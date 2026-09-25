@@ -1,0 +1,444 @@
+# CS276: Information Retrieval and Web Search
+# Stanford University
+# source: http://web.stanford.edu/class/cs276/index.html
+
+CS 276: Information Retrieval and Web Search
+CS 276 / LING 286: Information Retrieval and Web Search
+Image credit
+Course Description
+Information retrieval is the process through which a computer system can respond to a user's query for text-based information on a specific topic. IR was one of the first and remains one of the most important problems in the domain of natural language processing (NLP). Web search is the application of information retrieval techniques to the largest corpus of text anywhere — the web — and it is the context where many people interact with IR systems most frequently.
+In this course, we will cover basic and advanced techniques for building text-based information systems, including the following topics:
+Efficient text indexing
+Boolean and vector-space retrieval models
+Evaluation and interface issues
+IR techniques for the web, including crawling, link-based algorithms, and metadata usage
+Document clustering and classification
+Traditional and machine learning-based ranking approaches
+Course Instructors
+Chris Manning
+Pandu Nayak
+Teaching Assistants
+Ashwin Paranjape
+(head TA)
+Chris Chute
+Fei Jia
+Rohan Sampath
+Neethu Renjith
+Class time & location
+Spring quarter 2019
+Lecture times: Tues/Thurs, 4:30–5:50pm, April 1 to June 5
+Location: Gates B1 (Basement)
+Office Hours
+Richard : Tue 4:30-6:30pm, Huang Basement
+(for research and project discussions)
+TAs:
+David : Mon 6:00-8:00pm, Huang 138
+Bharath : Teus 1:00-3:00pm, Huang Basement
+James : Wed, 5:30-7:30pm, Gates B26
+Sameep : Thur, 12:45-2:45pm, Gates B21
+Naveen : Fri, 1:00-3:00pm, Huang Basement
+Qiaojing : Sun, 4:00-6:00pm, Gates B24
+-->
+Grading Policy
+Assignment #1: 15%
+Assignment #2: 15%
+Assignment #3: 15%
+Midterm: 15%
+Final Project: 40%
+-->
+Grading & course policies
+See the course policies page for details on grading, late days, and other policies.
+Assignment Details
+See the Assignments Page for more details on how to hand in your assignments.
+Final Project Details
+See the Project Page for more details on the final project.
+-->
+Required textbook
+Introduction to Information Retrieval , by C. Manning, P. Raghavan, and H. Schütze (Cambridge University Press, 2008).
+This book is available from Amazon , the Stanford bookstore, or your favorite book purveyor. You can also download and print chapters for free at the book website . (We’d appreciate any reports of typos or of higher-level problems for the third printing.)
+This book will be referred to as IIR in the reading assignments listed in the course schedule section.
+Other useful references
+(MG)
+Managing Gigabytes , by I. Witten, A. Moffat, and T. Bell.
+(IRAH)
+Information Retrieval: Algorithms and Heuristics , by D. Grossman and O. Frieder.
+(MIR)
+Modern Information Retrieval , by R. Baeza-Yates and B. Ribeiro-Neto.
+(FSNLP)
+Foundations of Statistical Natural Language Processing , by C. Manning and H. Schütze.
+(SE)
+Search Engines: Information Retrieval in Practice , by B. Croft, D. Metzler, and T. Strohman.
+(IRIE)
+Information Retrieval: Implementing and Evaluating Search Engines , by S. Büttcher, C. Clarke, and G. Cormack.
+Prerequisites
+Core programming and algorithm skills
+CS 107, CS 161, and ideally other courses in the "core" for CS majors provide good preparation. Note that we will be using bitwise operations in several labs and assignments, so it's a good idea to brush up on these concepts and their syntax if you're rusty on low-level data manipulation.
+Basic probability and statistics
+You should have a good grasp of the fundamentals of probability distributions and basic statistical calculations (mean, standard deviation, etc.) at the level of a course like CS 109.
+Proficiency in Python All class assignments this year will be in Python.
+Proficiency in Java All class assignments this year will be in Java. The links and other information in this document may be useful for those who would benefit from a tutorial or refresher on Java and the Ant build tool. -->
+Recommended
+Convex optimization You may find some of the optimization tricks more intuitive with this background.
+Knowledge of convolutional neural networks (CS231n) The first problem set will probably be easier for you. We cannot assume you took this class so there will be ~3 lectures that overlap in content. You can use that time to dive deeper into some aspects.
+Programming Tutorials
+Python for programmers
+While Python is wildly popular, this class was traditionally taught with programming assignments in Java. Here are a few Python Tutorials for programmers .
+Bit Manipulation in Python
+Bit Manipulation in Python . Although you might not need any of it, it might come in handy to brush up your bit manipulation skills.
+Jupyter notebook This years programming assignments make use of Jupyter Notebooks. If you are not familiar with them, here's a few pointers.
+Get started guide
+Official documentation
+Course Notes (updated each week) -->
+Course schedule
+-->
+OH calendar
+Lecture videos
+Coursera videos
+-->
+Canvas
+Piazza forum
+Note:
+Some of the slides and video links are from previous offering of the course. We leave them here for your reference and they will be updated/replaced by each lecture. * marks the latest updated slides.
+The complementary videos are on Canvas, and the slides of the videos are linked below.
+Course Schedule
+Week
+Date
+Event
+Description & materials
+Readings & other resources
+Week 1
+Tues. 4/2
+Lecture (Pandu)
+Introduction to the course
+Videos: "Semistructured Data"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 1
+MG section 3.2
+MIR section 8.2
+Shakespeare plays
+Thurs. 4/4
+Lecture (Chris)
+Inverted Indices : Dictionary and postings lists, boolean querying
+starter code )-->
+Postings list intersection class session
+-->
+Videos: "Term Vocabulary and Postings Lists"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+Videos: "Boolean Retrieval"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+-->
+Videos: "Document Encodings" , "Tokens" , "Terms" , "Stemming" , "Skip Lists"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 2
+MG sections 3.6, 4.3
+MIR section 7.2
+Porter's stemmer (MIR)
+Porter stemming algorithm (Official)
+A skip list cookbook (Pugh 1990)
+Fast phrase querying with combined indexes (Williams, Zobel, Bahle 2004)
+Efficient phrase querying with an auxiliary index (Bahle, Williams, Zobel 2002)
+Week 2
+Tues. 4/9
+Lecture (Pandu)
+Index Construction
+starter code )
+( Google doc with class results )-->
+Videos: "Index Construction"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 4
+Tues. 4/9
+PA1 release
+Programming assignment #1 released
+Thurs. 4/11
+Lecture (Chris)
+Algorithms for postings list compression
+starter code )
+( Google doc with class results )-->
+Videos: "Index Compression"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 5
+MG sections 3.3-3.4
+Compression of inverted indexes for fast query evaluation (Scholer et al. 2002)
+Inverted index compression using word-aligned binary codes (Anh and Moffat 2005)
+Inverted index compression and query processing with optimized document ordering (Yan et al. 2009)
+Week 3
+Tues. 4/16
+Lecture (Pandu)
+Spelling correction
+Powerpoint
+PDF/6 |
+PDF/1
+-->
+Videos: "Dictionaries and Tolerant Retrieval"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+PPT |
+PDF/6 |
+PDF/1
+-->
+IIR chapter 3
+MG section 4.2
+How to write a spelling corrector (Peter Norvig)
+Techniques for automatically correcting words in text (Kukich 1992)
+Finding approximate matches in large lexicons (Zobel and Dart 1995)
+Efficient Generation and Ranking of Spelling Error Corrections (Tillenius)
+Tues. 4/16
+PS1 release
+Problem set #1 released
+[PS1 solution] -->
+Tues. 4/16
+Query quiz release
+Query quiz released
+Thurs. 4/18
+Lecture (Pandu)
+Scoring, term weighting and the vector space model
+PPT |
+PDF/6 |
+PDF/1
+-->
+Videos: "Computing Scores"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 7
+IIR chapter 11
+Sun. 4/20
+Query quiz due
+Query quiz due
+Week 4
+Tues. 4/23
+PA1 due
+Programming assignment #1 due
+Tues. 4/23
+Guest lecture
+"Amazon Product Search: Search Relevance and Query Understanding" -->
+Guest lecture by Joachim Kupke (Principal Software Engineer, Google)
+NOTE: attendance required for on-campus students
+Tues. 4/23
+PA2 release
+Programming assignment #2 released
+Thurs. 4/25
+Lecture (Chris)
+Probabilistic IR: the binary independence model, BM25, BM25F
+PPT |
+PDF/6 |
+PDF/1
+-->
+Videos: "Vector Space Model"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 6
+IIR chapter 11
+Week 5
+Tues. 4/30
+PS1 due
+Problem set #1 due
+Tues. 4/30
+Lecture (Chris)
+Evaluation methods & NDCG
+PPT |
+PDF/6 |
+PDF/1
+-->
+Videos: "Result Summaries"
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 8
+MG section 4.5
+MIR chapter 3
+Tues. 4/30
+Ranking quiz release
+Ranking quiz released
+Thurs. 5/2
+Lecture (Pandu)
+Systems issues in efficient retrieval and scoring
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 6
+IIR chapter 7
+Efficient Query Evaluation using a Two-Level Retrieval Process (Broder et al. 2003)
+Week 6
+Tues. 5/7
+PA2 due
+Programming assignment #2 due
+Tues. 5/7
+Lecture (Pandu)
+Classification and clustering in vector spaces(Naive Bayes, kNN, decision boundaries)
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+Videos: "Naive Bayes"
+IIR chapter 13
+IIR chapter 14
+Reuters-21578
+Machine learning in automated text categorization (Sebastiani 2002)
+A re-examination of text categorization methods (Yang et al. 1999)
+A Comparison of event models for naive Bayes text classification (McCallum et al. 1998)
+Tackling the poor assumptions of Naive Bayes classifier (Rennie et al. 2003)
+Machine learning in automated text categorization (Sebastiani 2002)
+A re-examination of text categorization methods (Yang et al. 1999)
+Evaluating and optimizing autonomous text classification systems (Lewis 1995)
+Tom Mitchell. Machine Learning. McGraw-Hill, 1997.
+Trevor Hastie, Robert Tibshirani, Jerome Friedman. Elements of Statistical Learning: Data Mining, Inference, and Prediction . Springer-Verlag, New York, 2001.
+Open Calais
+Weka
+Thurs. 5/9
+Lecture (Chris)
+Text classification
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 15
+Reuters-21578
+A tutorial on support vector machines for pattern recognition (Burges 1998)
+Using SVMs for text categorization (Dumais 1998)
+Inductive learning algorithms and representations for text categorization (Dumais et al. 1998)
+A Re-examination of text categorization methods (Yang et al. 1999)
+Text categorization based on regularized linear classification methods (Zhang et al. 2001)
+A loss function analysis for classification methods in text categorization (Li et al. 2003)
+Trevor Hastie, Robert Tibshirani, Jerome Friedman. Elements of Statistical Learning: Data Mining, Inference, and Prediction . Springer-Verlag,New York, 2001.
+Thorsten Joachims. Learning to Classify Text using Support Vector Machines .
+Kluwer, 2002.
+Thurs/ 5/9
+PA3 release
+Programming assignment #3 released
+Week 7
+Tues. 5/14
+Lecture (Chris)
+Distributed word representations for IR
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+Distributed Representations of Words and Phrases and their
+Compositionality (Mikolov et al., 2013)
+GloVe: Global Vectors for Word Representation (Pennington et al., 2014)
+Tues. 5/14
+PS2 released
+Problem set #2 released
+[PS2 solution] -->
+Thurs. 5/16
+Lecture (Chris)
+Learning to rank
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR sections 6.1.2-6.1.3
+IIR section 15.4
+LETOR benchmark datasets
+Discriminative models for information retrieval (Nallapati 2004)
+Adapting ranking SVM to document retrieval (Cao et al. 2006)
+A support vector method for optimizing average precision (Yue et al. 2007)
+Week 8
+Tues. 5/21
+Lecture (Chris)
+Link analysis
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 21
+Ranking the web frontier (Eiron et al. 2004)
+The WebGraph framework I: Compression techniques (Boldi et al. 2004)
+Extrapolation methods for accelerating PageRank computations (Kamvar et al. 2003)
+Searching the workplace web (Fagin et al. 2003
+Thurs. 5/23
+PS2 due
+Problem set #2 due
+Thurs. 5/23
+Guest lecture
+Guest lecture by Susan Dumais (Distinguished Scientist & Deputy Managing Director, Microsoft Research Lab)
+Slides:
+PDF/1
+NOTE: attendance required for on-campus students
+Week 9
+Tues. 5/28
+Lecture (Pandu)
+Crawling and near-duplicate pages
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+IIR chapter 19
+IIR chapter 20
+Mercator: A scalable, extensible web crawler (Heydon et al. 1999)
+A standard for robot exclusion
+Thurs. 5/30
+PA3 due
+Programming assignment #3 due
+Thurs. 5/30
+Lecture (Chris)
+Question answering
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+Week 10
+Tues. 6/4
+Lecture (Pandu)
+Personalization
+Slides:
+PPT |
+PDF/6 |
+PDF/1
+J. Teevan, S. Dumais, E. Horvitz. Potential for personalization. 2010
+J. Pitkow et al. Personalized search. 2002
+J. Teevan, S. Dumais, E. Horvitz. Personalizing search via automated analysis of interests and activities. 2005
+P. Bennett et al. Inferring and using location metadata to personalize Web search. 2011
+T. Haveliwala. Topic-sensitive pagerank. 2002.
+G. Jeh and J. Widom. Scaling personalized Web search. 2003
+M. Curtiss et al. Unicorn: A system for searching the social graph. 2013
+Exam week
+Fri. 6/7
+Final exam
+Alternate final exam (8:30-11:30am)
+Wed. 6/12
+Final exam
+Final exam (3:30-6:30pm)
+Practice final and solution are on Canvas
+Practice final solutions -->
+FAQ
+Can I take this course on credit/no credit basis?
+Yes. Credit will be given to those who would have otherwise earned a C- or above.
+Can I audit or sit in?
+In general we are very open to sitting-in guests if you are a member of the Stanford community (registered student, staff, and/or faculty). Out of courtesy, we would appreciate that you first email us or talk to the instructor after the first class you attend.
+Can I follow along from the outside?
+We'd be happy if you join us! We plan to make the course materials widely available: The assignments, course notes and slides will be available online. We plan to make videos publicly available, but need to wait until after they have been subtitled (ADA), made FERPA-compliant, checked for copyright, etc. This will take some time. Thanks for you patience. We won't be able to give you course credit.
+-->
+I have a question about the class. What is the best way to reach the course staff?
+In general, we ask students to use the Piazza forum for our class so that other students may benefit from your questions and our answers. If you have a personal matter that you believe is not appropriate to share on Piazza (even in a private post), you may email the course staff at cs276-spr1819-staff@lists.stanford.edu . We may NOT be able to reply emails sent to individual instructors or TAs regarding the class.
+As an SCPD student, how do I take the final exam?
+For SCPD students, if you are local, you're encouraged to just come to Stanford for one of the on-campus exams. If you decide to take on-campus exams, please let us know in advance (through a survey that we send out closer to the final exam date). If you are not local or can't make it at the on-campus exams, you need to line up an exam monitor (usually your manager or a co-worker at your company), and submit the form specifying this person to SCPD in advance. You won't get an exam if you don't have an exam monitor on file. You need to make sure we get the exam back promptly (monitor should scan and email directly to us).If you are taking the exam in the first 24 hour period, you need to make sure we get the exam back from your monitor by Saturday 12:30 pm PT. If you are taking the exam in the second 24 hour period, you need to make sure we get the exam back from your monitor by Wednesday 7:30 pm PT. We need to grade exams immediately after that in order to be able to turn grades in in time. Please refer to the course policies page for Final exam details
+For the exam, we can use standard SCPD procedures of having a pre-approved person (usually your manager or a co-worker at your company) monitor you while you take the exam. -->
+Will there be virtual office hours for SCPD students?
+We will be sure to join a Google hangout for at least some office hours. We will use QueueStatus and post google hangout link on QueueStatus page in each office hour for SCPD students.

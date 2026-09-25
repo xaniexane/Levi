@@ -1,0 +1,3123 @@
+{
+  "batch": "shopping_deals",
+  "graded_at": "2026-09-18T19:01:52.050544+00:00",
+  "rubric": "core/levi/automation/grading.py",
+  "record_count": 38,
+  "grade_counts": {
+    "intake": 0,
+    "high-grade": 0,
+    "premium": 0,
+    "elite": 0,
+    "enterprise": 38
+  },
+  "catalog_signature_verified": true,
+  "signature_id": "ipsig-414b6f80b85e",
+  "records": [
+    {
+      "minion_id": "shopping-deals-back-in-stock-radar-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-back-in-stock-radar-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-70e0c71dfb06",
+          "node_detail": [
+            "[trigger] trigger: Restock detected: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Back-in-Stock Radar (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Distill)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-back-in-stock-radar-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-back-in-stock-radar-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Restock detected",
+        "condition": "Always",
+        "rite_steps": [
+          "Sold-out keyboard is back in stock -> HITL: Add it to the cart draft now or let it go?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Distill"
+        },
+        "notes": "Cart draft only, purchase is always manual",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Back-in-Stock Radar Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-bulk-buy-calculator-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-bulk-buy-calculator-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-795a64245efe",
+          "node_detail": [
+            "[trigger] trigger: New bulk offer: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Bulk Buy Calculator (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-bulk-buy-calculator-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-bulk-buy-calculator-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New bulk offer",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the unit count exceeds 10; compare bulk vs regular unit pricing; factor in your real consumption rate and storage space; call the honest buy",
+          "HITL: Notification - the bulk verdict is in?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Bulk is only cheap if you use it before it expires. The calculator does the math your enthusiasm skips.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Bulk Buy Calculator Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-bundle-split-scout-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-bundle-split-scout-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-542033720b14",
+          "node_detail": [
+            "[trigger] trigger: New bundle offer: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Bundle Split Scout (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-bundle-split-scout-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-bundle-split-scout-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New bundle offer",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the bundle still has 3+ items; break it into per-item pricing; compare each against standalone street prices; deliver the real-savings verdict",
+          "HITL: Notification - the real-savings verdict is in?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Bundles dress padding up as savings. The scout weighs every cut and calls out the filler.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Bundle Split Scout Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-cart-watchdog-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-cart-watchdog-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-db595aa273ef",
+          "node_detail": [
+            "[trigger] trigger: Cart idle 48h: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Cart Watchdog (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Distill)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-cart-watchdog-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-cart-watchdog-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Cart idle 48h",
+        "condition": "Cart: not empty",
+        "rite_steps": [
+          "List the stale items with added-dates; check each for a price drop or new coupon since it was added",
+          "HITL: Clear it, keep it, or chase a coupon first? (Clearing only empties the cart; nothing is purchased.)"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Distill"
+        },
+        "notes": "Only nudges, never checks out anything",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Cart Watchdog Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-cashback-net-catcher-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-cashback-net-catcher-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-ae73ded92936",
+          "node_detail": [
+            "[trigger] trigger: Purchase completed: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Cashback Net Catcher (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-cashback-net-catcher-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-cashback-net-catcher-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Purchase completed",
+        "condition": "Cashback: eligible",
+        "rite_steps": [
+          "Verify the cashback portal tracked the order; if it did not, draft the missing-cashback claim; tally the month's haul",
+          "HITL: Notification - missing-cashback claim drafted; review and file it?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Untracked cashback is the deal that got away. The net catcher hauls in what the portals 'forgot' to credit.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Cashback Net Catcher Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-clearance-endcap-pro-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-clearance-endcap-pro-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-8d7c76346a3e",
+          "node_detail": [
+            "[trigger] trigger: New clearance detected: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Clearance Endcap Pro (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-clearance-endcap-pro-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-clearance-endcap-pro-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New clearance detected",
+        "condition": "Wishlist overlap: yes",
+        "rite_steps": [
+          "Match new clearance finds against your wishlist; estimate true discount vs the price history; flag the genuine steals",
+          "HITL: Notification - the genuine steals are flagged; plan the store run?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Clearance endcaps hide real meat under the marketing bones. The pro sniffs out which markdowns are honest.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Clearance Endcap Pro Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-coupon-code-sleuth-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-coupon-code-sleuth-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-ab41f59f43a9",
+          "node_detail": [
+            "[trigger] trigger: Checkout page opened: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Coupon Code Sleuth (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-coupon-code-sleuth-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-coupon-code-sleuth-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Checkout page opened",
+        "condition": "Code field: empty",
+        "rite_steps": [
+          "Found 2 valid codes for the store -> HITL: Paste the 12%-off code or edit the pick first?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Tests codes in a sandbox cart, no credentials touched",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Coupon Code Sleuth Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-deal-digest-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-deal-digest-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "notification",
+          "run_id": "flow-b1f33d834ee5",
+          "node_detail": [
+            "[trigger] trigger: Time 08:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Deal Digest (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, Python, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-deal-digest-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-deal-digest-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 08:00",
+        "condition": "Day Saturday",
+        "rite_steps": [
+          "Weekly roundup of 5 tracked deals compiled -> HITL: Any worth a cart draft this week?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "Python",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Vary intervals, kills spam daily noise",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Deal Digest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-delivery-day-bunch-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-delivery-day-bunch-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-e07b8c1b557f",
+          "node_detail": [
+            "[trigger] trigger: Time 08:00: flow entered via schedule trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Delivery Day Bunch (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-delivery-day-bunch-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-delivery-day-bunch-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 08:00",
+        "condition": "Deliveries due: multiple",
+        "rite_steps": [
+          "Consolidates every package due today into one delivery board with carrier, window, and tracking links, replacing the notification chaos. HITL: Acknowledge the doorbell marathon?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Ten delivery pings are a flock of seagulls. The bunch nets them into one bird you can actually hold.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Delivery Day Bunch Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-duplicate-purchase-guard-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-duplicate-purchase-guard-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-a3bceb99f1cf",
+          "node_detail": [
+            "[trigger] trigger: Checkout page opened: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Duplicate Purchase Guard (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-duplicate-purchase-guard-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-duplicate-purchase-guard-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Checkout page opened",
+        "condition": "Ownership: already owned",
+        "rite_steps": [
+          "Cross-check the cart against your purchase history; flag items you already own, with the original purchase date and price",
+          "HITL: Approve the repeat buy?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Buying twice is a tax on forgetfulness. The guard remembers what your shelves already hold.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Duplicate Purchase Guard Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-expiry-date-watch-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-expiry-date-watch-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-f8bcd3bf5853",
+          "node_detail": [
+            "[trigger] trigger: New grocery receipt: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Expiry Date Watch (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-expiry-date-watch-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-expiry-date-watch-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New grocery receipt",
+        "condition": "Perishables: present",
+        "rite_steps": [
+          "Log expiry dates from the grocery receipt; build an eat-first meal plan around what spoils soonest; ping before anything turns",
+          "HITL: Notification - the eat-first list is ready?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Spoiled groceries are money composted. The watch schedules the feast before the rot.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Expiry Date Watch Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-flash-sale-bell-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-flash-sale-bell-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-9a23a837c2ec",
+          "node_detail": [
+            "[trigger] trigger: Flash sale starts: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Flash Sale Bell (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-flash-sale-bell-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-flash-sale-bell-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Flash sale starts",
+        "condition": "Watchlist: yes",
+        "rite_steps": [
+          "Verify the flash price is live and the item is still in stock; pre-load the product page",
+          "HITL: Approve the grab? (No approval, no purchase.)"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Flash sales are prey that bolts in minutes. The bell rings; you decide whether to pounce.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Flash Sale Bell Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-gift-card-forager-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-gift-card-forager-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-8623b94ad6a6",
+          "node_detail": [
+            "[trigger] trigger: Checkout page opened: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Gift Card Forager (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-gift-card-forager-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-gift-card-forager-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Checkout page opened",
+        "condition": "Gift cards: in vault",
+        "rite_steps": [
+          "Check the gift-card vault; draft the optimal card combination to cover the cart with the least waste",
+          "HITL: Approve the card split?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Forgotten gift cards are buried treasure with an expiration date. The forager digs them up before they rot.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Gift Card Forager Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-gift-occasion-scout-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-gift-occasion-scout-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-a7343efaf3cc",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Gift Occasion Scout (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-gift-occasion-scout-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-gift-occasion-scout-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Gift event: within 14 days",
+        "rite_steps": [
+          "Fourteen days out from a birthday or holiday, drafts a gift shortlist from their wishlist signals and your budget, with shipping-cutoff dates attached. HITL: Edit & Approve the pick?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Great gifts are hunted early, not grabbed at the gas station. The scout tracks the occasion like migrating game.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Gift Occasion Scout Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-impulse-cooldown-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-impulse-cooldown-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-995c2f6ef0f4",
+          "node_detail": [
+            "[trigger] trigger: Cart value spike: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Impulse Cooldown (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-impulse-cooldown-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-impulse-cooldown-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Cart value spike",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify 3+ items were added within 10 minutes and the cart is still unpurchased; freeze the cart behind a 24-hour cooling timer; queue a next-morning review with the true-need score per item",
+          "HITL: Confirm the 24h hold? (Nothing can be bought while frozen.)"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Impulse buys are ambush predators; this one turns the ambush around. Sleep on it or pounce with eyes open.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Impulse Cooldown Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-local-pickup-planner-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-local-pickup-planner-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-c34ea95349b5",
+          "node_detail": [
+            "[trigger] trigger: Order ready for pickup: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Local Pickup Planner (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-local-pickup-planner-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-local-pickup-planner-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Order ready for pickup",
+        "condition": "Always",
+        "rite_steps": [
+          "Batch ready-for-pickup orders into one optimized route with store hours and locker codes, so one trip clears the board",
+          "HITL: Notification - the pickup route is ready?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Scattered pickups burn fuel and afternoons. The planner hunts them all in a single efficient loop.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Local Pickup Planner Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-open-box-treasure-map-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-open-box-treasure-map-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "notification",
+          "run_id": "flow-523f9dda82a3",
+          "node_detail": [
+            "[trigger] trigger: Time 08:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Open-Box Treasure Map (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-open-box-treasure-map-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-open-box-treasure-map-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 08:00",
+        "condition": "Day Saturday",
+        "rite_steps": [
+          "Scan open-box and refurbished listings in your categories; grade condition descriptions honestly; map the best-value finds",
+          "HITL: Notification - the treasure map is ready?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Open-box shelves are where the smart predators shop. The map marks the X; condition reports keep it honest.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Open-Box Treasure Map Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-outlet-recon-team-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-outlet-recon-team-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-2a95bcbe21c1",
+          "node_detail": [
+            "[trigger] trigger: Time 07:30: flow entered via schedule trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Outlet Recon Team (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-outlet-recon-team-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-outlet-recon-team-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:30",
+        "condition": "Day Saturday",
+        "rite_steps": [
+          "Every Saturday morning, recons outlet inventories in your categories, ranks finds by discount depth vs original price, and delivers the haul brief. HITL: Acknowledge the haul plan?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Outlets are the jungle's watering holes. The recon team goes at dawn so you arrive with a map.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Outlet Recon Team Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-price-drop-patrol-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-price-drop-patrol-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-d2fa6220b300",
+          "node_detail": [
+            "[trigger] trigger: Price drop detected: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Price Drop Patrol (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-price-drop-patrol-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-price-drop-patrol-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Price drop detected",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the drop exceeds 10% against the 30-day baseline; if the price bounced back, stand down. Price-dip brief: old price, new price, seller",
+          "HITL: Approve the buy at this price or keep watching?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Threshold tuned per item, no auto-purchase ever",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Price Drop Patrol Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-price-floor-tracker-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-price-floor-tracker-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-e6f1bdcbf60f",
+          "node_detail": [
+            "[trigger] trigger: New wishlist item added: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Price Floor Tracker (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-price-floor-tracker-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-price-floor-tracker-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New wishlist item added",
+        "condition": "Always",
+        "rite_steps": [
+          "Watch each wishlist item for its all-time low; alert only when the price touches the floor you set; keep the noise silent otherwise",
+          "HITL: Notification - price-floor alert armed?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Patience is the predator's sharpest tooth. The tracker waits at the waterhole until the price comes to drink.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Price Floor Tracker Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-price-freeze-vault-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-price-freeze-vault-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-3a66845238a8",
+          "node_detail": [
+            "[trigger] trigger: Price drop detected: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Price Freeze Vault (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-price-freeze-vault-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-price-freeze-vault-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Price drop detected",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the drop still exceeds 15%; freeze the evidence: timestamped screenshot trail, listing snapshot, and policy notes for price-protection claims",
+          "HITL: Notification - evidence frozen for your price-protection claim?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Prices rebound and stores 'forget' the low. The vault keeps the receipt the internet wishes it had shredded.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Price Freeze Vault Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-price-hike-watcher-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-price-hike-watcher-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-b76603f26335",
+          "node_detail": [
+            "[trigger] trigger: Subscription price changed: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Price Hike Watcher (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Distill)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-price-hike-watcher-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-price-hike-watcher-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Subscription price changed",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the increase exceeds 5% and is not just a promo expiring; if it looks like a billing error, say so. Brief: old price, new price, next billing date",
+          "HITL: Approve keep, downgrade, or cancel?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Distill"
+        },
+        "notes": "Catches the sly-generosity drip of rising fees",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Price Hike Watcher Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-price-history-audit-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-price-history-audit-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-d9e5e2cb0fbb",
+          "node_detail": [
+            "[trigger] trigger: New wishlist item added: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Price History Audit (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, Python, AppleScript, Distill)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-price-history-audit-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-price-history-audit-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New wishlist item added",
+        "condition": "Always",
+        "rite_steps": [
+          "30-day price history shows this is NOT a real sale -> HITL: Still want it or wait for a true low?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "Python",
+          "mac": "AppleScript",
+          "chrome_extension": "Distill"
+        },
+        "notes": "Flags fake markdowns before you bite",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Price History Audit Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-price-match-bounty-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-price-match-bounty-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-c43032424304",
+          "node_detail": [
+            "[trigger] trigger: Price drop detected: flow entered via manual trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Price Match Bounty (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-price-match-bounty-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-price-match-bounty-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Price drop detected",
+        "condition": "Competitor price: lower",
+        "rite_steps": [
+          "Find a cheaper competitor price for the item; pack the screenshot evidence and the store's match policy; draft the claim script",
+          "HITL: Notification & Dialog - file the price-match claim or drop it?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Stores promise to match; most shoppers never collect. LEVI hunts the proof so you can collect the difference.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Price Match Bounty Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-receipt-roll-scanner-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-receipt-roll-scanner-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-0b611626059f",
+          "node_detail": [
+            "[trigger] trigger: Time 18:00: flow entered via schedule trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Receipt Roll Scanner (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-receipt-roll-scanner-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-receipt-roll-scanner-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 18:00",
+        "condition": "Day Sunday",
+        "rite_steps": [
+          "Check for unscanned paper receipts; if none, report the pile clear and stop. Nudge to photograph the week's paper receipts; auto-categorize the totals; flag any receipt older than the return window",
+          "HITL: Acknowledge the pile?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Paper receipts fade like footprints in rain. The scanner preserves the trail while it is still readable.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Receipt Roll Scanner Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-refill-subscription-judge-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-refill-subscription-judge-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-498f76b87113",
+          "node_detail": [
+            "[trigger] trigger: Subscription renewal notice: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Refill Subscription Judge (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-refill-subscription-judge-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-refill-subscription-judge-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Subscription renewal notice",
+        "condition": "Always",
+        "rite_steps": [
+          "When a refill subscription renews, weighs your actual usage rate against the renewal price and drafts a verdict: keep, downgrade cadence, or cancel. HITL: Edit & Approve cancel or keep?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Subscriptions breed in the dark. The judge drags each one into the light and makes it justify its existence.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Refill Subscription Judge Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-refund-radar-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-refund-radar-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-3ea90bf7dfb0",
+          "node_detail": [
+            "[trigger] trigger: Price falls after purchase: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Refund Radar (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-refund-radar-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-refund-radar-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Price falls after purchase",
+        "condition": "Drop window: within 30 days",
+        "rite_steps": [
+          "TV you bought is now $40 cheaper inside the adjustment window -> HITL: Approve the price-match request draft?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Drafts the claim, you send it",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Refund Radar Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-rental-vs-buy-arbiter-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-rental-vs-buy-arbiter-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-b23312702811",
+          "node_detail": [
+            "[trigger] trigger: High-ticket item viewed: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Rental vs Buy Arbiter (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-rental-vs-buy-arbiter-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-rental-vs-buy-arbiter-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "High-ticket item viewed",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the price still exceeds $200; run the rent-vs-buy math over your expected uses; draft the breakeven verdict; find rental sources if renting wins",
+          "HITL: Edit & Approve rent or buy?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Ownership is a commitment; rental is a trial. The arbiter settles the argument with arithmetic, not desire.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Rental vs Buy Arbiter Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-return-window-guard-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-return-window-guard-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-da3870285c6c",
+          "node_detail": [
+            "[trigger] trigger: Time 09:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Return Window Guard (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-return-window-guard-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-return-window-guard-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 09:00",
+        "condition": "Returns due: within 7 days",
+        "rite_steps": [
+          "Compile items whose return window closes within 7 days, with return shipping label links pre-fetched where available",
+          "HITL: Approve keep or return for each item?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Return windows close quietly and take your money with them. The guard stands at the door and knocks.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Return Window Guard Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-review-sniffer-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-review-sniffer-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-10ce32394fea",
+          "node_detail": [
+            "[trigger] trigger: New product link opened: flow entered via event trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Review Sniffer (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, Python, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-review-sniffer-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-review-sniffer-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New product link opened",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the rating is still below 4.0 on a real review count; scan for planted-5-star patterns (review bursts, duplicate phrasing)",
+          "HITL: Acknowledge and skip, or dig deeper anyway?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "Python",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Pattern flags, human makes the call",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Review Sniffer Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-rewards-points-harvest-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-rewards-points-harvest-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-f8c1d3f3c376",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Rewards Points Harvest (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-rewards-points-harvest-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-rewards-points-harvest-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Always",
+        "rite_steps": [
+          "Monthly cadence: if day-of-month is not 1, stop. Audit every rewards balance; flag points expiring within 90 days; draft the best-value redemption plan per program",
+          "HITL: Approve the redemption?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Expiring points are crops left in the field. The harvest brings them in before the frost.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Rewards Points Harvest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-seasonal-deal-scout-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-seasonal-deal-scout-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 1
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-12d36e81a7ef",
+          "node_detail": [
+            "[trigger] trigger: Sale event starts: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Seasonal Deal Scout (1 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Distill)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-seasonal-deal-scout-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-seasonal-deal-scout-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Sale event starts",
+        "condition": "Wishlist overlap: yes",
+        "rite_steps": [
+          "Big seasonal sale has 2 of your wishlist items at real lows -> HITL: Draft a cart with both or hold off?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Distill"
+        },
+        "notes": "Hunts so the human does not have to",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Seasonal Deal Scout Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-shipping-cost-slayer-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-shipping-cost-slayer-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-2cc0b54d4340",
+          "node_detail": [
+            "[trigger] trigger: Checkout page opened: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Shipping Cost Slayer (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-shipping-cost-slayer-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-shipping-cost-slayer-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Checkout page opened",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify shipping is still charged and no free-shipping code is already applied; hunt free-shipping codes or suggest a threshold-busting add-on you actually need from your list",
+          "HITL: Edit & Approve the add-on?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Shipping fees are the toll booth on the deal highway. The slayer finds the free lane or burns the toll honestly.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Shipping Cost Slayer Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-split-payment-strategist-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-split-payment-strategist-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-c77e52676738",
+          "node_detail": [
+            "[trigger] trigger: Checkout page opened: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Split Payment Strategist (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-split-payment-strategist-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-split-payment-strategist-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Checkout page opened",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the cart still exceeds $300; draft the optimal split across your cards to maximize rewards and category bonuses, with the per-card totals pre-calculated",
+          "HITL: Edit & Approve the charges?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "One big charge on the wrong card is a missed harvest. The strategist divides the spoils for maximum yield.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Split Payment Strategist Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-store-credit-reaper-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-store-credit-reaper-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-82e732b63152",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Store Credit Reaper (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-store-credit-reaper-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-store-credit-reaper-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Store credit: expiring",
+        "rite_steps": [
+          "Verify the credit is still expiring and unspent; draft a spend-down hit-list of items you actually want",
+          "HITL: Approve the spend?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Expiring store credit is a slow bleed. The reaper harvests it while it still spends.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Store Credit Reaper Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-thrift-flip-ledger-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-thrift-flip-ledger-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-f35bce3688eb",
+          "node_detail": [
+            "[trigger] trigger: New thrift listing: flow entered via event trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Thrift Flip Ledger (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, IFTTT)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-thrift-flip-ledger-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-thrift-flip-ledger-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New thrift listing",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the flip margin still exceeds 40% after fees and shipping; if the math broke, drop the lead. Spot brief: listing, true profit estimate",
+          "HITL: Approve the flip? (No approval, no purchase.)"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "IFTTT"
+        },
+        "notes": "Thrift flipping is honest arbitrage for patient hunters. The ledger keeps the profit real and the taxes honest.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Thrift Flip Ledger Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-waitlist-escalator-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-waitlist-escalator-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-7cfd667e8dc4",
+          "node_detail": [
+            "[trigger] trigger: Restock detected: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Waitlist Escalator (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Keyboard Maestro, Zapier)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-waitlist-escalator-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-waitlist-escalator-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Restock detected",
+        "condition": "Waitlist: yes",
+        "rite_steps": [
+          "Verify stock is back and the price still fits your budget; pre-load the buy link",
+          "HITL: Approve the purchase? (No approval, no purchase.)"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Keyboard Maestro",
+          "chrome_extension": "Zapier"
+        },
+        "notes": "Waitlists are queues; this minion makes sure you are at the front when the doors open.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Waitlist Escalator Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "shopping-deals-warranty-ledger-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-shopping-deals-warranty-ledger-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 2
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-26fe76e6c311",
+          "node_detail": [
+            "[trigger] trigger: New receipt photo: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Warranty Ledger (2 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'shopping-deals-warranty-ledger-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'shopping-deals-warranty-ledger-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New receipt photo",
+        "condition": "Category: electronics",
+        "rite_steps": [
+          "Read the new electronics receipt; register the warranty start and end dates; schedule a ping 30 days before expiry with the claim path",
+          "HITL: Notification - the warranty expiry alert is set?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Warranties are free insurance you already paid for. The ledger makes sure they expire on the manufacturer's clock, not your memory's.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Warranty Ledger Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    }
+  ]
+}

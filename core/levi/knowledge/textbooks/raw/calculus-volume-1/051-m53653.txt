@@ -1,0 +1,394 @@
+# m53653
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Calculus of the Hyperbolic Functions
+
+Calculus of the Hyperbolic Functions
+
+Apply the formulas for derivatives and integrals of the hyperbolic functions.
+
+Apply the formulas for the derivatives of the inverse hyperbolic functions and their associated integrals.
+
+Describe the common applied conditions of a catenary curve.
+
+We were introduced to hyperbolic functions in Introduction to Functions and Graphs, along with some of their basic properties. In this section, we look at differentiation and integration formulas for the hyperbolic functions and their inverses.
+
+Derivatives and Integrals of the Hyperbolic Functions
+
+Recall that the hyperbolic sine and hyperbolic cosine are defined as
+
+The other hyperbolic functions are then defined in terms of sinhx and coshx. The graphs of the hyperbolic functions are shown in the following figure.
+
+It is easy to develop differentiation formulas for the hyperbolic functions. For example, looking at sinhx we have
+
+Similarly, (d/dx)coshx=sinhx. We summarize the differentiation formulas for the hyperbolic functions in the following table.
+
+Derivatives of the Hyperbolic Functions
+−cschxcothx
+Let’s take a moment to compare the derivatives of the hyperbolic functions with the derivatives of the standard trigonometric functions. There are a lot of similarities, but differences as well. For example, the derivatives of the sine functions match: (d/dx)sinx=cosx and (d/dx)sinhx=coshx. The derivatives of the cosine functions, however, differ in sign: (d/dx)cosx=−sinx, but (d/dx)coshx=sinhx. As we continue our examination of the hyperbolic functions, we must be mindful of their similarities and differences to the standard trigonometric functions.
+
+These differentiation formulas for the hyperbolic functions lead directly to the following integral formulas.
+
+Differentiating Hyperbolic Functions
+
+Evaluate the following derivatives:
+ddx(sinh(x2))
+ddx(coshx)2
+
+Using the formulas in and the chain rule, we get
+ddx(sinh(x2))=cosh(x2)·2x
+ddx(coshx)2=2coshxsinhx
+
+Evaluate the following derivatives:
+ddx(tanh(x2+3x))
+ddx(1(sinhx)2)
+ddx(tanh(x2+3x))=(sech2(x2+3x))(2x+3)
+ddx(1(sinhx)2)=ddx(sinhx)−2=−2(sinhx)−3coshx
+
+Hint
+
+Use the formulas in and apply the chain rule as necessary.
+
+Integrals Involving Hyperbolic Functions
+
+Evaluate the following integrals:
+∫xcosh(x2)dx
+∫tanhxdx
+
+We can use u-substitution in both cases.
+
+Let u=x2. Then, du=2xdx and
+∫xcosh(x2)dx=∫12coshudu=12sinhu+C=12sinh(x2)+C.
+
+Let u=coshx. Then, du=sinhxdx and
+∫tanhxdx=∫sinhxcoshxdx=∫1udu=ln|u|+C=ln|coshx|+C.
+Note that coshx>0 for all x, so we can eliminate the absolute value signs and obtain
+∫tanhxdx=ln(coshx)+C.
+
+Evaluate the following integrals:
+∫sinh3xcoshxdx
+∫sech2(3x)dx
+∫sinh3xcoshxdx=sinh4x4+C
+∫sech2(3x)dx=tanh(3x)3+C
+
+Hint
+
+Use the formulas above and apply u-substitution as necessary.
+
+Calculus of Inverse Hyperbolic Functions
+
+Looking at the graphs of the hyperbolic functions, we see that with appropriate range restrictions, they all have inverses. Most of the necessary range restrictions can be discerned by close examination of the graphs. The domains and ranges of the inverse hyperbolic functions are summarized in the following table.
+
+Domains and Ranges of the Inverse Hyperbolic Functions
+
+Function
+Domain
+(−∞,0)∪(0,∞)
+The graphs of the inverse hyperbolic functions are shown in the following figure.
+
+To find the derivatives of the inverse functions, we use implicit differentiation. We have
+
+Recall that cosh2y−sinh2y=1, so coshy=1+sinh2y. Then,
+
+We can derive differentiation formulas for the other inverse hyperbolic functions in a similar fashion. These differentiation formulas are summarized in the following table.
+
+Derivatives of the Inverse Hyperbolic Functions
+−1|x|1+x2
+Note that the derivatives of tanh−1x and coth−1x are the same. Thus, when we integrate 1/(1−x2), we need to select the proper antiderivative based on the domain of the functions and the values of x. Integration formulas involving the inverse hyperbolic functions are summarized as follows.
+
+Differentiating Inverse Hyperbolic Functions
+
+Evaluate the following derivatives:
+ddx(sinh−1(x3))
+ddx(tanh−1x)2
+
+Using the formulas in and the chain rule, we obtain the following results:
+ddx(sinh−1(x3))=131+x29=19+x2
+ddx(tanh−1x)2=2(tanh−1x)1−x2
+
+Evaluate the following derivatives:
+ddx(cosh−1(3x))
+ddx(coth−1x)3
+ddx(cosh−1(3x))=39x2−1
+ddx(coth−1x)3=3(coth−1x)21−x2
+
+Hint
+
+Use the formulas in and apply the chain rule as necessary.
+
+Integrals Involving Inverse Hyperbolic Functions
+
+Evaluate the following integrals:
+∫14x2−1dx
+∫12x1−9x2dx
+
+We can use u-substitution in both cases.
+
+Let u=2x. Then, du=2dx and we have
+∫14x2−1dx=∫12u2−1du=12cosh−1u+C=12cosh−1(2x)+C.
+
+Let u=3x. Then, du=3dx and we obtain
+∫12x1−9x2dx=12∫1u1−u2du=−12sech−1|u|+C=−12sech−1|3x|+C.
+
+Evaluate the following integrals:
+∫1x2−4dx,x>2
+∫11−e2xdx
+∫1x2−4dx=cosh−1(x2)+C
+∫11−e2xdx=−sech−1(ex)+C
+
+Hint
+
+Use the formulas above and apply u-substitution as necessary.
+
+Applications
+
+One physical application of hyperbolic functions involves hanging cables. If a cable of uniform density is suspended between two supports without any load other than its own weight, the cable forms a curve called a catenary. High-voltage power lines, chains hanging between two posts, and strands of a spider’s web all form catenaries. The following figure shows chains hanging from a row of posts.
+
+Hyperbolic functions can be used to model catenaries. Specifically, functions of the form y=acosh(x/a) are catenaries. shows the graph of y=2cosh(x/2).
+
+Using a Catenary to Find the Length of a Cable
+
+Assume a hanging cable has the shape 10cosh(x/10) for −15≤x≤15, where x is measured in feet. Determine the length of the cable (in feet).
+
+Recall from Section 2.4 that the formula for arc length is
+
+We have f(x)=10cosh(x/10), so f′(x)=sinh(x/10). Then
+
+Now recall that 1+sinh2x=cosh2x, so we have
+
+Assume a hanging cable has the shape 15cosh(x/15) for −20≤x≤20. Determine the length of the cable (in feet).
+52.95ft
+
+Hint
+
+Use the procedure from the previous example.
+
+Key Concepts
+
+Hyperbolic functions are defined in terms of exponential functions.
+
+Term-by-term differentiation yields differentiation formulas for the hyperbolic functions. These differentiation formulas give rise, in turn, to integration formulas.
+
+With appropriate range restrictions, the hyperbolic functions all have inverses.
+
+Implicit differentiation yields differentiation formulas for the inverse hyperbolic functions, which in turn give rise to integration formulas.
+
+The most common physical applications of hyperbolic functions are calculations involving catenaries.
+[T] Find expressions for coshx+sinhx and coshx−sinhx. Use a calculator to graph these functions and ensure your expression is correct.
+exande−x
+
+From the definitions of cosh(x) and sinh(x), find their antiderivatives.
+
+Show that cosh(x) and sinh(x) satisfy y″=y.
+
+Answers may vary
+
+Use the quotient rule to verify that tanh(x)′=sech2(x).
+
+Derive cosh2(x)+sinh2(x)=cosh(2x) from the definition.
+
+Answers may vary
+
+Take the derivative of the previous expression to find an expression for sinh(2x).
+
+Prove sinh(x+y)=sinh(x)cosh(y)+cosh(x)sinh(y) by changing the expression to exponentials.
+
+Answers may vary
+
+Take the derivative of the previous expression to find an expression for cosh(x+y).
+
+For the following exercises, find the derivatives of the given functions and graph along with the function to ensure your answer is correct.
+[T] cosh(3x+1)
+3sinh(3x+1)
+[T] sinh(x2)
+[T] 1cosh(x)
+−tanh(x)sech(x)
+[T] sinh(ln(x))
+[T] cosh2(x)+sinh2(x)
+4cosh(x)sinh(x)
+[T] cosh2(x)−sinh2(x)
+[T] tanh(x2+1)
+xsech2(x2+1)x2+1
+[T] 1+tanh(x)1−tanh(x)
+[T] sinh6(x)
+6sinh5(x)cosh(x)
+[T] ln(sech(x)+tanh(x))
+
+For the following exercises, find the antiderivatives for the given functions.
+cosh(2x+1)
+12sinh(2x+1)+C
+tanh(3x+2)
+xcosh(x2)
+12sinh2(x2)+C
+3x3tanh(x4)
+cosh2(x)sinh(x)
+13cosh3(x)+C
+tanh2(x)sech2(x)
+sinh(x)1+cosh(x)
+ln(1+cosh(x))+C
+coth(x)
+cosh(x)+sinh(x)
+cosh(x)+sinh(x)+C
+(cosh(x)+sinh(x))n
+
+For the following exercises, find the derivatives for the functions.
+tanh−1(4x)
+41−16x2
+sinh−1(x2)
+sinh−1(cosh(x))
+sinh(x)cosh2(x)+1
+cosh−1(x3)
+tanh−1(cos(x))
+−csc(x)
+esinh−1(x)
+ln(tanh−1(x))
+−1(x2−1)tanh−1(x)
+
+For the following exercises, find the antiderivatives for the functions.
+∫dx4−x2
+∫dxa2−x2
+1atanh−1(xa)+C
+∫dxx2+1
+∫xdxx2+1
+x2+1+C
+∫−dxx1−x2
+∫exe2x−1
+cosh−1(ex)+C
+∫−2xx4−1
+
+For the following exercises, use the fact that a falling body with friction equal to velocity squared obeys the equation dv/dt=g−v2.
+
+Show that v(t)=gtanh((g)t) satisfies this equation.
+
+Answers may vary
+
+Derive the previous expression for v(t) by integrating dvg−v2=dt.
+[T] Estimate how far a body has fallen in 12 seconds by finding the area underneath the curve of v(t).
+37.30
+
+For the following exercises, use this scenario: A cable hanging under its own weight has a slope S=dy/dx that satisfies dS/dx=c1+S2. The constant c is the ratio of cable density to tension.
+
+Show that S=sinh(cx) satisfies this equation.
+
+Integrate dy/dx=sinh(cx) to find the cable height y(x) if y(0)=1/c.
+y=1ccosh(cx)
+
+Sketch the cable and determine how far down it sags at x=0.
+
+For the following exercises, solve each problem.
+[T] A chain hangs from two posts 2 m apart to form a catenary described by the equation y=2cosh(x/2)−1. Find the slope of the catenary at the left fence post.
+−0.521095
+[T] A chain hangs from two posts four meters apart to form a catenary described by the equation y=4cosh(x/4)−3. Find the total length of the catenary (arc length).
+[T] A high-voltage power line is a catenary described by y=10cosh(x/10). Find the ratio of the area under the catenary to its arc length. What do you notice?
+10
+
+A telephone line is a catenary described by y=acosh(x/a). Find the ratio of the area under the catenary to its arc length. Does this confirm your answer for the previous question?
+
+Prove the formula for the derivative of y=sinh−1(x) by differentiating x=sinh(y). (Hint: Use hyperbolic trigonometric identities.)
+
+Prove the formula for the derivative of y=cosh−1(x) by differentiating x=cosh(y).
+
+(Hint: Use hyperbolic trigonometric identities.)
+
+Prove the formula for the derivative of y=sech−1(x) by differentiating x=sech(y). (Hint: Use hyperbolic trigonometric identities.)
+
+Prove that (cosh(x)+sinh(x))n=cosh(nx)+sinh(nx).
+
+Prove the expression for sinh−1(x). Multiply x=sinh(y)=(1/2)(ey+e−y) by 2ey and solve for y. Does your expression match the textbook?
+
+Prove the expression for cosh−1(x). Multiply x=cosh(y)=(1/2)(ey−e−y) by 2ey and solve for y. Does your expression match the textbook?
+
+Chapter Review Exercises
+True or False? Justify your answer with a proof or a counterexample.
+
+The amount of work to pump the water out of a half-full cylinder is half the amount of work to pump the water out of the full cylinder.
+
+False
+
+If the force is constant, the amount of work to move an object from x=a to x=b is F(b−a).
+
+The disk method can be used in any situation in which the washer method is successful at finding the volume of a solid of revolution.
+
+False
+
+If the half-life of seaborgium-266 is 360 ms, then k=(ln(2))/360.
+
+For the following exercises, use the requested method to determine the volume of the solid.
+
+The volume that has a base of the ellipse x2/4+y2/9=1 and cross-sections of an equilateral triangle perpendicular to the y-axis. Use the method of slicing.
+163 units3
+
+The region bounded by the curve y = x2 – x and the x-axis from x=1tox=4, rotated around the y-axis using the washer method
+x=y2 and x=3y rotated around the y-axis using the washer method
+162π5
+x=2y2−y3,x=0,andy=0 rotated around the x-axis using cylindrical shells
+
+For the following exercises, find
+
+the area of the region,
+
+the volume of the solid when rotated around the x-axis, and
+
+the volume of the solid when rotated around the y-axis. Use whichever method seems most appropriate to you.
+y=x3,x=0,y=0,andx=2
+
+a. 4, b. 128π7, c. 64π5
+y=x2−xandx=0
+[T] y=ln(x)+2andy=x
+
+a. 1.949, b. 21.952, c. 17.099
+y=x2 and y=x
+y=5+x, y=x2, x=0, and x=1
+
+a. 316, b. 452π15, c. 31π6
+
+Below x2+y2=1 and above y=1−x
+
+Find the mass of ρ=e−x on a disk centered at the origin with radius 4.
+245.282
+
+Find the center of mass for ρ=tan2x on x∈(−π4,π4).
+
+Find the mass and the center of mass of ρ=1 on the region bounded by y=x5 and y=x.
+
+Mass: 12, center of mass: (1835,922)
+
+For the following exercises, find the requested arc lengths.
+
+The length of x for y=cosh(x) from x=0tox=2.
+
+The length of y for x=3−y from y=0 to y=4
+17+18ln(33+817)
+
+For the following exercises, find the surface area and volume when the given curves are revolved around the specified axis.
+
+The shape created by revolving the region between y=4+x, y=3−x, x=0, and x=2 rotated around the y-axis.
+
+The loudspeaker created by revolving y=1/x from x=1 to x=4 around the x-axis.
+
+Volume: 3π4, surface area: π(2−sinh−1(1)+sinh−1(16)−25716)
+
+For this exercise, consider the Karun-3 dam in Iran. Its shape can be approximated as an inverted isosceles triangle spanning across the river, with height 205 m and width (across the top of the dam) 388 m. Assume the current depth of the water is 180 m. The density of water is 1000 kg/m3. Find the total force on the wall of the dam.
+
+You are a crime scene investigator attempting to determine the time of death of a victim. It is noon and 45°F outside and the temperature of the body is 78°F. You know the cooling constant is k=0.00824°F/min. When did the victim die, assuming that a human’s temperature is 98°F
+?
+
+11:02 a.m.
+
+For the following exercise, consider the stock market crash in 1929 in the United States. The table lists the Dow Jones industrial average per year leading up to the crash.
+
+Years after 1920
+[T] The best-fit exponential curve to these data is given by y=40.71+1.224x. Why do you think the gains of the market were unsustainable? Use first and second derivatives to help justify your answer. What would this model predict the Dow Jones industrial average to be in 2014
+?
+
+For the following exercises, consider the catenoid, the only solid of revolution that has a minimal surface, or zero mean curvature. A catenoid in nature can be found when stretching soap between two rings.
+
+Find the volume of the catenoid y=cosh(x) from x=−1tox=1 that is created by rotating this curve around the x-axis, as shown here.
+π(1+sinh(1)cosh(1))
+
+Find surface area of the catenoid y=cosh(x) from x=−1 to x=1 that is created by rotating this curve around the x-axis.
+
+a curve in the shape of the function y=acosh(x/a) is a catenary; a cable of uniform density suspended between two supports assumes the shape of a catenary

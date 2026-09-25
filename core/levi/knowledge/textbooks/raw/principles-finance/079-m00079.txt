@@ -1,0 +1,268 @@
+# m00079
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Measures of Spread
+
+Measures of Spread
+
+By the end of this section, you will be able to:
+
+Define and calculate standard deviation for a data set.
+
+Define and calculate variance for a data set.
+
+Explain the relationship between standard deviation and variance.
+
+Standard Deviation
+
+An important characteristic of any set of data is the variation in the data. In some data sets, the data values are concentrated close to the mean; in other data sets, the data values are more widely spread out. For example, an investor might examine the yearly returns for Stock A, which are 1%, 2%, -1%, 0%, and 3%, and compare them to the yearly returns for Stock B, which are -9%, 2%, 15%, -5%, and 0%.
+
+Notice that Stock B exhibits more volatility in yearly returns than Stock A. The investor may want to quantify this variation in order to make the best investment decisions for a particular investment objective.
+
+The most common measure of variation, or spread, is standard deviation. The standard deviation of a data set is a measure of how far the data values are from their mean. A standard deviation
+
+provides a numerical measure of the overall amount of variation in a data set; and
+
+can be used to determine whether a particular data value is close to or far from the mean.
+The standard deviation provides a measure of the overall variation in a data set. The standard deviation is always positive or zero. It is small when the data values are all concentrated close to the mean, exhibiting little variation or spread. It is larger when the data values are more spread out from the mean, exhibiting more variation.
+
+Suppose that we are studying the variability of two different stocks, Stock A and Stock B. The average stock price for both stocks is $5. For Stock A, the standard deviation of the stock price is 2, whereas the standard deviation for Stock B is 4. Because Stock B has a higher standard deviation, we know that there is more variation in the stock price for Stock B than in the price for Stock A.
+
+There are two different formulas for calculating standard deviation. Which formula to use depends on whether the data represents a sample or a population. The notation s is used to represent the sample standard deviation, and the notation σ is used to represent the population standard deviation. In the formulas shown below, x̄ is the sample mean, μ is the population mean, n is the sample size, and N is the population size.
+
+Formula for the sample standard deviation:
+
+Formula for the population standard deviation:
+
+Variance
+Variance also provides a measure of the spread of data values. The variance of a data set measures the extent to which each data value differs from the mean. The more the individual data values differ from the mean, the larger the variance. Both the standard deviation and the variance provide similar information.
+
+In a finance application, variance can be used to determine the volatility of an investment and therefore to help guide financial decisions. For example, a more cautious investor might opt for investments with low volatility.
+
+Similar to standard deviation, the formula used to calculate variance also depends on whether the data is collected from a sample or a population. The notation s2 is used to represent the sample variance, and the notation σ2 is used to represent the population variance.
+
+Formula for the sample variance:
+
+Formula for the population variance:
+
+This is the method to calculate standard deviation and variance for a sample:
+
+First, find the mean x¯ of the data set by adding the data values and dividing the sum by the number of data values.
+
+Set up a table with three columns, and in the first column, list the data values in the data set.
+
+For each row, subtract the mean from the data value (x-x¯), and enter the difference in the second column. Note that the values in this column may be positive or negative. The sum of the values in this column will be zero.
+
+In the third column, for each row, square the value in the second column. So this third column will contain the quantity (Data Value – Mean)2 for each row. We can write this quantity as x - x¯2. Note that the values in this third column will always be positive because they represent a squared quantity.
+
+Add up all the values in the third column. This sum can be written as ∑x-x¯2.
+
+Divide this sum by the quantity (n – 1), where n is the number of data points. We can write this as ∑x - x¯2n - 1.
+
+This result is called the sample variance, denoted by s2. Thus, the formula for the sample variance is s2=∑x - x¯2n - 1.
+
+Now take the square root of the sample variance. This value is the sample standard deviation, called s. Thus, the formula for the sample standard deviation is s=∑(x - x¯)2n - 1.
+
+Round-off rule: The sample variance and sample standard deviation are typically rounded to one more decimal place than the data values themselves.
+
+Finding Standard Deviation and Variance
+
+A brokerage firm advertises a new financial analyst position and receives 210 applications. The ages of a sample of 10 applicants for the position are as follows:
+
+The brokerage firm is interested in determining the standard deviation and variance for this sample of 10 ages.
+Solution:
+
+Find the sample variance and sample standard deviation by creating a table with three columns (see ).
+
+The data set is 40, 36, 44, 51, 54, 55, 39, 47, 44, 50.
+
+This data set has 10 data values. Thus, n= 10.
+
+The mean is calculated as x¯=46.
+
+Column 1 will contain the data values themselves.
+
+Column 2 will contain x-x¯.
+
+Column 3 will contain x-x¯2.
+ 
+ Calculations for Standard Deviation for Age Example
+
+ Column 1x
+ Column 2(x - x¯)
+ Column 3(x - x¯)2
+
+ 40
+ 40 - 46 = -6
+ (-6)2 = 36
+
+ 36
+ 36 - 46 = -10
+ (-10)2 = 100
+
+ 44
+ 44 - 46 =  -2
+ (-2)2 = 4
+
+ 51
+ 51 - 46 = 5
+ (5)2 = 25
+
+ 54
+ 54 - 46 = 8
+ (8)2 = 64
+
+ 55
+ 55 - 46 = 9
+ (9)2 = 81
+
+ 39
+ 39 - 46 = -7
+ (-7)2 = 49
+
+ 47
+ 47 - 46 = 1
+ (1)2 = 1
+
+ 44
+ 44 - 46 = -2
+ (-2)2 = 4
+
+ 50
+ 50 - 46 = 4
+ (4)2 = 16
+
+ Sum= 0
+ Sum= 380
+
+Calculations for Standard Deviation for Age Example
+Column 1x
+Column 1
+x
+Column 2(x - x¯)
+Column 2
+(x - x¯)
+Column 3(x - x¯)2
+Column 3
+(x - x¯)2
+
+(-6)2 = 36
+(-10)2 = 100
+(-2)2 = 4
+(5)2 = 25
+(8)2 = 64
+(9)2 = 81
+(-7)2 = 49
+(1)2 = 1
+(-2)2 = 4
+Sum= 380
+To calculate the sample variance, use the sample variance formula:
+ s2=∑x - x¯2n - 1=38010 - 1=3809≈42.2
+
+To calculate the sample standard deviation, use the sample standard deviation formula:
+ s=∑x - x¯2n - 1=3809≈6.5
+
+As the above example illustrates, calculating the variance and standard deviation is a tedious process. A financial calculator can calculate statistical measurements such as mean and standard deviation quickly and efficiently.
+
+There are two steps needed to perform statistical calculations on the calculator:
+
+Enter the data in the calculator using the [DATA] function, which is located above the 7 key.
+
+Access the statistical results provided by the calculator using the [STAT] function, which is located above the 8 key.
+
+Follow the steps in to calculate mean and standard deviation using the financial calculator. The ages data set from the Think It Through example above is used again here: 40, 36, 44, 51, 54, 55, 39, 47, 44, 50.
+
+Calculator Steps for Mean and Standard DeviationThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+2ND [DATA]
+X01
+0.00
+2
+2ND [CLR WORK]
+X01
+0.00
+3
+Enter first data value of 40
+40 ENTER
+X01 =
+40.00
+4
+Move to next data entry
+↓
+Y01 =
+1.00
+5
+Move to next data entry
+↓
+X02
+0.0
+6
+Enter second data value of 36
+36 ENTER
+X02 =
+36.00
+7
+Move to next data entry
+↓
+Y02 =
+1.00
+8
+Move to next data entry
+↓
+X03
+0.00
+9
+Enter third data value of 44
+44 ENTER
+X03 =
+44.00
+10
+Move to next data entry
+↓
+Y03 =
+1.00
+11
+Continue to enter remaining data values
+12
+2nd [STAT]
+LIN
+13
+Move to first statistical result
+n =
+10.00
+14
+Move to next statistical result
+x¯=
+46.00
+15
+Move to next statistical result
+Sx =
+6.50
+From the statistical results, the mean is shown as 46, and the sample standard deviation is shown as 6.50.
+
+Excel provides a similar analysis using the built-in functions =AVERAGE (for the mean) and =STDEV.S (for the sample standard deviation). To calculate these statistical results in Excel, enter the data values in a column. Let’s assume the data values are placed in cells A2 through A11. In any cell, type the Excel command =AVERAGE(A2:A11) and press enter. Excel will calculate the arithmetic mean in this cell. Then, in any other cell, type the Excel command =STDEV.S(A2:A11) and press enter. Excel will calculate the sample standard deviation in this cell. shows the mean and standard deviation for the 10 ages.
+
+Mean and Standard Deviation in Excel.
+
+Relationship between Standard Deviation and Variance
+
+In the formulas shown above for variance and standard deviation, notice that the variance is the square of the standard deviation, and the standard deviation is the square root of the variance.
+
+Once you have calculated one of these values, you can directly calculate the other value. For example, if you know the standard deviation of a data set is 12.5, you can calculate the variance by squaring this standard deviation. The variance is then 12.52, which is 156.25.
+
+In the same way, if you know the value of the variance, you can determine the standard deviation by calculating the square root of the variance. For example, if the variance of a data set is known to be 31.36, then the standard deviation can be calculated as the square root of 31.36, which is 5.6.
+
+One disadvantage of using the variance is that the variance is measured in square units, which are different from the units in the data set. For example, if the data set consists of ages measured in years, then the variance would be measured in years squared, which can be confusing. The standard deviation is measured in the same units as the original data set, and thus the standard deviation is used more commonly than the variance to measure the spread of a data set.
+
+The standard deviation and variance are measures of the spread of a data set. The standard deviation is small when the data values are all concentrated close to the mean, exhibiting little variation or spread. The standard deviation is larger when the data values are more spread out from the mean, exhibiting more variation. The formula used to calculate the standard deviation depends on whether the data represents a sample or a population, as the formulas for the sample standard deviation and the population standard deviation are slightly different.
+
+a measure of the spread of a data set that indicates how far a typical data value is from the mean
+the measure of the spread of data values calculated as the square of the standard deviation

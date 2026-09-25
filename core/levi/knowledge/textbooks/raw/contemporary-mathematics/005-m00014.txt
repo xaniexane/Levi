@@ -1,0 +1,247 @@
+# m00014
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Set Operations with Two Sets
+
+Set Operations with Two Sets
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Determine the intersection of two sets.
+
+Determine the union of two sets.
+
+Determine the cardinality of the union of two sets.
+
+Apply the concepts of AND and OR to set operations.
+
+Draw conclusions from Venn diagrams with two sets.
+
+The movie Yours, Mine, and Ours was originally released in 1968 and starred Lucille Ball and Henry Fonda. This movie, which is loosely based on a true story, is about the marriage of Helen, a widow with eight children, and Frank, a widower with ten children, who then have an additional child together. The movie is a comedy that plays on the interpersonal and organizational struggles of feeding, bathing, and clothing twenty people in one household.
+
+If we consider the set of Helen's children and the set of Frank's children, then the child they had together is the intersection of these two sets, and the collection of all their children combined is the union of these two sets. In this section, we will explore the operations of union and intersection as it relates to two sets.
+
+The Intersection of Two Sets
+
+The members that the two sets share in common are included in the intersection of two sets. To be in the intersection of two sets, an element must be in both the first set and the second set. In this way, the intersection of two sets is a logical AND statement. Symbolically, A intersection B is written as: A∩B. A intersection B is written in set builder notation as: A∩B={x|x∈Aandx∈B}.
+
+Let us look at Helen's and Frank's children from the movie Yours, Mine, and Ours. Helen's children consist of the set H={Colleen, Nick, Janette, Tommy, Jean, Phillip, Gerald, Theresa, Joseph} and Frank's children are included in the set F={Mike, Rusty, Greg, Rosemary, Loise, Susan, Veronica, Mary, Germaine, Joan, Joseph}. H intersection F is the set of children they had together. H∩F={Joseph}, because Joseph is in both set H and set F.
+
+Finding the Intersection of Set A and Set B
+
+Set A={1,3,5,7,9} and 
+ B={2,3,5,7}. Find A intersection B.
+
+The intersection of sets A and B include the elements that set A and B have in common: 3, 5, and 7. A∩B={3,5,7}.
+
+Notice that if sets A and B are disjoint sets, then they do not share any elements in common, and A intersection B is the empty set, as shown in the Venn diagram below.
+
+Determining the Intersection of Disjoint Sets
+
+Set A={0,2,4,6,8} and set B={1,3,5,7,9}. Find A∩B.
+
+Because sets A and B are disjoint, they do not share any elements in common. So, the intersection of set A and set B is the empty set. A∩B=∅.
+
+Notice that if set A is a subset of set B, then A intersection B is equal to set A, as shown in the Venn diagram below.
+
+Finding the Intersection of a Set and a Subset
+
+Set A={1,3,5,…} and set B=ℕ={1,2,3,…} Find A∩B.
+
+Because set A is a subset of set B, A intersection B is equal to set A. A∩B=A={1,3,5,…}, the set of odd natural numbers.
+
+The Union of Two Sets
+
+Like the union of two families in marriage, the union of two sets includes all the members of the first set and all the members of the second set. To be in the union of two sets, an element must be in the first set, the second set, or both. In this way, the union of two sets is a logical inclusive OR statement. Symbolically, A union B is written as: A∪B. A union B is written in set builder notation as: A∪B={x|x∈Aorx∈B}.
+
+Let us consider the sets of Helen's and Frank's children from the movie Yours, Mine, and Ours again. Helen's children is set H={Colleen, Nick, Janette, Tommy, Jean, Phillip, Gerald, Theresa, Joseph} and Frank's children is set F={Mike, Rusty, Greg, Rosemary, Loise, Susan, Veronica, Mary, Germaine, Joan, Joseph}. The union of these two sets is the collection of all nineteen of their children, H∪F={Colleen, Nick, Janette, Tommy, Jean, Phillip, Gerald, Theresa, Joseph, Mike, Rusty, Greg, Rosemary, Loise, Susan, Veronica, Mary, Germaine, Joan}. Notice, Joseph is in both set H and set F, but he is only one child, so, he is only listed once in the union.
+
+Finding the Union of Sets A and B When A and B Overlap
+
+Set A={1,3,5,7,9} and set B={2,3,5,7}. Find A union B.
+A union B is the set formed by including all the unique elements in set A, set B, or both sets A and B: A∪B={1,3,5,7,9,2}. The first five elements of the union are the five unique elements in set A. Even though 3, 5, and 7 are also members of set B, these elements are only listed one time. Lastly, set B includes the unique element 2, so 2 is also included as part of the union of sets A and B.
+
+When observing the union of sets A and B, notice that both set A and set B are subsets of A union B. Graphically, A union B can be represented in several different ways depending on the members that they have in common. If A and B are disjoint sets, then A union B would be represented with two disjoint circles within the universal set, as shown in the Venn diagram below.
+
+If sets A and B share some, but not all, members in common, then the Venn diagram is drawn as two separate circles that overlap.
+
+If every member of set A is also a member of set B, then A is a subset of set B, and A union B would be equal to set B. To draw the Venn diagram, the circle representing set A should be completely enclosed in the circle containing set B.
+
+Finding the Union of Sets A and B When A and B Are Disjoint
+
+Set A={0,2,4,6,8} and set B={1,3,5,7,9}. Find A∪B.
+
+Because sets A and B are disjoint, the union is simply the set containing all the elements in both set A and set B. A∪B={0,1,2,3,4,5,6,7,8,9}.
+
+Finding the Union of Sets A and B When One Set is a Subset of the Other
+
+Set A={1,3,5,…} and set B=ℕ={1,2,3,…}. Find A∪B.
+
+Because set A is a subset of set B, A union B is equal to set B. A∪B=ℕ={1,2,3,…}=B.
+
+The Basics of Intersection of Sets, Union of Sets and Venn Diagrams
+
+Set Operation Practice
+
+Sets Challenge is an application available on both Android and iPhone smartphones that allows you to practice and gain familiarity with the operations of set union, intersection, complement, and difference.
+
+The Sets Challenge application/game uses some notation that differs from the notation covered in the text.
+ The complement of set A in this text is written symbolically as A′, but the Sets Challenge game uses AC to represent the complement operation.
+ In the text we do not cover set difference between two sets A and B, represented in the game as A−B. In the game this operation removes from set A all the elements in A∩B. For example, if set A={a,b,c,d} and set B={b,d,f,h} are subsets of the universal set U={a,b,c,…,z}, then A−B={a,b,c,d}−{b,d}={a,c}, and B−A={b,d,f,h}−{b,d}={f,h}. There is a project at the end of the chapter to research the set difference operation.
+
+The complement of set A in this text is written symbolically as A′, but the Sets Challenge game uses AC to represent the complement operation.
+
+In the text we do not cover set difference between two sets A and B, represented in the game as A−B. In the game this operation removes from set A all the elements in A∩B. For example, if set A={a,b,c,d} and set B={b,d,f,h} are subsets of the universal set U={a,b,c,…,z}, then A−B={a,b,c,d}−{b,d}={a,c}, and B−A={b,d,f,h}−{b,d}={f,h}. There is a project at the end of the chapter to research the set difference operation.
+
+Determining the Cardinality of Two Sets
+
+The cardinality of the union of two sets is the total number of elements in the set. Symbolically the cardinality of A union B is written, n(A∪B). If two sets A and B are disjoint, the cardinality of A union B is the sum of the cardinality of set A and the cardinality of set B. If the two sets intersect, then A intersection B is a subset of both set A and set B. This means that if we add the cardinality of set A and set B, we will have added the number of elements in A intersection B twice, so we must then subtract it once as shown in the formula that follows.
+
+The cardinality of A union B is found by adding the number of elements in set A to the number of elements in set B, then subtracting the number of elements in the intersection of set A and set B. n(A∪B)=n(A)+n(B)−n(A∩B) or n(AorB)=n(A)+n(B)−n(AandB).
+
+If sets A and B are disjoint, then n(A∩B)=n(AandB)=0 and the formula is still valid, but simplifies to n(A∪B)=n(A)+n(B).
+
+Determining the Cardinality of the Union of Two Sets
+
+The number of elements in set A is 10, the number of elements in set B is 20, and the number of elements in A intersection B is 4. Find the number of elements in A union B.
+
+Using the formula for determining the cardinality of the union of two sets, we can say n(A∪B)=n(A)+n(B)−n(A∩B)=10+20−4=26.
+
+Determining the Cardinality of the Union of Two Disjoint Sets
+
+If A and B are disjoint sets and the cardinality of set A is 37 and the cardinality of set B is 43, find the cardinality of A union B.
+
+To find the cardinality of A union B, apply the formula, n(A∪B)=n(A)+n(B)−n(A∩B). Because sets A and B are disjoint, A∩B is the empty set, therefore n(A∩B)=n(∅)=0 and n(A∪B)=37+43−0=80.
+
+Applying Concepts of “AND” and “OR” to Set Operations
+
+To become a licensed driver, you must pass some form of written test and a road test, along with several other requirements depending on your age. To keep this example simple, let us focus on the road test and the written test. If you pass the written test but fail the road test, you will not receive your license. If you fail the written test, you will not be allowed to take the road test and you will not receive a license to drive. To receive a driver's license, you must pass the written test AND the road test. For an “AND” statement to be true, both conditions that make up the statement must be true. Similarly, the intersection of two sets A and B is the set of elements that are in both set A and set B. To be a member of A intersection B, an element must be in set A and also must be in set B. The intersection of two sets corresponds to a logical "AND" statement.
+
+The union of two sets is a logical inclusive "OR" statement. Say you are at a birthday party and the host offers Leah, Lenny, Maya, and you some cake or ice cream for dessert. Leah asks for cake, Lenny accepts both cake and ice cream, Maya turns down both, and you choose only ice cream. Leah, Lenny, and you are all having dessert. The “OR” statement is true if at least one of the components is true. Maya is the only one who did not have cake or ice cream; therefore, she did not have dessert and the “OR” statement is false. To be in the union of two sets A and B, an element must be in set A or set B or both set A and set B.
+
+Applying the "AND" or "OR" Operation
+A={0,3,6,9,12},B={0,4,8,12,16}, and C={1,2,3,5,8,13}.
+
+Find the set consisting of elements in:
+AandB.
+AorB.
+AorC.
+(BandC)orA.
+AandB=A∩B={0,12}, because only the elements 0 and 12 are members of both set A and set B.
+ AorB=A∪B={0,3,4,6,8,9,12,16}, because the set A or B is the collection of all elements in set A or set B, or both.
+ AorC=A∪C={0,1,2,3,5,6,8,9,12,13}, because the set A or C is the collection of all elements in set A or set C, or both.
+ (BandC)orA=(B∩C)∪A. Parentheses are evaluated first: (BandC)=B∩C={8}, because the only member that both set B and set C share in common is 8. So, now we need to find {8}or{0,3,6,9,12}, Because the word translates to the union operation, the problem becomes {8}∪{0,3,6,9,12}, which is equal to {0,3,6,8,9,12}.
+AandB=A∩B={0,12}, because only the elements 0 and 12 are members of both set A and set B.
+AorB=A∪B={0,3,4,6,8,9,12,16}, because the set A or B is the collection of all elements in set A or set B, or both.
+AorC=A∪C={0,1,2,3,5,6,8,9,12,13}, because the set A or C is the collection of all elements in set A or set C, or both.
+(BandC)orA=(B∩C)∪A. Parentheses are evaluated first: (BandC)=B∩C={8}, because the only member that both set B and set C share in common is 8. So, now we need to find {8}or{0,3,6,9,12}, Because the word translates to the union operation, the problem becomes {8}∪{0,3,6,9,12}, which is equal to {0,3,6,8,9,12}.
+
+Determine and Apply the Appropriate Set Operations to Solve the Problem
+
+Don Woods is serving cake and ice cream at his Juneteenth celebration. The party has a total of 54 guests in attendance. Suppose 30 guests requested cake, 20 guests asked for ice cream, and 12 guests did not have either cake or ice cream.
+
+How many guests had cake or ice cream?
+
+How many guests had cake and ice cream?
+The total number of people at the party is 54, and 12 people did not have cake or ice cream. Recall that the total number of elements in the universal set is always equal to the number of elements in a subset plus the number of elements in the complement of the set, n(U)=n(A)+n(A′). That means 54=n(cake or ice cream)+n(not(cake or ice cream)), or equivalently,n(cake∪ice cream)=54−n((cake∪ice cream)′)=54−12=42. A total of 42 people at the party had cake or ice cream.
+ To determine the number of people who had both cake and ice cream, we need to find the intersection of the set of people who had cake and the set of people who had ice cream. From Question 1, the number of people who had cake or ice cream is 42. This is the union of the two sets. The formula for the union of two sets is n(A∪B)=n(A)+n(B)−n(A∩B). Use the information given in the problem and substitute the known values into the formula to solve for the number of people in the intersection: 42=30+20−n(A∩B). Adding 30 and 20, the equation simplifies to 42=50−n(cake and ice cream). Which means n(cake and ice cream)=50−42=8.
+
+The total number of people at the party is 54, and 12 people did not have cake or ice cream. Recall that the total number of elements in the universal set is always equal to the number of elements in a subset plus the number of elements in the complement of the set, n(U)=n(A)+n(A′). That means 54=n(cake or ice cream)+n(not(cake or ice cream)), or equivalently,n(cake∪ice cream)=54−n((cake∪ice cream)′)=54−12=42. A total of 42 people at the party had cake or ice cream.
+
+To determine the number of people who had both cake and ice cream, we need to find the intersection of the set of people who had cake and the set of people who had ice cream. From Question 1, the number of people who had cake or ice cream is 42. This is the union of the two sets. The formula for the union of two sets is n(A∪B)=n(A)+n(B)−n(A∩B). Use the information given in the problem and substitute the known values into the formula to solve for the number of people in the intersection: 42=30+20−n(A∩B). Adding 30 and 20, the equation simplifies to 42=50−n(cake and ice cream). Which means n(cake and ice cream)=50−42=8.
+
+The Real Inventor of the Venn Diagram
+
+John Venn, in his writings, references works by both John Boole and Augustus De Morgan, who referred to the circle diagrams commonly used to present logical relationships as Euler's circles. Leonhard Euler's works were published over 100 years prior to Venn's, and Euler may have been influenced by the works of Gottfried Leibniz.
+
+So, why does John Venn get all the credit for these graphical depictions? Venn was the first to formalize the use of these diagrams in his book Symbolic Logic, published in 1881. Further, he made significant improvements in their design, including shading to highlight the region of interest. The mathematician C.L. Dodgson, also known as Lewis Carroll, built upon Venn’s work by adding an enclosing universal set.
+
+Invention is not necessarily coming up with an initial idea. It is about seeing the potential of an idea and applying it to a new situation.
+
+References:
+
+Margaret E. Baron. "A Note on the Historical Development of Logic Diagrams: Leibniz, Euler and Venn." The Mathematical Gazette, vol. 53, no. 384, 1969, pp. 113-125. JSTOR, www.jstor.org/stable/3614533. Accessed 15 July 2021.
+
+Deborah Bennett. "Drawing Logical Conclusions." Math Horizons, vol. 22, no. 3, 2015, pp. 12-15. JSTOR, www.jstor.org/stable/10.4169/mathhorizons.22.3.12. Accessed 15 July 2021.
+
+Drawing Conclusions from a Venn Diagram with Two Sets
+
+All Venn diagrams will display the relationships between the sets, such as subset, intersecting, and/or disjoint. In addition to displaying the relationship between the two sets, there are two main additional details that Venn diagrams can include: the individual members of the sets or the cardinality of each disjoint subset of the universal set.
+
+A Venn diagram with two subsets will partition the universal set into 3 or 4 sections depending on whether they are disjoint or intersecting sets. Recall that the complement of set A, written A′, is the set of all elements in the universal set that are not in set A.
+
+Using a Venn Diagram to Draw Conclusions about Set Membership
+Find A∪B.
+ Find A∩B.
+ Find B′.
+ Find n(B′).
+
+Find A∪B.
+
+Find A∩B.
+
+Find B′.
+
+Find n(B′).
+A∪B={1,2,3,4,5,6,7,8}, because A union B is the collection of all elements in set A or set B or both.
+ Because A and B are disjoint sets, there are no elements that are in both A and B. Therefore, A intersection B is the empty set, A∩B=∅.
+ The complement of set B is the set of all elements in the universal set that are not in set B: B′={0,1,3,5,7,9}.
+ The cardinality, or number of elements in set B′,isn(B′)=6.
+A∪B={1,2,3,4,5,6,7,8}, because A union B is the collection of all elements in set A or set B or both.
+
+Because A and B are disjoint sets, there are no elements that are in both A and B. Therefore, A intersection B is the empty set, A∩B=∅.
+
+The complement of set B is the set of all elements in the universal set that are not in set B: B′={0,1,3,5,7,9}.
+
+The cardinality, or number of elements in set B′,isn(B′)=6.
+
+Using a Venn Diagram to Draw Conclusions about Set Cardinality
+
+Find n(AorB).
+
+Find n(AandB).
+
+Find n(A).
+
+The number of elements in A or B is the number of elements in A union B: n(A∪B)=n({2,5,7})=14.
+
+The number of elements in A and B is the number of elements in A intersection B: n(A∩B)=5.
+
+The number of elements in set A is the sum of all the numbers enclosed in the circle representing set A: n(A)=n({7,5})=12.
+
+Check Your Understanding
+
+Key Terms
+
+intersection of two sets
+
+union of two sets
+
+Key Concepts
+
+The intersection of two sets, A∩B is the set of all elements that they have in common. Any member of A intersection B must be is both set A and set B.
+
+The union of two sets, A∪B, is the collection of all members that are in either in set A, set B or both sets A and B combined.
+
+Two sets that share at least one element in common, so that they are not disjoint are represented in a Venn Diagram using two circles that overlap.
+ 
+ The region of the overlap is the set A intersection B, A∩B.
+ The regions that include everything in the circle representing set A or the circle representing set B or their overlap is the set A union B, A∪B.
+
+The region of the overlap is the set A intersection B, A∩B.
+
+The regions that include everything in the circle representing set A or the circle representing set B or their overlap is the set A union B, A∪B.
+
+Apply knowledge of set union and intersection to determine cardinality and membership using Venn Diagrams, the roster method and set builder notation.
+
+Formulas
+
+The cardinality of A union B:n(A∪B)=n(A)+n(B)−n(A∩B)
+
+Video
+The Basics of Intersection of Sets, Union of Sets and Venn Diagrams

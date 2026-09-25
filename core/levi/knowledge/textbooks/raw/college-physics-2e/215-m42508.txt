@@ -1,0 +1,230 @@
+# m42508
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Young’s Double Slit Experiment
+
+Young’s Double Slit Experiment
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Explain the phenomena of interference.
+
+Define constructive interference for a double slit and destructive interference for a double slit.
+
+Although Christiaan Huygens thought that light was a wave, Isaac Newton did not. Newton felt that there were other explanations for color, and for the interference and diffraction effects that were observable at the time. Owing to Newton’s tremendous stature, his view generally prevailed. The fact that Huygens’s principle worked was not considered evidence that was direct enough to prove that light is a wave. The acceptance of the wave character of light came many years later when, in 1801, the English physicist and physician Thomas Young (1773–1829) did his now-classic double slit experiment (see ).
+
+Why do we not ordinarily observe wave behavior for light, such as observed in Young’s double slit experiment? First, light must interact with something small, such as the closely spaced slits used by Young, to show pronounced wave effects. Furthermore, Young first passed light from a single source (the Sun) through a single slit to make the light somewhat coherent. By coherent, we mean waves are in phase or have a definite phase relationship. Incoherent means the waves have random phase relationships. Why did Young then pass the light through a double slit? The answer to this question is that two slits provide two coherent light sources that then interfere constructively or destructively. Young used sunlight, where each wavelength forms its own pattern, making the effect more difficult to see. We illustrate the double slit experiment with monochromatic (single λ) light to clarify the effect. shows the pure constructive and destructive interference of two waves having the same wavelength and amplitude.
+
+When light passes through narrow slits, it is diffracted into semicircular waves, as shown in (a). Pure constructive interference occurs where the waves are crest to crest or trough to trough. Pure destructive interference occurs where they are crest to trough. The light must fall on a screen and be scattered into our eyes for us to see the pattern. An analogous pattern for water waves is shown in (b). Note that regions of constructive and destructive interference move out from the slits at well-defined angles to the original beam. These angles depend on wavelength and the distance between the slits, as we shall see below.
+
+To understand the double slit interference pattern, we consider how two waves travel from the slits to the screen, as illustrated in . Each slit is a different distance from a given point on the screen. Thus different numbers of wavelengths fit into each path. Waves start out from the slits in phase (crest to crest), but they may end up out of phase (crest to trough) at the screen if the paths differ in length by half a wavelength, interfering destructively as shown in (a). If the paths differ by a whole wavelength, then the waves arrive in phase (crest to crest) at the screen, interfering constructively as shown in (b). More generally, if the paths taken by the two waves differ by any half-integral number of wavelengths [(1/2)λ, (3/2)λ, (5/2)λ, etc.], then destructive interference occurs. Similarly, if the paths taken by the two waves differ by any integral number of wavelengths (λ, 2λ, 3λ, etc.), then constructive interference occurs.
+
+Take-Home Experiment: Using Fingers as Slits
+
+Look at a light, such as a street lamp or incandescent bulb, through the narrow gap between two fingers held close together. What type of pattern do you see? How does it change when you allow the fingers to move a little farther apart? Is it more distinct for a monochromatic source, such as the yellow light from a sodium vapor lamp, than for an incandescent bulb?
+shows how to determine the path length difference for waves traveling from two slits to a common point on a screen. If the screen is a large distance away compared with the distance between the slits, then the angle θ between the path and a line from the slits to the screen (see the figure) is nearly the same for each path. The difference between the paths is shown in the figure; simple trigonometry shows it to be dsinθ, where d is the distance between the slits. To obtain constructive interference for a double slit, the path length difference must be an integral multiple of the wavelength, or
+
+Similarly, to obtain destructive interference for a double slit, the path length difference must be a half-integral multiple of the wavelength, or
+
+where λ is the wavelength of the light, d is the distance between slits, and θ is the angle from the original direction of the beam as discussed above. We call m the order of the interference. For example, m=4 is fourth-order interference.
+
+The equations for double slit interference imply that a series of bright and dark lines are formed. For vertical slits, the light spreads out horizontally on either side of the incident beam into a pattern called interference fringes, illustrated in . The intensity of the bright fringes falls off on either side, being brightest at the center. The closer the slits are, the more is the spreading of the bright fringes. We can see this by examining the equation
+
+For fixed λ and m, the smaller d is, the larger θ must be, since
+
+sinθ=mλ/d.
+
+ This is consistent with our contention that wave effects are most noticeable when the object the wave encounters (here, slits a distance d apart) is small. Small d gives large θ, hence a large effect.
+
+Finding a Wavelength from an Interference Pattern
+
+Suppose you pass light from a He-Ne laser through two slits separated by 0.0100 mm and find that the third bright line on a screen is formed at an angle of 10.95º relative to the incident beam. What is the wavelength of the light?
+Strategy
+
+Strategy
+
+The third bright line is due to third-order constructive interference, which means that m=3. We are given d=0.0100mm and θ=10.95º. The wavelength can thus be found using the equation dsinθ=mλ for constructive interference.
+Solution
+
+Solution
+
+The equation is dsinθ=mλ. Solving for the wavelength λ gives
+
+Substituting known values yields
+Discussion
+
+Discussion
+
+To three digits, this is the wavelength of light emitted by the common He-Ne laser. Not by coincidence, this red color is similar to that emitted by neon lights. More important, however, is the fact that interference patterns can be used to measure wavelength. Young did this for visible wavelengths. This analytical technique is still widely used to measure electromagnetic spectra. For a given order, the angle for constructive interference increases with λ, so that spectra (measurements of intensity versus wavelength) can be obtained.
+
+Calculating Highest Order Possible
+
+Interference patterns do not have an infinite number of lines, since there is a limit to how big m can be. What is the highest-order constructive interference possible with the system described in the preceding example?
+Strategy and Concept
+
+Strategy and Concept
+
+The equation dsinθ=mλ(form=0,1,−1,2,−2,…) describes constructive interference. For fixed values of d and λ, the larger m is, the larger sinθ is. However, the maximum value that sinθ can have is 1, for an angle of 90º. (Larger angles imply that light goes backward and does not reach the screen at all.) Let us find which m corresponds to this maximum diffraction angle.
+Solution
+
+Solution
+
+Solving the equation dsinθ=mλ for m gives
+
+Taking sinθ=1 and substituting the values of d and λ from the preceding example gives
+
+Therefore, the largest integer m can be is 15, or
+Discussion
+
+Discussion
+
+The number of fringes depends on the wavelength and slit separation. The number of fringes will be very large for large slit separations. However, if the slit separation becomes much greater than the wavelength, the intensity of the interference pattern changes so that the screen has two bright lines cast by the slits, as expected when light behaves like a ray. We also note that the fringes get fainter further away from the center. Consequently, not all 15 fringes may be observable.
+
+Test Prep for AP Courses
+
+Superposition of which of the following light waves may produce interference fringes? Select two answers.
+
+Wave1 = A1sin(2ωt)
+
+Wave2 = A2sin(4ωt)
+
+Wave3 = A3sin(2ωt + θ)
+
+Wave4 = A4sin(4ωt + θ).
+
+Wave1 and Wave2
+
+Wave2 and Wave4
+
+Wave3 and Wave1
+
+Wave4 and Wave3
+
+(b) and (c)
+
+In a double slit experiment with monochromatic light, the separation between the slits is 2 mm. If the screen is moved by 100 mm toward the slits, the distance between the central bright line and the second bright line changes by 32 μm. Calculate the wavelength of the light used for the experiment.
+
+In a double slit experiment, a student measures the maximum and minimum intensities when two waves with equal amplitudes are used. The student then doubles the amplitudes of the two waves and performs the measurements again. Which of the following will remain unchanged?
+
+The intensity of the bright fringe
+
+The intensity of the dark fringe
+
+The difference in the intensities of consecutive bright and dark fringes
+
+None of the above
+
+(b)
+
+Draw a figure to show the resultant wave produced when two coherent waves (with equal amplitudes x) interact in phase. What is the amplitude of the resultant wave? If the phase difference between the coherent waves is changed to 60º, what will be new amplitude?
+
+What will be the amplitude of the central fringe if the amplitudes of the two waves in a double slit experiment are a and 3a?
+
+2a
+
+4a
+
+8a2
+
+16a2
+
+(b)
+
+If the ratio of amplitudes of the two waves in a double slit experiment is 3:4, calculate the ratio of minimum intensity (dark fringe) to maximum intensity (bright fringe).
+
+Section Summary
+
+Young’s double slit experiment gave definitive proof of the wave character of light.
+
+An interference pattern is obtained by the superposition of light from two slits.
+
+There is constructive interference when dsinθ=mλ(form=0,1,−1,2,−2,…), where d is the distance between the slits, θ is the angle relative to the incident direction, and m is the order of the interference.
+
+There is destructive interference when dsinθ=m+12λ(form=0,1,−1,2,−2,…).
+
+Conceptual Questions
+
+Young’s double slit experiment breaks a single light beam into two sources. Would the same pattern be obtained for two independent sources of light, such as the headlights of a distant car? Explain.
+
+Suppose you use the same double slit to perform Young’s double slit experiment in air and then repeat the experiment in water. Do the angles to the same parts of the interference pattern get larger or smaller? Does the color of the light change? Explain.
+
+Is it possible to create a situation in which there is only destructive interference? Explain.
+shows the central part of the interference pattern for a pure wavelength of red light projected onto a double slit. The pattern is actually a combination of single slit and double slit interference. Note that the bright spots are evenly spaced. Is this a double slit or single slit characteristic? Note that some of the bright spots are dim on either side of the center. Is this a single slit or double slit characteristic? Which is smaller, the slit width or the separation between slits? Explain your responses.
+
+Problems & Exercises
+
+At what angle is the first-order maximum for 450-nm wavelength blue light falling on double slits separated by 0.0500 mm?
+0
+ .
+ 516º
+
+Calculate the angle for the third-order maximum of 580-nm wavelength yellow light falling on double slits separated by 0.100 mm.
+
+What is the separation between two slits for which 610-nm orange light has its first maximum at an angle of 30.0º?
+1
+ .
+ 
+ 22
+ ×
+ 
+ 10
+
+ −
+ 6
+
+ m
+
+Find the distance between two slits that produces the first minimum for 410-nm violet light at an angle of 45.0º.
+
+Calculate the wavelength of light that has its third minimum at an angle of 30.0º when falling on double slits separated by 3.00μm. Explicitly, show how you follow the steps in Problem-Solving Strategies for Wave Optics.
+
+600 nm
+
+What is the wavelength of light falling on double slits separated by 2.00μm if the third-order maximum is at an angle of 60.0º?
+
+At what angle is the fourth-order maximum for the situation in ?
+2
+ .
+ 06º
+
+What is the highest-order maximum for 400-nm light falling on double slits separated by 25.0μm?
+
+Find the largest wavelength of light falling on double slits separated by 1.20μm for which there is a first-order maximum. Is this in the visible part of the spectrum?
+
+1200 nm (not visible)
+
+What is the smallest separation between two slits that will produce a second-order maximum for 720-nm red light?
+
+(a) What is the smallest separation between two slits that will produce a second-order maximum for any visible light? (b) For all visible light?
+
+(a) 760 nm
+
+(b) 1520 nm
+
+(a) If the first-order maximum for pure-wavelength light falling on a double slit is at an angle of 10.0º, at what angle is the second-order maximum? (b) What is the angle of the first minimum? (c) What is the highest-order maximum possible here?
+shows a double slit located a distance x from a screen, with the distance from the center of the screen given by y. When the distance d between the slits is relatively large, there will be numerous bright spots, called fringes. Show that, for small angles (where sinθ≈θ, with θ in radians), the distance between fringes is given by Δy=xλ/d.
+
+For small angles sinθ−tanθ≈θ(in radians).
+
+For two adjacent fringes we have,
+
+and
+
+Subtracting these equations gives
+
+Using the result of the problem above, calculate the distance between fringes for 633-nm light falling on double slits separated by 0.0800 mm, located 3.00 m from a screen as in .
+
+Using the result of the problem two problems prior, find the wavelength of light that produces fringes 7.50 mm apart on a screen 2.00 m from double slits separated by 0.120 mm (see ).
+
+450 nm
+
+waves are in phase or have a definite phase relationship
+the path length difference must be an integral multiple of the wavelength
+the path length difference must be a half-integral multiple of the wavelength
+waves have random phase relationships
+the integer m used in the equations for constructive and destructive interference for a double slit

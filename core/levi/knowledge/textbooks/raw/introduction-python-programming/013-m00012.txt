@@ -1,0 +1,59 @@
+# m00012
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Type conversion
+
+Type conversion
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain how the interpreter uses implicit type conversion.
+
+Use explicit type conversion with int(), float(), and str().
+
+Implicit type conversion
+
+Common operations update a variable such that the variable's data type needs to be changed. Ex: A GPS first assigns distance with 250, an integer. After a wrong turn, the GPS assigns distance with 252.5, a float. The Python interpreter uses implicit type conversion to automatically convert one data type to another. Once distance is assigned with 252.5, the interpreter will convert distance from an integer to a float without the programmer needing to specify the conversion.
+
+Example: Book ratings
+
+Implicit type conversion in practice
+
+Consider the example above.
+
+Explicit type conversion
+
+A programmer often needs to change data types to perform an operation. Ex: A program should read in two values using input() and sum the values. Remember input() reads in values as strings. A programmer can use explicit type conversion to convert one data type to another.
+int() converts a data type to an integer. Any fractional part is removed. Ex: int(5.9) produces 5.
+float() converts a data type to a float. Ex: float(2) produces 2.0.
+str() converts a data type to a string. Ex: str(3.14) produces "3.14".
+
+Example: Ordering pizza
+
+Example: Ordering pizza
+
+Consider the example above.
+
+Using int(), float(), and str()
+
+Given x = 4.5 and y = int(x), what is the value of each expression?
+
+Grade average
+
+The following program computes the average of three predefined exam grades and prints the average twice. Improve the program to read the three grades from input and print the average first as a float, and then as an integer, using explicit type conversion. Ignore any differences that occur due to rounding.
+
+Cups of water
+
+The following program should read in the ounces of water the user drank today and compute the number of cups drank and the number of cups left to drink based on a daily goal. Assume a cup contains 8 ounces. Fix the code to calculate cups_drank and cups_left and match the following:
+ounces is an integer representing the ounces the user drank.
+cups_drank is a float representing the number of cups of water drank.
+cups_left is an integer representing the number of cups of water left to drink (rounded down) out of the daily goal of 8 cups.
+
+Product as float
+
+The following program reads two integers in as strings. Calculate the product of the two integers, and print the result as a float.

@@ -1,0 +1,663 @@
+# m53481
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Exponential and Logarithmic Functions
+
+Exponential and Logarithmic Functions
+
+Identify the form of an exponential function.
+
+Explain the difference between the graphs of xb and bx.
+
+Recognize the significance of the number e.
+
+Identify the form of a logarithmic function.
+
+Explain the relationship between exponential and logarithmic functions.
+
+Describe how to calculate a logarithm to a different base.
+
+Identify the hyperbolic functions, their graphs, and basic identities.
+
+In this section we examine exponential and logarithmic functions. We use the properties of these functions to solve equations involving exponential or logarithmic terms, and we study the meaning and importance of the number e. We also define hyperbolic and inverse hyperbolic functions, which involve combinations of exponential and logarithmic functions. (Note that we present alternative definitions of exponential and logarithmic functions in the chapter Applications of Integrations, and prove that the functions have the same properties with either definition.)
+
+Exponential Functions
+
+Exponential functions arise in many applications. One common example is population growth.
+
+For example, if a population starts with P0 individuals and then grows at an annual rate of 2%, its population after 1 year is
+
+Its population after 2 years is
+
+In general, its population after t years is
+
+which is an exponential function. More generally, any function of the form f(x)=bx, where b>0,b≠1, is an exponential function with base b and exponent x. Exponential functions have constant bases and variable exponents. Note that a function of the form f(x)=xb for some constant b is not an exponential function but a power function.
+
+To see the difference between an exponential function and a power function, we compare the functions y=x2 and y=2x. In , we see that both 2x and x2 approach infinity as x→∞. Eventually, however, 2x becomes larger than x2 and grows more rapidly as x→∞. In the opposite direction, as x→−∞,x2→∞, whereas 2x→0. The line y=0 is a horizontal asymptote for y=2x.
+
+Values of x2 and 2x
+64
+In , we graph both y=x2 and y=2x to show how the graphs differ.
+
+Evaluating Exponential Functions
+
+Recall the properties of exponents: If x is a positive integer, then we define bx=b·b⋯b (with x factors of b). If x is a negative integer, then x=−y for some positive integer y, and we define bx=b−y=1/by. Also, b0 is defined to be 1. If x is a rational number, then x=p/q, where p and q are integers and bx=bp/q=bpq. For example, 93/2=93=27. However, how is bx defined if x is an irrational number? For example, what do we mean by 22? This is too complex a question for us to answer fully right now; however, we can make an approximation. In , we list some rational numbers approaching 2, and the values of 2x for each rational number x are presented as well. We claim that if we choose rational numbers x getting closer and closer to 2, the values of 2x get closer and closer to some number L. We define that number L to be 22.
+
+Values of 2x for a List of Rational Numbers Approximating 2
+2.665143
+Bacterial Growth
+
+Suppose a particular population of bacteria is known to double in size every 4 hours. If a culture starts with 1000 bacteria, the number of bacteria after 4 hours is n(4)=1000·2. The number of bacteria after 8 hours is n(8)=n(4)·2=1000·22. In general, the number of bacteria after 4m hours is n(4m)=1000·2m. Letting t=4m, we see that the number of bacteria after t hours is n(t)=1000·2t/4. Find the number of bacteria after 6 hours, 10 hours, and 24 hours.
+
+The number of bacteria after 6 hours is given by n(6)=1000·26/4≈2828 bacteria. The number of bacteria after 10 hours is given by n(10)=1000·210/4≈5657 bacteria. The number of bacteria after 24 hours is given by n(24)=1000·26=64,000 bacteria.
+
+Given the exponential function f(x)=100·3x/2, evaluate f(4) and f(10).
+f(4)=900;f(10)=24,300.
+
+Go to Population Balance for another example of exponential population growth.
+
+Graphing Exponential Functions
+
+For any base b>0,b≠1, the exponential function f(x)=bx is defined for all real numbers x and bx>0. Therefore, the domain of f(x)=bx is (−∞,∞) and the range is (0,∞). To graph bx, we note that for b>1,bx is increasing on (−∞,∞) and bx→∞ as x→∞, whereas bx→0 as x→−∞. On the other hand, if 0<b<1,f(x)=bx is decreasing on (−∞,∞) and bx→0 as x→∞ whereas bx→∞ as x→−∞ ().
+
+Visit this site for more exploration of the graphs of exponential functions.
+
+Note that exponential functions satisfy the general laws of exponents. To remind you of these laws, we state them as rules.
+
+Rule: Laws of Exponents
+
+For any constants a>0,b>0, and for all x and y,
+bx·by=bx+y
+bxby=bx−y
+(bx)y=bxy
+(ab)x=axbx
+axbx=(ab)x
+
+Using the Laws of Exponents
+
+Use the laws of exponents to simplify each of the following expressions.
+(2x2/3)3(4x−1/3)2
+(x3y−1)2(xy2)−2
+
+We can simplify as follows:
+(2x2/3)3(4x−1/3)2=23(x2/3)342(x−1/3)2=8x216x−2/3=x2x2/32=x8/32.
+
+We can simplify as follows:
+(x3y−1)2(xy2)−2=(x3)2(y−1)2x−2(y2)−2=x6y−2x−2y−4=x6x2y−2y4=x8y2.
+
+Use the laws of exponents to simplify (6x−3y2)/(12x−4y5).
+x/(2y3)
+
+Hint
+xa/xb=xa−b
+
+The Number e
+
+A special type of exponential function appears frequently in real-world applications. To describe it, consider the following example of exponential growth, which arises from compounding interest in a savings account. Suppose a person invests P dollars in a savings account with an annual interest rate r, compounded annually. The amount of money after 1 year is
+
+The amount of money after 2 years is
+
+More generally, the amount after t years is
+
+If the money is compounded 2 times per year, the amount of money after half a year is
+
+The amount of money after 1 year is
+
+After t years, the amount of money in the account is
+
+More generally, if the money is compounded n times per year, the amount of money in the account after t years is given by the function
+
+What happens as n→∞? To answer this question, we let m=n/r and write
+
+and examine the behavior of (1+1/m)m as m→∞, using a table of values ().
+
+Values of (1+1m)m as m→∞
+2.718280
+Looking at this table, it appears that (1+1/m)m is approaching a number between 2.7 and 2.8 as m→∞. In fact, (1+1/m)m does approach some number as m→∞. We call this number e. To six decimal places of accuracy,
+
+The letter e was first used to represent this number by the Swiss mathematician Leonhard Euler during the 1720s. Although Euler did not discover the number, he showed many important connections between e and logarithmic functions. We still use the notation e today to honor Euler’s work because it appears in many areas of mathematics and because we can use it in many practical applications.
+
+Returning to our savings account example, we can conclude that if a person puts P dollars in an account at an annual interest rate r, compounded continuously, then A(t)=Pert. This function may be familiar. Since functions involving base e arise often in applications, we call the function f(x)=ex the natural exponential function. Not only is this function interesting because of the definition of the number e, but also, as discussed next, its graph has an important property.
+
+Since e>1, we know ex is increasing on (−∞,∞). In , we show a graph of f(x)=ex along with a tangent line to the graph of at x=0. We give a precise definition of tangent line in the next chapter; but, informally, we say a tangent line to a graph of f at x=a is a line that passes through the point (a,f(a)) and has the same “slope” as f at that point . The function f(x)=ex is the only exponential function bx with tangent line at x=0 that has a slope of 1. As we see later in the text, having this property makes the natural exponential function the most simple exponential function to use in many instances.
+
+Compounding Interest
+
+Suppose $500 is invested in an account at an annual interest rate of r=5.5%, compounded continuously.
+
+Let t denote the number of years after the initial investment and A(t) denote the amount of money in the account at time t. Find a formula for A(t).
+
+Find the amount of money in the account after 10 years and after 20 years.
+
+If P dollars are invested in an account at an annual interest rate r, compounded continuously, then A(t)=Pert. Here P=$500 and r=0.055. Therefore, A(t)=500e0.055t.
+
+After 10 years, the amount of money in the account is
+A(10)=500e0.055·10=500e0.55≈$866.63.
+After 20 years, the amount of money in the account is
+A(20)=500e0.055·20=500e1.1≈$1,502.08.
+
+If $750 is invested in an account at an annual interest rate of 4%, compounded continuously, find a formula for the amount of money in the account after t years. Find the amount of money after 30 years.
+A(t)=750e0.04t. After 30 years, there will be approximately $2,490.09.
+
+Hint
+A(t)=Pert.
+
+Logarithmic Functions
+
+Using our understanding of exponential functions, we can discuss their inverses, which are the logarithmic functions. These come in handy when we need to consider any phenomenon that varies over a wide range of values, such as pH in chemistry or decibels in sound levels.
+
+The exponential function f(x)=bx is one-to-one, with domain (−∞,∞) and range (0,∞). Therefore, it has an inverse function, called the logarithmic function with base b. For any b>0,b≠1, the logarithmic function with base b, denoted logb, has domain (0,∞) and range (−∞,∞), and satisfies
+
+For example,
+
+Furthermore, since y=logb(x) and y=bx are inverse functions,
+
+The most commonly used logarithmic function is the function loge. Since this function uses natural e as its base, it is called the natural logarithm. Here we use the notation ln(x) or lnx to mean loge(x). For example,
+
+Since the functions f(x)=ex and g(x)=ln(x) are inverses of each other,
+
+and their graphs are symmetric about the line y=x ().
+
+At this site you can see an example of a base-10 logarithmic scale.
+
+In general, for any base b>0,b≠1, the function g(x)=logb(x) is symmetric about the line y=x with the function f(x)=bx. Using this fact and the graphs of the exponential functions, we graph functions logb for several values of b>1 ().
+
+Before solving some equations involving exponential and logarithmic functions, let’s review the basic properties of logarithms.
+
+Rule: Properties of Logarithms
+
+If a,b,c>0,b≠1, and r is any real number, then
+
+Solving Equations Involving Exponential Functions
+
+Solve each of the following equations for x.
+5x=2
+ex+6e−x=5
+
+Applying the natural logarithm function to both sides of the equation, we have
+ln5x=ln2.
+Using the power property of logarithms,
+xln5=ln2.
+Therefore, x=ln2/ln5.
+
+Multiplying both sides of the equation by ex, we arrive at the equation
+e2x+6=5ex.
+Rewriting this equation as
+e2x−5ex+6=0,
+we can then rewrite it as a quadratic equation in ex:
+(ex)2−5(ex)+6=0.
+Now we can solve the quadratic equation. Factoring this equation, we obtain
+(ex−3)(ex−2)=0.
+Therefore, the solutions satisfy ex=3 and ex=2. Taking the natural logarithm of both sides gives us the solutions x=ln3,ln2.
+
+Solve e2x/(3+e2x)=1/2.
+x=ln32
+
+Hint
+
+First solve the equation for e2x.
+
+Solving Equations Involving Logarithmic Functions
+
+Solve each of the following equations for x.
+ln(1x)=4
+log10x+log10x=2
+ln(2x)−3ln(x2)=0
+
+By the definition of the natural logarithm function,
+ln(1x)=4if and only ife4=1x.
+Therefore, the solution is x=1/e4.
+
+Using the product and power properties of logarithmic functions, rewrite the left-hand side of the equation as
+log10x+log10x=log10xx=log10x3/2=32log10x.
+Therefore, the equation can be rewritten as
+32log10x=2orlog10x=43.
+The solution is x=104/3=10103.
+
+Using the power property of logarithmic functions, we can rewrite the equation as ln(2x)−ln(x6)=0.
+Using the quotient property, this becomes
+ln(2x5)=0.
+Therefore, 2/x5=1, which implies x=25. We should then check for any extraneous solutions.
+
+Solve ln(x3)−4ln(x)=1.
+x=1e
+
+Hint
+
+First use the power property, then use the product property of logarithms.
+
+When evaluating a logarithmic function with a calculator, you may have noticed that the only options are log10 or log, called the common logarithm, or ln, which is the natural logarithm. However, exponential functions and logarithm functions can be expressed in terms of any desired base b. If you need to use a calculator to evaluate an expression with a different base, you can apply the change-of-base formulas first. Using this change of base, we typically write a given exponential or logarithmic function in terms of the natural exponential and natural logarithmic functions.
+
+Rule: Change-of-Base Formulas
+
+Let a>0,b>0, and a≠1,b≠1.
+ax=bxlogba for any real number x.
+If b=e, this equation reduces to ax=exlogea=exlna.
+logax=logbxlogba for any real number x>0.
+If b=e, this equation reduces to logax=lnxlna.
+
+Proof
+
+For the first change-of-base formula, we begin by making use of the power property of logarithmic functions. We know that for any base b>0,b≠1,logb(ax)=xlogba. Therefore,
+
+In addition, we know that bx and logb(x) are inverse functions. Therefore,
+
+Combining these last two equalities, we conclude that ax=bxlogba.
+
+To prove the second property, we show that
+
+Let u=logba,v=logax, and w=logbx. We will show that u·v=w. By the definition of logarithmic functions, we know that bu=a,av=x, and bw=x. From the previous equations, we see that
+
+Therefore, buv=bw. Since exponential functions are one-to-one, we can conclude that u·v=w.
+
+□
+
+Changing Bases
+
+Use a calculating utility to evaluate log37 with the change-of-base formula presented earlier.
+
+Use the second equation with a=3 and e=3:
+log37=ln7ln3≈1.77124.
+
+Use the change-of-base formula and a calculating utility to evaluate log46.
+1.29248
+
+Hint
+
+Use the change of base to rewrite this expression in terms of expressions involving the natural logarithm function.
+
+Chapter Opener: The Richter Scale for Earthquakes
+
+In 1935, Charles Richter developed a scale (now known as the Richter scale) to measure the magnitude of an earthquake. The scale is a base-10 logarithmic scale, and it can be described as follows: Consider one earthquake with magnitude R1 on the Richter scale and a second earthquake with magnitude R2 on the Richter scale. Suppose R1>R2, which means the earthquake of magnitude R1 is stronger, but how much stronger is it than the other earthquake? A way of measuring the intensity of an earthquake is by using a seismograph to measure the amplitude of the earthquake waves. If A1 is the amplitude measured for the first earthquake and A2 is the amplitude measured for the second earthquake, then the amplitudes and magnitudes of the two earthquakes satisfy the following equation:
+
+Consider an earthquake that measures 8 on the Richter scale and an earthquake that measures 7 on the Richter scale. Then,
+
+Therefore,
+
+which implies A1/A2=10 or A1=10A2. Since A1 is 10 times the size of A2, we say that the first earthquake is 10 times as intense as the second earthquake. On the other hand, if one earthquake measures 8 on the Richter scale and another measures 6, then the relative intensity of the two earthquakes satisfies the equation
+
+Therefore, A1=100A2. That is, the first earthquake is 100 times more intense than the second earthquake.
+
+How can we use logarithmic functions to compare the relative severity of the magnitude 9 earthquake in Japan in 2011 with the magnitude 7.3 earthquake in Haiti in 2010?
+
+To compare the Japan and Haiti earthquakes, we can use an equation presented earlier:
+9−7.3=log10(A1A2).
+
+Therefore, A1/A2=101.7, and we conclude that the earthquake in Japan was approximately 50 times more intense than the earthquake in Haiti.
+
+Compare the relative severity of a magnitude 8.4 earthquake with a magnitude 7.4 earthquake.
+
+The magnitude 8.4 earthquake is roughly 10 times as severe as the magnitude 7.4 earthquake.
+
+Hint
+R1−R2=log10(A1/A2).
+
+Hyperbolic Functions
+
+The hyperbolic functions are defined in terms of certain combinations of ex and e−x. These functions arise naturally in various engineering and physics applications, including the study of water waves and vibrations of elastic membranes. Another common use for a hyperbolic function is the representation of a hanging chain or cable, also known as a catenary (). If we introduce a coordinate system so that the low point of the chain lies along the y-axis, we can describe the height of the chain in terms of a hyperbolic function. First, we define the hyperbolic functions.
+
+Definition
+Hyperbolic cosine
+Hyperbolic sine
+Hyperbolic tangent
+Hyperbolic cosecant
+Hyperbolic secant
+Hyperbolic cotangent
+
+The name cosh rhymes with “gosh,” whereas the name sinh is pronounced “cinch.” Tanh, sech, csch, and coth are pronounced “tanch,” “seech,” “coseech,” and “cotanch,” respectively.
+
+Using the definition of cosh(x) and principles of physics, it can be shown that the height of a hanging chain, such as the one in , can be described by the function h(x)=acosh(x/a)+c for certain constants a and c.
+
+But why are these functions called hyperbolic functions? To answer this question, consider the quantity cosh2t−sinh2t. Using the definition of cosh and sinh, we see that
+
+This identity is the analog of the trigonometric identity cos2t+sin2t=1. Here, given a value t, the point (x,y)=(cosht,sinht) lies on the unit hyperbola x2−y2=1 ().
+
+Graphs of Hyperbolic Functions
+
+To graph coshx and sinhx, we make use of the fact that both functions approach (1/2)ex as x→∞, since e−x→0 as x→∞. As x→−∞,coshx approaches 1/2e−x, whereas sinhx approaches −1/2e−x. Therefore, using the graphs of 1/2ex,1/2e−x, and −1/2e−x as guides, we graph coshx and sinhx. To graph tanhx, we use the fact that tanh(0)=0,−1<tanh(x)<1 for all x,tanhx→1 as x→∞, and tanhx→−1 as x→−∞. The graphs of the other three hyperbolic functions can be sketched using the graphs of coshx,sinhx, and tanhx ().
+
+Identities Involving Hyperbolic Functions
+
+The identity cosh2t−sinh2t, shown in , is one of several identities involving the hyperbolic functions, some of which are listed next. The first four properties follow easily from the definitions of hyperbolic sine and hyperbolic cosine. Except for some differences in signs, most of these properties are analogous to identities for trigonometric functions.
+
+Rule: Identities Involving Hyperbolic Functions
+cosh(−x)=coshx
+sinh(−x)=−sinhx
+coshx+sinhx=ex
+coshx−sinhx=e−x
+cosh2x−sinh2x=1
+1−tanh2x=sech2x
+coth2x−1=csch2x
+sinh(x±y)=sinhxcoshy±coshxsinhy
+cosh(x±y)=coshxcoshy±sinhxsinhy
+
+Evaluating Hyperbolic Functions
+
+Simplify sinh(5lnx).
+
+If sinhx=3/4, find the values of the remaining five hyperbolic functions.
+
+Using the definition of the sinh function, we write
+sinh(5lnx)=e5lnx−e−5lnx2=eln(x5)−eln(x−5)2=x5−x−52.
+
+Using the identity cosh2x−sinh2x=1, we see that
+cosh2x=1+(34)2=2516.
+Since coshx≥1 for all x, we must have coshx=5/4. Then, using the definitions for the other hyperbolic functions, we conclude that tanhx=3/5,cschx=4/3,sechx=4/5, and cothx=5/3.
+
+Simplify cosh(2lnx).
+(x2+x−2)/2
+
+Hint
+
+Use the definition of the cosh function and the power property of logarithm functions.
+
+Inverse Hyperbolic Functions
+
+From the graphs of the hyperbolic functions, we see that all of them are one-to-one except coshx and sechx. If we restrict the domains of these two functions to the interval [0,∞), then all the hyperbolic functions are one-to-one, and we can define the inverse hyperbolic functions. Since the hyperbolic functions themselves involve exponential functions, the inverse hyperbolic functions involve logarithmic functions.
+
+Definition
+Inverse Hyperbolic Functions
+
+Let’s look at how to derive the first equation. The others follow similarly. Suppose y=sinh−1x. Then, x=sinhy and, by the definition of the hyperbolic sine function, x=ey−e−y2. Therefore,
+
+Multiplying this equation by ey, we obtain
+
+This can be solved like a quadratic equation, with the solution
+
+Since ey>0, the only solution is the one with the positive sign. Applying the natural logarithm to both sides of the equation, we conclude that
+
+Evaluating Inverse Hyperbolic Functions
+
+Evaluate each of the following expressions.
+sinh−1(2)=ln(2+22+1)=ln(2+5)≈1.4436
+tanh−1(1/4)=12ln(1+1/41−1/4)=12ln(5/43/4)=12ln(53)≈0.2554
+
+Evaluate tanh−1(1/2).
+12ln(3)≈0.5493.
+
+Hint
+
+Use the definition of tanh−1x and simplify.
+
+Key Concepts
+
+The exponential function y=bx is increasing if b>1 and decreasing if 0<b<1. Its domain is (−∞,∞) and its range is (0,∞).
+
+The logarithmic function y=logb(x) is the inverse of y=bx. Its domain is (0,∞) and its range is (−∞,∞).
+
+The natural exponential function is y=ex and the natural logarithmic function is y=lnx=logex.
+
+Given an exponential function or logarithmic function in base a, we can make a change of base to convert this function to any base b>0,b≠1. We typically convert to base e.
+
+The hyperbolic functions involve combinations of the exponential functions ex and e−x. As a result, the inverse hyperbolic functions involve the natural logarithm.
+
+For the following exercises, evaluate the given exponential functions as indicated, accurate to two significant digits after the decimal.
+f(x)=5x a. x=3 b. x=12 c. x=2
+
+a. 125 b. 2.24 c. 9.74
+f(x)=(0.3)x a. x=−1 b. x=4 c. x=−1.5
+f(x)=10x a. x=−2 b. x=4 c. x=53
+
+a. 0.01 b. 10,000 c. 46.42
+f(x)=ex a. x=2 b. x=−3.2 c. x=π
+
+For the following exercises, match the exponential equation to the correct graph.
+y=4−x
+y=3x−1
+y=2x+1
+y=(12)x+2
+y=−3−x
+y=1−5x
+
+d
+
+b
+
+e
+
+For the following exercises, sketch the graph of the exponential function. Determine the domain, range, and horizontal asymptote.
+f(x)=ex+2
+
+Domain: all real numbers, range: (2,∞),y=2
+f(x)=−2x
+f(x)=3x+1
+
+Domain: all real numbers, range: (0,∞),y=0
+f(x)=4x−1
+f(x)=1−2−x
+
+Domain: all real numbers, range: (−∞,1),y=1
+f(x)=5x+1+2
+f(x)=e−x−1
+
+Domain: all real numbers, range: (−1,∞),y=−1
+
+For the following exercises, write the equation in equivalent exponential form.
+log381=4
+log82=13
+81/3=2
+log51=0
+log525=2
+52=25
+log0.1=−1
+ln(1e3)=−3
+e−3=1e3
+log93=0.5
+ln1=0
+e0=1
+
+For the following exercises, write the equation in equivalent logarithmic form.
+23=8
+4−2=116
+log4(116)=−2
+102=100
+90=1
+log91=0
+(13)3=127
+643=4
+log644=13
+ex=y
+9y=150
+log9150=y
+b3=45
+4−3/2=0.125
+log40.125=−32
+
+For the following exercises, sketch the graph of the logarithmic function. Determine the domain, range, and vertical asymptote.
+f(x)=3+lnx
+f(x)=ln(x−1)
+
+Domain: (1,∞), range: (−∞,∞),x=1
+f(x)=ln(−x)
+f(x)=1−lnx
+
+Domain: (0,∞), range: (−∞,∞),x=0
+f(x)=logx−1
+f(x)=ln(x+1)
+
+Domain: (−1,∞), range: (−∞,∞),x=−1
+
+For the following exercises, use properties of logarithms to write the expressions as a sum, difference, and/or product of logarithms.
+logx4y
+log39a3b
+2+3log3a−log3b
+lnab3
+log5125xy3
+32+12log5x+32log5y
+log4xy364
+ln(6e3)
+−32+ln6
+
+For the following exercises, solve the exponential equation exactly.
+5x=125
+e3x−15=0
+ln153
+8x=4
+4x+1−32=0
+32
+3x/14=110
+10x=7.21
+log7.21
+4·23x−20=0
+73x−2=11
+23+log113log7
+
+For the following exercises, solve the logarithmic equation exactly, if possible.
+log3x=0
+log5x=−2
+x=125
+log4(x+5)=0
+log(2x−7)=0
+x=4
+lnx+3=2
+log6(x+9)+log6x=2
+x=3
+log4(x+2)−log4(x−1)=0
+lnx+ln(x−2)=ln4
+1+5
+
+For the following exercises, use the change-of-base formula and either base 10 or base e to evaluate the given expressions. Answer in exact form and in approximate form, rounding to four decimal places.
+log547
+log782
+(log82log7≈2.2646)
+log6103
+log0.5211
+(log211log0.5≈−7.7211)
+log2π
+log0.20.452
+(log0.452log0.2≈0.4934)
+
+Rewrite the following expressions in terms of exponentials and simplify.
+
+a. 2cosh(lnx) b. cosh4x+sinh4x c. cosh2x−sinh2x d. ln(coshx+sinhx)+ln(coshx−sinhx)
+[T] The number of bacteria N in a culture after t days can be modeled by the function N(t)=1300·(2)t/4. Find the number of bacteria present after 15 days.
+~17,491
+[T] The demand D (in millions of barrels) for oil in an oil-rich country is given by the function D(p)=150·(2.7)−0.25p, where p is the price (in dollars) of a barrel of oil. Find the amount of oil demanded (to the nearest million barrels) when the price is between $15 and $20.
+[T] The amount A of a $100,000 investment paying continuously and compounded for t years is given by A(t)=100,000·e0.055t. Find the amount A accumulated in 5 years.
+
+Approximately $131,653 is accumulated in 5 years.
+[T] An investment is compounded monthly, quarterly, or yearly and is given by the function A=P(1+jn)nt, where A is the value of the investment at time t,P is the initial principle that was invested, j is the annual interest rate, and n is the number of time the interest is compounded per year. Given a yearly interest rate of 3.5% and an initial principle of $100,000, find the amount A accumulated in 5 years for interest that is compounded a. daily, b., monthly, c. quarterly, and d. yearly.
+[T] The concentration of hydrogen ions in a substance is denoted by [H+], measured in moles per liter. The pH of a substance is defined by the logarithmic function pH=−log[H+]. This function is used to measure the acidity of a substance. The pH of water is 7. A substance with a pH less than 7 is an acid, whereas one that has a pH of more than 7 is a base.
+
+Find the pH of the following substances. Round answers to one digit.
+
+Determine whether the substance is an acid or a base.
+
+Eggs: [H+]=1.6×10−8 mol/L
+Beer: [H+]=3.16×10−3 mol/L
+Tomato Juice: [H+]=7.94×10−5 mol/L
+
+Eggs: [H+]=1.6×10−8 mol/L
+
+Beer: [H+]=3.16×10−3 mol/L
+
+Tomato Juice: [H+]=7.94×10−5 mol/L
+
+i. a. pH = 8 b. Base ii. a. pH = 3 b. Acid iii. a. pH = 4 b. Acid
+[T] Iodine-131 is a radioactive substance that decays according to the function Q(t)=Q0·e−0.08664t, where Q0 is the initial quantity of a sample of the substance and t is in days. Determine how long it takes (to the nearest day) for 95% of a quantity to decay.
+[T] According to the World Bank, at the end of 2013 (t=0
+) the U.S. population was 316 million and was increasing according to the following model:
+P(t)=316e0.0074t,
+where P is measured in millions of people and t is measured in years after 2013.
+
+Based on this model, what will be the population of the United States in 2020?
+
+Determine when the U.S. population will be twice what it is in 2013.
+
+a. ~333 million b. 94 years from 2013, or in 2107
+[T] The amount A accumulated after 1000 dollars is invested for t years at an interest rate of 4% is modeled by the function A(t)=1000(1.04)t.
+
+Find the amount accumulated after 5 years and 10 years.
+
+Determine how long it takes for the original investment to triple.
+[T] A bacterial colony grown in a lab is known to double in number in 12 hours. Suppose, initially, there are 1000 bacteria present.
+
+Use the exponential function Q=Q0ekt to determine the value k, which is the growth rate of the bacteria. Round to four decimal places.
+
+Determine approximately how long it takes for 200,000 bacteria to grow.
+
+a. k≈0.0578 b. ≈92 hours
+[T] The rabbit population on a game reserve doubles every 6 months. Suppose there were 120 rabbits initially.
+
+Use the exponential function P=P0at to determine the growth rate constant a. Round to four decimal places.
+
+Use the function in part a. to determine approximately how long it takes for the rabbit population to reach 3500.
+[T] The 1906 earthquake in San Francisco had a magnitude of 8.3 on the Richter scale. At the same time, in Japan, an earthquake with magnitude 4.9 caused only minor damage. Approximately how much more intense was the San Francisco earthquake than the Japanese earthquake? See the definition of Richter Scale in in this section.
+
+The San Francisco earthquake was 103.4or≈2512 times more intense than the Japanese earthquake.
+
+Chapter Review Exercises
+True or False? Justify your answer with a proof or a counterexample.
+
+A function is always one-to-one.
+f∘g=g∘f, assuming f and g are functions.
+
+False
+
+A relation that passes the horizontal and vertical line tests is a one-to-one function.
+
+A relation passing the horizontal line test is a function.
+
+False
+
+For the following problems, state the domain and range of the given functions:
+f=x2+2x−3,g=ln(x−5),h=1x+4
+h
+g
+
+Domain: x>5, range: all real numbers
+h∘f
+g∘f
+
+Domain: x>2 and x<−4, range: all real numbers
+
+Find the degree, y-intercept, and zeros for the following polynomial functions.
+f(x)=2x2+9x−5
+f(x)=x3+2x2−2x
+
+Degree of 3, y-intercept: 0, zeros: 0, 3−1,−1−3
+
+Simplify the following trigonometric expressions.
+tan2xsec2x+cos2x
+cos2x-sin2x
+cos2x-sin2x=cos2x=1-2sin2x=2cos2x-1
+
+Solve the following trigonometric equations on the interval x=[−2π,2π] exactly.
+6cos2x−3=0
+sec2x−2secx+1=0
+0,±2π
+
+Solve the following logarithmic equations.
+5x=16
+log2(x+4)=3
+
+4
+
+Are the following functions one-to-one over their domain of existence? Does the function have an inverse? If so, find the inverse f−1(x) of the function. Justify your answer.
+f(x)=x2+2x+1
+f(x)=1x
+
+One-to-one; yes, the function has an inverse; inverse: f−1(x)=1y
+
+For the following problems, determine the largest domain on which the function is one-to-one and find the inverse on that domain.
+f(x)=9−x
+f(x)=x2+3x+4
+x≥−32,f−1(x)=−32+124y−7
+
+A car is racing along a circular track with diameter of 1 mi. A trainer standing in the center of the circle marks his progress every 5 sec. After 5 sec, the trainer has to turn 55° to keep up with the car. How fast is the car traveling?
+
+For the following problems, consider a restaurant owner who wants to sell T-shirts advertising his brand. He recalls that there is a fixed cost and variable cost, although he does not remember the values. He does know that the T-shirt printing company charges $440 for 20 shirts and $1000 for 100 shirts.
+
+a. Find the equation C=f(x) that describes the total cost as a function of number of shirts and b. determine how many shirts he must sell to break even if he sells the shirts for $10 each.
+
+a. C(x)=300+7x b. 100 shirts
+
+a. Find the inverse function x=f−1(C) and describe the meaning of this function. b. Determine how many shirts the owner can buy if he has $8000 to spend.
+
+For the following problems, consider the population of Ocean City, New Jersey, which is cyclical by season.
+
+The population can be modeled by P(t)=82.5−67.5cos[(π/6)t], where t is time in months 
+[truncated]

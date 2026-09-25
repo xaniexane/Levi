@@ -1,0 +1,212 @@
+# CS 109: Programming Practice Using Scala
+# KAIST
+# source: http://otfried.org/courses/cs109/index.html
+
+CS109 Spring Semester 2018
+Home
+Programming Practice (CS109)
+This webpage is designed not only for the
+CS109 course that I teach but also to allow you to study programming
+on your own. See the self-study section below.
+Programming Practice (CS109)
+Spring Semester 2018
+Students must bring their own laptop computer to this course.
+Students cannot enroll in this course if they do not have a computer
+that they can bring to the classroom.
+This course introduces basic concepts of programming and computer
+science, such as dynamic and static typing, dynamic memory allocation,
+objects and methods, binary representation of numbers, using an editor
+and compiler from the command line, running programs with arguments
+from the commmand line, using libraries, and the use of basic data
+structures such as arrays, lists, sets, and maps.
+This course is particularly meant for students who did not
+learn programming in high school, but who enjoyed programming in CS101
+and who want to develop their programming skills .
+Every week there will be one lecture , and a three-hour
+lab . I will provide materials (lecture notes and on-line
+tutorials) that students sometimes need to study before coming to
+the lab . You will spend all three lab hours on a fun
+programming project . The difficulty of the projects will slowly
+increase over the semester. There will be no separate homeworks
+or projects , however, you will be asked to finish projects at home
+if you could not complete it during the lab.
+Self-study
+I'm trying to make this webpage and the materials suitable for
+self-study, for students who cannot take CS109 or who quickly want to
+improve their programming skills (for instance during the semester
+break).
+I have made a complete written tutorial that
+walks you through all the material in the course. Read the tutorials
+on The command line , Introduction to Kotlin , and
+Incremental testing , then start working on the programming
+projects. The difficulty of the projects increases slowly during the
+course. You'll need to read more of the tutorials as you progress
+through the projects.
+Programming language
+In this course we will use the
+Kotlin programming language.
+In my experience, students develop a style of programming in their
+first programming language. They find it difficult to learn a
+different style later, even if they switch to a different language.
+This means that students should start early to use a modern language
+that encourages writing clean and elegant code, and supports a good
+object-oriented and functional style.
+We will therefore use Kotlin in this course. Kotlin is fully
+compatible with Java, so you can use it for anything that can be done
+in Java, but it is a much more modern, much more readable, and much
+more sensible language. We will also experiment with compiling Kotlin
+source to Javascript, so you can run your programs inside a web
+browser, and will even write small apps that can run on Android
+phones.
+Most students will still have to learn C++ and/or Java later during
+their studies—but I believe that after getting programming practice
+in Kotlin, they will be able to write better code in those languages
+as well.
+Course information
+Lecturer:
+Otfried Cheong
+Office: E3-1 3434, Phone: 3542.
+Teaching assistants
+Edu 3.0 room: 정재원, 김단우, 이주희.
+class room #3: 하대근, 이민지.
+class room #4: 안가빈, 구재현.
+Office hour
+Gabin and Daegeun offer an office hour once a week:
+Monday, 14:30–16:00 (Daegeun)
+Tuesday, 16:00–17:30 (Gabin)
+Both office hours are in room 401 of building N1.
+Here you can ask questions about the self-study material or the
+projects (or anything else related to the course). You can also come
+with your computer and program during the office hour, using it in the
+same way as the lab.
+Lecture
+We will have one lecture per week, on Mondays from 16:00 to 17:15, in
+the joint classroom #2 (this is in building E3-2: if you take the
+corridor past Strikezone, go out of E3-1 and enter E3-2 through the
+door opposite to you, it's one of the first doors on the left).
+Labs
+Our programming lab takes place on Friday from 13:00 to 16:00.
+in classrooms #3, #4, and #5 of building E3-1, as follows:
+room 1104 (Edu 3.0 room): all Korean students whose student
+number ends with 0, 1, 2, 3, or 4;
+room 2443 (class room #3): all Korean students whose student
+number ends with 5, 7, or 8.
+room 2445 (class room #4): all foreign students, and all
+students whose student number ends with 6 or 9;
+All non-Korean speakers must be in classroom #4. In the other rooms,
+TAs will only speak Korean .
+Grading policy
+Programs will not be graded , because programming is part of
+the learning experience (it is not an exam).
+However, students must submit all programming projects they have
+done. Grades will be deducted for missing labs without excuse, or for
+not submitting lab projects.
+The final grade will be composed as follows (small changes
+reserved):
+Project (20%), Midterm exam (30%), Final exam (40%),
+Participation (10%).
+Again: Students must upload their lab projects to the course
+submission server . The programs will not be graded, but uploads
+will count for lab participation, and I can see if students are
+making progress.
+Participation
+Attendance will be taken in nearly every class. If you miss at most 2
+lectures, you receive 10 attendance points. For 3 missed lectures,
+you receive 9 attendance points, and so on. For 12 or more missed
+lectures you receive no attendance points.
+Going to a conference, workshop, doctor, interview, is no excuse for
+missing the class — you can use the two free missed classes for
+this.
+Exams
+There will be a midterm exam and a final exam.
+The midterm exam is on April 9, from 16:00 to 17:30 in the Terman Hall
+in the Creative Learning Building.
+The final exam is on June 4, from 16:00 to 17:30 in the Terman Hall
+in the Creative Learning Building.
+Syllabus
+Here is a rough list of what we will cover in each week of the
+semester.
+Week 1 Introduction, command line tools
+Week 2 Basic Kotlin, command line arguments
+Week 3 Types of objects, dynamic and static typing
+Week 3 Number types
+Week 4 Dynamically allocated objects, stack frames, garbage collection
+Week 5 Arrays and lists
+Week 6 Sets and maps
+Week 7 Strings and text processing
+Week 8 Midterm exam
+Week 9 Function objects
+Week 10 Higher-order functions
+Week 11 Compiled programs
+Week 12 Objects
+Week 13 Object-oriented programming I
+Week 14 Object-oriented programming II
+Week 15 Project presentations
+Week 16 Reserve
+Lecture slides
+02-26 Introduction to Kotlin
+intro slides ,
+basic kotlin slides
+03-05 Incremental testing, number representation
+slides
+03-12 No lecture (business trip)
+03-19 Data classes, objects, references, and the heap. Arrays,
+two-dimensional arrays.
+object slides ,
+array slides
+03-26 Sets review, compiling programs, nullable-variables
+compilation slides ,
+null slides
+04-02 Maps, LED project introduction
+maps slides
+04-09 Midterm exam in Terman Hall
+04-16 Midterm week: No lecture, no lab
+04-23 Midterm review, Exceptions
+slides
+04-30 Classes with methods
+slides 1 ,
+slides 2
+05-07 No lecture (Children's day)
+05-14 Higher-order functions
+slides
+05-21 Android mini-apps
+slides
+05-28 Review & Question hour
+quiz slides
+06-04 Final exam in Terman Hall
+06-11 Final week: No lecture, no lab
+Piazza
+This term we will be using Piazza for class
+announcements, discussion, and asking questions.
+Here is our Piazza class
+page .
+You are responsible for checking the announcements on our Piazza class
+page regularly (if you make a Piazza account and enroll for the
+course, announcements will be mailed to you automatically.)
+If you do not understand something, it is important that you ask
+questions. Piazza allows you to ask questions and get answers from
+the instructor, the teaching assistants, and your classmates.
+You can ask questions anonymously , so don't be shy and ask!
+Both Korean and English are acceptable on Piazza :-). You make it
+easier for me if you write in English, but if the TAs can answer your
+question, then Korean is just fine.
+To ask questions, you need to register on Piazza and enroll as a
+student for CS109. To do so, go to the CS109 enrollment
+page . Select
+"Join as student". You will then need to use your KAIST email
+address (ending with @kaist.ac.kr ) to create an account.
+Tutorials
+Every week you will be assigned to read about certain topics in the
+course tutorials . You will find each week's
+reading assignment posted on Piazza.
+It is important that you do not just read through the tutorials
+briefly. Turn on your computer, and follow the steps of the tutorial
+on your own computer. That way the material will become active
+knowledge that you can apply yourself when you program.
+Programming projects
+You will find the project for each week posted on Piazza. The full
+list of projects for self-study can be found
+here .
+Tutorials
+Projects
+Piazza

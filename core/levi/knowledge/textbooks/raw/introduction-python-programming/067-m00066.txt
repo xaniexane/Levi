@@ -1,0 +1,55 @@
+# m00066
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Modifying and iterating lists
+
+Modifying and iterating lists
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Modify a list using append(), remove(), and pop() list operations.
+
+Search a list using a for loop.
+
+Using list operations to modify a list
+
+An append() operation is used to add an element to the end of a list. In programming, append means add to the end. A remove() operation removes the specified element from a list. A pop() operation removes the last item of a list.
+
+Simple operations to modify a list
+
+The code below demonstrates simple operations for modifying a list.
+
+Line 8 shows the append() operation, line 12 shows the remove() operation, and line 17 shows the pop() operation. Since the pop() operation removes the last element, no parameter is needed.
+
+The above code's output is:
+
+Modifying lists
+
+Iterating lists
+
+An iterative for loop can be used to iterate through a list. Alternatively, lists can be iterated using list indexes with a counting for loop. The animation below shows both ways of iterating a list.
+
+Using len() to get the length of a list
+
+Iterating lists
+
+For the following questions, consider the list:
+
+Sports list
+
+Create a list of sports played on a college campus. The sports to be included are baseball, football, tennis, and table tennis.
+
+Next, add volleyball to the list.
+
+Next, remove "football" from the list and add "soccer" to the list.
+
+Show the list contents after each modification.
+
+Simple Searching
+
+Write a program that prints "found!" if "soccer" is found in the given list.

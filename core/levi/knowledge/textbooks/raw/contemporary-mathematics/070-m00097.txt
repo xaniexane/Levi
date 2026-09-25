@@ -1,0 +1,439 @@
+# m00097
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Expected Value
+
+Expected Value
+
+Learning Objectives
+After completing this section, you should be able to:
+
+Calculate the expected value of an experiment.
+
+Interpret the expected value of an experiment.
+
+Use expected value to analyze applications.
+
+The casino game roulette has dozens of different bets that can be made. These bets have different probabilities of winning but also have different payouts. In general, the lower the probability of winning a bet is, the more money a player wins for that bet. With so many options, is there one bet that’s “smarter” than the rest? What’s the best play to make at a roulette table? In this section, we’ll develop the tools we need to answer these questions.
+
+Expected Value
+
+Many experiments have numbers associated with their outcomes. Some are easy to define; if you roll 2 dice, the sum of the numbers showing is a good example. In some card games, cards have different point values associated with them; for example, in some forms of the game rummy, aces are worth 15 points; 10s, jacks, queens, and kings are worth 10; and all other cards are worth 5. The outcomes of casino and lottery games are all associated with an amount of money won or lost. These outcome values are used to find the expected value of an experiment: the mean of the values associated with the outcomes that we would observe over a large number of repetitions of the experiment. (See Conditional Probability and the Multiplication Rule for more on means.)
+
+That definition is a little vague; How many is “a large number?” In practice, it depends on the experiment; the number has to be large enough that every outcome would be expected to appear at least a few times. For example, if we’re talking about rolling a standard 6-sided die and we note the number showing, a few dozen replications should be enough that the mean would be representative. Since the probability of each outcome is 16, we would expect to see each outcome about 8 times over the course of 48 replications. However, if we’re talking about the Powerball lottery, where the probability of winning the jackpot is about 1292,000,000, we would need several billion replications to ensure that every outcome appears a few times. Luckily, we can find the theoretical expected value before we even run the experiment the first time.
+
+Expected Value: If O represents an outcome of an experiment and n(O) represents the value of that outcome, then the expected value of the experiment is:
+
+where Σ is the “sum,” meaning we add up the results of the formula that follows over all possible outcomes.
+
+Finding Expected Values
+
+Find the expected values of the following experiments.
+
+Roll a standard 6-sided die and note the number showing.
+
+Roll two standard 6-sided dice and note the sum of the numbers showing.
+
+Draw a card from a well-shuffled standard deck of cards and note its rummy value (15 for aces; 10 for tens, jacks, queens, and kings; 5 for everything else).
+Step 1: Let’s start by writing out the PDF table for this experiment.
+
+ Value
+ Probability
+
+ 1
+ 16
+
+ 2
+ 16
+
+ 3
+ 16
+
+ 4
+ 16
+
+ 5
+ 16
+
+ 6
+ 16
+
+ Step 2: To find the expected value, we need to find n(O)×P(O) for each possible outcome in the table below.
+
+ Value
+ Probability
+ n(O)×P(O)
+
+ 1
+ 16
+ 1×16=16
+ 2
+ 16
+ 2×16=13
+
+ 3
+ 16
+ 3×16=12
+
+ 4
+ 16
+ 4×16=23
+
+ 5
+ 16
+ 5×16=56
+
+ 6
+ 16
+ 6×16=1
+
+ Step 3: We add all of the values in that last column: 16+13+12+23+56+1=72=3.5. So, the expected value of a single roll of a die is 3.5.
+
+Value
+Probability
+16
+16
+16
+16
+16
+Step 2: To find the expected value, we need to find n(O)×P(O) for each possible outcome in the table below.
+
+Value
+n(O)×P(O)
+1×16=16
+2×16=13
+3×16=12
+4×16=23
+5×16=56
+Step 3: We add all of the values in that last column: 16+13+12+23+56+1=72=3.5. So, the expected value of a single roll of a die is 3.5.
+
+Back in , we made this table of all of the equally likely outcomes ():
+
+ Step 1: Let’s use to create the PDF for this experiment, as shown in the following table:
+
+ Value
+ Probability
+
+ 2
+ 136
+
+ 3
+ 118
+
+ 4
+ 112
+
+ 5
+ 19
+
+ 6
+ 536
+
+ 7
+ 16
+
+ 8
+ 536
+
+ 9
+ 19
+
+ 10
+ 112
+
+ 11
+ 118
+
+ 12
+ 136
+
+ Step 2: We can multiply each row to find n(O)×P(O)as shown in the following table:
+
+ Value
+ Probability
+ n(O)×P(O)
+
+ 2
+ 136
+ 118
+
+ 3
+ 118
+ 16
+
+ 4
+ 112
+ 13
+
+ 5
+ 19
+ 59
+
+ 6
+ 536
+ 56
+
+ 7
+ 16
+ 76
+
+ 8
+ 536
+ 109
+
+ 9
+ 19
+ 1
+
+ 10
+ 112
+ 56
+
+ 11
+ 118
+ 1118
+
+ 12
+ 136
+ 13
+
+ Step 3: We can add the last column to get the expected value:
+ 118+16+13+59+56+76+109+1+56+1118+13=7.So, the expected value is 7.
+Step 1: Let’s use to create the PDF for this experiment, as shown in the following table:
+
+Value
+Probability
+136
+118
+112
+19
+536
+16
+536
+19
+112
+118
+Step 2: We can multiply each row to find n(O)×P(O)as shown in the following table:
+
+Value
+n(O)×P(O)
+118
+16
+13
+59
+56
+76
+109
+1
+56
+1118
+Step 3: We can add the last column to get the expected value:
+ 118+16+13+59+56+76+109+1+56+1118+13=7.So, the expected value is 7.
+Step 1: Let’s make a PDF table for this experiment. There are 3 events that we care about, so let’s use those events in the table below:
+
+ Event
+ Probability
+
+ {A}
+ 113
+
+ {10, J, Q, K}
+ 413
+
+ {2, 3, 4, 5, 6, 7, 8, 9}
+ 813
+
+ Step 2: Let’s add a column to the following table for the values of each event:
+
+ Event
+ Probability
+ Value
+
+ {A}
+ 113
+ 15
+
+ {10, J, Q, K}
+ 413
+ 10
+
+ {2, 3, 4, 5, 6, 7, 8, 9}
+ 813
+ 5
+
+ Step 3: We’ll add the column for the product of the values and probabilities to the table below:
+
+ Event
+ Probability
+ Value
+ n(O)×P(O)
+
+ {A}
+ 113
+ 15
+ 1513
+
+ {10, J, Q, K}
+ 41310
+ 4013
+
+ {2, 3, 4, 5, 6, 7, 8, 9}
+ 813
+ 5
+ 4013
+
+ Step 4: We’ll find the sum of the last column: 1513+4013+4013=9513≈7.3. Thus, the expected Rummy value of a randomly selected card is about 7.3.
+
+Event
+Probability
+113
+413
+Step 2: Let’s add a column to the following table for the values of each event:
+
+Event
+Probability
+Value
+113
+15
+413
+10
+813
+Step 3: We’ll add the column for the product of the values and probabilities to the table below:
+
+Event
+Probability
+n(O)×P(O)
+113
+1513
+413
+4013
+813
+Step 4: We’ll find the sum of the last column: 1513+4013+4013=9513≈7.3. Thus, the expected Rummy value of a randomly selected card is about 7.3.
+
+Let’s make note of some things we can learn from . First, as Exercises 1 and 3 demonstrate, the expected value of an experiment might not be a value that could come up in the experiment. Remember that the expected value is interpreted as a mean, and the mean of a collection of numbers doesn’t have to actually be one of those numbers.
+
+Second, looking at Exercise 1, the expected value (3.5) was just the mean of the numbers on the faces of the die: 1+2+3+4+5+66=3.5. This is no accident! If we break that fraction up using the addition in the numerator, we get 16+26+36+46+56+66, which we can rewrite as 1×16+2×16+3×16+4×16+5×16+6×16. That’s exactly the computation we did to find the expected value! In fact, expected values can always be treated as a special kind of mean called a weighted mean, where the weights are the probabilities associated with each value. When the probabilities are all equal, the weighted mean is just the regular mean.
+
+Interpreting Expected Values
+
+As we noted, the expected value of an experiment is the mean of the values we would observe if we repeated the experiment a large number of times. (This interpretation is due to an important theorem in the theory of probability called the Law of Large Numbers.) Let’s use that to interpret the results of the previous example.
+
+Interpreting Expected Values
+
+Interpret the expected values of the following experiments.
+
+Roll a standard 6-sided die and note the number showing.
+
+Roll 2 standard 6-sided dice and note the sum of the numbers showing.
+
+Draw a card from a well-shuffled standard deck of cards and note its Rummy value (15 for aces; 10 for tens, jacks, queens, and kings; 5 for everything else).
+
+If you roll a standard 6-sided die many times, the mean of the numbers you roll will be around 3.5.
+
+If you roll a pair of standard 6-sided dice many times, the mean of the sums of the numbers you roll will be about 7.
+
+If you draw a card from a well-shuffled deck many times, the mean of the Rummy values of the cards would be around 7.3.
+
+Pascal’s Wager
+
+The French scholar Blaise Pascal (1623–1662) was among the earliest mathematicians to study probabilities, and was the first to accurately describe and compute expected values. In his book Pensées (Thoughts), he turned the analysis of expected values to his belief in the Christian God. He said that there is no way for people to establish the probability that God exists, but since the “winnings” on a bet that God exists (and that you then lead your life accordingly) are essentially infinite, the expected value of taking that bet is always positive, no matter how unlikely it is that God exists.
+
+Using Expected Value
+
+Now that we know how to find and interpret expected values, we can turn our attention to using them. Suppose someone offers to play a game with you. If you roll a die and get a 6, you get $10. However, if you get a 5 or below, you lose $1. Is this a game you’d want to play? Let’s look at the expected value: The probability of winning is 16 and the probability of losing is 56, so the expected value is $10×16+(−$1)×56=56≈$0.83. That means, on average, you’ll come out ahead by about 83 cents every time you play this game. It’s a great deal! On the other hand, if the winnings for rolling a 6 drop to $3, the expected value becomes $3×16+(−$1)×56=−13≈−$0.33, meaning you should expect to lose about 33 cents on average for every time you play. Playing that game is not a good idea! In general, this is how casinos and lottery corporations make money: Every game has a negative expected value for the player.
+
+Expected Values in Football
+
+In the 21st century, data analytics tools have revolutionized the way sports are coached and played. One tool in particular is used in football at crucial moments in the game. When a team faces a fourth down (the last possession in a series of four possessions, a fairly common occurrence), the coach faces a decision: Run one play to try to gain a certain number of yards, or kick the ball away to the other team. Here’s the interesting part of the decision: If the team “goes for it” and runs the play and they are successful, then they keep possession of the ball and can continue in their quest to score more points. If they are unsuccessful, then they lose possession of the ball, giving the other team an opportunity to score points. If, instead, the team punts, or kicks the ball away, then the other team gets possession of the ball, but in a worse position for them than if the original team goes for it and fails. To analyze this situation, data analysts have generated empirical probabilities for every fourth down situation, and computed the expected value (in terms of points) for each decision. Coaches frequently use those calculations when they decide which option to take!
+
+Pierre de Fermat and Blaise Pascal
+
+In 1654, a French writer and amateur mathematician named Antoine Gombaud (who called himself the Chevalier du Mére) reached out to his gambling buddy Blaise Pascal to answer a question that he’d read about called the “problem of points.” The question goes like this: Suppose you’re playing a game that is scored using points, and the first person to earn 5 points is the winner. The game is interrupted with the score 4 points to 2. If the winner stood to win $100, how should the prize money be divided between the players? Certainly the person who is 1 point away from victory should get more, but how much more?
+
+We have developed tools in this section to answer this question. At its heart, it’s a question about conditional probabilities and expected value. At the time that Pascal first started thinking about it, though, those ideas hadn’t yet been invented. Pascal reached out to a colleague named Pierre de Fermat, and over the course of a couple of months, their correspondence with each other would eventually solve the problem. In the process, they first described conditional probabilities and expected values!
+
+Apart from their work in probability, these men are famous for other work in mathematics (and, in Pascal’s case, philosophy and physics). Fermat is remembered for his work in geometry and in number theory. After his death, the statement of what came to be called “Fermat’s Last Theorem” was discovered scribbled in the margin of a book, with the note that Fermat had discovered a “marvelous proof that this margin is too small to contain.” The theorem says that any equation of the form an+bn=cn has no positive integer solutions if n≥3. No proof of that theorem was discovered until 1994, when Andrew Wiles used computers and new branches of geometry to finally prove the theorem!
+
+Pascal is remembered for the “arithmetical triangle” that is named for him (though he wasn’t the first person to discover it; see the section on the binomial distribution for more), as well as work in geometry. In physics, Pascal worked on hydrodynamics and air pressure (the SI unit for pressure is named for him), and in philosophy, Pascal advocated for a mathematical approach to philosophical problems.
+
+Using Expected Values
+
+In the casino game keno, a machine chooses at random 20 numbers between 1 and 80 (inclusive) without replacement. Players try to predict which numbers will be chosen. Players don’t try to guess all 20, though; generally, they’ll try to predict between 1 and 10 of the chosen numbers. The amount won depends on the number of guesses they made and the number of guesses that were correct.
+
+At one casino, a player can try to guess just 1 number. If that number is among the 20 selected, the player wins $2; otherwise, the player loses $1. What is the expected value?
+
+At the same casino, if a player makes 2 guesses and they’re both correct, the player wins $14; otherwise, the player loses $1. What is the expected value?
+
+Players can also make 3 guesses. If 2 of the 3 guesses are correct, the player wins $1. If all 3 guesses are correct, the player wins $42. Otherwise, the player loses $1. What is the expected value?
+
+Which of these games is the best for the player? Which is the best for the casino?
+
+There are 20 winning numbers out of 80, so if we try to guess one of them, the probability of guessing correctly is 2080=14. The probability of losing is then 34, and so the expected value is $2×14+(−$1)×34=−$0.25.
+
+There are 20C2=190 winning choices out of 80C2=3,160 total ways to choose 2 numbers. So, the probability of winning is 1903,160 and the probability of losing is 3,160−1903,160=2,9703,160. So, the expected value of the game is $14×1903,160+(−$1)×29703160≈−$0.10.
+Step 1: Let’s start with the big prize. There are 20C3=1,140 ways to correctly guess 3 winning numbers out of 80C3=82,160 ways to guess three numbers total. That means the probability of winning the big prize is 1,14082,160≈0.01388. 
+ Step 2: Let’s find the probability of the second prize. The denominator is the same: 82,160. Let’s figure out the numerator. To win the second prize, the player must pick 2 of the 20 winning numbers and one of the 60 losing numbers. The number of ways to do that can be found using the Multiplication Rule for Counting: there are 20C2=190 ways to pick 2 winning numbers and 60 ways to pick 1 losing number, so there are 190×60=11,400 ways to win the second prize. So, the probability of winning that second prize is 11,40082,160≈0.13875. 
+ Step 3: Since the overall probability of winning is 1,14082,160+11,40082,160=12,54082,160≈0.15263, the probability of losing must be 1−0.15263=0.84737. So, the expected value is $42×0.01388+$1×0.13875+(−$1)×0.84737≈−$0.13.
+Step 2: Let’s find the probability of the second prize. The denominator is the same: 82,160. Let’s figure out the numerator. To win the second prize, the player must pick 2 of the 20 winning numbers and one of the 60 losing numbers. The number of ways to do that can be found using the Multiplication Rule for Counting: there are 20C2=190 ways to pick 2 winning numbers and 60 ways to pick 1 losing number, so there are 190×60=11,400 ways to win the second prize. So, the probability of winning that second prize is 11,40082,160≈0.13875.
+Step 3: Since the overall probability of winning is 1,14082,160+11,40082,160=12,54082,160≈0.15263, the probability of losing must be 1−0.15263=0.84737. So, the expected value is $42×0.01388+$1×0.13875+(−$1)×0.84737≈−$0.13.
+
+The bet that’s the best for the player is the one with the highest expected value for the player, which is guessing two numbers. The best one for the casino is the one with the lowest expected value for the player, which is guessing one number.
+
+Make Your Own Lottery
+
+By yourself or with a partner, devise your own lottery scheme. Assume you would have access to one or more machines that choose numbers randomly. What will a lottery draw look like? How many numbers are players choosing from? How many will be drawn? Will they be drawn with replacement or without replacement? What conditions must be met for a player to win first or second (or more!) prize? Once you’ve decided that, decide the payoff structure for winners, and how much the game will cost to play. Try to make the game enticing enough that people will want to play it, but with enough negative expected value that the lottery will make money. Aim for the expected value to be about −0.25 times the cost of playing the game.
+
+Check Your Understanding
+
+Key Terms
+
+expected value
+
+Key Concepts
+
+The expected value of an experiment is the sum of the products of the numerical outcomes of an experiment with their corresponding probabilities.
+
+The expected value of an experiment is the most likely value of the average of a large number of replications of the experiment.
+
+Formulas
+
+If O represents an outcome of an experiment and n(O) represents the value of that outcome, then the expected value of the experiment is:
+ ∑ n(O)×P(O)
+ where Σ stands for the sum, meaning we add up the results of the formula that follows over all possible outcomes.
+
+where Σ stands for the sum, meaning we add up the results of the formula that follows over all possible outcomes.
+
+Projects
+
+The Binomial Distribution is one of many examples of a discrete probability distribution. Other examples include the Geometric, Hypergeometric, Multinomial, Poisson, and Negative Binomial Distributions. Choose one of these distributions, and find out what makes it different from the Binomial Distribution. In what situations can it be applied? How is it used? Once you have an idea of how it’s used, write a series of five questions like the ones in this chapter that can be answered with that distribution, and find the answers.
+Binomial is a word that also comes up in algebra; the word describes polynomials with two terms. At first glance, there isn’t much to indicate that these two uses of the word are related, but it turns out there is a connection. Explore the connection between the Binomial Distribution and the algebraic concept of binomial expansion, (the process of multiplying out expressions like (x+y)n for a positive whole number n). Search for a connection with the mathematical object known as Pascal’s Triangle.
+
+Hazard is a dice game that was mentioned in Chaucer’s Canterbury Tales. It was a popular game of chance played in taverns and coffee houses well into the 18th century; its popularity at the time of the foundation of probability theory means that it was a common example in early texts on finding expected values and probabilities. Find the rules of the game, and get some practice playing it. Then, analyze the choices that the caster gets to make, and decide which is most advantageous, using the language of expected values.
+
+Chapter Review
+The Multiplication Rule for Counting
+
+Permutations
+
+Combinations
+
+Tree Diagrams, Tables, and Outcomes
+
+Basic Concepts of Probability
+
+Probability with Permutations and Combinations
+
+What Are the Odds?
+
+The Addition Rule for Probability
+
+Conditional Probability and the Multiplication Rule
+
+The Binomial Distribution
+
+Expected Value
+
+Chapter Test

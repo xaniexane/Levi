@@ -1,0 +1,221 @@
+# m58314
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Conservation of Energy
+
+Conservation of Energy
+
+By the end of this section, you will be able to:
+
+Formulate the principle of conservation of mechanical energy, with or without the presence of non-conservative forces
+
+Use the conservation of mechanical energy to calculate various properties of simple systems
+
+In this section, we elaborate and extend the result we derived in Potential Energy of a System, where we re-wrote the work-energy theorem in terms of the change in the kinetic and potential energies of a particle. This will lead us to a discussion of the important principle of the conservation of mechanical energy. As you continue to examine other topics in physics, in later chapters of this book, you will see how this conservation law is generalized to encompass other types of energy and energy transfers. The last section of this chapter provides a preview.
+
+The terms ‘conserved quantity’ and ‘conservation law’ have specific, scientific meanings in physics, which are different from the everyday meanings associated with the use of these words. (The same comment is also true about the scientific and everyday uses of the word ‘work.’) In everyday usage, you could conserve water by not using it, or by using less of it, or by re-using it. Water is composed of molecules consisting of two atoms of hydrogen and one of oxygen. Bring these atoms together to form a molecule and you create water; dissociate the atoms in such a molecule and you destroy water. However, in scientific usage, a conserved quantity for a system stays constant, changes by a definite amount that is transferred to other systems, and/or is converted into other forms of that quantity. A conserved quantity, in the scientific sense, can be transformed, but not strictly created or destroyed. Thus, there is no physical law of conservation of water.
+
+Systems with a Single Particle or Object
+
+We first consider a system with a single particle or object. Returning to our development of , recall that we first separated all the forces acting on a particle into conservative and non-conservative types, and wrote the work done by each type of force as a separate term in the work-energy theorem. We then replaced the work done by the conservative forces by the change in the potential energy of the particle, combining it with the change in the particle’s kinetic energy to get . Now, we write this equation without the middle step and define the sum of the kinetic and potential energies, K+U=E; to be the mechanical energy of the particle.
+
+Conservation of Energy
+
+The mechanical energy E of a particle stays constant unless forces outside the system or non-conservative forces do work on it, in which case, the change in the mechanical energy is equal to the work done by the non-conservative forces:
+
+This statement expresses the concept of energy conservation for a classical particle as long as there is no non-conservative work. Recall that a classical particle is just a point mass, is nonrelativistic, and obeys Newton’s laws of motion. In Relativity, we will see that conservation of energy still applies to a non-classical particle, but for that to happen, we have to make a slight adjustment to the definition of energy.
+
+It is sometimes convenient to separate the case where the work done by non-conservative forces is zero, either because no such forces are assumed present, or, like the normal force, they do zero work when the motion is parallel to the surface. Then
+
+In this case, the conservation of mechanical energy can be expressed as follows: The mechanical energy of a particle does not change if all the non-conservative forces that may act on it do no work. Understanding the concept of energy conservation is the important thing, not the particular equation you use to express it.
+
+Conservation of Energy
+
+Identify the body or bodies to be studied (the system). Often, in applications of the principle of mechanical energy conservation, we study more than one body at the same time.
+
+Identify all forces acting on the body or bodies.
+
+Determine whether each force that does work is conservative. If a non-conservative force (e.g., friction) is doing work, then mechanical energy is not conserved. The system must then be analyzed with non-conservative work, .
+
+For every conservative force that does work, choose a reference point and determine the potential energy function for the force. The reference points for the various potential energies do not have to be at the same location.
+
+If no non-conservative work is done, apply the principle of mechanical energy conservation by setting the sum of the kinetic energies and potential energies equal at every point of interest.
+Simple Pendulum
+A particle of mass m is hung from the ceiling by a massless string of length 1.0 m, as shown in . The particle is released from rest, when the angle between the string and the downward vertical direction is 30°. What is its speed when it reaches the lowest point of its arc?
+
+Simple Pendulum
+Strategy
+Using our problem-solving strategy, the first step is to define that we are interested in the particle-Earth system. Second, only the gravitational force is acting on the particle, which is conservative (step 3). We neglect air resistance in the problem, and no work is done by the string tension, which is perpendicular to the arc of the motion. Therefore, the mechanical energy of the system is conserved, as represented by , 0=Δ(K+U). Because the particle starts from rest, the increase in the kinetic energy is just the kinetic energy at the lowest point. This increase in kinetic energy equals the decrease in the gravitational potential energy, which we can calculate from the geometry. In step 4, we choose a reference point for zero gravitational potential energy to be at the lowest vertical point the particle achieves, which is mid-swing. Lastly, in step 5, we set the sum of energies at the highest point (initial) of the swing to the lowest point (final) of the swing to ultimately solve for the final speed.
+
+Strategy
+Solution
+We are neglecting non-conservative forces, so we write the energy conservation formula relating the particle at the highest point (initial) and the lowest point in the swing (final) as
+
+Solution
+
+Since the particle is released from rest, the initial kinetic energy is zero. At the lowest point, we define the gravitational potential energy to be zero. Therefore our conservation of energy formula reduces to
+
+The vertical height of the particle is not given directly in the problem. This can be solved for by using trigonometry and two givens: the length of the pendulum and the angle through which the particle is vertically pulled up. Looking at the diagram, the vertical dashed line is the length of the pendulum string. The vertical height is labeled h. The other partial length of the vertical string can be calculated with trigonometry. That piece is solved for by
+
+Therefore, by looking at the two parts of the string, we can solve for the height h,
+
+We substitute this height into the previous expression solved for speed to calculate our result:
+Significance
+We found the speed directly from the conservation of mechanical energy, without having to solve the differential equation for the motion of a pendulum (see Oscillations). We can approach this problem in terms of bar graphs of total energy. Initially, the particle has all potential energy, being at the highest point, and no kinetic energy. When the particle crosses the lowest point at the bottom of the swing, the energy moves from the potential energy column to the kinetic energy column. Therefore, we can imagine a progression of this transfer as the particle moves between its highest point, lowest point of the swing, and back to the highest point (). As the particle travels from the lowest point in the swing to the highest point on the far right hand side of the diagram, the energy bars go in reverse order from (c) to (b) to (a).
+
+Significance
+
+How high above the bottom of its arc is the particle in the simple pendulum above, when its speed is 0.81m/s?
+0.10m
+Air Resistance on a Falling Object
+A helicopter is hovering at an altitude of 1km when a panel from its underside breaks loose and plummets to the ground (). The mass of the panel is 15kg, and it hits the ground with a speed of 45m/s. How much mechanical energy was dissipated by air resistance during the panel’s descent?
+
+Air Resistance on a Falling Object
+Strategy
+Step 1: Here only one body is being investigated.
+
+Strategy
+
+Step 2: Gravitational force is acting on the panel, as well as air resistance, which is stated in the problem.
+
+Step 3: Gravitational force is conservative; however, the non-conservative force of air resistance does negative work on the falling panel, so we can use the conservation of mechanical energy, in the form expressed by , to find the energy dissipated. This energy is the magnitude of the work:
+
+Step 4: The initial kinetic energy, at yi=1km, is zero. We set the gravitational potential energy to zero at ground level out of convenience.
+
+Step 5: The non-conservative work is set equal to the energies to solve for the work dissipated by air resistance.
+Solution
+The mechanical energy dissipated by air resistance is the algebraic sum of the gain in the kinetic energy and loss in potential energy. Therefore the calculation of this energy is
+
+Solution
+Significance
+Most of the initial mechanical energy of the panel (Ui), 147 kJ, was lost to air resistance. Notice that we were able to calculate the energy dissipated without knowing what the force of air resistance was, only that it was dissipative.
+
+Significance
+
+You probably recall that, neglecting air resistance, if you throw a projectile straight up, the time it takes to reach its maximum height equals the time it takes to fall from the maximum height back to the starting height. Suppose you cannot neglect air resistance, as in . Is the time the projectile takes to go up (a) greater than, (b) less than, or (c) equal to the time it takes to come back down? Explain.
+
+b. At any given height, the gravitational potential energy is the same going up or down, but the kinetic energy is less going down than going up, since air resistance is dissipative and does negative work. Therefore, at any height, the speed going down is less than the speed going up, so it must take a longer time to go down than to go up.
+
+In these examples, we were able to use conservation of energy to calculate the speed of a particle just at particular points in its motion. But the method of analyzing particle motion, starting from energy conservation, is more powerful than that. More advanced treatments of the theory of mechanics allow you to calculate the full time dependence of a particle’s motion, for a given potential energy. In fact, it is often the case that a better model for particle motion is provided by the form of its kinetic and potential energies, rather than an equation for force acting on it. (This is especially true for the quantum mechanical description of particles like electrons or atoms.)
+
+We can illustrate some of the simplest features of this energy-based approach by considering a particle in one-dimensional motion, with potential energy U(x) and no non-conservative interactions present. and the definition of velocity require
+
+Separate the variables x and t and integrate, from an initial time t=0 to an arbitrary time, to get
+
+If you can do the integral in , then you can solve for x as a function of t.
+Constant Acceleration
+Use the potential energy U(x)=−E(x/x0), for E>0, in to find the position x of a particle as a function of time t.
+
+Constant Acceleration
+Strategy
+Since we know how the potential energy changes as a function of x, we can substitute for U(x) in , integrate, and then solve for x. This results in an expression of x as a function of time with constants of energy E, mass m, and the initial position x0.
+
+Strategy
+Solution
+Following the first two suggested steps in the above strategy,
+
+Solution
+
+Solving for the position, we obtain x(t)=x0−12(E/mx0)t2.
+Significance
+The position as a function of time, for this potential, represents one-dimensional motion with constant acceleration, a=(–E/mx0), starting at rest from position x0. This is not so surprising, since this is a potential energy for a constant force, F=−dU/dx=–E/x0, and a=F/m.
+
+Significance
+
+What potential energy U(x) can you substitute in that will result in motion with constant velocity of 2 m/s for a particle of mass 1 kg and mechanical energy 1 J?
+
+constant U(x)=−1J
+
+We will look at another more physically appropriate example of the use of after we have explored some further implications that can be drawn from the functional form of a particle’s potential energy.
+
+Systems with Several Particles or Objects
+
+Systems generally consist of more than one particle or object. However, the conservation of mechanical energy, in one of the forms in or , is a fundamental law of physics and applies to any system. You just have to include the kinetic and potential energies of all the particles, and the work done by all the non-conservative forces acting on them. Until you learn more about the dynamics of systems composed of many particles, in Linear Momentum and Collisions, Fixed-Axis Rotation, and Angular Momentum, it is better to postpone discussing the application of energy conservation to then.
+
+Summary
+
+A conserved quantity is a physical property that stays constant regardless of the path taken.
+
+A form of the work-energy theorem says that the change in the mechanical energy of a particle equals the work done on it by non-conservative forces.
+
+If non-conservative forces do no work and there are no external forces, the mechanical energy of a particle stays constant. This is a statement of the conservation of mechanical energy and there is no change in the total mechanical energy.
+
+For one-dimensional particle motion, in which the mechanical energy is constant and the potential energy is known, the particle’s position, as a function of time, can be found by evaluating an integral that is derived from the conservation of mechanical energy.
+
+Conceptual Questions
+
+When a body slides down an inclined plane, does the work of friction depend on the body’s initial speed? Answer the same question for a body sliding down a curved surface.
+
+Consider the following scenario. A car for which friction is not negligible accelerates from rest down a hill, running out of gasoline after a short distance (see below). The driver lets the car coast farther down the hill, then up and over a small crest. He then coasts down that hill into a gas station, where he brakes to a stop and fills the tank with gasoline. Identify the forms of energy the car has, and how they are changed and transferred in this series of events.
+
+The car experiences a change in gravitational potential energy as it goes down the hills because the vertical distance is decreasing. Some of this change of gravitational potential energy will be taken away by work done by friction. The rest of the energy results in a kinetic energy increase, making the car go faster. Lastly, the car brakes and will lose its kinetic energy to the work done by braking to a stop.
+
+A dropped ball bounces to one-half its original height. Discuss the energy transformations that take place.
+
+“E=K+U constant is a special case of the work-energy theorem.” Discuss this statement.
+
+It states that total energy of the system E is conserved as long as there are no non-conservative forces acting on the object.
+
+In a common physics demonstration, a bowling ball is suspended from the ceiling by a rope.
+
+The professor pulls the ball away from its equilibrium position and holds it adjacent to his nose, as shown below. He releases the ball so that it swings directly away from him. Does he get struck by the ball on its return swing? What is he trying to show in this demonstration?
+
+A child jumps up and down on a bed, reaching a higher height after each bounce. Explain how the child can increase his maximum gravitational potential energy with each bounce.
+
+He puts energy into the system through his legs compressing and expanding.
+
+Can a non-conservative force increase the mechanical energy of the system?
+
+Neglecting air resistance, how much would I have to raise the vertical height if I wanted to double the impact speed of a falling object?
+
+Four times the original height would double the impact speed.
+
+A box is dropped onto a spring at its equilibrium position. The spring compresses with the box attached and comes to rest. Since the spring is in the vertical position, does the change in the gravitational potential energy of the box while the spring is compressing need to be considered in this problem?
+
+Problems
+
+A boy throws a ball of mass 0.25kg straight upward with an initial speed of 20m/s When the ball returns to the boy, its speed is 17m/s How much much work does air resistance do on the ball during its flight?
+14J
+
+A mouse of mass 200 g falls 100 m down a vertical mine shaft and lands at the bottom with a speed of 8.0 m/s. During its fall, how much work is done on the mouse by air resistance?
+
+Using energy considerations and assuming negligible air resistance, show that a rock thrown from a bridge 20.0 m above water with an initial speed of 15.0 m/s strikes the water with a speed of 24.8 m/s independent of the direction thrown. (Hint: show that Ki+Ui=Kf+Uf)
+
+proof
+
+A 1.0-kg ball at the end of a 2.0-m string swings in a vertical plane. At its lowest point the ball is moving with a speed of 10 m/s. (a) What is its speed at the top of its path? (b) What is the tension in the string when the ball is at the bottom and at the top of its path?
+
+Ignoring details associated with friction, extra forces exerted by arm and leg muscles, and other factors, we can consider a pole vault as the conversion of an athlete’s running kinetic energy to gravitational potential energy. If an athlete is to lift their body 4.8 m during a vault, what speed must they have when they plant the pole?
+9.7m/s
+
+Tarzan grabs a vine hanging vertically from a tall tree when he is running at 9.0m/s. (a) How high can he swing upward? (b) Does the length of the vine affect this height?
+
+Assume that the force of a bow on an arrow behaves like the spring force. In aiming the arrow, an archer pulls the bow back 50 cm and holds it in position with a force of 150N. If the mass of the arrow is 50g and the “spring” is massless, what is the speed of the arrow immediately after it leaves the bow?
+39m/s
+
+A 100−kg man is skiing across level ground at a speed of 8.0m/s when he comes to the small slope 1.8 m higher than ground level shown in the following figure. (a) If the skier coasts up the hill, what is his speed when he reaches the top plateau? Assume friction between the snow and skis is negligible. (b) What is his speed when he reaches the upper level if an 80−N frictional force acts on the skis?
+
+A sled of mass 70 kg starts from rest and slides down a 10° incline 80m long. It then travels for 20 m horizontally before starting back up an 8° incline. It travels 80 m along this incline before coming to rest. What is the magnitude of the net work done on the sled by friction?
+
+1900 J
+
+A girl on a skateboard (total mass of 40 kg) is moving at a speed of 10 m/s at the bottom of a long ramp. The ramp is inclined at 20° with respect to the horizontal. If she travels 14.2 m upward along the ramp before stopping, what is the net frictional force on her?
+
+A baseball of mass 0.25 kg is hit at home plate with a speed of 40 m/s. When it lands in a seat in the left-field bleachers a horizontal distance 120 m from home plate, it is moving at 30 m/s. If the ball lands 20 m above the spot where it was hit, how much work is done on it by air resistance?
+
+–39 J
+
+A small block of mass m slides without friction around the loop-the-loop apparatus shown below. (a) If the block starts from rest at A, what is its speed at B? (b) What is the force of the track on the block at B?
+
+The massless spring of a spring gun has a force constant k=12N/cm. When the gun is aimed vertically, a 15-g projectile is shot to a height of 5.0 m above the end of the expanded spring. (See below.) How much was the spring compressed initially?
+
+3.5 cm
+
+A small ball is tied to a string and set rotating with negligible friction in a vertical circle. If the ball moves over the top of the circle at its slowest possible speed (so that the tension in the string is negligible), what is the tension in the string at the bottom of the circle, assuming there is no additional energy added to the ball during rotation?
+
+one that cannot be created or destroyed, but may be transformed between different forms of itself
+total energy of an isolated system is constant
+sum of the kinetic and potential energies

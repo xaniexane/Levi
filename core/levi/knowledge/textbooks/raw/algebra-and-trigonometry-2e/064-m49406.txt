@@ -1,0 +1,1734 @@
+# m49406
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Polar Coordinates
+
+Polar Coordinates
+
+In this section, you will:
+
+Plot points using polar coordinates.
+
+Convert from polar coordinates to rectangular coordinates.
+
+Convert from rectangular coordinates to polar coordinates.
+
+Transform equations between polar and rectangular forms.
+
+Identify and graph polar equations by converting to rectangular equations.
+
+Over 12 kilometers from port, a sailboat encounters rough weather and is blown off course by a 16-knot wind (see ). How can the sailor indicate his location to the Coast Guard? In this section, we will investigate a method of representing location that is different from a standard coordinate grid.
+
+Plotting Points Using Polar Coordinates
+
+When we think about plotting points in the plane, we usually think of rectangular coordinates 
+ 
+ (
+ 
+ x,y
+ )
+ in the Cartesian coordinate plane. However, there are other ways of writing a coordinate pair and other types of grid systems. In this section, we introduce to polar coordinates, which are points labeled 
+ 
+ (
+ 
+ r,θ
+ )
+ and plotted on a polar grid. The polar grid is represented as a series of concentric circles radiating out from the pole, or the origin of the coordinate plane.
+
+The polar grid is scaled as the unit circle with the positive x-axis now viewed as the polar axis and the origin as the pole. The first coordinate 
+ 
+ r
+ is the radius or length of the directed line segment from the pole. The angle 
+ 
+ θ,
+ measured in radians, indicates the direction of 
+ 
+ r.
+ We move counterclockwise from the polar axis by an angle of 
+ 
+ θ,
+ and measure a directed line segment the length of 
+ 
+ r
+ in the direction of 
+ 
+ θ.
+ Even though we measure 
+ 
+ θ
+ first and then 
+ 
+ r,
+ the polar point is written with the r-coordinate first. For example, to plot the point 
+ 
+ (
+ 
+ 2,
+ π
+ 4
+
+ ),
+ we would move 
+
+ π
+ 4
+
+ units in the counterclockwise direction and then a length of 2 from the pole. This point is plotted on the grid in .
+
+Plotting a Point on the Polar Grid
+
+Plot the point 
+ 
+ (
+ 
+ 3,
+ π
+ 2
+
+ )
+ on the polar grid.
+
+The angle 
+
+ π
+ 2
+
+ is found by sweeping in a counterclockwise direction 90° from the polar axis. The point is located at a length of 3 units from the pole in the 
+
+ π
+ 2
+
+ direction, as shown in .
+
+Plot the point 
+ 
+ (
+ 
+ 2,
+ π
+ 3
+
+ )
+ in the polar grid.
+
+Plotting a Point in the Polar Coordinate System with a Negative Component
+
+Plot the point 
+ 
+ (
+ 
+ −2,
+ π
+ 6
+
+ )
+ on the polar grid.
+
+We know that 
+
+ π
+ 6
+
+ is located in the first quadrant. However, 
+ 
+ r=−2.
+ We can approach plotting a point with a negative 
+ 
+ r
+ in two ways:
+
+Plot the point 
+ 
+ (
+ 
+ 2,
+ π
+ 6
+
+ )
+ by moving 
+
+ π
+ 6
+
+ in the counterclockwise direction and extending a directed line segment 2 units into the first quadrant. Then retrace the directed line segment back through the pole, and continue 2 units into the third quadrant;
+
+Move 
+
+ π
+ 6
+
+ in the counterclockwise direction, and draw the directed line segment from the pole 2 units in the negative direction, into the third quadrant.
+
+See (a). Compare this to the graph of the polar coordinate 
+ 
+ (
+ 
+ 2,
+ π
+ 6
+
+ )
+ shown in (b).
+
+Plot the points 
+ 
+ (
+ 
+ 3,−
+ π
+ 6
+
+ )
+ and 
+ 
+ (
+ 
+ 2,
+ 
+ 9π
+ 4
+
+ )
+ on the same polar grid.
+
+Converting from Polar Coordinates to Rectangular Coordinates
+
+When given a set of polar coordinates, we may need to convert them to rectangular coordinates. To do so, we can recall the relationships that exist among the variables 
+ 
+ x,y,r,
+ and 
+ 
+ θ.
+
+Dropping a perpendicular from the point in the plane to the x-axis forms a right triangle, as illustrated in . An easy way to remember the equations above is to think of 
+ 
+ cosθ
+ 
+ as the adjacent side over the hypotenuse and 
+ 
+ sinθ
+ as the opposite side over the hypotenuse.
+
+Converting from Polar Coordinates to Rectangular Coordinates
+
+To convert polar coordinates 
+ 
+ (
+ 
+ r,θ
+ )
+ to rectangular coordinates 
+ 
+ (
+ 
+ x,y
+ ),
+ let
+Given polar coordinates, convert to rectangular coordinates.
+
+Given the polar coordinate 
+ 
+ (
+ 
+ r,θ
+ ),
+ write 
+ 
+ x=rcosθ
+ and 
+ 
+ y=rsinθ.
+
+Evaluate 
+ 
+ cosθ
+ and 
+ 
+ sinθ.
+
+Multiply 
+ 
+ cosθ
+ by 
+ 
+ r
+ to find the x-coordinate of the rectangular form.
+
+Multiply 
+ 
+ sinθ
+ by 
+ 
+ r
+ to find the y-coordinate of the rectangular form.
+
+Writing Polar Coordinates as Rectangular Coordinates
+
+Write the polar coordinates 
+ 
+ (
+ 
+ 3,
+ π
+ 2
+
+ )
+ as rectangular coordinates.
+
+Use the equivalent relationships.
+
+The rectangular coordinates are 
+ 
+ (
+ 
+ 0,3
+ ).
+ See .
+
+Writing Polar Coordinates as Rectangular Coordinates
+
+Write the polar coordinates 
+ 
+ (
+ 
+ −2,0
+ )
+ as rectangular coordinates.
+
+See . Writing the polar coordinates as rectangular, we have
+
+The rectangular coordinates are also 
+ 
+ (
+ 
+ −2,0
+ ).
+
+Write the polar coordinates 
+ 
+ (
+ 
+ −1,
+ 
+ 2π
+ 3
+
+ )
+ as rectangular coordinates.
+(
+ 
+ x,y
+ )=(
+
+ 1
+ 2
+ 
+ ,−
+
+ 3
+
+ 2
+
+ )
+
+Converting from Rectangular Coordinates to Polar Coordinates
+
+To convert rectangular coordinates to polar coordinates, we will use two other familiar relationships. With this conversion, however, we need to be aware that a set of rectangular coordinates will yield more than one polar point.
+
+Converting from Rectangular Coordinates to Polar Coordinates
+
+Converting from rectangular coordinates to polar coordinates requires the use of one or more of the relationships illustrated in .
+
+Writing Rectangular Coordinates as Polar Coordinates
+
+Convert the rectangular coordinates 
+ 
+ (
+ 
+ 3,3
+ )
+ to polar coordinates.
+
+We see that the original point 
+ 
+ (
+ 
+ 3,3
+ )
+ is in the first quadrant. To find 
+ 
+ θ,
+ use the formula 
+ 
+ tanθ=
+ y
+ x
+ 
+ .
+ This gives
+
+To find 
+ 
+ r,
+ we substitute the values for 
+ 
+ x
+ and 
+ 
+ y
+ into the formula 
+ 
+ r=
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ .
+ We know that 
+ 
+ r
+ must be positive, as 
+
+ π
+ 4
+
+ is in the first quadrant. Thus
+
+So, 
+ 
+ r=3
+ 2
+
+ and 
+ 
+ θ=
+ π
+ 4
+ 
+ ,
+ giving us the polar point 
+ 
+ (
+ 
+ 3
+ 2
+ 
+ ,
+ π
+ 4
+
+ ).
+ See .
+
+Analysis
+
+There are other sets of polar coordinates that will be the same as our first solution. For example, the points 
+ 
+ (
+ 
+ −3
+ 2
+ 
+ ,
+ 
+ 5π
+ 4
+
+ )
+ and 
+ 
+ (
+ 
+ 3
+ 2
+ 
+ ,−
+ 
+ 7π
+ 4
+
+ )
+ will coincide with the original solution of 
+ 
+ (
+ 
+ 3
+ 2
+ 
+ ,
+ π
+ 4
+
+ ).
+ The point 
+ 
+ (
+ 
+ −3
+ 2
+ 
+ ,
+ 
+ 5π
+ 4
+
+ )
+ indicates a move further counterclockwise by 
+ 
+ π,
+ which is directly opposite 
+
+ π
+ 4
+ 
+ .
+ The radius is expressed as 
+ 
+ −3
+ 2
+ 
+ .
+ However, the angle 
+
+ 5π
+ 4
+
+ is located in the third quadrant and, as 
+ 
+ r
+ is negative, we extend the directed line segment in the opposite direction, into the first quadrant. This is the same point as 
+ 
+ (
+ 
+ 3
+ 2
+ 
+ ,
+ π
+ 4
+
+ ).
+ The point 
+ 
+ (
+ 
+ 3
+ 2
+ 
+ ,−
+ 
+ 7π
+ 4
+
+ )
+ is a move further clockwise by 
+ 
+ −
+ 
+ 7π
+ 4
+ 
+ ,
+ from 
+
+ π
+ 4
+ 
+ .
+ The radius, 
+ 
+ 3
+ 2
+ 
+ ,
+ is the same.
+
+Transforming Equations between Polar and Rectangular Forms
+
+We can now convert coordinates between polar and rectangular form. Converting equations can be more difficult, but it can be beneficial to be able to convert between the two forms. Since there are a number of polar equations that cannot be expressed clearly in Cartesian form, and vice versa, we can use the same procedures we used to convert points between the coordinate systems. We can then use a graphing calculator to graph either the rectangular form or the polar form of the equation.
+Given an equation in polar form, graph it using a graphing calculator.
+
+Change the MODE to POL, representing polar form.
+
+Press the Y= button to bring up a screen allowing the input of six equations: 
+
+ r
+ 1
+ 
+ ,
+ r
+ 2
+ 
+ ,...,
+ r
+ 6
+ 
+ .
+
+Enter the polar equation, set equal to 
+ 
+ r.
+
+Press GRAPH.
+
+Writing a Cartesian Equation in Polar Form
+
+Write the Cartesian equation 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =9
+ in polar form.
+
+The goal is to eliminate 
+ 
+ x
+ and 
+ 
+ y
+ from the equation and introduce 
+ 
+ r
+ and 
+ 
+ θ.
+ Ideally, we would write the equation 
+ 
+ r
+ as a function of 
+ 
+ θ.
+ To obtain the polar form, we will use the relationships between 
+ 
+ (
+ 
+ x,y
+ )
+ and 
+ 
+ (
+ 
+ r,θ
+ ).
+ Since 
+ 
+ x=rcosθ
+ and 
+ 
+ y=rsinθ,
+ we can substitute and solve for 
+ 
+ r.
+
+Thus, 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =9,r=3,
+ and 
+ 
+ r=−3
+ should generate the same graph. See .
+
+To graph a circle in rectangular form, we must first solve for 
+ 
+ y.
+
+Note that this is two separate functions, since a circle fails the vertical line test. Therefore, we need to enter the positive and negative square roots into the calculator separately, as two equations in the form 
+
+ Y
+ 1
+ 
+ =
+ 
+ 9−
+ x
+ 2
+
+ and 
+
+ Y
+ 2
+ 
+ =−
+ 
+ 9−
+ x
+ 2
+
+ .
+ Press GRAPH.
+
+Rewriting a Cartesian Equation as a Polar Equation
+
+Rewrite the Cartesian equation 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =6y
+ as a polar equation.
+
+This equation appears similar to the previous example, but it requires different steps to convert the equation.
+
+We can still follow the same procedures we have already learned and make the following substitutions:
+
+Therefore, the equations 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =6y
+ and 
+ 
+ r=6sinθ
+ 
+ should give us the same graph. See .
+
+The Cartesian or rectangular equation is plotted on the rectangular grid, and the polar equation is plotted on the polar grid. Clearly, the graphs are identical.
+
+Rewriting a Cartesian Equation in Polar Form
+
+Rewrite the Cartesian equation 
+ 
+ y=3x+2
+ as a polar equation.
+
+We will use the relationships 
+ 
+ x=rcosθ
+ and 
+ 
+ y=rsinθ.
+
+Rewrite the Cartesian equation 
+
+ y
+ 2
+ 
+ =3−
+ x
+ 2
+
+ in polar form.
+r=
+ 3
+
+Identify and Graph Polar Equations by Converting to Rectangular Equations
+
+We have learned how to convert rectangular coordinates to polar coordinates, and we have seen that the points are indeed the same. We have also transformed polar equations to rectangular equations and vice versa. Now we will demonstrate that their graphs, while drawn on different grids, are identical.
+
+Graphing a Polar Equation by Converting to a Rectangular Equation
+
+Covert the polar equation 
+ 
+ r=2secθ
+ to a rectangular equation, and draw its corresponding graph.
+
+The conversion is
+
+Notice that the equation 
+ 
+ r=2secθ
+ drawn on the polar grid is clearly the same as the vertical line 
+ 
+ x=2
+ drawn on the rectangular grid (see ). Just as 
+ 
+ x=c
+ is the standard form for a vertical line in rectangular form, 
+ 
+ r=csecθ
+ is the standard form for a vertical line in polar form.
+
+A similar discussion would demonstrate that the graph of the function 
+ 
+ r=2cscθ
+ 
+ will be the horizontal line 
+ 
+ y=2.
+ In fact, 
+ 
+ r=ccscθ
+ is the standard form for a horizontal line in polar form, corresponding to the rectangular form 
+ 
+ y=c.
+
+Rewriting a Polar Equation in Cartesian Form
+
+Rewrite the polar equation 
+ 
+ r=
+ 3
+ 
+ 1−2cosθ
+
+ as a Cartesian equation.
+
+The goal is to eliminate 
+ 
+ θ
+ and 
+ 
+ r,
+ and introduce 
+ 
+ x
+ and 
+ 
+ y.
+ We clear the fraction, and then use substitution. In order to replace 
+ 
+ r
+ with 
+ 
+ x
+ and 
+ 
+ y,
+ we must use the expression 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =
+ r
+ 2
+ 
+ .
+
+The Cartesian equation is 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =
+ 
+ (
+ 
+ 3+2x
+ )
+ 2
+ 
+ .
+ However, to graph it, especially using a graphing calculator or computer program, we want to isolate 
+ 
+ y.
+
+When our entire equation has been changed from 
+ 
+ r
+ and 
+ 
+ θ
+ to 
+ 
+ x
+ and 
+ 
+ y,
+ we can stop, unless asked to solve for 
+ 
+ y
+ or simplify. See .
+
+The “hour-glass” shape of the graph is called a hyperbola. Hyperbolas have many interesting geometric features and applications, which we will investigate further in Analytic Geometry.
+
+Analysis
+
+In this example, the right side of the equation can be expanded and the equation simplified further, as shown above. However, the equation cannot be written as a single function in Cartesian form. We may wish to write the rectangular equation in the hyperbola’s standard form. To do this, we can start with the initial equation.
+
+Rewrite the polar equation 
+ 
+ r=2sinθ
+ in Cartesian form.
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =2y
+ or, in the standard form for a circle, 
+
+ x
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−1
+ )
+ 2
+ 
+ =1
+
+Rewriting a Polar Equation in Cartesian Form
+
+Rewrite the polar equation 
+ 
+ r=sin(
+ 
+ 2θ
+ )
+ in Cartesian form.
+
+This equation can also be written as
+
+Access these online resources for additional instruction and practice with polar coordinates.
+Introduction to Polar Coordinates
+Comparing Polar and Rectangular Coordinates
+
+Key Equations
+
+cosθ=
+ x
+ r
+ 
+ →x=rcosθ
+
+ sinθ=
+ y
+ r
+ 
+ →y=rsinθ
+
+ r
+ 2
+ 
+ =
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ tanθ=
+ y
+ x
+Key Concepts
+
+The polar grid is represented as a series of concentric circles radiating out from the pole, or origin.
+
+To plot a point in the form 
+ 
+ (
+ 
+ r,θ
+ ),θ>0,
+ move in a counterclockwise direction from the polar axis by an angle of 
+ 
+ θ,
+ and then extend a directed line segment from the pole the length of 
+ 
+ r
+ in the direction of 
+ 
+ θ.
+ If 
+ 
+ θ
+ is negative, move in a clockwise direction, and extend a directed line segment the length of 
+ 
+ r
+ in the direction of 
+ 
+ θ.
+ See .
+
+If 
+ 
+ r
+ is negative, extend the directed line segment in the opposite direction of 
+ 
+ θ.
+ See .
+
+To convert from polar coordinates to rectangular coordinates, use the formulas 
+ 
+ x=rcosθ
+ and 
+ 
+ y=rsinθ.
+ See and .
+
+To convert from rectangular coordinates to polar coordinates, use one or more of the formulas: 
+ 
+ cosθ=
+ x
+ r
+ 
+ ,sinθ=
+ y
+ r
+ 
+ ,tanθ=
+ y
+ x
+ 
+ ,
+ and 
+ 
+ r=
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ .
+ See .
+
+Transforming equations between polar and rectangular forms means making the appropriate substitutions based on the available formulas, together with algebraic manipulations. See , , and .
+
+Using the appropriate substitutions makes it possible to rewrite a polar equation as a rectangular equation, and then graph it in the rectangular plane. See , , and .
+
+Section Exercises
+
+Verbal
+
+How are polar coordinates different from rectangular coordinates?
+
+For polar coordinates, the point in the plane depends on the angle from the positive x-axis and distance from the origin, while in Cartesian coordinates, the point represents the horizontal and vertical distances from the origin. For each point in the coordinate plane, there is one representation, but for each point in the polar plane, there are infinite representations.
+
+How are the polar axes different from the x- and y-axes of the Cartesian plane?
+
+Explain how polar coordinates are graphed.
+
+Determine 
+ 
+ θ
+ for the point, then move 
+ 
+ r
+ units from the pole to plot the point. If 
+ 
+ r
+ is negative, move 
+ 
+ r
+ units from the pole in the opposite direction but along the same angle. The point is a distance of 
+ 
+ r
+ away from the origin at an angle of 
+ 
+ θ
+ from the polar axis.
+
+How are the points 
+ 
+ (
+ 
+ 3,
+ π
+ 2
+
+ )
+ and 
+ 
+ (
+ 
+ −3,
+ π
+ 2
+
+ )
+ related?
+
+Explain why the points 
+ 
+ (
+ 
+ −3,
+ π
+ 2
+
+ )
+ and 
+ 
+ (
+ 
+ 3,−
+ π
+ 2
+
+ )
+ are the same.
+
+The point 
+ 
+ (
+ 
+ −3,
+ π
+ 2
+
+ )
+ has a positive angle but a negative radius and is plotted by moving to an angle of 
+
+ π
+ 2
+
+ and then moving 3 units in the negative direction. This places the point 3 units down the negative y-axis. The point 
+ 
+ (
+ 
+ 3,−
+ π
+ 2
+
+ )
+ has a negative angle and a positive radius and is plotted by first moving to an angle of 
+ 
+ −
+ π
+ 2
+
+ and then moving 3 units down, which is the positive direction for a negative angle. The point is also 3 units down the negative y-axis.
+
+Algebraic
+
+For the following exercises, convert the given polar coordinates to Cartesian coordinates. Remember to consider the quadrant in which the given point is located when determining 
+ 
+ θ
+ for the point.
+(
+ 
+ 7,
+ 
+ 7π
+ 6
+
+ )
+(
+ 
+ 5,π
+ )
+(
+ 
+ −5,0
+ )
+(
+ 
+ 6,−
+ π
+ 4
+
+ )
+(
+ 
+ −3,
+ π
+ 6
+
+ )
+(
+ 
+ −
+ 
+ 3
+ 3
+
+ 2
+ 
+ ,−
+ 3
+ 2
+
+ )
+(
+ 
+ 4,
+ 
+ 7π
+ 4
+
+ )
+
+For the following exercises, convert the given Cartesian coordinates to polar coordinates with 
+ 
+ r>0,0≤θ<2π.
+ Remember to consider the quadrant in which the given point is located.
+(
+ 
+ 4,2
+ )
+(
+ 
+ 2
+ 5
+ 
+ ,0.464
+ )
+(
+ 
+ −4,6
+ )
+(
+ 
+ 3,−5
+ )
+(
+
+ 34
+ 
+ ,5.253
+ )
+(
+ 
+−10,−13
+ )
+(
+ 
+ 8,8
+ )
+(
+ 
+ 8
+ 2
+ 
+ ,
+ π
+ 4
+
+ )
+
+For the following exercises, convert the given Cartesian equation to a polar equation.
+x=3
+y=4
+r=4cscθ
+y=4
+ x
+ 2
+y=2
+ x
+ 4
+r=
+
+ sinθ
+ 
+ 2co
+ s
+ 4
+ 
+ θ
+
+ 3
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =4y
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =3x
+r=3cosθ
+x
+ 2
+ 
+ −
+ y
+ 2
+ 
+ =x
+x
+ 2
+ 
+ −
+ y
+ 2
+ 
+ =3y
+r=
+ 
+ 3sinθ
+ 
+ cos(
+ 
+ 2θ
+ )
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =9
+x
+ 2
+ 
+ =9y
+r=
+ 
+ 9sinθ
+
+ cos
+ 
+ 2
+ 
+ θ
+y
+ 2
+ 
+ =9x
+9xy=1
+r=
+
+ 1
+ 
+ 9cosθsinθ
+
+For the following exercises, convert the given polar equation to a Cartesian equation. Write in the standard form of a conic if possible, and identify the conic section represented.
+r=3sinθ
+r=4cosθ
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =4x
+ or 
+
+ (
+ 
+ x−2
+ )
+ 2
+
+ 4
+ 
+ +
+
+ y
+ 2
+
+ 4
+ 
+ =1;
+ circle
+r=
+ 4
+ 
+ sinθ+7cosθ
+r=
+ 6
+ 
+ cosθ+3sinθ
+3y+x=6;
+ line
+r=2secθ
+r=3cscθ
+y=3;
+
+line
+r=
+ 
+ rcosθ+2
+r
+ 2
+ 
+ =4secθcscθ
+xy=4;
+ hyperbola
+r=4
+r
+ 2
+ 
+ =4
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =4;
+ circle
+r=
+ 1
+ 
+ 4cosθ−3sinθ
+r=
+ 3
+ 
+ cosθ−5sinθ
+x−5y=3;
+ line
+
+Graphical
+
+For the following exercises, find the polar coordinates of the point.
+(
+ 
+ 3,
+ 
+ 3π
+ 4
+
+ )
+(
+ 
+ 5,π
+ )
+
+For the following exercises, plot the points.
+(
+ 
+ −2,
+ π
+ 3
+
+ )
+(
+ 
+ −1,−
+ π
+ 2
+
+ )
+(
+ 
+ 3.5,
+ 
+ 7π
+ 4
+
+ )
+(
+ 
+ −4,
+ π
+ 3
+
+ )
+(
+ 
+ 5,
+ π
+ 2
+
+ )
+(
+ 
+ 4,
+ 
+ −5π
+ 4
+
+ )
+(
+ 
+ 3,
+ 
+ 5π
+ 6
+
+ )
+(
+ 
+ −1.5,
+ 
+ 7π
+ 6
+
+ )
+(
+ 
+ −2,
+ π
+ 4
+
+ )
+(
+ 
+ 1,
+ 
+ 3π
+ 2
+
+ )
+
+For the following exercises, convert the equation from rectangular to polar form and graph on the polar axis.
+5x−y=6
+r=
+ 6
+ 
+ 5cosθ−sinθ
+2x+7y=−3
+x
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−1
+ )
+ 2
+ 
+ =1
+r=2sinθ
+(
+ 
+ x+2
+ )
+ 2
+ 
+ +
+ 
+ (
+ 
+ y+3
+ )
+ 2
+ 
+ =13
+x=2
+r=
+ 2
+ 
+ cosθ
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =5y
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =3x
+r=3cosθ
+
+For the following exercises, convert the equation from polar to rectangular form and graph on the rectangular plane.
+r=6
+r=−4
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =16
+θ=−
+ 
+ 2π
+ 3
+θ=
+ π
+ 4
+y=x
+r=secθ
+r=−10sinθ
+x
+ 2
+ 
+ +
+ 
+ (
+ 
+ y+5
+ )
+ 2
+ 
+ =25
+r=3cosθ
+
+Technology
+
+Use a graphing calculator to find the rectangular coordinates of 
+ 
+ (
+ 
+ 2,−
+ π
+ 5
+
+ ).
+ Round to the nearest thousandth.
+(
+ 
+ 1.618,−1.176
+ )
+
+Use a graphing calculator to find the rectangular coordinates of 
+ 
+ (
+ 
+ −3,
+ 
+ 3π
+ 7
+
+ ).
+ Round to the nearest thousandth.
+
+Use a graphing calculator to find the polar coordinates of 
+ 
+ (
+ 
+ −7,8
+ )
+ in degrees. Round to the nearest thousandth.
+(
+ 
+ 10.630,131.186°
+ )
+
+Use a graphing calculator to find the polar coordinates of 
+ 
+ (
+ 
+ 3,−4
+ )
+ in degrees. Round to the nearest hundredth.
+
+Use a graphing calculator to find the polar coordinates of 
+ 
+ (
+ 
+ −2,0
+ )
+ in radians. Round to the nearest hundredth.
+(
+ 
+ 2,3.14
+ )or(
+ 
+ 2,π
+ )
+
+Extensions
+
+Describe the graph of 
+ 
+ r=asecθ;a>0.
+
+Describe the graph of 
+ 
+ r=asecθ;a<0.
+
+A vertical line with 
+ 
+ a
+ units left of the y-axis.
+
+Describe the graph of 
+ 
+ r=acscθ;a>0.
+
+Describe the graph of 
+ 
+ r=acscθ;a<0.
+
+A horizontal line with 
+ 
+ a
+ units below the x-axis.
+
+What polar equations will give an oblique line?
+
+For the following exercise, graph the polar inequality.
+r<4
+0≤θ≤
+ π
+ 4
+θ=
+ π
+ 4
+ 
+ ,r≥2
+θ=
+ π
+ 4
+ 
+ ,r≥−3
+0≤θ≤
+ π
+ 3
+ 
+ ,r<2
+−π
+ 6
+ 
+ <θ≤
+ π
+ 3
+ 
+ ,−3<r<2
+
+on the polar grid, the equivalent of the positive x-axis on the rectangular grid
+on the polar grid, the coordinates of a point labeled 
+ 
+ (
+ 
+ r,θ
+ ),
+ where 
+ 
+ θ
+ indicates the angle of rotation from the polar axis and 
+ 
+ r
+ represents the radius, or the distance of the point from the pole in the direction of 
+ 
+ θ
+the origin of the polar grid

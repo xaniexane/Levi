@@ -1,0 +1,165 @@
+# m58371
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Energy and Power of a Wave
+
+Energy and Power of a Wave
+
+By the end of this section, you will be able to:
+
+Explain how energy travels with a pulse or wave
+
+Describe, using a mathematical expression, how the energy in a wave depends on the amplitude of the wave
+
+All waves carry energy, and sometimes this can be directly observed. Earthquakes can shake whole cities to the ground, performing the work of thousands of wrecking balls (). Loud sounds can pulverize nerve cells in the inner ear, causing permanent hearing loss. Ultrasound is used for deep-heat treatment of muscle strains. A laser beam can burn away a malignancy. Water waves chew up beaches.
+
+In this section, we examine the quantitative expression of energy in waves. This will be of fundamental importance in later discussions of waves, from sound to light to quantum mechanics.
+
+Energy in Waves
+
+The amount of energy in a wave is related to its amplitude and its frequency. Large-amplitude earthquakes produce large ground displacements. Loud sounds have high-pressure amplitudes and come from larger-amplitude source vibrations than soft sounds. Large ocean breakers churn up the shore more than small ones. Consider the example of the seagull and the water wave earlier in the chapter (). Work is done on the seagull by the wave as the seagull is moved up, changing its potential energy. The larger the amplitude, the higher the seagull is lifted by the wave and the larger the change in potential energy.
+
+The energy of the wave depends on both the amplitude and the frequency. If the energy of each wavelength is considered to be a discrete packet of energy, a high-frequency wave will deliver more of these packets per unit time than a low-frequency wave. We will see that the average rate of energy transfer in mechanical waves is proportional to both the square of the amplitude and the square of the frequency. If two mechanical waves have equal amplitudes, but one wave has a frequency equal to twice the frequency of the other, the higher-frequency wave will have a rate of energy transfer a factor of four times as great as the rate of energy transfer of the lower-frequency wave. It should be noted that although the rate of energy transport is proportional to both the square of the amplitude and square of the frequency in mechanical waves, the rate of energy transfer in electromagnetic waves is proportional to the square of the amplitude, but independent of the frequency.
+
+Power in Waves
+
+Consider a sinusoidal wave on a string that is produced by a string vibrator, as shown in . The string vibrator is a device that vibrates a rod up and down. A string of uniform linear mass density is attached to the rod, and the rod oscillates the string, producing a sinusoidal wave. The rod does work on the string, producing energy that propagates along the string. Consider a mass element of the string with a mass Δm, as seen in . As the energy propagates along the string, each mass element of the string is driven up and down at the same frequency as the wave. Each mass element of the string can be modeled as a simple harmonic oscillator. Since the string has a constant linear density μ=ΔmΔx, each mass element of the string has the mass Δm=μΔx.
+
+The total mechanical energy of the wave is the sum of its kinetic energy and potential energy. The kinetic energy K=12mv2 of each mass element of the string of length Δx is ΔK=12(Δm)vy2, as the mass element oscillates perpendicular to the direction of the motion of the wave. Using the constant linear mass density, the kinetic energy of each mass element of the string with length Δx is
+
+A differential equation can be formed by letting the length of the mass element of the string approach zero,
+
+Since the wave is a sinusoidal wave with an angular frequency ω, the position of each mass element may be modeled as y(x,t)=Asin(kx−ωt). Each mass element of the string oscillates with a velocity vy=∂y(x,t)∂t=−Aωcos(kx−ωt). The kinetic energy of each mass element of the string becomes
+
+The wave can be very long, consisting of many wavelengths. To standardize the energy, consider the kinetic energy associated with a wavelength of the wave. This kinetic energy can be integrated over the wavelength to find the energy associated with each wavelength of the wave:
+
+There is also potential energy associated with the wave. Much like the mass oscillating on a spring, there is a conservative restoring force that, when the mass element is displaced from the equilibrium position, drives the mass element back to the equilibrium position. The potential energy of the mass element can be found by considering the linear restoring force of the string, In Oscillations, we saw that the potential energy stored in a spring with a linear restoring force is equal to U=12ksx2, where the equilibrium position is defined as x=0.00m. When a mass attached to the spring oscillates in simple harmonic motion, the angular frequency is equal to ω=ksm. As each mass element oscillates in simple harmonic motion, the spring constant is equal to ks=Δmω2. The potential energy of the mass element is equal to
+
+Note that ks is the spring constant and not the wave number k=2πλ. This equation can be used to find the energy over a wavelength. Integrating over the wavelength, we can compute the potential energy over a wavelength:
+
+The potential energy associated with a wavelength of the wave is equal to the kinetic energy associated with a wavelength.
+
+The total energy associated with a wavelength is the sum of the potential energy and the kinetic energy:
+
+The time-averaged power of a sinusoidal mechanical wave, which is the average rate of energy transfer associated with a wave as it passes a point, can be found by taking the total energy associated with the wave divided by the time it takes to transfer the energy. If the velocity of the sinusoidal wave is constant, the time for one wavelength to pass by a point is equal to the period of the wave, which is also constant. For a sinusoidal mechanical wave, the time-averaged power is therefore the energy associated with a wavelength divided by the period of the wave. The wavelength of the wave divided by the period is equal to the velocity of the wave,
+
+Note that this equation for the time-averaged power of a sinusoidal mechanical wave shows that the power is proportional to the square of the amplitude of the wave and to the square of the angular frequency of the wave. Recall that the angular frequency is equal to ω=2πf, so the power of a mechanical wave is equal to the square of the amplitude and the square of the frequency of the wave.
+Power Supplied by a String Vibrator
+Consider a two-meter-long string with a mass of 70.00 g attached to a string vibrator as illustrated in . The tension in the string is 90.0 N. When the string vibrator is turned on, it oscillates with a frequency of 60 Hz and produces a sinusoidal wave on the string with an amplitude of 4.00 cm and a constant wave speed. What is the time-averaged power supplied to the wave by the string vibrator?
+
+Power Supplied by a String Vibrator
+Strategy
+The power supplied to the wave should equal the time-averaged power of the wave on the string. We know the mass of the string (ms), the length of the string (Ls), and the tension (FT) in the string. The speed of the wave on the string can be derived from the linear mass density and the tension. The string oscillates with the same frequency as the string vibrator, from which we can find the angular frequency.
+
+Strategy
+Solution
+
+Solution
+
+Begin with the equation of the time-averaged power of a sinusoidal wave on a string:
+P=12μA2ω2v.
+The amplitude is given, so we need to calculate the linear mass density of the string, the angular frequency of the wave on the string, and the speed of the wave on the string.
+
+We need to calculate the linear density to find the wave speed:
+μ=msLs=0.070kg2.00m=0.035kg/m.
+
+The wave speed can be found using the linear mass density and the tension of the string:
+v=FTμ=90.00N0.035kg/m=50.71m/s.
+
+The angular frequency can be found from the frequency:
+ω=2πf=2π(60s−1)=376.80s−1.
+
+Calculate the time-averaged power:
+P=12μA2ω2v=12(0.035kgm)(0.040m)2(376.80s−1)2(50.71ms)=201.59W.
+Significance
+The time-averaged power of a sinusoidal wave is proportional to the square of the amplitude of the wave and the square of the angular frequency of the wave. This is true for most mechanical waves. If either the angular frequency or the amplitude of the wave were doubled, the power would increase by a factor of four. The time-averaged power of the wave on a string is also proportional to the speed of the sinusoidal wave on the string. If the speed were doubled, by increasing the tension by a factor of four, the power would also be doubled.
+
+Significance
+
+Is the time-averaged power of a sinusoidal wave on a string proportional to the linear density of the string?
+
+At first glance, the time-averaged power of a sinusoidal wave on a string may look proportional to the linear density of the string because P=12μA2ω2v; however, the speed of the wave depends on the linear density. Replacing the wave speed with FTμ shows that the power is proportional to the square root of tension and proportional to the square root of the linear mass density:
+P=12μA2ω2v=12μA2ω2FTμ=12A2ω2μFT.
+
+The equations for the energy of the wave and the time-averaged power were derived for a sinusoidal wave on a string. In general, the energy of a mechanical wave and the power are proportional to the amplitude squared and to the angular frequency squared (and therefore the frequency squared).
+
+Another important characteristic of waves is the intensity of the waves. Waves can also be concentrated or spread out. Waves from an earthquake, for example, spread out over a larger area as they move away from a source, so they do less damage the farther they get from the source. Changing the area the waves cover has important effects. All these pertinent factors are included in the definition of intensity (I) as power per unit area:
+
+where P is the power carried by the wave through area A. The definition of intensity is valid for any energy in transit, including that carried by waves. The SI unit for intensity is watts per square meter (W/m2). Many waves are spherical waves that move out from a source as a sphere. For example, a sound speaker mounted on a post above the ground may produce sound waves that move away from the source as a spherical wave. Sound waves are discussed in more detail in the next chapter, but in general, the farther you are from the speaker, the less intense the sound you hear. As a spherical wave moves out from a source, the surface area of the wave increases as the radius increases (A=4πr2). The intensity for a spherical wave is therefore
+
+If there are no dissipative forces, the energy will remain constant as the spherical wave moves away from the source, but the intensity will decrease as the surface area increases.
+
+In the case of the two-dimensional circular wave, the wave moves out, increasing the circumference of the wave as the radius of the circle increases. If you toss a pebble in a pond, the surface ripple moves out as a circular wave. As the ripple moves away from the source, the amplitude decreases. The energy of the wave spreads around a larger circumference and the intensity decreases proportional to 1r, which is also the same in the case of a spherical wave, since intensity is proportional to the amplitude squared.
+
+Summary
+
+The energy and power of a wave are proportional to the square of the amplitude of the wave and the square of the angular frequency of the wave.
+
+The time-averaged power of a sinusoidal wave on a string is found by Pave=12μA2ω2v, where μ is the linear mass density of the string, A is the amplitude of the wave, ω is the angular frequency of the wave, and v is the speed of the wave.
+
+Intensity is defined as the power divided by the area. In a spherical wave, the area is A=4πr2 and the intensity is I=P4πr2. As the wave moves out from a source, the energy is conserved, but the intensity decreases as the area increases.
+
+Conceptual Questions
+
+Consider a string with under tension with a constant linear mass density. A sinusoidal wave is produced by some external driving force. If the frequency, keeping the wave amplitude as it was originally, how is the time-averaged power of the wave affected? If the amplitude of the wave is decreased by half, keeping the wave frequency as it was originally, how is the time-averaged power affected? Explain your answer.
+
+The time averaged power is P=EλT=12μA2ω2λT=12μA2ω2v. If the frequency or amplitude is halved, the power decreases by a factor of 4.
+
+Circular water waves decrease in amplitude as they move away from where a rock is dropped. Explain why.
+
+In a transverse wave on a string, the motion of the string is perpendicular to the motion of the wave. If this is so, how is possible to move energy along the length of the string?
+
+As a portion on the string moves vertically, it exerts a force on the neighboring portion of the string, doing work on the portion and transferring the energy.
+
+The energy from the sun warms the portion of the earth facing the sun during the daylight hours. Why are the North and South Poles cold while the equator is quite warm?
+
+The intensity of a spherical waves decreases as the wave moves away from the source. If the intensity of the wave at the source is I0, how far from the source will the intensity decrease by a factor of nine?
+
+The intensity of a spherical wave is I=P4πr2, if no energy is dissipated the intensity will decrease by a factor of nine at three meters.
+
+Problems
+
+A string of length 5 m and a mass of 90 g is held under a tension of 100 N. A wave travels down the string that is modeled as y(x,t)=0.01msin(15.7m−1x−1170.12s−1t). What is the power over one wavelength?
+v=74.54m/s, Pλ=91.85W
+
+Ultrasound of intensity 1.50×102W/m2 is produced by the rectangular head of a medical imaging device measuring 3.00 cm by 5.00 cm. What is its power output?
+
+The low-frequency speaker of a stereo set has a surface area of A=0.05m2 and produces 1 W of acoustical power. (a) What is the intensity at the speaker? (b) If the speaker projects sound uniformly in all directions, at what distance from the speaker is the intensity 0.1W/m2?
+
+a. I=20.0W/m2; b. I=PA,A=10.0m2A=4πr2,r=0.892m
+
+To increase the intensity of a wave by a factor of 50, by what factor should the amplitude be increased?
+
+A device called an insolation meter is used to measure the intensity of sunlight. It has an area of 100cm2 and registers 6.50 W. What is the intensity in W/m2?
+I=650W/m2
+
+Energy from the Sun arrives at the top of Earth’s atmosphere with an intensity of 1400W/m2. How long does it take for 1.80×109J to arrive on an area of 1.00m2?
+
+Suppose you have a device that extracts energy from ocean breakers in direct proportion to their intensity. If the device produces 10.0 kW of power on a day when the breakers are 1.20 m high, how much will it produce when they are 0.600 m high?
+P∝E∝I∝X2⇒P2P1=(X2X1)2P2=2.50kW
+
+A photovoltaic array of (solar cells) is 10.0% efficient in gathering solar energy and converting it to electricity. If the average intensity of sunlight on one day is 70.00W/m2, what area should your array have to gather energy at the rate of 100 W? (b) What is the maximum cost of the array if it must pay for itself in two years of operation averaging 10.0 hours per day? Assume that it earns money at the rate of 9.00 cents per kilowatt-hour.
+
+A microphone receiving a pure sound tone feeds an oscilloscope, producing a wave on its screen. If the sound intensity is originally 2.00×10−5W/m2, but is turned up until the amplitude increases by 30.0%, what is the new intensity?
+I∝X2⇒I1I2=(X1X2)2⇒I2=3.38×10−5W/m2
+
+A string with a mass of 0.30 kg has a length of 4.00 m. If the tension in the string is 50.00 N, and a sinusoidal wave with an amplitude of 2.00 cm is induced on the string, what must the frequency be for an average power of 100.00 W?
+
+The power versus time for a point on a string (μ=0.05kg/m) in which a sinusoidal traveling wave is induced. The wave is modeled with the wave equation y(x,t)=Asin(20.93m−1x−ωt). What is the frequency and amplitude of the wave?
+f=100.00Hz,A=1.10cm
+
+A string is under tension FT1. Energy is transmitted by a wave on the string at rate P1 by a wave of frequency f1. What is the ratio of the new energy transmission rate P2 to P1 if the tension is doubled?
+
+A 250-Hz tuning fork is struck and the intensity at the source is I1 at a distance of one meter from the source. (a) What is the intensity at a distance of 4.00 m from the source? (b) How far from the tuning fork is the intensity a tenth of the intensity at the source?
+
+a. I2=0.063I1; b. I14πr12=I24πr22r2=3.16m
+
+A sound speaker is rated at a voltage of V=120.00V and a current of I=10.00A. Electrical power consumption is P=IV. To test the speaker, a signal of a sine wave is applied to the speaker. Assuming that the sound wave moves as a spherical wave and that all of the energy applied to the speaker is converted to sound energy, how far from the speaker is the intensity equal to 3.82W/m2?
+
+The energy of a ripple on a pond is proportional to the amplitude squared. If the amplitude of the ripple is 0.1 cm at a distance from the source of 6.00 meters, what was the amplitude at a distance of 2.00 meters from the source?
+2πr1A12=2πr2A22,A1=(r2r1)1/2A1=0.17m
+
+power per unit area

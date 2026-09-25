@@ -1,0 +1,268 @@
+# m42236
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Applications of Thermodynamics: Heat Pumps and Refrigerators
+
+Applications of Thermodynamics: Heat Pumps and Refrigerators
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe the use of heat engines in heat pumps and refrigerators.
+
+Demonstrate how a heat pump works to warm an interior space.
+
+Explain the differences between heat pumps and refrigerators.
+
+Calculate a heat pump’s coefficient of performance.
+
+Heat pumps, air conditioners, and refrigerators utilize heat transfer from cold to hot. They are heat engines run backward. We say backward, rather than reverse, because except for Carnot engines, all heat engines, though they can be run backward, cannot truly be reversed. Heat transfer occurs from a cold reservoir Qc and into a hot one. This requires work input W, which is also converted to heat transfer. Thus the heat transfer to the hot reservoir is Qh=Qc+W. (Note that Qh, Qc, and W are positive, with their directions indicated on schematics rather than by sign.) A heat pump’s mission is for heat transfer Qh to occur into a warm environment, such as a home in the winter. The mission of air conditioners and refrigerators is for heat transfer Qc to occur from a cool environment, such as chilling a room or keeping food at lower temperatures than the environment. (Actually, a heat pump can be used both to heat and cool a space. It is essentially an air conditioner and a heating unit all in one. In this section we will concentrate on its heating mode.)
+
+Heat Pumps
+
+The great advantage of using a heat pump to keep your home warm, rather than just burning fuel, is that a heat pump supplies Qh=Qc+W. Heat transfer is from the outside air, even at a temperature below freezing, to the indoor space. You only pay for W, and you get an additional heat transfer of Qc from the outside at no cost; in many cases, at least twice as much energy is transferred to the heated space as is used to run the heat pump. When you burn fuel to keep warm, you pay for all of it. The disadvantage is that the work input (required by the second law of thermodynamics) is sometimes more expensive than simply burning fuel, especially if the work is done by electrical energy.
+
+The basic components of a heat pump in its heating mode are shown in . A working fluid such as a non-CFC refrigerant is used. In the outdoor coils (the evaporator), heat transfer Qc occurs to the working fluid from the cold outdoor air, turning it into a gas.
+
+The electrically driven compressor (work input W) raises the temperature and pressure of the gas and forces it into the condenser coils that are inside the heated space. Because the temperature of the gas is higher than the temperature inside the room, heat transfer to the room occurs and the gas condenses to a liquid. The liquid then flows back through a pressure-reducing valve to the outdoor evaporator coils, being cooled through expansion. (In a cooling cycle, the evaporator and condenser coils exchange roles and the flow direction of the fluid is reversed.)
+
+The quality of a heat pump is judged by how much heat transfer Qh occurs into the warm space compared with how much work input W is required. In the spirit of taking the ratio of what you get to what you spend, we define a heat pump’s coefficient of performance (COPhp) to be
+
+Since the efficiency of a heat engine is Eff=W/Qh, we see that COPhp=1/Eff, an important and interesting fact. First, since the efficiency of any heat engine is less than 1, it means that COPhp is always greater than 1—that is, a heat pump always has more heat transfer Qh than work put into it. Second, it means that heat pumps work best when temperature differences are small. The efficiency of a perfect, or Carnot, engine is EffC=1−Tc/Th; thus, the smaller the temperature difference, the smaller the efficiency and the greater the COPhp (because COPhp=1/Eff). In other words, heat pumps do not work as well in very cold climates as they do in more moderate climates.
+
+Friction and other irreversible processes reduce heat engine efficiency, but they do not benefit the operation of a heat pump—instead, they reduce the work input by converting part of it to heat transfer back into the cold reservoir before it gets into the heat pump.
+
+The Best COP hp of a Heat Pump for Home Use
+
+A heat pump used to warm a home must employ a cycle that produces a working fluid at temperatures greater than typical indoor temperature so that heat transfer to the inside can take place. Similarly, it must produce a working fluid at temperatures that are colder than the outdoor temperature so that heat transfer occurs from outside. Its hot and cold reservoir temperatures therefore cannot be too close, placing a limit on its COPhp. (See .) What is the best coefficient of performance possible for such a heat pump, if it has a hot reservoir temperature of 45.0ºC and a cold reservoir temperature of −15.0ºC?
+Strategy
+
+Strategy
+
+A Carnot engine reversed will give the best possible performance as a heat pump. As noted above, COPhp=1/Eff, so that we need to first calculate the Carnot efficiency to solve this problem.
+Solution
+
+Solution
+
+Carnot efficiency in terms of absolute temperature is given by:
+
+The temperatures in kelvins are Th=318 K and Tc=258 K, so that
+
+Thus, from the discussion above,
+
+or
+
+so that
+Discussion
+
+Discussion
+
+This result means that the heat transfer by the heat pump is 5.30 times as much as the work put into it. It would cost 5.30 times as much for the same heat transfer by an electric room heater as it does for that produced by this heat pump. This is not a violation of conservation of energy. Cold ambient air provides 4.3 J per 1 J of work from the electrical outlet.
+
+Real heat pumps do not perform quite as well as the ideal one in the previous example; their values of COPhp range from about 2 to 4. This range means that the heat transfer Qh from the heat pumps is 2 to 4 times as great as the work W put into them. Their economical feasibility is still limited, however, since W is usually supplied by electrical energy that costs more per joule than heat transfer by burning fuels like natural gas. Furthermore, the initial cost of a heat pump is greater than that of many furnaces, so that a heat pump must last longer for its cost to be recovered. Heat pumps are most likely to be economically superior where winter temperatures are mild, electricity is relatively cheap, and other fuels are relatively expensive. Also, since they can cool as well as heat a space, they have advantages where cooling in summer months is also desired. Thus some of the best locations for heat pumps are in warm summer climates with cool winters. shows a heat pump, called a “reverse cycle” or “split-system cooler” in some countries.
+
+Air Conditioners and Refrigerators
+
+Air conditioners and refrigerators are designed to cool something down in a warm environment. As with heat pumps, work input is required for heat transfer from cold to hot, and this is expensive. The quality of air conditioners and refrigerators is judged by how much heat transfer Qc occurs from a cold environment compared with how much work input W is required. What is considered the benefit in a heat pump is considered waste heat in a refrigerator. We thus define the coefficient of performance (COPref) of an air conditioner or refrigerator to be
+
+Noting again that Qh=Qc+W, we can see that an air conditioner will have a lower coefficient of performance than a heat pump, because COPhp=Qh/W and Qh is greater than Qc. In this module’s Problems and Exercises, you will show that
+
+for a heat engine used as either an air conditioner or a heat pump operating between the same two temperatures. Real air conditioners and refrigerators typically do remarkably well, having values of COPref ranging from 2 to 6. These numbers are better than the COPhp values for the heat pumps mentioned above, because the temperature differences are smaller, but they are less than those for Carnot engines operating between the same two temperatures.
+
+A type of COP rating system called the “energy efficiency rating” (
+
+ EER
+
+ ) has been developed. This rating is an example where non-SI units are still used and relevant to consumers. To make it easier for the consumer, Australia, Canada, New Zealand, and the U.S. use an Energy Star Rating out of 5 stars—the more stars, the more energy efficient the appliance. 
+
+ EER
+ s
+
+ are expressed in mixed units of British thermal units (Btu) per hour of heating or cooling divided by the power input in watts. Room air conditioners are readily available with 
+
+ EER
+ s
+
+ ranging from 6 to 12. Although not the same as the COPs just described, these 
+
+ EER
+ s
+
+ are good for comparison purposes—the greater the 
+
+ EER
+
+ , the cheaper an air conditioner is to operate (but the higher its purchase price is likely to be).
+
+The 
+
+EER
+
+ of an air conditioner or refrigerator can be expressed as
+
+where
+
+Q
+
+c
+
+ is the amount of heat transfer from a cold environment in British thermal units,
+
+t
+
+1
+
+ is time in hours,
+
+W
+
+ is the work input in joules, and
+
+t
+
+2
+
+ is time in seconds.
+
+Problem-Solving Strategies for Thermodynamics
+Examine the situation to determine whether heat, work, or internal energy are involved. Look for any system where the primary methods of transferring energy are heat and work. Heat engines, heat pumps, refrigerators, and air conditioners are examples of such systems.
+Identify the system of interest and draw a labeled diagram of the system showing energy flow.
+Identify exactly what needs to be determined in the problem (identify the unknowns). A written list is useful. Maximum efficiency means a Carnot engine is involved. Efficiency is not the same as the coefficient of performance.
+Make a list of what is given or can be inferred from the problem as stated (identify the knowns). Be sure to distinguish heat transfer into a system from heat transfer out of the system, as well as work input from work output. In many situations, it is useful to determine the type of process, such as isothermal or adiabatic.
+Solve the appropriate equation for the quantity to be determined (the unknown).
+Substitute the known quantities along with their units into the appropriate equation and obtain numerical solutions complete with units.
+Check the answer to see if it is reasonable: Does it make sense? For example, efficiency is always less than 1, whereas coefficients of performance are greater than 1.
+
+Section Summary
+
+An artifact of the second law of thermodynamics is the ability to heat an interior space using a heat pump. Heat pumps compress cold ambient air and, in so doing, heat it to room temperature without violation of conservation principles.
+
+To calculate the heat pump’s coefficient of performance, use the equation COPhp=QhW.
+
+A refrigerator is a heat pump; it takes warm ambient air and expands it to chill it.
+
+Conceptual Questions
+
+Explain why heat pumps do not work as well in very cold climates as they do in milder ones. Is the same true of refrigerators?
+
+In some Northern European nations, homes are being built without heating systems of any type. They are very well insulated and are kept warm by the body heat of the residents. However, when the residents are not at home, it is still warm in these houses. What is a possible explanation?
+
+Why do refrigerators, air conditioners, and heat pumps operate most cost-effectively for cycles with a small difference between Th and Tc? (Note that the temperatures of the cycle employed are crucial to its COP.)
+
+Grocery store managers contend that there is less total energy consumption in the summer if the store is kept at a low temperature. Make arguments to support or refute this claim, taking into account that there are numerous refrigerators and freezers in the store.
+
+Can you cool a kitchen by leaving the refrigerator door open?
+
+Problem Exercises
+
+What is the coefficient of performance of an ideal heat pump that has heat transfer from a cold temperature of −25.0ºC to a hot temperature of 40.0ºC?
+
+4.82
+
+Suppose you have an ideal refrigerator that cools an environment at −20.0ºC and has heat transfer to another environment at 50.0ºC. What is its coefficient of performance?
+
+What is the best coefficient of performance possible for a hypothetical refrigerator that could make liquid nitrogen at −200ºC and has heat transfer to the environment at 35.0ºC?
+
+0.311
+
+In a very mild winter climate, a heat pump has heat transfer from an environment at 5.00ºC to one at 35.0ºC. What is the best possible coefficient of performance for these temperatures? Explicitly show how you follow the steps in the Problem-Solving Strategies for Thermodynamics.
+
+(a) What is the best coefficient of performance for a heat pump that has a hot reservoir temperature of 50.0ºC and a cold reservoir temperature of −20.0ºC? (b) How much heat transfer occurs into the warm environment if 3.60×107 J of work (10.0 kW⋅h) is put into it? (c) If the cost of this work input is 10.0 cents/kW⋅h, how does its cost compare with the direct heat transfer achieved by burning natural gas at a cost of 85.0 cents per therm. (A therm is a common unit of energy for natural gas and equals 1.055×108 J.)
+
+(a) 4.61
+
+(b) 
+
+1
+
+.
+
+66
+
+×
+
+10
+
+8
+
+J
+
+or 3
+
+.
+
+97
+
+×
+
+10
+
+4
+
+kcal
+
+(c) To transfer 
+
+1
+
+.
+
+66
+
+×
+
+10
+
+8
+
+J
+
+ , heat pump costs $1.00, natural gas costs $1.34.
+
+(a) What is the best coefficient of performance for a refrigerator that cools an environment at −30.0ºC and has heat transfer to another environment at 45.0ºC? (b) How much work in joules must be done for a heat transfer of 4186 kJ from the cold environment? (c) What is the cost of doing this if the work costs 10.0 cents per 3.60×106 J (a kilowatt-hour)? (d) How many kJ of heat transfer occurs into the warm environment? (e) Discuss what type of refrigerator might operate between these temperatures.
+
+Suppose you want to operate an ideal refrigerator with a cold temperature of −10.0ºC, and you would like it to have a coefficient of performance of 7.00. What is the hot reservoir temperature for such a refrigerator?
+27.6ºC
+
+An ideal heat pump is being considered for use in heating an environment with a temperature of 22.0ºC. What is the cold reservoir temperature if the pump is to have a coefficient of performance of 12.0?
+
+A 4-ton air conditioner removes 5.06×107 J (48,000 British thermal units) from a cold environment in 1.00 h. (a) What energy input in joules is necessary to do this if the air conditioner has an energy efficiency rating (
+
+ EER
+
+ ) of 12.0? (b) What is the cost of doing this if the work costs 10.0 cents per 3.60×106 J (one kilowatt-hour)? (c) Discuss whether this cost seems realistic. Note that the energy efficiency rating (
+
+ EER
+
+ ) of an air conditioner or refrigerator is defined to be the number of British thermal units of heat transfer from a cold environment per hour divided by the watts of power input.
+
+(a) 
+
+1
+
+.
+
+44
+
+×
+
+10
+
+7
+
+ J
+
+(b) 40 cents
+
+(c) This cost seems quite realistic; it says that running an air conditioner all day would cost $9.59 (if it ran continuously).
+
+Show that the coefficients of performance of refrigerators and heat pumps are related by COPref=COPhp−1.
+
+Start with the definitions of the COP s and the conservation of energy relationship between Qh, Qc, and W.
+
+a machine that generates heat transfer from cold to hot
+for a heat pump, it is the ratio of heat transfer at the output (the hot reservoir) to the work supplied; for a refrigerator or air conditioner, it is the ratio of heat transfer from the cold reservoir to the work supplied

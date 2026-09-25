@@ -1,0 +1,525 @@
+# m53586
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Derivatives of Exponential and Logarithmic Functions
+
+Derivatives of Exponential and Logarithmic Functions
+
+Find the derivative of exponential functions.
+
+Find the derivative of logarithmic functions.
+
+Use logarithmic differentiation to determine the derivative of a function.
+
+So far, we have learned how to differentiate a variety of functions, including trigonometric, inverse, and implicit functions. In this section, we explore derivatives of exponential and logarithmic functions. As we discussed in Introduction to Functions and Graphs, exponential functions play an important role in modeling population growth and the decay of radioactive materials. Logarithmic functions can help rescale large quantities and are particularly helpful for rewriting complicated expressions.
+
+Derivative of the Exponential Function
+
+Just as when we found the derivatives of other functions, we can find the derivatives of exponential and logarithmic functions using formulas. As we develop these formulas, we need to make certain basic assumptions. The proofs that these assumptions hold are beyond the scope of this course.
+
+First of all, we begin with the assumption that the function B(x)=bx,b>0, is defined for every real number and is continuous. In previous courses, the values of exponential functions for all rational numbers were defined—beginning with the definition of bn, where n is a positive integer—as the product of b multiplied by itself n times. Later, we defined b0=1,b−n=1bn, for a positive integer n, and bs/t=(bt)s for positive integers s and t. These definitions leave open the question of the value of br where r is an arbitrary real number. By assuming the continuity of B(x)=bx,b>0, we may interpret br as limx→rbx where the values of x as we take the limit are rational. For example, we may view 4π as the number satisfying
+
+As we see in the following table, 4π≈77.88.
+
+Approximating a Value of 4π
+3
+3.141593
+3.1
+3.1416
+3.14
+3.142
+3.141
+3.15
+3.1415
+3.2
+3.14159
+4
+256
+We also assume that for B(x)=bx,b>0, the value B′(0) of the derivative exists. In this section, we show that by making this one additional assumption, it is possible to prove that the function B(x) is differentiable everywhere.
+
+We make one final assumption: that there is a unique value of b>0 for which B′(0)=1. We define e to be this unique value, as we did in Introduction to Functions and Graphs. provides graphs of the functions y=2x,y=3x,y=2.7x, and y=2.8x. A visual estimate of the slopes of the tangent lines to these functions at 0 provides evidence that the value of e lies somewhere between 2.7 and 2.8. The function E(x)=ex is called the natural exponential function. Its inverse, L(x)=logex=lnx is called the natural logarithmic function.
+
+For a better estimate of e, we may construct a table of estimates of B′(0) for functions of the form B(x)=bx. Before doing this, recall that
+
+for values of x very close to zero. For our estimates, we choose x=0.00001 and x=−0.00001 to obtain the estimate
+
+See the following table.
+
+Estimating a Value of e
+1.098606<B′(0)<1.098618
+The evidence from the table suggests that 2.7182<e<2.7183.
+
+The graph of E(x)=ex together with the line y=x+1 are shown in . This line is tangent to the graph of E(x)=ex at x=0.
+
+Now that we have laid out our basic assumptions, we begin our investigation by exploring the derivative of B(x)=bx,b>0. Recall that we have assumed that B′(0) exists. By applying the limit definition to the derivative we conclude that
+
+Turning to B′(x), we obtain the following.
+
+We see that on the basis of the assumption that B(x)=bx is differentiable at 0,B(x) is not only differentiable everywhere, but its derivative is
+
+For E(x)=ex,E′(0)=1. Thus, we have E′(x)=ex. (The value of B′(0) for an arbitrary function of the form B(x)=bx,b>0, will be derived later.)
+
+Derivative of the Natural Exponential Function
+
+Let E(x)=ex be the natural exponential function. Then
+
+In general,
+
+Derivative of an Exponential Function
+
+Find the derivative of f(x)=etan(2x).
+
+Using the derivative formula and the chain rule,
+
+Combining Differentiation Rules
+
+Find the derivative of y=ex2x.
+
+Use the derivative of the natural exponential function, the quotient rule, and the chain rule.
+
+Find the derivative of h(x)=xe2x.
+h′(x)=e2x+2xe2x
+
+Hint
+
+Don’t forget to use the product rule.
+
+Applying the Natural Exponential Function
+
+A colony of mosquitoes has an initial population of 1000. After t days, the population is given by A(t)=1000e0.3t. Show that the ratio of the rate of change of the population, A′(t), to the population, A(t) is constant.
+
+First find A′(t). By using the chain rule, we have A′(t)=300e0.3t. Thus, the ratio of the rate of change of the population to the population is given by
+
+The ratio of the rate of change of the population to the population is the constant 0.3.
+
+If A(t)=1000e0.3t describes the mosquito population after t days, as in the preceding example, what is the rate of change of A(t) after 4 days?
+
+996
+
+Hint
+
+Find A′(4).
+
+Derivative of the Logarithmic Function
+
+Now that we have the derivative of the natural exponential function, we can use implicit differentiation to find the derivative of its inverse, the natural logarithmic function.
+
+The Derivative of the Natural Logarithmic Function
+
+If x>0 and y=lnx, then
+
+More generally, let g(x) be a differentiable function. For all values of x for which g′(x)>0, the derivative of h(x)=ln(g(x)) is given by
+
+Proof
+
+If x>0 and y=lnx, then ey=x. Differentiating both sides of this equation results in the equation
+
+Solving for dydx yields
+
+Finally, we substitute x=ey to obtain
+
+We may also derive this result by applying the inverse function theorem, as follows. Since y=g(x)=lnx is the inverse of f(x)=ex, by applying the inverse function theorem we have
+
+Using this result and applying the chain rule to h(x)=ln(g(x)) yields
+
+□
+
+The graph of y=lnx and its derivative dydx=1x are shown in .
+
+Taking a Derivative of a Natural Logarithm
+
+Find the derivative of f(x)=ln(x3+3x−4).
+
+Use directly.
+
+Using Properties of Logarithms in a Derivative
+
+Find the derivative of f(x)=ln(x2sinx2x+1).
+
+At first glance, taking this derivative appears rather complicated. However, by using the properties of logarithms prior to finding the derivative, we can make the problem much simpler.
+
+Differentiate: f(x)=ln(3x+2)5.
+f′(x)=153x+2
+
+Hint
+
+Use a property of logarithms to simplify before taking the derivative.
+
+Now that we can differentiate the natural logarithmic function, we can use this result to find the derivatives of y=logbx and y=bx for b>0,b≠1.
+
+Derivatives of General Exponential and Logarithmic Functions
+
+Let b>0,b≠1, and let g(x) be a differentiable function.
+
+If, y=logbx, then
+dydx=1xlnb.
+More generally, if h(x)=logb(g(x)), then for all values of x for which g(x)>0,
+h′(x)=g′(x)g(x)lnb.
+
+If y=bx, then
+dydx=bxlnb.
+More generally, if h(x)=bg(x), then
+h′(x)=bg(x)g′(x)lnb.
+
+Proof
+
+If y=logbx, then by=x. It follows that ln(by)=lnx. Thus ylnb=lnx. Solving for y, we have y=lnxlnb. Differentiating and keeping in mind that lnb is a constant, we see that
+
+The derivative in now follows from the chain rule.
+
+If y=bx, then lny=xlnb. Using implicit differentiation, again keeping in mind that lnb is constant, it follows that 1ydydx=lnb. Solving for dydx and substituting y=bx, we see that
+
+The more general derivative () follows from the chain rule.
+
+□
+
+Applying Derivative Formulas
+
+Find the derivative of h(x)=3x3x+2.
+
+Use the quotient rule and .
+
+Finding the Slope of a Tangent Line
+
+Find the slope of the line tangent to the graph of y=log2(3x+1) at x=1.
+
+To find the slope, we must evaluate dydx at x=1. Using , we see that
+
+By evaluating the derivative at x=1, we see that the tangent line has slope
+
+Find the slope for the line tangent to y=3x at x=2.
+9ln(3)
+
+Hint
+
+Evaluate the derivative at x=2.
+
+Logarithmic Differentiation
+
+At this point, we can take derivatives of functions of the form y=(g(x))n for certain values of n, as well as functions of the form y=bg(x), where b>0 and b≠1. Unfortunately, we still do not know the derivatives of functions such as y=xx or y=xπ. These functions require a technique called logarithmic differentiation, which allows us to differentiate any function of the form h(x)=g(x)f(x). It can also be used to convert a very complex differentiation problem into a simpler one, such as finding the derivative of y=x2x+1exsin3x. We outline this technique in the following problem-solving strategy.
+
+Problem-Solving Strategy: Using Logarithmic Differentiation
+
+To differentiate y=h(x) using logarithmic differentiation, take the natural logarithm of both sides of the equation to obtain lny=ln(h(x)).
+
+Use properties of logarithms to expand ln(h(x)) as much as possible.
+
+Differentiate both sides of the equation. On the left we will have 1ydydx.
+
+Multiply both sides of the equation by y to solve for dydx.
+
+Replace y by h(x).
+
+Using Logarithmic Differentiation
+
+Find the derivative of y=(2x4+1)tanx.
+
+Use logarithmic differentiation to find this derivative.
+
+Using Logarithmic Differentiation
+
+Find the derivative of y=x2x+1exsin3x.
+
+This problem really makes use of the properties of logarithms and the differentiation rules given in this chapter.
+
+Extending the Power Rule
+
+Find the derivative of y=xr where r is an arbitrary real number.
+
+The process is the same as in , though with fewer complications.
+
+Use logarithmic differentiation to find the derivative of y=xx.
+dydx=xx(1+lnx)
+
+Hint
+
+Follow the problem solving strategy.
+
+Find the derivative of y=(tanx)π.
+y′=π(tanx)π−1sec2x
+
+Hint
+
+Use the result from .
+
+Key Concepts
+
+On the basis of the assumption that the exponential function y=bx,b>0 is continuous everywhere and differentiable at 0, this function is differentiable everywhere and there is a formula for its derivative.
+
+We can use a formula to find the derivative of y=lnx, and the relationship logbx=lnxlnb allows us to extend our differentiation formulas to include logarithms with arbitrary bases.
+
+Logarithmic differentiation allows us to differentiate functions of the form y=g(x)f(x) or very complex functions by taking the natural logarithm of both sides and exploiting the properties of logarithms before differentiating.
+
+Key Equations
+ddx(logbg(x))=g′(x)g(x)lnb
+For the following exercises, find f′(x) for each function.
+f(x)=x2ex
+2xex+x2ex
+f(x)=e−xx
+f(x)=ex3lnx
+ex3lnx(3x2lnx+x2)
+f(x)=e2x+2x
+f(x)=ex−e−xex+e−x
+4(ex+e−x)2
+f(x)=10xln10
+f(x)=24x+4x2
+24x+2·ln2+8x
+f(x)=3sin3x
+f(x)=xπ·πx
+πxπ−1·πx+xπ·πxlnπ
+f(x)=ln(4x3+x)
+f(x)=ln5x−7
+52(5x−7)
+f(x)=x2ln9x
+f(x)=log(secx)
+tanxln10
+f(x)=log7(6x4+3)5
+f(x)=2x·log37x2−4
+2x·ln2·log37x2−4+2x·2xln7ln3
+
+For the following exercises, use logarithmic differentiation to find dydx.
+y=xx
+y=(sin2x)4x
+(sin2x)4x[4·ln(sin2x)+8x·cot2x]
+y=(lnx)lnx
+y=xlog2x
+xlog2x·2lnxxln2
+y=(x2−1)lnx
+y=xcotx
+xcotx·[−csc2x·lnx+cotxx]
+y=x+11x2−43
+y=x−1/2(x2+3)2/3(3x−4)4
+x−1/2(x2+3)2/3(3x−4)4·[−12x+4x3(x2+3)+123x−4]
+[T] Find an equation of the tangent line to the graph of f(x)=4xe(x2−1) at the point where
+x=−1. Graph both the function and the tangent line.
+[T] Find the equation of the line that is normal to the graph of f(x)=x·5x at the point where x=1. Graph both the function and the normal line.
+y=−15+5ln5x+(5+15+5ln5)
+[T] Find the equation of the tangent line to the graph of x3−xlny+y3=2x+5 at the point (2, 1). (Hint: Use implicit differentiation to find dydx.) Graph both the curve and the tangent line.
+
+Consider the function y=x1/x for x>0.
+
+Determine the points on the graph where the tangent line is horizontal.
+
+Determine the points on the graph where y′>0 and those where y′<0.
+
+a. x=e~2.718 b. y' > 0 on (0, e); y' < 0 on (e, ∞)
+
+The formula I(t)=sintet is the formula for a decaying alternating current.
+
+Complete the following table with the appropriate values.
+
+t
+sintet
+
+0
+(i)
+
+π2
+(ii)
+
+π
+(iii)
+
+3π2
+(iv)
+
+2π
+(v)
+
+5π2
+(vi)
+
+3π
+(vii)
+
+7π2
+(viii)
+
+4π
+(ix)
+sintet
+0
+π2
+π
+3π2
+2π
+5π2
+3π
+7π2
+4π
+(ix)
+Using only the values in the table, determine where the tangent line to the graph of I(t) is horizontal.
+[T] The population of Toledo, Ohio, in 2000 was approximately 500,000. Assume the population is increasing at a rate of 5% per year.
+
+Write the exponential function that relates the total population as a function of t.
+
+Use a. to determine the rate at which the population is increasing in t years.
+
+Use b. to determine the rate at which the population is increasing in 10 years.
+
+a. P=500,000(1.05)t individuals b. P′(t)=24395·(1.05)t individuals per year c. 39,737 individuals per year
+[T] An isotope of the element erbium has a half-life of approximately 12 hours. Initially there are 9 grams of the isotope present.
+
+Write the exponential function that relates the amount of substance remaining as a function of t, measured in hours.
+
+Use a. to determine the rate at which the substance is decaying in t hours.
+
+Use b. to determine the rate of decay at t=4 hours.
+[T] The number of cases of influenza in New York City from the beginning of 1960 to the beginning of 1964 is modeled by the function
+N(t)=5.3e0.093t2−0.87t,(0≤t≤4),
+where N(t) gives the number of cases (in thousands) and t is measured in years, with t=0 corresponding to the beginning of 1960.
+
+Show work that evaluates N(0) and N(4). Briefly describe what these values indicate about the disease in New York City.
+
+Show work that evaluates N′(0) and N′(3). Briefly describe what these values indicate about the disease in New York City.
+
+a. At the beginning of 1960 there were 5.3 thousand cases of the disease in New York City. At the beginning of 1964 there were approximately 723 cases of the disease in the United States. b. At the beginning of 1960 the number of cases of the disease was decreasing at rate of −4.611 thousand per year; at the beginning of 1963, the number of cases of the disease was decreasing at a rate of −0.2808 thousand per year.
+[T] The relative rate of change of a differentiable function y=f(x) is given by 100·f′(x)f(x)%. One model for population growth is a Gompertz growth function, given by P(x)=ae−b·e−cx where a,b, and c are constants.
+
+Find the relative rate of change formula for the generic Gompertz function.
+
+Use a. to find the relative rate of change of a population in x=20 months when a=204,b=0.0198, and c=0.15.
+
+Briefly interpret what the result of b. means.
+
+For the following exercises, use the population of New York City from 1790 to 1860, given in the following table.
+
+New York City Population Over Time
+
+Years since 1790
+Population
+0
+33,131
+10
+60,515
+20
+96,373
+30
+123,706
+40
+202,300
+50
+312,710
+60
+515,547
+70
+[T] Using a computer program or a calculator, fit a growth curve to the data of the form p=abt.
+p=35741(1.045)t
+[T] Using the exponential best fit for the data, write a table containing the derivatives evaluated at each year.
+[T] Using the exponential best fit for the data, write a table containing the second derivatives evaluated at each year.
+
+P″
+0
+69.25
+10
+107.5
+20
+167.0
+30
+259.4
+40
+402.8
+50
+625.5
+60
+971.4
+70
+[T] Using the tables of first and second derivatives and the best fit, answer the following questions:
+
+Will the model be accurate in predicting the future population of New York City? Why or why not?
+
+Estimate the population in 2010. Was the prediction correct from a.?
+
+Chapter Review Exercises
+True or False? Justify the answer with a proof or a counterexample.
+
+Every function has a derivative.
+
+False.
+
+A continuous function has a continuous derivative.
+
+A continuous function has a derivative.
+
+False
+
+If a function is differentiable, it is continuous.
+
+Use the limit definition of the derivative to exactly evaluate the derivative.
+f(x)=x+4
+12x+4
+f(x)=3x
+
+Find the derivatives of the following functions.
+f(x)=3x3−4x2
+9x2+8x3
+f(x)=(4−x2)3
+f(x)=esinx
+esinxcosx
+f(x)=ln(x+2)
+f(x)=x2cosx+xtan(x)
+xsec2(x)+2xcos(x)+tan(x)−x2sin(x)
+f(x)=3x2+2
+f(x)=x4sin−1(x)
+14(x1−x2+sin−1(x))
+x2y=(y+2)+xysin(x)
+
+Find the following derivatives of various orders.
+
+First derivative of y=xln(x)cosx
+cosx·(lnx+1)−xln(x)sinx
+
+Third derivative of y=(3x+2)2
+
+Second derivative of y=4x+x2sin(x)
+4x(ln4)2+2sinx+4xcosx−x2sinx
+
+Find the equation of the tangent line to the following equations at the specified point.
+y=cos−1(x)+x at x=0
+y=x+ex−1x at x=1
+T=(2+e)x−2
+
+Draw the derivative for the following graphs.
+
+The following questions concern the water level in Ocean City, New Jersey, in January, which can be approximated by w(t)=1.9+2.9cos(π6t), where t is measured in hours after midnight, and the height is measured in feet.
+
+Find and graph the derivative. What is the physical meaning?
+
+Find w′(3). What is the physical meaning of this value?
+w′(3)=−2.9π6. At 3 a.m. the tide is decreasing at a rate of 1.518 ft/hr.
+
+The following questions consider the wind speeds of Hurricane Katrina, which affected New Orleans, Louisiana, in August 2005. The data are displayed in a table.
+
+Wind Speeds of Hurricane Katrina
+
+Hours after Midnight, August 26
+Wind Speed (mph)
+1
+45
+5
+75
+11
+100
+29
+115
+49
+145
+58
+175
+73
+155
+81
+125
+85
+95
+107
+35
+Using the table, estimate the derivative of the wind speed at hour 39. What is the physical meaning?
+
+Estimate the derivative of the wind speed at hour 83. What is the physical meaning?
+−7.5. The wind speed is decreasing at a rate of 7.5 mph/hr
+
+is a technique that allows us to differentiate a function by first taking the natural logarithm of both sides of an equation, applying properties of logarithms to simplify the equation, and differentiating implicitly

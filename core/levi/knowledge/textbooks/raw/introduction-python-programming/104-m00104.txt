@@ -1,0 +1,74 @@
+# m00104
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Files in different locations and working with CSV files
+
+Files in different locations and working with CSV files
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Demonstrate how to access files within a file system.
+
+Demonstrate how to process a CSV file.
+
+Opening a file at any location
+
+When only the filename is used as the argument to the open() function, the file must be in the same folder as the Python file that is executing. Ex: For fileobj = open("file1.txt") in files.py to execute successfully, the file1.txt file should be in the same folder as files.py.
+
+Often a programmer needs to open files from folders other than the one in which the Python file exists. A path uniquely identifies a folder location on a computer. The path can be used along with the filename to open a file in any folder location. Ex: To open a file named logfile.log located in /users/turtle/desktop the following can be used:
+fileobj = open("/users/turtle/desktop/logfile.log")
+
+Opening files on different paths.
+
+Operating System
+open() function example
+
+/users/student/
+fileobj = open("/users/student/output.txt")
+
+/usr/code/
+fileobj = open("/usr/code/output.txt")
+
+c:\projects\code\
+fileobj = open("c:/projects/code/output.txt")orfileobj = open("c:\\projects\\code\\output.txt")
+
+Opening files at different locations
+
+For each question, assume that the Python file executing the open() function is not in the same folder as the out.txt file.
+
+Each question indicates the location of out.txt, the type of computer, and the desired mode for opening the file. Choose which option is best for opening out.txt.
+
+Working with CSV files
+
+In Python, files are read from and written to as Unicode by default. Many common file formats use Unicode such as text files (.txt), Python code files (.py), and other code files (.c,.java).
+
+Comma separated value (CSV, .csv) files are often used for storing tabular data. These files store cells of information as Unicode separated by commas. CSV files can be read using methods learned thus far, as seen in the example below.
+
+Raw text of the file:
+Title, Author, Pages\n1984, George Orwell, 268\nJane Eyre, Charlotte Bronte, 532\nWalden, Henry David Thoreau, 156\nMoby Dick, Herman Melville, 538
+
+Processing a CSV file
+
+The code's output is:
+
+File types and CSV files
+
+Exploring further
+
+Files such as Word documents (.docx) and PDF documents (.pdf), image formats such as Portable Network Graphics (PNG, .png) and Joint Photographic Experts Group (JPEG, .jpeg or .jpg) as well as many other file types are encoded differently.
+
+Some types of non-Unicode files can be read using specialized libraries that support the reading and writing of different file types.
+PyPDF is a popular library that can be used to extract information from PDF files.
+BeautifulSoup can be used to extract information from XML and HTML files. XML and HTML files usually contain unicode with structure provided through the use of angled <> bracket tags.
+python-docx can be used to read and write DOCX files.
+
+Additionally, csv is a built-in library that can be used to extract information from CSV files.
+
+Processing a CSV file
+
+The file fe.csv contains scores for a group of students on a final exam. Write a program to display the average score.

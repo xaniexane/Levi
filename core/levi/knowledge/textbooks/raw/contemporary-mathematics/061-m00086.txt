@@ -1,0 +1,125 @@
+# m00086
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Permutations
+
+Permutations
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Use the Multiplication Rule for Counting to determine the number of permutations.
+
+Compute expressions containing factorials.
+
+Compute permutations.
+
+Apply permutations to solve problems.
+
+Swimming events are some of the most popular events at the summer Olympic Games. In the finals of each event, 8 swimmers compete at the same time, making for some exciting finishes. How many different orders of finish are possible in these events? In this section, we’ll extend the Multiplication Rule for Counting to help answer questions like this one, which relate to permutations. A permutation is an ordered list of objects taken from a given population. The length of the list is given, and the list cannot contain any repeated items.
+
+Applying the Multiplication Rule for Counting to Permutations
+
+In the case of the swimming finals, one possible permutation of length 3 would be the list of medal winners (first, second, and third place finishers). A permutation of length 8 would be the full order of finish (first place through eighth place). Let’s use the Multiplication Rule for Counting to figure out how many of each of these permutations there are.
+
+Using the Multiplication Rule for Counting to Find the Number of Permutations
+
+The final heat of Olympic swimming events features 8 swimmers (or teams of swimmers).
+
+How many different podium placements (first place, second place, and third place) are possible?
+
+How many different complete orders of finish (first place through eighth place) are possible?
+
+Let’s start with the first place finisher. How many options are there? Since 8 swimmers are competing, there are 8 possibilities. Once that first swimmer completes the race, there are 7 swimmers left competing for second place. After the second finisher is decided, there are 6 swimmers remaining who could possibly finish in third place. Thus, there are 8 possibilities for first place, 7 for second place, and 6 for third place. The Multiplication Rule for Counting then tells us there are 8×7×6=336 different ways the winners’ podium can be filled out.
+
+To look at the complete order of finish, we can continue the pattern we can see in part 1 of this example: There are 5 possibilities for fourth place, 4 for fifth place, 3 for sixth place, 2 for seventh place, and then just 1 swimmer is left to finish in eighth place. Using the Multiplication Rule for Counting, we see that there are 8×7×6×5×4×3×2×1=40,320 possible orders of finish.
+
+Factorials
+
+The pattern we see in occurs commonly enough that we have a name for it: factorial. For any positive whole number n, we define the factorial of n (denoted n! and read "n factorial") to be the product of every whole number less than or equal to n. We also define 0! to be equal to one. We will use factorials in a couple of different contexts, so let's get some practice doing computations with them.
+
+Computing Factorials
+
+Compute the following:
+4!
+8!6!
+9!3!4!
+4!=4×3×2×1=24
+
+There are two ways to approach this calculation. The first way is to compute the factorials first, then divide:
+8!6!=8×7×6×5×4×3×2×16×5×4×3×2×1=40,320720=56
+ However, there is an easier way! You may notice in the second step that there are several terms that can be canceled; that’s always the case whenever we divide factorials. In this case, notice that we can rewrite the numerator like this:
+ 8!=8×7×(6×5×4×3×2×1)=8×7×6!
+ With that in mind, we can proceed this way by canceling out the 6!:
+ 8!6!=8×7×6!6!=8×7=56 That’s much easier!
+
+However, there is an easier way! You may notice in the second step that there are several terms that can be canceled; that’s always the case whenever we divide factorials. In this case, notice that we can rewrite the numerator like this:
+8!=8×7×(6×5×4×3×2×1)=8×7×6!
+
+With that in mind, we can proceed this way by canceling out the 6!:
+8!6!=8×7×6!6!=8×7=56 That’s much easier!
+
+Let’s approach this one using our canceling technique. When we see two factorials in either the numerator or denominator, we should focus on the larger one first. So: 
+ 9!3!4!=9×8×7×6×5×4!3!4!=9×8×7×6×53×2×1=9×8×7×5=2,520
+9!3!4!=9×8×7×6×5×4!3!4!=9×8×7×6×53×2×1=9×8×7×5=2,520
+
+Permutations
+
+As we’ve seen, factorials can pop up when we’re computing permutations. In fact, there is a formula that we can use to make that connection explicit. Let’s define some notation first. If we have a collection of n objects and we wish to create an ordered list of r of the objects (where 1≤r≤n), we’ll call the number of those permutations nPr (read “the number of permutations of n objects taken r at a time”). We formalize the formula we'll use to compute permutations below.
+nPr=n!(n−r)!
+
+If you wondered why we defined 0!=1 earlier, it was to make formulas like this one work; if we have n objects and want to order all of them (so, we want the number of permutations of n objects taken n at a time), we get nPn=n!(n−n)!=n!0!=n!1=n!. Next, we’ll get some practice computing these permutations.
+
+Computing Permutations
+
+Find the following numbers:
+
+The number of permutations of 12 objects taken 3 at a time
+
+The number of permutations of 8 objects taken 5 at a time
+
+The number of permutations of 32 objects taken 2 at a time
+12P3=12!(12−3)!=12!9!=12×11×10×9!9!=12×11×10=1,320
+8P5=8!(8−5)!=8×7×6×5×4×3!3!=8×7×6×5×4=6,720
+32P2=32!(32−2)!=32×31×30!30!=32×31=992
+
+Applying Permutations
+
+A high school graduating class has 312 students. The top student is declared valedictorian, and the second-best is named salutatorian. How many possible outcomes are there for the valedictorian and salutatorian?
+
+In the card game blackjack, the dealer’s hand of 2 cards is dealt with 1 card faceup and 1 card facedown. If the game is being played with a single deck of (52) cards, how many possible hands could the dealer get?
+
+The University Combinatorics Club has 3 officers: president, vice president, and treasurer. If there are 18 members of the club, how many ways are there to fill the officer positions?
+
+This is the number of permutations of 312 students taken 2 at a time, and 312P2=97,032.
+
+We want the number of permutations of 52 cards taken 2 at a time, and 52P2=2,652.
+
+Here we’re looking for the number of permutations of 18 members taken 3 at a time, and 18P3=4,896.
+
+Very Big Permutations
+
+Permutations involving relatively small sets of objects can get very big, very quickly. A standard deck contains 52 cards. So, the number of different ways to shuffle the cards—in other words, the number of permutations of 52 objects taken 52 at a time—is 52!≈8×1067 (written out, that’s an 8 followed by 67 zeroes). The estimated age of the universe is only about 4×1017 seconds. So, if a very bored all-powerful being started shuffling cards at the instant the universe began, it would have to have averaged at least 8×10674×1017≈2×1050 shuffles per second since the beginning of time to have covered every possible arrangement of a deck of cards. That means the next time you pick up a deck of cards and give it a good shuffle, it’s almost certain that the particular arrangement you created has never been created before and likely never will be created again.
+
+Check Your Understanding
+
+Key Terms
+
+permutation
+
+factorial
+
+Key Concepts
+
+Using the Multiplication Rule for Counting to enumerate permutations.
+
+Simplifying and computing expressions involving factorials.
+
+Using factorials to count permutations.
+
+Formulas
+Pnr=n!(n−r)!

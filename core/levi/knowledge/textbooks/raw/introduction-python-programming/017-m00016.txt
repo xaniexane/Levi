@@ -1,0 +1,177 @@
+# m00016
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+The math module
+
+The math module
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Distinguish between built-in functions and math functions.
+
+Use functions and constants defined in the math module.
+
+Importing modules
+
+Python comes with an extensive standard library of modules. A module is previously written code that can be imported in a program. The import statement defines a variable for accessing code in a module. Import statements often appear at the beginning of a program.
+
+The standard library also defines built-in functions such as print(), input(), and float(). A built-in function is always available and does not need to be imported. The complete list of built-in functions is available in Python's official documentation.
+
+A commonly used module in the standard library is the math module. This module defines functions such as sqrt() (square root). To call sqrt(), a program must import math and use the resulting math variable followed by a dot. Ex: math.sqrt(25) evaluates to 5.0.
+
+The following program imports and uses the math module, and uses built-in functions for input and output.
+
+Calculating the distance between two points
+
+Importing math in a Python shell
+
+Built-in functions and math module
+
+Mathematical functions
+
+Commonly used math functions and constants are shown below. The complete math module listing is available in Python's official documentation.
+
+Example constants in the math module.
+
+Constant
+Value
+math.e
+e=2.71828…
+math.pi
+π=3.14159…
+math.tau
+τ=6.28318…
+The ratio of the circumference to the radius of a circle.
+ Tau is equal to 2π.
+Example functions in the math module.
+
+Function
+Description
+math.ceil(x)
+The ceiling of x: the smallest integer greater than or equal to x.
+The ceiling of x: the smallest integer greater than or equal to x.
+math.ceil(7.4) → 8
+ math.ceil(-7.4) → -7
+math.floor(x)
+The floor of x: the largest integer less than or equal to x.
+The floor of x: the largest integer less than or equal to x.
+math.floor(7.4) → 7
+ math.floor(-7.4) → -8
+math.log(x)
+The natural logarithm of x (to base e).
+The natural logarithm of x (to base e).
+math.log(math.e) → 1.0
+ math.log(0) → ValueError: math domain error
+math.log(x, base)
+The logarithm of x to the given base.
+The logarithm of x to the given base.
+math.log(8, 2) → 3.0
+ math.log(10000, 10) → 4.0
+math.pow(x, y)
+x raised to the power y. Unlike the ** operator, math.pow() converts x and y to type float.
+math.pow(3, 0) → 1.0
+ math.pow(3, 3) → 27.0
+math.sqrt(x)
+The square root of x.
+The square root of x.
+math.sqrt(9) → 3.0
+ math.sqrt(-9) → ValueError: math domain error
+math.cos(x)
+The cosine of x radians.
+The cosine of x radians.
+math.cos(0) → 1.0
+ math.cos(math.pi) → -1.0
+math.sin(x)
+The sine of x radians.
+The sine of x radians.
+math.sin(0) → 0.0
+ math.sin(math.pi/2) → 1.0
+math.tan(x)
+The tangent of x radians.
+The tangent of x radians.
+math.tan(0) → 0.0
+ math.tan(math.pi/4) → 0.999
+ (Round-off error; the result should be 1.0.)
+
+Using math functions and constants
+
+Quadratic formula
+
+In algebra, a quadratic equation is written as ax2+bx+c=0.
+ The coefficients a, b, and c are known values.
+ The variable x represents an unknown value.
+ Ex: 2x2+3x−5=0 has the coefficients a=2, b=3, and c=−5.
+ The quadratic formula provides a quick and easy way to solve a quadratic equation for x:
+
+x=
+
+−b±
+
+b
+2
+
+−4ac
+
+2a
+
+ The plus-minus symbol indicates the equation has two solutions.
+ However, Python does not have a plus-minus operator.
+ To use this formula in Python, the formula must be separated: 
+
+x
+1
+
+=
+
+−b+
+
+b
+2
+
+−4ac
+
+2a
+
+x
+2
+
+=
+
+−b−
+
+b
+2
+
+−4ac
+
+2a
+
+ Write the code for the quadratic formula in the program below.
+ Test your program using the following values for a, b, and c:
+
+Provided input
+math domain error
+Cylinder formulas
+
+In geometry, the surface area and volume of a right circular cylinder can be computed as follows:
+
+A=2πrh+2π
+r
+2
+
+V=π
+r
+2
+
+h
+
+ Write the code for these two formulas in the program below. Hint: Your solution should use both math.pi and math.tau. Test your program using the following values for r and h:
+
+Provided input
+211.33
+If you get an error, try to look up what that error means.

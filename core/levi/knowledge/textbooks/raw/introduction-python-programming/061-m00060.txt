@@ -1,0 +1,63 @@
+# m00060
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+String slicing
+
+String slicing
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use string indexing to access characters in the string.
+
+Use string slicing to get a substring from a string.
+
+Identify immutability characteristics of strings.
+
+String indexing
+
+A string is a type of sequence. A string is made up of a sequence of characters indexed from left to right, starting at 0. For a string variable s, the left-most character is indexed 0 and the right-most character is indexed len(s) - 1. Ex: The length of the string "Cloud" is 5, so the last index is 4.
+
+Negative indexing can also be used to refer to characters from right to left starting at -1. For a string variable s, the left-most character is indexed -len(s) and the right-most character is indexed -1. Ex: The length of the string "flower" is 6, so the index of the first character with negative indexing is -6.
+
+String indexing
+
+Accessing characters in a string using indexing
+
+String slicing
+String slicing is used when a programmer must get access to a sequence of characters. Here, a string slicing operator can be used. When [a:b] is used with the name of a string variable, a sequence of characters starting from index a (inclusive) up to index b (exclusive) is returned. Both a and b are optional. If a or b are not provided, the default values are 0 and len(string), respectively.
+
+Getting the minutes
+
+Consider a time value is given as "hh:mm" with "hh" representing the hour and "mm" representing the minutes. To retrieve only the string's minutes portion, the following code can be used:
+
+The above code's output is:
+
+Getting the hour
+
+Consider a time value is given as "hh:mm" with "hh" representing the hour and "mm" representing the minutes. To retrieve only the string's hour portion, the following code can be used:
+
+The above code's output is:
+
+Getting a substring using string slicing
+
+String immutability
+
+String objects are immutable meaning that string objects cannot be modified or changed once created. Once a string object is created, the string's contents cannot be altered by directly modifying individual characters or elements within the string. Instead, to make changes to a string, a new string object with the desired changes is created, leaving the original string unchanged.
+
+Strings are immutable
+
+Modifying string content
+
+Changing the greeting message
+
+Given the string "Hello my fellow
+ classmates" containing a greeting message, print the first word by getting the beginning of the string up to (and including) the 5th character. Change the first word in the string to "Hi" instead of "hello" and print the greeting message again.
+
+Editing the string at specified locations
+
+Given a string variable, string_variable, and a list of indexes, remove characters at the specified indexes and print the resulting string.

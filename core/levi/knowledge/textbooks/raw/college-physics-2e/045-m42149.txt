@@ -1,0 +1,189 @@
+# m42149
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Conservative Forces and Potential Energy
+
+Conservative Forces and Potential Energy
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define conservative force, potential energy, and mechanical energy.
+
+Explain the potential energy of a spring in terms of its compression when Hooke’s law applies.
+
+Use the work-energy theorem to show how having only conservative forces implies conservation of mechanical energy.
+
+Potential Energy and Conservative Forces
+
+Work is done by a force, and some forces, such as weight, have special characteristics. A conservative force is one, like the gravitational force, for which work done by or against it depends only on the starting and ending points of a motion and not on the path taken. We can define a potential energy (PE) for any conservative force, just as we did for the gravitational force. For example, when you wind up a toy, an egg timer, or an old-fashioned watch, you do work against its spring and store energy in it. (We treat these springs as ideal, in that we assume there is no friction and no production of thermal energy.) This stored energy is recoverable as work, and it is useful to think of it as potential energy contained in the spring. Indeed, the reason that the spring has this characteristic is that its force is conservative. That is, a conservative force results in stored or potential energy. Gravitational potential energy is one example, as is the energy stored in a spring. We will also see how conservative forces are related to the conservation of energy.
+
+Potential Energy and Conservative Forces
+
+Potential energy is the energy a system has due to position, shape, or configuration. It is stored energy that is completely recoverable.
+
+A conservative force is one for which work done by or against it depends only on the starting and ending points of a motion and not on the path taken.
+
+We can define a potential energy (PE) for any conservative force. The work done against a conservative force to reach a final configuration depends on the configuration, not the path followed, and is the potential energy added.
+
+Potential Energy of a Spring
+
+First, let us obtain an expression for the potential energy stored in a spring (PEs). We calculate the work done to stretch or compress a spring that obeys Hooke’s law. (Hooke’s law was examined in Elasticity: Stress and Strain, and states that the magnitude of force F on the spring and the resulting deformation ΔL are proportional, F=kΔL.) (See .) For our spring, we will replace ΔL (the amount of deformation produced by a force F) by the distance x that the spring is stretched or compressed along its length. So the force needed to stretch the spring has magnitude F = kx, where k is the spring’s force constant. The force increases linearly from 0 at the start to kx in the fully stretched position. The average force is kx/2. Thus the work done in stretching or compressing the spring is Ws=Fd=kx2x=12kx2. Alternatively, we noted in Kinetic Energy and the Work-Energy Theorem that the area under a graph of F vs. x is the work done by the force. In (c) we see that this area is also 12kx2. We therefore define the potential energy of a spring, PEs, to be
+
+where k is the spring’s force constant and x is the displacement from its undeformed position. The potential energy represents the work done on the spring and the energy stored in it as a result of stretching or compressing it a distance x. The potential energy of the spring PEs does not depend on the path taken; it depends only on the stretch or squeeze x in the final configuration.
+
+The equation PEs=12kx2 has general validity beyond the special case for which it was derived. Potential energy can be stored in any elastic medium by deforming it. Indeed, the general definition of potential energy is energy due to position, shape, or configuration. For shape or position deformations, stored energy is PEs=12kx2, where k is the force constant of the particular system and x is its deformation. Another example is seen in for a guitar string.
+
+Conservation of Mechanical Energy
+
+Let us now consider what form the work-energy theorem takes when only conservative forces are involved. This will lead us to the conservation of energy principle. The work-energy theorem states that the net work done by all forces acting on a system equals its change in kinetic energy. In equation form, this is
+
+If only conservative forces act, then
+
+where Wc is the total work done by all conservative forces. Thus,
+
+Now, if the conservative force, such as the gravitational force or a spring force, does work, the system loses potential energy. That is, Wc=−ΔPE. Therefore,
+
+or
+
+This equation means that the total kinetic and potential energy is constant for any process involving only conservative forces. That is,
+
+where i and f denote initial and final values. This equation is a form of the work-energy theorem for conservative forces; it is known as the conservation of mechanical energy principle. Remember that this applies to the extent that all the forces are conservative, so that friction is negligible. The total kinetic plus potential energy of a system is defined to be its mechanical energy, (KE+PE). In a system that experiences only conservative forces, there is a potential energy associated with each force, and the energy only changes form between KE and the various types of PE, with the total energy remaining constant.
+
+Using Conservation of Mechanical Energy to Calculate the Speed of a Toy Car
+
+A 0.100-kg toy car is propelled by a compressed spring, as shown in . The car follows a track that rises 0.180 m above the starting point. The spring is compressed 4.00 cm and has a force constant of 250.0 N/m. Assuming work done by friction to be negligible, find (a) how fast the car is going before it starts up the slope and (b) how fast it is going at the top of the slope.
+Strategy
+
+Strategy
+
+The spring force and the gravitational force are conservative forces, so conservation of mechanical energy can be used. Thus,
+
+or
+
+where h is the height (vertical position) and x is the compression of the spring. This general statement looks complex but becomes much simpler when we start considering specific situations. First, we must identify the initial and final conditions in a problem; then, we enter them into the last equation to solve for an unknown.
+Solution for (a)
+
+Solution for (a)
+
+This part of the problem is limited to conditions just before the car is released and just after it leaves the spring. Take the initial height to be zero, so that both hi and hf are zero. Furthermore, the initial speed vi is zero and the final compression of the spring xf is zero, and so several terms in the conservation of mechanical energy equation are zero and it simplifies to
+
+In other words, the initial potential energy in the spring is converted completely to kinetic energy in the absence of friction. Solving for the final speed and entering known values yields
+Solution for (b)
+
+Solution for (b)
+
+One method of finding the speed at the top of the slope is to consider conditions just before the car is released and just after it reaches the top of the slope, completely ignoring everything in between. Doing the same type of analysis to find which terms are zero, the conservation of mechanical energy becomes
+
+This form of the equation means that the spring’s initial potential energy is converted partly to gravitational potential energy and partly to kinetic energy. The final speed at the top of the slope will be less than at the bottom. Solving for vf and substituting known values gives
+Discussion
+
+Discussion
+
+Another way to solve this problem is to realize that the car’s kinetic energy before it goes up the slope is converted partly to potential energy—that is, to take the final conditions in part (a) to be the initial conditions in part (b).
+
+Note that, for conservative forces, we do not directly calculate the work they do; rather, we consider their effects through their corresponding potential energies, just as we did in . Note also that we do not consider details of the path taken—only the starting and ending points are important (as long as the path is not impossible). This assumption is usually a tremendous simplification, because the path may be complicated and forces may vary along the way.
+
+Energy Skate Park
+
+Learn about conservation of energy with a skater dude! Build tracks, ramps and jumps for the skater and view the kinetic energy, potential energy and friction as he moves. You can also take the skater to different planets or even space!
+
+Test Prep for AP Courses
+
+Two 4.0 kg masses are connected to each other by a spring with a force constant of 25 N/m and a rest length of 1.0 m. If the spring has been compressed to 0.80 m in length and the masses are traveling toward each other at 0.50 m/s (each), what is the total energy in the system?
+
+1.0 J
+
+1.5 J
+
+9.0 J
+
+8.0 J
+
+A spring with a force constant of 5000 N/m and a rest length of 3.0 m is used in a catapult. When compressed to 1.0 m, it is used to launch a 50 kg rock. However, there is an error in the release mechanism, so the rock gets launched almost straight up. How high does it go, and how fast is it going when it hits the ground?
+
+20 m high, 20 m/s.
+
+What information do you need to calculate the kinetic energy and potential energy of a spring? Potential energy due to gravity? How many objects do you need information about for each of these cases?
+
+You are loading a toy dart gun, which has two settings, the more powerful with the spring compressed twice as far as the lower setting. If it takes 5.0 J of work to compress the dart gun to the lower setting, how much work does it take for the higher setting?
+
+20 J
+
+10 J
+
+2.5 J
+
+40 J
+
+(a)
+
+Describe a system you use daily with internal potential energy.
+
+Old-fashioned pendulum clocks are powered by masses that need to be wound back to the top of the clock about once a week to counteract energy lost due to friction and to the chimes. One particular clock has three masses: 4.0 kg, 4.0 kg, and 6.0 kg. They can drop 1.3 meters. How much energy does the clock use in a week?
+
+51 J
+
+76 J
+
+127 J
+
+178 J
+
+(d)
+
+A water tower stores not only water, but (at least part of) the energy to move the water. How much? Make reasonable estimates for how much water is in the tower, and other quantities you need.
+
+Old-fashioned pocket watches needed to be wound daily so they wouldn’t run down and lose time, due to the friction in the internal components. This required a large number of turns of the winding key, but not much force per turn, and it was possible to overwind and break the watch. How was the energy stored?
+
+A small mass raised a long distance
+
+A large mass raised a short distance
+
+A weak spring deformed a long way
+
+A strong spring deformed a short way
+
+(c)
+
+Some of the very first clocks invented in China were powered by water. Describe how you think this was done.
+
+Section Summary
+
+A conservative force is one for which work depends only on the starting and ending points of a motion, not on the path taken.
+
+We can define potential energy (PE) for any conservative force, just as we defined PEg for the gravitational force.
+
+The potential energy of a spring is PEs=12kx2, where k is the spring’s force constant and x is the displacement from its undeformed position.
+
+Mechanical energy is defined to be KE + PE for a conservative force.
+
+When only conservative forces act on and within a system, the total mechanical energy is constant. In equation form,
+
+where i and f denote initial and final values. This is known as the conservation of mechanical energy.
+
+Conceptual Questions
+
+What is a conservative force?
+
+The force exerted by a diving board is conservative, provided the internal friction is negligible. Assuming friction is negligible, describe changes in the potential energy of a diving board as a swimmer dives from it, starting just before the swimmer steps on the board until just after his feet leave it.
+
+Define mechanical energy. What is the relationship of mechanical energy to nonconservative forces? What happens to mechanical energy if only conservative forces act?
+
+What is the relationship of potential energy to conservative force?
+
+Problems & Exercises
+
+A 5.00×105-kg subway train is brought to a stop from a speed of 0.500 m/s in 0.400 m by a large spring bumper at the end of its track. What is the force constant k of the spring?
+
+A pogo stick has a spring with a force constant of 2.50×104 N/m, which can be compressed 12.0 cm. To what maximum height can a child jump on the stick using only the energy in the spring, if the child and stick have a total mass of 40.0 kg? Explicitly show how you follow the steps in the Problem-Solving Strategies for Energy.
+
+a force that does the same work for any given initial and final configuration, regardless of the path followed
+energy due to position, shape, or configuration
+the stored energy of a spring as a function of its displacement; when Hooke’s law applies, it is given by the expression 12kx2 where x is the distance the spring is compressed or extended and k is the spring constant
+the rule that the sum of the kinetic energies and potential energies remains constant if only conservative forces act on and within a system
+the sum of kinetic energy and potential energy

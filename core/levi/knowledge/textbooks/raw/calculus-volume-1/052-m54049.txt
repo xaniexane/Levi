@@ -1,0 +1,259 @@
+# m54049
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Table of Integrals
+
+Table of Integrals
+
+Basic Integrals
+
+1. ∫undu=un+1n+1+C,n≠−1
+
+2. ∫duu=ln|u|+C
+
+3. ∫eudu=eu+C
+
+4. ∫audu=aulna+C
+
+5. ∫sinudu=−cosu+C
+
+6. ∫cosudu=sinu+C
+
+7. ∫sec2udu=tanu+C
+
+8. ∫csc2udu=−cotu+C
+
+9. ∫secutanudu=secu+C
+
+10. ∫cscucotudu=−cscu+C
+
+11. ∫tanudu=ln|secu|+C
+
+12. ∫cotudu=ln|sinu|+C
+
+13. ∫secudu=ln|secu+tanu|+C
+
+14. ∫cscudu=ln|cscu−cotu|+C
+
+15. ∫dua2−u2=sin−1ua+C
+
+16. ∫dua2+u2=1atan−1ua+C
+
+17. ∫duuu2−a2=1asec−1ua+C
+
+Trigonometric Integrals
+
+18. ∫sin2udu=12u−14sin2u+C
+
+19. ∫cos2udu=12u+14sin2u+C
+
+20. ∫tan2udu=tanu−u+C
+
+21. ∫cot2udu=−cotu−u+C
+
+22. ∫sin3udu=−13(2+sin2u)cosu+C
+
+23. ∫cos3udu=13(2+cos2u)sinu+C
+
+24. ∫tan3udu=12tan2u+ln|cosu|+C
+
+25. ∫cot3udu=−12cot2u−ln|sinu|+C
+
+26. ∫sec3udu=12secutanu+12ln|secu+tanu|+C
+
+27. ∫csc3udu=−12cscucotu+12ln|cscu−cotu|+C
+
+28. ∫sinnudu=−1nsinn−1ucosu+n−1n∫sinn−2udu
+
+29. ∫cosnudu=1ncosn−1usinu+n−1n∫cosn−2udu
+
+30. ∫tannudu=1n−1tann−1u−∫tann−2udu
+
+31. ∫cotnudu=−1n−1cotn−1u−∫cotn−2udu
+
+32. ∫secnudu=1n−1tanusecn−2u+n−2n−1∫secn−2udu
+
+33. ∫cscnudu=−1n−1cotucscn−2u+n−2n−1∫cscn−2udu
+
+34. ∫sinausinbudu=sin((a−b)u)2(a−b)−sin((a+b)u)2(a+b)+C
+
+35. ∫cosaucosbudu=sin((a−b)u)2(a−b)+sin((a+b)u)2(a+b)+C
+
+36. ∫sinaucosbudu=−cos((a−b)u)2(a−b)−cos((a+b)u)2(a+b)+C
+
+37. ∫usinudu=sinu−ucosu+C
+
+38. ∫ucosudu=cosu+usinu+C
+
+39. ∫unsinudu=−uncosu+n∫un−1cosudu
+
+40. ∫uncosudu=unsinu−n∫un−1sinudu
+
+41. ∫sinnucosmudu=−sinn−1ucosm+1un+m+n−1n+m∫sinn−2ucosmudu=sinn+1ucosm−1un+m+m−1n+m∫sinnucosm−2udu
+
+Exponential and Logarithmic Integrals
+
+42. ∫ueaudu=1a2(au−1)eau+C
+
+43. ∫uneaudu=1auneau−na∫un−1eaudu
+
+44. ∫eausinbudu=eaua2+b2(asinbu−bcosbu)+C
+
+45. ∫eaucosbudu=eaua2+b2(acosbu+bsinbu)+C
+
+46. ∫lnudu=ulnu−u+C
+
+47. ∫unlnudu=un+1(n+1)2[(n+1)lnu−1]+C
+
+48. ∫1ulnudu=ln|lnu|+C
+
+Hyperbolic Integrals
+
+49. ∫sinhudu=coshu+C
+
+50. ∫coshudu=sinhu+C
+
+51. ∫tanhudu=lncoshu+C
+
+52. ∫cothudu=ln|sinhu|+C
+
+53. ∫sechudu=tan−1|sinhu|+C
+
+54. ∫cschudu=ln|tanh12u|+C
+
+55. ∫sech2udu=tanhu+C
+
+56. ∫csch2udu=−cothu+C
+
+57. ∫sechutanhudu=−sechu+C
+
+58. ∫cschucothudu=−cschu+C
+
+Inverse Trigonometric Integrals
+
+59. ∫sin−1udu=usin−1u+1−u2+C
+
+60. ∫cos−1udu=ucos−1u−1−u2+C
+
+61. ∫tan−1udu=utan−1u−12ln(1+u2)+C
+
+62. ∫usin−1udu=2u2−14sin−1u+u1−u24+C
+
+63. ∫ucos−1udu=2u2−14cos−1u−u1−u24+C
+
+64. ∫utan−1udu=u2+12tan−1u−u2+C
+
+65. ∫unsin−1udu=1n+1[un+1sin−1u−∫un+1du1−u2],n≠−1
+
+66. ∫uncos−1udu=1n+1[un+1cos−1u+∫un+1du1−u2],n≠−1
+
+67. ∫untan−1udu=1n+1[un+1tan−1u−∫un+1du1+u2],n≠−1
+
+Integrals Involving a2 + u2, a > 0
+
+68. ∫a2+u2du=u2a2+u2+a22ln(u+a2+u2)+C
+
+69. ∫u2a2+u2du=u8(a2+2u2)a2+u2−a48ln(u+a2+u2)+C
+
+70. ∫a2+u2udu=a2+u2−aln|a+a2+u2u|+C
+
+71. ∫a2+u2u2du=−a2+u2u+ln(u+a2+u2)+C
+
+72. ∫dua2+u2=ln(u+a2+u2)+C
+
+73. ∫u2dua2+u2=u2(a2+u2)−a22ln(u+a2+u2)+C
+
+74. ∫duua2+u2=−1aln|a2+u2+au|+C
+
+75. ∫duu2a2+u2=−a2+u2a2u+C
+
+76. ∫du(a2+u2)3/2=ua2a2+u2+C
+
+Integrals Involving u2 − a2, a > 0
+
+77. ∫u2−a2du=u2u2−a2−a22ln|u+u2−a2|+C
+
+78. ∫u2u2−a2du=u8(2u2−a2)u2−a2−a48ln|u+u2−a2|+C
+
+79. ∫u2−a2udu=u2−a2−acos−1a|u|+C
+
+80. ∫u2−a2u2du=−u2−a2u+ln|u+u2−a2|+C
+
+81. ∫duu2−a2=ln|u+u2−a2|+C
+
+82. ∫u2duu2−a2=u2u2−a2+a22ln|u+u2−a2|+C
+
+83. ∫duu2u2−a2=u2−a2a2u+C
+
+84a. ∫du(u2−a2)3/2=−ua2u2−a2+C
+
+84b. ∫duu2-a2=12alnu-au+a+C
+
+Integrals Involving a2 − u2, a > 0
+
+85. ∫a2−u2du=u2a2−u2+a22sin−1ua+C
+
+86. ∫u2a2−u2du=u8(2u2−a2)a2−u2+a48sin−1ua+C
+
+87. ∫a2−u2udu=a2−u2−aln|a+a2−u2u|+C
+
+88. ∫a2−u2u2du=−1ua2−u2−sin−1ua+C
+
+89. ∫u2dua2−u2=−u2a2−u2+a22sin−1ua+C
+
+90. ∫duua2−u2=−1aln|a+a2−u2u|+C
+
+91. ∫duu2a2−u2=−1a2ua2−u2+C
+
+92. ∫(a2−u2)3/2du=−u8(2u2−5a2)a2−u2+3a48sin−1ua+C
+
+93a. ∫du(a2−u2)3/2=ua2a2−u2+C
+
+93b. ∫dua2-u2=12alnu+au-a+C
+
+Integrals Involving 2au − u2, a > 0
+
+94. ∫2au−u2du=u−a22au−u2+a22cos−1(a−ua)+C
+
+95. ∫du2au−u2=cos−1(a−ua)+C
+
+96. ∫u2au−u2du=2u2−au−3a262au−u2+a32cos−1(a−ua)+C
+
+97. ∫duu2au−u2=−2au−u2au+C
+
+Integrals Involving a + bu, a ≠ 0
+
+98. ∫udua+bu=1b2(a+bu−aln|a+bu|)+C
+
+99. ∫u2dua+bu=12b3[(a+bu)2−4a(a+bu)+2a2ln|a+bu|]+C
+
+100. ∫duu(a+bu)=1aln|ua+bu|+C
+
+101. ∫duu2(a+bu)=−1au+ba2ln|a+buu|+C
+
+102. ∫udu(a+bu)2=ab2(a+bu)+1b2ln|a+bu|+C
+
+103. ∫uduu(a+bu)2=1a(a+bu)−1a2ln|a+buu|+C
+
+104. ∫u2du(a+bu)2=1b3(a+bu−a2a+bu−2aln|a+bu|)+C
+
+105. ∫ua+budu=215b2(3bu−2a)(a+bu)3/2+C
+
+106. ∫udua+bu=23b2(bu−2a)a+bu+C
+
+107. ∫u2dua+bu=215b3(8a2+3b2u2−4abu)a+bu+C
+
+108. ∫duua+bu=1aln|a+bu−aa+bu+a|+C,ifa>0=2−atan−1a+bu−a+C,ifa<0
+
+109. ∫a+buudu=2a+bu+a∫duua+bu
+
+110. ∫a+buu2du=−a+buu+b2∫duua+bu
+
+111. ∫una+budu=2b(2n+3)[un(a+bu)3/2−na∫un−1a+budu]
+
+112. ∫undua+bu=2una+bub(2n+1)−2nab(2n+1)∫un−1dua+bu
+
+113. ∫duuna+bu=−a+bua(n−1)un−1−b(2n−3)2a(n−1)∫duun−1a+bu

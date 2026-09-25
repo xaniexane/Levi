@@ -1,0 +1,1671 @@
+# m49408
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Polar Form of Complex Numbers
+
+Polar Form of Complex Numbers
+
+In this section, you will:
+
+Plot complex numbers in the complex plane.
+
+Find the absolute value of a complex number.
+
+Write complex numbers in polar form.
+
+Convert a complex number from polar to rectangular form.
+
+Find products of complex numbers in polar form.
+
+Find quotients of complex numbers in polar form.
+
+Find powers of complex numbers in polar form.
+
+Find roots of complex numbers in polar form.
+
+“God made the integers; all else is the work of man.” This rather famous quote by nineteenth-century German mathematician Leopold Kronecker sets the stage for this section on the polar form of a complex number. Complex numbers were invented by people and represent over a thousand years of continuous investigation and struggle by mathematicians such as Pythagoras, Descartes, De Moivre, Euler, Gauss, and others. Complex numbers answered questions that for centuries had puzzled the greatest minds in science.
+
+We first encountered complex numbers in Complex Numbers. In this section, we will focus on the mechanics of working with complex numbers: translation of complex numbers from polar form to rectangular form and vice versa, interpretation of complex numbers in the scheme of applications, and application of De Moivre’s Theorem.
+
+Plotting Complex Numbers in the Complex Plane
+
+Plotting a complex number 
+ 
+ a+bi
+ is similar to plotting a real number, except that the horizontal axis represents the real part of the number, 
+ 
+ a,
+ and the vertical axis represents the imaginary part of the number, 
+ 
+ bi.
+Given a complex number 
+ 
+ a+bi,
+ plot it in the complex plane.
+
+Label the horizontal axis as the real axis and the vertical axis as the imaginary axis.
+
+Plot the point in the complex plane by moving 
+ 
+ a
+ units in the horizontal direction and 
+ 
+ b
+ units in the vertical direction.
+
+Plotting a Complex Number in the Complex Plane
+
+Plot the complex number 
+ 
+ 2−3i
+ in the complex plane.
+
+From the origin, move two units in the positive horizontal direction and three units in the negative vertical direction. See .
+
+Plot the point 
+ 
+ 1+5i
+ in the complex plane.
+
+Finding the Absolute Value of a Complex Number
+
+The first step toward working with a complex number in polar form is to find the absolute value. The absolute value of a complex number is the same as its magnitude, or 
+ 
+ | z |.
+ It measures the distance from the origin to a point in the plane. For example, the graph of 
+ 
+ z=2+4i,
+ in , shows 
+ 
+ | z |.
+
+Absolute Value of a Complex Number
+
+Given 
+ 
+ z=x+yi,
+ a complex number, the absolute value of 
+ 
+ z
+ is defined as
+
+It is the distance from the origin to the point 
+ 
+ (
+ 
+ x,y
+ ).
+
+Notice that the absolute value of a real number gives the distance of the number from 0, while the absolute value of a complex number gives the distance of the number from the origin, 
+ 
+ (
+ 
+ 0,0
+ ).
+
+Finding the Absolute Value of a Complex Number with a Radical
+
+Find the absolute value of 
+ 
+ z=
+ 5
+ 
+ −i.
+
+Using the formula, we have
+
+See .
+
+Find the absolute value of the complex number 
+ 
+ z=12−5i.
+
+13
+
+Finding the Absolute Value of a Complex Number
+
+Given 
+ 
+ z=3−4i,
+ find 
+ 
+ | z |.
+
+Using the formula, we have
+
+The absolute value 
+ 
+ z
+ is 5. See .
+
+Given 
+ 
+ z=1−7i,
+ find 
+ 
+ | z |.
+| z |=
+ 
+ 50
+ 
+ =5
+ 2
+
+Writing Complex Numbers in Polar Form
+
+The polar form of a complex number expresses a number in terms of an angle 
+ 
+ θ
+ and its distance from the origin 
+ 
+ r.
+ Given a complex number in rectangular form expressed as 
+ 
+ z=x+yi,
+ we use the same conversion formulas as we do to write the number in trigonometric form:
+
+We review these relationships in .
+
+We use the term modulus to represent the absolute value of a complex number, or the distance from the origin to the point 
+ 
+ (
+ 
+ x,y
+ ).
+ The modulus, then, is the same as 
+ 
+ r,
+ the radius in polar form. We use 
+ 
+ θ
+ to indicate the angle of direction (just as with polar coordinates). Substituting, we have
+
+Polar Form of a Complex Number
+
+Writing a complex number in polar form involves the following conversion formulas:
+
+Making a direct substitution, we have
+
+where 
+ 
+ r
+ is the modulus and 
+ 
+ θ
+ is the argument. We often use the abbreviation 
+ 
+ rcisθ
+ to represent 
+ 
+ r(
+ 
+ cosθ+isinθ
+ ).
+
+Expressing a Complex Number Using Polar Coordinates
+
+Express the complex number 
+ 
+ 4i
+ using polar coordinates.
+
+On the complex plane, the number 
+ 
+ z=4i
+ is the same as 
+ 
+ z=0+4i.
+ Writing it in polar form, we have to calculate 
+ 
+ r
+ first.
+
+Next, we look at 
+ 
+ x.
+ If 
+ 
+ x=rcosθ,
+ and 
+ 
+ x=0,
+ then 
+ 
+ θ=
+ π
+ 2
+ 
+ .
+ In polar coordinates, the complex number 
+ 
+ z=0+4i
+ can be written as 
+ 
+ z=4(
+ 
+ cos(
+
+ π
+ 2
+
+ )+isin(
+
+ π
+ 2
+
+ )
+ )
+ or 
+ 
+ 4cis(
+
+ π
+ 2
+
+ ).
+ See .
+
+Express 
+ 
+ z=3i
+ as 
+ 
+ rcisθ
+ in polar form.
+z=3(
+ 
+ cos(
+
+ π
+ 2
+
+ )+isin(
+
+ π
+ 2
+
+ )
+ )
+
+Finding the Polar Form of a Complex Number
+
+Find the polar form of 
+ 
+ −4+4i.
+
+First, find the value of 
+ 
+ r.
+
+Find the angle 
+ 
+ θ
+ 
+ using the formula:
+
+Thus, the solution is 
+ 
+ 4
+ 2
+ 
+ cis(
+
+ 3π
+ 4
+
+ ).
+
+Write 
+ 
+ z=
+ 3
+ 
+ +i
+ in polar form.
+z=2(
+ 
+ cos(
+
+ π
+ 6
+
+ )+isin(
+
+ π
+ 6
+
+ )
+ )
+
+Converting a Complex Number from Polar to Rectangular Form
+
+Converting a complex number from polar form to rectangular form is a matter of evaluating what is given and using the distributive property. In other words, given 
+ 
+ z=r(
+ 
+ cosθ+isinθ
+ ),
+ first evaluate the trigonometric functions 
+ 
+ cosθ
+ and 
+ 
+ sinθ.
+ Then, multiply through by 
+ 
+ r.
+
+Converting from Polar to Rectangular Form
+
+Convert the polar form of the given complex number to rectangular form:
+
+We begin by evaluating the trigonometric expressions.
+
+After substitution, the complex number is
+
+We apply the distributive property:
+
+The rectangular form of the given point in complex form is 
+ 
+ 6
+ 3
+ 
+ +6i.
+
+Finding the Rectangular Form of a Complex Number
+
+Find the rectangular form of the complex number given 
+ 
+ r=13
+ and 
+ 
+ tanθ=
+ 5
+ 
+ 12
+ 
+ .
+
+If 
+ 
+ tanθ=
+ 5
+ 
+ 12
+ 
+ ,
+ and 
+ 
+ tanθ=
+ y
+ x
+ 
+ ,
+ we first determine 
+ 
+ r=
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 12
+ 2
+ 
+ +
+ 5
+ 2
+
+ =13. 
+ We then find 
+ 
+ cosθ=
+ x
+ r
+
+ and 
+ 
+ sinθ=
+ y
+ r
+ 
+ .
+
+The rectangular form of the given number in complex form is 
+ 
+ 12+5i.
+
+Convert the complex number to rectangular form:
+z=2
+ 3
+ 
+ −2i
+
+Finding Products of Complex Numbers in Polar Form
+
+Now that we can convert complex numbers to polar form we will learn how to perform operations on complex numbers in polar form. For the rest of this section, we will work with formulas developed by French mathematician Abraham De Moivre (1667-1754). These formulas have made working with products, quotients, powers, and roots of complex numbers much simpler than they appear. The rules are based on multiplying the moduli and adding the arguments.
+
+Products of Complex Numbers in Polar Form
+
+If 
+
+ z
+ 1
+ 
+ =
+ r
+ 1
+ 
+ (cos
+ θ
+ 1
+ 
+ +isin
+ θ
+ 1
+ 
+ )
+ 
+ and 
+
+ z
+ 2
+ 
+ =
+ r
+ 2
+ 
+ (cos
+ θ
+ 2
+ 
+ +isin
+ θ
+ 2
+ 
+ ),
+ 
+ then the product of these numbers is given as:
+
+Notice that the product calls for multiplying the moduli and adding the angles.
+
+Finding the Product of Two Complex Numbers in Polar Form
+
+Find the product of 
+
+ z
+ 1
+
+ z
+ 2
+ 
+ ,
+ given 
+
+ z
+ 1
+ 
+ =4(cos(80°)+isin(80°))
+ 
+ and 
+
+ z
+ 2
+ 
+ =2(cos(145°)+isin(145°)).
+
+Follow the formula
+
+Finding Quotients of Complex Numbers in Polar Form
+
+The quotient of two complex numbers in polar form is the quotient of the two moduli and the difference of the two arguments.
+
+Quotients of Complex Numbers in Polar Form
+
+If 
+
+ z
+ 1
+ 
+ =
+ r
+ 1
+ 
+ (cos
+ θ
+ 1
+ 
+ +isin
+ θ
+ 1
+ 
+ )
+ 
+ and 
+
+ z
+ 2
+ 
+ =
+ r
+ 2
+ 
+ (cos
+ θ
+ 2
+ 
+ +isin
+ θ
+ 2
+ 
+ ),
+ 
+ then the quotient of these numbers is
+
+Notice that the moduli are divided, and the angles are subtracted.
+Given two complex numbers in polar form, find the quotient.
+
+Divide 
+
+ r
+ 1
+
+ r
+ 2
+
+ .
+
+Find 
+
+ θ
+ 1
+ 
+ −
+ θ
+ 2
+ 
+ .
+
+Substitute the results into the formula: 
+ 
+ z=r(
+ 
+ cosθ+isinθ
+ ).
+ Replace 
+ 
+ r
+ with 
+
+ r
+ 1
+
+ r
+ 2
+
+ ,
+ and replace 
+ 
+ θ
+ with 
+
+ θ
+ 1
+ 
+ −
+ θ
+ 2
+ 
+ .
+
+Calculate the new trigonometric expressions and multiply through by 
+ 
+ r.
+
+Finding the Quotient of Two Complex Numbers
+
+Find the quotient of 
+
+ z
+ 1
+ 
+ =2(cos(213°)+isin(213°))
+ 
+ and 
+
+ z
+ 2
+ 
+ =4(cos(33°)+isin(33°)).
+
+Using the formula, we have
+
+Find the product and the quotient of 
+
+ z
+ 1
+ 
+ =2
+ 3
+ 
+ (cos(150°)+isin(150°))
+ 
+ and 
+
+ z
+ 2
+ 
+ =2(cos(30°)+isin(30°)).
+z
+ 1
+
+ z
+ 2
+ 
+ =−4
+ 3
+ 
+ ;
+
+ z
+ 1
+
+ z
+ 2
+
+ =−
+
+ 3
+
+ 2
+ 
+ +
+ 3
+ 2
+ 
+ i
+
+Finding Powers of Complex Numbers in Polar Form
+
+Finding powers of complex numbers is greatly simplified using De Moivre’s Theorem. It states that, for a positive integer 
+ 
+ n,
+ z
+ n
+
+ is found by raising the modulus to the 
+ 
+ nth
+ power and multiplying the argument by 
+ 
+ n.
+ It is the standard method used in modern mathematics.
+
+De Moivre’s Theorem
+
+If 
+ 
+ z=r(
+ 
+ cosθ+isinθ
+ )
+ is a complex number, then
+
+where 
+ 
+ n
+
+is a positive integer.
+
+Evaluating an Expression Using De Moivre’s Theorem
+
+Evaluate the expression 
+
+ (
+ 
+ 1+i
+ )
+ 5
+
+ using De Moivre’s Theorem.
+
+Since De Moivre’s Theorem applies to complex numbers written in polar form, we must first write 
+ 
+ (
+ 
+ 1+i
+ )
+ in polar form. Let us find 
+ 
+ r.
+
+Then we find 
+ 
+ θ.
+ Using the formula 
+ 
+ tanθ=
+ y
+ x
+
+ gives
+
+Use De Moivre’s Theorem to evaluate the expression.
+
+Finding Roots of Complex Numbers in Polar Form
+
+To find the nth root of a complex number in polar form, we use the 
+ 
+ nth
+ Root Theorem or De Moivre’s Theorem and raise the complex number to a power with a rational exponent. There are several ways to represent a formula for finding 
+ nth
+ roots of complex numbers in polar form.
+
+The nth Root Theorem
+
+To find the 
+ 
+ nth
+ root of a complex number in polar form, use the formula given as
+
+where 
+ 
+ k=0,1,2,3,...,n−1.
+ We add 
+
+ 2kπ
+ n
+
+ to 
+
+ θ
+ n
+
+ in order to obtain the periodic roots.
+
+Finding the nth Root of a Complex Number
+
+Evaluate the cube roots of 
+ 
+ z=8(
+ 
+ cos(
+
+ 2π
+ 3
+
+ )+isin(
+
+ 2π
+ 3
+
+ )
+ ).
+
+We have
+
+There will be three roots: 
+ 
+ k=0,1,2.
+ When 
+ 
+ k=0,
+ we have
+
+When 
+ 
+ k=1,
+ we have
+
+When 
+ 
+ k=2,
+ we have
+
+Remember to find the common denominator to simplify fractions in situations like this one. For 
+ 
+ k=1,
+ the angle simplification is
+
+Find the four fourth roots of 
+ 
+ 16(cos(120°)+isin(120°)).
+z
+ 0
+ 
+ =2(cos(30°)+isin(30°))
+z
+ 1
+ 
+ =2(cos(120°)+isin(120°))
+z
+ 2
+ 
+ =2(cos(210°)+isin(210°))
+z
+ 3
+ 
+ =2(cos(300°)+isin(300°))
+
+Access these online resources for additional instruction and practice with polar forms of complex numbers.
+The Product and Quotient of Complex Numbers in Trigonometric Form
+De Moivre’s Theorem
+
+Key Concepts
+
+Complex numbers in the form 
+ 
+ a+bi
+ are plotted in the complex plane similar to the way rectangular coordinates are plotted in the rectangular plane. Label the x-axis as the real axis and the y-axis as the imaginary axis. See .
+
+The absolute value of a complex number is the same as its magnitude. It is the distance from the origin to the point: 
+ 
+ | z |=
+
+ a
+ 2
+ 
+ +
+ b
+ 2
+
+ .
+ See and .
+
+To write complex numbers in polar form, we use the formulas 
+ 
+ x=rcosθ,y=rsinθ,
+ and 
+ 
+ r=
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ .
+ Then, 
+ 
+ z=r(
+ 
+ cosθ+isinθ
+ ).
+ See and .
+
+To convert from polar form to rectangular form, first evaluate the trigonometric functions. Then, multiply through by 
+ 
+ r.
+ See and .
+
+To find the product of two complex numbers, multiply the two moduli and add the two angles. Evaluate the trigonometric functions, and multiply using the distributive property. See .
+
+To find the quotient of two complex numbers in polar form, find the quotient of the two moduli and the difference of the two angles. See .
+
+To find the power of a complex number 
+
+ z
+ n
+ 
+ ,
+ raise 
+ 
+ r
+ to the power 
+ 
+ n,
+ and multiply 
+ 
+ θ
+ by 
+ 
+ n.
+ See .
+
+Finding the roots of a complex number is the same as raising a complex number to a power, but using a rational exponent. See .
+
+Section Exercises
+
+Verbal
+
+A complex number is 
+ 
+ a+bi.
+ Explain each part.
+a is the real part, b is the imaginary part, and 
+ 
+ i=
+ 
+ −1
+
+What does the absolute value of a complex number represent?
+
+How is a complex number converted to polar form?
+
+Polar form converts the real and imaginary part of the complex number in polar form using 
+ 
+ x=rcosθ
+ and 
+ 
+ y=rsinθ.
+
+How do we find the product of two complex numbers?
+
+What is De Moivre’s Theorem and what is it used for?
+z
+ n
+ 
+ =
+ r
+ n
+ 
+ (
+ 
+ cos(
+ 
+ nθ
+ )+isin(
+ 
+ nθ
+ )
+ )
+ It is used to simplify polar form when a number has been raised to a power.
+
+Algebraic
+
+For the following exercises, find the absolute value of the given complex number.
+5+​3i
+−7+​i
+5
+ 2
+−3−3i
+2
+ 
+ −6i
+38
+2i
+2.2−3.1i
+14.45
+
+For the following exercises, write the complex number in polar form.
+2+2i
+8−4i
+4
+ 5
+ 
+ cis(
+ 
+ 333.4°
+ )
+−
+ 1
+ 2
+ 
+ −
+ 1
+ 2
+ 
+ ​i
+3
+ 
+ +i
+2cis(
+
+ π
+ 6
+
+ )
+3i
+
+For the following exercises, convert the complex number from polar to rectangular form.
+z=7cis(
+
+ π
+ 6
+
+ )
+7
+ 3
+
+ 2
+ 
+ +i
+ 7
+ 2
+z=2cis(
+
+ π
+ 3
+
+ )
+z=4cis(
+
+ 7π
+ 6
+
+ )
+−2
+ 3
+ 
+ −2i
+z=7cis(
+ 
+ 25°
+ )
+z=3cis(
+ 
+ 240°
+ )
+−1.5−i
+ 
+ 3
+ 3
+
+ 2
+z=
+ 2
+ 
+ cis(
+ 
+ 100°
+ )
+
+For the following exercises, find 
+
+ z
+ 1
+
+ z
+ 2
+
+ in polar form.
+z
+ 1
+ 
+ =2
+ 3
+ 
+ cis(
+ 
+ 116°
+ );
+ z
+ 2
+ 
+ =2cis(
+ 
+ 82°
+ )
+4
+ 3
+ 
+ cis(
+ 
+ 198°
+ )
+z
+ 1
+ 
+ =
+ 2
+ 
+ cis(
+ 
+ 205°
+ );
+ z
+ 2
+ 
+ =2
+ 2
+ 
+ cis(
+ 
+ 118°
+ )
+z
+ 1
+ 
+ =3cis(
+ 
+ 120°
+ );
+ z
+ 2
+ 
+ =
+ 1
+ 4
+ 
+ cis(
+ 
+ 60°
+ )
+3
+ 4
+ 
+ cis(
+ 
+ 180°
+ )
+z
+ 1
+ 
+ =3cis(
+
+ π
+ 4
+
+ );
+ z
+ 2
+ 
+ =5cis(
+
+ π
+ 6
+
+ )
+z
+ 1
+ 
+ =
+ 5
+ 
+ cis(
+
+ 5π
+ 8
+
+ );
+ z
+ 2
+ 
+ =
+ 
+ 15
+ 
+ cis(
+
+ π
+ 
+ 12
+
+ )
+5
+ 3
+ 
+ cis(
+
+ 17π
+ 
+ 24
+
+ )
+z
+ 1
+ 
+ =4cis(
+
+ π
+ 2
+
+ );
+ z
+ 2
+ 
+ =2cis(
+
+ π
+ 4
+
+ )
+
+For the following exercises, find 
+
+ z
+ 1
+
+ z
+ 2
+
+ in polar form.
+z
+ 1
+ 
+ =21cis(
+ 
+ 135°
+ );
+ z
+ 2
+ 
+ =3cis(
+ 
+ 65°
+ )
+7cis(
+ 
+ 70°
+ )
+z
+ 1
+ 
+ =
+ 2
+ 
+ cis(
+ 
+ 90°
+ );
+ z
+ 2
+ 
+ =2cis(
+ 
+ 60°
+ )
+z
+ 1
+ 
+ =15cis(
+ 
+ 120°
+ );
+ z
+ 2
+ 
+ =3cis(
+ 
+ 40°
+ )
+5cis(
+ 
+ 80°
+ )
+z
+ 1
+ 
+ =6cis(
+
+ π
+ 3
+
+ );
+ z
+ 2
+ 
+ =2cis(
+
+ π
+ 4
+
+ )
+z
+ 1
+ 
+ =5
+ 2
+ 
+ cis(
+ π
+ );
+ z
+ 2
+ 
+ =
+ 2
+ 
+ cis(
+
+ 2π
+ 3
+
+ )
+5cis(
+
+ π
+ 3
+
+ )
+z
+ 1
+ 
+ =2cis(
+
+ 3π
+ 5
+
+ );
+ z
+ 2
+ 
+ =3cis(
+
+ π
+ 4
+
+ )
+
+For the following exercises, find the powers of each complex number in polar form.
+
+Find 
+
+ z
+ 3
+
+ when 
+ 
+ z=5cis(
+ 
+ 45°
+ ).
+125cis(
+ 
+ 135°
+ )
+
+Find 
+
+ z
+ 4
+
+ when 
+ 
+ z=2cis(
+ 
+ 70°
+ ).
+
+Find 
+
+ z
+ 2
+
+ when 
+ 
+ z=3cis(
+ 
+ 120°
+ ).
+9cis(
+ 
+ 240°
+ )
+
+Find 
+
+ z
+ 2
+
+ when 
+ 
+ z=4cis(
+
+ π
+ 4
+
+ ).
+
+Find 
+
+ z
+ 4
+
+ when 
+ 
+ z=cis(
+
+ 3π
+ 
+ 16
+
+ ).
+cis(
+
+ 3π
+ 4
+
+ )
+
+Find 
+
+ z
+ 3
+
+ when 
+ 
+ z=3cis(
+
+ 5π
+ 3
+
+ ).
+
+For the following exercises, evaluate each root.
+
+Evaluate the cube root of 
+ 
+ z
+ when 
+ 
+ z=27cis(
+ 
+ 240°
+ ).
+3cis(
+ 
+ 80°
+ ),3cis(
+ 
+ 200°
+ ),3cis(
+ 
+ 320°
+ )
+
+Evaluate the square root of 
+ 
+ z
+ when 
+ 
+ z=16cis(
+ 
+ 100°
+ ).
+
+Evaluate the cube root of 
+ 
+ z
+ when 
+ 
+ z=32cis(
+
+ 2π
+ 3
+
+ ).
+2
+ 4
+ 3
+ 
+ cis(
+
+ 2π
+ 9
+
+ ),2
+ 4
+ 3
+ 
+ cis(
+
+ 8π
+ 9
+
+ ),2
+ 4
+ 3
+ 
+ cis(
+
+ 14π
+ 9
+
+ )
+
+Evaluate the square root of 
+ 
+ z
+ when 
+ 
+ z=32cis(
+ π
+ ).
+
+Evaluate the square root of 
+ 
+ z
+ when 
+ 
+ z=8cis(
+
+ 7π
+ 4
+
+ ).
+2
+ 2
+ 
+ cis(
+
+ 7π
+ 8
+
+ ),2
+ 2
+ 
+ cis(
+
+ 15π
+ 8
+
+ )
+
+Graphical
+
+For the following exercises, plot the complex number in the complex plane.
+2+4i
+−3−3i
+5−4i
+−1−5i
+3+2i
+2i
+−4
+6−2i
+−2+i
+1−4i
+
+Technology
+
+For the following exercises, find all answers rounded to the nearest hundredth.
+
+Use the rectangular to polar feature on the graphing calculator to change 
+ 
+ 5+5i
+ to polar form.
+
+Use the rectangular to polar feature on the graphing calculator to change 
+ 
+ 3−2i
+
+to polar form.
+3.61
+ e
+ 
+ −0.59i
+
+Use the rectangular to polar feature on the graphing calculator to change 
+ 
+ −3−8i
+
+to polar form.
+
+Use the polar to rectangular feature on the graphing calculator to change 
+ 
+ 4cis(
+ 
+ 120°
+ )
+ to rectangular form.
+−2+3.46i
+
+Use the polar to rectangular feature on the graphing calculator to change 
+ 
+ 2cis(
+ 
+ 45°
+ )
+ to rectangular form.
+
+Use the polar to rectangular feature on the graphing calculator to change 
+ 
+ 5cis(
+ 
+ 210°
+ )
+ to rectangular form.
+−4.33−2.50i
+
+the angle associated with a complex number; the angle between the line from the origin to the point and the positive real axis
+formula used to find the 
+ 
+ nth
+ power or nth roots of a complex number; states that, for a positive integer 
+ 
+ n,
+ z
+ n
+
+ is found by raising the modulus to the 
+ 
+ nth
+ power and multiplying the angles by 
+ 
+ n
+the absolute value of a complex number, or the distance from the origin to the point 
+ 
+ (
+ 
+ x,y
+ );
+ also called the amplitude
+a complex number expressed in terms of an angle 
+ 
+ θ
+ and its distance from the origin 
+ 
+ r;
+ can be found by using conversion formulas 
+ 
+ x=rcosθ,y=rsinθ,
+ and 
+ 
+ r=
+
+ x
+ 2
+ 
+ +
+ y
+ 2

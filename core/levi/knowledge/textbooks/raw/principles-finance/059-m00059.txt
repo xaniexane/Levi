@@ -1,0 +1,393 @@
+# m00059
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Unequal Payments Using a Financial Calculator or Microsoft Excel
+
+Unequal Payments Using a Financial Calculator or Microsoft Excel
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate unequal payments using a financial calculator.
+
+Calculate unequal payments using Microsoft Excel.
+
+Using a Financial Calculator
+
+A financial calculator provides utilities to simplify the analysis of uneven mixed cash streams (see ).
+
+Earlier, we explored the future value of a seven-year mixed stream, with $2,000 being saved each year, plus an additional $10,000 in year 4 and an additional $3,000 in year 6. All cash flows and balances earn 7% per year compounded annually, and the payments are made at the start of each year. We proved that this result totals approximately $35,062.26. We begin by clearing all memory functions and then entering each cash flow as follows:
+
+Steps for Calculating Uneven Mixed Cash FlowsThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+CF 2ND [CLR WORK]
+CF0
+0.00
+2
+ENTER ↓
+CF0
+0.00
+3
+Move to next entry
+↓
+C01
+0.00
+4
+Enter first cash flow
+2000 ENTER
+C01 =
+2000.00
+5
+Move to next entry
+↓ ↓
+C02
+0.00
+6
+Enter second cash flow
+2000 ENTER ↓
+C02 =
+2000.00
+7
+Move to next entry
+↓ ↓
+C03
+0.00
+8
+Enter third cash flow
+2000 ENTER
+C03 =
+2000.00
+9
+Move to next entry
+↓ ↓
+C04
+0.00
+10
+Enter fourth cash flow
+12000 ENTER
+C04 =
+12000.00
+11
+Move to next entry
+↓ ↓
+C05
+0.00
+12
+Enter fifth cash flow
+2000 ENTER
+C05 =
+2000.00
+13
+Move to next entry
+↓ ↓
+C06
+0.00
+14
+Enter sixth cash flow
+5000 ENTER
+C06 =
+5000.00
+15
+Move to next entry
+↓ ↓
+C07
+0.00
+16
+Enter seventh cash flow
+2000 ENTER
+C07 =
+2000.00
+17
+NPV
+I
+0.00
+18
+Enter interest rate
+7 ENTER
+I =
+7.00
+19
+Press down arrow to show current NPV rate
+↓
+NPV
+0.00
+20
+CPT
+NPV
+20,406.56
+At this point, we have found the net present value of this uneven stream of payments. You will recall, however, that we are not trying to calculate present values; we are looking for future values. The TI BA II Plus™ Professional calculator does not have a similar function for future value. This means that either we can find the future value for each payment in the stream and combine them, or we can take the net present value we just calculated and easily project it forward using the following keystrokes. Note the net present value solution in Step 20 above. We will use that and then use the simpler of the two approaches to calculate future value (see ).
+
+Steps for Calculating Uneven Mixed Cash Flows, Continued
+
+Step
+Description
+Enter
+Display
+21
+Enter NPV from Step 20
+20406.56
+PV =
+20,406.56
+22
+Enter number of compounding periods
+8 N
+N =
+8.00
+23
+Enter interest rate
+7 I/Y
+I/Y =
+7.00
+24
+CPT FV
+FV =
+-35,062.27
+This is consistent with the solution we found earlier, with a difference of one cent due to rounding error.
+
+We may also use the calculator to solve for the present value of a mixed cash stream. Earlier in this chapter, we asked how much money you would need today to fund the following five annual withdrawals, with each withdrawal made at the end of the year, beginning one year from now, and all remaining money earning 6% compounded annually:
+
+Year
+1
+2
+3
+4
+5
+$17,000
+$17,000
+$17,000
+$17,500
+$18,000
+We determined these withdrawals to have a total present value of $72,753.30. Here is an approach to a solution using a financial calculator. In this example, we will store all cash flows in the calculator and perform an operation on them as a whole (see ). Because we will use the NPV function (to be explored in more detail in a later chapter), we enter our starting point as 0 because we do not withdraw any cash until one year after we begin.
+
+Steps for Calculating the Present Value of a Mixed Cash Stream
+
+Step
+Description
+Enter
+Display
+1
+CF 2ND [CLR WORK]
+CF0
+0.00
+2
+ENTER ↓
+CF0
+0.00
+3
+Move to next entry
+↓
+C01
+0.00
+4
+Enter first cash flow
+17000 ENTER
+C01 =
+17000.00
+5
+Move to next entry
+↓ ↓
+C02
+0.00
+6
+Enter second cash flow
+17000 ENTER
+C02 =
+17000.00
+7
+Move to next entry
+↓ ↓
+C03
+0.00
+8
+Enter third cash flow
+17000 ENTER
+C03 =
+17000.00
+9
+Move to next entry
+↓ ↓
+C04
+0.00
+10
+Enter fourth cash flow
+17500 ENTER
+C04 =
+17500.00
+11
+Move to next entry
+↓ ↓
+C05
+0.00
+12
+Enter fifth cash flow
+18000 ENTER
+C05 =
+18000.00
+13
+NPV
+I
+0.00
+14
+Enter interest rate
+6 ENTER
+I =
+6
+15
+Press down arrow to show current NPV rate
+↓
+NPV
+0.00
+16
+CPT
+NPV =
+72,753.49
+This result, you will remember, was calculated earlier in the chapter by the formula approach.
+
+Using Microsoft Excel
+
+Several of the exhibits already in this chapter have been prepared with Microsoft Excel. While full mastery of Excel requires extensive study and practice, enough basics can be learned in two or three hours to provide the user with the ability to quickly and conveniently solve problems, including extensive financial applications. Potential employers and internship hosts have come to expect basic Excel knowledge, something to which you are exposed in college.
+
+We will demonstrate the same two problems using Excel rather than a calculator:
+
+The future value of a mixed cash stream for a seven-year investment
+
+The present value of a mixed cash stream of five withdrawals that you wish to make from a fund to be established today
+
+Beginning with the future value problem, we created a simple matrix to lay out the mixed stream of future cash flows, starting on the first day of each year, with all funds earning 7% throughout. Our goal is to determine how much money you will have saved at the end of this seven-year period.
+repeats the data from earlier in the chaper for your convenience.
+
+Year
+0
+1
+2
+3
+4
+5
+6
+7
+Cash Invested
+$0.00
+$2,000
+$2,000
+$2,000
+$12,000
+$2,000
+$5,000
+$2,000
+Cumulative Cash Flows
+$2,000
+$4,000
+$6,000
+$18,000
+$20,000
+$25,000
+$27,000
+Years to Compound
+7
+6
+5
+4
+3
+2
+is an Excel matrix that parallels above.
+
+Compound Interest Example
+
+Download the spreadsheet file containing key Chapter 9 Excel exhibits.
+
+We begin by entering the cash flow as shown in . The assumed interest rate is 7%. The interest on the balance is calculated as the amount invested at the start of the year multiplied by the assumed interest rate. The cumulative cash flows of each year are calculated as follows: for year 1, the amount invested plus the interest on the balance; for years 2 through 7, the amount invested plus the interest on the balance plus the previous year’s running balance. By adding up the amount invested and the interest on the balance, you should arrive at a total of $35,062.27.
+
+We can use Excel formulas to solve time value of money problems. For example, if we wanted to find the present value of the amount invested at 7% over the seven-year time period, we could use the NPV function in Excel. The dialog box for this function (Rate, Value 1, Value2) is shown in .
+
+Dialog Box for NPV Function, Problem 1
+
+The function argument Rate is the interest rate; Value1, Value2, and so on are the cash flows; and “Formula result” is the answer.
+
+We can apply the NPV function to our problem as shown in .
+
+Applying the NPV Function, Problem 1
+
+Please note that the Rate cell value (C1) and the Value1 cell range (C3:I3) will vary depending on how you set up your spreadsheet.
+
+The non-Excel version of the problem, using an assumed interest rate of 7%, produces the same result.
+
+Year
+1
+2
+3
+4
+5
+6
+7
+Amount Invested at Start
+$2,000
+$2,000
+$2,000
+$12,000
+$2,000
+$5,000
+$2,000
+NPV
+$20,406.56
+We conclude with the second problem addressed earlier in this chapter: finding the present value of an uneven stream of payments. We can use Excel’s NPV function to solve this problem as well (see ).
+
+Year
+0
+1
+2
+3
+4
+5
+Expected Amount to Be Withdrawn at End of Year
+$0.00
+$17,000
+$17,000
+$17,000
+$17,500
+$18,000
+Dialog Box for NPV Function, Problem 2
+
+Again, Rate is the interest rate; Value1, Value 2, and so on are the cash flows; and “Formula result” is the answer.
+
+Let us apply the NPV function to our problem, as shown in and .
+
+Applying the NPV Function, Problem 2: Excel Data
+
+Applying the NPV Function, Problem 2: Function Argument
+
+Please note that the Rate cell value (B3) and the Value1 cell range (C2:G2) will vary depending on how you set up your spreadsheet.
+
+The non-Excel version of the problem produces the same result: an NPV of $72,753.49.
+
+Year
+0
+1
+2
+3
+4
+5
+Desired WithdrawalsEach Year
+$17,000
+$17,000
+$17,000
+$17,500
+$18,000
+Interest Rate
+$72,753.49
+
+This section discussed the use of two tools for managing and understanding the time value of money and its many applications when the flows of cash are unequal: the TI BA II Plus™ Professional financial calculator and the spreadsheet application Excel.
+
+Future Value of Uneven Cash Flows
+
+CFA Institute
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.

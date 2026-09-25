@@ -1,0 +1,58 @@
+# m00070
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Nested lists
+
+Nested lists
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Demonstrate the use of a list-of-lists to structure data.
+
+Demonstrate individual element addressing using multi-dimensional indexing.
+
+Use nested loops to iterate a list-of-lists.
+
+List-of-lists
+
+Lists can be made of any type of element. A list element can also be a list. Ex: [2, [3, 5], 17] is a valid list with the list [3, 5] being the element at index 1.
+
+When a list is an element inside a larger list, it is called a nested list. Nested lists are useful for expressing multidimensional data. When each of the elements of a larger list is a smaller list, the larger list is called a list-of-lists.
+
+Ex: A table can be stored as a two-dimensional list-of-lists, where each row of data is a list in the list-of-lists.
+
+List-of-lists
+
+Lists
+
+For each of the questions below, consider the following matrix:
+
+Using nested loops to iterate nested lists
+
+A nested loop structure can be used to iterate a list-of-lists. For a two-dimensional list-of-lists, an outer for loop can be used for rows, and an inner for loop can be used for columns.
+
+Iterating a list-of-lists
+
+The code below demonstrates how to iterate a list-of-lists.
+
+The outer loop on line 9 goes element by element for the larger list. Each element in the larger list is a list. The inner loop on line 10 iterates through each element in each nested list.
+
+The above code's output is:
+
+Iterating a list-of-lists
+
+For each question below, consider the following list:
+
+Matrix multiplication
+
+Write a program that calculates the matrix multiplication product of the matrices matW and matZ below and prints the result. The expected result is shown.
+
+In the result matrix, each element is calculated according to the position of the element. The result at position [i][j] is calculated using row i from the first matrix, W, and column j from the second matrix, Z.
+
+Ex:
+result[1][2] = (row 1 in W) times (column 2 in Z)

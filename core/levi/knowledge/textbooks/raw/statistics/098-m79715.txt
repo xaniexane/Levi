@@ -1,0 +1,740 @@
+# m79715
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Mathematical Phrases, Symbols, and Formulas
+
+Mathematical Phrases, Symbols, and Formulas
+
+English Phrases Written Mathematically
+
+When the English says:
+X ≥ 4
+X ≤ 4
+X < 4
+X ≠ 4
+Formulas
+Formula 1: Factorial
+
+n
+!
+=
+n
+(
+n
+−
+1
+)
+(
+n
+−
+2
+)
+.
+.
+.
+(
+1
+)
+
+Formula 1: Factorial
+0
+!
+=
+1
+Formula 2: Combinations
+ 
+ (
+
+ n
+
+ r
+
+ )=
+ 
+ n!
+
+ (n−r)!r!
+
+Formula 2: Combinations
+Formula 3: Binomial Distribution
+ 
+ X~B(n,p)
+
+Formula 3: Binomial Distribution
+P(X=x)=(
+
+n
+
+x
+
+)
+p
+x
+
+q
+
+n−x
+
+, for 
+x
+=
+0
+,
+1
+,
+2
+,
+.
+.
+.
+,
+n
+Formula 4: Geometric Distribution
+ 
+ X~G(p)
+
+Formula 4: Geometric Distribution
+P(X=x)=
+q
+
+x−1
+
+p
+
+, for 
+x
+=
+1
+,
+2
+,
+3
+,
+.
+.
+.
+Formula 5: Hypergeometric Distribution
+ 
+ X~H(r,b,n)
+
+Formula 5: Hypergeometric Distribution
+P
+(
+X
+=
+x
+)
+=
+
+(
+
+(
+
+r
+x
+
+)
+
+(
+
+b
+
+ n
+ −
+ x
+
+)
+
+(
+
+r
++
+b
+
+n
+
+)
+
+)
+Formula 6: Poisson Distribution
+ 
+ X~P(μ)
+
+Formula 6: Poisson Distribution
+P
+(
+X
+=
+x
+)
+=
+
+μ
+x
+
+e
+
+−
+μ
+
+x
+!
+Formula 7: Uniform Distribution
+ 
+ X~U(a,b)
+
+Formula 7: Uniform Distribution
+f(X)=
+ 1
+ 
+ b−a
+
+, 
+a
+<
+x
+<
+b
+Formula 8: Exponential Distribution
+ 
+ X~Exp(m)
+
+Formula 8: Exponential Distribution
+f(x)=m
+ e
+ 
+ −mx
+
+ m>0,x≥0
+Formula 9: Normal Distribution
+ 
+ X~N(μ,
+ σ
+ 2
+ 
+ )
+
+Formula 9: Normal Distribution
+f
+(
+x
+)
+=
+
+1
+
+σ
+
+2
+π
+
+e
+
+−
+(
+x
+−
+μ
+)
+
+2
+
+2
+σ
+
+2
+
+ , 
+–∞<x
+<∞
+Formula 10: Gamma Function
+ 
+ Γ(z)=
+
+ ∫
+ ​
+
+ ∞
+ 0
+
+ x
+ 
+ z−1
+
+ e
+ 
+ −x
+
+ dx
+ 
+ z>0
+
+Formula 10: Gamma Function
+Γ
+(
+
+1
+2
+
+)
+=
+
+π
+Γ
+(
+m
++
+1
+)
+=
+m
+!
+ for m, a nonnegative integer
+
+otherwise: 
+ 
+ Γ(a+1)=aΓ(a)
+Formula 11: Student's t-distribution
+ 
+ X~
+ t
+ 
+ df
+
+Formula 11: Student's t-distribution
+f
+(
+x
+)
+=
+
+(
+
+1
++
+
+ x
+ 2
+ 
+ n
+
+)
+
+−
+(
+n
++
+1
+)
+
+2
+
+Γ
+
+(
+
+n
++
+1
+
+2
+
+)
+
+nπ
+
+Γ
+
+(
+
+n
+
+2
+
+)
+X
+=
+
+Z
+
+Y
+n
+Z~N(0,1),Y~
+ Χ
+ 
+ df
+ 
+ 2
+
+, n = degrees of freedom
+Formula 12: Chi-Square Distribution
+ 
+ X~
+ Χ
+ 
+ df
+ 
+ 2
+
+Formula 12: Chi-Square Distribution
+f
+(
+x
+)
+=
+
+x
+
+n
+−
+2
+
+2
+
+e
+
+−
+x
+
+2
+
+2
+
+n
+2
+
+Γ
+
+(
+
+n
+2
+
+)
+
+,
+x>0 , n = positive integer and degrees of freedom
+Formula 13: F Distribution
+ 
+ X~F
+ 
+ df(n),df(d)
+
+Formula 13: F Distribution
+df(n)=
+degrees of freedom for the numerator
+df(d)=
+degrees of freedom for the denominator
+f(x)=
+ 
+ Γ(
+ 
+ u+v
+ 
+ 2
+ 
+ )
+
+ Γ(
+ u
+ 2
+ 
+ )Γ(
+ v
+ 2
+ 
+ )
+
+ (
+ u
+ v
+ 
+ )
+
+ u
+ 2
+
+ x
+ 
+ (
+ u
+ 2
+ 
+ −1)
+
+ [1+(
+ u
+ v
+ 
+ )
+ x
+ 
+ −0.5(u+v)
+
+ ]
+X
+=
+
+Y
+u
+
+W
+v
+
+, Y, W are chi-square
+
+Symbols and Their Meanings
+
+Symbols and their Meanings
+
+Chapter (1st used)
+Symbol
+Spoken
+Meaning
+Sampling and Data
+The square root of
+same
+π
+Pi
+3.14159… (a specific number)
+Q1
+Quartile one
+the first quartile
+Q2
+Quartile two
+the second quartile
+Q3
+Quartile three
+the third quartile
+IQR
+Q3 – Q1 = IQR
+x
+ ¯
+x-bar
+sample mean
+μ
+mu
+population mean
+s sx sx
+s
+sample standard deviation
+s2 sx2
+s squared
+sample variance
+σ σx σx
+sigma
+population standard deviation
+σ2 σx2
+sigma squared
+population variance
+Σ
+capital sigma
+sum
+{
+ }
+brackets
+set notation
+S
+S
+sample space
+A
+Event A
+event A
+P
+ 
+ (
+ A
+ )
+probability of A
+probability of A occurring
+P(A|B)
+probability of A given B
+prob. of A occurring given B has occurred
+P(A OR B)
+prob. of A or B
+prob. of A or B or both occurring
+P(A AND B)
+prob. of A and B
+prob. of both A and B occurring (same time)
+A′
+A-prime, complement of A
+complement of A, not A
+P(A')
+prob. of complement of A
+same
+G1
+green on first pick
+same
+P(G1)
+prob. of green on first pick
+same
+PDF
+prob. distribution function
+same
+X
+X
+the random variable X
+X ~
+the distribution of X
+same
+B
+binomial distribution
+same
+G
+geometric distribution
+same
+H
+hypergeometric dist.
+same
+P
+Poisson dist.
+same
+λ
+Lambda
+average of Poisson distribution
+≥
+greater than or equal to
+same
+≤
+less than or equal to
+same
+Discrete Random Variables
+=
+equal to
+same
+Discrete Random Variables
+≠
+not equal to
+same
+f of x
+function of x
+pdf
+prob. density function
+same
+U
+uniform distribution
+same
+Exp
+exponential distribution
+same
+k
+critical value
+f of x equals
+same
+m
+decay rate (for exp. dist.)
+N
+normal distribution
+same
+z-score
+same
+Z
+standard normal dist.
+same
+CLT
+Central Limit Theorem
+same
+X-bar
+the random variable X-bar
+μ
+ x
+mean of X
+the average of X
+μ
+ 
+ x
+ ¯
+mean of X-bar
+the average of X-bar
+σ
+ x
+standard deviation of X
+same
+σ
+ 
+ x
+ ¯
+standard deviation of X-bar
+same
+ΣX
+sum of X
+same
+Σx
+sum of x
+same
+CL
+confidence level
+same
+CI
+confidence interval
+same
+EBM
+error bound for a mean
+same
+EBP
+error bound for a proportion
+same
+t
+Student's t-distribution
+same
+df
+degrees of freedom
+same
+t
+ 
+ α
+ 2
+student t with a/2 area in right tail
+same
+p-prime; p-hat
+sample proportion of success
+q-prime; q-hat
+sample proportion of failure
+H-naught, H-sub 0
+null hypothesis
+H-a, H-sub a
+alternate hypothesis
+H-1, H-sub 1
+alternate hypothesis
+α
+alpha
+probability of Type I error
+β
+beta
+probability of Type II error
+X1-bar minus X2-bar
+difference in sample means
+mu-1 minus mu-2
+difference in population means
+P1-prime minus P2-prime
+difference in sample proportions
+p1 minus p2
+difference in population proportions
+Ky-square
+Chi-square
+O
+Observed
+Observed frequency
+E
+Expected
+Expected frequency
+y equals a plus b-x
+equation of a line
+y-hat
+estimated value of y
+r
+correlation coefficient
+same
+ε
+error
+same
+SSE
+Sum of Squared Errors
+same
+Linear Regression and Correlation
+1.9s
+1.9 times s
+F-ratio

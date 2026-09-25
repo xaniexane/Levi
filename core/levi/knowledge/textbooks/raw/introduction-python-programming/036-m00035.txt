@@ -1,0 +1,79 @@
+# m00035
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Booleans represent a value of True or False.
+
+Comparison operators compare values and produce True or False.
+
+Logical operators take condition operand(s) and produce True or False.
+
+Operators are evaluated in order according to precedence and associativity.
+
+Conditions are expressions that evaluate to True or False.
+
+Decision statements allow different paths of execution (branches) through code based on conditions.
+
+Decision statements can be nested inside other decision statements.
+
+Conditional expressions are single-line versions of if-else statements.
+
+At this point, you should be able to write programs that evaluate conditions and execute code statements accordingly with the correct order of operations. The programming practice below ties together most topics presented in the chapter.
+
+Chapter 4 reference.
+
+Function
+Converts x to a Boolean value, either True or False.
+Converts x to a Boolean value, either True or False.
+x == y
+ (Equality)
+Compares the values of x and y and returns True if the values are equal and False otherwise.
+ Ex: 10 == 10 is True.
+Compares the values of x and y and returns True if the values are equal and False otherwise.
+ Ex: 10 == 10 is True.
+x != y
+ (Inequality)
+Compares the values of x and y and returns True if the values are inequal and False otherwise. Ex: 7 != 4 is True.
+Compares the values of x and y and returns True if the values are inequal and False otherwise. Ex: 7 != 4 is True.
+x > y
+ (Greater than)
+Compares the values of x and y and returns True if the x is greater than y and False otherwise. Ex: 9 > 3 is True.
+Compares the values of x and y and returns True if the x is greater than y and False otherwise. Ex: 9 > 3 is True.
+x < y
+ (Less than)
+Compares the values of x and y and returns True if the x is less than y and False otherwise. Ex: 9 < 8 is False.
+Compares the values of x and y and returns True if the x is less than y and False otherwise. Ex: 9 < 8 is False.
+x >= y
+ (Greater than or equal)
+Compares the values of x and y and returns True if the x is greater than or equal to y and False otherwise. Ex: 2 >= 2 is True.
+Compares the values of x and y and returns True if the x is greater than or equal to y and False otherwise. Ex: 2 >= 2 is True.
+x <= y
+ (Less than or equal)
+Compares the values of x and y and returns True if the x is less than or equal to y and False otherwise. Ex: 8 <= 7 is False.
+Compares the values of x and y and returns True if the x is less than or equal to y and False otherwise. Ex: 8 <= 7 is False.
+x and y
+ (Logical)
+Evaluates the Boolean values of x and y and returns True if both are true. Ex: True and False is False.
+Evaluates the Boolean values of x and y and returns True if both are true. Ex: True and False is False.
+x or y
+ (Logical)
+Evaluates the Boolean values of x and y and returns True if either is true. Ex: True or False is True.
+Evaluates the Boolean values of x and y and returns True if either is true. Ex: True or False is True.
+not x
+ (Logical)
+Evaluates the Boolean value of x and returns True if the value is false and False if the value is true. Ex: not True is False.
+Evaluates the Boolean value of x and returns True if the value is false and False if the value is true. Ex: not True is False.
+if statement
+else statement
+elif statement
+Nested if statement
+Nested if statement
+expression_if_true if condition else expression_if_false

@@ -1,0 +1,143 @@
+# m00086
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Maintaining Records in a Database
+
+Maintaining Records in a Database
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Examine existing records in a database
+
+Construct new records to add to a database
+
+Update existing records in a database
+
+Demonstrate the process to delete records from a database
+
+Most of the time, when employees maintain and work with a database, they access data that has been provided to them from another data storage area, such as the company’s data warehouse. The tasks in the analysis are to import the data, review the data to ensure that it is brought into the database correctly, and then use the data. Sometimes, however, users need to complete other tasks to ensure that the database processes the data correctly.
+
+Data integrity is a cornerstone of the digital organization. Without data that can be trusted, companies cannot transform themselves to be successful in the digital world. Transformation comes with two data-related problems—how companies store and access data and the quality of that data. For an overview of these issues, read this article on data integrity in business and think about the ethical requirements for the data professional and organizational leadership and how they need to balance the quality, security, and accessibility of data within the organization.
+
+Reviewing Records in a Database
+
+It is possible to view records in database tables but be sure to not change the records.
+
+In a table, records are shown on a datasheet, with each column equaling a field name (a value that all records have) and each row representing an individual record. On the datasheet, there are commands that let you move between records. You can also use the scroll bars to look at different parts of the table. Although using the datasheet to view records can be useful in limited situations, databases typically hold a great deal of data, so in general, querying the table will be a much more efficient way of finding the records you need ().
+
+Data Flow Processes
+
+Data moves across the data landscape from transactional production databases, including sales, customer service, human resources, and other systems, to storage databases such as the data warehouse, which can hold historical information (online transaction processing (OLTP)). Once housed in a data store, datasets can be made available to databases like Access and spreadsheets like Excel for local use and analysis (online analytical processing (OLAP)). Why would it be important to keep in mind how and when data was collected from a production system when performing analysis on that data in Access?
+
+If you need to look at records in Datasheet View, there are commands at the bottom of the screen that will help you move between them. When a datasheet view is open, these commands appear automatically in Access, on the bottom left side of the screen.
+
+The record navigation buttons open any time that records are shown. As you work in the database, you will see these buttons in Datasheet View and in certain form views. The command buttons include jumping to the first or last record in the series, navigating one record ahead or back, and adding a new record, as you can see in . You can also add a filter or use the search feature to find a specific field value.
+
+Constructing New Records
+
+Databases are historical in that they record past details about an organization, but they also need to be updated as time goes on. There are a variety of ways to update a database, including both manual and automated updates. Most of the time, when you use Access, you will import a dataset or file from another system, such as the organization’s data warehouse.
+
+Adding a Record Manually
+
+If you need to add a record into a database, you can either add the record to the table manually or import it from another database. To add a record manually:
+
+Open the table in Datasheet View.
+
+On the Home tab, click the command New in the Records group.
+
+Fill in the information, using Tab or the left and right arrow keys to move through the record.
+
+Once you are done, use Tab or the up and down arrows to move to the next record, or press Shift+Enter (or any version of Save that saves a record).
+
+Importing a Record
+
+Creating files that can be imported to other systems is a hallmark of a digital organization. When working with Access, we are likely to import files from other, larger systems. Data is collected in business units across an organization, and using that data is key to an effective business. Business units routinely transfer files between systems, which in turn lets units analyze and create actionable information.
+
+Most systems can create comma-delimited (CSV) files, which use commas as delimiters or breakpoints to tell Access (or any other program) where data should be separated. CSV files can be read into most Microsoft products and other popular software packages. There are also other formats designed for importing and exporting files, which use another type of formatting to delimit, or separate, data.
+
+Access can import a variety of file types, including Excel, CSV, and XML, as well as files specific to databases and other systems or software products. Even so, CSV is one of the most common formats for data importing ().
+
+Before importing a file, be familiar with the file and its contents. To make the import process easier, you may want to rename fields so that they match in the file and the database.
+
+Once your file is ready, you will likely want to import it to a new table so you can catch and correct any errors without corrupting the data in your other data tables. Depending on the specific type of work you are doing, you can either set up a table ahead of time or import the data into a new table.
+
+Note: Access has the ability to import data directly into existing tables manually through the Import command and by connecting automatically with a database or system.
+
+Follow these steps in importing a file:
+
+With your database open, select the External Data tab in Access.
+
+Choose the New Data Source button.
+
+Choose the file type you want to work with—for example, text. A dialog box will open.
+
+Select the file you want to import.
+
+Choose the import type that fits best with your project. If you are concerned about an import, try importing the data into a new table to be sure you have all of the fields and parameters set correctly.
+
+Click on OK; the import screen will open (see ).
+
+ Importing a file using the Import Text Wizard allows the user to select the correct format for their file. (Used with permission from Microsoft)
+
+The Import Wizard, which is a part of the import process, will open and ask you to choose how your text file is structured. (Hint: Most text files are delimited, and CSV files use commas as the delimiting or separating character.) Once you choose whether the file is delimited or fixed width (broken up based on a certain number of characters), click Next to continue.
+
+On the next screen, set your delimiter (comma for a CSV file) and click the first row that contains field names (assuming your first row is titles or labels). Then preview the data and, when you are sure it is correct, click Next to move to the next screen. See .
+
+In the screen that appears, you can change field names and data types, if necessary (). Once you are ready, click Next to continue.
+
+The Import Wizard will ask if you would like to set a primary key or have Access set it for you. Make your choice, as seen in , and click Next to continue.
+
+The final Import Wizard screen will allow you to name your new table. Be sure to use a descriptive name that distinguishes it from the tables you already have in the database.
+
+When you are done, click Finish to view your new table. If your table has errors (e.g., if data cannot be imported because of mismatches in the field type), a new table containing the errors will appear in your list, as shows. If you find any errors, you may want to delete your imported tables and walk through these steps again.
+
+Data management is a bigger concern than just tables and fields—data professionals at all levels need to understand the data landscape and how organizations can manage it. This article on data lineage provides an overview of some of the challenges and considerations in data management.
+
+Editing or Deleting an Existing Record
+
+Once you locate the record you want to update, you can edit it. To edit a record:
+
+Open the table in Datasheet View (or Form View).
+
+Click on the field you would like to edit.
+
+Place your cursor where you want the information to appear.
+
+Enter your text.
+
+Use Tab to move across your record.
+
+As you work, Access will save your changes whenever you move your cursor from one field to another. If you want to save the record manually to be sure your data is saved, you can either click the Home tab then click Save in the Records group, or press Shift+Enter on the keyboard.
+
+When you are updating a record, you may see symbols appear that share the status of that record, as shows. As you manually edit records, pay attention to these data entry symbols.
+
+Deleting a Record
+
+If you need to delete a record or set of records for any reason, you can do so through either the datasheet or the form.
+
+Open the table in Datasheet View or Form View.
+
+Select the record by clicking on the record selector. To select multiple records, either click and drag across record selectors or use Ctrl+Click.
+
+Press Delete or select Home>Records>Delete.
+
+Summary
+
+Microsoft Access can be used to locate and review records.
+
+You will likely add records to a database by importing from other data sources.
+
+It is possible to edit or delete records in a database, but these functions are less common.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+options that open whenever records are shown, enabling users to execute commands in a database

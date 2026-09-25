@@ -1,0 +1,79 @@
+# m00097
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Methods
+
+Methods
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Write overridden methods to change behavior of inherited methods.
+
+Use super() to access superclass methods.
+
+Identify applications of polymorphism in method and function use.
+
+Overriding methods
+
+Sometimes a programmer wants to change the functions a subclass inherits. Mint is a subclass that has the same functionality as Plant, except for one function. A subclass can override a superclass method by defining a method with the same name as the superclass method.
+
+Overriding a superclass method
+
+Overriding methods
+
+super()
+super() is a special method that provides a temporary superclass object instance for a subclass to use. super() is commonly used to call superclass methods from a subclass. super() is commonly used in a subclass's __init__() to assign inherited instance attributes. Ex: super().__init__().
+
+Using super() to call the superclass __init__() method
+
+Using super()
+
+Consider the following program.
+
+Polymorphism
+Polymorphism is the concept of having many forms. In programming, a single name can be used for multiple functionalities. Within inheritance, polymorphism is the basis of method overriding, as multiple methods have the same name.
+
+Polymorphism and inheritance
+
+The name display() maps to multiple methods. The class type of the calling object determines which display() method is executed.
+
+The code's output is:
+
+Polymorphism can also be used with methods of unrelated classes. The class type of the calling object determines the method executed.
+
+Polymorphism and methods
+Tax and ContractTax are unrelated classes that each define calc_tax(). calc_tax() isn't overridden as ContractTax isn't inherited from Tax.
+
+The code's output is:
+
+Polymorphism allows methods to be called with different parameter types. Many built-in operators and functions have this utility.
+
+Polymorphism and functions
+len() can be called with multiple types, including lists and strings.
+
+The code's output is:
+
+Polymorphism in practice
+
+Overriding methods
+
+Given the Pet class, create a Bird class inherited from Pet and a Finch class inherited from Bird. Override the display() method in Bird and Finch such that the program output is:
+
+Using super()
+
+Given the Employee class, create a Developer class inherited from Employee with methods __init__() and print_info() such that:
+__init__()
+
+Uses super() to call Employee's __init__() to initialize e_id and hire_year.
+
+Assigns lang_xp with list parameter lang_xp.
+print_info()
+
+Uses super() to print e_id and hire_year.
+
+Prints "Language(s):" followed by lang_xp.

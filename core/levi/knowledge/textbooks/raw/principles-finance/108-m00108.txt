@@ -1,0 +1,156 @@
+# m00108
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Calculating the Weighted Average Cost of Capital
+
+Calculating the Weighted Average Cost of Capital
+
+By the end of this section, you will be able to:
+
+Calculate the weighted average cost of capital (WACC).
+
+Describe issues that arise from estimating the cost of equity capital.
+
+Describe the use of net debt in calculating WACC.
+
+Once you know the weights in a company’s capital structure and have estimated the costs of the different sources of its capital, you can calculate the company’s weighted average cost of capital (WACC).
+
+WACC Equation
+
+WACC is calculated using the equation
+D%, P%, and E% represent the weight of debt, preferred stock, and common equity, respectively, in the capital structure. Note that D% + P% + E% must equal 100% because the company must account for 100% of its financing. The after-tax cost of debt is rd1-T. The cost of preferred stock capital is represented by rpfd, and the cost of common stock capital is represented by re.
+
+For a company that does not issue preferred stock, P% is equal to zero, and the WACC equation is simply
+
+Earlier in this chapter, we calculated the weights in Bluebonnet Industries’ capital structure to be D%=24.4% and E%=75.6%. We also calculated the after-tax cost of debt for Bluebonnet to be 4.99%. If we use the CAPM to estimate the cost of equity capital for the firm, Bluebonnet’s WACC is computed as
+
+If we use the constant dividend discount model to estimate the cost of equity for Bluebonnet Industries, the WACC is computed as
+
+Calculating WACC in Practice
+
+The equation for calculating WACC is straightforward. However, issues come up when financial managers calculate WACC in practice. Both the weights of the equity components and the cost of the equity components are needed to calculate the WACC. The WACC that financial managers derive will depend on the assumptions and models they use to determine what weights and capital costs to use.
+
+Issues in Estimating the Cost of Equity Capital
+
+We have explored two ways of estimating the cost of equity capital: the CAPM and the constant dividend growth model. Often, these methods will produce similar estimates of the cost of capital; seldom will the two methods provide the same value.
+
+In our example for Bluebonnet Industries, the CAPM estimated the cost of equity capital as 13.4%. The constant dividend growth model estimated the cost of capital as 14.24%. The exact value of the WACC calculation depends on which of these estimates is used. It is important to remember that the WACC is an estimate that is based on a number of assumptions that financial managers made.
+
+For example, using the CAPM requires assumptions be made regarding the values of the risk-free interest rate, the market risk premium, and a firm’s beta. The risk-free interest rate is generally determined using US Treasury security yields. In theory, the yield on US Treasury securities that have a maturity equivalent to the length of the company’s investors’ investment horizon should be used. It is common for financial analysts to use yields on long-term US Treasury bonds to determine the risk-free rate.
+
+To estimate the market risk premium, analysts turn to historical data. Because this historical data is used to estimate the future market risk premium, the question arises of how many years of historical data should be used. Using more years of historical data can lead to more accurate estimates of what the average past return has been, but very old data may have little relevance if today’s financial market environment is different from what it was in the past. Old data may have little relevance for investors’ expectations today. Typical market risk premiums used by financial managers range from 5% to 8%.
+
+The same issue with how much historical data should be considered arises when calculating a company’s beta. Different financial managers can calculate significantly different betas even for well-established, stable companies. In April 2021, for example, the beta for IBM was reported as 0.97 by MarketWatch and as 1.25 by Yahoo! Finance.
+
+The CAPM estimate of the cost of equity capital for IBM is significantly different depending on what source is used for the company’s beta and what value is used for the market risk premium. Using a market risk premium of 5%, the beta of 0.97 provided by MarketWatch, and a risk-free rate of 3% results in a cost of capital of
+
+If, instead, a market risk premium of 8% and the beta of 1.25 provided by Yahoo! Finance are used, the cost of capital is estimated to be
+
+Estimating the Equity Cost of Capital
+
+Although the calculation of the cost of capital using the CAPM equation is simple and straightforward, there is not one definitive equity cost of capital for a company that all financial managers will agree on. Consider the eight companies spotlighted in .
+
+Four estimates of the equity cost of capital are calculated for each firm. The first two estimates are based on the beta provided by MarketWatch for each of the companies. A risk-free rate of 3% is assumed. Market risk premiums of both 5% and of 8% are considered. A market risk premium of 5% would suggest that long-run investors who hold a well-diversified portfolio, such as one with all of the stocks in the S&P 500, will average a return 5 percentage points higher than the risk-free rate, or 8%. If you assume instead that the average long-run return on the S&P 500 is 11%, then people who purchase a portfolio of those stocks are rewarded by earning 8 percentage points more than the 3% they would earn investing in the risk-free security.
+
+The last two estimates of the cost of equity capital for each company also use the same risk-free rate of 3% and the possible market risk premiums of 5% and 8%. The only difference is that the beta provided by Yahoo! Finance is used in the calculation.
+
+Estimates of Equity Cost of Capital for Eight Companies
+
+Company
+Industry
+MarketWatch
+Yahoo! Finance
+Beta
+MRP = 5%
+MRP = 8%
+Beta
+MRP = 5%
+Kroger
+Food retail
+0.31
+4.55%
+5.48%
+0.66
+6.30%
+Coca-Cola
+Nonalcoholic beverages
+0.69
+6.45%
+8.52%
+0.62
+6.10%
+AT&T
+Telecommunications
+0.74
+6.70%
+8.92%
+0.74
+6.70%
+Kraft Heinz
+Food products
+0.82
+7.10%
+9.56%
+1.14
+8.70%
+Microsoft
+Software
+1.19
+8.95%
+12.52%
+0.79
+6.95%
+Goodyear Tire and Rubber
+Tires
+1.24
+9.20%
+12.92%
+2.26
+14.30%
+American Airlines
+Passenger airlines
+1.34
+9.70%
+13.72%
+1.93
+12.65%
+KB Homes
+Residential construction
+1.42
+10.10%
+14.36%
+1.83
+12.15%
+17.64%
+The range of the equity cost of capital estimates for each of the firms is significant. Consider, for example, Goodyear Tire and Rubber. According to MarketWatch, the beta for the company is 1.24, resulting in an estimated cost of equity capital between 9.20% and 12.92%. The beta provided by Yahoo! Finance is much higher, at 2.26. Using this higher beta results in an estimated equity cost of capital for Goodyear Tire and Rubber between 14.30% and 21.08%. This leaves the financial managers of Goodyear Tire and Rubber with an estimate of the equity cost of capital between 9.20% and 21.08%, using a range of reasonable assumptions.
+
+What is a financial manager to do when one estimate is more than twice as large as another estimate? A financial manager who believes the equity cost of capital is close to 9% is likely to make very different choices from one who believes the cost is closer to 21%. This is why it is important for a financial manager to have a broad understanding of the operations of a particular company. First, the manager must know the historical background from which these numbers were derived. It is not enough for the manager to know that beta is estimated as 1.24 or 2.26; the manager must be able to determine why the estimates are so different. Second, the manager must be familiar enough with the company and the economic environment to draw a conclusion about what set of assumptions will most likely be reasonable going forward. While these numbers are based on historical data, the financial manager’s main concern is what the numbers will be going forward.
+
+It is evident that estimating the equity cost of capital is not a simple task for companies. Although we do see a wide range of estimates in the table, some general principles emerge. First, the average company has a beta of 1. With a risk-free rate of 3% and a market risk premium in the range of 5% to 8%, the cost of equity capital will fall within a range of 8% to 11% for the average company. Companies that have a beta less than 1 will have an equity cost of capital that falls below this range, and companies that have a beta greater than 1 will have an equity cost of capital that rises above this range.
+
+Recall that a company’s beta is heavily influenced by the type of industry. Grocery stores and providers of food products, for example, tend to have betas less than 1. During recessionary times, people still eat, but during expansionary times, people do not significantly increase their spending on these products. Thus, companies such as Kroger, Coca-Cola, and Kraft Heinz will tend to have low betas and a range of equity cost of capital below 8% to 11%.
+
+The sales of companies in other industries tend to be much more volatile. During expansionary periods, people fly to vacation destinations and purchase new homes. During recessionary periods, families cut back on these discretionary expenditures. Thus, companies such as American Airlines and KB Homes will have higher betas and ranges of equity cost of capital that exceed the 8% to 11% average. The higher equity cost of capital is needed to incentivize investors to invest in these companies with riskier cash flows rather than in lower-risk companies.
+
+The CAPM estimate depends on assumptions made, but issues also exist with the constant dividend growth model. First, the constant dividend growth model can be used only for companies that pay dividends. Second, the model assumes that the dividends will grow at a constant rate in the future, an assumption that is not always reasonable. It also assumes that the financial manager accurately forecasts the growth rate of dividends; any error in this forecast results in an error in estimating the cost of equity capital.
+
+Given the differences in assumptions made when using the constant dividend growth model and the CAPM to estimate the equity cost of capital, it is not surprising that the numbers from the two models differ. When estimating the cost of equity capital for a particular firm, financial managers must examine the assumptions made for both approaches and decide which set of assumptions is more realistic for that particular company.
+
+Net Debt
+
+Many practitioners use net debt rather than total debt when calculating the weights for WACC. Net debt is the amount of debt that would remain if a company used all of its liquid assets to pay off as much debt as possible. Net debt is calculated as the firm’s total debt, both short-term and long-term, minus the firm’s cash and cash equivalents. Cash equivalents are current assets that can quickly and easily be converted into cash, such as Treasury bills, commercial paper, and marketable securities.
+
+Consider, for example, Apple, which had $112.436 billion in total debt in 2020. The company also had $38.016 billion in cash and cash equivalents. This meant that the net debt for Apple was only $74.420 billion. If Apple used all of its cash and cash equivalents to pay debt, it would be left with $74.420 billion in debt.“Historical Data.” Apple Inc. (AAPL). Yahoo! Finance, accessed October 29, 2021. https://finance.yahoo.com/quote/AAPL/history/
+
+Cash and cash equivalents can be viewed as negative debt. For firms with relatively low levels of cash, this adjustment will not have a large impact on the overall WACC estimate. However, the adjustment can be important for firms that hold substantial cash reserves.
+
+Calculate the weighted average cost of capital (WACC) using the formula
+
+Remember that the WACC is an estimate; different methods of estimating the cost of equity capital can lead to different estimations of WACC.
+
+Calculating the Weighted Average Cost of Capital
+
+a company’s total debt minus any cash or risk-free assets the company holds

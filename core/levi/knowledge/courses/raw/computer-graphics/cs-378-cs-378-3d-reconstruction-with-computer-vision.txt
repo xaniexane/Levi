@@ -1,0 +1,264 @@
+# CS 378: 3D Reconstruction with Computer Vision
+# UTexas
+# source: https://github.com/ut-cs378-vision-2014fall/course-info
+
+GitHub - ut-cs378-vision-2014fall/course-info: Syllabus and other general course information · GitHub
+Skip to content
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+{{ message }}
+Uh oh!
+There was an error while loading. Please reload this page .
+ut-cs378-vision-2014fall
+/
+course-info
+Public
+Notifications
+You must be signed in to change notification settings
+Fork
+13
+Star
+75
+master Branches Tags Go to file Code Open more actions menu Latest commit   History 224 Commits 224 Commits Folders and files Name Name Last commit message Last commit date final_presentations final_presentations     images images     meeting-notes meeting-notes     README.md README.md     github_setup.md github_setup.md     installing_open_cv.md installing_open_cv.md     View all files Repository files navigation 3D Reconstruction with Computer Vision
+CS 378 (53132), Fall 2014
+Meetings: Tuesdays and Thursdays, 9:30-11am, WEL 2.256
+Unique number: 53132
+Instructor: Bryan Klingner
+Email: bmk at cs dot utexas dot edu
+Office hours: Thursday 5-6pm, GDC 5.420
+TA: Pengxiang Cheng
+Email: pxcheng at cs dot utexas dot edu
+Office hours: Tuesday 4-5pm, GDC 1.302 (TA Station) Desk 2
+Course discussion on Piazza
+Course aims and objectives
+Projects like Photosynth , Kinect , and Tango have shown the incredible potential of using computer vision to construct immersive 3D environments from easily acquired imagery. In this lab-based class, we'll dive into practical applications of 3D reconstruction, combining hardware and software to build our own 3D environments from scratch.
+We'll use open-source frameworks like OpenCV to do the heavy lifting, with the focus on understanding and applying state-of-the art approaches to geometric computer vision. Along the way, we'll use industry standard revision management tools like Git and Github . The class will culminate in a final project of your choice that puts your new 3D reconstruction skills to use.
+Specific learning objectives
+By the end of the class, you should be able to:
+Extract 3D information latent in 2D images and video.
+Apply state-of-the-art scientific libraries without needing a full grasp of their implementations.
+Use industry standard software engineering practices such as version control and peer code review.
+Class format
+The class will be heavily project-based. Projects will be completed in small groups. I'll assign early projects with specific goals and evaluations. Your group will design the final project, which will occupy roughly the last third of the semester.
+We'll devote lots of in-class time to working on projects with the TA and I available to help. Each class may begin with a short presentation on a topic relevant to the current assignment. You should expect to spend time outside of class gaining additional background and practice with the topics covered by the projects.
+Course Schedule
+This schedule is a living thing and may change as needed to accomodate the class's progress.
+#
+Date
+Topic
+Details
+Reading
+Projects
+1
+Thursday 28 Aug
+Introductions and image basics
+We meet each other. I'll tell you what I hope cover, you'll tell me what you hope to learn.
+2.1, 2.3
+Project 0 out
+2
+Tuesday 2 Sep
+Image Alignment 1
+Image warping
+3.6.1
+3
+Thursday 4 Sep
+Image Alignment 2
+Fitting a model
+6.1.1, 6.1.4
+Project 0 due Project 1 out
+4
+Tuesday 9 Sep
+Feature Matching 1
+What is an interest point? What is a feature?
+4.1.1-3
+5
+Thursday 11 Sep
+Feature Matching 2
+Invariant features and feature matching
+4.1.1-3
+6
+Tuesday 16 Sep
+Image Blending
+High-level overview of blending
+3.5, 9.3, Burt & Adelson
+7
+Thursday 18 Sep
+Stereo 1
+Epipolar geometry
+11.1
+8
+Tuesday 23 Sep
+Stereo 2
+Epipolar review + Project 1 Worktime
+Project 1 due
+9
+Thursday 25 Sep
+Stereo 3
+Computing disparity / Code Review
+Project 1 code reviews out
+10
+Tuesday 30 Sep
+Structure from Motion 1
+Project 1 recap, SfM intro, Project 2
+Project 2 out
+11
+Thursday 2 Oct
+Structure from Motion 2
+Street View SfM
+Project 1 code reviews due
+12
+Tuesday 7 Oct
+Project 2 work week
+13
+Thursday 9 Oct
+Project 2 work week
+14
+Tuesday 14 Oct
+Video 1
+Motion
+Project 2 due
+15
+Thursday 16 Oct
+Video 2
+Background Subtraction / Action Recognition
+Project 2 code reviews due Friday 17 Oct
+16
+Tuesday 21 Oct
+Video 3
+Tracking
+Project 2 Revisions due. Project 3 out
+17
+Thursday 21 Oct
+Applications 1
+Street View indoor geometry reconstruction
+18
+Tuesday 28 Oct
+Applications 2
+Academic survey
+Final project groups and proposals due
+19
+Thursday 30 Oct
+Geometric Computer Vision Systems
+Chris Slaughter, CEO, Lynx Labs
+20
+Tuesday 4 Nov
+Final Project Work
+On-demand topics: None
+Project 3 due, Final project proposal evaluations back
+21
+Thursday 6 Nov
+Final Project Work
+On-demand topics: Video
+Project 3 code reviews due Friday 7 Nov.
+22
+Tuesday 11 Nov
+Final Project Work
+On-demand topics: Structure from motion
+Project 3 final code revisions due.
+23
+Thursday 13 Nov
+Final Project Work
+On-demand topics: Feature matching
+Final project progress report 1 due.
+24
+Tuesday 18 Nov
+Final Project Work
+On-demand topics: Stereo
+25
+Thursday 20 Nov
+Final Project Work
+On-demand topics
+Final project progress report 2 due
+26
+Tuesday 25 Nov
+Final Project Presentations 1
+Group 13: Video overlays Group 1: Automatic climbing route detection Group 8: AR Globe
+27
+Tuesday 2 Dec
+Final Project Presentations 2
+Group 2: Gesture control Group 11: AR Chess Group 6: Stereo 3D scanning Group 7: Kinect/Cardboard 3D modeling Group 9: 2D-to-3D camera pose
+Final projects due
+28
+Thursday 4 Dec
+Final Project Presentations 3
+Group 12: Motion tweening Group 3: Emotion detection Group 10: Hand tracking Group 4: Facial and gesture recognition Group 5: Hand gesture recognition
+Topic overview
+Image basics
+Programming environment (Python/Numpy/OpenCV)
+Revision control with Git
+Code submission, and peer review with Github
+Digital image representation
+Basic image transformations
+Image features
+What is an interest point?
+How can we summarize image appearance?
+Matching features
+Multiple views of a scene
+Camera models
+Homography
+RANSAC
+Image warping
+Stitching
+Stereo and Structure From Motion
+Stereo vision
+Camera motion
+Triangulation
+Track formation
+Real-time 3D tracking
+Object segmentation
+Motion estimation
+Scene estimation
+Course requirements
+Prerequisites
+Basic knowledge of probability, statistics, and linear algebra.
+Strong programming experience. Projects will be completed in Python. While no previous Python experience is required, I expect you to learn the Python you need to complete your assignments on your own outside of class.
+No specific experience with computer vision is required.
+Attendance and Participation
+Classtime will be largely devoted to working in small groups, when you'll have access to me and the TA. While attendance is not required, it's to your advantage to come to collaborate with your group and stay abreast of developments in the course schedule.
+Course materials
+You'll find the following resources useful:
+Computer Vision: Algorithms and Applications, by Rick Szeliski. Free online or buy at Amazon .
+OpenCV Python Tutorials
+Grading
+Grades will be based on a series of projects completed in small groups. Projects will be due about every two weeks. I'll assign different groups of three students for each of projects 0-3, and you can choose your own group of 3-4 students for the final project 4, which will be on a topic of your choosing.
+Each project will be graded in three phases:
+Initial code submission (80%)
+Peer code review (10%)
+Revised code submission (10%)
+See the project pages for details on submission and grading phases.
+Here is a list of the five projects for the class, along with estimated due dates. Actual dates may vary to accomodate class progress.
+Name
+Description
+Weight
+Due date (estimated)
+Project 0
+Account setup and image basics
+10%
+4 Sept
+Project 1
+Stitching a panorama
+20%
+23 Sept
+Project 2
+Dense stereo reconstruction
+20%
+14 Oct
+Project 3
+Real-time tracking
+20%
+4 Nov
+Project 4
+Choose your own adventure!
+30%
+2 Dec
+Late policy
+Submit your project by 11:59 PM on the day that its due according to the project's instructions.
+You're allowed three late days to use at your discretion across the semester with no penalty to your grade. If you submit your assignment any later than 11:59 on its due date, you will consume a late day. After all three late days are consumed, you'll receive no credit for late assignments. If you submit an assignment late, notify the TA by email.
+Programming Guidelines.
+Assignments in this course will be completed in Python 2.7 .
+Code style should follow the guidelines established in PEP 8 and PEP 257 .
+Note: the course logo image is copyright flickr user Dominic Alves, used under Creative Commons license.
+About Syllabus and other general course information Resources Readme Activity Custom properties Stars 75 stars Watchers 8 watching Forks 13 forks Report repository Releases Packages Used by Contributors
+You can’t perform that action at this time.

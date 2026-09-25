@@ -1,0 +1,441 @@
+# m42333
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Capacitors and Dielectrics
+
+Capacitors and Dielectrics
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe the action of a capacitor and define capacitance.
+
+Explain parallel plate capacitors and their capacitances.
+
+Discuss the process of increasing the capacitance of a dielectric.
+
+Determine capacitance given charge and voltage.
+
+A capacitor is a device used to store electric charge. Capacitors have applications ranging from filtering static out of radio reception to energy storage in heart defibrillators. Typically, commercial capacitors have two conducting parts close to one another, but not touching, such as those in . (Most of the time an insulator is used between the two plates to provide separation—see the discussion on dielectrics below.) When battery terminals are connected to an initially uncharged capacitor, equal amounts of positive and negative charge, +Q and –Q, are separated into its two plates. The capacitor remains neutral overall, but we refer to it as storing a charge Q in this circumstance.
+
+Capacitor
+
+A capacitor is a device used to store electric charge.
+
+The amount of charge Q a capacitor can store depends on two major factors—the voltage applied and the capacitor’s physical characteristics, such as its size.
+
+The Amount of Charge Q a Capacitor Can Store
+
+The amount of charge Q a capacitor can store depends on two major factors—the voltage applied and the capacitor’s physical characteristics, such as its size.
+
+A system composed of two identical, parallel conducting plates separated by a distance, as in , is called a parallel plate capacitor. It is easy to see the relationship between the voltage and the stored charge for a parallel plate capacitor, as shown in . Each electric field line starts on an individual positive charge and ends on a negative one, so that there will be more field lines if there is more charge. (Drawing a single field line per charge is a convenience, only. We can draw many field lines for each charge, but the total number is proportional to the number of charges.) The electric field strength is, thus, directly proportional to Q.
+
+The field is proportional to the charge:
+
+where the symbol ∝ means “proportional to.” From the discussion in Electric Potential in a Uniform Electric Field, we know that the voltage across parallel plates is V=Ed. Thus,
+
+It follows, then, that V ∝Q, and conversely,
+
+This is true in general: The greater the voltage applied to any capacitor, the greater the charge stored in it.
+
+Different capacitors will store different amounts of charge for the same applied voltage, depending on their physical characteristics. We define their capacitance C to be such that the charge Q stored in a capacitor is proportional to C. The charge stored in a capacitor is given by
+
+This equation expresses the two major factors affecting the amount of charge stored. Those factors are the physical characteristics of the capacitor, C, and the voltage, V. Rearranging the equation, we see that capacitance C is the amount of charge stored per volt, or
+
+Capacitance
+
+Capacitance C is the amount of charge stored per volt, or
+
+The unit of capacitance is the farad (F), named for Michael Faraday (1791–1867), an English scientist who contributed to the fields of electromagnetism and electrochemistry. Since capacitance is charge per unit voltage, we see that a farad is a coulomb per volt, or
+
+A 1-farad capacitor would be able to store 1 coulomb (a very large amount of charge) with the application of only 1 volt. One farad is, thus, a very large capacitance. Typical capacitors range from fractions of a picofarad 1 pF=10–12 F to millifarads 1 mF=10–3 F.
+shows some common capacitors. Capacitors are primarily made of ceramic, glass, or plastic, depending upon purpose and size. Insulating materials, called dielectrics, are commonly used in their construction, as discussed below.
+
+Parallel Plate Capacitor
+
+The parallel plate capacitor shown in has two identical conducting plates, each having a surface area A, separated by a distance d (with no material between the plates). When a voltage V is applied to the capacitor, it stores a charge Q, as shown. We can see how its capacitance depends on A and d by considering the characteristics of the Coulomb force. We know that like charges repel, unlike charges attract, and the force between charges decreases with distance. So it seems quite reasonable that the bigger the plates are, the more charge they can store—because the charges can spread out more. Thus C should be greater for larger A. Similarly, the closer the plates are together, the greater the attraction of the opposite charges on them. So C should be greater for smaller d.
+
+It can be shown that for a parallel plate capacitor there are only two factors (A and d) that affect its capacitance C. The capacitance of a parallel plate capacitor in equation form is given by
+
+Capacitance of a Parallel Plate Capacitor
+A
+is the area of one plate in square meters, and
+
+ d
+
+is the distance between the plates in meters. The constant
+
+ ε
+ 0
+
+is the permittivity of free space; its numerical value in SI units is
+
+ ε
+ 
+ 0
+
+ =
+ 8.85
+
+ ×
+ 
+ 10
+
+ –
+ 12
+
+ F/m
+
+.
+The units of F/m are equivalent to C2/N·m2. The small numerical value of ε0 is related to the large size of the farad. A parallel plate capacitor must have a large area to have a capacitance approaching a farad. (Note that the above equation is valid when the parallel plates are separated by air or free space. When another material is placed between the plates, the equation is modified, as discussed below.)
+
+Capacitance and Charge Stored in a Parallel Plate Capacitor
+
+(a) What is the capacitance of a parallel plate capacitor with metal plates, each of area 1.00m2, separated by 1.00 mm? (b) What charge is stored in this capacitor if a voltage of 
+
+ 3.00
+ ×
+ 
+ 10
+ 3
+
+ V
+
+ is applied to it?
+Strategy
+
+Strategy
+
+Finding the capacitance C is a straightforward application of the equation C=ε0A/d. Once C is found, the charge stored can be found using the equation Q=CV.
+Solution for (a)
+
+Solution for (a)
+
+Entering the given values into the equation for the capacitance of a parallel plate capacitor yields
+Discussion for (a)
+
+Discussion for (a)
+
+This small value for the capacitance indicates how difficult it is to make a device with a large capacitance. Special techniques help, such as using very large area thin foils placed close together.
+Solution for (b)
+
+Solution for (b)
+
+The charge stored in any capacitor is given by the equation Q=CV. Entering the known values into this equation gives
+Discussion for (b)
+
+Discussion for (b)
+
+This charge is only slightly greater than those found in typical static electricity. Since air breaks down at about 3.00×106V/m, more charge cannot be stored on this capacitor by increasing the voltage.
+
+Another interesting biological example dealing with electric potential is found in the cell’s plasma membrane. The membrane sets a cell off from its surroundings and also allows ions to selectively pass in and out of the cell. There is a potential difference across the membrane of about 
+ 
+ –70 mV
+ 
+. This is due to the mainly negatively charged ions in the cell and the predominance of positively charged sodium (
+
+ Na
+ +
+
+) ions outside. Things change when a nerve cell is stimulated. 
+
+ Na
+ +
+
+ ions are allowed to pass through the membrane into the cell, producing a positive membrane potential—the nerve signal. The cell membrane is about 7 to 10 nm thick. An approximate value of the electric field across it is given by
+
+This electric field is enough to cause a breakdown in air.
+
+Dielectric
+
+The previous example highlights the difficulty of storing a large amount of charge in capacitors. If d is made smaller to produce a larger capacitance, then the maximum voltage must be reduced proportionally to avoid breakdown (since E=V/d). An important solution to this difficulty is to put an insulating material, called a dielectric, between the plates of a capacitor and allow 
+
+ d
+
+ to be as small as possible. Not only does the smaller d make the capacitance greater, but many insulators can withstand greater electric fields than air before breaking down.
+
+There is another benefit to using a dielectric in a capacitor. Depending on the material used, the capacitance is greater than that given by the equation C=ε0Ad by a factor κ, called the dielectric constant. A parallel plate capacitor with a dielectric between its plates has a capacitance given by
+
+Values of the dielectric constant κ for various materials are given in . Note that κ for vacuum is exactly 1, and so the above equation is valid in that case, too. If a dielectric is used, perhaps by placing Teflon between the plates of the capacitor in , then the capacitance is greater by the factor κ, which for Teflon is 2.1.
+
+Take-Home Experiment: Building a Capacitor
+
+How large a capacitor can you make using a chewing gum wrapper? The plates will be the aluminum foil, and the separation (dielectric) in between will be the paper.
+
+Dielectric Constants and Dielectric Strengths for Various Materials at 20ºC
+
+Material
+Dielectric constant κ
+Dielectric strength (V/m)
+Vacuum
+1.00000
+—
+Air
+3
+ ×
+ 
+ 10
+
+ 6
+Bakelite
+24
+ ×
+ 
+ 10
+
+ 6
+Fused quartz
+8
+ ×
+ 
+ 10
+
+ 6
+Neoprene rubber
+12
+ ×
+ 
+ 10
+
+ 6
+Nylon
+14
+ ×
+ 
+ 10
+
+ 6
+Paper
+16
+ ×
+ 
+ 10
+
+ 6
+Polystyrene
+24
+ ×
+ 
+ 10
+
+ 6
+Pyrex glass
+14
+ ×
+ 
+ 10
+
+ 6
+Silicon oil
+15
+ ×
+ 
+ 10
+
+ 6
+Strontium titanate
+8
+ ×
+ 
+ 10
+
+ 6
+Teflon
+60
+ ×
+ 
+ 10
+
+ 6
+Water
+80
+—
+Note also that the dielectric constant for air is very close to 1, so that air-filled capacitors act much like those with vacuum between their plates except that the air can become conductive if the electric field strength becomes too great. (Recall that E=V/d for a parallel plate capacitor.) Also shown in are maximum electric field strengths in V/m, called dielectric strengths, for several materials. These are the fields above which the material begins to break down and conduct. The dielectric strength imposes a limit on the voltage that can be applied for a given plate separation. For instance, in , the separation is 1.00 mm, and so the voltage limit for air is
+
+However, the limit for a 1.00 mm separation filled with Teflon is 60,000 V, since the dielectric strength of Teflon is 60×106 V/m. So the same capacitor filled with Teflon has a greater capacitance and can be subjected to a much greater voltage. Using the capacitance we calculated in the above example for the air-filled parallel plate capacitor, we find that the Teflon-filled capacitor can store a maximum charge of
+
+This is 42 times the charge of the same air-filled capacitor.
+
+Dielectric Strength
+
+The maximum electric field strength above which an insulating material begins to break down and conduct is called its dielectric strength.
+
+Microscopically, how does a dielectric increase capacitance? Polarization of the insulator is responsible. The more easily it is polarized, the greater its dielectric constant κ. Water, for example, is a polar molecule because one end of the molecule has a slight positive charge and the other end has a slight negative charge. The polarity of water causes it to have a relatively large dielectric constant of 80. The effect of polarization can be best explained in terms of the characteristics of the Coulomb force. shows the separation of charge schematically in the molecules of a dielectric material placed between the charged plates of a capacitor. The Coulomb force between the closest ends of the molecules and the charge on the plates is attractive and very strong, since they are very close together. This attracts more charge onto the plates than if the space were empty and the opposite charges were a distance d away.
+
+Another way to understand how a dielectric increases capacitance is to consider its effect on the electric field inside the capacitor. (b) shows the electric field lines with a dielectric in place. Since the field lines end on charges in the dielectric, there are fewer of them going from one side of the capacitor to the other. So the electric field strength is less than if there were a vacuum between the plates, even though the same charge is on the plates. The voltage between the plates is V=Ed, so it too is reduced by the dielectric. Thus there is a smaller voltage V for the same charge Q; since C=Q/V, the capacitance C is greater.
+
+The dielectric constant is generally defined to be κ=E0/E, or the ratio of the electric field in a vacuum to that in the dielectric material, and is intimately related to the polarizability of the material.
+
+Things Great and Small
+The Submicroscopic Origin of Polarization
+
+Polarization is a separation of charge within an atom or molecule. As has been noted, the planetary model of the atom pictures it as having a positive nucleus orbited by negative electrons, analogous to the planets orbiting the Sun. Although this model is not completely accurate, it is very helpful in explaining a vast range of phenomena and will be refined elsewhere, such as in Atomic Physics. The submicroscopic origin of polarization can be modeled as shown in .
+
+We will find in Atomic Physics that the orbits of electrons are more properly viewed as electron clouds with the density of the cloud related to the probability of finding an electron in that location (as opposed to the definite locations and paths of planets in their orbits around the Sun). This cloud is shifted by the Coulomb force so that the atom on average has a separation of charge. Although the atom remains neutral, it can now be the source of a Coulomb force, since a charge brought near the atom will be closer to one type of charge than the other.
+
+Some molecules, such as those of water, have an inherent separation of charge and are thus called polar molecules. illustrates the separation of charge in a water molecule, which has two hydrogen atoms and one oxygen atom H2O. The water molecule is not symmetric—the hydrogen atoms are repelled to one side, giving the molecule a boomerang shape. The electrons in a water molecule are more concentrated around the more highly charged oxygen nucleus than around the hydrogen nuclei. This makes the oxygen end of the molecule slightly negative and leaves the hydrogen ends slightly positive. The inherent separation of charge in polar molecules makes it easier to align them with external fields and charges. Polar molecules therefore exhibit greater polarization effects and have greater dielectric constants. Those who study chemistry will find that the polar nature of water has many effects. For example, water molecules gather ions much more effectively because they have an electric field and a separation of charge to attract charges of both signs. Also, as brought out in the previous chapter, polar water provides a shield or screening of the electric fields in the highly charged molecules of interest in biological systems.
+
+Capacitor Lab
+
+Explore how a capacitor works! Change the size of the plates and add a dielectric to see the effect on capacitance. Change the voltage and see charges built up on the plates. Observe the electric field in the capacitor. Measure the voltage and the electric field.
+
+Test Prep for AP Courses
+
+Two parallel plate capacitors are otherwise identical, except the second one has twice the distance between the plates of the first. If placed in otherwise identical circuits, how much charge will the second plate have on it compared to the first?
+
+four times as much
+
+twice as much
+
+the same
+
+half as much
+
+(d)
+
+In a very simple circuit consisting of a battery and a capacitor with an adjustable distance between the plates, how does the voltage vary as the distance is altered?
+
+A parallel plate capacitor with adjustable-size square plates is placed in a circuit. How does the charge on the capacitor change as the length of the sides of the plates is increased?
+
+it grows proportional to length2
+
+it grows proportional to length
+
+it shrinks proportional to length
+
+it shrinks proportional to length2
+
+(a)
+
+Design an experiment to test the relative permittivities of various materials, and briefly describe some basic features of the results.
+
+A student was changing one of the dimensions of a square parallel plate capacitor and measuring the resultant charge in a circuit with a battery. However, the student forgot which dimension was being varied, and didn’t write it or any units down. Given the table, which dimension was it?
+
+Dimension
+Charge(µC)
+1.00
+0.50
+1.10
+0.61
+1.20
+0.71
+1.30
+0.86
+The distance between the plates
+
+The area
+
+The length of a side
+
+Both the area and the length of a side
+
+(c)
+
+In an experiment in which a circular parallel plate capacitor in a circuit with a battery has the radius and plate separation grow at the same relative rate, what will happen to the total charge on the capacitor?
+
+Section Summary
+
+A capacitor is a device used to store charge.
+
+The amount of charge Q a capacitor can store depends on two major factors—the voltage applied and the capacitor’s physical characteristics, such as its size.
+
+The capacitance C is the amount of charge stored per volt, or
+ C=QV.
+
+The capacitance of a parallel plate capacitor is C=ε0Ad, when the plates are separated by air or free space. 
+
+ ε
+ 0
+
+ is called the permittivity of free space.
+
+A parallel plate capacitor with a dielectric between its plates has a capacitance given by
+
+C=κε0Ad,
+
+where 
+ 
+ κ
+ 
+ is the dielectric constant of the material.
+
+The maximum electric field strength above which an insulating material begins to break down and conduct is called dielectric strength.
+
+Conceptual Questions
+
+Does the capacitance of a device depend on the applied voltage? What about the charge stored in it?
+
+Use the characteristics of the Coulomb force to explain why capacitance should be proportional to the plate area of a capacitor. Similarly, explain why capacitance should be inversely proportional to the separation between plates.
+
+Give the reason why a dielectric material increases capacitance compared with what it would be with air between the plates of a capacitor. What is the independent reason that a dielectric material also allows a greater voltage to be applied to a capacitor? (The dielectric thus increases C and permits a greater V.)
+
+How does the polar character of water molecules help to explain water’s relatively large dielectric constant? ()
+
+Sparks will occur between the plates of an air-filled capacitor at lower voltage when the air is humid than when dry. Explain why, considering the polar character of water molecules.
+
+Water has a large dielectric constant, but it is rarely used in capacitors. Explain why.
+
+Membranes in living cells, including those in humans, are characterized by a separation of charge across the membrane. Effectively, the membranes are thus charged capacitors with important functions related to the potential difference across the membrane. Is energy required to separate these charges in living membranes and, if so, is its source the metabolization of food energy or some other source?
+
+Problems & Exercises
+
+What charge is stored in a 180 µF capacitor when 120 V is applied to it?
+21
+ .
+ 6 
+ mC
+
+Find the charge stored when 5.50 V is applied to an 8.00 pF capacitor.
+
+What charge is stored in the capacitor in ?
+80
+ .
+ 0
+ mC
+
+Calculate the voltage applied to a 2 .00 µF capacitor when it holds 3.10 µC of charge.
+
+What voltage must be applied to an 8.00 nF capacitor to store 0.160 mC of charge?
+
+20.0 kV
+
+What capacitance is needed to store 3.00 µC of charge at a voltage of 120 V?
+
+What is the capacitance of a large Van de Graaff generator’s terminal, given that it stores 8.00 mC of charge at a voltage of 12.0 MV?
+667
+ pF
+
+Find the capacitance of a parallel plate capacitor having plates of area 5.00m2 that are separated by 0.100 mm of Teflon.
+
+(a)What is the capacitance of a parallel plate capacitor having plates of area 1.50 m2 that are separated by 0.0200 mm of neoprene rubber? (b) What charge does it hold when 9.00 V is applied to it?
+
+(a) 4.4 µF
+
+(b) 4.0×10–5 C
+Integrated Concepts
+
+Integrated Concepts
+
+A prankster applies 450 V to an 80.0 µF capacitor and then tosses it to an unsuspecting victim. The victim’s finger is burned by the discharge of the capacitor through 0.200 g of flesh. What is the temperature increase of the flesh? Is it reasonable to assume no phase change?
+Unreasonable Results
+
+Unreasonable Results
+
+(a) A certain parallel plate capacitor has plates of area 4.00 m2, separated by 0.0100 mm of nylon, and stores 0.170 C of charge. What is the applied voltage? (b) What is unreasonable about this result? (c) Which assumptions are responsible or inconsistent?
+
+(a) 14.2 kV
+
+(b) The voltage is unreasonably large, more than 100 times the breakdown voltage of nylon.
+
+(c) The assumed charge is unreasonably large and cannot be stored in a capacitor of these dimensions.
+
+a device that stores electric charge
+amount of charge stored per unit volt
+an insulating material
+the maximum electric field above which an insulating material begins to break down and conduct
+two identical conducting plates separated by a distance
+a molecule with inherent separation of charge

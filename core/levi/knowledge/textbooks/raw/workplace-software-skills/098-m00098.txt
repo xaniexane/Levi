@@ -1,0 +1,107 @@
+# m00098
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Microsoft Word: Integration with Microsoft Excel and Microsoft Access
+
+Microsoft Word: Integration with Microsoft Excel and Microsoft Access
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Integrate Word documents into Excel worksheets
+
+Link Excel worksheets to Word documents
+
+Insert Excel charts into Word documents
+
+Embed Access data into Word documents
+
+One key advantage of a suite like Microsoft 365 (Office) is that it enables you to insert information from other file types into its applications. For example, suppose you want to connect a file with a more narrative structure to explain your analysis in an Excel worksheet. You can use file integration to include notes that detail the specific calculations or data sources in Excel. Conversely, in a company-wide report, it may be helpful to include chart visuals to illustrate how sales have changed over the last quarter. These are just a few examples of the value of integrating Word and Excel when conveying information to a broad audience.
+
+Integrating Microsoft Word Documents into Microsoft Excel Worksheets
+
+The previous section provided a general overview of linking and embedding in Microsoft. Now we look specifically at the process for linking and embedding Word files into Excel worksheets. Keep in mind that Excel is a spreadsheet program. It is not designed to handle large amounts of text. It is a good idea to spend a little time thinking through the best approach before you try to integrate a lengthy Word document into an Excel workbook.
+
+Here is an example scenario: You have just finished summarizing information from three of WorldCorp’s top sales agents for the past month. You have created a Monthly Report memo in Word and an Excel worksheet that includes a PivotTable. Because the memo is rather short, you decide to incorporate it into your Excel worksheet rather than sharing two separate files with your team. This makes the most sense because you want others to be able to manipulate the PivotTable and analyze the information to best meet their needs. shows the Excel file with the PivotTable and chart of the summarized data and shows the memo created in Word.
+
+Using the Insert Object function in Excel, you can integrate the Word document into the file. First, place your cursor where you would like to have the memo information placed in the Excel document. In this example, let’s choose cell A10. The object will be inserted into the selected cell. Note that you will be able to move and resize the object once you have placed it on the worksheet, but it is easier to manipulate the object if you insert it in the general location where you would like it to be. Also note that resizing an object can compromise its readability—another reason to be cautious about placing large amounts of text in Excel.
+
+As covered in Microsoft 365: Collaboration and Integration, go to the Insert tab and the Text command group, and choose Object (). From there, you have two options: Create New or Create from File. Select Create from File (see ).
+
+The Word file was previously created and saved as Monthly Report. Choose this file and click OK. If the file you are trying to insert is open, you will get an error message indicating that the file is in use. (Only one person can be working in a shared file at the same time. Once the person is finished and has closed the file, it will become available for others to edit.) In that case, simply close the file and insert the object again. Notice that the Link to File and Display as icon options are available here as well. The information from the Word document is now in the Excel file (). Because we did not choose Link to File, the Word memo is embedded in the Excel worksheet and has become part of the Excel file. This means that if you make any changes in the Word document (the source file), they will not be reflected in the Excel file. Notice in the formula bar you see “=EMBED(“Document”,”). Excel automatically adds this to indicate that an object has been embedded (or more specifically is now a part of) into the Excel file. In this case, we embedded a Word document, so you see the word “Document” in the formula. This will be inserted when you choose to embed an object or file. You should not edit or change this formula.
+
+Note that although we selected cell A10 as the cell to insert the memo into, the memo takes up much more space than this. The cell we select is simply where the top left corner of the object will be, but the object itself may cover many other cells. This is why resizing is important ().
+
+As an alternative to placing the actual text into the worksheet, you can choose to insert the information as an icon. Adding the icon to the spreadsheet creates a link rather than embedding the text into the Excel file. The user simply double-clicks on the icon to access the Word file. By choosing Display as icon, you can avoid some of the drawbacks of inserting blocks of text into a worksheet and have a direct link to the source file. To do this, select the Display as icon option. Remember that you can change the look of the icon that will be inserted by choosing Change Icon ().
+
+When the icon is placed in the worksheet, it will contain the file name, “monthly report.docx” in this case. However, because the file name has a space in it, the program will insert the Unicode for a space, which is “%20”. (Note: Unicode was discussed in Document Preparation.) Notice that the icon displays the file name with the “%20” where the space was located. This is a quirk of the program that cannot be avoided.
+
+Finally, you can choose to link the Word document and the Excel spreadsheet using the Link to File option. This provides a dynamic link to the file so that any changes made in the Word file will also be reflected in the Excel file. To insert a link to the file, tick the checkbox, Link to File, and click OK. Generally speaking, providing a link is the preferred option unless you are certain that the source file is not going to change. However, remember that if the file path (where the source file is saved on your computer or in your cloud drive) changes, you will need to insert the link again into your Excel worksheet.
+
+Integrating Microsoft Excel Worksheets into Microsoft Word Documents
+
+Now we look at integrating an Excel file into Word. This is quite common in organizations when preparing summary reports that include data. Excel is used to summarize, analyze, and prepare visuals such as charts of the data. Word is then used to provide some textual context and additional information. We follow steps similar to those that have previously been discussed for integrating Excel worksheets into Word documents.
+
+Let’s go back to the WorldCorp Monthly Report example. The management team would like to include information from the sales department in their monthly report. The monthly report is created in Word and ideally would include some text, the data tables, and any charts or graphs that help summarize the data. The report is distributed to all members of the management team to keep them updated on the company’s progress toward year-end goals. You want to include the data from the Excel worksheet in the document.
+
+We start by embedding the summary table from the March sales data in the Excel file into the monthly report file created in Word. First, open the Word document and determine where you would like to display the Excel information. The information will be embedded at the cursor location in the Word file. Go to the Insert tab, then the Text command group, then Object. Follow the same procedure we used previously. The Excel data will insert as a clean table into your Word document (). If your Excel file has multiple worksheets, you will have to double-click on the table to see those other worksheets. You can also use this double-click functionality to access the Excel data and edit it directly in Word (). Remember, the Excel file must not be open when using the Insert Object tool. Also remember that you are embedding this into the Word document. If any information in the source file (the Excel file) changes, it will not be updated in the Word file.
+
+At this point, the report is still a draft, so you anticipate changes to the data. You want to be sure that the report reflects accurate information when it is distributed, so you would like to replace the embedded information with a link. Linking to the Excel file means that information that is changed in the source Excel file will also be updated in the Word file. Choose the Link to File option to create the connection between the two files of different types. Visually, the result will look the same in the Word document, but any changes that are made to the source will be automatically reflected in the table in the Word document. Double-clicking on the table will open a new Excel window of the source file. Finally, you again have the option to include an icon instead of the actual table.
+
+Another available method for inserting Excel content into a Word document is to use the Insert tab to place an Excel workbook into a Word file, allowing you to work in that interface as you normally would in Excel. To do this, go to the Insert tab, then select the Table drop-down menu and choose Excel Spreadsheet, as shown in a. A blank Excel object will appear in Word, as shown in b. (Note that this option is not available to Mac users.) You can then paste the copied table onto this blank document or add new data and create the table. This table will not be linked. This method gives you the same functionality for sizing columns, sorting, and inserting formulas as you would have in Excel. The Excel worksheet is simply placed inside the Word file. Keep in mind that when you choose this option, the Excel file you create inside the Word document does not stand alone but becomes part of the Word file. Therefore, to make changes to the Excel spreadsheet, you need to access the Word file. As a result, this option is not very practical if you need to create a large dataset. You might need to make changes to the Excel file, and working in Excel as an object in a Word file can be cumbersome. However, it can be useful as a quick and easy way of providing others with access to Excel data without sending multiple files.
+
+Finally, you can always copy and paste Excel information into the Word file. To do this, go to the Paste drop-down menu, accessible from the Home tab. This drop-down menu gives you six options, as seen in .
+
+You begin by selecting a table in the worksheet in Excel and copying it with Ctrl+C or by using the Copy tool from the Home tab. Then head to Word to paste the table into the document file. The table shown lists the different options for pasting the Excel information into the Word file .
+
+Let’s look at an example of each copy-and-paste option. shows an example Excel table, as it appears in Excel. Notice the differences between the copy-and-paste options; you may have to adjust the Excel table to get it to look the way it is supposed to.
+
+For example, using the Keep Source Formatting option () keeps the font and cell background colors, but you will need to adjust some of the column widths to display the dollar values correctly. Note that the option Link & Keep Source Formatting will appear the same, except that the data will be a link, not an embedded object.
+
+In , you can see the result of the Use Destination Styles option. In this case, our “destination style” is the style of the Word document we are pasting into, which of course does not contain any cell background colors or special formatting. As a result, you will lose some of the formatting, such as the blue fill color. Note that the option Link & Use Destination Styles will appear the same except that the data will be a link, not an embedded object.
+
+The option to copy and paste the Excel data as a Picture will result in the cleanest appearance (see ). The inserted picture will appear exactly how the original Excel table appears; note that there are no issues with the column widths or the cell background color. However, the picture is static and cannot be edited.
+
+Last, there is the Text Only copy-and-paste option. This option is exactly as it sounds: it pastes only the text of the Excel table and does not include any formatting, cell borders, or background colors. The issue with this is that much information in Excel is represented in cell format, so once the cell borders are gone, it becomes difficult to parse the information. You can see in how difficult this is to read. This option is useful only when you need to strip out all formatting and manipulate the text on its own.
+
+You also have the option to use the Paste Special tool and choose the Object Linking and Embedding (OLE) option. Paste Special gives you some options in addition to the shortcuts shown as icons on the drop-down menu. (Several of the options we already discussed are included in the list as well.) Go to the same Paste drop-down command (in ), but this time choose Paste Special. This will open a new dialog box that will give you additional choices, as seen in . Select the first option, Microsoft Excel Worksheet Object. If you have Paste selected (on the left side of the dialog box), the OLE Excel object will not be linked to the original, meaning that it will be static; it will not update if the original file changes. If you have Paste link selected, the object will look the same, but it will be updated if the original file changes. Both options will result in a similar image; however, the Paste link option will simply result in a linked file. You can see the result in .
+
+Inserting Microsoft Excel Charts into Microsoft Word Documents
+
+To integrate charts into Word documents, you simply follow the same procedure as outlined previously for inserting objects. Here, we are looking at ways to directly integrate the two file types rather than simply copying and pasting the information from one to the other. The concepts in this chapter are particularly useful when collaborating with others on workbooks or documents. Multiple users can make changes to either file, or those with access to files will see those changes in real time.
+
+There are a few options when integrating Excel charts into Word documents, all of which use the same methods for inserting that you already learned in this section. You can include the chart as a picture, or you can choose to embed or link the chart into the Word document. Finally, if you also want to include the Excel data along with the chart, you can use the Insert Object tool. However, if you just want to include the chart and not the spreadsheet data, linking or embedding will be the best option.
+
+Think about the differences between linking and embedding when you determine which option is appropriate. Let’s look at the same example of the sales data broken down by agent (refer to ). What do we do if we only want to include the chart in a Word document, and not the PivotTable?
+
+First, we copy the chart. Then we open our Word document—the Monthly Report—and determine where we would like to include the chart in the file. In this example, let’s include the chart below the table of data we integrated in the previous section. Be sure to have the cursor at the location where you want the chart to be placed. Use the Paste Special function on the Home tab to either link or embed the chart into the Word file, selecting “Microsoft Excel Chart Object,” similar to what we did in . See to see the different options that appear in this dialog box when you have a chart as your source file.
+
+To embed the chart, choose Microsoft Excel Chart Object and click OK. If you would prefer to link the chart, choose Microsoft Excel Chart Object and check the option Paste link. This will establish the link rather than embedding the chart. The final chart should appear as it does in Excel and may need to be resized to fit on your Word page ().
+
+If you linked the chart to your Word document, the chart should automatically update when you alter the source data in the original Excel file. Let’s walk through an example of changing information in the Excel file to see how this affects the chart. We will change Izabelle’s Sum of FOB$ from the current value of $46,847 to a new value of $26,847 ().
+
+When you open the Monthly Report Word file again, these values will be automatically updated in the chart. You will be presented with a window asking if you would like to update the linked information. Choose Yes to update the linked Excel chart. As an alternative, if you are already working in the Word file, you can right-click on the chart and choose Update Link to automatically update the chart with the new Excel chart, as shows.
+
+Embed Microsoft Access Data into Microsoft Word Documents
+
+The process for importing data from Access is similar to what we just did with Excel. You can use the classic copy and paste, or you can choose Paste Special options. You can also add exported data from Access to Word. Because Access files can be very lengthy databases, it may not always make sense to integrate them with Word files. In some cases, however, you may want to integrate these files. For example, you may want to integrate an Access database into a Word document to make it easier to print customer lists or product sales in a full document. You also may want to use portions of a database to create mailing labels or product summary cards for sales personnel.
+
+Summary
+
+Integrating Word into Excel has some drawbacks as Excel is meant more for data rather than text.
+
+However, methods for importing Excel content into Word files include many copy-and-paste options, as well as the ability to insert a linked object.
+
+The process for linking or embedding Excel charts into a Word file is similar to linking or embedding tables of data. You can choose to display the information as an icon in the Word document rather than showing an image of the linked or embedded information.
+
+You can import Access tables into Word, but this is typically not advised, as Access databases can be quite lengthy.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises

@@ -1,0 +1,313 @@
+# m58324
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Rocket Propulsion
+
+Rocket Propulsion
+
+By the end of this section, you will be able to:
+
+Describe the application of conservation of momentum when the mass changes with time, as well as the velocity
+
+Calculate the speed of a rocket in empty space, at some time, given initial conditions
+
+Calculate the speed of a rocket in Earth’s gravity field, at some time, given initial conditions
+
+Now we deal with the case where the mass of an object is changing. We analyze the motion of a rocket, which changes its velocity (and hence its momentum) by ejecting burned fuel gases, thus causing it to accelerate in the opposite direction of the velocity of the ejected fuel (see ). Specifically: A fully fueled rocket ship in deep space has a total mass m0 (this mass includes the initial mass of the fuel). At some moment in time, the rocket has a velocity v→ and mass m; this mass is a combination of the mass of the empty rocket and the mass of the remaining unburned fuel it contains. (We refer to m as the “instantaneous mass” and v→ as the “instantaneous velocity.”) The rocket accelerates by burning the fuel it carries and ejecting the burned exhaust gases. If the burn rate of the fuel is constant, and the velocity at which the exhaust is ejected is also constant, what is the change of velocity of the rocket as a result of burning all of its fuel?
+
+Physical Analysis
+
+Here’s a description of what happens, so that you get a feel for the physics involved.
+
+As the rocket engines operate, they are continuously ejecting burned fuel gases, which have both mass and velocity, and therefore some momentum. By conservation of momentum, the rocket’s momentum changes by this same amount (with the opposite sign). We will assume the burned fuel is being ejected at a constant rate, which means the rate of change of the rocket’s momentum is also constant. By , this represents a constant force on the rocket.
+
+However, as time goes on, the mass of the rocket (which includes the mass of the remaining fuel) continuously decreases. Thus, even though the force on the rocket is constant, the resulting acceleration is not; it is continuously increasing.
+
+So, the total change of the rocket’s velocity will depend on the amount of mass of fuel that is burned, and that dependence is not linear.
+
+The problem has the mass and velocity of the rocket changing; also, the total mass of ejected gases is changing. If we define our system to be the rocket + fuel, then this is a closed system (since the rocket is in deep space, there are no external forces acting on this system); as a result, momentum is conserved for this system. Thus, we can apply conservation of momentum to answer the question ().
+
+At the same moment that the total instantaneous rocket mass is m (i.e., m is the mass of the rocket body plus the mass of the fuel at that point in time), we define the rocket’s instantaneous velocity to be v→=vi^ (in the +x-direction); this velocity is measured relative to an inertial reference system (the Earth, for example). Thus, the initial momentum of the system is
+p→i=mvi^.
+
+The rocket’s engines are burning fuel at a constant rate and ejecting the exhaust gases in the −x-direction. During an infinitesimal time interval dt, the engines eject a (positive) infinitesimal mass of gas dmg at velocity u→=−ui^; note that although the rocket velocity vi^ is measured with respect to Earth, the exhaust gas velocity is measured with respect to the (moving) rocket. Measured with respect to the Earth, therefore, the exhaust gas has velocity (v−u)i^.
+
+As a consequence of the ejection of the fuel gas, the rocket’s mass decreases by dmg, and its velocity increases by dvi^. Therefore, including both the change for the rocket and the change for the exhaust gas, the final momentum of the system is
+
+Since all vectors are in the x-direction, we drop the vector notation. Applying conservation of momentum, we obtain
+
+Now, dmg and dv are each very small; thus, their product dmgdv is very, very small, much smaller than the other two terms in this expression. We neglect this term, therefore, and obtain:
+
+Our next step is to remember that, since dmg represents an increase in the mass of ejected gases, it must also represent a decrease of mass of the rocket:
+
+Replacing this, we have
+
+or
+
+Integrating from the initial mass m0 to the final mass m of the rocket gives us the result we are after:
+
+and thus our final answer is
+
+This result is called the rocket equation. It was originally derived by the Russian rocket scientist Konstantin Tsiolkovsky in 1897. It gives us the change of velocity that the rocket obtains from burning a mass of fuel that decreases the total rocket mass from m0 down to m. As expected, the relationship between Δv and the change of mass of the rocket is nonlinear.
+
+Rocket Propulsion
+
+In rocket problems, the most common questions are finding the change of velocity due to burning some amount of fuel for some amount of time; or to determine the acceleration that results from burning fuel.
+
+To determine the change of velocity, use the rocket equation .
+
+To determine the acceleration, determine the force by using the impulse-momentum theorem, using the rocket equation to determine the change of velocity.
+Thrust on a Spacecraft
+A spacecraft is moving in gravity-free space along a straight path when its pilot decides to accelerate forward. He turns on the thrusters, and burned fuel is ejected at a constant rate of 2.0×102kg/s, at a speed (relative to the rocket) of 2.5×102m/s. The initial mass of the spacecraft and its unburned fuel is 2.0×104kg, and the thrusters are on for 30 s.
+
+Thrust on a Spacecraft
+
+What is the thrust (the force applied to the rocket by the ejected fuel) on the spacecraft?
+
+What is the spacecraft’s acceleration as a function of time?
+
+What are the spacecraft’s accelerations at t = 0, 15, 30, and 35 s?
+Strategy
+
+Strategy
+
+The force on the spacecraft is equal to the rate of change of the momentum of the fuel.
+
+Knowing the force from part (a), we can use Newton’s second law to calculate the consequent acceleration. The key here is that, although the force applied to the spacecraft is constant (the fuel is being ejected at a constant rate), the mass of the spacecraft isn’t; thus, the acceleration caused by the force won’t be constant. We expect to get a function a(t), therefore.
+
+We’ll use the function we obtain in part (b), and just substitute the numbers given. Important: We expect that the acceleration will get larger as time goes on, since the mass being accelerated is continuously decreasing (fuel is being ejected from the rocket).
+Solution
+
+Solution
+
+The momentum of the ejected fuel gas is
+p=mgv.
+The ejection velocity v=2.5×102m/s is constant, and therefore the force is
+F=dpdt=vdmgdt=−vdmdt.
+Now, dmgdt is the rate of change of the mass of the fuel; the problem states that this is 2.0×102kg/s. Substituting, we get
+F=vdmgdt=(2.5×102ms)(2.0×102kgs)=5×104N.
+
+Above, we defined m to be the combined mass of the empty rocket plus however much unburned fuel it contained: m=mR+mg. From Newton’s second law,
+a=Fm=FmR+mg.
+The force is constant and the empty rocket mass mR is constant, but the fuel mass mg is decreasing at a uniform rate; specifically:
+mg=mg(t)=mg0−(dmgdt)t.
+This gives us
+a(t)=Fmgi−(dmgdt)t=FM−(dmgdt)t.
+Notice that, as expected, the acceleration is a function of time. Substituting the given numbers:
+a(t)=5×104N2.0×104kg−(2.0×102kgs)t.
+
+At t=0s:
+a(0s)=5×104N2.0×104kg−(2.0×102kgs)(0s)=2.5ms2.
+At t=15s,a(15s)=2.9m/s2.
+At t=30s,a(30s)=3.6m/s2.
+Acceleration is increasing, as we expected.
+Significance
+Notice that the acceleration is not constant; as a result, any dynamical quantities must be calculated either using integrals, or (more easily) conservation of total energy.
+
+Significance
+
+What is the physical difference (or relationship) between dmdt and dmgdt in this example?
+
+The notation mg stands for the mass of the fuel and m stands for the mass of the rocket plus the initial mass of the fuel. Note that mg changes with time, so we write it as mg(t). Using mR as the mass of the rocket with no fuel, the total mass of the rocket plus fuel is m=mR+mg(t). Differentiation with respect to time gives
+dmdt=dmRdt+dmg(t)dt=dmg(t)dt
+where we used dmRdt=0 because the mass of the rocket does not change. Thus, time rate of change of the mass of the rocket is the same as that of the fuel.
+
+Rocket in a Gravitational Field
+
+Let’s now analyze the velocity change of the rocket during the launch phase, from the surface of Earth. To keep the math manageable, we’ll restrict our attention to distances for which the acceleration caused by gravity can be treated as a constant g.
+
+The analysis is similar, except that now there is an external force of F→=−mgj^ acting on our system. This force applies an impulse dJ→=F→dt=−mgdtj^, which is equal to the change of momentum. This gives us
+
+and so
+
+where we have again neglected the term dmgdv and dropped the vector notation. Next we replace dmg with −dm:
+
+Dividing through by m gives
+
+and integrating, we have
+
+Unsurprisingly, the rocket’s velocity is affected by the (constant) acceleration of gravity.
+
+Remember that Δt is the burn time of the fuel. Now, in the absence of gravity, implies that it makes no difference how much time it takes to burn the entire mass of fuel; the change of velocity does not depend on Δt. However, in the presence of gravity, it matters a lot. The −gΔt term in tells us that the longer the burn time is, the smaller the rocket’s change of velocity will be. This is the reason that the launch of a rocket is so spectacular at the first moment of liftoff: It’s essential to burn the fuel as quickly as possible, to get as large a Δv as possible.
+
+Summary
+
+A rocket is an example of conservation of momentum where the mass of the system is not constant, since the rocket ejects fuel to provide thrust.
+
+The rocket equation gives us the change of velocity that the rocket obtains from burning a mass of fuel that decreases the total rocket mass.
+
+Key Equations
+
+p→=mv→
+J→≡∫titfF→(t)dtorJ→=F→aveΔt
+J→=Δp→
+F→=Δp→Δt
+F→(t)=dp→dt
+dp→1dt+dp→2dt=0orp→1+p→2=constant
+∑j=1Np→j=constant
+pf,x=p1,i,x+p2,i,xpf,y=p1,i,y+p2,i,y
+F→ext=∑j=1Ndp→jdt
+F→=dp→CMdt
+a→CM=d2dt2(1M∑j=1Nmjr→j)=1M∑j=1Nmja→j
+r→CM≡1M∑j=1Nmjr→j
+v→CM=ddt(1M∑j=1Nmjr→j)=1M∑j=1Nmjv→j
+r→CM≡1M∫r→dm
+Δv=uln(mim)
+Conceptual Questions
+
+It is possible for the velocity of a rocket to be greater than the exhaust velocity of the gases it ejects. When that is the case, the gas velocity and gas momentum are in the same direction as that of the rocket. How is the rocket still able to obtain thrust by ejecting the gases?
+
+Yes, the rocket speed can exceed the exhaust speed of the gases it ejects. The thrust of the rocket does not depend on the relative speeds of the gases and rocket, it simply depends on conservation of momentum.
+
+Problems
+
+(a) A 5.00-kg squid initially at rest ejects 0.250 kg of fluid with a velocity of 10.0 m/s. What is the recoil velocity of the squid if the ejection is done in 0.100 s and there is a 5.00-N frictional force opposing the squid’s movement?
+
+(b) How much energy is lost to work done against friction?
+
+(a) 0.413 m/s, (b) about 0.2 J
+
+A rocket takes off from Earth and reaches a speed of 100 m/s in 10.0 s. If the exhaust speed is 1500 m/s and the mass of fuel burned is 100 kg, what was the initial mass of the rocket?
+
+Repeat the preceding problem but for a rocket that takes off from a space station, where there is no gravity other than the negligible gravity due to the space station.
+
+1551 kg
+
+How much fuel would be needed for a 1000-kg rocket (this is its mass with no fuel) to take off from Earth and reach 1000 m/s in 30 s? The exhaust speed is 1000 m/s.
+
+What exhaust speed is required to accelerate a rocket in deep space from 800 m/s to 1000 m/s in 5.0 s if the total rocket mass is 1200 kg and the rocket only has 50 kg of fuel left?
+
+4.9 km/s
+Unreasonable Results Squids have been reported to jump from the ocean and travel 30.0 m (measured horizontally) before re-entering the water.
+
+(a) Calculate the initial speed of the squid if it leaves the water at an angle of 20.0°, assuming negligible lift from the air and negligible air resistance.
+
+(b) The squid propels itself by squirting water. What fraction of its mass would it have to eject in order to achieve the speed found in the previous part? The water is ejected at 12.0 m/s; gravitational force and friction are neglected.
+
+(c) What is unreasonable about the results?
+
+(d) Which premise is unreasonable, or which premises are inconsistent?
+
+Additional Problems
+
+Two 70-kg canoers paddle in a single, 50-kg canoe. Their paddling moves the canoe at 1.2 m/s with respect to the water, and the river they’re in flows at 4 m/s with respect to the land. What is their momentum with respect to the land?
+
+Which has a larger magnitude of momentum: a 3000-kg elephant moving at 40 km/h or a 60-kg cheetah moving at 112 km/h?
+
+the elephant has a higher momentum
+
+A driver applies the brakes and reduces the speed of her car by 20%, without changing the direction in which the car is moving. By how much does the car’s momentum change?
+
+You friend claims that momentum is mass multiplied by velocity, so things with more mass have more momentum. Do you agree? Explain.
+
+Answers may vary. The first clause is true, but the second clause is not true in general because the velocity of an object with small mass may be large enough so that the momentum of the object is greater than that of a larger-mass object with a smaller velocity.
+
+Dropping a glass on a cement floor is more likely to break the glass than if it is dropped from the same height on a grass lawn. Explain in terms of the impulse.
+
+Your 1500-kg sports car accelerates from 0 to 30 m/s in 10 s. What average force is exerted on it during this acceleration?
+4.5×103N
+
+A ball of mass m is dropped. What is the formula for the impulse exerted on the ball from the instant it is dropped to an arbitrary time τ later? Ignore air resistance.
+
+Repeat the preceding problem, but including a drag force due to air of fdrag=−bv→.
+J→=∫0τ[mg→−mg→(1−e−bt/m)]dt=m2bg→(e−bτ/m−1)
+
+A 5.0-g egg falls from a 90-cm-high counter onto the floor and breaks. What impulse is exerted by the floor on the egg?
+
+A car crashes into a large tree that does not move. The car goes from 30 m/s to 0 in 1.3 m. (a) What impulse is applied to the driver by the seatbelt, assuming he follows the same motion as the car? (b) What is the average force applied to the driver by the seatbelt?
+
+a. −(2.1×103kg·m/s)i^, b. −(24×103N)i^
+
+Two hockey players approach each other head on, each traveling at the same speed vi. They collide and get tangled together, falling down and moving off at a speed vi/5. What is the ratio of their masses?
+
+You are coasting on your 10-kg bicycle at 15 m/s and a 5.0-g bug splatters on your helmet. The bug was initially moving at 2.0 m/s in the same direction as you. If your mass is 60 kg, (a) what is the initial momentum of you plus your bicycle? (b) What is the initial momentum of the bug? (c) What is your change in velocity due to the collision with the bug? (d) What would the change in velocity have been if the bug were traveling in the opposite direction?
+
+a. (1.1×103kg·m/s)i^, b. (0.010kg·m/s)i^, c. −(0.00093m/s)i^, d. −(0.0012m/s)i^
+
+A load of gravel is dumped straight down into a 30 000-kg freight car coasting at 2.2 m/s on a straight section of a railroad. If the freight car’s speed after receiving the gravel is 1.5 m/s, what mass of gravel did it receive?
+
+Two carts on a straight track collide head on. The first cart was moving at 3.6 m/s in the positive x direction and the second was moving at 2.4 m/s in the opposite direction. After the collision, the second car continues moving in its initial direction of motion at 0.24 m/s. If the mass of the second car is 5.0 times that of the first, what is the final velocity of the first car?
+−(7.2m/s)i^
+
+A 100-kg astronaut finds himself separated from his spaceship by 10 m and moving away from the spaceship at 0.1 m/s. To get back to the spaceship, he throws a 10-kg tool bag away from the spaceship at 5.0 m/s. How long will he take to return to the spaceship?
+
+Derive the equations giving the final speeds for two objects that collide elastically, with the mass of the objects being m1 and m2 and the initial speeds being v1,i and v2,i=0 (i.e., second object is initially stationary).
+v1,f=v1,im1−m2m1+m2,v2,f=v1,i2m1m1+m2
+
+Repeat the preceding problem for the case when the initial speed of the second object is nonzero.
+
+A child sleds down a hill and collides at 5.6 m/s into a stationary sled that is identical to his. The child is launched forward at the same speed, leaving behind the two sleds that lock together and slide forward more slowly. What is the speed of the two sleds after this collision?
+
+2.8 m/s
+
+For the preceding problem, find the final speed of each sled for the case of an elastic collision.
+
+A 90-kg football player jumps vertically into the air to catch a 0.50-kg football that is thrown essentially horizontally at him at 17 m/s. What is his horizontal speed after catching the ball?
+
+0.094 m/s
+
+Three skydivers are plummeting earthward. They are initially holding onto each other, but then push apart. Two skydivers of mass 70 and 80 kg gain horizontal velocities of 1.2 m/s east and 1.4 m/s southeast, respectively. What is the horizontal velocity of the third skydiver, whose mass is 55 kg?
+
+Two billiard balls are at rest and touching each other on a pool table. The cue ball travels at 3.8 m/s along the line of symmetry between these balls and strikes them simultaneously. If the collision is elastic, what is the velocity of the three balls after the collision?
+
+final velocity of cue ball is −(0.76m/s)i^, final velocities of the other two balls are 2.6 m/s at ±30° with respect to the initial velocity of the cue ball
+
+A billiard ball traveling at (2.2m/s)i^−(0.4m/s)j^ collides with a wall that is aligned in the j^ direction. Assuming the collision is elastic, what is the final velocity of the ball?
+
+Two identical billiard balls collide. The first one is initially traveling at (2.2m/s)i^−(0.4m/s)j^ and the second one at −(1.4m/s)i^+(2.4m/s)j^. Suppose they collide when the center of ball 1 is at the origin and the center of ball 2 is at the point (2R,0) where R is the radius of the balls. What is the final velocity of each ball?
+
+ball 1: −(1.4m/s)i^−(0.4m/s)j^, ball 2: (2.2m/s)i^+(2.4m/s)j^
+
+Repeat the preceding problem if the balls collide when the center of ball 1 is at the origin and the center of ball 2 is at the point (0,2R).
+
+Repeat the preceding problem if the balls collide when the center of ball 1 is at the origin and the center of ball 2 is at the point (3R/2,R/2)
+
+ball 1: (1.4m/s)i^−(1.7m/s)j^, ball 2: −(2.8m/s)i^+(0.012m/s)j^
+
+Where is the center of mass of a semicircular wire of radius R that is centered on the origin, begins and ends on the x axis, and lies in the x,y plane?
+
+Where is the center of mass of a slice of pizza that was cut into eight equal slices? Assume the origin is at the apex of the slice and measure angles with respect to an edge of the slice. The radius of the pizza is R.
+θcm=18, rcm=8R3π2-2
+
+If 1% of the Earth’s mass were transferred to the Moon, how far would the center of mass of the Earth-Moon-population system move? The mass of the Earth is 5.97×1024kg and that of the Moon is 7.34×1022kg. The radius of the Moon’s orbit is about 3.84×105m.
+
+You friend wonders how a rocket continues to climb into the sky once it is sufficiently high above the surface of Earth so that its expelled gasses no longer push on the surface. How do you respond?
+
+Answers may vary. The rocket is propelled forward not by the gasses pushing against the surface of Earth, but by conservation of momentum. The momentum of the gas being expelled out the back of the rocket must be compensated by an increase in the forward momentum of the rocket.
+
+To increase the acceleration of a rocket, should you throw rocks out of the front window of the rocket or out of the back window?
+
+Challenge
+
+A 65-kg person jumps from the first floor window of a burning building and lands almost vertically on the ground with a horizontal velocity of 3 m/s and vertical velocity of −9m/s. Upon impact with the ground he is brought to rest in a short time. The force experienced by his feet depends on whether he keeps his knees stiff or bends them. Find the force on his feet in each case.
+
+First find the impulse on the person from the impact on the ground. Calculate both its magnitude and direction.
+
+Find the average force on the feet if the person keeps his leg stiff and straight and his center of mass drops by only 1 cm vertically and 1 cm horizontally during the impact.
+
+Find the average force on the feet if the person bends his legs throughout the impact so that his center of mass drops by 50 cm vertically and 5 cm horizontally during the impact.
+
+Compare the results of part (b) and (c), and draw conclusions about which way is better.
+
+You will need to find the time the impact lasts by making reasonable assumptions about the acceleration opposite to the motion. Although the force is not constant during the impact, working with constant average force for this problem is acceptable.
+
+a. 617N·s, 108°; b. Fx=2.91×104N, Fy=2.6×105N; c. Fx=5850N, Fy=5265N
+
+Two projectiles of mass m1 and m2 are ﬁred at the same speed but in opposite directions from two launch sites separated by a distance D. They both reach the same spot in their highest point and strike there. As a result of the impact they stick together and move as a single body afterwards. Find the place they will land.
+
+Two identical objects (such as billiard balls) have a one-dimensional collision in which one is initially motionless. After the collision, the moving object is stationary and the other moves with the same speed as the other originally had. Show that both momentum and kinetic energy are conserved.
+
+Conservation of momentum demands m1v1,i+m2v2,i=m1v1,f+m2v2,f. We are given that m1=m2, v1,i=v2,f, and v2,i=v1,f=0. Combining these equations with the equation given by conservation of momentum gives v1,i=v1,i, which is true, so conservation of momentum is satisfied. Conservation of energy demands 12m1v1,i2+12m2v2,i2=12m1v1,f2+12m2v2,f2. Again combining this equation with the conditions given above give v1,i=v1,i, so conservation of energy is satisfied.
+
+A ramp of mass M is at rest on a horizontal surface. A small cart of mass m is placed at the top of the ramp and released.
+
+What are the velocities of the ramp and the cart relative to the ground at the instant the cart leaves the ramp?
+
+Find the center of mass of the structure given in the figure below. Assume a uniform thickness of 20 cm, and a uniform density of 1g/cm3.
+
+Assume origin on centerline and at floor, then (xCM,yCM)=(0,86cm)
+
+derived by the Soviet physicist Konstantin Tsiolkovsky in 1897, it gives us the change of velocity that the rocket obtains from burning a mass of fuel that decreases the total rocket mass from mi down to m

@@ -1,0 +1,153 @@
+# m00012
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Subsets
+
+Subsets
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Represent subsets and proper subsets symbolically.
+
+Compute the number of subsets of a set.
+
+Apply concepts of subsets and equivalent sets to finite and infinite sets.
+
+The rules of Major League Soccer (MLS) allow each team to have up to 30 players on their team. However, only 18 of these players can be listed on the game day roster, and of the 18 listed, 11 players must be selected to start the game. How the coaches and general managers form the team and choose the starters for each game will determine the success of the team in any given year.
+
+The entire group of 30 players is each team’s set. The group of game day players is a subset of the team set, and the group of 11 starters is a subset of both the team set and the set of players on the game day roster.
+
+Set A is a subset of set B if every member of set A is also a member of set B. Symbolically, this relationship is written as A⊆B.
+
+Sets can be related to each other in several different ways: they may not share any members in common, they may share some members in common, or they may share all members in common. In this section, we will explore the way we can select a group of members from the whole set.
+Every set is also a subset of itself, B⊆B
+
+Recall the set of flatware in our kitchen drawer from Section 1.1, F={fork, spoon, knife, meat thermometer, can opener}. Suppose you are preparing to eat dinner, so you pull a fork and a knife from the drawer to set the table. The set D={knife, fork} is a subset of set F, because every member or element of set D is also a member of set F. More specifically, set D is a proper subset of set F, because there are other members of set F not in set D. This is written as D⊂F. The only subset of a set that is not a proper subset of the set would be the set itself.
+The empty set or null set, ∅, is a proper subset of every set, except itself.
+
+Graphically, sets are often represented as circles. In the following graphic, set A is represented as a circle completely enclosed inside the circle representing set B, showing that set A is a proper subset of set B. The element x represents an element that is in both set A and set B.
+While we can list all the subsets of a finite set, it is not possible to list all the possible subsets of an infinite set, as it would take an infinitely long time.
+
+Listing All the Proper Subsets of a Finite Set
+
+Set L is a set of reading materials available in a shop at the airport, L={newspaper, magazine, book}. List all the subsets of set L.
+Step 1: It is best to begin with the set itself, as every set is a subset of itself. In our example, the cardinality of set L is n(L)=3. There is only one subset of set L that has the same number of elements of set L:{newspaper,magazine,book }.
+Step 2: Next, list all the proper subsets of the set containing n(L)−1 elements. In this case, 3−1=2. There are three subsets that each contain two elements: {newspaper,magazine}, { newspaper,book}, and {magazine,book}.
+Step 3: Continue this process by listing all the proper subsets of the set containing n(L)−2 elements. In this case, 3−2=1. There are three subsets that contain one element: {newspaper}, {magazine}, and {book}.
+Step 4: Finally, list the subset containing 0 elements, or the empty set: {}.
+
+Determining Whether a Set Is a Proper Subset
+
+Consider the set of common political parties in the United States, P={Democratic, Green, Libertarian, Republican}. Determine if the following sets are proper subsets of P.
+M={Democratic, Republican}
+G={Green}
+V={Republican, Libertarian, Green, Democratic}
+M is a proper subset of P, written symbolically as M⊂P because every member of M is a member of set P, but P also contains at least one element that is not in M.
+ G is a single member proper subset of P, written symbolically as G⊂P, because Green is a member of set P, but P also contains other members (such as Democratic) that are not in G.
+ V is subset of P because every member of V is also a member of P, but it is not a proper subset of P because there are no members of V that are not also in set P. We can represent the relationship symbolically as V⊆P, or more precisely, set V is equal to set P, V=P.
+M is a proper subset of P, written symbolically as M⊂P because every member of M is a member of set P, but P also contains at least one element that is not in M.
+G is a single member proper subset of P, written symbolically as G⊂P, because Green is a member of set P, but P also contains other members (such as Democratic) that are not in G.
+V is subset of P because every member of V is also a member of P, but it is not a proper subset of P because there are no members of V that are not also in set P. We can represent the relationship symbolically as V⊆P, or more precisely, set V is equal to set P, V=P.
+
+Expressing the Relationship between Sets Symbolically
+
+Consider the subsets of a standard deck of cards:
+ S={spades, hearts, diamonds, clubs}; R={hearts, diamonds}; B={spades, clubs}; and C={clubs}.
+
+Express the relationship between the following sets symbolically.
+
+Set S and set B.
+
+Set C and set B.
+
+Set R and R.
+B⊂S. B is a proper subset of set S.
+ C⊂B. C is a proper subset of set B.
+ R⊆RorR=R. R is subset of itself, but not a proper subset of itself because R is equal to itself.
+B⊂S. B is a proper subset of set S.
+C⊂B. C is a proper subset of set B.
+R⊆RorR=R. R is subset of itself, but not a proper subset of itself because R is equal to itself.
+
+Exponential Notation
+
+So far, we have figured out how many subsets exist in a finite set by listing them. Recall that in , when we listed all the subsets of the three-element set L={newspaper, magazine, book} we saw that there are eight subsets. In Your Turn 1.11, we discovered that there are four subsets of the two-element subset, S={heads, tails}. A one-element set has two subsets, the empty set and itself. The only subset of the empty set is the empty set itself. But how can we easily figure out the number of subsets in a very large finite set? It turns out that the number of subsets can be found by raising 2 to the number of elements in the set, using exponential notation to represent repeated multiplication. For example, the number of subsets of the set L={newspaper, magazine, book} is equal to 23=2⋅2⋅2=8. Exponential notation is used to represent repeated multiplication, bn=b⋅b⋅b⋅…⋅b, where b appears as a factor n times.
+
+The number of subsets of a finite set A is equal to 2 raised to the power of n(A), where n(A) is the number of elements in set A:
+ Number of Subsets of Set A=2n(A).
+Note that 20=1, so this formula works for the empty set, also.
+
+Computing the Number of Subsets of a Set
+
+Find the number of subsets of each of the following sets.
+
+The set of top five scorers of all time in the NBA: S={ LeBron James, Kareem Abdul-Jabbar, Karl Malone, Kobe Bryant, Michael Jordan }.
+
+The set of the top four bestselling albums of all time: A={ Thriller, Hotel California, The Beatles White Album, Led Zepplin IV }.
+R={ Snap, Crackle, Pop }.
+n(S)=5. So, the total number of subsets of Sis25=2⋅2⋅2⋅2⋅2=32.
+ n(A)=4. Therefore, the total number of subsets of Ais24=16.
+ n(R)=3. So, the total number of subsets of Ris23=8.
+n(S)=5. So, the total number of subsets of Sis25=2⋅2⋅2⋅2⋅2=32.
+n(A)=4. Therefore, the total number of subsets of Ais24=16.
+n(R)=3. So, the total number of subsets of Ris23=8.
+
+Equivalent Subsets
+
+In the early 17th century, the famous astronomer Galileo Galilei found that the set of natural numbers and the subset of the natural numbers consisting of the set of square numbers, n2, are equivalent. Upon making this discovery, he conjectured that the concepts of less than, greater than, and equal to did not apply to infinite sets.
+Sequences and series are defined as infinite subsets of the set of natural numbers by forming a relationship between the sequence or series in terms of a natural number, n. For example, the set of even numbers can be defined using set builder notation as {a|a=2nwherenis a natural number}. The formula in this case replaces every natural number with two times the number, resulting in the set of even numbers, {2,4,6,…}. The set of even numbers is also equivalent to the set of natural numbers.
+
+Employment Opportunities
+
+You can make a career out of working with sets. Applications of equivalent sets include relational database design and analysis.
+
+Relational databases that store data are tables of related information. Each row of a table has the same number of columns as every other row in the table; in this way, relational databases are examples of set equivalences for finite sets. In a relational database, a primary key is set up to identify all related information. There is a one-to-one relationship between the primary key and any other information associated with it.
+
+Database design and analysis is a high demand career with a median entry-level salary of about $85,000 per year, according to salary.com.
+
+Writing Equivalent Subsets of an Infinite Set
+
+Using natural numbers, multiples of 3 are given by the sequence {3, 6, 9, …}. Write this set using set builder notation by expressing each multiple of 3 using a formula in terms of a natural number, n.
+{m|m=3nwherenis a natural number} or {m|m=3nwheren∈N}. In this example, m is a multiple of 3 and n is a natural number. The symbol ∈ is read as “is a member or element of.” Because there is a one-to-one correspondence between the set of multiples of 3 and the natural numbers, the set of multiples of 3 is an equivalent subset of the natural numbers.
+
+Creating Equivalent Subsets of a Finite Set That Are Not Equal
+
+A fast-food restaurant offers a deal where you can select two options from the following set of four menu items for $6: a chicken sandwich, a fish sandwich, a cheeseburger, or 10 chicken nuggets. Javier and his friend Michael are each purchasing lunch using this deal. Create two equivalent, but not equal, subsets that Javier and Michael could choose to have for lunch.
+
+The possible two-element subsets are: {chicken sandwich, fish sandwich}, {chicken sandwich, cheeseburger}, {chicken sandwich, chicken nuggets}, {fish sandwich, cheeseburger}, {fish sandwich, chicken nuggets}, and {cheeseburger, chicken nuggets}. One possible solution is that Javier picked the set {chicken sandwich, chicken nuggets}, while Michael chose the {cheeseburger, chicken nuggets}. Because Javier and Michael both picked two items, but not exactly the same two items, these sets are equivalent, but not equal.
+
+Creating Equivalent Subsets of a Finite Set
+
+A high school volleyball team at a small school consists of the following players: {Angie, Brenda, Colleen, Estella, Maya, Maria, Penny, Shantelle}. Create two possible equivalent starting line-ups of six players that the coach could select for the next game.
+
+There are actually 28 possible ways that the coach could choose his starting line-up. Two such equivalent subsets are {Angie, Brenda, Maya, Maria, Penny, Shantelle} and {Angie, Brenda, Colleen, Estella, Maria, Shantelle}. Each subset has six members, but they are not identical, so the two sets are equivalent but not equal.
+
+Check Your Understanding
+
+Key Terms
+
+subset
+
+proper subset
+
+equivalent subsets
+
+exponential notation
+
+Every member of a subset of a set is also a member of the set containing it. A⊆B
+
+A proper subset of a set does not contain all the members of the set containing it. There is a least one member of set B that is not a member of set A. A⊂B
+
+The number subsets of a finite set A with n(A) members is equal to 2 raised to the n(A) power.
+
+The empty set is a subset of every set and must be included when listing all the subsets of a set.
+
+Understand how to create and distinguish between equivalent subsets of finite and infinite sets that are not equal to the original set.
+
+Formulas
+
+The number of subsets of a finite set A is equal to 2 raised to the power of n(A), where n(A) is the number of elements in set A: Number of Subsets of Set A=2n(A).

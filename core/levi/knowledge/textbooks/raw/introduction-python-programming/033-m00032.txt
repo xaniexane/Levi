@@ -1,0 +1,80 @@
+# m00032
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chained decisions
+
+Chained decisions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify the branches taken in an if-elif and if-elif-else statement.
+
+Create a chained decision statement to evaluate multiple conditions.
+
+elif
+
+Sometimes, a complicated decision is based on more than a single condition. Ex: A travel planning site reviews the layovers on an itinerary. If a layover is greater than 24 hours, the site should suggest accommodations. Else if the layover is less than one hour, the site should alert for a possible missed connection.
+
+Two separate if statements do not guarantee that only one branch is taken and might result in both branches being taken. Ex: The program below attempts to add a curve based on the input test score. If the input is 60, both if statements are incorrectly executed, and the resulting score is 75.
+
+Chaining decision statements with elif allows the programmer to check for multiple conditions. An elif (short for else if) statement checks a condition when the prior decision statement's condition is false. An elif statement is part of a chain and must follow an if (or elif) statement.
+if-elif statement template:
+
+Example: Livestream features
+
+Using elif
+
+if-elif-else statements
+
+Elifs can be chained with an if-else statement to create a more complex decision statement. Ex: A program shows possible chess moves depending on the piece type. If the piece is a pawn, show moving forward one (or two) places. Else if the piece is a bishop, show diagonal moves. Else if . . . (finish for the rest of the pieces).
+
+Example: Possible chess moves
+
+Using elif within if-elif-else statements
+
+Crochet hook size conversion
+
+Write a program that reads in a crochet hook's US size and computes the metric diameter in millimeters. (A subset of sizes is used.) If the input does not match B-G, the diameter should be assigned with -1.0. Ex: If the input is D, the output is "3.25 mm".
+
+Size conversions for US size: mm
+
+B : 2.25
+
+C : 2.75
+
+D : 3.25
+
+E : 3.5
+
+F : 3.75
+
+G : 4.0
+
+Color wavelengths
+
+Write a program that reads in an integer representing a visible light wavelength in nanometers. Print the corresponding color using the following inclusive ranges:
+
+Violet: 380–449
+
+Blue: 450–484
+
+Cyan: 485–499
+
+Green: 500–564
+
+Yellow: 565–589
+
+Orange: 590–624
+
+Red: 625–750
+
+Assume the input is within the visible light spectrum, 380-750 inclusive.
+
+Given input:
+
+The output is:

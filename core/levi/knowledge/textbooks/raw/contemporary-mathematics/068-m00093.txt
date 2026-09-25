@@ -1,0 +1,150 @@
+# m00093
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Conditional Probability and the Multiplication Rule
+
+Conditional Probability and the Multiplication Rule
+
+Learning Objectives
+After completing this section, you should be able to:
+
+Calculate conditional probabilities.
+
+Apply the Multiplication Rule for Probability to compute probabilities.
+
+Back in , we constructed the following table () to help us find the probabilities associated with rolling two standard 6-sided dice:
+
+For example, 3 of these 36 equally likely outcomes correspond to rolling a sum of 10, so the probability of rolling a 10 is 336=112. However, if you choose to roll the dice one at a time, the probability of rolling a 10 will change after the first die comes to rest. For example, if the first die shows a 5, then the probability of rolling a sum of 10 has jumped to 16—the event will occur if the second die also shows a 5, which is 1 of 6 equally likely outcomes for the second die. If instead the first die shows a 3, then the probability of rolling a sum of 10 drops to 0—there are no outcomes for the second die that will give us a sum of 10.
+
+Understanding how probabilities can shift as we learn new information is critical in the analysis of our second type of compound events: those built with “and.” This section will explain how to compute probabilities of those compound events.
+
+Conditional Probabilities
+
+When we analyze experiments with multiple stages, we often update the probabilities of the possible final outcomes or the later stages of the experiment based on the results of one or more of the initial stages. These updated probabilities are called conditional probabilities.
+
+In other words, if O is a possible outcome of the first stage in a multistage experiment, then the probability of an event E conditional on O (denoted P(E|O), read “the probability of E given O”) is the updated probability of E under the assumption that O occurred.
+
+In the example that opened this section, we might consider rolling two dice as a multistage experiment: rolling one, then the other. If we define E to be the event “roll a sum of 10,” O to be the event “first die shows 5,” and Q to be the event “first die shows 3,” then we computed P(E)=112, P(E|O)=16, and P(E|Q)=0.
+
+Computing Conditional Probabilities
+
+April is playing a coin-flipping game with Ben. She will flip a coin 3 times. If the coin lands on heads more than tails, April wins; if it lands on tails more than heads, Ben wins. Let A be the event “April wins,” H be “first flip is heads,” and T be “first flip is tails.” Compute P(A), P(A|H), and P(A|T).
+
+You are about to draw 2 cards without replacement from a deck containing only these 10 cards: A♡, A♠, A♣, A♢, K♠, K♣, Q♡, Q♠, J♡, J♠. We’ll define the following events: F is “both cards are the same rank,” A is “first card is an ace,” and K is “first card is a king.” Compute P(F|A) and P(F|K).
+
+Jim’s sock drawer contains 5 black socks and 3 blue socks. To avoid waking his partner, Jim doesn’t want to turn the lights on, so he puts on 2 socks at random. Let M be the event “Jim’s 2 socks match,” let K be the event “the sock on Jim’s left foot is black,” and let L be the event “the sock on Jim’s left foot is blue.” Compute P(M), P(M|K), and P(M|L).
+Step 1. The sample space is {HHH, HHT, HTH, THH, HTT, THT, TTH, TTT}. The event A consists of the first 4 of those outcomes: HHH, HHT, HTH, and THH. Thus, P(A)=48=12.
+ Step 2. Now, let’s compute P(A|H). We are assuming the result of the first flip is heads. That leaves us with 4 possible outcomes: HHH, HHT, HTH, and HTT. Of those, April wins 3 (HHH, HHT, HTH) and loses one (HTT). So, P(A|H)=34.
+ Step 3. If the result of the first flip is instead tails, the 4 possible outcomes are THH, THT, TTH, and TTT. Of those, April wins 1 (THH) and loses 3 (THT, TTH, TTT). So, P(A|T)=14.
+ Step 1. If the event A happens, then 1 of the 4 aces is drawn first; the remaining cards in the deck are 3 aces, 2 kings, 2 queens, and 2 jacks. In order for the event F to occur, the second card drawn has to be an ace. Since there are 3 aces among the remaining 9 cards, P(F|A)=39=13.
+ Step 2. If the event K happens instead, then the first card drawn is a king. That leaves 4 aces, 1 king, 2 queens, and 2 jacks in the deck. Under the assumption that the first card is a king, the event F will occur only if the second card is also a king. Since only one of the remaining 9 cards is a king, we have P(F|K)=19.
+ Step 1. We can view the event M as a compound event using “or”: both socks are blue or both socks are black. Let’s compute the probability that both socks are blue using combinations. We’re choosing 2 socks from a group of 8; 3 of the 8 are blue. So, P(both socks blue)=3C28C2=328. Similarly, P(both socks black)=5C28C2=1028. Therefore, since these events are mutually exclusive, we can use the Addition Rule: P(M)=P(both socks blue)+P(both socks black)=328+1028=1328. 
+ Step 2. If the sock on Jim’s left foot is black (i.e., K occurred), then there are 4 remaining black socks of the 7 in the drawer. So, P(M|K)=47.
+ Step 3. If the sock on Jim’s left foot is blue (L occurred), then there are 2 blue socks among the 7 remaining in the drawer. So, P(M|L)=27.
+Step 1. The sample space is {HHH, HHT, HTH, THH, HTT, THT, TTH, TTT}. The event A consists of the first 4 of those outcomes: HHH, HHT, HTH, and THH. Thus, P(A)=48=12.
+ Step 2. Now, let’s compute P(A|H). We are assuming the result of the first flip is heads. That leaves us with 4 possible outcomes: HHH, HHT, HTH, and HTT. Of those, April wins 3 (HHH, HHT, HTH) and loses one (HTT). So, P(A|H)=34.
+ Step 3. If the result of the first flip is instead tails, the 4 possible outcomes are THH, THT, TTH, and TTT. Of those, April wins 1 (THH) and loses 3 (THT, TTH, TTT). So, P(A|T)=14.
+Step 1. The sample space is {HHH, HHT, HTH, THH, HTT, THT, TTH, TTT}. The event A consists of the first 4 of those outcomes: HHH, HHT, HTH, and THH. Thus, P(A)=48=12.
+Step 2. Now, let’s compute P(A|H). We are assuming the result of the first flip is heads. That leaves us with 4 possible outcomes: HHH, HHT, HTH, and HTT. Of those, April wins 3 (HHH, HHT, HTH) and loses one (HTT). So, P(A|H)=34.
+Step 3. If the result of the first flip is instead tails, the 4 possible outcomes are THH, THT, TTH, and TTT. Of those, April wins 1 (THH) and loses 3 (THT, TTH, TTT). So, P(A|T)=14.
+Step 1. If the event A happens, then 1 of the 4 aces is drawn first; the remaining cards in the deck are 3 aces, 2 kings, 2 queens, and 2 jacks. In order for the event F to occur, the second card drawn has to be an ace. Since there are 3 aces among the remaining 9 cards, P(F|A)=39=13.
+ Step 2. If the event K happens instead, then the first card drawn is a king. That leaves 4 aces, 1 king, 2 queens, and 2 jacks in the deck. Under the assumption that the first card is a king, the event F will occur only if the second card is also a king. Since only one of the remaining 9 cards is a king, we have P(F|K)=19.
+Step 1. If the event A happens, then 1 of the 4 aces is drawn first; the remaining cards in the deck are 3 aces, 2 kings, 2 queens, and 2 jacks. In order for the event F to occur, the second card drawn has to be an ace. Since there are 3 aces among the remaining 9 cards, P(F|A)=39=13.
+Step 2. If the event K happens instead, then the first card drawn is a king. That leaves 4 aces, 1 king, 2 queens, and 2 jacks in the deck. Under the assumption that the first card is a king, the event F will occur only if the second card is also a king. Since only one of the remaining 9 cards is a king, we have P(F|K)=19.
+Step 1. We can view the event M as a compound event using “or”: both socks are blue or both socks are black. Let’s compute the probability that both socks are blue using combinations. We’re choosing 2 socks from a group of 8; 3 of the 8 are blue. So, P(both socks blue)=3C28C2=328. Similarly, P(both socks black)=5C28C2=1028. Therefore, since these events are mutually exclusive, we can use the Addition Rule: P(M)=P(both socks blue)+P(both socks black)=328+1028=1328. 
+ Step 2. If the sock on Jim’s left foot is black (i.e., K occurred), then there are 4 remaining black socks of the 7 in the drawer. So, P(M|K)=47.
+ Step 3. If the sock on Jim’s left foot is blue (L occurred), then there are 2 blue socks among the 7 remaining in the drawer. So, P(M|L)=27.
+Step 1. We can view the event M as a compound event using “or”: both socks are blue or both socks are black. Let’s compute the probability that both socks are blue using combinations. We’re choosing 2 socks from a group of 8; 3 of the 8 are blue. So, P(both socks blue)=3C28C2=328. Similarly, P(both socks black)=5C28C2=1028. Therefore, since these events are mutually exclusive, we can use the Addition Rule: P(M)=P(both socks blue)+P(both socks black)=328+1028=1328.
+Step 2. If the sock on Jim’s left foot is black (i.e., K occurred), then there are 4 remaining black socks of the 7 in the drawer. So, P(M|K)=47.
+Step 3. If the sock on Jim’s left foot is blue (L occurred), then there are 2 blue socks among the 7 remaining in the drawer. So, P(M|L)=27.
+
+In Tree Diagrams, Tables, and Outcomes, we introduced the concept of dependence between stages of a multistage experiment. We stated at the time that two stages were dependent if the result of one stage affects the other stage. We explained that dependence in terms of the sample space, but sometimes that dependence can be a little more subtle; it’s more properly understood in terms of conditional probabilities. Two stages of an experiment are dependent if P(E|F)≠P(E|F′) for some outcome of the second stage E and outcome of the first stage F.
+
+Protecting Bombers in World War II
+
+In his book How Not to Be Wrong, Jordan Ellenberg recounts this anecdote: During World War II, the American military wanted to add additional armor plating to bomber aircraft, in order to reduce the chances that they get shot down. So, they collected data on planes after returning from missions. The data showed that the fuselage, wings, and fuel system had many more bullet holes (per unit area) than the engine compartments, so the military brass wanted to add additional armor to the parts of the plane that were hit most often. Luckily, before they added the armor to the planes, they asked for a second opinion. Abraham Wald, a Jewish mathematician who had fled the rising Nazi regime, pointed out that it was far more important that the armor plating be added to areas where there were fewer bullet holes. Why? The planes they were studying had already completed their missions, so the military was essentially looking at conditional probabilities: the probability of suffering a bullet strike, given that the plane made it back safely. More bullet holes in an area on the plane indicated that was a region that wasn’t as important for the plane’s survival!
+
+Compound Events Using “And” and the Multiplication Rule
+
+For multistage experiments, the outcomes of the experiment as a whole are often stated in terms of the outcomes of the individual stages. Commonly, those statements are joined with “and.” For example, in the sock drawer example just above, one outcome might be “the left sock is black and the right sock is blue.” As with “or” compound events, these probabilities can be computed with basic arithmetic.
+
+Multiplication Rule for Probability: If E and F are events associated with the first and second stages of an experiment, then P(Eand⁢F)=P(E)×P(F|E).
+In The Addition Rule for Probability, we considered probabilities of events connected with “and” in the statement of the Inclusion/Exclusion Principle. These two scenarios are different; in the statement of the Inclusion/Exclusion Principle, the events connected with “and” are both events associated with the same single-stage experiment (or the same stage of a multistage experiment). In the Multiplication Rule, we’re looking at events associated with different stages of a multistage experiment.
+
+Using the Multiplication Rule for Probability
+
+You are president of a club with 10 members: 4 seniors, 3 juniors, 2 sophomores, and 1 first-year. You need to choose 2 members to represent the club on 2 college committees. The first person selected will be on the Club Awards Committee and the second will be on the New Club Orientation Committee. The same person cannot be selected for both. You decide to select these representatives at random.
+
+What is the probability that a senior is chosen for both positions?
+
+What is the probability that a junior is chosen first and a sophomore is chosen second?
+
+What is the probability that a sophomore is chosen first and a senior is chosen second?
+
+We need the probability that a senior is chosen first and a senior is chosen second. These are two stages of a multistage experiment, so we’ll apply the Multiplication Rule for Probability: P( senior chosen first and senior chosen second)=P(senior chosen first)×P(senior chosen second|senior chosen first). Since there are 4 seniors among the 10 members, P(senior chosen first)=410=25. Next, assuming a senior is chosen first, there are 3 seniors among the 9 remaining members. So, P(senior chosen second|senior chosen first)=39=13. Putting this all together, we get P(senior chosen first and senior chosen second)=25×13=215.
+
+There are 3 juniors among the 10 members, so P(junior chosen first)=310. Assuming a junior is chosen first, there are 2 sophomores among the remaining 9 members, so P(sophomore chosen second|junior chosen first)=29. Thus, using the Multiplication Rule for Probability, we have P(junior chosen first and sophomore chosen second)=310×29=115.
+
+The probability that a sophomore is chosen first is 210=15, and the probability that a senior is chosen second given that a sophomore was chosen first is 49. Thus, using the Multiplication Rule for Probability, we have: P(sophomore chosen first and senior chosen second)=15×49=445.
+
+The Birthday Problem
+
+One of the most famous problems in probability theory is the Birthday Problem, which has to do with shared birthdays in a large group. To make the analysis easier, we’ll ignore leap days, and assume that the probability of being born on any given date is 1365. Now, if you have 366 people in a room, we’re guaranteed to have at least one pair of people who share a single birthday. Imagine filling the room by first admitting someone born on January 1, then someone born on January 2, and so on… The 365th person admitted would be born on December 31. If you add one more person to the room, that person’s birthday would have to match someone else’s.
+
+Let’s look at the other end of the spectrum. If you choose two people at random, what is the probability that they share a birthday? As with many probability questions, this is best addressed by find out the probability that they do not share a birthday. The first person’s birthday can be anything (probability 1), and the second person’s birthday can be anything other than the first person’s birthday (probability 364365). The probability that they have different birthdays is 1×364365=364365. So, the probability that they share a birthday is 1−364365=1365.
+
+What if we have three people? The probability that they all have different birthdays can be obtained by extending our previous calculation: The probability that two people have different birthdays is 364365, so if we add a third to the mix, the probability that they have a different birthday from the other two is 363365. So, the probability that all three have different birthdays is 364365×363365≈0.9918, and thus the probability that there’s a shared birthday in the group is 1−0.9918≈0.0082.
+
+The big question is this: How many people do we need in the room to have the probability of a shared birthday greater than 12? Make a guess, then with a partner keep adding hypothetical people to the group and computing probabilities until you get there!
+
+It is often useful to combine the rules we’ve seen so far with the techniques we used for finding sample spaces. In particular, trees can be helpful when we want to identify the probabilities of every possible outcome in a multistage experiment. The next example will illustrate this.
+
+Using Tree Diagrams to Help Find Probabilities
+
+The board game Clue uses a deck of 21 cards: 6 suspects, 6 weapons, and 9 rooms. Suppose you are about to draw 2 cards from this deck. There are 6 possible outcomes for the draw: 2 suspects, 2 weapons, 2 rooms, 1 suspect and 1 weapon, 1 suspect and 1 room, or 1 weapon and 1 room. What are the probabilities for each of these outcomes?
+Step 1: Let’s start by building a tree diagram that illustrates both stages of this experiment. Let’s use S, W, and R to indicate drawing a suspect, weapon, and room, respectively ().
+Step 2: We want to start computing probabilities, starting with the first stage. The probability that the first card is a suspect is 621=27. The probability that the first card is a weapon is the same: 27. Finally, the probability that the first card is a room is 921=37.
+Step 3: Let’s incorporate those probabilities into our tree: label the edges going into each of the nodes representing the first-stage outcomes with the corresponding probabilities ().
+
+Note that the sum of the probabilities coming out of the initial node is 1; this should always be the case for the probabilities coming out of any node!
+Step 4: Let’s look at the case where the first card is a suspect. There are 3 edges emanating from that node (leading to the outcomes SS, SW, and SR). We’ll label those edges with the appropriate conditional probabilities, under the assumption that the first card is a suspect. First, there are 5 remaining suspect cards among the 20 left in the deck, so P(second is suspect|first is suspect)=520=14. Using similar reasoning, we can compute P(second is weapon|first is suspect)=620=310 and P(second is room|first is suspect)=920.
+Step 5: Checking our work, we see that the sum of these 3 probabilities is again equal to 1. Let’s add those to our tree ().
+Step 6: Let’s continue filling in the conditional probabilities at the other nodes, always checking to make sure the sum of the probabilities coming out of any node is equal to 1 ().
+Step 7: We can compute the probability of landing on any final node by multiplying the probabilities along the path we would take to get there. For example, the probability of drawing a suspect first and a weapon second (i.e., ending up on the node labeled “SW”) is 27×310=335, as illustrated in .
+Step 8: Let’s fill in the rest of the probabilities ().
+Step 9: A helpful feature of tree diagrams is that the final outcomes are always mutually exclusive, so the Addition Rule can be directly applied. For example, the probability of drawing one suspect and one room (in any order) would be P(SR)+P(RS)=970+970=935. We can find the probabilities of the other outcomes in a similar fashion, as shown in the following table:
+
+Outcome
+Probability
+114
+114
+635
+335+335=635
+970+970=935
+970+970=935
+Checking once again, the sum of these 6 probabilities is 1, as expected.
+
+The Monty Hall Problem
+
+On the original version of the game show Let’s Make a Deal, originally hosted by Monty Hall and now hosted by Wayne Brady, one contestant was chosen to play a game for the grand prize of the day (often a car). Here’s how it worked: On the stage were three areas concealed by numbered curtains. The car was hidden behind one of the curtains; the other two curtains hid worthless prizes (called “Zonks” on the show). The contestant would guess which curtain concealed the car. To build tension, Monty would then reveal what was behind one of the other curtains, which was always one of the Zonks (Since Monty knew where the car was hidden, he always had at least one Zonk curtain that hadn’t been chosen that he could reveal). Monty then turned to the contestant and asked: “Do you want to stick with your original choice, or do you want to switch your choice to the other curtain?” What should the contestant do? Does it matter?
+
+With a partner or in a small group, simulate this game. You can do that with a small candy (the prize) hidden under one of three cups, or with three playing cards (just decide ahead of time which card represents the “Grand Prize”). One person plays the host, who knows where the prize is hidden. Another person plays the contestant and tries to guess where the prize is hidden. After the guess is made, the host should reveal a losing option that wasn’t chosen by the contestant. The contestant then has the option to stick with the original choice or switch to the other, unrevealed option. Play about 20 rounds, taking turns in each role and making sure that both contestant strategies (stick or switch) are used equally often. After each round, make a note of whether the contestant chose “stick” or “switch” and whether the contestant won or lost. Find the empirical probability of winning under each strategy. Then, see if you can use tree diagrams to verify your findings.
+
+Check Your Understanding
+
+Key Terms
+
+conditional probability
+
+Key Concepts
+
+Conditional probabilities are computed under the assumption that the condition has already occurred.
+
+The Multiplication Rule for Probability is used to find the probability that two events occur in sequence.
+
+Formulas
+
+If E and F are events associated with the first and second stages of an experiment, then P(Eand⁢F)=P(E)×P(F|E).

@@ -1,0 +1,1196 @@
+# m79650
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Using the Central Limit Theorem
+
+Using the Central Limit Theorem
+
+It is important for you to understand when to use the central limit theorem. If you are being asked to find the probability of the mean, use the clt for the means. If you are being asked to find the probability of a sum or total, use the clt for sums. This also applies to percentiles for means and sums.
+
+NOTE
+
+If you are being asked to find the probability of an individual value, do not use the clt. Use the distribution of its random variable.
+
+Examples of the Central Limit Theorem
+
+Law of Large Numbers
+
+The law of large numbers says that if you take samples of larger and larger sizes from any population, then the mean 
+ 
+ x
+ ¯
+ 
+ of the samples tends to get closer and closer to μ. From the central limit theorem, we know that as n gets larger and larger, the sample means follow a normal distribution. The larger n gets, the smaller the standard deviation gets. (Remember that the standard deviation for 
+ 
+ X
+ ¯
+ 
+ is 
+
+ σ
+
+ n
+
+.) This means that the sample mean 
+ 
+ x
+ ¯
+ must be close to the population mean μ. We can say that μ is the value that the sample means approach as n gets larger. The central limit theorem illustrates the law of large numbers.
+
+Central Limit Theorem for the Mean and Sum Examples
+
+A study involving stress is conducted among the students on a college campus. The stress scores follow a uniform distribution with the lowest stress score equal to one and the highest equal to five. Using a sample of 75 students, find:
+
+the probability that the mean stress score for the 75 students is less than 2
+
+the 90th percentile for the mean stress score for the 75 students
+
+the probability that the total of the 75 stress scores is less than 200
+
+the 90th percentile for the total stress score for the 75 students
+
+Let X = one stress score.
+
+Problems (a) and (b) ask you to find a probability or a percentile for a mean. Problems (c) and (d) ask you to find a probability or a percentile for a total or sum. The sample size, n, is equal to 75.
+
+Because the individual stress scores follow a uniform distribution, X ~ U(1, 5) where a = 1 and b = 5 (see Continuous Random Variables for an explanation of a uniform distribution),
+
+In the formula above, the denominator is understood to be 12, regardless of the endpoints of the uniform distribution.
+
+For problems (a) and (b), let 
+ 
+ X
+ ¯
+
+ = the mean stress score for the 75 students. Then,
+
+a. Find P(
+ 
+ x
+ ¯
+ 
+ < 2). Draw the graph.
+
+a. P(
+ 
+ x
+ ¯
+ 
+ < 2) = 0
+
+The probability that the mean stress score is less than 2 is about zero.
+normalcdf 
+ 
+ (
+ 
+ 1,2,3,
+ 
+ 1.15
+
+ 75
+
+ )
+ 
+ = 0
+
+Reminder
+
+The smallest stress score is one.
+
+b. Find the 90th percentile for the mean of 75 stress scores. Draw a graph.
+
+b. Let k = the 90th precentile.
+
+Find k, where P(
+ 
+ x
+ ¯
+ 
+ < k) = 0.90.
+
+The 90th percentile for the mean of 75 scores is about 3.2. This tells us that 90 percent of all the means of 75 stress scores are at most 3.2, and that 10 percent are at least 3.2.
+invNorm
+ 
+ (
+ 
+ 0.90,3,
+ 
+ 1.15
+
+ 75
+
+ )
+ 
+ = 3.2
+
+For problems (c) and (d), let ΣX = the sum of the 75 stress scores. Then, ΣX ~ N[(75)(3),
+ 
+ (
+ 
+ 75
+
+ )
+ 
+(1.15)].
+
+c. Find P(Σx < 200). Draw the graph.
+
+c. The mean of the sum of 75 stress scores is (75)(3) = 225.
+
+The standard deviation of the sum of 75 stress scores is 
+ 
+ (
+ 
+ 75
+
+ )
+ 
+(1.15) = 9.96.
+
+The probability that the total of 75 scores is less than 200 is about zero.
+normalcdf (75,200,(75)(3),
+ 
+ (
+ 
+ 75
+
+ )
+ 
+(1.15)).
+
+Reminder
+
+The smallest total of 75 stress scores is 75, because the smallest single score is one.
+
+d. Find the 90th percentile for the total of 75 stress scores. Draw a graph.
+
+d. Let k = the 90th percentile.
+
+Find k where P(Σx < k) = 0.90.
+
+The 90th percentile for the sum of 75 scores is about 237.8. This tells us that 90 percent of all the sums of 75 scores are no more than 237.8 and 10 percent are no less than 237.8.
+invNorm(0.90,(75)(3),
+ 
+ (
+ 
+ 75
+
+ )
+ 
+(1.15)) = 237.8
+
+Try It
+
+Use the information in , but use a sample size of 55 to answer the following questions.
+
+Find P(
+
+x
+¯
+
+ < 7).
+
+Find P(Σx > 170).
+
+Find the 80th percentile for the mean of 55 scores.
+
+Find the 85th percentile for the sum of 55 scores.
+
+Solutions
+
+0.0265
+
+0.2789
+
+3.13
+
+173.84
+
+Suppose that a market research analyst for a cell phone company conducts a study of their customers who exceed the time allowance included on their basic cell phone contract. The analyst finds that for those people who exceed the time included in their basic contract, the excess time used follows an exponential distribution with a mean of 22 minutes.
+
+Consider a random sample of 80 customers who exceed the time allowance included in their basic cell phone contract.
+
+Let X = the excess time used by one INDIVIDUAL cell phone customer who exceeds his contracted time allowance.
+X ∼ Exp
+ 
+ (
+
+ 1
+ 
+ 22
+
+ )
+ 
+. From previous chapters, we know that μ = 22 and σ = 22.
+
+Let 
+ 
+ X
+ ¯
+ 
+ = the mean excess time used by a sample of n = 80 customers who exceed their contracted time allowance.
+X
+ ¯
+
+ ~ N
+ 
+ (
+ 
+ 22, 
+ 
+ 22
+
+ 80
+
+ )
+ 
+ by the central limit theorem for sample means.
+Using the clt to find probability
+
+Find the probability that the mean excess time used by the 80 customers in the sample is longer than 20 minutes. This is asking us to find P(
+ 
+ x
+ ¯
+ 
+ > 20). Draw the graph.
+
+Suppose that one customer who exceeds the time limit for his cell phone contract is randomly selected. Find the probability that this individual customer's excess time is longer than 20 minutes. This is asking us to find P(x > 20).
+
+Explain why the probabilities in parts (a) and (b) are different.
+Find: P(
+ 
+ x
+ ¯
+
+ > 20)
+P(
+ 
+ x
+ ¯
+ 
+ > 20) = 0.79199 using normalcdf
+ 
+ (
+ 
+ 20,1E99,22,
+ 
+ 22
+
+ 80
+
+ )
+ 
+The probability is 0.7919 that the mean excess time used is more than 20 minutes, for a sample of 80 customers who exceed their contracted time allowance.
+
+Reminder
+1E99 = 1099 and –1E99 = –1099. Press the EE key for E. Or just use 1099 instead of 1E99.
+
+Find: P(
+ 
+ x
+ ¯
+
+ > 20)
+P(
+ 
+ x
+ ¯
+ 
+ > 20) = 0.79199 using normalcdf
+ 
+ (
+ 
+ 20,1E99,22,
+ 
+ 22
+
+ 80
+
+ )
+
+The probability is 0.7919 that the mean excess time used is more than 20 minutes, for a sample of 80 customers who exceed their contracted time allowance.
+
+Reminder
+1E99 = 1099 and –1E99 = –1099. Press the EE key for E. Or just use 1099 instead of 1E99.
+
+Find P(x > 20). Remember to use the exponential distribution for an individual. 
+ 
+ X~Exp(
+
+ 1
+ 
+ 22
+
+ )
+ 
+.
+
+ P(x>20) = 
+ e
+ 
+ (
+ 
+ −(
+
+ 1
+ 
+ 22
+
+ )(20)
+ 
+ )
+
+  or 
+ e
+ 
+ (–0.04545(20))
+
+  = 0.4029
+P(x > 20) = 0.4029, but P(
+ 
+ x
+ ¯
+
+ > 20) = 0.7919
+The probabilities are not equal because we use different distributions to calculate the probability for individuals and for means.
+When asked to find the probability of an individual value, use the stated distribution of its random variable; do not use the clt. Use the clt with the normal distribution when you are being asked to find the probability for a mean.
+P(x > 20) = 0.4029, but P(
+ 
+ x
+ ¯
+
+ > 20) = 0.7919
+
+The probabilities are not equal because we use different distributions to calculate the probability for individuals and for means.
+
+When asked to find the probability of an individual value, use the stated distribution of its random variable; do not use the clt. Use the clt with the normal distribution when you are being asked to find the probability for a mean.
+Using the clt to find percentilesFind the 95th percentile for the sample mean excess time for a sample of 80 customers who exceed their basic contract time allowances. Draw a graph.
+Using the clt to find percentiles
+
+Let k = the 95th percentile. Find k where P(
+ 
+ x
+ ¯
+ 
+ < k) = 0.95.
+k = 26.0 using invNorm
+ 
+ (
+ 
+ 0.95,22,
+ 
+ 22
+
+ 80
+
+ )
+ 
+ = 26.0
+
+The 95th percentile for the sample mean excess time used is about 26.0 minutes for a random sample of 80 customers who exceed their contractual allowed time.
+
+95 percent of such samples would have means under 26 minutes; only five percent of such samples would have means above 26 minutes.
+
+Try It
+
+Use the information in , but change the sample size to 144.
+
+Find P(20 < 
+ 
+ x
+ ¯
+
+ < 30).
+
+Find P(Σx is at least 3000).
+
+Find the 75th percentile for the sample mean excess time of 144 customers.
+
+Find the 85th percentile for the sum of 144 excess times used by customers.
+
+Solutions
+
+0.8623
+
+0.7377
+
+23.2
+
+3,441.6
+
+U.S. scientists studying a certain medical condition discovered that a new person is diagnosed every two minutes, on average. Suppose the standard deviation is 0.5 minutes and the sample size is 100.
+
+Find the median, the first quartile, and the third quartile for the sample mean time of diagnosis in the United States.
+
+Find the median, the first quartile, and the third quartile for the sum of sample times of diagnosis in the United States.
+
+Find the probability that a diagnosis occurs on average between 1.75 and 1.85 minutes.
+
+Find the value that is two standard deviations above the sample mean.
+
+Find the IQR for the sum of the sample times.
+
+We have μx = μ = 2 and σx = 
+
+ σ
+
+ n
+
+ = 
+
+ 0.5
+
+ 10
+
+ = 0.05. Therefore,
+50th percentile = μx = μ = 2,
+25th percentile = invNorm(0.25,2,0.05) = 1.97, and
+75th percentile = invNorm(0.75,2,0.05) = 2.03.
+
+50th percentile = μx = μ = 2,
+
+25th percentile = invNorm(0.25,2,0.05) = 1.97, and
+
+75th percentile = invNorm(0.75,2,0.05) = 2.03.
+
+We have μΣx = n(μx) = 100(2) = 200 and σμx = 
+
+ n
+
+(σx) = 10(0.5) = 5. Therefore,
+50th percentile = μΣx = n(μx) = 100(2) = 200,
+25th percentile = invNorm(0.25,200,5) = 196.63, and
+75th percentile = invNorm(0.75,200,5) = 203.37.
+
+50th percentile = μΣx = n(μx) = 100(2) = 200,
+
+25th percentile = invNorm(0.25,200,5) = 196.63, and
+
+75th percentile = invNorm(0.75,200,5) = 203.37.
+P(1.75 < 
+ 
+ x
+ ¯
+
+ < 1.85) = normalcdf(1.75,1.85,2,0.05) = 0.0013
+
+Using the z-score equation, 
+ 
+ z = 
+
+ x
+ ¯
+ 
+ –
+ μ
+ 
+ x
+ ¯
+
+ σ
+ 
+ x
+ ¯
+
+, and solving for x, we get x = 2(0.05) + 2 = 2.1.
+
+The IQR is 75th percentile – 25th percentile = 203.37 – 196.63 = 6.74.
+
+Try It
+
+Based on data from the National Health Survey, women between the ages of 18 and 24 have an average systolic blood pressures (in mm Hg) of 114.8 with a standard deviation of 13.1. Systolic blood pressure for women between the ages of 18 to 24 follows a normal distribution.
+
+If one woman from this population is randomly selected, find the probability that her systolic blood pressure is greater than 120.
+
+If 40 women from this population are randomly selected, find the probability that their mean systolic blood pressure is greater than 120.
+
+If the sample was four women between the ages of 18–24 and we did not know the original distribution, could the central limit theorem be used?
+P(x > 120) = normalcdf(120,99,114.8,13.1) = 0.0272. There is about a 3%, that the randomly selected woman will have systolics blood pressure greater than 120.
+P(
+ 
+ x
+ ¯
+
+ > 120) = normalcdf
+ 
+ (
+ 
+ 120,114.8,
+ 
+ 13.1
+
+ 40
+
+ )
+ 
+ = 0.006. There is only a 0.6% chance that the average systolic blood pressure for the randomly selected group is greater than 120.
+
+The central limit theorem could not be used if the sample size were four and we did not know the original distribution was normal. The sample size would be too small.
+
+A study was done about a medical condition that affects a certain group of people. The age range of the people was 14–61. The mean age was 30.9 years with a standard deviation of nine years.
+
+In a sample of 25 people, what is the probability that the mean age of the people is less than 35?
+
+Is it likely that the mean age of the sample group could be more than 50 years? Interpret the results.
+
+In a sample of 49 people, what is the probability that the sum of the ages is no less than 1,600?
+
+Is it likely that the sum of the ages of the 49 people are at most 1,595? Interpret the results.
+
+Find the 95th percentile for the sample mean age of 65 people. Interpret the results.
+
+Find the 90th percentile for the sum of the ages of 65 people. Interpret the results.
+P(
+ 
+ x
+ ¯
+
+ < 35) = normalcdf(-E99,35,30.9,1.8) = 0.9886
+P(
+ 
+ x
+ ¯
+
+ > 50) = normalcdf(50, E99,30.9,1.8) ≈ 0. For this sample group, it is almost impossible for the group’s average age to be more than 50. However, it is still possible for an individual in this group to have an age greater than 50.
+P(Σx ≥ 1,600) = normalcdf(1600,E99,1514.10,63) = 0.0864
+P(Σx ≤ 1,595) = normalcdf(-E99,1595,1514.10,63) = 0.9005. This means that there is a 90 percent chance that the sum of the ages for the sample group n = 49 is at most 1,595.
+
+The 95th percentile = invNorm(0.95,30.9,1.1) = 32.7. This indicates that 95 percent of the people in the sample of 65 are younger than 32.7 years, on average.
+
+The 90th percentile = invNorm(0.90,2008.5,72.56) = 2101.5. This indicates that 90 percent of the people in the sample of 65 have a sum of ages less than 2,101.5 years.
+
+Try It
+
+According to data from an aerospace company, the 757 airliner carries 200 passengers and has doors with a mean height of 72 inches. Assume for a certain population of men we have a mean of 69 inches inches and a standard deviation of 2.8 inches.
+
+What mean doorway height would allow 95 percent of men to enter the aircraft without bending?
+
+Assume that half of the 200 passengers are men. What mean doorway height satisfies the condition that there is a 0.95 probability that this height is greater than the mean height of 100 men?
+
+For engineers designing the 757, which result is more relevant: the height from part (a) or part (b)? Why?
+
+We know that μx = μ = 69 and we have σx = 2.8. The height of the doorway is found to be invNorm(0.95,69,2.8) = 73.61
+
+We know that μx = μ = 69 and we have σx = 0.28. So, invNorm(0.95,69,0.28) = 69.49
+
+When designing the doorway heights, we need to incorporate as much variability as possible in order to accommodate as many passengers as possible. Therefore, we need to use the result based on part a.
+
+HISTORICAL NOTE
+Normal Approximation to the Binomial
+
+Historically, being able to compute binomial probabilities was one of the most important applications of the central limit theorem. Binomial probabilities with a small value for n (say, 20) were displayed in a table in a book. To calculate the probabilities with large values of n, you had to use the binomial formula, which could be very complicated. Using the normal approximation to the binomial distribution simplified the process. To compute the normal approximation to the binomial distribution, take a simple random sample from a population. You must meet the following conditions for a binomial distribution:
+
+There are a certain number, n, of independent trials.
+
+The outcomes of any trial are success or failure.
+
+Each trial has the same probability of a success, p.
+
+Recall that if X is the binomial random variable, then X ~ B(n, p). The shape of the binomial distribution needs to be
+similar to the shape of the normal distribution. To ensure this, the quantities np
+and nq must both be greater than five (np > 5 and nq > 5; the approximation is better if they are both greater than or equal to 10. The product >5 is more or less accepted as the norm here.). This is another accepted rule. So, for whatever value of x we are looking at (the number of successes). We add 0.5 if we are looking for the probability that is less than or equal to that number. We subtract 0.5 if we are looking for the probability that is greater than or equal to that number. Then the binomial can be approximated by the normal distribution with mean μ = np and standard deviation σ = 
+
+ npq
+
+. Remember that q = 1 – p. In order to get the best approximation, add 0.5 to x or subtract 0.5 from x (use x + 0.5 or x – 0.5).
+
+This is another accepted rule. So, for whatever value of x we are looking at (the number of successes). We add 0.5 if we are looking for the probability that is less than or equal to that number. We subtract 0.5 if we are looking for the probability that is greater than or equal to that number. The number 0.5 is called the continuity correction factor and is used in the following example.
+
+Suppose in a local kindergarten through 12th grade (K12) school district, 53 percent of the population favor a charter school for grades K through 5. A simple random sample of 300 is surveyed.
+
+Find the probability that at least 150 favor a charter school.
+
+Find the probability that at most 160 favor a charter school.
+
+Find the probability that more than 155 favor a charter school.
+
+Find the probability that fewer than 147 favor a charter school.
+
+Find the probability that exactly 175 favor a charter school.
+
+Let X = the number that favor a charter school for grades K through 5. X ~ B(n, p) where n = 300 and p = 0.53. Because np > 5 and nq > 5, use the normal approximation to the binomial. The formulas for the mean and standard deviation are μ = np and σ = 
+ 
+ npq
+
+. The mean is 159, and the standard deviation is 8.6447. The random variable for the normal distribution is Y. Y ~ N(159, 8.6447). See The Normal Distribution for help with calculator instructions.
+
+For Part (a), you include 150 so P(X ≥ 150) has a normal approximation P(Y ≥ 149.5) = 0.8641.
+normalcdf(149.5,10^99,159,8.6447) = 0.8641.
+
+For Part (b), you include 160 so P(X ≤ 160) has a normal approximation P(Y ≤ 160.5) = 0.5689.
+normalcdf(0,160.5,159,8.6447) = 0.5689
+
+For Part (c), you exclude 155 so P(X > 155) has normal approximation P(y > 155.5) = 0.6572.
+normalcdf(155.5,10^99,159,8.6447) = 0.6572.
+
+For Part (d), you exclude 147 so P(X < 147) has normal approximation P(Y < 146.5) = 0.0741.
+normalcdf(0,146.5,159,8.6447) = 0.0741
+
+For Part (e), P(X = 175) has normal approximation P(174.5 < Y < 175.5) = 0.0083.
+normalcdf(174.5,175.5,159,8.6447) = 0.0083
+
+Because of calculators and computer software that let you calculate binomial probabilities for large values of n easily, it is not necessary to use the the normal approximation to the binomial distribution, provided that you have access to these technology tools. Most school labs have computer software that calculates binomial probabilities. Many students have access to calculators that calculate probabilities for binomial distribution. If you type in binomial probability distribution calculation in an internet browser, you can find at least one online calculator for the binomial.
+
+For , the probabilities are calculated using the following binomial distribution: (n = 300 and p = 0.53). Compare the binomial and normal distribution answers. See Discrete Random Variables for help with calculator instructions for the binomial.
+P(X ≥ 150) :1 - binomialcdf(300,0.53,149) = 0.8641
+P(X ≤ 160) :binomialcdf(300,0.53,160) = 0.5684
+P(X > 155) :1 - binomialcdf(300,0.53,155) = 0.6576
+P(X < 147) :binomialcdf(300,0.53,146) = 0.0742
+P(X = 175) :(You use the binomial pdf.)binomialpdf(300,0.53,175) = 0.0083
+
+Try It
+
+In a city, 46 percent of the population favors the incumbent, Dawn Morgan, for mayor. A simple random sample of 500 is taken. Using the continuity correction factor, find the probability that at least 250 favor Dawn Morgan for mayor.
+
+Solutions
+
+0.0401
+
+References
+The Wall Street Journal. (n.d.). Retrieved from https://www.wsj.com/
+
+Centers for Disease Control and Prevention. (2017, April 16). National health and nutrition examination survey. National Center for Health Statistics. Retrieved from http://www.cdc.gov/nchs/nhanes.htm
+
+Chapter Review
+
+The central limit theorem can be used to illustrate the law of large numbers. The law of large numbers states that the larger the sample size you take from a population, the closer the sample mean, 
+ 
+ x
+ ¯
+
+, gets to μ.
+Use the following information to answer the next 10 exercises: A manufacturer produces 25-pound lifting weights. The lowest actual weight is 24 pounds, and the highest is 26 pounds. Each weight is equally likely, so the distribution of weights is uniform. A sample of 100 weights is taken.
+
+What is the distribution for the weights of one 25-pound lifting weight? What are the mean and standard deivation?
+
+What is the distribution for the mean weight of 100 25-pound lifting weights?
+
+Find the probability that the mean actual weight for the 100 weights is less than 24.9.
+U(24, 26), 25, 0.5774
+N(25, 0.0577)
+
+0.0416
+
+Draw the graph of .
+
+Find the probability that the mean actual weight for the 100 weights is greater than 25.2.
+
+0.0003
+
+Draw the graph of .
+
+Find the 90th percentile for the mean weight for the 100 weights.
+
+25.07
+
+Draw the graph of .
+
+What is the distribution for the sum of the weights of 100 25-pound lifting weights?
+
+Find P(Σx < 2450).
+N(2500, 5.7735)
+
+0
+
+Draw the graph of .
+
+Find the 90th percentile for the total weight of the 100 weights.
+
+2507.40
+
+Draw the graph of .
+Use the following information to answer the next five exercises: The length of time a particular smartphone's battery lasts follows an exponential distribution with a mean of ten months. A sample of 64 of these smartphones is taken.
+
+What is the standard deviation?
+
+What is the parameter m?
+
+10
+1
+ 
+ 10
+
+What is the distribution for the length of time one battery lasts?
+
+What is the distribution for the mean length of time 64 batteries last?
+N
+ 
+ (
+ 
+ 10, 
+ 
+ 10
+ 
+ 8
+
+ )
+
+What is the distribution for the total length of time 64 batteries last?
+
+Find the probability that the sample mean is between 7 and 11.
+
+0.7799
+
+Find the 80th percentile for the total length of time 64 batteries last.
+
+Find the interquartile range (IQR) for the mean amount of time 64 batteries last.
+
+1.69
+
+Find the middle 80 percent for the total amount of time 64 batteries last.
+Use the following information to answer the next six exercises: A uniform distribution has a minimum of six and a maximum of ten. A sample of 50 is taken.
+
+Find P(Σx > 420).
+
+0.0072
+
+Find the 90th percentile for the sums.
+
+Find the 15th percentile for the sums.
+
+391.54
+
+Find the first quartile for the sums.
+
+Find the third quartile for the sums.
+
+405.51
+
+Find the 80th percentile for the sums.
+
+Homework
+
+The attention span of a two-year-old is exponentially distributed with a mean of about eight minutes. Suppose we randomly survey 60 two-year-olds.
+
+In words, Χ = _______.
+Χ ~ _____(_____, _____)
+
+In words, 
+ 
+ X
+ ¯
+
+ = ____________.
+X
+ ¯
+
+ ~ _____(_____, _____)
+
+Before doing any calculations, which do you think will be higher? Explain why.
+
+The probability that an individual attention span is less than 10 minutes.
+The probability that the average attention span for the 60 children is less than 10 minutes.
+
+The probability that an individual attention span is less than 10 minutes.
+
+The probability that the average attention span for the 60 children is less than 10 minutes.
+
+Calculate the probabilities in part (e).
+
+Explain why the distribution for 
+ 
+ X
+ ¯
+ 
+ is not exponential.
+
+The closing stock prices of 35 U.S. semiconductor manufacturers are given as follows:
+
+Company
+Closing Stock Prices
+1
+8.625
+2
+30.25
+3
+27.625
+4
+46.75
+5
+32.875
+6
+18.25
+7
+5
+8
+0.125
+9
+2.9375
+10
+6.875
+11
+28.25
+12
+24.25
+13
+21
+14
+1.5
+15
+30.25
+16
+71
+17
+43.5
+18
+49.25
+19
+2.5625
+20
+31
+21
+16.5
+22
+9.5
+23
+18.5
+24
+18
+25
+9
+26
+10.5
+27
+16.625
+28
+1.25
+29
+18
+30
+12.87
+31
+7
+32
+12.875
+33
+2.875
+34
+60.25
+35
+29.25
+In words, Χ = ______________.
+x
+ ¯
+ 
+ = _____
+sx = _____
+n = _____
+x
+ ¯
+ 
+ = _____
+sx = _____
+n = _____
+
+Construct a histogram of the distribution of the averages. Start at x = –0.0005. Use bar widths of 10.
+
+In words, describe the distribution of the stock prices.
+
+Randomly average five stock prices together. (Use a random number generator.) Continue averaging five prices together until you have 10 averages. List those 10 averages.
+
+Use the 10 averages from part (e) to calculate the following:
+
+ x
+ ¯
+ 
+ = _____
+sx = _____
+x
+ ¯
+ 
+ = _____
+sx = _____
+
+Construct a histogram of the distribution of the averages. Start at x = –0.0005. Use bar widths of 10.
+
+Does this histogram look like the graph in Part (c)?
+
+In one or two complete sentences, explain why the graphs either look the same or look different.
+
+Based on the theory of the central limit theorem, 
+ 
+ X
+ ¯
+
+ ~ _____(_____, ____).
+X = the closing stock prices for U.S. semiconductor manufacturers
+
+i. $20.71, ii. $17.31, iii. 35
+
+exponential distribution, Χ ~ Exp
+ 
+ (
+
+ 1
+ 
+ 20.71
+
+ )
+
+Answers will vary.
+
+i. $20.71, ii. $11.14
+
+Answers will vary.
+
+Answers will vary.
+
+Answers will vary.
+N
+ 
+ (
+ 
+ 20.71, 
+ 
+ 17.31
+
+ 5
+
+ )
+Use the following information to answer the next three exercises: Richard’s Furniture Company delivers furniture from 10 a.m. to 2 p.m. continuously and uniformly. We are interested in how long (in hours) past the 10 a.m. start time that individuals wait for their delivery.
+Χ ~ _____(_____, _____)
+U(0, 4)
+U(10, 2)
+Eχp(2)
+N(2, 1)
+
+The average wait time is:
+
+one hour
+
+two hours
+
+two and a half hours
+
+four hours
+
+b
+
+Suppose that it is now past noon on a delivery day. The probability that a person must wait at least one and a half more hours is
+1
+ 4
+1
+ 2
+3
+ 4
+3
+ 8
+Use the following information to answer the next two exercises: The time to wait for a particular rural bus is distributed uniformly from zero to 75 minutes. One hundred riders are randomly sampled to learn how long they waited.
+
+The 90th percentile sample average wait time (in minutes) for a sample of 100 riders is:
+
+315.0
+
+40.3
+
+38.5
+
+65.2
+
+b
+
+Would you be surprised, based on numerical calculations, if the sample average wait time (in minutes) for 100 riders was less than 30 minutes?
+
+yes
+
+no
+
+There is not enough information.
+Use the following to answer the next two exercises: The cost of unleaded gasoline in the Bay Area once followed an unknown distribution with a mean of $4.59 and a standard deviation of $0.10. Sixteen gas stations from the Bay Area are randomly chosen. We are interested in the average cost of gasoline for the 16 gas stations.
+
+What's the approximate probability that the average price for 16 gas stations is more than $4.69?
+
+almost zero
+
+0.1587
+
+0.0943
+
+unknown
+
+a
+
+Find the probability that the average price for 30 gas stations is less than $4.55.
+
+0.6554
+
+0.3446
+
+0.0142
+
+0.9858
+
+0
+
+Suppose in a local kindergarten through 12th grade (K12) school district, 53 percent of the population favor a charter school for grades K through five. A simple random sample of 300 is surveyed. Calculate the following using the normal approximation to the binomial distribtion.
+
+Find the probability that less than 100 favor a charter school for grades K through 5.
+
+Find the probability that 170 or more favor a charter school for grades K through 5.
+
+Find the probability that no more than 140 favor a charter school for grades K through 5.
+
+Find the probability that there are fewer than 130 that favor a charter school for grades K through 5.
+
+Find the probability that exactly 150 favor a charter school for grades K through 5.
+
+If you have access to an appropriate calculator or computer software, try calculating these probabilities using the technology.
+
+0
+
+0.1123
+
+0.0162
+
+0.0003
+
+0.0268
+
+Four friends, Janice, Barbara, Kathy, and Roberta, decided to carpool together to get to school. Each day the driver would be chosen by randomly selecting one of the four names. They carpool to school for 96 days. Use the normal approximation to the binomial to calculate the following probabilities. Round the standard deviation to four decimal places.
+
+Find the probability that Janice is the driver at most 20 days.
+
+Find the probability that Roberta is the driver more than 16 days.
+
+Find the probability that Barbara drives exactly 24 of those 96 days.
+X ~ N(60, 9). Suppose that you form random samples of 25 from this distribution. Let 
+ 
+ X
+ ¯
+
+ be the random variable of averages. Let ΣX be the random variable of sums. For parts (c) through (f), sketch the graph, shade the region, label and scale the horizontal axis for 
+ 
+ X
+ ¯
+
+, and find the probability.
+
+Sketch the distributions of X and
+
+ X
+ ¯
+
+ on the same graph.
+X
+ ¯
+
+ ~ _____(_____, _____)
+P(
+ 
+ x
+ ¯
+
+ < 60) = _____
+
+Find the 30th percentile for the mean.
+P(56 < 
+ 
+ x
+ ¯
+
+ < 62) = _____
+P(18 < 
+ 
+ x
+ ¯
+
+ < 58) = _____
+Σx ~ _____(_____, _____)
+
+Find the minimum value for the upper quartile for the sum.
+P(1400 < Σx < 1550) = _____
+
+Check student’s solution.
+X
+ ¯
+
+ ~ N
+ 
+ (
+ 
+ 60, 
+ 9
+
+ 25
+
+ )
+
+0.5000
+
+59.06
+
+0.8536
+
+0.1333
+N(1500, 45)
+
+1530.35
+
+0.6877
+
+Suppose that the length of research papers is uniformly distributed from 10 to 25 pages. We survey a class in which 55 research papers were turned in to a professor. The 55 research papers are considered a random collection of all papers. We are interested in the average length of the research papers.
+
+In words, X = _____________.
+X ~ _____(_____, _____)
+μx = _____
+σx = _____
+
+In words, 
+ 
+ X
+ ¯
+
+ = ______________.
+X
+ ¯
+
+ ~ _____(_____, _____)
+
+In words, ΣX = _____________.
+ΣX ~ _____(_____, _____)
+
+Without doing any calculations, do you think that it’s likely the professor will need to read a total of more than 1,050 pages? Why?
+
+Calculate the probability that the professor will need to read a total of more than 1,050 pages.
+
+Why is it so unlikely that the average length of the papers will be less than 12 pages?
+
+Salaries for managers in a restaurant chain are normally distributed with a mean of $44,000 and a standard deviation of $6,500. We randomly survey 10 managers from that district.
+
+Find the 90th percentile for an individual manager's salary.
+
+Find the 90th percentile for the average manager's salary.
+
+$52,330
+
+$46,634
+
+The average length of a maternity stay in a U.S. hospital is said to be 2.4 days with a standard deviation of 0.9 days. We randomly survey 80 women who recently bore children in a U.S. hospital.
+
+In words, X = _____________.
+
+In words, 
+ 
+ X
+ ¯
+
+ = ___________________.
+X
+ ¯
+
+ ~ _____(_____, _____)
+
+In words, ΣX = _______________.
+ΣX ~ _____(_____, _____)
+
+Is it likely that an individual stayed more than five days in the hospital? Why or why not?
+
+Is it likely that the average stay for the 80 women was more than five days? Why or why not?
+
+Which is more likely:
+
+An individual stayed m
+[truncated]

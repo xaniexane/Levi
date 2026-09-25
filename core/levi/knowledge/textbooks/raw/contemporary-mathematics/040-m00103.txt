@@ -1,0 +1,324 @@
+# m00103
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Functions
+
+Functions
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Use function notation.
+
+Determine if a relation is a function with different representations.
+
+Apply the vertical line test.
+
+Determine the domain and range of a function.
+
+In this section, we will learn about relations and functions. As we go about our daily lives, we have many data items or quantities that are paired to our names. Our social security number, student ID number, email address, phone number, and our birthday are matched to our name. There is a relationship between our name and each of those items. When your teacher gets their class roster, the names of all the students in the class are listed in one column and then the student ID number is likely to be in the next column. If we think of the correspondence as a set of ordered pairs, where the first element is a student name and the second element is that student’s ID number, we call this a relation.
+
+(Student name, Student ID #)
+
+The set of all the names of the students in the class is called the domain of the relation and the set of all student ID numbers paired with these students is the range of the relation. In general terms, a relation is any set of ordered pairs, (x,y). All the x-values in the ordered pairs together make up the domain. All the y-values in the ordered pairs together make up the range.
+
+There are many situations similar to the student's name and student ID # where one variable is paired or matched with another. The set of ordered pairs that records this matching is a relation. A special type of relation, called a function, occurs extensively in mathematics. A function is a relation that assigns to each element in its domain exactly one element in the range. For each ordered pair in the relation, each x-value is matched with only one y-value.
+
+Let us look at the relation between your friends and their birthdays in . Every friend has a birthday, but no one has two birthdays. It is okay for two people to share a birthday. It is okay that Danny and Stephen share July 24 as their birthday and that June and Liz share August 2. Since each person has exactly one birthday, the relation is a function.
+
+Use Function Notation
+
+It is very convenient to name a function; most often functions are named f, g, h, F, G, or H. In any function, for each x-value from the domain, we get a corresponding y-value in the range. In the function f, we write this range value y as f(x). This notation f(x) is called function notation and is read "f of x" or "the value of f at x." In this case the parentheses do not indicate multiplication.
+
+We call x the independent variable as it can be any value in the domain. We call y the dependent variable as its value depends on x. Much like when you first encountered the variable x, function notation may be rather unsettling. But the more you use the notation, the more familiar you become with the notation, and the more comfortable you will be with it.
+
+Let’s review the equation y=4x−5. To find the value of y when x=2, we know to substitute x=2 into the equation and then simplify.
+y=4x−5
+
+ Let x=2.
+ 
+ y=4⋅2−5
+ y=3
+y=4x−5
+y=4⋅2−5
+ y=3
+The value of the function at x=2 is 3. We do the same thing using function notation, the equation y=4x−5 can be written as f(x)=4x−5. To find the value when x=2, we write:
+
+ f(x)=4x−5
+
+ Let x=2.
+ f(2)=4⋅2−5f(2)=3
+f(x)=4x−5
+f(2)=4⋅2−5f(2)=3
+The value of the function at x=2 is 3. This process of finding the value of f(x) for a given value of x is called evaluating the function.
+
+Evaluating the Function
+
+For the function f(x)=2x2+3x−1, evaluate the function.
+f(3)
+f(−2)
+f(a)
+
+To evaluate f(3), substitute 3, for x.
+ Simplify.
+ f(x)=2x2+3x−1f(3)=2(3)2+3⋅3−1f(3)=2⋅9+3⋅3−1f(3)=18+9−1f(3)=26
+
+To evaluate f(−2), substitute −2 for x.
+ Simplify.
+
+ f(x)=2x2+3x−1
+ f(−2)=2(−2)2+3(−2)−1
+ f(−2)=2⋅4+(−6)−1
+ f(−2)=8+(−6)−1
+ f(−2)=1
+
+To evaluate f(a), substitute a for x.
+ Simplify.
+
+ f(x)=2x2+3x−1
+ 
+ f(a)=2(a)2+3⋅a−1
+ 
+ f(a)=2a2+3a−1
+
+Evaluating the Function in an Application
+
+The number of unread emails in Sylvia’s inbox is 75. This number grows by 10 unread emails a day. The function N(t)=75+10t represents the relation between the number of emails, N, and the time, t, measured in days. Find N(5). Explain what this result means.
+
+Find N(5). Explain what this result means.
+
+Substitute in t=5.
+ 
+ Simplify. 
+
+ N(5)=75+10⋅5
+ N(t)=75+10t
+
+ N(5)=75+50
+ 
+ N(5)=125
+
+If 5 is the number of days, N(5) is the number of unread emails after 5 days. After 5 days, there are 125 unread emails in Sylvia’s inbox.
+
+Determining If a Relation Is a Function with Different Representations
+
+We can determine whether a relation is a function by identifying the input and the output values. If each input value leads to only one output value, classify the relation as a function. If any input value leads to two or more outputs, do not classify the relation as a function.
+
+We will review three different representations of relations and determine if they are functions: ordered pairs, mapping, and equations.
+
+Determining If a Relation Is a Function with a Set of Ordered Pairs
+
+Use the set of ordered pairs to determine whether the relation is a function.
+{(−3,27),(−2,8),(−1,1),(0,0),(1,1),(2,8),(3,27)}
+{ (9,−3),(4,−2),(1,−1),(0,0),(1,1),(4,2),(9,3) }
+Each x-value is matched with only one y-value. This relation is a function.
+ The x-value 9 is matched with two y-values, both 3 and −3. This relation is not a function.
+
+Each x-value is matched with only one y-value. This relation is a function.
+
+The x-value 9 is matched with two y-values, both 3 and −3. This relation is not a function.
+
+A mapping is sometimes used to show a relation. The arrows show the pairing of the elements of the domain with the elements of the range. Consider the example of the relation between your friends and their birthdays used in . In this particular example, the domain is the set of people’s names, and the range is the set of their birthdays. This mapping was a function because everybody’s name maps to exactly one birthday.
+
+Determining If a Relation Is a Function with Mapping
+
+Use the mapping in to determine whether the relation is a function.
+
+Both Lydia and Marty have two phone numbers. Each x-value is not matched with only one y-value. This relation is not a function.
+
+In algebra functions will usually be represented by an equation. It is easiest to see if the equation is a function when it is solved for y. If each value of x results in only one value of y, then the equation defines a function.
+
+Determining If a Relation Is a Function with an Equation
+
+Determine whether each equation is a function. Assume x is the independent variable.
+2x+y=7
+y=x2+1
+x+y2=3
+2x+y=7
+ For each value of x, we multiply it by −2 and then add 7 to get the y-value.
+ For example, if x=3:
+
+ y=
+ −2x+7
+ 
+ y=
+ −2⋅3+7
+ 
+ y=1 
+ We have that when x=3, then y=1. It would work similarly for any value of x. Since each value of x, corresponds to only one value of y the equation defines a function.
+ 
+ y=x2+1
+ For each value of x, we square it and then add 1 to get the y-value.
+ For example, if x=2
+
+ y=
+ x2+1
+ 
+ y=
+ 22+1
+ 
+ y=
+ 5
+ We have that when x=2, then y=5. It would work similarly for any value of x. Since each value of x corresponds to only one value of y, the equation defines a function.
+ 
+ x+y2=3
+ x+y2=3
+ Isolate the y term.
+ y2=−x+3
+ Let us substitute x=2.
+ y2=−2+3
+ y2=1
+ This gives us two values for y.
+ y=1,y=−1
+ We have shown that when x=2, then y=1 and y=−1. It would work similarly for any value of x. Since each value of x does not corresponds to only one value of y the equation does not define a function.
+2x+y=7
+ For each value of x, we multiply it by −2 and then add 7 to get the y-value.
+ For example, if x=3:
+
+ y=
+ −2x+7
+ 
+ y=
+ −2⋅3+7
+ 
+ y=1 
+ We have that when x=3, then y=1. It would work similarly for any value of x. Since each value of x, corresponds to only one value of y the equation defines a function.
+
+For each value of x, we multiply it by −2 and then add 7 to get the y-value.
+
+For example, if x=3:
+
+We have that when x=3, then y=1. It would work similarly for any value of x. Since each value of x, corresponds to only one value of y the equation defines a function.
+y=x2+1
+ For each value of x, we square it and then add 1 to get the y-value.
+ For example, if x=2
+
+ y=
+ x2+1
+ 
+ y=
+ 22+1
+ 
+ y=
+ 5
+ We have that when x=2, then y=5. It would work similarly for any value of x. Since each value of x corresponds to only one value of y, the equation defines a function.
+
+For each value of x, we square it and then add 1 to get the y-value.
+
+For example, if x=2
+
+We have that when x=2, then y=5. It would work similarly for any value of x. Since each value of x corresponds to only one value of y, the equation defines a function.
+x+y2=3
+ x+y2=3
+ Isolate the y term.
+ y2=−x+3
+ Let us substitute x=2.
+ y2=−2+3
+ y2=1
+ This gives us two values for y.
+ y=1,y=−1
+ We have shown that when x=2, then y=1 and y=−1. It would work similarly for any value of x. Since each value of x does not corresponds to only one value of y the equation does not define a function.
+x+y2=3
+
+Isolate the y term.
+y2=−x+3
+
+Let us substitute x=2.
+y2=−2+3
+y2=1
+
+This gives us two values for y.
+y=1,y=−1
+
+We have shown that when x=2, then y=1 and y=−1. It would work similarly for any value of x. Since each value of x does not corresponds to only one value of y the equation does not define a function.
+
+Relations and Functions
+
+Applying the Vertical Line Test
+
+We reviewed how to determine if a relation is a function. The relations we looked at were expressed as a set of ordered pairs, a mapping, or an equation. We will now cover how to tell if a graph is that of a function.
+
+An ordered pair (x,y) is a solution of a linear equation, if the equation is a true statement when the x-values and y-values of the ordered pair are substituted into the equation. The graph of a linear equation is a straight line where every point on the line is a solution of the equation, and every solution of this equation is a point on this line. we can see that in the graph of the equation y=2x−3, for every x-value there is only one y-value, as shown in the accompanying table.
+
+A relation is a function if every element of the domain has exactly one value in the range. The relation defined by the equation y=2x−3 is a function. If we look at the graph, each vertical dashed line only intersects the solid line at one point. This makes sense as in a function, for every x-value there is only one y-value. If the vertical line hit the graph twice, the x-value would be mapped to two y-values, and so the graph would not represent a function. This leads us a graphical method of determining functions called the vertical line test, which states that a set of points in a rectangular coordinate system is the graph of a function if every vertical line intersects the graph in at most one point. If any vertical line intersects the graph in more than one point, the graph does not represent a function.
+
+Applying the Vertical Line Test
+
+Determine whether the graph () is the graph of a function applying the vertical line test.
+
+On the graph (), only three vertical dashed lines are drawn. However, it can be determined that any vertical dashed line that is drawn will intersect the solid line at exactly one point. It is the graph of a function.
+
+Applying the Vertical Line Test to a Parabola
+
+Determine whether the graph is the graph of a function ().
+does not represent a function since the vertical dashed lines shown on the graph below intersect the solid line at two points.
+
+Determining the Domain and Range of a Function
+
+For the function y=f(x),x is the independent variable as it can be any value in the domain, and y is the dependent variable since its value depends on x. For the function y=f(x), the values of x make up the domain and the values of y make up the range.
+
+Finding the Domain and Range of Ordered Pairs
+
+For { (1,1),(2,4),(3,9),(4,16),(5,25)}:
+
+Find the domain of the relation.
+
+Find the range of the relation.
+
+The domain is the set of all x-values of the relation: {1,2,3,4,5}
+
+The range is the set of all y-values of the relation: {1,4,9,16,25}
+
+Finding the Domain and Range on a Graph
+
+Use to:
+
+List the ordered pairs of the relation.
+
+Find the domain of the relation.
+
+Find the range of the relation.
+
+The ordered pairs of the relation are: {(1,5),(−3,−1),(4,−2),(0,3),(2,−2),(−3,4)}.
+
+The domain is the set of all x-values of the relation: {−3,0,1,2,4 }. Notice that while −3 repeats, it is only listed once.
+
+The range is the set of all y-values of the relation: {−2,−1,3,4,5}. Notice that while −2 repeats, it is only listed once.
+
+Domain and Range on Graphs
+
+Function and Function Notation
+
+In 1673, Gottfried Leibniz, the German mathematician who co-invented calculus, seems to be the first person to use the word function in a mathematical sense, although his use of it does not exactly fit with the modern use and definition. The person who is credited with the modern definition of function is Swiss mathematician Johann Bernoulli, who wrote about it in a letter to Leibniz in 1698. Supposedly, Leibniz wrote Bernoulli back, approving of this use of the word. In 1734, the use of the notation f(x) for a function was first used by Swiss mathematician Leonhard Euler (pronounced “Oiler”). Euler had a knack for inventing notation. He also introduced the notation e for the base of natural logs (1727), i for the square root of −1 (1777), ∑ for summation (1755), and many others. Euler also introduced many other ideas associated with functions. Euler defined exponential functions and defined logarithmic functions as their inverse; he also introduced the beta and gamma functions, and was the first person to consider the trigonometric identities (sine, cosine, etc.) as functions.
+
+Check Your Understanding
+
+Key Terms
+
+relation
+
+domain
+
+function
+
+mapping
+
+vertical line test
+
+Key Concepts
+
+A relation is any set of ordered pairs (x,y). All of the x-values of the set are the domain, and all of the y-values of the set are the range.
+
+A relation is a function if each x-value in the domain is assigned to exactly one element in the range. A y-value in the range can have more than one x-value assigned to it; but each x-value can only be assigned to one y-value.
+
+For the function y=f(x),f is the name of the function, x is the domain value variable, and y=f(x) is the range value variable.
+
+The vertical line test is a test that can be done on the graph of a relation to determine if it is a function.
+
+Videos
+Relations and Functions
+Domain and Range on Graphs

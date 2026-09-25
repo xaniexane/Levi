@@ -1,0 +1,99 @@
+# m00019
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Expressions and statements can be run interactively using a shell.
+
+Input strings can be converted to other types. Ex: int(input()).
+
+Strings can be concatenated with other types. Ex: "$" + str(cost).
+
+Floats are subject to round-off and overflow errors.
+
+Integers can be divided exactly using // and %.
+
+Modules like math provide many useful functions.
+
+Formatting long lines helps improve readability.
+
+At this point, you should be able to write programs that ask for input of mixed types, perform mathematical calculations, and output results with better formatting. The programming practice below ties together most topics presented in the chapter.
+
+Chapter 2 reference.
+
+Function
+Returns the absolute value of x.
+Returns the absolute value of x.
+Converts x (a string or float) to an integer.
+Converts x (a string or float) to an integer.
+Converts x (a string or integer) to a float.
+Converts x (a string or integer) to a float.
+Converts x (a float or integer) to a string.
+Converts x (a float or integer) to a string.
+Rounds x to ndigits places after the decimal point. If ndigits is omitted, returns the nearest integer to x.
+Rounds x to ndigits places after the decimal point. If ndigits is omitted, returns the nearest integer to x.
+s * n
+ (Repetition)
+Creates a string with n copies of s.
+ Ex: "Ha" * 3 is "HaHaHa".
+Creates a string with n copies of s.
+ Ex: "Ha" * 3 is "HaHaHa".
+x / y
+ (Real division)
+Divides x by y and returns the entire result as a float.
+ Ex: 7 / 4 is 1.75.
+Divides x by y and returns the entire result as a float.
+ Ex: 7 / 4 is 1.75.
+x // y
+ (Floor division)
+Divides x by y and returns the quotient as an integer.
+ Ex: 7 // 4 is 1.
+Divides x by y and returns the quotient as an integer.
+ Ex: 7 // 4 is 1.
+x % y
+ (Modulo)
+Divides x by y and returns the remainder as an integer.
+ Ex: 7 % 4 is 3.
+Divides x by y and returns the remainder as an integer.
+ Ex: 7 % 4 is 3.
+
+Baking bread
+
+The holidays are approaching, and you need to buy ingredients for baking many loaves of bread. According to a recipe by King Arthur Flour, you will need the following ingredients for each loaf:
+
+1 1/2 teaspoons instant yeast
+
+1 1/2 teaspoons salt
+
+1 1/2 teaspoons sugar
+
+2 1/2 cups all-purpose flour
+
+2 cups sourdough starter
+
+1/2 cup lukewarm water
+
+Write a program that inputs the following variables: bread_weight (float), serving_size (float), and num_guests (int). The output will look like the following:
+
+Note: The measures the program comes up with are exact, but to bake, the baker would have to use some approximation. Ex: 9.765625 cups all-purpose flour really means 9 and 3/4 cups.
+
+In the above output, bread_weight is 16.0 ounces, serving_size is 2.5 ounces, and num_guests is 25 people. Use these three variables to calculate the number of loaves needed.
+
+Make sure your output matches the above example exactly. Notice that each line of the ingredients begins with two spaces.
+
+Tip calculator
+
+Google has a variety of search tricks that present users with instant results. If you search on Google for tip calculator, an interactive tool is included at the top of the results. The goal of this exercise is to implement a similar tip calculator.
+
+Begin by prompting the user to input the following values (user input in bold):
+
+Then calculate the tip amount and total amount for the bill, based on the user input. Output the results using this format:
+
+Your program should output all dollar amounts rounded to two decimal places. The output should be exactly six lines, as shown above. Notice the blank line before each section of the output. Notice also the space before but not after the dollar sign.

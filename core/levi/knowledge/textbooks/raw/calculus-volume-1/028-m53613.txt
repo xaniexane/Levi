@@ -1,0 +1,404 @@
+# m53613
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Derivatives and the Shape of a Graph
+
+Derivatives and the Shape of a Graph
+
+Explain how the sign of the first derivative affects the shape of a function’s graph.
+
+State the first derivative test for critical points.
+
+Use concavity and inflection points to explain how the sign of the second derivative affects the shape of a function’s graph.
+
+Explain the concavity test for a function over an open interval.
+
+Explain the relationship between a function and its first and second derivatives.
+
+State the second derivative test for local extrema.
+
+Earlier in this chapter we stated that if a function f has a local extremum at a point c, then c must be a critical point of f. However, a function is not guaranteed to have a local extremum at a critical point. For example, f(x)=x3 has a critical point at x=0 since f′(x)=3x2 is zero at x=0, but f does not have a local extremum at x=0. Using the results from the previous section, we are now able to determine whether a critical point of a function actually corresponds to a local extreme value. In this section, we also see how the second derivative provides information about the shape of a graph by describing whether the graph of a function curves upward or curves downward.
+
+The First Derivative Test
+
+Corollary 3 of the Mean Value Theorem showed that if the derivative of a function is positive over an interval I then the function is increasing over I. On the other hand, if the derivative of the function is negative over an interval I, then the function is decreasing over I as shown in the following figure.
+
+A continuous function f has a local maximum at point c if and only if f switches from increasing to decreasing at point c. Similarly, f has a local minimum at c if and only if f switches from decreasing to increasing at c. If f is a continuous function over an interval I containing c and differentiable over I, except possibly at c, the only way f can switch from increasing to decreasing (or vice versa) at point c is if f′ changes sign as x increases through c. If f is differentiable at c, the only way that f′. can change sign as x increases through c is if f′(c)=0. Therefore, for a function f that is continuous over an interval I containing c and differentiable over I, except possibly at c, the only way f can switch from increasing to decreasing (or vice versa) is if f′(c)=0 or f′(c) is undefined. Consequently, to locate local extrema for a function f, we look for points c in the domain of f such that f′(c)=0 or f′(c) is undefined. Recall that such points are called critical points of f.
+
+Note that f need not have local extrema at a critical point. The critical points are candidates for local extrema only. In , we show that if a continuous function f has a local extremum, it must occur at a critical point, but a function may not have a local extremum at a critical point. We show that if f has a local extremum at a critical point, then the sign of f′ switches as x increases through that point.
+
+Using , we summarize the main results regarding local extrema.
+
+If a continuous function f has a local extremum, it must occur at a critical point c.
+
+The function has a local extremum at the critical point c if and only if the derivative f′ switches sign as x increases through c.
+
+Therefore, to test whether a function has a local extremum at a critical point c, we must determine the sign of f′(x) to the left and right of c.
+
+This result is known as the first derivative test.
+
+First Derivative Test
+
+Suppose that f is a continuous function over an interval I containing a critical point c. If f is differentiable over I, except possibly at point c, then f(c) satisfies one of the following descriptions:
+
+If f′ changes sign from positive when x<c to negative when x>c, then f(c) is a local maximum of f.
+
+If f′ changes sign from negative when x<c to positive when x>c, then f(c) is a local minimum of f.
+
+If f′ has the same sign for x<c and x>c, then f(c) is neither a local maximum nor a local minimum of f.
+
+We can summarize the first derivative test as a strategy for locating local extrema.
+
+Problem-Solving Strategy: Using the First Derivative Test
+
+Consider a function f that is continuous over an interval I.
+
+Find all critical points of f and divide the interval I into smaller intervals using the critical points as endpoints.
+
+Analyze the sign of f′ in each of the subintervals. If f′ is continuous over a given subinterval (which is typically the case), then the sign of f′ in that subinterval does not change and, therefore, can be determined by choosing an arbitrary test point x in that subinterval and by evaluating the sign of f′ at that test point. Use the sign analysis to determine whether f is increasing or decreasing over that interval.
+
+Use and the results of step 2 to determine whether f has a local maximum, a local minimum, or neither at each of the critical points.
+
+Now let’s look at how to use this strategy to locate all local extrema for particular functions.
+
+Using the First Derivative Test to Find Local Extrema
+
+Use the first derivative test to find the location of all local extrema for f(x)=x3−3x2−9x−1. Use a graphing utility to confirm your results.
+
+Step 1. The derivative is f′(x)=3x2−6x−9. To find the critical points, we need to find where f′(x)=0. Factoring the polynomial, we conclude that the critical points must satisfy
+
+Therefore, the critical points are x=3,−1. Now divide the interval (−∞,∞) into the smaller intervals (−∞,−1),(−1,3)and(3,∞).
+
+Step 2. Since f′ is a continuous function, to determine the sign of f′(x) over each subinterval, it suffices to choose a point over each of the intervals (−∞,−1),(−1,3)and(3,∞) and determine the sign of f′ at each of these points. For example, let’s choose x=−2,x=0,andx=4 as test points.
+
+Interval
+Test Point
+Sign of f′(x)=3(x−3)(x+1) at Test Point
+f is increasing.
+Step 3. Since f′ switches sign from positive to negative as x increases through –1,f has a local maximum at x=−1. Since f′ switches sign from negative to positive as x increases through 3,f has a local minimum at x=3. These analytical results agree with the following graph.
+
+Use the first derivative test to locate all local extrema for f(x)=−x3+32x2+18x.
+f has a local minimum at −2 and a local maximum at 3.
+
+Hint
+
+Find all critical points of f and determine the signs of f′(x) over particular intervals determined by the critical points.
+
+Using the First Derivative Test
+
+Use the first derivative test to find the location of all local extrema for f(x)=5x1/3−x5/3. Use a graphing utility to confirm your results.
+
+Step 1. The derivative is
+
+The derivative f′(x)=0 when 1−x4/3=0. Therefore, f′(x)=0 at x=±1. The derivative f′(x) is undefined at x=0. Therefore, we have three critical points: x=0, x=1, and x=−1. Consequently, divide the interval (−∞,∞) into the smaller intervals (−∞,−1),(−1,0),(0,1), and (1,∞).
+
+Step 2: Since f′ is continuous over each subinterval, it suffices to choose a test point x in each of the intervals from step 1 and determine the sign of f′ at each of these points. The points x=−2,x=−12,x=12,andx=2 are test points for these intervals.
+
+Interval
+Test Point
+Sign of f′(x)=5(1−x4/3)3x2/3 at Test Point
+f is decreasing.
+Step 3: Since f is decreasing over the interval (−∞,−1) and increasing over the interval (−1,0), f has a local minimum at x=−1. Since f is increasing over the interval (−1,0) and the interval (0,1), f does not have a local extremum at x=0. Since f is increasing over the interval (0,1) and decreasing over the interval (1,∞),f has a local maximum at x=1. The analytical results agree with the following graph.
+
+Use the first derivative test to find all local extrema for f(x)=x−13.
+f has no local extrema because f′ does not change sign at x=1.
+
+Hint
+
+The only critical point of f is x=1.
+
+Concavity and Points of Inflection
+
+We now know how to determine where a function is increasing or decreasing. However, there is another issue to consider regarding the shape of the graph of a function. If the graph curves, does it curve upward or curve downward? This notion is called the concavity of the function.
+(a) shows a function f with a graph that curves upward. As x increases, the slope of the tangent line increases. Thus, since the derivative increases as x increases, f′ is an increasing function. We say this function f is concave up. (b) shows a function f that curves downward. As x increases, the slope of the tangent line decreases. Since the derivative decreases as x increases, f′ is a decreasing function. We say this function f is concave down.
+
+Definition
+
+Let f be a function that is differentiable over an open interval I. If f′ is increasing over I, we say f is concave up over I. If f′ is decreasing over I, we say f is concave down over I.
+
+In general, without having the graph of a function f, how can we determine its concavity? By definition, a function f is concave up if f′ is increasing. From Corollary 3, we know that if f′ is a differentiable function, then f′ is increasing if its derivative f″(x)>0. Therefore, a function f that is twice differentiable is concave up when f″(x)>0. Similarly, a function f is concave down if f′ is decreasing. We know that a differentiable function f′ is decreasing if its derivative f″(x)<0. Therefore, a twice-differentiable function f is concave down when f″(x)<0. Applying this logic is known as the concavity test.
+
+Test for Concavity
+
+Let f be a function that is twice differentiable over an interval I.
+
+If f″(x)>0 for all x∈I, then f is concave up over I.
+
+If f″(x)<0 for all x∈I, then f is concave down over I.
+
+We conclude that we can determine the concavity of a function f by looking at the second derivative of f. In addition, we observe that a function f can switch concavity (). However, a continuous function can switch concavity only at a point x if f″(x)=0 or f″(x) is undefined. Consequently, to determine the intervals where a function f is concave up and concave down, we look for those values of x where f″(x)=0 or f″(x) is undefined. When we have determined these points, we divide the domain of f into smaller intervals and determine the sign of f″ over each of these smaller intervals. If f″ changes sign as we pass through a point x, then f changes concavity. It is important to remember that a function f may not change concavity at a point x even if f″(x)=0 or f″(x) is undefined. If, however, f does change concavity at a point a and f is continuous at a, we say the point (a,f(a)) is an inflection point of f.
+
+Definition
+
+If f is continuous at a and f changes concavity at a, the point (a,f(a)) is an inflection point of f.
+
+Testing for Concavity
+
+For the function f(x)=x3−6x2+9x+30, determine all intervals where f is concave up and all intervals where f is concave down. List all inflection points for f. Use a graphing utility to confirm your results.
+
+To determine concavity, we need to find the second derivative f″(x). The first derivative is f′(x)=3x2−12x+9, so the second derivative is f″(x)=6x−12. If the function changes concavity, it occurs either when f″(x)=0 or f″(x) is undefined. Since f″ is defined for all real numbers x, we need only find where f″(x)=0. Solving the equation 6x−12=0, we see that x=2 is the only place where f could change concavity. We now test points over the intervals (−∞,2) and (2,∞) to determine the concavity of f. The points x=0 and x=3 are test points for these intervals.
+
+Interval
+Test Point
+Sign of f″(x)=6x−12 at Test Point
+f is concave up.
+We conclude that f is concave down over the interval (−∞,2) and concave up over the interval (2,∞). Since f changes concavity at x=2, the point (2,f(2))=(2,32) is an inflection point. confirms the analytical results.
+
+For f(x)=−x3+32x2+18x, find all intervals where f is concave up and all intervals where f is concave down.
+f is concave up over the interval (−∞,12) and concave down over the interval (12,∞)
+
+Hint
+
+Find where f″(x)=0.
+
+We now summarize, in , the information that the first and second derivatives of a function f provide about the graph of f, and illustrate this information in .
+
+What Derivatives Tell Us about Graphs
+
+Sign of f′
+Sign of f″
+Is f increasing or decreasing?
+Concavity
+Positive
+Positive
+Increasing
+Concave up
+Positive
+Negative
+Increasing
+Concave down
+Negative
+Positive
+Decreasing
+Concave up
+Negative
+Negative
+Decreasing
+Concave down
+The Second Derivative Test
+
+The first derivative test provides an analytical tool for finding local extrema, but the second derivative can also be used to locate extreme values. Using the second derivative can sometimes be a simpler method than using the first derivative.
+
+We know that if a continuous function has local extrema, it must occur at a critical point. However, a function need not have local extrema at a critical point. Here we examine how the second derivative test can be used to determine whether a function has a local extremum at a critical point. Let f be a twice-differentiable function such that f′(a)=0 and f″ is continuous over an open interval I containing a. Suppose f″(a)<0. Since f″ is continuous over I, f″(x)<0 for all x∈I (). Then, by Corollary 3, f′ is a decreasing function over I. Since f′(a)=0, we conclude that for all x∈I,f′(x)>0 if x<a and f′(x)<0 if x>a. Therefore, by the first derivative test, f has a local maximum at x=a. On the other hand, suppose there exists a point b such that f′(b)=0 but f″(b)>0. Since f″ is continuous over an open interval I containing b, then f″(x)>0 for all x∈I (). Then, by Corollary 3,f′ is an increasing function over I. Since f′(b)=0, we conclude that for all x∈I, f′(x)<0 if x<b and f′(x)>0 if x>b. Therefore, by the first derivative test, f has a local minimum at x=b.
+
+Second Derivative Test
+
+Suppose f′(c)=0,f″ is continuous over an interval containing c.
+
+If f″(c)>0, then f has a local minimum at c.
+
+If f″(c)<0, then f has a local maximum at c.
+
+If f″(c)=0, then the test is inconclusive.
+
+Note that for case iii. when f″(c)=0, then f may have a local maximum, local minimum, or neither at c. For example, the functions f(x)=x3, f(x)=x4, and f(x)=−x4 all have critical points at x=0. In each case, the second derivative is zero at x=0. However, the function f(x)=x4 has a local minimum at x=0 whereas the function f(x)=−x4 has a local maximum at x, and the function f(x)=x3 does not have a local extremum at x=0.
+
+Let’s now look at how to use the second derivative test to determine whether f has a local maximum or local minimum at a critical point c where f′(c)=0.
+
+Using the Second Derivative Test
+
+Use the second derivative to find the location of all local extrema for f(x)=x5−5x3.
+
+To apply the second derivative test, we first need to find critical points c where f′(c)=0. The derivative is f′(x)=5x4−15x2. Therefore, f′(x)=5x4−15x2=5x2(x2−3)=0 when x=0,±3.
+
+To determine whether f has local extrema at any of these points, we need to evaluate the sign of f″ at these points. The second derivative is
+
+In the following table, we evaluate the second derivative at each of the critical points and use the second derivative test to determine whether f has a local maximum or local minimum at any of these points.
+f″(x)
+−303
+0
+303
+Local minimum
+By the second derivative test, we conclude that f has a local maximum at x=−3 and f has a local minimum at x=3. The second derivative test is inconclusive at x=0. To determine whether f has local extrema at x=0, we apply the first derivative test. To evaluate the sign of f′(x)=5x2(x2−3) for x∈(−3,0) and x∈(0,3), let x=−1 and x=1 be the two test points. Since f′(−1)<0 and f′(1)<0, we conclude that f is decreasing on both intervals and, therefore, f does not have local extrema at x=0 as shown in the following graph.
+
+Consider the function f(x)=x3−(32)x2−18x. The points c=3,−2 satisfy f′(c)=0. Use the second derivative test to determine whether f has a local maximum or local minimum at those points.
+f has a local maximum at −2 and a local minimum at 3.
+
+Hint
+f″(x)=6x−3
+
+We have now developed the tools we need to determine where a function is increasing and decreasing, as well as acquired an understanding of the basic shape of the graph. In the next section we discuss what happens to a function as x→±∞. At that point, we have enough tools to provide accurate graphs of a large variety of functions.
+
+Key Concepts
+
+If c is a critical point of f and f′(x)>0 for x<c and f′(x)<0 for x>c, then f has a local maximum at c.
+
+If c is a critical point of f and f′(x)<0 for x<c and f′(x)>0 for x>c, then f has a local minimum at c.
+
+If f″(x)>0 over an interval I, then f is concave up over I.
+
+If f″(x)<0 over an interval I, then f is concave down over I.
+
+If f′(c)=0 and f″(c)>0, then f has a local minimum at c.
+
+If f′(c)=0 and f″(c)<0, then f has a local maximum at c.
+
+If f′(c)=0 and f″(c)=0, then evaluate f′(x) at a test point x to the left of c and a test point x to the right of c, to determine whether f has a local extremum at c.
+
+If c is a critical point of f(x), when is there no local maximum or minimum at c? Explain.
+
+For the function y=x3, is x=0 both an inflection point and a local maximum/minimum?
+
+It is not a local maximum/minimum because f′ does not change sign
+
+For the function y=x3, is x=0 an inflection point?
+
+Is it possible for a point c to be both an inflection point and a local extremum of a twice differentiable function?
+
+No
+
+Why do you need continuity for the first derivative test? Come up with an example.
+
+Explain whether a concave-down function has to cross y=0 for some value of x.
+
+False; for example, y=x.
+
+Explain whether a polynomial of degree 2 can have an inflection point.
+
+For the following exercises, analyze the graphs of f′, then list all intervals where f is increasing or decreasing.
+
+Increasing for −2<x<−1 and x>2; decreasing for x<−2 and −1<x<2
+
+Decreasing for x<1, increasing for x>1
+
+Decreasing for −2<x<−1 and 1<x<2; increasing for −1<x<1 and x<−2 and x>2
+
+For the following exercises, analyze the graphs of f′, then list all intervals where
+f is increasing and decreasing and
+
+the minima and maxima are located.
+
+a. Increasing over −2<x<−1,0<x<1,x>2, decreasing over x<−2, −1<x<0,1<x<2; b. maxima at x=−1 and x=1, minima at x=−2 and x=0 and x=2
+
+a. Increasing over x>0, decreasing over x<0; b. Minimum at x=0
+
+For the following exercises, analyze the graphs of f′, then list all inflection points and intervals f that are concave up and concave down.
+
+Concave up on all x, no inflection points
+
+Concave up on all x, no inflection points
+
+Concave up for x<0 and x>1, concave down for 0<x<1, inflection points at x=0 and x=1
+
+For the following exercises, draw a graph that satisfies the given specifications for the domain xϵ[−3,3]. The function does not have to be continuous or differentiable.
+f(x)>0,f′(x)>0 over x>1,−3<x<0,f′(x)=0 over 0<x<1
+f′(x)>0 over x>2,−3<x<−1,f′(x)<0 over −1<x<2,f″(x)<0 for all x
+
+Answers will vary
+f″(x)<0 over −1<x<1,f″(x)>0,−3<x<−1,1<x<3, local maximum at x=0, local minima at x=±2
+
+There is a local maximum at x=2, local minimum at x=1, and the graph is neither concave up nor concave down.
+
+Answers will vary
+
+There are local maxima at x=±1, the function is concave up for all x, and the function remains positive for all x.
+
+For the following exercises, determine
+
+intervals where f is increasing or decreasing and
+
+local minima and maxima of f.
+
+If needed, use a calculator to graph the functions, but show your work.
+f(x)=sinx+sin3x over −π<x<π
+
+a. Increasing over −π2<x<π2, decreasing over x<−π2,x>π2 b. Local maximum at x=π2; local minimum at x=−π2
+f(x)=x2+cosx
+
+For the following exercises, determine a. intervals where f is concave up or concave down, and b. the inflection points of f.
+f(x)=x3−4x2+x+2
+
+a. Concave up for x>43, concave down for x<43 b. Inflection point at x=43
+
+For the following exercises, determine
+
+intervals where f is increasing or decreasing,
+
+local minima and maxima of f,
+
+intervals where f is concave up and concave down, and
+
+the inflection points of f.
+f(x)=x2−6x
+f(x)=x3−6x2
+
+a. Increasing over x<0 and x>4, decreasing over 0<x<4 b. Maximum at x=0, minimum at x=4 c. Concave up for x>2, concave down for x<2 d. Infection point at x=2
+f(x)=x4−6x3
+f(x)=x11−6x10
+
+a. Increasing over x<0 and x>6011, decreasing over 0<x<6011 b. Minimum at x=6011, local maximum at x = 0 c. Concave down for x<5411, concave up for x>5411 d. Inflection point at x=5411
+f(x)=x+x2−x3
+f(x)=x2+x+1
+
+a. Increasing over x>−12, decreasing over x<−12 b. Minimum at x=−12 c. Concave up for all x d. No inflection points
+f(x)=x3+x4
+
+For the following exercises, determine
+
+intervals where f is increasing or decreasing,
+
+local minima and maxima of f,
+
+intervals where f is concave up and concave down, and
+
+the inflection points of f. Sketch the curve, then use a calculator to compare your answer. If you cannot determine the exact answer analytically, use a calculator.
+[T] f(x)=sin(πx)−cos(πx) over x=[−1,1]
+
+a. Increases over −14<x<34, decreases over x>34 and x<−14 b. Minimum at x=−14, maximum at x=34 c. Concave up for −34<x<14, concave down for x<−34 and x>14 d. Inflection points at x=−34,x=14
+[T] f(x)=x+sin(2x) over x=[−π2,π2]
+[T] f(x)=sinx+tanx over (−π2,π2)
+
+a. Increasing for all x b. No local minimum or maximum c. Concave up for x>0, concave down for x<0 d. Inflection point at x=0
+[T] f(x)=(x−2)2(x−4)2
+[T] f(x)=11−x,x≠1
+
+a. Increasing for all x where defined b. No local minima or maxima c. Concave up for x<1; concave down for x>1 d. No inflection points in domain
+[T] f(x)=sinxx over x= [2π,0)∪(0,2π]
+f(x)=sin(x)ex over x=[−π,π]
+
+a. Increasing over −π4<x<3π4, decreasing over x>3π4,x<−π4 b. Minimum at x=−π4, maximum at x=3π4 c. Concave up for −π2<x<π2, concave down for x<−π2,x>π2 d. Infection points at x=±π2
+f(x)=lnxx,x>0
+f(x)=14x+1x,x>0
+
+a. Increasing over x>4, decreasing over 0<x<4 b. Minimum at x=4 c. Concave up for 0<x<823, concave down for x>823 d. Inflection point at x=823
+f(x)=exx,x≠0
+
+For the following exercises, interpret the sentences in terms of f,f′,andf″.
+
+The population is growing more slowly. Here f is the population.
+f>0,f′>0,f″<0
+
+A bike accelerates faster, but a car goes faster. Here f= Bike’s position minus Car’s position.
+
+The airplane lands smoothly. Here f is the plane’s altitude.
+f>0,f′<0,f″>0
+
+Stock prices are at their peak. Here f is the stock price.
+
+The economy is picking up speed. Here f is a measure of the economy, such as GDP.
+f>0,f′>0,f″>0
+
+For the following exercises, consider a third-degree polynomial f(x), which has the properties f′(1)=0,f′(3)=0 (not applicable to Exercises 249 and 250). Determine whether the following statements are true or false. Justify your answer.
+f(x)=0 for some 1≤x≤3
+f″(x)=0 for some 1≤x≤3
+
+True, by the Mean Value Theorem
+
+There is no absolute maximum at x=3
+
+If f(x) has three roots, then it has 1 inflection point.
+
+True, examine derivative
+
+If f(x) has one inflection point, then it has three real roots.
+
+if f is differentiable over an interval I and f′ is decreasing over I, then f is concave down over I
+if f is differentiable over an interval I and f′ is increasing over I, then f is concave up over I
+the upward or downward curve of the graph of a function
+suppose f is twice differentiable over an interval I; if f″>0 over I, then f is concave up over I; if f″<0 over I, then f is concave down over I
+let f be a continuous function over an interval I containing a critical point c such that f is differentiable over I except possibly at c; if f′ changes sign from positive to negative as x increases through c, then f has a local maximum at c; if f′ changes sign from negative to positive as x increases through c, then f has a local minimum at c; if f′ does not change sign as x increases through c, then f does not have a local extremum at c
+if f is continuous at c and f changes concavity at c, the point (c,f(c)) is an inflection point of f
+suppose f′(c)=0 and f″ is continuous over an interval containing c; if f″(c)>0, then f has a local minimum at c; if f″(c)<0, then f has a local maximum at c; if f″(c)=0, then the test is inconclusive

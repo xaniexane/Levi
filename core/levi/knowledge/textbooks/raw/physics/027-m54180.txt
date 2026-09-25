@@ -1,0 +1,564 @@
+# m54180
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Rotational Motion
+
+Rotational Motion
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Describe rotational kinematic variables and equations and relate them to their linear counterparts
+
+Describe torque and lever arm
+
+Solve problems involving torque and rotational kinematics
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(4) Science concepts. The student knows and applies the laws governing motion in a variety of situations. The student is expected to:
+ 
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+(D) calculate the effect of forces on objects, including the law of inertia, the relationship between force and acceleration, and the nature of force pairs between objects.
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+
+(D) calculate the effect of forces on objects, including the law of inertia, the relationship between force and acceleration, and the nature of force pairs between objects.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Circular and Rotational Motion, as well as the following standards:
+
+(4) Science concepts. The student knows and applies the laws governing motion in a variety of situations. The student is expected to:
+
+(D) calculate the effect of forces on objects, including the law of inertia, the relationship between force and acceleration, and the nature of force pairs between objects.
+(D) calculate the effect of forces on objects, including the law of inertia, the relationship between force and acceleration, and the nature of force pairs between objects.
+
+Section Key Terms
+
+angular acceleration
+kinematics of rotational motion
+lever arm
+tangential acceleration
+torque
+Rotational Kinematics
+
+Teacher Support
+[BL][OL] Review linear kinematic equations.
+
+Students may get confused between deceleration and increasing acceleration in the negative direction.
+
+In the section on uniform circular motion, we discussed motion in a circle at constant speed and, therefore, constant angular velocity. However, there are times when angular velocity is not constant—rotational motion can speed up, slow down, or reverse directions. Angular velocity is not constant when a spinning skater pulls in her arms, when a child pushes a merry-go-round to make it rotate, or when a CD slows to a halt when switched off. In all these cases, angular acceleration occurs because the angular velocity 
+ ω
+ changes. The faster the change occurs, the greater is the angular acceleration. Angular acceleration 
+ α
+ is the rate of change of angular velocity. In equation form, average angular acceleration is
+
+where 
+ 
+ Δω
+ 
+ is the change in angular velocity and 
+ 
+ Δt
+ 
+ is the change in time. The units of angular acceleration are (rad/s)/s, or rad/s2. If 
+ ω
+ increases, then 
+ α
+ is positive. If 
+ ω
+ decreases, then 
+ α
+ is negative. Keep in mind that, by convention, counterclockwise is the positive direction and clockwise is the negative direction. For example, the skater in is rotating counterclockwise as seen from above, so her angular velocity is positive. Acceleration would be negative, for example, when an object that is rotating counterclockwise slows down. It would be positive when an object that is rotating counterclockwise speeds up.
+
+The relationship between the magnitudes of tangential acceleration, a, and angular acceleration,
+
+These equations mean that the magnitudes of tangential acceleration and angular acceleration are directly proportional to each other. The greater the angular acceleration, the larger the change in tangential acceleration, and vice versa. For example, consider riders in their pods on a Ferris wheel at rest. A Ferris wheel with greater angular acceleration will give the riders greater tangential acceleration because, as the Ferris wheel increases its rate of spinning, it also increases its tangential velocity. Note that the radius of the spinning object also matters. For example, for a given angular acceleration 
+ α
+ , a smaller Ferris wheel leads to a smaller tangential acceleration for the riders.
+
+Tangential acceleration is sometimes denoted at. It is a linear acceleration in a direction tangent to the circle at the point of interest in circular or rotational motion. Remember that tangential acceleration is parallel to the tangential velocity (either in the same direction or in the opposite direction.) Centripetal acceleration is always perpendicular to the tangential velocity.
+
+So far, we have defined three rotational variables: 
+ θ
+ , 
+ ω
+ , and 
+ α
+ . These are the angular versions of the linear variables x, v, and a. The following equations in the table represent the magnitude of the rotational variables and only when the radius is constant and perpendicular to the rotational variable. shows how they are related.
+
+Rotational and Linear Variables
+
+Rotational
+Linear
+θ
+ω
+α
+α=
+ a
+ r
+We can now begin to see how rotational quantities like 
+ θ
+ , 
+ ω
+ , and 
+ α
+ are related to each other. For example, if a motorcycle wheel that starts at rest has a large angular acceleration for a fairly long time, it ends up spinning rapidly and rotates through many revolutions. Putting this in terms of the variables, if the wheel’s angular acceleration 
+ α
+ is large for a long period of time t, then the final angular velocity 
+ ω
+ and angle of rotation 
+ θ
+ are large. In the case of linear motion, if an object starts at rest and undergoes a large linear acceleration, then it has a large final velocity and will have traveled a large distance.
+
+The kinematics of rotational motion describes the relationships between the angle of rotation, angular velocity, angular acceleration, and time. It only describes motion—it does not include any forces or masses that may affect rotation (these are part of dynamics). Recall the kinematics equation for linear motion: 
+ 
+ v=
+ v
+ 0
+ 
+ +at
+ 
+ (constant a).
+
+As in linear kinematics, we assume a is constant, which means that angular acceleration 
+ α
+ is also a constant, because 
+ 
+ a=rα
+ 
+ . The equation for the kinematics relationship between 
+ ω
+ , 
+ α
+ , and t is
+ω=
+ ω
+ 0
+ 
+ +αt(constantα),
+
+where 
+
+ ω
+ 0
+
+ is the initial angular velocity. Notice that the equation is identical to the linear version, except with angular analogs of the linear variables. In fact, all of the linear kinematics equations have rotational analogs, which are given in . These equations can be used to solve rotational or linear kinematics problem in which a and 
+ α
+ are constant.
+
+Equations for Rotational Kinematics
+
+Rotational
+v=
+ v
+ 0
+ 
+ +at
+x=
+ v
+ 0
+ 
+ t+
+ 1
+ 2
+ 
+ a
+ t
+ 2
+v
+ 2
+ 
+ =
+ v
+ 0
+
+ 2
+ 
+ +2ax
+constant 
+ α
+ , a
+In these equations, 
+
+ ω
+ 0
+
+ and 
+
+ v
+ 0
+
+ are initial values, 
+
+ t
+ 0
+
+ is zero, and the average angular velocity 
+ 
+ ω
+ ¯
+
+ and average velocity 
+ 
+ v
+ ¯
+
+ are
+ω
+ ¯
+ 
+ =
+
+ ω
+ 0
+ 
+ +ω
+ 
+ 2
+ 
+ and
+ v
+ ¯
+ 
+ =
+
+ v
+ 0
+ 
+ +v
+ 
+ 2
+ 
+ .
+
+Storm Chasing
+
+Storm chasers tend to fall into one of three groups: Amateurs chasing tornadoes as a hobby, atmospheric scientists gathering data for research, weather watchers for news media, or scientists having fun under the guise of work. Storm chasing is a dangerous pastime because tornadoes can change course rapidly with little warning. Since storm chasers follow in the wake of the destruction left by tornadoes, changing flat tires due to debris left on the highway is common. The most active part of the world for tornadoes, called tornado alley, is in the central United States, between the Rocky Mountains and Appalachian Mountains.
+
+Tornadoes are perfect examples of rotational motion in action in nature. They come out of severe thunderstorms called supercells, which have a column of air rotating around a horizontal axis, usually about four miles across. The difference in wind speeds between the strong cold winds higher up in the atmosphere in the jet stream and weaker winds traveling north from the Gulf of Mexico causes the axis of the column of rotating air to shift as the storm travels so that the axis becomes vertical, creating a tornado.
+
+Tornadoes produce wind speeds as high as 500 km/h (approximately 300 miles/h), particularly at the bottom where the funnel is narrowest because the rate of rotation increases as the radius decreases. They blow houses away as if they were made of paper and have been known to pierce tree trunks with pieces of straw.
+
+Torque
+
+If you have ever spun a bike wheel or pushed a merry-go-round, you know that force is needed to change angular velocity. The farther the force is applied from the pivot point (or fulcrum), the greater the angular acceleration. For example, a door opens slowly if you push too close to its hinge, but opens easily if you push far from the hinges. Furthermore, we know that the more massive the door is, the more slowly it opens; this is because angular acceleration is inversely proportional to mass. These relationships are very similar to the relationships between force, mass, and acceleration from Newton’s second law of motion. Since we have already covered the angular versions of distance, velocity and time, you may wonder what the angular version of force is, and how it relates to linear force.
+
+The angular version of force is torque 
+ τ
+ , which is the turning effectiveness of a force. See . The equation for the magnitude of torque is
+
+where r is the magnitude of the lever arm, F is the magnitude of the linear force, and 
+ θ
+ is the angle between the lever arm and the force. The lever arm is the vector from the point of rotation (pivot point or fulcrum) to the location where force is applied. Since the magnitude of the lever arm is a distance, its units are in meters, and torque has units of N⋅m. Torque is a vector quantity and has the same direction as the angular acceleration that it produces.
+
+Applying a stronger torque will produce a greater angular acceleration. For example, the harder the man pushes the merry-go-round in , the faster it accelerates. Furthermore, the more massive the merry-go-round is, the slower it accelerates for the same torque. If the man wants to maximize the effect of his force on the merry-go-round, he should push as far from the center as possible to get the largest lever arm and, therefore, the greatest torque and angular acceleration. Torque is also maximized when the force is applied perpendicular to the lever arm.
+
+Teacher Support
+[BL][OL][AL] Demonstrate the physical relationships between torque, force, angle of application of force, and length of lever arm by using levers of different lengths. Help students make the connections between the physical observations and mathematical relationships. For instance, torque is maximum when the force is applied exactly perpendicular to the lever arm because 
+ 
+ sinθ=1
+ 
+ for 
+ 
+ θ=90
+ 
+ degrees.
+
+Solving Rotational Kinematics and Torque Problems
+
+Just as linear forces can balance to produce zero net force and no linear acceleration, the same is true of rotational motion. When two torques of equal magnitude act in opposing directions, there is no net torque and no angular acceleration, as you can see in the following video. If zero net torque acts on a system spinning at a constant angular velocity, the system will continue to spin at the same angular velocity.
+
+Introduction to Torque
+
+This video defines torque in terms of moment arm (which is the same as lever arm). It also covers a problem with forces acting in opposing directions about a pivot point. (At this stage, you can ignore Sal’s references to work and mechanical advantage.)
+
+Now let’s look at examples applying rotational kinematics to a fishing reel and the concept of torque to a merry-go-round.
+
+Calculating the Time for a Fishing Reel to Stop Spinning
+
+A deep-sea fisherman uses a fishing rod with a reel of radius 4.50 cm. A big fish takes the bait and swims away from the boat, pulling the fishing line from his fishing reel. As the fishing line unwinds from the reel, the reel spins at an angular velocity of 220 rad/s. The fisherman applies a brake to the spinning reel, creating an angular acceleration of −300 rad/s2. How long does it take the reel to come to a stop?
+
+Strategy
+
+We are asked to find the time t for the reel to come to a stop. The magnitude of the initial angular velocity is 
+
+ ω
+ 0
+ 
+ =220
+ 
+ rad/s, and the magnitude of the final angular velocity 
+ 
+ ω=0
+ 
+ . The signed magnitude of the angular acceleration is 
+ 
+ α=−300
+ 
+ rad/s2, where the minus sign indicates that it acts in the direction opposite to the angular velocity. Looking at the rotational kinematic equations, we see all quantities but t are known in the equation 
+ 
+ ω=
+ ω
+ 0
+ 
+ +αt
+ 
+ , making it the easiest equation to use for this problem.
+
+Solution
+
+The equation to use is 
+ 
+ ω=
+ ω
+ 0
+ 
+ +αt
+ 
+ .
+
+We solve the equation algebraically for t, and then insert the known values.
+
+Discussion
+
+The time to stop the reel is fairly small because the acceleration is fairly large. Fishing lines sometimes snap because of the forces involved, and fishermen often let the fish swim for a while before applying brakes on the reel. A tired fish will be slower, requiring a smaller acceleration and therefore a smaller force.
+
+Calculating the Torque on a Merry-Go-Round
+
+Consider the man pushing the playground merry-go-round in . He exerts a force of 250 N at the edge of the merry-go-round and perpendicular to the radius, which is 1.50 m. How much torque does he produce? Assume that friction acting on the merry-go-round is negligible.
+
+Strategy
+
+To find the torque, note that the applied force is perpendicular to the radius and that friction is negligible.
+
+Solution
+
+Discussion
+
+The man maximizes the torque by applying force perpendicular to the lever arm, so that 
+ 
+ θ=
+ π
+ 2
+
+ and 
+ 
+ sinθ=1
+ 
+ . The man also maximizes his torque by pushing at the outer edge of the merry-go-round, so that he gets the largest-possible lever arm.
+
+Practice Problems
+
+An objects angular velocity changes from 3 rad/s clockwise to 8 rad/s clockwise in 5 s. What is its angular acceleration?
+
+0.6 rad/s2
+
+1.6 rad/s2
+
+1 rad/s2
+
+5 rad/s2
+
+Check Your Understanding
+
+What is the equation for angular acceleration, α? Assume θ is the angle, ω is the angular velocity, and t is time.
+α=
+ 
+ Δω
+
+ Δt
+α=ΔωΔt
+α=
+ 
+ Δθ
+
+ Δt
+α=ΔθΔt
+
+Teacher Support
+
+Use the Check Your Understanding questions to assess whether students master the learning objectives of this section. If students are struggling with a specific objective, these questions will help identify which objective is causing the problem and direct students to the relevant content.
+
+Section Summary
+
+Kinematics is the description of motion.
+
+The kinematics of rotational motion describes the relationships between rotation angle, angular velocity, angular acceleration, and time.
+
+Torque is the effectiveness of a force to change the rotational speed of an object. Torque is the rotational analog of force.
+
+The lever arm is the distance between the point of rotation (pivot point) and the location where force is applied.
+
+Torque is maximized by applying force perpendicular to the lever arm and at a point as far as possible from the pivot point or fulcrum. If torque is zero, angular acceleration is zero.
+
+Key Equations
+Constant angular velocity
+Constant angular acceleration
+θ=ωt
+ 
+, 
+ 
+ ω=
+ ω
+ 0
+ 
+ +αt
+ 
+, 
+ 
+ θ=
+ ω
+ 0
+ 
+ t+
+ 1
+ 2
+ 
+ α
+ t
+ 2
+
+, 
+
+ ω
+ 2
+ 
+ =
+ ω
+ 0
+
+ 2
+ 
+ +2αθ
+a=rα
+τ=rFsinθ
+Concept Items
+
+Conventionally, for which direction of rotation of an object is angular acceleration considered positive?
+
+the positive x direction of the coordinate system
+
+the negative x direction of the coordinate system
+
+the counterclockwise direction
+
+the clockwise direction
+
+Critical Thinking
+
+Consider two spinning tops with different radii. Both have the same linear instantaneous velocities at their edges. Which top has a higher angular velocity?
+
+the top with the smaller radius because the radius of curvature is inversely proportional to the angular velocity
+
+the top with the smaller radius because the radius of curvature is directly proportional to the angular velocity
+
+the top with the larger radius because the radius of curvature is inversely proportional to the angular velocity
+
+The top with the larger radius because the radius of curvature is directly proportional to the angular velocity
+
+Problems
+
+An objects angular acceleration is 36 rad/s2. If it were initially spinning with a velocity of 6.0 m/s, what would its angular velocity be after 5.0 s?
+
+186 rad/s
+
+190 rad/s2
+
+−174 rad/s
+
+−174 rad/s2
+
+When a fan is switched on, it undergoes an angular acceleration of 150 rad/s2. How long will it take to achieve its maximum angular velocity of 50 rad/s?
+
+−0.3 s
+
+0.3 s
+
+3.0 s
+
+Performance Task
+
+Design a lever arm capable of lifting a 0.5 kg object such as a stone. The force for lifting should be provided by placing coins on the other end of the lever. How many coins would you need? What happens if you shorten or lengthen the lever arm? What does this say about torque?
+
+Test Prep Multiple Choice
+
+Which of these quantities is not described by the kinematics of rotational motion?
+
+Rotation angle
+
+Angular acceleration
+
+Centripetal force
+
+Angular velocity
+
+In the equation 
+
+ τ = rFsinθ
+
+, what is F?
+
+Linear force
+
+Centripetal force
+
+Angular force
+
+Test Prep Short Answer
+
+The relationships between which variables are described by the kinematics of rotational motion?
+
+The kinematics of rotational motion describes the relationships between rotation angle, angular velocity, and angular acceleration.
+
+The kinematics of rotational motion describes the relationships between rotation angle, angular velocity, angular acceleration, and angular momentum.
+
+The kinematics of rotational motion describes the relationships between rotation angle, angular velocity, angular acceleration, and time.
+
+The kinematics of rotational motion describes the relationships between rotation angle, angular velocity, angular acceleration, torque, and time.
+
+What kind of quantity is torque?
+
+Scalar
+
+Vector
+
+Dimensionless
+
+Fundamental quantity
+
+Test Prep Extended Response
+
+Why do tornadoes produce more wind speed at the bottom of the funnel?
+Wind speed is greater at the bottom because rate of rotation increases as the radius increases.
+Wind speed is greater at the bottom because rate of rotation increases as the radius decreases.
+Wind speed is greater at the bottom because rate of rotation decreases as the radius increases.
+Wind speed is greater at the bottom because rate of rotation decreases as the radius increases.
+
+Wind speed is greater at the bottom because rate of rotation increases as the radius increases.
+
+Wind speed is greater at the bottom because rate of rotation increases as the radius decreases.
+
+Wind speed is greater at the bottom because rate of rotation decreases as the radius increases.
+
+Wind speed is greater at the bottom because rate of rotation decreases as the radius increases.
+
+When will an object continue spinning at the same angular velocity?
+
+When net torque acting on it is zero
+
+When net torque acting on it is non zero
+
+When angular acceleration is positive
+
+When angular acceleration is negative
+
+the rate of change of angular velocity with time
+the relationships between rotation angle, angular velocity, angular acceleration, and time
+the distance between the point of rotation (pivot point) and the location where force is applied
+the acceleration in a direction tangent to the circular path of motion and in the same direction or opposite direction as the tangential velocity
+the effectiveness of a force to change the rotational speed of an object

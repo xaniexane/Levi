@@ -1,0 +1,462 @@
+# m63183
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Half Life and Radiometric Dating
+
+Half Life and Radiometric Dating
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Explain radioactive half-life and its role in radiometric dating
+
+Calculate radioactive half-life and solve problems associated with radiometric dating
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(5) Science concepts. The student knows the nature of forces in the physical world. The student is expected to:
+
+(H)
+describe evidence for and effects of the strong and weak nuclear forces in nature.
+(H)
+describe evidence for and effects of the strong and weak nuclear forces in nature.
+
+(8) Science concepts. The student knows simple examples of atomic, nuclear, and quantum phenomena. The student is expected to:
+
+(C)
+describe the significance of mass-energy equivalence and apply it in explanations of phenomena such as nuclear stability, fission, and fusion.
+(C)
+describe the significance of mass-energy equivalence and apply it in explanations of phenomena such as nuclear stability, fission, and fusion.
+
+Section Key Terms
+
+activity
+becquerel
+carbon-14 dating
+decay constant
+half-life
+radioactive dating
+Half-Life and the Rate of Radioactive Decay
+
+Unstable nuclei decay. However, some nuclides decay faster than others. For example, radium and polonium, discovered by Marie and Pierre Curie, decay faster than uranium. That means they have shorter lifetimes, producing a greater rate of decay. Here we will explore half-life and activity, the quantitative terms for lifetime and rate of decay.
+
+Why do we use the term like half-life rather than lifetime? The answer can be found by examining , which shows how the number of radioactive nuclei in a sample decreases with time. The time in which half of the original number of nuclei decay is defined as the half-life, 
+
+ t
+
+ 1
+ 2
+
+ . After one half-life passes, half of the remaining nuclei will decay in the next half-life. Then, half of that amount in turn decays in the following half-life. Therefore, the number of radioactive nuclei decreases from N to N / 2 in one half-life, to N / 4 in the next, to N / 8 in the next, and so on. Nuclear decay is an example of a purely statistical process.
+
+A more precise definition of half-life is that each nucleus has a 50 percent chance of surviving for a time equal to one half-life. If an individual nucleus survives through that time, it still has a 50 percent chance of surviving through another half-life. Even if it happens to survive hundreds of half-lives, it still has a 50 percent chance of surviving through one more. Therefore, the decay of a nucleus is like random coin flipping. The chance of heads is 50 percent, no matter what has happened before.
+
+The probability concept aligns with the traditional definition of half-life. Provided the number of nuclei is reasonably large, half of the original nuclei should decay during one half-life period.
+
+Teacher Support
+[BL]Prepare a few other examples of exponential decay so that students understand the concept of half-life. Atmospheric pressure above sea level or temperature difference between objects, for example, both show exponential decay. Show two different rates of decay for the same scenario so that students have another example of activity.
+
+The following equation gives the quantitative relationship between the original number of nuclei present at time zero 
+ 
+ (
+
+ N
+ O
+
+ )
+ and the number 
+ 
+ (
+ N
+ )
+ at a later time t
+
+where e = 2.71828... is the base of the natural logarithm, and 
+ λ
+ is the decay constant for the nuclide. The shorter the half-life, the larger is the value of 
+ λ
+, and the faster the exponential 
+
+ e
+ 
+ −λt
+
+ decreases with time. The decay constant can be found with the equation
+
+Activity, the Rate of Decay
+
+What do we mean when we say a source is highly radioactive? Generally, it means the number of decays per unit time is very high. We define activity R to be the rate of decay expressed in decays per unit time. In equation form, this is
+
+where 
+ 
+ ΔN
+ is the number of decays that occur in time 
+ 
+ Δt
+ .
+
+Activity can also be determined through the equation
+
+which shows that as the amount of radiative material (N) decreases, the rate of decay decreases as well.
+
+The SI unit for activity is one decay per second and it is given the name becquerel (Bq) in honor of the discoverer of radioactivity. That is,
+1 Bq = 1 decay/second.
+
+Activity R is often expressed in other units, such as decays per minute or decays per year. One of the most common units for activity is the curie (Ci), defined to be the activity of 1 g of 226Ra, in honor of Marie Curie’s work with radium. The definition of the curie is
+
+or 
+ 
+ 3.70×
+ 
+ 10
+ 
+ 10
+
+ decays per second.
+
+Radiometric Dating
+
+Teacher Support
+[AL]Show that carbon-14 can create nitrogen-14 when struck by neutrino in the atmosphere.
+Radioactive dating or radiometric dating is a clever use of naturally occurring radioactivity. Its most familiar application is carbon-14 dating. Carbon-14 is an isotope of carbon that is produced when solar neutrinos strike 
+
+ 14
+ 
+ N
+ particles within the atmosphere. Radioactive carbon has the same chemistry as stable carbon, and so it mixes into the biosphere, where it is consumed and becomes part of every living organism. Carbon-14 has an abundance of 1.3 parts per trillion of normal carbon, so if you know the number of carbon nuclei in an object (perhaps determined by mass and Avogadro’s number), you can multiply that number by 
+ 
+ 1.3×
+ 
+ 10
+ 
+ −12
+
+ to find the number of 
+
+ 14
+ 
+ C
+ nuclei within the object. Over time, carbon-14 will naturally decay back to 
+
+ 14
+ 
+ N
+ with a half-life of 5,730 years (note that this is an example of beta decay). When an organism dies, carbon exchange with the environment ceases, and 
+
+ 14
+ 
+ C
+ is not replenished. By comparing the abundance of 
+
+ 14
+ 
+ C
+ in an artifact, such as mummy wrappings, with the normal abundance in living tissue, it is possible to determine the artifact’s age (or time since death). Carbon-14 dating can be used for biological tissues as old as 50 or 60 thousand years, but is most accurate for younger samples, since the abundance of 
+
+ 14
+ 
+ C
+ nuclei in them is greater.
+
+One of the most famous cases of carbon-14 dating involves the Shroud of Turin, a long piece of fabric purported to be the burial shroud of Jesus (see ). This relic was first displayed in Turin in 1354 and was denounced as a fraud at that time by a French bishop. Its remarkable negative imprint of an apparently crucified body resembles the then-accepted image of Jesus. As a result, the relic has been remained controversial throughout the centuries. Carbon-14 dating was not performed on the shroud until 1988, when the process had been refined to the point where only a small amount of material needed to be destroyed. Samples were tested at three independent laboratories, each being given four pieces of cloth, with only one unidentified piece from the shroud, to avoid prejudice. All three laboratories found samples of the shroud contain 92 percent of the 
+
+ 14
+ 
+ C
+ found in living tissues, allowing the shroud to be dated (see ).
+
+Carbon-11 Decay
+
+Carbon-11 has a half-life of 20.334 min. (a) What is the decay constant for carbon-11?
+
+If 1 kg of carbon-11 sample exists at the beginning of an hour, (b) how much material will remain at the end of the hour and (c) what will be the decay activity at that time?
+
+Strategy
+
+Since 
+
+ N
+ O
+
+ refers to the amount of carbon-11 at the start, then after one half-life, the amount of carbon-11 remaining will be 
+
+ N
+ O
+ 
+ /2.
+ The decay constant is equivalent to the probability that a nucleus will decay each second. As a result, the half-life will need to be converted to seconds.
+
+Solution
+
+(a)
+
+Since half of the carbon-11 remains after one half-life, 
+ 
+ N/
+ N
+ O
+ 
+ =0.5
+ .
+
+Take the natural logarithm of each side to isolate the decay constant.
+
+Convert the 20.334 min to seconds.
+
+(b) The amount of material after one hour can be found by using the equation
+
+with t converted into seconds and NO written as 1,000 g
+
+(c) The decay activity after one hour can be found by using the equation
+
+for the mass value after one hour.
+
+Discussion
+
+(a) The decay constant shows that 0.0568 percent of the nuclei in a carbon-11 sample will decay each second. Another way of considering the decay constant is that a given carbon-11 nuclei has a 0.0568 percent probability of decaying each second. The decay of carbon-11 allows it to be used in positron emission topography (PET) scans; however, its 20.334 min half-life does pose challenges for its administration.
+
+(b) One hour is nearly three full half-lives of the carbon-11 nucleus. As a result, one would expect the amount of sample remaining to be approximately one eighth of the original amount. The 129.4 g remaining is just a bit larger than one-eighth, which is sensible given a half-life of just over 20 min.
+
+(c) Label analysis shows that the unit of Becquerel is sensible, as there are 0.0735 g of carbon-11 decaying each second. That is smaller amount than at the beginning of the hour, when 
+ 
+ R=(
+ 
+ 0.000568
+ 
+ decay
+ s
+
+ )(
+ 
+ 1,000g
+ )=0.568
+ g of carbon-11 were decaying each second.
+
+How Old is the Shroud of Turin?
+
+Calculate the age of the Shroud of Turin given that the amount of 
+
+ 14
+ 
+ C
+ found in it is 92 percent of that in living tissue.
+
+Strategy
+
+Because 92 percent of the 
+
+ 14
+ 
+ C
+ remains, 
+ 
+ N/
+ N
+ O
+ 
+ =0.92
+ . Therefore, the equation 
+ 
+ N=
+ N
+ O
+
+ e
+ 
+ −λt
+
+ can be used to find 
+ 
+ λt
+ . We also know that the half-life of 
+
+ 14
+ 
+ C
+ is 5,730 years, and so once 
+ 
+ λt
+ is known, we can find 
+ λ
+ and then find t as requested. Here, we assume that the decrease in 
+
+ 14
+ 
+ C
+ is solely due to nuclear decay.
+
+Solution
+
+Solving the equation 
+ 
+ N=
+ N
+ O
+
+ e
+ 
+ −λt
+
+ for 
+ 
+ N/
+ N
+ O
+
+ gives
+
+Thus,
+
+Taking the natural logarithm of both sides of the equation yields
+
+so that
+
+Rearranging to isolate t gives
+
+Now, the equation 
+ 
+ λ=
+ 
+ 0.693
+
+ t
+ 
+ 1/2
+
+ can be used to find 
+ λ
+ for 
+
+ 14
+ 
+ C
+ . Solving for 
+ λ
+ and substituting the known half-life gives
+
+We enter that value into the previous equation to find t.
+t=
+ 
+ 0.0834
+
+ 1.21×
+ 
+ 10
+
+ −4
+
+ =690years.
+
+Discussion
+
+This dates the material in the shroud to 1988–690 = 1300. Our calculation is only accurate to two digits, so that the year is rounded to 1300. The values obtained at the three independent laboratories gave a weighted average date of 1320 ± 60. That uncertainty is typical of carbon-14 dating and is due to the small amount of 14 C in living tissues, the amount of material available, and experimental uncertainties (reduced by having three independent measurements). That said, is it notable that the carbon-14 date is consistent with the first record of the shroud’s existence and certainly inconsistent with the period in which Jesus lived.
+
+There are other noncarbon forms of radioactive dating. Rocks, for example, can sometimes be dated based on the decay of 
+
+ 238
+ 
+ U.
+ The decay series for 
+
+ 238
+ 
+ U
+ ends with 
+
+ 206
+ 
+ Pb
+, so the ratio of those nuclides in a rock can be used an indication of how long it has been since the rock solidified. Knowledge of the 
+
+ 238
+ 
+ U
+ half-life has shown, for example, that the oldest rocks on Earth solidified about 
+ 
+ 3.5 × 
+ 
+ 10
+ 
+ 9
+
+ years ago.
+
+Radioactive Dating Game
+
+Learn about different types of radiometric dating, such as carbon dating. Understand how decay and half-life work to enable radiometric dating to work. Play a game that tests your ability to match the percentage of the dating element that remains to the age of the object.
+
+Section Summary
+
+Radioactive half-life is the time it takes a sample of nuclei to decay to half of its original amount.
+
+The rate of radioactive decay is defined as the sample’s activity, represented by the equation 
+ 
+ R=
+ 
+ ΔN
+ 
+ Δt
+
+ .
+
+Knowing the half-life of a radioactive isotope allows for the process of radioactive dating to determine the age of a material.
+
+If the half-life of a material is known, the age of the material can be found using the equation 
+ 
+ N=
+ N
+ O
+
+ e
+ 
+ −λt
+
+ .
+
+The age of organic material can be determined using the decay of the carbon-14 isotope, while the age of rocks can be determined using the decay of uranium-238.
+
+Key Equations
+
+N=
+ N
+ O
+
+ e
+ 
+ −λt
+Critical Thinking
+
+Provide an example of something that decreases in a manner similar to radioactive decay.
+
+The potential energy of an object falling under the influence of gravity
+
+The kinetic energy of a ball that is dropped from a building to the ground
+
+Theh charge transfer from an ebonite rod to fur
+
+The heat transfer from a hot to a cold object
+
+A sample of radioactive material has a decay constant of 0.05 s1. Why is it wrong to presume that the sample will take just 20 seconds to fully decay?
+
+The decay constant varies with the mass of the sample.
+
+The decay constant results vary with the amount of the sample.
+
+The decay constant represents a percentage of the sample that cannot decay.
+
+The decay constant represents only the fraction of a sample that decays in a unit of time, not the decay of the entire sample.
+
+Test Prep Short Answer
+
+rate of decay for radioactive nuclides
+SI unit for rate of decay of a radioactive material
+radioactive dating technique based on the radioactivity of carbon-14
+quantity that is inversely proportional to the half-life and that is used in the equation for number of nuclei as a function of time
+time in which there is a 50 percent chance that a nucleus will decay
+application of radioactive decay in which the age of a material is determined by the amount of radioactivity of a particular type that occurs

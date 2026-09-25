@@ -1,0 +1,62 @@
+# m00090
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Probability with Permutations and Combinations
+
+Probability with Permutations and Combinations
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Calculate probabilities with permutations.
+
+Calculate probabilities with combinations.
+
+In our earlier discussion of theoretical probabilities, the first step we took was to write out the sample space for the experiment in question. For many experiments, that method just isn’t practical. For example, we might want to find the probability of drawing a particular 5-card poker hand. Since there are 52 cards in a deck and the order of cards doesn’t matter, the sample space for this experiment has 52C5=2,598,960 possible 5-card hands. Even if we had the patience and space to write them all out, sorting through the results to find the outcomes that fall in our event would be just as tedious.
+
+Luckily, the formula for theoretical probabilities doesn’t require us to know every outcome in the sample space; we just need to know how many outcomes there are. In this section, we’ll apply the techniques we learned earlier in the chapter (The Multiplication Rule for Counting, permutations, and combinations) to compute probabilities.
+
+Using Permutations to Compute Probabilities
+
+Recall that we can use permutations to count how many ways there are to put a number of items from a list in order. If we’re looking at an experiment whose sample space looks like an ordered list, then permutations can help us to find the right probabilities.
+
+Using Permutations to Compute Probabilities
+
+In horse racing, an exacta bet is one where the player tries to predict the top two finishers in particular race in order. If there are 9 horses in a race, and a player decided to make an exacta bet at random, what is the probability that they win?
+
+You are in a club with 10 people, 3 of whom are close friends of yours. If the officers of this club are chosen at random, what is the probability that you are named president and one of your friends is named vice president?
+
+A bag contains slips of paper with letters written on them as follows: A, A, B, B, B, C, C, D, D, D, D, E. If you draw 3 slips, what is the probability that the letters will spell out (in order) the word BAD?
+
+Since order matters for this situation, we’ll use permutations. How many different exacta bets can be made? Since there are 9 horses and we must select 2 in order, we know there are 9P2=56 possible outcomes. That’s the size of our sample space, so it will go in the denominator of the probability. Since only one of those outcomes is a winner, the numerator of the probability is 1. So, the probability of randomly selecting the winning exacta bet is 156.
+
+There are 10 people in the club, and 2 will be chosen to be officers. Since the order matters, there are 10P2=90 different ways to select officers. Next, we must figure out how many outcomes are in our event. We’ll use the Multiplication Rule for Counting to find that number. There is only 1 choice for president in our event, and there are 3 choices for vice president. So, there are 1×3=3 outcomes in the event. Thus, the probability that you will serve as president with one of your friends as vice president is 390=130.
+
+There are 12 slips of paper in the bag, and 3 will be drawn. So, there are 12P3=1320 possible outcomes. Now, we’ll compute the number of outcomes in our event. The first letter drawn must be a B, and there are 3 of those. Next must come an A (2 of those) and then a D (4 of those). Thus, there are 3×2×4=24 outcomes in our event. So, the probability that the letters drawn spell out the word BAD is 241320=155.
+
+Combinations to Computer Probabilities
+
+If the sample space of our experiment is one in which order doesn’t matter, then we can use combinations to find the number of outcomes in that sample space.
+
+Using Combinations to Compute Probabilities
+
+Palmetto Cash 5 is a game offered by the South Carolina Education Lottery. Players choose 5 numbers from the whole numbers between 1 and 38 (inclusive); the player wins the jackpot of $100,000 if the randomizer selects those numbers in any order. If you buy one ticket for this game, what is the probability that you win the top prize by choosing all 5 winning numbers?
+
+There’s a second prize in the Palmetto Cash 5 game that a player wins if 4 of the player's 5 numbers are among the 5 winning numbers. What’s the probability of winning the second prize?
+Scrabble is a word-building board game. Players make hands of 7 letters by selecting tiles with single letters printed on them blindly from a bag (2 tiles have nothing printed on them; these blanks can stand for any letter). Players use the letters in their hands to spell out words on the board. Initially, there are 100 tiles in the bag. Of those, 44 are (or could be) vowels (9 As, 12 Es, 9 Is, 8 Os, 4 Us, and 2 blanks; we’ll treat Y as a consonant). What is the probability that your initial hand has no vowels?
+
+There are 38 numbers to choose from, and the order of the 5 we pick doesn’t matter. So, there are 38C5=501,492 outcomes in the sample space. Only one outcome is in our winning event, so the probability of winning is 1501,492.
+
+As in part 1 of this example,, there are 501,492 outcomes in the sample space. The tricky part here is figuring out how many outcomes are in our event. To qualify, the outcome must contain 4 of the 5 winning numbers, plus one losing number. There are 5C4=5 ways to choose the 4 winning numbers, and there are 38−5=33 losing numbers. So, using the Multiplication Rule for Counting, there are 5×33=165 outcomes in our event. Thus, the probability of winning the second prize is 165501,492=55167,164, which is about 0.00033.
+
+The number of possible starting hands is 100C7=16,007,560,800. There are 100−44=56 consonants in the bag, so the number of all-consonant hands is 56C7=231,917,400. Thus, the probability of drawing all consonants is 231,917,4016,007,560,800=32,1392,425,388≈0.0145.
+
+Check Your Understanding
+
+Key Concepts
+
+We use permutations and combinations to count the number of equally likely outcomes in an event and in a sample space, which allows us to compute theoretical probabilities.

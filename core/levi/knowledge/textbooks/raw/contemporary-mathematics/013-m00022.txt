@@ -1,0 +1,249 @@
+# m00022
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+De Morgan’s Laws
+
+De Morgan’s Laws
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Use De Morgan’s Laws to negate conjunctions and disjunctions.
+
+Construct the negation of a conditional statement.
+
+Use truth tables to evaluate De Morgan’s Laws.
+
+The contributions to logic made by Augustus De Morgan and George Boole during the 19th century acted as a bridge to the development of computers, which may be the greatest invention of the 20th century. Boolean logic is the basis for computer science and digital electronics, and without it the technological revolution of the late 20th and early 21st centuries—including the creation of computer chips, microprocessors, and the Internet—would not have been possible. Every modern computer language uses Boolean logic statements, which are translated into commands understood by the underlying electronic circuits enabling computers to operate. But how did this logic get its name?
+
+George Boole
+
+George Boole was born in Lincolnshire, England in 1815. He was the son of a cobbler who provided him some initial education, but Boole was mostly self-taught. He began teaching at 16 years of age, and opened his own school at the age of 20. In 1849, at the age of 34, he was appointed Professor of Mathematics at Queens College in Cork, Ireland. In 1853, he published the paper, An Investigation of the Laws of Thought, on Which Are Founded the Mathematical Theories of Logic and Probabilities, which is the treatise that the field of Boolean algebra and digital circuitry was built on.
+
+Reference: Posamentier, Alfred and Spreitzer Christian, “Chapter 35 George Boole: English (1815-1864)” pp. 279-283, Math Makers: The Lives and Works of 50 Famous Mathematicians, Prometheus Books, 2019.
+
+Negation of Conjunctions and Disjunctions
+
+In Chapter 1, used a Venn diagram to prove De Morgan’s Law for set complement over union. Because the complement of a set is analogous to negation and union is analogous to an or statement, there are equivalent versions of De Morgan’s Laws for logic.
+
+De Morgan’s Law for negation of a conjunction: ~(p∧q) ≡ ~p∨~q
+
+De Morgan’s Law for the negation of a disjunction: ~(p∨q) ≡ ~p∧~q
+
+Negation of a conditional: ~(p→q) ≡ p∧~q
+
+Writing conditional as a disjunction: p→q ≡ ~p∨q
+Recall that the symbol for logical equivalence is: ≡.
+
+De Morgan’s Laws allow us to write the negation of conjunctions and disjunctions without using the phrase, “It is not the case that …” to indicate the parentheses. Avoiding this phrase often results in a written or verbal statement that is clearer or easier to understand.
+
+Applying De Morgan’s Law for Negation of Conjunctions and Disjunctions
+
+Write the negation of each statement in words without using the phrase, “It is not the case that.”
+
+Kristin is a biomedical engineer and Thomas is a chemical engineer.
+
+A person had cake or they had ice cream.
+
+Kristin is a biomedical engineer and Thomas is a chemical engineer has the form “p∧q,” where p is the statement, “Kristin is a biomedical engineer,” and q is the statement, “Thomas is a chemical engineer.” By De Morgan’s Law, the negation of a conjunction, ~(p∧q), is logically equivalent to ~p∨~q. ~p is “Kristen is not a biomedical engineer,” and ~q is “Thomas is not a chemical engineer.” By De Morgan’s Law, the solution has the form “~p ∨~q,” so the answer is: “Kristin is not a biomedical engineer or Tom is not a chemical engineer.”
+
+A person had cake or they had ice cream has the form “p∨q,” where p is the statement, “A person had cake,” and q is the statement, “A person had ice cream.” By De Morgan’s Law for the negations of a disjunction, ~(p∨q)≡ ~p ∧~q. The solution is the statement: “A person did not have cake and they did not have ice cream.”
+
+Negation of a Conditional Statement
+
+The negation of any statement has the opposite truth values of the original statement. The negation of a conditional, ~(p→q), is the conjunction of p and not q, p ∧~q. Consider the truth table below for the negation of the conditional.
+~(p→q)
+T
+T
+T
+F
+T
+F
+F
+T
+F
+T
+T
+F
+F
+F
+T
+F
+The only time the negation of the conditional statement is true is when p is true, and q is false. This means that ~(p→q) is logically equivalent to p∧~q, as the following truth table demonstrates.
+~(p→q)↔(p ∧~q)
+T
+T
+T
+F
+F
+T
+T
+F
+F
+T
+T
+T
+F
+T
+T
+F
+F
+T
+F
+F
+T
+F
+T
+T
+Constructing the Negation of a Conditional Statement
+
+Write the negation of each conditional statement.
+
+If Adele won a Grammy, then she is a singer.
+
+If Henrik Lundqvist played professional hockey, then he did not win the Stanley Cup.
+
+The negation of the conditional statement, p→q, is the statement, p∧~q. The hypothesis of the conditional statement is p: “Adele won a Grammy,” and conclusion of the conditional statement is q: “Adele is a singer.” The negation of the conclusion, ~q, is the statement: “She is not a singer.” Therefore, the answer is p∧~q: “Adele won a Grammy, and she is not a singer.”
+
+The hypothesis is p: “Henrik Lundqvist played professional hockey,” and the conclusion of the conditional statement is q: “He did not win the Stanley Cup.” The negation of q is the statement: “He won the Stanley Cup.” The negation of the conditional statement is equal to p∧~q: “Henrick Lundqvist played professional hockey, and he won the Stanley Cup.”
+
+Constructing the Negation of a Conditional Statement with Quantifiers
+
+Write the negation of each conditional statement.
+
+If all cats purr, then my partner’s cat purrs.
+
+If a penguin is a bird, then some birds do not fly.
+
+The negation of the conditional statement p→q is the statement p∧~q. The hypothesis of the conditional statement is p: “All cats purr,” and the conclusion of the conditional statement is q: “My partner’s cat purrs.” The negation of the conclusion, ~q, is the statement: “My partner’s cat does not purr.” Therefore, the answer is p∧~q: “All cats purr, but my partner’s cat does not purr.”
+
+The hypothesis is p: “A penguin is a bird,” and the conclusion of the conditional statement is q: “Some birds do not fly.” The negation of q is the statement: “All birds fly.” Therefore, the negation of the conditional statement is equal to p∧~q: “A penguin is a bird, and all birds fly.”
+
+Many of the properties that hold true for number systems and sets also hold true for logical statements. The following table summarizes some of the most useful properties for analyzing and constructing logical arguments. These properties can be verified using a truth table.
+
+Property
+Conjunction (AND)
+p→q ≡ ~p∨q
+Negating a Conditional Statement with a Conjunction or Disjunction
+
+Write the negation of each conditional statement applying De Morgan’s Law.
+
+If mom needs to buy chips, then Mike had friends over and Bob was hungry.
+
+If Juan had pizza or Chris had wings, then dad watched the game.
+
+The conditional has the form “If p then q or r,” where p is “Mom needs to buy chips,” q is “Mike had friends over,” and r is “Bob was hungry.” The negation of p→(q∧r) is p∧~(q∧r). Applying De Morgan’s Law to the statement ~(q∧r) the result is ~q ∨~r, so our conditional statement becomes p∧(~q∨~r). By the distributive property for conjunction over disjunction, this statement is equivalent to (p∧~q)∨(p∧~r). Translating the statement (p∧~q)∨(p∧~r) into words, the solution is: “Mom needs to buy chips and Mike did not have friends over, or Mom needs to buy chips and Bob was not hungry.”
+
+The conditional has the form “If p or q, then r,” where p is “Juan had pizza,” q is “Chris had wings,” and r is “Dad watched the game.” The negation of (p∨q)→r is (p∨q)∧~r. By the distributive property for disjunction over conjuction, the statement is equivalent to (p ∨~r)∧(q ∨~r). Translating the statement (p ∨~r)∧(q ∨~r) into words, the solution is: “Juan had pizza or dad did not watch the game, and Chris had wings or dad did not watch the game.”
+
+Evaluating De Morgan’s Laws with Truth Tables
+
+In Chapter 1, you learned that you could prove the validity of De Morgan’s Laws using Venn diagrams. Truth tables can also be used to prove that two statements are logically equivalent. If two statements are logically equivalent, you can use the form of the statement that is clearer or more persuasive when constructing a logical argument.
+
+The next example will prove the validity of one of De Morgan’s Laws using a truth table. The same procedure can be applied to any two logical statement that you believe are equivalent. If the last column of the truth table is a tautology, then the two statements are logically equivalent.
+
+Verifying De Morgan’s Law for Negation of a Conjunction
+
+Construct a truth table to verify De Morgan’s Law for the negation of a conjunction, ~(p∧q) ≡ ~p∨~q, is valid.
+Step 1: To verify any logical equivalence, you must first replace the logical equivalence symbol, ≡, with the biconditional symbol, ↔. The statement ~(p∧q) ≡ ~p ∨~q becomes ~(p∧q) ↔ ~p ∨~q.
+ Step 2: Next, you create a truth table for the statement. Because we have two basic statements, p, and q, the truth table will have four rows to account for all the possible outcomes. The columns will be p, q, ~p, ~q, p∧q,~(p∧q),~p ∨~q, and the biconditional statement is ~(p∧q)↔ ~p ∨~q.
+
+ p
+ q
+ p∧q
+ ~(p∧q)
+ ~p
+ ~q
+ ~p ∨~q
+ ~(p∧q)↔(~p ∨~q)
+
+ T
+ T
+ T
+ F
+ F
+ F
+ F
+ T
+
+ T
+ F
+ F
+ T
+ F
+ T
+ T
+ T
+
+ F
+ T
+ F
+ T
+ T
+ F
+ T
+ T
+
+ F
+ F
+ F
+ T
+ T
+ T
+ T
+ T
+
+ Step 3: Finally, verify that the statement is valid by confirming it is a tautology. In this instance, the last column is all true. Therefore, the statement is valid and De Morgan’s Law for the negation of a conjunction is verified.
+~(p∧q)↔(~p ∨~q)
+T
+T
+T
+F
+F
+F
+T
+T
+F
+F
+T
+F
+T
+T
+F
+T
+F
+T
+T
+F
+T
+F
+F
+F
+T
+T
+T
+T
+
+Check Your Understanding
+
+Key Terms
+
+Boolean logic
+
+negation of a conditional
+
+Key Concepts
+
+De Morgan’s Law for the negation of a disjunction states that, ~(p∨q) is logically equivalent to ~p∧~q.
+
+De Morgan’s Law The negation of a conjunction states that, ~(p∧q)≡~p∨~q.
+
+Use De Morgan’s Laws to negate conjunctions and disjunctions.
+
+The negation of a conditional statement, if p then q is logically equivalent to the statement p and not q. Use this property to write the negation of conditional statements.
+
+Use truth tables to evaluate De Morgan’s Laws.

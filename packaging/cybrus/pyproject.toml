@@ -1,0 +1,52 @@
+# Cybrus — standalone distribution manifest (LOCAL ONLY, do not publish)
+#
+# Distribution: `cybrus` — the standalone product. stdlib-only core, matching
+# the repo law that the kernel stays stdlib-only. `cryptography` is an
+# OPTIONAL accelerator: without it the vault uses its labeled stdlib
+# fallback (see core/levi/cybrus/vault.py) and reports which backend is
+# active via `vault.backend`.
+#
+# Layout shipped:
+#   cybrus/            top-level product package (shim: python -m cybrus)
+#   levi/cybrus/       engine (vault, identity, factory, tokens, gateway,
+#                      approval, audit, broker) under a PEP 420 namespace
+#                      `levi` package (no levi/__init__.py shipped, so it
+#                      never collides with a full LEVI install).
+#
+# Build from the repo root (~/workspace/levi):
+#   1. mkdir -p /tmp/cybrus-dist/src
+#   2. cp -r core/cybrus /tmp/cybrus-dist/src/cybrus
+#   3. mkdir -p /tmp/cybrus-dist/src/levi && cp -r core/levi/cybrus /tmp/cybrus-dist/src/levi/
+#      (namespace package: do NOT copy core/levi/__init__.py)
+#   4. cp packaging/cybrus/pyproject.toml /tmp/cybrus-dist/
+#   5. cd /tmp/cybrus-dist && python -m pip wheel . --no-deps -w dist/
+#
+# Version is single-sourced from core/levi/cybrus/product.py::PRODUCT_VERSION;
+# keep the two in sync (tests/test_cybrus_standalone.py asserts it).
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cybrus"
+version = "0.1.0"
+description = "Cybrus — local-first credential vault, third-party broker, and OAuth layer (standalone product)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "Chauncey J. Logan / Cybrus AI Systems" }]
+dependencies = []  # stdlib-only core, by law
+
+[project.optional-dependencies]
+# Optional hardened crypto backend for the vault. Without it, the vault
+# uses its labeled stdlib fallback and says so via vault.backend.
+accelerated = ["cryptography>=50,<51"]
+
+[project.scripts]
+cybrus = "cybrus.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["cybrus*", "levi.cybrus*"]
+namespaces = true

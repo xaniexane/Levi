@@ -1,0 +1,135 @@
+# m58357
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Fluid Dynamics
+
+Fluid Dynamics
+
+By the end of this section, you will be able to:
+
+Describe the characteristics of flow
+
+Calculate flow rate
+
+Describe the relationship between flow rate and velocity
+
+Explain the consequences of the equation of continuity to the conservation of mass
+
+The first part of this chapter dealt with fluid statics, the study of fluids at rest. The rest of this chapter deals with fluid dynamics, the study of fluids in motion. Even the most basic forms of fluid motion can be quite complex. For this reason, we limit our investigation to ideal fluids in many of the examples. An ideal fluid is a fluid with negligible viscosity. Viscosity is a measure of the internal friction in a fluid; we examine it in more detail in Viscosity and Turbulence. In a few examples, we examine an incompressible fluid—one for which an extremely large force is required to change the volume—since the density in an incompressible fluid is constant throughout.
+
+Characteristics of Flow
+
+Velocity vectors are often used to illustrate fluid motion in applications like meteorology. For example, wind—the fluid motion of air in the atmosphere—can be represented by vectors indicating the speed and direction of the wind at any given point on a map. shows velocity vectors describing the winds during Hurricane Arthur in 2014.
+
+Another method for representing fluid motion is a streamline. A streamline represents the path of a small volume of fluid as it flows. The velocity is always tangential to the streamline. The diagrams in use streamlines to illustrate two examples of fluids moving through a pipe. The first fluid exhibits a laminar flow (sometimes described as a steady flow), represented by smooth, parallel streamlines. Note that in the example shown in part (a), the velocity of the fluid is greatest in the center and decreases near the walls of the pipe due to the viscosity of the fluid and friction between the pipe walls and the fluid. This is a special case of laminar flow, where the friction between the pipe and the fluid is high, known as no slip boundary conditions. The second diagram represents turbulent flow, in which streamlines are irregular and change over time. In turbulent flow, the paths of the fluid flow are irregular as different parts of the fluid mix together or form small circular regions that resemble whirlpools. This can occur when the speed of the fluid reaches a certain critical speed.
+
+Flow Rate and its Relation to Velocity
+
+The volume of fluid passing by a given location through an area during a period of time is called flow rate Q, or more precisely, volume flow rate. In symbols, this is written as
+
+where V is the volume and t is the elapsed time. In , the volume of the cylinder is Ax, so the flow rate is
+
+The SI unit for flow rate is m3/s, but several other units for Q are in common use, such as liters per minute (L/min). Note that a liter (L) is 1/1000 of a cubic meter or 1000 cubic centimeters (10−3m3or103cm3).
+
+Flow rate and velocity are related, but quite different, physical quantities. To make the distinction clear, consider the flow rate of a river. The greater the velocity of the water, the greater the flow rate of the river. But flow rate also depends on the size and shape of the river. A rapid mountain stream carries far less water than the Amazon River in Brazil, for example. illustrates the volume flow rate. The volume flow rate is Q=dVdt=Av, where A is the cross-sectional area of the pipe and v is the magnitude of the velocity.
+
+The precise relationship between flow rate Q and average speed v is
+
+where A is the cross-sectional area and v is the average speed. The relationship tells us that flow rate is directly proportional to both the average speed of the fluid and the cross-sectional area of a river, pipe, or other conduit. The larger the conduit, the greater its cross-sectional area. illustrates how this relationship is obtained. The shaded cylinder has a volume V=Ad, which flows past the point P in a time t. Dividing both sides of this relationship by t gives
+
+We note that Q=V/t and the average speed is v =d/t. Thus the equation becomes Q=Av.
+shows an incompressible fluid flowing along a pipe of decreasing radius. Because the fluid is incompressible, the same amount of fluid must flow past any point in the tube in a given time to ensure continuity of flow. The flow is continuous because they are no sources or sinks that add or remove mass, so the mass flowing into the pipe must be equal the mass flowing out of the pipe. In this case, because the cross-sectional area of the pipe decreases, the velocity must necessarily increase. This logic can be extended to say that the flow rate must be the same at all points along the pipe. In particular, for arbitrary points 1 and 2,
+
+This is called the equation of continuity and is valid for any incompressible fluid (with constant density). The consequences of the equation of continuity can be observed when water flows from a hose into a narrow spray nozzle: It emerges with a large speed—that is the purpose of the nozzle. Conversely, when a river empties into one end of a reservoir, the water slows considerably, perhaps picking up speed again when it leaves the other end of the reservoir. In other words, speed increases when cross-sectional area decreases, and speed decreases when cross-sectional area increases.
+
+Since liquids are essentially incompressible, the equation of continuity is valid for all liquids. However, gases are compressible, so the equation must be applied with caution to gases if they are subjected to compression or expansion.
+Calculating Fluid Speed through a Nozzle
+A nozzle with a diameter of 0.500 cm is attached to a garden hose with a radius of 0.900 cm. The flow rate through hose and nozzle is 0.500 L/s. Calculate the speed of the water (a) in the hose and (b) in the nozzle.
+
+Calculating Fluid Speed through a Nozzle
+Strategy
+We can use the relationship between flow rate and speed to find both speeds. We use the subscript 1 for the hose and 2 for the nozzle.
+
+Strategy
+Solution
+
+Solution
+
+We solve the flow rate equation for speed and use πr12 for the cross-sectional area of the hose, obtaining
+v=QA=Qπr12.
+Substituting values and using appropriate unit conversions yields
+v=(0.500L/s)(10−3m3/L)3.14(9.00×10−3m)2=1.96m/s.
+
+We could repeat this calculation to find the speed in the nozzle v2, but we use the equation of continuity to give a somewhat different insight. The equation states
+A1v1=A2v2.
+Solving for v2 and substituting πr2 for the cross-sectional area yields
+v2=A1A2v1=πr12πr22v1=r12r22v1.
+Substituting known values, 
+v2=(0.900 cm)2(0.250 cm)21.96m/s=25.5m/s.
+Significance
+A speed of 1.96 m/s is about right for water emerging from a hose with no nozzle. The nozzle produces a considerably faster stream merely by constricting the flow to a narrower tube.
+
+Significance
+
+The solution to the last part of the example shows that speed is inversely proportional to the square of the radius of the tube, making for large effects when radius varies. We can blow out a candle at quite a distance, for example, by pursing our lips, whereas blowing on a candle with our mouth wide open is quite ineffective.
+
+Mass Conservation
+
+The rate of flow of a fluid can also be described by the mass flow rate or mass rate of flow. This is the rate at which a mass of the fluid moves past a point. Refer once again to , but this time consider the mass in the shaded volume. The mass can be determined from the density and the volume:
+
+The mass flow rate is then
+
+where ρ is the density, A is the cross-sectional area, and v is the magnitude of the velocity. The mass flow rate is an important quantity in fluid dynamics and can be used to solve many problems. Consider . The pipe in the figure starts at the inlet with a cross sectional area of A1 and constricts to an outlet with a smaller cross sectional area of A2. The mass of fluid entering the pipe has to be equal to the mass of fluid leaving the pipe. For this reason the velocity at the outlet (v2) is greater than the velocity of the inlet (v1). Using the fact that the mass of fluid entering the pipe must be equal to the mass of fluid exiting the pipe, we can find a relationship between the velocity and the cross-sectional area by taking the rate of change of the mass in and the mass out:
+is also known as the continuity equation in general form. If the density of the fluid remains constant through the constriction—that is, the fluid is incompressible—then the density cancels from the continuity equation,
+
+The equation reduces to show that the volume flow rate into the pipe equals the volume flow rate out of the pipe.
+
+Summary
+
+Flow rate Q is defined as the volume V flowing past a point in time t, or Q=dVdt where V is volume and t is time. The SI unit of flow rate is m3/s, but other rates can be used, such as L/min.
+
+Flow rate and velocity are related by Q=Av where A is the cross-sectional area of the flow and v is its average velocity.
+
+The equation of continuity states that for an incompressible fluid, the mass flowing into a pipe must equal the mass flowing out of the pipe.
+
+Conceptual Questions
+
+Many figures in the text show streamlines. Explain why fluid velocity is greatest where streamlines are closest together. (Hint: Consider the relationship between fluid velocity and the cross-sectional area through which the fluid flows.)
+
+Consider two different pipes connected to a single pipe of a smaller diameter, with fluid flowing from the two pipes into the smaller pipe. Since the fluid is forced through a smaller cross-sectional area, it must move faster as the flow lines become closer together. Likewise, if a pipe with a large radius feeds into a pipe with a small radius, the stream lines will become closer together and the fluid will move faster.
+
+Problems
+
+What is the average flow rate in cm3/s of gasoline to the engine of a car traveling at 100 km/h if it averages 10.0 km/L?
+
+2.78 cm3/s
+
+The heart of a resting adult pumps blood at a rate of 5.00 L/min. (a) Convert this to cm3/s. (b) What is this rate in m3/s?
+
+The Huka Falls on the Waikato River is one of New Zealand’s most visited natural tourist attractions. On average, the river has a flow rate of about 300,000 L/s. At the gorge, the river narrows to 20-m wide and averages 20-m deep. (a) What is the average speed of the river in the gorge? (b) What is the average speed of the water in the river downstream of the falls when it widens to 60 m and its depth increases to an average of 40 m?
+
+a. 0.75 m/s; b. 0.13 m/s
+
+(a) Estimate the time it would take to fill a private swimming pool with a capacity of 80,000 L using a garden hose delivering 60 L/min. (b) How long would it take if you could divert a moderate size river, flowing at 5000m3/s into the pool?
+
+What is the fluid speed in a fire hose with a 9.00-cm diameter carrying 80.0 L of water per second? (b) What is the flow rate in cubic meters per second? (c) Would your answers be different if salt water replaced the fresh water in the fire hose?
+
+a. 12.6 m/s; b. 0.0800m3/s; c. No, the flow rate and the velocity are independent of the density of the fluid.
+
+Water is moving at a velocity of 2.00 m/s through a hose with an internal diameter of 1.60 cm. (a) What is the flow rate in liters per second? (b) The fluid velocity in this hose’s nozzle is 15.0 m/s. What is the nozzle’s inside diameter?
+
+Prove that the speed of an incompressible fluid through a constriction, such as in a Venturi tube, increases by a factor equal to the square of the factor by which the diameter decreases. (The converse applies for flow out of a constriction into a larger-diameter region.)
+
+If the fluid is incompressible, the flow rate through both sides will be equal:
+Q=A1v–1=A2v–2, or πd124v–1=πd224v–2⇒v–2=v–1(d12/d22)=v–1(d1/d2)2
+
+Water emerges straight down from a faucet with a 1.80-cm diameter at a speed of 0.500 m/s. (Because of the construction of the faucet, there is no variation in speed across the stream.) (a) What is the flow rate in cm3/s? (b) What is the diameter of the stream 0.200 m below the faucet? Neglect any effects due to surface tension.
+
+abbreviated Q, it is the volume V that flows past a particular point during a time t, or Q=dV/dt
+fluid with negligible viscosity
+type of fluid flow in which layers do not mix
+type of fluid flow in which layers mix together via eddies and swirls
+measure of the internal friction in a fluid

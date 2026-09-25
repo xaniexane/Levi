@@ -1,0 +1,68 @@
+# m00030
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Boolean operations
+
+Boolean operations
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain the purpose of logical operators.
+
+Describe the truth tables for and, or, and not.
+
+Create expressions with logical operators.
+
+Interpret if-else statements with conditions using logical operators.
+
+Logical operator: and
+
+Decisions are often based on multiple conditions. Ex: A program printing if a business is open may check that hour >= 9 and hour < 17. A logical operator takes condition operand(s) and produces True or False.
+
+Python has three logical operators: and, or, and not. The and operator takes two condition operands and returns True if both conditions are true.
+
+Truth table: p and q.
+
+p
+q
+False
+Example: Museum entry
+
+Using the and operator
+
+Logical operator: or
+
+Sometimes a decision only requires one condition to be true. Ex: If a student is in the band or choir, they will perform in the spring concert. The or operator takes two condition operands and returns True if either condition is true.
+
+Truth table: p or q.
+
+p
+q
+False
+Example: Streaming prompt
+
+Using the or operator
+
+Logical operator: not
+
+If the computer is not on, press the power button. The not operator takes one condition operand and returns True when the operand is false and returns False when the operand is true.
+not is a useful operator that can make a condition more readable and can be used to toggle a Boolean's value. Ex: is_on = not is_on.
+
+Truth table: not p.
+
+p
+True
+Example: Diving warning
+
+Using the not operator
+
+Speed limits
+
+Write a program that reads in a car's speed as an integer and checks if the car's speed is within the freeway limits. A car's speed must be at least 45 mph but no greater than 70 mph on the freeway.
+
+If the speed is within the limits, print "Good driving". Else, print "Follow the speed limits".

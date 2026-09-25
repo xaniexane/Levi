@@ -1,0 +1,27 @@
+# SOXI configuration — LEVI's offline-first intelligence pattern.
+# The sever protocol: online stays false. Gathering happens explicitly,
+# never implicitly; becoming happens offline.
+
+[soxi]
+online = false
+data_dir = "~/.levi/soxi"
+device = "laptop-springfield"
+
+# Per-class switches. Everything defaults on; all are local-only.
+[soxi.classes]
+XI = true   # gremlin field lab
+FR = true   # friction corrections
+GR = true   # gleaner metadata scan
+SH = true   # shadow abandonment log
+ET = true   # etched board
+BT = true   # bent small-model harness (local runner only)
+CV = true   # cadence rhythm vectors (explicit samples only — no keylogger)
+DR = true   # drift timeline
+RT = true   # root nightly write-up
+WC = true   # witness 30-day silence
+TH = true   # threshold circles
+
+[soxi.ghost_sync]
+# Optional, explicit, and never GR. When you choose to be online:
+# only encrypted ET hash checks + model version numbers leave the device.
+enabled = false

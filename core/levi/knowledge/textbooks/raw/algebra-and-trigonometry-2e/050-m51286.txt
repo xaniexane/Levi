@@ -1,0 +1,2517 @@
+# m51286
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Other Trigonometric Functions
+
+The Other Trigonometric Functions
+
+In this section you will:
+
+Find exact values of the trigonometric functions secant, cosecant, tangent, and cotangent of 
+
+ π
+ 3
+ 
+ ,
+ π
+ 4
+ 
+ ,
+ and 
+
+ π
+ 6
+ 
+ .
+
+Use reference angles to evaluate the trigonometric functions secant, tangent, and cotangent.
+
+Use properties of even and odd trigonometric functions.
+
+Recognize and use fundamental identities.
+
+Evaluate trigonometric functions with a calculator.
+
+A wheelchair ramp that meets the standards of the Americans with Disabilities Act must make an angle with the ground whose tangent is 
+
+1
+
+12
+
+ or less, regardless of its length. A tangent represents a ratio, so this means that for every 1 inch of rise, the ramp must have 12 inches of run. Trigonometric functions allow us to specify the shapes and proportions of objects independent of exact dimensions. We have already defined the sine and cosine functions of an angle. Though sine and cosine are the trigonometric functions most often used, there are four others. Together they make up the set of six trigonometric functions. In this section, we will investigate the remaining functions.
+
+Finding Exact Values of the Trigonometric Functions Secant, Cosecant, Tangent, and Cotangent
+
+We can also define the remaining functions in terms of the unit circle with a point 
+
+(
+
+x,y
+
+)
+
+ corresponding to an angle of 
+
+t,
+
+ as shown in . As with the sine and cosine, we can use the 
+
+(
+
+x,y
+
+)
+
+ coordinates to find the other functions.
+
+The first function we will define is the tangent. The tangent of an angle is the ratio of the y-value to the x-value of the corresponding point on the unit circle. In , the tangent of angle 
+
+t
+
+ is equal to 
+
+y
+x
+
+,x≠0.
+
+ Because the y-value is equal to the sine of 
+
+t,
+
+ and the x-value is equal to the cosine of 
+
+t,
+
+ the tangent of angle 
+
+t
+
+ can also be defined as 
+
+ sint
+ 
+ cost
+ 
+ ,cost≠0.
+ The tangent function is abbreviated as 
+
+tan.
+
+ The remaining three functions can all be expressed as reciprocals of functions we have already defined.
+
+The secant function is the reciprocal of the cosine function. In , the secant of angle 
+
+t
+
+ is equal to 
+
+ 1
+ 
+ cost
+ 
+ =
+ 1
+ x
+ 
+ ,x≠0.
+ The secant function is abbreviated as 
+
+sec.
+
+The cotangent function is the reciprocal of the tangent function. In , the cotangent of angle 
+
+t
+
+ is equal to 
+
+ cost
+ 
+ sint
+ 
+ =
+ x
+ y
+ 
+ ,y≠0.
+ The cotangent function is abbreviated as 
+
+cot.
+
+The cosecant function is the reciprocal of the sine function. In , the cosecant of angle 
+
+t
+
+ is equal to 
+
+ 1
+ 
+ sint
+ 
+ =
+ 1
+ y
+ 
+ ,y≠0.
+ The cosecant function is abbreviated as 
+
+csc.
+
+Tangent, Secant, Cosecant, and Cotangent Functions
+
+If 
+
+t
+
+ is a real number and 
+
+(x,y)
+
+ is a point where the terminal side of an angle of 
+
+t
+
+ radians intercepts the unit circle, then
+
+Finding Trigonometric Functions from a Point on the Unit Circle
+
+The point 
+
+(
+
+−
+
+3
+
+2
+
+,
+1
+2
+
+)
+
+ is on the unit circle, as shown in . Find 
+ 
+ sint,cost,tant,sect,csct,
+ and 
+ 
+ cott.
+
+Because we know the 
+
+(x,y)
+
+ coordinates of the point on the unit circle indicated by angle 
+
+t,
+
+ we can use those coordinates to find the six functions:
+
+The point 
+
+(
+
+2
+
+2
+
+,−
+
+2
+
+2
+
+)
+
+ is on the unit circle, as shown in . Find 
+ 
+ sint,cost,tant,sect,csct,
+ and 
+ 
+ cott.
+sint=−
+
+2
+
+2
+
+cost=
+
+2
+
+2
+
+,tant=−1,sect=
+2
+
+,csct=−
+2
+
+,cott=−1
+
+Finding the Trigonometric Functions of an Angle
+
+Find 
+ 
+ sint,cost,tant,sect,csct,
+ and 
+ 
+ cott.
+ when 
+
+t=
+π
+6
+
+.
+
+We have previously used the properties of equilateral triangles to demonstrate that 
+ 
+ sin
+ π
+ 6
+ 
+ =
+ 1
+ 2
+
+ and 
+ 
+ cos
+ π
+ 6
+ 
+ =
+
+ 3
+
+ 2
+ 
+ .
+ We can use these values and the definitions of tangent, secant, cosecant, and cotangent as functions of sine and cosine to find the remaining function values.
+
+Find 
+ 
+ sint,cost,tant,sect,csct,
+ and 
+ 
+ cott.
+ when 
+
+t=
+π
+3
+
+.
+sinπ3=32,cosπ3=12,tanπ3=3,secπ3=2,cscπ3=233,cotπ3=33
+
+Because we know the sine and cosine values for the common first-quadrant angles, we can find the other function values for those angles as well by setting 
+
+x
+
+ equal to the cosine and 
+
+y
+
+ equal to the sine and then using the definitions of tangent, secant, cosecant, and cotangent. The results are shown in .
+
+Cosine
+1
+2
+Sine
+3
+
+2
+Tangent
+3
+
+3
+3
+Secant
+2
+2
+Cosecant
+Undefined
+2
+3
+
+3
+Cotangent
+3
+3
+
+3
+0
+Using Reference Angles to Evaluate Tangent, Secant, Cosecant, and Cotangent
+
+We can evaluate trigonometric functions of angles outside the first quadrant using reference angles as we have already done with the sine and cosine functions. The procedure is the same: Find the reference angle formed by the terminal side of the given angle with the horizontal axis. The trigonometric function values for the original angle will be the same as those for the reference angle, except for the positive or negative sign, which is determined by x- and y-values in the original quadrant. shows which functions are positive in which quadrant.
+
+To help remember which of the six trigonometric functions are positive in each quadrant, we can use the mnemonic phrase “A Smart Trig Class.” Each of the four words in the phrase corresponds to one of the four quadrants, starting with quadrant I and rotating counterclockwise. In quadrant I, which is “A,” all of the six trigonometric functions are positive. In quadrant II, “Smart,” only sine and its reciprocal function, cosecant, are positive. In quadrant III, “Trig,” only tangent and its reciprocal function, cotangent, are positive. Finally, in quadrant IV, “Class,” only cosine and its reciprocal function, secant, are positive.
+Given an angle not in the first quadrant, use reference angles to find all six trigonometric functions.
+
+Measure the angle formed by the terminal side of the given angle and the horizontal axis. This is the reference angle.
+
+Evaluate the function at the reference angle.
+
+Observe the quadrant where the terminal side of the original angle is located. Based on the quadrant, determine whether the output is positive or negative.
+
+Using Reference Angles to Find Trigonometric Functions
+
+Use reference angles to find all six trigonometric functions of 
+
+−
+
+5π
+
+6
+
+.
+
+The angle between this angle’s terminal side and the x-axis is 
+
+π
+6
+
+,
+
+ so that is the reference angle. Since 
+
+−
+
+5π
+
+6
+
+ is in the third quadrant, where both 
+
+x
+
+ and 
+
+y
+
+ are negative, cosine, sine, secant, and cosecant will be negative, while tangent and cotangent will be positive.
+cos(
+ 
+ −
+ 
+ 5π
+ 6
+
+ )
+
+ =−
+
+ 3
+
+ 2
+ 
+ ,sin(
+ 
+ −
+ 
+ 5π
+ 6
+
+ )
+
+ =−
+ 1
+ 2
+ 
+ ,tan(
+ −
+
+ 5π
+ 6
+
+ )
+
+ =
+
+ 3
+
+ 3
+ 
+ ,
+
+ sec(
+ 
+ −
+ 
+ 5π
+ 6
+
+ )
+
+ =−
+ 
+ 2
+ 3
+
+ 3
+ 
+ ,csc(
+ 
+ −
+ 
+ 5π
+ 6
+
+ )
+
+ =−2,cot(
+ 
+ −
+ 
+ 5π
+ 6
+
+ )
+
+ =
+ 3
+
+Use reference angles to find all six trigonometric functions of 
+
+−
+
+7π
+
+4
+
+.
+sin(
+
+ −7π
+ 
+ 4
+
+ )=
+
+ 2
+
+ 2
+ 
+ ,cos(
+
+ −7π
+ 
+ 4
+
+ )=
+
+ 2
+
+ 2
+ 
+ ,tan(
+
+ −7π
+ 
+ 4
+
+ )=1,
+
+ sec(
+
+ −7π
+ 
+ 4
+
+ )=
+ 2
+ 
+ ,csc(
+
+ −7π
+ 
+ 4
+
+ )=
+ 2
+ 
+ ,cot(
+
+ −7π
+ 
+ 4
+
+ )=1
+
+Using Even and Odd Trigonometric Functions
+
+To be able to use our six trigonometric functions freely with both positive and negative angle inputs, we should examine how each function treats a negative input. As it turns out, there is an important difference among the functions in this regard.
+
+Consider the function 
+
+f(x)=
+x
+2
+
+,
+
+ shown in . The graph of the function is symmetrical about the y-axis. All along the curve, any two points with opposite x-values have the same function value. This matches the result of calculation: 
+
+(4)
+
+2
+
+=
+
+(−4)
+
+2
+
+,
+
+(−5)
+
+2
+
+=
+
+(5)
+
+2
+
+,
+
+ and so on. So 
+
+f(x)=
+x
+2
+
+ is an even function, a function such that two inputs that are opposites have the same output. That means 
+
+f(
+
+−x
+
+)=f(
+x
+).
+
+Now consider the function 
+
+f(x)=
+x
+3
+
+,
+
+ shown in . The graph is not symmetrical about the y-axis. All along the graph, any two points with opposite x-values also have opposite y-values. So 
+
+f(x)=
+x
+3
+
+ is an odd function, one such that two inputs that are opposites have outputs that are also opposites. That means 
+
+f(
+
+−x
+
+)=−f(
+x
+).
+
+We can test whether a trigonometric function is even or odd by drawing a unit circle with a positive and a negative angle, as in . The sine of the positive angle is 
+
+y.
+
+ The sine of the negative angle is 
+
+−y.
+
+ The sine function, then, is an odd function. We can test each of the six trigonometric functions in this fashion. The results are shown in .
+cot t
+
+ =
+
+ x
+ y
+
+ cot(−t)
+
+ =
+
+ x
+ 
+ −y
+
+ cot t
+
+ ≠
+
+ cot(−t)
+Even and Odd Trigonometric Functions
+
+An even function is one in which 
+
+f(−x)=f(x).
+
+An odd function is one in which 
+
+f(−x)=−f(x).
+
+Cosine and secant are even:
+
+Sine, tangent, cosecant, and cotangent are odd:
+
+Using Even and Odd Properties of Trigonometric Functions
+
+If the secant of angle 
+
+t
+
+ is 2, what is the secant of 
+
+−t?
+
+Secant is an even function. The secant of an angle is the same as the secant of its opposite. So if the secant of angle 
+
+t
+
+ is 2, the secant of 
+
+−t
+
+ is also 2.
+
+If the cotangent of angle 
+
+t
+
+ is 
+
+3
+
+,
+
+ what is the cotangent of 
+
+−t?
+−
+3
+
+Recognizing and Using Fundamental Identities
+
+We have explored a number of properties of trigonometric functions. Now, we can take the relationships a step further, and derive some fundamental identities. Identities are statements that are true for all values of the input on which they are defined. Usually, identities can be derived from definitions and relationships we already know. For example, the Pythagorean Identity we learned earlier was derived from the Pythagorean Theorem and the definitions of sine and cosine.
+
+Fundamental Identities
+
+We can derive some useful identities from the six trigonometric functions. The other four trigonometric functions can be related back to the sine and cosine functions using these basic relationships:
+
+Using Identities to Evaluate Trigonometric Functions
+ⓐ Given 
+
+sin(45°)=
+
+2
+
+2
+
+,cos(45°)=
+
+2
+
+2
+
+,
+
+ evaluate 
+
+tan(45°).
+ⓑ Given 
+
+sin(
+
+5π
+
+6
+
+)=
+1
+2
+
+,cos(
+
+5π
+
+6
+
+)=−
+
+3
+
+2
+
+,
+
+ evaluate 
+
+sec(
+
+5π
+
+6
+
+).
+
+Because we know the sine and cosine values for these angles, we can use identities to evaluate the other functions.
+ⓐ 
+
+ tan(45°)
+
+ =
+
+ sin(45°)
+ 
+ cos(45°)
+
+ =
+
+ 2
+
+ 2
+
+ 2
+
+ 2
+
+ =
+ 1
+ⓑ
+
+ sec(
+
+ 5π
+ 6
+
+ )
+ 
+ =
+
+ 1
+ 
+ cos(
+
+ 5π
+ 6
+
+ )
+
+ =
+
+ 1
+ 
+ −
+
+ 3
+
+ 2
+
+ =
+
+ −2
+ 3
+
+ 1
+
+ =
+
+ −2
+
+ 3
+
+ =
+
+ −
+ 
+ 2
+ 3
+
+ 3
+
+Evaluate 
+ 
+ csc(
+
+ 7π
+ 6
+
+ ).
+−2
+
+Using Identities to Simplify Trigonometric Expressions
+
+Simplify 
+
+ sect
+ 
+ tant
+ 
+ .
+
+We can simplify this by rewriting both functions in terms of sine and cosine.
+
+By showing that 
+
+ sect
+ 
+ tant
+
+ can be simplified to 
+ 
+ csct,
+ we have, in fact, established a new identity.
+
+Simplify 
+ 
+ (tant)(cost).
+sint
+
+Alternate Forms of the Pythagorean Identity
+
+We can use these fundamental identities to derive alternate forms of the Pythagorean Identity, 
+
+ cos
+ 
+ 2
+ 
+ t+
+ 
+ sin
+ 
+ 2
+ 
+ t=1.
+ 
+ One form is obtained by dividing both sides by 
+
+ cos
+ 
+ 2
+ 
+ t.
+
+The other form is obtained by dividing both sides by 
+
+ sin
+ 
+ 2
+ 
+ t.
+
+Alternate Forms of the Pythagorean Identity
+
+Using Identities to Relate Trigonometric Functions
+
+If 
+ 
+ cos(t)=
+ 
+ 12
+
+ 13
+
+ and 
+ 
+ t
+ 
+ is in quadrant IV, as shown in , find the values of the other five trigonometric functions.
+
+We can find the sine using the Pythagorean Identity, 
+
+ cos
+ 
+ 2
+ 
+ t+
+ 
+ sin
+ 
+ 2
+ 
+ t=1,
+ 
+ and the remaining functions by relating them to sine and cosine.
+
+The sign of the sine depends on the y-values in the quadrant where the angle is located. Since the angle is in quadrant IV, where the y-values are negative, its sine is negative, 
+ 
+ −
+ 5
+ 
+ 13
+
+ .
+
+The remaining functions can be calculated using identities relating them to sine and cosine.
+
+If 
+ 
+ sec(t)=−
+ 
+ 17
+ 
+ 8
+
+ and 
+ 
+ 0<t<π,
+ 
+ find the values of the other five functions.
+cost=−
+ 8
+ 
+ 17
+
+ ,sint=
+ 
+ 15
+
+ 17
+
+ ,tant=−
+ 
+ 15
+ 
+ 8
+
+ csct=
+ 
+ 17
+
+ 15
+
+ ,cott=−
+ 8
+ 
+ 15
+
+As we discussed at the beginning of the chapter, a function that repeats its values in regular intervals is known as a periodic function. The trigonometric functions are periodic. For the four trigonometric functions, sine, cosine, cosecant and secant, a revolution of one circle, or 
+ 
+ 2π,
+ 
+ will result in the same outputs for these functions. And for tangent and cotangent, only a half a revolution will result in the same outputs.
+
+Other functions can also be periodic. For example, the lengths of months repeat every four years. If 
+ 
+ x
+ 
+ represents the length time, measured in years, and 
+ 
+ f(x)
+ 
+ represents the number of days in February, then 
+ 
+ f(x+4)=f(x).
+ 
+ This pattern repeats over and over through time. In other words, every four years, February is guaranteed to have the same number of days as it did 4 years earlier. The positive number 4 is the smallest positive number that satisfies this condition and is called the period. A period is the shortest interval over which a function completes one full cycle—in this example, the period is 4 and represents the time it takes for us to be certain February has the same number of days.
+
+Period of a Function
+
+The period 
+ 
+ P
+ 
+ of a repeating function 
+ 
+ f
+ 
+ is the number representing the interval such that 
+ 
+ f(x+P)=f(x)
+ 
+ for any value of 
+ 
+ x.
+
+The period of the cosine, sine, secant, and cosecant functions is 
+ 
+ 2π.
+
+The period of the tangent and cotangent functions is 
+ 
+ π.
+
+Finding the Values of Trigonometric Functions
+
+Find the values of the six trigonometric functions of angle 
+ 
+ t 
+ based on .
+
+Find the values of the six trigonometric functions of angle 
+ 
+ t 
+ based on .
+sint=−1,cost=0,tant=Undefined
+
+ sect=Undefined,csct=−1,cott=0
+
+Finding the Value of Trigonometric Functions
+
+If 
+ 
+ sin(t)=−
+
+ 3
+
+ 2
+ 
+ andcos(t)=
+ 1
+ 2
+ 
+ ,findsec(t),csc(t),tan(t),cot(t).
+sin(t)=
+
+ 2
+
+ 2
+ 
+ andcos(t)=
+
+ 2
+
+ 2
+ 
+ ,findsec(t),csc(t),tan(t),andcot(t)
+sect=
+ 2
+ 
+ ,csct=
+ 2
+ 
+ ,tant=1,cott=1
+
+Evaluating Trigonometric Functions with a Calculator
+
+We have learned how to evaluate the six trigonometric functions for the common first-quadrant angles and to use them as reference angles for angles in other quadrants. To evaluate trigonometric functions of other angles, we use a scientific or graphing calculator or computer software. If the calculator has a degree mode and a radian mode, confirm the correct mode is chosen before making a calculation.
+
+Evaluating a tangent function with a scientific calculator as opposed to a graphing calculator or computer algebra system is like evaluating a sine or cosine: Enter the value and press the TAN key. For the reciprocal functions, there may not be any dedicated keys that say CSC, SEC, or COT. In that case, the function must be evaluated as the reciprocal of a sine, cosine, or tangent.
+
+If we need to work with degrees and our calculator or software does not have a degree mode, we can enter the degrees multiplied by the conversion factor 
+
+ π
+ 
+ 180
+
+ to convert the degrees to radians. To find the secant of 
+ 
+ 30°,
+ 
+ we could press
+Given an angle measure in radians, use a scientific calculator to find the cosecant.
+
+If the calculator has degree mode and radian mode, set it to radian mode.
+
+Enter: 
+ 
+ 1/
+
+Enter the value of the angle inside parentheses.
+
+Press the SIN key.
+
+Press the = key.
+Given an angle measure in radians, use a graphing utility/calculator to find the cosecant.
+
+If the graphing utility has degree mode and radian mode, set it to radian mode.
+
+Enter: 
+ 
+ 1/
+
+Press the SIN key.
+
+Enter the value of the angle inside parentheses.
+
+Press the ENTER key.
+
+Evaluating the Cosecant Using Technology
+
+Evaluate the cosecant of 
+
+ 5π
+ 
+ 7
+ 
+ .
+
+For a scientific calculator, enter information as follows:
+
+Evaluate the cotangent of 
+ 
+ −
+ π
+ 8
+ 
+ .
+≈−2.414
+
+Access these online resources for additional instruction and practice with other trigonometric functions.
+Determing Trig Function Values
+More Examples of Determining Trig Functions
+Pythagorean Identities
+Trig Functions on a Calculator
+
+Key Equations
+
+tant=
+ 
+ sint
+
+ cost
+sect=
+ 1
+ 
+ cost
+csct=
+ 1
+ 
+ sint
+cott=
+ 1
+ 
+ tant
+
+ =
+ 
+ cost
+
+ sint
+Key Concepts
+
+The tangent of an angle is the ratio of the y-value to the x-value of the corresponding point on the unit circle.
+
+The secant, cotangent, and cosecant are all reciprocals of other functions. The secant is the reciprocal of the cosine function, the cotangent is the reciprocal of the tangent function, and the cosecant is the reciprocal of the sine function.
+
+The six trigonometric functions can be found from a point on the unit circle. See .
+
+Trigonometric functions can also be found from an angle. See .
+
+Trigonometric functions of angles outside the first quadrant can be determined using reference angles. See .
+
+A function is said to be even if 
+ 
+ f(−x)=f(x) 
+ and odd if 
+ 
+ f(
+ 
+ −x
+ 
+ )=−f(
+ x
+ ) 
+ for all x in the domain of f.
+
+Cosine and secant are even; sine, tangent, cosecant, and cotangent are odd.
+
+Even and odd properties can be used to evaluate trigonometric functions. See .
+
+The Pythagorean Identity makes it possible to find a cosine from a sine or a sine from a cosine.
+
+Identities can be used to evaluate trigonometric functions. See and .
+
+Fundamental identities such as the Pythagorean Identity can be manipulated algebraically to produce new identities. See .
+
+The trigonometric functions repeat at regular intervals.
+
+The period 
+ 
+ P 
+ of a repeating function 
+ 
+ f 
+ is the smallest interval such that 
+ 
+ f(x+P)=f(x) 
+ for any value of 
+ 
+ x.
+
+The values of trigonometric functions can be found by mathematical analysis. See and .
+
+To evaluate trigonometric functions of other angles, we can use a calculator or computer software. See .
+
+Section Exercises
+
+Verbal
+
+On an interval of 
+ 
+ [ 
+ 0,2π
+ ),
+ 
+ can the sine and cosine values of a radian measure ever be equal? If so, where?
+
+Yes, when the reference angle is 
+
+ π
+ 4
+
+ and the terminal side of the angle is in quadrants I and III. Thus, a 
+ 
+ x=
+ π
+ 4
+ 
+ ,
+ 
+ 5π
+ 
+ 4
+ 
+ ,
+ 
+ the sine and cosine values are equal.
+
+What would you estimate the cosine of 
+ 
+ π 
+ degrees to be? Explain your reasoning.
+
+For any angle in quadrant II, if you knew the sine of the angle, how could you determine the cosine of the angle?
+
+Substitute the sine of the angle in for 
+ 
+ y 
+ in the Pythagorean Theorem 
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =1. 
+ Solve for 
+ 
+ x 
+ and take the negative solution.
+
+Describe the secant function.
+
+Tangent and cotangent have a period of 
+ 
+ π. 
+ What does this tell us about the output of these functions?
+
+The outputs of tangent and cotangent will repeat every 
+ 
+ π 
+ units.
+
+Algebraic
+
+For the following exercises, find the exact value of each expression.
+tan
+ π
+ 6
+sec
+ π
+ 6
+2
+ 3
+
+ 3
+csc
+ π
+ 6
+cot
+ π
+ 6
+3
+tan
+ π
+ 4
+sec
+ π
+ 4
+2
+csc
+ π
+ 4
+cot
+ π
+ 4
+
+1
+tan
+ π
+ 3
+sec
+ π
+ 3
+
+2
+csc
+ π
+ 3
+cot
+ π
+ 3
+3
+
+ 3
+
+For the following exercises, use reference angles to evaluate the expression.
+tan
+ 
+ 5π
+ 6
+sec
+ 
+ 7π
+ 6
+−
+ 
+ 2
+ 3
+
+ 3
+csc
+ 
+ 11π
+ 6
+cot
+ 
+ 13π
+ 6
+3
+tan
+ 
+ 7π
+ 4
+sec
+ 
+ 3π
+ 4
+−
+ 2
+csc
+ 
+ 5π
+ 4
+cot
+ 
+ 11π
+ 4
+
+–1
+tan
+ 
+ 8π
+ 3
+sec
+ 
+ 4π
+ 3
+
+-2
+csc
+ 
+ 2π
+ 3
+cot
+ 
+ 5π
+ 3
+−
+
+ 3
+
+ 3
+tan225°
+sec300°
+
+2
+csc150°
+cot240°
+3
+
+ 3
+tan330°
+sec120°
+
+–2
+csc210°
+cot315°
+
+–1
+
+If 
+ 
+ sint=
+ 3
+ 4
+ 
+ ,
+ 
+ and 
+ 
+ t 
+ is in quadrant II, find 
+ 
+ cost,sect,csct,tant,
+ and 
+ 
+ cott.
+
+If 
+ 
+ cost=−
+ 1
+ 3
+ 
+ ,
+ 
+ and 
+ 
+ t 
+ is in quadrant III, find 
+ 
+ sint,sect,csct,tant,
+ and 
+ 
+ cott.
+sint=−
+ 
+ 2
+ 2
+
+ 3
+ 
+, sect=−3, csct=−
+ 
+ 3
+ 2
+
+ 4
+ 
+, tant=2
+ 2
+ 
+, cott=
+
+ 2
+
+ 4
+
+If 
+ 
+ tant=
+ 
+ 12
+ 5
+
+, and 
+ 
+ 0≤t<
+ π
+ 2
+
+, find 
+ sint,cost,sect,csct,andcott.
+
+If 
+ 
+ sint=
+
+ 3
+
+ 2
+
+ and 
+ 
+ cost=
+ 1
+ 2
+ 
+ ,
+ find 
+ 
+ sect,csct,tant,
+ and 
+ 
+ cott.
+sect=2,
+
+ csct=
+ 
+ 2
+ 3
+
+ 3
+ 
+ ,
+
+ tant=
+ 3
+ 
+ ,
+
+ cott=
+
+ 3
+
+ 3
+
+If 
+ 
+ sin40°≈0.643
+ and 
+ 
+ cos40°≈0.766,
+ find 
+ 
+ sec40°,csc40°,tan40°,
+ and 
+ 
+ cot40°.
+
+If 
+ 
+ sint=
+
+ 2
+
+ 2
+ 
+ ,
+ 
+ what is the 
+ 
+ sin(−t)?
+−
+
+ 2
+
+ 2
+
+If 
+ 
+ cost=
+ 1
+ 2
+ 
+ ,
+ 
+ what is the 
+ 
+ cos(−t)?
+
+If 
+ 
+ sect=3.1,
+ 
+ what is the 
+ 
+ sec(−t)?
+
+3.1
+
+If 
+ 
+ csct=0.34,
+ 
+ what is the 
+ 
+ csc(−t)?
+
+If 
+ 
+ tant=−1.4,
+ 
+ what is the 
+ 
+ tan(−t)?
+
+1.4
+
+If 
+ 
+ cott=9.23,
+ 
+ what is the 
+ 
+ cot(−t)?
+
+Graphical
+
+For the following exercises, use the angle in the unit circle to find the value of the each of the six trigonometric functions.
+
+sint=
+
+ 2
+
+ 2
+ 
+, cost=
+
+ 2
+
+ 2
+ 
+, tant=1, cott=1, sect=
+ 2
+ 
+, csct=
+ 2
+
+sint=−
+
+ 3
+
+ 2
+ 
+, cost=−
+ 1
+ 2
+ 
+tant=
+ 3
+ 
+, cott=
+
+ 3
+
+ 3
+ 
+, sect=−2, csct=−
+ 
+ 2
+ 3
+
+ 3
+
+Technology
+
+For the following exercises, use a graphing calculator to evaluate to three decimal places.
+csc
+ 
+ 5π
+ 9
+cot
+ 
+ 4π
+ 7
+
+–0.228
+sec
+ π
+ 
+ 10
+tan
+ 
+ 5π
+ 8
+
+–2.414
+sec
+ 
+ 3π
+ 4
+csc
+ π
+ 4
+
+1.414
+tan98°
+cot33°
+
+1.540
+cot140°
+sec310°
+
+1.556
+
+Extensions
+
+For the following exercises, use identities to evaluate the expression.
+
+If 
+ 
+ tan(
+ t
+ )≈2.7,
+ 
+ and 
+ 
+ sin(
+ t
+ )≈0.94,
+ 
+ find 
+ 
+ cos(
+ t
+ ).
+
+If 
+ 
+ tan(
+ t
+ )≈1.3,
+ 
+ and 
+ 
+ cos(
+ t
+ )≈0.61,
+ 
+ find 
+ 
+ sin(
+ t
+ ).
+sin(
+ t
+ )≈0.79
+
+If 
+ 
+ csc(
+ t
+ )≈3.2,
+ 
+ and 
+ 
+ cos(
+ t
+ )≈0.95,
+ 
+ find 
+ 
+ tan(
+ t
+ ).
+
+If 
+ 
+ cot(
+ t
+ )≈0.58,
+ 
+ and 
+ 
+ cos(
+ t
+ )≈0.5,
+ 
+ find 
+ 
+ csc(
+ t
+ ).
+csct≈1.16
+
+Determine whether the function 
+ 
+ f(x)=2sinxcosx
+ is even, odd, or neither.
+
+Determine whether the function 
+ 
+ f(x)=3
+ 
+ sin
+ 2
+ 
+ xcosx+secx
+ is even, odd, or neither.
+
+even
+
+Determine whether the function 
+ 
+ f(x)=sinx−2
+ 
+ cos
+ 2
+ 
+ x
+ is even, odd, or neither.
+
+Determine whether the function 
+ 
+ f(x)=
+ 
+ csc
+ 2
+ 
+ x+secx
+ is even, odd, or neither.
+
+even
+
+For the following exercises, use identities to simplify the expression.
+cscttant
+sect
+ 
+ csct
+sint
+ 
+ cost
+ 
+ =tant
+
+Real-World Applications
+
+The amount of sunlight in a certain city can be modeled by the function 
+ 
+ h=15cos(
+
+ 1
+ 
+ 600
+
+ d
+ 
+ ),
+ 
+ where 
+ 
+ h 
+ represents the hours of sunlight, and 
+ 
+ d 
+ is the day of the year. Use the equation to find how many hours of sunlight there are on February 11, the 42nd day of the year. State the period of the function.
+
+The amount of sunlight in a certain city can be modeled by the function 
+ 
+ h=16cos(
+
+ 1
+ 
+ 500
+
+ d
+ 
+ ),
+ 
+ where 
+ 
+ h 
+ represents the hours of sunlight, and 
+ 
+ d 
+ is the day of the year. Use the equation to find how many hours of sunlight there are on September 24, the 267th day of the year. State the period of the function.
+
+13.77 hours, period: 
+ 
+ 1000π
+
+The equation 
+ 
+ P=20sin(
+ 
+ 2πt
+ 
+ )+100 
+ models the blood pressure, 
+ 
+ P,
+ 
+ where 
+ 
+ t 
+ represents time in seconds. (a) Find the blood pressure after 15 seconds. (b) What are the maximum and minimum blood pressures?
+
+The height of a piston, 
+ 
+ h,
+ 
+ in inches, can be modeled by the equation 
+ 
+ y=3sinx+1,
+ where 
+ 
+ x 
+ represents the crank angle. Find the height of the piston when the crank angle is 
+ 
+ 55°.
+
+3.46 inches
+
+The height of a piston, 
+ 
+ h,
+ 
+ in inches, can be modeled by the equation 
+ 
+ y=2cosx+5,
+ where 
+ 
+ x 
+ represents the crank angle. Find the height of the piston when the crank angle is 
+ 
+ 55°.
+
+Chapter Review Exercises
+Angles
+
+For the following exercises, convert the angle measures to degrees.
+π
+ 4
+45°
+−
+ 
+ 5π
+ 
+ 3
+
+For the following exercises, convert the angle measures to radians.
+−210°
+−
+ 
+ 7π
+ 
+ 6
+180°
+
+Find the length of an arc in a circle of radius 7 meters subtended by the central angle of 
+ 
+ 85°.
+
+10.385 meters
+
+Find the area of the sector of a circle with diameter 32 feet and an angle of 
+
+ 3π
+ 
+ 5
+
+ radians.
+
+For the following exercises, find the angle between 
+ 
+ 0° 
+ and 
+ 
+ 360° 
+ that is coterminal with the given angle.
+420°
+60°
+−80°
+
+For the following exercises, find the angle between 0 and 
+ 
+ 2π 
+ in radians that is coterminal with the given angle.
+−
+ 
+ 20π
+
+ 11
+2π
+
+ 11
+14π
+ 
+ 5
+
+For the following exercises, draw the angle provided in standard position on the Cartesian plane.
+−210°
+
+75°
+5π
+ 
+ 4
+
+−
+ π
+ 3
+
+Find the linear speed of a point on the equator of the earth if the earth has a radius of 3,960 miles and the earth rotates on its axis every 24 hours. Express answer in miles per hour. Round to the nearest hundredth.
+
+1036.73 miles per hour
+
+A car wheel with a diameter of 18 inches spins at the rate of 10 revolutions per second. What is the car's speed in miles per hour? Round to the nearest hundredth.
+Right Triangle Trigonometry
+
+For the following exercises, use side lengths to evaluate.
+cos
+ π
+ 4
+2
+
+ 2
+cot
+ π
+ 3
+tan
+ π
+ 6
+3
+
+ 3
+cos(
+
+ π
+ 2
+
+ )=sin(
+ 
+ ___°
+ 
+ )
+csc(
+ 
+ 18°
+ 
+ )=sec(
+ 
+ ___°
+ 
+ )
+72°
+
+For the following exercises, use the given information to find the lengths of the other two sides of the right triangle.
+cosB=
+ 3
+ 5
+ 
+ ,a=6
+tanA=
+ 5
+ 9
+ 
+ ,b=6
+a=
+ 
+ 10
+ 
+ 3
+ 
+ ,c=
+ 
+ 2
+ 
+ 106
+
+ 3
+
+For the following exercises, use to evaluate each trigonometric function.
+sinA
+tanB
+6
+ 
+ 11
+
+For the following exercises, solve for the unknown sides of the given triangle.
+
+a=
+ 
+ 5
+ 3
+
+ 2
+ 
+ ,b=
+ 5
+ 2
+
+A 15-ft ladder leans against a building so that the angle between the ground and the ladder is 
+ 
+ 70°.
+ 
+ How high does the ladder reach up the side of the building? Find the answer to four decimal places.
+
+The angle of elevation to the top of a building in Baltimore is found to be 4 degrees from the ground at a distance of 1 mile from the base of the building. Using this information, find the height of the building. Find the answer to four decimal places.
+
+369.2136 ft
+Unit Circle
+
+Find the exact value of 
+ 
+ sin
+ π
+ 3
+ 
+ .
+
+Find the exact value of 
+ 
+ cos
+ π
+ 4
+ 
+ .
+2
+
+ 2
+
+Find the exact value of 
+ 
+ cosπ.
+
+State the reference angle for 
+ 
+ 300°.
+60°
+
+State the reference angle for 
+
+ 3π
+ 
+ 4
+ 
+ .
+
+Compute cosine of 
+ 
+ 330°.
+3
+
+ 2
+
+Compute sine of 
+
+ 5π
+ 
+ 4
+ 
+ .
+
+State the domain of the sine and cosine functions.
+
+all real numbers
+
+State the range of the sine and cosine functions.
+The Other Trigonometric Functions
+
+For the following exercises, find the exact value of the given expression.
+cos
+ π
+ 6
+3
+
+ 2
+tan
+ π
+ 4
+csc
+ π
+ 3
+2
+ 3
+
+ 3
+sec
+ π
+ 4
+
+For the following exercises, use reference angles to evaluate the given expression.
+sec
+ 
+ 11π
+ 3
+
+2
+sec315°
+
+If 
+ 
+ sec(
+ t
+ )=−2.5,
+ 
+ what is the 
+ 
+ sec(−t)?
+
+–2.5
+
+If 
+ 
+ tan(t)=−0.6,
+ 
+ what is the 
+ 
+ tan(−t)?
+
+If 
+ 
+ tan(t)=
+ 1
+ 3
+ 
+ ,
+ 
+ find 
+ 
+ tan(t−π).
+1
+ 3
+
+If 
+ 
+ cos(t)=
+
+ 2
+
+ 2
+ 
+ ,
+ 
+ find 
+ 
+ sin(t+2π).
+
+There are two possible solutions.
+
+Which trigonometric functions are even?
+
+cosine, secant
+
+Which trigonometric functions are odd?
+
+Chapter Practice Test
+
+Convert 
+
+ 5π
+ 
+ 6
+
+ radians to degrees.
+150°
+
+Convert 
+ 
+ −620°
+ 
+ to radians.
+
+Find the length of a circular arc with a radius 12 centimeters subtended by the central angle of 
+ 
+ 30°.
+
+6.283 centimeters
+
+Find the area of the sector with radius of 8 feet and an angle of 
+
+ 5π
+ 
+ 4
+
+ radians.
+
+Find the angle between 
+ 
+ 0°
+ 
+ and 
+ 
+ 360°
+
+ that is coterminal with 
+ 
+ 375°.
+15°
+
+Find the angle between 0 and 
+ 
+ 2π
+ 
+ in radians that is coterminal with 
+ 
+ −
+ 
+ 4π
+ 
+ 7
+ 
+ .
+
+Draw the angle 
+ 
+ 315°
+ 
+ in standard position on the Cartesian plane.
+
+Draw the angle 
+ 
+ −
+ π
+ 6
+
+ in standard position on the Cartesian plane.
+
+A carnival has a Ferris wheel with a diameter of 80 feet. The time for the Ferris wheel to make one revolution is 75 seconds. What is the linear speed in feet per second of a point on the Ferris wheel? What is the angular speed in radians per second?
+
+3.351 feet per second, 
+
+ 2π
+
+ 75
+
+ radians per second
+
+Find the missing sides of the triangle 
+ 
+ ABC:sinB=
+ 3
+ 4
+ 
+ ,c=12.
+
+Find the missing sides of the triangle.
+
+a=
+ 9
+ 2
+ 
+ ,b=
+ 
+ 9
+ 3
+
+ 2
+
+The angle of elevation to the top of a building in Chicago is found to be 9 degrees from the ground at a distance of 2000 feet from the base of the building. Using this information, find the height of the building.
+
+Find the exact value of 
+ 
+ sin
+ π
+ 6
+ 
+ .
+1
+ 2
+
+Compute sine of 
+ 
+ 240°.
+
+State the domain of the sine and cosine functions.
+
+real numbers
+
+State the range of the sine and cosine functions.
+
+Find the exact value of 
+ 
+ cot
+ π
+ 4
+ 
+ .
+
+1
+
+Find the exact value of 
+ 
+ tan
+ π
+ 3
+ 
+ .
+
+Use reference angles to evaluate 
+ 
+ csc
+ 
+ 7π
+ 4
+ 
+ .
+−
+ 2
+
+Use reference angles to evaluate 
+ 
+ tan210°.
+
+If 
+ 
+ csct=0.68,
+ 
+ what is the 
+ 
+ csc(−t)?
+
+–0.68
+
+If 
+ 
+ cost=
+
+ 3
+
+ 2
+ 
+ ,
+ 
+ find 
+ 
+ cos(t−2π).
+
+Find the missing angle: 
+ 
+ cos(
+
+ π
+ 6
+
+ )=sin(
+ 
+ ___
+ 
+ )
+π
+ 3
+
+the reciprocal of the sine function: on the unit circle, 
+ 
+ csct=
+ 1
+ y
+ 
+ ,y≠0
+the reciprocal of the tangent function: on the unit circle, 
+ 
+ cott=
+ x
+ y
+ 
+ ,y≠0
+statements that are true for all values of the input on which they are defined
+the smallest interval 
+ 
+ P
+ 
+ of a repeating function 
+ 
+ f
+ 
+ such that 
+ 
+ f(x+P)=f(x)
+the reciprocal of the cosine function: on the unit circle, 
+ 
+ sect=
+ 1
+ x
+ 
+ ,x≠0
+the quotient of the sine and cosine: on the unit circle, 
+ 
+ tant=
+ y
+ x
+ 
+ ,x≠0

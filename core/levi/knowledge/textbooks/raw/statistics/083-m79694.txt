@@ -1,0 +1,878 @@
+# m79694
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Outliers
+
+Outliers
+
+In some data sets, there are values (observed data points) called outliers. Outliers are observed data points that are far from the least-squares line. They have large errors, where the error or residual is not very close to the best-fit line.
+
+Outliers need to be examined closely. Sometimes, they should not be included in the analysis of the data, like if it is possible that an outlier is a result of incorrect data. Other times, an outlier may hold valuable information about the population under study and should remain included in the data. The key is to examine carefully what causes a data point to be an outlier.
+
+Besides outliers, a sample may contain one or a few points that are called influential points. Influential points are observed data points that are far from the other observed data points in the horizontal direction. These points may have a big effect on the slope of the regression line. To begin to identify an influential point, you can remove it from the data set and determine whether the slope of the regression line is changed significantly.
+
+You also want to examine how the correlation coefficient, r, has changed. Sometimes, it is difficult to discern a significant change in slope, so you need to look at how the strength of the linear relationship has changed. Computers and many calculators can be used to identify outliers and influential points. Regression analysis can determine if an outlier is, indeed, an influential point. The new regression will show how omitting the outlier will affect the correlation among the variables, as well as the fit of the line. A graph showing both regression lines helps determine how removing an outlier affects the fit of the model.
+
+Identifying Outliers
+
+We could guess at outliers by looking at a graph of the scatter plot and best-fit line. However, we would like some guideline regarding how far away a point needs to be to be considered an outlier. As a rough rule of thumb, we can flag as an outlier any point that is located farther than two standard deviations above or below the best-fit line. The standard deviation used is the standard deviation of the residuals or errors.
+
+We can do this visually in the scatter plot by drawing an extra pair of lines that are two standard deviations above and below the best-fit line. Any data points outside this extra pair of lines are flagged as potential outliers. Or, we can do this numerically by calculating each residual and comparing it with twice the standard deviation. With regard to the TI-83, 83+, or 84+ calculators, the graphical approach is easier. The graphical procedure is shown first, followed by the numerical calculations. You would generally need to use only one of these methods.
+
+In the third exam/final exam example, you can determine whether there is an outlier. If there is an outlier, as an exercise, delete it and fit the remaining data to a new line. For this example, the new line ought to fit the remaining data better. This means the SSE (sum of the squared errors) should be smaller and the correlation coefficient ought to be closer to 1 or –1.
+Graphical Identification of OutliersWith the TI-83, 83+, or 84+ graphing calculators, it is easy to identify the outliers graphically and visually. If we were to measure the vertical distance from any data point to the corresponding point on the line of best fit and that distance were equal to 2s or more, then we would consider the data point to be too far from the line of best fit. We need to find and graph the lines that are two standard deviations below and above the regression line. Any points that are outside these two lines are outliers. Let’s call these lines Y2 and Y3.
+
+Graphical Identification of Outliers
+
+As we did with the equation of the regression line and the correlation coefficient, we will use technology to calculate this standard deviation for us. Using the LinRegTTest with these data, scroll down through the output screens to find s = 16.412.
+
+Line Y2 = –173.5 + 4.83x – 2(16.4), and line Y3 = –173.5 + 4.83x + 2(16.4),where ŷ = –173.5 + 4.83x is the line of best fit. Y2 and Y3 have the same slope as the line of best fit.
+
+Graph the scatter plot with the best-fit line in equation Y1, then enter the two extra lines as Y2 and Y3 in the Y= equation editor. Press ZOOM-9 to get a good view. You will see that the only point that is not between Y2 and Y3 is the point (65, 175). On the calculator screen, it is barely outside these lines, but it is considered an outlier because it is more than two standard deviations away from the best-fit line. The outlier is the student who had a grade of 65 on the third exam and 175 on the final exam.
+
+Sometimes a point is so close to the lines used to flag outliers on the graph that it is difficult to tell whether the point is between or outside the lines. On a computer, enlarging the graph may help; on a small calculator screen, zooming in may make the graph clearer. Note that when the graph does not give a clear enough picture, you can use the numerical comparisons to identify outliers.
+
+Try It
+
+Identify the potential outlier in the scatter plot. The standard deviation of the residuals, or errors, is approximately 8.6.
+
+The outlier appears to be at (6, 58). The expected y value on the line for the point (6, 58) is approximately 82. Fifty-eight is 24 units from 82. Twenty-four is more than two standard deviations (2s = (2)(8.6) = 17.2 ). So 82 is more than two standard deviations from 58, which makes (6, 58) a potential outlier.
+
+Numerical Identification of Outliers
+
+In , the first two columns include the third exam and final exam data. The third column shows the predicted ŷ values calculated from the line of best fit: ŷ = –173.5 + 4.83x. The residuals, or errors, that were mentioned in Section 3 of this chapter have been calculated in the fourth column of the table: Observed y value  predicted y value = y  ŷ.
+s is the standard deviation of all the y  ŷ = ε values, where n is the total number of data points. If each residual is calculated and squared, and the results are added, we get the SSE. The standard deviation of the residuals is calculated from the SSE as
+
+Note
+
+We divide by (n – 2) because the regression model involves two estimates.
+
+Rather than calculate the value of s ourselves, we can find s using a computer or calculator. For this example, the calculator function LinRegTTest found s = 16.4 as the standard deviation of the residuals 35
+–17
+16
+–6
+–19
+9
+3
+–1
+–10
+–9
+–1
+.
+
+35
+
+–17
+
+16
+
+–6
+
+–19
+
+9
+
+3
+
+–1
+
+–10
+
+–9
+
+–1
+y – ŷ
+65
+175
+140
+175 – 140 = 35
+67
+133
+150
+133 – 150= –17
+71
+185
+169
+185 – 169 = 16
+71
+163
+169
+163 – 169 = –6
+66
+126
+145
+126 – 145 = –19
+75
+198
+189
+198 – 189 = 9
+67
+153
+150
+153 – 150 = 3
+70
+163
+164
+163 – 164 = –1
+71
+159
+169
+159 – 169 = –10
+69
+151
+160
+151 – 160 = –9
+69
+159
+160
+159 – 160 = –1
+We are looking for all data points for which the residual is greater than 2s = 2(16.4) = 32.8 or less than –32.8. Compare these values with the residuals in column four of the table. The only such data point is the student who had a grade of 65 on the third exam and 175 on the final exam; the residual for this student is 35.
+
+How Does the Outlier Affect the Best-Fit Line?
+
+Numerically and graphically, we have identified point (65, 175) as an outlier. Recall that recalculation of the least-squares regression line and summary statistics, following deletion of an outlier, may be used to determine whether an outlier is also an influential point. This process also allows you to compare the strength of the correlation of the variables and possible changes in the slope both before and after the omission of any outliers.
+
+Compute a new best-fit line and correlation coefficient using the 10 remaining points.
+
+On the TI-83, TI-83+, or TI-84+ calculators, delete the outlier from L1 and L2. Using the LinRegTTest, found under Stat and Tests, the new line of best fit and correlation coefficient are the following:
+ŷ
+ =−355.19+7.39x
+ 
+ and 
+ 
+ r=0.9121
+ 
+.
+
+The slope is now 7.39, compared to the previous slope of 4.83. This seems significant, but we need to look at the change in r-values as well. The new line shows 
+ 
+ r=0.9121
+ 
+, which indicates a stronger correlation than the original line, with 
+ 
+ r=0.6631
+,
+ 
+ since 
+ 
+ r=0.9121
+ 
+ is closer to 1. This means the new line is a better fit to the data values. The line can better predict the final exam score given the third exam score. It also means the outlier of (65, 175) was an influential point, since there is a sizeable difference in r-values. We must now decide whether to delete the outlier. If the outlier was recorded erroneously, it should certainly be deleted. Because it produces such a profound effect on the correlation, the new line of best fit allows for better prediction and an overall stronger model.
+
+You may use Excel to graph the two least-squares regression lines and compare the slopes and fit of the lines to the data, as shown in .
+
+You can see that the second graph shows less deviation from the line of best fit. It is clear that omission of the influential point produced a line of best fit that more closely models the data.
+
+Numerical Identification of Outliers: Calculating s and Finding Outliers Manually
+
+If you do not have the function LinRegTTest on your calculator, then you must calculate the outlier in the first example by doing the following.
+
+First, square each |y – ŷ|.
+
+The squares are 
+352
+172
+162
+62
+192
+92
+32
+12
+102
+92
+12.
+
+352
+
+172
+
+162
+
+62
+
+192
+
+92
+
+32
+
+12
+
+102
+
+92
+
+12.
+
+Then, add (sum) all the |y – ŷ| squared terms using the formula
+Σ
+ 
+ i = 1
+
+ 11
+
+ (
+ 
+ |
+ y
+ i
+ 
+ −
+ŷ
+ i
+ 
+ |
+ 
+ )
+ 
+ 2
+ 
+ =
+
+ Σ
+ 
+ i = 1
+
+ 11
+
+ ε
+ i
+
+ 2
+
+ (Recall that yi – ŷi = εi).
+
+= 352 + 172 + 162 + 62 + 192 + 92 + 32 + 12 + 102 + 92 + 12
+
+= 2,440 = SSE.
+
+The result, SSE, is the sum of squared errors.
+
+Next, calculate s, the standard deviation of all the y – ŷ = ε-values where n = the total number of data points.
+
+The calculation is s=
+
+SSE
+n–2
+
+.
+
+For the third exam/final exam example, s=
+
+2440
+11–2
+
+=16.47.
+
+Next, multiply s by 2:
+(2)(16.47) = 32.94
+32.94 is two standard deviations away from the mean of the y – ŷ values.
+
+If we were to measure the vertical distance from any data point to the corresponding point on the line of best fit and that distance is at least 2s, then we would consider the data point to be too far from the line of best fit. We call that point a potential outlier.
+
+For the example, if any of the |y – ŷ| values are at least 32.94, the corresponding (x, y) data point is a potential outlier.
+
+For the third exam/final exam example, all the |y – ŷ| values are less than 31.29 except for the first one, which is 35:
+
+35 > 31.29. That is, |y – ŷ| ≥ (2)(s).
+
+The point that corresponds to |y – ŷ| = 35 is (65, 175). Therefore, the data point (65, 175) is a potential outlier. For this example, we will delete it. (Remember, we do not always delete an outlier.)
+
+Note
+When outliers are deleted, the researcher should either record that data were deleted, and why, or the researcher should provide results both with and without the deleted data. If data are erroneous and the correct values are known (e.g., student 1 actually scored a 70 instead of a 65), then this correction can be made to the data.The next step is to compute a new best-fit line using the 10 remaining points. The new line of best fit and the correlation coefficient are
+
+Note
+
+When outliers are deleted, the researcher should either record that data were deleted, and why, or the researcher should provide results both with and without the deleted data. If data are erroneous and the correct values are known (e.g., student 1 actually scored a 70 instead of a 65), then this correction can be made to the data.
+ŷ = –355.19 + 7.39x and r = .9121.
+
+Using this new line of best fit (based on the remaining 10 data points in the third exam/final exam example), what would a student who receives a 73 on the third exam expect to receive on the final exam? Is this the same as the prediction made using the original line?
+
+Using the new line of best fit, ŷ = –355.19 + 7.39(73) = 184.28. A student who scored 73 points on the third exam would expect to earn 184 points on the final exam.
+
+The original line predicted that ŷ = –173.51 + 4.83(73) = 179.08, so the prediction using the new line with the outlier eliminated differs from the original prediction.
+
+Try It
+
+The data points for the graph from the third exam/final exam example are as follows: (1, 5), (2, 7), (2, 6), (3, 9), (4, 12), (4, 13), (5, 18), (6, 19), (7, 12), and (7, 21). Remove the outlier and recalculate the line of best fit. Find the value of ŷ when x = 10.
+ŷ = 1.04 + 2.96x = 30.64.
+
+The consumer price index (CPI) measures the average change over time in prices paid by urban consumers for consumer goods and services. The CPI affects nearly all Americans because of the many ways it is used. One of its biggest uses is as a measure of inflation. By providing information about price changes in the nation’s economy to government, businesses, and labor forces, the CPI helps them make economic decisions. The president, U.S. Congress, and the Federal Reserve Board use CPI trends to form monetary and fiscal policies. In the following table, x is the year and y is the CPI.
+y
+1915
+10.1
+1969
+36.7
+1926
+17.7
+1975
+49.3
+1935
+13.7
+1979
+72.6
+1940
+14.7
+1980
+82.4
+1947
+24.1
+1986
+109.6
+1952
+26.5
+1991
+130.7
+1964
+31.0
+1999
+166.6
+Draw a scatter plot of the data.
+
+Calculate the least-squares line. Write the equation in the form ŷ = a + bx.
+
+Draw the line on a scatter plot.
+
+Find the correlation coefficient. Is it significant?
+
+What is the average CPI for the year 1990?
+
+See .
+
+Using our calculator, ŷ = 3204 + 1.662x is the equation of the line of best fit.
+
+See .
+r = 0.8694. The number of data points is n = 14. Use the 95 Percent Critical Values of the Sample Correlation Coefficient table at the end of Chapter 12: In this case, df = 12. The corresponding critical values from the table are ±0.532. Since 0.8694 > 0.532, r is significant. We can use the predicted regression line we found above to make the prediction for x = 1990.
+ŷ = 3204 + 1.662(1990) = 103.4 CPI.
+
+Note
+
+In the example, notice the pattern of the points compared with the line. Although the correlation coefficient is significant, the pattern in the scatter plot indicates that a curve would be a more appropriate model to use than a line. In this example, a statistician would prefer to use other methods to fit a curve to these data, rather than model the data with the line we found. In addition to doing the calculations, it is always important to look at the scatter plot when deciding whether a linear model is appropriate.
+
+If you are interested in seeing more years of data, visit the Bureau of Labor Statistics CPI website (ftp://ftp.bls.gov/pub/special.requests/cpi/cpiai.txt). Our data are taken from the column Annual Avg. (third column from the right). For example, you could add more current years of data. Try adding the more recent years: 2004, CPI = 188.9; 2008, CPI = 215.3; and 2011, CPI = 224.9. See how this affects the model. (Check: ŷ = –4436 + 2.295x; r = 0.9018. Is r significant? Is the fit better with the addition of the new points?)
+
+Try It
+
+The following table shows economic development measured in per capita income (PCINC).
+
+Year
+PCINC
+Year
+PCINC
+1870
+340
+1920
+1,050
+1880
+499
+1930
+1,170
+1890
+592
+1940
+1,364
+1900
+757
+1950
+1,836
+1910
+927
+1960
+2,132
+What are the independent and dependent variables?
+
+Draw a scatter plot.
+
+Use regression to find the line of best fit and the correlation coefficient.
+
+Interpret the significance of the correlation coefficient.
+
+Is there a linear relationship between the variables?
+
+Find the coefficient of determination and interpret it.
+
+What is the slope of the regression equation? What does it mean?
+
+Use the line of best fit to estimate PCINC for 1900 and for 2000.
+
+Determine whether there are any outliers.
+
+a. The independent variable (x) is the year and the dependent variable (y) is the per capita income.
+
+b.
+
+c. ŷ = 18.61x – 34574; r = 0.9732
+
+d. At df = 8, the critical value is 0.632. The r-value is significant because it is greater than the critical value.
+
+e. There does appear to be a linear relationship between the variables.
+
+f. The coefficient of determination is 0.947, which means that 94.7% of the variation in PCINC is explained by the variation in the years.
+
+g. and h. The slope of the regression equation is 18.61, and it means that per capita income increases by $18.61 for each passing year. ŷ = 785 when the year is 1900, and ŷ = 2,646 when the year is 2000.
+
+i. There do not appear to be any outliers.
+
+95 Percent Critical Values of the Sample Correlation Coefficient Table
+
+Degrees of Freedom: n – 2
+Critical Values: + and –
+1
+0.997
+2
+0.950
+3
+0.878
+4
+0.811
+5
+0.754
+6
+0.707
+7
+0.666
+8
+0.632
+9
+0.602
+10
+0.576
+11
+0.555
+12
+0.532
+13
+0.514
+14
+0.497
+15
+0.482
+16
+0.468
+17
+0.456
+18
+0.444
+19
+0.433
+20
+0.423
+21
+0.413
+22
+0.404
+23
+0.396
+24
+0.388
+25
+0.381
+26
+0.374
+27
+0.367
+28
+0.361
+29
+0.355
+30
+0.349
+40
+0.304
+50
+0.273
+60
+0.250
+70
+0.232
+80
+0.217
+90
+0.205
+100
+0.195
+References
+
+Committee on Ways and Means, U.S. House of Representatives. (n.d.). Washington, DC: U.S. Department of Health and Human Services.
+
+Microsoft Bookshelf. (n.d.).
+
+Physicians Desk Reference Staff. (1990). Physicians desk reference. Ohio: Medical Economics Company.
+
+U.S. Bureau of Labor Statistics. (n.d.). Retrieved from https://www.bls.gov/
+
+Chapter Review
+
+To determine whether a point is an outlier, do one of the following:
+ Input the following equations into the TI 83, 83+, 84, or 84+ calculator:
+
+ y
+ 1
+ 
+ =a+bx
+
+ y
+ 2
+ 
+ =a+bx+2s
+
+ y
+ 3
+ 
+ =a+bx–2s
+
+where s is the standard deviation of the residuals.If any point is above y2 or below y3, then the point is considered to be an outlier.
+
+ Use the residuals and compare their absolute values to 2s, where s is the standard deviation of the residuals. If the absolute value of any residual is greater than or equal to 2s, then the corresponding point is an outlier.
+
+ Note: The calculator function LinRegTTest (STATS, TESTS, LinRegTTest) calculates s.
+
+Input the following equations into the TI 83, 83+, 84, or 84+ calculator:
+
+ y
+ 1
+ 
+ =a+bx
+
+ y
+ 2
+ 
+ =a+bx+2s
+
+ y
+ 3
+ 
+ =a+bx–2s
+
+where s is the standard deviation of the residuals.If any point is above y2 or below y3, then the point is considered to be an outlier.
+y
+ 1
+ 
+ =a+bx
+
+ y
+ 2
+ 
+ =a+bx+2s
+
+ y
+ 3
+ 
+ =a+bx–2s
+
+where s is the standard deviation of the residuals.
+
+If any point is above y2 or below y3, then the point is considered to be an outlier.
+
+Use the residuals and compare their absolute values to 2s, where s is the standard deviation of the residuals. If the absolute value of any residual is greater than or equal to 2s, then the corresponding point is an outlier.
+
+Note: The calculator function LinRegTTest (STATS, TESTS, LinRegTTest) calculates s.
+
+Marcus states that all outliers are influential points. Is he correct? Explain.
+
+No, he is not correct. An outlier is only an influential point if it significantly impacts the slope of the least-squares regression line and the correlation coefficient, r. If omission of this data point from the calculation of the regression line does not show much impact on the slope or r-value, then the outlier is not considered an influential point. For different reasons, it still may be determined that the data point must be omitted from the data set.
+Use the following information to answer the next four exercises. The scatter plot shows the relationship between hours spent studying and exam scores. The line shown is the calculated line of best fit. The correlation coefficient is 0.69.
+
+Do there appear to be any outliers?
+
+Yes. There appears to be an outlier at (6, 58).
+
+A point is removed and the line of best fit is recalculated. The new correlation coefficient is 0.98. Does the point appear to have been an outlier? Why?
+
+What effect did the potential outlier have on the line of best fit?
+
+The potential outlier flattened the slope of the line of best fit because it was below the data set. It made the line of best fit less accurate as a predictor for the data.
+
+Are you more or less confident in the predictive ability of the new line of best fit?
+
+The sum of squared errors (SSE) for a data set of 18 numbers is 49. What is the standard deviation?
+s = 1.75
+
+The standard deviation for the SSE for a data set is 9.8. What is the cutoff for the vertical distance that a point can be from the line of best fit to be considered an outlier?
+
+Homework
+
+Given the information in Table 12.30, which represents the relationship between final exam math grades and final exam history grades, decide whether point (56, 95) is an influential point. Explain how you arrived at your decision. Show all work.
+y (final exam history grades)
+54
+60
+56
+68
+77
+82
+74
+78
+63
+69
+51
+55
+88
+97
+72
+77
+69
+78
+56
+95
+Using LinRegTTest, the output for the original least-squares regression line is 
+ 
+ y=26.14+0.7539x
+ 
+ and 
+ 
+ r=0.6657
+.
+
+The output for the new least-squares regression line, after omitting the outlier of (56, 95), is 
+ 
+ŷ
+ =6.36+1.0045x
+ 
+ and 
+ 
+ r=0.9757
+.
+
+The slope of the new line is quite a bit different from the slope of the original least-squares regression line, but the larger change is shown in the r-values, such that the new line has an r-value that has increased to a value that is almost equal to one.
+
+Thus, it may be stated that the outlier (56, 95) is also an influential point.
+
+In Table 12.31, the height (sidewalk to roof) of notable tall buildings in America is compared with the number of stories of the building (beginning at street level).
+
+Height (in feet)
+Stories
+1,050
+57
+428
+28
+362
+26
+529
+40
+790
+60
+401
+22
+380
+38
+1,454
+110
+1,127
+100
+700
+46
+Using stories as the independent variable and height as the dependent variable, make a scatter plot of the data.
+
+Does it appear from inspection that there is a relationship between the variables?
+
+Calculate the least-squares line. Put the equation in the form ŷ = a + bx.
+
+Find the correlation coefficient. Is it significant?
+
+Find the estimated heights for a building that has 32 stories and for a building that has 94 stories.
+
+Based on the data in , is there a linear relationship between the number of stories in tall buildings and the height of the buildings?
+
+Are there any outliers in the data? If so, which point(s)?
+
+What is the estimated height of a building with six stories? Does the least-squares line give an accurate estimate of height? Explain why or why not.
+
+Based on the least-squares line, adding an extra story is predicted to add about how many feet to a building?
+
+What is the slope of the least-squares (best-fit) line? Interpret the slope.
+
+Ornithologists (scientists who study birds) tag sparrow hawks in 13 different colonies to study their population. They gather data for the percentage of new sparrow hawks in each colony and the percentage of those that have returned from migration.
+
+Percent return: 74, 66, 81, 52, 73, 62, 52, 45, 62, 46, 60, 46, 38
+Percent new: 5, 6, 8, 11, 12, 15, 16, 17, 18, 18, 19, 20, 20
+
+Enter the data into a calculator and make a scatter plot.
+
+Use the calculator’s regression function to find the equation of the least-squares regression line. Add this to your scatter plot from Part A.
+
+Explain what the slope and y-intercept of the regression line tell us.
+
+How well does the regression line fit the data? Explain your response.
+
+Which point has the largest residual? Explain what the residual means in context. Is this point an outlier? An influential point? Explain.
+
+An ecologist wants to predict how many birds will join another colony of sparrow hawks to which 70 percent of the adults from the previous year have returned. What is the prediction?
+
+a. and b. Check student solution.
+
+c. The slope of the regression line is 0.3031 with a y-intercept of 31.93. In context, the y-intercept indicates that when there are no returning sparrow hawks, there will be almost 32 percent new sparrow hawks, which doesn’t make sense, because if there are no returning birds, then the new percentage would have to be 100% (this is an example of why we do not extrapolate). The slope tells us that for each percentage increase in returning birds, the percentage of new birds in the colony decreases by 30.3 percent.
+
+d. If we examine r2, we see that only 57.52 percent of the variation in the percentage of new birds is explained by the model and the correlation coefficient, r = .7584 only indicates a somewhat strong correlation between returning and new percentages.
+
+e. The ordered pair (66, 6) generates the largest residual of 6.0. This means that when the observed return percentage is 66 percent, our observed new percentage, 6 percent, is almost 6 percent less than the predicted new value of 11.98 percent. If we remove this data pair, we see only an adjusted slope of 0.2789 and an adjusted intercept of 30.9816. In other words, although these data generate the largest residual, it is not an outlier, nor is the data pair an influential point.
+
+f. If there are 70 percent returning birds, we would expect to see y = 0.2789(70) + 30.9816 = 0.114 or 11.4 percent new birds in the colony.
+
+The following table shows data on average per capita coffee consumption and death rate from heart disease in a random sample of 10 countries.
+Yearly Coffee Consumption (liters)
+2.5
+3.9
+2.9
+2.4
+2.9
+0.8
+9.1
+2.7
+0.8
+No. of Deaths from Heart Disease
+221
+167
+131
+191
+220
+297
+71
+172
+211
+300
+Enter the data into a calculator and make a scatter plot.
+
+Use the calculator’s regression function to find the equation of the least-squares regression line. Add this to your scatter plot from Part A.
+
+Explain what the slope and y-intercept of the regression line tell us.
+
+How well does the regression line fit the data? Explain your response.
+
+Which point has the largest residual? Explain what the residual means in context. Is this point an outlier? An influential point? Explain.
+
+Do the data provide convincing evidence that there is a linear relationship between the amount of coffee consumed and the heart disease death rate? Carry out an appropriate test at a significance level of 0.05 to help answer this question.
+
+The following table consists of one student athlete’s time (in minutes) to swim 2,000 yards and the student’s heart rate (beats per minute) after swimming on a random sample of 10 days.
+
+Swim Time
+Heart Rate
+34.12
+144
+35.72
+152
+34.72
+124
+34.05
+140
+34.13
+152
+35.73
+146
+36.17
+128
+35.57
+136
+35.37
+144
+35.57
+148
+Enter the data into a calculator and make a scatter plot.
+
+Use the calculator’s regression function to find the equation of the least-squares regression line. Add this to your scatter plot from Part A.
+
+Explain what the slope and y-intercept of the regression line tell us.
+
+How well does the regression line fit the data? Explain your response.
+
+Which point has the largest residual? Explain what the residual means in context. Is this point an outlier? An influential point? Explain.
+
+Check student solution.
+
+Check student solution.
+
+We have a slope of –1.4946 with a y-intercept of 193.88. The slope, in context, indicates that for each additional minute added to the swim time, the heart rate decreases by 1.5 beats per minute. If the student is not swimming at all, the y-intercept indicates that his heart rate will be 193.88 beats per minute. Although the slope has meaning (the longer it takes to swim 2000 m, the less effort the heart puts out), the y-intercept does not make sense. If the athlete is not swimming (resting), then his heart rate should be very low.
+
+Because only 1.5 percent of the heart rate variation is explained by this regression equation, we must conclude that this association is not explained with a linear relationship.
+
+Point (34.72, 124) generates the largest residual: –11.82. This means that our observed heart rate is almost 12 beats less than our predicted rate of 136 beats per minute. When this point is removed, the slope becomes 2.953, with the y-intercept changing to 247.1616. Although the linear association is still very weak, we see that the removed data pair can be considered an influential point in the sense that the y-intercept becomes more meaningful.
+
+A researcher is investigating whether population impacts homicide rate. He uses demographic data from Detroit, Michigan, to compare homicide rates and the population.
+
+Population Size
+Homicide Rate per 100,000 People
+558,724
+8.6
+538,584
+8.9
+519,171
+8.52
+500,457
+8.89
+482,418
+13.07
+465,029
+14.57
+448,267
+21.36
+432,109
+28.03
+416,533
+31.49
+401,518
+37.39
+387,046
+46.26
+373,095
+47.24
+359,647
+52.33
+Use a calculator to construct a scatter plot of the data. What is the independent variable? Why?
+
+Use the calculator’s regression function to find the equation of the least-squares regression line. Add this to your scatter plot.
+
+Discuss what the following mean in context:
+The slope of the regression equation
+The y-intercept of the regression equation
+The correlation coefficient, r
+The coefficient of determination, r2
+
+The slope of the regression equation
+
+The y-intercept of the regression equation
+
+The correlation coefficient, r
+
+The coefficient of determination, r2
+
+Do the data provide convincing evidence that there is a linear relationship between population size and homicide rate? Carry out an appropriate test at a significance level of 0.05 to help answer this question.
+
+School
+Mid-Career Salary (in thousands of U.S. dollars)
+Yearly Tuition (in U.S. dollars)
+Princeton
+137
+28,540
+Harvey Mudd
+135
+40,133
+CalTech
+127
+39,900
+U.S. Naval Academy
+122
+0
+West Point
+120
+0
+MIT
+118
+42,050
+Lehigh University
+118
+43,220
+NYU-Poly
+117
+39,565
+Babson College
+117
+40,400
+Stanford
+114
+54,506
+Use the data in the Table 12.35 to determine the linear regression line equation with the outliers removed. Is there a linear correlation for the data set with outliers removed? Justify your answer.
+
+If we remove the two service academies (the t
+[truncated]

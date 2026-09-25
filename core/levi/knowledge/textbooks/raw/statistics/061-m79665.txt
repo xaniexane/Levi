@@ -1,0 +1,755 @@
+# m79665
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Additional Information and Full Hypothesis Test Examples
+
+Additional Information and Full Hypothesis Test Examples
+
+In a hypothesis test problem, you may see words such as "the level of significance is 1 percent". The "1 percent" is the preconceived or preset α.
+
+The statistician setting up the hypothesis test selects the value of α to use before collecting the sample data.
+If no level of significance is given, a common standard to use is α = 0.05.
+
+When you calculate the p-value and draw the picture, the p-value is the area in the left tail, the right tail, or split evenly between the two tails. For this reason, we call the hypothesis test left, right, or two tailed.
+
+The alternative hypothesis, Ha, tells you if the test is left, right, or two-tailed. It is the key to conducting the appropriate test.
+Ha never has a symbol that contains an equal sign.
+Thinking about the meaning of the p-value: A data analyst should have more confidence that he made the correct decision to reject the null hypothesis with a smaller p-value (for example, 0.001 as opposed to 0.04) even if using the 0.05 level for alpha. Similarly, for a large p-value such as 0.4, as opposed to a p-value of 0.056 (alpha = 0.05 is less than either number), a data analyst should have more confidence that she made the correct decision in not rejecting the null hypothesis. This makes the data analyst use judgment rather than mindlessly applying rules.
+
+The following examples illustrate a left-, right-, and two-tailed test.
+H0: μ = 5   Ha: μ < 5
+
+Test of a single population mean. Ha tells you the test is left-tailed. The picture of the p-value is as follows:
+
+Try It
+H0: μ = 10   Ha: μ < 10
+
+Assume the p-value is 0.0935. What type of test is this? Draw the picture of the p-value.
+
+left-tailed test
+H0: p ≤ 0.2  Ha: p > 0.2
+
+This is a test of a single population proportion. Ha tells you the test is right-tailed. The picture of the p-value is as follows:
+
+Try It
+H0: μ ≤ 1   Ha: μ > 1
+
+Assume the p-value is 0.1243. What type of test is this? Draw the picture of the p-value.
+
+right-tailed test
+H0: p = 50  Ha: p ≠ 50
+
+This is a test of a single population mean. Ha tells you the test is two-tailed. The picture of the p-value is as follows.
+
+Try It
+H0: p = 0.5   Ha: p ≠ 0.5
+
+Assume the p-value is 0.2564. What type of test is this? Draw the picture of the p-value.
+
+two-tailed test
+
+Full Hypothesis Test Examples
+
+Jeffrey, as an eight-year-old, established a mean time of 16.43 seconds for swimming the 25-yard freestyle, with a standard deviation of 0.8 seconds. His dad, Frank, thought that Jeffrey could swim the 25-yard freestyle faster using goggles. Frank bought Jeffrey a new pair of expensive goggles and timed Jeffrey for 15 25-yard freestyle swims. For the 15 swims, Jeffrey's mean time was 16 seconds. Frank thought that the goggles helped Jeffrey to swim faster than the 16.43 seconds. Conduct a hypothesis test using a preset α = 0.05. Assume that the swim times for the 25-yard freestyle are normal.
+
+Set up the hypothesis test:
+
+Since the problem is about a mean, this is a test of a single population mean.
+H0: μ = 16.43  Ha: μ < 16.43
+
+For Jeffrey to swim faster, his time will be less than 16.43 seconds. The "<" tells you this is left-tailed.
+
+Determine the distribution needed:
+Random variable: X = the mean time to swim the 25-yard freestyle.
+Distribution for the test: X is normal (population standard deviation is known: σ = 0.8)
+
+with mean 
+
+ μ=16.43
+
+ and standard error of 
+
+ 0.8
+
+ 15
+
+;
+μ = 16.43 comes from H0 and not the data. σ = 0.8, and n = 15.
+
+Using a table or a calculator, we can calculate the p-value as the area to the left of 16 under the normal curve:
+p-value = P(
+ 
+ x
+ ¯
+
+ < 16) = 0.0187 where the sample mean in the problem is given as 16.
+p-value = 0.0187. The p-value is the area to the left of the sample mean given as 16.
+Graph:
+μ = 16.43 comes from H0. Our assumption is μ = 16.43.
+Interpretation of the p-value: If H0 is true, there is a 0.0187 probability (1.87 percent), that Jeffrey's mean time to swim the 25-yard freestyle is 16 seconds or less. Because a 1.87 percent chance is small, the mean time of 16 seconds or less is unlikely to have happened randomly. It is a rare event.
+
+Compare α and the p-value:
+α = 0.05   p-value = 0.0187   α > p-value
+Make a decision: Since α > p-value, reject H0.
+
+An alternative approach is to find the z-test corresponding to the sample mean 
+
+ x
+ ¯
+ 
+ =16.
+
+ This is 
+
+ z-test=
+
+ x
+ ¯
+ 
+ −
+ μ
+ X
+
+ σ
+ X
+
+ n
+
+ =
+ 
+ 16−16.43
+
+ 0.8
+
+ 15
+
+ =-2.081729
+
+.
+
+The critical z-value = –1.645 for this test has probability 0.05 to its left tail, according to the Normal Table (see Appendices). Because the z-test is to the left of the critical z-value, we reject the null hypothesis.
+
+This means that you reject μ = 16.43. In other words, you do not think Jeffrey swims the 25-yard freestyle in 16.43 seconds but instead that he swims faster with the new goggles.
+Conclusion: At the 5 percent significance level, we conclude that Jeffrey swims faster using the new goggles. The sample data show there is sufficient evidence that Jeffrey's mean time to swim the 25-yard freestyle is less than 16.43 seconds.
+
+The p-value can easily be calculated.
+
+Press STAT and arrow over to TESTS. Press 1:z-Test. Arrow over to Stats and press ENTER. Arrow down and enter 16.43 for μ0 (null hypothesis), .8 for σ, 16 for the sample mean, and 15 for n. Arrow down to μ : (alternate hypothesis) and arrow over to < μ0. Press ENTER. Arrow down to Calculate and press ENTER. The calculator not only calculates the p-value (p = 0.0187) but it also calculates the test statistic (z-score) for the sample mean. μ < 16.43 is the alternative hypothesis. Do this set of instructions again except arrow to Draw(instead of Calculate). Press ENTER. A shaded graph appears with z = -2.08 (test statistic) and p = 0.0187 (p-value). Make sure when you use Draw that no other equations are highlighted in Y = and the plots are turned off.
+
+When the calculator does a z-Test, the z-Test function finds the p-value by doing a normal probability calculation:
+P(
+ x
+ ¯
+ 
+ <16)=
+ 
+ 2nd DISTR normcdf 
+ 
+ (
+ −10^99,16,16.43,0.8/
+ 
+ 15
+
+ )
+ .
+
+The Type I and Type II errors for this problem are as follows:
+
+The Type I error is to conclude that Jeffrey swims the 25-yard freestyle, on average, in
+less than 16.43 seconds when, in fact, he actually swims the 25-yard freestyle, on
+average, in 16.43 seconds. (Reject the null hypothesis when the null hypothesis is true.)
+
+The Type II error is that there is not evidence to conclude that Jeffrey swims the 25-yard freestyle, on average, in less than 16.43 seconds when, in fact, he actually does swim the 25-yard freestyle, on average, in less than 16.43 seconds. (Do not reject the null hypothesis when the null hypothesis is false.)
+
+Historical Note ()
+
+The traditional way to compare the two probabilities, α and the p-value, is to compare the critical value (z-score from α) to the test statistic (z-score from data). The calculated test statistic for the p-value is –2.08. (From the central limit theorem, the test statistic formula is 
+ 
+ z=
+
+ x
+ ¯
+ 
+ −
+ μ
+ X
+
+ (
+
+ σ
+ X
+
+ n
+
+ )
+
+.
+
+For this problem, 
+ 
+ x
+ ¯
+ 
+ = 16, μX = 16.43 from the null hypothesis, σX = 0.8, and n = 15.) You can find the critical value for α = 0.05 in the normal table (see Appendix H: Tables). The z-score for an area to the left equal to 0.05 is midway between –1.65 and –1.64 (0.05 is midway between 0.0505 and 0.0495). The z-score is –1.645. Since –1.645 > –2.08 (which demonstrates that α > p-value), reject H0. Traditionally, the decision
+to reject or not reject was done in this way. Today, comparing the two probabilities α and the p-value is very common. For this problem, the p-value, 0.0187, is considerably smaller than α, 0.05. You can be confident about your decision to reject. The graph shows α, the p-value, and the test statistic and the critical value.
+
+Try It
+
+The mean throwing distance of a football by Marco, a high school freshman quarterback, is 40 yards, with a standard deviation of two yards. The team coach tells Marco to adjust his grip to get more distance. The coach records the distances for 20 throws. For the 20 throws, Marco’s mean distance was 45 yards. The coach thought the different grip helped Marco throw farther than 40 yards. Conduct a hypothesis test using a preset α = 0.05. Assume the throw distances for footballs are normal.
+
+First, determine what type of test this is, set up the hypothesis test, find the p-value, sketch the graph, and state your conclusion.
+
+Press STAT and arrow over to TESTS. Press 1: z-Test. Arrow over to Stats and press ENTER. Arrow down and enter 40 for μ0 (null hypothesis), 2 for σ, 45 for the sample mean, and 20 for n. Arrow down to μ: (alternative hypothesis) and set it either as <, ≠, or >. Press ENTER. Arrow down to Calculate and press ENTER. The calculator not only calculates the p-value but it also calculates the test statistic (z-score) for the sample mean. Select <, ≠, or > for the alternative hypothesis. Do this set of instructions again except arrow to Draw (instead of Calculate). Press ENTER. A shaded graph appears with test statistic and p-value. Make sure when you use Draw that no other equations are highlighted in Y = and the plots are turned off.
+
+Since the problem is about a mean, this is a test of a single population mean.
+H0 : μ = 40
+Ha : μ > 40
+p = 0.0062
+
+Because p < α, we reject the null hypothesis. There is sufficient evidence to suggest that the change in grip improved Marco’s throwing distance.
+
+A college football coach records the mean weight that his players can bench press as 275 pounds, with a standard deviation of 55 pounds. Three of his players thought that the mean weight was more than that amount.
+They asked 30 of their teammates for their estimated maximum lift on the bench
+press exercise. The data ranged from 205 pounds to 385 pounds. The actual
+different weights were (frequencies are in parentheses)
+
+205(3)
+215(3)
+225(1)
+241(2)
+252(2)
+265(2)
+275(2)
+313(2)
+316(5)
+338(2)
+341(1)
+345(2)
+368(2)
+385(1).
+
+205(3)
+
+215(3)
+
+225(1)
+
+241(2)
+
+252(2)
+
+265(2)
+
+275(2)
+
+313(2)
+
+316(5)
+
+338(2)
+
+341(1)
+
+345(2)
+
+368(2)
+
+385(1)
+
+Conduct a hypothesis test using a 2.5 percent level of significance to determine if the bench press mean is more than 275 pounds.
+
+Set up the hypothesis test:
+
+Since the problem is about a mean weight, this is a test of a single population mean.
+H0: μ = 275   Ha: μ > 275   This is a right-tailed test.
+
+Calculating the distribution needed:
+
+Random variable: 
+ 
+ X
+ ¯
+ 
+ = the mean weight, in pounds, lifted by the football players.
+Distribution for the test: It is normal because σ is known.
+X
+ ¯
+ 
+ ~N(
+ 
+ 275,
+ 
+ 55
+
+ 30
+
+ )
+x
+ ¯
+ 
+ =286.2
+ 
+ pounds (from the data).
+σ = 55 pounds. Always use σ if you know it. We assume μ = 275 pounds unless our data shows us otherwise.
+
+First, we compute the sample mean:
+
+Next, we compute the z-test:
+
+Finally, the p-value is the probability to the right tail of the z-test, which we can compute from the table of z-scores as 0.5 - 0.36650 = 0.1335.
+p-value=P(
+ x
+ ¯
+ 
+ >286.2)=0.1323
+Interpretation of the p-value: If H0 is true, then there is a 0.1331 probability, 13.23 percent, that the football players can lift a mean weight of 286.2 pounds or more. Because a 13.23 percent chance is large enough, a mean weight lift of 286.2 pounds or more is not a rare event.
+
+Compare α and the p-value:
+Make a decision: Since α < p-value, do not reject H0.
+Conclusion: At the 2.5 percent level of significance, from the sample data, there is not sufficient evidence to conclude that the true mean weight lifted is more than 275 pounds.
+
+The p-value can easily be calculated.
+
+Put the data and frequencies into lists. Press STAT and arrow over to TESTS. Press 1:z-Test. Arrow over to Data and press ENTER. Arrow down and enter 275 for μ0, 55 for σ, the name of the list where you put the data, and the name of the list where you put the frequencies. Arrow down to μ: and arrow over to > μ0. Press ENTER. Arrow down to Calculate and press ENTER. The calculator not only calculates the p-value (p = 0.1331, a little different from the previous calculation—in it we used the sample mean rounded to one decimal place instead of the data), but also the test statistic (z-score) for the sample mean, the sample mean, and the sample standard deviation. μ > 275 is the alternative hypothesis. Do this set of instructions again except arrow to Draw (instead of Calculate). Press ENTER. A shaded graph appears with z = 1.112 (test statistic) and p = 0.1331 (p-value). Make sure when you use Draw that no other equations are highlighted in Y = and the plots are turned off.
+
+Statistics students believe that the mean score on the first statistics test is 65. A statistics instructor thinks the mean score is higher than 65. He samples 10 statistics students and obtains the scores 
+65
+65
+70
+67
+66
+63
+63
+68
+72
+71. He performs a hypothesis test using a 5 percent level of significance. The data are assumed to be from a normal distribution.
+
+65
+
+65
+
+70
+
+67
+
+66
+
+63
+
+63
+
+68
+
+72
+
+71
+
+Set up the hypothesis test:
+
+A 5 percent level of significance means that α = 0.05. This is a test of a single population mean.
+H0: μ = 65  Ha: μ > 65
+
+Since the instructor thinks the average score is higher, use a ">". The ">" means the test is right-tailed.
+
+Determine the distribution needed:
+Random variable: 
+ 
+ X
+ ¯
+
+ = average score on the first statistics test.
+Distribution for the test: If you read the problem carefully, you will notice that there is
+no population standard deviation given. You are only given n = 10 sample data values. Notice also that the data come from a normal distribution. This means that the distribution for the test is a Student's t-distribution.
+
+Use t-distribution. Therefore, the distribution for the test is t with nine degrees of freedom.
+
+Calculate the p-value using the Student's t-distribution:
+
+First, we compute the sample mean as
+
+Next, we compute the t-test as
+
+The p-value is the probability to the right tail of 1.98 in a t-distribution with nine degrees of freedom.
+p-value = P(
+ 
+ x
+ ¯
+
+ > 67) = 0.0396 where the sample mean and sample standard deviation are calculated as 67 and 3.1972 from the data.
+Interpretation of the p-value: If the null hypothesis is true, then there is a 0.0396
+probability (3.96 percent) that the sample mean is 65 or more.
+
+Compare α and the p-value:
+
+Since α = 0.05 and p-value = 0.0396, α > p-value.
+Make a decision: Since α > p-value, reject H0.
+
+Alternatively, according to a Student's t-distribution table (see Appendices), the critical t-value is 1.833. Since the t-test (1.98) is to the right of the critical t-value 1.833, we reject the null hypothesis.
+
+This decision means we reject μ = 65. In other words, we believe the average test score is more than 65.
+Conclusion: At a 5 percent level of significance, the sample data show sufficient evidence that the mean (average) test score is more than 65, just as the math instructor thinks.
+
+The p-value can easily be calculated.
+
+Put the data into a list. Press STAT and arrow over to TESTS. Press 2:T-Test. Arrow over to Data and press ENTER. Arrow down and enter 65 for μ0, the name of the list where you put the data, and 1 for Freq:. Arrow down to μ: and arrow over to > μ0. Press ENTER. Arrow down to Calculate and press ENTER. The calculator not only calculates the p-value (p = 0.0396) but it also calculates the test statistic (t-score) for the sample mean, the sample mean, and the sample standard deviation. μ > 65 is the alternative hypothesis. Do this set of instructions again except arrow to Draw (instead of Calculate). Press ENTER. A shaded graph appears with t = 1.9781 (test statistic) and p = 0.0396 (p-value). Make sure when you use Draw that no other equations are highlighted in Y = and the plots are turned off.
+
+Try It
+
+It is believed that a stock price for a particular company will grow at a rate of $5 per week with a standard deviation of $1. An investor believes the stock won’t grow as quickly. The changes in stock price are recorded for 10 weeks and are as follows: $4, $3, $2, $3, $1, $7, $2, $1, $1, $2. Perform a hypothesis test using a 5 percent level of significance. State the null and alternative hypotheses, find the p-value, state your conclusion, and identify the Type I and Type II errors.
+H0: μ = 5
+Ha: μ < 5
+p = 0.0082
+
+Because p < α, we reject the null hypothesis. There is sufficient evidence to suggest that the stock price of the company grows at a rate less than $5 a week.
+
+Type I Error: To conclude that the stock price is growing slower than $5 a week when, in fact, the stock price is growing at $5 a week (reject the null hypothesis when the null hypothesis is true).
+
+Type II Error: To conclude that the stock price is growing at a rate of $5 a week when, in fact, the stock price is growing slower than $5 a week (do not reject the null hypothesis when the null hypothesis is false).
+
+Joon believes that 50 percent of first-time brides in the United States are younger than their grooms. She performs a hypothesis test to determine if the percentage is the same or different from 50 percent. Joon samples 100 first-time brides and 53 reply that they are younger than their grooms. For the hypothesis test, she uses a 1 percent level of significance.
+
+Set up the hypothesis test:
+
+The 1 percent level of significance means that α = 0.01. This is a test of a single population proportion.
+H0: p = 0.50  Ha: p ≠ 0.50
+
+The words is the same or different from tell you this is a two-tailed test.
+
+Calculate the distribution needed:
+Random variable: P′ = the percentage of first-time brides who are younger than their grooms.
+Distribution for the test: The problem contains no mention of a mean. The information is given in terms of percentages. Use the distribution for P′, the estimated proportion.
+P′ follows a normal distribution with mean value 
+
+ μ=p,
+
+ and standard error 
+
+ σ=
+
+ p⋅q
+ 
+ n
+ 
+ .
+
+In our example, p = q = 0.5, and n = 100, where p = 0.50, q = 1 – p = 0.50, and n = 100.
+
+Calculate the p-value using the normal distribution for proportions:
+
+First, we compute the sample proportion as 
+
+ p
+ ^
+ 
+ =
+ 
+ 53
+
+ 100
+
+ =0.53.
+
+Next, the z-test is given by
+
+Since the z-test is positive, we compute the area to the right tail of 0.6 in a normal distribution, 
+
+ P(Z>0.6)=0.2742531.
+
+ Finally, because this is a two-sided test of significance, we multiply this probability times two to account for the left tail, and obtain 
+
+ p-value=2×0.2742531=0.5485062
+
+where x = 53, p′ = 
+
+ x
+ n
+ 
+  = 
+ 
+ 53
+
+ 100
+
+ = 0.53.
+Interpretation of the p-value: If the null hypothesis is true, there is 0.5485 probability,
+(54.85 percent) that the sample (estimated) proportion p′ is 0.53 or more OR 0.47 or less (see
+the graph in ).
+μ = p = 0.50 comes from H0, the null hypothesis.
+p′ = 0.53. Since the curve is symmetrical and the test is two-tailed, the p′ for the left tail is equal to 0.50 – 0.03 = 0.47 where μ = p = 0.50. (0.03 is the difference between 0.53 and 0.50.)
+
+Compare α and the p-value:
+
+Since α = 0.01 and p-value = 0.5485, α < p-value.
+Make a decision: Since α < p-value, you cannot reject H0.
+Conclusion: At the 1 percent level of significance, the sample data do not show sufficient evidence that the percentage of first-time brides who are younger than their grooms is different from 50 percent.
+
+The p-value can easily be calculated.
+
+Press STAT and arrow over to TESTS. Press 5:1-PropZTest. Enter .5 for p0, 53 for x and 100 for n. Arrow down to Prop and arrow to not equals p0. Press ENTER. Arrow down to Calculate and press ENTER. The calculator calculates the p-value (p = 0.5485) and the test statistic (z-score). Prop not equals .5 is the alternate hypothesis. Do this set of instructions again except arrow to Draw (instead of Calculate). Press ENTER. A shaded graph appears with z = 0.6 (test statistic) and p = 0.5485 (p-value). Make sure when you use Draw that no other equations are highlighted in Y = and the plots are turned off.
+
+The Type I and Type II errors are as follows:
+
+The Type I error is to conclude that the proportion of first-time brides who are younger than their grooms is different from 50 percent when, in fact, the proportion is actually 50 percent. Reject the null hypothesis when the null hypothesis is true.
+
+The Type II error is there is not enough evidence to conclude that the proportion of first-time brides who are younger than their grooms differs from 50 percent when, in fact, the proportion does differ from 50 percent. Do not reject the null hypothesis when the null hypothesis is false.
+
+Try It
+
+A teacher believes that 85 percent of students in the class will want to go on a field trip to the local zoo. She performs a hypothesis test to determine if the percentage is the same or different from 85 percent. The teacher samples 50 students and 39 reply that they would want to go to the zoo. For the hypothesis test, use a 1 percent level of significance.
+
+First, determine what type of test this is, set up the hypothesis test, find the p-value, sketch the graph, and state your conclusion.
+
+Since the problem is about percentages, this is a test of single population proportions.
+H0 : p = 0.85
+Ha: p ≠ 0.85
+p = 0.7554
+
+Because p > α, we fail to reject the null hypothesis. There is not sufficient evidence to suggest that the proportion of students that want to go to the zoo is not 85 percent.
+
+Suppose a consumer group suspects that the proportion of households that have three cell phones is 30 percent. A cell phone company has reason to believe that the proportion is not 30 percent. Before the cell phone company starts a big advertising campaign, it conducts a hypothesis test. The company's marketing people survey 150 households with the result that 43 of the households have three cell phones.
+
+The value that helps determine the p-value is p′. Calculate p′.
+What is a success for this problem?
+What is the level of significance?
+Draw the graph for this problem. Draw the horizontal axis. Label and shade appropriately.Calculate the p-value.
+Make a decision. _____________(Reject/Do not reject) H0 because____________.
+
+The value that helps determine the p-value is p′. Calculate p′.
+
+What is a success for this problem?
+
+What is the level of significance?
+
+Draw the graph for this problem. Draw the horizontal axis. Label and shade appropriately.Calculate the p-value.
+
+Make a decision. _____________(Reject/Do not reject) H0 because____________.
+
+Set up the hypothesis test:
+H0: p = 0.30   Ha: p ≠ 0.30
+
+Determine the distribution needed:
+
+The random variable is P′ = proportion of households that have three cell phones.
+
+The distribution for the hypothesis test is 
+ 
+ P'~N(
+ 
+ 0.30,
+
+ (0.30)⋅(0.70)
+
+ 150
+
+ )
+.
+p′ = 
+
+ x
+ n
+
+ where x is the number of successes and n is the total number in the sample.
+
+ x = 43, n = 150
+
+p′=
+
+ 43
+
+ 150
+ .
+p′ = 
+
+ x
+ n
+
+ where x is the number of successes and n is the total number in the sample.
+
+A success is having three cell phones in a household.
+
+The level of significance is the preset α. Since α is not given, assume that α = 0.05.
+First we compute the sample proportion 
+
+ p
+ ^
+ 
+ =
+ 
+ 43
+
+ 150
+
+ =0.287.
+
+Next, the z-test is given by
+
+ z-test=
+
+ p
+ ^
+ 
+ −p
+
+ p⋅q
+ 
+ n
+
+ =
+ 
+ 0.287–0.30
+
+ 0.30×0.70
+
+ 150
+
+ ≈–0.36
+ .
+
+Since the z-test is negative, we compute the area to the left tail of –0.36 in a normal distribution, 
+
+ P(Z<−0.36)≈0.3607902.
+
+ Finally, because this is a two-sided test of significance, we multiply this probability times two to account for the right tail, and obtain 
+
+ p-value=2×0.3607902=0.7215804.
+
+First we compute the sample proportion 
+
+ p
+ ^
+ 
+ =
+ 
+ 43
+
+ 150
+
+ =0.287.
+
+Next, the z-test is given by
+
+Since the z-test is negative, we compute the area to the left tail of –0.36 in a normal distribution, 
+
+ P(Z<−0.36)≈0.3607902.
+
+ Finally, because this is a two-sided test of significance, we multiply this probability times two to account for the right tail, and obtain 
+
+ p-value=2×0.3607902=0.7215804.
+
+Assuming that α = 0.05, α < p-value. The decision is do not reject H0 because there is not sufficient evidence to conclude that the proportion of households that have three cell phones is not 30 percent.
+
+Try It
+
+Marketers believe that 92 percent of adults in the United States own a cell phone. A cell phone manufacturer believes that number is actually lower. Two hundred American adults are surveyed, of which 174 report having cell phones. Use a 5 percent level of significance. State the null and alternative hypotheses, find the p-value, state your conclusion, and identify the Type I and Type II errors.
+H0: p = 0.92
+Ha: p < 0.92
+p-value = 0.0046
+
+Because p < 0.05, we reject the null hypothesis. There is sufficient evidence to conclude that fewer than 92 percent of American adults own cell phones.
+
+Type I Error: To conclude that fewer than 92 percent of American adults own cell phones when, in fact, 92 percent of American adults do own cell phones (reject the null hypothesis when the null hypothesis is true).
+
+Type II Error: To conclude that 92 percent of American adults own cell phones when, in fact, fewer than 92 percent of American adults own cell phones (do not reject the null hypothesis when the null hypothesis is false).
+
+The next example is a poem written by a statistics student named Nicole Hart. The solution to the problem follows the poem. Notice that the hypothesis test is for a single population proportion. This means that the null and alternate hypotheses use the parameter p. The distribution for the test is normal. The estimated proportion p′ is the proportion of fleas killed to the total fleas found on Fido. This is sample information. The problem gives a preconceived α = 0.01, for comparison, and a 95 percent confidence interval computation. The poem is clever and humorous, so please enjoy it!
+
+My dog has so many fleas,
+They do not come off with ease.
+As for shampoo, I have tried many types
+Even one called Bubble Hype,
+Which only killed 25 percent of the fleas,
+Unfortunately I was not pleased.
+I've used all kinds of soap,
+Until I had given up hope
+Until one day I saw
+An ad that put me in awe.
+A shampoo used for dogs
+Called GOOD ENOUGH to Clean a Hog
+Guaranteed to kill more fleas.
+I gave Fido a bath
+And after doing the math
+His number of fleas
+Started dropping by 3's!
+Before his shampoo
+I counted 42.
+At the end of his bath,
+I redid the math
+And the new shampoo had killed 17 fleas.
+So now I was pleased.
+Now it is time for you to have some fun
+With the level of significance being .01,
+You must help me figure out
+Use the new shampoo or go without?
+
+Set up the hypothesis test:
+H0: p ≤ 0.25   Ha: p > 0.25
+
+Determine the distribution needed:
+
+In words, clearly state what your random variable 
+ 
+ X
+ ¯
+
+ or P′ represents.
+P′ = The proportion of fleas that are killed by the new shampoo
+
+State the distribution to use for the test.
+Normal:
+
+The z-test is given by
+
+Because this is a hypothesis test one-sided to the right, we compute the p-value as the area to the right tail of the z-test in a standard normal distribution, 
+
+ P(Z>3.32)≈0.0103.
+
+In one to two complete sentences, explain what the p-value means for this problem.
+
+If the null hypothesis is true (the proportion is 0.25), then there is a 0.0103 probability that the sample (estimated) proportion is 0.4048 (1742) or more.
+
+Use the previous information to sketch a picture of this situation. Clearly label and scale the horizontal axis and
+shade the region(s) corresponding to the p-value.
+
+Compare α and the p-value:
+
+Indicate the correct decision (reject or do not reject the null hypothesis) and the reason for it, and write an appropriate conclusion, using complete sentences.
+
+Alpha
+Decision
+Reason for Decision
+0.01
+Conclusion: At the 1 percent level of significance, the sample data do not show sufficient evidence that the percentage of fleas that are killed by the new shampoo is more than 25 percent.
+
+Construct a 95 percent confidence interval for the true mean or proportion. Include a sketch of the graph of the situation.
+Label the point estimate and the lower and upper bounds of the confidence interval.
+
+Confidence Interval: (0.26, 0.55). We are 95 percent confident that the true population proportion p of fleas that are killed by the new shampoo is between 26 percent and 55 percent.
+
+Note
+
+This test result is not very definitive since the p-value is very close to alpha. In reality, one would probably do more tests by giving the dog another bath after the fleas have had a chance to return.
+
+The National Institute of Standards and Technology provides exact data on conductivity properties of materials. Following are conductivity measurements for 11 randomly selected pieces of a particular type of glass:
+
+1.11, 1.07, 1.11, 1.07, 1.12, 1.08, 0.98, 0.98, 1.02, 0.95, 0.95
+
+Is there convincing evidence that the average conductivity of this type of glass is greater than one? Use a significance level of 0.05. Assume the population is normal.
+
+Let’s follow a four-step process to answer this statistical question.
+State the question: We need to determine if, at a 0.05 significance level, the average conductivity of the selected glass is greater than one. Our hypotheses will be as follows:
+
+H0: μ ≤ 1
+Ha: μ > 1
+
+Plan: We are testing a sample mean without a known population standard deviation. Therefore, we need to use a Student's t-distribution. Assume the underlying population is normal.
+Do the calculations: We will input the sample data into the TI-83 as follows.
+
+State the conclusions: Since the p-value (p = 0.036) is less than our alpha value, we will reject the null hypothesis. It is reasonable to state that the data support the claim that the average conductivity level is greater than one.
+State the question: We need to determine if, at a 0.05 significance level, the average conductivity of the selected glass is greater than one. Our hypotheses will be as follows:
+
+H0: μ ≤ 1
+Ha: μ >
+[truncated]

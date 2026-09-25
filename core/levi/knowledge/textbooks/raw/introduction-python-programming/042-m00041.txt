@@ -1,0 +1,42 @@
+# m00041
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Loop else
+
+Loop else
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use loop else statement to identify when the loop execution is interrupted using a break statement.
+
+Implement a loop else statement with a for or a while loop.
+
+Loop else
+
+A loop else statement runs after the loop's execution is completed without being interrupted by a break statement. A loop else is used to identify if the loop is terminated normally or the execution is interrupted by a break statement.
+
+Ex: A for loop that iterates over a list of numbers to find if the value 10 is in the list. In each iteration, if 10 is observed, the statement "Found 10!" is printed and the execution can terminate using a break statement. If 10 is not in the list, the loop terminates when all integers in the list are evaluated, and hence the else statement will run and print "10 is not in the list." Alternatively, a Boolean variable can be used to track whether number 10 is found after loop's execution terminates.
+
+Finding the number 10 in a list
+
+In the code examples below, the code on the left prints "Found 10!" if the variable i's value is 10. If the value 10 is not in the list, the code prints "10 is not in the list.". The code on the right uses the seen Boolean variable to track if the value 10 is in the list. After loop's execution, if seen's value is still false, the code prints "10 is not in the list.".
+numbers = [2, 5, 7, 11, 12]
+seen = False
+for i in numbers:
+  if i == 10:
+    print("Found 10!")
+    seen = True
+if seen == False:
+  print("10 is not in the list.")
+Loop else template
+
+Loop else practices
+
+Sum of values less than 10
+
+Write a program that, given a list, calculates the sum of all integer values less than 10. If a value greater than or equal to 10 is in the list, no output should be printed. Test the code for different values in the list.

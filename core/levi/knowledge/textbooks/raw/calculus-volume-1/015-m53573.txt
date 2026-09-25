@@ -1,0 +1,338 @@
+# m53573
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Derivative as a Function
+
+The Derivative as a Function
+
+Define the derivative function of a given function.
+
+Graph a derivative function from the graph of a given function.
+
+State the connection between derivatives and continuity.
+
+Describe three conditions for when a function does not have a derivative.
+
+Explain the meaning of a higher-order derivative.
+
+As we have seen, the derivative of a function at a given point gives us the rate of change or slope of the tangent line to the function at that point. If we differentiate a position function at a given time, we obtain the velocity at that time. It seems reasonable to conclude that knowing the derivative of the function at every point would produce valuable information about the behavior of the function. However, the process of finding the derivative at even a handful of values using the techniques of the preceding section would quickly become quite tedious. In this section we define the derivative function and learn a process for finding it.
+
+Derivative Functions
+
+The derivative function gives the derivative of a function at each point in the domain of the original function for which the derivative is defined. We can formally define a derivative function as follows.
+
+Definition
+
+Let f be a function. The derivative function, denoted by f′, is the function whose domain consists of those values of x such that the following limit exists:
+
+A function f(x) is said to be differentiable at a if
+f′(a) exists. More generally, a function is said to be differentiable on S if it is differentiable at every point in an open set S, and a differentiable function is one in which f′(x) exists on its domain.
+
+In the next few examples we use to find the derivative of a function.
+
+Finding the Derivative of a Square-Root Function
+
+Find the derivative of f(x)=x.
+
+Start directly with the definition of the derivative function. Use .
+
+Finding the Derivative of a Quadratic Function
+
+Find the derivative of the function f(x)=x2−2x.
+
+Follow the same procedure here, but without having to multiply by the conjugate.
+
+Find the derivative of f(x)=x2.
+f′(x)=2x
+
+Hint
+
+Use and follow the example.
+
+We use a variety of different notations to express the derivative of a function. In we showed that if f(x)=x2−2x, then f′(x)=2x−2. If we had expressed this function in the form y=x2−2x, we could have expressed the derivative as y′=2x−2 or dydx=2x−2. We could have conveyed the same information by writing ddx(x2−2x)=2x−2. Thus, for the function y=f(x), each of the following notations represents the derivative of f(x):
+
+In place of f′(a) we may also use dydx|x=a Use of the dydx notation (called Leibniz notation) is quite common in engineering and physics. To understand this notation better, recall that the derivative of a function at a point is the limit of the slopes of secant lines as the secant lines approach the tangent line. The slopes of these secant lines are often expressed in the form ΔyΔx where Δy is the difference in the y values corresponding to the difference in the x values, which are expressed as Δx (). Thus the derivative, which can be thought of as the instantaneous rate of change of y with respect to x, is expressed as
+
+Graphing a Derivative
+
+We have already discussed how to graph a function, so given the equation of a function or the equation of a derivative function, we could graph it. Given both, we would expect to see a correspondence between the graphs of these two functions, since f′(x) gives the rate of change of a function f(x) (or slope of the tangent line to f(x)).
+
+In we found that for f(x)=x,f′(x)=1/2x. If we graph these functions on the same axes, as in , we can use the graphs to understand the relationship between these two functions. First, we notice that f(x) is increasing over its entire domain, which means that the slopes of its tangent lines at all points are positive. Consequently, we expect f′(x)>0 for all values of x in its domain. Furthermore, as x increases, the slopes of the tangent lines to f(x) are decreasing and we expect to see a corresponding decrease in f′(x). We also observe that f′(0) is undefined and that limx→0+f′(x)=+∞, corresponding to a vertical tangent to f(x) at 0.
+
+In we found that for f(x)=x2−2x,f′(x)=2x−2. The graphs of these functions are shown in . Observe that f(x) is decreasing for x<1. For these same values of x,f′(x)<0. For values of x>1,f(x) is increasing and f′(x)>0. Also, f(x) has a horizontal tangent at x=1 and f′(1)=0.
+
+Sketching a Derivative Using a Function
+
+Use the following graph of f(x) to sketch a graph of f′(x).
+
+The solution is shown in the following graph. Observe that f(x) is increasing and f′(x)>0 on (–2,3). Also, f(x) is decreasing and f′(x)<0 on (−∞,−2) and on (3,+∞). Also note that f(x) has horizontal tangents at –2 and 3, and f′(−2)=0 and f′(3)=0.
+
+Sketch the graph of f(x)=x2−4. On what interval is the graph of f′(x) above the x-axis?
+(0,+∞)
+
+Hint
+
+The graph of f′(x) is positive where f(x) is increasing.
+
+Derivatives and Continuity
+
+Now that we can graph a derivative, let’s examine the behavior of the graphs. First, we consider the relationship between differentiability and continuity. We will see that if a function is differentiable at a point, it must be continuous there; however, a function that is continuous at a point need not be differentiable at that point. In fact, a function may be continuous at a point and fail to be differentiable at the point for one of several reasons.
+
+Differentiability Implies Continuity
+
+Let f(x) be a function and a be in its domain. If f(x) is differentiable at a, then f is continuous at a.
+
+Proof
+
+If f(x) is differentiable at a, then f′(a) exists and
+
+We want to show that f(x) is continuous at a by showing that limx→af(x)=f(a). Thus,
+
+Therefore, since f(a) is defined and limx→af(x)=f(a), we conclude that f is continuous at a.
+
+□
+
+We have just proven that differentiability implies continuity, but now we consider whether continuity implies differentiability. To determine an answer to this question, we examine the function f(x)=|x|. This function is continuous everywhere; however, f′(0) is undefined. This observation leads us to believe that continuity does not imply differentiability. Let’s explore further. For f(x)=|x|,
+
+This limit does not exist because
+
+See .
+
+Let’s consider some additional situations in which a continuous function fails to be differentiable. Consider the function f(x)=x3:
+
+Thus f′(0) does not exist. A quick look at the graph of f(x)=x3 clarifies the situation. The function has a vertical tangent line at 0 ().
+
+The function f(x)={xsin(1x)ifx≠00ifx=0 also has a derivative that exhibits interesting behavior at 0. We see that
+
+This limit does not exist, essentially because the slopes of the secant lines continuously change direction as they approach zero ().
+
+In summary:
+
+We observe that if a function is not continuous, it cannot be differentiable, since every differentiable function must be continuous. However, if a function is continuous, it may still fail to be differentiable.
+
+We saw that f(x)=|x| failed to be differentiable at 0 because the limit of the slopes of the tangent lines on the left and right were not the same. Visually, this resulted in a sharp corner on the graph of the function at 0. From this we conclude that in order to be differentiable at a point, a function must be “smooth” at that point.
+
+As we saw in the example of f(x)=x3, a function fails to be differentiable at a point where there is a vertical tangent line.
+
+As we saw with f(x)={xsin(1x)ifx≠00ifx=0 a function may fail to be differentiable at a point in more complicated ways as well.
+
+A Piecewise Function that is Continuous and Differentiable
+
+A toy company wants to design a track for a toy car that starts out along a parabolic curve and then converts to a straight line (). The function that describes the track is to have the form f(x)={110x2+bx+cifx<−10−14x+52ifx≥−10 where x and f(x) are in inches. For the car to move smoothly along the track, the function f(x) must be both continuous and differentiable at −10. Find values of b and c that make f(x) both continuous and differentiable.
+
+For the function to be continuous at x=−10,limx→−10−f(x)=f(−10). Thus, since
+
+and f(−10)=5, we must have 10−10b+c=5. Equivalently, we have c=10b−5.
+
+For the function to be differentiable at −10,
+
+must exist. Since f(x) is defined using different rules on the right and the left, we must evaluate this limit from the right and the left and then set them equal to each other:
+
+We also have
+
+This gives us b−2=−14. Thus b=74 and c=10(74)−5=252.
+
+Find values of a and b that make f(x)={ax+bifx<3x2ifx≥3 both continuous and differentiable at 3.
+a=6 and b=−9
+
+Hint
+
+Use as a guide.
+
+Higher-Order Derivatives
+
+The derivative of a function is itself a function, so we can find the derivative of a derivative. For example, the derivative of a position function is the rate of change of position, or velocity. The derivative of velocity is the rate of change of velocity, which is acceleration. The new function obtained by differentiating the derivative is called the second derivative. Furthermore, we can continue to take derivatives to obtain the third derivative, fourth derivative, and so on. Collectively, these are referred to as higher-order derivatives. The notation for the higher-order derivatives of y=f(x) can be expressed in any of the following forms:
+
+It is interesting to note that the notation for d2ydx2 may be viewed as an attempt to express ddx(dydx) more compactly. Analogously, ddx(ddx(dydx))=ddx(d2ydx2)=d3ydx3.
+
+Finding a Second Derivative
+
+For f(x)=2x2−3x+1, find f″(x).
+
+First find f′(x).
+
+Next, find f″(x) by taking the derivative of f′(x)=4x−3.
+
+Find f″(x) for f(x)=x2.
+f″(x)=2
+
+Hint
+
+We found f′(x)=2x in a previous checkpoint. Use to find the derivative of f′(x)
+
+Finding Acceleration
+
+The position of a particle along a coordinate axis at time t (in seconds) is given by s(t)=3t2−4t+1 (in meters). Find the function that describes its acceleration at time t.
+
+Since v(t)=s′(t) and a(t)=v′(t)=s″(t), we begin by finding the derivative of s(t):
+
+Next,
+
+Thus, a=6m/s2.
+
+For s(t)=t3, find a(t).
+a(t)=6t
+
+Hint
+
+Use as a guide.
+
+Key Concepts
+
+The derivative of a function f(x) is the function whose value at x is f′(x).
+
+The graph of a derivative of a function f(x) is related to the graph of f(x). Where f(x) has a tangent line with positive slope, f′(x)>0. Where f(x) has a tangent line with negative slope, f′(x)<0. Where f(x) has a horizontal tangent line, f′(x)=0.
+
+If a function is differentiable at a point, then it is continuous at that point. A function is not differentiable at a point if it is not continuous at the point, if it has a vertical tangent line at the point, or if the graph has a sharp corner or cusp.
+
+Higher-order derivatives are derivatives of derivatives, from the second derivative to the nth derivative.
+
+Key Equations
+f′(x)=limh→0f(x+h)−f(x)h
+For the following exercises, use the definition of a derivative to find f′(x).
+f(x)=6
+f(x)=2−3x
+−3
+f(x)=2x7+1
+f(x)=4x2
+8x
+f(x)=5x−x2
+f(x)=2x
+12x
+f(x)=x−6
+f(x)=9x
+−9x2
+f(x)=x+1x
+f(x)=1x
+−12x3/2
+
+For the following exercises, use the graph of y=f(x) to sketch the graph of its derivative f′(x).
+
+For the following exercises, the given limit represents the derivative of a function y=f(x) at x=a. Find f(x) and a.
+limh→0(1+h)2/3−1h
+limh→0[3(2+h)2+2]−14h
+f(x)=3x2+2,a=2
+limh→0cos(π+h)+1h
+limh→0(2+h)4−16h
+f(x)=x4,a=2
+limh→0[2(3+h)2−(3+h)]−15h
+limh→0eh−1h
+f(x)=ex,a=0
+
+For the following functions,
+
+sketch the graph and
+
+use the definition of a derivative to show that the function is not differentiable at x=1.
+f(x)={2x,0≤x≤13x−1,x>1
+f(x)={3,x<13x,x≥1
+
+a.
+
+b. limh→1−3−3h≠limh→1+3hh
+f(x)={−x2+2,x≤1x,x>1
+f(x)={2x,x≤12x,x>1
+
+a.
+
+b. limh→1−2hh≠limh→1+2x+h−2xh.
+
+For the following graphs,
+
+determine for which values of x=a the limx→af(x) exists but f is not continuous at x=a, and
+
+determine for which values of x=a the function is continuous but not differentiable at x=a.
+
+a. x=1, b. x=2
+
+Use the graph to evaluate a. f′(−0.5), b. f′(0), c. f′(1), d. f′(2), and e. f′(3), if it exists.
+
+For the following functions, use f″(x)=limh→0f′(x+h)−f′(x)h to find f″(x).
+f(x)=2−3x
+0
+f(x)=4x2
+f(x)=x+1x
+2x3
+
+For the following exercises, use a calculator to graph f(x). Determine the function f′(x), then use a calculator to graph f′(x).
+[T] f(x)=−5x
+[T] f(x)=3x2+2x+4.
+f′(x)=6x+2
+[T] f(x)=x+3x
+[T] f(x)=12x
+f′(x)=−1(2x)3/2
+[T] f(x)=1+x+1x
+[T] f(x)=x3+1
+f′(x)=3x2
+
+For the following exercises, describe what the two expressions represent in terms of each of the given situations. Be sure to include units.
+f(x+h)−f(x)h
+f′(x)=limh→0f(x+h)−f(x)h
+P(x) denotes the population of a city at time x in years.
+C(x) denotes the total amount of money (in thousands of dollars) spent on concessions by x customers at an amusement park.
+
+a. Average rate at which customers spent on concessions in thousands per customer. b. Rate (in thousands per customer) at which x customers spent money on concessions in thousands per customer.
+R(x) denotes the total cost (in thousands of dollars) of manufacturing x clock radios.
+g(x) denotes the grade (in percentage points) received on a test, given x hours of studying.
+
+a. Average grade received on the test with an average study time between two values. b. Rate (in percentage points per hour) at which the grade on the test increased or decreased for a given average study time of x hours.
+B(x) denotes the cost (in dollars) of a sociology textbook at university bookstores in the United States in x years since 1990.
+p(x) denotes atmospheric pressure in Torrs at an altitude of x feet.
+
+a. Average change of atmospheric pressure between two different altitudes. b. Rate (torr per foot) at which atmospheric pressure is increasing or decreasing at x feet.
+
+Sketch the graph of a function y=f(x) with all of the following properties:
+f′(x)>0 for −2≤x<1
+f′(2)=0
+f′(x)>0 for x>2
+f(2)=2 and f(0)=1
+limx→−∞f(x)=0 and limx→∞f(x)=∞
+f′(1) does not exist.
+
+Suppose temperature T in degrees Fahrenheit at a height x in feet above the ground is given by y=T(x).
+
+Give a physical interpretation, with units, of T′(x).
+
+If we know that T′(1000)=−0.1, explain the physical meaning.
+
+a. The rate (in degrees per foot) at which temperature is increasing or decreasing for a given height x. b. The rate of change of temperature as altitude changes at 1000 feet is −0.1 degrees per foot.
+
+Suppose the total profit of a company is y=P(x) thousand dollars when x units of an item are sold.
+
+What does P(b)−P(a)b−a for 0<a<b measure, and what are the units?
+
+What does P′(x) measure, and what are the units?
+
+Suppose that P′(30)=5, what is the approximate change in profit if the number of items sold increases from 30to31?
+
+The graph in the following figure models the number of people N(t) who have come down with the flu t weeks after its initial outbreak in a town with a population of 50,000 citizens.
+
+Describe what N′(t) represents and how it behaves as t increases.
+
+What does the derivative tell us about how this town is affected by the flu outbreak?
+
+a. The rate at which the number of people who have come down with the flu is changing t weeks after the initial outbreak. b. The rate is increasing sharply up to the third week, at which point it slows down and then becomes constant.
+
+For the following exercises, use the following table, which shows the height h of the Saturn V rocket for the Apollo 11 mission t seconds after launch.
+
+Time (seconds)
+32
+What is the physical meaning of h′(t)? What are the units?
+[T] Construct a table of values for h′(t) and graph both h(t) and h′(t) on the same graph. (Hint: for interior points, estimate both the left limit and right limit and average them. An interior point of an interval I is an element of I which is not an endpoint of I.)
+
+[T] The best linear fit to the data is given by H(t)=7.229t−4.905, where H is the height of the rocket (in meters) and t is the time elapsed since takeoff. From this equation, determine H′(t). Graph H(t) with the given data and, on a separate coordinate plane, graph H′(t).
+[T] The best quadratic fit to the data is given by G(t)=1.429t2+0.0857t−0.1429, where G is the height of the rocket (in meters) and t is the time elapsed since takeoff. From this equation, determine G′(t). Graph G(t) with the given data and, on a separate coordinate plane, graph G′(t).
+G′(t)=2.858t+0.0857
+[T] The best cubic fit to the data is given by F(t)=0.2037t3+2.956t2−2.705t+0.4683, where F is the height of the rocket (in m) and t is the time elapsed since take off. From this equation, determine F′(t). Graph F(t) with the given data and, on a separate coordinate plane, graph F′(t). Does the linear, quadratic, or cubic function fit the data best?
+
+Using the best linear, quadratic, and cubic fits to the data, determine what H″(t),G″(t)andF″(t) are. What are the physical meanings of H″(t),G″(t)andF″(t), and what are their units?
+H″(t)=0,G″(t)=2.858andf″(t)=1.222t+5.912 represent the acceleration of the rocket, with units of meters per second squared (m/s2).
+
+gives the derivative of a function at each point in the domain of the original function for which the derivative is defined
+a function for which f′(a) exists is differentiable at a
+a function for which f′(x) exists for each x in the open set S is differentiable on S
+a function for which f′(x) exists is a differentiable function
+a derivative of a derivative, from the second derivative to the nth derivative, is called a higher-order derivative

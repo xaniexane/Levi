@@ -1,0 +1,149 @@
+# m00082
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Probability Distributions
+
+Probability Distributions
+
+By the end of this section, you will be able to:
+
+Calculate portfolio weights in an investment.
+
+Calculate and interpret the expected values.
+
+Apply the normal distribution to characterize average and standard deviation in financial contexts.
+
+Calculate Portfolio Weights
+
+In many financial analyses, the weightings by asset category in a portfolio are a key index used to assess if the portfolio is meeting allocation metrics. For example, an investor approaching retirement age may wish to shift assets in a portfolio to more conservative and lower-volatility investments. Weightings can be calculated in several different ways—for example, based on individual stocks in a portfolio or on various sectors in a portfolio. Weightings can also be calculated based on number of shares or the value of shares of a stock.
+
+To calculate a weighting in a portfolio based on value, take the value of the particular investment and divide it by the total value of the overall portfolio. As an example, consider an individual’s retirement account for which the desired portfolio weighting is determined to be 40% stocks, 50% bonds, and 10% cash equivalents. shows the current assets in the individual’s portfolio, broken out according to stocks, bonds, and cash equivalents.
+
+Portfolio Assets in Stocks, Bonds, and Cash Equivalents
+
+Asset
+Value ($)
+Stock A
+134,000
+Stock B
+172,000
+Bond C
+38,000
+Bond D
+102,000
+Bond E
+96,000
+Cash in CDs
+35,700
+Cash in savings
+600,200
+To determine the weighting in this portfolio for stocks, bonds, and cash, take the total value for each category and divide it by the total value of the entire portfolio. These results are summarized in . Notice that the portfolio weightings shown in the table do not match the target, or desired, allocation weightings of 40% stocks, 50% bonds, and 10% cash equivalents.
+
+Portfolio Weightings for Stocks, Bonds, and Cash Equivalents
+
+Asset Category
+Category Value ($)
+Portfolio Weighting
+306,000600,200=0.51
+236,000600,200=0.39
+600,200
+Portfolio rebalancing is a process whereby the investor buys or sells assets to achieve the desired portfolio weightings. In this example, the investor could sell approximately 10% of the stock assets and purchase bonds with the proceeds to align the asset categories to the desired portfolio weightings.
+
+Calculate and Interpret Expected Values
+
+A probability distribution is a mathematical function that assigns probabilities to various outcomes. For example, we can assign a probability to the outcome of a certain stock increasing in value or decreasing in value. One application of a probability distribution function is determining expected value.
+
+In many financial situations, we are interested in determining the expected value of the return on a particular investment or the expected return on a portfolio of multiple investments. To calculate expected returns, we formulate a probability distribution and then use the following formula to calculate expected value:
+
+where P1, P2, P3, ⋯ Pn are the probabilities of the various returns and R1, R2, R3, ⋯ Rn are the various rates of return.
+
+In essence, expected value is a weighted mean where the probabilities form the weights. Typically, these values for Pn and Rn are derived from historical data. As an example, consider a probability distribution for potential returns for United Airlines common stock. Assume that from historical data gathered over a certain time period, there is a 15% probability of generating a 12% return on investment for this stock, a 35% probability of generating a 5% return, a 25% probability of generating a 2% return, a 14% probability of generating a 5% loss, and an 11% probability of resulting in a 10% loss. This data can be organized into a probability distribution table as seen in .
+
+Using the expected value formula, the expected return of United Airlines stock over an extended period of time 
+ follows:
+
+Based on the probability distribution, the expected value of the rate of return for United Airlines common stock over an extended period of time is 2.25%.
+
+Probability Distribution for Historical Returns on United Airlines Stock
+
+Historical Return (%)
+Associated Probability (%)
+12
+15
+5
+35
+2
+25
+-5
+14
+-10
+11
+We can extend this analysis to evaluate the expected return for an investment portfolio consisting of various asset categories, such as stocks, bonds, and cash equivalents, where the probabilities are associated with the weighting of each category relative to the total value of the portfolio. Using historical return data for each of the asset categories, the expected return of the overall portfolio can be calculated using the expected value formula.
+
+Assume an investor has assets in stocks, bonds, and cash equivalents as shown in .
+
+Portfolio Weightings and Historical Returns for Various Asset Categories
+
+Asset Category
+Value ($)
+Portfolio Weighting
+Historical Return (%)
+306,000600,200=0.51
+13.0
+236,000600,200=0.39
+4.0
+58,200600,200=0.10
+$600,200
+Based on the probability distribution, the expected value of the rate of return for this portfolio over an extended period of time is 8.44%.
+
+Apply the Normal Distribution in Financial Contexts
+
+The normal, or bell-shaped, distribution can be utilized in many applications, including financial contexts. Remember that the normal distribution has two parameters: the mean, which is the center of the distribution, and the standard deviation, which measures the spread of the distribution. Here are several examples of applications of the normal distribution:
+
+IQ scores follow a normal distribution, with a mean IQ score of 100 and a standard deviation of 15.
+
+Salaries at a certain company follow a normal distribution, with a mean salary of $52,000 and a standard deviation of $4,800.
+
+Grade point averages (GPAs) at a certain college follow a normal distribution, with a mean GPA of 3.27 and a standard deviation of 0.24.
+
+The average annual gain of the Dow Jones Industrial Average (DJIA) over a 40-year time period follows a normal distribution, with a mean gain of 485 points and a standard deviation of 1,065 points.
+
+The average annual return on the S&P 500 over a 50-year time period follows a normal distribution, with a mean rate of return of 10.5% and a standard deviation of 14.3%.
+
+The average annual return on mid-cap stock funds over the five-year period from 2010 to 2015 follows a normal distribution, with a mean rate of return of 8.9% and a standard deviation of 3.7%.
+
+When analyzing data sets that follow a normal distribution, probabilities can be calculated by finding areas under the normal curve. To find the probability that a measurement is within a specific interval, we can compute the area under the normal curve corresponding to the interval of interest.
+
+Areas under the normal curve are available in tables, and Excel also provides a method to find these areas. The empirical rule is one method for determining areas under the normal curve that fall within a certain number of standard deviations of the mean (see ).
+
+Normal Distribution Showing Mean and Increments of Standard Deviation
+
+If x is a random variable and has a normal distribution with mean µ and standard deviation σ, then the empirical rule states the following:
+
+About 68% of the x-values lie between -1σ and +1σ units from the mean µ (within one standard deviation of the mean).
+
+About 95% of the x-values lie between -2σ and +2σ units from the mean µ (within two standard deviations of the mean).
+
+About 99.7% of the x-values lie between -3σ and +3σ units from the mean µ (within three standard deviations of the mean). Notice that almost all the x-values lie within three standard deviations of the mean.
+
+The z-scores for +1σ and -1σ are +1 and -1, respectively.
+
+The z-scores for +2σ and -2σ are +2 and -2, respectively.
+
+The z-scores for +3σ and -3σ are +3 and -3, respectively.
+
+As an example of using the empirical rule, suppose we know that the average annual return for mid-cap stock funds over the five-year period from 2010 to 2015 follows a normal distribution, with a mean rate of return of 8.9% and a standard deviation of 3.7%. We are interested in knowing the likelihood that a randomly selected mid-cap stock fund provides a rate of return that falls within one standard deviation of the mean, which implies a rate of return between 5.2% and 12.6%. Using the empirical rule, the area under the normal curve within one standard deviation of the mean is 68%. Thus, there is a probability, or likelihood, of 0.68 that a mid-cap stock fund will provide a rate of return between 5.2% and 12.6%.
+
+If the interval of interest is extended to two standard deviations from the mean (a rate of return between 1.5% and 16.3%), using the empirical rule, we can determine that the area under the normal curve within two standard deviations of the mean is 95%. Thus, there is a probability, or likelihood, of 0.95 that a mid-cap stock fund will provide a rate of return between 1.5% and 16.3%.
+
+A probability distribution is a mathematical function that assigns probabilities to various outcomes. In many financial situations, we are interested in determining the expected value of the return on a particular investment or the expected return on a portfolio of multiple investments. When analyzing distributions that follow a normal distribution, probabilities can be calculated by finding the area under the graph of the normal curve.
+
+Portfolio Weights
+
+a rule that provides the percentages of data values falling within one, two, and three standard deviations from the mean for a bell-shaped (normal) distribution
+a weighted average of the values of a variable where the weights are the associated probabilities
+a collection of financial investments, such as stocks, bonds, mutual funds, certificates of deposit, etc.
+a mathematical function that assigns probabilities to various outcomes

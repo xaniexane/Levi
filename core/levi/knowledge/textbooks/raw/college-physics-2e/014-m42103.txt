@@ -1,0 +1,239 @@
+# m42103
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Graphical Analysis of One-Dimensional Motion
+
+Graphical Analysis of One-Dimensional Motion
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe a straight-line graph in terms of its slope and y-intercept.
+
+Determine average velocity or instantaneous velocity from a graph of position vs. time.
+
+Determine average or instantaneous acceleration from a graph of velocity vs. time.
+
+Derive a graph of velocity vs. time from a graph of position vs. time.
+
+Derive a graph of acceleration vs. time from a graph of velocity vs. time.
+
+A graph, like a picture, is worth a thousand words. Graphs not only contain numerical information; they also reveal relationships between physical quantities. This section uses graphs of position, velocity, and acceleration versus time to illustrate one-dimensional kinematics.
+
+Slopes and General Relationships
+
+First note that graphs in this text have perpendicular axes, one horizontal and the other vertical. When two physical quantities are plotted against one another in such a graph, the horizontal axis is usually considered to be an independent variable and the vertical axis a dependent variable. If we call the horizontal axis the x-axis and the vertical axis the y-axis, as in , a straight-line graph has the general form
+
+Here m is the slope, defined to be the rise divided by the run (as seen in the figure) of the straight line. The letter b is used for the y-intercept, which is the point at which the line crosses the vertical axis.
+
+Graph of Position vs. Time (a = 0, so v is constant)
+
+Time is usually an independent variable that other quantities, such as position, depend upon. A graph of position versus time would, thus, have x on the vertical axis and t on the horizontal axis. is just such a straight-line graph. It shows a graph of position versus time for a jet-powered car on a very flat dry lake bed in Nevada.
+
+Using the relationship between dependent and independent variables, we see that the slope in the graph above is average velocity v- and the intercept is position at time zero—that is, x0. Substituting these symbols into y=mx+b gives
+
+or
+
+Thus a graph of position versus time gives a general relationship among displacement(change in position), velocity, and time, as well as giving detailed numerical information about a specific situation.
+
+The Slope of x vs. t
+
+The slope of the graph of position x vs. time t is velocity v.
+
+Notice that this equation is the same as that derived algebraically from other motion equations in Motion Equations for Constant Acceleration in One Dimension.
+
+From the figure we can see that the car has a position of 525 m at 0.50 s and 2000 m at 6.40 s. Its position at other times can be read from the graph; furthermore, information about its velocity and acceleration can also be obtained from the graph.
+
+Determining Average Velocity from a Graph of Position versus Time: Jet Car
+
+Find the average velocity of the car whose position is graphed in .
+Strategy
+
+Strategy
+
+The slope of a graph of x vs. t is average velocity, since slope equals rise over run. In this case, rise = change in position and run = change in time, so that
+
+Since the slope is constant here, any two points on the graph can be used to find the slope. (Generally speaking, it is most accurate to use two widely separated points on the straight line. This is because any error in reading data from the graph is proportionally smaller if the interval is larger.)
+Solution
+
+Solution
+
+1. Choose two points on the line. In this case, we choose the points labeled on the graph: (6.4 s, 2000 m) and (0.50 s, 525 m). (Note, however, that you could choose any two points.)
+
+2. Substitute the x and t values of the chosen points into the equation. Remember in calculating change (Δ) we always use final value minus initial value.
+
+yielding
+Discussion
+
+Discussion
+
+This is an impressively large land speed (900 km/h, or about 560 mi/h): much greater than the typical highway speed limit of 60 mi/h (27 m/s or 96 km/h), but considerably shy of the record of 343 m/s (1234 km/h or 766 mi/h) set in 1997.
+
+Graphs of Motion when a is constant but a≠0
+
+The graphs in below represent the motion of the jet-powered car as it accelerates toward its top speed, but only during the time when its acceleration is constant. Time starts at zero for this motion (as if measured with a stopwatch), and the position and velocity are initially 200 m and 15 m/s, respectively.
+
+The graph of position versus time in (a) is a curve rather than a straight line. The slope of the curve becomes steeper as time progresses, showing that the velocity is increasing over time. The slope at any point on a position-versus-time graph is the instantaneous velocity at that point. It is found by drawing a straight line tangent to the curve at the point of interest and taking the slope of this straight line. Tangent lines are shown for two points in (a). If this is done at every point on the curve and the values are plotted against time, then the graph of velocity versus time shown in (b) is obtained. Furthermore, the slope of the graph of velocity versus time is acceleration, which is shown in (c).
+
+Determining Instantaneous Velocity from the Slope at a Point: Jet Car
+
+Calculate the velocity of the jet car at a time of 25 s by finding the slope of the x vs. t graph in the graph below.
+Strategy
+
+Strategy
+
+The slope of a curve at a point is equal to the slope of a straight line tangent to the curve at that point. This principle is illustrated in , where Q is the point at t=25 s.
+Solution
+
+Solution
+
+1. Find the tangent line to the curve at t=25 s.
+
+2. Determine the endpoints of the tangent. These correspond to a position of 1300 m at time 19 s and a position of 3120 m at time 32 s.
+
+3. Plug these endpoints into the equation to solve for the slope, v.
+
+Thus,
+Discussion
+
+Discussion
+
+This is the value given in this figure’s table for v at t=25 s. The value of 140 m/s for vQ is plotted in . The entire graph of v vs. t can be obtained in this fashion.
+
+Carrying this one step further, we note that the slope of a velocity versus time graph is acceleration. Slope is rise divided by run; on a v vs. t graph, rise = change in velocity Δv and run = change in time Δt.
+
+The Slope of v vs. t
+
+The slope of a graph of velocity v vs. time t is acceleration a.
+
+Since the velocity versus time graph in (b) is a straight line, its slope is the same everywhere, implying that acceleration is constant. Acceleration versus time is graphed in (c).
+
+Additional general information can be obtained from and the expression for a straight line, y=mx+b.
+
+In this case, the vertical axis y is V, the intercept b is v0, the slope m is a, and the horizontal axis x is t. Substituting these symbols yields
+
+A general relationship for velocity, acceleration, and time has again been obtained from a graph. Notice that this equation was also derived algebraically from other motion equations in Motion Equations for Constant Acceleration in One Dimension.
+
+It is not accidental that the same equations are obtained by graphical analysis as by algebraic techniques. In fact, an important way to discover physical relationships is to measure various physical quantities and then make graphs of one quantity against another to see if they are correlated in any way. Correlations imply physical relationships and might be shown by smooth graphs such as those above. From such graphs, mathematical relationships can sometimes be postulated. Further experiments are then performed to determine the validity of the hypothesized relationships.
+
+Graphs of Motion Where Acceleration is Not Constant
+
+Now consider the motion of the jet car as it goes from 165 m/s to its top velocity of 250 m/s, graphed in . Time again starts at zero, and the initial velocity is 165 m/s. (This was the final velocity of the car in the motion graphed in .) Acceleration gradually decreases from 5.0 m/s2 to zero when the car hits 250 m/s. The velocity increases until 55 s and then becomes constant, since acceleration decreases to zero at 55 s and remains zero afterward.
+
+Calculating Acceleration from a Graph of Velocity versus Time
+
+Calculate the acceleration of the jet car at a time of 25 s by finding the slope of the v vs. t graph in (a).
+Strategy
+
+Strategy
+
+The slope of the curve at t=25 s is equal to the slope of the line tangent at that point, as illustrated in (a).
+Solution
+
+Solution
+
+Determine endpoints of the tangent line from the figure, and then plug them into the equation to solve for slope, a.
+Discussion
+
+Discussion
+
+Note that this value for a is consistent with the value plotted in (b) at t=25 s.
+
+A graph of position versus time can be used to generate a graph of velocity versus time, and a graph of velocity versus time can be used to generate a graph of acceleration versus time. We do this by finding the slope of the graphs at every point. If the graph is linear (i.e., a line with a constant slope), it is easy to find the slope at any point and you have the slope for every point. Graphical analysis of motion can be used to describe both specific and general characteristics of kinematics. Graphs can also be used for other topics in physics. An important aspect of exploring physical relationships is to graph them and look for underlying relationships.
+
+Check Your Understanding
+
+A graph of velocity vs. time of a ship coming into a harbor is shown below. (a) Describe the motion of the ship based on the graph. (b)What would a graph of the ship’s acceleration look like?
+
+(a) The ship moves at constant velocity and then begins to decelerate at a constant rate. At some point, its deceleration rate decreases. It maintains this lower deceleration rate until it stops moving.
+
+(b) A graph of acceleration vs. time would show zero acceleration in the first leg, large and constant negative acceleration in the second leg, and constant negative acceleration.
+
+Section Summary
+
+Graphs of motion can be used to analyze motion.
+
+Graphical solutions yield identical solutions to mathematical methods for deriving motion equations.
+
+The slope of a graph of displacement x vs. time t is velocity v.
+
+The slope of a graph of velocity v vs. time t graph is acceleration a.
+
+Average velocity, instantaneous velocity, and acceleration can all be obtained by analyzing graphs.
+
+Conceptual Questions
+
+(a) Explain how you can use the graph of position versus time in to describe the change in velocity over time. Identify (b) the time (ta,
+tb,
+tc,
+td, or
+te) at which the instantaneous velocity is greatest, (c) the time at which it is zero, and (d) the time at which it is negative.
+
+(a) Sketch a graph of velocity versus time corresponding to the graph of position versus time given in . (b) Identify the time or times (ta,
+tb,
+tc, etc.) at which the instantaneous velocity is greatest. (c) At which times is it zero? (d) At which times is it negative?
+
+(a) Explain how you can determine the acceleration over time from a velocity versus time graph such as the one in . (b) Based on the graph, how does acceleration change over time?
+
+(a) Sketch a graph of acceleration versus time corresponding to the graph of velocity versus time given in . (b) Identify the time or times (ta,
+tb,
+tc, etc.) at which the acceleration is greatest. (c) At which times is it zero? (d) At which times is it negative?
+
+Consider the velocity vs. time graph of a person in an elevator shown in . Suppose the elevator is initially at rest. It then accelerates for 3 seconds, maintains that velocity for 15 seconds, then decelerates for 5 seconds until it stops. The acceleration for the entire trip is not constant so we cannot use the equations of motion from Motion Equations for Constant Acceleration in One Dimension for the complete trip. (We could, however, use them in the three individual sections where acceleration is a constant.) Sketch graphs of (a) position vs. time and (b) acceleration vs. time for this trip.
+
+A cylinder is given a push and then rolls up an inclined plane. If the origin is the starting point, sketch the position, velocity, and acceleration of the cylinder vs. time as it goes up and then down the plane.
+
+Problems & Exercises
+
+Note: There is always uncertainty in numbers taken from graphs. If your answers differ from expected values, examine them to see if they are within data extraction uncertainties estimated by you.
+
+(a) By taking the slope of the curve in , verify that the velocity of the jet car is 115 m/s at t=20 s. (b) By taking the slope of the curve at any point in , verify that the jet car’s acceleration is 5.0 m/s2.
+
+(a) 115 m/s
+
+(b) 5.0 m/s2
+
+Using approximate values, calculate the slope of the curve in to verify that the velocity at t=30.0 s is approximately 0.24 m/s. Assume all values are known to 2 significant figures.
+
+Using approximate values, calculate the slope of the curve in to verify that the velocity at t=30.0 s is approximately 0.24 m/s.
+
+By taking the slope of the curve in , verify that the acceleration is 3.2 m/s2 at t=10 s.
+
+Construct the position graph for the subway shuttle train as shown in (a). Your graph should show the position of the train, in kilometers, from t = 0 to 20 s. You will need to use the information on acceleration and velocity given in the examples for this figure.
+
+(a) Take the slope of the curve in to find the jogger’s velocity at t=2.5 s. (b) Repeat at 7.5 s. These values must be consistent with the graph in .
+
+A graph of vt is shown for a world-class track sprinter in a 100-m race. (See ). (a) What is his average velocity for the first 4 s? (b) What is his instantaneous velocity at t=5 s? (c) What is his average acceleration between 0 and 4 s? (d) What is his time for the race?
+
+(a) 6 m/s
+
+(b) 12 m/s
+
+(c) 3 m/s2
+
+(d) 10 s
+shows the position graph for a particle for 6 s. (a) Draw the corresponding Velocity vs. Time graph. (b) What is the acceleration between 0 s and 2 s? (c) What happens to the acceleration at exactly 2 s?
+Critical Thinking Two cars are side by side on a path where friction is negligible. Car A starts from rest and has a positive, constant acceleration while car B travels at a constant speed. The cars reach the same check point down the road at the same time. (a) Which car is traveling faster at the check point? Briefly explain your reasoning. (b) Based on experimental data, an equation that fits the data is suggested for the speed of car A at the check point, V, which may not be correct: V=KV0, where K is a constant with appropriate units and V0 is the initial velocity of car B. Is this equation consistent with your answer from part a? Explain why or why not. Does this equation make sense? Explain why or why not. (c) Graph the velocity of car A and the velocity of car B vs. distance along the path, starting when the cars are side by side.
+
+Critical Thinking
+
+(a) Car A is traveling faster at the checkpoint because it must go past the speed of car B to reach the same distance.
+
+(b) i. Yes, the equation is consistent with the answer because the speed of car A is only a constant away from the correct answer. ii. Yes, the equation makes sense because 
+ 
+ V=2
+ V
+ 0
+
+ .
+
+(c)
+
+the variable that the dependent variable is measured with respect to; usually plotted along the x-axis
+the variable that is being measured; usually plotted along the y-axis
+the difference in y-value (the rise) divided by the difference in x-value (the run) of two points on a straight line
+the y-value when x= 0, or when the graph crosses the y-axis

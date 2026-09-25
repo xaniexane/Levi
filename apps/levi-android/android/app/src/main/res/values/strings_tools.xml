@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings home entry -->
+    <string name="row_tools">Device tools</string>
+    <string name="row_tools_sub">On-device capabilities the agent may use</string>
+
+    <!-- Tools screen -->
+    <string name="tools_group">Capabilities</string>
+    <string name="tools_note">Each toggle is standing consent: the agent can only invoke a tool that is switched on here. Tools that need an Android permission still fail closed until the permission is granted — a toggle on its own is never enough.</string>
+    <string name="tools_note2">Invocations are explicit. LEVI never reads location, opens apps, or fetches URLs silently in the background — each of these runs only when the agent calls the tool, and every result reports honestly whether the action happened.</string>
+
+    <string name="tools_risk_low">Risk: low</string>
+    <string name="tools_risk_medium">Risk: medium</string>
+    <string name="tools_risk_high">Risk: high</string>
+
+    <string name="tools_perm_notifications">Requires notification permission</string>
+    <string name="tools_perm_location">Requires location permission (coarse)</string>
+
+    <string name="tools_permission_title">Android permission</string>
+    <string name="tools_permission_granted">Granted</string>
+    <string name="tools_permission_not_granted">Not granted — tap to request</string>
+    <string name="tools_permission_badge">NEEDED</string>
+
+    <string name="tools_channel_name">LEVI device tools</string>
+    <string name="tools_channel_desc">Notifications posted by LEVI\'s on-device tools when the agent asks it to notify you.</string>
+
+    <!-- Tool titles + descriptions (mirrored in assets/levi_tools.json) -->
+    <string name="tool_notify_title">Show notification</string>
+    <string name="tool_notify_desc">Posts a notification on this device with a title and body.</string>
+
+    <string name="tool_calendar_title">Create calendar event</string>
+    <string name="tool_calendar_desc">Opens the system calendar editor pre-filled with the event.</string>
+    <string name="tool_calendar_note">No calendar permission needed: the system editor opens and you confirm the event on screen.</string>
+
+    <string name="tool_alarm_title">Set alarm / timer</string>
+    <string name="tool_alarm_desc">Hands an alarm or countdown timer to the system clock app.</string>
+
+    <string name="tool_location_title">Coarse location</string>
+    <string name="tool_location_desc">Returns a coarse network/IP-based position estimate.</string>
+    <string name="tool_location_note">City-block level at best. Read only at the moment of invocation — never tracked in the background.</string>
+
+    <string name="tool_open_url_title">Open URL</string>
+    <string name="tool_open_url_desc">Opens an http(s) link in the default browser.</string>
+
+    <string name="tool_open_file_title">Open file</string>
+    <string name="tool_open_file_desc">Opens a file from the app\'s own storage in its default app.</string>
+    <string name="tool_open_file_note">Scoped to LEVI\'s own storage; paths outside it are refused.</string>
+
+    <string name="tool_local_time_title">Local time</string>
+    <string name="tool_local_time_desc">Returns the device\'s current time, timezone and UTC offset.</string>
+
+    <string name="tool_web_search_title">Web search</string>
+    <string name="tool_web_search_desc">Hands a query to the device\'s default search handler.</string>
+
+    <string name="tool_fetch_url_title">Fetch URL</string>
+    <string name="tool_fetch_url_desc">Fetches an HTTPS URL and returns the body text to the agent.</string>
+    <string name="tool_fetch_url_note">HTTPS only — plain HTTP is refused. Responses are capped in size and time.</string>
+</resources>

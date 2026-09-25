@@ -1,0 +1,68 @@
+# m00005
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+String basics
+
+String basics
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use the built-in len() function to get a string's length.
+
+Concatenate string literals and variables using the + operator.
+
+Quote marks
+
+A string is a sequence of characters enclosed by matching single (') or double (") quotes. Ex: "Happy birthday!" and '21' are both strings.
+
+To include a single quote (') in a string, enclose the string with matching double quotes ("). Ex: "Won't this work?" To include a double quote ("), enclose the string with matching single quotes ('). Ex: 'They said "Try it!", so I did'.
+
+Rules for strings.
+
+Valid string
+"The teacher said "Correct!" "
+Valid and invalid strings
+
+len() function
+
+A common operation on a string object is to get the string length, or the number of characters in the string. The len() function, when called on a string value, returns the string length.
+
+Using len() to get the length of a string
+
+Applying len() function to string values
+
+Concatenation
+
+Concatenation is an operation that combines two or more strings sequentially with the concatenation operator (+). Ex: "A" + "part" produces the string "Apart".
+
+Concatenating multiple strings
+
+String concatenation
+
+Name length
+
+Write a program that asks the user to input their first and last name separately. Use the following prompts (example input in bold):
+
+The program should then output the length of each name. Based on the example input above, the output would be:
+
+Punctuation
+
+Write a Python computer program that:
+
+Assigns the string "Freda" to a variable, name.
+Assigns the string "happy" to a variable, feel.
+Prints the string "Hi Freda!" with a single print() function using the variable name.
+Prints the string "I'm glad you feel happy." with a single print() function using the variable feel.
+
+Assigns the string "Freda" to a variable, name.
+
+Assigns the string "happy" to a variable, feel.
+
+Prints the string "Hi Freda!" with a single print() function using the variable name.
+
+Prints the string "I'm glad you feel happy." with a single print() function using the variable feel.

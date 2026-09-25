@@ -1,0 +1,203 @@
+# m00089
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Best-Fit Linear Model
+
+Best-Fit Linear Model
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate the slope and y-intercept for a linear regression model using technology.
+
+Interpret and apply the slope and y-intercepts.
+
+Calculate the Slope and y-Intercept for a Linear Regression Model Using Technology
+
+Once a correlation has been deemed as significant, a best-fit linear regression model is developed. The goal in the regression analysis is to determine the coefficients a and b in the following regression equation:
+
+The slope (b) and y-intercept (a) can be calculated using the following formulas:
+
+These formulas can be quite cumbersome, especially for a significant number of data pairs, and thus technology is often used (such as Excel, a calculator, R statistical software, etc.).
+Using Excel: To calculate the slope and y-intercept of the linear model, start by entering the (x, y) data in two columns in Excel. Then the Excel commands =SLOPE and =INTERCEPT can be used to calculate the slope and intercept, respectively.
+
+The following data set will be used as an example: the monthly amount spent on advertising and the monthly revenue for a Fortune 500 company for 12 months (data is shown in ).
+
+Revenue versus Advertising for Fortune 500 Company ($000s)
+
+Advertising
+ Expenditure
+Advertising
+
+Expenditure
+
+Revenue
+Jan
+49
+12,210
+Feb
+145
+17,590
+Mar
+57
+13,215
+Apr
+153
+19,200
+May
+92
+14,600
+Jun
+83
+14,100
+Jul
+117
+17,100
+Aug
+142
+18,400
+Sep
+69
+14,100
+Oct
+106
+15,500
+Nov
+109
+16,300
+Dec
+121
+17,020
+To calculate the slope of the regression model, use the Excel command
+
+It’s important to note that this Excel command expects that the y-data range is entered first and the x-data range is entered second. Since revenue depends on amount spent on advertising, revenue is considered the y-variable and amount spent on advertising is considered the x-variable. Notice the y-data is contained in cells C2 through C13 and the x-data is contained in cells B2 through B13. Thus the Excel command for slope would be entered as
+
+In the same way, the Excel command to calculate the y-intercept of the regression model is
+
+For the data set shown in the above table, the Excel command would be
+
+The results are shown in , where
+
+Revenue versus Advertising for Fortune 500
+ Company ($000s) Showing Slope and y-Intercept Calculation in Excel
+
+Based on this, the regression equation can be written as
+
+where x represents the amount spent on advertising (in thousands of dollars) and y represents the amount of revenue (in thousands of dollars).
+
+Using a Financial Calculator
+
+The financial calculator provides the slope and y-intercept for the linear regression model once the (x, y) data is inputted into the calculator.
+
+Follow the steps in for calculating the slope and y-intercept for the data set of amounts spent on advertising and revenue shown previously.
+
+Calculator Steps for the Slope and y-Intercept
+
+Step
+Description
+Enter
+Display
+1
+2ND [DATA]
+X01
+0.00
+2
+2ND [CLR WORK]
+X01
+0.00
+3
+Enter first x-value of 49
+49 ENTER
+X01 =
+49.00
+4
+Move to next data entry
+↓
+Y01 =
+1.00
+5
+Enter first y-value of 12210
+12210 ENTER
+Y01 =
+12,210.00
+6
+Move to next data entry
+↓
+X02
+0.00
+7
+Enter second x-value of 145
+145 ENTER
+X02 =
+145.00
+8
+Move to next data entry
+↓
+Y02 =
+1.00
+9
+Enter second y-value of 17590
+17590ENTER
+Y02 =
+17,590.00
+10
+Move to next data entry
+↓
+X03
+0.00
+11
+Continue to enter remaining data values
+12
+2ND [STAT]
+13
+2ND [SET]
+LIN
+14
+Move to 1st statistical result
+n=
+12.00
+15
+Move to next statistical result
+x¯=
+103.58
+16
+Continue to scroll down until the value of a is displayed
+a=
+9,376.70
+17
+Continue to scroll down until the value of b is displayed
+b=
+61.80
+From the statistical results shown on the calculator display, the slope b is 61.8 and the y-intercept a is 9,367.7.
+
+Based on this, the regression equation can be written as
+
+Interpret and Apply the Slope and y-Intercept
+
+The slope of the line, b, describes how changes in the variables are related. It is important to interpret the slope of the line in the context of the situation represented by the data. You should be able to write a sentence interpreting the slope in plain English.
+
+Interpretation of the Slope
+
+The slope of the best-fit line tells us how the dependent variable (y) changes for every one unit increase in the independent (x) variable, on average.
+
+In the previous example, the linear regression model for the monthly amount spent on advertising and the monthly revenue for a Fortune 500 company for 12 months was generated as follows:
+
+Since the slope was determined to be 61.8, the company can interpret this to mean that for every $1,000 dollars spent on advertising, on average, this will result in an increase in revenues of $61,800.
+
+The intercept of the regression equation is the corresponding y-value when.
+
+Interpretation of the Intercept
+
+The intercept of the best-fit line tells us the expected mean value of y in the case where the x-variable is equal to zero.
+
+However, in many scenarios it may not make sense to have the x-variable equal zero, and in these cases, the intercept does not have any meaning in the context of the problem. In other examples, the x-value of zero is outside the range of the x-data that was collected. In this case, we should not assign any interpretation to the y-intercept.
+
+In the previous example, the range of data collected for the x-variable was from $49 to $153 spent per month on advertising. Since this interval does not include an x-value of zero, we would not provide any interpretation for the intercept.
+
+Once a correlation has been deemed significant, a linear regression model is developed. The goal in the regression analysis is to determine the coefficients a and b in the following regression equation: y^=a+bx. Typically some technology, such as Excel, R statistical tool, or a calculator, is used to generate the coefficients a and b since manual calculations are cumbersome.
+
+an equation of the form y^=a+bx that provides the best-fit straight line to the (x, y) data points

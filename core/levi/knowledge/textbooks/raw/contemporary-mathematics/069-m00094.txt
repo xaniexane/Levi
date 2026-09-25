@@ -1,0 +1,193 @@
+# m00094
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+The Binomial Distribution
+
+The Binomial Distribution
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Identify binomial experiments.
+
+Use the binomial distribution to analyze binomial experiments.
+
+It’s time for the World Series, which determines the champion for this season in Major League Baseball. The scrappy Los Angeles Angels are facing the powerhouse Cincinnati Reds. Computer models put the chances of the Reds winning any single game against the Angels at about 65%. The World Series, as its name implies, isn’t just one game, though: it’s what’s known as a “best-of-seven” contest: the teams play each other repeatedly until one team wins 4 games (which could take up to 7 games total, if each team wins three of the first 6 matchups). If the Reds truly have a 65% chance of winning a single game, then the probability that they win the series should be greater than 65%. Exactly how much bigger?
+
+If you have the patience for it, you could use a tree diagram like we used in to trace out all of the possible outcomes, find all the related probabilities, and add up the ones that result in the Reds winning the series. Such a tree diagram would have 27=128 final nodes, though, so the calculations would be very tedious. Fortunately, we have tools at our disposal that allow us to find these probabilities very quickly. This section will introduce those tools and explain their use.
+
+Binomial Experiments
+
+The tools of this section apply to multistage experiments that satisfy some pretty specific criteria. Before we move on to the analysis, we need to introduce and explain those criteria so that we can recognize experiments that fall into this category. Experiments that satisfy each of these criteria are called binomial experiments. A binomial experiment is an experiment with a fixed number of repeated independent binomial trials, where each trial has the same probability of success.
+
+Repeated Binomial Trials
+
+The first criterion involves the structure of the stages. Each stage of the experiment should be a replication of every other stage; we call these replications trials. An example of this is flipping a coin 10 times; each of the ten flips is a trial, and they all occur under the same conditions as every other. Further, each trial must have only two possible outcomes. These two outcomes are typically labeled “success” and “failure,” even if there is not a positive or negative connotation associated with those outcomes. Experiments with more than two outcomes in their sample spaces are sometimes reconsidered in a way that forces just two outcomes; all we need to do is completely divide the sample space into two parts that we can label “success” and “failure.” For example, your grade on an exam might be recorded as A, B, C, D, or F, but we could instead think of the grades A, B, C, and D as “success” and a grade of F as “failure.” Trials with only two outcomes are called binomial trials (the word binomial derives from Latin and Greek roots that mean “two parts”).
+
+Independent Trials
+
+The next criterion that we’ll be looking for is independence of trials. Back in Tree Diagrams, Tables, and Outcomes, we said that two stages of an experiment are independent if the outcome of one stage doesn’t affect the other stage. Independence is necessary for the experiments we want to analyze in this section.
+
+Fixed Number of Trials
+
+Next, we require that the number of trials in the experiment be decided before the experiment begins. For example, we might say “flip a coin 10 times.” The number of trials there is fixed at 10. However, if we say “flip a coin until you get 5 heads,” then the number of trials could be as low as 5, but theoretically it could be 50 or a 100 (or more)! We can’t apply the tools from this section in cases where the number of trials is indeterminate.
+
+Constant Probability
+
+The next criterion needed for binomial experiments is related to the independence of the trials. We must make sure that the probability of success in each trial is the same as the probability of success in every other trial.
+
+Identifying Binomial Experiments
+
+Decide whether each of the following is a binomial experiment. For those that aren’t, identify which criterion or criteria are violated.
+
+You roll a standard 6-sided die 10 times and write down the number that appears each time.
+
+You roll a standard 6-sided die 10 times and write down whether the die shows a 6 or not.
+
+You roll a standard 6-sided die until you get a 6.
+
+You roll a standard 6-sided die 10 times. On the first roll, we define “success” as rolling a 4 or greater. After the first roll, we define “success” as rolling a number greater than the result of the previous roll.
+
+Since we’re noting 1 of 6 possible outcomes, the trials are not binomial. So, this isn’t a binomial experiment.
+
+We have 2 possible outcomes (“6” and “not 6”), the trials are independent, the probability of success is the same every time, and the number of trials is fixed. This is a binomial experiment.
+
+Since the number of trials isn’t fixed (we don’t know if we’ll get our first 6 after 1 roll or 20 rolls or somewhere in between), this isn’t a binomial experiment.
+
+Here, the probability of success might change with every roll (on the first roll, that probability is 12; if the first roll is a 6, the probability of success on the next roll is zero). So, this is not a binomial experiment.
+
+The Binomial Formula
+
+If we flip a coin 100 times, you might expect the number of heads to be around 50, but you probably wouldn’t be surprised if the actual number of heads was 47 or 52. What is the probability that the number of heads is exactly 50? Or falls between 45 and 55? It seems unlikely that we would get more than 70 heads. Exactly how unlikely is that?
+
+Each of these questions is a question about the number of successes in a binomial experiment (flip a coin 100 times, “success” is flipping heads). We could theoretically use the techniques we’ve seen in earlier sections to answer each of these, but the number of calculations we’d have to do is astronomical; just building the tree diagram that represents this situation is more than we could complete in a lifetime; it would have 2100≈1.3×1030 final nodes! To put that number in perspective, if we could draw 1,000 dots every second, and we started at the moment of the Big Bang, we’d currently be about 0.00000003% of the way to drawing out those final nodes. Luckily, there’s a shortcut called the Binomial Formula that allows us to get around doing all those calculations!
+
+Binomial Formula: Suppose we have a binomial experiment with n trials and the probability of success in each trial is p. Then:
+
+We can use this formula to answer one of our questions about 100 coin flips. What is the probability of flipping exactly 50 heads? In this case, n=100, p=12, and a=50, so P(flip 50 heads)=C10050×(12)50×(1−12)100−50. Unfortunately, many calculators will balk at this calculation; that first factor (100C50) is an enormous number, and the other two factors are very close to zero. Even if your calculator can handle numbers that large or small, the arithmetic can create serious errors in rounding off.
+
+Luckily, spreadsheet programs have alternate methods for doing this calculation. In Google Sheets, we can use the BINOMDIST function to do this calculation for us. Open up a new sheet, click in any empty cell, and type “=BINOMDIST(50,100,0.5,FALSE)” followed by the Enter key. The cell will display the probability we seek; it’s about 8%. Let’s break down the syntax of that function in Google Sheets: enter “=BINOMDIST(a, n, p, FALSE)” to find the probability of a successes in n trials with probability of success p.
+
+Using the Binomial Formula
+
+Find the probability of rolling a standard 6-sided die 4 times and getting exactly one 6 without using technology.
+
+Find the probability of rolling a standard 6-sided die 60 times and getting exactly ten 6s using technology.
+
+Find the probability of rolling a standard 6-sided die 60 times and getting exactly eight 6s using technology.
+
+We’ll apply the Binomial Formula, where n=4, a=1, and p=16:
+
+ P(rolling one 6)=C14×(16)1×(56)4−1=4!1!(4−1)!×16×(56)3=4×16×5363=4×5364=5001,296.
+
+Here, n=60, a=10, and p=16. In Google Sheets, we’ll enter “=BINOMDIST(10, 60, 1/6, FALSE)” to get our result: 0.137.
+
+This experiment is the same as in Exercise 2 of this example; we’re simply changing the number of successes from 10 to 8. Making that change in the formula in Google Sheets, we get the probability 0.116.
+
+The Binomial Distribution
+
+If we are interested in the probability of more than just a single outcome in a binomial experiment, it’s helpful to think of the Binomial Formula as a function, whose input is the number of successes and whose output is the probability of observing that many successes. Generally, for a small number of trials, we’ll give that function in table form, with a complete list of the possible outcomes in one column and the probability in the other.
+
+For example, suppose Kristen is practicing her basketball free throws. Assume Kristen always makes 82% of those shots. If she attempts 5 free throws, then the Binomial Formula gives us these probabilities:
+
+Shots Made
+Probability
+0
+0.000189
+1
+0.004304
+2
+0.0392144
+3
+0.1786432
+4
+0.4069096
+5
+0.3707398
+A table that lists all possible outcomes of an experiment along with the probabilities of those outcomes is an example of a probability density function (PDF). A PDF may also be a formula that you can use to find the probability of any outcome of an experiment.
+Because they refer to the same thing, some sources will refer to the Binomial Formula as the Binomial PDF.
+
+If we want to know the probability of a range of outcomes, we could add up the corresponding probabilities. Going back to Kristen’s free throws, we can find the probability that she makes 3 or fewer of her 5 attempts by adding up the probabilities associated with the corresponding outcomes (in this case: 0, 1, 2, or 3):
+
+The probability that the outcome of an experiment is less than or equal to a given number is called a cumulative probability. A table of the cumulative probabilities of all possible outcomes of an experiment is an example of a cumulative distribution function (CDF). A CDF may also be a formula that you can use to find those cumulative probabilities.
+Cumulative probabilities are always associated with events that are defined using ≤. If other inequalities are used to define the event, we must restate the definition so that it uses the correct inequality.
+
+Here are the PDF and CDF for Kristen’s free throws:
+
+Shots Made
+Probability
+Cumulative
+0
+0.000189
+0.000189
+1
+0.004304
+0.004493
+2
+0.0392144
+0.0437073
+3
+0.1786432
+0.2223506
+4
+0.4069096
+0.6292602
+5
+0.3707398
+1
+Google Sheets can also compute cumulative probabilities for us; all we need to do is change the “FALSE” in the formulas we used before to "TRUE."
+
+Using the Binomial CDF
+
+Suppose we are about to flip a fair coin 50 times. Let H represent the number of heads that result from those flips. Use technology to find the following:
+P(H≤22)
+P(H<26)
+P(H>28)
+P(H≥20)
+P(20<H<25)
+
+The event here is defined by H≤22, which is the inequality we need to have if we want to use the Binomial CDF. In Google Sheets, we’ll enter “=BINOMDIST(22, 50, 0.5, TRUE)” to get our answer: 0.2399.
+
+This event uses the wrong inequality, so we need to do some preliminary work. If H<26, that means H≤25 (because H has to be a whole number). So, we’ll enter “=BINOMDIST(25, 50, 0.5, TRUE)” to find P(H<26)=P(H≤25)=0.5561.
+
+The inequality associated with this event is pointing in the wrong direction. If E is the event H>28, that means that E contains the outcomes {29, 30, 31, 32, 33, …}. Thus, E′ must contain the outcomes {…, 25, 26, 27, 28}. In other words, E′ is defined by H≤28. Since it uses ≤, we can find P(E′) using “=BINOMDIST(28, 50, 0.5, TRUE)”: 0.8389 So, using the formula for probabilities of complements, we have
+ P(E)=1−P(E′)=1−0.8389=0.1611.
+
+As in part 3, this inequality is pointing in the wrong direction. If F is the event H≥20, then F contains the outcomes {20, 21, 22, 23, …}. That means F′ contains the outcomes {…, 16, 17, 18, 19}, and so F′ is defined by H≤19. So, we can find P(F′) using “=BINOMDIST(19, 50, 0.5, TRUE)”: 0.0595. Finally, using the formula for probabilities of complements, we get:
+ P(F)=1−P(F′)=1−0.0595=0.9405.
+
+If 20<H<25, that means we are interested in the outcomes {21, 22, 23, 24}. This doesn’t look like any of the previous situations, but there is a way to find this probability using the Binomial CDF. We need to put everything in terms of “less than or equal to,” so we’ll first note that all of our outcomes are less than or equal to 24. But we don’t want to include values that are less than or equal to 20. So, we have three events: let I be the event defined by 20<H<25 (note that we’re trying to find P(I)). Let J be defined by H≤24, and let K be defined by H≤20. Of these three events, J contains the most outcomes. If J occurs, then either K or I must have occurred. Moreover, K and I are mutually exclusive. Thus, P(J)=P(K)+P(I), by the Addition Rule. Solving for the probability that we want, we get
+ P(I)=P(J)−P(K)=P(H≤24)−P(H≤20)=0.44386−0.10132=0.34254.
+
+Finally, we can answer the question posed at the beginning of this section. Remember that the Reds are facing the Angels in the World Series, which is won by the team who is first to win 4 games. The Reds have a 65% chance to win any game against the Angels. So, what is the probability that the Reds win the World Series? At first glance, this is not a binomial experiment: The number of games played is not fixed, since the series ends as soon as one team wins 4 games. However, we can extend this situation to a binomial experiment: Let’s assume that 7 games are always played in the World Series, and the winner is the team who wins more games. In a way, this is what happens in reality; it’s as though the first team to lose 4 games (and thus cannot win more than the other team) forfeits the rest of their games. So, we can treat the actual World Series as a binomial experiment with seven trials. If W is the number of games won by the Reds, the probability that the Reds win the World Series is P(W≥4). Using the techniques from the last example, we get P(Reds win the series)=0.8002.
+
+Abraham de Moivre
+
+Abraham de Moivre was born in 1667 in France to a Protestant family. Though he was educated in Catholic schools, he remained true to his faith; in 1687, he fled with his brother to London to escape persecution under the reign of King Louis XIV. Once he arrived in England, he supported himself as a freelance math tutor while he conducted his own research. Among his interests was probability; in 1711, he published the first edition of The Doctrine of Chances: A Method of Calculating the Probabilities of Events in Play. This book was the second textbook on probability (after Cardano’s Liber de ludo aleae). De Moivre discovered an important connection between the binomial distribution and thenormal distribution (an important concept in statistics; we’ll explore that distribution and its connection to the binomial distribution in Chapter 8). De Moivre also discovered some properties of a new probability distribution that later became known as the Poisson distribution.
+
+Check Your Understanding
+
+Key Terms
+
+binomial experiment
+
+probability density function (PDF)
+
+cumulative distribution function (CDF)
+
+Key Concepts
+
+Binomial experiments result when we count the number of successful outcomes in a fixed number of repeated, independent trials with a constant probability of success.
+
+The binomial distribution is used to find probabilities associated with binomial experiments.
+
+Probability density functions (PDFs) describe the probabilities of individual outcomes in an experiment; cumulative distribution functions (CDFs) give the probabilities of ranges of outcomes.
+
+Formulas
+
+Suppose we have a binomial experiment with n trials and the probability of success in each trial is p. Then:
+ P(number of successes isa)=Cna×pa×(1−p)n−a

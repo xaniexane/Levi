@@ -1,0 +1,78 @@
+# m00006
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Google Sheets Basics
+
+Google Sheets Basics
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Identify common uses and basic features of Google Sheets
+
+Describe the essential functions of each command group on the toolbar
+
+Create a worksheet in Google Sheets
+
+Open an existing workbook in Google Sheets
+
+Print a Google Sheets file
+
+Google Sheets is another spreadsheet application that has much of the same functionality as Microsoft Excel. They have similar GUIs, in that they use window menus and a toolbar. Excel has the ribbon, which has wide tabs filled with commands. Sheets only has one toolbar menu, although its button commands grow over time as the product is updated. Sheets contains all the same basic features as Excel, but Excel is more robust with regard to higher-level tools.
+
+Common Uses and Basic Features
+
+Sheets serves the same basic purposes as Excel and can be used for most of the same purposes that any spreadsheet could serve. Google Workspace is a web-based service and does not have desktop versions like Microsoft Office. Because of this, there are some limitations to the functionality of Sheets compared with Excel. To access Sheets, you need to have internet access and a Gmail account.
+
+The basic features are the same as any other spreadsheet program. Similar to Excel, Sheets has rows and columns in an interface that does calculations for the user. It has automated features like autofill and easy copying of formatting. You can create all tables you’ve created in Excel in Sheets, including your order-dispatching worksheets or sales reports. Sheets also requires you to separate the values in each column so that the spreadsheet can read the numbers and calculate the desired result. Words and letters should be separated from numbers in order for spreadsheets to use the numbers for calculations. Sheets doesn’t have the same library of functions that you can find in Excel. On its own, Sheets may not be able to handle in-depth analysis like Excel can.
+
+The Toolbar Overview
+
+Sheets does not have any ribbon tabs like Excel. Instead, the toolbar is composed of menus and commands. The menu options are similar to those you see in Excel in the ribbon tabs. The menus are as follows: File, Edit, View, Insert, Format, Data, Tools, and Extensions. To view the contents in the menu, simply hover over the menu title with your cursor. The File and Edit menus are similar to those for Google Docs, as covered in Essentials of Google Workspace. The View menu gives the user the ability to freeze and group cells together. Inserting and deleting cells can be accessed in the Insert menu. The data and text can be formatted using the commands contained in the Format menu. The Data menu includes commands similar to the Data tab in Excel that are useful for analyzing data in a spreadsheet. The Tools menu is like the Review tab in Excel with spelling and grammar checking commands. Advanced features are in the Extensions menu.
+
+The toolbar is called the action bar, and it mostly remains static, yet sometimes it adds functions based on usage. shows the toolbar. In addition to the menus, the toolbar includes buttons for the more frequently used commands for easy access. These commands can be accessed through the menus, but here they are available with one click. You will notice there is some similarity in the look of the icons in Sheets and Excel. The first two commands are Undo and Redo, then Print, and Paint format. After that, you see the Zoom drop-down menu, the Format as currency, Format as percent, Decrease decimal places or Increase decimal places, and more formats. Next are the menus for the font type and size, font formatting, border lines, alignment, text wrapping, and text rotation. The last group includes linking, commenting, and adding a graph, filter, or function.
+
+On a Mac, the Google Sheets action bar shows the menu, like on a PC. However, rather than simply hovering, you will need to click on the menu title to see its contents.
+
+Creating Sheets
+shows a finished sales report, much like an Excel worksheet. As in Excel, when you open Sheets, there is only one worksheet, called “Sheet1.” To add another sheet, you can click on the plus sign at the bottom left. This will add another sheet called “Sheet2.” Let’s walk through the steps to create this table in Sheets. Let’s assume that you have handwritten invoices of a set of orders, and you want to enter these invoices in Excel or Sheets. The receipt-block pads are customized with a unique receipt number, your company logo, contact data, and other business information. These were popular before small and medium businesses started to use computerized receipts, yet you may still see these handwritten receipts sometimes. In such a case, after the sale has occurred, you need to input the data into Excel or Sheets.
+
+The first step in re-creating the table in is to insert and format the headers in a blank worksheet. Then, select the first 20 rows below the headers, since the table has 20 rows of data (), click on the Borders drop-down menu, and choose All Borders. Next, change the format type for each column based on the contents of the column (). For cells A2 to A21, use the Date format under the More Formats drop-down menu. Format cells B2 to B21 and C2 to C21 as Plain Text. You can leave cells D2 to D21 as Automatic or change them to Plain Text. Format cells E2 to E21 and G2 to G21 as Accounting. Automatic as a format type is the equivalent of “General” in Excel. To select two columns that are not contiguous, select the first one, in this case E, then press Ctrl on the keyboard, and select G. This is called the Ctrl+Select process. For column F, you can leave it as Automatic or format it as a number. Now, you are ready to do the data entry of the manual invoicing. You will format the header after entering the data.
+
+Next, enter the data in row 2, and follow the same steps for subsequent rows. The first several columns only require typing in data from the data source. The first order was placed on February 27, 2021, for 14 model E-900s 32-inch LCD TVs for $170 each. First, enter the date as 02-27-21 (a). Because we selected the format in advance, it will automatically be formatted to the desired format of 02/27/2021. Fill in the rest of the data from the order across the row (b). The price is already in accounting format, so you do not need to type the currency symbol. The Revenue, column G, is the product of the price and the quantity, so type in a formula, “=E2*F2” (b).
+
+Now that the first row is finished, you will adjust the width of each column to accommodate the data so it looks like the original table. Place your cursor on the edge of column A, and the cursor will change to an arrow (a), then double-click it. The column automatically adjusts to the width of the contents. To do this with a single action, highlight the entire table and then double-click between any two columns. This will apply the AutoFit function to all columns you have selected (highlighted). When you do this for all columns, the columns all have different widths (b). Finally, to format the header row, select the whole row and click on the Fill color command, choosing a similar color, as shown in .
+
+Navigating Existing Sheets
+
+To open existing sheets, you start from Google Drive. Sign into your Drive account, then browse through your files to look for the existing workbooks. Double-click on an existing Sheets file, and it will open in a new browser tab. shows several files in Google Drive. You will need to recognize the icon for Sheets to know which are workbooks. The icon for Sheets is green. Sheets can also open Excel files. To browse for the saved Excel files not found in your Google Drive, choose Upload.
+
+Maintaining Accountability with Version History
+
+In order to open Docs or Sheets, you will need to create or log in to your Google account. Every time you make a change to a file, Google Workspace uses your username to track it. If multiple people have been given access to open or edit the file, Google tracks these changes. You can review the changes different collaborators in your company make to a file using the Version History feature located near the bottom of the File menu. Version history is tracked from file creation. If a user has editing privileges for a document, they can see the version history. You can also filter changes by date to see what users changed on a specific date. You can check what changes any coworker made in the document. Having access to the version history of the document protects the integrity of collaborating with others by establishing accountability. Changes to the file cannot be made without other collaborators knowing that changes have been made. This allows transparency of information flow between collaborators. This can become important in tracking down errors in the file and can guide you if you need to revert to an earlier version of a document. It is also an important feature that helps collaboration when the individuals are not in the same location.
+
+Printing Sheets
+
+The process for printing worksheets in Sheets is the same as it is in Excel. Choose Print from the File menu (a). The dialog box that opens (b) lets you choose the print settings, such as page setup, range of pages to print, and zoom level, just like in Excel. The Print dialog box allows you to adjust the margins and add page breaks to make sure the spreadsheet prints as you would like. To adjust the margins, choose the Margins menu from the right side of the display. To add page breaks, choose Set Custom Page Breaks and move the lines to the desired location for the page breaks. Then, choose Confirm Breaks in the upper-right corner. You can also choose to print the active worksheet or the whole workbook. The whole workbook choice is shown in b. When you click Next, Sheets will generate a preview of the file you are printing. Typically, your printer is listed as the default destination for printing. Choose the down arrow to choose your printer if it is not automatically listed. You can also generate a .pdf file, which you can save and then download from the browser into your computer. You can then open the .pdf file in Adobe Acrobat or any other .pdf viewer, such as Microsoft Edge, and print it there.
+
+Summary
+
+Sheets serves many of the same purposes as Excel, but some of its tools are limited, compared with Excel. Many of the features are the same as or similar to Excel.
+
+The toolbar on Sheets is called the action bar. It is just one row of commands, unlike the wider Microsoft Office ribbon, with menus that are essentially the same as the tools in Excel, but the action bar also includes a row of buttons for frequently used commands.
+
+The process of creating a worksheet and formatting cells in an existing worksheet in Sheets is similar to that of Excel, with drop-down menus for common commands.
+
+Printing in Sheets is similar to printing in Excel.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+command that allows you to select two or more areas that are not contiguous

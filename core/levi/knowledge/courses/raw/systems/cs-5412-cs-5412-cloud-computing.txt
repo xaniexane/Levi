@@ -1,0 +1,181 @@
+# CS 5412: Cloud Computing
+# Cornell University
+# source: http://www.cs.cornell.edu/Courses/CS5412/2014sp/
+
+ken
+Normal
+ken
+4
+4
+2012-01-15T19:22:00Z
+2012-01-23T18:19:00Z
+1
+1004
+5729
+Cornell University
+47
+13
+6720
+14.00
+false
+false
+false
+false
+EN-US
+X-NONE
+X-NONE
+MicrosoftInternetExplorer4
+CS5412:
+Cloud Computing (Spring 2014) Tuesday/Thursday 10:10-11:25, Hollister B14
+Prof. Ken Birman , 435 Gates Hall, x5-9199
+Syllabus , Slides, other Course materials: click here .    Project
+info: here .
+Newsgroup for posting questions: We haven't yet decided if we will use
+EdX or Piazza -- EdX has better support for MOOC materials and working on
+projects semi-independently, while Piazza is very robust and friendly but
+rather limited.  Until we do, you can post questions
+to Piazza,
+here .
+Synopsis: Cloud computing has become a major commercial
+area for Internet product development and activity.  The term has many
+uses: we use the cloud whenever we search the web, post a photo to Facebook, or
+use the mobile version of Google Maps for driving directions.  Cloud
+computing enables a new kind of computation in which staggering amounts of data
+can be culled from sensors world-wide and then employed as the basis for
+problem solving in new styles that need to also be massively parallel, since
+the data ends up spread over large numbers of machines, with no single machine
+having more than a "shard" of the big picture.   Many users
+think of the cloud as the ultimate "rent-a-machine" computing
+solution: as many virtual computing nodes as you might care to pay for, on
+demand.  Finally, computing evokes a new kind of social phenomenon, namely
+the penetration of computing systems into society at every level, and a
+diversity of privacy, security and even legal issues tied to those
+developments.
+CS5412 will focus on the technology of the cloud.  This is a narrow
+focus: entire courses could be constructed around such topics as the social and
+legal impact of cloud computing.  Indeed, we'll be even more narrow:
+because CS5320  explores database and
+information management aspects of the cloud, we avoid overlap with that
+class.  Accordingly, in CS5412 we'll concentrate primarily on the
+architecture of today's cloud computing client systems, the evolution of the
+Internet to support the cloud, the architecture of modern cloud data centers,
+and the technologies used within them.
+Of particular interest in spring 2014 will be the first and second tier
+cloud components that focus on elasticity, amazing scalability, instant
+responsiveness and the form of security needed to support web transactions such
+as credit-card purchases.  By the end of the course, participants will
+have not just a deep picture of how all this works, but also a sense of the
+underlying theory, the current set of research and engineering challenges, and
+even some cloud computing technology options that work in the lab but have yet
+to enter wide practice in the field.
+Prerequisites:   This course assumes a sound background
+in operating systems and computer architecture: CS3410 and CS4410.  It is
+not necessary to have taken the Cornell versions of those courses, but it
+is
+important to have the required background.  We do not require any direct
+hands-on exposure to cloud computing, but all students should be proficient in
+a programming language such as C# or Java or Python as used on an operating
+system like Windows or Linux.  You'll be expected to write a fair amount of
+code for your project.
+Level of the Course:   CS5412 is aimed at students
+in the CS or ECE MEng program, CS undergraduates who have taken the required
+3xxx and 4xxx courses and done well in them, and PhD students.  We should
+caution that because the course isn't really wasn't developed as a research
+course for PhD
+students, the coverage of material is mucht more practical in emphasis than
+in a typical Cornell PhD course, where we would dive deeper into the theory and read current
+research publications.  On the other hand, Professor Birman is an active
+researcher in this area, and he couldn't teach a shallow cloud computing
+"engineering" course if he tried.  So even our non-PhD attendees
+may get a bigger exposure to research topics in the area than they would
+normally expect, and PhD students should feel welcome!
+Grading:   Grading will be based on surprise in-class
+quizzes, which will count for 0-20% of credit depending on how many we decide to do
+(e.g. we might not use quizzes at all, if attendence is good, or we might decide
+to have plenty of them if people stop
+coming to class or show up but then seem to be playing World of Warcraft or engaging in other
+non-class related activities).  There won't be any prelim exams or final.
+The main part of your grade will be based on your course project (80-100%), which can be undertaken in small
+teams or individually.  We use the grades to make a curve, and then award
+letter grades based on your ranking on the curve.  Generally about half the
+class gets an A+/A/A- and about half a B+/B/B-.  We avoid giving grades in
+the C-F range, and that won't happen to you if you come to class and work hard
+on your project and have something cool to demo by the end of the semester.
+We'll be providing a variety of computing tools but many students are
+likely to use the Isis2 system in these
+projects, or the Mica system.  Isis2 can be employed from C#, C++, Visual Basic, Iron Python
+and many other languages, although documentation is still under development for
+some of the less common options.  You can work on Windows or Linux, and
+will have access to real cloud resources as appropriate to your project.
+Some projects will focus on the mobile side of the cloud, but the majority are
+expected to involve developing new cloud services that can be deployed into the
+first-tier on systems like Microsoft's Azure or Google's AppEngine.
+We do not offer makeup quizzes, so if we do need to have quizzes, you need to
+be in class on the day of the quiz to take them, and otherwise are marked as a
+no-show for that quiz.
+MEng project option:   After looking at the project list
+and rules for doing a project, you can pick one of the MEng-approved projects if
+you like.  In that case just sign up for 3 credits of CS5999 using Ken's
+CS5999 course code, in addition
+to CS5412.  He'll give you the identical grade in CS5412 and in the CS5999
+section.
+Speak to Professor Birman, Theo or Stavros if you
+would like to do an even more ambitious project or something of your own design.
+You would still enroll for a maximum of 3 credits of CS5999, would still do
+the project during the spring semester and finish it on time, and would
+still use it as your class project too.  We are open to considering team MEng project
+proposals from groups of no more than 2.
+Textbook:   We are using Ken's
+textbook, in the Springer Verlag "Guide to..." series:
+Reliable Distributed Systems: Building High-Assurance Applications and
+Cloud-Hosted Services.   You can purchase this online, or in the
+campus store, or at the bookstore in CollegeTown.   However, the
+book is not required and we've put copies on reserve in the library for people
+who prefer not to own their own copy.  We may ask you to do some readings
+from the book, though, so if you don't plan to own it, do make sure you can
+access a copy.  We may also ask you to read some published papers from the cloud
+computing literature.  If we do end up having in-class quizzes, they
+would often be based on those assigned readings or on things covered in class
+on Ken's slides, copies of which are online in case you need to revisit them
+when trying to understand things better.
+MOOCs: We
+will not be using "videonotes" this semester, but there will be MOOC-style
+videos relating to using the Isis2 system and (we hope) the Mica system posted
+fairly soon.  Mica is owned by a PhD student who is currently on leave at
+Amazon in their cloud computing unit, however, so we can't be sure that it
+will be available to us this semester. We'll just have to keep our fingers
+crossed that Amazon gives him enough time to make that feasible.
+For people who
+decide to do Isis2 projects , Ken is recording an Isis2 MOOC video
+sequence now.  He can already give you advance access to the slides
+without the voice-over and demo content if you need to see that stuff asap.
+However, the Isis2 programmer's manual on isis2.codeplex.com is pretty good,
+and people who want to use Isis2 should download it, as well as the online
+manual pages for the various Isis2 method.  To really work with Isis2
+you'll want to either work from Windows with Visual Studio for .NET, or on
+Linux using Mono with the Mono development environment/debugger.  Both
+work pretty well.  This option works well for people comfortable with C#
+or IronPython, but would be more challenging for people who don't know either
+of those languages.  C++/CLI (a .NET version of C++) is probably the next
+best choice, for those who know C++.
+TA Support: CS5412 has two TAs: Theo Gkountouvas < tg294@cornell.edu >
+and Stavros Nikolaou < sn478@cornell.edu >.
+Both are PhD students who do research right in the area of scalable cloud
+computing systems, but because the technology in this space is so varied and
+there is so much "stuff" out there, you may still need to track things down
+independentally if you focus on a specific tool or technology and need help.
+There are thousands of open source options to work with and nobody knows the
+details of all of them.  So you can count on all of us, including Theo and
+Stavros, to give good suggestions, but you'll end up needing to be a
+"self-starter" to succeed.  In cloud computing, this is a good skill to
+develop!
+Office hours
+Ken Birman (Gates 435, 5-9199
+Tues 1:15-2:15
+Thu 1:15-2:15
+Theodoros Gkountouvas (Gates G11)
+Fri 3:00-4:00
+Sun 3:00-4:00
+Stavros Nikolaou (Gates G13)
+Mon 3:00-4:00
+Wed 3:00-4:00

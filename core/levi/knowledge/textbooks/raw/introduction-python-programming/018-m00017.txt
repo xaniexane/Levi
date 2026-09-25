@@ -1,0 +1,118 @@
+# m00017
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Formatting code
+
+Formatting code
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify good spacing for expressions and statements.
+
+Write multi-line statements using implicit line joining.
+
+Recommended spacing
+
+Most spaces in Python code are ignored when running programs; however, spaces at the start of a line are very important. The following two programs are equivalent:
+
+Good spacing:
+ 
+ name = input("Enter someone's name: ")
+ place = input("Enter a famous place: ")
+ print(name, "should visit", place + "!")
+
+Poor spacing: 
+ 
+ name=input ("Enter someone's name: " )
+ place =input("Enter a famous place: ")
+ print( name,"should visit" , place+ "!")
+
+One might argue that missing or extra spaces do not matter. After all, the two programs above run exactly the same way. However, the "poor spacing" version is more difficult to read. Code like name=input and place+ might lead to confusion.
+
+Good programmers write code that is as easy to read as possible. That way, other programmers are more likely to understand the code. To encourage consistency, the Python community has a set of guidelines about where to put spaces and blank lines, what to name variables, how to break up long lines, and other important topics.
+
+Python style guide
+PEP 8 is the official style guide for Python. PEP stands for Python Enhancement Proposal. Members of the Python community write PEPs to document best practices and propose new features. The table below is based on guidelines from PEP 8 under the heading Whitespace in Expressions and Statements.
+
+Guidelines for spaces.
+
+Guideline
+Example
+Common Mistakes
+print("Go team!")
+print ("Go team!")
+ print( "Go team!" )
+
+print("Hello", name)
+print("Hello" , name)
+ print("Hello",name)
+Assignment: one space before and after the =.
+Assignment: one space before and after the =.
+name = input("Your name? ")
+name=input("Your name? ")
+ name= input("Your name? ")
+ name =input("Your name? ")
+Concatenation: one space before and after the +.
+Concatenation: one space before and after the +.
+print("Hi", name + "!")
+print("Hi", name+"!")
+ print("Hi", name+ "!")
+ print("Hi", name +"!")
+
+x**2 + 5*x - 8
+x ** 2 + 5 * x - 8
+ x ** 2+5 * x-8
+ x**2+5*x-8
+
+Recommended spacing
+
+Automatic concatenation
+
+Long strings make Python programs difficult to read. Ex: This program prints the first sentence of the US Declaration of Independence:
+
+print("The unanimous Declaration of the thirteen united States of America, When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.")
+
+PEP 8 recommends that each line of code be less than 80 characters long. That way, programmers won't need to scroll horizontally to read the code. The above program can be rewritten by breaking up the original string:
+
+For convenience, Python automatically concatenates multiple strings. The + operator is not required in this situation.
+
+String concatenation
+
+String literal concatenation
+
+Multi-line statements
+
+Most statements in a Python program need only one line of code. But occasionally longer statements need to span multiple lines. Python provides two ways to write multi-line statements:
+Explicit line joining, using \ characters:
+ 
+ decl = "The unanimous Declaration of the thirteen united States of " \
+         "America, When in the Course of human events, it becomes " \
+         "necessary for one people to dissolve the political bands..."
+
+Explicit line joining, using \ characters:
+Implicit line joining, using parentheses:
+ 
+ decl = ("The unanimous Declaration of the thirteen united States of "
+         "America, When in the Course of human events, it becomes "
+         "necessary for one people to dissolve the political bands...")
+
+Implicit line joining, using parentheses:
+
+Implicit line joining is more common, since many statements and expressions use parentheses anyway. PEP 8 recommends avoiding the use of explicit line joining whenever possible.
+
+Multi-line statements
+
+Spaced out
+
+The following code works correctly but is formatted poorly. In particular, the code does not include spaces recommended by PEP 8. Furthermore, two of the lines are about 90 characters long. Reformat the code to follow the guidelines in this section. Be careful not to change the behavior of the code itself.
+
+Five quotes
+
+Write a program that prints the following five quotes (source: BrainyQuote) from Guido van Rossum, the creator of Python. Your program should have exactly five print statements, one for each quote:
+
+Notice that all of these lines are longer than 80 characters, and some contain single quote marks. Format the code using multi-line statements and escape sequences as necessary.

@@ -1,0 +1,156 @@
+# m00081
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Statistical Distributions
+
+Statistical Distributions
+
+By the end of this section, you will be able to:
+
+Construct and interpret a frequency distribution.
+
+Apply and evaluate probabilities using the normal distribution.
+
+Apply and evaluate probabilities using the exponential distribution.
+
+Frequency Distributions
+
+A frequency distribution provides a method to organize and summarize a data set. For example, we might be interested in the spread, center, and shape of the data set’s distribution. When a data set has many data values, it can be difficult to see patterns and come to conclusions about important characteristics of the data. A frequency distribution allows us to organize and tabulate the data in a summarized way and also to create graphs to help facilitate an interpretation of the data set.
+
+To create a basic frequency distribution, set up a table with three columns. The first column will show the intervals for the data, and the second column will show the frequency of the data values, or the count of how many data values fall within each interval. A third column can be added to include the relative frequency for each row, which is calculated by taking the frequency for that row and dividing it by the sum of all the frequencies in the table.
+
+Graphing Demand and Supply
+
+A financial consultant at a brokerage firm records the portfolio values for 20 clients, as shown in , where the portfolio values are shown in thousands of dollars.
+
+Portfolio Values for 20 Clients at a Brokerage Firm ($000s)
+
+278
+318
+422
+577
+618
+735
+798
+864
+903
+944
+1,052
+1,099
+1,132
+1,180
+1,279
+1,365
+1,471
+1,572
+1,787
+1,905
+Create a frequency distribution table using the following intervals for the portfolio values:
+
+0–299
+300–599
+600–899
+900–1,199
+1,200–1,499
+1,500–1,799
+Solution:
+
+Create a table where the intervals for portfolio value are listed in the first column. For this example, it was decided to create a frequency distribution table with seven rows and a class width set to 300. The class width is the distance from the start of one interval to the start of the next interval in the subsequent row. For example, the interval for the second row starts at 300, the interval for the third row starts at 600, and so on.
+
+In the second column, record the frequency, or the number of data values that fall within the interval, for each row. For example, for the first row, count the number of data values that fall between 0 and 299. Because there is only one data value (278) that falls in this interval, the corresponding frequency is 1. For the second row, there are 3 data values that fall between 300 and 599 (318, 422, and 577). Thus, the frequency for the second row is 3.
+
+For the third column, called relative frequency, take the frequency for each row and divide it by the sum of the frequencies, which is 20. For example, in the first row, the relative frequency will be 1 divided by 20, which is 0.05. The relative frequency for the second row will be 3 divided by 20, which is 0.15. The resulting frequency distribution table is shown in .
+
+Frequency Distribution of Portfolio Values for 20 Clients at a Brokerage Firm ($000s)
+
+Portfolio Value Interval ($000s)
+Frequency
+Relative Frequency
+0–299
+1
+0.05
+300–599
+3
+0.15
+600–899
+4
+0.20
+900–1,199
+6
+0.30
+1,200–1,499
+3
+0.15
+1,500–1,799
+2
+0.10
+1,800–2,099
+1
+0.05
+The frequency table indicates that most customers have portfolio values between $300,000 and $599,000, as this row in the table shows the highest frequency. Very few customers have portfolios with a value below $299,000 or above $1,800,000, as these frequencies in these rows are very low. Because the highest frequency corresponds to the row in the middle of the table and the frequencies decrease with each interval below and above this middle interval, the frequency table indicates that this distribution is a bell-shaped distribution.
+
+The following is a summary of how to create a frequency distribution table (for integer data). Note that the number of classes in a frequency table is the same as the number of rows in the table.
+
+Calculate the class width using the formula ClassWidth=Max - MinNumberofClasses
+ 
+ Note: For integer data, round the class width up to the next whole number.
+
+Note: For integer data, round the class width up to the next whole number.
+
+Create a table with a number of rows equal to the number of classes. Create columns for Lower Class Limit, Upper Class Limit, Frequency, and Relative Frequency.
+
+Set the lower class limit for the first row equal to the minimum value from the data set, or some other appropriate value.
+
+Calculate the lower class limit for the second row by adding the class width to the lower class limit from the first row. Add the class width to each new lower class limit to calculate the lower class limit for each subsequent row.
+
+The upper class limit for each row is 1 less than the lower class limit of the subsequent row. You can also add the class width to each upper class limit to determine the upper class limit for the subsequent row.
+
+Record the frequency for each row by counting how many data values fall between the lower class limit and the upper class limit for that row.
+
+Calculate the relative frequency for each row by taking the frequency for that row and dividing by the total number of data values.
+
+Normal Distribution
+
+The normal probability density function, a continuous distribution, is the most important of all the distributions. The normal distribution is applicable when the frequency of data values decreases with each class above and below the mean. The normal distribution can be applied to many examples from the finance industry, including average returns for mutual funds over a certain time period, portfolio values, and others. The normal distribution has two parameters, or numerical descriptive measures: the mean, μ, and the standard deviation, σ. The variable x represents the quantity being measured whose data values have a normal distribution.
+
+Graph of the Normal Distribution
+
+The curve in is symmetric about a vertical line drawn through the mean, μ. The mean is the same as the median, which is the same as the mode, because the graph is symmetric about μ. As the notation indicates, the normal distribution depends only on the mean and the standard deviation. Because the area under the curve must equal 1, a change in the standard deviation, σ, causes a change in the shape of the normal curve; the curve becomes fatter and wider or skinnier and taller depending on σ. A change in μ causes the graph to shift to the left or right. This means there are an infinite number of normal probability distributions.
+
+To determine probabilities associated with the normal distribution, we find specific areas under the normal curve, and this is further discussed in Apply the Normal Distribution in Financial Contexts. For example, suppose that at a financial consulting company, the mean employee salary is $60,000 with a standard deviation of $7,500. A normal curve can be drawn to represent this scenario, in which the mean of $60,000 would be plotted on the horizontal axis, corresponding to the peak of the curve. Then, to find the probability that an employee earns more than $75,000, you would calculate the area under the normal curve to the right of the data value $75,000.
+
+Excel uses the following command to find the area under the normal curve to the left of a specified value:
+
+For example, at the financial consulting company mentioned above, the mean employee salary is $60,000 with a standard deviation of $7,500. To find the probability that a random employee’s salary is less than $55,000 using Excel, this is the command you would use:
+
+Thus, there is a probability of about 25% that a random employee has a salary less than $55,000.
+
+Exponential Distribution
+
+The exponential distribution is often concerned with the amount of time until some specific event occurs. For example, a finance professional might want to model the time to default on payments for company debt holders.
+
+An exponential distribution is one in which there are fewer large values and more small values. For example, marketing studies have shown that the amount of money customers spend in a store follows an exponential distribution. There are more people who spend small amounts of money and fewer people who spend large amounts of money.
+
+Exponential distributions are commonly used in calculations of product reliability, or the length of time a product lasts. The random variable for the exponential distribution is continuous and often measures a passage of time, although it can be used in other applications. Typical questions may be, What is the probability that some event will occur between x1 hours and x2 hours? or What is the probability that the event will take more than x1 hours to perform? In these examples, the random variable x equals either the time between events or the passage of time to complete an action (e.g., wait on a customer). The probability density function is given by
+
+where μ is the historical average of the values of the random variable (e.g., the historical average waiting time). This probability density function has a mean and standard deviation of 1μ.
+
+To determine probabilities associated with the exponential distribution, we find specific areas under the exponential distribution curve. The following formula can be used to calculate the area under the exponential curve to the left of a certain value:
+
+Calculating Probability
+
+At a financial company, the mean time between incoming phone calls is 45 seconds, and the time between phone calls follows an exponential distribution, where the time is measured in minutes. Calculate the probability of having 2 minutes or less between phone calls.
+Solution:
+
+To calculate the probability, find the area under the curve to the left of 1 minute. The mean time is given as 45 seconds, which is the same as 0.75 minutes. The probability can then be calculated as follows:
+
+A frequency distribution provides a method of organizing and summarizing a data set and allows us to organize and tabulate the data in a summarized way. Once a frequency distribution is generated, it can be used to create graphs to help facilitate an interpretation of the data set. The normal distribution has two parameters, or numerical descriptive measures: the mean, μ, and the standard deviation, σ. The exponential distribution is often concerned with the amount of time until some specific event occurs.
+
+Normal Distribution Stock Return Calculations
+
+a continuous probability distribution that is useful for calculating probabilities within the time between events
+a method of organizing and summarizing a data set that provides the frequency with which each value in the data set occurs
+a bell-shaped distribution curve that is used to model many measurements, including IQ scores, salaries, heights, weights, blood pressures, etc.

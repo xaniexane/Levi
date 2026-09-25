@@ -1,0 +1,171 @@
+# m42150
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Nonconservative Forces
+
+Nonconservative Forces
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define nonconservative forces and explain how they affect mechanical energy.
+
+Show how the principle of conservation of energy can be applied by treating the conservative forces in terms of their potential energies and any nonconservative forces in terms of the work they do.
+
+Nonconservative Forces and Friction
+
+Forces are either conservative or nonconservative. Conservative forces were discussed in Conservative Forces and Potential Energy. A nonconservative force is one for which work depends on the path taken. Friction is a good example of a nonconservative force. As illustrated in , work done against friction depends on the length of the path between the starting and ending points. Because of this dependence on path, there is no potential energy associated with nonconservative forces. An important characteristic is that the work done by a nonconservative force adds or removes mechanical energy from a system. Friction, for example, creates thermal energy that dissipates, removing energy from the system. Furthermore, even if the thermal energy is retained or captured, it cannot be fully converted back to work, so it is lost or not recoverable in that sense as well.
+
+How Nonconservative Forces Affect Mechanical Energy
+Mechanical energy may not be conserved when nonconservative forces act. For example, when a car is brought to a stop by friction on level ground, it loses kinetic energy, which is dissipated as thermal energy, reducing its mechanical energy. compares the effects of conservative and nonconservative forces. We often choose to understand simpler systems such as that described in (a) first before studying more complicated systems as in (b).
+
+How the Work-Energy Theorem Applies
+
+Now let us consider what form the work-energy theorem takes when both conservative and nonconservative forces act. We will see that the work done by nonconservative forces equals the change in the mechanical energy of a system. As noted in Kinetic Energy and the Work-Energy Theorem, the work-energy theorem states that the net work on a system equals the change in its kinetic energy, or Wnet=ΔKE. The net work is the sum of the work by nonconservative forces plus the work by conservative forces. That is,
+
+so that
+
+where Wnc is the total work done by all nonconservative forces and Wc is the total work done by all conservative forces.
+
+Consider , in which a person pushes a crate up a ramp and is opposed by friction. As in the previous section, we note that work done by a conservative force comes from a loss of gravitational potential energy, so that Wc=−ΔPE. Substituting this equation into the previous one and solving for Wnc gives
+
+This equation means that the total mechanical energy (KE + PE) changes by exactly the amount of work done by nonconservative forces. In , this is the work done by the person minus the work done by friction. So even if energy is not conserved for the system of interest (such as the crate), we know that an equal amount of work was done to cause the change in total mechanical energy.
+
+We rearrange Wnc=ΔKE+ΔPE to obtain
+
+This means that the amount of work done by nonconservative forces adds to the mechanical energy of a system. If Wnc is positive, then mechanical energy is increased, such as when the person pushes the crate up the ramp in . If Wnc is negative, then mechanical energy is decreased, such as when the rock hits the ground in (b). If Wnc is zero, then mechanical energy is conserved, and nonconservative forces are balanced. For example, when you push a lawn mower at constant speed on level ground, your work done is removed by the work of friction, and the mower has a constant energy.
+
+Applying Energy Conservation with Nonconservative Forces
+
+When no change in potential energy occurs, applying KEi+PEi+Wnc=
+
+KE
+
+f
+
++PEf amounts to applying the work-energy theorem by setting the change in kinetic energy to be equal to the net work done on the system, which in the most general case includes both conservative and nonconservative forces. But when seeking instead to find a change in total mechanical energy in situations that involve changes in both potential and kinetic energy, the previous equation
+
+ KE
+
+i
+
++
+
+PEi
+
++
+
+Wnc
+
+=
+
+KE
+f
+
++
+
+PEf
+
+says that you can start by finding the change in mechanical energy that would have resulted from just the conservative forces, including the potential energy changes, and add to it the work done, with the proper sign, by any nonconservative forces involved.
+
+Calculating Distance Traveled: How Far a Baseball Player Slides
+
+Consider the situation shown in , where a baseball player slides to a stop on level ground. Using energy considerations, calculate the distance the 65.0-kg baseball player slides, given that his initial speed is 6.00 m/s and the force of friction against him is a constant 450 N.
+Strategy
+
+Strategy
+
+Friction stops the player by converting his kinetic energy into other forms, including thermal energy. In terms of the work-energy theorem, the work done by friction, which is negative, is added to the initial kinetic energy to reduce it to zero. The work done by friction is negative, because f is in the opposite direction of the motion (that is, θ=180º, and so cosθ=−1). Thus Wnc=−fd. The equation simplifies to
+
+or
+
+This equation can now be solved for the distance d.
+Solution
+
+Solution
+
+Solving the previous equation for d and substituting known values yields
+Discussion
+
+Discussion
+
+The most important point of this example is that the amount of nonconservative work equals the change in mechanical energy. For example, you must work harder to stop a truck, with its large mechanical energy, than to stop a mosquito.
+
+Calculating Distance Traveled: Sliding Up an Incline
+
+Suppose that the player from is running up a hill having a 5.00º incline upward with a surface similar to that in the baseball stadium. The player slides with the same initial speed, and the frictional force is still 450 N. Determine how far he slides.
+Strategy
+
+Strategy
+
+In this case, the work done by the nonconservative friction force on the player reduces the mechanical energy he has from his kinetic energy at zero height, to the final mechanical energy he has by moving through distance d to reach height h along the hill, with h=dsin5.00º. This is expressed by the equation
+Solution
+
+Solution
+
+The work done by friction is again Wnc=−fd; initially the potential energy is PEi=mg⋅0=0 and the kinetic energy is
+KEi=12mvi2; the final energy contributions are
+KEf=0 for the kinetic energy and PEf=mgh=mgdsinθ for the potential energy.
+
+Substituting these values gives
+
+Solve this for d to obtain
+Discussion
+
+Discussion
+
+As might have been expected, the player slides a shorter distance by sliding uphill. Note that the problem could also have been solved in terms of the forces directly and the work energy theorem, instead of using the potential energy. This method would have required combining the normal force and force of gravity vectors, which no longer cancel each other because they point in different directions, and friction, to find the net force. You could then use the net force and the net work to find the distance d that reduces the kinetic energy to zero. By applying conservation of energy and using the potential energy instead, we need only consider the gravitational potential energy mgh, without combining and resolving force vectors. This simplifies the solution considerably.
+
+Making Connections: Take-Home Investigation—Determining Friction from the Stopping Distance
+
+This experiment involves the conversion of gravitational potential energy into thermal energy. Use the ruler, book, and marble from Take-Home Investigation—Converting Potential to Kinetic Energy. In addition, you will need a foam cup with a small hole in the side, as shown in . From the 10-cm position on the ruler, let the marble roll into the cup positioned at the bottom of the ruler. Measure the distance d the cup moves before stopping. What forces caused it to stop? What happened to the kinetic energy of the marble at the bottom of the ruler? Next, place the marble at the 20-cm and the 30-cm positions and again measure the distance the cup moves after the marble enters it. Plot the distance the cup moves versus the initial marble position on the ruler. Is this relationship linear?
+
+With some simple assumptions, you can use these data to find the coefficient of kinetic friction μk of the cup on the table. The force of friction f on the cup is μkN, where the normal force N is just the weight of the cup plus the marble. The normal force and force of gravity do no work because they are perpendicular to the displacement of the cup, which moves horizontally. The work done by friction is fd. You will need the mass of the marble as well to calculate its initial kinetic energy.
+
+It is interesting to do the above experiment also with a steel marble (or ball bearing). Releasing it from the same positions on the ruler as you did with the glass marble, is the velocity of this steel marble the same as the velocity of the marble at the bottom of the ruler? Is the distance the cup moves proportional to the mass of the steel and glass marbles?
+
+The Ramp
+
+Explore forces, energy and work as you push household objects up and down a ramp. Lower and raise the ramp to see how the angle of inclination affects the parallel forces acting on the file cabinet. Graphs show forces, energy and work.
+Click to view content.
+
+Test Prep for AP Courses
+
+You are in a room in a basement with a smooth concrete floor (friction force equals 40 N) and a nice rug (friction force equals 55 N) that is 3 m by 4 m. However, you have to push a very heavy box from one corner of the rug to the opposite corner of the rug. Will you do more work against friction going around the floor or across the rug, and how much extra?
+
+Across the rug is 275 J extra
+
+Around the floor is 5 J extra
+
+Across the rug is 5 J extra
+
+Around the floor is 280 J extra
+
+(b)
+
+In the Appalachians, along the interstate, there are ramps of loose gravel for semis that have had their brakes fail to drive into to stop. Design an experiment to measure how effective this would be.
+
+Section Summary
+
+A nonconservative force is one for which work depends on the path.
+
+Friction is an example of a nonconservative force that changes mechanical energy into thermal energy.
+
+Work Wnc done by a nonconservative force changes the mechanical energy of a system. In equation form, Wnc=ΔKE+ΔPE or, equivalently, KEi+PEi+Wnc=KEf+PEf.
+
+When both conservative and nonconservative forces act, energy conservation can be applied and used to calculate motion in terms of the known potential energies of the conservative forces and the work done by nonconservative forces, instead of finding the net work from the net force, or having to directly apply Newton’s laws.
+
+Problems & Exercises
+
+A 60.0-kg skier with an initial speed of 12.0 m/s coasts up a 2.50-m-high rise as shown in . Find her final speed at the top, given that the coefficient of friction between her skis and the snow is 0.0800. (Hint: Find the distance traveled up the incline assuming a straight-line path as shown in the figure.)
+
+9.46 m/s
+
+(a) How high a hill can a car coast up (engine disengaged) if work done by friction is negligible and its initial speed is 110 km/h? (b) If, in actuality, a 750-kg car with an initial speed of 110 km/h is observed to coast up a hill to a height 22.0 m above its starting point, how much thermal energy was generated by friction? (c) What is the average force of friction if the hill has a slope 2.5º above the horizontal?
+
+a force whose work depends on the path followed between the given initial and final configurations
+the force between surfaces that opposes one sliding on the other; friction changes mechanical energy into thermal energy

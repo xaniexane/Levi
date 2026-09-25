@@ -1,0 +1,74 @@
+# m67754
+# Book: OpenStax Introduction Business
+# Subject: business
+# Source: https://github.com/openstax/osbooks-introduction-business
+# License: CC BY 4.0 (OpenStax)
+
+Management Information Systems
+
+Management Information Systems
+
+What types of systems make up a typical company’s management information system?
+
+Whereas individuals use business productivity software such as word processing, spreadsheet, and graphics programs to accomplish a variety of tasks, the job of managing a company’s information needs falls to management information systems: users, hardware, and software that support decision-making. Information systems collect and store the company’s key data and produce the information managers need for analysis, control, and decision-making.
+
+Factories use computer-based information systems to automate production processes and order and monitor inventory. Most companies use them to process customer orders and handle billing and vendor payments. Banks use a variety of information systems to process transactions such as deposits, ATM withdrawals, and loan payments. Most consumer transactions also involve information systems. When you check out at the supermarket, book a hotel room online, or download music over the internet, information systems record and track the transaction and transmit the data to the necessary places.
+
+Companies typically have several types of information systems, starting with systems to process transactions. Management support systems are dynamic systems that allow users to analyze data to make forecasts, identify business trends, and model business strategies. Office automation systems improve the flow of communication throughout the organization. Each type of information system serves a particular level of decision-making: operational, tactical, and strategic. shows the relationship between transaction processing and management support systems as well as the management levels they serve. Let’s take a more detailed look at how companies and managers use transaction processing and management support systems to manage information.
+
+Transaction Processing Systems
+
+A firm’s integrated information system starts with its transaction processing system (TPS). The TPS receives raw data from internal and external sources and prepares these data for storage in a database similar to a microcomputer database but vastly larger. In fact, all the company’s key data are stored in a single huge database that becomes the company’s central information resource. As noted earlier, the database management system tracks the data and allows users to query the database for the information they need.
+
+A Company’s Integrated Information System
+
+The database can be updated in two ways: batch processing, where data are collected over some time period and processed together, and online, or real-time, processing, which processes data as they become available. Batch processing uses computer resources very efficiently and is well-suited to applications such as payroll processing that require periodic rather than continuous processing. Online processing keeps the company’s data current. When you make an airline reservation, the information is entered into the airline’s information system, and you quickly receive confirmation, typically through an e-mail. Online processing is more expensive than batch processing, so companies must weigh the cost versus the benefit. For example, a factory that operates around the clock may use real-time processing for inventory and other time-sensitive requirements but process accounting data in batches overnight.
+
+Decisions, Decisions: Management Support Systems
+
+Transaction processing systems automate routine and tedious back-office processes such as accounting, order processing, and financial reporting. They reduce clerical expenses and provide basic operational information quickly. Management support systems (MSS) use the internal master database to perform high-level analyses that help managers make better decisions.
+
+Information technologies such as data warehousing are part of more advanced MSSs. A data warehouse combines many databases across the whole company into one central database that supports management decision-making. With a data warehouse, managers can easily access and share data across the enterprise to get a broad overview rather than just isolated segments of information. Data warehouses include software to extract data from operational databases, maintain the data in the warehouse, and provide data to users. They can analyze data much faster than transaction-processing systems. Data warehouses may contain many data marts, special subsets of a data warehouse that each deal with a single area of data. Data marts are organized for quick analysis.
+
+Companies use data warehouses to gather, secure, and analyze data for many purposes, including customer relationship management systems, fraud detection, product-line analysis, and corporate asset management. Retailers might wish to identify customer demographic characteristics and shopping patterns to improve direct-mailing responses. Banks can more easily spot credit-card fraud, as well as analyze customer usage patterns.
+
+According to Forrester Research, about 60 percent of companies with $1 billion or more in revenues use data warehouses as a management tool. Union Pacific (UP), a $19 billion railroad, turned to data warehouse technology to streamline its business operations. By consolidating multiple separate systems, UP achieved a unified supply-chain system that also enhanced its customer service. “Before our data warehouse came into being we had stovepipe systems,” says Roger Bresnahan, principal engineer. “None of them talked to each other. . . . We couldn’t get a whole picture of the railroad.”
+
+UP’s data warehouse system took many years and the involvement of 26 departments to create. The results were well worth the effort: UP can now make more accurate forecasts, identify the best traffic routes, and determine the most profitable market segments. The ability to predict seasonal patterns and manage fuel costs more closely has saved UP millions of dollars by optimizing locomotive and other asset utilization and through more efficient crew management. In just three years, Bresnahan reports, the data warehouse system had paid for itself.Kathleen Hickey, “Data Warehouses Integrate Supply Chains,” World Trade, February 1, 2006, p. 42.
+
+Kathleen Hickey, “Data Warehouses Integrate Supply Chains,”
+At the first level of an MSS is an information-reporting system, which uses summary data collected by the TPS to produce both regularly scheduled and special reports. The level of detail would depend on the user. A company’s payroll personnel might get a weekly payroll report showing how each employee’s paycheck was determined. Higher-level mangers might receive a payroll summary report that shows total labor cost and overtime by department and a comparison of current labor costs with those in the prior year. Exception reports show cases that fail to meet some standard. An accounts receivable exception report that lists all customers with overdue accounts would help collection personnel focus their work. Special reports are generated only when a manager requests them; for example, a report showing sales by region and type of customer can highlight reasons for a sales decline.
+
+Decision Support Systems
+
+A decision support system (DSS) helps managers make decisions using interactive computer models that describe real-world processes. The DSS also uses data from the internal database but looks for specific data that relate to the problems at hand. It is a tool for answering “what if” questions about what would happen if the manager made certain changes. In simple cases, a manager can create a spreadsheet and try changing some of the numbers. For instance, a manager could create a spreadsheet to show the amount of overtime required if the number of workers increases or decreases. With models, the manager enters into the computer the values that describe a particular situation, and the program computes the results. Marketing executives at a furniture company could run DSS models that use sales data and demographic assumptions to develop forecasts of the types of furniture that would appeal to the fastest-growing population groups.
+
+Companies can use a predictive analytics program to improve their inventory management system and use big data to target customer segments for new products and line extensions.
+
+Executive Information Systems
+
+Although similar to a DSS, an executive information system (EIS) is customized for an individual executive. These systems provide specific information for strategic decisions. For example, a CEO’s EIS may include special spreadsheets that present financial data comparing the company to its principal competitors and graphs showing current economic and industry trends.
+
+Expert Systems
+
+An expert system gives managers advice similar to what they would get from a human consultant. Artificial intelligence enables computers to reason and learn to solve problems in much the same way humans do, using what-if reasoning. Although they are expensive and difficult to create, expert systems are finding their way into more companies as more applications are found. Lower-end expert systems can even run on mobile devices. Top-of-the-line systems help airlines appropriately deploy aircraft and crews, critical to the carriers’ efficient operations. The cost of hiring enough people to do these ongoing analytical tasks would be prohibitively expensive. Expert systems have also been used to help explore for oil, schedule employee work shifts, and diagnose illnesses. Some expert systems take the place of human experts, whereas others assist them.
+
+What are the main types of management information systems, and what does each do?
+
+Differentiate between the types of management support systems, and give examples of how companies use each.
+
+Summary of Learning Outcomes
+
+What types of systems make up a typical company’s management information system?
+
+A management information system consists of a transaction processing system, management support systems, and an office automation system. The transaction processing system collects and organizes operational data on the firm’s activities. Management support systems help managers make better decisions. They include an information-reporting system that provides information based on the data collected by the TPS to the managers who need it; decision support systems that use models to assist in answering “what if” types of questions; and expert systems that give managers advice similar to what they would get from a human consultant. Executive information systems are customized to the needs of top management.
+
+A method of updating a database in which data are collected over some time period and processed together.
+Special subset of a data warehouse that deals with a single area of data and is organized for quick analysis.
+An information technology that combines many databases across a whole company into one central database that supports management decision-making.
+A management support system that helps managers make decisions using interactive computer models that describe real-world processes.
+A management support system that is customized for an individual executive; provides specific information for strategic decisions.
+A management support system that gives managers advice similar to what they would get from a human consultant; it uses artificial intelligence to enable computers to reason and learn to solve problems in much the same way humans do.
+An information system that uses the internal master database to perform high-level analyses that help managers make better decisions.
+A method of updating a database in which data are processed as they become available.
+An information system that handles the daily business operations of a firm. The system receives and organizes raw data from internal and external sources for storage in a database using either batch or online processing.

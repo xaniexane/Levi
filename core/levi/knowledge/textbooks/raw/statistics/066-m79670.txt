@@ -1,0 +1,918 @@
+# m79670
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Comparing Two Independent Population Proportions
+
+Comparing Two Independent Population Proportions
+
+When conducting a hypothesis test that compares two independent population proportions, the following characteristics should be present:
+
+The two independent samples are simple random samples that are independent.
+
+The number of successes is at least five, and the number of failures is at least five, for each of the samples.
+
+Growing literature states that the population must be at least 10 or 20 times the size of the sample. This keeps each population from being over-sampled and causing incorrect results.
+
+Comparing two proportions, like comparing two means, is common. If two estimated proportions are different, it may be due to a difference in the populations or it may be due to chance. A hypothesis test can help determine if a difference in the estimated proportions reflects a difference in the population proportions.
+
+The difference of two proportions follows an approximate normal distribution. Generally, the null hypothesis states that the two proportions are the same. That is, H0: pA = pB. To conduct the test, we use a pooled proportion, pc.
+
+The pooled proportion is calculated as follows:
+
+The distribution for the differences is
+
+The test statistic (z-score) is
+
+Two types of medication for hives are being tested to determine if there is a difference in the proportions of adult patient reactions. Twenty out of a random sample of 200 adults given Medication A still had hives 30 minutes after taking the medication. Twelve out of another random sample of 200 adults given Medication B still had hives 30 minutes after taking the medication. Test at a 1 percent level of significance.
+
+The problem asks for a difference in proportions, making it a test of two proportions.
+
+Let A and B be the subscripts for Medication A and Medication B, respectively. Then, pA and pB are the desired population proportions.
+Random Variable:P′A – P′B = difference in the proportions of adult patients who did not react after 30 minutes to Medication A and to Medication B.
+
+Random Variable:
+H0: pA = pB
+pA – pB = 0
+Ha: pA ≠ pB
+pA – pB ≠ 0
+
+The words is a difference tell you the test is two-tailed.
+Distribution for the test: Since this is a test of two binomial population proportions, the distribution is normal:
+p
+c
+
+=
+
+x
+A
+
++
+x
+B
+
+n
+A
+
++
+n
+B
+
+=
+
+20+12
+
+200+200
+
+=0.08 1–
+p
+c
+
+=0.92
+P
+ ′
+
+ A
+ 
+ –
+ 
+ P
+ ′
+
+ B
+ 
+ ~N[ 
+ 0,
+ 
+ (0.08)(0.92)(
+ 1
+ 
+ 200
+
+ +
+ 1
+ 
+ 200
+
+ )
+
+ ]
+P′A – P′B follows an approximate normal distribution.
+Calculate the p-value using the normal distribution: p-value = 0.1404.
+
+Estimated proportion for group A: 
+
+p
+′
+
+A
+
+=
+
+x
+A
+
+n
+A
+
+=
+
+20
+
+200
+
+=0.1
+
+Estimated proportion for group B: 
+
+p
+′
+
+B
+
+=
+
+x
+B
+
+n
+B
+
+=
+
+12
+
+200
+
+=0.06
+Graph:
+
+Graph:
+P′A – P′B = 0.1 – 0.06 = 0.04.
+
+Half the p-value is below –0.04, and half is above 0.04.
+
+Compare α and the p-value: α = 0.01 and the p-value = 0.1404. α < p-value.
+
+Make a decision: Since α < p-value, do not reject H0.
+Conclusion: At a 1 percent level of significance, from the sample data, there is not sufficient evidence to conclude that there is a difference in the proportions of adult patients who did not react after 30 minutes to Medication A and Medication B.
+
+Press STAT. Arrow over to TESTS and press
+6:2-PropZTest. Arrow down and enter 20 for x1, 200 for n1, 12 for x2,
+and 200 for n2. Arrow down to p1: and arrow to not equal p2. Press ENTER. Arrow down to Calculate and press ENTER. The p-value is p = 0.1404, and the test statistic is 1.47. Do the procedure again, but instead of Calculate do Draw.
+
+Try It
+
+Two types of valves are being tested to determine if there is a difference in pressure tolerances. Fifteen out of a random sample of 100 of Valve A cracked under 4,500 psi. Six out of a random sample of 100 of Valve B cracked under 4,500 psi. Test at a 5 percent level of significance.
+
+The p-value is 0.0379, so we can reject the null hypothesis. At the 5 percent significance level, the data support that there is a difference in the pressure tolerances between the two valves.
+
+A research study was conducted about gender differences in texting. The researcher believed that the proportion of girls involved in texting is less than the proportion of boys involved. The data collected in spring 2010 among a random sample of middle and high school students in a large school district in the southern United States is summarized in . Is the proportion of girls sending texts less than the proportion of boys texting? Test at a 1 percent level of significance.
+
+Males
+Females
+Sent texts
+183
+156
+Total number surveyed
+2231
+2169
+This is a test of two population proportions. Let M and F be the subscripts for males and females. Then, pM and pF are the desired population proportions.
+Random variable:
+ p′F − p′M = difference in the proportions of males and females who sent texts.
+
+Random variable:
+H0: pF = pM H0: pF – pM = 0
+Ha: pF < pM Ha: pF – pM < 0
+
+The words less than tell you the test is left-tailed.
+Distribution for the test: Since this is a test of two population proportions, the distribution is normal:
+p
+ c
+ 
+ =
+
+ x
+ F
+ 
+ +
+ x
+ M
+
+ n
+ F
+ 
+ +
+ n
+ M
+
+ =
+ 
+ 156+183
+
+ 2169+2231
+
+ =0.077
+
+ 1−
+ p
+ c
+ 
+ =0.923
+
+Therefore,
+
+ p
+ ′
+
+ F
+ 
+ –
+ 
+ p
+ ′
+
+ M
+ 
+ ∼N(
+ 
+ 0,
+ 
+ (0.077)(0.923)(
+
+ 1
+ 
+ 2169
+
+ +
+ 1
+ 
+ 2231
+
+ )
+
+ )
+
+ p′F – p′M follows an approximate normal distribution.
+Calculate the p-value using the normal distribution:
+p-value = 0.1045
+Estimated proportion for females: 0.0719
+Estimated proportion for males: 0.082
+Graph:
+
+Graph:
+Decision: Since α < p-value, do not reject H0.
+Conclusion: At the 1 percent level of significance, from the sample data, there is not sufficient evidence to conclude that the proportion of girls sending texts is less than the proportion of boys sending texts.
+
+Press STAT. Arrow over to TESTS and press 6:2-PropZTest. Arrow down and enter 156 for x1, 2169 for n1, 183 for x2, and 2231 for n2. Arrow down to p1: and arrow to less than p2. Press ENTER. Arrow down to Calculate and press ENTER. The p-value is p = 0.1045 and the test statistic is z = –1.256.
+
+Researchers conducted a study of smartphone use (Phone A versus Phone B) among adults. A cell phone company claimed that Phone B smartphones are more popular with whites (non-Hispanic) than with African Americans. The results of the survey indicate that of the 232 African American cell phone owners randomly sampled, 5 percent own Phone B. Of the 1,343 white cell phone owners randomly sampled, 10 percent own Phone B. Test at the 5 percent level of significance. Is the proportion of white Phone B owners greater than the proportion of African American Phone B owners?
+
+This is a test of two population proportions. Let W and A be the subscripts for the whites and African Americans. Then, pW and pA are the desired population proportions.
+Random variable:p′W – p′A = difference in the proportions of Phone A and Phone B users.
+
+Random variable:
+H0: pW = pA H0: pW – pA = 0
+Ha: pW > pA Ha: pW – pA > 0
+
+The words more popular indicate that the test is right-tailed.
+Distribution for the test: The distribution is approximately normal.
+p
+ c
+ 
+ =
+
+ x
+ W
+ 
+ +
+ x
+ A
+
+ n
+ W
+ 
+ +
+ n
+ A
+
+ =
+ 
+ 134+12
+
+ 1343+232
+
+ = 0.0927
+1−
+ p
+ c
+ 
+ =0.9073
+
+Therefore,
+p
+ ′
+
+ W
+ 
+ –
+ 
+ p
+ ′
+
+ A
+ 
+ ∽N(
+ 
+ 0,
+ 
+ (
+ 
+ 0.0927
+ 
+ )(
+ 
+ 0.9073
+ 
+ )(
+
+ 1
+ 
+ 1343
+
+ +
+ 1
+ 
+ 232
+
+ )
+
+ )
+p
+ ′
+
+ W
+ 
+ –
+ 
+ p
+ ′
+
+ A
+
+ follows an approximate normal distribution.
+Calculate the p-value using the normal distribution:p-value = 0.0077
+Estimated proportion for group A: 0.10
+Estimated proportion for group B: 0.05
+
+Calculate the p-value using the normal distribution:
+Graph:
+Decision: Since α > p-value, reject the H0.
+Conclusion: At the 5 percent level of significance, from the sample data, there is sufficient evidence to conclude that a larger proportion of white cell phone owners use Phone B than African Americans.
+
+TI-83+ and TI-84: Press STAT. Arrow over to TESTS and press 6:2-PropZTest. Arrow down and enter 135 for x1, 1343 for n1, 12 for x2, and 232 for n2. Arrow down to p1: and arrow to greater than p2. Press ENTER. Arrow down to Calculate and press ENTER. The p-value is p = 0.0092, and the test statistic is z = 2.33.
+
+Try It
+
+A group of citizens wanted to know if the proportion of homeowners in their small city was different in 2011 than in 2010. Their research showed that of the 113,231 available homes in their city in 2010, 7,622 of them were owned by the families who live there. In 2011, 7,439 of the 104,873 of the available homes were owned by city residents. Test at a 5 percent significance level. Answer the following questions:
+
+a. Is this a test of two means or two proportions?
+
+a. two proportions
+
+b. Which distribution do you use to perform the test?
+
+b. normal for two proportions
+
+c. What is the random variable?
+
+c. Subscripts: 1 = 2010, 2 = 2011
+P′2 - P′2
+
+d. What are the null and alternative hypotheses? Write the null and alternative hypotheses in symbols.
+
+d. Subscripts: 1 = 2010, 2 = 2011H0: p1 = p2 H0: p1 − p2 = 0 Ha: p1 ≠ p2 Ha: p1 − p2 ≠ 0
+
+e. Is this test right-, left-, or two-tailed?
+
+e. two-tailed
+
+f. What is the p-value?
+
+f. p-value = 0.00086
+
+g. Do you reject or not reject the null hypothesis?
+
+g. Reject the H0.
+
+h. At the ______ level of significance, from the sample data, there ______ (is/is not) sufficient evidence to conclude that ______.
+
+h. At the 5 percent significance level, from the sample data, there is sufficient evidence to conclude that there is a difference between the proportion of forcible rapes in 2011 and 2010.
+
+References
+
+American Cancer Society. (n.d.). Retrieved from http://www.cancer.org/index
+
+Centers for Disease Control and Prevention. (n.d.). West Nile virus. Retrieved from http://www.cdc.gov/ncidod/dvbid/westnile/index.htm
+
+Chancellors Office, California Community Colleges. (1994, Nov.).
+
+Educational Resources. (n.d.).
+
+Gallup. (2013). State of the states. Retrieved from http://www.gallup.com/poll/125066/State-States.aspx?ref=interactive
+
+Hilton Hotels. (n.d.). Retrieved from http://www.hilton.com
+
+Hyatt Hotels. Retrieved from http://hyatt.com
+
+San Jose Museum of Art. (n.d.). Whitney exhibit (on loan).
+
+U.S. Department of Health and Human Services. (n.d). Statistics. Retrieved from https://www.hhs.gov/
+
+Chapter Review
+
+Test of two population proportions from independent samples
+
+ Random variable: 
+
+ p
+ ^
+
+ A
+ 
+ –
+ 
+ p
+ ^
+
+ B
+ 
+ =
+ 
+ difference between the two estimated proportions
+Distribution: normal distribution
+
+Random variable: 
+
+ p
+ ^
+
+ A
+ 
+ –
+ 
+ p
+ ^
+
+ B
+ 
+ =
+ 
+ difference between the two estimated proportions
+
+Distribution: normal distribution
+
+Formula Review
+
+Pooled proportion: pc = 
+
+ x
+ F
+ 
+  + 
+ x
+ M
+
+ n
+ F
+ 
+  + 
+ n
+ M
+
+Distribution for the differences:
+
+ p
+ ′
+
+ A
+ 
+ −
+ 
+ p
+ ′
+
+ B
+ 
+ ∼N[ 
+ 0,
+
+ p
+ c
+ 
+ (1−
+ p
+ c
+ 
+ )(
+
+ 1
+
+ n
+ A
+
+ +
+ 1
+
+ n
+ B
+
+ )
+
+ ]
+
+where the null hypothesis is H0: pA = pB or H0: pA – pB = 0
+
+Test statistic (z-score): 
+ 
+ z=
+ 
+ (
+ p
+ ′
+
+ A
+ 
+ −
+ p
+ ′
+
+ B
+ 
+ )
+
+ p
+ c
+ 
+ (1−
+ p
+ c
+ 
+ )(
+
+ 1
+
+ n
+ A
+
+ +
+ 1
+
+ n
+ B
+
+ )
+
+where the null hypothesis is H0: pA = pB or H0: pA − pB = 0
+
+and where
+p′A
+ and p′B
+ are the sample proportions, pA and pB are the population proportions,
+Pc is the pooled proportion, and nA and nB are the sample sizes.
+Use the following information for the next five exercises. Two types of phone operating system are being tested to determine if there is a difference in the proportions of system failures (crashes). Fifteen out of a random sample of 150 phones with OS1 had system failures within the first eight hours of operation. Nine out of another random sample of 150 phones with OS2 had system failures within the first eight hours of operation. OS2 is believed to be more stable (have fewer crashes) than OS1.
+
+Is this a test of means or proportions?
+
+What is the random variable?
+P′OS1 – P′OS2 = difference in the proportions of phones that had system failures within the first eight hours of operation with OS1 and OS2.
+
+State the null and alternative hypotheses.
+
+What is the p-value?
+
+0.1018
+
+What can you conclude about the two operating systems?
+Use the following information to answer the next 12 exercises. In the recent U.S. Census, 3 percent of the U.S. population reported being of two or more races. However, the percent varies tremendously from state to state. Suppose that two random surveys are conducted. In the first random survey, out of 1,000 North Dakotans, only 9 people reported being of two or more races. In the second random survey, out of 500 Nevadans, 17 people reported being of two or more races. Conduct a hypothesis test to determine if the population percents are the same for the two states or if the percent for Nevada is statistically higher than for North Dakota.
+
+Is this a test of means or proportions?
+
+proportions
+
+State the null and alternative hypotheses.
+H0: _________
+Ha: _________
+
+Is this a right-tailed, left-tailed, or two-tailed test? How do you know?
+
+right-tailed
+
+What is the random variable of interest for this test?
+
+In words, define the random variable for this test.
+
+The random variable is the difference in proportions (percents) of the populations that are of two or more races in Nevada and North Dakota.
+
+Which distribution (normal or Student’s t) would you use for this hypothesis test?
+
+Explain why you chose the distribution you did for the Exercise 10.56.
+
+Our sample sizes are much greater than five each, so we use the normal for two proportions distribution for this hypothesis test.
+
+Calculate the test statistic.
+
+Sketch a graph of the situation. Mark the hypothesized difference and the sample difference. Shade the area corresponding to the p-value.
+
+Check student’s solution.
+
+Find the p-value.
+
+At a preconceived α = 0.05, write the following:
+ 
+ Your decision:
+ The reason for your decision:
+ Your conclusion (write out in a complete sentence):
+
+Your decision:
+
+The reason for your decision:
+
+Your conclusion (write out in a complete sentence):
+
+Reject the null hypothesis.
+p-value < alpha
+
+At the 5 percent significance level, there is sufficient evidence to conclude that the proportion (percent) of the population that is of two or more races in Nevada is statistically higher than that in North Dakota.
+
+Does it appear that the proportion of Nevadans who are two or more races is higher than the proportion of North Dakotans? Why or why not?
+
+Homework
+DIRECTIONS: For each of the word problems, use a solution sheet to do the hypothesis test. The solution sheet is found in Appendix E. Please feel free to make copies of the solution sheets. For the online version of the book, it is suggested that you copy the .doc or the .pdf files.
+
+Note
+
+If you are using a Student’s t-distribution for one of the following homework problems, including for paired data, you may assume that the underlying population is normally distributed. (In general, you must first prove that assumption.)
+
+A recent drug survey showed an increase in the use of prescription medication among local senior citizens as compared to the national percent. Suppose that a survey of 100 local seniors and 100 national seniors is conducted to see if the proportion of prescription medication use is higher locally or nationally. Locally, 65 senior citizens reported taking prescription medication within the past month, while 60 national seniors reported using them.
+
+Elizabeth Mjelde, an art history professor, was interested in whether the value from the Golden Ratio formula, 
+ 
+ (
+
+ larger + smaller dimension
+
+ larger dimension
+
+ )
+ 
+ , was the same in the Whitney Exhibit for works from 1900 to 1919 as for works from 1920 to 1942. Thirty-seven early works were sampled, averaging 1.74 with a standard deviation of 0.11. Sixty-five of the later works were sampled, averaging 1.746 with a standard deviation of 0.1064. Do you think that there is a significant difference in the Golden Ratio calculation?
+
+A year was randomly picked from 1985 to the present. In that year, there were 2,051 Hispanic students at Cabrillo College out of a total of 12,328 students. At Lake Tahoe College, there were 321 Hispanic students out of a total of 2,441 students. In general, do you think that the percent of Hispanic students at the two colleges is basically the same or different?
+
+Subscripts: 1 = Cabrillo College, 2 = Lake Tahoe College
+H0: p1 = p2
+Ha: p1 ≠ p2
+
+The random variable is the difference between the proportions of Hispanic students at Cabrillo College and Lake Tahoe College.
+
+normal for two proportions
+
+test statistic: 4.29
+p-value: 0.00002
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Reject the null hypothesis.
+ Reason for decision: p-value < alpha
+ Conclusion: There is sufficient evidence to conclude that the proportions of Hispanic students at Cabrillo College and Lake Tahoe College are different.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for decision: p-value < alpha
+
+Conclusion: There is sufficient evidence to conclude that the proportions of Hispanic students at Cabrillo College and Lake Tahoe College are different.
+Use the following information to answer the next three exercises. Neuroinvasive West Nile virus is a severe disease that affects a person’s nervous system. It is spread by the Culex species of mosquito. In the United States in 2010, there were 629 reported cases of neuroinvasive West Nile virus out of a total of 1,021 reported cases, and there were 486 neuroinvasive reported cases out of a total of 712 cases reported in 2011. Is the 2011 proportion of neuroinvasive West Nile virus cases more than the 2010 proportion of neuroinvasive West Nile virus cases? Using a 1 percent level of significance, conduct an appropriate hypothesis test.
+
+2011 subscript: 2011 group.
+2010 subscript: 2010 group
+2011 subscript: 2011 group.
+2010 subscript: 2010 group
+
+This is
+
+a test of two proportions
+
+a test of two independent means
+
+a test of a single mean
+
+a test of matched pairs.
+
+An appropriate null hypothesis is
+p2011 ≤ p2010
+p2011 ≥ p2010
+μ2011 ≤ μ2010
+p2011 > p2010
+
+a
+
+The p-value is 0.0022. At a 1 percent level of significance, what is the appropriate conclusion?
+
+There is sufficient evidence to conclude that the proportion of people in the United States in 2011 who contracted neuroinvasive West Nile virus is less than the proportion of people in the United States in 2010 who contracted neuroinvasive West Nile virus.
+
+There is insufficient evidence to conclude that the proportion of people in the United States in 2011 who contracted neuroinvasive West Nile virus is more than the proportion of people in the United States in 2010 who contracted neuroinvasive West Nile virus.
+
+There is insufficient evidence to conclude that the proportion of people in the United States in 2011 who contracted neuroinvasive West Nile virus is less than the proportion of people in the United States in 2010 who contracted neuroinvasive West Nile virus.
+
+There is sufficient evidence to conclude that the proportion of people in the United States in 2011 who contracted neuroinvasive West Nile virus is more than the proportion of people in the United States in 2010 who contracted neuroinvasive West Nile virus.
+
+Researchers conducted a study to find out if there is a difference in the use of e-readers by different age groups. Randomly selected participants were divided into two age groups. In the 16- to 29-year-old group, 7 percent of the 628 surveyed use e-readers, while 11 percent of the 2,309 participants 30 years old and older use e-readers.
+
+Test: two independent sample proportions.
+
+Random variable: p′1 - p′2
+
+Distribution:
+H0: p1 = p2
+Ha: p1 ≠ p2
+
+The proportion of e-reader users is different for the 16- to 29-year-old users from that of the 30 and older users.
+
+Graph: two-tailed
+p-value : 0.0033
+
+Decision: Reject the null hypothesis.
+
+Conclusion: At the 5 percent level of significance, from the sample data, there is sufficient evidence to conclude that the proportion of e-reader users 16 to 29 years old is different from the proportion of e-reader users 30 and older.
+
+Adults aged 18 years and older were randomly selected for a survey about a specific disease. The researchers wanted to determine if the proportion of women who have the disease is less than the proportion of southern men who do. The results are shown in . Test at the 1 percent level of significance.
+
+Number diagnosed with disease
+Men
+42,769
+Women
+67,169
+248,775
+Two computer users were discussing tablet computers. A higher proportion of people ages 16 to 29 use tablets than of people age 30 and older. details the number of tablet owners for each age group. Test at the 1 percent level of significance.
+
+16–29 year olds
+Own a Tablet
+69
+Sample Size
+628
+2,309
+Test: two independent sample means, population standard deviations unknown.
+μ1 = the the mean price of a sociology text on the selected site.
+μ2 = the mean price of a math/science text on the selected site.
+
+Random variable: X1¯-X1¯ = the difference in the sample mean textbook price between sociology texts and math/science texts.
+
+Hypotheses: H0 : μ1-μ2 = 0, Ha : μ1 - μ2 < μ2 which can be expressed as H0s: μ1-μ2, Ha μ1 < μ2.
+
+Distribution for the test: Use tdf; because each sample has more than 30 observations, df=n1+n2-2=33+33-2=64.
+
+Estimate the critical value on the t-table using the nearest available degrees of freedom, 60. The critical value, 2.660, is found in the .0005 column.
+
+Calculate the test statistic: tc=(X¯1-X¯2)-0s12n2+s22n2=(74.64-111.56)-049.36233+66.90233=-2.55.
+
+Using a calculator with tc=-2.55 and df=64, the left-tailed p-value: Decision: Reject H0. Conclusion: At the 1% level of significance, from the sample data, there is sufficient evidence to conclude that the mean price of sociology textbooks is less than the mean price of textbooks for math/science.
+
+A group of friends debated whether more men use smartphones than women. They consulted a research study of smartphone use among adults. The results of the survey indicate that of the 973 men randomly sampled, 379 use smartphones. For women, 404 of the 1,304 who were randomly sampled use smartphones. Test at the 5 percent level of significance.
+
+While her husband spent 2.5 hours picking out new speakers, a statistician decided to determine whether the percent of men who enjoy shopping for electronic equipment is higher than the percent of women who do. The population was Saturday afternoon shoppers. Out of 67 men, 24 said they enjoyed the activity. Eight of the 24 women surveyed claimed to enjoy the activity. Interpret the results of the survey.
+
+Subscripts: 1: men; 2: women
+H0: p1 ≤ p2
+Ha: p1 > p2
+P
+ ′
+
+ 1
+ 
+ −
+ 
+ P
+ ′
+
+ 2
+
+ is the difference between the proportions of men and women who enjoy shopping for electronic equipment.
+
+normal for two proportions
+
+test statistic: 0.22
+p-value: 0.4133
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Do not reject the null hypothesis.
+ Reason for Decision: p-value > alpha
+ Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that the proportion of men who enjoy shopping for electronic equipment is more than the proportion of women.
+
+Alpha: 0.05
+
+Decision: Do not reject the null hypothesis.
+
+Reason for Decision: p-value > alpha
+
+Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that the proportion of men who enjoy shopping for electronic equipment is more than the proportion of women.
+
+We are interested in whether children’s educational computer software costs less, on average, than children’s entertainment software. Thirty-six educational software titles were randomly picked from a catalog. The mean cost was $31.14 with a standard deviation of $4.69. Thirty-five entertainment software titles were randomly picked from the same catalog. The mean cost was $33.86 with a standard deviation of $10.87. Decide whether children’s educational software costs less, on average, than children’s entertainment software.
+
+A researcher recently claimed that the proportion of college-age males who wear at least one piece of jewelery is as high as the proportion of college-age females. She conducted a survey in her classes. Out of 107 males, 20 wear at least one piece of jewelery. Out of 92 females, 47 wear at least one piece of jewelery. Do you believe that the proportion of males has reached the proportion of females?
+H0: p1 = p2
+Ha: p1 ≠ p2
+P
+ ′
+
+ 1
+ 
+ −
+ 
+ P
+ ′
+
+ 2
+
+ is the difference between the proportions of men and women that have at least one pierced ear.
+
+normal for two proportions
+
+test statistic: –4.82
+p-value: zero
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Reject the null hypothesis.
+ Reason for Decision: p-value < alpha
+ Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that the proportions of males and females with at least one pierced ear is different.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for Decision: p-value < alpha
+
+Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that the proportions of males and females with at least one pierced ear is different.
+
+Use the data sets found in Appendix C to answer this exercise. Is the proportion of race laps Terri completes slower than 130 seconds less than the proportion of practice laps she completes slower than 135 seconds?
+To Breakfast or Not to Breakfast? by Richard Ayore
+
+In the American society, birthdays are one of those days that everyone looks forward to. People of different ages and peer groups gather to mark the 18th, 20th, …, birthdays. During this time, one looks back to see what he or she has achieved for the past year and also focuses ahead for more to come.
+
+If, by any chance, I am invited to one of these parties, my experience is always different. Instead of dancing around with my friends while the music is booming, I get carried away by memories of my family back home in Kenya. I remember the good times I had with my brothers and sister while we did our daily routine.
+
+Every morning, I remember we went to the shamba (garden) to weed our crops. I remember one day arguing with my brother as to why he always remained behind just to join us an hour later. In his defense, he said that he preferred waiting for breakfast before he came to weed. He said, “This is why I always work more hours than you guys!”
+
+And so, to prove him wrong or right, we decided to give it a try. One day we went to work as usual without breakfast, and recorded the time we could work before getting tired and stopping. On the next day, we all ate breakfast before going to work. We recorded how long we worked again before getting tired and stopping. Of interest was our mean increase in work time. Though not sure, my brother insisted that it was more than two hours. Using the data in , solve our problem.
+
+Work hours with breakfast
+Work hours without breakfast
+8
+6
+7
+5
+9
+5
+5
+4
+9
+7
+8
+7
+10
+7
+7
+5
+6
+6
+9
+H0: µd = 0
+Ha: µd > 0
+
+The random variable Xd is the mean difference in work times on days when eating breakfast and on days when not eating breakfast.
+t9
+
+test statistic: 4.8963
+p-value: 0.0004
+
+Check student’s solution.
+Alpha: 0.05
+Decision: Reject the null hypothesis.
+Reason for Decision: p-value < alpha
+Conclusion: At the 5 percent level of significance, there is sufficient evidence to conclude that the mean difference in work times on days when eating breakfast and on days when not eating breakfast has increased.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for Decision: p-value < alpha
+
+Conclusion: At the 5 percent level of significance, there is sufficient evidence to conclude that the mean difference in work times on days when eating breakfast and on days when not eating breakfast has increased.
+
+estimate of the common value of p1 and p2

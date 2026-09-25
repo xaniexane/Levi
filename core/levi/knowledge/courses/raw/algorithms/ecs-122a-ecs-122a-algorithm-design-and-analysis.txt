@@ -1,0 +1,157 @@
+# ECS 122A: Algorithm Design and Analysis
+# UC Davis
+# source: http://web.cs.ucdavis.edu/~gusfield/cs122f10/
+
+ECS 122A - Algorithms - Fall 2010 - Gusfield
+ECS 122A - Fall 2010 Algorithm Design and Analysis - Gusfield
+This index page will just link to the various course handouts that
+are available on the web, and provide some description of them.
+Distribution List
+Course Syllabus
+There are past video lectures online for some of the topics covered in the class. I will point
+you to those when appropriate. The past videos are found at
+video list of past lectures
+Current lectures will also be videod and put online. The link to those is
+Videos of current lectures
+A Running class outline and recap
+Introduction to complexity and rules of the
+game
+First homework, due Friday October 1.
+A rant on induction - useful if you are unsure about how to do inductive proofs
+Solving recurrence relations by unwrapping and
+the master method
+Another exposition on the
+master method for solving divide and conquer recurrences
+Second homework, due Monday October 10. Don't wait
+until the last minute to start this, even though you have more than a week.
+A full proof of correctness of the algorithm to count the number of inversions.
+Permanent office hours for the TA and Gusfield are listed on the updated course syllabus.
+The Midterm will be Monday October 25.
+To do the unwrapping for a recurrence problem on Homework 2, you can assume that the base case is T(n) = cn
+for some constant c. What c is exactly will not influence the asymptotic solution.
+The algorithm Select (S,k) is on page 728 of the book. In my printing it defines it as the k'th largest
+element in S, but that is clearly wrong - it is the k'th smallest element.
+For a complete derivation of the mean of the geometric distribution, see page 228, Example 6.4
+in the following:
+a chapter on expected value You only need to read page 228, but the chapter is a good
+introduction to expected value, especially the early part of the chapter. You will need to understand
+the expected value of a geometric distribution when we analyze randomized Select and randomized Quicksort.
+Third homework, due Weds. October 20. This homework is very conceptually oriented. Don't wait
+Prof. Gusfield is out of town and will not have office hours on thursday.
+Solutions to hw 1 The ID and password given in class on weds. should work now.
+Please let me know if it does not.
+Solutions to hw 2
+Fourth homework, due Weds. October 27.
+The midterm is open book and class notes (notes you took or anything distributed on the
+class website, but no additional materials or electronics) and
+will cover material and topics through the class yesterday, October 20.
+Solutions to hw 3
+Please bring a small blue book (if you see this in time),
+with regular lined pages, for the midterm exam.
+Do not bring an engineering blue book that is filled with graph paper.
+On HW 4, problem 5, you can assume that the road is straight with no turns or curves. For extra credit, try to
+solve the problem where the road is not assumed to be straight. I don't know a solution for that case.
+Solutions to Midterm
+Fifth homework, due Friday November 5. Start early - I think it may be hard.
+Midterm scores out of 100 pts: Mean 69, median 72, highest grad student 100, highest undergrad 99.
+Your score should be available on smartsite. If smartsite also reports a course grade, ignore that.
+Garrett is back and will make office hours.
+Notes on the unique-decypherability problem.
+Sixth homework, due Weds. November 17.
+Notes on traceback for the maximum weight independent set problem on a tree.
+ud.pl Perl program to determine if a code is UD.
+Notes on the Z-algorithm
+Professor Gusfield will not have office hours on thursday Nov. 17
+*MODIFIED* Seventh homework, due Weds. November 24.
+Problem 3 has changed a bit (to clarify it) since homework 7 was first posted.
+Also, the tone of problem 2 makes it seem that the conjecture is surely correct. It might not be,
+so don't exclude that possibility.
+Professor Gusfield's office hour on tuesday Nov. 23 will be 2-3 instead of 12-1.
+Sorry for the last minute change.
+Solutions to hw 4
+Eight homework, due Friday Dec. 3. Problem 3 was corrected monday evening,
+so reload if you downloaded before then.
+Solutions to hw 5 The solution to the tree coloring DP problem
+as corrected monday evening, so reload if you downloaded before then.
+Partial Solutions to hw 6
+Partial Solutions to hw 7 The solution for problem 4 has been corrected, Dec. 8.
+Gusfield will have office hours tuesday Dec. 7 12-1 and Garrett will have office hours
+weds. Dec. 8 12-1.
+The final exam is Dec. 8 6-8 in the classroom. The exam will be open book and notes
+the same way as the midterm. Everything in the course is fair-game for the exam, including
+material from the last lecture and homework. However, the emphasis will be on material
+since the midterm. Please bring a small bluebook (not grid ruled) and a sharp
+enough and dark enough pencil (or pen) to make it easy to read your writing.
+Solutions to hw 8
+The portion of chapter 8 that was covered in class is sections 8.1, 8.2, 8.3 and part of the first page of
+section 8.4 (until the start of circuit SAT, which we did not cover). Nothing else in chapter 8 was covered.
+Solutions to final exam Don't look if you haven't taken it yet.
+Monday Dec. 13. The final exam is graded and you should be able to see your
+final exam score on Smartsite, but there are still some homeworks to grade so
+course grades have not been assigned. The median and mean on the final were 73, 69. The max possible
+was 125 and the highest score was 121. If smartsite reports a course grade, ignore that.
+Solutions to HW 1
+Homework 3, due April 22
+To find out what was discussed in any lecture, and other information about the lecture,
+read the class recap, linked above.
+If you use the automatic extension time for HW 2, it must be turned into the HW box
+on the second floor of Kemper Hall, by 4:45 on monday.
+On homework 3, Problem 1, the time bound of O(n) is possible. Try to obtain that bound.
+If you can only do O(n \log n) that will be counted as full credit, since that was all that
+was asked for, but for the greatest sense of accomplishment, try to obtain the O(n) time bound.
+Notes on the stabbing set proof given in class on April 20
+Solutions to HW 2
+The midterm will be on Thursday, April 29. It will cover the materail through the
+lecture on April 22, and on the first three homeworks. Be sure to read the homework
+solutions that are posted, since questions might also be based on those problems and solutions.
+Topics on the midterm are: Assymptotic notation and relations between functions; forming
+and solving divide and conquer recurrense relations; divide and conquer algorithms and
+analysis; randomized divide and conquer algorithms and expected time analysis;
+greedy algorithms; and (if we have
+time to discuss it on April 22, Dijkstra's shortest path algorithm).
+Homework 4, due Tuesday May 4 But don't wait until the
+last minute to start this one. Reading the problems early, and getting them into your
+brain, helps, even if you don't work directly on them until some time later.
+The midterm will be open book and notes. Bring a small bluebook.
+Solutions to HW 3
+Notes on solving the UD problem as a graph-path problem
+HW 2 has been graded and the papers are hanging in a tray outside of my office 2125 Kemper.
+The papers are in alphabetical order, so please try to keep that order.
+Some comments on answers to HW 2, thanks to Shuting
+A huge amount of work went into writing and typesetting these comments!
+Update to midterm content: There will be no questions about graphs or shortest paths.
+Midterm Solutions
+Comments on students answers on midterm for the
+more difficult problems, 5,6,7.
+On homework 4, problem 2, you can assume that there are no edges of length zero (and
+of course, none of length less than zero). On problem 4b, the target time bound is
+O(m), where m is the number of edges.
+On friday May 14, from 5-6 pm, during the discussion section, we will have
+the second midterm. This one will be very different from the first one. The second
+midterm will be closed book and each question will ask you to execute one of the
+algorithms we have studied in the class, on some problem instance,
+and to show the workings of the algorithm.
+HW 3 has been graded and the papers are hanging outside of 2125 Kemper.
+Homework 5, due May 13
+Office hours for May 6: 1:30 - 3:00.
+Solutions to HW 4
+The median for the midterm is 74, the mean is 73.3, and the Std. Deviation is 27.49.
+The total possible was 130 and the high score is 126.
+The midterm on friday will cover all algorithms discussed in class, up through
+the weighted interval scheduling problem, discussed last thursday.
+Homework 6, Due May 20
+Notes on the Z-algorithm for exact string matching
+No office hours friday May 21 - on the road again.
+Solutions to HW 5
+Homework 7, Due June 1
+See a note about the last question on homework 7, in the class recap for May 27.
+Professor Gusfield's office hours for the week of June 1: Thursday 12:30 - 1:30, Friday 1:30 - 3.
+Review session friday 5-6 in the classroom.
+Solutions to HW 6 (corrected June 3, 2010)
+The final exam is open book and notes. Bring a small bluebook (maybe two) and a sharp pencil that
+writes darkly.
+Notes on the traceback for the Weighted Maximum Independent Set Problem on a Tree
+Partial solutions to homework 7
+Students who want to study together can meet from 12 to 4 on sunday in 75 Kemper.
+Solutions to the more challenging problems on the final exam
+-->

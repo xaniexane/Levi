@@ -1,0 +1,248 @@
+# m00123
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Traveling Salesperson Problem
+
+Traveling Salesperson Problem
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Distinguish between brute force algorithms and greedy algorithms.
+
+List all distinct Hamilton cycles of a complete graph.
+
+Apply brute force method to solve traveling salesperson applications.
+
+Apply nearest neighbor method to solve traveling salesperson applications.
+
+We looked at Hamilton cycles and paths in the previous sections Hamilton Cycles and Hamilton Paths. In this section, we will analyze Hamilton cycles in complete weighted graphs to find the shortest route to visit a number of locations and return to the starting point. Besides the many routing applications in which we need the shortest distance, there are also applications in which we search for the route that is least expensive or takes the least time. Here are a few less common applications that you can read about on a website set up by the mathematics department at the University of Waterloo in Ontario, Canada:
+
+Design of fiber optic networks
+
+Minimizing fuel expenses for repositioning satellites
+
+Development of semi-conductors for microchips
+
+A technique for mapping mammalian chromosomes in genome sequencing
+
+Before we look at approaches to solving applications like these, let's discuss the two types of algorithms we will use.
+
+Brute Force and Greedy Algorithms
+
+An algorithm is a sequence of steps that can be used to solve a particular problem. We have solved many problems in this chapter, and the procedures that we used were different types of algorithms. In this section, we will use two common types of algorithms, a brute force algorithm and a greedy algorithm. A brute force algorithm begins by listing every possible solution and applying each one until the best solution is found. A greedy algorithm approaches a problem in stages, making the apparent best choice at each stage, then linking the choices together into an overall solution which may or may not be the best solution.
+
+To understand the difference between these two algorithms, consider the tree diagram in . Suppose we want to find the path from left to right with the largest total sum. For example, branch A in the tree diagram has a sum of 10+2+11+13=36.
+
+To be certain that you pick the branch with greatest sum, you could list each sum from each of the different branches:
+A: 10+2+11+13=36
+B: 10+2+11+8=31
+C: 10+2+15+1=28
+D: 10+2+15+6=33
+E: 10+7+3+20=40
+F: 10+7+3+14=34
+G: 10+7+4+11=32
+H: 10+7+4+5=26
+
+Then we know with certainty that branch E has the greatest sum.
+
+Now suppose that you wanted to find the branch with the highest value, but you only were shown the tree diagram in phases, one step at a time.
+
+After phase 1, you would have chosen the branch with 10 and 7. So far, you are following the same branch. Let’s look at the next phase.
+
+After phase 2, based on the information you have, you will choose the branch with 10, 7 and 4. Now, you are following a different branch than before, but it is the best choice based on the information you have. Let’s look at the last phase.
+
+After phase 3, you will choose branch G which has a sum of 32.
+
+The process of adding the values on each branch and selecting the highest sum is an example of a brute force algorithm because all options were explored in detail. The process of choosing the branch in phases, based on the best choice at each phase is a greedy algorithm. Although a brute force algorithm gives us the ideal solution, it can take a very long time to implement. Imagine a tree diagram with thousands or even millions of branches. It might not be possible to check all the sums. A greedy algorithm, on the other hand, can be completed in a relatively short time, and generally leads to good solutions, but not necessarily the ideal solution.
+
+Distinguishing between Brute Force and Greedy Algorithms
+
+A cashier rings up a sale for $4.63 cents in U.S. currency. The customer pays with a $5 bill. The cashier would like to give the customer $0.37 in change using the fewest coins possible. The coins that can be used are quarters ($0.25), dimes ($0.10), nickels ($0.05), and pennies ($0.01). The cashier starts by selecting the coin of highest value less than or equal to $0.37, which is a quarter. This leaves $0.37−$0.25=$0.12. The cashier selects the coin of highest value less than or equal to $0.12, which is a dime. This leaves $0.12−$0.10=$0.02. The cashier selects the coin of highest value less than or equal to $0.02, which is a penny. This leaves $0.02−$0.01=$0.01. The cashier selects the coin of highest value less than or equal to $0.01, which is a penny. This leaves no remainder. The cashier used one quarter, one dime, and two pennies, which is four coins. Use this information to answer the following questions.
+
+Is the cashier’s approach an example of a greedy algorithm or a brute force algorithm? Explain how you know.
+
+The cashier’s solution is the best solution. In other words, four is the fewest number of coins possible. Is this consistent with the results of an algorithm of this kind? Explain your reasoning.
+
+The approach the cashier used is an example of a greedy algorithm, because the problem was approached in phases and the best choice was made at each phase. Also, it is not a brute force algorithm, because the cashier did not attempt to list out all possible combinations of coins to reach this conclusion.
+
+Yes, it is consistent. A greedy algorithm does not always yield the best result, but sometimes it does.
+
+The Traveling Salesperson Problem
+
+Now let’s focus our attention on the graph theory application known as the traveling salesperson problem (TSP) in which we must find the shortest route to visit a number of locations and return to the starting point.
+
+Recall from Hamilton Cycles, the officer in the U.S. Air Force who is stationed at Vandenberg Air Force base and must drive to visit three other California Air Force bases before returning to Vandenberg. The officer needed to visit each base once. We looked at the weighted graph in representing the four U.S. Air Force bases: Vandenberg, Edwards, Los Angeles, and Beal and the distances between them.
+
+Any route that visits each base and returns to the start would be a Hamilton cycle on the graph. If the officer wants to travel the shortest distance, this will correspond to a Hamilton cycle of lowest weight. We saw in that there are six distinct Hamilton cycles (directed cycles) in a complete graph with four vertices, but some lie on the same cycle (undirected cycle) in the graph.
+
+Complete Graph
+Cycle
+Cycle
+a → b → c → d → a
+a → b → c → d → a
+a → b → d → c → a
+a → b → d → c → a
+a → c → b → d → a
+a → c → b → d → a
+a → d → c → b → a
+a → d → c → b → a
+a → c → d → b → a
+a → c → d → b → a
+a → d → b → c → a
+a → d → b → c → a
+
+Since the distance between bases is the same in either direction, it does not matter if the officer travels clockwise or counterclockwise. So, there are really only three possible distances as shown in .
+
+The possible distances are:
+
+So, a Hamilton cycle of least weight is V → B → E → L → V (or the reverse direction). The officer should travel from Vandenberg to Beal to Edwards, to Los Angeles, and back to Vandenberg.
+
+Finding Weights of All Hamilton Cycles in Complete Graphs
+
+Notice that we listed all of the Hamilton cycles and found their weights when we solved the TSP about the officer from Vandenberg. This is a skill you will need to practice. To make sure you don't miss any, you can calculate the number of possible Hamilton cycles in a complete graph. It is also helpful to know that half of the directed cycles in a complete graph are the same cycle in reverse direction, so, you only have to calculate half the number of possible weights, and the rest are duplicates.
+
+In a complete graph with n vertices,
+
+The number of distinct Hamilton cycles is (n−1)!.
+
+There are at most (n−1)!2 different weights of Hamilton cycles.
+TIP! When listing all the distinct Hamilton cycles in a complete graph, you can start them all at any vertex you choose. Remember, the cycle a → b → c → a is the same cycle as b → c → a → b so there is no need to list both.
+
+Calculating Possible Weights of Hamilton Cycles
+
+Suppose you have a complete weighted graph with vertices N, M, O, and P.
+
+Use the formula (n−1)! to calculate the number of distinct Hamilton cycles in the graph.
+
+Use the formula (n−1)!2 to calculate the greatest number of different weights possible for the Hamilton cycles.
+
+Are all of the distinct Hamilton cycles listed here? How do you know?
+ Cycle 1: N → M → O → P → N
+ Cycle 2: N → M → P → O → N
+ Cycle 3: N → O → M → P → N
+ Cycle 4: N → O → P → M → N
+ Cycle 5: N → P → M → O → N
+ Cycle 6: N → P → O → M → N
+
+Which pairs of cycles must have the same weights? How do you know?
+
+There are 4 vertices; so, n=4. This means there are (n−1)!=(4−1)!=3⋅2⋅1=6 distinct Hamilton cycles beginning at any given vertex.
+
+Since n=4, there are (n−1)!2=(4−1)!2=62=3 possible weights.
+
+Yes, they are all distinct cycles and there are 6 of them.
+
+Cycles 1 and 6 have the same weight, Cycles 2 and 4 have the same weight, and Cycles 3 and 5 have the same weight, because these pairs follow the same route through the graph but in reverse.
+TIP! When listing the possible cycles, ignore the vertex where the cycle begins and ends and focus on the ways to arrange the letters that represent the vertices in the middle. Using a systematic approach is best; for example, if you must arrange the letters M, O, and P, first list all those arrangements beginning with M, then beginning with O, and then beginning with P, as we did in Example 12.42.
+
+The Brute Force Method
+
+The method we have been using to find a Hamilton cycle of least weight in a complete graph is a brute force algorithm, so it is called the brute force method. The steps in the brute force method are:
+Step 1: Calculate the number of distinct Hamilton cycles and the number of possible weights.
+Step 2: List all possible Hamilton cycles.
+Step 3: Find the weight of each cycle.
+Step 4: Identify the Hamilton cycle of lowest weight.
+
+Applying the Brute Force Method
+
+On the next assignment, the air force officer must leave from Travis Air Force base, visit Beal, Edwards, and Vandenberg Air Force bases each exactly once and return to Travis Air Force base. There is no need to visit Los Angeles Air Force base. Use to find the shortest route.
+Step 1: Since there are 4 vertices, there will be (4−1)!=3!=6 cycles, but half of them will be the reverse of the others; so, there will be (4−1)!2=62=3 possible distances.
+Step 2: List all the Hamilton cycles in the subgraph of the graph in .
+
+To find the 6 cycles, focus on the three vertices in the middle, B, E, and V. The arrangements of these vertices are BEV, BVE, EBV, EVB, VBE, and VEB. These would correspond to the 6 cycles:
+
+1: T → B → E → V → T
+
+2: T → B → V → E → T
+
+3: T → E → B → V → T
+
+4: T → E → V → B → T
+
+5: T → V → B → E → T
+
+6: T → V → E → B → T
+Step 3: Find the weight of each path. You can reduce your work by observing the cycles that are reverses of each other.
+
+1: 84+410+207+396=1097
+
+2: 84+396+207+370=1071
+
+3: 370+410+396+396=1572
+
+4: Reverse of cycle 2, 1071
+
+5: Reverse of cycle 3, 1572
+
+6: Reverse of cycle 1, 1097
+Step 4: Identify a Hamilton cycle of least weight.
+
+The second path, T → B → V → E → T, and its reverse, T → E → V → B → T, have the least weight. The solution is that the officer should travel from Travis Air Force base to Beal Air Force Base, to Vandenberg Air Force base, to Edwards Air Force base, and return to Travis Air Force base, or the same route in reverse.
+
+Now suppose that the officer needed a cycle that visited all 5 of the Air Force bases in . There would be (5−1)!=4!=4×3×2×1=24 different arrangements of vertices and (5−1)!2=4!2=242=12 distances to compare using the brute force method. If you consider 10 Air Force bases, there would be (10−1)!=9!=9⋅8⋅7⋅6⋅5⋅4⋅3⋅2⋅1=362,880 different arrangements and (10−1)!2=9!2=9⋅8⋅7⋅6⋅5⋅4⋅3⋅2⋅12=181,440 distances to consider. There must be another way!
+
+The Nearest Neighbor Method
+
+When the brute force method is impractical for solving a traveling salesperson problem, an alternative is a greedy algorithm known as the nearest neighbor method, which always visit the closest or least costly place first. This method finds a Hamilton cycle of relatively low weight in a complete graph in which, at each phase, the next vertex is chosen by comparing the edges between the current vertex and the remaining vertices to find the lowest weight. Since the nearest neighbor method is a greedy algorithm, it usually doesn’t give the best solution, but it usually gives a solution that is "good enough." Most importantly, the number of steps will be the number of vertices. That’s right! A problem with 10 vertices requires 10 steps, not 362,880. Let’s look at an example to see how it works.
+
+Suppose that a candidate for governor wants to hold rallies around the state. They plan to leave their home in city A, visit cities B, C, D, E, and F each once, and return home. The airfare between cities is indicated in the graph in .
+
+Let’s help the candidate keep costs of travel down by applying the nearest neighbor method to find a Hamilton cycle that has a reasonably low weight. Begin by marking starting vertex as V1 for "visited 1st." Then to compare the weights of the edges between A and vertices adjacent to A: $250, $210, $300, $200, and $100 as shown in . The lowest of these is $100, which is the edge between A and F.
+
+Mark F as V2 for "visited 2nd" then compare the weights of the edges between F and the remaining vertices adjacent to F: $170, $330, $150 and $350 as shown in . The lowest of these is $150, which is the edge between F and D.
+
+Mark D as V3 for "visited 3rd." Next, compare the weights of the edges between D and the remaining vertices adjacent to D: $120, $310, and $270 as shown in . The lowest of these is $120, which is the edge between D and B.
+
+So, mark B as V4 for "visited 4th." Finally, compare the weights of the edges between B and the remaining vertices adjacent to B: $160 and $220 as shown in . The lower amount is $160, which is the edge between B and E.
+
+Now you can mark E as V5 and mark the only remaining vertex, which is C, as V6. This is shown in . Make a note of the weight of the edge from E to C, which is $180, and from C back to A, which is $210.
+
+The Hamilton cycle we found is A → F → D → B → E → C → A. The weight of the circuit is $100+$150+$120+$160+$180+$210=$920. This may or may not be the route with the lowest cost, but there is a good chance it is very close since the weights are most of the lowest weights on the graph and we found it in six steps instead of finding 120 different Hamilton cycles and calculating 60 weights. Let’s summarize the procedure that we used.
+Step 1: Select the starting vertex and label V1 for "visited 1st." Identify the edge of lowest weight between V1 and the remaining vertices.
+Step 2: Label the vertex at the end of the edge of lowest weight that you found in previous step as Vn where the subscript n indicates the order the vertex is visited. Identify the edge of lowest weight between Vn and the vertices that remain to be visited.
+Step 3: If vertices remain that have not been visited, repeat Step 2. Otherwise, a Hamilton cycle of low weight is V1→V2→⋯→Vn→V1.
+
+Using the Nearest Neighbor Method
+
+Suppose that the candidate for governor wants to hold rallies around the state but time before the election is very limited. They would like to leave their home in city A, visit cities B, C, D, E, and F each once, and return home. The airfare between cities is not as important as the time of travel, which is indicated in . Use the nearest neighbor method to find a route with relatively low travel time. What is the total travel time of the route that you found?
+Step 1: Label vertex A as V1. The edge of lowest weight between A and the remaining vertices is 85 min between A and D.
+Step 2: Label vertex D as V2. The edge of lowest weight between D and the vertices that remain to be visited, B, C, E, and F, is 70 min between D and F.
+Repeat Step 2: Label vertex F as V3. The edge of lowest weight between F and the vertices that remain to be visited, B, C, and E, is 75 min between F and C.
+Repeat Step 2: Label vertex C as V4. The edge of lowest weight between C and the vertices that remain to be visited, B and E, is 100 min between C and B.
+Repeat Step 2: Label vertex B as V5. The only vertex that remains to be visited is E. The weight of the edge between B and E is 95 min.
+Step 3: A Hamilton cycle of low weight is A → D → F → C → B → E → A. So, a route of relatively low travel time is A to D to F to C to B to E and back to A. The total travel time of this route is: 85min+70min+75min+100min+95min+90min=515minor8hrs35min
+
+Check Your Understanding
+
+Key Terms
+
+brute force algorithm
+
+greedy algorithm
+
+traveling salesperson problem (TSP)
+
+brute force method
+
+nearest neighbor method
+
+Key Concepts
+
+A brute force algorithm always finds the ideal solution but can be impractical whereas a greedy algorithm is efficient but usually does not lead to the ideal solution.
+
+A Hamilton cycle of lowest weight is a solution to the traveling salesperson problem.
+
+The brute force method finds a Hamilton cycle of lowest weight in a complete graph.
+
+The nearest neighbor method is a greedy algorithm that finds a Hamilton cycle of relatively low weight in a complete graph.
+
+Formulas
+
+In a complete graph with n vertices, the number of distinct Hamilton cycles is (n−1)!.
+
+In a complete graph with n vertices, there are at most (n−1)!2 different weights of Hamilton cycles.

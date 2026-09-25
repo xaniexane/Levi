@@ -1,0 +1,507 @@
+# m54333
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Sound Intensity and Sound Level
+
+Sound Intensity and Sound Level
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Relate amplitude of a wave to loudness and energy of a sound wave
+
+Describe the decibel scale for measuring sound intensity
+
+Solve problems involving the intensity of a sound wave
+
+Describe how humans produce and hear sounds
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(7) Science concepts. The student knows the characteristics and behavior of waves. The student is expected to:
+
+(C) compare characteristics and behaviors of transverse waves, including electromagnetic waves and the electromagnetic spectrum, and characteristics and behaviors of longitudinal waves, including sound waves;
+
+(F) describe the role of wave characteristics and behaviors in medical and industrial applications.
+(C) compare characteristics and behaviors of transverse waves, including electromagnetic waves and the electromagnetic spectrum, and characteristics and behaviors of longitudinal waves, including sound waves;
+(F) describe the role of wave characteristics and behaviors in medical and industrial applications.
+
+Section Key Terms
+
+amplitude
+decibel
+hearing
+loudness
+pitch
+sound intensity
+sound intensity level
+Teacher Support
+[BL] Review sound, properties of sound waves and characteristics of sound waves.
+
+Amplitude, Loudness and Energy of a Sound Wave
+
+Teacher Support
+
+Students may be confused between amplitude and intensity. While sound intensity is proportional to amplitude, they are different physical quantities. Sound intensity is defined as the sound power per unit area, whereas amplitude is the distance between the resting position and the crest of a wave.
+
+In a quiet forest, you can sometimes hear a single leaf fall to the ground. But in a traffic jam filled with honking cars, you may have to shout just so the person next to you can hear .The loudness of a sound is related to how energetically its source is vibrating. In cartoons showing a screaming person, the cartoonist often shows an open mouth with a vibrating uvula (the hanging tissue at the back of the mouth) to represent a loud sound coming from the throat. shows such a cartoon depiction of a bird loudly expressing its opinion.
+
+A useful quantity for describing the loudness of sounds is called sound intensity. In general, the intensity of a wave is the power per unit area carried by the wave. Power is the rate at which energy is transferred by the wave. In equation form, intensity I is
+
+where P is the power through an area A. The SI unit for I is W/m2. The intensity of a sound depends upon its pressure amplitude. The relationship between the intensity of a sound wave and its pressure amplitude (or pressure variation Δp) is
+
+where ρ is the density of the material in which the sound wave travels, in units of kg/m3, and v is the speed of sound in the medium, in units of m/s. Pressure amplitude has units of pascals (Pa) or N/m2. Note that Δp is half the difference between the maximum and minimum pressure in the sound wave.
+
+We can see from the equation that the intensity of a sound is proportional to its amplitude squared. The pressure variation is proportional to the amplitude of the oscillation, and so I varies as (Δp)2. This relationship is consistent with the fact that the sound wave is produced by some vibration; the greater its pressure amplitude, the more the air is compressed during the vibration. Because the power of a sound wave is the rate at which energy is transferred, the energy of a sound wave is also proportional to its amplitude squared.
+
+Teacher Support
+[OL][AL] Note from the equation that the intensity of sound is also affected by the density of the material that it travels through. The denser the material, the lower the intensity of sound.
+
+Pressure is usually denoted by capital P, but we are using a lowercase p for pressure in this case to distinguish it from power P above.
+
+Teacher Support
+[BL][OL][AL] Ask students whether the pitch of both birds differs. How can they tell by looking at the graph?
+
+The Decibel Scale
+
+You may have noticed that when people talk about the loudness of a sound, they describe it in units of decibels rather than watts per meter squared. While sound intensity (in W/m2) is the SI unit, the sound intensity level in decibels (dB) is more relevant for how humans perceive sounds. The way our ears perceive sound can be more accurately described by the logarithm of the intensity of a sound rather than the intensity of a sound directly. The sound intensity level β is defined to be
+
+where I is sound intensity in watts per meter squared, and I0 = 10–12 W/m2 is a reference intensity. I0 is chosen as the reference point because it is the lowest intensity of sound a person with normal hearing can perceive. The decibel level of a sound having an intensity of 10–12 W/m2 is β = 0 dB, because log10 1 = 0. That is, the threshold of human hearing is 0 decibels.
+
+Each factor of 10 in intensity corresponds to 10 dB. For example, a 90 dB sound compared with a 60 dB sound is 30 dB greater, or three factors of 10 (that is, 103 times) as intense. Another example is that if one sound is 107 as intense as another, it is 70 dB higher.
+
+Since β is defined in terms of a ratio, it is unit-less. The unit called decibel (dB) is used to indicate that this ratio is multiplied by 10. The sound intensity level is not the same as sound intensity—it tells you the level of the sound relative to a reference intensity rather than the actual intensity.
+
+Teacher Support
+[BL][OL][AL] Note that decibel is different from other units in that it is not an absolute measurement. It is a ratio of two measurements. It is useful, and more widely used because it is closer to how humans perceive sound.
+
+Feeling Sound
+
+In this lab, you will play music with a heavy beat to literally feel the vibrations and explore what happens when the volume changes.
+
+CD player or portable electronic device connected to speakers
+
+rock or rap music CD or mp3
+
+a lightweight table
+
+Procedure
+
+Place the speakers on a light table, and start playing the CD or mp3.
+
+Place your hand gently on the table next to the speakers.
+
+Increase the volume and note the level when the table just begins to vibrate as the music plays.
+
+Increase the reading on the volume control until it doubles. What has happened to the vibrations?
+
+Solving Sound Wave Intensity Problems
+
+Calculating Sound Intensity Levels: Sound Waves
+
+Calculate the sound intensity level in decibels for a sound wave traveling in air at 0 ºC and having a pressure amplitude of 0.656 Pa.
+
+Strategy
+
+We are given Δp, so we can calculate I using the equation 
+ 
+ I=
+
+ (
+ 
+ Δp
+ )
+ 2
+
+ 2ρ
+ v
+
+ . Using I , we can calculate β straight from its definition in 
+ 
+ β (dB)=10
+ 
+  log
+ 
+ 10
+ 
+ (
+
+ I
+
+ I
+ 0
+
+ )
+
+ β (dB)=10
+ 
+  log
+ 
+ 10
+ 
+ (
+
+ I
+
+ I
+ 0
+
+ )
+ .
+
+Solution
+
+(1) Identify knowns:
+
+Sound travels at 331 m/s in air at 0 °C.
+
+Air has a density of 1.29 kg/m3 at atmospheric pressure and 0ºC.
+
+(2) Enter these values and the pressure amplitude into 
+ 
+ I=
+
+ (
+ 
+ Δp
+ )
+ 2
+
+ 2ρ
+ v
+ w
+
+ .
+I=
+
+ (
+ 
+ Δp
+ )
+ 2
+
+ 2ρ
+ v
+ w
+
+ =
+
+ (
+ 
+ 0.656 Pa
+ )
+ 2
+
+ 2(
+ 
+ 1.29
+ 
+  kg/m
+ 3
+
+ )(
+ 
+ 331 m/s
+ )
+ 
+ =5.04×
+ 
+ 10
+ 
+ −4
+
+  W/m
+ 2
+ 
+.
+
+(3) Enter the value for I and the known value for I0 into 
+ 
+ β (dB)=10
+ 
+  log
+ 
+ 10
+ 
+ (
+
+ I
+
+ I
+ 0
+
+ )
+ . Calculate to find the sound intensity level in decibels.
+10
+ 
+  log
+ 
+ 10
+ 
+ (
+ 
+ 5.04×
+ 
+ 10
+ 8
+
+ )=10(
+ 
+ 8.70
+ ) dB=87.0 dB.
+
+Discussion
+
+This 87.0 dB sound has an intensity five times as great as an 80 dB sound. So a factor of five in intensity corresponds to a difference of 7 dB in sound intensity level. This value is true for any intensities differing by a factor of five.
+
+Change Intensity Levels of a Sound: What Happens to the Decibel Level?
+
+Show that if one sound is twice as intense as another, it has a sound level about 3 dB higher.
+
+Strategy
+
+You are given that the ratio of two intensities is 2 to 1, and are then asked to find the difference in their sound levels in decibels. You can solve this problem using of the properties of logarithms.
+
+Solution
+
+(1) Identify knowns:
+
+The ratio of the two intensities is 2 to 1, or: 
+
+ I
+ 2
+
+ I
+ 1
+
+ =2.00.
+
+We want to show that the difference in sound levels is about 3 dB. That is, we want to show
+
+Note that
+
+(2) Use the definition of β to get
+
+Therefore, 
+
+ β
+ 2
+ 
+ −
+ β
+ 1
+ 
+ =3.01 dB.
+
+Discussion
+
+This means that the two sound intensity levels differ by 3.01 dB, or about 3 dB, as advertised. Note that because only the ratio I2/I1 is given (and not the actual intensities), this result is true for any intensities that differ by a factor of two. For example, a 56.0 dB sound is twice as intense as a 53.0 dB sound, a 97.0 dB sound is half as intense as a 100 dB sound, and so on.
+
+Practice Problems
+
+Calculate the intensity of a wave if the power transferred is 10 W and the area through which the wave is transferred is 5 square meters.
+
+200 W / m2
+
+50 W / m2
+
+0.5 W / m2
+
+2 W / m2
+
+Hearing and Voice
+
+People create sounds by pushing air up through their lungs and through elastic folds in the throat called vocal cords. These folds open and close rhythmically, creating a pressure buildup. As air travels up and past the vocal cords, it causes them to vibrate. This vibration escapes the mouth along with puffs of air as sound. A voice changes in pitch when the muscles of the larynx relax or tighten, changing the tension on the vocal chords. A voice becomes louder when air flow from the lungs increases, making the amplitude of the sound pressure wave greater.
+Hearing is the perception of sound. It can give us plenty of information—such as pitch, loudness, and direction. Humans can normally hear frequencies ranging from approximately 20 to 20,000 Hz. Other animals have hearing ranges different from that of humans. Dogs can hear sounds as high as 45,000 Hz, whereas bats and dolphins can hear up to 110,000 Hz sounds. You may have noticed that dogs respond to the sound of a dog whistle which produces sound out of the range of human hearing.
+
+Sounds below 20 Hz are called infrasound, whereas those above 20,000 Hz are ultrasound. The perception of frequency is called pitch, and the perception of intensity is called loudness.
+
+The way we hear involves some interesting physics. The sound wave that hits our ear is a pressure wave. The ear converts sound waves into electrical nerve impulses, similar to a microphone.
+shows the anatomy of the ear with its division into three parts: the outer ear or ear canal; the middle ear, which runs from the eardrum to the cochlea; and the inner ear, which is the cochlea itself. The body part normally referred to as the ear is technically called the pinna.
+
+The outer ear, or ear canal, carries sound to the eardrum protected inside of the ear. The middle ear converts sound into mechanical vibrations and applies these vibrations to the cochlea. The lever system of the middle ear takes the force exerted on the eardrum by sound pressure variations, amplifies it and transmits it to the inner ear via the oval window. Two muscles in the middle ear protect the inner ear from very intense sounds. They react to intense sound in a few milliseconds and reduce the force transmitted to the cochlea. This protective reaction can also be triggered by your own voice, so that humming during a fireworks display, for example, can reduce noise damage.
+shows the middle and inner ear in greater detail. As the middle ear bones vibrate, they vibrate the cochlea, which contains fluid. This creates pressure waves in the fluid that cause the tectorial membrane to vibrate. The motion of the tectorial membrane stimulates tiny cilia on specialized cells called hair cells. These hair cells, and their attached neurons, transform the motion of the tectorial membrane into electrical signals that are sent to the brain.
+
+The tectorial membrane vibrates at different positions based on the frequency of the incoming sound. This allows us to detect the pitch of sound. Additional processing in the brain also allows us to determine which direction the sound is coming from (based on comparison of the sound’s arrival time and intensity between our two ears).
+
+Musical Instruments
+
+Yet another way that people make sounds is through playing musical instruments (see the previous figure). Recall that the perception of frequency is called pitch. You may have noticed that the pitch range produced by an instrument tends to depend upon its size. Small instruments, such as a piccolo, typically make high-pitch sounds, while larger instruments, such as a tuba, typically make low-pitch sounds. High-pitch means small wavelength, and the size of a musical instrument is directly related to the wavelengths of sound it produces. So a small instrument creates short-wavelength sounds, just as a large instrument creates long-wavelength sounds.
+
+Most of us have excellent relative pitch, which means that we can tell whether one sound has a different frequency from another. We can usually distinguish one sound from another if the frequencies of the two sounds differ by as little as 1 Hz. For example, 500.0 and 501.5 Hz are noticeably different.
+
+Musical notes are particular sounds that can be produced by most instruments, and are the building blocks of a song. In Western music, musical notes have particular names, such as A-sharp, C, or E-flat. Some people can identify musical notes just by listening to them. This rare ability is called perfect, or absolute, pitch.
+
+When a violin plays middle C, there is no mistaking it for a piano playing the same note. The reason is that each instrument produces a distinctive set of frequencies and intensities. We call our perception of these combinations of frequencies and intensities the timbre of the sound. It is more difficult to quantify timbre than loudness or pitch. Timbre is more subjective. Evocative adjectives such as dull, brilliant, warm, cold, pure, and rich are used to describe the timbre of a sound rather than quantities with units, which makes for a difficult topic to dissect with physics. So the consideration of timbre takes us into the realm of perceptual psychology, where higher-level processes in the brain are dominant. This is also true for other perceptions of sound, such as music and noise. But as a teenager, you are likely already aware that one person’s music may be another person’s noise.
+
+Check Your Understanding
+
+Teacher Support
+
+Use these questions to assess student achievement of the section’s Learning Objectives. If students are struggling with a specific objective, these questions will help identify which and direct students to the relevant content.
+
+What word or phrase is used to describe the loudness of sound?
+
+frequency or oscillation
+
+intensity level or decibel
+
+timbre
+
+pitch
+
+How do humans change the pitch of their voice?
+
+Relaxing or tightening their glottis
+
+Relaxing or tightening their uvula
+
+Relaxing or tightening their tongue
+
+Relaxing or tightening their larynx
+
+Section Summary
+
+The intensity of a sound is proportional to its amplitude squared.
+
+The energy of a sound wave is also proportional to its amplitude squared.
+
+Sound intensity level in decibels (dB) is more relevant for how humans perceive sounds than sound intensity (in W/m2), even though sound intensity is the SI unit.
+
+Sound intensity level is not the same as sound intensity—it tells you the level of the sound relative to a reference intensity rather than the actual intensity.
+
+Hearing is the perception of sound and involves that transformation of sound waves into vibrations of parts within the ear. These vibrations are then transformed into neural signals that are interpreted by the brain.
+
+People create sounds by pushing air up through their lungs and through elastic folds in the throat called vocal cords.
+
+Key Equations
+
+I=
+ P
+ A
+I=
+
+ (
+ 
+ Δp
+ )
+ 2
+
+ 2ρ
+ v
+ w
+β (dB)=10
+ 
+  log
+ 
+ 10
+ 
+ (
+
+ I
+
+ I
+ 0
+
+ )
+Concept Items
+
+What is the mathematical relationship between intensity, power, and area?
+I=
+ P
+
+ A
+ 2
+I=PA
+I=
+ A
+ P
+I=
+ P
+ A
+
+How does the "decibel" get its name?
+
+The meaning of deci is hundred and the number of decibels is one-hundredth of the logarithm to base 10 of the ratio of two sound intensities.
+
+The meaning of deci is "ten" and the number of decibels is one-tenth of the logarithm to base 10 of the ratio of two sound intensities.
+
+The meaning of deci is one-hundredth and the number of decibels is hundred times the logarithm to base 10 of the ratio of two sound intensities.
+
+The meaning of deci is one-tenth and the number of decibels is ten times the logarithm to base 10 of the ratio of two sound intensities.
+
+Critical Thinking
+
+Problems
+
+Calculate the sound intensity for a sound wave traveling through air at 15° C and having a pressure amplitude of 0.80 Pa. (Hint—Speed of sound in air at 15° C is 340 m/s .)
+
+9.6×10−3 W / m2
+
+7.7×10−3 W / m2
+
+9.6×10−4 W / m2
+
+7.7×10−4 W / m2
+
+Test Prep Multiple Choice
+
+Which of the following terms is a useful quantity to describe the loudness of a sound?
+
+intensity
+
+frequency
+
+pitch
+
+wavelength
+
+What is the unit of sound intensity level?
+
+decibels
+
+hertz
+
+watts
+
+Why is I0 chosen as the reference for sound intensity?
+
+Because, it is the highest intensity of sound a person with normal hearing can perceive at a frequency of 100 Hz.
+
+Because, it is the lowest intensity of sound a person with normal hearing can perceive at a frequency of 100 Hz.
+
+Because, it is the highest intensity of sound a person with normal hearing can perceive at a frequency of 1000 Hz.
+
+Because, it is the lowest intensity of sound a person with normal hearing can perceive at a frequency of 1000 Hz.
+
+Test Prep Short Answer
+
+Which nerve carries auditory information to the brain?
+
+buccal nerve
+
+peroneal nerve
+
+cochlear nerve
+
+mandibular nerve
+
+Test Prep Extended Response
+
+References
+
+Nave, R. Vocal sound production—HyperPhysics. Retrieved from http://hyperphysics.phy-astr.gsu.edu/hbase/music/voice.html
+
+the amount that matter is disrupted during a sound wave, as measured by the difference in height between the crests and troughs of the sound wave.
+a unit used to describe sound intensity levels
+the perception of sound
+the perception of sound intensity
+the perception of the frequency of a sound
+the power per unit area carried by a sound wave
+the level of sound relative to a fixed standard related to human hearing

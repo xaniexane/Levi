@@ -1,0 +1,120 @@
+# m66513
+# Book: OpenStax Biology
+# Subject: science
+# Source: https://github.com/openstax/osbooks-biology-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Whole-Genome Sequencing
+
+Whole-Genome Sequencing
+
+By the end of this section, you will be able to do the following:
+
+Describe three types of sequencing
+
+Define whole-genome sequencing
+
+Although there have been significant advances in the medical sciences in recent years, doctors are still confounded by some diseases, and they are using whole-genome sequencing to discover the root of the problem. Whole-genome sequencing is a process that determines an entire genome’s DNA sequence. Whole-genome sequencing is a brute-force approach to problem solving when there is a genetic basis at the core of a disease. Several laboratories now provide services to sequence, analyze, and interpret entire genomes.
+
+For example, whole-exome sequencing is a lower-cost alternative to whole genome sequencing. In exome sequencing, the doctor sequences only the DNA’s coding, exon-producing regions. In 2010, doctors used whole-exome sequencing to save a young boy whose intestines had multiple mysterious abscesses. The child had several colon operations with no relief. Finally, they performed whole-exome sequencing, which revealed a defect in a pathway that controls apoptosis (programmed cell death). The doctors used a bone-marrow transplant to overcome this genetic disorder, leading to a cure for the boy. He was the first person to receive successful treatment based on a whole-exome sequencing diagnosis. Today, human genome sequencing is more readily available and results are available within two days for about $1000.
+
+Strategies Used in Sequencing Projects
+
+The basic sequencing technique used in all modern day sequencing projects is the chain termination method (also known as the dideoxy method), which Fred Sanger developed in the 1970s. The chain termination method involves DNA replication of a single-stranded template by using a primer and a regular deoxynucleotide (dNTP), which is a monomer, or a single DNA unit. The primer and dNTP mix with a small proportion of fluorescently labeled dideoxynucleotides (ddNTPs). The ddNTPs are monomers that are missing a hydroxyl group (–OH) at the site at which another nucleotide usually attaches to form a chain (). Scientists label each ddNTP with a different color of fluorophore. Every time a ddNTP incorporates in the growing complementary strand, it terminates the DNA replication process, which results in multiple short strands of replicated DNA that each terminate at a different point during replication. When gel electrophoresis processes the reaction mixture after separating into single strands, the multiple newly replicated DNA strands form a ladder because of the differing sizes. Because the ddNTPs are fluorescently labeled, each band on the gel reflects the DNA strand’s size and the ddNTP that terminated the reaction. The different colors of the fluorophore-labeled ddNTPs help identify the ddNTP incorporated at that position. Reading the gel on the basis of each band’s color on the ladder produces the template strand’s sequence ().
+
+Early Strategies: Shotgun Sequencing and Pair-Wise End Sequencing
+
+In shotgun sequencing method, several DNA fragment copies cut randomly into many smaller pieces (somewhat like what happens to a round shot cartridge when fired from a shotgun). All of the segments sequence using the chain-sequencing method. Then, with sequence computer assistance, scientists can analyze the fragments to see where their sequences overlap. By matching overlapping sequences at each fragment’s end, scientists can reform the entire DNA sequence. A larger sequence that is assembled from overlapping shorter sequences is called a contig. As an analogy, consider that someone has four copies of a landscape photograph that you have never seen before and know nothing about how it should appear. The person then rips up each photograph with their hands, so that different size pieces are present from each copy. The person then mixes all of the pieces together and asks you to reconstruct the photograph. In one of the smaller pieces you see a mountain. In a larger piece, you see that the same mountain is behind a lake. A third fragment shows only the lake, but it reveals that there is a cabin on the shore of the lake. Therefore, from looking at the overlapping information in these three fragments, you know that the picture contains a mountain behind a lake that has a cabin on its shore. This is the principle behind reconstructing entire DNA sequences using shotgun sequencing.
+
+Originally, shotgun sequencing only analyzed one end of each fragment for overlaps. This was sufficient for sequencing small genomes. However, the desire to sequence larger genomes, such as that of a human, led to developing double-barrel shotgun sequencing, or pairwise-end sequencing. In pairwise-end sequencing, scientists analyze each fragment’s end for overlap. Pairwise-end sequencing is, therefore, more cumbersome than shotgun sequencing, but it is easier to reconstruct the sequence because there is more available information.
+
+Next-generation Sequencing
+
+Since 2005, automated sequencing techniques used by laboratories are under the umbrella of next-generation sequencing (deep sequencing or massively parallel sequencing), which is a group of automated techniques used for rapid DNA sequencing. These automated low-cost sequencers can generate sequences of hundreds of thousands or millions of short fragments (25 to 500 base pairs) in the span of one day. These sequencers use sophisticated software to get through the cumbersome process of putting all the fragments in order.
+
+Comparing Sequences
+
+A sequence alignment is an arrangement of proteins, DNA, or RNA. Scientists use it to identify similar regions between cell types or species, which may indicate function or structure conservation. We can use sequence alignments to construct phylogenetic trees. The following website uses a software program called BLAST (basic local alignment search tool).
+
+Under “Basic Blast,” click “Nucleotide Blast.” Input the following sequence into the large "query sequence" box: ATTGCTTCGATTGCA. Below the box, locate the "Species" field and type "human" or "Homo sapiens". Then click “BLAST” to
+compare the inputted sequence against the human genome’s known sequences. The result is that this sequence occurs in over a hundred places in the human genome. Scroll down below the graphic with the horizontal bars and you will see a short description of each of the matching hits. Pick one of the hits near the top of the list and click on "Graphics". This will bring you to a page that shows the sequence’s location within the entire human genome. You can move the slider that looks like a green flag back and forth to view the sequences immediately around the selected gene. You can then return to your selected sequence by clicking the "ATG" button.
+
+Use of Whole-Genome Sequences of Model Organisms
+
+British biochemist and Nobel Prize winner Fred Sanger used a bacterial virus, the bacteriophage fx174 (5368 base pairs), to completely sequence the first genome. Other scientists later sequenced several other organelle and viral genomes. American biotechnologist, biochemist, geneticist, and businessman Craig Venter sequenced the bacterium Haemophilus influenzae in the 1980s. Approximately 74 different laboratories collaborated on sequencing the genome of the yeast Saccharomyces cerevisiae, which began in 1989 and was completed in 1996, because it was 60 times bigger than any other genome sequencing. By 1997, the genome sequences of two important model organisms were available: the bacterium Escherichia coli K12 and the yeast Saccharomyces cerevisiae. We now know the genomes of other model organisms, such as the mouse Mus musculus, the fruit fly Drosophila melanogaster, the nematode Caenorhabditis. elegans, and humans Homo sapiens. Researchers perform extensive basic research in model organisms because they can apply the information to genetically similar organisms. A model organism is a species that researchers use as a model to understand the biological processes in other species that the model organism represents. Having entire genomes sequenced helps with the research efforts in these model organisms. The process of attaching biological information to gene sequences is genome annotation. Annotating gene sequences helps with basic experiments in molecular biology, such as designing PCR primers and RNA targets.
+
+Click through each genome sequencing step at this site.
+
+Genome Sequence Uses
+DNA microarrays are methods that scientists use to detect gene expression by analyzing different DNA fragments that are fixed to a glass slide or a silicon chip to identify active genes and sequences. We can discover almost one million genotypic abnormalities using microarrays; whereas, whole-genome sequencing can provide information about all six billion base pairs in the human genome. Although studying genome sequencing with medical applications is interesting, this discipline dwells on abnormal gene function. Knowing about the entire genome will allow researchers to discover future onset diseases and other genetic disorders early. This will allow for more informed decisions about lifestyle, medication, and having children. Genomics is still in its infancy, although someday it may become routine to use whole-genome sequencing to screen every newborn to detect genetic abnormalities.
+
+In addition to disease and medicine, genomics can contribute to developing novel enzymes that convert biomass to biofuel, which results in higher crop and fuel production, and lower consumer cost. This knowledge should allow better methods of control over the microbes that industry uses to produce biofuels. Genomics could also improve monitoring methods that measure the impact of pollutants on ecosystems and help clean up environmental contaminants. Genomics has aided in developing agrochemicals and pharmaceuticals that could benefit medical science and agriculture.
+
+It sounds great to have all the knowledge we can get from whole-genome sequencing; however, humans have a responsibility to use this knowledge wisely. Otherwise, it could be easy to misuse the power of such knowledge, leading to discrimination based on a person's genetics, human genetic engineering, and other ethical concerns. This information could also lead to legal issues regarding health and privacy.
+
+Section Summary
+
+Whole-genome sequencing is the latest available resource to treat genetic diseases. Some doctors are using whole-genome sequencing to save lives. Genomics has many industrial applications including biofuel development, agriculture, pharmaceuticals, and pollution control. The basic principle of all modern-day sequencing strategies involves the chain termination method of sequencing.
+
+Although the human genome sequences provide key insights to medical professionals, researchers use whole-genome sequences of model organisms to better understand the species' genome. Automation and the decreased cost of whole-genome sequencing may lead to personalized medicine in the future.
+
+Review Questions
+
+The chain termination method of sequencing:
+
+uses labeled ddNTPs
+
+uses only dideoxynucleotides
+
+uses only deoxynucleotides
+
+uses labeled dNTPs
+
+A
+
+Whole-genome sequencing can be used for advances in:
+
+the medical field
+
+agriculture
+
+biofuels
+
+all of the above
+
+D
+
+Sequencing an individual person’s genome
+
+is currently possible
+
+could lead to legal issues regarding discrimination and privacy
+
+could help make informed choices about medical treatment
+
+all of the above
+
+D
+
+What is the most challenging issue facing genome sequencing?
+
+the inability to develop fast and accurate sequencing techniques
+
+the ethics of using information from genomes at the individual level
+
+the availability and stability of DNA
+
+all of the above
+
+B
+
+method of DNA sequencing using labeled dideoxynucleotides to terminate DNA replication; it is also called the dideoxy method or the Sanger method
+larger sequence of DNA assembled from overlapping shorter sequences
+individual DNA monomer (single unit)
+individual DNA monomer that is missing a hydroxyl group (–OH)
+method to detect gene expression by analyzing many DNA fragments that are fixed to a glass slide or a silicon chip to identify active genes and identify sequences
+process of attaching biological information to gene sequences
+species that researchers study and use as a model to understand the biological processes in other species represented by the model organism
+group of automated techniques for rapid DNA sequencing
+method used to sequence multiple DNA fragments to generate the sequence of a large piece of DNA
+process that determines an entire genome's DNA sequence

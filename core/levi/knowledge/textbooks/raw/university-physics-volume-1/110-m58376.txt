@@ -1,0 +1,221 @@
+# m58376
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Speed of Sound
+
+Speed of Sound
+
+By the end of this section, you will be able to:
+
+Explain the relationship between wavelength and frequency of sound
+
+Determine the speed of sound in different media
+
+Derive the equation for the speed of sound in air
+
+Determine the speed of sound in air for a given temperature
+
+Sound, like all waves, travels at a certain speed and has the properties of frequency and wavelength. You can observe direct evidence of the speed of sound while watching a fireworks display (). You see the flash of an explosion well before you hear its sound and possibly feel the pressure wave, implying both that sound travels at a finite speed and that it is much slower than light.
+
+The difference between the speed of light and the speed of sound can also be experienced during an electrical storm. The flash of lighting is often seen before the clap of thunder. You may have heard that if you count the number of seconds between the flash and the sound, you can estimate the distance to the source. Every five seconds converts to about one mile. The velocity of any wave is related to its frequency and wavelength by
+
+where v is the speed of the wave, f is its frequency, and λ is its wavelength. Recall from Waves that the wavelength is the length of the wave as measured between sequential identical points. For example, for a surface water wave or sinusoidal wave on a string, the wavelength can be measured between any two convenient sequential points with the same height and slope, such as between two sequential crests or two sequential troughs. Similarly, the wavelength of a sound wave is the distance between sequential identical parts of a wave—for example, between sequential compressions (). The frequency is the same as that of the source and is the number of waves that pass a point per unit time.
+
+Speed of Sound in Various Media
+shows that the speed of sound varies greatly in different media. The speed of sound in a medium depends on how quickly vibrational energy can be transferred through the medium. For this reason, the derivation of the speed of sound in a medium depends on the medium and on the state of the medium. In general, the equation for the speed of a mechanical wave in a medium depends on the square root of the restoring force, or the elastic property, divided by the inertial property,
+
+Also, sound waves satisfy the wave equation derived in Waves,
+
+Recall from Waves that the speed of a wave on a string is equal to v=FTμ, where the restoring force is the tension in the string FT and the linear density μ is the inertial property. In a fluid, the speed of sound depends on the bulk modulus and the density,
+
+The speed of sound in a solid depends on the Young’s modulus of the medium and the density,
+
+In an ideal gas (see The Kinetic Theory of Gases), the equation for the speed of sound is
+
+where γ is the adiabatic index, R=8.31J/mol·K is the gas constant, TK is the absolute temperature in kelvins, and M is the molar mass. In general, the more rigid (or less compressible) the medium, the faster the speed of sound. This observation is analogous to the fact that the frequency of simple harmonic motion is directly proportional to the stiffness of the oscillating object as measured by k, the spring constant. The greater the density of a medium, the slower the speed of sound. This observation is analogous to the fact that the frequency of a simple harmonic motion is inversely proportional to m, the mass of the oscillating object. The speed of sound in air is low, because air is easily compressible. Because liquids and solids are relatively rigid and very difficult to compress, the speed of sound in such media is generally greater than in gases.
+
+Speed of Sound in Various Media
+
+Gases at 0°C
+Air
+331
+Carbon dioxide
+259
+Oxygen
+316
+Helium
+965
+Hydrogen
+Liquids at 20°C
+Ethanol
+1160
+Mercury
+1450
+Water, fresh
+1480
+Sea Water
+1540
+Human tissue
+Solids (longitudinal or bulk)
+Vulcanized rubber
+54
+Polyethylene
+920
+Marble
+3810
+Glass, Pyrex
+5640
+Lead
+1960
+Aluminum
+5120
+Steel
+5960
+Because the speed of sound depends on the density of the material, and the density depends on the temperature, there is a relationship between the temperature in a given medium and the speed of sound in the medium. For air at sea level, the speed of sound is given by
+
+where the temperature in the first equation (denoted as TC) is in degrees Celsius and the temperature in the second equation (denoted as TK) is in kelvins. The speed of sound in gases is related to the average speed of particles in the gas, vrms=3kBTm, where kB is the Boltzmann constant (1.38×10−23J/K) and m is the mass of each (identical) particle in the gas. Note that v refers to the speed of the coherent propagation of a disturbance (the wave), whereas vrms describes the speeds of particles in random directions. Thus, it is reasonable that the speed of sound in air and other gases should depend on the square root of temperature. While not negligible, this is not a strong dependence. At 0°C, the speed of sound is 331 m/s, whereas at 20.0°C, it is 343 m/s, less than a 4% increase. shows how a bat uses the speed of sound to sense distances.
+
+Derivation of the Speed of Sound in Air
+
+As stated earlier, the speed of sound in a medium depends on the medium and the state of the medium. The derivation of the equation for the speed of sound in air starts with the mass flow rate and continuity equation discussed in Fluid Mechanics.
+
+Consider fluid flow through a pipe with cross-sectional area A (). The mass in a small volume of length x of the pipe is equal to the density times the volume, or m=ρV=ρAx. The mass flow rate is
+
+The continuity equation from Fluid Mechanics states that the mass flow rate into a volume has to equal the mass flow rate out of the volume, ρinAinvin=ρoutAoutvout.
+
+Now consider a sound wave moving through a parcel of air. A parcel of air is a small volume of air with imaginary boundaries (). The density, temperature, and velocity on one side of the volume of the fluid are given as ρ,T,v, and on the other side are ρ+dρ,T+dT,v+dv.
+
+The continuity equation states that the mass flow rate entering the volume is equal to the mass flow rate leaving the volume, so
+
+This equation can be simplified, noting that the area cancels and considering that the multiplication of two infinitesimals is approximately equal to zero: dρ(dv)≈0,
+
+The net force on the volume of fluid () equals the sum of the forces on the left face and the right face:
+
+The acceleration is the force divided by the mass and the mass is equal to the density times the volume, m=ρV=ρdxdydz. We have
+
+From the continuity equation ρdv=−vdρ, we obtain
+
+Consider a sound wave moving through air. During the process of compression and expansion of the gas, no heat is added or removed from the system. A process where heat is not added or removed from the system is known as an adiabatic system. Adiabatic processes are covered in detail in The First Law of Thermodynamics, but for now it is sufficient to say that for an adiabatic process,pVγ=constant, where p is the pressure, V is the volume, and gamma (γ) is a constant that depends on the gas. For air, γ=1.40. The density equals the number of moles times the molar mass divided by the volume, so the volume is equal to V=nMρ. The number of moles and the molar mass are constant and can be absorbed into the constant p(1ρ)γ=constant. Taking the natural logarithm of both sides yields lnp−γlnρ=constant. Differentiating with respect to the density, the equation becomes
+
+If the air can be considered an ideal gas, we can use the ideal gas law:
+
+Here M is the molar mass of air:
+
+Since the speed of sound is equal to v=dpdρ, the speed is equal to
+
+Note that the velocity is faster at higher temperatures and slower for heavier gases. For air, γ=1.4, M=0.02897kgmol, and R=8.31Jmol·K. If the temperature is TC=20°C(T=293K), the speed of sound is v=343m/s.
+
+The equation for the speed of sound in air v=γRTM can be simplified to give the equation for the speed of sound in air as a function of absolute temperature:
+
+One of the more important properties of sound is that its speed is nearly independent of the frequency. This independence is certainly true in open air for sounds in the audible range. If this independence were not true, you would certainly notice it for music played by a marching band in a football stadium, for example. Suppose that high-frequency sounds traveled faster—then the farther you were from the band, the more the sound from the low-pitch instruments would lag that from the high-pitch ones. But the music from all instruments arrives in cadence independent of distance, so all frequencies must travel at nearly the same speed. Recall that
+
+In a given medium under fixed conditions, v is constant, so there is a relationship between f and λ; the higher the frequency, the smaller the wavelength ().
+Calculating Wavelengths
+Calculate the wavelengths of sounds at the extremes of the audible range, 20 and 20,000 Hz, in 30.0°C air. (Assume that the frequency values are accurate to two significant figures.)
+
+Calculating Wavelengths
+Strategy
+To find wavelength from frequency, we can use v=fλ.
+
+Strategy
+Solution
+
+Solution
+
+Identify knowns. The value for v is given by
+v=(331m/s)T273K.
+
+Convert the temperature into kelvins and then enter the temperature into the equation
+v=(331m/s)303K273K=348.7m/s.
+
+Solve the relationship between speed and wavelength for λ:
+λ=vf.
+
+Enter the speed and the minimum frequency to give the maximum wavelength:
+λmax=​348.7m/s20Hz=17m.
+
+Enter the speed and the maximum frequency to give the minimum wavelength:
+λmin=348.7m/s20,000Hz=0.017m=1.7cm.
+Significance
+Because the product of f multiplied by λ equals a constant, the smaller f is, the larger λ must be, and vice versa.
+
+Significance
+
+The speed of sound can change when sound travels from one medium to another, but the frequency usually remains the same. This is similar to the frequency of a wave on a string being equal to the frequency of the force oscillating the string. If v changes and f remains the same, then the wavelength λ must change. That is, because v=fλ, the higher the speed of a sound, the greater its wavelength for a given frequency.
+
+Imagine you observe two firework shells explode. You hear the explosion of one as soon as you see it. However, you see the other shell for several milliseconds before you hear the explosion. Explain why this is so.
+
+Sound and light both travel at definite speeds, and the speed of sound is slower than the speed of light. The first shell is probably very close by, so the speed difference is not noticeable. The second shell is farther away, so the light arrives at your eyes noticeably sooner than the sound wave arrives at your ears.
+
+Although sound waves in a fluid are longitudinal, sound waves in a solid travel both as longitudinal waves and transverse waves. Seismic waves, which are essentially sound waves in Earth’s crust produced by earthquakes, are an interesting example of how the speed of sound depends on the rigidity of the medium. Earthquakes produce both longitudinal and transverse waves, and these travel at different speeds. The bulk modulus of granite is greater than its shear modulus. For that reason, the speed of longitudinal or pressure waves (P-waves) in earthquakes in granite is significantly higher than the speed of transverse or shear waves (S-waves). Both types of earthquake waves travel slower in less rigid material, such as sediments. P-waves have speeds of 4 to 7 km/s, and S-waves range in speed from 2 to 5 km/s, both being faster in more rigid material. The P-wave gets progressively farther ahead of the S-wave as they travel through Earth’s crust. The time between the P- and S-waves is routinely used to determine the distance to their source, the epicenter of the earthquake. Because S-waves do not pass through the liquid core, two shadow regions are produced ().
+
+Seismologists and geophysicists use properties and velocities of earthquake waves to study the Earth's interior, which due to it's depth and pressure is not observable through many other means. In fact, the discoveries of the structure of the Earth, illustrated in the figure above, resulted from earthquake observations. In 1914, Beno Gutenberg used differences in wave speeds to determine that there must be a liquid core within the mantle. In 1936, Inge Lehmann began investigating P-waves from a New Zealand earthquake that had unexpectedly reached Europe, which should have been in the shadow region. Up until that point, seismologists had explained such shadow waves as being caused by some type of diffraction (as Gutenberg himself assumed) or a result of faulty seismometers. However, Lehmann had installed the European instruments herself, and so trusted their accuracy. She calculated that the amplitude of the waves must be caused by the existence of a solid inner core within the liquid core. This model has been accepted and reinforced by decades of subsequent calculations, including those from nuclear test explosions, which can be measured very precisely.
+
+As sound waves move away from a speaker, or away from the epicenter of an earthquake, their power per unit area decreases. This is why the sound is very loud near a speaker and becomes less loud as you move away from the speaker. This also explains why there can be an extreme amount of damage at the epicenter of an earthquake but only tremors are felt in areas far from the epicenter. The power per unit area is known as the intensity, and in the next section, we will discuss how the intensity depends on the distance from the source.
+
+Summary
+
+The speed of sound depends on the medium and the state of the medium.
+
+In a fluid, because the absence of shear forces, sound waves are longitudinal. A solid can support both longitudinal and transverse sound waves.
+
+In air, the speed of sound is related to air temperature T byv=331msTK273K=331ms1+TC273°C.
+v is the same for all frequencies and wavelengths of sound in air.
+
+Conceptual Questions
+
+How do sound vibrations of atoms differ from thermal motion?
+
+When sound passes from one medium to another where its propagation speed is different, does its frequency or wavelength change? Explain your answer briefly.
+
+The frequency does not change as the sound wave moves from one medium to another. Since the speed changes and the frequency does not, the wavelength must change. This is similar to the driving force of a harmonic oscillator or a wave on the string.
+
+A popular party trick is to inhale helium and speak in a high-frequency, funny voice. Explain this phenomenon.
+
+You may have used a sonic range finder in lab to measure the distance of an object using a clicking sound from a sound transducer. What is the principle used in this device?
+
+The transducer sends out a sound wave, which reflects off the object in question and measures the time it takes for the sound wave to return. Since the speed of sound is constant, the distance to the object can found by multiplying the velocity of sound by half the time interval measured.
+
+The sonic range finder discussed in the preceding question often needs to be calibrated. During the calibration, the software asks for the room temperature. Why do you suppose the room temperature is required?
+
+Problems
+
+When poked by a spear, an operatic soprano lets out a 1200-Hz shriek. What is its wavelength if the speed of sound is 345 m/s?
+
+What frequency sound has a 0.10-m wavelength when the speed of sound is 340 m/s?
+f=3400Hz
+
+Calculate the speed of sound on a day when a 1500-Hz frequency has a wavelength of 0.221 m.
+
+(a) What is the speed of sound in a medium where a 100-kHz frequency produces a 5.96-cm wavelength? (b) Which substance in is this likely to be?
+
+a. v=5.96×103m/s; b. steel (from value in )
+
+Show that the speed of sound in 20.0°C air is 343m/s, as claimed in the text.
+
+Air temperature in the Sahara Desert can reach 56.0°C (about 134°F). What is the speed of sound in air at that temperature?
+v=363ms
+
+Dolphins make sounds in air and water. What is the ratio of the wavelength of a sound in air to its wavelength in seawater? Assume air temperature is 20.0°C.
+
+A sonar echo returns to a submarine 1.20 s after being emitted. What is the distance to the object creating the echo? (Assume that the submarine is in the ocean, not in fresh water.)
+Δx=924m
+
+(a) If a submarine’s sonar can measure echo times with a precision of 0.0100 s, what is the smallest difference in distances it can detect? (Assume that the submarine is in the ocean, not in fresh water.) (b) Discuss the limits this time resolution imposes on the ability of the sonar system to detect the size and shape of the object creating the echo.
+
+Ultrasonic sound waves are often used in methods of nondestructive testing. For example, this method can be used to find structural faults in a steel I-beams used in building. Consider a 10.00 meter long, steel I-beam with a cross-section shown below. The weight of the I-beam is 3846.50 N. What would be the speed of sound through in the I-beam? (Ysteel=200GPa,βsteel=159GPa).
+V=0.05m3m=392.5kgρ=7850kg/m3v=5047.54m/s
+
+A physicist at a fireworks display times the lag between seeing an explosion and hearing its sound, and finds it to be 0.400 s. (a) How far away is the explosion if air temperature is 24.0°C and if you neglect the time taken for light to reach the physicist? (b) Calculate the distance to the explosion taking the speed of light into account. Note that this distance is negligibly greater.
+
+During a 4th of July celebration, an M80 firework explodes on the ground, producing a bright flash and a loud bang. The air temperature of the night air is TF=95.00°F. Two observers see the flash and hear the bang. The first observer notes the time between the flash and the bang as 0.10 second. The second observer notes the difference as 0.15 seconds. The line of sight between the two observers meet at a right angle as shown below. What is the distance Δx between the two observers?
+TC=35°C,v=351.58m/sΔx1=35.16m,Δx2=52.74mΔx=63.39m
+
+The density of a sample of water is ρ=998.00kg/m3 and the bulk modulus is β=2.15GPa. What is the speed of sound through the sample?
+
+Suppose a bat uses sound echoes to locate its insect prey, 3.00 m away. (See .) (a) Calculate the echo times for temperatures of 5.00°C and 35.0°C. (b) What percent uncertainty does this cause for the bat in locating the insect? (c) Discuss the significance of this uncertainty and whether it could cause difficulties for the bat. (In practice, the bat continues to use sound as it closes in, eliminating most of any difficulties imposed by this and other effects, such as motion of the prey.)
+
+a. t5.00°C=0.0180s,t35.0°C=0.0171s; b. % uncertainty=5.00%; c. This uncertainty could definitely cause difficulties for the bat, if it didn’t continue to use sound as it closed in on its prey. A 5% uncertainty could be the difference between catching the prey around the neck or around the chest, which means that it could miss grabbing its prey.

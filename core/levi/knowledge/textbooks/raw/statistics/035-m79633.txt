@@ -1,0 +1,1218 @@
+# m79633
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+The Uniform Distribution
+
+The Uniform Distribution
+
+The uniform distribution is a continuous probability distribution and is concerned with events that are equally likely to occur. When working out problems that have a uniform distribution, be careful to note if the data are inclusive or exclusive of endpoints.
+
+The data in are 55 smiling times, in seconds, of an eight-week-old baby.
+
+10.4
+19.6
+18.8
+13.9
+17.8
+16.8
+21.6
+17.9
+12.5
+11.1
+4.9
+12.8
+14.8
+22.8
+20.0
+15.9
+16.3
+13.4
+17.1
+14.5
+19.0
+22.8
+1.3
+0.7
+8.9
+11.9
+10.9
+7.3
+5.9
+3.7
+17.9
+19.2
+9.8
+5.8
+6.9
+2.6
+5.8
+21.7
+11.8
+3.4
+2.1
+4.5
+6.3
+10.7
+8.9
+9.4
+9.4
+7.6
+10.0
+3.3
+6.7
+7.8
+11.6
+13.8
+18.6
+The sample mean = 11.49 and the sample standard deviation = 6.23.
+
+We will assume that the smiling times, in seconds, follow a uniform distribution between zero and 23 seconds, inclusive. This means that any smiling time from zero to and including 23 seconds is equally likely. The histogram that could be constructed from the sample is an empirical distribution that closely matches the theoretical uniform distribution.
+
+Let X = length, in seconds, of an eight-week-old baby's smile.
+
+The notation for the uniform distribution is
+X ~ U(a, b) where a = the lowest value of x and b = the highest value of x.
+
+The probability density function is
+f(x) = 
+
+1
+
+b−a
+
+ for a ≤ x ≤ b.
+
+For this example, X ~ U(0, 23) and f(x) = 
+
+1
+
+23−0
+
+ for 0 ≤ X ≤ 23.
+
+Formulas for the theoretical mean and standard deviation are
+
+For this problem, the theoretical mean and standard deviation are
+
+Notice that the theoretical mean and standard deviation are close to the sample mean and standard deviation in this example.
+
+Try It
+
+The data that follow are the number of passengers on 35 different charter fishing boats. The sample mean = 7.9 and the sample standard deviation = 4.33. The data follow a uniform distribution where all values between and including zero and 14 are equally likely. State the values of a and b. Write the distribution in proper notation, and calculate the theoretical mean and standard deviation.
+
+1
+12
+4
+10
+4
+14
+11
+7
+11
+4
+13
+2
+4
+6
+3
+10
+0
+12
+6
+9
+10
+5
+13
+4
+10
+14
+12
+11
+6
+10
+11
+0
+11
+13
+a is zero, b is 14, X ~ U (0, 14), μ = 7 passengers, σ = 4.04 passengers
+
+a. Refer to . What is the probability that a randomly chosen eight-week-old baby smiles between two and 18 seconds?
+P(2 < x < 18) = (base)(height) = (18 – 2)
+
+(
+
+1
+
+23
+
+)
+
+ = 
+
+16
+
+23
+
+b. Find the 90th percentile for an eight-week-old baby's smiling time.
+
+b. Ninety percent of the smiling times fall below the 90th percentile, k, so P(x < k) = 0.90.
+
+c. Find the probability that a random eight-week-old baby smiles more than 12 seconds knowing that the baby smiles more than eight seconds.
+
+c. This probability question is a conditional. You are asked to find the probability that an eight-week-old baby smiles more than 12 seconds when you already know the baby has smiled for more than eight seconds.
+
+Find P(x > 12|x > 8) There are two ways to do the problem. For the first way, use the fact that this is a conditional and changes the sample space. The graph illustrates the new sample space. You already know the baby smiled more than eight seconds.
+
+for 8 < x < 23
+Write a new f(x): f(x) = 
+
+1
+
+23 − 8
+
+ = 
+
+1
+
+15
+
+ for 8 < x < 23.
+P(x > 12|x > 8) = (23 − 12)
+
+(
+
+1
+
+15
+
+)
+
+ = 
+
+11
+
+15
+
+For the second way, use the conditional formula from Probability Topics with the original distribution.
+P(A|B) = 
+
+ P(A AND B)
+
+ P(B)
+
+For this problem, A is (x > 12) and B is (x > 8).
+
+So, P(x > 12|x > 8) = 
+
+ (x>12 AND x>8)
+
+ P(x>8)
+
+ =
+ 
+ P(x>12)
+
+ P(x>8)
+
+ =
+
+ 11
+
+ 23
+
+ 15
+
+ 23
+
+ =
+ 
+ 11
+
+ 15
+
+Try It
+
+A distribution is given as X ~ U(0, 20). What is P(2 < x < 18)? Find the 90th percentile.
+P(2 < x < 18) = 0.8, 90th percentile = 18
+
+The amount of time, in minutes, that a person must wait for a bus is uniformly distributed between zero and 15 minutes, inclusive.
+
+a. What is the probability that a person waits fewer than 12.5 minutes?
+
+a. Let X = the number of minutes a person must wait for a bus. a = 0 and b = 15.
+X ~ U(0, 15). Write the probability density function. f (x) = 
+
+1
+
+15 − 0
+
+ = 
+
+1
+
+15
+
+for 0 ≤ x ≤ 15.
+
+Find P (x < 12.5). Draw a graph.
+
+The probability a person waits fewer than 12.5 minutes is 0.8333.
+
+b. On the average, how long must a person wait? Find the mean, μ, and the standard deviation, σ.
+
+b. μ = 
+
+a + b
+
+2
+
+= 
+
+15 + 0
+
+2
+
+= 7.5. On the average, a person must wait 7.5 minutes.
+
+σ = 
+(b-a)2
+12
+=
+
+(15-0)2
+12
+ = 4.3. The standard deviation is 4.3 minutes.
+
+c. Ninety percent of the time, the minutes a person must wait falls below what value?
+NoteThis question asks for the 90th percentile.
+
+c. Find the 90th percentile. Draw a graph. Let k = the 90th percentile.
+
+P(x<k)=(base)(height)=(k−0)(
+1
+
+15
+
+)
+
+0.90=(
+k
+)(
+
+1
+
+15
+
+)
+
+k=(0.90)(15)=13.5
+
+k is sometimes called a critical value.
+
+The 90th percentile is 13.5 minutes. Ninety percent of the time, a person must wait at most 13.5 minutes.
+
+Try It
+
+The total duration of baseball games in the major league in the 2011 season is uniformly distributed between 447 hours and 521 hours inclusive.
+
+Find a and b and describe what they represent.
+
+Write the distribution.
+
+Find the mean and the standard deviation.
+
+What is the probability that the duration of games for a team for the 2011 season is between 480 and 500 hours?
+
+What is the 65th percentile for the duration of games for a team for the 2011 season?
+a is 447, and b is 521. a is the minimum duration of games for a team for the 2011 season, and b is the maximum duration of games for a team for the 2011 season.
+X ~ U (447, 521).
+μ = 484, and σ = 21.36
+P(480 < x < 500) = 0.2703
+
+65th percentile is 495.1 hours.
+
+Suppose the time it takes a nine-year old to eat a donut is between 0.5 and 4 minutes, inclusive. Let X = the time, in minutes, it takes a nine-year-old child to eat a doughnut. Then X ~ U(0.5, 4).
+
+a. The probability that a randomly selected nine-year-old child eats a doughnut in at least two minutes is _______.
+
+a. 0.5714
+
+b. Find the probability that a different nine-year-old child eats a doughnut in more than two minutes given that the child has already been eating the doughnut for more than 1.5 minutes.
+
+The second question has a conditional probability. You are asked to find the probability that a nine-year-old child eats a doughnut in more than two minutes given that the child has already been eating the donut for more than 1.5 minutes. Solve the problem two different ways (see ). You must reduce the sample space. First way: Since you know the child has already been eating the doughnut for more than 1.5 minutes, you are no longer starting at a = 0.5 minutes. Your starting point is 1.5 minutes.
+Write a new f(x):
+
+Find P(x > 2|x > 1.5). Draw a graph.
+
+b. 45
+
+The probability that a nine-year-old child eats a donut in more than two minutes given that the child has already been eating the doughnut for more than 1.5 minutes is 45.
+Second way: Draw the original graph for X ~ U(0.5, 4). Use the conditional formula
+
+Try It
+
+Suppose the time it takes a student to finish a quiz is uniformly distributed between six and 15 minutes, inclusive. Let X = the time, in minutes, it takes a student to finish a quiz. Then X ~ U(6, 15).
+
+Find the probability that a randomly selected student needs at least eight minutes to complete the quiz. Then find the probability that a different student needs at least eight minutes to finish the quiz given that she has already taken more than seven minutes.
+P (x > 8) = 0.7778
+P (x > 8 | x > 7) = 0.875
+
+Ace Heating and Air Conditioning Service finds that the amount of time a repairman needs to fix a furnace is uniformly distributed between 1.5 and four hours. Let x = the time needed to fix a furnace. Then x ~ U(1.5, 4).
+
+Find the probability that a randomly selected furnace repair requires more than two hours.
+
+Find the probability that a randomly selected furnace repair requires less than three hours.
+
+Find the 30th percentile of furnace repair times.
+
+The longest 25 percent of furnace repair times take at least how long? (In other words: find the minimum time for the longest 25 percent of repair times.) What percentile does this represent?
+
+Find the mean and standard deviation
+
+a. To find f(x): f (x) = 
+
+1
+
+4 − 1.5
+
+ = 
+
+1
+
+2.5
+
+ so f(x) = 0.4
+P(x > 2) = (base)(height) = (4 – 2)(0.4) = 0.8
+
+b. P(x < 3) = (base)(height) = (3 – 1.5)(0.4) = 0.6
+
+The graph of the rectangle showing the entire distribution would remain the same. However the graph should be shaded between x = 1.5 and x = 3. Note that the shaded area starts at x = 1.5 rather than at x = 0. Because X ~ U(1.5, 4), x cannot be less than 1.5.
+
+c. 
+
+Uniform distribution between 1.5 and 4 with an area of 0.30 shaded to the left, representing the shortest 30 percent of repair times.
+P (x < k) = 0.30
+
+P(x < k) = (base)(height) = (k – 1.5)(0.4)
+0.3 = (k – 1.5) (0.4); Solve to find k:
+0.75 = k – 1.5, obtained by dividing both sides by 0.4
+k = 2.25 , obtained by adding 1.5 to both sides
+The 30th percentile of repair times is 2.25 hours. 30 percent of repair times are 2.5 hours or less.
+
+d. 
+
+Uniform distribution between 1.5 and 4 with an area of 0.25 shaded to the right representing the longest 25 percent of repair times.
+P(x > k) = 0.25
+
+P(x > k) = (base)(height) = (4 – k)(0.4)
+0.25 = (4 – k)(0.4); Solve for k:
+0.625 = 4 − k,
+obtained by dividing both sides by 0.4
+−3.375 = −k,
+obtained by subtracting four from both sides: k = 3.375
+The longest 25 percent of furnace repairs take at least 3.375 hours (3.375 hours or longer).
+Note: Since 25 percent of repair times are 3.375 hours or longer, that means that 75 percent of repair times are 3.375 hours or less. 3.375 hours is the 75th percentile of furnace repair times.
+
+e. 
+
+μ=
+
+a+b
+
+2
+
+ and 
+
+σ=
+
+(b−a)
+
+2
+
+12
+
+μ
+1.5+4
+2
+2.75
+
+hours and 
+ 
+ σ=
+
+ (4–1.5)
+ 
+ 2
+
+ 12
+
+ =0.7217
+ 
+ hours
+
+Try It
+
+The amount of time a service technician needs to change the oil in a car is uniformly distributed between 11 and 21 minutes. Let X = the time needed to change the oil on a car.
+
+Write the random variable X in words. X = __________________.
+
+Write the distribution.
+
+Graph the distribution.
+
+Find P (x > 19).
+
+Find the 50th percentile.
+
+Let X = the time needed to change the oil in a car.
+X ~ U (11, 21).
+
+P (x > 19) = 0.2
+
+the 50th percentile is 16 minutes.
+
+Chapter Review
+
+If X has a uniform distribution where a < x < b or a ≤ x ≤ b, then X takes on values between a and b (may include a and b). All values x are equally likely. We write X ∼ U(a, b). The mean of X is 
+
+μ=
+
+a+b
+
+2
+
+. The standard deviation of X is 
+
+σ=
+
+(b−a)
+
+2
+
+12
+
+. The probability density function of X is 
+
+f(x)=
+1
+
+b−a
+
+ for a ≤ x ≤ b. The cumulative distribution function of X is P(X ≤ x) = 
+
+x−a
+
+b−a
+
+. X is continuous.
+
+The probability P(c < X < d) may be found by computing the area under f(x), between c and d. Since the corresponding area is a rectangle, the area may be found simply by multiplying the width and the height.
+
+Formula Review
+X = a real number between a and b (in some instances, X can take on the values a and b). a = smallest X, b = largest X
+X ~ U(a, b)
+
+The mean is 
+
+μ=
+
+a+b
+
+2
+
+.
+
+The standard deviation is 
+ 
+ σ=
+
+ (b – a)
+ 
+ 2
+
+ 12
+
+.
+Probability density function:
+
+f(x)=
+1
+
+b−a
+
+ for 
+
+a≤X≤b
+Area to the left of x: P(X < x) = (x – a)
+ 
+ (
+
+ 1
+ 
+ b−a
+
+ )
+Area to the right of x: P(X > x) = (b – x)
+ 
+ (
+
+ 1
+ 
+ b−a
+
+ )
+Area between c and d: P(c < x < d) = (base)(height) = (d – c)
+ 
+ (
+
+ 1
+ 
+ b−a
+
+ )
+
+Uniform: X ~ U(a, b) where a < x < b
+
+pdf: 
+
+f(
+x
+)=
+1
+
+b−a
+
+for a ≤ x ≤ b
+
+cdf: P(X ≤ x) = 
+
+x−a
+
+b−a
+
+mean µ = 
+
+a+b
+
+2
+
+standard deviation σ 
+
+=
+
+(b−a)
+
+2
+
+12
+P(c < X < d) = (d – c)
+
+(
+1
+
+b–a
+
+)
+
+References
+
+McDougall, J. A. (1995). The McDougall program for maximum weight loss. New York: Plume
+Use the following information to answer the next 10 questions. The data that follow are the square footage (in 1,000 feet squared) of 28 homes:
+
+1.5
+2.4
+3.6
+2.6
+1.6
+2.4
+2.0
+3.5
+2.5
+1.8
+2.4
+2.5
+3.5
+4.0
+2.6
+1.6
+2.2
+1.8
+3.8
+2.5
+1.5
+2.8
+1.8
+4.5
+1.9
+1.9
+3.1
+1.6
+The sample mean = 2.50 and the sample standard deviation = 0.8302.
+
+The distribution can be written as X ~ U(1.5, 4.5).
+
+What type of distribution is this?
+
+In this distribution, outcomes are equally likely. What does this mean?
+
+It means that the value of x is just as likely to be any number between 1.5 and 4.5.
+
+What is the height of f(x) for the continuous probability distribution?
+
+What are the constraints for the values of x?
+
+1.5 ≤ x ≤ 4.5
+
+Graph P(2 < x < 3).
+
+What is P(2 < x < 3)?
+
+0.3333
+
+What is P(x < 3.5| x < 4)?
+
+What is P(x = 1.5)?
+
+zero
+
+What is the 90th percentile of square footage for homes?
+
+Find the probability that a randomly selected home has more than 3,000 square feet given that you already know the house has more than 2,000 square feet.
+
+0.6
+Use the following information to answer the next eight exercises. A distribution is given as X ~ U(0, 12).
+
+What is a? What does it represent?
+
+What is b? What does it represent?
+b is 12, and it represents the highest value of x.
+
+What is the probability density function?
+
+What is the theoretical mean?
+
+six
+
+What is the theoretical standard deviation?
+
+Draw the graph of the distribution for P(x > 9).
+
+Find P(x > 9).
+
+Find the 40th percentile.
+
+4.8
+Use the following information to answer the next 12 exercises. The age of cars in the staff parking lot of a suburban college is uniformly distributed from six months (0.5 years) to 9.5 years.
+
+What is being measured here?
+
+In words, define the random variable X.
+X = The age (in years) of cars in the staff parking lot
+
+Are the data discrete or continuous?
+
+The interval of values for x is ______.
+
+0.5 to 9.5
+
+The distribution for X is ______.
+
+Write the probability density function.
+f(x) = 
+
+1
+9
+
+ where x is between 0.5 and 9.5, inclusive.
+
+Graph the probability distribution.
+
+Sketch the graph of the probability distribution.
+
+Identify the following values:
+Lowest value for 
+
+x
+¯
+
+: _______
+Highest value for 
+
+x
+¯
+
+: _______
+Height of the rectangle: _______
+Label for x-axis (words): _______
+Label for y-axis (words): _______
+
+Lowest value for 
+
+x
+¯
+
+: _______
+
+Highest value for 
+
+x
+¯
+
+: _______
+
+Height of the rectangle: _______
+
+Label for x-axis (words): _______
+
+Label for y-axis (words): _______
+
+Find the average age of the cars in the lot.
+μ = 5
+
+Find the probability that a randomly chosen car in the lot was less than four years old.
+
+Sketch the graph, and shade the area of interest.
+
+Find the probability. P(x < 4) = _______
+
+Considering only the cars less than 7.5 years old, find the probability that a randomly chosen car in the lot was less than four years old.
+
+Sketch the graph, shade the area of interest.
+
+Find the probability. P(x < 4|x < 7.5) = _______
+
+Check student’s solution.
+3.5
+
+7
+
+What has changed in the previous two problems that made the solutions different?
+
+Find the third quartile of ages of cars in the lot. This means you will have to find the value such that 
+
+3
+4
+
+, or 75 percent, of the cars are at most (less than or equal to) that age.
+
+Sketch the graph, and shade the area of interest.
+
+Find the value k such that P(x < k) = 0.75.
+
+The third quartile is _______
+
+Check student's solution
+k = 7.25
+
+7.25
+
+Homework
+For each probability and percentile problem, draw the picture.
+
+Births are approximately uniformly distributed between the 52 weeks of the year. They can be said to follow a uniform distribution from one to 53 (spread of 52 weeks).
+X ~ _________
+
+Graph the probability distribution.
+f(x) = _________
+μ = _________
+
+σ = _________
+
+Find the probability that a person is born at the exact moment week 19 starts. That is, find P(x = 19) = _________
+P(2 < x < 31) = _________
+
+Find the probability that a person is born after week 40.
+P(12 < x|x < 28) = _________
+
+Find the 70th percentile.
+
+Find the minimum for the upper quarter.
+
+A random number generator picks a number from one to nine in a uniform manner.
+X ~ _________
+
+Graph the probability distribution.
+f(x) = _________
+μ = _________
+σ = _________
+P(3.5 < x < 7.25) = _________
+P(x > 5.67)
+P(x > 5|x > 3) = _________
+
+Find the 90th percentile.
+X ~ U(1, 9)
+
+Check student’s solution
+f(x)=
+ 1
+ 8
+
+ where 
+ 
+ 1≤x≤9
+
+five
+
+2.3
+15
+
+ 32
+333
+
+ 800
+2
+ 3
+
+8.2
+
+According to a study by Dr. John McDougall of his live-in weight loss program, the people who follow his program lose between six and 15 pounds a month until they approach trim body weight. Let’s suppose that the weight loss is uniformly distributed. We are interested in the weight loss of a randomly selected individual following the program for one month.
+
+Define the random variable. X = _________
+X ~ _________
+
+Graph the probability distribution.
+f(x) = _________
+μ = _________
+σ = _________
+
+Find the probability that the individual lost more than 10 pounds in a month.
+
+Suppose it is known that the individual lost more than 10 pounds in a month. Find the probability that he lost less than 12 pounds in the month.
+P(7 < x < 13|x > 9) = __________. State this result in a probability question, similarly to Parts g and h, draw the picture, and find the probability.
+
+A subway train arrives every eight minutes during rush hour. We are interested in the length of time a commuter must wait for a train to arrive. The time follows a uniform distribution.
+
+Define the random variable. X = _______
+X ~ _______
+
+Graph the probability distribution.
+f(x) = _______
+μ = _______
+σ = _______
+
+Find the probability that the commuter waits less than one minute.
+
+Find the probability that the commuter waits between three and four minutes.
+
+Sixty percent of commuters wait more than how long for the train? State this result in a probability question, similarly to Parts g and h, draw the picture, and find the probability.
+X represents the length of time a commuter must wait for a train to arrive on the Red Line.
+X ~ U(0, 8)
+f(x)=
+ 1
+ 8
+
+ where ≤ x ≤ 8
+
+four
+
+2.31
+1
+8
+1
+8
+
+3.2
+
+The age of a first grader on September 1 at Garden Elementary School is uniformly distributed from 5.8 to 6.8 years. We randomly select one first grader from the class.
+
+Define the random variable. X = _________
+X ~ _________
+
+Graph the probability distribution.
+f(x) = _________
+μ = _________
+σ = _________
+
+Find the probability that she is over 6.5 years old.
+
+Find the probability that she is between four and six years old.
+
+Find the 70th percentile for the age of first graders on September 1 at Garden Elementary School.
+Use the following information to answer the next three exercises. The Sky Train from the terminal to the rental–car and long–term parking center is supposed to arrive every eight minutes. The waiting times for the train are known to follow a uniform distribution.
+
+What is the average waiting time (in minutes)?
+
+zero
+
+two
+
+three
+
+four
+
+d
+
+Find the 30th percentile for the waiting times (in minutes).
+
+two
+
+2.4
+
+2.75
+
+three
+
+The probability of waiting more than seven minutes given a person has waited more than four minutes is?
+
+0.125
+
+0.25
+
+0.5
+
+0.75
+
+b
+
+The time (in minutes) until the next bus departs a major bus depot follows a distribution with f(x) = 
+
+ 1
+ 
+ 20
+
+ where x goes from 25 to 45 minutes.
+
+Define the random variable. X = ________
+X ~ ________
+
+Graph the probability distribution.
+
+The distribution is ______________ (name of distribution). It is _____________ (discrete or continuous).
+μ = ________
+σ = ________
+
+Find the probability that the time is at most 30 minutes. Sketch and label a graph of the distribution. Shade the area of interest. Write the answer in a probability statement.
+
+Find the probability that the time is between 30 and 40 minutes. Sketch and label a graph of the distribution. Shade the area of interest. Write the answer in a probability statement.
+P(25 < x < 55) = _________. State this result in a probability statement, similarly to Parts g and h, draw the picture, and find the probability.
+
+Find the 90th percentile. This means that 90 percent of the time, the time is less than _____ minutes.
+
+Find the 75th percentile. In a complete sentence, state what this means. (See Part j.)
+
+Find the probability that the time is more than 40 minutes given (or knowing that) it is at least 30 minutes.
+
+Suppose that the value of a stock varies each day from $16 to $25 with a uniform distribution.
+
+Find the probability that the value of the stock is more than $19.
+
+Find the probability that the value of the stock between $19 and $22.
+
+Find the upper quartile — 25 percent of all days the stock is above what value? Draw the graph.
+
+Given that the stock is greater than $18, find the probability that the stock is more than $21.
+
+The probability density function of X is 
+
+ 1
+ 
+ 25−16
+
+ =
+ 1
+ 9
+
+.
+P(X > 19) = (25 – 19) 
+ 
+ (
+
+ 1
+ 9
+
+ )
+
+ = 
+
+ 6
+ 9
+
+ = 
+
+ 2
+ 3
+
+.
+P(19 < X < 22) = (22 – 19) 
+ 
+ (
+
+ 1
+ 9
+
+ )
+ 
+ = 
+
+ 3
+ 9
+
+ = 
+
+ 1
+ 3
+
+.
+
+The area must be 0.25, and 0.25 = (width)
+ 
+ (
+
+ 1
+ 9
+
+ )
+ 
+, so width = (0.25)(9) = 2.25. Thus, the value is 25 – 2.25 = 22.75.
+
+This is a conditional probability question. P(x > 21| x > 18). You can do this two ways:
+ 
+Draw the graph where a is now 18 and b is still 25. The height is 
+
+ 1
+ 
+ (25−18)
+
+ = 
+
+ 1
+ 7
+
+So, P(x > 21|x > 18) = (25 – 21)
+ 
+ (
+
+ 1
+ 7
+
+ )
+ 
+ = 4/7.
+Use the formula: P(x > 21|x > 18) = 
+
+ P(x>21 AND x>18)
+
+ P(x>18)
+
+= 
+
+ P(x>21)
+
+ P(x>18)
+
+ = 
+
+ (25−21)
+
+ (25−18)
+
+ = 
+
+ 4
+ 7
+
+.
+
+Draw the graph where a is now 18 and b is still 25. The height is 
+
+ 1
+ 
+ (25−18)
+
+ = 
+
+ 1
+ 7
+
+So, P(x > 21|x > 18) = (25 – 21)
+ 
+ (
+
+ 1
+ 7
+
+ )
+ 
+ = 4/7.
+
+Use the formula: P(x > 21|x > 18) = 
+
+ P(x>21 AND x>18)
+
+ P(x>18)
+
+= 
+
+ P(x>21)
+
+ P(x>18)
+
+ = 
+
+ (25−21)
+
+ (25−18)
+
+ = 
+
+ 4
+ 7
+
+.
+
+A fireworks show is designed so that the time between fireworks is between one and five seconds, and follows a uniform distribution.
+
+Find the average time between fireworks.
+
+Find the probability that the time between fireworks is greater than four seconds.
+
+The number of miles driven by a truck driver falls between 300 and 700, and follows a uniform distribution.
+
+Find the probability that the truck driver goes more than 650 miles in a day.
+
+Find the probability that the truck driver goes between 400 and 650 miles in a day.
+
+At least how many miles does the truck driver travel on the 10 percent of days with the highest mileage?
+P(X > 650) = 
+
+ 700−650
+
+ 700−300
+
+ =
+ 
+ 50
+
+ 400
+
+ =
+ 1
+ 8
+
+ = 0.125.
+P(400 < X < 650) = 
+
+ 650−400
+
+ 700−300
+
+ =
+ 
+ 250
+
+ 400
+
+ = 0.625
+
+0.10 = 
+
+ width
+
+ 700−300
+
+, so width = 400(0.10) = 40. Since 700 – 40 = 660, the drivers travel at least 660 miles on the farthest 10 percent of days.
+
+the likelihood that an event will occur given that another event has already occurred

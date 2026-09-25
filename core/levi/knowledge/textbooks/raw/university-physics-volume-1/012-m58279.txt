@@ -1,0 +1,235 @@
+# m58279
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Algebra of Vectors
+
+Algebra of Vectors
+
+By the end of this section, you will be able to:
+
+Apply analytical methods of vector algebra to find resultant vectors and to solve vector equations for unknown vectors.
+
+Interpret physical situations in terms of vector expressions.
+
+Vectors can be added together and multiplied by scalars. Vector addition is associative () and commutative (), and vector multiplication by a sum of scalars is distributive (). Also, scalar multiplication by a sum of vectors is distributive:
+
+In this equation, α is any number (a scalar). For example, a vector antiparallel to vector A→=Axi^+Ayj^+Azk^ can be expressed simply by multiplying A→ by the scalar α=−1:
+Direction of Motion
+In a Cartesian coordinate system where i^ denotes geographic east, j^ denotes geographic north, and k^ denotes altitude above sea level, a military convoy advances its position through unknown territory with velocity v→=(4.0i^+3.0j^+0.1k^)km/h. If the convoy had to retreat, in what geographic direction would it be moving?
+
+Direction of Motion
+Solution
+The velocity vector has the third component v→z=(+0.1km/h)k^, which says the convoy is climbing at a rate of 100 m/h through mountainous terrain. At the same time, its velocity is 4.0 km/h to the east and 3.0 km/h to the north, so it moves on the ground in direction tan−1(3/4)≈37° north of east. If the convoy had to retreat, its new velocity vector u→ would have to be antiparallel to v→ and be in the form u→=−αv→, where α is a positive number. Thus, the velocity of the retreat would be u→=α(−4.0i^−3.0j^−0.1k^)km/h. The negative sign of the third component indicates the convoy would be descending. The direction angle of the retreat velocity is tan−1(−3α/−4α)≈37° south of west. Therefore, the convoy would be moving on the ground in direction 37° south of west while descending on its way back.
+
+Solution
+
+The generalization of the number zero to vector algebra is called the null vector, denoted by 0→. All components of the null vector are zero, 0→=0i^+0j^+0k^, so the null vector has no length and no direction.
+
+Two vectors A→ and B→ are equal vectors if and only if their difference is the null vector:
+
+This vector equation means we must have simultaneously Ax−Bx=0, Ay−By=0, and Az−Bz=0. Hence, we can write A→=B→ if and only if the corresponding components of vectors A→ and B→ are equal:
+
+Two vectors are equal when their corresponding scalar components are equal.
+
+Resolving vectors into their scalar components (i.e., finding their scalar components) and expressing them analytically in vector component form (given by ) allows us to use vector algebra to find sums or differences of many vectors analytically (i.e., without using graphical methods). For example, to find the resultant of two vectors A→ and B→, we simply add them component by component, as follows:
+
+In this way, using , scalar components of the resultant vector R→=Rxi^+Ryj^+Rzk^ are the sums of corresponding scalar components of vectors A→ and B→:
+
+Analytical methods can be used to find components of a resultant of many vectors. For example, if we are to sum up N vectors F→1,F→2,F→3,…,F→N, where each vector is F→k=Fkxi^+Fkyj^+Fkzk^, the resultant vector F→R is
+
+Therefore, scalar components of the resultant vector are
+
+Having found the scalar components, we can write the resultant in vector component form:
+
+Analytical methods for finding the resultant and, in general, for solving vector equations are very important in physics because many physical quantities are vectors. For example, we use this method in kinematics to find resultant displacement vectors and resultant velocity vectors, in mechanics to find resultant force vectors and the resultants of many derived vector quantities, and in electricity and magnetism to find resultant electric or magnetic vector fields.
+Analytical Computation of a Resultant
+Three displacement vectors A→, B→, and C→ in a plane () are specified by their magnitudes A = 10.0, B = 7.0, and C = 8.0, respectively, and by their respective direction angles with the horizontal direction α=35°, β=−110°, and γ=30°. The physical units of the magnitudes are centimeters. Resolve the vectors to their scalar components and find the following vector sums: (a) R→=A→+B→+C→, (b) D→=A→−B→, and (c) S→=A→−3B→+C→.
+
+Analytical Computation of a Resultant
+Strategy
+First, we use to find the scalar components of each vector and then we express each vector in its vector component form given by . Then, we use analytical methods of vector algebra to find the resultants.
+
+Strategy
+Solution
+We resolve the given vectors to their scalar components:
+
+Solution
+
+For (a) we may substitute directly into to find the scalar components of the resultant:
+
+Therefore, the resultant vector is R→=Rxi^+Ryj^=(12.7i^+3.1j^)cm.
+
+For (b), we may want to write the vector difference as
+
+Then, the scalar components of the vector difference are
+
+Hence, the difference vector is D→=Dxi^+Dyj^=(10.6i^+12.3j^)cm.
+
+For (c), we can write vector S→ in the following explicit form:
+
+Then, the scalar components of S→ are
+
+The vector is S→=Sxi^+Syj^=(22.3i^+29.5j^)cm.
+Significance
+Having found the vector components, we can illustrate the vectors by graphing or we can compute magnitudes and direction angles, as shown in . Results for the magnitudes in (b) and (c) can be compared with results for the same problems obtained with the graphical method, shown in and . Notice that the analytical method produces exact results and its accuracy is not limited by the resolution of a ruler or a protractor, as it was with the graphical method used in for finding this same resultant.
+
+Significance
+
+Three displacement vectors A→, B→, and F→ () are specified by their magnitudes A = 10.00, B = 7.00, and F = 20.00, respectively, and by their respective direction angles with the horizontal direction α=35°, β=−110°, and φ=110°. The physical units of the magnitudes are centimeters. Use the analytical method to find vector G→=A→+2B→−F→. Verify thatG = 28.15 cm and that θG=−68.65°.
+G→=(10.25i^−26.22j^)cm
+The Tug-of-War GameFour dogs named Astro, Balto, Clifford, and Dug play a tug-of-war game with a toy (). Astro pulls on the toy in direction α=55° south of east, Balto pulls in direction β=60° east of north, and Clifford pulls in direction γ=55° west of north. Astro pulls strongly with 160.0 units of force (N), which we abbreviate as A = 160.0 N. Balto pulls even stronger than Astro with a force of magnitude B = 200.0 N, and Clifford pulls with a force of magnitude C = 140.0 N. When Dug pulls on the toy in such a way that his force balances out the resultant of the other three forces, the toy does not move in any direction. With how big a force and in what direction must Dug pull on the toy for this to happen?
+
+The Tug-of-War Game
+StrategyWe assume that east is the direction of the positive x-axis and north is the direction of the positive y-axis. As in , we have to resolve the three given forces— A→ (the pull from Astro), B→ (the pull from Balto), and C→ (the pull from Clifford)—into their scalar components and then find the scalar components of the resultant vector R→=A→+B→+C→. When the pulling force D→ from Dug balances out this resultant, the sum of D→ and R→ must give the null vector D→+R→=0→. This means that D→=−R→, so the pull from Dug must be antiparallel to R→.
+
+Strategy
+Solution
+The direction angles are θA=−α=−55°, θB=90°−β=30°, and θC=90°+γ=145°, and substituting them into gives the scalar components of the three given forces:
+
+Solution
+
+Now we compute scalar components of the resultant vector R→=A→+B→+C→:
+
+The antiparallel vector to the resultant R→ is
+
+The magnitude of Dug’s pulling force is
+
+The direction of Dug’s pulling force is
+
+Dug pulls in the direction 18.1° south of west because both components are negative, which means the pull vector lies in the third quadrant ().
+
+Suppose that Balto in leaves the game to attend to more important matters, but Astro, Clifford, and Dug continue playing. Astro and Clifford's pull on the toy does not change, but Dug runs around and bites on the toy in a different place. With how big a force and in what direction must Dug pull on the toy now to balance out the combined pulls from Clifford and Astro? Illustrate this situation by drawing a vector diagram indicating all forces involved.
+D = 55.7 N; direction 65.7° north of east
+Vector Algebra
+Find the magnitude of the vector C→ that satisfies the equation 2A→−6B→+3C→=2j^, where A→=i^−2k^ and B→=−j^+k^/2.
+
+Vector Algebra
+Strategy
+We first solve the given equation for the unknown vector C→. Then we substitute A→ and B→; group the terms along each of the three directions i^, j^, and k^; and identify the scalar components Cx, Cy, and Cz. Finally, we substitute into to find magnitude C.
+
+Strategy
+Solution
+
+Solution
+
+The components are Cx=−2/3, Cy=−4/3, and Cz=7/3, and substituting into gives
+Displacement of a Skier
+Starting at a ski lodge, a cross-country skier goes 5.0 km north, then 3.0 km west, and finally 4.0 km southwest before taking a rest. Find their total displacement vector relative to the lodge when they are at the rest point. How far and in what direction must they ski from the rest point to return directly to the lodge?
+
+Displacement of a Skier
+StrategyWe assume a rectangular coordinate system with the origin at the ski lodge and with the unit vector i^ pointing east and the unit vector j^ pointing north. There are three displacements: D→1, D→2, and D→3. We identify their magnitudes as D1=5.0km, D2=3.0km, and D3=4.0km. We identify their directions are the angles θ1=90°, θ2=180°, and θ3=180°+45°=225°. We resolve each displacement vector to its scalar components and substitute the components into to obtain the scalar components of the resultant displacement D→ from the lodge to the rest point. On the way back from the rest point to the lodge, the displacement is B→=−D→. Finally, we find the magnitude and direction of B→.
+
+Strategy
+Solution
+Scalar components of the displacement vectors are
+
+Solution
+
+Scalar components of the net displacement vector are
+
+Hence, the skier’s net displacement vector is D→=Dxi^+Dyj^=(−5.8i^+2.2j^)km. On the way back to the lodge, their displacement is B→=−D→=−(−5.8i^+2.2j^)km=(5.8i^−2.2j^)km. Its magnitude is B=Bx2+By2=(5.8)2+(−2.2)2km=6.2km and its direction angle is θ=tan−1(−2.2/5.8)=−20.8°. Therefore, to return to the lodge, they must go 6.2 km in a direction about 21° south of east.
+Significance
+Notice that no figure is needed to solve this problem by the analytical method. Figures are required when using a graphical method; however, we can check if our solution makes sense by sketching it, which is a useful final step in solving any vector problem.
+
+Significance
+Displacement of a Jogger
+A jogger runs up a flight of 200 identical steps to the top of a hill and then runs along the top of the hill 50.0 m before he stops at a drinking fountain (). His displacement vector from point A at the bottom of the steps to point B at the fountain is D→AB=(−90.0i^+30.0j^)m. What is the height and width of each step in the flight? What is the actual distance the jogger covers? If he makes a loop and returns to point A, what is his net displacement vector?
+
+Displacement of a Jogger
+StrategyThe displacement vector D→AB is the vector sum of the jogger’s displacement vector D→AT along the stairs (from point A at the bottom of the stairs to point T at the top of the stairs) and his displacement vector D→TB on the top of the hill (from point T at the top of the stairs to the fountain at point B). We must find the horizontal and the vertical components of D→AT. If each step has width w and height h, the horizontal component of D→AT must have a length of 200w and the vertical component must have a length of 200h. The actual distance the jogger covers is the sum of the distance he runs up the stairs and the distance of 50.0 m that he runs along the top of the hill.
+
+Strategy
+Solution
+In the coordinate system indicated in , the jogger’s displacement vector on the top of the hill is D→TB=(−50.0m)i^. His net displacement vector is
+
+Solution
+
+Therefore, his displacement vector D→AT along the stairs is
+
+Its scalar components are DATx=−40.0m and DATy=30.0m. Therefore, we must have
+
+Hence, the step width is w = 40.0 m/200 = 0.2 m = 20 cm, and the step height is h = 30.0 m/200 = 0.15 m = 15 cm. The distance that the jogger covers along the stairs is
+
+Thus, the actual distance he runs is DAT+DTB=50.0m+50.0m=100.0m. When he makes a loop and comes back from the fountain to his initial position at point A, the total distance he covers is twice this distance, or 200.0 m. However, his net displacement vector is zero, because when his final position is the same as his initial position, the scalar components of his net displacement vector are zero ().
+
+In many physical situations, we often need to know the direction of a vector. For example, we may want to know the direction of a magnetic field vector at some point or the direction of motion of an object. We have already said direction is given by a unit vector, which is a dimensionless entity—that is, it has no physical units associated with it. When the vector in question lies along one of the axes in a Cartesian system of coordinates, the answer is simple, because then its unit vector of direction is either parallel or antiparallel to the direction of the unit vector of an axis. For example, the direction of vector d→=−5mi^ is unit vector d^=−i^. The general rule of finding the unit vector V^ of direction for any vector V→ is to divide it by its magnitude V:
+
+We see from this expression that the unit vector of direction is indeed dimensionless because the numerator and the denominator in have the same physical unit. In this way, allows us to express the unit vector of direction in terms of unit vectors of the axes. The following example illustrates this principle.
+The Unit Vector of Direction
+If the velocity vector of the military convoy in is v→=(4.000i^+3.000j^+0.100k^)km/h, what is the unit vector of its direction of motion?
+
+The Unit Vector of Direction
+Strategy
+The unit vector of the convoy’s direction of motion is the unit vector v^ that is parallel to the velocity vector. The unit vector is obtained by dividing a vector by its magnitude, in accordance with .
+
+Strategy
+Solution
+The magnitude of the vector v→ is
+
+Solution
+
+To obtain the unit vector v^, divide v→ by its magnitude:
+Significance
+Note that when using the analytical method with a calculator, it is advisable to carry out your calculations to at least three decimal places and then round off the final answer to the required number of significant figures, which is the way we performed calculations in this example. If you round off your partial answer too early, you risk your final answer having a huge numerical error, and it may be far off from the exact answer or from a value measured in an experiment.
+
+Significance
+
+Verify that vector v^ obtained in is indeed a unit vector by computing its magnitude. If the convoy in was moving across a desert flatland—that is, if the third component of its velocity was zero—what is the unit vector of its direction of motion? Which geographic direction does it represent?
+v^=0.8i^+0.6j^, 36.87° north of east
+
+Summary
+
+Analytical methods of vector algebra allow us to find resultants of sums or differences of vectors without having to draw them. Analytical methods of vector addition are exact, contrary to graphical methods, which are approximate.
+
+Analytical methods of vector algebra are used routinely in mechanics, electricity, and magnetism. They are important mathematical tools of physics.
+
+Problems
+
+For vectors B→=−i^−4j^ and A→=−3i^−2j^, calculate (a) A→+B→ and its magnitude and direction angle, and (b) A→−B→ and its magnitude and direction angle.
+
+a. A→+B→=−4i^−6j^, |A→+B→|=7.211,θ=236°; b. A→−B→=–2i^+2j^, |A→−B→|=22,θ=135°
+
+A particle undergoes three consecutive displacements given by vectors D→1=(3.0i^−4.0j^−2.0k^)mm, D→2=(1.0i^−7.0j^+4.0k^)mm, and D→3=(−7.0i^+4.0j^+1.0k^)mm. (a) Find the resultant displacement vector of the particle. (b) What is the magnitude of the resultant displacement? (c) If all displacements were along one line, how far would the particle travel?
+
+Given two displacement vectors A→=(3.00i^−4.00j^+4.00k^)m and B→=(2.00i^+3.00j^−7.00k^)m, find the displacements and their magnitudes for (a) C→=A→+B→ and (b) D→=2A→−B→.
+
+a. C→=(5.0i^−1.0j^−3.0k^)m,C=5.92m;
+b. D→=(4.0i^−11.0j^+15.0k^)m,D=19.03m
+
+A small plane flies 40.0km in a direction 60° north of east and then flies 30.0km in a direction 15° north of east. Use the analytical method to find the total distance the plane covers from the starting point, and the geographic direction of its displacement vector. What is its displacement vector?
+
+In an attempt to escape a desert island, a castaway builds a raft and sets out to sea. The wind shifts a great deal during the day, and she is blown along the following straight lines: 2.50 km and 45.0° north of west, then 4.70 km and 60.0° south of east, then 1.30 km and 25.0° south of west, then 5.10 km due east, then 1.70 km and 5.00° east of north, then 7.20 km and 55.0° south of west, and finally 2.80 km and 10.0° north of east. Use the analytical method to find the resultant vector of all her displacement vectors. What is its magnitude and direction?
+D→=(3.3i^−6.6j^)km, i^ is to the east, 7.34 km, −63.5°
+
+Assuming the +x-axis is horizontal to the right for the vectors given in the following figure, use the analytical method to find the following resultants: (a) 11.67i^+8.99j^, (b) 9.01i^–6.40j^, (c) D→+F→, (d) 5.65i^+1.01j^, (e) D→−F→, (f) A→+2F→, (g) C→−2D→+3F→, and (h) A→−4D→+2F→.
+
+Given the vectors in the preceding figure, find vector R→ that solves equations (a) D→+R→=F→ and (b) C→−2D→+5R→=3F→. Assume the +x-axis is horizontal to the right.
+
+a. R→=−1.35i^−22.04j^, b. R→=−17.98i^+0.89j^
+
+A delivery driver starts at the post office, drives 40 km north, then 20 km west, then 60 km northeast, and finally 50 km north to stop for lunch. Use the analytical method to determine the following: (a) Find his net displacement vector. (b) How far is the restaurant from the post office? (c) If he returns directly from the restaurant to the post office, what is his displacement vector on the return trip? (d) What is his compass heading on the return trip? Assume the +x-axis is to the east.
+
+An adventurous dog strays from home, runs three blocks east, two blocks north, and one block east, one block north, and two blocks west. Assuming that each block is about a 100 yd, use the analytical method to find the dog’s net displacement vector, its magnitude, and its direction. Assume the +x-axis is to the east. How would your answer be affected if each block was about 100 m?
+D→=(200i^+300j^)yd, D = 360.5 yd, 56.3° north of east; The numerical answers would stay the same but the physical unit would be meters. The physical meaning and distances would be about the same because 1 yd is comparable with 1 m.
+
+If D→=(6.00i^−8.00j^)m, B→=(−8.00i^+3.00j^)m, and A→=(26.0i^+19.0j^)m, find the unknown constants a and b such that aD→+bB→+A→=0→.
+
+Given the displacement vector D→=(3i^−4j^)m, find the displacement vector R→ so that D→+R→=−4Dj^.
+R→=(−3i^−16j^)m
+
+Find the unit vector of direction for the following vector quantities: (a) Force F→=(3.0i^−2.0j^)N, (b) displacement D→=(−3.0i^−4.0j^)m, and (c) velocity v→=(−5.00i^+4.00j^)m/s.
+
+At one point in space, the direction of the electric field vector is given in the Cartesian system by the unit vector E^=1/5i^−2/5j^. If the magnitude of the electric field vector is E = 400.0 V/m, what are the scalar components Ex, Ey, and Ez of the electric field vector E→ at this point? What is the direction angle θE of the electric field vector at this point?
+E→=EE^, Ex=+178.9V/m, Ey=−357.8V/m, Ez=0.0V/m, θE=−tan−1(2)
+
+A barge is pulled by the two tugboats shown in the following figure. One tugboat pulls on the barge with a force of magnitude 4000 units of force at 15° above the line AB (see the figure) and the other tugboat pulls on the barge with a force of magnitude 5000 units of force at 12° below the line AB. Resolve the pulling forces to their scalar components and find the components of the resultant force pulling on the barge. What is the magnitude of the resultant pull? What is its direction relative to the line AB?
+
+In the control tower at a regional airport, an air traffic controller monitors two aircraft that travel in straight paths directly away from the control tower. One plane is a cargo carrier Boeing 747 climbing at 10° above the horizontal, and moving 30° north of west. At some moment in time, the controller notes that the Boeing is at an altitude of 2500 m and the DC-3 is at an altitude of 3000 m. The other plane is a Douglas DC-3 climbing at 5° above the horizontal, and cruising directly west. (a) Find the position vectors of the planes relative to the control tower at this time. (b) What is the distance between the planes at this time?
+
+a. –34.290 R→B=(–12.278i^+7.089j^+2.500k^)km, R→D=(−34.290i^+3.000k^)km; b. |R→B−R→D|=23.131km
+
+two vectors are equal if and only if all their corresponding components are equal; alternately, two parallel vectors of equal magnitudes
+a vector with all its components equal to zero

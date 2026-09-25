@@ -1,0 +1,621 @@
+# m79669
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Two Population Means with Known Standard Deviations
+
+Two Population Means with Known Standard Deviations
+
+Even though this situation is not likely (knowing the population standard deviations), the following example illustrates hypothesis testing for independent means, known population standard deviations. The sampling distribution for the difference between the means is normal, and both populations must be normal. The random variable is
+
+ X
+ ¯
+
+ 1
+ 
+ –
+
+ X
+ ¯
+
+ 2
+
+. The normal distribution has the following format:
+Normal distribution is
+
+ X
+ ¯
+
+ 1
+ 
+ –
+ 
+ X
+ ¯
+
+ 2
+ 
+ ~N[ 
+ 
+ μ
+ 1
+ 
+ –
+ μ
+ 2
+ 
+ ,
+
+ (
+ σ
+ 1
+ 
+ )
+ 
+ 2
+
+ n
+ 1
+
+ +
+
+ (
+ σ
+ 2
+ 
+ )
+ 
+ 2
+
+ n
+ 2
+
+ ].
+
+The standard deviation is
+
+The test statistic (z-score) is
+Independent groups, population standard deviations known: The
+ mean lasting time of two competing floor waxes is to be compared. Twenty floors are randomly assigned to test each wax. Both populations have a normal distribution. The data are recorded in .
+
+Wax
+Sample Mean Number of Months Floor Wax Lasts
+Population Standard Deviation
+
+1
+3
+0.33
+
+2
+2.9
+0.36
+
+Wax
+Sample Mean Number of Months Floor Wax Lasts
+Population Standard Deviation
+1
+3
+0.33
+2
+2.9
+0.36
+Does the data indicate that Wax 1 is more effective than Wax 2? Test at a 5 percent level of
+significance.
+
+This is a test of two independent groups, two population means, population standard deviations known.
+Random Variable: 
+
+ X
+ ¯
+
+ 1
+ 
+ – 
+ 
+ X
+ ¯
+
+ 2
+
+ = difference in the mean number of months the competing floor waxes last.
+H0: μ1 ≤ μ2
+Ha: μ1 > μ2
+
+The words is more effective says that Wax 1 lasts longer than Wax 2, on average. Longer is a > symbol and goes into Ha. Therefore, this is a right-tailed test.
+Distribution for the test: The population standard deviations are known, so the distribution is normal. Using the formula, the distribution is
+X
+ ¯
+ 
+ 1
+ 
+ –
+
+ X
+ ¯
+ 
+ 2
+ 
+ ~N(
+ 
+ 0,
+
+ 0.33
+ 
+ 2
+
+ 20
+
+ +
+
+ 0.36
+ 
+ 2
+
+ 20
+
+ ).
+
+Since μ1 ≤ μ2, then μ1 – μ2 ≤ 0 and the mean for the normal distribution is zero.
+Calculate the p value using the normal distribution: p value = 0.1799
+Graph:
+X
+ ¯
+
+ 1
+
+ – 
+
+ X
+ ¯
+
+ 2
+
+ = 3 – 2.9 = 0.1
+Compare α and the p value: α = 0.05 and p value = 0.1799. Therefore, α < p value.
+Make a decision: Since α < p value, do not reject H0.
+Conclusion: At the 5 percent level of significance, from the sample data, there is not sufficient evidence to conclude that the mean time Wax 1 lasts is longer (Wax 1 is more effective) than the mean time Wax 2 lasts.
+
+Press STAT. Arrow over to TESTS and press 3:2-SampZTest. Arrow over to Stats and press ENTER. Arrow down and enter .33 for sigma1, .36 for sigma2, 3 for the first sample mean, 20 for n1, 2.9 for the second sample mean, and 20 for n2. Arrow down to μ1: and arrow to > μ2. Press ENTER. Arrow down to Calculate and press ENTER. The p value is p = 0.1799, and the test statistic is 0.9157. Do the procedure again, but instead of Calculate do Draw.
+
+Try It
+
+The means of the number of revolutions per minute of two competing engines are to be compared. Thirty engines are randomly assigned to be tested. Both populations have normal distributions. shows the result. Do the data indicate that Engine 2 has higher RPM than Engine 1? Test at a 5 percent level of significance.
+
+Engine
+Sample Mean Number of RPM
+Population Standard Deviation
+1
+1,500
+50
+2
+1,600
+60
+The p value is almost zero, so we reject the null hypothesis. There is sufficient evidence to conclude that Engine 2 runs at a higher RPM than Engine 1.
+
+An interested citizen wanted to know if Democratic U.S. senators are older than Republican U.S. senators, on average. On May 26, 2013, the mean age of 30 randomly selected Republican senators was 61 years 247 days (61.675 years) with a standard deviation of 10.17 years. The mean age of 30 randomly selected Democratic senators was 61 years 257 days (61.704 years) with a standard deviation of 9.55 years.
+
+Do the data indicate that Democratic senators are older than Republican senators, on average? Test at a 5 percent level of significance.
+
+This is a test of two independent groups, two population means. The population standard deviations are unknown, but the sum of the sample sizes is 30 + 30 = 60, which is greater than 30, so we can use the normal approximation to the Student’s-t distribution. Subscripts: 1: Democratic senators; 2: Republican senators
+Random variable: 
+
+ X
+ ¯
+
+ 1
+ 
+  – 
+ 
+ X
+ ¯
+
+ 2
+
+ = difference in the mean age of Democratic and Republican U.S. senators.
+H0: µ1 ≤ µ2 H0: µ1 – µ2 ≤ 0
+Ha: µ1 > µ2 Ha: µ1 – µ2 > 0
+
+The words older than translates as a > symbol and goes into Ha. Therefore, this is a right-tailed test.
+Distribution for the test: The distribution is the normal approximation to the Student’s t for means, independent groups. Using the formula, the distribution is
+
+ X
+ ¯
+
+ 1
+ 
+ –
+ 
+ X
+ ¯
+
+ 2
+ 
+ ∼N[0,
+
+ (9.55)
+ 
+ 2
+
+ 30
+
+ +
+
+ (10.17)
+ 
+ 2
+
+ 30
+
+ ]
+
+Since µ1 ≤ µ2, µ1 – µ2 ≤ 0 and the mean for the normal distribution is zero.
+
+Calculating the p value using the normal distribution gives p value = 0.4040.
+Graph:
+Compare α and the p value: α = 0.05 and p value = 0.4040. Therefore, α < p value.
+Make a decision: Since α < p value, do not reject H0.
+Conclusion: At the 5 percent level of significance, from the sample data, there is not sufficient evidence to conclude that the mean age of Democratic senators is greater than the mean age of the Republican senators.
+
+References
+
+Centers for Disease Control and Prevention. (2008, July 18). State-specific prevalence of obesity among adultsUnited States, 2007. MMWR, 57(28), 765768. Retrieved from http://www.cdc.gov/mmwr/preview/mmwrhtml/mm5728a1.htm
+
+Federal Bureau of Investigation. (n.d.). Texas Crime Rates 19601012. Available at http://www.disastercenter.com/crime/txcrime.htm
+
+Hinduja, S. (2013). Sexting Research and Gender Differences. Cyberbulling Research Center. Retrieved from http://cyberbullying.us/blog/sexting-research-and-gender-differences/
+
+Humes, K. R., Jones, N. A., & Ramirez, R. R. (2011 March). Overview of race and Hispanic origin: 2010 (2010 Census Briefs). Washington, DC: U.S. Census Bureau. Available online at http://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf
+
+Smith, A. (2011, July 11). 35% of American adults own a smartphone. Pew Internet. Available online at http://www.pewinternet.org/~/media/Files/Reports/2011/PIP_Smartphones.pdf
+
+Visually. (2013). Smart phone users, by the numbers. Retrieved from http://visual.ly/smart-phone-users-numbers
+
+Chapter Review
+
+A hypothesis test of two population means from independent samples where the population standard deviations are known (typically approximated with the sample standard deviations) will have these characteristics:
+Random variable: 
+
+ X
+ ¯
+
+ 1
+ 
+ −
+ 
+ X
+ ¯
+
+ 2
+
+ = the difference of the means
+Distribution: normal distribution
+
+Random variable: 
+
+ X
+ ¯
+
+ 1
+ 
+ −
+ 
+ X
+ ¯
+
+ 2
+
+ = the difference of the means
+
+Distribution: normal distribution
+
+Formula Review
+
+Normal distribution:
+
+ X
+ ¯
+
+ 1
+ 
+ −
+ 
+ X
+ ¯
+
+ 2
+ 
+ ∼N[ 
+ 
+ μ
+ 1
+ 
+ −
+ μ
+ 2
+ 
+ ,
+
+ (
+ σ
+ 1
+ 
+ )
+ 
+ 2
+
+ n
+ 1
+
+ +
+
+ (
+ σ
+ 2
+ 
+ )
+ 
+ 2
+
+ n
+ 2
+
+ ]
+ 
+.
+Generally, µ1 – µ2 = 0.
+
+Test statistic (z-score):
+
+ z=
+ 
+ (
+ 
+ x
+ ¯
+
+ 1
+ 
+ −
+ 
+ x
+ ¯
+
+ 2
+ 
+ )−(
+ μ
+ 1
+ 
+ −
+ μ
+ 2
+ 
+ )
+
+ (
+ σ
+ 1
+ 
+ )
+ 
+ 2
+
+ n
+ 1
+
+ +
+
+ (
+ σ
+ 2
+ 
+ )
+ 
+ 2
+
+ n
+ 2
+
+Generally, µ1 - µ2 = 0.
+
+where
+
+σ1 and σ2 are the known population standard deviations, n1 and n2 are the sample sizes, 
+
+ x
+ ¯
+
+ 1
+
+ and 
+
+ x
+ ¯
+
+ 2
+
+ are the sample means, and μ1 and μ2 are the population means.
+Use the following information to answer the next five exercises. The mean speeds of fastball pitches from two different baseball pitchers are to be compared. A sample of 14 fastball pitches is measured from each pitcher. The populations have normal distributions. shows the result. Scouters believe that Rodriguez pitches a speedier fastball.
+
+Pitcher
+Sample Mean Speed of Pitches (mph)
+Wesley
+86
+Rodriguez
+91
+7
+What is the random variable?
+
+the difference in mean speeds of the fastball pitches of the two pitchers
+
+State the null and alternative hypotheses.
+
+What is the test statistic?
+
+–2.46
+
+What is the p value?
+
+At the 1 percent significance level, what is your conclusion?
+
+At the 1 percent significance level, we can reject the null hypothesis. There is sufficient data to conclude that the mean speed of Rodriguez’s fastball is faster than Wesley’s.
+Use the following information to answer the next five exercises. A researcher is testing the effects of plant food on plant growth. Nine plants have been given the plant food. Another nine plants have not been given the plant food. The heights of the plants are recorded after eight weeks. The populations have normal distributions. The following table is the result. The researcher thinks the food makes the plants grow taller.
+
+Plant Group
+Sample Mean Height of Plants (inches)
+Food
+16
+No food
+14
+1.5
+Is the population standard deviation known or unknown?
+
+State the null and alternative hypotheses.
+
+Subscripts: 1 = Food, 2 = No Food
+H0: μ1 ≤ μ2
+Ha: μ1 > μ2
+
+What is the p value?
+
+Draw the graph of the p value.
+
+At the 1 percent significance level, what is your conclusion?
+Use the following information to answer the next five exercises. Two metal alloys are being considered as material for ball bearings. The mean melting point of the two alloys is to be compared. Fifteen pieces of each metal are being tested. Both populations have normal distributions. The following table is the result. It is believed that Alloy Zeta has a different melting point.
+
+Sample Mean Melting Temperatures (°F)
+Alloy Gamma
+800
+Alloy Zeta
+900
+105
+State the null and alternative hypotheses.
+
+Subscripts: 1 = Gamma, 2 = Zeta
+H0: μ1 = μ2
+Ha: μ1 ≠ μ2
+
+Is this a right-, left-, or two-tailed test?
+
+What is the p value?
+
+0.0062
+
+Draw the graph of the p value.
+
+At the 1 percent significance level, what is your conclusion?
+
+There is sufficient evidence to reject the null hypothesis. The data support that the melting point for Alloy Zeta is different from the melting point of Alloy Gamma.
+
+Homework
+DIRECTIONS: For each of the word problems, use a solution sheet to do the hypothesis test. The solution sheet is found in Appendix E. Please feel free to make copies of the solution sheets. For the online version of the book, it is suggested that you copy the .doc or the .pdf files.
+
+Note
+
+If you are using a Student’s t-distribution for one of the following homework problems, including for paired data, you may assume that the underlying population is normally distributed. (When using these tests in a real situation, you must first prove that assumption.)
+
+A study is done to determine if students in the California state university system take longer to graduate, on average, than students enrolled in private universities. One hundred students from both the California state university system and private universities are surveyed. Suppose that from years of research, it is known that the population standard deviations are 1.5811 years and 1 year, respectively. The following data are collected. The California state university system students took on average 4.5 years with a standard deviation of 0.8. The private university students took on average 4.1 years with a standard deviation of 0.3.
+
+Parents of teenage boys often complain that auto insurance costs more, on average, for teenage boys than for teenage girls. A group of concerned parents examines a random sample of insurance bills. The mean annual cost for 36 teenage boys was $679. For 23 teenage girls, it was $559. From past years, it is known that the population standard deviation for each group is $180. Determine whether you believe that the mean cost for auto insurance for teenage boys is greater than that for teenage girls.
+
+Subscripts: 1 = boys, 2 = girls
+H0: µ1 ≤ µ2
+Ha: µ1 > µ2
+
+The random variable is the difference in the mean auto insurance costs for boys and girls.
+
+normal
+
+test statistic: z = 2.50
+p value: 0.0062
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Reject the null hypothesis.
+ Reason for Decision: p value < alpha
+ Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that the mean cost of auto insurance for teenage boys is greater than that for girls.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for Decision: p value < alpha
+
+Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that the mean cost of auto insurance for teenage boys is greater than that for girls.
+
+A group of transfer-bound students wondered if they will spend the same mean amount on texts and supplies each year at their four-year university as they have at their community college. They conducted a random survey of 54 students at their community college and 66 students at their local four-year university. The sample means were $947 and $1,011, respectively. The population standard deviations are known to be $254 and $87, respectively. Conduct a hypothesis test to determine if the means are statistically the same.
+
+Some manufacturers claim that nonhybrid sedan cars have a lower mean miles per gallon (mpg) than hybrid ones. Suppose that consumers test 21 hybrid sedans and get a mean of 31 mpg with a standard deviation of 7 mpg. Thirty-one nonhybrid sedans get a mean of 22 mpg with a standard deviation of 4 mpg. Suppose that the population standard deviations are known to be 6 and 3, respectively. Conduct a hypothesis test to evaluate the manufacturers’ claim.
+
+Subscripts: 1 = non-hybrid sedans, 2 = hybrid sedans
+H0: µ1 ≥ µ2
+Ha: µ1 < µ2
+
+The random variable is the difference in the mean miles per gallon of nonhybrid sedans and hybrid sedans.
+
+normal
+
+test statistic: 6.36
+p-value: 0
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Reject the null hypothesis.
+ Reason for decision: p value < alpha
+ Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that the mean miles per gallon of non-hybrid sedans is less than that of hybrid sedans.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for decision: p value < alpha
+
+Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that the mean miles per gallon of non-hybrid sedans is less than that of hybrid sedans.
+
+A baseball fan wanted to know if there is a difference between the number of games played in a World Series when the American League won the series versus when the National League won the series. From 1922 to 2012, the population standard deviation of games won by the American League was 1.14, and the population standard deviation of games won by the National League was 1.11. Of 19 randomly selected World Series games won by the American League, the mean number of games won was 5.76. The mean number of 17 randomly selected games won by the National League was 5.42. Conduct a hypothesis test.
+
+One of the questions in a study of marital satisfaction of dual-career couples was to rate the statement “I’m pleased with the way we divide the responsibilities for childcare.” The ratings went from 1 (strongly agree) to 5 (strongly disagree). contains 10 of the paired responses for husbands and wives. Conduct a hypothesis test to see if the mean difference in the husband’s versus the wife’s satisfaction level is negative (meaning that, within the partnership, the husband is happier than the wife).
+Wife’s Score
+2
+2
+3
+3
+4
+2
+1
+1
+2
+Husband’s Score
+2
+2
+1
+3
+2
+1
+1
+1
+2
+H0: µd = 0
+Ha: µd < 0
+
+The random variable Xd is the average difference between husband’s and wife’s satisfaction level.
+t9
+
+test statistic: t = –1.86
+p value: 0.0479
+
+Check student’s solution
+Alpha: 0.05
+Decision: Reject the null hypothesis, but run another test.
+Reason for Decision: p value < alpha
+Conclusion: This is a weak test because alpha and the p value are close. However, there is insufficient evidence to conclude that the mean difference is negative.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis, but run another test.
+
+Reason for Decision: p value < alpha
+
+Conclusion: This is a weak test because alpha and the p value are close. However, there is insufficient evidence to conclude that the mean difference is negative.

@@ -1,0 +1,62 @@
+# m00004
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Variables
+
+Variables
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Assign variables and print variables.
+
+Explain rules for naming variables.
+
+Assignment statement
+
+Variables allow programs to refer to values using names rather than memory locations. Ex: age refers to a person's age, and birth refers to a person's date of birth.
+
+A statement can set a variable to a value using the assignment operator (=). Note that this is different from the equal sign of mathematics. Ex: age = 6 or birth = "May 15". The left side of the assignment statement is a variable, and the right side is the value the variable is assigned.
+
+Assigning and using variables
+
+Assigning and using variables
+
+Variable naming rules
+
+A variable name can consist of letters, digits, and underscores and be of any length. The name cannot start with a digit. Ex: 101class is invalid. Also, letter case matters. Ex: Total is different from total. Python's style guide recommends writing variable names in snake case, which is all lowercase with underscores in between each word, such as first_name or total_price.
+
+A name should be short and descriptive, so words are preferred over single characters in programs for readability. Ex: A variable named count indicates the variable's purpose better than a variable named c.
+
+Python has reserved words, known as keywords, which have special functions and cannot be used as names for variables (or other objects).
+
+Keywords
+yield
+Valid variable names
+
+Final score
+
+Write a Python computer program that:
+
+Creates a variable, team1, assigned with the value "Liverpool".
+Creates a variable, team2, assigned with the value "Chelsea".
+Creates a variable score1, assigned with the value 4.
+Creates a variable, score2, assigned with the value 3.
+Prints team1, "versus", and team2 as a single line of output.
+Prints "Final score: ", score1, "to", score2 as a single line of output.
+
+Creates a variable, team1, assigned with the value "Liverpool".
+
+Creates a variable, team2, assigned with the value "Chelsea".
+
+Creates a variable score1, assigned with the value 4.
+
+Creates a variable, score2, assigned with the value 3.
+
+Prints team1, "versus", and team2 as a single line of output.
+
+Prints "Final score: ", score1, "to", score2 as a single line of output.

@@ -1,0 +1,228 @@
+# m00053
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Early Numeration Systems
+
+Early Numeration Systems
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Understand and convert Babylonian numerals to Hindu-Arabic numerals.
+
+Understand and convert Mayan numerals to Hindu-Arabic numerals.
+
+Understand and convert between Roman numerals and Hindu-Arabic numerals.
+
+Each culture throughout history had to develop its own method of counting and recording quantity. The system used in Australia would necessarily differ from the system developed in Babylon that would, in turn, differ from the system developed in sub-Saharan Africa. These differences arose due to cultural differences. In nearly all societies, knowing the difference between one and two would be useful. But it might not be useful to know the difference between 145 and 167, as those quantities never had a practical use. For example, a shepherd likely didn't manage more than 100 sheep, so quantities larger than 100 might never have been encountered. This can even be seen in our use of the term few, which is an inexact quantity that most would agree means more than two. However, as societies became more complex, as commerce arose, as military bodies developed, so did the need for a system to handle large numbers. No matter the system, the issues of representing multiple values and how many symbols to use had to be addressed. In this section, we explore how the Babylonians, Mayans, and Romans addressed these issues.
+
+Understand and Convert Babylonian Numerals to Hindu-Arabic Numerals
+
+The Babylonians used a mix of an additive system of numbers and a positional system of numbers. An additive system is a number system where the value of repeated instances of a symbol is added the number of times the symbol appears. A positional system is a system of numbers that multiplies a “digit” by a number raised to a power, based on the position of the “digit.”
+
+The Babylonian place values didn’t use powers of 10, but instead powers of 60. They didn’t use 60 different symbols though. For the value 1, they used the following symbol: For values up to 9, that symbol would be repeated, so three would be written as To represent the quantity 10, they used For 20, 30, 40, and 50, they repeated the symbol for 10 however many times it was needed, so 40 would be written When they reached 60, they moved to the next place value. The complete list of the Babylonian numerals up to 59 is in .
+
+You can see how Babylonians repeated the symbols to indicate multiples of a value. The number 6 is 6 of the symbol for 1 grouped together. The symbol for 30 is three of the symbols for 10 grouped together. However, their system doesn’t go past 59. To go past 59, they used place values. As opposed to the Hindu-Arabic system, which was based on powers of 10, the Babylonian positional system was based on powers of 60. You should also notice there is no symbol for 0, which has some impact on the number system. Since the Babylonian number system lacked a 0, they didn’t have a placeholder when a power of 60 was absent. Without a 0, 101, 110, and 11 all look the same. However, there is some evidence that the Babylonians left a small space between "digits" where we would use a 0, allowing them to represent the absence of that place value. To summarize, the Babylonian system of numbers used repeating a symbol to indicate more than one, used place values, and lacked a 0.
+
+Invention of 0
+
+The idea of 0 is not a natural one. Most cultures failed to recognize the need for a 0. If someone asked a farmer in 300 B.C.E. how many cows they had, but they had none, they would not answer "zero." They’d say “I don’t have any” and be done with it. It wasn’t until roughly 3 B.C.E. that 0 appeared in Mesopotamia. It was independently discovered (or invented!) in the Mayan culture around 4 C.E. it made its appearance in India in the 400s C.E., and began to spread at that point. It wasn’t developed earlier mostly because positional systems were not yet fully developed. Once positional systems arose, the need to represent a missing power had to be addressed.
+
+So how do we convert from Babylonian numbers to Hindu-Arabic numbers? To do so, we need to use the symbols from , and then place values based on powers of 60. If you have n digits in the Babylonian number, you multiply the first “digit” by 60 raised to one less than the number of “digits.” You then continue through the “digits,” multiplying each by 60 raised to a power that is one smaller. However, be careful of spaces, since they represent a zero in that place.
+
+Converting Two-Digit Babylonian Numbers to Hindu-Arabic Numbers
+
+Convert the Babylonian number into a Hindu-Arabic number.
+has two digits: and
+Step 1: So the first symbol, represents 4 in the Babylonian system. This is multiplied by 60 to the first power (just as would happen in a two digit number), which gives us 4×601.
+Step 2: The next symbol is which represents 27 in the Babylonian system. This is multiplied by 60 raised to 0, which gives 4×601+27×600.
+Step 3: Calculating that yields 4×601+27×600=240+27=267. So the Babylonian number equals 267 in the Hindu-Arabic number system.
+
+Converting Three-Digit Babylonian Numbers to Hindu-Arabic Numbers
+
+Convert the Babylonian number into a Hindu-Arabic number.
+has three digits: and and
+Step 1: So the first symbol, represents 13 in the Babylonian system. This is multiplied by 60 to the second power (since there are 3 digits), which gives us 13×602.
+Step 2: The next symbol is which represents 8 in the Babylonian system, is multiplied by 60 raised to the first power, which gives us 13×602+8×601.
+Step 3: The last digit is representing 54, which is multiplied by 60 raised to 0, which gives 13×602+8×601+54×600.
+Step 4: Calculating that yields 13×602+8×601+54×600=13×3,600+8×60+54×1=46,800+480+54=47,334.
+
+So, the Babylonian number equals 47,334 in the Hindu-Arabic number system.
+
+Converting Four-Digit Babylonian Numbers to Hindu-Arabic Numbers
+
+Convert the Babylonian number into a Hindu-Arabic number.
+
+It appears that has three digits, but there is a space in between and Remember, the Babylonian system has no 0, it instead employs a space where we expect a zero. This means this is a four digit number.
+Step 1: The first symbol, represents 12 in the Babylonian system. This is multiplied by 60 to the third power since there are four digits, which gives us 12×603.
+Step 2: The next symbol is a blank, which for us is a 0, representing 0×102, giving us 12×603+0×102.
+Step 3: The next symbol is which represents 42 in the Babylonian system, is multiplied by 60 raised to the first power, which gives us 12×603+0×102+42×601.
+Step 4: The last Babylonian digit, represents 39 in the Babylonian system. This is multiplied by 60 raised to 0, which gives 12×603+0×102+42×601+39×600.
+Step 5: Calculating that yields 12×603+0×102+42×601+39×600=12×216,000+0×102+42×60+39×1=2,592,000+0+2,520+39=2,594,559
+
+So the Babylonian number equals 2,594,559 in the Hindu-Arabic number system.
+
+The Legacy of Babylonian System
+
+The Babylonian system can still be seen today. An hour is 60 minutes, and a minute is 60 seconds. Additionally, when measuring angles in degrees, each degree can be split into 60 minutes (1/60th of a degree) and 60 seconds (1/60th of a minute).
+Converting Between Babylonian and Hindu-Arabic Numbers
+
+Understand and Convert Mayan Numerals to Hindu-Arabic Numerals
+
+The Mayans employed a positional system just as we do and the Babylonians did, but they based their position values on powers of 20 and they had a dedicated symbol for zero. Similar to the Babylonians, the Mayans would repeat symbols to indicate certain values. A single dot was a 1, two dots were a 2, up to four dots. Then a five was a horizontal bar. The horizontal bars could be used three times, since the fourth horizontal bar would make a 20, which was a new position in the number. The 0 was a special picture, which appears like a turtle lying on its back. The shell would then be "empty," so maybe that’s why the symbol was 0. The complete list is provided in . Another feature of Mayan numbers was that they were written vertically. The powers of 20 increased from bottom to top.
+
+To summarize, the Mayan system of numbers used repeating symbol to indicate more than one, used place values, and employed a 0. So how do we convert from Mayan numbers to Hindu-Arabic numbers? To do so, we need to use the symbols from and then place values based on powers of 20. If you have n digits in the Mayan number, you multiply the first “digit” by 20 raised to one less than the number of “digits.” You then continue through the “digits,” multiplying each by 20 raised to a power that is one smaller than the previous power. Fortunately, there is an explicit 0, so there is no ambiguity about numbers like 110, 101, and 11.
+
+Converting Two-Digit Mayan Numbers to Hindu-Arabic Numbers
+
+Convert the Mayan number into a Hindu-Arabic number.
+has two digits: and
+Step 1: So, the first symbol, represents 15 in the Mayan system. This is multiplied by 20 to the first power, which gives us 15×201.
+Step 2: The next symbol is which represents 9 in the Mayan system. This is multiplied by 20 raised to 0, which gives 15×201+9×200.
+Step 3: Calculating that yields 15×201+9×200=300+9=309. So equals 309 in the Hindu-Arabic number system.
+
+Converting Three-Digit Mayan Numbers to Hindu-Arabic Numbers
+
+Convert the Mayan number into a Hindu-Arabic number.
+has three digits: and and
+Step 1: So the first symbol, represents 6 in the Mayan system. This is multiplied by 20 to the second power (since there are 3 digits), which gives us 6×202.
+Step 2: The next symbol is which represents 8 in the Mayan system, is multiplied by 20 raised to the first power, which gives us 6×202+8×201.
+Step 3: The last digit is representing 4, which is multiplied by 20 raised to 0, which gives 6×202+8×201+4×200.
+Step 4: Calculating that yields 6×202+8×201+4×200=6×400+8×20+4×1=2,400+160+4=2,564. So the Mayan number equals 2,564 in the Hindu-Arabic number system.
+
+Converting Four-Digit Mayan Numbers to Hindu-Arabic Numbers
+
+Convert the Mayan number into a Hindu-Arabic number.
+has four digits, so the first power of 20 that is used is 3.
+Step 1: The first symbol, represents 8 in the Mayan system. This is multiplied by 20 to the third power (since there are four digits), which gives us 8×203.
+Step 2: The next symbol is which is a 0, representing 0×202, giving us 8×203+0×202.
+Step 3: The next symbol is which represents 16 in the Mayan system, is multiplied by 20 raised to the first power, which gives us 8×203+0×202+16×201.
+Step 4: The last Mayan digit, represents 5 in the Mayan system. This is multiplied by 20 raised to 0, which gives 8×203+0×202+16×201+5×200.
+Step 5: Calculating that yields 8×203+0×202+16×201+5×200=8×8000+0×400+16×20+5×1=64,000+0+320+5=64,325
+
+So the Mayan number equals 64,325 in the Hindu-Arabic number system.
+
+The Mayan Calendar
+
+The Mayans used this base 20 system for everyday situations. But their culturally important, and extremely accurate, calendar system used a slightly different system. For their calendars, they used a system where the place values were 1, 20, then 20*18, then 20*18*18. The reason for this is 20*18 is 360, which is closer to the number of days in a year. Had they used a purely base 20 system for their calendar, they’d be very far off with 400 days in a year.
+
+Three hundred sixty days still left the Mayans a bit short, as there are 365 days in a year (ignoring leap years). The Mayan calendar also included 5 days, called Wayeb days, which brings their calendar to 365 days. As it happens, Wayeb is the Mayan god of misfortune, so these 5 days were considered the bad luck days.
+Converting Mayan Numbers to Hindu-Arabic Numbers
+
+Understand and Convert Between Roman Numerals and Hindu-Arabic Numerals
+
+The Mayan and Babylonian systems shared two features, one of which we are familiar with (place value) and one that we don’t use (repeated symbols). The Roman system of numbers used repeated symbols, but does not employ a place value. It also lacks a 0. The Roman system is built on the following symbols in .
+
+Roman Numeral
+Hindu-Arabic Value
+I
+1
+V
+5
+X
+10
+L
+50
+C
+100
+D
+500
+M
+1,000
+As in the Mayan and Babylonian systems, a symbol may be repeated to indicate a larger value. However, at 4, they did not use IIII. They instead used IV. Since the I came before the V, the number stands for “one before five.” A similar process was used for 9, which was written IX, or “one before ten.” The value 40 was written XL, or “ten before fifty,” while 49 was written XLIX, or “forty plus nine.”
+
+The following are the rules for writing and reading Roman numerals.
+
+The representations for bigger values precede those for smaller values.
+
+Up to three symbols may be grouped together; for example, III for 3, or XXX for 30, or CC for 200.
+
+A larger value followed by a smaller value indicated addition; for example, VII for 7, XIII for 13, LV for 55, and MCC for 1200.
+
+I can be placed before V to indicate 4, or before X, to indicate 9. These are the only ways I is used as a subtraction.
+
+X can be placed before L to indicate 40, and before C to indicate 90. These are the only ways X is used as a subtraction.
+
+C can be placed before D to indicate 400, and before M to indicate 900. These are the only ways C is used as a subtraction.
+
+If multiple symbols are used, and a subtraction involving that symbol, the subtraction part comes after the multiple symbols. For example, XXIX for 29 and CCXC for 290.
+
+Legacy of Roman Numerals
+
+The Roman numbering system is still used today in some situations. Many cornerstones of buildings have the year written in Roman numerals. Movie titles often represent the year the movie was produced as Roman numerals. The most recognizable might be that the Super Bowl is numbered using Roman numerals.
+
+Converting Roman Numerals to Hindu-Arabic Numbers
+
+Convert the following Roman numerals into Hindu-Arabic numerals.
+
+XXVII
+
+XXXIV
+
+MMCMXLVIII
+
+The numeral XXVII begins with two X’s, which is then followed by a V. So, the two X’s combine to be 20. The V is followed by two I’s, so the V indicates the addition of 5. The two I’s that follow indicate addition of two. That ends the symbols, so the value is 20 plus 5 plus 2, or 27 in Hindu-Arabic numerals.
+
+The numeral XXXIV begins with three X’s, which is then followed by an I. So, the three X’s combine to be 30. The I is followed by a V, which indicates 4. That ends the symbols, so the value is 30 plus 4, or 34 in Hindu-Arabic numerals.
+
+The numeral MMCMXLVIII begins with two M’s, which is then followed by a C. So, the two M’s combine to make 2000. The C is followed by an M, which indicates 900. The CM is followed by XL, which indicates 40. The L is followed by V, which indicates 5. The V is followed by three I’s, indicating 3. Adding those values yields 2,948.
+
+Converting From Roman Numbers to Hindu-Arabic Numbers
+
+Of course, we can convert from Hindu-Arabic numerals, to Roman numerals, too.
+
+Converting Hindu-Arabic Numbers to Roman Numerals
+
+Convert the following Hindu-Arabic numerals into Roman numerals.
+
+38
+
+94
+
+846
+
+2,987
+
+Thirty is represented as three X’s, and the 8 is represented with VIII, so 38 in Roman numerals is XXXVIII.
+
+Ninety is represented by XC, and four is represented by IV, so 94 in Roman numerals is XCIV.
+
+The number is less than 900 and more than 500, so the first symbol to be used is D, which is 500. To get to 800, we need 300 more, which is represented with three C’s. Forty is represented with XL, and the six. The Roman numerals are DCCCXLVI.
+
+The two thousand is represented by two M’s. The 900 is represented by CM. The 80 is represented by LXXX (50 plus 30). Finally, the 7 is represented by VII. We have that 2,987 in Roman numerals is MMCMLXXXVII.
+
+Converting From Hindu-Arabic Numbers to Roman Numbers
+
+Check Your Understanding
+
+Key Terms
+
+additive system of numbers
+
+positional system of numbers
+
+Babylonian system of numbers
+
+Mayan system of numbers
+
+Roman system of numbers
+
+Key Concepts
+
+Historically, there have been many systems for numbering. One system is an additive system, in which symbols are repeated to express larger numbers. Another system is a positional system, in which the digits and their positions determine the quantity being represented.
+
+The Babylonian system was a combination of a positional and additive system. It used 60 as its base. Using that in the positional system makes it possible to convert between Babylonian and Hindu-Arabic numbers.
+
+The Mayan system was a combination of a positional and additive system. It used 20 as its base. Using that in the positional system makes it possible to convert between Mayan and Hindu-Arabic numbers.
+
+The Roman system was an additive system. Knowing what each symbol represents makes it possible to convert between Roman and Hindu-Arabic numbers.
+
+Videos
+Converting Between Babylonian and Hindu-Arabic numbers
+Converting Mayan Numbers to Hindu-Arabic Numbers
+Converting From Roman Numbers to Hindu-Arabic Numbers
+Converting From Hindu-Arabic Numbers to Roman Numbers

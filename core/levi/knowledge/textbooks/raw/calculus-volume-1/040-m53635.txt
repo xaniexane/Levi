@@ -1,0 +1,377 @@
+# m53635
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Integrals Involving Exponential and Logarithmic Functions
+
+Integrals Involving Exponential and Logarithmic Functions
+
+Integrate functions involving exponential functions.
+
+Integrate functions involving logarithmic functions.
+
+Exponential and logarithmic functions are used to model population growth, cell growth, and financial growth, as well as depreciation, radioactive decay, and resource consumption, to name only a few applications. In this section, we explore integration involving exponential and logarithmic functions.
+
+Integrals of Exponential Functions
+
+The exponential function is perhaps the most efficient function in terms of the operations of calculus. The exponential function, y=ex, is its own derivative and its own integral.
+
+Rule: Integrals of Exponential Functions
+
+Exponential functions can be integrated using the following formulas.
+
+Finding an Antiderivative of an Exponential Function
+
+Find the antiderivative of the exponential function e−x.
+
+Use substitution, setting u=−x, and then du=−1dx. Multiply the du equation by −1, so you now have −du=dx. Then,
+
+Find the antiderivative of the function using substitution: x2e−2x3.
+∫x2e−2x3dx=−16e−2x3+C
+
+Hint
+
+Let u equal the exponent on e.
+
+A common mistake when dealing with exponential expressions is treating the exponent on e the same way we treat exponents in polynomial expressions. We cannot use the power rule for the exponent on e. This can be especially confusing when we have both exponentials and polynomials in the same expression, as in the previous checkpoint. In these cases, we should always double-check to make sure we’re using the right rules for the functions we’re integrating.
+
+Square Root of an Exponential Function
+
+Find the antiderivative of the exponential function ex1+ex.
+
+First rewrite the problem using a rational exponent:
+
+Using substitution, choose u=1+ex. Then, du=exdx. We have ()
+
+Then
+
+Find the antiderivative of ex(3ex−2)2.
+∫ex(3ex−2)2dx=19(3ex−2)3
+
+Hint
+
+Let u=3ex−2u=3ex−2.
+
+Using Substitution with an Exponential Function
+
+Use substitution to evaluate the indefinite integral ∫3x2e2x3dx.
+
+Here we choose to let u equal the expression in the exponent on e. Let u=2x3 and du=6x2dx.. Again, du is off by a constant multiplier; the original function contains a factor of 3x2, not 6x2. Multiply both sides of the equation by 12 so that the integrand in u equals the integrand in x. Thus,
+
+Integrate the expression in u and then substitute the original expression in x back into the u integral:
+
+Evaluate the indefinite integral ∫2x3ex4dx.
+∫2x3ex4dx=12ex4
+
+Hint
+
+Let u=x4.
+
+As mentioned at the beginning of this section, exponential functions are used in many real-life applications. The number e is often associated with compounded or accelerating growth, as we have seen in earlier sections about the derivative. Although the derivative represents a rate of change or a growth rate, the integral represents the total change or the total growth. Let’s look at an example in which integration of an exponential function solves a common business application.
+
+A price–demand function tells us the relationship between the quantity of a product demanded and the price of the product. In general, price decreases as quantity demanded increases. The marginal price–demand function is the derivative of the price–demand function and it tells us how fast the price changes at a given level of production. These functions are used in business to determine the price–elasticity of demand, and to help companies determine whether changing production levels would be profitable.
+
+Finding a Price–Demand Equation
+
+Find the price–demand equation for a particular brand of toothpaste at a supermarket chain when the demand is 50 tubes per week at $2.35 per tube, given that the marginal price—demand function, p′(x), for x number of tubes per week, is given as
+
+If the supermarket chain sells 100 tubes per week, what price should it set?
+
+To find the price–demand equation, integrate the marginal price–demand function. First find the antiderivative, then look at the particulars. Thus,
+
+Using substitution, let u=−0.01x and du=−0.01dx. Then, divide both sides of the du equation by −0.01. This gives
+
+The next step is to solve for C. We know that when the price is $2.35 per tube, the demand is 50 tubes per week. This means
+
+Now, just solve for C:
+
+Thus,
+
+If the supermarket sells 100 tubes of toothpaste per week, the price would be
+
+The supermarket should charge $1.99 per tube if it is selling 100 tubes per week.
+
+Evaluating a Definite Integral Involving an Exponential Function
+
+Evaluate the definite integral ∫12e1−xdx.
+
+Again, substitution is the method to use. Let u=1−x, so du=−1dx or −du=dx. Then ∫e1−xdx=−∫eudu. Next, change the limits of integration. Using the equation u=1−x, we have
+
+The integral then becomes
+
+See .
+
+Evaluate ∫02e2xdx.
+12∫04eudu=12(e4−1)
+
+Hint
+
+Let u=2x.
+
+Growth of Bacteria in a Culture
+
+Suppose the rate of growth of bacteria in a Petri dish is given by q(t)=3t, where t is given in hours and q(t) is given in thousands of bacteria per hour. If a culture starts with 10,000 bacteria, find a function Q(t) that gives the number of bacteria in the Petri dish at any time t. How many bacteria are in the dish after 2 hours?
+
+We have
+
+Then, at t=0 we have Q(0)=10=1ln3+C, so C≈9.090 and we get
+
+At time t=2, we have
+
+After 2 hours, there are 17,282 bacteria in the dish.
+
+From , suppose the bacteria grow at a rate of q(t)=2t. Assume the culture still starts with 10,000 bacteria. Find Q(t). How many bacteria are in the dish after 3 hours?
+Q(t)=2tln2+8.557. There are 20,099 bacteria in the dish after 3 hours.
+
+Hint
+
+Use the procedure from to solve the problem.
+
+Fruit Fly Population Growth
+
+Suppose a population of fruit flies increases at a rate of g(t)=2e0.02t, in flies per day. If the initial population of fruit flies is 100 flies, how many flies are in the population after 10 days?
+
+Let G(t) represent the number of flies in the population at time t. Applying the net change theorem, we have
+
+There are 122 flies in the population after 10 days.
+
+Suppose the rate of growth of the fly population is given by g(t)=e0.01t, and the initial fly population is 100 flies. How many flies are in the population after 15 days?
+
+There are 116 flies.
+
+Hint
+
+Use the process from to solve the problem.
+
+Evaluating a Definite Integral Using Substitution
+
+Evaluate the definite integral using substitution: ∫12e1/xx2dx.
+
+This problem requires some rewriting to simplify applying the properties. First, rewrite the exponent on e as a power of x, then bring the x2 in the denominator up to the numerator using a negative exponent. We have
+
+Let u=x−1, the exponent on e. Then
+
+Bringing the negative sign outside the integral sign, the problem now reads
+
+Next, change the limits of integration:
+
+Notice that now the limits begin with the larger number, meaning we must multiply by −1 and interchange the limits. Thus,
+
+Evaluate the definite integral using substitution: ∫121x3e4x−2dx.
+∫121x3e4x−2dx=18[e4−e]
+
+Hint
+
+Let u=4x−2.
+
+Integrals Involving Logarithmic Functions
+
+Integrating functions of the form f(x)=x−1 result in the absolute value of the natural log function, as shown in the following rule. Integral formulas for other logarithmic functions, such as f(x)=lnx and f(x)=logax, are also included in the rule.
+
+Rule: Integration Formulas Involving Logarithmic Functions
+
+The following formulas can be used to evaluate integrals involving logarithmic functions.
+
+Finding an Antiderivative Involving lnx
+
+Find the antiderivative of the function 3x−10.
+
+First factor the 3 outside the integral symbol. Then use the u−1 rule. Thus,
+
+See .
+
+Find the antiderivative of 1x+2.
+ln|x+2|+C
+
+Hint
+
+Follow the pattern from to solve the problem.
+
+Finding an Antiderivative of a Rational Function
+
+Find the antiderivative of 2x3+3xx4+3x2.
+
+This can be rewritten as ∫(2x3+3x)(x4+3x2)−1dx. Use substitution. Let u=x4+3x2, then du=4x3+6x. Alter du by factoring out the 2. Thus,
+
+Rewrite the integrand in u:
+
+Then we have
+
+Finding an Antiderivative of a Logarithmic Function
+
+Find the antiderivative of the log function log2x.
+
+Follow the format in the formula listed in the rule on integration formulas involving logarithmic functions. Based on this format, we have
+
+Find the antiderivative of log3x.
+xln3(lnx−1)+C
+
+Hint
+
+Follow and refer to the rule on integration formulas involving logarithmic functions.
+is a definite integral of a trigonometric function. With trigonometric functions, we often have to apply a trigonometric property or an identity before we can move forward. Finding the right form of the integrand is usually the key to a smooth integration.
+
+Evaluating a Definite Integral
+
+Find the definite integral of ∫0π/2sinx1+cosxdx.
+
+We need substitution to evaluate this problem. Let u=1+cosx,, so du=−sinxdx. Rewrite the integral in terms of u, changing the limits of integration as well. Thus,
+
+Then
+
+Key Concepts
+
+Exponential and logarithmic functions arise in many real-world applications, especially those involving growth and decay.
+
+Substitution is often used to evaluate integrals involving exponential functions or logarithms.
+
+Key Equations
+∫x−1dx=ln|x|+C
+ ∫lnxdx=xlnx−x+C=x(lnx−1)+C
+ ∫logaxdx=xlna(lnx−1)+C
+In the following exercises, compute each indefinite integral.
+∫e2xdx
+∫e−3xdx
+−13e−3x+C
+∫2xdx
+∫3−xdx
+−3−xln3+C
+∫12xdx
+∫2xdx
+2lnx+Corlnx2+C
+∫1x2dx
+∫1xdx
+2x+C
+
+In the following exercises, find each indefinite integral by using appropriate substitutions.
+∫lnxxdx
+∫dxx(lnx)2
+−1lnx+C
+∫dxxlnx(x>1)
+∫dxxlnxln(lnx)
+ln(ln(lnx))+C
+∫tanθdθ
+∫cosx−xsinxxcosxdx
+ln(xcosx)+C
+∫ln(sinx)tanxdx
+∫ln(cosx)tanxdx
+−12(ln(cos(x)))2+C
+∫xe−x2dx
+∫x2e−x3dx
+−e−x33+C
+∫esinxcosxdx
+∫etanxsec2xdx
+etanx+C
+∫elnxdxx
+∫eln(1−t)1−tdt
+t+C
+
+In the following exercises, verify by differentiation that ∫lnxdx=x(lnx−1)+C, then use appropriate changes of variables to compute the integral.
+∫x lnxdx (Hint:∫x lnxdx=12∫x ln(x2)dx)
+∫x2ln(x2)dx
+29x3(ln(x3)−1)+C
+∫lnxx2dx (Hint:Setu=1x.)
+∫lnxxdx (Hint:Setu=x.)
+2x(lnx−2)+C
+
+Write an integral to express the area under the graph of y=1t from t=1 to ex and evaluate the integral.
+
+Write an integral to express the area under the graph of y=et between t=0 and t=lnx, and evaluate the integral.
+∫0lnxetdt=et|0lnx=elnx−e0=x−1
+
+In the following exercises, use appropriate substitutions to express the trigonometric integrals in terms of compositions with logarithms.
+∫tan(2x)dx
+∫sin(3x)−cos(3x)sin(3x)+cos(3x)dx
+-13lnsin(3x)+cos(3x)+C
+∫xsin(x2)cos(x2)dx
+∫xcsc(x2)dx
+−12ln|csc(x2)+cot(x2)|+C
+∫ln(cosx)tanxdx
+∫ln(cscx)cotxdx
+−12(ln(cscx))2+C
+∫ex−e−xex+e−xdx
+
+In the following exercises, evaluate the definite integral.
+∫121+2x+x23x+3x2+x3dx
+13ln(267)
+∫0π/4tanxdx
+∫0π/3sinx−cosxsinx+cosxdx
+ln(3−1)
+∫π/6π/2cscxdx
+∫π/4π/3cotxdx
+12ln32
+
+In the following exercises, integrate using the indicated substitution.
+∫xx−100dx;u=x−100
+∫y−1y+1dy;u=y+1
+y−2ln|y+1|+C
+∫1−x23x−x3dx;u=3x−x3
+∫sinx+cosxsinx−cosxdx;u=sinx−cosx
+ln|sinx−cosx|+C
+∫e2x1−e2xdx;u=e2x
+∫ln(x)1−(lnx)2xdx;u=lnx
+−13(1−(lnx)2)3/2+C
+
+In the following exercises, does the right-endpoint approximation overestimate or underestimate the exact area? Calculate the right endpoint estimate R50 and solve for the exact area.
+[T] y=ex over [0,1]
+[T] y=e−x over [0,1]
+
+Exact solution: e−1e,R50=0.6258. Since f is decreasing, the right endpoint estimate underestimates the area.
+[T] y=ln(x) over [1,2]
+[T] y=x+1x2+2x+6 over [0,1]
+
+Exact solution: 2ln(3)−ln(6)2,R50=0.2033. Since f is increasing, the right endpoint estimate overestimates the area.
+[T] y=2x over [−1,0]
+[T] y=−2−x over [0,1]
+
+Exact solution: −1ln(4),R50=−0.7164. Since f is increasing, the right endpoint estimate overestimates the area (the actual area is a larger negative number).
+
+In the following exercises, f(x)≥0 for a≤x≤b. Find the area under the graph of f(x) between the given values a and b by integrating.
+f(x)=log10(x)x;a=10,b=100
+f(x)=log2(x)x;a=32,b=64
+112ln2
+f(x)=2−x;a=1,b=2
+f(x)=2−x;a=3,b=4
+1ln(65,536)
+
+Find the area under the graph of the function f(x)=xe−x2 between x=0 and x=5.
+
+Compute the integral of f(x)=xe−x2 and find the smallest value of N such that the area under the graph f(x)=xe−x2 between x=N and x=N+1 is, at most, 0.01.
+∫NN+1xe−x2dx=12(e−N2−e−(N+1)2). The quantity is less than 0.01 when N=2.
+
+Find the limit, as N tends to infinity, of the area under the graph of f(x)=xe−x2 between x=0 and x=N.
+
+Show that ∫abdtt=∫1/b1/adtt when 0<a≤b.
+∫abdxx=ln(b)−ln(a)=ln(1a)−ln(1b)=∫1/b1/adxx
+
+Suppose that f(x)>0 for all x and that f and g are differentiable. Use the identity fg=eglnf and the chain rule to find the derivative of fg.
+
+Use the previous exercise to find the antiderivative of h(x)=xx(1+lnx) and evaluate ∫23xx(1+lnx)dx.
+
+23
+
+Show that if c>0, then the integral of 1/x from ac to bc (0<a<b) is the same as the integral of 1/x from a to b.
+
+The following exercises are intended to derive the fundamental properties of the natural log starting from the definition ln(x)=∫1xdtt, using properties of the definite integral and making no further assumptions.
+
+Use the identity ln(x)=∫1xdtt to derive the identity ln(1x)=−lnx.
+
+We may assume that x>1,so1x<1. Then, ∫11/xdtt. Now make the substitution u=1t, so du=−dtt2 and duu=−dtt, and change endpoints: ∫11/xdtt=−∫1xduu=−lnx.
+
+Use a change of variable in the integral ∫1xy1tdt to show that lnxy=lnx+lnyforx,y>0.
+
+Use the identity lnx=∫1xdtt to show that ln(x) is an increasing function of x on [0,∞), and use the previous exercises to show that the range of ln(x) is (−∞,∞). Without any further assumptions, conclude that ln(x) has an inverse function defined on (−∞,∞).
+
+Answers will vary.
+
+Pretend, for the moment, that we do not know that ex is the inverse function of ln(x), but keep in mind that ln(x) has an inverse function defined on (−∞,∞). Call it E. Use the identity lnxy=lnx+lny to deduce that E(a+b)=E(a)E(b) for any real numbers a, b.
+
+Pretend, for the moment, that we do not know that ex is the inverse function of lnx, but keep in mind that lnx has an inverse function defined on (−∞,∞). Call it E. Show that E'(t)=E(t).
+x=E(ln(x)). Then, 1=E'(lnx)xorx=E'(lnx). Since any number t can be written t=lnx for some x, and for such t we have x=E(t), it follows that for any t,E'(t)=E(t).
+
+The sine integral, defined as S(x)=∫0xsinttdt is an important quantity in engineering. Although it does not have a simple closed formula, it is possible to estimate its behavior for large x. Show that for k≥1,|S(2πk)−S(2π(k+1))|≤1k(2k+1)π. (Hint:sin(t+π)=−sint)
+[T] The normal distribution in probability is given by p(x)=1σ2πe−(x−μ)2/2σ2, where σ is the standard deviation and μ is the average. The standard normal distribution in probability, ps, corresponds to μ=0andσ=1. Compute the right endpoint estimates R10andR100 of ∫−1112πe−x22dx.
+R10=0.6811,R100=0.6827
+[T] Compute the right endpoint estimates R50andR100 of ∫−35122πe−(x−1)2/8.

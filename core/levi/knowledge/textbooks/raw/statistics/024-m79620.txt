@@ -1,0 +1,62 @@
+# m79620
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Introduction
+
+Introduction
+
+Chapter Objectives
+
+By the end of this chapter, the student should be able to do the following:
+
+Recognize and understand discrete probability distribution functions, in general.
+
+Calculate and interpret expected values.
+
+Recognize the binomial probability distribution and apply it appropriately.
+
+Recognize the poisson probability distribution and apply it appropriately.
+
+Recognize the geometric probability distribution and apply it appropriately.
+
+Recognize the hypergeometric probability distribution and apply it appropriately.
+
+Classify discrete word problems by their distributions.
+
+A student takes a 10-question, true-false quiz. Because the student had such a busy schedule, he or she could not study and guesses randomly at each answer. What is the probability of the student passing the test with at least a 70 percent?
+
+Small companies might be interested in the number of long-distance phone calls their employees make during the peak time of the day. Suppose the average is 20 calls. What is the probability that the employees make more than 20 long-distance phone calls during the peak time?
+
+These two examples illustrate two different types of probability problems involving discrete random variables. Recall that discrete data are data that you can count. A random variable is a variable whose values are numerical outcome of a probability experiment. We always describe a random variable in words and its values in numbers. The values of a random variable can vary with each repetition of an experiment.
+
+Random Variable Notation
+
+Uppercase letters such as X or Y denote a random variable. Lowercase letters like x or y denote the value of a random variable. If X is a random variable, then X is written in words, and x is given as a number.
+
+The following are examples of random variables:
+
+Example 1: Suppose a jar contains three marbles, one blue, one red, and one white. Randomly draw one marble from the jar. Let X = the possible number of red marbles to be drawn. The sample space for the drawing is red, white, and blue. Then, x = 0,1. If the marble we draw is red, then x = 1; otherwise, x = 0.
+
+Example 2: Let X = the number of female children in a randomly selected family with only two kids. Here we are only interested in families with two kids, not families with one kid or more than two kids. The sample space for the genders of two-kid families is MM, MF, FM, FF. Here the first letter represents the gender of the older child and the second letter represents the gender of the younger child. F represents a female child and M represents a male child. For example, FM represents that the older child is a girl and the younger child is a boy, while MF represents that the older child is a boy and the younger child is a girl. Then, x = 0,1,2. A family has 0 female children if it has two boys (MM), a family has one female child if it has one boy and one girl (MF or FM), and a family has two female children if both kids are girls (FF).
+
+Example 3: Let X = the number of heads you get when you toss three fair coins. The sample space for the toss of three fair coins is TTT, THH, HTH, HHT, HTT, THT, TTH, HHH. Here the first letter represents the result of the first toss, the second letter represents the result of the second toss, and the third letter represents the result of the third toss. T represents a tail and H represents a head. For example, THH means we get a tail in the first toss but a head in the second and third toss, while HHT means we get a head in the first and second toss but a tail in the third toss. Then, x = 0, 1, 2, 3. There are 0 heads if the result is TTT, one head if the result is THT, TTH, or HTT, two heads if the result is THH, HTH, or HHT, and three heads if the result is HHH.
+
+Toss a coin 10 times and record the number of heads. After all members of the class have completed the experiment (tossed a coin 10 times and counted the number of heads), fill in . Let X = the number of heads in 10 tosses of the coin.
+Relative Frequency of x
+Which value(s) of x occurred most frequently?
+
+If you tossed the coin 1,000 times, what values could x take on? Which value(s) of x do you think would occur most frequently?
+
+What does the relative frequency column sum to?
+
+a characteristic of interest in a population being studied; common notation for variables are uppercase Latin letters X, Y, Z, . . . ; common notation for a specific value from the domain (set of all possible values of a variable) are lowercase Latin letters x, y, and z
+For example, if X is the number of children in a family, then x represents a specific integer 0, 1, 2, 3, . . . ; variables in statistics differ from variables in intermediate algebra in the two following ways: 
+
+The domain of the random variable (RV) is not necessarily a numerical set; the domain may be expressed in words; for example, if X = hair color then the domain is {black, blond, gray, green, orange}
+We can tell what specific value x the random variable X takes only after performing the experiment
+The domain of the random variable (RV) is not necessarily a numerical set; the domain may be expressed in words; for example, if X = hair color then the domain is {black, blond, gray, green, orange}
+
+We can tell what specific value x the random variable X takes only after performing the experiment

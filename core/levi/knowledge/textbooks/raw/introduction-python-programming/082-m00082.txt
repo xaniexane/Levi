@@ -1,0 +1,106 @@
+# m00082
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Classes and instances
+
+Classes and instances
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Create a class with instance attributes, class attributes, and the __init__() method.
+
+Use a class definition to create class instances to represent objects.
+
+Classes and instances
+
+In the previous section, a real-world entity, like a person's social media profile, was modeled as a single object. How could a programmer develop a software system that manages millions of profiles? A blueprint that defines the fields and procedures of a profile would be crucial.
+
+In a Python program, a class defines a type of object with attributes (fields) and methods (procedures). A class is a blueprint for creating objects. Individual objects created of the class type are called instances.
+
+Representing a coffee order with a class
+
+Classes and instances
+
+Consider the example below:
+
+Creating instances with __init__()
+___init___() is a special method that is called every time a new instance of a class is created. self refers to the instance of a class and is used in class methods to access the specific instance that called the method. __init__() uses self to define and initialize the instance's attributes.
+
+Creating multiple coffee orders and changing attributes
+
+instances and __init__()
+
+Consider the example below:
+
+Instance attributes vs. class attributes
+
+The attributes shown so far have been instance attributes. An instance attribute is a variable that is unique to each instance of a class and is accessed using the format instance_name.attribute_name. Another type of attribute, a class attribute, belongs to the class and is shared by all class instances. Class attributes are accessed using the format class_name.attribute_name.
+
+Using class attributes for shared coffee order information
+
+Instances and class attributes
+
+Consider the example above.
+
+Creating a class for an airline's flight tickets
+
+Write a class, FlightTicket, as described below. Default values follow the attributes. Then create a flight ticket and assign each instance attribute with values read from input.
+
+Instance attributes:
+
+flight_num: 1
+
+airport: JFK
+
+gate: T1-1
+
+time: 8:00
+
+seat: 1A
+
+passenger: unknown
+
+Class attributes:
+
+airline: Oceanic Airlines
+
+airline_code: OA
+
+Method:
+__init__(): initializes the instance attributes
+print_info(): prints ticket information (provided in template)
+
+Given input:
+
+The output is:
+
+Creating a class for fantasy books
+
+Write a class, Book, as described below. Then create two instances and assign each instance attribute with values read from input.
+
+Instance attributes:
+
+title: ''
+
+author: ''
+
+year: 0
+
+pages: 0
+
+Class attribute:
+
+imprint: Fantasy Tomes
+
+Method:
+__init__(): initializes the instance attributes
+print_info(): prints book information (provided in template)
+
+Given input:
+
+The output is:

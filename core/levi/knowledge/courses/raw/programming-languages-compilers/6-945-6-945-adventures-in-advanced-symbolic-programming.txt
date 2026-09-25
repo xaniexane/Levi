@@ -1,0 +1,182 @@
+# 6.945: Adventures in Advanced Symbolic Programming
+# MIT
+# source: https://groups.csail.mit.edu/mac/users/gjs/6.945/index.html
+
+-->
+Adventures in Advanced Symbolic Programming
+Spring 2025: 6.5150 (6.945) (grad AAGS), 6.5151 (6.905) (AUS)
+6.945 -->
+Adventures in Advanced Symbolic Programming
+Officially: Large-scale Symbolic Systems
+3-0-9, Grad AAGS Level, AI Concentration
+Gerald Jay Sussman ,
+with Manushaque Muco
+Overview:
+Concepts and techniques for the design and implementation of large
+software systems that can be adapted to uses not anticipated by the
+designer. Applications include compilers, computer-algebra systems,
+deductive systems, and some artificial intelligence applications.
+Means for decoupling goals from strategy. Mechanisms for implementing
+additive data-directed invocation. Working with partially-specified
+entities. Managing multiple viewpoints. Topics include combinators,
+generic operations, pattern matching, pattern-directed invocation,
+rule systems, backtracking, dependencies, indeterminacy, memoization,
+constraint propagation, and incremental refinement. Substantial
+weekly programming assignments are an integral part of the subject.
+There will be extensive programming assignments, using
+MIT/GNU Scheme .
+Although MIT/GNU Scheme is Free (Libre) Software that you may install
+on your personal computers, we will supply alternative computing
+resources to support our class.
+Students should have significant programming experience in Scheme,
+Common Lisp, Haskell, CAML or other "functional" language. A strong
+background in Python is OK.
+This subject is appropriate for
+undergraduates who have the prerequisite experience.
+Prerequisites: 6.034, or comparable experience. For example, good performance in 6.009 is appropriate experience. . Programming experience in a functional language recommended.
+Time: MWF 2:00PM
+Room: 35-225
+Textbook: Textbook: Software Design for Flexibility .
+Office Hours:
+GJS will be available on Wednesday afternoons from 3:15--4:30.
+(and he is often around in other afternoons!)
+You are welcome to visit his office at 32-G514, but call first to
+confirm availability.
+MIT phone: (617) 253-5874
+Email gjs@mit.edu
+Manu Muco will be available on ??? in G521
+or the room adjacent to it.
+Kenny is available Friday 1:00--2:00
+-->
+Supplemental Discussion: T 7:00PM in 32-397
+-->
+Announcements:
+We posted the Final
+Project Presentation Schedule . Let us know if you have any
+questions.
+Hard deadline for late problem sets:
+Tuesday, May 13 will be the last day we will accept any late
+problem set submissions.
+PS09 Code Updated:
+The code for PS09 has been slightly changed. Please get a new version of PS09. The questions are
+not changed. (William Liu: Thank you for catching some scheduler bugs).
+:
+Code Updates:
+There is a new update of the SDF code base :
+The previously announced rare bug in the unifier is now fixed.
+-->
+There is a new version of the "better-layering" flavor.
+Also, there are additional textbook pages explaining the
+better-layering code
+here , and the
+continuation-passing interpreter it is based on
+here .
+Be careful: If you have modified your copy of the sdf code base,
+do not just replace it with the newer one, because you will lose
+your modifications. Instead, copy the newly changed files to your
+copy, or copy your changes to a new copy of the code base that you
+download with a new name.
+-->
+-->
+Piazza for the class. -->
+-->
+We will have a one-time special tutorial session
+for anyone who needs help starting with Scheme
+or Emacs
+in 32-141 from 7:30PM--10:00PM tonight!
+8 February 2025
+13 March 2021:
+Class is cancelled.
+Guy Steele will not be giving a guest lecture.
+11 March 2021:
+Pset due dates are currently null and void. Hand them in at your convenience, before the term ends.
+LGG code from L17 is here.
+Sun. 2021-03-08:
+Just a reminder that since some releases of mit-scheme 10.1.10 have a vector printing bug,
+here's a patch to fix it:
+(environment-define
+(->environment '(runtime printer))
+'nmv-header?
+(lambda args #f))
+Tue. 2021-02-18:
+The Don't Panic! page and FAQ has been updated.
+Check it out and send me comments!
+Sat. 2021-02-15:
+There is no class on Monday due to President's Day. Tuesday is on a Monday
+schedule.
+Therefore, there will be lecture on Tuesday and no office hours.
+Enjoy the long weekend!
+Mon. 4/27/2021: We posted the Final
+Project Presentation Schedule . Let us know if you have any
+questions.
+Thu. 4/23/15: No Class Friday 4/24: Prof. Sussman is not
+feeling well and will not be able to lecture tomorrow. He hopes to
+recover enough to have class again on Monday. Students with completed
+problem sets can turn them in under his office door
+(32-385).
+Looking ahead: Next Friday, May 1 will be the last day we will
+accept late psets. If you are behind, please work to catch up.
+Project presentations begin May 4. We will distribute a schedule and
+information about presentations and reports early next week.
+Fri. 4/27/23: Hard deadline for late problem sets:
+Monday, May 15 will be the last day we will accept any late
+problem set submissions.
+Mon. 3/9/15: Note about problem sets and expectations:
+As stated in the initial Red Tape Memo, we expect students to be at
+every class and to complete every problem set. Both are essential in
+learning and understanding the class material.
+However, we understand that there are a lot of things going on these
+days and that weeks can get busy. We are not huge sticklers about due
+dates, and will accept assignments when you are ready, but please
+inform and update us about how things are going and if there's
+anything we can do to help.
+This being said, since there are new assignments distributed each
+week, we strongly discourage people from getting too far behind the
+rhythm that they are unable to ever catch up.
+Mon. 3/9/15: Office Hours This Week:
+I will be holding office hours this afternoon, Monday 3/9 1:30-3:30pm and
+tomorrow, Tuesday 3/10 3-4:30pm near 32-385 if you have any further
+questions about the class, material, or assignments.
+Wed. 3/4/15: MIT Scheme on Athena updated: The version
+of MIT Scheme provided in the 6.945 Athena locker has been updated to
+the latest version, MIT Scheme 9.2.
+-->
+Class materials:
+Overview
+Red Tape Memo
+Don't Panic! : A guide for the perplexed (software setup).
+Textbook: Software Design for Flexibility .
+Programming Assignments
+(a.k.a. problem sets).
+Frequently Asked Questions (FAQ)
+(check this page before emailing)
+L02-code
+Piazza
+LGG code
+dream interpreter code from 16 April class
+experimental layers code from 21 April class
+-->
+Monad code from 30 April class
+Request for Project Proposals
+Code base
+Readings
+Introduction to Scheme .
+Combinators .
+Simple Eval/Apply interpreter .
+Eval/Apply interpreter with continuations .
+Piazza
+-->
+Schedule for Project Presentations
+Calendar
+Final Project Presentation Schedule
+-->
+Software Tools used in the class.
+-->
+Evaluation for HKN Underground Guide
+-->
+Reference documentation:
+Structure and Interpretation of Computer Programs (SICP)
+.
+Look in the SICP supplemental site for the full text in HTML.
+MIT/GNU Scheme documentation
+SDF Software Manager documentation

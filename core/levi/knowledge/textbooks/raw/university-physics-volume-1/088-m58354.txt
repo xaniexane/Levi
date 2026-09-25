@@ -1,0 +1,125 @@
+# m58354
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Measuring Pressure
+
+Measuring Pressure
+
+By the end of this section, you will be able to:
+
+Define gauge pressure and absolute pressure
+
+Explain various methods for measuring pressure
+
+Understand the working of open-tube barometers
+
+Describe in detail how manometers and barometers operate
+
+In the preceding section, we derived a formula for calculating the variation in pressure for a fluid in hydrostatic equilibrium. As it turns out, this is a very useful calculation. Measurements of pressure are important in daily life as well as in science and engineering applications. In this section, we discuss different ways that pressure can be reported and measured.
+
+Gauge Pressure vs. Absolute Pressure
+
+Suppose the pressure gauge on a full scuba tank reads 3000 psi, which is approximately 207 atmospheres. When the valve is opened, air begins to escape because the pressure inside the tank is greater than the atmospheric pressure outside the tank. Air continues to escape from the tank until the pressure inside the tank equals the pressure of the atmosphere outside the tank. At this point, the pressure gauge on the tank reads zero, even though the pressure inside the tank is actually 1 atmosphere—the same as the air pressure outside the tank.
+
+Most pressure gauges, like the one on the scuba tank, are calibrated to read zero at atmospheric pressure. Pressure readings from such gauges are called gauge pressure, which is the pressure relative to the atmospheric pressure. When the pressure inside the tank is greater than atmospheric pressure, the gauge reports a positive value.
+
+Some gauges are designed to measure negative pressure. For example, many physics experiments must take place in a vacuum chamber, a rigid chamber from which some of the air is pumped out. The pressure inside the vacuum chamber is less than atmospheric pressure, so the pressure gauge on the chamber reads a negative value.
+
+Unlike gauge pressure, absolute pressure accounts for atmospheric pressure, which in effect adds to the pressure in any fluid not enclosed in a rigid container.
+
+Absolute Pressure
+
+The absolute pressure, or total pressure, is the sum of gauge pressure and atmospheric pressure:
+
+where pabs is absolute pressure, pg is gauge pressure, and patm is atmospheric pressure.
+
+For example, if a tire gauge reads 34 psi, then the absolute pressure is 34 psi plus 14.7 psi (patm in psi), or 48.7 psi (equivalent to 336 kPa).
+
+In most cases, the absolute pressure in fluids cannot be negative. Fluids push rather than pull, so the smallest absolute pressure in a fluid is zero (a negative absolute pressure is a pull). Thus, the smallest possible gauge pressure is pg=−patm (which makes pabs zero). There is no theoretical limit to how large a gauge pressure can be.
+
+Measuring Pressure
+
+A host of devices are used for measuring pressure, ranging from tire gauges to blood pressure monitors. Many other types of pressure gauges are commonly used to test the pressure of fluids, such as mechanical pressure gauges. We will explore some of these in this section.
+
+Any property that changes with pressure in a known way can be used to construct a pressure gauge. Some of the most common types include strain gauges, which use the change in the shape of a material with pressure; capacitance pressure gauges, which use the change in electric capacitance due to shape change with pressure; piezoelectric pressure gauges, which generate a voltage difference across a piezoelectric material under a pressure difference between the two sides; and ion gauges, which measure pressure by ionizing molecules in highly evacuated chambers. Different pressure gauges are useful in different pressure ranges and under different physical situations. Some examples are shown in .
+
+Manometers
+
+One of the most important classes of pressure gauges applies the property that pressure due to the weight of a fluid of constant density is given by p=hρg. The U-shaped tube shown in is an example of a manometer; in part (a), both sides of the tube are open to the atmosphere, allowing atmospheric pressure to push down on each side equally so that its effects cancel.
+
+A manometer with only one side open to the atmosphere is an ideal device for measuring gauge pressures. The gauge pressure is pg=hρg and is found by measuring h. For example, suppose one side of the U-tube is connected to some source of pressure pabs, such as the balloon in part (b) of the figure or the vacuum-packed peanut jar shown in part (c). Pressure is transmitted undiminished to the manometer, and the fluid levels are no longer equal. In part (b), pabs is greater than atmospheric pressure, whereas in part (c), pabs is less than atmospheric pressure. In both cases, pabs differs from atmospheric pressure by an amount hρg, where ρ is the density of the fluid in the manometer. In part (b), pabs can support a column of fluid of height h, so it must exert a pressure hρg greater than atmospheric pressure (the gauge pressure pg is positive). In part (c), atmospheric pressure can support a column of fluid of height h, so pabs is less than atmospheric pressure by an amount hρg (the gauge pressure pg is negative).
+
+Barometers
+
+Manometers typically use a U-shaped tube of a fluid (often mercury) to measure pressure. A barometer (see ) is a device that typically uses a single column of mercury to measure atmospheric pressure. The barometer, invented by the Italian mathematician and physicist Evangelista Torricelli (1608–1647) in 1643, is constructed from a glass tube closed at one end and filled with mercury. The tube is then inverted and placed in a pool of mercury. This device measures atmospheric pressure, rather than gauge pressure, because there is a nearly pure vacuum above the mercury in the tube. The height of the mercury is such that hρg=patm. When atmospheric pressure varies, the mercury rises or falls.
+
+Weather forecasters closely monitor changes in atmospheric pressure (often reported as barometric pressure), as rising mercury typically signals improving weather and falling mercury indicates deteriorating weather. The barometer can also be used as an altimeter, since average atmospheric pressure varies with altitude. Mercury barometers and manometers are so common that units of mm Hg are often quoted for atmospheric pressure and blood pressures.
+Fluid Heights in an Open U-Tube
+A U-tube with both ends open is filled with a liquid of density ρ1 to a height h on both sides (). A liquid of density ρ2<ρ1 is poured into one side and Liquid 2 settles on top of Liquid 1. The heights on the two sides are different. The height to the top of Liquid 2 from the interface is h2 and the height to the top of Liquid 1 from the level of the interface is h1. Derive a formula for the height difference.
+
+Fluid Heights in an Open U-Tube
+Strategy
+The pressure at points at the same height on the two sides of a U-tube must be the same as long as the two points are in the same liquid. Therefore, we consider two points at the same level in the two arms of the tube: One point is the interface on the side of the Liquid 2 and the other is a point in the arm with Liquid 1 that is at the same level as the interface in the other arm. The pressure at each point is due to atmospheric pressure plus the weight of the liquid above it.
+
+Strategy
+Solution
+Since the two points are in Liquid 1 and are at the same height, the pressure at the two points must be the same. Therefore, we have
+
+Solution
+
+Hence,
+
+This means that the difference in heights on the two sides of the U-tube is
+
+The result makes sense if we set ρ2=ρ1, which gives h2=h1. If the two sides have the same density, they have the same height.
+
+Mercury is a hazardous substance. Why do you suppose mercury is typically used in barometers instead of a safer fluid such as water?
+
+The density of mercury is 13.6 times greater than the density of water. It takes approximately 76 cm (29.9 in.) of mercury to measure the pressure of the atmosphere, whereas it would take approximately 10 m (34 ft.) of water.
+
+Units of pressure
+
+As stated earlier, the SI unit for pressure is the pascal (Pa), where
+
+In addition to the pascal, many other units for pressure are in common use (). In meteorology, atmospheric pressure is often described in the unit of millibars (mbar), where
+
+The millibar is a convenient unit for meteorologists because the average atmospheric pressure at sea level on Earth is 1.013×105Pa=1013mbar=1atm. Using the equations derived when considering pressure at a depth in a fluid, pressure can also be measured as millimeters or inches of mercury. The pressure at the bottom of a 760-mm column of mercury at 0°C in a container where the top part is evacuated is equal to the atmospheric pressure. Thus, 760 mm Hg is also used in place of 1 atmosphere of pressure. In vacuum physics labs, scientists often use another unit called the torr, named after Torricelli, who, as we have just seen, invented the mercury manometer for measuring pressure. One torr is equal to a pressure of 1 mm Hg.
+
+Summary of the Units of Pressure
+
+Unit
+Definition
+1Pa=1N/m2
+1psi=6.895×103Pa
+1torr=1mm Hg=133.3Pa
+Summary
+
+Gauge pressure is the pressure relative to atmospheric pressure.
+
+Absolute pressure is the sum of gauge pressure and atmospheric pressure.
+
+Open-tube manometers have U-shaped tubes and one end is always open. They are used to measure pressure. A mercury barometer is a device that measures atmospheric pressure.
+
+The SI unit of pressure is the pascal (Pa), but several other units are commonly used.
+
+Conceptual Questions
+
+Explain why the fluid reaches equal levels on either side of a manometer if both sides are open to the atmosphere, even if the tubes are of different diameters.
+
+The pressure of the atmosphere is due to the weight of the air above. The pressure, force per area, on the manometer will be the same at the same depth of the atmosphere.
+
+Problems
+
+Find the gauge and absolute pressures in the balloon and peanut jar shown in , assuming the manometer connected to the balloon uses water and the manometer connected to the jar contains mercury. Express in units of centimeters of water for the balloon and millimeters of mercury for the jar, taking h=0.0500m for each.
+
+How tall must a water-filled manometer be to measure blood pressure as high as 300 mm Hg?
+
+4.08 m
+
+Assuming bicycle tires are perfectly flexible and support the weight of bicycle and rider by pressure alone, calculate the total area of the tires in contact with the ground if a bicycle and rider have a total mass of 80.0 kg, and the gauge pressure in the tires is 3.50×105Pa.
+
+sum of gauge pressure and atmospheric pressure
+pressure relative to atmospheric pressure

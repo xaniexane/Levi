@@ -1,0 +1,50 @@
+# m00068
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Sorting and reversing lists
+
+Sorting and reversing lists
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Understand the concept of sorting.
+
+Use built-in sort() and reverse() methods.
+
+Sorting
+
+Ordering elements in a sequence is often useful. Sorting is the task of arranging elements in a sequence in ascending or descending order.
+
+Sorting can work on numerical or non-numerical data. When ordering text, dictionary order is used. Ex: "bat" comes before "cat" because "b" comes before "c".
+
+Sorting
+
+Sorting
+
+Using sort() and reverse()
+
+Python provides methods for arranging elements in a list.
+ 
+ The sort() method arranges the elements of a list in ascending order. For strings, ASCII values are used and uppercase characters come before lowercase characters, leading to unexpected results. Ex: "A" is ordered before "a" in ascending order but so is "G"; thus, "Gail" comes before "apple".
+ The reverse() method reverses the elements in a list.
+
+The sort() method arranges the elements of a list in ascending order. For strings, ASCII values are used and uppercase characters come before lowercase characters, leading to unexpected results. Ex: "A" is ordered before "a" in ascending order but so is "G"; thus, "Gail" comes before "apple".
+
+The reverse() method reverses the elements in a list.
+
+Sorting and reversing lists
+
+The above code's output is:
+
+sort() and reverse() methods
+
+Use the following list for the questions below.
+
+Sorting and reversing
+
+Complete the program below to arrange and print the numbers in ascending and descending order.

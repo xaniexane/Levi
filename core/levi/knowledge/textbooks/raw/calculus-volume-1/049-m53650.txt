@@ -1,0 +1,408 @@
+# m53650
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Integrals, Exponential Functions, and Logarithms
+
+Integrals, Exponential Functions, and Logarithms
+
+Write the definition of the natural logarithm as an integral.
+
+Recognize the derivative of the natural logarithm.
+
+Integrate functions involving the natural logarithmic function.
+
+Define the number e through an integral.
+
+Recognize the derivative and integral of the exponential function.
+
+Prove properties of logarithms and exponential functions using integrals.
+
+Express general logarithmic and exponential functions in terms of natural logarithms and exponentials.
+
+We already examined exponential functions and logarithms in earlier chapters. However, we glossed over some key details in the previous discussions. For example, we did not study how to treat exponential functions with exponents that are irrational. The definition of the number e is another area where the previous development was somewhat incomplete. We now have the tools to deal with these concepts in a more mathematically rigorous way, and we do so in this section.
+
+For purposes of this section, assume we have not yet defined the natural logarithm, the number e, or any of the integration and differentiation formulas associated with these functions. By the end of the section, we will have studied these concepts in a mathematically rigorous way (and we will see they are consistent with the concepts we learned earlier).
+
+We begin the section by defining the natural logarithm in terms of an integral. This definition forms the foundation for the section. From this definition, we derive differentiation formulas, define the number e, and expand these concepts to logarithms and exponential functions of any base.
+
+The Natural Logarithm as an Integral
+
+Recall the power rule for integrals:
+
+Clearly, this does not work when n=−1, as it would force us to divide by zero. So, what do we do with ∫1xdx? Recall from the Fundamental Theorem of Calculus that ∫1x1tdt is an antiderivative of 1/x. Therefore, we can make the following definition.
+
+Definition
+
+For x>0, define the natural logarithm function by
+
+For x>1, this is just the area under the curve y=1/t from 1 to x. For x<1, we have ∫1x1tdt=−∫x11tdt, so in this case it is the negative of the area under the curve from xto1 (see the following figure).
+
+Notice that ln1=0. Furthermore, the function y=1/t>0 for x>0. Therefore, by the properties of integrals, it is clear that lnx is increasing for x>0.
+
+Properties of the Natural Logarithm
+
+Because of the way we defined the natural logarithm, the following differentiation formula falls out immediately as a result of to the Fundamental Theorem of Calculus.
+
+Derivative of the Natural Logarithm
+
+For x>0, the derivative of the natural logarithm is given by
+
+Corollary to the Derivative of the Natural Logarithm
+
+The function lnx is differentiable; therefore, it is continuous.
+
+A graph of lnx is shown in . Notice that it is continuous throughout its domain of (0,∞).
+
+Calculating Derivatives of Natural Logarithms
+
+Calculate the following derivatives:
+ddxln(5x3−2)
+ddx(ln(3x))2
+
+We need to apply the chain rule in both cases.
+ddxln(5x3−2)=15x25x3−2
+ddx(ln(3x))2=2(ln(3x))·33x=2(ln(3x))x
+
+Calculate the following derivatives:
+ddxln(2x2+x)
+ddx(ln(x3))2
+ddxln(2x2+x)=4x+12x2+x
+ddx(ln(x3))2=6ln(x3)x
+
+Hint
+
+Apply the differentiation formula just provided and use the chain rule as necessary.
+
+Note that if we use the absolute value function and create a new function ln|x|, we can extend the domain of the natural logarithm to include x<0. Then (d/(dx))ln|x|=1/x. This gives rise to the familiar integration formula.
+
+Integral of (1/u) du
+
+The natural logarithm is the antiderivative of the function f(u)=1/u:
+
+Calculating Integrals Involving Natural Logarithms
+
+Calculate the integral ∫xx2+4dx.
+
+Using u-substitution, let u=x2+4. Then du=2xdx and we have
+
+Calculate the integral ∫x2x3+6dx.
+∫x2x3+6dx=13ln|x3+6|+C
+
+Hint
+
+Apply the integration formula provided earlier and use u-substitution as necessary.
+
+Although we have called our function a “logarithm,” we have not actually proved that any of the properties of logarithms hold for this function. We do so here.
+
+Properties of the Natural Logarithm
+
+If a,b>0 and r is a rational number, then
+ln1=0
+ln(ab)=lna+lnb
+ln(ab)=lna−lnb
+ln(ar)=rlna
+
+Proof
+
+i. By definition, ln1=∫111tdt=0.
+
+ii. We have
+ln(ab)=∫1ab1tdt=∫1a1tdt+∫aab1tdt.
+Use u-substitution on the last integral in this expression. Let u=t/a. Then du=(1/a)dt. Furthermore, when t=a,u=1, and when t=ab,u=b. So we get
+ln(ab)=∫1a1tdt+∫aab1tdt=∫1a1tdt+∫aabat·1adt=∫1a1tdt+∫1b1udu=lna+lnb.
+
+iv. Note that
+ddxln(xr)=rxr−1xr=rx.
+Furthermore,
+ddx(rlnx)=rx.
+Since the derivatives of these two functions are the same, by the Fundamental Theorem of Calculus, they must differ by a constant. So we have
+ln(xr)=rlnx+C
+for some constant C. Taking x=1, we get
+ln(1r)=rln(1)+C0=r(0)+CC=0.
+Thus ln(xr)=rlnx and the proof is complete. Note that we can extend this property to irrational values of r later in this section.
+Part iii. follows from parts ii. and iv. and the proof is left to you.
+
+□
+
+Using Properties of Logarithms
+
+Use properties of logarithms to simplify the following expression into a single logarithm:
+
+We have
+
+Use properties of logarithms to simplify the following expression into a single logarithm:
+4ln2
+
+Hint
+
+Apply the properties of logarithms.
+
+Defining the Number e
+
+Now that we have the natural logarithm defined, we can use that function to define the number e.
+
+Definition
+
+The number e is defined to be the real number such that
+
+To put it another way, the area under the curve y=1/t between t=1 and t=e is 1 (). The proof that such a number exists and is unique is left to you. (Hint: Use the Intermediate Value Theorem to prove existence and the fact that lnx is increasing to prove uniqueness.)
+
+The number e can be shown to be irrational, although we won’t do so here (see the Student Project in Taylor and Maclaurin Series). Its approximate value is given by
+
+The Exponential Function
+
+We now turn our attention to the function ex. Note that the natural logarithm is one-to-one and therefore has an inverse function. For now, we denote this inverse function by expx. Then,
+
+The following figure shows the graphs of expx and lnx.
+
+We hypothesize that expx=ex. For rational values of x, this is easy to show. If x is rational, then we have ln(ex)=xlne=x. Thus, when x is rational, ex=expx. For irrational values of x, we simply define ex as the inverse function of lnx.
+
+Definition
+
+For any real number x, define y=ex to be the number for which
+
+Then we have ex=exp(x) for all x, and thus
+
+for all x.
+
+Properties of the Exponential Function
+
+Since the exponential function was defined in terms of an inverse function, and not in terms of a power of e, we must verify that the usual laws of exponents hold for the function ex.
+
+Properties of the Exponential Function
+
+If p and q are any real numbers and r is a rational number, then
+epeq=ep+q
+epeq=ep−q
+(ep)r=epr
+
+Proof
+
+Note that if p and q are rational, the properties hold. However, if p or q are irrational, we must apply the inverse function definition of ex and verify the properties. Only the first property is verified here; the other two are left to you. We have
+
+Since lnx is one-to-one, then
+
+□
+
+As with part iv. of the logarithm properties, we can extend property iii. to irrational values of r, and we do so by the end of the section.
+
+We also want to verify the differentiation formula for the function y=ex. To do this, we need to use implicit differentiation. Let y=ex. Then
+
+Thus, we see
+
+as desired, which leads immediately to the integration formula
+
+We apply these formulas in the following examples.
+
+Using Properties of Exponential Functions
+
+Evaluate the following derivatives:
+ddte3tet2
+ddxe3x2
+
+We apply the chain rule as necessary.
+ddte3tet2=ddte3t+t2=e3t+t2(3+2t)
+ddxe3x2=e3x26x
+
+Evaluate the following derivatives:
+ddx(ex2e5x)
+ddt(e2t)3
+ddx(ex2e5x)=ex2−5x(2x−5)
+ddt(e2t)3=6e6t
+
+Hint
+
+Use the properties of exponential functions and the chain rule as necessary.
+
+Using Properties of Exponential Functions
+
+Evaluate the following integral: ∫2xe−x2dx.
+
+Using u-substitution, let u=−x2. Then du=−2xdx, and we have
+
+Evaluate the following integral: ∫4e3xdx.
+∫4e3xdx=−43e−3x+C
+
+Hint
+
+Use the properties of exponential functions and u-substitution as necessary.
+
+General Logarithmic and Exponential Functions
+
+We close this section by looking at exponential functions and logarithms with bases other than e. Exponential functions are functions of the form f(x)=ax. Note that unless a=e, we still do not have a mathematically rigorous definition of these functions for irrational exponents. Let’s rectify that here by defining the function f(x)=ax in terms of the exponential function ex. We then examine logarithms with bases other than e as inverse functions of exponential functions.
+
+Definition
+
+For any a>0, and for any real number x, define y=ax as follows:
+
+Now ax is defined rigorously for all values of x. This definition also allows us to generalize property iv. of logarithms and property iii. of exponential functions to apply to both rational and irrational values of r. It is straightforward to show that properties of exponents hold for general exponential functions defined in this way.
+
+Let’s now apply this definition to calculate a differentiation formula for ax. We have
+
+The corresponding integration formula follows immediately.
+
+Derivatives and Integrals Involving General Exponential Functions
+
+Let a>0. Then,
+
+and
+
+If a≠1, then the function ax is one-to-one and has a well-defined inverse. Its inverse is denoted by logax. Then,
+
+Note that general logarithm functions can be written in terms of the natural logarithm. Let y=logax. Then, x=ay. Taking the natural logarithm of both sides of this second equation, we get
+
+Thus, we see that all logarithmic functions are constant multiples of one another. Next, we use this formula to find a differentiation formula for a logarithm with base a. Again, let y=logax. Then,
+
+Derivatives of General Logarithm Functions
+
+Let a>0. Then,
+
+Calculating Derivatives of General Exponential and Logarithm Functions
+
+Evaluate the following derivatives:
+ddt(4t·2t2)
+ddxlog8(7x2+4)
+
+We need to apply the chain rule as necessary.
+ddt(4t·2t2)=ddt(22t·2t2)=ddt(22t+t2)=22t+t2ln(2)(2+2t)
+ddxlog8(7x2+4)=1(7x2+4)(ln8)(14x)
+
+Evaluate the following derivatives:
+ddt4t4
+ddxlog3(x2+1)
+ddt4t4=4t4(ln4)(4t3)
+ddxlog3(x2+1)=x(ln3)(x2+1)
+
+Hint
+
+Use the formulas and apply the chain rule as necessary.
+
+Integrating General Exponential Functions
+
+Evaluate the following integral: ∫323xdx.
+
+Use u-substitution and let u=−3x. Then du=−3dx and we have
+
+Evaluate the following integral: ∫x22x3dx.
+∫x22x3dx=13ln22x3+C
+
+Hint
+
+Use the properties of exponential functions and u-substitution as necessary.
+
+Key Concepts
+
+The earlier treatment of logarithms and exponential functions did not define the functions precisely and formally. This section develops the concepts in a mathematically rigorous way.
+
+The cornerstone of the development is the definition of the natural logarithm in terms of an integral.
+
+The function ex is then defined as the inverse of the natural logarithm.
+
+General exponential functions are defined in terms of ex, and the corresponding inverse functions are general logarithms.
+
+Familiar properties of logarithms and exponents still hold in this more rigorous context.
+
+Key Equations
+lny=ln(ex)=x Z
+For the following exercises, find the derivative dydx.
+y=ln(2x)
+1x
+y=ln(2x+1)
+y=1lnx
+−1x(lnx)2
+
+For the following exercises, find the indefinite integral.
+∫dt3t
+∫dx1+x
+ln(x+1)+C
+
+For the following exercises, find the derivative dy/dx. (You can use a calculator to plot the function and the derivative to confirm that it is correct.)
+[T] y=ln(x)x
+[T] y=xln(x)
+ln(x)+1
+[T] y=log10x
+[T] y=ln(sinx)
+cot(x)
+[T] y=ln(lnx)
+[T] y=7ln(4x)
+7x
+[T] y=ln((4x)7)
+[T] y=ln(tanx)
+csc(x)secx
+[T] y=ln(tan(3x))
+[T] y=ln(cos2x)
+−2tanx
+
+For the following exercises, find the definite or indefinite integral.
+∫01dx3+x
+∫01dt3+2t
+12ln(53)
+∫02xdxx2+1
+∫02x3dxx2+1
+2−12ln(5)
+∫2edxxlnx
+∫2edxx(lnx)2
+1ln(2)−1
+∫cosxdxsinx
+∫0π/4tanxdx
+12ln(2)
+∫cot(3x)dx
+∫(lnx)2dxx
+13(lnx)3
+
+For the following exercises, compute dy/dx by differentiating lny.
+y=x2+1
+y=x2+1x2−1
+2x3x2+1x2−1
+y=esinx
+y=x−1/x
+x−2−(1/x)(lnx−1)
+y=e(ex)
+y=xe
+exe−1
+y=x(ex)
+y=xx3x6
+1
+y=x−1/lnx
+y=e−lnx
+−1x2
+
+For the following exercises, evaluate by any method.
+∫510dtt−∫5x10xdtt
+∫1eπdxx+∫−2−1dxx
+π−ln(2)
+ddx∫x1dtt
+ddx∫xx2dtt
+1x
+ddxln(secx+tanx)
+
+For the following exercises, use the function lnx. If you are unable to find intersection points analytically, use a calculator.
+
+Find the area of the region enclosed by x=1 and y=5 above y=lnx.
+e5−6units2
+[T] Find the arc length of lnx from x=1 to x=2.
+
+Find the area between lnx and the x-axis from x=1tox=2.
+ln(4)−1units2
+
+Find the volume of the shape created when rotating this curve from x=1tox=2 around the x-axis, as pictured here.
+[T] Find the surface area of the shape created when rotating the curve in the previous exercise from x=1 to x=2 around the x-axis.
+2.8656
+
+If you are unable to find intersection points analytically in the following exercises, use a calculator.
+
+Find the area of the hyperbolic quarter-circle enclosed by x=2andy=2 above y=1/x.
+[T] Find the arc length of y=1/x from x=1tox=4.
+3.1502
+
+Find the area under y=1/x and above the x-axis from x=1tox=4.
+
+For the following exercises, verify the derivatives and antiderivatives.
+ddxln(x+x2+1)=11+x2
+ddxln(x−ax+a)=2a(x2−a2)
+ddxln(1+1−x2x)=−1x1−x2
+ddxln(x+x2−a2)=1x2−a2
+∫dxxln(x)ln(lnx)=ln(ln(lnx))+C

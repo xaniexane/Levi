@@ -1,0 +1,393 @@
+# m58280
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Products of Vectors
+
+Products of Vectors
+
+By the end of this section, you will be able to:
+
+Explain the difference between the scalar product and the vector product of two vectors.
+
+Determine the scalar product of two vectors.
+
+Determine the vector product of two vectors.
+
+Describe how the products of vectors are used in physics.
+
+A vector can be multiplied by another vector but may not be divided by another vector. There are two kinds of products of vectors used broadly in physics and engineering. One kind of multiplication is a scalar multiplication of two vectors. Taking a scalar product of two vectors results in a number (a scalar), as its name indicates. Scalar products are used to define work and energy relations. For example, the work that a force (a vector) performs on an object while causing its displacement (a vector) is defined as a scalar product of the force vector with the displacement vector. A quite different kind of multiplication is a vector multiplication of vectors. Taking a vector product of two vectors returns as a result a vector, as its name suggests. Vector products are used to define other derived vector quantities. For example, in describing rotations, a vector quantity called torque is defined as a vector product of an applied force (a vector) and its distance from pivot to force (a vector). It is important to distinguish between these two kinds of vector multiplications because the scalar product is a scalar quantity and a vector product is a vector quantity.
+
+The Scalar Product of Two Vectors (the Dot Product)
+
+Scalar multiplication of two vectors yields a scalar product.
+
+Scalar Product (Dot Product)
+
+The scalar product A→·B→ of two vectors A→ and B→ is a number defined by the equation
+
+where φ is the angle between the vectors (shown in ). The scalar product is also called the dot product because of the dot notation that indicates it.
+
+In the definition of the dot product, the direction of angle φ does not matter, and φ can be measured from either of the two vectors to the other because cosφ=cos(−φ)=cos(2π−φ). The dot product is a negative number when 90°<φ≤180° and is a positive number when 0°≤φ<90°. Moreover, the dot product of two parallel vectors is A→·B→=ABcos0°=AB, and the dot product of two antiparallel vectors is A→·B→=ABcos180°=−AB. The scalar product of two orthogonal vectors vanishes: A→·B→=ABcos90°=0. The scalar product of a vector with itself is the square of its magnitude:
+The Scalar Product
+For the vectors shown in , find the scalar product A→·F→.
+
+The Scalar Product
+Strategy
+From , the magnitudes of vectors A→ and F→ are A = 10.0 and F = 20.0. Angle θ, between them, is the difference: θ=φ−α=110°−35°=75°. Substituting these values into gives the scalar product.
+
+Strategy
+Solution
+A straightforward calculation gives us
+
+Solution
+
+For the vectors given in , find the scalar products A→·B→ and F→·C→.
+A→·B→=−57.3, F→·C→=27.8
+
+In the Cartesian coordinate system, scalar products of the unit vector of an axis with other unit vectors of axes always vanish because these unit vectors are orthogonal:
+
+In these equations, we use the fact that the magnitudes of all unit vectors are one: |i^|=|j^|=|k^|=1. For unit vectors of the axes, gives the following identities:
+
+The scalar product A→·B→ can also be interpreted as either the product of B with the projection Aǁ of vector A→ onto the direction of vector B→ ((b)) or the product of A with the projection Bǁ of vector B→ onto the direction of vector A→ ((c)):
+
+For example, in the rectangular coordinate system in a plane, the scalar x-component of a vector is its dot product with the unit vector i^, and the scalar y-component of a vector is its dot product with the unit vector j^:
+
+Scalar multiplication of vectors is commutative,
+
+and obeys the distributive law:
+
+We can use the commutative and distributive laws to derive various relations for vectors, such as expressing the dot product of two vectors in terms of their scalar components.
+
+For vector A→=Axi^+Ayj^+Azk^ in a rectangular coordinate system, use through to show that A→·i^=Ax A→·j^=Ay and A→·k^=Az.
+
+When the vectors in are given in their vector component forms,
+
+we can compute their scalar product as follows:
+
+Since scalar products of two different unit vectors of axes give zero, and scalar products of unit vectors with themselves give one (see and ), there are only three nonzero terms in this expression. Thus, the scalar product simplifies to
+
+We can use for the scalar product in terms of scalar components of vectors to find the angle between two vectors. When we divide by AB, we obtain the equation for cosφ, into which we substitute :
+
+Angle φ between vectors A→ and B→ is obtained by taking the inverse cosine of the expression in .
+Angle between Two Forces
+Three dogs are pulling on a stick in different directions, as shown in . The first dog pulls with force F→1=(10.0i^−20.4j^+2.0k^)N, the second dog pulls with force F→2=(−15.0i^−6.2k^)N, and the third dog pulls with force F→3=(5.0i^+12.5j^)N. What is the angle between forces F→1 and F→2?
+
+Angle between Two Forces
+Strategy
+The components of force vector F→1 are F1x=10.0N, F1y=−20.4N, and F1z=2.0N, whereas those of force vector F→2 are F2x=−15.0N, F2y=0.0N, and F2z=−6.2N. Computing the scalar product of these vectors and their magnitudes, and substituting into gives the angle of interest.
+
+Strategy
+Solution
+The magnitudes of forces F→1 and F→2 are
+
+Solution
+
+and
+
+Substituting the scalar components into yields the scalar product
+
+Finally, substituting everything into gives the angle
+Significance
+Notice that when vectors are given in terms of the unit vectors of axes, we can find the angle between them without knowing the specifics about the geographic directions the unit vectors represent. Here, for example, the +x-direction might be to the east and the +y-direction might be to the north. But, the angle between the forces in the problem is the same if the +x-direction is to the west and the +y-direction is to the south.
+
+Significance
+
+Find the angle between forces F→1 and F→3 in .
+131.9°
+The Work of a Force
+When force F→ pulls on an object and when it causes its displacement D→, we say the force performs work. The amount of work the force does is the scalar product F→·D→. If the stick in moves momentarily and gets displaced by vector D→=(−7.9j^−4.2k^)cm, how much work is done by the third dog in ?
+
+The Work of a Force
+Strategy
+We compute the scalar product of displacement vector D→ with force vector F→3=(5.0i^+12.5j^)N, which is the pull from the third dog. Let’s use W3 to denote the work done by force F→3 on displacement D→.
+
+Strategy
+Solution
+Calculating the work is a straightforward application of the dot product:
+
+Solution
+Significance
+The SI unit of work is called the joule (J), where 1 J = 1 N·m. The unit cm·N can be written as 10−2m·N=10−2J, so the answer can be expressed as W3=−0.9875J≈−1.0J.
+
+Significance
+
+How much work is done by the first dog and by the second dog in on the displacement in ?
+W1=1.5J, W2=0.3J
+
+The Vector Product of Two Vectors (the Cross Product)
+
+Vector multiplication of two vectors yields a vector product.
+
+Vector Product (Cross Product)
+
+The vector product of two vectors A→ and B→ is denoted by A→×B→ and is often referred to as a cross product. The vector product is a vector that has its direction perpendicular to both vectors A→ and B→. In other words, vector A→×B→ is perpendicular to the plane that contains vectors A→ and B→, as shown in . The magnitude of the vector product is defined as
+
+where angle φ, between the two vectors, is measured from vector A→ (first vector in the product) to vector B→ (second vector in the product), as indicated in , and is between 0° and 180°.
+
+According to , the vector product vanishes for pairs of vectors that are either parallel (φ=0°) or antiparallel (φ=180°) because sin0°=sin180°=0.
+
+On the line perpendicular to the plane that contains vectors A→ and B→ there are two alternative directions—either up or down, as shown in —and the direction of the vector product may be either one of them. In the standard right-handed orientation, where the angle between vectors is measured counterclockwise from the first vector, vector A→×B→ points upward, as seen in (a). If we reverse the order of multiplication, so that now B→ comes first in the product, then vector B→×A→ must point downward, as seen in (b). This means that vectors A→×B→ and B→×A→ are antiparallel to each other and that vector multiplication is not commutative but anticommutative. The anticommutative property means the vector product reverses the sign when the order of multiplication is reversed:
+
+The corkscrew right-hand rule is a common mnemonic used to determine the direction of the vector product. As shown in , a corkscrew is placed in a direction perpendicular to the plane that contains vectors A→ and B→, and its handle is turned in the direction from the first to the second vector in the product. The direction of the cross product is given by the progression of the corkscrew.
+The Torque of a ForceThe mechanical advantage that a familiar tool called a wrench provides () depends on magnitude F of the applied force, on its direction with respect to the wrench handle, and on how far from the nut this force is applied. The distance R from the nut to the point where force vector F→ is attached is represented by the radial vector R→. The physical vector quantity that makes the nut turn is called torque (denoted by τ→), and it is the vector product of the distance between the pivot to force with the force: τ→=R→×F→.
+
+The Torque of a Force
+
+To loosen a rusty nut, a 20.00-N force is applied to the wrench handle at angle φ=40° and at a distance of 0.25 m from the nut, as shown in (a). Find the magnitude and direction of the torque applied to the nut. What would the magnitude and direction of the torque be if the force were applied at angle φ=45°, as shown in (b)? For what value of angle φ does the torque have the largest magnitude?
+Strategy
+We adopt the frame of reference shown in , where vectors R→ and F→ lie in the xy-plane and the origin is at the position of the nut. The radial direction along vector R→ (pointing away from the origin) is the reference direction for measuring the angle φ because R→ is the first vector in the vector product τ→=R→×F→. Vector τ→ must lie along the z-axis because this is the axis that is perpendicular to the xy-plane, where both R→ and F→ lie. To compute the magnitude τ, we use . To find the direction of τ→, we use the corkscrew right-hand rule ().
+
+Strategy
+SolutionFor the situation in (a), the corkscrew rule gives the direction of R→×F→ in the positive direction of the z-axis. Physically, it means the torque vector τ→ points out of the page, perpendicular to the wrench handle. We identify F = 20.00 N and R = 0.25 m, and compute the magnitude using :
+
+Solution
+
+For the situation in (b), the corkscrew rule gives the direction of R→×F→ in the negative direction of the z-axis. Physically, it means the vector τ→ points into the page, perpendicular to the wrench handle. The magnitude of this torque is
+
+The torque has the largest value when sinφ=1, which happens when φ=90°. Physically, it means the wrench is most effective—giving us the best mechanical advantage—when we apply the force perpendicular to the wrench handle. For the situation in this example, this best-torque value is τbest=RF=(0.25m)(20.00N)=5.00N·m.
+Significance
+When solving mechanics problems, we often do not need to use the corkscrew rule at all, as we’ll see now in the following equivalent solution. Notice that once we have identified that vector R→×F→ lies along the z-axis, we can write this vector in terms of the unit vector k^ of the z-axis:
+
+Significance
+
+In this equation, the number that multiplies k^ is the scalar z-component of the vector R→×F→. In the computation of this component, care must be taken that the angle φ is measured counterclockwise from R→ (first vector) to F→ (second vector). Following this principle for the angles, we obtain RFsin(+40°)=+3.2N·m for the situation in (a), and we obtain RFsin(−45°)=−3.5N·m for the situation in (b). In the latter case, the angle is negative because the graph in indicates the angle is measured clockwise; but, the same result is obtained when this angle is measured counterclockwise because +(360°−45°)=+315° and sin(+315°)=sin(−45°). In this way, we obtain the solution without reference to the corkscrew rule. For the situation in (a), the solution is R→×F→=+3.2N·mk^; for the situation in (b), the solution is R→×F→=−3.5N·mk^.
+
+For the vectors given in , find the vector products A→×B→ and C→×F→.
+A→×B→=−40.1k^ or, equivalently, |A→×B→|=40.1, and the direction is into the page; C→×F→=+157.6k^ or, equivalently, |C→×F→|=157.6, and the direction is out of the page.
+
+Similar to the dot product (), the cross product has the following distributive property:
+
+The distributive property is applied frequently when vectors are expressed in their component forms, in terms of unit vectors of Cartesian axes.
+
+When we apply the definition of the cross product, , to unit vectors i^, j^, and k^ that define the positive x-, y-, and z-directions in space, we find that
+
+All other cross products of these three unit vectors must be vectors of unit magnitudes because i^, j^, and k^ are orthogonal. For example, for the pair i^ and j^, the magnitude is |i^×j^|=ijsin90°=(1)(1)(1)=1. The direction of the vector product i^×j^ must be orthogonal to the xy-plane, which means it must be along the z-axis. The only unit vectors along the z-axis are −k^ or +k^. By the corkscrew rule, the direction of vector i^×j^ must be parallel to the positive z-axis. Therefore, the result of the multiplication i^×j^ is identical to +k^. We can repeat similar reasoning for the remaining pairs of unit vectors. The results of these multiplications are
+
+Notice that in , the three unit vectors i^, j^, and k^ appear in the cyclic order shown in a diagram in (a). The cyclic order means that in the product formula, i^ follows k^ and comes before j^, or k^ follows j^ and comes before i^, or j^ follows i^ and comes before k^. The cross product of two different unit vectors is always a third unit vector. When two unit vectors in the cross product appear in the cyclic order, the result of such a multiplication is the remaining unit vector, as illustrated in (b). When unit vectors in the cross product appear in a different order, the result is a unit vector that is antiparallel to the remaining unit vector (i.e., the result is with the minus sign, as shown by the examples in (c) and (d). In practice, when the task is to find cross products of vectors that are given in vector component form, this rule for the cross-multiplication of unit vectors is very useful.
+
+Suppose we want to find the cross product A→×B→ for vectors A→=Axi^+Ayj^+Azk^ and B→=Bxi^+Byj^+Bzk^. We can use the distributive property (), the anticommutative property (), and the results in and for unit vectors to perform the following algebra:
+
+When performing algebraic operations involving the cross product, be very careful about keeping the correct order of multiplication because the cross product is anticommutative. The last two steps that we still have to do to complete our task are, first, grouping the terms that contain a common unit vector and, second, factoring. In this way we obtain the following very useful expression for the computation of the cross product:
+
+In this expression, the scalar components of the cross-product vector are
+
+When finding the cross product, in practice, we can use either or , depending on which one of them seems to be less complex computationally. They both lead to the same final result. One way to make sure if the final result is correct is to use them both.
+A Particle in a Magnetic Field
+When moving in a magnetic field, some particles may experience a magnetic force. Without going into details—a detailed study of magnetic phenomena comes in later chapters—let’s acknowledge that the magnetic field B→ is a vector, the magnetic force F→ is a vector, and the velocity u→ of the particle is a vector. The magnetic force vector is proportional to the vector product of the velocity vector with the magnetic field vector, which we express as F→=ζu→×B→. In this equation, a constant ζ takes care of the consistency in physical units, so we can omit physical units on vectors u→ and B→. In this example, let’s assume the constant ζ is positive.
+
+A Particle in a Magnetic Field
+
+A particle moving in space with velocity vector u→=−5.0i^−2.0j^+3.5k^ enters a region with a magnetic field and experiences a magnetic force. Find the magnetic force F→ on this particle at the entry point to the region where the magnetic field vector is (a) B→=7.2i^−j^−2.4k^ and (b) B→=4.5k^. In each case, find magnitude F of the magnetic force and angle θ the force vector F→ makes with the given magnetic field vector B→.
+Strategy
+First, we want to find the vector product u→×B→, because then we can determine the magnetic force using F→=ζu→×B→. Magnitude F can be found either by using components, F=Fx2+Fy2+Fz2, or by computing the magnitude |u→×B→| directly using . In the latter approach, we would have to find the angle between vectors u→ and B→. When we have F→, the general method for finding the direction angle θ involves the computation of the scalar product F→·B→ and substitution into . To compute the vector product we can either use or compute the product directly, whichever way is simpler.
+
+Strategy
+Solution
+The components of the velocity vector are ux=−5.0, uy=−2.0, and uz=3.5.
+
+Solution
+
+(a) The components of the magnetic field vector are Bx=7.2, By=−1.0, and Bz=−2.4. Substituting them into gives the scalar components of vector F→=ζu→×B→:
+
+Thus, the magnetic force is F→=ζ(8.3i^+13.2j^+19.4k^) and its magnitude is
+
+To compute angle θ, we may need to find the magnitude of the magnetic field vector,
+
+and the scalar product F→·B→:
+
+Now, substituting into gives angle θ:
+
+Hence, the magnetic force vector is perpendicular to the magnetic field vector. (We could have saved some time if we had computed the scalar product earlier.)
+
+(b) Because vector B→=4.5k^ has only one component, we can perform the algebra quickly and find the vector product directly:
+
+The magnitude of the magnetic force is
+
+Because the scalar product is
+
+the magnetic force vector F→ is perpendicular to the magnetic field vector B→.
+Significance
+Even without actually computing the scalar product, we can predict that the magnetic force vector must always be perpendicular to the magnetic field vector because of the way this vector is constructed. Namely, the magnetic force vector is the vector product F→=ζu→×B→ and, by the definition of the vector product (see ), vector F→ must be perpendicular to both vectors u→ and B→.
+
+Significance
+
+Given two vectors A→=−i^+j^ and B→=3i^−j^, find (a) A→×B→, (b) |A→×B→|, (c) the angle between A→ and B→, and (d) the angle between A→×B→ and vector C→=i^+k^.
+
+a. −2k^, b. 2, c. 153.4°, d. 135°
+
+In conclusion to this section, we want to stress that “dot product” and “cross product” are entirely different mathematical objects that have different meanings. The dot product is a scalar; the cross product is a vector. Later chapters use the terms dot product and scalar product interchangeably. Similarly, the terms cross product and vector product are used interchangeably.
+
+Summary
+
+There are two kinds of multiplication for vectors. One kind of multiplication is the scalar product, also known as the dot product. The other kind of multiplication is the vector product, also known as the cross product. The scalar product of vectors is a number (scalar). The vector product of vectors is a vector.
+
+Both kinds of multiplication have the distributive property, but only the scalar product has the commutative property. The vector product has the anticommutative property, which means that when we change the order in which two vectors are multiplied, the result acquires a minus sign.
+
+The scalar product of two vectors is obtained by multiplying their magnitudes with the cosine of the angle between them. The scalar product of orthogonal vectors vanishes; the scalar product of antiparallel vectors is negative.
+
+The vector product of two vectors is a vector perpendicular to both of them. Its magnitude is obtained by multiplying their magnitudes by the sine of the angle between them. The direction of the vector product can be determined by the corkscrew right-hand rule. The vector product of two either parallel or antiparallel vectors vanishes. The magnitude of the vector product is largest for orthogonal vectors.
+
+The scalar product of vectors is used to find angles between vectors and in the definitions of derived scalar physical quantities such as work or energy.
+
+The cross product of vectors is used in definitions of derived vector physical quantities such as torque or magnetic force, and in describing rotations.
+
+Key Equations
+
+B→=αA→
+B=|α|A
+D→AD=D→AC+D→CD
+A→+B→=B→+A→
+(A→+B→)+C→=A→+(B→+C→)
+α1A→+α2A→=(α1+α2)A→
+A→=Axi^+Ayj^
+{Ax=xe−xb
+Ay=ye−yb
+A=Ax2+Ay2
+θA=tan−1(AyAx)
+{Ax=AcosθA
+Ay=AsinθA
+{x=rcosφ
+y=rsinφ
+A→=Axi^+Ayj^+Azk^
+Az=ze−zb
+A=Ax2+Ay2+Az2
+α(A→+B→)=αA→+αB→
+−A→=−Axi^−Ayj^−Azk^
+A→=B→⇔{Ax=Bx
+Ay=By
+Az=Bz
+{FRx=∑k=1NFkx=F1x+F2x+…+FNx
+FRy=∑k=1NFky=F1y+F2y+…+FNy
+FRz=∑k=1NFkz=F1z+F2z+…+FNz
+V^=V→V
+A→·B→=ABcosφ
+A→·B→=B→·A→
+A→·(B→+C→)=A→·B→+A→·C→
+A→·B→=AxBx+AyBy+AzBz
+cosφ=A→·B→AB
+i^·j^=j^·k^=k^·i^=0
+|A→×B→|=ABsinφ
+A→×B→=−B→×A→
+A→×(B→+C→)=A→×B→+A→×C→
+{i^×j^=+k^,
+j^×k^=+i^,
+k^×i^=+j^.
+A→×B→=(AyBz−AzBy)i^+(AzBx−AxBz)j^+(AxBy−AyBx)k^
+Conceptual Questions
+
+What is wrong with the following expressions? How can you correct them? (a) C=A→B→, (b) C→=A→B→, (c) C=A→×B→, (d) C=AB→, (e) C+2A→=B, (f) C→=A×B→, (g) A→·B→=A→×B→, (h) C→=2A→·B→, (i) C=A→/B→, and (j) C=A→/B.
+
+a. C=A→·B→, b. C→=A→×B→ or C→=A→−B→, c. C→=A→×B→, d. C→=AB→, e. C→+2A→=B→, f. C→=A→×B→, g. left side is a scalar and right side is a vector, h. C→=2A→×B→, i. C→=A→/B, j. C→=A→/B
+
+If the cross product of two vectors vanishes, what can you say about their directions?
+
+If the dot product of two vectors vanishes, what can you say about their directions?
+
+They are orthogonal.
+
+What is the dot product of a vector with the cross product that this vector has with another vector?
+
+Problems
+
+Assuming the +x-axis is horizontal to the right for the vectors in the following figure, find the following scalar products: (a) A→·C→, (b) A→·F→, (c) D→·C→, (d) A→·(F→+2C→), (e) i^·B→, (f) j^·B→, (g) (3i^−j^)·B→, and (h) B^·B→.
+
+Assuming the +x-axis is horizontal to the right for the vectors in the preceding figure, find (a) the component of vector A→ along vector C→, (b) the component of vector C→ along vector A→, (c) the component of vector i^ along vector F→, and (d) the component of vector F→ along vector i^.
+
+a. 0, b. 0, c. –0.866, d. –17.32
+
+Find the angle between vectors for (a) D→=(−3.0i^−4.0j^)m and A→=(−3.0i^+4.0j^)m and (b) D→=(2.0i^−4.0j^+k^)m and B→=(−2.0i^+3.0j^+2.0k^)m.
+
+Find the angles that vector D→=(2.0i^−4.0j^+k^)m makes with the x-, y-, and z- axes.
+θi=64.12°,θj=150.79°,θk=77.39°
+
+Show that the force vector D→=(2.0i^−4.0j^+k^)N is orthogonal to the force vector G→=(3.0i^+4.0j^+10.0k^)N.
+
+Assuming the +x-axis is horizontal to the right for the vectors in the previous figure, find the following vector products: (a) A→×C→, (b) A→×F→, (c) D→×C→, (d) A→×(F→+2C→), (e) i^×B→, (f) j^×B→, (g) (3i^−j^)×B→, and (h) B^×B→.
+
+a. −120k^, b. 0k^, c. –94k^, d. –240k^, e. 4.0k^, f. −3.0k^, g. 15k^, h. 0
+
+Find the cross product A→×C→ for (a) A→=2.0i^−4.0j^+k^ and C→=3.0i^+4.0j^+10.0k^, (b) A→=3.0i^+4.0j^+10.0k^ and C→=2.0i^−4.0j^+k^, (c) A→=−3.0i^−4.0j^ and C→=−3.0i^+4.0j^, and (d) C→=−2.0i^+3.0j^+2.0k^ and A→=−9.0j^.
+
+For the vectors in the earlier figure, find (a) (A→×F→)·D→, (b) (A→×F→)·(D→×B→), and (c) (A→·F→)(D→×B→).
+
+a. 0, b. 0, c. +–20,000k^
+
+(a) If A→×F→=B→×F→, can we conclude A→=B→? (b) If A→·F→=B→·F→, can we conclude A→=B→? (c) If FA→=B→F, can we conclude A→=B→? Why or why not?
+
+Additional Problems
+
+You fly 32.0km in a straight line in still air in the direction 35.0° south of west. (a) Find the distances you would have to fly due south and then due west to arrive at the same point. (b) Find the distances you would have to fly first in a direction 45.0° south of west and then in a direction 45.0° west of north. Note these are the components of the displacement along a different set of axes—namely, the one rotated by 45° with respect to the axes in (a).
+
+a. 18.4 km and 26.2 km, b. 31.5 km and 5.56 km
+
+Rectangular coordinates of a point are given by (2, y) and its polar coordinates are given by (r,π/6). Find y and r.
+
+If the polar coordinates of a point are (r,φ) and its rectangular coordinates are (x,y), determine the polar coordinates of the following points: (a) (−x, y), (b) (−2x, −2y), and (c) (3x, −3y).
+
+a. (r,π−φ), b. (2r,φ+2π), c. (3r,−φ)
+
+Vectors A→ and B→ have identical magnitudes of 5.0 units. Find the angle between them if A→+B→=52j^.
+
+Starting at the island of Moi in an unknown archipelago, a fishing boat makes a round trip with two stops at the islands of Noi and Poi. It sails from Moi for 4.76 nautical miles (nmi) in a direction 37° north of east to Noi. From Noi, it sails 69° west of north to Poi. On its return leg from Poi, it sails 28° east of south. What distance does the boat sail between Noi and Poi? What distance does it sail between Moi and Poi? Express your answer both in nautical miles and in kilometers. Note: 1 nmi = 1852 m.
+dPM=6.2nmi=11.4km,dNP=7.2nmi=13.3km
+
+An air traffic controller notices two signals from two planes on the radar monitor. One plane is at altitude 800 m and in a 19.2-km horizontal distance to the tower in a direction 25° south of west. The second plane is at altitude 1100 m and its horizontal distance is 17.6 km and 20° south of west. What is the distance between these planes?
+
+Show that when A→+B→=C→, then C2=A2+B2+2ABcosφ, where φ is the angle between vectors A→ and B→.
+
+proof
+
+Four force vectors each have the same magnitude f. What is the largest magnitude the resultant force vector may have when these forces are added? What is the smallest magnitude of the resultant? Make a graph of both situations.
+
+A skater glides along a circular path of radius 5.00 m in clockwise direction. When he coasts around one-half of the circle, starting from the west point, find (a) the magnitude of his displacement vector and (b) how far he actually skated. (c) What is the magnitude of his displacement vector when he skates all the way around the circle and comes back to the west point?
+
+a. 10.00 m, b. 5πm, c. 0
+
+A stubborn dog is being walked on a leash by its owner. At one point, the dog encounters an interesting scent at some spot on the ground and wants to explore it in detail, but the owner gets impatient and pulls on the leash with force F→=(98.0i^+132.0j^+32.0k^)N along the leash. (a) What is the magnitude of the pulling force? (b) What angle does the leash make with the vertical?
+
+If the velocity vector of a polar bear is u→=(−18.0i^−13.0j^)km/h, how fast and in what geographic direction is it heading? Here, i^ and j^ are directions to geographic east and north, respectively.
+
+22.2 km/h, 35.8° south of west
+
+Find the scalar components of three-dimensional vectors G→ and H→ in the following figure and write the vectors in vector component form in terms of the unit vectors of the axes.
+
+A diver explores a shallow reef off the coast of Belize. She initially swims 90.0 m north, makes a turn to the east and continues for 200.0 m, then follows a big grouper for 80.0 m in the direction 30° north of east. In the meantime, a local current displaces her by 150.0 m south. Assuming the current is no longer present, in what direction and how far should she now swim to come back to the point where she started?
+
+270 m, 4.2° north of west
+
+A force vector A→ has x- and y-components, respectively, of −8.80 units of force and 15.00 units of force. The x- and y-components of force vector B→ are, respectively, 13.20 units of force and −6.60 units of force. Find the components of force vector C→ that satisfies the vector equation A→−B→+3C→=0.
+
+Vectors A→ and B→ are two orthogonal vectors in the xy-plane and they have identical magnitudes. If A→=3.0i^+4.0j^, find B→.
+B→=−4.0i^+3.0j^ or B→=4.0i^−3.0j^
+
+For the three-dimensional vectors in the following figure, find (a) G→×H→, (b) |G→×H→|, and (c) G→·H→.
+
+Show that (B→×C→)·A→ is the volume of the parallelepiped, with edges formed by the three vectors in the following figure.
+
+proof
+
+Challenge Problems
+
+Vector B→ is 5.0 cm long and vector A→ is 4.0 cm long. Find the angle between these two vectors when |A→+B→|=3.0cm.
+
+What is the component of the force vector G→=(3.0i^+4.0j^+10.0k^)N along the force vector H→=(1.0i^+4.0j^)N?
+GH=19N/17≈4.6N
+
+The following figure shows a triangle formed by the three vectors A→, B→, and C→. If vector C→′ is drawn between the midpoints of vectors A→ and B→, show that C→′=C→/2.
+
+Distances between points in a plane do not change when a coordinate system is rotated. In other words, the magnitude of a vector is invariant under rotations of the coordinate system. Suppose a coordinate system S is rotated about its origin by angle φ to become a new coordinate system S′, as shown in the following figure. A point in a plane has coordinates (x, y) in S and coordinates (x′,y′) in S′.
+
+(a) Show that, during the transformation of rotation, the coordinates in S′ are expressed in terms of the coordinates in S by the following relations:
+
+(b) Show that the distance of point P to the origin is invariant under rotations of the coordinate system. Here, you have to show that
+
+(c) Show that the distance between points P and Q is invariant under rotations of the coordinate system. Here, you have to show that
+
+proof
+
+change in the order of operation introduces the minus sign
+a rule used to determine the d
+[truncated]

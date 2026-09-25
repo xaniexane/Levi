@@ -1,0 +1,85 @@
+# m00084
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Overloading operators
+
+Overloading operators
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify magic methods and describe their purpose.
+
+Develop overloaded arithmetic and comparison operators for user-defined classes.
+
+Magic methods and customizing
+Magic methods are special methods that perform actions for users, typically out of view of users. Magic methods are also called dunder methods, since the methods must start and end with double underscores (__). Ex: __init__() is a magic method used alongside __new__() to create a new instance and initialize attributes with a simple line like eng = Engineer(). A programmer can explicitly define a magic method in a user-defined class to customize the method's behavior.
+
+Customizing __str__() in a user-defined class, Engineer
+
+Magic methods
+
+Overloading arithmetic operators
+Operator overloading refers to customizing the function of a built-in operator. Arithmetic operators are commonly overloaded to allow for easy changes to instances of user-defined classes.
+
+Overloading __add__() for a user-defined class, Account
+
+Arithmetic operators and magic methods.
+
+Arithmetic operator (Operation)
+Magic method
+__add__(self, other)
+__sub__(self, other)
+__mul__(self, other)
+__truediv__(self, other)
+__mod__(self, other)
+__pow__(self, other)
+Arithmetic operator overloading
+
+Overloading comparison operators
+
+Comparison operators can also be overloaded like arithmetic operators.
+
+Comparison operators and magic methods.
+
+Comparison operator (Operation)
+Magic method
+__lt__(self, other)
+__gt__(self, other)
+__le__(self, other)
+__ge__(self, other)
+__eq__(self, other)
+__ne__(self, other)
+Overloading comparison operators for the Account class
+
+Code
+False
+ True
+ True
+Comparison operator overloading
+
+Consider the example above.
+
+Combining exercise logs
+
+The ExerciseLog class has two instance attributes: e_type, the type of exercise, and duration, the time spent exercising.
+
+Overload the + operator to combine two ExerciseLogs such that:
+
+If the exercise types are different, combine them with " and " in between. Else, use the same type and don't duplicate.
+
+Add durations together.
+
+Given input:
+
+The output is:
+
+Expanding the Account class
+
+Using isinstance() allows the programmer to define different behaviors depending on an object's type. The first parameter is the object, and the second parameter is the type or class. Ex: isinstance(my_var, int) returns True if my_var is an integer.
+
+Expand the existing Account example so that the addition operator can also be used to add an integer value to an Account's amount attribute.

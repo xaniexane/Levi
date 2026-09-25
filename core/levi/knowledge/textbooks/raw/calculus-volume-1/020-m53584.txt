@@ -1,0 +1,300 @@
+# m53584
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Derivatives of Inverse Functions
+
+Derivatives of Inverse Functions
+
+Calculate the derivative of an inverse function.
+
+Recognize the derivatives of the standard inverse trigonometric functions.
+
+In this section we explore the relationship between the derivative of a function and the derivative of its inverse. For functions whose derivatives we already know, we can use this relationship to find derivatives of inverses without having to use the limit definition of the derivative. In particular, we will apply the formula for derivatives of inverse functions to trigonometric functions. This formula may also be used to extend the power rule to rational exponents.
+
+The Derivative of an Inverse Function
+
+We begin by considering a function and its inverse. If f(x) is both invertible and differentiable, it seems reasonable that the inverse of f(x) is also differentiable. shows the relationship between a function f(x) and its inverse f−1(x). Look at the point (a,f−1(a)) on the graph of f−1(x) having a tangent line with a slope of (f−1)′(a)=pq. This point corresponds to a point (f−1(a),a) on the graph of f(x) having a tangent line with a slope of f′(f−1(a))=qp. Thus, if f−1(x) is differentiable at a, then it must be the case that
+
+We may also derive the formula for the derivative of the inverse by first recalling that x=f(f−1(x)). Then by differentiating both sides of this equation (using the chain rule on the right), we obtain
+
+Solving for (f−1)′(x), we obtain
+
+We summarize this result in the following theorem.
+
+Inverse Function Theorem
+
+Let f(x) be a function that is both invertible and differentiable. Let y=f−1(x) be the inverse of f(x). For all x satisfying f′(f−1(x))≠0,
+
+Alternatively, if y=g(x) is the inverse of f(x), then
+
+Applying the Inverse Function Theorem
+
+Use the inverse function theorem to find the derivative of g(x)=x+2x. Compare the resulting derivative to that obtained by differentiating the function directly.
+
+The inverse of g(x)=x+2x is f(x)=2x−1. Since g′(x)=1f′(g(x)), begin by finding f′(x). Thus,
+
+Finally,
+
+We can verify that this is the correct derivative by applying the quotient rule to g(x) to obtain
+
+Use the inverse function theorem to find the derivative of g(x)=1x+2. Compare the result obtained by differentiating g(x) directly.
+g′(x)=−1(x+2)2
+
+Hint
+
+Use the preceding example as a guide.
+
+Applying the Inverse Function Theorem
+
+Use the inverse function theorem to find the derivative of g(x)=x3.
+
+The function g(x)=x3 is the inverse of the function f(x)=x3. Since g′(x)=1f′(g(x)), begin by finding f′(x). Thus,
+
+Finally,
+
+Find the derivative of g(x)=x5 by applying the inverse function theorem.
+g(x)=15x−4/5
+
+Hint
+g(x) is the inverse of f(x)=x5.
+
+From the previous example, we see that we can use the inverse function theorem to extend the power rule to exponents of the form 1n, where n is a positive integer. This extension will ultimately allow us to differentiate xq, where q is any rational number.
+
+Extending the Power Rule to Rational Exponents
+
+The power rule may be extended to rational exponents. That is, if n is a positive integer, then
+
+Also, if n is a positive integer and m is an arbitrary integer, then
+
+Proof
+
+The function g(x)=x1/n is the inverse of the function f(x)=xn. Since g′(x)=1f′(g(x)), begin by finding f′(x). Thus,
+
+Finally,
+
+To differentiate xm/n we must rewrite it as (x1/n)m and apply the chain rule. Thus,
+
+□
+
+Applying the Power Rule to a Rational Power
+
+Find the equation of the line tangent to the graph of y=x2/3 at x=8.
+
+First find dydx and evaluate it at x=8. Since
+
+the slope of the tangent line to the graph at x=8 is 13.
+
+Substituting x=8 into the original function, we obtain y=4. Thus, the tangent line passes through the point (8,4). Substituting into the point-slope formula for a line, we obtain the tangent line
+
+Find the derivative of s(t)=2t+1.
+s′(t)=(2t+1)−1/2
+
+Hint
+
+Use the chain rule.
+
+Derivatives of Inverse Trigonometric Functions
+
+We now turn our attention to finding derivatives of inverse trigonometric functions. These derivatives will prove invaluable in the study of integration later in this text. The derivatives of inverse trigonometric functions are quite surprising in that their derivatives are actually algebraic functions. Previously, derivatives of algebraic functions have proven to be algebraic functions and derivatives of trigonometric functions have been shown to be trigonometric functions. Here, for the first time, we see that the derivative of a function need not be of the same type as the original function.
+
+Derivative of the Inverse Sine Function
+
+Use the inverse function theorem to find the derivative of g(x)=sin−1x.
+
+Since for x in the interval [−π2,π2],f(x)=sinx is the inverse of g(x)=sin−1x, begin by finding f′(x). Since
+
+we see that
+
+Analysis
+
+To see that cos(sin−1x)=1−x2, consider the following argument. Set sin−1x=θ. In this case, sinθ=x where −π2≤θ≤π2. We begin by considering the case where 0<θ<π2. Since θ is an acute angle, we may construct a right triangle having acute angle θ, a hypotenuse of length 1 and the side opposite angle θ having length x. From the Pythagorean theorem, the side adjacent to angle θ has length 1−x2. This triangle is shown in . Using the triangle, we see that cos(sin−1x)=cosθ=1−x2.
+
+In the case where −π2<θ<0, we make the observation that 0<−θ<π2 and hence
+
+Now if θ=π2 or θ=−π2,x=1 or x=−1, and since in either case cosθ=0 and 1−x2=0, we have
+
+Finally, if θ=0, x=0 and cosθ=1-0=1.
+
+Consequently, in all cases, cos(sin−1x)=1−x2.
+
+Applying the Chain Rule to the Inverse Sine Function
+
+Apply the chain rule to the formula derived in to find the derivative of h(x)=sin−1(g(x)) and use this result to find the derivative of h(x)=sin−1(2x3).
+
+Applying the chain rule to h(x)=sin−1(g(x)), we have
+
+Now let g(x)=2x3, so g′(x)=6x2. Substituting into the previous result, we obtain
+
+Use the inverse function theorem to find the derivative of g(x)=tan−1x.
+g′(x)=11+x2
+
+Hint
+
+The inverse of g(x) is f(x)=tanx. Use as a guide.
+
+The derivatives of the remaining inverse trigonometric functions may also be found by using the inverse function theorem. These formulas are provided in the following theorem.
+
+Derivatives of Inverse Trigonometric Functions
+
+Applying Differentiation Formulas to an Inverse Tangent Function
+
+Find the derivative of f(x)=tan−1(x2).
+
+Let g(x)=x2, so g′(x)=2x. Substituting into , we obtain
+
+Simplifying, we have
+
+Applying Differentiation Formulas to an Inverse Sine Function
+
+Find the derivative of h(x)=x2sin−1x.
+
+By applying the product rule, we have
+
+Find the derivative of h(x)=cos−1(3x−1).
+h′(x)=−36x−9x2
+
+Hint
+
+Use . with g(x)=3x−1
+
+Applying the Inverse Tangent Function
+
+The position of a particle at time t is given by s(t)=tan−1(1t) for t≥12. Find the velocity of the particle at time t=1.
+
+Begin by differentiating s(t) in order to find v(t). Thus,
+
+Simplifying, we have
+
+Thus, v(1)=−12.
+
+Find the equation of the line tangent to the graph of f(x)=sin−1x at x=0.
+y=x
+
+Hint
+f′(0) is the slope of the tangent line.
+
+Key Concepts
+
+The inverse function theorem allows us to compute derivatives of inverse functions without using the limit definition of the derivative.
+
+We can use the inverse function theorem to develop differentiation formulas for the inverse trigonometric functions.
+
+Key Equations
+ddxcsc−1x=−1|x|(x)2−1
+For the following exercises, use the graph of y=f(x) to
+
+sketch the graph of y=f−1(x), and
+
+use part a. to estimate (f−1)′(1).
+
+a.
+
+b. (f−1)′(1)~2
+
+a.
+
+b. y'=-x16-x2y'1=-116-1=-115
+
+For the following exercises, use the functions y=f(x) to find
+dfdx at x=a and
+x=f−1(y).
+
+Then use part b. to find df−1dy at y=f(a).
+f(x)=6x−1,x=−2
+f(x)=2x3−3,x=1
+
+a. 6, b. x=f−1(y)=(y+32)1/3, c. 16
+f(x)=9−x2,0≤x≤3,x=2
+f(x)=sinx,x=0
+
+a. 1, b. x=f−1(y)=sin−1y, c. 1
+
+For each of the following functions, find (f−1)′(a).
+f(x)=x2+3x+2,x≥-32,a=2
+f(x)=x3+2x+3,a=0
+15
+f(x)=x+x,a=2
+f(x)=x−2x,x<0,a=1
+13
+f(x)=x+sinx,a=0
+f(x)=tanx+3x2,a=0; 0 < x < π/2
+1
+
+For each of the given functions y=f(x),
+
+find the slope of the tangent line to its inverse function f−1 at the indicated point P, and
+find the equation of the tangent line to the graph of f−1 at the indicated point.
+
+find the slope of the tangent line to its inverse function f−1 at the indicated point P, and
+
+find the equation of the tangent line to the graph of f−1 at the indicated point.
+f(x)=41+x2,P(2,1)
+f(x)=x−4,P(2,8)
+
+a. 4, b. y=4x
+f(x)=(x3+1)4,P(16,1)
+f(x)=−x3−x+2,P(−8,2)
+
+a. −113, b. y=−113x+1813
+f(x)=x5+3x3−4x−8,P(−8,1)
+
+For the following exercises, find dydx for the given function.
+y=sin−1(x2)
+2x1−x4
+y=cos−1(x)
+y=sec−1(1x)
+−11−x2
+y=csc−1x
+y=(1+tan−1x)3
+3(1+tan−1x)21+x2
+y=cos−1(2x)·sin−1(2x)
+y=1tan−1(x)
+−1(1+x2)(tan−1x)2
+y=sec−1(−x)
+y=cot−14−x2
+x(5−x2)4−x2
+y=x·csc−1x
+
+For the following exercises, use the given values to find (f−1)′(a).
+f(π)=0,f′(π)=−1,a=0
+−1
+f(6)=2,f′(6)=13,a=2
+f(13)=−8,f′(13)=2,a=−8
+12
+f(3)=12,f′(3)=23,a=12
+f(1)=−3,f′(1)=10,a=−3
+110
+f(1)=0,f′(1)=−2,a=0
+[T] The position of a moving hockey puck after t seconds is s(t)=tan−1t where s is in meters.
+
+Find the velocity of the hockey puck at any time t.
+
+Find the acceleration of the puck at any time t.
+
+Evaluate a. and b. for t=2,4, and 6 seconds.
+
+What conclusion can be drawn from the results in c.?
+
+a. v(t)=11+t2 b. a(t)=−2t(1+t2)2 c. (a)0.2,0.06,0.03;(b)−0.16,−0.028,−0.0088 d. The hockey puck is decelerating/slowing down at 2, 4, and 6 seconds.
+[T] A building that is 225 feet tall casts a shadow of various lengths x as the day goes by. An angle of elevation θ is formed by lines from the top and bottom of the building to the tip of the shadow, as seen in the following figure. Find the rate of change of the angle of elevation dθdx when x=272 feet.
+[T] A pole stands 75 feet tall. An angle θ is formed when wires of various lengths of x feet are attached from the ground to the top of the pole, as shown in the following figure. Find the rate of change of the angle dθdx when a wire of length 90 feet is attached.
+−0.0168 radians per foot
+[T] A television camera at ground level is 2000 feet away from the launching pad of a space rocket that is set to take off vertically, as seen in the following figure. The angle of elevation of the camera can be found by θ=tan−1(x2000), where x is the height of the rocket. Find the rate of change of the angle of elevation after launch when the camera and the rocket are 5000 feet apart.
+[T] A local movie theater with a 30-foot-high screen that is 10 feet above a person’s eye level when seated has a viewing angle θ (in radians) given by θ=cot−1x40−cot−1x10,
+
+where x is the distance in feet away from the movie screen that the person is sitting, as shown in the following figure.
+
+Find dθdx.
+
+Evaluate dθdx for x=5,10,15, and 20.
+
+Interpret the results in b..
+
+Evaluate dθdx for x=25,30,35, and 40
+
+Interpret the results in d. At what distance x should the person sit to maximize his or her viewing angle?
+
+a. dθdx=10100+x2−401600+x2 b. 18325,9340,424745,0 c. As a person moves farther away from the screen, the viewing angle is increasing, which implies that as he or she moves farther away, his or her screen vision is widening. d. −5412905,−3500,−19829945,−91360 e. As the person moves beyond 20 feet from the screen, the viewing angle is decreasing. The optimal distance the person should stand for maximizing the viewing angle is 20 feet.

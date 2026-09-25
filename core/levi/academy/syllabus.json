@@ -1,0 +1,1764 @@
+{
+ "program": "LEVI Boot Camp — 30-day, 24/7 defensive analyst, platform intelligence, and LEVI domain mastery program",
+ "days": 30,
+ "blocks_per_day": 4,
+ "sessions_total": 120,
+ "block_map": {
+  "1": "A",
+  "2": "B",
+  "3": "C",
+  "4": "S"
+ },
+ "track_names": {
+  "A": "Defensive Security Analyst",
+  "B": "Platform Intelligence",
+  "C": "LEVI Domain Mastery",
+  "S": "Synthesis Sparring (cross-track)"
+ },
+ "track_boundaries": {
+  "A": "Defensive-only. Detection, analysis, hardening. No offensive instruction content, ever.",
+  "B": "Public sources only. Original LEVI synthesis, never copied text.",
+  "C": "Operate LEVI's own systems. Advisory-only where money or publishing is involved.",
+  "S": "Cross-track practicals. Inherits the strictest boundary of every track involved (defensive-only for security content)."
+ },
+ "weeks": [
+  {
+   "week": 1,
+   "days": [
+    1,
+    7
+   ],
+   "phase": "Foundations",
+   "note": "Core vocabulary and mental models. Every later lesson assumes this week's concepts; the runner reads the journal so teaching compounds instead of repeating."
+  },
+  {
+   "week": 2,
+   "days": [
+    8,
+    14
+   ],
+   "phase": "Intermediate Methods",
+   "note": "Working methods: engineering detections, tuning, hunting with structure, consuming intel, operating LEVI's subsystems for real."
+  },
+  {
+   "week": 3,
+   "days": [
+    15,
+    21
+   ],
+   "phase": "Advanced Application",
+   "note": "Harder, longer-horizon work: advanced hunts, DFIR, cross-domain orchestration, platform teardowns with investment-grade depth."
+  },
+  {
+   "week": 4,
+   "days": [
+    22,
+    30
+   ],
+   "phase": "Mastery + Synthesis",
+   "note": "Capstones, war-games, and honest self-assessment. Ends with Session 120: cross-track graduation assessment and a brain retrain."
+  }
+ ],
+ "tracks": {
+  "A": {
+   "name": "Defensive Security Analyst",
+   "days": {
+    "1": {
+     "title": "The Defender's Map",
+     "objectives": [
+      "Use ATT&CK as a defensive coverage map, not an attacker menu",
+      "Name the D3FEND countermeasure families that pair with common techniques",
+      "Run the evidence-first analyst loop: observe, hypothesize, verify"
+     ],
+     "key_questions": [
+      "What does ATT&CK give a defender that a technique list alone does not?",
+      "How does D3FEND complement ATT&CK?",
+      "What makes evidence 'first' in the analyst loop?"
+     ],
+     "exercise_type": "coverage-map"
+    },
+    "2": {
+     "title": "Telemetry: What Defenders Can See",
+     "objectives": [
+      "Inventory the major telemetry sources: endpoint, network, identity, cloud",
+      "Explain what each source can and cannot prove",
+      "Choose the right source for a given investigative question"
+     ],
+     "key_questions": [
+      "Which telemetry answers 'what ran on this host'?",
+      "What can network telemetry prove that endpoint telemetry cannot?",
+      "Why is identity telemetry the fastest-growing blind spot?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "3": {
+     "title": "The Detection Lifecycle",
+     "objectives": [
+      "Walk a detection from idea to draft to test to production to tune",
+      "Define what 'production-ready' means for a detection",
+      "Explain detection debt and how it accumulates"
+     ],
+     "key_questions": [
+      "What are the stages of the detection lifecycle?",
+      "When is a detection ready for production?",
+      "What is detection debt?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "4": {
+     "title": "Sigma: Detections as Code",
+     "objectives": [
+      "Read and write Sigma rule structure: logsource, detection, condition",
+      "Explain why vendor-agnostic rules reduce lock-in",
+      "Convert a hunting idea into a Sigma draft"
+     ],
+     "key_questions": [
+      "What are the three required parts of a Sigma rule?",
+      "Why does a vendor-agnostic format matter?",
+      "What does the condition field control?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "5": {
+     "title": "Alert Triage Under Load",
+     "objectives": [
+      "Prioritize alerts by severity, fidelity, and asset value",
+      "Run a triage queue without dropping criticals",
+      "Write triage notes another analyst can act on"
+     ],
+     "key_questions": [
+      "What three factors set triage priority?",
+      "How do you avoid alert fatigue without missing real incidents?",
+      "What belongs in a triage note?"
+     ],
+     "exercise_type": "triage"
+    },
+    "6": {
+     "title": "Documentation That Holds Up",
+     "objectives": [
+      "Write incident notes with timestamps, sources, and confidence",
+      "Maintain chain of custody for digital evidence",
+      "Produce a report a non-technical reader can follow"
+     ],
+     "key_questions": [
+      "What three things must every incident note carry?",
+      "What is chain of custody and why does it matter?",
+      "How do you write for non-technical readers without losing accuracy?"
+     ],
+     "exercise_type": "intel-brief"
+    },
+    "7": {
+     "title": "Week 1 Review: Coverage Drill",
+     "objectives": [
+      "Map the week's concepts onto defensive coverage",
+      "Identify your own weakest area from the week",
+      "Set week-2 learning targets"
+     ],
+     "key_questions": [
+      "Which week-1 concept maps to which defensive layer?",
+      "Where is your coverage thinnest?",
+      "What will you do differently in week 2?"
+     ],
+     "exercise_type": "coverage-map"
+    },
+    "8": {
+     "title": "Detection Engineering, Deep",
+     "objectives": [
+      "Design high-fidelity detections from behavior, not signatures",
+      "Select log sources that maximize signal",
+      "Write detection logic that survives attacker variation"
+     ],
+     "key_questions": [
+      "Why do behavior-based detections outlast signature-based ones?",
+      "How do you choose log sources for a detection?",
+      "What makes detection logic brittle?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "9": {
+     "title": "Killing False Positives",
+     "objectives": [
+      "Baseline normal before tuning anything",
+      "Apply allowlisting without blinding the detection",
+      "Measure precision and tune iteratively"
+     ],
+     "key_questions": [
+      "Why must baselining precede tuning?",
+      "When does allowlisting become dangerous?",
+      "How do you measure whether tuning worked?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "10": {
+     "title": "YARA for Defenders",
+     "objectives": [
+      "Explain what YARA identifies and where defenders use it",
+      "Read a YARA rule's strings and condition sections",
+      "Apply YARA in triage and hunting workflows"
+     ],
+     "key_questions": [
+      "What is YARA best used for by defenders?",
+      "What do the strings and condition sections do?",
+      "Where does YARA fit in a hunt?"
+     ],
+     "exercise_type": "hunt-hypothesis"
+    },
+    "11": {
+     "title": "Consuming Threat Intelligence",
+     "objectives": [
+      "Distinguish strategic, operational, and tactical intel",
+      "Evaluate an intel report's relevance to your environment",
+      "Turn an indicator list into defensive action"
+     ],
+     "key_questions": [
+      "What are the three levels of threat intel?",
+      "How do you judge an intel report's relevance?",
+      "What do you do with an indicator feed?"
+     ],
+     "exercise_type": "intel-brief"
+    },
+    "12": {
+     "title": "Hunt Hypotheses That Falsify",
+     "objectives": [
+      "Write a falsifiable hunt hypothesis",
+      "Scope a hunt so it finishes instead of sprawling",
+      "Define what evidence would disprove the hypothesis"
+     ],
+     "key_questions": [
+      "What makes a hunt hypothesis falsifiable?",
+      "How does scoping bound a hunt?",
+      "What evidence would disprove your hypothesis?"
+     ],
+     "exercise_type": "hunt-hypothesis"
+    },
+    "13": {
+     "title": "Baselining the Normal",
+     "objectives": [
+      "Build a behavioral baseline for a system or user group",
+      "Spot deviations worth investigating",
+      "Document baselines so hunts are repeatable"
+     ],
+     "key_questions": [
+      "Why is 'normal' the prerequisite for 'suspicious'?",
+      "How do you baseline without drowning in data?",
+      "What makes a baseline reusable?"
+     ],
+     "exercise_type": "hunt-hypothesis"
+    },
+    "14": {
+     "title": "SIEM Workflow Design",
+     "objectives": [
+      "Design a detection-to-triage queue with SLAs",
+      "Define escalation criteria",
+      "Balance automation with analyst judgment"
+     ],
+     "key_questions": [
+      "What belongs in a SIEM triage queue?",
+      "When does an alert escalate?",
+      "Where should automation stop and judgment start?"
+     ],
+     "exercise_type": "triage"
+    },
+    "15": {
+     "title": "Advanced Threat Hunting",
+     "objectives": [
+      "Chain multiple hypotheses across attack stages",
+      "Hunt without alerts using raw telemetry",
+      "Document hunts for detection-engineering handoff"
+     ],
+     "key_questions": [
+      "How do multi-stage hunts differ from single hunts?",
+      "What does alert-free hunting require?",
+      "How does a hunt become a detection?"
+     ],
+     "exercise_type": "hunt-hypothesis"
+    },
+    "16": {
+     "title": "DFIR: The Responder's Playbook",
+     "objectives": [
+      "Walk the NIST incident lifecycle from preparation to recovery",
+      "Run response with evidence integrity intact",
+      "Make the first 30 minutes of an incident count"
+     ],
+     "key_questions": [
+      "What are the incident response phases?",
+      "What does evidence integrity require during response?",
+      "What matters most in the first 30 minutes?"
+     ],
+     "exercise_type": "triage"
+    },
+    "17": {
+     "title": "Timeline Analysis",
+     "objectives": [
+      "Build a super-timeline from multiple sources",
+      "Correlate events across hosts",
+      "Read attacker narrative from a timeline"
+     ],
+     "key_questions": [
+      "What is a super-timeline?",
+      "How do you correlate events across hosts?",
+      "How do you read attacker narrative from timestamps?"
+     ],
+     "exercise_type": "triage"
+    },
+    "18": {
+     "title": "Scoping an Incident",
+     "objectives": [
+      "Determine blast radius from evidence, not fear",
+      "Decide what is in-scope versus out-of-scope",
+      "Communicate scope with explicit confidence levels"
+     ],
+     "key_questions": [
+      "How do you determine blast radius?",
+      "What separates in-scope from out-of-scope?",
+      "How do you state scope honestly?"
+     ],
+     "exercise_type": "triage"
+    },
+    "19": {
+     "title": "Containment Decisions",
+     "objectives": [
+      "Weigh isolate-now versus observe-longer trade-offs",
+      "Choose containment proportionate to confidence",
+      "Plan eradication before containing"
+     ],
+     "key_questions": [
+      "When do you isolate immediately versus keep observing?",
+      "What makes containment proportionate?",
+      "Why plan eradication before containment?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "20": {
+     "title": "Detection as Code",
+     "objectives": [
+      "Version detections in git like software",
+      "Test detections before deployment",
+      "Roll back a bad detection safely"
+     ],
+     "key_questions": [
+      "Why version detections like software?",
+      "What should detection testing check?",
+      "How do you roll back safely?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "21": {
+     "title": "Validating Detections Safely",
+     "objectives": [
+      "Explain defensive validation versus offensive testing",
+      "Run atomic, scoped validation checks",
+      "Measure detection coverage honestly"
+     ],
+     "key_questions": [
+      "What is defensive validation?",
+      "How do you validate without risking production?",
+      "How do you measure coverage honestly?"
+     ],
+     "exercise_type": "detection-sketch"
+    },
+    "22": {
+     "title": "The Intelligence Cycle",
+     "objectives": [
+      "Run direction, collection, analysis, dissemination",
+      "Write collection requirements that can actually be answered",
+      "Disseminate intel the business will use"
+     ],
+     "key_questions": [
+      "What are the intelligence cycle phases?",
+      "What makes a good collection requirement?",
+      "How do you write intel people act on?"
+     ],
+     "exercise_type": "intel-brief"
+    },
+    "23": {
+     "title": "Vulnerability Management",
+     "objectives": [
+      "Prioritize beyond CVSS: exploitability and asset value",
+      "Design a remediation SLA",
+      "Track vulnerability metrics that drive action"
+     ],
+     "key_questions": [
+      "Why is CVSS alone insufficient for prioritization?",
+      "How do you set remediation SLAs?",
+      "Which vulnerability metrics change behavior?"
+     ],
+     "exercise_type": "hardening-check"
+    },
+    "24": {
+     "title": "Hardening Programs",
+     "objectives": [
+      "Apply CIS-style baselines proportionately",
+      "Verify hardening with checks, not assumptions",
+      "Handle exceptions without eroding the baseline"
+     ],
+     "key_questions": [
+      "What is a hardening baseline?",
+      "How do you verify instead of assume?",
+      "How do you handle exceptions safely?"
+     ],
+     "exercise_type": "hardening-check"
+    },
+    "25": {
+     "title": "Metrics That Matter",
+     "objectives": [
+      "Choose MTTD, MTTR, coverage, and precision metrics",
+      "Avoid vanity metrics",
+      "Present security metrics to leadership"
+     ],
+     "key_questions": [
+      "Which metrics reflect real defensive capability?",
+      "What makes a metric vanity?",
+      "How do you brief leadership?"
+     ],
+     "exercise_type": "coverage-map"
+    },
+    "26": {
+     "title": "Supporting Incident Command",
+     "objectives": [
+      "Describe incident command roles",
+      "Communicate upward without causing panic",
+      "Keep decision logs during incidents"
+     ],
+     "key_questions": [
+      "What are the key incident command roles?",
+      "How do you brief executives mid-incident?",
+      "Why keep a decision log?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "27": {
+     "title": "Purple-Team Thinking (Defensive)",
+     "objectives": [
+      "Extract defensive lessons from exercises",
+      "Turn findings into detection and hardening backlogs",
+      "Run blameless reviews"
+     ],
+     "key_questions": [
+      "What does the defensive side gain from joint exercises?",
+      "How do findings become backlog?",
+      "What makes a review blameless?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "28": {
+     "title": "Designing Tabletops",
+     "objectives": [
+      "Design scenarios that test decisions, not trivia",
+      "Facilitate without leading the room",
+      "Capture action items that actually get done"
+     ],
+     "key_questions": [
+      "What makes a tabletop scenario good?",
+      "How do you facilitate neutrally?",
+      "How do tabletops produce real improvements?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "29": {
+     "title": "Capstone: Full Incident",
+     "objectives": [
+      "Run a complete incident end-to-end",
+      "Make scope, containment, and communications calls",
+      "Write the after-action report"
+     ],
+     "key_questions": [
+      "How do the phases connect in a real incident?",
+      "Which decisions were hardest and why?",
+      "What goes in the after-action report?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "30": {
+     "title": "Track A Graduation Review",
+     "objectives": [
+      "Demonstrate cumulative defensive competence",
+      "Identify remaining gaps honestly",
+      "Commit to a post-academy practice plan"
+     ],
+     "key_questions": [
+      "What can you now do that you could not on day 1?",
+      "Where are you still weak?",
+      "What is your 90-day practice plan?"
+     ],
+     "exercise_type": "capstone"
+    }
+   }
+  },
+  "B": {
+   "name": "Platform Intelligence",
+   "days": {
+    "1": {
+     "title": "How Assistant Platforms Operate",
+     "objectives": [
+      "Compare interaction models: chat, agent, ambient",
+      "Explain capability patterns that recur across platforms",
+      "Identify what users actually value and pay for"
+     ],
+     "key_questions": [
+      "What are the main assistant interaction models?",
+      "Which capability patterns recur across platforms?",
+      "What do users value most?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "2": {
+     "title": "Tool-Use Architectures",
+     "objectives": [
+      "Explain function calling and tool loops",
+      "Compare planning approaches across platforms",
+      "Identify safety patterns: confirmations, scopes, receipts"
+     ],
+     "key_questions": [
+      "How does tool use work in agents?",
+      "How do platforms plan multi-step tasks?",
+      "What safety patterns exist?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "3": {
+     "title": "Memory in Agent Platforms",
+     "objectives": [
+      "Distinguish session, working, and long-term memory",
+      "Compare memory architectures across platforms",
+      "Explain provenance and forgetting"
+     ],
+     "key_questions": [
+      "What are the layers of agent memory?",
+      "How do platforms handle long-term memory?",
+      "Why does provenance matter?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "4": {
+     "title": "Delegation and Scheduling Patterns",
+     "objectives": [
+      "Compare subagent and orchestration models",
+      "Explain scheduled autonomous work",
+      "Identify where humans must stay in the loop"
+     ],
+     "key_questions": [
+      "How do platforms delegate to subagents?",
+      "How is scheduled autonomy structured?",
+      "Where must humans stay in the loop?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "5": {
+     "title": "UX Patterns Worth Adopting",
+     "objectives": [
+      "Deconstruct streaming, transparency, and control UX",
+      "Separate information from manipulation",
+      "Name patterns LEVI should adopt"
+     ],
+     "key_questions": [
+      "Which UX patterns build trust?",
+      "How do you separate information from pressure?",
+      "What should LEVI adopt?"
+     ],
+     "exercise_type": "ux-deconstruction"
+    },
+    "6": {
+     "title": "Failure Modes of AI Platforms",
+     "objectives": [
+      "Catalog hallucination, over-autonomy, and injection failures",
+      "Explain how platforms mitigate each",
+      "Design honest failure UX"
+     ],
+     "key_questions": [
+      "What are the top AI platform failure modes?",
+      "How do leading platforms mitigate them?",
+      "What does honest failure UX look like?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "7": {
+     "title": "Week 1 Synthesis: The LEVI Difference",
+     "objectives": [
+      "Summarize adopt, adapt, and deliberately-different across week 1",
+      "Write LEVI's platform differentiation",
+      "Defend the differences with reasons"
+     ],
+     "key_questions": [
+      "What will LEVI adopt from AI platforms?",
+      "What will it adapt?",
+      "What will it deliberately do differently, and why?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "8": {
+     "title": "SIEM Platforms: Detection Workflows",
+     "objectives": [
+      "Map how SIEMs structure detection to triage",
+      "Compare rule management across products",
+      "Extract workflow ideas for LEVI"
+     ],
+     "key_questions": [
+      "How do SIEMs organize detection workflows?",
+      "How do products differ in rule management?",
+      "What can LEVI borrow?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "9": {
+     "title": "SOAR: Automation with Guardrails",
+     "objectives": [
+      "Explain playbook automation models",
+      "Identify where SOAR keeps humans in the loop",
+      "Compare low-code versus code playbooks"
+     ],
+     "key_questions": [
+      "How do SOAR playbooks work?",
+      "Where is human judgment preserved?",
+      "Low-code versus code: what are the trade-offs?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "10": {
+     "title": "Bug Bounty Platforms",
+     "objectives": [
+      "Explain scope, triage, and reward mechanics",
+      "Compare the major bounty platform models",
+      "Extract trust and fairness patterns"
+     ],
+     "key_questions": [
+      "How do bounty platforms define scope?",
+      "How do triage and rewards work?",
+      "What builds researcher trust?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "11": {
+     "title": "EDR and XDR Platforms",
+     "objectives": [
+      "Explain endpoint telemetry product models",
+      "Compare detection versus response emphasis",
+      "Identify data-model patterns"
+     ],
+     "key_questions": [
+      "What do EDR and XDR platforms sell?",
+      "Detection versus response: where is the emphasis?",
+      "What data models recur?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "12": {
+     "title": "Threat Intel Platforms",
+     "objectives": [
+      "Explain intel sharing models",
+      "Describe exchange standards and formats",
+      "Evaluate trust in shared intel"
+     ],
+     "key_questions": [
+      "How is threat intel shared?",
+      "What standards enable exchange?",
+      "How do you trust shared intel?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "13": {
+     "title": "Detection Marketplaces",
+     "objectives": [
+      "Explain community rule sharing",
+      "Compare curation models",
+      "Assess quality signals for shared detections"
+     ],
+     "key_questions": [
+      "How are detections shared as a marketplace?",
+      "How is quality curated?",
+      "What signals indicate a good rule?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "14": {
+     "title": "Week 2 Synthesis",
+     "objectives": [
+      "Consolidate SecOps platform patterns",
+      "Write adopt, adapt, differ for the SOC domain",
+      "Prioritize what LEVI builds first"
+     ],
+     "key_questions": [
+      "What SecOps patterns matter most?",
+      "Adopt, adapt, differ for SOC tooling?",
+      "What should LEVI build first?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "15": {
+     "title": "Retail Trading UX",
+     "objectives": [
+      "Deconstruct portfolio dashboards and watchlists",
+      "Identify gamification and urgency manipulation",
+      "Separate useful clarity from pressure"
+     ],
+     "key_questions": [
+      "What makes trading UX clear?",
+      "Where does it manipulate the user?",
+      "How do you keep clarity without pressure?"
+     ],
+     "exercise_type": "ux-deconstruction"
+    },
+    "16": {
+     "title": "Presenting Signals Honestly",
+     "objectives": [
+      "Present confidence and provenance alongside signals",
+      "Avoid false precision",
+      "Design explicit 'I do not know' states"
+     ],
+     "key_questions": [
+      "How do you show confidence honestly?",
+      "What is false precision?",
+      "How do you design for uncertainty?"
+     ],
+     "exercise_type": "ux-deconstruction"
+    },
+    "17": {
+     "title": "Portfolio and Watchlist Views",
+     "objectives": [
+      "Explain information hierarchy in portfolio UX",
+      "Design progressive disclosure",
+      "Let users control detail depth"
+     ],
+     "key_questions": [
+      "What belongs at the top of a portfolio view?",
+      "How does progressive disclosure work?",
+      "How do users control detail?"
+     ],
+     "exercise_type": "ux-deconstruction"
+    },
+    "18": {
+     "title": "Market Data Platforms",
+     "objectives": [
+      "Explain feeds, latency tiers, and cost structures",
+      "Compare retail versus institutional data",
+      "Relate findings to LEVI's finance domain"
+     ],
+     "key_questions": [
+      "How do market data platforms tier their product?",
+      "Retail versus institutional: what differs?",
+      "What applies to LEVI finance?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "19": {
+     "title": "Fintech Trust UX",
+     "objectives": [
+      "Explain disclosures, compliance UX, and consent",
+      "Design trust without friction theater",
+      "Apply findings to advisory-only finance"
+     ],
+     "key_questions": [
+      "How do fintech apps build trust?",
+      "What is friction theater?",
+      "How does this apply to advisory-only tools?"
+     ],
+     "exercise_type": "ux-deconstruction"
+    },
+    "20": {
+     "title": "API Platform Patterns",
+     "objectives": [
+      "Explain docs, sandboxes, and versioning as product",
+      "Compare developer-experience leaders",
+      "Extract patterns for LEVI's own surfaces"
+     ],
+     "key_questions": [
+      "What makes API docs great?",
+      "How do platforms version without breaking trust?",
+      "What should LEVI copy?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "21": {
+     "title": "Week 3 Synthesis",
+     "objectives": [
+      "Consolidate fintech and market platform lessons",
+      "Write adopt, adapt, differ for finance UX",
+      "Set LEVI finance UX principles"
+     ],
+     "key_questions": [
+      "What are LEVI's finance UX principles?",
+      "Adopt, adapt, differ?",
+      "What will you never do in finance UX?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "22": {
+     "title": "Creator Platforms",
+     "objectives": [
+      "Explain content pipelines and monetization",
+      "Compare discovery models",
+      "Extract packaging and scheduling patterns"
+     ],
+     "key_questions": [
+      "How do creator platforms structure pipelines?",
+      "How does discovery work?",
+      "What applies to content operations?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "23": {
+     "title": "Distribution and Recommendation",
+     "objectives": [
+      "Explain feed and recommendation mechanics",
+      "Discuss feedback loops and their failure modes",
+      "Design healthy distribution"
+     ],
+     "key_questions": [
+      "How do recommendation systems work?",
+      "What are the failure modes?",
+      "What does healthy distribution look like?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "24": {
+     "title": "Community Platforms",
+     "objectives": [
+      "Explain moderation and trust models",
+      "Compare governance approaches",
+      "Extract safety patterns"
+     ],
+     "key_questions": [
+      "How do platforms moderate at scale?",
+      "What governance models exist?",
+      "What safety patterns transfer?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "25": {
+     "title": "Platform Business Models",
+     "objectives": [
+      "Explain how platforms capture value",
+      "Compare free-core versus paid-layer models",
+      "Relate to LEVI's economics: free to produce, valuable, profitable"
+     ],
+     "key_questions": [
+      "How do platforms make money?",
+      "What are the viable free-core models?",
+      "How does LEVI's economics compare?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "26": {
+     "title": "Mapping the Competitive Landscape",
+     "objectives": [
+      "Map competitors across the three tracks' domains",
+      "Identify white space",
+      "Write LEVI's moat thesis"
+     ],
+     "key_questions": [
+      "Who competes in each domain?",
+      "Where is the white space?",
+      "What is LEVI's moat?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "27": {
+     "title": "LEVI's Positioning",
+     "objectives": [
+      "Write a positioning statement per domain",
+      "Defend it against alternatives",
+      "Name what LEVI will not do"
+     ],
+     "key_questions": [
+      "How is LEVI positioned?",
+      "Why not the alternatives?",
+      "What will LEVI not do?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "28": {
+     "title": "Build versus Adopt Decisions",
+     "objectives": [
+      "Apply a build-versus-adopt framework",
+      "Estimate total cost honestly",
+      "Make three real decisions"
+     ],
+     "key_questions": [
+      "What framework guides build versus adopt?",
+      "How do you estimate total cost?",
+      "Which three decisions matter most?"
+     ],
+     "exercise_type": "comparison"
+    },
+    "29": {
+     "title": "Final Platform Teardown",
+     "objectives": [
+      "Tear down a chosen platform end-to-end",
+      "Produce the full adopt, adapt, differ brief",
+      "Present findings crisply"
+     ],
+     "key_questions": [
+      "What is the platform's core loop?",
+      "Adopt, adapt, differ?",
+      "What is the one insight that matters?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "30": {
+     "title": "Track B Graduation Synthesis",
+     "objectives": [
+      "Demonstrate platform-intelligence competence",
+      "Present the 30-day teardown portfolio",
+      "Commit to an ongoing platform watch"
+     ],
+     "key_questions": [
+      "What patterns do you now see everywhere?",
+      "What is your teardown portfolio?",
+      "How will you keep watching?"
+     ],
+     "exercise_type": "capstone"
+    }
+   }
+  },
+  "C": {
+   "name": "LEVI Domain Mastery",
+   "days": {
+    "1": {
+     "title": "The Agent Runtime",
+     "objectives": [
+      "Explain LEVI's tool registry and agentic loop",
+      "Run the loop's human-in-the-loop gate",
+      "Trace a tool call end-to-end"
+     ],
+     "key_questions": [
+      "How does the agentic loop work?",
+      "Where does human approval gate execution?",
+      "How do you trace a tool call?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "2": {
+     "title": "Skills and the Registry",
+     "objectives": [
+      "Explain skill categories and risk tags",
+      "Load a skill and inspect its contract",
+      "Describe when to create a new skill"
+     ],
+     "key_questions": [
+      "How are skills categorized?",
+      "What is a skill contract?",
+      "When should you create one?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "3": {
+     "title": "Scheduling and Automation",
+     "objectives": [
+      "Create a cron and a hook definition",
+      "Explain idempotency in scheduled work",
+      "Debug a missed run"
+     ],
+     "key_questions": [
+      "How do crons and hooks differ?",
+      "Why does idempotency matter?",
+      "How do you debug a missed run?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "4": {
+     "title": "Memory Systems",
+     "objectives": [
+      "Explain the memory store and provenance",
+      "Write and retrieve a memory",
+      "Apply the growth safety rails"
+     ],
+     "key_questions": [
+      "How is memory stored?",
+      "What is provenance?",
+      "What are the growth rails?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "5": {
+     "title": "Sessions and Chat",
+     "objectives": [
+      "Explain session persistence and summarization",
+      "Run a chat turn through the loop",
+      "Describe the context-compaction rule"
+     ],
+     "key_questions": [
+      "How do sessions persist?",
+      "What happens when context fills?",
+      "How does summarization preserve facts?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "6": {
+     "title": "Providers and References",
+     "objectives": [
+      "Explain the provider chain and the identity rule",
+      "Add a provider reference",
+      "State the references-not-sources doctrine"
+     ],
+     "key_questions": [
+      "How does provider selection work?",
+      "What is the identity rule?",
+      "Why references, not sources?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "7": {
+     "title": "Week 1 Drill",
+     "objectives": [
+      "Operate agent, skills, schedule, and memory together",
+      "Diagnose a broken automation",
+      "Document the fix"
+     ],
+     "key_questions": [
+      "How do the week-1 systems connect?",
+      "How do you diagnose automation failure?",
+      "What did you learn?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "8": {
+     "title": "The News Pipeline",
+     "objectives": [
+      "Explain ingest to dated corpus to query",
+      "Refresh and query the corpus",
+      "Explain why news stays out of training weights"
+     ],
+     "key_questions": [
+      "How does the news pipeline work?",
+      "How do you query the corpus?",
+      "Why is news excluded from training?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "9": {
+     "title": "Knowledge Bases",
+     "objectives": [
+      "Query the course and security indexes",
+      "Explain the 81-category security catalog",
+      "Add a knowledge entry correctly"
+     ],
+     "key_questions": [
+      "How are knowledge bases organized?",
+      "What does the security index cover?",
+      "How do you add entries?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "10": {
+     "title": "Demand Intelligence",
+     "objectives": [
+      "Explain five-factor scoring",
+      "Score a seeded signal",
+      "Defend the honesty guardrails"
+     ],
+     "key_questions": [
+      "What are the five factors?",
+      "How do you score a signal?",
+      "Why require a basis note?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "11": {
+     "title": "The Finance Domain",
+     "objectives": [
+      "Explain bars, indicators, and signals",
+      "Run scoring on synthetic bars",
+      "State the advisory-only boundary"
+     ],
+     "key_questions": [
+      "How do market signals work?",
+      "How do you score synthetic bars?",
+      "What is the advisory-only boundary?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "12": {
+     "title": "Bounty Recon Pipeline",
+     "objectives": [
+      "Explain scope-gated recon",
+      "Enroll a scope and run recon safely",
+      "Read findings and monitor changes"
+     ],
+     "key_questions": [
+      "How does scope gating work?",
+      "What are the recon stages?",
+      "How do you monitor for change?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "13": {
+     "title": "The Security Index",
+     "objectives": [
+      "Navigate the 81 categories",
+      "Show an attack profile",
+      "Explain the defensive-only boundary"
+     ],
+     "key_questions": [
+      "How is the index organized?",
+      "What is an attack profile?",
+      "Where is the defensive boundary?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "14": {
+     "title": "Week 2 Drill",
+     "objectives": [
+      "Chain news to demand to finance in one flow",
+      "Keep provenance across the chain",
+      "Present the result honestly"
+     ],
+     "key_questions": [
+      "How do intel domains connect?",
+      "How is provenance preserved?",
+      "What does honest presentation require?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "15": {
+     "title": "King Control Plane",
+     "objectives": [
+      "Explain the manuscript and social workflow",
+      "Run preview without posting",
+      "State the permission path"
+     ],
+     "key_questions": [
+      "How does the workflow gate publishing?",
+      "What does preview show?",
+      "Where is permission required?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "16": {
+     "title": "The Growth Loop",
+     "objectives": [
+      "Explain harvest, reflect, consolidate, journal",
+      "Run a dry-run cycle",
+      "Read the baby book"
+     ],
+     "key_questions": [
+      "What are the growth stages?",
+      "How does consolidation stay safe?",
+      "What is the journal for?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "17": {
+     "title": "Lab and Evals",
+     "objectives": [
+      "Explain clean-room experiments",
+      "Run a lab scenario",
+      "Read a model card honestly"
+     ],
+     "key_questions": [
+      "What makes an experiment clean-room?",
+      "How do you run a scenario?",
+      "How do you read a model card?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "18": {
+     "title": "Plugins and MCP",
+     "objectives": [
+      "Explain the plugin contract",
+      "Add an MCP reference",
+      "List and inspect plugins"
+     ],
+     "key_questions": [
+      "What is the plugin contract?",
+      "How do references work?",
+      "How do you inspect plugins?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "19": {
+     "title": "Operating the Daemon",
+     "objectives": [
+      "Explain the always-on OS layer",
+      "Check daemon health",
+      "Recover from a stuck service"
+     ],
+     "key_questions": [
+      "What does the daemon do?",
+      "How do you check health?",
+      "How do you recover?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "20": {
+     "title": "Hardening LEVI Itself",
+     "objectives": [
+      "Review a module defensively",
+      "Apply least privilege",
+      "Write a hardening checklist"
+     ],
+     "key_questions": [
+      "How do you review your own modules?",
+      "Where is least privilege violated?",
+      "What goes on the checklist?"
+     ],
+     "exercise_type": "design-review"
+    },
+    "21": {
+     "title": "Week 3 Drill",
+     "objectives": [
+      "Operate King, growth, lab, and plugins together",
+      "Trace a cross-module failure",
+      "Write the incident note"
+     ],
+     "key_questions": [
+      "How do week-3 systems interact?",
+      "How do you trace cross-module failure?",
+      "What goes in the note?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "22": {
+     "title": "Cross-Domain Orchestration",
+     "objectives": [
+      "Design a multi-domain workflow",
+      "Keep each domain's guardrails intact",
+      "Produce a unified receipt"
+     ],
+     "key_questions": [
+      "How do you orchestrate across domains?",
+      "How are guardrails preserved?",
+      "What is a unified receipt?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "23": {
+     "title": "Decision Traces",
+     "objectives": [
+      "Explain provenance from intent to receipt",
+      "Reconstruct a decision from traces",
+      "Audit a past automation"
+     ],
+     "key_questions": [
+      "What is a decision trace?",
+      "How do you reconstruct one?",
+      "How do you audit automation?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "24": {
+     "title": "Failure Composting",
+     "objectives": [
+      "Explain failure composting: turning failure into lessons",
+      "Turn a failure into a lesson",
+      "Keep the compost honest"
+     ],
+     "key_questions": [
+      "How does failure become compost?",
+      "What makes composting honest?",
+      "When is a failure truly composted?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "25": {
+     "title": "Performance Tuning",
+     "objectives": [
+      "Measure a slow path",
+      "Apply one principled optimization",
+      "Verify no behavior change"
+     ],
+     "key_questions": [
+      "How do you find the slow path?",
+      "What is a principled optimization?",
+      "How do you verify safety?"
+     ],
+     "exercise_type": "module-drill"
+    },
+    "26": {
+     "title": "The Operator's Handbook",
+     "objectives": [
+      "Write runbook entries",
+      "Define on-call discipline",
+      "Document escalation paths"
+     ],
+     "key_questions": [
+      "What goes in a runbook?",
+      "What is on-call discipline?",
+      "When do you escalate?"
+     ],
+     "exercise_type": "design-review"
+    },
+    "27": {
+     "title": "Policy and Safety Rails",
+     "objectives": [
+      "Enumerate LEVI's binding policies",
+      "Test a rail with a probe",
+      "Explain fail-closed design"
+     ],
+     "key_questions": [
+      "What policies bind LEVI?",
+      "How do you test a rail?",
+      "What does fail-closed mean?"
+     ],
+     "exercise_type": "design-review"
+    },
+    "28": {
+     "title": "Final Systems Review",
+     "objectives": [
+      "Map every major subsystem",
+      "Name each subsystem's failure mode",
+      "Prioritize hardening work"
+     ],
+     "key_questions": [
+      "What are the major subsystems?",
+      "What breaks each?",
+      "What do you harden first?"
+     ],
+     "exercise_type": "orchestration-drill"
+    },
+    "29": {
+     "title": "Pre-Graduation Integration",
+     "objectives": [
+      "Run a full day of LEVI operations",
+      "Keep all guardrails green",
+      "Write the operations report"
+     ],
+     "key_questions": [
+      "Can you operate LEVI for a full day?",
+      "Were guardrails ever bypassed?",
+      "What does the report show?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "30": {
+     "title": "Track C Graduation",
+     "objectives": [
+      "Demonstrate operator competence",
+      "Present the systems portfolio",
+      "Take the operator's oath: honest limits"
+     ],
+     "key_questions": [
+      "What can you operate?",
+      "What is your portfolio?",
+      "What are your honest limits?"
+     ],
+     "exercise_type": "capstone"
+    }
+   }
+  },
+  "S": {
+   "name": "Synthesis Sparring (cross-track)",
+   "days": {
+    "1": {
+     "title": "Sparring: First SOC Shift",
+     "objectives": [
+      "Triage a simulated queue across all three tracks",
+      "Use LEVI modules in the response",
+      "Write the shift report"
+     ],
+     "key_questions": [
+      "How do you prioritize the queue?",
+      "Which LEVI tools helped?",
+      "What goes in the shift report?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "2": {
+     "title": "Sparring: Hunt Exercise",
+     "objectives": [
+      "Execute a scoped hunt end-to-end",
+      "Falsify or confirm the hypothesis",
+      "Hand off a detection"
+     ],
+     "key_questions": [
+      "What was the hypothesis?",
+      "What did the evidence show?",
+      "What detection came out of it?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "3": {
+     "title": "Sparring: Teardown Drill",
+     "objectives": [
+      "Tear down a platform in 30 minutes",
+      "Extract adopt, adapt, differ",
+      "Present in 5 minutes"
+     ],
+     "key_questions": [
+      "What is the platform's core loop?",
+      "Adopt, adapt, differ?",
+      "What is the headline insight?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "4": {
+     "title": "Sparring: Detection Duel",
+     "objectives": [
+      "Write a detection",
+      "Critique a partner detection",
+      "Merge the best of both"
+     ],
+     "key_questions": [
+      "What does your detection catch?",
+      "What is weak in the partner's?",
+      "What did the merge improve?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "5": {
+     "title": "Sparring: Triage Race",
+     "objectives": [
+      "Triage 10 alerts in 20 minutes",
+      "Defend your priority order",
+      "Identify what you deferred and why"
+     ],
+     "key_questions": [
+      "What was your priority order?",
+      "Why?",
+      "What did you defer?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "6": {
+     "title": "Sparring: Intel Brief",
+     "objectives": [
+      "Fuse sources into a one-page brief",
+      "Brief a decision-maker",
+      "Handle a hard question"
+     ],
+     "key_questions": [
+      "What is the bottom line?",
+      "What is the evidence?",
+      "How did you handle the hard question?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "7": {
+     "title": "Sparring: Week 1 Review",
+     "objectives": [
+      "Replay the week's hardest moments",
+      "Name what broke and why",
+      "Set week-2 sparring goals"
+     ],
+     "key_questions": [
+      "What was hardest?",
+      "What broke?",
+      "What are your week-2 goals?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "8": {
+     "title": "Sparring: Lateral Movement Hunt",
+     "objectives": [
+      "Hunt across hosts for movement",
+      "Correlate identity and endpoint telemetry",
+      "Scope the findings"
+     ],
+     "key_questions": [
+      "Where did movement occur?",
+      "How did you correlate?",
+      "What is the scope?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "9": {
+     "title": "Sparring: DFIR Tabletop",
+     "objectives": [
+      "Run a tabletop as incident lead",
+      "Make containment calls",
+      "Capture action items"
+     ],
+     "key_questions": [
+      "What decisions did you make?",
+      "Why?",
+      "What are the action items?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "10": {
+     "title": "Sparring: Bounty Platform Teardown",
+     "objectives": [
+      "Tear down bounty platform mechanics",
+      "Design a fair triage queue",
+      "Present the trust model"
+     ],
+     "key_questions": [
+      "How do the mechanics work?",
+      "What is fair triage?",
+      "What builds trust?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "11": {
+     "title": "Sparring: Bounty Triage Drill",
+     "objectives": [
+      "Triage simulated bounty reports",
+      "Spot duplicates and out-of-scope reports",
+      "Write researcher replies"
+     ],
+     "key_questions": [
+      "Which reports are valid?",
+      "How do you spot duplicates?",
+      "What do you tell researchers?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "12": {
+     "title": "Sparring: Detection-as-Code Sprint",
+     "objectives": [
+      "Ship a versioned detection in one session",
+      "Test it CI-style",
+      "Document the rollout"
+     ],
+     "key_questions": [
+      "What did you ship?",
+      "How did you test?",
+      "What is the rollout plan?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "13": {
+     "title": "Sparring: Trading App Teardown",
+     "objectives": [
+      "Tear down a trading app's UX",
+      "Separate clarity from manipulation",
+      "Write LEVI's finance UX rules"
+     ],
+     "key_questions": [
+      "Where is the clarity?",
+      "Where is the manipulation?",
+      "What are LEVI's rules?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "14": {
+     "title": "Sparring: Week 2 Review",
+     "objectives": [
+      "Consolidate intermediate methods",
+      "Pressure-test your detections",
+      "Set week-3 goals"
+     ],
+     "key_questions": [
+      "What methods are now solid?",
+      "Which detections survived?",
+      "What are the week-3 goals?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "15": {
+     "title": "Sparring: Incident Command Sim",
+     "objectives": [
+      "Command a simulated incident",
+      "Brief executives twice",
+      "Keep the decision log"
+     ],
+     "key_questions": [
+      "What were the key decisions?",
+      "How did the briefings land?",
+      "What does the log show?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "16": {
+     "title": "Sparring: Purple Tabletop (Defensive)",
+     "objectives": [
+      "Extract defensive improvements from the exercise",
+      "Write detection backlog items",
+      "Commit to hardening changes"
+     ],
+     "key_questions": [
+      "What did the exercise reveal?",
+      "What is the detection backlog?",
+      "What hardening is committed?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "17": {
+     "title": "Sparring: AI Platform Teardown",
+     "objectives": [
+      "Tear down an AI platform's agent loop",
+      "Map its safety patterns",
+      "Write LEVI's answer"
+     ],
+     "key_questions": [
+      "How does its agent loop work?",
+      "What safety patterns exist?",
+      "What is LEVI's answer?"
+     ],
+     "exercise_type": "platform-teardown"
+    },
+    "18": {
+     "title": "Sparring: Vuln Prioritization Drill",
+     "objectives": [
+      "Prioritize 20 vulnerabilities in 30 minutes",
+      "Defend the top 5",
+      "Name what you accepted as risk"
+     ],
+     "key_questions": [
+      "What is your top 5?",
+      "Why?",
+      "What risk did you accept?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "19": {
+     "title": "Sparring: Intel-to-Detection Drill",
+     "objectives": [
+      "Turn an intel report into a detection",
+      "Validate it safely",
+      "Hand off to production"
+     ],
+     "key_questions": [
+      "What intel did you use?",
+      "What detection resulted?",
+      "How was it validated?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "20": {
+     "title": "Sparring: Creator Platform Teardown",
+     "objectives": [
+      "Tear down a creator platform",
+      "Map its distribution loop",
+      "Apply lessons to content operations"
+     ],
+     "key_questions": [
+      "What is the distribution loop?",
+      "What transfers?",
+      "What do we do differently?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "21": {
+     "title": "Sparring: Week 3 Review",
+     "objectives": [
+      "Consolidate advanced application",
+      "Run your hardest scenario again",
+      "Set final-week goals"
+     ],
+     "key_questions": [
+      "What is now automatic?",
+      "What still needs work?",
+      "What are the final-week goals?"
+     ],
+     "exercise_type": "sparring-scenario"
+    },
+    "22": {
+     "title": "Capstone: Enterprise Intrusion",
+     "objectives": [
+      "Run the full response across all tracks",
+      "Coordinate detection, intel, and comms",
+      "Deliver the after-action report"
+     ],
+     "key_questions": [
+      "How did the tracks combine?",
+      "What broke under pressure?",
+      "What does the report conclude?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "23": {
+     "title": "Capstone: Platform Under Attack",
+     "objectives": [
+      "Defend a platform's trust model",
+      "Triage abuse reports",
+      "Write the public postmortem"
+     ],
+     "key_questions": [
+      "How was trust attacked?",
+      "What did you triage?",
+      "What does the postmortem say?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "24": {
+     "title": "Capstone: Full-Stack Teardown",
+     "objectives": [
+      "Tear down an entire platform stack",
+      "Produce the investment-grade brief",
+      "Defend it under questioning"
+     ],
+     "key_questions": [
+      "What is the stack's thesis?",
+      "What is the brief's recommendation?",
+      "How did you defend it?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "25": {
+     "title": "Capstone: Adversary Review (Defensive)",
+     "objectives": [
+      "Review detections against new intel",
+      "Close the gaps found",
+      "Measure coverage honestly"
+     ],
+     "key_questions": [
+      "What gaps did new intel reveal?",
+      "How were they closed?",
+      "What is honest coverage now?"
+     ],
+     "exercise_type": "tabletop"
+    },
+    "26": {
+     "title": "Capstone: The Operator's Gauntlet",
+     "objectives": [
+      "Operate LEVI under load for the session",
+      "Keep every guardrail green",
+      "Produce the ops receipt"
+     ],
+     "key_questions": [
+      "Did guardrails hold?",
+      "What degraded?",
+      "What does the receipt prove?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "27": {
+     "title": "Capstone: Platform War-Game",
+     "objectives": [
+      "War-game LEVI against two competitors",
+      "Stress-test the positioning as an analyst",
+      "Strengthen the moat"
+     ],
+     "key_questions": [
+      "How would competitors attack?",
+      "Where is LEVI weak?",
+      "How is the moat strengthened?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "28": {
+     "title": "Capstone: Final Hunt",
+     "objectives": [
+      "Run the hardest hunt of the program",
+      "Document every step",
+      "Hand off production detections"
+     ],
+     "key_questions": [
+      "What made this hunt the hardest?",
+      "How did you work it?",
+      "What detections resulted?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "29": {
+     "title": "Capstone: Dress Rehearsal",
+     "objectives": [
+      "Rehearse the graduation assessment",
+      "Fix every gap found",
+      "Rest and prepare"
+     ],
+     "key_questions": [
+      "What gaps remain?",
+      "How were they fixed?",
+      "Are you ready?"
+     ],
+     "exercise_type": "capstone"
+    },
+    "30": {
+     "title": "GRADUATION",
+     "objectives": [
+      "Pass the cross-track final assessment",
+      "Present the 30-day portfolio",
+      "Graduate into continuous practice"
+     ],
+     "key_questions": [
+      "What did 30 days build?",
+      "What are your honest limits?",
+      "What comes after graduation?"
+     ],
+     "exercise_type": "graduation"
+    }
+   }
+  }
+ }
+}

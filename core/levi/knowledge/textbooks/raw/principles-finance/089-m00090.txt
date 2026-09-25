@@ -1,0 +1,192 @@
+# m00090
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Regression Applications in Finance
+
+Regression Applications in Finance
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate the regression model for a single independent variable as applied to financial forecasting.
+
+Extract measures of slope and intercept from regression analysis in financial applications.
+
+Regression Model for a Single Independent Variable
+
+Regression analysis is used extensively in finance-related applications. Many typical applications involve determining if there is a correlation between various stock market indices such as the S&P 500, the Dow Jones Industrial Average (DJIA), and the Russell 2000 index.
+
+As an example, suppose we would like to determine if there is a correlation between the Russell 2000 index and the DJIA. Does the value of the Russell 2000 index depend on the value of the DJIA? Is it possible to predict the value of the Russell 2000 index for a certain value of the DJIA? We can explore these questions using regression analysis.
+shows a summary of monthly closing prices of the DJIA and the Russell 2000 for a 12-month time period. We consider the DJIA to be the independent variable and the Russell 2000 index to be the dependent variable.
+
+Monthly Closing Prices of the DJIA and the Russell 2000 for a 12-Month Time Period
+
+Monthly Close
+DJIA
+Russell 2000
+1-Apr-21
+34,200.67
+2,262.67
+1-Mar-21
+32,981.55
+2,220.52
+1-Feb-21
+30,932.37
+2,201.05
+1-Jan-21
+29,982.62
+2,073.64
+1-Dec-20
+30,606.48
+1,974.86
+1-Nov-20
+29,638.64
+1,819.82
+1-Oct-20
+26,501.60
+1,538.48
+1-Sep-20
+27,781.70
+1,507.69
+1-Aug-20
+28,430.05
+1,561.88
+1-Jul-20
+26,428.32
+1,480.43
+1-Jun-20
+25,812.88
+1,441.37
+1-May-20
+25,383.11
+1,394.04
+The first step is to create a scatter plot to determine if the data points appear to follow a linear pattern. The scatter plot is shown in . The scatter plot clearly shows a linear pattern; the next step is to calculate the correlation coefficient and determine if the correlation is significant.
+
+Using the Excel command =CORREL, the correlation coefficient is calculated to be 0.947. This value of the correlation coefficient is significant using the test for significance referenced earlier in Correlation Analysis.
+
+Using the Excel commands =SLOPE and =INTERCEPT, the value of the slope and y-intercept are calculated as 0.11 and -1,496.34, respectively, when rounded to two decimal places.
+
+The Excel output is shown below:
+
+Scatter Plot for Monthly Closing Prices of the DJIA versus the Russell 2000 for a 12-Month Time Period
+
+Based on these results, the corresponding linear regression model is
+
+Assume the DJIA has reached a value of 32,000. Predict the corresponding value of the Russell 2000 index. To determine this, substitute the value of the independent variable, x=32,000 (this is the given value of the DJIA), and calculate the corresponding value for the dependent variable, which is the predicted value for the Russell 2000 index:
+
+Thus the predicted value for the Russell 2000 index is approximately 2,024 when the DJIA reached a value of 32,000.
+
+Measures of Slope and Intercept from Regression Analysis
+
+An important application of regression analysis is to determine the systematic risk for a particular stock, which is referred to as beta. A stock’s beta is a measure of the volatility of the stock compared to a benchmark such as the S&P 500 index. If a stock has more volatility compared to the benchmark, then the stock will have a beta greater than 1.0. If a stock has less volatility compared to the benchmark, then the stock will have a beta less than 1.0.
+
+Beta can be determined as the slope of the regression line when the stock returns are plotted versus the returns for the benchmark, such as the S&P 500. As an example, consider the calculation for beta of Nike stock based on monthly returns of Nike stock versus monthly returns for the S&P 500 over the time period from May 2020 to March 2021. The monthly return data is shown in .
+
+Monthly Returns of Nike Stock versus Monthly Returns for the S&P 500
+
+Date
+S&P
+ Monthly
+ Return (%)
+S&P
+
+Monthly
+
+Return (%)
+Nike
+ Stock
+ Price ($)
+Nike
+
+Stock
+
+Price ($)
+Nike
+ Monthly
+ Return (%)
+Nike
+
+Monthly
+
+Return (%)
+
+4/1/2020
+2,912.43
+N/A
+87.18
+N/A
+5/1/2020
+3,044.31
+0.05
+98.58
+0.13
+6/1/2020
+3,100.29
+0.02
+98.05
+-0.01
+7/1/2020
+3,271.12
+0.06
+97.61
+0.00
+8/1/2020
+3,500.31
+0.07
+111.89
+0.15
+9/1/2020
+3,363.00
+-0.04
+125.54
+0.12
+10/1/2020
+3,269.96
+-0.03
+120.08
+-0.04
+11/1/2020
+3,621.63
+0.11
+134.70
+0.12
+12/1/2020
+3,756.07
+0.04
+141.47
+0.05
+1/1/2021
+3,714.24
+-0.01
+133.59
+-0.06
+2/1/2021
+3,811.15
+0.03
+134.78
+0.01
+3/1/2021
+3,943.34
+0.03
+140.45
+0.04
+3/12/2021
+3,943.34
+0.00
+140.45
+0.00
+The scatter plot that graphs S&P monthly return versus Nike monthly return is shown in .
+
+Scatter Plot of Monthly Returns of Nike Stock versus Monthly Returns for the S&P 500 ($)
+
+The slope of the regression line is 0.83, obtained by using the =SLOPE command in Excel.
+
+This indicates the value of beta for Nike stock is 0.83, which indicates that Nike stock had lower volatility versus the S&P 500 for the time period of interest.
+
+Regression analysis is used extensively in finance-related applications. Many typical applications involve determining if there is a correlation between various stock market indices such as the S&P 500, the DJIA, and the Russell 2000 index. The procedure is to first generate a scatter plot to determine if a visual trend is observed, then calculate a correlation coefficient and check for significance. If the correlation coefficient is significant, a linear model can then be generated and used for predictions.
+
+the measure of the volatility of a stock as compared to a benchmark such as the S&P 500 index

@@ -1,0 +1,43 @@
+# m00096
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Attribute access
+
+Attribute access
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Implement a subclass that accesses inherited attributes from the superclass.
+
+Write a subclass's __init__() that inherits superclass instance attributes and creates new instance attributes.
+
+Creating a simple subclass
+
+Subclasses have access to the attributes inherited from the superclass. When the subclass's __init__() isn't explicitly defined, the superclass's __init__() method is called. Accessing both types of attributes uses the same syntax.
+
+Defining a simple subclass
+
+Using simple subclasses
+
+Using __init__() to create and inherit instance attributes
+
+A programmer often wants a subclass to have new instance attributes as well as those inherited from the superclass. Explicitly defining a subclass's __init__() involves defining instance attributes and assigning instance attributes inherited from the superclass.
+
+Defining __init__() in a subclass
+
+Accessing a subclass's attributes
+
+Consider the Employee and Developer example code:
+
+Creating a subclass with an instance attribute
+
+Given a class Dessert, create a class, Cupcake, inherited from Dessert. Cupcake class methods:
+__init__(self): initializes inherited instance attribute ingredients with ["butter", "sugar", "eggs", "flour"], and initializes instance attribute frosting with "buttercream"
+display(self): prints a cupcake's ingredients and frosting
+
+Then call the display() method on a new Cupcake object. The output should match:

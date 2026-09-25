@@ -1,0 +1,483 @@
+# CS 6640: Computational Photography
+# Cornell University
+# source: http://www.cs.cornell.edu/courses/CS6640/2012fa/index.shtml#
+
+CS6640: Computational Photography
+CS6640
+Home
+Schedule
+Homeworks
+Projects
+About
+Bibliography
+Piazza
+CS6640 Computational Photography
+Cornell University
+Tuseday & Thursday, 10:10am, Hollister 401
+Instructor: Steve Marschner
+From Courses of Study: A course on the emerging applications of computation in
+photography. Likely topics include digital photography,
+unconventional cameras and optics, light field cameras,
+image processing for photography, techniques for combining
+multiple images, advanced image editing algorithms, and
+projector-camera systems. Course work includes implementing
+several algorithms and a final project.
+Schedule
+This is a new course, so all future dates and topics are highly
+tentative and certain to change.
+date
+topic
+reading
+assignments
+23 Aug
+introduction slides slides
+Digital Photography
+28 Aug
+camera basics slides
+HW1 out
+30 Aug
+color science slides
+4 Sep
+image sensors slides
+HW1 due, HW2 out
+6 Sep
+camera color processing
+11 Sep
+camera photofinishing pipeline slides
+13 Sep
+gaussian optics slides
+HW2 due
+18 Sep
+gaussian optics
+HW3 out, PR1 out
+20 Sep
+practical camera optics slides
+25 Sep
+Ivo Boyadzhiev: Color2Gray David Thomason: Homogeneity-directed Demosaicking
+HW3 due
+27 Sep
+Shuang Zhao: Radiometric Self Calibration Long Wei: Tone Reproduction for Realistic Images
+Cameras with modified optics
+2 Oct
+light field photography slides
+PR1 due
+4 Oct
+multidimensional signal processing slides
+9 Oct
+—Fall Break—
+11 Oct
+multidimensional signal processing slides
+HW4 out
+16 Oct
+light field manipulations slides
+18 Oct
+Scott Wehrwein: Fourier Slice Photography Pramook Khungurn: Coded Aperture Photography
+HW4 due, PR2 out
+23 Oct
+Youyou Yang: Multi-Aperture Photography Daniel Schroeder: Dual Photography
+25 Oct
+Josh Vekhter: General Linear Cameras Steve Marschner: Dappled Photography
+Tools for editing images
+30 Oct
+gradient domain methods slides
+1 Nov
+graph cuts and Markov random fields slides
+6 Nov
+bilateral filter and HDR tone mapping slides
+PR2 due
+8 Nov
+applications Won Jun Jang: Seam Carving
+Fixing photographers’ problems
+13 Nov
+matting and compositing slides
+15 Nov
+camera shake removal slides
+20 Nov
+video stabilization slides
+final proposal due 11/16
+22 Nov
+—Thanksgiving break—
+27 Nov
+Mevlana Gemici: Content Preserving Warps and Subspace Video Stabilization Sean Bell: GrabCut
+final milestone due 11/21
+29 Nov
+Gokhan Arikan: Single Image Deblurring Zhongyang Fu: Flash and No-flash
+Final projects
+13 Dec Final project demos
+Homeworks
+There will be short written homeworks, roughly weekly,
+to give you practice with the material we cover in
+lecture. Generally the results of your homework will be
+reported by posting to the
+CS6640 wiki ,
+and for most homeworks, we will discuss the results
+in class on the due date.
+Homework 1 Camera response
+nonlinearity
+Do this project in groups of two. You
+can use Piazza to help pair yourselves up.
+Cameras produce pixel values that are related to the
+intensity of light in the scene they are looking at. You
+can learn about the function that maps scene intensity to
+pixel value by taking an exposure series — a
+series of images looking at a static scene where the
+exposure varies. Since the amount of light getting to
+the sensor is proportional to the exposure, this gives us
+(up to some normalization factor) information about the
+pixel values that will be caused by different amounts of
+light.
+To do this homework you need a camera that lets you
+control the exposure. Depending on software this might
+even be your cell phone, but most often it is probably a
+standalone camera of one sort or another. You can always
+use one of the course's cameras for this if you like.
+The first part of the assignment is to take an
+exposure series. Choose a nice scene—we will be
+using these as a shared pool of input data for the next
+assignment. Still lifes, landscapes, architectural
+subjects, … anything that stays put (and that
+can be counted on not to change brightness while you
+are photographing; watch out for partly-cloudy days
+where the illumination may change rapidly). Take about
+20 or so images, with shutter speeds ranging from way
+too dark (as in, the whole image looks pretty much
+black) to way too bright (most of the image completely
+saturated white). Convert them to grayscale, and
+resize them to at most 2000 pixels (that is, shrink if
+needed so that the maximum of width and height is
+2000). Put a .zip or .tgz archive of your images,
+encoded as 8-bit PNGs, labeled with a 600-pixel
+thumbnail of a reasonable exposure, at the appropriate
+place in the course's
+project
+wiki.
+The second part is to estimate the response curve.
+Choose a small patch of image that has near-constant
+intensity, and compute the average value of that patch
+in all the exposures. Make a log-log plot of pixel
+value vs. exposure. Does it look smooth? If not, be
+sure your camera settings are staying constant, and
+that you have the exposure times right. Fit something
+to the points to define a smooth curve (a good option
+might be a low-order polynomial, but use whatever you
+see fit) and make a clear and well labeled plot showing
+the data points and the curve. Post the plot to the
+wiki, next to your images, along with a precise
+specification of your fitted response function, and
+explain the relevant details about the capture
+(i.e. what kind of camera, and what relevant settings
+you used).
+Homework 2 High dynamic
+range imaging
+Do this project in groups of two. You
+can use Piazza to help pair yourselves up.
+For this homework, we'll use the data from the previous
+homework to build high dynamic range images—images
+that contain an unusually wide range of intensities. The
+idea is to treat the pixels in an exposure series as a
+large set of observations of an underlying image; for a
+given pixel we have several measurements, each
+contaminated by noise and possibly saturation, and we can
+use all this information to derive a high-quality
+estimate of the true intensity at that pixel.
+The input to this process is an exposure
+series—a set of low dynamic range (LDR)
+images. The term “dynamic range,” which can
+be applied to any system that handles some kind of signal
+(microphones and audio amplifiers as well as cameras and
+displays), simply means the ratio between the highest
+signal that can be measured and the lowest signal that
+can can be meaningfully distinguished from zero. In the
+LDR image that comes from a single exposure in the
+camera, the dynamic range is not too large; maybe 100:1
+or 1000:1. (Fundamentally this ratio has to do with the
+ratio of full well capacity to dark current and readout
+noise in the sensor of the camera.) LDR images are
+normally encoded using 8- to 14-bit fixed point numbers
+that represent numbers in the range 0 to 1.
+We want to extend the dynamic range by using many
+different exposures: the bright parts of the scene are
+measured well by the shortest exposures, and the deepest
+shadows are measured well by the longest exposures.
+The output we are computing is a single high
+dynamic range (HDR) image, which has a larger dynamic
+range. For instance, the “piano” scene has
+its lowest intensities around 0.07 in a 15-second
+exposure and its highest intensities around 0.95 in a
+1/4000 second exposure. If we normalize these to a
+one-second exposure, these intensities (if we could
+measure them) are in the ratio (4000*0.95) : (0.07/15),
+or about 80,000:1. HDR images are normally encoded using
+some kind of floating-point numbers, and their values
+take on a range that is in principle unbounded.
+Once we have built an HDR image, displaying it on the
+screen requires extracting an LDR image somehow, since
+the screen again has a fixed and limited dynamic range.
+(For a screen the dynamic range is called “contrast
+ratio,” and 1000:1 would be a high-quality
+display). This process is called tone mapping , and
+the simplest tone mapping model is to use the log-linear
+equation: \[a = k I^\gamma\] where \(I\) is the scene
+intensity (the number stored in the HDR image), \(a\) is
+the pixel value (between 0 and 1), \(k\) is
+the display exposure, so called because its effect
+on the displayed image is much like the effect of camera
+exposure settings on a captured image, and the exponent
+\(\gamma\) determines the contrast of the image. (Some
+people would call this linear tone mapping, but it's noe
+linear, it's a power law, so I like to call it
+log-linear.) Because of display nonlinearities that are
+codified in color space standards, values of \(\gamma\)
+around \(1/2\) produce contrast ratios on the display
+that are similar to the contrast ratios in the original
+scene. However, you are free to adjust \(\gamma\) to a
+larger value to get snazzy high-contrast images or to a
+lower value to fit a wider range of intensities onto the
+screen.
+The first step is to transform the input images
+into linear measurements. To do this, you will have to
+invert the response function that you fit in the
+previous assignment. So that others don't have to
+worry about the analytic form of your particular
+function, generate a 256-entry table that contains the
+real-world intensity corresponding to each of the pixel
+values from 0 to 255 in your exposure sequences.
+You can check the results by comparing two linearized
+images: select, say, 10,000
+pixels and make a scatter plot of the linearized
+intensity in exposures \(t_1\) against the linearized
+intensity in exposure \(t_2\) multiplied by \((t_1/t_2)\)
+(where this ratio is maybe between 2 and 5). Since these are two
+measurements of the same number, the result should fit a
+line of slope 1, with no discernible systematic
+structure. From this experiment you can determine what
+pixel values should be considered to be saturated.
+Post the result on the wiki with your response
+function, as a text file with 256 decimal numbers
+separated by whitespace. Indicate pixel values that
+are saturated by the special value −1. This part
+is due on Tuesday 11 September .
+The second step is a brief paper-and-pencil
+exercise. Let the exposure times in the exposure
+series be \(t_1 \ldots t_n\), and call the linearized
+intensities \(y_1 \ldots y_n\). Provided the
+measurements are accurate, \(y_k/t_k\) is an estimate
+of the true pixel value, with some amount of noise.
+Assuming an additive noise model that looks like this:
+\[y_k = t_k y + n_g + n_p\]
+where the true intensity \(y\) is scaled up by the
+exposure time and then contaminated by both gaussian
+read noise \(n_g\), which has signal-independent
+variance \(\sigma_g^2\), and gaussian shot noise
+\(n_p\), which has signal-dependent variance
+\(\sigma_p^2 t_k y\) (approximating the true Poisson
+noise; see lecture), what is the right formula to
+compute a maximum likelihood estimate of the true value
+from the observations?
+(See this
+page on weighted averaging.) Your answer will
+depend on the ratio of \(n_g\) and \(n_p\), and will
+have a surprisingly simple form when either
+\(\sigma_p=0\) or \(\sigma_g=0\). One question to consider is how to get
+a reasonable value of \(y\) to use in modeling the
+shot noise; feel free to make approximations that seem
+reasonable to you, and we'll discuss the various
+choices after the homework is handed in. If you find
+yourself facing equations that don't appear to have a
+simple analytic solution, you might consider
+approximating the value of \(y\). Hand this
+part in as a PDF in CMS.
+The third step is to actually make HDR images.
+Write code that uses the formula you derived to make
+HDR images. Compute HDR images for all the class's
+exposure sequences, and write the results to files in
+the OpenEXR
+format. Compute the ratio of the 99th to
+the 1st percentile of pixel values in each image to get
+an idea of the dynamic range.
+The last step is to apply simple tone mapping for
+display. Using a log-linear tone mapping curve, map
+each HDR image into an LDR image; set contrast
+appropriately for each example so that you can see
+detail in both dark and bright regions. You may want
+to experiment with introducing a shoulder in the
+response curve; we'll come back to that in the next
+assignment. Tone-map all your HDR images and post the
+tonemapped images to the wiki as high quality JPEGs,
+with information about the dynamic range of each image
+and the exponent you used to tone-map it.
+Homework 3 Gaussian optics
+Do this project alone or in groups of two, as
+you prefer.
+In this homework you will work with actual lens
+construction data for two camera lenses. The first lens
+is the Leica SUMMILUX-M 35mm f:1.4 (a normal-to-wide lens
+for 35mm rangefinder cameras), described
+in this
+patent , this data
+file ,
+and this
+marketing material (the patent differs slightly from
+the current product, with the aspherical surfaces on
+different elements). The second lens is the Nikon
+MF-Nikkor 24mm f:2.8 (a wide-angle lens for SLR cameras),
+described
+in this
+patent and this data
+file ; more interesting information about this lens
+(and many others) can be
+found here .
+As are all wide-angle lenses for SLRs, this second lens
+is a retrofocus design, meaning its rear principal point
+is well outside the lens, to allow clearance for the
+mirror box between the lens and the sensor.
+For each lens, compute the 2x2 matrix describing
+its action on rays from a reference plane at the front
+vertex of the lens to a reference plane at the back
+vertex.
+For each lens, compute the effective focal
+length, the back and front focal lengths, and locate
+the principal planes relative to the back focal plane.
+With each lens focused at infinity, what is the
+physical distance from the rear element of the lens to
+the sensor plane? How about when it is focused at one
+meter from the sensor plane?
+For the next few parts, consider a scene with an array
+of 5 bright points all at the same distance from the
+camera. If I draw a picture of the set of rays that
+are lit up, using the \((q,p)\) coordinates referenced
+to the plane of the points, I get something like the
+image at right. It shows with arrows that each bright
+point lights up all directions for a given position.
+Draw a similar illustration showing what set of
+rays is lit up at the first principal plane, the
+second principal plane (assuming the aperture is in
+the principal planes and simply removes all rays with
+\(p\) larger than a given value), at the image plane
+when the camera is focused on the points, at the image plane
+when the camera is focused a bit closer than the points,
+and at the image plane when the camera is focused a
+bit behind the points.
+Repeat the previous question, but this time with
+the points positioned in a line that is not
+perpendicular to the optical axis. Draw your
+illustrations for reference planes at the distance
+of the center point, at the second principal plane,
+and a the image plane with the camera focused on
+the closest point, then the middle point, then the
+farthest point.
+These illustrations do not need to be to scale for
+any particular lens; just be sure things slope the
+right way and are vertical or horizontal at the right
+places.
+Due by 11:59pm on 25 September.
+Homework 4 Sampling theory
+Do this project alone or in groups of two, as
+you prefer.
+This homework is about resampling an image that has
+been blurred by various processes, and the interpretation
+of what is going on in the frequency domain.
+You'll need mathematical software capable of doing
+discrete Fourier transforms (probably using the FFT) and
+simple image manipulations. I used Matlab but there are
+many other environments or libraries you could use.
+Suppose we have a camera in which the combination
+of lens, antialiasing filter, and pixel area produces a
+band-limited image at the sensor plane, where there is
+a square grid of pixels (assume grayscale for this
+homework). If we take a photo with this camera, the
+image is well sampled and aliasing is not introduced.
+If we subsample this image by a factor of 4 in \(x\)
+and \(y\) (just by dropping pixels, without any
+attention to antialiasing) and then reconstruct back to
+the full resolution, we will find we've introduced
+aliasing. Sketch out what is going on in the frequency
+domain when this happens.
+Back up your sketch with an experiment:
+using this image as your
+test data, subsample by a factor of 4 in each dimension
+and look at the effect on the discrete Fourier
+transform of the image. (To keep the units consistent
+between your full-res and subsampled images, subsample
+by zeroing out the pixels you are dropping, rather than
+moving the subsampled pixels to a smaller array, and
+multiply the remaining values by 16 to keep the overall
+energy the same. This is a discrete approximation of
+multiplying by an impulse grid.) Then reconstruct by
+convolving with
+this reconstruction filter ,
+which is a reconstruction filter with reasonable
+properties sampled at 4 points per input sample.
+(Construct your 2D filter as a separable product).
+Now suppose the camera was out of focus when the
+image was taken. It has a circular aperture (and let's
+further assume we are photographing a planar object) so
+that a single point would be imaged as a constant disk
+of radius 4 pixels. Now what happens when we subsample
+in the same way as in the previous question? Explain
+in words and math how the signal and its Fourier
+transform change from the in-focus case, and make an
+updated frequency domain sketch of what happens during
+subsampling and reconstruction. Also extend the
+computational experiment to confirm the sketch, using
+this data to save yourself the
+trouble of rasterizing a disk.
+You should be able
+to reconstruct an image barely distinguishable from the
+blurred image, without introducing artifacts.
+Extra credit: Can you manage the
+same quality
+with a bit fewer samples by using a hexagonal grid?
+Now suppose the image is blurry for a different
+reason. It is in focus, but it was taken out the
+window of a moving train (we'll continue to assume the
+scene is planar—maybe this is a billboard at the
+train station?), and the image shifted by 8 pixels
+during the exposure. Again explain and sketch the
+effect on the Fourier transform of the image, and
+confirm with an experiment
+( here is a centered line). You
+can safely sample this image using one fourth the
+samples—where should we place them? Sketch
+and confirm by subsampling and reconstructing and
+showing the effects in the frequency domain.
+Now (I know, it's getting to be a stretch)
+further suppose the motion-blurred image was taken with
+the camera tilted 28 degrees from the horizontal, still
+moving at the same speed. This produces a diagonally
+oriented blur. I claim you can still represent this image
+with one-fourth the samples, on an axis-aligned grid.
+You should find that simply repeating the same process
+we have been using will result in noticeable aliasing
+artifacts. What can we change to enable successful
+reconstruction, without tilting the sampling grid to
+align with the motion direction?
+As usual, back up your claims with frequency
+domain sketches and an
+experiment. Here is a tilted
+line for you.
+Projects
+There will be 3 or 4 projects during the first part of
+the semester; the tentative topic plans are:
+Digital camera photofinishing pipeline
+Light field camera image processing
+Gradient-domain image editing
+Video stabilization
+Each project will lead into a brief peer evaluation and
+a discussion of the results achieved by the class and what
+make the best images good.
+You will also design your own final project
+that you'll present at the end of the course.
+For all the projects, we have a small stable of cameras
+available for loan, including some DSLRs with various
+lenses, and light field cameras. You can also use your own
+equipment as well.
+For all projects please include a brief writeup on the
+wiki page you create for the project that discusses:
+Which parts of the project were the most challenging.
+Interesting design decisions that you made
+(simplicity/efficiency tradeoffs; selection of
+implementation languages, libraries, etc; choice of
+algorithms, …)
+Noteworthy issues that you ran into while
+designing, implementing, or testing your su

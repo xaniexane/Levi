@@ -1,0 +1,443 @@
+# m53581
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Chain Rule
+
+The Chain Rule
+
+State the chain rule for the composition of two functions.
+
+Apply the chain rule together with the power rule.
+
+Apply the chain rule and the product/quotient rules correctly in combination when both are necessary.
+
+Recognize the chain rule for a composition of three or more functions.
+
+Describe the proof of the chain rule.
+
+We have seen the techniques for differentiating basic functions (xn,sinx,cosx,etc.) as well as sums, differences, products, quotients, and constant multiples of these functions. However, these techniques do not allow us to differentiate compositions of functions, such as h(x)=sin(x3) or k(x)=3x2+1. In this section, we study the rule for finding the derivative of the composition of two or more functions.
+
+Deriving the Chain Rule
+
+When we have a function that is a composition of two or more functions, we could use all of the techniques we have already learned to differentiate it. However, using all of those techniques to break down a function into simpler parts that we are able to differentiate can get cumbersome. Instead, we use the chain rule, which states that the derivative of a composite function is the derivative of the outer function evaluated at the inner function times the derivative of the inner function.
+
+To put this rule into context, let’s take a look at an example: h(x)=sin(x3). We can think of the derivative of this function with respect to x as the rate of change of sin(x3) relative to the change in x. Consequently, we want to know how sin(x3) changes as x changes. We can think of this event as a chain reaction: As x changes, x3 changes, which leads to a change in sin(x3). This chain reaction gives us hints as to what is involved in computing the derivative of sin(x3). First of all, a change in x forcing a change in x3 suggests that somehow the derivative of x3 is involved. In addition, the change in x3 forcing a change in sin(x3) suggests that the derivative of sin(u) with respect to u, where u=x3, is also part of the final derivative.
+
+We can take a more formal look at the derivative of h(x)=sin(x3) by setting up the limit that would give us the derivative at a specific value a in the domain of h(x)=sin(x3).
+
+This expression does not seem particularly helpful; however, we can modify it by multiplying and dividing by the expression x3−a3 to obtain
+
+From the definition of the derivative, we can see that the second factor is the derivative of x3 at x=a. That is,
+
+However, it might be a little more challenging to recognize that the first term is also a derivative. We can see this by letting u=x3 and observing that as x→a,u→a3:
+
+Thus, h′(a)=cos(a3)·3a2.
+
+In other words, if h(x)=sin(x3), then h′(x)=cos(x3)·3x2. Thus, if we think of h(x)=sin(x3) as the composition (f∘g)(x)=f(g(x)) where f(x)= sin x and g(x)=x3, then the derivative of h(x)=sin(x3) is the product of the derivative of g(x)=x3 and the derivative of the function f(x)=sinx evaluated at the function g(x)=x3. At this point, we anticipate that for h(x)=sin(g(x)), it is quite likely that h′(x)=cos(g(x))g′(x). As we determined above, this is the case for h(x)=sin(x3).
+
+Now that we have derived a special case of the chain rule, we state the general case and then apply it in a general form to other composite functions. An informal proof is provided at the end of the section.
+
+Rule: The Chain Rule
+
+Let f and g be functions. For all x in the domain of g for which g is differentiable at x and f is differentiable at g(x), the derivative of the composite function
+
+is given by
+
+Alternatively, if y is a function of u, and u is a function of x, then
+
+Watch an animation of the chain rule.
+
+Problem-Solving Strategy: Applying the Chain Rule
+
+To differentiate h(x)=f(g(x)), begin by identifying f(x) and g(x).
+
+Find f′(x) and evaluate it at g(x) to obtain f′(g(x)).
+
+Find g′(x).
+
+Write h′(x)=f′(g(x))·g′(x).
+Note: When applying the chain rule to the composition of two or more functions, keep in mind that we work our way from the outside function in. It is also useful to remember that the derivative of the composition of two functions can be thought of as having two parts; the derivative of the composition of three functions has three parts; and so on. Also, remember that we never evaluate a derivative at a derivative.
+
+The Chain and Power Rules Combined
+
+We can now apply the chain rule to composite functions, but note that we often need to use it with other rules. For example, to find derivatives of functions of the form h(x)=(g(x))n, we need to use the chain rule combined with the power rule. To do so, we can think of h(x)=(g(x))n as f(g(x)) where f(x)=xn. Then f′(x)=nxn−1. Thus, f′(g(x))=n(g(x))n−1. This leads us to the derivative of a power function using the chain rule,
+
+Rule: Power Rule for Composition of Functions
+
+For all values of x for which the derivative is defined, if
+
+Then
+
+Using the Chain and Power Rules
+
+Find the derivative of h(x)=1(3x2+1)2.
+
+First, rewrite h(x)=1(3x2+1)2=(3x2+1)−2.
+
+Applying the power rule with g(x)=3x2+1, we have
+
+Rewriting back to the original form gives us
+
+Find the derivative of h(x)=(2x3+2x−1)4.
+h′(x)=4(2x3+2x−1)3(6x2+2)=8(3x2+1)(2x3+2x−1)3
+
+Hint
+
+Use with g(x)=2x3+2x−1
+
+Using the Chain and Power Rules with a Trigonometric Function
+
+Find the derivative of h(x)=sin3x.
+
+First recall that sin3x=(sinx)3, so we can rewrite h(x)=sin3x as h(x)=(sinx)3.
+
+Applying the power rule with g(x)=sinx, we obtain
+
+Finding the Equation of a Tangent Line
+
+Find the equation of a line tangent to the graph of h(x)=1(3x−5)2 at x=2.
+
+Because we are finding an equation of a line, we need a point. The x-coordinate of the point is 2. To find the y-coordinate, substitute 2 into h(x). Since h(2)=1(3(2)−5)2=1, the point is (2,1).
+
+For the slope, we need h′(2). To find h′(x), first we rewrite h(x)=(3x−5)−2 and apply the power rule to obtain
+
+By substituting, we have h′(2)=−6(3(2)−5)−3=−6. Therefore, the line has equation y−1=−6(x−2). Rewriting, the equation of the line is y=−6x+13.
+
+Find the equation of the line tangent to the graph of f(x)=(x2−2)3 at x=−2.
+y=−48x−88
+
+Hint
+
+Use the preceding example as a guide.
+
+Combining the Chain Rule with Other Rules
+
+Now that we can combine the chain rule and the power rule, we examine how to combine the chain rule with the other rules we have learned. In particular, we can use it with the formulas for the derivatives of trigonometric functions or with the product rule.
+
+Using the Chain Rule on a General Cosine Function
+
+Find the derivative of h(x)=cos(g(x)).
+
+Think of h(x)=cos(g(x)) as f(g(x)) where f(x)=cosx. Since f′(x)=−sinx. we have f′(g(x))=−sin(g(x)). Then we do the following calculation.
+
+Thus, the derivative of h(x)=cos(g(x)) is given by h′(x)=−sin(g(x))g′(x).
+
+In the following example we apply the rule that we have just derived.
+
+Using the Chain Rule on a Cosine Function
+
+Find the derivative of h(x)=cos(5x2).
+
+Let g(x)=5x2. Then g′(x)=10x. Using the result from the previous example,
+
+Using the Chain Rule on Another Trigonometric Function
+
+Find the derivative of h(x)=sec(4x5+2x).
+
+Apply the chain rule to h(x)=sec(g(x)) to obtain
+
+In this problem, g(x)=4x5+2x, so we have g′(x)=20x4+2. Therefore, we obtain
+
+Find the derivative of h(x)=sin(7x+2).
+h′(x)=7cos(7x+2)
+
+Hint
+
+Apply the chain rule to h(x)=sing(x) first and then use g(x)=7x+2.
+
+At this point we provide a list of derivative formulas that may be obtained by applying the chain rule in conjunction with the formulas for derivatives of trigonometric functions. Their derivations are similar to those used in and . For convenience, formulas are also given in Leibniz’s notation, which some students find easier to remember. (We discuss the chain rule using Leibniz’s notation at the end of this section.) It is not absolutely necessary to memorize these as separate formulas as they are all applications of the chain rule to previously learned formulas.
+
+Using the Chain Rule with Trigonometric Functions
+
+For all values of x for which the derivative is defined,
+
+Combining the Chain Rule with the Product Rule
+
+Find the derivative of h(x)=(2x+1)5(3x−2)7.
+
+First apply the product rule, then apply the chain rule to each term of the product.
+
+Find the derivative of h(x)=x(2x+3)3.
+h′(x)=3−4x(2x+3)4
+
+Hint
+
+Start out by applying the quotient rule. Remember to use the chain rule to differentiate the denominator.
+
+Composites of Three or More Functions
+
+We can now combine the chain rule with other rules for differentiating functions, but when we are differentiating the composition of three or more functions, we need to apply the chain rule more than once. If we look at this situation in general terms, we can generate a formula, but we do not need to remember it, as we can simply apply the chain rule multiple times.
+
+In general terms, first we let
+
+Then, applying the chain rule once we obtain
+
+Applying the chain rule again, we obtain
+
+Rule: Chain Rule for a Composition of Three Functions
+
+For all values of x for which the function is differentiable, if
+
+then
+
+In other words, we are applying the chain rule twice.
+
+Notice that the derivative of the composition of three functions has three parts. (Similarly, the derivative of the composition of four functions has four parts, and so on.) Also, remember, we can always work from the outside in, taking one derivative at a time.
+
+Differentiating a Composite of Three Functions
+
+Find the derivative of k(x)=cos4(7x2+1).
+
+First, rewrite k(x) as
+
+Then apply the power rule several times.
+
+Find the derivative of h(x)=sin6(x3).
+h′(x)=18x2sin5(x3)cos(x3)
+
+Hint
+
+Rewrite h(x)=sin6(x3)=(sin(x3))6 and use as a guide.
+
+Using the Chain Rule in a Velocity Problem
+
+A particle moves along a coordinate axis. Its position at time t is given by s(t)=sin(2t)+cos(3t). What is the velocity of the particle at time t=π6?
+
+To find v(t), the velocity of the particle at time t, we must differentiate s(t). Thus,
+
+Substituting t=π6 into v(t), we obtain v(π6)=−2.
+
+A particle moves along a coordinate axis. Its position at time t is given by s(t)=sin(4t). Find its acceleration at time t.
+a(t)=−16sin(4t)
+
+Hint
+
+Acceleration is the second derivative of position.
+
+Proof
+
+At this point, we present a very informal proof of the chain rule. For simplicity’s sake we ignore certain issues: For example, we assume that g(x)≠g(a) for x≠a in some open interval containing a. We begin by applying the limit definition of the derivative to the function h(x) to obtain h′(a):
+
+Rewriting, we obtain
+
+Although it is clear that
+
+it is not obvious that
+
+To see that this is true, first recall that since g is differentiable at a,g is also continuous at a. Thus,
+
+Next, make the substitution y=g(x) and b=g(a) and use change of variables in the limit to obtain
+
+Finally,
+
+□
+
+Using the Chain Rule with Functional Values
+
+Let h(x)=f(g(x)). If g(1)=4,g′(1)=3, and f′(4)=7, find h′(1).
+
+Use the chain rule, then substitute.
+
+Given h(x)=f(g(x)). If g(2)=−3,g′(2)=4, and f′(−3)=7, find h′(2).
+28
+
+Hint
+
+Follow .
+
+The Chain Rule Using Leibniz’s Notation
+
+As with other derivatives that we have seen, we can express the chain rule using Leibniz’s notation. This notation for the chain rule is used heavily in physics applications.
+Forh(x)=f(g(x)), let u=g(x) and y=h(x)=f(u). Thus,
+
+Consequently,
+
+Rule: Chain Rule Using Leibniz’s Notation
+
+If y is a function of u, and u is a function of x, then
+
+Taking a Derivative Using Leibniz’s Notation, Example 1
+
+Find the derivative of y=(x3x+2)5.
+
+First, let u=x3x+2. Thus, y=u5. Next, find dudx and dydu. Using the quotient rule,
+
+and
+
+Finally, we put it all together.
+
+It is important to remember that, when using the Leibniz form of the chain rule, the final answer must be expressed entirely in terms of the original variable given in the problem.
+
+Taking a Derivative Using Leibniz’s Notation, Example 2
+
+Find the derivative of y=tan(4x2−3x+1).
+
+First, let u=4x2−3x+1. Then y=tanu. Next, find dudx and dydu:
+
+Finally, we put it all together.
+
+Use Leibniz’s notation to find the derivative of y=cos(x3). Make sure that the final answer is expressed entirely in terms of the variable x.
+dydx=−3x2sin(x3)
+
+Hint
+
+Let u=x3.
+
+Key Concepts
+
+The chain rule allows us to differentiate compositions of two or more functions. It states that for h(x)=f(g(x)),
+h′(x)=f′(g(x))g′(x).
+In Leibniz’s notation this rule takes the form
+dydx=dydu·dudx.
+
+We can use the chain rule with other rules that we have learned, and we can derive formulas for some of them.
+
+The chain rule combines with the power rule to form a new rule:
+Ifh(x)=(g(x))n,thenh′(x)=n(g(x))n−1g′(x).
+
+When applied to the composition of three functions, the chain rule can be expressed as follows: If h(x)=f(g(k(x))), then h′(x)=f′(g(k(x))g′(k(x))k′(x).
+
+Key Equations
+h′(x)=n(g(x))n−1g′(x)
+For the following exercises, given y=f(u) and u=g(x), find dydx by using Leibniz’s notation for the chain rule: dydx=dydududx.
+y=3u−6,u=2x2
+y=6u3,u=7x−4
+18u2·7=18(7x−4)2·7
+y=sinu,u=5x−1
+y=cosu,u=−x8
+−sinu·−18=−sin(−x8)·−18
+y=tanu,u=9x+2
+y=4u+3,u=x2−6x
+8x−2424u+3=4x−124x2−24x+3
+
+For each of the following exercises,
+
+decompose each function in the form y=f(u) and u=g(x), and
+
+find dydx as a function of x.
+y=(3x−2)6
+y=(3x2+1)3
+
+a. u=3x2+1; b. 18x(3x2+1)2
+y=sin5(x)
+y=(x7+7x)7
+
+a. f(u)=u7,u=x7+7x; b. 7(x7+7x)6·(17−7x2)
+y=tan(secx)
+y=csc(πx+1)
+
+a. f(u)=cscu,u=πx+1; b. −πcsc(πx+1)·cot(πx+1)
+y=cot2x
+y=−6(sin x)-3
+
+a. f(u)=−6u−3,u=sinx, b. 18(sin)−4x·cosx
+
+For the following exercises, find dydx for each function.
+y=(3x2+3x−1)4
+y=(5−2x)−2
+4(5−2x)3
+y=cos3(πx)
+y=(2x3−x2+6x+1)3
+6(2x3−x2+6x+1)2(3x2−x+3)
+y=1sin2(x)
+y=(tanx+sinx)−3
+−3(tanx+sinx)−4·(sec2x+cosx)
+y=x2cos4x
+y=sin(cos7x)
+−7cos(cos7x)·sin7x
+y=6+secπx2
+y=cot3(4x+1)
+−12cot2(4x+1)·csc2(4x+1)
+
+Let y=[f(x)]2 and suppose that f′(1)=4 and dydx=10 for x=1. Find f(1).
+
+Let y=(f(x)+5x2)4 and suppose that f(−1)=−4 and dydx=3 when x=−1. Find f′(−1)
+1034
+
+Let y=(f(u)+3x)2 and u=x3−2x. If f(4)=6 and dydx=18 when x=2, find f′(4).
+[T] Find the equation of the tangent line to y=−sin(x2) at the origin. Use a calculator to graph the function and the tangent line together.
+y=−12x
+[T] Find the equation of the tangent line to y=(3x+1x)2 at the point (1,16). Use a calculator to graph the function and the tangent line together.
+
+Find the x-coordinates at which the tangent line to y=(x−6x)8 is horizontal.
+x=±6
+[T] Find an equation of the line that is normal to g(θ)=sin2(πθ) at the point (14,12). Use a calculator to graph the function and the normal line together.
+
+For the following exercises, use the information in the following table to find h′(a) at the given value for a.
+g′(x)
+0
+2
+5
+0
+2
+1
+1
+−2
+3
+0
+2
+4
+4
+1
+−1
+3
+3
+−3
+2
+h(x)=f(g(x));a=0
+
+10
+h(x)=g(f(x));a=0
+h(x)=(x4+g(x))−2;a=1
+−18
+h(x)=(f(x)g(x))2;a=3
+h(x)=f(x+f(x));a=1
+−4
+h(x)=(1+g(x))3;a=2
+h(x)=g(2+f(x2));a=1
+−12
+h(x)=f(g(sinx));a=0
+[T] The position function of a freight train is given by s(t)=100(t+1)−2, with s in meters and t in seconds. At time t=6 s, find the train’s
+
+velocity and
+
+acceleration.
+
+Using a. and b. is the train speeding up or slowing down?
+
+a. −200343 m/s, b. 6002401 m/s2, c. The train is slowing down since velocity and acceleration have opposite signs.
+[T] A mass hanging from a vertical spring is in simple harmonic motion as given by the following position function, where t is measured in seconds and s is in inches:
+s(t)=−3cos(πt+π4).
+
+Determine the position of the spring at t=1.5 s.
+
+Find the velocity of the spring at t=1.5 s.
+[T] The total cost to produce x boxes of Thin Mint Girl Scout cookies is C dollars, where C=0.0001x3−0.02x2+3x+300. In t weeks production is estimated to be x=1600+100t boxes.
+
+Find the marginal cost C′(x).
+
+Use Leibniz’s notation for the chain rule, dCdt=dCdx·dxdt, to find the rate with respect to time t that the cost is changing.
+
+Use b. to determine how fast costs are increasing when t=2 weeks. Include units with the answer.
+
+a. C′(x)=0.0003x2−0.04x+3 b. dCdt=100·(0.0003x2−0.04x+3) c. Approximately $90,300 per week
+[T] The formula for the area of a circle is A=πr2, where r is the radius of the circle. Suppose a circle is expanding, meaning that both the area A and the radius r (in inches) are expanding.
+
+Suppose r=2−100(t+7)2 where t is time in seconds. Use the chain rule dAdt=dAdr·drdt to find the rate at which the area is expanding.
+
+Use a. to find the rate at which the area is expanding at t=4 s.
+[T] The formula for the volume of a sphere is S=43πr3, where r (in feet) is the radius of the sphere. Suppose a spherical snowball is melting in the sun.
+
+Suppose r=1(t+1)2−112 where t is time in minutes. Use the chain rule dSdt=dSdr·drdt to find the rate at which the snowball is melting.
+
+Use a. to find the rate at which the volume is changing at t=1 min.
+
+a. dSdt=−8πr2(t+1)3 b. The volume is decreasing at a rate of −π36 ft3/min.
+[T] The daily temperature in degrees Fahrenheit of Phoenix in the summer can be modeled by the function T(x)=94−10cos[π12(x−2)], where x is hours after midnight. Find the rate at which the temperature is changing at 4 p.m.
+[T] The depth (in feet) of water at a dock changes with the rise and fall of tides. The depth is modeled by the function D(t)=5sin(π6t−7π6)+8, where t is the number of hours after midnight. Find the rate at which the depth is changing at 6 a.m.
+~2.3 ft/hr
+
+the chain rule defines the derivative of a composite function as the derivative of the outer function evaluated at the inner function times the derivative of the inner function

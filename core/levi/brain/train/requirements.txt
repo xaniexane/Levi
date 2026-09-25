@@ -1,0 +1,9 @@
+# Training-only dependencies for LEVI's tiny brain.
+#
+# These live OUTSIDE the core runtime on purpose: core/ stays stdlib-only.
+# Nothing here is imported by levi at runtime; train.py / eval.py are
+# standalone scripts run by a human (or CI) on a machine with CPU torch.
+#
+# CPU-only install (no CUDA needed, ~200MB):
+#   pip install -r requirements.txt
+torch>=2.4 --index-url https://download.pytorch.org/whl/cpu

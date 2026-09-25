@@ -1,0 +1,395 @@
+# m00021
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Equivalent Statements
+
+Equivalent Statements
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Determine whether two statements are logically equivalent using a truth table.
+
+Compose the converse, inverse, and contrapositive of a conditional statement
+
+Have you ever had a conversation with or sent a note to someone, only to have them misunderstand what you intended to convey? The way you choose to express your ideas can be as, or even more, important than what you are saying. If your goal is to convince someone that what you are saying is correct, you will not want to alienate them by choosing your words poorly.
+
+Logical arguments can be stated in many different ways that still ultimately result in the same valid conclusion. Part of the art of constructing a persuasive argument is knowing how to arrange the facts and conclusion to elicit the desired response from the intended audience.
+
+In this section, you will learn how to determine whether two statements are logically equivalent using truth tables, and then you will apply this knowledge to compose logically equivalent forms of the conditional statement. Developing this skill will provide the additional skills and knowledge needed to construct well-reasoned, persuasive arguments that can be customized to address specific audiences.
+An alternate way to think about logical equivalence is that the truth values have to match. That is, whenever p is true, q is also true, and whenever p is false, q is also false.
+
+Determine Logical Equivalence
+
+Two statements, p and q, are logically equivalent when p↔q is a valid argument, or when the last column of the truth table consists of only true values. When a logical statement is always true, it is known as a tautology. To determine whether two statements p and q are logically equivalent, construct a truth table for p↔q and determine whether it valid. If the last column is all true, the argument is a tautology, it is valid, and p is logically equivalent to q; otherwise, p is not logically equivalent to q.
+
+Determining Logical Equivalence with a Truth Table
+
+Create a truth table to determine whether the following compound statements are logically equivalent.
+p→q; ~p→ ~q
+p→q; ~p∨q
+
+Construct a truth table for the biconditional formed by using the first statement as the hypothesis and the second statement as the conclusion, (p→q)↔(~p→ ~q).
+
+ p
+ q
+ p→q
+ ~p
+ ~q
+ ~p→ ~q
+ (p→q)↔(~p→ ~q)
+
+ T
+ T
+ T
+ F
+ F
+ T
+ T
+
+ T
+ F
+ F
+ F
+ T
+ T
+ F
+
+ F
+ T
+ T
+ T
+ F
+ F
+ F
+
+ F
+ F
+ T
+ T
+ T
+ T
+ T
+
+ Because the last column it not all true, the biconditional is not valid and the statement p→q is not logically equivalent to the statement ~p→ ~q.
+(p→q)↔(~p→ ~q)
+T
+T
+T
+F
+F
+T
+T
+F
+F
+F
+T
+F
+F
+T
+T
+T
+F
+F
+F
+F
+T
+T
+T
+T
+Because the last column it not all true, the biconditional is not valid and the statement p→q is not logically equivalent to the statement ~p→ ~q.
+
+Construct a truth table for the biconditional formed by using the first statement as the hypothesis and the second statement as the conclusion, (p→q)↔(~p∨q).
+
+ p
+ q
+ p→q
+ ~p
+ ~p∨q
+ (p→q)↔(~p∨q)
+
+ T
+ T
+ T
+ F
+ T
+ T
+
+ T
+ F
+ F
+ F
+ F
+ T
+
+ F
+ T
+ T
+ T
+ T
+ T
+
+ F
+ F
+ T
+ T
+ T
+ T
+
+ Because the last column is true for every entry, the biconditional is valid and the statement p→q is logically equivalent to the statement ~p∨q. Symbolically, p→q ≡ ~p∨q.
+(p→q)↔(~p∨q)
+T
+T
+T
+F
+T
+T
+F
+F
+F
+T
+F
+T
+T
+T
+T
+F
+F
+T
+T
+T
+Because the last column is true for every entry, the biconditional is valid and the statement p→q is logically equivalent to the statement ~p∨q. Symbolically, p→q ≡ ~p∨q.
+
+Compose the Converse, Inverse, and Contrapositive of a Conditional Statement
+
+The converse, inverse, and contrapositive are variations of the conditional statement, p→q.
+ 
+ The converse is if q then p, and it is formed by interchanging the hypothesis and the conclusion. The converse is logically equivalent to the inverse.
+ The inverse is if ~p then ~q, and it is formed by negating both the hypothesis and the conclusion. The inverse is logically equivalent to the converse.
+ The contrapositive is if ~q then ~p, and it is formed by interchanging and negating both the hypothesis and the conclusion. The contrapositive is logically equivalent to the conditional.
+
+The converse is if q then p, and it is formed by interchanging the hypothesis and the conclusion. The converse is logically equivalent to the inverse.
+
+The inverse is if ~p then ~q, and it is formed by negating both the hypothesis and the conclusion. The inverse is logically equivalent to the converse.
+
+The contrapositive is if ~q then ~p, and it is formed by interchanging and negating both the hypothesis and the conclusion. The contrapositive is logically equivalent to the conditional.
+
+The table below shows how these variations are presented symbolically.
+
+Conditional
+Contrapositive
+Converse
+~p→ ~q
+T
+T
+F
+F
+T
+T
+T
+T
+T
+F
+F
+T
+F
+F
+T
+T
+F
+T
+T
+F
+T
+T
+F
+F
+F
+F
+T
+T
+T
+T
+T
+T
+Writing the Converse, Inverse, and Contrapositive of a Conditional Statement
+
+Use the statements, p: Harry is a wizard and q: Hermione is a witch, to write the following statements:
+
+Write the conditional statement, p→q, in words.
+
+Write the converse statement, q→p, in words.
+
+Write the inverse statement, ~p→ ~q, in words.
+
+Write the contrapositive statement, ~q→ ~p, in words.
+
+The conditional statement takes the form, “if p, then q,” so the conditional statement is: “If Harry is a wizard, then Hermione is a witch.” Remember the if … then … words are the connectives that form the conditional statement.
+
+The converse swaps or interchanges the hypothesis, p, with the conclusion, q. It has the form, “if q, then p.” So, the converse is: "If Hermione is a witch, then Harry is a wizard."
+
+To construct the inverse of a statement, negate both the hypothesis and the conclusion. The inverse has the form, “if ~p, then ~q,” so the inverse is: "If Harry is not a wizard, then Hermione is not a witch."
+
+The contrapositive is formed by negating and interchanging both the hypothesis and conclusion. It has the form, “if ~q, then ~p," so the contrapositive statement is: "If Hermione is not a witch, then Harry is not a wizard."
+
+Identifying the Converse, Inverse, and Contrapositive
+
+Use the conditional statement, “If all dogs bark, then Lassie likes to bark,” to identify the following.
+
+Write the hypothesis of the conditional statement and label it with a p.
+
+Write the conclusion of the conditional statement and label it with a q.
+
+Identify the following statement as the converse, inverse, or contrapositive: “If Lassie likes to bark, then all dogs bark.”
+
+Identify the following statement as the converse, inverse, or contrapositive: “If Lassie does not like to bark, then some dogs do not bark.”
+
+Which statement is logically equivalent to the conditional statement?
+
+The hypothesis is the phrase following the if. The answer is p: All dogs bark. Notice, the word if is not included as part of the hypothesis.
+
+The conclusion of a conditional statement is the phrase following the then. The word then is not included when stating the conclusion. The answer is: q: Lassie likes to bark.
+
+“Lassie likes to bark” is q and “All dogs bark” is p. So, “If Lassie likes to bark, then all dogs bark,” has the form “if q, then p,” which is the form of the converse.
+
+“Lassie does not like to bark” is ~q and “Some dogs do not bark” is ~p. The statement, “If Lassie does not like to bark, then some dogs do not bark,” has the form “if ~q, then ~p,” which is the form of the contrapositive.
+
+The contrapositive ~q→ ~p is logically equivalent to the conditional statement p→q.
+
+Determining the Truth Value of the Converse, Inverse, and Contrapositive
+
+Assume the conditional statement, p→q: “If Chadwick Boseman was an actor, then Chadwick Boseman did not star in the movie Black Panther” is false, and use it to answer the following questions.
+
+Write the converse of the statement in words and determine its truth value.
+
+Write the inverse of the statement in words and determine its truth value.
+
+Write the contrapositive of the statement in words and determine its truth value.
+
+The only way the conditional statement can be false is if the hypothesis, p: Chadwick Boseman was an actor, is true and the conclusion, q: Chadwick Boseman did not star in the movie Black Panther, is false. The converse is q→p, and it is written in words as: “If Chadwick Boseman did not star in the movie Black Panther, then Chadwick Boseman was an actor.” This statement is true, because false → true is true.
+
+The inverse has the form “~p→ ~q.” The written form is: “If Chadwick Boseman was not an actor, then Chadwick Boseman starred in the movie Black Panther.” Because p is true, and q is false, ~p is false, and ~q is true. This means the inverse is false → true, which is true. Alternatively, from Question 1, the converse is true, and because the inverse is logically equivalent to the converse it must also be true.
+
+The contrapositive is logically equivalent to the conditional. Because the conditional is false, the contrapositive is also false. This can be confirmed by looking at the truth values of the contrapositive statement. The contrapositive has the form “~q→ ~p.” Because q is false and p is true, ~q is true and ~p is false. Therefore, ~q→ ~p is true → false, which is false. The written form of the contrapositive is “If Chadwick Boseman starred in the movie Black Panther, then Chadwick Boseman was not an actor.”
+
+Check Your Understanding
+
+Key Terms
+
+logically equivalent
+
+tautology
+
+inverse
+
+converse
+
+contrapositive
+
+Key Concepts
+
+Two statements p and q are logically equivalent if the biconditional statement, p↔q is a valid argument. That is, the last column of the truth table consists of only true values. In other words, p↔q is a tautology. Symbolically, p is logically equivalent to q is written as: p≡q.
+
+A logical statement is a tautology if it is always true.
+
+To be valid a local argument must be a tautology. It must always be true.
+
+Know the variations of the conditional statement, be able to determine their truth values and compose statements with them.
+
+The converse of a conditional statement, if p then q, is the statement formed by interchanging the hypothesis and conclusion. It is the statement if q then p.
+
+The inverse of a conditional statement if formed by negating the hypothesis and the conclusion of the conditional statement.
+
+The contrapositive negates and interchanges the hypothesis and the conclusion.
+
+ Conditional
+ Contrapositive
+ Converse
+ Inverse
+ p
+ q
+ ~p
+ ~q
+ p→q
+ ~q→~p
+ q→p
+ ~p→~q
+
+ T
+ T
+ F
+ F
+ T
+ T
+ T
+ T
+ T
+ F
+ F
+ T
+ F
+ F
+ T
+ T
+ F
+ T
+ T
+ F
+ T
+ T
+ F
+ F
+ F
+ F
+ T
+ T
+ T
+ T
+ T
+ T
+
+Conditional
+Contrapositive
+Converse
+~p→~q
+T
+T
+F
+F
+T
+T
+T
+T
+T
+F
+F
+T
+F
+F
+T
+T
+F
+T
+T
+F
+T
+T
+F
+F
+F
+F
+T
+T
+T
+T
+T
+T
+The conditional statement is logically equivalent to the contrapositive.
+
+The converse is logically equivalent to the inverse.
+
+Know how to construct and use truth tables to determine whether statements are logically equivalent.

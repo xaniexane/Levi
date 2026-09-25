@@ -1,0 +1,248 @@
+# m00089
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Basic Concepts of Probability
+
+Basic Concepts of Probability
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Define probability including impossible and certain events.
+
+Calculate basic theoretical probabilities.
+
+Calculate basic empirical probabilities.
+
+Distinguish among theoretical, empirical, and subjective probability.
+
+Calculate the probability of the complement of an event.
+
+It all comes down to this. The game of Monopoly that started hours ago is in the home stretch. Your sister has the dice, and if she rolls a 4, 5, or 7 she’ll land on one of your best spaces and the game will be over. How likely is it that the game will end on the next turn? Is it more likely than not? How can we measure that likelihood? This section addresses this question by introducing a way to measure uncertainty.
+
+Introducing Probability
+
+Uncertainty is, almost by definition, a nebulous concept. In order to put enough constraints on it that we can mathematically study it, we will focus on uncertainty strictly in the context of experiments. Recall that experiments are processes whose outcomes are unknown; the sample space for the experiment is the collection of all those possible outcomes. When we want to talk about the likelihood of particular outcomes, we sometimes group outcomes together; for example, in the Monopoly example at the beginning of this section, we were interested in the roll of 2 dice that might fall as a 4, 5, or 7. A grouping of outcomes that we’re interested in is called an event. In other words, an event is a subset of the sample space of an experiment; it often consists of the outcomes of interest to the experimenter.
+
+Once we have defined the event that interests us, we can try to assess the likelihood of that event. We do that by assigning a number to each event (E) called the probability of that event (P(E)). The probability of an event is a number between 0 and 1 (inclusive). If the probability of an event is 0, then the event is impossible. On the other hand, an event with probability 1 is certain to occur. In general, the higher the probability of an event, the more likely it is that the event will occur.
+
+Determining Certain and Impossible Events
+
+Consider an experiment that consists of rolling a single standard 6-sided die (with faces numbered 1-6). Decide if these probabilities are equal to zero, equal to one, or somewhere in between.
+P(roll a 4)
+P(roll a 7)
+P(roll a positive number)
+P(roll a13)
+P(roll an even number)
+P(roll a single-digit number)
+
+Let's start by identifying the sample space. For one roll of this die, the possible outcomes are {1, 2, 3, 4, 5,6}. We can use that to assess these probabilities:
+
+We see that 4 is in the sample space, so it’s possible that it will be the outcome. It’s not certain to be the outcome, though. So, 0<P(roll a 4)<1.
+
+Notice that 7 is not in the sample space. So, P(roll a7)=0.
+
+Every outcome in the sample space is a positive number, so this event is certain. Thus, P(roll a positive number)=1.
+
+Since 13 is not in the sample space, P(roll a13)=0.
+
+Some outcomes in the sample space are even numbers (2, 4, and 6), but the others aren’t. So, 0<P(roll an even number)<1.
+
+Every outcome in the sample space is a single-digit number, so P(roll a single-digit number)=1.
+
+Three Ways to Assign Probabilities
+
+The probabilities of events that are certain or impossible are easy to assign; they’re just 1 or 0, respectively. What do we do about those in-between cases, for events that might or might not occur? There are three methods to assign probabilities that we can choose from. We’ll discuss them here, in order of reliability.
+
+Method 1: Theoretical Probability
+
+The theoretical method gives the most reliable results, but it cannot always be used. If the sample space of an experiment consists of equally likely outcomes, then the theoretical probability of an event is defined to be the ratio of the number of outcomes in the event to the number of outcomes in the sample space.
+
+For an experiment whose sample space S consists of equally likely outcomes, the theoretical probability of the event E is the ratio
+ P(E)=n(E)n(S),
+
+where n(E) and n(S) denote the number of outcomes in the event and in the sample space, respectively.
+
+Computing Theoretical Probabilities
+
+Recall that a standard deck of cards consists of 52 unique cards which are labeled with a rank (the whole numbers from 2 to 10, plus J, Q, K, and A) and a suit (♣, ♢, ♡, or ♠). A standard deck is thoroughly shuffled, and you draw one card at random (so every card has an equal chance of being drawn). Find the theoretical probability of each of these events:
+ 
+ The card is 10♠.
+ The card is a ♡.
+ The card is a king (K).
+
+The card is 10♠.
+
+The card is a ♡.
+
+The card is a king (K).
+
+There are 52 cards in the deck, so the sample space for each of these experiments has 52 elements. That will be the denominator for each of our probabilities.
+
+There is only one 10♠ in the deck, so this event only has one outcome in it. Thus, P(10♠)=152.
+
+There are 13 ♡s in the deck, so P(♡)=1352=14.
+
+There are 4 cards of each rank in the deck, so P(K)=452=113.
+
+It is critical that you make sure that every outcome in a sample space is equally likely before you compute theoretical probabilities!
+
+Using Tables to Find Theoretical Probabilities
+
+In the Basic Concepts of Probability, we were considering a Monopoly game where, if your sister rolled a sum of 4, 5, or 7 with 2 standard dice, you would win the game. What is the probability of this event? Use tables to determine your answer.
+
+We should think of this experiment as occurring in two stages: (1) one die roll, then (2) another die roll. Even though these two stages will usually occur simultaneously in practice, since they’re independent, it’s okay to treat them separately.
+Step 1: Since we have two independent stages, let’s create a table (), which is probably the most efficient method for determining the sample space.
+
+Now, each of the 36 ordered pairs in the table represent an equally likely outcome.
+Step 2: To make our analysis easier, let’s replace each ordered pair with the sum ().
+Step 3: Since the event we’re interested in is the one consisting of rolls of 4, 5, or 7. Let’s shade those in ().
+
+Our event contains 13 outcomes, so the probability that your sister rolls a losing number is 1336.
+
+Using Tree Diagrams to Compute Theoretical Probability
+
+If you flip a fair coin 3 times, what is the probability of each event? Use a tree diagram to determine your answer
+
+You flip exactly 2 heads.
+
+You flip 2 consecutive heads at some point in the 3 flips.
+
+All 3 flips show the same result.
+
+Let’s build a tree to identify the sample space ().
+
+The sample space is {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT}, which has 8 elements.
+
+Flipping exactly 2 heads occurs three times (HHT, HTH, THH), so the probability is 38.
+
+Flipping 2 consecutive heads at some point in the experiment happens 3 times: HHH, HHT, THH. So, the probability is 38.
+
+There are 2 outcomes that all show the same result: HHH and TTT. So, the probability is 28=14.
+
+Gerolamo Cardano
+
+The first known text that provided a systematic approach to probabilities was written in 1564 by Gerolamo Cardano (1501–1576). Cardano was a physician whose illegitimate birth closed many doors that would have otherwise been open to someone with a medical degree in 16th-century Italy. As a result, Cardano often turned to gambling to help ends meet. He was a remarkable mathematician, and he used his knowledge to gain an edge when playing at cards or dice. His 1564 work, titled Liber de ludo aleae (which translates as Book on Games of Chance), summarized everything he knew about probability. Of course, if that book fell into the hands of those he played against, his advantage would disappear. That’s why he never allowed it to be published in his lifetime (it was eventually published in 1663). Cardano made other contributions to mathematics; he was the first person to publish the third degree analogue of the Quadratic Formula (though he didn’t discover it himself), and he popularized the use of negative numbers.
+
+Method 2: Empirical Probability
+
+Theoretical probabilities are precise, but they can’t be found in every situation. If the outcomes in the sample space are not equally likely, then we’re out of luck. Suppose you’re watching a baseball game, and your favorite player is about to step up to the plate. What is the probability that he will get a hit?
+
+In this case, the sample space is {hit, not a hit}. That doesn’t mean that the probability of a hit is 12, since those outcomes aren’t equally likely. The theoretical method simply can’t be used in this situation. Instead, we might look at the player’s statistics up to this point in the season, and see that he has 122 hits in 531 opportunities. So, we might think that the probability of a hit in the next plate appearance would be about 122531≈0.23. When we use the outcomes of previous replications of an experiment to assign a probability to the next replication, we’re defining an empirical probability. Empirical probability is assigned using the outcomes of previous replications of an experiment by finding the ratio of the number of times in the previous replications the event occurred to the total number of previous replications.
+
+Empirical probabilities aren’t exact, but when the number of previous replications is large, we expect them to be close. Also, if the previous runs of the experiment are not conducted under the exact set of circumstances as the one we’re interested in, the empirical probability is less reliable. For instance, in the case of our favorite baseball player, we might try to get a better estimate of the probability of a hit by looking only at his history against left- or right-handed pitchers (depending on the handedness of the pitcher he’s about to face).
+
+Probability and Statistics
+
+One of the broad uses of statistics is called statistical inference, where statisticians use collected data to make a guess (or inference) about the population the data were collected from. Nearly every tool that statisticians use for inference is based on probability. Not only is the method we just described for finding empirical probabilities one type of statistical inference, but some more advanced techniques in the field will give us an idea of how close that empirical probability might be to the actual probability!
+
+Finding Empirical Probabilities
+
+Assign an empirical probability to the following events:
+
+Jose is on the basketball court practicing his shots from the free throw line. He made 47 out of his last 80 attempts. What is the probability he makes his next shot?
+
+Amy is about to begin her morning commute. Over her last 60 commutes, she arrived at work 12 times in under half an hour. What is the probability that she arrives at work in 30 minutes or less?
+
+Felix is playing Yahtzee with his sister. Felix won 14 of the last 20 games he played against her. How likely is he to win this game?
+
+Since Jose made 47 out of his last 80 attempts, assign this event an empirical probability of 4780≈59%.
+
+Amy completed the commute in under 30 minutes in 12 of the last 60 commutes, so we can estimate her probability of making it in under 30 minutes this time at 1260=20%.
+
+Since Felix has won 14 of the last 20 games, assign a probability for a win this time of 1420=70%.
+
+Buffon’s Needle
+
+A famous early question about probability (posed by Georges-Louis Leclerc, Comte de Buffon in the 18th century) had to do with the probability that a needle dropped on a floor finished with wooden slats would lay across one of the seams. If the distance between the slats is exactly the same length as the needle, then it can be shown using calculus that the probability that the needle crosses a seam is 2π. Using toothpicks or matchsticks (or other uniformly long and narrow objects), assign an empirical probability to this experiment by drawing parallel lines on a large sheet of paper where the distance between the lines is equal to the length of your dropping object, then repeatedly dropping the objects and noting whether the object touches one of the lines. Once you have your empirical probability, take its reciprocal and multiply by 2. Is the result close to π?
+
+Method 3: Subjective Probability
+
+In cases where theoretical probability can’t be used and we don’t have prior experience to inform an empirical probability, we’re left with one option: using our instincts to guess at a subjective probability. A subjective probability is an assignment of a probability to an event using only one’s instincts.
+
+Subjective probabilities are used in cases where an experiment can only be run once, or it hasn’t been run before. Because subjective probabilities may vary widely from person to person and they’re not based on any mathematical theory, we won’t give any examples. However, it’s important that we be able to identify a subjective probability when we see it; they will in general be far less accurate than empirical or theoretical probabilities.
+
+Distinguishing among Theoretical, Empirical, and Subjective Probabilities
+
+Classify each of the following probabilities as theoretical, empirical, or subjective.
+
+An eccentric billionaire is testing a brand new rocket system. He says there is a 15% chance of failure.
+
+With 4 seconds to go in a close basketball playoff game, the home team need 3 points to tie up the game and send it to overtime. A TV commentator says that team captain should take the final 3-point shot, because he has a 38% chance of making it (greater than every other player on the team).
+
+Felix is losing his Yahtzee game against his sister. He has one more chance to roll 2 dice; he’ll win the game if they both come up 4. The probability of this is about 2.8%.
+
+This experiment has never been run before, so the given probability is subjective.
+
+Presumably, the commentator has access to each player’s performance statistics over the entire season. So, the given probability is likely empirical.
+
+Rolling 2 dice results in a sample space with equally likely outcomes. This probability is theoretical. (We’ll learn how to calculate that probability later in this chapter.)
+
+Benford’s Law
+
+In 1938, Frank Benford published a paper (“The law of anomalous numbers,” in Proceedings of the American Philosophical Society) with a surprising result about probabilities. If you have a list of numbers that spans at least a couple of orders of magnitude (meaning that if you divide the largest by the smallest, the result is at least 100), then the digits 1–9 are not equally likely to appear as the first digit of those numbers, as you might expect. Benford arrived at this conclusion using empirical probabilities; he found that 1 was about 6 times as likely to be the initial digit as 9 was!
+
+New Probabilities from Old: Complements
+
+One of the goals of the rest of this chapter is learning how to break down complicated probability calculations into easier probability calculations. We’ll look at the first of the tools we can use to accomplish this goal in this section; the rest will come later.
+
+Given an event E, the complement of E (denoted E′) is the collection of all of the outcomes that are not in E. (This is language that is taken from set theory, which you can learn more about elsewhere in this text.) Since every outcome in the sample space either is or is not in E, it follows that n(E)+n(E′)=n(S). So, if the outcomes in S are equally likely, we can compute theoretical probabilities P(E)=n(E)n(S) and P(E′)=n(E′)n(S). Then, adding these last two equations, we get
+P(E)+P(E′)=n(E)n(S)+n(E′)n(S)=n(E)+n(E′)n(S)=n(S)n(S)=1
+
+Thus, if we subtract P(E′) from both sides, we can conclude that P(E)=1−P(E′). Though we performed this calculation under the assumption that the outcomes in S are all equally likely, the last equation is true in every situation.
+P(E)=1−P(E′)
+
+How is this helpful? Sometimes it is easier to compute the probability that an event won’t happen than it is to compute the probability that it will. To apply this principle, it’s helpful to review some tricks for dealing with inequalities. If an event is defined in terms of an inequality, the complement will be defined in terms of the opposite inequality: Both the direction and the inclusivity will be reversed, as shown in the table below.
+
+If E is defined with:
+<
+Using the Formula for Complements to Compute Probabilities
+
+If you roll a standard 6-sided die, what is the probability that the result will be a number greater than one?
+
+If you roll two standard 6-sided dice, what is the probability that the sum will be 10 or less?
+
+If you flip a fair coin 3 times, what is the probability that at least one flip will come up tails?
+
+Here, the sample space is {1, 2, 3, 4, 5, 6}. It’s easy enough to see that the probability in question is 56, because there are 5 outcomes that fall into the event “roll a number greater than 1.” Let’s also apply our new formula to find that probability. Since E is defined using the inequality roll>1, then E′ is defined using roll≤1. Since there’s only one outcome (1) in E′, we have P(E′)=16. Thus, P(E)=1−P(E′)=56.
+
+In , we found the following table of equally likely outcomes for rolling 2 dice ():
+
+ Here, the event E is defined by the inequality sum≤10. Thus, E′ is defined by sum>10. There are three outcomes in E′: two 11s and one 12. Thus, P(E)=1−P(E′)=1−336=1112.
+
+Here, the event E is defined by the inequality sum≤10. Thus, E′ is defined by sum>10. There are three outcomes in E′: two 11s and one 12. Thus, P(E)=1−P(E′)=1−336=1112.
+
+In , we found the sample space for this experiment consisted of these equally likely outcomes: {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT}. Our event E is defined by T≥1, so E′ is defined by T<1. The only outcome in E′ is the first one on the list, where zero tails are flipped. So, P(E)=1−P(E′)=1−18=78.
+
+Check Your Understanding
+
+Key Terms
+
+event
+
+probability
+
+theoretical probability
+
+empirical probability
+
+subjective probability
+
+Key Concepts
+
+The theoretical probability of an event is the ratio of the number of equally likely outcomes in the event to the number of equally likely outcomes in the sample space.
+
+Empirical probabilities are computed by repeating the experiment many times, and then dividing the number of replications that result in the event of interest by the total number of replications.
+
+Subjective probabilities are assigned based on subjective criteria, usually because the experiment can’t be repeated and the outcomes in the sample space are not equally likely.
+
+The probability of the complement of an event is found by subtracting the probability of the event from one.
+
+Formulas
+
+For an experiment whose sample space S consists of equally likely outcomes, the theoretical probability of the event E is the ratio P(E)=n(E)n(S) where n(E) and n(S) denote the number of outcomes in the event and in the sample space, respectively.
+P(E)=1−P(E′)

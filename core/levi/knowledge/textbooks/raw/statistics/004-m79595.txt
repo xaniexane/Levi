@@ -1,0 +1,972 @@
+# m79595
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Frequency, Frequency Tables, and Levels of Measurement
+
+Frequency, Frequency Tables, and Levels of Measurement
+
+Once you have a set of data, you will need to organize it so that you can analyze how frequently each datum occurs in the set. However, when calculating the frequency, you may need to round your answers so that they are as precise as possible.
+
+Answers and Rounding Off
+
+A simple way to round off answers is to carry your final answer one more decimal place than was present in the original data. Round off only the final answer. Do not round off any intermediate results, if possible. If it becomes necessary to round off intermediate results, carry them to at least twice as many decimal places as the final answer. Expect that some of your answers will vary from the text due to rounding errors.
+
+It is not necessary to reduce most fractions in this course. Especially in Probability Topics, the chapter on probability, it is more helpful to leave an answer as an unreduced fraction.
+
+Levels of Measurement
+
+The way a set of data is measured is called its level of measurement. Correct statistical procedures depend on a researcher being familiar with levels of measurement. Not every statistical operation can be used with every set of data. Data can be classified into four levels of measurement. They are as follows (from lowest to highest level):
+Nominal scale level
+Ordinal scale level
+Interval scale level
+Ratio scale level
+
+Data that is measured using a nominal scale is qualitative (categorical). Categories, colors, names, labels, and favorite foods along with yes or no responses are examples of nominal level data. Nominal scale data are not ordered. For example, trying to classify people according to their favorite food does not make any sense. Putting pizza first and sushi second is not meaningful.
+
+Smartphone companies are another example of nominal scale data. The data are the names of the companies that make smartphones, but there is no agreed upon order of these brands, even though people may have personal preferences. Nominal scale data cannot be used in calculations.
+
+Data that is measured using an ordinal scale is similar to nominal scale data but there is a big difference. The ordinal scale data can be ordered. An example of ordinal scale data is a list of the top five national parks in the United States. The top five national parks in the United States can be ranked from one to five but we cannot measure differences between the data.
+
+Another example of using the ordinal scale is a cruise survey where the responses to questions about the cruise are excellent, good, satisfactory, and unsatisfactory. These responses are ordered from the most desired response to the least desired. But the differences between two pieces of data cannot be measured. Like the nominal scale data, ordinal scale data cannot be used in calculations.
+
+Data that is measured using the interval scale is similar to ordinal level data because it has a definite ordering but there is a difference between data. The differences between interval scale data can be measured though the data does not have a starting point.
+
+Temperature scales like Celsius (C) and Fahrenheit (F) are measured by using the interval scale. In both temperature measurements, 40° is equal to 100° minus 60°. Differences make sense. But 0 degrees does not because, in both scales, 0 is not the absolute lowest temperature. Temperatures like 10 °F and 15 °C exist and are colder than 0.
+
+Interval level data can be used in calculations, but one type of comparison cannot be done. 80 °C is not four times as hot as 20 °C (nor is 80 °F four times as hot as 20 °F). There is no meaning to the ratio of 80 to 20 (or four to one).
+
+Data that is measured using the ratio scale takes care of the ratio problem and gives you the most information. Ratio scale data is like interval scale data, but it has a 0 point and ratios can be calculated. For example, four multiple choice statistics final exam scores are 80, 68, 20 and 92 (out of a possible 100 points). The exams are machine-graded.
+
+The data can be put in order from lowest to highest 20, 68, 80, 92.
+
+The differences between the data have meaning. The score 92 is more than the score 68 by 24 points.
+Ratios can be calculated. The smallest score is 0. So 80 is four times 20. The score of 80 is four times better than the score of 20.
+
+Frequency
+
+Twenty students were asked how many hours they worked per day. Their responses, in hours, are as follows: 5, 6, 3, 3, 2, 4, 7, 5, 2, 3, 5, 6, 5, 4, 4, 3, 5, 2, 5, 3.
+lists the different data values in ascending order and their frequencies.
+
+Frequency Table of Student Work Hours
+
+DATA VALUE
+2
+3
+4
+5
+6
+7
+1
+A frequency is the number of times a value of the data occurs. According to , there are three students who work two hours, five students who work three hours, and so on. The sum of the values in the frequency column, 20, represents the total number of students included in the sample.
+
+A relative frequency is the ratio (fraction or proportion) of the number of times a value of the data occurs in the set of all outcomes to the total number of outcomes. To find the relative frequencies, divide each frequency by the total number of students in the sample, in this case, 20. Relative frequencies can be written as fractions, percents, or decimals.
+
+Frequency Table of Student Work Hours with Relative Frequencies
+
+DATA VALUE
+FREQUENCY
+2
+3
+4
+5
+6
+7
+1
+ 
+ 20
+
+ or .05
+The sum of the values in the relative frequency column of is 
+
+ 20
+
+ 20
+
+, or 1.
+Cumulative relative frequency is the accumulation of the previous relative
+frequencies. To find the cumulative relative frequencies, add all the previous relative frequencies to
+the relative frequency for the current row, as shown in .
+
+In the first row, the cumulative frequency is simply .15 because it is the only one. In the second row, the relative frequency was .25, so adding that to .15, we get a relative frequency of .40. Continue adding the relative frequencies in each row to get the rest of the column.
+
+Frequency Table of Student Work Hours with Relative and Cumulative Relative Frequencies
+
+DATA VALUE
+FREQUENCY
+RELATIVE FREQUENCY
+2
+3
+ 
+ 20
+
+ or .15
+3
+5
+ 
+ 20
+
+ or .25
+4
+3
+ 
+ 20
+
+ or .15
+5
+6
+ 
+ 20
+
+ or .30
+6
+2
+ 
+ 20
+
+ or .10
+7
+1
+ 
+ 20
+
+ or .05
+.95 + .05 = 1.00
+The last entry of the cumulative relative frequency column is one, indicating that one hundred percent of the data has been accumulated.
+
+NOTE
+
+Because of rounding, the relative frequency column may not always sum to one, and the last entry in the cumulative relative frequency column may not be one. However, they each should be close to one.
+
+The following data are the heights (in inches to the nearest half inch) of 100 male semiprofessional soccer players. The heights are continuous data since height is measured.
+ 60, 60.5, 61, 61, 61.5,
+ 63.5, 63.5, 63.5,
+ 64, 64, 64, 64, 64, 64, 64, 64.5, 64.5, 64.5, 64.5, 64.5, 64.5, 64.5, 64.5,
+ 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5,
+ 68, 68, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69.5, 69.5, 69.5, 69.5, 69.5,
+ 70, 70, 70, 70, 70, 70, 70.5, 70.5, 70.5, 71, 71, 71,
+ 72, 72, 72, 72.5, 72.5, 73, 73.5,
+ 74
+summarizes the heights in this sample. Since heights are expressed in tenths, the frequency table will use labels measured in hundredths. This ensures that no data value will coincide with the upper or lower limit of an interval.
+
+Frequency Table of Soccer Player Height
+
+HEIGHTS (INCHES)
+FREQUENCY
+RELATIVE FREQUENCY
+59.95–61.95
+5
+ 
+ 100
+
+ = .05
+61.95–63.95
+3
+ 
+ 100
+
+ = .03
+63.95–65.95
+15
+
+ 100
+
+ = .15
+65.95–67.95
+40
+
+ 100
+
+ = .40
+67.95–69.95
+17
+
+ 100
+
+ = .17
+69.95–71.95
+12
+
+ 100
+
+ = .12
+71.95–73.95
+7
+ 
+ 100
+
+ = .07
+73.95–75.95
+1
+ 
+ 100
+
+ = .01
+Total = 1.00
+The data in this table have been grouped into the following intervals:
+
+59.9561.95 inches
+
+61.9563.95 inches
+
+63.9565.95 inches
+
+65.9567.95 inches
+
+67.9569.95 inches
+
+69.9571.95 inches
+
+71.9573.95 inches
+
+73.9575.95 inches
+
+Note
+
+This example is used again in Descriptive Statistics, where the method used to compute the intervals will be explained.
+
+In this sample, there are five players whose heights fall within the interval 59.95–61.95 inches, three players whose heights fall within the interval 61.95–63.95 inches, 15 players whose heights fall within the interval 63.95–65.95 inches, 40 players whose heights fall within the interval 65.95–67.95 inches, 17 players whose heights fall within the interval 67.95–69.95 inches, 12 players whose heights fall within the interval 69.95–71.95, seven players whose heights fall within the interval 71.95–73.95, and one player whose heights fall within the interval 73.95–75.95. All heights fall between the endpoints of an interval and not at the endpoints.
+
+From , find the percentage of heights that are less than 65.95 inches.
+
+If you look at the first, second, and third rows, the heights are all less than 65.95 inches. There are 5 + 3 + 15 = 23 players whose heights are less than 65.95 inches. The percentage of heights less than 65.95 inches is then 
+
+ 23
+
+ 100
+
+ or 23 percent. This percentage is the cumulative relative frequency entry in the third row.
+
+Try It
+shows the amount, in inches, of annual rainfall in a sample of towns.
+
+Rainfall (Inches)
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+2.95–4.97
+6
+ 
+ 50
+
+ = .12
+.12
+4.97–6.99
+7
+ 
+ 50
+
+ = .14
+.12 + .14 = .26
+6.99–9.01
+15
+
+ 50
+
+ = .30
+.26 + .30 = .56
+9.01–11.03
+8
+ 
+ 50
+
+ = .16
+.56 + .16 = .72
+11.03–13.05
+9
+ 
+ 50
+
+ = .18
+.72 + .18 = .90
+13.05–15.07
+5
+ 
+ 50
+
+ = .10
+.90 + .10 = 1.00
+Total = 50
+Total = 1.00
+From , find the percentage of rainfall that is less than 9.01 inches.
+
+Try It Solutions
+
+0.56 or 56%
+
+From , find the percentage of heights that fall between 61.95 and 65.95 inches.
+
+Add the relative frequencies in the second and third rows: .03 + .15 = .18 or 18 percent.
+
+Try It
+
+From , find the percentage of rainfall that is between 6.99 and 13.05 inches.
+
+Try It Solutions
+
+0.30 + 0.16 + 0.18 = 0.64 or 64%
+
+Use the heights of the 100 male semiprofessional soccer players in . Fill in the blanks and check your answers.
+
+The percentage of heights that are from 67.9571.95 inches is ________.
+
+The percentage of heights that are from 67.9573.95 inches is ________.
+
+The percentage of heights that are more than 65.95 inches is ________.
+
+The number of players in the sample who are between 61.95 and 71.95 inches tall is ________.
+
+What kind of data are the heights?
+
+Describe how you could gather this data (the heights) so that the data are characteristic of all male semiprofessional soccer players.
+
+Remember, you count frequencies. To find the relative frequency, divide the frequency by the total number of data values. To find the cumulative relative frequency, add all of the previous relative frequencies to the relative frequency for the current row.
+
+29 percent
+
+36 percent
+
+77 percent
+
+87
+
+quantitative continuous
+
+get rosters from each team and choose a simple random sample from each
+
+Try It
+
+From , find the number of towns that have rainfall between 2.95 and 9.01 inches.
+
+Try It Solutions
+
+6 + 7 + 15 = 28 towns
+
+In your class, have someone conduct a survey of the number of siblings (brothers and sisters) each student has. Create a frequency table. Add to it a relative frequency column and a cumulative relative frequency column. Answer the following questions:
+
+What percentage of the students in your class have no siblings?
+
+What percentage of the students have from one to three siblings?
+
+What percentage of the students have fewer than three siblings?
+
+Nineteen people were asked how many miles, to the nearest mile, they commute to work each day. The data are as follows:
+2
+5
+7
+3
+2
+10
+18
+15
+20
+7
+10
+18
+5
+12
+13
+12
+4
+5
+10. was produced.
+
+2
+
+5
+
+7
+
+3
+
+2
+
+10
+
+18
+
+15
+
+20
+
+7
+
+10
+
+18
+
+5
+
+12
+
+13
+
+12
+
+4
+
+5
+
+10
+
+Frequency of Commuting Distances
+
+DATA
+FREQUENCY
+RELATIVE FREQUENCY
+3
+3
+19
+4
+1
+ 19
+5
+3
+ 19
+7
+2
+ 19
+10
+4
+ 19
+12
+2
+ 19
+13
+1
+ 19
+15
+1
+ 19
+18
+1
+ 19
+20
+1
+ 19
+1.0000
+Is the table correct? If it is not correct, what is wrong?
+
+True or False: Three percent of the people surveyed commute three miles. If the statement is not correct, what should it be? If the table is incorrect, make the corrections.
+
+What fraction of the people surveyed commute five or seven miles?
+
+What fraction of the people surveyed commute 12 miles or more? Less than 12 miles? Between five and 13 miles (not including five and 13 miles)?
+
+No. The frequency column sums to 18, not 19. Not all cumulative relative frequencies are correct. The table entries for data values 2, 3, 10, and 18 are incorrect. This affects cumulative relative frequency for most values.
+
+False. The frequency for three miles should be one; for two miles (left out), two. The cumulative relative frequency column should read 1052, .1579, .2105, .3684, .4737, .6316, .7368, .7895, .8421, .9474, 1.0000.
+519
+719, 1219, 719
+
+Try It
+represents the amount, in inches, of annual rainfall in a sample of towns. What fraction of towns surveyed get between 11.03 and 13.05 inches of rainfall each year?
+
+Try It Solutions
+9
+ 
+ 50
+contains the total number of deaths worldwide as a result of earthquakes for the period from 2000 to 2012.
+
+Year
+Total Number of Deaths
+2000
+231
+2001
+21,357
+2002
+11,685
+2003
+33,819
+2004
+228,802
+2005
+88,003
+2006
+6,605
+2007
+712
+2008
+88,011
+2009
+1,790
+2010
+320,120
+2011
+21,953
+2012
+768
+Total
+823,856
+Answer the following questions:
+
+What is the frequency of deaths measured from 2006 through 2009?
+
+What percentage of deaths occurred after 2009?
+
+What is the relative frequency of deaths that occurred in 2003 or earlier?
+
+What is the percentage of deaths that occurred in 2004?
+
+What kind of data are the numbers of deaths?
+
+The Richter scale is used to quantify the energy produced by an earthquake. Examples of Richter scale numbers are 2.3, 4.0, 6.1, and 7.0. What kind of data are these numbers?
+
+97,118 (11.8 percent)
+
+41.6 percent
+
+67,092/823,356 or 0.081 or 8.1 percent
+
+27.8 percent
+
+quantitative discrete
+
+quantitative continuous
+
+Try It
+contains the total number of fatal motor vehicle traffic crashes in the United States for the period from 1994–2011.
+
+Year
+Total Number of Crashes
+Year
+Total Number of Crashes
+1994
+36,254
+2004
+38,444
+1995
+37,241
+2005
+39,252
+1996
+37,494
+2006
+38,648
+1997
+37,324
+2007
+37,435
+1998
+37,107
+2008
+34,172
+1999
+37,140
+2009
+30,862
+2000
+37,526
+2010
+30,296
+2001
+37,862
+2011
+29,757
+2002
+38,491
+Total
+653,782
+2003
+38,477
+Answer the following questions:
+
+What is the frequency of deaths measured from 2000 through 2004?
+
+What percentage of deaths occurred after 2006?
+
+What is the relative frequency of deaths that occurred in 2000 or before?
+
+What is the percentage of deaths that occurred in 2011?
+
+What is the cumulative relative frequency for 2006? Explain what this number tells you about the data.
+
+Try It Solutions
+
+190,800 (29.2%)
+
+24.9%
+
+260,086/653,782 or 39.8%
+
+4.6%
+
+75.1% of all fatal traffic crashes for the period from 1994 to 2011 happened from 1994 to 2006.
+
+References
+
+Levels of Measurement. Retrieved from http://cnx.org/content/m10809/latest/.
+
+National Hurricane Center. Retrieved from http://www.nhc.noaa.gov/gifs/table5.gif.
+
+ThoughtCo. Retrieved from https://www.thoughtco.com/levels-of-measurement-in-statistics-3126349.
+
+U.S. Census Bureau. Retrieved from https://www.census.gov/quickfacts/table/PST045216/00.
+
+Levels of measurement. Retrieved from https://www.cos.edu/Faculty/georgew/Tutorial/Data_Levels.htm.
+
+Chapter Review
+
+Some calculations generate numbers that are artificially precise. It is not necessary to report a value to eight decimal places when the measures that generated that value were only accurate to the nearest tenth. Round your final answer to one more decimal place than was present in the original data. This means that if you have data measured to the nearest tenth of a unit, report the final statistic to the nearest hundredth. Expect that some of your answers will vary from the text due to rounding errors.
+
+In addition to rounding your answers, you can measure your data using the following four levels of measurement:
+Nominal scale level data that cannot be ordered nor can it be used in calculations
+Ordinal scale level data that can be ordered; the differences cannot be measured
+Interval scale level data with a definite ordering but no starting point; the differences can be measured, but there is no such thing as a ratio
+Ratio scale level data with a starting point that can be ordered; the differences have meaning and ratios can be calculated
+
+When organizing data, it is important to know how many times a value appears. How many statistics students study five hours or more for an exam? What percent of families on our block own two pets? Frequency, relative frequency, and cumulative relative frequency are measures that answer questions like these.
+
+What type of measure scale is being used? Nominal, ordinal, interval or ratio.
+
+High school soccer players classified by their athletic ability: superior, average, above average
+
+Baking temperatures for various main dishes: 350, 400, 325, 250, 300
+
+The colors of crayons in a 24-crayon box
+
+Social security numbers
+
+Incomes measured in dollars
+
+A satisfaction survey of a social website by number: 1 = very satisfied, 2 = somewhat satisfied, 3 = not satisfied
+
+Preferred TV shows: comedy, drama, science fiction, sports, news
+
+Time of day on an analog watch
+
+The distance in miles to the closest grocery store
+
+The dates 1066, 1492, 1644, 1947, and 1944
+
+The heights of 21–65-year-old women
+
+Common letter grades: A, B, C, D, and F
+
+ordinal
+
+interval
+
+nominal
+
+nominal
+
+ratio
+
+ordinal
+
+nominal
+
+interval
+
+ratio
+
+interval
+
+ratio
+
+ordinal
+
+HOMEWORK
+
+Fifty part-time students were asked how many courses they were taking this term. The (incomplete) results are shown below.
+
+Part-time Student Course Loads
+
+# of Courses
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+1
+30
+.6
+2
+15
+3
+Fill in the blanks in .
+
+What percent of students take exactly two courses?
+
+What percent of students take one or two courses?
+
+Sixty adults with gum disease were asked the number of times per week they used to floss before their diagnosis. The (incomplete) results are shown in .
+
+Flossing Frequency for Adults with Gum Disease
+
+# Flossing per Week
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+0
+27
+.4500
+1
+18
+3
+.9333
+6
+3
+.0500
+7
+1
+.0167
+Fill in the blanks in .
+
+What percent of adults flossed six times per week?
+
+What percent flossed at most three times per week?
+# Flossing per Week
+ Frequency
+ Relative Frequency
+ Cumulative Relative Frequency
+
+ 0
+ 27
+ .4500
+ .4500
+
+ 1
+ 18
+ .3000
+ .7500
+
+ 3
+ 11
+ .1833
+ .9333
+
+ 6
+ 3
+ .0500
+ .9833
+
+ 7
+ 1
+ .0167
+ 1
+
+# Flossing per Week
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+0
+27
+.4500
+.4500
+1
+18
+.3000
+.7500
+3
+11
+.1833
+.9333
+6
+3
+.0500
+.9833
+7
+1
+.0167
+1
+5.00 percent
+
+93.33 percent
+
+Nineteen immigrants to the United States were asked how many years, to the nearest year, they have lived in the United States The data are as follows: 2, 5, 7, 2, 2, 10, 20, 15, 0, 7, 0, 20, 5, 12, 15, 12, 4, 5, 10.
+was produced.
+
+Frequency of Immigrant Survey Responses
+
+Data
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+0
+2
+19
+.1053
+2
+3
+19
+.2632
+4
+1
+19
+.3158
+5
+3
+19
+.4737
+7
+2
+19
+.5789
+10
+2
+19
+.6842
+12
+2
+19
+.7895
+15
+1
+19
+.8421
+20
+1
+19
+1.0000
+Fix the errors in . Also, explain how someone might have arrived at the incorrect
+number(s).
+
+Explain what is wrong with this statement: “47 percent of the people surveyed have lived in the United States for 5 years.”
+
+Fix the statement in b to make it correct.
+
+What fraction of the people surveyed have lived in the United States five or seven years?
+
+What fraction of the people surveyed have lived in the United States at most 12 years?
+
+What fraction of the people surveyed have lived in the United States fewer than 12 years?
+
+What fraction of the people surveyed have lived in the United States from five to 20 years, inclusive?
+
+How much time does it take to travel to work? shows the mean commute time by state for workers at least 16 years old who are not working at home. Find the mean travel time, and round off the answer properly.
+
+24.0
+24.3
+25.9
+18.9
+27.5
+17.9
+21.8
+20.9
+16.7
+27.3
+18.2
+24.7
+20.0
+22.6
+23.9
+18.0
+31.4
+22.3
+24.0
+25.5
+24.7
+24.6
+28.1
+24.9
+22.6
+23.6
+23.4
+25.7
+24.8
+25.5
+21.2
+25.7
+23.1
+23.0
+23.9
+26.0
+16.3
+23.1
+21.4
+21.5
+27.0
+27.0
+18.6
+31.7
+23.3
+30.1
+22.9
+23.3
+21.7
+18.6
+The sum of the travel times is 1,173.1. Divide the sum by 50 to calculate the mean value: 23.462. Because each state’s travel time was measured to the nearest tenth, round this calculation to the nearest hundredth: 23.46.
+
+A business magazine published data on the best small firms in 2012. These were firms which had been publicly traded for at least a year, have a stock price of at least $5 per share, and have reported annual revenue between $5 million and $1 billion. shows the ages of the chief executive officers for the first 60 ranked firms.
+
+Age
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+40–44
+3
+45–49
+11
+50–54
+13
+55–59
+16
+60–64
+10
+65–69
+6
+70–74
+1
+What is the frequency for CEO ages between 54 and 65?
+
+What percentage of CEOs are 65 years or older?
+
+What is the relative frequency of ages under 50?
+
+What is the cumulative relative frequency for CEOs younger than 55?
+
+Which graph shows the relative frequency and which shows the cumulative relative frequency?
+Use the following information to answer the next two exercises: contains data on hurricanes that have made direct hits on the United States. Between 1851-2004. A hurricane is given a strength category rating based on the minimum wind speed generated by the storm.
+
+Frequency of Hurricane Direct Hits
+
+Category
+Number of Direct Hits
+Relative Frequency
+Cumulative Frequency
+1
+109
+.3993
+.3993
+2
+72
+.2637
+.6630
+3
+71
+.2601
+4
+18
+.9890
+5
+3
+.0110
+1.0000
+Total = 273
+What is the relative frequency of direct hits that were category 4 hurricanes?
+
+.0768
+
+.0659
+
+.2601
+
+not enough information to calculate
+
+b
+
+What is the relative frequency of direct hits that were AT MOST a category 3 storm?
+
+.3480
+
+.9231
+
+.2601
+
+.3370
+
+the term applies to an ordered set of observations from smallest to largest. The cumulative relative frequency is the sum of the relative frequencies for all values that are less than or equal to the given value
+the number of times a value of the data occurs
+the ratio of the number of times a value of the data occurs in the set of all outcomes to the number of all outcomes to the total number of outcomes

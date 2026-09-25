@@ -1,0 +1,131 @@
+# m00002
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Microsoft Excel Basics
+
+Microsoft Excel Basics
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Identify common uses for Excel spreadsheets
+
+Use basic features of Excel
+
+Describe the essential functions of each tab on the ribbon
+
+Differentiate between worksheets and workbooks
+
+Create worksheets and navigate existing files
+
+Print a workbook and a worksheet
+
+WorldCorp sells many consumer electronics, including tablets, HD antennas, headphones, and TVs. The Portland location is in a port city, so it can dispatch orders anywhere in the world, but most of its orders go to the northern United States and Canada. As you receive more and more orders from clients, you need a spreadsheet or database to keep all data flowing so that the warehouse knows where the shipment will be sent, what products are in the order, and how much the total shipment costs. This data, in turn, can be added to the financial statements in the accounting system, which will help the senior managers analyze the sales results of the company. Microsoft Excel is a powerful tool that can be used for creating sales order tables.
+
+Common Uses of Spreadsheets
+
+Excel is a spreadsheet software application type that has rows and columns in a grid pattern. A cell is the intersection of a row and a column, and it looks like a rectangle. You can enter data into the cells to design tables and graphs and perform data analysis. A workbook is a file that contains at least one worksheet, which is a tab within a workbook where you can input data and design tables and graphs that use the data (). The terms worksheet and spreadsheet are interchangeable, but Excel uses the worksheet terminology.
+
+A workbook may contain several worksheets, similar to taking a hard copy of a set of data and adding it to another hard copy in a file folder. One benefit of using a workbook is that the worksheets within it can communicate with each other. Having multiple worksheets in one workbook gives you flexibility in organizing and analyzing your data. Data analysis grows in complexity as a business grows. Even a simple accounting system for a small business designed in Excel will require many sheets, and each worksheet can feed or receive data from other worksheets. One workbook can contain all of these worksheets together, as in a manila file folder.
+
+The cells are named based on their location. For example, the upper-left cell is in column A and row 1, so Excel designates its address relative to the other cells in the worksheet, or its cell reference, as A1. You can use these cell references to perform operations that use either formulas or functions. A formula is a mathematical operation that may use constants or cell references, or a combination of constants and cell references. All formulas must begin with “=.” For example, you can calculate 4 + 4 by typing “=4+4” in a cell, or you can add the contents of cell A1 and 4 by typing “=A1+4” or typing “=” and then clicking on cell A1 and then completing the formula.
+
+A function is a mathematical or analytical operation that uses words instead of mathematical operators. All functions must also begin with “=” in Excel. For example, to calculate 4 + 4, you can type “=sum(4,4).” Excel can do the calculations for you just as you would using a calculator. Excel’s formulas and functions can take the place of a calculator.
+
+One use for spreadsheets is to create a monthly food budget. You can keep track of how much you spend on groceries by category and on eating out at restaurants. You could list it by the type of product (i.e., milk) and by restaurant. Over time, you can use these numbers to determine your average cost for groceries and for eating out, and you will then be able to predict what you will spend on groceries. This tracking can serve as a control on your budget and will help you save money in the long run. You can use a similar process for all your personal finance and family expenses to enable you to create a budget that works for your situation by tracking expenses.
+
+In business, the same principles apply. If you can track business sales, you will be able to allocate the money more effectively. In other words, by having a better accounting system and dispatching of orders, a manager will be able to see where money is being generated. If the manager realizes that a certain product is generating a higher profit, then the manager can allocate resources to increase the sales of that product. For example, the company could increase the unit production and hire more sales agents to sell that product, which in turn will increase distribution venues, such as corporate retail clients that sell the products in their stores. Not only that, the company may also increase the marketing and advertisement expenses of these products, to gain new clients. All of these actions stemmed from the tracking of sales and analyzing what products sell the most units. In all these layers of actions, there will be many worksheets tracking data, such as an order-dispatching spreadsheet or the unit cost manufacturing sheets.
+
+Mallory is an Australian website that offers career advice and tips to recent college grads or high-school students about to enter the job market. Read the article that discusses different ways businesses use Excel to learn more.
+
+Basic Features
+
+The most salient Excel feature is the arrangement of cells in columns and rows. The appearance of Excel is similar to graph paper. You can easily customize the width or height to fit words or numbers in the cells. To navigate through the cells in the spreadsheet, you can click on the cell and then use the Enter or Return key to move down to the next row, use the Tab key to move to the next column, or use the arrows on your keyboard to move around the worksheet.
+
+Spreadsheets are designed for data analysis. Each cell has its own integrated calculators that automatically compute the result when you type in a formula or function. Another major benefit to Excel is that you can quickly and easily copy an equation into other cells, so that you do not have to retype it. Excel has many other features that can save you time over using a calculator.
+
+To demonstrate how efficient Excel can be in organizing and analyzing data, let’s look at an order-dispatching spreadsheet (). Each row represents one order, and each column represents a different characteristic of the order, identified by the labels in the top row (called the headers), with the data separated into different cells.
+
+Separating the data by columns serves multiple purposes. First, it allows a user to organize the information by any one or more of the columns. For example, you could organize the data by date, as shown in or by destination. You can also keep different types of data, such as item description (column D) and price per unit (column G), separated. That way, if the price per unit changed, it could be updated quickly and easily. Further, if they were combined in a single column, you would be unable to use formulas to do calculations, because Excel cannot perform calculations when there are both letters and numbers in a cell. Excel recognizes numerals for calculations but cannot perform calculations with words or letters, just as a calculator cannot calculate letters. Another benefit of separating data into categories by column is that each column can later become a graph and help the user visually analyze the information.
+
+The data in column E and column G in are not linked to other columns; in other words, they do not contain formulas or functions but are raw quantities entered into the spreadsheet. Column H, however, is a quantity based on the data in columns E and G. The FOB $ is the number of products (column E) multiplied by the price per unit (column G). The formula is displayed at the top of the Excel worksheet in the Formula Bar, which is next to the “fx ” symbol. You can see in the Formula Bar in that the formula is “=E2*G2,” yet the cell displays the result of the multiplication. The “*” is the mathematical symbol Excel uses for multiplication. This simple multiplication formula shows how Excel calculates numbers.
+
+In order to apply this calculation to the rest of the data, you can repeat the formula in other cells in the same column. In a, all data has been removed from column H, except for the first cell, which contains our formula “=E2*G2.” The easiest way to repeat the formula is to use AutoFill. Place the cursor on the lower-right corner of the cell, until the cursor changes to a black cross. Then, click and drag the cross to the end of your column of data, which copies the formula into each cell. b shows the result of dragging the formula from H2 to H18. AutoFill is also a useful feature for repeating text. The text could be a static value, such as when you enter multiple orders that contain the same item, or a time value, such as months of the year or days of the week. You can simply type in “January” and then use AutoFill to drag across or down to fill in the rest of the months. This method works for dates, days of the week, other text such as Quarter 1 and Quarter 2, and nearly any pattern of numbers (i.e., odd numbers or counting by 5). When using AutoFill for a pattern of numbers or text you want to repeat, you need to select enough of the pattern so that Excel can recognize the repetition. For example, if you want to generate a list of numbers counting up by 5, you will need to select at least the cells that contain 5 and 10 so that Excel understands you want to increase the value in each row in the AutoFill by 5.
+
+On a Mac, you can simply double-click on the cross, and the formula will copy down the column to the last row that contains data.
+
+The Ribbon
+
+As you recall from Essentials of Software Applications for Business, Excel’s interface includes a ribbon of commands, grouped into categories that are similar across Microsoft Office programs. The Home tab for Excel (a) has commands such as conditional formatting and inserting/deleting columns or cells. The Insert tab (b) includes inserting a chart or equation, which is not included on the Insert tab of other programs such as Microsoft Word. The Formulas (c) and Data (d) tabs are specific to Excel. These tabs include commands for analyzing data in various ways.
+
+Creating Worksheets and Navigating Existing Files
+
+Now that you understand how to navigate a worksheet, let’s see how to apply this skill. Suppose you need to build sales figures of different retail store locations. Each location will have its own worksheet, and then you’ll add one more sheet to total the sales figures and make a comparison using a table. a gives the data for location X. You will need to use the copy-and-paste method to use this table to make the table for location Y. In the copy-and-paste method, copy text or objects by typing Ctrl+C (or right-click to Copy or use the Clipboard command group on the Home tab), and then typing Ctrl+V to paste the text or object in the new area. To use this procedure in this workbook, follow these steps:
+
+Highlight the table, as shown in a.
+
+Press Ctrl+C to copy the table.
+
+Create a new sheet by clicking on the circled plus sign at the bottom of the worksheet.
+
+Click on cell A1.
+
+Press Ctrl+V to paste the table into your new sheet.
+
+This process copies the table exactly, so you will need to change the data so that it reflects the sales figures of location Y using the sales figures received from the finance department.
+
+Macs use a Command key, whereas PCs use a Ctrl (control) key. These keyboard shortcuts on a Mac are Command+C to copy and Command+V to paste. Mac also uses Ctrl+click to bring up the right-click menu Windows uses.
+
+Data that you provide or that is provided to you is often raw data, and designing a worksheet or even a workbook helps to organize it. Replace the data from location X with the data from location Y and change the location, as shown in b. Using the copy-and-paste procedure saves time when dealing with the same or similar scenarios because it eliminates the need to create a new table from scratch. Note, however, that this process works with cells that contain numbers and not formulas; copying and pasting tables with formulas requires additional work after the initial copy and paste to retain the correct formulas and cell references.
+
+Now, replicate the steps for location Z: copy and paste the table, and then retype the real data. Next, focus on creating the final sheet that displays the totals. In the workbook, this would be “Sheet 4.” Because the summary table needs to be a similar structure to the other tables, you can copy and paste the same table here, but you will need to modify Column D so that it adds up the units sold in each location. However, the summary table will need to use the data from Sheets 1, 2, and 3.
+
+To calculate the totals, you need an addition formula. Follow the same process used previously to insert a formula. First, in cell D2, type “=,” which tells Excel that a formula or a function is being entered. Next, click on the tab for Sheet 1 and then on cell D2 in that sheet (a). Then, type the operator (in this case +), and then repeat the process for the appropriate cells in Sheets 2 and 3. When finished, press Enter, and Excel will display the total in the cell. Notice in the syntax that Excel has inserted “Sheet1!” before the cell designation in the first part of the formula. This tells Excel that it needs to use the contents of cell D2 in Sheet 1 for that portion of the calculation. The next element is “Sheet2!D2,” which is cell D2 in Sheet 2.
+
+Now that the formula is in place for cell D2, use the AutoFill feature to apply the formula to subsequent rows. Highlight cell D2, click on the cross, and drag it to the bottom of the table. If you then click on cell D3, for example, you will see that the formula has been repeated but references cells D3 in the other sheets. b shows the completed table.
+
+This summary table can be very useful. In addition to providing a straightforward list of the totals, you could create graphs using this data and have a visual representation of sales trends. This is a simple scenario assumption; in the real-world sales totals, you would have much more than just five TV models. Imagine adding all the unit and dollar sale figures of three Best Buy locations in a given city; there would be hundreds of different products. You will learn increased complexity that will help in analyzing real-world problems such as this as your knowledge of Excel grows. The sorting and filtering feature is covered in Data Tables and Ranges, where you will learn how to set up a condition and a criterion to hide or show values for analysis.
+
+Printing Worksheets
+Excel offers two options for printing: either printing each worksheet separately or printing the whole workbook. To do either, first go to the File tab, and then click on Print (). The default is to print only the currently opened worksheet, so we’ll do that first. Choose the number of copies you want for this page, then choose the correct printer. There are other options for printing, include changing the size of the paper, changing vertical or horizontal orientation of the paper, adjusting the margins, and regulating the scaling (i.e., zooming in or not while printing). Once you have chosen your settings, click on the Print icon, and Sheet 1 will come out of the printer. Different printers might have different options for you to choose from.
+
+It is important to note that, when constructing spreadsheets, what you see on the computer screen is rarely how it looks when you actually print the workbook. When you have large spreadsheets with multiple rows or columns, they may not always fit within the bounds of the printed page. When you print the document, the result could be columns of data split oddly across several pages. Be sure to preview the printed version prior to printing. When you select Print, you will see the print preview on the right of the screen. Double-check that the columns and rows are displayed in the way you would like them to print. If not, you can change the margins of the worksheet or insert a page break as appropriate to print a final, professional workbook. More will be covered about formatting the worksheets and workbook in Formatting and Templates in Excel.
+
+You can get to the Print menu with Command+P, but you can also use the File tab at the top of the window. There is a separate menu in the File menu to set your print area, and you can select which worksheets to print from the Print menu.
+
+If you want to print all the sheets in the workbook, select Print Entire Workbook from the drop-down menu under Settings (). Then, click on the Print icon, and this time all the worksheets will be printed (including any blank worksheets that are in the workbook), instead of individual worksheets.
+
+Using Excel for Personal Finance
+
+Excel is a powerful tool for business; however, it can also be a very useful tool for managing personal finances. You can set up Excel to manage all your personal finances, link bank accounts and other financial documents, help with managing documentation for income taxes, and perform many other personal finance tasks. Excel has all the features needed to set up a budget and manage personal and projected income, track expenditures, and analyze investments and other personal revenue trends. You will want to organize your financial information into separate functional worksheets within your budget workbook to ensure you keep your finances organized from the start. For instance, consider keeping separate worksheets to record income, expenditures, savings, and investments. You can start small as you grow in your comfort level in using Excel to record your financial transactions; for instance, you might want to start with a weekly or monthly expenditure sheet to track what you spend your money on, then move into savings and tracking interest accrued. This disciplined approach will ensure data is recorded in a timely manner, reducing the potential for missed information and errors, ultimately helping you maximize your dollars. What’s more, there are a number of free templates available online and through Microsoft to help set up your budget workbook with little effort.
+
+What software or other tools do you use now to help you track your budget? Do a Google or template search in Excel and identify a budget template you might adopt. Once you find one you like, set up your monthly budget.
+
+Summary
+
+A spreadsheet is a type of software that allows you to calculate mathematical equations and design tables that you can use for financial documents and that performs data analysis and mathematical calculations.
+
+The GUI of Excel is designed for manipulating the cells of the spreadsheet. The GUI also has a ribbon, which is a wide, multitabbed menu that contains features for customizing and formatting tables.
+
+The spreadsheet file is called a workbook and is composed of worksheets. A workbook can contain only one worksheet. However, you cannot have a worksheet without a workbook.
+
+Add new worksheets to a workbook by clicking on the + next to the sheet tabs found along the bottom of the interface.
+
+The Print feature of Excel allows you to print a single worksheet or the whole workbook.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+address of a cell relative to the other cells in a worksheet
+mathematical operation that may use constants or cell references, or a combination of constants and cell references
+mathematical or analytical operation that uses words instead of mathematical operators
+software application type that has rows and columns in a grid pattern where you can enter data to design tables and graphs and perform data analysis
+file that contains one or more worksheets
+tab within a workbook where you can input data and design tables and graphs that use the data

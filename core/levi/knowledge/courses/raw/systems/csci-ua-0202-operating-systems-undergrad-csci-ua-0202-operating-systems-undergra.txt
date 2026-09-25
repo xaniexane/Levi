@@ -1,0 +1,206 @@
+# CSCI-UA.0202: Operating Systems (Undergrad): Operating Systems
+# NYU
+# source: http://www.cs.nyu.edu/~mwalfish/classes/15sp/index.html
+
+CSCI-UA.0202: Operating Systems (Undergrad)
+CSCI-UA.0202: Operating Systems (Undergrad)
+Home
+Schedule
+Policies and grading
+Labs
+Exams
+Tools -->
+Reference materials
+Announcements
+Latest Announcements
+5/21: Final grades submitted to registrar.
+Have a nice summer!
+5/18: Distribution of final exam scores posted.
+Here is the distribution of scores on the final exam.
+5/16: Final exam grades are posted
+Final exam grades are posted on NYU Classes. Average: 64.1. Median: 68. Standard deviation: 18.9. We are aiming to file letter grades by Monday evening.
+5/15: Lab weights
+The weights of the individual labs are now on the labs page .
+5/14: Solutions to final exam posted
+Solutions to the final are posted on the exams page . Please let us know if you see any errors.
+5/12: Taping fail
+Unfortunately, the battery in the microphone was dead, and as a consequence, the review session was not taped in any useful way. We will be posting detailed notes on Piazza.
+5/11: Review session will be taped
+The review session will be taped.
+5/11: Change in location of review session
+We will meet Tuesday evening in WWH 101 rather than WWH 109.
+5/11: Emergency office hours
+Mike will hold office hours Wednesday May 13, 5:00-7:00 PM . The location is 715 Bway, Room 709.
+5/7: HW10 Solns posted
+The solutions for HW10 are posted on the schedule page.
+See all announcements
+-->RSS 2.0 feed
+Course information
+Meetings
+Lectures: TueTh 3:30–4:45 PM, CIWW 109
+Review sessions: each of you is assigned to a session led by a
+team of TAs.
+Mon 10:00–11:00 AM, 719B Rm 1221. TA team: Keavney-Tan
+Mon 2:00–3:00 PM, 719B Rm 1221. TA team: Cui-Je
+Wed 1:00–2:00 PM, 719B Rm 1221. TA team: Cui-Je
+Wed 4:00–5:00 PM, 719B Rm 1221. TA team: Keavney-Tan
+Make-ups: There are a few days when I (Mike) cannot avoid being out
+of town. We will compensate with make-up classes on a few Friday
+afternoons. They will be videotaped.
+Staff
+Office hours Location
+Michael Walfish
+Instructor
+Fri, 3:00–4:00 PM, or by appt.
+715 Broadway, Room 709
+Yang Cui (pron: “ts- way ”)
+TA
+Wed, 2:00–4:00 PM
+719 Broadway, Room 1221
+Ye Ji
+TA
+Tue, 1:00–3:00 PM
+719 Broadway, Room 709
+Ryan Keavney
+TA
+Mon, 3:30–5:30 PM
+719 Broadway, Room 1221
+Cheng Tan
+TA
+Thu, 1:00–3:00 PM
+719 Broadway, Room 709
+Communication
+We want to make sure that our replies to your questions are
+consistent and timely. Thus:
+Please use Piazza
+for questions about assignments. If
+you include code that you have written, please mark your question
+private (failing to do this conflicts with the collaboration policy ). Please expect
+response latency of 12 to 24 hours.
+For administrative and sensitive questions, please use
+the staff email list: staff-cs202-sp15@cs
+Please note that questions about labs or course administration
+that are emailed to the instructor or a TA individually may be
+dropped.
+Here are the staff email addresses: mwalfish at cs, yang.cui at nyu,
+yj682 at nyu, rjk381 at nyu, chengtan at cs.nyu.
+Description and goals
+We hope you learn three sets of interrelated things. The
+first thing is how computers work. Students graduating with CS degrees
+should believe "there is no magic": they should be able to describe the
+chain of events that occurs when they hit a key and cause a letter to
+appear on the screen from the register level (or logical gate level or
+transistor level) to the system architecture level to the operating
+system level to the application level. This is philosophically
+important, but it is also of practical interest to developers who need
+to figure out how to make a system do what they want it to do.
+The second goal is for you to learn the core ideas in operating
+systems: concurrent programming, memory protection, virtual addressing,
+file systems, scheduling, transactions, etc. Often, such ideas are best
+explained as abstractions that some software layer (usually the
+operating system) provides above imperfect hardware to make that
+hardware usable by programmers and users. The intent is for you to
+understand such abstractions well enough to be able to synthesize new
+abstractions when faced with new problems.
+Many of the ideas and abstractions that we will cover are relevant
+not only to operating systems but also to large-scale systems. Thus, a
+third goal of this course is to enhance your ability to understand,
+design, and implement large-scale systems.
+The coding workload in this class will be substantial. This is a
+necessity: understanding many of the ideas above requires implementing
+them or working through them in code. The good news is that if things go
+according to plan, you will learn a lot in this class, and ideally find
+it rewarding. For example, you will learn how operating systems are
+implemented, and how to effectively use the abstractions exported by
+operating systems.
+The work
+The lectures will cover topics in operating systems and the
+topic of systems generally. The schedule is
+here .
+The review sessions will go over homework problems, work
+new exercises, and cover the labs. These are not required but highly
+recommended.
+The labs are a crucial component of this course and are
+described here . You will
+implement, help implement, or interact with, a number of the abstractions listed above.
+The exams are described here .
+The readings are listed on the
+schedule and should be completed before class. The required and
+optional texts are listed below.
+The homeworks are intended to reinforce the course material.
+(These
+homeworks shouldn't be confused with the labs and their included
+exercises.)
+The honors section is included in the regular section. The
+honors designation means that you will be asked to complete more
+exercises. The classes will be otherwise the same.
+We assume that you check the announcements (either on this site or by
+RSS) every 24 hours. Also, we will use Piazza . Finally, we
+will occasionally email you (for the most urgent communications). You
+are responsible for monitoring all three of these media.
+A note about the labs
+We recommend
+that you start the labs long before they are due. The standard advice is
+"Start the labs early", but that is not quite right. The best advice, we
+think, is "Start the labs on time, but on time is probably much earlier
+than you think it is".
+Readings
+Required texts
+Abbreviation Book and
+information Comment -->
+OSTEP
+Operating Systems: Three Easy
+Pieces , by Remzi H. Arpaci-Dusseau and Andrea C.
+Arpaci-Dusseau. Arpaci-Dusseau Books, May 2014, edition 0.80.
+Note: This book is freely available online, at the link
+given.
+OSM:SCI
+Operating
+Systems and Middleware: Supporting Controlled Interaction , by Max
+Hailperin. January 2014, Revised Edition 1.1.6.
+Note: As with the preceding text, this text is online
+and free. It is available under this
+Creative Commons license .
+CS:APP2e
+Computer Systems: A Programmer's Perspective, Second
+Edition , Randal E. Bryant and David R. O'Hallaron. (Addison-Wesley),
+2010. ISBN: 0136108040.
+Note:
+The prerequisite to this class (CS201) required this text, so we
+assume that you
+already have it.
+Optional texts
+Highly recommended: The C programming language (second edition) , Brian W.
+Kernighan and Dennis M. Ritchie. (Prentice Hall, Inc., 1988. ISBN:
+0-13-110362-8.) This book is a classic reference to C.
+Optional: Operating Systems: Principles and Practice , Beta Edition,
+Anderson and Dahlin. (Recursive Books, 2012. ISBN: 0985673516.)
+Optional: Modern Operating Systems (third
+edition) , Andrew S. Tanenbaum. (Prentice Hall, Inc., 2008. ISBN:
+0-13-600663-9.) Note: the NYU bookstores list this text as required; it is not (it was in an earlier version of this class.)
+Optional: Principles of Computer System Design: An
+Introduction , Jerome Saltzer and M. Frans Kaashoek (Morgan
+Kaufmann, 2009. ISBN: 0-12-374957-3.)
+Optional: Operating System Concepts (eighth edition) , Abraham
+Silberschatz, Peter Baer Galvin, and Greg Gagne. (John Wiley & Sons,
+2008. ISBN: 0-47-012872-0.)
+Acknowledgments
+We are indebted to the staffs of related past courses at
+MIT ,
+UCLA ,
+Harvard ,
+Stanford ,
+and UT Austin
+( cs372h ,
+cs372 ,
+and cs439
+a ,
+b ,
+c ),
+and ancestors of these courses. Credits are particularly due to
+Mike Dahlin (UT Austin), Eddie Kohler (Harvard), David
+Mazières (Stanford, formerly NYU), and Allison Norman (UT
+Austin). This site relies on software to generate course Web pages,
+developed by Dave Andersen and Nick Feamster.
+Last updated: 2019-08-11 07:38:00 -0400
+[ validate xhtml ]

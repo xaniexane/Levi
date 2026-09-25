@@ -1,0 +1,69 @@
+# m00103
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Writing to files
+
+Writing to files
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Understand how to open a file for writing.
+
+Explain different modes for opening a file in Python.
+
+Demonstrate the use of the write() function to write to a file.
+
+Understand the importance of closing a file.
+
+Opening a file for writing
+
+A file may be opened for reading, allowing no changes, or for writing, allowing changes to occur in the file. The mode defines whether a file is opened for reading only or for writing. The default mode of the open() function is reading only. A second mode parameter defines the mode.
+
+Ex: open("output.txt", 'w') opens the output.txt file in writing mode. The following table lists common modes.
+
+Modes for the open() function.
+
+Parameter
+Mode name and description
+'r'
+fileobj = open("input.txt")same as:fileobj = open("input.txt", 'r')
+'w'
+fileobj = open("output.txt", 'w')
+'a'
+fileobj = open("log.txt", 'a')
+
+File modes
+
+Assume that a file named logfile.txt exists.
+
+Using write() and close()
+
+The write() function is used to write to an already opened file. The write() function will only accept a string parameter. Other variable types must be cast to string before writing using write().
+
+The write() function does not automatically add a newline character as the print() function does. A newline must be added explicitly by adding a newline ('\n') character.
+
+The write() function writes automatically to a temporary store called the file buffer. To ensure that the information is written to a file, the close() function must be used. The close() function finalizes changes and closes the file.
+
+Writing and appending to a file
+
+The code's output is:
+
+write() and close()
+
+Writing to files
+resources.txt already exists. What would happen for each of the following snippets of code?
+
+Writing to a new file
+
+Write a line of text to a file called out.txt. Don't forget to use close(). out.txt should only have the line of text that you have written.
+
+Writing to an existing file
+
+Add two lines of text to the file called out.log, such that out.log has three lines after the code executes.
+
+Hint: Don't forget that you need a newline character.

@@ -1,0 +1,674 @@
+# m79612
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Independent and Mutually Exclusive Events
+
+Independent and Mutually Exclusive Events
+
+Independent and mutually exclusive do not mean the same thing.
+
+Independent Events
+
+Two events are independent if the following are true:
+P(A|B) = P(A)
+P(B|A) = P(B)
+P(A AND B) = P(A)P(B)
+
+Two events A and B are independent events if the knowledge that one occurred does not affect the chance the other occurs. For example, the outcomes of two roles of a fair die are independent events. The outcome of the first roll does not change the probability for the outcome of the second roll. To show two events are independent, you must show only one of the above conditions. If two events are not independent, then we say that they are dependent events.
+
+Sampling may be done with replacement or without replacement.
+With replacement: If each member of a population is replaced after it is picked, then that member has the possibility of being chosen more than once. When sampling is done with replacement, then events are considered to be independent, meaning the result of the first pick will not change the probabilities for the second pick.
+
+A bag contains four blue and three white marbles. James draws one marble from the bag at random, records the color, and replaces the marble. The probability of drawing blue is 
+
+ 4
+ 7
+
+. When James draws a marble from the bag a second time, the probability of drawing blue is still 
+
+ 4
+ 7
+
+. James replaced the marble after the first draw, so there are still four blue and three white marbles.
+Without replacement: When sampling is done without replacement, each member of a population may be chosen only once. In this case, the probabilities for the second pick are affected by the result of the first pick. The events are considered to be dependent or not independent.
+
+The bag still contains four blue and three white marbles. Maria draws one marble from the bag at random, records the color, and sets the marble aside. The probability of drawing blue on the first draw is 
+
+ 4
+ 7
+
+. Suppose Maria draws a blue marble and sets it aside. When she draws a marble from the bag a second time, there are now three blue and three white marbles. So, the probability of drawing blue is now 
+
+ 3
+ 6
+ 
+ =
+ 1
+ 2
+
+. Removing the first marble without replacing it influences the probabilities on the second draw.
+
+If it is not known whether A and B are independent or dependent, assume they are dependent until you can show otherwise.
+
+You have a fair, well-shuffled deck of 52 cards. It consists of four suits. The suits are clubs, diamonds, hearts, and spades. Clubs and spades are black, while diamonds and hearts are red cards. There are 13 cards in each suit consisting of A (ace), 2, 3, 4, 5, 6, 7, 8, 9, 10, J (jack), Q (queen), K (king) of that suit.
+
+a. Sampling with replacement
+Suppose you pick three cards with replacement. The first card you pick out of the 52 cards is the Q of spades. You put this card back, reshuffle the cards and pick a second card from the 52-card deck. It is the 10 of clubs. You put this card back, reshuffle the cards and pick a third card from the 52-card deck. This time, the card is the Q of spades again. Your picks are {Q of spades, 10 of clubs, Q of spades}. You have picked the Q of spades twice. You pick each card from the 52-card deck.
+
+b. Sampling without replacement
+Suppose you pick three cards without replacement. The first card you pick out of the 52 cards is the K of hearts. You put this card aside and pick the second card from the 51 cards remaining in the deck. It is the three of diamonds. You put this card aside and pick the third card from the remaining 50 cards in the deck. The third card is the J of spades. Your picks are {K of hearts, three of diamonds, J of spades}. Because you have picked the cards without replacement, you cannot pick the same card twice.
+
+Try It
+
+You have a fair, well-shuffled deck of 52 cards. It consists of four suits. The suits are clubs, diamonds, hearts and spades. There are 13 cards in each suit consisting of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, J (jack), Q (queen), K (king) of that suit. Three cards are picked at random.
+
+Suppose you know that the picked cards are Q of spades, K of hearts and Q of spades. Can you decide if the sampling was with or without replacement?
+
+Suppose you know that the picked cards are Q of spades, K of hearts, and J of spades. Can you decide if the sampling was with or without replacement?
+
+With replacement
+
+No
+
+You have a fair, well-shuffled deck of 52 cards. It consists of four suits. The suits are clubs, diamonds, hearts, and spades. There are 13 cards in each suit consisting of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, J (jack), Q (queen), and K (king) of that suit. S = spades, H = Hearts, D = Diamonds, C = Clubs.
+
+Suppose you pick four cards, but do not put any cards back into the deck. Your cards are QS, 1D, 1C, QD.
+
+Suppose you pick four cards and put each card back before you pick the next card. Your cards are KH, 7D, 6D, KH.
+
+Which of a. or b. did you sample with replacement and which did you sample without replacement?
+
+a. Because you do not put any cards back, the deck changes after each draw. These events are dependent, and this is sampling without replacement; b. Because you put each card back before picking the next one, the deck never changes. These events are independent, so this is sampling with replacement.
+
+Try It
+
+You have a fair, well-shuffled deck of 52 cards. It consists of four suits. The suits are clubs, diamonds, hearts, and spades. There are 13 cards in each suit consisting of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, J (jack), Q (queen), and K (king) of that suit. S = spades, H = Hearts, D = Diamonds, C = Clubs. Suppose that you sample four cards without replacement. Which of the following outcomes are possible? Answer the same question for sampling with replacement.
+QS, 1D, 1C, QD
+KH, 7D, 6D, KH
+QS, 7D, 6D, KS
+
+without replacement: 1. Possible; 2. Impossible, 3. Possible
+
+with replacement: 1. Possible; 2. Possible, 3. Possible
+
+Mutually Exclusive Events
+A and B are mutually exclusive events if they cannot occur at the same time. This means that A and B do not share any outcomes and P(A AND B) = 0.
+
+For example, suppose the sample space S = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}. Let A = {1, 2, 3, 4, 5}, B = {4, 5, 6, 7, 8}, and C = {7, 9}. A AND B = {4, 5}. P(A AND B) = 210 and is not equal to zero. Therefore, A and B are not mutually exclusive. A and C do not have any numbers in common so P(A AND C) = 0. Therefore, A and C are mutually exclusive.
+
+If it is not known whether A and B are mutually exclusive, assume they are not until you can show otherwise. The following examples illustrate these definitions and terms.
+
+Flip two fair coins. This is an experiment.
+
+The sample space is {HH, HT, TH, TT}, where T = tails and H = heads. The outcomes are HH, HT, TH, and TT. The outcomes HT and TH are different. The HT means that the first coin showed heads and the second coin showed tails. The TH means that the first coin showed tails and the second coin showed heads.
+
+Let A = the event of getting at most one tail. At most one tail means zero or one tail. Then A can be written as {HH, HT, TH}. The outcome HH shows zero tails. HT and TH each show one tail.
+
+Let B = the event of getting all tails. B can be written as {TT}. B is the complement event of A, so B = A′. Also, P(A) + P(B) = P(A) + P(A′) = 1.
+
+The probabilities for A and for B are P(A) = 34 and P(B) = 14.
+
+Let C = the event of getting all heads. C = {HH}. Since B = {TT}, P(B AND C) = 0. B and C are mutually exclusive. (B and C have no members in common because you cannot have all tails and all heads at the same time.)
+
+Let D = event of getting more than one tail. D = {TT}. P(D) = 
+
+ 1
+ 4
+ 
+.
+
+Let E = event of getting a head on the first roll. This implies you can get either a head or tail on the second roll. E = {HT, HH}. P(E) = 
+
+ 2
+ 4
+ 
+.
+
+Find the probability of getting at least one (one or two) tail in two flips. Let F = event of getting at least one tail in two flips. F = {HT, TH, TT}. P(F) = 
+ 
+ 3
+ 4
+ 
+.
+
+Try It
+
+Draw two cards from a standard 52-card deck with replacement. Find the probability of getting at least one black card.
+
+Try It Solutions
+
+The sample space of drawing two cards with replacement from a standard 52-card deck with respect to color is {BB, BR, RB, RR}.
+
+Event A = Getting at least one black card = {BB, BR, RB}
+P(A) = 
+ 
+ 3
+ 4
+
+ = 0.75
+
+Flip two fair coins. Find the probabilities of the events.
+
+Let F = the event of getting at most one tail (zero or one tail).
+
+Let G = the event of getting two faces that are the same.
+
+Let H = the event of getting a head on the first flip followed by a head or tail on the second flip.
+
+Are F and G mutually exclusive?
+
+Let J = the event of getting all tails. Are J and H mutually exclusive?
+
+Look at the sample space in .
+
+Zero (0) or one (1) tails occur when the outcomes HH, TH, HT show up. P(F) = 
+
+ 3
+ 4
+ 
+.
+
+Two faces are the same if HH or TT show up. P(G) = 24.
+
+A head on the first flip followed by a head or tail on the second flip occurs when HH or HT show up. P(H) = 24.
+F and G share HH so P(F AND G) is not equal to zero (0). F and G are not mutually exclusive.
+
+Getting all tails occurs when tails shows up on both coins (TT). H’s outcomes are HH and HT.
+J and H have nothing in common so P(J AND H) = 0. J and H are mutually exclusive.
+
+Try It
+
+A box has two balls, one white and one red. We select one ball, put it back in the box, and select a second ball (sampling with replacement). Find the probability of the following events:
+
+Let F = the event of getting the white ball twice.
+
+Let G = the event of getting two balls of different colors.
+
+Let H = the event of getting white on the first pick.
+
+Are F and G mutually exclusive?
+
+Are G and H mutually exclusive?
+P(F) = 14
+P(G) = 12
+P(H) = 12
+
+Yes
+
+No
+
+Roll one fair, six-sided die. The sample space is {1, 2, 3, 4, 5, 6}. Let event A = a face is odd. Then A = {1, 3, 5}. Let event B = a face is even. Then B = {2, 4, 6}.
+
+Find the complement of A, A′. The complement of A, A′, is B because A and B together make up the sample space. P(A) + P(B) = P(A) + P(A′) = 1. Also, P(A) = 36 and P(B) = 36.
+
+Let event C = odd faces larger than two. Then C = {3, 5}. Let event D = all even faces smaller than five. Then D = {2, 4}. P(C AND D) = 0 because you cannot have an odd and even face at the same time. Therefore, C and D are mutually exclusive events.
+
+Let event E = all faces less than five. E = {1, 2, 3, 4}.
+
+Are C and E mutually exclusive events? Answer yes or no. Why or why not?
+
+No. C = {3, 5} and E = {1, 2, 3, 4}. P(C AND E) = 16. To be mutually exclusive, P(C AND E) must be zero.
+
+Find P(C|A). This is a conditional probability. Recall that event C is {3, 5} and event A is {1, 3, 5}. To find P(C|A), find the probability of C using the sample space A. You have reduced the sample space from the original sample space {1, 2, 3, 4, 5, 6} to {1, 3, 5}. So, P(C|A) = 
+
+ 2
+ 3
+
+.
+
+Try It
+
+Let event A = learning Spanish. Let event B = learning German. Then A AND B = learning Spanish and German. Suppose P(A) = 0.4 and P(B) = .2. P(A AND B) = .08. Are events A and B independent? Hint—You must show one of the following:
+P(A|B) = P(A)
+P(B|A) = P(B)
+P(A AND B) = P(A)P(B)
+P(A|B) = 
+
+ P(A AND B)
+
+ P(B)
+
+  = 
+ 
+ 0.08
+
+ 0.2
+
+  = 0.4 = P(A)
+
+The events are independent because P(A|B) = P(A).
+
+Let event G = taking a math class. Let event H = taking a science class. Then, G AND H = taking a math class and a science class. Suppose P(G) = .6, P(H) = .5, and P(G AND H) = .3. Are G and H independent?
+
+If G and H are independent, then you must show ONE of the following:
+P(G|H) = P(G)
+P(H|G) = P(H)
+P(G AND H) = P(G)P(H)
+
+NOTE
+The choice you make depends on the information you have. You could choose any of the methods here because you have the necessary information.
+
+a. Show that P(G|H) = P(G).
+P(G|H) = 
+
+ P(G AND H)
+
+ P(H)
+
+ = 
+
+ .3
+
+ .5
+
+ = .6 = P(G)
+
+b. Show P(G AND H) = P(G)P(H).
+P(G)P(H) = (.6)(.5) = .3 = P(G AND H)
+
+Since G and H are independent, knowing that a person is taking a science class does not change the chance that he or she is taking a math class. If the two events had not been independent, that is, they are dependent, then knowing that a person is taking a science class would change the chance he or she is taking math. For practice, show that P(H|G) = P(H) to show that G and H are independent events.
+
+Try It
+
+In a bag, there are six red marbles and four green marbles. The red marbles are marked with the numbers 1, 2, 3, 4, 5, and 6. The green marbles are marked with the numbers 1, 2, 3, and 4.
+R = a red marble
+G = a green marble
+O = an odd-numbered marble
+
+The sample space is S = {R1, R2, R3, R4, R5, R6, G1, G2, G3, G4}.
+S has 10 outcomes. What is P(G AND O)?
+
+Event G and O = {G1, G3}
+P(G and O) = 
+ 
+ 2
+ 
+ 10
+
+ = 0.2
+
+Let event C = taking an English class. Let event D = taking a speech class.
+
+Suppose P(C) = .75, P(D) = .3, P(C|D) = .75 and P(C AND D) = .225.
+
+Justify your answers to the following questions numerically.
+
+Are C and D independent?
+
+Are C and D mutually exclusive?
+
+What is P(D|C)?
+
+Yes, because P(C|D) = .75 = P(C).
+
+No, because P(C AND D) is not equal to zero.
+P(D|C) = 
+
+ P(C AND D)
+
+ P(C)
+
+ = 
+
+ 0.225
+
+ .75
+
+ = .3
+
+Try It
+
+A student goes to the library. Let events B = the student checks out a book and D = the student checks out a DVD. Suppose that P(B) = .40, P(D) = .30 and P(B AND D) = .20.
+
+Find P(B|D).
+
+Find P(D|B).
+
+Are B and D independent?
+
+Are B and D mutually exclusive?
+P(B|D) = 0.6667
+P(D|B) = 0.5
+
+No
+
+No
+
+In a box there are three red cards and five blue cards. The red cards are marked with the numbers 1, 2, and 3, and the blue cards are marked with the numbers 1, 2, 3, 4, and 5. The cards are well-shuffled. You reach into the box (you cannot see into it) and draw one card.
+
+Let R = red card is drawn, B = blue card is drawn, E = even-numbered card is drawn.
+
+The sample space S = R1, R2, R3, B1, B2, B3, B4, B5. S has eight outcomes.
+P(R) = 
+
+ 3
+ 8
+
+. P(B) = 
+
+ 5
+ 8
+
+. P(R AND B) = 0. You cannot draw one card that is both red and blue.
+P(E) = 
+
+ 3
+ 8
+
+. There are three even-numbered cards, R2, B2, and B4.
+P(E|B = 
+
+ 2
+ 5
+
+. There are five blue cards: B1, B2, B3, B4, and B5. Out of the blue cards, there are two even cards; B2 and B4.
+P(B|E) = 
+
+ 2
+ 3
+
+. There are three even-numbered cards: R2, B2, and B4. Out of the even-numbered cards, two are blue; B2 and B4.
+
+The events R and B are mutually exclusive because P(R AND B) = 0.
+
+Let G = card with a number greater than 3. G = {B4, B5}. P(G) = 
+
+ 2
+ 8
+
+. Let H = blue card numbered between one and four, inclusive. H = {B1, B2, B3, B4}. P(G|H) = 
+
+ 1
+ 4
+
+. The only card in H that has a number greater than three is B4. Since 
+
+ 2
+ 8
+
+ = 
+
+ 1
+ 4
+
+, P(G) = P(G|H), which means that G and H are independent.
+
+Try It
+
+In a basketball arena,
+
+70 percent of the fans are rooting for the home team,
+
+25 percent of the fans are wearing blue,
+
+20 percent of the fans are wearing blue and are rooting for the away team, and
+
+Of the fans rooting for the away team, 67 percent are wearing blue.
+
+Let A be the event that a fan is rooting for the away team.
+Let B be the event that a fan is wearing blue.
+Are the events of rooting for the away team and wearing blue independent? Are they mutually exclusive?
+P(B|A) = 0.67
+P(B) = 0.25
+
+So P(B) does not equal P(B|A) which means that B and A are not independent (wearing blue and rooting for the away team are not independent). They are also not mutually exclusive, because P(B AND A) = 0.20, not 0.
+
+In a particular class, 60 percent of the students are female. Fifty percent of all students in the class have long hair. Forty-five percent of the students are female and have long hair. Of the female students, 75 percent have long hair. Let F be the event that a student is female. Let L be the event that a student has long hair. One student is picked randomly. Are the events of being female and having long hair independent?
+
+The following probabilities are given in this example:
+P(F) = 0.60; P(L) = 0.50
+P(F AND L) = 0.45
+P(L|F) = 0.75
+
+NOTE
+The choice you make depends on the information you have. You could use the first or last condition on the list for this example. You do not know P(F|L) yet, so you cannot use the second condition.
+Solution 1Check whether P(F AND L) = P(F)P(L). We are given that P(F AND L) = 0.45, but P(F)P(L) = (.60)(.50) = .30. The events of being female and having long hair are not independent because P(F AND L) does not equal P(F)P(L).
+
+Solution 1
+Solution 2Check whether P(L|F) equals P(L). We are given that P(L|F) = .75, but P(L) = .50; they are not equal. The events of being female and having long hair are not independent.
+
+Solution 2
+Interpretation of ResultsThe events of being female and having long hair are not independent; knowing that a student is female changes the probability that a student has long hair.
+
+Interpretation of Results
+
+Try It
+
+Mark is deciding which route to take to work. His choices are I = the Interstate and F = Fifth Street.
+P(I) = .44 and P(F) = .55
+P(I AND F) = 0 because Mark will take only one route to work.
+
+What is the probability of P(I OR F)?
+
+Because P(I AND F) = 0,
+P(I OR F) = P(I) + P(F) - P(I AND F) = 0.44 + 0.56 - 0 = 1
+
+Toss one fair coin (the coin has two sides, H and T). The outcomes are ________. Count the outcomes. There are ________ outcomes.
+
+Toss one fair, six-sided die (the die has 1, 2, 3, 4, 5, or 6 dots on a side). The outcomes are ________. Count the outcomes. There are ________ outcomes.
+
+Multiply the two numbers of outcomes. The answer is ________.
+
+If you flip one fair coin and follow it with the toss of one fair, six-sided die, the answer in Part c is the number of outcomes (size of the sample space). List the outcomes. Hint—Two of the outcomes are H1 and T6.
+
+Event A = heads (H) on the coin followed by an even number (2, 4, 6) on the die.
+A = {________}. Find P(A).
+
+Event B = heads on the coin followed by a three on the die. B = {________}. Find P(B).
+
+Are A and B mutually exclusive? Hint—What is P(A AND B)? If P(A AND B) = 0, then A and B are mutually exclusive.
+
+Are A and B independent? Hint—Is P(A AND B) = P(A)P(B)? If P(A AND B) = P(A)P(B), then A and B are independent. If not, then they are dependent.
+H and T; 2
+
+1, 2, 3, 4, 5, 6; 6
+
+2(6) = 12
+
+Make a systematic list of possible outcomes. Start by listing all possible outcomes when the coin shows tails (T). Then list the outcomes that are possible when the coin shows heads (H): T1, T2, T3, T4, T5, T6, H1, H2, H3, H4, H5, H6
+A = {H2, H4, H6}; P(A) =
+
+ number of outcomes in A
+
+ number of possible outcomes
+
+ = 
+ 
+ 3
+ 
+ 12
+B = {H3}; P(B) = 
+
+ 1
+ 
+ 12
+
+Yes, because P(A AND B) = 0
+P(A AND B) = 0. P(A)P(B) = 
+ 
+ (
+
+ 3
+ 
+ 12
+
+ )
+
+ (
+
+ 1
+ 
+ 12
+
+ )
+ 
+. P(A AND B) does not equal P(A)P(B), so A and B are dependent.
+
+Try It
+
+A box has two balls, one white and one red. We select one ball, put it back in the box, and select a second ball (sampling with replacement). Let T be the event of getting the white ball twice, F the event of picking the white ball first, and S the event of picking the white ball in the second drawing.
+
+Compute P(T).
+
+Compute P(T|F).
+
+Are T and F independent?
+
+Are F and S mutually exclusive?
+
+Are F and S independent?
+P(T) = 
+
+ 1
+ 4
+P(T|F) = 
+
+ 1
+ 2
+
+No
+
+No
+
+Yes
+
+References
+
+Gallup. (n.d.). Retrieved from www.gallup.com/
+
+Lopez, S., and Sidhu, P. (2013, March 28). U.S. teachers love their lives, but struggle in the workplace. Gallup Wellbeing. http://www.gallup.com/poll/161516/teachers-love-lives-struggle-workplace.aspx
+
+Chapter Review
+
+Two events A and B are independent if the knowledge that one occurred does not affect the chance the other occurs. If two events are not independent, then we say that they are dependent
+
+In sampling with replacement, each member of a population is replaced after it is picked, so that member has the possibility of being chosen more than once, and the events are considered to be independent. In sampling without replacement, each member of a population may be chosen only once, and the events are considered not to be independent. When events do not share outcomes, they are mutually exclusive of each other.
+
+Formula Review
+
+If A and B are independent, P(A AND B) = P(A)P(B), P(A|B) = P(A), and P(B|A) = P(B).
+
+If A and B are mutually exclusive, P(A OR B) = P(A) + P(B) and P(A AND B) = 0.
+E and F are mutually exclusive events. P(E) = .4; P(F) = .5. Find P(E∣F).
+J and K are independent events. P(J|K) = .3. Find P(J).
+P(J) = .3
+U and V are mutually exclusive events. P(U) = .26; P(V) = .37. Find the following:
+P(U AND V) =
+P(U|V) =
+P(U OR V) =
+Q and R are independent events. P(Q) = .4 and P(Q AND R) = .1. Find P(R).
+P(Q AND R) = P(Q)P(R)
+
+.1 = (.4)P(R)
+P(R) = .25
+
+Homework
+Use the following information to answer the next 12 exercises. The graph shown is based on more than 170,000 interviews that took place from January through December 2012. The sample consists of employed Americans 18 years of age or older. The Health Index Scores are the sample space. We randomly sample one type of Health Index Score, the emotional well-being score.
+
+Find the probability that a Health Index Score is 82.7.
+
+Find the probability that a Health Index Score is 81.0.
+
+0
+
+Find the probability that a Health Index Score is more than 81.
+
+Find the probability that a Health Index Score is between 80.5 and 82.
+
+.3571
+
+If we know a Health Index Score is 81.5 or more, what is the probability that it is 82.7?
+
+What is the probability that a Health Index Score is 80.7 or 82.7?
+
+.2142
+
+What is the probability that a Health Index Score is less than 80.2 given that it is already less than 81?
+
+What occupation has the highest Health Index Score?
+
+Physician (83.7)
+
+What occupation has the lowest emotional index score?
+
+What is the range of the data?
+
+83.7 − 79.6 = 4.1
+
+Compute the average Health Index Score.
+
+If all occupations are equally likely for a certain individual, what is the probability that he or she will have an occupation with lower than average Health Index Score?
+P(Occupation < 81.3) = .5
+
+Bringing It Together
+
+A previous year, the weights of the members of a California football team and a Texas football team were published in a newspaper The factual data are compiled into .
+
+Shirt#
+≤ 210
+211–250
+251–290
+290≤
+1–33
+21
+5
+0
+0
+34–66
+6
+18
+7
+4
+66–99
+6
+12
+22
+5
+For the following, suppose that you randomly select one player from the California team or the Texas team.
+
+If having a shirt number from one to 33 and weighing at most 210 pounds were independent events, then what should be true about P(Shirt# 1–33|≤ 210 pounds)?
+
+The probability that a male develops some form of cancer in his lifetime is .4567. The probability that a male has at least one false-positive test result, meaning the test comes back for cancer when the man does not have it, is .51. Some of the following questions do not have enough information for you to answer them. Write not enough information for those answers. Let C = a man develops cancer in his lifetime and P = a man has at least one false-positive.
+P(C) = ______
+P(P|C) = ______
+P(P|C') = ______
+If a test comes up positive, based upon numerical values, can you assume that man has cancer? Justify numerically and explain why or why not.
+P(C) = ______
+P(P|C) = ______
+P(P|C') = ______
+
+If a test comes up positive, based upon numerical values, can you assume that man has cancer? Justify numerically and explain why or why not.
+P(C) = .4567
+
+not enough information
+
+not enough information
+
+no, because over half (0.51) of men have at least one false-positive text
+
+Given events G and H: P(G) = .43; P(H) = .26; P(H AND G) = .14
+
+Find P(H OR G).
+
+Find the probability of the complement of event (H AND G).
+
+Find the probability of the complement of event (H OR G).
+
+Given events J and K: P(J) = .18; P(K) = .37; P(J OR K) = .45
+
+Find P(J AND K).
+
+Find the probability of the complement of event (J AND K).
+
+Find the probability of the complement of event (J OR K).
+P(J OR K) = P(J) + P(K) − P(J AND K); .45 = .18 + .37 – P(J AND K); solve to find P(J AND K) = .10
+P(NOT (J AND K)) = 1 – P(J AND K) = 1 – 010 = .90
+P(NOT (J OR K)) = 1 – P(J OR K) = 1 – .45 = .55
+
+if two events are NOT independent, then we say that they are dependent
+if each member of a population is replaced after it is picked, then that member has the possibility of being chosen more than once
+P(A|B) is the probability that event A will occur given that the event B has already occurred
+an outcome is in the event A OR B if the outcome is in A, is in B, or is in both A and B

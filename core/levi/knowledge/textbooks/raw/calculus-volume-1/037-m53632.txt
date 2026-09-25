@@ -1,0 +1,466 @@
+# m53632
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Fundamental Theorem of Calculus
+
+The Fundamental Theorem of Calculus
+
+Describe the meaning of the Mean Value Theorem for Integrals.
+
+State the meaning of the Fundamental Theorem of Calculus, Part 1.
+
+Use the Fundamental Theorem of Calculus, Part 1, to evaluate derivatives of integrals.
+
+State the meaning of the Fundamental Theorem of Calculus, Part 2.
+
+Use the Fundamental Theorem of Calculus, Part 2, to evaluate definite integrals.
+
+Explain the relationship between differentiation and integration.
+
+In the previous two sections, we looked at the definite integral and its relationship to the area under the curve of a function. Unfortunately, so far, the only tools we have available to calculate the value of a definite integral are geometric area formulas and limits of Riemann sums, and both approaches are extremely cumbersome. In this section we look at some more powerful and useful techniques for evaluating definite integrals.
+
+These new techniques rely on the relationship between differentiation and integration. This relationship was discovered and explored by both Sir Isaac Newton and Gottfried Wilhelm Leibniz (among others) during the late 1600s and early 1700s, and it is codified in what we now call the Fundamental Theorem of Calculus, which has two parts that we examine in this section. Its very name indicates how central this theorem is to the entire development of calculus.
+
+Isaac Newton’s contributions to mathematics and physics changed the way we look at the world. The relationships he discovered, codified as Newton’s laws and the law of universal gravitation, are still taught as foundational material in physics today, and his calculus has spawned entire fields of mathematics. To learn more, read a brief biography of Newton with multimedia clips.
+
+Before we get to this crucial theorem, however, let’s examine another important theorem, the Mean Value Theorem for Integrals, which is needed to prove the Fundamental Theorem of Calculus.
+
+The Mean Value Theorem for Integrals
+
+The Mean Value Theorem for Integrals states that a continuous function on a closed interval takes on its average value at some point in that interval. The theorem guarantees that if f(x) is continuous, a point c exists in an interval [a,b] such that the value of the function at c is equal to the average value of f(x) over [a,b]. We state this theorem mathematically with the help of the formula for the average value of a function that we presented at the end of the preceding section.
+
+The Mean Value Theorem for Integrals
+
+If f(x) is continuous over an interval [a,b], then there is at least one point c∈[a,b] such that
+
+This formula can also be stated as
+
+Proof
+
+Since f(x) is continuous on [a,b], by the extreme value theorem (see Maxima and Minima), it assumes minimum and maximum values—m and M, respectively—on [a,b]. Then, for all x in [a,b], we have m≤f(x)≤M. Therefore, by the comparison theorem (see The Definite Integral), we have
+
+Dividing by b−a gives us
+
+Since 1b−a∫abf(x)dx is a number between m and M, and since f(x) is continuous and assumes the values m and M over [a,b], by the Intermediate Value Theorem (see Continuity), there is a number c over [a,b] such that
+
+and the proof is complete.
+
+□
+
+Finding the Average Value of a Function
+
+Find the average value of the function f(x)=8−2x over the interval [0,4] and find c such that f(c) equals the average value of the function over [0,4].
+
+The formula states the mean value of f(x) is given by
+
+We can see in that the function represents a straight line and forms a right triangle bounded by the x- and y-axes. The area of the triangle is A=12(base)(height). We have
+
+The average value is found by multiplying the area by 1/(4−0). Thus, the average value of the function is
+
+Set the average value equal to f(c) and solve for c.
+
+At c=2,f(2)=4.
+
+Find the average value of the function f(x)=x2 over the interval [0,6] and find c such that f(c) equals the average value of the function over [0,6].
+Average value=1.5;c=3
+
+Hint
+
+Use the procedures from to solve the problem
+
+Finding the Point Where a Function Takes on Its Average Value
+
+Given ∫03x2dx=9, find c such that f(c) equals the average value of f(x)=x2 over [0,3].
+
+We are looking for the value of c such that
+
+Replacing f(c) with c2, we have
+
+Since −3 is outside the interval, take only the positive value. Thus, c=3 ().
+
+Given ∫03(2x2−1)dx=15, find c such that f(c) equals the average value of f(x)=2x2−1 over [0,3].
+c=3
+
+Hint
+
+Use the procedures from to solve the problem.
+
+Fundamental Theorem of Calculus Part 1: Integrals and Antiderivatives
+
+As mentioned earlier, the Fundamental Theorem of Calculus is an extremely powerful theorem that establishes the relationship between differentiation and integration, and gives us a way to evaluate definite integrals without using Riemann sums or calculating areas. The theorem is comprised of two parts, the first of which, the Fundamental Theorem of Calculus, Part 1, is stated here. Part 1 establishes the relationship between differentiation and integration.
+
+Fundamental Theorem of Calculus, Part 1
+
+If f(x) is continuous over an interval [a,b], and the function F(x) is defined by
+
+then F′(x)=f(x) over [a,b].
+
+Before we delve into the proof, a couple of subtleties are worth mentioning here. First, a comment on the notation. Note that we have defined a function, F(x), as the definite integral of another function, f(t), from the point a to the point x. At first glance, this is confusing, because we have said several times that a definite integral is a number, and here it looks like it’s a function. The key here is to notice that for any particular value of x, the definite integral is a number. So the function F(x) returns a number (the value of the definite integral) for each value of x.
+
+Second, it is worth commenting on some of the key implications of this theorem. There is a reason it is called the Fundamental Theorem of Calculus. Not only does it establish a relationship between integration and differentiation, but also it guarantees that any integrable function has an antiderivative.
+
+Proof
+
+Applying the definition of the derivative, we have
+
+Looking carefully at this last expression, we see 1h∫xx+hf(t)dt is just the average value of the function f(x) over the interval [x,x+h]. Therefore, by , there is some number c in [x,x+h] such that
+
+In addition, since c is between x and x + h, c approaches x as h approaches zero. Also, since f(x) is continuous, we have limh→0f(c)=limc→xf(c)=f(x). Putting all these pieces together, we have
+
+and the proof is complete.
+
+□
+
+Finding a Derivative with the Fundamental Theorem of Calculus
+
+Use the to find the derivative of
+
+According to the Fundamental Theorem of Calculus, the derivative is given by
+
+Use the Fundamental Theorem of Calculus, Part 1 to find the derivative of g(r)=∫0rx2+4dx.
+g′(r)=r2+4
+
+Hint
+
+Follow the procedures from to solve the problem.
+
+Using the Fundamental Theorem and the Chain Rule to Calculate Derivatives
+
+Let F(x)=∫1xsintdt. Find F′(x).
+
+Letting u(x)=x, we have F(x)=∫1u(x)sintdt. Thus, by the Fundamental Theorem of Calculus and the chain rule,
+
+Let F(x)=∫1x3costdt. Find F′(x).
+F′(x)=3x2cosx3
+
+Hint
+
+Use the chain rule to solve the problem.
+
+Using the Fundamental Theorem of Calculus with Two Variable Limits of Integration
+
+Let F(x)=∫x2xt3dt. Find F′(x).
+
+We have F(x)=∫x2xt3dt. Both limits of integration are variable, so we need to split this into two integrals. We get
+
+Differentiating the first term, we obtain
+
+Differentiating the second term, we first let u(x)=2x. Then,
+
+Thus,
+
+Let F(x)=∫xx2costdt. Find F′(x).
+F′(x)=2xcosx2−cosx
+
+Hint
+
+Use the procedures from to solve the problem.
+
+Fundamental Theorem of Calculus, Part 2: The Evaluation Theorem
+
+The Fundamental Theorem of Calculus, Part 2, is perhaps the most important theorem in calculus. After tireless efforts by mathematicians for approximately 500 years, new techniques emerged that provided scientists with the necessary tools to explain many phenomena. Using calculus, astronomers could finally determine distances in space and map planetary orbits. Everyday financial problems such as calculating marginal costs or predicting total profit could now be handled with simplicity and accuracy. Engineers could calculate the bending strength of materials or the three-dimensional motion of objects. Our view of the world was forever changed with calculus.
+
+After finding approximate areas by adding the areas of n rectangles, the application of this theorem is straightforward by comparison. It almost seems too simple that the area of an entire curved region can be calculated by just evaluating an antiderivative at the first and last endpoints of an interval.
+
+The Fundamental Theorem of Calculus, Part 2
+
+If f is continuous over the interval [a,b] and F(x) is any antiderivative of f(x), then
+
+We often see the notation F(x)|ab to denote the expression F(b)−F(a). We use this vertical bar and associated limits a and b to indicate that we should evaluate the function F(x) at the upper limit (in this case, b), and subtract the value of the function F(x) evaluated at the lower limit (in this case, a).
+
+The Fundamental Theorem of Calculus, Part 2 (also known as the evaluation theorem) states that if we can find an antiderivative for the integrand, then we can evaluate the definite integral by evaluating the antiderivative at the endpoints of the interval and subtracting.
+
+Proof
+
+Let P={xi},i=0,1,…,n be a regular partition of [a,b]. Then, we can write
+
+Now, we know F is an antiderivative of f over [a,b], so by the Mean Value Theorem (see The Mean Value Theorem) for i=0,1,…,n we can find ci in [xi−1,xi] such that
+
+Then, substituting into the previous equation, we have
+
+Taking the limit of both sides as n→∞, we obtain
+
+□
+
+Evaluating an Integral with the Fundamental Theorem of Calculus
+
+Use to evaluate
+
+Recall the power rule for Antiderivatives:
+
+Use this rule to find the antiderivative of the function and then apply the theorem. We have
+
+Analysis
+
+Notice that we did not include the “+ C” term when we wrote the antiderivative. The reason is that, according to the Fundamental Theorem of Calculus, Part 2, any antiderivative works. So, for convenience, we chose the antiderivative with C=0. If we had chosen another antiderivative, the constant term would have canceled out. This always happens when evaluating a definite integral.
+
+The region of the area we just calculated is depicted in . Note that the region between the curve and the x-axis is all below the x-axis. Area is always positive, but a definite integral can still produce a negative number (a net signed area). For example, if this were a profit function, a negative number indicates the company is operating at a loss over the given interval.
+
+Evaluating a Definite Integral Using the Fundamental Theorem of Calculus, Part 2
+
+Evaluate the following integral using the Fundamental Theorem of Calculus, Part 2:
+
+First, eliminate the radical by rewriting the integral using rational exponents. Then, separate the numerator terms by writing each one over the denominator:
+
+Use the properties of exponents to simplify:
+
+Now, integrate using the power rule:
+
+See .
+
+Use to evaluate ∫12x−4dx.
+724
+
+Hint
+
+Use the power rule.
+
+A Roller-Skating Race
+
+James and Kathy are racing on roller skates. They race along a long, straight track, and whoever has gone the farthest after 5 sec wins a prize. If James can skate at a velocity of f(t)=5+2t ft/sec and Kathy can skate at a velocity of g(t)=10+cos(π2t) ft/sec, who is going to win the race?
+
+We need to integrate both functions over the interval [0,5] and see which value is bigger. For James, we want to calculate
+
+Using the power rule, we have
+
+Thus, James has skated 50 ft after 5 sec. Turning now to Kathy, we want to calculate
+
+We know sint is an antiderivative of cost, so it is reasonable to expect that an antiderivative of cos(π2t) would involve sin(π2t). However, when we differentiate sin(π2t), we get π2cos(π2t) as a result of the chain rule, so we have to account for this additional coefficient when we integrate. We obtain
+
+Kathy has skated approximately 50.6 ft after 5 sec. Kathy wins, but not by much!
+
+Suppose James and Kathy have a rematch, but this time the official stops the contest after only 3 sec. Does this change the outcome?
+
+Kathy still wins, but by a much larger margin: James skates 24 ft in 3 sec, but Kathy skates 29.3634 ft in 3 sec.
+
+Hint
+
+Change the limits of integration from those in .
+
+A Parachutist in Free Fall
+
+Julie is an avid skydiver. She has more than 300 jumps under her belt and has mastered the art of making adjustments to her body position in the air to control how fast she falls. If she arches her back and points her belly toward the ground, she reaches a terminal velocity of approximately 120 mph (176 ft/sec). If, instead, she orients her body with her head straight down, she falls faster, reaching a terminal velocity of 150 mph (220 ft/sec).
+
+Since Julie will be moving (falling) in a downward direction, we assume the downward direction is positive to simplify our calculations. Julie executes her jumps from an altitude of 12,500 ft. After she exits the aircraft, she immediately starts falling at a velocity given by v(t)=32t. She continues to accelerate according to this velocity function until she reaches terminal velocity. After she reaches terminal velocity, her speed remains constant until she pulls her ripcord and slows down to land.
+
+On her first jump of the day, Julie orients herself in the slower “belly down” position (terminal velocity is 176 ft/sec). Using this information, answer the following questions.
+
+How long after she exits the aircraft does Julie reach terminal velocity?
+
+Based on your answer to question 1, set up an expression involving one or more integrals that represents the distance Julie falls after 30 sec.
+
+If Julie pulls her ripcord at an altitude of 3000 ft, how long does she spend in a free fall?
+
+Julie pulls her ripcord at 3000 ft. It takes 5 sec for her parachute to open completely and for her to slow down, during which time she falls another 400 ft. After her canopy is fully open, her speed is reduced to 16 ft/sec. Find the total time Julie spends in the air, from the time she leaves the airplane until the time her feet touch the ground.
+On Julie’s second jump of the day, she decides she wants to fall a little faster and orients herself in the “head down” position. Her terminal velocity in this position is 220 ft/sec. Answer these questions based on this velocity:
+
+How long does it take Julie to reach terminal velocity in this case?
+
+Before pulling her ripcord, Julie reorients her body in the “belly down” position so she is not moving quite as fast when her parachute opens. If she begins this maneuver at an altitude of 4000 ft, how long does she spend in a free fall before beginning the reorientation?
+Some jumpers wear “wingsuits” (see ). These suits have fabric panels between the arms and legs and allow the wearer to glide around in a free fall, much like a flying squirrel. (Indeed, the suits are sometimes called “flying squirrel suits.”) When wearing these suits, terminal velocity can be reduced to about 30 mph (44 ft/sec), allowing the wearers a much longer time in the air. Wingsuit flyers still use parachutes to land; although the vertical velocities are within the margin of safety, horizontal velocities can exceed 70 mph, much too fast to land safely.
+
+Answer the following question based on the velocity in a wingsuit.
+
+If Julie dons a wingsuit before her third jump of the day, and she pulls her ripcord at an altitude of 3000 ft, how long does she get to spend gliding around in the air?
+
+Key Concepts
+
+The Mean Value Theorem for Integrals states that for a continuous function over a closed interval, there is a value c such that f(c) equals the average value of the function. See .
+
+The Fundamental Theorem of Calculus, Part 1 shows the relationship between the derivative and the integral. See .
+
+The Fundamental Theorem of Calculus, Part 2 is a formula for evaluating a definite integral in terms of an antiderivative of its integrand. The total area under a curve can be found using this formula. See .
+
+Key Equations
+Mean Value Theorem for Integrals
+Fundamental Theorem of Calculus Part 1
+Fundamental Theorem of Calculus Part 2
+If f is continuous over the interval [a,b] and F(x) is any antiderivative of f(x), then ∫abf(x)dx=F(b)−F(a).
+Consider two athletes running at variable speeds v1(t) and v2(t). The runners start and finish a race at exactly the same time. Explain why the two runners must be going the same speed at some point.
+
+Two mountain climbers start their climb at base camp, taking two different routes, one steeper than the other, and arrive at the peak at exactly the same time. Is it necessarily true that, at some point, both climbers increased in altitude at the same rate?
+
+Yes. It is implied by the Mean Value Theorem for Integrals.
+
+To get on a certain toll road a driver has to take a card that lists the mile entrance point. The card also has a timestamp. When going to pay the toll at the exit, the driver is surprised to receive a speeding ticket along with the toll. Explain how this can happen.
+
+Set F(x)=∫1x(1−t)dt. Find F′(2) and the average value of F′ over [1,2].
+F′(2)=−1; average value of F′ over [1,2] is −1/2.
+
+In the following exercises, use the Fundamental Theorem of Calculus, Part 1, to find each derivative.
+ddx∫1xe−t2dt
+ddx∫1xecostdt
+ecosx
+ddx∫3x9−y2dy
+ddx∫3xds16−s2
+116−x2
+ddx∫x2xtdt
+ddx∫0xtdt
+xddxx=12
+ddx∫0sinx1−t2dt
+ddx∫cosx11−t2dt
+−1−cos2xddxcosx=|sinx|sinx
+ddx∫1xt21+t4dt
+ddx∫1x2t1+tdt
+2x|x|1+x2
+ddx∫0lnxetdt
+ddx∫1exlnu2du
+ln(e2x)ddxex=2xex
+
+The graph of y=∫0xf(t)dt, where f is a piecewise constant function, is shown here.
+
+Over which intervals is f positive? Over which intervals is it negative? Over which intervals, if any, is it equal to zero?
+
+What are the maximum and minimum values of f?
+
+What is the average value of f?
+
+The graph of y=∫0xf(t)dt, where f is a piecewise constant function, is shown here.
+
+Over which intervals is f positive? Over which intervals is it negative? Over which intervals, if any, is it equal to zero?
+
+What are the maximum and minimum values of f?
+
+What is the average value of f?
+
+a. f is positive over (1,2) and (5,6), negative over (0,1) and (3,4), and zero over (2,3) and (4,5). b. The maximum value is 2 and the minimum is −3. c. The average value is 0.
+
+The graph of y=∫0xℓ(t)dt, where ℓ is a piecewise linear function, is shown here.
+
+Over which intervals is ℓ positive? Over which intervals is it negative? Over which, if any, is it zero?
+
+Over which intervals is ℓ increasing? Over which is it decreasing? Over which, if any, is it constant?
+
+What is the average value of ℓ?
+
+The graph of y=∫0xℓ(t)dt, where ℓ is a piecewise linear function, is shown here.
+
+Over which intervals is ℓ positive? Over which intervals is it negative? Over which, if any, is it zero?
+
+Over which intervals is ℓ increasing? Over which is it decreasing? Over which intervals, if any, is it constant?
+
+What is the average value of ℓ?
+
+a. ℓ is positive over (0,1) and (3,6), and negative over (1,3). b. It is increasing over (0,1) and (3,5), and it is constant over (1,3) and (5,6). c. Its average value is 13.
+
+In the following exercises, use a calculator to estimate the area under the curve by computing T10, the average of the left- and right-endpoint Riemann sums using N=10 rectangles. Then, using the Fundamental Theorem of Calculus, Part 2, determine the exact area.
+[T] y=x2 over [0,4]
+[T] y=x3+6x2+x−5 over [−4,2]
+T10=49.08,∫−43(x3+6x2+x−5)dx=48
+[T] y=x3 over [0,6]
+[T] y=x+x2 over [1,9]
+T10=260.836,∫19(x+x2)dx=260
+[T] ∫(cosx−sinx)dx over [0,π]
+[T] ∫4x2dx over [1,4]
+T10=3.058,∫144x2dx=3
+
+In the following exercises, evaluate each definite integral using the Fundamental Theorem of Calculus, Part 2.
+∫−12(x2−3x)dx
+∫−23(x2+3x−5)dx
+F(x)=x33+3x22−5x,F(3)−F(−2)=−356
+∫−23(t+2)(t−3)dt
+∫23(t2−9)(4−t2)dt
+F(x)=−t55+13t33−36t,F(3)−F(2)=6215
+∫12x9dx
+∫01x99dx
+F(x)=x100100,F(1)−F(0)=1100
+∫48(4t5/2−3t3/2)dt
+∫1/44(x2−1x2)dx
+F(x)=x33+1x,F(4)−F(14)=112564
+∫122x3dx
+∫1412xdx
+F(x)=x,F(4)−F(1)=1
+∫142−tt2dt
+∫116dtt1/4
+F(x)=43t3/4,F(16)−F(1)=283
+∫02πcosθdθ
+∫0π/2sinθdθ
+F(x)=−cosx,F(π2)−F(0)=1
+∫0π/4sec2θdθ
+∫0π/4secθtanθdθ
+F(x)=secx,F(π4)−F(0)=2−1
+∫π/3π/4cscθcotθdθ
+∫π/4π/2csc2θdθ
+F(x)=−cot(x),F(π2)−F(π4)=1
+∫12(1t2−1t3)dt
+∫−2−1(1t2−1t3)dt
+F(x)=−1x+12x2,F(−1)−F(−2)=78
+
+In the following exercises, use the evaluation theorem to express the integral as a function F(x).
+∫axt2dt
+∫1xetdt
+F(x)=ex−e
+∫0xcostdt
+∫−xxsintdt
+F(x)=0
+
+In the following exercises, identify the roots of the integrand to remove absolute values, then evaluate using the Fundamental Theorem of Calculus, Part 2.
+∫−23|x|dx
+∫−24|t2−2t−3|dt
+∫−2−1(t2−2t−3)dt−∫−13(t2−2t−3)dt+∫34(t2−2t−3)dt=463
+∫0π|cost|dt
+∫−π/2π/2|sint|dt
+−∫−π/20sintdt+∫0π/2sintdt=2
+
+Suppose that the number of hours of daylight on a given day in Seattle is modeled by the function −3.75cos(πt6)+12.25, with t given in months and t=0 corresponding to the winter solstice.
+
+What is the average number of daylight hours in a year?
+
+At which times t1 and t2, where 0≤t1<t2<12, do the number of daylight hours equal the average number?
+
+Write an integral that expresses the total number of daylight hours in Seattle between t1 and t2.
+
+Compute the mean hours of daylight in Seattle between t1 and t2, where 0≤t1<t2<12, and then between t2 and t1, and show that the average of the two is equal to the average day length.
+
+Suppose the rate of gasoline consumption over the course of a year in the United States can be modeled by a sinusoidal function of the form (11.21−cos(πt6))×109 gal/mo.
+
+What is the average monthly consumption, and for which values of t is the rate at time t equal to the average rate?
+
+What is the number of gallons of gasoline consumed in the United States in a year?
+
+Write an integral that expresses the average monthly U.S. gas consumption during the part of the year between the beginning of April (t=3) and the end of September (t=9).
+
+a. The average is 11.21×109 since cos(πt6) has period 12 and integral 0 over any period. Consumption is equal to the average when cos(πt6)=0, when t=3, and when t=9. b. Total consumption is the average rate times duration: 11.21×12×109=1.35×1011 c. 109(11.21−16∫39cos(πt6)dt)=109(11.21+2π)=11.84x109
+
+Explain why, if f is continuous over [a,b], there is at least one point c∈[a,b] such that f(c)=1b−a∫abf(t)dt.
+
+Explain why, if f is continuous over [a,b] and is not equal to a constant, there is at least one point M∈[a,b] such that f(M)>1b−a∫abf(t)dt and at least one point m∈[a,b] such that f(m)<1b−a∫abf(t)dt.
+
+If f is not constant, then its average is strictly smaller than the maximum and larger than the minimum, which are attained over [a,b] by the extreme value theorem.
+
+Kepler’s first law states that the planets move in elliptical orbits with the Sun at one focus. The closest point of a planetary orbit to the Sun is called the perihelion (for Earth, it currently occurs around January 3) and the farthest point is called the aphelion (for Earth, it currently occurs around July 4). Kepler’s second law states that planets sweep out equal areas of their elliptical orbits in equal times. Thus, the two arcs indicated in the following figure are swept out in equal times. At what time of year is Earth moving fastest in its orbit? When is it moving slowest?
+
+A point on an ellipse with major axis length 2a and minor axis length 2b has the coordinates (acosθ,bsinθ),0≤θ≤2π.
+
+Show that the distance from this point to the focus at (−c,0) is d(θ)=a+ccosθ, where c=a2−b2.
+
+Use these coordinates to show that the average distance d– from a point on the ellipse to the focus at (−c,0), with respect to angle θ, is a.
+
+a. d2θ=(acosθ+c)2+b2sin2θ=a2+c2cos2θ+2accosθ=(a+ccosθ)2; b. d–=12π∫02π(a+2ccosθ)dθ=a
+
+As implied earlier, according to Kepler’s laws, Earth’s orbit is an ellipse with the Sun at one focus. The perihelion for Earth’s orbit around the Sun is 147,098,290 km and the aphelion is 152,098,232 km.
+
+By placing the major axis along the x-axis, find the average distance from Earth to the Sun.
+
+The classic definition of an astronomical unit (AU) is the distance from Earth to the Sun, and its value was computed as the average of the perihelion and aphelion distances. Is this definition justified?
+
+The force of gravitational attraction between the Sun and a planet is F(θ)=GmMr2(θ), where m is the mass of the planet, M is the mass of the Sun, G is a universal constant, and r(θ) is the distance between the Sun and the planet when the planet is at an angle θ with the major axis of its orbit. Assuming that M, m, and the ellipse parameters a and b (half-lengths of the major and minor axes) are given, set up—but do not evaluate—an integral that expresses in terms of G,m,M,a,b the average gravitational force between the Sun and the planet.
+
+Mean gravitational force = 
+ GmM2π
+ ∫02π
+ 
+ 1
+ (a+2a2−b2cosθ)2
+
+dθ.
+
+The displacement from rest of a mass attached to a spring satisfies the simple harmonic motion equation x(t)=Acos(ωt−ϕ), where ϕ is a phase constant, ω is the angular frequency, and A is the amplitude. Find the average velocity, the average speed (magnitude of velocity), the average displacement, and the average distance from rest (magnitude of displacement) of the mass.
+
+the theorem, central to the entire development of calculus, that establishes the relationship between differentiation and integration
+uses a definite integral to define an antiderivative of a function
+(also, evaluation theorem) we can evaluate a definite integral by evaluating the antiderivative of the integrand at the endpoints of the interval and subtracting
+guarantees that a point c exists such that f(c) is equal to the average value of the function

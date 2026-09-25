@@ -1,0 +1,67 @@
+# m00086
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Object-oriented programming involves grouping related fields and procedures into objects using data abstraction and encapsulation.
+
+Classes define a type of object with attributes and methods.
+
+Instances of a class type represent objects and are created using __init__().
+
+Attributes may belong to the instance (unique for each instance) or the class (shared by all instances).
+
+Instance methods have the first parameter self to access the specific instance.
+
+Python uses magic methods to perform "under-the-hood" actions for users. Magic methods always start and end with double underscores.
+
+Python allows overloading of existing operators for user-defined classes.
+
+Classes can be imported from modules by name or can be renamed using aliases.
+
+At this point, you should be able to write classes that have instance attributes, class attributes, and methods, and import classes from modules. You should also be able to overload operators when defining a class.
+
+Chapter 11 reference.
+
+Construct
+Description
+class ClassName:
+  def __init__(self):
+    # Initialize attributes
+class ClassName:
+  class_attr_1 = [value]
+  class_attr_2 = [value]
+
+  def __init__(self):
+    instance_attr_1 = [value]
+    instance_attr_2 = [value]
+    instance_attr_3 = [value]
+class ClassName:
+
+  def __init__(self):
+    instance_attr_1 = [value]
+    instance_attr_2 = [value]
+    instance_attr_3 = [value]
+
+  def method_1(self, val1, val2):
+    # Access/change attributes
+
+  def method_2(self):
+    # Access/change attributes
+instance_1 = ClassName()
+instance_1.instance_attr_1 = [new value]
+instance_2 = ClassName()
+instance_2.method_2()
+class ClassName:
+  # Other methods
+
+  def __mul__(self, other):
+    return ClassName(self.instance_attr_3 * other.instance_attr_3)
+from class_module import ClassName as ClassAlias

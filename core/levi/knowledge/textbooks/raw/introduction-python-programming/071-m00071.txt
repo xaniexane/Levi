@@ -1,0 +1,64 @@
+# m00071
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+List comprehensions
+
+List comprehensions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify the different components of a list comprehension statement.
+
+Implement filtering using list comprehension.
+
+List comprehensions
+
+A list comprehension is a Python statement to compactly create a new list using a pattern.
+
+The general form of a list comprehension statement is shown below.
+list_name = [expression for loop_variable in iterable]
+list_name refers to the name of a new list, which can be anything, and the for is the for loop keyword. An expression defines what will become part of the new list. loop_variable is an iterator, and iterable is an object that can be iterated, such as a list or string.
+
+Creating a new list with a list comprehension
+
+A list comprehension shown below in the second code has the same effect as the regular for loop shown in the first code. The resultant list is [0, 1, 4, 9, 16, 25, 36, 49, 64, 81] in both cases.
+
+Creating a list of squares using a for loop.
+
+Creating a list of squares using the list comprehension.
+
+The expression i*i is applied for each value of the loop_variable i.
+
+A Dr. Seuss poem
+
+A list comprehension can be used to create a list based on another list. In line 6, the for loop is written on the list poem_lines.
+
+The above code's output is:
+
+List comprehensions
+
+Filtering using list comprehensions
+
+List comprehensions can be used to filter items from a given list. A condition is added to the list comprehension.
+list_name = [expression for loop_variable in container if condition]
+
+In a filter list comprehension, an element is added into list_name only if the condition is met.
+
+Filtering a list
+
+Filtering using list comprehensions
+
+For each code using list comprehension, select the correct resultant list in new_list.
+
+Selecting five-letter words
+
+Write a program that creates a list of only five-letter words from the given list and prints the new list.
+
+Books starting with "A"
+
+Write a program that selects words that begin with an "A" in the given list. Make sure the new list is then sorted in dictionary order. Finally, print the new sorted list.

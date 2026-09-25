@@ -1,0 +1,300 @@
+# m54202
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Conservation of Momentum
+
+Conservation of Momentum
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Describe the law of conservation of momentum verbally and mathematically
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(6) Science concepts. The student knows that changes occur within a physical system and applies the laws of conservation of energy and momentum. The student is expected to:
+(C) calculate the mechanical energy of, power generated within, impulse applied to, and momentum of a physical system
+(D) demonstrate and apply the laws of conservation of energy and conservation of momentum in one dimension
+(C) calculate the mechanical energy of, power generated within, impulse applied to, and momentum of a physical system
+(D) demonstrate and apply the laws of conservation of energy and conservation of momentum in one dimension
+
+Section Key Terms
+
+angular momentum
+isolated system
+law of conservation of momentum
+Teacher Support
+
+In this section, students will apply what they have learned about momentum, impulse, and force.
+[BL][OL] Before students read the section, ask them what they understand by the word conservation. Have they come across it in any other law of physics?
+
+Conservation of Momentum
+
+It is important we realize that momentum is conserved during collisions, explosions, and other events involving objects in motion. To say that a quantity is conserved means that it is constant throughout the event. In the case of conservation of momentum, the total momentum in the system remains the same before and after the collision.
+
+You may have noticed that momentum was not conserved in some of the examples previously presented in this chapter. where forces acting on the objects produced large changes in momentum. Why is this? The systems of interest considered in those problems were not inclusive enough. If the systems were expanded to include more objects, then momentum would in fact be conserved in those sample problems. It is always possible to find a larger system where momentum is conserved, even though momentum changes for individual objects within the system.
+
+Teacher Support
+[OL][AL] Caution students that momentum is only conserved when the entire system affected is taken into account. Explain isolated system. Ask students to give examples of isolated systems. Ask them if these are perfectly isolated. Would it be possible to have perfectly isolated systems on Earth?
+
+For example, if a football player runs into the goalpost in the end zone, a force will cause him to bounce backward. His momentum is obviously greatly changed, and considering only the football player, we would find that momentum is not conserved. However, the system can be expanded to contain the entire Earth. Surprisingly, Earth also recoils—conserving momentum—because of the force applied to it through the goalpost. The effect on Earth is not noticeable because it is so much more massive than the player, but the effect is real.
+
+Next, consider what happens if the masses of two colliding objects are more similar than the masses of a football player and Earth—in the example shown in of one car bumping into another. Both cars are coasting in the same direction when the lead car, labeled m2, is bumped by the trailing car, labeled m1. The only unbalanced force on each car is the force of the collision, assuming that the effects due to friction are negligible. Car m1 slows down as a result of the collision, losing some momentum, while car m2 speeds up and gains some momentum. If we choose the system to include both cars and assume that friction is negligible, then the momentum of the two-car system should remain constant. Now we will prove that the total momentum of the two-car system does in fact remain constant, and is therefore conserved.
+
+Using the impulse-momentum theorem, the change in momentum of car 1 is given by
+
+where F1 is the force on car 1 due to car 2, and 
+
+Δt
+
+ is the time the force acts, or the duration of the collision.
+
+Similarly, the change in momentum of car 2 is 
+
+Δ
+p
+2
+
+=
+F
+2
+
+Δt
+
+ where F2 is the force on car 2 due to car 1, and we assume the duration of the collision 
+
+Δt
+
+ is the same for both cars. We know from Newton’s third law of motion that F2 = –F1, and so 
+
+Δ
+p
+2
+
+=−
+F
+1
+
+Δt=−Δ
+p
+1
+
+ .
+
+Therefore, the changes in momentum are equal and opposite, and 
+
+Δ
+p
+1
+
++Δ
+p
+2
+
+=0
+
+ .
+
+Because the changes in momentum add to zero, the total momentum of the two-car system is constant. That is,
+
+where p′1 and p′2 are the momenta of cars 1 and 2 after the collision.
+
+This result that momentum is conserved is true not only for this example involving the two cars, but for any system where the net external force is zero, which is known as an isolated system. The law of conservation of momentum states that for an isolated system with any number of objects in it, the total momentum is conserved. In equation form, the law of conservation of momentum for an isolated system is written as
+
+or
+
+where ptot is the total momentum, or the sum of the momenta of the individual objects in the system at a given time, and p′tot is the total momentum some time later.
+
+The conservation of momentum principle can be applied to systems as diverse as a comet striking the Earth or a gas containing huge numbers of atoms and molecules. Conservation of momentum appears to be violated only when the net external force is not zero. But another larger system can always be considered in which momentum is conserved by simply including the source of the external force. For example, in the collision of two cars considered above, the two-car system conserves momentum while each one-car system does not.
+
+Momenta is the plural form of the word momentum. One object is said to have momentum, but two or more objects are said to have momenta.
+
+Angular Momentum in Figure Skating
+
+So far we have covered linear momentum, which describes the inertia of objects traveling in a straight line. But we know that many objects in nature have a curved or circular path. Just as linear motion has linear momentum to describe its tendency to move forward, circular motion has the equivalent angular momentum to describe how rotational motion is carried forward.
+
+This is similar to how torque is analogous to force, angular acceleration is analogous to translational acceleration, and mr2 is analogous to mass or inertia. You may recall learning that the quantity mr2 is called the rotational inertia or moment of inertia of a point mass m at a distance r from the center of rotation.
+
+We already know the equation for linear momentum, p = mv. Since angular momentum is analogous to linear momentum, the moment of inertia (I) is analogous to mass, and angular velocity 
+
+ (ω)
+
+ is analogous to linear velocity, it makes sense that angular momentum (L) is defined as
+
+Angular momentum is conserved when the net external torque ( 
+τ
+ ) is zero, just as linear momentum is conserved when the net external force is zero.
+
+Figure skaters take advantage of the conservation of angular momentum, likely without even realizing it. In , a figure skater is executing a spin. The net torque on her is very close to zero, because there is relatively little friction between her skates and the ice, and because the friction is exerted very close to the pivot point. Both F and r are small, and so 
+
+τ
+
+ is negligibly small.
+
+Consequently, she can spin for quite some time. She can do something else, too. She can increase her rate of spin by pulling her arms and legs in. Why does pulling her arms and legs in increase her rate of spin? The answer is that her angular momentum is constant, so that L = L′.
+
+Expressing this equation in terms of the moment of inertia,
+
+where the primed quantities refer to conditions after she has pulled in her arms and reduced her moment of inertia. Because I′ is smaller, the angular velocity 
+
+ω
+′
+
+ must increase to keep the angular momentum constant. This allows her to spin much faster without exerting any extra torque.
+
+A video is also available that shows a real figure skater executing a spin. It discusses the physics of spins in figure skating.
+
+Teacher Support
+
+You can demonstrate a similar exercise in class using a revolving stool or chair. Ask a student to sit on the stool with outstretched arms, holding some weight in each hand. Rotate the stool and once a good speed is achieved, ask him to bring his hands in close to his body. He will start spinning faster.
+
+Based on the equation L = Iω, how would you expect the moment of inertia of an object to affect angular momentum? How would angular velocity affect angular momentum?
+
+Large moment of inertia implies large angular momentum, and large angular velocity implies large angular momentum.
+
+Large moment of inertia implies small angular momentum, and large angular velocity implies small angular momentum.
+
+Large moment of inertia implies large angular momentum, and large angular velocity implies small angular momentum.
+
+Large moment of inertia implies small angular momentum, and large angular velocity implies large angular momentum.
+
+Check Your Understanding
+
+When is momentum said to be conserved?
+
+When momentum is changing during an event
+
+When momentum is increasing during an event
+
+When momentum is decreasing during an event
+
+When momentum is constant throughout an event
+
+Teacher Support
+
+Use the Check Your Understanding questions to assess whether students master the learning objectives of this section. If students are struggling with a specific objective, the assessment will help identify which objective is causing the problem and direct students to the relevant content.
+
+Section Summary
+
+The law of conservation of momentum is written ptot = constant or ptot = p′tot (isolated system), where ptot is the initial total momentum and p′tot is the total momentum some time later.
+
+In an isolated system, the net external force is zero.
+
+Conservation of momentum applies only when the net external force is zero, within the defined system.
+
+Key Equations
+
+ptot = constant, or ptot = p′tot
+p1 + p2 = constant, or p1 + p2 = p′1 + p′2
+L = I 
+
+ ω
+Concept Items
+
+What is angular momentum?
+
+The sum of moment of inertia and angular velocity
+
+The ratio of moment of inertia to angular velocity
+
+The product of moment of inertia and angular velocity
+
+Half the product of moment of inertia and square of angular velocity
+
+What is an isolated system?
+
+A system in which the net internal force is zero
+
+A system in which the net external force is zero
+
+A system in which the net internal force is a nonzero constant
+
+A system in which the net external force is a nonzero constant
+
+Critical Thinking
+
+A billiards ball rolling on the table has momentum p1. It hits another stationary ball, which then starts rolling. Considering friction to be negligible, what will happen to the momentum of the first ball?
+
+It will decrease.
+
+It will increase.
+
+It will become zero.
+
+It will remain the same.
+
+A ball rolling on the floor with momentum p1 collides with a stationary ball and sets it in motion. The momentum of the first ball becomes p'1, and that of the second becomes p'2. The directions of p1, p'1, and p'2 are all the same. Compare the magnitudes of p1 and p'2.
+
+Momenta p1 and p'2 are the same in magnitude.
+
+The sum of the magnitudes of p1 and p'2 is zero.
+
+The magnitude of p1 is greater than that of p'2.
+
+The magnitude of p'2 is greater than that of p1.
+
+Two cars are moving in the same direction. One car with momentum p1 collides with another, which has momentum p2. Their momenta become p'1 and p'2 respectively. Considering frictional losses, compare (p'1 + p'2 ) with (p1 + p2).
+
+The value of (p'1 + p'2 ) is zero.
+
+The values of (p1 + p2) and (p'1 + p'2 ) are equal.
+
+The value of (p1 + p2) will be greater than (p'1 + p'2 ).
+
+The value of (p'1 + p'2 ) will be greater than (p1 + p2).
+
+Test Prep Multiple Choice
+
+In the equation L = Iω, what is I?
+
+Linear momentum
+
+Angular momentum
+
+Torque
+
+Moment of inertia
+
+Give an example of an isolated system.
+
+A cyclist moving along a rough road
+
+A figure skater gliding in a straight line on an ice rink
+
+A baseball player hitting a home run
+
+A man drawing water from a well
+
+Test Prep Short Answer
+
+Under what condition(s) is the angular momentum of a system conserved?
+
+When net torque is zero
+
+When net torque is not zero
+
+When moment of inertia is constant
+
+When both moment of inertia and angular momentum are constant
+
+Test Prep Extended Response
+
+Why does a figure skater spin faster if he pulls his arms and legs in?
+
+Due to an increase in moment of inertia
+
+Due to an increase in angular momentum
+
+Due to conservation of linear momentum
+
+Due to conservation of angular momentum
+
+the product of the moment of inertia and angular velocity
+system in which the net external force is zero
+when the net external force is zero, the total momentum of the system is conserved or constant

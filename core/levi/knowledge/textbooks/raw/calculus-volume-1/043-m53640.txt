@@ -1,0 +1,289 @@
+# m53640
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Areas between Curves
+
+Areas between Curves
+
+Determine the area of a region between two curves by integrating with respect to the independent variable.
+
+Find the area of a compound region.
+
+Determine the area of a region between two curves by integrating with respect to the dependent variable.
+
+In Introduction to Integration, we developed the concept of the definite integral to calculate the area below a curve on a given interval. In this section, we expand that idea to calculate the area of more complex regions. We start by finding the area between two curves that are functions of x, beginning with the simple case in which one function value is always greater than the other. We then look at cases when the graphs of the functions cross. Last, we consider how to calculate the area between two curves that are functions of y.
+
+Area of a Region between Two Curves
+
+Let f(x) and g(x) be continuous functions over an interval [a,b] such that f(x)≥g(x) on [a,b]. We want to find the area between the graphs of the functions, as shown in the following figure.
+
+As we did before, we are going to partition the interval on the x-axis and approximate the area between the graphs of the functions with rectangles. So, for i=0,1,2,…,n, let P={xi} be a regular partition of [a,b]. Then, for i=1,2,…,n, choose a point xi*∈[xi−1,xi], and on each interval [xi−1,xi] construct a rectangle that extends vertically from g(xi*) to f(xi*). (a) shows the rectangles when xi* is selected to be the left endpoint of the interval and n=10. (b) shows a representative rectangle in detail.
+
+Use this calculator to learn more about the areas between two curves.
+
+The height of each individual rectangle is f(xi*)−g(xi*) and the width of each rectangle is Δx. Adding the areas of all the rectangles, we see that the area between the curves is approximated by
+
+This is a Riemann sum, so we take the limit as n→∞ and we get
+
+These findings are summarized in the following theorem.
+
+Finding the Area between Two Curves
+
+Let f(x) and g(x) be continuous functions such that f(x)≥g(x) over an interval [a,b]. Let R denote the region bounded above by the graph of f(x), below by the graph of g(x), and on the left and right by the lines x=a and x=b, respectively. Then, the area of R is given by
+
+We apply this theorem in the following example.
+
+Finding the Area of a Region between Two Curves 1
+
+If R is the region bounded above by the graph of the function f(x)=x+4 and below by the graph of the function g(x)=3−x2 over the interval [1,4], find the area of region R.
+
+The region is depicted in the following figure.
+
+We have
+
+The area of the region is 574units2.
+
+If R is the region bounded by the graphs of the functions f(x)=x2+5 and g(x)=x+12 over the interval [1,5], find the area of region R.
+12 units2
+
+Hint
+
+Graph the functions to determine which function’s graph forms the upper bound and which forms the lower bound, then follow the process used in .
+
+In , we defined the interval of interest as part of the problem statement. Quite often, though, we want to define our interval of interest based on where the graphs of the two functions intersect. This is illustrated in the following example.
+
+Finding the Area of a Region between Two Curves 2
+
+If R is the region bounded above by the graph of the function f(x)=9−(x/2)2 and below by the graph of the function g(x)=6−x, find the area of region R.
+
+The region is depicted in the following figure.
+
+We first need to compute where the graphs of the functions intersect. Setting f(x)=g(x), we get
+
+The graphs of the functions intersect when x=6 or x=−2, so we want to integrate from −2 to 6. Since f(x)≥g(x) for −2≤x≤6, we obtain
+
+The area of the region is 64/3 units2.
+
+If R is the region bounded above by the graph of the function f(x)=x and below by the graph of the function g(x)=x4, find the area of region R.
+310 unit2
+
+Hint
+
+Use the process from .
+
+Areas of Compound Regions
+
+So far, we have required f(x)≥g(x) over the entire interval of interest, but what if we want to look at regions bounded by the graphs of functions that cross one another? In that case, we modify the process we just developed by using the absolute value function.
+
+Finding the Area of a Region between Curves That Cross
+
+Let f(x) and g(x) be continuous functions over an interval [a,b]. Let R denote the region between the graphs of f(x) and g(x), and be bounded on the left and right by the lines x=a and x=b, respectively. Then, the area of R is given by
+
+In practice, applying this theorem requires us to break up the interval [a,b] and evaluate several integrals, depending on which of the function values is greater over a given part of the interval. We study this process in the following example.
+
+Finding the Area of a Region Bounded by Functions That Cross
+
+If R is the region between the graphs of the functions f(x)=sinx and g(x)=cosx over the interval [0,π], find the area of region R.
+
+The region is depicted in the following figure.
+
+The graphs of the functions intersect at x=π/4. For x∈[0,π/4], cosx≥sinx, so
+
+On the other hand, for x∈[π/4,π], sinx≥cosx, so
+
+Then
+
+The area of the region is 22 units2.
+
+If R is the region between the graphs of the functions f(x)=sinx and g(x)=cosx over the interval [π/2,2π], find the area of region R.
+2+22 units2
+
+Hint
+
+The two curves intersect at x=(5π)/4.
+
+Finding the Area of a Complex Region
+
+Consider the region depicted in . Find the area of R.
+
+As with , we need to divide the interval into two pieces. The graphs of the functions intersect at x=1 (set f(x)=g(x) and solve for x), so we evaluate two separate integrals: one over the interval [0,1] and one over the interval [1,2].
+
+Over the interval [0,1], the region is bounded above by f(x)=x2 and below by the x-axis, so we have
+
+Over the interval [1,2], the region is bounded above by g(x)=2−x and below by the x-axis, so we have
+
+Adding these areas together, we obtain
+
+The area of the region is 5/6 units2.
+
+Consider the region depicted in the following figure. Find the area of R.
+53 units2
+
+Hint
+
+The two curves intersect at x=1.
+
+Regions Defined with Respect to y
+
+In , we had to evaluate two separate integrals to calculate the area of the region. However, there is another approach that requires only one integral. What if we treat the curves as functions of y, instead of as functions of x? Review . Note that the left graph, shown in red, is represented by the function y=f(x)=x2. We could just as easily solve this for x and represent the curve by the function x=v(y)=y. (Note that x=−y is also a valid representation of the function y=f(x)=x2 as a function of y. However, based on the graph, it is clear we are interested in the positive square root.) Similarly, the right graph is represented by the function y=g(x)=2−x, but could just as easily be represented by the function x=u(y)=2−y. When the graphs are represented as functions of y, we see the region is bounded on the left by the graph of one function and on the right by the graph of the other function. Therefore, if we integrate with respect to y, we need to evaluate one integral only. Let’s develop a formula for this type of integration.
+
+Let u(y) and v(y) be continuous functions over an interval [c,d] such that u(y)≥v(y) for all y∈[c,d]. We want to find the area between the graphs of the functions, as shown in the following figure.
+
+This time, we are going to partition the interval on the y-axis and use horizontal rectangles to approximate the area between the functions. So, for i=0,1,2,…,n, let Q={yi} be a regular partition of [c,d]. Then, for i=1,2,…,n, choose a point yi*∈[yi−1,yi], then over each interval [yi−1,yi] construct a rectangle that extends horizontally from v(yi*) to u(yi*). (a) shows the rectangles when yi* is selected to be the lower endpoint of the interval and n=10. (b) shows a representative rectangle in detail.
+
+The height of each individual rectangle is Δy and the width of each rectangle is u(yi*)−v(yi*). Therefore, the area between the curves is approximately
+
+This is a Riemann sum, so we take the limit as n→∞, obtaining
+
+These findings are summarized in the following theorem.
+
+Finding the Area between Two Curves, Integrating along the y-axis
+
+Let u(y) and v(y) be continuous functions such that u(y)≥v(y) for all y∈[c,d]. Let R denote the region bounded on the right by the graph of u(y), on the left by the graph of v(y), and above and below by the lines y=d and y=c, respectively. Then, the area of R is given by
+
+Integrating with Respect to y
+
+Let’s revisit , only this time let’s integrate with respect to y. Let R be the region depicted in . Find the area of R by integrating with respect to y.
+
+We must first express the graphs as functions of y. As we saw at the beginning of this section, the curve on the left can be represented by the function x=v(y)=y, and the curve on the right can be represented by the function x=u(y)=2−y.
+
+Now we have to determine the limits of integration. The region is bounded below by the x-axis, so the lower limit of integration is y=0. The upper limit of integration is determined by the point where the two graphs intersect, which is the point (1,1), so the upper limit of integration is y=1. Thus, we have [c,d]=[0,1].
+
+Calculating the area of the region, we get
+
+The area of the region is 5/6 units2.
+
+Let’s revisit the checkpoint associated with , only this time, let’s integrate with respect to y. Let R be the region depicted in the following figure. Find the area of R by integrating with respect to y.
+53 units2
+
+Hint
+
+Follow the process from the previous example.
+
+Key Concepts
+
+Just as definite integrals can be used to find the area under a curve, they can also be used to find the area between two curves.
+
+To find the area between two curves defined by functions, integrate the difference of the functions.
+
+If the graphs of the functions cross, or if the region is complex, use the absolute value of the difference of the functions. In this case, it may be necessary to evaluate two or more integrals and add the results to find the area of the region.
+
+Sometimes it can be easier to integrate with respect to y to find the area. The principles are the same regardless of which variable is used as the variable of integration.
+
+Key Equations
+A=∫cd[u(y)−v(y)]dy
+For the following exercises, determine the area of the region between the two curves in the given figure by integrating over the x-axis.
+y=x2−3andy=1
+323
+y=x2andy=3x+4
+
+For the following exercises, split the region between the two curves into two smaller regions, then determine the area by integrating over the x-axis. Note that you will have two integrals to solve.
+y=x3 and y=x2+x
+1312
+y=cosθ and y=0.5, for 0≤θ≤π
+
+For the following exercises, determine the area of the region between the two curves by integrating over the y-axis.
+x=y2andx=9
+36
+y=xandx=y2
+
+For the following exercises, graph the equations and shade the area of the region between the curves. Determine its area by integrating over the x-axis.
+y=x2andy=−x2+18x
+243 square units
+y=1x,y=1x2,andx=3
+y=cosx and y=cos2x on x=[−π,π]
+4
+y=ex,y=e2x−1,andx=0
+y=ex,y=e−x,x=−1andx=1
+2(e−1)2e
+y=e,y=ex,andy=e−x
+y=|x|andy=x2
+13
+
+For the following exercises, graph the equations and shade the area of the region between the curves. If necessary, break the region into sub-regions to determine its entire area.
+y=sin(πx),y=2x,andx>0
+y=12−x,y=x,andy=1
+343
+y=sinx and y=cosx over x=[−π,π]
+y=x3andy=x2−2x over x=[−1,1]
+52
+y=x2+9andy=10+2x over x=[−1,3]
+y=x3+3x and y=4x
+12
+
+For the following exercises, graph the equations and shade the area of the region between the curves. Determine its area by integrating over the y-axis.
+x=y3andx=3y−2
+x=2yandx=y3−y
+92
+x=−3+y2andx=y−y2
+y2=xandx=y+2
+92
+x=|y|and2x=−y2+2
+x=siny,x=cos(2y),y=π/2,andy=−π/2
+332
+
+For the following exercises, graph the equations and shade the area of the region between the curves. Determine its area by integrating over the x-axis or y-axis, whichever seems more convenient.
+x=y4andx=y5
+y=xex,y=ex,x=0,andx=1
+e−2
+y=x6andy=x4
+x=y3+2y2+1andx=−y2+1
+274
+y=|x|andy=x2−1
+y=4−3xandy=1x
+43−ln(3)
+y=sinx,x=−π/6,x=π/6,andy=cos3x
+y=x2−3x+2andy=x3−2x2−x+2
+12
+y=2cos3(3x),y=−1,x=π4,andx=−π4
+y+y3=xand2y=x
+12
+y=1−x2andy=x2−1
+y=cos−1x,y=sin−1x,x=−1,andx=1
+−2(2−π)
+
+For the following exercises, find the exact area of the region bounded by the given equations if possible. If you are unable to determine the intersection points analytically, use a calculator to approximate the intersection points with three decimal places and determine the approximate area of the region.
+[T] x=eyandy=x−2
+[T] y=x2andy=1−x2
+1.067
+[T] y=3x2+8x+9and3y=x+24
+[T] x=4−y2andy2=1+x2
+0.852
+[T] x2=y3andx=3y
+[T] y=sin3x+2,y=tanx,x=−1.5,andx=1.5
+7.523
+[T] y=1−x2andy2=x2
+[T] y=1−x2andy=x2+2x+1
+3π−412
+[T] x=4−y2andx=1+3y+y2
+[T] y=cosx,y=ex,x=−π,andx=0
+1.429
+
+The largest triangle with a base on the x-axis that fits inside the upper half of the unit circle y2+x2=1 is given by y=1+x and y=1−x. See the following figure. What is the area inside the semicircle but outside the triangle?
+
+A factory selling cell phones has a marginal cost function C(x)=0.01x2−3x+229, where x represents the number of cell phones, and a marginal revenue function given by R(x)=429−2x. Find the area between the graphs of these curves and x=0. What does this area represent?
+$33,333.33 total profit for 200 cell phones sold
+
+An amusement park has a marginal cost function C(x)=1000e−x+5, where x represents the number of tickets sold, and a marginal revenue function given by R(x)=60−0.1x. Find the total profit generated when selling 550 tickets. Use a calculator to determine intersection points, if necessary, to two decimal places.
+
+The tortoise versus the hare: The speed of the hare is given by the sinusoidal function H(t)=1−cos((πt)/2) whereas the speed of the tortoise is T(t)=(1/2)tan−1(t/4), where t is time measured in hours and the speed is measured in miles per hour. Find the area between the curves from time t=0 to the first time after one hour when the tortoise and hare are traveling at the same speed. What does it represent? Use a calculator to determine the intersection points, if necessary, accurate to three decimal places.
+3.263 mi represents how far ahead the hare is from the tortoise
+
+The tortoise versus the hare: The speed of the hare is given by the sinusoidal function H(t)=(1/2)−(1/2)cos(2πt) whereas the speed of the tortoise is T(t)=t, where t is time measured in hours and speed is measured in kilometers per hour. If the race is over in 1 hour, who won the race and by how much? Use a calculator to determine the intersection points, if necessary, accurate to three decimal places.
+
+For the following exercises, find the area between the curves by integrating with respect to x and then with respect to y. Is one method easier than the other? Do you obtain the same answer?
+y=x2+2x+1andy=−x2−3x+4
+34324
+y=x4andx=y5
+x=y2−2andx=2y
+43
+
+For the following exercises, solve using calculus, then check your answer with geometry.
+
+Determine the equations for the sides of the square that touches the unit circle on all four sides, as seen in the following figure. Find the area between the perimeter of this square and the unit circle. Is there another way to solve this without using calculus?
+
+Find the area between the perimeter of the unit circle and the triangle created from y=2x+1,y=1−2x and y=−35, as seen in the following figure. Is there a way to solve this without using calculus?
+π−3225

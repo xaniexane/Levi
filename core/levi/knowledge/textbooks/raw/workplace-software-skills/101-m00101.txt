@@ -1,0 +1,61 @@
+# m00101
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Microsoft Excel and Microsoft Access Integration
+
+Microsoft Excel and Microsoft Access Integration
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Create Access tables from Excel worksheets
+
+Create Excel worksheets from Access tables
+
+Different Microsoft applications, such as Access and Word, have different requirements when it comes to integrating information into other applications. Access is a program designed to manage and store data. Unlike Excel, it is not designed to analyze data and perform complex calculations. However, you can integrate Excel data into Access and vice versa. Some of these concepts were covered in the chapters on databases. Revisit those chapters to refresh your memory on the functionality and purpose of Access as an application for managing information.
+
+Note that the terminology used for integrating Excel and Access is importing and exporting rather than linking or embedding. You can import Excel data into Access and export Access information into Excel. Note also that Access does not work on computers with macOS.
+
+Creating Microsoft Access Tables from Microsoft Excel Worksheets
+
+You may find that Access tables are created from existing information. The existing information can be from other software programs, a customer database, or information from an accounting software program. When you want to create an Access table from an Excel file, you need to import that Excel information into Access.
+
+Let’s consider a possible scenario in which you might want to import an Excel file into Access. WorldCorp would like to create a database of sales information that is currently in an Excel file. Each month, new information from sales will be added to the database. Moving the sales data to Access will allow the sales team greater functionality for sorting, filtering, grouping, and other customizations, which will enable them to gauge progress toward the company’s annual goals. (Remember, Excel is best used as a data analysis program, not as a database solution.) The Access database will be shared with the sales team through OneDrive at WorldCorp. Currently, the Excel file contains two months of sales data. The information is organized by date, product, product category, and item (). Note that before you consider importing anything from Excel into Access, you need to first clean up and organize your Excel file. Make sure the headers in your Excel file are in the first row of the table. Before completing the import, you will get a preview of the data from Excel so you can double-check that it is being imported correctly.
+
+Now that your Excel data is cleaned, open Access and create a blank database. Save it with an appropriate file name, such as “Sales Data.” At this point, the database contains no data. We will import the data from the Excel file into this blank database. Go to the External Data tab, then select New Data Source, then From File. From there, choose Excel (). Find the name for the Excel file that you are importing into Access ().
+
+When importing information into Access, you have a couple of options. You can import the information into the current database you have open as a new table, you can add the information to an existing table in a database you have open, or finally, you can link the Excel information to the database, so that any changes made in the linked Excel file will automatically be updated in the Access file. However, unlike integration with other programs such as PowerPoint or Word when you could double-click on the image to access the actual Excel file, you cannot edit the Excel file from Access.
+
+For this example, we choose to import into a new table in the current database. When you click OK, you get a preview of the data separated into columns, as seen in . If it appears as it should, click Next. If your table has headers, make sure the box is checked; Access will use these headers for the database columns.
+
+You can modify aspects of the fields (columns) you are importing by selecting Next, which enables you to change the data type or the field name and also allows you to choose not to import a specific column. Once you are satisfied with the field settings, click Next. Remember, you can always modify the field settings once the database is created. You will be prompted to either name the table or use the default assigned by Access ().
+
+The information is now imported into the database and ready to use, as shows.
+
+Sometimes when importing information from Excel into Access, you can encounter problems. These could be a result of formatting within the Excel worksheet, because of complex calculations included in the data, or other related issues. Other issues can arise when importing multiple sheets from a single Excel file. Read this article on how to successfully import Excel data into Access to learn more about how to make sure your Excel file is ready to be imported into Access.
+
+Create Microsoft Excel Worksheets from Microsoft Access Tables
+
+You can also export information from an Access table into an Excel worksheet. This can be useful when you would like to do further data analysis with the information stored in your database, or if you would like to share some database information with an external stakeholder.
+
+Let’s consider a scenario in which WorldCorp would like to send information from their central sales database to some of the members of the sales team. The database has been filtered to include only two specific locations—Virginia and West Virginia. This information will be shared with the regional sales team for their quarterly meeting. The team members are more familiar with Excel than with Access, and WorldCorp management would prefer to restrict access to the Access database to key personnel. So, they wish to send the information from the table to the sales force in an Excel format. The data in the Access table has been filtered by the criteria as shown in . Refer to the chapters on databases for additional information on sorting, filtering, and information in Access tables.
+
+Once the information from the database has been filtered, you can easily export it to Excel. Go to the External Data tab and the Export command group. Choose the Excel icon from the group ().
+
+You will need to tell Access where to export the file to and give it a file name. You can choose a new file or use an existing Excel file. You can also change the file format if needed. Finally, you can choose to export the entire table or just selected columns, whether to keep the formatting in the table, and whether to automatically open the file in Excel when the export is finished. The formatting will be similar to what you see in Access but may not be identical. You may need to adjust the column width and colors in Excel ().
+
+Summary
+
+Access and Excel are commonly integrated. Many databases start with information from Excel.
+
+Information manipulated in an Access table is easily exported into Excel for additional analysis.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises

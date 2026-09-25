@@ -1,0 +1,87 @@
+# m00022
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Formatted strings
+
+Formatted strings
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use f-strings to simplify output with multiple values.
+
+Format numbers with leading zeros and fixed precision.
+
+F-strings
+
+A formatted string literal (or f-string) is a string literal that is prefixed with "f" or "F". A replacement field is an expression in curly braces ({}) inside an f-string. Ex: The string f"Good morning, {first} {last}!" has two replacement fields: one for a first name, and one for a last name. F-strings provide a convenient way to combine multiple values into one string.
+
+Printing an f-string
+
+Basic f-strings
+
+Formatting numbers
+
+Programs often need to display numbers in a specific format. Ex: When displaying the time, minutes are formatted as two-digit integers. If the hour is 9 and the minute is 5, then the time is "9:05" (not "9:5").
+
+In an f-string, a replacement field may include a format specifier introduced by a colon. A format specifier defines how a value should be formatted for display. Ex: In the string f"{hour}:{minute:02d}", the format specifier for minute is 02d.
+
+Example format specifiers.
+
+Format
+Description
+Example
+d
+
+f"{12345678:d}"
+'12345678'
+,d
+
+f"{12345678:,d}"
+'12,345,678'
+10d
+
+f"{12345678:10d}"
+'  12345678'
+010d
+
+f"{12345678:010d}"
+'0012345678'
+f
+
+f"{math.pi:f}"
+'3.141593'
+.4f
+
+f"{math.pi:.4f}"
+'3.1416'
+8.4f
+
+f"{math.pi:8.4f}"
+'  3.1416'
+08.4f
+
+f"{math.pi:08.4f}"
+'003.1416'
+
+Formatting numbers
+
+Mad lib (f-string)
+
+A mad lib is a funny story that uses words provided by a user. The following mad lib is based on four words (user input in bold):
+
+Most of the code for this mad lib is already written. Complete the code below by writing the f-string.
+
+Wage calculator
+
+You just landed a part-time job and would like to calculate how much money you will earn. Write a program that inputs the time you start working, the time you stop working, and your hourly pay rate (example input in bold):
+
+Based on the user input, your program should calculate and display the following results:
+
+For this exercise, you need to write code that (1) calculates the total payment and (2) formats the three output lines. Use f-strings and format specifiers to display two-digit minutes, one decimal place for hours, and two decimal places for payment. The input code has been provided as a starting point.
+
+Assume the use of a 24-hour clock. Ex: 16:15 is used instead of 4:15pm.

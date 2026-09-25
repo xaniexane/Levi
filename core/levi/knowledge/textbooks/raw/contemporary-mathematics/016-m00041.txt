@@ -1,0 +1,510 @@
+# m00041
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Prime and Composite Numbers
+
+Prime and Composite Numbers
+
+After completing this section, you should be able to:
+
+Apply divisibility rules.
+
+Define and identify numbers that are prime or composite.
+
+Find the prime factorization of composite numbers.
+
+Find the greatest common divisor.
+
+Use the greatest common divisor to solve application problems.
+
+Find the least common multiple.
+
+Use the least common multiple to solve application problems.
+
+Encryption, which is needed for the secure exchange of information (i.e., online banking or shopping) is based on prime numbers. Encryption uses a composite number that is the product of two very large prime numbers. To break the encryption, the two primes that were used to form the composite number need to be determined. If the two prime numbers used are sufficiently large, even the fastest computer cannot determine those two prime numbers in a reasonable amount of time. It would take a computer 300 trillion years to crack the current encryption standard.
+
+Applying Divisibility Rules
+
+Before we begin our investigation of divisibility, we need to know some facts about important sets of numbers:
+
+The counting numbers are referred to as the natural numbers. This set of numbers, {1,2,3,4,…}, is denoted with the symbol ℕ.
+
+Another important set of numbers is the integers. The integers are the natural numbers, along with 0, and the negatives of the natural numbers. This set is often written as {…,−3,−2,−1,0,1,2,3,…}. We denote the integers with the symbol ℤ.
+
+Notice that ℕ is a proper subset of ℤ, or, ℕ ⊂ ℤ. All the ideas of this section apply to the natural numbers, while only some apply to all the integers.
+Divisibility is when the integer n is divisible by m, if n can be written as m times another integer. Equivalently, there is no remainder when n is divided by m. There are many occasions when separating items into equal groups comes into play to ensure an equal distribution of whole items. For example, Francis, a preschool art teacher, has 15 students in one class. Francis has 225 sheets of construction paper and wants to provide each student with an equal number of pieces. To know if he will use all the construction paper, Francis is really asking if 225 can be evenly divided into 15 groups.
+
+Determining if a Number Divides Another Number
+
+Determine if 36 is divisible by 4.
+
+We could divide 36 by 4 and see if there is a remainder, or we could see if we can write 36 as 4 times another integer. If we divide 36 by 4, we see 36÷4=9 with no remainder. We see that 36 is divisible by 4. We can write 36 as 4 times another integer, 36=4×9. By the definition of divisibility, 36 is divisible by 4.
+
+You can quickly check if a number is divisible by 2, 3, 4, 5, 6, 9, 10, and 12. Each has an easy-to-identify feature, or rule, that indicates the divisibility by those numbers, as shown in the following table.
+
+Divisor
+Rule
+2
+Last digit is even
+3
+Add the digits of the number together. If that sum is divisible by 3, then so is the original number
+4
+Look at only the last two digits. If this number is divisible by 4, so is the original number
+5
+Look at only the last digit. If it is a 5 or a 0, then the original number is divisible by 5
+6
+If the number passes the rule for divisibility by 2 and for 3, then the number is divisible by 6
+9
+Add the digits of the number together. If that number is divisible by 9, then so is the original number
+10
+Look at only the last digit. If it is a 0, then the original number is divisible by 10
+12
+If the number passes the rule for 3 and 4, the number is divisible by 12
+Using Divisibility Rules
+
+Using divisibility rules, determine if 245 is divisible by 5.
+
+Since the last digit is a 5, the number 245 is divisible by 5 because the rule states if the last digit of the number is a 5 or a 0, then the original number is divisible by 5.
+
+Using Divisibility Rules
+
+Using divisibility rules, determine if 25,983 is divisible by 9.
+
+The divisibility rule for 9 is when the digits of the number are added, the sum is divisible by 9. So, we calculate the sum of the digits.
+2+5+9+8+3=27. Since 27 is divisible by 9, so is the original number 25,983.
+
+Using Divisibility Rules
+
+Can 298 coins be stacked into 6 stacks with an equal number of coins in each stack?
+
+In order for the coins to be in equal-sized stacks, 298 would need to be divisible by 6. The divisibility rule for 6 is that the number passes the divisibility rules for both 2 and 3. Since the last digit is even, 298 is divisible by 2. To determine if 298 is divisible by 3, we first add the digits of the number: 2+9+8=19. Since 19 is not divisible by 3, neither is 298. Because 298 is not divisible by 3, it is also not divisible by 6, which means they cannot be put into 6 equal stacks of coins.
+
+Using Divisibility Rules
+
+Using divisibility rules, determine if 4,259 is divisible by 10.
+
+The divisibility rule for 10 is that the last digit of the number is 0. Since the last digit of 4,259 is not 0, then 4,259 is not divisible by 10.
+
+Using Divisibility Rules
+
+Using divisibility rules, determine if 936,276 is divisible by 4.
+
+The divisibility rule for 4 is to check the last two digits of the number. If the number formed by the last two digits of the original number is divisible by 4, then so is the original number. The last two digits make the number 76 and 76 is divisible by 4, since 76=4×19. Since 76 is divisible by 4, so is 936,276.
+
+Divisibility Rules
+
+Prime and Composite Numbers
+
+Sometimes, a natural number has only two unique divisors, 1 and itself. For instance, 7 and 19 are prime. In other words, there is no way to divide a prime number into groups with an equal number of things, unless there is only one group, or those groups have one item per group. Other natural numbers have more than two unique divisors, such as 4, or 26. These numbers are called composite. The number 1 is special; it is neither prime nor composite.
+
+To determine if a number is prime or composite, you have to determine if the number has any divisors other than 1 and itself. The divisibility rules are useful here, and can quickly show you if a number has a divisor on that list.
+
+However, if none of those divide the number, you still have to check all other possible prime divisors. What are the prime numbers that are possibly divisors of the number you are checking? You need only check the prime numbers up to the square root of the number in question. For instance, if you want to know if 2,117 is prime, you need to determine if any primes up to the square root of 2,117 (which is 46.0 when rounded to one decimal place) divide 2,117. If any of those primes are divisors of the number in question, then the number is composite. If none of those primes work, then the number is itself prime.
+
+We can check divisibility with whatever tool we wish. Divisibility rules are quick for some prime divisors (2 and 5 come to mind) but aren't quick for other values (like 11). In place of divisibility rules, we could just use a calculator. If the prime number divides the number evenly (that is, there is no decimal or fractional part), then the number is divisible by that prime. is a quick list of the prime numbers up to 50. There are 15 prime numbers less than 50.
+
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+Determining If a Number Is Prime or Composite
+
+Determine if 2,117 is prime or composite.
+
+The square root of 2,117 is 46.0 (rounded to one decimal place). So, we need to check if 2,117 is divisible by any prime up to 46.
+Step 1: First we’ll use the rules of divisibility we learned earlier:
+
+We can tell 2,117 is not divisible by 2, as the last digit isn't even.
+
+2,117 is not divisible by 5 (the last digit isn't 0 or 5).
+
+Add the digits of 2,117 to get 11, which is not divisible by 3. So, 2,117 is also not divisible by 3.
+Step 2: Now we repeat the process for all the primes up to 46.
+
+Using a calculator, we find that 2,117 divided by the prime numbers 7, 11, 13, 17, 19, and 23 results in a remainder, a decimal part. So, we know that 2,117 is not divisible by these prime numbers. (You should check these results yourself.)
+
+Moving on, we check the next prime: 29. Using the calculator to divide 2,117 by 29 results in 73. Since there is no decimal part, 2,117 is divisible by 29.
+
+This means that 2,117 is not a prime number, but rather, a composite number. Writing 2,117 as the product of 29 and another natural number, 2,117=29×73.
+
+Determining if a Number Is Prime or Composite
+
+Determine if 423 is prime or composite.
+
+The square root of 423 is 20.57 (rounded to two decimal places). So, we need to check if 423 is divisible by any prime up to 20.
+Step 1: Check 2. We can tell 423 is not divisible by 2, as the last digit isn't even.
+Step 2: Check 5. It is not divisible by 5 (the last digit isn't 0 or 5).
+Step 3: Check 3. To check if 423 is divisible by 3, we use the divisibility rule for 3. When we take the sum of the digits of 423, the result is 9. Since 9 is divisible by 3, so is 423.
+
+Since 423 is divisible by 3, then 423 is a composite number. Writing 423 as the product of 3 and another natural number, 423=3×141.
+
+Determining if a Number Is Prime or Composite
+
+Determine if 1,034 is prime or composite
+
+A quick inspection of 1,034 shows it is divisible by 2 since the last digit is even, and so 1,034 is a composite number.
+
+Determining if a Number Is Prime or Composite
+
+Determine if 2,917 is prime or composite.
+
+The square root of 2,917 is 50.01 (rounded to two decimal places). So, we need to check if 2,917 is divisible by any prime up to 50.
+Step 1: Check 2. We can tell 2,917 is not divisible by 2, as the last digit isn't even.
+Step 2: Check 5. It is it divisible by 5 (the last digit isn't 0 or 5).
+Step 3: Check 3. Using the divisibility rule for 3, we take the sum of the digits of 2,917, which is 19. Since 19 is not divisible by 3, neither is 2,917.
+Step 4: Check the rest of the primes up to 50 using a calculator. When 2,917 is divided by every prime number up to 50, the result has a decimal part.
+
+Since no prime up to 50 divides 2,917, it is a prime number.
+
+ILLEGAL PRIMES
+
+Large primes are a hot commodity. Using two very large primes (some have more than 22 million digits!) is necessary for secure encryption. Anyone who has a new prime that is large enough can use that prime to create a new encryption. Of course, whoever discovers a large prime could sell it to a security company. These primes are so useful for encryption, it is necessary to protect that intellectual property. In fact, at least one prime number was declared illegal.
+Illegal Prime Number
+
+Sophie Germain
+
+Born into a wealthy French family in 1776, Sophie Germain discovered and fell in love with mathematics by browsing her father’s books. Clandestine study, hard and tenacious work, and a mathematical mindset did not lead to college, however, as she was not allowed to attend. She did manage, through friends, to obtain problem sets and submit brilliant solutions under the name Monsieur LaBlanc. One of her great interests was number theory, which is the study of properties of integers. One of her theorems, titled “Sophie Germain’s Theorem,” partially solved one of the great mathematical mysteries, Fermat’s Last Theorem. From this she discovered what are now known as Sophie Germain Primes. A Sophie Germain Prime is a prime number that can be written in the form 2p+1, where p is a prime number. For instance, 23 is prime: 2(23)+1=47, which is prime, so 47 is a Sophie Germain Prime. It should be noted that 2p+1, where p is a prime number, may or may not be prime (check for p=7!).
+
+Finding the Prime Factorization of Composite Numbers
+
+Before we can start with prime factorization, let’s remind ourselves what it means to factor a number. We factor a number by identifying two (or more) numbers that, when multiplied, result in the original number. For instance, 3 and 24, when multiplied, give 72. So, 72 can be factored into 3×24. Notice that we could have factored the 72 differently, say as 72=6×12, or 72=2×36, or even as 72=3×4×6.
+
+Finding the prime factorization of a composite number means writing the number as the product of all of its prime factors. For example, 80=2×2×2×2×5. Notice that all the numbers being multiplied on the right-hand side are prime numbers. Sometimes prime numbers repeat themselves in the factorization. When prime factors do repeat, we may write the prime factorization using exponents, as in 80=24×5. In that equation, the 2 is raised to the 4th power. The 4 is the exponent, and the 2 is the base. More generally, in the exponent notation ab, the number represented by a is the base, and the number represented by b is the exponent.
+
+One has to wonder if finding the prime factorization could result in different factorizations. The Fundamental Theorem of Arithmetic tells us that there is only one prime factorization for a given natural number.
+
+Fundamental Theorem of Arithmetic
+
+Every natural number, other than 1, can be expressed in exactly one way, apart from the arrangement, as a product of primes.
+
+The process of finding the prime factorization of a number is iterative, which means we do a step, then repeat it until we cannot do the step any longer. The step we use is to identify one prime factor of the number, then write the number as the prime factor times another factor. We repeat this step on the other, newly found, factor. This step is repeated until no more primes can be factored from the remaining factor. This is easier to see and explain with an example.
+
+Finding the Prime Factorization
+
+Find the prime factorization of 140.
+Step 1: Identify a prime number that divides 140. Since 140 is even (the last digit is even), 2 divides 140. We then factor the 2 out of the 140, giving us 140=2×70.
+Step 2: With the other factor, 70, find a prime factor of 70. Since 70 is also even, 2 divides 70. We factor the 2 out of the 70 and the factorization is now 140=2×2×35=22×35.
+
+Notice that we expressed the two factors of 2 as 22.
+Step 3: Look to the remaining factor, 35. The last digit of 35 is 5, so 5 is a factor of 35. We factor the 5 out of the 35. The factorization is now 140=22×5×7.
+Step 4: Look to the remaining factor, 7. Since 7 is prime, the process is complete.
+
+The prime factorization of 140 is 22×5×7.
+
+Factor Trees
+
+A useful tool for helping with prime factorization is a factor tree. To create a factor tree for the natural number n (where n is not 1), perform the following steps:
+Step 1: If n is prime, you're done. If n is composite, continue to the next step.
+Step 2: Identify two divisors of n, call them a and b.
+Step 3: Write the number n down, and draw two branches extending down (or to the right) of the number n.
+Step 4: Label the end of one branch a, the other as b. See .
+Step 5: If a and b are prime, the tree is complete. When a number at this step is a prime number, we refer to it as a leaf of the tree diagram.
+Step 6: If either a or b are composite, repeat Steps 2 through 4 for a and b.
+Step 7: The process stops when the leaves are all prime.
+Step 8: The prime factorization is then the product of all the leaves.
+
+This is best seen in an example.
+
+Finding the Prime Factorization
+
+Find the prime factorization of 66.
+
+Since 66 is even, 2 is a factor.
+Step 1: Factor out the 2. The factorization is 66=2×33. The factor tree is shown in .
+
+Since 2 is a factor, that branch is done, and 2 is a leaf.
+Step 2: The 33, though, is divisible by 3, and is the product of 3 and 11. We attach that to the factor tree ().
+
+Since the 2, 3 and 11 are all prime, the factor tree is done.
+
+The prime factorization of 66 is the product of the leaves, so 66=2×3×11. The factorization is complete.
+
+Using a Factor Tree to Find the Prime Factorization
+
+Finding the Prime Factorization
+
+Find the prime factorization of 135.
+
+The number 135 is divisible by 3, and so 3 is a factor of 135.
+Step 1: Factor out the 3. The factorization is 135=3×45. Using the factor tree (),
+
+45 is also divisible by 3.
+Step 2: Factor out a 3 from 45. The other factor is 15. The factor tree is shown in .
+
+15 is also divisible by 3.
+Step 3: The factors of 15 are 3 and 5. The factor tree is shown in .
+
+All the leaves are prime, so the process is complete. The prime factorization of 135 is 33×5.
+
+Identifying Prime Factors
+
+How many different prime factors does 10,241 have?
+
+To know how many different prime factors 10,241 has, we need the prime factorization of 10,241.
+Step 1: Use divisibility rules, to see that the number 10,241 is not divisible by 2 or by 3 (the sum of the digits is 8), or by 5. However, it is divisible by 7.
+Step 2: After factoring the 7, the factorization is 10,241=7×1463; 1,463 is also divisible by 7.
+Step 3: After factoring the 7, the factorization is 10,241=7×7×209=72×209. The number 209 is not divisible by 7.
+Step 4: Check the next prime number: 11; 11 does divide 1,463.
+Step 5: After factoring the 11, the factorization is 10,241=72×11×19.
+
+Since 19 is prime, the prime factorization of 10,241 is complete. We see that 10,241 has three different prime factors: 7, 11, and 19.
+
+Finding the Prime Factorization of 168
+
+Using Wolfram Alpha to Find Prime Factorizations
+
+The Wolfram Alpha website is a powerful resource available for free to use. It is designed using AI so that it understands natural language requests. For instance, typing the question “What is the prime factorization of 543,390?” gets a rather quick answer of 2×3×5×59×307. So, if you want to find the prime factorization of a number, you can simply ask Wolfram Alpha to find the prime factorization of the number.
+
+Finding the Greatest Common Divisor
+
+Two numbers often have more than one divisor in common (all pairs of natural numbers have the common divisor 1). When listing the common divisors, it’s often the case that the largest is of interest. This divisor is called the greatest common divisor and is denoted GCD. It is also sometimes referred to as the greatest common factor (GCF).
+
+For instance, 6 is the greatest common divisor of 12 and 18. We can see this by listing all the divisors of each number and, by inspection, select the largest value that shows up in each list.
+
+The divisors of 12
+1, 2, 3, 4, 6, 12
+The divisors of 18
+1, 2, 3, 6, 9
+It is easy to see that 6 is the largest value that appears in both lists.
+
+Finding the Greatest Common Divisor Using Lists
+
+Find the greatest common divisor of 1,400 and 250 by listing all divisors of each number.
+
+We create a list of all the divisors of 1,400 and of 250, and choose the largest one.
+
+The divisors of 1,400 are
+
+1, 2, 4, 5, 7, 8, 10, 14, 20, 25, 28, 35, 40, 50, 56, 70, 100, 140, 175, 200, 280, 350, 700, 1,400.
+
+The divisors of 250 are
+
+1, 2, 5, 10, 25, 50, 125, 250.
+
+The largest value that appears on both lists is 50, so the greatest common divisor of 1,400 and 250 is 50.
+
+Listing all the divisors of the numbers in the set will always work, but for some relatively small numbers, the set of all divisors can become pretty big, and finding them all can be a chore. Another approach to finding the greatest common divisor is to use the prime factorization of the numbers. To do so, use the following steps:
+Step 1: Find the prime factorization of the numbers.
+Step 2: Identify the prime factors that appear in every number’s prime factorization. These are called the common prime factors.
+Step 3: Identify the smallest exponent of each prime factor identified in Step 2 in the prime factorizations.
+Step 4: Multiply the prime factors identified in Step 2 raised to the powers identified in Step 3. The result is the greatest common divisor.
+
+Finding the Greatest Common Divisor Using Prime Factorization
+
+Find the greatest common divisor of 1,400 and 250 by using their prime factorizations.
+Step 1: Find the prime factorizations of the numbers.
+
+The prime factorization of 1,400 is 23×52×7.
+
+The prime factorization of 250 is 250=2×53.
+Step 2: Identify the prime factors that appear in every number’s prime factorization.
+
+The common prime factors are 2 and 5.
+Step 3: Identify the smallest exponent of each prime identified in Step 2 in the prime factorizations.
+
+The exponent of common prime factor 2 in the prime factorization of 1,400 is 3, and in the prime factorization of 250 is 1. The smallest of those exponents is 1.
+
+The exponent of the common prime factor 5 in the prime factorization of 1,400 is 2 and is in the prime factorization of 250 is 3. The smallest of these exponents is 2.
+Step 4: Multiply the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+This gives 21×52=50. The greatest common divisor of 1,400 and 250 is 2×52=50.
+
+Notice that the answer matches the one we found in Example 3.15.
+
+Finding the Greatest Common Divisor Using Prime Factorization
+
+Find the greatest common divisor of 600 and 784 by using their prime factorizations.
+Step 1: Find the prime factorizations of the numbers.
+
+The prime factorization of 600 is 23×3×52.
+
+The prime factorization of 784 is 24×72.
+Step 2: Identify the prime factors that appear in every number’s prime factorization.
+
+There is only one common prime factor, 2.
+Step 3: Identify the smallest exponent of each prime from identified in Step 2 in the prime factorizations.
+
+The exponent of 2 in the prime factorization of 600 is 3. The exponent of 2 in the prime factorization of 784 is 4. So, the smallest exponent of 2 is 3.
+Step 4: Multiply the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+This gives 23=8. The greatest common divisor of 600 and 784 is 8.
+
+Srinivasa Ramanujan
+
+Ramanujan was born in southern India in 1887, during British rule. He was a self-taught mathematician, who, while in high school, began working through a two-volume text of mathematical theorems and results. His work included examination of the distribution of primes. He eventually came to the attention of British mathematician, G.H. Hardy. During one visit, Hardy mentioned to Ramanujan that his taxicab number was 1,729, remarking that 1,729 appeared to be a rather dull number. To which Ramanujan responded, “It is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways.”
+
+Using Desmos to Find the GCD
+
+To find the GCD of a set of numbers in Desmos, type gcd(first_number,second_number…) and Desmos will display the GCD of the numbers, as the numbers are typed!
+Using Desmos to Find the GCD
+
+Applications of the Greatest Common Divisor
+
+The greatest common divisor has uses that are related to other mathematics (reducing fractions) but also in everyday applications. We’ll look at two such applications, which have very similar underlying structures. In each case, something must divide the groups or measurements equally.
+
+Calculating Floor Tile Size
+
+Suppose you have a rectangular room that is 570 cm wide and 450 cm long. You wish to cover the floor of the room with square tiles. What’s the largest size square tile that can be used to cover this floor?
+
+Using squares means that the length and width of the tiles are equal. To ensure we are using full tiles, the side length of the square tiles must divide the length of the room and the width of the room. Since we want the largest square tiles, we need the GCD of the width and length of the room or the GCD of 570 and 450.
+Step 1: Find the prime factorizations of the numbers.
+
+The prime factorization of 570 is 2×3×5×19.
+
+The prime factorization of 450 is 2×32×52.
+Step 2: Identify the prime factors that appear in every number’s prime factorization.
+
+The common prime factors are 2, 3, and 5.
+Step 3: Identify the smallest exponent of each prime identified in Step 2 in the prime factorizations.
+
+The exponents of 2 in the prime factorizations of 570 and 450 are 1 and 1. So the smallest exponent for 2 is 1.
+
+The exponents of 3 in the prime factorizations of 570 and 450 are 1 and 2, so the smallest exponent for 3 is 1.
+
+The exponents of 5 in the prime factorizations of 570 and 450 are 1 and 2, so the smallest exponent for 5 is 1.
+Step 4: Multiply the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+This gives 21×31×51=30. The GCD of 450 and 570 is 30, so the largest size square tile that can be used to cover the floor is 30 cm by 30 cm.
+
+Organizing Books Per Shelf
+
+Suppose you want to organize books onto shelves, and you want the shelves to hold the same number of books. Each shelf will only contain one genre of book. You have 24 sci-fi, 42 fantasy, and 30 horror books. How many books can go on each shelf?
+
+Since we want shelves that hold an equal number of books, and a shelf can only hold one genre of book, we need a number that will equally divide 24, 42, and 30. So, we need the GCD of the number of books of each genre or the GCD of 24, 42, and 30.
+Step 1: Find the prime factorizations of the numbers.
+
+The prime factorization of 24 is 23×3.
+
+The prime factorization of 42 is 2×3×7.
+
+The prime factorization of 30 is 2×3×5.
+Step 2: Identify the prime factors that appear in every number’s prime factorization.
+
+The common prime factors are 2 and 3.
+Step 3: Identify the smallest exponent of each prime identified in Step 2 in the prime factorizations.
+
+The smallest exponent of 2 and 3 in the factorizations is 1.
+Step 4: Multiply the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+This gives 21×31=6. The GCD of 24, 42, and 30 is 6, so the largest number of books that can go on a shelf is 6.
+
+Applying the GCD
+
+Finding the Least Common Multiple
+
+The flip side to a divisor of a number is a multiple of a number. For example, 5 is a divisor of 45 and so 45 is a multiple of 5. More generally, if the number a divides the number b, then b is a multiple of a.
+
+This drives the idea of the least common multiple of a set of numbers. A common multiple of a set of numbers is a multiple of each of those numbers. For instance, 45 is a common multiple of 9 and 5, because 45 is a multiple of 9 (9 divides 45) and 45 is also a multiple of 5 (5 divides 45). The least common multiple (LCM) of a set of number is the smallest positive common multiple of that set of numbers.
+
+There are (at least) three ways to find the LCM of a set of numbers, and we will explore two of them. One way is to create a list of multiples of each number in the set, and then identify the smallest multiple that appears in those lists.
+
+Finding the Least Common Multiple Using Lists
+
+Find the LCM of 24 and 90 by listing multiples and choosing the smallest common multiple.
+
+Create a list of the multiples of each number.
+Step 1: The first 15 multiples for 24:
+
+24, 48, 72, 96, 120, 144, 168, 192, 216, 240, 264, 288, 312, 336, 360.
+Step 2: The first 15 multiples for 90:
+
+90, 180, 270, 360, 450, 540, 630, 720, 810, 900, 990, 1,080, 1,170, 1,260, 1,350.
+
+There is one multiple common to these lists, which is 360. So, 360 is the LCM of 24 and 90.
+
+The second method we can use is to find the prime factorizations of the number in the set to build the LCM of the numbers based on the prime divisors of the numbers. The LCM can be built from the prime factorization of the numbers in the set in a similar way as when finding the greatest common divisor. Here are the steps for using the prime factorization process for finding the LCM.
+Step 1: Find the prime factorization of each number.
+Step 2: Identify each prime that is present in any of the prime factorizations.
+Step 3: Identify the largest exponent of each prime identified in Step 2 in the prime factorizations.
+Step 4:. Multiply the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+Finding the Least Common Multiple Using Prime Factorization
+
+Use the prime factorizations of 24 and 90 to identify their LCM.
+Step 1: Find the prime factorization of each number.
+24=23×3
+90=2×32×5
+Step 2: Identify each prime that is present in any of the prime factorizations.
+
+The prime numbers present in the prime factorizations are 2, 3, and 5.
+Step 3: Identify the largest exponent of each prime identified in Step 2 in the prime factorizations.
+
+Prime
+2
+3
+5
+Largest exponent
+3
+2
+Step 4: Compute the LCM by multiplying the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+The LCM for 24 and 90 is 2×2×2×3×3×5=23×32×51=360.
+
+Finding the Least Common Multiple Using Prime Factorization
+
+Use the prime factorizations of 36, 66, and 250 to identify the LCM.
+Step 1: Find the prime factorization of each number.
+36=22×32
+66=2×3×11
+250=2×53
+Step 2: Identify each prime that is present in any of the prime factorizations.
+
+The prime numbers present in the prime factorizations are 2, 3, 5, and 11.
+Step 3: Identify the largest exponent of each prime identified in Step 2 in the prime factorizations.
+
+Prime
+2
+3
+5
+11
+Largest exponent
+2
+2
+3
+Step 4: Compute the LCM by multiplying the prime factors identified in Step 2 raised to the powers identified in Step 3.
+
+The LCM for 36, 66, and 250 is 2×2×3×3×5×5×5×11=22×32×53×111=49,500.
+
+Using lists for three or more numbers, particularly larger numbers, could take quite a bit of time. Frequently, as in this example, the prime factorization process is much quicker. In practice, you can use either listing or prime factorization to find the LCM.
+
+Finding the Least Common Multiple Using Both Methods
+
+Find the LCM of 20, 36, and 45 using lists and prime factorization.
+Step 1: Use listing. List the multiples:
+
+20
+20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220
+36
+36, 72, 108, 144, 180, 216, 252, 288, 324, 360
+45
+45, 90, 135, 180, 225, 270, 315, 360, 405, 450, 495, 540
+The smallest value that appears on all the lists is 180, so 180 is the LCM of 20, 36, and 45.
+Step 2: Find the prime factorization of each number.
+20=22×5
+36=22×32
+45=32×5
+Step 3: Identify each prime that is present in any of the prime factorizations.
+
+The prime numbers present in the prime factorizations are 2, 3, 5.
+Step 4: Identify the largest exponent of each prime identified in Step 3 in the prime factorizations.
+
+Prime
+2
+3
+5
+Largest
+[truncated]

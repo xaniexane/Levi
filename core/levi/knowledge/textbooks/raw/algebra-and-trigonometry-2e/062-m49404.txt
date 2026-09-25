@@ -1,0 +1,1008 @@
+# m49404
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Non-right Triangles: Law of Sines
+
+Non-right Triangles: Law of Sines
+
+In this section, you will:
+
+Use the Law of Sines to solve oblique triangles.
+
+Find the area of an oblique triangle using the sine function.
+
+Solve applied problems using the Law of Sines.
+
+To ensure the safety of over 5,000 U.S. aircraft flying simultaneously during peak times, air traffic controllers monitor and communicate with them after receiving data from the robust radar beacon system. Suppose two radar stations located 20 miles apart each detect an aircraft between them. The angle of elevation measured by the first station is 35 degrees, whereas the angle of elevation measured by the second station is 15 degrees. How can we determine the altitude of the aircraft? We see in that the triangle formed by the aircraft and the two stations is not a right triangle, so we cannot use what we know about right triangles. In this section, we will find out how to solve problems involving non-right triangles.
+
+Using the Law of Sines to Solve Oblique Triangles
+
+In any triangle, we can draw an altitude, a perpendicular line from one vertex to the opposite side, forming two right triangles. It would be preferable, however, to have methods that we can apply directly to non-right triangles without first having to create right triangles.
+
+Any triangle that is not a right triangle is an oblique triangle. Solving an oblique triangle means finding the measurements of all three angles and all three sides. To do so, we need to start with at least three of these values, including at least one of the sides. We will investigate three possible oblique triangle problem situations:
+ASA (angle-side-angle) We know the measurements of two angles and the included side. See .
+AAS (angle-angle-side) We know the measurements of two angles and a side that is not between the known angles. See .
+SSA (side-side-angle) We know the measurements of two sides and an angle that is not between the known sides. See .
+
+Knowing how to approach each of these situations enables us to solve oblique triangles without having to drop a perpendicular to form two right triangles. Instead, we can use the fact that the ratio of the measurement of one of the angles to the length of its opposite side will be equal to the other two ratios of angle measure to opposite side. Let’s see how this statement is derived by considering the triangle shown in .
+
+Using the right triangle relationships, we know that 
+ 
+ sinα=
+ h
+ b
+
+ and 
+ 
+ sinβ=
+ h
+ a
+ 
+ .
+ 
+ Solving both equations for 
+ 
+h
+ gives two different expressions for 
+ 
+h.
+
+We then set the expressions equal to each other.
+
+Similarly, we can compare the other ratios.
+
+Collectively, these relationships are called the Law of Sines.
+
+Note the standard way of labeling triangles: angle 
+ 
+α
+ (alpha) is opposite side 
+ 
+a;
+ angle 
+ 
+β
+ (beta) is opposite side 
+ 
+b;
+ and angle 
+ 
+γ
+ (gamma) is opposite side 
+ 
+c.
+ See .
+
+While calculating angles and sides, be sure to carry the exact values through to the final answer. Generally, final answers are rounded to the nearest tenth, unless otherwise specified.
+
+Law of Sines
+
+Given a triangle with angles and opposite sides labeled as in , the ratio of the measurement of an angle to the length of its opposite side will be equal to the other two ratios of angle measure to opposite side. All proportions will be equal. The Law of Sines is based on proportions and is presented symbolically two ways.
+
+To solve an oblique triangle, use any pair of applicable ratios.
+
+Solving for Two Unknown Sides and Angle of an AAS Triangle
+
+Solve the triangle shown in to the nearest tenth.
+
+The three angles must add up to 180 degrees. From this, we can determine that
+
+To find an unknown side, we need to know the corresponding angle and a known ratio. We know that angle 
+ 
+ α=50°
+ 
+ and its corresponding side 
+ 
+ a=10.
+ We can use the following proportion from the Law of Sines to find the length of 
+ 
+ c.
+
+Similarly, to solve for 
+ 
+ b,
+ we set up another proportion.
+
+Therefore, the complete set of angles and sides is
+
+Solve the triangle shown in to the nearest tenth.
+α=
+ 98
+ ∘
+ a=34.6
+
+ β=
+ 39
+ ∘
+ b=22
+
+ γ=
+ 43
+ ∘
+ c=23.8
+
+Using The Law of Sines to Solve SSA Triangles
+
+We can use the Law of Sines to solve any oblique triangle, but some solutions may not be straightforward. In some cases, more than one triangle may satisfy the given criteria, which we describe as an ambiguous case. Triangles classified as SSA, those in which we know the lengths of two sides and the measurement of the angle opposite one of the given sides, may result in one or two solutions, or even no solution.
+
+Possible Outcomes for SSA Triangles
+
+Oblique triangles in the category SSA may have four different outcomes. illustrates the solutions with the known sides 
+ 
+ a
+ and 
+ 
+ b
+ and known angle 
+ 
+ α.
+
+Solving an Oblique SSA Triangle
+
+Solve the triangle in for the missing side and find the missing angle measures to the nearest tenth.
+
+Use the Law of Sines to find angle 
+ 
+ β
+ and angle 
+ 
+ γ,
+ and then side 
+ 
+ c.
+ Solving for 
+ 
+ β,
+ we have the proportion
+
+However, in the diagram, angle 
+ 
+ β
+ appears to be an obtuse angle and may be greater than 90°. How did we get an acute angle, and how do we find the measurement of 
+ 
+ β?
+ Let’s investigate further. Dropping a perpendicular from 
+ 
+ γ
+ and viewing the triangle from a right angle perspective, we have . It appears that there may be a second triangle that will fit the given criteria.
+
+The angle supplementary to 
+ 
+ β
+ is approximately equal to 49.9°, which means that 
+ 
+ β=180°−49.9°=130.1°.
+ 
+ (Remember that the sine function is positive in both the first and second quadrants.) Solving for 
+ 
+ γ,
+ 
+ we have
+
+We can then use these measurements to solve the other triangle. Since 
+
+ γ
+ ′
+
+ is supplementary to the sum of 
+
+ α
+ ′
+
+ and 
+
+ β
+ ′
+ 
+ ,
+ we have
+
+Now we need to find 
+ 
+ c
+ and 
+
+ c
+ ′
+ 
+ .
+
+We have
+
+Finally,
+
+To summarize, there are two triangles with an angle of 35°, an adjacent side of 8, and an opposite side of 6, as shown in .
+
+However, we were looking for the values for the triangle with an obtuse angle 
+ 
+ β.
+ We can see them in the first triangle (a) in .
+
+Given 
+ 
+ α=80°,a=120,
+ 
+ and 
+ 
+ b=121,
+ find the missing side and angles. If there is more than one possible solution, show both.
+
+Solution 1
+
+Solution 2
+
+Solving for the Unknown Sides and Angles of a SSA Triangle
+
+In the triangle shown in , solve for the unknown side and angles. Round your answers to the nearest tenth.
+
+In choosing the pair of ratios from the Law of Sines to use, look at the information given. In this case, we know the angle 
+ 
+ γ=85°,
+ 
+ and its corresponding side 
+ 
+ c=12,
+ and we know side 
+ 
+ b=9.
+ We will use this proportion to solve for 
+ 
+ β.
+
+To find 
+ 
+ β,
+ apply the inverse sine function. The inverse sine will produce a single result, but keep in mind that there may be two values for 
+ 
+ β.
+ It is important to verify the result, as there may be two viable solutions, only one solution (the usual case), or no solutions.
+
+In this case, if we subtract 
+ 
+ β
+ from 180°, we find that there may be a second possible solution. Thus, 
+ 
+ β=180°−48.3°≈131.7°.
+ To check the solution, subtract both angles, 131.7° and 85°, from 180°. This gives
+
+which is impossible, and so 
+ 
+ β≈48.3°.
+
+To find the remaining missing values, we calculate 
+ 
+ α=180°−85°−48.3°≈46.7°.
+ 
+ Now, only side 
+ 
+ a
+ is needed. Use the Law of Sines to solve for 
+ 
+ a
+ by one of the proportions.
+
+The complete set of solutions for the given triangle is
+
+Given 
+ 
+ α=80°,a=100,b=10,
+ 
+ find the missing side and angles. If there is more than one possible solution, show both. Round your answers to the nearest tenth.
+β≈5.7°,γ≈94.3°,c≈101.3
+
+Finding the Triangles That Meet the Given Criteria
+
+Find all possible triangles if one side has length 4 opposite an angle of 50°, and a second side has length 10.
+
+Using the given information, we can solve for the angle opposite the side of length 10. See .
+
+We can stop here without finding the value of 
+ 
+ α.
+ Because the range of the sine function is 
+ 
+ [ 
+ −1,1 ],
+ it is impossible for the sine value to be 1.915. In fact, inputting 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ 1.915
+ )
+ in a graphing calculator generates an ERROR DOMAIN. Therefore, no triangles can be drawn with the provided dimensions.
+
+Determine the number of triangles possible given 
+ 
+ a=31, b=26, β=48°.
+
+two
+
+Finding the Area of an Oblique Triangle Using the Sine Function
+
+Now that we can solve a triangle for missing values, we can use some of those values and the sine function to find the area of an oblique triangle. Recall that the area formula for a triangle is given as 
+ 
+Area=
+ 1
+ 2
+ 
+ bh,
+ where 
+ 
+b
+ is base and 
+ 
+h
+ is height. For oblique triangles, we must find 
+ 
+h
+ before we can use the area formula. Observing the two triangles in , one acute and one obtuse, we can drop a perpendicular to represent the height and then apply the trigonometric property 
+ 
+ sinα=
+ 
+ opposite
+
+ hypotenuse
+
+ to write an equation for area in oblique triangles. In the acute triangle, we have 
+ 
+sinα=
+ h
+ c
+
+ or 
+ 
+ csinα=h.
+ However, in the obtuse triangle, we drop the perpendicular outside the triangle and extend the base 
+ 
+b
+ to form a right triangle. The angle used in calculation is 
+
+ α
+ ′
+ 
+ ,
+ or 
+ 
+180−α.
+
+Thus,
+
+Similarly,
+
+Area of an Oblique Triangle
+
+The formula for the area of an oblique triangle is given by
+
+This is equivalent to one-half of the product of two sides and the sine of their included angle.
+
+Finding the Area of an Oblique Triangle
+
+Find the area of a triangle with sides 
+ 
+ a=90,b=52,
+ and angle 
+ 
+ γ=102°.
+ 
+ Round the area to the nearest integer.
+
+Using the formula, we have
+
+Find the area of the triangle given 
+ 
+ β=42°, a=7.2ft, c=3.4ft.
+ 
+ Round the area to the nearest tenth.
+
+about 
+ 
+ 8.2
+ square feet
+
+Solving Applied Problems Using the Law of Sines
+
+The more we study trigonometric applications, the more we discover that the applications are countless. Some are flat, diagram-type situations, but many applications in calculus, engineering, and physics involve three dimensions and motion.
+
+Finding an Altitude
+
+Find the altitude of the aircraft in the problem introduced at the beginning of this section, shown in . Round the altitude to the nearest tenth of a mile.
+
+To find the elevation of the aircraft, we first find the distance from one station to the aircraft, such as the side 
+ 
+ a,
+ and then use right triangle relationships to find the height of the aircraft, 
+ 
+ h.
+
+Because the angles in the triangle add up to 180 degrees, the unknown angle must be 180°−15°−35°=130°. This angle is opposite the side of length 20, allowing us to set up a Law of Sines relationship.
+
+The distance from one station to the aircraft is about 14.98 miles.
+
+Now that we know 
+ 
+ a,
+ we can use right triangle relationships to solve for 
+ 
+ h.
+
+The aircraft is at an altitude of approximately 3.9 miles.
+
+The diagram shown in represents the height of a blimp flying over a football stadium. Find the height of the blimp if the angle of elevation at the southern end zone, point A, is 70°, the angle of elevation from the northern end zone, point 
+ 
+ B,
+ is 62°, and the distance between the viewing points of the two end zones is 145 yards.
+
+161.9 yd.
+
+Access these online resources for additional instruction and practice with trigonometric applications.
+Law of Sines: The Basics
+Law of Sines: The Ambiguous Case
+
+Key Equations
+
+sinα
+ 
+ a
+ 
+ =
+ 
+ sinβ
+ 
+ b
+ 
+ =
+ 
+ sinγ
+ 
+ c
+
+ a
+ 
+ sinα
+
+ =
+ b
+ 
+ sinβ
+
+ =
+ c
+ 
+ sinγ
+Area=
+ 1
+ 2
+ 
+ bcsinα
+
+ =
+ 1
+ 2
+ 
+ acsinβ
+
+ =
+ 1
+ 2
+ 
+ absinγ
+Key Concepts
+
+The Law of Sines can be used to solve oblique triangles, which are non-right triangles.
+
+According to the Law of Sines, the ratio of the measurement of one of the angles to the length of its opposite side equals the other two ratios of angle measure to opposite side.
+
+There are three possible cases: ASA, AAS, SSA. Depending on the information given, we can choose the appropriate equation to find the requested solution. See .
+
+The ambiguous case arises when an oblique triangle can have different outcomes.
+
+There are three possible cases that arise from SSA arrangement—a single solution, two possible solutions, and no solution. See and .
+
+The Law of Sines can be used to solve triangles with given criteria. See .
+
+The general area formula for triangles translates to oblique triangles by first finding the appropriate height value. See .
+
+There are many trigonometric applications. They can often be solved by first drawing a diagram of the given information and then using the appropriate equation. See .
+
+Section Exercises
+
+Verbal
+
+Describe the altitude of a triangle.
+
+The altitude extends from any vertex to the opposite side or to the line containing the opposite side at a 90° angle.
+
+Compare right triangles and oblique triangles.
+
+When can you use the Law of Sines to find a missing angle?
+
+When the known values are the side opposite the missing angle and another side and its opposite angle.
+
+In the Law of Sines, what is the relationship between the angle in the numerator and the side in the denominator?
+
+What type of triangle results in an ambiguous case?
+
+A triangle with two given sides and a non-included angle.
+
+Algebraic
+
+For the following exercises, assume 
+ 
+ α
+ is opposite side 
+ 
+ a,β
+ is opposite side 
+ 
+ b,
+ and 
+ 
+ γ
+ is opposite side 
+ 
+ c.
+ Solve each triangle, if possible. Round each answer to the nearest tenth.
+α=43°,γ=69°,a=20
+α=35°,γ=73°,c=20
+β=72°,a≈12.0,b≈19.9
+α=60°, β=60°, γ=60°
+a=4, α=
+ 
+ 60°
+ , β=100°
+γ=20°,b≈4.5,c≈1.6
+b=10, β=95°,γ=
+ 
+ 30°
+
+For the following exercises, use the Law of Sines to solve for the missing side for each oblique triangle. Round each answer to the nearest hundredth. Assume that angle 
+ 
+ A
+ is opposite side 
+ 
+ a,
+ angle 
+ 
+ B
+ is opposite side 
+ 
+ b,
+ and angle 
+ 
+ C
+ is opposite side 
+ 
+ c.
+
+Find side 
+ 
+b
+ when 
+ 
+A=37°, B=49°, c=5.
+b≈3.78
+
+Find side 
+ 
+a
+ when 
+ 
+A=132°,C=23°,b=10.
+
+Find side 
+ 
+c
+ when 
+ 
+B=37°,C=21°, b=23.
+c≈13.70
+
+For the following exercises, assume 
+ 
+ α
+ is opposite side 
+ 
+ a,β
+ is opposite side 
+ 
+ b,
+ and 
+ 
+ γ
+ is opposite side 
+ 
+ c.
+ Determine whether there is no triangle, one triangle, or two triangles. Then solve each triangle, if possible. Round each answer to the nearest tenth.
+α=119°,a=14,b=26
+γ=113°,b=10,c=32
+
+one triangle, 
+ 
+ α≈50.3°,β≈16.7°,a≈26.7
+b=3.5, c=5.3, γ=
+ 
+ 80°
+a=12, c=17, α=
+ 
+ 35°
+
+two triangles, 
+ 
+ γ≈54.3°,β≈90.7°,b≈20.9
+ or 
+
+ γ
+ ′
+ 
+ ≈125.7°,
+ β
+ ′
+ 
+ ≈19.3°,
+ b
+ ′
+ 
+ ≈6.9
+a=20.5, b=35.0, β=
+ 
+ 25°
+a=7, c=9, α=43°
+
+two triangles, 
+ β≈75.7°,γ≈61.3°,b≈9.9
+ or 
+ 
+ β
+ ′
+ 
+ ≈18.3°,
+ γ
+ ′
+ 
+ ≈118.7°,
+ b
+ ′
+ 
+ ≈3.2
+a=7,b=3,β=24°
+b=13,c=5,γ=10°
+
+two triangles, 
+ α≈143.2°,β≈26.8°,a≈17.3
+ or 
+
+ α
+ ′
+ 
+ ≈16.8°,
+ β
+ ′
+ 
+ ≈153.2°,
+ a
+ ′
+ 
+ ≈8.3
+a=2.3,c=1.8,γ=28°
+β=119°,b=8.2,a=11.3
+
+no triangle possible
+
+For the following exercises, use the Law of Sines to solve, if possible, the missing side or angle for each triangle or triangles in the ambiguous case. Round each answer to the nearest tenth.
+
+Find angle 
+ A
+ when 
+ 
+a=24,b=5,B=22°.
+
+Find angle 
+ 
+ A
+ when 
+ 
+a=13,b=6,B=20°.
+A≈47.8°
+ or 
+
+ A
+ ′
+ 
+ ≈
+ 
+ 132.2°
+
+Find angle 
+ 
+B
+ when 
+ 
+A=12°,a=2,b=9.
+
+For the following exercises, find the area of the triangle with the given measurements. Round each answer to the nearest tenth.
+a=5,c=6,β=
+ 
+ 35°
+8.6
+b=11,c=8,α=
+ 
+ 28°
+a=32,b=24,γ=
+ 
+ 75°
+370.9
+a=7.2,b=4.5,γ=
+ 
+ 43°
+
+Graphical
+
+For the following exercises, find the length of side 
+ 
+ x.
+ Round to the nearest tenth.
+12.3
+12.2
+16.0
+
+For the following exercises, find the measure of angle 
+ 
+ x, if possible. Round to the nearest tenth.
+29.7°
+x=76.9°orx=103.1°
+
+Notice that 
+ 
+x
+ is an obtuse angle.
+110.6°
+
+For the following exercise, solve the triangle. Round each answer to the nearest tenth.
+A≈39.4,C≈47.6,BC≈20.7
+
+For the following exercises, find the area of each triangle. Round each answer to the nearest tenth.
+57.1
+42.0
+430.2
+
+Extensions
+
+Find the radius of the circle in . Round to the nearest tenth.
+
+Find the diameter of the circle in . Round to the nearest tenth.
+10.1
+
+Find 
+ 
+ m∠ADC
+ 
+ in . Round to the nearest tenth.
+
+Find 
+ 
+ AD
+ in . Round to the nearest tenth.
+AD≈13.8
+
+Solve both triangles in . Round each answer to the nearest tenth.
+
+Find 
+ 
+AB
+ in the parallelogram shown in .
+AB≈2.8
+
+Solve the triangle in . (Hint: Draw a perpendicular from 
+ 
+ H
+ to 
+ 
+ JK).
+ Round each answer to the nearest tenth.
+
+Solve the triangle in . (Hint: Draw a perpendicular from 
+ 
+N
+ to 
+ 
+LM).
+ Round each answer to the nearest tenth.
+L≈49.7,N≈56.3,LN≈5.8
+
+In , 
+ 
+ABCD
+ is not a parallelogram. 
+ 
+ ∠m
+ 
+ is obtuse. Solve both triangles. Round each answer to the nearest tenth.
+
+Real-World Applications
+
+A pole leans away from the sun at an angle of 
+ 
+7°
+ to the vertical, as shown in . When the elevation of the sun is 
+ 
+55°,
+ the pole casts a shadow 42 feet long on the level ground. How long is the pole? Round the answer to the nearest tenth.
+
+51.4 feet
+
+To determine how far a boat is from shore, two radar stations 500 feet apart find the angles out to the boat, as shown in . Determine the distance of the boat from station 
+ 
+A
+ and the distance of the boat from shore. Round your answers to the nearest whole foot.
+shows a satellite orbiting Earth. The satellite passes directly over two tracking stations 
+ 
+A
+ and 
+ 
+B,
+ which are 69 miles apart. When the satellite is on one side of the two stations, the angles of elevation at 
+ 
+A
+ and 
+ 
+B
+ are measured to be 
+ 
+83.9°
+ and 
+ 
+86.2°,
+ respectively. How far is the satellite from station 
+ 
+A
+ and how high is the satellite above the ground? Round answers to the nearest whole mile.
+
+The distance from the satellite to station 
+ 
+ A
+ is approximately 1716 miles. The satellite is approximately 1706 miles above the ground.
+
+A communications tower is located at the top of a steep hill, as shown in . The angle of inclination of the hill is 
+ 
+67°.
+ A guy wire is to be attached to the top of the tower and to the ground, 165 meters downhill from the base of the tower. The angle formed by the guy wire and the hill is 
+ 
+16°.
+ Find the length of the cable required for the guy wire to the nearest whole meter.
+
+The roof of a house is at a 
+ 
+20°
+ angle. An 8-foot solar panel is to be mounted on the roof and should be angled 
+ 
+38°
+ relative to the horizontal for optimal results. (See ). How long does the vertical support holding up the back of the panel need to be? Round to the nearest tenth.
+
+2.6 ft
+
+Similar to an angle of elevation, an angle of depression is the acute angle formed by a horizontal line and an observer’s line of sight to an object below the horizontal. A pilot is flying over a straight highway. He determines the angles of depression to two mileposts, 6.6 km apart, to be 
+ 
+37°
+ and 
+ 
+44°,
+ as shown in . Find the distance of the plane from point 
+ 
+A
+ to the nearest tenth of a kilometer.
+
+A pilot is flying over a straight highway. He determines the angles of depression to two mileposts, 4.3 km apart, to be 32° and 56°, as shown in . Find the distance of the plane from point 
+ 
+A
+ to the nearest tenth of a kilometer.
+
+5.6 km
+
+In order to estimate the height of a building, two students stand at a certain distance from the building at street level. From this point, they find the angle of elevation from the street to the top of the building to be 39°. They then move 300 feet closer to the building and find the angle of elevation to be 50°. Assuming that the street is level, estimate the height of the building to the nearest foot.
+
+In order to estimate the height of a building, two students stand at a certain distance from the building at street level. From this point, they find the angle of elevation from the street to the top of the building to be 35°. They then move 250 feet closer to the building and find the angle of elevation to be 53°. Assuming that the street is level, estimate the height of the building to the nearest foot.
+
+371 ft
+
+Points 
+ 
+A
+ and 
+ 
+B
+ are on opposite sides of a lake. Point 
+ 
+C
+ is 97 meters from 
+ 
+A.
+ The measure of angle 
+ 
+BAC
+ is determined to be 101°, and the measure of angle 
+ 
+ ACB
+ 
+ is determined to be 53°. What is the distance from 
+ 
+A
+ to 
+ 
+B,
+ rounded to the nearest whole meter?
+
+A man and a woman standing 
+ 
+3
+ 1
+ 2
+
+ miles apart spot a hot air balloon at the same time. If the angle of elevation from the man to the balloon is 27°, and the angle of elevation from the woman to the balloon is 41°, find the altitude of the balloon to the nearest foot.
+
+5936 ft
+
+Two search teams spot a stranded climber on a mountain. The first search team is 0.5 miles from the second search team, and both teams are at an altitude of 1 mile. The angle of elevation from the first search team to the stranded climber is 15°. The angle of elevation from the second search team to the climber is 22°. What is the altitude of the climber? Round to the nearest tenth of a mile.
+
+A street light is mounted on a pole. A 6-foot-tall man is standing on the street a short distance from the pole, casting a shadow. The angle of elevation from the tip of the man’s shadow to the top of his head of 28°. A 6-foot-tall woman is standing on the same street on the opposite side of the pole from the man. The angle of elevation from the tip of her shadow to the top of her head is 28°. If the man and woman are 20 feet apart, how far is the street light from the tip of the shadow of each person? Round the distance to the nearest tenth of a foot.
+
+24.1 ft
+
+Three cities, 
+ 
+A,B,
+ and 
+ 
+C,
+ are located so that city 
+ 
+A
+ is due east of city 
+ 
+B.
+ If city 
+ 
+C
+ is located 35° west of north from city 
+ 
+B
+ and is 100 miles from city 
+ 
+A
+ and 70 miles from city 
+ 
+B,
+ how far is city 
+ 
+A
+ from city 
+ 
+B?
+ Round the distance to the nearest tenth of a mile.
+
+Two streets meet at an 80° angle. At the corner, a park is being built in the shape of a triangle. Find the area of the park if, along one road, the park measures 180 feet, and along the other road, the park measures 215 feet.
+
+19,056 ft2
+
+Brian’s house is on a corner lot. Find the area of the front yard if the edges measure 40 and 56 feet, as shown in .
+
+The Bermuda triangle is a region of the Atlantic Ocean that connects Bermuda, Florida, and Puerto Rico. Find the area of the Bermuda triangle if the distance from Florida to Bermuda is 1030 miles, the distance from Puerto Rico to Bermuda is 980 miles, and the angle created by the two distances is 62°.
+
+445,624 square miles
+
+A yield sign measures 30 inches on all three sides. What is the area of the sign?
+
+Naomi bought a dining table whose top is in the shape of a triangle. Find the area of the table top if two of the sides measure 4 feet and 4.5 feet, and the smaller angles measure 32° and 42°, as shown in .
+
+8.65 ft2
+
+a perpendicular line from one vertex of a triangle to the opposite side, or in the case of an obtuse triangle, to the line containing the opposite side, forming two right triangles
+a scenario in which more than one triangle is a valid solution for a given oblique SSA triangle
+states that the ratio of the measurement of one angle of a triangle to the length of its opposite side is equal to the remaining two ratios of angle measure to opposite side; any pair of proportions may be used to solve for a missing angle or side
+any triangle that is not a right triangle

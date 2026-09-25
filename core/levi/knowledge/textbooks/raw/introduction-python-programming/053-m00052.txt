@@ -1,0 +1,63 @@
+# m00052
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Module basics
+
+Module basics
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Write a module that consists only of function definitions.
+
+Import the module and use the functions in a program.
+
+Defining a module
+
+Modules are defined by putting code in a .py file. The area module below is in a file named area.py. This module provides functions for calculating area.
+
+The area module
+
+Defining a module
+
+Importing a module
+
+The module defined in area.py can be used in other programs. When importing the area module, the suffix .py is removed:
+
+The output is:
+
+Importing area in a Python shell
+
+Importing a module
+
+Conversion module
+
+Write a module that defines the following functions:
+cel2fah(c) –
+ Converts a temperature in Celsius to Fahrenheit.
+ The formula is 9/5 * c + 32.
+fah2cel(f) –
+ Converts a temperature in Fahrenheit to Celsius.
+ The formula is 5/9 * (f - 32).
+km2mi(km) –
+ Converts a distance in kilometers to miles.
+ The formula is km / 1.60934.
+mi2km(mi) –
+ Converts a distance in miles to kilometers.
+ The formula is mi * 1.60934.
+
+Each function should include a docstring as the first line. A docstring for the module has been provided for you.
+
+The module should not do anything except define functions. When you click the "Run" button, the module should run without error. No output should be displayed.
+
+European vacation
+
+Write a program that uses the conversion module from the previous exercise to complete a short story. The program's output should match the following example (input in bold):
+
+Notice this exercise requires two files:
+european.py, the main program. Input and output statements are provided as a starting point. Edit the lines with TODO comments to use the conversion module.
+conversion.py, the other module. Copy and paste your code from the previous exercise. Import this module in european.py after the docstring.

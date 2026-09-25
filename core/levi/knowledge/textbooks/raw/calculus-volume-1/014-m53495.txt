@@ -1,0 +1,521 @@
+# m53495
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Defining the Derivative
+
+Defining the Derivative
+
+Recognize the meaning of the tangent to a curve at a point.
+
+Calculate the slope of a tangent line.
+
+Identify the derivative as the limit of a difference quotient.
+
+Calculate the derivative of a given function at a point.
+
+Describe the velocity as a rate of change.
+
+Explain the difference between average velocity and instantaneous velocity.
+
+Estimate the derivative from a table of values.
+
+Now that we have both a conceptual understanding of a limit and the practical ability to compute limits, we have established the foundation for our study of calculus, the branch of mathematics in which we compute derivatives and integrals. Most mathematicians and historians agree that calculus was developed independently by the Englishman Isaac Newton (1643–1727) and the German Gottfried Leibniz (1646–1716), whose images appear in . When we credit Newton and Leibniz with developing calculus, we are really referring to the fact that Newton and Leibniz were the first to understand the relationship between the derivative and the integral. Both mathematicians benefited from the work of predecessors, such as Barrow, Fermat, and Cavalieri. The initial relationship between the two mathematicians appears to have been amicable; however, in later years a bitter controversy erupted over whose work took precedence. Although it seems likely that Newton did, indeed, arrive at the ideas behind calculus first, we are indebted to Leibniz for the notation that we commonly use today.
+
+Tangent Lines
+
+We begin our study of calculus by revisiting the notion of secant lines and tangent lines. Recall that we used the slope of a secant line to a function at a point (a,f(a)) to estimate the rate of change, or the rate at which one variable changes in relation to another variable. We can obtain the slope of the secant by choosing a value of x near a and drawing a line through the points (a,f(a)) and (x,f(x)), as shown in . The slope of this line is given by an equation in the form of a difference quotient:
+
+We can also calculate the slope of a secant line to a function at a value a by using this equation and replacing x with a+h, where h is a value close to 0. We can then calculate the slope of the line through the points (a,f(a)) and (a+h,f(a+h)). In this case, we find the secant line has a slope given by the following difference quotient with increment h:
+
+Definition
+
+Let f be a function defined on an interval I containing a. If x≠a is in I, then
+
+is a difference quotient.
+
+Also, if h≠0 is chosen so that a+h is in I, then
+
+is a difference quotient with increment h.
+
+View the development of the derivative with this applet.
+
+These two expressions for calculating the slope of a secant line are illustrated in . We will see that each of these two methods for finding the slope of a secant line is of value. Depending on the setting, we can choose one or the other. The primary consideration in our choice usually depends on ease of calculation.
+
+In (a) we see that, as the values of x approach a, the slopes of the secant lines provide better estimates of the rate of change of the function at a. Furthermore, the secant lines themselves approach the tangent line to the function at a, which represents the limit of the secant lines. Similarly, (b) shows that as the values of h get closer to 0, the secant lines also approach the tangent line. The slope of the tangent line at a is the rate of change of the function at a, as shown in (c).
+
+You can use this site to explore graphs to see if they have a tangent line at a point.
+
+In we show the graph of f(x)=x and its tangent line at (1,1) in a series of tighter intervals about x=1. As the intervals become narrower, the graph of the function and its tangent line appear to coincide, making the values on the tangent line a good approximation to the values of the function for choices of x close to 1. In fact, the graph of f(x) itself appears to be locally linear in the immediate vicinity of x=1.
+
+Formally we may define the tangent line to the graph of a function as follows.
+
+Definition
+
+Let f(x) be a function defined in an open interval containing a. The tangent line to f(x) at a is the line passing through the point (a,f(a)) having slope
+
+provided this limit exists.
+
+Equivalently, we may define the tangent line to f(x) at a to be the line passing through the point (a,f(a)) having slope
+
+provided this limit exists.
+
+Just as we have used two different expressions to define the slope of a secant line, we use two different forms to define the slope of the tangent line. In this text we use both forms of the definition. As before, the choice of definition will depend on the setting. Now that we have formally defined a tangent line to a function at a point, we can use this definition to find equations of tangent lines.
+
+Finding a Tangent Line
+
+Find the equation of the line tangent to the graph of f(x)=x2 at x=3.
+
+First find the slope of the tangent line. In this example, use .
+
+Next, find a point on the tangent line. Since the line is tangent to the graph of f(x) at x=3, it passes through the point (3,f(3)). We have f(3)=9, so the tangent line passes through the point (3,9).
+
+Using the point-slope equation of the line with the slope m=6 and the point (3,9), we obtain the line y−9=6(x−3). Simplifying, we have y=6x−9. The graph of f(x)=x2 and its tangent line at 3 are shown in .
+
+The Slope of a Tangent Line Revisited
+
+Use to find the slope of the line tangent to the graph of f(x)=x2 at x=3.
+
+The steps are very similar to . See for the definition.
+
+We obtained the same value for the slope of the tangent line by using the other definition, demonstrating that the formulas can be interchanged.
+
+Finding the Equation of a Tangent Line
+
+Find the equation of the line tangent to the graph of f(x)=1/x at x=2.
+
+We can use , but as we have seen, the results are the same if we use .
+
+We now know that the slope of the tangent line is −14. To find the equation of the tangent line, we also need a point on the line. We know that f(2)=12. Since the tangent line passes through the point (2,12) we can use the point-slope equation of a line to find the equation of the tangent line. Thus the tangent line has the equation y=−14x+1. The graphs of f(x)=1x and y=−14x+1 are shown in .
+
+Find the slope of the line tangent to the graph of f(x)=x at x=4.
+14
+
+Hint
+
+Use either or . Multiply the numerator and the denominator by a conjugate.
+
+The Derivative of a Function at a Point
+
+The type of limit we compute in order to find the slope of the line tangent to a function at a point occurs in many applications across many disciplines. These applications include velocity and acceleration in physics, marginal profit functions in business, and growth rates in biology. This limit occurs so frequently that we give this value a special name: the derivative. The process of finding a derivative is called differentiation.
+
+Definition
+
+Let f(x) be a function defined in an open interval containing a. The derivative of the function f(x) at a, denoted by f′(a), is defined by
+
+provided this limit exists.
+
+Alternatively, we may also define the derivative of f(x) at a as
+
+Estimating a Derivative
+
+For f(x)=x2, use a table to estimate f′(3) using .
+
+Create a table using values of x just below 3 and just above 3.
+6.1
+After examining the table, we see that a good estimate is f′(3)=6.
+
+For f(x)=x2, use a table to estimate f′(3) using .
+6
+
+Hint
+
+Evaluate (x+h)−x2h at h=−0.1,−0.01,−0.001,0.001,0.01,0.1
+
+Finding a Derivative
+
+For f(x)=3x2−4x+1, find f′(2) by using .
+
+Substitute the given function and value directly into the equation.
+
+Revisiting the Derivative
+
+For f(x)=3x2−4x+1, find f′(2) by using .
+
+Using this equation, we can substitute two values of the function into the equation, and we should get the same value as in .
+
+The results are the same whether we use or .
+
+For f(x)=x2+3x+2, find f′(1).
+f′(1)=5
+
+Hint
+
+Use either , , or try both. Use either or as a guide.
+
+Velocities and Rates of Change
+
+Now that we can evaluate a derivative, we can use it in velocity applications. Recall that if s(t) is the position of an object moving along a coordinate axis, the average velocity of the object over a time interval [a,t] if t>a or [t,a] if t<a is given by the difference quotient
+
+As the values of t approach a, the values of vave approach the value we call the instantaneous velocity at a. That is, instantaneous velocity at a, denoted v(a), is given by
+
+To better understand the relationship between average velocity and instantaneous velocity, see . In this figure, the slope of the tangent line (shown in red) is the instantaneous velocity of the object at time t=a whose position at time t is given by the function s(t). The slope of the secant line (shown in green) is the average velocity of the object over the time interval [a,t].
+
+We can use to calculate the instantaneous velocity, or we can estimate the velocity of a moving object by using a table of values. We can then confirm the estimate by using .
+
+Estimating Velocity
+
+A lead weight on a spring is oscillating up and down. Its position at time t with respect to a fixed horizontal line is given by s(t)=sint (). Use a table of values to estimate v(0). Check the estimate by using .
+
+We can estimate the instantaneous velocity at t=0 by computing a table of average velocities using values of t approaching 0, as shown in .
+
+Average velocities using values of t approaching 0
+0.998334166
+From the table we see that the average velocity over the time interval [−0.1,0] is 0.998334166, the average velocity over the time interval [−0.01,0] is 0.9999833333, and so forth. Using this table of values, it appears that a good estimate is v(0)=1.
+
+By using , we can see that
+
+Thus, in fact, v(0)=1.
+
+A rock is dropped from a height of 64 feet. Its height above ground at time t seconds later is given by s(t)=−16t2+64,0≤t≤2. Find its instantaneous velocity 1 second after it is dropped, using .
+−32 ft/s
+
+Hint
+v(t)=s′(t). Follow the earlier examples of the derivative using .
+
+As we have seen throughout this section, the slope of a tangent line to a function and instantaneous velocity are related concepts. Each is calculated by computing a derivative and each measures the instantaneous rate of change of a function, or the rate of change of a function at any point along the function.
+
+Definition
+
+The instantaneous rate of change of a function f(x) at a value a is its derivative f′(a).
+
+Chapter Opener: Estimating Rate of Change of Velocity
+
+Reaching a top speed of 270.49 mph, the Hennessey Venom GT is one of the fastest cars in the world. In tests it went from 0 to 60 mph in 3.05 seconds, from 0to100 mph in 5.88 seconds, from 0to200 mph in 14.51 seconds, and from 0to229.9 mph in 19.96 seconds. Use this data to draw a conclusion about the rate of change of velocity (that is, its acceleration) as it approaches 229.9 mph. Does the rate at which the car is accelerating appear to be increasing, decreasing, or constant?
+
+First observe that 60 mph = 88 ft/s, 100 mph ≈146.67 ft/s, 200 mph ≈293.33 ft/s, and 229.9 mph ≈337.19 ft/s. We can summarize the information in a table.
+v(t) at different values of t
+337.19
+Now compute the average acceleration of the car in feet per second per second on intervals of the form [t,19.96] as t approaches 19.96, as shown in the following table.
+
+Average acceleration
+8.05
+The rate at which the car is accelerating is decreasing as its velocity approaches 229.9 mph (337.19 ft/s).
+
+Rate of Change of Temperature
+
+A homeowner sets the thermostat so that the temperature in the house begins to drop from 70°F at 9 p.m., reaches a low of 60° during the night, and rises back to 70° by 7 a.m. the next morning. Suppose that the temperature in the house is given by T(t)=0.4t2−4t+70 for 0≤t≤10, where t is the number of hours past 9 p.m. Find the instantaneous rate of change of the temperature at midnight.
+
+Since midnight is 3 hours past 9 p.m., we want to compute T′(3). Refer to .
+
+The instantaneous rate of change of the temperature at midnight is −1.6°F per hour.
+
+Rate of Change of Profit
+
+A toy company can sell x electronic gaming systems at a price of p=−0.01x+400 dollars per gaming system. The cost of manufacturing x systems is given by C(x)=100x+10,000 dollars. Find the rate of change of profit when 10,000 games are produced. Should the toy company increase or decrease production?
+
+The profit P(x) earned by producing x gaming systems is R(x)−C(x), where R(x) is the revenue obtained from the sale of x games. Since the company can sell x games at p=−0.01x+400 per game,
+
+Consequently,
+
+Therefore, evaluating the rate of change of profit gives
+
+Since the rate of change of profit P′(10,000)>0 and P(10,000)>0, the company should increase production.
+
+A coffee shop determines that the daily profit on scones obtained by charging s dollars per scone is P(s)=−20s2+150s−10. The coffee shop currently charges $3.25 per scone. Find P′(3.25), the rate of change of profit when the price is $3.25 and decide whether or not the coffee shop should consider raising or lowering its prices on scones.
+P′(3.25)=20>0; raise prices
+
+Hint
+
+Use for a guide.
+
+Key Concepts
+
+The slope of the tangent line to a curve measures the instantaneous rate of change of a curve. We can calculate it by finding the limit of the difference quotient or the difference quotient with increment h.
+
+The derivative of a function f(x) at a value a is found using either of the definitions for the slope of the tangent line.
+
+Velocity is the rate of change of position. As such, the velocity v(t) at time t is the derivative of the position s(t) at time t. Average velocity is given by
+vave=s(t)−s(a)t−a.
+Instantaneous velocity is given by
+v(a)=s′(a)=limt→as(t)−s(a)t−a.
+
+We may estimate a derivative by using a table of values.
+
+Key Equations
+v(a)=s′(a)=limt→as(t)−s(a)t−a
+For the following exercises, use to find the slope of the secant line between the values x1 and x2 for each function y=f(x).
+f(x)=4x+7;x1=2,x2=5
+4
+f(x)=8x−3;x1=−1,x2=3
+f(x)=x2+2x+1;x1=3,x2=3.5
+8.5
+f(x)=−x2+x+2;x1=0.5,x2=1.5
+f(x)=43x−1;x1=1,x2=3
+−34
+f(x)=x−72x+1;x1=0,x2=2
+f(x)=x;x1=1,x2=16
+0.2
+f(x)=x−9;x1=10,x2=13
+f(x)=x1/3+1;x1=0,x2=8
+0.25
+f(x)=6x2/3+2x1/3;x1=1,x2=27
+
+For the following functions,
+
+use to find the slope of the tangent line mtan=f′(a), and
+
+find the equation of the tangent line to f at x=a.
+f(x)=3−4x,a=2
+
+a. −4 b. y=3−4x
+f(x)=x5+6,a=−1
+f(x)=x2+x,a=1
+
+a. 3 b. y=3x−1
+f(x)=1−x−x2,a=0
+f(x)=7x,a=3
+
+a. −79 b. y=−79x+143
+f(x)=x+8,a=1
+f(x)=2−3x2,a=−2
+
+a. 12 b. y=12x+14
+f(x)=−3x−1,a=4
+f(x)=2x+3,a=−4
+
+a. −2 b. y=−2x−10
+f(x)=3x2,a=3
+
+For the following functions y=f(x), find f′(a) using .
+f(x)=5x+4,a=−1
+5
+f(x)=−7x+1,a=3
+f(x)=x2+9x,a=2
+13
+f(x)=3x2−x+2,a=1
+f(x)=x,a=4
+14
+f(x)=x−2,a=6
+f(x)=1x,a=2
+−14
+f(x)=1x−3,a=−1
+f(x)=1x3,a=1
+−3
+f(x)=1x,a=4
+
+For the following exercises, given the function y=f(x),
+
+find the slope of the secant line PQ for each point Q(x,f(x)) with x value given in the table.
+
+Use the answers from a. to estimate the value of the slope of the tangent line at P.
+
+Use the answer from b. to find the equation of the tangent line to f at point P.
+[T] f(x)=x2+3x+4,P(1,8) (Round to 6 decimal places.)
+x
+x
+Slope mPQ
+1.1
+(i)
+0.9
+(vii)
+1.01
+(ii)
+0.99
+(viii)
+1.001
+(iii)
+0.999
+(ix)
+1.0001
+(iv)
+0.9999
+(x)
+1.00001
+(v)
+0.99999
+(xi)
+1.000001
+(vi)
+0.999999
+(xii)
+a. (i)5.100000, (ii)5.010000, (iii)5.001000, (iv)5.000100, (v)5.000010, (vi)5.000001, (vii)4.900000, (viii)4.990000, (ix)4.999000, (x)4.999900, (xi)4.999990, (x)4.999999 b. mtan=5 c. y=5x+3
+[T] f(x)=x+1x2−1,P(0,−1)
+x
+x
+Slope mPQ
+0.1
+−0.1
+(vii)
+0.01
+−0.01
+(viii)
+0.001
+−0.001
+(ix)
+0.0001
+−0.0001
+(x)
+0.00001
+−0.00001
+(xi)
+0.000001
+−0.000001
+[T] f(x)=10e0.5x,P(0,10) (Round to 4 decimal places.)
+x
+−0.1
+−0.01
+−0.001
+−0.0001
+−0.00001
+(v)
+−0.000001
+(vi)
+a. (i)4.8771, (ii)4.9875(iii)4.9988, (iv)4.9999, (v)4.9999, (vi)4.9999 b. mtan=5 c. y=5x+10
+[T] f(x)=tan(x),P(π,0)
+x
+Slope mPQ
+3.1
+(i)
+3.14
+(ii)
+3.141
+(iii)
+3.1415
+(iv)
+3.14159
+(v)
+3.141592
+[T] For the following position functions y=s(t), an object is moving along a straight line, where t is in seconds and s is in meters. Find
+
+the simplified expression for the average velocity from t=2 to t=2+h;
+
+the average velocity between t=2 and t=2+h, where (i)h=0.1, (ii)h=0.01, (iii)h=0.001, and (iv)h=0.0001; and
+
+use the answer from a. to estimate the instantaneous velocity at t=2 second.
+s(t)=13t+5
+
+a. 13; b. (i)0.3– m/s, (ii)0.3– m/s, (iii)0.3– m/s, (iv)0.3– m/s; c. 0.3–=13 m/s
+s(t)=t2−2t
+s(t)=2t3+3
+
+a. 2(h2+6h+12); b. (i)25.22 m/s, (ii)24.12 m/s, (iii)24.01 m/s, (iv)24 m/s; c. 24 m/s
+s(t)=16t2−4t
+
+Use the following graph to evaluate a. f′(1) and b. f′(6).
+
+a. 1.25; b. 0.5
+
+Use the following graph to evaluate a. f′(−3) and b. f′(1.5).
+
+For the following exercises, use the limit definition of derivative to show that the derivative does not exist at x=a for each of the given functions.
+f(x)=x1/3,x=0
+limx→0−x1/3−0x−0=limx→0−1x2/3=∞
+f(x)=x2/3,x=0
+f(x)={1,x<1x,x≥1,x=1
+limx→1−1−1x−1=0≠1=limx→1+x−1x−1
+f(x)=|x|x,x=0
+[T] The position in feet of a race car along a straight track after t seconds is modeled by the function s(t)=8t2−116t3.
+
+Find the average velocity of the vehicle over the following time intervals to four decimal places:
+
+[4, 4.1]
+[4, 4.01]
+[4, 4.001]
+[4, 4.0001]
+
+[4, 4.1]
+
+[4, 4.01]
+
+[4, 4.001]
+
+[4, 4.0001]
+
+Use a. to draw a conclusion about the instantaneous velocity of the vehicle at t=4 seconds.
+
+a. (i)61.7244 ft/s, (ii)61.0725 ft/s (iii)61.0072 ft/s (iv)61.0007 ft/s b. At 4 seconds the race car is traveling at a rate/velocity of 61 ft/s.
+[T] The distance in feet that a ball rolls down an incline is modeled by the function s(t)=14t2, where t is seconds after the ball begins rolling.
+
+Find the average velocity of the ball over the following time intervals:
+
+[5, 5.1]
+[5, 5.01]
+[5, 5.001]
+[5, 5.0001]
+
+[5, 5.1]
+
+[5, 5.01]
+
+[5, 5.001]
+
+[5, 5.0001]
+
+Use the answers from a. to draw a conclusion about the instantaneous velocity of the ball at t=5 seconds.
+
+Two vehicles start out traveling side by side along a straight road. Their position functions, shown in the following graph, are given by s=f(t) and s=g(t), where s is measured in feet and t is measured in seconds.
+
+Which vehicle has traveled farther at t=2 seconds?
+
+What is the approximate velocity of each vehicle at t=3 seconds?
+
+Which vehicle is traveling faster at t=4 seconds?
+
+What is true about the positions of the vehicles at t=4 seconds?
+
+a. The vehicle represented by f(t), because it has traveled 2 feet, whereas g(t) has traveled 1 foot. b. The velocity of f(t) is constant at 1 ft/s, while the velocity of g(t) is approximately 2 ft/s. c. The vehicle represented by g(t), with a velocity of approximately 4 ft/s. d. Both have traveled 4 feet in 4 seconds.
+[T] The total cost C(x), in hundreds of dollars, to produce x jars of mayonnaise is given by C(x)=0.000003x3+4x+300.
+
+Calculate the average cost per jar over the following intervals:
+
+[100, 100.1]
+[100, 100.01]
+[100, 100.001]
+[100, 100.0001]
+
+[100, 100.1]
+
+[100, 100.01]
+
+[100, 100.001]
+
+[100, 100.0001]
+
+Use the answers from a. to estimate the average cost to produce 100 jars of mayonnaise.
+[T] For the function f(x)=x3−2x2−11x+12, do the following.
+
+Use a graphing calculator to graph f in an appropriate viewing window.
+
+Use the ZOOM feature on the calculator to approximate the two values of x=a for which mtan=f′(a)=0.
+
+a.
+
+b. a≈−1.361,2.694
+[T] For the function f(x)=x1+x2, do the following.
+
+Use a graphing calculator to graph f in an appropriate viewing window.
+
+Use the ZOOM feature on the calculator to approximate the values of x=a for which mtan=f′(a)=0.
+
+Suppose that N(x) computes the number of gallons of gas used by a vehicle traveling x miles. Suppose the vehicle gets 30 mpg.
+
+Find a mathematical expression for N(x).
+
+What is N(100)? Explain the physical meaning.
+
+What is N′(100)? Explain the physical meaning.
+
+a. N(x)=x30 b. ∼3.3 gallons. When the vehicle travels 100 miles, it has used 3.3 gallons of gas. c. 130. The rate of gas consumption in gallons per mile that the vehicle is achieving after having traveled 100 miles.
+[T] For the function f(x)=x4−5x2+4, do the following.
+
+Use a graphing calculator to graph f in an appropriate viewing window.
+
+Use the nDeriv function, which numerically finds the derivative, on a graphing calculator to estimate f′(−2),f′(−0.5),f′(1.7), and f′(2.718).
+[T] For the function f(x)=x2x2+1, do the following.
+
+Use a graphing calculator to graph f in an appropriate viewing window.
+
+Use the nDeriv function on a graphing calculator to find f′(−4),f′(−2),f′(2), and f′(4).
+
+a.
+
+b. −0.028,−0.16,0.16,0.028
+
+the slope of the tangent line to a function at a point, calculated by taking the limit of the difference quotient, is the derivative
+of a function f(x) at a is given by
+f(a+h)−f(a)horf(x)−f(a)x−a
+the process of taking a derivative
+the rate of change of a function at any point along the function a, also called f′(a), or the derivative of the function at a

@@ -1,0 +1,436 @@
+# m00044
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Rational Numbers
+
+Rational Numbers
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Define and identify numbers that are rational.
+
+Simplify rational numbers and express in lowest terms.
+
+Add and subtract rational numbers.
+
+Convert between improper fractions and mixed numbers.
+
+Convert rational numbers between decimal and fraction form.
+
+Multiply and divide rational numbers.
+
+Apply the order of operations to rational numbers to simplify expressions.
+
+Apply density property of rational numbers.
+
+Solve problems involving rational numbers.
+
+Use fractions to convert between units.
+
+Define and apply percent.
+
+Solve problems using percent.
+
+We are often presented with percentages or fractions to explain how much of a population has a certain feature. For example, the 6-year graduation rate of college students at public institutions is 57.6%, or 72/125. That fraction may be unsettling. But without the context, the percentage is hard to judge. So how does that compare to private institutions? There, the 6-year graduation rate is 65.4%, or 327/500. Comparing the percentages is straightforward, but the fractions are harder to interpret due to different denominators. For more context, historical data could be found. One study reported that the 6-year graduation rate in 1995 was 56.4%. Comparing that historical number to the recent 6-year graduation rate at public institutions of 57.6% shows that there hasn't been much change in that rate.
+
+Defining and Identifying Numbers That Are Rational
+
+A rational number (called rational since it is a ratio) is just a fraction where the numerator is an integer and the denominator is a non-zero integer. As simple as that is, they can be represented in many ways. It should be noted here that any integer is a rational number. An integer, n, written as a fraction of two integers is n1.
+
+In its most basic representation, a rational number is an integer divided by a non-zero integer, such as 312. Fractions may be used to represent parts of a whole. The denominator is the total number of parts to the object, and the numerator is how many of those parts are being used or selected. So, if a pizza is cut into 8 equal pieces, each piece is 18 of the pizza. If you take three slices, you have 38 of the pizza (). Similarly, if in a group of 20 people, 5 are wearing hats, then 520 of the people are wearing hats ().
+
+Another representation of rational numbers is as a mixed number, such as 258 (). This represents a whole number (2 in this case), plus a fraction (the 58).
+
+Rational numbers may also be expressed in decimal form; for instance, as 1.34. When 1.34 is written, the decimal part, 0.34, represents the fraction 34100, and the number 1.34 is equal to 134100. However, not all decimal representations are rational numbers.
+
+A number written in decimal form where there is a last decimal digit (after a given decimal digit, all following decimal digits are 0) is a terminating decimal, as in 1.34 above. Alternately, any decimal numeral that, after a finite number of decimal digits, has digits equal to 0 for all digits following the last non-zero digit.
+
+All numbers that can be expressed as a terminating decimal are rational. This comes from what the decimal represents. The decimal part is the fraction of the decimal part divided by the appropriate power of 10. That power of 10 is the number of decimal digits present, as for 0.34, with two decimal digits, being equal to 34100.
+
+Another form that is a rational number is a decimal that repeats a pattern, such as 67.1313… When a rational number is expressed in decimal form and the decimal is a repeated pattern, we use special notation to designate the part that repeats. For example, if we have the repeating decimal 4.3636…, we write this as 4.36¯. The bar over the 36 indicates that the 36 repeats forever.
+
+If the decimal representation of a number does not terminate or form a repeating decimal, that number is not a rational number.
+
+One class of numbers that is not rational is the square roots of integers or rational numbers that are not perfect squares, such as 10 and 256. More generally, the number b is the square root of the number a if a=b2. The notation for this is b=a, where the symbol is the square root sign. An integer perfect square is any integer that can be written as the square of another integer. A rational perfect square is any rational number that can be written as a fraction of two integers that are perfect squares.
+
+Sometimes you may be able to identify a perfect square from memory. Another process that may be used is to factor the number into the product of an integer with itself. Or a calculator (such as Desmos) may be used to find the square root of the number. If the calculator yields an integer, the original number was a perfect square.
+
+Using Desmos to Find the Square Root of a Number
+
+When Desmos is used, there is a tab at the bottom of the screen that opens the keyboard for Desmos. The keyboard is shown below. On the keyboard () is the square root symbol ( ). To find the square root of a number, click the square root key, and then type the number. Desmos will automatically display the value of the square root as you enter the number.
+
+Identifying Perfect Squares
+
+Which of the following are perfect squares?
+
+45
+
+144
+We could attempt to find the perfect square by factoring. Writing all the factor pairs of 45 results in 1×45,3×15, and 5×9. None of the pairs is a square, so 45 is not a perfect square. Using a calculator to find the square root of 45, we obtain 6.708 (rounded to three decimal places). Since this was not an integer, the original number was not a perfect square.
+ We could attempt to find the perfect square by factoring. Writing all the factor pairs of 144 results in 1×144,2×72,3×48,6×24,8×18, and 12×12. Since the last pair is an integer multiplied by itself, 144 is a perfect square. Alternately, using Desmos to find the square root of 144, we obtain 12. Since the square root of 144 is an integer, 144 is a perfect square.
+
+We could attempt to find the perfect square by factoring. Writing all the factor pairs of 45 results in 1×45,3×15, and 5×9. None of the pairs is a square, so 45 is not a perfect square. Using a calculator to find the square root of 45, we obtain 6.708 (rounded to three decimal places). Since this was not an integer, the original number was not a perfect square.
+
+We could attempt to find the perfect square by factoring. Writing all the factor pairs of 144 results in 1×144,2×72,3×48,6×24,8×18, and 12×12. Since the last pair is an integer multiplied by itself, 144 is a perfect square. Alternately, using Desmos to find the square root of 144, we obtain 12. Since the square root of 144 is an integer, 144 is a perfect square.
+
+Introduction to Fractions
+
+Identifying Rational Numbers
+
+Determine which of the following are rational numbers:
+73
+4.556
+315
+4117
+5.64¯
+Since 73 is not a perfect square, its square root is not a rational number. This can also be seen when a calculator is used. Entering 73 into a calculator results in 8.544003745317 (and then more decimal values after that). There is no repeated pattern, so this is not a rational number.
+ Since 4.556 is a decimal that terminates, this is a rational number.
+ 315 is a mixed number, so it is a rational number.
+ 4117 is an integer divided by an integer, so it is a rational number.
+ 5.646464... is a decimal that repeats a pattern, so it is a rational number.
+
+Since 73 is not a perfect square, its square root is not a rational number. This can also be seen when a calculator is used. Entering 73 into a calculator results in 8.544003745317 (and then more decimal values after that). There is no repeated pattern, so this is not a rational number.
+
+Since 4.556 is a decimal that terminates, this is a rational number.
+315 is a mixed number, so it is a rational number.
+4117 is an integer divided by an integer, so it is a rational number.
+5.646464... is a decimal that repeats a pattern, so it is a rational number.
+
+Simplifying Rational Numbers and Expressing in Lowest Terms
+
+A rational number is one way to express the division of two integers. As such, there may be multiple ways to express the same value with different rational numbers. For instance, 45 and 1215 are the same value. If we enter them into a calculator, they both equal 0.8. Another way to understand this is to consider what it looks like in a figure when two fractions are equal.
+
+In , we see that 35 of the rectangle and 915 of the rectangle are equal areas.
+
+They are the same proportion of the area of the rectangle. The left rectangle has 5 pieces, three of which are shaded. The right rectangle has 15 pieces, 9 of which are shaded. Each of the pieces of the left rectangle was divided equally into three pieces. This was a multiplication. The numerator describing the left rectangle was 3 but it becomes 3×3, or 9, as each piece was divided into three. Similarly, the denominator describing the left rectangle was 5, but became 5×3, or 15, as each piece was divided into 3. The fractions 35 and 915 are equivalent because they represent the same portion (often loosely referred to as equal).
+
+This understanding of equivalent fractions is very useful for conceptualization, but it isn’t practical, in general, for determining when two fractions are equivalent. Generally, to determine if the two fractions ab and cd are equivalent, we check to see that a×d=b×c. If those two products are equal, then the fractions are equal also.
+
+Determining If Two Fractions Are Equivalent
+
+Determine if 1230 and 1435 are equivalent fractions.
+
+Applying the definition, a=12,b=30,c=14 and d=35. So a×d=12×35=420. Also, b×c=30×14=420. Since these values are equal, the fractions are equivalent.
+
+That a×d=b×c indicates the fractions ab and cd are equivalent is due to some algebra. One property of natural numbers, integers, and rational numbers (also irrational numbers) is that for any three numbers a,b, and c with c≠0, if a=b, then a/c=b/c. In other words, when two numbers are equal, then dividing both numbers by the same non-zero number, the two newly obtained numbers are also equal. We can apply that to a×d and b×c, to show that ab and cd are equivalent if a×d=b×c.
+
+If a×d=b×c, and c≠0,d ≠0, we can divide both sides by and obtain the following: a×dc=b×cc. We can divide out the c on the right-hand side of the equation, resulting in a×dc=b. Similarly, we can divide both sides of the equation by d and obtain the following: a×dc×d=bd. We can divide out d the on the left-hand side of the equation, resulting in ac=bd. So, the rational numbers ac and bd are equivalent when a×d=b×c.
+Equivalent Fractions
+
+Recall that a common divisor or common factor of a set of integers is one that divides all the numbers of the set of numbers being considered. In a fraction, when the numerator and denominator have a common divisor, that common divisor can be divided out. This is often called canceling the common factors or, more colloquially, as canceling.
+
+To show this, consider the fraction 3663. The numerator and denominator have the common factor 3. We can rewrite the fraction as 3663=12×321×3. The common divisor 3 is then divided out, or canceled, and we can write the fraction as 12×321×3=1221. The 3s have been crossed out to indicate they have been divided out. The process of dividing out two factors is also referred to as reducing the fraction.
+
+If the numerator and denominator have no common positive divisors other than 1, then the rational number is in lowest terms.
+
+The process of dividing out common divisors of the numerator and denominator of a fraction is called reducing the fraction.
+
+One way to reduce a fraction to lowest terms is to determine the GCD of the numerator and denominator and divide out the GCD. Another way is to divide out common divisors until the numerator and denominator have no more common factors.
+
+Reducing Fractions to Lowest Terms
+
+Express the following rational numbers in lowest terms:
+3648
+100250
+51136
+One process to reduce 3648 to lowest terms is to identify the GCD of 36 and 48 and divide out the GCD. The GCD of 36 and 48 is 12.
+ Step 1: We can then rewrite the numerator and denominator by factoring 12 from both.
+ 3648=12×312×4
+ Step 2: We can now divide out the 12s from the numerator and denominator.
+ 3648=12×312×4=34
+ So, when 3648
+ is reduced to lowest terms, the result is 34.
+ Alternately, you could identify a common factor, divide out that common factor, and repeat the process until the remaining fraction is in lowest terms.
+ Step 1: You may notice that 4 is a common factor of 36 and 48.
+ Step 2: Divide out the 4, as in 3648=4×94×12=4×94×12=912.
+ Step 3: Examining the 9 and 12, you identify 3 as a common factor and divide out the 3, as in 912=3×33×4=34. The 3 and 4 have no common positive factors other than 1, so it is in lowest terms.
+ So, when 3648
+ is reduced to lowest terms, the result is 34.
+ 
+ Step 1: To reduce 100250 to lowest terms, identify the GCD of 100 and 250. This GCD is 50.
+ Step 2: We can then rewrite the numerator and denominator by factoring 50 from both.
+ 100250=50×250×5
+ .
+ Step 3: We can now divide out the 50s from the numerator and denominator.
+ 100250=50×2
+ 50×5=25
+ So, when 100
+ 250 is reduced to lowest terms, the result is 25.
+ 
+ Step 1: To reduce 51136 to lowest terms, identify the GCD of 51 and 136. This GCD is 17.
+ Step 2: We can then rewrite the numerator and denominator by factoring 17 from both.
+ 51136=17×317×8
+ Step 3: We can now divide out the 17s from the numerator and denominator.
+ 51136=17×317×8=38
+ So, when 51136 is reduced to lowest terms, the result is 38.
+
+One process to reduce 3648 to lowest terms is to identify the GCD of 36 and 48 and divide out the GCD. The GCD of 36 and 48 is 12.
+ Step 1: We can then rewrite the numerator and denominator by factoring 12 from both.
+ 3648=12×312×4
+ Step 2: We can now divide out the 12s from the numerator and denominator.
+ 3648=12×312×4=34
+ So, when 3648
+ is reduced to lowest terms, the result is 34.
+ Alternately, you could identify a common factor, divide out that common factor, and repeat the process until the remaining fraction is in lowest terms.
+ Step 1: You may notice that 4 is a common factor of 36 and 48.
+ Step 2: Divide out the 4, as in 3648=4×94×12=4×94×12=912.
+ Step 3: Examining the 9 and 12, you identify 3 as a common factor and divide out the 3, as in 912=3×33×4=34. The 3 and 4 have no common positive factors other than 1, so it is in lowest terms.
+ So, when 3648
+ is reduced to lowest terms, the result is 34.
+Step 1: We can then rewrite the numerator and denominator by factoring 12 from both.
+3648=12×312×4
+Step 2: We can now divide out the 12s from the numerator and denominator.
+3648=12×312×4=34
+
+So, when 3648
+ is reduced to lowest terms, the result is 34.
+
+Alternately, you could identify a common factor, divide out that common factor, and repeat the process until the remaining fraction is in lowest terms.
+Step 1: You may notice that 4 is a common factor of 36 and 48.
+Step 2: Divide out the 4, as in 3648=4×94×12=4×94×12=912.
+Step 3: Examining the 9 and 12, you identify 3 as a common factor and divide out the 3, as in 912=3×33×4=34. The 3 and 4 have no common positive factors other than 1, so it is in lowest terms.
+
+So, when 3648
+ is reduced to lowest terms, the result is 34.
+Step 1: To reduce 100250 to lowest terms, identify the GCD of 100 and 250. This GCD is 50.
+ Step 2: We can then rewrite the numerator and denominator by factoring 50 from both.
+ 100250=50×250×5
+ .
+ Step 3: We can now divide out the 50s from the numerator and denominator.
+ 100250=50×2
+ 50×5=25
+ So, when 100
+ 250 is reduced to lowest terms, the result is 25.
+Step 2: We can then rewrite the numerator and denominator by factoring 50 from both.
+100250=50×250×5
+ .
+Step 3: We can now divide out the 50s from the numerator and denominator.
+100250=50×2
+ 50×5=25
+
+So, when 100
+ 250 is reduced to lowest terms, the result is 25.
+Step 1: To reduce 51136 to lowest terms, identify the GCD of 51 and 136. This GCD is 17.
+ Step 2: We can then rewrite the numerator and denominator by factoring 17 from both.
+ 51136=17×317×8
+ Step 3: We can now divide out the 17s from the numerator and denominator.
+ 51136=17×317×8=38
+ So, when 51136 is reduced to lowest terms, the result is 38.
+Step 2: We can then rewrite the numerator and denominator by factoring 17 from both.
+51136=17×317×8
+Step 3: We can now divide out the 17s from the numerator and denominator.
+51136=17×317×8=38
+
+So, when 51136 is reduced to lowest terms, the result is 38.
+
+Reducing Fractions to Lowest Terms
+
+Using Desmos to Find Lowest Terms
+
+Desmos is a free online calculator. Desmos supports reducing fractions to lowest terms. When a fraction is entered, Desmos immediately calculates the decimal representation of the fraction. However, to the left of the fraction, there is a button that, when clicked, shows the fraction in reduced form.
+Using Desmos to Reduce a Fraction
+
+Adding and Subtracting Rational Numbers
+
+Adding or subtracting rational numbers can be done with a calculator, which often returns a decimal representation, or by finding a common denominator for the rational numbers being added or subtracted.
+
+Using Desmos to Add Rational Numbers in Fractional Form
+
+To create a fraction in Desmos, enter the numerator, then use the division key (/) on your keyboard, and then enter the denominator. The fraction is then entered. Then click the right arrow key to exit the denominator of the fraction. Next, enter the arithmetic operation (+ or –). Then enter the next fraction. The answer is displayed dynamically (calculates as you enter). To change the Desmos result from decimal form to fractional form, use the fraction button () on the left of the line that contains the calculation:
+
+Adding Rational Numbers Using Desmos
+
+Calculate 2342+956 using Desmos.
+
+Enter 2342+956 in Desmos. The result is displayed as 0.70833333333 (which is 0.7083¯). Clicking the fraction button to the left on the calculation line yields 1724.
+
+Performing addition and subtraction without a calculator may be more involved. When the two rational numbers have a common denominator, then adding or subtracting the two numbers is straightforward. Add or subtract the numerators, and then place that value in the numerator and the common denominator in the denominator. Symbolically, we write this as ac±bc=a±bc. This can be seen in the , which shows 320+420=720.
+
+It is customary to then write the result in lowest terms.
+
+If c is a non-zero integer, then ac±bc=a±bc.
+
+Adding Rational Numbers with the Same Denominator
+
+Calculate 1328+728.
+
+Since the rational numbers have the same denominator, we perform the addition of the numerators, 13+7, and then place the result in the numerator and the common denominator, 28, in the denominator. 1328+728=13+728=2028
+
+Once we have that result, reduce to lowest terms, which gives 2028=4×54×7=4×54×7=57.
+
+Subtracting Rational Numbers with the Same Denominator
+
+Calculate 45136−17136.
+
+Since the rational numbers have the same denominator, we perform the subtraction of the numerators, 45−17, and then place the result in the numerator and the common denominator, 136, in the denominator. 45136−17136−45−17136=28136
+
+Once we have that result, reduce to lowest terms, this gives 28136=4×74×34=4×74×34=734.
+
+When the rational numbers do not have common denominators, then we have to transform the rational numbers so that they do have common denominators. The common denominator that reduces work later in the problem is the LCM of the numerator and denominator. When adding or subtracting the rational numbers ab and cd, we perform the following steps.
+Step 1: Find LCM(b,d).
+Step 2: Calculate n=LCM(b,d)b and m=LCM(b,d)d.
+Step 3: Multiply the numerator and denominator of ab by n, yielding a×nb×n.
+Step 4: Multiply the numerator and denominator of cd by m, yielding c×md×m
+ .
+Step 5: Add or subtract the rational numbers from Steps 3 and 4, since they now have the common denominators.
+
+You should be aware that the common denominator is LCM(b,d). For the first denominator, we have b×n=b×LCM(b,d)b=LCM(b,d), since we multiply and divide LCM(b,d) by the same number. For the same reason, d×m=d×LCM(b,d)b=LCM(b,d).
+
+Adding Rational Numbers with Unequal Denominators
+
+Calculate 1118+215.
+
+The denominators of the fractions are 18 and 15, so we label b=18 and d=15.
+Step 1: Find LCM(18,15). This is 90.
+Step 2: Calculate n and m. n=9018=5 and m=9015=6.
+Step 3: Multiplying the numerator and denominator of 1118 by n=5 yields 11×518×5=5590.
+Step 4: Multiply the numerator and denominator of 215 by m=6 yields 2×615×6=1290.
+Step 5: Now we add the values from Steps 3 and 4: 5590+1290=6790.
+
+This is in lowest terms, so we have found that 1118+215=6790.
+
+Subtracting Rational Numbers with Unequal Denominators
+
+Calculate 1425−970.
+
+The denominators of the fractions are 25 and 70, so we label b=25 and d=70.
+Step 1: Find LCM(25,70). This is 350.
+Step 2: Calculate n and m: n=35025=14 and m=35070=5.
+Step 3: Multiplying the numerator and denominator of 1425 by n=14 yields 14×1425×14=196350.
+Step 4: Multiplying the numerator and denominator of 970 by m=5 yields 9×570×5=45350.
+Step 5: Now we subtract the value from Step 4 from the value in Step 3: 196350−45350=151350.
+
+This is in lowest terms, so we have found that 1425−970=151350.
+
+Adding and Subtracting Fractions with Different Denominators
+
+Converting Between Improper Fractions and Mixed Numbers
+
+One way to visualize a fraction is as parts of a whole, as in 512 of a pizza. But when the numerator is larger than the denominator, as in 2312, then the idea of parts of a whole seems not to make sense. Such a fraction is an improper fraction. That kind of fraction could be written as an integer plus a fraction, which is a mixed number. The fraction 2312 rewritten as a mixed number would be 11112. Arithmetically, 11112 is equivalent to 1+1112, which is read as “one and 11 twelfths.”
+
+Improper fractions can be rewritten as mixed numbers using division and remainders. To find the mixed number representation of an improper fraction, divide the numerator by the denominator. The quotient is the integer part, and the remainder becomes the numerator of the remaining fraction.
+
+Rewriting an Improper Fraction as a Mixed Number
+
+Rewrite 4813 as a mixed number.
+
+When 48 is divided by 13, the result is 3 with a remainder of 9. So, we can rewrite 4813 as 3913.
+
+Converting an Improper Fraction to a Mixed Number Using Desmos
+
+Similarly, we can convert a mixed number into an improper fraction. To do so, first convert the whole number part to a fraction by writing the whole number as itself divided by 1, and then add the two fractions.
+
+Alternately, we can multiply the whole number part and the denominator of the fractional part. Next, add that product to the numerator. Finally, express the number as that product divided by the denominator.
+
+Rewriting a Mixed Number as an Improper Fraction
+
+Rewrite 549 as an improper fraction.
+Step 1: Multiply the integer part, 5, by the denominator, 9, which gives 5×9=45.
+Step 2: Add that product to the numerator, which gives 45+4=49.
+Step 3: Write the number as the sum, 49, divided by the denominator, 9, which gives 499.
+
+Using Desmos to Rewrite a Mixed Number as an Improper Fraction
+
+Desmos can be used to convert from a mixed number to an improper fraction. To do so, we use the idea that a mixed number, such as 5611, is another way to represent 5+611. If 5+611 is entered in Desmos, the result is the decimal form of the number. However, clicking the fraction button to the left will convert the decimal to an improper fraction, 6111. As an added bonus, Desmos will automatically reduce the fraction to lowest terms.
+
+Converting Rational Numbers Between Decimal and Fraction Forms
+
+Understanding what decimals represent is needed before addressing conversions between the fractional form of a number and its decimal form, or writing a number in decimal notation. The decimal number 4.557 is equal to 45571,000. The decimal portion, .557, is 557 divided by 1,000. To write any decimal portion of a number expressed as a terminating decimal, divide the decimal number by 10 raised to the power equal to the number of decimal digits. Since there were three decimal digits in 4.557, we divided 557 by 103=1000.
+
+Decimal representations may be very long. It is convenient to round off the decimal form of the number to a certain number of decimal digits. To round off the decimal form of a number to n (decimal) digits, examine the (n+1)st decimal digit. If that digit is 0, 1, 2, 3, or 4, the number is rounded off by writing the number to the nth decimal digit and no further. If the (n+1)st decimal digit is 5, 6, 7, 8, or 9, the number is rounded off by writing the number to the nth digit, then replacing the nth digit by one more than the nth digit.
+
+Rounding Off a Number in Decimal Form to Three Digits
+
+Round 5.67849 to three decimal digits.
+
+The third decimal digit is 8. The digit following the 8 is 4. When the digit is 4, we write the number only to the third digit. So, 5.67849 rounded off to three decimal places is 5.678.
+
+Rounding Off a Number in Decimal Form to Four Digits
+
+Round 45.11475 to four decimal digits.
+
+The fourth decimal digit is 7. The digit following the 7 is 5. When the digit is 5, we write the number only to the fourth decimal digit, 45.1147. We then replace the fourth decimal digit by one more than the fourth digit, which yields 45.1148. So, 45.11475 rounded off to four decimal places is 45.1148.
+
+To convert a rational number in fraction form to decimal form, use your calculator to perform the division.
+
+Converting a Rational Number in Fraction Form into Decimal Form
+
+Convert 4725 into decimal form.
+
+Using a calculator to divide 47 by 25, the result is 1.88.
+
+Converting a terminating decimal to the fractional form may be done in the following way:
+Step 1: Count the number of digits in the decimal part of the number, labeled n.
+Step 2: Raise 10 to the nth power.
+Step 3: Rewrite the number without the decimal.
+Step 4: The fractional form is the number from Step 3 divided by the result from Step 2.
+
+This process works due to what decimals represent and how we work with mixed numbers. For example, we could convert the number 7.4536 to fractional from. The decimal part of the number, the .4536 part of 7.4536, has four digits. By the definition of decimal notation, the decimal portion represents 4,536104=4,53610,000. The decimal number 7.4536 is equal to the improper fraction 74,53610,000. Adding those to fractions yields 74,53610,000.
+
+Converting from Decimal Form to Fraction Form with Terminating Decimals
+
+Convert 3.2117 to fraction form.
+Step 1: There are four digits after the decimal point, so n=4.
+Step 2: Raise 10 to the fourth power, 104=10,000.
+Step 3: When we remove the decimal point, we have 32,117.
+Step 4: The fraction has as its numerator the result from Step 3 and as its denominator the result of Step 2, which is the fraction 32,11710,000.
+
+The process is different when converting from the decimal form of a rational number into fraction form when the decimal form is a repeating decimal. This process is not covered in this text.
+
+Multiplying and Dividing Rational Numbers
+
+Multiplying rational numbers is less complicated than adding or subtracting rational numbers, as there is no need to find common denominators. To multiply rational numbers, multiply the numerators, then multiply the denominators, and write the numerator product divided by the denominator product. Symbolically, ab×cd=a×cb×d. As always, rational numbers should be reduced to lowest terms.
+
+If b and d are non-zero integers, then ab×cd=a×cb×d.
+
+Multiplying Rational Numbers
+
+Calculate 1225×1021.
+
+Multiply the numerators and place that in the numerator, and then multiply the denominators and place that in the denominator.
+1225×1021=12×1025×21=120525
+
+This is not in lowest terms, so this needs to be reduced. The GCD of 120 and 525 is 15.
+120525=15×815×35=835
+
+Multiplying Fractions
+
+As with multiplication, division of rational numbers can be done using a calculator.
+
+Dividing Decimals with a Calculator
+
+Calculate 3.45 ÷
+ 2.341 using a calculator. Round to three decimal places if necessary.
+
+Using a calculator, we obtain 1.473729175565997. Rounding to three decimal places we have 1.474.
+
+Before discussing division of fractions without a calculator, we should look at the reciprocal of a number. The reciprocal of a number is 1 divided by the number. For a fraction, the reciprocal is the fraction formed by switching the numerator and denominator. For the fraction ab, the reciprocal is ba. An important feature for a number and its reciprocal is that their product is 1.
+
+When dividing two fractions by hand, find the reciprocal of the divisor (the number that is being divided into the other number). Next, replace the divisor by its reciprocal and change the division into multiplication. Then, perform the multiplication. Symbolically,ba÷cd=ab×dc=a×db×c. As before, reduce to lowest terms.
+
+If b,c and d are non-zero integers, then ba÷cd=ab×dc=a×db×c.
+
+Dividing Rational Numbers
+Calculate 421÷635.
+ Calculate 18÷528.
+
+Calculate 421÷635.
+
+Calculate 18÷528.
+Step 1: Find the reciprocal of the number being divided by 635. The reciprocal of that is 356.
+ Step 2: Multiply the first fraction by that reciprocal.
+ 421÷635=421×356=140126
+ The answer, 140126 is not in lowest terms. The GCD of 140 and 126 is 14. Factoring and canceling gives 140126=14×1014×9=109.
+Step 1: Find the reciprocal of the number being divided by 635. The reciprocal of that is 356.
+Step 2: Multiply the first fraction by that reciprocal.
+421÷635=421×356=140126
+
+The answer, 140126 is not in lowest terms. The GCD of 140 and 126 is 14. Factoring and canceling gives 140126=14×1014×9=109.
+Step 1: Find the reciprocal of the number being divided by, which is 528. The reciprocal of that is 285.
+ Step 2:
+[truncated]

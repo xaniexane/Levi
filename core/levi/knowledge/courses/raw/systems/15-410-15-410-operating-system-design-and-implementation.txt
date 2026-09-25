@@ -1,0 +1,212 @@
+# 15-410: Operating System Design and Implementation
+# Carnegie-Mellon University
+# source: https://www.cs.cmu.edu/~410/
+
+15-410, Operating System Design and Implementation
+Carnegie Mellon
+Computer Science Department
+15-410, Operating System Design and Implementation
+Welcome to the Fall 2026 edition of 15-410/605.
+Syllabus
+Please take this opportunity to read
+the syllabus .
+It really does answer questions you will
+have later in the course.
+Partner Registration
+Project 2/3/4 Partner Registration Page (early access for early birds)
+A sign for advertising interest in a partner: PDF .
+FAQ
+Preparatory coursework
+The best preparation for this class is taking 15-213/513 (18-213,
+18-613, 14-513) followed by one of the 15-4xx/6xx
+"Systems electives" : 15-411/611, 15-418/618,
+15-440/640, 15-441/641, 15-445/645.
+Those specific classes are believed to be
+better preparation than other classes that contain some
+Systems content and/or have "Systems" in the name of the
+class.
+That specific list contains classes that the CSD Systems
+faculty agree meet a variety of criteria related to
+conceptual content and project work.
+In specific circumstances other preparation may suffice.
+Academic advisors in related programs may be able to provide
+detailed advice.
+Discussion with one's advisor is an important step for
+students -- especially master's students -- planning to
+take the class.
+Wait list
+This course is usually full, so it is very possible
+that you will not be able to take it the first time you want to.
+Please note that the Registrar's wait list
+is not a FIFO queue ;
+students will be accepted from the wait list according to
+our best estimate of readiness to successfully complete the
+class, moderated to some extent by urgency.
+Your numerical position on the registrar's wait list is
+irrelevant.
+Please do not send us mail mentioning your
+numerical position on
+the registrar's wait list.
+Getting off the wait list
+If you are concerned about getting into the class,
+first make sure that you have completed the
+wait-list survey .
+Aside from that,
+you should make sure that your academic advisor is aware
+of your aspiration to take the class this semester,
+which experiences constitute your preparation for the class,
+and how the class fits in to your semester workload and
+overall academic plan.
+If your advisor doesn't understand
+the objectives and time commitment of this class
+and
+your educational objectives
+well enough to affirmatively recommend that you should take
+this course this semester,
+you should
+discuss these topics with your advisor
+before contacting us about getting into the class .
+Auditing
+This course is usually full, and we generally receive
+many more requests to
+audit
+than we can accept.
+If you wish to
+audit ,
+please have your advisor contact us before the semester
+begins to discuss how
+auditing
+might meet your educational goals.
+TAing
+What does it take to be an OS TA?
+Here is some
+inspirational advice about TA candidacy .
+Prep work
+The following are productive things to do before the semester
+begins:
+If you've forgotten how to modify your shell startup files
+(e.g., so that your PATH environment variable includes a specific
+directory automatically when you log in, or how to add a command
+alias), please refresh your memory.
+If you don't know how to use grep , it is probably wise
+to look into that.
+For example, if given a large source tree, know how to use grep
+to find all mentions of a function. There are other ways to do this!
+Some people might prefer cscope , in which case
+it's ok to know how to use both of them.
+As another example: list name of all the files in a source tree
+that contain the string "increment", the string "decrement", or both,
+without regard to capitalization of those strings.
+What short command could one type to determine which C source
+file in the current directory contains the most (or least) lines?
+There are multiple ways to do this.
+If you don't know how to use find , it is probably wise
+to look into that.
+For example, list assembly-language files in a source
+tree whose file name contains the string "tree".
+It is probably useful to install an X server on your personal
+machine. To make sure you have it working, SSH into LINUX.ANDREW
+and run xrefresh , xeyes ,
+and/or xclock .
+The textbook information includes some optional additional
+readings.
+If you are proficient at banging out code that runs ok but gets
+complaints from project partners,
+it would probably be productive to read
+The Practice of Programming ,
+at least the first few chapters.
+Again, this is optional!
+But some students do start the semester writing code exhibiting
+features which are not best practices in any programming language.
+This is a good semester to write good code,
+and there are books that discuss how to do that.
+Speaking of textbooks, if your relationship with 15-213/513
+didn't involve a lot of textbook time,
+please be aware that we expect you to be able to apply
+a 213-level understanding of relevant 213 topics,
+including files and directories, file I/O, signals,
+and virtual memory,
+in addition to the absolutely core machine-model material
+on instructions, registers, and caches.
+If you are fuzzy on any of this,
+the 213 textbook contains excellent refresher material!
+Speaking of 213, it is probably a good idea for you to
+re-read most of the code you submitted.
+Probably the Malloc lab and the Shell lab are the most
+directly applicable.
+If there is anything in the code you submitted that you no longer
+understand, please remedy that!
+It is a good idea to be familiar with C conventions.
+For example, it is generally not the case that a void *
+is a pointer.
+If seeing a
+void * parameter,
+or a void ** parameter,
+in a function prototype would be confusing,
+this would be a good area to look into.
+You should know what sizeof() is for,
+and be prepared to use it.
+If you like to watch videos, this one might be interesting:
+SREcon14 - Keys to SRE , Ben Treynor,
+Jun 26, 2014 .
+And if you like to read papers, this might be eye-opening:
+A Few Billion Lines of Code Later: using static analysis to find bugs in the real world .
+If you are interested in writing small amounts of dangerous
+code, these may be of interest:
+From Debugging to Integrity in Coding (Dan O'Dowd, Fall 2017);
+Software That Never Fails and Can't Be Hacked (Dan O'Dowd, June 11, 2021).
+Textbook
+The traditional textbook is Operating System Concepts , by
+Silberschatz, Galvin, and Gagne.
+We provide a table mapping reading assignments to
+the 6th through 10th editions of the book.
+The newer editions are more up-to-date on some topics,
+but they are also more expensive.
+What you get out of the textbook
+depends more on how much time you spend with it than on
+which edition you have,
+though you probably want to avoid
+some of the stranger sub-editions, e.g., "Essentials" or "with Java".
+We will not
+cover all of the text, and some topics (such as synchronization)
+will be taught using additional material.
+Rumor has it that the OSC text is available (purchase or rental)
+as an e-book from at least one major e-book vendor.
+As we have no experience with this format, if you try it,
+please let us know whether you like it.
+Amazon (10e)
+Amazon (9e, completely ok to use)
+Barnes & Noble (10e)
+O'Reilly (online 8e) FREE for CMU students: "Sign in" with your e-mail address, then choose SSO
+Alibris (10e, when available)
+Alibris (9e, completely ok to use)
+isbn.nu (10e)
+isbn.nu (9e, completely ok to use)
+The experimental textbook is
+Operating Systems: Principles and Practice, Second Edition, 2014, by Anderson and Dahlin:
+Amazon
+Alibris
+isbn.nu
+You may also find useful the 15-213 textbook, Computer Systems: A Programmer's Perspective, Third Edition ; the K&R C book; and perhaps
+C Traps and Pitfalls .
+An excellent source of suggestions for programming style and structure
+is
+Brian Kernigan and Rob Pike's
+The Practice of Programming ,
+especially the first few chapters.
+Final exams
+You are responsible for checking
+the
+official CMU final exam schedule and immediately notifying
+instructors of all affected courses about any conflicts.
+Intel
+graciously supports our educational
+mission by providing us with a free
+Intel Simics
+license.
+more info ).
+-->
+Some of the library software used in this class is used
+under license
+( more info ).
+[Last modified Friday August 28, 2026]

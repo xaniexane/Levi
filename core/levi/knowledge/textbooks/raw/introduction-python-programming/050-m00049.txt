@@ -1,0 +1,60 @@
+# m00049
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Keyword arguments
+
+Keyword arguments
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe the difference between positional and keyword arguments.
+
+Create functions that use positional and keyword arguments and default parameter values.
+
+Keyword arguments
+
+So far, functions have been called using positional arguments, which are arguments that are assigned to parameters in order. Python also allows keyword arguments, which are arguments that use parameter names to assign values rather than order. When mixing positional and keyword arguments, positional arguments must come first in the correct order, before any keyword arguments.
+
+Using keyword arguments
+
+Using keyword and positional arguments
+
+Consider the following function:
+
+Default parameter values
+
+Functions can define default parameter values to use if a positional or keyword argument is not provided for the parameter. Ex: def season(m, d, hemi="N"): defines a default value of "N" for the hemi parameter. Note: Default parameter values are only defined once to be used by the function, so mutable objects (such as lists) should not be used as default values.
+
+The physics example below calculates weight as a force in newtons given mass in kilograms and acceleration in ms2. Gravity on Earth is 9.8 ms2, and gravity on Mars is 3.7 ms2.
+
+Using default parameter values
+
+Using default parameter values
+
+Consider the following updated version of greeting():
+
+PEP 8 recommendations: spacing
+
+The PEP 8 style guide recommends no spaces around = when indicating keyword arguments and default parameter values.
+
+Stream donations
+
+Write a function, donate(), that lets an online viewer send a donation to a streamer. donate() has three parameters:
+ 
+ amount: amount to donate, default value: 5
+ name: donor's name, default value: "Anonymous"
+ msg: donor's message, default value: ""
+amount: amount to donate, default value: 5
+name: donor's name, default value: "Anonymous"
+msg: donor's message, default value: ""
+
+Given:
+
+The output is:
+
+Write function calls that use the default values along with positional and keyword arguments.

@@ -1,0 +1,39 @@
+# m00034
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Conditional expressions
+
+Conditional expressions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify the components of a conditional expression.
+
+Create a conditional expression.
+
+Conditional expressions
+
+A conditional expression (also known as a "ternary operator") is a simplified, single-line version of an if-else statement.
+
+Conditional expression template:
+
+A conditional expression is evaluated by first checking the condition. If condition is true, expression_if_true is evaluated, and the result is the resulting value of the conditional expression. Else, expression_if_false is evaluated, and the result is the resulting value of the conditional expression.
+
+A variable can be assigned with a conditional expression. Ex: Finding the max of two numbers can be calculated with max_num = y if x < y else x
+
+Note: Conditional expressions have the lowest precedence of all Python operations.
+
+Example: Version check
+
+Using conditional expressions
+
+Ping values
+
+Write a program that reads in an integer, ping, and prints ping_report, a string indicating whether the ping is low to average or too high. ping values under 150 have a ping_report of "low to average". ping values of 150 and higher have a ping_report of "too high". Use a conditional expression to assign ping_report.
+
+Ex: If the input is 30, the output is "Ping is low to average".

@@ -1,0 +1,210 @@
+# m58338
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Precession of a Gyroscope
+
+Precession of a Gyroscope
+
+By the end of this section, you will be able to:
+
+Describe the physical processes underlying the phenomenon of precession
+
+Calculate the precessional angular velocity of a gyroscope
+shows a gyroscope, defined as a spinning disk in which the axis of rotation is free to assume any orientation. When spinning, the orientation of the spin axis is unaffected by the orientation of the body that encloses it. The body or vehicle enclosing the gyroscope can be moved from place to place and the orientation of the spin axis will remain the same. This makes gyroscopes very useful in navigation, especially where magnetic compasses can’t be used, such as in piloted and unpiloted spacecrafts, intercontinental ballistic missiles, unmanned aerial vehicles, and satellites like the Hubble Space Telescope.
+
+We illustrate the precession of a gyroscope with an example of a top in the next two figures. If the top is placed on a flat surface near the surface of Earth at an angle to the vertical and is not spinning, it will fall over, due to the force of gravity producing a torque acting on its center of mass. This is shown in (a). However, if the top is spinning on its axis, rather than topple over due to this torque, it precesses about the vertical, shown in part (b) of the figure. This is due to the torque on the center of mass, which provides the change in angular momentum.
+shows the forces acting on a spinning top. The torque produced is perpendicular to the angular momentum vector. This changes the direction of the angular momentum vector L→ according to dL→=τ→dt, but not its magnitude. The top precesses around a vertical axis, since the torque is always horizontal and perpendicular to L→. If the top is not spinning, it acquires angular momentum in the direction of the torque, and it rotates around a horizontal axis, falling over just as we would expect.
+
+We can experience this phenomenon first hand by holding a spinning bicycle wheel and trying to rotate it about an axis perpendicular to the spin axis. As shown in , the person applies forces perpendicular to the spin axis in an attempt to rotate the wheel, but instead, the wheel axis starts to change direction to her left due to the applied torque.
+
+We all know how easy it is for a bicycle to tip over when sitting on it at rest. But when riding the bicycle at a good pace, tipping it over involves changing the angular momentum vector of the spinning wheels.
+
+View the video on gyroscope precession for a complete demonstration of precession of the bicycle wheel.
+
+Also, when a spinning disk is put in a box such as a Blu-Ray player, try to move it. It is easy to translate the box in a given direction but difficult to rotate it about an axis perpendicular to the axis of the spinning disk, since we are putting a torque on the box that will cause the angular momentum vector of the spinning disk to precess.
+
+We can calculate the precession rate of the top in . From , we see that the magnitude of the torque is
+
+Thus,
+
+The angle the top precesses through in time dt is
+
+The precession angular velocity is ωP=dϕdt and from this equation we see that
+
+In this derivation, we assumed that ωP≪ω, that is, that the precession angular velocity is much less than the angular velocity of the gyroscope disk. The precession angular velocity adds a small component to the angular momentum along the z-axis. This is seen in a slight bob up and down as the gyroscope precesses, referred to as nutation.
+
+Earth itself acts like a gigantic gyroscope. Its angular momentum is along its axis and currently points at Polaris, the North Star. But Earth is slowly precessing (once in about 26,000 years) due to the torque of the Sun and the Moon on its nonspherical shape.
+Period of Precession
+A gyroscope spins with its tip on the ground and is spinning with negligible frictional resistance. The disk of the gyroscope has mass 0.3 kg and is spinning at 20 rev/s. Its center of mass is 5.0 cm from the pivot and the radius of the disk is 5.0 cm. What is the precessional period of the gyroscope?
+
+Period of Precession
+Strategy
+We use to find the precessional angular velocity of the gyroscope. This allows us to find the period of precession.
+
+Strategy
+Solution
+The moment of inertia of the disk is
+
+Solution
+
+The angular velocity of the disk is
+
+We can now substitute in . The precessional angular velocity is
+
+The precessional period of the gyroscope is
+Significance
+The precessional angular frequency of the gyroscope, 3.12 rad/s, or about 0.5 rev/s, is much less than the angular velocity 20 rev/s of the gyroscope disk. Therefore, we don’t expect a large component of the angular momentum to arise due to precession, and is a good approximation of the precessional angular velocity.
+
+Significance
+
+A top has a precession frequency of 5.0 rad/s on Earth. What is its precession frequency on the Moon?
+
+The Moon’s gravity is 1/6 that of Earth’s. By examining , we see that the top’s precession frequency is linearly proportional to the acceleration of gravity. All other quantities, mass, moment of inertia, and spin rate are the same on the Moon. Thus, the precession frequency on the Moon isωP(Moon)=16ωP(Earth)=16(5.0rad/s)=0.83rad/s.
+
+Summary
+
+When a gyroscope is set on a pivot near the surface of Earth, it precesses around a vertical axis, since the torque is always horizontal and perpendicular to L→. If the gyroscope is not spinning, it acquires angular momentum in the direction of the torque, and it rotates about a horizontal axis, falling over just as we would expect.
+
+The precessional angular velocity is given by ωP=rMgIω, where r is the distance from the pivot to the center of mass of the gyroscope, I is the moment of inertia of the gyroscope’s spinning disk, M is its mass, and ω is the angular frequency of the gyroscope disk.
+
+Key Equations
+
+vCM=Rω
+aCM=Rα
+dCM=Rθ
+aCM=mgsinθm+(ICM/r2)
+l→=r→×p→
+dl→dt=∑τ→
+L→=l→1+l→2+⋯+l→N
+dL→dt=∑τ→
+L=Iω
+dL→dt=0
+L→=l→1+l→2+⋯+l→N=constant
+ωP=rMgIω
+Conceptual Questions
+
+Gyroscopes used in guidance systems to indicate directions in space must have an angular momentum that does not change in direction. When placed in the vehicle, they are put in a compartment that is separated from the main fuselage, such that changes in the orientation of the fuselage does not affect the orientation of the gyroscope. If the space vehicle is subjected to large forces and accelerations how can the direction of the gyroscopes angular momentum be constant at all times?
+
+A torque is needed in the direction perpendicular to the angular momentum vector in order to change its direction. These forces on the space vehicle are external to the container in which the gyroscope is mounted and do not impart torques to the gyroscope’s rotating disk.
+
+Earth precesses about its vertical axis with a period of 26,000 years. Discuss whether can be used to calculate the precessional angular velocity of Earth.
+
+Problems
+
+A gyroscope has a 0.5-kg disk that spins at 40 rev/s. The center of mass of the disk is 15 cm from a pivot with a radius of the disk of 10 cm. What is the precession angular velocity?
+I=2.5×10−3kg·m2,
+ωP=1.17rad/s
+
+The precession angular velocity of a gyroscope is 1.0 rad/s. If the mass of the rotating disk is 0.4 kg and its radius is 30 cm, and the distance from the center of mass to the pivot is 40 cm, what is the rotation rate in rev/s of the disk?
+
+The axis of Earth makes a 23.5° angle with a direction perpendicular to the plane of Earth’s orbit. As shown below, this axis precesses, making one complete rotation in 25,780 y.
+
+(a) Calculate the change in angular momentum in half this time.
+
+(b) What is the average torque producing this change in angular momentum?
+
+(c) If this torque were created by a pair of forces acting at the most effective point on the equator, what would the magnitude of each force be?
+
+a. LEarth=7.06×1033kg·m2/s,
+ΔL=5.63×1033kg·m2/s;
+b. τ=1.4×1022N·m;
+c. The two forces at the equator would have the same magnitude but different directions, one in the north direction and the other in the south direction on the opposite side of Earth. The angle between the forces and the lever arms to the center of Earth is 90°, so a given torque would have magnitude τ=FREsin90°=FRE. Both would provide a torque in the same direction:
+τ=2FRE⇒F=1.1×1015N
+
+Additional Problems
+
+A marble is rolling across the floor at a speed of 7.0 m/s when it starts up a plane inclined at 30° to the horizontal. (a) How far along the plane does the marble travel before coming to a rest? (b) How much time elapses while the marble moves up the plane?
+
+Repeat the preceding problem replacing the marble with a hollow sphere. Explain the new results.
+aCM=−310g,
+v2=v02+2aCMx⇒v2=(7.0m/s)2−2(310g)x, v2=0⇒x=8.34m;
+b. t=v−v0aCM, v=v0+aCMt⇒t=2.38s;
+The hollow sphere has a larger moment of inertia, and therefore is harder to bring to a rest than the marble, or solid sphere. The distance travelled is larger and the time elapsed is longer.
+
+The mass of a hoop of radius 1.0 m is 6.0 kg. It rolls across a horizontal surface with a speed of 10.0 m/s. (a) How much work is required to stop the hoop? (b) If the hoop starts up a surface at 30° to the horizontal with a speed of 10.0 m/s, how far along the incline will it travel before stopping and rolling back down?
+
+Repeat the preceding problem for a hollow sphere of the same radius and mass and initial speed. Explain the differences in the results.
+
+a. W=−500.0J;
+b. K+Ugrav=constant,
+500J+0=0+(6.0kg)(9.8m/s2)h,
+h=8.5m,d=17.0m;
+The moment of inertia is less for the hollow sphere, therefore less work is required to stop it. Likewise it rolls up the incline a shorter distance than the hoop.
+
+A particle has mass 0.5 kg and is traveling along the line x=5.0m at 2.0 m/s in the positive y-direction. What is the particle’s angular momentum about the origin?
+
+A 4.0-kg particle moves in a circle of radius 2.0 m. The angular momentum of the particle varies in time according to l=5.0t2. (a) What is the torque on the particle about the center of the circle at t=3.4s? (b) What is the angular velocity of the particle at t=3.4s?
+
+a. τ=34.0N·m;
+b. l=mr2ω⇒ω=3.6rad/s
+
+A proton is accelerated in a cyclotron to 5.0×106m/s in 0.01 s. The proton follows a circular path. If the radius of the cyclotron is 0.5 km, (a) What is the angular momentum of the proton about the center at its maximum speed? (b) What is the torque on the proton about the center as it accelerates to maximum speed?
+
+(a) What is the angular momentum of the Moon in its orbit around Earth? (b) How does this angular momentum compare with the angular momentum of the Moon on its axis? Remember that the Moon keeps one side toward Earth at all times.
+
+a. dM=3.85×108m average distance to the Moon; orbital period 27.32d=2.36×106s; speed of the Moon 2π3.85×108m2.36×106s=1.0×103m/s; mass of the Moon 7.35×1022kg,
+L=2.90×1034kgm2/s;
+b. radius of the Moon 1.74×106m; the orbital period is the same as (a): ω=2.66×10−6rad/s,
+L=2.37×1029kg·m2/s;
+The orbital angular momentum is 1.22×105 times larger than the rotational angular momentum for the Moon.
+
+A DVD is rotating at 500 rpm. What is the angular momentum of the DVD if has a radius of 6.0 cm and mass 20.0 g?
+
+A potter’s disk spins from rest up to 10 rev/s in 15 s. The disk has a mass 3.0 kg and radius 30.0 cm. What is the angular momentum of the disk at t=5s,t=10 s?
+I=0.135kg·m2,
+α=4.19rad/s2, ω=ω0+αt,
+ω(5s)=21.0rad/s, L=2.84kg·m2/s,
+ω(10s)=41.9rad/s, L=5.66kg·m/s2
+
+Suppose you start an antique car by exerting a force of 300 N on its crank for 0.250 s. What is the angular momentum given to the engine if the handle of the crank is 0.300 m from the pivot and the force is exerted to create maximum torque the entire time?
+
+A solid cylinder of mass 2.0 kg and radius 20 cm is rotating counterclockwise around a vertical axis through its center at 600 rev/min. A second solid cylinder of the same mass and radius is rotating clockwise around the same vertical axis at 900 rev/min. If the cylinders couple so that they rotate about the same vertical axis, what is the angular velocity of the combination?
+
+In the conservation of angular momentum equation, the rotation rate appears on both sides so we keep the (rev/min) notation as the angular velocity can be multiplied by a constant to get (rev/min):
+Li=−0.04kg·m2(300.0rev/min),
+Lf=0.08kg·m2ff⇒ff=−150.0rev/min clockwise
+
+A boy stands at the center of a platform that is rotating without friction at 1.0 rev/s. The boy holds weights as far from his body as possible. At this position the total moment of inertia of the boy, platform, and weights is 5.0kg·m2. The boy draws the weights in close to his body, thereby decreasing the total moment of inertia to 1.5kg·m2. (a) What is the final angular velocity of the platform? (b) By how much does the rotational kinetic energy increase?
+
+Eight children, each of mass 40 kg, climb on a small merry-go-round. They position themselves evenly on the outer edge and join hands. The merry-go-round has a radius of 4.0 m and a moment of inertia 1000.0kg·m2. After the merry-go-round is given an angular velocity of 6.0 rev/min, the children walk inward and stop when they are 0.75 m from the axis of rotation. What is the new angular velocity of the merry-go-round? Assume there is negligible frictional torque on the structure.
+I0ω0=Ifωf,
+I0=6120.0kg·m2,
+If=1180.0kg·m2,
+ωf=31.1rev/min
+
+A thin meter stick of mass 150 g rotates around an axis perpendicular to the stick’s long axis at an angular velocity of 240 rev/min. What is the angular momentum of the stick if the rotation axis (a) passes through the center of the stick? (b) Passes through one end of the stick?
+
+A satellite in the shape of a sphere of mass 20,000 kg and radius 5.0 m is spinning about an axis through its center of mass. It has a rotation rate of 8.0 rev/s. Two antennas deploy in the plane of rotation extending from the center of mass of the satellite. Each antenna can be approximated as a rod has mass 200.0 kg and length 7.0 m. What is the new rotation rate of the satellite?
+Li=1.00×107kg·m2/s,
+If=2.025×105kg·m2,
+ωf=7.86rev/s
+
+A top has moment of inertia 3.2×10−4kg·m2 and radius 4.0 cm from the center of mass to the pivot point. If it spins at 20.0 rev/s and is precessing, how many revolutions does it precess in 10.0 s?
+
+Challenge Problems
+
+The truck shown below is initially at rest with solid cylindrical roll of paper sitting on its bed. If the truck moves forward with a uniform acceleration a, what distance s does it move before the paper rolls off its back end? (Hint: If the roll accelerates forward with a′, then is accelerates backward relative to the truck with an acceleration a−a′. Also, Rα=a−a′.)
+
+Assume the roll accelerates forward with respect to the ground with an acceleration a′. Then it accelerates backwards relative to the truck with an acceleration (a−a′).
+
+Also, Rα=a−a′I=12mR2∑ Fx=fs=ma′,
+∑ τ=fsR=Iα=Ia−a′Rfs=IR2(a−a′)=12m(a−a′),
+Solving for a′: fs=12m(a−a′); a′=a3,
+x−x0=v0t+12at2;d=13at2;t=3da;
+therefore, s=1.5d
+
+A bowling ball of radius 8.5 cm is tossed onto a bowling lane with speed 9.0 m/s. The direction of the toss is to the left, as viewed by the observer, so the bowling ball starts to rotate counterclockwise when in contact with the floor. The coefficient of kinetic friction on the lane is 0.3. (a) What is the time required for the ball to come to the point where it is not slipping? What is the distance d to the point where the ball is rolling without slipping?
+
+A small ball of mass 0.50 kg is attached by a massless string to a vertical rod that is spinning as shown below. When the rod has an angular velocity of 6.0 rad/s, the string makes an angle of 30° with respect to the vertical. (a) If the angular velocity is increased to 10.0 rad/s, what is the new angle of the string? (b) Calculate the initial and final angular momenta of the ball. (c) Can the rod spin fast enough so that the ball is horizontal?
+
+a. The tension in the string provides the centripetal force such that Tsinθ=mr⊥ω2. The component of the tension that is vertical opposes the gravitational force such that Tcosθ=mg. This gives T=5.7N. We solve for r⊥=0.16m. This gives the length of the string as r=0.32m.
+At ω=10.0rad/s, there is a new angle, tension, and perpendicular radius to the rod. Dividing the two equations involving the tension to eliminate it, we have sinθcosθ=(0.32msinθ)ω2g⇒1cosθ=0.32mω2g;
+cosθ=0.31⇒θ=72.2°; b. linitial=0.08kg·m2/s,
+lfinal=0.46kg·m2/s; c. No, the cosine of the angle is inversely proportional to the square of the angular velocity, therefore in order for θ→90°,ω→∞. The rod would have to spin infinitely fast.
+
+A bug flying horizontally at 1.0 m/s collides and sticks to the end of a uniform stick hanging vertically. After the impact, the stick swings out to a maximum angle of 5.0° from the vertical before rotating back. If the mass of the stick is 10 times that of the bug, calculate the length of the stick.
+
+circular motion of the pole of the axis of a spinning object around another axis due to a torque

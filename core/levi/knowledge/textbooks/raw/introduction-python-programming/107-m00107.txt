@@ -1,0 +1,62 @@
+# m00107
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Python can read and write data in files using the built-in open() function.
+
+Due to buffering, changes to a file may not be visible until the file is closed.
+
+Newline characters need to be removed/added when reading/writing files.
+
+Comma-separate-value (CSV) files are commonly used to represent data.
+
+Exceptions that cause a program to terminate can be handled using try and except.
+
+Raising an exception is an alternative way to return from a function when an error occurs.
+
+Chapter 14 reference.
+
+Statement
+file = open("myfile.txt")
+
+file = open("myfile.txt", 'w')
+
+file = open("myfile.txt", 'a')
+
+file.close()
+
+data = file.read()
+Read the entire contents of a file. The variable data is a string.
+Read the entire contents of a file. The variable data is a string.
+data = file.readline()
+Read the next line of a file. The variable data is a string.
+Read the next line of a file. The variable data is a string.
+data = file.readlines()
+Read all lines of a file. The variable data is a list of strings.
+Read all lines of a file. The variable data is a list of strings.
+file.write("Have a nice day!\n")
+Writes a line to a file. In contrast to print(), the write() function does not automatically append a newline.
+Writes a line to a file. In contrast to print(), the write() function does not automatically append a newline.
+file.write(["Line 1\n", "Line 2\n"])
+Writes multiple lines to a file. As with write(), a newline is not automatically added at the end of each line.
+Writes multiple lines to a file. As with write(), a newline is not automatically added at the end of each line.
+try:
+    # Statements
+except:
+    # Statements
+Try to run statements that might raise a ValueError. If a ValueError is raised, run other statements.
+Try to run statements that might raise a ValueError. If a ValueError is raised, run other statements.
+Try to run statements that might raise a ValueError. If a ValueError is raised, run other statements. The variable err contains more details about the ValueError.
+Try to run statements that might raise a ValueError. If a ValueError is raised, run other statements. The variable err contains more details about the ValueError.
+Raises a ValueError with no specific error message.
+Raises a ValueError with no specific error message.
+Raises a ValueError with the message "number is prime".
+Raises a ValueError with the message "number is prime".

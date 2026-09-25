@@ -1,0 +1,2281 @@
+# m49436
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Solving Systems with Cramer's Rule
+
+Solving Systems with Cramer's Rule
+
+In this section, you will:
+
+Evaluate  2 × 2  determinants.
+
+Use Cramer’s Rule to solve a system of equations in two variables.
+
+Evaluate  3 × 3  determinants.
+
+Use Cramer’s Rule to solve a system of three equations in three variables.
+
+Know the properties of determinants.
+
+Learning Objectives
+
+Use Cramer’s Rule to solve systems of equations (IA 4.6.3)
+
+Objective 1: Use Cramer’s Rule to solve systems of equations (IA 4.6.3)
+Cramer’s Rule uses determinants to solve systems of equations.
+
+Use Cramer’s rule to solve the system of equations.
+-2x+3y=3x+3y=12
+
+D=-2313=-6-3=-9
+Dx=33123=9-36=-27
+Dy=-23112=-24-3=-27
+x=DxD=-27-9=3y=DyD=-27-9=3
+(3, 3)
+Check the solution in the original equations
+Practice Makes Perfect
+
+Use Cramer’s Rule to solve the system of equations.
+3x+8y=-32x+5y=-3
+
+Solve the system of equations using Cramer’s Rule: {3x−5y+4z=55x+2y+z=02x+3y−2z=3.
+Evaluate the determinant D.
+
+Expand by minors using column 1.
+
+Evaluate the determinants.
+
+Simplify.
+
+Simplify.
+
+Simplify.
+
+Evaluate the determinant Dx. Use theconstants to replace the coefficients of x.
+
+Expand by minors using column 1.
+
+Evaluate the determinants.
+
+Simplify.
+
+Simplify.
+
+Evaluate the determinant Dy. Use theconstants to replace the coefficients of y.
+
+Evaluate the determinants.
+
+Simplify.
+
+Simplify.
+
+Simplify.
+
+Evaluate the determinant Dz. Use theconstants to replace the coefficients of z.
+
+Evaluate the determinants.
+
+Simplify.
+
+Simplify.
+
+Simplify.
+
+Find x, y, and z.
+
+Substitute in the values.
+
+Simplify.
+
+Write the solution as an ordered triple.
+
+Check that the ordered triple is a solutionto all three original equations.
+We leave the check to you.
+
+The solution is (2,−3,−4).
+
+Evaluate the determinant D.
+Expand by minors using column 1.
+Evaluate the determinants.
+Simplify.
+Simplify.
+Simplify.
+Evaluate the determinant Dx. Use theconstants to replace the coefficients of x.
+Expand by minors using column 1.
+Evaluate the determinants.
+Simplify.
+Simplify.
+Evaluate the determinant Dy. Use theconstants to replace the coefficients of y.
+Evaluate the determinants.
+Simplify.
+Simplify.
+Simplify.
+Evaluate the determinant Dz. Use theconstants to replace the coefficients of z.
+Evaluate the determinants.
+Simplify.
+Simplify.
+Simplify.
+Find x, y, and z.
+Substitute in the values.
+Simplify.
+Write the solution as an ordered triple.
+Check that the ordered triple is a solutionto all three original equations.
+We leave the check to you.
+The solution is (2,−3,−4).
+Practice Makes Perfect
+
+Use Cramer’s Rule to solve the system of three equations.
+3x+8y+2z=-52x+5y-3z=0x+2y-2z=-1
+
+We have learned how to solve systems of equations in two variables and three variables, and by multiple methods: substitution, addition, Gaussian elimination, using the inverse of a matrix, and graphing. Some of these methods are easier to apply than others and are more appropriate in certain situations. In this section, we will study two more strategies for solving systems of equations.
+
+Evaluating the Determinant of a 2×2 Matrix
+
+A determinant is a real number that can be very useful in mathematics because it has multiple applications, such as calculating area, volume, and other quantities. Here, we will use determinants to reveal whether a matrix is invertible by using the entries of a square matrix to determine whether there is a solution to the system of equations. Perhaps one of the more interesting applications, however, is their use in cryptography. Secure signals or messages are sometimes sent encoded in a matrix. The data can only be decrypted with an invertible matrix and the determinant. For our purposes, we focus on the determinant as an indication of the invertibility of the matrix. Calculating the determinant of a matrix involves following the specific patterns that are outlined in this section.
+
+Find the Determinant of a 2 × 2 Matrix
+
+The determinant of a 
+ 
+ 2×2 
+ matrix, given
+
+is defined as
+
+Notice the change in notation. There are several ways to indicate the determinant, including 
+ 
+ det(
+ A
+ ) 
+ and replacing the brackets in a matrix with straight lines, 
+ 
+ | A |.
+
+Finding the Determinant of a 2 × 2 Matrix
+
+Find the determinant of the given matrix.
+
+Using Cramer’s Rule to Solve a System of Two Equations in Two Variables
+
+We will now introduce a final method for solving systems of equations that uses determinants. Known as Cramer’s Rule, this technique dates back to the middle of the 18th century and is named for its innovator, the Swiss mathematician Gabriel Cramer (1704-1752), who introduced it in 1750 in Introduction à l'Analyse des lignes Courbes algébriques. Cramer’s Rule is a viable and efficient method for finding solutions to systems with an arbitrary number of unknowns, provided that we have the same number of equations as unknowns.
+
+Cramer’s Rule will give us the unique solution to a system of equations, if it exists. However, if the system has no solution or an infinite number of solutions, this will be indicated by a determinant of zero. To find out if the system is inconsistent or dependent, another method, such as elimination, will have to be used.
+
+To understand Cramer’s Rule, let’s look closely at how we solve systems of linear equations using basic row operations. Consider a system of two equations in two variables.
+
+We eliminate one variable using row operations and solve for the other. Say that we wish to solve for 
+ 
+ x. 
+ If equation (2) is multiplied by the opposite of the coefficient of 
+ 
+ y 
+ in equation (1), equation (1) is multiplied by the coefficient of 
+ 
+ y 
+ in equation (2), and we add the two equations, the variable 
+ 
+ y 
+ will be eliminated.
+
+Now, solve for 
+ 
+ x.
+
+Similarly, to solve for 
+ 
+ y,
+ 
+ we will eliminate 
+ 
+ x.
+
+Solving for 
+ 
+ y 
+ gives
+
+Notice that the denominator for both 
+ 
+ x 
+ and 
+ 
+ y 
+ is the determinant of the coefficient matrix.
+
+We can use these formulas to solve for 
+ 
+ x 
+ and 
+ 
+ y, 
+ but Cramer’s Rule also introduces new notation:
+D:
+ 
+ determinant of the coefficient matrix
+D
+ x
+ 
+ :
+ 
+ determinant of the numerator in the solution of 
+ x
+
+ x=
+
+ D
+ x
+
+ D
+D
+ y
+ 
+ :
+ 
+ determinant of the numerator in the solution of 
+ 
+ y
+
+ y=
+
+ D
+ y
+
+ D
+
+The key to Cramer’s Rule is replacing the variable column of interest with the constant column and calculating the determinants. We can then express 
+ 
+ x 
+ and 
+ 
+ y 
+ as a quotient of two determinants.
+
+Cramer’s Rule for 2×2 Systems
+Cramer’s Rule is a method that uses determinants to solve systems of equations that have the same number of equations as variables.
+
+Consider a system of two linear equations in two variables.
+
+The solution using Cramer’s Rule is given as
+
+If we are solving for 
+ 
+ x, 
+ the 
+ 
+ x 
+ column is replaced with the constant column. If we are solving for 
+ 
+ y, 
+ the 
+ 
+ y 
+ column is replaced with the constant column.
+
+Using Cramer’s Rule to Solve a 2 × 2 System
+
+Solve the following 
+ 
+ 2×2 
+ system using Cramer’s Rule.
+
+Solve for 
+ 
+ x.
+
+Solve for 
+ 
+ y.
+
+The solution is 
+ 
+ (
+ 
+ 2,−3
+ 
+ ).
+
+Use Cramer’s Rule to solve the 2 × 2 system of equations.
+(
+ 
+ 3,−7
+ 
+ )
+
+Evaluating the Determinant of a 3 × 3 Matrix
+
+Finding the determinant of a 2×2 matrix is straightforward, but finding the determinant of a 3×3 matrix is more complicated. One method is to augment the 3×3 matrix with a repetition of the first two columns, giving a 3×5 matrix. Then we calculate the sum of the products of entries down each of the three diagonals (upper left to lower right), and subtract the products of entries up each of the three diagonals (lower left to upper right). This is more easily understood with a visual and an example.
+
+Find the determinant of the 3×3 matrix.
+
+Augment 
+ 
+ A 
+ with the first two columns.
+
+ det(A)=| 
+
+ a
+ 1
+
+ b
+ 1
+
+ c
+ 1
+
+ a
+ 2
+
+ b
+ 2
+
+ c
+ 2
+
+ a
+ 3
+
+ b
+ 3
+
+ c
+ 3
+
+ |
+
+ a
+ 1
+
+ a
+ 2
+
+ a
+ 3
+
+ b
+ 1
+
+ b
+ 2
+
+ b
+ 3
+
+ |
+
+From upper left to lower right: Multiply the entries down the first diagonal. Add the result to the product of entries down the second diagonal. Add this result to the product of the entries down the third diagonal.
+
+From lower left to upper right: Subtract the product of entries up the first diagonal. From this result subtract the product of entries up the second diagonal. From this result, subtract the product of entries up the third diagonal.
+
+The algebra is as follows:
+
+Finding the Determinant of a 3 × 3 Matrix
+
+Find the determinant of the 3 × 3 matrix given
+
+Augment the matrix with the first two columns and then follow the formula. Thus,
+
+Find the determinant of the 3 × 3 matrix.
+−10
+Can we use the same method to find the determinant of a larger matrix?
+No, this method only works for 
+ 
+ 2×2 
+ and 
+ 
+ 3×3 
+ matrices. For larger matrices it is best to use a graphing utility or computer software.
+
+Using Cramer’s Rule to Solve a System of Three Equations in Three Variables
+
+Now that we can find the determinant of a 3 × 3 matrix, we can apply Cramer’s Rule to solve a system of three equations in three variables. Cramer’s Rule is straightforward, following a pattern consistent with Cramer’s Rule for 2 × 2 matrices. As the order of the matrix increases to 3 × 3, however, there are many more calculations required.
+
+When we calculate the determinant to be zero, Cramer’s Rule gives no indication as to whether the system has no solution or an infinite number of solutions. To find out, we have to perform elimination on the system.
+
+Consider a 3 × 3 system of equations.
+
+where
+
+If we are writing the determinant 
+
+ D
+ x
+ 
+ ,
+ 
+ we replace the 
+ 
+ x 
+ column with the constant column. If we are writing the determinant 
+
+ D
+ y
+ 
+ ,
+ 
+ we replace the 
+ 
+ y 
+ column with the constant column. If we are writing the determinant 
+
+ D
+ z
+ 
+ ,
+ 
+ we replace the 
+ 
+ z 
+ column with the constant column. Always check the answer.
+
+Solving a 3 × 3 System Using Cramer’s Rule
+
+Find the solution to the given 3 × 3 system using Cramer’s Rule.
+
+Use Cramer’s Rule.
+
+Then,
+
+The solution is 
+ 
+ (
+ 
+ 1,3,−2
+ 
+ ).
+
+Use Cramer’s Rule to solve the 3 × 3 matrix.
+(
+ 
+ −2,
+ 3
+ 5
+ 
+ ,
+ 
+ 12
+ 
+ 5
+
+ )
+
+Using Cramer’s Rule to Solve an Inconsistent System
+
+Solve the system of equations using Cramer’s Rule.
+
+We begin by finding the determinants 
+ 
+ D,
+ D
+ x
+ 
+ ,and 
+ D
+ y
+ 
+ .
+
+We know that a determinant of zero means that either the system has no solution or it has an infinite number of solutions. To see which one, we use the process of elimination. Our goal is to eliminate one of the variables.
+
+Multiply equation (1) by 
+ 
+ −2.
+
+Add the result to equation 
+ 
+ (
+ 2
+ ).
+
+We obtain the equation 
+ 
+ 0=−8, 
+ which is false. Therefore, the system has no solution. Graphing the system reveals two parallel lines. See .
+
+Use Cramer’s Rule to Solve a Dependent System
+
+Solve the system with an infinite number of solutions.
+
+Let’s find the determinant first. Set up a matrix augmented by the first two columns.
+
+Then,
+
+As the determinant equals zero, there is either no solution or an infinite number of solutions. We have to perform elimination to find out.
+
+Multiply equation (1) by 
+ 
+ −2 
+ and add the result to equation (3):
+
+ −2x+4y−6z=0
+
+ 2x−4y+6z=0
+
+ 0=0
+
+Obtaining an answer of 
+ 
+ 0=0, 
+ a statement that is always true, means that the system has an infinite number of solutions. Graphing the system, we can see that two of the planes are the same and they both intersect the third plane on a line. See .
+
+Understanding Properties of Determinants
+
+There are many properties of determinants. Listed here are some properties that may be helpful in calculating the determinant of a matrix.
+
+Properties of Determinants
+
+If the matrix is in upper triangular form, the determinant equals the product of entries down the main diagonal.
+
+When two rows are interchanged, the determinant changes sign.
+
+If either two rows or two columns are identical, the determinant equals zero.
+
+If a matrix contains either a row of zeros or a column of zeros, the determinant equals zero.
+
+The determinant of an inverse matrix 
+
+ A
+ 
+ −1
+
+ is the reciprocal of the determinant of the matrix 
+ 
+ A.
+
+If any row or column is multiplied by a constant, the determinant is multiplied by the same factor.
+
+Illustrating Properties of Determinants
+
+Illustrate each of the properties of determinants.
+
+Property 1 states that if the matrix is in upper triangular form, the determinant is the product of the entries down the main diagonal.
+
+Augment 
+ 
+ A 
+ with the first two columns.
+
+Then
+
+Property 2 states that interchanging rows changes the sign. Given
+
+Property 3 states that if two rows or two columns are identical, the determinant equals zero.
+
+Property 4 states that if a row or column equals zero, the determinant equals zero. Thus,
+
+Property 5 states that the determinant of an inverse matrix 
+
+ A
+ 
+ −1
+
+ is the reciprocal of the determinant 
+ 
+ A. 
+ Thus,
+
+Property 6 states that if any row or column of a matrix is multiplied by a constant, the determinant is multiplied by the same factor. Thus,
+
+Using Cramer’s Rule and Determinant Properties to Solve a System
+
+Find the solution to the given 3 × 3 system.
+
+Using Cramer’s Rule, we have
+
+Notice that the second and third columns are identical. According to Property 3, the determinant will be zero, so there is either no solution or an infinite number of solutions. We have to perform elimination to find out.
+
+Multiply equation (3) by –2 and add the result to equation (1).
+
+ −2x−4y−4x=−8
+
+   2x+4y+4z=2
+
+ 0=−6
+
+Obtaining a statement that is a contradiction means that the system has no solution.
+
+Access these online resources for additional instruction and practice with Cramer’s Rule.
+Solve a System of Two Equations Using Cramer's Rule
+Solve a Systems of Three Equations using Cramer's Rule
+
+Key Concepts
+
+The determinant for 
+ 
+ [ 
+
+ a
+
+ b
+
+ c
+
+ d
+
+ ] 
+ is 
+ 
+ ad−bc. 
+ See .
+
+Cramer’s Rule replaces a variable column with the constant column. Solutions are 
+ 
+ x=
+
+ D
+ x
+
+ D
+ 
+ ,y=
+
+ D
+ y
+
+ D
+ 
+ . 
+ See .
+
+To find the determinant of a 3×3 matrix, augment with the first two columns. Add the three diagonal entries (upper left to lower right) and subtract the three diagonal entries (lower left to upper right). See .
+
+To solve a system of three equations in three variables using Cramer’s Rule, replace a variable column with the constant column for each desired solution: 
+ 
+ x=
+
+ D
+ x
+
+ D
+ 
+ ,y=
+
+ D
+ y
+
+ D
+ 
+ ,z=
+
+ D
+ z
+
+ D
+ 
+ . 
+ See .
+
+Cramer’s Rule is also useful for finding the solution of a system of equations with no solution or infinite solutions. See and .
+
+Certain properties of determinants are useful for solving problems. For example:
+
+If the matrix is in upper triangular form, the determinant equals the product of entries down the main diagonal.
+When two rows are interchanged, the determinant changes sign.
+If either two rows or two columns are identical, the determinant equals zero.
+If a matrix contains either a row of zeros or a column of zeros, the determinant equals zero.
+The determinant of an inverse matrix 
+
+ A
+ 
+ −1
+
+ is the reciprocal of the determinant of the matrix 
+ 
+ A.
+
+If any row or column is multiplied by a constant, the determinant is multiplied by the same factor. See and .
+
+If the matrix is in upper triangular form, the determinant equals the product of entries down the main diagonal.
+
+When two rows are interchanged, the determinant changes sign.
+
+If either two rows or two columns are identical, the determinant equals zero.
+
+If a matrix contains either a row of zeros or a column of zeros, the determinant equals zero.
+
+The determinant of an inverse matrix 
+
+ A
+ 
+ −1
+
+ is the reciprocal of the determinant of the matrix 
+ 
+ A.
+
+If any row or column is multiplied by a constant, the determinant is multiplied by the same factor. See and .
+
+Section Exercises
+
+Verbal
+
+Explain why we can always evaluate the determinant of a square matrix.
+
+A determinant is the sum and products of the entries in the matrix, so you can always evaluate that product—even if it does end up being 0.
+
+Examining Cramer’s Rule, explain why there is no unique solution to the system when the determinant of your matrix is 0. For simplicity, use a 
+ 
+ 2×2 
+ matrix.
+
+Explain what it means in terms of an inverse for a matrix to have a 0 determinant.
+
+The inverse does not exist.
+
+The determinant of 
+ 
+ 2×2 
+ matrix 
+ 
+ A 
+ is 3. If you switch the rows and multiply the first row by 6 and the second row by 2, explain how to find the determinant and provide the answer.
+
+Algebraic
+
+For the following exercises, find the determinant.
+| 
+
+ 1
+
+ 2
+
+ 3
+
+ 4
+
+ |
+−2
+| 
+
+ −1
+
+ 2
+
+ 3
+
+ −4
+
+ |
+| 
+
+ 2
+
+ −5
+
+ −1
+
+ 6
+
+ |
+7
+| 
+
+ −8
+
+ 4
+
+ −1
+
+ 5
+
+ |
+| 
+
+ 1
+
+ 0
+
+ 3
+
+ −4
+
+ |
+−4
+| 
+
+ 10
+
+ 20
+
+ 0
+
+ −10
+
+ |
+| 
+
+ 10
+
+ 0.2
+
+ 5
+
+ 0.1
+
+ |
+0
+| 
+
+ 6
+
+ −3
+
+ 8
+
+ 4
+
+ |
+| 
+
+ −2
+
+ −3
+
+ 3.1
+
+ 4,000
+
+ |
+−7,990.7
+| 
+
+ −1.1
+
+ 0.6
+
+ 7.2
+
+ −0.5
+
+ |
+| 
+
+ −1
+
+ 0
+
+ 0
+
+ 0
+
+ 1
+
+ 0
+
+ 0
+
+ 0
+
+ −3
+
+ |
+3
+| 
+
+ −1
+
+ 4
+
+ 0
+
+ 0
+
+ 2
+
+ 3
+
+ 0
+
+ 0
+
+ −3
+
+ |
+| 
+
+ 1
+
+ 0
+
+ 1
+
+ 0
+
+ 1
+
+ 0
+
+ 1
+
+ 0
+
+ 0
+
+ |
+−1
+| 
+
+ 2
+
+ −3
+
+ 1
+
+ 3
+
+ −4
+
+ 1
+
+ −5
+
+ 6
+
+ 1
+
+ |
+| 
+
+ −2
+
+ 1
+
+ 4
+
+ −4
+
+ 2
+
+ −8
+
+ 2
+
+ −8
+
+ −3
+
+ |
+224
+| 
+
+ 6
+
+ −1
+
+ 2
+
+ −4
+
+ −3
+
+ 5
+
+ 1
+
+ 9
+
+ −1
+
+ |
+| 
+
+ 5
+
+ 1
+
+ −1
+
+ 2
+
+ 3
+
+ 1
+
+ 3
+
+ −6
+
+ −3
+
+ |
+15
+| 
+
+ 1.1
+
+ 2
+
+ −1
+
+ −4
+
+ 0
+
+ 0
+
+ 4.1
+
+ −0.4
+
+ 2.5
+
+ |
+| 
+
+ 2
+
+ −1.6
+
+ 3.1
+
+ 1.1
+
+ 3
+
+ −8
+
+ −9.3
+
+ 0
+
+ 2
+
+ |
+−17.03
+| 
+
+ −
+ 1
+ 2
+
+ 1
+ 3
+
+ 1
+ 4
+
+ 1
+ 5
+
+ −
+ 1
+ 6
+
+ 1
+ 7
+
+ 0
+
+ 0
+
+ 1
+ 8
+
+ |
+
+For the following exercises, solve the system of linear equations using Cramer’s Rule.
+2x−3y=−1
+
+ 4x+5y=9
+(
+ 
+ 1,1
+ 
+ )
+5x−4y=2
+
+ −4x+7y=6
+6x−3y=2
+
+ −8x+9y=−1
+(
+
+ 1
+ 2
+ 
+ ,
+ 1
+ 3
+
+ )
+2x+6y=12
+
+ 5x−2y=13
+4x+3y=23
+
+ 2x−y=−1
+(
+ 
+ 2,5
+ 
+ )
+10x−6y=2
+
+ −5x+8y=−1
+4x−3y=−3
+
+ 2x+6y=−4
+(
+ 
+ −1,−
+ 1
+ 3
+
+ )
+4x−5y=7
+
+ −3x+9y=0
+4x+10y=180
+
+ −3x−5y=−105
+(
+ 
+ 15,12
+ 
+ )
+8x−2y=−3
+
+ −4x+6y=4
+
+For the following exercises, solve the system of linear equations using Cramer’s Rule.
+x+2y−4z=−1
+
+ 7x+3y+5z=26
+
+ −2x−6y+7z=−6
+(
+ 
+ 1,3,2
+ 
+ )
+−5x+2y−4z=−47
+
+ 4x−3y−z=−94
+
+ 3x−3y+2z=94
+4x+5y−z=−7
+
+−2x−9y+2z=8
+
+ 5y+7z=21
+(
+ 
+ −1,0,3
+ 
+ )
+4x−3y+4z=10
+
+ 5x−2z=−2
+
+ 3x+2y−5z=−9
+4x−2y+3z=6
+
+ −6x+y=−2
+
+ 2x+7y+8z=24
+(
+
+ 1
+ 2
+ 
+ ,1,2
+ 
+ )
+5x+2y−z=1
+
+ −7x−8y+3z=1.5
+
+ 6x−12y+z=7
+13x−17y+16z=73
+
+ −11x+15y+17z=61
+
+ 46x+10y−30z=−18
+(
+ 
+ 2,1,4
+ 
+ )
+−4x−3y−8z=−7
+
+ 2x−9y+5z=0.5
+
+ 5x−6y−5z=−2
+4x−6y+8z=10
+
+ −2x+3y−4z=−5
+
+ x+y+z=1
+
+Infinite solutions
+4x−6y+8z=10
+
+ −2x+3y−4z=−5
+
+ 12x+18y−24z=−30
+
+Technology
+
+For the following exercises, use the determinant function on a graphing utility.
+| 
+
+ 1
+
+ 0
+
+ 8
+
+ 9
+
+ 0
+
+ 2
+
+ 1
+
+ 0
+
+ 1
+
+ 0
+
+ 3
+
+ 0
+
+ 0
+
+ 2
+
+ 4
+
+ 3
+
+ |
+24
+| 
+
+ 1
+
+ 0
+
+ 2
+
+ 1
+
+ 0
+
+ −9
+
+ 1
+
+ 3
+
+ 3
+
+ 0
+
+ −2
+
+ −1
+
+ 0
+
+ 1
+
+ 1
+
+ −2
+
+ |
+| 
+
+ 1
+ 2
+
+ 1
+
+ 7
+
+ 4
+
+ 0
+
+ 1
+ 2
+
+ 100
+
+ 5
+
+ 0
+
+ 0
+
+ 2
+
+ 2,000
+
+ 0
+
+ 0
+
+ 0
+
+ 2
+
+ |
+1
+| 
+
+ 1
+
+ 0
+
+ 0
+
+ 0
+
+ 2
+
+ 3
+
+ 0
+
+ 0
+
+ 4
+
+ 5
+
+ 6
+
+ 0
+
+ 7
+
+ 8
+
+ 9
+
+ 0
+
+ |
+
+Real-World Applications
+
+For the following exercises, create a system of linear equations to describe the behavior. Then, calculate the determinant. Will there be a unique solution? If so, find the unique solution.
+
+Two numbers add up to 56. One number is 20 less than the other.
+
+Yes; 18, 38
+
+Two numbers add up to 104. If you add two times the first number plus two times the second number, your total is 208
+
+Three numbers add up to 106. The first number is 3 less than the second number. The third number is 4 more than the first number.
+
+Yes; 33, 36, 37
+
+Three numbers add to 216. The sum of the first two numbers is 112. The third number is 8 less than the first two numbers combined.
+
+For the following exercises, create a system of linear equations to describe the behavior. Then, solve the system for all solutions using Cramer’s Rule.
+
+You invest $10,000 into two accounts, which receive 8% interest and 5% interest. At the end of a year, you had $10,710 in your combined accounts. How much was invested in each account?
+
+$7,000 in first account, $3,000 in second account.
+
+You invest $80,000 into two accounts, $22,000 in one account, and $58,000 in the other account. At the end of one year, assuming simple interest, you have earned $2,470 in interest. The second account receives half a percent less than twice the interest on the first account. What are the interest rates for your accounts?
+
+A theater needs to know how many adult tickets and children tickets were sold out of the 1,200 total tickets. If children’s tickets are $5.95, adult tickets are $11.15, and the total amount of revenue was $12,756, how many children’s tickets and adult tickets were sold?
+
+120 children, 1,080 adult
+
+A concert venue sells single tickets for $40 each and couple’s tickets for $65. If the total revenue was $18,090 and the 321 tickets were sold, how many single tickets and how many couple’s tickets were sold?
+
+You decide to paint your kitchen green. You create the color of paint by mixing yellow and blue paints. You cannot remember how many gallons of each color went into your mix, but you know there were 10 gal total. Additionally, you kept your receipt, and know the total amount spent was $29.50. If each gallon of yellow costs $2.59, and each gallon of blue costs $3.19, how many gallons of each color go into your green mix?
+
+4 gal yellow, 6 gal blue
+
+You sold two types of scarves at a farmers’ market and would like to know which one was more popular. The total number of scarves sold was 56, the yellow scarf cost $10, and the purple scarf cost $11. If you had total revenue of $583, how many yellow scarves and how many purple scarves were sold?
+
+Your garden produced two types of tomatoes, one green and one red. The red weigh 10 oz, and the green weigh 4 oz. You have 30 tomatoes, and a total weight of 13 lb, 14 oz. How many of each type of tomato do you have?
+
+13 green tomatoes, 17 red tomatoes
+
+At a market, the three most popular vegetables make up 53% of vegetable sales. Corn has 4% higher sales than broccoli, which has 5% more sales than onions. What percentage does each vegetable have in the market share?
+
+At the same market, the three most popular fruits make up 37% of the total fruit sold. Strawberries sell twice as much as oranges, and kiwis sell one more percentage point than oranges. For each fruit, find the percentage of total fruit sold.
+
+Strawberries 18%, oranges 9%, kiwi 10%
+
+Three artists performed at a concert venue. The first one charged $15 per ticket, the second artist charged $45 per ticket, and the final one charged $22 per ticket. There were 510 tickets sold, for a total of $12,700. If the first band had 40 more audience members than the second band, how many tickets were sold for each band?
+
+A movie theatre sold tickets to three movies. The tickets to the first movie were $5, the tickets to the second movie were $11, and the third movie was $12. 100 tickets were sold to the first movie. The total number of tickets sold was 642, for a total revenue of $6,774. How many tickets for each movie were sold?
+
+100 for movie 1, 230 for movie 2, 312 for movie 3
+
+For the following exercises, use this scenario: A health-conscious company decides to make a trail mix out of almonds, dried cranberries, and chocolate-covered cashews. The nutritional information for these items is shown in .
+
+Fat (g)
+Protein (g)
+Almonds (10)
+6
+2
+Cranberries (10)
+0.02
+0
+Cashews (10)
+7
+3.5
+5.5
+For the special “low-carb”trail mix, there are 1,000 pieces of mix. The total number of carbohydrates is 425 g, and the total amount of fat is 570.2 g. If there are 200 more pieces of cashews than cranberries, how many of each item is in the trail mix?
+
+For the “hiking” mix, there are 1,000 pieces in the mix, containing 390.8 g of fat, and 165 g of protein. If there is the same amount of almonds as cashews, how many of each item is in the trail mix?
+
+300 almonds, 400 cranberries, 300 cashews
+
+For the “energy-booster” mix, there are 1,000 pieces in the mix, containing 145 g of protein and 625 g of carbohydrates. If the number of almonds and cashews summed together is equivalent to the amount of cranberries, how many of each item is in the trail mix?
+
+Review Exercises
+Systems of Linear Equations: Two Variables
+
+For the following exercises, determine whether the ordered pair is a solution to the system of equations.
+3x−y=4
+
+ x+4y=−3
+
+ and 
+ 
+ (−1,1)
+
+No
+6x−2y=24
+
+ −3x+3y=18
+
+ and 
+ 
+ (9,15)
+
+For the following exercises, use substitution to solve the system of equations.
+10x+5y=−5
+
+ 3x−2y=−12
+(
+ 
+ −2,3
+ 
+ )
+4
+ 7
+ 
+ x+
+ 1
+ 5
+ 
+ y=
+ 
+ 43
+
+ 70
+
+ 5
+ 6
+ 
+ x−
+ 1
+ 3
+ 
+ y=−
+ 2
+ 3
+5x+6y=14
+
+ 4x+8y=8
+(
+ 
+ 4,−1
+ 
+ )
+
+For the following exercises, use addition to solve the system of equations.
+3x+2y=−7
+
+ 2x+4y=6
+3x+4y=2
+
+ 9x+12y=3
+
+No solutions exist.
+8x+4y=2
+
+ 6x−5y=0.7
+
+For the following exercises, write a system of equations to solve each problem. Solve the system of equations.
+
+A factory has a cost of production 
+ 
+ C(x)=150x+15,000
+ 
+ and a revenue function 
+ 
+ R(x)=200x.
+ 
+ What is the break-even point?
+(300,60,000)
+
+A performer charges 
+ 
+ C(x)=50x+10,000,
+ 
+ where 
+ 
+ x
+ 
+ is the total number of attendees at a show. The venue charges $75 per ticket. After how many people buy tickets does the venue break even, and what is the value of the total tickets sold at that point?
+Systems of Linear Equations: Three Variables
+
+For the following exercises, solve the system of three equations using substitution or addition.
+0.5x−0.5y=10
+
+ −0.2y+0.2x=4
+
+ 0.1x+0.1z=2
+
+Infinite solutions
+5x+3y−z=5
+
+ 3x−2y+4z=13
+
+ 4x+3y+5z=22
+x+y+z=1
+
+ 2x+2y+2z=1
+
+ 3x+3y=2
+
+No solutions exist.
+2x−3y+z=−1
+
+ x+y+z=−4
+
+ 4x+2y−3z=33
+3x+2y−z=−10
+
+ x−y+2z=7
+
+ −x+3y+z=−2
+(
+ 
+ −1,−2,3
+ 
+ )
+3x+4z=−11
+
+ x−2y=5
+
+ 4y−z=−10
+2x−3y+z=0
+
+ 2x+4y−3z=0
+
+ 6x−2y−z=0
+(
+ 
+ x,
+ 
+ 8x
+ 
+ 5
+ 
+ ,
+ 
+ 14x
+ 
+ 5
+
+ )
+6x−4y−2z=2
+
+ 3x+2y−5z=4
+
+ 6y−7z=5
+
+For the following exercises, write a system of equations to solve each problem. Solve the system of equations.
+
+Three odd numbers sum up to 61. The smaller is one-third the larger and the middle number is 16 less than the larger. What are the three numbers?
+
+11, 17, 33
+
+A local theatre sells out for their show. They sell all 500 tickets for a total purse of $8,070.00. The tickets were priced at $15 for students, $12 for children, and $18 for adults. If the band sold three times as many adult tickets as children’s tickets, how many of each type was sold?
+Systems of Nonlinear Equations and Inequalities: Two Variables
+
+For the following exercises, solve the system of nonlinear equations.
+y=
+ x
+ 2
+ 
+ −7
+
+ y=5x−13
+(
+ 
+ 2,−3
+ 
+ ),(
+ 
+ 3,2
+ 
+ )
+y=
+ x
+ 2
+ 
+ −4
+
+ y=5x+10
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =16
+
+ y=x−8
+
+No solution
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =25
+
+ y=
+ x
+ 2
+ 
+ +5
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =4
+
+ y−
+ x
+ 2
+ 
+ =3
+
+No solution
+
+For the following exercises, graph the inequality.
+y>
+ x
+ 2
+ 
+ −1
+1
+ 4
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ <4
+
+For the following exercises, graph the system of inequalities.
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ +2x<3
+
+ y>−
+ x
+ 2
+ 
+ −3
+x
+ 2
+ 
+ −2x+
+ y
+ 2
+ 
+ −4x<4
+
+ y<−x+4
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ <1
+
+ y
+ 2
+ 
+ <x
+Partial Fractions
+
+For the following exercises, decompose into partial fractions.
+−2x+6
+
+ x
+ 2
+ 
+ +3x+2
+2
+ 
+ x+2
+
+ ,
+ 
+ −4
+
+ x+1
+10x+2
+
+ 4
+ x
+ 2
+ 
+ +4x+1
+7x+20
+
+ x
+ 2
+ 
+ +10x+25
+7
+ 
+ x+5
+
+ ,
+ 
+ −15
+
+ (x+5)
+ 
+ 2
+x−18
+
+ x
+ 2
+ 
+ −12x+36
+−
+ x
+ 2
+ 
+ +36x+70
+
+ x
+ 3
+ 
+ −125
+3
+ 
+ x−5
+
+ ,
+ 
+ −4x+1
+
+ x
+ 2
+ 
+ +5x+25
+−5
+ x
+ 2
+ 
+ +6x−2
+
+ x
+ 3
+ 
+ +27
+x
+ 3
+ 
+ −4
+ x
+ 2
+ 
+ +3x+11
+
+ (
+ x
+ 2
+ 
+ −2)
+ 
+ 2
+x−4
+
+ (
+ x
+ 2
+ 
+ −2)
+
+ ,
+ 
+ 5x+3
+
+ (
+ x
+ 2
+ 
+ −2)
+ 
+ 2
+4
+ x
+ 4
+ 
+ −2
+ x
+ 3
+ 
+ +22
+ x
+ 2
+ 
+ −6x+48
+
+ x
+ 
+ (
+ x
+ 2
+ 
+ +4)
+ 
+ 2
+Matrices and Matrix Operations
+
+For the following exercises, perform the requested operations on the given matrices.
+−4A
+[ 
+
+ −16
+
+ 8
+
+ −4
+
+ −12
+
+ ]
+10D−6E
+B+C
+
+undefined; dimensions do not match
+AB
+BA
+
+undefined; inner dimensions do not match
+BC
+CB
+[ 
+
+ 113
+
+ 28
+
+ 10
+
+ 44
+
+ 81
+
+ −41
+
+ 84
+
+ 98
+
+ −42
+
+ ]
+DE
+ED
+[ 
+
+ −127
+
+ −74
+
+ 176
+
+ −2
+
+ 11
+
+ 40
+
+ 28
+
+ 77
+
+ 38
+
+ ]
+EC
+CE
+
+undefined; inner dimensions do not match
+A
+ 3
+Solving Systems with Gaussian Elimination
+
+For the following exercises, write the system of linear equations from the augmented matrix. Indicate whether there will be a unique solution.
+[ 
+
+ 1
+
+ 0
+
+ −3
+
+ 0
+
+ 1
+
+ 2
+
+ 0
+
+ 0
+
+ 0
+
+ |
+
+ 7
+
+ −5
+
+ 0
+
+ ]
+x−3z=7
+
+ y+2z=−5
+
+ with infinite solutions
+[ 
+
+ 1
+
+ 0
+
+ 5
+
+ 0
+
+ 1
+
+ −2
+
+ 0
+
+ 0
+
+ 0
+
+ |
+
+ −9
+
+ 4
+
+ 3
+
+ ]
+
+For the following exercises, write the augmented matrix from the system of linear equations.
+−2x+2y+z=7
+
+ 2x−8y+5z=0
+
+ 19x−10y+22z=3
+[ 
+
+ −2
+
+ 2
+
+ 1
+
+ 2
+
+ −8
+
+ 5
+
+ 19
+
+ −10
+
+ 22
+
+ |
+
+ 7
+
+ 0
+
+ 3
+
+ ]
+4x+2y−3z=14
+
+ −12x+3y+z=100
+
+ 9x−6y+2z=31
+x+3z=12
+
+ −x+4y=0
+
+ y+2z=−7
+[ 
+
+ 1
+
+ 0
+
+ 3
+
+ −1
+
+ 4
+
+ 0
+
+ 0
+
+ 1
+
+ 2
+
+ |
+
+ 12
+
+ 0
+
+ −7
+
+ ]
+
+For the following exercises, solve the system of linear equations using Gaussian elimination.
+3x−4y=−7
+
+ −6x+8y=14
+3x−4y=1
+
+ −6x+8y=6
+
+No solutions exist.
+−1.1x−2.3y=6.2
+
+ −5.2x−4.1y=4.3
+2x+3y+2z=1
+
+ −4x−6y−4z=−2
+
+ 10x+15y+10z=0
+
+No solutions exist.
+−x+2y−4z=8
+
+ 3y+8z=−4
+
+ −7x+y+2z=1
+Solving Systems with Inverses
+
+For the following exercises, find the inverse of the matrix.
+[ 
+
+ −0.2
+
+ 1.4
+
+ 1.2
+
+ −0.4
+
+ ]
+1
+ 8
+ 
+ [ 
+
+ 2
+
+ 7
+
+ 6
+
+ 1
+
+ ]
+[ 
+
+ 1
+ 2
+
+ −
+ 1
+ 2
+
+ −
+ 1
+ 4
+
+ 3
+ 4
+
+ ]
+[ 
+
+ 12
+
+ 9
+
+ −6
+
+ −1
+
+ 3
+
+ 2
+
+ −4
+
+ −3
+
+ 2
+
+ ]
+
+No inverse exists.
+[ 
+
+ 2
+
+ 1
+
+ 3
+
+ 1
+
+ 2
+
+ 3
+
+ 3
+
+ 2
+
+ 1
+
+ ]
+
+For the following exercises, find the solutions by computing the inverse of the matrix.
+0.3x−0.1y=−10
+
+ −0.1x+0.3y=14
+(
+ 
+ −20,40
+ 
+ )
+0.4x−0.2y=−0.6
+
+ −0.1x+0.05y=0.3
+4x+3y−3z=−4.3
+
+ 5x−4y−z=−6.1
+
+ x+z=−0.7
+(
+ 
+ −1,0.2,0.3
+ 
+ )
+−2x−3y+2z=3
+
+ −x+2y+4z=−5
+
+ −2y+5z=−3
+
+For the following exercises, write a system of equations to solve each problem. Solve the system of equations.
+
+Students were asked to bring their favorite fruit to class. 90% of the fruits consisted of banana, apple, and oranges. If oranges were half as popular as bananas and apples were 5% more popular than bananas, what are the percentages of each individual fruit?
+
+17% oranges, 34% bananas, 39% apples
+
+A school club held a bake sale to raise money and sold brownies and chocolate chip cookies. They priced the brownies at $2 and the chocolate chip cookies at $1. They raised $250 and sold 175 items. How many brownies and how many cookies were sold?
+Solving Systems with Cramer's Rule
+
+For the following exercises, find the determinant.
+| 
+
+ 100
+
+ 0
+
+ 0
+
+ 0
+
+ |
+
+0
+| 
+
+ 0.2
+
+ −0.6
+
+ 0.7
+
+ −1.1
+
+ |
+| 
+
+ −1
+
+ 4
+
+ 3
+
+ 0
+
+
+[truncated]

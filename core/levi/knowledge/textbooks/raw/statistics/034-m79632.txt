@@ -1,0 +1,191 @@
+# m79632
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Continuous Probability Functions
+
+Continuous Probability Functions
+
+We begin by defining a continuous probability density function. We use the function notation f(x). Intermediate algebra may have been your first formal introduction to functions. In the study of probability, the functions we study are special. We define the function f(x) so that the area between it and the x-axis is equal to a probability. Since the maximum probability is one, the maximum area is also one. For continuous probability distributions, PROBABILITY = AREA.
+
+Consider the function
+f(x) = 120 for 0 ≤ x ≤ 20. x = a real number. The graph of
+f(x) = 120 is a horizontal line. However, since 0 ≤ x ≤ 20, f(x) is restricted to the portion between x = 0 and x = 20, inclusive.
+f(x) = 120 for 0 ≤ x ≤ 20.
+
+The graph of f(x) = 120 is a horizontal line segment when 0 ≤ x ≤ 20.
+
+The area between f(x) = 120 where 0 ≤ x ≤ 20 and the x-axis is the area of a rectangle with base = 20 and height = 120.
+Suppose we want to find the area between f(x) = 120 and the x-axis where 0 < x < 2.
+AREA = (2 – 0)(
+
+ 1
+ 
+ 20
+
+ ) = 0.1
+(2 – 0) = 2 = base of a rectangle
+
+Reminder
+
+area of a rectangle = (base)(height)
+
+The area corresponds to a probability. The probability that x is between zero and two is 0.1, which can be written mathematically as P(0 < x < 2) = P(x < 2) = 0.1.
+Suppose we want to find the area between f(x) = 120 and the x-axis where 4 < x < 15.
+AREA = (15 – 4)(
+
+ 1
+ 
+ 20
+
+ ) = 0.55
+(15 – 4) = 11 = the base of a rectangle
+
+The area corresponds to the probability P(4 < x < 15) = 0.55.
+
+Suppose we want to find P(x = 15). On an x-y graph, x = 15 is a vertical line. A vertical line has no width (or zero width). Therefore, P(x = 15) = (base)(height) = (0)
+ 
+ (
+
+ 1
+ 
+ 20
+
+ )
+ 
+ = 0
+P(X <= x), which can also be written as P(X < x) for continuous distributions, is called the cumulative distribution function or CDF. Notice the less than or equal to symbol. We can also use the CDF to calculate P(X > x). The CDF gives area to the left and P(X > x) gives area to the right. We calculate P(X > x) for continuous distributions as follows: P(X > x) = 1 – P (X < x).
+
+Label the graph with
+f(x) and x. Scale the x and y axes with the maximum x and y values. f(x) = 
+
+1
+
+20
+
+, 0 ≤ x ≤ 20.
+
+To calculate the probability that x is between two values, look at the following graph. Shade the region between x = 2.3 and x = 12.7. Then calculate the shaded area of a rectangle.
+P(2.3<x<12.7)=(base)(height)=(12.7−2.3)(
+
+ 1
+ 
+ 20
+
+ )=0.52
+
+Try It
+
+Consider the function f(x) = 
+
+ 1
+ 8
+
+ for 0 ≤ x ≤ 8. Draw the graph of f(x) and find P(2.5 < x < 7.5).
+P (2.5 < x < 7.5) = 0.625
+
+Chapter Review
+
+The probability density function (pdf) is used to describe probabilities for continuous random variables. The area under the density curve between two points corresponds to the probability that the variable falls between those two values. In other words, the area under the density curve between points a and b is equal to P(a < x < b). The cumulative distribution function (cdf) gives the probability as an area. If X is a continuous random variable, the probability density function (pdf), f(x), is used to draw the graph of the probability distribution. The total area under the graph of f(x) is one. The area under the graph of f(x) and between values a and b gives the probability P(a < x < b).
+
+The cumulative distribution function (cdf) of X is defined by P (X ≤ x). It is a function of x that gives the probability that the random variable is less than or equal to x.
+
+Formula Review
+
+Probability density function (pdf) f(x):
+f(x) ≥ 0
+
+The total area under the curve f(x) is one.
+
+Cumulative distribution function (cdf): P(X ≤ x)
+
+Which type of distribution does the graph illustrate?
+
+Uniform distribution
+
+Which type of distribution does the graph illustrate?
+
+Which type of distribution does the graph illustrate?
+
+Normal distribution
+
+What does the shaded area represent? P(___< x < ___)
+
+What does the shaded area represent? P(___< x < ___)
+P(6 < x < 7)
+
+For a continuous probablity distribution, 0 ≤ x ≤ 15. What is P(x > 15)?
+
+What is the area under f(x) if the function is a continuous probability density function?
+
+one
+
+For a continuous probability distribution, 0 ≤ x ≤ 10. What is P(x = 7)?
+
+A continuous probability function is restricted to the portion between x = 0 and 7. What is P(x = 10)?
+
+zero
+f(x) for a continuous probability function is 
+
+1
+5
+
+, and the function is restricted to 0 ≤ x ≤ 5. What is P(x < 0)?
+f(x), a continuous probability function, is equal to 
+
+1
+
+12
+
+, and the function is restricted to 0 ≤ x ≤ 12. What is P (0 < x < 12)?
+
+one
+
+Find the probability that x falls in the shaded area.
+
+Find the probability that x falls in the shaded area.
+
+0.625
+
+Find the probability that x falls in the shaded area.
+f(x), a continuous probability function, is equal to 
+
+1
+3
+
+ and the function is restricted to 1 ≤ x ≤ 4. Describe 
+
+P(
+
+x>
+3
+2
+
+).
+
+The probability is equal to the area from x = 
+
+3
+2
+
+ to x = 4 above the x-axis and up to f(x) = 
+
+1
+3
+
+.
+
+Homework
+For each probability and percentile problem, draw the picture.
+
+Consider the following experiment. You are one of 100 people enlisted to take part in a study to determine percentage of nurses in America with an R.N. (registered nurse) degree.  You ask nurses if they have an R.N. degree.  The nurses answer yes or no.  You then calculate the percentage of nurses with an R.N. degree.  You give that percentage to your supervisor.
+
+What part of the experiment will yield discrete data?
+
+What part of the experiment will yield continuous data?
+
+When age is rounded to the nearest year, do the data stay continuous, or do they become discrete?  Why?
+
+Age is a measurement, regardless of the accuracy used.

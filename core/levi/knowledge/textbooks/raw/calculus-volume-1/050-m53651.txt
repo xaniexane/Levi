@@ -1,0 +1,285 @@
+# m53651
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Exponential Growth and Decay
+
+Exponential Growth and Decay
+
+Use the exponential growth model in applications, including population growth and compound interest.
+
+Explain the concept of doubling time.
+
+Use the exponential decay model in applications, including radioactive decay and Newton’s law of cooling.
+
+Explain the concept of half-life.
+
+One of the most prevalent applications of exponential functions involves growth and decay models. Exponential growth and decay show up in a host of natural applications. From population growth and continuously compounded interest to radioactive decay and Newton’s law of cooling, exponential functions are ubiquitous in nature. In this section, we examine exponential growth and decay in the context of some of these applications.
+
+Exponential Growth Model
+
+Many systems exhibit exponential growth. These systems follow a model of the form y=y0ekt, where y0 represents the initial state of the system and k is a positive constant, called the growth constant. Notice that in an exponential growth model, we have
+
+That is, the rate of growth is proportional to the current function value. This is a key feature of exponential growth. involves derivatives and is called a differential equation. We learn more about differential equations in Introduction to Differential Equations.
+
+Rule: Exponential Growth Model
+
+Systems that exhibit exponential growth increase according to the mathematical model
+
+where y0 represents the initial state of the system and k>0 is a constant, called the growth constant.
+Population growth is a common example of exponential growth. Consider a population of bacteria, for instance. It seems plausible that the rate of population growth would be proportional to the size of the population. After all, the more bacteria there are to reproduce, the faster the population grows. and represent the growth of a population of bacteria with an initial population of 200 bacteria and a growth constant of 0.02. Notice that after only 2 hours (120 minutes), the population is 10 times its original size!
+
+Exponential Growth of a Bacterial Population
+2205
+Note that we are using a continuous function to model what is inherently discrete behavior. At any given time, the real-world population contains a whole number of bacteria, although the model takes on noninteger values. When using exponential growth models, we must always be careful to interpret the function values in the context of the phenomenon we are modeling.
+
+Population Growth
+
+Consider the population of bacteria described earlier. This population grows according to the function f(t)=200e0.02t, where t is measured in minutes. How many bacteria are present in the population after 5 hours (300 minutes)? When does the population reach 100,000 bacteria?
+
+We have f(t)=200e0.02t. Then
+
+There are 80,686 bacteria in the population after 5 hours.
+
+To find when the population reaches 100,000 bacteria, we solve the equation
+
+The population reaches 100,000 bacteria after 310.73 minutes.
+
+Consider a population of bacteria that grows according to the function f(t)=500e0.05t, where t is measured in minutes. How many bacteria are present in the population after 4 hours? When does the population reach 100 million bacteria?
+
+There are 81,377,396 bacteria in the population after 4 hours. The population reaches 100 million bacteria after 244.12 minutes.
+
+Hint
+
+Use the process from the previous example.
+
+Let’s now turn our attention to a financial application: compound interest. Interest that is not compounded is called simple interest. Simple interest is paid once, at the end of the specified time period (usually 1 year). So, if we put $1000 in a savings account earning 2% simple interest per year, then at the end of the year we have
+
+Compound interest is paid multiple times per year, depending on the compounding period. Therefore, if the bank compounds the interest every 6 months, it credits half of the year’s interest to the account after 6 months. During the second half of the year, the account earns interest not only on the initial $1000, but also on the interest earned during the first half of the year. Mathematically speaking, at the end of the year, we have
+
+Similarly, if the interest is compounded every 4 months, we have
+
+and if the interest is compounded daily (365 times per year), we have $1020.20. If we extend this concept, so that the interest is compounded continuously, after t years we have
+
+Now let’s manipulate this expression so that we have an exponential growth function. Recall that the number e can be expressed as a limit:
+
+Based on this, we want the expression inside the parentheses to have the form (1+1/m). Let n=0.02m. Note that as n→∞, m→∞ as well. Then we get
+
+We recognize the limit inside the brackets as the number e. So, the balance in our bank account after t years is given by 1000e0.02t. Generalizing this concept, we see that if a bank account with an initial balance of $P earns interest at a rate of r%, compounded continuously, then the balance of the account after t years is
+
+Compound Interest
+
+A 25-year-old student is offered an opportunity to invest some money in a retirement account that pays 5% annual interest compounded continuously. How much does the student need to invest today to have $1 million when she retires at age 65? What if she could earn 6% annual interest compounded continuously instead?
+
+We have
+
+She must invest $135,335.28 at 5% interest.
+
+If, instead, she is able to earn 6%, then the equation becomes
+
+In this case, she needs to invest only $90,717.95. This is roughly two-thirds the amount she needs to invest at 5%. The fact that the interest is compounded continuously greatly magnifies the effect of the 1% increase in interest rate.
+
+Suppose instead of investing at age 25, the student waits until age 35. How much would she have to invest at 5%? At 6%?
+
+At 5% interest, she must invest $223,130.16. At 6% interest, she must invest $165,298.89.
+
+Hint
+
+Use the process from the previous example.
+
+If a quantity grows exponentially, the time it takes for the quantity to double remains constant. In other words, it takes the same amount of time for a population of bacteria to grow from 100 to 200 bacteria as it does to grow from 10,000 to 20,000 bacteria. This time is called the doubling time. To calculate the doubling time, we want to know when the quantity reaches twice its original size. So we have
+
+Definition
+
+If a quantity grows exponentially, the doubling time is the amount of time it takes the quantity to double. It is given by
+
+Using the Doubling Time
+
+Assume a population of fish grows exponentially. A pond is stocked initially with 500 fish. After 6 months, there are 1000 fish in the pond. The owner will allow his friends and neighbors to fish on his pond after the fish population reaches 10,000. When will the owner’s friends be allowed to fish?
+
+We know it takes the population of fish 6 months to double in size. So, if t represents time in months, by the doubling-time formula, we have 6=(ln2)/k. Then, k=(ln2)/6. Thus, the population is given by y=500e((ln2)/6)t. To figure out when the population reaches 10,000 fish, we must solve the following equation:
+
+The owner’s friends have to wait 25.93 months (a little more than 2 years) to fish in the pond.
+
+Suppose it takes 9 months for the fish population in to reach 1000 fish. Under these circumstances, how long do the owner’s friends have to wait?
+38.90 months
+
+Hint
+
+Use the process from the previous example.
+
+Exponential Decay Model
+
+Exponential functions can also be used to model populations that shrink (from disease, for example), or chemical compounds that break down over time. We say that such systems exhibit exponential decay, rather than exponential growth. The model is nearly the same, except there is a negative sign in the exponent. Thus, for some positive constant k, we have y=y0e−kt.
+
+As with exponential growth, there is a differential equation associated with exponential decay. We have
+
+Rule: Exponential Decay Model
+
+Systems that exhibit exponential decay behave according to the model
+
+where y0 represents the initial state of the system and k>0 is a constant, called the decay constant.
+
+The following figure shows a graph of a representative exponential decay function.
+
+Let’s look at a physical application of exponential decay. Newton’s law of cooling says that an object cools at a rate proportional to the difference between the temperature of the object and the temperature of the surroundings. In other words, if T represents the temperature of the object and Ta represents the ambient temperature in a room, then
+
+Note that this is not quite the right model for exponential decay. We want the derivative to be proportional to the function, and this expression has the additional Ta term. Fortunately, we can make a change of variables that resolves this issue. Let y(t)=T(t)−Ta. Then y′(t)=T′(t)−0=T′(t), and our equation becomes
+
+From our previous work, we know this relationship between y and its derivative leads to exponential decay. Thus,
+
+and we see that
+
+where T0 represents the initial temperature. Let’s apply this formula in the following example.
+
+Newton’s Law of Cooling
+
+According to experienced baristas, the optimal temperature to serve coffee is between 155°F and 175°F. Suppose coffee is poured at a temperature of 200°F, and after 2 minutes in a 70°F room it has cooled to 180°F. When is the coffee first cool enough to serve? When is the coffee too cold to serve? Round answers to the nearest half minute.
+
+We have
+
+Then, the model is
+
+The coffee reaches 175°F when
+
+The coffee can be served about 2.5 minutes after it is poured. The coffee reaches 155°F at
+
+The coffee is too cold to be served about 5 minutes after it is poured.
+
+Suppose the room is warmer (75°F) and, after 2 minutes, the coffee has cooled only to 185°F. When is the coffee first cool enough to serve? When is the coffee be too cold to serve? Round answers to the nearest half minute.
+
+The coffee is first cool enough to serve about 3.5 minutes after it is poured. The coffee is too cold to serve about 7 minutes after it is poured.
+
+Hint
+
+Use the process from the previous example.
+
+Just as systems exhibiting exponential growth have a constant doubling time, systems exhibiting exponential decay have a constant half-life. To calculate the half-life, we want to know when the quantity reaches half its original size. Therefore, we have
+Note: This is the same expression we came up with for doubling time.
+
+Definition
+
+If a quantity decays exponentially, the half-life is the amount of time it takes the quantity to be reduced by half. It is given by
+
+Radiocarbon Dating
+
+One of the most common applications of an exponential decay model is carbon dating. Carbon-14 decays (emits a radioactive particle) at a regular and consistent exponential rate. Therefore, if we know how much carbon was originally present in an object and how much carbon remains, we can determine the age of the object. The half-life of carbon-14 is approximately 5730 years—meaning, after that many years, half the material has converted from the original carbon-14 to the new nonradioactive nitrogen-14. If we have 100 g carbon-14 today, how much is left in 50 years? If an artifact that originally contained 100 g of carbon now contains 10 g of carbon, how old is it? Round the answer to the nearest hundred years.
+
+We have
+
+So, the model says
+
+In 50 years, we have
+
+Therefore, in 50 years, 99.40 g of carbon-14 remains.
+
+To determine the age of the artifact, we must solve
+
+The artifact is about 19,000 years old.
+
+If we have 100 g of carbon-14, how much is left after 500 years? If an artifact that originally contained 100 g of carbon now contains 20g of carbon, how old is it? Round the answer to the nearest hundred years.
+
+A total of 94.13 g of carbon remains. The artifact is approximately 13,300 years old.
+
+Hint
+
+Use the process from the previous example.
+
+Key Concepts
+
+Exponential growth and exponential decay are two of the most common applications of exponential functions.
+
+Systems that exhibit exponential growth follow a model of the form y=y0ekt.
+
+In exponential growth, the rate of growth is proportional to the quantity present. In other words, y′=ky.
+
+Systems that exhibit exponential growth have a constant doubling time, which is given by (ln2)/k.
+
+Systems that exhibit exponential decay follow a model of the form y=y0e−kt.
+
+Systems that exhibit exponential decay have a constant half-life, which is given by (ln2)/k.
+True or False? If true, prove it. If false, find the true answer.
+
+The doubling time for y=ect is (ln(2))/(ln(c)).
+
+If you invest $500, an annual rate of interest of 3% yields more money in the first year than a 2.5% continuous rate of interest.
+
+True
+
+If you leave a 100°C pot of tea at room temperature (25°C) and an identical pot in the refrigerator (5°C), with k=0.02, the tea in the refrigerator reaches a drinkable temperature (70°C) more than 5 minutes before the tea at room temperature.
+
+If given a half-life of t years, the constant k for y=ekt is calculated by k=ln(1/2)/t.
+
+False; k=ln(2)t
+
+For the following exercises, use y=y0ekt.
+
+If a culture of bacteria doubles in 3 hours, how many hours does it take to multiply by 10?
+
+If bacteria increase by a factor of 10 in 10 hours, how many hours does it take to increase by 100?
+20 hours
+
+How old is a skull that contains one-fifth as much radiocarbon as a modern skull? Note that the half-life of radiocarbon is 5730 years.
+
+If a relic contains 90% as much radiocarbon as new material, can it have come from the time of Christ (approximately 2000 years ago)? Note that the half-life of radiocarbon is 5730 years.
+
+No. The relic is approximately 871 years old.
+
+The population of Cairo grew from 5 million to 10 million in 20 years. Use an exponential model to find when the population was 8 million.
+
+The populations of New York and Los Angeles are growing at 1% and 1.4% a year, respectively. Starting from 8 million (New York) and 6 million (Los Angeles), when are the populations equal?
+71.92 years
+
+Suppose the value of $1 in Japanese yen decreases at 2% per year. Starting from $1=¥250, when will $1=¥1?
+
+The effect of advertising decays exponentially. If 40% of the population remembers a new product after 3 days, how long will 20% remember it?
+5 days 6 hours 27 minutes
+
+If y=1000 at t=3 and y=3000 at t=4, what was y0 at t=0?
+
+If y=100 at t=4 and y=10 at t=8, when does y=1?
+12
+
+If a bank offers annual interest of 7.5% or continuous interest of 7.25%, which has a better annual yield?
+
+What continuous interest rate has the same yield as an annual rate of 9%?
+8.618%
+
+If you deposit $5000 at 8% annual interest, how many years can you withdraw $500 (starting after the first year) without running out of money?
+
+You are trying to save $50,000 in 20 years for college tuition for your child. If interest is a continuous 10%, how much do you need to invest initially?
+$6766.76
+
+You are cooling a turkey that was taken out of the oven with an internal temperature of 165°F. After 10 minutes of resting the turkey in a 70°F apartment, the temperature has reached 155°F. What is the temperature of the turkey 20 minutes after taking it out of the oven?
+
+You are trying to thaw some vegetables that are at a temperature of 1°F. To thaw vegetables safely, you must put them in the refrigerator, which has an ambient temperature of 44°F. You check on your vegetables 2 hours after putting them in the refrigerator to find that they are now 12°F. Plot the resulting temperature curve and use it to determine when the vegetables reach 33°F.
+9 hours 13 minutes
+
+You are an archaeologist and are given a bone that is claimed to be from a Tyrannosaurus Rex. You know these dinosaurs lived during the Cretaceous Era (146 million years to 65 million years ago), and you find by radiocarbon dating that there is 0.000001% the amount of radiocarbon. Is this bone from the Cretaceous?
+
+The spent fuel of a nuclear reactor contains plutonium-239, which has a half-life of 24,000 years. If 1 barrel containing 10kg of plutonium-239 is sealed, how many years must pass until only 10g of plutonium-239 is left?
+239,179 years
+
+For the next set of exercises, use the following table, which features the world population by decade.
+
+Years since 1950
+[T] The best-fit exponential curve to the data of the form P(t)=aebt is given by P(t)=2686e0.01604t. Use a graphing calculator to graph the data and the exponential curve together.
+[T] Find and graph the derivative y′ of your equation. Where is it increasing and what is the meaning of this increase?
+P′(t)=43e0.01604t. The population is always increasing.
+[T] Find and graph the second derivative of your equation. Where is it increasing and what is the meaning of this increase?
+[T] Find the predicted date when the population reaches 10 billion. Using your previous answers about the first and second derivatives, explain why exponential growth is unsuccessful in predicting the future.
+
+The population reaches 10 billion people in 2027.
+
+For the next set of exercises, use the following table, which shows the population of San Francisco during the 19th century.
+[T] The best-fit exponential curve to the data of the form P(t)=aebt is given by P(t)=35.26e0.06407t. Use a graphing calculator to graph the data and the exponential curve together.
+[T] Find and graph the derivative y′ of your equation. Where is it increasing? What is the meaning of this increase? Is there a value where the increase is maximal?
+P′(t)=2.259e0.06407t. The population is always increasing.
+[T] Find and graph the second derivative of your equation. Where is it increasing? What is the meaning of this increase?
+
+if a quantity grows exponentially, the doubling time is the amount of time it takes the quantity to double, and is given by (ln2)/k
+systems that exhibit exponential decay follow a model of the form y=y0e−kt
+systems that exhibit exponential growth follow a model of the form y=y0ekt
+if a quantity decays exponentially, the half-life is the amount of time it takes the quantity to be reduced by half. It is given by (ln2)/k

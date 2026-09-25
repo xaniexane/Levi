@@ -1,0 +1,308 @@
+# m53578
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Derivatives of Trigonometric Functions
+
+Derivatives of Trigonometric Functions
+
+Find the derivatives of the sine and cosine function.
+
+Find the derivatives of the standard trigonometric functions.
+
+Calculate the higher-order derivatives of the sine and cosine.
+
+One of the most important types of motion in physics is simple harmonic motion, which is associated with such systems as an object with mass oscillating on a spring. Simple harmonic motion can be described by using either sine or cosine functions. In this section we expand our knowledge of derivative formulas to include derivatives of these and other trigonometric functions. We begin with the derivatives of the sine and cosine functions and then use them to obtain formulas for the derivatives of the remaining four trigonometric functions. Being able to calculate the derivatives of the sine and cosine functions will enable us to find the velocity and acceleration of simple harmonic motion.
+
+Derivatives of the Sine and Cosine Functions
+
+We begin our exploration of the derivative for the sine function by using the formula to make a reasonable guess at its derivative. Recall that for a function f(x),
+
+Consequently, for values of h very close to 0, f′(x)≈f(x+h)−f(x)h. We see that by using h=0.01,
+
+By setting D(x)=sin(x+0.01)−sinx0.01 and using a graphing utility, we can get a graph of an approximation to the derivative of sinx ().
+
+Upon inspection, the graph of D(x) appears to be very close to the graph of the cosine function. Indeed, we will show that
+
+If we were to follow the same steps to approximate the derivative of the cosine function, we would find that
+
+The Derivatives of sin x and cos x
+
+The derivative of the sine function is the cosine and the derivative of the cosine function is the negative sine.
+
+Proof
+
+Because the proofs for ddx(sinx)=cosx and ddx(cosx)=−sinx use similar techniques, we provide only the proof for ddx(sinx)=cosx. Before beginning, recall two important trigonometric limits we learned in Introduction to Limits:
+
+The graphs of y=(sinh)h and y=(cosh−1)h are shown in .
+
+We also recall the following trigonometric identity for the sine of the sum of two angles:
+
+Now that we have gathered all the necessary equations and identities, we proceed with the proof.
+
+□
+shows the relationship between the graph of f(x)=sinx and its derivative f′(x)=cosx. Notice that at the points where f(x)=sinx has a horizontal tangent, its derivative f′(x)=cosx takes on the value zero. We also see that where f(x)=sinx is increasing, f′(x)=cosx>0 and where f(x)=sinx is decreasing, f′(x)=cosx<0.
+
+Differentiating a Function Containing sin x
+
+Find the derivative of f(x)=5x3sinx.
+
+Using the product rule, we have
+
+After simplifying, we obtain
+
+Find the derivative of f(x)=sinxcosx.
+f′(x)=cos2x−sin2x
+
+Hint
+
+Don’t forget to use the product rule.
+
+Finding the Derivative of a Function Containing cos x
+
+Find the derivative of g(x)=cosx4x2.
+
+By applying the quotient rule, we have
+
+Simplifying, we obtain
+
+Find the derivative of f(x)=xcosx.
+cosx+xsinxcos2x
+
+Hint
+
+Use the quotient rule.
+
+An Application to Velocity
+
+A particle moves along a coordinate axis in such a way that its position at time t is given by s(t)=2sint−t for 0≤t≤2π. At what times is the particle at rest?
+
+To determine when the particle is at rest, set s′(t)=v(t)=0. Begin by finding s′(t). We obtain
+
+so we must solve
+
+The solutions to this equation are t=π3 and t=5π3. Thus the particle is at rest at times t=π3 and t=5π3.
+
+A particle moves along a coordinate axis. Its position at time t is given by s(t)=3t+2cost for 0≤t≤2π. At what times is the particle at rest?
+t=π3,t=2π3
+
+Hint
+
+Use the previous example as a guide.
+
+Derivatives of Other Trigonometric Functions
+
+Since the remaining four trigonometric functions may be expressed as quotients involving sine, cosine, or both, we can use the quotient rule to find formulas for their derivatives.
+
+The Derivative of the Tangent Function
+
+Find the derivative of f(x)=tanx.
+
+Start by expressing tanx as the quotient of sinx and cosx:
+
+Now apply the quotient rule to obtain
+
+Simplifying, we obtain
+
+Recognizing that cos2x+sin2x=1, by the Pythagorean theorem, we now have
+
+Finally, use the identity secx=1cosx to obtain
+
+Find the derivative of f(x)=cotx.
+f′(x)=−csc2x
+
+Hint
+
+Rewrite cotx as cosxsinx and use the quotient rule.
+
+The derivatives of the remaining trigonometric functions may be obtained by using similar techniques. We provide these formulas in the following theorem.
+
+Derivatives of tanx,cotx,secx, and cscx
+
+The derivatives of the remaining trigonometric functions are as follows:
+
+Finding the Equation of a Tangent Line
+
+Find the equation of a line tangent to the graph of f(x)=cotx at x=π4.
+
+To find the equation of the tangent line, we need a point and a slope at that point. To find the point, compute
+
+Thus the tangent line passes through the point (π4,1). Next, find the slope by finding the derivative of f(x)=cotx and evaluating it at π4:
+
+Using the point-slope equation of the line, we obtain
+
+or equivalently,
+
+Finding the Derivative of Trigonometric Functions
+
+Find the derivative of f(x)=cscx+xtanx.
+
+To find this derivative, we must use both the sum rule and the product rule. Using the sum rule, we find
+
+In the first term, ddx(cscx)=−cscxcotx, and by applying the product rule to the second term we obtain
+
+Therefore, we have
+
+Find the derivative of f(x)=2tanx−3cotx.
+f′(x)=2sec2x+3csc2x
+
+Hint
+
+Use the rule for differentiating a constant multiple and the rule for differentiating a difference of two functions.
+
+Find the slope of the line tangent to the graph of f(x)=tanx at x=π6.
+43
+
+Hint
+
+Evaluate the derivative at x=π6.
+
+Higher-Order Derivatives
+
+The higher-order derivatives of sinx and cosx follow a repeating pattern. By following the pattern, we can find any higher-order derivative of sinx and cosx.
+
+Finding Higher-Order Derivatives of y=sinx
+
+Find the first four derivatives of y=sinx.
+
+Each step in the chain is straightforward:
+
+Analysis
+
+Once we recognize the pattern of derivatives, we can find any higher-order derivative by determining the step in the pattern to which it corresponds. For example, every fourth derivative of sin x equals sin x, so
+
+For y=cosx, find d4ydx4.
+cosx
+
+Hint
+
+See the previous example.
+
+Using the Pattern for Higher-Order Derivatives of y=sinx
+
+Find d74dx74(sinx).
+
+We can see right away that for the 74th derivative of sinx,74=4(18)+2, so
+
+For y=sinx, find d59dx59(sinx).
+−cosx
+
+Hint
+d59dx59(sinx)=d4·14+3dx4·14+3(sinx)
+
+An Application to Acceleration
+
+A particle moves along a coordinate axis in such a way that its position at time t is given by s(t)=2−sint. Find v(π/4) and a(π/4). Compare these values and decide whether the particle is speeding up or slowing down.
+
+First find v(t)=s′(t):
+
+Thus,
+
+Next, find a(t)=v′(t). Thus, a(t)=v′(t)=sint and we have
+
+Since v(π4)=−12<0 and a(π4)=12>0, we see that velocity and acceleration are acting in opposite directions; that is, the object is being accelerated in the direction opposite to the direction in which it is travelling. Consequently, the particle is slowing down.
+
+A block attached to a spring is moving vertically. Its position at time t is given by s(t)=2sint. Find v(5π6) and a(5π6). Compare these values and decide whether the block is speeding up or slowing down.
+v(5π6)=−3<0 and a(5π6)=−1<0. The block is speeding up.
+
+Hint
+
+Use as a guide.
+
+Key Concepts
+
+We can find the derivatives of sin x and cos x by using the definition of derivative and the limit formulas found earlier. The results are
+ddxsinx=cosxddxcosx=−sinx.
+
+With these two formulas, we can determine the derivatives of all six basic trigonometric functions.
+
+Key Equations
+ddx(cscx)=−cscxcotx
+For the following exercises, find dydx for the given functions.
+y=x2−secx+1
+dydx=2x−secxtanx
+y=3cscx+5x
+y=x2cotx
+dydx=2xcotx−x2csc2x
+y=x−x3sinx
+y=secxx
+dydx=xsecxtanx−secxx2
+y=sinxtanx
+y=(x+cosx)(1−sinx)
+dydx=(1−sinx)(1−sinx)−cosx(x+cosx)
+y=tanx1−secx
+y=1−cotx1+cotx
+dydx=2csc2x(1+cotx)2
+y=cosx(1+cscx)
+
+For the following exercises, find the equation of the tangent line to each of the given functions at the indicated values of x. Then use a calculator to graph both the function and the tangent line to ensure the equation for the tangent line is correct.
+[T] f(x)=−sinx,x=0
+y=−x
+[T] f(x)=cscx,x=π2
+[T] f(x)=1+cosx,x=3π2
+y=x+2−3π2
+[T] f(x)=secx,x=π4
+[T] f(x)=x2−tanx,x=0
+y=−x
+[T] f(x)=5cotx,x=π4
+
+For the following exercises, find d2ydx2 for the given functions.
+y=xsinx−cosx
+3cosx−xsinx
+y=sinxcosx
+y=x−12sinx
+12sinx
+y=1x+tanx
+y=2cscx
+2cscx(csc2x+cot2x)
+y=sec2x
+
+Find all x values on the graph of f(x)=−3sinxcosx where the tangent line is horizontal.
+(2n+1)π4,wherenis an integer
+
+Find all x values on the graph of f(x)=x−2cosx for 0<x<2π where the tangent line has slope 2.
+
+Let f(x)=cotx. Determine the points on the graph of f for 0<x<2π where the tangent line(s) is (are) parallel to the line y=−2x.
+(π4, 1), (3π4, −1), (5π4, 1), (7π4, -1)
+[T] A mass on a spring bounces up and down in simple harmonic motion, modeled by the function s(t)=−6cost where s is measured in inches and t is measured in seconds. Find the rate at which the spring is oscillating at t=5 s.
+
+Let the position of a swinging pendulum in simple harmonic motion be given by s(t)=acost+bsint where a and b are constants, t measures time in seconds, and s measures position in centimeters. If the position is 0 cm and the velocity is 3 cm/s when t=0, find the values of a and b.
+a=0,b=3
+
+After a diver jumps off a diving board, the edge of the board oscillates with position given by s(t)=−5cost cm at t seconds after the jump.
+
+Sketch one period of the position function for t≥0.
+
+Find the velocity function.
+
+Sketch one period of the velocity function for t≥0.
+
+Determine the times when the velocity is 0 over one period.
+
+Find the acceleration function.
+
+Sketch one period of the acceleration function for t≥0.
+
+The number of hamburgers sold at a fast-food restaurant in Pasadena, California, is given by y=10+5sinx where y is the number of hamburgers sold and x represents the number of hours after the restaurant opened at 11 a.m. until 11 p.m., when the store closes. Find y′ and determine the intervals where the number of burgers being sold is increasing.
+y′=5cos(x), increasing on (0,π2),(3π2,5π2), and (7π2,12)
+[T] The amount of rainfall per month in Phoenix, Arizona, can be approximated by y(t)=0.5+0.3cost, where t is months since January. Find y′ and use a calculator to determine the intervals where the amount of rain falling is decreasing.
+
+For the following exercises, use the quotient rule to derive the given equations.
+ddx(cotx)=−csc2x
+ddx(secx)=secxtanx
+ddx(cscx)=−cscxcotx
+
+Use the definition of derivative and the identity
+cos(x+h)=cosxcosh−sinxsinh to prove that d(cosx)dx=−sinx.
+
+For the following exercises, find the requested higher-order derivative for the given functions.
+d3ydx3 of y=3cosx
+3sinx
+d2ydx2 of y=3sinx+x2cosx
+d4ydx4 of y=5cosx
+5cosx
+d2ydx2 of y=secx+cotx
+d3ydx3 of y=x10−secx
+720x7−5tan(x)sec3(x)−tan3(x)sec(x)

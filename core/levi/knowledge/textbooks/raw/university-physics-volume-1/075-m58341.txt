@@ -1,0 +1,256 @@
+# m58341
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Examples of Static Equilibrium
+
+Examples of Static Equilibrium
+
+By the end of this section, you will be able to:
+
+Identify and analyze static equilibrium situations
+
+Set up a free-body diagram for an extended object in static equilibrium
+
+Set up and solve static equilibrium conditions for objects in equilibrium in various physical situations
+
+All examples in this chapter are planar problems. Accordingly, we use equilibrium conditions in the component form of to . We introduced a problem-solving strategy in to illustrate the physical meaning of the equilibrium conditions. Now we generalize this strategy in a list of steps to follow when solving static equilibrium problems for extended rigid bodies. We proceed in five practical steps.
+
+Static Equilibrium
+
+Identify the object to be analyzed. For some systems in equilibrium, it may be necessary to consider more than one object. Identify all forces acting on the object. Identify the questions you need to answer. Identify the information given in the problem. In realistic problems, some key information may be implicit in the situation rather than provided explicitly.
+
+Set up a free-body diagram for the object. (a) Choose the xy-reference frame for the problem. Draw a free-body diagram for the object, including only the forces that act on it. When suitable, represent the forces in terms of their components in the chosen reference frame. As you do this for each force, cross out the original force so that you do not erroneously include the same force twice in equations. Label all forces—you will need this for correct computations of net forces in the x- and y-directions. For an unknown force, the direction must be assigned arbitrarily; think of it as a ‘working direction’ or ‘suspected direction.’ The correct direction is determined by the sign that you obtain in the final solution. A plus sign (+) means that the working direction is the actual direction. A minus sign (−) means that the actual direction is opposite to the assumed working direction. (b) Choose the location of the rotation axis; in other words, choose the pivot point with respect to which you will compute torques of acting forces. On the free-body diagram, indicate the location of the pivot and the lever arms of acting forces—you will need this for correct computations of torques. In the selection of the pivot, keep in mind that the pivot can be placed anywhere you wish, but the guiding principle is that the best choice will simplify as much as possible the calculation of the net torque along the rotation axis.
+
+Set up the equations of equilibrium for the object. (a) Use the free-body diagram to write a correct equilibrium condition for force components in the x-direction. (b) Use the free-body diagram to write a correct equilibrium condition for force components in the y-direction. (c) Use the free-body diagram to write a correct equilibrium condition for torques along the axis of rotation. Use to evaluate torque magnitudes and senses.
+
+Simplify and solve the system of equations for equilibrium to obtain unknown quantities. At this point, your work involves algebra only. Keep in mind that the number of equations must be the same as the number of unknowns. If the number of unknowns is larger than the number of equations, the problem cannot be solved.
+
+Evaluate the expressions for the unknown quantities that you obtained in your solution. Your final answers should have correct numerical values and correct physical units. If they do not, then use the previous steps to track back a mistake to its origin and correct it. Also, you may independently check for your numerical answers by shifting the pivot to a different location and solving the problem again, which is what we did in .
+
+Note that setting up a free-body diagram for a rigid-body equilibrium problem is the most important component in the solution process. Without the correct setup and a correct diagram, you will not be able to write down correct conditions for equilibrium. Also note that a free-body diagram for an extended rigid body that may undergo rotational motion is different from a free-body diagram for a body that experiences only translational motion (as you saw in the chapters on Newton’s laws of motion). In translational dynamics, a body is represented as its CM, where all forces on the body are attached and no torques appear. This does not hold true in rotational dynamics, where an extended rigid body cannot be represented by one point alone. The reason for this is that in analyzing rotation, we must identify torques acting on the body, and torque depends both on the acting force and on its lever arm. Here, the free-body diagram for an extended rigid body helps us identify external torques.
+The Torque Balance
+Three masses are attached to a uniform meter stick, as shown in . The mass of the meter stick is 150.0 g and the masses to the left of the fulcrum are m1=50.0g and m2=75.0g. Find the mass m3 that balances the system when it is attached at the right end of the stick, and the normal reaction force at the fulcrum when the system is balanced.
+
+The Torque Balance
+Strategy
+For the arrangement shown in the figure, we identify the following five forces acting on the meter stick:
+
+Strategy
+w1=m1g is the weight of mass m1; w2=m2g is the weight of mass m2;
+w=mg is the weight of the entire meter stick; w3=m3g is the weight of unknown mass m3;
+FS is the normal reaction force at the support point S.
+
+We choose a frame of reference where the direction of the y-axis is the direction of gravity, the direction of the x-axis is along the meter stick, and the axis of rotation (the z-axis) is perpendicular to the x-axis and passes through the support point S. In other words, we choose the pivot at the point where the meter stick touches the support. This is a natural choice for the pivot because this point does not move as the stick rotates. Now we are ready to set up the free-body diagram for the meter stick. We indicate the pivot and attach five vectors representing the five forces along the line representing the meter stick, locating the forces with respect to the pivot . At this stage, we can identify the lever arms of the five forces given the information provided in the problem. For the three hanging masses, the problem is explicit about their locations along the stick, but the information about the location of the weight w is given implicitly. The key word here is “uniform.” We know from our previous studies that the CM of a uniform stick is located at its midpoint, so this is where we attach the weight w, at the 50-cm mark.
+Solution
+With and for reference, we begin by finding the lever arms of the five forces acting on the stick:
+
+Solution
+
+Now we can find the five torques with respect to the chosen pivot:
+
+The second equilibrium condition (equation for the torques) for the meter stick is
+
+When substituting torque values into this equation, we can omit the torques giving zero contributions. In this way the second equilibrium condition is
+
+Selecting the +y-direction to be parallel to F→S, the first equilibrium condition for the stick is
+
+Substituting the forces, the first equilibrium condition becomes
+
+We solve these equations simultaneously for the unknown values m3 and FS. In , we cancel the g factor and rearrange the terms to obtain
+
+To obtain m3 we divide both sides by r3, so we have
+
+To find the normal reaction force, we rearrange the terms in , converting grams to kilograms:
+Significance
+Notice that is independent of the value of g. The torque balance may therefore be used to measure mass, since variations in g-values on Earth’s surface do not affect these measurements. This is not the case for a spring balance because it measures the force.
+
+Significance
+
+Repeat using the left end of the meter stick to calculate the torques; that is, by placing the pivot at the left end of the meter stick.
+
+316.7 g; 5.8 N
+
+In the next example, we show how to use the first equilibrium condition (equation for forces) in the vector form given by and . We present this solution to illustrate the importance of a suitable choice of reference frame. Although all inertial reference frames are equivalent and numerical solutions obtained in one frame are the same as in any other, an unsuitable choice of reference frame can make the solution quite lengthy and convoluted, whereas a wise choice of reference frame makes the solution straightforward. We show this in the equivalent solution to the same problem. This particular example illustrates an application of static equilibrium to biomechanics.
+Forces in the Forearm
+A weightlifter is holding a 50.0-lb weight (equivalent to 222.4 N) with his forearm, as shown in . His forearm is positioned at β=60° with respect to his upper arm. The forearm is supported by a contraction of the biceps muscle, which causes a torque around the elbow. Assuming that the tension in the biceps acts along the vertical direction given by gravity, what tension must the muscle exert to hold the forearm at the position shown? What is the force on the elbow joint? Assume that the forearm’s weight is negligible. Give your final answers in SI units.
+
+Forces in the Forearm
+Strategy
+We identify three forces acting on the forearm: the unknown force F→ at the elbow; the unknown tension T→M in the muscle; and the weight w→ with magnitude w=50lb. We adopt the frame of reference with the x-axis along the forearm and the pivot at the elbow. The vertical direction is the direction of the weight, which is the same as the direction of the upper arm. The x-axis makes an angle β=60° with the vertical. The y-axis is perpendicular to the x-axis. Now we set up the free-body diagram for the forearm. First, we draw the axes, the pivot, and the three vectors representing the three identified forces. Then we locate the angle β and represent each force by its x- and y-components, remembering to cross out the original force vector to avoid double counting. Finally, we label the forces and their lever arms. The free-body diagram for the forearm is shown in . At this point, we are ready to set up equilibrium conditions for the forearm. Each force has x- and y-components; therefore, we have two equations for the first equilibrium condition, one equation for each component of the net force acting on the forearm.
+
+Strategy
+
+Notice that in our frame of reference, contributions to the second equilibrium condition (for torques) come only from the y-components of the forces because the x-components of the forces are all parallel to their lever arms, so that for any of them we have sinθ=0 in . For the y-components we have θ=±90° in . Also notice that the torque of the force at the elbow is zero because this force is attached at the pivot. So the contribution to the net torque comes only from the torques of Ty and of wy.
+Solution
+We see from the free-body diagram that the x-component of the net force satisfies the equation
+
+Solution
+
+and the y-component of the net force satisfies
+and are two equations of the first equilibrium condition (for forces). Next, we read from the free-body diagram that the net torque along the axis of rotation is
+is the second equilibrium condition (for torques) for the forearm. The free-body diagram shows that the lever arms are rT=1.5in. and rw=13.0in. At this point, we do not need to convert inches into SI units, because as long as these units are consistent in , they cancel out. Using the free-body diagram again, we find the magnitudes of the component forces:
+
+We substitute these magnitudes into , , and to obtain, respectively,
+
+When we simplify these equations, we see that we are left with only two independent equations for the two unknown force magnitudes, F and T, because for the x-component is equivalent to for the y-component. In this way, we obtain the first equilibrium condition for forces
+
+and the second equilibrium condition for torques
+
+The magnitude of tension in the muscle is obtained by solving :
+
+The force at the elbow is obtained by solving :
+
+The negative sign in the equation tells us that the actual force at the elbow is antiparallel to the working direction adopted for drawing the free-body diagram. In the final answer, we convert the forces into SI units of force. The answer is
+Significance
+Two important issues here are worth noting. The first concerns conversion into SI units, which can be done at the very end of the solution as long as we keep consistency in units. The second important issue concerns the hinge joints such as the elbow. In the initial analysis of a problem, hinge joints should always be assumed to exert a force in an arbitrary direction, and then you must solve for all components of a hinge force independently. In this example, the elbow force happens to be vertical because the problem assumes the tension by the biceps to be vertical as well. Such a simplification, however, is not a general rule.
+
+Significance
+Solution
+Suppose we adopt a reference frame with the direction of the y-axis along the 50-lb weight and the pivot placed at the elbow. In this frame, all three forces have only y-components, so we have only one equation for the first equilibrium condition (for forces). We draw the free-body diagram for the forearm as shown in , indicating the pivot, the acting forces and their lever arms with respect to the pivot, and the angles θT and θw that the forces T→M and w→ (respectively) make with their lever arms. In the definition of torque given by , the angle θT is the direction angle of the vector T→M, counted counterclockwise from the radial direction of the lever arm that always points away from the pivot. By the same convention, the angle θw is measured counterclockwise from the radial direction of the lever arm to the vector w→. Done this way, the non-zero torques are most easily computed by directly substituting into as follows:
+
+Solution
+
+The second equilibrium condition, τT+τw=0, can be now written as
+
+From the free-body diagram, the first equilibrium condition (for forces) is
+is identical to and gives the result T=433.3lb. gives
+
+We see that these answers are identical to our previous answers, but the second choice for the frame of reference leads to an equivalent solution that is simpler and quicker because it does not require that the forces be resolved into their rectangular components.
+
+Repeat assuming that the forearm is an object of uniform density that weighs 8.896 N.
+T=1963 N;F=1732N
+A Ladder Resting Against a Wall
+A uniform ladder is L=5.0m long and weighs 400.0 N. The ladder rests against a slippery vertical wall, as shown in . The inclination angle between the ladder and the rough floor is β=53°. Find the reaction forces from the floor and from the wall on the ladder and the coefficient of static friction μs at the interface of the ladder with the floor that prevents the ladder from slipping.
+
+A Ladder Resting Against a Wall
+Strategy
+We can identify four forces acting on the ladder. The first force is the normal reaction force N from the floor in the upward vertical direction. The second force is the static friction force f=μsN directed horizontally along the floor toward the wall—this force prevents the ladder from slipping. These two forces act on the ladder at its contact point with the floor. The third force is the weight w of the ladder, attached at its CM located midway between its ends. The fourth force is the normal reaction force F from the wall in the horizontal direction away from the wall, attached at the contact point with the wall. There are no other forces because the wall is slippery, which means there is no friction between the wall and the ladder. Based on this analysis, we adopt the frame of reference with the y-axis in the vertical direction (parallel to the wall) and the x-axis in the horizontal direction (parallel to the floor). In this frame, each force has either a horizontal component or a vertical component but not both, which simplifies the solution. We select the pivot at the contact point with the floor. In the free-body diagram for the ladder, we indicate the pivot, all four forces and their lever arms, and the angles between lever arms and the forces, as shown in . With our choice of the pivot location, there is no torque either from the normal reaction force N or from the static friction f because they both act at the pivot.
+
+Strategy
+Solution
+From the free-body diagram, the net force in the x-direction is
+
+Solution
+
+the net force in the y-direction is
+
+and the net torque along the rotation axis at the pivot point is
+
+where τw is the torque of the weight w and τF is the torque of the reaction F. From the free-body diagram, we identify that the lever arm of the reaction at the wall is rF=L=5.0m and the lever arm of the weight is rw=L/2=2.5m. With the help of the free-body diagram, we identify the angles to be used in for torques: θF=180°−β for the torque from the reaction force with the wall, and θw=180°+(90°−β) for the torque due to the weight. Now we are ready to use to compute torques:
+
+We substitute the torques into and solve for F:
+
+We obtain the normal reaction force with the floor by solving : N=w=400.0N. The magnitude of friction is obtained by solving : f=F=150.7N. The coefficient of static friction is μs=f/N=150.7/400.0=0.377.
+
+The net force on the ladder at the contact point with the floor is the vector sum of the normal reaction from the floor and the static friction forces:
+
+Its magnitude is
+
+and its direction is
+
+We should emphasize here two general observations of practical use. First, notice that when we choose a pivot point, there is no expectation that the system will actually pivot around the chosen point. The ladder in this example is not rotating at all but firmly stands on the floor; nonetheless, its contact point with the floor is a good choice for the pivot. Second, notice when we use for the computation of individual torques, we do not need to resolve the forces into their normal and parallel components with respect to the direction of the lever arm, and we do not need to consider a sense of the torque. As long as the angle in is correctly identified—with the help of a free-body diagram—as the angle measured counterclockwise from the direction of the lever arm to the direction of the force vector, gives both the magnitude and the sense of the torque. This is because torque is the vector product of the lever-arm vector crossed with the force vector, and expresses the rectangular component of this vector product along the axis of rotation.
+Significance
+This result is independent of the length of the ladder because L is cancelled in the second equilibrium condition, . No matter how long or short the ladder is, as long as its weight is 400 N and the angle with the floor is 53°, our results hold. But the ladder will slip if the net torque becomes negative in . This happens for some angles when the coefficient of static friction is not great enough to prevent the ladder from slipping.
+
+Significance
+
+For the situation described in , determine the values of the coefficient μs of static friction for which the ladder starts slipping, given that β is the angle that the ladder makes with the floor.
+μs<0.5cotβ
+Forces on Door Hinges
+A swinging door that weighs w=400.0N is supported by hinges A and B so that the door can swing about a vertical axis passing through the hinges . The door has a width of b=1.00m, and the door slab has a uniform mass density. The hinges are placed symmetrically at the door’s edge in such a way that the door’s weight is evenly distributed between them. The hinges are separated by distance a=2.00m. Find the forces on the hinges when the door rests half-open.
+
+Forces on Door Hinges
+Strategy
+The forces that the door exerts on its hinges can be found by simply reversing the directions of the forces that the hinges exert on the door. Hence, our task is to find the forces from the hinges on the door. Three forces act on the door slab: an unknown force A→ from hinge A, an unknown force B→ from hinge B, and the known weight w→ attached at the center of mass of the door slab. The CM is located at the geometrical center of the door because the slab has a uniform mass density. We adopt a rectangular frame of reference with the y-axis along the direction of gravity and the x-axis in the plane of the slab, as shown in panel (a) of , and resolve all forces into their rectangular components. In this way, we have four unknown component forces: two components of force A→ (Ax and Ay), and two components of force B→ (Bx and By). In the free-body diagram, we represent the two forces at the hinges by their vector components, whose assumed orientations are arbitrary. Because there are four unknowns (Ax, Bx, Ay, and By), we must set up four independent equations. One equation is the equilibrium condition for forces in the x-direction. The second equation is the equilibrium condition for forces in the y-direction. The third equation is the equilibrium condition for torques in rotation about a hinge. Because the weight is evenly distributed between the hinges, we have the fourth equation, Ay=By. To set up the equilibrium conditions, we draw a free-body diagram and choose the pivot point at the upper hinge, as shown in panel (b) of . Finally, we solve the equations for the unknown force components and find the forces.
+
+Strategy
+Solution
+From the free-body diagram for the door we have the first equilibrium condition for forces:
+
+Solution
+
+We select the pivot at point P (upper hinge, per the free-body diagram) and write the second equilibrium condition for torques in rotation about point P:
+
+We use the free-body diagram to find all the terms in this equation:
+
+In evaluating sinβ, we use the geometry of the triangle shown in part (a) of the figure. Now we substitute these torques into and compute Bx:
+
+Therefore the magnitudes of the horizontal component forces are Ax=Bx=100.0N. The forces on the door are
+
+The forces on the hinges are found from Newton’s third law as
+Significance
+Note that if the problem were formulated without the assumption of the weight being equally distributed between the two hinges, we wouldn’t be able to solve it because the number of the unknowns would be greater than the number of equations expressing equilibrium conditions.
+
+Significance
+
+Solve the problem in by taking the pivot position at the center of mass.
+F→door onA=100.0Ni^−200.0Nj^;F→door onB=−100.0Ni^−200.0Nj^
+
+A 50-kg person stands 1.5 m away from one end of a uniform 6.0-m-long scaffold of mass 70.0 kg. Find the tensions in the two vertical ropes supporting the scaffold.
+
+711.0 N; 466.0 N
+
+A 400.0-N sign hangs from the end of a uniform strut. The strut is 4.0 m long and weighs 600.0 N. The strut is supported by a hinge at the wall and by a cable whose other end is tied to the wall at a point 3.0 m above the left end of the strut. Find the tension in the supporting cable and the force of the hinge on the strut.
+
+1167 N; 980 N directed upward at 18° above the horizontal
+
+Summary
+
+A variety of engineering problems can be solved by applying equilibrium conditions for rigid bodies.
+
+In applications, identify all forces that act on a rigid body and note their lever arms in rotation about a chosen rotation axis. Construct a free-body diagram for the body. Net external forces and torques can be clearly identified from a correctly constructed free-body diagram. In this way, you can set up the first equilibrium condition for forces and the second equilibrium condition for torques.
+
+In setting up equilibrium conditions, we are free to adopt any inertial frame of reference and any position of the pivot point. All choices lead to one answer. However, some choices can make the process of finding the solution unduly complicated. We reach the same answer no matter what choices we make. The only way to master this skill is to practice.
+
+Conceptual Questions
+
+Is it possible to rest a ladder against a rough wall when the floor is frictionless?
+
+Show how a spring scale and a simple fulcrum can be used to weigh an object whose weight is larger than the maximum reading on the scale.
+
+(Proof)
+
+A painter climbs a ladder. Is the ladder more likely to slip when the painter is near the bottom or near the top?
+
+Problems
+
+A uniform plank rests on a level surface as shown below. The plank has a mass of 30 kg and is 6.0 m long. How much mass can be placed at its right end before it tips? (Hint: When the board is about to tip over, it makes contact with the surface only along the edge that becomes a momentary axis of rotation.)
+
+The uniform seesaw shown below is balanced on a fulcrum located 3.0 m from the left end. The smaller boy on the right has a mass of 40 kg and the bigger boy on the left has a mass 80 kg. What is the mass of the board?
+
+40 kg
+
+In order to get his car out of the mud, a man ties one end of a rope to the front bumper and the other end to a tree 15 m away, as shown below. He then pulls on the center of the rope with a force of 400 N, which causes its center to be displaced 0.30 m, as shown. What is the force of the rope on the car?
+
+A uniform 40.0-kg scaffold of length 6.0 m is supported by two light cables, as shown below. An 80.0-kg painter stands 1.0 m from the left end of the scaffold, and his painting equipment is 1.5 m from the right end. If the tension in the left cable is twice that in the right cable, find the tensions in the cables and the mass of the equipment.
+
+right cable, 444.3 N; left cable, 888.5 N; weight of equipment 156.8 N; 16.0 kg
+
+When the structure shown below is supported at point P, it is in equilibrium. Find the magnitude of force F and the force applied at P. The weight of the structure is negligible.
+
+To get up on the roof, a person (mass 70.0 kg) places a 6.00-m aluminum ladder (mass 10.0 kg) against the house on a concrete pad with the base of the ladder 2.00 m from the house. The ladder rests against a plastic rain gutter, which we can assume to be frictionless. The center of mass of the ladder is 2.00 m from the bottom. The person is standing 3.00 m from the bottom. Find the normal reaction and friction forces on the ladder at its base.
+
+784 N, 132.8 N
+
+A uniform horizontal strut weighs 400.0 N. One end of the strut is attached to a hinged support at the wall, and the other end of the strut is attached to a sign that weighs 200.0 N. The strut is also supported by a cable attached between the end of the strut and the wall. Assuming that the entire weight of the sign is attached at the very end of the strut, find the tension in the cable and the force at the hinge of the strut.
+
+The forearm shown below is positioned at an angle θ with respect to the upper arm, and a 5.0-kg mass is held in the hand. The total mass of the forearm and hand is 3.0 kg, and their center of mass is 15.0 cm from the elbow. (a) What is the magnitude of the force that the biceps muscle exerts on the forearm for θ=60°? (b) What is the magnitude of the force on the elbow joint for the same angle? (c) How do these forces depend on the angle θ?
+
+a. 539 N; b. 461 N; c. do not depend on the angle
+
+The uniform boom shown below weighs 3000 N. It is supported by the horizontal guy wire and by the hinged support at point A. What are the forces on the boom due to the wire and due to the support at A? Does the force at A act along the boom?
+
+The uniform boom shown below weighs 700 N, and the object hanging from its right end weighs 400 N. The boom is supported by a light cable and by a hinge at the wall. Calculate the tension in the cable and the force on the hinge on the boom. Does the force on the hinge act along the boom?
+
+tension 778 N; at hinge 778 N at 45° above the horizontal; no
+
+A 12.0-m boom, AB, of a crane lifting a 3000-kg load is shown below. The center of mass of the boom is at its geometric center, and the mass of the boom is 1000 kg. For the position shown, calculate tension T in the cable and the force at the axle A.
+
+A uniform trapdoor shown below is 1.0 m by 1.5 m and weighs 300 N. It is supported by a single hinge (H), and by a light rope tied between the middle of the door and the floor. The door is held at the position shown, where its slab makes a 30° angle with the horizontal floor and the rope makes a 20° angle with the floor. Find the tension in the rope and the force at the hinge.
+
+1500 N; 1620 N at 30°
+
+A 90-kg man walks on a sawhorse, as shown below. The sawhorse is 2.0 m long and 1.0 m high, and its mass is 25.0 kg. Calculate the normal reaction force on each leg at the contact point with the floor when the man is 0.5 m from the far end of the sawhorse. (Hint: At each end, find the total reaction force first. This reaction force is the vector sum of two reaction forces, each acting along one leg. The normal reaction force at the contact point with the floor is the normal (with respect to the floor) component of this force.)

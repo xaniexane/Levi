@@ -1,0 +1,43 @@
+# m00026
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+A string is a sequence of values that represents Unicode code points.
+
+An index refers to the position of a value in a sequence (string, list, tuple).
+
+Positive indexes range from 0 to length–1. Negative indexes range from –1 to –length.
+
+F-strings are a convenient way to print multiple outputs and format integers and floats.
+
+Variables refer to objects. Memory diagrams are useful for drawing variables and objects.
+
+A list object can be used to refer to multiple objects, by index, using the same variable.
+
+A tuple is similar to a list, but uses parentheses and cannot be changed once created.
+
+Chapter 3 reference.
+
+Code
+ord(c)
+chr(i)
+'\n'
+'\t'
+f"{number:.02d}"
+f"{number:.2f}"
+id(object)
+type(object)
+my_list = ["a", "b", "c"]
+my_tuple = ("a", "b", "c")
+Gets the first element ("a") of my_tuple.
+Gets the first element ("a") of my_tuple.
+Gets the last element ("c") of my_tuple.
+Gets the last element ("c") of my_tuple.

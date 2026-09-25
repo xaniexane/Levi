@@ -1,0 +1,157 @@
+# m00092
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Customizing Forms
+
+Customizing Forms
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Use the tools to build a custom form
+
+Modify and add controls to a form
+
+Customize the appearance of a form by including images and modifying fonts
+
+WorldCorp has manufacturing locations in the United States, China, and Germany, with headquarters in key metropolitan areas in those same countries. Smaller functional units are located in offices around the world, and there is an established international remote workforce. As you continue to develop an inventory database for potential retail locations its customers experience, forms will help users add data records to fields within tables. Those working in the new retail locations become the users of forms. As they receive shipments of inventory or create sales transactions for customers, their input is what truly creates the data. Above all, a form should be functional for them. Beyond functionality, a form that is customized in a way that makes it easier and faster to use will create a more enjoyable user experience. Consider our diverse workforce around the world. Knowing how to customize a form for cultural business practices is crucial in supporting the user. This will be no different as you develop and design an inventory database for a potential booming retail arm of WorldCorp.
+
+Typically, one of the first forms all users experience is the Main Menu at WorldCorp, which helps them navigate through all the other forms available to them in the database. Rather than scrolling through the entire list, the user can go to the Main Menu, a starting point for all navigation.
+
+A quick way to prioritize a Main Menu for any graphical user interface is to manage its settings. A Main Menu can be created either all at once quickly or over time, and the process can be creative and fun. Be sure to set the Display Form option to Main Menu so that when the database is first opened, the Main Menu form is opened up and ready for the user.
+
+This video on creating a menu GUI in Access 2013 discusses the basic steps in creating a Main Menu and, most important, walks through the display options.
+
+Building a Custom Form
+
+In general, using the Form Wizard will be the quickest and most efficient way to create a custom form. We covered how to do that in Understanding and Using Databases. Here, however, we will walk through the steps of building a form from scratch, in Design View, to demonstrate all of the possibilities. Start by selecting the Query Design option under the Create tab in Access, and you will create a blank form in which you can start working. shows the Detail section that appears when you create a blank form.
+
+The next step is to save the form (frmMainMenu) and start planning how you want the Main Menu to look and operate.
+
+Form Views and Tools
+
+Right-click on the top of the form to see the list of options, as shows. Here, we will review the four ways to view a form: Form View, Layout View, Design View, and Datasheet View.
+
+Form View
+Form View shows us what the form will look like for the user. Data can be changed in Form View, but formatting cannot be changed. Whenever a form is launched, it will first be displayed in Form View. It is recommended to continually check the Form View while creating a form to make sure that the final version of the form displays all of the desired options.
+
+Layout View
+Layout View is a feature that allows us to design and customize the layout of forms and reports visually, by dragging and dropping fields and other objects onto the design surface. It is helpful for inexperienced users because it provides a more intuitive and user-friendly way to create forms and reports than the traditional Design View. In Layout View, you can see how your form or report will look as you design it, and you can easily move fields and other objects around to create the desired layout.
+
+For example, let’s say you want to create a form to enter data about damaged items that need to be removed from inventory. In Layout View, you can drag and drop fields such as Item Name, UPC Code, Quantity, Description of Damage, and Date onto the form, and then arrange them in a way that makes sense for your users. You can also add other objects such as labels, images, and buttons to make the form more user-friendly. Overall, Layout View is a helpful tool for creating forms and reports in Access, particularly for the least experienced users, who may not be familiar with the intricacies of Design View.
+
+Design View
+Design View is a feature that allows us to create and modify the structure of tables, queries, forms, and reports in a more detailed and precise way. Similar to Layout View, in Design View for forms and reports, you can add and arrange fields, labels, buttons, and other objects, and set their properties to control their behavior and appearance. However, Design View provides a more granular level of control over the structure and properties of your database objects, allowing you to create more complex and customized solutions. It also allows you to view and modify the underlying SQL code that Access generates for your objects, which can be helpful for troubleshooting and advanced customization.
+
+Design view is a powerful tool for creating and customizing the structure and functionality of tables, queries, forms, and reports in Access, and is helpful for naive users who want to create more complex and customized solutions.
+
+Datasheet View
+Datasheet View is similar to what you might see in a spreadsheet program. The data is in a table grid like Excel. This allows you to interact with the information in a form similar to how you would work in Excel. You can add or delete records (rows) and add or delete fields (columns) easily in this view. You can also use some of the common keyboard shortcuts for copy and paste.
+
+Having this view option can depend on which version of Access you are using. As of 2021, Datasheet View was removed from forms in Access. So, if you are using a new version of the app, you will likely not have the Datasheet View option.
+
+Using the Form Tool
+
+A list of form tools is available within the Form Design tab on the right side of the ribbon. To add existing fields to a form, click the Add Existing Fields command (see ). The Field List pane will appear, and you can select a field or fields to add to your form.
+
+An option set in Design View on the property sheet is called a form property. These options control how the form looks, works, and interacts with the rest of the database. Use the tabs to find the specific property you want to set, and use the help available to you in the bottom-left corner of the Access window to learn the function of each property setting. In many cases, the default setting may be adequate for getting started.
+
+You can use tab order to help control which section of the form the cursor moves to next. This feature provides ease-of-use for gathering data in a user-friendly way. When adjusting tab order, always consider the layout of the form: What is the first thing the user will do, what is next, and so on? Also consider omitting any fields the user will simply tab through—for example, autonumber fields. These types of fields can be omitted altogether for a better user interface experience.
+
+Using the Split Form Tool
+
+After building a table, you can create a split form. Select the table from the All Access Objects list and then go to the Create tab. Under More Forms, select Split Form. In this example, , you can collect a list of your favorite jokes. The split form shows the datasheet (a running list of jokes) in the lower section, outlined in yellow, while allowing access to the single-form information outlined at the top.
+
+Using a split form may be helpful when you are scrolling through a datasheet to make changes, because it enables you to highlight a row of data in the single-form view. As you have seen, a common theme in form design is making the process easy and intuitive for the user.
+
+Adding Controls to a Form
+
+A form control is the part of a form that is used to enter, edit, or display data. Remember that controls can be bound, unbound, or calculated. In Understanding and Using Databases, we covered how to use the Control Wizard to walk you through adding controls to your form. Here, we will go into more detail about the different types of controls you can add, and how to add them without the wizard.
+
+As an example of adding controls, start by creating a Main Menu for a multiuser-friendly database, using the example of a carpeting business, as shows.
+
+When helping a customer, an agent of the business would begin by opening the Main Menu form. Notice that a form control, Carpet Calculator, has been added to the Main Menu as the first control. To respond to a customer’s call, the agent will most likely need a form to calculate a potential quote for a project. The form control that was added is a button, one of many options available in the Controls section of Form Design.
+
+Common Controls
+
+Controls can be placed on forms to add to their functionality. This section walks you through the procedure for adding several common controls.
+
+The command control is used to start an action or a set of actions. For example, the button in is designed to open the Carpet Calculator form. The Command Button Wizard shown in appears automatically when you add a button to a form in Design View. When you select Form Operations within the Categories field, followed by Open Form within the Actions list, the wizard records a macro or event procedure and attaches it to the command button’s On Click property.
+
+Text Boxes
+
+Text boxes are great items to elevate the use and function of any form. They can be bound to a field or unbound. You can use an unbound text box to display the results of a calculation or to accept input that you don’t want to store directly in a table, such as the current date and time—information that is not connected to a field in a table or query.
+
+It is easiest to add an unbound text box in Design View. On the Design tab, in the Controls group, click Text Box. Position the pointer where you want the text box to be placed on the form or report, and then click to insert the text box (outlined in yellow in ). In this example, the expression =Now() was added to the unbound text box within the property sheet (circled). (Note that Access also places a label to the left of the text box. In this example, the label was deleted, as the current date and time do not require a label.)
+
+Combo Boxes
+
+A combo box is an object or control that you can also place on a form. It displays a list of values from which a user can quickly select. The values displayed within a combo box can be populated by a table/query, value list, or field list. Combo boxes are commonly used in forms to provide users with a list of choices to select from, while also allowing them to enter a new value if none of the predefined options meet their needs.
+
+Combo boxes are helpful for numerous reasons. As an example, they can simplify data entry by providing users with a list of predefined options to choose from, which can help reduce errors and ensure data consistency. In addition, combo boxes can be set up to validate the data entered by users, such as by checking if the input matches a specific format or if it exists in a related table. This helps ensure the data entered into the database is accurate and complete. In consideration of your users in retail, combo boxes can increase efficiency by allowing retail associates to quickly select from a list of options, rather than having to manually enter the information every time they handle any of the inventory.
+
+In the example shown in , a New Customer form is designed with two combo boxes: one for State and the other for City. These two combo boxes were designed differently. The State combo box was built from a table of state names and abbreviations, while the City combo box was built from a query of city and state names. The query is set to display only the conditions selected by the State combo box.
+
+An additional option that can be added to any combo box is the ability to update the list provided in the combo box. In the example, only a couple of states and cities are listed, so you may want to include a shortcut for adding a new state or city to the table. Combo boxes maintain spelling integrity.
+
+In this example (see , frmState (circled) is a form designed to update the tblState table. This form was then added to the List Items Edit Form criteria on the associated property. Users can select List Items Edit Form option, located in the property sheet, which launches the frmState form to update the table.
+
+Changing the Appearance of a Form
+
+This section discusses changes that make a form easier to use and more appealing overall, and that will allow for personalization of the project, including company branding.
+
+Before you start to manipulate the appearance of a form, consider creating a template for both primary default views: Single Form View and Continuous Form View. It is important to have a starting point to build from if you anticipate creating numerous forms for the project, all of which will require formatting changes. In this section, you will learn how to add headers and footers, add a title, modify text, control colors, and, finally, add logos and custom imagery. This will be the starting point for you to explore your creativity.
+
+Adding and Modifying Headers and Footers
+
+Adding Header and Footer sections to a form in Access takes just a few simple steps. Start by displaying the form in Design View (see ). Right-click on the grid area on the design surface and select Form Header/Footer from the shortcut menu.
+
+Adding a Title to the Form
+
+A clear and descriptive title can help users quickly identify the purpose of the form and understand how it relates to the overall database. This may be the very first thing they see when the form opens. A well-crafted title can communicate important information about the form, such as the type of data it contains, the purpose of the form, or the specific function it serves within the database. This can help users understand how the form fits into the larger context of the database and improve their overall understanding of the system. In addition, consistent use of titles can help maintain a cohesive and organized database structure, making it easier for users to locate specific forms and navigate the database overall. In consideration that you’re a WorldCorp employee, adding a title to a form can add a level of professionalism to the database and make it look more polished and organized. This can improve the overall perception of the database.
+
+Often, the original form design is built around the title. When you envision a WorldCorp user interacting with a form you designed, consider the title placement, size, and font selections in correlation with the company branding.
+
+As shown in , you can add a title from Design View, on the Form Design Tools tab in the Header/Footer command group. Select Title (circled) to add a text box to the Header section of the form ().
+
+Adding and Formatting Text
+
+In today’s modern world with information at our fingertips, marketing toolkits (MTs) are often available and are expected to be used when available. Numerous company websites now have highly detailed information on their branding. As an example, Tennessee Tech is one of many institutes that make branding information available to both employees (faculty and staff) and customers (students). This enables their current workforce and stakeholders to post on social media, post flyers, or add branding information to newsletters as a way of promoting the company culture. MTs provide users with the various elements the company requires—all promotion, training, and public relation materials. From the color scheme to the font to the logo placement, expectations in design are being elevated every year.
+
+In the current example, make sure to select the text box that you want to format. If you want to apply the same formatting to multiple text boxes, click and hold Control on the keyboard to select multiple text boxes before you apply the desired formatting (see ).
+
+When you are working in Design View, remember to return to Form View to preview your results. You may need to repeat this several times to achieve your desired formatting.
+
+Adding Logos and Images
+
+Logos and images are important elements to add to forms for several reasons. They can be used to reinforce the WorldCorp branding and create a consistent visual identity across all aspects of our databases, including forms. They can enhance the visual appeal of a form, leading to a more engaging and attractive experience for the user. They can also be helpful in communicating information to users—for example, highlighting important points, guiding users through a process, or providing visual cues for navigation. Consider the rapid rise of self-ordering screens at your local fast-food restaurant. Images help a diverse group of users identify what they would like to order from the menu.
+
+In addition, logos and images can evoke emotional responses in users, creating a more positive overall experience. For example, using images of happy customers can help create a more positive association with the database and improve user satisfaction while helping a customer in a retail location. Adding logos and images can improve the overall user experience and encourage users to use the database more frequently.
+
+To insert a logo from Design View, select the text box that was created when inserting the title. Then, select Logo (). The Windows folder will open, allowing you to select a picture file to be inserted as a logo ().
+
+Formatting a form can be an enjoyable and creative process. It is satisfying to invest the time needed to craft the most visually pleasing form. Once you are satisfied with a design, consider creating a template of it that you can copy and paste as a starting point for additional forms. That way, you can avoid duplicating the effort that you have put into perfecting your form design.
+
+Summary
+
+Through the tools in Access, you can add and arrange fields, labels, buttons, and other objects, and set their properties to control their behavior and appearance in the form. These tools allow you to create more complex and customized forms.
+
+Controls are the parts of a form that are used to enter, edit, or display data Adding controls such as command buttons or combo boxes are added to manage how form looks, works, and interacts with the rest of the database.
+
+Elements such as headers and footers, titles, modifications to the text and colors, logos can be used to customize the form to company specific standards.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+tool that is used to start an action or a set of actions
+information that appears once for every row in the record source that is being referenced
+part of a form used to enter, edit, or display data; controls can be bound, unbound, or calculated
+option that is set in Design View on the property sheet; they control how the form looks, works, and interacts with the rest of the database
+helps control which section of the form the curser moves to next

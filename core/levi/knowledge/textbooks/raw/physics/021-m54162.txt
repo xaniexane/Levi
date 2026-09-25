@@ -1,0 +1,930 @@
+# m54162
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Projectile Motion
+
+Projectile Motion
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Describe the properties of projectile motion
+
+Apply kinematic equations and vectors to solve problems involving projectile motion
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(4) Science concepts. The student knows and applies the laws governing motion in two dimensions for a variety of situations. The student is expected to:
+ 
+ (C) analyze and describe accelerated motion in two dimensions using equations.
+(C) analyze and describe accelerated motion in two dimensions using equations.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Motion in Two Dimensions, as well as the following standards:
+
+(4) Science concepts. The student knows and applies the laws governing motion in a variety of situations. The student is expected to:
+
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+
+Section Key Terms
+
+air resistance
+maximum height (of a projectile)
+projectile
+projectile motion
+range
+trajectory
+Properties of Projectile Motion
+Projectile motion is the motion of an object thrown (projected) into the air when, after the initial force that launches the object, air resistance is negligible and the only other force that object experiences is the force of gravity. The object is called a projectile, and its path is called its trajectory. Air resistance is a frictional force that slows its motion and can significantly alter the trajectory of the motion. Due to the difficulty in calculation, only situations in which the deviation from projectile motion is negligible and air resistance can be ignored are considered in introductory physics. That approximation is often quite accurate.
+
+Teacher Support
+[BL][OL] Review addition of vectors graphically and analytically.
+[BL][OL][AL] Explain the term projectile motion. Ask students to guess what the motion of a projectile might depend on? Is the initial velocity important? Is the angle important? How will these things affect its height and the distance it covers? Introduce the concept of air resistance. Review kinematic equations.
+
+The most important concept in projectile motion is that when air resistance is ignored, horizontal and vertical motions are independent, meaning that they don’t influence one another. compares a cannonball in free fall (in blue) to a cannonball launched horizontally in projectile motion (in red). You can see that the cannonball in free fall falls at the same rate as the cannonball in projectile motion. Keep in mind that if the cannon launched the ball with any vertical component to the velocity, the vertical displacements would not line up perfectly.
+
+Since vertical and horizontal motions are independent, we can analyze them separately, along perpendicular axes. To do this, we separate projectile motion into the two components of its motion, one along the horizontal axis and the other along the vertical.
+
+We’ll call the horizontal axis the x-axis and the vertical axis the y-axis. For notation, d is the total displacement, and x and y are its components along the horizontal and vertical axes. The magnitudes of these vectors are x and y, as illustrated in .
+
+As usual, we use velocity, acceleration, and displacement to describe motion. We must also find the components of these variables along the x- and y-axes. The components of acceleration are then very simple ay = –g = –9.80 m/s2. Note that this definition defines the upwards direction as positive. Because gravity is vertical, ax = 0. Both accelerations are constant, so we can use the kinematic equations. For review, the kinematic equations from a previous chapter are summarized in .
+
+Summary of Kinematic Equations (constant a)
+v
+ 2
+ 
+ =
+ v
+ 0
+ 2
+ 
+ +2a(x−
+ x
+ 0
+ 
+ )
+Where x is position, x0 is initial position, v is velocity, vavg is average velocity, t is time and a is acceleration.
+
+Solve Problems Involving Projectile Motion
+
+The following steps are used to analyze projectile motion:
+
+Separate the motion into horizontal and vertical components along the x- and y-axes. These axes are perpendicular, so 
+
+ A
+ x
+ 
+ =Acosθ
+ and 
+
+ A
+ y
+ 
+ =Asinθ
+ 
+ are used. The magnitudes of the displacement 
+ 
+ s
+ 
+ along x- and y-axes are called 
+ 
+ x
+ 
+ and 
+ 
+ y.
+ 
+ The magnitudes of the components of the velocity 
+ 
+ v
+ 
+ are 
+
+ v
+ x
+ 
+ =v​​​cosθ
+ 
+ and 
+
+ v
+ y
+ 
+ =v​​​sinθ
+ 
+ , where 
+ 
+ v
+ 
+ is the magnitude of the velocity and 
+ 
+ θ
+ 
+ is its direction. Initial values are denoted with a subscript 0.
+
+Treat the motion as two independent one-dimensional motions, one horizontal and the other vertical. The kinematic equations for horizontal and vertical motion take the following forms
+
+ Horizontal Motion(
+ a
+ x
+ 
+ =0)
+
+ x=
+ x
+ 0
+ 
+ +
+ v
+ x
+ 
+ t
+
+ v
+ x
+ 
+ =
+ v
+ 
+ 0x
+
+ =
+ v
+ x
+ 
+ =velocity  is a constant.
+
+ Vertical motion (assuming positive is up 
+
+ a
+ y
+ 
+ =−g=−9.80
+ 
+  m/s
+ 
+ 2
+
+ )
+
+ y
+
+ =
+
+ y
+ 0
+ 
+ +
+ 1
+ 2
+ 
+ (
+ v
+ 
+ 0y
+
+ +
+ v
+ y
+ 
+ )t
+
+ v
+ y
+
+ =
+
+ v
+ 
+ 0y
+
+ −gt
+
+ y
+
+ =
+
+ y
+ 0
+ 
+ +
+ v
+ 
+ 0y
+
+ t−
+ 1
+ 2
+ 
+ g
+ t
+ 2
+
+ v
+ y
+ 2
+
+ =
+
+ v
+ 
+ 0y
+ 
+ 2
+ 
+ −2g(y−
+ y
+ 0
+ 
+ )
+
+Solve for the unknowns in the two separate motions (one horizontal and one vertical). Note that the only common variable between the motions is time 
+ 
+ t
+ 
+ . The problem solving procedures here are the same as for one-dimensional kinematics.
+
+Recombine the two motions to find the total displacement 
+ 
+ s
+ 
+ and velocity 
+ 
+ v
+ 
+ . We can use the analytical method of vector addition, which uses 
+ 
+ A=
+
+ A
+ x
+
+ 2
+ 
+ +
+ A
+ y
+
+ 2
+
+ and 
+ 
+ θ=
+ 
+ tan
+
+ −1
+
+ (
+ A
+ y
+ 
+ /
+ A
+ x
+ 
+ )
+ 
+ to find the magnitude and direction of the total displacement and velocity.
+
+ Displacement
+
+ d=
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ θ=
+ 
+ tan
+
+ −1
+
+ (y/x)
+
+ Velocity
+
+ v=
+
+ v
+ x
+ 2
+ 
+ +
+ v
+ y
+ 2
+
+ θ
+ v
+ 
+ =
+ 
+ tan
+
+ −1
+
+ (
+ v
+ y
+ 
+ /
+ v
+ x
+ 
+ )
+
+ θ
+ 
+ is the direction of the displacement 
+ 
+ d
+ 
+ , and 
+
+ θ
+ v
+
+ is the direction of the velocity 
+ 
+ v
+ 
+ . (See 
+
+ (a) We analyze two-dimensional projectile motion by breaking it into two independent one-dimensional motions along the vertical and horizontal axes. (b) The horizontal motion is simple, because 
+
+ a
+ x
+ 
+ =0
+ 
+ and 
+
+ v
+ x
+
+ is thus constant. (c) The velocity in the vertical direction begins to decrease as the object rises; at its highest point, the vertical velocity is zero. As the object falls towards the Earth again, the vertical velocity increases again in magnitude but points in the opposite direction to the initial vertical velocity. (d) The x- and y-motions are recombined to give the total velocity at any given point on the trajectory.
+
+Teacher Support
+
+Demonstrate the path of a projectile by doing a simple demonstration. Toss a dark beanbag in front of a white board so that students can get a good look at the projectile path. Vary the toss angles, so different paths can be displayed. This demonstration could be extended by using digital photography. Draw a reference grid on the whiteboard, then toss the bag at different angles while taking a video. Replay this in slow motion to observe and compare the altitudes and trajectories.
+
+For problems of projectile motion, it is important to set up a coordinate system. The first step is to choose an initial position for 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ . Usually, it is simplest to set the initial position of the object so that 
+
+ x
+ 0
+ 
+ =0
+ 
+ and 
+
+ y
+ 0
+ 
+ =0
+ 
+ .
+
+Projectile at an Angle
+
+This video presents an example of finding the displacement (or range) of a projectile launched at an angle. It also reviews basic trigonometry for finding the sine, cosine and tangent of an angle.
+
+A Fireworks Projectile Explodes High and Away
+
+During a fireworks display like the one illustrated in , a shell is shot into the air with an initial speed of 70.0 m/s at an angle of 75° above the horizontal. The fuse is timed to ignite the shell just as it reaches its highest point above the ground. (a) Calculate the height at which the shell explodes. (b) How much time passed between the launch of the shell and the explosion? (c) What is the horizontal displacement of the shell when it explodes?
+
+Strategy
+
+The motion can be broken into horizontal and vertical motions in which 
+
+ a
+ x
+ 
+ =0
+ 
+ and 
+
+ a
+ y
+ 
+ =g
+ 
+ . We can then define 
+
+ x
+ 0
+
+ and 
+
+ y
+ 0
+
+ to be zero and solve for the maximum height.
+
+Solution for (a)
+
+By height we mean the altitude or vertical position 
+ 
+ y
+ 
+ above the starting point. The highest point in any trajectory, the maximum height, is reached when 
+
+ v
+ y
+ 
+ =0
+ 
+ ; this is the moment when the vertical velocity switches from positive (upwards) to negative (downwards). Since we know the initial velocity, initial position, and the value of vy when the firework reaches its maximum height, we use the following equation to find 
+ 
+ y
+
+Because 
+
+ y
+ 0
+
+ and 
+
+ v
+ y
+
+ are both zero, the equation simplifies to
+
+Solving for 
+ 
+ y
+ 
+ gives
+
+Now we must find 
+
+ v
+ 
+ 0y
+
+ , the component of the initial velocity in the y-direction. It is given by 
+
+ v
+ 
+ 0y
+
+ =
+ v
+ 0
+ 
+ sinθ
+ 
+ , where 
+
+ v
+ 
+ 0y
+
+ is the initial velocity of 70.0 m/s, and 
+ 
+ θ=
+ 
+ 75
+ 
+ ∘
+
+ is the initial angle. Thus,
+
+and 
+ 
+ y
+ 
+ is
+
+so that
+
+Discussion for (a)
+
+Since up is positive, the initial velocity and maximum height are positive, but the acceleration due to gravity is negative. The maximum height depends only on the vertical component of the initial velocity. The numbers in this example are reasonable for large fireworks displays, the shells of which do reach such heights before exploding.
+
+Solution for (b)
+
+There is more than one way to solve for the time to the highest point. In this case, the easiest method is to use 
+ 
+ y=
+ y
+ 0
+ 
+ +
+ 1
+ 2
+ 
+ (
+ v
+ 
+ 0y
+
+ +
+ v
+ y
+ 
+ )t
+ 
+ . Because 
+
+ y
+ 0
+
+ is zero, this equation reduces to
+
+Note that the final vertical velocity, 
+
+ v
+ y
+
+ , at the highest point is zero. Therefore,
+
+Discussion for (b)
+
+This time is also reasonable for large fireworks. When you are able to see the launch of fireworks, you will notice several seconds pass before the shell explodes. Another way of finding the time is by using 
+ 
+ y=
+ y
+ 0
+ 
+ +
+ v
+ 
+ 0y
+
+ t−
+ 1
+ 2
+ 
+ g
+ t
+ 2
+
+ , and solving the quadratic equation for 
+ 
+ t
+ 
+ .
+
+Solution for (c)
+
+Because air resistance is negligible, 
+
+ a
+ x
+ 
+ =0
+ 
+ and the horizontal velocity is constant. The horizontal displacement is horizontal velocity multiplied by time as given by 
+ 
+ x=
+ x
+ 0
+ 
+ +
+ v
+ x
+ 
+ t
+ 
+ , where 
+
+ x
+ 0
+
+ is equal to zero
+
+where 
+
+ v
+ x
+
+ is the x-component of the velocity, which is given by 
+
+ v
+ x
+ 
+ =
+ v
+ 0
+ 
+ cos
+ θ
+ 0
+ 
+ .
+ 
+ Now,
+
+The time 
+ 
+ t
+ 
+ for both motions is the same, and so 
+ 
+ x
+ 
+ is
+
+Discussion for (c)
+
+The horizontal motion is a constant velocity in the absence of air resistance. The horizontal displacement found here could be useful in keeping the fireworks fragments from falling on spectators. Once the shell explodes, air resistance has a major effect, and many fragments will land directly below, while some of the fragments may now have a velocity in the –x direction due to the forces of the explosion.
+
+Teacher Support
+[BL][OL][AL] Talk about the sample problem. Discuss the variables or unknowns in each part of the problem Ask students which kinematic equations may be best suited to solve the different parts of the problem.
+
+The expression we found for 
+ 
+ y
+ 
+ while solving part (a) of the previous problem works for any projectile motion problem where air resistance is negligible. Call the maximum height 
+ 
+ y=h
+ 
+ ; then,
+
+This equation defines the maximum height of a projectile. The maximum height depends only on the vertical component of the initial velocity.
+
+Calculating Projectile Motion: Hot Rock Projectile
+
+Suppose a large rock is ejected from a volcano, as illustrated in , with a speed of 
+ 
+ 25.0 m/s
+ 
+ and at an angle 
+ 
+ 35°
+ 
+ above the horizontal. The rock strikes the side of the volcano at an altitude 20.0 m lower than its starting point. (a) Calculate the time it takes the rock to follow this path.
+
+Strategy
+
+Breaking this two-dimensional motion into two independent one-dimensional motions will allow us to solve for the time. The time a projectile is in the air depends only on its vertical motion.
+
+Solution
+
+While the rock is in the air, it rises and then falls to a final position 20.0 m lower than its starting altitude. We can find the time for this by using
+
+If we take the initial position 
+
+ y
+ 0
+
+ to be zero, then the final position is 
+ 
+ y=−20.0 m.
+ 
+ Now the initial vertical velocity is the vertical component of the initial velocity, found from
+
+Substituting known values yields
+
+Rearranging terms gives a quadratic equation in 
+ 
+ t
+
+This expression is a quadratic equation of the form 
+ 
+ a
+ t
+ 2
+ 
+ +bt+c=0
+ 
+ , where the constants are a = 4.90, b = –14.3, and c = –20.0. Its solutions are given by the quadratic formula
+
+This equation yields two solutions t = 3.96 and t = –1.03. You may verify these solutions as an exercise. The time is t = 3.96 s or –1.03 s. The negative value of time implies an event before the start of motion, so we discard it. Therefore,
+
+Discussion
+
+The time for projectile motion is completely determined by the vertical motion. So any projectile that has an initial vertical velocity of 
+ 
+ 14.3m/s
+ 
+ and lands 20.0 m below its starting altitude will spend 3.96 s in the air.
+
+Practice Problems
+
+The fact that vertical and horizontal motions are independent of each other lets us predict the range of a projectile. The range is the horizontal distance R traveled by a projectile on level ground, as illustrated in . Throughout history, people have been interested in finding the range of projectiles for practical purposes, such as aiming cannons.
+
+How does the initial velocity of a projectile affect its range? Obviously, the greater the initial speed 
+
+ v
+ 0
+
+ , the greater the range, as shown in the figure above. The initial angle 
+
+ θ
+ 0
+
+ also has a dramatic effect on the range. When air resistance is negligible, the range 
+ 
+ R
+ 
+ of a projectile on level ground is
+
+where 
+
+ v
+ 0
+
+ is the initial speed and 
+
+ θ
+ 0
+
+ is the initial angle relative to the horizontal. It is important to note that the range doesn’t apply to problems where the initial and final y position are different, or to cases where the object is launched perfectly horizontally.
+
+Projectile Motion
+
+In this simulation you will learn about projectile motion by blasting objects out of a cannon. You can choose between objects such as a tank shell, a golf ball or even a Buick. Experiment with changing the angle, initial speed, and mass, and adding in air resistance. Make a game out of this simulation by trying to hit the target.
+
+Section Summary
+
+Projectile motion is the motion of an object through the air that is subject only to the acceleration of gravity.
+
+Projectile motion in the horizontal and vertical directions are independent of one another.
+
+The maximum height of an projectile is the highest altitude, or maximum displacement in the vertical position reached in the path of a projectile.
+
+The range is the maximum horizontal distance traveled by a projectile.
+
+To solve projectile problems: choose a coordinate system; analyze the motion in the vertical and horizontal direction separately; then, recombine the horizontal and vertical components using vector addition equations.
+
+Key Equations
+
+θ=
+ 
+ tan
+
+ −1
+
+ (y/x)
+v=
+
+ v
+ x
+ 2
+ 
+ +
+ v
+ y
+ 2
+θ
+ v
+ 
+ =
+ 
+ tan
+
+ −1
+
+ (
+ v
+ y
+ 
+ /
+ v
+ x
+ 
+ )
+h=
+
+ v
+ 
+ 0y
+ 
+ 2
+
+ 2g
+R=
+
+ v
+ 0
+ 2
+ 
+ sin2
+ θ
+ 0
+
+ g
+Check Your Understanding
+
+What is the force experienced by a projectile after the initial force that launched it into the air in the absence of air resistance?
+
+The nuclear force
+
+The gravitational force
+
+The electromagnetic force
+
+The contact force
+
+Teacher Support
+
+Use the Check Your Understanding questions to assess whether students achieve the learning objectives for this section. If students are struggling with a specific objective, the Check Your Understanding will help identify which objective is causing the problem and direct students to the relevant content.
+
+Concept Items
+
+Problems
+
+A person wants to fire a water balloon cannon such that it hits a target 100 m away. If the cannon can only be launched at 45° above the horizontal, what should be the initial speed at which it is launched?
+
+31.3 m/s
+
+37.2 m/s
+
+980.0 m/s
+
+1,385.9 m/s
+
+Critical Thinking
+
+An object is launched into the air. If the y-component of its acceleration is 9.8 m/s2, which direction is defined as positive?
+
+Vertically upward in the coordinate system
+
+Vertically downward in the coordinate system
+
+Horizontally to the right side of the coordinate system
+
+Horizontally to the left side of the coordinate system
+
+Test Prep Multiple Choice
+
+After a projectile is launched in the air, in which direction does it experience constant, non-zero acceleration, ignoring air resistance?
+
+The x direction
+
+The y direction
+
+Both the x and y directions
+
+Neither direction
+
+A ball is thrown in the air at an angle of 40°. If the maximum height it reaches is 10 m, what must be its initial speed?
+
+17.46 m/s
+
+21.78 m/s
+
+304.92 m/s
+
+474.37 m/s
+
+Test Prep Short Answer
+
+In the equation for the maximum height of a projectile, what does 
+
+ v0y
+
+ stand for?
+
+ h=
+
+ v
+ 0y
+ 
+ 2
+
+ 2g
+
+Initial velocity in the x direction
+
+Initial velocity in the y direction
+
+Final velocity in the x direction
+
+Final velocity in the y direction
+
+True or False—Range is defined as the maximum vertical distance travelled by a projectile.
+
+True
+
+False
+
+Test Prep Extended Response
+
+a frictional force that slows the motion of objects as they travel through the air; when solving basic physics problems, air resistance is assumed to be zero
+the highest altitude, or maximum displacement in the vertical position reached in the path of a projectile
+an object that travels through the air and experiences only acceleration due to gravity
+the motion of an object that is subject only to the acceleration of gravity
+the maximum horizontal distance that a projectile travels
+the path of a projectile through the air

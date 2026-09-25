@@ -1,0 +1,1918 @@
+# m49412
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Vectors
+
+Vectors
+
+In this section you will:
+
+View vectors geometrically.
+
+Find magnitude and direction.
+
+Perform vector addition and scalar multiplication.
+
+Find the component form of a vector.
+
+Find the unit vector in the direction of  v.
+
+Perform operations with vectors in terms of  i  and  j.
+
+Find the dot product of two vectors.
+
+An airplane is flying at an airspeed of 200 miles per hour headed on a SE bearing of 140°. A north wind (from north to south) is blowing at 16.2 miles per hour, as shown in . What are the ground speed and actual bearing of the plane?
+
+Ground speed refers to the speed of a plane relative to the ground. Airspeed refers to the speed a plane can travel relative to its surrounding air mass. These two quantities are not the same because of the effect of wind. In an earlier section, we used triangles to solve a similar problem involving the movement of boats. Later in this section, we will find the airplane’s groundspeed and bearing, while investigating another approach to problems of this type. First, however, let’s examine the basics of vectors.
+
+A Geometric View of Vectors
+
+A vector is a specific quantity drawn as a line segment with an arrowhead at one end. It has an initial point, where it begins, and a terminal point, where it ends. A vector is defined by its magnitude, or the length of the line, and its direction, indicated by an arrowhead at the terminal point. Thus, a vector is a directed line segment. There are various symbols that distinguish vectors from other quantities:
+
+Lower case, boldfaced type, with or without an arrow on top such as 
+ v, u, w, 
+ v
+ →
+ 
+ , 
+ u
+ →
+ 
+ ,
+ w
+ →
+ 
+ .
+
+Given initial point 
+ 
+ P
+ and terminal point 
+ 
+ Q,
+ a vector can be represented as 
+
+ PQ
+ →
+ .
+ The arrowhead on top is what indicates that it is not just a line, but a directed line segment.
+
+Given an initial point of 
+ 
+ (
+ 
+ 0,0
+ )
+ and terminal point 
+ 
+ (
+ 
+ a,b
+ ),
+ a vector may be represented as 
+ 
+ 〈 
+ a,b 〉.
+
+This last symbol 
+ 
+ 〈 
+ a,b 〉
+ has special significance. It is called the standard position. The position vector has an initial point 
+ (
+ 
+ 0,0
+ )
+ and a terminal point 
+ 
+ ( 
+ a,b ).
+ To change any vector into the position vector, we think about the change in the x-coordinates and the change in the y-coordinates. Thus, if the initial point of a vector 
+
+ CD
+ →
+
+ is 
+ 
+ C(
+
+ x
+ 1
+ 
+ ,
+ y
+ 1
+
+ )
+ and the terminal point is 
+ 
+ D(
+
+ x
+ 2
+ 
+ ,
+ y
+ 2
+
+ ),
+ then the position vector is found by calculating
+
+In , we see the original vector 
+
+ CD
+ →
+
+ and the position vector 
+
+ Ab
+ →
+ 
+ .
+
+Properties of Vectors
+
+A vector is a directed line segment with an initial point and a terminal point. Vectors are identified by magnitude, or the length of the line, and direction, represented by the arrowhead pointing toward the terminal point. The position vector has an initial point at ( 0,0 ) and is identified by its terminal point 
+ 
+ ( 
+ a,b ).
+
+Find the Position Vector
+
+Consider the vector whose initial point is 
+ 
+ P(
+ 
+ 2,3
+ )
+ and terminal point is 
+ 
+ Q(
+ 
+ 6,4
+ ).
+ Find the position vector.
+
+The position vector is found by subtracting one x-coordinate from the other x-coordinate, and one y-coordinate from the other y-coordinate. Thus
+
+The position vector begins at 
+ 
+ (
+ 
+ 0,0
+ )
+ and terminates at 
+ 
+ (
+ 
+ 4,1
+ ).
+ The graphs of both vectors are shown in .
+
+We see that the position vector is 
+ 
+ 〈 
+ 4,1 〉.
+
+Drawing a Vector with the Given Criteria and Its Equivalent Position Vector
+
+Find the position vector given that vector 
+ 
+ v
+ has an initial point at 
+ 
+ (
+ 
+ −3,2
+ )
+ and a terminal point at 
+ 
+ (
+ 
+ 4,5
+ ),
+ then graph both vectors in the same plane.
+
+The position vector is found using the following calculation:
+
+Thus, the position vector begins at 
+ 
+ (
+ 
+ 0,0
+ )
+ and terminates at 
+ 
+ (
+ 
+ 7,3
+ ).
+ See .
+
+Draw a vector 
+ 
+ v
+ that connects from the origin to the point 
+ 
+ (3,5).
+
+Finding Magnitude and Direction
+
+To work with a vector, we need to be able to find its magnitude and its direction. We find its magnitude using the Pythagorean Theorem or the distance formula, and we find its direction using the inverse tangent function.
+
+Magnitude and Direction of a Vector
+
+Given a position vector 
+ 
+ v
+
+ =〈 
+ a,b 〉,
+ the magnitude is found by 
+ 
+ | v |=
+
+ a
+ 2
+ 
+ +
+ b
+ 2
+
+ .
+ The direction is equal to the angle formed with the x-axis, or with the y-axis, depending on the application. For a position vector, the direction is found by 
+ 
+ tanθ=(
+
+ b
+ a
+
+ )⇒θ=
+ 
+ tan
+ 
+ −1
+ 
+ (
+
+ b
+ a
+
+ ),
+ as illustrated in .
+
+Two vectors v and u are considered equal if they have the same magnitude and the same direction. Additionally, if both vectors have the same position vector, they are equal.
+
+Finding the Magnitude and Direction of a Vector
+
+Find the magnitude and direction of the vector with initial point 
+ 
+ P(
+ 
+ −8,1
+ )
+ and terminal point 
+ 
+ Q(
+ 
+ −2,−5
+ ).
+ Draw the vector.
+
+First, find the position vector.
+
+We use the Pythagorean Theorem to find the magnitude.
+
+The direction is given as
+
+However, the angle terminates in the fourth quadrant, so we add 360° to obtain a positive angle. Thus, 
+ 
+ −45°+360°=315°.
+ 
+ See .
+
+Showing That Two Vectors Are Equal
+
+Show that vector v with initial point at 
+ 
+ (
+ 
+ 5,−3
+ )
+ and terminal point at 
+ 
+ (
+ 
+ −1,2
+ )
+ is equal to vector u with initial point at 
+ 
+ (
+ 
+ −1,−3
+ )
+ and terminal point at 
+ 
+ (
+ 
+ −7,2
+ ).
+ Draw the position vector on the same grid as v and u. Next, find the magnitude and direction of each vector.
+
+As shown in , draw the vector 
+ 
+ v
+ starting at initial 
+ 
+ (
+ 
+ 5,−3
+ )
+ and terminal point 
+ 
+ (
+ 
+ −1,2
+ ).
+ Draw the vector 
+ 
+ u
+ with initial point 
+ 
+ (
+ 
+ −1,−3
+ )
+ and terminal point 
+ 
+ (
+ 
+ −7,2
+ ).
+ Find the standard position for each.
+
+Next, find and sketch the position vector for v and u. We have
+
+Since the position vectors are the same, v and u are the same.
+
+An alternative way to check for vector equality is to show that the magnitude and direction are the same for both vectors. To show that the magnitudes are equal, use the Pythagorean Theorem.
+
+As the magnitudes are equal, we now need to verify the direction. Using the tangent function with the position vector gives
+
+However, we can see that the position vector terminates in the second quadrant, so we add 
+ 
+ 180°.
+ 
+ Thus, the direction is 
+ 
+ −39.8°+180°=140.2°.
+
+Performing Vector Addition and Scalar Multiplication
+
+Now that we understand the properties of vectors, we can perform operations involving them. While it is convenient to think of the vector u 
+ 
+ =〈 
+ x,y 〉
+ as an arrow or directed line segment from the origin to the point 
+ 
+ (x,y),
+ vectors can be situated anywhere in the plane. The sum of two vectors u and v, or vector addition, produces a third vector u+ v, the resultant vector.
+
+To find u + v, we first draw the vector u, and from the terminal end of u, we drawn the vector v. In other words, we have the initial point of v meet the terminal end of u. This position corresponds to the notion that we move along the first vector and then, from its terminal point, we move along the second vector. The sum u + v is the resultant vector because it results from addition or subtraction of two vectors. The resultant vector travels directly from the beginning of u to the end of v in a straight path, as shown in .
+
+Vector subtraction is similar to vector addition. To find u − v, view it as u + (−v). Adding −v is reversing direction of v and adding it to the end of u. The new vector begins at the start of u and stops at the end point of −v. See for a visual that compares vector addition and vector subtraction using parallelograms.
+
+Adding and Subtracting Vectors
+
+Given 
+ u
+
+ =〈 
+ 3,−2 〉
+ and 
+ v
+
+ =〈 
+ −1,4 〉,
+ find two new vectors u + v, and u − v.
+
+To find the sum of two vectors, we add the components. Thus,
+
+See (a).
+
+To find the difference of two vectors, add the negative components of 
+ 
+ v
+ to 
+ 
+ u.
+ Thus,
+
+See (b).
+
+Multiplying By a Scalar
+
+While adding and subtracting vectors gives us a new vector with a different magnitude and direction, the process of multiplying a vector by a scalar, a constant, changes only the magnitude of the vector or the length of the line. Scalar multiplication has no effect on the direction unless the scalar is negative, in which case the direction of the resulting vector is opposite the direction of the original vector.
+
+Scalar Multiplication
+Scalar multiplication involves the product of a vector and a scalar. Each component of the vector is multiplied by the scalar. Thus, to multiply 
+ v
+
+ =〈 
+ a,b 〉
+ by 
+ 
+ k
+, we have
+
+Only the magnitude changes, unless 
+ 
+ k
+ is negative, and then the vector reverses direction.
+
+Performing Scalar Multiplication
+
+Given vector 
+ v
+
+ =〈 
+ 3,1 〉,
+ find 3v, 
+
+ 1
+ 2
+
+ v,
+ 
+ and −v.
+
+See for a geometric interpretation. If 
+ v
+
+ =〈 
+ 3,1 〉,
+ then
+
+Analysis
+
+Notice that the vector 3v is three times the length of v, 
+ 
+ 1
+ 2
+ 
+ v
+ is half the length of v, and –v is the same length of v, but in the opposite direction.
+
+Find the scalar multiple 3 
+ u
+ given 
+ u 
+ 
+ =〈 
+ 5,4 〉.
+3u=〈 
+ 15,12 〉
+
+Using Vector Addition and Scalar Multiplication to Find a New Vector
+
+Given 
+ u
+
+ =〈 
+ 3,−2 〉
+ and 
+ v
+
+ =〈 
+ −1,4 〉,
+ find a new vector w = 3u + 2v.
+
+First, we must multiply each vector by the scalar.
+
+Then, add the two together.
+
+So, 
+ w
+
+ =〈 
+ 7,2 〉.
+
+Finding Component Form
+
+In some applications involving vectors, it is helpful for us to be able to break a vector down into its components. Vectors are comprised of two components: the horizontal component is the 
+ 
+ x
+ direction, and the vertical component is the 
+ 
+ y
+ direction. For example, we can see in the graph in that the position vector 
+ 
+ 〈 
+ 2,3 〉
+ comes from adding the vectors v1 and v2. We have v1 with initial point 
+ 
+ (
+ 
+ 0,0
+ )
+ and terminal point 
+ 
+ (
+ 
+ 2,0
+ ).
+
+We also have v2 with initial point 
+ 
+ (
+ 
+ 0,0
+ )
+ and terminal point 
+ 
+ (
+ 
+ 0,3
+ ).
+
+Therefore, the position vector is
+
+Using the Pythagorean Theorem, the magnitude of v1 is 2, and the magnitude of v2 is 3. To find the magnitude of v, use the formula with the position vector.
+
+The magnitude of v is 
+
+ 13
+ 
+ .
+ To find the direction, we use the tangent function 
+ 
+ tanθ=
+ y
+ x
+ 
+ .
+
+Thus, the magnitude of 
+ 
+ v
+ is 
+
+ 13
+
+ and the direction is 
+
+ 56.3
+ ∘
+
+ off the horizontal.
+
+Finding the Components of the Vector
+
+Find the components of the vector 
+ 
+ v
+ with initial point 
+ 
+ (
+ 
+ 3,2
+ )
+ and terminal point 
+ 
+ (
+ 
+ 7,4
+ ).
+
+First find the standard position.
+
+See the illustration in .
+
+The horizontal component is 
+ 
+ v
+ 1
+ 
+ =〈 
+ 4,0
+ 〉
+ 
+ and the vertical component is 
+ 
+ v
+ 2
+
+ =〈 
+ 0,2
+ 〉.
+
+Finding the Unit Vector in the Direction of v
+
+In addition to finding a vector’s components, it is also useful in solving problems to find a vector in the same direction as the given vector, but of magnitude 1. We call a vector with a magnitude of 1 a unit vector. We can then preserve the direction of the original vector while simplifying calculations.
+
+Unit vectors are defined in terms of components. The horizontal unit vector is written as 
+ i 
+ =〈 
+ 1,0
+ 〉
+ and is directed along the positive horizontal axis. The vertical unit vector is written as 
+ j
+ 
+ =〈 
+ 0,1
+ 〉
+ and is directed along the positive vertical axis. See .
+
+The Unit Vectors
+
+If 
+ 
+ v
+ is a nonzero vector, then 
+
+ v
+ 
+ | v |
+
+ is a unit vector in the direction of 
+ 
+ v.
+ Any vector divided by its magnitude is a unit vector. Notice that magnitude is always a scalar, and dividing by a scalar is the same as multiplying by the reciprocal of the scalar.
+
+Finding the Unit Vector in the Direction of v
+
+Find a unit vector in the same direction as 
+ v
+ 
+ =〈 
+ −5,12
+ 〉.
+
+First, we will find the magnitude.
+
+Then we divide each component by 
+ 
+ | v |,
+ which gives a unit vector in the same direction as v:
+
+or, in component form
+
+See .
+
+Verify that the magnitude of the unit vector equals 1. The magnitude of 
+ 
+ −
+ 5
+ 
+ 13
+ 
+ i+
+ 
+ 12
+ 
+ 13
+ 
+ j
+ is given as
+
+The vector u 
+ 
+ =
+ 5
+ 
+ 13
+
+ i 
+ 
+ +
+ 
+ 12
+
+ 13
+
+ j is the unit vector in the same direction as v 
+ 
+ =〈 
+ −5,12
+ 〉.
+
+Performing Operations with Vectors in Terms of i and j
+
+So far, we have investigated the basics of vectors: magnitude and direction, vector addition and subtraction, scalar multiplication, the components of vectors, and the representation of vectors geometrically. Now that we are familiar with the general strategies used in working with vectors, we will represent vectors in rectangular coordinates in terms of i and j.
+
+Vectors in the Rectangular Plane
+
+Given a vector 
+ 
+ v
+ with initial point 
+ 
+ P=(
+
+ x
+ 1
+ 
+ ,
+ y
+ 1
+
+ )
+ and terminal point 
+ 
+ Q=(
+ x
+ 2
+ 
+ ,
+ y
+ 2
+ 
+ ),
+ 
+ v is written as
+
+The position vector from 
+ 
+ (
+ 
+ 0,0
+ )
+ to 
+ 
+ (
+ 
+ a,b
+ ),
+ where 
+ 
+ (
+
+ x
+ 2
+ 
+ −
+ x
+ 1
+
+ )=a
+ and 
+ 
+ (
+
+ y
+ 2
+ 
+ −
+ y
+ 1
+
+ )=b,
+ is written as v = ai + bj. This vector sum is called a linear combination of the vectors i and j.
+
+The magnitude of v = ai + bj is given as 
+ 
+ | v |=
+
+ a
+ 2
+ 
+ +
+ b
+ 2
+
+ .
+ 
+ See .
+
+Writing a Vector in Terms of i and j
+
+Given a vector 
+ 
+ v
+ with initial point 
+ 
+ P=(
+ 
+ 2,−6
+ )
+ and terminal point 
+ 
+ Q=(
+ 
+ −6,6
+ ),
+ write the vector in terms of 
+ 
+ i
+ and 
+ 
+ j.
+
+Begin by writing the general form of the vector. Then replace the coordinates with the given values.
+
+Writing a Vector in Terms of i and j Using Initial and Terminal Points
+
+Given initial point 
+
+ P
+ 1
+ 
+ =(
+ 
+ −1,3
+ )
+ and terminal point 
+
+ P
+ 2
+ 
+ =(
+ 
+ 2,7
+ ),
+ write the vector 
+ 
+ v
+ in terms of 
+ 
+ i
+ and 
+ 
+ j.
+
+Begin by writing the general form of the vector. Then replace the coordinates with the given values.
+
+Write the vector 
+ 
+ u
+ with initial point 
+ 
+ P=(
+ 
+ −1,6
+ )
+ and terminal point 
+ 
+ Q=(
+ 
+ 7,−5
+ )
+ in terms of 
+ 
+ i
+ and 
+ 
+ j.
+u=8i−11j
+
+Performing Operations on Vectors in Terms of i and j
+
+When vectors are written in terms of 
+ 
+ i
+ and 
+ 
+ j,
+ we can carry out addition, subtraction, and scalar multiplication by performing operations on corresponding components.
+
+Adding and Subtracting Vectors in Rectangular Coordinates
+
+Given v = ai + bj and u = ci + dj, then
+
+Finding the Sum of the Vectors
+
+Find the sum of 
+
+ v
+ 1
+ 
+ =2i−3j
+ and 
+
+ v
+ 2
+ 
+ =4i+5j.
+
+According to the formula, we have
+
+Calculating the Component Form of a Vector: Direction
+
+We have seen how to draw vectors according to their initial and terminal points and how to find the position vector. We have also examined notation for vectors drawn specifically in the Cartesian coordinate plane using 
+ 
+ iandj.
+ For any of these vectors, we can calculate the magnitude. Now, we want to combine the key points, and look further at the ideas of magnitude and direction.
+
+Calculating direction follows the same straightforward process we used for polar coordinates. We find the direction of the vector by finding the angle to the horizontal. We do this by using the basic trigonometric identities, but with 
+ 
+ | v |
+ replacing 
+ 
+ r.
+
+Vector Components in Terms of Magnitude and Direction
+
+Given a position vector 
+ 
+ v=〈 
+ x,y 〉
+ and a direction angle 
+ 
+ θ,
+
+Thus, 
+ 
+ v=xi+yj=| v |cosθi+| v |sinθj,
+ and magnitude is expressed as 
+ 
+ | v |=
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ .
+
+Writing a Vector in Component Form When It Is Given in Magnitude and Direction Form
+
+Given a vector with length 7 and an angle of 135°, write it in component form.
+
+Using the conversion formulas 
+ 
+ x=| v |cosθ
+ and 
+ 
+ y=| v |sinθ,
+ we find that
+
+This vector can be written as 
+ 
+ v=7cos(135°)+7sin(135°)
+ 
+ or simplified as
+
+A vector travels from the origin to the point 
+ 
+ (
+ 
+ 3,5
+ ).
+ Write the vector in terms of magnitude and direction.
+v=
+ 
+ 34
+
+ cos(59°)i+
+ 
+ 34
+
+ sin(59°)j
+
+Magnitude = 
+
+ 34
+θ=
+ 
+ tan
+
+ −1
+
+ (
+
+ 5
+ 3
+
+ )=59.04°
+
+Finding the Dot Product of Two Vectors
+
+As we discussed earlier in the section, scalar multiplication involves multiplying a vector by a scalar, and the result is a vector. As we have seen, multiplying a vector by a number is called scalar multiplication. If we multiply a vector by a vector, there are two possibilities: the dot product and the cross product. We will only examine the dot product here; you may encounter the cross product in more advanced mathematics courses.
+
+The dot product of two vectors involves multiplying two vectors together, and the result is a scalar.
+
+Dot Product
+
+The dot product of two vectors 
+ 
+ v=〈 
+ a,b
+ 〉
+ 
+ and 
+ 
+ u=〈 
+ c,d
+ 〉
+ 
+ is the sum of the product of the horizontal components and the product of the vertical components.
+
+To find the angle between the two vectors, use the formula below.
+
+Finding the Dot Product of Two Vectors
+
+Find the dot product of 
+ 
+ v=〈 
+ 5,12 〉
+ and 
+ 
+ u=〈 
+ −3,4 〉.
+
+Using the formula, we have
+
+Finding the Dot Product of Two Vectors and the Angle between Them
+
+Find the dot product of v1 = 5i + 2j and v2 = 3i + 7j. Then, find the angle between the two vectors.
+
+Finding the dot product, we multiply corresponding components.
+
+To find the angle between them, we use the formula 
+ 
+ cosθ=
+ v
+ 
+ |v|
+
+ ⋅
+ u
+ 
+ |u|
+
+ .
+
+See .
+
+Finding the Angle between Two Vectors
+
+Find the angle between 
+ 
+ u=〈 
+ −3,4 〉
+ and 
+ 
+ v=〈 
+ 5,12 〉.
+
+Using the formula, we have
+
+See .
+
+Finding Ground Speed and Bearing Using Vectors
+
+We now have the tools to solve the problem we introduced in the opening of the section.
+
+An airplane is flying at an airspeed of 200 miles per hour headed on a SE bearing of 140°. A north wind (from north to south) is blowing at 16.2 miles per hour. What are the ground speed and actual bearing of the plane? See .
+
+The ground speed is represented by 
+ 
+ x
+ in the diagram, and we need to find the angle 
+ 
+ α
+ in order to calculate the adjusted bearing, which will be 
+ 
+ 140°+α.
+
+Notice in , that angle 
+ 
+ bCO
+ must be equal to angle 
+ 
+ AOC
+ by the rule of alternating interior angles, so angle 
+ 
+ bCO
+ is 140°. We can find 
+ 
+ x
+ by the Law of Cosines:
+
+The ground speed is approximately 213 miles per hour. Now we can calculate the bearing using the Law of Sines.
+
+Therefore, the plane has a SE bearing of 140°+2.8°=142.8°. The ground speed is 212.7 miles per hour.
+
+Access these online resources for additional instruction and practice with vectors.
+Introduction to Vectors
+Vector Operations
+The Unit Vector
+
+Key Concepts
+
+The position vector has its initial point at the origin. See .
+
+If the position vector is the same for two vectors, they are equal. See .
+
+Vectors are defined by their magnitude and direction. See .
+
+If two vectors have the same magnitude and direction, they are equal. See .
+
+Vector addition and subtraction result in a new vector found by adding or subtracting corresponding elements. See .
+
+Scalar multiplication is multiplying a vector by a constant. Only the magnitude changes; the direction stays the same. See and .
+
+Vectors are comprised of two components: the horizontal component along the positive x-axis, and the vertical component along the positive y-axis. See .
+
+The unit vector in the same direction of any nonzero vector is found by dividing the vector by its magnitude.
+
+The magnitude of a vector in the rectangular coordinate system is 
+ 
+ | v |=
+
+ a
+ 2
+ 
+ +
+ b
+ 2
+
+ .
+ See .
+
+In the rectangular coordinate system, unit vectors may be represented in terms of 
+ i
+ and 
+ j
+ where 
+ 
+ i
+ represents the horizontal component and 
+ 
+ j
+ represents the vertical component. Then, v = ai + bj  is a scalar multiple of 
+ 
+ v
+ by real numbers 
+ 
+ aandb.
+ See and .
+
+Adding and subtracting vectors in terms of i and j consists of adding or subtracting corresponding coefficients of i and corresponding coefficients of j. See .
+
+A vector v = ai + bj is written in terms of magnitude and direction as 
+ 
+ v=| v |cosθi+| v |sinθj.
+ See .
+
+The dot product of two vectors is the product of the 
+ 
+ i
+ terms plus the product of the 
+ 
+ j
+ 
+ terms. See .
+
+We can use the dot product to find the angle between two vectors. and .
+
+Dot products are useful for many types of physics applications. See .
+
+Section Exercises
+
+Verbal
+
+What are the characteristics of the letters that are commonly used to represent vectors?
+
+lowercase, bold letter, usually 
+ 
+ u,v,w
+
+How is a vector more specific than a line segment?
+
+What are 
+ 
+ i
+ and 
+ 
+ j,
+ and what do they represent?
+
+They are unit vectors. They are used to represent the horizontal and vertical components of a vector. They each have a magnitude of 1.
+
+What is component form?
+
+When a unit vector is expressed as 
+ 
+ 〈 
+ a,b 〉,
+ which letter is the coefficient of the 
+ 
+ i
+ 
+ and which the 
+ 
+ j?
+
+The first number always represents the coefficient of the 
+ 
+ i,
+ and the second represents the 
+ 
+ j.
+
+Algebraic
+
+Given a vector with initial point 
+ 
+ (
+ 
+ 5,2
+ )
+ and terminal point 
+ 
+ (
+ 
+ −1,−3
+ ),
+ find an equivalent vector whose initial point is 
+ 
+ (
+ 
+ 0,0
+ ).
+ Write the vector in component form 
+ 
+ 〈 
+ a,b 〉.
+
+Given a vector with initial point 
+ 
+ (
+ 
+ −4,2
+ )
+ and terminal point 
+ 
+ (
+ 
+ 3,−3
+ ),
+ find an equivalent vector whose initial point is 
+ 
+ (
+ 
+ 0,0
+ ).
+ Write the vector in component form 
+ 
+ 〈 
+ a,b 〉.
+〈 
+ 7,−5 〉
+
+Given a vector with initial point 
+ 
+ (
+ 
+ 7,−1
+ )
+ and terminal point 
+ 
+ (
+ 
+ −1,−7
+ ),
+ find an equivalent vector whose initial point is 
+ 
+ (
+ 
+ 0,0
+ ).
+ Write the vector in component form 
+ 
+ 〈 
+ a,b 〉.
+
+For the following exercises, determine whether the two vectors 
+ 
+ u
+ and 
+ 
+ v
+ are equal, where 
+ 
+ u
+ has an initial point 
+
+ P
+ 1
+
+ and a terminal point 
+
+ P
+ 2
+
+ and 
+ v
+ has an initial point 
+
+ P
+ 3
+
+ and a terminal point 
+
+ P
+ 4
+
+.
+P
+ 1
+ 
+ =(
+ 
+ 5,1
+ ),
+ P
+ 2
+ 
+ =(
+ 
+ 3,−2
+ ),
+ P
+ 3
+ 
+ =(
+ 
+ −1,3
+ ),
+ and 
+
+ P
+ 4
+ 
+ =(
+ 
+ 9,−4
+ )
+
+not equal
+P
+ 1
+ 
+ =(
+ 
+ 2,−3
+ ),
+ P
+ 2
+ 
+ =(
+ 
+ 5,1
+ ),
+ P
+ 3
+ 
+ =(
+ 
+ 6,−1
+ ),
+ and 
+
+ P
+ 4
+ 
+ =(
+ 
+ 9,3
+ )
+P
+ 1
+ 
+ =(
+ 
+ −1,−1
+ ),
+ P
+ 2
+ 
+ =(
+ 
+ −4,5
+ ),
+ P
+ 3
+ 
+ =(
+ 
+ −10,6
+ ),
+ and 
+
+ P
+ 4
+ 
+ =(
+ 
+ −13,12
+ )
+
+equal
+P
+ 1
+ 
+ =(
+ 
+ 3,7
+ ),
+ P
+ 2
+ 
+ =(
+ 
+ 2,1
+ ),
+ P
+ 3
+ 
+ =(
+ 
+ 1,2
+ ),
+ and 
+
+ P
+ 4
+ 
+ =(
+ 
+ −1,−4
+ )
+P
+ 1
+ 
+ =(
+ 
+ 8,3
+ ),
+ P
+ 2
+ 
+ =(
+ 
+ 6,5
+ ),
+ P
+ 3
+ 
+ =(
+ 
+ 11,8
+ ),
+ and 
+
+ P
+ 4
+ 
+ =(
+ 
+ 9,10
+ )
+
+equal
+
+Given initial point 
+
+ P
+ 1
+ 
+ =(
+ 
+ −3,1
+ )
+ and terminal point 
+
+ P
+ 2
+ 
+ =(
+ 
+ 5,2
+ ),
+ write the vector 
+ 
+ v
+ in terms of 
+ 
+ i
+ and 
+ 
+ j.
+
+Given initial point 
+
+ P
+ 1
+ 
+ =(
+ 
+ 6,0
+ )
+ and terminal point 
+
+ P
+ 2
+ 
+ =(
+ 
+ −1,−3
+ ),
+ write the vector 
+ 
+ v
+ in terms of 
+ 
+ i
+ and 
+ 
+ j.
+−7i−3j
+
+For the following exercises, use the vectors u = i + 5j, v = −2i− 3j,  and w = 4i − j.
+
+Find u + (v − w)
+
+Find 4v + 2u
+−6i−2j
+
+For the following exercises, use the given vectors to compute u + v, u − v, and 2u − 3v.
+u=〈 
+ 2,−3 〉,v=〈 
+ 1,5 〉
+u=〈 
+ −3,4 〉,v=〈 
+ −2,1 〉
+u+v=〈 
+ −5,5
+ 〉,u−v=〈 
+ −1,3
+ 〉,2u−3v=〈 
+ 0,5
+ 〉
+
+Let v = −4i + 3j. Find a vector that is half the length and points in the same direction as 
+ 
+ v.
+
+Let v = 5i + 2j. Find a vector that is twice the length and points in the opposite direction as 
+ 
+ v.
+−10i–4j
+
+For the following exercises, find a unit vector in the same direction as the given vector.
+a = 3i + 4j
+b = −2i + 5j
+−
+ 
+ 2
+ 
+ 29
+
+ 29
+ 
+ i+
+ 
+ 5
+ 
+ 29
+
+ 29
+ 
+ j
+c = 10i – j
+d=−
+ 1
+ 3
+ 
+ i+
+ 5
+ 2
+ 
+ j
+−
+ 
+ 2
+ 
+ 229
+
+ 229
+
+ i+
+ 
+ 15
+ 
+ 229
+
+ 229
+
+ j
+u = 100i + 200j
+u = −14i + 2j
+−
+ 
+ 7
+ 2
+
+ 10
+ 
+ i+
+
+ 2
+
+ 10
+ 
+ j
+
+For the following exercises, find the magnitude and direction of the vector, 
+ 
+ 0≤θ<2π.
+〈 
+ 0,4 〉
+〈 
+ 6,5 〉
+| v |=7.810,θ=39.806°
+〈 
+ 2,−5 〉
+〈 
+ −4,−6 〉
+| v |=7.211,θ=236.310°
+
+Given u = 3i − 4j and v = −2i + 3j, calculate 
+ 
+ u⋅v.
+
+Given u = −i − j and v = i + 5j, calculate 
+ 
+ u⋅v.
+−6
+
+Given 
+ 
+ u=〈 
+ −2,4 〉
+ and 
+ 
+ v=〈 
+ −3,1 〉,
+ calculate 
+ 
+ u⋅v.
+
+Given u 
+ 
+ =〈 
+ −1,6
+ 〉
+ 
+ and v 
+ 
+ =〈 
+ 6,−1
+ 〉,
+ 
+ calculate 
+ 
+ u⋅v.
+−12
+
+Graphical
+
+For the following exercises, given 
+ 
+ v,
+ draw 
+ 
+ v,
+ 
+ 3v and 
+
+ 1
+ 2
+ 
+ v.
+〈 
+ 2,−1 〉
+〈 
+ −1,4 〉
+〈 
+ −3,−2 〉
+
+For the following exercises, use the vectors shown to sketch u + v, u − v, and 2u.
+
+For the following exercises, use the vectors shown to sketch 2u + v.
+
+For the following exercises, use the vectors shown to sketch u − 3v.
+
+For the following exercises, write the vector shown in component form.
+〈 
+ 4,1 〉
+
+Given initial point 
+
+ P
+ 1
+ 
+ =(
+ 
+ 2,1
+ )
+ and terminal point 
+
+ P
+ 2
+ 
+ =(
+ 
+ −1,2
+ ),
+ write the vector 
+ 
+ v
+ in terms of 
+ 
+ i
+ and 
+ 
+ j,
+ then draw the vector on the graph.
+
+Given initial point 
+
+ P
+ 1
+ 
+ =(
+ 
+ 4,−1
+ )
+ and terminal point 
+
+ P
+ 2
+ 
+ =(
+ 
+ −3,2
+ ),
+ write the vector 
+ 
+ v
+ in terms of 
+ 
+ i
+ and 
+ 
+ j.
+ 
+ Draw the points and the vector on the graph.
+v=−7i+3j
+
+Given initial point 
+
+ P
+ 1
+ 
+ =(
+ 
+ 3,3
+ )
+ and terminal point 
+
+ P
+ 2
+ 
+ =(
+ 
+ −3,3
+ ),
+ write the vector 
+ 
+ v
+ in terms of 
+ 
+ i
+ and 
+ 
+ j.
+ Draw the points and the vector on the graph.
+
+Extensions
+
+For the following exercises, use the given magnitude and direction in standard position, write the vector in component form.
+| v |=6,θ=45°
+3
+ 2
+ 
+ i+3
+ 2
+ 
+ j
+| v |=8,θ=220°
+| v |=2,θ=300°
+i−
+ 3
+ 
+ j
+| v |=5,θ=135°
+
+A 60-pound box is resting on a ramp that is inclined 12°. Rounding to the nearest tenth,
+ⓐ Find the magnitude of the normal (perpendicular) component of the force.
+ⓑ Find the magnitude of the component of the force that is parallel to the ramp.
+ⓐ 58.7
+ⓑ 12.5
+
+A 25-pound box is resting on a ramp that is inclined 8°. Rounding to the nearest tenth,
+ⓐ Find the magnitude of the normal (perpendicular) component of the force.
+ⓑ Find the magnitude of the component of the force that is parallel to the ramp.
+
+Find the magnitude of the horizontal and vertical components of a vector with magnitude 8 pounds pointed in a direction of 27° above the horizontal. Round to the nearest hundredth.
+x=7.13
+ pounds, 
+ 
+ y=3.63
+ pounds
+
+Find the magnitude of the horizontal and vertical components of the vector with magnitude 4 pounds pointed in a direction of 127° above the horizontal. Round to the nearest hundredth.
+
+Find the magnitude of the horizontal and vertical components of a vector with magnitude 5 pounds pointed in a direction of 55° above the horizontal. Round to the nearest hundredth.
+x=2.87
+ pounds, 
+ 
+ y=4.10
+ pounds
+
+Find the magnitude of the horizontal and vertical components of the vector with magnitude 1 pound pointed in a direction of 8° above the horizontal. Round to the nearest hundredth.
+
+Real-World Applications
+
+A woman leaves home and walks 3 miles west, then 2 miles southwest. How far from home is she, and in what direction must she walk to head directly home?
+
+4.635 miles, 17.764° N of E
+
+A boat leaves the marina and sails 6 miles north, then 2 miles northeast. How far from the marina is the boat, and in what direction must it sail to head directly back to the marina?
+
+A man starts walking from home and walks 4 miles east, 2 miles southeast, 5 miles south, 4 miles southwest, and 2 miles east. How far has he walked? If he walked straight home, how far would he have to walk?
+
+17 miles. 10.318 miles
+
+A woman starts walking from home and walks 4 miles east, 7 miles southeast, 6 miles south, 5 miles southwest, and 3 miles east. How far has she walked? If she walked straight home, how far would she have to walk?
+
+A man starts walking from home and walks 3 miles at 20° north of west, then 5 miles at 10° west of south, then 4 miles at 15° north of east. If he walked straight home, how far would he have to the walk, and in what direction?
+
+Distance: 2.868. Direction: 86.474° North of West, or 3.526° West of North
+
+A woman starts walking from home and walks 6 miles at 40° north of east, then 2 miles at 15° east of south, then 5 miles at 30° south of west. If she walked straight home, how far would she have to walk, and in what direction?
+
+An airplane is heading north at an airspeed of 600 km/hr, but there is a wind blowing from the southwest at 80 km/hr. How many degrees off course will the plane end up flying, and what is the plane’s speed relative to the ground?
+
+4.924°. 659 km/hr
+
+An airplane is heading north at an airspeed of 500 km/hr, but there is a wind blowing from the northwest at 50 km/hr. How many degrees off course will the plane end up flying, and what is the plane’s speed relative to the ground?
+
+An airplane needs to head due north, but there is a wind blowing from the southwest at 60 km/hr. The plane flies with an airspeed of 550 km/hr. To end up flying due north, how many degrees west of north will the pilot need to fly the plane?
+
+4.424°
+
+An airplane needs to head due north, but there is a wind blowing from the northwest at 80 km/hr. The plane flies with an airspeed of 500 km/hr. To end up flying due north, how many degrees west of north will the pilot need to fly the plane?
+
+As part of a video game, the point 
+ 
+ (
+ 
+ 5,7
+ )
+ is rotated counterclockwise about the origin through an angle of 35°. Find the new coordinates of this point.
+(
+ 
+ 0.081,8.602
+ )
+
+As part of a video game, the point 
+ 
+ (
+ 
+ 7,3
+ )
+ is rotated counterclockwise about the origin through an angle of 40°. Find the new coordinates of this point.
+
+Two children are throwing a ball back and forth straight across the back seat of a car. The ball is being thrown 10 mph relative to the car, and the car is traveling 25 mph down the road. If one child doesn't catch the ball, and it flies out the window, in what direction does the ball fly (ignoring wind resistance)?
+
+21.801°, relative to the car’s forward direction
+
+Two children are throwing a ball back and forth straight across the back seat of a car. The ball is being thrown 8 mph relative to the car, and the car is traveling 45 mph down the road. If one child doesn't catch the ball, and it flies out the window, in what direction does the ball fly (ignoring wind resistance)?
+
+A 50-pound object rests on a ramp that is inclined 19°. Find the magnitude of the components of the force parallel to and perpendicular to (normal) the ramp to the nearest tenth of a pound.
+
+parallel: 16.28, perpendicular: 47.28 pounds
+
+Suppose a body has a force of 10 pounds acting on it to the right, 25 pounds acting on it upward, and 5 pounds acting on it 45° from the horizontal. What single force is the resultant force acting on the body?
+
+Suppose a body has a force of 10 pounds acting on it to the right, 25 pounds acti
+[truncated]

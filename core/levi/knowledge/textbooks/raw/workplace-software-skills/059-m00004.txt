@@ -1,0 +1,63 @@
+# m00004
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Calculations and Basic Formulas in Microsoft Excel
+
+Calculations and Basic Formulas in Microsoft Excel
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Create basic formulas
+
+Add numbers in Excel using a formula or function
+
+Subtract numbers in Excel using a formula or function
+
+Multiply numbers in Excel using a formula or function
+
+Divide numbers in Excel using a formula or function
+
+At WorldCorp, you manage several account teams, each of which has a sales team. Part of your job is to compare the sales agents’ revenues using some basic data analysis, which you can extend to other applications in your job. To assess the performance of the agents and the sales team, you will need to create some basic formulas. These formulas could include the total sales during a specific time period by agent or the average sales per time period for the whole team. These values can then be used to put together a report of the performance of your entire team. Upper management compiles the reports from all the teams to summarize the company’s performance. Using basic formulas in Microsoft Excel expedites the process and helps management to uniformly analyze the information.
+
+Setting Up Basic Formulas
+
+Now that you have learned how to set up a table or spreadsheet, you can perform calculations on the data. First, select the cell where you want the calculation to appear. Use the Formula Bar located below the ribbon to type in the formula or function, starting with the “=” sign ().
+
+Adding Numbers
+
+You have learned the two ways to add quantities in Excel: formulas and functions. We can use WorldCorp’s sales data to illustrate how to add numbers. a contains a set of sales data, with a row at the bottom for the total of all the sales but with the total amount missing. To fill in this empty cell, first, type “=” to open the calculation procedure. Then, click on the first cell you want to add, type a “+” sign, then click on the next cell in the column. Continue this process until all the cells you want to add are included. b shows the finished formula that includes all the cells in the columns. Notice that Excel adds colors to the cells to help you follow the formulas.
+
+When you have a small set of data, or when the numbers you are adding using the “+” operator are not all in one row or column, using an addition formula may be the best way to find your sum. However, Excel has built-in shortcuts, such as the SUM function. Functions can often save you time over performing the same calculations using formulas. Like formulas, functions must begin with an equals sign, but rather than using cell references to build an equation, you type the function name, in this case, SUM (). Then, type an open parenthesis, insert the cell references, separated by commas, and then close the parentheses. You can click on each cell individually or type its cell reference, as in , but you’ll notice that this method does not save time because you are still entering or clicking each cell reference. Functions allow users to reference individual cells, but they also allow us to choose multiple cells at the same time, which does save time. To select a range of cells, which is a group of cells that are contiguous, you can type in the function and opening parenthesis, and then highlight the cells you want to add. You can also type in the range, separating the first cell and the last cell with a colon. shows the range as F3:F11. Functions are often faster to type than formulas, but sometimes you will need to use both formulas and functions to perform complex calculations.
+
+The Formula Builder is a tool in Excel that can help you create a function based on your data and your needs. Read the tutorial on the SUM function to learn how to use the Formula Builder.
+
+Subtracting Numbers
+
+Understanding how to add numbers in Excel makes subtracting them rather intuitive. If you wanted to subtract many cells in a column, you could type out a long subtraction equation, starting with the equals sign and using cell references and the hyphen key, for example, “=F3-F4-F5-F6-F7-F8-F9-F10-F11.” Using a new set of data, you can see in that the margin is the price minus the cost. You can carry this formula down the rows in the same column.
+
+Multiplying Numbers
+
+With multiplication, formulas and functions start getting more complicated. Sometimes, you may need to multiply the values of two or more cells, and other times, you may need to multiply a cell value by a constant value such as a percentage. One may be more efficient than the other, depending on the data. In , the price per unit is the same for every row, so you can use cell references to multiply the quantity cell by the price-per-unit cell. Because this table contains only one product, the unit price does not change, and it can be tedious to enter the same price for each sale. You can enter the price per unit in the first row and then click and drag the value to the bottom of your table. Another method would be to simplify your table by eliminating the price-per-unit column and including the value in the formula . Condensing a table in this manner is helpful, especially if you have a large table of data. To construct a multiplication formula, start with an equals sign and use an asterisk (*) as the mathematical operator.
+
+For multiplication, you can also use the PRODUCT function. shows an example of the function syntax. When you have entered all of the cell references, close the parentheses, and the product will be the same as it would if you had used a formula.
+
+Dividing Numbers
+
+Division calculations use the operator “/” and follow a similar syntax as other basic mathematical formulas. a shows an example of division for determining increases or decreases in prices of aluminum. As you can see, the gain on 1/10/2021 was 2.36 percent. Excel does have a QUOTIENT function, but it returns only whole numbers, leaving off the decimal portion of the quotient (b). It may be useful for some situations, but formulas provide more exact answers.
+
+Summary
+
+Excel uses the formula syntax to add, subtract, multiply, or divide. The formula syntax is comparable to writing out math equations by hand, with numbers and mathematical operators.
+
+The function syntax can perform the same calculations as the formula syntax for addition and multiplication but not for subtraction or division. The function syntax uses function names with cell references or ranges in parentheses to calculate.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises

@@ -1,0 +1,283 @@
+# m00086
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Correlation Analysis
+
+Correlation Analysis
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate a correlation coefficient.
+
+Interpret a correlation coefficient.
+
+Test for the significance of a correlation coefficient.
+
+Calculate a Correlation Coefficient
+
+In correlation analysis, we study the relationship between bivariate data, which is data collected on two variables where the data values are paired with one another.
+Correlation is the measure of association between two numeric variables. For example, we may be interested to know if there is a correlation between bond prices and interest rates or between the age of a car and the value of the car. To investigate the correlation between two numeric quantities, the first step is to create a scatter plot that will graph the (x, y) ordered pairs. The independent, or explanatory, quantity is labeled as the x-variable, and the dependent, or response, quantity is labeled as the y-variable.
+
+For example, we may be interested to know if the price of Nike stock is correlated with the value of the S&P 500 (Standard & Poor’s 500 stock market index). To investigate this, monthly data can be collected for Nike stock prices and value of the S&P 500 for a period of time, and a scatter plot can be created and examined. A scatter plot, or scatter diagram, is a graphical display intended to show the relationship between two variables. The setup of the scatter plot is that one variable is plotted on the horizontal axis and the other variable is plotted on the vertical axis. Each pair of data values is considered as an (x, y) point, and the various points are plotted on the diagram. A visual inspection of the plot is then made to detect any patterns or trends on the scatter diagram. shows the relationship between the Nike stock price and its S&P value over a one-year time period.
+
+To assess linear correlation, the graphical trend of the data points is examined on the scatter plot to determine if a straight-line pattern exists. If a linear pattern exists, the correlation may indicate either a positive or a negative correlation. A positive correlation indicates that as the independent variable increases, the dependent variable tends to increase as well, or, as the independent variable decreases, the dependent variable tends to decrease (the two quantities move in the same direction). A negative correlation indicates that as the independent variable increases, the dependent variable decreases, or, as the independent variable decreases, the dependent variable increases (the two quantities move in opposite directions). If there is no relationship or association between the two quantities, where one quantity changing does not affect the other quantity, we conclude that there is no correlation between the two variables.
+
+Nike Stock Price ($) and Value of S&P 500 over a One-Year Time Period
+
+Date
+Nike
+ Stock Price
+Nike
+
+Stock Price
+
+4/1/2020
+2,912.43
+87.18
+5/1/2020
+3,044.31
+98.58
+6/1/2020
+3,100.29
+98.05
+7/1/2020
+3,271.12
+97.61
+8/1/2020
+3,500.31
+111.89
+9/1/2020
+3,363.00
+125.54
+10/1/2020
+3,269.96
+120.08
+11/1/2020
+3,621.63
+134.70
+12/1/2020
+3,756.07
+141.47
+1/1/2021
+3,714.24
+133.59
+2/1/2021
+3,811.15
+134.78
+3/1/2021
+3,943.34
+140.45
+3/12/2021
+3,943.34
+140.45
+From the scatter plot in the Nike stock versus S&P 500 example (see ), we note that the trend reflects a positive correlation in that as the value of the S&P 500 increases, the price of Nike stock tends to increase as well.
+
+Scatter Plot of Nike Stock Price ($) and Value of S&P 500
+
+When inspecting a scatter plot, it may be difficult to assess a correlation based on a visual inspection of the graph alone. A more precise assessment of the correlation between the two quantities can be obtained by calculating the numeric correlation coefficient (referred to using the symbol r).
+
+The correlation coefficient, which was developed by statistician Karl Pearson in the early 1900s, is a measure of the strength and direction of the correlation between the independent variable x and the dependent variable y.
+
+The formula for r is shown below; however, technology, such as Excel or the statistical analysis program R, is typically used to calculate the correlation coefficient.
+
+where n refers to the number of data pairs and the symbol ∑x indicates to sum the x-values.
+provides a step-by-step procedure on how to calculate the correlation coefficient r.
+
+Steps for Calculating the Correlation Coefficient
+
+Step
+Representation in Symbols
+∑x
+∑y
+∑xy
+∑x2
+∑y2
+n
+r=n∑xy-∑x∑yn∑x2-∑x2n∑y2-∑y2
+Note that since r is calculated using sample data, r is considered a sample statistic used to measure the strength of the correlation for the two population variables. Sample data indicates data based on a subset of the entire population.
+
+Given the complexity of this calculation, Excel or other software is typically used to calculate the correlation coefficient.
+
+The Excel command to calculate the correlation coefficient uses the following format:
+
+where A1:A10 are the cells containing the x-values and B1:B10 are the cells containing the y-values.
+
+Download the spreadsheet file containing key Chapter 14 Excel exhibits.
+
+Interpret a Correlation Coefficient
+
+Once the value of r is calculated, this measurement provides two indicators for the correlation:
+
+the strength of the correlation based on the value of r
+
+the direction of the correlation based on the sign of r
+
+The value of r gives us this information:
+
+The value of r is always between -1 and +1: -1 ≤ r ≤ 1.
+
+The size of the correlation r indicates the strength of the linear relationship between the two variables. Values of r close to -1 or to +1 indicate a stronger linear relationship.
+
+If r =0, there is no linear relationship between the two variables (no linear correlation).
+
+If r=1, there is perfect positive correlation.
+
+If r=-1, there is perfect negative correlation. In both of these cases, all the original data points lie on a straight line.
+
+The sign of r gives us this information:
+
+A positive value of r means that when x increases, y tends to increase, and when x decreases, y tends to decrease (positive correlation).
+
+A negative value of r means that when x increases, y tends to decrease, and when x decreases, y tends to increase (negative correlation).
+
+Correlation in Finance Applications
+This video on correlation concepts discusses them with a specific focus on finance applications.
+
+The Excel command used to find the value of the correlation coefficient for the Nike stock versus S&P 500 example (refer back to ) is
+
+In this example, the value of r is calculated by Excel to be r=0.928.
+
+Since this is a positive value close to 1, we conclude that the relationship between Nike stock and the value of the S&P 500 over this time period represents a strong, positive correlation.
+
+The correlation coefficient r can also be determined using the statistical capability on the financial calculator:
+
+Step 1 is to enter the data in the calculator (using the [DATA] function that is located above the 7 key).
+
+Step 2 is to access the statistical results provided by the calculator (using the [STAT] function that is located above the 8 key) and scroll to the correlation coefficient results.
+
+Follow the steps in for calculating the correlation data for the data set of Nike stock price and value of the S&P 500 shown previously.
+
+Calculator Steps for Finding the Relationship between Nike Stock Price and Value of S&P 500The specific financial calculator in these examples is the Texas Instruments BA II Plus TM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+2ND [DATA]
+X01
+0.00
+2
+2ND [CLR WORK]
+X01
+0.00
+3
+Enter first x-value of 2912.43
+2912.43 ENTER
+X01 =
+2,912.43
+4
+Move to next data entry
+↓
+Y01 =
+1.00
+5
+Enter first y-value of 87.18
+87.18 ENTER
+Y01 =
+87.18
+6
+Move to next data entry
+↓
+X02
+0.00
+7
+Enter second x-value of 3044.31
+3044.31 ENTER
+X02 =
+3,044.31
+8
+Move to next data entry
+↓
+Y02 =
+1.00
+9
+Enter second y-value of 98.58
+98.58 ENTER
+Y02 =
+98.58
+10
+Move to next data entry
+↓
+X03
+0.00
+11
+Continue to enter remaining data values
+12
+2ND [STAT]
+13
+2ND [SET]
+LIN
+14
+Move to 1st statistical result
+n=
+13.00
+15
+Move to next statistical result
+x¯=
+3,480.86
+16
+Continue to scroll down until the value of r is displayed
+r=
+0.93
+From the statistical results shown on the calculator display, the correlation coefficient r is 0.93, which indicates that the relationship between Nike stock and the value of the S&P 500 over this time period represents a strong, positive correlation.
+
+Note: A strong correlation does not suggest that x causes y or y causes x. We must remember that correlation does not imply causation.
+
+Test a Correlation Coefficient for Significance
+
+The correlation coefficient, r, tells us about the strength and direction of the linear relationship between x and y. The sample data are used to compute r, the correlation coefficient for the sample. If we had data for the entire population (that is, all measurements of interest), we could find the population correlation coefficient, which is labeled as the Greek letter ρ (pronounced “rho”). But because we have only sample data, we cannot calculate the population correlation coefficient. The sample correlation coefficient, r, is our estimate of the unknown population correlation coefficient.
+ρ = population correlation coefficient (unknown)
+r = sample correlation coefficient (known; calculated from sample data)
+
+An important step in the correlation analysis is to determine if the correlation is significant. By this, we are asking if the correlation is strong enough to allow meaningful predictions for y based on values of x. One method to test the significance of the correlation is to employ a hypothesis test. The hypothesis test lets us decide whether the value of the population correlation coefficient ρ is close to zero or significantly different from zero. We decide this based on the sample correlation coefficient r and the sample size n.
+
+If the test concludes that the correlation coefficient is significantly different from zero, we say that the correlation coefficient is significant.
+
+Conclusion: There is sufficient evidence to conclude that there is a significant linear relationship between x and y variables because the correlation coefficient is significantly different from zero.
+
+What the conclusion means: There is a significant linear relationship between the x and y variables. If the test concludes that the correlation coefficient is not significantly different from zero (it is close to zero), we say that the correlation coefficient is not significant.
+
+A hypothesis test can be performed to test if the correlation is significant. A hypothesis test is a statistical method that uses sample data to test a claim regarding the value of a population parameter. In this case, the hypothesis test will be used to test the claim that the population correlation coefficient ρ is equal to zero.
+
+Use these hypotheses when performing the hypothesis test:
+
+Null hypothesis: H0: ρ=0
+
+Alternate hypothesis: Ha: ρ≠0
+
+The hypotheses can be stated in words as follows:
+
+Null hypothesis H0: The population correlation coefficient is not significantly different from zero. There is not a significant linear relationship (correlation) between x and y in the population.
+
+Alternate hypothesis Ha: The population correlation coefficient is significantly different from zero. There is a significant linear relationship (correlation) between x and y in the population.
+
+A quick shorthand way to test correlations is the relationship between the sample size and the correlation. If  r  ≥ 2n, then this implies that the correlation between the two variables demonstrates that a linear relationship exists and is statistically significant at approximately the 0.05 level of significance. As the formula indicates, there is an inverse relationship between the sample size and the required correlation for significance of a linear relationship. With only 10 observations, the required correlation for significance is 0.6325; for 30 observations, the required correlation for significance decreases to 0.3651; and at 100 observations, the required level is only 0.2000.
+
+NOTE:
+
+If r is significant and the scatter plot shows a linear trend, the line can be used to predict the value of y for values of x that are within the domain of observed x-values.
+
+If r is not significant OR if the scatter plot does not show a linear trend, the line should not be used for prediction.
+
+If r is significant and the scatter plot shows a linear trend, the line may not be appropriate or reliable for prediction outside the domain of observed x-values in the data.
+
+Determining If a Correlation Is Significant
+
+Suppose that the chief financial officer (CFO) of a corporation is investigating the correlation between stock prices and unemployment rate over a period of 10 years and finds the correlation coefficient to be -0.68. There are 10 (x, y) data points in the data set. Should the CFO conclude that the correlation is significant for the relationship between stock prices and unemployment rate based on a level of significance of 0.05?
+Solution:
+
+When using a level of significance of 0.05, if  r  ≥ 2n, then this implies that the correlation between the two variables demonstrates a linear relationship that is statistically significant at approximately the 0.05 level of significance. In this example, we check if |-0.68| is greater than or equal to 2n  where n=10. Since 210  is approximately 0.632, this indicates that the absolute value of r of -0.68 is greater than 2n , and thus the correlation is deemed as significant.
+
+Correlations may be helpful in visualizing the data, but they are not appropriately used to explain a relationship between two variables. Perhaps no single statistic is more misused than the correlation coefficient. Citing correlations between health conditions and everything from place of residence to eye color have the effect of implying a cause-and-effect relationship. This simply cannot be accomplished with a correlation coefficient. The correlation coefficient is, of course, innocent of this misinterpretation. It is the duty of analysts to use a statistic that is designed to test for cause-and-effect relationships and to report only those results, if they are intending to make such a claim. The problem is that passing this more rigorous test is difficult, therefore lazy and/or unscrupulous researchers fall back on correlations when they cannot make their case legitimately.
+
+Correlation is the measure of association between two numeric variables. A correlation coefficient called r is used to assess the strength and direction of the correlation. The value of r is always between -1 and +1. The size of the correlation r indicates the strength of the linear relationship between the two variables. Values of r close to -1 or to +1 indicate a stronger linear relationship. A positive value of r means that when x increases, y tends to increase and when x decreases, y tends to decrease (positive correlation). A negative value of r means that when x increases, y tends to decrease and when x decreases, y tends to increase (negative correlation).
+
+the measure of association between two numeric variables
+a measure of the strength and direction of the linear relationship between two variables
+a measure of the association between two variables that exhibit an approximate straight-line fit when plotted on a scatter plot

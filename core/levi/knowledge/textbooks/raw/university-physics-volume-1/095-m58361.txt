@@ -1,0 +1,228 @@
+# m58361
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Simple Harmonic Motion
+
+Simple Harmonic Motion
+
+By the end of this section, you will be able to:
+
+Define the terms period and frequency
+
+List the characteristics of simple harmonic motion
+
+Explain the concept of phase shift
+
+Write the equations of motion for the system of a mass and spring undergoing simple harmonic motion
+
+Describe the motion of a mass oscillating on a vertical spring
+
+When you pluck a guitar string, the resulting sound has a steady tone and lasts a long time (). The string vibrates around an equilibrium position, and one oscillation is completed when the string starts from the initial position, travels to one of the extreme positions, then to the other extreme position, and returns to its initial position. We define periodic motion to be any motion that repeats itself at regular time intervals, such as exhibited by the guitar string or by a child swinging on a swing. In this section, we study the basic characteristics of oscillations and their mathematical description.
+
+Period and Frequency in Oscillations
+
+In the absence of friction, the time to complete one oscillation remains constant and is called the period (T). Its units are usually seconds, but may be any convenient unit of time. The word ‘period’ refers to the time for some event whether repetitive or not, but in this chapter, we shall deal primarily in periodic motion, which is by definition repetitive.
+
+A concept closely related to period is the frequency of an event. Frequency (f) is defined to be the number of events per unit time. For periodic motion, frequency is the number of oscillations per unit time. The relationship between frequency and period is
+
+The SI unit for frequency is the hertz (Hz) and is defined as one cycle per second:
+
+A cycle is one complete oscillation.
+Determining the Frequency of Medical Ultrasound
+Ultrasound machines are used by medical professionals to make images for examining internal organs of the body. An ultrasound machine emits high-frequency sound waves, which reflect off the organs, and a computer receives the waves, using them to create a picture. We can use the formulas presented in this module to determine the frequency, based on what we know about oscillations. Consider a medical imaging device that produces ultrasound by oscillating with a period of 0.400μs. What is the frequency of this oscillation?
+
+Determining the Frequency of Medical Ultrasound
+Strategy
+The period (T) is given and we are asked to find frequency (f).
+
+Strategy
+Solution
+Substitute 0.400μs for T in f=1T:
+
+Solution
+
+Solve to find
+Significance
+This frequency of sound is much higher than the highest frequency that humans can hear (the range of human hearing is 20 Hz to 20,000 Hz); therefore, it is called ultrasound. Appropriate oscillations at this frequency generate ultrasound used for noninvasive medical diagnoses, such as observations of a fetus in the womb.
+
+Significance
+
+Characteristics of Simple Harmonic Motion
+
+A very common type of periodic motion is called simple harmonic motion (SHM). A system that oscillates with SHM is called a simple harmonic oscillator.
+
+Simple Harmonic Motion
+
+In simple harmonic motion, the acceleration of the system, and therefore the net force, is proportional to the displacement and acts in the opposite direction of the displacement.
+
+A good example of SHM is an object with mass m attached to a spring on a frictionless surface, as shown in . The object oscillates around the equilibrium position, and the net force on the object is equal to the force provided by the spring. This force obeys Hooke’s law Fs=−kx, as discussed in a previous chapter.
+
+If the net force can be described by Hooke’s law and there is no damping (slowing down due to friction or other nonconservative forces), then a simple harmonic oscillator oscillates with equal displacement on either side of the equilibrium position, as shown for an object on a spring in . The maximum displacement from equilibrium is called the amplitude (A). The units for amplitude and displacement are the same but depend on the type of oscillation. For the object on the spring, the units of amplitude and displacement are meters.
+
+What is so significant about SHM? For one thing, the period T and frequency f of a simple harmonic oscillator are independent of amplitude. The string of a guitar, for example, oscillates with the same frequency whether plucked gently or hard.
+
+Two important factors do affect the period of a simple harmonic oscillator. The period is related to how stiff the system is. A very stiff object has a large force constant (k), which causes the system to have a smaller period. For example, you can adjust a diving board’s stiffness—the stiffer it is, the faster it vibrates, and the shorter its period. Period also depends on the mass of the oscillating system. The more massive the system is, the longer the period. For example, a heavy person on a diving board bounces up and down more slowly than a light one. In fact, the mass m and the force constant k are the only factors that affect the period and frequency of SHM. To derive an equation for the period and the frequency, we must first define and analyze the equations of motion. Note that the force constant is sometimes referred to as the spring constant.
+
+Equations of SHM
+
+Consider a block attached to a spring on a frictionless table (). The equilibrium position (the position where the spring is neither stretched nor compressed) is marked as x=0. At the equilibrium position, the net force is zero.
+
+Work is done on the block to pull it out to a position of x=+A, and it is then released from rest. The maximum x-position (A) is called the amplitude of the motion. The block begins to oscillate in SHM between x=+A and x=−A, where A is the amplitude of the motion and T is the period of the oscillation. The period is the time for one oscillation. shows the motion of the block as it completes one and a half oscillations after release. shows a plot of the position of the block versus time. When the position is plotted versus time, it is clear that the data can be modeled by a cosine function with an amplitude A and a period T. The cosine function cosθ repeats every multiple of 2π, whereas the motion of the block repeats every period T. However, the function cos(2πTt) repeats every integer multiple of the period. The maximum of the cosine function is one, so it is necessary to multiply the cosine function by the amplitude A.
+
+Recall from the chapter on rotation that the angular frequency equals ω=dθdt. In this case, the period is constant, so the angular frequency is defined as 2π divided by the period, ω=2πT.
+
+The equation for the position as a function of time x(t)=Acos(ωt) is good for modeling data, where the position of the block at the initial time t=0.00s is at the amplitude A and the initial velocity is zero. Often when taking experimental data, the position of the mass at the initial time t=0.00s is not equal to the amplitude and the initial velocity is not zero. Consider 10 seconds of data collected by a student in lab, shown in .
+
+The data in can still be modeled with a periodic function, like a cosine function, but the function is shifted to the right. This shift is known as a phase shift and is usually represented by the Greek letter phi (ϕ). The equation of the position as a function of time for a block on a spring becomes
+
+This is the generalized equation for SHM where t is the time measured in seconds, ω is the angular frequency with units of inverse seconds, A is the amplitude measured in meters or centimeters, and ϕ is the phase shift measured in radians (). It should be noted that because sine and cosine functions differ only by a phase shift, this motion could be modeled using either the cosine or sine function.
+
+The velocity of the mass on a spring, oscillating in SHM, can be found by taking the derivative of the position equation:
+
+Because the sine function oscillates between –1 and +1, the maximum velocity is the amplitude times the angular frequency, vmax=Aω. The maximum velocity occurs at the equilibrium position (x=0) when the mass is moving toward x=+A. The maximum velocity in the negative direction is attained at the equilibrium position (x=0) when the mass is moving toward x=−A and is equal to −vmax.
+
+The acceleration of the mass on the spring can be found by taking the time derivative of the velocity:
+
+The maximum acceleration is amax=Aω2. The maximum acceleration occurs at the position (x=−A), and the acceleration at the position (x=−A) and is equal to amax.
+
+Summary of Equations of Motion for SHM
+
+In summary, the oscillatory motion of a block on a spring can be modeled with the following equations of motion:
+
+Here, A is the amplitude of the motion, T is the period, ϕ is the phase shift, and ω=2πT=2πf is the angular frequency of the motion of the block.
+Determining the Equations of Motion for a Block and a Spring
+A 2.00-kg block is placed on a frictionless surface. A spring with a force constant of k=32.00N/m is attached to the block, and the opposite end of the spring is attached to the wall. The spring can be compressed or extended. The equilibrium position is marked as x=0.00m.
+
+Determining the Equations of Motion for a Block and a Spring
+
+Work is done on the block, pulling it out to x=+0.02m. The block is released from rest and oscillates between x=+0.02m and x=−0.02m. The period of the motion is 1.57 s. Determine the equations of motion.
+Strategy
+We first find the angular frequency. The phase shift is zero, ϕ=0.00rad, because the block is released from rest at x=A=+0.02m. Once the angular frequency is found, we can determine the maximum velocity and maximum acceleration.
+
+Strategy
+Solution
+The angular frequency can be found and used to find the maximum velocity and maximum acceleration:
+
+Solution
+
+All that is left is to fill in the equations of motion:
+Significance
+The position, velocity, and acceleration can be found for any time. It is important to remember that when using these equations, your calculator must be in radians mode.
+
+Significance
+
+The Period and Frequency of a Mass on a Spring
+
+One interesting characteristic of the SHM of an object attached to a spring is that the angular frequency, and therefore the period and frequency of the motion, depend on only the mass and the force constant, and not on other factors such as the amplitude of the motion. We can use the equations of motion and Newton’s second law (F→net=ma→) to find equations for the angular frequency, frequency, and period.
+
+Consider the block on a spring on a frictionless surface. There are three forces on the mass: the weight, the normal force, and the force due to the spring. The only two forces that act perpendicular to the surface are the weight and the normal force, which have equal magnitudes and opposite directions, and thus sum to zero. The only force that acts parallel to the surface is the force due to the spring, so the net force must be equal to the force of the spring:
+
+Substituting the equations of motion for x and a gives us
+
+Cancelling out like terms and solving for the angular frequency yields
+
+The angular frequency depends only on the force constant and the mass, and not the amplitude. The angular frequency is defined as ω=2π/T, which yields an equation for the period of the motion:
+
+The period also depends only on the mass and the force constant. The greater the mass, the longer the period. The stiffer the spring, the shorter the period. The frequency is
+
+Vertical Motion and a Horizontal Spring
+
+When a spring is hung vertically and a block is attached and set in motion, the block oscillates in SHM. In this case, there is no normal force, and the net effect of the force of gravity is to change the equilibrium position. Consider . Two forces act on the block: the weight and the force of the spring. The weight is constant and the force of the spring changes as the length of the spring changes.
+
+When the block reaches the equilibrium position, as seen in , the force of the spring equals the weight of the block, Fnet=Fs−mg=0, where
+
+From the figure, the change in the position is Δy=y0−y1 and since −k(−Δy)=mg, we have
+
+If the block is displaced and released, it will oscillate around the new equilibrium position. As shown in , if the position of the block is recorded as a function of time, the recording is a periodic function.
+
+If the block is displaced to a position y, the net force becomes 
+ 
+ Fnet=k(y0−y)−mg=0. But we found that at the equilibrium position, mg=kΔy=ky0−ky1. Substituting for the weight in the equation yields
+
+Recall that y1 is just the equilibrium position and any position can be set to be the point y=0.00m. So let’s set y1 to y=0.00m. The net force then becomes
+
+This is just what we found previously for a horizontally sliding mass on a spring. The constant force of gravity only served to shift the equilibrium location of the mass. Therefore, the solution should be the same form as for a block on a horizontal spring, y(t)=Acos(ωt+ϕ). The equations for the velocity and the acceleration also have the same form as for the horizontal case. Note that the inclusion of the phase shift means that the motion can actually be modeled using either a cosine or a sine function, since these two functions only differ by a phase shift.
+
+Summary
+
+Periodic motion is a repeating oscillation. The time for one oscillation is the period T and the number of oscillations per unit time is the frequency f. These quantities are related by f=1T.
+
+Simple harmonic motion (SHM) is oscillatory motion for a system where the restoring force is proportional to the displacement and acts in the direction opposite to the displacement.
+
+Maximum displacement is the amplitude A. The angular frequency ω, period T, and frequency f of a simple harmonic oscillator are given by ω=km, T=2πmk,andf=12πkm, where m is the mass of the system and k is the force constant.
+
+Displacement as a function of time in SHM is given byx(t)=Acos(2πTt+ϕ)=Acos(ωt+ϕ).
+
+The velocity is given by v(t)=−Aωsin(ωt+ϕ)=−vmaxsin(ωt+ϕ), where vmax=Aω=Akm.
+
+The acceleration is a(t)=−Aω2cos(ωt+ϕ)=−amaxcos(ωt+ϕ), where amax=Aω2=Akm.
+
+Conceptual Questions
+
+What conditions must be met to produce SHM?
+
+The restoring force must be proportional to the displacement and act opposite to the direction of motion with no drag forces or friction. The frequency of oscillation does not depend on the amplitude.
+
+(a) If frequency is not constant for some oscillation, can the oscillation be SHM? (b) Can you think of any examples of harmonic motion where the frequency may depend on the amplitude?
+
+Give an example of a simple harmonic oscillator, specifically noting how its frequency is independent of amplitude.
+
+Examples: Mass attached to a spring on a frictionless table, a mass hanging from a string, a simple pendulum with a small amplitude of motion. All of these examples have frequencies of oscillation that are independent of amplitude.
+
+Explain why you expect an object made of a stiff material to vibrate at a higher frequency than a similar object made of a more pliable material.
+
+As you pass a freight truck with a trailer on a highway, you notice that its trailer is bouncing up and down slowly. Is it more likely that the trailer is heavily loaded or nearly empty? Explain your answer.
+
+Since the frequency is proportional to the square root of the force constant and inversely proportional to the square root of the mass, it is likely that the truck is heavily loaded, since the force constant would be the same whether the truck is empty or heavily loaded.
+
+Some people modify cars to be much closer to the ground than when manufactured. Should they install stiffer springs? Explain your answer.
+
+Problems
+
+Prove that using x(t)=Asin(ωt+ϕ) will produce the same results for the period for the oscillations of a mass and a spring. Why do you think the cosine function was chosen?
+
+Proof
+
+What is the period of 60.0 Hz of electrical power?
+
+If your heart rate is 150 beats per minute during strenuous exercise, what is the time per beat in units of seconds?
+
+0.400 s/beat
+
+Find the frequency of a tuning fork that takes 2.50×10−3s to complete one oscillation.
+
+A stroboscope is set to flash every 8.00×10−5s. What is the frequency of the flashes?
+
+12,500 Hz
+
+A tire has a tread pattern with a crevice every 2.00 cm. Each crevice makes a single vibration as the tire moves. What is the frequency of these vibrations if the car moves at 30.0 m/s?
+
+Each piston of an engine makes a sharp sound every other revolution of the engine. (a) How fast is a race car going if its eight-cylinder engine emits a sound of frequency 750 Hz, given that the engine makes 2000 revolutions per kilometer? (b) At how many revolutions per minute is the engine rotating?
+
+a. 340 km/hr; b. 11.3×103 rev/min
+
+A type of cuckoo clock keeps time by having a mass bouncing on a spring, usually something cute like a cherub in a chair. What force constant is needed to produce a period of 0.500 s for a 0.0150-kg mass?
+
+A mass m0 is attached to a spring and hung vertically. The mass is raised a short distance in the vertical direction and released. The mass oscillates with a frequency f0. If the mass is replaced with a mass nine times as large, and the experiment was repeated, what would be the frequency of the oscillations in terms of f0
+?
+f=13f0
+
+A 0.500-kg mass suspended from a spring oscillates with a period of 1.50 s. How much mass must be added to the object to change the period to 2.00 s?
+
+How much leeway (both percentage and mass) would you have in the selection of the mass of the object in the previous problem if you did not wish the new period to be greater than 2.01 s or less than 1.99 s?
+
+0.009 kg; 2%
+
+maximum displacement from the equilibrium position of an object oscillating around the equilibrium position
+position where the spring is neither stretched nor compressed
+characteristic of a spring which is defined as the ratio of the force applied to the spring to the displacement caused by the force
+number of events per unit of time
+single fluctuation of a quantity, or repeated and regular fluctuations of a quantity, between two extreme values around an equilibrium or average value
+motion that repeats itself at regular time intervals
+time taken to complete one oscillation
+angle, in radians, that is used in a cosine or sine function to shift the function left or right, used to match up the function with the initial conditions of data
+oscillatory motion in a system where the restoring force is proportional to the displacement, which acts in the direction opposite to the displacement
+a device that oscillates in SHM where the restoring force is proportional to the displacement and acts in the direction opposite to the displacement

@@ -1,0 +1,101 @@
+# m00016
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Advanced Formatting Techniques
+
+Advanced Formatting Techniques
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Create custom formats for worksheet or table for appearance
+
+Create custom formats for a worksheet or table for content
+
+Copy formatting from one range of data to a new range of data
+
+It is important for organizations to use uniform branding and style, which can appear anywhere, from emails to invoice templates to Excel files. Having a uniform style within an organization adds a level of professionalism and consistency to the business, and these may be tied to the company’s intellectual property and similar protections. Many organizations provide guidelines or manuals for all files produced, to ensure that all employees can easily follow the same style or use the same templates.
+
+Microsoft Excel offers many prepackaged themes and styles that can be easily applied to tables and spreadsheets. But it is also possible to create your own custom format. This can be ideal for businesses that want their products to look a certain way and contain specific branding.
+
+Custom Formats for Appearance
+
+The tables and datasets you’ve been working with were finished versions, with color, font, table size, and background set. Here, you’ll create these tables step-by-step with themes and other style elements.
+
+Using Existing Themes
+
+To make formatting easy to use and high quality, Excel offers Themes. Applying a Theme can quickly change the color scheme, fonts, and size of a table or graph. For example, you could easily change the formatting of a table without manually readjusting everything. If your objective is to save time when changing the overall formatting, choose a default theme and all the formatting will be handled automatically.
+
+To access Themes, go to the Page Layout tab and select the Themes icon (a). Then, choose any of the available themes. (“Wisp” is shown in .) All of the formatted tables and graphs in that particular workbook will be changed. If you have a simple worksheet with no specific formatting such as colors, font style, and the like, when you choose a theme, nothing will change. However, if you have a worksheet with formatted headings and charts, you will notice changes when you select a theme. The Color combo box lets users further modify the theme by selecting a different color palette (b).
+
+For additional changes, the Home tab has a combo box called Cell Styles that lets users select other font sizes or background colors, as shown in . Depending on your selection in the Colors menu in the Themes command group (Page Layout tab), the options in the Styles menu will change. For instance, use Blue from the palette, and in the Styles combo box, select Heading 3 and Accent 5, 40%. If an orange color palette from the Color menu was chosen, the Styles options would be orange tones.
+
+Creating Custom Themes
+
+Often companies will have a color scheme for all communications and materials within and outside of the company. The palette is usually linked to the company logo and is an essential part of creating a unified and professional appearance for marketing purposes and legal usage. If a company has a specific theme, it can be saved and used by all employees. The saved theme file can be shared company-wide to ensure consistency. Moreover, the saved theme can be used across all Microsoft products.
+
+There are two ways to create a custom theme. First, users can create the theme from scratch. This means you define the font, color, and other elements of the theme. Second, and perhaps easier, is to start with an existing theme that is close to the desired theme. You can then make the needed adjustments such as changing the font or modifying heading colors slightly. First, format your table using the desired settings, and then choose Save Current Theme at the bottom of the Themes menu to save the theme as a file that can be used in other Microsoft products and/or shared with others.
+
+Go to Microsoft’s theme repository and look for Excel themes. Think about how they might be used in a business. Look for themes that might be appropriate for an accounting department or a human resources department.
+
+Other Formatting Tools
+
+Another time-saving strategy is using the Format as Table tool. On the Home tab, select the Format as Table combo box to see many options for formatting tables (). The background color, heading font, and borders can be changed; additionally, column widths will change automatically to fit the text. This feature also automatically adds filters to the columns, which can help with organizing the data in a table . However, using the Format as Table feature does not format cells according to their content, such as currency.
+
+Adding Images to the Background
+
+Beyond formatting cell content, you can also add an image to a table’s background. The background is a canvas that is displayed behind the cell contents of a worksheet. It could be useful to add a logo, or a topic-related image to the background of a table, especially for an internal or client-facing presentation. Often, this feature is used to indicate that documents are not finalized but in a “draft” stage.
+
+To add an image in the background, first select the table, then go to the Page Layout tab and select Background. You will then be prompted to select an existing file, or you can search online for an image. An image of the word “Confidential” has been added in to show that this report should be kept confidential and not shared. You may insert an existing file or search the internet for a picture.
+
+Custom Formats for Content
+
+Custom formats for content allow users to design a format for data contained in cells. For example, you can use custom formatting to set a format type for how your purchase order numbers are input into your company’s system, or to change how dates are displayed. This feature is different from merely changing a cell’s format such as the decimal points displayed or how months are abbreviated. Instead, the custom format can be saved as a format that is then widely applied to worksheets. You can create a format from scratch, but it is easier to use one of the built-in formats and adjust if necessary. You can customize most aspects of the formatting—from spacing, to displayed decimals, to font color.
+
+Shortening Large Numbers
+
+Sometimes, the appearance of many repeated large numbers in a spreadsheet can be overwhelming. Other times, you may simply want to reduce numbers to estimates. Excel can shorten large numbers so that they are summarized by a letter, such as K (for “thousands”) or M (for “millions”). shows that the estimated COGS varies depending on the quantity sold and the unit cost.
+
+Since these figures are estimations for the coming period, they can be abbreviated to the million by marking with an “m.” To do this, select the cells on which to perform this process, and then right-click and select Format Cells. In the Format Cells dialog box, go to Custom, as shown in . In the Type field, delete the existing text, type [0,,“m”], and then click OK. Using the 0 indicates no decimal points and to use only whole numbers. The “m” is used to round to the million units. Excel will change the figures in the selected cells to be rounded up to the nearest million, as shown in .
+
+Common Number Formats
+
+Some number formats come up frequently, such as addresses, phone numbers, or Social Security Numbers (SSNs). Their formats may be consistent in a specific region (like SSNs in the United States), or they may be similar with variations (like phone numbers with all hyphens, hyphens and parentheses, or spaces).
+
+In , you can see a table of names and contact information. However, there are some issues with the data: the numbers all look the same. Phone numbers should be separated by parentheses for the area code and a hyphen after the exchange, and SSNs use hyphens around the middle two digits. Zip codes should be five digits long, but some are showing up as only four digits; this is because Excel does not recognize the leading zero. As is, the data in the current table is confusing. Microsoft offers a standard command to format cells in these situations.
+
+First, select each column separately, right-click each column, select Format Cells, and then select Special. For formatting zip codes (), select the Zip Code column values (but not the header), and in the Special format cell dialog box, select Zip Code, and choose OK. Follow the same steps for formatting phone numbers (). As you can see in the result shown in , Excel already has special formats for these number types.
+
+The mail merge feature of Microsoft Word allows the user to create letters, mailing labels, or envelopes from a list of names and addresses such as a customer list. This can make the process much quicker than formatting each letter or envelope individually. Often lists of customers with contact information such as addresses and emails will be organized in a spreadsheet. Mail merge connects a Word document to an Excel data table to seamlessly create the documents needed for mailing. Watch this tutorial from Business Insider on Mail Merge to learn the steps.
+
+Copy Formatting
+
+Copying the format of a given cell is one of the most used commands in Microsoft Office because it is available not only in Excel, but in all other Office applications. The Format Painter command lets a user copy a certain range’s formatting and apply it to a new range by selecting the cell with the desired format to be copied, and then selecting the Format Painter icon on the Home tab. Format Painter can be used to transfer the formatting from one cell or a whole table to another cell or table. The Format Painter tool is the paintbrush icon on the Home tab in the Clipboard command group. To use the tool, first select the cell or cells that have the formatting you want to apply to other cells. shows the selected cells E1 to G7. Then, click on the paintbrush icon on the Home tab. As you do, your cursor will change to a paintbrush. With that paintbrush, select the range of cells to which you want to apply the formatting. In this example, those cells are A1 to C7. The unformatted table will then be formatted in the same manner as the formatted table. The result is apparent in . The only step left is adjusting the columns by clicking on the border of each column on top.
+
+The Mac version uses Cell Styles to format cells.
+
+There are also other ways to copy formatting. Another way is to use the Paste Special tool. You first select the whole formatted table and press Ctrl+C (to copy it), then select your entire unformatted table (a). Then, on the Home tab, choose Paste Special from the Paste menu and click on Formatting (R) from the last row, as shown in b. This tool will paste just the formatting from your original selection; it will not paste any of the values or formulas (c).
+
+Summary
+
+Using consistent branding and style throughout a company’s documents is important for promoting professionalism. This can be achieved by using a company-wide branding or style manual.
+
+The Themes tool lets you change a formatting scheme throughout an entire workbook. You can further adjust the theme by using the Styles combo-box options.
+
+Excel lets you save time by copying a format using the Format Painter or the Paste Special method.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+Case Exercises
+
+canvas that is displayed behind the cell contents of a worksheet
+tool that lets you select other font sizes and background colors
+tool that lets you copy a certain range’s formatting and apply it to a new range

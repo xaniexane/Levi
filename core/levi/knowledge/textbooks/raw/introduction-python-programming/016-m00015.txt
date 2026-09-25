@@ -1,0 +1,73 @@
+# m00015
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Dividing integers
+
+Dividing integers
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Evaluate expressions that involve floor division and modulo.
+
+Use the modulo operator to convert between units of measure.
+
+Division and modulo
+
+Python provides two ways to divide numbers:
+True division (/) converts numbers to floats before dividing. Ex: 7 / 4 becomes 7.0 / 4.0, resulting in 1.75.
+Floor division (//) computes the quotient, or the number of times divided. Ex: 7 // 4 is 1 because 4 goes into 7 one time, remainder 3. The modulo operator (%) computes the remainder. Ex: 7 % 4 is 3.
+
+Note: The % operator is traditionally pronounced "mod" (short for "modulo"). Ex: When reading 7 % 4 out loud, a programmer would say "seven mod four."
+
+Quotient and remainder
+
+Division and modulo
+
+What is the value of each expression?
+
+Unit conversions
+
+Division is useful for converting one unit of measure to another. To convert centimeters to meters, a variable is divided by 100. Ex: 300 centimeters divided by 100 is 3 meters.
+
+Amounts often do not divide evenly as integers. 193 centimeters is 1.93 meters, or 1 meter and 93 centimeters. A program can use floor division and modulo to separate the units:
+
+The quotient, 1 meter, is 193 // 100.
+
+The remainder, 93 centimeters, is 193 % 100.
+
+Programs often use floor division and modulo together. If one line of code floor divides by m, the next line will likely modulo by m. The unit m by which an amount is divided is called the modulus. Ex: When converting centimeters to meters, the modulus is 100.
+
+Money and time
+
+Unit conversions
+
+Arrival time
+
+Having a mobile device can be a lifesaver on long road trips. Programs like Google Maps find the shortest route and estimate the time of arrival. The time of arrival is based on the current time plus how long the trip will take.
+
+Write a program that (1) inputs the current time and estimated length of a trip, (2) calculates the time of arrival, and (3) outputs the results in hours and minutes. Your program should use the following prompts (user input in bold):
+
+In this example, the current time is 13:25 (1:25pm). The trip time is 340 minutes (5 hours and 40 minutes). 340 minutes after 13:25 is 19:05 (7:05pm). Your program should output the result in this format:
+
+The arrival hour must be between 0 and 23. Ex: Adding 120 minutes to 23:00 should be 1:00, not 25:00. The arrival minute must be between 0 and 59. Ex: Adding 20 minutes to 8:55 should be 9:15, not 8:75.
+
+Hint: Multiply the current hour by 60 to convert hours to minutes. Then, calculate the arrival time, in total minutes, as an integer.
+
+Your code must not use Python keywords from later chapters, such as if or while. The solution requires only addition, multiplication, division, and modulo.
+
+Change machine
+
+Self-checkout aisles are becoming increasingly popular at grocery stores. Customers scan their own items, and a computer determines the total purchase amount. Customers who pay in cash insert dollar bills, and a machine automatically dispenses change in coins.
+
+That's where this program comes into the story. Your task is to calculate how many of each coin to dispense. Your program should use the following prompts (user input in bold):
+
+You may assume that the cash paid will always be a whole number (representing dollar bills) that is greater than or equal to the total amount. The program should calculate and output the amount of change due and how many dollars, quarters, dimes, nickels, and pennies should be dispensed:
+
+Hint: Calculate the total change, in cents, as an integer. Use the round() function to avoid floating-point errors.
+
+Your code must not use Python keywords from later chapters, such as if or while. The solution requires only subtraction, multiplication, division, and modulo.

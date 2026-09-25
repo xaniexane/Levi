@@ -1,0 +1,1486 @@
+# m51291
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Sum-to-Product and Product-to-Sum Formulas
+
+Sum-to-Product and Product-to-Sum Formulas
+
+Express products as sums.
+
+Express sums as products.
+
+A band marches down the field creating an amazing sound that bolsters the crowd. That sound travels as a wave that can be interpreted using trigonometric functions. For example, represents a sound wave for the musical note A. In this section, we will investigate trigonometric identities that are the foundation of everyday phenomena such as sound waves.
+
+Expressing Products as Sums
+
+We have already learned a number of formulas useful for expanding or simplifying trigonometric expressions, but sometimes we may need to express the product of cosine and sine as a sum. We can use the product-to-sum formulas, which express products of trigonometric functions as sums. Let’s investigate the cosine identity first and then the sine identity.
+
+Expressing Products as Sums for Cosine
+
+We can derive the product-to-sum formula from the sum and difference identities for cosine. If we add the two equations, we get:
+
+Then, we divide by 
+ 2
+ 
+ to isolate the product of cosines:
+Given a product of cosines, express as a sum.
+
+Write the formula for the product of cosines.
+
+Substitute the given angles into the formula.
+
+Simplify.
+
+Writing the Product as a Sum Using the Product-to-Sum Formula for Cosine
+
+Write the following product of cosines as a sum: 
+ 
+ 2cos(
+
+ 7x
+ 
+ 2
+
+ )cos
+ 
+ 3x
+ 
+ 2
+ 
+ .
+
+We begin by writing the formula for the product of cosines:
+
+We can then substitute the given angles into the formula and simplify.
+
+Use the product-to-sum formula to write the product as a sum or difference: 
+ 
+ cos(
+ 
+ 2θ
+ 
+ )cos(
+ 
+ 4θ
+ 
+ ).
+1
+ 2
+ 
+ (
+ 
+ cos6θ+cos2θ
+ 
+ )
+
+Expressing the Product of Sine and Cosine as a Sum
+
+Next, we will derive the product-to-sum formula for sine and cosine from the sum and difference formulas for sine. If we add the sum and difference identities, we get:
+
+Then, we divide by 2 to isolate the product of cosine and sine:
+
+Writing the Product as a Sum Containing only Sine or Cosine
+
+Express the following product as a sum containing only sine or cosine and no products: 
+ 
+ sin(
+ 
+ 4θ
+ 
+ )cos(
+ 
+ 2θ
+ 
+ ).
+
+Write the formula for the product of sine and cosine. Then substitute the given values into the formula and simplify.
+
+Use the product-to-sum formula to write the product as a sum: 
+ 
+ sin(
+ 
+ x+y
+ 
+ )cos(
+ 
+ x−y
+ 
+ ).
+1
+ 2
+ 
+ (
+ 
+ sin2x+sin2y
+ 
+ )
+
+Expressing Products of Sines in Terms of Cosine
+
+Expressing the product of sines in terms of cosine is also derived from the sum and difference identities for cosine. In this case, we will first subtract the two cosine formulas:
+
+Then, we divide by 2 to isolate the product of sines:
+
+Similarly we could express the product of cosines in terms of sine or derive other product-to-sum formulas.
+
+The Product-to-Sum Formulas
+
+The product-to-sum formulas are as follows:
+
+Express the Product as a Sum or Difference
+
+Write 
+ 
+ cos(3θ)cos(5θ)
+ 
+ as a sum or difference.
+
+We have the product of cosines, so we begin by writing the related formula. Then we substitute the given angles and simplify.
+
+Use the product-to-sum formula to evaluate 
+ 
+ cos
+ 
+ 11π
+
+ 12
+
+ cos
+ π
+ 
+ 12
+
+ .
+−2−
+ 3
+
+ 4
+
+Expressing Sums as Products
+
+Some problems require the reverse of the process we just used. The sum-to-product formulas allow us to express sums of sine or cosine as products. These formulas can be derived from the product-to-sum identities. For example, with a few substitutions, we can derive the sum-to-product identity for sine. Let 
+
+ u+v
+ 
+ 2
+ 
+ =α
+ 
+ and 
+
+ u−v
+ 
+ 2
+ 
+ =β.
+
+Then,
+
+Thus, replacing 
+ 
+ α
+ 
+ and 
+ 
+ β
+ 
+ in the product-to-sum formula with the substitute expressions, we have
+
+The other sum-to-product identities are derived similarly.
+
+Sum-to-Product Formulas
+
+The sum-to-product formulas are as follows:
+
+Writing the Difference of Sines as a Product
+
+Write the following difference of sines expression as a product: 
+ 
+ sin(
+ 
+ 4θ
+ 
+ )−sin(
+ 
+ 2θ
+ 
+ ).
+
+We begin by writing the formula for the difference of sines.
+
+Substitute the values into the formula, and simplify.
+
+Use the sum-to-product formula to write the sum as a product: 
+ 
+ sin(
+ 
+ 3θ
+ 
+ )+sin(
+ θ
+ ).
+2sin(
+ 
+ 2θ
+ 
+ )cos(
+ θ
+ )
+
+Evaluating Using the Sum-to-Product Formula
+
+Evaluate 
+ 
+ cos(15°)−cos(75°).
+ 
+ Check the answer with a graphing calculator.
+
+We begin by writing the formula for the difference of cosines.
+
+Then we substitute the given angles and simplify.
+
+Proving an Identity
+
+Prove the identity:
+
+We will start with the left side, the more complicated side of the equation, and rewrite the expression until it matches the right side.
+
+Analysis
+
+Recall that verifying trigonometric identities has its own set of rules. The procedures for solving an equation are not the same as the procedures for verifying an identity. When we prove an identity, we pick one side to work on and make substitutions until that side is transformed into the other side.
+
+Verifying the Identity Using Double-Angle Formulas and Reciprocal Identities
+
+Verify the identity 
+
+ csc
+ 
+ 2
+ 
+ θ−2=
+ 
+ cos(2θ)
+
+ sin
+ 
+ 2
+ 
+ θ
+
+ .
+
+For verifying this equation, we are bringing together several of the identities. We will use the double-angle formula and the reciprocal identities. We will work with the right side of the equation and rewrite it until it matches the left side.
+
+Verify the identity 
+ 
+ tanθcotθ−
+ 
+ cos
+ 
+ 2
+ 
+ θ=
+ 
+ sin
+ 
+ 2
+ 
+ θ.
+tanθcotθ−
+ 
+ cos
+ 
+ 2
+ 
+ θ
+
+ =
+
+ (
+
+ sinθ
+
+ cosθ
+
+ )(
+
+ cosθ
+
+ sinθ
+
+ )−
+ 
+ cos
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 1−
+ 
+ cos
+ 
+ 2
+ 
+ θ
+
+ =
+
+ sin
+ 
+ 2
+ 
+ θ
+
+Access these online resources for additional instruction and practice with the product-to-sum and sum-to-product identities.
+Sum to Product Identities
+Sum to Product and Product to Sum Identities
+
+Key Equations
+
+cosαcosβ
+
+ =
+
+ 1
+ 2
+ 
+ [cos(α−β)+cos(α+β)]
+
+ sinαcosβ
+
+ =
+
+ 1
+ 2
+ 
+ [sin(α+β)+sin(α−β)]
+
+ sinαsinβ
+
+ =
+
+ 1
+ 2
+ 
+ [cos(α−β)−cos(α+β)]
+
+ cosαsinβ
+
+ =
+
+ 1
+ 2
+ 
+ [sin(α+β)−sin(α−β)]
+sinα+sinβ
+
+ =
+
+ 2sin(
+
+ α+β
+ 
+ 2
+
+ )cos(
+
+ α−β
+ 
+ 2
+
+ )
+
+ sinα−sinβ
+
+ =
+
+ 2sin(
+
+ α−β
+ 
+ 2
+
+ )cos(
+
+ α+β
+ 
+ 2
+
+ )
+
+ cosα−cosβ
+
+ =
+
+ −2sin(
+
+ α+β
+ 
+ 2
+
+ )sin(
+
+ α−β
+ 
+ 2
+
+ )
+
+ cosα+cosβ
+
+ =
+
+ 2cos(
+
+ α+β
+ 
+ 2
+
+ )cos(
+
+ α−β
+ 
+ 2
+
+ )
+Key Concepts
+
+From the sum and difference identities, we can derive the product-to-sum formulas and the sum-to-product formulas for sine and cosine.
+
+We can use the product-to-sum formulas to rewrite products of sines, products of cosines, and products of sine and cosine as sums or differences of sines and cosines. See , , and .
+
+We can also derive the sum-to-product identities from the product-to-sum identities using substitution.
+
+We can use the sum-to-product formulas to rewrite sum or difference of sines, cosines, or products sine and cosine as products of sines and cosines. See .
+
+Trigonometric expressions are often simpler to evaluate using the formulas. See .
+
+The identities can be verified using other formulas or by converting the expressions to sines and cosines. To verify an identity, we choose the more complicated side of the equals sign and rewrite it until it is transformed into the other side. See and .
+
+Section Exercises
+
+Verbal
+
+Starting with the product to sum formula 
+ 
+ sinαcosβ=
+ 1
+ 2
+ 
+ [sin(α+β)+sin(α−β)],
+ 
+ explain how to determine the formula for 
+ 
+ cosαsinβ.
+
+Substitute 
+ 
+  α  
+ 
+ into cosine and 
+ 
+  β  
+ 
+ into sine and evaluate.
+
+Provide two different methods of calculating 
+ 
+ cos(195°)cos(105°),
+ 
+ one of which uses the product to sum. Which method is easier?
+
+Describe a situation where we would convert an equation from a sum to a product and give an example.
+
+Answers will vary. There are some equations that involve a sum of two trig expressions where when converted to a product are easier to solve. For example: 
+
+ sin(3x)+sinx
+
+ cosx
+
+ =1.  
+ 
+ When converting the numerator to a product the equation becomes: 
+
+ 2sin(2x)cosx
+
+ cosx
+
+ =1
+
+Describe a situation where we would convert an equation from a product to a sum, and give an example.
+
+Algebraic
+
+For the following exercises, rewrite the product as a sum or difference.
+16sin(16x)sin(11x)
+8(
+ 
+ cos(
+ 
+ 5x
+ 
+ )−cos(
+ 
+ 27x
+ 
+ )
+ 
+ )
+20cos(
+ 
+ 36t
+ 
+ )cos(
+ 
+ 6t
+ 
+ )
+2sin(
+ 
+ 5x
+ 
+ )cos(
+ 
+ 3x
+ 
+ )
+sin(
+ 
+ 2x
+ 
+ )+sin(
+ 
+ 8x
+ 
+ )
+10cos(
+ 
+ 5x
+ 
+ )sin(
+ 
+ 10x
+ 
+ )
+sin(
+ 
+ −x
+ 
+ )sin(
+ 
+ 5x
+ 
+ )
+1
+ 2
+ 
+ (
+ 
+ cos(
+ 
+ 6x
+ 
+ )−cos(
+ 
+ 4x
+ 
+ )
+ 
+ )
+sin(
+ 
+ 3x
+ 
+ )cos(
+ 
+ 5x
+ 
+ )
+
+For the following exercises, rewrite the sum or difference as a product.
+cos(
+ 
+ 6t
+ 
+ )+cos(
+ 
+ 4t
+ 
+ )
+2cos(
+ 
+ 5t
+ 
+ )cost
+sin(
+ 
+ 3x
+ 
+ )+sin(
+ 
+ 7x
+ 
+ )
+cos(
+ 
+ 7x
+ 
+ )+cos(
+ 
+ −7x
+ 
+ )
+2cos(
+ 
+ 7x
+ 
+ )
+sin(
+ 
+ 3x
+ 
+ )−sin(
+ 
+ −3x
+ 
+ )
+cos(
+ 
+ 3x
+ 
+ )+cos(
+ 
+ 9x
+ 
+ )
+2cos(
+ 
+ 6x
+ 
+ )cos(
+ 
+ 3x
+ 
+ )
+sinh−sin(
+ 
+ 3h
+ 
+ )
+
+For the following exercises, evaluate the product for the following using a sum or difference of two functions. Evaluate exactly.
+cos(
+ 
+ 45°
+ 
+ )cos(
+ 
+ 15°
+ 
+ )
+1
+ 4
+ 
+ (
+ 
+ 1+
+ 3
+
+ )
+cos(
+ 
+ 45°
+ 
+ )sin(
+ 
+ 15°
+ 
+ )
+sin(
+ 
+ −345°
+ 
+ )sin(
+ 
+ −15°
+ 
+ )
+1
+ 4
+ 
+ (
+
+ 3
+ 
+ −2
+ 
+ )
+sin(
+ 
+ 195°
+ 
+ )cos(
+ 
+ 15°
+ 
+ )
+sin(
+ 
+−45°
+ 
+ )sin(
+ 
+−15°
+ 
+ )
+1
+ 4
+ 
+ (
+
+ 3
+ 
+ −1
+ 
+ )
+
+For the following exercises, evaluate the product using a sum or difference of two functions. Leave in terms of sine and cosine.
+cos(
+ 
+ 23°
+ 
+ )sin(
+ 
+ 17°
+ 
+ )
+2sin(
+ 
+ 100°
+ 
+ )sin(
+ 
+ 20°
+ 
+ )
+cos(
+ 
+ 80°
+ 
+ )−cos(
+ 
+ 120°
+ 
+ )
+2sin(−100°)sin(−20°)
+sin(
+ 
+ 213°
+ 
+ )cos(
+ 
+ 8°
+ 
+ )
+1
+ 2
+ 
+ (sin(221°)+sin(205°))
+2cos(56°)cos(47°)
+
+For the following exercises, rewrite the sum as a product of two functions. Leave in terms of sine and cosine.
+sin(76°)+sin(14°)
+2
+ 
+ cos(
+ 
+ 31°
+ 
+ )
+cos(
+ 
+ 58°
+ 
+ )−cos(
+ 
+ 12°
+ 
+ )
+sin(101°)−sin(32°)
+2cos(66.5°)sin(34.5°)
+cos(
+ 
+ 100°
+ 
+ )+cos(
+ 
+ 200°
+ 
+ )
+sin(−1°)+sin(−2°)
+2sin(
+ 
+−1.5°
+ 
+ )cos(
+ 
+ 0.5°
+ 
+ )
+
+For the following exercises, prove the identity.
+cos(a+b)
+
+ cos(a−b)
+
+ =
+ 
+ 1−tanatanb
+
+ 1+tanatanb
+4sin(
+ 
+ 3x
+ 
+ )cos(
+ 
+ 4x
+ 
+ )=2sin(
+ 
+ 7x
+ 
+ )−2sinx
+2sin(7x)−2sinx=2sin(4x+3x)−2sin(4x−3x)=
+
+ 2(sin(4x)cos(3x)+sin(3x)cos(4x))−2(sin(4x)cos(3x)−sin(3x)cos(4x))=
+
+ 2sin(4x)cos(3x)+2sin(3x)cos(4x))−2sin(4x)cos(3x)+2sin(3x)cos(4x))=
+
+ 4sin(3x)cos(4x)
+6cos(
+ 
+ 8x
+ 
+ )sin(
+ 
+ 2x
+ 
+ )
+
+ sin(
+ 
+ −6x
+ 
+ )
+
+ =−3sin(
+ 
+ 10x
+ 
+ )csc(
+ 
+ 6x
+ 
+ )+3
+sinx+sin(
+ 
+ 3x
+ 
+ )=4sinx
+ 
+ cos
+ 
+ 2
+ 
+ x
+sinx+sin(3x)
+
+ =
+
+ 2sin(
+
+ 4x
+ 
+ 2
+
+ )cos(
+
+ −2x
+ 
+ 2
+
+ )=
+
+ 2sin(2x)cosx
+
+ =
+
+ 2(2sinxcosx)cosx=
+
+ 4sinx
+ 
+ cos
+ 
+ 2
+ 
+ x
+2(
+
+ cos
+ 
+ 3
+ 
+ x−cosx
+ 
+ sin
+ 
+ 2
+ 
+ x
+ 
+ )=cos(
+ 
+ 3x
+ 
+ )+cosx
+2tanxcos(
+ 
+ 3x
+ 
+ )=secx(
+ 
+ sin(
+ 
+ 4x
+ 
+ )−sin(
+ 
+ 2x
+ 
+ )
+ 
+ )
+2tanxcos(
+ 
+ 3x
+ 
+ )=
+ 
+ 2sinxcos(3x)
+
+ cosx
+
+ =
+ 
+ 2(.5(sin(4x)−sin(2x)))
+
+ cosx
+
+ =
+
+ 1
+ 
+ cosx
+
+ (
+ 
+ sin(4x)−sin(2x)
+ 
+ )=secx(
+ 
+ sin(
+ 
+ 4x
+ 
+ )−sin(
+ 
+ 2x
+ 
+ )
+ 
+ )
+cos(
+ 
+ a+b
+ 
+ )+cos(
+ 
+ a−b
+ 
+ )=2cosacosb
+
+Numeric
+
+For the following exercises, rewrite the sum as a product of two functions or the product as a sum of two functions. Give your answer in terms of sines and cosines. Then evaluate the final answer numerically, rounded to four decimal places.
+cos(58°)+cos(12°)
+2cos(35°)cos(23°),1.5081
+sin(2°)−sin(3°)
+cos(44°)−cos(22°)
+−2sin(33°)sin(11°),−0.2078
+cos(176°)sin(9°)
+sin(−14°)sin(85°)
+1
+ 2
+ 
+ (cos(99°)−cos(71°)),−0.2410
+
+Technology
+
+For the following exercises, algebraically determine whether each of the given equation is an identity. If it is not an identity, replace the right-hand side with an expression equivalent to the left side. Verify the results by graphing both expressions on a calculator.
+2sin(2x)sin(3x)=cosx−cos(5x)
+cos(
+ 
+ 10θ
+ 
+ )+cos(
+ 
+ 6θ
+ 
+ )
+
+ cos(
+ 
+ 6θ
+ 
+ )−cos(
+ 
+ 10θ
+ 
+ )
+
+ =cot(
+ 
+ 2θ
+ 
+ )cot(
+ 
+ 8θ
+ 
+ )
+
+It is an identity.
+sin(
+ 
+ 3x
+ 
+ )−sin(
+ 
+ 5x
+ 
+ )
+
+ cos(
+ 
+ 3x
+ 
+ )+cos(
+ 
+ 5x
+ 
+ )
+
+ =tanx
+2cos(2x)cosx+sin(2x)sinx=2sinx
+
+It is not an identity, but 
+ 
+ 2
+ 
+ cos
+ 
+ 3
+ 
+ x
+ 
+ is.
+sin(
+ 
+ 2x
+ 
+ )+sin(
+ 
+ 4x
+ 
+ )
+
+ sin(
+ 
+ 2x
+ 
+ )−sin(
+ 
+ 4x
+ 
+ )
+
+ =−tan(
+ 
+ 3x
+ 
+ )cotx
+
+For the following exercises, simplify the expression to one term, then graph the original function and your simplified version to verify they are identical.
+sin(
+ 
+ 9t
+ 
+ )−sin(
+ 
+ 3t
+ 
+ )
+
+ cos(
+ 
+ 9t
+ 
+ )+cos(
+ 
+ 3t
+ 
+ )
+tan(
+ 
+ 3t
+ 
+ )
+2sin(
+ 
+ 8x
+ 
+ )cos(
+ 
+ 6x
+ 
+ )−sin(
+ 
+ 2x
+ 
+ )
+sin(
+ 
+ 3x
+ 
+ )−sinx
+
+ sinx
+2cos(
+ 
+ 2x
+ 
+ )
+cos(
+ 
+ 5x
+ 
+ )+cos(
+ 
+ 3x
+ 
+ )
+
+ sin(
+ 
+ 5x
+ 
+ )+sin(
+ 
+ 3x
+ 
+ )
+sinxcos(
+ 
+ 15x
+ 
+ )−cosxsin(
+ 
+ 15x
+ 
+ )
+−sin(14x)
+
+Extensions
+
+For the following exercises, prove the following sum-to-product formulas.
+sinx−siny=2sin(
+
+ x−y
+ 
+ 2
+
+ )cos(
+
+ x+y
+ 
+ 2
+
+ )
+cosx+cosy=2cos(
+
+ x+y
+ 
+ 2
+
+ )cos(
+
+ x−y
+ 
+ 2
+
+ )
+
+Start with 
+ 
+ cosx+cosy.
+ 
+ Make a substitution and let 
+ 
+ x=α+β
+ 
+ and let 
+ 
+ y=α−β,
+ 
+ so 
+ 
+ cosx+cosy
+ 
+ becomes 
+
+ cos(α+β)+cos(α−β)=cosαcosβ−sinαsinβ+cosαcosβ+sinαsinβ=
+
+ 2cosαcosβ
+
+Since 
+ 
+ x=α+β
+ 
+ and 
+ 
+ y=α−β,
+ 
+ we can solve for 
+ 
+ α
+ 
+ and 
+ 
+ β
+ 
+ in terms of x and y and substitute in for 
+ 
+ 2cosαcosβ
+ 
+ and get 
+ 
+ 2cos(
+
+ x+y
+ 
+ 2
+
+ )cos(
+
+ x−y
+ 
+ 2
+
+ ).
+
+For the following exercises, prove the identity.
+sin(6x)+sin(4x)
+
+ sin(6x)−sin(4x)
+
+ =tan(5x)cotx
+cos(3x)+cosx
+
+ cos(3x)−cosx
+
+ =−cot(2x)cotx
+cos(
+ 
+ 3x
+ 
+ )+cosx
+
+ cos(
+ 
+ 3x
+ 
+ )−cosx
+
+ =
+ 
+ 2cos(
+ 
+ 2x
+ 
+ )cosx
+
+ −2sin(
+ 
+ 2x
+ 
+ )sinx
+
+ =−cot(
+ 
+ 2x
+ 
+ )cotx
+cos(6y)+cos(8y)
+
+ sin(6y)−sin(4y)
+
+ =cotycos(7y)sec(5y)
+cos(
+ 
+ 2y
+ 
+ )−cos(
+ 
+ 4y
+ 
+ )
+
+ sin(
+ 
+ 2y
+ 
+ )+sin(
+ 
+ 4y
+ 
+ )
+
+ =tany
+cos(2y)−cos(4y)
+
+ sin(2y)+sin(4y)
+
+ =
+
+ −2sin(3y)sin(−y)
+
+ 2sin(3y)cosy
+
+ =
+
+ 2sin(3y)sin(y)
+
+ 2sin(3y)cosy
+
+ =
+
+ tany
+sin(
+ 
+ 10x
+ 
+ )−sin(
+ 
+ 2x
+ 
+ )
+
+ cos(
+ 
+ 10x
+ 
+ )+cos(
+ 
+ 2x
+ 
+ )
+
+ =tan(
+ 
+ 4x
+ 
+ )
+cosx−cos(3x)=4
+ 
+ sin
+ 
+ 2
+ 
+ xcosx
+cosx−cos(
+ 
+ 3x
+ 
+ )=−2sin(2x)sin(−x)=
+
+ 2(2sinxcosx)sinx=4
+ sin
+ 2
+ 
+ xcosx
+(cos(2x)−cos(4x))
+ 
+ 2
+ 
+ +
+ 
+ (sin(4x)+sin(2x))
+ 
+ 2
+ 
+ =4
+ 
+ sin
+ 
+ 2
+ 
+ (3x)
+tan(
+
+ π
+ 4
+ 
+ −t
+ 
+ )=
+ 
+ 1−tant
+
+ 1+tant
+tan(
+
+ π
+ 4
+ 
+ −t
+ 
+ )=
+ 
+ tan(
+
+ π
+ 4
+
+ )−tant
+
+ 1+tan(
+
+ π
+ 4
+
+ )tan(t)
+
+ =
+ 
+ 1−tant
+
+ 1+tant
+
+a trigonometric identity that allows the writing of a product of trigonometric functions as a sum or difference of trigonometric functions
+a trigonometric identity that allows, by using substitution, the writing of a sum of trigonometric functions as a product of trigonometric functions

@@ -1,0 +1,216 @@
+# 15-440: Distributed Systems
+# Carnegie-Mellon University
+# source: http://www.cs.cmu.edu/~dga/15-440/F12/index.html
+
+15-440, Fall 2012: Distributed Systems
+15-440, Fall 2012: Distributed Systems
+15-440 Home
+Syllabus
+Assignments
+Exams
+Announcements
+Latest Announcements
+12/10: Sample final for 2011 answers updated to fix bug in the security question answer
+see subject
+12/3: Sign up for final project review slots
+Use the google cal to sign up for review slots for project 3. Please make sure to do so!
+11/29: Sample finals and Midterm 2012 solutions posted
+See the exams page
+See all announcements
+RSS 2.0 feed
+Overview
+15-440 is an introductory course in distributed systems. The
+emphasis will be on the techniques for creating functional, usable,
+and high-performance distributed systems. To make the issues more
+concrete, the class includes several multi-week projects requiring
+significant design and implementation.
+The goals of this course are twofold: First, for students to gain an
+understanding of the principles and techniques behind the design of
+distributed systems, such as locking, concurrency,
+scheduling, and communication across the network. Second,
+for students to gain practical experience designing, implementing, and
+debugging real distributed systems.
+The major themes this course will teach
+include scarcity, scheduling,
+concurrency and concurrent programming, naming, abstraction and modularity,
+imperfect communication and other types of failure, protection from
+accidental and malicious harm, optimism, and the use of
+instrumentation and monitoring and debugging tools in problem
+solving. As the creation and management of software systems is a
+fundamental goal of any undergraduate systems course, students will
+design, implement, and debug large programming projects.
+Evaluation is based on homework assignments, the projects,
+and three exams.
+Instructors: David
+Andersen , Randy Bryant .
+Lecture time: 10:30 - 11:50pm
+Units: 12
+Prerequisites
+Because this course has a big project component, you must be
+proficient in C and Java programming on UNIX systems. It is required that you
+have taken 15-213 and gotten a "C-" or higher since many of
+the programming skills you will need are taught in that course. If you received a C in 15-213, you must meet with your academic advisor to discuss your background before taking 15-440, perhaps taking an additional course to sharpen your systems skills.
+Learning Objectives
+After this course, students will have learned to...
+Implement and structure distributed systems programs;
+Write programs that can interoperate using well-defined protocols
+Debug highly concurrent code that spans multiple programs running on multiple cores and machines
+Reason about distributed algorithms for locking, synchronizationa and concurrency, scheduling, and replication
+Use standard network communication primitives such as UDP and TCP
+Understand the general properties of networked communication necessary for distributed systems programming in clusters and on the Internet
+Employ and create common paradigms for easing the task of distributed systems programming, such as distributed filesystems, RPC, and MapReduce. Be able to clearly elucidate their benefits, drawbacks, and limitations.
+Identify the security challenges faced by distributed systems programs;
+Be able to select appropriate security solutions to meet the needs of commonly encountered distributed programming scenarios.
+Course Staff
+Teaching Assistants
+Name Email Office Tel Hours
+Bin Fan
+binfan AT cs DOT cmu DOT edu
+GHC 9003
+412-268-4751
+Mondays 4:00pm-5:00pm
+Anthony Santos
+aas1 AT andrew DOT cmu DOT edu
+GHC 4122
+305-215-8409
+Tuesdays 3:30pm-4:30pm
+Alexander Rodriguez
+alexande AT andrew DOT cmu DOT edu
+GHC 5207
+510-593-5540
+Thursdays 7:00pm-8:00pm
+Timmy Zhu
+timothyz AT cs DOT cmu DOT edu
+GHC 7010
+412-268-4973
+Mondays Noon-1:00pm
+Instructors
+Name Email Office Tel Hours
+David Andersen
+dga AT cs DOT cmu DOT edu
+GHC 9109
+412-268-3064
+W 11:00 - 11:59
+Randy Bryant
+bryant AT cs DOT cmu DOT edu
+GHC 5113
+412-268-8821
+F 14:30 - 15:30
+Course Secretary
+Kathy McNiff, kmm AT cs DOT cmu DOT edu , GHC 9213, Tel: 412-268-5099
+Office Hours
+See individual course staff entries above.
+Day Time Location
+TBA
+TBA
+TBA
+-->
+Course Policies
+Collaboration
+Students are encouraged to talk to each other, to the TAs, to the
+instructors, or to anyone else about any of the assignments. Any
+assistance, though, must be limited to discussion of the problem and
+sketching general approaches to a solution. Each student must write
+out his or her own solutions to the homework. The project handouts
+have more detailed information about collaboration when working on the
+projects, but, basically, each programming project group must write
+their own code and documentation for the programming projects done as
+a group.
+Consulting another student's or group's solution is prohibited, and
+submitted solutions may not be copied from any source. These and any
+other form of collaboration on assignments constitute cheating. If you
+have any question about whether some activity would constitute
+cheating, please feel free to ask the instructors.
+You may not supply work that you complete during 15-440 to other
+students in future instances of this course or for use in future
+instances of this course (just as you may not use work completed by
+students who've taken the course previously).
+Piazza Policy
+This course uses the Piazza web site for answering questions. The home Piazza page for this course is at:
+https://piazza.com/cmu/fall2012/15440/home .
+When posting questions on Piazza, students must keep in mind the collaboration guidelines noted above, and use those guidelines to determine:
+Whether to mark your post "private to the instructors" or public;
+How much detail and help to provide in an answer to a fellow student
+Part of the learning process is struggling with the material until you arrive at the right insight for you to understand it. Posting too much detail in response to a request for assistance can impair learning. On the other hand, sometimes it's great to be nudged in the right direction when you're not able to get out of a rut. And, of course, misunderstandings of the assignment or tools available should be helped rapidly. Please use your best judgement when posting to the Piazza site, as if you were collaborating with your friends in person. A few rough guidelines:
+Please do post and answer publicly : Misunderstandings of the assignment; clarifications about the requirements; bugs in the assignment spec or reference implementation or tests; small, detailed questions about the operation of system calls, functions, etc. Things that look like they'd go in the FAQ are good candidates for asking or answering.
+Please don't post or answer publicly : More than a few lines of code; in-depth explanations of how your system works; questions about the best approach for architecting the system at a high level; questions about your grade; problems with your partner; etc.
+Please use your judgement between these two examples. If you post privately, please let us know whether or not it would be OK to mark the post public if we feel it would be beneficial to the class to make it public.
+Late Policy
+Take project and homework deadlines seriously. Our experience is that
+students often seriously underestimate the effort involved in programming
+assignments and projects. If we give you 4 weeks to complete an assignment,
+there is typically a reason. In the interest of fairness, we have adopted
+the following late policy:
+Each student is given a total of 2 "free points" to use during the
+semester.
+One free point can be used to extend the deadline of any homework
+assignment by a single day with no penalty.
+One free point is needed to extend the deadline of the single-person Project 1.
+Two free points are needed to extend the deadline of the two-person Projects 2 or
+3 by a single day with no penalty (you and your partner might each
+contribute a point).
+In the absence of free points, the deadline for any assignment
+can be extended with a 10% penalty per day.
+No deadline can be extended by more than two days, regardless
+of how many free points you have saved up. Assignments will NOT
+be accepted 48 hours after the due date.
+If you are ill : If you have a medical note, you may turn
+in your assignments late without using free points. Please contact
+the instructors to arrange a reasonable replacement turn-in time.
+You must notify us before the due-date .
+Without a medical note, you must use your free points as you would
+with any other reason for being late.
+Re-Grading
+If you think we made a mistake in grading, please return the
+assignment with a note explaining your concern to the course secretary
+no later than two weeks after the day the assignment was returned. We
+will have the question re-graded by the person responsible for grading
+that question.
+Recordings
+The course staff in 15-440 strongly encourage participation and
+asking questions during lectures, and to attend our office hours and
+interact there.
+Therefore, to protect the privacy of your fellow students, no audio or video
+recordings may be made of the class without the prior permission of
+the instructor. If the course staff make audio or video recordings of
+the course, we will notify the course before such recordings are made
+(and will make it extremely obvious because there will be a big camera
+in the back of the room...).
+Partner Problems
+Please try to avoid having partner problems. Seriously! Share your hopes
+before they turn into concerns, your concerns before they have problems, and
+your problems before they inflate into crises.
+Also, in order for the course staff to help you and your partner
+work through issues, or for us to provide an appropriate response to
+serious partner problems, you must contact us well before
+the relevant due date! While some problems can never be truly solved,
+it is likely that your career after CMU will you to sometimes "involve
+management" to address issues with co-workers, and will certainly
+require you to work out all sorts of problems with your co-workers. If
+you find yourself in a situation which you can't resolve, it will provide
+you with an opportunity to practice interacting with management.
+A special case to avoid is coming to us a day or two before a major
+deadline to tell us that your partner has been ill (etc.) for multiple
+weeks. We, and thus you, have many more options if you inform us
+while a problem is developing, instead of after the fact.
+Resources
+Class newsgroup : academic.cs.15-440
+If you have a question about a project handout or a technical
+issue, there is an excellent chance that other students have
+the same question. Please read the newsgroup to see if there
+has been traffic, and consider posting your questions there.
+Announcements newsgroup : academic.cs.15-440.announce
+Staff mailing list: staff-440 at cs dot cmu dot edu
+If you have a question you believe is particular to your circumstances
+and should not be posted in a public forum (e.g., one that involves
+posting the solution to homework problems), send mail to the staff list,
+which reaches the instructors and TAs. Questions of general interest
+sent to the staff list will probably be replied to via the newsgroup.
+If your question involves a confidential personal or academic-conduct
+issue, you should probably contact one of the instructors in person
+or send mail to both.
+Suggested study problems - if you'd like
+a bit more structure to help guide your studying, we list some problems from
+the book that you might find helpful.
+Last updated: Mon Dec 10 13:36:57 -0500 2012
+[ validate xhtml ]

@@ -1,0 +1,76 @@
+# m00003
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Input/output
+
+Input/output
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Display output using the print() function.
+
+Obtain user input using the input() function.
+
+Basic output
+
+The print() function displays output to the user. Output is the information or result produced by a program. The sep and end options can be used to customize the output. shows examples of sep and end.
+
+Multiple values, separated by commas, can be printed in the same statement. By default, each value is separated by a space character in the output. The sep option can be used to change this behavior.
+
+By default, the print() function adds a newline character at the end of the output. A newline character tells the display to move to the next line. The end option can be used to continue printing on the same line.
+
+Example uses of print().
+
+Code
+print("Today is Monday.")
+ print("I like string beans.")
+Today is Monday.
+ I like string beans.
+print("Today", "is", "Monday")
+ print("Today", "is", "Monday", sep="...")
+Today is Monday
+ Today...is...Monday
+print("Today is Monday, ", end="")
+ print("I like string beans.")
+Today is Monday, I like string beans.
+print("Today", "is", "Monday", sep="? ", end="!!")
+ print("I like string beans.")
+Today? is? Monday!!I like string beans.
+
+Displaying output to the user
+
+The print() function
+
+Do spaces really matter?
+
+Spaces and newline characters are not inherently important. However, learning to be precise is an essential skill for programming. Noticing little details, like how words are separated and how lines end, helps new programmers become better.
+
+Basic input
+
+Computer programs often receive input from the user. Input is what a user enters into a program. An input statement, variable = input("prompt"), has three parts:
+
+A variable refers to a value stored in memory. In the statement above, variable can be replaced with any name the programmer chooses.
+
+The input() function reads one line of input from the user. A function is a named, reusable block of code that performs a task when called. The input is stored in the computer's memory and can be accessed later using the variable.
+
+A prompt is a short message that indicates the program is waiting for input. In the statement above, "prompt" can be omitted or replaced with any message.
+
+Obtaining input from the user
+
+The input() function
+
+Frost poem
+
+Write a program that uses multiple print() statements to output the following poem by Robert Frost. Each print() statement should correspond to one line of output.
+Tip: You don't need to write the entire program all at once. Try writing the first print() statement, and then click the Run button. Then write the next print() statement, and click the Run button again. Continue writing and testing the code incrementally until you finish the program.
+
+Name and likes
+
+Write a program that asks the following two questions (example input in bold):
+
+Output a blank line after reading the input. Then output the following message based on the input:

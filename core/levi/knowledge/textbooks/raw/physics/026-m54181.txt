@@ -1,0 +1,564 @@
+# m54181
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Uniform Circular Motion
+
+Uniform Circular Motion
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Describe centripetal acceleration and relate it to linear acceleration
+
+Describe centripetal force and relate it to linear force
+
+Solve problems involving centripetal acceleration and centripetal force
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(4) Science concepts. The student knows and applies the laws governing motion in a variety of situations. The student is expected to:
+ 
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+
+(D) calculate the effect of forces on objects, including the law of inertia, the relationship between force and acceleration, and the nature of force pairs between objects.
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+(D) calculate the effect of forces on objects, including the law of inertia, the relationship between force and acceleration, and the nature of force pairs between objects.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Circular and Rotational Motion, as well as the following standards:
+
+(4) Science concepts. The student knows and applies the laws governing motion in a variety of situations. The student is expected to:
+
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+(C) analyze and describe accelerated motion in two dimensions using equations, including projectile and circular examples.
+
+Section Key Terms
+
+centrifugal force
+centripetal acceleration
+centripetal force
+uniform circular motion
+Centripetal Acceleration
+
+Teacher Support
+[BL][OL] Review uniform circular motion. Ask students to give examples of circular motion. Review linear acceleration.
+
+In the previous section, we defined circular motion. The simplest case of circular motion is uniform circular motion, where an object travels a circular path at a constant speed. Note that, unlike speed, the linear velocity of an object in circular motion is constantly changing because it is always changing direction. We know from kinematics that acceleration is a change in velocity, either in magnitude or in direction or both. Therefore, an object undergoing uniform circular motion is always accelerating, even though the magnitude of its velocity is constant.
+
+You experience this acceleration yourself every time you ride in a car while it turns a corner. If you hold the steering wheel steady during the turn and move at a constant speed, you are executing uniform circular motion. What you notice is a feeling of sliding (or being flung, depending on the speed) away from the center of the turn. This isn’t an actual force that is acting on you—it only happens because your body wants to continue moving in a straight line (as per Newton’s first law) whereas the car is turning off this straight-line path. Inside the car it appears as if you are forced away from the center of the turn. This fictitious force is known as the centrifugal force. The sharper the curve and the greater your speed, the more noticeable this effect becomes.
+
+Teacher Support
+[BL][OL][AL] Demonstrate circular motion by tying a weight to a string and twirling it around. Ask students what would happen if you suddenly cut the string? In which direction would the object travel? Why? What does this say about the direction of acceleration? Ask students to give examples of when they have come across centripetal acceleration.
+shows an object moving in a circular path at constant speed. The direction of the instantaneous tangential velocity is shown at two points along the path. Acceleration is in the direction of the change in velocity; in this case it points roughly toward the center of rotation. (The center of rotation is at the center of the circular path). If we imagine 
+ 
+ Δs
+ becoming smaller and smaller, then the acceleration would point exactly toward the center of rotation, but this case is hard to draw. We call the acceleration of an object moving in uniform circular motion the centripetal acceleration ac because centripetal means center seeking.
+
+Teacher Support
+
+Consider . The figure shows an object moving in a circular path at constant speed and the direction of the instantaneous velocity of two points along the path. Acceleration is in the direction of the change in velocity and points toward the center of rotation. This is strictly true only as 
+ 
+ Δs
+ tends to zero.
+
+Now that we know that the direction of centripetal acceleration is toward the center of rotation, let’s discuss the magnitude of centripetal acceleration. For an object traveling at speed v in a circular path with radius r, the magnitude of centripetal acceleration is
+
+Centripetal acceleration is greater at high speeds and in sharp curves (smaller radius), as you may have noticed when driving a car, because the car actually pushes you toward the center of the turn. But it is a bit surprising that ac is proportional to the speed squared. This means, for example, that the acceleration is four times greater when you take a curve at 100 km/h than at 50 km/h.
+
+We can also express ac in terms of the magnitude of angular velocity. Substituting 
+ 
+ v=rω
+ into the equation above, we get 
+
+ a
+ c
+ 
+ =
+
+ (rω)
+ 
+ 2
+
+ r
+ 
+ =r
+ ω
+ 2
+
+ . Therefore, the magnitude of centripetal acceleration in terms of the magnitude of angular velocity is 
+
+ a
+ c
+ 
+ =r
+ ω
+ 2
+ 
+ .
+
+The equation expressed in the form ac = rω2 is useful for solving problems where you know the angular velocity rather than the tangential velocity.
+
+Ladybug Motion in 2D
+
+In this simulation, you experiment with the position, velocity, and acceleration of a ladybug in circular and elliptical motion. Switch the type of motion from linear to circular and observe the velocity and acceleration vectors. Next, try elliptical motion and notice how the velocity and acceleration vectors differ from those in circular motion.
+
+In uniform circular motion, what is the angle between the acceleration and the velocity? What type of acceleration does a body experience in the uniform circular motion?
+
+The angle between acceleration and velocity is 0°, and the body experiences linear acceleration.
+
+The angle between acceleration and velocity is 0°, and the body experiences centripetal acceleration.
+
+The angle between acceleration and velocity is 90°, and the body experiences linear acceleration.
+
+The angle between acceleration and velocity is 90°, and the body experiences centripetal acceleration.
+
+Centripetal Force
+
+Teacher Support
+[BL][OL][AL] Using the same demonstration as before, ask students to predict the relationships between the quantities of angular velocity, centripetal acceleration, mass, centripetal force. Invite students to experiment by using various lengths of string and different weights.
+
+Because an object in uniform circular motion undergoes acceleration (by changing the direction of motion but not the speed), we know from Newton’s second law of motion that there must be a net external force acting on the object. Since the magnitude of the acceleration is constant, so is the magnitude of the net force, and since the acceleration points toward the center of the rotation, so does the net force.
+
+Any force or combination of forces can cause a centripetal acceleration. Just a few examples are the tension in the rope on a tether ball, the force of Earth’s gravity on the Moon, the friction between a road and the tires of a car as it goes around a curve, or the normal force of a roller coaster track on the cart during a loop-the-loop.
+
+The component of any net force that causes circular motion is called a centripetal force. When the net force is equal to the centripetal force, and its magnitude is constant, uniform circular motion results. The direction of a centripetal force is toward the center of rotation, the same as for centripetal acceleration. According to Newton’s second law of motion, a net force causes the acceleration of mass according to Fnet = ma. For uniform circular motion, the acceleration is centripetal acceleration: a = ac. Therefore, the magnitude of centripetal force, Fc, is 
+
+ F
+ c
+ 
+ =m
+ a
+ c
+
+ .
+
+By using the two different forms of the equation for the magnitude of centripetal acceleration, 
+
+ a
+ c
+ 
+ =
+ 
+ v
+ 2
+ 
+ /r
+ 
+ and 
+
+ a
+ c
+ 
+ =r
+ ω
+ 2
+
+, we get two expressions involving the magnitude of the centripetal force Fc. The first expression is in terms of tangential speed, the second is in terms of angular speed: 
+
+ F
+ c
+ 
+ =m
+
+ v
+ 2
+
+ r
+
+ and 
+
+ F
+ c
+ 
+ =mr
+ ω
+ 2
+
+ .
+
+Both forms of the equation depend on mass, velocity, and the radius of the circular path. You may use whichever expression for centripetal force is more convenient. Newton’s second law also states that the object will accelerate in the same direction as the net force. By definition, the centripetal force is directed towards the center of rotation, so the object will also accelerate towards the center. A straight line drawn from the circular path to the center of the circle will always be perpendicular to the tangential velocity. Note that, if you solve the first expression for r, you get
+
+From this expression, we see that, for a given mass and velocity, a large centripetal force causes a small radius of curvature—that is, a tight curve.
+
+Centripetal Force and Acceleration Intuition
+
+This video explains why centripetal force, when it is equal to the net force and has constant magnitude, creates centripetal acceleration and uniform circular motion.
+
+Teacher Support
+
+Some students might be confused between centripetal force and centrifugal force. Centrifugal force is not a real force but the result of an accelerating reference frame, such as a turning car or the spinning Earth. Centrifugal force refers to a fictional center fleeing force.
+
+Solving Centripetal Acceleration and Centripetal Force Problems
+
+To get a feel for the typical magnitudes of centripetal acceleration, we’ll do a lab estimating the centripetal acceleration of a tennis racket and then, in our first Worked Example, compare the centripetal acceleration of a car rounding a curve to gravitational acceleration. For the second Worked Example, we’ll calculate the force required to make a car round a curve.
+
+Estimating Centripetal Acceleration
+
+In this activity, you will measure the swing of a golf club or tennis racket to estimate the centripetal acceleration of the end of the club or racket. You may choose to do this in slow motion. Recall that the equation for centripetal acceleration is 
+
+ a
+ c
+ 
+ =
+
+ v
+ 2
+
+ r
+
+ or 
+
+ a
+ c
+ 
+ =r
+ ω
+ 2
+
+ .
+
+One tennis racket or golf club
+
+One timer
+
+One ruler or tape measure
+
+Procedure
+
+Work with a partner. Stand a safe distance away from your partner as he or she swings the golf club or tennis racket.
+
+Describe the motion of the swing—is this uniform circular motion? Why or why not?
+
+Try to get the swing as close to uniform circular motion as possible. What adjustments did your partner need to make?
+
+Measure the radius of curvature. What did you physically measure?
+
+By using the timer, find either the linear or angular velocity, depending on which equation you decide to use.
+
+What is the approximate centripetal acceleration based on these measurements? How accurate do you think they are? Why? How might you and your partner make these measurements more accurate?
+
+Teacher Support
+
+The swing of the golf club or racket can be made very close to uniform circular motion. For this, the person would have to move it at a constant speed, without bending their arm. The length of the arm plus the length of the club or racket is the radius of curvature. Accuracy of measurements of angular velocity and angular acceleration will depend on resolution of the timer used and human observational error. The swing of the golf club or racket can be made very close to uniform circular motion. For this, the person would have to move it at a constant speed, without bending their arm. The length of the arm plus the length of the club or racket is the radius of curvature. Accuracy of measurements of angular velocity and angular acceleration will depend on resolution of the timer used and human observational error.
+
+Was it more useful to use the equation a c = v 2 r or a c =r ω 2 in this activity? Why?
+
+It should be simpler to use a c =r ω 2 because measuring angular velocity through observation would be easier.
+
+It should be simpler to use a c = v 2 r because measuring tangential velocity through observation would be easier.
+
+It should be simpler to use a c =r ω 2 because measuring angular velocity through observation would be difficult.
+
+It should be simpler to use a c = v 2 r because measuring tangential velocity through observation would be difficult.
+
+Comparing Centripetal Acceleration of a Car Rounding a Curve with Acceleration Due to Gravity
+
+A car follows a curve of radius 500 m at a speed of 25.0 m/s (about 90 km/h). What is the magnitude of the car’s centripetal acceleration? Compare the centripetal acceleration for this fairly gentle curve taken at highway speed with acceleration due to gravity (g).
+
+Strategy
+
+Because linear rather than angular speed is given, it is most convenient to use the expression 
+
+ a
+ c
+ 
+ =
+
+ v
+ 2
+
+ r
+
+ to find the magnitude of the centripetal acceleration.
+
+Solution
+
+Entering the given values of v = 25.0 m/s and r = 500 m into the expression for ac gives
+
+Discussion
+
+To compare this with the acceleration due to gravity (g = 9.80 m/s2), we take the ratio 
+
+ a
+ c
+ 
+ /g
+ =
+ (1.25
+ 
+  m/s
+ 2
+ 
+ )/
+ (9.80
+ 
+ m/s
+ 2
+ 
+ )
+ =0.128
+ . Therefore, 
+
+ a
+ c
+ 
+ =0.128g
+, which means that the centripetal acceleration is about one tenth the acceleration due to gravity.
+
+Frictional Force on Car Tires Rounding a Curve
+
+Calculate the centripetal force exerted on a 900 kg car that rounds a 600-m-radius curve on horizontal ground at 25.0 m/s.
+
+Static friction prevents the car from slipping. Find the magnitude of the frictional force between the tires and the road that allows the car to round the curve without sliding off in a straight line.
+
+If the car would slip if it were to be traveling any faster, what is the coefficient of static friction between the tires and the road? Could we conclude anything about the coefficient of static friction if we did not know whether the car could round the curve any faster without slipping?
+
+Strategy and Solution for (a)
+
+We know that 
+
+ F
+ c
+ 
+ =m
+
+ v
+ 2
+
+ r
+
+ . Therefore,
+
+Strategy and Solution for (b)
+
+The image above shows the forces acting on the car while rounding the curve. In this diagram, the car is traveling into the page as shown and is turning to the left. Friction acts toward the left, accelerating the car toward the center of the curve. Because friction is the only horizontal force acting on the car, it provides all of the centripetal force in this case. Therefore, the force of friction is the centripetal force in this situation and points toward the center of the curve.
+
+Strategy and Solution for (c)
+
+If the car is about to slip, the static friction is at its maximum value and 
+
+f
+=μsN
+=μsmg
+. Solving for μs, we get
+
+ μs
+ =
+ 938
+ 900×9.8
+ 
+ =0.11
+ 
+. Regardless of whether we know the maximum allowable speed for rounding the curve, we can conclude this is a minimum value for the coefficient.
+
+Discussion
+
+Since we found the force of friction in part (b), we could also solve for the coefficient of friction, since 
+ 
+ f=
+ μ
+ s
+ 
+ N=
+ μ
+ s
+ 
+ mg
+. The static friction is only equal to 
+μs
+ N when it is at the maximum possible value. If the car could go faster, the friction at the given speed would still be the same as we calculated, but the coefficient of static friction would be larger.
+
+Practice Problems
+
+Calculate the centripetal acceleration of an object following a path with a radius of a curvature of 0.2 m and at an angular velocity of 5 rad/s.
+
+1 m/s
+
+5 m/s
+
+1 m/s2
+
+5 m/s2
+
+Check Your Understanding
+
+Which of the following is centripetal acceleration?
+
+The acceleration of an object moving in a circular path and directed radially toward the center of the circular orbit
+
+The acceleration of an object moving in a circular path and directed tangentially along the circular path
+
+The acceleration of an object moving in a linear path and directed in the direction of motion of the object
+
+The acceleration of an object moving in a linear path and directed in the direction opposite to the motion of the object
+
+Identify two examples of forces that can cause centripetal acceleration.
+
+The force of Earths gravity on the moon and the normal force
+
+The force of Earths gravity on the moon and the tension in the rope on an orbiting tetherball
+
+The normal force and the force of friction acting on a moving car
+
+The normal force and the tension in the rope on a tetherball
+
+Teacher Support
+
+Use the Check Your Understanding questions to assess whether students master the learning objectives of this section. If students are struggling with a specific objective, the formative assessment will help identify which objective is causing the problem and direct students to the relevant content.
+
+Section Summary
+
+Centripetal acceleration ac is the acceleration experienced while in uniform circular motion.
+
+Centripetal acceleration force is a center-seeking force that always points toward the center of rotation, perpendicular to the linear velocity, in the same direction as the net force, and in the direction opposite that of the radius vector.
+
+The standard unit for centripetal acceleration is m/s2.
+
+Centripetal force Fc is any net force causing uniform circular motion.
+
+Key Equations
+
+a
+ c
+ 
+ =
+
+ v
+ 2
+
+ r
+
+ or 
+
+ a
+ c
+ 
+ =r
+ ω
+ 2
+F
+ c
+ 
+ =m
+ a
+ c
+
+, 
+
+ F
+ c
+ 
+ =m
+
+ v
+ 2
+
+ r
+
+, 
+
+ F
+ c
+ 
+ =mr
+ ω
+ 2
+Concept Items
+
+Critical Thinking
+
+Problems
+
+What is the centripetal force exerted on a 1,600 kg car that rounds a 100 m radius curve at 12 m/s?
+
+192 N
+
+1, 111 N
+
+2, 300 N
+
+13, 333 N
+
+Find the frictional force between the tires and the road that allows a 1,000 kg car traveling at 30 m/s to round a 20 m radius curve.
+
+22 N
+
+667 N
+
+1, 500 N
+
+45, 000 N
+
+Test Prep Multiple Choice
+
+Which of these quantities is constant in uniform circular motion?
+
+Speed
+
+Velocity
+
+Acceleration
+
+Displacement
+
+Which of these quantities impact centripetal force?
+
+Mass and speed only
+
+Mass and radius only
+
+Speed and radius only
+
+Mass, speed, and radius all impact centripetal force
+
+An increase in the magnitude of which of these quantities causes a reduction in centripetal force?
+
+Mass
+
+Radius of curvature
+
+Speed
+
+Test Prep Short Answer
+
+What type of quantity is centripetal acceleration?
+
+Scalar quantity; centripetal acceleration has magnitude only but no direction
+
+Scalar quantity; centripetal acceleration has magnitude as well as direction
+
+Vector quantity; centripetal acceleration has magnitude only but no direction
+
+Vector quantity; centripetal acceleration has magnitude as well as direction
+
+What are the standard units for centripetal force?
+
+m
+
+m/s
+
+m/s2
+
+newtons
+
+Test Prep Extended Response
+
+An object is in uniform circular motion. Suppose the centripetal force was removed. In which direction would the object now travel?
+
+In the direction of the centripetal force
+
+In the direction opposite to the direction of the centripetal force
+
+In the direction of the tangential velocity
+
+In the direction opposite to the direction of the tangential velocity
+
+a fictitious force that acts in the direction opposite the centripetal acceleration
+the component of the acceleration of an object perpendicular to the velocity; an object moving in a circular path experiences centripetal acceleration directed toward the center of the circle
+the component of the net force which is perpendicular to the velocity; an object moving in a circular path does so due to a centripetal force
+the motion of an object in a circular path at constant speed

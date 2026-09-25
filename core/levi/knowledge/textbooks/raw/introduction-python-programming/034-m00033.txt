@@ -1,0 +1,58 @@
+# m00033
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Nested decisions
+
+Nested decisions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe the execution paths of programs with nested if-else statements.
+
+Implement a program with nested if-else statements.
+
+Nested decision statements
+
+Suppose a programmer is writing a program that reads in a game ID and player count and prints whether the user has the right number of players for the game.
+
+The programmer may start with:
+
+The programmer realizes the code is redundant. What if the programmer could decide the game ID first and then make a decision about players? Nesting allows a decision statement to be inside another decision statement, and is indicated by an indentation level.
+
+An improved program:
+
+Example: Poisonous plant identification
+
+Using nested if-else statements
+
+Meal orders
+
+Write a program that reads in a string, "lunch" or "dinner", representing the menu choice, and an integer, 1, 2, or 3, representing the user's meal choice. The program then prints the user's meal choice.
+
+Lunch Meal Options
+
+1: Caesar salad
+
+2: Spicy chicken wrap
+
+3: Butternut squash soup
+
+Dinner Meal Options
+
+1: Baked salmon
+
+2: Turkey burger
+
+3: Mushroom risotto
+
+Ex: If the input is:
+ lunch 
+ 3
+
+The output is:
+ Your order: Butternut squash soup

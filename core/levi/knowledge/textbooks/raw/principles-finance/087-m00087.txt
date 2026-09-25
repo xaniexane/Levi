@@ -1,0 +1,105 @@
+# m00087
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Linear Regression Analysis
+
+Linear Regression Analysis
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Analyze a regression using the method of least squares and residuals.
+
+Test the assumptions for linear regression.
+
+Method of Least Squares and Residuals
+
+Once the correlation coefficient has been calculated and a determination has been made that the correlation is significant, typically a regression model is then developed. In this discussion we will focus on linear regression, where a straight line is used to model the relationship between the two variables. Once a straight-line model is developed, this model can then be used to predict the value of the dependent variable for a specific value of the independent variable.
+
+Recall from algebra that the equation of a straight line is given by
+
+where m is the slope of the line and b is the y-intercept of the line.
+
+The slope measures the steepness of the line, and the y-intercept is that point on the y-axis where the graph crosses, or intercepts, the y-axis.
+
+In linear regression analysis, the equation of the straight line is written in a slightly different way using the model
+
+In this format, b is the slope of the line, and a is the y-intercept. The notation y^ is called y-hat and is used to indicate a predicted value of the dependent variable y for a certain value of the independent variable x.
+
+If a line extends uphill from left to right, the slope is a positive value, and if the line extends downhill from left to right, the slope is a negative value. Refer to .
+
+Three Possible Graphs of y^=a+bx
+
+When generating the equation of a line in algebra using y=mx+b, two (x, y) points were required to generate the equation. However, in regression analysis, all (x, y) points in the data set will be utilized to develop the linear regression model.
+
+The first step in any regression analysis is to create the scatter plot. Then proceed to calculate the correlation coefficient r, and check this value for significance. If we think that the points show a linear relationship, we would like to draw a line on the scatter plot. This line can be calculated through a process called linear regression. However, we only calculate a regression line if one of the variables helps to explain or predict the other variable. If x is the independent variable and y the dependent variable, then we can use a regression line to predict y for a given value of x.
+
+As an example of a regression equation, assume that a correlation exists between the monthly amount spent on advertising and the monthly revenue for a Fortune 500 company. After collecting (x, y) data for a certain time period, the company determines the regression equation is of the form
+
+where x represents the monthly amount spent on advertising (in thousands of dollars) and y^ represents the monthly revenues for the company (in thousands of dollars).
+
+A scatter plot of the (x, y) data is shown in .
+
+Scatter Plot of Revenue versus Advertising for a Fortune 500 Company ($000s)
+
+The Fortune 500 company would like to predict the monthly revenue if its executives decide to spend $150,000 in advertising next month. To determine the estimate of monthly revenue, let x=150 in the regression equation and calculate a corresponding value for y^:
+
+This predicted value of y indicates that the anticipated revenue would be $18,646,700, given the advertising spend of $150,000.
+
+Notice that from past data, there may have been a month where the company actually did spend $150,000 on advertising, and thus the company may have an actual result for the monthly revenue. This actual, or observed, amount can be compared to the prediction from the linear regression model to calculate a residual.
+
+A residual is the difference between an observed y-value and the predicted y-value obtained from the linear regression equation. As an example, assume that in a previous month, the actual monthly revenue for an advertising spend of $150,000 was $19,200,000, and thus y=19,200. The residual for this data point can be calculated as follows:
+
+Notice that residuals can be positive, negative, or zero. If the observed y-value exactly matches the predicted y-value, then the residual will be zero. If the observed y-value is greater than the predicted y-value, then the residual will be a positive value. If the observed y-value is less than the predicted y-value, then the residual will be a negative value.
+
+When formulating the linear regression line of best fit to the points on the scatter plot, the mathematical analysis generates a linear equation where the sum of the squared residuals is minimized. This analysis is referred to as the method of least squares. The result is that the analysis generates a linear equation that is the “best fit” to the points on the scatter plot, in the sense that the line minimizes the differences between the predicted values and observed values for y.
+
+Calculating a Residual
+
+Suppose that the chief financial officer of a corporation has created a linear model for the relationship between the company stock and interest rates. When interest rates are at 5%, the company stock has a value of $94. Using the linear model, when interest rates are at 5%, the model predicts the value of the company stock to be $99. Calculate the residual for this data point.
+Solution:
+
+A residual is the difference between an observed y-value and the predicted y-value obtained from the linear regression equation
+
+The goal in the regression analysis is to determine the coefficients a and b in the following regression equation:
+
+Once the (x, y) has been collected, the slope (b) and y-intercept (a) can be calculated using the following formulas:
+
+where n refers to the number of data pairs and ∑x indicates sum of the x-values.
+
+Notice that the formula for the y-intercept requires the use of the slope result (b), and thus the slope should be calculated first and the y-intercept should be calculated second.
+
+When making predictions for y, it is always important to plot a scatter diagram first. If the scatter plot indicates that there is a linear relationship between the variables, then it is reasonable to use a best-fit line to make predictions for y, given x within the domain of x-values in the sample data, but not necessarily for x-values outside that domain.
+
+Note: Computer spreadsheets, statistical software, and many calculators can quickly calculate the best-fit line and create the graphs. The calculations tend to be tedious if done by hand.
+
+Assumptions for Linear Regression
+
+Testing the significance of the correlation coefficient requires that certain assumptions about the data are satisfied. The premise of this test is that the data are a sample of observed points taken from a larger population. We have not examined the entire population because it is not possible or feasible to do so. We are examining the sample to draw a conclusion about whether the linear relationship that we see between x and y in the sample data provides strong enough evidence that we can conclude that there is a linear relationship between x and y in the population.
+
+The regression line equation that we calculate from the sample data gives the best-fit line for our particular sample. We want to use this best-fit line for the sample as an estimate of the best-fit line for the population (). Examining the scatter plot and testing the significance of the correlation coefficient helps us determine if it is appropriate to do this.
+
+These are the assumptions underlying the test of significance:
+
+There is a linear relationship in the population that models the average value of y for varying values of x. In other words, the expected value of y for each particular value lies on a straight line in the population. (We do not know the equation for the line for the population. Our regression line from the sample is our best estimate of this line in the population.)
+
+The y-values for any particular x-value are normally distributed about the line. This implies that there are more y-values scattered closer to the line than are scattered farther away. Assumption (1) implies that these normal distributions are centered on the line: the means of these normal distributions of y-values lie on the line.
+
+The standard deviations of the population y-values about the line are equal for each value of x. In other words, each of these normal distributions of y-values has the same shape and spread about the line.
+
+The residual errors are mutually independent (no pattern).
+
+The data are produced from a well-designed, random sample or randomized experiment.
+
+Best-Fit Line
+
+Linear regression analysis uses a straight-line fit to model the relationship between the two variables. Once a straight-line model is developed, this model can then be used to predict the value of the dependent variable for a specific value of the independent variable. Two parameters are calculated for the linear model, the slope of the best-fit line and the y-intercept of the best-fit line. The method of least squares is used to generate these parameters; this method is based on minimizing the squared differences between the predicted values and observed values for y.
+
+a mathematical method to generate a linear equation that is the “best fit” to the points on the scatter plot in the sense that the line minimizes the differences between the predicted values and observed values for y
+a forecast for the dependent variable based on a specific value of the independent variable generated using the linear model
+the difference between an observed y-value and the predicted y-value obtained from the linear regression equation
+graphical display that shows values of the independent variable plotted on the x-axis and values of the dependent variable plotted on the y-axis

@@ -1,0 +1,125 @@
+# m00092
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+The Addition Rule for Probability
+
+The Addition Rule for Probability
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Identify mutually exclusive events.
+
+Apply the Addition Rule to compute probability.
+
+Use the Inclusion/Exclusion Principle to compute probability.
+
+Up to this point, we have looked at the probabilities of simple events. Simple events are those with a single, simple characterization. Sometimes, though, we want to investigate more complicated situations. For example, if we are choosing a college student at random, we might want to find the probability that the chosen student is a varsity athlete or in a Greek organization. This is a compound event: there are two possible criteria that might be met. We might instead try to identify the probability that the chosen student is both a varsity athlete and in a Greek organization. In this section and the next, we’ll cover probabilities of two types of compound events: those build using “or” and those built using “and.” We’ll deal with the former first.
+
+Mutual Exclusivity
+
+Before we get to the key techniques of this section, we must first introduce some new terminology. Let’s say you’re drawing a card from a standard deck. We’ll consider 3 events: H is the event “the card is a ♡,” T is the event “the card is a 10,” and S is the event “the card is a ♠.” If the card drawn is J♠, then H and T didn’t occur, but S did. If the card drawn is instead 10♠, then H didn’t occur, but both T and S did.
+
+We can see from these examples that, if we are interested in several possible events, more than one of them can occur simultaneously (both T and S, for example). But, if you think about all the possible outcomes, you can see that H and S can never occur simultaneously; there are no cards in the deck that are both ♡ and ♠. Pairs of events that cannot both occur simultaneously are called mutually exclusive. Let’s go through an example to help us better understand this concept.
+
+Identifying Mutually Exclusive Events
+
+Decide whether the following events are mutually exclusive. If they are not mutually exclusive, identify an outcome that would result in both events occurring.
+
+You are about to roll a standard 6-sided die. E is the event “the die shows an even number” and F is the event “the die shows an odd number.”
+
+You are about to roll a standard 6-sided die. E is the event “the die shows an even number” and S is the event “the die shows a number less than 4.”
+
+You are about to flip a coin 4 times. J is the event “at least 2 heads are flipped” and K is the event “fewer than 3 tails are flipped.”
+Let’s look at the outcomes for each event: E={2,4,6} and F={1,3,5}. There are no outcomes in common, so E and F are mutually exclusive.
+ Again, consider the outcomes in each event: E={2,4,6} and S={1,2,3}. Since the outcome 2 belongs to both events, these are not mutually exclusive.
+ Suppose the results of the 4 flips are HTTH. Then at least 2 heads are flipped, and fewer than 3 tails are flipped. That means that both J and K occurred, and so these events are not mutually exclusive.
+
+Let’s look at the outcomes for each event: E={2,4,6} and F={1,3,5}. There are no outcomes in common, so E and F are mutually exclusive.
+
+Again, consider the outcomes in each event: E={2,4,6} and S={1,2,3}. Since the outcome 2 belongs to both events, these are not mutually exclusive.
+
+Suppose the results of the 4 flips are HTTH. Then at least 2 heads are flipped, and fewer than 3 tails are flipped. That means that both J and K occurred, and so these events are not mutually exclusive.
+
+The Addition Rule for Mutually Exclusive Events
+
+If two events are mutually exclusive, then we can use addition to find the probability that one or the other event occurs.
+
+If E and F are mutually exclusive events, then
+ P(EorF)=P(E)+P(F).
+
+Why does this formula work? Let’s consider a basic example. Suppose we’re about to draw a Scrabble tile from a bag containing A, A, B, E, E, E, R, S, S, U. What is the probability of drawing an E or an S? Since 3 of the tiles are marked with E and 2 are marked with S, there are 5 tiles that satisfy the criteria. There are ten tiles in the bag, so the probability is 510=12. Notice that the probability of drawing an E is 310 and the probability of drawing an S is 210; adding those together, we get 310+210=510. Look at the numerators in the fractions involved in the sum: the 3 represents the number of E tiles and the 2 is the number of S tiles. This is why the Addition Rule works: The total number of outcomes in one event or the other is the sum of the numbers of outcomes in each of the individual events.
+
+Using the Addition Rule
+
+For each of the given pairs of events, decide if the Addition Rule applies. If it does, use the Addition Rule to find the probability that one or the other occurs.
+
+You are rolling a standard 6-sided die. Event A is “roll an even number” and event B is “roll a 3.”
+
+You are drawing a card at random from a standard 52-card deck. Event R is “draw a ♡” and event S is “draw a king.”
+
+You are rolling a pair of standard 6-sided dice. Event E is “roll an odd sum” and event F is “roll a sum of 10.” The table we constructed in might help.
+
+Since 3 is not an even number, these events are mutually exclusive. So, we can use the Addition Rule: since P(A)=36 and P(B)=16, we get P(A⁢or⁢B)=36+16=23.
+
+If the card drawn is K♡, then both R and S occur. So, they aren’t mutually exclusive, and the Addition Rule doesn’t apply.
+
+Since 10 is not odd, these events are mutually exclusive. Since P(E)=1836 and P(F)=336, the Addition Rule gives us P(E⁢or⁢F)=1836+336=712.
+
+Finding Probabilities When Events Aren’t Mutually Exclusive
+
+Let’s return to the example we used to explore the Addition Rule: We’re about to draw a Scrabble tile from a bag containing A, A, B, E, E, E, R, S, S, U. Consider these events: J is “draw a vowel” and K is “draw a letter that comes after L in the alphabet.” Since there are 6 vowels, P(J)=610. There are 4 tiles with letters that come after L alphabetically, so P(K)=410. What is P(J⁢or⁢K)? If we blindly apply the Addition Rule, we get 610+410=1, which would mean that the compound event J or K is certain. However, it’s possible to draw a B, in which case neither J nor K happens. Where’s the error?
+
+The events are not mutually exclusive: the outcome U belongs to both events, and so the Addition Rule doesn’t apply. However, there’s a way to extend the Addition Rule to allow us to find this probability anyway; it’s called the Inclusion/Exclusion Principle. In this example, if we just add the two probabilities together, the outcome U is included in the sum twice: It’s one of the 6 outcomes represented in the numerator of 610, and it’s one of the 4 outcomes represented in the numerator of 410. So, that particular outcome has been “double counted.” Since it has been included twice, we can get a true accounting by excluding it once: 610+410−110=910. We can generalize this idea to a formula that we can apply to find the probability of any compound event built using “or.”
+
+Inclusion/Exclusion Principle: If E and F are events that contain outcomes of a single experiment, then 
+ P(EorF)=P(E)+P(F)−P(EandF).
+
+It’s worth noting that this formula is truly an extension of the Addition Rule. Remember that the Addition Rule requires that the events E and F are mutually exclusive. In that case, the compound event (E⁢and⁢F) is impossible, and so P(E⁢and⁢F)=0. So, in cases where the events in question are mutually exclusive, the Inclusion/Exclusion Principle reduces to the Addition Rule.
+
+Using the Inclusion/Exclusion Principle
+
+Suppose we have events E, F, and G, associated with these probabilities:
+
+Compute the following:
+P(E⁢or⁢F)
+P(E⁢or⁢G)
+P(F⁢or⁢G)
+
+Using the Inclusion/Exclusion Principle, we get:
+
+ P(E⁢or⁢F)=P(E)+P(F)−P(Eand⁢F)=0.45+0.6−0.2=0.85.
+
+Again, we’ll apply the Inclusion/Exclusion Principle:
+
+ P(Eor⁢G)=P(E)+P(G)−P(Eand⁢G)
+ =0.45+0.55−0.2
+ =0.8.
+
+Applying the Inclusion/Exclusion Principle one more time:
+
+ P(F⁢or⁢G)=P(F)+P(G)−P(Fand⁢G)=0.6+0.55−0.25=0.9.
+
+Check Your Understanding
+
+Key Terms
+
+mutually exclusive
+
+Key Concepts
+
+The Addition Rule is used to find the probability that one event or another will occur when those events are mutually exclusive.
+
+The Inclusion/Exclusion Principle is used to find probabilities when events are not mutually exclusive.
+
+Formulas
+
+If E and F are mutually exclusive events, then
+ P(EorF)=P(E)+P(F).
+
+If E and F are events that contain outcomes of a single experiment, then
+ P(EorF)=P(E)+P(F)−P(E⁢and⁢F).

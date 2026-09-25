@@ -1,0 +1,284 @@
+# m53643
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Volumes of Revolution: Cylindrical Shells
+
+Volumes of Revolution: Cylindrical Shells
+
+Calculate the volume of a solid of revolution by using the method of cylindrical shells.
+
+Compare the different methods for calculating a volume of revolution.
+
+In this section, we examine the method of cylindrical shells, the final method for finding the volume of a solid of revolution. We can use this method on the same kinds of solids as the disk method or the washer method; however, with the disk and washer methods, we integrate along the coordinate axis parallel to the axis of revolution. With the method of cylindrical shells, we integrate along the coordinate axis perpendicular to the axis of revolution. The ability to choose which variable of integration we want to use can be a significant advantage with more complicated functions. Also, the specific geometry of the solid sometimes makes the method of using cylindrical shells more appealing than using the washer method. In the last part of this section, we review all the methods for finding volume that we have studied and lay out some guidelines to help you determine which method to use in a given situation.
+
+The Method of Cylindrical Shells
+
+Again, we are working with a solid of revolution. As before, we define a region R, bounded above by the graph of a function y=f(x), below by the x-axis, and on the left and right by the lines x=a and x=b, respectively, as shown in (a). We then revolve this region around the y-axis, as shown in (b). Note that this is different from what we have done before. Previously, regions defined in terms of functions of x were revolved around the x-axis or a line parallel to it.
+
+As we have done many times before, partition the interval [a,b] using a regular partition, P={x0,x1,…,xn} and, for i=1,2,…,n, choose a point xi*∈[xi−1,xi]. Then, construct a rectangle over the interval [xi−1,xi] of height f(xi*) and width Δx. A representative rectangle is shown in (a). When that rectangle is revolved around the y-axis, instead of a disk or a washer, we get a cylindrical shell, as shown in the following figure.
+
+To calculate the volume of this shell, consider .
+
+The shell is a cylinder, so its volume is the cross-sectional area multiplied by the height of the cylinder. The cross-sections are annuli (ring-shaped regions—essentially, circles with a hole in the center), with outer radius xi and inner radius xi−1. Thus, the cross-sectional area is πxi2−πxi−12. The height of the cylinder is f(xi*). Then the volume of the shell is
+
+Note that xi−xi−1=Δx, so we have
+
+Furthermore, xi+xi−12 is both the midpoint of the interval [xi−1,xi] and the average radius of the shell, and we can approximate this by xi*. We then have
+
+Another way to think of this is to think of making a vertical cut in the shell and then opening it up to form a flat plate ().
+
+In reality, the outer radius of the shell is greater than the inner radius, and hence the back edge of the plate would be slightly longer than the front edge of the plate. However, we can approximate the flattened shell by a flat plate of height f(xi*), width 2πxi*, and thickness Δx (). The volume of the shell, then, is approximately the volume of the flat plate. Multiplying the height, width, and depth of the plate, we get
+
+which is the same formula we had before.
+
+To calculate the volume of the entire solid, we then add the volumes of all the shells and obtain
+
+Here we have another Riemann sum, this time for the function 2πxf(x). Taking the limit as n→∞ gives us
+
+This leads to the following rule for the method of cylindrical shells.
+
+Rule: The Method of Cylindrical Shells
+
+Let f(x) be continuous and nonnegative. Define R as the region bounded above by the graph of f(x), below by the x-axis, on the left by the line x=a, and on the right by the line x=b. Then the volume of the solid of revolution formed by revolving R around the y-axis is given by
+
+Now let’s consider an example.
+
+The Method of Cylindrical Shells 1
+
+Define R as the region bounded above by the graph of f(x)=1/x and below by the x-axis over the interval [1,3]. Find the volume of the solid of revolution formed by revolving R around the y-axis.
+
+First we must graph the region R and the associated solid of revolution, as shown in the following figure.
+
+Then the volume of the solid is given by
+
+Define R as the region bounded above by the graph of f(x)=x2 and below by the x-axis over the interval [1,2]. Find the volume of the solid of revolution formed by revolving R around the y-axis.
+15π2 units3
+
+Hint
+
+Use the procedure from .
+
+The Method of Cylindrical Shells 2
+
+Define R as the region bounded above by the graph of f(x)=2x−x2 and below by the x-axis over the interval [0,2]. Find the volume of the solid of revolution formed by revolving R around the y-axis.
+
+First graph the region R and the associated solid of revolution, as shown in the following figure.
+
+Then the volume of the solid is given by
+
+Define R as the region bounded above by the graph of f(x)=3x−x2 and below by the x-axis over the interval [0,2]. Find the volume of the solid of revolution formed by revolving R around the y-axis.
+8π units3
+
+Hint
+
+Use the process from .
+
+As with the disk method and the washer method, we can use the method of cylindrical shells with solids of revolution, revolved around the x-axis, when we want to integrate with respect to y. The analogous rule for this type of solid is given here.
+
+Rule: The Method of Cylindrical Shells for Solids of Revolution around the x-axis
+
+Let g(y) be continuous and nonnegative. Define Q as the region bounded on the right by the graph of g(y), on the left by the y-axis, below by the line y=c, and above by the line y=d. Then, the volume of the solid of revolution formed by revolving Q around the x-axis is given by
+
+The Method of Cylindrical Shells for a Solid Revolved around the x-axis
+
+Define Q as the region bounded on the right by the graph of g(y)=2y and on the left by the y-axis for y∈[0,4]. Find the volume of the solid of revolution formed by revolving Q around the x-axis.
+
+First, we need to graph the region Q and the associated solid of revolution, as shown in the following figure.
+
+Label the shaded region Q. Then the volume of the solid is given by
+
+Define Q as the region bounded on the right by the graph of g(y)=3/y and on the left by the y-axis for y∈[1,3]. Find the volume of the solid of revolution formed by revolving Q around the x-axis.
+12π units3
+
+Hint
+
+Use the process from .
+
+For the next example, we look at a solid of revolution for which the graph of a function is revolved around a line other than one of the two coordinate axes. To set this up, we need to revisit the development of the method of cylindrical shells. Recall that we found the volume of one of the shells to be given by
+
+This was based on a shell with an outer radius of xi and an inner radius of xi−1. If, however, we rotate the region around a line other than the y-axis, we have a different outer and inner radius. Suppose, for example, that we rotate the region around the line x=−k, where k is some positive constant. Then, the outer radius of the shell is xi+k and the inner radius of the shell is xi−1+k. Substituting these terms into the expression for volume, we see that when a plane region is rotated around the line x=−k, the volume of a shell is given by
+
+As before, we notice that xi+xi−12 is the midpoint of the interval [xi−1,xi] and can be approximated by xi*. Then, the approximate volume of the shell is
+
+The remainder of the development proceeds as before, and we see that
+
+We could also rotate the region around other horizontal or vertical lines, such as a vertical line in the right half plane. In each case, the volume formula must be adjusted accordingly. Specifically, the x-term in the integral must be replaced with an expression representing the radius of a shell. To see how this works, consider the following example.
+
+A Region of Revolution Revolved around a Line
+
+Define R as the region bounded above by the graph of f(x)=x and below by the x-axis over the interval [1,2]. Find the volume of the solid of revolution formed by revolving R around the line x=−1.
+
+First, graph the region R and the associated solid of revolution, as shown in the following figure.
+
+Note that the radius of a shell is given by x+1. Then the volume of the solid is given by
+
+Define R as the region bounded above by the graph of f(x)=x2 and below by the x-axis over the interval [0,1]. Find the volume of the solid of revolution formed by revolving R around the line x=−2.
+11π6 units3
+
+Hint
+
+Use the process from .
+
+For our final example in this section, let’s look at the volume of a solid of revolution for which the region of revolution is bounded by the graphs of two functions.
+
+A Region of Revolution Bounded by the Graphs of Two Functions
+
+Define R as the region bounded above by the graph of the function f(x)=x and below by the graph of the function g(x)=1/x over the interval [1,4]. Find the volume of the solid of revolution generated by revolving R around the y-axis.
+
+First, graph the region R and the associated solid of revolution, as shown in the following figure.
+
+Note that the axis of revolution is the y-axis, so the radius of a shell is given simply by x. We don’t need to make any adjustments to the x-term of our integrand. The height of a shell, though, is given by f(x)−g(x), so in this case we need to adjust the f(x) term of the integrand. Then the volume of the solid is given by
+
+Define R as the region bounded above by the graph of f(x)=x and below by the graph of g(x)=x2 over the interval [0,1]. Find the volume of the solid of revolution formed by revolving R around the y-axis.
+π6 units3
+
+Hint
+
+Use the process from .
+
+Which Method Should We Use?
+
+We have studied several methods for finding the volume of a solid of revolution, but how do we know which method to use? It often comes down to a choice of which integral is easiest to evaluate. describes the different approaches for solids of revolution around the x-axis. It’s up to you to develop the analogous table for solids of revolution around the y-axis.
+
+Let’s take a look at a couple of additional problems and decide on the best approach to take for solving them.
+
+Selecting the Best Method
+
+For each of the following problems, select the best method to find the volume of a solid of revolution generated by revolving the given region around the x-axis, and set up the integral to find the volume (do not evaluate the integral).
+
+The region bounded by the graphs of y=x, y=2−x, and the x-axis.
+
+The region bounded by the graphs of y=4x−x2 and the x-axis.
+
+First, sketch the region and the solid of revolution as shown.
+
+(a) The region R bounded by two lines and the x-axis. (b) The solid of revolution generated by revolving R about the x-axis.
+
+Looking at the region, if we want to integrate with respect to x, we would have to break the integral into two pieces, because we have different functions bounding the region over [0,1] and [1,2]. In this case, using the disk method, we would have
+V=∫01(πx2)dx+∫12(π(2−x)2)dx.
+If we used the shell method instead, we would use functions of y to represent the curves, producing
+V=∫01(2πy[(2−y)−y])dy=∫01(2πy[2−2y])dy.
+Neither of these integrals is particularly onerous, but since the shell method requires only one integral, and the integrand requires less simplification, we should probably go with the shell method in this case.
+
+First, sketch the region and the solid of revolution as shown.
+
+(a) The region R between the curve and the x-axis. (b) The solid of revolution generated by revolving R about the x-axis.
+
+Looking at the region, it would be problematic to define a horizontal rectangle; the region is bounded on the left and right by the same function. Therefore, we can dismiss the method of shells. The solid has no cavity in the middle, so we can use the method of disks. Then
+V=∫04π(4x−x2)2dx.
+
+Select the best method to find the volume of a solid of revolution generated by revolving the given region around the x-axis, and set up the integral to find the volume (do not evaluate the integral): the region bounded by the graphs of y=2−x2 and y=x2.
+
+Use the method of washers; V=∫−11π[(2−x2)2−(x2)2]dx
+
+Hint
+
+Sketch the region and use to decide which integral is easiest to evaluate.
+
+Key Concepts
+
+The method of cylindrical shells is another method for using a definite integral to calculate the volume of a solid of revolution. This method is sometimes preferable to either the method of disks or the method of washers because we integrate with respect to the other variable. In some cases, one integral is substantially more complicated than the other.
+
+The geometry of the functions and the difficulty of the integration are the main factors in deciding which integration method to use.
+
+Key Equations
+V=∫ab(2πxf(x))dx
+For the following exercises, find the volume generated when the region between the two curves is rotated around the given axis. Use both the shell method and the washer method. Use technology to graph the functions and draw a typical slice by hand.
+[T] Bounded by the curves y=3x,x=0, and y=3 rotated around the y-axis.
+[T] Bounded by the curves y=3x,y=0,andx=3 rotated around the y-axis.
+54π units3
+[T] Bounded by the curves y=3x,y=0,andy=3 rotated around the x-axis.
+[T] Bounded by the curves y=3x,y=0,andx=3 rotated around the x-axis.
+81π units3
+[T] Bounded by the curves y=2x3,y=0,andx=2 rotated around the y-axis.
+[T] Bounded by the curves y=2x3,y=0,andx=2 rotated around the x-axis.
+512π7 units3
+
+For the following exercises, use shells to find the volumes of the given solids. Note that the rotated regions lie between the curve and the x-axis and are rotated around the y-axis.
+y=1−x2,x=0,andx=1
+y=5x3,x=0,andx=1
+2π units3
+y=1x,x=1,andx=100
+y=1−x2,x=0,andx=1
+2π3 units3
+y=11+x2,x=0,andx=3
+y=sinx2,x=0,andx=π
+2π units3
+y=11−x2,x=0,andx=12
+y=x,x=0,andx=1
+4π5 units3
+y=(1+x2)3,x=0,andx=1
+y=5x3−2x4,x=0,andx=2
+64π3 units3
+
+For the following exercises, use shells to find the volume generated by rotating the regions between the given curve and y=0 around the x-axis.
+y=1−x2,x=0,x=1 and the x-axis
+y=x2,x=0,x=2 and the x-axis
+32π5 units3
+y=x32,x=0,x=2, and the x-axis
+y=2x2,x=1,x=2, and the x-axis
+7π6
+x=11+y2,y=1,andy=4
+x=1+y2y,y=1,y=4, and the y-axis
+48π
+x=4-y2,x=0,y=0
+x=y3-2y2,x=0,x=9
+113π5
+x=y+1,x=1,x=3, and the x-axis
+x=27y3andx=3y4
+512π7
+
+For the following exercises, find the volume generated when the region between the curves is rotated around the given axis.
+y=3−x,y=0,x=0,andx=2 rotated around the y-axis.
+y=x3,x=0,andy=8 rotated around the y-axis.
+96π5 units3
+y=x2,y=x, rotated around the y-axis.
+y=x,y=0,andx=1 rotated around the line x=2.
+28π15 units3
+y=14−x,x=1,x=2andy=0 rotated around the line x=4.
+y=xandy=x2 rotated around the y-axis.
+3π10 units3
+y=xandy=x2 rotated around the line x=2.
+x=y3,x=1y,x=1,andx=2 rotated around the x-axis.
+π6·22/35-1110=π1012·22/3-11≈2.5286 units3
+x=y2andy=x rotated around the line y=2.
+[T] Left of x=sin(πy), right of y=x, around the y-axis.
+0.9876 units3
+
+For the following exercises, use technology to graph the region. Determine which method you think would be easiest to use to calculate the volume generated when the function is rotated around the specified axis. Then, use your chosen method to find the volume.
+[T] y=x2 and y=4x rotated around the y-axis.
+[T] y=cos(πx),y=sin(πx),x=14,andx=54 rotated around the y-axis. This exercise requires advanced technique. You may use technology to perform the integration.
+32 units3
+[T] y=x2−2x,x=2,andx=4 rotated around the y-axis.
+[T] y=x2−2x,x=2,andx=4 rotated around the x-axis.
+496π15 units3
+[T] y=3x3−2,y=x,andx=2 rotated around the x-axis.
+[T] y=3x3−2,y=x,andx=2 rotated around the y-axis.
+398π15 units3
+[T] x=sin(πy2) and x=2y rotated around the x-axis.
+[T] x=y2,x=y2−2y+1,andx=2 rotated around the y-axis.
+15.9074 units3
+
+For the following exercises, use the method of shells to approximate the volumes of some common objects, which are pictured in accompanying figures.
+
+Use the method of shells to find the volume of a sphere of radius r.
+
+Use the method of shells to find the volume of a cone with radius r and height h.
+13πr2h units3
+
+Use the method of shells to find the volume of an ellipsoid (x2/a2)+(y2/b2)=1 rotated around the x-axis.
+
+Use the method of shells to find the volume of a cylinder with radius r and height h.
+πr2h units3
+
+Use the method of shells to find the volume of the donut created when the circle x2+y2=4 is rotated around the line x=4.
+
+Consider he region enclosed by the graphs of y=f(x),y=1+f(x),x=0,y=0, and x=a>0. What is the volume of the solid generated when this region is rotated around the y-axis? Assume that the function is defined over the interval [0,a].
+πa2 units3
+
+Consider the function y=f(x), which decreases from f(0)=b to f(1)=0. Set up the integrals for determining the volume, using both the shell method and the disk method, of the solid generated when this region, with x=0 and y=0, is rotated around the y-axis. Prove that both methods approximate the same volume. Which method is easier to apply? (Hint: Since f(x) is one-to-one, there exists an inverse f−1(y).)
+
+a method of calculating the volume of a solid of revolution by dividing the solid into nested cylindrical shells; this method is different from the methods of disks or washers in that we integrate with respect to the opposite variable

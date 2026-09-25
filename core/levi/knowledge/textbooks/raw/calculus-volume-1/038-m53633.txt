@@ -1,0 +1,712 @@
+# m53633
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Integration Formulas and the Net Change Theorem
+
+Integration Formulas and the Net Change Theorem
+
+Apply the basic integration formulas.
+
+Explain the significance of the net change theorem.
+
+Use the net change theorem to solve applied problems.
+
+Apply the integrals of odd and even functions.
+
+In this section, we use some basic integration formulas studied previously to solve some key applied problems. It is important to note that these formulas are presented in terms of indefinite integrals. Although definite and indefinite integrals are closely related, there are some key differences to keep in mind. A definite integral is either a number (when the limits of integration are constants) or a single function (when one or both of the limits of integration are variables). An indefinite integral represents a family of functions, all of which differ by a constant. As you become more familiar with integration, you will get a feel for when to use definite integrals and when to use indefinite integrals. You will naturally select the correct approach for a given problem without thinking too much about it. However, until these concepts are cemented in your mind, think carefully about whether you need a definite integral or an indefinite integral and make sure you are using the proper notation based on your choice.
+
+Basic Integration Formulas
+
+Recall the integration formulas given in the table in Antiderivatives and the rule on properties of definite integrals. Let’s look at a few examples of how to apply these rules.
+
+Integrating a Function Using the Power Rule
+
+Use the power rule to integrate the function ∫14t(1+t)dt.
+
+The first step is to rewrite the function and simplify it so we can apply the power rule:
+
+Now apply the power rule:
+
+Find the definite integral of f(x)=x2−3x over the interval [1,3].
+−103
+
+Hint
+
+Follow the process from to solve the problem.
+
+The Net Change Theorem
+
+The net change theorem considers the integral of a rate of change. It says that when a quantity changes, the new value equals the initial value plus the integral of the rate of change of that quantity. The formula can be expressed in two ways. The second is more familiar; it is simply the definite integral.
+
+Net Change Theorem
+
+The new value of a changing quantity equals the initial value plus the integral of the rate of change:
+
+Subtracting F(a) from both sides of the first equation yields the second equation. Since they are equivalent formulas, which one we use depends on the application.
+
+The significance of the net change theorem lies in the results. Net change can be applied to area, distance, and volume, to name only a few applications. Net change accounts for negative quantities automatically without having to write more than one integral. To illustrate, let’s apply the net change theorem to a velocity function in which the result is displacement.
+
+We looked at a simple example of this in The Definite Integral. Suppose a car is moving due north (the positive direction) at 40 mph between 2 p.m. and 4 p.m., then the car moves south at 30 mph between 4 p.m. and 5 p.m. We can graph this motion as shown in .
+
+Just as we did before, we can use definite integrals to calculate the net displacement as well as the total distance traveled. The net displacement is given by
+
+Thus, at 5 p.m. the car is 50 mi north of its starting position. The total distance traveled is given by
+
+Therefore, between 2 p.m. and 5 p.m., the car traveled a total of 110 mi.
+
+To summarize, net displacement may include both positive and negative values. In other words, the velocity function accounts for both forward distance and backward distance. To find net displacement, integrate the velocity function over the interval. Total distance traveled, on the other hand, is always positive. To find the total distance traveled by an object, regardless of direction, we need to integrate the absolute value of the velocity function.
+
+Finding Net Displacement
+
+Given a velocity function v(t)=3t−5 (in meters per second) for a particle in motion from time t=0 to time t=3, find the net displacement of the particle.
+
+Applying the net change theorem, we have
+
+The net displacement is −32 m ().
+
+Finding the Total Distance Traveled
+
+Use to find the total distance traveled by a particle according to the velocity function v(t)=3t−5 m/sec over a time interval [0,3].
+
+The total distance traveled includes both the positive and the negative values. Therefore, we must integrate the absolute value of the velocity function to find the total distance traveled.
+
+To continue with the example, use two integrals to find the total distance. First, find the t-intercept of the function, since that is where the division of the interval occurs. Set the equation equal to zero and solve for t. Thus,
+
+The two subintervals are [0,53] and [53,3]. To find the total distance traveled, integrate the absolute value of the function. Since the function is negative over the interval [0,53], we have |v(t)|=−v(t) over that interval. Over [53,3], the function is positive, so |v(t)|=v(t). Thus, we have
+
+So, the total distance traveled is 416 m.
+
+Find the net displacement and total distance traveled in meters given the velocity function f(t)=12et−2 over the interval [0,2].
+
+Net displacement: e2−92≈−0.8055m; total distance traveled: 4ln4−7.5+e22≈1.740 m
+
+Hint
+
+Follow the procedures from and . Note that f(t)≤0 for t≤ln4, and f(t)≥0 for t≥ln4.
+
+Applying the Net Change Theorem
+
+The net change theorem can be applied to the flow and consumption of fluids, as shown in .
+
+How Many Gallons of Gasoline Are Consumed?
+
+If the motor on a motorboat is started at t=0 and the boat consumes gasoline at the rate of 5-0.1t3 gal/hr, how much gasoline is used in the first 2 hours?
+
+Express the problem as a definite integral, integrate, and evaluate using the Fundamental Theorem of Calculus. The limits of integration are the endpoints of the interval [0,2]. We have
+
+Thus, the motorboat uses 9.6 gal of gas in 2 hours.
+
+Chapter Opener: Iceboats
+
+As we saw at the beginning of the chapter, top iceboat racers () can attain speeds of up to five times the wind speed. Andrew is an intermediate iceboater, though, so he attains speeds equal to only twice the wind speed. Suppose Andrew takes his iceboat out one morning when a light 5-mph breeze has been blowing all morning. As Andrew gets his iceboat set up, though, the wind begins to pick up. During his first half hour of iceboating, the wind speed increases according to the function v(t)=20t+5. For the second half hour of Andrew’s outing, the wind remains steady at 15 mph. In other words, the wind speed is given by
+
+Recalling that Andrew’s iceboat travels at twice the wind speed, and assuming he moves in a straight line away from his starting point, how far is Andrew from his starting point after 1 hour?
+
+To figure out how far Andrew has traveled, we need to integrate his velocity, which is twice the wind speed. Then
+
+Distance =∫012v(t)dt.
+
+Substituting the expressions we were given for v(t), we get
+
+Andrew is 25 mi from his starting point after 1 hour.
+
+Suppose that, instead of remaining steady during the second half hour of Andrew’s outing, the wind starts to die down according to the function v(t)=−10t+15. In other words, the wind speed is given by
+
+Under these conditions, how far from his starting point is Andrew after 1 hour?
+
+17.5 mi
+
+Hint
+
+Don’t forget that Andrew’s iceboat moves twice as fast as the wind.
+
+Integrating Even and Odd Functions
+
+We saw in Functions and Graphs that an even function is a function in which f(−x)=f(x) for all x in the domain—that is, the graph of the curve is unchanged when x is replaced with −x. The graphs of even functions are symmetric about the y-axis. An odd function is one in which f(−x)=−f(x) for all x in the domain, and the graph of the function is symmetric about the origin.
+
+Integrals of even functions, when the limits of integration are from −a to a, involve two equal areas, because they are symmetric about the y-axis. Integrals of odd functions, when the limits of integration are similarly [−a,a], evaluate to zero because the areas above and below the x-axis are equal.
+
+Rule: Integrals of Even and Odd Functions
+
+For continuous even functions such that f(−x)=f(x),
+
+For continuous odd functions such that f(−x)=−f(x),
+
+Integrating an Even Function
+
+Integrate the even function ∫−22(3x8−2)dx and verify that the integration formula for even functions holds.
+
+The symmetry appears in the graphs in . Graph (a) shows the region below the curve and above the x-axis. We have to zoom in to this graph by a huge amount to see the region. Graph (b) shows the region above the curve and below the x-axis. The signed area of this region is negative. Both views illustrate the symmetry about the y-axis of an even function. We have
+
+To verify the integration formula for even functions, we can calculate the integral from 0 to 2 and double it, then check to make sure we get the same answer.
+
+Since 2·5003=10003, we have verified the formula for even functions in this particular example.
+
+Integrating an Odd Function
+
+Evaluate the definite integral of the odd function −5sinx over the interval [−π,π].
+
+The graph is shown in . We can see the symmetry about the origin by the positive area above the x-axis over [−π,0], and the negative area below the x-axis over [0,π]. We have
+
+Integrate the function ∫−22x4dx.
+645
+
+Hint
+
+Integrate an even function.
+
+Key Concepts
+
+The net change theorem states that when a quantity changes, the final value equals the initial value plus the integral of the rate of change. Net change can be a positive number, a negative number, or zero.
+
+The area under an even function over a symmetric interval can be calculated by doubling the area over the positive x-axis. For an odd function, the integral over a symmetric interval equals zero, because half the area is negative.
+
+Key Equations
+F(b)=F(a)+∫abF'(x)dx or ∫abF'(x)dx=F(b)−F(a)
+Use basic integration formulas to compute the following antiderivatives or definite integrals.
+∫(x−1x)dx
+∫(x−1x)dx=∫x1/2dx−∫x−1/2dx=23x3/2+C1−2x1/2+C2=23x3/2−2x1/2+C
+∫(e2x−12ex/2)dx
+∫dx2x
+∫dx2x=12ln|x|+C
+∫x−1x2dx
+∫0π(sinx−cosx)dx
+∫0πsinxdx−∫0πcosxdx=−cosx|0π−(sinx)|0π=(−(−1)+1)−(0−0)=2
+∫0π/2(x−sinx)dx
+
+Write an integral that expresses the increase in the perimeter P(s) of a square when its side length s increases from 2 units to 4 units and evaluate the integral.
+P(s)=4s, so dPds=4 and ∫244ds=8.
+
+Write an integral that quantifies the change in the area A(s)=s2 of a square when the side length doubles from S units to 2S units and evaluate the integral.
+
+A regular N-gon (an N-sided polygon with sides that have equal length s, such as a pentagon or hexagon) has perimeter Ns. Write an integral that expresses the increase in perimeter of a regular N-gon when the length of each side increases from 1 unit to 2 units and evaluate the integral.
+∫12Nds=N
+
+The area of a regular pentagon with side length a>0 is pa2 with p=145+5+25. The Pentagon in Washington, DC, has inner sides of length 360 ft and outer sides of length 920 ft. Write an integral to express the area of the roof of the Pentagon according to these dimensions and evaluate this area.
+
+A dodecahedron is a Platonic solid with a surface that consists of 12 pentagons, each of equal area. By how much does the surface area of a dodecahedron increase as the side length of each pentagon doubles from 1 unit to 2 units?
+
+With p as in the previous exercise, each of the 12 pentagons increases in area from 2p to 4p units so the net increase in the area of the dodecahedron is 36p units.
+
+An icosahedron is a Platonic solid with a surface that consists of 20 equilateral triangles. By how much does the surface area of an icosahedron increase as the side length of each triangle doubles from a unit to 2a units?
+
+Write an integral that quantifies the change in the area of the surface of a cube when its side length doubles from s unit to 2s units and evaluate the integral.
+18s2=6∫s2s2xdx
+
+Write an integral that quantifies the increase in the volume of a cube when the side length doubles from s unit to 2s units and evaluate the integral.
+
+Write an integral that quantifies the increase in the surface area of a sphere as its radius doubles from R unit to 2R units and evaluate the integral.
+12πR2=8π∫R2Rrdr
+
+Write an integral that quantifies the increase in the volume of a sphere as its radius doubles from R unit to 2R units and evaluate the integral.
+
+Suppose that a particle moves along a straight line with velocity v(t)=4−2t, where 0≤t≤2 (in meters per second). Find the displacement at time t and the total distance traveled up to t=2.
+d(t)=∫0tv(s)ds=4t−t2. The total distance is d(2)=4m.
+
+Suppose that a particle moves along a straight line with velocity defined by v(t)=t2−3t−18, where 0≤t≤6 (in meters per second). Find the displacement at time t and the total distance traveled up to t=6.
+
+Suppose that a particle moves along a straight line with velocity defined by v(t)=|2t−6|, where 0≤t≤6 (in meters per second). Find the displacement at time t and the total distance traveled up to t=6.
+d(t)=∫0tv(s)ds. For t<3,d(t)=∫0t(6−2t)dt=6t−t2. For t>3,d(t)=d(3)+∫3t(2t−6)dt=9+(t2−6t)|36.
+
+The total distance is d(6)=18m.
+
+Suppose that a particle moves along a straight line with acceleration defined by a(t)=t−3, where 0≤t≤6 (in meters per second). Find the velocity and displacement at time t and the total distance traveled up to t=6 if v(0)=3 and d(0)=0.
+
+A ball is thrown upward from a height of 1.5 m at an initial speed of 40 m/sec. Acceleration resulting from gravity is −9.8 m/sec2. Neglecting air resistance, solve for the velocity v(t) and the height h(t) of the ball t seconds after it is thrown and before it returns to the ground.
+v(t)=40−9.8tm/sec;h(t)=1.5+40t−4.9t2 m/s
+
+A ball is thrown upward from a height of 3 m at an initial speed of 60 m/sec. Acceleration resulting from gravity is −9.8 m/sec2. Neglecting air resistance, solve for the velocity v(t) and the height h(t) of the ball t seconds after it is thrown and before it returns to the ground.
+
+The area A(t) of a circular shape is growing at a constant rate. If the area increases from 4π units to 9π units between times t=2 and t=3, find the net change in the radius during that time.
+
+The net increase is 1 unit.
+
+A spherical balloon is being inflated at a constant rate. If the volume of the balloon changes from 36π in.3 to 288π in.3 between time t=30 and t=60 seconds, find the net change in the radius of the balloon during that time.
+
+Water flows into a conical tank with cross-sectional area πx2 at height x and volume πx33 up to height x. If water flows into the tank at a rate of 1 m3/min, find the height of water in the tank after 5 min. Find the change in height between 5 min and 10 min.
+
+At t=5, the height of water is x=(15π)1/3m.. The net change in height from t=5 to t=10 is (30π)1/3−(15π)1/3 m.
+
+A horizontal cylindrical tank has cross-sectional area A(x)=4(6x−x2)m2 at height x meters above the bottom when x≤3.
+
+The volume V between heights a and b is ∫abA(x)dx. Find the volume at heights between 2 m and 3 m.
+
+Suppose that oil is being pumped into the tank at a rate of 50 L/min. Using the chain rule, dxdt=dxdVdVdt, at how many meters per minute is the height of oil in the tank changing, expressed in terms of x, when the height is at x meters?
+
+How long does it take to fill the tank to 3 m starting from a fill level of 2 m?
+
+The following table lists the electrical power in gigawatts—the rate at which energy is consumed—used in a certain city for different hours of the day, in a typical 24-hour period, with hour 1 corresponding to midnight to 1 a.m.
+
+Hour
+Power
+Hour
+Power
+1
+28
+13
+48
+2
+25
+14
+49
+3
+24
+15
+49
+4
+23
+16
+50
+5
+24
+17
+50
+6
+27
+18
+50
+7
+29
+19
+46
+8
+32
+20
+43
+9
+34
+21
+42
+10
+39
+22
+40
+11
+42
+23
+37
+12
+46
+24
+34
+Find the total amount of energy in gigawatt-hours (gW-h) consumed by the city in a typical 24-hour period.
+
+The total daily power consumption is estimated as the sum of the hourly power rates, or 911 gW-h.
+
+The average residential electrical power use (in hundreds of watts) per hour is given in the following table.
+
+Hour
+Power
+Hour
+Power
+1
+8
+13
+12
+2
+6
+14
+13
+3
+5
+15
+14
+4
+4
+16
+15
+5
+5
+17
+17
+6
+6
+18
+19
+7
+7
+19
+18
+8
+8
+20
+17
+9
+9
+21
+16
+10
+10
+22
+16
+11
+10
+23
+13
+12
+11
+24
+11
+Compute the average total energy used in a day in kilowatt-hours (kWh).
+
+If a ton of coal generates 1842 kWh, how long does it take for an average residence to burn a ton of coal?
+
+Explain why the data might fit a plot of the form p(t)=11.5−7.5sin(πt12).
+
+The data in the following table are used to estimate the average power output produced by Peter Sagan for each of the last 18 sec of Stage 1 of the 2012 Tour de France.
+
+Average Power Output
+
+Second
+Watts
+Second
+Watts
+1
+600
+10
+1200
+2
+500
+11
+1170
+3
+575
+12
+1125
+4
+1050
+13
+1100
+5
+925
+14
+1075
+6
+950
+15
+1000
+7
+1050
+16
+950
+8
+950
+17
+900
+9
+1100
+18
+780
+Estimate the net energy used in kilojoules (kJ), noting that 1W = 1 J/s, and the average power output by Sagan during this time interval.
+
+17 kJ
+
+The data in the following table are used to estimate the average power output produced by Peter Sagan for each 15-min interval of Stage 1 of the 2012 Tour de France.
+
+Average Power Output
+
+Minutes
+Watts
+Minutes
+Watts
+15
+200
+165
+170
+30
+180
+180
+220
+45
+190
+195
+140
+60
+230
+210
+225
+75
+240
+225
+170
+90
+210
+240
+210
+105
+210
+255
+200
+120
+220
+270
+220
+135
+210
+285
+250
+150
+150
+300
+400
+Estimate the net energy used in kilojoules, noting that 1W = 1 J/s.
+
+The distribution of incomes as of 2012 in the United States in $5000 increments is given in the following table. The kth row denotes the percentage of households with incomes between $5000xk and 5000xk+4999. The row k=40 contains all households with income between $200,000 and $250,000.
+
+Income Distributions
+
+0
+3.5
+21
+1.5
+1
+4.1
+22
+1.4
+2
+5.9
+23
+1.3
+3
+5.7
+24
+1.3
+4
+5.9
+25
+1.1
+5
+5.4
+26
+1.0
+6
+5.5
+27
+0.75
+7
+5.1
+28
+0.8
+8
+4.8
+29
+1.0
+9
+4.1
+30
+0.6
+10
+4.3
+31
+0.6
+11
+3.5
+32
+0.5
+12
+3.7
+33
+0.5
+13
+3.2
+34
+0.4
+14
+3.0
+35
+0.3
+15
+2.8
+36
+0.3
+16
+2.5
+37
+0.3
+17
+2.2
+38
+0.2
+18
+2.2
+39
+1.8
+19
+1.8
+40
+2.3
+20
+2.1
+Estimate the percentage of U.S. households in 2012 with incomes less than $55,000.
+
+What percentage of households had incomes exceeding $85,000?
+
+Plot the data and try to fit its shape to that of a graph of the form a(x+c)e−b(x+e) for suitable a,b,c.
+
+a. 54.3%; b. 27.00%; c. The curve in the following plot is 2.35(t+3)e−0.15(t+3).
+
+Newton’s law of gravity states that the gravitational force exerted by an object of mass M and one of mass m with centers that are separated by a distance r is F=GmMr2, with G an empirical constant G=6.67x10−11m3/(kg·s2). The work done by a variable force over an interval [a,b] is defined as W=∫abF(x)dx. If Earth has mass 5.97219×1024 and radius 6371 km, compute the amount of work to elevate a polar weather satellite of mass 1400 kg to its orbiting altitude of 850 km above Earth.
+
+For a given motor vehicle, the maximum achievable deceleration from braking is approximately 7 m/sec2 on dry concrete. On wet asphalt, it is approximately 2.5 m/sec2. Given that 1 mph corresponds to 0.447 m/sec, find the total distance that a car travels in meters on dry concrete after the brakes are applied until it comes to a complete stop if the initial velocity is 67 mph (30 m/sec) or if the initial braking velocity is 56 mph (25 m/sec). Find the corresponding distances if the surface is slippery wet asphalt.
+
+In dry conditions, with initial velocity v0=30 m/s, D=64.3 and, if v0=25,D=44.64. In wet conditions, if v0=30, and D=180 and if v0=25,D=125.
+
+John is a 25-year old man who weighs 160 lb. He burns 500−50t calories/hr while riding his bike for t hours. If an oatmeal cookie has 55 cal and John eats 4t cookies during the tth hour, how many net calories has he lost after 3 hours riding his bike?
+
+Sandra is a 25-year old woman who weighs 120 lb. She burns 300−50t cal/hr while walking on her treadmill. Her caloric intake from drinking Gatorade is 100t calories during the tth hour. What is her net decrease in calories after walking for 3 hours?
+
+225 cal
+
+A motor vehicle has a maximum efficiency of 33 mpg at a cruising speed of 40 mph. The efficiency drops at a rate of 0.1 mpg/mph between 40 mph and 50 mph, and at a rate of 0.4 mpg/mph between 50 mph and 80 mph. What is the efficiency in miles per gallon if the car is cruising at 50 mph? What is the efficiency in miles per gallon if the car is cruising at 80 mph? If gasoline costs $3.50/gal, what is the cost of fuel to drive 50 mi at 40 mph, at 50 mph, and at 80 mph?
+
+Although some engines are more efficient at given a horsepower than others, on average, fuel efficiency decreases with horsepower at a rate of 1/25 mpg/horsepower. If a typical 50-horsepower engine has an average fuel efficiency of 32 mpg, what is the average fuel efficiency of an engine with the following horsepower: 150, 300, 450?
+E(150)=28,E(300)=22,E(450)=16
+[T] The following table lists the 2013 schedule of federal income tax versus taxable income.
+
+Federal Income Tax Versus Taxable Income
+
+Taxable Income Range
+The Tax Is …
+… Of the Amount Over
+$0–$8925
+10%
+$0
+$8925–$36,250
+$892.50 + 15%
+$8925
+$36,250–$87,850
+$4,991.25 + 25%
+$36,250
+$87,850–$183,250
+$17,891.25 + 28%
+$87,850
+$183,250–$398,350
+$44,603.25 + 33%
+$183,250
+$398,350–$400,000
+$115,586.25 + 35%
+$398,350
+> $400,000
+$116,163.75 + 39.6%
+$400,000
+Suppose that Steve just received a $10,000 raise. How much of this raise is left after federal taxes if Steve’s salary before receiving the raise was $40,000? If it was $90,000? If it was $385,000?
+[T] The following table provides hypothetical data regarding the level of service for a certain highway.
+
+Highway Speed Range (mph)
+Vehicles per Hour per Lane
+Density Range (vehicles/mi)
+> 60
+< 600
+< 10
+60–57
+600–1000
+10–20
+57–54
+1000–1500
+20–30
+54–46
+1500–1900
+30–45
+46–30
+1900–2100
+45–70
+<30
+Unstable
+70–200
+Plot vehicles per hour per lane on the x-axis and highway speed on the y-axis.
+
+Compute the average decrease in speed (in miles per hour) per unit increase in congestion (vehicles per hour per lane) as the latter increases from 600 to 1000, from 1000 to 1500, and from 1500 to 2100. Does the decrease in miles per hour depend linearly on the increase in vehicles per hour per lane?
+
+Plot minutes per mile (60 times the reciprocal of miles per hour) as a function of vehicles per hour per lane. Is this function linear?
+
+a.
+
+b. Between 600 and 1000 the average decrease in vehicles per hour per lane is −0.0075. Between 1000 and 1500 it is −0.006 per vehicles per hour per lane, and between 1500 and 2100 it is −0.04 vehicles per hour per lane. c.
+
+The graph is nonlinear, with minutes per mile increasing dramatically as vehicles per hour per lane reach 2000.
+
+For the next two exercises use the data in the following table, which displays bald eagle populations from 1963 to 2000 in the continental United States.
+
+Population of Breeding Bald Eagle Pairs
+
+Year
+Population of Breeding Pairs of Bald Eagles
+1963
+487
+1974
+791
+1981
+1188
+1986
+1875
+1992
+3749
+1996
+5094
+2000
+[T] The graph below plots the quadratic p(t)=6.48t2−80.31t+585.69 against the data in preceding table, normalized so that t=0 corresponds to 1963. Estimate the average number of bald eagles per year present for the 37 years by computing the average value of p over [0,37].
+[T] The graph below plots the cubic p(t)=0.07t3+2.42t2−25.63t+521.23 against the data in the preceding table, normalized so that t=0 corresponds to 1963. Estimate the average number of bald eagles per year present for the 37 years by computing the average value of p over [0,37].
+137∫037p(t)dt=0.07(37)34+2.42(37)23−25.63(37)2+521.23≈2037
+[T] Suppose you go on a road trip and record your speed at every half hour, as compiled in the following table. The best quadratic fit to the data is q(t)=5x2−11x+49, shown in the accompanying graph. Integrate q to estimate the total distance driven over the 3 hours.
+
+Time (hr)
+Speed (mph)
+0 (start)
+50
+1
+40
+2
+50
+3
+60
+As a car accelerates, it does not accelerate at a constant rate; rather, the acceleration is variable. For the following exercises, use the following table, which contains the acceleration measured at every second as a driver merges onto a freeway.
+
+Time (sec)
+Acceleration (mph/sec)
+1
+11.2
+2
+10.6
+3
+8.1
+4
+5.4
+5
+[T] The accompanying graph plots the best quadratic fit, a(t)=−0.70t2+1.44t+10.44, to the data from the preceding table. Compute the average value of a(t) to estimate the average acceleration between t=0 and t=5.
+
+Average acceleration is A=15∫05a(t)dt=−0.7(52)3+1.44(5)2+10.44≈8.2 mph/s
+[T] Using your acceleration equation from the previous exercise, find the corresponding velocity equation. Assuming the initial velocity is 0 mph, find the velocity at time t=0.
+[T] Using your velocity equation from the previous exercise, find the corresponding distance equation, assuming your initial distance is 0 mi. How far did you travel while you accelerated your car? (Hint: You will need to convert time units.)
+d=∫05vtdt=∫05-730t3+0.72t2−10.44tdt=124.04252803600=181.928 ft.
+[T] The number of hamburgers sold at a restaurant throughout the day is given in the following table, with the accompanying graph plotting the best cubic fit to the data, b(t)=0.12t3−2.13t2+12.13t+3.91, with t=0 corresponding to 9 a.m. and t=12 corresponding to 9 p.m. Compute the average value of b(t) to estimate the average number of hamburgers sold per hour.
+
+Hours Past Midnight
+No. of Burgers Sold
+9
+3
+12
+28
+15
+20
+18
+30
+21
+[T] An athlete runs by a motion detector, which records her speed, as displayed in the following table. The best linear fit to this data, ℓ(t)=−0.068t+5.14, is shown in the accompanying graph. Use the average value of ℓ(t) between t=0 and t=40 to estimate the runner’s average speed.
+
+Minutes
+Speed (m/sec)
+0
+5
+10
+4.8
+20
+3.6
+30
+3.0
+40
+140∫040(−0.068t+5.14)dt=−0.068(40)2+5.14=3.78m/sec
+
+if we know the rate of change of a quantity, the net change theorem says the future quantity is equal to the initial quantity plus the integral of the rate of change of the quantity

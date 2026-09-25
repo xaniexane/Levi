@@ -1,0 +1,243 @@
+# m00029
+# Book: OpenStax Introduction Philosophy
+# Subject: humanities
+# Source: https://github.com/openstax/osbooks-introduction-philosophy
+# License: CC BY 4.0 (OpenStax)
+
+Types of Inferences
+
+Types of Inferences
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define deductive, inductive, and abductive inferences.
+
+Classify inferences as deductive, inductive, or abductive.
+
+Explain different explanatory virtues used in abductive reasoning.
+
+Inferences can be deductive, inductive, or abductive. Deductive inferences are the strongest because they can guarantee the truth of their conclusions. Inductive inferences are the most widely used, but they do not guarantee the truth and instead deliver conclusions that are probably true. Abductive inferences also deal in probability.
+
+Deductive Reasoning
+Deductive inferences, which are inferences arrived at through deduction (deductive reasoning), can guarantee truth because they focus on the structure of arguments. Here is an example:
+
+Either you can go to the movies tonight, or you can go to the party tomorrow.
+
+You cannot go to the movies tonight.
+
+So, you can go to the party tomorrow.
+
+This argument is good, and you probably knew it was good even without thinking too much about it. The argument uses “or,” which means that at least one of the two statements joined by the “or” must be true. If you find out that one of the two statements joined by “or” is false, you know that the other statement is true by using deduction. Notice that this inference works no matter what the statements are. Take a look at the structure of this form of reasoning:
+
+X or Y is true.
+
+X is not true.
+
+Therefore, Y is true.
+
+By replacing the statements with variables, we get to the form of the initial argument above. No matter what statements you replace X and Y with, if those statements are true, then the conclusion must be true as well. This common argument form is called a disjunctive syllogism.
+
+Valid Deductive Inferences
+
+A good deductive inference is called a valid inference, meaning its structure guarantees the truth of its conclusion given the truth of the premises. Pay attention to this definition. The definition does not say that valid arguments have true conclusions. Validity is a property of the logical forms of arguments, and remember that logic and truth are distinct. The definition states that valid arguments have a form such that if the premises are true, then the conclusion must be true. You can test a deductive inference’s validity by testing whether the premises lead to the conclusion. If it is impossible for the conclusion to be false when the premises are assumed to be true, then the argument is valid.
+
+Deductive reasoning can use a number of valid argument structures:
+Disjunctive Syllogism:
+
+X or Y.
+
+Not Y.
+
+Therefore X.
+Modus Ponens:
+
+If X, then Y.
+
+X.
+
+Therefore Y.
+Modus Tollens:
+
+If X, then Y.
+
+Not Y.
+
+Therefore, not X.
+
+You saw the first form, disjunctive syllogism, in the previous example. The second form, modus ponens, uses a conditional, and if you think about necessary and sufficient conditions already discussed, then the validity of this inference becomes apparent. The conditional in premise 1 expresses that X is sufficient for Y. So if X is true, then Y must be true. And premise 2 states that X is true. So the conclusion (the truth of Y) necessarily follows. You can also use your knowledge of necessary and sufficient conditions to understand the last form, modus tollens. Remember, in a conditional, the consequent is the necessary condition. So Y is necessary for X. But premise 2 states that Y is not true. Because Y must be the case if X is the case, and we are told that Y is false, then we know that X is also false. These three examples are only a few of the numerous possible valid inferences.
+
+Invalid Deductive Inferences
+
+A bad deductive inference is called an invalid inference. In invalid inferences, their structure does not guarantee the truth of the conclusion—that is to say, even if the premises are true, the conclusion may be false. This does not mean that the conclusion must be false, but that we simply cannot know whether the conclusion is true or false. Here is an example of an invalid inference:
+
+If it snows more than three inches, the schools are mandated to close.
+
+The schools closed.
+
+Therefore, it snowed more than three inches.
+
+If the premises of this argument are true (and we assume they are), it may or may not have snowed more than three inches. Schools close for many reasons besides snow. Perhaps the school district experienced a power outage or a hurricane warning was issued for the area. Again, you can use your knowledge of necessary and sufficient conditions to understand why this form is invalid. Premise 2 claims that the necessary condition is the case. But the truth of the necessary condition does not guarantee that the sufficient condition is true. The conditional states that the closing of schools is guaranteed when it has snowed more than 3 inches, not that snow of more than 3 inches is guaranteed if the schools are closed.
+
+Invalid deductive inferences can also take general forms. Here are two common invalid inference forms:
+Affirming the Consequent:
+
+If X, then Y.
+
+Y.
+
+Therefore, X.
+Denying the Antecedent:
+
+If X, then Y.
+
+Not X.
+
+Therefore, not Y.
+
+You saw the first form, affirming the consequent, in the previous example concerning school closures. The fallacy is so called because the truth of the consequent (the necessary condition) is affirmed to infer the truth of the antecedent statement. The second form, denying the antecedent, occurs when the truth of the antecedent statement is denied to infer that the consequent is false. Your knowledge of sufficiency will help you understand why this inference is invalid. The truth of the antecedent (the sufficient condition) is only enough to know the truth of the consequent. But there may be more than one way for the consequent to be true, which means that the falsity of the sufficient condition does not guarantee that the consequent is false. Going back to an earlier example, that a creature is not a dog does not let you infer that it is not a mammal, even though being a dog is sufficient for being a mammal. Watch the video below for further examples of conditional reasoning. See if you can figure out which incorrect selection is structurally identical to affirming the consequent or denying the antecedent.
+
+The Wason Selection Task
+
+Testing Deductive Inferences
+
+Earlier it was explained that logical analysis involves assuming the premises of an argument are true and then determining whether the conclusion logically follows, given the truth of those premises. For deductive arguments, if you can come up with a scenario where the premises are true but the conclusion is false, you have proven that the argument is invalid. An instance of a deductive argument where the premises are all true but the conclusion false is called a counterexample. As with counterexamples to statements, counterexamples to arguments are simply instances that run counter to the argument. Counterexamples to statements show that the statement is false, while counterexamples to deductive arguments show that the argument is invalid. Complete the exercise below to get a better understanding of coming up with counterexamples to prove invalidity.
+
+Using the sample arguments given, come up with a counterexample to prove that the argument is invalid. A counterexample is a scenario in which the premises are true but the conclusion is false. Solutions are provided below.
+Argument 1:
+
+If an animal is a dog, then it is a mammal.
+
+Charlie is not a dog.
+
+Therefore, Charlie is not a mammal.
+Argument 2:
+
+All desserts are sweet foods.
+
+Some sweet foods are low fat.
+
+So all desserts are low fat.
+Argument 3:
+
+If Jad doesn’t finish his homework on time, he won’t go to the party.
+
+Jad doesn’t go to the party.
+
+Jad didn’t finish his homework on time.
+
+When you have completed your work on the three arguments, check your answers against the solutions below.
+Solution 1: Invalid. If you imagine that Charlie is a cat (or other animal that is not a dog but is a mammal), then both the premises are true, while the conclusion is false. Charlie is not a dog, but Charlie is a mammal.
+Solution 2: Invalid. Buttercream cake is a counterexample. Buttercream cake is a dessert and is sweet, which shows that not all desserts are low fat.
+Solution3: Invalid. Assuming the first two premises are true, you can still imagine that Jad is too tired after finishing his homework and decides not to go to the party, thus making the conclusion false.
+
+Inductive Inferences
+
+When we reason inductively, we gather evidence using our experience of the world and draw general conclusions based on that experience. Inductive reasoning (induction) is also the process by which we use general beliefs we have about the world to create beliefs about our particular experiences or about what to expect in the future. Someone can use their past experiences of eating beets and absolutely hating them to conclude that they do not like beets of any kind, cooked in any manner. They can then use this conclusion to avoid ordering a beet salad at a restaurant because they have good reason to believe they will not like it. Because of the nature of experience and inductive inference, this method can never guarantee the truth of our beliefs. At best, inductive inference generates only probable true conclusions because it goes beyond the information contained in the premises. In the example, past experience with beets is concrete information, but the person goes beyond that information when making the general claim that they will dislike all beets (even those varieties they’ve never tasted and even methods of preparing beets they’ve never tried).
+
+Consider a belief as certain as “the sun will rise tomorrow.” The Scottish philosopher David Hume famously argued against the certainty of this belief nearly three centuries ago ([1748, 1777] 2011, IV, i). Yes, the sun has risen every morning of recorded history (in truth, we have witnessed what appears to be the sun rising, which is a result of the earth spinning on its axis and creating the phenomenon of night and day). We have the science to explain why the sun will continue to rise (because the earth’s rotation is a stable phenomenon). Based on the current science, we can reasonably conclude that the sun will rise tomorrow morning. But is this proposition certain? To answer this question, you have to think like a philosopher, which involves thinking critically about alternative possibilities. Say the earth gets hit by a massive asteroid that destroys it, or the sun explodes into a supernova that encompasses the inner planets and incinerates them. These events are extremely unlikely to occur, although no contradiction arises in imagining that they could take place. We believe the sun will rise tomorrow, and we have good reason for this belief, but the sun’s rising is still only probable (even if it is nearly certain).
+
+While inductive inferences are not always a sure thing, they can still be quite reliable. In fact, a good deal of what we think we know is known through induction. Moreover, while deductive reasoning can guarantee the truth of conclusions if the premises are true, many times the premises themselves of deductive arguments are inductively known. In studying philosophy, we need to get used to the possibility that our inductively derived beliefs could be wrong.
+
+There are several types of inductive inferences, but for the sake of brevity, this section will cover the three most common types: reasoning from specific instances to generalities, reasoning from generalities to specific instances, and reasoning from the past to the future.
+
+Reasoning from Specific Instances to Generalities
+
+Perhaps I experience several instances of some phenomenon, and I notice that all instances share a similar feature. For example, I have noticed that every year, around the second week of March, the red-winged blackbirds return from wherever they’ve wintering. So I can conclude that generally the red-winged blackbirds return to the area where I live (and observe them) in the second week of March. All my evidence is gathered from particular instances, but my conclusion is a general one. Here is the pattern:
+Instance1, Instance2, Instance3 . . . Instancen --> Generalization
+
+And because each instance serves as a reason in support of the generalization, the instances are premises in the argument form of this type of inductive inference:
+Specific to General Inductive Argument Form:
+
+Instance1
+
+Instance2
+
+Instance3
+
+General Conclusion
+
+Reasoning from Generalities to Specific Instances
+
+Induction can work in the opposite direction as well: reasoning from accepted generalizations to specific instances. This feature of induction relies on the fact that we are learners and that we learn from past experiences and from one another. Much of what we learn is captured in generalizations. You have probably accepted many generalizations from your parents, teachers, and peers. You probably believe that a red “STOP” sign on the road means that when you are driving and see this sign, you must bring your car to a full stop. You also probably believe that water freezes at 32° Fahrenheit and that smoking cigarettes is bad for you. When you use accepted generalizations to predict or explain things about the world, you are using induction. For example, when you see that the nighttime low is predicted to be 30°F, you may surmise that the water in your birdbath will be frozen when you get up in the morning.
+
+Some thought processes use more than one type of inductive inference. Take the following example:
+
+Every cat I have ever petted doesn’t tolerate its tail being pulled.
+
+So this cat probably will not tolerate having its tail pulled.
+
+Notice that this reasoner has gone through a series of instances to make an inference about one additional instance. In doing so, the reasoner implicitly assumed a generalization along the way. The reasoner’s implicit generalization is that no cat likes its tail being pulled. They then use that generalization to determine that they shouldn’t pull the tail of the cat in front of them now. A reasoner can use several instances in their experience as premises to draw a general conclusion and then use that generalization as a premise to draw a conclusion about a specific new instance.
+
+Inductive reasoning finds its way into everyday expressions, such as “Where there is smoke, there is fire.” When people see smoke, they intuitively come to believe that there is fire. This is the result of inductive reasoning. Consider your own thought process as you examine .
+
+Reasoning from Past to Future
+
+We often use inductive reasoning to predict what will happen in the future. Based on our ample experience of the past, we have a basis for prediction. Reasoning from the past to the future is similar to reasoning from specific instances to generalities. We have experience of events across time, we notice patterns concerning the occurrence of those events at particular times, and then we reason that the event will happen again in the future. For example:
+
+I see my neighbor walking her dog every morning. So my neighbor will probably walk her dog this morning.
+
+Could the person reasoning this way be wrong? Yes—the neighbor could be sick, or the dog could be at the vet. But depending upon the regularity of the morning dog walks and on the number of instances (say the neighbor has walked the dog every morning for the past year), the inference could be strong in spite of the fact that it is possible for it to be wrong.
+
+Strong Inductive Inferences
+
+The strength of inductive inferences depends upon the reliability of premises given as evidence and their relation to the conclusions drawn. A strong inductive inference is one where, if the evidence offered is true, then the conclusion is probably true. A weak inductive inference is one where, if the evidence offered is true, the conclusion is not probably true. But just how strong an inference needs to be to be considered good is context dependent. The word “probably” is vague. If something is more probable than not, then it needs at least a 51 percent chance of happening. However, in most instances, we would expect to have a much higher probability bar to consider an inference to be strong. As an example of this context dependence, compare the probability accepted as strong in gambling to the much higher probability of accuracy we expect in determining guilt in a court of law.
+illustrates three forms of reasoning are used in the scientific method. Induction is used to glean patterns and generalizations, from which hypotheses are made. Hypotheses are tested, and if they remain unfalsified, induction is used again to assume support for the hypothesis.
+
+Abductive Reasoning
+
+Abductive reasoning is similar to inductive reasoning in that both forms of inference are probabilistic. However, they differ in the relationship of the premises to the conclusion. In inductive argumentation, the evidence in the premises is used to justify the conclusion. In abductive reasoning, the conclusion is meant to explain the evidence offered in the premises. In induction the premises explain the conclusion, but in abduction the conclusion explains the premises.
+
+Inference to the Best Explanation
+
+Because abduction reasons from evidence to the most likely explanation for that evidence, it is often called “inference to the best explanation.” We start with a set of data and attempt to come up with some unifying hypothesis that can best explain the existence of those data. Given this structure, the evidence to be explained is usually accepted as true by all parties involved. The focus is not the truth of the evidence, but rather what the evidence means.
+
+Although you may not be aware, you regularly use this form of reasoning. Let us say your car won’t start, and the engine won’t even turn over. Furthermore, you notice that the radio and display lights are not on, even when the key is in and turned to the ON position. Given this evidence, you conclude that the best explanation is that there is a problem with the battery (either it is not connected or is dead). Or perhaps you made pumpkin bread in the morning, but it is not on the counter where you left it when you get home. There are crumbs on the floor, and the bag it was in is also on the floor, torn to shreds. You own a dog who was inside all day. The dog in question is on the couch, head hanging low, ears back, avoiding eye contact. Given the evidence, you conclude that the best explanation for the missing bread is that the dog ate it.
+
+Detectives and forensic investigators use abduction to come up with the best explanation for how a crime was committed and by whom. This form of reasoning is also indispensable to scientists who use observations (evidence) along with accepted hypotheses to create new hypotheses for testing. You may also recognize abduction as a form of reasoning used in medical diagnoses. A doctor considers all your symptoms and any further evidence gathered from preliminarily tests and reasons to the best possible conclusion (a diagnosis) for your illness.
+
+Explanatory Virtues
+
+Good abductive inferences share certain features. Explanatory virtues are aspects of an explanation that generally make it strong. There are many explanatory virtues, but we will focus on four. A good hypothesis should be explanatory, simple, and conservative and must have depth.
+
+To say that a hypothesis must be explanatory simply means that it must explain all the available evidence. The word “explanatory” for our purposes is being used in a narrower sense than used in everyday language. Take the pumpkin bread example: a person might reason that perhaps their roommate ate the loaf of pumpkin bread. However, such an explanation would not explain why the crumbs and bag were on the floor, nor the guilty posture of the dog. People do not normally eat an entire loaf of pumpkin bread, and if they do, they don’t eviscerate the bag while doing so, and even if they did, they’d probably hide the evidence. Thus, the explanation that your roommate ate the bread isn’t as explanatory as the one that pinpoints your dog as the culprit.
+
+But what if you reason that a different dog got into the house and ate the bread, then got out again, and your dog looks guilty because he did nothing to stop the intruder? This explanation seems to explain the missing bread, but it is not as good as the simpler explanation that your dog is the perpetrator. A good explanation is often simple. You may have heard of Occam’s razor, formulated by William of Ockham (1287–1347), which says that the simplest explanation is the best explanation. Ockham said that “entities should not be multiplied beyond necessity” (Spade & Panaccio 2019). By “entities,” Ockham meant concepts or mechanisms or moving parts.
+
+Examples of explanations that lack simplicity abound. For example, conspiracy theories present the very opposite of simplicity since such explanations are by their very nature complex. Conspiracy theories must posit plots, underhanded dealings, cover-ups (to explain the existence of alternative evidence), and maniacal people to explain phenomena and to further explain away the simpler explanation for those phenomena. Conspiracy theories are never simple, but that is not the only reason they are suspect. Conspiracy theories also generally lack the virtues of being conservative and having depth.
+
+A conservative explanation maintains or conserves much of what we already believe. Conservativeness in science is when a theory or hypothesis fits with other established scientific theories and explanations. For example, a theory that accounts for some physical phenomenon but also does not violate Newton’s first law of motion is an example of a conservative theory. On the other hand, consider the conspiracy theory that we never landed on the moon. Someone might posit that the televised Apollo 11 space landing was filmed in a secret studio somewhere. But the reality of the first televised moon landing is not the only belief we must get rid of to maintain the theory. Five more manned moon landings occurred. Furthermore, the reality of the moon landings fits into beliefs about technological advancement over the next five decades. Many of the technologies developed were later adopted by the military and private sector (NASA, n.d.). Moreover, the Apollo missions are a key factor in understanding the space race of the Cold War era. Accepting the conspiracy theory requires rejecting a wide range of beliefs, and so the theory is not conservative.
+
+A conspiracy theorist may offer alternative explanations to account for the tension between their explanation and established beliefs. However, for each explanation the conspiracist offers, more questions are raised. And a good explanation should not raise more questions than it answers. This characteristic is the virtue of depth. A deep explanation avoids unexplained explainers, or an explanation that itself is in need of explanation. For example, the theorist might claim that John Glenn and the other astronauts were brainwashed to explain the astronauts’ firsthand accounts. But this claim raises a question about how brainwashing works. Furthermore, what about the accounts of the thousands of other personnel who worked on the project? Were they all brainwashed? And if so, how? The conspiracy theorist’s explanation raises more questions than it answers.
+
+Extraordinary Claims Require Extraordinary Evidence
+
+Is it possible that our established beliefs (or scientific theories) could be wrong? Why give precedence to an explanation because it upholds our beliefs? Scientific thought would never have advanced if we deferred to conservative explanations all the time. In fact, the explanatory virtues are not laws but rules of thumb, none of which are supreme or necessary. Sometimes the correct explanation is more complicated, and sometimes the correct explanation will require that we give up long-held beliefs. Novel and revolutionary explanations can be strong if they have evidence to back them up. In the sciences, this approach is expressed in the following principle: Extraordinary claims will require extraordinary evidence. In other words, a novel claim that disrupts accepted knowledge will need more evidence to make it credible than a claim that already aligns with accepted knowledge.
+summarizes the three types of inferences just discussed.
+
+Type of inference
+Description
+Considerations
+Deductive
+Focuses on the structure of arguments
+Provides valid inferences when its structure guarantees the truth of its conclusion
+Provides invalid inferences when, even if the premises are true, the conclusion may be false
+Inductive
+Uses general beliefs about the world to create beliefs about specific experiences or to make predictions about future experiences
+Strong if the conclusion is probably true, assuming that the evidence is true
+Weak if the conclusion is probably not true, even if the evidence offered is true
+Abductive
+An explanation is offered to justify and explain evidence
+Strong if it is explanatory, simple, conservative, and has depth
+Extraordinary claims require extraordinary evidence
+
+There are three different types of inferences: deductive, inductive, and abductive. Deductive inferences, when valid, guarantee the truth of their conclusions. Inductive inferences, when strong, offer probable support for the conclusion. And good abductive inferences offer probable support for their conclusions. Deductive inferences that cannot guarantee the truth of their conclusions are called invalid. A counterexample can be offered to prove that a deductive inference is invalid. Inductive inferences involve using observations based on experience to draw general conclusions about the world. Abductive inferences involve offering explanations for accepted evidence. Abduction is sometimes called “inference to the best explanation.”
+
+having to do with abduction/abductive reasoning. Abduction is probabilistic form of inference in which an explanation is offered to justify and explain evidence.
+having to do with deduction/deductive reasoning. Deduction is a form of inference that can guarantee the truth of its conclusions, given the truth of the premises.
+aspects of an explanation that generally make it strong; four such virtues are that a good hypothesis should be explanatory, simple, and conservative, and have depth.
+having to do with induction/inductive reasoning. Induction is a probabilistic form of inference in which observation or experience is used to draw conclusions about the world.
+a reasoning process that moves from one idea to another, resulting in conclusions.
+a property of bad deductive inferences. An invalid inference/argument is one in which the truth of the premises does not guarantee the truth of the conclusion.
+a property of deductive arguments where the structure of an argument is such that if the premises are true, then the conclusion is guaranteed to be true. A valid inference is a logically good inference.

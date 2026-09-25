@@ -1,0 +1,209 @@
+{"content": "Every request starts with a request line: METHOD, path, and HTTP version, e.g. GET /users/42 HTTP/1.1.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Headers are key-value metadata lines that follow the request line; they describe the client, what it accepts, and how the body is encoded.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "The status line carries the HTTP version, a three-digit status code, and a short reason phrase like 200 OK.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "The status code is the machine-readable verdict; the reason phrase is decorative and clients should not depend on it.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "GET retrieves a representation and must not change server state; it is both safe and idempotent.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "POST submits data for processing; it is neither safe nor idempotent, so clients should not blindly retry it.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "1xx is informational, 2xx means success, 3xx means go look elsewhere, 4xx means the client messed up, 5xx means the server did.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "200 OK, 201 Created, and 204 No Content cover nearly all success cases; reach for 201 when you made something new.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Host identifies which virtual site the client wants; without it one server cannot serve many domains on one IP.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Content-Type declares the body's media type and charset, e.g. application/json; charset=utf-8; Content-Length gives its byte size.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "The server sends Set-Cookie headers; the browser stores them in a cookie jar and returns matching ones on future requests.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Domain and Path scope where a cookie is sent; narrower scope means less exposure.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Freshness says a cached copy may be reused without asking: Cache-Control: max-age=3600 lets a cache serve it for an hour.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Validation says the cache must check first: ETag or Last-Modified let the server answer 304 Not Modified instead of resending the body.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "The client advertises capabilities with Accept (media types), Accept-Language, Accept-Encoding, and Accept-Charset.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Quality values (q=0.9) rank preferences; the server chooses the highest-ranked type it can produce.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "301 Moved Permanently and 308 Permanent Redirect are cacheable and signal a lasting move; use them for canonical URLs.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "302 Found and 307 Temporary Redirect signal a short-term detour, such as post-login landing pages.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "HTTP/1.0 opened a new TCP connection per request; HTTP/1.1 added persistent keep-alive connections and pipelining.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "HTTP/1.1 suffers head-of-line blocking: one slow response stalls everything behind it on the same connection.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Resources are nouns: /orders, /orders/42, /orders/42/items. Verbs belong in HTTP methods, not in paths.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "A collection (/orders) and its members (/orders/42) are different resources with different methods allowed.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "POST that creates returns 201 with a Location header pointing at the new resource.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Successful PUT and PATCH return 200 with the updated representation, or 204 when there is nothing to return.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Offset pagination (?offset=40&limit=20) is simple but skips or duplicates rows when data changes between pages.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Page-number pagination has the same drift problem and gets slow on deep pages in most databases.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Filters are query parameters naming fields: ?status=shipped&region=west; keep the vocabulary tied to resource fields.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Sorting uses a sort parameter with - for descending: ?sort=-created_at; whitelist sortable fields.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Every error response shares one envelope: a stable machine code, a human message, and optional details.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Machine codes (ORDER_LIMIT_EXCEEDED) stay stable across versions; human messages may be reworded freely.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Path versioning (/v1/orders) is the most visible and the easiest to route, cache, and document.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Header or media-type versioning keeps URLs clean but is invisible in browser bars and harder to debug.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "GET, PUT, DELETE, HEAD, and OPTIONS are idempotent by contract; repeating them must not change the outcome.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "POST is not idempotent, which is exactly why payment and order endpoints need idempotency keys.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Limits are usually expressed per key or per IP per window: 1000 requests per hour, 10 per second burst.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Fixed windows are simple; sliding windows and token buckets smooth bursts more fairly.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "A webhook is an HTTP POST your system sends when something happens; the receiver must answer 2xx quickly.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Sign every payload with HMAC so receivers can verify it came from you and was not tampered with.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "OpenAPI describes paths, operations, parameters, request/response schemas, and security schemes in one document.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "The spec is the contract: generate documentation, client SDKs, and mock servers from it instead of hand-writing each.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "The doctype <!DOCTYPE html> triggers standards mode; without it browsers fall back to quirks mode with legacy layout bugs.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "The head holds metadata invisible on the page: title, charset, viewport, stylesheets, and scripts.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "Semantic elements describe role: <nav> is navigation, <article> is self-contained content, <aside> is tangential.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "Screen readers offer landmark navigation built from these elements; divs give them nothing to work with.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "Every input needs an associated <label>; placeholders are hints, not labels, and vanish when typing starts.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "Input types (email, tel, number, date) summon the right mobile keyboard and free validation.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "Tables are for tabular data, not layout; CSS handles layout now.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "<thead>, <tbody>, and <tfoot> group rows so headers repeat and styling targets structure.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "Images need alt text describing their purpose; decorative images get empty alt so they are skipped.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "All interactive elements must be reachable and operable by keyboard, with a visible focus indicator.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "charset and viewport are functional: they affect decoding and mobile layout directly.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "The description meta often becomes the search-result snippet; write it like ad copy for the page.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "An iframe embeds a full separate document with its own origin, scripts, and storage.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "The sandbox attribute strips capabilities by default; allow-scripts and allow-same-origin re-grant them selectively.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "Every element is a box: content at the center, then padding, border, and margin moving outward.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "By default, width sets only the content box; padding and border add to the total size.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "Specificity is scored per selector: ids outweigh classes, classes outweigh element names.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "Inline styles beat all selectors; !important beats everything and should be reserved for utilities and overrides.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "Inheritance passes some properties (color, font, line-height) from parent to child automatically.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "Layout properties (margin, padding, border, width) do not inherit; each element starts fresh.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "Flexbox lays out along one axis: the main axis (row or column) and the perpendicular cross axis.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "justify-content aligns along the main axis; align-items aligns along the cross axis.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "Grid lays out in two dimensions at once: define columns and rows on the container, place items into cells.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "grid-template-columns: 1fr 2fr 1fr creates three tracks with the middle twice as wide; fr is a share of free space.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "Fluid layouts use relative units (%, fr, vw) so content stretches instead of snapping at fixed widths.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "Media queries apply styles conditionally: @media (min-width: 768px) targets viewports at least that wide.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "Custom properties are declared with --name and read with var(--name, fallback).", "tags": ["web", "css"], "importance": 0.8}
+{"content": "They follow normal cascade and inheritance, so a subtree can override a token for everything inside it.", "tags": ["web", "css"], "importance": 0.7}
+{"content": "const is the default: it binds the name, though the object it points to can still change.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "let allows reassignment and is block-scoped to the nearest { } pair.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "A closure is a function bundled with the variables that were in scope when it was created.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "Function declarations are hoisted whole; function expressions and arrows are not.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "A promise represents a future value with three states: pending, fulfilled, rejected.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "async/await lets you write async logic in straight-line style; await pauses only that function.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "fetch returns a promise of a Response; it only rejects on network failure, not on HTTP error statuses.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "Always check response.ok (or the status) before parsing; a 404 still resolves the promise.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "querySelector and querySelectorAll find elements with CSS selectors; getElementById is the fastest single lookup.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "textContent sets plain text safely; innerHTML parses HTML and must never receive untrusted strings.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "addEventListener attaches handlers without clobbering others; one element can have many listeners.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "Events bubble from the target up through ancestors; capture phase runs the other way down.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "JSON.parse throws on malformed input; always parse inside try/catch at trust boundaries.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "JSON.stringify drops functions, undefined, and symbols, and converts dates to ISO strings silently.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "Each module has its own scope; nothing is global unless explicitly attached to window.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "Named exports (export function) allow many per module; default export (export default) allows one.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "localStorage persists across sessions on one origin (~5MB); sessionStorage dies with the tab.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "Both store strings only; JSON.stringify on the way in, JSON.parse on the way out.", "tags": ["web", "javascript"], "importance": 0.7}
+{"content": "Name the columns you need; SELECT * is fine for exploration but wasteful and brittle in applications.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "WHERE filters rows before any grouping or ordering; put the most selective conditions where indexes can use them.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "INNER JOIN keeps only rows with a match on both sides; it is the default mental model for related data.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "LEFT JOIN keeps every row from the left table, filling NULLs where the right side has no match.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "Aggregates collapse rows: COUNT counts, SUM/AVG total and average numerics, MIN/MAX find extremes.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "GROUP BY partitions rows first, then aggregates each group separately.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "INSERT names its columns explicitly so schema changes do not silently shift values into wrong columns.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "UPDATE and DELETE without WHERE affect every row; always write WHERE first, then the rest of the statement.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "Every table gets a primary key; surrogate integer or UUID keys keep identity stable when business keys change.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "Foreign keys declare relationships and, with the right actions, prevent or cascade orphaned rows.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "An index is a separate data structure the planner can use to find rows without scanning the table.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "B-tree indexes serve equality and range queries on the indexed columns' leading edge.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "A transaction groups statements into one atomic unit: all commit together or all roll back.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "ACID promises atomicity, consistency, isolation, and durability for committed work.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "Parameters ($1, ?, :name) send values separately from the SQL text; the database never parses values as code.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "String concatenation of user input into SQL is the vulnerability; parameterization is the fix.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "First normal form: atomic values, one value per cell, no repeating groups.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "Second normal form: every non-key column depends on the whole key, not part of a composite key.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "A supervisor (systemd, runit, a container runtime) starts your process, watches it, and restarts it on failure.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Restart policies need backoff: immediate tight-loop restarts on a persistent crash burn CPU and fill logs.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "A reverse proxy sits in front of app servers, accepting client connections and forwarding requests inward.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "It terminates TLS, so app servers speak plain HTTP on a trusted network and certificates live in one place.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "server blocks select by Host; location blocks inside them match paths with prefix or regex rules.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "proxy_pass forwards to upstreams; pairing it with header forwarding keeps the app informed.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "TLS encrypts traffic in transit, protecting against eavesdropping and tampering on the path.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "The handshake negotiates a version and cipher, then the server proves identity with a certificate.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "Automated CAs (like ACME-based issuers) make certificates free and renewable by software, not by calendar.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Renewal must be automated AND verified: a cron job that silently fails is the same as no cron job.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "Structured logs (JSON with named fields) are queryable; free-text logs are archaeology.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Every request gets a trace id propagated through services so one user's journey is one query.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "Liveness asks 'is it running'; readiness asks 'can it serve traffic right now'.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "A service can be alive but not ready (warming caches, migrations running); only readiness should gate traffic.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "Configuration lives in the environment, not in code: env vars or mounted config, never hard-coded.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Secrets are configuration with extra handling: injected from a vault or secret store, never in repos or images.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "SIGTERM means 'please stop soon'; SIGKILL means 'stop now' with no cleanup.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "On SIGTERM: stop accepting new work, finish in-flight requests, close connections, then exit.", "tags": ["web", "ops"], "importance": 0.7}
+{"content": "Validate on the server; client-side checks are UX, not security, and attackers bypass them freely.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Prefer allowlists (known-good patterns) over denylists (known-bad signatures attackers mutate around).", "tags": ["web", "security"], "importance": 0.7}
+{"content": "XSS happens when attacker-controlled data is interpreted as code by the browser.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Encode output for its context: HTML-encode in HTML, JS-encode in scripts, URL-encode in URLs.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Parameterized queries separate code from data at the protocol level; injection becomes impossible by construction.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "The vulnerability is string concatenation of input into SQL; the fix is never concatenating input into SQL.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "CSRF exploits the browser's automatic cookie sending: a malicious page triggers a request your session authorizes.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Synchronizer tokens (per-session, per-form secrets) prove the request came from your rendered page.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Never reveal whether the username or password was wrong; 'invalid credentials' covers both.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Rate-limit and progressively delay login attempts; lockouts should be temporary and logged.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Store salted hashes, never plaintext or reversible encryption; the server should not know the password.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Use a password-hashing function built for the job (bcrypt, scrypt, Argon2), not a fast general hash.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Session ids must be long, random, and unguessable; never derive them from usernames or timestamps.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Store session data server-side keyed by the id; the cookie carries only the random identifier.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Content-Security-Policy controls which sources can load scripts, styles, and frames: the strongest header you set.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Strict-Transport-Security tells browsers to use HTTPS only, for you and your subdomains, for a long max-age.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Every dependency is code you ship but did not write; its vulnerabilities become yours.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "Pin versions with lockfiles so builds are reproducible and surprise upgrades cannot sneak in.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "Disable TLS 1.0 and 1.1 and weak ciphers; support 1.2 with strong ciphers and prefer 1.3.", "tags": ["web", "security"], "importance": 0.8}
+{"content": "HSTS with includeSubDomains and a long max-age stops protocol-downgrade tricks.", "tags": ["web", "security"], "importance": 0.7}
+{"content": "HTTP 200 means the request succeeded; the response body carries the result.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP 201 Created is returned when a POST successfully creates a new resource, usually with a Location header.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP 204 No Content signals success with deliberately no response body.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "HTTP 301 and 308 are permanent redirects; 302 and 307 are temporary.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "HTTP 307 and 308 preserve the request method across the redirect; 301 and 302 historically may rewrite POST to GET.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "HTTP 400 means the client sent malformed or invalid data.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP 401 means missing or invalid credentials; 403 means authenticated but not permitted.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP 404 means the requested resource does not exist on the server.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP 409 Conflict signals a state clash such as a duplicate unique value or version mismatch.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "HTTP 422 Unprocessable Entity means the request was well-formed but semantically invalid.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "HTTP 429 Too Many Requests tells the client it exceeded its rate limit; pair it with Retry-After.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP 500 means an unexpected server-side failure; 503 means temporarily unable to serve.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "GET, HEAD, OPTIONS, and TRACE are safe methods: they must not change server state.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "GET, PUT, DELETE, HEAD, and OPTIONS are idempotent: repeating them has the same effect as once.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "POST is neither safe nor idempotent, so clients must not blindly retry it without idempotency keys.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "The Content-Type header declares the media type of the message body, e.g. application/json.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "The Authorization header carries credentials, typically as a Bearer token; its value must never be logged.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "The Location header gives the URL for redirects and newly created resources.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "ETag and Last-Modified enable conditional requests; a 304 Not Modified answer means the cached copy is fresh.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "Cache-Control: no-store forbids caching; no-cache allows storage but requires revalidation.", "tags": ["web", "http"], "importance": 0.8}
+{"content": "The Vary header tells caches which request headers affect the response variant.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "Set-Cookie HttpOnly blocks JavaScript access to the cookie; Secure requires HTTPS; SameSite limits cross-site sending.", "tags": ["web", "http"], "importance": 0.9}
+{"content": "HTTP/2 multiplexes many streams over one TCP connection and compresses headers with HPACK.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "HTTP/3 runs over QUIC on UDP so packet loss stalls only the affected stream, not the whole connection.", "tags": ["web", "http"], "importance": 0.7}
+{"content": "REST models APIs as nouns: collections like /orders and members like /orders/42.", "tags": ["web", "api"], "importance": 0.8}
+{"content": "Cursor pagination stays correct when data changes between pages; offset pagination can skip or duplicate rows.", "tags": ["web", "api"], "importance": 0.8}
+{"content": "An idempotency key lets clients safely retry POST requests without creating duplicates.", "tags": ["web", "api"], "importance": 0.9}
+{"content": "Webhooks should be HMAC-signed so receivers can verify authenticity and integrity.", "tags": ["web", "api"], "importance": 0.8}
+{"content": "OpenAPI documents paths, operations, schemas, and security in one machine-readable contract.", "tags": ["web", "api"], "importance": 0.7}
+{"content": "The HTML doctype <!DOCTYPE html> triggers standards mode in browsers.", "tags": ["web", "html"], "importance": 0.7}
+{"content": "The charset meta tag should be the first element in head so the browser decodes bytes correctly.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "Every form input needs an associated label; placeholders are not labels.", "tags": ["web", "html"], "importance": 0.9}
+{"content": "Use button for actions and a for navigation; the choice determines keyboard behavior and semantics.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "The sandbox attribute on iframes strips capabilities unless selectively re-granted.", "tags": ["web", "html"], "importance": 0.8}
+{"content": "box-sizing: border-box makes width include padding and border.", "tags": ["web", "css"], "importance": 0.9}
+{"content": "In the cascade, origin beats importance, importance beats specificity, specificity beats source order.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "Flexbox is for one-dimensional layout; grid is for two-dimensional layout.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "justify-content aligns along the flex main axis; align-items aligns along the cross axis.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "CSS custom properties inherit, which is what makes token-based theming work.", "tags": ["web", "css"], "importance": 0.8}
+{"content": "const is the default declaration in modern JavaScript; let is for reassigned bindings; var is legacy.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "A closure is a function bundled with the variables in scope where it was created.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "fetch only rejects on network failure; HTTP error statuses must be detected via response.ok.", "tags": ["web", "javascript"], "importance": 0.9}
+{"content": "textContent sets plain text safely; innerHTML parses HTML and must never receive untrusted strings.", "tags": ["web", "javascript"], "importance": 0.9}
+{"content": "localStorage persists per origin and stores strings only; never put secrets or tokens in it.", "tags": ["web", "javascript"], "importance": 0.9}
+{"content": "JSON.parse throws on malformed input and must be wrapped in try/catch at trust boundaries.", "tags": ["web", "javascript"], "importance": 0.8}
+{"content": "In SQL, NULL never equals anything, not even NULL; use IS NULL and IS NOT NULL.", "tags": ["web", "sql"], "importance": 0.9}
+{"content": "INNER JOIN keeps only matched rows; LEFT JOIN keeps all left rows with NULLs for missing matches.", "tags": ["web", "sql"], "importance": 0.9}
+{"content": "WHERE filters rows before grouping; HAVING filters groups after aggregation.", "tags": ["web", "sql"], "importance": 0.9}
+{"content": "Bound parameters separate SQL code from data and make injection structurally impossible.", "tags": ["web", "sql"], "importance": 0.95}
+{"content": "A transaction makes multi-statement changes atomic: all commit together or all roll back.", "tags": ["web", "sql"], "importance": 0.9}
+{"content": "Composite index column order matters: equality-filtered columns go before range-filtered ones.", "tags": ["web", "sql"], "importance": 0.8}
+{"content": "Third normal form means every non-key column depends only on the key, eliminating update anomalies.", "tags": ["web", "sql"], "importance": 0.7}
+{"content": "A reverse proxy terminates TLS, routes by host or path, and buffers slow clients away from app workers.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Never trust X-Forwarded-For from arbitrary clients; only the proxy's forwarded headers are trustworthy.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Liveness asks if the process runs; readiness asks if it can serve traffic; only readiness should gate traffic.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Configuration belongs in the environment, not in code; secrets come from a vault, never from git.", "tags": ["web", "ops"], "importance": 0.9}
+{"content": "On SIGTERM a service should stop accepting new work, drain in-flight requests, then exit.", "tags": ["web", "ops"], "importance": 0.8}
+{"content": "Validate all input server-side; client-side validation is user experience, not security.", "tags": ["web", "security"], "importance": 0.95}
+{"content": "Prefer allowlists over denylists when validating input.", "tags": ["web", "security"], "importance": 0.85}
+{"content": "Keep template auto-escaping on; every raw/safe bypass on user data is an XSS risk.", "tags": ["web", "security"], "importance": 0.9}
+{"content": "Content Security Policy restricts where scripts may load from, containing injection damage.", "tags": ["web", "security"], "importance": 0.9}
+{"content": "Store passwords as Argon2/bcrypt/scrypt hashes with unique salts, never plaintext or fast hashes.", "tags": ["web", "security"], "importance": 0.95}
+{"content": "Session ids must be 128-bit cryptographic random, rotated at login, and expired by idle and absolute timeouts.", "tags": ["web", "security"], "importance": 0.9}
+{"content": "Anti-CSRF tokens prove state-changing requests came from your own pages.", "tags": ["web", "security"], "importance": 0.9}
+{"content": "HSTS tells browsers to use HTTPS only, defeating protocol-downgrade attacks.", "tags": ["web", "security"], "importance": 0.85}
+{"content": "Disable TLS 1.0 and 1.1; prefer TLS 1.3 with forward-secret ciphers.", "tags": ["web", "security"], "importance": 0.85}
+{"content": "Pin dependency versions with lockfiles and fail CI on known-critical vulnerabilities.", "tags": ["web", "security"], "importance": 0.85}

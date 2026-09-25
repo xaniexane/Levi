@@ -1,0 +1,114 @@
+# m00091
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+What Are the Odds?
+
+What Are the Odds?
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Compute odds.
+
+Determine odds from probabilities.
+
+Determine probabilities from odds.
+
+A particular lottery instant-win game has 2 million tickets available. Of those, 500,000 win a prize. If there are 500,000 winners, then it follows that there are 1,500,000 losing tickets. When we evaluate the risk associated with a game like this, it can be useful to compare the number of ways to win the game to the number of ways to lose. In the case of this game, we would compare the 500,000 wins to the 1,500,000 losses. In other words, there are 3 losing tickets for every winning ticket. Comparisons of this type are the focus of this section.
+
+Computing Odds
+
+The ratio of the number of equally likely outcomes in an event E to the number of equally likely outcomes not in the event E′ is called the odds for (or odds in favor of) the event. The opposite ratio (the number of outcomes not in the event to the number in the event E′ to the number in the event E is called the odds against the event.
+Both odds and probabilities are calculated as ratios. To avoid confusion, we will always use fractions, decimals, or percents for probabilities, and we’ll use colons to indicate odds. The rules for simplifying fractions apply to odds, too. Thus, the odds for winning a prize in the game described in the section opener are 500,000:1,500,000=1:3 and the odds against winning a prize are 3:1. These would often be described in words as “the odds of winning are one to three in favor” or “the odds of winning are three to one against.”.
+Notice that, while probabilities must always be between zero and one inclusive, odds can be any (non-negative) number, as we’ll see in the next example.
+
+Computing Odds
+
+If you roll a fair 6-sided die, what are the odds for rolling a 5 or higher?
+
+If you roll two fair 6-sided dice, what are the odds against rolling a sum of 7?
+
+If you draw a card at random from a standard deck, what are the odds for drawing a ♡?
+
+If you draw 2 cards at random from a standard deck, what are the odds against them both being ♠?
+
+The sample space for this experiment is {1, 2, 3, 4, 5, 6}. Two of those outcomes are in the event “roll a five or higher,” while four are not. So, the odds for rolling a five or higher are 2:4=1:2.
+
+In , we found the sample space for this experiment using the following table ():
+
+ There are 6 outcomes in the event “roll a sum of 7,” and there are 30 outcomes not in the event. So, the odds against rolling a 7 are 30:6=5:1.
+
+There are 6 outcomes in the event “roll a sum of 7,” and there are 30 outcomes not in the event. So, the odds against rolling a 7 are 30:6=5:1.
+
+There are 13 ♡ in a standard deck, and 52−13=39 others. So, the odds in favor of drawing a ♡ are 13:39=1:3.
+
+There are 13C2=78 ways to draw 2 ♠, and 52C2−78=1,248 ways to draw 2 cards that are not both ♠. So, the odds against drawing 2 ♠ are 1,248:78=16:1.
+
+Odds as a Ratio of Probabilities
+
+We can also think of odds as a ratio of probabilities. Consider again the instant-win game from the section opener, with 500,000 winning tickets out of 2,000,000 total tickets. If a player buys one ticket, the probability of winning is 500,0002,000,000=14, and the probability of losing is 1−14=34. Notice that the ratio of the probability of winning to the probability of losing is 14:34=1:3, which matches the odds in favor of winning.
+
+For an event E,
+ odds forE=n(E):n(E′)=P(E):P(E′)=P(E):(1−P(E))odds againstE=n(E′):n(E)=P(E′):P(E)=(1−P(E)):P(E)
+
+We can use these formulas to convert probabilities to odds, and vice versa.
+
+Converting Probabilities to Odds
+
+Given the following probabilities of an event, find the corresponding odds for and odds against that event.
+P(E)=35
+P(E)=17%
+
+Using the formula, we have:
+ odds forE=P(E):(1−P(E))=35:(1−35)=35:25=3:2.
+ 
+(Note that in the last step, we simplified by multiplying both terms in the ratio by 5.)
+ Since the odds for E are 3:2, the odds against E must be 2:3.
+
+Again, we’ll use the formula:
+ odds forE=P(E):(1−P(E))=0.17:(1−0.17)=0.17:0.83≈1:4.88. 
+ 
+(In the last step, we simplified by dividing both terms in the ratio by 0.17.)
+ It follows that the odds against E are approximately 4.88:1.
+
+Now, let’s convert odds to probabilities. Let’s say the odds for an event are A:B. Then, using the formula above, we have A:B=P(E):(1−P(E)). Converting to fractions and solving for P(E), we get:
+
+Let’s put this result in a formula we can use.
+
+If the odds in favor of E are A:B, then
+P(E)=AA+B.
+
+Converting Odds to Probabilities
+
+Find P(E) if E:
+
+The odds of E are 2:1 in favor
+
+The odds of E are 6:1 against
+
+Using the formula we just found, we have P(E)=22+1=23.
+
+If the odds against are 6:1, then the odds for are 1:6. Thus, using the formula, P(E)=11+6=17.
+
+Some places, particularly state lottery websites, will use the words “odds” and “probability” interchangeably. Never assume that the word “odds” is being used correctly! Compute one of the odds/probabilities yourself to make sure you know how the word is being used!
+
+Check Your Understanding
+
+Key Terms
+
+odds (for/against)
+
+Key Concepts
+
+Odds are computed as the ratio of the probability of an event to the probability of its compliment.
+
+Formulas
+
+For an event E,
+ odds forE=n(E):n(E′)=P(E):P(E′)=P(E):(1−P(E))odds againstE=n(E′):n(E)=P(E′):P(E)=(1−P(E)):P(E)
+
+If the odds in favor of E are A:B, then P(E)=AA+B.

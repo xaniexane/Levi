@@ -1,0 +1,499 @@
+# m53631
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Definite Integral
+
+The Definite Integral
+
+State the definition of the definite integral.
+
+Explain the terms integrand, limits of integration, and variable of integration.
+
+Explain when a function is integrable.
+
+Describe the relationship between the definite integral and net area.
+
+Use geometry and the properties of definite integrals to evaluate them.
+
+Calculate the average value of a function.
+
+In the preceding section we defined the area under a curve in terms of Riemann sums:
+
+However, this definition came with restrictions. We required f(x) to be continuous and nonnegative. Unfortunately, real-world problems don’t always meet these restrictions. In this section, we look at how to apply the concept of the area under the curve to a broader set of functions through the use of the definite integral.
+
+Definition and Notation
+
+The definite integral generalizes the concept of the area under a curve. We lift the requirements that f(x) be continuous and nonnegative, and define the definite integral as follows.
+
+Definition
+
+If f(x) is a function defined on an interval [a,b], the definite integral of f from a to b is given by
+
+provided the limit exists. If this limit exists, the function f(x) is said to be integrable on [a,b], or is an integrable function.
+
+The integral symbol in the previous definition should look familiar. We have seen similar notation in the chapter on Applications of Derivatives, where we used the indefinite integral symbol (without the a and b above and below) to represent an antiderivative. Although the notation for indefinite integrals may look similar to the notation for a definite integral, they are not the same. A definite integral is a number. An indefinite integral is a family of functions. Later in this chapter we examine how these concepts are related. However, close attention should always be paid to notation so we know whether we’re working with a definite integral or an indefinite integral.
+
+Integral notation goes back to the late seventeenth century and is one of the contributions of Gottfried Wilhelm Leibniz, who is often considered to be the codiscoverer of calculus, along with Isaac Newton. The integration symbol ∫ is an elongated S, suggesting sigma or summation. On a definite integral, above and below the summation symbol are the boundaries of the interval, [a,b]. The numbers a and b are x-values and are called the limits of integration; specifically, a is the lower limit and b is the upper limit. To clarify, we are using the word limit in two different ways in the context of the definite integral. First, we talk about the limit of a sum as n→∞. Second, the boundaries of the region are called the limits of integration.
+
+We call the function f(x) the integrand, and the dx indicates that f(x) is a function with respect to x, called the variable of integration. Note that, like the index in a sum, the variable of integration is a dummy variable, and has no impact on the computation of the integral. We could use any variable we like as the variable of integration:
+
+Previously, we discussed the fact that if f(x) is continuous on [a,b], then the limit limn→∞∑i=1nf(xi*)Δx exists and is unique. This leads to the following theorem, which we state without proof.
+
+Continuous Functions Are Integrable
+
+If f(x) is continuous on [a,b], then f is integrable on [a,b].
+
+Functions that are not continuous on [a,b] may still be integrable, depending on the nature of the discontinuities. For example, functions continuous on a closed interval, apart from a finite number of jump discontinuities, are integrable.
+
+It is also worth noting here that we have retained the use of a regular partition in the Riemann sums. This restriction is not strictly necessary. Any partition can be used to form a Riemann sum. However, if a nonregular partition is used to define the definite integral, it is not sufficient to take the limit as the number of subintervals goes to infinity. Instead, we must take the limit as the width of the largest subinterval goes to zero. This introduces a little more complex notation in our limits and makes the calculations more difficult without really gaining much additional insight, so we stick with regular partitions for the Riemann sums.
+
+Evaluating an Integral Using the Definition
+
+Use the definition of the definite integral to evaluate ∫02x2dx. Use a right-endpoint approximation to generate the Riemann sum.
+
+We first want to set up a Riemann sum. Based on the limits of integration, we have a=0 and b=2. For i=0,1,2,…,n, let P={xi} be a regular partition of [0,2]. Then
+
+Since we are using a right-endpoint approximation to generate Riemann sums, for each i, we need to calculate the function value at the right endpoint of the interval [xi−1,xi]. The right endpoint of the interval is xi, and since P is a regular partition,
+
+Thus, the function value at the right endpoint of the interval is
+
+Then the Riemann sum takes the form
+
+Using the summation formula for ∑i=1ni2, we have
+
+Now, to calculate the definite integral, we need to take the limit as n→∞. We get
+
+Use the definition of the definite integral to evaluate ∫03(2x−1)dx. Use a right-endpoint approximation to generate the Riemann sum.
+
+6
+
+Hint
+
+Use the solving strategy from .
+
+Evaluating Definite Integrals
+
+Evaluating definite integrals this way can be quite tedious because of the complexity of the calculations. Later in this chapter we develop techniques for evaluating definite integrals without taking limits of Riemann sums. However, for now, we can rely on the fact that definite integrals represent the area under the curve, and we can evaluate definite integrals by using geometric formulas to calculate that area. We do this to confirm that definite integrals do, indeed, represent areas, so we can then discuss what to do in the case of a curve of a function dropping below the x-axis.
+
+Using Geometric Formulas to Calculate Definite Integrals
+
+Use the formula for the area of a circle to evaluate ∫369−(x−3)2dx.
+
+The function describes a semicircle with radius 3. To find
+
+we want to find the area under the curve over the interval [3,6]. The formula for the area of a circle is A=πr2. The area of a semicircle is just one-half the area of a circle, or A=(12)πr2. The shaded area in covers one-half of the semicircle, or A=(14)πr2. Thus,
+
+Use the formula for the area of a trapezoid to evaluate ∫24(2x+3)dx.
+
+18 square units
+
+Hint
+
+Graph the function f(x) and calculate the area under the function on the interval [2,4].
+
+Area and the Definite Integral
+
+When we defined the definite integral, we lifted the requirement that f(x) be nonnegative. But how do we interpret “the area under the curve” when f(x) is negative?
+
+Net Signed Area
+
+Let us return to the Riemann sum. Consider, for example, the function f(x)=2−2x2 (shown in ) on the interval [0,2]. Use n=8 and choose {xi*} as the left endpoint of each interval. Construct a rectangle on each subinterval of height f(xi*) and width Δx. When f(xi*) is positive, the product f(xi*)Δx represents the area of the rectangle, as before. When f(xi*) is negative, however, the product f(xi*)Δx represents the negative of the area of the rectangle. The Riemann sum then becomes
+
+Taking the limit as n→∞, the Riemann sum approaches the area between the curve above the x-axis and the x-axis, less the area between the curve below the x-axis and the x-axis, as shown in . Then,
+
+The quantity A1−A2 is called the net signed area.
+
+Notice that net signed area can be positive, negative, or zero. If the area above the x-axis is larger, the net signed area is positive. If the area below the x-axis is larger, the net signed area is negative. If the areas above and below the x-axis are equal, the net signed area is zero.
+
+Finding the Net Signed Area
+
+Find the net signed area between the curve of the function f(x)=2x and the x-axis over the interval [−3,3].
+
+The function produces a straight line that forms two triangles: one from x=−3 to x=0 and the other from x=0 to x=3 (). Using the geometric formula for the area of a triangle, A=12bh, the area of triangle A1, above the axis, is
+
+where 3 is the base and 2(3)=6 is the height. The area of triangle A2, below the axis, is
+
+where 3 is the base and 6 is the height. Thus, the net area is
+
+Analysis
+
+If A1 is the area above the x-axis and A2 is the area below the x-axis, then the net area is A1−A2. Since the areas of the two triangles are equal, the net area is zero.
+
+Find the net signed area of f(x)=x−2 over the interval [0,6], illustrated in the following image.
+
+6
+
+Hint
+
+Use the solving method described in .
+
+Total Area
+
+One application of the definite integral is finding displacement when given a velocity function. If v(t) represents the velocity of an object as a function of time, then the area under the curve tells us how far the object is from its original position. This is a very important application of the definite integral, and we examine it in more detail later in the chapter. For now, we’re just going to look at some basics to get a feel for how this works by studying constant velocities.
+
+When velocity is a constant, the area under the curve is just velocity times time. This idea is already very familiar. If a car travels away from its starting position in a straight line at a speed of 70 mph for 2 hours, then it is 140 mi away from its original position (). Using integral notation, we have
+
+In the context of displacement, net signed area allows us to take direction into account. If a car travels straight north at a speed of 60 mph for 2 hours, it is 120 mi north of its starting position. If the car then turns around and travels south at a speed of 40 mph for 3 hours, it will be back at it starting position (). Again, using integral notation, we have
+
+In this case the displacement is zero.
+
+Suppose we want to know how far the car travels overall, regardless of direction. In this case, we want to know the area between the curve and the x-axis, regardless of whether that area is above or below the axis. This is called the total area.
+
+Graphically, it is easiest to think of calculating total area by adding the areas above the axis and the areas below the axis (rather than subtracting the areas below the axis, as we did with net signed area). To accomplish this mathematically, we use the absolute value function. Thus, the total distance traveled by the car is
+
+Bringing these ideas together formally, we state the following definitions.
+
+Definition
+
+Let f(x) be an integrable function defined on an interval [a,b]. Let A1 represent the area between f(x) and the x-axis that lies above the axis and let A2 represent the area between f(x) and the x-axis that lies below the axis. Then, the net signed area between f(x) and the x-axis is given by
+
+The total area between f(x) and the x-axis is given by
+
+Finding the Total Area
+
+Find the total area between f(x)=x−2 and the x-axis over the interval [0,6].
+
+Calculate the x-intercept as (2,0) (set y=0, solve for x). To find the total area, take the area below the x-axis over the subinterval [0,2] and add it to the area above the x-axis on the subinterval [2,6] ().
+
+We have
+
+Then, using the formula for the area of a triangle, we obtain
+
+The total area, then, is
+
+Find the total area between the function f(x)=2x and the x-axis over the interval [−3,3].
+
+18
+
+Hint
+
+Review the solving strategy in .
+
+Properties of the Definite Integral
+
+The properties of indefinite integrals apply to definite integrals as well. Definite integrals also have properties that relate to the limits of integration. These properties, along with the rules of integration that we examine later in this chapter, help us manipulate expressions to evaluate definite integrals.
+
+Rule: Properties of the Definite Integral
+∫aaf(x)dx=0If the limits of integration are the same, the integral is just a line and contains no area.
+∫baf(x)dx=−∫abf(x)dxIf the limits are reversed, then place a negative sign in front of the integral.
+∫ab[f(x)+g(x)]dx=∫abf(x)dx+∫abg(x)dxThe integral of a sum is the sum of the integrals.
+∫ab[f(x)−g(x)]dx=∫abf(x)dx−∫abg(x)dxThe integral of a difference is the difference of the integrals.
+∫abcf(x)dx=c∫abf(x)dxfor constant c. The integral of the product of a constant and a function is equal to the constant multiplied by the integral of the function.
+∫abf(x)dx=∫acf(x)dx+∫cbf(x)dxAlthough this formula normally applies when c is between a and b, the formula holds for all values of a, b, and c, provided f(x) is integrable on the largest interval.
+
+Using the Properties of the Definite Integral
+
+Use the properties of the definite integral to express the definite integral of f(x)=−3x3+2x+2 over the interval [−2,1] as the sum of three definite integrals.
+
+Using integral notation, we have ∫−21(−3x3+2x+2)dx. We apply properties 3. and 5. to get
+
+Use the properties of the definite integral to express the definite integral of f(x)=6x3−4x2+2x−3 over the interval [1,3] as the sum of four definite integrals.
+6∫13x3dx−4∫13x2dx+2∫13xdx−∫133dx
+
+Hint
+
+Use the solving strategy from and the properties of definite integrals.
+
+Using the Properties of the Definite Integral
+
+If it is known that ∫08f(x)dx=10 and ∫05f(x)dx=5, find the value of ∫58f(x)dx.
+
+By property 6.,
+
+Thus,
+
+If it is known that ∫15f(x)dx=−3 and ∫25f(x)dx=4, find the value of ∫12f(x)dx.
+
+−7
+
+Hint
+
+Use the solving strategy from and the rule on properties of definite integrals.
+
+Comparison Properties of Integrals
+
+A picture can sometimes tell us more about a function than the results of computations. Comparing functions by their graphs as well as by their algebraic expressions can often give new insight into the process of integration. Intuitively, we might say that if a function f(x) is above another function g(x), then the area between f(x) and the x-axis is greater than the area between g(x) and the x-axis. This is true depending on the interval over which the comparison is made. The properties of definite integrals are valid whether a<b,a=b, or a>b. The following properties, however, concern only the case a≤b, and are used when we want to compare the sizes of integrals.
+
+Comparison Theorem
+
+If f(x)≥0 for a≤x≤b, then
+∫abf(x)dx≥0.
+
+If f(x)≥g(x) for a≤x≤b, then
+∫abf(x)dx≥∫abg(x)dx.
+
+If m and M are constants such that m≤f(x)≤M for a≤x≤b, then
+m(b−a)≤∫abf(x)dx≤M(b−a).
+
+Comparing Two Functions over a Given Interval
+
+Compare f(x)=1+x2 and g(x)=1+x over the interval [0,1].
+
+Graphing these functions is necessary to understand how they compare over the interval [0,1]. Initially, when graphed on a graphing calculator, f(x) appears to be above g(x) everywhere. However, on the interval [0,1], the graphs appear to be on top of each other. We need to zoom in to see that, on the interval [0,1],g(x) is above f(x). The two functions intersect at x=0 and x=1 ().
+
+We can see from the graph that over the interval [0,1],g(x)≥f(x). Comparing the integrals over the specified interval [0,1], we also see that ∫01g(x)dx≥∫01f(x)dx (). The thin, red-shaded area shows just how much difference there is between these two integrals over the interval [0,1].
+
+Average Value of a Function
+
+We often need to find the average of a set of numbers, such as an average test grade. Suppose you received the following test scores in your algebra class: 89, 90, 56, 78, 100, and 69. Your semester grade is your average of test scores and you want to know what grade to expect. We can find the average by adding all the scores and dividing by the number of scores. In this case, there are six test scores. Thus,
+
+Therefore, your average test grade is approximately 80.33, which translates to a B− at most schools.
+
+Suppose, however, that we have a function v(t) that gives us the speed of an object at any time t, and we want to find the object’s average speed. The function v(t) takes on an infinite number of values, so we can’t use the process just described. Fortunately, we can use a definite integral to find the average value of a function such as this.
+
+Let f(x) be continuous over the interval [a,b] and let [a,b] be divided into n subintervals of width Δx=(b−a)/n. Choose a representative xi* in each subinterval and calculate f(xi*) for i=1,2,…,n. In other words, consider each f(xi*) as a sampling of the function over each subinterval. The average value of the function may then be approximated as
+
+which is basically the same expression used to calculate the average of discrete values.
+
+But we know Δx=b−an, so n=b−aΔx, and we get
+
+Following through with the algebra, the numerator is a sum that is represented as ∑i=1nf(xi*), and we are dividing by a fraction. To divide by a fraction, invert the denominator and multiply. Thus, an approximate value for the average value of the function is given by
+
+This is a Riemann sum. Then, to get the exact average value, take the limit as n goes to infinity. Thus, the average value of a function is given by
+
+Definition
+
+Let f(x) be continuous over the interval [a,b]. Then, the average value of the function f(x) (or fave) on [a,b] is given by
+
+Finding the Average Value of a Linear Function
+
+Find the average value of f(x)=x+1 over the interval [0,5].
+
+First, graph the function on the stated interval, as shown in .
+
+The region is a trapezoid lying on its side, so we can use the area formula for a trapezoid A=12h(a+b), where h represents height, and a and b represent the two parallel sides. Then,
+
+Thus the average value of the function is
+
+Find the average value of f(x)=6−2x over the interval [0,3].
+
+3
+
+Hint
+
+Use the average value formula, and use geometry to evaluate the integral.
+
+Key Concepts
+
+The definite integral can be used to calculate net signed area, which is the area above the x-axis less the area below the x-axis. Net signed area can be positive, negative, or zero.
+
+The component parts of the definite integral are the integrand, the variable of integration, and the limits of integration.
+
+Continuous functions on a closed interval are integrable. Functions that are not continuous may still be integrable, depending on the nature of the discontinuities.
+
+The properties of definite integrals can be used to evaluate integrals.
+
+The area under the curve of many functions can be calculated using geometric formulas.
+
+The average value of a function can be calculated using definite integrals.
+
+Key Equations
+∫aaf(x)dx=0
+ ∫baf(x)dx=−∫abf(x)dx
+ ∫ab[f(x)+g(x)]dx=∫abf(x)dx+∫abg(x)dx
+ ∫ab[f(x)−g(x)]dx=∫abf(x)dx−∫abg(x)dx
+ ∫abcf(x)dx=c∫abf(x) for constant c
+ ∫abf(x)dx=∫acf(x)dx+∫cbf(x)dx
+In the following exercises, express the limits as integrals.
+limn→∞∑i=1n(xi*)Δx over [1,3]
+limn→∞∑i=1n(5(xi*)2−3(xi*)3)Δx over [0,2]
+∫02(5x2−3x3)dx
+limn→∞∑i=1nsin2(2πxi*)Δx over [0,1]
+limn→∞∑i=1ncos2(2πxi*)Δx over [0,1]
+∫01cos2(2πx)dx
+
+In the following exercises, given Ln or Rn as indicated, express their limits as n→∞ as definite integrals, identifying the correct intervals.
+Ln=1n∑i=1ni−1n
+Rn=1n∑i=1nin
+∫01xdx
+Ln=2n∑i=1n(1+2i−1n)
+Rn=3n∑i=1n(3+3in)
+∫36xdx
+Ln=2πn∑i=1n2πi−1ncos(2πi−1n)
+Rn=1n∑i=1n(1+in)log((1+in)2)
+∫12xlog(x2)dx
+
+In the following exercises, evaluate the integrals of the functions graphed using the formulas for areas of triangles and circles, and subtracting the areas below the x-axis.
+1+2·2+3·3=14
+1−4+9=6
+1−2π+9=10−2π
+
+In the following exercises, evaluate the integral using area formulas.
+∫03(3−x)dx
+∫23(3−x)dx
+
+The integral is the area of the triangle, 12
+∫−33(3−|x|)dx
+∫06(3−|x−3|)dx
+
+The integral is the area of the triangle, 9.
+∫−224−x2dx
+∫154−(x−3)2dx
+
+The integral is the area 12πr2=2π.
+∫01236−(x−6)2dx
+∫−23(3−|x|)dx
+
+The integral is the area of the “big” triangle less the “missing” triangle, 9−12.
+
+In the following exercises, use averages of values at the left (L) and right (R) endpoints to compute the integrals of the piecewise linear functions with graphs that pass through the given list of points over the indicated intervals.
+{(0,0),(2,1),(4,3),(5,0),(6,0),(8,3)} over [0,8]
+{(0,2),(1,0),(3,5),(5,5),(6,2),(8,0)} over [0,8]
+L=2+0+10+5+4=21,R=0+10+10+2+0=22,L+R2=21.5
+{(−4,−4),(−2,0),(0,−2),(3,3),(4,3)} over [−4,4]
+{(−4,0),(−2,2),(0,0),(1,2),(3,2),(4,0)} over [−4,4]
+L=0+4+0+4+2=10,R=4+0+2+4+0=10,L+R2=10
+
+Suppose that ∫04f(x)dx=5 and ∫02f(x)dx=−3, and ∫04g(x)dx=−1 and ∫02g(x)dx=2. In the following exercises, compute the integrals.
+∫04(f(x)+g(x))dx
+∫24(f(x)+g(x))dx
+∫24f(x)dx+∫24g(x)dx=8−3=5
+∫02(f(x)−g(x))dx
+∫24(f(x)−g(x))dx
+∫24f(x)dx−∫24g(x)dx=8+3=11
+∫02(3f(x)−4g(x))dx
+∫24(4f(x)−3g(x))dx
+4∫24f(x)dx−3∫24g(x)dx=32+9=41
+
+In the following exercises, use the identity ∫−AAf(x)dx=∫−A0f(x)dx+∫0Af(x)dx to compute the integrals.
+∫−ππsint1+t2dt (Hint:sin(−t)=−sin(t))
+∫−ππt1+costdt
+
+The integrand is odd; the integral is zero.
+
+In the following exercises, find the net signed area between f(x) and the x-axis.
+∫13(2−x)dx (Hint: Look at the graph of f.)
+∫24(x−3)3dx (Hint: Look at the graph of f.)
+
+The integrand is antisymmetric with respect to x=3. The integral is zero.
+
+In the following exercises, given that ∫01xdx=12,∫01x2dx=13, and ∫01x3dx=14, compute the integrals.
+∫01(1+x+x2+x3)dx
+∫01(1−x+x2−x3)dx
+1−12+13−14=712
+∫01(1−x)2dx
+∫01(1−2x)3dx
+∫01(1−6x+12x2−8x3)dx=(x-3x2+4x3-2x4)=(1-3+4-2)(0-0+0-0)=0
+∫01(6x−43x2)dx
+∫01(7−5x3)dx
+7−54=234
+
+In the following exercises, use the comparison theorem.
+
+Show that ∫03(x2−6x+9)dx≥0.
+
+Show that ∫−23(x−3)(x+2)dx≤0.
+
+The integrand is negative over [−2,3].
+
+Show that ∫011+x3dx≤∫011+x2dx.
+
+Show that ∫121+xdx≤∫121+x2dx.
+x≤x2 over [1,2], so 1+x≤1+x2 over [1,2].
+
+Show that ∫0π/2sintdt≥π4. (Hint:sint≥2tπ over [0,π2])
+
+Show that ∫−π/4π/4costdt≥π2/4.
+cos(t)≥22. Multiply by the length of the interval to get the inequality.
+
+In the following exercises, find the average value fave of f between a and b, and find a point c, where f(c)=fave.
+f(x)=x2,a=−1,b=1
+f(x)=x5,a=−1,b=1
+fave=0;c=0
+f(x)=4−x2,a=0,b=2
+f(x)=(3−|x|),a=−3,b=3
+32 when c=±32
+f(x)=sinx,a=0,b=2π
+f(x)=cosx,a=0,b=2π
+fave=0;c=π2,3π2
+
+In the following exercises, approximate the average value using Riemann sums L100 and R100. How does your answer compare with the exact given answer?
+[T] y=ln(x) over the interval [1,4]; the exact solution is ln(256)3−1.
+[T] y=ex/2 over the interval [0,1]; the exact solution is 2(e−1).
+L100=1.294,R100=1.301; the exact average is between these values.
+[T] y=tanx over the interval [0,π4]; the exact solution is 2ln(2)π.
+[T] y=x+14−x2 over the interval [−1,1]; the exact solution is π6.
+L100×(12)=0.5178,R100×(12)=0.5294
+
+In the following exercises, compute the average value using the left Riemann sums LN for N=1,10,100. How does the accuracy compare with the given exact value?
+[T] y=x2−4 over the interval [0,2]; the exact solution is −83.
+[T] y=xex2 over the interval [0,2]; the exact solution is 14(e4−1).
+L1=0,L10×(12)=8.743493,L100×(12)=12.861728. The exact answer ≈26.799, so L100 is not accurate.
+[T] y=(12)x over the interval [0,4]; the exact solution is 1564ln(2).
+[T] y=xsin(x2) over the interval [−π,0]; the exact solution is cos(π2)−12π.
+L1×(1π)=1.352,L10×(1π)=−0.1837,L100×(1π)=−0.2956. The exact answer ≈−0.303, so L100 is not accurate to first decimal.
+
+Suppose that A=∫02πsin2tdt and B=∫02πcos2tdt. Show that A+B=2π and A=B.
+
+Suppose that A=∫−π/4π/4sec2tdt=π and B=∫−π/4π/4tan2tdt. Show that A−B=π2.
+
+Use tan2θ+1=sec2θ. Then, B−A=∫−π/4π/41dx=π2.
+
+Show that the average value of sin2t over [0,2π] is equal to 1/2 Without further calculation, determine whether the average value of sin2t over [0,π] is also equal to 1/2.
+
+Show that the average value of cos2t over [0,2π] is equal to 1/2. Without further calculation, determine whether the average value of cos2(t) over [0,π] is also equal to 1/2.
+∫02πcos2tdt=π, so divide by the length 2π of the interval. cos2t has period π, so yes, it is true.
+
+Explain why the graphs of a quadratic function (parabola) p(x) and a linear function ℓ(x) can intersect in at most two points. Suppose that p(a)=ℓ(a) and p(b)=ℓ(b), and that ∫abp(t)dt>∫abℓ(t)dt. Explain why ∫cdp(t)>∫cdℓ(t)dt whenever a≤c<d≤b.
+
+Suppose that parabola p(x)=ax2+bx+c opens downward (a<0) and has a vertex of y=−b2a>0. For which interval [A,B] is ∫AB(ax2+bx+c)dx as large as possible?
+
+The integral is maximized when one uses the largest interval on which p is nonnegative. Thus, A=−b−b2−4ac2a and B=−b+b2−4ac2a.
+
+Suppose [a,b] can be subdivided into subintervals a=a0<a1<a2<⋯<aN=b such that either f≥0 over [ai−1,ai] or f≤0 over [ai−1,ai]. Set Ai=∫ai−1aif(t)dt.
+
+Explain why ∫abf(t)dt=A1+A2+⋯+AN.
+
+Then, explain why |∫abf(t)dt|≤∫ab|f(t)|dt.
+
+Suppose f and g are continuous functions such that ∫cdf(t)dt≤∫cdg(t)dt for every subinterval [c,d] of [a,b]. Explain why f(x)≤g(x) for all values of x.
+
+If f(t0)>g(t0) for some t0∈[a,b], then since f−g is continuous, there is an interval containing t0 such that f(t)>g(t) over the interval [c,d], and then ∫ddf(t)dt>∫cdg(t)dt over this interval.
+
+Suppose the average value of f over [a,b] is 1 and the average value of f over [b,c] is 1 where a<c<b. Show that the average value of f over [a,c] is also 1.
+
+Suppose that [a,b] can be partitioned. taking a=a0<a1<⋯<aN=b such that the average value of f over each subinterval [ai−1,ai]=1 is equal to 1 for each i=1,…,N. Explain why the average value of f over [a,b] is also equal to 1.
+
+The integral of f over an interval is the same as the integral of the average of f over that interval. Thus, ∫abf(t)dt=∫a0a1f(t)dt+∫a1a2f(t)dt+⋯+∫aN+1aNf(t)dt=∫a0a11dt+∫a1a21dt+⋯+∫aN+1aN1dt=(a1−a0)+(a2−a1)+⋯+(aN−aN−1)=aN−a0=b−a. Dividing through by b−a gives the desired identity.
+
+Suppose that for each i such that 1≤i≤N one has ∫i−1if(t)dt=i. Show that ∫0Nf(t)dt=N(N+1)2.
+
+Suppose that for each i such that 1≤i≤N one has ∫i−1if(t)dt=i2. Show that ∫0Nf(t)dt=N(N+1)(2N+1)6.
+∫0Nf(t)dt=∑i=1N∫i−1if(t)dt=∑i=1Ni2=N(N+1)(2N+1)6
+[T] Compute the left and right Riemann sums L10 and R10 and their average L10+R102 for f(t)=t2 over [0,1]. Given that ∫01t2dt=0.33–, to how many decimal places is L10+R102 accurate?
+[T] Compute the left and right Riemann sums, L10 and R10, and their average L10+R102 for f(t)=(4−t2) over [1,2]. Given that ∫12(4−t2)dt=1.66–, to how many decimal places is L10+R102 accurate?
+L10=1.815,R10=1.515,L10+R102=1.665, so the estimate is accurate to two decimal places.
+
+If ∫151+t4dt=41.7133..., what is ∫151+u4du?
+
+Estimate ∫01tdt using the left and right endpoint sums, each with a single rectangle. How does the average of these left and right endpoint sums compare with the actual value ∫01tdt?
+
+The average is 1/2, which is equal to the integral in this case.
+
+Estimate ∫01tdt by comparison with the area of a single rectangle with height equal to the value of t at the midpoint t=12. How does this midpoint estimate compare with the actual value ∫01tdt?
+
+From the graph of sin(2πx) shown:
+
+Explain why ∫01sin(2πt)dt=0.
+
+Explain why, in general, ∫aa+1sin(2πt)dt=0 for any value of a.
+
+a. The graph is antisymmetric with respect to t=12 over [0,1], so the average value is zero. b. For any value of a, the graph between [a,a+1] is a shift of the graph over [0,1], so the net areas above and below the axis do not change and the average remains zero.
+
+If f is 1-periodic (f(t+1)=f(t)), odd, and integrable over [0,1], is it always true that ∫01f(t)dt=0?
+
+If f is 1-periodic and ∫01f(t)dt=A, is it necessarily true that ∫a1+af(t)dt=A for all A?
+
+Yes, the integral over any interval of length 1 is the same.
+
+(or fave) the average value of a function on an interval can be found by calculating the definite integral of the function and dividing that value by the length of the interval
+a primary operation of calculus; the area between the curve and the x-axis over a given interval is a definite integral
+a function is integrable if the limit defining the integral exists; in other words, if the limit of the Riemann sums as n goes to infinity exists
+the function to the right of the integration symbol; the integrand includes the function being integrated
+these values appear near the top and bottom of the integral sign and define the interval over which the function should be integrated
+the area between a function and the x-axis such that the area below the x-axis is subtracted from the area above the x-axis; the result is the same as the definite integral of the function
+total area between a function and the x-axis is calculated by adding the area above the x-axis and the area below the x-axis; the result is the same as the definite integral of the absolute value of the function
+indicates which variable you are integrating with respect to; if it is x, then the function in the integrand is followed by dx

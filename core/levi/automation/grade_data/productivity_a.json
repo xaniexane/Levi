@@ -1,0 +1,3485 @@
+{
+  "batch": "productivity_a",
+  "graded_at": "2026-09-18T19:01:54.035944+00:00",
+  "rubric": "core/levi/automation/grading.py",
+  "record_count": 42,
+  "grade_counts": {
+    "intake": 1,
+    "high-grade": 0,
+    "premium": 0,
+    "elite": 0,
+    "enterprise": 41
+  },
+  "catalog_signature_verified": true,
+  "signature_id": "ipsig-21758b0d2323",
+  "records": [
+    {
+      "minion_id": "productivity-calendar-backup-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-backup-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 5
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-939864c91dc6",
+          "node_detail": [
+            "[trigger] trigger: Device inserted: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Backup (5 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-backup-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-backup-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Device inserted",
+        "condition": "Time: 23:00",
+        "rite_steps": [
+          "Confirm the backup device is present at 23:00",
+          "Export the Google Calendar snapshot",
+          "Upload the snapshot to Drive as a dated archive",
+          "Verify the archive by event count",
+          "HITL: Notification \u2014 backup verified; send the email confirmation?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Cross-device sync",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Backup Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-conflict-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-conflict-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-31f198631b31",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Conflict (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-conflict-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-conflict-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Overlap: true",
+        "rite_steps": [
+          "Detect the overlapping calendar events",
+          "Propose alternative slots for the new event",
+          "Draft the reschedule messages",
+          "HITL: Notification \u2014 alternative suggested; approve?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Conflict Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-conflict-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-conflict-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-4069f7e4be62",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Conflict (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-conflict-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-conflict-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Overlap: true",
+        "rite_steps": [
+          "Detect the overlapping events",
+          "Suggest swapping the lower-priority one",
+          "Draft the swap proposal",
+          "HITL: Notification \u2014 swap suggested; approve?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery >30%",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Conflict Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-conflict-03",
+      "grade": "intake",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [
+            "example_rite"
+          ],
+          "incomplete": true,
+          "hitl_type": "",
+          "hitl_explicit": false,
+          "gate_kind": "approval",
+          "cap_reason": "missing fields: example_rite; flagged incomplete (verbatim intake row, preserved as authored); hitl_type '' not in HITL_TYPE_MAP (fail-closed to approval)"
+        }
+      },
+      "adapter_gaps": [],
+      "doc": {},
+      "genesis": {}
+    },
+    {
+      "minion_id": "productivity-calendar-conflict-levi-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-conflict-levi-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-56a2fc258a72",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Conflict (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-conflict-levi-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-conflict-levi-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Overlap: focus block",
+        "rite_steps": [
+          "Scan the new event against declared focus blocks",
+          "Identify the intruding event",
+          "Draft a proposal to move the intruder",
+          "HITL: Notification & Dialog \u2014 approve moving the intruder to defend focus time?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Focus guard",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Calendar Conflict Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-conflict-levi-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-conflict-levi-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-38fd55c870c3",
+          "node_detail": [
+            "[trigger] trigger: Event updated: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Conflict (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-conflict-levi-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-conflict-levi-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Event updated",
+        "condition": "Overlap: true",
+        "rite_steps": [
+          "Re-scan the calendar after the event move",
+          "Verify no overlaps remain",
+          "Report the clean schedule",
+          "HITL: Notification \u2014 conflicts cleared?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Move watch",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Calendar Conflict Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-conflict-levi-03",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-conflict-levi-03",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-5f5edd8c1b49",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Conflict (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-conflict-levi-03' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-conflict-levi-03' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Overlap: both high priority",
+        "rite_steps": [
+          "Detect the two high-priority overlapping events",
+          "Lay out both with stakes and owners",
+          "Draft reschedule options for each",
+          "HITL: Notification & Dialog \u2014 you pick the winner; approve the move?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Priority tie",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Calendar Conflict Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-declutterer-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-declutterer-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "approval",
+          "run_id": "flow-ca2d2806a459",
+          "node_detail": [
+            "[trigger] trigger: Time 09:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Declutterer (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Fantastical)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-declutterer-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-declutterer-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 09:00",
+        "condition": "Day Sunday",
+        "rite_steps": [
+          "Scan for stale holds and tentative events",
+          "Find duplicate entries",
+          "Propose removals with reasons",
+          "HITL: Approval \u2014 prune these calendar weeds?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Fantastical"
+        },
+        "notes": "A calendar grows weeds. LEVI prowls it on Sunday mornings and drags out the stale holds for your approval to compost.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Calendar Declutterer Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-reminder-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-reminder-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-65bf252faa65",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Reminder (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-reminder-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-reminder-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Time: 10:00",
+        "rite_steps": [
+          "Read the 10:00 event details",
+          "Draft the SMS reminder text",
+          "Address it to the attendee list",
+          "HITL: Notification & Dialog \u2014 approve before the SMS goes out?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery >25%",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Reminder Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-reminder-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-reminder-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-4f78d2298b36",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Reminder (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-reminder-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-reminder-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Time: 10:00",
+        "rite_steps": [
+          "Read the 10:00 event details",
+          "Draft the SMS reminder",
+          "Schedule it 15 minutes ahead",
+          "HITL: Notification & Dialog \u2014 approve before the SMS goes out?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery >25%",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Reminder Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-share-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-share-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-7ac5805a0522",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Share (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-share-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-share-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Share: external",
+        "rite_steps": [
+          "Read the new event",
+          "Prepare the external invite package",
+          "Draft the share message",
+          "HITL: Notification & Dialog \u2014 approve before the invite is sent?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Cross-device",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Share Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-share-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-share-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-2ff0f8b205bd",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Share (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-share-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-share-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Share: external",
+        "rite_steps": [
+          "Read the new event",
+          "Prepare the external invite",
+          "Draft the share message",
+          "HITL: Notification & Dialog \u2014 approve before the invite is sent?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Cross-device",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Share Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-calendar-sync-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-calendar-sync-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-5dc7e6fceaf7",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Calendar Sync (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-calendar-sync-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-calendar-sync-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Time: 09:00",
+        "rite_steps": [
+          "Read the new 09:00 calendar event details",
+          "Sync it to Mac Calendar",
+          "Verify no duplicate was created",
+          "HITL: Notification \u2014 synced; invite recorded?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Cross-device",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Calendar Sync Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-clipboard-bridge-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-clipboard-bridge-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-57a7be5c0154",
+          "node_detail": [
+            "[trigger] trigger: Clipboard copied: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Clipboard Bridge (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-clipboard-bridge-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-clipboard-bridge-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Clipboard copied",
+        "condition": "Always",
+        "rite_steps": [
+          "Capture the clipboard content and type",
+          "Sanitize formatting for notes",
+          "Append it to the Mac Notes inbox",
+          "HITL: Notification \u2014 clipboard bridged to Mac Notes?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "n8n processes",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Clipboard Bridge Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-context-switch-toll-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-context-switch-toll-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-db5a56537914",
+          "node_detail": [
+            "[trigger] trigger: App switched: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Context Switch Toll (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, ManicTime)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-context-switch-toll-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-context-switch-toll-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App switched",
+        "condition": "Focus session: active",
+        "rite_steps": [
+          "Log the app switch during focus",
+          "Estimate the 2-minute recovery cost",
+          "Tally the session toll",
+          "HITL: Notification \u2014 switch toll tallied?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "ManicTime"
+        },
+        "notes": "Every context switch charges a toll. LEVI collects it on the spot so you feel the true price of 'just checking one thing'.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Context Switch Toll Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-daily-briefing-builder-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-daily-briefing-builder-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 5
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-370ab1c838fb",
+          "node_detail": [
+            "[trigger] trigger: Time 07:15: flow entered via schedule trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Daily Briefing Builder (5 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-daily-briefing-builder-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-daily-briefing-builder-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:15",
+        "condition": "Always",
+        "rite_steps": [
+          "Assemble today's calendar events",
+          "Pull weather and top tasks",
+          "Draft one focus suggestion",
+          "Compile the morning brief",
+          "HITL: Edit & Approve \u2014 approve today's battle plan?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI scouts the day's terrain while you sleep: who, where, what matters. You wake up to a map instead of a fog.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Daily Briefing Builder Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-deadline-stalker-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-deadline-stalker-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-8f7be87ce194",
+          "node_detail": [
+            "[trigger] trigger: Time 08:30: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Deadline Stalker (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Todoist)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-deadline-stalker-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-deadline-stalker-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 08:30",
+        "condition": "Due: today",
+        "rite_steps": [
+          "List every item due today",
+          "Compute time remaining and blockers",
+          "Order by deadline",
+          "HITL: Notification \u2014 today's hit list sent; strike in order?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Todoist"
+        },
+        "notes": "Deadlines that thought they could hide. LEVI smells them out by morning and pins the list to your wall. Nothing expires quietly.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Deadline Stalker Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-deep-work-guardian-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-deep-work-guardian-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "confirm",
+          "run_id": "flow-63f056f30687",
+          "node_detail": [
+            "[trigger] trigger: Time 09:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Deep Work Guardian (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-deep-work-guardian-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-deep-work-guardian-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 09:00",
+        "condition": "Day weekday",
+        "rite_steps": [
+          "Silence distracting apps",
+          "Set status to focusing",
+          "Start a 90-minute focus timer",
+          "HITL: Confirm \u2014 begin the focus block?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI hunts your distractions before you can feed them. It locks the doors, dims the noise, and only stands down when you confirm the hunt is over. No guilt trips, just a clean arena.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Deep Work Guardian Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-desk-reset-ritual-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-desk-reset-ritual-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-f69f9ee9110b",
+          "node_detail": [
+            "[trigger] trigger: Time 17:45: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Desk Reset Ritual (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-desk-reset-ritual-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-desk-reset-ritual-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 17:45",
+        "condition": "Location: WiFi Office",
+        "rite_steps": [
+          "File loose downloads into folders",
+          "Close stray windows",
+          "Empty trash items over 5MB",
+          "HITL: Confirm \u2014 desk reset complete; workspace pristine?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Leave the desk like a hunter leaves a camp: clean, packed, ready for dawn. LEVI resets the digital clutter while you head out.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Desk Reset Ritual Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-distraction-quarantine-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-distraction-quarantine-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-40b266612b1c",
+          "node_detail": [
+            "[trigger] trigger: App opened (Social): flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Distraction Quarantine (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Cold Turkey)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-distraction-quarantine-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-distraction-quarantine-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Social)",
+        "condition": "Focus mode: on",
+        "rite_steps": [
+          "Detect the social app opening during focus",
+          "Overlay the 30-second breather screen",
+          "Show the current goal",
+          "HITL: Confirm \u2014 do you really want this break?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Cold Turkey"
+        },
+        "notes": "LEVI stands between you and the siren apps with a cool head. One confirm gate, and most urges walk away hungry.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Distraction Quarantine Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-archive-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-archive-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-06ed2b1c41e2",
+          "node_detail": [
+            "[trigger] trigger: New email: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Archive (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-archive-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-archive-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New email",
+        "condition": "From: boss",
+        "rite_steps": [
+          "File the boss's email to the archive",
+          "Extract any action items",
+          "Draft a reply template for your review",
+          "HITL: Notification \u2014 archived; reply draft waiting?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location office",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Archive Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-digest-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-digest-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-dc89ff85b5c0",
+          "node_detail": [
+            "[trigger] trigger: Time 06:45: flow entered via schedule trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Digest (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-digest-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-digest-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 06:45",
+        "condition": "Always",
+        "rite_steps": [
+          "Pull all Gmail received overnight",
+          "Compile sender and subject digest",
+          "Summarize each thread in one line",
+          "Flag items needing action",
+          "Rank by urgency",
+          "HITL: Notification & Dialog \u2014 approve before the digest ships to Slack?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Vary 5-10 min intervals",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Digest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-digest-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-digest-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-a7a54230c9c0",
+          "node_detail": [
+            "[trigger] trigger: New Email: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Digest (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-digest-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-digest-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New Email",
+        "condition": "To: me@work.com",
+        "rite_steps": [
+          "Classify the incoming work email by topic",
+          "Extract action items and deadlines",
+          "Draft a reply template in your voice",
+          "HITL: Notification \u2014 classified and filed; reply draft held for review?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Add 10 more filters",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Digest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-digest-03",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-digest-03",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-9ef6de32e908",
+          "node_detail": [
+            "[trigger] trigger: App opened (Gmail): flow entered via manual trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Digest (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-digest-03' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-digest-03' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Gmail)",
+        "condition": "Location: WiFi Home",
+        "rite_steps": [
+          "Detect new mail since the last Gmail session",
+          "Draft auto-replies from templates",
+          "Personalize each with thread context",
+          "HITL: Notification & Dialog \u2014 approve or edit the auto-replies before sending?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery >30%",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Digest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-draft-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-draft-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-90dca4b77e4b",
+          "node_detail": [
+            "[trigger] trigger: New email: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Draft (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-draft-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-draft-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New email",
+        "condition": "To: team",
+        "rite_steps": [
+          "Detect the email's intent",
+          "Load the matching team template",
+          "Draft the message for editing",
+          "HITL: Notification \u2014 draft ready; edit?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location WiFi",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Draft Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-draft-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-draft-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-5e430089a0c1",
+          "node_detail": [
+            "[trigger] trigger: New email: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Draft (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-draft-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-draft-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New email",
+        "condition": "To: team",
+        "rite_steps": [
+          "Detect the email's intent",
+          "Load the matching team template",
+          "Draft the message for editing",
+          "HITL: Notification \u2014 draft ready; edit?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location WiFi",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Draft Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-follow-up-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-follow-up-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-c43f0ac85519",
+          "node_detail": [
+            "[trigger] trigger: New email: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Follow-up (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-follow-up-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-follow-up-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New email",
+        "condition": "To: me@work.com",
+        "rite_steps": [
+          "Read the work email thread",
+          "Draft the follow-up reply",
+          "Attach the relevant context",
+          "HITL: Notification & Dialog \u2014 approve before the reply is sent?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location home",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Follow-up Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-follow-up-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-follow-up-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-d853d6b5817d",
+          "node_detail": [
+            "[trigger] trigger: New email: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Follow-up (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-follow-up-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-follow-up-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New email",
+        "condition": "To: me@work.com",
+        "rite_steps": [
+          "Read the work email thread",
+          "Draft the follow-up reply",
+          "Attach the relevant context",
+          "HITL: Notification & Dialog \u2014 approve before the reply is sent?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location home",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Email Follow-up Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-email-triage-blitzer-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-email-triage-blitzer-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-2b76a1feccfd",
+          "node_detail": [
+            "[trigger] trigger: Time 12:00: flow entered via schedule trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Email Triage Blitzer (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Superhuman)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-email-triage-blitzer-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-email-triage-blitzer-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 12:00",
+        "condition": "Inbox: >10",
+        "rite_steps": [
+          "Check the inbox count at noon",
+          "Stage swipe-style batch actions",
+          "Run the 5-minute triage session",
+          "HITL: Notification & Dialog \u2014 run the midday blitz?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Superhuman"
+        },
+        "notes": "Midday mail pile-up, meet the blitz. LEVI queues the unread in triage formation and lets you mow through in minutes.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Email Triage Blitzer Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-end-of-day-shutdown-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-end-of-day-shutdown-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "confirm",
+          "run_id": "flow-8eae877c4700",
+          "node_detail": [
+            "[trigger] trigger: Time 18:30: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: End-of-Day Shutdown (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-end-of-day-shutdown-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-end-of-day-shutdown-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 18:30",
+        "condition": "Day weekday",
+        "rite_steps": [
+          "Close work apps",
+          "Snapshot open tasks",
+          "Queue tomorrow's top three",
+          "HITL: Confirm \u2014 lock the day out?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI pulls down the shutters on the workday so it stops following you home. Confirm once; the office goes dark.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "End-of-Day Shutdown Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-expense-categorize-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-expense-categorize-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-b0a6aaec65e2",
+          "node_detail": [
+            "[trigger] trigger: New receipt photo: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Expense Categorize (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-expense-categorize-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-expense-categorize-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New receipt photo",
+        "condition": "Always",
+        "rite_steps": [
+          "Read the receipt photo and extract merchant, total, and date",
+          "Suggest an expense category with confidence",
+          "Upload the receipt to Drive",
+          "HITL: Notification & Dialog \u2014 approve the category before filing?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "OCR via n8n",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Expense Categorize Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-expense-report-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-expense-report-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-0887c5bfcc86",
+          "node_detail": [
+            "[trigger] trigger: New expense: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Expense Report (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-expense-report-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-expense-report-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New expense",
+        "condition": "Time: 18:00",
+        "rite_steps": [
+          "Collect the day's logged expenses",
+          "Generate the expense report PDF",
+          "Attach receipt images",
+          "HITL: Notification & Dialog \u2014 approve before the report is submitted?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location work",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Expense Report Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-expense-report-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-expense-report-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-458f98cc0664",
+          "node_detail": [
+            "[trigger] trigger: New expense: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Expense Report (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-expense-report-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-expense-report-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New expense",
+        "condition": "Time: 18:00",
+        "rite_steps": [
+          "Collect pending expenses",
+          "Generate the PDF report",
+          "Reconcile totals against receipts",
+          "HITL: Notification & Dialog \u2014 approve before the report is submitted?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location work",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Expense Report Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-focus-session-logger-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-focus-session-logger-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-48a358271c08",
+          "node_detail": [
+            "[trigger] trigger: App opened (Timer): flow entered via manual trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Focus Session Logger (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Toggl Track)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-focus-session-logger-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-focus-session-logger-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Timer)",
+        "condition": "Always",
+        "rite_steps": [
+          "Detect the timer app opening",
+          "Guess the project tag from the active window",
+          "Log the focus session",
+          "HITL: Acknowledge \u2014 session logged?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Toggl Track"
+        },
+        "notes": "Every deep session gets a trophy on the shelf. LEVI watches the clock so you can watch the work.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Focus Session Logger Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-goal-milestone-tracker-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-goal-milestone-tracker-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-bc25625c2c9a",
+          "node_detail": [
+            "[trigger] trigger: New note: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Goal Milestone Tracker (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Notion)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-goal-milestone-tracker-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-goal-milestone-tracker-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New note",
+        "condition": "Tag: goal",
+        "rite_steps": [
+          "Extract the goal's target, deadline, and next action",
+          "Register the milestone",
+          "Set progress tracking",
+          "HITL: Notification \u2014 milestone registered; chase it?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Notion"
+        },
+        "notes": "Goals written down get hunted. LEVI pins your goal note to the tracking board and starts the clock.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Goal Milestone Tracker Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-habit-streak-keeper-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-habit-streak-keeper-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-ad521ae189c1",
+          "node_detail": [
+            "[trigger] trigger: Time 20:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Habit Streak Keeper (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Streaks)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-habit-streak-keeper-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-habit-streak-keeper-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 20:00",
+        "condition": "Always",
+        "rite_steps": [
+          "Check each daily habit's completion",
+          "Flag unfinished habits with streaks at stake",
+          "Build the streak report",
+          "HITL: Confirm \u2014 log the streak report?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Streaks"
+        },
+        "notes": "Streaks are fragile creatures. LEVI guards yours at dusk and shows you exactly what dies if you skip tonight.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Habit Streak Keeper Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-idea-inbox-funnel-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-idea-inbox-funnel-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-80f8eefd3238",
+          "node_detail": [
+            "[trigger] trigger: Voice note recorded: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Idea Inbox Funnel (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Mem)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-idea-inbox-funnel-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-idea-inbox-funnel-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Voice note recorded",
+        "condition": "Always",
+        "rite_steps": [
+          "Transcribe the voice note",
+          "Guess its topic tag",
+          "File it to the idea inbox",
+          "HITL: Edit & Approve \u2014 approve the captured idea before filing?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Mem"
+        },
+        "notes": "Ideas spoken into the void get rescued. LEVI funnels every voice note into a tagged inbox so brilliance never evaporates.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Idea Inbox Funnel Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-inbox-zero-sprint-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-inbox-zero-sprint-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 5
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-183950fdc3c0",
+          "node_detail": [
+            "[trigger] trigger: Time 16:30: flow entered via schedule trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Inbox Zero Sprint (5 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Magical)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-inbox-zero-sprint-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-inbox-zero-sprint-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 16:30",
+        "condition": "Always",
+        "rite_steps": [
+          "Pull all unread mail into a triage queue",
+          "Attach one-tap archive, delete, and defer actions",
+          "Run the rapid sprint",
+          "File the results",
+          "HITL: Notification & Dialog \u2014 run the sprint and file the results?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Magical"
+        },
+        "notes": "A fifteen-minute blitz on the inbox at day's end. LEVI lines up the unreads like targets and hands you a fast bow. The queue does the counting, you do the choosing.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Inbox Zero Sprint Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-journal-entry-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-journal-entry-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-5533961acb4f",
+          "node_detail": [
+            "[trigger] trigger: Time 22:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Journal Entry (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-journal-entry-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-journal-entry-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 22:00",
+        "condition": "Always",
+        "rite_steps": [
+          "Collect today's events, tasks, and notes",
+          "Draft the journal entry in your voice",
+          "Auto-save it to the Obsidian daily note",
+          "HITL: Notification \u2014 entry saved; edit the title if you like?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery >20%",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Journal Entry Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-knowledge-capture-net-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-knowledge-capture-net-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-f89f609b2c4e",
+          "node_detail": [
+            "[trigger] trigger: Clipboard copied: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Knowledge Capture Net (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Raindrop.io)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-knowledge-capture-net-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-knowledge-capture-net-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Clipboard copied",
+        "condition": "Contains: URL",
+        "rite_steps": [
+          "Detect the copied URL",
+          "Fetch its title and summary",
+          "File it to the reading shelf",
+          "HITL: Notification \u2014 link captured; shelve it?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Raindrop.io"
+        },
+        "notes": "Good links slip through fingers. LEVI casts a net over every copied URL and shelves it with a summary before it can escape.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Knowledge Capture Net Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-meeting-free-sentinel-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-meeting-free-sentinel-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-42010e524b28",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Meeting-Free Sentinel (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Clockwise)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-meeting-free-sentinel-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-meeting-free-sentinel-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Title: contains meeting",
+        "rite_steps": [
+          "Flag the meeting landing on a focus day",
+          "Draft an async alternative proposal",
+          "Prepare the decline-with-alternative message",
+          "HITL: Approval \u2014 defend the focus day?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Clockwise"
+        },
+        "notes": "Focus days are sacred ground. LEVI stands sentry and challenges every intruder meeting with an async counter-offer.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Meeting-Free Sentinel Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-meeting-minutes-miller-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-meeting-minutes-miller-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-6d6c34748e32",
+          "node_detail": [
+            "[trigger] trigger: Meeting ended: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Meeting Minutes Miller (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Otter.ai)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-meeting-minutes-miller-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-meeting-minutes-miller-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Meeting ended",
+        "condition": "Always",
+        "rite_steps": [
+          "Grind raw notes or transcript into decisions",
+          "Assign owners and deadlines",
+          "Format the minutes",
+          "HITL: Edit & Approve \u2014 approve the minutes before they ship?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Otter.ai"
+        },
+        "notes": "LEVI mills the chaos of a meeting into clean flour: decisions, owners, deadlines. You sign off before it leaves the kitchen.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Meeting Minutes Miller Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+# LEVI × L.W.P. — continuous integration
+#
+# Jobs:
+#   python   — root pytest suite (core + megazord) + VYVE backend tests
+#   web      — typecheck, lint, node --test suite, vitest unit tests, build
+#   android  — assembleDebug (P2.4 rebuild landed 2026-09-15; must stay green)
+#   gitleaks — secret scanning
+#
+# Action majors verified 2026-09-15: the Node-20 runtime deprecation forces
+# checkout@v5, setup-python@v6, setup-node@v5 (all node24).
+# gitleaks-action is SHA-pinned (see the gitleaks job), not tag-pinned.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Least privilege: every job gets read-only by default; jobs that need
+# more declare it explicitly below.
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python core + megazord + VYVE backend
+    runs-on: ubuntu-latest
+    env:
+      # P3.1 root packaging is not landed yet, so `pip install -e .` is not
+      # possible; expose the two Python products via PYTHONPATH instead.
+      PYTHONPATH: ${{ github.workspace }}/core:${{ github.workspace }}/delivery/megazord
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install test deps
+        # httpx2 is required by starlette's TestClient (used by the VYVE
+        # backend tests); it is deliberately not in backend/requirements.txt
+        # (runtime-only pins), so CI installs it here.
+        run: pip install pytest cryptography httpx2 pyyaml ruff
+
+      - name: Format check (ruff format)
+        run: ruff format --check .
+
+      - name: Byte-compile everything
+        run: python -m compileall -q core delivery apps/vyve-messenger/backend
+
+      - name: Root pytest suite (core + megazord)
+        run: python -m pytest tests/ -q
+
+      - name: Interop registry check_all (F7)
+        # The provides/requires manifest is a living contract: fail fast
+        # when any module drops a capability its dependents require.
+        # check_all() raises RegistryError on any broken wiring.
+        run: python3 -c "from levi.interop.registry import check_all; check_all(); print('registry check_all OK')"
+
+      - name: Install VYVE backend deps
+        run: pip install -r apps/vyve-messenger/backend/requirements.txt
+
+      - name: VYVE backend tests (auth/token paths)
+        run: python -m pytest apps/vyve-messenger/backend/tests/ -q
+
+      - name: OpenAPI consistency check (P3.4)
+        # Fails when any route in either VYVE backend server is missing from
+        # docs/openapi.yaml or vice versa. Runs after the backend deps are
+        # installed; PyYAML comes from the "Install test deps" step above.
+        run: python3 apps/vyve-messenger/docs/check_openapi.py
+
+  web:
+    name: Web UI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      # web/package-lock.json exists untracked in the working tree; it must be
+      # committed (per audit P3.8) for `npm ci` to work in CI.
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check (prettier)
+        run: npx prettier --check src
+
+      - name: Existing node --test suite
+        run: npm run test
+
+      - name: Vitest unit tests
+        run: npm run test:unit
+
+      - name: Production build
+        run: npm run build
+
+  android:
+    name: Android assembleDebug (${{ matrix.app }})
+    runs-on: ubuntu-latest
+    # upload-artifact needs actions:write; everything else is read-only.
+    permissions:
+      contents: read
+      actions: write
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [vyve-messenger, levi-android]
+    defaults:
+      run:
+        working-directory: apps/${{ matrix.app }}/android
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # android-actions/setup-android@v3 is broken: it unconditionally runs
+      # `sdkmanager tools`, but the obsolete `tools` package no longer exists
+      # in the SDK repository, so the step fails. Install exactly what the
+      # app needs (compileSdk/targetSdk 36) explicitly instead. NB: do NOT
+      # try to install an API 37 platform — Google has not published one
+      # (no platforms;android-37* in the SDK repository); the catalog pins
+      # androidx versions whose AAR metadata tops out at compileSdk 36.
+      - name: Install Android SDK (API 36)
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${RUNNER_TEMP}/android-sdk"
+          mkdir -p "${SDK_ROOT}/cmdline-tools"
+          curl -fsSL -o /tmp/cmdtools.zip \
+            https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+          unzip -q /tmp/cmdtools.zip -d "${SDK_ROOT}/cmdline-tools"
+          mv "${SDK_ROOT}/cmdline-tools/cmdline-tools" "${SDK_ROOT}/cmdline-tools/latest"
+          export PATH="${SDK_ROOT}/cmdline-tools/latest/bin:${PATH}"
+          # NB: `yes |` dies with SIGPIPE (exit 141) once sdkmanager quits, so
+          # pipefail must be off for the license-acceptance pipeline.
+          set +o pipefail
+          yes | sdkmanager --sdk_root="${SDK_ROOT}" --licenses > /dev/null
+          set -o pipefail
+          sdkmanager --sdk_root="${SDK_ROOT}" \
+            "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          echo "ANDROID_HOME=${SDK_ROOT}" >> "${GITHUB_ENV}"
+          echo "ANDROID_SDK_ROOT=${SDK_ROOT}" >> "${GITHUB_ENV}"
+          echo "${SDK_ROOT}/platform-tools" >> "${GITHUB_PATH}"
+
+      - name: Assemble debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+      # On-device inference (levi-android only): install the NDK, compile
+      # llama.cpp + the JNI bridge for all ABIs via the standalone superbuild,
+      # then assemble the :inference module's JVM tests + AAR. Kept as a
+      # separate step so the app APK above stays green independently.
+      - name: Install Android NDK (r27)
+        if: matrix.app == 'levi-android'
+        run: |
+          set -euo pipefail
+          export PATH="${ANDROID_HOME}/cmdline-tools/latest/bin:${PATH}"
+          set +o pipefail
+          yes | sdkmanager --sdk_root="${ANDROID_HOME}" --licenses > /dev/null
+          set -o pipefail
+          sdkmanager --sdk_root="${ANDROID_HOME}" "ndk;27.2.12479018"
+          echo "ANDROID_NDK_HOME=${ANDROID_HOME}/ndk/27.2.12479018" >> "${GITHUB_ENV}"
+
+      - name: Build on-device inference native libs
+        if: matrix.app == 'levi-android'
+        run: ./gradlew :inference:buildNativeLibs --no-daemon
+
+      - name: Test + assemble inference module
+        if: matrix.app == 'levi-android'
+        run: ./gradlew :inference:testDebugUnitTest :inference:assembleDebug --no-daemon
+
+      # The LEVI shell app's debug APK is the installable artifact Chauncey
+      # sideloads onto his phone (debug-signed; see docs/ANDROID_APP.md).
+      - name: Upload LEVI debug APK
+        if: matrix.app == 'levi-android'
+        uses: actions/upload-artifact@v4
+        with:
+          name: levi-android-debug-apk
+          path: apps/levi-android/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+  gitleaks:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # SHA-pinned (not tag-pinned): a repointed tag on a third-party action
+      # would otherwise execute attacker code with repo access.
+      # e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e = v3.0.0
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e

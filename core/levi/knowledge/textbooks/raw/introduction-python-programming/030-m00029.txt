@@ -1,0 +1,65 @@
+# m00029
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+If-else statements
+
+If-else statements
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify which operations are performed when a program with if and if-else statements is run.
+
+Identify the components of an if and if-else statement and the necessary formatting.
+
+Create an if-else statement to perform an operation when a condition is true and another operation otherwise.
+
+if statement
+
+If the weather is rainy, grab an umbrella! People make decisions based on conditions like if the weather is rainy, and programs perform operations based on conditions like a variable's value. Ex: A program adds two numbers. If the result is negative, the program prints an error.
+
+A condition is an expression that evaluates to true or false. An if statement is a decision-making structure that contains a condition and a body of statements. If the condition is true, the body is executed. If the condition is false, the body is not executed.
+
+The if statement's body must be grouped together and have one level of indentation. The PEP 8 style guide recommends four spaces per indentation level. The Python interpreter will produce an error if the body is empty.
+
+Example: Quantity check
+
+Using boolean variables
+
+A Boolean variable already has a value of True or False and can be used directly in a condition rather than using the equality operator. Ex: if is_raining == True: can be simplified to if is_raining:.
+
+Using if statements
+
+if-else statement
+
+An if statement defines actions to be performed when a condition is true. What if an action needs to be performed only when the condition is false? Ex: If the restaurant is less than a mile away, we'll walk. Else, we'll drive.
+
+An else statement is used with an if statement and contains a body of statements that is executed when the if statement's condition is false. When an if-else statement is executed, one and only one of the branches is taken. That is, the body of the if or the body of the else is executed. Note: The else statement is at the same level of indentation as the if statement, and the body is indented.
+if-else statement template:
+
+Example: Trivia question
+
+Exploring if-else statements
+
+Improved division
+
+The following program divides two integers. Division by 0 produces an error. Modify the program to read in a new denominator (with no prompt) if the denominator is 0.
+
+Converting temperature units
+
+The following program reads in a temperature as a float and the unit as a string: "f" for Fahrenheit or "c" for Celsius.
+
+Calculate new_temp, the result of converting temp from Fahrenheit to Celsius or Celsius to Fahrenheit based on unit. Calculate new_unit: "c" if unit is "f" and "f" if unit is "c".
+
+Conversion formulas:
+ 
+ Degrees Celsius = (degrees Fahrenheit - 32) * 5/9
+ Degrees Fahrenheit = (degrees Celsius * 5/9) + 32
+
+Degrees Celsius = (degrees Fahrenheit - 32) * 5/9
+
+Degrees Fahrenheit = (degrees Celsius * 5/9) + 32

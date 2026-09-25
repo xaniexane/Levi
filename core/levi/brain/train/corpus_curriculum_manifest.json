@@ -1,0 +1,27 @@
+{
+ "generator": "build_curriculum_corpus.py",
+ "generator_version": "2026-09-21-v1",
+ "seed": 20260921,
+ "built_utc": "2026-09-21T21:49:11.046618+00:00",
+ "directive": "Chauncey 2026-09-21 curriculum: arithmetic (required), grammar, chemistry, physics, trig, algebra, geometry, history, government, civics, 5D EI, personality traits. 'more human than human.'",
+ "sections": {
+  "arithmetic": 4000,
+  "algebra": 700,
+  "number-sense": 400,
+  "grammar": 107,
+  "geometry": 122,
+  "science": 140,
+  "civics-history": 97,
+  "ei": 60,
+  "persona": 91
+ },
+ "total_records": 5717,
+ "total_chars": 376154,
+ "record_shape": "{text, kind, source, topic} + optional sidecars (ei_dims, persona_id/provisional/tone/role, traits)",
+ "sources": {
+  "arithmetic/algebra/number-sense": "programmatic templates, seeded RNG",
+  "grammar/geometry/science/civics-history": "authored fact banks (elementary, well-established facts only)",
+  "ei": "authored 5D EI scenes x4 paraphrase variants",
+  "persona": "provisional lattice IDs only (repo-verified set), provisional:true throughout; final set is Chauncey's call"
+ }
+}

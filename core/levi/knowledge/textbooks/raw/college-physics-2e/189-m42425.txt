@@ -1,0 +1,191 @@
+# m42425
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+RL Circuits
+
+RL Circuits
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate the current in an RL circuit after a specified number of characteristic time steps.
+
+Calculate the characteristic time of an RL circuit.
+
+Sketch the current in an RL circuit over time.
+
+We know that the current through an inductor L cannot be turned on or off instantaneously. The change in current changes flux, inducing an emf opposing the change (Lenz’s law). How long does the opposition last? Current will flow and can be turned off, but how long does it take? shows a switching circuit that can be used to examine current through an inductor as a function of time.
+
+When the switch is first moved to position 1 (at t=0), the current is zero and it eventually rises to I0=V/R, where 
+ 
+ R
+ 
+ is the total resistance of the circuit. The opposition of the inductor L is greatest at the beginning, because the amount of change is greatest. The opposition it poses is in the form of an induced emf, which decreases to zero as the current approaches its final value. The opposing emf is proportional to the amount of change left. This is the hallmark of an exponential behavior, and it can be shown with calculus that
+
+is the current in an RL circuit when switched on (Note the similarity to the exponential behavior of the voltage on a charging capacitor). The initial current is zero and approaches I0=V/R with a characteristic time constant
+
+ τ
+
+for an RL circuit, given by
+
+where τ has units of seconds, since
+
+ 1
+ H
+ =
+ 1
+ Ω
+ ·
+ s
+
+.
+ In the first period of time τ, the current rises from zero to 0.632I0, since I=I0(1−e−1)=I0(1−0.368)=0.632I0. The current will go 0.632 of the remainder in the next time τ. A well-known property of the exponential is that the final value is never exactly reached, but 0.632 of the remainder to that value is achieved in every characteristic time τ. In just a few multiples of the time τ, the final value is very nearly achieved, as the graph in (b) illustrates.
+
+The characteristic time τ depends on only two factors, the inductance L and the resistance R. The greater the inductance L, the greater τ is, which makes sense since a large inductance is very effective in opposing change. The smaller the resistance R, the greater τ is. Again this makes sense, since a small resistance means a large final current and a greater change to get there. In both cases—large L and small R —more energy is stored in the inductor and more time is required to get it in and out.
+
+When the switch in (a) is moved to position 2 and cuts the battery out of the circuit, the current drops because of energy dissipation by the resistor. But this is also not instantaneous, since the inductor opposes the decrease in current by inducing an emf in the same direction as the battery that drove the current. Furthermore, there is a certain amount of energy, (1/2)LI02, stored in the inductor, and it is dissipated at a finite rate. As the current approaches zero, the rate of decrease slows, since the energy dissipation rate is I2R. Once again the behavior is exponential, and
+I
+ is found to be
+
+(See (c).) In the first period of time τ=L/R after the switch is closed, the current falls to 0.368 of its initial value, since I=I0e−1=0.368I0. In each successive time τ, the current falls to 0.368 of the preceding value, and in a few multiples of τ, the current becomes very close to zero, as seen in the graph in (c).
+
+Calculating Characteristic Time and Current in an RL Circuit
+
+(a) What is the characteristic time constant for a 7.50 mH inductor in series with a 
+ 
+ 3.00 Ω
+ 
+ resistor? (b) Find the current 5.00 ms after the switch is moved to position 2 to disconnect the battery, if it is initially 10.0 A.
+Strategy for (a)
+
+Strategy for (a)
+
+The time constant for an RL circuit is defined by τ=L/R.
+Solution for (a)
+
+Solution for (a)
+
+Entering known values into the expression for τ given in τ=L/R yields
+Discussion for (a)
+
+Discussion for (a)
+
+This is a small but definitely finite time. The coil will be very close to its full current in about ten time constants, or about 25 ms.
+Strategy for (b)
+
+Strategy for (b)
+
+We can find the current by using I=I0e−t/τ, or by considering the decline in steps. Since the time is twice the characteristic time, we consider the process in steps.
+Solution for (b)
+
+Solution for (b)
+
+In the first 2.50 ms, the current declines to 0.368 of its initial value, which is
+
+After another 2.50 ms, or a total of 5.00 ms, the current declines to 0.368 of the value just found. That is,
+Discussion for (b)
+
+Discussion for (b)
+
+After another 5.00 ms has passed, the current will be 0.183 A (see ); so, although it does die out, the current certainly does not go to zero instantaneously.
+
+In summary, when the voltage applied to an inductor is changed, the current also changes, but the change in current lags the change in voltage in an RL circuit. In Reactance, Inductive and Capacitive, we explore how an RL circuit behaves when a sinusoidal AC voltage is applied.
+
+Section Summary
+
+When a series connection of a resistor and an inductor—an RL circuit—is connected to a voltage source, the time variation of the current is
+ I=I0(1−e−t/τ)    (turning on).
+ where 
+ I0=V/R is the final current.
+
+The characteristic time constant τ is τ=LR , where 
+ 
+ L
+ 
+ is the inductance and 
+ 
+ R
+ 
+ is the resistance.
+
+In the first time constant τ, the current rises from zero to 0.632I0, and 0.632 of the remainder in every subsequent time interval τ.
+
+When the inductor is shorted through a resistor, current decreases as
+ I=I0e−t/τ    (turning off).
+
+Here I0 is the initial current.
+
+Current falls to 0.368I0 in the first time interval τ, and 0.368 of the remainder toward zero in each subsequent time τ.
+
+Problem Exercises
+
+If you want a characteristic RL time constant of 1.00 s, and you have a 
+ 
+ 500 Ω
+ 
+ resistor, what value of self-inductance is needed?
+
+500 H
+
+Your RL circuit has a characteristic time constant of 20.0 ns, and a resistance of 
+ 
+ 5.00 MΩ
+ 
+. (a) What is the inductance of the circuit? (b) What resistance would give you a 1.00 ns time constant, perhaps needed for quick response in an oscilloscope?
+
+A large superconducting magnet, used for magnetic resonance imaging, has a 50.0 H inductance. If you want current through it to be adjustable with a 1.00 s characteristic time constant, what is the minimum resistance of system?
+50.0 Ω
+
+Verify that after a time of 10.0 ms, the current for the situation considered in will be 0.183 A as stated.
+
+Suppose you have a supply of inductors ranging from 1.00 nH to 10.0 H, and resistors ranging from
+
+ 0.100 Ω
+ 
+ to
+
+ 1.00 MΩ
+ 
+. What is the range of characteristic RL time constants you can produce by connecting a single resistor to a single inductor?
+1.00×10–18 s to 0.100 s
+
+(a) What is the characteristic time constant of a 25.0 mH inductor that has a resistance of
+
+ 4.00 Ω
+ 
+? (b) If it is connected to a 12.0 V battery, what is the current after 12.5 ms?
+
+What percentage of the final current
+
+ I
+ 0
+
+ flows through an inductor L in series with a resistor R, three time constants after the circuit is completed?
+
+95.0%
+
+The 5.00 A current through a 1.50 H inductor is dissipated by a 2.00 Ω resistor in a circuit like that in with the switch in position 2. (a) What is the initial energy in the inductor? (b) How long will it take the current to decline to 5.00% of its initial value? (c) Calculate the average power dissipated, and compare it with the initial power dissipated by the resistor.
+
+(a) Use the exact exponential treatment to find how much time is required to bring the current through an 80.0 mH inductor in series with a
+
+ 15.0 Ω
+
+ resistor to 99.0% of its final value, starting from zero. (b) Compare your answer to the approximate treatment using integral numbers of τ. (c) Discuss how significant the difference is.
+
+(a) 24.6 ms
+
+(b) 26.7 ms
+
+(c) 9% difference, which is greater than the inherent uncertainty in the given parameters.
+
+(a) Using the exact exponential treatment, find the time required for the current through a 2.00 H inductor in series with a
+
+ 0.500 Ω
+
+ resistor to be reduced to 0.100% of its original value. (b) Compare your answer to the approximate treatment using integral numbers of τ. (c) Discuss how significant the difference is.
+
+denoted by τ, of a particular series RL circuit is calculated by τ=LR, where L is the inductance and R is the resistance

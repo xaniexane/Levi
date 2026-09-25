@@ -1,0 +1,553 @@
+# m00002
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Gathering and Organizing Data
+
+Gathering and Organizing Data
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Distinguish among sampling techniques.
+
+Organize data using an appropriate method.
+
+Create frequency distributions.
+
+When a polling organization wants to try to establish which candidate will win an upcoming election, the first steps are to write questions for the survey and to choose which people will be asked to respond to the survey. These can seem like simple steps, but they have far-reaching implications in the analysis the pollsters will later carry out. The process by which samples (or groups of units from which we collect data) are chosen can strongly affect the data that are collected. Units are anything that can be measured or surveyed (such as people, animals, objectives, or experiments) and data are observations made on units.
+
+One of the most famous failures of good sampling occurred in the first half of the twentieth century. The Literary Digest was among the most respected magazines of the early twentieth century. Despite the name, the Digest was a weekly newsmagazine. Starting in 1916, the Digest conducted a poll to try to predict the winner of each US Presidential election. For the most part, their results were good; they correctly predicted the outcome of all five elections between 1916 and 1932. In 1936, the incumbent President Franklin Delano Roosevelt faced Kansas governor Alf Landon, and once again the Digest ran their famous poll, with results published the week before the election. Their conclusion? Landon would win in a landslide, 57% to 43%. Once the actual votes had been counted, though, Roosevelt ended up with 61% of the popular vote, 18% more than the poll predicted. What went wrong?
+
+The short answer is that the people who were chosen to receive the survey (over ten million of them!) were not a good representation of the population of voting adults. The sample was chosen using the Digest's own base of subscribers as well as publicly available lists of people that were likely adults (and therefore eligible to vote), mostly phone books and vehicle registration records. The pollsters then mailed every single person on these lists a survey. Around a quarter of those surveys were returned; this constituted the sample that was used to make the Digest’s disastrously incorrect prediction. However, the Digest made an error in failing to consider that the election was happening during the Great Depression, and only the wealthy had disposable income to spend on telephone lines, automobiles, and magazine subscriptions. Thus, only the wealthy were sent the Digest’s survey. Since Roosevelt was extremely popular among poorer voters, many of Roosevelt’s supporters were excluded from the Digest’s sample.
+
+Another more complicated factor was the low response rate; only around 25% of the surveys were returned. This created what’s called a non-response bias.
+
+Sampling and Gathering Data
+
+The Digest's failure highlights the need for what is now considered the most important criterion for sampling: randomness. This randomness can be achieved in several ways. Here we cover some of the most common.
+
+A simple random sample is chosen in a way that every unit in the population has an equal chance of being selected, and the chances of a unit being selected do not depend on the units already chosen. An example of this is choosing a group of people by drawing names out of a hat (assuming the names are well-mixed in the hat).
+
+A systematic random sample is selected from an ordered list of the population (for example, names sorted alphabetically or students listed by student ID). First, we decide what proportion of the population will be in our sample. We want to express that proportion as a fraction with 1 in the numerator. Let’s call that number D. Next, we’ll choose a random number between one and D. The unit at that position will go into our sample. We’ll find the rest of our sample by choosing every Dth unit in the list, starting with our random number.
+
+To walk through an example, let’s say we want to sample 2% of the population: 2%=2100=150. (Note: If the number in the denominator isn’t a whole number, we can just round it off. This part of the process doesn’t have to be precise.) We can then use a random number generator to find a random number between 1 and 50; let's use 31. In our example, our sample would then be the units in the list at positions 31, 81 (31 + 50), 131 (81 + 50), and so forth.
+
+A stratified sample is one chosen so that particular groups in the population are certain to be represented. Let’s say you are studying the population of students in a large high school (where the grades run from 9th to 12th), and you want to choose a sample of 12 students. If you use a simple or systematic random sample, there’s a pretty good chance that you’ll miss one grade completely. In a stratified sample, you would first divide the population into groups (the strata), then take a random sample within each stratum (that’s the singular form of “strata”). In the high school example, we could divide the population into grades, then take a random sample of three students within each grade. That would get us to the 12 students we need while ensuring coverage of each grade.
+
+A cluster sample is a sample where clusters of units are chosen at random, instead of choosing individual units. For example, if we need a sample of college students, we may take a list of all the course sections being offered at the college, choose three of them at random (the sections are the clusters), and then survey all the students in those sections. A sample like this one has the advantage of convenience: If the survey needs to be administered in person, many of your sample units will be located in one place at the same time.
+
+Random Sampling
+
+For each of the following situations, identify whether the sample is a simple random sample, a systematic random sample, a stratified random sample, a cluster random sample, or none of these.
+ 
+ A postal inspector wants to check on the performance of a new mail carrier, so she chooses four streets at random among those that the carrier serves. Each household on the selected streets receives a survey.
+ A hospital wants to survey past patients to see if they were satisfied with the care they received. The administrator sorts the patients into groups based on the department of the hospital where they were treated (ICU, pediatrics, or general), and selects patients at random from each of those groups.
+ A quality control engineer at a factory that makes smartphones wants to figure out the proportion of devices that are faulty before they are shipped out. The phones are currently packed in boxes for shipping, each of which holds 20 devices. The engineer wants to sample 100 phones, so he selects five crates at random and tests every phone in those five crates.
+ A newspaper reporter wants to write a story on public perceptions on a project that will widen a congested street. She stands on the side of the street in question and interviews the first five people she sees there.
+ An executive at a streaming video service wants to know if her subscribers would support a second season of a new show. She gets a list of all the subscribers who have watched at least one episode of the show, and uses a random number generator to select a sample of 50 people from the list.
+ An agent for a state’s Department of Revenue is in charge of selecting 100 tax returns for audit. He has a list of all of the returns eligible for audit (about 12,000 in all), sorted by the taxpayer’s ID number. He asks a computer to give him a random number between 1 and 120; it gives him 15. The agent chooses the 15th, 135th, 255th, 375th, and every 120th return after that to be audited.
+
+A postal inspector wants to check on the performance of a new mail carrier, so she chooses four streets at random among those that the carrier serves. Each household on the selected streets receives a survey.
+
+A hospital wants to survey past patients to see if they were satisfied with the care they received. The administrator sorts the patients into groups based on the department of the hospital where they were treated (ICU, pediatrics, or general), and selects patients at random from each of those groups.
+
+A quality control engineer at a factory that makes smartphones wants to figure out the proportion of devices that are faulty before they are shipped out. The phones are currently packed in boxes for shipping, each of which holds 20 devices. The engineer wants to sample 100 phones, so he selects five crates at random and tests every phone in those five crates.
+
+A newspaper reporter wants to write a story on public perceptions on a project that will widen a congested street. She stands on the side of the street in question and interviews the first five people she sees there.
+
+An executive at a streaming video service wants to know if her subscribers would support a second season of a new show. She gets a list of all the subscribers who have watched at least one episode of the show, and uses a random number generator to select a sample of 50 people from the list.
+
+An agent for a state’s Department of Revenue is in charge of selecting 100 tax returns for audit. He has a list of all of the returns eligible for audit (about 12,000 in all), sorted by the taxpayer’s ID number. He asks a computer to give him a random number between 1 and 120; it gives him 15. The agent chooses the 15th, 135th, 255th, 375th, and every 120th return after that to be audited.
+
+To decide which type of random sample is being used in each of these, we need to focus on how the randomization is being incorporated.
+ 
+ The surveys are being given to households, so households are the units in this case. But households aren’t being chosen randomly; instead, streets are being chosen at random. These form clusters of units, so this is a cluster random sample.
+ In this case, the administrator isn’t selecting patients at random from the entire list of patients. Instead, she is choosing at random from the patients who were in each of the departments (ICU, pediatrics, general) separately. The departments form strata, so this is a stratified random sample.
+ The engineer is testing whether the phones are faulty, so those are the units. But the random process is being used to select the crates of phones. Those crates form clusters, so this is a cluster random sample.
+ The reporter isn’t using a random process at all, so this sample doesn’t belong to any of the types we have been talking about. A sample like this one is sometimes described as a convenience sample, and shouldn’t be used in a statistical setting.
+ The executive is choosing her sample completely at random from the full population, so this is a simple random sample.
+ The agent is choosing from the full population, but is only choosing the first unit for the sample at random; the rest are chosen by skipping down the list systematically. Thus, this is a systematic random sample.
+
+The surveys are being given to households, so households are the units in this case. But households aren’t being chosen randomly; instead, streets are being chosen at random. These form clusters of units, so this is a cluster random sample.
+
+In this case, the administrator isn’t selecting patients at random from the entire list of patients. Instead, she is choosing at random from the patients who were in each of the departments (ICU, pediatrics, general) separately. The departments form strata, so this is a stratified random sample.
+
+The engineer is testing whether the phones are faulty, so those are the units. But the random process is being used to select the crates of phones. Those crates form clusters, so this is a cluster random sample.
+
+The reporter isn’t using a random process at all, so this sample doesn’t belong to any of the types we have been talking about. A sample like this one is sometimes described as a convenience sample, and shouldn’t be used in a statistical setting.
+
+The executive is choosing her sample completely at random from the full population, so this is a simple random sample.
+
+The agent is choosing from the full population, but is only choosing the first unit for the sample at random; the rest are chosen by skipping down the list systematically. Thus, this is a systematic random sample.
+
+George Gallup
+
+George Gallup (1901–1984) rose to fame in 1936 when his prediction of the percentage of the vote going to each candidate in that year’s U.S. Presidential election was more accurate than the one published in Literary Digest, and he did so using a sample that was much smaller than the Digest. He even took it one step farther, predicting with high accuracy the erroneous results of the poll that the Literary Digest would end up publishing! Gallup’s theories on public opinion polling essentially created that field. In 1948, Gallup’s reputation took a bit of a hit, when he famously, but incorrectly, predicted that Thomas Dewey would beat incumbent Harry Truman in that year’s Presidential election. Over the following decades, however, public trust in Gallup’s polls recovered and even steadily increased. The company Gallup founded continues to conduct daily public opinion polls, as well as provides consulting services for businesses.
+
+Organizing Data
+
+Once data have been collected, we turn our attention to analysis. Before we analyze, though, it’s useful to reorganize the data into a format that makes the analysis easier. For example, if our data were collected using a paper survey, our raw data are all broken down by respondent (represented by an individual response sheet). To perform an analysis on all the responses to an individual question, we need to first group all the responses to each question together. The way we organize the data depends on the type of data we’ve collected.
+
+There are two broad types of data: categorical and quantitative. Categorical data classifies the unit into a group (or category). Examples of categorical data include a response to a yes-or-no question, or the color of a person’s eyes. Quantitative data is a numerical measure of a property of a unit. Examples of quantitative data include the time it takes for a rat to run through a maze or a person’s daily calorie intake. We’ll look at each type of data in turn when considering how best to organize.
+
+Categorical Data Organization
+
+The best way to organize categorical data is using a categorical frequency distribution. A categorical frequency distribution is a table with two columns. The first contains all the categories present in the data, each listed once. The second contains the frequencies of each category, which are just a count of how often each category appears in the data.
+
+Creating a Categorical Frequency Distribution
+
+A teacher records the responses of the class (28 students) on the first question of a multiple choice quiz, with five possible responses (A, B, C, D, and E):
+
+ A
+ A
+ C
+ A
+ B
+ B
+ A
+ E
+ A
+ C
+ A
+ A
+ A
+ C
+
+ E
+ A
+ B
+ A
+ A
+ C
+ A
+ B
+ E
+ E
+ A
+ A
+ C
+ C
+
+A
+A
+C
+A
+B
+B
+A
+E
+A
+C
+A
+A
+A
+C
+E
+A
+B
+A
+A
+C
+A
+B
+E
+E
+A
+A
+C
+C
+Create a categorical frequency distribution that organizes the responses.
+Step 1: For each possible response, count the number of times that response appears in the data. In the responses for this class, “A” appears 14 times, “B” 4 times, “C” 6 times, “D” 0 times, and “E” 4 times.
+Step 2: Make a table with two columns. The first column should be labeled so that the reader knows what the responses mean, and the second should be labeled “Frequency.”
+
+ Response to First Question
+ Frequency
+
+ A
+ 14
+
+ B
+ 4
+
+ C
+ 6
+
+ D
+ 0
+
+ E
+ 4
+
+Response to First Question
+Frequency
+A
+14
+B
+4
+C
+6
+D
+0
+E
+Step 3: Check your work. If you add up your frequencies, you should get the same number as the total number of responses. Twenty-eight students answered that first question, and 14+4+6+0+4=28.
+
+Quantitative Data
+
+We have a couple of options available for organizing quantitative data. If there are just a few possible responses, we can create a frequency distribution just like the ones we made for categorical data above. For example, if we’re surveying a group of high school students and we ask for each student’s age, we’ll likely only get whole-number responses between 13 and 19. Since there are only around seven (and likely fewer) possible responses, we can treat the data as if they’re categorical and create a frequency distribution as before.
+
+Creating a Quantitative Frequency Distribution
+
+Attendees of a conflict resolution workshop are asked how many siblings they have. The responses are as follows:
+
+ 1
+ 0
+ 1
+ 1
+ 2
+ 0
+ 3
+ 1
+ 1
+ 4
+ 1
+ 2
+ 0
+ 1
+ 3
+
+ 1
+ 2
+ 1
+ 2
+ 4
+ 1
+ 0
+ 1
+ 3
+ 0
+ 1
+ 2
+ 2
+ 1
+ 5
+
+1
+0
+1
+1
+2
+0
+3
+1
+1
+4
+1
+2
+0
+1
+3
+1
+2
+1
+2
+4
+1
+0
+1
+3
+0
+1
+2
+2
+1
+5
+Create a frequency distribution to organize the responses.
+Step 1: Count the number of times you see each unique response: “0” appears 5 times, “1” appears 13 times, “2” appears 6 times, “3” appears 3 times, “4” appears twice, and “5” appears once.
+Step 2: Make a table with two columns. The first column should be labeled so that the reader knows what the responses mean, and the second should be labeled “Frequency.” Then fill in the results of our count.
+
+ Number of Siblings
+ Frequency
+ Number of Siblings
+ Frequency
+
+ 0
+ 5
+ 3
+ 3
+
+ 1
+ 13
+ 4
+ 2
+
+ 2
+ 6
+ 5
+ 1
+
+Number of Siblings
+Frequency
+Number of Siblings
+Frequency
+0
+5
+3
+3
+1
+13
+4
+2
+2
+6
+5
+Step 3: Check your work. If you add up your counts, you should get the same number as the total number of responses. Looking back at the raw data, there were 30 responses, and 5+13+6+3+2+1=30.
+
+If there are many possible responses, a frequency distribution table like the ones we’ve seen so far isn’t really useful; there will likely be many responses with a frequency of one, which means the table will be no better than looking at the raw data. In these cases, we can create a binned frequency distribution. A binned frequency distribution groups the data into ranges of values called bins, then records the number of responses in each bin.
+
+For example, if we have height data for individuals measured in centimeters, we might create bins like 150–155 cm, 155–160 cm, and so forth (making sure that every data value falls into a bin). We must be careful, though; in this scenario, it’s not clear which bin would contain a response of 155 cm. Usually, responses on the edge of a bin are placed in the higher bin, but it’s good practice to make that clear. In cases where responses are rounded off, you can avoid this issue by leaving a gap between the bins that couldn’t contain any responses. In our example, if the measurements were all rounded off to the nearest centimeter, we could make bins like 150–154 cm, 155–159 cm, etc. (since a response like 154.2 isn’t possible). We’ll use this method going forward. How do we decide what the boundaries of our bins should be? There’s no one right way to do that, but there are some guidelines that can be helpful.
+
+Every data value should fall into exactly one bin. For example, if the lowest value in our data is 42, the lowest bin should not be 45–49.
+
+Every bin should have the same width. Note that if we shift the upper limits of our bins down a bit to avoid ambiguity (like described above), we can’t simply subtract the lower limit from the upper limit to get the bin width; instead, we subtract the lower limit of the bin from the lower limit of the next bin. For example, if we’re looking at GPAs rounded to the nearest hundredth, we might choose bins like 2.00–2.24, 2.25–2.49, 2.50–2.74, etc. These bins all have a width of 0.25.
+
+If the minimum or maximum value of the data falls right on the boundary between two bins, then it’s OK to bend the rule just a little in order to avoid having an additional bin containing just that one value. We’ll see an example of this in just a moment.
+
+If we have too many or too few bins, it can be difficult to get a good sense of the distribution. Seven or eight bins is ideal, but that’s not a firm rule; anything between five and twelve is fine. We often choose the number of bins so that the widths are round numbers.
+
+Creating a Binned Frequency Distribution
+
+The GPAs of students enrolled in an advanced sociology class are listed in the following table. At this institution, 4.00 is the maximum possible GPA.
+
+ 3.93
+ 3.43
+ 2.87
+ 2.51
+ 2.70
+ 1.91
+ 2.32
+ 2.85
+ 3.06
+ 3.03
+ 3.49
+ 1.84
+ 3.72
+ 2.56
+
+ 1.99
+ 3.40
+ 3.74
+ 3.23
+ 1.98
+ 3.05
+ 1.43
+ 2.90
+ 1.20
+ 3.72
+ 3.56
+ 3.07
+ 2.58
+ 4.00
+
+ 2.79
+ 3.81
+ 2.60
+ 3.69
+ 2.88
+ 3.34
+ 1.51
+ 
+ 3.63
+ 3.45
+ 1.89
+ 2.30
+ 2.98
+ 3.04
+ 2.70
+
+3.93
+3.43
+2.87
+2.51
+2.70
+1.91
+2.32
+2.85
+3.06
+3.03
+3.49
+1.84
+3.72
+2.56
+1.99
+3.40
+3.74
+3.23
+1.98
+3.05
+1.43
+2.90
+1.20
+3.72
+3.56
+3.07
+2.58
+4.00
+2.79
+3.81
+2.60
+3.69
+2.88
+3.34
+1.51
+3.63
+3.45
+1.89
+2.30
+2.98
+3.04
+2.70
+Create a binned frequency distribution for the data.
+Step 1: Identify the max and min values in your bins. Looking at the dataset, you can see that the lowest value is 1.20, and the highest is 4.00.
+Step 2: Get a rough idea of bin widths. Aim for seven or eight bins, give or take a couple. For eight bins, the minimum width can be found by taking the difference between the largest and smallest data values and dividing by the number of bins:
+
+If we use 0.35 for our widths, starting at our minimum value of 1.20, we’ll get bins with these boundaries: 1.20, 1.55, 1.90, 2.25, 2.60, 2.95, 3.30, 3.65, 4.00.
+Step 3: Consider the context of the values.
+ Because these are GPAs, there are natural breaks at 2.00 and 3.00 that are important. (People like whole numbers!) Since 0.35 is very close to 13, let’s use that for our bin width instead, and make sure that whole numbers fall on the boundaries. That means our first bin needs to start at 1.00 and go up to 1.33 to make sure our minimum value is included. The next bin will run from 1.34 to 1.66, and so forth.
+Step 4: Create the distribution table. We
+ start our distribution table by filling in the bins:
+
+ GPA Range
+ Frequency
+ GPA Range
+ Frequency
+ GPA Range
+ Frequency
+
+ 1.00–1.33
+ 
+ 2.00–2.33
+ 
+ 3.00–3.33
+
+ 1.34–1.66
+ 
+ 2.34–2.66
+ 
+ 3.34–3.66
+
+ 1.67–1.99
+ 
+ 2.67–2.99
+ 
+ 3.67–4.00
+
+GPA Range
+Frequency
+GPA Range
+Frequency
+GPA Range
+Frequency
+1.00–1.33
+2.00–2.33
+3.00–3.33
+1.34–1.66
+2.34–2.66
+3.34–3.66
+1.67–1.99
+2.67–2.99
+3.67–4.00
+Notice that the last bin doesn’t follow the pattern; since our maximum data value is right on the upper boundary of that last bin, this is a case where we can bend that rule just a little to avoid creating a bin for 4.00–4.33 (which wouldn’t really make sense in the context of these GPAs anyway, since 4.00 is the maximum possible GPA).
+Step 5: Complete the table with the frequencies. Finish the table by counting the number of data values that fall in each bin, and recording them in the frequency column:
+
+ GPA Range
+ Frequency
+ GPA Range
+ Frequency
+ GPA Range
+ Frequency
+
+ 1.00–1.33
+ 1
+ 2.00–2.33
+ 2
+ 3.00–3.33
+ 6
+
+ 1.34–1.66
+ 2
+ 2.34–2.66
+ 4
+ 3.34–3.66
+ 7
+
+ 1.67–1.99
+ 5
+ 2.67–2.99
+ 8
+ 3.67–4.00
+ 7
+
+GPA Range
+Frequency
+GPA Range
+Frequency
+GPA Range
+Frequency
+1.00–1.33
+1
+2.00–2.33
+2
+3.00–3.33
+6
+1.34–1.66
+2
+2.34–2.66
+4
+3.34–3.66
+7
+1.67–1.99
+5
+2.67–2.99
+8
+3.67–4.00
+Step 6: Check your work. Add up the frequencies to make sure all the data values are included. We started with forty-two data values, and 1+2+5+2+4+8+6+7+7=42.
+
+Check Your Understanding
+
+Key Terms
+
+sample
+
+units
+
+data
+
+population
+
+simple random sample
+
+systematic random sample
+
+stratified sample
+
+cluster sample
+
+quantitative data
+
+categorical data
+
+categorical frequency Distribution
+
+binned frequency distribution
+
+Key Concepts
+
+Categorical data places units into groups (categories), while quantitative data is a numerical measure of a property of a unit.
+
+The sampling method for a study depends on the way that randomization is used to select units for the sample.
+
+Frequency distributions help to summarize data by counting the number of units that fall into a particular category or range of quantitative values.

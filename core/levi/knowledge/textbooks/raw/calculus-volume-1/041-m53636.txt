@@ -1,0 +1,298 @@
+# m53636
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Integrals Resulting in Inverse Trigonometric Functions
+
+Integrals Resulting in Inverse Trigonometric Functions
+
+Integrate functions resulting in inverse trigonometric functions
+
+In this section we focus on integrals that result in inverse trigonometric functions. We have worked with these functions before. Recall from Functions and Graphs that trigonometric functions are not one-to-one unless the domains are restricted. When working with inverses of trigonometric functions, we always need to be careful to take these restrictions into account. Also in Derivatives, we developed formulas for derivatives of inverse trigonometric functions. The formulas developed there give rise directly to integration formulas involving inverse trigonometric functions.
+
+Integrals that Result in Inverse Sine Functions
+
+Let us begin this last section of the chapter with the three formulas. Along with these formulas, we use substitution to evaluate the integrals. We prove the formula for the inverse sine integral.
+
+Rule: Integration Formulas Resulting in Inverse Trigonometric Functions
+
+The following integration formulas yield inverse trigonometric functions. Assume a>0:
+∫dua2−u2=1asin-1ua+C
+∫dua2+u2=1atan−1ua+C
+∫duuu2−a2=1|a|sec−1|u|a+C
+
+Proof
+
+Let y=sin−1xa. Then asiny=x. Now let’s use implicit differentiation. We obtain
+
+For −π2≤y≤π2,cosy≥0. Thus, applying the Pythagorean identity sin2y+cos2y=1, we have cosy=1–sin2y. This gives
+
+Then for −a≤x≤a, and generalizing to u, we have
+
+□
+
+Evaluating a Definite Integral Using Inverse Trigonometric Functions
+
+Evaluate the definite integral ∫012dx1−x2.
+
+We can go directly to the formula for the antiderivative in the rule on integration formulas resulting in inverse trigonometric functions, and then evaluate the definite integral. We have
+
+Evaluate the integral ∫dx1−16x2.
+14sin−1(4x)+C
+
+Hint
+
+Substitute u=4x
+
+Finding an Antiderivative Involving an Inverse Trigonometric Function
+
+Evaluate the integral ∫dx4−9x2.
+
+Substitute u=3x. Then du=3dx and we have
+
+Applying the formula with a=2, we obtain
+
+Find the indefinite integral using an inverse trigonometric function and substitution for ∫dx9−x2.
+sin−1(x3)+C
+
+Hint
+
+Use the formula in the rule on integration formulas resulting in inverse trigonometric functions.
+
+Evaluating a Definite Integral
+
+Evaluate the definite integral ∫03/2du1−u2.
+
+The format of the problem matches the inverse sine formula. Thus,
+
+Integrals Resulting in Other Inverse Trigonometric Functions
+
+There are six inverse trigonometric functions. However, only three integration formulas are noted in the rule on integration formulas resulting in inverse trigonometric functions because the remaining three are negative versions of the ones we use. The only difference is whether the integrand is positive or negative. Rather than memorizing three more formulas, if the integrand is negative, simply factor out −1 and evaluate the integral using one of the formulas already provided. To close this section, we examine one more formula: the integral resulting in the inverse tangent function.
+
+Finding an Antiderivative Involving the Inverse Tangent Function
+
+Evaluate the integral ∫11+4x2dx.
+
+Comparing this problem with the formulas stated in the rule on integration formulas resulting in inverse trigonometric functions, the integrand looks similar to the formula for tan−1u+C. So we use substitution, letting u=2x, then du=2dx and 1/2du=dx. Then, we have
+
+Use substitution to find the antiderivative ∫dx25+4x2.
+110tan−1(2x5)+C
+
+Hint
+
+Use the solving strategy from and the rule on integration formulas resulting in inverse trigonometric functions.
+
+Applying the Integration Formulas
+
+Evaluate the integral ∫19+x2dx.
+
+Apply the formula with a=3. Then,
+
+Evaluate the integral ∫dx16+x2.
+14tan−1(x4)+C
+
+Hint
+
+Follow the steps in .
+
+Evaluating a Definite Integral
+
+Evaluate the definite integral ∫3/33dx1+x2.
+
+Use the formula for the inverse tangent. We have
+
+Evaluate the definite integral ∫02dx4+x2.
+π8
+
+Hint
+
+Follow the procedures from to solve the problem.
+
+Key Concepts
+
+Formulas for derivatives of inverse trigonometric functions developed in Derivatives of Exponential and Logarithmic Functions lead directly to integration formulas involving inverse trigonometric functions.
+
+Use the formulas listed in the rule on integration formulas resulting in inverse trigonometric functions to match up the correct format and make alterations as necessary to solve the problem.
+
+Substitution is often required to put the integrand in the correct form.
+
+Key Equations
+∫dua2−u2=sin−1(ua)+C
+ ∫dua2+u2=1atan−1(ua)+C
+ ∫duuu2−a2=1asec−1(ua)+C
+In the following exercises, evaluate each integral in terms of an inverse trigonometric function.
+∫03/2dx1−x2
+sin−1x|03/2=π3
+∫−1/21/2dx1−x2
+∫31dx1+x2
+tan−1x|31=−π12
+∫1/33dx1+x2
+∫232dx|x|x2−1
+sec−1|232=π4-π6=π12
+∫22dx|x|x2−1
+
+In the following exercises, find each indefinite integral, using appropriate substitutions.
+∫dx9−x2
+sin−1(x3)+C
+∫dx1−16x2
+∫dx9+x2
+13tan−1(x3)+C
+∫dx25+16x2
+∫dx|x|x2−9
+13sec−1(x3)+C
+∫dx|x|4x2−16
+
+Explain the relationship −cos−1t+C=∫dt1−t2=sin−1t+C. Is it true, in general, that cos−1t=−sin−1t?
+cos(π2−θ)=sinθ. So, sin−1t=π2−cos−1t. They differ by a constant.
+
+Explain the relationship sec−1t+C=∫dt|t|t2−1=−csc−1t+C. Is it true, in general, that sec−1t=−csc−1t?
+
+Explain what is wrong with the following integral: ∫12dt1−t2.
+1−t2 is not defined as a real number when t>1.
+
+Explain what is wrong with the following integral: ∫−11dt|t|t2−1.
+
+In the following exercises, solve for the antiderivative ∫f of f with C=0, then use a calculator to graph f and the antiderivative over the given interval [a,b]. Identify a value of C such that adding C to the antiderivative recovers the definite integral F(x)=∫axf(t)dt.
+[T] ∫19−x2dx over [−3,3]
+The antiderivative is sin−1(x3)+C. Taking C=π2 recovers the definite integral.
+[T] ∫99+x2dx over [−6,6]
+[T] ∫cosx4+sin2xdx over [−6,6]
+The antiderivative is 12tan−1(sinx2)+C. Taking C=12tan−1(sin(6)2) recovers the definite integral.
+[T] ∫ex1+e2xdx over [−6,6]
+
+In the following exercises, compute the antiderivative using appropriate substitutions.
+∫sin−1tdt1−t2
+12(sin−1t)2+C
+∫dtsin−1t1−t2
+∫tan−1(2t)1+4t2dt
+14(tan−1(2t))2
+∫ttan−1(t2)1+t4dt
+∫sec−1(t2)|t|t2−4dt
+14(sec−1(t2)2)+C
+∫tsec−1(t2)t2t4−1dt
+
+In the following exercises, use a calculator to graph the antiderivative ∫f with C=0 over the given interval [a,b]. Approximate a value of C, if possible, such that adding C to the antiderivative gives the same value as the definite integral F(x)=∫axf(t)dt.
+[T] ∫1xx2−4dx over [2,6]
+The antiderivative is 12sec−1(x2)+C. Taking C=0 recovers the definite integral over [2,6].
+[T] ∫1(2x+2)xdx over [0,6]
+[T] ∫(sinx+xcosx)1+x2sin2xdx over [−6,6]
+The general antiderivative is tan−1(xsinx)+C. Taking C=−tan−1(6sin(6)) recovers the definite integral.
+[T] ∫2e−2x1−e−4xdx over [0,2]
+[T] ∫1x+xln2x over [0,2]
+The general antiderivative is tan−1(lnx)+C. Taking C=π2=tan−1∞ recovers the definite integral.
+[T] ∫sin−1x1−x2 over [−1,1]
+
+In the following exercises, compute each integral using appropriate substitutions.
+∫et1−e2tdt
+sin−1(et)+C
+∫et1+e2tdt
+∫dtt1−ln2t
+sin−1(lnt)+C
+∫dtt(1+ln2t)
+∫cos−1(2t)1−4t2dt
+−14(cos−1(2t))2+C
+∫etcos−1(et)1−e2tdt
+
+In the following exercises, compute each definite integral.
+∫01/2tan(sin−1t)1−t2dt
+12ln(43)
+∫1/41/2tan(cos−1t)1−t2dt
+∫01/2sin(tan−1t)1+t2dt
+1−25
+∫01/2cos(tan−1t)1+t2dt
+
+For A>0, compute I(A)=∫−AAdt1+t2 and evaluate lima→∞I(A), the area under the graph of 11+t2 on [−∞,∞].
+2tan−1(A)→π as A→∞
+
+For 1<B<∞, compute I(B)=∫1Bdttt2−1 and evaluate limB→∞I(B), the area under the graph of 1tt2−1 over [1,∞).
+
+Use the substitution u=2cotx and the identity 1+cot2x=csc2x to evaluate ∫dx1+cos2x. (Hint: Multiply the top and bottom of the integrand by csc2x.)
+
+Using the hint, one has ∫csc2xcsc2x+cot2xdx=∫csc2x1+2cot2xdx. Set u=2cotx. Then, du=−2csc2x and the integral is −12∫du1+u2=−12tan−1u+C=12tan−1(2cotx)+C. If one uses the identity tan−1s+tan−1(1s)=π2, then this can also be written 12tan−1(tanx2)+C.
+[T] Approximate the points at which the graphs of f(x)=2x2−1 and g(x)=(1+4x2)−3/2 intersect to four decimal places, and approximate the area between their graphs to three decimal places.
+
+47. [T] Approximate the points at which the graphs of f(x)=x2−1 and g(x)=(x2+1)12 intersect to four decimal places, and approximate the area between their graphs to three decimal places.
+x≈±1.7321. The left endpoint estimate with N=100 is 4.781 and these decimals persist for N=500.
+
+Use the following graph to prove that ∫0x1−t2dt=12x1−x2+12sin−1x.
+
+Chapter Review Exercises
+True or False. Justify your answer with a proof or a counterexample. Assume all functions f and g are continuous over their domains.
+
+If f(x)>0,f′(x)>0 for all x, then the right-hand rule underestimates the integral ∫abf(x). Use a graph to justify your answer.
+
+False
+∫abf(x)2dx=∫abf(x)dx∫abf(x)dx
+
+If f(x)≤g(x) for all x∈[a,b], then ∫abf(x)≤∫abg(x).
+
+True
+
+All continuous functions have an antiderivative.
+
+Evaluate the Riemann sums L4andR4 for the following functions over the specified interval. Compare your answer with the exact answer, when possible, or use a calculator to determine the answer.
+y=3x2−2x+1 over [−1,1]
+L4=5.25,R4=3.25, exact answer: 4
+y=ln(x2+1) over [0,e]
+y=x2sinx over [0,π]
+L4=5.364,R4=5.364, exact answer: 5.870
+y=x+1x over [1,4]
+
+Evaluate the following integrals.
+∫−11(x3−2x2+4x)dx
+−43
+∫043t1+6t2dt
+∫π/3π/22sec(2θ)tan(2θ)dθ
+
+1
+∫0π/4ecos2xsinxcosxdx
+
+Find the antiderivative.
+∫dx(x+4)3
+−12(x+4)2+C
+∫xln(x2)dx
+∫4x21−x6dx
+43sin−1(x3)+C
+∫e2x1+e4xdx
+
+Find the derivative.
+ddt∫0tsinx1+x2dx
+sint1+t2
+ddx∫1x34−t2dt
+ddx∫1ln(x)(4t+et)dt
+4lnxx+1
+ddx∫0cosxet2dt
+
+The following problems consider the historic average cost per gigabyte of RAM on a computer.
+
+Year
+5-Year Change ($)
+1980
+0
+1985
+−5,468,750
+−755,495
+1995
+−73,005
+2000
+−29,768
+2005
+−918
+2010
+−177
+If the average cost per gigabyte of RAM in 2010 is $12, find the average cost per gigabyte of RAM in 1980.
+
+$6,328,113
+
+The average cost per gigabyte of RAM can be approximated by the function C(t)=8,500,000(0.65)t, where t is measured in years since 1980, and C is cost in US$. Find the average cost per gigabyte of RAM for 1980 to 2010.
+
+Find the average cost of 1GB RAM for 2005 to 2010.
+
+$73.36
+
+The velocity of a bullet from a rifle can be approximated by v(t)=6400t2−6505t+2686, where t is seconds after the shot and v is the velocity measured in feet per second. This equation only models the velocity for the first half-second after the shot: 0≤t≤0.5. What is the total distance the bullet travels in 0.5 sec?
+
+What is the average velocity of the bullet for the first half-second?
+1911712ft/sec,or1593ft/sec

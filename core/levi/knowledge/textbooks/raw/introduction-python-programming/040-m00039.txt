@@ -1,0 +1,52 @@
+# m00039
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Nested loops
+
+Nested loops
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Implement nested while loops.
+
+Implement nested for loops.
+
+Nested loops
+
+A nested loop has one or more loops within the body of another loop. The two loops are referred to as outer loop and inner loop. The outer loop controls the number of the inner loop's full execution. More than one inner loop can exist in a nested loop.
+
+Nested while loops
+
+Available appointments
+
+Consider a doctor's office schedule. Each appointment is 30 minutes long. A program to print available appointments can use a nested for loop where the outer loop iterates over the hours, and the inner loop iterates over the minutes. This example prints time in hours and minutes in the range between 8:00am and 10:00am. In this example, the outer loop iterates over the time's hour portion between 8 and 9, and the inner loop iterates over the time's minute portion between 0 and 59.
+
+The above code's output is:
+
+Nested while loop question set
+
+Nested for loops
+
+A nested for loop can be implemented and used in the same way as a nested while loop. A for loop is a preferable option in cases where a loop is used for counting purposes using a range() function, or when iterating over a container object, including nested situations. Ex: ​​Iterating over multiple course rosters. The outer loop iterates over different courses, and the inner loop iterates over the names in each course roster.
+
+Nested for loops
+
+Nested loop practices
+
+Mixed loops
+
+The two for and while loop constructs can also be mixed in a nested loop construct. Ex: Printing even numbers less than a given number in a list. The outer loop can be implemented using a for loop iterating over the provided list, and the inner loop iterates over all even numbers less than a given number from the list using a while loop.
+
+Printing a triangle of numbers
+
+Write a program that prints the following output:
+Finish!
+
+Printing two triangles
+
+Write a program that prints the following output using nested while and for loops:

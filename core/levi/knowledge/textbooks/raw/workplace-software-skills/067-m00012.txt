@@ -1,0 +1,134 @@
+# m00012
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+More About Formulas
+
+More About Formulas
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Create complex formulas
+
+Use cell references in formulas
+
+Use comparison operators
+
+Use arrays in formulas
+
+Portland is a small city in Cumberland County, Maine, and is Maine’s most populous city. Its main commercial attraction is that it is a port city, and among the main economic activity in the region is marine transport services. WorldCorp has an office there, as the company uses the port facilities to export some of their products to different destinations. The WorldCorp regional manager has to use intricate spreadsheets to keep track of the large volume of cargo coming from different cities in the United States. The manager wants to start using data automation intelligence tools in Excel, allowing the manager to make operational decisions more quickly.
+
+The shipping information may contain data such as the origin city, the destination, types of inventory included in the cargo, the weight of each shipment, and specific international shipping terms for the shipment. The manager receives this information separately in each bill of lading (a summary of the shipment) and has constructed many complex Excel workbooks with different tabs, each containing the raw data from the cargo. With shipments increasing year by year, this raw data has grown and become unwieldy. Using Excel’s built-in analytical tools, such as cell references, comparison operators, and array formulas, the manager can make sense of this raw data to use and process it in a more helpful way.
+
+As a WorldCorp employee, you are asked to deliver recurring reports based on this data. These reports can be tedious to create if you are not able to immediately find the information you need in your spreadsheets. In this case, you are asked to find the heaviest shipment, the average tonnage, the most-used destination, and other report highlights.
+
+Excel’s analytical tools like cell references, comparison operators such as greater than (>), and array formulas allow all the information in your spreadsheet to be summarized automatically. Using comparison operators enables powerful functions that are used for different purposes when constructing array formulas. Cell reference notations—relative, absolute, and mixed—are used to construct automated tables. A relative cell reference means that the cell used in the formula will change if it is copied to another part of the spreadsheet. More specifically, both the column and row location are not fixed. An absolute cell reference occurs when both the row and the column are fixed to that exact cell, so if you copy the formula to another location in the spreadsheet, it will always reference the same cell. A mixed cell reference is when either the column or the row is fixed. If the column is fixed, the row will be relative when copied to another location in the spreadsheet, and if the row is fixed, the column will be relative. Understanding cell reference notations will help you learn to build and use complex formulas using the correct order of operations. More advanced use of cell references will allow you to use comparison operators and arrays in different situations.
+
+Complex Formulas
+
+As calculations grow in complexity, they require the use of several operators, such as +, –, /, *, and ^, in the same formula. This is the basic definition of a complex formula, a formula that uses several operators to calculate an output. One important aspect of complex formulas is that Excel will automatically calculate them in a specific order. When first working with complex formulas, it can be helpful to write out the formula on paper first. To input formulas into Excel, use parentheses to separate the different mathematical functions. Multiple parentheses might be needed when working with complex and long formulas. For example, to add cells A1 and B1 and then divide by cell C1, it would look like 
+
+ A1+B1
+ 
+ C1
+
+ if you wrote out the formula. In Excel, the formula is one single line: =(A1+B1)/C1. Another strategy when dealing with complex formulas is to break down the formula into parts. To break down the previous example, you would do the addition part of the equation in one cell, and then in the next cell, do the division. Excel employs a color-coding system in complex formulas to help you follow the math, as shown in .
+
+Insert Function Tool
+
+Recall, the Formula Bar is located right above the lettered columns, right beneath the ribbon. The Formula Bar can be used for double-checking that what you typed in the cell was what you intended, or for editing the relative cell references of a copied cell. However, there is another feature in the Formula Bar using the Insert Function tool, which is essentially an assistant to help users build formulas. It contains the whole roster of Excel functions, categorized by discipline (e.g., engineering, financial, math and trigonometry, statistical), so users can explore and search for functions. Insert Function is activated by clicking on the “ƒx” icon that you see in the Formula Bar, or by going to the Formulas tab, and selecting Insert Function. The Function Library command group on the Formulas tab also shows formulas grouped by category.
+
+In the Mac version, the Formula Bar only shows the most commonly used formulas, but you can expand the Formulas tab.
+
+Let’s examine how to use the Insert Function tool for a simple function, the SUM function. (Note that the Insert Function tool is typically used for more complex and specialized functions because it is quick and easy to just type in the simple formulas; however, here, the SUM function provides a simple example.) First, select the cell where you want the summed total to appear. Then, click on the Insert Function icon. The dialog box will open, asking for the function you want to use; select the Math & Trig category, and look for SUM (they are listed alphabetically). When selected, a second screen will appear and ask for the range on which to perform the addition. Select the range and then click OK.
+
+In the Mac version, the Formula Builder defaults to the last formula you used.
+
+One useful feature of the Insert Function tool is that it can automatically detect what your range might be (a). In b, Excel automatically guessed that the user would want to sum the range F2:F5. This Insert Function tool is useful when you do not want to manually type the formula in the Formula Bar.
+
+Order of Operations
+
+In all math equations, there are rules regarding the order in which calculations must be completed. Otherwise, the equation result will be incorrect. The order of operations is the universal law of math used to prescribe the order of doing each calculation in an equation: parentheses, exponents, multiplication, division, addition, and subtraction, going from left to right (the acronym PEMDAS can help you remember the order). For example, if you calculate 5+3*3–5 from left to right, you would add 5 and 3 to get 8, then multiply 8 by 3 to get 24, and then subtract 5 to get 19, which is incorrect. Following the mathematical order of operations, the equation should be done in this order: multiply 3 by 3 to get 9, then add 5 to get 14, then subtract 5 to get 9. You can also use parentheses to help show the correct order of operations, such as 5+(3*3)–5. The parentheses show that the multiplication should be done first. Excel requires equations to follow the correct order of operations, using parentheses when combining operations in a single cell.
+
+Let’s look at some WorldCorp revenue streams to see this on a larger scale. WorldCorp produces thousands of different consumer electronic products, including TVs. shows the number of TVs sold for each of these models in the Volume Sold column. To calculate the margin for each model, subtract the cost from the price. Then, to calculate the profit per each model (Marginal Profit), multiply the margin by the volume sold.
+
+To calculate the total profit margin, you can use the SUM function on the Marginal Profit column. This simply adds up all of the profit margin amounts for each model. Alternatively, you can get this same total by creating a complex formula. Subtract the cost from the price, then multiply the difference by the volume sold, then add the product of each model and the quantity. Remember to use parentheses to make sure that each section of the formula is completed in the right order. The formula would look something like this: =((Price1-Cost1)*Volume Sold1)+((Price2-Cost2)*Volume Sold2)+((Price3-Cost3)*Volume Sold3) [etc.].
+
+The calculation in a shows the wrong answer that would result from not using parentheses in the formula. It uses the formula =Price1-Cost1*Volume Sold1+Price2-Cost2*Volume Sold2+Price3-Cost3*Volume Sold3 [etc.], which means the cost is multiplied by the volume sold first, before being subtracted from the price, which is not correct. b shows the formula written the correct way (with the parentheses). It uses =((B4-C4)*D4)+((B5-C5)*D5)+((B6-C6)*D6)+((B7-C7)*D7), which gives the correct result.
+
+Cell References in Formulas
+
+In Defining, Selecting, and Naming a Cell Range, you learned about cell references and how to define a range of cells. Now, we will expand this into Excel’s cell reference notation and learn how to use relative, absolute, and mixed cell references.
+
+Relative Cell References
+
+Formulas use relative cell references by default in Excel. A relative cell reference is one in which the cell reference in a formula or function updates automatically to reference an adjacent cell when you copy that formula or function to another cell; in other words, if your formula refers to cells A2 and B2, Excel knows that this means the columns are next to one another and in the same row. If you copy a formula with these values to the next row, Excel will automatically change the cell references to A3 and B3.
+
+Let’s consider an example. You want to replicate the TV profit calculation =((B4-C4)*D4)+((B5-C5)*D5)+((B6-C6)*D6)+((B7-C7)*D7) in another table with different models of TVs. You simply need to copy (Ctrl+C) the cell with the formula in it (D8), and paste (Ctrl+V) it into a new cell (D15). As shown in a, all of the Price, Cost, and Volume Sold values in the new table are different, and cell D15 is blank. Once you copy the formula into cell D15 (as in b), the result is that the formula will be exactly the same, but the cell references will automatically be changed to reflect the new table: =((B11-C11)*D11)+((B12-C12)*D12)+((B13-C13)*D13)+((B14-C14)*D14). As a word of caution, this only works if the tables are uniform and the formulas needed are the same.
+
+As a reminder, all shortcuts that use Ctrl on a PC use Command on a Mac.
+
+Yet, as easy as relative cell references can be, they might not be appropriate for all circumstances. For example, you may have a set of informational data that will be used recurrently, but you don’t want Excel to move the reference of one or more cells, so the relative cell reference function will not work. This is when a different type of cell reference can be used.
+
+Absolute Cell References
+
+An absolute cell reference is one in which the cell reference is fixed, regardless of where you copy the formula. To use the absolute cell reference feature, put a “$”before the column and row reference. For example, $A$3 means that the reference to column A, row 3 is fixed. If you don’t add both “$” symbols, the absolute cell reference won’t work, and you will simply have a relative cell reference. Another way to use the absolute cell reference is with a shortcut. Click on the cell you would like to fix, and then click F4, and Excel will automatically add the “$” to the cell.
+
+Recall the loan you were analyzing for WorldCorp, but instead of using a Data Table What-If Analysis, you will use the PMT function and absolute cell references. As shown in a, the same loan interest rate data remains, but now you will calculate the payments using absolute references. The formula in cell F3: =PMT(E3,$C$2,-$C$4,0,0). You can click on the fill handle (the lower-right corner of the cell) of cell F3 and drag it to F9. This copies the formula so that all the PMTs will automatically be calculated for you, using the fixed references to cells C2 and C4. b shows the completed table, and the formula in cell F9 shows the updated formula with absolute cell references.
+
+Let’s examine this formula without absolute cell references; in other words, using relative cell references. If cell F3 is =PMT(E3,C2,-C4,0,0), and you drag the fill handle to cell F9, then all the values from F4 to F9 will be incorrect (). Essentially, you have copied the same formula, but the relative cell references have moved location along with the location of the formula. Instead of referring to cells C2 and C4 for each iteration of the formula, the reference moved down one row for each row you copied the formula down the table.
+
+Excel Horror Stories
+
+Even the employee with the most certifications and skills in Excel can make mistakes. Excel facilitates most computations, but if the user makes an error in the formula or with entering the data, there can be significant consequences. For instance, you might think copying and pasting information would reduce errors. However, that was not the case for an employee working at JP Morgan Chase. In 2012, an employee copied and pasted content and formulas from one spreadsheet to another while working on a Value Risk model. The data and formulas were untested and unverified, and errors were carried over into the model.
+
+You should also consider the veracity and completeness of files you might receive. Barclays ended up purchasing 179 contracts they did not want from the Lehman Brothers in 2008. Why? They received a spreadsheet of Lehman’s assets, in PDF form. When they reviewed the Excel spreadsheet, they identified 179 contracts they did not want to purchase and hid those rows, but those notes were omitted from the PDF when it was converted, and the hidden rows were visible. Excel is a very powerful tool; with that power comes the potential for grave mistakes that can be incredibly costly. The utmost care and integrity must be taken to ensure fidelity of any spreadsheet generated and/or shared.
+
+Mixed Cell References
+
+A mixed cell reference uses a combination of both relative and absolute cell references. A mixed cell reference might have a fixed row but a relative column or a fixed column but a relative row. When the “$” is directly to the left of the row number only (e.g., B$1), the row is absolute and the column is relative. When the “$” is directly to the left of the column only (e.g., $B1), the column is absolute and the row is relative.
+
+Let’s look at another example. The WorldCorp Portland, Maine, location offers different promotional discounts as a percentage of the TV retail price depending on the month. The manager asks you to create an autofilled table of the unit prices per TV model for the year 2020. That is easy to achieve manually, multiplying the monthly discount times the retail price, but each cell reference has to be fixed as they move. To automate the calculation, you can use mixed cell references. shows the retail prices per unit and the monthly discount rates.
+
+In , the discounted retail price for model 32" LCD #E-900s is $168.30 to be calculated in cell D9. This is obtained by multiplying the Price in column C9 by (1-discount rate found in cell D5). For this example, this would be 170*(1-0.01) or C9*(1-D5). Without absolute cell references for either the column or row, the table will not calculate correctly when the formula is copied (see ). Placing the $ before the column (column C) for the price will fix the formula to always calculate the output based on column C, and the table will fill properly with the discounted prices when you copy the formula from D9 into the remaining cells.
+
+Comparison Operators
+
+The Excel comparison operators are the same as the inequality symbols used in math. These are: < (less than), > (greater than), ≥ or >= (greater than or equal to), ≤ or <= (less than or equal to), = (equal to), and <> (not equal to). Comparison operators can be used for comparing numbers. Comparison operators are valuable because of their use in the IF functions. With the IF function (or similar functions like SUMIF, COUNTIF, etc.), comparison operators can automatically search for important information. More will be covered about these functions in Logical Functions.
+
+Arrays in Formulas
+
+Array formulas can save time when used for basic or intermediate calculations (recall saving the time of adding an extra column in ). But more importantly, array formulas are used for higher-level calculations that may involve statistical and financial analysis, such as figuring out maximums and minimums of a certain product (similar to MINIF and MAXIF functions) or summing certain X or Y rows/columns (similar to SUMIF). In short, most array applications can be done in other ways in Excel, but using arrays allows you to do multiple calculations at the same time.
+
+Let’s use a manufacturing example to see how to use arrays in formulas. WorldCorp’s Fairfax, Virginia, manufacturing plant transports their items by truck to the Portland, Maine, location. The Fairfax plant has plenty of stock for some of the items in the orders, but not for all of them. shows the available stock in the Fairfax plant (Quantity In Stock) and the amounts needed to complete the orders (Quantity Planned). Let’s calculate the difference between these two numbers to determine if more is needed. Specifically, if the Quantity in Stock (Column E) is larger than the Quantity Planned (Column D), we will not need to manufacture more. To make this simple, we will use a simple subtraction calculation: Quantity in Stock – Quantity Planned. If this value is a positive number, there is plenty in stock. This would be the case with Row 6 – Tablets 7in. The Quantity in Stock is 425 and the Quantity planned is 143. So, 425 – 143 = 282. So, there will be 282 units remaining after filling the Quantity Planned order. If the value of the subtraction formula is negative, then more product is needed. We see this in Row 4 where the Quantity in Stock is 464, but 542 are Planned. Using the equation, 464 – 542, we are left with a shortfall of 78 units or -78. First, determine the difference between the values in Column E and Column D using an array. This will allow us to do the calculations for all rows in one step. Highlight cells G4 to G12. Then, in the Formula Bar, type the formula: E4:E12 – D4:12 (a), and then press Ctrl+Shift+Enter simultaneously for the curly braces to appear, as shown in b. The formula then is automatically entered for all highlighted rows.
+
+For those who are new to using the Excel math syntax and notation, the first section of this video tutorial on using math in Excel has a series of handwritten math exercises set alongside the same calculations using Excel. Seeing math equations written out in the “traditional” way may help you better understand how to devise Excel formulas. You can access the companion handout to use as a reference.
+
+Summary
+
+Businesses need spreadsheets to handle datasets that are updated every minute with information. Cell references, comparison operators, and array formulas can help analyze large sets of changing data.
+
+Complex equations need complex formulas to solve them. Excel formulas use the same math symbols as “pencil and paper” math and follow the same order of operations. An easy way to remember the order of operations is with the acronym PEMDAS.
+
+Cell references are needed in formulas and in constructing autofilled tables. There are three types of cell references: relative, absolute, and mixed. Relative cell references are when a cell copies its links to other cells relative to where it is located. Absolute cell references lock a reference to a specific cell, row, or column. Mixed cell references use both.
+
+Comparison operators are math inequalities used in Excel formulas. They use logical operators like the IF function to make your workbook pull information for you.
+
+Array formulas make simultaneous calculations, which saves time. They do the same operations that other default Excel functions do but allow the user to customize the calculation given the designed criteria in the formula.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+one in which the cell reference is fixed, regardless of where you copy the formula
+inequality symbols used in math; includes <, >, ≥, ≤, =, and <>
+one that uses several operators to calculate an output
+one that uses a combination of both relative and absolute cell references
+universal law of math used to prescribe the order of doing each calculation in an equation
+one in which the cell reference in a formula or function updates automatically to reference an adjacent cell when you copy that formula or function to another cell

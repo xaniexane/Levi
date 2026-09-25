@@ -1,0 +1,335 @@
+# m42242
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Simple Harmonic Motion: A Special Periodic Motion
+
+Simple Harmonic Motion: A Special Periodic Motion
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe a simple harmonic oscillator.
+
+Explain the link between simple harmonic motion and waves.
+
+The oscillations of a system in which the net force can be described by Hooke’s law are of special importance, because they are very common. They are also the simplest oscillatory systems. Simple Harmonic Motion (SHM) is the name given to oscillatory motion for a system where the net force can be described by Hooke’s law, and such a system is called a simple harmonic oscillator. If the net force can be described by Hooke’s law and there is no damping (by friction or other non-conservative forces), then a simple harmonic oscillator will oscillate with equal displacement on either side of the equilibrium position, as shown for an object on a spring in . The maximum displacement from equilibrium is called the amplitude X. The units for amplitude and displacement are the same, but depend on the type of oscillation. For the object on the spring, the units of amplitude and displacement are meters; whereas for sound oscillations, they have units of pressure (and other types of oscillations have yet other units). Because amplitude is the maximum displacement, it is related to the energy in the oscillation.
+
+Take-Home Experiment: SHM and the Marble
+
+Find a bowl or basin that is shaped like a hemisphere on the inside. Place a marble inside the bowl and tilt the bowl periodically so the marble rolls from the bottom of the bowl to equally high points on the sides of the bowl. Get a feel for the force required to maintain this periodic motion. What is the restoring force and what role does the force you apply play in the simple harmonic motion (SHM) of the marble?
+An object attached to a spring sliding on a frictionless surface is an uncomplicated simple harmonic oscillator. When displaced from equilibrium, the object performs simple harmonic motion that has an amplitude X and a period T. The object’s maximum speed occurs as it passes through equilibrium. The stiffer the spring is, the smaller the period T. The greater the mass of the object is, the greater the period T.
+
+What is so significant about simple harmonic motion? One special thing is that the period T and frequency f of a simple harmonic oscillator are independent of amplitude. The string of a guitar, for example, will oscillate with the same frequency whether plucked gently or hard. Because the period is constant, a simple harmonic oscillator can be used as a clock.
+
+Two important factors do affect the period of a simple harmonic oscillator. The period is related to how stiff the system is. A very stiff object has a large force constant k, which causes the system to have a smaller period. For example, you can adjust a diving board’s stiffness—the stiffer it is, the faster it vibrates, and the shorter its period. Period also depends on the mass of the oscillating system. The more massive the system is, the longer the period. For example, a heavy person on a diving board bounces up and down more slowly than a light one.
+
+In fact, the mass m and the force constant k are the only factors that affect the period and frequency of simple harmonic motion.
+
+Period of Simple Harmonic Oscillator
+
+The period of a simple harmonic oscillator is given by
+
+and, because f=1/T, the frequency of a simple harmonic oscillator is
+
+Note that neither T nor f has any dependence on amplitude.
+
+Take-Home Experiment: Mass and Ruler Oscillations
+
+Find two identical wooden or plastic rulers. Tape one end of each ruler firmly to the edge of a table so that the length of each ruler that protrudes from the table is the same. On the free end of one ruler tape a heavy object such as a few large coins. Pluck the ends of the rulers at the same time and observe which one undergoes more cycles in a time period, and measure the period of oscillation of each of the rulers.
+
+Calculate the Frequency and Period of Oscillations: Bad Shock Absorbers in a Car
+
+If the shock absorbers in a car go bad, then the car will oscillate at the least provocation, such as when going over bumps in the road and after stopping (See ). Calculate the frequency and period of these oscillations for such a car if the car’s mass (including its load) is 900 kg and the force constant (k) of the suspension system is 6.53×104N/m.
+Strategy
+
+Strategy
+
+The frequency of the car’s oscillations will be that of a simple harmonic oscillator as given in the equation f=12πkm. The mass and the force constant are both given.
+Solution
+
+Solution
+
+Enter the known values of k and m:
+
+ f
+ =
+ 
+ 1
+ 2π
+
+ k
+ m
+
+ =
+ 
+ 1
+ 2π
+
+ 6
+ .
+ 
+ 53
+ ×
+ 
+ 10
+
+ 4
+
+ N/m
+
+ 900
+ kg
+
+ .
+
+Calculate the frequency:
+ 12π72.6/s2=1.3656/s1≈1.36/s1=1.36Hz.
+
+You could use T=2πmk to calculate the period, but it is simpler to use the relationship T=1/f and substitute the value just found for f:
+
+ T
+ =
+ 
+ 1
+ f
+
+ =
+ 
+ 1
+ 
+ 1
+ .
+ 356
+ Hz
+
+ =
+ 0
+ 
+ .
+ 738
+ s
+
+ .
+Discussion
+
+Discussion
+
+The values of T and f both seem about right for a bouncing car. You can observe these oscillations if you push down hard on the end of a car and let go.
+
+The Link between Simple Harmonic Motion and Waves
+
+If a time-exposure photograph of the bouncing car were taken as it drove by, the headlight would make a wavelike streak, as shown in . Similarly, shows an object bouncing on a spring as it leaves a wavelike "trace" of its position on a moving strip of paper. Both waves are sine functions. All simple harmonic motion is intimately related to sine and cosine waves.
+
+The displacement as a function of time t in any simple harmonic motion—that is, one in which the net restoring force can be described by Hooke’s law, is given by
+
+where X is amplitude. At t=0, the initial position is x0=X, and the displacement oscillates back and forth with a period T. (When t=T, we get x=X again because cos2π=1.). Furthermore, from this expression for x, the velocity v as a function of time is given by:
+
+where vmax=2πX/T=Xk/m. The object has zero velocity at maximum displacement—for example, v=0 when t=0, and at that time x=X. The minus sign in the first equation for v(t) gives the correct direction for the velocity. Just after the start of the motion, for instance, the velocity is negative because the system is moving back toward the equilibrium point. Finally, we can get an expression for acceleration using Newton’s second law. [Then we have x(t), v(t), t, and a(t), the quantities needed for kinematics and a description of simple harmonic motion.] According to Newton’s second law, the acceleration is a=F/m=kx/m. So, a(t) is also a cosine function:
+
+Hence, a(t) is directly proportional to and in the opposite direction to x(t).
+shows the simple harmonic motion of an object on a spring and presents graphs of x(t), v(t), and a(t) versus time.
+
+The most important point here is that these equations are mathematically straightforward and are valid for all simple harmonic motion. They are very useful in visualizing waves associated with simple harmonic motion, including visualizing how waves add with one another.
+
+Check Your Understanding
+
+Suppose you pluck a banjo string. You hear a single note that starts out loud and slowly quiets over time. Describe what happens to the sound waves in terms of period, frequency and amplitude as the sound decreases in volume.
+
+Frequency and period remain essentially unchanged. Only amplitude decreases as volume decreases.
+
+Check Your Understanding
+
+A babysitter is pushing a child on a swing. At the point where the swing reaches X, where would the corresponding point on a wave of this motion be located?
+X is the maximum deformation, which corresponds to the amplitude of the wave. The point on the wave would either be at the very top or the very bottom of the curve.
+
+Masses and Springs
+
+A realistic mass and spring laboratory. Hang masses from springs and adjust the spring stiffness and damping. You can even slow time. Transport the lab to different planets. A chart shows the kinetic, potential, and thermal energy for each spring.
+
+Test Prep for AP Courses
+
+Use these figures to answer the following questions.
+
+Which of the two pendulums oscillates with larger amplitude?
+
+Which of the two pendulums oscillates at a higher frequency?
+
+A particle of mass 100 g undergoes a simple harmonic motion. The restoring force is provided by a spring with a spring constant of 40 N∙m−1. What is the period of oscillation?
+
+10π
+
+0.5π
+
+0.1π
+
+1π
+
+(c)
+
+The graph shows the simple harmonic motion of a mass m attached to a spring with spring constant k.
+
+What is the displacement at time 8π?
+
+1 m
+
+0 m
+
+Not defined
+
+−1 m
+
+A pendulum of mass 200 g undergoes simple harmonic motion when acted upon by a force of 15 N. The pendulum crosses the point of equilibrium at a speed of 5 m∙s−1. What is the energy of the pendulum at the center of the oscillation?
+
+The energy of the particle at the center of the oscillation is given by
+E = 
+ 1
+ 2
+ 
+ m
+ v
+ 2
+
+ = 
+ 1
+ 2
+ 
+ ×0.2 kg×
+ 
+ (5
+ 
+  m·s
+
+ −1
+
+ )
+ 
+ 2
+
+ = 2.5 J
+
+Section Summary
+
+Simple harmonic motion is oscillatory motion for a system that can be described only by Hooke’s law. Such a system is also called a simple harmonic oscillator.
+
+Maximum displacement is the amplitude X. The period T and frequency f of a simple harmonic oscillator are given by
+ T=2πmk and f=12πkm, where m is the mass of the system.
+T=2πmk and f=12πkm, where m is the mass of the system.
+
+Displacement in simple harmonic motion as a function of time is given by 
+
+ x
+ (
+ t
+ 
+ )
+ =
+ X
+ 
+ cos
+
+ 2π
+ 
+ t
+ 
+ T
+
+ .
+
+The velocity is given by
+
+v(t)=−
+
+vmax
+
+sin2π tT, where
+
+vmax
+
+=k/mX.
+
+The acceleration is found to be 
+
+ a
+ (
+ t
+ 
+ )
+ =
+ 
+ −
+
+ kX
+ 
+ m
+
+ cos 
+
+ 2π
+ t
+ 
+ T
+
+ .
+
+Conceptual Questions
+
+What conditions must be met to produce simple harmonic motion?
+
+(a) If frequency is not constant for some oscillation, can the oscillation be simple harmonic motion?
+
+(b) Can you think of any examples of harmonic motion where the frequency may depend on the amplitude?
+
+Give an example of a simple harmonic oscillator, specifically noting how its frequency is independent of amplitude.
+
+Explain why you expect an object made of a stiff material to vibrate at a higher frequency than a similar object made of a spongy material.
+
+As you pass a freight truck with a trailer on a highway, you notice that its trailer is bouncing up and down slowly. Is it more likely that the trailer is heavily loaded or nearly empty? Explain your answer.
+
+Some people modify cars to be much closer to the ground than when manufactured. Should they install stiffer springs? Explain your answer.
+
+Problems & Exercises
+
+A type of cuckoo clock keeps time by having a mass bouncing on a spring, usually something cute like a cherub in a chair. What force constant is needed to produce a period of 0.500 s for a 0.0150-kg mass?
+2
+ .
+ 37
+ 
+ N/m
+
+If the spring constant of a simple harmonic oscillator is doubled, by what factor will the mass of the system need to change in order for the frequency of the motion to remain the same?
+
+A 0.500-kg mass suspended from a spring oscillates with a period of 1.50 s. How much mass must be added to the object to change the period to 2.00 s?
+
+0.389 kg
+
+By how much leeway (both percentage and mass) would you have in the selection of the mass of the object in the previous problem if you did not wish the new period to be greater than 2.01 s or less than 1.99 s?
+
+Suppose you attach the object with mass m to a vertical spring originally at rest, and let it bounce up and down. You release the object from rest at the spring’s original rest length. (a) Show that the spring exerts an upward force of
+
+2.00mg
+
+ on the object at its lowest point. (b) If the spring has a force constant of 10.0N/m and a 0.25-kg-mass object is set in motion as described, find the amplitude of the oscillations. (c) Find the maximum velocity.
+
+A diver on a diving board is undergoing simple harmonic motion. Her mass is 55.0 kg and the period of her motion is 0.800 s. The next diver is a male whose period of simple harmonic oscillation is 1.05 s. What is his mass if the mass of the board is negligible?
+
+94.7 kg
+
+Suppose a diving board with no one on it bounces up and down in a simple harmonic motion with a frequency of 4.00 Hz. The board has an effective mass of 10.0 kg. What is the frequency of the simple harmonic motion of a 75.0-kg diver on the board?
+
+The device pictured in entertains infants while keeping them from wandering. The child bounces in a harness suspended from a door frame by a spring.
+
+(a) If the spring stretches 0.250 m while supporting an 8.00-kg child, what is its spring constant?
+
+(b) What is the time for one complete bounce of this child? (c) What is the child’s maximum velocity if the amplitude of her bounce is 0.200 m?
+
+A 90.0-kg skydiver hanging from a parachute bounces up and down with a period of 1.50 s. What is the new period of oscillation when a second skydiver, whose mass is 60.0 kg, hangs from the legs of the first, as seen in .
+
+1.94 s
+
+the maximum displacement from the equilibrium position of an object oscillating around the equilibrium position
+the oscillatory motion in a system where the net force can be described by Hooke’s law
+a device that implements Hooke’s law, such as a mass that is attached to a spring, with the other end of the spring being connected to a rigid support such as a wall

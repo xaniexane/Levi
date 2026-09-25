@@ -1,0 +1,91 @@
+# m00102
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Integrating Data from Other Programs into Google Workspace
+
+Integrating Data from Other Programs into Google Workspace
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Integrate data from Google Sheets into a Google Doc
+
+Integrate information from Microsoft programs into a Google program
+
+You may wish to integrate data from a spreadsheet or other program into a Google Doc for the reasons we addressed earlier in this chapter. Linked data will update automatically, turning your Google Doc into a live document with the latest information. Or you might want to copy and paste data from other programs into Google Docs and match its style. You may also use Excel to make tables and graphs, and then import those into Google Sheets. Using these tools can improve the quality of the infographics in your document as well as help to convert your file into a more shareable, collaborative format.
+
+Integrating Data from Google Sheets into a Google Doc
+
+There are two ways to import Google Sheets tables into Google Docs. The first option is copy and paste, similar to the process we used in Excel and Word. To do this, go to the table you want to copy in Sheets and select the cells that are contained in it, as seen in . Press Ctrl+C (Command+C on Mac) on the keyboard to copy it or use another copy method. Then go to the Docs file, place the cursor where you want the table to be pasted, and paste using Ctrl+V or another paste method. Immediately after pressing these keys, a Paste Table dialog box will appear, as seen in , asking you if you want to link the table or paste a static table.
+
+Linked tables or graphs, as discussed earlier, will update automatically in your Doc when the data in the source sheet is updated. Remember, a static table will simply paste the content and will not update automatically. In our example, we chose to have our table linked, so we left the Link to Spreadsheet on, and chose Paste. In , we can see the pasted table.
+
+Linking data from Sheets is not always straightforward. When you edit the original source document—the Google Sheet—you need to make sure that the settings are correct in your Doc so that it will update properly. Let’s assume that we will add rows to the client order list (our Google Sheet) as shown in . This means that the original Sheets table will grow three new rows; this will not immediately be updated in our Google Doc.
+
+The table has increased in size; therefore, we need to make sure that our Google Doc knows how large the table is supposed to be. To do this, go to the linked table in the Doc and hover over the Linked Table Options icon in the upper right of the table, as shown in . Choose Change Range.
+
+A dialog box will appear, and we see that the current range is A1 to G14, but we want it to be A1 to G23, as in . Type the new range, select OK, and the table will be updated.
+
+If you are just updating information in existing cells, and not adding or deleting columns or rows, you will need to tell Google to update the table. For example, let’s say we made a mistake in row 2, and the quantity is supposed to be nine instead of fourteen (). Change the quantity in the Sheets file, then go to the Doc file. Notice you now have a button at the top of the table that says Update, as shows. Select Update, and the table will now be updated with the revised information ().
+
+To unlink the tables and graphs, simply select Unlink from the Linked Table options, and the table will become static, as shows.
+
+Google Docs also enables you to insert a chart or graph that exists in a Google Sheet directly into your Google Doc. A chart or graph that is linked in this way will automatically update when the contents of the Google Sheet update. Using the skills learned in previous chapters, let’s create a summary chart of Quantity Sold per product in your linked table. To incorporate this chart into the Google Doc, put your cursor at the point where you want the chart to be placed in the document. Next, go to the Insert menu and hover over the Chart command. This will open a drop-down menu; select From Sheets, as shown in . This, in turn, will open a dialog box that shows your recent Sheets files.
+
+You can also use the Search tool to find a specific file. Select the one that has the information you want in your chart—in our example, this file is called Sales Data (). Click Select.
+
+The next screen gives you a preview of the graph (). If you have more than one chart or graph created in the Sheets file, as in this example, you will see all of them in the preview and can select the ones you want to include.
+
+When you have selected the charts or graphs to include, choose Import. To ensure that the chart stays updated, tick the checkbox labeled Link to spreadsheet.
+
+Again, if you want to update the chart to reflect changed values in the existing table, just click on the Update button. But if the number of rows or columns has changed, so that the table is no longer the same size, you will need to select the range for the linked table as we did previously. If there are no changes to the size of the table, but only changes in values in existing cells, you can use the Update button. shows the result of the integrated charts.
+
+Integrating Data from Microsoft Programs into a Google Program
+
+To add data from Microsoft 365 (Office) apps to your Google Workspace programs, simply upload the files to Google Drive. Then you have the choice of keeping them as .docx (Word) or .xlsx (Excel) files or converting them to .gdocx (Google Doc) or .gxlsx (Google Sheets), respectively. To convert Microsoft files to Google files, you must open the document and manually choose to save it as a Google Doc or Sheet. When choosing this option, you may have to adjust some of the formatting of your Doc or Sheets, but generally, this is a straightforward approach to bringing files from Microsoft programs into Google.
+
+Data from Microsoft Excel
+
+You can integrate data from Excel into any of the Google applications. First, let’s discuss how to bring Excel information into a Google Doc. If your tables and graphs were created in Excel rather than in Sheets, you can use one of the copy-and-paste methods used when placing Excel tables into a Word file. Select the table, copy it using your preferred method, and then paste it into the Doc using either Paste or Paste Without Formatting (). Notice that much of your Excel formatting is lost when you use the copy-and-paste method.
+
+To ensure that the Excel data gets inserted into your Google Doc in a manner that is closer to what you have in Excel, you need to first upload the Excel file into your Google Drive and open it in Google Sheets.
+
+First, upload the file into your Google Drive. Then, find the file in the Drive and right-click on it. Choose Open with Google Sheets, as in . This will open the file using the Google Sheets app, but remember, it will not be saved as a Google Sheet until you manually choose to do so. After opening the file in Sheets, go to the File window menu and then choose Save as Google Sheets, as shown in .
+
+Another option is to import the Excel information into a new Sheets file. This too will preserve much of your formatting. However, if you have charts or graphs created in the Excel file that are not available in Google, the charts or graphs will not import. Only the data will be imported. Then you can create a chart from within Sheets. This is one limitation of Google: it does not have as many options for creating graphs and charts as you will find in Microsoft. Most of the graph and chart formats available in Google are very basic, such as simple line graphs and bar charts. You will not see some of the more advanced formats, such as the 3D options, as you do in Microsoft.
+
+Additionally, when you import an Excel file into a Sheets file, you might notice that any links you established between that Excel file and another Excel file may not be preserved. If your Excel sheet contains formulas, make sure these are accurate once imported. Importing works well, but the result may need some editing to resolve compatibility issues. It is important to be aware of this limitation when importing Excel information into Sheets.
+
+Finally, once you have imported the data into a Sheets file, you can integrate that information into a Doc if desired. This approach is likely to do a better job of retaining your formatting than the copy-and-paste method.
+
+To begin importing Excel into Sheets, create a new blank worksheet in Sheets. Then, while in Sheets, go to the File window menu and choose Import (). If the Excel sheet has already been uploaded to the Drive as an .xlsx document, you can get the Excel file from the My Drive tab, as seen in . If the file is not in your Google Drive, choose the Upload tab to locate it. A new dialog box will appear, as shown in , asking what you want to do next: create a new spreadsheet, insert a new sheet, or replace the spreadsheet. Select Replace Spreadsheet and then choose Import Data. This will move the entire contents of the Excel spreadsheet into the new Google Sheet you just created ().
+
+Another option for bringing Microsoft files into Google is to change your settings in Google Drive. As a word of caution, when you change your Google Workspace settings, you will change the settings for the entire Google Drive and all files that are stored in the Drive.
+
+First, go to the Settings icon at the top right of your Drive ().
+
+In the General tab, go to the option that says Convert Uploads and check the box Convert uploads to Google Docs editor format. Tick on the checkbox as shown in . Then click on Done. Again, be careful with changing these settings, however, since this will change the process for your whole Google Drive, and not just one file or folder.
+
+Information from Microsoft Word
+
+To import an entire Word document into Google Docs, follow the same steps that you used to import an Excel document into Google Sheets: you can either upload the file into Google Drive, then Open it in Google Docs (); or, if the file is already in your Google Drive, right-click on the file and hover to Open with Google Docs. Again, the file will not be a Google Doc file right away; it will remain a Word file unless you deliberately choose to save it as a Google Doc. This is the same as the procedure for saving an Excel file as a Google Sheet.
+
+If you want to bring in certain portions of a Word document into Google Docs, you can use the copy-and-paste method. For example, to bring just the title and this bulleted list from the report into a new Google Docs, you would first select and copy the information from Word (). In the new Google Doc, you can either use Paste or Paste without formatting to insert the text. and show the difference between using these paste options.
+
+As with Sheets and Excel, there are some known compatibility issues between Docs and Word: The footer and header may not be shown the same, some blank pages may be added in Docs that were not in the Word version of the file, some fonts may not be recognized, the text may have alignment or indent issues, word-wrapped pictures in Word may be out of place, and line spacing may be a little off. You will need to experiment and use the programs consistently to get a better understanding of these compatibility issues and how they might affect your document.
+
+Summary
+
+Data from Google Sheets can be imported into a Google Doc using a few different methods.
+
+Microsoft files, such as Excel tables and charts, Excel worksheets, and Word documents, can be imported into Google Sheets, which can then be imported into Google Docs by using the copy-and-paste method or the Chart command in the Insert window menu. Converted files in both Sheets and Docs will not be identical to the original Excel and Word documents.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises

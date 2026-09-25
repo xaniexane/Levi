@@ -1,0 +1,492 @@
+# m53621
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Antiderivatives
+
+Antiderivatives
+
+Find the general antiderivative of a given function.
+
+Explain the terms and notation used for an indefinite integral.
+
+State the power rule for integrals.
+
+Use antidifferentiation to solve simple initial-value problems.
+
+At this point, we have seen how to calculate derivatives of many functions and have been introduced to a variety of their applications. We now ask a question that turns this process around: Given a function f, how do we find a function with the derivative f and why would we be interested in such a function?
+
+We answer the first part of this question by defining antiderivatives. The antiderivative of a function f is a function with a derivative f. Why are we interested in antiderivatives? The need for antiderivatives arises in many situations, and we look at various examples throughout the remainder of the text. Here we examine one specific example that involves rectilinear motion. In our examination in Derivatives of rectilinear motion, we showed that given a position function s(t) of an object, then its velocity function v(t) is the derivative of s(t)—that is, v(t)=s′(t). Furthermore, the acceleration a(t) is the derivative of the velocity v(t)—that is, a(t)=v′(t)=s″(t). Now suppose we are given an acceleration function a, but not the velocity function v or the position function s. Since a(t)=v′(t), determining the velocity function requires us to find an antiderivative of the acceleration function. Then, since v(t)=s′(t), determining the position function requires us to find an antiderivative of the velocity function. Rectilinear motion is just one case in which the need for antiderivatives arises. We will see many more examples throughout the remainder of the text. For now, let’s look at the terminology and notation for antiderivatives, and determine the antiderivatives for several types of functions. We examine various techniques for finding antiderivatives of more complicated functions later in the text (Introduction to Techniques of Integration).
+
+The Reverse of Differentiation
+
+At this point, we know how to find derivatives of various functions. We now ask the opposite question. Given a function f, how can we find a function with derivative f? If we can find a function F with derivative f, we call F an antiderivative of f.
+
+Definition
+
+A function F is an antiderivative of the function f if
+
+for all x in the domain of f.
+
+Consider the function f(x)=2x. Knowing the power rule of differentiation, we conclude that F(x)=x2 is an antiderivative of f since F′(x)=2x. Are there any other antiderivatives of f? Yes; since the derivative of any constant C is zero, x2+C is also an antiderivative of 2x. Therefore, x2+5 and x2−2 are also antiderivatives. Are there any others that are not of the form x2+C for some constant C? The answer is no. From Corollary 2 of the Mean Value Theorem, we know that if F and G are differentiable functions such that F′(x)=G′(x), then F(x)−G(x)=C for some constant C. This fact leads to the following important theorem.
+
+General Form of an Antiderivative
+
+Let F be an antiderivative of f over an interval I. Then,
+
+for each constant C, the function F(x)+C is also an antiderivative of f over I;
+
+if G is an antiderivative of f over I, there is a constant C for which G(x)=F(x)+C over I.
+
+In other words, the most general form of the antiderivative of f over I is F(x)+C.
+
+We use this fact and our knowledge of derivatives to find all the antiderivatives for several functions.
+
+Finding Antiderivatives
+
+For each of the following functions, find all antiderivatives.
+f(x)=3x2
+f(x)=1x
+f(x)=cosx
+f(x)=ex
+
+Because
+ddx(x3)=3x2
+then F(x)=x3 is an antiderivative of 3x2. Therefore, every antiderivative of 3x2 is of the form x3+C for some constant C, and every function of the form x3+C is an antiderivative of 3x2.
+
+Let f(x)=ln|x|. For x>0,f(x)=ln(x) and
+ddx(lnx)=1x.
+For x<0,f(x)=ln(−x) and
+ddx(ln(−x))=−1−x=1x.
+Therefore,
+ddx(ln|x|)=1x.
+Thus, F(x)=ln|x| is an antiderivative of 1x. Therefore, every antiderivative of 1x is of the form ln|x|+C for some constant C and every function of the form ln|x|+C is an antiderivative of 1x.
+
+We have
+ddx(sinx)=cosx,
+so F(x)=sinx is an antiderivative of cosx. Therefore, every antiderivative of cosx is of the form sinx+C for some constant C and every function of the form sinx+C is an antiderivative of cosx.
+
+Since
+ddx(ex)=ex,
+then F(x)=ex is an antiderivative of ex. Therefore, every antiderivative of ex is of the form ex+C for some constant C and every function of the form ex+C is an antiderivative of ex.
+
+Find all antiderivatives of f(x)=sinx.
+−cosx+C
+
+Hint
+
+What function has a derivative of sinx?
+
+Indefinite Integrals
+
+We now look at the formal notation used to represent antiderivatives and examine some of their properties. These properties allow us to find antiderivatives of more complicated functions. Given a function f, we use the notation f′(x) or dfdx to denote the derivative of f. Here we introduce notation for antiderivatives. If F is an antiderivative of f, we say that F(x)+C is the most general antiderivative of f and write
+
+The symbol ∫ is called an integral sign, and ∫f(x)dx is called the indefinite integral of f.
+
+Definition
+
+Given a function f, the indefinite integral of f, denoted
+
+is the most general antiderivative of f. If F is an antiderivative of f, then
+
+The expression f(x) is called the integrand and the variable x is the variable of integration.
+
+Given the terminology introduced in this definition, the act of finding the antiderivatives of a function f is usually referred to as integrating f.
+
+For a function f and an antiderivative F, the functions F(x)+C, where C is any real number, is often referred to as the family of antiderivatives of f. For example, since x2 is an antiderivative of 2x and any antiderivative of 2x is of the form x2+C, we write
+
+The collection of all functions of the form x2+C, where C is any real number, is known as the family of antiderivatives of 2x. shows a graph of this family of antiderivatives.
+
+For some functions, evaluating indefinite integrals follows directly from properties of derivatives. For example, for n≠−1,
+
+which comes directly from
+
+This fact is known as the power rule for integrals.
+
+Power Rule for Integrals
+
+For n≠−1,
+
+Evaluating indefinite integrals for some other functions is also a straightforward calculation. The following table lists the indefinite integrals for several common functions. A more complete list appears in Appendix B.
+
+Integration Formulas
+
+Differentiation Formula
+∫1xx2−1dx=sec−1|x|+C
+From the definition of indefinite integral of f, we know
+
+if and only if F is an antiderivative of f. Therefore, when claiming that
+
+it is important to check whether this statement is correct by verifying that F′(x)=f(x).
+
+Verifying an Indefinite Integral
+
+Each of the following statements is of the form ∫f(x)dx=F(x)+C. Verify that each statement is correct by showing that F′(x)=f(x).
+∫(x+ex)dx=x22+ex+C
+∫xexdx=xex−ex+C
+
+Since
+ddx(x22+ex+C)=x+ex,
+the statement
+∫(x+ex)dx=x22+ex+C
+is correct.
+Note that we are verifying an indefinite integral for a sum. Furthermore, x22 and ex are antiderivatives of x and ex, respectively, and the sum of the antiderivatives is an antiderivative of the sum. We discuss this fact again later in this section.
+
+Using the product rule, we see that
+ddx(xex−ex+C)=ex+xex−ex=xex.
+Therefore, the statement
+∫xexdx=xex−ex+C
+is correct.
+Note that we are verifying an indefinite integral for a product. The antiderivative xex−ex is not a product of the antiderivatives. Furthermore, the product of antiderivatives, x2ex/2 is not an antiderivative of xex since
+ddx(x2ex2)=xex+x2ex2≠xex.
+In general, the product of antiderivatives is not an antiderivative of a product.
+
+Verify that ∫xcosxdx=xsinx+cosx+C.
+ddx(xsinx+cosx+C)=sinx+xcosx−sinx=xcosx
+
+Hint
+
+Calculate ddx(xsinx+cosx+C).
+
+In , we listed the indefinite integrals for many elementary functions. Let’s now turn our attention to evaluating indefinite integrals for more complicated functions. For example, consider finding an antiderivative of a sum f+g. In a. we showed that an antiderivative of the sum x+ex is given by the sum (x22)+ex—that is, an antiderivative of a sum is given by a sum of antiderivatives. This result was not specific to this example. In general, if F and G are antiderivatives of any functions f and g, respectively, then
+
+Therefore, F(x)+G(x) is an antiderivative of f(x)+g(x) and we have
+
+Similarly,
+
+In addition, consider the task of finding an antiderivative of kf(x), where k is any real number. Since
+
+for any real number k, we conclude that
+
+These properties are summarized next.
+
+Properties of Indefinite Integrals
+
+Let F and G be antiderivatives of f and g, respectively, and let k be any real number.
+
+Sums and Differences
+
+Constant Multiples
+
+From this theorem, we can evaluate any integral involving a sum, difference, or constant multiple of functions with antiderivatives that are known. Evaluating integrals involving products, quotients, or compositions is more complicated (see b. for an example involving an antiderivative of a product.) We look at and address integrals involving these more complicated functions in Introduction to Integration. In the next example, we examine how to use this theorem to calculate the indefinite integrals of several functions.
+
+Evaluating Indefinite Integrals
+
+Evaluate each of the following indefinite integrals:
+∫(5x3−7x2+3x+4)dx
+∫x2+4x3xdx
+∫41+x2dx
+∫tanxcosxdx
+
+Using , we can integrate each of the four terms in the integrand separately. We obtain
+∫(5x3−7x2+3x+4)dx=∫5x3dx−∫7x2dx+∫3xdx+∫4dx.
+From the second part of , each coefficient can be written in front of the integral sign, which gives
+∫5x3dx−∫7x2dx+∫3xdx+∫4dx=5∫x3dx−7∫x2dx+3∫xdx+4∫1dx.
+Using the power rule for integrals, we conclude that
+∫(5x3−7x2+3x+4)dx=54x4−73x3+32x2+4x+C.
+
+Rewrite the integrand as
+x2+4x3x=x2x+4x3x.
+Then, to evaluate the integral, integrate each of these terms separately. Using the power rule, we have
+∫(x+4x2/3)dx=∫xdx+4∫x−2/3dx=12x2+41(−23)+1x(−2/3)+1+C=12x2+12x1/3+C.
+
+Using , write the integral as
+4∫11+x2dx.
+Then, use the fact that tan−1(x) is an antiderivative of 1(1+x2) to conclude that
+∫41+x2dx=4tan−1(x)+C.
+
+Rewrite the integrand as
+tanxcosx=sinxcosxcosx=sinx.
+Therefore,
+∫tanxcosx=∫sinx=−cosx+C.
+
+Evaluate ∫(4x3−5x2+x−7)dx.
+x4−53x3+12x2−7x+C
+
+Hint
+
+Integrate each term in the integrand separately, making use of the power rule.
+
+Initial-Value Problems
+
+We look at techniques for integrating a large variety of functions involving products, quotients, and compositions later in the text. Here we turn to one common use for antiderivatives that arises often in many applications: solving differential equations.
+
+A differential equation is an equation that relates an unknown function and one or more of its derivatives. The equation
+
+is a simple example of a differential equation. Solving this equation means finding a function y with a derivative f. Therefore, the solutions of are the antiderivatives of f. If F is one antiderivative of f, every function of the form y=F(x)+C is a solution of that differential equation. For example, the solutions of
+
+are given by
+
+Sometimes we are interested in determining whether a particular solution curve passes through a certain point (x0,y0)—that is, y(x0)=y0. The problem of finding a function y that satisfies a differential equation
+
+with the additional condition
+
+is an example of an initial-value problem. The condition y(x0)=y0 is known as an initial condition. For example, looking for a function y that satisfies the differential equation
+
+and the initial condition
+
+is an example of an initial-value problem. Since the solutions of the differential equation are y=2x3+C, to find a function y that also satisfies the initial condition, we need to find C such that y(1)=2(1)3+C=5. From this equation, we see that C=3, and we conclude that y=2x3+3 is the solution of this initial-value problem as shown in the following graph.
+
+Solving an Initial-Value Problem
+
+Solve the initial-value problem
+
+First we need to solve the differential equation. If dydx=sinx, then
+
+Next we need to look for a solution y that satisfies the initial condition. The initial condition y(0)=5 means we need a constant C such that −cosx+C=5. Therefore,
+
+The solution of the initial-value problem is y=−cosx+6.
+
+Solve the initial value problem dydx=3x−2,y(1)=2.
+y=−3x+5
+
+Hint
+
+Find all antiderivatives of f(x)=3x−2.
+
+Initial-value problems arise in many applications. Next we consider a problem in which a driver applies the brakes in a car. We are interested in how long it takes for the car to stop. Recall that the velocity function v(t) is the derivative of a position function s(t), and the acceleration a(t) is the derivative of the velocity function. In earlier examples in the text, we could calculate the velocity from the position and then compute the acceleration from the velocity. In the next example we work the other way around. Given an acceleration function, we calculate the velocity function. We then use the velocity function to determine the position function.
+
+Decelerating Car
+
+A car is traveling at the rate of 88 ft/sec (60 mph) when the brakes are applied. The car begins decelerating at a constant rate of 15 ft/sec2.
+
+How many seconds elapse before the car stops?
+
+How far does the car travel during that time?
+
+First we introduce variables for this problem. Let t be the time (in seconds) after the brakes are first applied. Let a(t) be the acceleration of the car (in feet per seconds squared) at time t. Let v(t) be the velocity of the car (in feet per second) at time t. Let s(t) be the car’s position (in feet) beyond the point where the brakes are applied at time t.
+The car is traveling at a rate of 88ft/sec. Therefore, the initial velocity is v(0)=88 ft/sec. Since the car is decelerating, the acceleration is
+a(t)=−15ft/s2.
+The acceleration is the derivative of the velocity,
+v′(t)=−15.
+Therefore, we have an initial-value problem to solve:
+v′(t)=−15,v(0)=88.
+Integrating, we find that
+v(t)=−15t+C.
+Since v(0)=88,C=88. Thus, the velocity function is
+v(t)=−15t+88.
+To find how long it takes for the car to stop, we need to find the time t such that the velocity is zero. Solving −15t+88=0, we obtain t=8815 sec.
+
+To find how far the car travels during this time, we need to find the position of the car after 8815 sec. We know the velocity v(t) is the derivative of the position s(t). Consider the initial position to be s(0)=0. Therefore, we need to solve the initial-value problem
+s′(t)=−15t+88,s(0)=0.
+Integrating, we have
+s(t)=−152t2+88t+C.
+Since s(0)=0, the constant is C=0. Therefore, the position function is
+s(t)=−152t2+88t.
+After t=8815 sec, the position is s(8815)≈258.133 ft.
+
+Suppose the car is traveling at the rate of 44 ft/sec. How long does it take for the car to stop? How far will the car travel?
+2.93sec,64.5ft
+
+Hint
+v(t)=−15t+44.
+
+Key Concepts
+
+If F is an antiderivative of f, then every antiderivative of f is of the form F(x)+C for some constant C.
+
+Solving the initial-value problem
+dydx=f(x),y(x0)=y0
+requires us first to find the set of antiderivatives of f and then to look for the particular antiderivative that also satisfies the initial condition.
+
+For the following exercises, show that F(x) are antiderivatives of f(x).
+F(x)=5x3+2x2+3x+1,f(x)=15x2+4x+3
+F′(x)=15x2+4x+3
+F(x)=x2+4x+1,f(x)=2x+4
+F(x)=x2ex,f(x)=ex(x2+2x)
+F′(x)=2xex+x2ex
+F(x)=cosx,f(x)=−sinx
+F(x)=ex,f(x)=ex
+F′(x)=ex
+
+For the following exercises, find the antiderivative of the function.
+f(x)=1x2+x
+f(x)=ex−3x2+sinx
+F(x)=ex−x3−cos(x)+C
+f(x)=ex+3x−x2
+f(x)=x−1+4sin(2x)
+F(x)=x22−x−2cos(2x)+C
+
+For the following exercises, find the antiderivative F(x) of each function f(x).
+f(x)=5x4+4x5
+f(x)=x+12x2
+F(x)=12x2+4x3+C
+f(x)=1x
+f(x)=(x)3
+F(x)=25(x)5+C
+f(x)=x1/3+(2x)1/3
+f(x)=x1/3x2/3
+F(x)=32x2/3+C
+f(x)=2sin(x)+sin(2x)
+f(x)=sec2(x)+1
+F(x)=x+tan(x)+C
+f(x)=sinxcosx
+f(x)=sin2(x)cos(x)
+F(x)=13sin3(x)+C
+f(x)=0
+f(x)=12csc2(x)+1x2
+F(x)=−12cot(x)−1x+C
+f(x)=cscxcotx+3x
+f(x)=4cscxcotx−secxtanx
+F(x)=−secx−4cscx+C
+f(x)=8secx(secx−4tanx)
+f(x)=12e−4x+sinx
+F(x)=−18e−4x−cosx+C
+
+For the following exercises, evaluate the integral.
+∫(−1)dx
+∫sinxdx
+−cosx+C
+∫(4x+x)dx
+∫3x2+2x2dx
+3x−2x+C
+∫(secxtanx+4x)dx
+∫(4x+x4)dx
+83x3/2+45x5/4+C
+∫(x−1/3−x2/3)dx
+∫14x3+2x+1x3dx
+14x−2x−12x2+C
+∫(ex+e−x)dx
+
+For the following exercises, solve the initial value problem.
+f′(x)=x−3,f(1)=1
+f(x)=−12x2+32
+f′(x)=x+x2,f(0)=2
+f′(x)=cosx+sec2(x),f(π4)=2+22
+f(x)=sinx+tanx+1
+f′(x)=x3−8x2+16x+1,f(0)=0
+f′(x)=2x2−x22,f(1)=0
+f(x)=−16x3−2x+136
+
+For the following exercises, find two possible functions f given the second- or third-order derivatives.
+f″(x)=x2+2
+f″(x)=e−x
+
+Answers may vary; one possible answer is f(x)=e−x
+f″(x)=1+x
+f‴(x)=cosx
+
+Answers may vary; one possible answer is f(x)=−sinx
+f‴(x)=8e−2x−sinx
+
+A car is being driven at a rate of 40 mph when the brakes are applied. The car decelerates at a constant rate of 10 ft/sec2. How long before the car stops?
+5.867 sec
+
+In the preceding problem, calculate how far the car travels in the time it takes to stop.
+
+You are merging onto the freeway, accelerating from rest at a constant rate of 12 ft/sec2. How long does it take you to reach merging speed at 60 mph?
+7.333 sec
+
+Based on the previous problem, how far does the car travel to reach merging speed?
+
+A car company wants to ensure its newest model can stop in 8 sec when traveling at 75 mph. If we assume constant deceleration, find the value of deceleration that accomplishes this.
+13.75 ft/sec2
+
+A car company wants to ensure its newest model can stop in less than 450 ft when traveling at 60 mph. If we assume constant deceleration, find the value of deceleration that accomplishes this.
+
+For the following exercises, find the antiderivative of the function, assuming F(0)=0.
+[T] f(x)=x2+2
+F(x)=13x3+2x
+[T] f(x)=4x−x
+[T] f(x)=sinx+2x
+F(x)=x2−cosx+1
+[T] f(x)=ex
+[T] f(x)=1(x+1)2
+F(x)=−1(x+1)+1
+[T] f(x)=e−2x+3x2
+
+For the following exercises, determine whether the statement is true or false. Either prove it is true or find a counterexample if it is false.
+
+If f(x) is the antiderivative of v(x), then 2f(x) is the antiderivative of 2v(x).
+
+True
+
+If f(x) is the antiderivative of v(x), then f(2x) is the antiderivative of v(2x).
+
+If f(x) is the antiderivative of v(x), then f(x)+1 is the antiderivative of v(x)+1.
+
+False
+
+If f(x) is the antiderivative of v(x), then (f(x))2 is the antiderivative of (v(x))2.
+
+Chapter Review Exercises
+True or False? Justify your answer with a proof or a counterexample. Assume that f(x) is continuous and differentiable unless stated otherwise.
+
+If f(−1)=−6 and f(1)=2, then there exists at least one point x∈[−1,1] such that f′(x)=4.
+
+True, by Mean Value Theorem
+
+If f′(c)=0, there is a maximum or minimum at x=c.
+
+There is a function such that f(x)<0,f′(x)>0, and f″(x)<0. (A graphical “proof” is acceptable for this answer.)
+
+True
+
+There is a function such that there is both an inflection point and a critical point for some value x=a.
+
+Given the graph of f′, determine where f is increasing or decreasing.
+
+Increasing: (−2,0)∪(4,∞), decreasing: (−∞,−2)∪(0,4)
+
+The graph of f is given below. Draw f′.
+
+Find the linear approximation L(x) to y=x2+tan(πx) near x=14.
+L(x)=1716+12(1+4π)(x−14)
+
+Find the differential of y=x2−5x−6 and evaluate for x=2 with dx=0.1.
+
+Find the critical points and the local and absolute extrema of the following functions on the given interval.
+f(x)=x+sin2(x) over [0,π]
+
+Critical point: x=3π4, absolute minimum: x=0, absolute maximum: x=π
+f(x)=3x4−4x3−12x2+6 over [−3,3]
+
+Determine over which intervals the following functions are increasing, decreasing, concave up, and concave down.
+x(t)=3t4−8t3−18t2
+
+Increasing: (−1,0)∪(3,∞), decreasing: (−∞,−1)∪(0,3), concave up: (−∞,13(2−13))∪(13(2+13),∞), concave down: (13(2−13),13(2+13))
+y=x+sin(πx)
+g(x)=x−x
+
+Increasing: (14,∞), decreasing: (0,14), concave up: (0,∞), concave down: nowhere
+f(θ)=sin(3θ)
+
+Evaluate the following limits.
+limx→∞3xx2+1x4−1
+3
+limx→∞cos(1x)
+limx→1x−1sin(πx)
+−1π
+limx→∞(3x)1/x
+
+Use Newton’s method to find the first two iterations, given the starting point.
+y=x3+1,x0=0.5
+x1=−1,x2=−1
+y=1x+1=12,x0=0
+
+Find the antiderivatives F(x) of the following functions.
+g(x)=x−1x2
+F(x)=2x3/23+1x+C
+f(x)=2x+6cosx,F(π)=π2+2
+
+Graph the following functions by hand. Make sure to label the inflection points, critical points, zeros, and asymptotes.
+y=1x(x+1)2
+Inflection points: none; critical points: x=−13; zeros: none; vertical asymptotes: x=−1, x=0; horizontal asymptote: y=0
+y=x−4−x2
+
+A car is being compacted into a rectangular solid. The volume is decreasing at a rate of 2 m3/sec. The length and width of the compactor are square, but the height is not the same length as the length and width. If the length and width walls move toward each other at a rate of 0.25 m/sec, find the rate at which the height is changing when the length and width are 2 m and the height is 1.5 m.
+
+The height is decreasing at a rate of 0.125 m/sec
+
+A rocket is launched into space; its kinetic energy is given by K(t)=(12)m(t)v(t)2, where K is the kinetic energy in joules, m is the mass of the rocket in kilograms, and v is the velocity of the rocket in meters/second. Assume the velocity is increasing at a rate of 15 m/sec2 and the mass is decreasing at a rate of 10 kg/sec because the fuel is being burned. At what rate is the rocket’s kinetic energy changing when the mass is 2000 kg and the velocity is 5000 m/sec? Give your answer in mega-Joules per second (MJ/s), which is equivalent to 106 J/s.
+
+The famous Regiomontanus’ problem for angle maximization was proposed during the 15th century. A painting hangs on a wall with the bottom of the painting a distance a feet above eye level, and the top b feet above eye level. What distance x (in feet) from the wall should the viewer stand to maximize the angle subtended by the painting, θ?
+x=ab feet
+
+An airline sells tickets from Tokyo to Detroit for $1200. There are 500 seats available and a typical flight books 350 seats. For every $10 decrease in price, the airline observes an additional five seats sold. What should the fare be to maximize profit? How many passengers would be onboard?
+
+a function F such that F′(x)=f(x) for all x in the domain of f is an antiderivative of f
+the most general antiderivative of f(x) is the indefinite integral of f; we use the notation ∫f(x)dx to denote the indefinite integral of f
+a problem that requires finding a function y that satisfies the differential equation dydx=f(x) together with the initial condition y(x0)=y0

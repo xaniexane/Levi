@@ -1,0 +1,324 @@
+# m42180
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Rotational Kinetic Energy: Work and Energy Revisited
+
+Rotational Kinetic Energy: Work and Energy Revisited
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Derive the equation for rotational work.
+
+Calculate rotational kinetic energy.
+
+Demonstrate the Law of Conservation of Energy.
+
+In this module, we will learn about work and energy associated with rotational motion. shows a worker using an electric grindstone propelled by a motor. Sparks are flying, and noise and vibration are created as layers of steel are pared from the pole. The stone continues to turn even after the motor is turned off, but it is eventually brought to a stop by friction. Clearly, the motor had to work to get the stone spinning. This work went into heat, light, sound, vibration, and considerable rotational kinetic energy.
+
+Work must be done to rotate objects such as grindstones or merry-go-rounds. Work was defined in Uniform Circular Motion and Gravitation for translational motion, and we can build on that knowledge when considering work done in rotational motion. The simplest rotational situation is one in which the net force is exerted perpendicular to the radius of a disk (as shown in ) and remains perpendicular as the disk starts to rotate. The force is parallel to the displacement, and so the net work done is the product of the force times the arc length traveled:
+
+To get torque and other rotational quantities into the equation, we multiply and divide the right-hand side of the equation by r, and gather terms:
+
+We recognize that r net F= net τ and Δs/r=θ, so that
+
+This equation is the expression for rotational work. It is very similar to the familiar definition of translational work as force multiplied by distance. Here, torque is analogous to force, and angle is analogous to distance. The equation net W=net τθ is valid in general, even though it was derived for a special case.
+
+To get an expression for rotational kinetic energy, we must again perform some algebraic manipulations. The first step is to note that net τ=Iα, so that
+
+Making Connections
+
+Work and energy in rotational motion are completely analogous to work and energy in translational motion, first presented in Uniform Circular Motion and Gravitation.
+
+Now, we solve one of the rotational kinematics equations for αθ. We start with the equation
+
+Next, we solve for αθ:
+
+Substituting this into the equation for net W and gathering terms yields
+
+This equation is the work-energy theorem for rotational motion only. As you may recall, net work changes the kinetic energy of a system. Through an analogy with translational motion, we define the term 12Iω2 to be rotational kinetic energy KErot for an object with a moment of inertia I and an angular velocity ω:
+
+The expression for rotational kinetic energy is exactly analogous to translational kinetic energy, with I being analogous to m and ω to v. Rotational kinetic energy has important effects. Flywheels, for example, can be used to store large amounts of rotational kinetic energy in a vehicle, as seen in .
+
+Calculating the Work and Energy for Spinning a Grindstone
+
+Consider a person who spins a large grindstone by placing her hand on its edge and exerting a force through part of a revolution as shown in . In this example, we verify that the work done by the torque she exerts equals the change in rotational energy. (a) How much work is done if she exerts a force of 200 N through a rotation of 1.00 rad(57.3º)? The force is kept perpendicular to the grindstone’s 0.320-m radius at the point of application, and the effects of friction are negligible. (b) What is the final angular velocity if the grindstone has a mass of 85.0 kg? (c) What is the final rotational kinetic energy? (It should equal the work.)
+Strategy
+
+Strategy
+
+To find the work, we can use the equation net W=net τθ. We have enough information to calculate the torque and are given the rotation angle. In the second part, we can find the final angular velocity using one of the kinematic relationships. In the last part, we can calculate the rotational kinetic energy from its expression in KErot=12Iω2.
+Solution for (a)
+
+Solution for (a)
+
+The net work is expressed in the equation
+
+where net τ is the applied force multiplied by the radius (rF) because there is no retarding friction, and the force is perpendicular to r. The angle θ is given. Substituting the given values in the equation above yields
+
+Noting that 1 N·m=1 J,
+Solution for (b)
+
+Solution for (b)
+
+To find ω from the given information requires more than one step. We start with the kinematic relationship in the equation
+
+Note that ω0=0 because we start from rest. Taking the square root of the resulting equation gives
+
+Now we need to find α. One possibility is
+
+where the torque is
+
+The formula for the moment of inertia for a disk is found in :
+
+Substituting the values of torque and moment of inertia into the expression for α, we obtain
+
+Now, substitute this value and the given value for θ into the above expression for ω:
+Solution for (c)
+
+Solution for (c)
+
+The final rotational kinetic energy is
+
+Both I and ω were found above. Thus,
+Discussion
+
+Discussion
+
+The final rotational kinetic energy equals the work done by the torque, which confirms that the work done went into rotational kinetic energy. We could, in fact, have used an expression for energy instead of a kinematic relation to solve part (b). We will do this in later examples.
+
+Helicopter pilots are quite familiar with rotational kinetic energy. They know, for example, that a point of no return will be reached if they allow their blades to slow below a critical angular velocity during flight. The blades lose lift, and it is impossible to immediately get the blades spinning fast enough to regain it. Rotational kinetic energy must be supplied to the blades to get them to rotate faster, and enough energy cannot be supplied in time to avoid a crash. Because of weight limitations, helicopter engines are too small to supply both the energy needed for lift and to replenish the rotational kinetic energy of the blades once they have slowed down. The rotational kinetic energy is put into them before takeoff and must not be allowed to drop below this crucial level. One possible way to avoid a crash is to use the gravitational potential energy of the helicopter to replenish the rotational kinetic energy of the blades by losing altitude and aligning the blades so that the helicopter is spun up in the descent. Of course, if the helicopter’s altitude is too low, then there is insufficient time for the blade to regain lift before reaching the ground.
+
+Problem-Solving Strategy for Rotational Energy
+Determine that energy or work is involved in the rotation.
+Determine the system of interest. A sketch usually helps.
+Analyze the situation to determine the types of work and energy involved.
+For closed systems, mechanical energy is conserved. That is, KEi+PEi=KEf+PEf. Note that KEi and KEf may each include translational and rotational contributions.
+For open systems, mechanical energy may not be conserved, and other forms of energy (referred to previously as OE), such as heat transfer, may enter or leave the system. Determine what they are, and calculate them as necessary.
+Eliminate terms wherever possible to simplify the algebra.
+Check the answer to see if it is reasonable.
+
+Calculating Helicopter Energies
+
+A typical small rescue helicopter, similar to the one in , has four blades, each is 4.00 m long and has a mass of 50.0 kg. The blades can be approximated as thin rods that rotate about one end of an axis perpendicular to their length. The helicopter has a total loaded mass of 1000 kg. (a) Calculate the rotational kinetic energy in the blades when they rotate at 300 rpm. (b) Calculate the translational kinetic energy of the helicopter when it flies at 20.0 m/s, and compare it with the rotational energy in the blades. (c) To what height could the helicopter be raised if all of the rotational kinetic energy could be used to lift it?
+Strategy
+
+Strategy
+
+Rotational and translational kinetic energies can be calculated from their definitions. The last part of the problem relates to the idea that energy can change form, in this case from rotational kinetic energy to gravitational potential energy.
+Solution for (a)
+
+Solution for (a)
+
+The rotational kinetic energy is
+
+We must convert the angular velocity to radians per second and calculate the moment of inertia before we can find KErot. The angular velocity ω is
+
+The moment of inertia of one blade will be that of a thin rod rotated about its end, found in . The total I is four times this moment of inertia, because there are four blades. Thus,
+
+Entering ω and I into the expression for rotational kinetic energy gives
+Solution for (b)
+
+Solution for (b)
+
+Translational kinetic energy was defined in Uniform Circular Motion and Gravitation. Entering the given values of mass and velocity, we obtain
+
+To compare kinetic energies, we take the ratio of translational kinetic energy to rotational kinetic energy. This ratio is
+Solution for (c)
+
+Solution for (c)
+
+At the maximum height, all rotational kinetic energy will have been converted to gravitational energy. To find this height, we equate those two energies:
+
+or
+
+We now solve for h and substitute known values into the resulting equation
+Discussion
+
+Discussion
+
+The ratio of translational energy to rotational kinetic energy is only 0.380. This ratio tells us that most of the kinetic energy of the helicopter is in its spinning blades—something you probably would not suspect. The 53.7 m height to which the helicopter could be raised with the rotational kinetic energy is also impressive, again emphasizing the amount of rotational kinetic energy in the blades.
+
+Making Connections
+
+Conservation of energy includes rotational motion, because rotational kinetic energy is another form of 
+
+ KE
+
+ . Uniform Circular Motion and Gravitation has a detailed treatment of conservation of energy.
+
+How Thick Is the Soup? Or Why Don’t All Objects Roll Downhill at the Same Rate?
+
+One of the quality controls in a tomato soup factory consists of rolling filled cans down a ramp. If they roll too fast, the soup is too thin. Why should cans of identical size and mass roll down an incline at different rates? And why should the thickest soup roll the slowest?
+
+The easiest way to answer these questions is to consider energy. Suppose each can starts down the ramp from rest. Each can starting from rest means each starts with the same gravitational potential energy PEgrav, which is converted entirely to KE, provided each rolls without slipping. KE, however, can take the form of KEtrans or KErot, and total KE is the sum of the two. If a can rolls down a ramp, it puts part of its energy into rotation, leaving less for translation. Thus, the can goes slower than it would if it slid down. Furthermore, the thin soup does not rotate, whereas the thick soup does, because it sticks to the can. The thick soup thus puts more of the can’s original gravitational potential energy into rotation than the thin soup, and the can rolls more slowly, as seen in .
+
+Assuming no losses due to friction, there is only one force doing work—gravity. Therefore the total work done is the change in kinetic energy. As the cans start moving, the potential energy is changing into kinetic energy. Conservation of energy gives
+
+More specifically,
+
+or
+
+So, the initial mgh is divided between translational kinetic energy and rotational kinetic energy; and the greater I is, the less energy goes into translation. If the can slides down without friction, then ω=0 and all the energy goes into translation; thus, the can goes faster.
+
+Take-Home Experiment
+
+Locate several cans each containing different types of food. First, predict which can will win the race down an inclined plane and explain why. See if your prediction is correct. You could also do this experiment by collecting several empty cylindrical containers of the same size and filling them with different materials such as wet or dry sand.
+
+Calculating the Speed of a Cylinder Rolling Down an Incline
+
+Calculate the final speed of a solid cylinder that rolls down a 2.00-m-high incline. The cylinder starts from rest, has a mass of 0.750 kg, and has a radius of 4.00 cm.
+Strategy
+
+Strategy
+
+We can solve for the final velocity using conservation of energy, but we must first express rotational quantities in terms of translational quantities to end up with v as the only unknown.
+Solution
+
+Solution
+
+Conservation of energy for this situation is written as described above:
+
+Before we can solve for v , we must get an expression for I from . Because v and ω are related (note here that the cylinder is rolling without slipping), we must also substitute the relationship ω=v/R into the expression. These substitutions yield
+
+Interestingly, the cylinder’s radius R and mass m cancel, yielding
+
+Solving algebraically, the equation for the final velocity 
+
+ v
+
+ gives
+
+Substituting known values into the resulting expression yields
+Discussion
+
+Discussion
+
+Because m and R cancel, the result v=43gh1/2 is valid for any solid cylinder, implying that all solid cylinders will roll down an incline at the same rate independent of their masses and sizes. (Rolling cylinders down inclines is what Galileo actually did to show that objects fall at the same rate independent of mass.) Note that if the cylinder slid without friction down the incline without rolling, then the entire gravitational potential energy would go into translational kinetic energy. Thus, 12mv2=mgh and v=(2gh)1/2, which is 22% greater than (4gh/3)1/2. That is, the cylinder would go faster at the bottom.
+
+Check Your Understanding
+Analogy of Rotational and Translational Kinetic EnergyIs rotational kinetic energy completely analogous to translational kinetic energy? What, if any, are their differences? Give an example of each type of kinetic energy.
+
+Analogy of Rotational and Translational Kinetic Energy
+
+Yes, rotational and translational kinetic energy are exact analogs. They both are the energy of motion involved with the coordinated (non-random) movement of mass relative to some reference frame. The only difference between rotational and translational kinetic energy is that translational is straight line motion while rotational is not. An example of both kinetic and translational kinetic energy is found in a bike tire while being ridden down a bike path. The rotational motion of the tire means it has rotational kinetic energy while the movement of the bike along the path means the tire also has translational kinetic energy. If you were to lift the front wheel of the bike and spin it while the bike is stationary, then the wheel would have only rotational kinetic energy relative to the Earth.
+
+Test Prep for AP Courses
+
+Gear A, which turns clockwise, meshes with gear B, which turns counterclockwise. When more force is applied through gear A, torque is created. How does the angular velocity of gear B change as a result?
+
+It increases in magnitude.
+
+It decreases in magnitude.
+
+It changes direction.
+
+It stays the same.
+
+(a)
+
+Which will cause a greater increase in the angular velocity of a disk: doubling the torque applied or halving the radius at which the torque is applied? Explain.
+
+Which measure would not be useful to help you determine the change in angular velocity when the torque on a fishing reel is increased?
+
+the radius of the reel
+
+the amount of line that unspools
+
+the angular momentum of the fishing line
+
+the time it takes the line to unspool
+
+(c)
+
+What data could you collect to study the change in angular velocity when two people push a merry-go-round instead of one, providing twice as much torque? How would you use the data you collect?
+
+Section Summary
+
+The rotational kinetic energy KErot for an object with a moment of inertia I and an angular velocity ω is given by
+KErot=12Iω2.
+
+Helicopters store large amounts of rotational kinetic energy in their blades. This energy must be put into the blades before takeoff and maintained until the end of the flight. The engines do not have enough power to simultaneously provide lift and put significant rotational energy into the blades.
+
+Work and energy in rotational motion are completely analogous to work and energy in translational motion.
+
+The equation for the work-energy theorem for rotational motion is,net W=12Iω2−12I
+
+ ω
+ 0
+
+ 2
+
+ .
+
+Conceptual Questions
+
+Describe the energy transformations involved when a yo-yo is thrown downward and then climbs back up its string to be caught in the user’s hand.
+
+What energy transformations are involved when a dragster engine is revved, its clutch let out rapidly, its tires spun, and it starts to accelerate forward? Describe the source and transformation of energy at each step.
+
+The Earth has more rotational kinetic energy now than did the cloud of gas and dust from which it formed. Where did this energy come from?
+
+Problems & Exercises
+
+This problem considers energy and work aspects of —use data from that example as needed. (a) Calculate the rotational kinetic energy in the merry-go-round plus child when they have an angular velocity of 20.0 rpm. (b) Using energy considerations, find the number of revolutions the father will have to push to achieve this angular velocity starting from rest. (c) Again, using energy considerations, calculate the force the father must exert to stop the merry-go-round in two revolutions
+
+(a) 185 J
+
+(b) 0.0785 rev
+
+(c) W=9.81 N
+
+What is the final velocity of a hoop that rolls without slipping down a 5.00-m-high hill, starting from rest?
+
+(a) Calculate the rotational kinetic energy of Earth on its axis. (b) What is the rotational kinetic energy of Earth in its orbit around the Sun?
+
+(a) 2.57×1029 J
+
+(b) KErot=2.65×1033 J
+
+Calculate the rotational kinetic energy in the motorcycle wheel () if its angular velocity is 120 rad/s. Assume M = 12.0 kg, R1 = 0.280 m, and R2 = 0.330 m.
+
+A baseball pitcher throws the ball in a motion where there is rotation of the forearm about the elbow joint as well as other movements. If the linear velocity of the ball relative to the elbow joint is 20.0 m/s at a distance of 0.480 m from the joint and the moment of inertia of the forearm is 0.500 kg⋅m2, what is the rotational kinetic energy of the forearm?
+
+While punting a football, a kicker rotates her leg about the hip joint. The moment of inertia of the leg is 3.75 kg⋅m2 and its rotational kinetic energy is 175 J. (a) What is the angular velocity of the leg? (b) What is the velocity of tip of the punter’s shoe if it is 1.05 m from the hip joint? (c) Explain how the football can be given a velocity greater than the tip of the shoe (necessary for a decent kick distance).
+
+A bus contains a 1500 kg flywheel (a disk that has a 0.600 m radius) and has a total mass of 10,000 kg. (a) Calculate the angular velocity the flywheel must have to contain enough energy to take the bus from rest to a speed of 20.0 m/s, assuming 90.0% of the rotational kinetic energy can be transformed into translational energy. (b) How high a hill can the bus climb with this stored energy and still have a speed of 3.00 m/s at the top of the hill? Explicitly show how you follow the steps in the Problem-Solving Strategy for Rotational Energy.
+
+(a) 128 rad/s
+
+(b) 19.9 m
+
+A ball with an initial velocity of 8.00 m/s rolls up a hill without slipping. Treating the ball as a spherical shell, calculate the vertical height it reaches. (b) Repeat the calculation for the same ball if it slides up the hill without rolling.
+
+While exercising in a fitness center, a man lies face down on a bench and lifts a weight with one lower leg by contacting the muscles in the back of the upper leg. (a) Find the angular acceleration produced given the mass lifted is 10.0 kg at a distance of 28.0 cm from the knee joint, the moment of inertia of the lower leg is 0.900 kg⋅m2, the muscle force is 1500 N, and its effective perpendicular lever arm is 3.00 cm. (b) How much work is done if the leg rotates through an angle of 20.0º with a constant force exerted by the muscle?
+
+(a) 10.4 rad/s2
+
+(b) net W=6.11 J
+
+To develop muscle tone, a woman lifts a 2.00-kg weight held in her hand. She uses her biceps muscle to flex the lower arm through an angle of 60.0º. (a) What is the angular acceleration if the weight is 24.0 cm from the elbow joint, her forearm has a moment of inertia of 0.250 kg⋅m2, and the net force she exerts is 750 N at an effective perpendicular lever arm of 2.00 cm? (b) How much work does she do?
+
+Consider two cylinders that start down identical inclines from rest except that one is frictionless. Thus one cylinder rolls without slipping, while the other slides frictionlessly without rolling. They both travel a short distance at the bottom and then start up another incline. (a) Show that they both reach the same height on the other incline, and that this height is equal to their original height. (b) Find the ratio of the time the rolling cylinder takes to reach the height on the second incline to the time the sliding cylinder takes to reach the height on the second incline. (c) Explain why the time for the rolling motion is greater than that for the sliding motion.
+
+What is the moment of inertia of an object that rolls without slipping down a 2.00-m-high incline starting from rest, and has a final velocity of 6.00 m/s? Express the moment of inertia as a multiple of MR2, where M is the mass of the object and R is its radius.
+
+Suppose a 200-kg motorcycle has two wheels like, the one described in Problem 10.15 and is heading toward a hill at a speed of 30.0 m/s. (a) How high can it coast up the hill, if you neglect friction? (b) How much energy is lost to friction if the motorcycle only gains an altitude of 35.0 m before coming to rest?
+
+In softball, the pitcher throws with the arm fully extended (straight at the elbow). In a fast pitch the ball leaves the hand with a speed of 139 km/h. (a) Find the rotational kinetic energy of the pitcher’s arm and ball together given that the arm's moment of inertia is 0.720 kg⋅m2 and the ball leaves the hand at a distance of 0.600 m from the pivot at the shoulder. (b) What force did the muscles exert to cause the arm to rotate if their effective perpendicular lever arm is 4.00 cm and the ball is 0.156 kg?
+
+(a) 1.49 kJ
+
+(b) 2.52×104 N
+Construct Your Own Problem
+
+Construct Your Own Problem
+
+Consider the work done by a spinning skater pulling his arms in to increase his rate of spin. Construct a problem in which you calculate the work done with a “force multiplied by distance” calculation and compare it to the skater’s increase in kinetic energy.
+
+if one or more external forces act upon a rigid object, causing its kinetic energy to change from KE1 to KE2, then the work W done by the net force is equal to the change in kinetic energy
+the kinetic energy due to the rotation of an object. This is part of its total kinetic energy

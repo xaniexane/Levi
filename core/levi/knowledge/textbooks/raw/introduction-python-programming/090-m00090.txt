@@ -1,0 +1,49 @@
+# m00090
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Recursion with strings and lists
+
+Recursion with strings and lists
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Demonstrate the use of recursion to solve a string problem.
+
+Demonstrate the use of recursion to solve a list problem.
+
+Use the built-in count() list function.
+
+Recursion with strings
+
+A word that is spelled the same forward and backward is called a palindrome. Ex: racecar.
+
+Recursion can be used to identify whether a given word is a palindrome.
+
+Identifying a palindrome
+
+Recursion with strings
+
+Refer to the animation above.
+
+Recursion with lists
+
+The animation below shows a recursive way to check whether two lists contain the same items but in different order.
+
+The count() function returns a count of the number of items in a list that match the given item, and returns 0 otherwise. Ex: For list_num = [1, 3, 3, 4], list_num.count(3) returns 2.
+
+Checking list permutations
+
+List permutations
+
+Refer to the above animation. What would permu_check() return for each pair of lists below?
+
+Remove duplicates
+
+Write a recursive rem_dup() function that removes duplicates from a list.
+
+Ex: List [5, 5, 2, 1, 3, 1, 6] should result in an output list [5, 2, 1, 3, 6].

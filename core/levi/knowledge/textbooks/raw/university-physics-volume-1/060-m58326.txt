@@ -1,0 +1,234 @@
+# m58326
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Rotational Variables
+
+Rotational Variables
+
+By the end of this section, you will be able to:
+
+Describe the physical meaning of rotational variables as applied to fixed-axis rotation
+
+Explain how angular velocity is related to tangential speed
+
+Calculate the instantaneous angular velocity given the angular position function
+
+Find the angular velocity and angular acceleration in a rotating system
+
+Calculate the average angular acceleration when the angular velocity is changing
+
+Calculate the instantaneous angular acceleration given the angular velocity function
+
+So far in this text, we have mainly studied translational motion, including the variables that describe it: displacement, velocity, and acceleration. Now we expand our description of motion to rotation—specifically, rotational motion about a fixed axis. We will find that rotational motion is described by a set of related variables similar to those we used in translational motion.
+
+Angular Velocity
+
+Uniform circular motion (discussed previously in Motion in Two and Three Dimensions) is motion in a circle at constant speed. Although this is the simplest case of rotational motion, it is very useful for many situations, and we use it here to introduce rotational variables.
+
+In , we show a particle moving in a circle. The coordinate system is fixed and serves as a frame of reference to define the particle’s position. Its position vector from the origin of the circle to the particle sweeps out the angle θ, which increases in the counterclockwise direction as the particle moves along its circular path. The angle θ is called the angular position of the particle. As the particle moves in its circular path, it also traces an arc length s.
+
+The angle is related to the radius of the circle and the arc length by
+
+The angle θ, the angular position of the particle along its path, has units of radians (rad). There are 2π radians in 360°. Note that the radian measure is a ratio of length measurements, and therefore is a dimensionless quantity. As the particle moves along its circular path, its angular position changes and it undergoes angular displacements Δθ.
+
+We can assign vectors to the quantities in . The angle θ→ is a vector out of the page in . The angular position vector r→ and the arc length s→ both lie in the plane of the page. These three vectors are related to each other by
+
+That is, the arc length is the cross product of the angle vector and the position vector, as shown in .
+
+The magnitude of the angular velocity, denoted by ω, is the time rate of change of the angle θ as the particle moves in its circular path. The instantaneous angular velocity is defined as the limit in which Δt→0 in the average angular velocity ω–=ΔθΔt:
+
+where θ is the angle of rotation (). The units of angular velocity are radians per second (rad/s). Angular velocity can also be referred to as the rotation rate in radians per second. In many situations, we are given the rotation rate in revolutions/s or cycles/s. To find the angular velocity, we must multiply revolutions/s by 2π, since there are 2π radians in one complete revolution. Since the direction of a positive angle in a circle is counterclockwise, we take counterclockwise rotations as being positive and clockwise rotations as negative.
+
+We can see how angular velocity is related to the tangential speed of the particle by differentiating with respect to time. We rewrite as
+
+Taking the derivative with respect to time and noting that the radius r is a constant, we have
+
+where θdrdt=0. Here dsdt is just the tangential speed vt of the particle in . Thus, by using , we arrive at
+
+That is, the tangential speed of the particle is its angular velocity times the radius of the circle. From , we see that the tangential speed of the particle increases with its distance from the axis of rotation for a constant angular velocity. This effect is shown in . Two particles are placed at different radii on a rotating disk with a constant angular velocity. As the disk rotates, the tangential speed increases linearly with the radius from the axis of rotation. In , we see that v1=r1ω1 and v2=r2ω2. But the disk has a constant angular velocity, so ω1=ω2. This means v1r1=v2r2 or v2=(r2r1)v1. Thus, since r2>r1, v2>v1.
+
+Up until now, we have discussed the magnitude of the angular velocity ω=dθ/dt, which is a scalar quantity—the change in angular position with respect to time. The vector ω→ is the vector associated with the angular velocity and points along the axis of rotation. This is useful because when a rigid body is rotating, we want to know both the axis of rotation and the direction that the body is rotating about the axis, clockwise or counterclockwise. The angular velocity ω→ gives us this information. The angular velocity ω→ has a direction determined by what is called the right-hand rule. The right-hand rule is such that if the fingers of your right hand wrap counterclockwise from the x-axis (the direction in which θ increases) toward the y-axis, your thumb points in the direction of the positive z-axis (). An angular velocity ω→ that points along the positive z-axis therefore corresponds to a counterclockwise rotation, whereas an angular velocity ω→ that points along the negative z-axis corresponds to a clockwise rotation.
+
+Similar to , one can state a cross product relation to the vector of the tangential velocity as stated in . Therefore, we have
+
+That is, the tangential velocity is the cross product of the angular velocity and the position vector, as shown in . From part (a) of this figure, we see that with the angular velocity in the positive z-direction, the rotation in the xy-plane is counterclockwise. In part (b), the angular velocity is in the negative z-direction, giving a clockwise rotation in the xy-plane.
+Rotation of a Flywheel
+A flywheel rotates such that it sweeps out an angle at the rate of θ=ωt=(45.0rad/s)t radians. The wheel rotates counterclockwise when viewed in the plane of the page. (a) What is the angular velocity of the flywheel? (b) What direction is the angular velocity? (c) How many radians does the flywheel rotate through in 30 s? (d) What is the tangential speed of a point on the flywheel 10 cm from the axis of rotation?
+
+Rotation of a Flywheel
+Strategy
+The functional form of the angular position of the flywheel is given in the problem as θ(t)=ωt, so by taking the derivative with respect to time, we can find the angular velocity. We use the right-hand rule to find the angular velocity. To find the angular displacement of the flywheel during 30 s, we seek the angular displacement Δθ, where the change in angular position is between 0 and 30 s. To find the tangential speed of a point at a distance from the axis of rotation, we multiply its distance times the angular velocity of the flywheel.
+
+Strategy
+Solution
+
+Solution
+ω=dθdt=45rad/s. We see that the angular velocity is a constant.
+
+By the right-hand rule, we curl the fingers in the direction of rotation, which is counterclockwise in the plane of the page, and the thumb points in the direction of the angular velocity, which is out of the page.
+Δθ=θ(30s)−θ(0s)=45.0(30.0s)−45.0(0s)=1350.0rad.
+vt=rω=(0.1m)(45.0rad/s)=4.5m/s.
+Significance
+In 30 s, the flywheel has rotated through quite a number of revolutions, about 215 if we divide the angular displacement by 2π. A massive flywheel can be used to store energy in this way, if the losses due to friction are minimal. Recent research has considered superconducting bearings on which the flywheel rests, with zero energy loss due to friction.
+
+Significance
+
+Angular Acceleration
+
+We have just discussed angular velocity for uniform circular motion, but not all motion is uniform. Envision an ice skater spinning with his arms outstretched—when he pulls his arms inward, his angular velocity increases. Or think about a computer’s hard disk slowing to a halt as the angular velocity decreases. We will explore these situations later, but we can already see a need to define an angular acceleration for describing situations where ω changes. The faster the change in ω, the greater the angular acceleration. We define the instantaneous angular acceleration α as the derivative of angular velocity with respect to time:
+
+where we have taken the limit of the average angular acceleration, α–=ΔωΔt as Δt→0.
+
+The units of angular acceleration are (rad/s)/s, or rad/s2.
+
+In the same way as we defined the vector associated with angular velocity ω→, we can define α→, the vector associated with angular acceleration (). If the angular velocity is along the positive z-axis, as in , and dωdt is positive, then the angular acceleration α→ is positive and points along the +z- axis. Similarly, if the angular velocity ω→ is along the positive z-axis and dωdt is negative, then the angular acceleration is negative and points along the –z- axis.
+
+We can express the tangential acceleration vector as a cross product of the angular acceleration and the position vector. This expression can be found by taking the time derivative of v→=ω→×r→ and is left as an exercise:
+
+The vector relationships for the angular acceleration and tangential acceleration are shown in .
+
+We can relate the tangential acceleration of a point on a rotating body at a distance from the axis of rotation in the same way that we related the tangential speed to the angular velocity. If we differentiate with respect to time, noting that the radius r is constant, we obtain
+
+Thus, the tangential acceleration at is the radius times the angular acceleration. and are important for the discussion of rolling motion (see Angular Momentum).
+
+Let’s apply these ideas to the analysis of a few simple fixed-axis rotation scenarios. Before doing so, we present a problem-solving strategy that can be applied to rotational kinematics: the description of rotational motion.
+
+Rotational Kinematics
+
+Examine the situation to determine that rotational kinematics (rotational motion) is involved.
+
+Identify exactly what needs to be determined in the problem (identify the unknowns). A sketch of the situation is useful.
+
+Make a complete list of what is given or can be inferred from the problem as stated (identify the knowns).
+
+Solve the appropriate equation or equations for the quantity to be determined (the unknown). It can be useful to think in terms of a translational analog, because by now you are familiar with the equations of translational motion.
+
+Substitute the known values along with their units into the appropriate equation and obtain numerical solutions complete with units. Be sure to use units of radians for angles.
+
+Check your answer to see if it is reasonable: Does your answer make sense?
+
+Now let’s apply this problem-solving strategy to a few specific examples.
+A Spinning Bicycle Wheel
+A bicycle mechanic mounts a bicycle on the repair stand and starts the rear wheel spinning from rest to a final angular velocity of 250 rpm in 5.00 s. (a) Calculate the average angular acceleration in rad/s2. (b) If she now hits the brakes, causing an angular acceleration of −87.3 rad/s2, how long does it take the wheel to stop?
+
+A Spinning Bicycle Wheel
+Strategy
+The average angular acceleration can be found directly from its definition α–=ΔωΔt because the final angular velocity and time are given. We see that Δω=ωfinal−ωinitial=250rev/min and Δt is 5.00 s. For part (b), we know the angular acceleration and the initial angular velocity. We can find the stopping time by using the definition of average angular acceleration and solving for Δt, yielding
+
+Strategy
+Solution
+
+Solution
+
+Entering known information into the definition of angular acceleration, we get
+α–=ΔωΔt=250rpm5.00s.
+Because Δω is in revolutions per minute (rpm) and we want the standard units of rad/s2 for angular acceleration, we need to convert from rpm to rad/s:
+Δω=250revmin·2πradrev·1min60s=26.2rads.
+Entering this quantity into the expression for α, we get
+α=ΔωΔt=26.2rad/s5.00s=5.24rad/s2.
+
+Here the angular velocity decreases from 26.2 rad/s (250 rpm) to zero, so that Δω is −26.2 rad/s, and α is given to be –87.3 rad/s2. Thus,
+Δt=−26.2rad/s−87.3rad/s2=0.300s.
+Significance
+Note that the angular acceleration as the mechanic spins the wheel is small and positive; it takes 5 s to produce an appreciable angular velocity. When she hits the brake, the angular acceleration is large and negative. The angular velocity quickly goes to zero.
+
+Significance
+
+The fan blades on a turbofan jet engine (shown below) accelerate from rest up to a rotation rate of 40.0 rev/s in 20 s. The increase in angular velocity of the fan is constant in time. (The GE90-110B1 turbofan engine mounted on a Boeing 777, as shown, is currently the largest turbofan engine in the world, capable of thrusts of 330–510 kN.)
+
+(a) What is the average angular acceleration?
+
+(b) What is the instantaneous angular acceleration at any time during the first 20 s?
+
+a. 40.0rev/s=2π(40.0)rad/s, α–=ΔωΔt=2π(40.0)−0rad/s20.0s=2π(2.0)=4.0πrad/s2; b. Since the angular velocity increases linearly, there has to be a constant acceleration throughout the indicated time. Therefore, the instantaneous angular acceleration at any time is the solution to 4.0πrad/s2.
+Wind Turbine
+A wind turbine () in a wind farm is being shut down for maintenance. It takes 30 s for the turbine to go from its operating angular velocity to a complete stop in which the angular velocity function is ω(t)=[(ts−1−30.0)2/100.0]rad/s, where t is the time in seconds. If the turbine is rotating counterclockwise looking into the page, (a) what are the directions of the angular velocity and acceleration vectors? (b) What is the average angular acceleration? (c) What is the instantaneous angular acceleration at t=0.0,15.0,30.0s?
+
+Wind Turbine
+Strategy
+
+Strategy
+
+We are given the rotational sense of the turbine, which is counterclockwise in the plane of the page. Using the right hand rule (), we can establish the directions of the angular velocity and acceleration vectors.
+
+We calculate the initial and final angular velocities to get the average angular acceleration. We establish the sign of the angular acceleration from the results in (a).
+
+We are given the functional form of the angular velocity, so we can find the functional form of the angular acceleration function by taking its derivative with respect to time.
+Solution
+
+Solution
+
+Since the turbine is rotating counterclockwise, angular velocity ω→ points out of the page. But since the angular velocity is decreasing, the angular acceleration α→ points into the page, in the opposite sense to the angular velocity.
+
+The initial angular velocity of the turbine, setting t=0,isω=9.0rad/s. The final angular velocity is zero, so the average angular acceleration is
+α–=ΔωΔt=ω−ω0t−t0=0−9.0rad/s30.0−0s=−0.3rad/s2.
+
+Taking the derivative of the angular velocity with respect to time gives α=dωdt=(t−30.0)/50.0rad/s2
+α(0.0s)=−0.6rad/s2,α(15.0s)=−0.3rad/s2,andα(30.0s)=0rad/s.
+Significance
+We found from the calculations in (a) and (b) that the angular acceleration α and the average angular acceleration α– are negative. The turbine has an angular acceleration in the opposite sense to its angular velocity.
+
+Significance
+
+We now have a basic vocabulary for discussing fixed-axis rotational kinematics and relationships between rotational variables. We discuss more definitions and connections in the next section.
+
+Summary
+
+The angular position θ of a rotating body is the angle the body has rotated through in a fixed coordinate system, which serves as a frame of reference.
+
+The angular velocity of a rotating body about a fixed axis is defined as ω(rad/s), the rotational rate of the body in radians per second. The instantaneous angular velocity of a rotating body ω=limΔt→0ΔθΔt=dθdt is the derivative with respect to time of the angular position θ, found by taking the limit Δt→0 in the average angular velocity ω–=ΔθΔt. The angular velocity relates vt to the tangential speed of a point on the rotating body through the relation vt=rω, where r is the radius to the point and vt is the tangential speed at the given point.
+
+The angular velocity ω→ is found using the right-hand rule. If the fingers curl in the direction of rotation about a fixed axis, the thumb points in the direction of ω→ (see ).
+
+If the system’s angular velocity is not constant, then the system has an angular acceleration. The average angular acceleration over a given time interval is the change in angular velocity over this time interval, α–=ΔωΔt. The instantaneous angular acceleration is the time derivative of angular velocity, α=limΔt→0ΔωΔt=dωdt. The angular acceleration α→ is found by locating the angular velocity. If a rotation rate of a rotating body is decreasing, the angular acceleration is in the opposite direction to ω→. If the rotation rate is increasing, the angular acceleration is in the same direction as ω→.
+
+The tangential acceleration of a point at a radius from the axis of rotation is the angular acceleration times the radius to the point.
+
+Conceptual Questions
+
+A clock is mounted on the wall. As you look at it, what is the direction of the angular velocity vector of the second hand?
+
+The second hand rotates clockwise, so by the right-hand rule, the angular velocity vector is into the wall.
+
+What is the value of the angular acceleration of the second hand of the clock on the wall?
+
+A baseball bat is swung. Do all points on the bat have the same angular velocity? The same tangential speed?
+
+They have the same angular velocity. Points further out on the bat have greater tangential speeds.
+
+The blades of a blender on a counter are rotating clockwise as you look into it from the top. If the blender is put to a greater speed what direction is the angular acceleration of the blades?
+
+Problems
+
+Calculate the angular velocity of Earth.
+
+A track star runs a 400-m race on a 400-m circular track in 45 s. What is his angular velocity assuming a constant speed?
+ω=2πrad45.0s=0.14rad/s
+
+A wheel rotates at a constant rate of 2.0×103rev/min. (a) What is its angular velocity in radians per second? (b) Through what angle does it turn in 10 s? Express the solution in radians and degrees.
+
+A particle moves 3.0 m along a circle of radius 1.5 m. (a) Through what angle does it rotate? (b) If the particle makes this trip in 1.0 s at a constant speed, what is its angular velocity? (c) What is its acceleration?
+
+a. θ=sr=3.0m1.5m=2.0rad; b. ω=2.0rad1.0s=2.0rad/s; c. v2r=(3.0m/s)21.5m=6.0m/s2.
+
+A compact disc rotates at 500 rev/min. If the diameter of the disc is 120 mm, (a) what is the tangential speed of a point at the edge of the disc? (b) At a point halfway to the center of the disc?
+Unreasonable results. The propeller of an aircraft is spinning at 10 rev/s when the pilot shuts off the engine. The propeller reduces its angular velocity at a constant 2.0rad/s2 for a time period of 40 s. What is the rotation rate of the propeller in 40 s? Is this a reasonable situation?
+
+The propeller takes only Δt=Δωα=0rad/s−10.0(2π)rad/s−2.0rad/s2=31.4s to come to rest, when the propeller is at 0 rad/s, it would start rotating in the opposite direction. This would be impossible due to the magnitude of forces involved in getting the propeller to stop and start rotating in the opposite direction.
+
+A gyroscope slows from an initial rate of 32.0 rad/s at a rate of 0.700rad/s2. How long does it take to come to rest?
+
+On takeoff, the propellers on a UAV (unmanned aerial vehicle) increase their angular velocity for 3.0 s from rest at a rate of ω=(25.0t)rad/s where t is measured in seconds. (a) What is the instantaneous angular velocity of the propellers at t=2.0s? (b) What is the angular acceleration?
+
+a. ω=25.0(2.0s)=50.0rad/s; b. α=dωdt=25.0rad/s2
+
+The angular position of a rod varies as 20.0t2 radians from time t=0. The rod has two beads on it as shown in the following figure, one at 10 cm from the rotation axis and the other at 20 cm from the rotation axis. (a) What is the instantaneous angular velocity of the rod at t=5s? (b) What is the angular acceleration of the rod? (c) What are the tangential speeds of the beads at t=5s? (d) What are the tangential accelerations of the beads at t=5s? (e) What are the centripetal accelerations of the beads at t=5s?
+
+time rate of change of angular velocity
+angle a body has rotated through in a fixed coordinate system
+time rate of change of angular position
+derivative of angular velocity with respect to time
+derivative of angular position with respect to time

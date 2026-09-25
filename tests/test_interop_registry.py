@@ -1,0 +1,271 @@
+"""Hermetic tests for the capability registry (levi.interop.registry)."""
+
+import pytest
+
+from levi.interop.manifest import DECLARATIONS
+from levi.interop.registry import Registry, RegistryError
+
+
+def _fresh():
+    return Registry()
+
+
+def test_manifest_registers_all_modules():
+    reg = _fresh()
+    for name, decl in DECLARATIONS.items():
+        reg.register(name, provides=decl["provides"], requires=decl["requires"])
+    assert set(reg.modules()) == {
+        "organs",
+        "memory-store",
+        "memory-retrieval",
+        "rag",
+        "bot-services",
+        "growth",
+        "academy",
+        "bounty",
+        "knowledge",
+        "oath",
+        "agent-assistant",
+        # axis-3 additions (deny-closed, all must register + check)
+        "methods",
+        "revival",
+        "galaxy",
+        "lifepack",
+        "bloodstream",
+        "daemon",
+        "perpetual",
+        "archive",
+        "cyber-skills",
+        "factory",
+        "finance",
+        "forge",
+        # operator + additions + research waves, 2026-09-16 sweep
+        "signals",
+        "creed",
+        "promises",
+        "decisions",
+        "interruptions",
+        "snapshots",
+        "drift",
+        "teachback",
+        "energy",
+        "friction",
+        "sweeps",
+        "premortem",
+        "research",
+        "ephemera",
+        "feedreader",
+        "packs",
+        # shareware (perpetual-hunt daily 2026-09-16: the honest markets)
+        "shareware",
+        # engines (pack-to-the-brim 2026-09-17: deterministic decision machines)
+        "engines",
+        "commitments",
+        "recap",
+        "classifieds",
+        "dials",
+        "bridging",
+        "communities",
+        "threads",
+        "charters",
+        "capproto",
+        "mailtriage",
+        "vaults",
+        "canvas",
+        "discover",
+        "presence",
+        "honestsearch",
+        "recommender",
+        # games wave (fair-play additions)
+        "games",
+        # telegraph (perpetual-hunt wave-001: dead protocols revived)
+        "telegraph",
+        # feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
+        "feedlab",
+        # copper (perpetual-hunt wave-004: scored timed choreography)
+        "copper",
+        # verify (perpetual-hunt wave-006: pre-digital proof rituals)
+        "verify",
+        # liberation (perpetual-hunt daily 2026-09-15: roach-motel inversion)
+        "liberation",
+        # shelf (perpetual-hunt daily 2026-09-16: fallen platforms)
+        "shelf",
+        # circles (perpetual-hunt daily 2026-09-16 evening: Path's cap)
+        "circles",
+        # analog (perpetual-hunt wave-006: pre-digital computation revived)
+        "analog",
+        # reveal (perpetual-hunt daily 2026-09-16b: retired software wave)
+        "reveal",
+        # fairtrade (perpetual-hunt evening 2026-09-16: giant sly-generosity
+        # trades inverted into an honest-trade ledger + auditor)
+        "fairtrade",
+        # twins (2026-09-16: SER-21 twin architecture — twin agents, twin
+        # daemons, 6 twin shells as 3 FG/BG pairs)
+        "twins",
+        # quickdial (perpetual-hunt evening-20260916-software: dead desktop
+        # software wave 3 — committed in b094858, hardcoded set lagged behind)
+        "quickdial",
+        # dead-networks (perpetual-hunt wave-008)
+        "digest",
+        "pdi",
+        "boards",
+        "doors",
+        # craft (perpetual-hunt wave-014: lost crafts revived)
+        "craft",
+        # serve (hosting wave: LEVI-native static file server)
+        "serve",
+        # cybrus (Chauncey's own Security & Identity Layer — intentionally
+        # declared in the manifest; snapshot updated in round-2 review)
+        "cybrus",
+        # identity (Echo/Mandella variant engine with REIM/RIEM controlled
+        # compression; --scope all interpenetrates every declared module)
+        "identity",
+        # automation (2026-09-17: LEVI-native automation engine — minion
+        # catalog, HITL rail, "watch me once" routine recorder)
+        "automation",
+        # dream-products wave (2026-09-17: SI team, Nexus, DemandPulse,
+        # Omega/Alpha organs, UniForge, Dweller labor — manifest grew,
+        # hardcoded set lagged behind)
+        "nexus",
+        "demand",
+        "si_team",
+        "omega",
+        "alpha",
+        "uniforge",
+        "dweller",
+        # pack-to-the-brim (2026-09-17: polling directory watchman, temporal
+        # personality modulation, credentialless RSS/Atom reader)
+        "daemon-watchman",
+        "persona-seasons",
+        "plugins-rss",
+        # pack-to-the-brim (2026-09-18: daemon signal bus, canon-voice
+        # guardrail, automation retry/backoff + circuit breaker)
+        "daemon-signalbus",
+        "persona-canon",
+        "automation-backoff",
+        # pack-to-the-brim (2026-09-18 night: journal compaction daemon,
+        # Termux device bridge, inbound switchboard router bot)
+        "integrations",
+        "daemon-fossil",
+        "integrations-termux",
+        "bot-switchboard",
+        # pre-existing manifest entries whose pinned set lagged behind
+        # (builder skills wave, webhook plugin — not this run's additions)
+        "builder-skills",
+        "plugins-webhook",
+        # wave-019 (perpetual-hunt 2026-09-19: dead wire protocols revived —
+        # Ceefax page carousel, SELCAL quiet channel, Bell 103 ritual)
+        "teletext",
+        "attention",
+        # pack run 7 (2026-09-19: keyless weather connector, polling
+        # trigger watchers, notification dispatcher)
+        "plugins-weather",
+        "automation-watchers",
+        "daemon-herald",
+        # pack run 11 (2026-09-20: pacing daemon, inbound triage bot,
+        # maintenance-window gating)
+        "daemon-metronome",
+        "bot-triage",
+        "automation-windows",
+        # pack run 13 (2026-09-21: briefing-card bot)
+        "bot-brief",
+    }
+
+
+def test_manifest_passes_check_all():
+    reg = _fresh()
+    for name, decl in DECLARATIONS.items():
+        reg.register(name, provides=decl["provides"], requires=decl["requires"])
+    reg.check_all()  # must not raise
+
+
+def test_check_unknown_module_denied():
+    reg = _fresh()
+    with pytest.raises(RegistryError):
+        reg.check("nope-not-a-module")
+
+
+def test_check_unknown_requires_target_denied():
+    reg = _fresh()
+    reg.register("a", provides=["a.x"], requires=["ghost-module"])
+    with pytest.raises(RegistryError, match="unknown requires"):
+        reg.check("a")
+
+
+def test_check_all_aggregates_failures():
+    reg = _fresh()
+    reg.register("ok-module", provides=["ok.x"])
+    reg.register("bad-one", requires=["missing-a"])
+    reg.register("bad-two", requires=["missing-b"])
+    with pytest.raises(RegistryError) as excinfo:
+        reg.check_all()
+    msg = str(excinfo.value)
+    assert "bad-one" in msg and "bad-two" in msg
+
+
+def test_register_duplicate_denied():
+    reg = _fresh()
+    reg.register("a")
+    with pytest.raises(RegistryError, match="already declared"):
+        reg.register("a")
+
+
+def test_register_malformed_caps_denied():
+    reg = _fresh()
+    with pytest.raises(RegistryError):
+        reg.register("a", provides="not-a-list")
+    with pytest.raises(RegistryError):
+        reg.register("b", requires=[""])
+    with pytest.raises(RegistryError):
+        reg.register("c", provides=["x", "x"])  # duplicates
+    with pytest.raises(RegistryError):
+        reg.register("", provides=[])
+
+
+def test_dependents_of_direct():
+    reg = _fresh()
+    reg.register("memory-store", provides=["memory.write"])
+    reg.register("rag", requires=["memory-store"])
+    reg.register("bot-services", requires=["rag"])
+    assert reg.dependents_of("memory-store") == ["rag"]
+    assert reg.dependents_of("rag") == ["bot-services"]
+    assert reg.dependents_of("bot-services") == []
+
+
+def test_dependents_of_transitive():
+    reg = _fresh()
+    reg.register("memory-store")
+    reg.register("memory-retrieval", requires=["memory-store"])
+    reg.register("rag", requires=["memory-retrieval"])
+    reg.register("bot-services", requires=["rag"])
+    assert reg.dependents_of("memory-store", transitive=True) == [
+        "bot-services",
+        "memory-retrieval",
+        "rag",
+    ]
+
+
+def test_dependents_of_unknown_module_denied():
+    reg = _fresh()
+    with pytest.raises(RegistryError):
+        reg.dependents_of("ghost")
+
+
+def test_default_registry_preloaded_and_valid():
+    import levi.interop.registry as regmod
+
+    assert len(regmod.modules()) == len(DECLARATIONS)
+    regmod.check_all()  # must not raise
+    deps = regmod.dependents_of("memory-store", transitive=True)
+    assert "rag" in deps and "bot-services" in deps
+
+
+def test_manifest_memory_store_is_foundation():
+    # the substrate must be required-by many and require nothing
+    assert DECLARATIONS["memory-store"]["requires"] == []
+    dependents = [
+        name
+        for name, decl in DECLARATIONS.items()
+        if "memory-store" in decl["requires"]
+    ]
+    assert len(dependents) >= 4

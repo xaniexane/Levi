@@ -1,0 +1,451 @@
+# m54154
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Simple Harmonic Motion
+
+Simple Harmonic Motion
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Describe Hooke’s law and Simple Harmonic Motion
+
+Describe periodic motion, oscillations, amplitude, frequency, and period
+
+Solve problems in simple harmonic motion involving springs and pendulums
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(7) Science concepts. The student knows the characteristics and behavior of waves. The student is expected to:
+ 
+ (A) examine and describe oscillatory motion and wave propagation in various types of media.
+(A) examine and describe oscillatory motion and wave propagation in various types of media.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Motion in Two Dimensions, as well as the following standards:
+
+(7) Science concepts. The student knows the characteristics and behavior of waves. The student is expected to:
+
+(A) examine and describe oscillatory motion and wave propagation in various types of media.
+(A) examine and describe oscillatory motion and wave propagation in various types of media.
+
+Section Key Terms
+
+amplitude
+deformation
+equilibrium position
+frequency
+Hooke’s law
+oscillate
+period
+periodic motion
+restoring force
+simple harmonic motion
+simple pendulum
+Hooke’s Law and Simple Harmonic Motion
+
+Imagine a car parked against a wall. If a bulldozer pushes the car into the wall, the car will not move but it will noticeably change shape. A change in shape due to the application of a force is a deformation. Even very small forces are known to cause some deformation. For small deformations, two important things can happen. First, unlike the car and bulldozer example, the object returns to its original shape when the force is removed. Second, the size of the deformation is proportional to the force. This second property is known as Hooke’s law. In equation form, Hooke’s law is
+
+where x is the amount of deformation (the change in length, for example) produced by the restoring force F, and k is a constant that depends on the shape and composition of the object. The restoring force is the force that brings the object back to its equilibrium position; the minus sign is there because the restoring force acts in the direction opposite to the displacement. Note that the restoring force is proportional to the deformation x. The deformation can also be thought of as a displacement from equilibrium. It is a change in position due to a force. In the absence of force, the object would rest at its equilibrium position. The force constant k is related to the stiffness of a system. The larger the force constant, the stiffer the system. A stiffer system is more difficult to deform and requires a greater restoring force. The units of k are newtons per meter (N/m). One of the most common uses of Hooke’s law is solving problems involving springs and pendulums, which we will cover at the end of this section.
+
+Teacher Support
+[BL] Review the concept of force.
+[BL][OL][AL] Introduce Hooke’s law and force constant of a spring.
+
+Oscillations and Periodic Motion
+
+What do an ocean buoy, a child in a swing, a guitar, and the beating of hearts all have in common? They all oscillate. That is, they move back and forth between two points, like the ruler illustrated in . All oscillations involve force. For example, you push a child in a swing to get the motion started.
+
+Teacher Support
+[BL][OL][AL] Find springs or rubber bands with different amounts of stiffness. Ask students to attach weights to these to construct oscillators. Introduce the terms frequency and time period. Ask students to observe how the stiffness of the spring affects them. How does mass of the system affect them? How does the initial force applied affect them?
+
+Newton’s first law implies that an object oscillating back and forth is experiencing forces. Without force, the object would move in a straight line at a constant speed rather than oscillate. Consider, for example, plucking a plastic ruler to the left as shown in . The deformation of the ruler creates a force in the opposite direction, known as a restoring force. Once released, the restoring force causes the ruler to move back toward its stable equilibrium position, where the net force on it is zero. However, by the time the ruler gets there, it gains momentum and continues to move to the right, producing the opposite deformation. It is then forced to the left, back through equilibrium, and the process is repeated until it gradually loses all of its energy. The simplest oscillations occur when the restoring force is directly proportional to displacement. Recall that Hooke’s law describes this situation with the equation F = −kx. Therefore, Hooke’s law describes and applies to the simplest case of oscillation, known as simple harmonic motion.
+
+When you pluck a guitar string, the resulting sound has a steady tone and lasts a long time. Each vibration of the string takes the same time as the previous one. Periodic motion is a motion that repeats itself at regular time intervals, such as with an object bobbing up and down on a spring or a pendulum swinging back and forth. The time to complete one oscillation (a complete cycle of motion) remains constant and is called the period T. Its units are usually seconds.
+Frequency f is the number of oscillations per unit time. The SI unit for frequency is the hertz (Hz), defined as the number of oscillations per second. The relationship between frequency and period is
+
+As you can see from the equation, frequency and period are different ways of expressing the same concept. For example, if you get a paycheck twice a month, you could say that the frequency of payment is two per month, or that the period between checks is half a month.
+
+If there is no friction to slow it down, then an object in simple motion will oscillate forever with equal displacement on either side of the equilibrium position. The equilibrium position is where the object would naturally rest in the absence of force. The maximum displacement from equilibrium is called the amplitude X. The units for amplitude and displacement are the same, but depend on the type of oscillation. For the object on the spring, shown in , the units of amplitude and displacement are meters.
+
+The mass m and the force constant k are the only factors that affect the period and frequency of simple harmonic motion. The period of a simple harmonic oscillator is given by
+
+and, because f = 1/T, the frequency of a simple harmonic oscillator is
+
+Introduction to Harmonic Motion
+
+This video shows how to graph the displacement of a spring in the x-direction over time, based on the period. Watch the first 10 minutes of the video (you can stop when the narrator begins to cover calculus).
+
+Solving Spring and Pendulum Problems with Simple Harmonic Motion
+
+Before solving problems with springs and pendulums, it is important to first get an understanding of how a pendulum works. provides a useful illustration of a simple pendulum.
+
+Teacher Support
+[BL] Review simple harmonic motion.
+
+Everyday examples of pendulums include old-fashioned clocks, a child’s swing, or the sinker on a fishing line. For small displacements of less than 15 degrees, a pendulum experiences simple harmonic oscillation, meaning that its restoring force is directly proportional to its displacement. A pendulum in simple harmonic motion is called a simple pendulum. A pendulum has an object with a small mass, also known as the pendulum bob, which hangs from a light wire or string. The equilibrium position for a pendulum is where the angle 
+ 
+ θ
+ 
+ is zero (that is, when the pendulum is hanging straight down). It makes sense that without any force applied, this is where the pendulum bob would rest.
+
+Teacher Support
+[BL][OL][AL]Construct simple pendulums of different lengths. Ask students to measure their time periods or frequencies. Are they constant for a given pendulum? How does the mass impact the frequency? How does the initial displacement affect it? What happens if a small push is given to the pendulum to get it started? Does that change the frequency? In what way does the length affect the frequency?
+
+The displacement of the pendulum bob is the arc length s. The weight mg has components mg cos 
+ 
+ θ
+ 
+ along the string and mg sin 
+ 
+ θ
+ 
+ tangent to the arc. Tension in the string exactly cancels the component mg cos 
+ 
+ θ
+ 
+ parallel to the string. This leaves a net restoring force back toward the equilibrium position that runs tangent to the arc and equals −mg sin 
+ 
+ θ
+ 
+ .
+
+For small angle oscillations of a simple pendulum, the period is 
+ 
+ T=2π
+
+ L
+ g
+
+ .
+
+The only things that affect the period of a simple pendulum are its length and the acceleration due to gravity. The period is completely independent of other factors, such as mass or amplitude. However, note that T does depend on g. This means that if we know the length of a pendulum, we can actually use it to measure gravity! This will come in useful in .
+
+Tension is represented by the variable T, and period is represented by the variable T. It is important not to confuse the two, since tension is a force and period is a length of time.
+
+Measuring Acceleration due to Gravity: The Period of a Pendulum
+
+What is the acceleration due to gravity in a region where a simple pendulum having a length 75.000 cm has a period of 1.7357 s?
+
+Strategy
+
+We are asked to find g given the period T and the length L of a pendulum. We can solve 
+ 
+ T=2π
+
+ L
+ g
+
+ for g, assuming that the angle of deflection is less than 15 degrees. Recall that when the angle of deflection is less than 15 degrees, the pendulum is considered to be in simple harmonic motion, allowing us to use this equation.
+
+Solution
+
+Square 
+ 
+ T=2π
+
+ L
+ g
+
+ and solve for g.
+
+ g=4
+ π
+ 2
+
+ L
+
+ T
+ 2
+
+Substitute known values into the new equation.
+
+ g=4
+ π
+ 2
+
+ 0.75000 m
+
+ (1.7357 s)
+ 
+ 2
+
+Calculate to find g.
+
+ g= 9.8281 m/
+ s
+ 2
+
+Discussion
+
+This method for determining g can be very accurate. This is why length and period are given to five digits in this example.
+
+Hooke’s Law: How Stiff Are Car Springs?
+
+What is the force constant for the suspension system of a car, like that shown in , that settles 1.20 cm when an 80.0-kg person gets in?
+
+Strategy
+
+Consider the car to be in its equilibrium position x = 0 before the person gets in. The car then settles down 1.20 cm, which means it is displaced to a position x = −1.20×10−2 m.
+
+At that point, the springs supply a restoring force F equal to the person’s weight
+w = mg = (80.0 kg)(9.80 m/s2) = 784 N. We take this force to be F in Hooke’s law.
+
+Knowing F and x, we can then solve for the force constant k.
+
+Solution
+
+Solve Hooke’s law, F = −kx, for k.
+
+Substitute known values and solve for k.
+
+Discussion
+
+Note that F and x have opposite signs because they are in opposite directions—the restoring force is up, and the displacement is down. Also, note that the car would oscillate up and down when the person got in, if it were not for the shock absorbers. Bouncing cars are a sure sign of bad shock absorbers.
+
+Practice Problems
+
+Finding Gravity Using a Simple Pendulum
+
+Use a simple pendulum to find the acceleration due to gravity g in your home or classroom.
+
+1 string
+
+1 stopwatch
+
+1 small dense object
+
+Cut a piece of a string or dental floss so that it is about 1 m long.
+
+Attach a small object of high density to the end of the string (for example, a metal nut or a car key).
+
+Starting at an angle of less than 10 degrees, allow the pendulum to swing and measure the pendulum’s period for 10 oscillations using a stopwatch.
+
+Calculate g.
+
+How accurate is this measurement for g? How might it be improved?
+
+Accuracy for value of g will increase with an increase in the mass of a dense object.
+
+Accuracy for the value of g will increase with increase in the length of the pendulum.
+
+The value of g will be more accurate if the angle of deflection is more than 15°.
+
+The value of g will be more accurate if it maintains simple harmonic motion.
+
+Section Summary
+
+An oscillation is a back and forth motion of an object between two points of deformation.
+
+An oscillation may create a wave, which is a disturbance that propagates from where it was created.
+
+The simplest type of oscillations are related to systems that can be described by Hooke’s law.
+
+Periodic motion is a repetitious oscillation.
+
+The time for one oscillation is the period T.
+
+The number of oscillations per unit time is the frequency
+
+A mass m suspended by a wire of length L is a simple pendulum and undergoes simple harmonic motion for amplitudes less than about 15 degrees.
+
+Key Equations
+
+F=−kx
+T=2π
+
+ m
+ k
+f=
+ 1
+ 
+ 2π
+
+ k
+ m
+T=2π
+
+ L
+ g
+Check Your Understanding
+
+According to Hookes law, what is deformation proportional to?
+
+Force
+
+Velocity
+
+Displacement
+
+Force constant
+
+What are oscillations?
+
+Motion resulting in small displacements
+
+Motion which repeats itself periodically
+
+Periodic, repetitive motion between two points
+
+motion that is the opposite to the direction of the restoring force
+
+True or FalseOscillations can occur without force.
+
+True
+
+False
+
+Teacher Support
+
+Use the Check Your Understanding questions to assess whether students achieve the learning objectives for this section. If students are struggling with a specific objective, the Check Your Understanding will help identify which objective is causing the problem and direct students to the relevant content.
+
+Concept Items
+
+With reference to simple harmonic motion, what is the equilibrium position?
+
+The position where velocity is the minimum
+
+The position where the displacement is maximum
+
+The position where the restoring force is the maximum
+
+The position where the object rests in the absence of force
+
+Problems
+
+Critical Thinking
+
+Two springs are attached to two hooks. Spring A has a greater force constant than spring B. Equal weights are suspended from both. Which of the following statements is true?
+
+Spring A will have more extension than spring B.
+
+Spring B will have more extension than spring A.
+
+Both springs will have equal extension.
+
+Both springs are equally stiff.
+
+Performance Task
+
+Teacher Support
+[AL] Ask two students to demonstrate pushing a table from two different directions. Ask students what they feel the direction of resultant motion will be. How would they represent this graphically? Recall that a vector’s magnitude is represented by the length of the arrow. Demonstrate the head-to-tail method of adding vectors, using the example given in the chapter. Ask students to practice this method of addition using a scale and a protractor.
+[BL][OL][AL] Ask students if anything changes by moving the vector from one place to another on a graph. How about the order of addition? Would that make a difference? Introduce negative of a vector and vector subtraction.
+
+Construct a seconds pendulum (pendulum with time period 2 seconds).
+
+Test Prep Multiple Choice
+
+A change in which of the following is an example of deformation?
+
+Velocity
+
+Length
+
+Mass
+
+Weight
+
+The units of amplitude are the same as those for which of the following measurements?
+
+Speed
+
+Displacement
+
+Acceleration
+
+Force
+
+Test Prep Short Answer
+
+What is the term used for changes in shape due to the application of force?
+
+Amplitude
+
+Deformation
+
+Displacement
+
+Restoring force
+
+What is the restoring force?
+
+The normal force on the surface of an object
+
+The weight of a mass attached to an object
+
+Force which is applied to deform an object from its original shape
+
+Force which brings an object back to its equilibrium position
+
+For a given oscillator, what are the factors that affect its period and frequency?
+
+Mass only
+
+Force constant only
+
+Applied force and mass
+
+Mass and force constant
+
+For an object in simple harmonic motion, when does the maximum speed occur?
+
+At the extreme positions
+
+At the equilibrium position
+
+At the moment when the applied force is removed
+
+Midway between the extreme and equilibrium positions
+
+What is the equilibrium position of a pendulum?
+
+When the tension in the string is zero
+
+When the pendulum is hanging straight down
+
+When the tension in the string is maximum
+
+When the weight of the mass attached is minimum
+
+If a pendulum is displaced by an angle θ, what is the net restoring force it experiences?
+mgsinθ
+mgcosθ
+
+–mgsinθ
+
+–mgcosθ
+
+Test Prep Extended Response
+
+What physical characteristic of a system is its force constant related to?
+
+The force constant k is related to the stiffness of a system: The larger the force constant, the stiffer the system.
+
+The force constant k is related to the stiffness of a system: The larger the force constant, the looser the system.
+
+The force constant k is related to the friction in the system: The larger the force constant, the greater the friction in the system.
+
+The force constant k is related to the friction in the system: The larger the force constant, the lower the friction in the system.
+
+the maximum displacement from the equilibrium position of an object oscillating around the equilibrium position
+displacement from equilibrium, or change in shape due to the application of force
+where an object would naturally rest in the absence of a net force
+number of events per unit of time
+proportional relationship between the force F on a material and the deformation 
+ 
+ ΔL
+ 
+ it causes, 
+ 
+ F=kΔL
+moving back and forth regularly between two points
+time it takes to complete one oscillation
+motion that repeats itself at regular time intervals
+force acting in opposition to the force causing the deformation
+the oscillatory motion in a system where the net force can be described by Hooke’s law
+an object with a small mass suspended from a light wire or string

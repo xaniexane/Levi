@@ -1,0 +1,688 @@
+# m00028
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Apportionment Methods
+
+Apportionment Methods
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe and interpret the apportionment problem.
+
+Apply Hamilton’s Method.
+
+Describe and interpret the quota rule.
+
+Apply Jefferson’s Method.
+
+Apply Adams’s Method.
+
+Apply Webster’s Method.
+
+Compare and contrast apportionment methods.
+
+Identify and contrast flaws in various apportionment methods.
+
+A Closer Look at the Apportionment Problem
+
+In Standard Divisors, Standard Quotas, and the Apportionment Problem we calculated the standard divisor and the standard quotas in various apportionment scenarios. The results of those calculations routinely led to fractions and decimals of units. However, the seats in the House of Representatives, laptops in a classroom, or a variety of other resources, are indivisible, meaning they cannot be divided up into fractional parts. This leaves a decision to be made. For example, if the standard quota for the number of laptops to be distributed to a classroom is 12.44 units, how do we deal with the fractional part of 0.44? It is unclear if the classroom should receive 12 units, 13 units, or some other value. Let’s try traditional rounding to the nearest whole number value.
+
+Installing Emergency Lights
+
+The board of trustees of a college has recently approved the installation of 70 new emergency blue lights in three parking lots. The number of lights in each lot will be proportionate to the size of the parking lot, which is to be measured in acres. The total number of acres is 34; so the standard divisor is 3470≈0.4857. The standard quota for each lot is listed in the table below. Use this information to answer each question.
+
+Lot
+Acres
+Lot’s Standard Quota
+A
+15÷0.4857≈30.88 emergency blue lights
+B
+9÷0.4857≈18.53 emergency blue lights
+C
+10÷0.4857=20.59 emergency blue lights
+Use traditional rounding to determine the number of lights assigned to each lot.
+
+Find the sum of the values from part 1.
+
+Does the sum found in part 2 equal the number of lights available?
+If traditional rounding is used, there will be 31, 19, and 21 lights distributed to each lot, respectively.
+ The total of these values is 71.
+ No, the total from part 2 is one more than the number of lights available. In other words, one of the parking lots must get 1 fewer light than apportioned.
+
+If traditional rounding is used, there will be 31, 19, and 21 lights distributed to each lot, respectively.
+
+The total of these values is 71.
+
+No, the total from part 2 is one more than the number of lights available. In other words, one of the parking lots must get 1 fewer light than apportioned.
+
+demonstrates that we cannot successfully apportion indivisible resources by rounding off each standard quota using traditional rounding. This leaves us with a problem. What is a fair way to distribute the fractional parts of the standard quotas? We will refer to this as the apportionment problem. Several methods for making this decision will be discussed.
+
+A-10C Thunderbolt II Aircraft
+
+In 2015, the U.S. Air Force had a fleet of approximately 281 A-10C Thunderbolt II aircraft. Suppose that the Air Force administration wanted to distribute 27 aircrafts across six bases based on the number of qualified pilots stationed at those bases. Use the information in the table below to answer each question.
+
+Base
+Pilots
+(A) Alpha
+13
+(B) Bravo
+12
+(C) Charlie
+5
+(D) Delta
+16
+(E) Echo
+7
+(F) Foxtrot
+9
+Identify the states, the seats, and the state population (the basis for the apportionment) in this scenario.
+
+Find the standard divisor for the apportionment of the aircraft. Round to four decimal places as needed. Include the units.
+
+Find each Air Force base’s standard quota for the apportionment of the aircraft. Round to the nearest hundredth as needed. What are the units?
+
+How does this example demonstrate the apportionment problem? Will traditional rounding solve the problem?
+The states are the bases, the seats are the aircraft, and the state populations are the pilots at a given base.
+ Standard Divisor=Total PopulationHouse Size=13+12+5+16+7+927=6227≈2.2963 pilots per aircraft.
+ A 132.2963≈5.66, B 122.2963≈5.23, C 52.2963≈2.18, D 162.2963≈6.97, E 72.2963≈3.05, F 92.2963≈3.92. The units are aircraft.
+ This example demonstrates the apportionment problem because it is not possible to send a fractional number of aircraft to an Air Force base. On the other hand, if we use traditional rounding methods to get whole numbers, the results are 5+5+2+7+3+4=26 aircraft will be apportioned, which is one less than the number of aircraft that were supposed to be apportioned.
+
+The states are the bases, the seats are the aircraft, and the state populations are the pilots at a given base.
+Standard Divisor=Total PopulationHouse Size=13+12+5+16+7+927=6227≈2.2963 pilots per aircraft.
+
+A 132.2963≈5.66, B 122.2963≈5.23, C 52.2963≈2.18, D 162.2963≈6.97, E 72.2963≈3.05, F 92.2963≈3.92. The units are aircraft.
+
+This example demonstrates the apportionment problem because it is not possible to send a fractional number of aircraft to an Air Force base. On the other hand, if we use traditional rounding methods to get whole numbers, the results are 5+5+2+7+3+4=26 aircraft will be apportioned, which is one less than the number of aircraft that were supposed to be apportioned.
+
+Hamilton's Method of Apportionment
+
+One of the problems encountered when standard quotas are transformed into whole numbers using traditional rounding is that it is possible for the sum of the values to be greater than the number of seats available. A reasonable way to avoid this is to always round down, even when the first decimal place is five or greater. For example, a standard quota of 12.33 and a standard quota of 12.99 would both round down to 12. This is called the lower quota.
+
+Lower Quota for Apportionment of Aircraft
+
+The Air Force administration wants to distribute 27 aircrafts across six bases based on the number of qualified pilots stationed at those bases. The standard quotas for each base are listed in the table below. Use this information to answer the questions.
+
+Base
+Standard Quota
+132.2963≈5.66 aircraft
+122.2963≈5.23 aircraft
+52.2963≈2.18 aircraft
+162.2963≈6.97 aircraft
+72.2963≈3.05 aircraft
+92.2963≈3.92 aircraft
+Give the lower quota for each Air Force base.
+
+Find the sum of the lower quotas. By how much does this sum fall short of the actual number of aircraft?
+Round down. The lower quota for each Air Force base is 5, 5, 2, 6, 3, 3, respectively.
+ The sum is 24. This is 3 fewer than the actual number of aircraft.
+
+Round down. The lower quota for each Air Force base is 5, 5, 2, 6, 3, 3, respectively.
+
+The sum is 24. This is 3 fewer than the actual number of aircraft.
+
+If the standard quotas are all rounded down, their sum will always be less than or equal to the house size. Then, it would only remain to find a fair way to distribute any remaining seats. Alexander Hamilton, who was a general in the American Revolution, author of the Federalist Papers, and the first secretary of the treasury, took this approach to apportionment.
+
+Steps for Hamilton’s Method of Apportionment
+
+There are five steps we follow when applying Hamilton’s Method of apportionment:
+
+Find the standard divisor.
+
+Find each state’s standard quota.
+
+Give each state the state’s lower quota (with each state receiving at least 1 seat).
+
+Give each remaining seat one at a time to the states with the largest fractional parts of their standard quotas until no seats remain.
+
+Check the solution by confirming that the sum of the modified quotas equals the house size.
+Hamilton Method of Apportionment
+
+Hawaiian School Districts
+
+Suppose that the Hawaii State Department of Education has a budget for 616 schools and is doing a research study to determine the equitable number of schools to have in each of the five counties based on the residents under 19 years old, This data is provided in the table below. Using the Hamilton method, calculate how many schools would be funded in each state.
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+Residents under age 19
+46,310
+224,230
+20
+16,560
+38,450
+Step 1: Calculate the standard divisor. Divide the total population, 325,570, by the house size, 616 seats. The standard divisor is 528.52.
+Step 2: Find each state’s standard quota:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450528.52≈72.75
+Step 3: Find each state’s lower quota and their sum:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+Lower Quota
+87
+424
+1
+31
+72
+Step 4: Compare the sum of the states’ lower quotas, 615, to the house size, 616. One seat remains to be apportioned and must be given to the state with the largest fractional part: Maui with 0.75. So, the final Hamilton quotas are as follows: Hawaii 87, Honolulu 424, Kalawao 1, Kauai 31, and Maui 73.
+Step 5: Find the total to confirm the sum of the quotas equals the house size, 616. Then 87+424+1+31+73=616. The apportionment is complete.
+
+Apportionment Calculators
+
+Check out websites such as Ms. Hearn Math for a free Hamilton apportionment calculator.
+
+This can be a useful tool to confirm your results!
+
+The Quota Rule
+
+A characteristic of an apportionment that is considered favorable is when the final quota values all either result from rounding down or rounding up from the standard quotas. The value that results from rounding down is called the lower quota, and the value that results from rounding up is called the upper quota.
+
+As we explore more methods of apportionment, we will consider whether they satisfy the quota rule. If a scenario exists in which a particular apportionment allocates a value greater than the upper quota or less than the lower quota, then that apportionment violates the quota rule and the apportionment method that was used violates the quota rule.
+
+Which Apportionment Method Satisfies the Quota Rule?
+
+Several apportionment methods have been used to allocate 125 seats to ten states and the results are shown in the table below. Determine which apportionments do not satisfy the quota rule and justify your answer.
+
+State A
+State B
+State C
+State D
+State E
+State F
+Standard Quota
+41.26
+16.00
+5.77
+2.64
+7.82
+10.47
+Lower Quota
+41
+16
+5
+2
+7
+10
+Upper Quota
+42
+17
+6
+3
+8
+11
+Method X
+43
+16
+5
+2
+7
+10
+Method Y
+41
+16
+6
+2
+8
+10
+Method Z
+42
+16
+7
+3
+7
+9
+1
+Look for states such that the number of seats allocated differs from the lower or upper quota. Method X violates the quota rule because State A receives 43 seats instead of 41 or 42. Method Z violates the quota rule because State C receives 7 seats instead of 5 or 6 and State F receives 9 instead of 10 or 11.
+
+It is possible for an apportionment method to satisfy the quota rule in some scenarios but violate it in others. However, because the Hamilton method always begins with the lower quota and either adds one to it or keeps it the same, the final Hamilton quota will always consist of values that are either lower quota values or upper quota values. When an apportionment method has this characteristic, it is said to satisfy the quota rule. So, we can say:
+The Hamilton method of apportionment satisfies the quota rule.
+
+Although the Hamilton method of apportionment satisfies the quota rule, it can result in some unexpected outcomes, which has caused it to pass in and out of favor of the U.S. government over the years. There are several apportionment methods that have been popular alternatives, such as Jefferson’s method of apportionment that the founders of Imaginaria should consider.
+
+Jefferson’s Method of Apportionment
+
+Another approach to dealing with the fractional parts of the standard quotas is to modify the standard divisor so that the total of the resulting modified lower quotas is the necessary number of seats. This is the approach used by Jefferson.
+
+In Jefferson’s method, the change to the standard divisor is made so that the total of the modified lower quotas equals the house size. The change in the standard divisor to get the modified divisor is relatively small. There is not a formula for this. The modified divisor is found by “guess and check.” It is important to remember that increasing the divisor decreases the quotas, but decreasing the divisor increases the quotas. So, if you need a larger quota, try reducing the divisor, and if you need a smaller quota, try increasing the divisor.
+
+Modifying a Standard Divisor
+
+Suppose the population of a state is 50 and the standard divisor is 12.5.
+
+Find the state’s standard quota.
+
+Increase the standard divisor by 2 units and use the modified divisor to determine the modified quota for the state.
+
+Decrease the modified divisor from part 2 by 1.5 units and use the new modified divisor to determine the modified quota for the state.
+
+Choose any value of divisor between the value of the modified divisor from part 2 and the value of the modified divisor from part 3 and use it to determine the modified quota for the state.
+
+Which modified quota was the largest, the modified quota from part 2, from part 3, or from part 4? Explain why.
+The state’s standard quota is 5012.5=4.
+ The modified divisor is 14.5. The modified quota is 5014.5≈3.45.
+ The modified divisor is 13. The modified quota is 5013≈3.85.
+ One value between 13 and 14.5 is 13.5. With a modified divisor of 13.5, the modified quota is 5013.5≈3.70.
+ The modified quota from part 3 was the largest because the divisor was the smallest of the three. Dividing the same number by a smaller value gives a larger result.
+
+The state’s standard quota is 5012.5=4.
+
+The modified divisor is 14.5. The modified quota is 5014.5≈3.45.
+
+The modified divisor is 13. The modified quota is 5013≈3.85.
+
+One value between 13 and 14.5 is 13.5. With a modified divisor of 13.5, the modified quota is 5013.5≈3.70.
+
+The modified quota from part 3 was the largest because the divisor was the smallest of the three. Dividing the same number by a smaller value gives a larger result.
+
+When you use Jefferson’s method, you might have to adjust the divisor several times find modified lower quotas that sum to the house size. First, guess what the divisor should be based on the sum of the lower quotas and then increase or decrease it from there based on whether the sum needs to be smaller or larger respectively. If the result still does not produce lower quotas that sum to the house size, adjust again. Keep a record of the values that didn't work to help you narrow your search.
+
+Steps for Jefferson’s Method of Apportionment
+
+We take four steps to apply Jefferson’s Method of apportionment:
+Step 1: Find the standard divisor.
+Step 2: Find each state’s quota. This will be the standard quota the first time Step 2 is completed and the standard divisor is used, but Step 2 may be repeated as needed using a modified divisor and resulting in modified quotas.
+Step 3: Find the states’ lower quotas (with each state receiving at least one seat), and their sum.
+Step 4: If the sum from Step 3 equals the number of seats, the apportionment is complete. If the sum of the lower quotas is less than the number of seats, reduce the standard divisor. If the sum of the lower quotas is greater than the number of seats, increase the standard divisor. Return to Step 2 using the modified divisor.
+
+Hawaiian State Representative Districts
+
+Suppose that the Hawaii State Department of Education has a budget for 616 schools and is doing a research study to determine the equitable number of schools to have in each of five counties based on the residents under the age of 19. With the data in the table below, apply Jefferson’s method to apportion the schools to the counties.
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+Residents under Age 19
+46,310
+224,230
+20
+16,560
+38,450
+Step 1: The process for finding the standard divisor, standard quotas, and lower quotas is the same in the Hamilton and Jefferson methods of apportionment. We walked through the Hamilton Method in , and following these steps resulted in lower quotas as shown in the table below.
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450528.52≈72.75
+Lower Quota
+87
+424
+1
+31
+72
+Step 2: Compare the sum of the states’ lower quotas, 615, to the house size, 616. Since 615 is less than 616, use a modified divisor that is less than the standard divisor of 528.52. Try 526.00.
+Step 3: Find each state’s modified quota, lower quota, and the sum of the lower quotas based on the modified divisor of 526:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450526.00≈72.75
+Lower Quota
+88
+426
+1
+31
+72
+Step 4: The new sum of the lower quotas is 2 units greater than 616. We have overshot the goal. So, increase the divisor to a value between 526.00 and 528.52. Try 527.00.
+Step 5: Repeat the process of finding the quotas. Find each state’s modified quota, lower quota, and the sum of the lower quotas based on the modified divisor of 526.00:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450527.00≈72.96
+Lower Quota
+87
+425
+1
+31
+72
+Step 6: The new sum of the lower quotas equals the house size. The apportionment is complete.
+
+The apportionment is: Hawaii County 87, Honolulu County 425, Kalawao County 1, Kauai 31, and Maui 72 schools.
+
+When using Jefferson’s method, the modified divisors you use may be 
+ different from what another person chooses, but final apportionment values will be the same.
+
+Notice that, in this apportionment, Mythbury received more than the upper quota. Since this apportionment of representatives to Imaginarian states by Jefferson’s method does not satisfy the quota rule, we say that:
+Jefferson’s method violates the quota rule.
+
+We have discussed two apportionment methods: one that satisfies the quota rule and one that does not. Before you decide which method to use in Imaginaria, there are a couple more options to consider.
+Jefferson Apportionment Method
+
+Apportionment Calculators
+
+It is possible to create Excel spreadsheets that complete the calculations necessary to complete a Jefferson Apportionment. In some cases, this work has already been done and posted online. Check out websites such Ms. Hearn Math for a free Jefferson apportionment calculator.
+
+This can be a useful tool to confirm your results!
+
+Adams’s Method of Apportionment
+
+Adams’s method of apportionment is another method of apportionment that is based on a modified divisor. However, instead of basing the changes on the sum of the lower quotas, as Jefferson did, Adams used the upper quotas.
+
+To apply Adams’s Method of apportionment, there are four steps we follow:
+
+Find the standard divisor.
+
+Find each state’s quota. This will be the standard quota the first time Step 2 is completed, and the standard divisor is used, but Step 2 may be repeated as needed using a modified divisor and resulting in modified quotas.
+
+Find the states’ upper quotas and their sum.
+
+If the sum from Step 3 equals the number of seats, the apportionment is complete. If the sum of the upper quotas is less than the number of seats, reduce the standard divisor. If the sum of the upper quotas is greater than the number of seats, increase the standard divisor. Return to Step 2 using the modified divisor.
+
+Hawaiian School Districts
+
+As in earlier examples, suppose that the Hawaii State Department of Education has a budget for 616 schools and is doing a research study to determine the equitable number of schools to have in each of the five counties based on the residents under the age of 19. Use the data in the following table and the Adams method to apportion the schools to the counties.
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+Residents under Age 19
+46,310
+224,230
+20
+16,560
+38,450
+Step 1: The steps of finding the standard divisor and each state’s quota are the same in the Jefferson and Adams methods. As in , the standard divisor is 528.52.
+Step 2: Find each state’s upper quota and their sum:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450528.52≈72.75
+Upper Quota
+88
+425
+1
+32
+73
+Step 3: Compare the sum of the states’ upper quotas, 619, to the house size, 616. Since 619 is greater than 616, we need to reduce the size of the quotas. Use a modified divisor that is greater than the standard divisor of 528.52. Try 534.00.
+Step 4: Find each state’s modified quota, upper quota, and the sum of the upper quotas based on the modified divisor of 534:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450534.00≈72.00
+Upper Quota
+88
+420
+1
+32
+72
+Step 5: The new sum of the upper quotas is 3 units less than 616. Larger quotas are needed. So, decrease the divisor to a value between 534.00 and 528.52. Try 532.00.
+Step 6: Find each state’s modified quota, upper quota, and the sum of the upper quotas based on the modified divisor of 532.00:
+
+County
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450532.00≈72.27
+Upper Quota
+88
+422
+1
+32
+73
+Step 7: The new sum of the upper quotas equals the house size. The apportionment is complete.
+
+The apportionment is Hawaii County 88, Honolulu County 422, Kalawao County 1, Kauai 32, and Maui 73 schools.
+
+When using Adams’s method, just as with Jefferson’s method, the modified divisors you use may be different from what another person chooses, but final apportionment values will be the same.
+
+In this apportionment, Mythbury received less than the state’s lower quota. So, this apportionment is an example of a scenario in which the Adams’s method violates the quota rule.
+Adams’s method of apportionment violates the quota rule.
+
+So far, only Hamilton’s method satisfies the quota rule, but there is one more apportionment method you should consider for Imaginaria.
+Adams Method Apportionment Calculator
+
+Apportionment Calculators
+
+Check out websites such as Ms. Hearn Math for a free Adams Method apportionment calculator.
+
+This can be a useful tool to confirm your results!
+
+Webster’s Method of Apportionment
+
+Webster’s method of apportionment is another method of apportionment that is based on a modified divisor. However, instead of basing the changes on the sum of the lower quotas, as Jefferson did or the sum of the upper quotas as Adams did, Webster used traditional rounding.
+
+To apply Webster’s method of apportionment, there are four steps we take:
+
+Find the standard divisor.
+
+Find each state’s quota. This will be the standard quota the first time Step 2 is completed, and the standard divisor is used, but Step 2 may be repeated as needed using a modified divisor and resulting in modified quotas.
+
+Round each state’s quota to the nearest whole number and find the sum of these values.
+
+If the sum of the rounded quotas equals the number of seats, the apportionment is complete. If the sum of the rounded quotas is less than the number of seats, reduce the divisor. If the sum of the rounded quotas is greater than the number of seats, increase the divisor. Return to Step 2 using the modified divisor.
+
+When using Webster’s method, just as with Jefferson’s method, the modified divisors you use may be different from what another person chooses, but final apportionment values will be the same.
+
+Hawaiian School Districts
+
+Use the data in the table below to apportion 616 schools to Hawaiian counties. This time, use Webster’s method.
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+Residents under Age 19
+46,310
+224,230
+20
+16,560
+38,450
+325,570
+To apply Webster’s method of apportionment, there are four steps we take:
+Step 1: The processes of finding the standard divisor and standard quota are the same in the Jefferson, Adams, and Webster’s methods. As in the previous examples, the standard divisor is 528.52.
+Step 2: Find each state’s rounded quota and their sum:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450528.52≈72.75
+Rounded Quota
+88
+424
+1
+31
+73
+Step 3: Compare the sum of the states’ rounded quotas, 617, to the house size, 616. Since 617 is greater than 616, we need to reduce the size of the quotas. Use a modified divisor that is greater than the standard divisor of 528.52. Try 534.00.
+Step 4: Find each state’s modified quota, rounded quota, and the sum of the rounded quotas based on the modified divisor of 534:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450534.00≈72.00
+Upper Quota
+87
+420
+1
+31
+72
+Step 5: The new sum of the rounded quotas is 4 units less than 616. Larger quotas are needed. So, decrease the divisor to a value between 534.00 and 528.52. Try 530.00.
+Step 6: Find each state’s modified quota, rounded quota, and the sum of the rounded quotas based on the modified divisor of 530.00:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450530.00≈72.55
+Upper Quota
+87
+423
+1
+31
+73
+Step 7: The new sum of the rounded quotas is 1 unit less than 616. Larger quotas are needed. So, decrease the divisor to a value between 528.52 and 530.00. Try 529.50.
+Step 8: Find each state’s modified quota, rounded quota, and the sum of the rounded quotas based on the modified divisor of 529.50:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450529.50≈72.62
+Upper Quota
+87
+423
+1
+31
+73
+Step 9: The new sum is still only 1 unit less than 616. Larger quotas are needed, but not much larger. So, decrease the divisor to a value between 528.52 and 529.50. Try 529.30.
+Step 10: Find each state’s modified quota, rounded quota, and the sum of the rounded quotas based on the modified divisor of 529.30:
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Maui
+38,450529.30≈72.64
+Upper Quota
+87
+424
+1
+31
+73
+Step 11: The new sum of the rounded quotas equals the house size. The apportionment is complete.
+
+The apportionment is Hawaii County 87, Honolulu County 424, Kalawao County 1, Kauai 31, and Maui 73 schools.
+
+So far, we know that the Hamilton method satisfies the quota rule, while the Jefferson and Adams methods do not. The apportionments in the Example and Your Turn above
+ are both scenarios in which the Webster method satisfies the quota rule. Does it always? We have a little more work to do to find out. However, one thing is clear. Not all apportionment methods have the same results. Before you make such an important decision for Imaginaria, it’s important to think about the differences in the apportionments that result from these four methods. How will the differences affect the citizens of Imaginaria?
+
+Apportionment Calculators
+
+Check out websites such as Ms. Hearn Math for a free Webster Method apportionment calculator.
+
+This can be a useful tool to confirm your results!
+
+Comparing Apportionment Methods
+
+Recall that the four apportionment methods discussed in this chapter differ in two main ways:
+
+Whether or not a modified divisor is used
+
+The type of rounding of the quotas that is used
+
+How might these differences affect Imaginarians? In the next two examples, we will compare the results when different apportionment methods are applied to the same scenario.
+
+Hawaiian School Districts with Different Apportionment Methods
+
+Let’s use the results from , , , and to compare the four apportionment methods we have discussed. The following table summarizes the results of the results of the Hamilton, Jefferson, Adams and Webster methods when applied to the apportionment of 616 schools to Hawaiian counties.
+
+Hawaii
+Honolulu
+Kalawao
+Kauai
+Under 19 years old
+46,310
+224,230
+20
+16,560
+Hamilton
+87
+424
+1
+31
+Jefferson
+87
+425
+1
+31
+Adams
+88
+422
+1
+32
+Webster
+87
+424
+1
+31
+73
+Do any of the apportionment methods result in the same apportionment? If so, which ones?
+
+Which apportionment method would the citizens of the largest county likely favor most and least? Justify your answer.
+
+As a group, which apportionment method would the citizens of the other four counties likely favor most and least? Justify your answer.
+Yes, the Hamilton and Webster methods result in the same apportionment.
+ The largest county is Honolulu. The citizens would likely favor the Jefferson method of apportionment most since they received the most seats by that method. They would likely favor the Adams method of apportionment least because they received the least number of seats by that method.
+ As a group, the other four counties received 192 seats by either the Hamilton or Webster method, 194 seats by the Adams method, and 191 seats by the Jefferson method. They would likely favor the Adams method the most and favor the Jefferson methods the least.
+
+Yes, the Hamilton and Webster methods result in the same apportionment.
+
+The largest county is Honolulu. The citizens would likely favor the Jefferson method of apportionment most since they received the most seats by that method. They would likely favor the Adams method of apportionment least because they received the least number of seats by that method.
+
+As a group, the other four counties received 192 seats by either the Hamilton or Webster method, 194 seats by the Adams method, and 191 seats by the Jefferson method. They would likely favor the Adams method the most and favor the Jefferson methods the least.
+
+The Adams method favored the smaller states and the Jefferson method favored the larger states in the previous example, but is this the case in general?
+
+Since the Jefferson method begins with the lower quotas, any adjustment to the quotas will be an increase. As you have seen, this is accomplished by using a modified divisor that is smaller than the standard divisor. The next example compares the impact of a decreasing divisor on the modified quotas of large states to the impact of the same size decrease on small states.
+
+Effect of Decreasing Divisors on Modified Quotas
+
+The following table displays the effect of reducing the size of the divisor. Observe the effect this has on the modified quotas of smaller states versus larger states and use the table answer each question.
+
+Modified Quotas
+State
+Population
+Divisor: 10,500
+Divisor: 10,000
+Divisor: 9,500
+A
+10,000
+0.95
+1
+1.05
+B
+100,000
+9.52
+10
+10.53
+C
+1,000,000
+95.24
+100
+105.26
+When the divisor decreases from 10,500 to 10,000, how many representatives are gained by each state based on the lower quota?
+
+When the divisor decreases from 10,000 to 9,500, how many representatives are gained by each state based on the lower quota?
+
+Which state gains the most representatives each time the divisor is decreased?
+Since a state must have at least one seat, State A begins with 1 seat and still has one seat. State B begins with 9 seats and increases to 10 seats. State C b
+[truncated]

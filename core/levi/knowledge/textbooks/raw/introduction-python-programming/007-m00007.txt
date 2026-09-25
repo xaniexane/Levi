@@ -1,0 +1,86 @@
+# m00007
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Error messages
+
+Error messages
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify the error type and line number in error messages.
+
+Correct syntax errors, name errors, and indentation errors.
+
+How to read errors
+
+A natural part of programming is making mistakes. Even experienced programmers make mistakes when writing code. Errors may result when mistakes are made when writing code. The computer requires very specific instructions telling the computer what to do. If the instructions are not clear, then the computer does not know what to do and gives back an error.
+
+When an error occurs, Python displays a message with the following information:
+
+The line number of the error.
+
+The type of error (Ex: SyntaxError).
+
+Additional details about the error.
+
+Ex: Typing print "Hello!" without parentheses is a syntax error. In Python, parentheses are required to use print. When attempting to run print "Hello!", Python displays the following error:
+
+The caret character (^) shows where Python found the error. Sometimes the error may be located one or two lines before where the caret symbol is shown because Python may not have discovered the error until then. Traceback is a Python report of the location and type of error. The word traceback suggests a programmer trace back in the code to find the error if the error is not seen right away.
+
+Learning to read error messages carefully is an important skill. The amount of technical jargon can be overwhelming at first. But this information can be very helpful.
+
+Incorrect variable name
+
+Parts of an error
+
+Given the following error message:
+
+Common types of errors
+
+Different types of errors may occur when running Python programs. When an error occurs, knowing the type of error gives insight about how to correct the error. The following table shows examples of mistakes that anyone could make when programming.
+
+Simple mistakes.
+
+Mistake
+Error message
+print("Have a nice day!"
+SyntaxError: unexpected EOF while parsing
+word = input("Type a word: )
+SyntaxError: EOL while scanning string literal
+print("You typed:", wird)
+The spelling of word is incorrect. The programmer accidentally typed the wrong key.
+The spelling of word is incorrect. The programmer accidentally typed the wrong key.
+prints("You typed:", word)
+The spelling of print is incorrect. The programmer accidentally typed an extra letter.
+The spelling of print is incorrect. The programmer accidentally typed an extra letter.
+IndentationError: unexpected indent
+IndentationError: unexpected indent
+The programmer accidentally pressed the Tab key at the start of the line.
+Types of errors
+
+For each program below, what type of error will occur?
+
+Three errors
+
+The following program has three errors.
+
+Run the program to find the first error, and correct the corresponding line of code.
+
+Then run the program again to find and correct the second error.
+
+Keep running and correcting the program until no errors are found.
+
+Wrong symbols
+
+This code is based on an earlier example, but the code contains several mistakes.
+
+One line is missing required punctuation, and another line uses incorrect symbols.
+
+Run the program to find the first error, and correct the corresponding line of code.
+
+Keep running and correcting the program until no errors are found.

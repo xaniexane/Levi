@@ -1,0 +1,68 @@
+# m00100
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Inheritance describes an is-a relationship between classes. One class, the subclass, inherits from another class, the superclass.
+
+Subclasses can access inherited attributes and methods directly.
+
+Subclasses can override superclass methods to change or add functionality.
+super() allows a subclass to access the methods of the superclass.
+
+Polymorphism describes a single representation for multiple forms and is applied in Python to define multiple methods with the same name and allow the same method to take different arguments.
+
+Hierarchical inheritance is a type of inheritance in which multiple classes inherit from a single superclass.
+
+Multiple inheritance is a type of inheritance in which one class inherits from multiple classes.
+
+Mixin classes are used in multiple inheritance to add functionality to a subclass without adding inheritance concerns.
+
+At this point, you should be able to write subclasses that inherit instance attributes and methods, and subclasses that have unique attributes and overridden methods. You should also be able to create hierarchical inheritance relationships and multiple inheritance relationships between classes.
+
+Chapter 13 reference.
+
+Task
+Example
+Define a subclass's __init__() using super()
+Define a subclass's __init__() using super()
+class SubClass(SuperClass):
+  def __init__(self):
+    super().__init__() # Calls superclass __init__()
+    # Initialize subclass instance attributes
+class SuperClass:
+  def display(self):
+    print('Superclass method')
+
+class SubClass(SuperClass):
+  def display(self): # Same name as superclass method
+    print('Subclass method')
+class SuperClass:
+  def display(self):
+    print('Superclass method')
+
+class SubClass1(SuperClass):
+  def display(self):
+    print('Subclass 1 method ')
+class SubClass2(SuperClass):
+  def display(self):
+  print('Subclass 2 method')
+
+class SubClass3(SuperClass):
+  def display(self):
+    print('Subclass 3 method')
+class SuperClass1:
+    pass
+
+class SuperClass2:
+    pass
+
+class SubClass(SuperClass1, SuperClass2):
+    pass

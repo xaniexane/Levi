@@ -1,0 +1,81 @@
+# m00105
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Handling exceptions
+
+Handling exceptions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe two exceptions that may occur when reading files.
+
+Write try/except statements that handle built-in exceptions.
+
+Runtime errors
+
+Various errors may occur when reading a file:
+FileNotFoundError: The filename or path is invalid.
+IndexError/ValueError: The file's format is invalid.
+
+Other errors caused by invalid contents of a file.
+
+When an error occurs, the program terminates with an error message.
+
+Typo in a file
+
+A file named food_order.txt has the following contents:
+
+The following program expects each line of the file to begin with an integer:
+
+Unfortunately, the line "soft drinks" does not begin with an integer. As a result, the program terminates and displays an error message:
+
+Common exceptions
+
+What error might occur in each situation?
+
+Exploring further
+
+The Built-in Exceptions page of the Python Standard Library explains the meaning of each exception.
+
+Try and except
+
+Programs can be designed to handle exceptions, rather than terminate. A try statement runs code that might raise an exception. An except clause runs code in response to the exception.
+
+Try to open a file
+
+The following program, named try_open.py, asks the user for a filename and counts the number of lines in the file.
+
+When running this program with the input try_open.py, the name of the program file, the output is:
+
+If the filename does not exist, a FileNotFoundError is raised on line 3. The program then jumps to the except clause on line 7 and continues to run. The resulting output is:
+
+Predicting output with exceptions
+
+For each code snippet, what is the output?
+
+Type analyzer
+
+Analysis programs often need to find numbers in large bodies of text. How can a program tell if a string like "123.45" represents a number? One approach is to use exceptions:
+
+Try converting the string to an integer. If no ValueError is raised, then the string represents an integer.
+
+Otherwise, try converting the string to a float. If no ValueError is raised, then the string represents a float.
+
+Otherwise, the string does not represent a number.
+
+Implement the get_type() function using this approach. The provided main block calls get_type() for each word in a file. get_type() should return either "int", "float", or "str", based on the word. The output for the provided data.txt is:
+
+United countries
+
+Write a program that prompts the user to input a word and a filename. The program should print each line of the file that contains the word. Here is an example run of the program (user input in bold):
+
+This example uses a file named countries.csv based on the alphabetical list of countries from Worldometer. Each line of the file includes a country's name, population, land area, and population density, separated by commas.
+
+The user might incorrectly type the filename (Ex: countries.txt instead of countries.csv). Your program should output an error message if the file is not found, and keep prompting the user to input a filename until the file is found:
+
+Hint: Try to open the file specified by the user. A FileNotFoundError is raised if the filename is invalid.

@@ -1,0 +1,810 @@
+# m79625
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Geometric Distribution (Optional)
+
+Geometric Distribution (Optional)
+
+There are three main characteristics of a geometric experiment:
+
+Repeating independent Bernoulli trials until a success is obtained. Recall that a Bernoulli trial is a binomial experiment with number of trials n = 1. In other words, you keep repeating what you are doing until the first success. Then you stop. For example, you throw a dart at a bull's-eye until you hit the bull's-eye. The first time you hit the bull's-eye is a success so you stop throwing the dart. It might take six tries until you hit the bull's-eye. You can think of the trials as failure, failure, failure, failure, failure, success, stop.
+
+In theory, the number of trials could go on forever. There must be at least one trial.
+
+The probability, p, of a success and the probability, q, of a failure do not change from trial to trial. p + q = 1 and q = 1 − p. For example, the probability of rolling a three when you throw one fair die is 
+
+ 1
+ 6
+
+. This is true no matter how many times you roll the die. Suppose you want to know the probability of getting the first three on the fifth roll. On rolls one through four, you do not get a face with a three. The probability for each of the rolls is q = 
+
+ 5
+ 6
+
+, the probability of a failure. The probability of getting a three on the fifth roll is 
+ 
+ (
+
+ 5
+ 6
+
+ )(
+
+ 5
+ 6
+
+ )(
+
+ 5
+ 6
+
+ )(
+
+ 5
+ 6
+
+ )(
+
+ 1
+ 6
+
+ )
+ 
+ = .0804.
+X = the number of independent trials until the first success.
+p = the probability of a success, q = 1  p = the probability of a failure.
+
+There are shortcut formulas for calculating mean μ, variance σ2, and standard deviation σ of a geometric probability distribution. The formulas are given as below. The deriving of these formulas will not be discussed in this book.
+
+Suppose a game has two outcomes, win or lose. You repeatedly play that game until you lose. The probability of losing is p = 0.57.
+
+If we let X = the number of games you play until you lose (includes the losing game), then X is a geometric random variable. All three characteristics are met. Each game you play is a Bernoulli trial, either win or lose. You would need to play at least one game before you stop. X takes on the values 1, 2, 3, . . . (could go on indefinitely). Since we are measuring the number of games you play until you lose, we define a success as losing a game and a failure as winning a game. The probability of a success 
+
+ p=.57
+
+ and the probability of a failure q = 1 – p = 1 – 0.57 = 0.43. Both p and q remain the same from game to game.
+
+If we want to find the probability that it takes five games until you lose, then the probability could be written as P(x = 5). We will explain how to find a geometric probability later in this section.
+
+Try It
+
+You throw darts at a board until you hit the center area. Your probability of hitting the center area is p = 0.17. You want to find the probability that it takes eight throws until you hit the center. What values does X take on?
+
+1, 2, 3, 4, … n. It can go on indefinitely.
+
+A safety engineer feels that 35 percent of all industrial accidents in her plant are caused by failure of employees to follow instructions. She decides to look at the accident reports (selected randomly and replaced in the pile after reading) until she finds one that shows an accident caused by failure of employees to follow instructions.
+
+If we let X = the number of accidents the safety engineer must examine until she finds a report showing an accident caused by employee failure to follow instructions, then X is a geometric random variable. All three characteristics are met. Each accident report she reads is a Bernoulli trial: the accident was either caused by failure of employees to follow instructions or not. She would need to read at least one accident report before she stops. X takes on the values 1, 2, 3, . . . (could go on indefinitely). Since we are measuring the number of reports she needs to read until one that shows an accident caused by failure of employees to follow instructions, we define a success as an accident caused by failure of employees to follow instructions. If an accident was caused by another reason, the report is defined as a failure. The probability of a success p = .35 and the probability of a failure 
+
+ q=1−p=1−.35=.65
+
+. Both p and q remain the same from report to report.
+
+If we want to find the probability that the safety engineer will have to examine at least three reports until she finds a report showing an accident caused by employee failure to follow instructions, then the probability could be written as 
+
+ p=.35
+
+. If we want to find how many reports, on average, the safety engineer would expect to look at until she finds a report showing an accident caused by employee failure to follow instructions, we need to find the expected value E(x). We will explain how to solve these questions later in this section.
+
+Try It
+
+An instructor feels that 15 percent of students get below a C on their final exam. She decides to look at final exams (selected randomly and replaced in the pile after reading) until she finds one that shows a grade below a C. We want to know the probability that the instructor will have to examine at least 10 exams until she finds one with a grade below a C. What is the probability question stated mathematically?
+P(x ≥ 10)
+
+Suppose that you are looking for a student at your college who lives within five miles of you. You know that 55 percent of the 25,000 students do live within five miles of you. You randomly contact students from the college until one says he or she lives within five miles of you. What is the probability that you need to contact four people?
+
+This is a geometric problem because you may have a number of failures before you have the one success you desire. Also, the probability of a success stays the same each time you ask a student if he or she lives within five miles of you. There is no definite number of trials (number of times you ask a student).
+
+a. Let X = the number of ________ you must ask ________ one says yes.
+
+a. Let X = the number of students you must ask until one says yes.
+
+b. What values does X take on?
+
+b. 1, 2, 3, . . ., (total number of students)
+
+c. What are p and q?
+
+c. p = .55; q = .45
+
+d. The probability question is P(_______).
+
+d. P(x = 4)
+
+Try It
+
+You need to find a store that carries a special printer ink. You know that of the stores that carry printer ink, 10 percent of them carry the special ink. You randomly call each store until one has the ink you need. What are p and q?
+p = 0.1
+q = 0.9
+
+Notation for the Geometric: G = Geometric Probability Distribution Function
+X ~ G(p)
+
+Read this as X is a random variable with a geometric distribution. The parameter is p; p = the probability of a success for each trial.
+
+Assume that the probability of a defective computer component is 0.02. Components are randomly selected. Find the probability that the first defect is caused by the seventh component tested. How many components do you expect to test until one is found to be defective?
+
+Let X = the number of computer components tested until the first defect is found.
+X takes on the values 1, 2, 3, . . . where p = .02. X ~ G(.02)
+
+Find P(x = 7). There is a formula to define the probability of a geometric distribution 
+
+ P(x)
+
+. We can use the formula to find 
+
+ P(x=7)
+
+. But since the calculation is tedious and time consuming, people usually use a graphing calculator or software to get the answer. Using a graphing calculator, you can get 
+
+ P(x=7)=.0177
+
+. The instruction of TI83, 83+, 84, 84+ is given below.
+
+Go into 2nd DISTR. The syntax for the instructions are as follows:
+To calculate the probability of a value P(x = value), use geometpdf(p, number). Here geometpdf represents geometric probability density function. It is used to find the probability that a geometric random variable is equal to an exact value. p is the probability of a success and number is the value.
+To calculate the cumulative probability P(x ≤ value), use geometcdf(p, number). Here geometcdf represents geometric cumulative distribution function. It is used to determine the probability of “at most” type of problem, the probability that a geometric random variable is less than or equal to a value. p is the probability of a success and number is the value.
+
+To find 
+
+ P(x=7)
+
+, enter 2nd DISTR, arrow down to geometpdf(. Press ENTER. Enter .02,7). The result is 
+
+ P(x=7)=.0177
+
+.
+
+If we need to find 
+
+ P(x≤7)
+
+ enter 2nd DISTR, arrow down to geometcdf(. Press ENTER. Enter .02,7). The result is 
+
+ (x≤=7)=.1319
+
+.
+
+The graph of X ~ G(.02) is
+
+The previous probability distribution histogram gives all the probabilities of X. The x-axis of each bar is the value of X = the number of computer components tested until the first defect is found, and the height of that bar is the probability of that value occurring. For example, the x value of the first bar is 1 and the height of the first bar is 0.02. That means the probability that the first computer components tested is defective is .02.
+
+The expected value or mean of X is 
+
+ E(X)=μ=
+ 1
+ p
+ 
+ =
+ 1
+ 
+ .02
+
+ =50
+
+.
+
+The variance of X is 
+
+ σ
+ 2
+ 
+ =(
+ 1
+ p
+ 
+ )(
+ 1
+ p
+ 
+ −1)=(
+ 1
+ 
+ .02
+
+ )(
+ 1
+ 
+ .02
+
+ −1)=(50)(49)=2,450
+
+The standard deviation of X is 
+
+ σ=
+
+ σ
+ 
+ 2
+
+ =
+ 
+ 2,450
+
+ =49.5
+
+Here is how we interpret the mean and standard deviation. The number of components that you would expect to test until you find the first defective one is 50 (which is the mean). And you expect that to vary by about 50 computer components (which is the standard deviation) on average.
+
+Try It
+
+The probability of a defective steel rod is .01. Steel rods are selected at random. Find the probability that the first defect occurs on the ninth steel rod. Use the TI-83+ or TI-84 calculator to find the answer.
+P(x = 9) = 0.0092
+
+The lifetime risk of developing pancreatic cancer is about one in 78 (1.28 percent). Let X = the number of people you ask until one says he or she has pancreatic cancer. Then X is a discrete random variable with a geometric distribution: X ~ G
+ 
+ (
+
+ 1
+ 
+ 78
+
+ )
+ 
+ or X ~ G(.0128).
+
+What is the probability that you ask 10 people before one says he or she has pancreatic cancer?
+
+What is the probability that you must ask 20 people?
+
+Find the (i) mean and (ii) standard deviation of X.
+P(x = 10) = geometpdf(.0128, 10) = .0114
+P(x = 20) = geometpdf(.0128, 20) = .01
+Mean = μ = 
+
+ 1
+ p
+
+ = 
+
+ 1
+ 
+ .0128
+
+ = 78
+
+ σ=
+
+ σ
+ 2
+
+ =
+ 
+ (
+
+ 1
+ p
+
+ )(
+
+ 1
+ p
+ 
+ −1
+ 
+ )
+
+ =
+ 
+ (
+
+ 1
+ 
+ .0128
+
+ )(
+
+ 1
+ 
+ .0128
+
+ −1
+ 
+ )
+
+ =
+ 
+ (
+ 
+ 78
+ 
+ )(
+ 
+ 78−1
+ 
+ )
+
+ =
+ 
+ 6,006
+
+ =77.4984≈77
+
+The number of people whom you would expect to ask until one says he or she has pancreatic cancer is 78. And you expect that to vary by about 77 people on average.
+
+Mean = μ = 
+
+ 1
+ p
+
+ = 
+
+ 1
+ 
+ .0128
+
+ = 78
+σ=
+
+ σ
+ 2
+
+ =
+ 
+ (
+
+ 1
+ p
+
+ )(
+
+ 1
+ p
+ 
+ −1
+ 
+ )
+
+ =
+ 
+ (
+
+ 1
+ 
+ .0128
+
+ )(
+
+ 1
+ 
+ .0128
+
+ −1
+ 
+ )
+
+ =
+ 
+ (
+ 
+ 78
+ 
+ )(
+ 
+ 78−1
+ 
+ )
+
+ =
+ 
+ 6,006
+
+ =77.4984≈77
+
+The number of people whom you would expect to ask until one says he or she has pancreatic cancer is 78. And you expect that to vary by about 77 people on average.
+
+Try It
+
+The literacy rate for a nation measures the proportion of people age 15 and over who can read and write. The literacy rate for women in Afghanistan is 12 percent. Let X = the number of Afghani women you ask until one says that she is literate.
+
+What is the probability distribution of X?
+
+What is the probability that you ask five women before one says she is literate?
+
+What is the probability that you must ask 10 women?
+
+Find the (i) mean and (ii) standard deviation of X.
+X ~ G(0.12)
+P(x = 5) = geometpdf(0.12, 5) = 0.0720
+P(x = 10) = geometpdf(0.12, 10) = 0.0380
+Mean = μ = 
+
+ 1
+ p
+
+ = 
+
+ 1
+ 
+ 0.12
+
+ ≈ 3333
+Standard Deviation = σ = 
+
+ 1−p
+
+ p
+ 2
+
+ = 
+
+ 1−0.12
+
+ 0.12
+ 
+ 2
+
+ ≈ 7.8174
+
+Mean = μ = 
+
+ 1
+ p
+
+ = 
+
+ 1
+ 
+ 0.12
+
+ ≈ 3333
+
+Standard Deviation = σ = 
+
+ 1−p
+
+ p
+ 2
+
+ = 
+
+ 1−0.12
+
+ 0.12
+ 
+ 2
+
+ ≈ 7.8174
+
+References
+
+Central Intelligence Agency. (n.d.). The world factbook. Retrieved from https://www.cia.gov/library/publications/theworld-factbook/geos/af.html
+
+Pew Research Center. (n.d.). Millennials: A portrait of generation next. Retrieved from http://www.pewsocialtrends.org/files/2010/10/millennials-confident-connected-open-to-change.pdf
+
+Pew Research. (2013). Millennials: confident. Executive Summary: Pew Research Social & Demographic Trends. Retrieved from http://www.pewsocialtrends.org/2010/02/24/millennials-confident-connected-open-tochange/
+
+Pryor, J. H., et al. (2011). The American freshman: National norms fall 2011. Los Angeles: Cooperative Institutional Research Program, Higher Education Research Institute. Retrieved from http://heri.ucla.edu/PDFs/pubs/TFS/Norms/Monographs/ TheAmericanFreshman2011.pdf
+
+The European Union and ICON-Institute. (2007/8). Summary of the national risk and vulnerability assessment 2007/8: A profile of Afghanistan. Retrieved from http://ec.europa.eu/europeaid/where/asia/documents/afgh_brochure_summary_en.pdf
+
+The World Bank. (2013). Prevalence of HIV, total (% of populations ages 15-49). Retrieved from http://data.worldbank.org/indicator/SH.DYN.AIDS.ZS?order=wbapi_data_value_2011+wbapi_data_value+wbapi_data_value-last&sort=desc
+
+UNICEF Television. (n.d.). UNICEF reports on female literacy centers in Afghanistan established to teach women and girls basic reading and writing skills. (Video). Retrieved from http://www.unicefusa.org/assets/video/afghan-femaleliteracy-centers.html
+
+Chapter Review
+
+There are three characteristics of a geometric experiment:
+
+There are one or more Bernoulli trials with all failures except the last one, which is a success
+
+In theory, the number of trials could go on forever; there must be at least one trial
+
+The probability, p, of a success and the probability, q, of a failure are the same for each trial
+
+In a geometric experiment, define the discrete random variable X as the number of independent trials until the first success. We say that X has a geometric distribution and write X ~ G(p) where p is the probability of success in a single trial.
+
+The mean of the geometric distribution X ~ G(p) is μ = 
+
+ 1−p
+
+ p
+ 2
+
+ = 
+
+ 1
+ p
+ 
+ (
+
+ 1
+ p
+ 
+ −1
+ 
+ )
+
+.
+
+Formula Review
+X ~ G(p) means that the discrete random variable X has a geometric probability distribution with probability of success in a single trial p.
+X = the number of independent trials until the first success
+X takes on the values x = 1, 2, 3, . . .
+p = the probability of a success for any trial
+q = the probability of a failure for any trial p + q = 1 : q = 1 – p
+
+The mean is μ = 
+
+ 1
+ p
+
+.
+
+The standard deviation is σ = 
+
+ 1 – p
+
+ p
+ 2
+
+ = 
+
+ 1
+ p
+ 
+ (
+
+ 1
+ p
+ 
+ −1
+ 
+ )
+
+.
+Use the following information to answer the next six exercises: Researchers collected data from 203,967 incoming first-time, full-time freshmen from 270 four-year colleges and universities in the United States. Of those students, 71.3 percent replied that, yes, they agree with a recent law that was passed. Suppose that you randomly select freshman from the study until you find one who replies yes. You are interested in the number of freshmen you must ask.
+
+In words, define the random variable X.
+X = the number of freshmen selected from the study until one replied yes to the law that was passed.
+X ~ _____(_____,_____)
+
+What values does the random variable X take on?
+
+1,2,…
+
+Construct the probability distribution function (PDF). Stop at x = 6.
+P(x)
+1
+2
+3
+4
+5
+6
+On average (μ), how many freshmen would you expect to have to ask until you found one who replies yes?
+
+1.4
+
+What is the probability that you will need to ask fewer than three freshmen?
+
+HOMEWORK
+
+A consumer looking to buy a used red sports car will call dealerships until she finds a dealership that carries the car. She estimates the probability that any independent dealership will have the car will be 28 percent. We are interested in the number of dealerships she must call.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+On average, how many dealerships would we expect her to have to call until she finds one that has the car?
+
+Find the probability that she must call at most four dealerships.
+
+Find the probability that she must call three or four dealerships.
+
+Suppose that the probability that an adult in America will watch the Super Bowl is 40 percent. Each person is considered independent. We are interested in the number of adults in America we must survey until we find one who will watch the Super Bowl.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+How many adults in America do you expect to survey until you find one who will watch the Super Bowl?
+
+Find the probability that you must ask seven people.
+
+Find the probability that you must ask three or four people.
+X = the number of adults in America who are surveyed until one says he or she will watch the Super Bowl.
+X ~ G(.40)
+
+2.5
+
+.0187
+
+.2304
+
+It has been estimated that only about 30 percent of California residents have adequate earthquake supplies. Suppose we are interested in the number of California residents we must survey until we find a resident who does not have adequate earthquake supplies.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+What is the probability that we must survey just one or two residents until we find a California resident who does not have adequate earthquake supplies?
+
+What is the probability that we must survey at least three California residents until we find a California resident who does not have adequate earthquake supplies?
+
+How many California residents do you expect to need to survey until you find a California resident who does not have adequate earthquake supplies?
+
+How many California residents do you expect to need to survey until you find a California resident who does have adequate earthquake supplies?
+
+In one of its spring catalogs, a retailer advertised footwear on 29 of its 192 catalog pages. Suppose we randomly survey 20 pages. We are interested in the number of pages that advertise footwear. Each page may be picked more than once.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+How many pages do you expect to advertise footwear on them?
+
+Is it probable that all 20 will advertise footwear on them? Why or why not?
+
+What is the probability that fewer than 10 will advertise footwear on them?
+
+Reminder: A page may be picked more than once. We are interested in the number of pages that we must randomly survey until we find one that has footwear advertised on it. Define the random variable X and give its distribution.
+
+What is the probability that you only need to survey at most three pages in order to find one that advertises footwear on it?
+
+How many pages do you expect to need to survey in order to find one that advertises footwear?
+X = the number of pages that advertise footwear
+X takes on the values 0, 1, 2, ..., 20
+X ~ B(20, 29192)
+
+ 3.02
+ no
+ .9997
+X = the number of pages we must survey until we find one that advertises footwear. X ~ G(29192)
+ .3881
+ 6.6207 pages
+X = the number of pages that advertise footwear
+X takes on the values 0, 1, 2, ..., 20
+X ~ B(20, 29192)
+
+3.02
+
+no
+
+.9997
+X = the number of pages we must survey until we find one that advertises footwear. X ~ G(29192)
+
+.3881
+
+6.6207 pages
+
+Suppose that you are performing the probability experiment of rolling one fair six-sided die. Let F be the event of rolling a four or a five. You are interested in how many times you need to roll the die to obtain the first four or five as the outcome.
+p = probability of success (event F occurs)
+q = probability of failure (event F does not occur)
+
+Write the description of the random variable X.
+
+What are the values that X can take on?
+
+Find the values of p and q.
+
+Find the probability that the first occurrence of event F (rolling a four or five) is on the second trial.
+
+Ellen has music practice three days a week. She practices for all of the three days 85 percent of the time, two days 8 percent of the time, one day 4 percent of the time, and no days 3 percent of the time. One week is selected at random. What values does X take on?
+
+0, 1, 2, and 3
+
+Researchers investigate the prevalence of a particular infectious disease in countries around the world. According to their data, Prevalence of this disease refers to the percentage of people ages 15 to 49 who are infected with it. In South Africa, the prevalence of this disease is 17.3 percent. Let X = the number of people you test until you find a person infected with this disease.
+
+Sketch a graph of the distribution of the discrete random variable X.
+
+What is the probability that you must test 30 people to find one with this disease?
+
+What is the probability that you must ask 10 people?
+
+Find the (i) mean and (ii) standard deviation of the distribution of X.
+
+According to a recent poll, 75 percent of millennials (people born between 1981 and 1995) have a profile on a social networking site. Let X = the number of millennials you ask until you find a person without a profile on a social networking site.
+
+Describe the distribution of X.
+
+Find the (i) mean and (ii) standard deviation of X.
+
+What is the probability that you must ask 10 people to find one person without a social networking site?
+
+What is the probability that you must ask 20 people to find one person without a social networking site?
+
+What is the probability that you must ask at most five people?
+X ~ G(.25)
+mean = μ = 
+
+ 1
+ p
+
+ = 
+
+ 1
+ 
+ 0.25
+
+ = 4
+standard deviation = σ = 
+
+ 1−p
+
+ p
+ 2
+
+ = 
+
+ 1−.25
+
+ .25
+ 
+ 2
+
+ ≈ 3.4641
+
+mean = μ = 
+
+ 1
+ p
+
+ = 
+
+ 1
+ 
+ 0.25
+
+ = 4
+
+standard deviation = σ = 
+
+ 1−p
+
+ p
+ 2
+
+ = 
+
+ 1−.25
+
+ .25
+ 
+ 2
+
+ ≈ 3.4641
+P(x = 10) = geometpdf(.25, 10) = .0188
+P(x = 20) = geometpdf(.25, 20) = .0011
+P(x ≤ 5) = geometcdf(.25, 5) = .7627
+
+a discrete random variable (RV) that arises from the Bernoulli trials; the trials are repeated until the first success.
+The geometric variable X is defined as the number of trials until the first success. Notation X ~ G(p). The mean is μ = 
+
+ 1
+ p
+
+ and the standard deviation is σ = 
+
+ 1
+ p
+ 
+ (
+
+ 1
+ p
+ 
+ −1
+ 
+ )
+
+. The probability of exactly x failures before the first success is given by the formula P(X=x)=p(1–p)x–1.
+a statistical experiment with the following properties:
+
+There are one or more Bernoulli trials with all failures except the last one, which is a success
+In theory, the number of trials could go on foreve; there must be at least one trial
+The probability, p, of a success and the probability, q, of a failure do not change from trial to trial
+There are one or more Bernoulli trials with all failures except the last one, which is a success
+
+In theory, the number of trials could go on foreve; there must be at least one trial
+
+The probability, p, of a success and the probability, q, of a failure do not change from trial to trial

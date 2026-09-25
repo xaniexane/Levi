@@ -1,0 +1,164 @@
+# m00116
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Preface
+
+Preface
+
+About OpenStax
+
+OpenStax is part of Rice University, which is a 501(c)(3) nonprofit charitable corporation. As an educational initiative, it's our mission to improve educational access and learning for everyone. Through our partnerships with philanthropic organizations and our alliance with other educational resource companies, we're breaking down the most common barriers to learning. Because we believe that everyone should and can have access to knowledge.
+
+About OpenStax Resources
+
+Customization
+Introduction to Python Programming is licensed under a Creative Commons Attribution 4.0 International (CC BY) license, which means that you can distribute, remix, and build upon the content, as long as you provide attribution to OpenStax and its content contributors.
+
+Because our books are openly licensed, you are free to use the entire book or select only the sections that are most relevant to the needs of your course. Feel free to remix the content by assigning your students certain chapters and sections in your syllabus, in the order that you prefer. You can even provide a direct link in your syllabus to the sections in the web view of your book.
+
+Instructors also have the option of creating a customized version of their OpenStax book. Visit the Instructor Resources section of your book page on OpenStax.org for more information.
+
+Art attribution
+
+In Introduction to Python Programming, most photos and third-party illustrations contain attribution to their creator, rights holder, host platform, and/or license within the caption. Because the art is openly licensed, anyone may reuse the art as long as they provide the same attribution to its original source. To maximize readability and content flow, some art does not include attribution in the text. This art is part of the public domain or under a CC0 or similar license, and can be reused without attribution. For illustrations (e.g. graphs, charts, etc.) that are not credited, use the following attribution: Copyright Rice University, OpenStax, under CC BY 4.0 license.
+
+Errata
+
+All OpenStax textbooks undergo a rigorous review process. However, like any professional-grade textbook, errors sometimes occur. Since our books are web-based, we can make updates periodically when deemed pedagogically necessary. If you have a correction to suggest, submit it through the link on your book page on OpenStax.org. Subject matter experts review all errata suggestions. OpenStax is committed to remaining transparent about all updates, so you will also find a list of past and pending errata changes on your book page on OpenStax.org.
+
+Format
+
+You can access this textbook for free in web view or PDF through OpenStax.org. The web view is the recommended format because it is the most accessible—including being WCAG 2.1 AA compliant—and most current.
+
+About Introduction to Python Programming
+Introduction to Python Programming provides a comprehensive foundation in programming concepts and skills, and is aligned to the scope of most introductory courses. A wide array of scenarios, contexts, and problems reflect programming applications in many disciplines and careers. The offering is suitable for a diverse learner audience, including those pursuing computer science, business, science, social science, statistics, data science, and related areas of study and employment.
+Introduction to Python Programming is an interactive offering that teaches basic programming concepts, problem-solving skills, and the Python language using hands-on activities. The resource includes a unique, integrated code runner, through which students can immediately apply what they learn to check their understanding. Embedded videos, critical thinking exercises, and explorations of external programming tools and activities all contribute to a meaningful and supportive learning experience.
+
+The content is organized in chapters, with each chapter containing 6-8 sections. Each section follows the pattern:
+
+Learning objectives
+
+1–3 subsections
+
+Programming practice
+
+The learning objectives are designed to help readers identify the section's focus. Each objective completes the sentence, "By the end of this section you should be able to". The programming practice aligns with the learning objectives and gives readers an opportunity to apply concepts learned in the section.
+
+Pedagogical Foundation
+
+Concise text and video-based animations
+Introduction to Python Programming is designed to foster active learning and student engagement. It focuses on interactivity and practice through its integrated code runner, videos, and links to external environments and activities. With that focus, the material is often more concise, with less text and more activity.
+
+Each section's content is organized in subsections. The subsection begins with a concise introduction to the concept, with key term definitions and brief context for its relevance and importance. The concept is then explained in detail using video-based animations and interactive learning questions.
+
+Animation videos use a step-by-step approach to show the execution of Python code. Explanations for each step describe Python syntax, show how fundamental programming concepts are used, illustrate how variables are assigned, emphasize how code executes line by line, apply problem solving to create programs, and more.
+
+Displaying output to the user
+
+Learning questions
+
+After introducing a new concept and explaining the concept with a video-based animation, each subsection includes engagement in the form of learning questions. These questions reinforce the concepts taught, explain concepts in more depth, directly address misconceptions and errors commonly made by new programmers, and teach related concepts.
+
+Explanations are provided for the incorrect answers. Incorrect answers' explanations include why the answer is incorrect and help guide the reader to the correct answer.
+
+Incorrect answer choices typically represent a misconception or are the result of making a common mistake. Even if the correct answer is achieved, readers are encouraged to explore the explanations to gain awareness of these common misconceptions.
+
+Programming practice exercises
+
+Each section ends with 1 or 2 practice programs. This book includes an integrated programming environment, known as the "OpenStax Python Code Runner," which allows readers to write programs directly in the browser. The code runner requires the reader to pre-enter any input before running a program.
+
+Conventions used in this book
+
+The following typographical conventions are used throughout the book:
+Bold
+ Indicates vocabulary words when first defined in the chapter.
+Italic
+ Indicates emphasized text, filenames, and file extensions.
+Constant width
+ Used for code listings and code elements within paragraphs. Code elements include variable names, Python keywords, etc.
+Constant width bold
+ Shows commands or keyboard input that should be typed literally by the user.
+
+Ex:
+ Abbreviation for "Example:"
+
+About the Authors
+
+Senior Contributing Authors
+Udayan Das, Saint Mary's College of California
+
+Udayan Das, PhD, is an Associate Professor and Program Director of Computer Science at Saint Mary's College of California. He received his PhD in Computer Science and a master's in Computer Engineering from the Illinois Institute of Technology. His research interests include wireless networks, computer science education and broadening participation in computing, and knowledge graph backed language models for technical document processing. He is also strongly committed to incorporating ethics into computer science and engineering education, and the Computer Science program that he has developed and launched at Saint Mary's College of California centers ethics and social justice while teaching students to be high-quality computing professionals.
+Aubrey Lawson, Wiley
+
+Aubrey Lawson is a CS Content Developer at zyBooks. She received her bachelor's and master's degrees in Computer Science from Clemson University, and her PhD research focuses on CS education.
+Chris Mayfield, James Madison University
+
+Chris Mayfield, PhD, is a Professor of Computer Science at James Madison University. His research focuses on CS education and professional development at the undergraduate and high school levels. He received a PhD in Computer Science from Purdue University and bachelor’s degrees in CS and German from the University of Utah.
+Narges Norouzi, UC Berkeley
+
+Narges Norouzi received her MS and PhD from the University of Toronto, focusing on applied deep learning. She has since been involved in working on applied machine learning projects with a focus on biology and education. Her CS education research focuses on using artificial intelligence in the classroom to close the equity gap and leading student-centered programs that promote equity and access.
+
+Contributing Authors
+Yamuna Rajasekhar, Wiley
+
+Yamuna Rajasekhar, PhD, is Director of Content, Authoring, and Research at Wiley. She works across disciplines on research strategy, authoring pedagogy and training, and content development for Computer Science and IT. She received her MS and PhD from University of North Carolina at Charlotte, focusing on Computer Engineering education. Prior to joining Wiley as a content author, Yamuna was an Assistant Professor of Computer Engineering at Miami University, where her research was focused on assistive technology with embedded systems and Computer Engineering education.
+Reed Kanemaru, Wiley
+
+Reed Kanemaru earned a BS in Computer Science from University of California, Riverside in 2020 and an MS in Computer Science from University of California, Riverside in 2021. Since graduating, he has worked as a Content/Software Developer at zyBooks.
+
+Reviewers
+
+Mel Akhimiemona, Community College of Baltimore County
+
+Doina Bein, Cal State Fullerton
+
+Phillip Bradford, University of Connecticut
+
+James Braman, Community College of Baltimore County
+
+Robert Burrows, College of DuPage
+
+Deena Engel, New York University
+
+Gabriel Ferrer, Hendrix College
+
+Nazli Hardy, Millersville University
+
+Matthew Hertz, University at Buffalo
+
+Rania Hodhod, Columbus State University
+
+Akira Kawaguchi, The City College of New York
+
+Kevin Lin, University of Washington
+
+Matin Pirouz, Fresno State
+
+Muhammad Rahman, Clayton State University
+
+Jerry Reed, Valencia College
+
+Kathleen Tamerlano, Cuyahoga Community College
+
+Linda Tansil
+
+Academic Integrity
+
+Academic integrity builds trust, understanding, equity, and genuine learning. While students may encounter significant challenges in their courses and their lives, doing their own work and maintaining a high degree of authenticity will result in meaningful outcomes that will extend far beyond their college career. Faculty, administrators, resource providers, and students should work together to maintain a fair and positive experience.
+
+We realize that students benefit when academic integrity ground rules are established early in the course. To that end, OpenStax has created an interactive to aid with academic integrity discussions in your course.
+
+Visit our academic integrity slider. Click and drag icons along the continuum to align these practices with your institution and course policies. You may then include the graphic on your syllabus, present it in your first course meeting, or create a handout for students.
+
+At OpenStax we are also developing resources supporting authentic learning experiences and assessment. Please visit this book's page for updates. For an in-depth review of academic integrity strategies, we highly recommend visiting the International Center of Academic Integrity (ICAI) website at https://academicintegrity.org/.
+
+Community Hubs
+
+OpenStax partners with the Institute for the Study of Knowledge Management in Education (ISKME) to offer Community Hubs on OER Commons—a platform for instructors to share community-created resources that support OpenStax books, free of charge. Through our Community Hubs, instructors can upload their own materials or download resources to use in their own courses, including additional ancillaries, teaching material, multimedia, and relevant course content. We encourage instructors to join the hubs for the subjects most relevant to your teaching and research as an opportunity both to enrich your courses and to engage with other faculty. To reach the Community Hubs, visit www.oercommons.org/hubs/openstax.
+
+Technology partners
+
+As allies in making high-quality learning materials accessible, our technology partners offer optional low-cost tools that are integrated with OpenStax books. To access the technology options for your text, visit your book page on OpenStax.org.

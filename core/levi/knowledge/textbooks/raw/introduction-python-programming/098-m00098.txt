@@ -1,0 +1,45 @@
+# m00098
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Hierarchical inheritance
+
+Hierarchical inheritance
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Label relationships between classes as types of inheritance.
+
+Construct classes that form hierarchical inheritance.
+
+Hierarchical inheritance basics
+Hierarchical inheritance is a type of inheritance in which multiple classes inherit from a single superclass. Multilevel inheritance is a type of inheritance in which a subclass becomes the superclass for another class. Combining hierarchical and multilevel inheritance creates a tree-like organization of classes.
+
+Hierarchical organization and types of inheritance
+
+Hierarchical organization
+
+Implementing hierarchical inheritance
+
+Multiple classes can inherit from a single class by simply including the superclass name in each subclass definition.
+
+Choir members
+
+The code's output is:
+
+Implementing hierarchical inheritance
+
+Consider the program:
+
+Overriding methods
+
+Define three classes: Instrument, Woodwind, and String.
+Instrument has instance attribute owner, with default value of "unknown".
+Woodwind inherits from Instrument and has instance attribute material with default value of "wood".
+String inherits from Instrument and has instance attribute num_strings, with default value of 4.
+
+The output should match:

@@ -1,0 +1,63 @@
+# m00008
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Calculations and Basic Formulas in Google Sheets
+
+Calculations and Basic Formulas in Google Sheets
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Add numbers in Sheets
+
+Subtract numbers in Sheets
+
+Multiply numbers in Sheets
+
+Divide numbers in Sheets
+
+Microsoft Excel has been around for decades, yet there are no functions for subtracting or dividing numbers. Users must still build formulas with the appropriate mathematical operator to divide or subtract numbers. Google Sheets has added a MINUS and a DIVIDE function. WorldCorp likes being able to use these functions in their number crunching.
+
+Adding Numbers
+
+Adding numbers in Sheets uses the same commands and formulas as Excel does. Here, you will compare orders from two clients, Client A and Client B, who ordered the same product—headphones—but at different times and in different quantities. is a snapshot of these orders, showing the two clients’ order history in two different tables.
+
+You will design a new table that summarizes these orders by client and by month using the data found in the two client tables. shows a snapshot of the summarized orders of each client, separated by month. In this table, we used the + sign to add the cells containing numbers (for example: =G3+G4+G5+G6+G7+G8+G9) in the formula bar to add together total sales for each month by client. Note this syntax is the same as Excel.
+
+The same calculations can occur using functions. You can use the table in , but replace the plus sign with the SUM function, like Excel. Type “=SUM", an open parenthesis, then list the cells you wish to add, putting a comma after each cell reference. Then close the formula with a closing parenthesis (). Repeat the process for all sales data by month and client.
+
+Subtracting Numbers
+
+One way to use subtraction in data analysis is to determine how far an order is above or below the average order. This information can tell us which clients might need more attention to increase their orders or to analyze ordering patterns due to seasonality. To perform this calculation, we will measure the distance from the average. First, find the average, which is the total sales divided by the number of orders. Using the data in , insert two columns after Quantity for the average quantity and distance from average and insert two more columns after FOB $ for the average FOB $ and distance from average. Then, find the average for each of these and repeat the value in all cells in that column. Then, to find the distance from average, subtract the average from the individual order, for both Quantity and FOB $. shows the average columns and the formula for finding the distance from average. Then, apply the formula to all rows (). Repeat the process for the distance from average for FOB $ (). In these statistical analyses, you can see that there are some large orders that make the average high, which in turn makes many smaller orders have a negative distance from average and makes them seem even smaller by comparison.
+
+Sheets also offers a subtraction function, unlike Excel. You can replace the subtraction formula with the MINUS function. First, type “=minus(” and list the cell references separated by a comma (). The MINUS function subtracts numbers in the order they appear in the formula just as if they were separated by “-” in a formula. You can repeat this for all the subtraction formulas in the table. You can only subtract two numbers using the MINUS function.
+
+Multiplying Numbers
+
+As in Excel, when using the multiplication formula in Sheets, you can multiply a cell reference by a constant or a cell reference by a cell reference. Using the same dataset, you can find the FOB $ by multiplying the quantity by the price per unit. a shows multiplication of the cell reference from the Quantity column by the constant price per unit without adding a column for the value. A Price per Unit column is added and the constant in the formula is replaced with the cell reference (b). You can repeat the calculation for all rows, as previously illustrated.
+
+To use the function, replace the formula with “=multiply(” and add the constant and/or cell references in parentheses, separated by commas (). You can only multiply two numbers using the MULTIPLY function. Sheets has another function, PRODUCT, that can multiply a series of numbers rather than just two.
+
+Dividing Numbers
+
+Dividing numbers using formulas in Sheets is also the same as in Excel. You can use the same sales data to find the proportion of sales of each client compared with the total. Start with the data from , organized by month. Add a column for the total sales for each month and one for the proportion, and then add a formula to calculate the total sales for clients A and B for each month ().
+
+Now that you have the totals, find the proportion by dividing the FOB $ in O3 by the total in Q3 (). Repeat the same operation for the other three rows (). This analysis shows the sales behavior differences between clients A and B. This data analyses shows that in December, client B had 52.36 percent of the sales, and in January client A had 65.81 percent of the sales. The proportion can be changed into a percentage to increase readability, as shown in .
+
+The division function in Sheets works in the same way as other mathematical functions. You can type “=divide(” and then enter the cell references, separated by a comma (). Notice that the result of the DIVIDE function is a decimal. The numbers are divided in the order in which they are placed in the function, and you can only divide two numbers using the DIVIDE function. The QUOTIENT function in Sheets also works in the same way as Excel. The result of the QUOTIENT function will be a whole number, not a decimal. For example, when you divide 5 by 4, the answer is 1.25, but using the QUOTIENT function, the answer will be displayed as 1.
+
+Summary
+
+In Sheets, mathematical calculations such as addition, subtraction, multiplication, and division can use formulas, mathematical operators, and/or functions.
+
+The functions in Sheets differ some from Excel. Sheets has a few functions such as MINUS and DIVIDE that are not in Excel.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises

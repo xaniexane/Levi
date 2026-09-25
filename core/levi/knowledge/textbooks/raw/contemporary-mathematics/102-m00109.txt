@@ -1,0 +1,118 @@
+# m00109
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Graph Basics
+
+Graph Basics
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Identify parts of a graph.
+
+Model applications of graph basics.
+
+When you hear the word, graph, what comes to mind? You might think of the xy-coordinate system you learned about earlier in this course, or you might think of the line graphs and bar charts that are used to display data in news reports. The graphs we discuss in this chapter are probably very different from what you think of as a graph. They look like a bunch of dots connected by short line segments. The dots represent a group of objects and the line segments represent the connections, or relationships, between them. The objects might be bus stops, computers, Snapchat accounts, family members, or any other objects that have direct connections to each other. The connections can be physical or virtual, formal or casual, scientific or social. Regardless of the kind of connections, the purpose of the graph is to help us visualize the structure of the entire network to better understand the interactions of the objects within it.
+
+Parts of a Graph
+
+In a graph, the objects are represented with dots and their connections are represented with lines like those in . displays a simple graph labeled G and a multigraph labeled H. The dots are called vertices; an individual dot is a vertex, which is one object of a set of objects, some of which may be connected. We often label vertices with letters. For example, Graph G has vertices a, b, c, and d, and Multigraph H has vertices, e, f, g, and h. Each line segment or connection joining two vertices is referred to as an edge. H is considered a multigraph because it has a double edge between f and h, and a double edge between h and g. Another reason H is called a multigraph is that it has a loop connecting vertex e to itself; a loop is an edge that joins a vertex to itself. Loops and double edges are not allowed in a simple graph.
+
+To sum up, a simple graph is a collection of vertices and any edges that may connect them, such that every edge connects two vertices with no loops and no two vertices are joined by more than one edge. A multigraph is a graph in which there may be loops or pairs of vertices that are joined by more than one edge. In this chapter, most of our work will be with simple graphs, which we will call graphs for convenience.
+
+It is not necessary for the edges in a graph to be straight. In fact, you can draw an edge any way you want. In graph theory, the focus is on which vertices are connected, not how the connections are drawn (see ). In a graph, each edge can be named by the two letters of the associated vertices. The four edges in Graph X in are ab, ac, ad, and ae. The order of the letters is not important when you name the edge of a graph. For example, ab refers to the same edge as ba.
+A graph may have vertices that are not joined to other vertices by edges, such as vertex f in Graph X in , but any edge must have a vertex at each end.
+
+Identifying Edges and Vertices
+
+Name all the vertices and edges of graph F in .
+
+The vertices are v, w, x, y, and z. The edges are vw, vx, wx, wz, xy, and xz.
+When listing the vertices and edges in a graph, work in alphabetical order to avoid accidentally listing the same item twice. When you are finished, count the number of vertices or edges you listed and compare that to the number of vertices or edges on the graph to ensure you didn’t miss any.
+
+Since the purpose of a graph is to represent the connections between objects, it is very important to know if two vertices share a common edge. The two vertices at either end of a given edge are referred to as neighboring, or adjacent. For example, in , vertices x and w are adjacent, but vertices y and w are not.
+
+Identifying Vertices That Are Not Adjacent
+
+Name all the pairs of vertices of graph F in that are not adjacent.
+
+The pairs of vertices that are not adjacent in graph F are v and y, v and z, w and y, and y and z.
+
+Sergey Brin and Laurence Page
+
+The “Google boys,” Sergey Brin and Laurence Page, transformed the World Wide Web in 1998 when they used the mathematics of graph theory to create an algorithm called Page Rank, which is known as the Google Search Engine today. The two computer scientists identified webpages as vertices and hyperlinks on those pages as edges because hyperlinks connect one website to the next. The number of edges influences the ranking of a website on the Google Search Engine because the websites with more links to “credible sources” are ranked higher. ("Page Rank: The Graph Theory-based Backbone of Google," September 20, 2011, Cornell University, Networks Blog.
+
+Analyzing Geographical Maps with Graphs
+
+When graphs are used to model and analyze real-world applications, the number of edges that meet at a particular vertex is important. For example, a graph may represent the direct flight connections for a particular airport as in . Representing the connections with a graph rather than a map shifts the focus away from the relative positions and toward which airports are connected. In , the vertices are the airports, and the edges are the direct flight paths. The number of flight connections between a particular airport and other South Florida airports is the number of edges meeting at a particular vertex. For example, Key West has direct flights to three of the five airports on the graph. In graph theory terms, we would say that vertex FYW has degree 3. The degree of a vertex is the number of edges that connect to that vertex.
+
+Determining the Degree of a Vertex
+
+Determine the degree of each vertex of Graph J in . If graph J represents direct flights between a set of airports, do any of the airports have direct flights to two or more of the other cities on the graph?
+
+For each vertex, count the number of edges that meet at that vertex. This value is the degree of the vertex. In , the dashed edges indicate the edges that meet at the marked vertex.
+
+Vertex a has degree 3, vertex b has degree 1, vertices c and d each have degree 2, and vertex e has degree 0. Airports a, c, and d have direct flights to two or more of the other airports.
+
+Graphs are also used to analyze regional boundaries. The states of Utah, Colorado, Arizona, and New Mexico all meet at a single point known as the “Four Corners,” which is shown in the map in .
+
+In , each vertex represents one of these states, and each edge represents a shared border. States like Utah and New Mexico that meet at only a single point are not considered to have a shared border. By representing this map as a graph, where the connections are shared borders, we shift our perspective from physical attributes such as shape, size and distance, toward the existence of the relationship of having a shared boundary.
+
+Graphing the Midwestern States
+
+A map of the Midwest is given in . Create a graph of the region in which each vertex represents a state and each edge represents a shared border.
+Step 1: For each state, draw and label a vertex as in .
+Step 2: Draw edges between any two states that share a common land border as in .
+
+The graph is given in .
+
+Graph Theory: Create a Graph to Represent Common Boundaries on a Map
+
+Graphs of Social Interactions
+
+Geographical maps are just one of many real-world scenarios which graphs can depict. Any scenario in which objects are connected to each other can be represented with a graph, and the connections don’t have to be physical. Just think about all the connections you have to people around the world through social media! Who is in your network of Twitter followers? Whose Snapchat network are you connected to?
+
+Graphing Chloe’s Roblox Friends
+
+Roblox is an online gaming platform. Chloe is interested to know how many people in her network of Roblox friends are also friends with each other so she polls them. Explain how a graph or multigraph might be drawn to model this scenario by identifying the objects that could be represented by vertices and the connections that could be represented by edges. Indicate whether a graph or a multigraph would be a better model.
+
+The objects that are represented with vertices are Roblox friends. A Roblox friendship between two friends will be represented as an edge between a pair of vertices. There will be no double edges because it is not possible for two friends to be linked twice in Roblox; they are either friends or they are not. Also, a player cannot be a friend to themself, so there is no need for a loop. Since there are no double edges or loops, this is best represented as a graph.
+
+Using Graph Theory to Reduce Internet Fraud
+
+Could graphs be used to reduce Internet fraud? At least one researcher thinks so. Graph theory is used every day to analyze our behavior, particularly on social network sites. Alex Buetel, a computer scientist from Carnegie Mellon University in Pittsburgh, Pennsylvania, published a research paper in 2016 that discussed the possibilities of distinguishing the normal interactions from those that might be fraudulent using graph theory. Buetel wrote, “To more effectively model and detect abnormal behavior, we model how fraudsters work, catching previously undetected fraud on Facebook, Twitter, and Tencent Weibo and improving classification accuracy by up to 68%.” In the same paper, the researcher discusses how similar techniques can be used to model many other applications and even, “predict why you like a particular movie.” (Alex Beutel, "User Behavior Modeling with Large-Scale Graph Analysis," http://reports-archive.adm.cs.cmu.edu/anon/2016/CMU-CS-16-105.pdf, May 2016, CMU-CS-16-105, Computer Science Department, School of Computer Science, Carnegie Mellon University, Pittsburgh, PA)
+
+Check Your Understanding
+
+Key Terms
+
+vertex
+
+edge
+
+loop
+
+graph (simple graph)
+
+multigraph
+
+adjacent (neighboring)
+
+degree
+
+Key Concepts
+
+Graphs and multigraphs represent objects as vertices and the relationships between the objects as edges.
+
+The degree of a vertex is the number of edges that meet it and the degree can be zero.
+
+An edge must have a vertex at each end.
+
+Multigraphs may contain loops and double edges, but simple graphs may not.
+
+Videos
+Graph Theory: Create a Graph to Represent Common Boundaries on a Map

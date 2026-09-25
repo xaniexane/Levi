@@ -1,0 +1,55 @@
+# m00025
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Tuple basics
+
+Tuple basics
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe the features and benefits of a tuple.
+
+Develop a program that creates and uses a tuple successfully.
+
+Identify and discuss the mutability of a tuple.
+
+Creating tuples and accessing elements
+
+A tuple is a sequence of comma separated values that can contain elements of different types. A tuple must be created with commas between values, and conventionally the sequence is surrounded by parentheses. Each element is accessed by index, starting with the first element at index 0.
+
+Example tuples.
+tuple_1: (2, 3, 4)
+3
+
+data_13: ('Aimee Perry', 96, [94, 100, 97, 93])
+[94, 100, 97, 93]
+Creating tuples and accessing elements
+
+Tuple properties
+
+How do tuples compare to lists? Tuples are ordered and allow duplicates, like lists, but have different mutability. An immutable object cannot be modified after creation. A mutable object can be modified after creation. Tuples are immutable, whereas lists are mutable.
+
+Mutability of a tuple vs. a list
+
+Using tuples
+
+Mutability and performance
+
+Tuples are immutable and have a fixed size, so tuples use less memory. Overall, tuples are faster to create and access, resulting in better performance that can be noticeable with large amounts of data.
+
+Creating a tuple from a list
+
+Suppose a programmer wants to create a tuple from a list to prevent future changes. The tuple() function creates a tuple from an object like a list. Ex: my_tuple = tuple(my_list) creates a tuple from the list my_list. Update the program below to create a tuple final_grades from the list grades.
+
+Creating a tuple with user input
+
+Write a program that reads in two strings and two integers from input and creates a tuple, my_data, with the four values.
+
+Given input:
+
+The output is:

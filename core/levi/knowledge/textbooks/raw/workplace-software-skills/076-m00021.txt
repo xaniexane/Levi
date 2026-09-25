@@ -1,0 +1,96 @@
+# m00021
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+PivotTables/Charts
+
+PivotTables/Charts
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Manipulate and create calculated fields in a PivotTable
+
+Add slicers to a PivotTable
+
+Use timelines in a PivotTable
+
+In business, you will sometimes hear references made to “big data.” In this context, “big data” represents the large, growing, diverse datasets used by businesses to analyze their performance and attract more customers. There are three components to big data: the velocity of growth in the amount of data, the massive volume of data collected, and the variety of data that is collected and used in businesses. This data is collected through a process called data mining, which involves using software to make sense of all the data collected by the company and from outside sources. The goal is to analyze and evaluate large quantities of information and discover trends that may be useful to the company. Those trends could show purchasing patterns for a specific demographic group or identify a new competitor that businesses need to combat. The possibilities are as endless as the data that is collected. Through programs such as Excel and sophisticated data analytic software packages, the data can be synthesized to aid in decision making in the business. The use of data for decision making is applicable to all types and sizes of businesses and organizations.
+
+You learned about PivotTables in Advanced Excel Formulas, Functions, and Techniques. Here, you will focus on the advanced features of PivotTables that help with data analysis. The PivotTable Analyze tab provides several tools that make data analysis a bit easier. Recall that the PivotTable Analyze tab is available when you have data formatted as a PivotTable and you click inside the table ().
+
+The Timeline and Slicer tools offer a more visual way to filter the data in the PivotTable. The Fields, Items, & Sets menu allows you to include more calculations in your analysis. There are additional options in this menu that can help facilitate data analysis in the PivotTable.
+
+Insert Timeline
+
+The Insert Timeline feature for a PivotTable allows you to quickly filter information based on a date field. You must have a field formatted as a date to use the Insert Timeline tool. Using the first four tabs in the Chapter 11 data file workbook ("timeline1," "timeline2," "timeline3," and "timeline4"), you can create a PivotTable using the skills learned in Advanced Excel Formulas, Functions, and Techniques. The PivotTable summarizes the enrollment English Index Score (EN Index Score) for various majors at a university over several years (). You can use this data to see if there have been changes in the score over time. The Insert Timeline feature on the PivotTable Analyze tab allows you to add a date filter to the table.
+
+Click in the PivotTable to bring up the PivotTable Analyze tab. Choose Insert Timeline from the Filter command group. Click the checkbox next to the field title that contains the date. In this example, the field is called DATE. Click OK. The timeline scroll bar will appear (). In this case, you only have annual data, so you can change the unit to years instead of quarters, months, or days.
+
+Currently, the PivotTable shows all years available in the dataset. You can deselect those years that you do not want and keep only those that you are interested in examining. Let’s select 2017 and 2018, which filters the table using those dates only. You can then use this filtered data for more in-depth analysis and calculations. To remove the timeline, right-click on the timeline scroll bar and choose Remove Timeline. If you had already filtered the data with the timeline, the data in the PivotTable will remain filtered to those dates. If you want the table to return to its original form with all of the dates included, be sure to click on the Remove Filter button prior to removing the timeline.
+
+Insert Slicer
+
+A slicer is a visual, interactive way to filter data in a PivotTable. When a PivotTable has slicers available, you can filter the data by clicking on buttons in the slicer as opposed to using the filter options in the column headings of a PivotTable. They are particularly useful when there are multiple users of a PivotTable who need to view the information that is relevant to their needs. You can add slicers through the PivotTable Analyze tab in the Filter command group.
+
+Let’s look again at the dataset of enrollment ACT scores. A PivotTable can be created to include the years, major, average high school grade point average (HS GPA), EN Index Score, and average ACT Math. You can insert a slicer to delve deeper into the data. Assume you want to look at the HS GPA for biology and chemistry majors compared with that of accounting and business majors. You can use a slicer to make this process easier. First, click in the PivotTable to access the PivotTable Analyze tab. Then, choose Insert Slicer. A selection window will appear (). Click the checkbox next to Major 1. Click OK.
+
+The slicer will appear on the spreadsheet with selection buttons for each of the majors in the list. You can resize and format the slicer to meet your needs. You can also choose various slicer styles under the Slicer tab that becomes accessible when you click inside the slicer ().
+
+When you insert the slicer, the default is for all majors to be selected, as indicated by the blue highlighted buttons (). You can click on the Multi-Select option to remove all the majors and start building your table for analysis. For this example, you want to look at the differences in HS GPA for Biology, Chemistry, Accounting, and Business Administration. You will choose only those majors to be displayed in your PivotTable ().
+
+Choosing only these majors filters the table for an easier and more direct comparison. Remember, you could simply use the filter option in the column heading, but slicers are a convenient and interactive way to filter data. To remove the filter, click on the Remove Filter button in the top right of the slicer window. To remove the slicer entirely, right-click on the slicer and choose Remove Slicer. Be sure to remove the filters first if you want the data to return to its original form. Simply removing the slicer window will not also remove the filters you set in place.
+
+Slicers are also available when you have data in a Data Table. With the data formatted as a Data Table, click inside the Data Table to bring up the Table Design tab. The Insert Slicer option is in the Tools command group (). The process to insert, format, use, and remove slicers is the same as it is for PivotTables.
+
+PivotTable slicers are a great way to set up an interface so that users can better navigate the data file. You can make a dashboard of slicers to make it easier for users to select the data they need to see from the PivotTable. Read this article that provides a detailed example of setting up a dashboard with both slicers and timelines to learn more.
+
+Calculated Field
+
+The Calculated Field tool allows you to add columns of calculations to your PivotTable. The Calculated Field tool is accessed through the Fields, Items, & Sets menu on the PivotTable Analyze tab ().
+
+These calculated field columns cannot be used with slicers, but they allow you to analyze the data in other ways. Using the dataset of enrollments and ACT scores, assume you want to get the average ACT scores across the various content areas (English, Math, etc.). You will need to get an average of the four ACT scores as a calculated field column. Click inside the PivotTable to access the PivotTable Analyze tab; choose Fields, Items, & Sets; and click on Calculated Field. An input window will appear ().
+
+You will need to name the calculated field—use “ACT average” for this example—and then you can input the formula. Remember that all formulas in Excel need to begin with an equals sign. You can use functions such as AVERAGE, SUM, and IF, as appropriate for your needs. For this example, you want the average of the English, Math, Reading, and Science fields. To accomplish this, type in the Formula input box “=AVERAGE(” to begin. Then, choose “eng” from the Fields list and select Insert Field. Then, type a comma and insert the next field, “math.” At the end of the formula, make sure to close your parentheses and then check for extra spaces in the formula. Then, click Add to create the calculated field. Finally, click OK (a). You will now see the calculated field column in your PivotTable (b).
+
+The default setting for the column headings in PivotTables is “Sum of” even though you are calculating an average. When you created the calculated field, you named the field ACT average, but that is not the column heading Excel will use. Excel will automatically add on “Sum of” to the column heading. You can change that by simply clicking on the column heading and deleting the words “Sum of.” Notice the data in the first cell in the ACT average column for each major is much larger than the other numbers in the major. This cell represents the sum of all the averages for the subgroup. For accounting, 131.49 is the sum of the average ACT numbers for the years 2015 to 2020. Excel automatically adds the subtotal to the first field in the Rows list. This number is probably not as valuable as the averages per year under each major. You can delete this value by choosing the field settings for Major 1 and under Subtotals, select None ().
+
+Adding this calculated field for the accounting majors, you can see that the average ACT was at its lowest in 2019 and at its highest in 2018. Calculated fields can be used with sales and expense information to determine your profit, profit margin, and other similar calculations.
+
+There are other options in the Insert Calculated Field input window that may also be useful. You can select the calculated field from the list and modify it to make changes. You can also select that calculated field and delete it entirely. Click OK after making your changes or deleting the calculated field. If you delete the field, the column will be removed from the PivotTable.
+
+List Formulas
+
+If there are multiple users of a data file, it can be important to ensure everyone is aware of the calculations behind the columns. This will assist the users in understanding the dataset and the information contained within. The List Formulas option in the Fields, Items, & Sets menu creates a separate tab that lists all the formulas (calculated fields) used in a PivotTable (). This option is accessed when you are in the PivotTable in the PivotTable Analyze tab. Then, go to Field, Items, & Sets to get to List Formulas. It is good practice to include this with all data files that have multiple calculated fields. The list is not dynamic. If you create additional fields after the list is created, you will need to delete the original list and create a new one.
+
+Tracking Spending
+
+PivotTables can be a powerful tool to manage finances in a business or for your personal retirement planning. They allow you to compare data, as well as identify trends and patterns in the data. They are especially useful when you have a large amount of data. PivotTables can summarize this data, as well as provide interactive capabilities that allow you to adjust the different variables and investigate their influence. For instance, perhaps you would like to investigate spending and determine different considerations, such as how much is being spent, by whom, and on what. The same scenario can be applied to your own personal budget. Consider how you can use a PivotTable to track your own spending:
+
+How might this process be adjusted for a small business?
+
+What are some other uses of PivotTables in small businesses that you can think of?
+
+Summary
+
+The PivotTable Analyze tab offers tools to make data analysis and filtering easier.
+
+Timelines can be inserted to filter the PivotTable data by date.
+
+Slicers can be used in PivotTables and Data Tables to filter data with visual buttons.
+
+Calculated fields can be added to PivotTables for additional analysis using formulas.
+
+The List Formulas tool creates a separate worksheet that includes all formulas used in the PivotTable. It is a valuable tool when there are multiple users of a single workbook.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+tool that allows addition of columns of calculations to a PivotTable
+visual, interactive way to filter data in a PivotTable

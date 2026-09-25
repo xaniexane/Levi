@@ -1,0 +1,22 @@
+# LEVI Core Requirements
+# Python >= 3.10 required
+#
+# Policy (2026-09-14, modernization P2.1):
+# - Only packages actually imported by code in this repo are listed here.
+#   Every entry was verified against `core/`, `delivery/` and `apps/`;
+#   ~30 unused pins (click, sqlalchemy, chromadb, selenium, pytest, …) were removed.
+# - Every pin carries an UPPER bound (next-major cap) so a fresh install can
+#   never silently pull a breaking major release.
+# - `cryptography` is a hard runtime dependency: vault/seal.py fail-closes
+#   without it, and apps/vyve-messenger uses it for RSA JWT keys.
+
+# App backends (apps/vyve-messenger/backend)
+fastapi>=0.109.0,<1
+uvicorn[standard]>=0.27.0,<1
+pydantic>=2.6.0,<3
+
+# Security (vault/seal.py + apps/vyve-messenger JWT keys)
+cryptography>=50,<51
+
+# Media (delivery/runtimes/apotheosis/levi.py imports PIL.Image)
+pillow>=10.2.0,<12

@@ -1,0 +1,527 @@
+# m53575
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Differentiation Rules
+
+Differentiation Rules
+
+State the constant, constant multiple, and power rules.
+
+Apply the sum and difference rules to combine derivatives.
+
+Use the product rule for finding the derivative of a product of functions.
+
+Use the quotient rule for finding the derivative of a quotient of functions.
+
+Extend the power rule to functions with negative exponents.
+
+Combine the differentiation rules to find the derivative of a polynomial or rational function.
+
+Finding derivatives of functions by using the definition of the derivative can be a lengthy and, for certain functions, a rather challenging process. For example, previously we found that ddx(x)=12x by using a process that involved multiplying an expression by a conjugate prior to evaluating a limit. The process that we could use to evaluate ddx(x3) using the definition, while similar, is more complicated. In this section, we develop rules for finding derivatives that allow us to bypass this process. We begin with the basics.
+
+The Basic Rules
+
+The functions f(x)=c and g(x)=xn where n is a positive integer are the building blocks from which all polynomials and rational functions are constructed. To find derivatives of polynomials and rational functions efficiently without resorting to the limit definition of the derivative, we must first develop formulas for differentiating these basic functions.
+
+The Constant Rule
+
+We first apply the limit definition of the derivative to find the derivative of the constant function, f(x)=c. For this function, both f(x)=c and f(x+h)=c, so we obtain the following result:
+
+The rule for differentiating constant functions is called the constant rule. It states that the derivative of a constant function is zero; that is, since a constant function is a horizontal line, the slope, or the rate of change, of a constant function is 0. We restate this rule in the following theorem.
+
+The Constant Rule
+
+Let c be a constant.
+
+If f(x)=c, then f′(x)=0.
+
+Alternatively, we may express this rule as
+
+Applying the Constant Rule
+
+Find the derivative of f(x)=8.
+
+This is just a one-step application of the rule:
+
+Find the derivative of g(x)=−3.
+
+0
+
+Hint
+
+Use the preceding example as a guide.
+
+The Power Rule
+
+We have shown that
+
+At this point, you might see a pattern beginning to develop for derivatives of the form ddx(xn). We continue our examination of derivative formulas by differentiating power functions of the form f(x)=xn where n is a positive integer. We develop formulas for derivatives of this type of function in stages, beginning with positive integer powers. Before stating and proving the general rule for derivatives of functions of this form, we take a look at a specific case, ddx(x3). As we go through this derivation, note that the technique used in this case is essentially the same as the technique used to prove the general case.
+
+Differentiating x3
+
+Find ddx(x3).
+
+Find ddx(x4).
+4x3
+
+Hint
+
+Use (x+h)4=x4+4x3h+6x2h2+4xh3+h4 and follow the procedure outlined in the preceding example.
+
+As we shall see, the procedure for finding the derivative of the general form f(x)=xn is very similar. Although it is often unwise to draw general conclusions from specific examples, we note that when we differentiate f(x)=x3, the power on x becomes the coefficient of x2 in the derivative and the power on x in the derivative decreases by 1. The following theorem states that the power rule holds for all positive integer powers of x. We will eventually extend this result to negative integer powers. Later, we will see that this rule may also be extended first to rational powers of x and then to arbitrary powers of x. Be aware, however, that this rule does not apply to functions in which a constant is raised to a variable power, such as f(x)=3x.
+
+The Power Rule
+
+Let n be a positive integer. If f(x)=xn, then
+
+Alternatively, we may express this rule as
+
+Proof
+
+For f(x)=xn where n is a positive integer, we have
+
+we see that
+
+Next, divide both sides by h:
+
+Thus,
+
+Finally,
+
+□
+
+Applying the Power Rule
+
+Find the derivative of the function f(x)=x10 by applying the power rule.
+
+Using the power rule with n=10, we obtain
+
+Find the derivative of f(x)=x7.
+f′(x)=7x6
+
+Hint
+
+Use the power rule with n=7.
+
+The Sum, Difference, and Constant Multiple Rules
+
+We find our next differentiation rules by looking at derivatives of sums, differences, and constant multiples of functions. Just as when we work with functions, there are rules that make it easier to find derivatives of functions that we add, subtract, or multiply by a constant. These rules are summarized in the following theorem.
+
+Sum, Difference, and Constant Multiple Rules
+
+Let f(x) and g(x) be differentiable functions and k be a constant. Then each of the following equations holds.
+Sum Rule. The derivative of the sum of a function f and a function g is the same as the sum of the derivative of f and the derivative of g.
+
+that is,
+Difference Rule. The derivative of the difference of a function f and a function g is the same as the difference of the derivative of f and the derivative of g:
+
+that is,
+Constant Multiple Rule. The derivative of a constant k multiplied by a function f is the same as the constant multiplied by the derivative:
+
+that is,
+
+Proof
+
+We provide only the proof of the sum rule here. The rest follow in a similar manner.
+
+For differentiable functions f(x) and g(x), we set j(x)=f(x)+g(x). Using the limit definition of the derivative we have
+
+By substituting j(x+h)=f(x+h)+g(x+h) and j(x)=f(x)+g(x), we obtain
+
+Rearranging and regrouping the terms, we have
+
+We now apply the sum law for limits and the definition of the derivative to obtain
+
+□
+
+Applying the Constant Multiple Rule
+
+Find the derivative of g(x)=3x2 and compare it to the derivative of f(x)=x2.
+
+We use the power rule directly:
+
+Since f(x)=x2 has derivative f′(x)=2x, we see that the derivative of g(x) is 3 times the derivative of f(x). This relationship is illustrated in .
+
+Applying Basic Derivative Rules
+
+Find the derivative of f(x)=2x5+7.
+
+We begin by applying the rule for differentiating the sum of two functions, followed by the rules for differentiating constant multiples of functions and the rule for differentiating powers. To better understand the sequence in which the differentiation rules are applied, we use Leibniz notation throughout the solution:
+
+Find the derivative of f(x)=2x3−6x2+3.
+f′(x)=6x2−12x.
+
+Hint
+
+Use the preceding example as a guide.
+
+Finding the Equation of a Tangent Line
+
+Find the equation of the line tangent to the graph of f(x)=x2−4x+6 at x=1.
+
+To find the equation of the tangent line, we need a point and a slope. To find the point, compute
+
+This gives us the point (1,3). Since the slope of the tangent line at 1 is f′(1), we must first find f′(x). Using the definition of a derivative, we have
+
+so the slope of the tangent line is f′(1)=−2. Using the point-slope formula, we see that the equation of the tangent line is
+
+Putting the equation of the line in slope-intercept form, we obtain
+
+Find the equation of the line tangent to the graph of f(x)=3x2−11 at x=2. Use the point-slope form.
+y=12x−23
+
+Hint
+
+Use the preceding example as a guide.
+
+The Product Rule
+
+Now that we have examined the basic rules, we can begin looking at some of the more advanced rules. The first one examines the derivative of the product of two functions. Although it might be tempting to assume that the derivative of the product is the product of the derivatives, similar to the sum and difference rules, the product rule does not follow this pattern. To see why we cannot use this pattern, consider the function f(x)=x2, whose derivative is f′(x)=2x and not ddx(x)·ddx(x)=1·1=1.
+
+Product Rule
+
+Let f(x) and g(x) be differentiable functions. Then
+
+That is,
+
+This means that the derivative of a product of two functions is the derivative of the first function times the second function plus the derivative of the second function times the first function.
+
+Proof
+
+We begin by assuming that f(x) and g(x) are differentiable functions. At a key point in this proof we need to use the fact that, since g(x) is differentiable, it is also continuous. In particular, we use the fact that since g(x) is continuous, limh→0g(x+h)=g(x).
+
+By applying the limit definition of the derivative to j(x)=f(x)g(x), we obtain
+
+By adding and subtracting f(x)g(x+h) in the numerator, we have
+
+After breaking apart this quotient and applying the sum law for limits, the derivative becomes
+
+Rearranging, we obtain
+
+By using the continuity of g(x), the definition of the derivatives of f(x) and g(x), and applying the limit laws, we arrive at the product rule,
+
+□
+
+Applying the Product Rule to Functions at a Point
+
+For j(x)=f(x)g(x), use the product rule to find j′(2) if f(2)=3,f′(2)=−4,g(2)=1, and g′(2)=6.
+
+Since j(x)=f(x)g(x),j′(x)=f′(x)g(x)+g′(x)f(x), and hence
+
+Applying the Product Rule to Binomials
+
+For j(x)=(x2+2)(3x3−5x), find j′(x) by applying the product rule. Check the result by first finding the product and then differentiating.
+
+If we set f(x)=x2+2 and g(x)=3x3−5x, then f′(x)=2x and g′(x)=9x2−5. Thus,
+
+Simplifying, we have
+
+To check, we see that j(x)=3x5+x3−10x and, consequently, j′(x)=15x4+3x2−10.
+
+Use the product rule to obtain the derivative of j(x)=2x5(4x2+x).
+j′(x)=10x4(4x2+x)+(8x+1)(2x5)=56x6+12x5.
+
+Hint
+
+Set f(x)=2x5 and g(x)=4x2+x and use the preceding example as a guide.
+
+The Quotient Rule
+
+Having developed and practiced the product rule, we now consider differentiating quotients of functions. As we see in the following theorem, the derivative of the quotient is not the quotient of the derivatives; rather, it is the derivative of the function in the numerator times the function in the denominator minus the derivative of the function in the denominator times the function in the numerator, all divided by the square of the function in the denominator. In order to better grasp why we cannot simply take the quotient of the derivatives, keep in mind that
+
+The Quotient Rule
+
+Let f(x) and g(x) be differentiable functions. Then
+
+That is,
+
+The proof of the quotient rule is very similar to the proof of the product rule, so it is omitted here. Instead, we apply this new rule for finding derivatives in the next example.
+
+Applying the Quotient Rule
+
+Use the quotient rule to find the derivative of k(x)=5x24x+3.
+
+Let f(x)=5x2 and g(x)=4x+3. Thus, f′(x)=10x and g′(x)=4. Substituting into the quotient rule, we have
+
+Simplifying, we obtain
+
+Find the derivative of h(x)=3x+14x−3.
+k′(x)=−13(4x−3)2.
+
+Hint
+
+Apply the quotient rule with f(x)=3x+1 and g(x)=4x−3.
+
+It is now possible to use the quotient rule to extend the power rule to find derivatives of functions of the form xk where k is a negative integer.
+
+Extended Power Rule
+
+If k is a negative integer, then
+
+Proof
+
+If k is a negative integer, we may set n=−k, so that n is a positive integer with k=−n. Since for each positive integer n,x−n=1xn, we may now apply the quotient rule by setting f(x)=1 and g(x)=xn. In this case, f′(x)=0 and g′(x)=nxn−1. Thus,
+
+Simplifying, we see that
+
+Finally, observe that since k=−n, by substituting we have
+
+□
+
+Using the Extended Power Rule
+
+Find ddx(x−4).
+
+By applying the extended power rule with k=−4, we obtain
+
+Using the Extended Power Rule and the Constant Multiple Rule
+
+Use the extended power rule and the constant multiple rule to find the derivative of f(x)=6x2.
+
+It may seem tempting to use the quotient rule to find this derivative, and it would certainly not be incorrect to do so. However, it is far easier to differentiate this function by first rewriting it as f(x)=6x−2.
+
+Find the derivative of g(x)=1x7 using the extended power rule.
+g′(x)=−7x−8.
+
+Hint
+
+Rewrite g(x)=1x7=x−7. Use the extended power rule with k=−7.
+
+Combining Differentiation Rules
+
+As we have seen throughout the examples in this section, it seldom happens that we are called on to apply just one differentiation rule to find the derivative of a given function. At this point, by combining the differentiation rules, we may find the derivatives of any polynomial or rational function. Later on we will encounter more complex combinations of differentiation rules. A good rule of thumb to use when applying several rules is to apply the rules in reverse of the order in which we would evaluate the function.
+
+Combining Differentiation Rules
+
+For k(x)=3h(x)+x2g(x), find k′(x).
+
+Finding this derivative requires the sum rule, the constant multiple rule, and the product rule.
+
+Extending the Product Rule
+
+For k(x)=f(x)g(x)h(x), express k′(x) in terms of f(x),g(x),h(x), and their derivatives.
+
+We can think of the function k(x) as the product of the function f(x)g(x) and the function h(x). That is, k(x)=(f(x)g(x))·h(x). Thus,
+
+Combining the Quotient Rule and the Product Rule
+
+For h(x)=2x3k(x)3x+2, find h′(x).
+
+This procedure is typical for finding the derivative of a rational function.
+
+Find ddx(3f(x)−2g(x)).
+3f′(x)−2g′(x).
+
+Hint
+
+Apply the difference rule and the constant multiple rule.
+
+Determining Where a Function Has a Horizontal Tangent
+
+Determine the values of x for which f(x)=x3−7x2+8x+1 has a horizontal tangent line.
+
+To find the values of x for which f(x) has a horizontal tangent line, we must solve f′(x)=0. Since
+
+we must solve (3x−2)(x−4)=0. Thus we see that the function has horizontal tangent lines at x=23 and x=4 as shown in the following graph.
+
+Finding a Velocity
+
+The position of an object on a coordinate axis at time t is given by s(t)=tt2+1. What is the initial velocity of the object?
+
+Since the initial velocity is v(0)=s′(0), begin by finding s′(t) by applying the quotient rule:
+
+After evaluating, we see that v(0)=1.
+
+Find the values of x for which the graph of f(x)=4x2−3x+2 has a tangent line parallel to the line y=2x+3.
+58
+
+Hint
+
+Solve f′(x)=2.
+
+Formula One Grandstands
+
+Formula One car races can be very exciting to watch and attract a lot of spectators. Formula One track designers have to ensure sufficient grandstand space is available around the track to accommodate these viewers. However, car racing can be dangerous, and safety considerations are paramount. The grandstands must be placed where spectators will not be in danger should a driver lose control of a car ().
+
+Safety is especially a concern on turns. If a driver does not slow down enough before entering the turn, the car may slide off the racetrack. Normally, this just results in a wider turn, which slows the driver down. But if the driver loses control completely, the car may fly off the track entirely, on a path tangent to the curve of the racetrack.
+
+Suppose you are designing a new Formula One track. One section of the track can be modeled by the function f(x)=x3+3x2+x (). The current plan calls for grandstands to be built along the first straightaway and around a portion of the first curve. The plans call for the front corner of the grandstand to be located at the point (−1.9,2.8). We want to determine whether this location puts the spectators in danger if a driver loses control of the car.
+
+Physicists have determined that drivers are most likely to lose control of their cars as they are coming into a turn, at the point where the slope of the tangent line is 1. Find the (x,y) coordinates of this point near the turn.
+
+Find the equation of the tangent line to the curve at this point.
+
+To determine whether the spectators are in danger in this scenario, find the x-coordinate of the point where the tangent line crosses the line y=2.8. Is this point safely to the right of the grandstand? Or are the spectators in danger?
+
+What if a driver loses control earlier than the physicists project? Suppose a driver loses control at the point (−2.5,0.625). What is the slope of the tangent line at this point?
+
+If a driver loses control as described in part 4, are the spectators safe?
+
+Should you proceed with the current design for the grandstand, or should the grandstands be moved?
+
+Key Concepts
+
+The derivative of a constant function is zero.
+
+The derivative of a power function is a function in which the power on x becomes the coefficient of the term and the power on x in the derivative decreases by 1.
+
+The derivative of a constant c multiplied by a function f is the same as the constant multiplied by the derivative.
+
+The derivative of the sum of a function f and a function g is the same as the sum of the derivative of f and the derivative of g.
+
+The derivative of the difference of a function f and a function g is the same as the difference of the derivative of f and the derivative of g.
+
+The derivative of a product of two functions is the derivative of the first function times the second function plus the derivative of the second function times the first function.
+
+The derivative of the quotient of two functions is the derivative of the first function times the second function minus the derivative of the second function times the first function, all divided by the square of the second function.
+
+We used the limit definition of the derivative to develop formulas that allow us to find derivatives without resorting to the definition of the derivative. These formulas can be used singly or in combination with each other.
+
+For the following exercises, find f′(x) for each function.
+f(x)=x7+10
+f(x)=5x3−x+1
+f′(x)=15x2−1
+f(x)=4x2−7x
+f(x)=8x4+9x2−1
+f′(x)=32x3+18x
+f(x)=x4+2x
+f(x)=3x(18x4+13x+1)
+f′(x)=270x4+39(x+1)2
+f(x)=(x+2)(2x2−3)
+f(x)=x2(2x2+5x3)
+f′(x)=−5x2
+f(x)=x3+2x2−43
+f(x)=4x3−2x+1x2
+f′(x)=4x4+2x2−2xx4
+f(x)=x2+4x2−4
+f(x)=x+9x2−7x+1
+f′(x)=−x2−18x+64(x2−7x+1)2
+
+For the following exercises, find the equation of the tangent line T(x) to the graph of the given function at the indicated point. Use a graphing calculator to graph the function and the tangent line.
+[T] y=3x2+4x+1 at (0,1)
+[T] y=2x2+1 at (1,3)
+T(x)=–4x+7
+[T] y=2xx−1 at (−1,1)
+[T] y=2x−3x2 at (1,−1)
+T(x)=4x−5
+
+For the following exercises, assume that f(x) and g(x) are both differentiable functions for all x. Find the derivative of each of the functions h(x).
+h(x)=4f(x)+g(x)7
+h(x)=x3f(x)
+h′(x)=3x2f(x)+x3f′(x)
+h(x)=f(x)g(x)2
+h(x)=3f(x)g(x)+2
+h′(x)=3f′(x)(g(x)+2)−3f(x)g′(x)(g(x)+2)2
+
+For the following exercises, assume that f(x) and g(x) are both differentiable functions with values as given in the following table. Use the following table to calculate the following derivatives.
+9
+Find h′(1) if h(x)=xf(x)+4g(x).
+
+Find h′(2) if h(x)=f(x)g(x).
+169
+
+Find h′(3) if h(x)=2x+f(x)g(x).
+
+Find h′(4) if h(x)=1x+g(x)f(x).
+
+Undefined
+
+For the following exercises, use the following figure to find the indicated derivatives, if they exist.
+
+Let h(x)=f(x)+g(x). Find
+h′(1),
+h′(3), and
+h′(4).
+
+Let h(x)=f(x)g(x). Find
+h′(1),
+h′(3), and
+h′(4).
+
+a. 2, b. does not exist, c. 2.5
+
+Let h(x)=f(x)g(x). Find
+h′(1),
+h′(3), and
+h′(4).
+
+For the following exercises,
+
+evaluate f′(a), and
+
+graph the function f(x) and the tangent line at x=a.
+[T] f(x)=2x3+3x−x2,a=2
+
+a. 23, b. y=23x−28
+[T] f(x)=1x−x2,a=1
+[T] f(x)=x2−x12+3x+2,a=0
+
+a. 3, b. y=3x+2
+[T] f(x)=1x−x2,a=−1
+
+Find the equation of the tangent line to the graph of f(x)=2x3+4x2−5x−3 at x=−1.
+y=−7x−3
+
+Find the equation of the tangent line to the graph of f(x)=x2+4x−10 at x=8.
+
+Find the equation of the tangent line to the graph of f(x)=(3x−x2)(3−x−x2) at x=1.
+y=−5x+7
+
+Find the point on the graph of f(x)=x3 such that the tangent line at that point has an x intercept of 6.
+
+Find the equation of the line passing through the point P(3,3) and tangent to the graph of f(x)=6x−1.
+y=−32x+152
+
+Determine all points on the graph of f(x)=x3+x2−x−1 for which
+
+the tangent line is horizontal
+
+the tangent line has a slope of −1.
+
+Find a quadratic polynomial such that f(1)=5,f′(1)=3 and f″(1)=−6.
+y=−3x2+9x−1
+
+A car driving along a freeway with traffic has traveled s(t)=t3−6t2+9t meters in t seconds.
+
+Determine the time in seconds when the velocity of the car is 0.
+
+Determine the acceleration of the car when the velocity is 0.
+[T] A herring swimming along a straight line has traveled s(t)=t2t2+2 feet in t seconds.
+
+Determine the velocity of the herring when it has traveled 3 seconds.
+12121 or 0.0992 ft/s
+
+The population in millions of arctic flounder in the Atlantic Ocean is modeled by the function P(t)=8t+30.2t2+1, where t is measured in years.
+
+Determine the initial flounder population.
+
+Determine P′(10) and briefly interpret the result.
+[T] The concentration of antibiotic in the bloodstream t hours after being injected is given by the function C(t)=2t2+tt3+50, where C is measured in milligrams per liter of blood.
+
+Find the rate of change of C(t).
+
+Determine the rate of change for t=8,12,24, and 36.
+
+Briefly describe what seems to be occurring as the number of hours increases.
+
+a. −2t4−2t3+200t+50(t3+50)2 b. −0.02395 mg/L-hr, −0.01344 mg/L-hr, −0.003566 mg/L-hr, −0.001579 mg/L-hr c. The rate at which the concentration of drug in the bloodstream decreases is slowing to 0 as time increases.
+
+A book publisher has a cost function given by C(x)=x3+2x+3x2, where x is the number of copies of a book in thousands and C is the cost, per book, measured in dollars. Evaluate C′(2) and explain its meaning.
+[T] According to Newton’s law of universal gravitation, the force F between two bodies of constant mass m1 and m2 is given by the formula F=Gm1m2d2, where G is the gravitational constant and d is the distance between the bodies.
+
+Suppose that G,m1,andm2 are constants. Find the rate of change of force F with respect to distance d.
+
+Find the rate of change of force F with gravitational constant G=6.67×10−11 Nm2/kg2, on two bodies 10 meters apart, each with a mass of 1000 kilograms.
+
+a. F′(d)=−2Gm1m2d3 b. −1.33×10−7 N/m
+
+the derivative of a constant c multiplied by a function f is the same as the constant multiplied by the derivative: ddx(cf(x))=cf′(x)
+the derivative of a constant function is zero: ddx(c)=0, where c is a constant
+the derivative of the difference of a function f and a function g is the same as the difference of the derivative of f and the derivative of g: ddx(f(x)−g(x))=f′(x)−g′(x)
+the derivative of a power function is a function in which the power on x becomes the coefficient of the term and the power on x in the derivative decreases by 1: If n is an integer, then ddxxn=nxn−1
+the derivative of a product of two functions is the derivative of the first function times the second function plus the derivative of the second function times the first function: ddx(f(x)g(x))=f′(x)g(x)+g′(x)f(x)
+the derivative of the quotient of two functions is the derivative of the first function times the second function minus the derivative of the second function times the first function, all divided by the square of the second function: ddx(f(x)g(x))=f′(x)g(x)−g′(x)f(x)(g(x))2
+the derivative of the sum of a function f and a function g is the same as the sum of the derivative of f and the derivative of g: ddx(f(x)+g(x))=f′(x)+g′(x)

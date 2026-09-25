@@ -1,0 +1,77 @@
+# m00091
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Predictions and Prediction Intervals
+
+Predictions and Prediction Intervals
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate predictions for the dependent variable using the regression model.
+
+Generate prediction intervals based on a prediction for the dependent variable.
+
+Predicting the Dependent Variable Using the Regression Model
+
+A key aspect of generating the linear regression model is to use the model for predictions, provided the correlation is significant. To generate predictions or forecasts using the linear regression model, substitute the value of the independent variable (x) in the regression equation and solve the equation for the dependent variable (y).
+
+In a previous example, the linear regression equation was generated to relate the amount of monthly revenue for a Fortune 500 company to the amount of monthly advertising spend. From the previous example, it was determined that the regression equation can be written as
+
+where x represents the amount spent on advertising (in thousands of dollars) and y represents the amount of revenue (in thousands of dollars).
+
+Let’s assume the Fortune 500 company would like to predict the monthly revenue for a month where it plans to spend $80,000 for advertising. To determine the estimate of monthly revenue, let x=80 in the regression equation and calculate a corresponding value for ŷ:
+
+This predicted value of y indicates that the forecasted revenue would be $14,320,700, assuming an advertising spend of $80,000.
+
+Excel can provide this forecasted value directly using the =FORECAST command.
+To use this command, enter the value of the independent variable x, followed by the cell range for the y-data and the cell range for the x-data, as follows: =FORECAST(X_VALUE, Range of Y-DATA, Range of X-DATA)
+
+To use this command, enter the value of the independent variable x, followed by the cell range for the y-data and the cell range for the x-data, as follows: =FORECAST(X_VALUE, Range of Y-DATA, Range of X-DATA)
+
+Using this Excel command, the forecasted value for the revenue is $14,320.52 when the advertising spend is $80 (in thousands of dollars) (see ). (Note: The discrepancy in the more precise Excel result and the formula result is due to rounding in interim calculations.)
+
+Revenue versus Advertising for Fortune 500
+ Company ($000s) Showing FORECAST Command in Excel
+
+A word of caution when predicting values for y: it is generally recommended to only predict values for y using values of x that are in the original range of the data collection.
+
+As an example, assume we have developed a linear model to predict the height of male children based on their age. We have collected data for the age range from x=3 years old to x=10 years old, and we have confirmed that the scatter plot shows a linear trend and that the correlation is significant.
+
+It would be erroneous to use this model to predict the height of a 25-year-old male since x=25 is outside the range of the x-data, which was from 3 to 10 years old. The reason this is not recommended is that a linear pattern cannot be assumed to continue beyond the x-value of 10 years old unless some data collection has occurred at ages greater than 10 to confirm that the linear pattern is consistent for x-values beyond 10 years old.
+
+Generating Prediction Intervals
+
+One important value of an estimated regression equation is its ability to predict the effects on y of a change in one or more values of the independent variables. The value of this is obvious. Careful policy cannot be made without estimates of the effects that may result. Indeed, it is the desire for particular results that drive the formation of most policy. Regression models can be, and have been, invaluable aids in forming such policies.
+
+Remember that point estimates do not carry a particular level of probability, or level of confidence, because points have no “width” above which there is an area to measure. There are actually two different approaches to the issue of developing estimates of changes in the independent variable (or variables) on the dependent variable. The first approach wishes to measure the expected mean value of y from a specific change in the value of x.
+
+The second approach to estimate the effect of a specific value of x on y treats the event as a single experiment: you choose x and multiply it times the coefficient, and that provides a single estimate of y. Because this approach acts as if there were a single experiment, the variance that exists in the parameter estimate is larger than the variance associated with the expected value approach.
+
+The conclusion is that we have two different ways to predict the effect of values of the independent variable(s) on the dependent variable, and thus we have two different intervals. Both are correct answers to the question being asked, but there are two different questions. To avoid confusion, the first case where we are asking for the expected value of the mean of the estimated y is called a confidence interval. The second case, where we are asking for the estimate of the impact on the dependent variable y of a single experiment using a value of x, is called the prediction interval.
+
+The prediction interval for an individual y for x=xp can be calculated as
+
+where se is the standard deviation of the error term, sx is the standard deviation of the x-variable, and tα2 is the critical value of the t-distribution at the 1 – α confidence level.
+
+Tabulated values of the t-distribution are available in online references such as the Engineering Statistics Handbook. The mathematical computations for prediction intervals are complex, and usually the calculations are performed using software. The formula above can be implemented in Excel to create a 95% prediction interval for the forecast for monthly revenue when x=$80,000 is spent on monthly advertising. shows the detailed calculations in Excel to arrive at a 95% prediction interval of (13,270.95, 15,370.09) for the monthly revenue. (The commands refer to the Excel data table shown in .)
+
+Calculations for 95% Prediction Interval for Monthly Revenue
+
+This prediction interval can be interpreted as follows: there is 95% confidence that when the amount spent on monthly advertising is $80,000, the corresponding monthly revenue will be between $13,270.95 and $15,370.09.
+
+Various computer regression software packages provide programs within the regression functions to provide answers to inquiries of estimated predicted values of y given various values chosen for the x-variable(s). For example, the statistical program R provides these prediction intervals directly. It is important to know just which interval is being tested in the computer package because the difference in the size of the standard deviations will change the size of the interval estimated. This is shown in .
+
+Prediction and Confidence Intervals for Regression Equation at 95% Confidence Level
+shows visually the difference the standard deviation makes in the size of the estimated intervals. The confidence interval, measuring the expected value of the dependent variable, is smaller than the prediction interval for the same level of confidence. The expected value method assumes that the experiment is conducted multiple times rather than just once, as in the other method. The logic here is similar, although not identical, to that discussed when developing the relationship between the sample size and the confidence interval using the central limit theorem. There, as the number of experiments increased, the distribution narrowed, and the confidence interval became tighter around the expected value of the mean.
+
+It is also important to note that the intervals around a point estimate are highly dependent upon the range of data used to estimate the equation, regardless of which approach is being used for prediction. Remember that all regression equations go through the point of means—that is, the mean value of y and the mean values of all independent variables in the equation. As the value of x gets further and further from the (x, y) point corresponding to the mean value of x and the mean value of y, the width of the estimated interval around the point estimate increases. Choosing values of x beyond the range of the data used to estimate the equation poses an even greater danger of creating estimates with little use, very large intervals, and risk of error. shows this relationship.
+
+Confidence Interval for an Individual Value of x, Xp, at 95% Confidence Level
+demonstrates the concern for the quality of the estimated interval, whether it is a prediction interval or a confidence interval. As the value chosen to predict y, Xp in the graph, is further from the central weight of the data, X¯, we see the interval expand in width even while holding constant the level of confidence. This shows that the precision of any estimate will diminish as one tries to predict beyond the largest weight of the data and most certainly will degrade rapidly for predictions beyond the range of the data. Unfortunately, this is just where most predictions are desired. They can be made, but the width of the confidence interval may be so large as to render the prediction useless.
+
+A key aspect of generating the linear regression model is to then use the model for predictions, provided that the correlation is significant. To generate predictions or forecasts using the linear regression model, substitute the value of the independent variable (x) in the regression equation and solve the equation for the dependent variable (y). When making predictions using the linear model, it is generally recommended to only predict values for y using values of x that are in the original range of the data collection.

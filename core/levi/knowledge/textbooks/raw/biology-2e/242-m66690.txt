@@ -1,0 +1,143 @@
+# m66690
+# Book: OpenStax Biology
+# Subject: science
+# Source: https://github.com/openstax/osbooks-biology-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Environmental Limits to Population Growth
+
+Environmental Limits to Population Growth
+
+By the end of this section, you will be able to do the following:
+
+Explain the characteristics of and differences between exponential and logistic growth patterns
+
+Give examples of exponential and logistic growth in natural populations
+
+Describe how natural selection and environmental adaptation led to the evolution of particular life history patterns
+
+Although life histories describe the way many characteristics of a population (such as their age structure) change over time in a general way, population ecologists make use of a variety of methods to model population dynamics mathematically. These more precise models can then be used to accurately describe changes occurring in a population and better predict future changes. Certain long-accepted models are now being modified or even abandoned due to their lack of predictive ability, and scholars strive to create effective new models.
+
+Exponential Growth
+
+Charles Darwin, in his theory of natural selection, was greatly influenced by the English clergyman Thomas Malthus. Malthus published a book in 1798 stating that populations with unlimited natural resources grow very rapidly, which represents an exponential growth, and then population growth decreases as resources become depleted, indicating a logistic growth.
+
+The best example of exponential growth is seen in bacteria. Bacteria reproduce by prokaryotic fission. This division takes about an hour for many bacterial species. If 1000 bacteria are placed in a large flask with an unlimited supply of nutrients (so the nutrients will not become depleted), after an hour, there is one round of division and each organism divides, resulting in 2000 organisms—an increase of 1000. In another hour, each of the 2000 organisms will double, producing 4000, an increase of 2000 organisms. After the third hour, there should be 8000 bacteria in the flask, an increase of 4000 organisms. The important concept of exponential growth is the accelerating population growth rate—the number of organisms added in each reproductive generation—that is, it is increasing at a greater and greater rate. After 1 day and 24 of these cycles, the population would have increased from 1000 to more than 16 billion. When the population size, N, is plotted over time, a J-shaped growth curve is produced ().
+
+The bacteria example is not representative of the real world where resources are limited. Furthermore, some bacteria will die during the experiment and thus not reproduce, lowering the growth rate. Therefore, when calculating the growth rate of a population, the death rate (D) (number organisms that die during a particular time interval) is subtracted from the birth rate (B) (number organisms that are born during that interval). This is shown in the following formula:
+
+The birth rate is usually expressed on a per capita (for each individual) basis. Thus, B (birth rate) = bN (the per capita birth rate “b” multiplied by the number of individuals “N”) and D (death rate) = dN (the per capita death rate “d” multiplied by the number of individuals “N”). Additionally, ecologists are interested in the population at a particular point in time, an infinitely small time interval. For this reason, the terminology of differential calculus is used to obtain the “instantaneous” growth rate, replacing the change in number and time with an instant-specific measurement of number and time.
+
+Notice that the “d” associated with the first term refers to the derivative (as the term is used in calculus) and is different from the death rate, also called “d.” The difference between birth and death rates is further simplified by substituting the term “r” (intrinsic rate of increase) for the relationship between birth and death rates:
+
+The value “r” can be positive, meaning the population is increasing in size; or negative, meaning the population is decreasing in size; or zero, where the population’s size is unchanging, a condition known as zero population growth. A further refinement of the formula recognizes that different species have inherent differences in their intrinsic rate of increase (often thought of as the potential for reproduction), even under ideal conditions. Obviously, a bacterium can reproduce more rapidly and have a higher intrinsic rate of growth than a human. The maximal growth rate for a species is its biotic potential, or rmax, thus changing the equation to:
+
+Logistic Growth
+
+Exponential growth is possible only when infinite natural resources are available; this is not the case in the real world. Charles Darwin recognized this fact in his description of the “struggle for existence,” which states that individuals will compete (with members of their own or other species) for limited resources. The successful ones will survive to pass on their own characteristics and traits (which we know now are transferred by genes) to the next generation at a greater rate (natural selection). To model the reality of limited resources, population ecologists developed the logistic growth model.
+
+Carrying Capacity and the Logistic Model
+
+In the real world, with its limited resources, exponential growth cannot continue indefinitely. Exponential growth may occur in environments where there are few individuals and plentiful resources, but when the number of individuals gets large enough, resources will be depleted, slowing the growth rate. Eventually, the growth rate will plateau or level off (). This population size, which represents the maximum population size that a particular environment can support, is called the carrying capacity, or K.
+
+The formula we use to calculate logistic growth adds the carrying capacity as a moderating force in the growth rate. The expression “K – N” indicates how many individuals may be added to a population at a given stage, and “K – N” divided by “K” is the fraction of the carrying capacity available for further growth. Thus, the exponential growth model is restricted by this factor to generate the logistic growth equation:
+
+Notice that when N is very small, (K-N)/K becomes close to K/K or 1, and the right side of the equation reduces to rmaxN, which means the population is growing exponentially and is not influenced by carrying capacity. On the other hand, when N is large, (K-N)/K comes close to zero, which means that population growth will be slowed greatly or even stopped. Thus, population growth is greatly slowed in large populations by the carrying capacity K. This model also allows for the population of a negative population growth, or a population decline. This occurs when the number of individuals in the population exceeds the carrying capacity (because the value of (K-N)/K is negative).
+
+A graph of this equation yields an S-shaped curve (), and it is a more realistic model of population growth than exponential growth. There are three different sections to an S-shaped curve. Initially, growth is exponential because there are few individuals and ample resources available. Then, as resources begin to become limited, the growth rate decreases. Finally, growth levels off at the carrying capacity of the environment, with little change in population size over time.
+
+Role of Intraspecific Competition
+
+The logistic model assumes that every individual within a population will have equal access to resources and, thus, an equal chance for survival. For plants, the amount of water, sunlight, nutrients, and the space to grow are the important resources, whereas in animals, important resources include food, water, shelter, nesting space, and mates.
+
+In the real world, phenotypic variation among individuals within a population means that some individuals will be better adapted to their environment than others. The resulting competition between population members of the same species for resources is termed intraspecific competition (intra- = “within”; -specific = “species”). Intraspecific competition for resources may not affect populations that are well below their carrying capacity—resources are plentiful and all individuals can obtain what they need. However, as population size increases, this competition intensifies. In addition, the accumulation of waste products can reduce an environment’s carrying capacity.
+
+Examples of Logistic Growth
+
+Yeast, a microscopic fungus used to make bread and alcoholic beverages, exhibits the classical S-shaped curve when grown in a test tube (a). Its growth levels off as the population depletes the nutrients. In the real world, however, there are variations to this idealized curve. Examples in wild populations include sheep and harbor seals (b). In both examples, the population size exceeds the carrying capacity for short periods of time and then falls below the carrying capacity afterwards. This fluctuation in population size continues to occur as the population oscillates around its carrying capacity. Still, even with this oscillation, the logistic model is confirmed.
+
+If the major food source of the seals declines due to pollution or overfishing, which of the following would likely occur?
+
+The carrying capacity of seals would decrease, as would the seal population.
+
+The carrying capacity of seals would decrease, but the seal population would remain the same.
+
+The number of seal deaths would increase but the number of births would also increase, so the population size would remain the same.
+
+The carrying capacity of seals would remain the same, but the population of seals would decrease.
+
+Section Summary
+
+Populations with unlimited resources grow exponentially, with an accelerating growth rate. When resources become limiting, populations follow a logistic growth curve. The population of a species will level off at the carrying capacity of its environment.
+
+Visual Connection Questions
+b If the major food source of the seals declines due to pollution or overfishing, which of the following would likely occur?
+
+The carrying capacity of seals would decrease, as would the seal population.
+
+The carrying capacity of seals would decrease, but the seal population would remain the same.
+
+The number of seal deaths would increase but the number of births would also increase, so the population size would remain the same.
+
+The carrying capacity of seals would remain the same, but the population of seals would decrease.
+A
+
+Review Questions
+
+Species with limited resources usually exhibit a(n) ________ growth curve.
+
+logistic
+
+logical
+
+experimental
+
+exponential
+
+A
+
+The maximum rate of increased characteristic of a species is called its ________.
+
+limit
+
+carrying capacity
+
+biotic potential
+
+exponential growth pattern
+
+C
+
+The population size of a species capable of being supported by the environment is called its ________.
+
+limit
+
+carrying capacity
+
+biotic potential
+
+logistic growth pattern
+
+B
+
+Critical Thinking Questions
+
+Describe the rate of population growth that would be expected at various parts of the S-shaped curve of logistic growth.
+
+In the first part of the curve, when few individuals of the species are present and resources are plentiful, growth is exponential, similar to a J-shaped curve. Later, growth slows due to the species using up resources. Finally, the population levels off at the carrying capacity of the environment, and it is relatively stable over time.
+
+Describe how the population of a species that survives a mass extinction event would change in size and growth pattern over time beginning immediately after the extinction event.
+
+Following a mass extinction event, the few surviving species can be considered to have access to unlimited natural resources since there would be minimal competition (due to low organism density). This means that the species would initially experience rapid exponential population growth, and the number of species members in the environment would rapidly increase over time. However, the further time progresses past the mass extinction event, the more the environment becomes populated by the species and its competitors. As resource availability declines the population growth rate will slow and enter logistic growth. Eventually, the population will meet the carrying capacity of the environment and stop increasing.
+
+maximal potential growth rate of a species
+number of births within a population at a specific point in time
+number of individuals of a species that can be supported by the limited resources of a habitat
+number of deaths within a population at a specific point in time
+accelerating growth pattern seen in species under conditions where resources are not limiting
+competition between members of the same species
+shape of an exponential growth curve
+leveling off of exponential growth due to limiting resources
+number of organisms added in each reproductive generation
+shape of a logistic growth curve
+steady population size where birth rates and death rates are equal

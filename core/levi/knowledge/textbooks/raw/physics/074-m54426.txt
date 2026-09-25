@@ -1,0 +1,927 @@
+# m54426
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Electric Potential
+
+Electric Potential
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Explain the similarities and differences between electric potential energy and gravitational potential energy
+
+Calculate the electric potential difference between two point charges and in a uniform electric field
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(5) The student knows the nature of forces in the physical world. The student is expected to:
+
+(C)
+describe and calculate how the magnitude of the electrical force between two objects depends on their charges and the distance between them; and
+
+(D)
+identify examples of electric and magnetic forces in everyday life.
+(C)
+describe and calculate how the magnitude of the electrical force between two objects depends on their charges and the distance between them; and
+(D)
+identify examples of electric and magnetic forces in everyday life.
+
+Section Key Terms
+
+electric potential
+electric potential energy
+Teacher Support
+
+This section again uses the analogy between gravity and electric force to present electric potential energy and electric potential.
+[BL]Ask students to define how potential is used in everyday life. Draw the analogy between this and potential energy.
+[OL][AL]Review the concept of potential energy as being the potential an object has to do work by virtue of its position with respect to another object.
+[OL]Remind students that gravitational potential energy is only meaningful when we deal with differences in energy. In other words, a reference position is chosen, and all other potential energies are compared with the potential energy at the reference position.
+[AL]Point out that sometimes the reference position is at infinity, in which case this may not be explicitly stated.
+
+As you learned in studying gravity, a mass in a gravitational field has potential energy, which means it has the potential to accelerate and thereby increase its kinetic energy. This kinetic energy can be used to do work. For example, imagine you want to use a stone to pound a nail into a piece of wood. You first lift the stone high above the nail, which increases the potential energy of the stone-Earth system—because Earth is so large, it does not move, so we usually shorten this by saying simply that the potential energy of the stone increases. When you drop the stone, gravity converts the potential energy into kinetic energy. When the stone hits the nail, it does work by pounding the nail into the wood. The gravitational potential energy is the work that a mass can potentially do by virtue of its position in a gravitational field. Potential energy is a very useful concept, because it can be used with conservation of energy to calculate the motion of masses in a gravitational field.
+Electric potential energy works much the same way, but it is based on the electric field instead of the gravitational field. By virtue of its position in an electric field, a charge has an electric potential energy. If the charge is free to move, the force due to the electric field causes it to accelerate, so its potential energy is converted to kinetic energy, just like a mass that falls in a gravitational field. This kinetic energy can be used to do work. The electric potential energy is the work that a charge can do by virtue of its position in an electric field.
+
+The analogy between gravitational potential energy and electric potential energy is depicted in . On the left, the ball-Earth system gains gravitational potential energy when the ball is higher in Earth's gravitational field. On the right, the two-charge system gains electric potential energy when the positive charge is farther from the negative charge.
+
+Let’s use the symbol 
+
+ U
+ G
+
+ to denote gravitational potential energy. When a mass falls in a gravitational field, its gravitational potential energy decreases. Conservation of energy tells us that the work done by the gravitational field to make the mass accelerate must equal the loss of potential energy of the mass. If we use the symbol 
+
+ W
+ 
+ donebygravity
+
+ to denote this work, then
+
+where the minus sign reflects the fact that the potential energy of the ball decreases.
+
+The work done by gravity on the mass is
+
+where F is the force due to gravity, and 
+
+ y
+ i
+
+ and 
+
+ y
+ f
+
+ are the initial and final positions of the ball, respectively. The negative sign is because gravity points down, which we consider to be the negative direction. For the constant gravitational field near Earth’s surface, 
+ 
+ F=mg
+ . The change in gravitational potential energy of the mass is
+
+Note that 
+
+ y
+ f
+ 
+ −
+ y
+ i
+
+ is just the negative of the height h from which the mass falls, so we usually just write 
+ 
+ Δ
+ U
+ G
+ 
+ =−mgh
+ .
+
+We now apply the same reasoning to a charge in an electric field to find the electric potential energy. The change 
+ 
+ Δ
+ U
+ E
+
+ in electric potential energy is the work done by the electric field to move a charge q from an initial position 
+
+ x
+ i
+
+ to a final position 
+
+ x
+ f
+
+ ( 
+ 
+ −Δ
+ U
+ E
+ 
+ =
+ W
+ 
+ donebyE-field
+
+ ). The definition of work does not change, except that now the work is done by the electric field: 
+
+ W
+ 
+ donebyE-field
+ 
+ =F(
+ x
+ f
+ 
+ −
+ x
+ i
+ 
+ )
+ . For a charge that falls through a constant electric field E, the force applied to the charge by the electric field is 
+ 
+ F=qE
+ . The change in electric potential energy of the charge is thus
+
+or
+
+This equation gives the change in electric potential energy of a charge q when it moves from position 
+
+ x
+ i
+
+ to position 
+
+ x
+ f
+
+ in a constant electric field E.
+shows how this analogy would work if we were close to Earth’s surface, where gravity is constant. The top image shows a charge accelerating due to a constant electric field. Likewise, the round mass in the bottom image accelerates due to a constant gravitation field. In both cases, the potential energy of the particle decreases, and its kinetic energy increases.
+
+Teacher Support
+
+Point out the fringing fields at the ends of the plates. Ask what path the charge would take if it were released in a fringing field (note that the charge does not follow the field lines due to its inertia).
+
+Ask students to draw the gravitational field lines in the bottom picture. Discuss why the mass does not follow the gravitational field lines.
+
+Analogy between Gravity and Electricity
+
+This video discusses the analogy between gravitational potential energy and electric potential energy. It reviews the concepts of work and potential energy and shows the connection between a mass in a uniform gravitation field, such as on Earth’s surface, and an electric charge in a uniform electric field.
+
+If the electric field is not constant, then the equation 
+ 
+ Δ
+ U
+ E
+ 
+ =−qE(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+ is not valid, and deriving the electric potential energy becomes more involved. For example, consider the electric potential energy of an assembly of two point charges 
+
+ q
+ 1
+
+ and 
+
+ q
+ 2
+
+ of the same sign that are initially very far apart. We start by placing charge 
+
+ q
+ 1
+
+ at the origin of our coordinate system. This takes no electrical energy, because there is no electric field at the origin (because charge 
+
+ q
+ 2
+
+ is very far away). We then bring charge 
+
+ q
+ 2
+
+ in from very far away to a distance r from the center of charge 
+
+ q
+ 1
+
+ . This requires some effort, because the electric field of charge 
+
+ q
+ 1
+
+ applies a repulsive force on charge 
+
+ q
+ 2
+
+ . The energy it takes to assemble these two charges can be recuperated if we let them fly apart again. Thus, the charges have potential energy when they are a distance r apart. It turns out that the electric potential energy of a pair of point charges 
+
+ q
+ 1
+
+ and 
+
+ q
+ 2
+
+ a distance r apart is
+
+To recap, if charges 
+
+ q
+ 1
+
+ and 
+
+ q
+ 2
+
+ are free to move, they can accumulate kinetic energy by flying apart, and this kinetic energy can be used to do work. The maximum amount of work the two charges can do (if they fly infinitely far from each other) is given by the equation above.
+
+Notice that if the two charges have opposite signs, then the potential energy is negative. This means that the charges have more potential to do work when they are far apart than when they are at a distance r apart. This makes sense: Opposite charges attract, so the charges can gain more kinetic energy if they attract each other from far away than if they start at only a short distance apart. Thus, they have more potential to do work when they are far apart. summarizes how the electric potential energy depends on charge and separation.
+
+Teacher Support
+
+Have students imagine that they have to push together or pull apart balls that carry these charges. Discuss which would require more work: pushing them together from far apart or from close together. Compare this with the analogous situations for the different charge combinations and for pushing together versus pulling apart.
+
+Electric Potential
+
+Recall that to find the force applied by a fixed charge Q on any arbitrary test charge q, it was convenient to define the electric field, which is the force per unit charge applied by Q on any test charge that we place in its electric field. The same Strategy is used here with electric potential energy: We now define the electric potential V, which is the electric potential energy per unit charge.
+
+Teacher Support
+
+Emphasize the difference between electric potential energy and electric potential. Although the latter seems to be shorthand for the former, the two terms have different meanings.
+
+Normally, the electric potential is simply called the potential or voltage. The units for the potential are J/C, which are given the name volt (V) after the Italian physicist Alessandro Volta (1745–1827). From the equation 
+
+ U
+ E
+ 
+ =
+ k
+ q
+ 1
+
+ q
+ 2
+ 
+ /r
+ 
+, the electric potential a distance r from a point charge 
+
+ q
+ 1
+
+ is
+
+This equation gives the energy required per unit charge to bring a charge 
+
+ q
+ 2
+
+ from infinity to a distance r from a point charge 
+
+ q
+ 1
+ .
+ 
+ Mathematically, this is written as
+
+Note that this equation actually represents a difference in electric potential. However, because the second term is zero, it is normally not written, and we speak of the electric potential instead of the electric potential difference, or we just say the potential difference, or voltage). Below, when we consider the electric potential energy per unit charge between two points not infinitely far apart, we speak of electric potential difference explicitly. Just remember that electric potential and electric potential difference are really the same thing; the former is used just when the electric potential energy is zero in either the initial or final charge configuration.
+
+Coming back now to the electric potential a distance r from a point charge 
+
+ q
+ 1
+
+, note that 
+
+ q
+ 1
+
+ can be any arbitrary point charge, so we can drop the subscripts and simply write
+
+Now consider the electric potential near a group of charges q1, q2, and q3, as drawn in . The electric potential is derived by considering the electric field. Electric fields follow the principle of superposition and can be simply added together, so the electric potential from different charges also add together. Thus, the electric potential of a point near a group of charges is
+
+where 
+
+ r
+ 1
+ 
+ ,
+ r
+ 2
+ 
+ ,
+ r
+ 3
+ 
+ ,…,
+ are the distances from the center of charges 
+
+ q
+ 1
+ 
+ ,
+ q
+ 2
+ 
+ ,
+ q
+ 3
+ 
+ ,…
+ to the point of interest, as shown in .
+
+Now let’s consider the electric potential in a uniform electric field. From the equation 
+ 
+ Δ
+ U
+ E
+ 
+ =−qE(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+, we see that the potential difference in going from 
+
+ x
+ i
+
+ to 
+
+ x
+ f
+
+ in a uniform electric field E is
+
+Notice from the equation 
+ 
+ ΔV=−E(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+ that the electric field can be written as
+
+which means that the electric field has units of V/m. Thus, if you know the potential difference between two points, calculating the electric field is very simple—you simply divide the potential difference by the distance!
+
+Notice that a positive charge in a region with high potential will experience a force pushing it toward regions of lower potential. In this sense, potential is like pressure for fluids. Imagine a pipe containing fluid, with the fluid at one end of the pipe under high pressure and the fluid at the other end of the pipe under low pressure. If nothing prevents the fluid from flowing, it will flow from the high-pressure end to the low-pressure end. Likewise, a positive charge that is free to move will move from a region with high potential to a region with lower potential.
+
+Voltage
+
+This video starts from electric potential energy and explains how this is related to electric potential (or voltage). The lecturer calculates the electric potential created by a uniform electric field.
+
+Electric Animals
+
+Many animals generate and/or detect electric fields. This is useful for activities such as hunting, defense, navigation, communication, and mating. Because salt water is a relatively good conductor, electric fish have evolved in all the world’s oceans. These fish have intrigued humans since the earliest times. In the nineteenth century, parties were even organized where the main attraction was getting a jolt from an electric fish! Scientists also studied electric fish to learn about electricity. Alessandro Volta based his research that led to batteries in 1799 on electric fish. He even referred to batteries as artificial electric organs, because he saw them as imitations of the electric organs of electric fish.
+
+Animals that generate electricity are called electrogenic and those that detect electric fields are called electroreceptive. Most fish that are electrogenic are also electroreceptive. One of the most well-known electric fish is the electric eel (see ), which is both electrogenic and electroreceptive. These fish have three pairs of organs that produce the electric charge: the main organ, Hunter’s organ, and Sach’s organ. Together, these organs account for more than 80percent of the fish’s body.
+
+Electric eels can produce electric discharges of much greater voltage than what you would get from a standard wall socket. These discharges can stun or even kill their prey. They also use low-intensity discharges to navigate. The electric fields they generate reflect off nearby obstacles or animals and are then detected by electroreceptors in the eel’s skin. The three organs that produce electricity contain electrolytes, which are substances that ionize when dissolved in water (or other liquids). An ionized atom or molecule is one that has lost or gained at least one electron, so it carries a net charge. Thus, a liquid solution containing an electrolyte conducts electricity, because the ions in the solution can move if an electric field is applied.
+
+To produce large discharges, the main organ is used. It contains approximately 6,000 rows of electroplaques connected in a long chain. Connected this way, the voltage between electroplaques adds up, creating a large final voltage. Each electroplaque consists of a column of cells controlled by an excitor nerve. When triggered by the excitor nerve, the electroplaques allow ionized sodium to flow through them, creating a potential difference between electroplaques. These potentials add up, and a large current can flow through the electrolyte.
+
+This geometry is reflected in batteries, which also use stacks of plates to produce larger potential differences.
+
+If an electric eel produces 1,000 V, which voltage is produced by each electroplaque in the main organ?
+
+0.17 mV
+
+1.7 mV
+
+17 mV
+
+170 mV
+
+X-ray Tube
+
+Dentists use X-rays to image their patients’ teeth and bones. The X-ray tubes that generate X-rays contain an electron source separated by about 10 cm from a metallic target. The electrons are accelerated from the source to the target by a uniform electric field with a magnitude of about 100 kN/C, as drawn in . When the electrons hit the target, X-rays are produced. (a) What is the potential difference between the electron source and the metallic target? (b) What is the kinetic energy of the electrons when they reach the target, assuming that the electrons start at rest?
+
+Strategy FOR (A)
+
+Use the equation 
+ 
+ ΔV=−E(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+ to find the potential difference given a constant electric field. Define the source position as 
+
+ x
+ i
+ 
+ =0
+ and the target position as 
+
+ x
+ f
+ 
+ =10cm
+ . To accelerate the electrons in the positive x direction, the electric field must point in the negative x direction. This way, the force 
+ 
+ F=qE
+ on the electrons will point in the positive x direction, because both q and E are negative. Thus, 
+ 
+ E=−100×
+ 
+ 10
+ 3
+ 
+ N/C
+ .
+
+Solution for (a)
+
+Using 
+
+ x
+ i
+ 
+ =0
+ and 
+
+ x
+ f
+ 
+ =10cm=0.10m
+, the equation 
+ 
+ ΔV=−E(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+ tells us that the potential difference between the electron source and the target is
+
+Discussion for (a)
+
+The potential difference is positive, so the energy per unit positive charge is higher at the target than at the source. This means that free positive charges would fall from the target to the source. However, electrons are negative charges, so they accelerate from the source toward the target, gaining kinetic energy as they go.
+
+Strategy FOR (B)
+
+Apply conservation of energy to find the final kinetic energy of the electrons. In going from the source to the target, the change in electric potential energy plus the change in kinetic energy of the electrons must be zero, so 
+ 
+ Δ
+ U
+ E
+ 
+ +ΔK=0
+. The change in electric potential energy for moving through a constant electric field is given by the equation
+Δ
+ U
+ E
+ 
+ =−qE(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+,
+
+where the electric field is 
+ 
+ E=−100×
+ 
+ 10
+ 3
+ 
+ N/C
+ . Because the electrons start at rest, their initial kinetic energy is zero. Thus, the change in kinetic energy is simply their final kinetic energy, so 
+ 
+ ΔK=
+ K
+ f
+
+ .
+
+Solution for (b)
+
+Again 
+
+ x
+ i
+ 
+ =0
+ and 
+
+ x
+ f
+ 
+ =10cm=0.10m
+ . The charge of an electron is 
+ 
+ q=−1.602×
+ 
+ 10
+ 
+ −19
+ 
+ C
+ . Conservation of energy gives
+
+Inserting the known values into the right-hand side of this equation gives
+
+Discussion for (b)
+
+This is a very small energy. However, electrons are very small, so they are easy to accelerate, and this energy is enough to make an electron go extremely fast. You can find their speed by using the definition of kinetic energy, 
+ 
+ K=
+ 1
+ 2
+ 
+ m
+ v
+ 2
+
+ . The result is that the electrons are moving at more than 100 million miles per hour!
+
+Electric Potential Energy of Doorknob and Dust Speck
+
+Consider again the doorknob from the example in the previous section. The doorknob is treated as a spherical conductor with a uniform static charge 
+
+ q
+ 1
+ 
+ =−1.5nC
+ on its surface. What is the electric potential energy between the doorknob and a speck of dust carrying a charge 
+
+ q
+ 2
+ 
+ =0.20nC
+ at 1.0 cm from the front surface of the doorknob? The diameter of the doorknob is 5.0 cm.
+
+Strategy
+
+As we did in the previous section, we treat the charge as if it were concentrated at the center of the doorknob. Again, as you will be able to validate in later physics classes, we can make this simplification, because the charge is uniformly distributed over the surface of the spherical object. Make a sketch of the situation and define a coordinate system, as shown in the image below. We use 
+ 
+ +x
+ to indicate the outward direction perpendicular to the door, with 
+ 
+ x=0
+ at the center of the doorknob. If the diameter of the doorknob is 5.0 cm, its radius is 2.5 cm. Thus, the speck of dust 1.0 cm from the surface of the doorknob is a distance 
+ 
+ r=2.5cm+1.0cm=3.5cm
+ from the center of the doorknob. To solve this problem, use the equation 
+
+ U
+ E
+ 
+ =
+ k
+ q
+ 1
+
+ q
+ 2
+ 
+ /r
+ 
+ .
+
+Solution
+
+The charge on the doorknob is 
+
+ q
+ 1
+ 
+ =−1.5nC=−1.5×
+ 
+ 10
+ 
+ −9
+ 
+ C,
+ and the charge on the speck of dust is 
+
+ q
+ 2
+ 
+ =0.20nC=2.0×
+ 
+ 10
+ 
+ −10
+ 
+ C
+ . The distance 
+ 
+ r=3.5cm=0.035m
+ . Inserting these values into the equation 
+
+ U
+ E
+ 
+ =
+ k
+ q
+ 1
+
+ q
+ 2
+ 
+ /r
+ 
+ gives
+
+Discussion
+
+The energy is negative, which means that the energy will decrease that is, get even more negative as the speck of dust approaches the doorknob. This helps explain why dust accumulates on objects that carry a static charge. However, note that insulators normally collect more static charge than conductors, because any charge that accumulates on insulators cannot move about on the insulator to find a way to escape. They must simply wait to be removed by some passing moist speck of dust or other host.
+
+Practice Problems
+
+What is the electric potential 10 cm from a −10 nC charge?
+
+9.0 × 102 V
+
+9.0 × 103 V
+
+9.0 × 104 V
+
+9.0 × 105 V
+
+An electron accelerates from 0 to 10 × 104 m/s in an electric field. Through what potential difference did the electron travel? The mass of an electron is 9.11 × 10–31 kg, and its charge is −1.60 × 10–19 C.
+
+29 mV
+
+290 mV
+
+2,900 mV
+
+29 V
+
+Check Your Understanding
+
+Gravitational potential energy is the potential for two masses to do work by virtue of their positions with respect to each other. What is the analogous definition of electric potential energy?
+
+Electric potential energy is the potential for two charges to do work by virtue of their positions with respect to the origin point.
+
+Electric potential energy is the potential for two charges to do work by virtue of their positions with respect to infinity.
+
+Electric potential energy is the potential for two charges to do work by virtue of their positions with respect to each other.
+
+Electric potential energy is the potential for single charges to do work by virtue of their positions with respect to their final positions.
+
+A negative charge is 10 m from a positive charge. Where would you have to move the negative charge to increase the potential energy of the system?
+
+The negative charge should be moved closer to the positive charge.
+
+The negative charge should be moved farther away from the positive charge.
+
+The negative charge should be moved to infinity.
+
+The negative charge should be placed just next to the positive charge.
+
+Section Summary
+
+Electric potential energy is a concept similar to gravitational potential energy: It is the potential that charges have to do work by virtue of their positions relative to each other.
+
+Electric potential is the electric potential energy per unit charge.
+
+The potential is always measured between two points, where one point may be at infinity.
+
+Positive charges move from regions of high potential to regions of low potential.
+
+Negative charges move from regions of low potential to regions of high potential.
+
+Key Equations
+
+Δ
+ U
+ E
+ 
+ =−qE(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+U
+ E
+ 
+ =
+ 
+ kQq
+ r
+V=
+
+ U
+ E
+
+ q
+ΔV=−E(
+
+ x
+ f
+ 
+ −
+ x
+ i
+
+ )
+V=
+ 
+ kQ
+ r
+Concept Items
+
+True or false—The potential from a group of charges is the sum of the potentials from each individual charge.
+
+false
+
+true
+
+True or false—The characteristics of an electric field make it analogous to the gravitational field near the surface of Earth.
+
+false
+
+true
+
+Critical Thinking
+
+What is the relationship between voltage and energy? More precisely, what is the relationship between potential difference and electric potential?
+
+Voltage is the energy per unit mass at some point in space.
+
+Voltage is the energy per unit length in space.
+
+Voltage is the energy per unit charge at some point in space.
+
+Voltage is the energy per unit area in space.
+
+Three parallel plates are stacked above each other, with a separation between each plate. If the potential difference between the first two plates is ΔV1 and the potential between the second two plates is ΔV2, what is the potential difference between the first and the third plates?
+
+ΔV3 = ΔV2 + ΔV1
+
+ΔV3 = ΔV2 − ΔV1
+
+ΔV3 = ΔV2 / ΔV1
+
+ΔV3 = ΔV2×ΔV1
+
+Problems
+
+You move a charge q from ri = 20 cm to rf = 40 cm from a fixed charge Q = 10 nC. What is the difference in potential for these two positions?
+
+−2.2 × 102 V
+
+−1.7 × 103 V
+
+−2.2 × 104 V
+
+−1.7 × 102 V
+
+How much work is required from an outside agent to move an electron from xi = 0 to xf = 20 cm in an electric field 
+
+ (50 N/C)
+ x
+ ^
+
+?
+
+1.6 × 10−15 J
+
+1.6 × 10−16 J
+
+1.6 × 10−20 J
+
+1.6 × 10−18 J
+
+Test Prep Multiple Choice
+
+What is the potential at 1.0 m from a point charge Q = − 25 nC?
+
+6.6 × 102 V
+
+−2.3 × 102 V
+
+−6.6 × 102 V
+
+2.3 × 102 V
+
+Increasing the distance by a factor of two from a point charge will change the potential by a factor of how much?
+
+2
+
+4
+
+1/2
+
+1/4
+
+True or false—Voltage is the common word for potential difference, because this term is more descriptive than potential difference.
+
+false
+
+true
+
+Test Prep Short Answer
+
+The energy required to bring a charge q = − 8.8 nC from far away to 5.5 cm from a point charge Q is 13 mJ. What is the potential at the final position of q?
+
+−112 MV
+
+−1.5 MV
+
+−0.66 MV
+
++1.5 MV
+
+How is electric potential related to electric potential energy?
+
+Electric potential is the electric potential energy per unit mass at a given position in space.
+
+Electric potential is the electric potential energy per unit length at a given position in space. This relation is not dimensionally correct.
+
+Electric potential is the electric potential energy per unit area in space.
+
+Electric potential is the electric potential energy per unit charge at a given position in space.
+
+If it takes 10 mJ to move a charge q from xi = 25 cm to xf = − 25 cm in an electric field of 
+
+ (20 N/C)
+ x
+ ^
+ 
+ ,
+
+ what is the charge q?
+
+−1.0 mC
+
++0.25 mC
+
++ 1.0 mC
+
++400 mC
+
+Test Prep Extended Response
+
+A square grid has charges of Q = 10 nC are each corner. The sides of the square at 10 cm . How much energy does it require to bring a q = 1.0 nC charge from very far away to the point at the center of this square?
+
+1.3 × 10−6 J
+
+2.5 × 10−6 J
+
+3.8 × 10−6 J
+
+5.1 × 10−6 J
+
+How are potential difference and electric-field strength related for a constant electric field?
+
+The magnitude of electric-field strength is equivalent to the potential divided by the distance.
+
+The magnitude of electric-field strength is equivalent to the product of the electric potential and the distance.
+
+The magnitude of electric-field strength is equivalent to the difference between magnitude of the electric potential and the distance.
+
+The magnitude of electric-field strength is equivalent to the sum of the magnitude of the electric potential and the distance.
+
+the electric potential energy per unit charge
+the work that a charge can do by virtue of its position in an electric field

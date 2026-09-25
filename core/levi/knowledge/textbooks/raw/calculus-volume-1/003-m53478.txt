@@ -1,0 +1,384 @@
+# m53478
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Basic Classes of Functions
+
+Basic Classes of Functions
+
+Calculate the slope of a linear function and interpret its meaning.
+
+Recognize the degree of a polynomial.
+
+Find the roots of a quadratic polynomial.
+
+Describe the graphs of basic odd and even polynomial functions.
+
+Identify a rational function.
+
+Describe the graphs of power and root functions.
+
+Explain the difference between algebraic and transcendental functions.
+
+Graph a piecewise-defined function.
+
+Sketch the graph of a function that has been shifted, stretched, or reflected from its initial graph position.
+
+We have studied the general characteristics of functions, so now let’s examine some specific classes of functions. We begin by reviewing the basic properties of linear and quadratic functions, and then generalize to include higher-degree polynomials. By combining root functions with polynomials, we can define general algebraic functions and distinguish them from the transcendental functions we examine later in this chapter. We finish the section with examples of piecewise-defined functions and take a look at how to sketch the graph of a function that has been shifted, stretched, or reflected from its initial form.
+
+Linear Functions and Slope
+
+The easiest type of function to consider is a linear function. Linear functions have the form f(x)=ax+b, where a and b are constants. In , we see examples of linear functions when a is positive, negative, and zero. Note that if a>0, the graph of the line rises as x increases. In other words, f(x)=ax+b is increasing on (−∞, ∞). If a<0, the graph of the line falls as x increases. In this case, f(x)=ax+b is decreasing on (−∞, ∞). If a=0, the line is horizontal.
+
+As suggested by , the graph of any linear function is a line. One of the distinguishing features of a line is its slope. The slope is the change in y for each unit change in x. The slope measures both the steepness and the direction of a line. If the slope is positive, the line points upward when moving from left to right. If the slope is negative, the line points downward when moving from left to right. If the slope is zero, the line is horizontal. To calculate the slope of a line, we need to determine the ratio of the change in y versus the change in x. To do so, we choose any two points (x1,y1) and (x2,y2) on the line and calculate y2−y1x2−x1. In , we see this ratio is independent of the points chosen.
+
+Definition
+
+Consider line L passing through points (x1,y1) and (x2,y2). Let Δy=y2−y1 and Δx=x2−x1 denote the changes in y and x, respectively. The slope of the line is
+
+We now examine the relationship between slope and the formula for a linear function. Consider the linear function given by the formula f(x)=ax+b. As discussed earlier, we know the graph of a linear function is given by a line. We can use our definition of slope to calculate the slope of this line. As shown, we can determine the slope by calculating (y2−y1)/(x2−x1) for any points (x1,y1) and (x2,y2) on the line. Evaluating the function f at x=0, we see that (0,b) is a point on this line. Evaluating this function at x=1, we see that (1,a+b) is also a point on this line. Therefore, the slope of this line is
+
+We have shown that the coefficient a is the slope of the line. We can conclude that the formula f(x)=ax+b describes a line with slope a. Furthermore, because this line intersects the y-axis at the point (0,b), we see that the y-intercept for this linear function is (0,b). We conclude that the formula f(x)=ax+b tells us the slope, a, and the y-intercept, (0,b), for this line. Since we often use the symbol m to denote the slope of a line, we can write
+
+to denote the slope-intercept form of a linear function.
+
+Sometimes it is convenient to express a linear function in different ways. For example, suppose the graph of a linear function passes through the point (x1,y1) and the slope of the line is m. Since any other point (x,f(x)) on the graph of f must satisfy the equation
+
+this linear function can be expressed by writing
+
+We call this equation the point-slope equation for that linear function.
+
+Since every nonvertical line is the graph of a linear function, the points on a nonvertical line can be described using the slope-intercept or point-slope equations. However, a vertical line does not represent the graph of a function and cannot be expressed in either of these forms. Instead, a vertical line is described by the equation x=k for some constant k. Since neither the slope-intercept form nor the point-slope form allows for vertical lines, we use the notation
+
+where a,b are both not zero, to denote the standard form of a line.
+
+Definition
+
+Consider a line passing through the point (x1,y1) with slope m. The equation
+
+is the point-slope equation for that line.
+
+Consider a line with slope m and y-intercept (0,b). The equation
+
+is an equation for that line in slope-intercept form.
+
+The standard form of a line is given by the equation
+
+where a and b are not both zero. This form is more general because it allows for a vertical line, x=k.
+
+Finding the Slope and Equations of Lines
+
+Consider the line passing through the points (11,−4) and (−4,5), as shown in .
+
+Find the slope of the line.
+
+Find an equation for this linear function in point-slope form.
+
+Find an equation for this linear function in slope-intercept form.
+
+The slope of the line is
+m=y2−y1x2−x1=5−(−4)−4−11=−915=−35.
+
+To find an equation for the linear function in point-slope form, use the slope m=−3/5 and choose any point on the line. If we choose the point (11,−4), we get the equation
+f(x)+4=−35(x−11).
+
+To find an equation for the linear function in slope-intercept form, solve the equation in part b. for f(x). When we do this, we get the equation
+f(x)=−35x+135.
+
+Consider the line passing through points (−3,2) and (1,4). Find the slope of the line.
+
+Find an equation of that line in point-slope form. Find an equation of that line in slope-intercept form.
+m=1/2. The point-slope form is
+y−4=12(x−1).
+
+The slope-intercept form is
+y=12x+72.
+
+Hint
+
+The slope m=Δy/Δx.
+
+A Linear Distance Function
+
+Jessica leaves her house at 5:50 a.m. and goes for a 9-mile run. She returns to her house at 7:08 a.m. Answer the following questions, assuming Jessica runs at a constant pace.
+
+Describe the distance D (in miles) Jessica runs as a linear function of her run time t (in minutes).
+
+Sketch a graph of D.
+
+Interpret the meaning of the slope.
+
+At time t=0, Jessica is at her house, so D(0)=0. At time t=78 minutes, Jessica has finished running 9 mi, so D(78)=9. The slope of the linear function is
+m=9−078−0=326.
+The y-intercept is (0,0), so the equation for this linear function is
+D(t)=326t.
+
+To graph D, use the fact that the graph passes through the origin and has slope m=3/26.
+
+The slope m=3/26≈0.115 describes the distance (in miles) Jessica runs per minute, or her average velocity.
+
+Polynomials
+
+A linear function is a special type of a more general class of functions: polynomials. A polynomial function is any function that can be written in the form
+
+for some integer n≥0 and constants an,an−1,…,a0, where an≠0. In the case when n=0, we allow for a0=0; if a0=0, the function f(x)=0 is called the zero function. The value n is called the degree of the polynomial; the constant an is called the leading coefficient. A linear function of the form f(x)=mx+b is a polynomial of degree 1 if m≠0 and degree 0 if m=0. A polynomial of degree 0 is also called a constant function. A polynomial function of degree 2 is called a quadratic function. In particular, a quadratic function has the form f(x)=ax2+bx+c, where a≠0. A polynomial function of degree 3 is called a cubic function.
+
+Power Functions
+
+Some polynomial functions are power functions. A power function is any function of the form f(x)=axb, where a and b are any real numbers. The exponent in a power function can be any real number, but here we consider the case when the exponent is a positive integer. (We consider other cases later.) If the exponent is a positive integer, then f(x)=axn is a polynomial. If n is even, then f(x)=axn is an even function because f(−x)=a(−x)n=axn if n is even. If n is odd, then f(x)=axn is an odd function because f(−x)=a(−x)n=−axn if n is odd ().
+
+Behavior at Infinity
+
+To determine the behavior of a function f as the inputs approach infinity, we look at the values f(x) as the inputs, x, become larger. For some functions, the values of f(x) approach a finite number. For example, for the function f(x)=2+1/x, the values 1/x become closer and closer to zero for all values of x as they get larger and larger. For this function, we say “f(x) approaches two as x goes to infinity,” and we write f(x)→2 as x→∞. The line y=2 is a horizontal asymptote for the function f(x)=2+1/x because the graph of the function gets closer to the line as x gets larger.
+
+For other functions, the values f(x) may not approach a finite number but instead may become larger for all values of x as they get larger. In that case, we say “f(x) approaches infinity as x approaches infinity,” and we write f(x)→∞ as x→∞. For example, for the function f(x)=3x2, the outputs f(x) become larger as the inputs x get larger. We can conclude that the function f(x)=3x2 approaches infinity as x approaches infinity, and we write 3x2→∞ as x→∞. The behavior as x→−∞ and the meaning of f(x)→−∞ as x→∞ or x→−∞ can be defined similarly. We can describe what happens to the values of f(x) as x→∞ and as x→−∞ as the end behavior of the function.
+
+To understand the end behavior for polynomial functions, we can focus on quadratic and cubic functions. The behavior for higher-degree polynomials can be analyzed similarly. Consider a quadratic function f(x)=ax2+bx+c. If a>0, the values f(x)→∞ as x→±∞. If a<0, the values f(x)→−∞ as x→±∞. Since the graph of a quadratic function is a parabola, the parabola opens upward if a>0; the parabola opens downward if a<0. (See (a).)
+
+Now consider a cubic function f(x)=ax3+bx2+cx+d. If a>0, then f(x)→∞ as x→∞ and f(x)→−∞ as x→−∞. If a<0, then f(x)→−∞ as x→∞ and f(x)→∞ as x→−∞. As we can see from both of these graphs, the leading term of the polynomial determines the end behavior. (See (b).)
+
+Zeros of Polynomial Functions
+
+Another characteristic of the graph of a polynomial function is where it intersects the x-axis. To determine where a function f intersects the x-axis, we need to solve the equation f(x)=0 for x. In the case of the linear function f(x)=mx+b, the x-intercept is given by solving the equation mx+b=0. In this case, we see that the x-intercept is given by (−b/m,0). In the case of a quadratic function, finding the x-intercept(s) requires finding the zeros of a quadratic equation: ax2+bx+c=0. In some cases, it is easy to factor the polynomial ax2+bx+c to find the zeros. If not, we make use of the quadratic formula.
+
+Rule: The Quadratic Formula
+
+Consider the quadratic equation
+
+where a≠0. The solutions of this equation are given by the quadratic formula
+
+If the discriminant b2−4ac>0, this formula tells us there are two real numbers that satisfy the quadratic equation. If b2−4ac=0, this formula tells us there is only one solution, and it is a real number. If b2−4ac<0, no real numbers satisfy the quadratic equation.
+
+In the case of higher-degree polynomials, it may be more complicated to determine where the graph intersects the x-axis. In some instances, it is possible to find the x-intercepts by factoring the polynomial to find its zeros. In other cases, it is impossible to calculate the exact values of the x-intercepts. However, as we see later in the text, in cases such as this, we can use analytical tools to approximate (to a very high degree) where the x-intercepts are located. Here we focus on the graphs of polynomials for which we can calculate their zeros explicitly.
+
+Graphing Polynomial Functions
+
+For the following functions a. and b., i. describe the behavior of f(x) as x→±∞, ii. find all zeros of f, and iii. sketch a graph of f.
+f(x)=−2x2+4x−1
+f(x)=x3−3x2−4x
+
+The function f(x)=−2x2+4x−1 is a quadratic function.
+
+Because a=−2<0,asx→±∞,f(x)→−∞.
+To find the zeros of f, use the quadratic formula. The zeros are
+x=−4±42−4(−2)(−1)2(−2)=−4±8−4=−4±22−4=2±22.
+To sketch the graph of f, use the information from your previous answers and combine it with the fact that the graph is a parabola opening downward.
+
+Because a=−2<0,asx→±∞,f(x)→−∞.
+
+To find the zeros of f, use the quadratic formula. The zeros are
+x=−4±42−4(−2)(−1)2(−2)=−4±8−4=−4±22−4=2±22.
+
+To sketch the graph of f, use the information from your previous answers and combine it with the fact that the graph is a parabola opening downward.
+
+The function f(x)=x3−3x2−4x is a cubic function.
+
+Because a=1>0,asx→∞,f(x)→∞. As x→−∞,f(x)→−∞.
+To find the zeros of f, we need to factor the polynomial. First, when we factor x out of all the terms, we find
+f(x)=x(x2−3x−4).
+Then, when we factor the quadratic function x2−3x−4, we find
+f(x)=x(x−4)(x+1).
+Therefore, the zeros of f are x=0,4,−1.
+Combining the results from parts i. and ii., draw a rough sketch of f.
+
+Because a=1>0,asx→∞,f(x)→∞. As x→−∞,f(x)→−∞.
+
+To find the zeros of f, we need to factor the polynomial. First, when we factor x out of all the terms, we find
+f(x)=x(x2−3x−4).
+Then, when we factor the quadratic function x2−3x−4, we find
+f(x)=x(x−4)(x+1).
+Therefore, the zeros of f are x=0,4,−1.
+
+Combining the results from parts i. and ii., draw a rough sketch of f.
+
+Consider the quadratic function f(x)=3x2−6x+2. Find the zeros of f. Does the parabola open upward or downward?
+
+The zeros are x=1±3/3. The parabola opens upward.
+
+Hint
+
+Use the quadratic formula.
+
+Mathematical Models
+
+A large variety of real-world situations can be described using mathematical models. A mathematical model is a method of simulating real-life situations with mathematical equations. Physicists, engineers, economists, and other researchers develop models by combining observation with quantitative data to develop equations, functions, graphs, and other mathematical tools to describe the behavior of various systems accurately. Models are useful because they help predict future outcomes. Examples of mathematical models include the study of population dynamics, investigations of weather patterns, and predictions of product sales.
+
+As an example, let’s consider a mathematical model that a company could use to describe its revenue for the sale of a particular item. The amount of revenue R a company receives for the sale of n items sold at a price of p dollars per item is described by the equation R=p·n. The company is interested in how the sales change as the price of the item changes. Suppose the data in show the number of units a company sells as a function of the price per item.
+
+Number of Units Sold n (in Thousands) as a Function of Price per Unit p (in Dollars)
+12.2
+In , we see the graph the number of units sold (in thousands) as a function of price (in dollars). We note from the shape of the graph that the number of units sold is likely a linear function of price per item, and the data can be closely approximated by the linear function n=−1.04p+26 for 0≤p≤25, where n predicts the number of units sold in thousands. Using this linear function, the revenue (in thousands of dollars) can be estimated by the quadratic function
+
+for 0≤p≤25. In , we use this quadratic function to predict the amount of revenue the company receives depending on the price the company charges per item. Note that we cannot conclude definitively the actual number of units sold for values of p, for which no data are collected. However, given the other data values and the graph shown, it seems reasonable that the number of units sold (in thousands) if the price charged is p dollars may be close to the values predicted by the linear function n=−1.04p+26.
+
+Maximizing Revenue
+
+A company is interested in predicting the amount of revenue it will receive depending on the price it charges for a particular item. Using the data from , the company arrives at the following quadratic function to model revenue R (in thousands of dollars) as a function of price per item p:
+
+for 0≤p≤25.
+
+Predict the revenue if the company sells the item at a price of p=$5 and p=$17.
+
+Find the zeros of this function and interpret the meaning of the zeros.
+
+Sketch a graph of R.
+
+Use the graph to determine the value of p that maximizes revenue. Find the maximum revenue.
+
+Evaluating the revenue function at p=5 and p=17, we can conclude that
+R(5)=−1.04(5)2+26(5)=104,so revenue=$104,000;R(17)=−1.04(17)2+26(17)=141.44,so revenue=$141,440.
+
+The zeros of this function can be found by solving the equation −1.04p2+26p=0. When we factor the quadratic expression, we get p(−1.04p+26)=0. The solutions to this equation are given by p=0,25. For these values of p, the revenue is zero. When p=$0, the revenue is zero because the company is giving away its merchandise for free. When p=$25, the revenue is zero because the price is too high, and no one will buy any items.
+
+Knowing the fact that the function is quadratic, we also know the graph is a parabola. Since the leading coefficient is negative, the parabola opens downward. One property of parabolas is that they are symmetric about the axis, so since the zeros are at p=0 and p=25, the parabola must be symmetric about the line halfway between them, or p=12.5.
+
+The function is a parabola with zeros at p=0 and p=25, and it is symmetric about the line p=12.5, so the maximum revenue occurs at a price of p=$12.50 per item. At that price, the revenue is R(p)=−1.04(12.5)2+26(12.5)=$162,500.
+
+Algebraic Functions
+
+By allowing for quotients and fractional powers in polynomial functions, we create a larger class of functions. An algebraic function is one that involves addition, subtraction, multiplication, division, rational powers, and roots. Two types of algebraic functions are rational functions and root functions.
+
+Just as rational numbers are quotients of integers, rational functions are quotients of polynomials. In particular, a rational function is any function of the form f(x)=p(x)/q(x), where p(x) and q(x) are polynomials. For example,
+
+are rational functions. A root function is a power function of the form f(x)=x1/n, where n is a positive integer greater than one. For example, f(x)=x1/2=x is the square-root function and g(x)=x1/3=x3 is the cube-root function. By allowing for compositions of root functions and rational functions, we can create other algebraic functions. For example, f(x)=4−x2 is an algebraic function.
+
+Finding Domain and Range for Algebraic Functions
+
+For each of the following functions, find the domain and range.
+f(x)=3x−15x+2
+f(x)=4-x2
+
+It is not possible to divide by zero, so the domain is the set of real numbers x such that x≠−2/5. To find the range, we need to find the values y for which there exists a real number x such that
+y=3x−15x+2.
+When we multiply both sides of this equation by 5x+2, we see that x must satisfy the equation
+5xy+2y=3x−1.
+From this equation, we can see that x must satisfy
+2y+1=x(3−5y).
+If y=3/5, this equation has no solution. On the other hand, as long as y≠3/5,
+x=2y+13−5y
+satisfies this equation. We can conclude that the range of f is {y|y≠3/5}.
+
+From this equation, we can see that x must satisfy
+
+To find the domain of f, we need 4−x2≥0. When we factor, we write 4−x2=(2−x)(2+x)≥0. This inequality holds if and only if both terms are positive or both terms are negative. For both terms to be positive, we need to find x such that
+2−x≥0and2+x≥0.
+These two inequalities reduce to 2≥x and x≥−2. Therefore, the set {x|−2≤x≤2} must be part of the domain. For both terms to be negative, we need
+2−x≤0and2+x≤0.
+These two inequalities also reduce to 2≤x and x≤−2. There are no values of x that satisfy both of these inequalities. Thus, we can conclude the domain of this function is {x|−2≤x≤2}.
+If −2≤x≤2, then 0≤4−x2≤4. Therefore, 0≤4−x2≤2, and the range of f is {y|0≤y≤2}.
+
+Find the domain and range for the function f(x)=(5x+2)/(2x−1).
+
+The domain is the set of real numbers x such that x≠1/2. The range is the set {y|y≠5/2}.
+
+Hint
+
+The denominator cannot be zero. Solve the equation y=(5x+2)/(2x−1) for x to find the range.
+
+The root functions f(x)=x1/n have defining characteristics depending on whether n is odd or even. For all even integers n≥2, the domain of f(x)=x1/n is the interval [0,∞). For all odd integers n≥1, the domain of f(x)=x1/n is the set of all real numbers. Since x1/n=-(−x)1/n for odd integers n,f(x)=x1/n is an odd function if n is odd. See the graphs of root functions for different values of n in .
+
+Finding Domains for Algebraic Functions
+
+For each of the following functions, determine the domain of the function.
+f(x)=3x2−1
+f(x)=2x+53x2+4
+f(x)=4−3x
+f(x)=2x−13
+
+You cannot divide by zero, so the domain is the set of values x such that x2−1≠0. Therefore, the domain is {x|x≠±1}.
+
+You need to determine the values of x for which the denominator is zero. Since 3x2+4≥4 for all real numbers x, the denominator is never zero. Therefore, the domain is (−∞,∞).
+
+Since the square root of a negative number is not a real number, the domain is the set of values x for which 4−3x≥0. Therefore, the domain is {x|x≤4/3}.
+
+The cube root is defined for all real numbers, so the domain is the interval (−∞, ∞).
+
+Find the domain for each of the following functions: f(x)=(5−2x)/(x2+2) and g(x)=5x−1.
+
+The domain of f is (−∞, ∞). The domain of g is {x|x≥1/5}.
+
+Hint
+
+Determine the values of x when the expression in the denominator of f is nonzero, and find the values of x when the expression inside the radical of g is nonnegative.
+
+Transcendental Functions
+
+Thus far, we have discussed algebraic functions. Some functions, however, cannot be described by basic algebraic operations. These functions are known as transcendental functions because they are said to “transcend,” or go beyond, algebra. The most common transcendental functions are trigonometric, exponential, and logarithmic functions. A trigonometric function relates the ratios of two sides of a right triangle. They are sinx,cosx,tanx,cotx,secx,andcscx. (We discuss trigonometric functions later in the chapter.) An exponential function is a function of the form f(x)=bx, where the base b>0,b≠1. A logarithmic function is a function of the form f(x)=logb(x) for some constant b>0,b≠1, where logb(x)=y if and only if by=x. (We also discuss exponential and logarithmic functions later in the chapter.)
+
+Classifying Algebraic and Transcendental Functions
+
+Classify each of the following functions, a. through c., as algebraic or transcendental.
+f(x)=x3+14x+2
+f(x)=2x2
+f(x)=sin(2x)
+
+Since this function involves basic algebraic operations only, it is an algebraic function.
+
+This function cannot be written as a formula that involves only basic algebraic operations, so it is transcendental. (Note that algebraic functions can only have powers that are rational numbers.)
+
+As in part b., this function cannot be written using a formula involving basic algebraic operations only; therefore, this function is transcendental.
+
+Is f(x)=x/2 an algebraic or a transcendental function?
+
+Algebraic
+
+Piecewise-Defined Functions
+
+Sometimes a function is defined by different formulas on different parts of its domain. A function with this property is known as a piecewise-defined function. The absolute value function is an example of a piecewise-defined function because the formula changes with the sign of x:
+
+Other piecewise-defined functions may be represented by completely different formulas, depending on the part of the domain in which a point falls. To graph a piecewise-defined function, we graph each part of the function in its respective domain, on the same coordinate system. If the formula for a function is different for x<a and x>a, we need to pay special attention to what happens at x=a when we graph the function. Sometimes the graph needs to include an open or closed circle to indicate the value of the function at x=a. We examine this in the next example.
+
+Graphing a Piecewise-Defined Function
+
+Sketch a graph of the following piecewise-defined function:
+
+Graph the linear function y=x+3 on the interval (−∞,1) and graph the quadratic function y=(x−2)2 on the interval [1,∞). Since the value of the function at x=1 is given by the formula f(x)=(x−2)2, we see that f(1)=1. To indicate this on the graph, we draw a closed circle at the point (1,1). The value of the function is given by f(x)=x+3 for all x<1, but not at x=1. To indicate this on the graph, we draw an open circle at (1,4).
+
+Sketch a graph of the function
+
+Hint
+
+Graph one linear function for x≤2 and then graph a different linear function for x>2.
+
+Parking Fees Described by a Piecewise-Defined Function
+
+In a big city, drivers are charged variable rates for parking in a parking garage. They are charged $10 for the first hour or any part of the first hour and an additional $2 for each hour or part thereof up to a maximum of $30 for the day. The parking garage is open from 6 a.m. to 12 midnight.
+
+Write a piecewise-defined function that describes the cost C to park in the parking garage as a function of hours parked x.
+
+Sketch a graph of this function C(x).
+
+Since the parking garage is open 18 hours each day, the domain for this function is {x|0<x≤18}. The cost to park a car at this parking garage can be described piecewise by the function
+C(x)={10,0<x≤112,1<x≤214,2<x≤316,3<x≤4⋮30,10<x≤18.
+
+The graph of the function consists of several horizontal line segments.
+
+The cost of mailing a letter is a function of the weight of the letter. Suppose the cost of mailing a letter is 49¢ for the first ounce and 21¢ for each additional ounce. Write a piecewise-defined function describing the cost C as a function of the weight x for 0<x≤3, where C is measured in cents and x is measured in ounces.
+C(x)={49,0<x≤170,1<x≤291,2<x≤3
+
+Hint
+
+The piecewise-defined function is constant on the intervals (0,1],(1,2],….
+
+Transformations of Functions
+
+We have seen several cases in which we have added, subtracted, or multiplied constants to form variations of simple functions. In the previous example, for instance, we subtracted 2 from the argument of the function y=x2 to get the function f(x)=(x−2)2. This subtraction represents a shift of the function y=x2 two units to the right. A shift, horizontally or vertically, is a type of transformation of a function. Other transformations include horizontal and vertical scalings, and reflections about the axes.
+
+A vertical shift of a function occurs if we add or subtract the same constant to each output y. For c>0, the graph of f(x)+c is a shift of the graph of f(x) up c units, whereas the graph of f(x)−c is a shift of the graph of f(x) down c units. For example, the graph of the function f(x)=x2+4 is the graph of y=x2 shifted up 4 units; the graph of the function f(x)=x2−4 is the graph of y=x2 shifted down 4 units ().
+
+A horizontal shift of a function occurs if we add or subtract the same constant to each input x. For c>0, the graph of f(x+c) is a shift of the graph of f(x) to the left c units; the graph of f(x−c) is a shift of the graph of f(x) to the right c units. Why does the graph shift left when adding a constant and shift right when subtracting a constant? To answer this question, let’s look at an example.
+
+Consider the function f(x)=|x+3| and evaluate this function at x−3. Since f(x−3)=|x| and x−3<x, the graph of f(x)=|x+3| is the graph of y=|x| shifted left 3 units. Similarly, the graph of f(x)=|x−3| is the graph of y=|x| shifted right 3 units ().
+
+A vertical scaling of a graph occurs if we multiply all outputs y of a function by the same positive constant. For c>0, the graph of the function cf(x) is the graph of f(x) scaled vertically by a factor of c. If c>1, the values of the outputs for the function cf(x) are larger than the values of the outputs for the function f(x); therefore, the graph has been stretched vertically. If 0<c<1, then the outputs of the function cf(x) are smaller, so the graph has been compressed. For example, the graph of the function f(x)=3x2 is the graph of y=x2 stretched vertically by a factor of 3, whereas the graph of f(x)=x2/3 is the graph of y=x2 compressed vertically by a factor of 3 ().
+
+The horizontal scaling of a function occurs if we multiply the inputs x by the same positive constant. For c>0, the graph of the function f(cx) is the graph of f(x) scaled horizontally by a factor of c. If c>1, the graph of f(cx) is the graph of f(x) compressed horizontally. If 0<c<1, the graph of f(cx) is the graph of f(x) stretched horizontally. For example, consider the function f(x)=2x and evaluate f at x/2. Since f(x/2)=x, the graph of f(x)=2x is the graph of y=x compressed horizontally. The graph of y=x/2 is a horizontal stretch of the graph of y=x ().
+
+We have explored what happens to the graph of a function f when we multiply f by a constant c>0 to get a new function cf(x). We have also discussed what happens to the graph of a function f when we multiply the independent variable x by c>0 to get a new function f(cx). However, we have not addressed what happens to the graph of the function if the constant c is negative. If we have a constant c<0, we can write c as a positive number multiplied by −1; but, what kind of transformation do we get when we multiply the function or its argument by −1? When we multiply all the outputs by −1, we get a reflection about the x-axis. When we multiply all inputs by −1, we get a reflection about the y-axis. For example, the graph of f(x)=−(x3+1) is the graph of y=(x3+1) reflected about the x-axis. The graph of f(x)=(−x)3+1 is the graph of y=x3+1 reflected about the y-axis ().
+
+If the graph of a function consists of more than one transformation of another graph, it is important to transform the graph in the correct order. Given a function f(x), the graph of the related function y=cf(a(x+b))+d can be obtained from the graph of y=f(x) by performing the transformations in the following order.
+
+Horizontal scaling of the graph of y=f(x+
+[truncated]

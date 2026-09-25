@@ -1,0 +1,196 @@
+# m58331
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Torque
+
+Torque
+
+By the end of this section, you will be able to:
+
+Describe how the magnitude of a torque depends on the magnitude of the lever arm and the angle the force vector makes with the lever arm
+
+Determine the sign (positive or negative) of a torque using the right-hand rule
+
+Calculate individual torques about a common axis and sum them to find the net torque
+
+An important quantity for describing the dynamics of a rotating rigid body is torque. We see the application of torque in many ways in our world. We all have an intuition about torque, as when we use a large wrench to unscrew a stubborn bolt. Torque is at work in unseen ways, as when we press on the accelerator in a car, causing the engine to put additional torque on the drive train. Or every time we move our bodies from a standing position, we apply a torque to our limbs. In this section, we define torque and make an argument for the equation for calculating torque for a rigid body with fixed-axis rotation.
+
+Defining Torque
+
+So far we have defined many variables that are rotational equivalents to their translational counterparts. Let’s consider what the counterpart to force must be. Since forces change the translational motion of objects, the rotational counterpart must be related to changing the rotational motion of an object about an axis. We call this rotational counterpart torque.
+
+In everyday life, we rotate objects about an axis all the time, so intuitively we already know much about torque. Consider, for example, how we rotate a door to open it. First, we know that a door opens slowly if we push too close to its hinges; it is more efficient to rotate a door open if we push far from the hinges. Second, we know that we should push perpendicular to the plane of the door; if we push parallel to the plane of the door, we are not able to rotate it. Third, the larger the force, the more effective it is in opening the door; the harder you push, the more rapidly the door opens. The first point implies that the farther the force is applied from the axis of rotation, the greater the angular acceleration; the second implies that the effectiveness depends on the angle at which the force is applied; the third implies that the magnitude of the force must also be part of the equation. Note that for rotation in a plane, torque has two possible directions. Torque is either clockwise or counterclockwise relative to the chosen pivot point. shows counterclockwise rotations.
+
+Now let’s consider how to define torques in the general three-dimensional case.
+
+Torque
+
+When a force F→ is applied to a point P whose position is r→ relative to O (), the torque τ→ around O is
+
+From the definition of the cross product, the torque τ→ is perpendicular to the plane containing r→andF→ and has magnitude
+
+where θ is the angle between the vectors r→ and F→. The SI unit of torque is newtons times meters, usually written as N·m. The quantity r⊥=rsinθ is the perpendicular distance from O to the line determined by the vector F→ and is called the lever arm. Note that the greater the lever arm, the greater the magnitude of the torque. In terms of the lever arm, the magnitude of the torque is
+
+The cross product r→×F→ also tells us the sign of the torque. In , the cross product r→×F→ is along the positive z-axis, which by convention is a positive torque. If r→×F→ is along the negative z-axis, this produces a negative torque.
+
+If we consider a disk that is free to rotate about an axis through the center, as shown in , we can see how the angle between the radius r→ and the force F→ affects the magnitude of the torque. If the angle is zero, the torque is zero; if the angle is 90°, the torque is maximum. The torque in is positive because the direction of the torque by the right-hand rule is out of the page along the positive z-axis. The disk rotates counterclockwise due to the torque, in the same direction as a positive angular acceleration.
+
+Any number of torques can be calculated about a given axis. The individual torques add to produce a net torque about the axis. When the appropriate sign (positive or negative) is assigned to the magnitudes of individual torques about a specified axis, the net torque about the axis is the sum of the individual torques:
+
+Calculating Net Torque for Rigid Bodies on a Fixed Axis
+
+In the following examples, we calculate the torque both abstractly and as applied to a rigid body.
+
+We first introduce a problem-solving strategy.
+
+Finding Net Torque
+
+Choose a coordinate system with the pivot point or axis of rotation as the origin of the selected coordinate system.
+
+Determine the angle between the lever arm r→ and the force vector.
+
+Take the cross product of r→andF→ to determine if the torque is positive or negative about the pivot point or axis.
+
+Evaluate the magnitude of the torque using r⊥F.
+
+Assign the appropriate sign, positive or negative, to the magnitude.
+
+Sum the torques to find the net torque.
+Calculating Torque
+Four forces are shown in at particular locations and orientations with respect to a given xy-coordinate system. Find the torque due to each force about the origin, then use your results to find the net torque about the origin.
+
+Calculating Torque
+Strategy
+This problem requires calculating torque. All known quantities––forces with directions and lever arms––are given in the figure. The goal is to find each individual torque and the net torque by summing the individual torques. Be careful to assign the correct sign to each torque by using the cross product of r→ and the force vector F→.
+
+Strategy
+Solution
+Use |τ→|=r⊥F=rFsinθ to find the magnitude and τ→=r→×F→ to determine the sign of the torque.
+
+Solution
+
+The torque from force 40 N in the first quadrant is given by (4)(40)sin90°=160N·m.
+
+The cross product of r→ and F→ is out of the page, positive.
+
+The torque from force 20 N in the third quadrant is given by−(3)(20)sin90°=−60N·m.
+
+The cross product of r→ and F→ is into the page, so it is negative.
+
+The torque from force 30 N in the third quadrant is given by (5)(30)sin53°=120N·m.
+
+The cross product of r→ and F→ is out of the page, positive.
+
+The torque from force 20 N in the second quadrant is given by (1)(20)sin30°=10N·m.
+
+The cross product of r→ and F→ is out of the page.
+
+The net torque is therefore τnet=∑i|τi|=160−60+120+10=230N·m.
+Significance
+Note that each force that acts in the counterclockwise direction has a positive torque, whereas each force that acts in the clockwise direction has a negative torque. The torque is greater when the distance, force, or perpendicular components are greater.
+
+Significance
+Calculating Torque on a rigid body
+ shows several forces acting at different locations and angles on a flywheel. We have |F→1|=20N, |F→2|=30N, |F→3|=30N, and r=0.5m. Find the net torque on the flywheel about an axis through the center.
+
+Calculating Torque on a rigid body
+Strategy
+We calculate each torque individually, using the cross product, and determine the sign of the torque. Then we sum the torques to find the net torque.
+
+Strategy
+Solution
+We start with F→1. If we look at , we see that F→1 makes an angle of 90°+60° with the radius vector r→. Taking the cross product, we see that it is out of the page and so is positive. We also see this from calculating its magnitude:
+
+Solution
+
+Next we look at F→2. The angle between F→2 and r→ is 90° and the cross product is into the page so the torque is negative. Its value is
+
+When we evaluate the torque due to F→3, we see that the angle it makes with r→ is zero so r→×F→3=0. Therefore, F→3 does not produce any torque on the flywheel.
+
+We evaluate the sum of the torques:
+Significance
+The axis of rotation is at the center of mass of the flywheel. Since the flywheel is on a fixed axis, it is not free to translate. If it were on a frictionless surface and not fixed in place, F→3 would cause the flywheel to translate, as well as F→1. Its motion would be a combination of translation and rotation.
+
+Significance
+
+A large ocean-going ship runs aground near the coastline, similar to the fate of the Costa Concordia, and lies at an angle as shown below. Salvage crews must apply a torque to right the ship in order to float the vessel for transport. A force of 5.0×105N acting at point A must be applied to right the ship. What is the torque about the point of contact of the ship with the ground ()?
+
+The angle between the lever arm and the force vector is 80°; therefore, r⊥=100m(sin80°)=98.5m.
+
+The cross product τ→=r→×F→ gives a negative or clockwise torque.
+
+The torque is then τ=−r⊥F=−98.5m(5.0×105N)=−4.9×107N·m.
+
+Summary
+
+The magnitude of a torque about a fixed axis is calculated by finding the lever arm to the point where the force is applied and using the relation |τ→|=r⊥F, where r⊥ is the perpendicular distance from the axis to the line upon which the force vector lies.
+
+The sign of the torque is found using the right hand rule. If the page is the plane containing r→ and F→, then r→×F→ is out of the page for positive torques and into the page for negative torques.
+
+The net torque can be found from summing the individual torques about a given axis.
+
+Conceptual Questions
+
+What three factors affect the torque created by a force relative to a specific pivot point?
+
+magnitude of the force, length of the lever arm, and angle of the lever arm and force vector
+
+Give an example in which a small force exerts a large torque. Give another example in which a large force exerts a small torque.
+
+When reducing the mass of a racing bike, the greatest benefit is realized from reducing the mass of the tires and wheel rims. Why does this allow a racer to achieve greater accelerations than would an identical reduction in the mass of the bicycle’s frame?
+
+The moment of inertia of the wheels is reduced, so a smaller torque is needed to accelerate them.
+
+Can a single force produce a zero torque?
+
+Can a set of forces have a net torque that is zero and a net force that is not zero?
+
+yes
+
+Can a set of forces have a net force that is zero and a net torque that is not zero?
+
+In the expression r→×F→ can |r→| ever be less than the lever arm? Can it be equal to the lever arm?
+|r→| can be equal to the lever arm but never less than the lever arm
+
+Problems
+
+Two flywheels of negligible mass and different radii are bonded together and rotate about a common axis (see below). The smaller flywheel of radius 30 cm has a cord that has a pulling force of 50 N on it. What pulling force needs to be applied to the cord connecting the larger flywheel of radius 50 cm such that the combination does not rotate?
+F=30N
+
+The cylinder head bolts on a car are to be tightened with a torque of 62.0 N·m. If a mechanic uses a wrench of length 20 cm, what perpendicular force must he exert on the end of the wrench to tighten a bolt correctly?
+
+(a) When opening a door, you push on it perpendicularly with a force of 55.0 N at a distance of 0.850 m from the hinges. What torque are you exerting relative to the hinges? (b) Does it matter if you push at the same height as the hinges? There is only one pair of hinges.
+
+a. 0.85m(55.0N)=46.75N·m; b. It does not matter at what height you push.
+
+When tightening a bolt, you push perpendicularly on a wrench with a force of 165 N at a distance of 0.140 m from the center of the bolt. How much torque are you exerting in newton-meters (relative to the center of the bolt)?
+
+What hanging mass must be placed on the cord to keep the pulley from rotating (see the following figure)? The mass on the frictionless plane is 5.0 kg. The mass on the plane is connected to a cord that wraps around the pulley’s inner radius of 20 cm. The hanging mass is connected to a cord that wraps around the pulley’s outer radius of 30 cm.
+m2=4.9N·m9.8(0.3m)=1.67kg
+
+A simple pendulum consists of a massless tether 50 cm in length connected to a pivot and a small mass of 1.0 kg attached at the other end. What is the torque about the pivot when the pendulum makes an angle of 40° with respect to the vertical?
+
+Calculate the torque about the z-axis that is out of the page at the origin in the following figure, given that F1=3N,F2=2N,F3=3N,F4=1.8N.
+τnet=−9.0N·m+3.46N·m+0−3.38N·m=−8.92N·m
+
+A seesaw has length 10.0 m and uniform mass 10.0 kg and is resting at an angle of 30° with respect to the ground (see the following figure). The pivot is located at 6.0 m. What magnitude of force needs to be applied perpendicular to the seesaw at the raised end so as to allow the seesaw to barely start to rotate?
+
+A pendulum consists of a rod of mass 1 kg and length 1 m connected to a pivot with a solid sphere attached at the other end with mass 0.5 kg and radius 30 cm. What is the torque about the pivot when the pendulum makes an angle of 30° with respect to the vertical?
+τ=5.66N·m
+
+A torque of 5.00×103N·m is required to raise a drawbridge (see the following figure). What is the tension necessary to produce this torque? Would it be easier to raise the drawbridge if the angle θ were larger or smaller?
+
+A horizontal beam of length 3 m and mass 2.0 kg has a mass of 1.0 kg and width 0.2 m sitting at the end of the beam (see the following figure). What is the torque of the system about the support at the wall?
+∑τ=57.82N·m
+
+What force must be applied to end of a rod along the x-axis of length 2.0 m in order to produce a torque on the rod about the origin of 8.0k^N·m
+?
+
+What is the torque about the origin of the force (5.0i^−2.0j^+1.0k^)N if it is applied at the point whose position is: r→=(−2.0i^+4.0j^)m?
+r→×F→=4.0i^+2.0j^−16.0k^N·m
+
+perpendicular distance from the line that the force vector lies on to a given axis
+cross product of a force and a lever arm to a given axis

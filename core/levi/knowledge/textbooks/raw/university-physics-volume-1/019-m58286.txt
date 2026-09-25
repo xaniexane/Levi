@@ -1,0 +1,207 @@
+# m58286
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Free Fall
+
+Free Fall
+
+By the end of this section, you will be able to:
+
+Use the kinematic equations with the variables y and g to analyze free-fall motion.
+
+Describe how the values of the position, velocity, and acceleration change during a free fall.
+
+Solve for the position, velocity, and acceleration as functions of time when an object is in a free fall.
+
+An interesting application of through is called free fall, which describes the motion of an object falling in a gravitational field, such as near the surface of Earth or other celestial objects of planetary size. Let’s assume the body is falling in a straight line perpendicular to the surface, so its motion is one-dimensional. For example, we can estimate the depth of a vertical mine shaft by dropping a rock into it and listening for the rock to hit the bottom. But “falling,” in the context of free fall, does not necessarily imply the body is moving from a greater height to a lesser height. If a ball is thrown upward, the equations of free fall apply equally to its ascent as well as its descent.
+
+Gravity
+
+The most remarkable and unexpected fact about falling objects is that if air resistance and friction are negligible, then in a given location all objects fall toward the center of Earth with the same constant acceleration, independent of their mass. This experimentally determined fact is unexpected because we are so accustomed to the effects of air resistance and friction that we expect light objects to fall slower than heavy ones. Until Galileo Galilei (1564–1642) proved otherwise, people believed that a heavier object has a greater acceleration in a free fall. We now know this is not the case. In the absence of air resistance, heavy objects arrive at the ground at the same time as lighter objects when dropped from the same height .
+
+In the real world, air resistance can cause a lighter object to fall slower than a heavier object of the same size. A tennis ball reaches the ground after a baseball dropped at the same time. (It might be difficult to observe the difference if the height is not large.) Air resistance opposes the motion of an object through the air, and friction between objects—such as between clothes and a laundry chute or between a stone and a pool into which it is dropped—also opposes motion between them.
+
+For the ideal situations of these first few chapters, an object falling without air resistance or friction is defined to be in free fall. The force of gravity causes objects to fall toward the center of Earth. The acceleration of free-falling objects is therefore called acceleration due to gravity. Acceleration due to gravity is constant, which means we can apply the kinematic equations to any falling object where air resistance and friction are negligible. This opens to us a broad class of interesting situations.
+
+Acceleration due to gravity is so important that its magnitude is given its own symbol, g. It is constant at any given location on Earth and has the average value
+
+Although g varies from 9.78 m/s2 to 9.83 m/s2, depending on latitude, altitude, underlying geological formations, and local topography, let’s use an average value of 9.8 m/s2 rounded to two significant figures in this text unless specified otherwise. Neglecting these effects on the value of g as a result of position on Earth’s surface, as well as effects resulting from Earth’s rotation, we take the direction of acceleration due to gravity to be downward (toward the center of Earth). In fact, its direction defines what we call vertical. Note that whether acceleration a in the kinematic equations has the value +g or −g depends on how we define our coordinate system. If we define the upward direction as positive, then a=−g=−9.8m/s2, and if we define the downward direction as positive, then a=g=9.8m/s2.
+
+One-Dimensional Motion Involving Gravity
+
+The best way to see the basic features of motion involving gravity is to start with the simplest situations and then progress toward more complex ones. So, we start by considering straight up-and-down motion with no air resistance or friction. These assumptions mean the velocity (if there is any) is vertical. If an object is dropped, we know the initial velocity is zero when in free fall. When the object has left contact with whatever held or threw it, the object is in free fall. When the object is thrown, it has the same initial speed in free fall as it did before it was released. When the object comes in contact with the ground or any other object, it is no longer in free fall and its acceleration of g is no longer valid. Under these circumstances, the motion is one-dimensional and has constant acceleration of magnitude g. We represent vertical displacement with the symbol y.
+
+Kinematic Equations for Objects in Free Fall
+
+We assume here that acceleration equals −g (with the positive direction upward).
+
+Free Fall
+
+Decide on the sign of the acceleration of gravity. In through , acceleration g is negative, which says the positive direction is upward and the negative direction is downward. In some problems, it may be useful to have acceleration g as positive, indicating the positive direction is downward.
+
+Draw a sketch of the problem. This helps visualize the physics involved.
+
+Record the knowns and unknowns from the problem description. This helps devise a strategy for selecting the appropriate equations to solve the problem.
+
+Decide which of through are to be used to solve for the unknowns.
+Free Fall of a Ball
+ shows the positions of a ball, at 1-s intervals, with an initial velocity of 4.9 m/s downward, that is thrown from the top of a 98-m-high building. (a) How much time elapses before the ball reaches the ground? (b) What is the velocity when it arrives at the ground?
+
+Free Fall of a Ball
+Strategy
+Choose the origin at the top of the building with the positive direction upward and the negative direction downward. To find the time when the position is −98 m, we use , with y0=0,v0=−4.9m/s,andg=9.8m/s2.
+
+Strategy
+Solution
+
+Solution
+
+Substitute the given values into the equation:
+y=y0+v0t−12gt2−98.0m=0−(4.9m/s)t−12(9.8m/s2)t2.
+This simplifies to
+t2+t−20=0.
+This is a quadratic equation with roots t=−5.0sandt=4.0s. The positive root is the one we are interested in, since time t=0 is the time when the ball is released at the top of the building. (The time t=−5.0s represents the fact that a ball thrown upward from the ground would have been in the air for 5.0 s when it passed by the top of the building moving downward at 4.9 m/s.)
+
+Using , we have
+v=v0−gt=−4.9m/s−(9.8m/s2)(4.0s)=−44.1m/s.
+Significance
+For situations when two roots are obtained from a quadratic equation in the time variable, we must look at the physical significance of both roots to determine which is correct. Since t=0 corresponds to the time when the ball was released, the negative root would correspond to a time before the ball was released, which is not physically meaningful. When the ball hits the ground, its velocity is not immediately zero, but as soon as the ball interacts with the ground, its acceleration is not g and it accelerates with a different value over a short time to zero velocity. This problem shows how important it is to establish the correct coordinate system and to keep the signs of g in the kinematic equations consistent.
+
+Significance
+Vertical Motion of a Baseball
+A batter hits a baseball straight upward at home plate and the ball is caught 5.0 s after it is struck . (a) What is the initial velocity of the ball? (b) What is the maximum height the ball reaches? (c) How long does it take to reach the maximum height? (d) What is the acceleration at the top of its path? (e) What is the velocity of the ball when it is caught? Assume the ball is hit and caught at the same location.
+
+Vertical Motion of a Baseball
+Strategy
+Choose a coordinate system with a positive y-axis that is straight up and with an origin that is at the spot where the ball is hit and caught.
+
+Strategy
+Solution
+
+Solution
+gives
+y=y0+v0t−12gt2
+0=0+v0(5.0s)−12(9.8m/s2)(5.0s)2,
+which gives v0=24.5m/s.
+
+At the maximum height, v=0. With v0=24.5m/s, gives
+v2=v02−2g(y−y0)
+0=(24.5m/s)2−2(9.8m/s2)(y−0)
+or
+y=30.6m.
+
+To find the time when v=0, we use :
+v=v0−gt
+0=24.5m/s−(9.8m/s2)t.
+This gives t=2.5s. Since the ball rises for 2.5 s, the time to fall is 2.5 s.
+
+The acceleration is 9.8 m/s2 everywhere, even when the velocity is zero at the top of the path. Although the velocity is zero at the top, it is changing at the rate of 9.8 m/s2 downward.
+
+The velocity at t=5.0s can be determined with :
+v=v0−gt=24.5m/s−9.8m/s2(5.0s)=−24.5m/s.
+SignificanceThe ball returns with the speed it had when it left. This is a general property of free fall for any initial velocity. We used a single equation to go from throw to catch, and did not have to break the motion into two segments, upward and downward. We are used to thinking that the effect of gravity is to create free fall downward toward Earth. It is important to understand, as illustrated in this example, that objects moving upward away from Earth are also in a state of free fall.
+
+Significance
+
+A chunk of ice breaks off a glacier and falls 30.0 m before it hits the water. Assuming it falls freely (there is no air resistance), how long does it take to hit the water? Which quantity increases faster, the speed of the ice chunk or its distance traveled?
+
+It takes 2.47 s to hit the water. The quantity distance traveled increases faster.
+Rocket Booster
+A small rocket with a booster blasts off and heads straight upward. When at a height of 5.0km and velocity of 200.0 m/s, it releases its booster. (a) What is the maximum height the booster attains? (b) What is the velocity of the booster at a height of 6.0 km? Neglect air resistance.
+
+Rocket Booster
+Strategy
+We need to select the coordinate system for the acceleration of gravity, which we take as negative downward. We are given the initial velocity of the booster and its height. We consider the point of release as the origin. We know the velocity is zero at the maximum position within the acceleration interval; thus, the velocity of the booster is zero at its maximum height, so we can use this information as well. From these observations, we use , which gives us the maximum height of the booster. We also use to give the velocity at 6.0 km. The initial velocity of the booster is 200.0 m/s.
+
+Strategy
+Solution
+
+Solution
+
+From , v2=v02−2g(y−y0). With v=0andy0=0, we can solve for y:
+y=v022g=(2.0×102m/s)22(9.8m/s2)=2040.8m.
+This solution gives the maximum height of the booster in our coordinate system, which has its origin at the point of release, so the maximum height of the booster is roughly 7.0 km.
+
+An altitude of 6.0 km corresponds toy=1.0×103m in the coordinate system we are using. The other initial conditions arey0=0,andv0=200.0m/s.
+We have, from , 
+v2=(200.0m/s)2−2(9.8m/s2)(1.0×103m)⇒v=±142.8m/s.
+Significance
+We have both a positive and negative solution in (b). Since our coordinate system has the positive direction upward, the +142.8 m/s corresponds to a positive upward velocity at 6000 m during the upward leg of the trajectory of the booster. The value v = −142.8 m/s corresponds to the velocity at 6000 m on the downward leg. This example is also important in that an object is given an initial velocity at the origin of our coordinate system, but the origin is at an altitude above the surface of Earth, which must be taken into account when forming the solution.
+
+Significance
+
+Engage the Phet simulation below to learn about graphing polynomials. The shape of the curve changes as the constants are adjusted. View the curves for the individual terms (for example, y = bx) to see how they add to generate the polynomial curve.
+
+Summary
+
+An object in free fall experiences constant acceleration if air resistance is negligible.
+
+On Earth, all free-falling objects have an acceleration g due to gravity, which averages g=9.81m/s2.
+
+For objects in free fall, the upward direction is normally taken as positive for displacement, velocity, and acceleration.
+
+Conceptual Questions
+
+What is the acceleration of a rock thrown straight upward on the way up? At the top of its flight? On the way down? Assume there is no air resistance.
+
+An object that is thrown straight up falls back to Earth. This is one-dimensional motion. (a) When is its velocity zero? (b) Does its velocity change direction? (c) Does the acceleration have the same sign on the way up as on the way down?
+
+a. at the top of its trajectory; b. yes, at the top of its trajectory; c. yes
+
+Suppose you throw a rock nearly straight up at a coconut in a palm tree and the rock just misses the coconut on the way up but hits the coconut on the way down. Neglecting air resistance and the slight horizontal variation in motion to account for the hit and miss of the coconut, how does the speed of the rock when it hits the coconut on the way down compare with what it would have been if it had hit the coconut on the way up? Is it more likely to dislodge the coconut on the way up or down? Explain.
+
+The severity of a fall depends on your speed when you strike the ground. All factors but the acceleration from gravity being the same, how many times higher could a safe fall occur on the Moon than on Earth (gravitational acceleration on the Moon is about one-sixth that of the Earth)?
+
+Earth v=v0−gt=−gt; Moon v′=–g6t′v=v′−gt=−g6t′t′=6t; Earth y=−12gt2 Moon y′=−12g6(6t)2=−12g6t2=−6(12gt2)=−6y
+
+How many times higher could an astronaut jump on the Moon than on Earth if her takeoff speed is the same in both locations (gravitational acceleration on the Moon is about on-sixth of that on Earth)?
+
+Problems
+
+Calculate the displacement and velocity at times of (a) 0.500 s, (b) 1.00 s, (c) 1.50 s, and (d) 2.00 s for a ball thrown straight up with an initial velocity of 15.0 m/s. Take the point of release to be y0=0.
+
+Calculate the displacement and velocity at times of (a) 0.500 s, (b) 1.00 s, (c) 1.50 s, (d) 2.00 s, and (e) 2.50 s for a rock thrown straight down with an initial velocity of 14.0 m/s from the Verrazano Narrows Bridge in New York City. The roadway of this bridge is 70.0 m above the water.
+
+a. y=−8.23mv1=−18.9m/s;
+b. y=−18.9mv2=−23.8m/s;
+c. y=−32.0mv3=−28.7m/s;
+d. y=−47.6mv4=−33.6m/s;
+e. y=−65.6mv5=−38.5m/s
+
+A basketball referee tosses the ball straight up for the starting tip-off. At what velocity must a basketball player leave the ground to rise 1.25 m above the floor in an attempt to get the ball?
+
+A rescue helicopter is hovering over a person whose boat has sunk. One of the rescuers throws a life preserver straight down to the victim with an initial velocity of 1.40 m/s and observes that it takes 1.8 s to reach the water. (a) List the knowns in this problem. (b) How high above the water was the preserver released? Note that the downdraft of the helicopter reduces the effects of air resistance on the falling life preserver, so that an acceleration equal to that of gravity is reasonable.
+
+a. Knowns: a=−9.8m/s2v0=−1.4m/st=1.8sy0=0m;
+b.
+y=y0+v0t−12gt2y=v0t−12gt=−1.4m/s(1.8sec)−12(9.8)(1.8s)2=−18.4m and the origin is at the rescuers, who are 18.4 m above the water.
+Unreasonable results A dolphin in an aquatic show jumps straight up out of the water at a velocity of 15.0 m/s. (a) List the knowns in this problem. (b) How high does his body rise above the water? To solve this part, first note that the final velocity is now a known, and identify its value. Then, identify the unknown and discuss how you chose the appropriate equation to solve for it. After choosing the equation, show your steps in solving for the unknown, checking units, and discuss whether the answer is reasonable. (c) How long a time is the dolphin in the air? Neglect any effects resulting from his size or orientation.
+
+A diver bounces straight up from a diving board, avoiding the diving board on the way down, and falls feet first into a pool. She starts with a velocity of 4.00 m/s and her takeoff point is 1.80 m above the pool. (a) What is her highest point above the board? (b) How long a time are her feet in the air? (c) What is her velocity when her feet hit the water?
+
+a. v2=v02−2g(y−y0)y0=0v=0y=v022g=(4.0m/s)22(9.80)=0.82m; b. to the apex v=0.41s times 2 to the board = 0.82 s from the board to the water y=y0+v0t−12gt2y=−1.80my0=0v0=4.0m/s−1.8=4.0t−4.9t24.9t2−4.0t−1.80=0, solution to quadratic equation gives 1.13 s; c. v2=v02−2g(y−y0)y0=0v0=4.0m/sy=−1.80mv=7.16m/s
+
+(a) Calculate the height of a cliff if it takes 2.35 s for a rock to hit the ground when it is thrown straight up from the cliff with an initial velocity of 8.00 m/s. (b) How long a time would it take to reach the ground if it is thrown straight down with the same speed?
+
+A very strong, but inept, shot putter puts the shot straight up vertically with an initial velocity of 11.0 m/s. How long a time does he have to get out of the way if the shot was released at a height of 2.20 m and he is 1.80 m tall?
+
+Time to the apex: t=1.12s times 2 equals 2.24 s to a height of 2.20 m. To 1.80 m in height is an additional 0.40 m. y=y0+v0t−12gt2y=−0.40my0=0v0=−11.0m/sy=y0+v0t−12gt2y=−0.40my0=0v0=−11.0m/s−0.40=−11.0t−4.9t2or4.9t2+11.0t−0.40=0.
+Take the positive root, so the time to go the additional 0.4 m is 0.04 s. Total time is 2.24s+0.04s=2.28s.
+
+You throw a ball straight up with an initial velocity of 15.0 m/s. It passes a tree branch on the way up at a height of 7.0 m. How much additional time elapses before the ball passes the tree branch on the way back down?
+
+A kangaroo can jump over an object 2.50 m high. (a) Considering just its vertical motion, calculate its vertical speed when it leaves the ground. (b) How long a time is it in the air?
+
+a. v2=v02−2g(y−y0)y0=0v=0y=2.50mv02=2gy⇒v0=2(9.80)(2.50)=7.0m/s; b. t=0.72s times 2 gives 1.44 s in the air
+
+Standing at the base of one of the cliffs of Mt. Arapiles in Victoria, Australia, a hiker hears a rock break loose from a height of 105.0 m. He can’t see the rock right away, but then does, 1.50 s later. (a) How far above the hiker is the rock when he can hear it? (b) How much time does he have to move before the rock hits his head?
+
+There is a 250-m-high cliff at Half Dome in Yosemite National Park in California. Suppose a boulder breaks loose from the top of this cliff. (a) How fast will it be going when it strikes the ground? (b) Assuming a reaction time of 0.300 s, how long a time will a tourist at the bottom have to get out of the way after hearing the sound of the rock breaking loose (neglecting the height of the tourist, which would become negligible anyway if hit)? The speed of sound is 335.0 m/s on this day.
+
+a. v=70.0m/s; b. time heard after rock begins to fall: 0.75 s, time to reach the ground: 6.09 s
+
+acceleration of an object as a result of gravity
+the state of movement that results from gravitational force only

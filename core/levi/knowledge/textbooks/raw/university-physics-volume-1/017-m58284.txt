@@ -1,0 +1,206 @@
+# m58284
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Average and Instantaneous Acceleration
+
+Average and Instantaneous Acceleration
+
+By the end of this section, you will be able to:
+
+Calculate the average acceleration between two points in time.
+
+Calculate the instantaneous acceleration given the functional form of velocity.
+
+Explain the vector nature of instantaneous acceleration and velocity.
+
+Explain the difference between average acceleration and instantaneous acceleration.
+
+Find instantaneous acceleration at a specified time on a graph of velocity versus time.
+
+The importance of understanding acceleration spans our day-to-day experience, as well as the vast reaches of outer space and the tiny world of subatomic physics. In everyday conversation, to accelerate means to speed up; applying the brake pedal causes a vehicle to slow down. We are familiar with the acceleration of our car, for example. The greater the acceleration, the greater the change in velocity over a given time. Acceleration is widely seen in experimental physics. In linear particle accelerator experiments, for example, subatomic particles are accelerated to very high velocities in collision experiments, which tell us information about the structure of the subatomic world as well as the origin of the universe. In space, cosmic rays are subatomic particles that have been accelerated to very high energies in supernovas (exploding massive stars) and active galactic nuclei. It is important to understand the processes that accelerate cosmic rays because these rays contain highly penetrating radiation that can damage electronics flown on spacecraft, for example.
+
+Average Acceleration
+
+The formal definition of acceleration is consistent with these notions just described, but is more inclusive.
+
+Average Acceleration
+
+Average acceleration is the rate at which velocity changes:
+
+where a− is average acceleration, v is velocity, and t is time. (The bar over the a means average acceleration.)
+
+Because acceleration is velocity in meters per second divided by time in seconds, the SI units for acceleration are often abbreviated m/s2—that is, meters per second squared or meters per second per second. This literally means by how many meters per second the velocity changes every second. Recall that velocity is a vector—it has both magnitude and direction—which means that a change in velocity can be a change in magnitude (or speed), but it can also be a change in direction. For example, if a runner traveling at 10 km/h due east slows to a stop, reverses direction, and continues her run at 10 km/h due west, her velocity has changed as a result of the change in direction, although the magnitude of the velocity is the same in both directions. Thus, acceleration occurs when velocity changes in magnitude (an increase or decrease in speed) or in direction, or both.
+
+Acceleration as a Vector
+
+Acceleration is a vector in the same direction as the change in velocity, Δv. Since velocity is a vector, it can change in magnitude or in direction, or both. Acceleration is, therefore, a change in speed or direction, or both.
+
+Keep in mind that although acceleration is in the direction of the change in velocity, it is not always in the direction of motion. When an object slows down, its acceleration is opposite to the direction of its motion. Although this is commonly referred to as deceleration , we say the train is accelerating in a direction opposite to its direction of motion.
+
+The term deceleration can cause confusion in our analysis because it is not a vector and it does not point to a specific direction with respect to a coordinate system, so we do not use it. Acceleration is a vector, so we must choose the appropriate sign for it in our chosen coordinate system. In the case of the train in , acceleration is in the negative direction in the chosen coordinate system, so we say the train is undergoing negative acceleration.
+
+If an object in motion has a velocity in the positive direction with respect to a chosen origin and it acquires a constant negative acceleration, the object eventually comes to a rest and reverses direction. If we wait long enough, the object passes through the origin going in the opposite direction. This is illustrated in .
+Calculating Average Acceleration: A Racehorse Leaves the Gate
+A racehorse coming out of the gate accelerates from rest to a velocity of 15.0 m/s due west in 1.80 s. What is its average acceleration?
+
+Calculating Average Acceleration: A Racehorse Leaves the Gate
+Strategy
+First we draw a sketch and assign a coordinate system to the problem . This is a simple problem, but it always helps to visualize it. Notice that we assign east as positive and west as negative. Thus, in this case, we have negative velocity.
+
+Strategy
+
+We can solve this problem by identifying ΔvandΔt from the given information, and then calculating the average acceleration directly from the equation a–=ΔvΔt=vf−v0tf−t0.
+Solution
+First, identify the knowns: v0=0,vf=−15.0m/s (the negative sign indicates direction toward the west), Δt = 1.80 s.
+
+Solution
+
+Second, find the change in velocity. Since the horse is going from zero to –15.0 m/s, its change in velocity equals its final velocity:
+
+Last, substitute the known values (ΔvandΔt) and solve for the unknown a–:
+Significance
+The negative sign for acceleration indicates that acceleration is toward the west. An acceleration of 8.33 m/s2 due west means the horse increases its velocity by 8.33 m/s due west each second; that is, 8.33 meters per second per second, which we write as 8.33 m/s2. This is truly an average acceleration, because the ride is not smooth. We see later that an acceleration of this magnitude would require the rider to hang on with a force nearly equal to his weight.
+
+Significance
+
+Protons in a linear accelerator are accelerated from rest to 2.0×107m/s in 10–4 s. What is the average acceleration of the protons?
+
+Inserting the knowns, we have
+a–=ΔvΔt=2.0×107m/s−010−4s−0=2.0×1011m/s2.
+
+Instantaneous Acceleration
+
+Instantaneous acceleration a, or acceleration at a specific instant in time, is obtained using the same process discussed for instantaneous velocity. That is, we calculate the average acceleration between two points in time separated by Δt and let Δt approach zero. The result is the derivative of the velocity function v(t), which is instantaneous acceleration and is expressed mathematically as
+
+Thus, similar to velocity being the derivative of the position function, instantaneous acceleration is the derivative of the velocity function. We can show this graphically in the same way as instantaneous velocity. In , instantaneous acceleration at time t0 is the slope of the tangent line to the velocity-versus-time graph at time t0. We see that average acceleration a–=ΔvΔt approaches instantaneous acceleration as Δt approaches zero. Also in part (a) of the figure, we see that velocity has a maximum when its slope is zero. This time corresponds to the zero of the acceleration function. In part (b), instantaneous acceleration at the minimum velocity is shown, which is also zero, since the slope of the curve is zero there, too. Thus, for a given velocity function, the zeros of the acceleration function give either the minimum or the maximum velocity.
+
+To illustrate this concept, let’s look at two examples. First, a simple example is shown using (b), the velocity-versus-time graph of , to find acceleration graphically. This graph is depicted in (a), which is a straight line. The corresponding graph of acceleration versus time is found from the slope of velocity and is shown in (b). In this example, the velocity function is a straight line with a constant slope, thus acceleration is a constant. In the next example, the velocity function has a more complicated functional dependence on time.
+
+If we know the functional form of velocity, v(t), we can calculate instantaneous acceleration a(t) at any time point in the motion using .
+Calculating Instantaneous Acceleration
+A particle is in motion and is accelerating. The functional form of the velocity is v(t)=(20m/s)t–(5m/s2)t2.
+
+Calculating Instantaneous Acceleration
+
+Find the functional form of the acceleration.
+
+Find the instantaneous velocity at t = 1, 2, 3, and 5 s.
+
+Find the instantaneous acceleration at t = 1, 2, 3, and 5 s.
+
+Interpret the results of (c) in terms of the directions of the acceleration and velocity vectors.
+Strategy
+We find the functional form of acceleration by taking the derivative of the velocity function. Then, we calculate the values of instantaneous velocity and acceleration from the given functions for each. For part (d), we need to compare the directions of velocity and acceleration at each time.
+
+Strategy
+Solution
+
+Solution
+a(t)=dv(t)dt=(20m/s2)–(10m/s3)t
+v(1s)=15m/s, v(2s)=20m/s, v(3s)=15m/s, v(5s)=−25m/s
+a(1 s)=10 m/s2, a(2 s)=0m/s2, a(3 s)=−10m/s2, a(5s)=−30m/s2
+
+At t = 1 s, velocity v(1s)=15m/s is positive and acceleration is positive, so both velocity and acceleration are in the same direction. The particle is moving faster.
+
+At t = 2 s, velocity has increased tov(2s)=20m/s, where it is maximum, which corresponds to the time when the acceleration is zero. We see that the maximum velocity occurs when the slope of the velocity function is zero, which is just the zero of the acceleration function.
+
+At t = 3 s, velocity is v(3s)=15m/s and acceleration is negative. The particle has reduced its velocity and the acceleration vector is negative. The particle is slowing down.
+
+At t = 5 s, velocity is v(5s)=−25m/s and acceleration is increasingly negative. Between the times t = 3 s and t = 5 s the particle has decreased its velocity to zero and then become negative, thus reversing its direction. The particle is now speeding up again, but in the opposite direction.
+
+We can see these results graphically in .
+Significance
+By doing both a numerical and graphical analysis of velocity and acceleration of the particle, we can learn much about its motion. The numerical analysis complements the graphical analysis in giving a total view of the motion. The zero of the acceleration function corresponds to the maximum of the velocity in this example. Also in this example, when acceleration is positive and in the same direction as velocity, velocity increases. As acceleration tends toward zero, eventually becoming negative, the velocity reaches a maximum, after which it starts decreasing. If we wait long enough, velocity also becomes negative, indicating a reversal of direction. A real-world example of this type of motion is a car with a velocity that is increasing to a maximum, after which it starts slowing down, comes to a stop, then reverses direction.
+
+Significance
+
+An airplane lands on a runway traveling east. Describe its acceleration.
+
+If we take east to be positive, then the airplane has negative acceleration because it is accelerating toward the west. It is also acceleration opposite to the motion; its acceleration is opposite in direction to its velocity.
+
+Getting a Feel for Acceleration
+
+You are probably used to experiencing acceleration when you step into an elevator, or step on the gas pedal in your car. However, acceleration is happening to many other objects in our universe with which we don’t have direct contact. presents the acceleration of various objects. We can see the magnitudes of the accelerations extend over many orders of magnitude.
+
+Typical Values of Acceleration
+
+Acceleration
+Value (m/s2)
+High-speed train
+0.25
+Elevator
+2
+Cheetah
+5
+Object in a free fall without air resistance near the surface of Earth
+9.8
+Space shuttle maximum during launch
+29
+Parachutist peak during normal opening of parachute
+59
+F16 aircraft pulling out of a dive
+79
+Explosive seat ejection from aircraft
+147
+Sprint missile
+982
+Fastest rocket sled peak acceleration
+1540
+Jumping flea
+3200
+Baseball struck by a bat
+30,000
+Closing jaws of a trap-jaw ant
+1,000,000
+1.9×109
+In this table, we see that typical accelerations vary widely with different objects and have nothing to do with object size or how massive it is. Acceleration can also vary widely with time during the motion of an object. A drag racer has a large acceleration just after its start, but then it tapers off as the vehicle reaches a constant velocity. Its average acceleration can be quite different from its instantaneous acceleration at a particular time during its motion. compares graphically average acceleration with instantaneous acceleration for two very different motions.
+
+Learn about position, velocity, and acceleration graphs. Move the little man back and forth with a mouse and plot his motion. Set the position, velocity, or acceleration and let the simulation move the man for you. Visit this link to use the moving man simulation.
+
+Summary
+
+Acceleration is the rate at which velocity changes. The SI unit for acceleration is meters per second squared.
+
+Acceleration is a vector. It has both magnitude and direction and so can be the rate of change of the magnitude or direction of the velocity, or both.
+
+Instantaneous acceleration a(t) is a continuous function of time and gives the acceleration at any specific time during the motion. It is calculated from the derivative of the velocity function. Instantaneous acceleration is the slope of the velocity-versus-time graph.
+
+Negative acceleration (sometimes called deceleration) is acceleration in the negative direction in the chosen coordinate system.
+
+Conceptual Questions
+
+Is it possible for speed to be constant while acceleration is not zero?
+
+No, in one dimension constant speed requires zero acceleration.
+
+Is it possible for velocity to be constant while acceleration is not zero? Explain.
+
+Give an example in which velocity is zero yet acceleration is not.
+
+A ball is thrown into the air and its velocity is zero at the apex of the throw, but acceleration is not zero.
+
+If a subway train is moving to the left (has a negative velocity) and then comes to a stop, what is the direction of its acceleration? Is the acceleration positive or negative?
+
+Plus and minus signs are used in one-dimensional motion to indicate direction. What is the sign of an acceleration that reduces the magnitude of a negative velocity? Of a positive velocity?
+
+Plus, minus
+
+A cheetah can accelerate from rest to a speed of 30.0 m/s in 7.00 s. What is its acceleration?
+a=4.29m/s2
+
+Dr. John Paul Stapp was a U.S. Air Force officer who studied the effects of extreme acceleration on the human body. On December 10, 1954, Stapp rode a rocket sled, accelerating from rest to a top speed of 282 m/s (1015 km/h) in 5.00 s and was brought jarringly back to rest in only 1.40 s. Calculate his (a) acceleration in his direction of motion and (b) acceleration opposite to his direction of motion. Express each in multiples of g (9.80 m/s2) by taking its ratio to the acceleration of gravity.
+
+Sketch the acceleration-versus-time graph from the following velocity-versus-time graph.
+
+A commuter backs her car out of her garage with an acceleration of 1.40 m/s2. (a) How long does it take her to reach a speed of 2.00 m/s? (b) If she then brakes to a stop in 0.800 s, what is her acceleration?
+
+Assume an intercontinental ballistic missile goes from rest to a suborbital speed of 6.50 km/s in 60.0 s (the actual speed and time are classified). What is its average acceleration in meters per second squared and in multiples of g (9.80 m/s2)?
+a=11.1g
+
+An airplane, starting from rest, moves down the runway at constant acceleration for 18 s and then takes off at a speed of 60 m/s. What is the average acceleration of the plane?
+
+the rate of change in velocity; the change in velocity over time
+acceleration at a specific point in time

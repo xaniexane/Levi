@@ -1,0 +1,347 @@
+# m00023
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Logical Arguments
+
+Logical Arguments
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Apply the law of detachment to determine the conclusion of a pair of statements.
+
+Apply the law of denying the consequent to determine the conclusion for pairs of statements.
+
+Apply the chain rule to determine valid conclusions for pairs of true statements.
+
+The previous sections of this chapter provide the foundational skills for constructing and analyzing logical arguments. All logical arguments include a set of premises that support a claim or conclusion; but not all logical arguments are valid and sound. A logical argument is valid if its conclusion follows from the premises, and it is sound if it is valid and all of its premises are true. A false or deceptive argument is called a fallacy. Many types of fallacies are so common that they have been named.
+
+In 1936, Dale Carnegie published his first book, titled How to Win Friends and Influence People. It was marketed as training materials for the improvement of public speaking and negotiation skills, and the methods it presented are still used today. Carnegie famously said, “When dealing with people, remember you are not dealing with creatures of logic, but creatures of emotion.”
+
+People who put forth fallacious logical arguments often take advantage of our susceptibility to emotional appeals, to try to convince us that what they are saying is true. The study of logic helps us combat this weakness through recognition and learning to focus on the facts and structure of the argument.
+
+This section focuses on the two main forms that logical arguments can take. While inductive arguments attempt to draw a more general conclusion from a pattern of specific premises, deductive arguments attempt to draw specific conclusions from at least one or more general premises. Deductive arguments can be proven to be valid using Venn diagrams or truth tables.
+
+Inductive arguments generally cannot be proven to be true. They are judged as being strong or weak, but, like any opinion, whether you believe an argument is strong or weak often depends on your knowledge of the topic being discussed along with the evidence being provided in the premises. Hasty generalization is the name given to any fallacy that presents a weak inductive argument.
+Be careful! Premises may be true or false. If a premise is false, the claims made by the argument should be questioned.
+
+Law of Detachment
+
+The law of detachment is a valid form of a conditional argument that asserts that if both the conditional, p→q, and the hypothesis, p, are true, then the conclusion q must also be true. The law of detachment is also called affirming the hypothesis (or antecedent) and modus ponens. Symbolically, it has the form ((p→q)∧p)→q.
+
+Law of Detachment
+p→q
+p
+The ∴ is read as the word, “therefore.”
+
+Looking at the truth table for the conditional statement, the only time the conditional is true is when the hypothesis p is also true. The only place this happens is in the first row, where q is also true, confirming that the law of detachment is a valid argument.
+p→q
+T
+T
+T
+F
+F
+T
+F
+T
+Another way to verify that the law of detachment is a valid argument is to construct a truth table for the argument ((p→q)∧p)→q and verify that it is a tautology.
+((p→q)∧p)→q
+T
+T
+T
+T
+T
+F
+F
+T
+F
+T
+T
+T
+F
+F
+T
+T
+Venn diagrams may also be used to verify deductive arguments, which include conditional premises. Consider the statement p→q: “If you play guitar, then you are a musician.” The set of guitarists is a subset of the set of musicians, p⊂q. To verify that an argument is valid using a Venn diagram, draw the Venn diagram representing all the premises in the argument only, as shown in . Then verify if the conclusion is also represented by the Venn diagram of the premises. If it is, the argument is valid. If it is not, the argument is not valid. The set of guitarists is drawn as a subset of the set of musicians to represent the premise, p→q. The × represents the premise: p is true. This completes the drawing of the premises.
+
+Now, examine the Venn diagram to verify if the conclusion is included in the picture. The conclusion is q. Because the × is in the set p, and p is a subset of q, × is also in q; therefore, the law of detachment is a valid argument.
+Remember that an argument can be valid without being true. For the argument to be proven true, it must be both valid and sound. An argument is sound if all its premises are true.
+Logic Part 14: Common Argument Forms like Modus Ponens and Tollens
+
+Applying the Law of Detachment to Determine a Valid Conclusion
+
+Each pair of statements represents the premises in a logical argument. Based on these premises, apply the law of detachment to determine a valid conclusion.
+
+If Leonardo da Vinci was an artist, then he painted the Mona Lisa. Leonardo da Vinci was an artist.
+
+If Michael Jordan played for the Chicago Bulls, then Michael Jordan was not a soccer player. Michael Jordan played for the Chicago Bulls.
+
+If all fish have gills, then clown fish have gills. All fish have gills.
+
+The premises are p→q: If Leonardo da Vinci was an artist, then he painted the Mona Lisa, and p: Leonardo da Vinci was an artist. This argument has the form of the law of detachment, so, the conclusion is q: Leonardo da Vinci painted the Mona Lisa.
+
+The premises follow the form of the law of detachment, so a valid conclusion would be q. The premises are p→q: If Michael Jordan played for the Chicago Bulls, then Michael Jordan was not a soccer player, and p: Michael Jordan played for the Chicago Bulls. The conclusion that follows from the premises is q: Michael Jordan was not a soccer player.
+
+The premises are p→q: If all fish have gills, then clown fish have gills, and p: All fish have gills. This argument has the form of the law of detachment, so the conclusion is q: clown fish have gills.
+
+Law of Denying the Consequent
+
+Another form of a valid conditional argument is called the law of denying the consequent, or modus tollens. Recall, that the conditional statement, p→q, is logically equivalent to the contrapositive, ~q→ ~p. So, if the conditional statement is true, then the contrapositive statement is also true. By the law of detachment, if ~q is also true, then it follows that ~p must also be true. Symbolically, it has the form ((p→q)∧~q)→ ~p.
+
+Law of Denying the Consequent
+p→q
+~q
+The conditional statement can also be described as, “If antecedent, then consequent.”This is where the law of denying the consequent gets its name.
+
+To verify if the law of denying the consequent is a valid argument, construct a truth table for the argument, ((p→q)∧~q)→ ~p, and verify that it is a tautology.
+((p→q)∧~q)→ ~p
+T
+T
+F
+F
+T
+T
+T
+F
+F
+T
+F
+T
+F
+T
+T
+F
+T
+T
+F
+F
+T
+T
+T
+T
+To verify an argument of this form using a Venn diagram, again consider the premise: p→q: “If you play guitar, then you are a musician.” We will change the second premise to ~q. In this case, the × represents the premise, ~q. So, it will be placed inside the universal set of all people, but outside the set of musicians, as depicted in the Venn diagram in .
+
+Because the × is also outside the set of guitarists, the statement ~p follows from the premises and the argument is valid.
+
+Applying the Law of Denying the Consequent to Determine a Valid Conclusion
+
+Each pair of statements represents the premises in a logical argument. Based on these premises, apply the law of denying the consequent to determine a valid conclusion.
+
+If Leonardo da Vinci was an artist, then he painted the Mona Lisa. Leonardo da Vinci did not paint the Mona Lisa.
+
+If Michael Jordan played for the Chicago Bulls, then Michael Jordan was not a soccer player. Michael Jordan was a soccer player.
+
+If all fish have gills, then clown fish have gills. Clown fish do not have gills.
+
+The premises are p→q: If Leonardo da Vinci was an artist, then he painted the Mona Lisa, and ~q: Leonardo da Vinci did not paint the Mona Lisa. This argument has the form of the law of denying the consequent, so the conclusion is ~p: Leonardo da Vinci was not an artist.
+
+The premises follow the form of the law of denying the consequent, so a valid conclusion would be ~p. The premises are: p→q: If Michael Jordan played for the Chicago Bulls, then Michael Jordan was not a soccer player, and ~q: Michael Jordan was a soccer player. The conclusion that follows from the premises is ~p: Michael Jordan did not play for the Chicago Bulls.
+
+The premises are p→q: If all fish have gills, then clown fish have gills, and ~q: Clown fish do not have gills. This argument has the form of the law denying the consequent, so the conclusion is ~p: Some fish do not have gills.
+
+Chain Rule for Conditional Arguments
+
+The chain rule for conditional arguments is another form of a valid conditional argument. It is also called hypothetical syllogism or the transitivity of implication. Recall that the conditional statement p→q can also be read as p implies q. This is where the name transitivity of implication comes from. The transitive property for numbers states that, if 3<4 and 4<5, then it follows that 3<5. The chain rule extends this property to conditional statements. If the premises of the argument consist of two conditional statements, with the form “p→q” and “q→r,” then it follows that p→r. Symbolically, it has the form ((p→q)∧(q→r))→(p→r).
+
+Chain Rule for Conditional Arguments
+p→q
+q→r
+∴ p→r
+To verify the chain rule for conditional arguments, construct a truth table for the argument, ((p→q)∧(q→r))→(p→r), and verify that it is a tautology.
+((p→q)∧(q→r))→(p→r)
+T
+T
+T
+T
+T
+T
+T
+T
+T
+F
+T
+F
+F
+T
+T
+F
+T
+F
+T
+F
+T
+T
+F
+F
+F
+T
+F
+T
+F
+T
+T
+T
+T
+T
+T
+F
+T
+F
+T
+F
+F
+T
+F
+F
+T
+T
+T
+T
+T
+F
+F
+F
+T
+T
+T
+T
+To verify an argument of this form using a Venn diagram, again consider the premise p→q: “If you play guitar, then you are a musician,” but change the second premise to q→r: “If you are a musician, then you are an artist.” In this case, the set p of guitarists is a subset of the set r of artists, and it follows that if you are a guitarist, then you are an artist. Therefore, the conclusion p→r follows from the premises and the chain rule for logical arguments is valid. See .
+
+Applying the Chain Rule for Conditional Arguments to Determine a Valid and Sound Conclusion
+
+Each pair of statements represents true premises in a logical argument. Based on these premises, apply the chain rule for conditional arguments to determine a valid and sound conclusion.
+
+If my roommate goes to work, then my roommate will get paid. If my roommate gets paid, then my roommate will pay their bills.
+
+If robins can fly, then some birds can fly. If some birds can fly, then we will watch birds fly.
+
+If Irma is a teacher, then Irma has a college degree. If Irma has a college degree, then Irma graduated from college.
+
+The premises are p→q: “If my roommate goes to work, then they will get paid,” and q→r: “If my roommate gets paid, then my roommate will pay their bills.” This argument has the form of the chain rule for conditional arguments, so the valid conclusion will have the form “p→r.” Because all the premises are true, the valid and sound conclusion of this argument is: “If my roommate goes to work, then my roommate will pay their bills.”
+
+The premises are p→q: “If robins can fly, then some birds can fly,” and q→r: “If some birds can fly, then we will watch them fly.” This argument has the form of the chain rule for conditional arguments, so, the valid conclusion will have the form “p→r.” Because all the premises are true, the valid and sound conclusion of this argument is: “If robins can fly, then we will watch birds fly.”
+
+The premises are p→q: (see line 1 of solution 1 and 2 above) “If Irma is a teacher, then Irma has a college degree,” and q→r: “If Irma has a college degree, then Irma graduated from college.” This argument has the form of the chain rule for conditional arguments, so the valid conclusion will have the form “p→r.” Because all the premises are true, the valid and sound conclusion of this argument is: “If Irma is a teacher, then Irma graduated from college.”
+
+Check Your Understanding
+
+Projects
+
+Logic Gates
+
+Logic gates are the basis for all digital circuits.
+
+Research and document the following terms: logic gate, OR gate, AND gate, and NOT gate.
+
+Construct a diagram of a NAND gate, NOR gate, and a XOR gate by using at least two of the following gates: AND, OR, and NOT.
+
+Digital electronics use a 1 for true or on, and a 0 for false or off. Create a truth table documenting all possible cases using 0s and 1s for the NAND gate, NOR gate and XOR gate.
+
+Use a truth table to explain how XOR is related to the biconditional statement.
+
+Logical Fallacies
+
+Fallacies are false or deceptive logical arguments.
+
+Research and document the structure of five of the following named fallacies: hasty generalization, limited choice, false cause, appeal to popularity, appeal to emotion, appeal to authority, personal attack, gamblers' ruin, slippery slope, and circular reasoning.
+
+Create a presentation highlighting one of the five fallacies researched in the previous question. The presentation must include an introductory slide with the title of the fallacy and the form or structure of the argument. The second slide must include an example of this fallacy as used in a commercial, a political cartoon or a current event or new article. The third slide must include an explanation of why the example on slide to is a representative example of the fallacy. The last slide must include citations for any materials used. No textbooks should be used as reference.
+
+Careers in Logic
+
+Lawyers, mathematicians, and computer programmers are a few of the careers that require knowledge of logic.
+
+What career are you interested in? Research how knowledge of logic applies to your chosen field of study. Then, write a cover letter for a position in your field you'd like to apply to. In the cover letter, include how your knowledge of logic qualifies you for the position you are applying for. If you do not think logic is important for your given career choice, find a position where logic is an essential element of the position and complete the project by pretending you are writing a cover letter for that job.
+
+Key Terms
+
+sound
+
+fallacy
+
+deductive arguments
+
+law of detachment
+
+law of denying the consequent
+
+chain rule for conditional arguments
+
+Key Concepts
+
+A logical argument uses a series of facts or premises to justify a conclusion or claim. It is valid if its conclusion follows from the premises, and it is sound if it is valid, and all of its premises are true.
+
+The law of detachment is a valid form of a conditional argument that asserts that if both the conditional, p→q is true and the hypothesis, p is true, then the conclusion q must also be true.
+
+ Law of Detachment
+
+ Premise:
+ p→q
+ Premise:
+ p
+ Conclusion:
+ ∴ q
+
+Law of Detachment
+p→q
+p
+∴ q
+Know how to apply the law of detachment to determine the conclusion of a pair of statements.
+
+The law of denying the consequent is a valid form of a conditional argument that asserts that if both the conditional, p→q is true and the negation of the conclusion, ~q is true, then the negation of the hypothesis ~p must also be true.
+
+ Law of Denying the Consequent
+
+ Premise:
+ p→q
+ Premise:
+ ~q
+ Conclusion:
+ ∴ ~p
+
+Law of Denying the Consequent
+p→q
+~q
+∴ ~p
+Know how to apply the law of denying the consequent to determine the conclusion for pairs of statements.
+
+The chain rule for conditional arguments is a valid form of a conditional argument that asserts that if the premises of the argument have the form, p→q and q→r, then it follows that p→r.
+
+ Chain Rule for Conditional Arguments
+
+ Premise:
+ p→q
+ Premise:
+ q→r
+ Conclusion:
+ ∴ p→r
+
+Chain Rule for Conditional Arguments
+p→q
+q→r
+∴ p→r
+Know how to apply the chain rule to determine valid conclusions for pairs of true statements.
+
+Video
+Logic Part 14: Common Argument Forms like Modus Ponens and Tollens
+
+Chapter Review
+Statements and Quantifiers
+
+Compound Statements
+
+Constructing Truth Tables
+
+Truth Tables for the Conditional and Biconditional
+
+Equivalent Statements
+
+De Morgan’s Laws
+
+Logical Arguments
+
+Chapter Test

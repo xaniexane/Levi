@@ -1,0 +1,267 @@
+# m42614
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Quantum Numbers and Rules
+
+Quantum Numbers and Rules
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define quantum number.
+
+Calculate angle of angular momentum vector with an axis.
+
+Define spin quantum number.
+
+Physical characteristics that are quantized—such as energy, charge, and angular momentum—are of such importance that names and symbols are given to them. The values of quantized entities are expressed in terms of quantum numbers, and the rules governing them are of the utmost importance in determining what nature is and does. This section covers some of the more important quantum numbers and rules—all of which apply in chemistry, material science, and far beyond the realm of atomic physics, where they were first discovered. Once again, we see how physics makes discoveries which enable other fields to grow.
+
+The energy states of bound systems are quantized, because the particle wavelength can fit into the bounds of the system in only certain ways. This was elaborated for the hydrogen atom, for which the allowed energies are expressed as En∝1/n2, where n=1, 2, 3, .... We define
+n to be the principal quantum number that labels the basic states of a system. The lowest-energy state has
+n=1, the first excited state has
+n=2, and so on. Thus the allowed values for the principal quantum number are
+
+This is more than just a numbering scheme, since the energy of the system, such as the hydrogen atom, can be expressed as some function of n, as can other characteristics (such as the orbital radii of the hydrogen atom).
+
+The fact that the magnitude of angular momentum is quantized was first recognized by Bohr in relation to the hydrogen atom; it is now known to be true in general. With the development of quantum mechanics, it was found that the magnitude of angular momentum L can have only the values
+
+where l is defined to be the angular momentum quantum number. The rule for l in atoms is given in the parentheses. Given n, the value of l can be any integer from zero up to n−1. For example, if n=4, then l can be 0, 1, 2, or 3.
+
+Note that for n=1, l can only be zero. This means that the ground-state angular momentum for hydrogen is actually zero, not
+
+ h/2π
+
+ as Bohr proposed. The picture of circular orbits is not valid, because there would be angular momentum for any circular orbit. A more valid picture is the cloud of probability shown for the ground state of hydrogen in . The electron actually spends time in and near the nucleus. The reason the electron does not remain in the nucleus is related to Heisenberg’s uncertainty principle—the electron’s energy would have to be much too large to be confined to the small space of the nucleus. Now the first excited state of hydrogen has n=2, so that l can be either 0 or 1, according to the rule in L=ll+1h2π . Similarly, for n=3, l can be 0, 1, or 2. It is often most convenient to state the value of l, a simple integer, rather than calculating the value of L from L=ll+1h2π. For example, for l=2, we see that
+
+It is much simpler to state l=2.
+
+As recognized in the Zeeman effect, the direction of angular momentum is quantized. We now know this is true in all circumstances. It is found that the component of angular momentum along one direction in space, usually called the z-axis, can have only certain values of Lz. The direction in space must be related to something physical, such as the direction of the magnetic field at that location. This is an aspect of relativity. Direction has no meaning if there is nothing that varies with direction, as does magnetic force. The allowed values of Lz are
+
+where Lz is the z-component of the angular momentum and ml is the angular momentum projection quantum number. The rule in parentheses for the values of ml is that it can range from −l to l in steps of one. For example, if l=2, then ml can have the five values –2, –1, 0, 1, and 2. Each ml corresponds to a different energy in the presence of a magnetic field, so that they are related to the splitting of spectral lines into discrete parts, as discussed in the preceding section. If the z-component of angular momentum can have only certain values, then the angular momentum can have only certain directions, as illustrated in .
+
+What Are the Allowed Directions?
+
+Calculate the angles that the angular momentum vector L can make with the z-axis for l=1, as illustrated in .
+Strategy
+
+Strategy
+represents the vectors L and Lz as usual, with arrows proportional to their magnitudes and pointing in the correct directions. L and Lz form a right triangle, with L being the hypotenuse and Lz the adjacent side. This means that the ratio of Lz to L is the cosine of the angle of interest. We can find L and Lz using L=ll+1h2π and Lz=mh2π.
+Solution
+
+Solution
+
+We are given l=1, so that ml can be +1, 0, or −1. Thus L has the value given by L=ll+1h2π.
+Lz can have three values, given by Lz=mlh2π.
+
+As can be seen in ,
+
+ cos θ=
+ 
+ L
+ z
+ 
+ /L,
+
+ and so for ml=+1, we have
+
+Thus,
+
+Similarly, for ml=0, we find cosθ2=0; thus,
+
+And for ml=−1,
+
+so that
+Discussion
+
+Discussion
+
+The angles are consistent with the figure. Only the angle relative to the z-axis is quantized. L can point in any direction as long as it makes the proper angle with the z-axis. Thus the angular momentum vectors lie on cones as illustrated. This behavior is not observed on the large scale. To see how the correspondence principle holds here, consider that the smallest angle (
+
+ θ
+ 1
+
+ in the example) is for the maximum value of ml=0, namely ml=l. For that smallest angle,
+
+which approaches 1 as l becomes very large. If cosθ=1, then θ=0º. Furthermore, for large l, there are many values of ml, so that all angles become possible as l gets very large.
+
+Intrinsic Spin Angular Momentum Is Quantized in Magnitude and Direction
+
+There are two more quantum numbers of immediate concern. Both were first discovered for electrons in conjunction with fine structure in atomic spectra. It is now well established that electrons and other fundamental particles have intrinsic spin, roughly analogous to a planet spinning on its axis. This spin is a fundamental characteristic of particles, and only one magnitude of intrinsic spin is allowed for a given type of particle. Intrinsic angular momentum is quantized independently of orbital angular momentum. Additionally, the direction of the spin is also quantized. It has been found that the magnitude of the intrinsic (internal) spin angular momentum, s, of an electron is given by
+
+where s is defined to be the spin quantum number. This is very similar to the quantization of L given in L=ll+1h2π, except that the only value allowed for s for electrons is 1/2.
+
+The direction of intrinsic spin is quantized, just as is the direction of orbital angular momentum. The direction of spin angular momentum along one direction in space, again called the z-axis, can have only the values
+
+for electrons. Sz is the z-component of spin angular momentum and ms is the spin projection quantum number. For electrons, s can only be 1/2, and ms can be either +1/2 or –1/2. Spin projection ms=+1/2 is referred to as spin up, whereas ms=−1/2 is called spin down. These are illustrated in .
+
+Intrinsic Spin
+
+In later chapters, we will see that intrinsic spin is a characteristic of all subatomic particles. For some particles s is half-integral, whereas for others s is integral—there are crucial differences between half-integral spin particles and integral spin particles. Protons and neutrons, like electrons, have s=1/2, whereas photons have s=1, and other particles called pions have s=0, and so on.
+
+To summarize, the state of a system, such as the precise nature of an electron in an atom, is determined by its particular quantum numbers. These are expressed in the form n, l,ml,ms —see For electrons in atoms, the principal quantum number can have the values n=1, 2, 3, .... Once n is known, the values of the angular momentum quantum number are limited to l=1, 2, 3, ...,n−1. For a given value of l, the angular momentum projection quantum number can have only the values ml=−l,−l+1, ...,−1, 0, 1, ...,l−1,l. Electron spin is independent of n, l, and ml, always having s=1/2. The spin projection quantum number can have two values, ms=1/2 or −1/2.
+
+Atomic Quantum Numbers
+
+Name
+Symbol
+Allowed values
+1, 2, 3, ...
+0, 1, 2, ...
+ 
+ n
+ −
+ 1
+−
+ l
+ ,
+
+ −
+ l
+ 
+ +
+ 1, ...
+ 
+ ,
+ 
+ −
+ 1, 0, 1, ...
+ ,
+ 
+ l
+ −
+ 1,
+ 
+ l
+ (
+ or
+ 0, ±1, ±2, ...
+ ,
+ ±
+ l
+ )
+1/2
+
+(
+
+electrons
+
+)
+shows several hydrogen states corresponding to different sets of quantum numbers. Note that these clouds of probability are the locations of electrons as determined by making repeated measurements—each measurement finds the electron in a definite location, with a greater chance of finding the electron in some places rather than others. With repeated measurements, the pattern of probability shown in the figure emerges. The clouds of probability do not look like nor do they correspond to classical orbits. The uncertainty principle actually prevents us and nature from knowing how the electron gets from one place to another, and so an orbit really does not exist as such. Nature on a small scale is again much different from that on the large scale.
+
+We will see that the quantum numbers discussed in this section are valid for a broad range of particles and other systems, such as nuclei. Some quantum numbers, such as intrinsic spin, are related to fundamental classifications of subatomic particles, and they obey laws that will give us further insight into the substructure of matter and its interactions.
+
+Section Summary
+
+Quantum numbers are used to express the allowed values of quantized entities. The principal quantum number n labels the basic states of a system and is given by
+ n=1,2,3,....
+
+The magnitude of angular momentum is given by
+
+ L
+ =
+
+ l
+
+ l
+ +
+ 1
+
+ h
+ 2π
+
+ l
+ =
+ 0, 1, 2, ...
+ ,
+ 
+ n
+ −
+ 1
+
+ ,
+
+where l is the angular momentum quantum number. The direction of angular momentum is quantized, in that its component along an axis defined by a magnetic field, called the z-axis is given by
+
+ Lz
+ =
+ ml
+ h2π
+
+ ml
+=
+−l,
+−l+
+1, ...
+,−1, 0, 1, ...l−1,l,Lz is the z-component of the angular momentum and ml is the angular momentum projection quantum number. Similarly, the electron’s intrinsic spin angular momentum s is given by
+ S=ss+1h2π(s=1/2 for electrons),s is defined to be the spin quantum number. Finally, the direction of the electron’s spin along the z-axis is given by
+ Sz=msh2πms=−12,+12,
+where Sz is the z-component of spin angular momentum and ms is the spin projection quantum number. Spin projection ms=+1/2 is referred to as spin up, whereas ms=−1/2 is called spin down. summarizes the atomic quantum numbers and their allowed values.
+
+Conceptual Questions
+
+Define the quantum numbers n, l,ml, s, and ms.
+
+For a given value of n, what are the allowed values of l?
+
+For a given value of l, what are the allowed values of ml? What are the allowed values of ml for a given value of n? Give an example in each case.
+
+List all the possible values of s and ms for an electron. Are there particles for which these values are different? The same?
+
+Problem Exercises
+
+If an atom has an electron in the n=5 state with ml=3, what are the possible values of l?
+l=4, 3 are possible since l<n and ∣ml∣≤l.
+
+An atom has an electron with ml=2. What is the smallest value of n for this electron?
+
+What are the possible values of ml for an electron in the n=4 state?
+n=4⇒l=3, 2, 1, 0⇒ml=±3,±2, ±1, 0 are possible.
+
+What, if any, constraints does a value of ml=1 place on the other quantum numbers for an electron in an atom?
+
+(a) Calculate the magnitude of the angular momentum for an l=1 electron. (b) Compare your answer to the value Bohr proposed for the n=1 state.
+
+(a) 1.49×10−34 J⋅s
+
+(b) 1.06×10−34 J⋅s
+
+(a) What is the magnitude of the angular momentum for an l=1 electron? (b) Calculate the magnitude of the electron’s spin angular momentum. (c) What is the ratio of these angular momenta?
+
+Repeat for l=3.
+
+(a) 3.66×10−34 J⋅s
+
+(b) s=9.13×10−35 J⋅s
+
+(c) LS=123/4=4
+
+(a) How many angles can L make with the z-axis for an l=2 electron? (b) Calculate the value of the smallest angle.
+
+What angles can the spin s of an electron make with the z-axis?
+θ
+ =
+ 54.7º, 125.3º
+
+the values of quantized entities, such as energy and angular momentum
+a quantum number associated with the angular momentum of electrons
+the quantum number that parameterizes the intrinsic angular momentum (or spin angular momentum, or simply spin) of a given particle
+quantum number that can be used to calculate the intrinsic electron angular momentum along the 
+ 
+ z
+ 
+-axis
+component of intrinsic electron spin along the 
+ 
+ z
+ 
+-axis
+given by S=ss+1h2π
+component of orbital angular momentum of electron along the 
+ 
+ z
+ 
+-axis

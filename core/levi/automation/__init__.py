@@ -1,0 +1,152 @@
+"""LEVI automation — plans, primitives, and device bridges.
+
+Original LEVI-native implementation. Browser/CDP concepts adapted from
+the Levi-ai Stage-1 lineage (source-sync entry ``levi-ai``); no source
+text copied.
+
+Boundary (binding): this package PLANS automation and emits helper
+scripts. It never drives a browser or device on its own — execution is
+always the user's action (Termux/CDP/device) or a HITL-gated step.
+"""
+
+from .browser import BrowserPlan, emit_termux_helper, format_plan, plan_browser_job
+from .minions import (
+    MINIONS,
+    Minion,
+    by_category,
+    by_hitl,
+    categories,
+    find_minion,
+    search,
+)
+from .engine import (
+    RAIL,
+    Receipt,
+    TriggerEvent,
+    dry_run,
+    evaluate_condition,
+    match_event,
+    run_minion,
+    trigger_matches,
+)
+from .hitl import (
+    Gate,
+    GateDenied,
+    GateKind,
+    GateRequest,
+    GateResult,
+    auto_approve,
+    auto_deny,
+    describe_gate,
+    gate_kind_for,
+)
+from .executor import (
+    ActionResult,
+    Adapter,
+    AgentWorkflowAdapter,
+    DeviceArtifactAdapter,
+    RefusalAdapter,
+    WebhookAdapter,
+    artifacts_dir,
+    execute,
+    route,
+    sanitize_data,
+    webhooks_path,
+)
+from .primitives import PRIMITIVES, Primitive, get_primitive, list_primitives
+from .routines import (
+    Routine,
+    RoutineRun,
+    RoutineStep,
+    delete_routine,
+    get_routine,
+    list_routines,
+    play_routine,
+    record_from_session,
+    record_routine,
+)
+from .flows import (
+    FlowError,
+    FlowReceipt,
+    NodeRecord,
+    build_flow,
+    delete_flow,
+    evaluate_expr,
+    list_flows,
+    load_flow,
+    manifest,
+    run_flow,
+    save_flow,
+    to_mermaid,
+)
+from .recur import RecurError, Recurrence, parse as parse_recur
+
+__all__ = [
+    "MINIONS",
+    "Minion",
+    "BrowserPlan",
+    "ActionResult",
+    "Adapter",
+    "AgentWorkflowAdapter",
+    "DeviceArtifactAdapter",
+    "FlowError",
+    "FlowReceipt",
+    "NodeRecord",
+    "RefusalAdapter",
+    "WebhookAdapter",
+    "Gate",
+    "GateDenied",
+    "GateKind",
+    "GateRequest",
+    "GateResult",
+    "PRIMITIVES",
+    "Primitive",
+    "RAIL",
+    "Receipt",
+    "RecurError",
+    "Recurrence",
+    "Routine",
+    "RoutineRun",
+    "RoutineStep",
+    "TriggerEvent",
+    "artifacts_dir",
+    "auto_approve",
+    "auto_deny",
+    "by_category",
+    "by_hitl",
+    "build_flow",
+    "categories",
+    "delete_flow",
+    "delete_routine",
+    "describe_gate",
+    "dry_run",
+    "emit_termux_helper",
+    "evaluate_condition",
+    "evaluate_expr",
+    "execute",
+    "find_minion",
+    "format_plan",
+    "gate_kind_for",
+    "get_primitive",
+    "get_routine",
+    "list_flows",
+    "list_primitives",
+    "list_routines",
+    "load_flow",
+    "manifest",
+    "match_event",
+    "parse_recur",
+    "plan_browser_job",
+    "play_routine",
+    "record_from_session",
+    "record_routine",
+    "route",
+    "run_flow",
+    "run_minion",
+    "sanitize_data",
+    "save_flow",
+    "search",
+    "to_mermaid",
+    "trigger_matches",
+    "webhooks_path",
+]

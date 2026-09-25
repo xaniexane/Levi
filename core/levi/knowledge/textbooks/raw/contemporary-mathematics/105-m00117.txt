@@ -1,0 +1,377 @@
+# m00117
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Navigating Graphs
+
+Navigating Graphs
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe and identify walks, trails, paths, and circuits.
+
+Solve application problems using walks, trails, paths, and circuits.
+
+Identify the chromatic number of a graph.
+
+Describe the Four-Color Problem.
+
+Solve applications using graph colorings.
+
+Now that we know the basic parts of graphs and we can distinguish one graph from another, it is time to really put our graphs to work for us. Many applications of graph theory involve navigating through a graph very much like you would navigate through a maze. Imagine that you are at the entrance to a maze. Your goal is to get from one point to another as efficiently as possible. Maybe there are treasures hidden along the way that make straying from the shortest path worthwhile, or maybe you just need to get to the end fast. Either way, you definitely want to avoid any wrong turns that would cause unnecessary backtracking. Luckily, graph theory is here to help!
+
+Walks
+
+Suppose is a maze you want to solve. You want to get from the start to the end.
+
+You can approach this task any way you want. The only rule is that you can’t climb over the wall. To put this in the context of graph theory, let’s imagine that at every intersection and every turn, there is a vertex. The edges that join the vertices must stay within the walls. The graph within the maze would look like .
+
+One approach to solving a maze is to just start walking. It is not the most efficient approach. You might cross through the same intersection twice. You might backtrack a bit. It’s okay. We are just out for a walk. It might look something like the black sequence of vertices and edges in .
+
+This type of sequence of adjacent vertices and edges is actually called a walk (or directed walk) in graph theory too!
+
+A walk can be identified by naming the sequence of its vertices (or by naming the sequence of its edges if those are labeled). Let’s take the graph out of the context of the maze and give each vertex a name and each edge of the walk a direction as in .
+
+The name of this walk from p to r is p → q → o → n → i → j → c → d → c → j → k → s → r. When a particular edge on our graph was traveled in both directions, it had arrows in both directions and the letters of vertices that were visited more than once had to be repeated in the name of the walk.
+Not every list of vertices or list of edges makes a path. The order must take into account the way in which the edges and vertices are connected. The list must be a sequence, which means they are in order. No edges or vertices can be skipped and you cannot go off the graph.
+
+The highlighted edges Graph Y in represent a walk between f and b. The highlighted edges in Graph X do not represent a walk between f and b, because there is a turn at a point that is not a vertex. This is like climbing over a wall when you are walking through a maze. Another way of saying this is that b → d → f is not a walk, because there is no edge between b and d.
+A point on a graph where two edges cross is not a vertex.
+
+Naming a Walk Through A House
+shows the floor plan of a house. Use the floor plan to answer each question.
+
+Draw a graph to represent the floor plan in which each vertex represents a different room (or hallway) and edges represent doorways between rooms.
+
+Name a walk through the house that begins in the living room, ends in the garage and visits each room (or hallway) at least once.
+Step 1: We will need a vertex for each room and it is convenient to label them according to the names of the rooms. Visualize the scenario in your head as shown in . You don’t have to write this step on your paper.
+
+ Assigning Vertices to Rooms
+
+ Step 2: Draw a graph to represent the scenario. Start with the vertices. Then connect those vertices that share a doorway in the floorplan as shown in .
+
+ Graph of the Floor plan
+Step 1: We will need a vertex for each room and it is convenient to label them according to the names of the rooms. Visualize the scenario in your head as shown in . You don’t have to write this step on your paper.
+
+ Assigning Vertices to Rooms
+Step 2: Draw a graph to represent the scenario. Start with the vertices. Then connect those vertices that share a doorway in the floorplan as shown in .
+Step 1: Draw a path that begins at vertex L, representing the living room, and ending at vertex G, representing the garage making sure to visit every room at least once. There are many ways this can be done. You may want to number the edges to keep track of their order. One example is shown in .
+
+ Draw the Path from L to G
+ 
+ Step 2: Name the path that you followed by listing the vertices in the order you visited them.
+ L → R → L → K → L → H → B → H → M → H → G
+Step 1: Draw a path that begins at vertex L, representing the living room, and ending at vertex G, representing the garage making sure to visit every room at least once. There are many ways this can be done. You may want to number the edges to keep track of their order. One example is shown in .
+Step 2: Name the path that you followed by listing the vertices in the order you visited them.
+L → R → L → K → L → H → B → H → M → H → G
+
+Paths and Trails
+
+A walk is the most basic way of navigating a graph because it has no restrictions except staying on the graph. When there are restrictions on which vertices or edges we can visit, we will call the walk by a different name. For example, if we want to find a walk that avoids travelling the same edge twice, we will say we want to find a trail (or directed trail). If we want to find a walk that avoids visiting the same vertex twice, we will say, we want to find a path (or directed path).
+
+Walks, trails, and paths are all related.
+
+All paths are trails, but trails that visit the same vertex twice are not paths.
+
+All trails are walks, but walks in which an edge is visited twice would not be trails.
+
+We can visualize the relationship as in .
+
+Let’s practice identifying walks, trails, and paths using the graphs in .
+
+Identifying Walks, Paths, and Trails
+
+Consider each sequence of vertices from Graph A in . Determine if it is only a walk, both a walk and a path, both a walk and a trail, all three, or none of these.
+b → c → d → e → f
+c → b → d → b → e
+c → f → e → d → b → c
+b → e → f → c → b → d
+
+First, check to see if the sequence of vertices is a walk by making sure that the vertices are consecutive. As you can see in , there is no edge between vertex c and vertex d.
+
+ This means that the sequence is not a walk. If it is not a walk, then it can’t be a path and it cannot be a trail, so, it is none of these.
+
+This means that the sequence is not a walk. If it is not a walk, then it can’t be a path and it cannot be a trail, so, it is none of these.
+
+First, check to see if the sequence is a walk. As you can see in , the vertices are consecutive.
+
+ This means that the sequence is a walk. Since the vertex b is visited twice, this walk is not a path. Since edge bd is traveled twice, this walk is not a trail. So, the sequence is only a walk.
+
+This means that the sequence is a walk. Since the vertex b is visited twice, this walk is not a path. Since edge bd is traveled twice, this walk is not a trail. So, the sequence is only a walk.
+
+First, check to see if the sequence is a walk. We can see in that the vertices are consecutive, which means it is a walk.
+
+ Next, check to see if any vertex is visited twice. Remember, we do not consider beginning and ending at the same vertex to be visiting a vertex twice. So, no vertex was visited twice. This means we have a walk that is also a path. Next check to see if any edge was visited twice; none were. So, the sequence is a walk, a path, and a trail.
+
+Next, check to see if any vertex is visited twice. Remember, we do not consider beginning and ending at the same vertex to be visiting a vertex twice. So, no vertex was visited twice. This means we have a walk that is also a path. Next check to see if any edge was visited twice; none were. So, the sequence is a walk, a path, and a trail.
+
+First, check to see if the sequence is a walk. We can see in that the vertices are consecutive, which means it is a walk.
+
+ Next check to see if any vertex is visited twice. Since vertex b is visited twice, this is not a path. Finally, check to see if any edges are traveled twice. Since no edges are traveled twice, this is a trail. So, the sequence of vertices is a walk and a trail.
+
+Next check to see if any vertex is visited twice. Since vertex b is visited twice, this is not a path. Finally, check to see if any edges are traveled twice. Since no edges are traveled twice, this is a trail. So, the sequence of vertices is a walk and a trail.
+
+Walks, Trails, and Paths in Graph Theory
+
+Circuits
+
+In many applications of graph theory, such as creating efficient delivery routes, beginning and ending at the same location is a requirement. When a walk, path, or trail end at the same location or vertex they began, we call it closed. Otherwise, we call it open (does not begin and end at the same location or vertex). Some examples of closed walks, closed trails, and closed paths are given in in the following table.
+
+DESCRIPTION
+EXAMPLE
+CHARACTERISTICS
+d → f → b → c → f → d
+d → f → b → c → f → d
+Alternating sequence of vertices and edges
+ Begins and ends at the same vertex
+Alternating sequence of vertices and edges
+
+Begins and ends at the same vertex
+
+d → f → b → c → f → e → d
+d → f → b → c → f → e → d
+No repeated edges
+ Begins and ends at the same vertex
+No repeated edges
+
+Begins and ends at the same vertex
+
+d → f → b → c → d
+d → f → b → c → d
+No repeated edges or vertices
+ Begins and ends at the same vertex
+No repeated edges or vertices
+
+Begins and ends at the same vertex
+
+Since walks, trails, and paths are all related, closed walks, circuits, and directed cycles are related too.
+
+All circuits are closed walks, but closed walks that visit the same edge twice are not circuits.
+
+All directed cycles are circuits, but circuits in which a vertex is visited twice are not directed cycles.
+
+We can visualize the relationship as in .
+
+The same circuit can be named using any of its vertices as a starting point. For example, the circuit d → f → b → c → d can also be referred to in the following ways.
+a → b → c → d → a is the same as
+
+Let’s practice working with closed walks, circuits (closed trails), and directed cycles (closed paths). In the graph in , the vertices are major central and south Florida airports. The edges are direct flights between them.
+
+Determining a Closed Walk, Circuit, or Directed Cycle
+
+Suppose that you need to travel by air from Miami (MIA) to Orlando (MCO) and you were restricted to flights represented on the graph. For the trip to Orlando, you decide to purchase tickets with a layover in Key West (EYW) as shown in , but you still have to decide on the return trip. Determine if your roundtrip itinerary is a closed walk, a circuit, and/or a directed cycle, based on the return trip described in each part.
+
+You returned to Miami (MIA) by reversing your route.
+
+Your direct flight back left Orlando (MCO) but was diverted to Fort Lauderdale (FLL)! From there you flew to Tampa (TPA) before returning to Miami (MIA).
+
+The whole trip was MIA → EYW → MCO → EYW → MIA. This is a closed walk, because it is a walk that begins and ends at the same vertex. It is not a circuit, because it repeats edges. If it is not a circuit, then it cannot be a directed cycle.
+
+The whole trip was MIA → EYW → MCO → FLL → TPA → MIA. This is a closed walk, because it is a walk that begins and ends at the same vertex. It is a circuit because no edges were repeated. It is also a directed cycle because no vertices were repeated either. So, it is all three!
+
+Closed Walks, Closed Trails (Circuits), and Closed Paths (Directed Cycles) in Graph Theory
+
+Graph Colorings
+
+In this section so far, we have looked at how to navigate graphs by proceeding from one vertex to another in a sequence that does not skip any vertices, but in some applications we may want to skip vertices. Remember the camp Olympics at Camp Woebegone in Comparing Graphs? You were planning a camp Olympics with four events. The campers signed up for the events. You drew a graph to help you visualize which events have campers in common. The vertices of Graph E in represent the events and adjacent vertices indicate that there are campers who are participating in both.
+
+In this case, we do NOT want events represented by two adjacent vertices to occur in the same timeslot, because that would prevent the campers who wanted to participate in both from doing so. We can use the graph in to count the timeslots we need so there are no conflicts. Let’s assign each timeslot a different color. We could categorize events that happen at 1 pm as Red; 2 pm, Purple; 3 pm, Blue; and 4 pm, Green. Then assign different colors to any pair of adjacent vertices to ensure that the events they represent do not end up in the same timeslot. shows several of the ways to do this while obeying the rule that no pair of adjacent vertices can be the same color.
+
+In , the graphs with vertices colored so that no adjacent vertices are the same color are called graph colorings. Notice that Graph 3 has the fewest colors, which means it shows us how to have the fewest number of timeslots. The events marked in red, a and d, can be held at the same time because they are not adjacent and do not have conflicts. Also, the events marked in purple, b and c, can be held at the same time. We would not need green or blue timeslots at all!
+
+A graph that uses n colors is called an n-coloring. The smallest number of colors needed to color a particular graph is called its chromatic number.
+
+Graph colorings can be used in many applications like the scheduling scenario at camp Woebegone. Let's look at how they work in more detail. shows two different colorings of a particular graph. Coloring A is called a four-coloring, because it uses four colors, red (R), green (G), blue (B), and purple (P). Coloring B is called a three-coloring because it uses three. The colors allow us to visually subdivide the graphs into groups. The only rule is that adjacent vertices are different colors so that they are in different groups.
+
+It turns out that a three-coloring is the best we can do with the graph in . No matter how many different patterns you try with only two colors, you will never find one in which the adjacent vertices are always different colors. In other words, the graph has a chromatic number of three. For large graphs, computer assistance is usually required to find the chromatic numbers. There is no formula for finding the chromatic number of a graph, but there are some facts that are helpful in .
+
+Fact
+Example
+Recall that planar graphs are untangled; that is, they can be drawn on a flat surface so that no two edges are crossing. If a graph is planar, it can be colored with four colors or possibly fewer.
+Each vertex in a complete graph is adjacent to every other vertex forcing us to color them all different colors.The chromatic number of a complete graph is the same as the number of vertices.
+If a graph has a clique, a complete subgraph, then each vertex in the clique must have a different color and the vertices outside the clique may or may not have even more colors. The chromatic number of a graph is at least the number of vertices in its biggest clique.
+Creating Colorings to Solve Problems
+
+Let’s see how these facts can help us color the graph in .
+
+Since the graph is planar, the chromatic number is no more than four.
+
+The graph is not complete, but it has complete subgraphs of three vertices. In other words, it has triangles like the one shown with blue vertices in . This means that the chromatic number is at least three.
+
+We know we can color this graph in three or four colors. It is usually best to start by coloring the vertex of highest degree as shown in . In this case, we used red (R). The color is not important.
+
+We want to color as many of the vertices the same color as possible; so, we look at all the vertices that are not adjacent to the red vertex and begin to color them, red starting with the one among them of highest degree. Since the only vertices that are not adjacent are both degree 2, choose either one and color it red as shown in .
+
+Now, there is only one vertex left that is not adjacent to a red; so, color it red. Of the remaining vertices, the highest degree is four; so, color one of the vertices of degree four in a different color. These two steps are shown in .
+
+Repeat the same procedure. There are three remaining vertices that are not adjacent to a blue. Color as many blue as possible, with priority going to vertices of higher degree as shown in .
+
+All the remaining vertices are adjacent to blue. So, it is time to repeat the procedure with another color as shown in .
+
+All the vertices are now colored with a three-coloring so we know the chromatic number is at most three, but we knew the chromatic number was at least three because the graph has a triangle. So, we are now certain it is exactly three.
+Coloring Graphs Part 1: Coloring and Identifying Chromatic Number
+
+Suppose the vertices of the graph in represented the nine events in the Camp Woebegone Olympics, and edges join any events that have campers in common, but nonadjacent vertices do not.
+
+Any vertices of the same color are nonadjacent; so, they have no conflicts. Since this graph is a three-coloring, all nine events could be scheduled in just three timeslots!
+
+Understanding Chromatic Numbers
+
+In , we discussed a high school, which holds end-of-course exams in (E3) English 3, (E4) English 4, (M) Advanced Math, (C) Calculus, (W) World History, (U) U.S. History, (B) Biology, and (P) Physics. We were given a list of courses that had no students in common. We used that information to find the graph in , which shows edges between exams with students in common. Use the graph we found in to answer each question.
+
+The graph contains a clique of size 4 formed by the vertices P, E3, C, and U. What does this tell you about the chromatic number?
+
+The graph is not planar, meaning that you cannot untangle it. What does this tell you about the chromatic number?
+
+Create a coloring by coloring vertex of highest degree first, coloring as many other vertices as possible each color from highest to lowest degree, then repeating this process for the remaining vertices.
+
+Do you know what the minimum number of timeslots is? If so, what is it and how do you know? If not, what are the possibilities?
+
+We would need four different colors just for the clique with four vertices; so, the chromatic number is at least four.
+
+It is possible for the chromatic number to be greater than four.
+
+The process is shown in .
+
+ This is the original graph. Vertex B has highest degree.
+ Color vertex B. Vertex E3 is the only remaining vertex that is NOT adjacent to B.
+ Color vertex E3 the same color. Vertices P, U, W, and C are the remaining vertices with highest degree. Pick one to color.
+
+ Color vertex P a new color. Vertices E4 and M are NOT adjacent to P, and M has higher degree.
+ Color vertex M the same color. Vertex E4 is the only remaining vertex NOT adjacent to P or M.
+ Color vertex E4 the same color. Vertices U, W, and C are the remaining vertices with highest degree. Pick one to color.
+
+ Color U a new color. Vertex W is the only remaining vertex NOT adjacent to U.
+ Color vertex W the same color. Vertex C is the only remaining vertex that has NOT been colored.
+ Color vertex C a new color. The coloring is final. We used four colors.
+
+ Coloring the Graph
+ 
+ The last graph in is the final coloring.
+
+This is the original graph. Vertex B has highest degree.
+Color vertex B. Vertex E3 is the only remaining vertex that is NOT adjacent to B.
+Color vertex E3 the same color. Vertices P, U, W, and C are the remaining vertices with highest degree. Pick one to color.
+Color vertex P a new color. Vertices E4 and M are NOT adjacent to P, and M has higher degree.
+Color vertex M the same color. Vertex E4 is the only remaining vertex NOT adjacent to P or M.
+Color vertex E4 the same color. Vertices U, W, and C are the remaining vertices with highest degree. Pick one to color.
+Color U a new color. Vertex W is the only remaining vertex NOT adjacent to U.
+Color vertex W the same color. Vertex C is the only remaining vertex that has NOT been colored.
+Color vertex C a new color. The coloring is final. We used four colors.
+The last graph in is the final coloring.
+
+Yes, the minimum number of times slots is the chromatic number. We knew the chromatic number had to be at least four because there was a clique with four vertices. Now we have found a four-coloring of the graph which tells us that the chromatic number is at most four. So, we know four must be the chromatic number.
+The procedure used in Example 22 to color the graph is not guaranteed to result in a graph that has the minimum number of colors possible, but it is usually results in a coloring that is close to the chromatic number.
+
+The Four Color Problem
+
+The idea of coloring graphs to solve problems was inspired by one of the most famous problems in mathematics, the “four color problem.” The idea was that, no matter how complicated a map might be, only four colors were needed to color the map so that no two regions that shared a boundary would be the same color. For many years, everyone suspected this to be true, because no one could create a map that needed more than four colors, but they couldn’t prove it was true in general. Finally, graphs were used to solve the problem!
+The Four Color Map Theorem – Numberphile
+
+We saw how maps can be represented as graphs in Graph Basics. from shows a map of the midwestern region of the United States.
+shows how this map can be associated with a graph in which each vertex represents a state and each edge indicates the states that share a common boundary. shows the final graph.
+
+Notice that the graph representing the common boundaries between midwestern states is planar, meaning that it can be drawn on a flat surface without edges crossing. As we have seen, any planar graph has a chromatic number of four or less. This very well-known fact is called the Four-Color Theorem, or Four-Color Map Theorem.
+Coloring Graphs Part 2: Coloring Maps and the Four Color Problem
+
+Four-Color Theorem
+
+In the 19th century, Francis Guthrie was coloring a map of British counties and noticed that he could color so that no two adjacent counties were the same color using only four colors. This seemed to be the case for other maps as well, but he could not figure out why. He shared this with his brother, Frederick, who subsequently took the problem to his professor, August De Morgan, one of the most famous mathematicians of all time. De Morgan never was able to solve the problem, but he shared it with his colleagues. The problem continued to intrigue and perplex mathematicians for over a hundred years, inspiring discoveries in several areas of mathematics. It was finally proven by Kenneth Appel and Wolfgang Haken from the University of Illinois in 1976 using a combination of computer-aided calculations and graph theory. This was the first time in history that a mathematical theorem was proven using a computer! (Jesus Najera, “The Four-Color Theorem,” Cantor’s Paradise, a Medium publication, October 22, 2019)
+
+Using Four Colors or Fewer to Color a Graph
+
+Find a coloring of the graph in , which uses four colors or fewer. Use the resulting coloring as a guide to recolor the map in . How many colors did you use? Does this support the conclusion of the Four-Color Theorem? If so, how?
+
+The steps to color the graph are shown in .
+Step 1: Graph with degrees of vertices labeled.
+
+Vertex IA has highest degree.
+Step 2: Color vertex IA any color.
+
+Vertices ND, KS, MI, OH, and IN are NOT adjacent to IA.
+
+MI and IN have highest degree, 3.
+Step 3: Color either MI or IN the same color as IA.
+
+Vertex ND and KS are the only remaining vertices not adjacent to a red vertex.
+
+They both have degree 2.
+Step 5: Choose one of the vertices of degree 4, SD, to color with a new color, blue. The vertices WI, IL, MO, IN,and OH are NOT adjacent to blue.
+
+WI, IL, and MO have the highest degree.
+Step 6: Choose one of WI, IL, or MO to color.
+
+We color WI blue.
+
+MO, IN and OH are NOT adjacent to blue.
+
+MO has the highest degree of these.
+Step 7: Color MO blue. All remaining vertices are adjacent to blue.
+
+Choose a new color. Four vertices remain, MN, NE, IL, and OH. MN, NE, and IL have the highest degree.
+Step 8: Since MN, IL, and NE are not adjacent, save steps and color all three the new color, purple.
+
+Vertex OH is the only remaining vertex that has NOT been colored.
+Step 9: Since vertex OH is not adjacent to purple, color it purple.
+
+This is the final graph.
+
+We used three colors.
+
+The final graph in shows how we would color the map. In we have colored the map to correspond to the colors on the graph.
+
+We used three colors to color the graph. This supports the Four-Color Theorem, because the graph is planar and its chromatic number is less than four.
+
+Coloring A Möbius Strip
+
+Have you ever heard of a möbius strip? It is a flat object with only one side. This might sound theoretical, but you can make one for yourself. Take a narrow strip of paper, make a half twist in it, and tape the ends together. To prove to yourself that it has only one side, pick a point anywhere on the paper and start drawing a line. You can draw the line continuously without lifting your pen from the paper and eventually, you will get back to the point at which you started. Since you never had to flip over the paper, you have just proved it has one side!
+
+Now, you might be wondering what this has to do with Graph Theory. It turns out that a map drawn on a möbius strip cannot necessarily be drawn using four colors. This doesn’t contradict the Four-Color Theorem, which only applies to graphs that are planar. A möbius strip does not live on a “plane,” or flat surface, which means the maps are not always planar like those drawn on a flat piece of paper. In the case of a möbius strip, it is the Six-Color Map Theorem! is an example of a möbius strip with a map that requires five colors.
+Neil deGrasse Tyson Explains the Möbius Strip
+
+Check Your Understanding
+
+Key Terms
+
+walk (directed walk)
+
+trail (directed trail)
+
+path (directed path)
+
+closed
+
+open
+
+closed walk
+
+circuit (closed trail)
+
+directed cycle (closed path)
+
+coloring (graph coloring)
+n-coloring
+
+chromatic number
+
+Key Concepts
+
+Walks, trails, and paths are ways to navigate through a graph using a sequence of connected vertices and edges.
+
+Closed walks, circuits, and directed cycles are ways to navigate from a vertex on a graph and return to the same vertex.
+
+Colorings are a way to organize the vertices of a graph into groups so that no two members of a group are adjacent.
+
+Maps can be represented with planar graphs, which can always be colored using four colors or fewer.
+
+Videos
+Walks, Trails, and Paths in Graph Theory
+Closed Walks, Closed Trails (Circuits), and Closed Paths (Directed Cycles) in Graph Theory
+Coloring Graphs Part 1: Coloring and Identifying Chromatic Number
+The Four Color Map Theorem – Numberphile
+Coloring Graphs Part 2: Coloring Maps and the Four Color Problem
+Neil deGrasse Tyson Explains the Möbius Strip

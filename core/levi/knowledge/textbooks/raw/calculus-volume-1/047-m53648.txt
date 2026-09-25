@@ -1,0 +1,402 @@
+# m53648
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Physical Applications
+
+Physical Applications
+
+Determine the mass of a one-dimensional object from its linear density function.
+
+Determine the mass of a two-dimensional circular object from its radial density function.
+
+Calculate the work done by a variable force acting along a line.
+
+Calculate the work done in pumping a liquid from one height to another.
+
+Find the hydrostatic force against a submerged vertical plate.
+
+In this section, we examine some physical applications of integration. Let’s begin with a look at calculating mass from a density function. We then turn our attention to work, and close the section with a study of hydrostatic force.
+
+Mass and Density
+
+We can use integration to develop a formula for calculating mass based on a density function. First we consider a thin rod or wire. Orient the rod so it aligns with the x-axis, with the left end of the rod at x=a and the right end of the rod at x=b (). Note that although we depict the rod with some thickness in the figures, for mathematical purposes we assume the rod is thin enough to be treated as a one-dimensional object.
+
+If the rod has constant density ρ, given in terms of mass per unit length, then the mass of the rod is just the product of the density and the length of the rod: (b−a)ρ. If the density of the rod is not constant, however, the problem becomes a little more challenging. When the density of the rod varies from point to point, we use a linear density function, ρ(x), to denote the density of the rod at any point, x. Let ρ(x) be an integrable linear density function. Now, for i=0,1,2,…,n let P={xi} be a regular partition of the interval [a,b], and for i=1,2,…,n choose an arbitrary point xi*∈[xi−1,xi]. shows a representative segment of the rod.
+
+The mass mi of the segment of the rod from xi−1 to xi is approximated by
+
+Adding the masses of all the segments gives us an approximation for the mass of the entire rod:
+
+This is a Riemann sum. Taking the limit as n→∞, we get an expression for the exact mass of the rod:
+
+We state this result in the following theorem.
+
+Mass–Density Formula of a One-Dimensional Object
+
+Given a thin rod oriented along the x-axis over the interval [a,b], let ρ(x) denote a linear density function giving the density of the rod at a point x in the interval. Then the mass of the rod is given by
+
+We apply this theorem in the next example.
+
+Calculating Mass from Linear Density
+
+Consider a thin rod oriented on the x-axis over the interval [π/2,π]. If the density of the rod is given by ρ(x)=sinx, what is the mass of the rod?
+
+Applying directly, we have
+
+Consider a thin rod oriented on the x-axis over the interval [1,3]. If the density of the rod is given by ρ(x)=2x2+3, what is the mass of the rod?
+70/3
+
+Hint
+
+Use the process from the previous example.
+
+We now extend this concept to find the mass of a two-dimensional disk of radius r. As with the rod we looked at in the one-dimensional case, here we assume the disk is thin enough that, for mathematical purposes, we can treat it as a two-dimensional object. We assume the density is given in terms of mass per unit area (called area density), and further assume the density varies only along the disk’s radius (called radial density). We orient the disk in the xy-plane, with the center at the origin. Then, the density of the disk can be treated as a function of x, denoted ρ(x). We assume ρ(x) is integrable. Because density is a function of x, we partition the interval from [0,r] along the x-axis. For i=0,1,2,…,n, let P={xi} be a regular partition of the interval [0,r], and for i=1,2,…,n, choose an arbitrary point xi*∈[xi−1,xi]. Now, use the partition to break up the disk into thin (two-dimensional) washers. A disk and a representative washer are depicted in the following figure.
+
+We now approximate the density and area of the washer to calculate an approximate mass, mi. Note that the area of the washer is given by
+
+You may recall that we had an expression similar to this when we were computing volumes by shells. As we did there, we use xi*≈(xi+xi−1)/2 to approximate the average radius of the washer. We obtain
+
+Using ρ(xi*) to approximate the density of the washer, we approximate the mass of the washer by
+
+Adding up the masses of the washers, we see the mass m of the entire disk is approximated by
+
+We again recognize this as a Riemann sum, and take the limit as n→∞. This gives us
+
+We summarize these findings in the following theorem.
+
+Mass–Density Formula of a Circular Object
+
+Let ρ(x) be an integrable function representing the radial density of a disk of radius r. Then the mass of the disk is given by
+
+Calculating Mass from Radial Density
+
+Let ρ(x)=x represent the radial density of a disk. Calculate the mass of a disk of radius 4.
+
+Applying the formula, we find
+
+Let ρ(x)=3x+2 represent the radial density of a disk. Calculate the mass of a disk of radius 2.
+24π
+
+Hint
+
+Use the process from the previous example.
+
+Work Done by a Force
+
+We now consider work. In physics, work is related to force, which is often intuitively defined as a push or pull on an object. When a force moves an object, we say the force does work on the object. In other words, work can be thought of as the amount of energy it takes to move an object. According to physics, when we have a constant force, work can be expressed as the product of force and distance.
+
+In the English system, the unit of force is the pound and the unit of distance is the foot, so work is given in foot-pounds. In the metric system, kilograms and meters are used. One newton is the force needed to accelerate 1 kilogram of mass at the rate of 1 m/sec2. Thus, the most common unit of work is the newton-meter. This same unit is also called the joule. Both are defined as kilograms times meters squared over seconds squared (kg·m2/s2).
+
+When we have a constant force, things are pretty easy. It is rare, however, for a force to be constant. The work done to compress (or elongate) a spring, for example, varies depending on how far the spring has already been compressed (or stretched). We look at springs in more detail later in this section.
+
+Suppose we have a variable force F(x) that moves an object in a positive direction along the x-axis from point a to point b. To calculate the work done, we partition the interval [a,b] and estimate the work done over each subinterval. So, for i=0,1,2,…,n, let P={xi} be a regular partition of the interval [a,b], and for i=1,2,…,n, choose an arbitrary point xi*∈[xi−1,xi]. To calculate the work done to move an object from point xi−1 to point xi, we assume the force is roughly constant over the interval, and use F(xi*) to approximate the force. The work done over the interval [xi−1,xi], then, is given by
+
+Therefore, the work done over the interval [a,b] is approximately
+
+Taking the limit of this expression as n→∞ gives us the exact value for work:
+
+Thus, we can define work as follows.
+
+Definition
+
+If a variable force F(x) moves an object in a positive direction along the x-axis from point a to point b, then the work done on the object is
+
+Note that if F is constant, the integral evaluates to F·(b−a)=F·d, which is the formula we stated at the beginning of this section.
+
+Now let’s look at the specific example of the work done to compress or elongate a spring. Consider a block attached to a horizontal spring. The block moves back and forth as the spring stretches and compresses. Although in the real world we would have to account for the force of friction between the block and the surface on which it is resting, we ignore friction here and assume the block is resting on a frictionless surface. When the spring is at its natural length (at rest), the system is said to be at equilibrium. In this state, the spring is neither elongated nor compressed, and in this equilibrium position the block does not move until some force is introduced. We orient the system such that x=0 corresponds to the equilibrium position (see the following figure).
+
+According to Hooke’s law, the force required to compress or stretch a spring from an equilibrium position is given by F(x)=kx, for some constant k. The value of k depends on the physical characteristics of the spring. The constant k is called the spring constant and is always positive. We can use this information to calculate the work done to compress or elongate a spring, as shown in the following example.
+
+The Work Required to Stretch or Compress a Spring
+
+Suppose it takes a force of 10 N (in the negative direction) to compress a spring 0.2 m from the equilibrium position. How much work is done to stretch the spring 0.5 m from the equilibrium position?
+
+First find the spring constant, k. When x=−0.2, we know F(x)=−10, so
+
+and F(x)=50x. Then, to calculate work, we integrate the force function, obtaining
+
+The work done to stretch the spring is 6.25 J.
+
+Suppose it takes a force of 8 lb to stretch a spring 6 in. from the equilibrium position. How much work is done to stretch the spring 1 ft from the equilibrium position?
+8 ft-lb
+
+Hint
+
+Use the process from the previous example. Be careful with units.
+
+Work Done in Pumping
+
+Consider the work done to pump water (or some other liquid) out of a tank. Pumping problems are a little more complicated than spring problems because many of the calculations depend on the shape and size of the tank. In addition, instead of being concerned about the work done to move a single mass, we are looking at the work done to move a volume of water, and it takes more work to move the water from the bottom of the tank than it does to move the water from the top of the tank.
+
+We examine the process in the context of a cylindrical tank, then look at a couple of examples using tanks of different shapes. Assume a cylindrical tank of radius 4 m and height 10 m is filled to a depth of 8 m. How much work does it take to pump all the water over the top edge of the tank?
+
+The first thing we need to do is define a frame of reference. We let x represent the vertical distance below the top of the tank. That is, we orient the x-axis vertically, with the origin at the top of the tank and the downward direction being positive (see the following figure).
+
+Using this coordinate system, the water extends from x=2 to x=10. Therefore, we partition the interval [2,10] and look at the work required to lift each individual “layer” of water. So, for i=0,1,2,…,n, let P={xi} be a regular partition of the interval [2,10], and for i=1,2,…,n, choose an arbitrary point xi*∈[xi−1,xi]. shows a representative layer.
+
+In pumping problems, the force required to lift the water to the top of the tank is the force required to overcome gravity, so it is equal to the weight of the water. Given that the weight-density of water is 9800 N/m3, or 62.4 lb/ft3, calculating the volume of each layer gives us the weight. In this case, we have
+
+Then, the force needed to lift each layer is
+
+Note that this step becomes a little more difficult if we have a noncylindrical tank. We look at a noncylindrical tank in the next example.
+
+We also need to know the distance the water must be lifted. Based on our choice of coordinate systems, we can use xi* as an approximation of the distance the layer must be lifted. Then the work to lift the ith layer of water Wi is approximately
+
+Adding the work for each layer, we see the approximate work to empty the tank is given by
+
+This is a Riemann sum, so taking the limit as n→∞, we get
+
+The work required to empty the tank is approximately 23,650,000 J.
+
+For pumping problems, the calculations vary depending on the shape of the tank or container. The following problem-solving strategy lays out a step-by-step process for solving pumping problems.
+
+Problem-Solving Strategy: Solving Pumping Problems
+
+Sketch a picture of the tank and select an appropriate frame of reference.
+
+Calculate the volume of a representative layer of water.
+
+Multiply the volume by the weight-density of water to get the force.
+
+Calculate the distance the layer of water must be lifted.
+
+Multiply the force and distance to get an estimate of the work needed to lift the layer of water.
+
+Sum the work required to lift all the layers. This expression is an estimate of the work required to pump out the desired amount of water, and it is in the form of a Riemann sum.
+
+Take the limit as n→∞ and evaluate the resulting integral to get the exact work required to pump out the desired amount of water.
+
+We now apply this problem-solving strategy in an example with a noncylindrical tank.
+
+A Pumping Problem with a Noncylindrical Tank
+
+Assume a tank in the shape of an inverted cone, with height 12 ft and base radius 4 ft. The tank is full to start with, and water is pumped over the upper edge of the tank until the height of the water remaining in the tank is 4 ft. How much work is required to pump out that amount of water?
+
+The tank is depicted in . As we did in the example with the cylindrical tank, we orient the x-axis vertically, with the origin at the top of the tank and the downward direction being positive (step 1).
+
+The tank starts out full and ends with 4 ft of water left, so, based on our chosen frame of reference, we need to partition the interval [0,8]. Then, for i=0,1,2,…,n, let P={xi} be a regular partition of the interval [0,8], and for i=1,2,…,n, choose an arbitrary point xi*∈[xi−1,xi]. We can approximate the volume of a layer by using a disk, then use similar triangles to find the radius of the disk (see the following figure).
+
+From properties of similar triangles, we have
+
+Then the volume of the disk is
+
+The weight-density of water is 62.4 lb/ft3, so the force needed to lift each layer is approximately
+
+Based on the diagram, the distance the water must be lifted is approximately xi* feet (step 4), so the approximate work needed to lift the layer is
+
+Summing the work required to lift all the layers, we get an approximate value of the total work:
+
+Taking the limit as n→∞, we obtain
+
+It takes approximately 33,450 ft-lb of work to empty the tank to the desired level.
+
+A tank is in the shape of an inverted cone, with height 10 ft and base radius 6 ft. The tank is filled to a depth of 8 ft to start with, and water is pumped over the upper edge of the tank until 3 ft of water remain in the tank. How much work is required to pump out that amount of water?
+
+Approximately 43,255.2 ft-lb
+
+Hint
+
+Use the process from the previous example.
+
+Hydrostatic Force and Pressure
+
+In this last section, we look at the force and pressure exerted on an object submerged in a liquid. In the English system, force is measured in pounds. In the metric system, it is measured in newtons. Pressure is force per unit area, so in the English system we have pounds per square foot (or, perhaps more commonly, pounds per square inch, denoted psi). In the metric system we have newtons per square meter, also called pascals.
+
+Let’s begin with the simple case of a plate of area A submerged horizontally in water at a depth s (). Then, the force exerted on the plate is simply the weight of the water above it, which is given by F=ρAs, where ρ is the weight density of water (weight per unit volume). To find the hydrostatic pressure—that is, the pressure exerted by water on a submerged object—we divide the force by the area. So the pressure is p=F/A=ρs.
+
+By Pascal’s principle, the pressure at a given depth is the same in all directions, so it does not matter if the plate is submerged horizontally or vertically. So, as long as we know the depth, we know the pressure. We can apply Pascal’s principle to find the force exerted on surfaces, such as dams, that are oriented vertically. We cannot apply the formula F=ρAs directly, because the depth varies from point to point on a vertically oriented surface. So, as we have done many times before, we form a partition, a Riemann sum, and, ultimately, a definite integral to calculate the force.
+
+Suppose a thin plate is submerged in water. We choose our frame of reference such that the x-axis is oriented vertically, with the downward direction being positive, and point x=0 corresponding to a logical reference point. Let s(x) denote the depth at point x. Note we often let x=0 correspond to the surface of the water. In this case, depth at any point is simply given by s(x)=x. However, in some cases we may want to select a different reference point for x=0, so we proceed with the development in the more general case. Last, let w(x) denote the width of the plate at the point x.
+
+Assume the top edge of the plate is at point x=a and the bottom edge of the plate is at point x=b. Then, for i=0,1,2,…,n, let P={xi} be a regular partition of the interval [a,b], and for i=1,2,…,n, choose an arbitrary point xi*∈[xi−1,xi]. The partition divides the plate into several thin, rectangular strips (see the following figure).
+
+Let’s now estimate the force on a representative strip. If the strip is thin enough, we can treat it as if it is at a constant depth, s(xi*). We then have
+
+Adding the forces, we get an estimate for the force on the plate:
+
+This is a Riemann sum, so taking the limit gives us the exact force. We obtain
+
+Evaluating this integral gives us the force on the plate. We summarize this in the following problem-solving strategy.
+
+Problem-Solving Strategy: Finding Hydrostatic Force
+
+Sketch a picture and select an appropriate frame of reference. (Note that if we select a frame of reference other than the one used earlier, we may have to adjust accordingly.)
+
+Determine the depth and width functions, s(x) and w(x).
+
+Determine the weight-density of whatever liquid with which you are working. The weight-density of water is 62.4 lb/ft3, or 9800 N/m3.
+
+Use the equation to calculate the total force.
+
+Finding Hydrostatic Force
+
+A water trough 15 ft long has ends shaped like inverted isosceles triangles, with base 8 ft and height 3 ft. Find the force on one end of the trough if the trough is full of water.
+shows the trough and a more detailed view of one end.
+
+Select a frame of reference with the x-axis oriented vertically and the downward direction being positive. Select the top of the trough as the point corresponding to x=0 (step 1). The depth function, then, is s(x)=x. Using similar triangles, we see that w(x)=8−(8/3)x (step 2). Now, the weight density of water is 62.4 lb/ft3 (step 3), so applying , we obtain
+
+The water exerts a force of 748.8 lb on the end of the trough (step 4).
+
+A water trough 12 m long has ends shaped like inverted isosceles triangles, with base 6 m and height 4 m. Find the force on one end of the trough if the trough is full of water.
+156,800 N
+
+Hint
+
+Follow the problem-solving strategy and the process from the previous example.
+
+Chapter Opener: Finding Hydrostatic Force
+
+We now return our attention to the Hoover Dam, mentioned at the beginning of this chapter. The actual dam is arched, rather than flat, but we are going to make some simplifying assumptions to help us with the calculations. Assume the face of the Hoover Dam is shaped like an isosceles trapezoid with lower base 750 ft, upper base 1250 ft, and height 750 ft (see the following figure).
+
+When the reservoir is full, Lake Mead’s maximum depth is about 530 ft, and the surface of the lake is about 10 ft below the top of the dam (see the following figure).
+
+Find the force on the face of the dam when the reservoir is full.
+
+The southwest United States has been experiencing a drought, and the surface of Lake Mead is about 125 ft below where it would be if the reservoir were full. What is the force on the face of the dam under these circumstances?
+
+We begin by establishing a frame of reference. As usual, we choose to orient the x-axis vertically, with the downward direction being positive. This time, however, we are going to let x=0 represent the top of the dam, rather than the surface of the water. When the reservoir is full, the surface of the water is 10 ft below the top of the dam, so s(x)=x−10 (see the following figure).
+
+We first choose a frame of reference.
+
+To find the width function, we again turn to similar triangles as shown in the figure below.
+
+We use similar triangles to determine a function for the width of the dam. (a) Assumed dimensions of the dam; (b) highlighting the similar triangles.
+
+From the figure, we see that w(x)=750+2r. Using properties of similar triangles, we get r=250−(1/3)x. Thus,
+w(x)=1250−23x(step 2).
+Using a weight-density of 62.4 lb/ft3 (step 3) and applying , we get
+F=∫abρw(x)s(x)dx=∫1054062.4(1250−23x)(x−10)dx=62.4∫10540−23[x2−1885x+18750]dx=−62.4(23)[x33−1885x22+18750x]|10540≈8,832,245,000lb=4,416,122.5t.
+
+Note the change from pounds to tons (2000 lb = 1 ton) (step 4).
+
+Note the change from pounds to tons (2000 lb = 1 ton) (step 4).
+Notice that the drought changes our depth function, s(x), and our limits of integration. We have s(x)=x−135. The lower limit of integration is 135. The upper limit remains 540. Evaluating the integral, we get
+
+Notice that the drought changes our depth function, s(x), and our limits of integration. We have s(x)=x−135. The lower limit of integration is 135. The upper limit remains 540. Evaluating the integral, we get
+
+When the reservoir is at its average level, the surface of the water is about 50 ft below where it would be if the reservoir were full. What is the force on the face of the dam under these circumstances?
+
+Approximately 7,164,520,000 lb or 3,582,260 t
+
+Hint
+
+Change the depth function, s(x), and the limits of integration.
+
+To learn more about Hoover Dam, see this article published by the History Channel.
+
+Key Concepts
+
+Several physical applications of the definite integral are common in engineering and physics.
+
+Definite integrals can be used to determine the mass of an object if its density function is known.
+
+Work can also be calculated from integrating a force function, or when counteracting the force of gravity, as in a pumping problem.
+
+Definite integrals can also be used to calculate the force exerted on an object submerged in a liquid.
+
+Key Equations
+F=∫abρw(x)s(x)dx
+For the following exercises, find the work done.
+
+Find the work done when a constant force F=12 lb moves a chair from x=0.9 to x=1.1 ft.
+
+How much work is done when a person lifts a 50 lb box of comics onto a truck that is 3 ft off the ground?
+150 ft-lb
+
+What is the work done lifting a 20 kg child from the floor to a height of 2 m? (Note that a mass of1 kg weighs 9.8 N near the surface of the Earth.)
+
+Find the work done when you push a box along the floor 2 m, when you apply a constant force of F=100N.
+200J
+
+Compute the work done for a force F=12/x2 N from x=1 to x=2 m.
+
+What is the work done moving a particle from x=0 to x=1 m if the force acting on it is F=3x2 N?
+1 J
+
+For the following exercises, find the mass of the one-dimensional object.
+
+A wire that is 2 ft long (starting at x=0) and has a density function of ρ(x)=x2+2x lb/ft
+
+A car antenna that is 3 ft long (starting at x=0) and has a density function of ρ(x)=3x+2 lb/ft
+392
+
+A metal rod that is 8 in. long (starting at x=0) and has a density function of ρ(x)=e1/2x lb/in.
+
+A pencil that is 4 in. long (starting at x=2) and has a density function of ρ(x)=5/x oz/in.
+ln(243)
+
+A ruler that is 12 in. long (starting at x=5) and has a density function of ρ(x)=ln(x)+(1/2)x2 oz/in.
+
+For the following exercises, find the mass of the two-dimensional object that is centered at the origin.
+
+An oversized hockey puck of radius 2 in. with density function ρ(x)=x3−2x+5
+332π15
+
+A frisbee of radius 6 in. with density function ρ(x)=e−x
+
+A plate of radius 10 in. with density function ρ(x)=1+cos(πx)
+100π
+
+A jar lid of radius 3 in. with density function ρ(x)=ln(x+1)
+
+A disk of radius 5 cm with density function ρ(x)=3x
+20π15
+
+A 12-in. spring is stretched to 15 in. by a force of 75 lb. What is the spring constant?
+
+A spring has a natural length of 10 cm. It takes 2 J to stretch the spring to 15 cm. How much work would it take to stretch the spring from 15 cm to 20 cm?
+6 J
+
+A 1-m spring requires 10 J to stretch the spring to 1.1 m. How much work would it take to stretch the spring from 1 m to 1.2 m?
+
+A spring requires 5 J to stretch the spring from 8 cm to 12 cm, and an additional 4 J to stretch the spring from 12 cm to 14 cm. What is the natural length of the spring?
+5 cm
+
+A shock absorber is compressed 1 in. by a weight of 1 t. What is the spring constant?
+
+A force of F=20x−x3 N stretches a nonlinear spring by x meters. What work is required to stretch the spring from x=0 to x=2 m?
+36 J
+
+Find the work done by winding up a hanging cable of length 100 ft and weight-density 5 lb/ft.
+
+For the cable in the preceding exercise, how much work is done to lift the cable 50 ft?
+18,750 ft-lb
+
+For the cable in the preceding exercise, how much additional work is done by hanging a 200 lb weight at the end of the cable?
+[T] A pyramid of height 500 ft has a square base 800 ft by 800 ft. Find the area A at height h. If the rock used to build the pyramid weighs approximately w=100lb/ft3, how much work did it take to lift all the rock?
+
+Weight =323×109lb
+
+Work =43×1012ft-lb
+[T] For the pyramid in the preceding exercise, assume there were 1000 workers each working 10 hours a day, 5 days a week, 50 weeks a year. If the workers, on average, lifted 10 100 lb rocks 2 ft/hr, how long did it take to build the pyramid?
+[T] The force of gravity on a mass m is F=−((GMm)/x2) newtons. For a rocket of mass m=1000kg, compute the work to lift the rocket from x=6400 to x=6500 km. State your answers with three significant figures. (Note: G=6.67×10−11N m2/kg2 and M=6×1024kg.)
+9.71×102N m
+[T] For the rocket in the preceding exercise, find the work to lift the rocket from x=6400 to x=∞.
+[T] A rectangular dam is 40 ft high and 60 ft wide. Assume the weight density of water is 62.5 lbs/ft3. Compute the total force F on the dam when
+
+the surface of the water is at the top of the dam and
+
+the surface of the water is halfway down the dam.
+
+a. 3,000,000 lb, b. 750,000 lbs
+[T] Find the work required to pump all the water out of a cylinder that has a circular base of radius 5 ft and height 200 ft. Use the fact that the density of water is 62 lb/ft3.
+[T] Find the work required to pump all the water out of the cylinder in the preceding exercise if the cylinder is only half full.
+23.25π million ft-lb
+[T] How much work is required to pump out a swimming pool if the area of the base is 800 ft2, the water is 4 ft deep, and the top is 1 ft above the water level? Assume that the density of water is 62 lb/ft3.
+
+A cylinder of depth H and cross-sectional area A stands full of water at density ρ. Compute the work to pump all the water to the top.
+AρH22
+
+For the cylinder in the preceding exercise, compute the work to pump all the water to the top if the cylinder is only half full.
+
+A cone-shaped tank has a cross-sectional area that increases with its depth: A=(πr2h2)/H3. Show that the work to empty it is half the work for a cylinder with the same height and base.
+
+Answers may vary
+
+a density function describes how mass is distributed throughout an object; it can be a linear density, expressed in terms of mass per unit length; an area density, expressed in terms of mass per unit area; or a volume density, expressed in terms of mass per unit volume; weight-density is also used to describe weight (rather than mass) per unit volume
+this law states that the force required to compress (or elongate) a spring is proportional to the distance the spring has been compressed (or stretched) from equilibrium; in other words, F=kx, where k is a constant
+the pressure exerted by water on a submerged object
+the amount of energy it takes to move an object; in physics, when a force is constant, work is expressed as the product of force and distance

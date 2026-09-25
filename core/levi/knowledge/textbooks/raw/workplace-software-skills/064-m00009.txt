@@ -1,0 +1,87 @@
+# m00009
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Formatting and Templates in Google Sheets
+
+Formatting and Templates in Google Sheets
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Format and manipulate a cell or group of cells
+
+Design column and row header
+
+Use conditional formatting
+
+Work with templates to format worksheets
+
+Google Sheets has the same formatting features that Microsoft Excel does. The cell formatting of fonts and shading of cells is part of everyday use when making headers. Text wrapping is also a feature in Sheets. Like Excel, there are numerous Sheets templates available online and within the application. All of these features make Sheets a valuable spreadsheet application for WorldCorp.
+
+Formatting Cells
+
+Sheets has the same functionality for formatting cells as Excel does. For example, you can use contrasting color combinations to make text easier to read. The main difference in formatting cells between Sheets and Excel is the location of the tools.
+
+Using Color and Fonts
+
+The tables in have the standard blue headers we’ve been using. Starting with these tables, we will apply formatting changes. First, let’s change the font of the headers and the body of the tables. Click on the header row and choose Courier New from the Font drop-down box (a). Next, change the color of the font. Since the headers are still selected after the font change, go to the action bar and click on the Text color command. Select dark orange (last option in the third column from the left) as the text color. You can then change the background color to a lighter blue using the Fill color command on the action bar (b). In this case, changing the color of the background or the color of the font can make the column headers stand out more and is more visually appealing.
+
+Borders
+
+The Borders command lets users modify the borders on each cell. Using the same table, let’s change the thickness of the borders around the headers to differentiate them from the body. You will also add an outside border for the body of the table. First, select the headers and click on the Borders command on the action bar, then click on the Border style drop-down menu and select the third thickest (a). To apply the thicker border, click on the command for All borders (b).
+
+For the border around the table body, repeat the same first step, selecting the third thickest. Then, instead of applying it to all borders, choose the Outer borders option ().
+
+Wrapping Text
+
+You may have noticed that because you changed the font, the header in column C does not fit the width of the column. This is easily fixed by using the Text wrapping command on the action bar. First, select cell C2, then click the Text wrapping command, and select the middle command for Wrap (a). Now all of the text is visible, as seen in b. If the text is still a little tight, widen the column slightly by hovering over the edge of the column until the cursor changes to a double arrow, then drag the edge of the column to the right to accommodate the text.
+
+Merging Cells
+
+As with Excel, Sheets allows cell merging. This enables information to be grouped to make it more readable for the user. For example, the Merge cells command could group sales agents by region. To use this function, first select the cells you would like to merge. Then, use the Merge cells tool in the action bar, as shown in . You have several options with the tool: Merge all, Merge vertically (working with rows), Merge horizontally (working with columns), and Unmerge.
+
+Designing Column and Row Headers
+
+You have learned how to change the font, font color, background color, and width for header styling. Header text can be bolded and centered to make them easier to read, and background colors can be applied and changed. shows the formatting applied to cell B2 in the header. The font is bold and the text is centered.
+
+Freezing Columns and Rows
+
+Freezing columns and rows is useful when the data in your sheet does not fit the available viewing space. In Sheets, you can freeze panes anywhere in the worksheet, but it’s certainly most useful to freeze column and row headers. First, select the row that you want to freeze, then select Freeze from the View menu and choose Up to current row. Sheets freezes that row and all rows above it, as shown in .
+
+Hiding Columns and Rows
+
+Sheets also supports hiding columns and rows. Select the row or column you want to hide. Right-click and then click on Hide row or Hide column (a). To unhide it, select the two on either side of the hidden row or column, right-click and click on Unhide rows or Unhide columns (b), or click on one of the two small arrows in the header.
+
+Conditional Formatting
+
+Conditional formatting allows us to apply preset formatting to data that meets certain criteria. You can find the conditional formatting feature in Sheets on the Format menu (). First, select the cells to format, and then choose the conditional formatting feature. A sidebar opens where you can set up the conditional formatting. In this example, the conditions are set so that Sheets will highlight in the default color any cells in the range G2:G11 that have values greater than 999. The table updates instantly ().
+
+Working with Templates
+
+Sheets offers many templates on the Welcome screen (). If you do not find what you are looking for in this screen, you can search for other online templates, but you have to use certain criteria. You need to use the Google search engine, and type “X template site:https://docs.google.com.” For example, if you are looking for business budget reports, you would type “business budget report template site:https://docs.google.com.” Searching in this manner will give you results from other Google Docs users’ Google Drive accounts, meaning that they are sharing their templates with other users and they are available for use and not protected or restricted. This also means that the templates have been formatted for Sheets and not for Excel. In some cases, importing Excel files into Sheets can alter the formatting.
+
+When you find the one you want to use, click on it, and a little ball will appear in the middle while you wait for the document to open. You can then edit the document that was generated using the template to customize it for your needs ().
+
+It is not always easy to present data in an appealing and interesting way. Following a few simple steps and best practices in formatting Sheets can ensure you are able to get your message across, while also engaging your audience. Check out these best practices for presenting data to learn more.
+
+Summary
+
+Sheets has many of the same formatting functionalities as Excel, such as colors, fonts, borders, text wrapping, and merging cells.
+
+The formatting features allow for designing professional column and row headers. Hiding and unhiding columns or rows can simplify a worksheet to make it easier to use.
+
+Conditional formatting works the same as in Excel.
+
+Sheets contains some templates on the Welcome screen, but users of Sheets also share their own. Searching among only those publicly available templates can help you find many additional templates.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+Case Exercises

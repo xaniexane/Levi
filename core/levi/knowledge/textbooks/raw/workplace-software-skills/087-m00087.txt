@@ -1,0 +1,162 @@
+# m00087
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Creating Reports in Microsoft Access
+
+Creating Reports in Microsoft Access
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Understand why reports are useful
+
+Create and edit a report using the Report Wizard
+
+Customize a report by adding images and text
+
+Databases are useful only if they enable us to transform data into information that will be ready for use when it is needed. Although queries are helpful in extracting the data that we need and even transforming it into actionable information, most decision-makers will need more refinement, formatting, and preparation before the data is ready for use.
+
+Recall that a report is a formatted display of information designed for a specific use case or project. Reports do more than summarize information; they also create the foundation for making sound decisions. When we combine queries with formatting, we create reports that we can use in our work.
+
+Using Reports in a Database
+
+Reports are a cornerstone for business decisions. We can generate reports within a database for a specific request, and we can also set up reports to provide summaries and information that we will need on an ongoing basis. Access enables us to set up reports (e.g., a financial, sales, or summary report) that we can then access as necessary for decision-making. Companies routinely run reports on key performance indicators (KPIs) that show an organization’s effectiveness, efficiency, quality, economics, project performance, resource use, and personnel and workforce performance. Companies also routinely look at revenue, profit, and customer and employee satisfaction. Because tables filled with data do not adequately describe KPIs, businesses rely on reports as part of their evidence-based decision-making.
+
+Tables are extremely efficient ways of storing data, and using a relational database with connections across tables is an effective way of building information storage. Unfortunately, however, tables do not display information in ways that people easily understand. We can manage this by creating reports—formatted, attractive displays of information. Reports use combinations of labels, values, and even graphics to present the results of a query in a way that supports action. Once designed, a report can easily be reused or copied and revised. Like other objects such as queries and forms, reports will show the most up-to-date information each time the database changes. Among the many reasons to generate reports are the need to create summary reports, to save snapshots of data, and to provide detail about specific customers or products.
+
+Consider this example. Anna, an analyst in the sales and marketing group at WorldCorp, has been asked to get data ready for a meeting with sales representatives. The meeting will focus on products that are on hold, and the representatives will need to identify wholesale companies that may be interested in these products. Anna begins by determining what the sales representatives will need for the meeting and the level of detail they will want to have available for decision-making. She then looks at the available data and decides how to create the report. Anna’s final report includes two sets of information—the list of on-hold products and the list of wholesalers who have shown an interest in those products. Therefore, she creates two versions of the report:
+
+List of on-hold products with a list of interested wholesalers for each product
+
+List of wholesalers with a list of on-hold products that may be of interest to each wholesaler
+
+Anna sends the final report to the person in charge of the meeting for review and comment.
+
+Tips for Effective Reports
+
+The way you design a report will depend on the data it will include, the audience that will use the report for decision-making, and the way the data will be used. Reports can be as brief as a few lines of summary text, or they can be highly detailed spreadsheets or within datasheets with many rows of records. The key to building a useful report is communication—your communication with the audience that needs the report, so you understand them, and the communication of the information to the audience so they can use it.
+
+Effective reports should utilize the headers and footers of a report and its pages to aid the reader when navigating the report. Headers and footers should contain useful information such as the report title, author, and page numbers. This makes it easier for a report reader to quickly find the information they are looking for across multiple reports.
+
+Data is only good to the extent that it is both accurate and actionable. Raw data without any use is just clutter. With this in mind, watch this video on how to make data actionable and consider how reports can summarize large amounts of data and make that data actionable.
+
+The goal of a report is to eliminate as many individual lines of information as possible and to simplify information through summary wherever you can. In general, consider the following when preparing effective reports:
+
+Minimize line-by-line data
+
+Use labels to explain the data that is shown on the report
+
+Use formatting to designate titles and other labels
+
+Incorporate white space to ensure readability
+
+Test with possible audience members to be sure the report makes sense to the final audience
+
+Focus on answering specific business questions generated by the person or people who request the report
+
+Organizing a Report
+
+A report can be flat, with one record per line, or you can use grouping to further organize the data. When designing a report, think about organizing your data as follows:
+
+Sorting to order your data by an important field (e.g., Name), when you are discussing customers or sales region
+
+Grouping records based on a field, such as active versus inactive products, regions that met specific targets versus those that are lagging in meeting goals, or geographical area
+
+Totaling groups of data, such as sales figures, to show both the detailed figures (e.g., an individual salesperson’s sales figures) and the figures for the overall region
+
+Access will allow you to quickly add and preview sorting, groups, and totals to ensure the report communicates what you need it to for the audience you are working with.
+
+Creating and Editing Reports with the Report Wizard
+
+WorldCorp is interested in creating a summary of their recent sales data for their latest product line. The report should include useful information such as which products have the highest total sales, which products have the highest net profit, and which customers are purchasing the most products. WorldCorp could create this report from a blank canvas, but it would be much easier to generate a report using the Report Wizard. This is a small program that will walk you through the steps of setting up a report, which you can then modify to meet your needs.
+
+Using the Report Wizard is usually an efficient and easy way to start a report. Most reports will need some form of customization, but the Wizard will provide a good starting point and will save steps by adding fields that are bound to the database.
+
+Creating a Report
+
+To start a report with the Report Wizard, click on the Create menu in the ribbon and then choose the Report Wizard command from the reports section. The Wizard will walk you through each question before creating your report.
+
+Step 1: In step 1 (), you can set the table(s) and/or queries you want to work on within the report. This gives you flexibility, as you can use data from more than one table or query in your work. (Hint: Consider setting up a query for your report before starting the report. This will enable you to check the data before setting it up for display.) Once you have chosen and added tables, queries, and fields to the report (use the >> button to move fields to the selection box), click Next to move to the next screen in the Wizard.
+
+Step 2: In step 2 (), you can choose grouping for your report. (Skip this step if grouping does not make sense for your report.) A group is a heading that organizes data with something in common. For example, you might group data based on the region a customer is assigned to. When used as a group, all customers belonging to a specific region will appear together. Once you set up grouping, you can click Next to continue.
+
+Step 3: Step 3 of the Report Wizard asks how you want to sort your records, as shows. Access allows you to sort by up to four fields in the designated order. For example, to create a report that fits the needs of your audience, you may want to sort a set of records by sales region in alphabetical order and then sort further by product ID. Once you set up sorting, you can move to the next step in the Wizard.
+
+Step 4: After you have set the sort order, the Wizard will ask you to choose the layout for your report (). You can also set the orientation and ask Access to adjust all fields to make sure they fit on a page.
+
+Step 5: The final step in the Wizard allows you to set a unique title for your report and then choose whether you want to provide the results or go into design to modify the report (). Usually, viewing the report will be useful, as it will show you what you want to change. When you are done, click Finish to continue the work.
+
+Reviewing a Report
+
+When you double-click on a report in the navigation area, the report will open with current data displayed. Let’s look at a simple report in : a listing of all product categories.
+
+This report, named ProductCategoryList, was created quickly by clicking on Create and then Report.
+
+The title at the top of the report shows the date the report was run, followed by two columns that list the product category ID and the description. This report is set up by Access and has not been modified. In Design View (), this report appears differently, with the design and grid available for modification. This report is usable as is but taking a few minutes to customize it will make it more useful for your audience.
+
+In Design View, the report header appears on the first page and includes the title and dates of the report. This is followed by the page header which appears on each page and includes information useful to the report user, such as page number or report author. The report detail is the area where data from the database is displayed for each record. Each record will show the product category ID and description. The report has a page footer, which displays useful information, such as the page number, and appears on each page. The report footer shares the number of pages in the entire report. As you build reports, you will likely switch back and forth between the Report View and Design View to change elements such as spacing and formatting so that your report is useful for your audience.
+
+Personal and company data needs to be safeguarded, and reports that summarize data related to projects and goals also need to be protected. Therefore, one of the responsibilities of anyone dealing with data and reports is data security. To this end, governments have put laws and procedures in place to guide how organizations manage data and reporting. This article on data privacy laws provides an overview of some of the laws in this area.
+
+Customizing Reports
+
+Although Access does a nice job of starting a report, you will likely want to modify reports before using them. Following are some of the changes you may want to make:
+
+Changing the size of fields (e.g., shortening them)
+
+Formatting the text of the report (e.g., by adding boldface)
+
+Shifting text boxes to lay the screen out more effectively
+
+Page Layout View
+
+Page layout view gives you a simple way to make changes to the overall appearance of a report. Changes made to a field in page layout view will be applied to all fields of the same type (e.g., if you boldface a field, all fields of the same type will also be bold). Page layout view displays live data while you make your changes, which makes decision-making easier.
+
+To enter Layout View, click on the View command on the Home tab while you have a report open on the screen. You can preview the report by changing to the report view. When you are finished working, save and close your report.
+
+Design View
+
+The Design View screen has more options for customizing your report. To switch to Design View, use the View command on the ribbon.
+
+Design View gives you a layout grid for your form and the ability to move each label and field independently, change the formatting of the text, and even change the attributes for each element on the report.
+
+A common change in Design View is modifying the size of the field on the screen. For example, you may find that Access cuts off some of the label or content in a field. You can modify the size of the field or label by clicking on the element and then using the selection handles on the left and right sides to stretch or shrink the element.
+
+You can also move elements manually by clicking and dragging them or by clicking on multiple items and using the commands on the Arrange tab on the ribbon. These commands allow you to move items up or down, arrange them together, or control how the elements are arranged on the report itself.
+
+Adding an Image or Custom Text
+
+You may want to include a logo or even a disclaimer as an image in a report. These images can add information or (as in the example of a logo) provide identification. Images typically appear at the top or bottom of a report. Remember that if you place an image in the detail section of the report, it will repeat for every line. (This is useful when you want to have each line start with a symbol or logo.)
+
+To add an image in Design View, click on the Form Layout Design tab and choose the image that you want to add. You can also add any image to the page by clicking Insert Image (see ) and then locating the image file. Again, be aware that when images are placed in the detail section of the form, they will repeat for every line. If you would like the image to appear only at the top or bottom of a page, place the image in the page header or footer.
+
+You may want to add elements that are not strictly images but display on the report (e.g., titles, dates, and times). Note that these items will be displayed on the report but will not be stored in the database; they will change each time you open the form.
+
+When you create and modify a report, Access will prompt you to name and save it. Each time you modify an existing report and close it, Access should prompt you to save it. You can save manually by right-clicking on the name of the tab in the work area and choosing the Save command.
+
+To close a report that is open in the work area, click on the X next to the tab name.
+
+Summary
+
+Reports compile and summarize data in actionable, useful formats that can be used for business decision-making. Reports update with current information each time we open them and can be modified to show only the information most useful to a reader.
+
+We can use the Report Wizard to create new reports that we can later customize.
+
+Reports can be customized to include images and custom text, like logos.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+heading that organizes data items that have something in common
+the bottom section of a document page, which typically repeats across pages and contains information useful to the report reader
+the top section of a document page, which typically repeats across pages and contains information useful to the report reader
+the area where data from the Access database is displayed for each record
+the bottom section of a report that does not typically repeat across pages and contains the name and dates of the report
+the bottom section of a report that does not typically repeat across pages and contains the number of pages in the entire report

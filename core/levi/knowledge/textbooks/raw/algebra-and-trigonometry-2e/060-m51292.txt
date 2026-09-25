@@ -1,0 +1,2753 @@
+# m51292
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Solving Trigonometric Equations
+
+Solving Trigonometric Equations
+
+Solve linear trigonometric equations in sine and cosine.
+
+Solve equations involving a single trigonometric function.
+
+Solve trigonometric equations using a calculator.
+
+Solve trigonometric equations that are quadratic in form.
+
+Solve trigonometric equations using fundamental identities.
+
+Solve trigonometric equations with multiple angles.
+
+Solve right triangle problems.
+
+Thales of Miletus (circa 625–547 BC) is known as the founder of geometry. The legend is that he calculated the height of the Great Pyramid of Giza in Egypt using the theory of similar triangles, which he developed by measuring the shadow of his staff. He reasoned that when the height of his staff's shadow was exactly equal to the actual height of the staff, then the height of the nearby pyramid's shadow must also be equal to the height of the actual pyramid. Since the structures and their shadows were creating a right triangle with two equal sides, they were similar triangles. By measuring the length of the pyramid's shadow at that moment, he could obtain the height of the pyramid. Based on proportions, this theory has applications in a number of areas, including fractal geometry, engineering, and architecture. Often, the angle of elevation and the angle of depression are found using similar triangles.
+
+In earlier sections of this chapter, we looked at trigonometric identities. Identities are true for all values in the domain of the variable. In this section, we begin our study of trigonometric equations to study real-world scenarios such as the finding the dimensions of the pyramids.
+
+Solving Linear Trigonometric Equations in Sine and Cosine
+
+Trigonometric equations are, as the name implies, equations that involve trigonometric functions. Similar in many ways to solving polynomial equations or rational equations, only specific values of the variable will be solutions, if there are solutions at all. Often we will solve a trigonometric equation over a specified interval. However, just as often, we will be asked to find all possible solutions, and as trigonometric functions are periodic, solutions are repeated within each period. In other words, trigonometric equations may have an infinite number of solutions. Additionally, like rational equations, the domain of the function must be considered before we assume that any solution is valid. The period of both the sine function and the cosine function is 
+ 
+ 2π.
+ 
+ In other words, every 
+ 
+ 2π
+ 
+ units, the y-values repeat. If we need to find all possible solutions, then we must add 
+ 
+ 2πk,
+ 
+ where 
+ 
+ k
+ 
+ is an integer, to the initial solution. Recall the rule that gives the format for stating all possible solutions for a function where the period is 
+ 
+ 2π:
+
+There are similar rules for indicating all possible solutions for the other trigonometric functions. Solving trigonometric equations requires the same techniques as solving algebraic equations. We read the equation from left to right, horizontally, like a sentence. We look for known patterns, factor, find common denominators, and substitute certain expressions with a variable to make solving a more straightforward process. However, with trigonometric equations, we also have the advantage of using the identities we developed in the previous sections.
+
+Solving a Linear Trigonometric Equation Involving the Cosine Function
+
+Find all possible exact solutions for the equation 
+ 
+ cosθ=
+ 1
+ 2
+ 
+ .
+
+From the unit circle, we know that
+
+These are the solutions in the interval 
+ 
+ [ 
+ 0,2π
+ ].
+ 
+ All possible solutions are given by
+
+where 
+ 
+ k
+ 
+ is an integer.
+
+Solving a Linear Equation Involving the Sine Function
+
+Find all possible exact solutions for the equation 
+ 
+ sint=
+ 1
+ 2
+ 
+ .
+
+Solving for all possible values of t means that solutions include angles beyond the period of 
+ 
+ 2π.
+ 
+ From , we can see that the solutions are 
+ 
+ t=
+ π
+ 6
+
+ and 
+ 
+ t=
+ 
+ 5π
+ 
+ 6
+ 
+ .
+ 
+ But the problem is asking for all possible values that solve the equation. Therefore, the answer is
+
+where 
+ 
+ k
+ 
+ is an integer.
+Given a trigonometric equation, solve using algebra.
+
+Look for a pattern that suggests an algebraic property, such as the difference of squares or a factoring opportunity.
+
+Substitute the trigonometric expression with a single variable, such as 
+ 
+ x
+ 
+ or 
+ 
+ u.
+
+Solve the equation the same way an algebraic equation would be solved.
+
+Substitute the trigonometric expression back in for the variable in the resulting expressions.
+
+Solve for the angle.
+
+Solve the Linear Trigonometric Equation
+
+Solve the equation exactly: 
+ 
+ 2cosθ−3=−5,0≤θ<2π.
+
+Use algebraic techniques to solve the equation.
+
+Solve exactly the following linear equation on the interval 
+ 
+ [0,2π):2sinx+1=0.
+x=
+ 
+ 7π
+ 
+ 6
+ 
+ ,
+ 
+ 11π
+ 
+ 6
+
+Solving Equations Involving a Single Trigonometric Function
+
+When we are given equations that involve only one of the six trigonometric functions, their solutions involve using algebraic techniques and the unit circle (see ). We need to make several considerations when the equation involves trigonometric functions other than sine and cosine. Problems involving the reciprocals of the primary trigonometric functions need to be viewed from an algebraic perspective. In other words, we will write the reciprocal function, and solve for the angles using the function. Also, an equation involving the tangent function is slightly different from one containing a sine or cosine function. First, as we know, the period of tangent is 
+ 
+ π,
+ 
+ not 
+ 2π.
+ 
+ Further, the domain of tangent is all real numbers with the exception of odd integer multiples of 
+
+ π
+ 2
+ 
+ ,
+ 
+ unless, of course, a problem places its own restrictions on the domain.
+
+Solving a Problem Involving a Single Trigonometric Function
+
+Solve the problem exactly: 
+ 
+ 2
+ 
+ sin
+ 
+ 2
+ 
+ θ−1=0,0≤θ<2π.
+
+As this problem is not easily factored, we will solve using the square root property. First, we use algebra to isolate 
+ 
+ sinθ.
+ 
+ Then we will find the angles.
+
+Solving a Trigonometric Equation Involving Cosecant
+
+Solve the following equation exactly: 
+ 
+ cscθ=−2,0≤θ<4π.
+
+We want all values of 
+ 
+ θ
+ 
+ for which 
+ 
+ cscθ=−2
+ 
+ over the interval 
+ 
+ 0≤θ<4π.
+
+Analysis
+
+As 
+ 
+ sinθ=−
+ 1
+ 2
+ 
+ ,
+ 
+ notice that all four solutions are in the third and fourth quadrants.
+
+Solving an Equation Involving Tangent
+
+Solve the equation exactly: 
+ 
+ tan(
+ 
+ θ−
+ π
+ 2
+
+ )=1,0≤θ<2π.
+
+Recall that the tangent function has a period of 
+ 
+ π.
+ 
+ On the interval 
+ 
+ [ 
+ 0,π
+ ),
+ 
+ and at the angle of 
+
+ π
+ 4
+ 
+ ,
+ 
+ the tangent has a value of 1. However, the angle we want is 
+ 
+ (
+ 
+ θ−
+ π
+ 2
+
+ ).
+ 
+ Thus, if 
+ 
+ tan(
+
+ π
+ 4
+
+ )=1,
+ 
+ then
+
+Over the interval 
+ 
+ [ 
+ 0,2π
+ ),
+ 
+ we have two solutions:
+
+Find all solutions for 
+ 
+ tanx=
+ 3
+ 
+ .
+π
+ 3
+ 
+ ±πk
+
+Identify all Solutions to the Equation Involving Tangent
+
+Identify all exact solutions to the equation 
+ 
+ 2(
+ 
+ tanx+3
+ 
+ )=5+tanx,0≤x<2π.
+
+We can solve this equation using only algebra. Isolate the expression 
+ 
+ tanx
+ 
+ on the left side of the equals sign.
+
+There are two angles on the unit circle that have a tangent value of 
+ 
+ −1: θ=
+ 
+ 3π
+ 
+ 4
+
+ and 
+ 
+ θ=
+ 
+ 7π
+ 
+ 4
+ 
+ .
+
+Solve Trigonometric Equations Using a Calculator
+
+Not all functions can be solved exactly using only the unit circle. When we must solve an equation involving an angle other than one of the special angles, we will need to use a calculator. Make sure it is set to the proper mode, either degrees or radians, depending on the criteria of the given problem.
+
+Using a Calculator to Solve a Trigonometric Equation Involving Sine
+
+Use a calculator to solve the equation 
+ 
+ sinθ=0.8,
+ 
+ where 
+ 
+ θ
+ 
+ is in radians.
+
+Make sure mode is set to radians. To find 
+ 
+ θ,
+ 
+ use the inverse sine function. On most calculators, you will need to push the 2ND button and then the SIN button to bring up the 
+
+ sin
+
+ −1
+
+ function. What is shown on the screen is 
+
+ sin
+
+ −1
+
+ (.
+ 
+ The calculator is ready for the input within the parentheses. For this problem, we enter 
+
+ sin
+
+ −1
+
+ (
+ 
+ 0.8
+ 
+ ),
+ 
+ and press ENTER. Thus, to four decimals places,
+
+The solution is
+
+The angle measurement in degrees is
+
+Analysis
+
+Note that a calculator will only return an angle in quadrants I or IV for the sine function, since that is the range of the inverse sine. The other angle is obtained by using 
+ 
+ π−θ.
+ Thus, the additional solution is ≈2.2143±2πk
+
+Using a Calculator to Solve a Trigonometric Equation Involving Secant
+
+Use a calculator to solve the equation 
+ 
+ secθ=−4,
+ 
+ giving your answer in radians.
+
+We can begin with some algebra.
+
+Check that the MODE is in radians. Now use the inverse cosine function.
+
+Since 
+
+ π
+ 2
+ 
+ ≈1.57
+ 
+ and 
+ 
+ π≈3.14,
+ 
+ 1.8235 is between these two numbers, thus 
+ 
+ θ≈1.8235
+ 
+ is in quadrant II. Cosine is also negative in quadrant III. Note that a calculator will only return an angle in quadrants I or II for the cosine function, since that is the range of the inverse cosine. See .
+
+So, we also need to find the measure of the angle in quadrant III. In quadrant II, the reference angle is 
+ 
+ θ ​​'≈π−1.8235≈1.3181.
+ 
+ The other solution in quadrant III is 
+ 
+ θ ​​'≈π+1.3181≈4.4597.
+
+The solutions are 
+ 
+ θ≈1.8235±2πk
+ 
+ and 
+ 
+ θ≈4.4597±2πk.
+
+Solve 
+ 
+ cosθ=−0.2.
+θ≈1.7722±2πk
+ 
+ and 
+ 
+ θ≈4.5110±2πk
+
+Solving Trigonometric Equations in Quadratic Form
+
+Solving a quadratic equation may be more complicated, but once again, we can use algebra as we would for any quadratic equation. Look at the pattern of the equation. Is there more than one trigonometric function in the equation, or is there only one? Which trigonometric function is squared? If there is only one function represented and one of the terms is squared, think about the standard form of a quadratic. Replace the trigonometric function with a variable such as 
+ 
+ x
+ 
+ or 
+ 
+ u.
+ 
+ If substitution makes the equation look like a quadratic equation, then we can use the same methods for solving quadratics to solve the trigonometric equations.
+
+Solving a Trigonometric Equation in Quadratic Form
+
+Solve the equation exactly: 
+
+ cos
+ 
+ 2
+ 
+ θ+3cosθ−1=0,0≤θ<2π.
+
+We begin by using substitution and replacing cos 
+ 
+ θ
+ 
+ with 
+ 
+ x.
+ 
+ It is not necessary to use substitution, but it may make the problem easier to solve visually. Let 
+ 
+ cosθ=x.
+ 
+ We have
+
+The equation cannot be factored, so we will use the quadratic formula 
+ 
+ x=
+ 
+ −b±
+
+ b
+ 2
+ 
+ −4ac
+
+ 2a
+
+ .
+
+Replace 
+ 
+ x
+ 
+ with 
+ 
+ cosθ,
+ 
+ and solve.
+
+Note that only the + sign is used. This is because we get an error when we solve 
+ 
+ θ=
+ 
+ cos
+
+ −1
+
+ (
+
+ −3−
+ 
+ 13
+
+ 2
+
+ )
+ 
+ on a calculator, since the domain of the inverse cosine function is 
+ 
+ [ 
+ −1,1
+ ].
+ 
+ However, there is a second solution:
+
+This terminal side of the angle lies in quadrant I. Since cosine is also positive in quadrant IV, the second solution is
+
+Solving a Trigonometric Equation in Quadratic Form by Factoring
+
+Solve the equation exactly: 
+ 
+ 2
+ 
+ sin
+ 
+ 2
+ 
+ θ−5sinθ+3=0,0≤θ≤2π.
+
+Using grouping, this quadratic can be factored. Either make the real substitution, 
+ 
+ sinθ=u,
+ 
+ or imagine it, as we factor:
+
+Now set each factor equal to zero.
+
+Next solve for 
+ 
+ θ:sinθ≠
+ 3
+ 2
+ 
+ ,
+ 
+ as the range of the sine function is 
+ 
+ [ 
+ −1,1
+ ].
+ 
+ However, 
+ 
+ sinθ=1,
+ 
+ giving the solution 
+ 
+ θ=
+ π
+ 2
+ 
+ .
+
+Analysis
+
+Make sure to check all solutions on the given domain as some factors have no solution.
+
+Solve 
+
+ sin
+ 
+ 2
+ 
+ θ=2cosθ+2,0≤θ≤2π.
+ 
+ [Hint: Make a substitution to express the equation only in terms of cosine.]
+cosθ=−1,θ=π
+
+Solving a Trigonometric Equation Using Algebra
+
+Solve exactly:
+
+This problem should appear familiar as it is similar to a quadratic. Let 
+ 
+ sinθ=x.
+ 
+ The equation becomes 
+ 
+ 2
+ x
+ 2
+ 
+ +x=0.
+ 
+ We begin by factoring:
+
+Set each factor equal to zero.
+
+Then, substitute back into the equation the original expression 
+ 
+ sinθ
+ 
+ for 
+ 
+ x.
+ 
+ Thus,
+
+The solutions within the domain 
+ 
+ 0≤θ<2π
+ 
+ are 
+ 
+ θ=0,π,
+ 
+ 7π
+ 
+ 6
+ 
+ ,
+ 
+ 11π
+ 
+ 6
+ 
+ .
+
+If we prefer not to substitute, we can solve the equation by following the same pattern of factoring and setting each factor equal to zero.
+
+Analysis
+
+We can see the solutions on the graph in . On the interval 
+ 
+ 0≤θ<2π,
+ 
+ the graph crosses the x-axis four times, at the solutions noted. Notice that trigonometric equations that are in quadratic form can yield up to four solutions instead of the expected two that are found with quadratic equations. In this example, each solution (angle) corresponding to a positive sine value will yield two angles that would result in that value.
+
+We can verify the solutions on the unit circle in as well.
+
+Solving a Trigonometric Equation Quadratic in Form
+
+Solve the equation quadratic in form exactly: 
+ 
+ 2
+ 
+ sin
+ 
+ 2
+ 
+ θ−3sinθ+1=0,0≤θ<2π.
+
+We can factor using grouping. Solution values of 
+ 
+ θ
+ 
+ can be found on the unit circle.
+
+Solve the quadratic equation 
+ 
+ 2
+ 
+ cos
+ 
+ 2
+ 
+ θ+cosθ=0.
+π
+ 2
+ 
+ ,
+ 
+ 2π
+ 
+ 3
+ 
+ ,
+ 
+ 4π
+ 
+ 3
+ 
+ ,
+ 
+ 3π
+ 
+ 2
+
+Solving Trigonometric Equations Using Fundamental Identities
+
+While algebra can be used to solve a number of trigonometric equations, we can also use the fundamental identities because they make solving equations simpler. Remember that the techniques we use for solving are not the same as those for verifying identities. The basic rules of algebra apply here, as opposed to rewriting one side of the identity to match the other side. In the next example, we use two identities to simplify the equation.
+
+Use Identities to Solve an Equation
+
+Use identities to solve exactly the trigonometric equation over the interval 
+ 
+ 0≤x<2π.
+
+Notice that the left side of the equation is the difference formula for cosine.
+
+From the unit circle in , we see that 
+ 
+ cosx=
+
+ 3
+
+ 2
+
+ when 
+ 
+ x=
+ π
+ 6
+ 
+ ,
+ 
+ 11π
+ 
+ 6
+ 
+ .
+
+Solving the Equation Using a Double-Angle Formula
+
+Solve the equation exactly using a double-angle formula: 
+ 
+ cos(
+ 
+ 2θ
+ 
+ )=cosθ.
+
+We have three choices of expressions to substitute for the double-angle of cosine. As it is simpler to solve for one trigonometric function at a time, we will choose the double-angle identity involving only cosine:
+
+So, if 
+ 
+ cosθ=−
+ 1
+ 2
+ 
+ ,
+ 
+ then 
+ 
+ θ=
+ 
+ 2π
+ 
+ 3
+ 
+ ±2πk
+ 
+ and 
+ 
+ θ=
+ 
+ 4π
+ 
+ 3
+ 
+ ±2πk;
+ 
+ if 
+ 
+ cosθ=1,
+ 
+ then 
+ 
+ θ=0±2πk.
+
+Solving an Equation Using an Identity
+
+Solve the equation exactly using an identity: 
+ 
+ 3cosθ+3=2
+ 
+ sin
+ 
+ 2
+ 
+ θ,0≤θ<2π.
+
+If we rewrite the right side, we can write the equation in terms of cosine:
+
+Our solutions are 
+ 
+ θ=
+ 
+ 2π
+ 
+ 3
+ 
+ ,
+ 
+ 4π
+ 
+ 3
+ 
+ ,π.
+
+Solving Trigonometric Equations with Multiple Angles
+
+Sometimes it is not possible to solve a trigonometric equation with identities that have a multiple angle, such as 
+ 
+ sin(
+ 
+ 2x
+ 
+ )
+ 
+ or 
+ 
+ cos(
+ 
+ 3x
+ 
+ ).
+ 
+ When confronted with these equations, recall that 
+ 
+ y=sin(
+ 
+ 2x
+ 
+ )
+ 
+ is a horizontal compression by a factor of 2 of the function 
+ 
+ y=sinx.
+ 
+ On an interval of 
+ 
+ 2π,
+ 
+ we can graph two periods of 
+ 
+ y=sin(
+ 
+ 2x
+ 
+ ),
+ 
+ as opposed to one cycle of 
+ 
+ y=sinx.
+ 
+ This compression of the graph leads us to believe there may be twice as many x-intercepts or solutions to 
+ 
+ sin(
+ 
+ 2x
+ 
+ )=0
+ 
+ compared to 
+ 
+ sinx=0.
+ 
+ This information will help us solve the equation.
+
+Solving a Multiple Angle Trigonometric Equation
+
+Solve exactly: 
+ 
+ cos(
+ 
+ 2x
+ 
+ )=
+ 1
+ 2
+
+ on 
+ 
+ [ 
+ 0,2π
+ ).
+
+We can see that this equation is the standard equation with a multiple of an angle. If 
+ 
+ cos(
+ α
+ )=
+ 1
+ 2
+ 
+ ,
+ 
+ we know 
+ 
+ α
+ 
+ is in quadrants I and IV. While 
+ 
+ θ=
+ 
+ cos
+
+ −1
+
+ 1
+ 2
+
+ will only yield solutions in quadrants I and II, we recognize that the solutions to the equation 
+ 
+ cosθ=
+ 1
+ 2
+
+ will be in quadrants I and IV.
+
+Therefore, the possible angles are 
+ 
+ θ=
+ π
+ 3
+
+ and 
+ 
+ θ=
+ 
+ 5π
+ 
+ 3
+ 
+ .
+ 
+ So, 
+ 
+ 2x=
+ π
+ 3
+
+ or 
+ 
+ 2x=
+ 
+ 5π
+ 
+ 3
+ 
+ ,
+ 
+ which means that 
+ 
+ x=
+ π
+ 6
+
+ or 
+ 
+ x=
+ 
+ 5π
+ 
+ 6
+ 
+ .
+ 
+ Does this make sense? Yes, because 
+ 
+ cos(
+ 
+ 2(
+
+ π
+ 6
+
+ )
+ 
+ )=cos(
+
+ π
+ 3
+
+ )=
+ 1
+ 2
+ 
+ .
+
+Are there any other possible answers? Let us return to our first step.
+
+In quadrant I, 
+ 
+ 2x=
+ π
+ 3
+ 
+ ,
+ 
+ so 
+ 
+ x=
+ π
+ 6
+
+ as noted. Let us revolve around the circle again:
+
+so 
+ 
+ x=
+ 
+ 7π
+ 
+ 6
+ 
+ .
+
+One more rotation yields
+x=
+ 
+ 13π
+ 
+ 6
+ 
+ >2π,
+ 
+ so this value for 
+ 
+ x
+ 
+ is larger than 
+ 
+ 2π,
+ 
+ so it is not a solution on 
+ 
+ [ 
+ 0,2π
+ ).
+
+In quadrant IV, 
+ 
+ 2x=
+ 
+ 5π
+ 
+ 3
+ 
+ ,
+ 
+ so 
+ 
+ x=
+ 
+ 5π
+ 
+ 6
+
+ as noted. Let us revolve around the circle again:
+
+so 
+ 
+ x=
+ 
+ 11π
+ 
+ 6
+ 
+ .
+
+One more rotation yields
+x=
+ 
+ 17π
+ 
+ 6
+ 
+ >2π,
+ 
+ so this value for 
+ 
+ x
+ 
+ is larger than 
+ 
+ 2π,
+ 
+ so it is not a solution on 
+ 
+ [ 
+ 0,2π
+ ).
+
+Our solutions are 
+ 
+ x=
+ π
+ 6
+ 
+ ,
+ 
+ 5π
+ 
+ 6
+ 
+ ,
+ 
+ 7π
+ 
+ 6
+ 
+ ,and 
+ 
+ 11π
+ 
+ 6
+
+. Note that whenever we solve a problem in the form of 
+ 
+ sin(
+ 
+ nx
+ 
+ )=c,
+ 
+ we must go around the unit circle 
+ 
+ n
+ 
+ times.
+
+Solving Right Triangle Problems
+
+We can now use all of the methods we have learned to solve problems that involve applying the properties of right triangles and the Pythagorean Theorem. We begin with the familiar Pythagorean Theorem, 
+
+ a
+ 2
+ 
+ +
+ b
+ 2
+ 
+ =
+ c
+ 2
+ 
+ ,
+ 
+ and model an equation to fit a situation.
+
+Using the Pythagorean Theorem to Model an Equation
+
+Use the Pythagorean Theorem, and the properties of right triangles to model an equation that fits the problem.
+
+One of the cables that anchors the center of the London Eye Ferris wheel to the ground must be replaced. The center of the Ferris wheel is 69.5 meters above the ground, and the second anchor on the ground is 23 meters from the base of the Ferris wheel. Approximately how long is the cable, and what is the angle of elevation (from ground up to the center of the Ferris wheel)? See .
+
+Using the information given, we can draw a right triangle. We can find the length of the cable with the Pythagorean Theorem.
+
+The angle of elevation is 
+ 
+ θ,
+ 
+ formed by the second anchor on the ground and the cable reaching to the center of the wheel. We can use the tangent function to find its measure. Round to two decimal places.
+
+The angle of elevation is approximately 
+ 
+ 71.7°,
+ 
+ and the length of the cable is 73.2 meters.
+
+Using the Pythagorean Theorem to Model an Abstract Problem
+
+OSHA safety regulations require that the base of a ladder be placed 1 foot from the wall for every 4 feet of ladder length. Find the angle that a ladder of any length forms with the ground and the height at which the ladder touches the wall.
+
+For any length of ladder, the base needs to be a distance from the wall equal to one fourth of the ladder’s length. Equivalently, if the base of the ladder is “a” feet from the wall, the length of the ladder will be 4a feet. See .
+
+The side adjacent to 
+ 
+ θ
+ 
+ is a and the hypotenuse is 
+ 
+ 4a.
+ 
+ Thus,
+
+The elevation of the ladder forms an angle of 
+ 
+ 75.5°
+ 
+ with the ground. The height at which the ladder touches the wall can be found using the Pythagorean Theorem:
+
+Thus, the ladder touches the wall at 
+ 
+ a
+ 
+ 15
+
+ feet from the ground.
+
+Access these online resources for additional instruction and practice with solving trigonometric equations.
+Solving Trigonometric Equations I
+Solving Trigonometric Equations II
+Solving Trigonometric Equations III
+Solving Trigonometric Equations IV
+Solving Trigonometric Equations V
+Solving Trigonometric Equations VI
+
+Key Concepts
+
+When solving linear trigonometric equations, we can use algebraic techniques just as we do solving algebraic equations. Look for patterns, like the difference of squares, quadratic form, or an expression that lends itself well to substitution. See , , and .
+
+Equations involving a single trigonometric function can be solved or verified using the unit circle. See , , and , and .
+
+We can also solve trigonometric equations using a graphing calculator. See and .
+
+Many equations appear quadratic in form. We can use substitution to make the equation appear simpler, and then use the same techniques we use solving an algebraic quadratic: factoring, the quadratic formula, etc. See , , , and .
+
+We can also use the identities to solve trigonometric equation. See , , and .
+
+We can use substitution to solve a multiple-angle trigonometric equation, which is a compression of a standard trigonometric function. We will need to take the compression into account and verify that we have found all solutions on the given interval. See .
+
+Real-world scenarios can be modeled and solved using the Pythagorean Theorem and trigonometric functions. See .
+
+Section Exercises
+
+Verbal
+
+Will there always be solutions to trigonometric function equations? If not, describe an equation that would not have a solution. Explain why or why not.
+
+There will not always be solutions to trigonometric function equations. For a basic example, 
+ 
+ cos(x)=−5.
+
+When solving a trigonometric equation involving more than one trig function, do we always want to try to rewrite the equation so it is expressed in terms of one trigonometric function? Why or why not?
+
+When solving linear trig equations in terms of only sine or cosine, how do we know whether there will be solutions?
+
+If the sine or cosine function has a coefficient of one, isolate the term on one side of the equals sign. If the number it is set equal to has an absolute value less than or equal to one, the equation has solutions, otherwise it does not. If the sine or cosine does not have a coefficient equal to one, still isolate the term but then divide both sides of the equation by the leading coefficient. Then, if the number it is set equal to has an absolute value greater than one, the equation has no solution.
+
+Algebraic
+
+For the following exercises, find all solutions exactly on the interval 
+ 
+ 0≤θ<2π.
+2sinθ=−
+ 2
+2sinθ=
+ 3
+π
+ 3
+ 
+ ,
+ 
+ 2π
+ 
+ 3
+2cosθ=1
+2cosθ=−
+ 2
+3π
+ 
+ 4
+ 
+ ,
+ 
+ 5π
+ 
+ 4
+tanθ=−1
+tanx=1
+π
+ 4
+ 
+ ,
+ 
+ 5π
+ 
+ 4
+cotx+1=0
+4
+ 
+ sin
+ 
+ 2
+ 
+ x−2=0
+π
+ 4
+ 
+ ,
+ 
+ 3π
+ 
+ 4
+ 
+ ,
+ 
+ 5π
+ 
+ 4
+ 
+ ,
+ 
+ 7π
+ 
+ 4
+csc
+ 
+ 2
+ 
+ x−4=0
+
+For the following exercises, solve exactly on 
+ 
+ [0,2π).
+2cosθ=
+ 2
+π
+ 4
+ 
+ ,
+ 
+ 7π
+ 
+ 4
+2cosθ=−1
+2sinθ=−1
+7π
+ 
+ 6
+ 
+ ,
+ 
+ 11π
+ 
+ 6
+2sinθ=−
+ 3
+2sin(
+ 
+ 3θ
+ 
+ )=1
+π
+ 
+ 18
+
+ ,
+ 
+ 5π
+
+ 18
+
+ ,
+ 
+ 13π
+
+ 18
+
+ ,
+ 
+ 17π
+
+ 18
+
+ ,
+ 
+ 25π
+
+ 18
+
+ ,
+ 
+ 29π
+
+ 18
+2sin(
+ 
+ 2θ
+ 
+ )=
+ 3
+2cos(
+ 
+ 3θ
+ 
+ )=−
+ 2
+3π
+
+ 12
+
+ ,
+ 
+ 5π
+
+ 12
+
+ ,
+ 
+ 11π
+
+ 12
+
+ ,
+ 
+ 13π
+
+ 12
+
+ ,
+ 
+ 19π
+
+ 12
+
+ ,
+ 
+ 21π
+
+ 12
+cos(
+ 
+ 2θ
+ 
+ )=−
+
+ 3
+
+ 2
+2sin(
+ 
+ πθ
+ 
+ )=1
+1
+ 6
+ 
+ ,
+ 5
+ 6
+ 
+ ,
+ 
+ 13
+ 
+ 6
+ 
+ ,
+ 
+ 17
+ 
+ 6
+ 
+ ,
+ 
+ 25
+ 
+ 6
+ 
+ ,
+ 
+ 29
+ 
+ 6
+ 
+ ,
+ 
+ 37
+ 
+ 6
+2cos(
+
+ π
+ 5
+ 
+ θ
+ 
+ )=
+ 3
+
+For the following exercises, find all exact solutions on 
+ 
+ [ 
+ 0,2π
+ ).
+sec(x)sin(x)−2sin(x)=0
+0,
+ π
+ 3
+ 
+ ,π,
+ 
+ 5π
+ 
+ 3
+tan(x)−2sin(x)tan(x)=0
+2
+ 
+ cos
+ 
+ 2
+ 
+ t+cos(
+ t
+ )=1
+π
+ 3
+ 
+ ,π,
+ 
+ 5π
+ 
+ 3
+2
+ 
+ tan
+ 
+ 2
+ 
+ (t)=3sec(t)
+2sin(x)cos(x)−sin(x)+2cos(x)−1=0
+π
+ 3
+ 
+ ,
+ 
+ 3π
+ 
+ 2
+ 
+ ,
+ 
+ 5π
+ 
+ 3
+cos
+ 
+ 2
+ 
+ θ=
+ 1
+ 2
+sec
+ 
+ 2
+ 
+ x=1
+0,π
+tan
+ 
+ 2
+ 
+ (
+ x
+ )=−1+2tan(
+ 
+ −x
+ 
+ )
+8
+ 
+ sin
+ 
+ 2
+ 
+ (x)+6sin(x)+1=0
+π−
+ 
+ sin
+
+ −1
+
+ (
+ 
+ −
+ 1
+ 4
+
+ ),
+ 
+ 7π
+ 
+ 6
+ 
+ ,
+ 
+ 11π
+ 
+ 6
+ 
+ ,2π+
+ 
+ sin
+
+ −1
+
+ (
+ 
+ −
+ 1
+ 4
+
+ )
+tan
+ 
+ 5
+ 
+ (x)=tan(x)
+
+For the following exercises, solve with the methods shown in this section exactly on the interval 
+ 
+ [0,2π).
+sin(3x)cos(6x)−cos(3x)sin(6x)=−0.9
+1
+ 3
+ 
+ (
+
+ sin
+
+ −1
+
+ (
+
+ 9
+ 
+ 10
+
+ )
+ 
+ ), 
+ π
+ 3
+ 
+ −
+ 1
+ 3
+ 
+ (
+
+ sin
+
+ −1
+
+ (
+
+ 9
+ 
+ 10
+
+ )
+ 
+ ), 
+ 
+ 2π
+ 
+ 3
+ 
+ +
+ 1
+ 3
+ 
+ (
+
+ sin
+
+ −1
+
+ (
+
+ 9
+ 
+ 10
+
+ )
+ 
+ ), π−
+ 1
+ 3
+ 
+ (
+
+ sin
+
+ −1
+
+ (
+
+ 9
+ 
+ 10
+
+ )
+ 
+ ), 
+ 
+ 4π
+ 
+ 3
+ 
+ +
+ 1
+ 3
+ 
+ (
+
+ sin
+
+ −1
+
+ (
+
+ 9
+ 
+ 10
+
+ )
+ 
+ ), 
+ 
+ 5π
+ 
+ 3
+ 
+ −
+ 1
+ 3
+ 
+ (
+
+ sin
+
+ −1
+
+ (
+
+ 9
+ 
+ 10
+
+ )
+ 
+ )
+sin(6x)cos(11x)−cos(6x)sin(11x)=−0.1
+cos(
+ 
+ 2x
+ 
+ )cosx+sin(
+ 
+ 2x
+ 
+ )sinx=1
+0
+6sin(
+ 
+ 2t
+ 
+ )+9sint=0
+9cos(
+ 
+ 2θ
+ 
+ )=9
+ 
+ cos
+ 
+ 2
+ 
+ θ−4
+π
+ 6
+ 
+ ,
+ 
+ 5π
+ 
+ 6
+ 
+ ,
+ 
+ 7π
+ 
+ 6
+ 
+ ,
+ 
+ 11π
+ 
+ 6
+sin(
+ 
+ 2t
+ 
+ )=cost
+cos(
+ 
+ 2t
+ 
+ )=sint
+3π
+ 
+ 2
+ 
+ ,
+ π
+ 6
+ 
+ ,
+ 
+ 5π
+ 
+ 6
+cos(6x)−cos(3x)=0
+
+For the following exercises, solve exactly on the interval 
+ 
+ [ 
+ 0,2π
+ ).
+ 
+ Use the quadratic formula if the equations do not factor.
+tan
+ 
+ 2
+ 
+ x−
+ 3
+ 
+ tanx=0
+0,
+ π
+ 3
+ 
+ ,π,
+ 
+ 4π
+ 
+ 3
+sin
+ 
+ 2
+ 
+ x+sinx−2=0
+sin
+ 
+ 2
+ 
+ x−2sinx−4=0
+
+There are no solutions.
+5
+ 
+ cos
+ 
+ 2
+ 
+ x+3cosx−1=0
+3
+ 
+ cos
+ 
+ 2
+ 
+ x−2cosx−2=0
+cos
+
+ −1
+
+ (
+
+ 1
+ 3
+ 
+ (
+ 
+ 1−
+ 7
+
+ )
+ 
+ ), 2π−
+ 
+ cos
+
+ −1
+
+ (
+
+ 1
+ 3
+ 
+ (
+ 
+ 1−
+ 7
+
+ )
+ 
+ )
+5
+ 
+ sin
+ 
+ 2
+ 
+ x+2sinx−1=0
+tan
+ 
+ 2
+ 
+ x+5tanx−1=0
+tan
+
+ −1
+
+ (
+
+ 1
+ 2
+ 
+ (
+
+ 29
+
+ −5
+ 
+ )
+ 
+ ), π+
+ 
+ tan
+
+ −1
+
+ (
+
+ 1
+ 2
+ 
+ (
+ 
+ −
+ 
+ 29
+
+ −5
+ 
+ )
+ 
+ ), π+
+ 
+ tan
+
+ −1
+
+ (
+
+ 1
+ 2
+ 
+ (
+
+ 29
+
+ −5
+ 
+ )
+ 
+ ), 2π+
+ 
+ tan
+
+ −1
+
+ (
+
+ 1
+ 2
+ 
+ (
+ 
+ −
+ 
+ 29
+
+ −5
+ 
+ )
+ 
+ )
+cot
+ 
+ 2
+ 
+ x=−cotx
+−
+ 
+ tan
+ 
+ 2
+ 
+ x−tanx−2=0
+
+There are no solutions.
+
+For the following exercises, find exact solutions on the interval 
+ 
+ [0,2π).
+ 
+ Look for opportunities to use trigonometric identities.
+sin
+ 
+ 2
+ 
+ x−
+ 
+ cos
+ 
+ 2
+ 
+ x−sinx=0
+sin
+ 
+ 2
+ 
+ x+
+ 
+ cos
+ 
+ 2
+ 
+ x=0
+
+There are no solutions.
+sin(
+ 
+ 2x
+ 
+ )−sinx=0
+cos(
+ 
+ 2x
+ 
+ )−cosx=0
+0,
+ 
+ 2π
+ 
+ 3
+ 
+ ,
+ 
+ 4π
+ 
+ 3
+2tanx
+
+ 2−
+ 
+ sec
+ 
+ 2
+ 
+ x
+
+ −
+ 
+ sin
+ 
+ 2
+ 
+ x=
+ 
+ cos
+ 
+ 2
+ 
+ x
+1−cos(2x)=1+cos(2x)
+π
+ 4
+ 
+ ,
+ 
+ 3π
+ 
+ 4
+ 
+ ,
+ 
+ 5π
+ 
+ 4
+ 
+ ,
+ 
+ 7π
+ 
+ 4
+sec
+ 
+ 2
+ 
+ x=7
+10sinxcosx=6cosx
+sin
+
+ −1
+
+ (
+
+ 3
+ 5
+
+ ),
+ π
+ 2
+ 
+ ,π−
+ 
+ sin
+
+ −1
+
+ (
+
+ 3
+ 5
+
+ ),
+ 
+ 3π
+ 
+ 2
+−3sint=15costsint
+4
+ 
+ cos
+ 
+ 2
+ 
+ x−4=15cosx
+cos
+
+ −1
+
+ (
+ 
+ −
+ 1
+ 4
+
+ ),2π−
+ 
+ cos
+
+ −1
+
+ (
+ 
+ −
+ 1
+ 4
+
+ )
+8
+ 
+ sin
+ 
+ 2
+ 
+ x+6sinx+1=0
+8
+ 
+ cos
+ 
+ 2
+ 
+ θ=3−2cosθ
+π
+ 3
+ 
+, 
+ 
+ cos
+
+ −1
+
+ (
+ 
+ −
+ 3
+ 4
+
+ ), 2π−
+ 
+ cos
+
+ −1
+
+ (
+ 
+ −
+ 3
+ 4
+
+ ), 
+ 
+ 5π
+ 
+ 3
+6
+ 
+ cos
+ 
+ 2
+ 
+ x+7sinx−8=0
+12
+ 
+ sin
+ 
+ 2
+ 
+ t+cost−6=0
+cos
+
+ −1
+
+ (
+
+ 3
+ 4
+
+ ), 
+ 
+ cos
+
+ −1
+
+ (
+ 
+ −
+ 2
+ 3
+
+ ), 2π−
+ 
+ cos
+
+ −1
+
+ (
+ 
+ −
+ 2
+ 3
+
+ ), 2π−
+ 
+ cos
+
+ −1
+
+ (
+
+ 3
+ 4
+
+ )
+tanx=3sinx
+cos
+ 
+ 3
+ 
+ t=cost
+0,
+ π
+ 2
+ 
+ ,π,
+ 
+ 3π
+ 
+ 2
+
+Graphical
+
+For the following exercises, algebraically determine all solutions of the trigonometric equation exactly, then verify the results by graphing the equation and finding the zeros.
+6
+ 
+ sin
+ 
+ 2
+ 
+ x−5sinx+1=0
+8
+ 
+ cos
+ 
+ 2
+ 
+ x−2cosx−1=0
+π
+ 3
+ 
+ , 
+ 
+ cos
+
+−1
+
+ (
+ 
+ −
+ 1
+ 4
+
+ ), 2π−
+ 
+ cos
+
+−1
+
+ (
+ 
+ −
+ 1
+ 4
+
+ ), 
+ 
+ 5π
+ 
+ 3
+100
+ 
+ tan
+ 
+ 2
+ 
+ x+20tanx−3=0
+2
+ 
+ cos
+ 
+ 2
+ 
+ x−cosx+15=0
+
+There are no solutions.
+20
+ 
+ sin
+ 
+ 2
+ 
+ x−27sinx+7=0
+2
+ 
+ tan
+ 
+ 2
+ 
+ x+7tanx+6=0
+π+
+ 
+ tan
+
+−1
+
+ (
+ 
+−2
+ 
+ ), π+
+ 
+ tan
+
+−1
+
+ (
+ 
+ −
+ 3
+ 2
+
+ ), 2π+
+ 
+ tan
+
+−1
+
+ (
+ 
+−2
+ 
+ ), 2π+
+ 
+ tan
+
+−1
+
+ (
+ 
+ −
+ 3
+ 2
+
+ )
+130
+ 
+ tan
+ 
+ 2
+ 
+ x+69tanx−130=0
+
+Technology
+
+For the following exercises, use a calculator to find all solutions to four decimal places.
+sinx=0.27
+2πk+0.2734,2πk+2.8682
+sinx=−0.55
+tanx=−0.34
+πk−0.3277
+cosx=0.71
+
+For the following exercises, solve the equations algebraically, and then use a calculator to find the values on the interval 
+ 
+ [0,2π).
+ 
+ Round to four decimal places.
+tan
+ 
+ 2
+ 
+ x+3tanx−3=0
+0.6694,1.8287,3.8110,4.9703
+6
+ 
+ tan
+ 
+ 2
+ 
+ x+13tanx=−6
+tan
+ 
+ 2
+ 
+ x−secx=1
+1.0472,3.1416,5.2360
+sin
+ 
+ 2
+ 
+ x−2
+ 
+ cos
+ 
+ 2
+ 
+ x=0
+2
+ 
+ tan
+ 
+ 2
+ 
+ x+9tanx−6=0
+0.5326,1.7648,3.6742,4.9064
+4
+ 
+ sin
+ 
+ 2
+ 
+ x+sin(
+ 
+ 2x
+ 
+ )secx−3=0
+
+Extensions
+
+For the following exercises, find all solutions exactly to the equations on the interval 
+ 
+ [0,2π).
+csc
+ 
+ 2
+ 
+ x−3cscx−4=0
+sin
+
+ −1
+
+ (
+
+ 1
+ 4
+
+ ),π−
+ 
+ sin
+
+ −1
+
+ (
+
+ 1
+ 4
+
+ ),
+ 
+ 3π
+ 
+ 2
+sin
+ 
+ 2
+ 
+ x−
+ 
+ cos
+ 
+ 2
+ 
+ x−1=0
+sin
+ 
+ 2
+ 
+ x(
+ 
+ 1−
+ 
+ sin
+ 
+ 2
+ 
+ x
+ 
+ )+
+ 
+ cos
+ 
+ 2
+ 
+ x(
+ 
+ 1−
+ 
+ sin
+ 
+ 2
+ 
+ x
+ 
+ )=0
+π
+ 2
+ 
+ ,
+ 
+ 3π
+ 
+ 2
+3
+ 
+ sec
+ 
+ 2
+ 
+ x+2+
+ 
+ sin
+ 
+ 2
+ 
+ x−
+ 
+ tan
+ 
+ 2
+ 
+ x+
+ 
+ cos
+ 
+ 2
+ 
+ x=0
+sin
+ 
+ 2
+ 
+ x−1+2cos(
+ 
+ 2x
+ 
+ )−
+ 
+ cos
+ 
+ 2
+ 
+ x=1
+
+There are no solutions.
+tan
+ 
+ 2
+ 
+ x−1−
+ 
+ sec
+ 
+ 3
+ 
+ xcosx=0
+sin(
+ 
+ 2x
+ 
+ )
+
+ sec
+ 
+ 2
+ 
+ x
+
+ =0
+0,
+ π
+ 2
+ 
+ ,π,
+ 
+ 3π
+ 
+ 2
+sin(
+ 
+ 2x
+ 
+ )
+
+ 2
+ 
+ csc
+ 
+ 2
+ 
+ x
+
+ =0
+2
+ 
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 2
+ 
+ x−cosx−5=0
+
+There are no solutions.
+1
+
+ sec
+ 
+ 2
+ 
+ x
+
+ +2+
+ 
+ sin
+ 
+ 2
+ 
+ x+4
+ 
+ cos
+ 
+ 2
+ 
+ x=4
+
+Real-World Applications
+
+An airplane has only enough gas to fly to a city 200 miles northeast of its current location. If the pilot knows that the city is 25 miles north, how many degrees north of east should the airplane fly?
+7.2
+ 
+ ∘
+
+If a loading ramp is placed next to a truck, at a height of 4 feet, and the ramp is 15 feet long, what angle does the ramp make with the ground?
+
+If a loading ramp is placed next to a truck, at a height of 2 feet, and the ramp is 20 feet long, what angle does the ramp make with the ground?
+5.7
+ 
+ ∘
+
+A woman is watching a launched rocket currently 11 miles in altitude. If she is standing 4 miles from the launch pad, at what angle is she looking up from horizontal?
+
+An astronaut is in a launched rocket currently 15 miles in altitude. If a man is standing 2 miles from the launch pad, at what angle is the astronaut looking down at him from horizontal? (Hint: this is called the angle of depression.)
+82.4
+ 
+ ∘
+
+A woman is standing 8 meters away from a 10-meter tall building. At what angle is she looking to the top of the building?
+
+Issa is standing 10 meters away from a 6-meter tall building. Travis is at the top of the building looking down at Issa. At what angle is Travis looking at Issa?
+31.0
+ 
+ ∘
+
+A 20-foot tall building has a shadow that is 55 feet long. What is the angle of elevation of the sun?
+
+A 90-foot tall building has a shadow that is 2 feet long. What is the angle of elevation of the sun?
+88.7
+ 
+ ∘
+
+A spotlight on the ground 3 meters from a 2-meter tall man casts a 6 meter shadow on a wall 6 meters from the man. At what angle is the light?
+
+A spotlight on the ground 3 feet from a 5-foot tall woman casts a 15-foot tall shadow on a wall 6 feet from the woman. At what angle is the light?
+59.0
+ 
+ ∘
+
+For the following exercises, find a solution to the following word problem algebraically. Then use a calculator to verify the result. Round the answer to the nearest tenth of a degree.
+
+A person does a handstand with their feet touching a wall and their hands 1.5 feet away from the wall. If the person is 6 feet tall, what angle do their feet make with the wall?
+
+A person does a handstand with her feet touching a wall and her hands 3 feet away from the wall. If the person is 5 feet tall, what angle do her feet make with the wall?
+36.9
+ 
+ ∘
+
+A 23-foot ladde
+[truncated]

@@ -1,0 +1,96 @@
+# m00014
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+PivotTables
+
+PivotTables
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define a PivotTable
+
+Organize and clean your data prior to designing a PivotTable
+
+Design/insert a PivotTable
+
+Understand and use the recommended PivotTable tool
+
+Add a PivotChart to pictorially present the data
+
+PivotTables help data analysts use raw data and organize it into an interactive tool for summarizing and analyzing the data points. WorldCorp can, for example, gather their manufacturing datasets of each machine’s daily performance and put this information into a table that the PivotTable tool can use to analyze the information. This type of organization would be useful for producing various metrics (such as machine performance) and company Key Performance Indicators (KPIs). The PivotTable tool can also divide data into a set of criteria, which will organize your data by variables you choose. This separation and division of data help you create business intelligence with ease.
+
+Definition and Uses
+Excel has various ways to store data and various tools that aid in data intelligence queries. You’ve learned the purpose of using What-If Data Tables, naming ranges, using comparison operators and writing statistical and logical functions—all of which can be combined with arrays (or other tools) to make interactive and automated tables. Excel has an even quicker way to make relational tables and automated business intelligence: PivotTables.
+
+A PivotTable lets users create interactive charts and tables from raw datasets. They can process large, raw datasets and allow the user to choose how the data will be tabulated and summarized using easy drag-and-drop features. PivotTables also help summarize the data for a professional appearance and to show it in a more user-friendly way. Out of thousands of rows and columns of raw data, you can produce a simple, easy-to-read table with different options for displaying your metrics. Some applications of PivotTables might include producing metrics for website views and ad clicks, displaying demographic information for a county or city, or gathering information about small business revenue. In each of these cases, PivotTables can be used to process large, ever-growing datasets into readable tables.
+
+Organizing and Cleaning Your Data
+
+Let’s return to the example of shipped products from WorldCorp’s Portland, Maine, location. PivotTables can be used to aggregate values and create an actionable market analysis and business intelligence for the company.
+
+The first step of creating this PivotTable is to organize and summarize the data. Having a digestible raw data sheet that Excel can read well enough to aggregate the data is critical. To clean the data, you should ensure that:
+
+There are no merged cells anywhere in the data.
+
+All filters are inactive.
+
+There are no SUM functions on the bottom or sides of the worksheets.
+
+All erroneous, duplicate, and/or blank values are deleted from the data.
+
+All values in each column are of the same value (e.g., currency, date, text).
+
+Next, convert your data into a top-down table, meaning that all of the data range headers should run along the top row of the sheet. This is the typical format for tables and will make using PivotTables much easier. In general, horizontal tables can be hard to follow. Cross-tabular source data (with headers on top/bottom and left/right) are even more difficult to read for the PivotTable generator. Designate a unique name for each top header; do not repeat any column header names. shows a correctly formatted worksheet. You can copy this worksheet into Excel, or you can use the data in the "pivot_table_data" tab of the downloadable Chapter 10 data file workbook.
+
+Inserting a PivotTable and Rearranging Variables
+
+To create a PivotTable, go to the Insert tab, choose the PivotTable icon located on the far left, select the entire dataset, and output to New Worksheet. (Alternatively, you may name your data ranges, as instructed in Defining, Selecting, and Naming a Cell Range, and simply select the named ranges for your data.) The Field List will activate and ask which columns to display, as shown in . Select the headers (variables) in the order that you want the PivotTable to display them. In the WorldCorp example, to see the quantity each client is buying, select Destination, then Quantity, and then FOB $. As shown in , the PivotTable neatly displays the data, with interactive features allowing the user to select different pieces of information as variables.
+
+Now, to further delimit the details of the clients, add Date to the variables (a). Because you chose Destination first, you are separating all the variables and ordering them by client to know what the client is consuming in volume and in dollar amount. Adding the date allows you to see total sales but also breaks down the data by month.
+
+This is only one way to create a PivotTable with this data. If you were to change the order in which you selected the headers in the PivotTable wizard, the whole table would be different. Additionally, you can choose a different set of data to display, which changes how the information is grouped. To demonstrate this, uncheck Date (you have to uncheck Months, too) and instead check Product. As seen in b, the table gives a totally different perspective. Instead of seeing the data grouped by Date, the grouping has changed to show the products the client ordered and the quantity of each.
+
+You can easily change the arrangement of the PivotTable using the fields in the lower half of the Field List. You can drag and drop the variables from one field to another to change how they appear in the PivotTable. For example, you can change the arrangement of the rows by putting Product first. This automatically changes the PivotTable completely, from being destination oriented (as seen in a) to being product oriented (b).
+
+Let’s apply a filter to the results from b. To filter by date, first check the Date and Month variables on the top half of the Field List. Then, drag and drop the dates from the Rows to the Filter field, as shown in a. This will allow you to apply a filter to the dates and be able to select only certain dates. To see just the February sales, go to the Month drop-down menu on the PivotTable and select Feb. Now, only the sales from that month will appear (b).
+
+Using the Recommended PivotTable Tool
+
+If you are unsure how to organize a PivotTable for your data, Excel can recommend one depending on how the data is organized. Let’s see what using a recommended PivotTable might look like.
+
+Go to the Insert tab and select the Recommended PivotTables icon. A dialog box appears with a handful of recommended charts. Scroll and select the one you like best. These recommended tables may be helpful to get you started, but they only compare one variable at a time. However, if you choose one, the new PivotTable will appear in another worksheet, and you can customize it there, adding or reorganizing variables until you have a PivotTable that presents your data in a way that makes sense.
+
+Adding a PivotChart to Visually Present Data
+
+Excel has a feature that allows you to create a PivotChart to visually present the data in your PivotTable. The first step is to select the entire PivotTable, which causes the ribbon tab “PivotTable Analyze” to appear. Next, select the PivotChart icon. You will use a small dataset from to create a chart of the information. More in-depth coverage of PivotTables is in PivotTables/Charts. shows the original data and shows the data summarized in a PivotTable by sales agent. To create a chart of the data summarized in the PivotTable, choose PivotChart from the PivotTable Analyze tab.
+
+For the data in , a bar chart, pie chart, or clustered column chart would be optimal. These chart types are appropriate because they allow you to see the difference in scale between the sales levels of the agents. For this example, choose the column chart. With the column chart, the higher the column, the greater the sales totals for that agent. You can further customize the column chart by adding percentages or labels. The Agent drop-down menu in allows you to further filter or change the column chart.
+
+Using PivotTables to Track Spending
+
+PivotTables can be a powerful tool for businesses in budgeting and creating other financial reports and analyses. You can also use PivotTables for your own personal budgeting. There are many budgeting services available online or through apps, but you can create your own powerful budgets that can help track all personal finance matters, including spending, without paying for an online service or app. As an individual, you might be able to track your budget fairly easily; however, as your financial matters become more complex, or as your family grows, Excel can come in handy to assist you in managing your budgets without the additional expense of a service or application.
+
+To get started, you can download a CSV file of your transactions from your financial accounts. Most institutions will have this function where you review your account and transaction information online. You will want to collect all information, particularly from your spending accounts, such as credit cards. Once these are gathered, be sure to validate the information, then create a column heading named Category. You will then create your categories, such as Food or Entertainment. Some credit cards will auto populate these categories when you download your transactions, but you will want to verify these are accurate. From there, you will complete your PivotTables using the instructions you can find in this textbook. You can opt to create different timelines of your budget, such as daily, monthly, or yearly, depending on your own budget analysis needs.
+
+Summary
+
+Corporations need to analyze their datasets to produce metrics or insights. However, these datasets need to be organized and cleaned before they can be processed.
+
+A PivotTable is a tool that reads raw datasets. It has user-friendly drag-and-drop capabilities that can help organize the table information for the business.
+
+These PivotTables are malleable, as the user can rearrange the variables in different ways to generate entirely different data highlights.
+
+Visual representations of PivotTables can be generated using another Excel tool, PivotChart.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+tool in Excel that lets users create interactive charts and tables from raw datasets

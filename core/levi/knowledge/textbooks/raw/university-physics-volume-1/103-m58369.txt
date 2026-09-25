@@ -1,0 +1,242 @@
+# m58369
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Mathematics of Waves
+
+Mathematics of Waves
+
+By the end of this section, you will be able to:
+
+Model a wave, moving with a constant wave velocity, with a mathematical expression
+
+Calculate the velocity and acceleration of the medium
+
+Show how the velocity of the medium differs from the wave velocity (propagation velocity)
+
+In the previous section, we described periodic waves by their characteristics of wavelength, period, amplitude, and wave speed of the wave. Waves can also be described by the motion of the particles of the medium through which the waves move. The position of particles of the medium can be mathematically modeled as wave functions, which can be used to find the position, velocity, and acceleration of the particles of the medium of the wave at any time.
+
+Pulses
+
+A pulse can be described as wave consisting of a single disturbance that moves through the medium with a constant amplitude. The pulse moves as a pattern that maintains its shape as it propagates with a constant wave speed. Because the wave speed is constant, the distance the pulse moves in a time Δt is equal to Δx=vΔt ().
+
+Modeling a One-Dimensional Sinusoidal Wave using a Wave Function
+
+Consider a string kept at a constant tension FT where one end is fixed and the free end is oscillated between y=+A and y=−A by a mechanical device at a constant frequency. shows snapshots of the wave at an interval of an eighth of a period, beginning after one period (t=T).
+
+Notice that each select point on the string (marked by colored dots) oscillates up and down in simple harmonic motion, between y=+A and y=−A, with a period T. The wave on the string is sinusoidal and is translating in the positive x-direction as time progresses.
+
+At this point, it is useful to recall from your study of algebra that if f(x) is some function, then f(x−d) is the same function translated in the positive x-direction by a distance d. The function f(x+d) is the same function translated in the negative x-direction by a distance d. We want to define a wave function that will give the y-position of each segment of the string for every position x along the string for every time t.
+
+Looking at the first snapshot in , the y-position of the string between x=0 and x=λ can be modeled as a sine function. This wave propagates down the string one wavelength in one period, as seen in the last snapshot. The wave therefore moves with a constant wave speed of v=λ/T.
+
+Recall that a sine function is a function of the angle θ, oscillating between +1 and −1, and repeating every 2π radians (). However, the y-position of the medium, or the wave function, oscillates between +A and −A, and repeats every wavelength λ.
+
+To construct our model of the wave using a periodic function, consider the ratio of the angle and the position,
+
+Using θ=2πλx and multiplying the sine function by the amplitude A, we can now model the y-position of the string as a function of the position x:
+
+The wave on the string travels in the positive x-direction with a constant velocity v, and moves a distance vt in a time t. The wave function can now be defined by
+
+It is often convenient to rewrite this wave function in a more compact form. Multiplying through by the ratio 2πλ leads to the equation
+
+The value 2πλ is defined as the wave number. The symbol for the wave number is k and has units of inverse meters, m−1:
+
+Recall from Oscillations that the angular frequency is defined as ω≡2πT. The second term of the wave function becomes
+
+The wave function for a simple harmonic wave on a string reduces to
+
+where A is the amplitude, k=2πλ is the wave number, ω=2πT is the angular frequency, the minus sign is for waves moving in the positive x-direction, and the plus sign is for waves moving in the negative x-direction. The velocity of the wave is equal to
+
+Think back to our discussion of a mass on a spring, when the position of the mass was modeled as x(t)=Acos(ωt+ϕ). The angle ϕ is a phase shift, added to allow for the fact that the mass may have initial conditions other than x=+A and v=0. For similar reasons, the initial phase is added to the wave function. The wave function modeling a sinusoidal wave, allowing for an initial phase shift ϕ, is
+
+The value
+
+is known as the phase of the wave, where ϕ is the initial phase of the wave function. Whether the temporal term ωt is negative or positive depends on the direction of the wave. First consider the minus sign for a wave with an initial phase equal to zero (ϕ=0). The phase of the wave would be (kx−ωt). Consider following a point on a wave, such as a crest. A crest will occur when sin(kx−ωt)=1.00, that is, when kx−ωt=nπ+π2, for any integral value of n. For instance, one particular crest occurs at kx−ωt=π2. As the wave moves, time increases and x must also increase to keep the phase equal to π2. Therefore, the minus sign is for a wave moving in the positive x-direction. Using the plus sign, kx+ωt=π2. As time increases, x must decrease to keep the phase equal to π2. The plus sign is used for waves moving in the negative x-direction. In summary, y(x,t)=Asin(kx−ωt+ϕ) models a wave moving in the positive x-direction and y(x,t)=Asin(kx+ωt+ϕ) models a wave moving in the negative x-direction.
+is known as a simple harmonic wave function. A wave function is any function such that f(x,t)=f(x−vt). Later in this chapter, we will see that it is a solution to the linear wave equation. Note that y(x,t)=Acos(kx+ωt+ϕ′) works equally well because it corresponds to a different phase shift ϕ′=ϕ−π2.
+
+Finding the Characteristics of a Sinusoidal Wave
+
+To find the amplitude, wavelength, period, and frequency of a sinusoidal wave, write down the wave function in the form y(x,t)=Asin(kx−ωt+ϕ).
+
+The amplitude can be read straight from the equation and is equal to A.
+
+The period of the wave can be derived from the angular frequency (T=2πω).
+
+The frequency can be found using f=1T.
+
+The wavelength can be found using the wave number (λ=2πk).
+Characteristics of a Traveling Wave on a String
+A transverse wave on a taut string is modeled with the wave function
+
+Characteristics of a Traveling Wave on a String
+
+Find the amplitude, wavelength, period, and speed of the wave.
+Strategy
+All these characteristics of the wave can be found from the constants included in the equation or from simple combinations of these constants.
+
+Strategy
+Solution
+
+Solution
+
+The amplitude, wave number, and angular frequency can be read directly from the wave equation:
+y(x,t)=Asin(kx−ωt)=0.2msin(6.28m−1x−1.57s−1t).
+(A=0.2m;k=6.28m−1;ω=1.57s−1)
+
+The wave number can be used to find the wavelength:
+k=2πλ.λ=2πk=2π6.28m−1=1.0m.
+
+The period of the wave can be found using the angular frequency:
+ω=2πT.T=2πω=2π1.57s−1=4s.
+
+The speed of the wave can be found using the wave number and the angular frequency. The direction of the wave can be determined by considering the sign of kx∓ωt: A negative sign suggests that the wave is moving in the positive x-direction:
+|v|=ωk=1.57s−16.28m−1=0.25m/s.
+Significance
+All of the characteristics of the wave are contained in the wave function. Note that the wave speed is the speed of the wave in the direction parallel to the motion of the wave. Plotting the height of the medium y versus the position x for two times t=0.00s and t=0.80s can provide a graphical visualization of the wave ().
+
+Significance
+
+There is a second velocity to the motion. In this example, the wave is transverse, moving horizontally as the medium oscillates up and down perpendicular to the direction of motion. The graph in shows the motion of the medium at point x=0.60m as a function of time. Notice that the medium of the wave oscillates up and down between y=+0.20m and y=−0.20m every period of 4.0 seconds.
+
+The wave function above is derived using a sine function. Can a cosine function be used instead?
+
+Yes, a cosine function is equal to a sine function with a phase shift, and either function can be used in a wave function. Which function is more convenient to use depends on the initial conditions. In , the wave has an initial height of y(0.00,0.00)=0 and then the wave height increases to the maximum height at the crest. If the initial height at the initial time was equal to the amplitude of the wave y(0.00,0.00)=+A, then it might be more convenient to model the wave with a cosine function.
+
+Velocity and Acceleration of the Medium
+
+As seen in , the wave speed is constant and represents the speed of the wave as it propagates through the medium, not the speed of the particles that make up the medium. The particles of the medium oscillate around an equilibrium position as the wave propagates through the medium. In the case of the transverse wave propagating in the x-direction, the particles oscillate up and down in the y-direction, perpendicular to the motion of the wave. The velocity of the particles of the medium is not constant, which means there is an acceleration. The velocity of the medium, which is perpendicular to the wave velocity in a transverse wave, can be found by taking the partial derivative of the position equation with respect to time. The partial derivative is found by taking the derivative of the function, treating all variables as constants, except for the variable in question. In the case of the partial derivative with respect to time t, the position x is treated as a constant. Although this may sound strange if you haven’t seen it before, the object of this exercise is to find the transverse velocity at a point, so in this sense, the x-position is not changing. We have
+
+The magnitude of the maximum velocity of the medium is |vymax|=Aω. This may look familiar from the Oscillations and a mass on a spring.
+
+We can find the acceleration of the medium by taking the partial derivative of the velocity equation with respect to time,
+
+The magnitude of the maximum acceleration is |aymax|=Aω2. The particles of the medium, or the mass elements, oscillate in simple harmonic motion for a mechanical wave.
+
+The Linear Wave Equation
+
+We have just determined the velocity of the medium at a position x by taking the partial derivative, with respect to time, of the position y. For a transverse wave, this velocity is perpendicular to the direction of propagation of the wave. We found the acceleration by taking the partial derivative, with respect to time, of the velocity, which is the second time derivative of the position:
+
+Now consider the partial derivatives with respect to the other variable, the position x, holding the time constant. The first derivative is the slope of the wave at a point x at a time t,
+
+The second partial derivative expresses how the slope of the wave changes with respect to position—in other words, the curvature of the wave, where
+
+The ratio of the acceleration and the curvature leads to a very important relationship in physics known as the linear wave equation. Taking the ratio and using the equation v=ω/k yields the linear wave equation (also known simply as the wave equation or the equation of a vibrating string),
+is the linear wave equation, which is one of the most important equations in physics and engineering. We derived it here for a transverse wave, but it is equally important when investigating longitudinal waves. This relationship was also derived using a sinusoidal wave, but it successfully describes any wave or pulse that has the form y(x,t)=f(x∓vt). These waves result due to a linear restoring force of the medium—thus, the name linear wave equation. Any wave function that satisfies this equation is a linear wave function.
+
+An interesting aspect of the linear wave equation is that if two wave functions are individually solutions to the linear wave equation, then the sum of the two linear wave functions is also a solution to the wave equation. Consider two transverse waves that propagate along the x-axis, occupying the same medium. Assume that the individual waves can be modeled with the wave functions y1(x,t)=f(x∓vt) and y2(x,t)=g(x∓vt), which are solutions to the linear wave equations and are therefore linear wave functions. The sum of the wave functions is the wave function
+
+Consider the linear wave equation:
+
+This has shown that if two linear wave functions are added algebraically, the resulting wave function is also linear. This wave function models the displacement of the medium of the resulting wave at each position along the x-axis. If two linear waves occupy the same medium, they are said to interfere. If these waves can be modeled with a linear wave function, these wave functions add to form the wave equation of the wave resulting from the interference of the individual waves. The displacement of the medium at every point of the resulting wave is the algebraic sum of the displacements due to the individual waves.
+
+Taking this analysis a step further, if wave functions y1(x,t)=f(x∓vt) and y2(x,t)=g(x∓vt) are solutions to the linear wave equation, then Ay1(x,t)+By2(x,t), where A and B are constants, is also a solution to the linear wave equation. This property is known as the principle of superposition. Interference and superposition are covered in more detail in Interference of Waves.
+Interference of Waves on a String
+Consider a very long string held taut by two students, one on each end. Student A oscillates the end of the string producing a wave modeled with the wave function y1(x,t)=Asin(kx−ωt) and student B oscillates the string producing at twice the frequency, moving in the opposite direction. Both waves move at the same speed v=ωk. The two waves interfere to form a resulting wave whose wave function is yR(x,t)=y1(x,t)+y2(x,t). Find the velocity of the resulting wave using the linear wave equation ∂2y(x,t)∂x2=1v2∂2y(x,t)∂t2.
+
+Interference of Waves on a String
+Strategy
+First, write the wave function for the wave created by the second student. Note that the angular frequency of the second wave is twice the frequency of the first wave (2ω), and since the velocity of the two waves are the same, the wave number of the second wave is twice that of the first wave (2k). Next, write the wave equation for the resulting wave function, which is the sum of the two individual wave functions. Then find the second partial derivative with respect to position and the second partial derivative with respect to time. Use the linear wave equation to find the velocity of the resulting wave.
+
+Strategy
+Solution
+
+Solution
+
+Write the wave function of the second wave: y2(x,t)=Asin(2kx+2ωt).
+
+Write the resulting wave function:
+yR(x,t)=y1(x,t)+y(x,t)=Asin(kx−ωt)+Asin(2kx+2ωt).
+
+Find the partial derivatives:
+∂yR(x,t)∂x=+Akcos(kx−ωt)+2Akcos(2kx+2ωt),∂2yR(x,t)∂x2=−Ak2sin(kx−ωt)−4Ak2sin(2kx+2ωt),∂yR(x,t)∂t=−Aωcos(kx−ωt)+2Aωcos(2kx+2ωt),∂2yR(x,t)∂t2=−Aω2sin(kx−ωt)−4Aω2sin(2kx+2ωt).
+
+Use the wave equation to find the velocity of the resulting wave:
+∂2y(x,t)∂x2=1v2∂2y(x,t)∂t2,−Ak2sin(kx−ωt)−4Ak2sin(2kx+2ωt)=1v2(−Aω2sin(kx−ωt)−4Aω2sin(2kx+2ωt)),k2(−Asin(kx−ωt)−4Asin(2kx+2ωt))=ω2v2(−Asin(kx−ωt)−4Asin(2kx+2ωt)),k2=ω2v2,|v|=ωk.
+∂2y(x,t)∂x2=1v2∂2y(x,t)∂t2,−Ak2sin(kx−ωt)−4Ak2sin(2kx+2ωt)=1v2(−Aω2sin(kx−ωt)−4Aω2sin(2kx+2ωt)),k2(−Asin(kx−ωt)−4Asin(2kx+2ωt))=ω2v2(−Asin(kx−ωt)−4Asin(2kx+2ωt)),k2=ω2v2,|v|=ωk.
+Significance
+The speed of the resulting wave is equal to the speed of the original waves (v=ωk). We will show in the next section that the speed of a simple harmonic wave on a string depends on the tension in the string and the mass per length of the string. For this reason, it is not surprising that the component waves as well as the resultant wave all travel at the same speed.
+
+Significance
+
+The wave equation ∂2y(x,t)∂x2=1v2∂2y(x,t)∂t2 works for any wave of the form y(x,t)=f(x∓vt). In the previous section, we stated that a cosine function could also be used to model a simple harmonic mechanical wave. Check if the wave
+
+is a solution to the wave equation.
+
+This wave, with amplitude A=0.5m, wavelength λ=10.00m, period T=0.50s, is a solution to the wave equation with a wave velocity v=20.00m/s.
+
+Any disturbance that complies with the wave equation can propagate as a wave moving along the x-axis with a wave speed v. It works equally well for waves on a string, sound waves, and electromagnetic waves. This equation is extremely useful. For example, it can be used to show that electromagnetic waves move at the speed of light.
+
+Summary
+
+A wave is an oscillation (of a physical quantity) that travels through a medium, accompanied by a transfer of energy. Energy transfers from one point to another in the direction of the wave motion. The particles of the medium oscillate up and down, back and forth, or both up and down and back and forth, around an equilibrium position.
+
+A snapshot of a sinusoidal wave at time t=0.00s can be modeled as a function of position. Two examples of such functions are y(x)=Asin(kx+ϕ) and y(x)=Acos(kx+ϕ).
+
+Given a function of a wave that is a snapshot of the wave, and is only a function of the position x, the motion of the pulse or wave moving at a constant velocity can be modeled with the function, replacing x with x∓vt. The minus sign is for motion in the positive direction and the plus sign for the negative direction.
+
+The wave function is given by y(x,t)=Asin(kx−ωt+ϕ) where k=2π/λ is defined as the wave number, ω=2π/T is the angular frequency, and ϕ is the phase shift.
+
+The wave moves with a constant velocity vw, where the particles of the medium oscillate about an equilibrium position. The constant velocity of a wave can be found by v=λT=ωk.
+
+Conceptual Questions
+
+If you were to shake the end of a taut spring up and down 10 times a second, what would be the frequency and the period of the sinusoidal wave produced on the spring?
+
+If you shake the end of a stretched spring up and down with a frequency f, you can produce a sinusoidal, transverse wave propagating down the spring. Does the wave number depend on the frequency you are shaking the spring?
+
+The wavelength is equal to the velocity of the wave times the frequency and the wave number is equal to k=2πλ, so yes, the wave number will depend on the frequency and also depend on the velocity of the wave propagating through the spring.
+
+Does the vertical speed of a segment of a horizontal taut string through which a sinusoidal, transverse wave is propagating depend on the wave speed of the transverse wave?
+
+In this section, we have considered waves that move at a constant wave speed. Does the medium accelerate?
+
+The medium moves in simple harmonic motion as the wave propagates through the medium, continuously changing speed, therefore it accelerates. The acceleration of the medium is due to the restoring force of the medium, which acts in the opposite direction of the displacement.
+
+If you drop a pebble in a pond you may notice that several concentric ripples are produced, not just a single ripple. Why do you think that is?
+
+Problems
+
+A pulse can be described as a single wave disturbance that moves through a medium. Consider a pulse that is defined at time t=0.00s by the equation y(x)=6.00m3x2+2.00m2 centered around x=0.00m. The pulse moves with a velocity of v=3.00m/s in the positive x-direction. (a) What is the amplitude of the pulse? (b) What is the equation of the pulse as a function of position and time? (c) Where is the pulse centered at time t=5.00s?
+
+A transverse wave on a string is modeled with the wave function y(x,t)=(0.20cm)sin(2.00m−1x−3.00s−1t+π16). What is the height of the string with respect to the equilibrium position at a position x=4.00m and a time t=10.00s?
+y(x,t)=−0.037cm
+
+Consider the wave function y(x,t)=(3.00cm)sin(0.4m−1x+2.00s−1t+π10). What are the period, wavelength, speed, and initial phase shift of the wave modeled by the wave function?
+
+A pulse is defined as y(x,t)=e−2.77(2.00(x−2.00m/s(t))5.00m)2. Use a spreadsheet, or other computer program, to plot the pulse as the height of medium y as a function of position x. Plot the pulse at times t=0.00s and t=3.00s on the same graph. Where is the pulse centered at time t=3.00s? Use your spreadsheet to check your answer.
+The pulse will move Δx=6.00m.
+
+A wave is modeled at time t=0.00s with a wave function that depends on position. The equation is y(x)=(0.30m)sin(6.28m−1x). The wave travels a distance of 4.00 meters in 0.50 s in the positive x-direction. Write an equation for the wave as a function of position and time.
+
+A wave is modeled with the function y(x,t)=(0.25m)cos(0.30m−1x−0.90s−1t+π3). Find the (a) amplitude, (b) wave number, (c) angular frequency, (d) wave speed, (e) initial phase shift, (f) wavelength, and (g) period of the wave.
+
+a. A=0.25m; b. k=0.30m−1; c. ω=0.90s−1; d. v=3.0m/s; e. ϕ=π/3rad; f. λ=20.93m; g. T=6.98s
+
+A surface ocean wave has an amplitude of 0.60 m and the distance from trough to trough is 8.00 m. It moves at a constant wave speed of 1.50 m/s propagating in the positive x-direction. At t=0, the water displacement at x=0 is zero, and vy is positive. (a) Assuming the wave can be modeled as a sine wave, write a wave function to model the wave. (b) Use a spreadsheet to plot the wave function at times t=0.00s and t=2.00s on the same graph. Verify that the wave moves 3.00 m in those 2.00 s.
+
+A wave is modeled by the wave function y(x,t)=(0.30m)sin[2π4.50m(x−18.00mst)]. What are the amplitude, wavelength, wave speed, period, and frequency of the wave?
+A=0.30m,λ=4.50m,v=18.00m/s,f=4.00Hz,T=0.25s
+
+A transverse wave on a string is described with the wave function y(x,t)=(0.50cm)sin(1.57m−1x−6.28s−1t). (a) What is the wave velocity of the wave? (b) What is the magnitude of the maximum velocity of the string perpendicular to the direction of the motion?
+
+A swimmer in the ocean observes one day that the ocean surface waves are periodic and resemble a sine wave. The swimmer estimates that the vertical distance between the crest and the trough of each wave is approximately 0.45 m, and the distance between each crest is approximately 1.8 m. The swimmer counts that 12 waves pass every two minutes. Determine the simple harmonic wave function that would describes these waves.
+y(x,t)=0.23msin(3.49m−1x−0.63s−1t)
+
+Consider a wave described by the wave function y(x,t)=0.3msin(2.00m−1x−628.00s−1t). (a) How many crests pass by an observer at a fixed location in 2.00 minutes? (b) How far has the wave traveled in that time?
+
+Consider two waves defined by the wave functions y1(x,t)=0.50msin(2π3.00mx+2π4.00st) and y2(x,t)=0.50msin(2π6.00mx−2π4.00st). What are the similarities and differences between the two waves?
+
+They have the same angular frequency, frequency, and period. They are traveling in opposite directions and y2(x,t) has twice the wavelength as y1(x,t) and is moving at half the wave speed.
+
+Consider two waves defined by the wave functions y1(x,t)=0.20msin(2π6.00mx−2π4.00st) and y2(x,t)=0.20mcos(2π6.00mx−2π4.00st). What are the similarities and differences between the two waves?
+
+The speed of a transverse wave on a string is 300.00 m/s, its wavelength is 0.50 m, and the amplitude is 20.00 cm. How much time is required for a particle on the string to move through a distance of 5.00 km?
+
+Each particle of the medium moves a distance of 4A each period. The period can be found by dividing the velocity by the wavelength: t=10.42s
+
+equation describing waves that result from a linear restoring force of the medium; any function that is a solution to the wave equation describes a wave moving in the positive x-direction or the negative x-direction with a constant wave speed v
+single disturbance that moves through a medium, transferring energy but not mass
+2πλ

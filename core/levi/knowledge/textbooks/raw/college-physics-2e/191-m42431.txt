@@ -1,0 +1,564 @@
+# m42431
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+RLC Series AC Circuits
+
+RLC Series AC Circuits
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate the impedance, phase angle, resonant frequency, power, power factor, voltage, and/or current in a RLC series circuit.
+
+Draw the circuit diagram for an RLC series circuit.
+
+Explain the significance of the resonant frequency.
+
+Impedance
+
+When alone in an AC circuit, inductors, capacitors, and resistors all impede current. How do they behave when all three occur together? Interestingly, their individual resistances in ohms do not simply add. Because inductors and capacitors behave in opposite ways, they partially to totally cancel each other’s effect. shows an RLC series circuit with an AC voltage source, the behavior of which is the subject of this section. The crux of the analysis of an RLC circuit is the frequency dependence of XL and XC, and the effect they have on the phase of voltage versus current (established in the preceding section). These give rise to the frequency dependence of the circuit, with important “resonance” features that are the basis of many applications, such as radio tuners.
+
+The combined effect of resistance R, inductive reactance XL, and capacitive reactance XC is defined to be impedance, an AC analogue to resistance in a DC circuit. Current, voltage, and impedance in an RLC circuit are related by an AC version of Ohm’s law:
+
+Here I0 is the peak current, V0 the peak source voltage, and 
+ 
+ Z
+ 
+ is the impedance of the circuit. The units of impedance are ohms, and its effect on the circuit is as you might expect: the greater the impedance, the smaller the current. To get an expression for Z in terms of 
+ 
+ R
+ 
+, XL, and XC, we will now examine how the voltages across the various components are related to the source voltage. Those voltages are labeled VR, VL, and VC in .
+
+Conservation of charge requires current to be the same in each part of the circuit at all times, so that we can say the currents in R, L, and C are equal and in phase. But we know from the preceding section that the voltage across the inductor VL leads the current by one-fourth of a cycle, the voltage across the capacitor VC follows the current by one-fourth of a cycle, and the voltage across the resistor VR is exactly in phase with the current. shows these relationships in one graph, as well as showing the total voltage around the circuit V=VR+VL+VC, where all four voltages are the instantaneous values. According to Kirchhoff’s loop rule, the total voltage around the circuit 
+ 
+ V
+ 
+ is also the voltage of the source.
+
+You can see from that while VR is in phase with the current, VL leads by 
+ 
+ 90º
+ 
+, and VC follows by 
+ 
+ 90º
+ 
+. Thus VL and VC are 
+ 
+ 180º
+ 
+ out of phase (crest to trough) and tend to cancel, although not completely unless they have the same magnitude. Since the peak voltages are not aligned (not in phase), the peak voltage V0 of the source does not equal the sum of the peak voltages across R, L, and C. The actual relationship is
+
+where V0R, V0L, and V0C are the peak voltages across R, L, and C, respectively. Now, using Ohm’s law and definitions from Reactance, Inductive and Capacitive, we substitute V0=I0Z into the above, as well as V0R=I0R, V0L=I0XL, and V0C=I0XC, yielding
+I0 cancels to yield an expression for 
+ 
+ Z
+ 
+:
+
+which is the impedance of an RLC series AC circuit. For circuits without a resistor, take 
+
+ R
+ =
+ 0
+
+; for those without an inductor, take XL=0; and for those without a capacitor, take XC=0.
+
+Calculating Impedance and Current
+
+An RLC series circuit has a 
+ 
+ 40.0 Ω
+ 
+ resistor, a 3.00 mH inductor, and a
+
+ 5.00 μF
+ 
+ capacitor. (a) Find the circuit’s impedance at 60.0 Hz and 10.0 kHz, noting that these frequencies and the values for
+
+ L
+ 
+ and
+
+ C
+
+ are the same as in and . (b) If the voltage source has Vrms=120V, what is Irms at each frequency?
+Strategy
+
+Strategy
+
+For each frequency, we use Z=R2+(XL−XC)2 to find the impedance and then Ohm’s law to find current. We can take advantage of the results of the previous two examples rather than calculate the reactances again.
+Solution for (a)
+
+Solution for (a)
+
+At 60.0 Hz, the values of the reactances were found in to be XL=1.13Ω and in to be XC=531 Ω . Entering these and the given 
+ 
+ 40.0 Ω
+ 
+ for resistance into Z=R2+(XL−XC)2 yields
+
+Similarly, at 10.0 kHz, XL=188Ω and XC=3.18Ω, so that
+Discussion for (a)
+
+Discussion for (a)
+
+In both cases, the result is nearly the same as the largest value, and the impedance is definitely not the sum of the individual values. It is clear that XL dominates at high frequency and XC dominates at low frequency.
+Solution for (b)
+
+Solution for (b)
+
+The current Irms can be found using the AC version of Ohm’s law in Equation Irms=Vrms/Z:
+Irms=VrmsZ=120 V531 Ω=0.226 A at 60.0 Hz
+
+Finally, at 10.0 kHz, we find
+Irms=VrmsZ=120 V190 Ω=0.633 A at 10.0 kHz
+Discussion for (a)
+
+Discussion for (a)
+
+The current at 60.0 Hz is the same (to three digits) as found for the capacitor alone in . The capacitor dominates at low frequency. The current at 10.0 kHz is only slightly different from that found for the inductor alone in . The inductor dominates at high frequency.
+
+Resonance in RLC Series AC Circuits
+
+How does an RLC circuit behave as a function of the frequency of the driving voltage source? Combining Ohm’s law, Irms=Vrms/Z, and the expression for impedance 
+ 
+ Z
+ 
+ from Z=R2+(XL−XC)2 gives
+
+The reactances vary with frequency, with XL large at high frequencies and XC large at low frequencies, as we have seen in three previous examples. At some intermediate frequency f0, the reactances will be equal and cancel, giving Z=R —this is a minimum value for impedance, and a maximum value for Irms results. We can get an expression for f0 by taking
+
+Substituting the definitions of XL and XC,
+
+Solving this expression for f0 yields
+
+where f0 is the resonant frequency of an RLC series circuit. This is also the natural frequency at which the circuit would oscillate if not driven by the voltage source. At f0, the effects of the inductor and capacitor cancel, so that Z=R, and Irms is a maximum.
+
+Resonance in AC circuits is analogous to mechanical resonance, where resonance is defined to be a forced oscillation—in this case, forced by the voltage source—at the natural frequency of the system. The receiver in a radio is an RLC circuit that oscillates best at its f0. A variable capacitor is often used to adjust f0 to receive a desired frequency and to reject others. is a graph of current as a function of frequency, illustrating a resonant peak in Irms at f0. The two curves are for two different circuits, which differ only in the amount of resistance in them. The peak is lower and broader for the higher-resistance circuit. Thus the higher-resistance circuit does not resonate as strongly and would not be as selective in a radio receiver, for example.
+
+Calculating Resonant Frequency and Current
+
+For the same RLC series circuit having a 
+ 
+ 40.0 Ω
+ 
+ resistor, a 3.00 mH inductor, and a 
+ 
+ 5.00 μF
+ 
+ capacitor: (a) Find the resonant frequency. (b) Calculate Irms at resonance if Vrms is 120 V.
+Strategy
+
+Strategy
+
+The resonant frequency is found by using the expression in f0=12πLC. The current at that frequency is the same as if the resistor alone were in the circuit.
+Solution for (a)
+
+Solution for (a)
+
+Entering the given values for 
+ 
+ L
+ 
+ and 
+ 
+ C
+ 
+ into the expression given for f0 in f0=12πLC yields
+Discussion for (a)
+
+Discussion for (a)
+
+We see that the resonant frequency is between 60.0 Hz and 10.0 kHz, the two frequencies chosen in earlier examples. This was to be expected, since the capacitor dominated at the low frequency and the inductor dominated at the high frequency. Their effects are the same at this intermediate frequency.
+Solution for (b)
+
+Solution for (b)
+
+The current is given by Ohm’s law. At resonance, the two reactances are equal and cancel, so that the impedance equals the resistance alone. Thus,
+Discussion for (b)
+
+Discussion for (b)
+
+At resonance, the current is greater than at the higher and lower frequencies considered for the same circuit in the preceding example.
+
+Power in RLC Series AC Circuits
+
+If current varies with frequency in an RLC circuit, then the power delivered to it also varies with frequency. But the average power is not simply current times voltage, as it is in purely resistive circuits. As was seen in , voltage and current are out of phase in an RLC circuit. There is a phase angle ϕ between the source voltage V and the current I, which can be found from
+
+For example, at the resonant frequency or in a purely resistive circuit Z=R, so that cosϕ=1. This implies that ϕ=0º and that voltage and current are in phase, as expected for resistors. At other frequencies, average power is less than at resonance. This is both because voltage and current are out of phase and because Irms is lower. The fact that source voltage and current are out of phase affects the power delivered to the circuit. It can be shown that the average power is
+
+Thus cosϕ is called the power factor, which can range from 0 to 1. Power factors near 1 are desirable when designing an efficient motor, for example. At the resonant frequency, cosϕ=1.
+
+Calculating the Power Factor and Power
+
+For the same RLC series circuit having a 
+ 
+ 40.0 Ω
+ 
+ resistor, a 3.00 mH inductor, a
+
+ 5.00 μF
+ 
+ capacitor, and a voltage source with a 
+
+ V
+rms
+
+ of 120 V: (a) Calculate the power factor and phase angle for f=60.0Hz. (b) What is the average power at 50.0 Hz? (c) Find the average power at the circuit’s resonant frequency.
+Strategy and Solution for (a)
+
+Strategy and Solution for (a)
+
+The power factor at 60.0 Hz is found from
+
+We know 
+
+ Z
+ = 531 Ω
+
+ from , so that
+
+This small value indicates the voltage and current are significantly out of phase. In fact, the phase angle is
+Discussion for (a)
+
+Discussion for (a)
+
+The phase angle is close to
+
+ 90º
+ 
+, consistent with the fact that the capacitor dominates the circuit at this low frequency (a pure RC circuit has its voltage and current 
+ 
+ 90º
+ 
+ out of phase).
+Strategy and Solution for (b)
+
+Strategy and Solution for (b)
+
+The average power at 60.0 Hz is
+Irms was found to be 0.226 A in . Entering the known values gives
+Strategy and Solution for (c)
+
+Strategy and Solution for (c)
+
+At the resonant frequency, we know cosϕ=1, and Irms was found to be 6.00 A in . Thus,
+Pave=(3.00 A)(120 V)(1)=360 W at resonance (1.30 kHz)
+Discussion
+
+Discussion
+
+Both the current and the power factor are greater at resonance, producing significantly greater power than at higher and lower frequencies.
+
+Power delivered to an RLC series AC circuit is dissipated by the resistance alone. The inductor and capacitor have energy input and output but do not dissipate it out of the circuit. Rather they transfer energy back and forth to one another, with the resistor dissipating exactly what the voltage source puts into the circuit. This assumes no significant electromagnetic radiation from the inductor and capacitor, such as radio waves. Such radiation can happen and may even be desired, as we will see in the next chapter on electromagnetic radiation, but it can also be suppressed as is the case in this chapter. The circuit is analogous to the wheel of a car driven over a corrugated road as shown in . The regularly spaced bumps in the road are analogous to the voltage source, driving the wheel up and down. The shock absorber is analogous to the resistance damping and limiting the amplitude of the oscillation. Energy within the system goes back and forth between kinetic (analogous to maximum current, and energy stored in an inductor) and potential energy stored in the car spring (analogous to no current, and energy stored in the electric field of a capacitor). The amplitude of the wheels’ motion is a maximum if the bumps in the road are hit at the resonant frequency.
+
+A pure LC circuit with negligible resistance oscillates at f0, the same resonant frequency as an RLC circuit. It can serve as a frequency standard or clock circuit—for example, in a digital wristwatch. With a very small resistance, only a very small energy input is necessary to maintain the oscillations. The circuit is analogous to a car with no shock absorbers. Once it starts oscillating, it continues at its natural frequency for some time. shows the analogy between an LC circuit and a mass on a spring.
+
+Circuit Construction Kit (AC+DC), Virtual Lab
+
+Build circuits with capacitors, inductors, resistors and AC or DC voltage sources, and inspect them using lab instruments such as voltmeters and ammeters.
+
+Section Summary
+
+The AC analogy to resistance is impedance 
+ 
+ Z
+ 
+, the combined effect of resistors, inductors, and capacitors, defined by the AC version of Ohm’s law:
+
+ I
+
+ 0
+
+ =
+
+ V
+
+ 0
+
+ Z
+
+ or 
+
+ I
+
+ rms
+
+ =
+
+ V
+
+ rms
+
+ Z
+
+ ,
+
+ where I0 is the peak current and V0 is the peak source voltage.
+
+Impedance has units of ohms and is given by Z=R2+(XL−XC)2.
+
+The resonant frequency f0, at which XL=XC, is
+ f0=12πLC.
+
+In an AC circuit, there is a phase angle ϕ between source voltage V and the current I, which can be found from
+ cosϕ=RZ,
+ϕ=0º for a purely resistive circuit or an RLC circuit at resonance.
+
+The average power delivered to an RLC circuit is affected by the phase angle and is given by
+ Pave=IrmsVrmscosϕ,cosϕ is called the power factor, which ranges from 0 to 1.
+
+Conceptual Questions
+
+Does the resonant frequency of an AC circuit depend on the peak voltage of the AC source? Explain why or why not.
+
+Suppose you have a motor with a power factor significantly less than 1. Explain why it would be better to improve the power factor as a method of improving the motor’s output, rather than to increase the voltage input.
+
+Problems & Exercises
+
+An RL circuit consists of a
+
+ 40.0 Ω
+ 
+ resistor and a
+3.00 mH inductor. (a) Find its impedance 
+ 
+ Z
+ 
+ at 60.0 Hz and 10.0 kHz. (b) Compare these values of 
+ 
+ Z
+ 
+ with those found in in which there was also a capacitor.
+
+(a) 
+ 
+ 40.02 Ω
+ 
+ at 60.0 Hz, 
+ 
+ 193 Ω
+ 
+ at 10.0 kHz
+
+(b) At 60 Hz, with a capacitor, 
+ 
+Z=531 Ω
+ 
+, over 13 times as high as without the capacitor. The capacitor makes a large difference at low frequencies. At 10 kHz, with a capacitor 
+ 
+Z=190 Ω
+ 
+, about the same as without the capacitor. The capacitor has a smaller effect at high frequencies.
+
+An RC circuit consists of a
+
+ 40.0 Ω
+ 
+ resistor and a
+
+ 5.00 μF
+ 
+ capacitor. (a) Find its impedance at 60.0 Hz and 10.0 kHz. (b) Compare these values of 
+ 
+ Z
+ 
+ with those found in , in which there was also an inductor.
+
+An LC circuit consists of a 3.00mH inductor and a 5.00μF capacitor. (a) Find its impedance at 60.0 Hz and 10.0 kHz. (b) Compare these values of Z with those found in in which there was also a resistor.
+
+(a) 
+ 
+ 529 Ω
+ 
+ at 60.0 Hz, 
+ 
+ 185 Ω
+ 
+ at 10.0 kHz
+
+(b) These values are close to those obtained in because at low frequency the capacitor dominates and at high frequency the inductor dominates. So in both cases the resistor makes little contribution to the total impedance.
+
+What is the resonant frequency of a 0.500 mH inductor connected to a
+
+ 40.0 μF
+ 
+ capacitor?
+
+To receive AM radio, you want an RLC circuit that can be made to resonate at any frequency between 500 and 1650 kHz. This is accomplished with a fixed 
+ 
+ 1.00 μH
+ 
+ inductor connected to a variable capacitor. What range of capacitance is needed?
+
+9.30 nF to 101 nF
+
+Suppose you have a supply of inductors ranging from 1.00 nH to 10.0 H, and capacitors ranging from 1.00 pF to 0.100 F. What is the range of resonant frequencies that can be achieved from combinations of a single inductor and a single capacitor?
+
+What capacitance do you need to produce a resonant frequency of 1.00 GHz, when using an 8.00 nH inductor?
+
+3.17 pF
+
+What inductance do you need to produce a resonant frequency of 60.0 Hz, when using a 
+ 
+ 2.00 μF
+ 
+ capacitor?
+
+The lowest frequency in the FM radio band is 88.0 MHz. (a) What inductance is needed to produce this resonant frequency if it is connected to a 2.50 pF capacitor? (b) The capacitor is variable, to allow the resonant frequency to be adjusted to as high as 108 MHz. What must the capacitance be at this frequency?
+
+(a) 
+ 
+ 1.31 μH
+
+(b) 1.66 pF
+
+An RLC series circuit has a
+
+ 2.50 Ω
+ 
+ resistor, a
+
+ 100 μH
+ 
+ inductor, and an
+
+ 80.0 μF
+ 
+ capacitor.(a) Find the circuit’s impedance at 120 Hz. (b) Find the circuit’s impedance at 5.00 kHz. (c) If the voltage source has Vrms=5.60V, what is Irms at each frequency? (d) What is the resonant frequency of the circuit? (e) What is Irms at resonance?
+
+An RLC series circuit has a 
+ 
+ 1.00 kΩ
+ 
+ resistor, a 
+ 
+ 150 μH
+ 
+ inductor, and a 25.0 nF capacitor. (a) Find the circuit’s impedance at 500 Hz. (b) Find the circuit’s impedance at 7.50 kHz. (c) If the voltage source has Vrms=408V, what is Irms at each frequency? (d) What is the resonant frequency of the circuit? (e) What is Irms at resonance?
+
+(a) 
+ 
+ 12.8 kΩ
+
+(b) 
+ 
+ 1.31 kΩ
+
+(c) 31.9 mA at 500 Hz, 312 mA at 7.50 kHz
+
+(d) 82.2 kHz
+
+(e) 0.408 A
+
+An RLC series circuit has a
+
+ 2.50 Ω
+ 
+ resistor, a
+
+ 100 μH
+ 
+ inductor, and an
+
+ 80.0 μF
+ 
+ capacitor. (a) Find the power factor at 
+
+ f
+ =
+ 120 Hz
+
+. (b) What is the phase angle at 120 Hz? (c) What is the average power at 120 Hz? (d) Find the average power at the circuit’s resonant frequency.
+
+An RLC series circuit has a
+
+ 1.00 kΩ
+ 
+ resistor, a
+
+ 150 μH
+ 
+ inductor, and a 25.0 nF capacitor. (a) Find the power factor at 
+
+ f
+ =
+ 7.50 Hz
+
+. (b) What is the phase angle at this frequency? (c) What is the average power at this frequency? (d) Find the average power at the circuit’s resonant frequency.
+
+(a) 0.159
+
+(b) 
+ 
+ 80.9º
+
+(c) 26.4 W
+
+(d) 166 W
+
+An RLC series circuit has a
+
+ 200 Ω
+
+ resistor and a 25.0 mH inductor. At 8000 Hz, the phase angle is 
+ 
+ 45.0º
+ 
+. (a) What is the impedance? (b) Find the circuit’s capacitance. (c) If Vrms=408V is applied, what is the average power supplied?
+
+Referring to , find the average power at 10.0 kHz.
+
+16.0 W
+Critical Thinking A length of 4.000 m of wire is to be used to detect a magnetic field. The wire is made into a single square loop and rotated at a rate of 400 cycles per second. (a) If the magnetic field is 0.02000 T, what is the magnitude of the average emf that can be generated in the first quarter cycle, provided the loop is initially oriented in a plane perpendicular to the magnetic field? (b) Is there a difference in the magnitude of the average emf generated if the wire is made into two square loops and rotated at the same rate, starting with the same orientation of the loops as that of the loop in part a? If so, what is the average emf possible for the first quarter cycle for two loops being rotated at 400 cycles per second in the magnetic field? (c) If the wire is made into a figure eight, what is the average emf for the first quarter cycle that can be generated by rotating it at 400 cycles per second in the magnetic field, again starting with the same orientation of the oops with respect to the magnetic field? The wire crosses itself in this arrangement. (d) Does the shape of the loop matter?
+
+Critical Thinking
+
+(a) 
+
+ emf
+ =1
+ 
+ Δϕ
+ 
+ Δt
+ 
+ =
+ 
+ 1.000(0.02000)
+ 
+ 100
+ 
+ V=0.0002000 V
+
+(b) 
+
+ emf
+ =2
+ 
+ Δϕ
+ 
+ Δt
+ 
+ =
+ 
+ 2(0.2500)(0.02000)
+ 
+ 100
+ 
+ V=0.0001000 V
+
+(c) The average emf is 0 since the loops are made by a wire that crosses, so the voltage from each loop cancels the emf from the other.
+
+(d) No.
+
+the AC analogue to resistance in a DC circuit; it is the combined effect of resistance, inductive reactance, and capacitive reactance in the form Z=R2+(XL−XC)2
+the frequency at which the impedance in a circuit is at a minimum, and also the frequency at which the circuit would oscillate if not driven by a voltage source; calculated by f0=12πLC
+denoted by ϕ, the amount by which the voltage and current are out of phase with each other in a circuit
+the amount by which the power delivered in the circuit is less than the theoretical maximum of the circuit due to voltage and current being out of phase; calculated by cosϕ

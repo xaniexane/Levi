@@ -1,0 +1,1147 @@
+# m54147
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Vector Addition and Subtraction: Analytical Methods
+
+Vector Addition and Subtraction: Analytical Methods
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Define components of vectors
+
+Describe the analytical method of vector addition and subtraction
+
+Use the analytical method of vector addition and subtraction to solve problems
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(3) Scientific processes. The student uses critical thinking, scientific reasoning, and problem solving to make informed decisions within and outside the classroom. The student is expected to:
+ (F) express and interpret relationships symbolically in accordance with accepted theories to make predictions and solve problems mathematically, including problems requiring proportional reasoning and graphical vector addition
+(F) express and interpret relationships symbolically in accordance with accepted theories to make predictions and solve problems mathematically, including problems requiring proportional reasoning and graphical vector addition
+
+(4) Science concepts. The student knows and applies the laws governing motion in two dimensions for a variety of situations. The student is expected to:
+ (E) develop and interpret free-body force diagrams;
+ (F) identify and describe motion relative to different frames of reference.
+(E) develop and interpret free-body force diagrams;
+(F) identify and describe motion relative to different frames of reference.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Motion in Two Dimensions, as well as the following standards:
+
+(3) Scientific processes. The student uses critical thinking, scientific reasoning, and problem solving to make informed decisions within and outside the classroom. The student is expected to:
+
+(F) express and interpret relationships symbolically in accordance with accepted theories to make predictions and solve problems mathematically, including problems requiring proportional reasoning and graphical vector addition.
+(F) express and interpret relationships symbolically in accordance with accepted theories to make predictions and solve problems mathematically, including problems requiring proportional reasoning and graphical vector addition.
+
+Section Key Terms
+
+analytical method
+component (of a two-dimensional vector)
+Components of Vectors
+
+For the analytical method of vector addition and subtraction, we use some simple geometry and trigonometry, instead of using a ruler and protractor as we did for graphical methods. However, the graphical method will still come in handy to visualize the problem by drawing vectors using the head-to-tail method. The analytical method is more accurate than the graphical method, which is limited by the precision of the drawing. For a refresher on the definitions of the sine, cosine, and tangent of an angle, see .
+
+Teacher Support
+[BL][OL] Review trigonometric concepts of sine, cosine, tangent and the Pythagorean theorem.
+
+Since, by definition, cosθ=x/h, we can find the length x if we know h and θ by using x=hcosθ . Similarly, we can find the length of y by using y=hsinθ . These trigonometric relationships are useful for adding vectors.
+
+When a vector acts in more than one dimension, it is useful to break it down into its x and y components. For a two-dimensional vector, a component is a piece of a vector that points in either the x- or y-direction. Every 2-d vector can be expressed as a sum of its x and y components.
+
+For example, given a vector like 
+ 
+ A
+ 
+ in , we may want to find what two perpendicular vectors, 
+
+ A
+ x
+
+ and 
+
+ A
+ y
+
+ , add to produce it. In this example, 
+
+ A
+ x
+
+ and 
+
+ A
+ y
+
+ form a right triangle, meaning that the angle between them is 90 degrees. This is a common situation in physics and happens to be the least complicated situation trigonometrically.
+A
+ x
+
+ and 
+
+ A
+ y
+
+ are defined to be the components of 
+ 
+ A
+ 
+ along the x- and y-axes. The three vectors, 
+ 
+ A
+ 
+ , 
+
+ A
+ x
+
+ , and 
+
+ A
+ y
+
+ , form a right triangle.
+
+If the vector 
+ 
+ A
+ 
+ is known, then its magnitude 
+ 
+ A
+ 
+ (its length) and its angle 
+ 
+ θ
+ 
+ (its direction) are known. To find 
+
+ A
+ x
+
+ and 
+
+ A
+ y
+
+ , its x- and y-components, we use the following relationships for a right triangle:
+
+and
+
+where 
+
+ A
+ x
+
+ is the magnitude of A in the x-direction, 
+
+ A
+ y
+
+ is the magnitude of A in the y-direction, and 
+ 
+ θ
+ 
+ is the angle of the resultant with respect to the x-axis, as shown in .
+
+Teacher Support
+[BL][OL][AL] Derive the formula for getting the magnitude and direction of a vector.
+
+Students might be confused between the relationship 
+
+ A
+ x
+ 
+  + 
+ A
+ y
+ 
+  = A
+ 
+ , which shows the addition of vectors and 
+ 
+ A=
+
+ A
+ x
+
+ 2
+ 
+ +
+ A
+ y
+
+ 2
+
+ which shows the addition of magnitudes of vectors.
+
+Suppose, for example, that 
+ 
+ A
+ 
+ is the vector representing the total displacement of the person walking in a city, as illustrated in .
+
+Then A = 10.3 blocks and 
+ 
+ θ=
+ 
+ 29.1
+ 
+ ∘
+
+ , so that
+
+This magnitude indicates that the walker has traveled 9 blocks to the east—in other words, a 9-block eastward displacement. Similarly,
+
+indicating that the walker has traveled 5 blocks to the north—a 5-block northward displacement.
+
+Analytical Method of Vector Addition and Subtraction
+
+Calculating a resultant vector (or vector addition) is the reverse of breaking the resultant down into its components. If the perpendicular components 
+
+ A
+ x
+
+ and 
+
+ A
+ y
+
+ of a vector 
+ 
+ A
+ 
+ are known, then we can find 
+ 
+ A
+ 
+ analytically. How do we do this? Since, by definition,
+
+we solve for 
+ θ
+ to find the direction of the resultant.
+
+Note that 
+ 
+ tan
+
+ −1
+ 
+ (θ) gives an angle in the first quadrant if 
+ 
+ Ay/Ax>0
+ and in the fourth quadrant if 
+ 
+ Ay/Ax<0
+ . If, in fact, both Ax and Ay are negative, or if Ax is negative and Ay positive, then θ, measured from the positive x direction, is 
+ 
+ tan
+ 
+ –1
+ (θ)+180°
+ 
+ .
+
+Since this is a right triangle, the Pythagorean theorem (x2 + y2 = h2) for finding the hypotenuse applies. In this case, it becomes
+
+Solving for A gives
+
+In summary, to find the magnitude 
+ 
+ A
+ 
+ and direction 
+ 
+ θ
+ 
+ of a vector from its perpendicular components 
+
+ A
+ x
+
+ and 
+
+ A
+ y
+
+ , as illustrated in , we use the following relationships:
+
+Teacher Support
+[BL][OL][AL] Demonstrate a problem involving displacement by physically walking along the specified direction. Show how this can be represented on a graph. Explain that even when solving problems analytically; representing it on a graph would make it easier to visualize the problem.
+
+Sometimes, the vectors added are not perfectly perpendicular to one another. An example of this is the case below, where the vectors 
+ 
+ A
+ 
+ and 
+ 
+ B
+ 
+ are added to produce the resultant 
+ 
+ R
+,
+ 
+ as illustrated in .
+
+If 
+ 
+ A
+ 
+ and 
+ 
+ B
+ 
+ represent two legs of a walk (two displacements), then 
+ 
+ R
+ 
+ is the total displacement. The person taking the walk ends up at the tip of 
+ 
+ R
+ 
+ . There are many ways to arrive at the same point. The person could have walked straight ahead first in the x-direction and then in the y-direction. Those paths are the x- and y-components of the resultant, 
+
+ R
+ x
+
+ and 
+
+ R
+ y
+ 
+ .
+ 
+ If we know 
+
+ R
+ x
+
+ and 
+
+ R
+ y
+
+ , we can find 
+ 
+ R
+ 
+ and 
+ 
+ θ
+ 
+ using the equations 
+ 
+ R=
+
+ R
+ x
+
+ 2
+ 
+ +
+ R
+ y
+
+ 2
+
+ and 
+ 
+ θ=ta
+ n
+ 
+ –1
+
+ (
+ R
+ y
+ 
+ /
+ R
+ x
+ 
+ )
+ 
+ .
+
+Draw in the x and y components of each vector (including the resultant) with a dashed line. Use the equations 
+
+ A
+ x
+ 
+ =Acosθ
+ 
+ and 
+
+ A
+ y
+ 
+ =Asinθ
+ 
+ to find the components. In , these components are 
+
+ A
+ x
+
+ , 
+
+ A
+ y
+
+ , 
+
+ B
+ x
+
+ , and 
+
+ B
+ y
+ 
+ .
+ 
+ Vector 
+ 
+ A
+ 
+ makes an angle of 
+
+ θ
+ A
+
+ with the x-axis, and vector 
+ 
+ B
+ 
+ makes and angle of 
+
+ θ
+ B
+
+ with its own x-axis (which is slightly above the x-axis used by vector A).
+
+ To add vectors 
+ 
+ A
+ 
+ and 
+ 
+ B,
+ 
+ first determine the horizontal and vertical components of each vector. These are the dotted vectors 
+
+ A
+ x
+ 
+ ,
+
+ A
+ y
+
+ B
+ y
+
+ shown in the image.
+
+Find the x component of the resultant by adding the x component of the vectors
+
+ R
+ x
+ 
+ =
+ A
+ x
+ 
+ +
+ B
+ x
+
+ and find the y component of the resultant (as illustrated in ) by adding the y component of the vectors.
+
+ R
+ y
+ 
+ =
+ A
+ y
+ 
+ +
+ B
+ y
+ 
+ .
+
+ The vectors 
+
+ A
+ x
+
+ and 
+
+ B
+ x
+
+ add to give the magnitude of the resultant vector in the horizontal direction, 
+
+ R
+ x
+ 
+ .
+ 
+ Similarly, the vectors 
+
+ A
+ y
+
+ and 
+
+ B
+ y
+
+ add to give the magnitude of the resultant vector in the vertical direction, 
+
+ R
+ y
+ 
+ .
+
+ Now that we know the components of 
+ 
+ R,
+ we can find its magnitude and direction.
+
+and find the y component of the resultant (as illustrated in ) by adding the y component of the vectors.
+
+Now that we know the components of 
+ 
+ R,
+ we can find its magnitude and direction.
+
+To get the magnitude of the resultant R, use the Pythagorean theorem.
+
+ R=
+
+ R
+ x
+ 2
+ 
+ +
+ R
+ y
+ 2
+
+To get the direction of the resultant
+
+ θ=
+ 
+ tan
+
+ −1
+
+ (
+ R
+ y
+ 
+ /
+ R
+ x
+ 
+ ).
+
+Classifying Vectors and Quantities Example
+
+This video contrasts and compares three vectors in terms of their magnitudes, positions, and directions.
+
+In the video, the vectors were represented with an arrow above them rather than in bold. This is a common notation in math classes.
+
+Using the Analytical Method of Vector Addition and Subtraction to Solve Problems
+uses the analytical method to add vectors.
+
+An Accelerating Subway Train
+
+Add the vector 
+ 
+ A
+ 
+ to the vector 
+ 
+ B
+ 
+ shown in , using the steps above. The x-axis is along the east–west direction, and the y-axis is along the north–south directions. A person first walks 
+ 
+ 53.0 m
+ 
+ in a direction 
+ 
+ 20.0°
+ 
+ north of east, represented by vector 
+ 
+ A.
+ 
+ The person then walks 
+ 
+ 34.0 m
+ 
+ in a direction 
+ 
+ 63.0°
+ 
+ north of east, represented by vector 
+ 
+ B.
+
+Strategy
+
+The components of 
+ 
+ A
+ 
+ and 
+ 
+ B
+ 
+ along the x- and y-axes represent walking due east and due north to get to the same ending point. We will solve for these components and then add them in the x-direction and y-direction to find the resultant.
+
+Solution
+
+First, we find the components of 
+ 
+ A
+ 
+ and 
+ 
+ B
+ 
+ along the x- and y-axes. From the problem, we know that 
+ 
+ A=53.0 m,
+
+ θ
+ A
+ 
+ =
+ 
+ 20.0
+ 
+ ∘,
+
+ B
+ 
+ = 
+ 
+ 34.0 m
+ 
+ , and 
+
+ θ
+ B
+ 
+ =
+ 
+ 63.0
+ 
+ ∘
+
+ . We find the x-components by using 
+
+ A
+ x
+ 
+ =Acosθ
+ 
+ , which gives
+
+and
+
+Similarly, the y-components are found using 
+
+ A
+ y
+ 
+ =Asin
+ θ
+ A
+
+and
+
+The x- and y-components of the resultant are
+
+and
+
+Now we can find the magnitude of the resultant by using the Pythagorean theorem
+
+so that
+
+Finally, we find the direction of the resultant
+
+This is
+
+Discussion
+
+This example shows vector addition using the analytical method. Vector subtraction using the analytical method is very similar. It is just the addition of a negative vector. That is, 
+ 
+ A−B≡A+(−B)
+ 
+ . The components of – 
+ 
+ B
+ 
+ are the negatives of the components of 
+ 
+ B
+ 
+ . Therefore, the x- and y-components of the resultant 
+ 
+ A−B=R
+ 
+ are
+
+and
+
+and the rest of the method outlined above is identical to that for addition.
+
+Practice Problems
+
+What is the magnitude of a vector whose x-component is 4 cm and whose y-component is 3 cm?
+
+1 cm
+
+5 cm
+
+7 cm
+
+25 cm
+
+What is the magnitude of a vector that makes an angle of 30° to the horizontal and whose x-component is 3 units?
+
+2.61 units
+
+3.00 units
+
+3.46 units
+
+6.00 units
+
+Atmospheric Science
+
+Atmospheric science is a physical science, meaning that it is a science based heavily on physics. Atmospheric science includes meteorology (the study of weather) and climatology (the study of climate). Climate is basically the average weather over a longer time scale. Weather changes quickly over time, whereas the climate changes more gradually.
+
+The movement of air, water and heat is vitally important to climatology and meteorology. Since motion is such a major factor in weather and climate, this field uses vectors for much of its math.
+
+Vectors are used to represent currents in the ocean, wind velocity and forces acting on a parcel of air. You have probably seen a weather map using vectors to show the strength (magnitude) and direction of the wind.
+
+Vectors used in atmospheric science are often three-dimensional. We won’t cover three-dimensional motion in this text, but to go from two-dimensions to three-dimensions, you simply add a third vector component. Three-dimensional motion is represented as a combination of x-, y- and z components, where z is the altitude.
+
+Vector calculus combines vector math with calculus, and is often used to find the rates of change in temperature, pressure or wind speed over time or distance. This is useful information, since atmospheric motion is driven by changes in pressure or temperature. The greater the variation in pressure over a given distance, the stronger the wind to try to correct that imbalance. Cold air tends to be more dense and therefore has higher pressure than warm air. Higher pressure air rushes into a region of lower pressure and gets deflected by the spinning of the Earth, and friction slows the wind at Earth’s surface.
+
+Finding how wind changes over distance and multiplying vectors lets meteorologists, like the one shown in , figure out how much rotation (spin) there is in the atmosphere at any given time and location. This is an important tool for tornado prediction. Conditions with greater rotation are more likely to produce tornadoes.
+
+Section Summary
+
+The analytical method of vector addition and subtraction uses the Pythagorean theorem and trigonometric identities to determine the magnitude and direction of a resultant vector.
+
+The steps to add vectors 
+ 
+ A
+ 
+ and 
+ 
+ B
+ 
+ using the analytical method are as follows:
+ 
+ Determine the coordinate system for the vectors. Then, determine the horizontal and vertical components of each vector using the equations
+
+ A
+ x
+
+ =
+
+ Acosθ
+
+ B
+ x
+
+ =
+
+ Bcosθ
+
+ and
+
+ A
+ y
+
+ =
+
+ Asinθ
+
+ B
+ y
+
+ =
+
+ Bsinθ
+.
+
+ Add the horizontal and vertical components of each vector to determine the components 
+
+ R
+ x
+
+ and 
+
+ R
+ y
+
+ of the resultant vector, 
+ 
+ R.
+
+ R
+ x
+ 
+ =
+ A
+ x
+ 
+ +
+ B
+ x
+
+ and
+
+ R
+ y
+ 
+ =
+ A
+ y
+ 
+ +
+ B
+ y
+ 
+ .
+
+ Use the Pythagorean theorem to determine the magnitude, 
+ 
+ R
+ 
+ , of the resultant vector 
+ 
+ R.
+
+ R=
+
+ R
+ x
+ 2
+ 
+ +
+ R
+ y
+ 2
+
+ Use a trigonometric identity to determine the direction, 
+ 
+ θ
+ 
+ , of 
+ 
+ R.
+
+ θ=
+ 
+ tan
+
+ −1
+
+ (
+ R
+ y
+ 
+ /
+ R
+ x
+ 
+ )
+
+Determine the coordinate system for the vectors. Then, determine the horizontal and vertical components of each vector using the equations
+
+ A
+ x
+
+ =
+
+ Acosθ
+
+ B
+ x
+
+ =
+
+ Bcosθ
+
+ and
+
+ A
+ y
+
+ =
+
+ Asinθ
+
+ B
+ y
+
+ =
+
+ Bsinθ
+.
+
+and
+
+Add the horizontal and vertical components of each vector to determine the components 
+
+ R
+ x
+
+ and 
+
+ R
+ y
+
+ of the resultant vector, 
+ 
+ R.
+
+ R
+ x
+ 
+ =
+ A
+ x
+ 
+ +
+ B
+ x
+
+ and
+
+ R
+ y
+ 
+ =
+ A
+ y
+ 
+ +
+ B
+ y
+ 
+ .
+
+and
+
+Use the Pythagorean theorem to determine the magnitude, 
+ 
+ R
+ 
+ , of the resultant vector 
+ 
+ R.
+
+ R=
+
+ R
+ x
+ 2
+ 
+ +
+ R
+ y
+ 2
+
+Use a trigonometric identity to determine the direction, 
+ 
+ θ
+ 
+ , of 
+ 
+ R.
+
+ θ=
+ 
+ tan
+
+ −1
+
+ (
+ R
+ y
+ 
+ /
+ R
+ x
+ 
+ )
+
+Key Equations
+
+R=
+
+ R
+ x
+ 2
+ 
+ +
+ R
+ y
+ 2
+θ=
+ 
+ tan
+
+ −1
+
+ (
+ R
+ y
+ 
+ /
+ R
+ x
+ 
+ )
+A
+ x
+ 
+ =Acosθ
+A
+ y
+ 
+ =Asinθ
+A
+ x
+ 
+  + 
+ A
+ y
+ 
+  = A
+Check Your Understanding
+
+Between the analytical and graphical methods of vector additions, which is more accurate? Why?
+
+The analytical method is less accurate than the graphical method, because the former involves geometry and trigonometry.
+
+The analytical method is more accurate than the graphical method, because the latter involves some extensive calculations.
+
+The analytical method is less accurate than the graphical method, because the former includes drawing all figures to the right scale.
+
+The analytical method is more accurate than the graphical method, because the latter is limited by the precision of the drawing.
+
+What is a component of a two dimensional vector?
+
+A component is a piece of a vector that points in either the x or y direction.
+
+A component is a piece of a vector that has half of the magnitude of the original vector.
+
+A component is a piece of a vector that points in the direction opposite to the original vector.
+
+A component is a piece of a vector that points in the same direction as original vector but with double of its magnitude.
+
+How can we determine the magnitude of a vector if we know the magnitudes of its components?
+|A→|=Ax+Ay
+|A→|=Ax2+Ay2
+|A→|=Ax2+Ay2
+|A→|=(Ax2+Ay2)2
+
+Teacher Support
+
+Use the Check Your Understanding questions to assess whether students achieve the learning objectives for this section. If students are struggling with a specific objective, the Check Your Understanding will help identify which objective is causing the problem and direct students to the relevant content.
+
+Concept Items
+
+True or FalseEvery 2-D vector can be expressed as the product of its x and y-components.
+
+True
+
+False
+
+Problems
+
+A person walks 10.0 m north and then 2.00 m east. Solving analytically, what is the resultant displacement of the person?
+R→ = 10.2 m, θ = 78.7º east of north
+R→ = 10.2 m, θ = 78.7º north of east
+R→ = 12.0 m, θ = 78.7º east of north
+R→ = 12.0 m, θ = 78.7º north of east
+
+Critical Thinking
+
+Test Prep Multiple Choice
+
+What is the dimensionality of vectors used in the study of atmospheric sciences?
+
+One-dimensional
+
+Two-dimensional
+
+Three-dimensional
+
+Test Prep Short Answer
+
+True or False—A vector can form the shape of a right angle triangle with its x and y components.
+
+True
+
+False
+
+True or False—All vectors have positive x and y components.
+
+True
+
+False
+
+When a three dimensional vector is used in the study of atmospheric sciences, what is z?
+
+Altitude
+
+Heat
+
+Temperature
+
+Wind speed
+
+Which method is not an application of vector calculus?
+
+To find the rate of change in atmospheric temperature
+
+To study changes in wind speed and direction
+
+To predict changes in atmospheric pressure
+
+To measure changes in average rainfall
+
+Test Prep Extended Response
+
+True or False—If only the angles of two vectors are known, we can find the angle of their resultant addition vector.
+
+True
+
+False
+
+True or false—We can find the magnitude and direction of the resultant vector if we know the angles of two vectors and the magnitude of one.
+
+True
+
+False
+
+the method of determining the magnitude and direction of a resultant vector using the Pythagorean theorem and trigonometric identities
+a piece of a vector that points in a particular direction, usually in the direction of one of the axes of a chosen coordinate system; every 2-d vector can be expressed as a sum of two perpendicular vector components

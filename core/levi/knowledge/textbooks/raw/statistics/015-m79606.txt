@@ -1,0 +1,1016 @@
+# m79606
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Measures of the Spread of the Data
+
+Measures of the Spread of the Data
+
+An important characteristic of any set of data is the variation in the data. In some data sets, the data values are concentrated closely near the mean; in other data sets, the data values are more widely spread out from the mean. The most common measure of variation, or spread, is the standard deviation. The standard deviation is a number that measures how far data values are from their mean.
+
+The standard deviation
+
+provides a numerical measure of the overall amount of variation in a data set and
+
+can be used to determine whether a particular data value is close to or far from the mean.
+
+The standard deviation provides a measure of the overall variation in a data set.
+
+The standard deviation is always positive or zero. The standard deviation is small when all the data are concentrated close to the mean, exhibiting little variation or spread. The standard deviation is larger when the data values are more spread out from the mean, exhibiting more variation.
+
+Suppose that we are studying the amount of time customers wait in line at the checkout at Supermarket A and Supermarket B. The average wait time at both supermarkets is five minutes. At Supermarket A, the standard deviation for the wait time is two minutes; at Supermarket B, the standard deviation for the wait time is four minutes.
+
+Because Supermarket B has a higher standard deviation, we know that there is more variation in the wait times at Supermarket B. Overall, wait times at Supermarket B are more spread out from the average whereas wait times at Supermarket A are more concentrated near the average.
+
+The standard deviation can be used to determine whether a data value is close to or far from the mean.
+
+Suppose that both Rosa and Binh shop at Supermarket A. Rosa waits at the checkout counter for seven minutes, and Binh waits for one minute. At Supermarket A, the mean waiting time is five minutes, and the standard deviation is two minutes. The standard deviation can be used to determine whether a data value is close to or far from the mean. A z-score is a standardized score that lets us compare data sets. It tells us how many standard deviations a data value is from the mean and is calculated as the ratio of the difference in a particular score and the population mean to the population standard deviation.
+
+We can use the given information to create the table below.
+
+Supermarket
+Population Standard Deviation, σ
+Individual Score, x
+Population Mean, μ
+Supermarket A
+2 minutes
+7, 1
+5
+Supermarket B
+4 minutes
+5
+Since Rosa and Binh only shop at Supermarket A, we can ignore the row for Supermarket B.
+
+We need the values from the first row to determine the number of standard deviations above or below the mean each individual wait time is; we can do so by calculating two different z-scores.
+
+Rosa waited for seven minutes, so the z-score representing this deviation from the population mean may be calculated as
+
+The z-score of one tells us that Rosa’s wait time is one standard deviation above the mean wait time of five minutes.
+
+Binh waited for one minute, so the z-score representing this deviation from the population mean may be calculated as
+
+The z-score of −2 tells us that Binh’s wait time is two standard deviations below the mean wait time of five minutes.
+
+A data value that is two standard deviations from the average is just on the borderline for what many statisticians would consider to be far from the average. Considering data to be far from the mean if they are more than two standard deviations away is more of an approximate rule of thumb than a rigid rule. In general, the shape of the distribution of the data affects how much of the data is farther away than two standard deviations. You will learn more about this in later chapters.
+
+The number line may help you understand standard deviation. If we were to put five and seven on a number line, seven is to the right of five. We say, then, that seven is one standard deviation to the right of five because 5 + (1)(2) = 7.
+
+If one were also part of the data set, then one is two standard deviations to the left of five because 5 + (–2)(2) = 1.
+
+In general, a value = mean + (#ofSTDEV)(standard deviation)
+
+where #ofSTDEVs = the number of standard deviations
+
+#ofSTDEV does not need to be an integer
+
+One is two standard deviations less than the mean of five because 1 = 5 + (–2)(2).
+
+The equation value = mean + (#ofSTDEVs)(standard deviation) can be expressed for a sample and for a population as follows:
+Sample: 
+ 
+ x = 
+ x
+ ¯
+ 
+  + (#ofSTDEV)(s)
+
+Population: 
+ 
+ x=μ+(#ofSTDEV)(σ)
+ .
+
+The lowercase letter s represents the sample standard deviation and the Greek letter σ (lower case) represents the population standard deviation.
+
+The symbol 
+
+ x
+
+ is the sample mean, and the Greek symbol
+μ is the population mean.
+Sample: 
+ 
+ x = 
+ x
+ ¯
+ 
+  + (#ofSTDEV)(s)
+Population: 
+ 
+ x=μ+(#ofSTDEV)(σ)
+ .
+
+Calculating the Standard Deviation
+
+If x is a number, then the difference x – mean is called its deviation. In a data set, there are as many deviations as there are items in the data set. The deviations are used to calculate the standard deviation. If the numbers belong to a population, in symbols, a deviation is x – μ. For sample data, in symbols, a deviation is x – 
+ 
+ x
+ ¯
+
+.
+
+The procedure to calculate the standard deviation depends on whether the numbers are the entire population or are data from a sample. The calculations are similar but not identical. Therefore, the symbol used to represent the standard deviation depends on whether it is calculated from a population or a sample. The lowercase letter s represents the sample standard deviation and the Greek letter σ (lowercase sigma) represents the population standard deviation. If the sample has the same characteristics as the population, then s should be a good estimate of σ.
+
+To calculate the standard deviation, we need to calculate the variance first. The variance is the average of the squares of the deviations (the x – 
+ 
+ x
+ ¯
+
+ values for a sample or the x – μ values for a population). The symbol σ2 represents the population variance; the population standard deviation σ is the square root of the population variance. The symbol s2 represents the sample variance; the sample standard deviation s is the square root of the sample variance. You can think of the standard deviation as a special average of the deviations.
+
+If the numbers come from a census of the entire population and not a sample, when we calculate the average of the squared deviations to find the variance, we divide by N, the number of items in the population. If the data are from a sample rather than a population, when we calculate the average of the squared deviations, we divide by n – 1, one less than the number of items in the sample.
+
+Formulas for the Sample Standard Deviation
+s=
+
+ Σ
+ 
+ (x − 
+ x
+ ¯
+ 
+ )
+ 
+ 2
+
+ n−1
+
+ or 
+ 
+ s=
+
+ Σf
+ 
+ (x−
+ x
+ ¯
+ 
+ )
+ 
+ 2
+
+ n−1
+
+For the sample standard deviation, the denominator is n−; that is, the sample size minus 1.
+
+Formulas for the Population Standard Deviation
+σ
+  = 
+
+ Σ
+ 
+ (x−μ)
+ 
+ 2
+
+ N
+
+ or 
+ 
+ σ
+  = 
+
+ Σf
+ 
+ (x–μ)
+ 
+ 2
+
+ N
+
+For the population standard deviation, the denominator is N, the number of items in the population.
+
+In these formulas, f represents the frequency with which a value appears. For example, if a value appears once, f is one. If a value appears three times in the data set or population, f is three.
+
+Types of Variability in Samples
+
+When researchers study a population, they often use a sample, either for convenience or because it is not possible to access the entire population. Variability is the term used to describe the differences that may occur in these outcomes. Common types of variability include the following:
+
+Observational or measurement variability
+
+Natural variability
+
+Induced variability
+
+Sample variability
+
+Here are some examples to describe each type of variability:
+
+Example 1: Measurement variability
+
+Measurement variability occurs when there are differences in the instruments used to measure or in the people using those instruments. If we are gathering data on how long it takes for a ball to drop from a height by having students measure the time of the drop with a stopwatch, we may experience measurement variability if the two stopwatches used were made by different manufacturers. For example, one stopwatch measures to the nearest second, whereas the other one measures to the nearest tenth of a second. We also may experience measurement variability because two different people are gathering the data. Their reaction times in pressing the button on the stopwatch may differ; thus, the outcomes will vary accordingly. The differences in outcomes may be affected by measurement variability.
+
+Example 2: Natural variability
+
+Natural variability arises from the differences that naturally occur because members of a population differ from each other. For example, if we have two identical corn plants and we expose both plants to the same amount of water and sunlight, they may still grow at different rates simply because they are two different corn plants. The difference in outcomes may be explained by natural variability.
+
+Example 3: Induced variability
+
+Induced variability is the counterpart to natural variability. This occurs because we have artificially induced an element of variation that, by definition, was not present naturally. For example, we assign people to two different groups to study memory, and we induce a variable in one group by limiting the amount of sleep they get. The difference in outcomes may be affected by induced variability.
+
+Example 4: Sample variability
+
+Sample variability occurs when multiple random samples are taken from the same population. For example, if I conduct four surveys of 50 people randomly selected from a given population, the differences in outcomes may be affected by sample variability.
+
+Sampling Variability of a Statistic
+
+The statistic of a sampling distribution was discussed in Descriptive Statistics: Measures of the Center of the Data. How much the statistic varies from one sample to another is known as the sampling variability of a statistic. You typically measure the sampling variability of a statistic by its standard error. The standard error of the mean is an example of a standard error. The standard error is the standard deviation of the sampling distribution. In other words, it is the average standard deviation that results from repeated sampling. You will cover the standard error of the mean in the chapter The Central Limit Theorem (not now). The notation for the standard error of the mean is 
+
+ σ
+
+ n
+
+, where σ is the standard deviation of the population and n is the size of the sample.
+
+NOTE
+In practice, use a calculator or computer software to calculate the standard deviation. If you are using a TI-83, 83+, or 84+ calculator, you need to select the appropriate standard deviation σx or sx from the summary statistics. We will concentrate on using and interpreting the information that the standard deviation gives us. However, you should study the following step-by-step example to help you understand how the standard deviation measures variation from the mean. The calculator instructions appear at the end of this example.
+
+In a fifth-grade class, the teacher was interested in the average age and the sample standard deviation of the ages of her students. The following data are the ages for a SAMPLE of n = 20 fifth-grade students. The ages are rounded to the nearest half year.
+
+9, 9.5, 9.5, 10, 10, 10, 10, 10.5, 10.5, 10.5, 10.5, 11, 11, 11, 11, 11, 11, 11.5, 11.5, 11.5
+
+The average age is 10.53 years, rounded to two places.
+
+The variance may be calculated by using a table. Then the standard deviation is calculated by taking the square root of the variance. We will explain the parts of the table after calculating s.
+
+Data
+Frequency
+Deviations2
+f
+(x – 
+ 
+ x
+ ¯
+ 
+ )
+(x – 
+ 
+ x
+ ¯
+
+)2
+(f)(x – 
+ 
+ x
+ ¯
+
+)2
+9
+1
+9 – 10.525 = –1.525
+(–1.525)2 = 2.325625
+1 × 2.325625 = 2.325625
+9.5
+2
+9.5 – 10.525 = –1.025
+(–1.025)2 = 1.050625
+2 × 1.050625 = 2.101250
+10
+4
+10 – 10.525 = –.525
+(–.525)2 = .275625
+4 × .275625 = 1.1025
+10.5
+4
+10.5 – 10.525 = –.025
+(–.025)2 = .000625
+4 × .000625 = .0025
+11
+6
+11 – 10.525 = .475
+(.475)2 = .225625
+6 × .225625 = 1.35375
+11.5
+3
+11.5 – 10.525 = .975
+(.975)2 = .950625
+3 × .950625 = 2.851875
+The total is 9.7375.
+The last column simply multiplies each squared deviation by the frequency for the corresponding data value.
+
+The sample variance, s2, is equal to the sum of the last column (9.7375) divided by the total number of data values minus one (20 – 1):
+
+The sample standard deviation s is equal to the square root of the sample variance:
+s=
+ 
+ .5125
+
+ =.715891,
+ 
+ which is rounded to two decimal places, s = .72.
+Typically, you do the calculation for the standard deviation on your calculator or computer. The intermediate results are not rounded. This is done for accuracy.
+For the following problems, recall that value = mean + (#ofSTDEVs)(standard deviation). Verify the mean and standard deviation on a calculator or computer. Note that these formulas are derived by algebraically manipulating the z-score formulas, given either parameters or statistics.
+ For a sample: x = 
+ 
+ x
+ ¯
+
+ + (#ofSTDEVs)(s)
+ For a population: x = μ + (#ofSTDEVs)(σ)
+ For this example, use x = 
+ 
+ x
+ ¯
+
+ + (#ofSTDEVs)(s) because the data is from a sample
+
+For the following problems, recall that value = mean + (#ofSTDEVs)(standard deviation). Verify the mean and standard deviation on a calculator or computer. Note that these formulas are derived by algebraically manipulating the z-score formulas, given either parameters or statistics.
+
+For a sample: x = 
+ 
+ x
+ ¯
+
+ + (#ofSTDEVs)(s)
+
+For a population: x = μ + (#ofSTDEVs)(σ)
+
+For this example, use x = 
+ 
+ x
+ ¯
+
+ + (#ofSTDEVs)(s) because the data is from a sample
+
+Verify the mean and standard deviation on your calculator or computer.
+
+Find the value that is one standard deviation above the mean. Find (
+ 
+ x
+ ¯
+
+ + 1s).
+
+Find the value that is two standard deviations below the mean. Find (
+ 
+ x
+ ¯
+
+ – 2s).
+
+Find the values that are 1.5 standard deviations from (below and above) the mean.
+Clear lists L1 and L2. Press STAT 4:ClrList. Enter 2nd 1 for L1, the comma (,), and
+ 2nd 2 for L2.
+ Enter data into the list editor. Press STAT 1:EDIT. If necessary, clear the lists by
+ arrowing up into the name. Press CLEAR and arrow down.
+ Put the data values (9, 9.5, 10, 10.5, 11, 11.5) into list L1 and the frequencies (1, 2, 4, 4, 6, 3) into list L2. Use the arrow keys to move around.
+ Press STAT and arrow to CALC. Press 1:1-VarStats and enter L1 (2nd 1), L2 (2nd 2). Do not forget the comma. Press ENTER.
+
+ x
+ ¯
+
+ = 10.525.
+ Use Sx because this is sample data (not a population): Sx=.715891.
+
+Clear lists L1 and L2. Press STAT 4:ClrList. Enter 2nd 1 for L1, the comma (,), and
+ 2nd 2 for L2.
+
+Enter data into the list editor. Press STAT 1:EDIT. If necessary, clear the lists by
+ arrowing up into the name. Press CLEAR and arrow down.
+
+Put the data values (9, 9.5, 10, 10.5, 11, 11.5) into list L1 and the frequencies (1, 2, 4, 4, 6, 3) into list L2. Use the arrow keys to move around.
+
+Press STAT and arrow to CALC. Press 1:1-VarStats and enter L1 (2nd 1), L2 (2nd 2). Do not forget the comma. Press ENTER.
+x
+ ¯
+
+ = 10.525.
+
+Use Sx because this is sample data (not a population): Sx=.715891.
+
+(
+ 
+ x
+ ¯
+
+ + 1s) = 10.53 + (1)(.72) = 11.25
+
+(
+ 
+ x
+ ¯
+
+ – 2s) = 10.53 – (2)(.72) = 9.09
+(
+ 
+ x
+ ¯
+
+ – 1.5s) = 10.53 – (1.5)(.72) = 9.45
+ (
+ 
+ x
+ ¯
+
+ + 1.5s) = 10.53 + (1.5)(.72) = 11.61
+
+(
+ 
+ x
+ ¯
+
+ – 1.5s) = 10.53 – (1.5)(.72) = 9.45
+
+(
+ 
+ x
+ ¯
+
+ + 1.5s) = 10.53 + (1.5)(.72) = 11.61
+
+Try It
+
+On a baseball team, the ages of each of the players are as follows:
+
+21, 21, 22, 23, 24, 24, 25, 25, 28, 29, 29, 31, 32, 33, 33, 34, 35, 36, 36, 36, 36, 38, 38, 38, 40
+Use your calculator or computer to find the mean and standard deviation. Then find the value that is two standard deviations above the mean.
+μ = 30.68
+s = 6.09
+(
+ 
+ x
+ ¯
+
+ + 2s) = 30.68 + (2)(6.09) = 42.86.
+
+Explanation of the standard deviation calculation shown in the table
+
+The deviations show how spread out the data are about the mean. The data value 11.5 is farther from the mean than is the data value 11, which is indicated by the deviations .97 and .47. A positive deviation occurs when the data value is greater than the mean, whereas a negative deviation occurs when the data value is less than the mean. The deviation is –1.525 for the data value nine. If you add the deviations, the sum is always zero. We can sum the products of the frequencies and deviations to show that the sum of the deviations is always zero. 
+
+ 1(
+ 
+ −1.525
+ 
+ )+2(
+ 
+ −1.025
+ 
+ )+4(
+ 
+ −.525
+ 
+ )+4(
+ 
+ −.025
+ 
+ )+6(
+ 
+ .475
+ 
+ )+3(
+ 
+ .975
+ 
+ )=0
+
+ For , there are n = 20 deviations. So you cannot simply add the deviations to get the spread of the data. By squaring the deviations, you make them positive numbers, and the sum will also be positive. The variance, then, is the average squared deviation.
+
+The variance is a squared measure and does not have the same units as the data. Taking the square root solves the problem. The standard deviation measures the spread in the same units as the data.
+
+Notice that instead of dividing by n = 20, the calculation divided by n – 1 = 20 – 1 = 19 because the data is a sample. For the sample variance, we divide by the sample size minus one (n – 1). Why not divide by n? The answer has to do with the population variance. The sample variance is an estimate of the population variance. Based on the theoretical mathematics that lies behind these calculations, dividing by (n – 1) gives a better estimate of the population variance.
+
+NOTE
+
+Your concentration should be on what the standard deviation tells us about the data. The standard deviation is a number that measures how far the data are spread from the mean. Let a calculator or computer do the arithmetic.
+
+The standard deviation, s or σ, is either zero or larger than zero. Describing the data with reference to the spread is called variability. The variability in data depends on the method by which the outcomes are obtained, for example, by measuring or by random sampling. When the standard deviation is zero, there is no spread; that is, all the data values are equal to each other. The standard deviation is small when all the data are concentrated close to the mean and larger when the data values show more variation from the mean. When the standard deviation is a lot larger than zero, the data values are very spread out about the mean; outliers can make s or σ very large.
+
+The standard deviation, when first presented, can seem unclear. By graphing your data, you can get a better feel for the deviations and the standard deviation. You will find that in symmetrical distributions, the standard deviation can be very helpful, but in skewed distributions, the standard deviation may not be much help. The reason is that the two sides of a skewed distribution have different spreads. In a skewed distribution, it is better to look at the first quartile, the median, the third quartile, the smallest value, and the largest value. Because numbers can be confusing, always graph your data. Display your data in a histogram or a box plot.
+
+Use the following data (first exam scores) from Susan Dean's spring precalculus class:
+
+33, 42, 49, 49, 53, 55, 55, 61, 63, 67, 68, 68, 69, 69, 72, 73, 74, 78, 80, 83, 88, 88, 88, 90, 92, 94, 94, 94, 94, 96, 100
+
+Create a chart containing the data, frequencies, relative frequencies, and cumulative relative frequencies to three decimal places.
+
+Calculate the following to one decimal place using a TI-83+ or TI-84 calculator:
+The sample mean
+
+The sample standard deviation
+The median
+The first quartile
+The third quartile
+IQR
+
+The sample mean
+
+The sample standard deviation
+
+The median
+
+The first quartile
+
+The third quartile
+IQR
+
+Construct a box plot and a histogram on the same set of axes. Make comments about the box plot, the histogram, and the chart.
+
+See .
+
+Entering the data values into a list in your graphing calculator and then selecting Stat, Calc, and 1-Var Stats will produce the one-variable statistics you need.
+
+The x-axis goes from 32.5 to 100.5; the y-axis goes from –2.4 to 15 for the histogram. The number of intervals is 5, so the width of an interval is (100.5 – 32.5) divided by 5, equal to 13.6. Endpoints of the intervals are as follows: the starting point is 32.5, 32.5 + 13.6 = 46.1, 46.1 + 13.6 = 59.7, 59.7 + 13.6 = 73.3, 73.3 + 13.6 = 86.9, 86.9 + 13.6 = 100.5 = the ending value; no data values fall on an interval boundary.
+
+The long left whisker in the box plot is reflected in the left side of the histogram. The spread of the exam scores in the lower 50 percent is greater (73 – 33 = 40) than the spread in the upper 50 percent (100 – 73 = 27). The histogram, box plot, and chart all reflect this. There are a substantial number of A and B grades (80s, 90s, and 100). The histogram clearly shows this. The box plot shows us that the middle 50 percent of the exam scores (IQR = 29) are Ds, Cs, and Bs. The box plot also shows us that the lower 25 percent of the exam scores are Ds and Fs.
+
+Data
+Frequency
+Relative Frequency
+Cumulative Relative Frequency
+33
+1
+.032
+.032
+42
+1
+.032
+.064
+49
+2
+.065
+.129
+53
+1
+.032
+.161
+55
+2
+.065
+.226
+61
+1
+.032
+.258
+63
+1
+.032
+.290
+67
+1
+.032
+.322
+68
+2
+.065
+.387
+69
+2
+.065
+.452
+72
+1
+.032
+.484
+73
+1
+.032
+.516
+74
+1
+.032
+.548
+78
+1
+.032
+.580
+80
+1
+.032
+.612
+83
+1
+.032
+.644
+88
+3
+.097
+.741
+90
+1
+.032
+.773
+92
+1
+.032
+.805
+94
+4
+.129
+.934
+96
+1
+.032
+.966
+100
+1
+.032
+.998 (Why isn't this value 1?)
+Try It
+
+The following data show the different types of pet food that stores in the area carry:
+6, 6, 6, 6, 7, 7, 7, 7, 7, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12
+Calculate the sample mean and the sample standard deviation to one decimal place using a TI-83+ or TI-84 calculator.
+μ = 9.3
+s = 2.2
+
+Standard deviation of Grouped Frequency Tables
+
+Recall that for grouped data we do not know individual data values, so we cannot describe the typical value of the data with precision. In other words, we cannot find the exact mean, median, or mode. We can, however, determine the best estimate of the measures of center by finding the mean of the grouped data with the formula Mean of Frequency Table=
+ 
+ ∑ 
+ fm
+
+ ∑ f
+ ,
+
+where 
+ f= interval frequencies and m = interval midpoints.
+
+Just as we could not find the exact mean, neither can we find the exact standard deviation. Remember that standard deviation describes numerically the expected deviation a data value has from the mean. In simple English, the standard deviation allows us to compare how unusual individual data are when compared to the mean.
+
+Find the standard deviation for the data in .
+
+Class
+Frequency, f
+fm2
+Standard Deviation
+0–2
+1
+1
+1
+7.58
+1
+3.5
+3–5
+6
+4
+16
+7.58
+96
+3.5
+6–8
+10
+7
+49
+7.58
+490
+3.5
+9–11
+7
+10
+100
+7.58
+700
+3.5
+12–14
+0
+13
+169
+7.58
+0
+3.5
+15–17
+2
+16
+256
+7.58
+512
+3.5
+For this data set, we have the mean, 
+ x
+ ¯
+ = 7.58, and the standard deviation, sx = 3.5. This means that a randomly selected data value would be expected to be 3.5 units from the mean. If we look at the first class, we see that the class midpoint is equal to one. This is almost two full standard deviations from the mean since 7.58 – 3.5 – 3.5 = .58. While the formula for calculating the standard deviation is not complicated, 
+
+ s
+ x
+ 
+ =
+
+ f
+ 
+ (m−
+ x
+ ¯
+ 
+ )
+ 
+ 2
+
+ n−1
+
+ ,
+ 
+ where sx = sample standard deviation, 
+ 
+ x
+ ¯
+
+ = sample mean; the calculations are tedious. It is usually best to use technology when performing the calculations.
+
+Try It
+
+Find the standard deviation for the data from the previous example:
+
+Class
+Frequency, f
+0–2
+1
+3–5
+6
+6–8
+10
+9–11
+7
+12–14
+0
+15–17
+2
+First, press the STAT key and select 1:Edit.
+
+Input the midpoint values into L1 and the frequencies into L2.
+
+Select STAT, CALC, and 1: 1-Var Stats.
+
+Select 2nd, then 1, then, 2nd, then 2 Enter.
+
+You will see displayed both a population standard deviation, σx, and the sample standard deviation, sx.
+
+Comparing Values from Different Data Sets
+
+As explained before, a z-score allows us to compare statistics from different data sets. If the data sets have different means and standard deviations, then comparing the data values directly can be misleading.
+
+For each data value, calculate how many standard deviations away from its mean the value is.
+
+In symbols, the formulas for calculating z-scores become the following.
+
+ Sample
+
+ z=
+ 
+ x − 
+ x
+ ¯
+
+ s
+
+ Population
+
+ z=
+ 
+ x − μ
+ 
+ σ
+
+z=
+ 
+ x − 
+ x
+ ¯
+
+ s
+z=
+ 
+ x − μ
+ 
+ σ
+As shown in the table, when only a sample mean and sample standard deviation are given, the top formula is used. When the population mean and population standard deviation are given, the bottom formula is used.
+
+Two students, John and Ali, from different high schools, wanted to find out who had the highest GPA when compared to his school. Which student had the highest GPA when compared to his school?
+
+ Student
+ GPA
+ School Mean GPA
+ School Standard Deviation
+
+ John
+ 2.85
+ 3.0
+ .7
+
+ Ali
+ 77
+ 80
+ 10
+
+Student
+GPA
+School Mean GPA
+School Standard Deviation
+John
+2.85
+3.0
+.7
+Ali
+77
+80
+10
+For each student, determine how many standard deviations (#ofSTDEVs) his GPA is away from the average, for his school. Pay careful attention to signs when comparing and interpreting the answer.
+z=
+ # of STDEVs=
+ 
+ value –mean
+
+ standard deviation
+
+ =
+ 
+ x+μ
+ 
+ σ
+
+For John, 
+ 
+ z=#ofSTDEVs=
+ 
+ 2.85–3.0
+
+ .7
+
+ =−0.21
+
+For Ali, 
+ 
+ z=#ofSTDEVs=
+ 
+ 77−80
+
+ 10
+
+ =−0.3
+
+John has the better GPA when compared to his school because his GPA is 0.21 standard deviations below his school's mean, while Ali's GPA is .3 standard deviations below his school's mean.
+
+John's z-score of –.21 is higher than Ali's z-score of –.3. For GPA, higher values are better, so we conclude that John has the better GPA when compared to his school. The z-score representing John's score does not fall as far below the mean as the z-score representing Ali's score.
+
+Try It
+
+Two swimmers, Angie and Beth, from different teams, wanted to find out who had the fastest time for the 50-meter freestyle when compared to her team. Which swimmer had the fastest time when compared to her team?
+
+Swimmer
+Time (seconds)
+Team Mean Time
+Team Standard Deviation
+Angie
+26.2
+27.2
+.8
+Beth
+27.3
+30.1
+1.4
+For Angie: z = 
+ 
+26.2 – 27.2
+ 0.8
+ = –1.25
+
+For Beth: z = 
+
+ 27.3–30.1
+
+ 1.4
+
+ = –2
+
+The following lists give a few facts that provide a little more insight into what the standard deviation tells us about the distribution of the data.
+
+For any data set, no matter what the distribution of the data is, the following are true:
+
+At least 75 percent of the data is within two standard deviations of the mean.
+
+At least 89 percent of the data is within three standard deviations of the mean.
+
+At least 95 percent of the data is within 4.5 standard deviations of the mean.
+
+This is known as Chebyshev's Rule.
+
+A bell-shaped distribution is one that is normal and symmetric, meaning the curve can be folded along a line of symmetry drawn through the median, and the left and right sides of the curve would fold on each other symmetrically.. With a bell-shaped distribution, the mean, median, and mode are all located at the same place.
+
+For data having a distribution that is bell-shaped and symmetric, the following are true:
+
+Approximately 68 percent of the data is within one standard deviation of the mean.
+
+Approximately 95 percent of the data is within two standard deviations of the mean.
+
+More than 99 percent of the data is within three standard deviations of the mean.
+
+This is known as the Empirical Rule.
+
+It is important to note that this rule applies only when the shape of the distribution of the data is bell-shaped and symmetric; we will learn more about this when studying the Normal or Gaussian probability distribution in later chapters.
+
+References
+
+King, B. (2005, Dec.). Graphically Speaking. Retrieved from http://www.ltcc.edu/web/about/institutional-research
+
+Microsoft Bookshelf. (n.d.).
+
+Chapter Review
+
+The standard deviation can help you calculate the spread of data. There are different equations to use if you are calculating the standard deviation of a sample or of a population.
+
+The standard deviation allows us to compare individual data or classes to the data set mean numerically.
+s = 
+
+ ∑
+ ​
+
+ (x−
+ x
+ ¯
+ 
+ )
+ 
+ 2
+
+ n−1
+
+ or s = 
+
+ ∑
+ ​
+ 
+ f
+ 
+ (x−
+ x
+ ¯
+ 
+ )
+ 
+ 2
+
+ n−1
+
+ is the formula for calculating the standard deviation of a sample. To calculate the standard deviation of a population, we would use the population mean, μ, and the formula σ = 
+
+ ∑
+ ​
+
+ (x−μ)
+ 
+ 2
+
+ N
+
+ or σ = 
+
+ ∑
+ ​
+ 
+ f
+ 
+ (x−μ)
+ 
+ 2
+
+ N
+
+.
+
+Formula Review
+s
+ x=
+ ∑ 
+ fm2
+ n
+ −
+ x
+ ¯
+ 2
+ where 
+ sx
+ = sample standard deviation
+ x
+ ¯
+  = sample mean
+
+ z=
+ 
+ (x-x
+ ¯)
+ 
+ s
+
+ and 
+
+ z=
+ 
+ (x-μ)
+ 
+ θ
+
+ .
+
+For each of the examples given below, tell whether the differences in outcomes may be explained by measurement variability, natural variability, induced variability, or sampling variability.
+
+Scientists randomly select five groups of 10 women from a population of 1,000 women to record their body fat percentage. The scientists compute the mean body fat percentage from each group. The differences in outcomes may be attributed to which type of variability?
+
+sampling variability
+
+A pharmaceutical company randomly assigns participants to one of two groups: one is a control group receiving a placebo, and another is a treatment group receiving a new drug to lower blood pressure. The differences in outcomes may be attributed to which type of variability?
+
+induced variability
+
+Jaiqua and Harold are trying to determine how ramp steepness affects the speed of a ball rolling down the ramp. They measure the time it takes for the ball to roll down ramps of differing slopes. When Jaiqua rolls the ball and Harold works the stopw
+[truncated]

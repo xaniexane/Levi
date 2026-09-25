@@ -1,0 +1,46 @@
+# m00085
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Using modules with classes
+
+Using modules with classes
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Construct an import statement that selectively imports classes.
+
+Create an alias to import a module.
+
+Importing classes from modules
+
+Import statements, as discussed in the Modules chapter, allow code from other files, including classes, to be imported into a program. Accessing an imported class depends on whether the whole module is imported or only selected parts.
+
+Multiple classes can be grouped in a module. For good organization, classes should be grouped in a module only if the grouping enables module reuse, as a key benefit of modules is reusability.
+
+Importing classes from files
+
+Importing classes
+
+Using aliases
+Aliasing allows the programmer to use an alternative name for imported items. Ex: import triangle as tri allows the program to refer to the triangle module as tri. Aliasing is useful to avoid name collisions but should be used carefully to avoid confusion.
+
+Using aliasing to import character
+character.py
+main.py
+
+Using an alias
+
+Consider the example above. Suppose a program imports the character module using import character as game_char.
+
+Missing import statement
+
+Add the missing import statement to the top of the file. Do not make any changes to the rest of the code. In the end, the program should run without errors.
+
+Missing class import statement
+
+Add the missing class import statement to the top of the file. Import only a class, not a full module. Do not make any changes to the rest of the code. In the end, the program should run without errors.

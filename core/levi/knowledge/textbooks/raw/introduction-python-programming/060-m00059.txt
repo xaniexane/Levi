@@ -1,0 +1,86 @@
+# m00059
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+String operations
+
+String operations
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Compare strings using logical and membership operators.
+
+Use lower() and upper() string methods to convert string values to lowercase and uppercase characters.
+
+String comparison
+
+String values can be compared using logical operators (<, <=, >, >=, ==, !=) and membership operators (in and not in). When comparing two string values, the matching characters in two string values are compared sequentially until a decision is reached. For comparing two characters, ASCII values are used to apply logical operators.
+
+Comparing string values.
+
+Operator
+Description
+Example
+Output
+> or >=
+
+"c" > "d"
+False
+When comparing "c" operand to "d" operand, the ASCII value for "c" is smaller than the ASCII value for "d". Therefore, "c" < "d". The expression "c" > "d" evaluates to False.
+When comparing "c" operand to "d" operand, the ASCII value for "c" is smaller than the ASCII value for "d". Therefore, "c" < "d". The expression "c" > "d" evaluates to False.
+< or <=
+
+"ab" < "ac"
+True
+When comparing "ab" operand to "ac" operand, the first characters are the same, but the second character of "ab" is less than the second character in "ac" and as such "ab" < "ac".
+When comparing "ab" operand to "ac" operand, the first characters are the same, but the second character of "ab" is less than the second character in "ac" and as such "ab" < "ac".
+==
+
+"aa" == "aa"
+True
+
+!=
+
+"a" != "b"
+True
+The two operands contain different string values ("a" vs. "b"), and the result of checking whether the two are not the same evaluates to True.
+The two operands contain different string values ("a" vs. "b"), and the result of checking whether the two are not the same evaluates to True.
+in
+
+"a" in "bc"
+False
+Since string "bc" does not contain string "a", the output of "a" in "bc" evaluates to False.
+Since string "bc" does not contain string "a", the output of "a" in "bc" evaluates to False.
+not in
+
+"a" not in "bc"
+True
+Since string "bc" does not contain string "a", the output of "a" not in "bc" evaluates to True.
+Since string "bc" does not contain string "a", the output of "a" not in "bc" evaluates to True.
+
+Using logical and membership operators to compare string values
+
+lower() and upper()
+
+Python has many useful methods for modifying strings, two of which are lower() and upper() methods. The lower() method returns the converted alphabetical characters to lowercase, and the upper() method returns the converted alphabetical characters to uppercase. Both the lower() and upper() methods do not modify the string.
+
+Converting characters in a string
+
+In the example below, the lower() and upper() string methods are called on the string variable x to convert all characters to lowercase and uppercase, respectively.
+
+The above code's output is:
+
+Using lower() and upper()
+
+Number of characters in the string
+
+A string variable, s_input, is defined. Use lower() and upper() to convert the string to lowercase and uppercase, and print the results in the output. Also, print the number of characters in the string, including space characters.
+
+What is my character?
+
+Given the string, s_input, which is a one-character string object, if the character is between "a" and "t" or "A" and "T", print True. Otherwise, print False.
+ Hint: You can convert s_input to lowercase and check if s_input is between "a" and "t".

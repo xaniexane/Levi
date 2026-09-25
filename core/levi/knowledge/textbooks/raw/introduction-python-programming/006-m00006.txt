@@ -1,0 +1,119 @@
+# m00006
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Number basics
+
+Number basics
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use arithmetic operators to perform calculations.
+
+Explain the precedence of arithmetic operators.
+
+Numeric data types
+
+Python supports two basic number formats, integer and floating-point. An integer represents a whole number, and a floating-point format represents a decimal number. The format a language uses to represent data is called a data type. In addition to integer and floating-point types, programming languages typically have a string type for representing text.
+
+Integer and floating-point
+
+Integers, floats, and strings
+
+Assume that x = 1, y = 2.0, and s = "32".
+
+Basic arithmetic
+Arithmetic operators are used to perform mathematical operations like addition, subtraction, multiplication, and division.
+
+Four basic arithmetic operators exist in Python:
+
+Addition (+)
+Subtraction (-)
+Multiplication (*)
+Division (/)
+
+Addition (+)
+
+Subtraction (-)
+
+Multiplication (*)
+
+Division (/)
+
+Examples of arithmetic operators
+
+Applying arithmetic operators
+
+Assume that x = 7, y = 20, and z = 2.
+
+Operator precedence
+
+When a calculation has multiple operators, each operator is evaluated in order of precedence. Ex: 1 + 2 * 3 is 7 because multiplication takes precedence over addition. However, (1 + 2) * 3 is 9 because parentheses take precedence over multiplication.
+
+Operator precedence from highest to lowest.
+
+Operator
+Description
+Example
+()
+
+(1 + 2) * 3
+9
+**
+
+2 ** 4
+16
++, -
+
+-math.pi
+-3.14159
+*, /
+
+2 * 3
+6
++, -
+
+1 + 2
+3
+
+Order of operations in an arithmetic expression
+
+Multiple arithmetic operators
+
+Values and types
+
+Write a Python computer program that:
+
+Defines an integer variable named 'int_a' and assigns 'int_a' with the value 10.
+Defines a floating-point variable named 'float_a' and assigns 'float_a' with the value 10.0.
+Defines a string variable named 'string_a' and assigns 'string_a' with the string value "10".
+Prints the value of each of the three variables along with their type.
+
+Defines an integer variable named 'int_a' and assigns 'int_a' with the value 10.
+
+Defines a floating-point variable named 'float_a' and assigns 'float_a' with the value 10.0.
+
+Defines a string variable named 'string_a' and assigns 'string_a' with the string value "10".
+
+Prints the value of each of the three variables along with their type.
+
+Meters to feet
+
+Write a Python computer program that:
+
+Assigns the integer value 10 to a variable, meters.
+Assigns the floating-point value 3.28 to a variable, meter2feet.
+Calculates 10 meters in feet by multiplying meter by meter2feet. Store the result in a variable, feet.
+Prints the content of variable feet in the output.
+
+Assigns the integer value 10 to a variable, meters.
+
+Assigns the floating-point value 3.28 to a variable, meter2feet.
+
+Calculates 10 meters in feet by multiplying meter by meter2feet. Store the result in a variable, feet.
+
+Prints the content of variable feet in the output.

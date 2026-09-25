@@ -1,0 +1,463 @@
+# m00049
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Methods for Solving Time Value of Money Problems
+
+Methods for Solving Time Value of Money Problems
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Explain how future dollar amounts are calculated.
+
+Explain how present dollar amounts are calculated.
+
+Describe how discount rates are calculated.
+
+Describe how growth rates are calculated.
+
+Illustrate how periods of time for specified growth are calculated.
+
+Use a financial calculator and Excel to solve TVM problems.
+
+We can determine future value by using any of four methods: (1) mathematical equations, (2) calculators with financial functions, (3) spreadsheets, and (4) FVIF tables. With the advent and wide acceptance and use of financial calculators and spreadsheet software, FVIF (and other such time value of money tables and factors) have become obsolete, and we will not discuss them in this text. Nevertheless, they are often still published in other finance textbooks and are also available on the internet to use if you so choose.
+
+Using Timelines to Organize TVM Information
+
+A useful tool for conceptualizing present value and future value problems is a timeline. A timeline is a visual, linear representation of periods and cash flows over a set amount of time. Each timeline shows today at the left and a desired ending, or future point (maturity date), at the right.
+
+Now, let us take an example of a future value problem that has a time frame of five years. Before we begin to solve for any answers, it would be a good approach to lay out a timeline like that shown in :
+
+5
+The timeline provides a visual reference for us and puts the problem into perspective.
+
+Now, let’s say that we are interested in knowing what today’s balance of $100 in our saving account, earning 5% annually, will be worth at the end of each of the next five years. Using the future value formula
+
+that we covered earlier, we would arrive at the following values: $105 at the end of year one, $110.25 at the end of year two, $115.76 at the end of year three, $121.55 at the end of year four, and $127.63 at the end of year five.
+
+With the numerical information, the timeline (at a 5% interest or growth rate) would look like :
+
+Year
+0
+1
+2
+3
+4
+5
+$100.00
+$105.00
+$110.25
+$115.76
+$121.55
+$127.63
+Using timelines to lay out TVM problems becomes more and more valuable as problems become more complex. You should get into the habit of using a timeline to set up these problems prior to using the equation, a calculator, or a spreadsheet to help minimize input errors. Now we will move on to the different methods available that will help you solve specific TVM problems. These are the financial calculator and the Excel spreadsheet.
+
+Using a Financial Calculator to Solve TVM Problems
+
+An extremely popular method of solving TVM problems is through the use of a financial calculator. Financial calculators such as the Texas Instruments BAII Plus™ Professional will typically have five keys that represent the critical variables used in most common TVM problems: N, I/Y, PV, FV, and PMT. These represent the following:
+
+These are the only keys on a financial calculator that are necessary to solve TVM problems involving a single payment or lump sum.
+
+Example 1: Future Value of a Single Payment or Lump Sum
+
+Let’s start with a simple example that will provide you with most of the skills needed to perform TVM functions involving a single lump sum payment with a financial calculator.
+
+Suppose that you have $1,000 and that you deposit this in a savings account earning 3% annually for a period of four years. You will naturally be interested in knowing how much money you will have in your account at the end of this four-year time period (assuming you make no other deposits and withdraw no cash).
+
+To answer this question, you will need to work with factors of $1,000, the present value (PV); four periods or years, represented by N; and the 3% interest rate, or I/Y. Make sure that the calculator register information is cleared, or you may end up with numbers from previous uses that will interfere with the solution. The register-clearing process will depend on what type of calculator you are using, but for the TI BA II Plus™ Professional calculator, clearing can be accomplished by pressing the keys 2ND and FV [CLR TVM].
+
+Once you have cleared any old data, you can enter the values in the appropriate key areas: 4 for N, 3 for I/Y, and 1000 for PV. Now you have entered enough information to calculate the future value. Continue by pressing the CPT (compute) key, followed by the FV key. The answer you end up with should be displayed as 1,125.51 (see ).
+
+Calculator Steps for Finding the Future Value of a Single Payment or Lump SumThe specific financial calculator in these examples is the Texas Instruments BA II Plus™ Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.00
+2
+Enter present value (as a negative integer)
+1000 +|- PV
+PV =
+-1,000.00
+3
+Enter interest rate
+3 I/Y
+I/Y =
+3.00
+4
+Enter time periods
+4 N
+N =
+4.00
+5
+Indicate no payments or deposits
+0 PMT
+PMT =
+0.00
+6
+CPT FV
+FV =
+1,125.51
+Important Notes for Using a Calculator and the Cash Flow Sign Convention
+
+Please note that the PV was entered as negative $1,000 (or -$1000). This is because most financial calculators (and spreadsheets) follow something called the cash flow sign convention, which is a way for calculators and spreadsheets to keep the relative direction of the cash flow straight. Positive numbers are used to represent cash inflows, and negative numbers should always be used for cash outflows.
+
+In this example, the $1,000 is an investment that requires a cash outflow. For this reason, -1000 is entered as the present value, as you will be essentially handing this $1,000 to a bank or to someone else to initiate the transaction. Conversely, the future value represents a cash inflow in four years’ time. This is why the calculator generates a positive 1,125.51 as the end result of this calculation.
+
+Had you entered the present value of $1,000 as a positive number, there would have been no real concern, but the ending future value answer would have been returned expressed as a negative number. This would be correct had you borrowed $1,000 today (cash inflow) and agreed to repay $1,125.51 (cash outflow) four years from now. Also, it is important that you do not change the sign of any input value by using the - (minus) key). For example, on the TI BA II Plus™ Professional, you must use the +|- key instead of the minus key. If you enter 1000 and then hit the +|- key, you will get a negative 1,000 amount showing in the calculator display.
+
+An important feature of most financial calculators is that it is possible to change any of the variables in a problem without needing to reenter all of the other data. For example, suppose that we wanted to find out the future value in our bank account if we left the money from our previous example invested for 20 years instead of 4. Before clearing any of the data, simply enter 20 for N and then press the CPT key and then the FV key. After this is done, all other inputs will remain the same, and you will arrive at an answer of $1,806.11.
+
+How to Determine Future Value When Other Variables Are Known
+
+Here’s an example of using a financial calculator to solve a common time value of money problem. You have $2,000 invested in a money market account that is expected to earn 4% annually. What will be the total value in the account after five years?
+Solution:
+
+Follow the recommended financial calculator steps in .
+
+Calculator Steps for Determining Future Value
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.00
+2
+Enter present value (as a negative integer)
+2000 +|- PV
+PV =
+-2,000.00
+3
+Enter interest rate
+4 I/Y
+I/Y =
+4.00
+4
+Enter time periods
+5 N
+N =
+5.00
+5
+Indicate no payments or deposits
+0 PMT
+PMT =
+0.00
+6
+CPT FV
+FV =
+2,433.31
+The result of this future value calculation of the invested money is $2,433.31.
+
+Example 2: Present Value of Lump Sums
+
+Solving for the present value (discounted value) of a lump sum is the exact opposite of solving for a future value. Once again, if we enter a negative value for the FV, then the calculated PV will be a positive amount.
+
+Taking the reverse of what we did in our example of future value above, we can enter -1,125.51 for FV, 3 for I/Y, and 4 for N. Hit the CPT and PV keys in succession, and you should arrive at a displayed answer of 1,000.
+
+An important constant within the time value of money framework is that the present value will always be less than the future value unless the interest rate is negative. It is important to keep this in mind because it can help you spot incorrect answers that may arise from errors with your input.
+
+How to Determine Present Value When Other Variables Are Known
+
+Here is another example of using a financial calculator to solve a common time value of money problem. You have just won a second-prize lottery jackpot that will pay a single total lump sum of $50,000 five years from now. How much value would this have in today’s dollars, assuming a 5% interest rate?
+Solution:
+
+Follow the recommended financial calculator steps in .
+
+Calculator Steps for Determining Present Value
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.00
+2
+Enter future value (as a negative integer)
+50000 +|- FV
+FV =
+-50,000.00
+3
+Enter interest rate
+5 I/Y
+I/Y =
+5.00
+4
+Enter time periods
+5 N
+N =
+5.00
+5
+Indicate no payments or deposits
+0 PMT
+PMT =
+0.00
+6
+CPT PV
+PV =
+39,176.31
+The present value of the lottery jackpot is $39,176.31.
+
+Example 3: Calculating the Number of Periods
+
+There will be times when you will know both the value of the money you have now and how much money you will need to have at some unknown point in the future. If you also know the interest rate your money will be earning for the foreseeable future, then you can solve for N, or the exact amount of time periods that it will take for the present value of your money to grow into the future value that you will require for your eventual use.
+
+Now, suppose that you have $100 today and you would like to know how long it will take for you to be able to purchase a product that costs $133.82.
+
+After making sure your calculator is clear, you will enter 5 for I/Y, -100 for PV, and 133.82 for FV. Now press CPT N, and you will see that it will take 5.97 years for your money to grow to the desired amount of $133.82.
+
+Again, an important thing to note when using a financial calculator to solve TVM problems is that you must enter your numbers according to the cash flow sign convention discussed above. If you do not make either the PV or the FV a negative number (with the other being a positive number), then you will end up getting an error message on the screen instead of the answer to the problem. The reason for this is that if both numbers you enter for the PV and FV are positive, the calculator will operate under the assumption that you are receiving a financial benefit without making any cash outlay as an initial investment. If you get such an error message in your calculations, you can simply press the CE/C key. This will clear the error, and you can reenter your data correctly by changing the sign of either PV or FV (but not both of these, of course).
+
+Determining Periods of Time
+
+Here is an additional example of using a financial calculator to solve a common time value of money problem. You want to be able to contribute $25,000 to your child’s first year of college tuition and related expenses. You currently have $15,000 in a tuition savings account that is earning 6% interest every year. How long will it take for this account grow into the targeted amount of $25,000, assuming no additional deposits or withdrawals will be made?
+Solution:
+shows the steps you will take.
+
+Calculator Steps for Determining Period of Time
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter present value (as a negative integer)
+15000 +|- PV
+PV =
+-15,000.0000
+3
+Enter interest rate
+6 I/Y
+I/Y =
+6.0000
+4
+Enter future value
+25000 FV
+FV =
+25,000.0000
+5
+Indicate no payments or deposits
+0 PMT
+PMT =
+0.0000
+6
+CPT N
+N =
+8.7667
+The result of this calculation is a time period of 8.7667 years for the account to reach the targeted amount.
+
+Example 4: Solving for the Interest Rate
+
+Solving for an interest rate is a common TVM problem that can be easily addressed with a financial calculator. Let’s return to our earlier example, but in this case, we know that we have $1,000 at the present time and that we will need to have a total of $1,125.51 four years from now. Let’s also say that the only way we can add to the current value of our savings is through interest income. We will not be able to make any further deposits in addition to our initial $1,000 account balance.
+
+What interest rate should we be sure to get on our savings account in order to have a total savings account value of $1,125.51 four years from now?
+
+Once again, clear the calculator, and then enter 4 for N, -1,000 for PV, and 1,125.51 for FV. Then, press the CPT and I/Y keys and you will find that you need to earn an average 3% interest per year in order to grow your savings balance to the desired amount of $1,125.51. Again, if you end up with an error message, you probably failed to follow the sign convention relating to cash inflow and outflow that we discussed earlier. To correct this, you will need to clear the calculator and reenter the information correctly.
+
+After you believe you are done and have arrived at a final answer, always make sure you give it a quick review. You can ask yourself questions such as “Does this make any sense?” “How does this compare to other answers I have arrived at?” or “Is this logical based on everything I know about the scenario?” Knowing how to go about such a review will require you to understand the concepts you are attempting to apply and what you are trying to make the calculator do. Further, it is critical to understand the relationships among the different inputs and variables of the problem. If you do not fully understand these relationships, you may end up with an incorrect answer. In the end, it is important to realize that any calculator is simply a tool. It will only do what you direct it to do and has no idea what your objective is or what it is that you really wish to accomplish.
+
+Determining Interest or Growth Rate
+
+Here is another example of using a financial calculator to solve a common time value of money problem. Let’s use a similar example to the one we used when calculating periods of time to determine an interest or growth rate. You still want to help your child with their first year of college tuition and related expenses. You also still have a starting amount of $15,000, but you have not yet decided on a savings plan to use.
+
+Instead, the information you now have is that your child is just under 10 years old and will begin college at age 18. For simplicity’s sake, let’s say that you have eight and a half years before you will need to meet your total savings target of $25,000. What rate of interest will you need to grow your saved money from $15,000 to $25,000 in this time period, again with no other deposits or withdrawals?
+Solution:
+
+Follow the steps shown in .
+
+Calculator Steps for Determining Interest Rate
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter present value (as a negative integer)
+15000 +|- PV
+PV =
+-15,000.0000
+3
+Enter time periods
+8.5 N
+N =
+8.5000
+4
+Enter future value
+25000 FV
+FV =
+25,000.0000
+5
+Indicate no payments or deposits
+0 PMT
+PMT =
+0.0000
+6
+CPT I/Y
+I/Y =
+6.1940
+The result of this calculation is a necessary interest rate of 6.194%.
+
+Using Excel to Solve TVM Problems
+
+Excel spreadsheets can be excellent tools to use when solving time value of money problems. There are dozens of financial functions available in Excel, but a student who can use a few of these functions can solve almost any TVM problem. Special functions that relate to TVM calculations are as follows:
+
+Future Value (FV)
+Present Value (PV)
+Number of Periods (NPER)
+Interest Rate (RATE)
+Excel also includes a function called Payment (PMT) that is used in calculations involving multiple payments or deposits (annuities). These will be covered in Time Value of Money II: Equal Multiple Payments.
+
+Future Value (FV)
+
+The Future Value function in Excel is also referred to as FV and can be used to calculate the value of a single lump sum amount carried to any point in the future. The FV function syntax is similar to that of the other four basic time-value functions and has the following inputs (referred to as arguments), similar to the functions listed above:
+
+Rate: Interest Rate
+Nper: Number of Periods
+Pmt: Payment
+PV: Present Value
+Lump sum problems do not involve payments, so the value of Pmt in such calculations is 0. Another argument, Type, refers to the timing of a payment and carries a default value of the end of the period, which is the most common timing (as opposed to the beginning of a period). This may be ignored in our current example, which means the default value of the end of the period will be used.
+
+The spreadsheet in shows two examples of using the FV function in Excel to calculate the future value of $100 in five years at 5% interest.
+
+In cell E1, the FV function references the values in cells B1 through B4 for each of the arguments. When a user begins to type a function into a spreadsheet, Excel provides helpful information in the form of on-screen tips showing the argument inputs that are required to complete the function. In our spreadsheet example, as the FV formula is being typed into cell E2, a banner showing the arguments necessary to complete the function appears directly below, hovering over cell E3.
+
+Using the FV Function in Excel
+
+Cells E1 and E2 show how the FV function appears in the spreadsheet as it is typed in with the required arguments. Cell E4 shows the calculated answer for cell E1 after hitting the enter key. Once the enter key is pressed, the hint banner hovering over cell E3 will disappear. The second example of the FV function in our example spreadsheet is in cell E6. Here, the actual numerical values are used in the FV function equation rather than cell references. The method in cell E8 is referred to as hard coding. In general, it is preferable to use the cell reference method, as this allows for copying formulas and provides the user with increased flexibility in accounting for changes to input data. This ability to accept cell references in formulas is one of the greatest strengths of Excel as a spreadsheet tool.
+
+Download the spreadsheet file containing key Chapter 7 Excel exhibits.
+Determining Future Value When Other Variables Are Known. You have $2,000 invested in a money market account that is expected to earn 4% annually. What will be the total value in the account in five years?
+
+Note: Be sure to follow the sign conventions. In this case, the PV should be entered as a negative value.
+
+Note: In Excel, interest and growth rates must be entered as percentages, not as whole integers. So, 4 percent must be entered as 4% or 0.04—not 4, as you would enter in a financial calculator.
+
+Note: It is always assumed that if not specifically stated, the compounding period of any given interest rate is annual, or based on years.
+
+Note: The Excel command used to calculate future value is as follows:
+
+You may simply type the values for the arguments in the above formula. Another option is to use the Excel insert function option. If you decide on this second method, below are several screenshots of dialog boxes you will encounter and will be required to complete.
+
+First, go to Formulas in the upper menu bar, and select the Insert Function option. When you do so, a dialog box will appear that looks like what you see in .
+ 
+ Dialog Box to Insert FV Function
+
+ This dialog box allows you to either search for a function or select a function that has been used recently. In this example, you can search for FV by typing this in the search box and selecting Go, or you can simply choose FV from the list of most recently used functions (as shown here with the highlighted FV option).
+
+Dialog Box to Insert FV Function
+
+This dialog box allows you to either search for a function or select a function that has been used recently. In this example, you can search for FV by typing this in the search box and selecting Go, or you can simply choose FV from the list of most recently used functions (as shown here with the highlighted FV option).
+
+Once you select FV and click the OK button, a new dialog box will appear for you to enter the necessary details. See .
+ 
+ New Dialog Box for FV Function Arguments
+
+ shows the completed data input for the variables, referred to here as “function arguments.” Note that cell addresses are used in this example. This allows the spreadsheet to still be useful if you decide to change any of the variables. You may also type values directly into the Function Arguments dialog box, but if you do this and you have to change any of your inputs later, you will have to reenter the new information. Using cell addresses is always a preferable method of entering the function argument data.
+ 
+ Completed Data Entry Menu for FV Function Arguments
+
+New Dialog Box for FV Function Arguments
+shows the completed data input for the variables, referred to here as “function arguments.” Note that cell addresses are used in this example. This allows the spreadsheet to still be useful if you decide to change any of the variables. You may also type values directly into the Function Arguments dialog box, but if you do this and you have to change any of your inputs later, you will have to reenter the new information. Using cell addresses is always a preferable method of entering the function argument data.
+
+Completed Data Entry Menu for FV Function Arguments
+
+Additional notes:
+
+The Pmt argument or variable can be ignored in this instance, or you can enter a placeholder value of zero. This example shows a blank or ignored entry, but either option may be used in problems such as this where the information is not relevant.
+
+The Type argument does not apply to this problem. Type refers to the timing of cash flows and is usually used in multiple payment or annuity problems to indicate whether payments or deposits are made at the beginning of periods or at the end. In single lump sum problems, this is not relevant information, and the Type argument box is left empty.
+
+When you use cell addresses as function argument inputs, the numerical values within the cells are displayed off to the right. This helps you ensure that you are identifying the correct cells in your function. The final answer generated by the function is also displayed for your preliminary review.
+
+Once you are satisfied with the result, hit the OK button, and the dialog box will disappear, with only the final numerical result appearing in the cell where you have set up the function.
+
+The FV of this present value has been calculated as approximately $2,433.31.
+
+Present Value (PV)
+
+We have covered the idea that present value is the opposite of future value. As an example, in the spreadsheet shown in , we calculated that the future value of $100 five years from now at a 5% interest rate would be $127.63. By reversing this process, we can safely state that $127.63 received five years from now with a 5% interest (or discount) rate would have a value of just $100 today. Thus, $100 is its present value. In Excel, the PV function is used to determine present value (see ).
+
+Using the PV Function in Excel
+
+The formula in cell E1 uses cell references in a similar fashion to our FV example spreadsheet above. Also similar to our earlier example is the hard-coded formula for this calculation, which is shown in cell E6. In both cases, the answers we arrive at using the PV function are identical, but once again, using cell references is preferred over hard coding if possible.
+
+Determining Present Value When Other Variables Are Known
+
+You have just won a second-prize lottery jackpot that will pay a single total lump sum of $50,000 five years from now. You are interested in knowing how much value this would have in today’s dollars, assuming a 5% interest rate.
+
+Notes:
+
+If you wish for the present value amount to be positive, the future value you enter here should be a negative value.
+
+In Excel, interest and growth rates must be entered as percentages, not as whole integers. So, 5 percent must be entered as 5% or 0.05—not 5, as you would enter in a financial calculator.
+
+It is always assumed that if not specifically stated, the compounding period of any given interest rate is annual, or based on years.
+
+The Excel command used to calculate present value is as shown here:
+Solution:
+
+As with the FV formula covered in the first tab of this workbook, you may simply type the values for the arguments in the above formula. Another option is to again use the Insert Function option in Excel. , , and provide several screenshots that demonstrate the steps you’ll need to follow if you decide to enter the PV function from the Insert Function menu.
+
+First, go to Formulas in the upper menu bar, and select Insert Function. When you do so, the Insert Function dialog box will appear (see ).
+ 
+ Dialog Box to Insert PV Function
+
+ As discussed in the FV function example above, this dialog box allows you to either search for a function or select a function that has been used recently. In this example, you can search for PV by typing this into the search box and selecting Go, or you can simply choose PV from the list of the most recently used functions.
+
+Dialog Box to Insert PV Function
+
+As discussed in the FV function example above, this dialog box allows you to either search for a function or select a function that has been used recently. In this example, you can search for PV by typing this into the search box and selecting Go, or you can simply choose PV from the list of the most recently used functions.
+
+Once you have highlighted PV, click the OK button, and a new dialog box will appear for you to enter the necessary details. Similar to our FV function example, it will look like .
+ 
+ New Dialog Box for PV Function Arguments
+
+ shows the completed data input for the function arguments. Note that once again, cell addresses are used in this example. This allows the spreadsheet to still be useful if you decide to change any of the variables. As in the FV function example, you may also type values directly in the Function Arguments dialog box, but if you do this and you have to change any of your input later, you will have to reenter the new information. Remember that using cell addresses is always a preferable method of entering the function argument data.
+ 
+ Completed Dialog Box for PV Function Arguments
+
+ Again, similar to our FV function example, the Function Arguments dialog box shows values off to the right of the data entry area, including our final answer. The Pmt and Type boxes are again not relevant to this single lump sum example, for reasons we covered in the FV example.
+ Review your answer. Once you are satisfied with the result, click the OK button, and the dialog box will disappear, with only the final numerical result appearing in the cell where you have set up the function. The PV of this future value has been calculated as approximately $39,176.31.
+
+New Dialog Box for PV Function Arguments
+shows the completed data input for the function arguments. Note that once again, cell addresses are used in this example. This allows the spreadsheet to still be useful if you decide to change any of the variables. As in the FV function example, you may also type values directly in the Function Arguments dialog box, but if you do this and you have to change any of your input later, you will have to reenter the new information. Remember that using cell addresses is always a preferable method of entering the function argument data.
+
+Completed Dialog Box for PV Function Arguments
+
+Again, similar to our FV function example, the Function Arguments dialog box shows values off to the right of the data entry area, including our final answer. The Pmt and Type boxes are again not relevant to this single lump sum example, for reasons we covered in the FV example.
+
+Review your answer. Once you are satisfied with the result, click the OK button, and the dialog box will disappear, with only the final numerical result appearing in the cell where you have set up the function. The PV of this future value has been calculated as approximately $39,176.31.
+
+Periods of Time
+
+The following discussion will show you how to use Excel to determine the amount of time a given present value will need to grow into a specified future value when the interest or growth rate is known.
+
+You want to be able to contribute $25,000 to your child’s first year of college tuition and related expenses. You currently have $15,000 in a tuition savings account that is earning 6% interest every year. How long will it take for this account grow into the targeted amount of $25,000, assuming no additional deposits or withdrawals are made?
+
+Notes:
+
+As with our other examples, interest and growth rates must be entered as percentages, not as whole integers. So, 6 percent must be entered as 6% or 0.06—not 6, as you would enter in a financial calculator.
+
+The present value needs to be entered as a negative value in accordance with the sign convention covered earlier.
+
+The Excel command used to calculate the amount of time, or number of periods, is this:
+
+As with our FV and PV examples, you may simply type the values of the arguments in the above formula, or we can again use the Insert Function option in Excel. If you do so, you will need to work with the various dialog boxes after you select Insert Function.
+
+First, go to Formulas in the upper menu bar, and select the Insert Function option. When you do so, the Insert Function dialog box w
+[truncated]

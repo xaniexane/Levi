@@ -1,0 +1,137 @@
+# COS 326: Functional Programming
+# Princeton University
+# source: http://www.cs.princeton.edu/~dpw/courses/cos326-12/info.php
+
+COS 326: Functional Programming
+Main menu:
+Home |
+Course Info |
+Lectures |
+Assignments |
+Resources |
+Notes |
+Home |
+Home |
+Course Info |
+Lectures |
+Sections |
+Assignments |
+Resources |
+Contact
+-->
+COS 326
+Functional Programming
+Home -->
+Resources
+O'Caml Home
+Installing and Editors
+O'Caml Manual
+O'Caml Book
+Pervasive Library
+Std Library
+Top-level Directives
+Ocaml Compiler Docs
+Program Style Guide
+Other Useful Stuff
+Course Staff
+Assignment Late Policy
+-->
+Caml Power
+Course Overview
+The goal of the course is to delve deeper in to the principles of
+program design, implementation and understanding. We wish to help
+students become superb programmers who can design, implement and
+reason about software that is elegant, efficient, and correct, and
+whose code can be maintained and reused.
+We use a programming language from the ML family of programming
+languages throughout the course: Objective Caml (OCaml). OCaml is a
+modern functional programming language with advanced type and module
+systems. However, the course is not about the OCaml language; rather,
+OCaml provides a convenient framework in which we can achieve the
+objectives of the course. Like the object-oriented model of Java, the
+functional paradigm of OCaml is an important programming model with
+which all students should be familiar, as it underlies the core of
+almost any high-level programming language. In addition, the OCaml
+type and module systems provide frameworks for ensuring code is
+modular, correct, re-usable, and elegant. In fact, OCaml does support
+objects, but we will focus more on other aspects of the language.
+By studying alternatives to object-oriented programming, students will be
+better equipped to use, implement or even design future programming
+environments that combine the best features of both worlds.
+And it turns out that once you understand how to program with functions
+and modules, many (most?) applications have no need for objects.
+Indeed, the vast majority of applications you wrote in COS 126 and COS
+226 had little need of objects -- they were unnecessarily forced on you by the
+design of the Java programming language. OCaml is a language that allows you
+to choose when to use objects and when not to.
+Another important reason we use OCaml is that it has a relatively
+clean and simple evaluation model that makes it easier to reason about
+the correctness of programs. In our studies, we will reason not only
+about the functional correctness of code, but also the space, time,
+and other resources used in a computation.
+Finally, it is important to learn the principles of functional programming
+due to its connection with and use in modern, massively parallel applications
+in data centers. For example, Google's famous map-reduce engine, which
+they use to implement page rank and a variety of other applications in their
+data centers, has its roots in functional programming languages.
+We will learn more about this kind of application in the course.
+Where and When
+Lectures: Monday and Wednesday, 11:00-12:20, Friend 008
+Precepts:
+P01: Thursday, 7:30pm, Friend 007
+P02: Friday, 11:00am, Friend 007
+Course Staff
+If you cannot make the course staff office hours, send email
+(or speak to me after class) to set up an appointment.
+Name
+Position
+Email
+Office
+Hours
+David Walker
+Prof
+dpw@cs
+CS 211
+MW 12:20-1
+Naga Katta
+Teaching Assistant
+nkatta@cs
+CS 315
+M 2:30-3; Tu 3-3:30
+Assignments
+There will be one assignment every one or two weeks.
+Lateness policy.
+Programming assignments are due at 11:59pm on the date specified, with a
+3-hour grace period. Late assignments are assessed a 20% penalty per
+day or partial day: 0-3 hours late (grace period -- no penalty), 3-24
+hours late (20%), 24-48 hours late (40%), and so forth. Your penalties
+for the first 4 late days during the course are automatically
+waived. No additional lateness penalties will be waived without the
+recommendation of a Dean or a letter from McCosh Health Center.
+Collaboration policy.
+Some assignments will be individual assignments. If you cannot come
+up with an answer after trying an individual assignment for a while
+then you may discuss the material or the problem with a friend. If
+you talk about how to solve a problem with someone then acknowledge
+them at the top of your homework (name and which parts you worked on
+together). After any discussions with friends, you should write up
+the assignment on your own. In particular, any programs, proofs, or
+written explanations should be written up by the homework author
+themselves. Copying code or proofs from someone else or allowing
+another individual to copy your code or proofs is a violation of
+Princeton's code of academic integrity.
+Other assignments will be done in pairs. Again, it is ok for multiple
+pairs to discuss solutions. Each pair should write up solutions
+themselves.
+Tests must be done completely independently.
+Evaluation
+There will be an in-class mid-term and one or more "quizes."
+Grades will be determined by weighting homeworks, tests and exams as follows:
+Assignments: 55%
+(weights among homeworks are not necessarily distributed evenly -- the longer and more challenging homeworks will be worth correspondingly more)
+Midterm: 25%
+Quizzes: 20%
+David Walker Copyright © 2012
+Princeton University ,
+Computer Science Department
+Template design Andreas Viklund

@@ -1,0 +1,192 @@
+# m58292
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Uniform Circular Motion
+
+Uniform Circular Motion
+
+By the end of this section, you will be able to:
+
+Solve for the centripetal acceleration of an object moving on a circular path.
+
+Use the equations of circular motion to find the position, velocity, and acceleration of a particle executing circular motion.
+
+Explain the differences between centripetal acceleration and tangential acceleration resulting from nonuniform circular motion.
+
+Evaluate centripetal and tangential acceleration in nonuniform circular motion, and find the total acceleration vector.
+
+Uniform circular motion is a specific type of motion in which an object travels in a circle with a constant speed. For example, any point on a propeller spinning at a constant rate is executing uniform circular motion. Other examples are the second, minute, and hour hands of a watch. It is remarkable that points on these rotating objects are actually accelerating, although the rotation rate is a constant. To see this, we must analyze the motion in terms of vectors.
+
+Centripetal Acceleration
+
+In one-dimensional kinematics, objects with a constant speed have zero acceleration. However, in two- and three-dimensional kinematics, even if the speed is a constant, a particle can have acceleration if it moves along a curved trajectory such as a circle. In this case the velocity vector is changing, or dv→/dt≠0. This is shown in . As the particle moves counterclockwise in time Δt on the circular path, its position vector moves from r→(t) to r→(t+Δt). The velocity vector has constant magnitude and is tangent to the path as it changes from v→(t) to v→(t+Δt), changing its direction only. Since the velocity vector v→(t) is perpendicular to the position vector r→(t), the triangles formed by the position vectors and Δr→, and the velocity vectors and Δv→ are similar. Furthermore, since |r→(t)|=|r→(t+Δt)| and |v→(t)|=|v→(t+Δt)|, the two triangles are isosceles. From these facts we can make the assertion
+Δvv=Δrr or Δv=vrΔr.
+
+We can find the magnitude of the acceleration from
+
+The direction of the acceleration can also be found by noting that as Δt and therefore Δθ approach zero, the vector Δv→ approaches a direction perpendicular to v→. In the limit Δt→0,Δv→ is perpendicular to v→. Since v→ is tangent to the circle, the acceleration dv→/dt points toward the center of the circle. Summarizing, a particle moving in a circle at a constant speed has an acceleration with magnitude
+
+The direction of the acceleration vector is toward the center of the circle (). This is a radial acceleration and is called the centripetal acceleration, which is why we give it the subscript c. The word centripetal comes from the Latin words centrum (meaning “center”) and petere (meaning “to seek”), and thus takes the meaning “center seeking.”
+
+Let’s investigate some examples that illustrate the relative magnitudes of the velocity, radius, and centripetal acceleration.
+Creating an Acceleration of 1 g
+A jet is flying at 134.1 m/s along a straight line and makes a turn along a circular path level with the ground. What does the radius of the circle have to be to produce a centripetal acceleration of 1 g on the pilot and jet toward the center of the circular trajectory?
+
+Creating an Acceleration of 1 g
+Strategy
+Given the speed of the jet, we can solve for the radius of the circle in the expression for the centripetal acceleration.
+
+Strategy
+Solution
+Set the centripetal acceleration equal to the acceleration of gravity: 9.8m/s2=v2/r.
+
+Solution
+
+Solving for the radius, we find
+Significance
+To create a greater acceleration than g on the pilot, the jet would either have to decrease the radius of its circular trajectory or increase its speed on its existing trajectory or both.
+
+Significance
+
+A flywheel has a radius of 20.0 cm. What is the speed of a point on the edge of the flywheel if it experiences a centripetal acceleration of 900.0cm/s2?
+
+134.0 cm/s
+
+Centripetal acceleration can have a wide range of values, depending on the speed and radius of curvature of the circular path. Typical centripetal accelerations are given in the following table.
+
+Typical Centripetal Accelerations
+
+Object
+Centripetal Acceleration (m/s2 or factors of g)
+5.93×10−3
+2.73×10−3
+Satellite in geosynchronous orbit
+0.233
+5.78
+Jet in a barrel roll
+(2–3 g)
+Roller coaster
+(5 g)
+9.0×1022
+Equations of Motion for Uniform Circular Motion
+
+A particle executing circular motion can be described by its position vector r→(t). shows a particle executing circular motion in a counterclockwise direction. As the particle moves on the circle, its position vector sweeps out the angle θ with the x-axis. Vector r→(t) making an angle θ with the x-axis is shown with its components along the x- and y-axes. The magnitude of the position vector is A=|r→(t)| and is also the radius of the circle, so that in terms of its components,
+
+Here, ω is a constant called the angular frequency of the particle. The angular frequency has units of radians (rad) per second and is simply the number of radians of angular measure through which the particle passes per second. The angle θ that the position vector has at any particular time is ωt.
+
+If T is the period of motion, or the time to complete one revolution (2π rad), then
+
+Velocity and acceleration can be obtained from the position function by differentiation:
+
+It can be shown from that the velocity vector is tangential to the circle at the location of the particle, with magnitude Aω. Similarly, the acceleration vector is found by differentiating the velocity:
+
+From this equation we see that the acceleration vector has magnitude Aω2 and is directed opposite the position vector, toward the origin, because a→(t)=−ω2r→(t).
+Circular Motion of a Proton
+A proton has speed 5×106m/s and is moving in a circle in the xy plane of radius r = 0.175 m. What is its position in the xy plane at time t=2.0×10−7s=200ns? At t = 0, the position of the proton is 0.175mi^ and it circles counterclockwise. Sketch the trajectory.
+
+Circular Motion of a Proton
+Solution
+
+Solution
+
+According to ,
+
+Since the period T is the time it takes an object to go once arounce a circle, and the distance around a circle is 2πr, we have:
+
+From the given data, the proton has period and angular frequency:
+
+The position of the particle at t=2.0×10−7s with A = 0.175 m is
+
+From this result we see that the proton is located slightly below the x-axis. This is shown in .
+Significance
+We picked the initial position of the particle to be on the x-axis. This was completely arbitrary. If a different starting position were given, we would have a different final position at t = 200 ns.
+
+Significance
+
+Nonuniform Circular Motion
+
+Circular motion does not have to be at a constant speed. A particle can travel in a circle and speed up or slow down, showing an acceleration in the direction of the motion.
+
+In uniform circular motion, the particle executing circular motion has a constant speed and the circle is at a fixed radius. If the speed of the particle is changing as well, then we introduce an additional acceleration in the direction tangential to the circle. Such accelerations occur at a point on a top that is changing its spin rate, or any accelerating rotor. In Displacement and Velocity Vectors we showed that centripetal acceleration is the time rate of change of the direction of the velocity vector. If the speed of the particle is changing, then it has a tangential acceleration that is the time rate of change of the magnitude of the velocity:
+
+The direction of tangential acceleration is tangent to the circle whereas the direction of centripetal acceleration is radially inward toward the center of the circle. Thus, a particle in circular motion with a tangential acceleration has a total acceleration that is the vector sum of the centripetal and tangential accelerations:
+
+The acceleration vectors are shown in . Note that the two acceleration vectors a→c and a→T are perpendicular to each other, with a→c in the radial direction and a→T in the tangential direction. The total acceleration a→ points at an angle between a→c and a→T.
+Total Acceleration during Circular Motion
+A particle moves in a circle of radius r = 2.0 m. During the time interval from t = 1.5 s to t = 4.0 s its speed varies with time according to
+
+Total Acceleration during Circular Motion
+
+What is the total acceleration of the particle at t = 2.0 s?
+Strategy
+We are given the speed of the particle and the radius of the circle, so we can calculate centripetal acceleration easily. The direction of the centripetal acceleration is toward the center of the circle. We find the magnitude of the tangential acceleration by taking the derivative with respect to time of |v(t)| using and evaluating it at t = 2.0 s. We use this and the magnitude of the centripetal acceleration to find the total acceleration.
+
+Strategy
+Solution
+Centripetal acceleration is
+
+Solution
+
+directed toward the center of the circle. Tangential acceleration is
+
+Total acceleration is
+
+and θ=tan−13.11.5=64° from the tangent to the circle. See .
+Significance
+The directions of centripetal and tangential accelerations can be described more conveniently in terms of a polar coordinate system, with unit vectors in the radial and tangential directions. This coordinate system, which is used for motion along curved paths, is discussed in detail later in the book.
+
+Significance
+
+Summary
+
+Uniform circular motion is motion in a circle at constant speed.
+
+Centripetal acceleration a→C is the acceleration a particle must have to follow a circular path. Centripetal acceleration always points toward the center of rotation and has magnitude aC=v2/r.
+
+Nonuniform circular motion occurs when there is tangential acceleration of an object executing circular motion such that the speed of the object is changing. This acceleration is called tangential acceleration a→T. The magnitude of tangential acceleration is the time rate of change of the magnitude of the velocity. The tangential acceleration vector is tangential to the circle, whereas the centripetal acceleration vector points radially inward toward the center of the circle. The total acceleration is the vector sum of tangential and centripetal accelerations.
+
+An object executing uniform circular motion can be described with equations of motion. The position vector of the object is r→(t)=Acosωti^+Asinωtj^, where A is the magnitude |r→(t)|, which is also the radius of the circle, and ω is the angular frequency.
+
+Conceptual Questions
+
+Can centripetal acceleration change the speed of a particle undergoing circular motion?
+
+Can tangential acceleration change the speed of a particle undergoing circular motion?
+
+yes
+
+Problems
+
+A flywheel is rotating at 30 rev/s. What is the total angle, in radians, through which a point on the flywheel rotates in 40 s?
+
+A particle travels in a circle of radius 10 m at a constant speed of 20 m/s. What is the magnitude of the acceleration?
+aC=40m/s2
+
+Cam Newton of the Carolina Panthers throws a perfect football spiral at 8.0 rev/s. The radius of a pro football is 8.5 cm at the middle of the short side. What is the centripetal acceleration of the laces on the football?
+
+A fairground ride spins its occupants inside a flying saucer-shaped container. If the horizontal circular path the riders follow has an 8.00-m radius, at how many revolutions per minute are the riders subjected to a centripetal acceleration equal to that of gravity?
+aC=v2r⇒v2=raC=78.4,v=8.85m/s
+T=5.68s, which is 0.176rev/s=10.6rev/min
+
+A runner taking part in the 200-m dash must run around the end of a track that has a circular arc with a radius of curvature of 30.0 m. The runner starts the race at a constant speed. If she completes the 200-m dash in 23.2 s and runs at constant speed throughout the race, what is her centripetal acceleration as she runs the curved portion of the track?
+
+What is the acceleration of Venus toward the Sun, assuming a circular orbit?
+
+Venus is 108.2 million km from the Sun and has an orbital period of 0.6152 y.
+r=1.082×1011mT=1.94×107s
+v=3.5×104m/s,aC=1.135×10−2m/s2
+
+An experimental jet rocket travels around Earth along its equator just above its surface. At what speed must the jet travel if the magnitude of its acceleration is g?
+
+A fan is rotating at a constant 360.0 rev/min. What is the magnitude of the acceleration of a point on one of its blades 10.0 cm from the axis of rotation?
+360rev/min=6rev/s
+v=3.8m/s aC=144.m/s2
+
+A point located on the second hand of a large clock has a radial acceleration of 0.1cm/s2. How far is the point from the axis of rotation of the second hand?
+ω, rate of change of an angle with which an object that is moving on a circular path
+component of acceleration of an object moving in a circle that is directed radially inward toward the center of the circle
+magnitude of which is the time rate of change of speed. Its direction is tangent to the circle.
+vector sum of centripetal and tangential accelerations

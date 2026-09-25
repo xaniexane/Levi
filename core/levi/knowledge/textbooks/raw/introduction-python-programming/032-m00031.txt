@@ -1,0 +1,93 @@
+# m00031
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Operator precedence
+
+Operator precedence
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe how precedence impacts order of operations.
+
+Describe how associativity impacts order of operations.
+
+Explain the purpose of using parentheses in expressions with multiple operators.
+
+Precedence
+
+When an expression has multiple operators, which operator is evaluated first? Precedence rules provide the priority level of operators. Operators with the highest precedence execute first. Ex: 1 + 2 * 3 is 7 because multiplication takes precedence over addition. However, (1 + 2) * 3 is 9 because parentheses take precedence over multiplication.
+
+Operator precedence from highest to lowest.
+
+Operator
+Meaning
+()
+Parentheses
+**
+Exponentiation (right associative)
+*, /, //, %
+Multiplication, division, floor division, modulo
++, -
+Addition, subtraction
+<, <=, >, >=, ==, !=
+Comparison operators
+Logical not operator
+Logical not operator
+
+Logical and operator
+Logical and operator
+
+Logical or operator
+Logical or operator
+
+Operator precedence
+
+Precedence rules
+
+Which part of each expression is evaluated first?
+
+Associativity
+
+What if operators beside each other have the same level of precedence? Associativity determines the order of operations when precedence is the same. Ex: 8 / 4 * 3 is evaluated as (8/4) * 3 rather than 8 / (4*3) because multiplication and division are left associative. Most operators are left associative and are evaluated from left to right. Exponentiation is the main exception (noted above) and is right associative: that is, evaluated from right to left. Ex: 2 ** 3 ** 4 is evaluated as 2 ** (3**4).
+
+When comparison operators are chained, the expression is converted into the equivalent combination of comparisons and evaluated from left to right. Ex. 10 < x <= 20 is evaluated as 10 < x and x <= 20.
+
+Operation precedence
+
+Associativity
+
+How is each expression evaluated?
+
+Enforcing order and clarity with parentheses
+
+Operator precedence rules can be hard to remember. Parentheses not only assert a different order of operations but also reduce confusion.
+
+Using parentheses
+
+Using parentheses
+
+PEP 8 recommendations: spacing around operators
+
+The PEP 8 style guide recommends consistent spacing around operators to avoid extraneous and confusing whitespace.
+
+Avoid multiple spaces and an unequal amount of whitespace around operators with two operands.
+ Avoid: x= y * 44
+ Better: x = y * 44
+
+Avoid spaces immediately inside parentheses.
+ Avoid: x = ( 4 * y )
+ Better: x = (4 * y)
+
+Surround the following operators with one space: assignment, augment assignment, comparison, Boolean.
+ Avoid: x= y<44
+ Better: x = y < 44
+
+Consider adding whitespace around operators with lower priority.
+ Avoid:
+ x = 5 * z+20
+ Better: x = 5*z + 20

@@ -1,0 +1,270 @@
+# m58333
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Work and Power for Rotational Motion
+
+Work and Power for Rotational Motion
+
+By the end of this section, you will be able to:
+
+Use the work-energy theorem to analyze rotation to find the work done on a system when it is rotated about a fixed axis for a finite angular displacement
+
+Solve for the angular velocity of a rotating rigid body using the work-energy theorem
+
+Find the power delivered to a rotating rigid body given the applied torque and angular velocity
+
+Summarize the rotational variables and equations and relate them to their translational counterparts
+
+Thus far in the chapter, we have extensively addressed kinematics and dynamics for rotating rigid bodies around a fixed axis. In this final section, we define work and power within the context of rotation about a fixed axis, which has applications to both physics and engineering. The discussion of work and power makes our treatment of rotational motion almost complete, with the exception of rolling motion and angular momentum, which are discussed in Angular Momentum. We begin this section with a treatment of the work-energy theorem for rotation.
+
+Work for Rotational Motion
+
+Now that we have determined how to calculate kinetic energy for rotating rigid bodies, we can proceed with a discussion of the work done on a rigid body rotating about a fixed axis. shows a rigid body that has rotated through an angle dθ from A to B while under the influence of a force F→. The external force F→ is applied to point P, whose position is r→, and the rigid body is constrained to rotate about a fixed axis that is perpendicular to the page and passes through O. The rotational axis is fixed, so the vector r→ moves in a circle of radius r, and the vector ds→ is perpendicular to r→.
+
+From , we have
+
+Thus,
+
+Note that dr→ is zero because r→ is fixed on the rigid body from the origin O to point P. Using the definition of work, we obtain
+
+where we used the identity a→·(b→×c→)=b→·(c→×a→). Noting that (r→×∑F→)=∑τ→, we arrive at the expression for the rotational work done on a rigid body:
+The total work done on a rigid body is the sum of the torques integrated over the angle through which the body rotates. The incremental work is
+
+where we have taken the dot product in , leaving only torques along the axis of rotation. In a rigid body, all particles rotate through the same angle; thus the work of every external force is equal to the torque times the common incremental angle dθ. The quantity (∑iτi) is the net torque on the body due to external forces.
+
+Similarly, we found the kinetic energy of a rigid body rotating around a fixed axis by summing the kinetic energy of each particle that makes up the rigid body. Since the work-energy theorem Wi=ΔKi is valid for each particle, it is valid for the sum of the particles and the entire body.
+
+Work-Energy Theorem for Rotation
+
+The work-energy theorem for a rigid body rotating around a fixed axis is
+
+where
+
+and the rotational work done by a net force rotating a body from point A to point B is
+
+We give a strategy for using this equation when analyzing rotational motion.
+
+Work-Energy Theorem for Rotational Motion
+
+Identify the forces on the body and draw a free-body diagram. Calculate the torque for each force.
+
+Calculate the work done during the body’s rotation by every torque.
+
+Apply the work-energy theorem by equating the net work done on the body to the change in rotational kinetic energy.
+
+Let’s look at two examples and use the work-energy theorem to analyze rotational motion.
+Rotational Work and Energy
+A 12.0N·m torque is applied to a flywheel that rotates about a fixed axis and has a moment of inertia of 30.0kg·m2. If the flywheel is initially at rest, what is its angular velocity after it has turned through eight revolutions?
+
+Rotational Work and Energy
+Strategy
+We apply the work-energy theorem. We know from the problem description what the torque is and the angular displacement of the flywheel. Then we can solve for the final angular velocity.
+
+Strategy
+Solution
+The flywheel turns through eight revolutions, which is 16π radians. The work done by the torque, which is constant and therefore can come outside the integral in , is
+
+Solution
+
+We apply the work-energy theorem:
+
+With τ=12.0N·m,θB−θA=16.0πrad,I=30.0kg·m2,andωA=0, we have
+
+Therefore,
+
+This is the angular velocity of the flywheel after eight revolutions.
+Significance
+The work-energy theorem provides an efficient way to analyze rotational motion, connecting torque with rotational kinetic energy.
+
+Significance
+Rotational Work: A Pulley
+A string wrapped around the pulley in is pulled with a constant downward force F→ of magnitude 50 N. The radius R and moment of inertia I of the pulley are 0.10 m and 2.5×10−3kg-m2, respectively. If the string does not slip, what is the angular velocity of the pulley after 1.0 m of string has unwound? Assume the pulley starts from rest.
+
+Rotational Work: A Pulley
+Strategy
+Looking at the free-body diagram, we see that neither B→, the force on the bearings of the pulley, norMg→, the weight of the pulley, exerts a torque around the rotational axis, and therefore does no work on the pulley. As the pulley rotates through an angle θ, F→ acts through a distance d such that d=Rθ.
+
+Strategy
+Solution
+Since the torque due to F→ has magnitude τ=RF, we have
+
+Solution
+
+If the force on the string acts through a distance of 1.0 m, we have, from the work-energy theorem,
+
+Solving for ω, we obtain
+
+Power for Rotational Motion
+
+Power always comes up in the discussion of applications in engineering and physics. Power for rotational motion is equally as important as power in linear motion and can be derived in a similar way as in linear motion when the force is a constant. The linear power when the force is a constant is P=F→·v→. If the net torque is constant over the angular displacement, simplifies and the net torque can be taken out of the integral. In the following discussion, we assume the net torque is constant. We can apply the definition of power derived in Power to rotational motion. From Work and Kinetic Energy, the instantaneous power (or just power) is defined as the rate of doing work,
+
+If we have a constant net torque, becomes W=τθ and the power is
+
+or
+Torque on a Boat Propeller
+A boat engine operating at 9.0×104W is running at 300 rev/min. What is the torque on the propeller shaft?
+
+Torque on a Boat Propeller
+Strategy
+We are given the rotation rate in rev/min and the power consumption, so we can easily calculate the torque.
+
+Strategy
+Solution
+
+Solution
+Significance
+It is important to note the radian is a dimensionless unit because its definition is the ratio of two lengths. It therefore does not appear in the solution.
+
+Significance
+
+A constant torque of 500kN·m is applied to a wind turbine to keep it rotating at 6 rad/s. What is the power required to keep the turbine rotating?
+
+3 MW
+
+Rotational and Translational Relationships Summarized
+
+The rotational quantities and their linear analog are summarized in three tables. summarizes the rotational variables for circular motion about a fixed axis with their linear analogs and the connecting equation, except for the centripetal acceleration, which stands by itself. summarizes the rotational and translational kinematic equations. summarizes the rotational dynamics equations with their linear analogs.
+
+Rotational and Translational Variables: Summary
+
+Rotational
+Translational
+ac=vt2r
+Rotational and Translational Kinematic Equations: Summary
+
+Rotational
+vf2=v20+2a(Δx)
+Rotational and Translational Equations: Dynamics
+
+Rotational
+P=F→·v→
+Summary
+
+The incremental work dW in rotating a rigid body about a fixed axis is the sum of the torques about the axis times the incremental angle dθ.
+
+The total work done to rotate a rigid body through an angle θ about a fixed axis is the sum of the torques integrated over the angular displacement. If the torque is a constant as a function of θ, then WAB=τ(θB−θA).
+
+The work-energy theorem relates the rotational work done to the change in rotational kinetic energy: WAB=KB−KA where K=12Iω2.
+
+The power delivered to a system that is rotating about a fixed axis is the torque times the angular velocity, P=τω.
+
+Key Equations
+
+θ=sr
+ω=limΔt→0ΔθΔt=dθdt
+vt=rω
+α=limΔt→0ΔωΔt=dωdt=d2θdt2
+at=rα
+ω–=ω0+ωf2
+θf=θ0+ω–t
+ωf=ω0+αt
+θf=θ0+ω0t+12αt2
+ωf2=ω02+2α(Δθ)
+a→=a→c+a→t
+K=12(∑jmjrj2)ω2
+I=∑jmjrj2
+K=12Iω2
+I=∫r2dm
+Iparallel-axis=Icenter of mass+md2
+Itotal=∑iIi
+τ→=r→×F→
+|τ→|=r⊥F
+τ→net=∑i|τ→i|
+∑iτi=Iα
+dW=(∑iτi)dθ
+WAB=KB−KA
+WAB=∫θAθB(∑iτi)dθ
+P=τω
+Problems
+
+A wind turbine rotates at 20 rev/min. If its power output is 2.0 MW, what is the torque produced on the turbine from the wind?
+τ=Pω=2.0×106W2.1rad/s=9.5×105N·m
+
+A clay cylinder of radius 20 cm on a potter’s wheel spins at a constant rate of 10 rev/s. The potter applies a force of 10 N to the clay with his hands where the coefficient of friction is 0.1 between his hands and the clay. What is the power that the potter has to deliver to the wheel to keep it rotating at this constant rate?
+
+A uniform cylindrical grindstone has a mass of 10 kg and a radius of 12 cm. (a) What is the rotational kinetic energy of the grindstone when it is rotating at 1.5×103rev/min? (b) After the grindstone’s motor is turned off, a knife blade is pressed against the outer edge of the grindstone with a perpendicular force of 5.0 N. The coefficient of kinetic friction between the grindstone and the blade is 0.80. Use the work energy theorem to determine how many turns the grindstone makes before it stops.
+
+a. K=888.50J;
+b. Δθ=294.6rev
+
+A uniform disk of mass 500 kg and radius 0.25 m is mounted on frictionless bearings so it can rotate freely around a vertical axis through its center (see the following figure). A cord is wrapped around the rim of the disk and pulled with a force of 10 N. (a) How much work has the force done at the instant the disk has completed three revolutions, starting from rest? (b) Determine the torque due to the force, then calculate the work done by this torque at the instant the disk has completed three revolutions? (c) What is the angular velocity at that instant? (d) What is the power output of the force at that instant?
+
+A propeller is accelerated from rest to an angular velocity of 1000 rev/min over a period of 6.0 seconds by a constant torque of 2.0×103N·m. (a) What is the moment of inertia of the propeller? (b) What power is being provided to the propeller 3.0 s after it starts rotating?
+
+a. I=114.6kg·m2;
+b. P=104,700W
+
+A sphere of mass 1.0 kg and radius 0.5 m is attached to the end of a massless rod of length 3.0 m. The rod rotates about an axis that is at the opposite end of the sphere (see below). The system rotates horizontally about the axis at a constant 400 rev/min. After rotating at this angular speed in a vacuum, air resistance is introduced and provides a force 0.15N on the sphere opposite to the direction of motion. What is the power provided by air resistance to the system 100.0 s after air resistance is introduced?
+
+A uniform rod of length L and mass M is held vertically with one end resting on the floor as shown below. When the rod is released, it rotates around its lower end until it hits the floor. Assuming the lower end of the rod does not slip, what is the linear velocity of the upper end when it hits the floor?
+v=Lω=3Lg
+
+An athlete in a gym applies a constant force of 50 N to the pedals of a bicycle at a rate of the pedals moving 60 rev/min. The length of the pedal arms is 30 cm. What is the power delivered to the bicycle by the athlete?
+
+A 2-kg block on a frictionless inclined plane at 40° has a cord attached to a pulley of mass 1 kg and radius 20 cm (see the following figure). The block slides a distance of 0.50 m. (a) What is the acceleration of the block down the plane? (b) What is the work done by the cord on the pulley?
+
+a. a=5.0m/s2; b. W=1.25N·m
+
+Small bodies of mass m1andm2 are attached to opposite ends of a thin rigid rod of length L and mass M. The rod is mounted so that it is free to rotate in a horizontal plane around a vertical axis (see below). What distance d from m1 should the rotational axis be so that a minimum amount of work is required to set the rod rotating at an angular velocity ω?
+
+Additional Problems
+
+A cyclist is riding such that the wheels of the bicycle have a rotation rate of 3.0 rev/s. If the cyclist brakes such that the rotation rate of the wheels decrease at a rate of 0.3rev/s2, how long does it take for the cyclist to come to a complete stop?
+Δt=10.0s
+
+Calculate the angular velocity of the orbital motion of Earth around the Sun.
+
+A phonograph turntable rotating at 33 1/3 rev/min slows down and stops in 1.0 min. (a) What is the turntable’s angular acceleration, in radians/s2, assuming it is constant? (b) How many revolutions does the turntable make while stopping?
+
+a. 0.06rad/s2; b. θ=16.7revolutions
+
+With the aid of a string, a gyroscope is accelerated from rest to 32 rad/s in 0.40 s under a constant angular acceleration. (a) What is its angular acceleration in rad/s2? (b) How many revolutions does it go through in the process?
+
+Suppose a piece of dust has fallen on a CD. If the spin rate of the CD is 500 rpm, and the piece of dust is 4.3 cm from the center, what is the total distance traveled by the dust in 3 minutes? (Ignore accelerations due to getting the CD rotating.)
+s=405.26m
+
+A system of point particles is rotating about a fixed axis at 4 rev/s. The particles are fixed with respect to each other. The masses and distances to the axis of the point particles are m1=0.1kg,r1=0.2m, m2=0.05kg,r2=0.4m, m3=0.5kg,r3=0.01m. (a) What is the moment of inertia of the system? (b) What is the rotational kinetic energy of the system?
+
+Calculate the moment of inertia of a skater given the following information. (a) The 60.0-kg skater is approximated as a cylinder that has a 0.110-m radius. (b) The skater with arms extended is approximated by a cylinder that is 52.5 kg, has a 0.110-m radius, and has two 0.900-m-long arms which are 3.75 kg each and extend straight out from the cylinder like rods rotated about their ends.
+
+a. I=0.363kg·m2;
+b. I=2.34kg·m2
+
+A stick of length 1.0 m and mass 6.0 kg is free to rotate about a horizontal axis through the center. Small bodies of masses 4.0 and 2.0 kg are attached to its two ends (see the following figure). The stick is released from the horizontal position. What is the angular velocity of the stick when it swings through the vertical?
+
+A pendulum consists of a rod of length 2 m and mass 3 kg with a solid sphere of mass 1 kg and radius 0.3 m attached at one end. The axis of rotation is as shown below. What is the angular velocity of the pendulum at its lowest point if it is released from rest at an angle of 30°?
+ω=6.68J4.4kgm2=1.23rad/s
+
+Calculate the torque of the 40-N force around the axis through O and perpendicular to the plane of the page as shown below.
+
+Two children push on opposite sides of a door during play. Both push horizontally and perpendicular to the door. One child pushes with a force of 17.5 N at a distance of 0.600 m from the hinges, and the second child pushes at a distance of 0.450 m. What force must the second child exert to keep the door from moving? Assume friction is negligible.
+F=23.3N
+
+The force of 20j^N is applied at r→=(4.0i^−2.0j^)m. What is the torque of this force about the origin?
+
+An automobile engine can produce 200 N· m of torque. Calculate the angular acceleration produced if 95.0% of this torque is applied to the drive shaft, axle, and rear wheels of a car, given the following information. The car is suspended so that the wheels can turn freely. Each wheel acts like a 15.0-kg disk that has a 0.180-m radius. The walls of each tire act like a 2.00-kg annular ring that has inside radius of 0.180 m and outside radius of 0.320 m. The tread of each tire acts like a 10.0-kg hoop of radius 0.330 m. The 14.0-kg axle acts like a rod that has a 2.00-cm radius. The 30.0-kg drive shaft acts like a rod that has a 3.20-cm radius.
+α=190.0N-m2.94kg-m2=64.4rad/s2
+
+A grindstone with a mass of 50 kg and radius 0.8 m maintains a constant rotation rate of 4.0 rev/s by a motor while a knife is pressed against the edge with a force of 5.0 N. The coefficient of kinetic friction between the grindstone and the blade is 0.8. What is the power provided by the motor to keep the grindstone at the constant rotation rate?
+
+Challenge Problems
+
+The angular acceleration of a rotating rigid body is given by α=(2.0−3.0t)rad/s2. If the body starts rotating from rest at t=0, (a) what is the angular velocity? (b) Angular position? (c) What angle does it rotate through in 10 s? (d) Where does the vector perpendicular to the axis of rotation indicating 0° at t=0 lie at t=10s?
+
+a. ω=2.0t−1.5t2; b. θ=t2−0.5t3; c. θ=−400.0rad; d. the vector is at −0.66(360°)=−237.6°
+
+Earth’s day has increased by 0.002 s in the last century. If this increase in Earth’s period is constant, how long will it take for Earth to come to rest?
+
+A disk of mass m, radius R, and area A has a surface mass density σ=mrAR (see the following figure). What is the moment of inertia of the disk about an axis through the center?
+I=25mR2
+
+Zorch, an archenemy of Rotation Man, decides to slow Earth’s rotation to once per 28.0 h by exerting an opposing force at and parallel to the equator. Rotation Man is not immediately concerned, because he knows Zorch can only exert a force of 4.00×107N (a little greater than a Saturn V rocket’s thrust). How long must Zorch push with this force to accomplish his goal? (This period gives Rotation Man time to devote to other villains.)
+
+A cord is wrapped around the rim of a solid cylinder of radius 0.25 m, and a constant force of 40 N is exerted on the cord shown, as shown in the following figure. The cylinder is mounted on frictionless bearings, and its moment of inertia is 6.0kg·m2. (a) Use the work energy theorem to calculate the angular velocity of the cylinder after 5.0 m of cord have been removed. (b) If the 40-N force is replaced by a 40-N weight, what is the angular velocity of the cylinder after 5.0 m of cord have unwound?
+
+a. ω=8.2rad/s; b. ω=8.0rad/s
+
+work done on a rigid body due to the sum of the torques integrated over the angle through with the body rotates

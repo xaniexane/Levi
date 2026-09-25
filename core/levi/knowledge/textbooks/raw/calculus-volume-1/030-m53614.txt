@@ -1,0 +1,374 @@
+# m53614
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Applied Optimization Problems
+
+Applied Optimization Problems
+
+Set up and solve optimization problems in several applied fields.
+
+One common application of calculus is calculating the minimum or maximum value of a function. For example, companies often want to minimize production costs or maximize revenue. In manufacturing, it is often desirable to minimize the amount of material used to package a product with a certain volume. In this section, we show how to set up these types of minimization and maximization problems and solve them by using the tools developed in this chapter.
+
+Solving Optimization Problems over a Closed, Bounded Interval
+
+The basic idea of the optimization problems that follow is the same. We have a particular quantity that we are interested in maximizing or minimizing. However, we also have some auxiliary condition that needs to be satisfied. For example, in , we are interested in maximizing the area of a rectangular garden. Certainly, if we keep making the side lengths of the garden larger, the area will continue to become larger. However, what if we have some restriction on how much fencing we can use for the perimeter? In this case, we cannot make the garden as large as we like. Let’s look at how we can maximize the area of a rectangle subject to some constraint on the perimeter.
+
+Maximizing the Area of a Garden
+
+A rectangular garden is to be constructed using a rock wall as one side of the garden and wire fencing for the other three sides (). Given 100 ft of wire fencing, determine the dimensions that would create a garden of maximum area. What is the maximum area?
+
+Let x denote the length of the side of the garden perpendicular to the rock wall and y denote the length of the side parallel to the rock wall. Then the area of the garden is
+
+We want to find the maximum possible area subject to the constraint that the total fencing is 100ft. From , the total amount of fencing used will be 2x+y. Therefore, the constraint equation is
+
+Solving this equation for y, we have y=100−2x. Thus, we can write the area as
+
+Before trying to maximize the area function A(x)=100x−2x2, we need to determine the domain under consideration. To construct a rectangular garden, we certainly need the lengths of both sides to be positive. Therefore, we need x>0 and y>0. Since y=100−2x, if y>0, then x<50. Therefore, we are trying to determine the maximum value of A(x) for x over the open interval (0,50). We do not know that a function necessarily has a maximum value over an open interval. However, we do know that a continuous function has an absolute maximum (and absolute minimum) over a closed interval. Therefore, let’s consider the function A(x)=100x−2x2 over the closed interval [0,50]. If the maximum value occurs at an interior point, then we have found the value x in the open interval (0,50) that maximizes the area of the garden. Therefore, we consider the following problem:
+
+Maximize A(x)=100x−2x2 over the interval [0,50].
+
+As mentioned earlier, since A is a continuous function on a closed, bounded interval, by the extreme value theorem, it has a maximum and a minimum. These extreme values occur either at endpoints or critical points. At the endpoints, A(x)=0. Since the area is positive for all x in the open interval (0,50), the maximum must occur at a critical point. Differentiating the function A(x), we obtain
+
+Therefore, the only critical point is x=25 (). We conclude that the maximum area must occur when x=25. Then we have y=100−2x=100−2(25)=50. To maximize the area of the garden, let x=25 ft and y=50ft. The area of this garden is 1250ft2.
+
+Determine the maximum area if we want to make the same rectangular garden as in , but we have 200 ft of fencing.
+
+The maximum area is 5000ft2.
+
+Hint
+
+We need to maximize the function A(x)=200x−2x2 over the interval [0,100].
+
+Now let’s look at a general strategy for solving optimization problems similar to .
+
+Problem-Solving Strategy: Solving Optimization Problems
+
+Introduce all variables. If applicable, draw a figure and label all variables.
+
+Determine which quantity is to be maximized or minimized, and for what range of values of the other variables (if this can be determined at this time).
+
+Write a formula for the quantity to be maximized or minimized in terms of the variables. This formula may involve more than one variable.
+
+Write any equations relating the independent variables in the formula from step 3. Use these equations to write the quantity to be maximized or minimized as a function of one variable.
+
+Identify the domain of consideration for the function in step 4 based on the physical problem to be solved.
+
+Locate the maximum or minimum value of the function from step 4. This step typically involves looking for critical points and evaluating a function at endpoints.
+
+Now let’s apply this strategy to maximize the volume of an open-top box given a constraint on the amount of material to be used.
+
+Maximizing the Volume of a Box
+
+An open-top box is to be made from a 24 in. by 36 in. piece of cardboard by removing a square from each corner of the box and folding up the flaps on each side. What size square should be cut out of each corner to get a box with the maximum volume?
+
+Step 1: Let x be the side length of the square to be removed from each corner (). Then, the remaining four flaps can be folded up to form an open-top box. Let V be the volume of the resulting box.
+
+Step 2: We are trying to maximize the volume of a box. Therefore, the problem is to maximize V.
+
+Step 3: As mentioned in step 2, we are trying to maximize the volume of a box. The volume of a box is V=L·W·H, where L,W,andH are the length, width, and height, respectively.
+
+Step 4: From , we see that the height of the box is x inches, the length is 36−2x inches, and the width is 24−2x inches. Therefore, the volume of the box is
+
+Step 5: To determine the domain of consideration, let’s examine . Certainly, we need x>0. Furthermore, the side length of the square cannot be greater than or equal to half the length of the shorter side, 24 in.; otherwise, one of the flaps would be completely cut off. Therefore, we are trying to determine whether there is a maximum volume of the box for x over the open interval (0,12). Since V is a continuous function over the closed interval [0,12], we know V will have an absolute maximum over the closed interval. Therefore, we consider V over the closed interval [0,12] and check whether the absolute maximum occurs at an interior point.
+
+Step 6: Since V(x) is a continuous function over the closed, bounded interval [0,12], V must have an absolute maximum (and an absolute minimum). Since V(x)=0 at the endpoints and V(x)>0 for 0<x<12, the maximum must occur at a critical point. The derivative is
+
+To find the critical points, we need to solve the equation
+
+Dividing both sides of this equation by 12, the problem simplifies to solving the equation
+
+Using the quadratic formula, we find that the critical points are
+
+Since 10+27 is not in the domain of consideration, the only critical point we need to consider is 10−27. Therefore, the volume is maximized if we let x=10−27in. The maximum volume is V(10−27)=640+4487≈1825in.3 as shown in the following graph.
+
+Watch a video about optimizing the volume of a box.
+
+Suppose the dimensions of the cardboard in are 20 in. by 30 in. Let x be the side length of each square and write the volume of the open-top box as a function of x. Determine the domain of consideration for x.
+V(x)=x(20−2x)(30−2x). The domain is [0,10].
+
+Hint
+
+The volume of the box is L·W·H.
+
+Minimizing Travel Time
+
+An island is 2mi due north of its closest point along a straight shoreline. A visitor is staying at a cabin on the shore that is 6mi west of that point. The visitor is planning to go from the cabin to the island. Suppose the visitor runs at a rate of 8mph and swims at a rate of 3mph. How far should the visitor run before swimming to minimize the time it takes to reach the island?
+
+Step 1: Let x be the distance running and let y be the distance swimming (). Let T be the time it takes to get from the cabin to the island.
+
+Step 2: The problem is to minimize T.
+
+Step 3: To find the time spent traveling from the cabin to the island, add the time spent running and the time spent swimming. Since Distance = Rate × Time (D=R×T), the time spent running is
+
+and the time spent swimming is
+
+Therefore, the total time spent traveling is
+
+Step 4: From , the line segment of y miles forms the hypotenuse of a right triangle with legs of length 2mi and 6−xmi. Therefore, by the Pythagorean theorem, 22+(6−x)2=y2, and we obtain y=(6−x)2+4. Thus, the total time spent traveling is given by the function
+
+Step 5: From , we see that 0≤x≤6. Therefore, [0,6] is the domain of consideration.
+
+Step 6: Since T(x) is a continuous function over a closed, bounded interval, it has a maximum and a minimum. Let’s begin by looking for any critical points of T over the interval [0,6]. The derivative is
+
+If T′(x)=0, then
+
+Therefore,
+
+Squaring both sides of this equation, we see that if x satisfies this equation, then x must satisfy
+
+which implies
+
+We conclude that if x is a critical point, then x satisfies
+
+Therefore, the possibilities for critical points are
+
+Since x=6+6/55 is not in the domain, it is not a possibility for a critical point. On the other hand, x=6−6/55 is in the domain. Since we squared both sides of to arrive at the possible critical points, it remains to verify that x=6−6/55 satisfies . Since x=6−6/55 does satisfy that equation, we conclude that x=6−6/55 is a critical point, and it is the only one. To justify that the time is minimized for this value of x, we just need to check the values of T(x) at the endpoints x=0 and x=6, and compare them with the value of T(x) at the critical point x=6−6/55. We find that T(0)≈2.108h and T(6)≈1.417h, whereas T(6−6/55)≈1.368h. Therefore, we conclude that T has a local minimum at x≈5.19 mi.
+
+Suppose the island is 1 mi from shore, and the distance from the cabin to the point on the shore closest to the island is 15mi. Suppose a visitor swims at the rate of 2.5mph and runs at a rate of 6mph. Let x denote the distance the visitor will run before swimming, and find a function for the time it takes the visitor to get from the cabin to the island.
+T(x)=x6+(15−x)2+12.5
+
+Hint
+
+The time T=Trunning+Tswimming.
+
+In business, companies are interested in maximizing revenue. In the following example, we consider a scenario in which a company has collected data on how many cars it is able to lease, depending on the price it charges its customers to rent a car. Let’s use these data to determine the price the company should charge to maximize the amount of money it brings in.
+
+Maximizing Revenue
+
+Owners of a car rental company have determined that if they charge customers p dollars per day to rent a car, where 50≤p≤200, the number of cars n they rent per day can be modeled by the linear function n(p)=1000−5p. If they charge $50 per day or less, they will rent all their cars. If they charge $200 per day or more, they will not rent any cars. Assuming the owners plan to charge customers between $50 per day and $200 per day to rent a car, how much should they charge to maximize their revenue?
+
+Step 1: Let p be the price charged per car per day and let n be the number of cars rented per day. Let R be the revenue per day.
+
+Step 2: The problem is to maximize R.
+
+Step 3: The revenue (per day) is equal to the number of cars rented per day times the price charged per car per day—that is, R=n×p.
+
+Step 4: Since the number of cars rented per day is modeled by the linear function n(p)=1000−5p, the revenue R can be represented by the function
+
+Step 5: Since the owners plan to charge between $50 per car per day and $200 per car per day, the problem is to find the maximum revenue R(p) for p in the closed interval [50,200].
+
+Step 6: Since R is a continuous function over the closed, bounded interval [50,200], it has an absolute maximum (and an absolute minimum) in that interval. To find the maximum value, look for critical points. The derivative is R′(p)=−10p+1000. Therefore, the critical point is p=100 When p=100, R(100)=$50,000. When p=50, R(p)=$37,500. When p=200, R(p)=$0. Therefore, the absolute maximum occurs at p=$100. The car rental company should charge $100 per day per car to maximize revenue as shown in the following figure.
+
+A car rental company charges its customers p dollars per day, where 60≤p≤150. It has found that the number of cars rented per day can be modeled by the linear function n(p)=750−5p. How much should the company charge each customer to maximize revenue?
+
+The company should charge $75 per car per day.
+
+Hint
+R(p)=n×p, where n is the number of cars rented and p is the price charged per car.
+
+Maximizing the Area of an Inscribed Rectangle
+
+A rectangle is to be inscribed in the ellipse
+
+What should the dimensions of the rectangle be to maximize its area? What is the maximum area?
+
+Step 1: For a rectangle to be inscribed in the ellipse, the sides of the rectangle must be parallel to the axes. Let L be the length of the rectangle and W be its width. Let A be the area of the rectangle.
+
+Step 2: The problem is to maximize A.
+
+Step 3: The area of the rectangle is A=LW.
+
+Step 4: Let (x,y) be the corner of the rectangle that lies in the first quadrant, as shown in . We can write length L=2x and width W=2y. Since x24+y2=1 and y>0, we have y=1−x24. Therefore, the area is
+
+Step 5: From , we see that to inscribe a rectangle in the ellipse, the x-coordinate of the corner in the first quadrant must satisfy 0<x<2. Therefore, the problem reduces to looking for the maximum value of A(x) over the open interval (0,2). Since A(x) will have an absolute maximum (and absolute minimum) over the closed interval [0,2], we consider A(x)=2x4−x2 over the interval [0,2]. If the absolute maximum occurs at an interior point, then we have found an absolute maximum in the open interval.
+
+Step 6: As mentioned earlier, A(x) is a continuous function over the closed, bounded interval [0,2]. Therefore, it has an absolute maximum (and absolute minimum). At the endpoints x=0 and x=2, A(x)=0. For 0<x<2, A(x)>0. Therefore, the maximum must occur at a critical point. Taking the derivative of A(x), we obtain
+
+To find critical points, we need to find where A′(x)=0. We can see that if x is a solution of
+
+then x must satisfy
+
+Therefore, x2=2. Thus, x=±2 are the possible solutions of . Since we are considering x over the interval [0,2], x=2 is a possibility for a critical point, but x=−2 is not. Therefore, we check whether 2 is a solution of . Since x=2 is a solution of , we conclude that 2 is the only critical point of A(x) in the interval [0,2]. Therefore, A(x) must have an absolute maximum at the critical point x=2. To determine the dimensions of the rectangle, we need to find the length L and the width W. If x=2 then
+
+Therefore, the dimensions of the rectangle are L=2x=22 and W=2y=22=2. The area of this rectangle is A=LW=(22)(2)=4.
+
+Modify the area function A if the rectangle is to be inscribed in the unit circle x2+y2=1. What is the domain of consideration?
+A(x)=4x1−x2. The domain of consideration is [0,1].
+
+Hint
+
+If (x,y) is the vertex of the square that lies in the first quadrant, then the area of the square is A=(2x)(2y)=4xy.
+
+Solving Optimization Problems when the Interval Is Not Closed or Is Unbounded
+
+In the previous examples, we considered functions on closed, bounded domains. Consequently, by the extreme value theorem, we were guaranteed that the functions had absolute extrema. Let’s now consider functions for which the domain is neither closed nor bounded.
+
+Many functions still have at least one absolute extrema, even if the domain is not closed or the domain is unbounded. For example, the function f(x)=x2+4 over (−∞,∞) has an absolute minimum of 4 at x=0. Therefore, we can still consider functions over unbounded domains or open intervals and determine whether they have any absolute extrema. In the next example, we try to minimize a function over an unbounded domain. We will see that, although the domain of consideration is (0,∞), the function has an absolute minimum.
+
+In the following example, we look at constructing a box of least surface area with a prescribed volume. It is not difficult to show that for a closed-top box, by symmetry, among all boxes with a specified volume, a cube will have the smallest surface area. Consequently, we consider the modified problem of determining which open-topped box with a specified volume has the smallest surface area.
+
+Minimizing Surface Area
+
+A rectangular box with a square base, an open top, and a volume of 216 in.3 is to be constructed. What should the dimensions of the box be to minimize the surface area of the box? What is the minimum surface area?
+
+Step 1: Draw a rectangular box and introduce the variable x to represent the length of each side of the square base; let y represent the height of the box. Let S denote the surface area of the open-top box.
+
+Step 2: We need to minimize the surface area. Therefore, we need to minimize S.
+
+Step 3: Since the box has an open top, we need only determine the area of the four vertical sides and the base. The area of each of the four vertical sides is x·y. The area of the base is x2. Therefore, the surface area of the box is
+
+Step 4: Since the volume of this box is x2y and the volume is given as 216in.3, the constraint equation is
+
+Solving the constraint equation for y, we have y=216x2. Therefore, we can write the surface area as a function of x only:
+
+Therefore, S(x)=864x+x2.
+
+Step 5: Since we are requiring that x2y=216, we cannot have x=0. Therefore, we need x>0. On the other hand, x is allowed to have any positive value. Note that as x becomes large, the height of the box y becomes correspondingly small so that x2y=216. Similarly, as x becomes small, the height of the box becomes correspondingly large. We conclude that the domain is the open, unbounded interval (0,∞). Note that, unlike the previous examples, we cannot reduce our problem to looking for an absolute maximum or absolute minimum over a closed, bounded interval. However, in the next step, we discover why this function must have an absolute minimum over the interval (0,∞).
+
+Step 6: Note that as x→0+, S(x)→∞. Also, as x→∞, S(x)→∞. Since S is a continuous function that approaches infinity at the ends, it must have an absolute minimum at some x∈(0,∞). This minimum must occur at a critical point of S. The derivative is
+
+Therefore, S′(x)=0 when 2x=864x2. Solving this equation for x, we obtain x3=432, so x=4323=623. Since this is the only critical point of S, the absolute minimum must occur at x=623 (see ). When x=623, y=216(623)2=323in. Therefore, the dimensions of the box should be x=623in. and y=323in. With these dimensions, the surface area is
+
+Consider the same open-top box, which is to have volume 216in.3. Suppose the cost of the material for the base is 20¢/in.2 and the cost of the material for the sides is 30¢/in.2 and we are trying to minimize the cost of this box. Write the cost as a function of the side lengths of the base. (Let x be the side length of the base and y be the height of the box.)
+c(x)=259.2x+0.2x2 dollars
+
+Hint
+
+If the cost of one of the sides is 30¢/in.2, the cost of that side is 0.30xy.
+
+Key Concepts
+
+To solve an optimization problem, begin by drawing a picture and introducing variables.
+
+Find an equation relating the variables.
+
+Find a function of one variable to describe the quantity that is to be minimized or maximized.
+
+Look for critical points to locate local extrema.
+
+For the following exercises, answer by proof, counterexample, or explanation.
+
+When you find the maximum for an optimization problem, why do you need to check the sign of the derivative around the critical points?
+
+The critical points can be the minima, maxima, or neither.
+
+Why do you need to check the endpoints for optimization problems?
+True or False. For every continuous nonlinear function, you can find the value x that maximizes the function.
+
+False; y=x2 has a minimum only
+True or False. For every continuous nonconstant function on a closed, finite domain, there exists at least one x that minimizes or maximizes the function.
+
+For the following exercises, set up and evaluate each optimization problem.
+
+To carry a suitcase on an airplane, the length +width+ height of the box must be less than or equal to 62in. Assuming the base of the suitcase is square, show that the volume is V=h(31−(12)h)2. What height allows you to have the largest volume?
+h=623 in.
+
+You are constructing a cardboard box with the dimensions 2 m by 4 m. You then cut equal-size squares from each corner so you may fold the edges. What are the dimensions of the box with the largest volume?
+
+Find the positive integer that minimizes the sum of the number and its reciprocal.
+1
+
+Find two positive integers such that their sum is 10, and minimize and maximize the sum of their squares.
+
+For the following exercises, consider the construction of a pen to enclose an area.
+
+You have 400ft of fencing to construct a rectangular pen for cattle. What are the dimensions of the pen that maximize the area?
+100ft by100ft
+
+You have 800ft of fencing to make a pen for hogs. If you have a river on one side of your property, what is the dimension of the rectangular pen that maximizes the area?
+
+You need to construct a fence around an area of 1600ft2. What are the dimensions of the rectangular pen to minimize the amount of material needed?
+40ft by40ft
+
+Two poles are connected by a wire that is also connected to the ground. The first pole is 20ft tall and the second pole is 10ft tall. There is a distance of 30ft between the two poles. Where should the wire be anchored to the ground to minimize the amount of wire needed?
+[T] You are moving into a new apartment and notice there is a corner where the hallway narrows from 8 ft to 6 ft. What is the length of the longest item that can be carried horizontally around the corner?
+19.73ft.
+
+A patient’s pulse measures 70 bpm, 80 bpm, then 120 bpm. To determine an accurate measurement of pulse, the doctor wants to know what value minimizes the expression (x−70)2+(x−80)2+(x−120)2? What value minimizes it?
+
+In the previous problem, assume the patient was nervous during the third measurement, so we only weight that value half as much as the others. What is the value that minimizes (x−70)2+(x−80)2+12(x−120)2?
+84bpm
+
+You can run at a speed of 6 mph and swim at a speed of 3 mph and are located on the shore, 4 miles east of an island that is 1 mile north of the shoreline. How far should you run west to minimize the time needed to reach the island?
+
+For the following problems, consider a lifeguard at a circular pool with diameter 40m. He must reach someone who is drowning on the exact opposite side of the pool, at position C. The lifeguard swims with a speed v and runs around the pool at speed w=3v.
+
+Find a function that measures the total amount of time it takes to reach the drowning person as a function of the swim angle, θ.
+T(θ)=40θ3v+40cosθv
+
+Find at what angle θ the lifeguard should swim to reach the drowning person in the least amount of time.
+
+A truck uses gas as g(v)=av+bv, where v represents the speed of the truck and g represents the gallons of fuel per mile. Assuming a and b are positive, at what speed is fuel consumption minimized?
+v=ba
+
+For the following exercises, consider a limousine that gets m(v)=(120−2v)5mi/gal at speed v, the chauffeur costs $15/h, and gas is $3.5/gal.
+
+Find the cost per mile at speed v.
+
+Find the cheapest driving speed.
+
+approximately 34mph
+
+For the following exercises, consider a pizzeria that sell pizzas for a revenue of R(x)=ax and costs C(x)=b+cx+dx2, where x represents the number of pizzas ; a > c.
+
+Find the profit function for the number of pizzas. How many pizzas gives the largest profit per pizza?
+
+Assume that R(x)=10x and C(x)=2x+x2. How many pizzas sold maximizes the profit?
+4
+
+Assume that R(x)=15x, and C(x)=60+3x+12x2. How many pizzas sold maximizes the profit?
+
+For the following exercises, consider a wire 4ft long cut into two pieces. One piece forms a circle with radius r and the other forms a square of side x.
+
+Choose x to maximize the sum of their areas.
+0
+
+Choose x to minimize the sum of their areas.
+
+For the following exercises, consider two nonnegative numbers x and y such that x+y=10. Maximize and minimize the quantities.
+xy
+
+Maximal: x=5,y=5; minimal: x=0,y=10 and y=0,x=10
+x2y2
+y−1x
+
+Maximal: x=1,y=9; minimal: none
+x2−y
+
+For the following exercises, draw the given optimization problem and solve.
+
+Find the volume of the largest right circular cylinder that fits in a sphere of radius 1.
+4π33
+
+Find the volume of the largest right cone that fits in a sphere of radius 1.
+
+Find the area of the largest rectangle that fits into the triangle with sides x=0,y=0 and x4+y6=1.
+6
+
+Find the largest volume of a cylinder that fits into a cone that has base radius R and height h.
+
+Find the dimensions of the closed cylinder volume V=16π that has the least amount of surface area.
+r=2,h=4
+
+Find the dimensions of a right cone with surface area S=4π that has the largest volume.
+
+For the following exercises, consider the points on the given graphs. Use a calculator to graph the functions.
+[T] Where is the line y=5−2x closest to the origin?
+(2,1)
+[T] Where is the line y=5−2x closest to point (1,1)?
+[T] Where is the parabola y=x2 closest to point (2,0)?
+(0.8351,0.6974)
+[T] Where is the parabola y=x2 closest to point (0,3)?
+
+For the following exercises, set up, but do not evaluate, each optimization problem.
+
+A window is composed of a semicircle placed on top of a rectangle. If you have 20ft of window-framing materials for the outer frame, what is the maximum size of the window you can create? Use r to represent the radius of the semicircle.
+A=2020π+4-220π+42-12π20π+42≈28.004 ft2
+
+You have a garden row of 20 watermelon plants that produce an average of 30 watermelons apiece. For any additional watermelon plants planted, the output per watermelon plant drops by one watermelon. How many extra watermelon plants should you plant?
+
+You are constructing a box for your cat to sleep in. The plush material for the square bottom of the box costs $5/ft2 and the material for the sides costs $2/ft2. You need a box with volume 4ft3. Find the dimensions of the box that minimize cost. Use x to represent the length of the side of the box.
+C(x)=5x2+32x
+Differentiating, setting the derivative equal to zero and solving, we obtain 
+x=1653 and 
+h=2543.
+
+You are building five identical pens adjacent to each other with a total area of 1000m2, as shown in the following figure. What dimensions should you use to minimize the amount of fencing?
+
+You are the manager of an apartment complex with 50 units. When you set rent at $800/month, all apartments are rented. As you increase rent by $25/month, one fewer apartment is rented. Maintenance costs run $50/month for each occupied unit. What is the rent that maximizes the total amount of profit?
+P(x)=(50−x)(800+25x−50) Rent which maximizes profit is $1050.
+
+problems that are solved by finding the maximum or minimum value of a function

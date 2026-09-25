@@ -1,0 +1,212 @@
+# m00054
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Loan Amortization
+
+Loan Amortization
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Distinguish between different types of loans.
+
+Explain how amortization works.
+
+Create an amortization schedule.
+
+Calculate the cost of borrowing.
+
+Types of Loans
+
+Funds can be loaned to businesses of any type, including corporations, partnerships, limited liability companies, and proprietorships. Bankers often refer to these lending structures as facilities, and they can be tailored to the specific needs of the borrower in a number of ways. Similarly, lenders develop loans and lines of credit for individuals. Whether for a business or an individual, the purpose of the loan, method of repayment, interest rate, specific terms, and time involved must all be tailored to the goals of the borrower and the lender. In this chapter, we will focus on fixed-rate loans, although other alternatives exist.
+
+Typical business loans include the following:
+Term loans generally bear a maturity date and a set rate of interest and are typically used to finance investments in assets such as equipment, buildings, and possibly other acquired firms. The length of the term loan is generally designed to match the useful life of the asset being financed, and it will usually be repaid on a monthly schedule. It’s common for a term loan to be backed by collateral, such as the asset itself or other assets of the business.
+Revolving lines of credit (revolvers), are used to finance the short-term working capital needs of a business. Revolvers will have a specific maximum but no set schedule of monthly payments. Interest accrues on the amount of cash that a company has drawn down from the facility. These credit lines may be secured by accounts receivable, inventory, other assets of the business, or sometimes simply the good faith and credit of the company if the firm is strong, creditworthy, and established with the lender. Revolvers must often be fully repaid and unused for a short period of time to assure the lender that the borrower is not using this facility for longer-term needs.
+
+Personal loans also come in several types, designed for the purpose the borrower (consumer) has in mind, with assistance from the lender in determining the appropriate structure:
+Personal lines of credit are similar to lines of credit on bank cards, with interest being charged on the outstanding balance of the credit line. These are available on the basis of personal credit scores, with data being supplied by the three best-known credit reporting firms: Experian, Equifax, and TransUnion. Individuals should check their scores with each of these companies at least once per year, which they can do for no charge. Additional requests from the same company require a small fee.
+
+An unsecured personal loan is an installment loan, initially drawn for a fixed amount and repaid on a periodic schedule with interest, as we have seen in our annuity examples. Unsecured means that the loan is not secured by collateral but is instead based on the strong credit history of the borrower.
+
+In contrast, a secured personal loan has an asset backing up the unpaid amount, and if the consumer defaults on the debt, the asset can be seized by the lender to satisfy their claim. A common example is an auto loan, which is secured by the car being purchased; nonpayment or default on the loan can lead to the borrower’s car being repossessed.
+
+A mortgage loan is another type of secured personal loan, but for a longer period, such as 20, 25, or even 30 years. The home being purchased or built is the collateral, and the home may be foreclosed upon if the borrower defaults. Full title to the home typically remains with the lender as long as an unpaid balance remains on the debt.
+Student loans are borrowings intended to fund college or career education, and they can come from a financial institution or the federal government. Interest rates on these loans are generally low and advantageous, and repayment does not begin until after the borrower’s education is complete (or if they drop below a certain level of time status, such as becoming a half-time student).
+
+Calculating Loan Payments Using Simple Amortization
+Loan amortization refers to a schedule of how and when a debt will be repaid with interest. As noted, we will focus on fixed-rate debts, such as auto loans, personal loans with installment payments, or mortgages. Before entering into a borrowing agreement, the borrower can use any of a number of tools to verify the terms being offered, such as the monthly payment on a car loan financed by the dealer. In many cases, this is accomplished by using the present value of an annuity formula:
+
+We’ve already reviewed the present value of ordinary annuities in several examples. Before we look into business or consumer loans and their repayment, we must review an area of Time Value of Money I.
+
+We’re not likely to make annual payments on a home mortgage or auto loan, as these are commonly paid on a monthly basis. Fortunately, our formulas are easily adjusted from annual to non-annual periods. You will recall that we solve for non-annual periods in the same way, with two adjustments: (1) we divide the annual interest rate by the number of periods in the year, and (2) we multiply the time periods by the number of those periods within a year. Therefore, in the case of monthly debt service, including interest and principal, we use 12 periods.
+
+Given a three-year car loan at 6%, rather than using 6% and 3 periods in our formula, we would instead use 0.5% (6% ÷ 12) and 36 periods (3 years × 12), and then apply the present value of an annuity formula in the same way. Let’s say the three-year, 6% auto loan is for $32,000. You need to know if you can squeeze the monthly payment into your budget. For our examples, we will ignore any other charges, fees, taxes, or extras that your lender might include in these payments, and we will focus only on interest and principal repayment. You will make the first payment one month from now, making this an ordinary annuity. What is the amount of your monthly debt service? In this case, you would be solving for a different unknown: the payment amount.
+
+By substitution into the present value of an annuity formula, adjusting for monthly payments as noted:
+
+Dividing both sides by 32.781 to isolate the payment amount (PYMT) gives us
+
+Solving for the payment, we find that it’s approximately $973.50 per month. You consult your monthly budget and find that you can cover this monthly payment, so you conclude the deal. Ask the salesperson for the amortization table on this debt to show how your 36 payments of $973.50 will cover your interest plus repayment of the principal amount of the debt. At this point, you know how to complete your own table. Using a financial calculator or Microsoft Excel simplifies the operation above to a few keystrokes, as presented later in this chapter.
+
+Two extracts from an amortization table are shown in .
+
+Extracts from an Amortization Table ($)
+
+Month
+Payment
+Interest
+Principal
+Remaining Balance
+1
+973.50
+160.00
+813.50
+31,186.50
+2
+973.50
+155.93
+817.57
+30,368.93
+3
+973.50
+151.84
+821.66
+29,547.27
+4
+973.50
+147.74
+825.77
+28,721.51
+5
+973.50
+143.61
+829.89
+…continued…
+33
+973.50
+19.23
+954.27
+2,891.54
+34
+973.50
+14.46
+959.04
+1,932.50
+35
+973.50
+9.66
+963.84
+968.66
+36
+973.50
+4.84
+968.66
+32,000.00
+This table resembles proofs we have seen of annuities, but let’s focus on some details:
+
+Each fixed payment contains both interest and principal repayment.
+
+Because the payments are fixed and the amount of remaining debt is decreasing, the monthly interest portion is always decreasing, and the amount of principal payment therefore must be increasing.
+
+We can conclude that the lender is making more of their revenue (interest) in the early months than in the later months. In addition, the debt is decreasing slowly in the early months and more rapidly in the later months. We can all agree that lenders are compensated for the risks they take earlier rather than later. Of the 36 payments of $973.50, $32,000 has been repaid as the principal borrowed. The remaining $3,046.08 is the lender’s revenue, the cost of credit.
+
+For an additional example, one that drives home the point that more interest is paid in the early months of a long-term loan, we will consider a 20-year home mortgage. Home mortgage payments are typically made monthly, and again, we will ignore additional charges by the lender, such as real estate tax and homeowner’s insurance. Let’s assume you buy a $200,000 home, pay $60,000 as a cash deposit, and will finance the remaining $140,000 over 20 years. The bank offers you a 3.6% annual interest rate. What will the amount of your monthly payment be for the interest and principal repayment? The bank will tell you, of course, but let’s prove it for ourselves. We’ll do it in exactly the same fashion as the car loan above, using the present value of an annuity formula. Remember that you are not financing the entire $200,000 purchase; you pay $60,000 in cash, so you are only financing the remaining $140,000.
+
+We modify the periods from years to months by multiplying by 12, and we modify the annual rate to a monthly rate by dividing by 12, resulting in
+
+By substitution into the present value of an annuity formula:
+
+We divide both sides by 170.907667 to isolate the payment amount (PYMT):
+
+Your monthly mortgage payment is $819.16. As in our auto loan example, we’ll complete an amortization table of our own—though, of course, you’ll remember to ask your lender for their version. Extracts from a full 240-month table are shown in below. The front-end packing of interest revenue is more obvious here because of the longer time period.
+
+Amortization Table for a Mortgage ($)
+
+Month
+Payment
+Interest
+Principal
+Remaining Balance
+140,000.00
+1
+819.16
+420.00
+399.16
+139,600.84
+2
+819.16
+418.80
+400.36
+139,200.48
+3
+819.16
+417.60
+401.56
+138,798.92
+4
+819.16
+416.40
+402.76
+138,396.16
+5
+819.16
+415.19
+403.97
+137,992.19
+6
+819.16
+413.98
+405.18
+137,587.01
+7
+819.16
+412.76
+406.40
+137,180.61
+8
+819.16
+411.54
+407.62
+136,772.99
+9
+819.16
+410.32
+408.84
+…continued….
+236
+819.16
+12.17
+806.99
+3,250.84
+237
+819.16
+9.75
+809.41
+2,441.44
+238
+819.16
+7.32
+811.84
+1,629.60
+239
+819.16
+4.89
+814.27
+815.33
+240
+819.16
+2.45
+816.71
+(Rounding)
+As with your car loan, earlier payments contain more interest than loan repayment, so the lender’s revenue is at a significant peak in the early years. The length of the loan, coupled with the frequent compounding, emphasizes this. In month 10, the interest and principal amounts “pass” each other, and now the loan balance is dropping at a quicker rate. Finally, note that you will pay more than $56,000 to finance this $140,000 borrowing. If you pay off this mortgage over 240 months as planned, the interest cost represents an additional 28% of the full cost of the home!
+
+If the borrower has the means to make an accelerated payment against this debt—for example, due to a bonus or other windfall—doing so can make a significant difference in the total cost of financing over the life of the loan. Assume that after three years (month 36), you receive a bonus of $2,000 and decide to apply the entire amount to prepay the remaining balance. Your loan agreement allows you to apply the entire amount to the remaining unpaid balance of the mortgage. While this might seem equal to just 2.5 months’ worth of payment, the debt is fully paid off almost 6 months ahead of schedule, and total interest is reduced from over $56,000 to $55,000. The ability to prepay long-term debts such as this is clearly worth negotiating initially.
+
+Loans are contracts between a lender and a borrower. Failure to observe the rules of that contract, such as payment of interest or repayment of the amount owed, can subject the borrower to substantial penalties as well as damage to their credit. Loan agreements bearing a fixed rate of interest have a scheduled amortization, or rate and time of repayments with interest. Several types of business and personal loans were described.
+
+the scheduling of periodic repayment of a debt, typically involving regular payments or receipts of amounts that include both interest payment and repayment of the principal of the amount owed

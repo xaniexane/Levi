@@ -1,0 +1,141 @@
+# 15-451/651: Algorithms
+# Carnegie Mellon University
+# source: http://www.cs.cmu.edu/afs/cs/academic/class/15451-f10/www/
+
+CMU 15-451 (Algorithms) Fall 2010
+CMU 15-451 (Algorithms), Fall 2010
+Instructor: Manuel Blum
+TAs: Jeremiah Blocki, Anvesh Komuravelli, Sarah Loos, Eric Seo, Jon Chu
+General info
+Lectures: Tue/Thu 12-1:20, GHC 4401.
+Recitations:
+C: Wed 9:30 AM ( SH 208 GHC 8115) - Sarah Loos
+A: Wed 10:30 AM (WEH 5312) - Jon Chu
+B: Wed 11:30 AM (GHC 4211) - Eric Seo
+D: Wed 2:30 PM ( DH 1211 WEH 4709) - Anvesh Komuravelli
+E: Wed 3:30 PM (DH 2105) - Jeremiah Blocki
+Office Hours:
+Jeremiah Blocki, jblocki+451@cs.cmu.edu : Monday @ 3:30 PM. GHC 7th floor lounge. Students can email me if they want to meet at a different time.
+Anvesh Komuravelli, anvesh+451@cs.cmu.edu : Friday @ 4 PM. GHC 7th floor lounge.
+Sarah Loos, sloos+451@cs.cmu.edu : Tuesday @ 9 AM 11 AM . GHC 7th floor lounge.
+Eric Seo, eseo+451@andrew.cmu.edu : Wednesday @ 12:30 PM . GHC 7th floor lounge.
+Jon Chu, jechu+451@andrew.cmu.edu : Monday @ 4:30 PM. GHC 7th floor lounge.
+Course information
+Course policy (pdf)
+Schedule
+The course bulletin boards are: academic.cs.15-451 (for announcements)
+and academic.cs.15-451.discuss (for general discussion). To sign up to these boards:
+Log in to https://webmail.andrew.cmu.edu using your andrew id.
+Click on "Folders"
+At the bottom, there is a box called "Subscribe to"
+Type in academic.cs.15-451 and click "Subscribe"
+Repeat for academic.cs.15-451.discuss
+Post to the discussion board by sending email to post+academic.cs.15-451.discuss@andrew.cmu.edu from your andrew account
+Final Exam: TBA
+TA Feedback!
+Below you will find links for Teaching Assistant evaluation surveys. Your feedback is very important to us. Please take the time to complete the evaluation survey for your TA.
+Remember: Evaluations need to be completed *before* December 10th.
+Jonathan Chu
+Eric Seo
+Sarah Loos
+Anvesh Komuravelli
+Jeremiah Blocki
+Practice Exams
+Practice Quiz 1 .
+Quiz 1 with Solutions .
+Practice Midterm .
+Practice Quiz 2 .
+Quiz 2 with Solutions .
+Practice Final Exam .
+Midterm .
+Midterm Solution .
+Exams
+Midterm Solutions
+Quizzes
+Quiz 1 Solutions
+Quiz 2 Solutions
+Minis
+Minis can be typed in a .txt document and emailed to your TA.
+Mini 1 (Due Tuesday 8/31/2010 11:59PM)
+Solutions
+Mini 2 (Due Tuesday 9/14/2010 11:59PM)
+Solutions
+Mini 3 (Due Tuesday 9/28/2010 11:59PM)
+Solutions
+Mini 4 (Due Tuesday 10/12/2010 11:59PM)
+Solutions
+Mini 5 (Due Tuesday 11/02/2010 11:59PM) Solutions
+Mini 6 (Due Tuesday 11/23/2010 11:59 PM) Solutions
+Homeworks
+Homeworks must be typeset or no credit will be given. LaTeX is recommended.
+Homework 1
+Solution
+(Due Thursday 9/9/2010 at the beginning of class. This is a written homework. Remember to print your solution to each problem on a different page!)
+Homework 2
+( signup sheet )
+Solution
+(Due Tue-Fri 9/21-9/24. This is an oral presentation assignment. You should work in groups of three.)
+Homework 3
+Solution
+(Due 10/5/2010 at the begining of class. This is a written homework. Remember to print your solution to each problem on a different page and put your recitation section and andrew id on each separate document.)
+Homework 4
+( signup sheet )
+Solution
+(Due Tue-Fri 10/26-10/29. This is an oral presentation assignment. You should work in groups of three.)
+Homework 5
+( signup sheet ) Solution
+(Due Tue-Fri 11/09-11/12. This is an oral presentation assignment. You should work in groups of three.)
+Homework 6 Notebook File Solution Notebook
+(Due 12/2/2010 at the begining of class. This is a written homework. Remember to print your solution to each problem on a different page and put your recitation section and andrew id on each separate document.)
+Homework Template
+hw_template.tex ( pdf )
+Lecture notes
+[ The first 10 lectures ]
+[ The next 10 lectures ]
+08/24: Intro & Admin. Karatsuba/Strassen .
+08/25:(recitation) Warmup Problems .
+08/26: Asymptotic analysis, solving recurrences .
+08/31: Probabilistic analysis, Randomized Quicksort .
+09/01:(recitation) Problems related to randomized quicksort .
+09/02: Linear-time Selection (randomized and deterministic) .
+09/07: Comparison-based lower bounds for sorting .
+09/08:(recitation) Problems related to selection recurrence, upper/lower bounds in concrete models .
+09/08:(recitation) Inductive proof of the selection recurrence .
+09/09: Concrete models and tight upper/lower bounds
+09/14: Amortized Analysis
+09/15:(recitation) Problems related to tight bounds and minimax optimality. .
+09/15:(recitation) Formal proof of the assumptions made in the problem .
+09/15:(recitation) Discussion on the Bounds on Randomized Algorithms .
+09/15:(recitation) Common problems from hw1
+09/16: Search trees: B-trees and treaps .
+09/21: Digit-based sorting/data-structures (radix sort, tries) .
+09/22: (recitation) Potential Function's and Amortization
+09/23: Universal and Perfect Hashing .
+09/28: Dynamic Programming .
+09/29: (recitation) Homework problems from last year (#1 and #3)
+09/30: Graph Algorithms I: DFS and Topological Sorting, DP algs for shortest paths (Bellman-Ford, Matrix, Floyd-Warshall) .
+10/05: Graph Algorithms II: Dijkstra, Prim, Kruskal .
+10/06:(recitation) Maximum bottleneck path, coupon-collector's problem. .
+10/07: Review.
+10/12: Midterm
+10/13:(recitation) 2-coloring,BFS and DFS trees .
+10/14: Graph Algorithms III: Union-find .
+10/19: Fun with BFS and DFS .
+10/20:(recitation) Examples of problems that can be solved using network flow. .
+10/21: Network Flows and Matchings I .
+10/26: Network Flows II: Edmonds-Karp 1, Edmonds-Karp 2, Min-cost max flow .
+10/27:(recitation) Examples of problems that can be solved using linear programming .
+10/28: Linear Programming .
+11/02: NP-completeness I .
+11/03:(recitation) Examples of NP-completeness reductions: Integer Programming and 3-Coloring .
+11/04: NP-completeness II .
+11/09: Approximation Algorithms .
+11/10:(recitation) NP-completeness reductions contd. .
+11/11: Online Algorithms .
+11/16: Number theoretic algorithms I .
+11/17:(recitation) Number-theory and a little more complexity theory .
+11/18: Number theoretic algorithms II .
+11/23: Fast Fourier Transform (FFT) .
+11/30: Intro to machine learning theory .
+12/01:(recitation) FFT/Review .
+12/02: Mechanism/protocol design, Cake Cutting

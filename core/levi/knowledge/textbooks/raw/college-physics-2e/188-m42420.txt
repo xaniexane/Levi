@@ -1,0 +1,293 @@
+# m42420
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Inductance
+
+Inductance
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate the inductance of an inductor.
+
+Calculate the energy stored in an inductor.
+
+Calculate the emf generated in an inductor.
+
+Inductors
+
+Induction is the process in which an emf is induced by changing magnetic flux. Many examples have been discussed so far, some more effective than others. Transformers, for example, are designed to be particularly effective at inducing a desired voltage and current with very little loss of energy to other forms. Is there a useful physical quantity related to how “effective” a given device is? The answer is yes, and that physical quantity is called inductance.
+Mutual inductance is the effect of Faraday’s law of induction for one device upon another, such as the primary coil in transmitting energy to the secondary in a transformer. See , where simple coils induce emfs in one another.
+
+In the many cases where the geometry of the devices is fixed, flux is changed by varying current. We therefore concentrate on the rate of change of current, ΔI/Δt, as the cause of induction. A change in the current I1 in one device, coil 1 in the figure, induces an emf2 in the other. We express this in equation form as
+
+where M is defined to be the mutual inductance between the two devices. The minus sign is an expression of Lenz’s law. The larger the mutual inductance M, the more effective the coupling. For example, the coils in have a small M compared with the transformer coils in . Units for M are (V⋅s)/A=Ω⋅s, which is named a henry (H), after Joseph Henry. That is, 1 H=1Ω⋅s.
+
+Nature is symmetric here. If we change the current I2 in coil 2, we induce an emf1 in coil 1, which is given by
+
+where M is the same as for the reverse process. Transformers run backward with the same effectiveness, or mutual inductance M.
+
+A large mutual inductance M may or may not be desirable. We want a transformer to have a large mutual inductance. But an appliance, such as an electric clothes dryer, can induce a dangerous emf on its case if the mutual inductance between its coils and the case is large. One way to reduce mutual inductance M is to counterwind coils to cancel the magnetic field produced. (See .)
+Self-inductance, the effect of Faraday’s law of induction of a device on itself, also exists. When, for example, current through a coil is increased, the magnetic field and flux also increase, inducing a counter emf, as required by Lenz’s law. Conversely, if the current is decreased, an emf is induced that opposes the decrease. Most devices have a fixed geometry, and so the change in flux is due entirely to the change in current ΔI through the device. The induced emf is related to the physical geometry of the device and the rate of change of current. It is given by
+
+where L is the self-inductance of the device. A device that exhibits significant self-inductance is called an inductor, and given the symbol in .The minus sign is an expression of Lenz’s law, indicating that emf opposes the change in current. Units of self-inductance are henries (H) just as for mutual inductance. The larger the self-inductance L of a device, the greater its opposition to any change in current through it. For example, a large coil with many turns and an iron core has a large L and will not allow current to change quickly. To avoid this effect, a small L must be achieved, such as by counterwinding coils as in .
+
+A 1 H inductor is a large inductor. To illustrate this, consider a device with L=1.0 H that has a 10 A current flowing through it. What happens if we try to shut off the current rapidly, perhaps in only 1.0 ms? An emf, given by emf=−L(ΔI/Δt), will oppose the change. Thus an emf will be induced given by emf=−L(ΔI/Δt)=(1.0 H)[(10 A)/(1.0 ms)]=10,000 V. The positive sign means this large voltage is in the same direction as the current, opposing its decrease. Such large emfs can cause arcs, damaging switching equipment, and so it may be necessary to change current more slowly.
+
+There are uses for such a large induced voltage. Camera flashes use a battery, two inductors that function as a transformer, and a switching system or oscillator to induce large voltages. (Remember that we need a changing magnetic field, brought about by a changing current, to induce a voltage in another coil.) The oscillator system will do this many times as the battery voltage is boosted to over one thousand volts. (You may hear the high pitched whine from the transformer as the capacitor is being charged.) A capacitor stores the high voltage for later use in powering the flash. (See .)
+
+It is possible to calculate L for an inductor given its geometry (size and shape) and knowing the magnetic field that it produces. This is difficult in most cases, because of the complexity of the field created. So in this text the inductance L is usually a given quantity. One exception is the solenoid, because it has a very uniform field inside, a nearly zero field outside, and a simple shape. It is instructive to derive an equation for its inductance. We start by noting that the induced emf is given by Faraday’s law of induction as emf=−N(ΔΦ/Δt) and, by the definition of self-inductance, as emf=−L(ΔI/Δt). Equating these yields
+
+Solving for L gives
+
+This equation for the self-inductance L of a device is always valid. It means that self-inductance L depends on how effective the current is in creating flux; the more effective, the greater ΔΦ/ ΔI is.
+
+Let us use this last equation to find an expression for the inductance of a solenoid. Since the area 
+ 
+ A
+ 
+ of a solenoid is fixed, the change in flux is
+
+ Δ
+ Φ
+ =
+ Δ
+ (
+ B
+ A
+ )
+ =
+ A
+ Δ
+ B
+
+.
+
+To find
+
+ Δ
+ B
+
+, we note that the magnetic field of a solenoid is given by B=μ0nI=μ0NIℓ. (Here n=N/ℓ, where
+
+ N
+ 
+ is the number of coils and
+
+ ℓ
+ 
+ is the solenoid’s length.) Only the current changes, so that ΔΦ=AΔB=μ0NAΔIℓ. Substituting
+
+ Δ
+ Φ
+
+ into L=NΔΦΔI gives
+
+This simplifies to
+
+This is the self-inductance of a solenoid of cross-sectional area 
+ 
+ A
+ 
+ and length
+
+ ℓ
+ 
+. Note that the inductance depends only on the physical characteristics of the solenoid, consistent with its definition.
+
+Calculating the Self-inductance of a Moderate Size Solenoid
+
+Calculate the self-inductance of a 10.0 cm long, 4.00 cm diameter solenoid that has 200 coils.
+Strategy
+
+Strategy
+
+This is a straightforward application of L=μ0N2Aℓ, since all quantities in the equation except L are known.
+Solution
+
+Solution
+
+Use the following expression for the self-inductance of a solenoid:
+
+The cross-sectional area in this example is A=πr2=(3.14...)(0.0200 m)2=1.26×10−3m2, 
+ 
+ N
+ 
+ is given to be 200, and the length 
+ 
+ ℓ
+ 
+ is 0.100 m. We know the permeability of free space is μ0=4π×10−7T⋅m/A. Substituting these into the expression for
+
+ L
+ 
+ gives
+Discussion
+
+Discussion
+
+This solenoid is moderate in size. Its inductance of nearly a millihenry is also considered moderate.
+
+One common application of inductance is used in traffic lights that can tell when vehicles are waiting at the intersection. An electrical circuit with an inductor is placed in the road under the place a waiting car will stop over. The body of the car increases the inductance and the circuit changes sending a signal to the traffic lights to change colors. Similarly, metal detectors used for airport security employ the same technique. A coil or inductor in the metal detector frame acts as both a transmitter and a receiver. The pulsed signal in the transmitter coil induces a signal in the receiver. The self-inductance of the circuit is affected by any metal object in the path. Such detectors can be adjusted for sensitivity and also can indicate the approximate location of metal found on a person. See .
+
+Energy Stored in an Inductor
+
+We know from Lenz’s law that inductances oppose changes in current. There is an alternative way to look at this opposition that is based on energy. Energy is stored in a magnetic field. It takes time to build up energy, and it also takes time to deplete energy; hence, there is an opposition to rapid change. In an inductor, the magnetic field is directly proportional to current and to the inductance of the device. It can be shown that the energy stored in an inductor Eind is given by
+
+This expression is similar to that for the energy stored in a capacitor.
+
+Calculating the Energy Stored in the Field of a Solenoid
+
+How much energy is stored in the 0.632 mH inductor of the preceding example when a 30.0 A current flows through it?
+Strategy
+
+Strategy
+
+The energy is given by the equation Eind=12LI2, and all quantities except Eind are known.
+Solution
+
+Solution
+
+Substituting the value for L found in the previous example and the given current into Eind=12LI2 gives
+Discussion
+
+Discussion
+
+This amount of energy is certainly enough to cause a spark if the current is suddenly switched off. It cannot be built up instantaneously unless the power input is infinite.
+
+Section Summary
+
+Inductance is the property of a device that tells how effectively it induces an emf in another device.
+
+Mutual inductance is the effect of two devices in inducing emfs in each other.
+
+A change in current ΔI1/Δt in one induces an emf emf2 in the second:
+
+ emf2=−MΔI1Δt,
+
+ where
+
+ M
+ 
+ is defined to be the mutual inductance between the two devices, and the minus sign is due to Lenz’s law.
+
+Symmetrically, a change in current ΔI2/Δt through the second device induces an emf emf1 in the first:
+
+ emf1=−MΔI2Δt,
+ where
+
+ M
+ 
+ is the same mutual inductance as in the reverse process.
+
+Current changes in a device induce an emf in the device itself.
+
+Self-inductance is the effect of the device inducing emf in itself.
+
+The device is called an inductor, and the emf induced in it by a change in current through it is
+
+ emf=−LΔIΔt,
+
+where L is the self-inductance of the inductor, and ΔI/Δt is the rate of change of current through it. The minus sign indicates that emf opposes the change in current, as required by Lenz’s law.
+
+The unit of self- and mutual inductance is the henry (H), where 1 H=1 Ω⋅s.
+
+The self-inductance L of an inductor is proportional to how much flux changes with current. For an N-turn inductor,
+
+ L=NΔΦΔI
+ .
+
+The self-inductance of a solenoid is
+
+ L=μ0N2Aℓ(solenoid),
+
+where N is its number of turns in the solenoid, A is its cross-sectional area, ℓ is its length, and μ0=4π×10−7T⋅m/A is the permeability of free space.
+
+The energy stored in an inductor Eind is
+
+ Eind=12LI2.
+
+Conceptual Questions
+
+How would you place two identical flat coils in contact so that they had the greatest mutual inductance? The least?
+
+How would you shape a given length of wire to give it the greatest self-inductance? The least?
+
+Verify, as was concluded without proof in , that units of T⋅m2/A=Ω⋅s=H.
+
+Problems & Exercises
+
+Two coils are placed close together in a physics lab to demonstrate Faraday’s law of induction. A current of 5.00 A in one is switched off in 1.00 ms, inducing a 9.00 V emf in the other. What is their mutual inductance?
+
+1.80 mH
+
+If two coils placed next to one another have a mutual inductance of 5.00 mH, what voltage is induced in one when the 2.00 A current in the other is switched off in 30.0 ms?
+
+The 4.00 A current through a 7.50 mH inductor is switched off in 8.33 ms. What is the emf induced opposing this?
+
+3.60 V
+
+A device is turned on and 3.00 A flows through it 0.100 ms later. What is the self-inductance of the device if an induced 150 V emf opposes this?
+
+Starting with emf2=−MΔI1Δt, show that the units of inductance are (V⋅s)/A=Ω⋅s.
+
+Camera flashes charge a capacitor to high voltage by switching the current through an inductor on and off rapidly. In what time must the 0.100 A current through a 2.00 mH inductor be switched on or off to induce a 500 V emf?
+
+A large research solenoid has a self-inductance of 25.0 H. (a) What induced emf opposes shutting it off when 100 A of current through it is switched off in 80.0 ms? (b) How much energy is stored in the inductor at full current? (c) At what rate in watts must energy be dissipated to switch the current off in 80.0 ms? (d) In view of the answer to the last part, is it surprising that shutting it down this quickly is difficult?
+
+(a) 31.3 kV
+
+(b) 125 kJ
+
+(c) 1.56 MW
+
+(d) No, it is not surprising since this power is very high.
+
+(a) Calculate the self-inductance of a 50.0 cm long, 10.0 cm diameter solenoid having 1000 loops. (b) How much energy is stored in this inductor when 20.0 A of current flows through it? (c) How fast can it be turned off if the induced emf cannot exceed 3.00 V?
+
+A precision laboratory resistor is made of a coil of wire 1.50 cm in diameter and 4.00 cm long, and it has 500 turns. (a) What is its self-inductance? (b) What average emf is induced if the 12.0 A current through it is turned on in 5.00 ms (one-fourth of a cycle for 50 Hz AC)? (c) What is its inductance if it is shortened to half its length and counter-wound (two layers of 250 turns in opposite directions)?
+
+(a) 1.39 mH
+
+(b) 3.33 V
+
+(c) Zero
+
+The heating coils in a hair dryer are 0.800 cm in diameter, have a combined length of 1.00 m, and a total of 400 turns. (a) What is their total self-inductance assuming they act like a single solenoid? (b) How much energy is stored in them when 6.00 A flows? (c) What average emf opposes shutting them off if this is done in 5.00 ms (one-fourth of a cycle for 50 Hz AC)?
+
+When the 20.0 A current through an inductor is turned off in 1.50 ms, an 800 V emf is induced, opposing the change. What is the value of the self-inductance?
+
+60.0 mH
+
+How fast can the 150 A current through a 0.250 H inductor be shut off if the induced emf cannot exceed 75.0 V?
+Integrated Concepts
+
+Integrated Concepts
+
+A very large, superconducting solenoid such as one used in MRI scans, stores 1.00 MJ of energy in its magnetic field when 100 A flows. (a) Find its self-inductance. (b) If the coils “go normal,” they gain resistance and start to dissipate thermal energy. What temperature increase is produced if all the stored energy goes into heating the 1000 kg magnet, given its average specific heat is
+
+ 200 J/kg·ºC
+ 
+?
+
+(a) 200 H
+
+(b) 
+ 
+ 5.00ºC
+Unreasonable Results
+
+Unreasonable Results
+
+A 25.0 H inductor has 100 A of current turned off in 1.00 ms. (a) What voltage is induced to oppose this? (b) What is unreasonable about this result? (c) Which assumption or premise is responsible?
+
+a property of a device describing how efficient it is at inducing emf in another device
+how effective a pair of devices are at inducing emfs in each other
+the unit of inductance; 1H=1Ω⋅s
+how effective a device is at inducing emf in itself
+a device that exhibits significant self-inductance
+self-explanatory; calculated by Eind=12LI2

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="gbc-card">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>HICOMB STUDIO — card nº HC-042/1000</title>
+<style>
+/* ============ HICOMB STUDIO · angular GBC card frame · ============ */
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+:root{
+  --bg:#05070c; --surface:#0b0e14; --surface2:#11141c; --frame:#232936;
+  --text:#e8f6ff; --muted:#5c6b84; --accent:#00e5ff; --accent2:#8a5fff;
+  --sel:#232936; --caret:#35f0ff; --good:#38e86c; --warn:#f8b800; --bad:#e83838;
+  --cut:10px; --font:13px;
+}
+[data-theme="void"]{--bg:#0d1117;--surface:#161b22;--surface2:#161b22;--frame:#2e3648;--text:#e6edf3;--muted:#7d8590;--accent:#2f81f7;--accent2:#a371f7;--sel:#264f78;--caret:#e6edf3}
+[data-theme="paper"]{--bg:#ffffff;--surface:#f6f8fa;--surface2:#f6f8fa;--frame:#c8d0da;--text:#1f2328;--muted:#59636e;--accent:#0969da;--accent2:#8250df;--sel:#b6e3ff;--caret:#1f2328}
+[data-theme="dusk"]{--bg:#1a1033;--surface:#241a4d;--surface2:#241a4d;--frame:#4b3a8f;--text:#f5efff;--muted:#9d8fd1;--accent:#c678dd;--accent2:#56b6c2;--sel:#4b3a8f;--caret:#f5efff}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:var(--font);overflow:hidden;display:flex;flex-direction:column}
+/* angular corner armor — every panel, like the Legion card frame */
+.cut{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+.panel{background:var(--surface);border:2px solid var(--frame);display:flex;flex-direction:column;min-height:0;min-width:0}
+/* ---- nameplate: the card title bar ---- */
+#nameplate{background:linear-gradient(180deg,var(--surface2),var(--surface));border-bottom:2px solid var(--frame);padding:6px 10px;display:flex;align-items:center;gap:10px;flex:0 0 auto}
+#nameplate .brand{font-weight:700;letter-spacing:2px;color:var(--accent);font-size:15px}
+#nameplate .series{color:var(--muted);font-size:11px;letter-spacing:1px}
+#nameplate .spacer{flex:1}
+.badge{border:2px solid var(--accent);color:var(--accent);padding:1px 7px;font-size:11px;font-weight:700;letter-spacing:1px}
+.mbtn{background:var(--surface2);border:2px solid var(--frame);color:var(--text);padding:4px 9px;font:inherit;cursor:pointer}
+.mbtn:active{background:var(--sel)}
+.only-mobile{display:none}
+/* ---- main grid ---- */
+#main{flex:1;display:grid;grid-template-columns:230px 1fr 300px;grid-template-rows:1fr 220px;gap:6px;padding:6px;min-height:0}
+#filetree{grid-row:1}
+#center{grid-row:1;display:flex;flex-direction:column;min-width:0}
+#aipanel{grid-row:1}
+#dockwrap{grid-column:1/4;grid-row:2}
+.phead{background:var(--surface2);border-bottom:2px solid var(--frame);padding:5px 8px;font-size:11px;letter-spacing:2px;color:var(--muted);display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.phead .spacer{flex:1}
+.phead button{background:none;border:1px solid var(--frame);color:var(--muted);font:inherit;font-size:11px;padding:1px 6px;cursor:pointer}
+/* ---- file tree ---- */
+#tree{overflow:auto;padding:6px;flex:1}
+#tree ul{list-style:none;padding-left:12px}
+#tree li{padding:2px 4px;cursor:pointer;white-space:nowrap}
+#tree li.dir{color:var(--accent);font-weight:700}
+#tree li.file:hover{background:var(--sel)}
+#tree li.active{background:var(--sel);color:var(--accent)}
+#tree .trash{color:var(--warn)}
+/* ---- tabs ---- */
+#tabstrip{display:flex;overflow-x:auto;background:var(--surface2);border-bottom:2px solid var(--frame);flex:0 0 auto}
+.tab{padding:6px 10px;border-right:2px solid var(--frame);cursor:pointer;white-space:nowrap;color:var(--muted);display:flex;gap:6px;align-items:center}
+.tab.active{color:var(--accent);background:var(--surface)}
+.tab .dirty{color:var(--warn)}
+.tab .x{color:var(--muted);padding:0 2px}
+/* ---- editor ---- */
+#editwrap{flex:1;position:relative;display:flex;min-height:0;background:var(--bg)}
+#gutter{flex:0 0 auto;overflow:hidden;background:var(--surface2);border-right:2px solid var(--frame);color:var(--muted);text-align:right;padding:8px 6px 8px 8px;user-select:none;line-height:1.55;font-size:var(--font)}
+#gutter .prob{color:var(--warn)}
+#edbox{flex:1;position:relative;min-width:0}
+#editor,#overlay{position:absolute;inset:0;padding:8px 10px;font:inherit;line-height:1.55;white-space:pre;tab-size:4;overflow:auto}
+#editor{background:transparent;color:transparent;caret-color:var(--caret);border:0;outline:none;resize:none;z-index:2}
+#overlay{z-index:1;pointer-events:none}
+#overlay .ghost{color:var(--muted);opacity:.75}
+.tok-k{color:#ff5fd2;font-weight:700}.tok-s{color:#38e86c}.tok-c{color:#5c6b84;font-style:italic}
+.tok-n{color:#f8b800}.tok-f{color:#00e5ff}.tok-b{color:#35f0ff}.tok-t{color:#e83838}
+.tok-h{color:#ff5fd2;font-weight:700}
+.match{background:var(--warn);color:#000}
+/* ---- find bar ---- */
+#findbar{display:none;background:var(--surface2);border-bottom:2px solid var(--frame);padding:4px 8px;gap:6px;align-items:center;flex:0 0 auto}
+#findbar.open{display:flex}
+#findbar input{background:var(--bg);border:2px solid var(--frame);color:var(--text);font:inherit;padding:3px 6px;width:160px}
+/* ---- AI panel: the one holo thing in a matte world ---- */
+#aipanel .phead .holo{background:linear-gradient(90deg,#ff5fd2,#8a5fff,#5fffd2,#ffe95f);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+#enginebadge{font-size:10px;border:1px solid var(--warn);color:var(--warn);padding:1px 5px;letter-spacing:1px}
+#aichat{flex:1;overflow:auto;padding:8px;display:flex;flex-direction:column;gap:8px}
+.msg{border:2px solid var(--frame);padding:6px 8px;background:var(--surface2)}
+.msg.ai{border-color:var(--accent2)}
+.msg .who{font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:4px}
+.msg.ai .who{color:var(--accent2)}
+.msg pre{white-space:pre-wrap;font-size:12px}
+.msg .acts{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.abtn{background:var(--surface);border:2px solid var(--accent);color:var(--accent);font:inherit;font-size:11px;padding:3px 8px;cursor:pointer}
+#airow{display:flex;gap:6px;padding:6px;border-top:2px solid var(--frame)}
+#aiinput{flex:1;background:var(--bg);border:2px solid var(--frame);color:var(--text);font:inherit;padding:6px}
+#aiqs{display:flex;gap:4px;padding:0 6px 6px;flex-wrap:wrap}
+#aiqs button{background:var(--surface2);border:1px solid var(--frame);color:var(--muted);font:inherit;font-size:10px;padding:2px 6px;cursor:pointer}
+/* ---- dock ---- */
+#docktabs{display:flex;background:var(--surface2);border-bottom:2px solid var(--frame);flex:0 0 auto}
+#docktabs button{background:none;border:0;border-right:2px solid var(--frame);color:var(--muted);font:inherit;font-size:11px;letter-spacing:1px;padding:5px 12px;cursor:pointer}
+#docktabs button.active{color:var(--accent);background:var(--surface)}
+#dockbody{flex:1;min-height:0;position:relative}
+.dockpane{position:absolute;inset:0;overflow:auto;padding:8px;display:none}
+.dockpane.active{display:block}
+#termout{white-space:pre-wrap}
+#termin{width:100%;background:var(--bg);border:2px solid var(--frame);color:var(--text);font:inherit;padding:6px;margin-top:6px}
+.probrow{padding:3px 6px;cursor:pointer;border-left:3px solid var(--warn);margin-bottom:2px;background:var(--surface2)}
+.probrow:hover{background:var(--sel)}
+/* ---- status bar: the edition stamp ---- */
+#statusbar{flex:0 0 auto;display:flex;gap:12px;align-items:center;background:var(--surface2);border-top:2px solid var(--frame);padding:4px 10px;font-size:11px;color:var(--muted)}
+#statusbar .stamp{color:var(--accent);letter-spacing:1px}
+#statusbar .ok{color:var(--good)} #statusbar .err{color:var(--bad)}
+#statusbar .spacer{flex:1}
+/* ---- overlays ---- */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:50;align-items:flex-start;justify-content:center;padding-top:12vh}
+.overlay.open{display:flex}
+.sheet{background:var(--surface);border:2px solid var(--accent);width:min(560px,92vw);max-height:60vh;display:flex;flex-direction:column}
+.sheet input{background:var(--bg);border:0;border-bottom:2px solid var(--frame);color:var(--text);font:inherit;font-size:15px;padding:10px}
+#palist{overflow:auto}
+.palrow{padding:8px 12px;cursor:pointer;display:flex;gap:8px}
+.palrow.active{background:var(--sel);color:var(--accent)}
+.palrow .k{color:var(--muted);font-size:11px;margin-left:auto}
+.sheet .body{padding:12px;display:flex;flex-direction:column;gap:10px}
+.sheet select,.sheet input[type=number]{background:var(--bg);border:2px solid var(--frame);color:var(--text);font:inherit;padding:6px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:10px}
+/* ---- mobile ---- */
+@media (max-width:820px){
+  #main{grid-template-columns:1fr;grid-template-rows:1fr 200px}
+  #filetree,#aipanel{position:fixed;top:0;bottom:0;width:min(300px,84vw);z-index:40;display:none}
+  #filetree{left:0} #aipanel{right:0}
+  #filetree.open,#aipanel.open{display:flex}
+  .only-mobile{display:inline-block}
+  #dockwrap{grid-column:1;grid-row:2}
+  #center{grid-row:1}
+  :root{--font:12px}
+}
+</style>
+</head>
+<body>
+<!-- nameplate: the card title bar -->
+<header id="nameplate" class="cut">
+  <button class="mbtn only-mobile" id="btn-tree">☰</button>
+  <span class="brand">▚ HICOMB STUDIO ▞</span>
+  <span class="series">GENESIS-2026 · ANGULAR GBC EDITION</span>
+  <span class="spacer"></span>
+  <button class="mbtn" id="btn-palette" title="command palette">⌘K</button>
+  <button class="mbtn" id="btn-settings" title="settings">⚙</button>
+  <button class="mbtn only-mobile" id="btn-ai">✦ AI</button>
+  <span class="badge">IDE</span>
+</header>
+
+<div id="main">
+  <!-- file tree panel -->
+  <section id="filetree" class="panel cut" aria-label="file tree">
+    <div class="phead">▤ FILES <span class="spacer"></span>
+      <button id="btn-newfile" title="new file">+f</button>
+      <button id="btn-newdir" title="new folder">+d</button>
+      <button id="btn-openfolder" title="open folder">open</button>
+    </div>
+    <div id="tree"></div>
+  </section>
+
+  <!-- center: tabs + editor -->
+  <section id="center">
+    <div id="tabstrip"></div>
+    <div id="findbar">
+      <input id="findinput" placeholder="find in file…">
+      <span id="findcount"></span>
+      <button class="mbtn" id="findprev">↑</button>
+      <button class="mbtn" id="findnext">↓</button>
+      <button class="mbtn" id="findclose">✕</button>
+    </div>
+    <div id="editwrap" class="panel cut">
+      <div id="gutter"></div>
+      <div id="edbox">
+        <pre id="overlay" aria-hidden="true"></pre>
+        <textarea id="editor" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI pair programmer: the holo chase slot -->
+  <aside id="aipanel" class="panel cut" aria-label="ai pair programmer">
+    <div class="phead"><span class="holo">✦ PAIR PROGRAMMER</span><span class="spacer"></span><span id="enginebadge">LOCAL ENGINE</span></div>
+    <div id="aichat"></div>
+    <div id="aiqs">
+      <button data-q="explain this file">explain</button>
+      <button data-q="review for problems">review</button>
+      <button data-q="fix the problems">fix</button>
+      <button data-q="refactor this">refactor</button>
+    </div>
+    <div id="airow">
+      <input id="aiinput" placeholder="ask about this file… (local engine)">
+      <button class="mbtn" id="aisend">➤</button>
+    </div>
+  </aside>
+
+  <!-- dock: terminal / problems / output -->
+  <section id="dockwrap" class="panel cut">
+    <div id="docktabs">
+      <button data-dock="terminal" class="active">▸ TERMINAL</button>
+      <button data-dock="problems">⚠ PROBLEMS <span id="probcount"></span></button>
+      <button data-dock="output">≣ OUTPUT</button>
+      <span class="spacer" style="flex:1"></span>
+      <button id="dockhide" title="toggle dock">▾</button>
+    </div>
+    <div id="dock">
+    <div id="dockbody">
+      <div class="dockpane active" id="pane-terminal">
+        <div id="termout"></div>
+        <input id="termin" placeholder="studio console — type 'help'">
+      </div>
+      <div class="dockpane" id="pane-problems"><div id="problems"></div></div>
+      <div class="dockpane" id="pane-output"><div id="output"></div></div>
+    </div>
+    </div>
+  </section>
+</div>
+
+<!-- status bar: the edition stamp -->
+<footer id="statusbar">
+  <span class="stamp">CARD Nº HC-042/1000</span>
+  <span>1000 A YEAR. DRAWN FAIR.</span>
+  <span class="spacer"></span>
+  <span id="st-lang">—</span>
+  <span id="st-pollen">POLLEN ✓</span>
+  <span id="st-caret">1:1</span>
+</footer>
+
+<!-- command palette -->
+<div class="overlay" id="palette"><div class="sheet cut">
+  <input id="palinput" placeholder="type a command…">
+  <div id="palist"></div>
+</div></div>
+
+<!-- settings -->
+<div class="overlay" id="settings"><div class="sheet cut">
+  <div class="phead">⚙ SETTINGS <span class="spacer"></span><button id="setclose">✕</button></div>
+  <div class="body">
+    <div class="srow"><span>theme (card frame)</span><select id="set-theme">
+      <option value="gbc-card">gbc-card · angular GBC</option>
+      <option value="void">void · dark</option>
+      <option value="paper">paper · light</option>
+      <option value="dusk">dusk · purple</option>
+    </select></div>
+    <div class="srow"><span>font size</span><input type="number" id="set-font" min="10" max="22" value="13"></div>
+    <div class="srow"><span>tab width</span><input type="number" id="set-tab" min="2" max="8" value="4"></div>
+    <div class="srow"><span>pollen on save (law)</span><span style="color:var(--good)">ALWAYS ON</span></div>
+    <div class="srow"><button class="mbtn" id="btn-wipe">wipe local workspace</button></div>
+  </div>
+</div></div>
+<script>
+"use strict";
+/* ================= HICOMB STUDIO · single-file IDE =================
+   Offline-first. No network. Pollen runs before every save and aborts
+   the write on failure. The AI panel is the LOCAL engine until a model
+   is seated — it never fakes it. */
+/* ---------- tiny utils ---------- */
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const debounce=(fn,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}};
+function out(html){const d=$("output");d.insertAdjacentHTML("beforeend",html+"<br>");d.parentElement.scrollTop=1e9;}
+function term(html){const d=$("termout");d.insertAdjacentHTML("beforeend",html+"<br>");d.parentElement.scrollTop=1e9;}
+/* ---------- language detection (mirrors highlight.py LANG_BY_EXT) ---------- */
+const LANG_BY_EXT={py:"python",pyw:"python",js:"javascript",mjs:"javascript",jsx:"javascript",ts:"typescript",tsx:"typescript",mts:"typescript",html:"html",htm:"html",css:"css",md:"markdown",markdown:"markdown",sh:"shell",bash:"shell",json:"json",txt:"plain"};
+const langOf=p=>{const e=(p.split(".").pop()||"").toLowerCase();return LANG_BY_EXT[e]||"plain";};
+/* ---------- tokenizer: sticky-regex scan, token kinds mirror highlight.py ---------- */
+const KWS={python:"def|class|return|import|from|as|if|elif|else|for|while|try|except|finally|with|lambda|yield|raise|assert|pass|break|continue|in|is|not|and|or|None|True|False|async|await|global|nonlocal|del",javascript:"function|return|const|let|var|if|else|for|while|do|switch|case|break|continue|new|typeof|instanceof|in|of|try|catch|finally|throw|class|extends|import|export|from|default|async|await|this|null|undefined|true|false",typescript:"function|return|const|let|var|if|else|for|while|do|switch|case|break|continue|new|typeof|instanceof|in|of|try|catch|finally|throw|class|extends|import|export|from|default|async|await|this|null|undefined|true|false|interface|type|enum|namespace|implements|public|private|protected|readonly",html:"",css:"",markdown:"",shell:"if|then|else|elif|fi|for|while|do|done|case|esac|function|return|in|export|local|set|echo|exit",json:"true|false|null"};
+function rulesFor(lang){
+  const R=[];const Y=(s,cls)=>R.push([new RegExp(s,"y"),cls]);
+  if(lang==="python"){
+    Y('"""[\\s\\S]*?"""',"s");Y("'''[\\s\\S]*?'''","s");Y('"([^"\\\\\\n]|\\\\.)*"',"s");Y("'([^'\\\\\\n]|\\\\.)*'","s");
+    Y("#[^\\n]*","c");Y("\\b\\d[\\d_]*(?:\\.\\d+)?\\b","n");
+    Y("\\b(?:"+KWS.python+")\\b","k");Y("\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()","f");Y("\\b[A-Za-z_][A-Za-z0-9_]*\\b","b");
+  }else if(lang==="javascript"||lang==="typescript"){
+    Y("//[^\\n]*","c");Y("/\\*[\\s\\S]*?\\*/","c");Y("`(?:[^`\\\\]|\\\\.)*`","s");
+    Y('"([^"\\\\\\n]|\\\\.)*"',"s");Y("'([^'\\\\\\n]|\\\\.)*'","s");
+    Y("\\b\\d[\\d_]*(?:\\.\\d+)?\\b","n");Y("\\b(?:"+KWS[lang]+")\\b","k");
+    Y("\\b[A-Za-z_$][A-Za-z0-9_$]*(?=\\s*\\()","f");
+  }else if(lang==="html"){
+    Y("<!--[\\s\\S]*?-->","c");Y("</?[A-Za-z][A-Za-z0-9-]*","t");Y("[A-Za-z-]+(?=\\s*=)","b");Y('"[^"\\n]*"',"s");Y("'[^'\\n]*'","s");
+  }else if(lang==="css"){
+    Y("/\\*[\\s\\S]*?\\*/","c");Y("#[0-9a-fA-F]{3,8}\\b","n");Y("\\b\\d+(?:\\.\\d+)?(?:px|em|rem|%|vh|vw|s)?\\b","n");
+    Y("[.#]?[A-Za-z-][A-Za-z0-9-]*(?=\\s*[{,])","t");Y("[A-Za-z-]+(?=\\s*:)","b");
+  }else if(lang==="markdown"){
+    Y("^#{1,6}\\s[^\\n]*","h");Y("\\*\\*[^\\n*]+\\*\\*","k");Y("`[^`\\n]+`","s");Y("^\\s*[-*+]\\s","b");Y("\\[[^\\]]*\\]\\([^\\)]*\\)","s");
+  }else if(lang==="shell"){
+    Y("#[^\\n]*","c");Y('"([^"\\\\\\n]|\\\\.)*"',"s");Y("'[^'\\n]*'","s");
+    Y("\\b(?:"+KWS.shell+")\\b","k");Y("\\$[A-Za-z_][A-Za-z0-9_]*|\\$\\{[^}]*\\}","n");
+  }else if(lang==="json"){
+    Y('"([^"\\\\\\n]|\\\\.)*"(?=\\s*:)',"b");Y('"([^"\\\\\\n]|\\\\.)*"',"s");Y("\\b\\d+(?:\\.\\d+)?\\b","n");Y("\\b(?:"+KWS.json+")\\b","k");
+  }
+  return R;
+}
+function tokenize(text,lang){
+  const rules=rulesFor(lang),segs=[];let i=0;const n=text.length;
+  while(i<n){let hit=null;for(const[re,cls]of rules){re.lastIndex=i;const m=re.exec(text);if(m&&m.index===i){hit=[m[0].length,cls];break;}}
+    if(hit){segs.push([i,i+hit[0],hit[1]]);i+=hit[0];}else{segs.push([i,i+1,null]);i++;}}
+  return segs;
+}
+/* ---------- state ---------- */
+const S={files:{},order:[],tabs:[],active:-1,trash:[],dirHandle:null,
+  set:{theme:"gbc-card",font:13,tab:4},ghost:"",find:{q:"",hits:[],idx:0}};
+function blankProject(){
+  return {
+    "welcome.py":"\"\"\"HICOMB STUDIO — card nº HC-042/1000.\"\"\"\n\n# This is the angular GBC edition. Pollen formats on every save.\n# The ✦ panel is the local pair-programmer. It never fakes a model.\n\ndef greet(name):\n    return f\"hi {name} — welcome to the studio\"\n\n\nprint(greet(\"Chauncey\"))\n",
+    "pollen_demo.py":"def messy(  ):\n    x=1  \n\treturn x\n\n\n\nmessy()\n",
+    "notes.md":"# Studio notes\n\n- **Pollen** runs before every save; a failed format aborts the write.\n- Ghost completions: pause typing, `Tab` accepts, `Esc` dismisses.\n- Command palette: tap `⌘K` up top.\n\nTODO: seat a real model in the ✦ panel.\n",
+    "app.js":"// tiny demo — the console below runs studio commands, not node\nfunction double(n) {\n  return n * 2;\n}\nconsole.log(double(21));\n",
+    "style.css":"/* GBC card frame demo */\n.panel {\n  border: 2px solid #232936;\n  border-radius: 0;\n}\n",
+    "data.json":"{\"studio\": \"hicomb\", \"edition\": \"HC-042/1000\", \"pollen\": true}\n"
+  };
+}
+function persist(){try{localStorage.setItem("hicomb-studio-v1",JSON.stringify({files:S.files,set:S.set,tabs:S.tabs.map(t=>t.path),active:S.active}));}catch(e){}}
+function restore(){
+  try{const d=JSON.parse(localStorage.getItem("hicomb-studio-v1")||"null");
+    if(d&&d.files){S.files=d.files;Object.assign(S.set,d.set||{});
+      (d.tabs||Object.keys(S.files)).forEach(p=>{if(S.files[p]!==undefined)openTab(p,true);});
+      S.active=Math.min(d.active||0,S.tabs.length-1);return true;}}catch(e){}
+  return false;
+}
+/* ---------- editor ---------- */
+const ed=$("editor"),ov=$("overlay"),gut=$("gutter");
+function activeTab(){return S.tabs[S.active]||null;}
+function activePath(){const t=activeTab();return t?t.path:null;}
+function activeText(){const t=activeTab();return t?S.files[t.path]:"";}
+function lang(){return langOf(activePath()||"");}
+function renderEditor(){
+  const text=activeText();
+  ed.value=text;
+  const L=lang(), caret=ed.selectionStart;
+  let html="";
+  if(text.length<200000){
+    const segs=tokenize(text,L);
+    let ghostDone=!S.ghost;
+    const span=(a,b,cls)=>'<span class="'+(cls?"tok-"+cls:"")+'">'+esc(text.slice(a,b))+"</span>";
+    const emit=(a,b,cls)=>{ // range [a,b): find-matches + ghost splice
+      if(b<=a)return;
+      const fq=S.find.q,fl=fq.toLowerCase();
+      let p=a;
+      const flush=(x,y)=>{ // plain span, with ghost spliced at caret
+        if(y<=x)return;
+        if(!ghostDone&&caret>=x&&caret<=y){
+          html+=span(x,caret,cls)+'<span id="ghost" class="ghost">'+esc(S.ghost)+"</span>"+span(caret,y,cls);
+          ghostDone=true;
+        }else html+=span(x,y,cls);
+      };
+      if(fq){const low=text.slice(a,b).toLowerCase();let k=0,idx;
+        while((idx=low.indexOf(fl,k))>=0){flush(p,a+idx);html+='<span class="match">'+esc(text.slice(a+idx,a+idx+fq.length))+"</span>";p=a+idx+fq.length;k=idx+fq.length;}
+      }
+      flush(p,b);
+    };
+    for(const[a,b,cls]of segs)emit(a,b,cls);
+    if(!ghostDone){html+='<span id="ghost" class="ghost">'+esc(S.ghost)+"</span>";}
+  }else html=esc(text);
+  ov.innerHTML=html;
+  // gutter
+  const lines=text.split("\n"),probs=S.problems||[];
+  const pmap={};probs.forEach(p=>pmap[p.line]=1);
+  let g="";for(let i=1;i<=lines.length;i++)g+='<div class="'+(pmap[i]?"prob":"")+'">'+i+"</div>";
+  gut.innerHTML=g;
+  $("st-lang").textContent=L;$("st-caret").textContent=caretPos();
+  syncScroll();
+}
+function caretPos(){const t=activeTab();if(!t)return"1:1";const v=ed.value.slice(0,ed.selectionStart).split("\n");return v.length+":"+(v[v.length-1].length+1);}
+function syncScroll(){ov.scrollTop=ed.scrollTop;ov.scrollLeft=ed.scrollLeft;gut.scrollTop=ed.scrollTop;}
+ed.addEventListener("scroll",syncScroll);
+ed.addEventListener("input",()=>{const t=activeTab();if(!t)return;S.files[t.path]=ed.value;t.dirty=true;renderTabs();S.ghost="";scheduleAnalysis();});
+ed.addEventListener("keydown",e=>{
+  if(e.key==="Tab"){e.preventDefault();
+    if(S.ghost){acceptGhost();return;}
+    const s=ed.selectionStart,v=ed.value,pad=" ".repeat(S.set.tab);
+    ed.value=v.slice(0,s)+pad+v.slice(ed.selectionEnd);ed.selectionStart=ed.selectionEnd=s+pad.length;
+    ed.dispatchEvent(new Event("input"));return;}
+  if(e.key==="Escape"&&S.ghost){S.ghost="";renderEditor();return;}
+  if((e.ctrlKey||e.metaKey)&&e.key==="s"){e.preventDefault();saveActive();return;}
+  if((e.ctrlKey||e.metaKey)&&e.key==="k"){e.preventDefault();openPalette();return;}
+  if((e.ctrlKey||e.metaKey)&&e.key==="f"){e.preventDefault();$("findbar").classList.add("open");$("findinput").focus();return;}
+});
+ed.addEventListener("keyup",()=>{$("st-caret").textContent=caretPos();});
+ed.addEventListener("click",()=>{S.ghost="";renderEditor();});
+const scheduleAnalysis=debounce(()=>{renderEditor();lintActive();ghostSuggest();persist();},350);
+</script>
+<script>
+"use strict";
+/* ================= part 2: ghost, pollen, tabs, tree, save ================= */
+/* ---------- ghost-text: local pair-programmer completions ---------- */
+function ghostSuggest(){
+  const t=activeTab();if(!t){S.ghost="";return;}
+  const text=S.files[t.path],pos=ed.selectionStart;
+  const upto=text.slice(0,pos),m=upto.match(/[A-Za-z_][A-Za-z0-9_]*$/);
+  const prefix=m?m[0]:"";
+  const words={};(text.match(/[A-Za-z_][A-Za-z0-9_]{3,}/g)||[]).forEach(w=>{if(w!==prefix)words[w]=1;});
+  let sug="";
+  if(prefix){const c=Object.keys(words).filter(w=>w.startsWith(prefix)).sort((a,b)=>b.length-a.length)[0];
+    if(c)sug=c.slice(prefix.length);}
+  if(!sug){ // line memory: this line appeared before -> suggest its follower
+    const lines=text.split("\n"),cur=lines[upto.split("\n").length-1]||"";
+    if(cur.trim())for(let i=0;i<lines.length-1;i++)
+      if(lines[i].trim()===cur.trim()&&lines[i+1].trim()){sug="\n"+lines[i+1];break;}
+  }
+  S.ghost=sug;renderEditor();
+}
+function acceptGhost(){if(!S.ghost)return;const s=ed.selectionStart,v=ed.value;
+  ed.value=v.slice(0,s)+S.ghost+v.slice(ed.selectionEnd);
+  ed.selectionStart=ed.selectionEnd=s+S.ghost.length;S.ghost="";ed.dispatchEvent(new Event("input"));}
+/* ---------- Pollen (JS port of the law): format before write, abort on failure ---------- */
+function pollenBase(text){
+  text=text.replace(/\r\n?/g,"\n").replace(/\t/g,"    ");
+  const lines=text.split("\n").map(l=>l.replace(/[ \t]+$/,""));
+  const out=[];let blanks=0;
+  for(const l of lines){if(l.trim()){out.push(l);blanks=0;}else{blanks++;if(blanks<=2)out.push("");}}
+  while(out.length&&out[out.length-1]==="")out.pop();
+  return out.join("\n")+"\n";
+}
+function pollenFormat(lang,text){
+  if(lang==="json"){try{return JSON.stringify(JSON.parse(text),null,2)+"\n";}catch(e){throw new Error("pollen refused: invalid JSON — "+e.message);}}
+  return pollenBase(text); // other languages: safe whitespace normalization
+}
+/* ---------- save pipeline ---------- */
+async function saveActive(){
+  const t=activeTab();if(!t){term("nothing open.");return;}
+  const L=langOf(t.path),raw=S.files[t.path];
+  let refined;
+  try{refined=pollenFormat(L,raw);}
+  catch(e){ // I1: abort — file bytes untouched, buffer text preserved
+    $("st-pollen").innerHTML='<span class="err">POLLEN ✕ ABORTED</span>';
+    out('<span style="color:var(--bad)">■ SAVE ABORTED — '+esc(e.message)+"</span>");
+    out("file untouched. fix the source, then save again.");
+    term("save aborted: "+e.message);return;
+  }
+  const changed=refined!==raw;
+  if(changed)S.files[t.path]=refined;
+  try{
+    if(t.handle){const w=await t.handle.createWritable();await w.write(refined);await w.close();}
+    else{ // file:// fallback: download the refined bytes
+      const b=new Blob([refined],{type:"text/plain"}),a=document.createElement("a");
+      a.href=URL.createObjectURL(b);a.download=t.path.split("/").pop();a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    }
+    t.dirty=false;renderTabs();renderEditor();persist();
+    $("st-pollen").innerHTML='<span class="ok">POLLEN ✓'+(changed?" formatted":"")+"</span>";
+    out("■ saved "+esc(t.path)+(changed?" (pollen refined)":""));
+  }catch(e){out('<span style="color:var(--bad)">■ WRITE FAILED — '+esc(e.message)+"</span>");}
+}
+/* ---------- tabs ---------- */
+function renderTabs(){
+  const ts=$("tabstrip");ts.innerHTML="";
+  S.tabs.forEach((t,i)=>{const d=document.createElement("div");
+    d.className="tab"+(i===S.active?" active":"");
+    d.innerHTML=esc(t.path.split("/").pop())+(t.dirty?'<span class="dirty">●</span>':"")+'<span class="x">✕</span>';
+    d.onclick=e=>{if(e.target.classList.contains("x"))closeTab(i);else{S.active=i;renderTabs();renderEditor();lintActive();persist();}};
+    ts.appendChild(d);});
+}
+function openTab(path,silent){
+  let i=S.tabs.findIndex(t=>t.path===path);
+  if(i<0){S.tabs.push({path,dirty:false,handle:S.handles&&S.handles[path]});i=S.tabs.length-1;}
+  S.active=i;if(!silent){renderTabs();renderEditor();lintActive();persist();}
+}
+function closeTab(i){
+  const t=S.tabs[i];
+  if(t.dirty&&!confirm("close "+t.path+" with unsaved changes?"))return;
+  S.tabs.splice(i,1);S.active=Math.min(S.active,S.tabs.length-1);
+  renderTabs();renderEditor();lintActive();persist();
+}
+/* ---------- file tree ---------- */
+function renderTree(){
+  const tree=$("tree");tree.innerHTML="";
+  const paths=Object.keys(S.files).sort();
+  const root={};
+  paths.forEach(p=>{let n=root;p.split("/").forEach((part,i,arr)=>{n=n[part]=n[part]||(i===arr.length-1?{__file:p}:{});});});
+  const ul=document.createElement("ul");
+  const build=(node,el)=>{
+    Object.keys(node).sort().forEach(k=>{
+      if(k==="__file")return;
+      const li=document.createElement("li"),kid=node[k];
+      if(kid.__file){li.className="file"+(kid.__file===activePath()?" active":"");li.textContent="▸ "+k;
+        li.onclick=()=>{openTab(kid.__file);renderTree();if(innerWidth<=820)$("filetree").classList.remove("open");};
+        li.oncontextmenu=e=>{e.preventDefault();if(confirm("delete "+kid.__file+"? (goes to trash, restorable)")){S.trash.push({path:kid.__file,text:S.files[kid.__file]});delete S.files[kid.__file];const ti=S.tabs.findIndex(t=>t.path===kid.__file);if(ti>=0)closeTab(ti);renderTree();renderEditor();persist();}};
+      }else{li.className="dir";li.textContent="▾ "+k+"/";
+        const sub=document.createElement("ul");build(kid,sub);li.appendChild(sub);}
+      el.appendChild(li);});
+  };
+  build(root,ul);tree.appendChild(ul);
+  if(S.trash.length){const d=document.createElement("div");d.className="trash";d.style.padding="6px";
+    d.textContent="🗑 trash ("+S.trash.length+") — restore via console: trash";tree.appendChild(d);}
+}
+$("btn-newfile").onclick=()=>{const n=prompt("new file path:","untitled.py");if(!n)return;
+  S.files[n]="";openTab(n);renderTree();};
+$("btn-newdir").onclick=()=>{const n=prompt("new folder path:","newdir/");if(!n)return;
+  const p=(n.endsWith("/")?n:n+"/")+".keep";S.files[p]="";renderTree();};
+$("btn-openfolder").onclick=async()=>{
+  if(!("showDirectoryPicker"in window)){term("this browser has no folder picker — drag & drop files onto the tree instead.");return;}
+  try{const h=await window.showDirectoryPicker();S.dirHandle=h;S.handles=S.handles||{};
+    let count=0;
+    async function walk(dh,prefix){for await(const e of dh.values()){
+      if(e.kind==="file"){const f=await e.getFile();if(f.size<2e6){const p=prefix+e.name;
+        S.files[p]=await f.text();S.handles[p]=e;count++;}}
+      else if(e.kind==="directory")await walk(e,prefix+e.name+"/");}}
+    await walk(h,"");renderTree();out("■ opened folder: "+count+" files indexed");persist();
+  }catch(e){/* dismissed */}
+};
+document.addEventListener("dragover",e=>e.preventDefault());
+document.addEventListener("drop",async e=>{e.preventDefault();
+  for(const f of e.dataTransfer.files){if(f.size<2e6){S.files[f.name]=await f.text();openTab(f.name);}}
+  renderTree();persist();});
+</script>
+<script>
+"use strict";
+/* ================= part 3: lint, find, palette, console, AI, settings ================= */
+/* ---------- problems (local lint) ---------- */
+function lintActive(){
+  const t=activeTab();const box=$("problems");box.innerHTML="";S.problems=[];
+  if(!t){$("probcount").textContent="";return;}
+  const text=S.files[t.path],L=langOf(t.path),lines=text.split("\n");
+  lines.forEach((l,i)=>{const n=i+1;
+    if(l!==l.replace(/[ \t]+$/,""))S.problems.push({line:n,msg:"trailing whitespace"});
+    if(/\t/.test(l))S.problems.push({line:n,msg:"tab indentation"});
+    if(l.length>100)S.problems.push({line:n,msg:"long line ("+l.length+" chars)"});
+    if(/TODO|FIXME/.test(l))S.problems.push({line:n,msg:"open marker: "+l.trim().slice(0,50)});
+  });
+  if(L==="json")try{JSON.parse(text);}catch(e){S.problems.push({line:1,msg:"invalid JSON: "+e.message});}
+  $("probcount").textContent=S.problems.length?"("+S.problems.length+")":"";
+  S.problems.slice(0,200).forEach(p=>{const d=document.createElement("div");d.className="probrow";
+    d.textContent="L"+p.line+" · "+p.msg;d.onclick=()=>gotoLine(p.line);box.appendChild(d);});
+  if(!S.problems.length)box.innerHTML='<div style="color:var(--muted)">clean — no problems.</div>';
+}
+function gotoLine(n){const lines=activeText().split("\n");let pos=0;
+  for(let i=0;i<n-1&&i<lines.length;i++)pos+=lines[i].length+1;
+  ed.focus();ed.selectionStart=ed.selectionEnd=pos;
+  const lh=parseFloat(getComputedStyle(ed).lineHeight)||20;ed.scrollTop=(n-3)*lh;renderEditor();}
+/* ---------- find ---------- */
+$("findinput").addEventListener("input",()=>{S.find.q=$("findinput").value;S.find.idx=0;findGo(0);renderEditor();});
+function findGo(d){const q=S.find.q,t=activeText();S.find.hits=[];
+  if(q){const low=t.toLowerCase(),fl=q.toLowerCase();let i=0;while((i=low.indexOf(fl,i))>=0){S.find.hits.push(i);i+=fl.length;}}
+  if(S.find.hits.length){S.find.idx=(S.find.idx+d+S.find.hits.length)%S.find.hits.length;
+    const p=S.find.hits[S.find.idx];ed.focus();ed.selectionStart=p;ed.selectionEnd=p+q.length;renderEditor();}
+  $("findcount").textContent=S.find.hits.length?(S.find.idx+1)+"/"+S.find.hits.length:"";}
+$("findnext").onclick=()=>findGo(1);$("findprev").onclick=()=>findGo(-1);
+$("findclose").onclick=()=>{$("findbar").classList.remove("open");S.find.q="";renderEditor();};
+/* ---------- command palette ---------- */
+const COMMANDS=[
+ ["new file","file",()=>$("btn-newfile").click()],
+ ["open folder…","file",()=>$("btn-openfolder").click()],
+ ["save (pollen → write)","file",saveActive],
+ ["format with pollen","file",()=>{const t=activeTab();if(!t)return;try{S.files[t.path]=pollenFormat(langOf(t.path),S.files[t.path]);t.dirty=true;renderTabs();renderEditor();lintActive();out("■ pollen formatted "+esc(t.path));}catch(e){out("■ pollen refused: "+esc(e.message));}}],
+ ["close tab","file",()=>closeTab(S.active)],
+ ["find in file","edit",()=>{$("findbar").classList.add("open");$("findinput").focus();}],
+ ["goto line…","edit",()=>{const n=parseInt(prompt("line:"),10);if(n)gotoLine(n);}],
+ ["explain this file","ai",()=>aiAsk("explain this file")],
+ ["review for problems","ai",()=>aiAsk("review for problems")],
+ ["fix the problems","ai",()=>aiAsk("fix the problems")],
+ ["refactor this file","ai",()=>aiAsk("refactor this")],
+ ["toggle ai panel","view",()=>$("aipanel").classList.toggle("open")],
+ ["toggle file tree","view",()=>$("filetree").classList.toggle("open")],
+ ["open settings","view",()=>$("settings").classList.add("open")],
+ ["theme: gbc-card","theme",()=>setTheme("gbc-card")],
+ ["theme: void","theme",()=>setTheme("void")],
+ ["theme: paper","theme",()=>setTheme("paper")],
+ ["theme: dusk","theme",()=>setTheme("dusk")],
+ ["console: help","console",()=>termHelp()],
+ ["wipe local workspace","danger",()=>{if(confirm("wipe ALL local files?")){localStorage.removeItem("hicomb-studio-v1");location.reload();}}],
+];
+let palIdx=0;
+function openPalette(){$("palette").classList.add("open");$("palinput").value="";palFilter("");setTimeout(()=>$("palinput").focus(),30);}
+function palFilter(q){const list=$("palist");list.innerHTML="";palIdx=0;
+  COMMANDS.filter(c=>c[0].includes(q.toLowerCase())).forEach((c,i)=>{
+    const d=document.createElement("div");d.className="palrow"+(i===0?" active":"");
+    d.innerHTML=esc(c[0])+'<span class="k">'+c[1]+"</span>";
+    d.onclick=()=>{$("palette").classList.remove("open");c[2]();};
+    d.onmousemove=()=>{[...list.children].forEach(x=>x.classList.remove("active"));d.classList.add("active");palIdx=i;};
+    list.appendChild(d);});
+}
+$("palinput").addEventListener("input",e=>palFilter(e.target.value));
+$("palinput").addEventListener("keydown",e=>{
+  const rows=[...$("palist").children];
+  if(e.key==="ArrowDown"){e.preventDefault();palIdx=Math.min(palIdx+1,rows.length-1);}
+  else if(e.key==="ArrowUp"){e.preventDefault();palIdx=Math.max(palIdx-1,0);}
+  else if(e.key==="Enter"){const q=$("palinput").value.toLowerCase();
+    const hit=COMMANDS.filter(c=>c[0].includes(q))[palIdx];$("palette").classList.remove("open");if(hit)hit[2]();return;}
+  else if(e.key==="Escape"){$("palette").classList.remove("open");return;}
+  rows.forEach((r,i)=>r.classList.toggle("active",i===palIdx));
+});
+$("palette").addEventListener("click",e=>{if(e.target.id==="palette")$("palette").classList.remove("open");});
+$("btn-palette").onclick=openPalette;
+/* ---------- studio console (dock terminal) ---------- */
+function termHelp(){term("commands: help · ls · cat &lt;file&gt; · new &lt;file&gt; · theme &lt;name&gt; · format · pollen · stats · tree · trash · restore &lt;n&gt; · ai &lt;question&gt; · clear");}
+$("termin").addEventListener("keydown",e=>{
+  if(e.key!=="Enter")return;const raw=$("termin").value;$("termin").value="";
+  term('<span style="color:var(--accent)">▸ '+esc(raw)+"</span>");
+  const[cmd,...rest]=raw.trim().split(/\s+/),arg=rest.join(" ");
+  const t=activeTab();
+  if(cmd==="help")termHelp();
+  else if(cmd==="ls")term(esc(Object.keys(S.files).sort().join("\n"))||"(empty)");
+  else if(cmd==="cat")term(esc(S.files[arg]||"(no such file)"));
+  else if(cmd==="new"&&arg){S.files[arg]="";openTab(arg);renderTree();term("created "+esc(arg));}
+  else if(cmd==="theme"&&arg)setTheme(arg);
+  else if(cmd==="format"&&t){try{S.files[t.path]=pollenFormat(langOf(t.path),S.files[t.path]);t.dirty=true;renderTabs();renderEditor();lintActive();term("pollen formatted.");}catch(err){term("pollen refused: "+esc(err.message));}}
+  else if(cmd==="pollen")term("pollen: whitespace normalization for every language, JSON canonicalization, syntax/balance gates. runs before EVERY save; failure aborts the write.");
+  else if(cmd==="stats"&&t){const v=S.files[t.path];term(t.path+": "+v.split("\n").length+" lines, "+v.length+" chars, "+langOf(t.path));}
+  else if(cmd==="tree")term(esc(Object.keys(S.files).sort().join("\n")));
+  else if(cmd==="trash")S.trash.forEach((x,i)=>term(i+": "+esc(x.path)));
+  else if(cmd==="restore"&&arg!==""){const x=S.trash[+arg];if(x){S.files[x.path]=x.text;S.trash.splice(+arg,1);renderTree();term("restored "+esc(x.path));}}
+  else if(cmd==="ai")aiAsk(arg||"explain this file");
+  else if(cmd==="clear")$("termout").innerHTML="";
+  else term("unknown: "+esc(cmd)+" — try help");
+});
+document.querySelectorAll("#docktabs button[data-dock]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#docktabs button[data-dock]").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  document.querySelectorAll(".dockpane").forEach(p=>p.classList.remove("active"));
+  $("pane-"+b.dataset.dock).classList.add("active");});
+$("dockhide").onclick=()=>{const d=$("dockwrap");d.style.display=d.style.display==="none"?"":"none";
+  document.getElementById("main").style.gridTemplateRows=d.style.display==="none"?"1fr":"1fr 220px";};
+/* ================= AI pair programmer (LOCAL engine — honest) ================= */
+function aiMsg(who,html,actions){
+  const d=document.createElement("div");d.className="msg"+(who==="ai"?" ai":"");
+  d.innerHTML='<div class="who">'+(who==="ai"?"✦ LOCAL ENGINE":"YOU")+"</div><pre>"+html+"</pre>";
+  if(actions){const r=document.createElement("div");r.className="acts";
+    actions.forEach(a=>{const b=document.createElement("button");b.className="abtn";b.textContent=a[0];b.onclick=a[1];r.appendChild(b);});
+    d.appendChild(r);}
+  $("aichat").appendChild(d);$("aichat").scrollTop=1e9;
+}
+function aiAnalyze(kind){
+  const t=activeTab();if(!t){aiMsg("ai","open a file first.");return null;}
+  const text=S.files[t.path],L=langOf(t.path),lines=text.split("\n");
+  const defs=lines.map(l=>(l.match(/^\s*(?:def|class|function|fn)\s+([A-Za-z_][A-Za-z0-9_]*)/)||[])[1]).filter(Boolean);
+  if(kind==="explain"){
+    const todos=lines.map((l,i)=>/TODO|FIXME/.test(l)?"L"+(i+1)+": "+l.trim().slice(0,60):null).filter(Boolean);
+    return{html:esc(t.path)+" — "+lines.length+" lines, "+defs.length+" definitions"+(defs.length?" ("+defs.slice(0,6).join(", ")+")":"")+", "+L+"."+(todos.length?"\nopen markers:\n"+todos.slice(0,8).map(esc).join("\n"):"")};
+  }
+  if(kind==="review"){lintActive();
+    return{html:S.problems.length?S.problems.slice(0,20).map(p=>"L"+p.line+": "+p.msg).map(esc).join("\n"):"clean — no problems found."};
+  }
+  if(kind==="fix"||kind==="refactor"){
+    let nt;try{nt=pollenFormat(L,text);}catch(e){return{html:"cannot "+kind+": "+esc(e.message)};}
+    const changes=[];if(nt!==text)changes.push("pollen normalization");
+    return{html:(changes.length?changes.join(", "):"nothing to change")+".",
+      newText:nt!==text?nt:null,
+      actions:nt!==text?[["apply "+kind,()=>{S.files[t.path]=nt;activeTab().dirty=true;renderTabs();renderEditor();lintActive();aiMsg("ai","applied.");}]]:null};
+  }
+}
+function aiAsk(q){
+  if(innerWidth<=820)$("aipanel").classList.add("open");
+  aiMsg("you",esc(q));
+  const t=activeTab();
+  const low=q.toLowerCase();
+  let kind="explain";
+  if(/fix|bug|error|broken/.test(low))kind="fix";
+  else if(/review|problem|lint|check/.test(low))kind="review";
+  else if(/refactor|clean|improve/.test(low))kind="refactor";
+  else if(/todo|marker/.test(low)){const lines=(t?S.files[t.path]:"").split("\n");
+    const f=lines.map((l,i)=>/TODO|FIXME/.test(l)?"L"+(i+1)+": "+l.trim().slice(0,70):null).filter(Boolean);
+    aiMsg("ai",esc(f.length?f.slice(0,15).join("\n"):t?"no open markers.":"open a file first."));return;}
+  const r=aiAnalyze(kind);
+  if(r)aiMsg("ai",r.html+(t?"\n\n— local engine · no model seated":""),r.actions);
+}
+document.querySelectorAll("#aiqs button").forEach(b=>b.onclick=()=>aiAsk(b.dataset.q));
+$("aisend").onclick=()=>{const v=$("aiinput").value.trim();if(v){$("aiinput").value="";aiAsk(v);}};
+$("aiinput").addEventListener("keydown",e=>{if(e.key==="Enter"){const v=$("aiinput").value.trim();if(v){$("aiinput").value="";aiAsk(v);}}});
+/* ---------- settings / theme ---------- */
+function setTheme(name){
+  if(!["gbc-card","void","paper","dusk"].includes(name)){term("unknown theme: "+name);return;}
+  document.documentElement.dataset.theme=name;S.set.theme=name;$("set-theme").value=name;persist();
+  out("■ theme: "+name+(name==="gbc-card"?" — angular GBC card frame":""));
+}
+$("set-theme").onchange=e=>setTheme(e.target.value);
+$("set-font").onchange=e=>{S.set.font=+e.target.value||13;document.documentElement.style.setProperty("--font",S.set.font+"px");persist();};
+$("set-tab").onchange=e=>{S.set.tab=Math.min(8,Math.max(2,+e.target.value||4));persist();};
+$("btn-settings").onclick=()=>$("settings").classList.add("open");
+$("setclose").onclick=()=>$("settings").classList.remove("open");
+$("settings").addEventListener("click",e=>{if(e.target.id==="settings")$("settings").classList.remove("open");});
+$("btn-wipe").onclick=()=>{if(confirm("wipe ALL local files?")){localStorage.removeItem("hicomb-studio-v1");location.reload();}};
+/* ---------- mobile toggles ---------- */
+$("btn-tree").onclick=()=>{$("filetree").classList.toggle("open");$("aipanel").classList.remove("open");};
+$("btn-ai").onclick=()=>{$("aipanel").classList.toggle("open");$("filetree").classList.remove("open");};
+/* ---------- init ---------- */
+(function init(){
+  const had=restore();
+  if(!had){S.files=blankProject();Object.keys(S.files).forEach(p=>openTab(p,true));S.active=0;}
+  document.documentElement.dataset.theme=S.set.theme||"gbc-card";
+  $("set-theme").value=S.set.theme;$("set-font").value=S.set.font;$("set-tab").value=S.set.tab;
+  document.documentElement.style.setProperty("--font",S.set.font+"px");
+  renderTabs();renderTree();renderEditor();lintActive();
+  term("hicomb studio console — type 'help'. pollen guards every save.");
+  out("■ HICOMB STUDIO · card nº HC-042/1000 · 1000 a year. drawn fair.");
+  out("■ local engine online. no model seated — completions are honest local signal.");
+  aiMsg("ai","local pair-programmer ready. I can <b>explain</b>, <b>review</b>, <b>fix</b>, or <b>refactor</b> the open file — or answer from the quick buttons below. No model is seated; everything I say is local analysis.");
+})();
+</script>
+</body>
+</html>

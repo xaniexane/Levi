@@ -1,0 +1,79 @@
+# m00097
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Using Excel to Make Investment Decisions
+
+Using Excel to Make Investment Decisions
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate the average return and standard deviation for a stock.
+
+Calculate the average return and standard deviation for a portfolio.
+
+Calculate the beta of a stock.
+
+Average Return and Standard Deviation for a Single Stock
+
+Excel can be used to calculate the average returns and the standard deviation of returns for both a single stock and a portfolio of stocks. It can also be used to calculate the beta for a stock. Historic stock price data for stocks you are interested in analyzing can easily be downloaded from sites such as Yahoo! Finance into Excel. The examples in this section use monthly stock data from December 2017 to December 2020 from Yahoo! Finance.
+
+Monthly price data for AMZN (Amazon) is shown in column B of . To begin, monthly returns must be calculated from the price data using the formula
+
+The ending prices shown in are the last price the stock traded for each month. Each month, the return is calculated under the assumption that you purchased the stock at the last trading price of the previous month and sold at the last price of the current month. Thus, the return for January 2018 is calculated as
+
+This is accomplished in Excel by placing the formula =(B3-B2)/B2 in cell C3. This formula can then be copied down the spreadsheet through row C38. Now that each monthly return is in column C, you can calculate the average of the monthly returns in cell C39 and the standard deviation of returns in cell C40.
+
+Calculating the Average Return and the Standard Deviation of Returns for AMZN
+
+Over the three-year period, the average monthly return for AMZN was 3.3%. However, this return was highly volatile, with a standard deviation of 9.33%. Remember that this means that approximately two-thirds of the time, the monthly return from AMZN was between −6.03% and 12.63%.
+
+Download the spreadsheet file containing key Chapter 15 Excel exhibits.
+
+Average Return and Standard Deviation for a Portfolio
+
+The Excel screenshot in shows the return and standard deviation calculation for a portfolio. This sample four-stock portfolio contains AMZN, CVS, AAPL (Apple), and NFLX (Netflix). This portfolio is constructed as an equally weighted portfolio; because there are four stocks in this portfolio, each has a weight of 25%.
+
+Calculation of the Average Return and Standard Deviation for a Portfolio
+
+The monthly returns for each stock are recorded in their respective columns. The portfolio return for each month is calculated as the weighted average of the four monthly individual stock returns. The formula for the portfolio return is
+
+The formula =$B$1*B3+$C$1*C3+$D$1*D3+$E$1*E3 is placed in cell F3. The formula is then copied down column F to calculate the portfolio return for each month. After the monthly portfolio return is calculated, then the average monthly portfolio return is calculated in cell F39. The average monthly portfolio return is 2.69%.
+
+Because this is an equally weighted portfolio, with each of the four stocks impacting the portfolio return in the same way, the average monthly portfolio return of 2.69% is the same as the sum of the average monthly returns of the four stocks divided by four, or 0.0330 + 0.0021 + 0.0380 + 0.03474 = 0.0269 = 2.69%.
+
+The standard deviation of the monthly portfolio returns is calculated in cell F40. This four-stock portfolio has a standard deviation of 7.10%. Unlike the average return, this standard deviation is not equal to the average of the standard deviations of returns of the four stocks. In fact, the standard deviation for the portfolio is less than the standard deviation for any one of the four stocks. Remember that this occurs because the stock returns are not perfectly positively correlated. The high return of one of the stocks in one month is dampened by a lower return in another stock during the same month. Likewise, a negative return in one stock during a month might be offset by a positive return in one of the other three stocks during the same month. This is the risk reduction benefit of holding a portfolio of stocks.
+
+Calculating Beta
+
+The standard deviation of a stock’s returns indicates the stock’s volatility. Remember that the volatility is caused by both firm-specific and systematic risk. Investors will not be rewarded for firm-specific risk because they can diversify away from it. Investors are, however, rewarded for systematic risk. To determine how much of a firm’s risk is due to systematic risk, you can use Excel to calculate the stock’s beta.
+
+To calculate a stock’s beta, you need the monthly return for the market in addition to the monthly market return for the stock. In column B in , the monthly return for SPY, the SPDR S&P 500 Trust, is recorded. SPY is an ETF that was created to mimic the performance of the S&P 500 index by State Street Global Advisors and is often used as a proxy for the overall market performance. The monthly returns for AMZN are visible in column C. It is important that these returns be lined up so that the returns for a particular month for both securities appear in the same row number. Also, you want to place the returns for SPY in the column to the left of the returns for AMZN so that when you create your graph, SPY will automatically appear on the horizontal axis.
+
+State Street Global Advisors
+
+You can learn more about State Street Global Advisors and its creation of the first ETF by visiting the company’s history page at its website (ssga.com).
+
+You will use a scatter plot to create a graph. In Excel, go to the Insert tab, and then from the Chart menu, choose the first scatter plot option.
+
+Excel Format for Calculating Beta
+
+Selecting the scatter plot option will result in a chart being inserted that looks like the chart in . Each dot represents one month’s combination of returns, with the return for SPY measured on the horizontal axis and the return for AMZN measured on the vertical axis. Consider, for example, the dot in the furthest upper right-hand section of the figure. This dot is the plot of returns for the month of April 2020, when the return for SPY was 13.36% (measured on the horizontal axis) and the return for AMZN was 26.89% (measured on the vertical axis).
+
+Hover your mouse over one of the dots, and right-click the dot to pull up a chart formatting menu. This menu will allow you to add labels to your axis and polish your chart in additional ways if you would like. Select the option Add Trendline.
+
+Creating a Scatter Plot in Excel
+
+When the trendline is inserted, a formatting box will appear on the right of your screen (see ). If it is not already selected, choose the Linear trendline option. Scroll down and select the “Display Equation on chart” option. You will see the equation y = 1.1477x + 0.0186 appear on the screen. This is the equation for the best-fit line that shows how AMZN moves when the market moves. The slope of this line, 1.1477, is the beta for AMZN. This tells you that for every 10% move the overall market makes, AMZN tends to move 11.477%. Because AMZN tends to move a little more than the broader market, it has a little more systematic risk than the average stock in the market.
+
+Inserting a Trendline to Determine Beta
+
+Using Excel to manipulate publicly available stock data makes calculating the average return of a stock and the standard deviation of returns easy. The average return for a portfolio and the standard deviation of the portfolio returns can also be calculated easily. By comparing the returns of a stock with the returns of the overall market using Excel charting tools, the beta for a stock, which measures systematic risk, can be determined.
+
+CFA Institute
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.

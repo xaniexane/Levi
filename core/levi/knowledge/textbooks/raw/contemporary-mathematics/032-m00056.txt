@@ -1,0 +1,1210 @@
+# m00056
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Multiplication and Division in Base Systems
+
+Multiplication and Division in Base Systems
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Multiply and divide in bases other than 10.
+
+Identify errors in multiplying and dividing in bases other than 10.
+
+Just as in Addition and Subtraction in Base Systems, once we decide on a system for counting, we need to establish rules for combining the numbers we’re using. This includes the rules for multiplication and division. We are familiar with those operations in base 10. How do they change if we instead use a different base? A larger base? A smaller one?
+
+In this section, we use multiplication and division in bases other than 10 by referencing the processes of base 10, but applied to a new base system.
+
+Multiplication in Bases Other Than 10
+
+Multiplication is a way of representing repeated additions, regardless of what base is being used. However, different bases have different addition rules. In order to create the multiplication tables for a base other than 10, we need to rely on addition and the addition table for the base. So let’s look at multiplication in base 6.
+
+Multiplication still has the same meaning as it does in base 10, in that 4×6 is 4 added to itself six times, 4×6=4+4+4+4+4+4.
+
+So, let’s apply that to base 6. It should be clear that 0 multiplied by anything, regardless of base, will give 0, and that 1 multiplied by anything, regardless of base, will be the value of “anything.”
+Step 1: So, we start with the table below:
+
+*
+0
+1
+2
+3
+4
+5
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+2
+0
+2
+4
+3
+0
+3
+4
+0
+4
+5
+0
+Step 2: Notice 2×2=4 is there. But we didn’t hit a problematic number there (4 works fine in both base 10 and base 6). But what is 2×3? If we use the repeated addition concept, 2×3=2+2+2=4+2. According to the base 6 addition table (), 4+2=10. So, we add that to our table:
+
+*
+0
+1
+2
+3
+4
+5
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+2
+0
+2
+4
+10
+3
+0
+3
+10
+4
+0
+4
+5
+0
+Step 3: Next, we need to fill in 2×4. Using repeated addition, 2×4=2+2+2+2=10+2=12 (if we use our base 6 addition rules). So, we add that to our table:
+
+*
+0
+1
+2
+3
+4
+5
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+2
+0
+2
+4
+10
+12
+3
+0
+3
+10
+4
+0
+4
+12
+5
+0
+Step 4: Finally, 2×5 =2+2+2+2+2=12+2=14. And so we add that to our table:
+
+*
+0
+1
+2
+3
+4
+5
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+2
+0
+2
+4
+10
+12
+14
+3
+0
+3
+10
+4
+0
+4
+12
+5
+0
+5
+Step 5: A similar analysis will give us the remainder of the entries. Here is 4×5 demonstrated: 4×5 =4+4+4+4+4=12+12+4=24+4=32.
+
+This is done by using the addition rules from Addition and Subtraction in Base Systems, namely that 4+4=12, and then applying the addition processes we’ve always known, but with the base 6 table (). In the end, our multiplication table is as follows:
+
+*
+0
+1
+2
+3
+4
+5
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+2
+0
+2
+4
+10
+12
+14
+3
+0
+3
+10
+13
+20
+23
+4
+0
+4
+12
+20
+24
+32
+5
+0
+5
+14
+23
+32
+41
+Notice anything about that bottom line? Is that similar to what happens in base 10?
+
+To summarize the creation of a multiplication in a base other than base 10, you need the addition table of the base with which you are working. Create the table, and calculate the entries of the multiplication table by performing repeated addition in that base. The table needs to be drawn only the one time.
+
+Creating a Multiplication Table for a Base Lower Than 10
+
+Create the multiplication table for base 7.
+Step 1: Let’s apply the process demonstrated and outlined above to find the base 7 multiplication table. It should be clear that 0 multiplied by anything, regardless of base, will give 0, and that 1 multiplied by anything, regardless of base, will be the value of “anything.” So, we start with the table below:
+
+*
+0
+1
+2
+3
+4
+5
+6
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+6
+2
+0
+2
+4
+6
+3
+0
+3
+6
+4
+0
+4
+5
+0
+5
+6
+0
+Step 2: Notice 2×2=4 is there. But we didn’t hit a problematic number there (4 works fine in both base 10 and base 6). The same is true for 2×3 and 3×2, which equal 6. But what is 2×4? If we use the repeated addition concept, 2×4=2+2+2+2=6+2. According to the base 7 addition table in the solution for , 6+2=11. So, we add that to our table:
+
+*
+0
+1
+2
+3
+4
+5
+6
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+6
+2
+0
+2
+4
+11
+3
+0
+3
+6
+4
+0
+11
+5
+0
+5
+6
+0
+Step 3: Next, we need to fill in 2×5. Using repeated addition, 2×5=2+2+2+2+2=11+2=13 if we use our base 7 addition rules. So, we add that to our table:
+
+*
+0
+1
+2
+3
+4
+5
+6
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+6
+2
+0
+2
+4
+6
+13
+3
+0
+3
+6
+4
+0
+4
+11
+5
+0
+13
+6
+0
+Step 4: Finally, 2×6=2+2+2+2+2+2+2=13+2=15. And so we add that to our table:
+
+*
+0
+1
+2
+3
+4
+5
+6
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+6
+2
+0
+2
+4
+6
+11
+15
+3
+0
+3
+6
+4
+0
+4
+11
+5
+0
+5
+13
+6
+0
+Step 5: A similar analysis will give us the remainder of the entries. Here is 47×57 demonstrated:
+ 47×57=47+47+47+47+47=117+117+47=227+47=267
+
+This is done by using the addition rules from Addition and Subtraction in Base Systems, namely that 47+47=117 and then applying the addition processes we’ve always known, but with the base 7 table in the solution for . Using those addition rules, the rest of the table is given below:
+
+*
+0
+1
+2
+3
+4
+5
+6
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+6
+2
+0
+2
+4
+6
+11
+13
+15
+3
+0
+3
+6
+12
+15
+21
+24
+4
+0
+4
+11
+15
+22
+26
+33
+5
+0
+5
+13
+21
+26
+34
+42
+6
+0
+6
+15
+24
+33
+42
+51
+
+Creating a Multiplication Table for a Base Higher Than 10
+
+Create the multiplication table for base 12.
+
+Let’s apply the repeated addition to base 12. Here is 712×912 demonstrated:
+ 712×912=712+712+712+712+712+712+712+712+712=1212+1212+1212+1212+712=4812+712=5312
+
+This is done by using the addition rules from Addition and Subtraction in Base Systems, namely that 712+712=1212 and then applying the addition processes we’ve always known, but with the base 12 table in the solution for . Using those addition rules, the rest of the table is given below:
+
+*
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+2
+0
+2
+4
+6
+8
+A
+10
+12
+14
+16
+18
+1A
+3
+0
+3
+6
+9
+10
+13
+16
+19
+20
+23
+26
+29
+4
+0
+4
+8
+10
+14
+18
+20
+24
+28
+30
+34
+38
+5
+0
+5
+A
+13
+18
+21
+26
+2B
+34
+39
+42
+47
+6
+0
+6
+10
+16
+20
+26
+30
+36
+40
+46
+50
+56
+7
+0
+7
+12
+19
+24
+2B
+36
+41
+48
+53
+5A
+65
+8
+0
+8
+14
+20
+28
+34
+40
+48
+54
+60
+68
+74
+9
+0
+9
+16
+23
+30
+39
+46
+53
+60
+69
+76
+83
+A
+0
+A
+18
+26
+34
+42
+50
+5A
+68
+76
+84
+92
+B
+0
+B
+1A
+29
+38
+47
+56
+65
+74
+83
+92
+A1
+
+The multiplication table in base 2 below is as minimal as the addition table in the solution for . Since the product of 1 with anything is itself, the following multiplication table is found.
+
+*
+0
+1
+0
+0
+0
+1
+0
+1
+As with the addition table, we can use the multiplication tables and the addition tables to perform multiplication of two numbers in bases other than base 10. The process is the same, with the same carry rules and placeholder rules.
+
+Multiplying in a Base Lower Than 10
+
+Calculate 456×246.
+
+Calculate 1012×1102.
+Step 1: Use the base 6 multiplication table () and, when necessary, the base 6 addition table ().
+ Set up this calculation using columns:
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ Step 2: Multiply the 1s digits, 5 and 4, using the base 6 multiplication table (). There we see the result is 326. So, we enter the 2 and carry the 3.
+
+ 3
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 2
+
+ Step 3: So, now we multiply the 4 and the 4, then add the 3 (just as you would do if multiplying two base 10 numbers!). 46×46=246 (from the base 6 table []), then 246+36=316. So, we enter the 31.
+
+ 3
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 3
+ 1
+ 2
+
+ Step 4: Now we move on to the 2 in the “tens” place in the bottom value. We multiply the 26 and the 56, and we get 146. So, we enter the 4 and carry the 1.
+
+ Step 5: Next up, we multiply the 2 and the 4, and then add 1. This gives us 126+16=136. We enter those on that second line.
+
+ 1
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 3
+ 1
+ 2
+
+ 1
+ 3
+ 4
+ 0
+
+ Step 6: Now we add down the columns.
+
+ 1
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 1
+ 3
+ 1
+ 2
+
+ 1
+ 3
+ 4
+ 0
+
+ 2
+ 0
+ 5
+ 2
+
+ Step 7: The 3 and the 3 add to 10 in base 6, so we enter the 0 and carry the 1. We now have the result: 
+ 456×246=20526.
+Step 1: Use the base 6 multiplication table () and, when necessary, the base 6 addition table ().
+
+Set up this calculation using columns:
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+4
+5
+x
+2
+Step 2: Multiply the 1s digits, 5 and 4, using the base 6 multiplication table (). There we see the result is 326. So, we enter the 2 and carry the 3.
+
+ 3
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 2
+3
+4
+5
+x
+2
+Step 3: So, now we multiply the 4 and the 4, then add the 3 (just as you would do if multiplying two base 10 numbers!). 46×46=246 (from the base 6 table []), then 246+36=316. So, we enter the 31.
+
+ 3
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 3
+ 1
+ 2
+
+3
+4
+5
+x
+2
+1
+Step 4: Now we move on to the 2 in the “tens” place in the bottom value. We multiply the 26 and the 56, and we get 146. So, we enter the 4 and carry the 1.
+Step 5: Next up, we multiply the 2 and the 4, and then add 1. This gives us 126+16=136. We enter those on that second line.
+
+ 1
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 3
+ 1
+ 2
+
+ 1
+ 3
+ 4
+ 0
+
+1
+4
+5
+x
+2
+4
+3
+1
+3
+4
+Step 6: Now we add down the columns.
+
+ 1
+
+ 4
+ 5
+
+ x
+ 2
+ 4
+
+ 1
+ 3
+ 1
+ 2
+
+ 1
+ 3
+ 4
+ 0
+
+ 2
+ 0
+ 5
+ 2
+
+1
+4
+5
+x
+2
+1
+3
+1
+2
+1
+3
+4
+0
+2
+0
+5
+Step 7: The 3 and the 3 add to 10 in base 6, so we enter the 0 and carry the 1. We now have the result:
+Step 1: Use the base 2 multiplication table () and, when necessary, the base 2 addition table in the solution for . Set up this calculation using columns:
+
+ 1
+ 0
+ 1
+
+ x
+ 1
+ 1
+ 0
+
+ Step 2: Using the pattern established above, and the processes from multiplication from base 10, we find the following:
+
+ 1
+ 0
+ 1
+
+ x
+
+ 1
+ 1
+ 0
+
+ 0
+ 0
+ 0
+
+ 1
+ 0
+ 1
+
+ 1
+ 0
+ 1
+
+ Step 3: Adding down the columns results in the following:
+
+ 1
+ 0
+ 1
+
+ x
+
+ 1
+ 1
+ 0
+
+ 0
+ 0
+ 0
+
+ 1
+ 0
+ 1
+
+ 1
+ 0
+ 1
+
+ 1
+ 1
+ 1
+ 1
+ 0
+
+ So, 1012×1102=111102.
+
+1
+0
+1
+x
+1
+1
+Step 2: Using the pattern established above, and the processes from multiplication from base 10, we find the following:
+
+ 1
+ 0
+ 1
+
+ x
+
+ 1
+ 1
+ 0
+
+ 0
+ 0
+ 0
+
+ 1
+ 0
+ 1
+
+ 1
+ 0
+ 1
+
+1
+0
+1
+x
+1
+1
+0
+0
+0
+0
+1
+0
+1
+1
+0
+Step 3: Adding down the columns results in the following:
+
+ 1
+ 0
+ 1
+
+ x
+
+ 1
+ 1
+ 0
+
+ 0
+ 0
+ 0
+
+ 1
+ 0
+ 1
+
+ 1
+ 0
+ 1
+
+ 1
+ 1
+ 1
+ 1
+ 0
+
+1
+0
+1
+x
+1
+1
+0
+0
+0
+0
+1
+0
+1
+1
+0
+1
+1
+1
+1
+1
+0
+So, 1012×1102=111102.
+
+Summarizing the process of multiplying two numbers in different bases, the multiplication table is referenced. Using that table, the multiplication is carried out in the same manner as it is in base 10. The addition rules for the base will also be referenced when carrying a 1 or when adding the results for each digit’s multiplication line.
+
+Multiplying in a Base Higher Than 10
+
+Calculate 3A12×7412.
+Step 1: Use the base 12 multiplication table in the solution for and, when necessary, the base 12 addition table in the solution for . Set up this calculation using columns:
+
+3
+A
+×
+7
+Step 2: First, the 4 is multiplied by 3A, resulting in the first line.
+
+3
+A
+×
+7
+Step 3: Now we move on to the 7 in the “tens” place in the bottom value.
+
+5
+3
+A
+x
+7
+4
+1
+3
+Step 4: Now we add down the columns.
+
+3
+A
+x
+7
+4
+1
+3
+4
+2
+2
+A
+Step 5: The 3 and the A add to 11 in base 12, so we enter the 1 and carry the 1.
+
+We now have the result: 3A12×7412=241412.
+
+Division in Bases Other Than 10
+
+Just as with the other operations, division in a base other than 10, the process of division in a base other than 10 is the same as the process when working in base 10. For instance, 72÷9=8 because, we know that 9×8=72. So, for many division problems, we are simply looking to the multiplication table to identify the appropriate multiplication rule.
+
+Dividing with a Base Other Than 10
+
+Calculate 146÷56.
+
+Calculate 5A12÷712
+
+Looking at the multiplication table for base 6 (), we see that 56×26=146. Using that, we know that 146÷56=26.
+
+Looking at the multiplication table for base 12 in the solution for , we see that 712×A12=5A12. Using that, we know that 5A12÷712=A12.
+
+Errors in Multiplying and Dividing in Bases Other Than Base 10
+
+The types of errors encountered when multiplying and dividing in bases other than base 10 are the same as when adding and subtracting. They often involve applying base 10 rules or symbols to an arithmetic problem in a base other than base 10. The first type of error is using a symbol that is not in the symbol set for the base.
+
+Identifying an Illegal Symbol in a Base Other Than Base 10
+
+Explain the error in the following calculation, and determine the correct answer:
+
+Since the problem is in base 6, the symbol set available is 0, 1, 2, 3, 4, and 5. The 8 in the answer is clearly not a legal symbol for base 6. Looking back to the base 6 multiplication table (), we see that 46×26=126.
+
+The second type of error is using a base 10 rule when the numbers are not in base 10. For instance, in base 17, 617×917=5417 would be incorrect, even though in base 10, 6×9=54. That rule doesn’t apply in base 17.
+
+Identifying an Error in Arithmetic in a Base Other Than Base 10
+
+Explain the error in the following calculation. Determine the correct answer:
+
+If this problem was a base 10 problem, this would be the correct answer. However, in base 12, 812×712 is not 56, but is instead 48. To correct this error, carefully use the multiplication table for base 12 (). If properly used, the correct answer would be 1812×712=B812.
+
+Check Your Understanding
+
+Key Concepts
+
+Multiplication tables for bases other than 10 can be built using the same processes that are used in base 10, including using repeated addition and the addition table for the base.
+
+Multiplication in bases other than base 10 use the same processes as multiplication in base 10, but use the multiplication table for that base.
+
+Basic division in bases other than base 10 use the same processes as basic division in base 10, where the missing factor process is used.
+
+Projects
+
+Additive Systems
+
+Go online. Google “additive number systems.”What system comes up?
+
+Describe the additive system you found.
+
+Using Google, identify three more additive systems of numbers.
+
+Compare and contrast the systems you found. For instance, how many times can a symbol be used before a new symbol is used.
+
+Identify three situations where additive systems are still used.
+
+Computers and Bases
+
+Use Google to determine what base computers use.
+
+Were other bases attempted for use in computers?
+
+Determine why the base used in computers is appropriate.
+
+Determine how the base used in computers is related to the circuitry in computers.
+
+Determine how Boolean logic and the base used in computers are related, and might be identical.
+
+There is research into using quibits in computers. Find out what quibits are and how can they improve computing speed.
+
+Cultures Using Base Systems Other Than 10
+
+Using Google, find three cultures, other than Babylonian or Mayan, that use base systems other than 10.
+
+Tell what base is used for each system.
+
+If possible, determine why the culture used that base system.
+
+Choose one of those systems. Explain that base system. Be sure to address whether the system is additive, place-value based, a blend of the two, and if it employs a zero.
+
+History of Zero
+
+Using any resources available to you, determine the history of 0 in at least three different numbering systems. Address at least when and why such a development occurred and why a 0 is vital to the use of a positional system.
+
+Numbering Systems from Other Global Regions
+
+Using any resources available to you, find at least three numbering systems from sub-Saharan Africa, Australia, China, or the Pacific Islands. Explore if they are positional or additive systems (or combinations!), the terminology of the system, if they used a 0, and what base they employed (if positional).
+
+Chapter Review
+Hindu-Arabic Positional System
+
+Early Numeration Systems
+
+Converting with Base Systems
+
+Addition and Subtraction in Base Systems
+
+Multiplication and Division in Base Systems
+
+Chapter Test

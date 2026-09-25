@@ -1,0 +1,163 @@
+# m58290
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Acceleration Vector
+
+Acceleration Vector
+
+By the end of this section, you will be able to:
+
+Calculate the acceleration vector given the velocity function in unit vector notation.
+
+Describe the motion of a particle with a constant acceleration in three dimensions.
+
+Use the one-dimensional motion equations along perpendicular axes to solve a problem in two or three dimensions with a constant acceleration.
+
+Express the acceleration in unit vector notation.
+
+Instantaneous Acceleration
+
+In addition to obtaining the displacement and velocity vectors of an object in motion, we often want to know its acceleration vector at any point in time along its trajectory. This acceleration vector is the instantaneous acceleration and it can be obtained from the derivative with respect to time of the velocity function, as we have seen in a previous chapter. The only difference in two or three dimensions is that these are now vector quantities. Taking the derivative with respect to time v→(t), we find
+
+The acceleration in terms of components is
+
+Also, since the velocity is the derivative of the position function, we can write the acceleration in terms of the second derivative of the position function:
+Finding an Acceleration Vector
+A particle has a velocity of v→(t)=5.0ti^+t2j^−2.0t3k^m/s. (a) What is the acceleration function? (b) What is the acceleration vector at t = 2.0 s? Find its magnitude and direction.
+
+Finding an Acceleration Vector
+Solution
+(a) We take the first derivative with respect to time of the velocity function to find the acceleration. The derivative is taken component by component:
+
+Solution
+
+(b) Evaluating a→(2.0s)=5.0i^+4.0j^−24.0k^m/s2 gives us the direction in unit vector notation. The magnitude of the acceleration is |a→(2.0s)|=5.02+4.02+(−24.0)2=24.8m/s2.
+Significance
+In this example we find that acceleration has a time dependence and is changing throughout the motion. Let’s consider a different velocity function for the particle.
+
+Significance
+Finding a Particle Acceleration
+A particle has a position function r→(t)=(10t−t2)i^+5tj^+5t​k^m. (a) What is the velocity? (b) What is the acceleration? (c) Describe the motion from t = 0 s.
+
+Finding a Particle Acceleration
+Strategy
+We can gain some insight into the problem by looking at the position function. It is linear in y and z, so we know the acceleration in these directions is zero when we take the second derivative. Also, note that the position in the x direction is zero for t = 0 s and t = 10 s.
+
+Strategy
+Solution
+(a) Taking the derivative with respect to time of the position function, we find
+
+Solution
+
+The velocity function is linear in time in the x direction and is constant in the y and z directions.
+
+(b) Taking the derivative of the velocity function, we find
+
+The acceleration vector is a constant in the negative x-direction.
+
+(c) The trajectory of the particle can be seen in . Let’s look in the y and z directions first. The particle’s position increases steadily as a function of time with a constant velocity in these directions. In the x direction, however, the particle follows a path in positive x until t = 5 s, when it reverses direction. We know this from looking at the velocity function, which becomes zero at this time and negative thereafter. We also know this because the acceleration is negative and constant—meaning, the particle is accelerating in the opposite direction. The particle’s position reaches 25 m, where it then reverses direction and begins to accelerate in the negative x direction. The position reaches zero at t = 10 s.
+Significance
+By graphing the trajectory of the particle, we can better understand its motion, given by the numerical results of the kinematic equations.
+
+Significance
+
+Suppose the acceleration function has the form a→(t)=ai^+bj^+ck^m/s2, where a, b, and c are constants. What can be said about the functional form of the velocity function?
+
+The acceleration vector is constant and doesn’t change with time. If a, b, and c are not zero, then the velocity function must be linear in time. We have v→(t)=∫a→dt=∫(ai^+bj^+ck^)dt=(ai^+bj^+ck^)tm/s, since taking the derivative of the velocity function produces a→(t). If any of the components of the acceleration are zero, then that component of the velocity would be a constant.
+
+Constant Acceleration
+
+Multidimensional motion with constant acceleration can be treated the same way as shown in the previous chapter for one-dimensional motion. Earlier we showed that three-dimensional motion is equivalent to three one-dimensional motions, each along an axis perpendicular to the others. To develop the relevant equations in each direction, let’s consider the two-dimensional problem of a particle moving in the xy plane with constant acceleration, ignoring the z-component for the moment. The acceleration vector is
+
+Each component of the motion has a separate set of equations similar to – of the previous chapter on one-dimensional motion. We show only the equations for position and velocity in the x- and y-directions. A similar set of kinematic equations could be written for motion in the z-direction:
+
+Here the subscript 0 denotes the initial position or velocity. to can be substituted into and without the z-component to obtain the position vector and velocity vector as a function of time in two dimensions:
+
+The following example illustrates a practical use of the kinematic equations in two dimensions.
+A Skier
+ shows a skier moving with an acceleration of 2.1m/s2 down a slope of 15° at t = 0. With the origin of the coordinate system at the front of the lodge, her initial position and velocity are
+
+A Skier
+
+and
+
+(a) What are the x- and y-components of the skier’s position and velocity as functions of time? (b) What are her position and velocity at t = 10.0 s?
+Strategy
+Since we are evaluating the components of the motion equations in the x and y directions, we need to find the components of the acceleration and put them into the kinematic equations. The components of the acceleration are found by referring to the coordinate system in . Then, by inserting the components of the initial position and velocity into the motion equations, we can solve for her position and velocity at a later time t.
+
+Strategy
+Solution
+(a) The origin of the coordinate system is at the top of the hill with y-axis vertically upward and the x-axis horizontal. By looking at the trajectory of the skier, the x-component of the acceleration is positive and the y-component is negative. Since the angle is 15° down the slope, we find
+
+Solution
+
+Inserting the initial position and velocity into and for x, we have
+
+For y, we have
+
+(b) Now that we have the equations of motion for x and y as functions of time, we can evaluate them at t = 10.0 s:
+
+The position and velocity at t = 10.0 s are, finally,
+
+The magnitude of the velocity of the skier at 10.0 s is 25 m/s, which is 60 mi/h.
+Significance
+It is useful to know that, given the initial conditions of position, velocity, and acceleration of an object, we can find the position, velocity, and acceleration at any later time.
+
+Significance
+
+With through we have completed the set of expressions for the position, velocity, and acceleration of an object moving in two or three dimensions. If the trajectories of the objects look something like the “Red Arrows” in the opening picture for the chapter, then the expressions for the position, velocity, and acceleration can be quite complicated. In the sections to follow we examine two special cases of motion in two and three dimensions by looking at projectile motion and circular motion.
+
+At this University of Colorado Boulder website, you can explore the position velocity and acceleration of a ladybug with an interactive simulation that allows you to change these parameters.
+
+Summary
+
+In two and three dimensions, the acceleration vector can have an arbitrary direction and does not necessarily point along a given component of the velocity.
+
+The instantaneous acceleration is produced by a change in velocity taken over a very short (infinitesimal) time period. Instantaneous acceleration is a vector in two or three dimensions. It is found by taking the derivative of the velocity function with respect to time.
+
+In three dimensions, acceleration a→(t) can be written as a vector sum of the one-dimensional accelerations ax(t),ay(t),andaz(t) along the x-, y-, and z-axes.
+
+The kinematic equations for constant acceleration can be written as the vector sum of the constant acceleration equations in the x, y, and z directions.
+
+Conceptual Questions
+
+If the position function of a particle is a linear function of time, what can be said about its acceleration?
+
+If an object has a constant x-component of the velocity and suddenly experiences an acceleration in the y direction, does the x-component of its velocity change?
+
+No, motions in perpendicular directions are independent.
+
+If an object has a constant x-component of velocity and suddenly experiences an acceleration at an angle of 70° in the x direction, does the x-component of velocity change?
+
+Problems
+
+The position of a particle is r→(t)=(3.0t2i^+5.0j^−6.0tk^)m. (a) Determine its velocity and acceleration as functions of time. (b) What are its velocity and acceleration at time t = 0?
+
+A particle’s acceleration is (4.0i^+3.0j^)m/s2. At t = 0, its position and velocity are zero. (a) What are the particle’s position and velocity as functions of time? (b) Find the equation of the path of the particle. Draw the x- and y-axes and sketch the trajectory of the particle.
+
+a. v→(t)=(4.0ti^+3.0tj^)m/s,r→(t)=(2.0t2i^+32t2j^)m,b. x(t)=2.0t2m,y(t)=32t2m,t2=x2⇒y=34x
+
+A boat leaves the dock at t = 0 and heads out into a lake with an acceleration of 2.0m/s2i^. A strong wind is pushing the boat, giving it an additional velocity of 2.0m/si^+1.0m/sj^. (a) What is the velocity of the boat at t = 10 s? (b) What is the position of the boat at t = 10s? Draw a sketch of the boat’s trajectory and position at t = 10 s, showing the x- and y-axes.
+
+The position of a particle for t > 0 is given by r→(t)=(3.0t2i^−7.0t3j^−5.0t−2k^)m. (a) What is the velocity as a function of time? (b) What is the acceleration as a function of time? (c) What is the particle’s velocity at t = 2.0 s? (d) What is its speed at t = 1.0 s and t = 3.0 s? (e) What is the average velocity between t = 1.0 s and t = 2.0 s?
+
+a. v→(t)=(6.0ti^−21.0t2j^+10.0t−3k^)m/s,
+b. a→(t)=(6.0i^−42.0tj^−30t−4k^)m/s2,
+c. v→(2.0s)=(12.0i^−84.0j^+1.25k^)m/s,
+d. v→(1.0s)=6.0i^−21.0j^+10.0k^m/s,|v→(1.0s)|=24.0m/s
+v→(3.0s)=18.0i^−189.0j^+0.37k^m/s,|v→(3.0s)|=190m/s,
+e. r→(t)=(3.0t2i^−7.0t3j^−5.0t−2k^)m
+v→avg=9.0i^−49.0j^+3.75k^m/s
+
+The acceleration of a particle is a constant. At t = 0 the velocity of the particle is (10i^+20j^)m/s. At t = 4 s the velocity is 10j^m/s. (a) What is the particle’s acceleration? (b) How do the position and velocity vary with time? Assume the particle is initially at the origin.
+
+A particle has a position function r→(t)=cos(1.0t)i^+sin(1.0t)j^+tk^, where the arguments of the cosine and sine functions are in radians. (a) What is the velocity vector? (b) What is the acceleration vector?
+
+a. v→(t)=−sin(1.0t)i^+cos(1.0t)j^+k^, b. a→(t)=−cos(1.0t)i^−sin(1.0t)j^
+
+A Lockheed Martin F-35 II Lighting jet takes off from an aircraft carrier with a runway length of 90 m and a takeoff speed 70 m/s at the end of the runway. Jets are catapulted into airspace from the deck of an aircraft carrier with two sources of propulsion: the jet propulsion and the catapult. At the point of leaving the deck of the aircraft carrier, the F-35’s acceleration decreases to a constant acceleration of 5.0m/s2 at 30° with respect to the horizontal. (a) What is the initial acceleration of the F-35 on the deck of the aircraft carrier to make it airborne? (b) Write the position and velocity of the F-35 in unit vector notation from the point it leaves the deck of the aircraft carrier. (c) At what altitude is the fighter 5.0 s after it leaves the deck of the aircraft carrier? (d) What is its velocity and speed at this time? (e) How far has it traveled horizontally?
+
+instantaneous acceleration found by taking the derivative of the velocity function with respect to time in unit vector notation

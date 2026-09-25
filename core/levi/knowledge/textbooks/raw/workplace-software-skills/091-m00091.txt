@@ -1,0 +1,106 @@
+# m00091
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Multiple Table Forms
+
+Multiple Table Forms
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Create a form that uses data from two different tables
+
+Create a form that contains subforms
+
+Much like any global manufacturing corporation, we have an extensive list of assets that include company vehicles, equipment, and facilities to operate and manage. At WorldCorp, when you work with relational data, it is often convenient to be able to view multiple tables on the same form. For example, suppose you are reviewing a fleet of vehicles for one of our manufacturing facilities in Germany. Initially, you built a form that lists all the vehicles in use and enables you to add and subtract vehicles. You also built a form to create service records for each vehicle that WorldCorp owns.
+
+When a new vehicle is added to the fleet, it receives an initial oil change and fresh fluids, and these service records are logged. You want to create a form that will make it easy to add a new vehicle and simultaneously add the initial maintenance and repair notes for that vehicle. To do this, you need to add a vehicle to a list of fleet vehicles on one table and, at the same time, add information about the maintenance/repair that has been done to the vehicle on another table. To accomplish this goal, you may want to combine data from two tables in one form or create subforms. This section presents several methods to help you create advanced forms.
+
+Adding Data from Two Tables in a Single Form
+
+If you want to add data across multiple tables in one form, this could help with efficiency when managing a fleet of vehicles at WorldCorp. Primarily, it can speed data entry while maintaining the organization of tables, fields, and records.
+
+To effectively create forms that feed into multiple tables, you should use a query as a critical building block. Recall from the chapter on Understanding and Using Databases that a query is an Access object used to view, analyze, or modify data. The query design determines which fields and records you see and their sort order. Using the example of our manufacturing facility fleet vehicle program, you can review how the query is designed, how to adjust it for user experience, and how to use the Form Wizard to build a form that can add data to two tables.
+
+Using Queries for a Form
+
+First, a query needs to be designed to build a relational database for the fleet vehicle program. In this example, you have two tables of information, as seen in : tblVehicle and tblMaintenance.
+
+The tblVehicle table represents each unique car/truck the company owns. The tblMaintenance table represents every maintenance record (oil changes, new tires, chipped glass repair, inspections, etc.) on all vehicles. In this section, you will see how to design a form that can add information to both tables simultaneously.
+
+Remember that the ultimate goal of the new form is to add a new vehicle to the fleet and to include that vehicle’s initial service information (oil change, safety inspection, cleaning, company decals, etc.) so that WorldCorp does not lose track or misuse valued assets. The new form will serve as a quick form for all new vehicles. For the query to be effective, a clear relationship needs to be established between the two tables.
+
+In this example, VehicleID is the primary key of tblVehicle and is listed as a required field of tblMaintenance. Recall from the chapter Understanding and Using Databases that a primary key is a field or set of fields with values that are unique throughout a table. Values of the primary key can be used to refer to entire records because each record has a different value for the key, as shown in .
+
+Access provides different data types for formatting field names. Rather than setting the VehicleID field in the tblMaintenance to short text, autonumber, or number, you can use the Lookup Wizard to build a relationship between tables. The example, shown in a series of screenshots (, , , , , and ) will walk through the use of the Lookup Wizard steps that are used to create a relationship.
+
+Now that you have created a relationship between the tables, build a query that joins the fields from the two tables together. To start, go to Query Design and bring in all the fields from both tables. In this example, the query will be saved as qryNewVehicles, as it will be the driver for the New Vehicle form to use in the vehicle fleet program (see ).
+
+Select qryNewVehicle from the list of All Access Objects to create the form “fromNewVehicle” (see ). Access will create the form automatically. This form allows the user to enter both the new vehicle that is part of the fleet and the initial check-in service performed on the vehicle.
+
+Using Subforms
+
+A subform is a form that is inserted in another form (known as the main form). A form/subform combination may be referred to as a hierarchical form, a master/detail form, or a parent/child form. Subforms are generally used whenever you want to display data from multiple tables where there is a one-to-many relationship.
+
+In a one-to-one relationship, each record in one table has no more than one related record in another table. This type of relationship is not common, as most information related in this way would be in one table, so there would be no need for a second table.
+
+By contrast, a one-to-many relationship is the most common type of relationship. In a one-to-many relationship, a record in one table can have many matching records in another table, and the opposite is true as well.
+
+For example, suppose you have two tables in your database, one called Employees and another called Employee Details. The Employees table contains basic information about each employee, such as their name, ID number, and job title. The Employee Details table contains additional details about each employee, such as their address, phone number, and emergency contact information. Because each employee has only one set of details, there is a one-to-one relationship between the Employees and Employee Details tables. To view and edit this information on the same form, you can use a subform.
+
+To do this, you could create a main form based on the Employees table, with fields for Employee ID, First Name, Last Name, and other relevant information. Then, you could add a subform based on the Employee Details table, with fields for Address, Phone Number, Emergency Contact, and other relevant information. By embedding the Employee Details subform within the Employees main form, you can easily view and edit data for both the employee and their details on the same screen. You can navigate between records in the Employees table and see the corresponding details in the subform, or you can add a new employee and their details at the same time.
+
+A many-to-many relationship means that for each record in one table, there can be many records in another table; likewise, for each record in the second table, there can be many in the first. Many-to-many relationships cannot be directly represented in relational database programs; they have to be built by using two or more one-to-many relationships. For example, for any business, a many-to-many relationship exists between customers and products. Customers can purchase various products and various amounts of a product, and products can be purchased by many different customers. A third table is required to create the relationship between customers (many) and products (many).
+
+Understanding How Subforms and Relationships Work
+
+Using subforms is an effective way to create one-to-many relationships and offers unlimited options for business use. In this type of association between two tables, the primary key value of each record in the primary table corresponds to the value in the matching field or fields of many records in the related table.
+
+For example, if you want to display an order with all of its details, you will use a subform. The order information would display on the “main” form (one detail), and the order details would display on the subform (many details). The data in the CustomerOrder table in is the “one” side of the relationship in this example. It creates a Document number for the transaction, identifies the Customer, provides room for Notes (delivery instructions, special handling, etc.), and date-stamps the transaction. In contrast, the data in the OrderDetails table is the “many” side of the relationship, showing an unlimited list of items purchased in a transaction.
+
+The main form and subform are linked so that the subform displays only records that are related to the current record in the main form. For example, when the main form displays a Customer Order by Arnold on 1/20/22, as shown, the subform then displays items that were included on Arnold’s #2 order only. If the form and subform were unlinked, the subform would display all the items that Arnold ever ordered, not just those ordered on 1/20/22, on Document #2.
+
+Adding a Subform through the Subform Wizard
+
+There are two common ways to add a subform to a main form. The quickest way is to simply open a form in Design View and then drag and drop a form (from your list of completed forms) that you want to be the “many” as your subform. However, using the Form Wizard can ensure that the correct relationships are established when creating the advanced form. The following example will walk you through the use of the Form/Subform Wizard to track your time away from the WorldCorp office on the golf course.
+
+Start by designing a query that helps ensure that relationships between the tables are created. To help you think through the query design, you might consider sketching it out on paper or in another app with boxes and arrows to show how fields are connected. Then you can take this plan and use it as your work through the queries when designing a form. Using the Form/Subform Wizard can also make designing the queries and the form easier. In this example, shown in , you will design a golfing relational database that keeps track of individual scores and rounds. It may sound like a complicated task to create for a weekend activity, but with the wizard, it can take just a few minutes to have a great application in place for your out-of-office recreation.
+
+First, create four tables to help keep track of (1) the different courses (tblCourseID), (2) the different players (tblPlayer), (3) each round played (tblRound), and (4) the score shot on each hole played per round (TblScore). Then, create a query that will bring together all four tables with all the fields from each table using the skills covered earlier in the chapter. The goal is to make tblPlayer the main form; with tblRound and tblScore listed as subforms.
+
+Now that you have created a query, save and close it. The next step, shown in , is to select the Form Wizard from the Create tab in Access.
+
+The following sequence of figures walks through the different options in the wizard. Once you have used the wizard a few times, you will find it easier to plan future forms and subforms for data management (see , , , and ). Remember that we also used the Form Wizard in Understanding and Using Databases.
+
+After you select Finish in the wizard, the following form is created . This database, built with four tables, one query, and three forms, will provide a way to keep track of weekend golf performance for years to come.
+
+To review, the Form Wizard created three forms, as shown in the All Access Objects section: Player, Round, and Score. When you open the Player form, it will display all three forms. In this example, Larry is the selected player on the main form—PlayerID #1. The subforms will display information related to only Larry. He is currently playing his first round at Twin Oaks on 5/24/22. We know this because the information displayed within the Round subform is clearly highlighted in blue. Round is set to be a subform of Player. Additionally, Larry has just entered his score on hole #3 of his first round. His score was a 3, and he also marked that the hole was listed as a par 3; Larry shot par!
+
+Score is a subform of Round, so only scores for the selected round will be stored. As Larry continues his round, he can simply add additional rows of data from each hole he plays on the Score subform. These scores will both be saved under RoundID #1 and kept as Larry’s unique scores. If Larry is playing against another player, you would navigate to the correct player on the main form and enter their round/score as well.
+
+Larry can use this simple yet powerful form to keep track of unlimited rounds of golf. In the office, he might apply these steps to developing a way to keep track of a variety of business tasks or projects. For example, each of his employees could have an assigned project with numerous unique details concerning each project. The employee would be the main form, while the project names and project details could be the subforms.
+
+Adjusting a Subform in Design View
+
+Subforms are difficult to change and update within Design View of the main form that they are sitting on. A much easier way to alter a subform is to open that form separately (first making sure the main form has been closed). Using the previous golf example, if you want to add details to the Round subform (for example, add a place for notes on weather or course conditions), it is best to open up the Round form by itself and make the changes. Once the changes have been made, you can save and close the form, then reopen the main form (in this example, Player) to see whether you need to adjust the size. After making any changes, always make sure the subform displays the new information within the main form.
+
+Summary
+
+Adding data from two tables to a single specialized form can be an efficient way to reduce steps and enhance user experience. Queries are the bedrock of building and designing relational forms.
+
+Using the Form/Subform Wizard in Access can help ensure the creation of proper relationships. Understanding how subforms and relationships work opens the door to form design.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+relationship in which each record in one table can have many related records in another table, and vice versa; this type of relationship, which really consists of two one-to-many relationships, is made possible only by defining a table
+relationship in which each record in one table has one or more related records in another table, but a record in the second table has only one matching record in the first table
+relationship in which each record in one table has at most one related record in another table
+form that is inserted into another form (the main form)

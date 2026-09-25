@@ -1,0 +1,189 @@
+# m00108
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Linear Programming
+
+Linear Programming
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Compose an objective function to be minimized or maximized.
+
+Compose inequalities representing a system application.
+
+Apply linear programming to solve application problems.
+
+Imagine you hear about some natural disaster striking a far-away country; it could be an earthquake, a fire, a tsunami, a tornado, a hurricane, or any other type of natural disaster. The survivors of this disaster need help—they especially need food, water, and medical supplies. You work for a company that has these supplies, and your company has decided to help by flying the needed supplies into the disaster area. They want to maximize the number of people they can help. However, there are practical constraints that need to be taken into consideration; the size of the airplanes, how much weight each airplane can carry, and so on. How do you solve this dilemma? This is where linear programming comes into play. Linear programming is a mathematical technique to solve problems involving finding maximums or minimums where a linear function is limited by various constraints.
+
+As a field, linear programming began in the late 1930s and early 1940s. It was used by many countries during World War II; countries used linear programming to solve problems such as maximizing troop effectiveness, minimizing their own casualties, and maximizing the damage they could inflict upon the enemy. Later, businesses began to realize they could use the concept of linear programming to maximize output, minimize expenses, and so on. In short, linear programming is a method to solve problems that involve finding a maximum or minimum where a linear function is constrained by various factors.
+
+A Mathematician Invents a “Tsunami Cannon”
+
+On December 26, 2004, a massive earthquake occurred in the Indian Ocean. This earthquake, which scientists estimate had a magnitude of 9.0 or 9.1 on the Richter Scale, set off a wave of tsunamis across the Indian Ocean. The waves of the tsunami averaged over 30 feet (10 meters) high, and caused massive damage and loss of life across the coastal regions bordering the Indian Ocean.
+
+Usama Kadri works as an applied mathematician at Cardiff University in Wales. His areas of research include fluid dynamics and non-linear phenomena. Lately, he has been focusing his research on the early detection and easing of the effects of tsunamis. One of his theories involves deploying a series of devices along coastlines which would fire acoustic-gravity waves (AGWs) into an oncoming tsunami, which in theory would lessen the force of the tsunami. Of course, this is all in theory, but Kadri believes it will work. There are issues with creating such a device: they would take a tremendous amount of electricity to generate an AGW, for instance, but if it would save lives, it may well be worth it.
+
+Compose an Objective Function to Be Minimized or Maximized
+
+An objective function is a linear function in two or more variables that describes the quantity that needs to be maximized or minimized.
+
+Composing an Objective Function for Selling Two Products
+
+Miriam starts her own business, where she knits and sells scarves and sweaters out of high-quality wool. She can make a profit of $8 per scarf and $10 per sweater. Write an objective function that describes her profit.
+
+Let x represent the number of scarves sold, and let y represent the number of sweaters sold. Let P represent profit. Since each scarf has a profit of $8 and each sweater has a profit of $10, the objective function is P=8x+10y.
+
+Composing an Objective Function for Production
+
+William’s factory produces two products, widgets and wadgets. It takes 24 minutes for his factory to make 1 widget, and 32 minutes for his factory to make 1 wadget. Write an objective function that describes the time it takes to make the products.
+
+Let x equal the number of widgets made; let y equal the number of wadgets made; let T represent total time. The objective function is T=24x+32y.
+
+Composing Inequalities Representing a System Application
+
+For our two examples of profit and production, in an ideal world the profit a person makes and/or the number of products a company produces would have no restrictions. After all, who wouldn’t want to have an unrestricted profit? However in reality this is not the case; there are usually several variables that can restrict how much profit a person can make or how many products a company can produce. These restrictions are called constraints.
+
+Many different variables can be constraints. When making or selling a product, the time available, the cost of manufacturing and the amount of raw materials are all constraints. In the opening scenario with the tsunami, the maximum weight on an airplane and the volume of cargo it can carry would be constraints. Constraints are expressed as linear inequalities; the list of constraints defined by the problem forms a system of linear inequalities that, along with the objective function, represent a system application.
+
+Representing the Constraints for Selling Two Products
+
+Two friends start their own business, where they knit and sell scarves and sweaters out of high-quality wool. They can make a profit of $8 per scarf and $10 per sweater. To make a scarf, 3 bags of knitting wool are needed; to make a sweater, 4 bags of knitting wool are needed. The friends can only make 8 items per day, and can use not more than 27 bags of knitting wool per day. Write the inequalities that represent the constraints. Then summarize what has been described thus far by writing the objective function for profit and the two constraints.
+
+Let x represent the number of scarves sold, and let y represent the number of sweaters sold. There are two constraints: the number of items the business can make in a day (a maximum of 8) and the number of bags of knitting wool they can use per day (a maximum of 27). The first constraint (total number of items in a day) is written as:
+ x+y≤8
+
+Since each scarf takes 3 bags of knitting wool and each sweater takes 4 bags of knitting wool, the second constraint, total bags of knitting wool per day, is written as:
+ 3x+4y≤27
+
+In summary, here are the equations that represent the new business:
+P=8x+10y; This is the profit equation: The business makes $8 per scarf and $10 per sweater.
+
+Representing Constraints for Production
+
+A factory produces two products, widgets and wadgets. It takes 24 minutes for the factory to make 1 widget, and 32 minutes for the factory to make 1 wadget. Research indicates that long-term demand for products from the factory will result in average sales of 12 widgets per day and 10 wadgets per day. Because of limitations on storage at the factory, no more than 20 widgets or 17 wadgets can be made each day. Write the inequalities that represent the constraints. Then summarize what has been described thus far by writing the objective function for time and the two constraints.
+
+Let x equal the number of widgets made; let y equal the number of wadgets made. Based on the long-term demand, we know the factory must produce a minimum of 12 widgets and 10 wadgets per day. We also know because of storage limitations, the factory cannot produce more than 20 widgets per day or 17 wadgets per day. Writing those as inequalities, we have:
+x≥12
+y≥10
+x≤20
+y≤17
+
+The number of widgets made per day must be between 12 and 20, and the number of wadgets made per day must be between 10 and 17. Therefore, we have:
+12≤x≤20
+10≤y≤17
+
+The system is:
+T=24x+32y
+12≤x≤20
+10≤y≤17
+T is the variable for time; it takes 24 minutes to make a widget and 32 minutes to make a wadget.
+
+Applying Linear Programming to Solve Application Problems
+
+There are four steps that need to be completed when solving a problem using linear programming. They are as follows:
+Step 1: Compose an objective function to be minimized or maximized.
+Step 2: Compose inequalities representing the constraints of the system.
+Step 3: Graph the system of inequalities representing the constraints.
+Step 4: Find the value of the objective function at each corner point of the graphed region.
+
+The first two steps you have already learned. Let’s continue to use the same examples to illustrate Steps 3 and 4.
+
+Solving a Linear Programming Problem for Two Products
+
+Three friends start their own business, where they knit and sell scarves and sweaters out of high-quality wool. They can make a profit of $8 per scarf and $10 per sweater. To make a scarf, 3 bags of knitting wool are needed; to make a sweater, 4 bags of knitting wool are needed. The friends can only make 8 items per day, and can use not more than 27 bags of knitting wool per day. Determine the number of scarves and sweaters they should make each day to maximize their profit.
+Step 1: Compose an objective function to be minimized or maximized. From , the objective function is P=8x+10y.
+Step 2: Compose inequalities representing the constraints of the system. From , the constraints are x+y≤8 and 3x+4y≤27.
+Step 3: Graph the system of inequalities representing the constraints. Using methods discussed in Graphing Linear Equations and Inequalities, the graphs of the constraints are shown below. Because the number of scarves (x) and the number of sweaters (y) both must be non-negative numbers (i.e., x≥0 and y≥0), we need to graph the system of inequalities in Quadrant I only. shows each constraint graphed on its own axes, while shows the graph of the system of inequalities (the two constraints graphed together). In , the large shaded region represents the area where the two constraints intersect. If you are unsure how to graph these regions, refer back to Graphing Linear Equations and Inequalities.
+Step 4: Find the value of the objective function at each corner point of the graphed region. The “graphed region” is the area where both of the regions intersect; in , it is the large shaded area. The “corner points” refer to each vertex of the shaded area. Why the corner points? Because the maximum and minimum of every objective function will occur at one (or more) of the corner points. shows the location and coordinates of each corner point.
+
+Three of the four points are readily found, as we used them to graph the regions; the fourth point, the intersection point of the two constraint lines, will have to be found using methods discussed in Systems of Linear Equations in Two Variables, either using substitution or elimination. As a reminder, set up the two equations of the constraint lines:
+ 3x+4y=27x+y=8
+
+For this example, substitution will be used.
+ x+y=8y=8-x.
+
+Substituting 8-x into the first equation for y, we have
+ 3x+4(8−x)=273x+32−4x=27−x=−5x=5
+
+Now, substituting the 5 in for x in either equation to solve for y. Choosing the second equation, we have:
+ 5+y=8y=3
+
+Therefore, x=5, and y=3.
+
+To find the value of the objective function, P=8x+10y, put the coordinates for each corner point into the equation and solve. The largest solution found when doing this will be the maximum value, and thus will be the answer to the question originally posed: determining the number of scarves and sweaters the new business should make each day to maximize their profit.
+
+Corner (x, y)
+P=8(8)+10(0)=64
+The maximum value for the profit P occurs when x=5 and y=3. This means that to maximize their profit, the new business should make 5 scarves and 3 sweaters every day.
+
+Leonid Kantorovich
+
+Leonid Vitalyevich Kantorovich was born January 19, 1912, in St. Petersburg, Russia. Two major events affected young Leonid’s life: when he was five, the Russian Revolution began, making life in St. Petersburg very difficult; so much so that Leonid’s family fled to Belarus for a year. When Leonid was 10, his father died, leaving his mother to raise five children on her own.
+
+Despite the hardships, Leonid showed incredible mathematical ability at a young age. When he was only 14, he enrolled in Leningrad State University to study mathematics. Four years later, at age 18, he graduated with what would be equivalent to a Ph.D. in mathematics.
+
+Although his primary interests were in pure mathematics, in 1938 he began working on problems in economics. Supposedly, he was approached by a local plywood manufacturer with the following question: how to come up with a work schedule for eight lathes to maximize output, given the five different kinds of plywood they had at the factory. By July 1939, Leonid had come up with a solution, not only to the lathe scheduling problem but to other areas as well, such as an optimal crop rotation schedule for farmers, minimizing waste material in manufacturing, and finding optimal routes for transporting goods. The technique he discovered to solve these problems eventually became known as linear programming. He continued to use this technique for solving many other problems involving optimization, which resulted in the book The Best Use of Economic Resources, which was published in 1959. His continued work in linear programming would ultimately result in him winning the Nobel Prize of Economics in 1975.
+
+Check Your Understanding
+
+Key Terms
+
+linear programming
+
+objective function
+
+constraint
+
+Key Concepts
+
+Linear programming is a mathematical technique to solve problems involving finding maximums or minimums where a linear function is limited by various constraints.
+
+An objective function is a linear function in two or more variables that describes the quantity that needs to be maximized or minimized.
+
+In linear programming, a constraint is a restriction that affects the maximum or minimum values of an objective function.
+
+Through the creation of objective functions and restraints, a linear system can be developed and solved through linear programming.
+
+Projects
+
+Ratio and Proportion—Comparing Prices, Part 1
+
+Go to your favorite coffee shops and find out what a same sized drink costs at each. You can do something similar for pizza as well. Find the unit rate (i.e., price per ounce or price per square inch). For example, go to your favorite coffee place and find the price per units on all their large coffee drinks. Or go to your favorite pizza place and compare prices of all their extra-large pizzas (by price per square inch). Write a report on the best deals.
+
+Ratio and Proportion—Comparing Prices, Part 2
+
+Rather than comparing prices of different, but same sized drinks (or pizzas), compare unit prices of the same drinks but of different sizes. Find out what the best bargain is based on price per ounce, price per square inch, etc. For example, compare the prices of your favorite soft drink sold at a local store, but in various sizes (i.e., 12-ounce can, 16-ounce bottle, 20-ounce bottle, 1-liter bottle, and multipacks). Or go to a pizza place and find out what the best bargain is on their menu, based on price per square inch of pizza. Write a report on the best deals.
+
+Systems of Linear Inequalities—Comparing Cell Phone Plans
+
+Go to the websites of different cell phone companies and compare their plans. Write a report on “the best deals. "Best Deals” doesn’t necessarily mean “cheapest.” You will need to look at what each company provides concerning restrictions (constraints) on minutes to talk. What are the constraints on the cell phone coverage for each company? Do they cover your area of the country well? Do they cover the entire United States well, or at least areas where you will be travelling? Is this coverage 5G, or is it less? Can you add a phone easily? Can you bring your previous phone number to this plan? The possibilities of constraints affecting each plan are several. So your task is to determine which plan is best, based on not only cost but also all constraints you deem important.
+
+Chapter Review
+Algebraic Expressions
+
+Linear Equations in One Variable with Applications
+
+Linear Inequalities in One Variable with Applications
+
+Ratio and Proportions
+
+Graphing Linear Equations and Inequalities
+
+Quadratic Equations with Two Variables with Applications
+
+Functions
+
+Graphing Functions
+
+System of Linear Equations in Two Variables
+
+Systems of Linear Inequalities in Two Variables
+
+Linear Programming
+
+Chapter Test

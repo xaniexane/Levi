@@ -1,0 +1,394 @@
+# m53479
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Trigonometric Functions
+
+Trigonometric Functions
+
+Convert angle measures between degrees and radians.
+
+Recognize the triangular and circular definitions of the basic trigonometric functions.
+
+Write the basic trigonometric identities.
+
+Identify the graphs and periods of the trigonometric functions.
+
+Describe the shift of a sine or cosine graph from the equation of the function.
+
+Trigonometric functions are used to model many phenomena, including sound waves, vibrations of strings, alternating electrical current, and the motion of pendulums. In fact, almost any repetitive, or cyclical, motion can be modeled by some combination of trigonometric functions. In this section, we define the six basic trigonometric functions and look at some of the main identities involving these functions.
+
+Radian Measure
+
+To use trigonometric functions, we first must understand how to measure the angles. Although we can use both radians and degrees, radians are a more natural measurement because they are related directly to the unit circle, a circle with radius 1. The radian measure of an angle is defined as follows. Given an angle θ, let s be the length of the corresponding arc on the unit circle (). We say the angle corresponding to the arc of length 1 has radian measure 1.
+
+Since an angle of 360° corresponds to the circumference of a circle, or an arc of length 2π, we conclude that an angle with a degree measure of 360° has a radian measure of 2π. Similarly, we see that 180° is equivalent to π radians. shows the relationship between common degree and radian values.
+
+Common Angles Expressed in Degrees and Radians
+
+Degrees
+Radians
+Degrees
+Radians
+0
+0
+2π/3
+π/6
+3π/4
+π/4
+5π/6
+π/3
+π
+π/2
+Converting between Radians and Degrees
+
+Express 225° using radians.
+
+Express 5π/3 rad using degrees.
+
+Use the fact that 180° is equivalent to π radians as a conversion factor: 1=πrad180°=180°πrad.
+225°=225°·π180°=5π4 rad
+5π3 rad = 5π3·180°π=300°
+
+Express 210° using radians. Express 11π/6 rad using degrees.
+7π/6; 330°
+
+Hint
+π radians is equal to 180°.
+
+The Six Basic Trigonometric Functions
+
+Trigonometric functions allow us to use angle measures, in radians or degrees, to find the coordinates of a point on any circle—not only on a unit circle—or to find an angle given a point on a circle. They also define the relationship among the sides and angles of a triangle.
+
+To define the trigonometric functions, first consider the unit circle centered at the origin and a point P=(x,y) on the unit circle. Let θ be an angle with an initial side that lies along the positive x-axis and with a terminal side that is the line segment OP. An angle in this position is said to be in standard position (). We can then define the values of the six trigonometric functions for θ in terms of the coordinates x and y.
+
+Definition
+
+Let P=(x,y) be a point on the unit circle centered at the origin O. Let θ be an angle with an initial side along the positive x-axis and a terminal side given by the line segment OP. The trigonometric functions are then defined as
+
+If x=0,secθ and tanθ are undefined. If y=0, then cotθ and cscθ are undefined.
+
+We can see that for a point P=(x,y) on a circle of radius r with a corresponding angle θ, the coordinates x and y satisfy
+
+The values of the other trigonometric functions can be expressed in terms of x,y, and r ().
+shows the values of sine and cosine at the major angles in the first quadrant. From this table, we can determine the values of sine and cosine at the corresponding angles in the other quadrants. The values of the other trigonometric functions are calculated easily from the values of sinθ and cosθ.
+
+Values of sinθ and cosθ at Major Angles θ in the First Quadrant
+0
+Evaluating Trigonometric Functions
+
+Evaluate each of the following expressions.
+sin(2π3)
+cos(−5π6)
+tan(15π4)
+
+On the unit circle, the angle θ=2π3 corresponds to the point (−12,32). Therefore, sin(2π3)=y=32.
+
+An angle θ=−5π6 corresponds to a revolution in the negative direction, as shown. Therefore, cos(−5π6)=x=−32.
+
+An angle θ=15π4=2π+7π4. Therefore, this angle corresponds to more than one revolution, as shown. Knowing the fact that an angle of 7π4 corresponds to the point (22,−22), we can conclude that tan(15π4)=yx=−1.
+
+Evaluate cos(3π/4) and sin(−π/6).
+cos(3π/4)=−2/2;sin(−π/6)=−1/2
+
+Hint
+
+Look at angles on the unit circle.
+
+As mentioned earlier, the ratios of the side lengths of a right triangle can be expressed in terms of the trigonometric functions evaluated at either of the acute angles of the triangle. Let θ be one of the acute angles. Let A be the length of the adjacent leg, O be the length of the opposite leg, and H be the length of the hypotenuse. By inscribing the triangle into a circle of radius H, as shown in , we see that A,H, and O satisfy the following relationships with θ:
+
+Constructing a Wooden Ramp
+
+A wooden ramp is to be built with one end on the ground and the other end at the top of a short staircase. If the top of the staircase is 4 ft from the ground and the angle between the ground and the ramp is to be 10°, how long does the ramp need to be?
+
+Let x denote the length of the ramp. In the following image, we see that x needs to satisfy the equation sin(10°)=4/x. Solving this equation for x, we see that x=4/sin(10°)≈23.035 ft.
+
+A house painter wants to lean a 20-ft ladder against a house. If the angle between the base of the ladder and the ground is to be 60°, how far from the house should she place the base of the ladder?
+10 ft
+
+Hint
+
+Draw a right triangle with hypotenuse 20.
+
+Trigonometric Identities
+
+A trigonometric identity is an equation involving trigonometric functions that is true for all angles θ for which the functions are defined. We can use the identities to help us solve or simplify equations. The main trigonometric identities are listed next.
+
+Rule: Trigonometric Identities
+Reciprocal identities
+Pythagorean identities
+Addition and subtraction formulas
+Double-angle formulas
+
+Solving Trigonometric Equations
+
+For each of the following equations, use a trigonometric identity to find all solutions.
+1+cos(2θ)=cosθ
+sin(2θ)=tanθ
+
+Using the double-angle formula for cos(2θ), we see that θ is a solution of
+1+cos(2θ)=cosθ
+if and only if
+1+2cos2θ−1=cosθ,
+which is true if and only if
+2cos2θ−cosθ=0.
+To solve this equation, it is important to note that we need to factor the left-hand side and not divide both sides of the equation by cosθ. The problem with dividing by cosθ is that it is possible that cosθ is zero. In fact, if we did divide both sides of the equation by cosθ, we would miss some of the solutions of the original equation. Factoring the left-hand side of the equation, we see that θ is a solution of this equation if and only if
+cosθ(2cosθ−1)=0.
+Since cosθ=0 when
+θ=π2,π2±π,π2±2π,…,
+and cosθ=1/2 when
+θ=π3,π3±2π,…orθ=−π3,−π3±2π,…,
+we conclude that the set of solutions to this equation is
+θ=π2+nπ,θ=π3+2nπ,andθ=−π3+2nπ,n=0,±1,±2,….
+
+Using the double-angle formula for sin(2θ) and the reciprocal identity for tan(θ), the equation can be written as
+2sinθcosθ=sinθcosθ.
+To solve this equation, we multiply both sides by cosθ to eliminate the denominator, and say that if θ satisfies this equation, then θ satisfies the equation
+2sinθcos2θ−sinθ=0.
+However, we need to be a little careful here. Even if θ satisfies this new equation, it may not satisfy the original equation because, to satisfy the original equation, we would need to be able to divide both sides of the equation by cosθ. However, if cosθ=0, we cannot divide both sides of the equation by cosθ. Therefore, it is possible that we may arrive at extraneous solutions. So, at the end, it is important to check for extraneous solutions. Returning to the equation, it is important that we factor sinθ out of both terms on the left-hand side instead of dividing both sides of the equation by sinθ. Factoring the left-hand side of the equation, we can rewrite this equation as
+sinθ(2cos2θ−1)=0.
+Therefore, the solutions are given by the angles θ such that sinθ=0 or cos2θ=1/2. The solutions of the first equation are θ=0,±π,±2π,…. The solutions of the second equation are θ=π/4,(π/4)±(π/2),(π/4)±π,…. After checking for extraneous solutions, the set of solutions to the equation is
+θ=nπandθ=π4+nπ2,n=0,±1,±2,….
+
+Find all solutions to the equation cos(2θ)=sinθ.
+θ=3π2+2nπ,π6+2nπ,5π6+2nπ for n=0,±1,±2,…
+
+Hint
+
+Use the double-angle formula for cosine.
+
+Proving a Trigonometric Identity
+
+Prove the trigonometric identity 1+tan2θ=sec2θ.
+
+We start with the identity
+
+Dividing both sides of this equation by cos2θ, we obtain
+
+Since sinθ/cosθ=tanθ and 1/cosθ=secθ, we conclude that
+
+Prove the trigonometric identity 1+cot2θ=csc2θ.
+
+Hint
+
+Divide both sides of the identity sin2θ+cos2θ=1 by sin2θ.
+
+Graphs and Periods of the Trigonometric Functions
+
+We have seen that as we travel around the unit circle, the values of the trigonometric functions repeat. We can see this pattern in the graphs of the functions. Let P=(x,y) be a point on the unit circle and let θ be the corresponding angle . Since the angle θ and θ+2π correspond to the same point P, the values of the trigonometric functions at θ and at θ+2π are the same. Consequently, the trigonometric functions are periodic functions. The period of a function f is defined to be the smallest positive value p such that f(x+p)=f(x) for all values x in the domain of f. The sine, cosine, secant, and cosecant functions have a period of 2π. Since the tangent and cotangent functions repeat on an interval of length π, their period is π ().
+
+Just as with algebraic functions, we can apply transformations to trigonometric functions. In particular, consider the following function:
+
+In , the constant α causes a horizontal or phase shift. The factor B changes the period. This transformed sine function will have a period 2π/|B|. The factor A results in a vertical stretch by a factor of |A|. We say |A| is the “amplitude of f.” The constant C causes a vertical shift.
+
+Notice in that the graph of y=cosx is the graph of y=sinx shifted to the left π/2 units. Therefore, we can write cosx=sin(x+π/2). Similarly, we can view the graph of y=sinx as the graph of y=cosx shifted right π/2 units, and state that sinx=cos(x−π/2).
+
+A shifted sine curve arises naturally when graphing the number of hours of daylight in a given location as a function of the day of the year. For example, suppose a city reports that June 21 is the longest day of the year with 15.7 hours and December 21 is the shortest day of the year with 8.3 hours. It can be shown that the function
+
+is a model for the number of hours of daylight h as a function of day of the year t ().
+
+Sketching the Graph of a Transformed Sine Curve
+
+Sketch a graph of f(x)=3sin(2(x−π4))+1.
+
+This graph is a horizontal compression by a factor of 2, a phase shift to the right by π/4 units, followed by a vertical stretch by a factor of 3, and then a vertical shift by 1 unit. The period of f is π.
+
+Describe the relationship between the graph of f(x)=3sin(4x)−5 and the graph of y=sin(x).
+
+To graph f(x)=3sin(4x)−5, the graph of y=sin(x) needs to be compressed horizontally by a factor of 4, then stretched vertically by a factor of 3, then shifted down 5 units. The function f will have a period of π/2 and an amplitude of 3.
+
+Hint
+
+The graph of f can be sketched using the graph of y=sin(x) and a sequence of three transformations.
+
+Key Concepts
+
+Radian measure is defined such that the angle associated with the arc of length 1 on the unit circle has radian measure 1. An angle with a degree measure of 180° has a radian measure of π rad.
+
+For acute angles θ, the values of the trigonometric functions are defined as ratios of two sides of a right triangle in which one of the acute angles is θ.
+
+For a general angle θ, let (x,y) be a point on a circle of radius r corresponding to this angle θ. The trigonometric functions can be written as ratios involving x,y, and r.
+
+The trigonometric functions are periodic. The sine, cosine, secant, and cosecant functions have period 2π. The tangent and cotangent functions have period π.
+
+Key Equations
+f(x)=Asin(B(x−α))+C
+For the following exercises, convert each angle in degrees to radians. Write the answer as a multiple of π.
+240°
+4π3rad
+15°
+−60°
+−π3
+−225°
+330°
+11π6rad
+
+For the following exercises, convert each angle in radians to degrees.
+π2rad
+7π6rad
+210°
+11π2rad
+−3πrad
+−540°
+5π12rad
+
+Evaluate the following functional values.
+cos(4π3)
+−0.5
+tan(19π4)
+sin(−3π4)
+−22
+sec(π6)
+sin(π12)
+3−122
+cos(5π12)
+
+For the following exercises, consider triangle ABC, a right triangle with a right angle at C. a. Find the missing side of the triangle. b. Find the six trigonometric function values for the angle at A. Where necessary, simplify to a fraction or round to three decimal places.
+a=4,c=7
+
+a. b=5.7 b. sinA=47,cosA=5.77,tanA=45.7,cscA=74,secA=75.7,cotA=5.74
+a=21,c=29
+a=85.3,b=125.5
+
+a. c=151.7 b. sinA=0.5623,cosA=0.8273,tanA=0.6797,cscA=1.778,secA=1.209,cotA=1.471
+b=40,c=41
+a=84,b=13
+
+a. c=85 b. sinA=8485,cosA=1385,tanA=8413,cscA=8584,secA=8513,cotA=1384
+b=28,c=35
+
+For the following exercises, P is a point on the unit circle. a. Find the (exact) missing coordinate value of each point and b. find the values of the six trigonometric functions for the angle θ with a terminal side that passes through point P. Rationalize denominators.
+P(725,y),y>0
+
+a. y=2425 b. sinθ=2425,cosθ=725,tanθ=247,cscθ=2524,secθ=257,cotθ=724
+P(−1517,y),y<0
+P(x,73),x<0
+
+a. x=−23 b. sinθ=73,cosθ=−23,tanθ=−142,cscθ=377,secθ=−322,cotθ=−147
+P(x,−154),x>0
+
+For the following exercises, simplify each expression by writing it in terms of sines and cosines, then simplify. The final answer does not have to be in terms of sine and cosine only.
+tan2x+sinxcscx
+sec2x
+secxsinxcotx
+tan2xsec2x
+sin2x
+secx−cosx
+(1+tanθ)2−2tanθ
+sec2θ
+sinx(cscx−sinx)
+costsint+sint1+cost
+1sint(=csct)
+1+tan2α1+cot2α
+
+For the following exercises, verify that each equation is an identity.
+tanθcotθcscθ=sinθ
+sec2θtanθ=secθcscθ
+sintcsct+costsect=1
+sinxcosx+1+cosx−1sinx=0
+cotγ+tanγ=secγcscγ
+sin2β+tan2β+cos2β=sec2β
+11−sinα+11+sinα=2sec2α
+tanθ−cotθsinθcosθ=sec2θ−csc2θ
+
+For the following exercises, solve the trigonometric equations on the interval 0≤θ<2π.
+2sinθ−1=0
+{π6,5π6}
+1+cosθ=12
+2tan2θ=2
+{π4,3π4,5π4,7π4}
+4sin2θ−2=0
+3cotθ+1=0
+{2π3,5π3}
+3secθ−23=0
+2cosθsinθ=sinθ
+{0,π,π3,5π3}
+csc2θ+2cscθ+1=0
+
+For the following exercises, each graph is of the form y=AsinBx or y=AcosBx, where B>0. Write the equation of the graph.
+y=4sin(π4x)
+y=cos(2πx)
+
+For the following exercises, find a. the amplitude, b. the period, and c. the phase shift with direction for each function.
+y=sin(x−π4)
+
+a. 1 b. 2π c. π4 units to the right
+y=3cos(2x+3)
+y=−12sin(14x)
+
+a. 12 b. 8π c. No phase shift
+y=2cos(x−π3)
+y=−3sin(πx+2)
+
+a. 3 b. 2 c. 2π units to the left
+y=4cos(2x−π2)
+[T] The diameter of a wheel rolling on the ground is 40 in. If the wheel rotates through an angle of 120°, how many inches does it move? Approximate to the nearest whole inch.
+
+Approximately 42 in.
+[T] Find the length of the arc intercepted by central angle θ in a circle of radius r. Round to the nearest hundredth.
+
+a. r=12.8 cm, θ=5π6 rad b. r=4.378 cm, θ=7π6 rad c. r=0.964 cm, θ=50° d. r=8.55 cm, θ=325°
+[T] As a point P moves around a circle, the measure of the angle changes. The measure of how fast the angle is changing is called angular speed, ω, and is given by ω=θ/t, where θ is in radians and t is time. Find the angular speed for the given data. Round to the nearest thousandth.
+
+a. θ=7π4rad,t=10 sec b. θ=3π5rad,t=8 sec c. θ=2π9rad,t=1 min d. θ=23.76rad,t=14 min
+
+a. 0.550 rad/sec b. 0.236 rad/sec c. 0.698 rad/min d. 1.697 rad/min
+[T] A total of 250,000 m2 of land is needed to build a nuclear power plant. Suppose it is decided that the area on which the power plant is to be built should be circular.
+
+Find the radius of the circular land area.
+
+If the land area is to form a 45° sector of a circle instead of a whole circle, find the length of the curved side.
+[T] The area of an isosceles triangle with equal sides of length x is
+12x2sinθ,
+
+where θ is the angle formed by the two sides. Find the area of an isosceles triangle with equal sides of length 8 in. and angle θ=5π/12 rad.
+≈30.9in2
+[T] A particle travels in a circular path at a constant angular speed ω. The angular speed is modeled by the function ω=9|cos(πt−π/12)|. Determine the angular speed at t=9 sec.
+[T] An alternating current for outlets in a home has voltage given by the function
+V(t)=150cos368t,
+
+where V is the voltage in volts at time t in seconds.
+
+Find the period of the function and interpret its meaning.
+
+Determine the number of periods that occur when 1 sec has passed.
+
+a. π/184; the voltage repeats every π/184 sec b. Approximately 59 periods
+[T] The number of hours of daylight in a northeast city is modeled by the function
+
+where t is the number of days after January 1.
+
+Find the amplitude and period.
+
+Determine the number of hours of daylight on the longest day of the year.
+
+Determine the number of hours of daylight on the shortest day of the year.
+
+Determine the number of hours of daylight 90 days after January 1.
+
+Sketch the graph of the function for one period starting on January 1.
+[T] Suppose that T=50+10sin[π12(t−8)] is a mathematical model of the temperature (in degrees Fahrenheit) at t hours after midnight on a certain day of the week.
+
+Determine the amplitude and period.
+
+Find the temperature 7 hours after midnight.
+
+At what time does T=60°?
+
+Sketch the graph of T over 0≤t≤24.
+
+a. Amplitude = 10;period=24 b. 47.4°F c. 14 hours later, or 2 p.m. d.
+[T] The function H(t)=8sin(π6t) models the height H (in feet) of the tide t hours after midnight. Assume that t=0 is midnight.
+
+Find the amplitude and period.
+
+Graph the function over one period.
+
+What is the height of the tide at 4:30 a.m.?
+
+a function is periodic if it has a repeating pattern as the values of x move from left to right
+for a circular arc of length s on a circle of radius 1, the radian measure of the associated angle θ is s
+functions of an angle defined as ratios of the lengths of the sides of a right triangle
+an equation involving trigonometric functions that is true for all angles θ for which the functions in the equation are defined

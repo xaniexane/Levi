@@ -1,0 +1,801 @@
+# m54442
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Parallel Circuits
+
+Parallel Circuits
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Interpret circuit diagrams with parallel resistors
+
+Calculate equivalent resistance of resistor combinations containing series and parallel resistors
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(5) Science concepts. The student knows the nature of forces in the physical world. The student is expected to:
+(F)
+design. construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+(F)
+design. construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Circuits, as well as the following standards:
+
+(5) The student knows the nature of forces in the physical world. The student is expected to:
+
+(F)
+design, construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+(F)
+design, construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+
+Section Key Terms
+
+in parallel
+Resistors in Parallel
+
+In the previous section, we learned that resistors in series are resistors that are connected one after the other. If we instead combine resistors by connecting them next to each other, as shown in , then the resistors are said to be connected in parallel. Resistors are in parallel when both ends of each resistor are connected directly together.
+
+Note that the tops of the resistors are all connected to the same wire, so the voltage at the top of the each resistor is the same. Likewise, the bottoms of the resistors are all connected to the same wire, so the voltage at the bottom of each resistor is the same. This means that the voltage drop across each resistor is the same. In this case, the voltage drop is the voltage rating V of the battery, because the top and bottom wires connect to the positive and negative terminals of the battery, respectively.
+
+Although the voltage drop across each resistor is the same, we cannot say the same for the current running through each resistor. Thus, 
+
+ I
+ 1
+ 
+ ,
+ I
+ 2
+ 
+ ,and
+ I
+ 3
+
+ are not necessarily the same, because the resistors 
+
+ R
+ 1
+ 
+ ,
+ R
+ 2
+ 
+ ,and
+ R
+ 3
+
+ do not necessarily have the same resistance.
+
+Note that the three resistors in provide three different paths through which the current can flow. This means that the equivalent resistance for these three resistors must be less than the smallest of the three resistors. To understand this, imagine that the smallest resistor is the only path through which the current can flow. Now add on the alternate paths by connecting other resistors in parallel. Because the current has more paths to go through, the overall resistance (i.e., the equivalent resistance) will decrease. Therefore, the equivalent resistance must be less than the smallest resistance of the parallel resistors.
+
+Teacher Support
+
+Emphasize that the voltage across each parallel resistor is the same, whereas the current may differ; it will be the same if a pair of resistors has the same resistance.
+
+To find the equivalent resistance 
+
+ R
+ 
+ equiv
+
+ of the three resistors 
+
+ R
+ 1
+ 
+ ,
+ R
+ 2
+ 
+ ,and
+ R
+ 3
+
+, we apply Ohm’s law to each resistor. Because the voltage drop across each resistor is V, we obtain
+
+or
+
+We also know from conservation of charge that the three currents 
+
+ I
+ 1
+ 
+ ,
+ I
+ 2
+ 
+ ,and
+ I
+ 3
+
+ must add up to give the current I that goes through the battery. If this were not true, current would have to be mysteriously created or destroyed somewhere in the circuit, which is physically impossible. Thus, we have
+
+Inserting the expressions for 
+
+ I
+ 1
+ 
+ ,
+ I
+ 2
+ 
+ ,and
+ I
+ 3
+
+ into this equation gives
+
+or
+
+This formula is just Ohm’s law, with the factor in parentheses being the equivalent resistance.
+
+Thus, the equivalent resistance for three resistors in parallel is
+
+The same logic works for any number of resistors in parallel, so the general form of the equation that gives the equivalent resistance of N resistors connected in parallel is
+
+Find the Current through Parallel Resistors
+
+The three circuits below are equivalent. If the voltage rating of the battery is 
+
+ V
+ 
+ battery
+ 
+ =3V
+, what is the equivalent resistance of the circuit and what current runs through the circuit?
+
+Strategy
+
+The three resistors are connected in parallel and the voltage drop across them is Vbattery. Thus, we can apply the equation for the equivalent resistance of resistors in parallel, which takes the form
+
+The circuit with the equivalent resistance is shown below. Once we know the equivalent resistance, we can use Ohm’s law to find the current in the circuit.
+
+Solution
+
+Inserting the given values for the resistance into the equation for equivalent resistance gives
+
+The current through the circuit is thus
+
+Discussion
+
+Although 0.62 A flows through the entire circuit, note that this current does not flow through each resistor. However, because electric charge must be conserved in a circuit, the sum of the currents going through each branch of the circuit must add up to the current going through the battery. In other words, we cannot magically create charge somewhere in the circuit and add this new charge to the current. Let’s check this reasoning by using Ohm’s law to find the current through each resistor.
+
+As expected, these currents add up to give 0.62 A, which is the total current found going through the equivalent resistor. Also, note that the smallest resistor has the largest current flowing through it, and vice versa.
+
+Reasoning with Parallel Resistors
+
+Without doing any calculation, what is the equivalent resistance of three identical resistors R in parallel?
+
+Strategy
+
+Three identical resistors R in parallel make three identical paths through which the current can flow. Thus, it is three times easier for the current to flow through these resistors than to flow through a single one of them.
+
+Solution
+
+If it is three times easier to flow through three identical resistors R than to flow through a single one of them, the equivalent resistance must be three times less: R/3.
+
+Discussion
+
+Let’s check our reasoning by calculating the equivalent resistance of three identical resistors R in parallel. The equation for the equivalent resistance of resistors in parallel gives
+
+Thus, our reasoning was correct. In general, when more paths are available through which the current can flow, the equivalent resistance decreases. For example, if we have identical resistors R in parallel, the equivalent resistance would be R/10.
+
+Practice Problems
+
+Three resistors, 10, 20, and 30 Ω, are connected in parallel. What is the equivalent resistance?
+
+The equivalent resistance is 5.5 Ω
+
+The equivalent resistance is 60 Ω
+
+The equivalent resistance is 6 × 103 Ω
+
+The equivalent resistance is 6 × 104 Ω
+
+Resistors in Parallel and in Series
+
+More complex connections of resistors are sometimes just combinations of series and parallel. Combinations of series and parallel resistors can be reduced to a single equivalent resistance by using the technique illustrated in . Various parts are identified as either series or parallel, reduced to their equivalents, and further reduced until a single resistance is left. The process is more time consuming than difficult.
+
+Teacher Support
+
+Students may be tempted to immediately add 
+
+ R
+ 1
+
+ and 
+
+ R
+ 7
+
+ together because they appear to be in series. Point out that 
+
+ R
+ 1
+
+ is in series with the parallel combination of 
+
+ R
+ 7
+
+ and all the resistors to the right of 
+
+ R
+ 7
+
+ . Thus, the equivalent resistance of this parallel combination must be found before it can be added to 
+
+ R
+ 1
+
+ .
+
+Teacher Support
+
+Work through this example with students to ensure that they understand the reduction that occurs at each step.
+
+Let’s work through the four steps in to reduce the seven resistors to a single equivalent resistor. To avoid distracting algebra, we’ll assume each resistor is 10 
+ Ω
+ . In step 1, we reduce the two sets of parallel resistors circled by the blue dashed loop. The upper set has three resistors in parallel and will be reduced to a single equivalent resistor 
+
+ R
+ 
+ P1
+
+ . The lower set has two resistors in parallel and will be reduced to a single equivalent resistor 
+
+ R
+ 
+ P2
+
+ . Using the equation for the equivalent resistance of resistors in parallel, we obtain
+
+These two equivalent resistances are encircled by the red dashed loop following step 1. They are in series, so we can use the equation for the equivalent resistance of resistors in series to reduce them to a single equivalent resistance 
+
+ R
+ 
+ S1
+
+ . This is done in step 2, with the result being
+
+The equivalent resistor 
+
+ R
+ 
+ S1
+
+ appears in the green dashed loop following step 2. This resistor is in parallel with resistor 
+
+ R
+ 7
+
+, so the pair can be replaced by the equivalent resistor 
+
+ R
+ 
+ P3
+
+, which is given by
+
+This is done in step 3. The resistor 
+
+ R
+ 
+ P3
+
+ is in series with the resistor 
+
+ R
+ 1
+
+, as shown in the purple dashed loop following step 3. These two resistors are combined in the final step to form the final equivalent resistor 
+
+ R
+ 
+ equiv
+
+, which is
+
+Thus, the entire combination of seven resistors may be replaced by a single resistor with a resistance of about 14.5 
+ Ω
+ .
+
+That was a lot of work, and you might be asking why we do it. It’s important for us to know the equivalent resistance of the entire circuit so that we can calculate the current flowing through the circuit. Ohm’s law tells us that the current flowing through a circuit depends on the resistance of the circuit and the voltage across the circuit. But to know the current, we must first know the equivalent resistance.
+
+Here is a general approach to find the equivalent resistor for any arbitrary combination of resistors:
+
+Identify a group of resistors that are only in parallel or only in series.
+
+For resistors in series, use the equation for the equivalent resistance of resistors in series to reduce them to a single equivalent resistance. For resistors in parallel, use the equation for the equivalent resistance of resistors in parallel to reduce them to a single equivalent resistance.
+
+Draw a new circuit diagram with the resistors from step 1 replaced by their equivalent resistor.
+
+If more than one resistor remains in the circuit, return to step 1 and repeat. Otherwise, you are finished.
+
+Robot
+
+Robots have captured our collective imagination for over a century. Now, this dream of creating clever machines to do our dirty work, or sometimes just to keep us company, is becoming a reality. Robotics has become a huge field of research and development, with some technology already being commercialized. Think of the small autonomous vacuum cleaners, for example.
+shows just a few of the multitude of different forms robots can take. The most advanced humanoid robots can walk, pour drinks, even dance (albeit not very gracefully). Other robots are bio-inspired, such as the dogbot shown in the middle photograph of . This robot can carry hundreds of pounds of load over rough terrain. The photograph on the right in shows the inner workings of an M-block, developed by the Massachusetts Institute of Technology. These simple-looking blocks contain inertial wheels and electromagnets that allow them to spin and flip into the air and snap together in a variety of shapes. By communicating wirelessly between themselves, they self-assemble into a variety of shapes, such as desks, chairs, and someday maybe even buildings.
+
+All robots involve an immense amount of physics and engineering. The simple act of pouring a drink has only recently been mastered by robots, after over 30 years of research and development! The balance and timing that we humans take for granted is in fact a very tricky act to follow, requiring excellent balance, dexterity, and feedback. To master this requires sensors to detect balance, computing power to analyze the data and communicate the appropriate compensating actions, and joints and actuators to implement the required actions.
+
+In addition to sensing gravity or acceleration, robots can contain multiple different sensors to detect light, sound, temperature, smell, taste, etc. These devices are all based on the physical principles that you are studying in this text. For example, the optics used for robotic vision are similar to those used in your digital cameras: pixelated semiconducting detectors in which light is converted into electrical signals. To detect temperature, simple thermistors may be used, which are resistors whose resistance changes depending on temperature.
+
+Building a robot today is much less arduous than it was a few years ago. Numerous companies now offer kits for building robots. These range in complexity something suitable for elementary school children to something that would challenge the best professional engineers. If interested, you may find these easily on the Internet and start making your own robot today.
+
+Resistors in Parallel
+
+This video shows a lecturer discussing a simple circuit with a battery and a pair of resistors in parallel. He emphasizes that electrons flow in the direction opposite to that of the positive current and also makes use of the fact that the voltage is the same at all points on an ideal wire. The derivation is quite similar to what is done in this text, but the lecturer goes through it well, explaining each step.
+
+True or false—In a circuit diagram, we can assume that the voltage is the same at every point in a given wire.
+
+false
+
+true
+
+Resistors in Series and in Parallel
+
+This video shows how to calculate the equivalent resistance of a circuit containing resistors in parallel and in series. The lecturer uses the same approach as outlined above for finding the equivalent resistance.
+
+Imagine connected N identical resistors in parallel. Each resistor has a resistance of R. What is the equivalent resistance for this group of parallel resistors?
+
+The equivalent resistance is (R)N.
+
+The equivalent resistance is NR.
+
+The equivalent resistance is 
+
+ R
+ N
+ 
+.
+
+The equivalent resistance is 
+
+ N
+ R
+ 
+.
+
+Find the Current through a Complex Resistor Circuit
+
+The battery in the circuit below has a voltage rating of 10 V. What current flows through the circuit and in what direction?
+
+Strategy
+
+Apply the Strategy for finding equivalent resistance to replace all the resistors with a single equivalent resistance, then use Ohm’s law to find the current through the equivalent resistor.
+
+Solution
+
+The resistor combination 
+
+ R
+ 4
+
+ and 
+
+ R
+ 5
+
+ can be reduced to an equivalent resistance of
+
+Replacing 
+
+ R
+ 4
+
+ and 
+
+ R
+ 5
+
+ with this equivalent resistance gives the circuit below.
+
+We now replace the two upper resistors 
+
+ R
+ 2
+
+ and 
+
+ R
+ 3
+
+ by the equivalent resistor 
+
+ R
+ 
+ S1
+
+ and the two lower resistors 
+
+ R
+ 
+ P1
+
+ and 
+
+ R
+ 6
+
+ by their equivalent resistor 
+
+ R
+ 
+ S2
+
+ . These resistors are in series, so we add them together to find the equivalent resistance.
+
+Replacing the relevant resistors with their equivalent resistor gives the circuit below.
+
+Now replace the two resistors 
+
+ R
+ 
+ S1
+ 
+  and 
+ R
+ 
+ S2
+
+, which are in parallel, with their equivalent resistor 
+
+ R
+ 
+ P2
+
+ . The resistance of 
+
+ R
+ 
+ P2
+
+ is
+
+Updating the circuit diagram by replacing 
+
+ R
+ 
+ S1
+ 
+  and 
+ R
+ 
+ S2
+
+ with this equivalent resistance gives the circuit below.
+
+Finally, we combine resistors 
+
+ R
+ 1
+ 
+  and 
+ R
+ 
+ P2
+
+, which are in series. The equivalent resistance is 
+
+ R
+ 
+ S3
+ 
+ =
+ R
+ 1
+ 
+ +
+ R
+ 
+ P2
+ 
+ =75Ω+29.09Ω=104.09Ω.
+ The final circuit is shown below.
+
+We now use Ohm’s law to find the current through the circuit.
+
+The current goes from the positive terminal of the battery to the negative terminal of the battery, so it flows clockwise in this circuit.
+
+Discussion
+
+This calculation may seem rather long, but with a little practice, you can combine some steps. Note also that extra significant digits were carried through the calculation. Only at the end was the final result rounded to two significant digits.
+
+Strange-Looking Circuit Diagrams
+
+Occasionally, you may encounter circuit diagrams that are not drawn very neatly, such as the diagram shown below. This circuit diagram looks more like how a real circuit might appear on the lab bench. What is the equivalent resistance for the resistors in this diagram, assuming each resistor is 10 
+ Ω
+ and the voltage rating of the battery is 12 V.
+
+Strategy
+
+Let’s redraw this circuit diagram to make it clearer. Then we’ll apply the Strategy outlined above to calculate the equivalent resistance.
+
+Solution
+
+To redraw the diagram, consider the figure below. In the upper circuit, the blue resistors constitute a path from the positive terminal of the battery to the negative terminal. In parallel with this circuit are the red resistors, which constitute another path from the positive to negative terminal of the battery. The blue and red paths are shown more cleanly drawn in the lower circuit diagram. Note that, in both the upper and lower circuit diagrams, the blue and red paths connect the positive terminal of the battery to the negative terminal of the battery.
+
+Now it is easier to see that 
+
+ R
+ 1
+ 
+  and 
+ R
+ 2
+
+ are in parallel, and the parallel combination is in series with 
+
+ R
+ 4
+
+ . This combination in turn is in parallel with the series combination of 
+
+ R
+ 3
+ 
+  and 
+ R
+ 5
+
+ . First, we calculate the blue branch, which contains 
+
+ R
+ 1
+ 
+ ,
+ R
+ 2
+ 
+ , and 
+ R
+ 4
+
+ . The equivalent resistance is
+
+where we show the contribution from the parallel combination of resistors and from the series combination of resistors. We now calculate the equivalent resistance of the red branch, which is
+
+Inserting these equivalent resistors into the circuit gives the circuit below.
+
+These two resistors are in parallel, so they can be replaced by a single equivalent resistor with a resistance of
+
+The final equivalent circuit is show below.
+
+Discussion
+
+Finding the equivalent resistance was easier with a clear circuit diagram. This is why we try to make clear circuit diagrams, where the resistors in parallel are lined up parallel to each other and at the same horizontal position on the diagram.
+
+We can now use Ohm’s law to find the current going through each branch to this circuit. Consider the circuit diagram with 
+
+ R
+ 
+ blue
+
+ and 
+
+ R
+ 
+ red
+
+ . The voltage across each of these branches is 12 V (i.e., the voltage rating of the battery). The current in the blue branch is
+
+The current across the red branch is
+
+The current going through the battery must be the sum of these two currents (can you see why?), or 1.4 A.
+
+Practice Problems
+
+What is the formula for the equivalent resistance of two parallel resistors with resistance R1 and R2?
+
+Equivalent resistance of two parallel resistors 
+
+ R
+ 
+ eqv
+
+ =
+ R
+ 1
+ 
+ +
+ R
+ 2
+
+Equivalent resistance of two parallel resistors 
+
+ R
+ 
+ eqv
+
+ =
+ R
+ 1
+ 
+ ×
+ R
+ 2
+
+Equivalent resistance of two parallel resistors 
+
+ R
+ 
+ eqv
+
+ =
+ R
+ 1
+ 
+ -
+ R
+ 2
+
+Equivalent resistance of two parallel resistors 
+
+ R
+ 
+ eqv
+
+ =
+ 1
+ 
+ 1/
+ R
+ 1
+ 
+ +1/
+ R
+ 2
+
+What is the equivalent resistance for the two resistors shown?
+
+The equivalent resistance is 20 Ω
+
+The equivalent resistance is 21 Ω
+
+The equivalent resistance is 90 Ω
+
+The equivalent resistance is 1,925 Ω
+
+Check Your Understanding
+
+The voltage drop across parallel resistors is ________.
+
+the same for all resistors
+
+greater for the larger resistors
+
+less for the larger resistors
+
+greater for the smaller resistors
+
+Consider a circuit of parallel resistors. The smallest resistor is 25 Ω . What is the upper limit of the equivalent resistance?
+
+The upper limit of the equivalent resistance is 2.5 Ω.
+
+The upper limit of the equivalent resistance is 25 Ω.
+
+The upper limit of the equivalent resistance is 100 Ω.
+
+There is no upper limit.
+
+Section Summary
+
+The equivalent resistance of a group of N identical resistors R connected in parallel is R/N.
+
+Connecting resistors in parallel provides more paths for the current to go through, so the equivalent resistance is always less than the smallest resistance of the parallel resistors.
+
+The same voltage drop occurs across all resistors in parallel; however, the current through each resistor can differ.
+
+Key Equations
+
+R
+ 
+ equiv
+ 
+ =
+ 1
+ 
+ 1/
+ 
+ R
+ 1
+
+ +1/
+ 
+ R
+ 2
+
+ +⋯+1/
+ 
+ R
+ N
+Concept Items
+
+Critical Thinking
+
+What is the equivalent resistance of the circuit shown below?
+
+The equivalent resistance of the circuit 14 Ω.
+
+The equivalent resistance of the circuit 16.7 Ω.
+
+The equivalent resistance of the circuit 140 Ω.
+
+The equivalent resistance of the circuit 195 Ω.
+
+Problems
+
+What is the equivalent resistance of this circuit?
+
+The equivalent resistance of the circuit is 32.7 Ω.
+
+The equivalent resistance of the circuit is 100 Ω.
+
+The equivalent resistance of the circuit is 327 Ω.
+
+The equivalent resistance of the circuit is 450 Ω.
+
+What is the equivalent resistance of the circuit shown below?
+
+The equivalent resistance is 25 Ω.
+
+The equivalent resistance is 50 Ω.
+
+The equivalent resistance is 75 Ω.
+
+The equivalent resistance is 100 Ω.
+
+Test Prep Multiple Choice
+
+A 10-Ω resistor is connected in parallel to another resistor R . The equivalent resistance of the pair is 8 Ω. What is the resistance R?
+
+10 Ω
+
+20 Ω
+
+30 Ω
+
+40 Ω
+
+Are the resistors shown connected in parallel or in series? Explain.
+
+The resistors are connected in parallel because the same current flows through all three resistors.
+
+The resistors are connected in parallel because different current flows through all three resistors.
+
+The resistors are connected in series because the same current flows through all three resistors.
+
+The resistors are connected in series because different current flows through all three resistors.
+
+Test Prep Short Answer
+
+Ten 100-Ω resistors are connected in series. How can you increase the total resistance of the circuit by about 40 percent?
+
+Adding two 10-Ω resistors increases the total resistance of the circuit by about 40 percent.
+
+Removing two 10-Ω resistors increases the total resistance of the circuit by about 40 percent.
+
+Adding four 10-Ω resistors increases the total resistance of the circuit by about 40 percent.
+
+Removing four 10-Ω resistors increases the total resistance of the circuit by about 40 percent.
+
+In the circuit shown, through which resistor(s) does the most current flow? Through which does the least flow? Explain.
+
+The most current flows through the 15-Ω resistor because all the current must pass through this resistor.
+
+The most current flows through the 20-Ω resistor because all the current must pass through this resistor.
+
+The most current flows through the 25-Ω resistor because it is the highest resistance.
+
+The same current flows through the all the resistor because all the current must pass through each of the resistors.
+
+Test Prep Extended Response
+
+when a group of resistors are connected side by side, with the top ends of the resistors connected together by a wire and the bottom ends connected together by a different wire

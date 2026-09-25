@@ -1,0 +1,64 @@
+# m00042
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+A while loop runs a set of statements, known as the loop body, while a given condition, known as the loop expression, is true.
+
+A for loop can be used to iterate over elements of a container object.
+
+A range() function generates a sequence of integers between the two numbers given a step size.
+
+A nested loop has one or more loops within the body of another loop.
+
+A break statement is used within a for or a while loop to allow the program execution to exit the loop once a given condition is triggered.
+
+A continue statement allows for skipping the execution of the remainder of the loop without exiting the loop entirely.
+
+A loop else statement runs after the loop's execution is completed without being interrupted by a break statement.
+
+At this point, you should be able to write programs with loop constructs. The programming practice below ties together most topics presented in the chapter.
+
+Chapter 5 reference.
+
+Function
+range(end)
+
+range(start, end)
+Generates a sequence beginning at start until end with step size of 1.
+Generates a sequence beginning at start until end with step size of 1.
+range(start, end, s)
+Generates a sequence beginning at start until end with the step size of s.
+Generates a sequence beginning at start until end with the step size of s.
+while loop
+for loop
+Nested while loop
+Nested while loop
+break statement
+continue statement
+Loop else statement
+Loop else statement
+# initialization
+ for loop_expression:
+   # loop body
+   if break_condition:
+     break
+   # remaining body of loop
+ else:
+   # loop else statement
+ 
+ # statements after the loop
+Prime numbers
+
+Write a program that takes in a positive integer number (N) and prints out the first N prime numbers on separate lines.
+
+Note: A prime number is a number that is not divisible by any positive number larger than 1. To check whether a number is prime, the condition of number % i != 0 can be checked for i greater than 1 and less than number.
+
+Ex: if N = 6, the output is:

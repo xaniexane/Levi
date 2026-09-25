@@ -1,0 +1,609 @@
+# m79604
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Measures of the Center of the Data
+
+Measures of the Center of the Data
+
+The center of a data set is also a way of describing location.
+The two most widely used measures of the center of the data are the mean (average) and the median. To calculate the mean weight of 50 people, add the 50 weights together and divide by 50. To find the median weight of the 50 people, order the data and find the number that splits the data into two equal parts. The median is generally a better measure of the center when there are extreme values or outliers because it is not affected by the precise numerical values of the outliers. The mean is the most common measure of the center.
+
+NOTE
+
+The words mean and average are often used interchangeably. The substitution of one word for the other is common practice. The technical term is arithmetic mean and average is technically a center location. However, in practice among non statisticians, average is commonly accepted for arithmetic mean.
+
+When each value in the data set is not unique, the mean can be calculated by multiplying each distinct value by its frequency and then dividing the sum by the total number of data values. The letter used to represent the sample mean is an x with a bar over it (pronounced “x bar”): x. The sample mean is a statistic.
+
+The Greek letter μ (pronounced "mew") represents the population mean. The population mean is a parameter. One of the requirements for the sample mean to be a good estimate of the population mean is for the sample taken to be truly random.
+
+To see that both ways of calculating the mean are the same, consider the following sample:
+1, 1, 1, 2, 2, 3, 4, 4, 4, 4, 4
+
+In the second example, the frequencies are 3(1) + 2(2) + 1(3) + 5(4).
+
+You can quickly find the location of the median by using the expression 
+
+n
++
+1
+
+2
+
+.
+
+The letter n is the total number of data values in the sample. As discussed earlier, if n is an odd number, the median is the middle value of the ordered data (ordered smallest to largest). If n is an even number, the median is equal to the two middle values added together and divided by two after the data have been ordered. For example, if the total number of data values is 97, then 
+
+n
++
+1
+
+2
+
+=
+
+97
++
+1
+
+2
+
+ = 49. The median is the 49th value in the ordered data. If the total number of data values is 100, then 
+
+n
++
+1
+
+2
+
+=
+
+100
++
+1
+
+2
+
+ = 50.5. The median occurs midway between the 50th and 51st values. The location of the median and the value of the median are not the same. The uppercase letter M is often used to represent the median. The next example illustrates the location of the median and the value of the median.
+
+Data indicating the number of months a patient with a specific disease lives after taking a new antibody drug are as follows (smallest to largest):
+3, 4, 8, 8, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 21, 22, 22, 24, 24, 25, 26, 26, 27, 27, 29, 29, 31, 32, 33, 33, 34, 34, 35, 37, 40, 44, 44, 47
+Calculate the mean and the median.
+
+The calculation for the mean is
+x
+ ¯
+ 
+ =[3+4+(8)(2)+10+11+12+13+14+(15)(2)+(16)(2)+(17)(2)+18+21+(22)(2)+(24)(2)+25+(26)(2)
+
+ +(27)(2)+(29)(2)+31+32+(33)(2)+(34)(2)+35+37+40+(44)(2)+47]/40=23.6.
+
+To find the median, M, first use the formula for the location. The location is
+
+n
++
+1
+
+2
+
+=
+
+40
++
+1
+
+2
+
+=
+20.5.
+
+Start from the smallest value and count up; the median is located between the 20th and 21st values (the two 24s):
+3, 4, 8, 8, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 21, 22, 22, 24, 24, 25, 26, 26, 27, 27, 29, 29, 31, 32, 33, 33, 34, 34, 35, 37, 40, 44, 44, 47
+M
+=
+
+24
++
+24
+
+2
+
+=
+24
+
+To find the mean and the median:
+
+Clear list L1. Pres STAT 4:ClrList. Enter 2nd 1 for list L1. Press ENTER.
+
+Enter data into the list editor. Press STAT 1:EDIT.
+
+Put the data values into list L1.
+
+Press STAT and arrow to CALC. Press 1:1-VarStats. Press 2nd 1 for L1 and then ENTER.
+
+Press the down and up arrow keys to scroll.
+x
+ ¯
+ 
+ = 23.6, M = 24
+
+Try It
+
+The following data show the number of months patients typically wait on a transplant list before getting surgery. The data are ordered from smallest to largest. Calculate the mean and median.
+
+3, 4, 5, 7, 7, 7, 7, 8, 8, 9, 9, 10, 10, 10, 10, 10, 11, 12, 12, 13, 14, 14, 15, 15, 17, 17, 18, 19, 19, 19, 21, 21, 22, 22, 23, 24, 24, 24, 24
+
+Mean: 3 + 4 + 5 + 7 + 7 + 7 + 7 + 8 + 8 + 9 + 9 + 10 + 10 + 10 + 10 + 10 + 11 + 12 + 12 + 13 + 14 + 14 + 15 + 15 + 17 + 17 + 18 + 19 + 19 + 19 + 21 + 21 + 22 + 22 + 23 + 24 + 24 + 24 = 544
+
+ 544
+
+ 39
+
+  = 13.95
+
+Median: Starting at the smallest value, the median is the 20th term, which is 13.
+
+Suppose that in a small town of 50 people, one person earns $5,000,000 per year and the other 49 each earn $30,000. Which is the better measure of the center: the mean or the median?
+x
+ ¯
+ 
+ =
+ 
+ 5,000,000+49(30,000)
+
+ 50
+
+ =129,400
+M = 30,000
+
+There are 49 people who earn $30,000 and one person who earns $5,000,000.
+
+The median is a better measure of the center than the mean because 49 of the values are 30,000 and one is 5,000,000. The 5,000,000 is an outlier. The 30,000 gives us a better sense of the middle of the data.
+
+Try It
+
+In a sample of 60 households, one house is worth $2,500,000. Half of the rest are worth $280,000, and all the others are worth $315,000. Which is the better measure of the center: the mean or the median?
+
+The median is the better measure of the “center” than the mean because 59 of the values are $280,000 and one is $2,500,000. The $2,500,000 is an outlier. Either $280,000 or $315,000 gives us a better sense of the middle of the data.
+
+Another measure of the center is the mode. The mode is the most frequent value. There can be more than one mode in a data set as long as those values have the same frequency and that frequency is the highest. A data set with two modes is called bimodal.
+
+Statistics exam scores for 20 students are as follows:
+
+50, 53, 59, 59, 63, 63, 72, 72, 72, 72, 72, 76, 78, 81, 83, 84, 84, 84, 90, 93
+
+Find the mode.
+
+The most frequent score is 72, which occurs five times. Mode = 72.
+
+Try It
+
+The number of books checked out from the library by 25 students are as follows:
+
+0, 0, 0, 1, 2, 3, 3, 4, 4, 5, 5, 7, 7, 7, 7, 8, 8, 8, 9, 10, 10, 11, 11, 12, 12
+Find the mode.
+
+The most frequent number of books is 7, which occurs four times. Mode = 7.
+
+Five real estate exam scores are 430, 430, 480, 480, 495. The data set is bimodal because the scores 430 and 480 each occur twice.
+
+When is the mode the best measure of the center? Consider a weight loss program that advertises a mean weight loss of six pounds the first week of the program. The mode might indicate that most people lose two pounds the first week, making the program less appealing.
+
+NOTE
+
+The mode can be calculated for qualitative data as well as for quantitative data. For example, if the data set is red, red, red, green, green, yellow, purple, black, blue, the mode is red.
+
+Statistical software will easily calculate the mean, the median, and the mode. Some graphing calculators can also make these calculations. In the real world, people make these calculations using software.
+
+Try It
+
+Five credit scores are 680, 680, 700, 720, 720. The data set is bimodal because the scores 680 and 720 each occur twice. Consider the annual earnings of workers at a factory. The mode is $25,000 and occurs 150 times out of 301. The median is $50,000, and the mean is $47,500. What would be the best measure of the center?
+
+Because $25,000 occurs nearly half the time, the mode would be the best measure of the center because the median and mean don’t represent what most people make at the factory.
+
+The Law of Large Numbers and the Mean
+
+The Law of Large Numbers says that if you take samples of larger and larger size from any population, then the mean x¯ of the sample is very likely to get closer and closer to µ. This law is discussed in more detail later in the text.
+
+Sampling Distributions and Statistic of a Sampling Distribution
+
+You can think of a sampling distribution as a relative frequency distribution with a great many samples. See Chapter 1: Sampling and Data for a review of relative frequency. Suppose 30 randomly selected students were asked the number of movies they watched the previous week. The results are in the relative frequency table shown below.
+
+Number of Movies
+Relative Frequency
+5
+ 
+ 30
+15
+ 
+ 30
+6
+ 
+ 30
+3
+ 
+ 30
+A relative frequency distribution includes the relative frequencies of a number of samples.
+
+Recall that a statistic is a number calculated from a sample. Statistic examples include the mean, the median, and the mode as well as others. The sample mean x¯ is an example of a statistic that estimates the population mean μ.
+
+Calculating the Mean of Grouped Frequency Tables
+
+When only grouped data is available, you do not know the individual data values (we know only intervals and interval frequencies); therefore, you cannot compute an exact mean for the data set. What we must do is estimate the actual mean by calculating the mean of a frequency table. A frequency table is a data representation in which grouped data is displayed along with the corresponding frequencies. To calculate the mean from a grouped frequency table, we can apply the basic definition of mean: mean = 
+ 
+ data sum
+ 
+ number of data values
+
+.
+ 
+ We simply need to modify the definition to fit within the restrictions of a frequency table.
+
+Since we do not know the individual data values, we can instead find the midpoint of each interval. The midpoint is 
+
+ lower boundary+upper boundary
+ 
+ 2
+
+. We can now modify the mean definition to be Mean of Frequency Table=
+
+ ∑ 
+ fm
+
+ ∑ f
+
+,
+ where f = the frequency of the interval, m = the midpoint of the interval, and sigma (∑) is read as "sigma" and means to sum up. So this formula says that we will sum the products of each midpoint and the corresponding frequency and divide by the sum of all of the frequencies.
+
+A frequency table displaying Professor Blount’s last statistic test is shown. Find the best estimate of the class mean.
+
+Grade Interval
+Number of Students
+50–56.5
+1
+56.5–62.5
+0
+62.5–68.5
+4
+68.5–74.5
+4
+74.5–80.5
+2
+80.5–86.5
+3
+86.5–92.5
+4
+92.5–98.5
+1
+Find the midpoints for all intervals.
+
+Grade Interval
+Midpoint
+50–56.5
+53.25
+56.5–62.5
+59.5
+62.5–68.5
+65.5
+68.5–74.5
+71.5
+74.5–80.5
+77.5
+80.5–86.5
+83.5
+86.5–92.5
+89.5
+92.5–98.5
+95.5
+Calculate the sum of the product of each interval frequency and midpoint.
+
+ ∑
+ ​
+ 
+ fm
+
+ 53.25(1)+59.5(0)+65.5(4)+71.5(4)+77.5(2)+83.5(3)+89.5(4)+95.5(1)=1460.25
+μ=
+
+ ∑ 
+ fm
+
+ ∑ f
+
+ =
+ 
+ 1460.25
+
+ 19
+
+ =76.86
+
+Try It
+
+Maris conducted a study on the effect that playing video games has on memory recall. As part of her study, she compiled the following data:
+
+Hours Teenagers Spend on Video Games
+Number of Teenagers
+0–3.5
+3
+3.5–7.5
+7
+7.5–11.5
+12
+11.5–15.5
+7
+15.5–19.5
+9
+What is the best estimate for the mean number of hours spent playing video games?
+
+Find the midpoint of each interval, multiply by the corresponding number of teenagers, add the results and then divide by the total number of teenagers
+The midpoints are 1.75, 5.5, 9.5, 13.5,17.5.
+Mean = (1.75)(3) + (5.5)(7) + (9.5)(12) + (13.5)(7) + (17.5)(9) = 409.75
+
+References
+
+CIA World Factbook. (n.d.). Obesity  adult prevalence rate. Available at http://www.indexmundi.com/g/r.aspx?t=50&v=2228&l=en
+
+World Bank Group. (n.d.). Retrieved from http://www.worldbank.org
+
+Chapter Review
+
+The mean and the median can be calculated to help you find the center of a data set. The mean is the best estimate for the actual data set, but the median is the best measurement when a data set contains several outliers or extreme values. The mode will tell you the most frequently occurring datum (or data) in your data set. The mean, median, and mode are extremely helpful when you need to analyze your data, but if your data set consists of ranges that lack specific values, the mean may seem impossible to calculate. However, the mean can be approximated if you add the lower boundary with the upper boundary and divide by two to find the midpoint of each interval. Multiply each midpoint by the number of values found in the corresponding range. Divide the sum of these values by the total number of data values in the set.
+
+Formula Review
+μ=
+
+ ∑ 
+ fm
+
+ ∑ f
+
+ where f = interval frequencies and m = interval midpoints.
+
+Find the mean for the following frequency tables:
+Grade Frequency
+
+49.5–59.52
+59.5–69.53
+69.5–79.58
+79.5–89.512
+89.5–99.55
+
+Grade
+Frequency
+49.5–59.5
+2
+59.5–69.5
+3
+69.5–79.5
+8
+79.5–89.5
+12
+89.5–99.5
+Daily Low Temperature
+Frequency
+
+49.5–59.553
+59.5–69.532
+69.5–79.515
+79.5–89.51
+89.5–99.50
+
+Daily Low Temperature
+Frequency
+49.5–59.5
+53
+59.5–69.5
+32
+69.5–79.5
+15
+79.5–89.5
+1
+89.5–99.5
+Points per Game
+Frequency
+
+49.5–59.514
+59.5–69.532
+69.5–79.515
+79.5–89.523
+89.5–99.52
+
+Points per Game
+Frequency
+49.5–59.5
+14
+59.5–69.5
+32
+69.5–79.5
+15
+79.5–89.5
+23
+89.5–99.5
+Use the following information to answer the next three exercises: The following data show the lengths of boats moored in a marina. The data are ordered from smallest to largest:
+16, 17, 19, 20, 20, 21, 23, 24, 25, 25, 25, 26, 26, 27, 27, 27, 28, 29, 30, 32, 33, 33, 34, 35, 37, 39, 40
+
+Calculate the mean.
+
+Mean: 16 + 17 + 19 + 20 + 20 + 21 + 23 + 24 + 25 + 25 + 25 + 26 + 26 + 27 + 27 + 27 + 28 + 29 + 30 + 32 + 33 + 33 + 34 + 35 + 37 + 39 + 40 = 738;
+738
+ 27
+ = 27.33
+
+Identify the median.
+
+Identify the mode.
+
+The most frequent lengths are 25 and 27, which occur three times. Mode = 25, 27
+Use the following information to answer the next three exercises: Sixty-five randomly selected car salespersons were asked the number of cars they generally sell in one week. Fourteen people answered that they generally sell three cars, 19 generally sell four cars, 12 generally sell five cars, nine generally sell six cars, and 11 generally sell seven cars. Calculate the following.
+
+sample mean = 
+
+ x
+
+ = ________
+
+median = ________
+
+4
+
+mode = ________
+
+Homework
+
+Scientists are studying a particular disease. They found that countries that have the highest rates of people who have ever been diagnosed with this disease range from 11.4 percent to 74.6 percent.
+
+Percentage of Population Diagnosed
+Number of Countries
+11.4–20.45
+29
+20.45–29.45
+13
+29.45–38.45
+4
+38.45–47.45
+0
+47.45–56.45
+2
+56.45–65.45
+1
+65.45–74.45
+0
+74.45–83.45
+1
+What is the best estimate of the average percentage affected by the disease for these countries?
+
+The United States has an average disease rate of 33.9 percent. Is this rate above average or below?
+
+How does the United States compare to other countries?
+gives the percentage of children under age five have been diagnosed with a medical condition. What is the best estimate for the mean percentage of children with the condition?
+
+Percentage of Children with the Condition
+Number of Countries
+16–21.45
+23
+21.45–26.9
+4
+26.9–32.35
+9
+32.35–37.8
+7
+37.8–43.25
+6
+43.25–48.7
+1
+the mean percentage, 
+
+ x
+ ¯
+ 
+ =
+ 
+ 1,328.65
+
+ 50
+
+ =26.75
+
+Bringing It Together
+
+Javier and Ercilia are supervisors at a shopping mall. Each was given the task of estimating the mean distance that shoppers live from the mall. They each randomly surveyed 100 shoppers. The samples yielded the following information.
+
+Javier
+x
+6.0 miles
+s
+4.0 miles
+7.0 miles
+How can you determine which survey was correct?
+
+Explain what the difference in the results of the surveys implies about the data.
+
+If the two histograms depict the distribution of values for each supervisor, which one depicts Ercilia’s sample? How do you know?
+
+If the two box plots depict the distribution of values for each supervisor, which one depicts Ercilia’s sample? How do you know?
+Use the following information to answer the next three exercises: We are interested in the number of years students in a particular elementary statistics class have lived in California. The information in the following table is from the entire section.
+
+Number of Years
+Frequency
+Number of Years
+Frequency
+7
+1
+22
+1
+14
+3
+23
+1
+15
+1
+26
+1
+18
+1
+40
+2
+19
+4
+42
+2
+20
+3
+Total = 20
+What is the IQR?
+
+8
+
+11
+
+15
+
+35
+
+a
+
+What is the mode?
+
+19
+
+19.5
+
+14 and 20
+
+22.65
+
+Is this a sample or the entire population?
+
+sample
+
+entire population
+
+neither
+
+b
+
+a data representation in which grouped data are displayed along with the corresponding frequencies
+a number that measures the central tendency of the data; a common name for mean is average. The term mean is a shortened form of arithmetic mean. By definition, the mean for a sample (denoted by x) is 
+
+ x
+ ¯
+ 
+  = 
+ 
+ Sum of all values in the sample
+
+ Number of values in the sample
+
+, and the mean for a population (denoted by μ) is 
+ 
+ μ=
+ 
+ Sum of all values in the population
+
+ Number of values in the population
+a number that separates ordered data into halves; half the values are the same number or smaller than the median, and half the values are the same number or larger than the median The median may or may not be part of the data.
+the mean of an interval in a frequency table
+the value that appears most frequently in a set of data

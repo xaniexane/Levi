@@ -1,0 +1,85 @@
+# m00011
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+The Python shell
+
+The Python shell
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use a Python shell to run statements and expressions interactively.
+
+Explain the function of the up and down arrow keyboard shortcuts.
+
+The interpreter
+
+Python is a high-level language, meaning that the source code is intended for humans to understand. Computers, on the other hand, understand only low-level machine code made up of 1's and 0's. Programs written in high-level languages must be translated into machine code to run. This translation process can happen all at once, or a little at a time, depending on the language.
+
+Python is an interpreted language: the source code is translated one line at a time while the program is running. The Python interpreter translates source code into machine code and runs the resulting program. If and when an error occurs, the interpreter stops translating the source code and displays an error message.
+
+Most development environments include a Python shell for experimenting with code interactively. A shell, also called a console or terminal, is a program that allows direct interaction with an interpreter. The interpreter usually runs an entire program all at once. But the interpreter can run one line of code at a time within a Python shell.
+
+Running a Python shell
+
+Using a Python shell
+
+The arrow keys
+
+A Python shell is convenient for exploring and troubleshooting code. The user can try something, look at the results, and then try something else. When an error occurs, an error message is displayed, but the program keeps running. That way, the user can edit the previous line and correct the error interactively.
+
+The acronym REPL (pronounced "rep ul") is often used when referring to a shell. REPL stands for "read-eval-print loop," which describes the repetitive nature of a shell:
+Read/input some code
+Evaluate/run the code
+Print any results
+Loop back to step 1
+
+Most shells maintain a history of every line of code the user types. Pressing the up or down arrow key on the keyboard displays the history. The up arrow displays the previous line; the down arrow displays the next line. That way, the user can repeat a line without having to type the line again.
+
+Correcting a typo
+
+Using the arrow keys
+
+Exploring the shell
+
+Running code interactively is a great way to learn how Python works. Open a Python shell on your computer, or use the one at python.org/shell. Then enter any Python code, one line at a time, to see the result. Here are a few expressions to try:
+x = 5
+3*x - 5
+3 * (x-5)
+x
+type(1)
+type('1')
+str(1)
+int('1')
+abs(-5)
+abs(5)
+len("Yo")
+len("HoHo")
+round(9.49)
+round(9.50)
+
+Note: These functions (type, str, int, len, and round) will be explored in more detail later in the chapter. You can read more about the built-in functions in the Python documentation.
+
+Correcting mistakes
+
+Open a Python shell on your computer, or use the one at python.org/shell. Run the following two statements in the shell:
+x = 123
+y = 456
+
+Making mistakes is common while typing in a shell. The following lines include typos and other errors. For each line: (1) run the line in a shell to see the result, (2) press the up arrow to repeat the line, and (3) edit the line to get the correct result.
+print("Easy as", X)
+print("y divided by 2 is", y / 0)
+name = intput("What is your name? ")
+print(name, "is", int(name), "letters long.")
+print("That's all folks!)
+
+The expected output, after correcting typos, should look like:
+Easy as 123
+y divided by 2 is 228.0
+(no error/output)
+Stacie is 6 letters long.
+That's all folks!

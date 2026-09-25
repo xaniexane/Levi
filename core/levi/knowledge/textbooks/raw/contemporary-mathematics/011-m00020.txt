@@ -1,0 +1,678 @@
+# m00020
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Truth Tables for the Conditional and Biconditional
+
+Truth Tables for the Conditional and Biconditional
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Use and apply the conditional to construct a truth table.
+
+Use and apply the biconditional to construct a truth table.
+
+Use truth tables to determine the validity of conditional and biconditional statements.
+
+Computer languages use if-then or if-then-else statements as decision statements:
+If the hypothesis is true, then do something.
+
+Or, if the hypothesis is true, then do something; else do something else.
+
+For example, the following representation of computer code creates an if-then-else decision statement:
+
+Check value of variable i.
+
+If i<1, then print "Hello, World!" else print "Goodbye".
+
+In this imaginary program, the if-then statement evaluates and acts on the value of the variable i. For instance, if i=0, the program would consider the statement i<1 as true and “Hello, World!” would appear on the computer screen. If instead, i=3, the program would consider the statement i<1 as false (because 3 is greater than 1), and print “Goodbye” on the screen.
+
+In this section, we will apply similar reasoning without the use of computer programs.
+
+The Countess of Lovelace, Ada Lovelace, is credited with writing the first computer program. She wrote an algorithm to work with Charles Babbage’s Analytical Engine that could compute the Bernoulli numbers in 1843. In doing so, she became the first person to write a program for a machine that would produce more than just a simple calculation. The computer programming language ADA is named after her.
+
+Reference: Posamentier, Alfred and Spreitzer Christian, “Chapter 34 Ada Lovelace: English (1815-1852)” pp. 272-278, Math Makers: The Lives and Works of 50 Famous Mathematicians, Prometheus Books, 2019.
+
+Use and Apply the Conditional to Construct a Truth Table
+
+A conditional is a logical statement of the form if p, then q. The conditional statement in logic is a promise or contract. The only time the conditional, p→q, is false is when the contract or promise is broken.
+
+For example, consider the following scenario. A child’s parent says, “If you do your homework, then you can play your video games.” The child really wants to play their video games, so they get started right away, finish within an hour, and then show their parent the completed homework. The parent thanks the child for doing a great job on their homework and allows them to play video games. Both the parent and child are happy. The contract was satisfied; true implies true is true.
+
+Now, suppose the child does not start their homework right away, and then struggles to complete it. They eventually finish and show it to their parent. The parent again thanks the child for completing their homework, but then informs the child that it is too late in the evening to play video games, and that they must begin to get ready for bed. Now, the child is really upset. They held up their part of the contract, but they did not receive the promised reward. The contract was broken; true implies false is false.
+
+So, what happens if the child does not do their homework? In this case, the hypothesis is false. No contract has been entered, therefore, no contract can be broken. If the conclusion is false, the child does not get to play video games and might not be happy, but this outcome is expected because the child did not complete their end of the bargain. They did not complete their homework. False implies false is true. The last option is not as intuitive. If the parent lets the child play video games, even if they did not do their homework, neither parent nor child are going to be upset. False implies true is true.
+
+The truth table for the conditional statement below summarizes these results.
+p→q
+T
+T
+T
+F
+F
+T
+F
+Notice that the only time the conditional statement, p→q, is false is when the hypothesis, p, is true and the conclusion, q, is false.
+Logic Part 8: The Conditional and Tautologies
+
+Constructing Truth Tables for Conditional Statements
+
+Assume both of the following statements are true: p: My sibling washed the dishes, and q: My parents paid them $5.00. Create a truth table to determine the truth value of each of the following conditional statements.
+p→q
+p→ ~q
+~p→q
+
+Because p is true and q is true, the statement p→q is, “If my sibling washed the dishes, then my parents paid them $5.00.” My sibling did wash the dishes, since p is true, and the parents did pay the sibling $5.00, so the contract was entered and completed. The conditional statement is true, as indicated by the truth table representing this case: T → T = T.
+
+ p
+ q
+ p→q
+
+ T
+ T
+ T
+p→q
+T
+p→~q translates to the statement, “If my sibling washed the dishes, then my parents did not pay them $5.00.” p is true, but ~q is false. The sibling completed their end of the contract, but they did not get paid. The contract was broken by the parents. The conditional statement is false, as indicated by the truth table representing this case: T → F = F.
+
+ p
+ q
+ ~q
+ p→ ~q
+
+ T
+ T
+ F
+ F
+p→ ~q
+T
+T
+~p→q translates to the statement, “If my sibling did not wash the dishes, then my parents paid them $5.00.” ~p is false, but q is true. The sibling did not do the dishes. No contract was entered, so it could not be broken. The parents decided to pay them $5.00 anyway. The conditional statement is true, as indicated by the truth table representing this case: F → T = T.
+
+ p
+ q
+ ~p
+ ~p→q
+
+ T
+ T
+ F
+ T
+~p→q
+T
+T
+T
+
+Determining Validity of Conditional Statements
+
+Construct a truth table to analyze all possible outcomes for each of the following statements then determine whether they are valid.
+p∧q→~q
+p→~p∨q
+
+Applying the dominance of connectives, the statement p∧q→ ~q is equivalent to (p∧q)→(~q). So, the columns of the truth table will include p, q, p∧q, ~q, and p∧q→ ~q. Because there are only two basic propositions, p and q, the table will have 2(2)=4 rows of truth values to account for all the possible outcomes. The statement is not valid because the last column is not all true.
+
+ p
+ q
+ p∧q
+ ~q
+ p∧q→ ~q
+
+ T
+ T
+ T
+ F
+ F
+
+ T
+ F
+ F
+ T
+ T
+
+ F
+ T
+ F
+ F
+ T
+
+ F
+ F
+ F
+ T
+ T
+p∧q→ ~q
+T
+T
+T
+F
+T
+F
+F
+T
+F
+T
+F
+T
+F
+F
+F
+T
+Applying the dominance of connectives, the statement p→ ~p∨q is equivalent to (p)→ ((~p)∨q). So, the columns of the truth table will include p, q, ~p, ~p∨q, and p→ (~p∨q). Because there are only two basic propositions, p and q, the table will have 2(2)=4 rows of truth values to account for all the possible outcomes. The statement is not valid because the last column is not all true.
+
+ p
+ q
+ ~p
+ ~p∨q
+ p→ (~p∨q)
+
+ T
+ T
+ F
+ T
+ T
+
+ T
+ F
+ F
+ F
+ F
+
+ F
+ T
+ T
+ T
+ T
+
+ F
+ F
+ T
+ T
+ T
+p→ (~p∨q)
+T
+T
+F
+T
+T
+F
+F
+F
+F
+T
+T
+T
+F
+F
+T
+T
+
+Use and Apply the Biconditional to Construct a Truth Table
+
+The biconditional, p↔q, is a two way contract; it is equivalent to the statement (p→q)∧(q→p). A biconditional statement, p↔q, is true whenever the truth value of the hypothesis matches the truth value of the conclusion, otherwise it is false.
+
+The truth table for the biconditional is summarized below.
+p↔q
+T
+T
+T
+F
+F
+F
+F
+Logic Part 11B: Biconditional and Summary of Truth Value Rules in Logic
+
+Constructing Truth Tables for Biconditional Statements
+
+Assume both of the following statements are true: p: The plumber fixed the leak, and q: The homeowner paid the plumber $150.00. Create a truth table to determine the truth value of each of the following biconditional statements.
+p↔q
+p↔ ~q
+~p↔ ~q
+
+Because p is true and q is true, the statement p↔q is “The plumber fixed the leak if and only if the homeowner paid them $150.00.” Because both p and q are true, the leak was fixed and the plumber was paid, meaning both parties satisfied their end of the bargain. The biconditional statement is true, as indicated by the truth table representing this case: T ↔ T = T.
+
+ p
+ q
+ p↔q
+
+ T
+ T
+ T
+p↔q
+T
+p→~q translates to the statement, “The plumber fixed the leak if and only if the homeowner did not pay them $150.” If the plumber fixed the leak and the homeowner did not pay them, the homeowner will have broken their end of the contract. The biconditional statement is false, as indicated by the truth table representing this case: T ↔ F = F.
+
+ p
+ q
+ ~q
+ p↔ ~q
+
+ T
+ T
+ F
+ F
+p↔ ~q
+T
+T
+~p↔ ~q translates to the statement, “The plumber did not fix the leak if and only if the homeowner did not pay them $150.” In this case, neither party—the plumber nor the homeowner—entered into the contract. The leak was not repaired, and the plumber was not paid. No agreement was broken. The biconditional statement is true, as indicated by the truth table representing this case: F ↔ F = T.
+
+ p
+ q
+ ~p
+ ~q
+ ~p↔ ~q
+
+ T
+ T
+ F
+ F
+ T
+~p↔ ~q
+T
+T
+F
+T
+The biconditional, p↔q, is true whenever the truth values of p and q match, otherwise it is false.
+Logic Part 13: Truth Tables to Determine if Argument is Valid or Invalid
+
+Determining Validity of Biconditional Statements
+
+Construct a truth table to analyze all possible outcomes for each of the following statements, then determine whether they are valid.
+p∧q↔p∧~q
+p∨q↔~p∨q
+p→q↔~q→~p
+p∧q→~r↔p∧q∧r
+
+Applying the dominance of connectives, the statement p∧q↔ p∧~q is equivalent to (p∧q)↔ (p∧(~q)). So, the columns of the truth table will include p, q, p∧q, ~q, p∧~q and (p∧q)↔(p∧~q). Because there are only two basic propositions, p and q, the table will have 2(2)=4 rows of truth values to account for all the possible outcomes. The statement is not valid because the last column is not all true.
+
+ p
+ q
+ p∧q
+ ~q
+ p∧~q
+ (p∧q)↔(p∧~q)
+
+ T
+ T
+ T
+ F
+ F
+ F
+
+ T
+ F
+ F
+ T
+ T
+ F
+
+ F
+ T
+ F
+ F
+ F
+ T
+
+ F
+ F
+ F
+ T
+ F
+ T
+(p∧q)↔(p∧~q)
+T
+T
+T
+F
+F
+T
+F
+F
+T
+F
+F
+T
+F
+F
+T
+F
+F
+F
+T
+T
+Applying the dominance of connectives, the statement p∨q↔~p∨q is equivalent to (p∨q)↔ ((~p)∨q). So, the columns of the truth table will include p, q, p∨q, ~p, ~p∨q, and (p∨q)↔(~p∨q). Because there are only two basic propositions, p and q, the table will have 2(2)=4 rows of truth values to account for all the possible outcomes. The statement is not valid because the last column is not all true.
+
+ p
+ q
+ p∨q
+ ~p
+ ~p∨q
+ (p∨q)↔(~p∨q)
+
+ T
+ T
+ T
+ F
+ T
+ T
+
+ T
+ F
+ T
+ F
+ F
+ F
+
+ F
+ T
+ T
+ T
+ T
+ T
+
+ F
+ F
+ F
+ T
+ T
+ F
+(p∨q)↔(~p∨q)
+T
+T
+T
+F
+T
+T
+F
+T
+F
+F
+F
+T
+T
+T
+T
+F
+F
+F
+T
+F
+Applying the dominance of connectives, the statement p→q↔ ~q→~p is equivalent to (p→q)↔ ((~q)→(~p)). So, the columns of the truth table will include p, q, p→q, ~q, ~p, ~q→~p, and (p→q)↔(~q→ ~p). Because there are only two basic propositions, p and q the table will have 2(2)=4 rows of truth values to account for all the possible outcomes. The statement is valid because the last column is all true.
+
+ p
+ q
+ p→q
+ ~q
+ ~p
+ ~q→~p
+ (p→q)↔(~q→~p)
+
+ T
+ T
+ T
+ F
+ F
+ T
+ T
+
+ T
+ F
+ F
+ T
+ F
+ F
+ T
+
+ F
+ T
+ T
+ F
+ T
+ T
+ T
+
+ F
+ F
+ T
+ T
+ T
+ T
+ T
+(p→q)↔(~q→~p)
+T
+T
+T
+F
+F
+T
+T
+F
+F
+T
+F
+T
+F
+T
+T
+F
+T
+T
+F
+F
+T
+T
+T
+T
+Applying the dominance of connectives, the statement p∧q→ ~r ↔ p∧q∧r is equivalent to ((p∧q)→(~r)) ↔ ((p∧q)∧r). So, the columns of the truth table will include p, q, r, ~r, p∧q, (p∧q)∧ ~r, (p∧q)∧r, and ((p∧q)→(~r)) ↔ ((p∧q)∧r). Because there are three basic propositions, p, q, and r, the table will have 2(2)(2)=8 rows of truth values to account for all the possible outcomes. The statement is not valid because the last column is not all true.
+
+ p
+ q
+ r
+ ~r
+ p∧q
+ (p∧q)→~r
+ (p∧q)∧r
+ (p∧q→~r)↔(p∧q∧r)
+
+ T
+ T
+ T
+ F
+ T
+ F
+ T
+ T
+
+ T
+ T
+ F
+ T
+ T
+ T
+ F
+ T
+
+ T
+ F
+ T
+ F
+ F
+ T
+ F
+ F
+
+ T
+ F
+ F
+ T
+ F
+ T
+ F
+ F
+
+ F
+ T
+ T
+ F
+ F
+ T
+ F
+ F
+
+ F
+ T
+ F
+ T
+ F
+ T
+ F
+ F
+
+ F
+ F
+ T
+ F
+ F
+ T
+ F
+ F
+
+ F
+ F
+ F
+ T
+ F
+ T
+ F
+ F
+(p∧q→~r)↔(p∧q∧r)
+T
+T
+T
+F
+T
+F
+T
+T
+T
+F
+T
+T
+T
+T
+T
+F
+T
+F
+F
+T
+F
+T
+F
+F
+T
+F
+T
+F
+F
+T
+T
+F
+F
+T
+F
+F
+T
+F
+T
+F
+T
+F
+F
+F
+T
+F
+F
+T
+F
+F
+F
+F
+T
+F
+T
+F
+
+Check Your Understanding
+
+Key Concepts
+
+The conditional statement, if p then q, is like a contract. The only time it is false is when the contract has been broken. That is, when p is true, and q is false.
+
+ Conditional
+ p
+ q
+ p→q
+
+ T
+ T
+ T
+ T
+ F
+ F
+ F
+ T
+ T
+ F
+ F
+ T
+
+p→q
+T
+T
+T
+F
+F
+T
+F
+T
+The biconditional statement, p if and only if q, it true whenever p and q have matching true values, otherwise it is false.
+
+ Biconditional
+ p
+ q
+ p↔q
+
+ T
+ T
+ T
+ T
+ F
+ F
+ F
+ T
+ F
+ F
+ F
+ T
+
+p↔q
+T
+T
+T
+F
+F
+F
+F
+T
+Know how to construct truth tables involving conditional and biconditional statements.
+
+Use truth tables to analyze conditional and biconditional statements and determine their validity.
+
+Video
+Logic Part 8: The Conditional and Tautologies
+Logic Part 11B Biconditional and Summary of Truth Value Rules in Logic
+Logic Part 13: Truth Tables to Determine if Argument is Valid or Invalid

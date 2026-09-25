@@ -1,0 +1,153 @@
+# m68758
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Kinetic-Molecular Theory
+
+The Kinetic-Molecular Theory
+
+State the postulates of the kinetic-molecular theory
+
+Use this theory’s postulates to explain the gas laws
+
+The gas laws that we have seen to this point, as well as the ideal gas equation, are empirical, that is, they have been derived from experimental observations. The mathematical forms of these laws closely describe the macroscopic behavior of most gases at pressures less than about 1 or 2 atm. Although the gas laws describe relationships that have been verified by many experiments, they do not tell us why gases follow these relationships.
+
+The kinetic molecular theory (KMT) is a simple microscopic model that effectively explains the gas laws described in previous modules of this chapter. This theory is based on the following five postulates described here. (Note: The term “molecule” will be used to refer to the individual chemical species that compose the gas, although some gases are composed of atomic species, for example, the noble gases.)
+
+Gases are composed of molecules that are in continuous motion, travelling in straight lines and changing direction only when they collide with other molecules or with the walls of a container.
+
+The molecules composing the gas are negligibly small compared to the distances between them.
+
+The pressure exerted by a gas in a container results from collisions between the gas molecules and the container walls.
+
+Gas molecules exert no attractive or repulsive forces on each other or the container walls; therefore, their collisions are elastic (do not involve a loss of energy).
+
+The average kinetic energy of the gas molecules is proportional to the kelvin temperature of the gas.
+
+The test of the KMT and its postulates is its ability to explain and describe the behavior of a gas. The various gas laws can be derived from the assumptions of the KMT, which have led chemists to believe that the assumptions of the theory accurately represent the properties of gas molecules. We will first look at the individual gas laws (Boyle’s, Charles’s, Amontons’s, Avogadro’s, and Dalton’s laws) conceptually to see how the KMT explains them. Then, we will more carefully consider the relationships between molecular masses, speeds, and kinetic energies with temperature, and explain Graham’s law.
+
+The Kinetic-Molecular Theory Explains the Behavior of Gases, Part I
+
+Recalling that gas pressure is exerted by rapidly moving gas molecules and depends directly on the number of molecules hitting a unit area of the wall per unit of time, we see that the KMT conceptually explains the behavior of a gas as follows:
+Amontons’s law. If the temperature is increased, the average speed and kinetic energy of the gas molecules increase. If the volume is held constant, the increased speed of the gas molecules results in more frequent and more forceful collisions with the walls of the container, therefore increasing the pressure ().
+Charles’s law. If the temperature of a gas is increased, a constant pressure may be maintained only if the volume occupied by the gas increases. This will result in greater average distances traveled by the molecules to reach the container walls, as well as increased wall surface area. These conditions will decrease the both the frequency of molecule-wall collisions and the number of collisions per unit area, the combined effects of which balance the effect of increased collision forces due to the greater kinetic energy at the higher temperature.
+Boyle’s law. If the gas volume of a given amount of gas at a given temperature is decreased (that is, if the gas is compressed), the molecules will be exposed to a decreased container wall area. Collisions with the container wall will therefore occur more frequently and the pressure exerted by the gas will increase ().
+Avogadro’s law. At constant pressure and temperature, the frequency and force of molecule-wall collisions are constant. Under such conditions, increasing the number of gaseous molecules will require a proportional increase in the container volume in order to yield a decrease in the number of collisions per unit area to compensate for the increased frequency of collisions ().
+Dalton’s Law. Because of the large distances between them, the molecules of one gas in a mixture bombard the container walls with the same frequency whether other gases are present or not, and the total pressure of a gas mixture equals the sum of the (partial) pressures of the individual gases.
+
+molecular speeds and Kinetic Energy
+
+The previous discussion showed that the KMT qualitatively explains the behaviors described by the various gas laws. The postulates of this theory may be applied in a more quantitative fashion to derive these individual laws. To do this, we must first look at speeds and kinetic energies of gas molecules, and the temperature of a gas sample.
+
+In a gas sample, individual molecules have widely varying speeds; however, because of the vast number of molecules and collisions involved, the molecular speed distribution and average speed are constant. This molecular speed distribution is known as a Maxwell-Boltzmann distribution, and it depicts the relative numbers of molecules in a bulk sample of gas that possesses a given speed ().
+
+The kinetic energy (KE) of a particle of mass (m) and speed (u) is given by:
+
+Expressing mass in kilograms and speed in meters per second will yield energy values in units of joules (J = kg m2 s–2). To deal with a large number of gas molecules, we use averages for both speed and kinetic energy. In the KMT, the root mean square speed of a particle, urms, is defined as the square root of the average of the squares of the speeds with n = the number of particles:
+
+The average kinetic energy for a mole of particles, KEavg, is then equal to:
+
+where M is the molar mass expressed in units of kg/mol. The KEavg of a mole of gas molecules is also directly proportional to the temperature of the gas and may be described by the equation:
+
+where R is the gas constant and T is the kelvin temperature. When used in this equation, the appropriate form of the gas constant is 8.314 J/mol⋅K (8.314 kg m2s–2mol–1K–1). These two separate equations for KEavg may be combined and rearranged to yield a relation between molecular speed and temperature:
+Calculation of urmsCalculate the root-mean-square speed for a nitrogen molecule at 30 °C.
+
+Calculation of urms
+Solution
+Convert the temperature into Kelvin:
+
+Solution
+
+Determine the molar mass of nitrogen in kilograms:
+
+Replace the variables and constants in the root-mean-square speed equation, replacing Joules with the equivalent kg m2s–2:
+Check Your LearningCalculate the root-mean-square speed for a mole of oxygen molecules at –23 °C.
+
+Check Your Learning
+
+Answer:
+
+441 m/s
+
+If the temperature of a gas increases, its KEavg increases, more molecules have higher speeds and fewer molecules have lower speeds, and the distribution shifts toward higher speeds overall, that is, to the right. If temperature decreases, KEavg decreases, more molecules have lower speeds and fewer molecules have higher speeds, and the distribution shifts toward lower speeds overall, that is, to the left. This behavior is illustrated for nitrogen gas in .
+
+At a given temperature, all gases have the same KEavg for their molecules. Gases composed of lighter molecules have more high-speed particles and a higher urms, with a speed distribution that peaks at relatively higher speeds. Gases consisting of heavier molecules have more low-speed particles, a lower urms, and a speed distribution that peaks at relatively lower speeds. This trend is demonstrated by the data for a series of noble gases shown in .
+
+The gas simulator may be used to examine the effect of temperature on molecular speeds. Examine the simulator’s “energy histograms” (molecular speed distributions) and “species information” (which gives average speed values) for molecules of different masses at various temperatures.
+
+The Kinetic-Molecular Theory Explains the Behavior of Gases, Part II
+
+According to Graham’s law, the molecules of a gas are in rapid motion and the molecules themselves are small. The average distance between the molecules of a gas is large compared to the size of the molecules. As a consequence, gas molecules can move past each other easily and diffuse at relatively fast rates.
+
+The rate of effusion of a gas depends directly on the (average) speed of its molecules:
+
+Using this relation, and the equation relating molecular speed to mass, Graham’s law may be easily derived as shown here:
+
+The ratio of the rates of effusion is thus derived to be inversely proportional to the ratio of the square roots of their masses. This is the same relation observed experimentally and expressed as Graham’s law.
+
+Key Concepts and Summary
+
+The kinetic molecular theory is a simple but very effective model that effectively explains ideal gas behavior. The theory assumes that gases consist of widely separated molecules of negligible volume that are in constant motion, colliding elastically with one another and the walls of their container with average speeds determined by their absolute temperatures. The individual molecules of a gas exhibit a range of speeds, the distribution of these speeds being dependent on the temperature of the gas and the mass of its molecules.
+
+Key Equations
+urms=3RTM
+Chemistry End of Chapter Exercises
+
+Using the postulates of the kinetic molecular theory, explain why a gas uniformly fills a container of any shape.
+
+Can the speed of a given molecule in a gas double at constant temperature? Explain your answer.
+
+Yes. At any given instant, there are a range of values of molecular speeds in a sample of gas. Any single molecule can speed up or slow down as it collides with other molecules. The average speed of all the molecules is constant at constant temperature.
+
+Describe what happens to the average kinetic energy of ideal gas molecules when the conditions are changed as follows:
+
+(a) The pressure of the gas is increased by reducing the volume at constant temperature.
+
+(b) The pressure of the gas is increased by increasing the temperature at constant volume.
+
+(c) The average speed of the molecules is increased by a factor of 2.
+
+The distribution of molecular speeds in a sample of helium is shown in . If the sample is cooled, will the distribution of speeds look more like that of H2 or of H2O? Explain your answer.
+
+H2O. Cooling slows the speeds of the He atoms, causing them to behave as though they were heavier.
+
+What is the ratio of the average kinetic energy of a SO2 molecule to that of an O2 molecule in a mixture of two gases? What is the ratio of the root mean square speeds, urms, of the two gases?
+
+A 1-L sample of CO initially at STP is heated to 546 K, and its volume is increased to 2 L.
+
+(a) What effect do these changes have on the pressure exerted by the gas?
+
+(b) What is the effect on the average kinetic energy of the molecules?
+
+(c) What is the effect on the root mean square speed of the molecules?
+
+(a) The pressure of the gas remains constant. (b) The average kinetic energy doubles. (c) The root mean square speed increases to 2 times its initial value; urms is proportional to KEavg.
+
+The root mean square speed of H2 molecules at 25 °C is about 1.6 km/s. What is the root mean square speed of a N2 molecule at 25 °C?
+
+Answer the following questions:
+
+(a) Is the pressure of the gas in the hot-air balloon shown at the opening of this chapter greater than, less than, or equal to that of the atmosphere outside the balloon?
+
+(b) Is the density of the gas in the hot-air balloon shown at the opening of this chapter greater than, less than, or equal to that of the atmosphere outside the balloon?
+
+(c) At a pressure of 1 atm and a temperature of 20 °C, dry air has a density of 1.2256 g/L. What is the (average) molar mass of dry air?
+
+(d) The average temperature of the gas in a hot-air balloon is 1.30 × 102 °F. Calculate its density, assuming the molar mass equals that of dry air.
+
+(e) The lifting capacity of a hot-air balloon is equal to the difference in the mass of the cool air displaced by the balloon and the mass of the gas in the balloon. What is the difference in the mass of 1.00 L of the cool air in part (c) and the hot air in part (d)?
+
+(f) An average balloon has a diameter of 60 feet and a volume of 1.1 × 105 ft3. What is the lifting power of such a balloon? If the weight of the balloon and its rigging is 500 pounds, what is its capacity for carrying passengers and cargo?
+
+(g) A balloon carries 40.0 gallons of liquid propane (density 0.5005 g/L). What volume of CO2 and H2O gas is produced by the combustion of this propane at STP?
+
+(h) A balloon flight can last about 90 minutes. If all of the fuel is burned during this time, what is the approximate rate of heat loss (in kJ/min) from the hot air in the bag during the flight?
+
+(a) equal; (b) less than; (c) 29.48 g mol−1; (d) 1.0966 g L−1; (e) 0.129 g/L; (f) 4.01 × 105 g; net lifting capacity = 384 lb; (g) 270 L; (h) 39.1 kJ min−1
+
+Show that the ratio of the rate of diffusion of Gas 1 to the rate of diffusion of Gas 2, R1R2, is the same at 0 °C and 100 °C.
+
+theory based on simple principles and assumptions that effectively explains ideal gas behavior
+measure of average speed for a group of particles calculated as the square root of the average squared speed

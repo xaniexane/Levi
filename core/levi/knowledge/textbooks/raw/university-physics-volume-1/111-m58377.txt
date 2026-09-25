@@ -1,0 +1,304 @@
+# m58377
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Sound Intensity
+
+Sound Intensity
+
+By the end of this section, you will be able to:
+
+Define the term intensity
+
+Explain the concept of sound intensity level
+
+Describe how the human ear translates sound
+
+In a quiet forest, you can sometimes hear a single leaf fall to the ground. But when a passing motorist has their stereo turned up, you cannot even hear what the person next to you in your car is saying (). We are all very familiar with the loudness of sounds and are aware that loudness is related to how energetically the source is vibrating. High noise exposure is hazardous to hearing, which is why it is important for people working in industrial settings to wear ear protection. The relevant physical quantity is sound intensity, a concept that is valid for all sounds whether or not they are in the audible range.
+
+In Waves, we defined intensity as the power per unit area carried by a wave. Power is the rate at which energy is transferred by the wave. In equation form, intensity I is
+
+where P is the power through an area A. The SI unit for I is W/m2. If we assume that the sound wave is spherical, and that no energy is lost to thermal processes, the energy of the sound wave is spread over a larger area as distance increases, so the intensity decreases. The area of a sphere is A=4πr2. As the wave spreads out from r1 to r2, the energy also spreads out over a larger area:
+
+The intensity decreases as the wave moves out from the source. In an inverse square relationship, such as the intensity, when you double the distance, the intensity decreases to one quarter,
+
+Generally, when considering the intensity of a sound wave, we take the intensity to be the time-averaged value of the power, denoted by 〈 P 〉, divided by the area,
+
+The intensity of a sound wave is proportional to the change in the pressure squared and inversely proportional to the density and the speed. Consider a parcel of a medium initially undisturbed and then influenced by a sound wave at time t, as shown in .
+
+As the sound wave moves through the parcel, the parcel is displaced and may expand or contract. If s2>s1, the volume has increased and the pressure decreases. If s2<s1, the volume has decreased and the pressure increases. The change in the volume is
+
+The fractional change in the volume is the change in volume divided by the original volume:
+
+The fractional change in volume is related to the pressure fluctuation by the bulk modulusβ=−Δp(x,t)dV/V. Recall that the minus sign is required because the volume is inversely related to the pressure. (We use lowercase p for pressure to distinguish it from power, denoted by P.) The change in pressure is therefore Δp(x,t)=−βdVV=−β∂s(x,t)∂x. If the sound wave is sinusoidal, then the displacement as shown in is s(x,t)=smaxcos(kx∓ωt+ϕ) and the pressure is found to be
+
+The intensity of the sound wave is the power per unit area, and the power is the force times the velocity, I=PA=FvA=pv. Here, the velocity is the velocity of the oscillations of the medium, and not the velocity of the sound wave. The velocity of the medium is the time rate of change in the displacement:
+
+Thus, the intensity becomes
+
+To find the time-averaged intensity over one period T=2πω for a position x, we integrate over the period, I=βkωsmax22. Using Δpmax=βksmax, v=βρ, and v=ωk, we obtain
+
+That is, the intensity of a sound wave is related to its amplitude squared by
+
+Here, Δpmax is the pressure variation or pressure amplitude in units of pascals (Pa) or N/m2. The energy (as kinetic energy 12mv2) of an oscillating element of air due to a traveling sound wave is proportional to its amplitude squared. In this equation, ρ is the density of the material in which the sound wave travels, in units of kg/m3, and v is the speed of sound in the medium, in units of m/s. The pressure variation is proportional to the amplitude of the oscillation, so I varies as (Δp)2. This relationship is consistent with the fact that the sound wave is produced by some vibration; the greater its pressure amplitude, the more the air is compressed in the sound it creates.
+
+Human Hearing and Sound Intensity Levels
+
+As stated earlier in this chapter, hearing is the perception of sound. The hearing mechanism involves some interesting physics. The sound wave that impinges upon our ear is a pressure wave. The ear is a transducer that converts sound waves into electrical nerve impulses in a manner much more sophisticated than, but analogous to, a microphone. shows the anatomy of the ear.
+
+The outer ear, or ear canal, carries sound to the recessed, protected eardrum. The air column in the ear canal resonates and is partially responsible for the sensitivity of the ear to sounds in the 2000–5000-Hz range. The middle ear converts sound into mechanical vibrations and applies these vibrations to the cochlea.
+
+Watch this video for a more detailed discussion of the workings of the human ear.
+
+The range of intensities that the human ear can hear depends on the frequency of the sound, but, in general, the range is quite large. The minimum threshold intensity that can be heard is I0=10−12W/m2. Pain is experienced at intensities of Ipain=1W/m2. Measurements of sound intensity (in units of W/m2) are very cumbersome due to this large range in values. For this reason, as well as for other reasons, the concept of sound intensity level was proposed.
+
+The sound intensity level β of a sound, measured in decibels, having an intensity I in watts per meter squared, is defined as
+
+where I0=10−12W/m2 is a reference intensity, corresponding to the threshold intensity of sound that a person with normal hearing can perceive at a frequency of 1.00 kHz. It is more common to consider sound intensity levels in dB than in W/m2. How human ears perceive sound can be more accurately described by the logarithm of the intensity rather than directly by the intensity. Because β is defined in terms of a ratio, it is a unitless quantity, telling you the level of the sound relative to a fixed standard (10−12W/m2). The units of decibels (dB) are used to indicate this ratio is multiplied by 10 in its definition. The bel, upon which the decibel is based, is named for Alexander Graham Bell, the inventor of the telephone.
+
+The decibel level of a sound having the threshold intensity of 10−12W/m2 is β=0dB, because log101=0. gives levels in decibels and intensities in watts per meter squared for some familiar sounds. The ear is sensitive to as little as a trillionth of a watt per meter squared—even more impressive when you realize that the area of the eardrum is only about 1cm2, so that only 10−16W falls on it at the threshold of hearing. Air molecules in a sound wave of this intensity vibrate over a distance of less than one molecular diameter, and the gauge pressures involved are less than 10−9atm.
+
+Sound Intensity Levels and Intensities
+
+Sound intensity level β (dB)
+Intensity I (W/m2)
+Example/effect
+1×10−12
+Threshold of hearing at 1000 Hz
+1×10−11
+Rustle of leaves
+1×10−10
+Whisper at 1-m distance
+1×10−9
+Quiet home
+1×10−8
+Average home
+1×10−7
+Average office, soft music
+1×10−6
+Normal conversation
+1×10−5
+Noisy office, busy traffic
+1×10−4
+Loud radio, classroom lecture
+1×10−3
+Inside a heavy truck; damage from prolonged exposureSeveral government agencies and health-related
+professional associations recommend that 85 dB not be exceeded for 8-hour daily exposures in the absence of
+hearing protection.
+1×10−2
+Noisy factory, siren at 30 m; damage from 8 h per day exposure
+1×10−1
+Damage from 30 min per day exposure
+120
+1
+Loud rock concert; pneumatic chipper at 2 m; threshold of pain
+1×102
+Jet airplane at 30 m; severe pain, damage in seconds
+1×104
+Bursting of eardrums
+An observation readily verified by examining or by using is that each factor of 10 in intensity corresponds to 10 dB. For example, a 90-dB sound compared with a 60-dB sound is 30 dB greater, or three factors of 10 (that is, 103 times) as intense. Another example is that if one sound is 107 as intense as another, it is 70 dB higher ().
+
+Ratios of Intensities and Corresponding Differences in Sound Intensity Levels
+β2−β1
+2.0
+3.0 dB
+5.0
+7.0 dB
+10.0
+10.0 dB
+100.0
+20.0 dB
+1000.0
+Calculating Sound Intensity Levels
+Calculate the sound intensity level in decibels for a sound wave traveling in air at 0°C and having a pressure amplitude of 0.656 Pa.
+
+Calculating Sound Intensity Levels
+Strategy
+We are given Δp, so we can calculate I using the equation I=(Δp)22ρvw. Using I, we can calculate β straight from its definition in β(dB)=10log10(II0).
+
+Strategy
+Solution
+
+Solution
+
+Identify knowns:
+Sound travels at 331 m/s in air at 0°C.
+Air has a density of
+1.29kg/m3 at atmospheric pressure and 0°C.
+
+Enter these values and the pressure amplitude into I=(Δp)22ρv.
+I=(Δp)22ρv=(0.656Pa)22(1.29kg/m3)(331m/s)=5.04×10−4W/m2.
+
+Enter the value for I and the known value for I0 into β(dB)=10log10(I/I0). Calculate to find the sound intensity level in decibels:
+10log10(5.04×108)=10(8.70)dB=87dB.
+Significance
+This 87-dB sound has an intensity five times as great as an 80-dB sound. So a factor of five in intensity corresponds to a difference of 7 dB in sound intensity level. This value is true for any intensities differing by a factor of five.
+
+Significance
+Changing Intensity Levels of a Sound
+Show that if one sound is twice as intense as another, it has a sound level about 3 dB higher.
+
+Changing Intensity Levels of a Sound
+Strategy
+We are given that the ratio of two intensities is 2 to 1, and are then asked to find the difference in their sound levels in decibels. We can solve this problem by using of the properties of logarithms.
+
+Strategy
+Solution
+
+Solution
+
+Identify knowns:
+The ratio of the two intensities is 2 to 1, or
+I2I1=2.00.
+We wish to show that the difference in sound levels is about 3 dB. That is, we want to show:
+β2−β1=3dB.
+Note that
+log10b−log10a=log10(ba).
+
+Use the definition of β to obtain
+β2−β1=10log10(I2I1)=10log102.00=10(0.301)dB.
+Thus,
+β2−β1=3.01dB.
+Significance
+This means that the two sound intensity levels differ by 3.01 dB, or about 3 dB, as advertised. Note that because only the ratio I2/I1 is given (and not the actual intensities), this result is true for any intensities that differ by a factor of two. For example, a 56.0-dB sound is twice as intense as a 53.0-dB sound, a 97.0-dB sound is half as intense as a 100-dB sound, and so on.
+
+Significance
+
+Identify common sounds at the levels of 10 dB, 50 dB, and 100 dB.
+
+10 dB: rustle of leaves; 50 dB: average office; 100 dB: noisy factory
+
+Another decibel scale is also in use, called the sound pressure level, based on the ratio of the pressure amplitude to a reference pressure. This scale is used particularly in applications where sound travels in water. It is beyond the scope of this text to treat this scale because it is not commonly used for sounds in air, but it is important to note that very different decibel levels may be encountered when sound pressure levels are quoted.
+
+Hearing and Pitch
+
+The human ear has a tremendous range and sensitivity. It can give us a wealth of simple information—such as pitch, loudness, and direction.
+
+The perception of frequency is called pitch. Typically, humans have excellent relative pitch and can discriminate between two sounds if their frequencies differ by 0.3% or more. For example, 500.0 and 501.5 Hz are noticeably different. Musical notes are sounds of a particular frequency that can be produced by most instruments and in Western music have particular names, such as A-sharp, C, or E-flat.
+
+The perception of intensity is called loudness. At a given frequency, it is possible to discern differences of about 1 dB, and a change of 3 dB is easily noticed. But loudness is not related to intensity alone. Frequency has a major effect on how loud a sound seems. Sounds near the high- and low-frequency extremes of the hearing range seem even less loud, because the ear is less sensitive at those frequencies. When a violin plays middle C, there is no mistaking it for a piano playing the same note. The reason is that each instrument produces a distinctive set of frequencies and intensities. We call our perception of these combinations of frequencies and intensities tone quality or, more commonly, the timbre of the sound. Timbre is the shape of the wave that arises from the many reflections, resonances, and superposition in an instrument.
+
+A unit called a phon is used to express loudness numerically. Phons differ from decibels because the phon is a unit of loudness perception, whereas the decibel is a unit of physical intensity. shows the relationship of loudness to intensity (or intensity level) and frequency for persons with normal hearing. The curved lines are equal-loudness curves. Each curve is labeled with its loudness in phons. Any sound along a given curve is perceived as equally loud by the average person. The curves were determined by having large numbers of people compare the loudness of sounds at different frequencies and sound intensity levels. At a frequency of 1000 Hz, phons are taken to be numerically equal to decibels.
+Measuring Loudness
+(a) What is the loudness in phons of a 100-Hz sound that has an intensity level of 80 dB? (b) What is the intensity level in decibels of a 4000-Hz sound having a loudness of 70 phons? (c) At what intensity level will an 8000-Hz sound have the same loudness as a 200-Hz sound at 60 dB?
+
+Measuring Loudness
+Strategy
+The graph in should be referenced to solve this example. To find the loudness of a given sound, you must know its frequency and intensity level, locate that point on the square grid, and then interpolate between loudness curves to get the loudness in phons. Once that point is located, the intensity level can be determined from the vertical axis.
+
+Strategy
+Solution
+
+Solution
+
+Identify knowns: The square grid of the graph relating phons and decibels is a plot of intensity level versus frequency—both physical quantities: 100 Hz at 80 dB lies halfway between the curves marked 70 and 80 phons.
+Find the loudness: 75 phons.
+
+Identify knowns: Values are given to be 4000 Hz at 70 phons.
+Follow the 70-phon curve until it reaches 4000 Hz. At that point, it is below the 70 dB line at about 67 dB.
+Find the intensity level: 67 dB.
+
+Locate the point for a 200 Hz and 60 dB sound.
+Find the loudness: This point lies just slightly above the 50-phon curve, and so its loudness is 51 phons.
+Look for the 51-phon level is at 8000 Hz: 63 dB.
+Significance
+These answers, like all information extracted from , have uncertainties of several phons or several decibels, partly due to difficulties in interpolation, but mostly related to uncertainties in the equal-loudness curves.
+
+Significance
+
+Describe how amplitude is related to the loudness of a sound.
+
+Amplitude is directly proportional to the experience of loudness. As amplitude increases, loudness increases.
+
+In this section, we discussed the characteristics of sound and how we hear, but how are the sounds we hear produced? Interesting sources of sound are musical instruments and the human voice, and we will discuss these sources. But before we can understand how musical instruments produce sound, we need to look at the basic mechanisms behind these instruments. The theories behind the mechanisms used by musical instruments involve interference, superposition, and standing waves, which we discuss in the next section.
+
+Summary
+
+Intensity I=P/A is the same for a sound wave as was defined for all waves, where P is the power crossing area A. The SI unit for I is watts per meter squared. The intensity of a sound wave is also related to the pressure amplitude Δp:
+I=(Δp)22ρv,
+where ρ is the density of the medium in which the sound wave travels and vw is the speed of sound in the medium.
+
+Sound intensity level in units of decibels (dB) is 
+β(dB)=10log10(II0),
+where I0=10−12W/m2 is the threshold intensity of hearing.
+
+The perception of frequency is pitch. The perception of intensity is loudness and loudness has units of phons.
+
+Conceptual Questions
+
+Six members of a synchronized swim team wear earplugs to protect themselves against water pressure at depths, but they can still hear the music and perform the combinations in the water perfectly. One day, they were asked to leave the pool so the dive team could practice a few dives, and they tried to practice on a mat, but seemed to have a lot more difficulty. Why might this be?
+
+The ear plugs reduce the intensity of the sound both in water and on land, but Navy researchers have found that sound under water is heard through vibrations mastoid, which is the bone behind the ear.
+
+A community is concerned about a plan to bring train service to their downtown from the town’s outskirts. The current sound intensity level, even though the rail yard is blocks away, is 70 dB downtown. The mayor assures the public that there will be a difference of only 30 dB in sound in the downtown area. Should the townspeople be concerned? Why?
+
+Problems
+
+What is the intensity in watts per meter squared of a 85.0-dB sound?
+
+The warning tag on a lawn mower states that it produces noise at a level of 91.0 dB. What is the intensity of this sound in watts per meter squared?
+1.26×10−3W/m2
+
+A sound wave traveling in air has a pressure amplitude of 0.5 Pa. What is the intensity of the wave?
+
+What intensity level does the sound in the preceding problem correspond to?
+
+85 dB
+
+What sound intensity level in dB is produced by earphones that create an intensity of 4.00×10−2W/m2?
+
+What is the decibel level of a sound that is twice as intense as a 90.0-dB sound? (b) What is the decibel level of a sound that is one-fifth as intense as a 90.0-dB sound?
+
+a. 93 dB; b. 83 dB
+
+What is the intensity of a sound that has a level 7.00 dB lower than a 4.00×10−9-W/m2 sound? (b) What is the intensity of a sound that is 3.00 dB higher than a 4.00×10−9-W/m2 sound?
+
+People with good hearing can perceive sounds as low as −8.00 dB at a frequency of 3000 Hz. What is the intensity of this sound in watts per meter squared?
+1.58×10−13W/m2
+
+If a large housefly 3.0 m away from you makes a noise of 40.0 dB, what is the noise level of 1000 flies at that distance, assuming interference has a negligible effect?
+
+Ten cars in a circle at a boom box competition produce a 120-dB sound intensity level at the center of the circle. What is the average sound intensity level produced there by each stereo, assuming interference effects can be neglected?
+
+A decrease of a factor of 10 in intensity corresponds to a reduction of 10 dB in sound level: 120dB−10dB=110dB.
+
+The amplitude of a sound wave is measured in terms of its maximum gauge pressure. By what factor does the amplitude of a sound wave increase if the sound intensity level goes up by 40.0 dB?
+
+If a sound intensity level of 0 dB at 1000 Hz corresponds to a maximum gauge pressure (sound amplitude) of 10−9atm, what is the maximum gauge pressure in a 60-dB sound? What is the maximum gauge pressure in a 120-dB sound?
+
+We know that 60 dB corresponds to a factor of 106 increase in intensity. Therefore,
+I∝X2⇒I2I1=(X2X1)2,so thatX2=10−6atm.
+120 dB corresponds to a factor of 1012 increase⇒10−9atm(1012)1/2=10−3atm.
+
+An 8-hour exposure to a sound intensity level of 90.0 dB may cause hearing damage. What energy in joules falls on a 0.800-cm-diameter eardrum so exposed?
+
+Sound is more effectively transmitted into a stethoscope by direct contact rather than through the air, and it is further intensified by being concentrated on the smaller area of the eardrum. It is reasonable to assume that sound is transmitted into a stethoscope 100 times as effectively compared with transmission though the air. What, then, is the gain in decibels produced by a stethoscope that has a sound gathering area of 15.0cm2, and concentrates the sound onto two eardrums with a total area of 0.900cm2 with an efficiency of 40.0%?
+
+28.2 dB
+
+Loudspeakers can produce intense sounds with surprisingly small energy input in spite of their low efficiencies. Calculate the power input needed to produce a 90.0-dB sound intensity level for a 12.0-cm-diameter speaker that has an efficiency of 1.00%. (This value is the sound intensity level right at the speaker.)
+
+The factor of 10-12 in the range of intensities to which the ear can respond, from threshold to that causing damage after brief exposure, is truly remarkable. If you could measure distances over the same range with a single instrument and the smallest distance you could measure was 1 mm, what would the largest be?
+1×106km
+
+What are the closest frequencies to 500 Hz that an average person can clearly distinguish as being different in frequency from 500 Hz? The sounds are not present simultaneously.
+
+Can you tell that your roommate turned up the sound on the TV if its average sound intensity level goes from 70 to 73 dB?
+73dB−70dB=3dB; Such a change in sound level is easily noticed.
+
+If a woman needs an amplification of 5.0×105 times the threshold intensity to enable her to hear at all frequencies, what is her overall hearing loss in dB? Note that smaller amplification is appropriate for more intense sounds to avoid further damage to her hearing from levels above 90 dB.
+
+A person has a hearing threshold 10 dB above normal at 100 Hz and 50 dB above normal at 4000 Hz. How much more intense must a 100-Hz tone be than a 4000-Hz tone if they are both barely audible to this person?
+
+2.5; The 100-Hz tone must be 2.5 times more intense than the 4000-Hz sound to be audible by this person.
+
+perception of sound intensity
+basic unit of music with specific names, combined to generate tunes
+numerical unit of loudness
+perception of the frequency of a sound
+unitless quantity telling you the level of the sound relative to a fixed standard
+ratio of the pressure amplitude to a reference pressure
+number and relative intensity of multiple sound frequencies
+device that converts energy of a signal into measurable energy form, for example, a microphone converts sound waves into an electrical signal

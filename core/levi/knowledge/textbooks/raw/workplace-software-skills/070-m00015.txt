@@ -1,0 +1,125 @@
+# m00015
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Auditing Formulas and Fixing Errors
+
+Auditing Formulas and Fixing Errors
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Explain the reasons formulas may need to be audited
+
+Identify the various errors that may be present in worksheets and tables
+
+Identify the cells involved in a formula
+
+Implement the appropriate options for auditing various aspects of formulas
+
+WorldCorp receives many client orders every day, and the corporation needs to have an accurate count of inventory to ensure that they have the capacity to deliver orders on time. This real-time inventory handling and customer relationship management can only happen by implementing computer systems that track these business activities. Microsoft Excel can be programmed to help in fulfilling these tasks with the right data. Yet, as you can imagine, this enormous data load can be daunting, and occasionally, small errors may be made in some formulas. Excel has various tools for the user to identify such errors, and thus correct them.
+
+Reasons to Audit Formulas
+
+As a business grows, its activities grow in complexity, requiring higher-level and concurrent data analyses. As a result, managers build large Excel workbooks to handle these business operations, designing spreadsheets with a wide selection of formulas, functions, PivotTables, arrays, data ranges, What-If Data Tables, and other Excel data exploration tools. Each of these tools requires user input, which makes them inevitably subject to user error. The process of using Excel tools to monitor and fix errors in worksheets is called auditing formulas.
+
+Remember that almost all formulas or functions have relationships to other areas of the workbook. Cell references or named ranges may even refer to other cell references, creating a complex web of references. If the key data points do not have the right formula or function, the resulting value will not be correct. You may also see an error message in Excel if the user settings are set to alert the user when a formula or function has a broken link or incorrect syntax.
+
+Identifying Errors in Worksheets and Tables
+
+There are many ways to check for errors in your workbook. These include tracing precedent functions, tracing dependent functions, showing the formula, and automated checking of errors. When tracing precedent or dependent functions, you are finding the relationships between cells.
+
+When you are tracing precedent functions, you are finding the source of an error in a formula by locating the cells that provide the data to perform the calculation in the active cell. The arrows will point to the cells that are used to construct the formula used in the active cell so you may review them before making a correction. When you are tracing dependent functions, you are finding any cells affected by the active cell. You would want to do this before deleting a cell from a worksheet. These specifically relate to checking cell references and the information found within them. shows the output when tracing precedents for a cell.
+
+Showing the formula is simply looking at a certain formula or function and manually checking its syntax. There is a command on the Formulas tab called Show Formulas that will automatically show which cells contain formulas. The actual formula in the cell is displayed, replacing the value that was calculated from that formula. It changes the content of the worksheet to show exactly what formulas are in the cells. This is a good first step to finding errors in formulas. To hide the formulas and return to the original spreadsheet with the computed values, simply select the Show Formulas command again. There is also an Error Checking command, which can help to identify specific errors in formulas.
+
+Before any error checking can occur, first make sure that your version of Excel is tracking the errors when they happen. Click on the File tab and select Options. In the dialog box, choose the Formulas tab, and check the “Enable background error checking” option. You should also check all of the “Error checking rules” boxes, and then click OK, as shown in .
+
+Remember that there are two main characteristics that all formulas have:
+
+All formulas must start with the equals sign (=).
+
+Formulas have constants, cell references, or both, and operators, functions, or both.
+
+Constants are numbers that are typed inside a formula; they can be integers or rational numbers. Operators are math notation signs for performing different calculations, such as +, –, *, /, and ^. These operators must respect the order of operations (PEMDAS). If the formula is complex—if it has multiple functions, for example—you must ensure that the function’s syntax rules are obeyed. For example, the PV function must include values for RATE, NPER, PMT, and FV, in that order, or the function will not work.
+
+There are several types of potential errors. You may have syntax errors (not having the right argument in the function or having too few or too many arguments); capacity errors (in Excel, you cannot have more than 64 functions in a cell); or sheet or cell reference errors. It is worth noting that, when linking a formula in one worksheet to a cell in another worksheet, Excel automatically adds the sheet’s name and “!” after the sheet’s name; you must double-check that you didn’t delete this mark. For example, WorldCorp’s data for two clients is seen in a. You summarize the overall total on a separate sheet, which references the first sheet. Notice in the formula the “!” after the worksheet named “data” and before the cell reference you include in the calculation (b).
+
+Additionally, several errors have specific code assignations that should automatically appear in your cell if you have an error. These code errors are preceded by “#” to indicate that they are errors. Some of the common code errors are described in .
+
+Common Code Errors
+
+# Code
+Explanation
+####
+This common error is a formatting error rather than a formula error. It occurs when the column is not wide enough for the numbers to be displayed.
+#NAME?
+This error is displayed if the function is not well-written, such as if there is a typo in the name of the function, or the designated function name is not complete or is written incorrectly.
+#DIV/0!
+This error happens when you divide by zero. This can also be caused if a linked cell reference has no value.
+#NULL!
+This happens when the Excel notation syntax rules are not obeyed, such as if an operator is incorrect or missing.
+#NUM!
+This happens when a cell reference contains contradictory or unsound numbers that stop the function from calculating the result.
+#REF!
+This means that the cell references in a formula are not there anymore, or the cell reference was entered incorrectly in the formula.
+#VALUE!
+This happens when a cell reference has a different data type, for example, when you use a function that requires two numerical values but you insert text for one of them.
+#N/A
+This happens when a function searches for a certain value and the function cannot find it.
+#GETTING_DATA
+This is a temporary error. While waiting for Excel to calculate a complicated query, Excel will process the answer in a few seconds and display this error.
+Wait for Excel to calculate the answer.
+Identifying the Cells Involved in a Formula
+
+Excel makes it easy to find cells that meet certain criteria. For example, Excel can highlight all cells in a worksheet that contain formulas. To do this, select a cell () and go to the Find and Select icon on the Home tab, then choose Go To Special (a). Next, select Formulas, then click OK (b). All the cells that contain formulas will be selected (highlighted) in that worksheet.
+
+Excel also has a built-in feature, called the Watch Window, that allows users to see where each constant, reference, and operators are correct. Select the Watch Window icon (on the Formulas tab in the ribbon). The Watch Window will be blank, so choose Add Watch, and select the cell or cells you want to analyze, as shown in . Putting a cell or a range in the Watch Window allows you to monitor the cells you choose to ensure they remain error-free as you continue to work in a worksheet. You can add multiple cells to the Watch Window by following the same process. The Watch Window tells you the value and the function, the sheet, the workbook, the cell, and the defined name to help you identify any errors.
+
+Another way to dissect a formula is by selecting the cell and choosing Evaluate Formula (on the Formulas tab). This command solves the formula piece by piece to ensure that the formula is built correctly. First, the formula displays as shown in . Then, select Evaluate, which will solve the first argument of the function, then click on Evaluate again and the second argument gets resolved. Continue to click Evaluate to solve the formula one argument at a time, until you reach the last argument, where the final step is the calculation result. This lets you confirm that the cell is calculating correctly.
+shows the Evaluate window when it first opens, and shows the last step before the final answer is shown in the window. If clicking the Evaluate button does not provide clarity on the formula, you can use Step In, which shows a more detailed view of all of the components of the formula. You are essentially going into the formula to see all the cell references that contribute to the data in that cell. If you use Step In, you will need to click Step Out to go back to the macro view of the formula and to proceed to the next argument, as shown in . You can use this method to break down complex formulas that might include cell references in other worksheets.
+
+Another way to see the references of a formula is by simply selecting the cell in question, and then pressing Ctrl+[ (Control and open bracket) to see dependent references, or Ctrl+] (Control and close bracket) to see precedents. This simple method selects all the cell references of the formula in question, as shown in a. You can see that cells C2, C4, and E3 are selected and shaded in. These commands serve a similar function as the Trace Dependents and Trace Precedents tools; they show the dependent cells or precedents, but they do not draw a line like the Trace Dependents and Trace Precedents tools do.
+
+If a cell has no dependent cells—cells that are depending on this data from other worksheets, or workbooks, or from another table in the same worksheet—then you cannot perform the Ctrl+[ command, as shown in b. In this example, there were no dependent cells.
+
+The most comprehensive way to see your cell relationships is by installing the Inquire add-in. First, go to the Add-ins menu (File > Options > Add-ins) (). Look for Manage drop-down at the bottom of the window and select COM Add-ins, from the drop-down menu. Then, select Go. Then, check Inquire and click OK, as shown in a. Excel adds a new tab to the ribbon. From that ribbon tab, select Workbook Analysis (b). The workbook will be displayed with all its formulas and connections between cells, and all formulas will be categorized by the type of function used (). This new ribbon tab also offers the features Workbook Relationship, Worksheet Relationship, and Cell Relationship, all of which give a graph of the relationship between the sheet and the precedents and dependents in the worksheet.
+
+In the Mac version, all add-ins are located in the Tools menu.
+
+Choosing and Implementing Formula Auditing Options
+
+Let’s look at an example to practice identifying errors and choosing and implementing the correct ways to fix those errors. Using the WorldCorp loan installment example, suppose that the loan the company settled on has a 5.5 percent interest rate, resulting in a payment of $99,500.83 per year in interest and principal. Therefore, the total cost of the increase in capacity for the manufacturing plant will be $995,008.27. Cell F4 now has precedents and dependents, as shown in the arrows in .
+
+The data in looks good, but suppose you get a #NUM! error in cell F4 (). Recall that this type of error means that the formula contains contradictory or unsound numbers that stop the formula from calculating the correct result. First, try the Error Checking tool. Change the location of the N variable to a blank cell, C1. This gives the error shown in the figure. The formula cannot be calculated based on a blank cell. Choose the Error Checking tool from the Formulas tab in the Formula Auditing command group.
+
+In the Mac version, the Error Checking tool is located in the Formulas menu.
+
+When the window appears, choose Show Calculation Steps (). This opens the Evaluate Formula command, which shows the formula already solved (a). When examining the formula, you can see the values of 0.065 for the rate and 750,000 for the principal. Because the PMT function requires you to input N, or the number of payment periods, you would also expect to see 10 in the formula, but there is a 0 instead of a 10 in the N variable location in the formula. Thus, you can see where the problem in the formula is, so you can fix it. If you then close the Evaluate Formula window, you are taken back to the Error Checking tool from where you can choose Edit in Formula Bar. When selected, the cells used in the formula are highlighted. At this point, you should see that the formula uses cell C1, not C2 as was intended. Revise the formula to replace C1 with C2 (b), and run the Error Checking tool again. Now the worksheet doesn’t have any errors (c).
+
+The Tick and Tie Method
+
+All businesses should have multiple ways of checking and auditing their financial statements. Often this is referred to as “checks and balances.” One example for banking purposes would be to require two signatures on all checks that are written on the account. That then ensures that two different people have approved the check. The concept of auditing in accounting is checking and double-checking that the financial statements are accurate and follow the appropriate accounting standards. This not only protects the company from the consequences of errors, but it can also ensure that the company employees are not committing any wrongdoing.
+
+One method to accomplish this is the “tick and tie” internal auditing method, which involves verifying the numbers on one financial statement with those on another. Managers can use this method internally to monitor transactions for irregularities (payments to unknown vendors, for example) or verify that company financial statements balance before the external auditors do a yearly review. It is better to monitor constantly and consistently than to wait for the external auditor to find the errors. Also, by having a regular internal audit of the finances of the company, you can create a culture that expects honesty and integrity. If you happen to find a deliberate error by an employee, you can address it quickly. By using the tools available in Excel, you can set up an internal audit system to use regularly, thus creating the culture in the organization and identifying misconduct quickly.
+
+Summary
+
+All organizations should use auditing formula techniques to double-check their datasets. Errors can occur in a variety of ways, from user error to cell reference errors.
+
+Running the Trace Precedents and Trace Dependents tools on a cell can diagram the problem with that formula or the information contained in that cell.
+
+Auditing formulas is a manageable process if you use the right tools. You need to specify the correct options in the Excel settings to be able to see all the error codes, and be aware of all the built-in error-checking tools Excel has to offer, such as the Inquire add-in.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+process of using Excel tools to monitor and fix errors in worksheets
+finding the source of an error in a formula by finding any cells affected by the active cell
+finding the source of an error in a formula by locating the cells that provide the data to perform the calculation in the active cell

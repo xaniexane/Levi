@@ -1,0 +1,473 @@
+# m42250
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Energy in Waves: Intensity
+
+Energy in Waves: Intensity
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate the intensity and the power of rays and waves.
+
+All waves carry energy. The energy of some waves can be directly observed. Earthquakes can shake whole cities to the ground, performing the work of thousands of wrecking balls.
+
+Loud sounds pulverize nerve cells in the inner ear, causing permanent hearing loss. Ultrasound is used for deep-heat treatment of muscle strains. A laser beam can burn away a malignancy. Water waves chew up beaches.
+
+The amount of energy in a wave is related to its amplitude. Large-amplitude earthquakes produce large ground displacements. Loud sounds have higher pressure amplitudes and come from larger-amplitude source vibrations than soft sounds. Large ocean breakers churn up the shore more than small ones. More quantitatively, a wave is a displacement that is resisted by a restoring force. The larger the displacement x, the larger the force F=kx needed to create it. Because work W is related to force multiplied by distance (Fx) and energy is put into the wave by the work done to create it, the energy in a wave is related to amplitude. In fact, a wave’s energy is directly proportional to its amplitude squared because
+
+The energy effects of a wave depend on time as well as amplitude. For example, the longer deep-heat ultrasound is applied, the more energy it transfers. Waves can also be concentrated or spread out. Sunlight, for example, can be focused to burn wood. Earthquakes spread out, so they do less damage the farther they get from the source. In both cases, changing the area the waves cover has important effects. All these pertinent factors are included in the definition of intensity I as power per unit area:
+
+where P is the power carried by the wave through area A. The definition of intensity is valid for any energy in transit, including that carried by waves. The SI unit for intensity is watts per square meter (W/m2). For example, infrared and visible energy from the Sun impinge on Earth at an intensity of 1300W/m2 just above the atmosphere. There are other intensity-related units in use, too. The most common is the decibel. For example, a 90 decibel sound level corresponds to an intensity of 10−3W/m2. (This quantity is not much power per unit area considering that 90 decibels is a relatively high sound level. Decibels will be discussed in some detail in a later chapter.
+
+Calculating intensity and power: How much energy is in a ray of sunlight?
+
+The average intensity of sunlight on Earth’s surface is about 700W/m2.
+
+(a) Calculate the amount of energy that falls on a solar collector having an area of 0.500m2 in 4.00h.
+
+(b) What intensity would such sunlight have if concentrated by a magnifying glass onto an area 200 times smaller than its own?
+Strategy a
+
+Strategy a
+
+Because power is energy per unit time or P=Et, the definition of intensity can be written as I=PA=E/tA, and this equation can be solved for E with the given information.
+Solution a
+
+Solution a
+
+Begin with the equation that states the definition of intensity:
+
+ I
+ =
+ 
+ P
+ A
+
+ .
+
+Replace 
+
+P
+
+ with its equivalent 
+
+E
+
+/
+
+t
+
+ :
+
+ I
+ =
+
+ E
+ /
+ t
+ 
+ A
+
+ .
+
+Solve for 
+
+E
+
+ :
+
+ E
+ =
+
+ IAt
+
+ .
+
+Substitute known values into the equation:
+
+ E
+ =
+
+ 700
+ 
+ W/m
+
+ 2
+
+ 0
+ .
+ 500
+
+ m
+
+ 2
+
+ 4
+ .
+ 00
+
+ h
+
+ 3600
+ s/h
+
+ .
+
+Calculate to find E and convert units:
+ 5.04×106J,
+Discussion a
+
+Discussion a
+
+The energy falling on the solar collector in 4 h in part is enough to be useful—for example, for heating a significant amount of water.
+Strategy b
+
+Strategy b
+
+Taking a ratio of new intensity to old intensity and using primes for the new quantities, we will find that it depends on the ratio of the areas. All other quantities will cancel.
+Solution b
+
+Solution b
+
+Take the ratio of intensities, which yields:
+ I′I=P′/A′P/A=AA′(
+The powers cancel becauseP′=P).
+
+Identify the knowns:
+
+ A
+ =
+ 200
+ 
+ A
+ ′
+
+ ,
+
+ I
+
+ ′
+
+ I
+ 
+ =
+ 200
+
+ .
+
+Substitute known quantities:
+
+ I
+ 
+ ′
+ =
+ 200
+
+ I
+ =
+ 200
+
+ 700
+
+ W/m
+
+ 2
+
+ .
+
+Calculate to find I′:
+
+I
+
+ ′
+
+=
+
+1.40
+
+×
+
+10
+
+5
+
+W/m
+
+2
+
+.
+Discussion b
+
+Discussion b
+
+Decreasing the area increases the intensity considerably. The intensity of the concentrated sunlight could even start a fire.
+
+Determine the combined intensity of two waves: Perfect constructive interference
+
+If two identical waves are spatially separated, each having an intensity of 1.00 W/m2, interfere perfectly constructively in a particular location, what is the intensity of the wave at this particular location?
+Strategy
+
+Strategy
+
+We know from Superposition and Interference that when two identical waves, which have equal amplitudes X, interfere perfectly constructively, the resulting wave has an amplitude of 2X. Because a wave’s intensity is proportional to amplitude squared, the intensity of the resulting wave is four times as great as in the individual waves.
+Solution
+
+Solution
+
+Recall that intensity is proportional to amplitude squared.
+
+Calculate the new amplitude:
+
+ I
+
+ ′
+
+ ∝
+
+ X
+
+ ′
+
+ 2
+
+ =
+
+ 2X
+
+ 2
+
+ =
+ 
+ 4X
+
+ 2
+
+ .
+
+Recall that the intensity of the old amplitude was:
+
+ I
+ ∝
+ 
+ X
+
+ 2
+
+ .
+
+Take the ratio of new intensity to the old intensity. This gives:
+
+ I
+
+ ′
+
+ I
+
+ =
+ 4
+
+ .
+
+Calculate to find I′:
+
+ I
+
+ ′
+ =
+ 4
+ I
+
+ =
+ 4
+ 
+ .
+ 00
+
+ W/m
+
+ 2
+
+ .
+Discussion
+
+Discussion
+
+The intensity goes up by a factor of 4 when the amplitude doubles. This answer is a little disquieting. The two individual waves each have intensities of 1.00W/m2, yet their sum has an intensity of 4.00W/m2, which may appear to violate conservation of energy. This violation, of course, cannot happen. What does happen is intriguing. The area over which the intensity is 4.00W/m2 is much less than the area covered by the two waves before they interfered. There are other areas where the intensity is zero. The addition of waves is not as simple as our first look in Superposition and Interference suggested. We actually get a pattern of both constructive interference and destructive interference whenever two waves are added. For example, if we have two stereo speakers putting out 1.00W/m2 each, there will be places in the room where the intensity is 4.00W/m2, other places where the intensity is zero, and others in between. shows what this interference might look like. We will pursue interference patterns elsewhere in this text.
+
+Check Your Understanding
+
+Which measurement of a wave is most important when determining the wave's intensity?
+
+Amplitude, because a wave’s energy is directly proportional to its amplitude squared.
+
+Section Summary
+
+Intensity is defined to be the power per unit area:
+I=PA and has units of W/m2.
+
+Conceptual Questions
+
+Two identical waves undergo pure constructive interference. Is the resultant intensity twice that of the individual waves? Explain your answer.
+
+Circular water waves decrease in amplitude as they move away from where a rock is dropped. Explain why.
+
+Problems & Exercises
+Medical Application
+
+Medical Application
+
+Ultrasound of intensity 1.50×102W/m2 is produced by the rectangular head of a medical imaging device measuring 3.00 by 5.00 cm. What is its power output?
+
+0.225 W
+
+The low-frequency speaker of a stereo set has a surface area of 
+
+0
+
+.
+
+05
+
+m
+
+2
+
+ and produces 1W of acoustical power. What is the intensity at the speaker? If the speaker projects sound uniformly in all directions, at what distance from the speaker is the intensity 
+
+0
+
+.
+
+1
+
+W/m
+
+2
+
+ ?
+
+To increase intensity of a wave by a factor of 50, by what factor should the amplitude be increased?
+
+7.07
+Engineering Application
+
+Engineering Application
+
+A device called an insolation meter is used to measure the intensity of sunlight has an area of 100 cm2 and registers 6.50 W. What is the intensity in 
+
+W/m
+
+2
+
+ ?
+Astronomy Application
+
+Astronomy Application
+
+Energy from the Sun arrives at the top of the Earth’s atmosphere with an intensity of
+
+1.30
+
+ kW/m
+
+2
+
+.
+
+ How long does it take for 
+
+1.8
+ 
+ ×
+ 
+109
+
+J
+
+ to arrive on an area of 
+
+1
+
+.
+
+00
+
+m
+
+2
+
+ ?
+
+16.0 d
+
+Suppose you have a device that extracts energy from ocean breakers in direct proportion to their intensity. If the device produces 10.0 kW of power on a day when the breakers are 1.20 m high, how much will it produce when they are 0.600 m high?
+
+2.50 kW
+Engineering Application
+
+Engineering Application
+
+(a) A photovoltaic array of (solar cells) is 10.0% efficient in gathering solar energy and converting it to electricity. If the average intensity of sunlight on one day is
+
+700
+
+W/m
+
+2
+
+,
+
+ what area should your array have to gather energy at the rate of 100 W? (b) What is the maximum cost of the array if it must pay for itself in two years of operation averaging 10.0 hours per day? Assume that it earns money at the rate of 9.00 ¢ per kilowatt-hour.
+
+A microphone receiving a pure sound tone feeds an oscilloscope, producing a wave on its screen. If the sound intensity is originally
+
+2.00
+ 
+×
+
+10
+–5
+
+W/m
+
+2
+
+,
+
+ but is turned up until the amplitude increases by 30.0%, what is the new intensity?
+3.38
+ ×
+ 
+ 10
+
+ –5
+
+ W/m
+
+ 2
+Medical Application
+
+Medical Application
+
+(a) What is the intensity in
+
+W/m
+
+2
+
+ of a laser beam used to burn away cancerous tissue that, when 90.0% absorbed, puts 500 J of energy into a circular spot 2.00 mm in diameter in 4.00 s? (b) Discuss how this intensity compares to the average intensity of sunlight (about
+
+700
+
+ W/m
+
+2
+
+) and the implications that would have if the laser beam entered your eye. Note how the amount of damage depends on the time duration of the exposure.
+
+power per unit area

@@ -1,0 +1,114 @@
+# m00011
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Data Tables and Ranges
+
+Data Tables and Ranges
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Differentiate between a spreadsheet and a Data Table
+
+Explain the advantages of a Data Table
+
+Create/insert a Data Table from data in a spreadsheet
+
+Define a cell range
+
+Select and name a cell range
+
+Differentiate between a cell range and an array
+
+WorldCorp has sufficient savings for capital investment for the Fairfax project, yet the chief financial officer (CFO) wants to borrow from a bank about 50 percent of the amount of the estimate for the new addition. There are many banks in Fairfax, each offering different interest rates and years to pay back the loan. The CFO is not sure which offer is best, as the longer the loan period is, the more interest WorldCorp will end up paying, yet the shorter the loan period, the higher the payment will be. The CFO is also analyzing the different interest rates and how they affect the installments and subsequently the total interest charge over the life of the loan.
+
+This case shows why it’s important to learn the intricacies of using Microsoft Excel’s Data Tables. Data Tables can be helpful to assist management in determining the best course of action by evaluating interest charges and monthly payments. In this section, you will create a data table from existing data and will discover the advantages of using the Data Table tool in the What-If Analysis, plus related concepts and definitions, such as data ranges and arrays. The Data Table’s powerful analysis options will be further explored in Organizing and Presenting Data.
+
+Differentiating Between a Spreadsheet and a Data Table
+
+Spreadsheets have a wide variety of applications and can be used for accounting, budgeting, data collection and analysis, and operations efficiency. Spreadsheets are used in all departments of corporations, such as marketing or operations. These departments can use spreadsheets in a variety of ways, such as compiling information from market studies, or performing statistical analysis on operations from the manufacturing plant.
+
+A Data Table is a scenario-building tool. It lets users choose a set of cells on the spreadsheet, and then outputs different solutions or forecasts depending on different scenarios. The difference between a Data Table and a spreadsheet is that a spreadsheet is a file with blank cells that can be formatted using the various tools and commands contained in the application. A Data Table can be part of (embedded in) a spreadsheet, but a spreadsheet can also include a graph, some text for information, or the listing of the inputs for the Data Table. The Data Table feature of Excel automatically builds a table of data based on certain inputs that is part of the spreadsheet. shows an example of an Excel-generated Data Table, as well as the data used in the scenarios. You will build a Data Table after learning more about its uses.
+
+The Advantages of a Data Table
+
+The advantages of Data Tables are many. One of their most important advantages is their ability to automate scenario-building. Another advantage is increased accuracy due to less manual entry of data. If you were to create a scenario from a blank workbook, you would need to build out the formulas initially and then copy them through the desired levels of the inputs. This increases the possibility of user error caused by inputting values or formulas incorrectly. By using the Data Table feature, all that work is done automatically—and quickly. Data Tables allow users to view all the levels of inputs in a single table without inputting multiple formulas.
+
+Consider the example of expanding Fairfax’s WorldCorp location. You have gathered the needed information to determine the amount of the loan you will need to finance the added capacity. You have the loan terms from banks in the area and you know that the loan payment period will be ten years. WorldCorp is working on its annual budget, so the CFO wants you to investigate the annual payments, not the monthly payments. The CFO also wants to examine the variability of the annual installment if the interest rate is increased by 0.5 percent increments per year over the life of the loan. The Data Table in the What-If Analysis will automatically perform the annual payment calculations for each increment. The CFO will then be able to look at the results and determine which loan from which bank will best meet the company’s needs.
+
+The first step in this analysis is to set up your data. Since you’re looking at how the interest rate affects the annual payment, you can use Excel’s Payment (PMT) function, which uses the present value (the value of the loan), the number of payments, and the rate. The PMT function is in the Financial library of functions found on the Formulas tab. The present value (PV) is principal to be borrowed; in this case, we will use $750,000, which is half of the total cost of the expansion. This was determined by the initial research by the CFO as the amount needed to finance the company growth. The time period of the loan has been set at ten years. Most loans are paid monthly, but since you are analyzing the annual payments, you will use 10 (not 120) for N (shown as Nper in the function builder) to define the number of payments. After gathering all the interest rates offered by the banks, it was determined that the average interest rate (I) of all is 6.5 percent. Using these input values, the yearly payment can be determined using the financial PMT function. shows the building of the PMT function in Excel.
+
+The result is an annual payment on the loan of $104,328.52 (). The output for Excel with the PMT function is negative by default, which is displayed in parentheses and in red. This is to indicate that the loan total will decrease by that amount each year after the payment is made. Keep this in mind as you examine the output.
+
+The next step in the analysis is to compare the payments with different loan terms. You can calculate the payment manually using the PMT function many times—that is, every time you change the interest rate. You can play around with it by changing the interest rate and seeing how it affects the payment. If the rate is lower, the payment will be lower, and if the rate is higher, the payment will be higher. For example, in , if you change the rate to 5 percent, the payment automatically updates to $97,128.43. However, this approach does not retain all of the options easily. Unless you make a separate table to capture the impact of changes in the interest rate on the payment, that information is lost each time you make a change to the inputs. If you do create a table, you would need to format it in a manner suitable for additional analysis and decision making. It would be a time-consuming exercise to record all of the data for each interest rate, and then you would need to take an extra step to summarize it in an easy-to-follow table. By creating a Data Table, you can use various levels of the interest rate to calculate the payment and summarize it in one concise table.
+
+Calculating Mortgage Payoff Schedule
+
+PMT is a useful tool for comparing different interest rates and their impact on monthly payment. It can also be used to determine a mortgage payoff schedule. Paying down a mortgage at a faster pace than agreed upon can lead to significant savings in interest payments. Even one additional payment a year can have a large impact on the amount of interest paid. You can find any number of amortization templates available online, either where you input the information and the site calculates it for you, or through an Excel template. Do some online research to find an Excel template to help you calculate your mortgage payoff schedule. Open the template and review the formulas. Notice the use of IF and PMT functions throughout. Using the template, locate a home to purchase and determine the payoff schedule for the home using today’s interest rates. If you own a home already, determine what one additional payment per year will do to your final home cost upon payoff.
+
+Creating a Data Table from Data in a Spreadsheet
+
+To facilitate the process of comparing various interest rates on the annual payment, you can create a Data Table. To do so, the information must be arranged on the spreadsheet in a specific way. First, make a list in a column of the interest rates being examined. The order doesn’t matter to Excel, but it makes the data easier to analyze if you put them in numerical order, either lowest rate to highest or vice versa. In the next column to the right and one row above, use the PMT function to calculate the payment at the current rate (recall, you used 6.5 percent), as shown in .
+
+Next, select the area of the spreadsheet where the changing input values are contained. In this example, that is cells E1:F8. On the Data tab, you will see the What-If Analysis menu group on the right side. Select the drop-down arrow and choose Data Table ().
+
+When the Data Table tool is selected, a dialog box appears for inputting data. Because the interest rates are listed in columns, use the “Column input cell” box. In this cell, place the cell reference for the original interest rate used in the PMT function. Notice the dollar sign ($) in front of the letter and number in the cell reference. This will set the column input cell to always refer to the value in cell B2. This is referred to as an absolute reference. You will learn more about absolute references in Absolute Cell References. For this example, the cell is B2 ().
+
+The Data Table will automatically calculate the payment at each of the interest rates listed in the column below the PMT, as shown in . You will need to format the data to be Accounting or Currency.
+
+This process will save a lot of time, as it eliminates manually creating a formula for each cell. Furthermore, with the same Data Table, any of the values in the list can be changed and the information will automatically update to the correct value. For example, to see the payments for a 6.4 percent interest rate instead of 6.5 percent, simply change that one value, and the row’s value will be autofilled to calculate the new installment payment. The rest of the data table stays the same, as you can see in .
+
+Suppose you have taken this Data Table to the WorldCorp CFO, who tells you that the company will not pay high interest rates and will only negotiate and meet with the executives of banks that offer rates at or below 7 percent. There is no need to create a new Data Table that only includes the data for that range of rates because you may need the information at a later point. Instead, you can temporarily hide the values that exceed the 7 percent maximum using Excel’s filtering tools. A filter is a tool that lets you select certain criteria so that only data with your chosen criteria is shown.
+
+To use a filter within the Data Table, select the rate column, and then go to the Data tab. In the Sort & Filter command group, select Filter (the funnel icon). When Filter is selected, a small arrow will appear at the top of the column, as shown in a. Select that arrow and go to Number Filters, then select Less Than Or Equal To.... On the dialog box that appears next, select 7.00% from the choices, and then click OK. The result is that the Data Table will only show values that are less than or equal to 7 percent, as shown in b.
+
+Now that you have created a Data Table with one variable, you will follow a similar process to analyze two variables. With the added capacity in Fairfax, WorldCorp can sell more products to help the company reach its strategic goals. Increasing unit sales could also allow the company to reduce its price per unit. You would like to better understand the impact of the increased sales and price changes on the annual revenue for WorldCorp. Let’s assume that in 2020, WorldCorp sold 5,000 RX-500 digital scales in the state of Virginia, at the retail price of $17.99 per unit. That would mean an annual revenue of $89,950 for this item. What would happen if the price was decreased to $16.99, in hopes that the unit sales would increase? Or, conversely, what would happen if the price increased to $18.99? WorldCorp is not sure how the public will react to either option, but you can estimate the revenue it will produce. Let’s assume that either sales will stay the same (i.e., 5,000 per year), decrease to 3,000, or increase to 7,000. With the Data Table tool located in the What-If Analysis, all the revenues will be autofilled for the different unit sales and the different prices (). To create this table, follow the steps for the loan interest rate example. However, instead of only including the column input, also include the row input.
+
+Defining, Selecting, and Naming a Cell Range
+
+A cell range is a selection of rows or columns of cells that is given a name to make it easier for the worksheet designer to find that specific group of cells later. It can include a group of cells that are next to each other or separated across the worksheet or workbook. Defining a cell range is especially useful when designing a large Excel worksheet with a substantial amount of data, or when interconnecting datasets or different spreadsheets. Naming a range of cells is referred to in Excel as defining a range. You can define a range in three different ways.
+
+Method 1: Define a Range
+
+First, select the range of cells you want to name. Then, click on the leftmost box below the ribbon (Excel calls this the Name Box). After the cursor on the Name Box begins blinking, type the name you want to use for the data range, and press Enter. Subsequently, you may refer to this range of cells as the name you typed in the Name Box. Type “digital scale” in the Name Box, as shown in .
+
+Method 2: Define a Range
+
+Begin by selecting the desired range of cells, then go to the Formulas tab, and select Define Name. A new dialog box will appear; it has three fields: Name, Scope, and Comment. Next to Name, simply type the name you want to use for the data range; under Scope, select Workbook; the Comment field is optional. Click OK to complete the process ().
+
+Method 3: Define a Range
+
+The third way to define a range is more comprehensive, as it allows you to select various columns or a whole Data Table. You need to select the entire table, or the set of columns (or rows), that you want to define. After making your selection, go to the Formulas tab in the ribbon and choose Create from Selection. A dialog box will appear and where you select the headers. (Many tables have column headings only, and other tables have row headings.) In the dialog box, you will select if the table has the column headings on the bottom or on the top, or if the row headings are on the right or on the left.
+
+Using the WorldCorp example of the loan interest rates, choose Left column, and click OK, as shown in . Because you didn’t type anything, as this method is more geared for tables, Excel automatically gave defined names to the data ranges (rows). Excel uses the text in the left column of the table to name (define) the data ranges. Spaces are automatically converted to “_” by Excel. Consequently, the data ranges are Years_N, Rate_I, Principal_PV, and Payment_PMT.
+
+Differentiating Between a Cell Range and an Array
+
+An array is similar to a cell range in that it is a collection of data in ranges of cells, but arrays do not have to be contiguous (right next to each other). Arrays can contain text or numbers and can span multiple rows and columns if needed. The array can be a collection of cells that consists of unrelated elements, whereas cell ranges have a start and finish and are made of elements related to each other. Arrays also are different from data ranges in that they can work creatively to simultaneously calculate different computations at the same time. An array can replace many standard formulas and make simple computations more efficient. The array formula performs multiple calculations on several values, so using arrays and array formulas can save users time.
+
+Let’s use the WorldCorp digital scale example and recalculate it using arrays. The unit sales of each model are added to the previous data in column C. Then, using arrays, you can determine the total revenue without calculating the revenue for each model separately. a shows how you can add a column for the revenue of each model and then add them up to get the total revenue of the digital scales. b shows the total revenue for sales of all models in cell C7, without any of the individual calculations, using an array.
+
+To use an array to calculate the total revenue in b, click on a blank cell (here, cell C7), and type the function =sum(b2:b6*c2:c6) and hold down Ctrl+Shift as you press Enter. This function calculates the sum of the revenue for each item, as shown in the ranges in the parentheses. As visible in the Formula Bar, Excel recognizes b2:b6 from the defined data ranges, and renames it “Price” in the formula. Excel also adds a curly brace (“{ }”) before and after the whole function (b) because it recognizes it as an array. Excel then does all of the calculations we did manually in a in one step and provides the total revenue. You’ll notice that the total revenue values match, regardless of whether you do the calculations manually or use an array. When a selection is defined as an array, then any formula is calculated as an array formula, which allows for multiple calculations to happen simultaneously.
+
+Summary
+
+Data Tables can be used for automatically generating multiple possible scenarios. This can be used to predict future outcomes, such as revenues, unit sales projections, installment payments, interest rate changes, and many other variables.
+
+Businesses need to construct complex datasets for their everyday control and management of the company. For that purpose, Excel has data ranges, which help the user define a name for a particular set of cells. This allows the user to use the given name of the data range instead of cell references.
+
+Arrays also simplify the complexity of huge worksheets, as they let the user autofill and compute multiple calculations simultaneously.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+selection of rows or columns that do not have to be contiguous
+selection of rows or columns that is given a name to make it easier for the worksheet designer to find that specific group of cells later
+scenario-building tool in Excel that lets users choose a set of cells on the spreadsheet, and then outputs different solutions or forecasts depending on different scenarios
+tool in Excel that lets the user select certain criteria so that only data with that criteria is shown

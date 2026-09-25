@@ -1,0 +1,116 @@
+# m00132
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Use of R Statistical Analysis Tool for Regression Analysis
+
+Use of R Statistical Analysis Tool for Regression Analysis
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Generate correlation coefficients using the R statistical tool.
+
+Generate linear regression models using the R statistical tool.
+
+Generate Correlation Coefficients Using the R Statistical Tool
+R is an open-source statistical analysis tool that is widely used in the finance industry. R is available as a free program and provides an integrated suite of functions for data analysis, graphing, and statistical programming. R provides many functions and capabilities for regression analysis.
+
+Recall that most calculations in R are handled via functions.
+
+The typical method for using functions in statistical applications is to first create a vector of data values. There are several ways to create vectors in R. For example, the c function is often used to combine values into a vector. For example, this R command will generate a vector called salaries, containing the data values 40,000, 50,000, 75,000, and 92,000:
+
+To calculate the correlation coefficient r, we use the R command called cor.
+
+As an example, consider the data set in , which tracks the return on the S&P 500 versus return on Coca-Cola stock for a seven-month time period.
+
+Monthly Returns of Coca-Cola Stock versus Monthly Returns for the S&P 500
+
+S&P 500
+ Monthly
+ Return (%)
+S&P 500
+
+Monthly
+
+Return (%)
+Coca-Cola
+ Monthly
+ Return (%)
+Coca-Cola
+
+Monthly
+
+Return (%)
+
+Jan
+8
+6
+Feb
+1
+0
+Mar
+0
+-2
+Apr
+2
+1
+May
+-3
+-1
+Jun
+7
+8
+Jul
+4
+2
+Create two vectors in R, one vector for the S&P 500 returns and a second vector for Coca-Cola returns:
+
+The R command called cor returns the correlation coefficient for the x-data vector and y-data vector:
+
+Generate Linear Regression Models Using the R Statistical Tool
+
+To create a linear model in R, assuming the correlation is significant, the command lm (for linear model) will provide the slope and y-intercept for the linear regression equation.
+
+The format of the R command is
+
+Notice the use of the tilde symbol as the separator between the dependent variable vector and the independent variable vector.
+
+We use the returns on Coca-Cola stock as the dependent variable and the returns on the S&P 500 as the independent variable, and thus the R command would be
+
+The R output provides the value of the y-intercept as -0.3453 and the value of the slope as 0.8641. Based on this, the linear model would be
+
+where x represents the value of S&P 500 return and y represents the value of Coca-Cola stock return.
+
+The results can also be saved as a formula and called “model” using the following R command. To obtain more detailed results for the linear regression, the summary command can be used, as follows:
+
+In this output, the y-intercept and slope is given, as well as the residuals for each x-value. The output includes additional statistical details regarding the regression analysis.
+
+Predicted values and prediction intervals can also be generated within R.
+
+First, we can create a structure in R called a data frame to hold the values of the independent variable for which we want to generate a prediction. For example, we would like to generate the predicted return for Coca-Cola stock, given that the return for the S&P 500 is 6.
+
+We use the R command called predict.
+
+To generate a prediction for the linear regression equation called model, using the data frame where the value of the S&P 500 is 6, the R commands will be
+
+The output from the predict command indicates that the predicted return for Coca-Cola stock will be 4.8% when the return for the S&P 500 is 6%.
+
+We can extend this analysis to generate a 95% prediction interval for this result by using the following R command, which adds an option to the predict command to generate a prediction interval:
+
+Thus the 95% prediction interval for Coca-Cola return is (0.05%, 9.62%) when the return for the S&P 500 is 6%.
+
+R is an open-source statistical analysis tool that is widely used in the finance industry and can be found online. R provides an integrated suite of functions for data analysis, graphing, and correlation and regression analysis. R is increasingly being used as a data analysis and statistical tool because it is an open-source language and additional features are constantly being added by the user community. The tool can be used on many different computing platforms.
+
+Multiple Choice
+
+Questions
+
+Problems
+
+Simple Linear Regression
+
+How to Calculate Correlation for Stocks, Bonds, and Funds

@@ -1,0 +1,594 @@
+# m42246
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Damped Harmonic Motion
+
+Damped Harmonic Motion
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Compare and discuss underdamped and overdamped oscillating systems.
+
+Explain critically damped system.
+
+A guitar string stops oscillating a few seconds after being plucked. To keep a child happy on a swing, you must keep pushing. Although we can often make friction and other non-conservative forces negligibly small, completely undamped motion is rare. In fact, we may even want to damp oscillations, such as with car shock absorbers.
+
+For a system that has a small amount of damping, the period and frequency are nearly the same as for simple harmonic motion, but the amplitude gradually decreases as shown in . This occurs because the non-conservative damping force removes energy from the system, usually in the form of thermal energy. In general, energy removal by non-conservative forces is described as
+
+where Wnc is work done by a non-conservative force (here the damping force). For a damped harmonic oscillator, Wnc is negative because it removes mechanical energy (KE + PE) from the system.
+
+If you gradually increase the amount of damping in a system, the period and frequency begin to be affected, because damping opposes and hence slows the back and forth motion. (The net force is smaller in both directions.) If there is very large damping, the system does not even oscillate—it slowly moves toward equilibrium. shows the displacement of a harmonic oscillator for different amounts of damping. When we want to damp out oscillations, such as in the suspension of a car, we may want the system to return to equilibrium as quickly as possible Critical damping is defined as the condition in which the damping of an oscillator results in it returning as quickly as possible to its equilibrium position The critically damped system may overshoot the equilibrium position, but if it does, it will do so only once. Critical damping is represented by Curve A in . With less-than critical damping, the system will return to equilibrium faster but will overshoot and cross over one or more times. Such a system is underdamped; its displacement is represented by the curve in . Curve B in represents an overdamped system. As with critical damping, it too may overshoot the equilibrium position, but will reach equilibrium over a longer period of time.
+
+Critical damping is often desired, because such a system returns to equilibrium rapidly and remains at equilibrium as well. In addition, a constant force applied to a critically damped system moves the system to a new equilibrium position in the shortest time possible without overshooting or oscillating about the new position. For example, when you stand on bathroom scales that have a needle gauge, the needle moves to its equilibrium position without oscillating. It would be quite inconvenient if the needle oscillated about the new equilibrium position for a long time before settling. Damping forces can vary greatly in character. Friction, for example, is sometimes independent of velocity (as assumed in most places in this text). But many damping forces depend on velocity—sometimes in complex ways, sometimes simply being proportional to velocity.
+
+Damping an Oscillatory Motion: Friction on an Object Connected to a Spring
+
+Damping oscillatory motion is important in many systems, and the ability to control the damping is even more so. This is generally attained using non-conservative forces such as the friction between surfaces, and viscosity for objects moving through fluids. The following example considers friction. Suppose a 0.200-kg object is connected to a spring as shown in , but there is simple friction between the object and the surface, and the coefficient of friction μk is equal to 0.0800. (a) What is the frictional force between the surfaces? (b) What total distance does the object travel if it is released 0.100 m from equilibrium, starting at v=0? The force constant of the spring is k=50.0 N/m .
+Strategy
+
+Strategy
+
+This problem requires you to integrate your knowledge of various concepts regarding waves, oscillations, and damping. To solve an integrated concept problem, you must first identify the physical principles involved. Part (a) is about the frictional force. This is a topic involving the application of Newton’s Laws. Part (b) requires an understanding of work and conservation of energy, as well as some understanding of horizontal oscillatory systems.
+
+Now that we have identified the principles we must apply in order to solve the problems, we need to identify the knowns and unknowns for each part of the question, as well as the quantity that is constant in Part (a) and Part (b) of the question.
+Solution a
+
+Solution a
+
+Choose the proper equation: Friction is f=μkmg.
+
+Identify the known values.
+
+Enter the known values into the equation:
+
+ f
+ =
+ (0.0800)
+
+ (0
+ .200 kg)
+ (9
+ .80 m/ s
+
+ 2
+
+)
+
+ .
+
+Calculate and convert units:
+
+ f
+ =
+ 0.157 N
+
+.
+Discussion a
+
+Discussion a
+
+The force here is small because the system and the coefficients are small.
+Solution b
+
+Solution b
+
+Identify the known:
+
+The system involves elastic potential energy as the spring compresses and expands, friction that is related to the work done, and the kinetic energy as the body speeds up and slows down.
+
+Energy is not conserved as the mass oscillates because friction is a non-conservative force.
+
+The motion is horizontal, so gravitational potential energy does not need to be considered.
+
+Because the motion starts from rest, the energy in the system is initially PEel,i=(1/2)kX2. This energy is removed by work done by friction Wnc=–fd, where
+
+d
+
+ is the total distance traveled and f=μkmg is the force of friction. When the system stops moving, the friction force will balance the force exerted by the spring, so 
+
+PE
+
+e1,f
+
+=
+
+(
+
+1
+
+/
+
+2
+
+)
+
+kx
+
+2
+
+ where 
+
+x
+
+ is the final position and is given by
+
+ F
+ 
+ el
+
+ =
+
+ f
+
+ kx
+
+ =
+
+ μ
+ 
+ k
+
+ mg
+
+ x
+
+ =
+
+ μ
+ 
+ k
+
+ mg
+
+ k
+
+.
+
+By equating the work done to the energy removed, solve for the distance
+
+d
+
+.
+
+The work done by the non-conservative forces equals the initial, stored elastic potential energy. Identify the correct equation to use:
+
+W
+
+nc
+
+=
+
+Δ
+
+KE
+
++
+
+PE
+
+=
+
+PE
+
+el,f
+
+−
+
+PE
+
+el,i
+
+=
+
+1
+
+2
+
+k
+
+μ
+
+k
+
+mg
+
+k
+
+2
+
+−
+
+X
+
+2
+
+.
+
+Recall that Wnc=–fd.
+
+Enter the friction as f=μkmg into Wnc=–fd, thus
+
+ W
+
+ nc
+
+ =
+ –
+ μ
+
+ k
+
+ mgd
+
+ .
+
+Combine these two equations to find
+
+1
+
+2
+
+k
+
+μ
+
+k
+
+mg
+
+k
+
+2
+
+−
+
+X
+
+2
+
+=
+
+−
+
+μ
+
+k
+
+mgd
+
+.
+
+Solve the equation for
+
+d
+
+:
+
+ d
+ =
+
+ k
+
+2
+ μ
+ k
+
+ mg
+
+(
+
+X2
+–
+
+(
+
+ μ
+ k
+
+ mg
+
+k
+
+)
+2
+
+)
+
+ .
+
+Enter the known values into the resulting equation:
+
+ d
+ =
+
+ 50.0 N/m
+
+ 2
+ (
+ 0.0800
+ )
+ (
+ 0.200
+
+ kg
+ )
+ (
+ 
+ 9.80
+
+ m/s
+ 2
+
+ )
+
+ (
+
+ (
+
+ 0.100
+
+ m)
+ 
+ 2
+ 
+ −
+ 
+ (
+
+ (0.0800)
+
+ (0.200
+ kg
+ 
+ )
+ (
+ 
+ 9.80
+
+ m/s
+ 2
+
+ )
+
+ 50.0
+
+ N/m
+
+ )
+
+ 2
+
+ )
+.
+
+Calculate
+
+d
+
+ and convert units:
+
+ d
+ =
+ 1
+ 
+ .
+ 59
+
+ m
+
+ .
+Discussion b
+
+Discussion b
+
+This is the total distance traveled back and forth across x=0, which is the undamped equilibrium position. The number of oscillations about the equilibrium position will be more than 
+
+d
+
+/
+
+X
+
+=
+
+(
+
+1
+
+.
+
+59
+
+m
+
+)
+
+/
+
+(
+
+0
+
+.
+
+100
+
+m
+
+)
+
+=
+
+15
+
+.
+
+9
+
+ because the amplitude of the oscillations is decreasing with time. At the end of the motion, this system will not return to x=0 for this type of damping force, because static friction will exceed the restoring force. This system is underdamped. In contrast, an overdamped system with a simple constant damping force would not cross the equilibrium position x=0 a single time. For example, if this system had a damping force 20 times greater, it would only move 0.0484 m toward the equilibrium position from its original 0.100-m position.
+
+This worked example illustrates how to apply problem-solving strategies to situations that integrate the different concepts you have learned. The first step is to identify the physical principles involved in the problem. The second step is to solve for the unknowns using familiar problem-solving strategies. These are found throughout the text, and many worked examples show how to use them for single topics. In this integrated concepts example, you can see how to apply them across several topics. You will find these techniques useful in applications of physics outside a physics course, such as in your profession, in other science disciplines, and in everyday life.
+
+Check Your Understanding
+
+Why are completely undamped harmonic oscillators so rare?
+
+Friction often comes into play whenever an object is moving. Friction causes damping in a harmonic oscillator.
+
+Check Your Understanding
+
+Describe the difference between overdamping, underdamping, and critical damping.
+
+An overdamped system moves slowly toward equilibrium. An underdamped system moves quickly to equilibrium, but will oscillate about the equilibrium point as it does so. A critically damped system moves as quickly as possible toward equilibrium without oscillating about the equilibrium.
+
+Test Prep for AP Courses
+
+The non-conservative damping force removes energy from a system in which form?
+
+Mechanical energy
+
+Electrical energy
+
+Thermal energy
+
+None of the above
+
+(c)
+
+The time rate of change of mechanical energy for a damped oscillator is always:
+
+0
+
+Negative
+
+Positive
+
+Undefined
+
+A 0.5-kg object is connected to a spring that undergoes oscillatory motion. There is friction between the object and the surface it is kept on given by coefficient of friction
+
+ μ
+ k
+ 
+  = 0.06
+ . If the object is released 0.2 m from equilibrium, what is the distance that the object travels? Given that the force constant of the spring is 50 N m-1 and the frictional force between the objects is 0.294 N.
+d = 
+ k
+ 
+ 2
+ μ
+ K
+ 
+ mg
+
+ (
+
+ X
+ 2
+ 
+ −
+
+ μ
+ K
+ 
+ mg
+ 
+ k
+
+ )
+ 2
+
+ where k = 50 N⋅
+ m
+ 
+ −1
+
+ μ
+ k
+ 
+  = 0.06
+
+ m = 0.5kg
+
+ d = 
+ 
+ 50N⋅
+ m
+ 
+ −1
+
+ 2×0.06×9.8m⋅
+ s
+ 
+ −2
+
+ (
+ 
+ (0.2)
+ 
+ 2
+ 
+ −(
+
+ (0.06×0.5kg×9.8m⋅
+ s
+ 
+ −2
+
+ )
+ 
+ 2
+
+ (50N⋅
+ m
+ 
+ −1
+
+ )
+ 
+ 2
+
+ ))
+
+ = 1.698 m
+
+Section Summary
+
+Damped harmonic oscillators have non-conservative forces that dissipate their energy.
+
+Critical damping returns the system to equilibrium as fast as possible without overshooting.
+
+An underdamped system will oscillate through the equilibrium position.
+
+An overdamped system moves more slowly toward equilibrium than one that is critically damped.
+
+Conceptual Questions
+
+Give an example of a damped harmonic oscillator. (They are more common than undamped or simple harmonic oscillators.)
+
+How would a car bounce after a bump under each of these conditions?
+ 
+ overdamping
+ underdamping
+ critical damping
+
+overdamping
+
+underdamping
+
+critical damping
+
+Most harmonic oscillators are damped and, if undriven, eventually come to a stop. How is this observation related to the second law of thermodynamics?
+
+Problems & Exercises
+
+The amplitude of a lightly damped oscillator decreases by 3.0% during each cycle. What percentage of the mechanical energy of the oscillator is lost in each cycle?
+
+the condition in which the damping of an oscillator causes it to return as quickly as possible to its equilibrium position without oscillating back and forth about this position
+the condition in which damping of an oscillator causes it to return to equilibrium without oscillating; oscillator moves more slowly toward equilibrium than in the critically damped system
+the condition in which damping of an oscillator causes it to return to equilibrium with the amplitude gradually decreasing to zero; system returns to equilibrium faster but overshoots and crosses the equilibrium position one or more times

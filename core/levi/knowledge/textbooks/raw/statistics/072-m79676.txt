@@ -1,0 +1,928 @@
+# m79676
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Test of Independence
+
+Test of Independence
+
+Tests of independence involve using a contingency table of observed (data) values.
+
+The test statistic for a test of independence is similar to that of a goodness-of-fit test
+
+where
+O = observed values,
+E = expected values,
+i = the number of rows in the table, and
+j = the number of columns in the table.
+
+There are i⋅ j terms of the form 
+
+ (O–E)
+ 
+ 2
+
+ E
+
+.
+
+A test of independence determines whether two factors are independent. You first encountered the term independence in Probability Topics. As a review, consider the following example.
+
+Note
+
+The expected value for each cell needs to be at least five for you to use this test.
+
+Suppose A = a speeding violation in the last year and B = a cell phone user while driving. If A and B are independent, then P(A AND B) = P(A)P(B). A AND B is the event that a driver received a speeding violation last year and also used a cell phone while driving. Suppose, in a study of drivers who received speeding violations in the last year, and who used cell phones while driving, that 755 people were surveyed. Out of the 755, 70 had a speeding violation and 685 did not; 305 used cell phones while driving and 450 did not.
+
+Let y = expected number of drivers who used a cell phone while driving and received speeding violations.
+
+If A and B are independent, then P(A AND B) = P(A)P(B). By substitution,
+y
+ 
+ 755
+
+ =(
+
+ 70
+
+ 755
+
+ )(
+
+ 305
+
+ 755
+
+ )
+.
+
+Solve for y: y = 
+
+ (70)(305)
+
+ 755
+
+ =28.3
+.
+
+About 28 people from the sample are expected to use cell phones while driving and to receive speeding violations.
+
+In a test of independence, we state the null and alternative hypotheses in words. Since the contingency table consists of two factors, the null hypothesis states that the factors are independent and the alternative hypothesis states that they are not independent (dependent). If we do a test of independence using the example, then the null hypothesis is the following:
+H0: Being a cell phone user while driving and receiving a speeding violation are independent events.
+
+If the null hypothesis were true, we would expect about 28 people to use cell phones while driving and to receive a speeding violation.
+
+The test of independence is always right-tailed because of the calculation of the test statistic. If the expected and observed values are not close together, then the test statistic is very large and way out in the right tail of the chi-square curve, as it is in a goodness-of-fit.
+
+The number of degrees of freedom for the test of independence is
+df = (number of columns – 1)(number of rows – 1).
+
+The following formula calculates the expected number (E):
+E=(row total)(column total)total number surveyed
+
+Try It
+
+A sample of 300 students is taken. Of the students surveyed, 50 were music students, while 250 were not. 97 were on the honor roll, while 203 were not. If we assume being a music student and being on the honor roll are independent events, what is the expected number of music students who are also on the honor roll?
+
+About 16 students are expected to be music students and on the honor roll.
+
+In a volunteer group, adults 21 and older volunteer from one to nine hours each week to spend time with a disabled senior citizen. The program recruits among community college students, four-year college students, and non-students. In is a sample of the adult volunteers and the number of hours they volunteer per week.
+
+Number of Hours Worked per Week by Volunteer Type (Observed)
+
+Type of Volunteer
+1–3 Hours
+4–6 Hours
+7–9 Hours
+Community College Students
+111
+96
+48
+Four-year College Students
+96
+133
+61
+Non-students
+91
+150
+53
+Column Total
+298
+379
+162
+839
+Is the number of hours volunteered independent of the type of volunteer?
+
+The observed values and the question at the end of the problem, “Is the number of hours volunteered independent of the type of volunteer?” tell you this is a test of independence. The two factors are number of hours volunteered and type of volunteer. This test is always right-tailed.
+H0: The number of hours volunteered is independent of the type of volunteer.
+Ha: The number of hours volunteered is dependent on the type of volunteer.
+
+The expected result are in .
+ Number of Hours Worked per Week by Volunteer Type (Expected)
+
+ Type of Volunteer 1-3 Hours 4–6 Hours 7-9 Hours
+ 
+ Community College Students90.57115.1949.24
+ Four-Year College Students10313156
+ Nonstudents104.42132.8156.77
+
+The table contains expected (E) values (data).
+
+Number of Hours Worked per Week by Volunteer Type (Expected)
+
+Type of Volunteer
+1-3 Hours
+4–6 Hours
+7-9 Hours
+Community College Students
+90.57
+115.19
+49.24
+Four-Year College Students
+103
+131
+56
+Nonstudents
+104.42
+132.81
+56.77
+For example, the calculation for the expected frequency for the top-left cell is
+E=
+ 
+ (row total)(column total)
+
+ total number surveyed
+
+ =
+ 
+ (
+ 
+ 255
+ 
+ )(
+ 
+ 298
+ 
+ )
+
+ 839
+
+ =90.57
+.
+Calculate the test statistic: χ2 = 12.99 (calculator or computer)
+Distribution for the test: χ42
+df = (3 columns – 1)(3 rows – 1) = (2)(2) = 4
+Graph
+Probability statement: p-value = P(χ2 > 12.99) = 0.0113
+Compare α and the p-value: Since no α is given, assume α = 0.05. p-value = 0.0113. α > p-value.
+Make a decision: Since α > p-value, reject H0. This means that the factors are not independent.
+Conclusion: At a 5 percent level of significance, from the data, there is sufficient evidence to conclude that the number of hours volunteered and the type of volunteer are dependent on each other.
+
+For the example in , if there had been another type of volunteer, teenagers, what would the degrees of freedom be?
+
+Press the MATRX key and arrow over to EDIT. Press 1:[A]. Press 3 ENTER 3 ENTER. Enter the table values by row from . Press ENTER after each. Press 2nd QUIT. Press STAT and arrow over to TESTS. Arrow down to C:χ2-TEST. Press ENTER. You should see Observed:[A] and Expected:[B]. Arrow down to Calculate. Press ENTER. The test statistic is 12.9909 and the p-value = .0113. Do the procedure a second time, but arrow down to Draw instead of Calculate.
+
+Try It
+
+The Bureau of Labor Statistics gathers data about employment in the United States. A sample is taken to calculate the number of U.S. citizens working in one of several industry sectors over time. shows the results:
+
+Industry Sector
+2000
+2010
+2020
+Non-agriculture Wage and Salary
+13,243
+13,044
+15,018
+Goods-producing, Excluding Agriculture
+2,457
+1,771
+1,950
+Services-providing
+10,786
+11,273
+13,068
+Agriculture, Forestry, Fishing, and Hunting
+240
+214
+201
+Non-agriculture Self-employed and Unpaid Family Worker
+931
+894
+972
+Secondary Wage and Salary Jobs in Agriculture and Private Household Industries
+14
+11
+11
+Secondary Jobs as a Self-employed or Unpaid Family Worker
+196
+144
+152
+492
+Total
+27,867
+27,351
+31,372
+86,590
+We want to know if the change in the number of jobs is independent of the change in years. State the null and alternative hypotheses and the degrees of freedom.
+H0 : The number of jobs is independent of the year.
+Ha : The number of jobs is dependent on the year.df = 12
+
+Press the MATRX key and arrow over to EDIT. Press 1:[A]. Press 3 ENTER 3 ENTER. Enter the table values by row. Press ENTER after each. Press 2nd QUIT. Press STAT and arrow over to TESTS. Arrow down to C:χ2-TEST. Press ENTER. You should see Observed:[A] and Expected:[B]. Arrow down to Calculate. Press ENTER. The test statistic is 227.73 and the p−value = 5.90E - 42 = 0. Do the procedure a second time but arrow down to Draw instead of calculate.
+
+De Anza College is interested in the relationship between anxiety level and the need to succeed in school. A random sample of 400 students took a test that measured anxiety level and need to succeed in school. shows the results. De Anza College wants to know if anxiety level and need to succeed in school are independent events.
+
+Need to Succeed in School vs. Anxiety Level
+
+Need to Succeed in School
+High Anxiety
+Med-High Anxiety
+Medium Anxiety
+Med-Low Anxiety
+Low Anxiety
+Row Total
+High Need
+35
+42
+53
+15
+10
+155
+Medium Need
+18
+48
+63
+33
+31
+193
+Low Need
+4
+5
+11
+15
+17
+52
+Column Total
+57
+95
+127
+63
+58
+400
+a. How many high anxiety level students are expected to have a high need to succeed in school?
+
+a. The column total for a high anxiety level is 57. The row total for high need to succeed in school is 155. The sample size or total surveyed is 400.
+E=(row total)(column total)total surveyed=155⋅57400=22.09
+
+The expected number of students who have a high anxiety level and a high need to succeed in school is about 22.
+
+b. If the two variables are independent, how many students do you expect to have a low need to succeed in school and a med-low level of anxiety?
+
+b. The column total for a med-low anxiety level is 63. The row total for a low need to succeed in school is 52. The sample size or total surveyed is 400.
+
+c. E=(row total)(column total)
+ total surveyed = ________
+
+c. E=(row total)(column total)total surveyed = 8.19
+
+d. The expected number of students who have a med-low anxiety level and a low need to
+ succeed in school is about ________.
+
+d. 8
+
+Try It
+
+Refer back to the information in . How many services-providing jobs are there expected to be in 2020? How many nonagriculture wage and salary jobs are there expected to be in 2020?
+
+12,727, 14,965
+
+References
+
+Harris Interactive. (n.d.). Retrieved from http://www.statisticbrain.com/favorite-flavor-of-ice-cream/
+
+Statistics Brain. (2016, June 29). Youngest online entrepreneurs list. Retrieved from http://www.statisticbrain.com/youngest-online-entrepreneur-list
+
+Chapter Review
+
+To assess whether two factors are independent, you can apply the test of independence that uses the chi-square distribution. The null hypothesis for this test states that the two factors are independent. The test compares observed values to expected values. The test is right-tailed. Each observation or cell category must have an expected value of at least five.
+
+Formula Review
+
+Test of Independence
+
+The number of degrees of freedom is equal to (number of columns–1)(number of rows–1).
+
+The test statistic is
+
+ Σ
+ 
+ (i⋅j)
+
+ (O–E)
+ 
+ 2
+
+ E
+
+ where
+O = observed values,
+E = expected values,
+i = the number of rows in the
+table, and
+j = the number of columns in
+the table.
+
+If the null hypothesis is true, the expected number
+
+E
+=
+
+(row total)(column total)
+total surveyed
+
+.
+Determine the appropriate test to be used in the next three exercises.
+
+A pharmaceutical company is interested in the relationship between age and presentation of symptoms for a common viral infection. A random sample is taken of 500 people with the infection across different age groups.
+
+a test of independence
+
+The owner of a baseball team is interested in the relationship between player salaries and team winning percentage. He takes a random sample of 100 players from different organizations.
+
+A marathon runner is interested in the relationship between the brand of shoes runners wear and their run times. She takes a random sample of 50 runners and records their run times and the brand of shoes they were wearing.
+
+a test of independence
+Use the following information to answer the next seven exercises: Transit Railroads is interested in the relationship between travel distance and the ticket class purchased. A random sample of 200 passengers is taken. shows the results. The railroad wants to know if a passenger’s choice in ticket class is independent of the distance the passenger must travel.
+
+Traveling Distance
+Third Class
+Second Class
+First Class
+1–100 miles
+21
+14
+6
+101–200 miles
+18
+16
+8
+201–300 miles
+16
+17
+15
+301–400 miles
+12
+14
+21
+401–500 miles
+6
+6
+10
+Total
+73
+67
+60
+200
+State the hypotheses.
+H0: _______
+Ha: _______
+df = _______
+
+8
+
+How many passengers are expected to travel between 201 and 300 miles and purchase second-class tickets?
+
+How many passengers are expected to travel between 401 and 500 miles and purchase first-class tickets?
+
+6.6
+
+What is the test statistic?
+
+What is the p-value?
+
+0.0435
+
+What can you conclude at the 5 percent level of significance?
+Use the following information to answer the next ten exercises. An article in the New England Journal of Medicine discussed a study on people who used a certain product in California and Hawaii. In one part of the report, the self-reported ethnicity and product-use levels per day were given. Of the people using the product at most 10 times per day, there were 9,886 African Americans, 2,745 Native Hawaiians, 12,831 Latinos, 8,378 Japanese Americans, and 7,650 whites. Of the people using the product 11 to 20 times per day, there were 6,514 African Americans, 3,062 Native Hawaiians, 4,932 Latinos, 10,680 Japanese Americans, and 9,877 whites. Of the people using the product 21 to 30 times per day, there were 1,671 African Americans, 1,419 Native Hawaiians, 1,406 Latinos, 4,715 Japanese Americans, and 6,062 whites. Of the people using the product at least 31 times per day, there were 759 African Americans, 788 Native Hawaiians, 800 Latinos, 2,305 Japanese Americans, and 3,970 whites.
+
+Complete the table.
+
+Product use Per Day
+African American
+Native Hawaiian
+Latino
+Japanese American
+White
+31+
+TOTALS
+
+Product-use Per Day
+African American
+Native Hawaiian
+Latino
+Japanese Americans
+White
+Totals
+1–10
+9,886
+2,745
+12,831
+8,378
+7,650
+41,490
+11–20
+6,514
+3,062
+4,932
+10,680
+9,877
+35,065
+21–30
+1,671
+1,419
+1,406
+4,715
+6,062
+15,273
+31+
+759
+788
+800
+2,305
+3,970
+8,622
+Totals
+18,830
+8,014
+19,969
+26,078
+27,559
+10,0450
+State the hypotheses.
+H0: _______
+Ha: _______
+
+Enter expected values in . Round to two decimal places.
+
+Calculate the following values.
+
+Product Use Per Day
+African American
+Native Hawaiian
+Latino
+Japanese Americans
+White
+1-10
+7,777.57
+3,310.11
+8,248.02
+10,771.29
+11,383.01
+11-20
+6,573.16
+2797.52
+6970.76
+9,103.29
+9,620.27
+21-30
+2,863.02
+1,218.49
+3,036.20
+3,965.05
+4,190.23
+31+
+1,616.25
+687.87
+1,714.01
+2,238.37
+df = _______
+χ
+ 2
+
+ test statistic = ______
+
+10,301.8
+p-value = ______
+
+Is this a right-tailed, left-tailed, or two-tailed test? Explain why.
+
+right-tailed
+
+Graph the situation. Label and scale the horizontal axis. Mark the mean and test statistic. Shade in the region corresponding to the p-value.
+
+State the decision and conclusion (in a complete sentence) for the following levels of α.
+α = 0.05
+
+Decision: ___________________
+
+Reason for the decision: ___________________
+
+Conclusion (write out in a complete sentence): ___________________
+
+Reject the null hypothesis.
+p-value < alpha
+
+There is sufficient evidence to conclude that product use is dependent on ethnic group.
+α = 0.01
+
+Decision: ___________________
+
+Reason for the decision: ___________________
+
+Conclusion (write out in a complete sentence): ___________________
+
+Homework
+For each problem, use a solution sheet to solve the hypothesis test problem. Go to Appendix E for the chi-square solution sheet. Round expected frequency to two decimal places.
+
+A recent debate about where in the U.S. skiers believe the skiing is best prompted the following survey. Test to see if the best ski area is independent of the level of the skier.
+
+U.S. Ski Area
+Beginner
+Intermediate
+Tahoe
+20
+30
+Utah
+10
+30
+Colorado
+10
+40
+50
+Car manufacturers are interested in whether there is a relationship between the size of car an individual drives and the number of people in the driver’s family—that is, whether car size and family size are independent. To test this, suppose that 800 car owners were randomly surveyed with the results in . Conduct a test of independence.
+
+Family Size
+Sub & Compact
+Mid-Size
+Full-Size
+1
+20
+35
+40
+2
+20
+50
+70
+3–4
+20
+50
+100
+5+
+20
+30
+70
+H0: Car size is independent of family size.
+Ha: Car size is dependent on family size.
+df = 9
+
+chi-square distribution with df = 9
+
+test statistic = 15.8284
+p-value = 0.0706
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Do not reject the null hypothesis.
+ Reason for decision: p-value > alpha
+ Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that car size and family size are dependent.
+
+Alpha: 0.05
+
+Decision: Do not reject the null hypothesis.
+
+Reason for decision: p-value > alpha
+
+Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that car size and family size are dependent.
+
+College students may be interested in whether their majors have any effect on starting salaries after graduation. Suppose that 300 recent graduates were surveyed as to their majors in college and their starting salaries after graduation. shows the data. Conduct a test of independence.
+
+Major
+< $50,000
+$50,000–$68,999
+English
+5
+20
+Engineering
+10
+30
+Nursing
+10
+15
+Business
+10
+20
+Psychology
+20
+30
+20
+Some travel agents claim that honeymoon hotspots vary according to age of the bride. Suppose that 280 recent brides were interviewed as to where they spent their honeymoons. The information is given in . Conduct a test of independence.
+
+Location
+20–29
+30–39
+40–49
+Niagara Falls
+15
+25
+25
+Poconos
+15
+25
+25
+Europe
+10
+25
+15
+Virgin Islands
+20
+25
+15
+H0: Honeymoon locations are independent of bride’s age.
+Ha: Honeymoon locations are dependent on bride’s age.
+df = 9
+
+chi-square distribution with df = 9
+
+test statistic = 15.7027
+p-value = 0.0734
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Do not reject the null hypothesis.
+ Reason for decision: p-value > alpha
+ Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that honeymoon location and bride age are dependent.
+
+Alpha: 0.05
+
+Decision: Do not reject the null hypothesis.
+
+Reason for decision: p-value > alpha
+
+Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that honeymoon location and bride age are dependent.
+
+A manager of a sports club keeps information concerning the main sport in which members participate and their ages. To test whether there is a relationship between the age of a member and his or her choice of sport, 643 members of the sports club are randomly selected. Conduct a test of independence.
+
+Sport
+18–25
+26–30
+31–40
+Racquetball
+42
+58
+30
+Tennis
+58
+76
+38
+Swimming
+72
+60
+65
+33
+A major food manufacturer is concerned that the sales for its skinny french fries have been decreasing. As a part of a feasibility study, the company conducts research into the types of fries sold across the country to determine if the type of fries sold is independent of the area of the country. The results of the study are shown in . Conduct a test of independence.
+
+Type of Fries
+Northeast
+South
+Central
+Skinny Fries
+70
+50
+20
+Curly Fries
+100
+60
+15
+Steak Fries
+20
+40
+10
+H0: The types of fries sold are independent of the location.
+Ha: The types of fries sold are dependent on the location.
+df = 6
+
+chi-square distribution with df = 6
+
+test statistic =18.8369
+p-value = 0.0044
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Reject the null hypothesis.
+ Reason for decision: p-value < alpha
+ Conclusion: At the 5 percent significance level, there is sufficient evidence that types of fries and location are dependent.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for decision: p-value < alpha
+
+Conclusion: At the 5 percent significance level, there is sufficient evidence that types of fries and location are dependent.
+
+According to Dan Leonard, an independent insurance agent in the Buffalo, New York area, the following is a breakdown of the amount of life insurance purchased by males in the following age groups. He is interested in whether the age of the male and the amount of life insurance purchased are independent events. Conduct a test for independence.
+
+Age of Males
+None
+< $200,000
+$200,000–$400,000
+$401,001–$1,000,000
+20–29
+40
+15
+40
+0
+30–39
+35
+5
+20
+20
+40–49
+20
+0
+30
+0
+50+
+40
+30
+15
+15
+10
+Suppose that 600 thirty-year-olds were surveyed to determine whether there is a relationship between the level of education an individual has and salary. Conduct a test of independence.
+
+Annual Salary
+Not a High School Graduate
+High School Graduate
+College Graduate
+< $30,000
+15
+25
+10
+$30,000–$40,000
+20
+40
+70
+$40,000–$50,000
+10
+20
+40
+$50,000–$60,000
+5
+10
+20
+$60,000+
+0
+5
+10
+H0: Salary is independent of level of education.
+Ha: Salary is dependent on level of education.
+df = 12
+
+chi-square distribution with df = 12
+
+test statistic = 255.7704
+p-value = 0
+
+Check student’s solution.
+Alpha: 0.05
+Decision: Reject the null hypothesis.
+Reason for decision: p-value < alpha
+Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that salary and level of education are dependent.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for decision: p-value < alpha
+
+Conclusion: At the 5 percent significance level, there is sufficient evidence to conclude that salary and level of education are dependent.
+Read the statement and decide whether it is true or false.
+
+The number of degrees of freedom for a test of independence is equal to the sample size minus one.
+
+The test for independence uses tables of observed and expected data values.
+
+true
+
+The test to use when determining if the college or university a student chooses to attend is related to his or her socioeconomic status is a test for independence.
+
+In a test of independence, the expected number is equal to the row total multiplied by the column total divided by the total surveyed.
+
+true
+
+An ice cream maker performs a nationwide survey about favorite flavors of ice cream in different geographic areas of the United States. Based on , do the numbers suggest that geographic location is independent of favorite ice cream flavors? Test at the 5 percent significance level.
+
+U.S. Region/Flavor
+Strawberry
+Chocolate
+Vanilla
+Rocky Road
+Mint Chocolate Chip
+Pistachio
+West
+12
+21
+22
+19
+15
+8
+Midwest
+10
+32
+22
+11
+15
+6
+East
+8
+31
+27
+8
+15
+7
+South
+15
+28
+30
+8
+15
+6
+Column Total
+45
+112
+101
+46
+60
+27
+provides results of a recent survey of the youngest online entrepreneurs whose net worth is estimated at one million dollars or more. Their ages range from 17 to 30. Each cell in the table illustrates the number of entrepreneurs who correspond to the specific age group and their net worth. Are the ages and net worth independent? Perform a test of independence at the 5 percent significance level.
+
+Age Group/Net Worth Value (in millions of U.S. dollars)
+1–5
+6–24
+≥25
+17–25
+8
+7
+5
+26–30
+6
+5
+9
+Column Total
+14
+12
+14
+H0: Age is independent of the youngest online entrepreneurs’ net worth.
+Ha: Age is dependent on the net worth of the youngest online entrepreneurs.
+df = 2
+
+chi-square distribution with df = 2
+
+test statistic = 1.76
+p-value = 0.4144
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Do not reject the null hypothesis.
+ Reason for decision: p-value > alpha
+ Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that age and net worth for the youngest online entrepreneurs are dependent.
+
+Alpha: 0.05
+
+Decision: Do not reject the null hypothesis.
+
+Reason for decision: p-value > alpha
+
+Conclusion: At the 5 percent significance level, there is insufficient evidence to conclude that age and net worth for the youngest online entrepreneurs are dependent.
+
+A 2013 poll in California surveyed people about a new tax. The results are presented in and are classified by ethnic group and response type. Are the poll responses independent of the participants’ ethnic group? Conduct a test of independence at the 5 percent significance level.
+
+Opinion/Ethnicity
+Asian American
+White/Non-Hispanic
+African American
+Latino
+Against Tax
+48
+433
+41
+160
+In Favor of Tax
+54
+234
+24
+147
+No Opinion
+16
+43
+16
+19
+Column Total
+118
+710
+81
+326
+1,235
+a table that displays sample values for two different factors that may be dependent or contingent on each other; facilitates determining conditional probabilities

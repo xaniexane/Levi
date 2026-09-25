@@ -1,0 +1,108 @@
+# m42380
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Torque on a Current Loop: Motors and Meters
+
+Torque on a Current Loop: Motors and Meters
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe how motors and meters work in terms of torque on a current loop.
+
+Calculate the torque on a current-carrying loop in a magnetic field.
+Motors are the most common application of magnetic force on current-carrying wires. Motors have loops of wire in a magnetic field. When current is passed through the loops, the magnetic field exerts torque on the loops, which rotates a shaft. Electrical energy is converted to mechanical work in the process. (See .)
+
+Let us examine the force on each segment of the loop in to find the torques produced about the axis of the vertical shaft. (This will lead to a useful equation for the torque on the loop.) We take the magnetic field to be uniform over the rectangular loop, which has width w and height l. First, we note that the forces on the top and bottom segments are vertical and, therefore, parallel to the shaft, producing no torque. Those vertical forces are equal in magnitude and opposite in direction, so that they also produce no net force on the loop. shows views of the loop from above. Torque is defined as τ=rFsinθ, where F is the force, r is the distance from the pivot that the force is applied, and θ is the angle between r and F. As seen in (a), right hand rule 1 gives the forces on the sides to be equal in magnitude and opposite in direction, so that the net force is again zero. However, each force produces a clockwise torque. Since r=w/2, the torque on each vertical segment is (w/2)Fsinθ, and the two add to give a total torque.
+
+Now, each vertical segment has a length l that is perpendicular to B, so that the force on each is F=IlB. Entering F into the expression for torque yields
+
+If we have a multiple loop of N turns, we get N times the torque of one loop. Finally, note that the area of the loop is A=wl; the expression for the torque becomes
+
+This is the torque on a current-carrying loop in a uniform magnetic field. This equation can be shown to be valid for a loop of any shape. The loop carries a current I, has N turns, each of area A, and the perpendicular to the loop makes an angle θ with the field B. The net force on the loop is zero.
+
+Calculating Torque on a Current-Carrying Loop in a Strong Magnetic Field
+
+Find the maximum torque on a 100-turn square loop of a wire of 10.0 cm on a side that carries 15.0 A of current in a 2.00-T field.
+Strategy
+
+Strategy
+
+Torque on the loop can be found using τ=NIABsinθ. Maximum torque occurs when θ=90º and sinθ=1.
+Solution
+
+Solution
+
+For sinθ=1, the maximum torque is
+
+Entering known values yields
+Discussion
+
+Discussion
+
+This torque is large enough to be useful in a motor.
+
+The torque found in the preceding example is the maximum. As the coil rotates, the torque decreases to zero at θ=0. The torque then reverses its direction once the coil rotates past θ=0. (See (d).) This means that, unless we do something, the coil will oscillate back and forth about equilibrium at θ=0. To get the coil to continue rotating in the same direction, we can reverse the current as it passes through θ=0 with automatic switches called brushes. (See .)
+Meters, such as those in analog fuel gauges on a car, are another common application of magnetic torque on a current-carrying loop. shows that a meter is very similar in construction to a motor. The meter in the figure has its magnets shaped to limit the effect of θ by making B perpendicular to the loop over a large angular range. Thus the torque is proportional to I and not θ. A linear spring exerts a counter-torque that balances the current-produced torque. This makes the needle deflection proportional to I. If an exact proportionality cannot be achieved, the gauge reading can be calibrated. To produce a galvanometer for use in analog voltmeters and ammeters that have a low resistance and respond to small currents, we use a large loop area A, high magnetic field B, and low-resistance coils.
+
+Section Summary
+
+The torque τ on a current-carrying loop of any shape in a uniform magnetic field. is
+τ=NIABsinθ,
+where N is the number of turns, I is the current, A is the area of the loop, B is the magnetic field strength, and θ is the angle between the perpendicular to the loop and the magnetic field.
+
+Conceptual Questions
+
+Draw a diagram and use RHR-1 to show that the forces on the top and bottom segments of the motor’s current loop in are vertical and produce no torque about the axis of rotation.
+
+Problems & Exercises
+
+(a) By how many percent is the torque of a motor decreased if its permanent magnets lose 5.0% of their strength? (b) How many percent would the current need to be increased to return the torque to original values?
+
+(a) τ decreases by 5.00% if B decreases by 5.00%
+
+(b) 5.26% increase
+
+(a) What is the maximum torque on a 150-turn square loop of wire 18.0 cm on a side that carries a 50.0-A current in a 1.60-T field? (b) What is the torque when θ is 10.9º?
+
+Find the current through a loop needed to create a maximum torque of 9.00 N⋅m. The loop has 50 square turns that are 15.0 cm on a side and is in a uniform 0.800-T magnetic field.
+
+10.0 A
+
+Calculate the magnetic field strength needed on a 200-turn square loop 20.0 cm on a side to create a maximum torque of 300 N⋅m if the loop is carrying 25.0 A.
+
+Since the equation for torque on a current-carrying loop is τ=NIABsinθ, the units of N⋅m must equal units of A⋅m2T. Verify this.
+A⋅m2⋅T=A⋅m2NA⋅m=N⋅m.
+
+(a) At what angle θ is the torque on a current loop 90.0% of maximum? (b) 50.0% of maximum? (c) 10.0% of maximum?
+
+A proton has a magnetic field due to its spin on its axis. The field is similar to that created by a circular current loop 0.650×10−15m in radius with a current of 1.05×104A (no kidding). Find the maximum torque on a proton in a 2.50-T field. (This is a significant torque on a small particle.)
+3
+ .
+ 
+ 48
+ ×
+ 
+ 10
+
+ −
+ 26
+
+ N
+ ⋅
+ m
+
+(a) A 200-turn circular loop of radius 50.0 cm is vertical, with its axis on an east-west line. A current of 100 A circulates clockwise in the loop when viewed from the east. The Earth’s field here is due north, parallel to the ground, with a strength of 3.00×10−5T. What are the direction and magnitude of the torque on the loop? (b) Does this device have any practical applications as a motor?
+
+Repeat , but with the loop lying flat on the ground with its current circulating counterclockwise (when viewed from above) in a location where the Earth’s field is north, but at an angle 45.0º below the horizontal and with a strength of 6.00×10−5T.
+
+(a) 0.666 N⋅m west
+
+(b) This is not a very significant torque, so practical use would be limited. Also, the current would need to be alternated to make the loop rotate (otherwise it would oscillate).
+
+loop of wire in a magnetic field; when current is passed through the loops, the magnetic field exerts torque on the loops, which rotates a shaft; electrical energy is converted to mechanical work in the process
+common application of magnetic torque on a current-carrying loop that is very similar in construction to a motor; by design, the torque is proportional to I and not θ, so the needle deflection is proportional to the current

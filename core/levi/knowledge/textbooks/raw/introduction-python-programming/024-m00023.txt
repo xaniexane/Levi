@@ -1,0 +1,96 @@
+# m00023
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Variables revisited
+
+Variables revisited
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Distinguish between variables, objects, and references.
+
+Draw memory diagrams with integers, floats, and strings.
+
+References to objects
+
+In Python, every variable refers to an object. The assignment statement message = "Hello" makes the variable message refer to the object "Hello". Multiple variables may refer to the same object. Ex: greeting = message makes greeting refer to the same object as message. A memory diagram shows the relationship between variables and objects.
+
+Example memory diagram
+
+Variables and objects
+
+Exploring further
+Python Tutor is a free online tool for visualizing code execution. A user can enter any Python code, click Visualize Execution, and then click the Next button to run the code one line at a time. Here is the rating and score example from the animation above.
+
+Python Tutor is also useful for drawing memory diagrams similar to the ones in this book. Before clicking Visualize Execution, change the middle option from "inline primitives, don't nest objects [default]" to "render all objects on the heap (Python/Java)" as shown in the following screenshot:
+
+Properties of objects
+
+Every object has an identity, a type, and a value:
+An object's identity is a unique integer associated with the object. Generally, this integer refers to the memory location where the object is stored. Once created, an object's identity never changes. The built-in id() function returns the object's identity.
+
+An object's identity is a unique integer associated with the object. Generally, this integer refers to the memory location where the object is stored. Once created, an object's identity never changes. The built-in id() function returns the object's identity.
+An object's type determines the possible values and operations of an object. Ex: Integers and floats can be "divided" using the / operator, but strings cannot. The built-in type() function returns the object's type.
+
+An object's type determines the possible values and operations of an object. Ex: Integers and floats can be "divided" using the / operator, but strings cannot. The built-in type() function returns the object's type.
+An object's value represents the current state of the object. Many objects, such as numbers and strings, cannot be modified once created. Some objects, such as lists (introduced later), are designed to be modified.
+
+An object's value represents the current state of the object. Many objects, such as numbers and strings, cannot be modified once created. Some objects, such as lists (introduced later), are designed to be modified.
+
+Identity, type, and value
+
+id() and type()
+
+Exploring further
+
+As shown in a memory diagram, variables and objects are two separate ideas. Calling a function like id() or type() returns information about an object, not a variable. In fact, a variable doesn't have an identity or a type, as shown in this example:
+
+One might incorrectly think that the rating variable's type or identity changes. However, the only thing that changes is which object the rating variable refers to.
+
+Three variables
+
+Draw a memory diagram for the following code:
+ 
+ a = 1
+ b = 2
+ c = b
+ b = a
+ a = c
+
+Run the code on Python Tutor to check your answer.
+
+Based on your diagram, answer these questions:
+ 
+ What is the final value of a, b, and c?
+ How many integer objects are created?
+
+What is the final value of a, b, and c?
+
+How many integer objects are created?
+
+Different types
+
+Draw a memory diagram for the following code:
+ 
+ name = "Chocolate"
+ length = len(name)
+ price = 1.99
+ lower = min(length, price)
+ product = name
+ name = name * 2
+
+Run the code on Python Tutor to check your answer.
+
+Based on your diagram, answer these questions:
+ 
+ What is the type and value of each object?
+ Which object does each variable reference?
+
+What is the type and value of each object?
+
+Which object does each variable reference?

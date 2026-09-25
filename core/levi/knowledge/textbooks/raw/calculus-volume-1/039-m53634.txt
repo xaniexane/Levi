@@ -1,0 +1,325 @@
+# m53634
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Substitution
+
+Substitution
+
+Use substitution to evaluate indefinite integrals.
+
+Use substitution to evaluate definite integrals.
+
+The Fundamental Theorem of Calculus gave us a method to evaluate integrals without using Riemann sums. The drawback of this method, though, is that we must be able to find an antiderivative, and this is not always easy. In this section we examine a technique, called integration by substitution, to help us find antiderivatives. Specifically, this method helps us find antiderivatives when the integrand is the result of a chain-rule derivative.
+
+At first, the approach to the substitution procedure may not appear very obvious. However, it is primarily a visual task—that is, the integrand shows you what to do; it is a matter of recognizing the form of the function. So, what are we supposed to see? We are looking for an integrand of the form f[g(x)]g′(x)dx. For example, in the integral ∫(x2−3)32xdx, we have f(x)=x3,g(x)=x2−3, and g′(x)=2x. Then,
+
+and we see that our integrand is in the correct form.
+
+The method is called substitution because we substitute part of the integrand with the variable u and part of the integrand with du. It is also referred to as change of variables because we are changing variables to obtain an expression that is easier to work with for applying the integration rules.
+
+Substitution with Indefinite Integrals
+
+Let u=g(x), where g′(x) is continuous over an interval, let f(x) be continuous over the corresponding range of g, and let F(x) be an antiderivative of f(x). Then,
+
+Proof
+
+Let f, g, u, and F be as specified in the theorem. Then
+
+Integrating both sides with respect to x, we see that
+
+If we now substitute u=g(x), and du=g'(x)dx, we get
+
+□
+
+Returning to the problem we looked at originally, we let u=x2−3 and then du=2xdx. Rewrite the integral in terms of u:
+
+Using the power rule for integrals, we have
+
+Substitute the original expression for x back into the solution:
+
+We can generalize the procedure in the following Problem-Solving Strategy.
+
+Problem-Solving Strategy: Integration by Substitution
+
+Look carefully at the integrand and select an expression g(x) within the integrand to set equal to u. Let’s select g(x) such that g′(x) is also part of the integrand.
+
+Substitute u=g(x) and du=g′(x)dx into the integral.
+
+We should now be able to evaluate the integral with respect to u. If the integral can’t be evaluated we need to go back and select a different expression to use as u.
+
+Evaluate the integral in terms of u.
+
+Write the result in terms of x and the expression g(x).
+
+Using Substitution to Find an Antiderivative
+
+Use substitution to find the antiderivative ∫6x(3x2+4)4dx.
+
+The first step is to choose an expression for u. We choose u=3x2+4 because then du=6xdx, and we already have du in the integrand. Write the integral in terms of u:
+
+Remember that du is the derivative of the expression chosen for u, regardless of what is inside the integrand. Now we can evaluate the integral with respect to u:
+
+Analysis
+
+We can check our answer by taking the derivative of the result of integration. We should obtain the integrand. Picking a value for C of 1, we let y=15(3x2+4)5+1. We have
+
+so
+
+This is exactly the expression we started with inside the integrand.
+
+Use substitution to find the antiderivative ∫3x2(x3−3)2dx.
+∫3x2(x3−3)2dx=13(x3−3)3+C
+
+Hint
+
+Let u=x3−3.
+
+Sometimes we need to adjust the constants in our integral if they don’t match up exactly with the expressions we are substituting.
+
+Using Substitution with Alteration
+
+Use substitution to find ∫zz2−5dz.
+
+Rewrite the integral as ∫z(z2−5)1/2dz. Let u=z2−5 and du=2zdz. Now we have a problem because du=2zdz and the original expression has only zdz. We have to alter our expression for du or the integral in u will be twice as large as it should be. If we multiply both sides of the du equation by 12. we can solve this problem. Thus,
+
+Write the integral in terms of u, but pull the 12 outside the integration symbol:
+
+Integrate the expression in u:
+
+Use substitution to find ∫x2(x3+5)9dx.
+(x3+5)1030+C
+
+Hint
+
+Multiply the du equation by 13.
+
+Using Substitution with Integrals of Trigonometric Functions
+
+Use substitution to evaluate the integral ∫sintcos3tdt.
+
+We know the derivative of cost is −sint, so we set u=cost. Then du=−sintdt. Substituting into the integral, we have
+
+Evaluating the integral, we get
+
+Putting the answer back in terms of t, we get
+
+Use substitution to evaluate the integral ∫costsin2tdt.
+−1sint+C
+
+Hint
+
+Use the process from to solve the problem.
+
+Sometimes we need to manipulate an integral in ways that are more complicated than just multiplying or dividing by a constant. We need to eliminate all the expressions within the integrand that are in terms of the original variable. When we are done, u should be the only variable in the integrand. In some cases, this means solving for the original variable in terms of u. This technique should become clear in the next example.
+
+Finding an Antiderivative Using u-Substitution
+
+Use substitution to find the antiderivative ∫xx−1dx.
+
+If we let u=x−1, then du=dx. But this does not account for the x in the numerator of the integrand. We need to express x in terms of u. If u=x−1, then x=u+1. Now we can rewrite the integral in terms of u:
+
+Then we integrate in the usual way, replace u with the original expression, and factor and simplify the result. Thus,
+
+Use substitution to evaluate the indefinite integral ∫cos3tsintdt.
+−cos4t4+C
+
+Hint
+
+Use the process from to solve the problem.
+
+Substitution for Definite Integrals
+
+Substitution can be used with definite integrals, too. However, using substitution to evaluate a definite integral requires a change to the limits of integration. If we change variables in the integrand, the limits of integration change as well.
+
+Substitution with Definite Integrals
+
+Let u=g(x) and let g′ be continuous over an interval [a,b], and let f be continuous over the range of u=g(x). Then,
+
+Although we will not formally prove this theorem, we justify it with some calculations here. From the substitution rule for indefinite integrals, if F(x) is an antiderivative of f(x), we have
+
+Then
+
+and we have the desired result.
+
+Using Substitution to Evaluate a Definite Integral
+
+Use substitution to evaluate ∫01x2(1+2x3)5dx.
+
+Let u=1+2x3, so du=6x2dx. Since the original function includes one factor of x2 and du=6x2dx, multiply both sides of the du equation by 1/6. Then,
+
+To adjust the limits of integration, note that when x=0,u=1+2(0)=1, and when x=1,u=1+2(1)=3. Then
+
+Evaluating this expression, we get
+
+Use substitution to evaluate the definite integral ∫−10y(2y2−3)5dy.
+913
+
+Hint
+
+Use the steps from to solve the problem.
+
+Using Substitution with an Exponential Function
+
+Use substitution to evaluate ∫01xe4x2+3dx.
+
+Let u=4x2+3. Then, du=8xdx. To adjust the limits of integration, we note that when x=0,u=3, and when x=1,u=7. So our substitution gives
+
+Use substitution to evaluate ∫01x2cos(π2x3)dx.
+23π≈0.2122
+
+Hint
+
+Use the process from to solve the problem.
+
+Substitution may be only one of the techniques needed to evaluate a definite integral. All of the properties and rules of integration apply independently, and trigonometric functions may need to be rewritten using a trigonometric identity before we can apply substitution. Also, we have the option of replacing the original expression for u after we find the antiderivative, which means that we do not have to change the limits of integration. These two approaches are shown in .
+
+Using Substitution to Evaluate a Trigonometric Integral
+
+Use substitution to evaluate ∫0π/2cos2θdθ.
+
+Let us first use a trigonometric identity to rewrite the integral. The trig identity cos2θ=1+cos2θ2 allows us to rewrite the integral as
+
+Then,
+
+We can evaluate the first integral as it is, but we need to make a substitution to evaluate the second integral. Let u=2θ. Then, du=2dθ, or 12du=dθ. Also, when θ=0,u=0, and when θ=π/2,u=π. Expressing the second integral in terms of u, we have
+
+Key Concepts
+
+Substitution is a technique that simplifies the integration of functions that are the result of a chain-rule derivative. The term ‘substitution’ refers to changing variables or substituting the variable u and du for appropriate expressions in the integrand.
+
+When using substitution for a definite integral, we also have to change the limits of integration.
+
+Key Equations
+∫abf(g(x))g'(x)dx=∫g(a)g(b)f(u)du
+Why is u-substitution referred to as change of variable?
+
+2. If f=g∘h, when reversing the chain rule, ddx(g∘h)(x)=g′(h(x))h′(x), should you take u=g(x) or u=h(x)?
+u=h(x)
+
+In the following exercises, verify each identity using differentiation. Then, using the indicated u-substitution, identify f such that the integral takes the form ∫f(u)du.
+∫xx+1dx=215(x+1)3/2(3x−2)+C;u=x+1
+
+For x>1:∫x2x−1dx=215x−1(3x2+4x+8)+C;u=x−1
+f(u)=(u+1)2u
+∫x4x2+9dx=112(4x2+9)3/2+C;u=4x2+9
+∫x4x2+9dx=144x2+9+C;u=4x2+9
+du=8xdx;f(u)=18u
+∫x(4x2+9)2dx=−18(4x2+9);u=4x2+9
+
+In the following exercises, find the antiderivative using the indicated substitution.
+∫(x+1)4dx;u=x+1
+15(x+1)5+C
+∫(x−1)5dx;u=x−1
+∫(2x−3)−7dx;u=2x−3
+−112(2x−3)6+C
+∫(3x−2)−11dx;u=3x−2
+∫xx2+1dx;u=x2+1
+x2+1+C
+∫x1−x2dx;u=1−x2
+∫(x−1)(x2−2x)3dx;u=x2−2x
+18(x2−2x)4+C
+∫(x2−2x)(x3−3x2)2dx;u=x3–3x2
+∫cos3θdθ;u=sinθ (Hint:cos2θ=1−sin2θ)
+sinθ−sin3θ3+C
+∫sin3θdθ;u=cosθ (Hint:sin2θ=1−cos2θ)
+
+In the following exercises, use a suitable change of variables to determine the indefinite integral.
+∫x(1−x)99dx
+(1−x)101101−(1−x)100100+C
+∫t(1−t2)10dt
+∫(11x−7)−3dx
+∫(11x-7)-2dx=
+
+−122(11x−7)2+C
+∫(7x−11)4dx
+∫cos3θsinθdθ
+−cos4θ4+C
+∫sin7θcosθdθ
+∫cos2(πt)sin(πt)dt
+−cos3(πt)3π+C
+∫sin2xcos3xdx (Hint:sin2x+cos2x=1)
+∫tsin(t2)cos(t2)dt
+−14cos2(t2)+C
+∫t2cos2(t3)sin(t3)dt
+∫x2(x3−3)2dx
+−13(x3−3)+C
+∫x31−x2dx
+∫y5(1−y3)3/2dy
+−2(y3−2)31−y3
+∫cosθ(1−cosθ)99sinθdθ
+∫(1−cos3θ)10cos2θsinθdθ
+133(1−cos3θ)11+C
+∫(cosθ−1)(cos2θ−2cosθ)3sinθdθ
+∫(sin2θ−2sinθ)(sin3θ−3sin2θ)3cosθdθ
+112(sin3θ−3sin2θ)4+C
+
+In the following exercises, use a calculator to estimate the area under the curve using left Riemann sums with 50 terms, then use substitution to solve for the exact answer.
+[T] y=3(1−x)2 over [0,2]
+[T] y=x(1−x2)3 over [−1,2]
+L50=−8.5779. The exact area is −818
+[T] y=sinx(1−cosx)2 over [0,π]
+[T] y=x(x2+1)2 over [−1,1]
+L50=−0.006399 … The exact area is 0.
+
+In the following exercises, use a change of variables to evaluate the definite integral.
+∫01x1−x2dx
+∫01x1+x2dx
+u=1+x2,du=2xdx,12∫12u−1/2du=2−1
+∫02t5+t2dt
+∫01t21+t3dt
+u=1+t3,du=3t2dt,13∫12u−1/2du=23(2−1)
+∫0π/4sec2θtanθdθ
+∫0π/4sinθcos4θdθ
+u=cosθ,du=−sinθdθ,∫1/21u−4du=13(22−1)
+
+In the following exercises, evaluate the indefinite integral ∫f(x)dx with constant C=0 using u-substitution. Then, graph the function and the antiderivative over the indicated interval. If possible, estimate a value of C that would need to be added to the antiderivative to make it equal to the definite integral F(x)=∫axf(t)dt, with a the left endpoint of the given interval.
+[T] ∫(2x+1)ex2+x−6dx over [−3,2]
+[T] ∫cos(ln(2x))xdx on [0,2]
+The antiderivative is y=sin(ln(2x)). Since the antiderivative is not continuous at x=0, one cannot find a value of C that would make y=sin(ln(2x))−C work as a definite integral.
+[T] ∫3x2+2x+1x3+x2+x+4dx over [−1,2]
+[T] ∫sinxcos3xdx over [−π3,π3]
+The antiderivative is y=12sec2x. You should take C=−2 so that F(−π3)=0.
+[T] ∫(x+2)e−x2−4x+3dx over [−5,1]
+[T] ∫3x22x3+1dx over [0,1]
+The antiderivative is y=13(2x3+1)3/2. One should take C=−13.
+
+If h(a)=h(b) in ∫abg′(h(x))h′(x)dx, what can you say about the value of the integral?
+
+Is the substitution u=1−x2 in the definite integral ∫02x1−x2dx okay? If not, why not?
+
+No, because the integrand is discontinuous at x=1.
+
+In the following exercises, use a change of variables to show that each definite integral is equal to zero.
+∫0πcos2(2θ)sin(2θ)dθ
+∫0πtcos(t2)sin(t2)dt
+u=sin(t2); the integral becomes 12∫00udu.
+∫01(1−2t)dt
+∫011−2t(1+(t−12)2)dt
+u=(1+(t−12)2); the integral becomes −∫5/45/41udu.
+∫0πsin((t−π2)3)cos(t−π2)dt
+∫02(1−t)cos(πt)dt
+u=1−t; the integral becomes∫1−1ucos(π(1−u))du=∫1−1u[cosπcosπu−sinπsinπu]du=−∫1−1ucosπudu=∫−11ucosπudu=0since the integrand is odd.
+∫π/43π/4sin2tcostdt
+
+Show that the average value of f(x) over an interval [a,b] is the same as the average value of f(cx) over the interval [ac,bc] for c>0.
+
+Setting u=cx and du=cdx gets you 1bc−ac∫a/cb/cf(cx)dx=cb−a∫u=au=bf(u)duc=1b−a∫abf(u)du.
+
+Find the area under the graph of f(t)=t(1+t2)a between t=0 and t=x where a>0 and a≠1 is fixed, and evaluate the limit as x→∞.
+
+Find the area under the graph of g(t)=t(1−t2)a between t=0 and t=x, where 0<x<1 and a>0 is fixed. Evaluate the limit as x→1.
+∫0xg(t)dt=12∫u=1−x21duua=12(1−a)u1−a|u=1−x21=12(1−a)(1−(1−x2)1−a). As x→1 the limit is 12(1−a) if a<1, and the limit diverges to +∞ if a≥1.
+
+The area of a semicircle of radius 1 can be expressed as ∫−111−x2dx. Use the substitution x=cost to express the area of a semicircle as the integral of a trigonometric function. You do not need to compute the integral.
+
+The area of the top half of an ellipse with a major axis that is the x-axis from x=−a to x=a and with a minor axis that is the y-axis from y=−b to y=b can be written as ∫−aab1−x2a2dx. Use the substitution x=acost to express this area in terms of an integral of a trigonometric function. You do not need to compute the integral.
+∫t=π0b1−cos2t×(−asint)dt=∫t=0πabsin2tdt
+[T] The following graph is of a function of the form f(t)=asin(nt)+bsin(mt). Estimate the coefficients a and b, and the frequency parameters n and m. Use these estimates to approximate ∫0πf(t)dt.
+[T] The following graph is of a function of the form f(x)=acos(nt)+bcos(mt). Estimate the coefficients a and b and the frequency parameters n and m. Use these estimates to approximate ∫0πf(t)dt.
+f(t)=2cos(3t)−cos(2t);∫0π(2cos(3t)−cos(2t))dt=0
+
+the substitution of a variable, such as u, for an expression in the integrand
+a technique for integration that allows integration of functions that are the result of a chain-rule derivative

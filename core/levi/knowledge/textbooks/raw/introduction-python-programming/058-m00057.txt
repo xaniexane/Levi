@@ -1,0 +1,40 @@
+# m00057
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Programs can be organized into multiple .py files (modules). The import keyword allows a program to use functions defined in another .py file.
+
+The from keyword can be used to import specific functions from a module. However, programs should avoid importing (or defining) multiple functions with the same name.
+
+Modules often include the line if __name__ == "__main__" to prevent code from running as a side effect when the module is imported by other programs.
+
+When working in a shell, the help() function can be used to look up the documentation for a module. The documentation is generated from the docstrings.
+
+Python comes with over 200 built-in modules and hundreds of thousands of third-party modules. Programmers can search for modules on docs.python.org and pypi.org.
+
+Chapter 7 reference.
+
+Statement
+import module
+
+from module import function
+
+if __name__ == "__main__":
+
+help(module_name)
+
+help(function_name)
+
+date(2023, 2, 14)
+Creates a date object representing February 14, 2023.
+ Requires: from datetime import date.
+Creates a date object representing February 14, 2023.
+ Requires: from datetime import date.

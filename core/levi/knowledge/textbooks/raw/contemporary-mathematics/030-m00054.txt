@@ -1,0 +1,426 @@
+# m00054
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Converting with Base Systems
+
+Converting with Base Systems
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Convert another base to base 10.
+
+Write numbers in different base systems.
+
+Convert base 10 to other bases.
+
+Determine errors in converting between bases.
+
+In our system of numbers, we use base 10, but using base 10 was not a given within other systems. There were other systems that used bases other than 10, as we saw with the Mayans and the Babylonians. The base 10 system comes down to grouping objects in sets of 10, but grouping in sets of 10 only happens if the culture values grouping by that many. We feel 10 is natural because we have 10 fingers. There are other systems using other grouping values, such as 4 or 20.
+
+One good reason for examining other bases is to remind ourselves how we had to learn arithmetic when we were young, memorizing rules for our base 10 system. We had to learn why those arithmetic rules made sense, such as why 1+1=2 and 1+2=3. Another good reason for learning other base systems is due to computers; their circuitry instead uses base 2.
+
+In this section, we explore other base systems and how to convert between them.
+
+Conversion of Another Base into Base 10 and Other Bases
+
+We saw in Hindu-Arabic Positional System that our Hindu-Arabic system uses base 10, which is a system using place values of digits that depend on powers of 10 (or, are based on powers of 10). We’ve already worked with bases other than base 10: The Babylonian system was base 60, while the Mayan system was base 20.
+
+To explore how our base 10 system is used, answer the following question: What’s the following quantity: 4,572? You probably said four thousand five hundred seventy-two (no, there is no “and” between hundred and seventy). But why do you think that 4 means four thousand? A very young person when learning their numbers might say that’s a four five seven and two. But you added the context of thousands to the four. Why?
+
+Place value, that’s why. You learned early on that where the numeral was gave it different meanings. Ten thousands, thousands, hundreds, tens, and ones. So, you translate that symbol string (4,572) into “four thousand five hundred seventy-two.” As we saw in Hindu-Arabic Positional System, expanding a Hindu-Arabic number involved writing the number using each digit times its appropriate power of 10. So, we could write 4,572 as 4×103+5×102+7×101+2×100=4×1000+5×100+7×10+2×1.
+
+One possible reason we use base 10 is that we have 10 fingers, and in the cultures where the Hindu-Arabic system developed, that became the standard. Other cultures may have used other ways of organizing numbers, perhaps using 20 by including toes, or using 60 because 60 has many divisors. Mathematically though, base 10 is an awkward base to work in since 10 has limited divisors. But we think it is easy and simple because that’s what we’ve been taught to use.
+
+Using a base 10 system means we need 10 symbols to make our numbering system work: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+
+Now imagine that we all only had 6 fingers instead of 10 and our counting system was based on those 6 fingers. We would be counting in groups of 6, not groups of 10. How would this change how we work with quantity?
+
+First, we’d need only six symbols. Let’s use 0, 1, 2, 3, 4, 5. Second, our place values would be based on powers of 6, not powers of 10. For instance, the number 3,024 in base 6 would be 3×63+0×62+2×61+4×60.
+ That is how you can translate a base 6 number into a base 10 number. When we calculate that expression we get 3×63+0×62+2×61+4×60=3×216+0×36+2×6+4×1=648+0+12+4=664.
+
+This means the base 6 number 3,024 is equal to the base 10 number 664.
+
+From now on, if we are using a base 6 number, we will follow it with the subscript 6, like the following: 3,0246 means the number is in base 6.
+
+A base 10 number gets no subscript (it’s the standard). So, 3,024 is a base 10 number. A base 13 number would be 4,67213.
+
+So, a base 6 system uses only the symbols 0, 1, 2, 3, 4, and 5. Also, the place values use powers of 6. However, we still don’t know how to count in base 6. In order to do so, we’d have to know how to represent the quantities larger than five in base 6. Let’s review how our base 10 system works by counting from 0 to 100, which shows how larger values are represented.
+
+In writing the base 10 numbers, you start with these first 10 values:
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+But you’ve run out of symbols. So, we use two digits:
+
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+The 1 out front means you’ve run out of digits one time.
+
+But now you’ve run out twice. Continuing with those numbers gives:
+
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+And so on,
+
+30
+31
+32
+33
+34
+etc.…
+Eventually, you hit the 90s,
+
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+And you’ve run out of the digits again! So, we say we’ve run out of digits in the tens place one time, hence:
+
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+That’s the pattern we use in base 10. We write out the symbols until we’ve used all the symbols, then add a digit in front that counts how many times we’ve used the digits. Knowing the numbers, or being able to count higher and higher, is necessary to understand how all the arithmetic works, as it all goes back to counting.
+
+The counting pattern is the same for any other base, including base 6. So, let’s start:
+
+0
+1
+2
+3
+4
+5
+But we’ve run out of symbols! Just like in base 10, we use a second digit, where the first digit will tell us we’ve run out of symbols one time.
+
+10
+11
+12
+13
+14
+15
+And we use the same pattern:
+
+20
+21
+22
+23
+24
+25
+30
+31
+32
+33
+34
+35
+40
+41
+42
+43
+44
+45
+50
+51
+52
+53
+54
+55
+But we’ve run out of symbols for that front digit. So, we indicate it the same way as in base 10…by adding a third digit in front, indicating we’ve run out of symbols once in the second place:
+
+100
+101
+102
+103
+104
+105
+110
+111
+etc.
+The symbol pattern is the same, but truncated. We only use the six symbols. So that is how we represent base 6. Being able to write out these numbers is important when working with addition in the base.
+
+When using a base larger than 10, though, we need more symbols. Instead of creating new symbols, we use capital letters, with A representing the digit for "10," B representing the digit for "11," and so on.
+
+Determining Digits of a Base with Less Than 10 Digits
+
+What are the digits used for base 7?
+
+Since this is base 7, we need only 7 symbols: 0, 1, 2, 3, 4, 5, 6.
+
+Determining Digits of a Base with More Than 10 Digits
+
+What are the digits used for base 14?
+
+Since this is base 14, we need 14 symbols. We don’t have single character numbers for 10, 11, 12, and 13, so, in a fit of inspired creativity, we use capital letters A, B, C, D to represent those quantities. So, the digits in base 14 are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D.
+
+Using Base 12
+
+As mentioned in the text, working in base 10 is mathematically awkward. Ten has only two natural number divisors: 2 and 5. This means dividing into groups is not easy. However, 12, or a dozen, has more divisors: 2, 3, 4, and 6. The Dozenal Society recognizes this more mathematically pleasant detail. It advocates for a switch to using base 12 for numbers. Their argument is based on the divisibility of the number 12. But has there ever been a society that used such a system? The answer is yes. A dialect of the Gwandara language in Nigeria uses the base 12 system. It is unlikely, though, that the Dozenal Society will achieve their goal, as the base 10 system is so entrenched in our society.
+
+Converting from One Base into Another
+
+Convert 3,6017 into base 10.
+
+In base 7, the place values are powers of 7. Since there are four digits, the highest power of 7 that is used is 3. This yields 3,6017=3×73+6×72+0×71+1×70=3×343+6×49+0×7+1=1,029+294+0+1=1,324.
+Convert Base 7 to Base 10
+
+Converting from Base 14 to Base 10
+
+Convert 4B714 into base 10.
+
+In base 14, the place values are powers of 14. Since there are three digits, the highest power of 14 is 2. Also recall that in base 14, 10 is represented by A, 11 is represented by B, 12 is represented by C, and 13 is represented by D. Using that, we convert to base 10:
+
+Converting from Base 12 to Base 10
+
+Convert A1612 into base 10.
+
+In base 12, the place values are powers of 12. Since there are three digits, the highest power of 12 is 2. Also recall that in base 12, 10 is represented by A and 11 is represented by B. Using that, we convert to base 10:
+
+Converting from Base 2 to Base 10
+
+Convert 10112 into base 10.
+
+In base 2, the place values are powers of 2. Since there are four digits, the highest power of 2 is 3. Using that, we convert to base 10:
+
+Before Napoleon
+
+Before Napoleon’s France, which adopted the base 10 system, a modified base 12 system was often used in Europe. Twelve is easily divisible into groups of 2, 3, 4, and 6, which makes it easier to work with. Even our numbering system retains a bit of this. You have likely noticed that we use the words thirteen, fourteen, fifteen, and so on to indicate 10 and 3, 10 and 4, 10 and 5, and so one. Even the 20s reinforce this idea, as in twenty-one, and twenty-two. However, two numbers don’t follow this pattern, namely 11 and 12. If they followed the same rules, they’d be one teen and two teen. We even have a special word for 12; that is, a dozen. However, etymologically speaking, the words eleven and twelve are likely derived by referencing the number 10. These two numbers may date back to the Old English words endleofan and twelf, which can be traced back further to ain lif and twa lif. The word lif here may be the base word for “to leave.” This would suggest ain lif is one left after 10, and twa lif is two left after 10, or, 11 and 12.
+
+Writing Numbers in Base Systems Other Than Base 10
+
+Write the numbers in base 7 up to 1007.
+Step 1: Using the patterns we indicated earlier, we begin with the first seven digits.
+
+0, 1, 2, 3, 4, 5, 6
+Step 2: Since we’ve run out of digits, we start with 10, indicating we’ve run out of symbols once.
+
+10, 11, 12, 13, 14, 15, 16
+Step 3: Continuing in the same way, we get:
+
+20, 21, 22, 23, 24, 25, 26
+
+30, 31, 32, 33, 34, 35, 36
+
+40, 41, 42, 43, 44, 45, 46
+
+50, 51, 52, 53, 54, 55, 56
+
+60, 61, 62, 63, 64, 65, 66
+
+Now, all the digits have been used in the leading digits. Since the digits have all been used in that leading digit, we use 100, as in base 10.
+
+100
+
+Writing Numbers in Bases with More Than 10 Symbols
+
+Write the numbers in base 14 up to 10014.
+Step 1: Using the patterns we indicated earlier, we begin with the first 14 digits.
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D
+Step 2: Since we’ve run out of digits, we start with 10, indicating we’ve run out of symbols once.
+
+10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 1A, 1B, 1C, 1D
+Step 3: Continuing in the same way, we get:
+
+20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 2A, 2B, 2C, 2D
+
+30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 3A, 3B, 3C, 3D
+
+40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 4A, 4B, 4C, 4D
+
+50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 5A, 5B, 5C, 5D
+
+60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 6A, 6B, 6C, 6D
+
+70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 7A, 7B, 7C, 7D
+
+80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 8A, 8B, 8C, 8D
+
+90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 9A, 9B, 9C, 9D
+
+A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, AA, AB, AC, AD
+
+B0, B1, B2, B3, B4, B5, B6, B7, B8, B9, BA, BB, BC, BD
+
+C0, C1, C2, C3, C4, C5, C6, C7, C8, C9, CA, CB, CC, CD
+
+D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, DA, DB, DC, DD
+
+100
+
+Base 2 is important in the digital age, as it is the system used by computers. It is the simplest base to work with, but has the drawback that the numbers in base 2 may use many, many digits. In Addition and Subtraction in Base Systems and Multiplication and Division in Base Systems, we will look at base 2 in each situation.
+
+Writing Numbers in Base 2
+
+Write the numbers in base 2 up to 1002.
+
+Base 2 uses only two symbols: 0 and 1. Following the pattern established previously, the numbers in base 2 up to 1002 are 0, 1, 10, 11, and 100.
+
+Early Hawaiian Numeration System
+
+Before the British arrived in Hawaii, people there used a system that combined two different bases. Objects were initially grouped into collections of four, and a collection of four was referred to as kauna. A person could have two kauna and three “ones” (in Hindu-Arabic, 11). Or they could have eight kauna and one “ones” (In Hindu-Arabic, 33). However, sets of four were grouped in collections of 10. A set of 10 kauna was ka’au. The collections of ka’au were grouped by 10 also. Which meant that 10 ka’au (this is 40 in Hindu-Arabic) would be lau (or 400 in Hindu-Arabic). What this shows is that the Hawaiian culture developed a system that used base 4 combined with base 10.
+
+Conversion of Base 10 into Another Base
+
+Converting from base 10 into another base uses repeated division, recording the remainder at each step. Then, the number in the new base is the remainder starting from the last remainder found. To be accurate in what we’re saying, we need to remind ourselves of some terminology associated with division. When integers are divided, the one being divided is the dividend, and the one that is dividing the dividend is the divisor. The quotient is the largest natural number that can be multiplied by the divisor where the product is less than the dividend.
+
+When the integer n is divided by the integer d, n is called the dividend and d is the divisor.
+
+To convert a base 10 number n into base d, we divide n by d, recording the remainder. Then we divide the quotient from that step by the base d, and record the remainder again. We continue this process until the quotient is 0. Then, the base d number has digits that start with the last remainder and use each remainder in reverse order.
+
+Converting from Base 10 into a Lower Base
+
+Convert 298 to base 6.
+
+We divide 298 by 6, and record the remainder. Then we divide the quotient from that step by 6, and record the remainder again. We continue this process until the quotient is 0. Then, the base 6 number has digits that start with the last remainder and use each remainder in reverse order.
+Step 1: When we divide 298 by 6, we get 49r46298. The quotient is 49 and the remainder is 4.
+Step 2: Now we divide the quotient, 49, by 6. This gives 8r1649. The quotient is 8 and the remainder is 1.
+Step 3: Repeating, we get 1r268. The quotient is 1 and the remainder is 2.
+Step 4: Finally, we perform the operation on the quotient 1, 0r161 giving us a quotient of 0 and a remainder of 1.
+Step 5: The base 6 number has digits equal to the remainders in reverse order, 12146. So, 298 in base 10 when converted to base 6 is 12146.
+
+Converting from Base 10 to Another Base
+
+Converting from Base 10 into a Higher Base
+
+Convert 45,134 to base 13.
+
+We divide 45,134 by 13, and record the remainder. Then we divide the quotient from that step by 13, and record the remainder again. We continue this process until the quotient is 0. Then, the base 13 number has digits that start with the last remainder and use each remainder in reverse order. It is at this step that we’ll convert to the base 13 digits, which are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C.
+Step 1: When we divide 45,134 by 13, we get 3,471r111345,134
+ . The quotient is 3,471 and the remainder is 11.
+Step 2: Now we divide the quotient, 3,471, by 13. This gives 267r0133,471. The quotient is 267 and the remainder is 0.
+Step 3: Repeating, we get 20r713267. The quotient is 20 and the remainder is 7.
+Step 4: Again, and we get 1r71320. The quotient is 1 and the remainder is 7.
+Step 5: Finally, we get 0r1131, with quotient 0 and a remainder 1.
+Step 6: The base 13 number has digits equal to the remainders in reverse order, which were 1, 7, 7, 0, and 11. The 11 is written as B in base 13. So, 45,134 in base 10 when converted to base 13 is 1770B13.
+
+Converting from Base 10 into Base 2
+
+Convert 100 to base 2.
+
+Following the pattern above:
+Step 1: We divide 100 by 2, and record the remainder.
+Step 2: Then we divide the quotient from that step by 2, and record the remainder again.
+Step 3: We continue this process until the quotient is 0.
+Step 4: Following this process, the remainders are, in order, 0, 0, 1, 0, 0, 1, 1. Writing those in reverse order gives the number in base 2, 11001002.
+
+Notice that 100 in base 2 took seven digits.
+
+Converting from Hindu-Arabic Numbers to Mayan Numbers
+
+To convert from a Hindu-Arabic number to a Mayan number involves two distinct processes. First, the number must be converted to base 20, using the process described and demonstrated previously. Next, that base 20 number has to be written using Mayan numerals. For reference, the Mayan numerals and their values are below.
+
+Converting from Base 10 into the Mayan System
+
+Convert the following into Mayan numbers.
+
+51
+
+653
+
+The Mayan system is base 20, so we must use 20 in the process from above. The first division has a quotient of 2 and remainder of 11. The 11 serves as the “ones” digit. Dividing that quotient, 2, by 20 has a quotient of 0 with a remainder of 2. The 2 becomes the “twenties” digit of the number. So, in base 20, the number would be 2 followed by 11. The Mayan symbols for 2 and 11 are and . Writing these vertically, with the “ones” digit on top, as appropriate for Mayan numbers, results in:
+
+The Mayan system is base 20, so we must use 20 in the process from above. The first division, 673 divided by 20, has a quotient of 32 and remainder of 13. Dividing that quotient, 32, by 20 has a quotient of 1 with a remainder of 12. Dividing that quotient, 1, by 20 has a quotient of 0 and a remainder of 1. Since there are three remainders here, this is a three-digit number. The 1 is the “20-squared” digit, the 12 is the “twenties” digit, and the 13 is the “ones” digit. So, in base 20, the number would be 1 followed by 12 followed by 13.. The Mayan symbols for 1, 12 and 13 are , , and . Writing these vertically, as appropriate for Mayan numbers, would result in:
+
+Other Languages, Other Bases
+
+There have been base systems that use bases other than 10. Some bases used were 20, 12, and 27! Visit this site to see more on the languages that used other bases.
+
+Errors in Converting Between Bases
+
+There are some common errors that are made when converting between bases. Often, it comes down to using an “illegal” symbol in the new base.
+
+Detecting an Illegal Symbol When Converting Between Bases
+
+A base 10 number is converted to base 7 and the result was 20817. Was an error committed? How do you know?
+
+The result has the digit 8 in it. In base 7, 8 is an illegal symbol. Based on that, an error was committed.
+
+When converting from base 10 to another base, an illegal symbol will be used if a mistake was made in the division process used to find the number in the new base. Since the digits are based on the remainders, any remainder that is an illegal symbol would indicate an error.
+
+Detecting an Error in Division When Converting Between Bases
+
+When changing from base 10 to base 8, the division process resulted in the following remainders: 1, 0, 9, 2, 4. Was an error committed? How do you know?
+
+The remainders include 9, which in base 8 is an illegal symbol.
+
+Another possible way to detect an error in converting between bases is to count the number of digits. When converting from a higher base to a lower base, the number of digits cannot get smaller. Similarly, when converting from a lower base to a higher base, the number of digits cannot get bigger. So, if a base 10 number is converted to a base 3 number, the number of digits in the new base 3 numbers cannot be less than the number of digits in the base 10 number. Similarly, if a base 7 number is converted to base 10, the number of digits in the base 10 number cannot be more than the number of digits in the original base 7 number.
+
+Detecting an Error in Number of Digits When Converting Between Bases
+
+A five-digit base 10 number is converted to a base 5 number. The base 5 number has four digits. Was an error committed? How do you know?
+
+Since 10 is larger than 5, the base 5 number cannot have less digits than the base 10 number. Since it did, we know an error has been made.
+
+Check Your Understanding
+
+The Babylonian system used base 60. To convert from Hindu Arabic numbers into Babylonian numbers, the process for converting from base 10 to a different base would be done first. Then, the results found in the conversion process would be changed to Babylonian numerals. This process is similar to the one for Mayan numbers.
+
+Key Terms
+
+base 10
+
+remainder
+
+dividend
+
+divisor
+
+quotient
+
+Key Concepts
+
+The system we use is the base 10 system. Base 10 is not the only base that can be used. To use another base, one could start with a list of numbers in that base.
+
+To indicate that a number is written in a base other than 10, a subscript is appended to the end of the number. That subscript indicates the base for the number.
+
+Numbers written in a base smaller than 10 use the same symbols as base 10. However, when using bases larger than 10, the symbols A, B, C, … are used to represent digits larger than 9.
+
+To convert from a number written in a base other than 10 into a base 10 number, the number is written in expanded form and then that expression is computed.
+
+To convert a number from base 10 into another base, the base 10 number is repeatedly divided by the new base. The remainders when performing these divisions become the digits for the number in the new base.
+
+Common errors can be detected when performing base conversions.
+
+Videos
+Convert Base 7 to Base 10
+Converting from Base 10 to Another Base

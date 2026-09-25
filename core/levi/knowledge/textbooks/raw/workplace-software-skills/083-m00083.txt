@@ -1,0 +1,206 @@
+# m00083
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+What Is a Database?
+
+What Is a Database?
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Discuss how databases are used in organizations
+
+Compare and contrast the features of a relational database system with other types of databases and data storage
+
+Describe the objects in a relational database
+
+Evaluate applications of relational database management systems in organizations
+
+Data—bits of information about people, places, and things—is a key part of the world of business and technology. It can take the form of words or numbers and is frequently collected without active individual involvement. For example, the internet is constantly collecting information on what consumers look at, click on, and read. This information is then often passed on to a database or even parsed out to several databases. Other technology, including sensors and the so-called Internet of Things, is also constantly recording and storing data for businesses to use in a myriad of ways.
+
+One of the challenges of managing and analyzing data is understanding what data is, what it can be, and how it can transform the world around us. Data on its own is not valuable or actionable. To make a difference, data needs to be processed and organized to give it context. When this occurs, we have information. Then, knowledge is generated from data that has been transformed into information and then finally analyzed in a way to give meaning and draw conclusions about the data.
+
+No matter how much data is collected, it is useless without organization and structure. Think about all the things you interact with in a typical day. If those things were collected but had no structure (imagine bits of paper with single words or numbers thrown into a pile), you would not be able to make sense of them. Since the value of data lies in its ability to inform decisions and help us understand the world, both past and present, the structure and storage of data are critical.
+
+A database stores a large amount of data in an effective way that will allow for efficient retrieval in a computerized environment. Databases may be physical objects, such as address books or file folders, each of which provides a place to keep data in an organized fashion so we can quickly locate what we need. Physical storage has limits, however, because its structure is easily overwhelmed when datasets get too large, and retrieval of meaningful information becomes impossible.
+
+A digital database is a computerized file that not only stores data in a structured or organized way but also allows users to make changes to transform data. Digital databases are often contained within a program such as Access on a desktop computer or Microsoft Azure or an structured query language (SQL) server at the companywide level. Digital databases add new features and capabilities to business decision-making by combining the power of analytics with the structure of tables and rows.
+
+Access is only available on desktops and laptops with a Windows operating system. It is not available on Mac, Chrome, or Linux devices. Mac has a comparable desktop/laptop database called FileMaker.
+
+Digital databases provide structure, organization, and access. But unlike physical objects, they provide a flexible structure that enables us to capture, store, and organize large, complicated sets of data, and that also gives us options for retrieving and using information. Using digital databases enables users to transform data, creating new ways of informing decisions. Because businesses must make decisions based on data every day, the key to good decision-making is creating a database that contains accessible, organized, actionable data.
+
+The Role of Databases in an Organization
+
+Databases drive nearly all business functions in organizations throughout the world. Any business that uses the internet has a digital platform or foundational technology that is built on databases. A digital platform is a place where users can interact with and explore the products and services offered by a company. Digital platforms often come in the form of an app, website, or social media. The term database is ubiquitous in organizations, where you can assume that every function and every employee or customer are interacting with many databases.
+
+Organizations use databases to store information about customers, employees, vendors, products, supply chain, transportation, maintenance, sales, inventory, and much more. Anywhere an organization is working with data, some type of database will be involved. Often the database is the foundation for the work, and the people who interact with the database may not even be aware that it is there.
+
+Data in organizations comes from a variety of inputs, such as from direct input by employees or customers. Some examples include entering new customer information, recording human resources information, creating maintenance requests, purchasing goods for company use, and engaging in sales transactions. Data can also come from technology that records information related to the business—for example, technology that tracks items such as inventory levels, building management (temperature, air quality, occupancy), traffic patterns (employee use of resources), resource use by customers, and customer contact (frequency and method of contact, as well as the results).
+
+Sales and marketing departments collect a great deal of data about their operations and customers. In addition to typical customer information and sales history, a business is also likely to look at daily performance data on marketing and sales operations. This can include sales force performance, customer service, and experience data; social media promotion; and web platform performance. Automatic data collection tends to generate a very large quantity of data that needs to be connected (or related) and then aggregated (or summarized) to be understandable and useful.
+
+Businesses also capture public data from other sources. For example, sales and marketing departments need to look at public data, which is available from the government and other organizations. Public data includes demographics and financial information and may even include climate change and environmental data that affects how businesses work. These datasets are free, very large, constantly changing, and challenging to locate and use. A clear plan for identifying and using this data benefits a sales and marketing department.
+
+All of this data has to go somewhere, and that is the digital platform and the databases it comprises. It is not enough to have data—data needs to be organized to be useful. Since data is key to decision-making and action in most organizations, the digital platform is mission critical.
+
+Data Collection and Storage in Organizations
+
+In a typical business, a production database contains live data that the business uses to produce transactions such as customer requests, inventory management, and sales transactions. Because production databases are in constant use, they should not be used for testing or analysis. Any change to a production database makes the system unavailable for some period of time, which is not desirable when the database is the interface between the company and its customers, suppliers, and other important people outside the company. Instead, when an organization needs to work with a production database, it moves its data to either a development database (used for testing) or an analytical database (used for analysis).
+
+Working with Live Data
+
+One of the best practices for working with databases is that users do not work directly with the production system—that is, the production database containing the live data that actively run the business. But why? It seems that working directly with the production system would be the most efficient choice. In this case, however, following best practices prevents users from making mistakes that can seriously compromise the business. “Don’t work with the production system” is an ethical issue—part of the code of conduct that all analysts are expected to follow. Watch this video using a case study to discuss this problem to learn more about why this has become a standard in database work.
+
+Access is a desktop-based relational database program that can be used to work with a wide variety of data quickly and easily, regardless of its source. Users can request data from the department in charge of the data warehouse, which is a type of data management system that businesses use, then download the dataset to work with to provide actionable information. Let’s see how this might look at WorldCorp.
+
+John works as a data analyst for WorldCorp. The company has a robust data warehouse that stores vast amounts of customer data, sales records, and inventory information. The data warehouse is managed by the Data Management Department (DMD) within WorldCorp. (Other companies may choose to contract out their data management department to a third party.)
+
+John is tasked with analyzing the sales trends of a particular product category to identify potential areas for improvement. To do so, he needs access to a specific dataset from the data warehouse. John follows the established procedure and sends a formal request to the DMD, specifying the dataset he requires and providing relevant details about his analysis objectives. The request outlines the specific parameters, such as the time frame, region, and product category of interest.
+
+Upon receiving the request, the DMD acknowledges John’s inquiry and begins processing it. They retrieve the requested dataset from the data warehouse, ensuring that it contains the relevant information needed by John to perform his analysis. After completing the data retrieval process, the DMD notifies John that the dataset is ready for download. John receives an email with a link to access the dataset securely.
+
+John clicks on the provided link, which directs him to a secure portal where he can download the dataset. He verifies his credentials and proceeds to download the dataset onto his local machine. With the dataset now available on his computer, John starts working with the data using specialized analysis tools. He cleans the dataset, performs statistical analyses, and generates insightful visualizations to gain a better understanding of the sales trends in the specified product category.
+
+After extensive analysis, John identifies certain regions where the product category is underperforming. He also discovers opportunities for strategic marketing campaigns and potential adjustments to the product assortment. John compiles his findings into a comprehensive report, highlighting actionable insights and recommendations based on the analysis of the downloaded dataset. He presents this report to the company’s management team, enabling them to make informed decisions to improve the performance of the product category.
+
+In this example, the user (John) requests data from the department in charge of the data warehouse (DMD), downloads the dataset, and uses it to generate actionable information through analysis.
+
+Data can come in a variety of formats and configurations. The way in which data is stored can affect how the data can be used, so it is important that a business carefully consider how its data will be stored. There are advantages and disadvantages to each storage medium, but based on the type and volume of data being stored, some storage formats are more suitable than others.
+
+Data Warehouses
+
+When we discuss data storage, we are typically talking about the data warehouse—a data management system that stores and manages data, especially data related to business intelligence operations and activities. Data warehouses are built for storage, accessibility, and retrieval, as illustrates, and often integrate data from a variety of sources within the organization. You may also hear the term data mart, which is a subset of the data warehouse that is optimized for specific workgroups or functions. Typically, data flows into the warehouse on a predetermined schedule, adding to the existing data available for analytical work.
+
+A data warehouse is also a type of database, but it differs from the type of database you will use in Access. As an organization’s central data repositories, data warehouses hold a lot of information and use a complex structure. Typically, a department or team will include someone who is trained to interact with the data warehouse, using business intelligence tools or other analytics technology. That employee can then use Microsoft products such as an Access database or an Excel spreadsheet for analysis and preparation for management to aid in decision-making.
+
+Flat Files
+
+Many businesses store their data in flat files—individual files that have a tabular structure, including single spreadsheets, other tables, and stand-alone lists of information. Flat files have no set links to other information. In fact, if there are any links, they will be obvious to employees but typically not in documents or parts of the file itself. Flat files tend to look like tables, with headers at the top and a row representing each record, as shows.
+
+Flat files are easiest to use when datasets are small and when the individual using them understands the data well. But even flat files that are quite large, containing thousands or hundreds of thousands of records, can be usable if all records follow a consistent pattern. Flat files are typically created by departments and individual employees in the course of their work, and most organizations have a huge number of these files, which are stored on personal computers and may not be updated or even available beyond the person who created them. In this way, they are a form of dark data—data that is not used or actionable for the organization.
+
+Flat-file databases are also used in other ways, including the transfer of information from one system to another. For example, suppose a sales organization wants to examine inventory records from a warehouse. In this case, the warehouse may send them a flat-file database that follows a uniform pattern, with columns for fields and rows for records. This type of flat file merely stores information; it does not have an indexed system or any links to other systems, and it is typically in a text format. Common examples of file formats that contain plain text include CSV (comma-separated values, where data items are separated by commas), txt (text, where items are separated by space in the file), or tsv (tab-separated values, where items are separated by tabs). Often businesses must consider the other systems that their database will interact with before deciding on a data format. Plain text is one of the most universally supported formats for data, making it simple to move data between business systems.
+
+Relational Database Management Systems
+
+The power in a digital database comes from the ability to connect data from one area to another. A relational database management system (RDBMS) is software that houses, manages, accesses, and retrieves data in its database. The term relational refers to the way that data links together by creating relationships between the tables that hold the data itself. In this way, relational databases can hold much more information that is complex and yet easily accessible.
+
+There are many different types of RDBMS in use today. Access is a desktop system that holds information that is typically generated in other, larger database systems running on dedicated database infrastructure servers. For example, a data analyst might use Access at their computer at their desk at headquarters but will pull the data from the more powerful relational database systems running in WorldCorp’s dedicated data center. Still, Access is also an RDBMS, with the power to manage relationships between tables, making it possible to create complex reports.
+
+A relational database is a type of database that stores and provides access to data. Relational databases hold a collection of items, with preset relationships between them. Sometimes people use data, database, and relational databases interchangeably, though you may need to pay attention to context to understand if a person is talking about the data, the database, or the system itself.
+
+A relational database and RDBMS are designed to give structure to data and to ensure that data is stored and used effectively. Examples of large-scale RDBMS include MySQL, IBM DB2, Oracle DB, and Microsoft SQL Server. Although each of these larger databases support querying and generating reports, in many small to medium-sized businesses, data is often exported and brought into an Access relational database for further refinement, analysis, and reporting or brought into Microsoft Excel for more complex statistical analysis.
+
+Relational databases, running in an RDBMS, allow us to join or connect tables, perform complex analysis, and run reports efficiently. A join is a function within an RDBMS that sets up the relationship between records in two tables. In a data warehouse environment, relationships (or joins) that connect tables make it possible to store vast quantities of data and still be able to retrieve them quickly and efficiently.
+
+Access, as a desktop RDBMS, uses the same idea of connecting tables through joins to make data retrieval quick and efficient and has the added benefit of using a graphical user interface. To work with data in Access, you do not need to know a language such as Java, Python, R, or SQL. Since we often need to analyze information from a larger data store, like the data warehouse, being able to work with relationships makes it possible to efficiently access information from multiple parts of the database.
+
+Storing Data in an RDBMS
+
+An RDBMS stores data in a database, which is a series of connected tables. The RDBMS provides the software and system structure for the data; the database is the holding area of the data. In practice, the term database is usually used for both of these, but it is important to understand that the data is separate from the program housing it. As a result, you can move data from one software to another program, such as from Access to Outlook or Word for communication distribution.
+
+A database can hold a variety of data types in its data tables. A relational database that uses structured data can recognize and process data based on its type; for example, it can understand the difference between text and numbers and process them accordingly. Data types in Access are shown in .
+
+Data Types in Access
+
+Data Type
+Description
+Text
+Alphanumeric data (in either short or long format)
+Number
+Numerical data
+Date/time
+Date and time
+Currency
+Monetary data with four decimal places
+Autonumber
+Unique value set by Access
+Yes/No
+Data stored as yes/no (true/false)
+OLE object
+Pictures, graphics, or other files that are stored
+Hyperlink
+Link to a document (online, local computer, or network)
+Attachment
+Full file attachment stored in the database
+Calculated
+Mathematical expression (or calculation)
+Lookup Wizard
+Field that uses the contents of another table to populate the field
+Data Manipulation
+
+One of the strengths of a database is that it enables users to manipulate data, changing it in a way that makes the data more useful and actionable. An example of data manipulation is the creation of new fields based on combining and calculating existing fields within the database. WorldCorp often manipulates its data as new products are added to its portfolio or old products are updated with new features. Data manipulation allows users to set up the data in a way that helps them and their audience make sense of it and transform it into business intelligence.
+
+Objects and Relationships
+
+Objects and relationships are key concepts in a database. Objects are the items that make up a database, including tables, queries, forms, and reports. Relationships link objects together in the database, as illustrates, which in turn improves the performance of the database itself.
+
+A database object is used to store, reference, or interact with the database. There are four main types of objects in an Access database:
+
+Tables: the structures that hold individual data records
+
+Queries: structured data requests
+
+Forms: formatted screens for inputting or viewing data
+
+Reports: formatted summaries of specific information in the database
+
+A relationship (also known as a join) tells the database that two records have a connection. This means we can break up a table into many tables, which in turn keeps screens manageable and speeds up processing. Relationships are created by using a key field, which is a field in a table that serves as a unique identifier for an individual record in a table. For example, in a database about employees, an employee ID number would be a key field and would act as the link between tables that hold employee information, payroll information, and even performance information in a sales department. Instead of trying to hold all this data in one extremely large table, we can have many smaller tables, each specializing in a particular type of data and linked to other tables by key fields, such as primary or foreign keys.
+
+Tables
+
+Tables hold the data within a database organized into rows and columns in two dimensions. A table consists of columns, each of which is a field, and rows, each of which is a record. The column or field names apply to each record in the table and create the structure the database uses to organize information. A database can include many tables that are joined together by relationships between fields. This structure makes relational databases fast and efficient when retrieving data.
+
+Each table typically contains a key field. A primary key field is a unique field in the table, which serves as a unique identifier for the individual record you are looking at. A table can also have a foreign key field, which refers to the primary key field in another table. For example, an invoice number for a sales record is a primary key field—it is unique—but it can also appear as a foreign key field in other tables. In this way, the primary key field prevents duplication in a sales invoice table and also provides a link to the sales invoice list as a foreign key when it appears elsewhere in the database. In Access, primary key fields have an image of a key next to them when viewed in Design View, as shown in .
+
+Key fields make it simple to gather useful information about a single data point from multiple tables. WorldCorp might use a model number as a key field in a database that stores the features, availability, and price of their products. In another database, WorldCorp can use a customer identification number to track various customer metrics such as location, purchase history, and contact information across various tables.
+
+Queries
+
+In a large database, it can be difficult or even impossible to find the information you need by simply scrolling through the records. It is even more difficult when a database contains many tables linked by joins. Instead, you can design or build a query, a structured request that allows you to set up criteria instructing the database to return what you are looking for.
+
+For example, suppose your boss at WorldCorp asks you to gather sales transactions on a specific date or all transactions for a certain dollar amount. Or you might want to be more specific, asking for all sales of a specific product in a specified time period that exceeded a certain dollar amount. In each case, you can use queries to ask the database to provide the information you need. In many relational databases, structured query language (SQL) is used to create and run queries. SQL is a system of written commands used to manipulate data in a database; it was developed by IBM in the 1970s to allow its engineers to interface with database systems more efficiently. SQL is in Access; however, users can create queries without knowing SQL.
+
+Forms
+
+A form is a database object that simplifies the use of information within the database. A form creates a user interface—a way for individuals to interact with the database—without directly using the table, which can be slow, overwhelming, and risky (because data in the table can be inadvertently changed). A form can be used to input information into a database (e.g., new customer information that customers enter themselves). A form can also be used to retrieve information (e.g., when a customer service representative needs to look up a specific customer record to resolve an issue). Examples of sales forms include customer information, sales invoices, and sales records.
+
+Reports
+
+A report is a formatted output of a database, ready for use and action. A report summarizes data in a way that matches the needs of the audience. For example, a product listing on a website or in print is a format ready for presentation to a customer or someone else who needs to see all products at a glance. A listing of sales, summarized by month, is also ready for presentation if the audience needs to know monthly sales figures for a decision or action. Reports are typically one of the final outputs of a database, as they are directly linked to the actionable goal or business intelligence activities of a specific workgroup, team, or project. An example of a sales report may cover sales by product or sales over a time period, such as a month or year.
+
+Applications of RDBMS
+
+Databases offer unique functionality that goes beyond the calculations and statistics provided by other programs such as Excel. This is because of the RDBMS functionality. A relational database provides structure for data, includes relationships that connect pieces of data in meaningful ways, and allows controlled access through queries, forms, and reports. Because of this advanced functionality, RDBMSs are used in a variety of use cases across multiple industries.
+
+As organizations work to transform themselves to meet the needs of the twenty-first century, companies are shifting how they view customers, employees, and work in general. Databases play an integral role in this shift. Digital transformation relies on data, and for companies to transform, they need not only good data but actionable data, available when they need it, where they need it. The core of this change is the data management system, and an organization’s data landscape is a constantly growing and evolving part of the business plan. Since the digital transformation of a business or organization is about leveraging technology to change the way a business is run, an organization’s collection and use of data is an ongoing process, with the focus on people—not technology—and how we enable people to be more innovative, responsive, and successful.
+
+Large organizations typically collect data through transactions and sensors, which then store the data. Eventually, data is transferred to a data warehouse, which stores data for historical purposes. From the data warehouse, organizations can bring datasets to a relational database such as Access for analytics and use. Data warehouses and Access are built on relational database models, which provide benefits, including the following:
+
+Data accuracy: The use of primary and foreign keys improves accuracy.
+
+Easy access to data: Data is held in tables that are easily accessed through queries, improving speed and efficiency.
+
+Flexibility: A RDBMS easily scales to include more data and tables as needed by the organization, without affecting the existing structure or the data in the database.
+
+Security: Because data is held in separate tables, it is possible to create a variety of user roles and permissions, allowing individuals to access some data without needing full system access.
+
+Adaptability: Databases can be easily modified as business requirements change.
+
+Because data in an organization is created in production systems and then brought to the analytical system for work, an RDBMS focuses on keeping the data organized and ready for retrieval. The RDBMS also allows the analyst to create database objects that make working with the data more accurate, effective, and efficient.
+
+Examples of Database Use
+
+How do companies apply the information they get from databases? They do so in many ways, most commonly through their marketing and customer service initiatives, for example. WorldCorp’s Sales and Marketing Department depends on databases to inform marketing strategy and customer service processes and procedures and to understand sales trends and future opportunities.
+
+Example: Marketing Strategy
+
+Recall that WorldCorp manufactures health-care products. Its leadership has been looking at their online promotion of allergy medications. They have a variety of advertisements online, served by social media platforms. While they can easily look at the data to see the click-through rate (which is the number of times a consumer clicks an online ad in relation to how many times the ad is shown) and the purchase rate on specific partner sites, they also want to know if they can better understand the customers who are considering purchasing but have not yet done so.
+
+Using the data warehouse, you as the WorldCorp employee can request a report of all shopping carts that were populated with a particular medication from an online shopping site partner. Since the data warehouse stores both the WorldCorp information and key information on sales from major partners, you are able to ask for a year’s worth of sales data, with customer demographics including location, family structure, and other related purchase information such as, say, other antihistamine and allergy comfort items. You receive the data, import it into Access, analyze it to identify who was likely to add the item to the cart and what they did after placing it in the cart (purchase the item, purchase something else, or a
+[truncated]

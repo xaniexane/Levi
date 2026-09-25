@@ -1,0 +1,55 @@
+# m00063
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Splitting/joining strings
+
+Splitting/joining strings
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use the split() method to split a string into substrings.
+
+Combine objects in a list into a string using join() method.
+
+split()
+
+A string in Python can be broken into substrings given a delimiter. A delimiter is also referred to as a separator. The split() method, when applied to a string, splits the string into substrings by using the given argument as a delimiter. Ex: "1-2".split('-') returns a list of substrings ["1", "2"]. When no arguments are given to the split() method, blank space characters are used as delimiters. Ex: "1\t2\n3 4".split() returns ["1", "2", "3", "4"].
+
+split() for breaking down the string into tokens
+
+Examples of string delimiters and split() method
+
+join()
+
+The join() method is the inverse of the split() method: a list of string values are concatenated together to form one output string. When joining string elements in the list, the delimiter is added in-between elements. Ex: ','.join(["this", "is", "great"]) returns "this,is,great".
+
+join() for combining tokens into one string
+
+Applying join() method on list of string values
+
+Unique and comma-separated words
+
+Write a program that accepts a comma-separated sequence of words as input, and prints words in separate lines. Ex: Given the string "happy,smiling,face", the output would be:
+
+Lunch order
+
+Use the join() method to repeat back a user's order at a restaurant, separated by commas. The user will input each food item on a separate line. When finished ordering, the user will enter a blank line. The output depends on how many items the user orders:
+
+If the user inputs nothing, the program outputs:
+ You ordered nothing.
+
+If the user inputs one item (Ex: eggs), the program outputs:
+ You ordered eggs.
+
+If the user inputs two items (Ex: eggs, ham), the program outputs:
+ You ordered eggs and ham.
+
+If the user inputs three or more items (Ex: eggs, ham, toast), the program outputs:
+ You ordered eggs, ham, and toast.
+
+In the general case with three or more items, each item should be separated by a comma and a space. The word "and" should be added before the last item.

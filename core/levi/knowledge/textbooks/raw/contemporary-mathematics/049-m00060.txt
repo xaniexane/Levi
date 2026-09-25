@@ -1,0 +1,231 @@
+# m00060
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Compound Interest
+
+Compound Interest
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Compute compound interest.
+
+Determine the difference in interest between simple and compound calculations.
+
+Understand and compute future value.
+
+Compute present value.
+
+Compute and interpret effective annual yield.
+
+For a very long time in certain parts of the world, interest was not charged due to religious dictates. Once this restriction was relaxed, loans that earned interest became possible. Initially, such loans had short terms, so only simple interest was applied to the loan. However, when loans began to stretch out for years, it was natural to add the interest at the end of each year, and add the interest to the principal of the loan. After another year, the interest was calculated on the initial principal plus the interest from year 1, or, the interest earned interest. Each year, more interest was added to the money owed, and that interest continued to earn interest.
+
+Since the amount in the account grows each year, more money earns interest, increasing the account faster. This growth follows a geometric series (Geometric Sequences). It is this feature that gives compound interest its power. This module covers the mathematics of compound interest.
+
+Understand and Compute Compound Interest
+
+As we saw in Simple Interest, an account that pays simple interest only pays based on the original principal and the term of the loan. Accounts offering compound interest pay interest at regular intervals. After each interval, the interest is added to the original principal. Later, interest is calculated on the original principal plus the interest that has been added previously.
+
+After each period, the interest on the account is computed, then added to the account. Then, after the next period, when interest is computed, it is computed based on the original principal AND the interest that was added in the previous periods.
+
+The following example illustrates how compounded interest works.
+
+Interest Compounded Annually
+
+Abena invests $1,000 in a CD (certificate of deposit) earning 4% compounded annually. How much will Abena’s CD be worth after 3 years?
+
+Since the interest is compounded annually, the interest will be computed at the end of each year and added to the CD’s value. The interest at the end of the following year will be based on the value found form the previous year.
+Step 1: After the first year, the interest in Abena’s CD is computed using the interest formula I=P×r×t. The principal is P = 1,000, the rate, as a decimal, is 0.04, and the time is one year, so t = 1. Using that, the interest earned in the first year is I=P×r×t=1,000×0.04×1=40, so the interest earned in the first year was $40.00. This is added to the value of the CD, making the CD worth $1,000+$40=$1,040.
+Step 2: At the end of the second year, interest is again computed, but is computed based on the CD’s new value, $1,040. Using this new value and the interest formula (r and t are still 0.04 and 1, respectively), we see that the CD earned I=P×r×t=1,040×0.04×1=41.6, or $41.60. This is added to the value of the CD, making the CD now worth $1,040.00+$41.60=$1,081.60.
+Step 3: At the end of the third year, interest is again computed, but is computed based on Abena’s CD’s new value, $1,081.60. Using this value and the interest formula (r and t are still 0.04 and 1, respectively), we see that the CD earned I=P×r×t=1,081.60×0.04×1=43.264, or $43.26 (remember to round down). This is added to the value of the CD, making the CD now worth $1,081.60+$43.26=$1,124.86.
+
+After 3 years, Abena’s CD is worth $1,124.86.
+
+Determine the Difference in Interest Between Simple and Compound Calculations
+
+It is natural to ask, does compound interest make much of a difference? To find out, we revisit Abena’s CD.
+
+Comparing Simple to Compound Interest on a 3-Year CD
+
+Abena invested $1,000 in a CD that earned 4% compounded annually, and the CD was worth $1,124.86 after 3 years. Had Abena invested in a CD with simple interest, how much would the CD have been worth after 3 years? How much more did Abena earn using compound interest?
+
+Had Abena invested $1,000 in a 4% simple interest CD for 3 years, her CD would have been worth P+P×r×t=1,000+1,000×0.04×3=1,120, or $1,120.00. With interest compounded annually, Abena’s CD was worth $1,124.86. The difference between compound and simple interest is $1,124.86-$1,120.00=$4.86. So compound interest earned Abena $4.86 more than the simple interest did.
+
+Compound Interest
+
+Understand and Compute Future Value
+
+Imagine investing for 30 years and compounding the interest every month. Using the method above, there would be 360 periods to calculate interest for. This is not a reasonable approach. Fortunately, there is a formula for finding the future value of an investment that earns compound interest.
+
+The future value of an investment, A, when the principal P is invested at an annual interest rate of r (in decimal form), compounded n times per year, for t years, is found using the formula A=P(1+rn)nt. This is also referred to as the future value of the investment.
+Note, sometimes the formula is presented with the total number of periods, n, and the interest rate per period, r. In that case the formula becomes A=P(1+r)n.
+
+Computing Future Value for Compound Interest
+
+In the following, compute the future value of the investment with the given conditions.
+
+Principal is $5,000, annual interest rate is 3.8%, compounded monthly, for 5 years.
+
+Principal is $18,500, annual interest rate is 6.25%, compounded quarterly, for 17 years.
+
+The principal is P = $5,000, interest rate, in decimal form, r = 0.038, compounded monthly so n = 12, and for t = 5 years. Substituting these values into the formula, we find
+ A=P(1+rn)nt=5,000(1+0.03812)12×5=5,000(1+0.00316¯)60=5,000(1.00316¯)40=5,000×1.20888663572=6,044.4332
+ The future value of the investment is $6,044.43.
+
+The principal is P = $18,500, interest rate, in decimal form, r = 0.0625, compounded quarterly so n = 4, and for t = 17 years. Substituting these values into the formula, we
+ A=P(1+rn)nt=18,500(1+0.06254)4×17=18,500(1+0.015625)68=18,500(1.015625)68=18,500×2.86992151999=53,093.5481
+ The future value of the investment is $53,093.54.
+
+Interest Compounded Quarterly
+
+Cody invests $7,500 in an account that earns 4.5% interest compounded quarterly (4 times per year). Determine the value of Cody’s investment after 10 years.
+
+Cody’s initial investment is $7,500, so P = $7,500. The annual interest rate is 4.5%, which is 0.045 in decimal form. Compounding quarterly means there are four periods in a year, so n = 4. He invests the money for 10 years. Substituting those values into the formula, we calculate
+
+After 10 years, Cody’s initial investment of $7,500 is worth $11,732.82.
+
+Interest Compounded Daily
+
+Kathy invests $10,000 in an account that yields 5.6% compounded daily. How much money will be in her account after 20 years?
+
+Kathy’s initial investment is $10,000, so P = $10,000. The annual interest rate is 5.6%, which is 0.056 in decimal form. Compounding daily means there are 364 periods in a year, so n = 365. She invests the money for 20 years, so t = 20. Substituting those values into the formula, we calculate
+
+After 20 years, Kathy’s initial investment of $10,000 is worth $30,645.90.
+
+Compare Simple Interest to Interest Compounded Annually
+ Compare Simple Interest and Compound Interest for Different Number of Periods Per Year
+Compare Simple Interest to Interest Compounded Annually
+Compare Simple Interest and Compound Interest for Different Number of Periods Per Year
+
+To truly grasp how compound interest works over a long period of time, create a table comparing simple interest to compound interest, with different numbers of periods per year, for many years would be useful. In this situation, the principal is $10,000, and the annual interest rate is 6%.
+
+Create a table with five columns. Label the first column YEARS, the second column SIMPLE INTEREST, the third column COMPOUND ANNUALLY, the fourth column COMPOUND MONTHLY and the last column COMPOUND DAILY, as shown below.
+
+ YEARS
+ SIMPLE INTEREST
+ COMPOUND ANNUALLY
+ COMPOUND MONTHLY
+ COMPOUND DAILY
+
+YEARS
+SIMPLE INTEREST
+COMPOUND ANNUALLY
+COMPOUND MONTHLY
+COMPOUND DAILY
+In the years column, enter 1, 2, 3, 5, 10, 20, and 30 for the rows.
+
+Calculate the account value for each column and each year.
+
+Compare the results from each of the values you find. How do the number of periods per year (compoundings per year) impact the account value? How does the number of years impact the account value?
+
+Redo the chart, with an interest rate you choose and a principal you choose. Are the patterns identified earlier still present?
+
+Understand and Compute Present Value
+
+When investing, there is often a goal to reach, such as “after 20 years, I’d like the account to be worth $100,000.” The question to be answered in this case is “How much money must be invested now to reach the goal?” As with simple interest, this is referred to as the present value.
+
+The money invested in an account bearing an annual interest rate of r (in decimal form), compounded n times per year for t years, is called the present value, PV, of the account (or of the money) and found using the formula PV=A(1+rn)n×t, where A is the value of the account at the investment’s end. Always round this value up to the nearest penny.
+
+Computing Present Value
+
+Find the present value of the accounts under the following conditions.
+A = $250,000, invested at 6.75 interest, compounded monthly, for 30 years.
+A = $500,000, invested at 7.1% interest, compounded quarterly, for 40 years.
+
+To reach a final account value of A = $250,000, invested at 6.75% interest, in decimal form r = 0.0675 (decimal form!), compounded monthly, so n = 12, for 30 years, substitute those values into the formula for present value. Calculating, we find the present value of the $250,000.
+ PV=A(1+rn)n×t=250,000(1+0.067512)12×30=250,000(1+0.005625)360=250,000(1.005625)360=250,0007.5332454772=33,186.2277
+ In order for this account to reach $250,000 after 30 years, $33,186.23 needs to be invested.
+
+To reach a final account value of A = $500,000, invested at 7.1% interest, in decimal form r = 0.071, compounded quarterly, so n = 4, for 40 years, substitute those values into the formula for present value. Calculating, we find the present value of the $500,000.
+ PV=A(1+rn)n×t=500,000(1+0.0714)4×40=500,000(1+0.01775)160=500,000(1.01775)160=500,00016.6946672846=29,949.6834
+ In order for this account to reach $500,000 after 40 years, $29,949.69 needs to be invested.
+
+Investment Goal with Compound Interest
+
+Pilar plans early for retirement, believing she will need $1,500,000 to live comfortably after the age of 67. How much will she need to deposit at age 23 in an account bearing 6.35% annual interest compounded monthly?
+
+Knowing how much to deposit at age 23 to reach a certain value later is a present value question. The target value for Pilar is $1,500,000. The interest rate is 6.35%, which in decimal form is 0.0635. Compounded monthly means n = 12. She’s 23 and will leave the money in the account until the age of 67, which is 44 years, making t = 44. Using this information and substituting in the formula for present value, we calculate
+
+Pilar will need to invest $92,442,51 in this account to have $1,500,000 at age 67.
+
+Compute and Interpret Effective Annual Yield
+
+As we’ve seen, quarterly compounding pays interest 4 times a year or every 3 months; monthly compounding pays 12 times a year; daily compounding pays interest every day, and so on. Effective annual yield allows direct comparisons between simple interest and compound interest by converting compound interest to its equivalent simple interest rate. We can even directly compare different compound interest situations. This gives information that can be used to identify the best investment from a yield perspective.
+
+Using a formula, we can interpret compound interest as simple interest. The effective annual yield formula stems from the compound interest formula and is based on an investment of $1 for 1 year.
+
+Effective annual yield is Y=(1+rn)n-1 where Y = effective annual yield, r = interest rate in decimal form, and n = number of times the interest is compounded in a year. Y is interpreted as the equivalent annual simple interest rate.
+
+Determine and Interpret Effective Annual Yield for 6% Compounded Quarterly
+
+Suppose you have an investment paying a rate of 6% compounded quarterly. Determine and interpret that effective annual yield of the investment.
+
+Here, n = 4 (quarterly) and r = 0.06 (decimal form). Substituting into the formula we find that the effective annual yield is
+
+Therefore, a rate of 6% compounded quarterly is equivalent to a simple interest rate of 6.14%.
+
+Determine and Interpret Effective Annual Yield for 5% Compounded Daily
+
+Calculate and interpret the effective annual yield on a deposit earning interest at a rate of 5% compounded daily.
+
+In this case, the rate is r = 0.05 and n = 365 (daily). Using the formula Y=(1+rn)n-1, we have
+
+This tells us that an account earning 5% compounded daily is equivalent to earning 5.13% as simple interest.
+
+Choosing a Bank
+
+Minh has a choice of banks in which he will open a savings account. He will deposit $3,200 and he wants to get the best interest he can. The banks advertise as follows:
+
+Bank
+Interest Rate
+ABC Bank
+2.08% compounded monthly
+123 Bank
+2.09% compounded annually
+XYZ Bank
+2.05% compounded daily
+Which bank offers the best interest?
+
+To compare these directly, Minh could change each interest rate to its effective annual yield, which would allow direct comparison between the rates. Computing the effective annual yield for all three choices gives:
+
+ABC Bank: Y=(1+0.020812)12-1=0.0210=2.10%
+
+123 Bank: Y=(1+0.02091)1-1=0.0209=2.09%
+
+XYZ Bank: Y=(1+0.0205365)365-1=0.0207=2.07%
+
+ABC Bank has the highest effective annual yield, so Minh should choose ABC bank.
+
+Check Your Understanding
+
+Key Terms
+
+Compound interest
+
+Effective annual yield
+
+Key Concepts
+
+Compound interest means that the interest earned during one period will earn interest in later periods. Essentially, the amount of the principal grows from period to period.
+
+The important values in computing compound interest are the interest rate, the principal, the length of time the investment, and the number of times the investment is compounded.
+
+Compound interest has minimal impact early, but later has a very large impact.
+
+You can determine how much to invest today in order to reach a goal for some time later.
+
+Compound interest can be translated into an effective annual yield, which allows for comparison between investment options.
+
+Videos
+Compound Interest
+Compare Simple Interest to Interest Compounded Annually
+Compare Simple Interest and Compound Interest for Different Number of Periods Per Year
+
+Formulas
+A=P(1+rn)nt
+PV=A(1+rn)n×t
+Y=(1+rn)n-1

@@ -1,0 +1,154 @@
+# m00022
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Data Analysis Charts
+
+Data Analysis Charts
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Determine the most appropriate chart for a given dataset or analysis
+
+Create a chart template
+
+Use the Quick Analysis tool to add sparklines to a table
+
+At some point in your career, you might need to present an analysis of data to an audience of peers or management. Your information must appear clear and professional and will likely include graphs and charts of your analysis. Recall that the theme and color choices of these elements can be critical to developing a professional presentation that will effectively and clearly communicate your intended message (see Preparing Presentations for a review of design strategies and tips).
+
+You learned how to create graphs and charts in PivotTables. Some of those skills, such as using legends, adding gridlines, editing axis titles and labels, and including chart titles, will make for a professional presentation of the data. This section will discuss several types of charts and graphs and when they might be appropriate to use based on your dataset.
+
+With data visuals, it is key that you select the type of chart or graph that works best for a particular dataset and makes the information easy to understand. You cannot simply select a graph or a chart based on its appearance. All types of graphs and charts are not appropriate for every dataset. As you decide which chart or graph to use, consider the type and level of data that you have (). You should also consider what kind of message you are trying to convey. Are you trying to inform, compare, show trends over time, or reveal relationships? Your purpose can dictate what type of chart you will use.
+
+Usage of Graphs and Charts
+
+Purpose
+Appropriate Charts/Graphs
+Comparisons
+Bar chart, pie chart, stacked bar chart, clustered column chart
+Changes
+Line graph, area chart, timeline
+Relationships
+Scatter plot, histogram, combo column/line chart
+Selecting the right type of chart to represent your data is not always easy. How you present your data is incredibly important. You need to always be mindful that you are accurately presenting your data visually in a way that tells the story objectively, with no apparent bias or intention. Visit this link to read strategies for choosing the correct chart to visualize your data.
+
+Clustered Column Chart
+
+A clustered column chart is simply a column chart that includes multiple variables to show the comparison between the groups. A column chart compares one variable against another variable. For example, you might put the sales region on the horizontal axis and the total sales on the vertical axis. A clustered column would have that, but it would include the same data for multiple years of data. The clustered column chart is great for showing comparisons (). Using the WorldCorp data, you can create a clustered column chart to see the comparisons between the quantity sold for each product type over time. A drawback of the clustered column chart is that it is not appropriate for large amounts of data. If you have more than five sets of data, the chart can look too busy and overwhelm your audience. The clustered column chart also works better with a 2D display rather than a 3D display. The 3D display can look too busy and can make it difficult to interpret the information easily.
+
+Combination Chart
+
+A combination chart combines two different chart types in one visual, allowing you to display data at different levels on the same chart. You can use combination charts to understand and examine comparisons between groups and the relationship between different variables. With this example, a combination chart can be created to show the FOB $ for each month based on the quantity sold for each of the two product types. With the combination chart, you determine which chart is appropriate for each data series you are including. uses a column chart for quantity sold and a line graph for FOB $. Combination charts are often easier to interpret as 2D than as 3D. Consider using contrasting colors to make the plotted series more visible.
+
+Stacked Column Chart
+
+The stacked column chart compares data like the clustered column chart but displays it in a different format. It shows the relationship between groups using the same scales. Instead of the columns being next to each other, the data is stacked, one series on top of the other, in a single column. A stacked column chart can be used to show part-to-whole relationships. Using contrasting colors will help make the distinction between the groups more visible. Using one of the 3D options for displaying a stacked column chart can give it a professional appearance that is easy to interpret (). This stacked column chart shows WorldCorp’s sales agents’ FOB $ during a three-week period.
+
+Bar Chart
+
+A bar chart is a horizontal column chart. It is sometimes used to communicate complex datasets and can be easier to interpret in certain situations. Bar charts are effective for displaying negative and positive numbers together. They also work well for charts with long text labels along the y-axis because the labels are more readable when placed horizontally (). You can create clustered and stacked bar charts to display multiple series in a single chart. Use a simple layout and contrasting colors for the most professional look. Like a clustered column chart, bar charts work best with smaller datasets. Too many bars on the chart can make it unreadable. Use a bar chart when you have ten or fewer categories to display. You can use WorldCorp data to construct a bar chart of the volume sold for four different sizes of televisions.
+
+Line Chart
+
+A line chart is used to show changes over time. It is appropriate for trend analysis and graphing continuous datasets. Line charts are not appropriate for categorical data. Be careful of the scaling of the axis so as to not overemphasize or deemphasize the trend in either the vertical or horizontal directions. Keep the chart to four lines or fewer for the most effective presentation of the material, and use thicker, solid lines rather than thin lines or dotted/dashed lines. Be sure to include a legend if you are plotting more than one series of data (). Also consider including data markers on the lines to make interpretation clearer. The 3D line chart is difficult to interpret even with a single line; the 2D line chart presents data more clearly. You can examine the changes in sales for Home Stereo Systems at WorldCorp for the month of March with a line chart. Adding gridlines or data labels can help your audience quickly see values at certain points in time.
+
+Misleading Graphs
+
+Earlier, you learned the importance of accurately representing data in a chart to prevent misinterpretation of the information. When you are presenting charts and graphs as opposed to the actual data, special care should be taken to make sure the data representation is valid. By adjusting the scaling on either axis, you can drastically change the interpretation of the information presented in a chart. Take a look at this article on how mistakes have been made in representing data to learn more. Now select one chart represented in the preceding link and re-create the chart so that it is not misleading, and then answer the following questions:
+
+What was the major issue(s) with the selected chart?
+
+What are some of the incorrect conclusions drawn from the chart?
+
+What adjustments did you make? How does it more accurately reflect the information?
+
+Scatter Chart
+
+A scatter chart or scatter plot shows the relationship between two variables. It is often used as part of a regression analysis, and it easily shows the direction of the slope of the line (). A positive slope indicates a positive correlation between the variables, and a negative slope indicates a negative correlation. A positive slope is when the two variables move in the same direction. The chart of data will have a line that moves from the lower-left to the upper-right corner. A negative slope means the variables move in opposite directions. The chart of a negative slope will start in the upper-left corner and move down toward the lower-right corner of the chart. If the chart is relatively flat, meaning a near 0 slope, then there is little relationship between the two variables. The scatter plot for FOB $ versus Quantity Sold show a slight positive (upward) trend in the data.
+
+A scatter chart can show if a relationship exists. It does not provide a quantitative measure of the relationship between the two variables; it simply shows the estimated relationship. In a scatter plot, the data points are not connected. Instead, it uses the data points only and then, if desired, you can add in a best fit regression line to examine the information more closely (). If the data points are clustered around the best fit regression line, the relationship is strong. If the data points are scattered and show little to no discernible pattern around the fitted regression line, the relationship is weak. When you add the trendline to the previous scatter plot, you can see that the data points are not clustered around that trendline. Instead, they are quite spread out. This is a visual indication that the variables (FOB $ and Quantity Sold) are not strongly connected to each other.
+
+Histogram
+
+A histogram represents a single variable at various levels/ranges for that variable. With a histogram, a dataset is condensed into categories for a quick analysis of the distribution of the data (). It is the visual representation of a histogram table. Histograms can represent discrete or continuous data, such as the distribution of customers. They are used frequently for a quick assessment of a dataset and to visually convey large datasets in an easy-to-understand format. They readily show outliers or gaps in information. The process of creating histograms was covered in more detail in Histograms.
+
+Stock Chart
+
+Stock charts are used to represent market data to show the highs and lows for stocks. They can also be used in quality control to show the range of data on a certain day or shift for a production process. To create a stock chart, you will need a date or time reference and the high values and low values for that date or time. The horizontal axis will be the span of time and the vertical axis will be dollars, in the case of a stock market chart. It could be another measure if you are using the stock chart for quality control purposes ().
+
+Chart Template
+
+If you are creating the same type of chart on a regular basis, creating a chart template will save time. You can save features, themes, colors, and formats as a template that you can use with other data files. To begin, create the chart as you would normally create it. Add the desired customization to the chart. This could include formatting the chart with company colors or including the company logo as a watermark in the chart. When you are finished, right-click on the chart you just created and formatted (). Choose Save As Template. You will then be prompted to enter a name for the chart template you just created (). Consider a name for the template that will help identify the template’s use. Make sure the type is listed as Chart Template Files. Input a name and click Save.
+
+To access the saved template, go to the Insert tab and choose Recommended Charts (). Then, select All Charts and Templates. The saved template should be listed, and you can select that template to apply to the new dataset. Click on the template, then click OK, and Excel creates the chart based on your new dataset.
+
+Quick Analysis Tool
+
+The Quick Analysis tool provides a shortcut to analyzing a dataset with a group of options located in one place for ease of use. You can use these options to add formatting, to automatically insert totals and subtotals, or to add sparklines to your Data Table. There are three ways to access the Quick Analysis tool. If you highlight the Data Table you are interested in analyzing, the Quick Analysis tool icon will appear in the lower right of the selection (). You can also use Ctrl+Q or right-click on a cell inside the dataset and select Quick Analysis from the menu that appears.
+
+When you access the tool, a menu of options appears (). Choose the appropriate tab and click on the option you want to use.
+
+Formatting
+
+The Formatting options in the Quick Analysis tool will insert conditional formatting based on the criteria you select. You can also access these options through the Home tab in the Styles command group. Select the drop-down menu next to the Conditional Formatting button. Conditional Formatting provided more detail on using conditional formatting for data. For formatting graphs and charts, there are a few options to choose from under the Conditional Formatting menu, and you can stack the formatting options upon each other. For example, you can choose to have both the Data Bars and Icon Set displayed in your table at the same time. You can add data bars into the selected cells, and they will appear on top of the values and will be appropriately sized for the data in that cell (). You can format the bars through the Conditional Formatting menu on the Home tab. To remove the data bars, click on Clear Format on the far right of the Format tab in the Quick Analysis tools. You can also clear the formats by choosing the Clear Rules option in the Conditional Format menu on the Home tab.
+
+The Color Scale option adds colors to the cells based on the values relative to each other. There are several different color scales you can choose. For example, one color scale uses blues to represent the higher values and reds to represent the lower values in the dataset (). Again, to remove the colors, click on Clear Formats in the Quick Analysis tools or Clear Rules under Conditional Formatting.
+
+Icon sets are a more visual way to see differences between the values in a dataset (). The default icon is an arrow that is either red, yellow, or green based on the value in the cell. The icon can be changed by accessing the Conditional Formatting menu on the Home tab.
+
+The Greater Than option in the Quick Analysis tools will highlight data that is greater than the value you set (). You set this value in the input window, choose the color scheme for the highlighted cells that meet the criteria, and then click OK. Using the default color scheme, the cells that are greater than the value you set will be highlighted with a light red fill and a dark red text.
+
+The final option in the Formatting tab of the Quick Analysis tools is the Top 10% tool. This tool highlights the values that are in the top 10 percent in the dataset. The default is to highlight those with light red fill and dark red text. This can be changed as desired ().
+
+Charts
+
+The Quick Analysis tools give you the option to quickly insert a chart of the data () using the Charts tab. The chart will be inserted directly on the worksheet using the default color schemes. After you have created the chart, you can choose to customize it to meet your needs using the skills you have already learned. You can access charts not listed specifically by clicking on More Charts.
+
+Totals
+
+The Totals tab in the Quick Analysis tool gives you several options for summarizing your dataset. You can access the same options through the Formulas tab, but the process is much simpler through the Quick Analysis tool (a). You can include the total of data (sum), average, count, percent of total, and running total. These options are available for both columns and rows. To access the additional formulas, click on the small arrow to the right of the window. With any of the options, the result of the formula will be included in your Data Table as another row or column (b).
+
+Sparklines
+
+One way to show trends in your data is to use a sparkline, a small chart inserted into a cell next to your data that shows changes over time. There are three options in the Sparklines tab: Line, Column, and Win/Loss (). These can also be accessed through the Insert menu in the Sparklines command group.
+
+By default, sparklines are inserted at the end of each row. Once the sparkline is inserted, you have access to the Sparkline formatting tab. Here, you can format the sparkline’s style, change the input data, or change the type of sparkline. You can also add markers to the sparkline to show the highest and lowest points. In , the Line sparkline was inserted. With just a quick glance, you can see that Antonio had the most sales in week two but did not do as well in week three, whereas Izabelle and James improved consistently.
+
+Marimekko charts are a way to visually examine market share. They are used often in consulting and finance companies. You can also include different segments within an industry. Read this article to find out more about this special type of chart and how to create it in Excel.
+
+Summary
+
+There are many types of charts to visually present your data.
+
+Some options for charts or graphs include bar charts, pie charts, column charts, line graphs, and scatter plots.
+
+A column chart can be used to show comparisons between groups.
+
+A line chart is useful to show changes over time.
+
+Scatter plots visually show the relationship between two variables and are often used with regression.
+
+Chart templates can be created for chart formats you use frequently such as those with company colors or logos.
+
+The Quick Analysis tool gives you access to several options such as conditional formatting, adding totals to the rows or columns, or quick links to creating a chart of the data.
+
+Sparklines added to your Data Table can be used to quickly assess trends.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+Case Exercises
+
+horizontal column chart
+column chart that includes multiple variables to show the comparison between the groups
+chart that combines two different chart types in one visual
+chart used to show changes over time
+chart used to show the relationship between two variables
+small charts inserted into cells next to data that show changes over time

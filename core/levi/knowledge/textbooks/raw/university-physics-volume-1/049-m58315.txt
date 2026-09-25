@@ -1,0 +1,131 @@
+# m58315
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Potential Energy Diagrams and Stability
+
+Potential Energy Diagrams and Stability
+
+By the end of this section, you will be able to:
+
+Create and interpret graphs of potential energy
+
+Explain the connection between stability and potential energy
+
+Often, you can get a good deal of useful information about the dynamical behavior of a mechanical system just by interpreting a graph of its potential energy as a function of position, called a potential energy diagram. This is most easily accomplished for a one-dimensional system, whose potential energy can be plotted in one two-dimensional graph—for example, U(x) versus x—on a piece of paper or a computer program. For systems whose motion is in more than one dimension, the motion needs to be studied in three-dimensional space. We will simplify our procedure for one-dimensional motion only.
+
+First, let’s look at an object, freely falling vertically, near the surface of Earth, in the absence of air resistance. The mechanical energy of the object is conserved, E=K+U, and the potential energy, with respect to zero at ground level, is U(y)=mgy, which is a straight line through the origin with slope mg. In the graph shown in , the x-axis is the height above the ground y and the y-axis is the object’s energy.
+
+The line at energy E represents the constant mechanical energy of the object, whereas the kinetic and potential energies, KA and UA, are indicated at a particular height yA. You can see how the total energy is divided between kinetic and potential energy as the object’s height changes. Since kinetic energy can never be negative, there is a maximum potential energy and a maximum height, which an object with the given total energy cannot exceed:
+
+If we use the gravitational potential energy reference point of zero at y0, we can rewrite the gravitational potential energy U as mgy. Solving for y results in
+
+We note in this expression that the quantity of the total energy divided by the weight (mg) is located at the maximum height of the particle, or ymax. At the maximum height, the kinetic energy and the speed are zero, so if the object were initially traveling upward, its velocity would go through zero there, and ymax would be a turning point in the motion. At ground level, y0=0, the potential energy is zero, and the kinetic energy and the speed are maximum:
+
+The maximum speed ±v0 gives the initial velocity necessary to reach ymax, the maximum height, and −v0 represents the final velocity, after falling from ymax. You can read all this information, and more, from the potential energy diagram we have shown.
+
+Consider a mass-spring system on a frictionless, stationary, horizontal surface, so that gravity and the normal contact force do no work and can be ignored (). This is like a one-dimensional system, whose mechanical energy E is a constant and whose potential energy, with respect to zero energy at zero displacement from the spring’s unstretched length, x=0,isU(x)=12kx2.
+
+You can read off the same type of information from the potential energy diagram in this case, as in the case for the body in vertical free fall, but since the spring potential energy describes a variable force, you can learn more from this graph. As for the object in vertical free fall, you can deduce the physically allowable range of motion and the maximum values of distance and speed, from the limits on the kinetic energy, 0≤K≤E. Therefore, K=0 and U=E at a turning point, of which there are two for the elastic spring potential energy,
+
+The glider’s motion is confined to the region between the turning points, −xmax≤x≤xmax. This is true for any (positive) value of E because the potential energy is unbounded with respect to x. For this reason, as well as the shape of the potential energy curve, U(x) is called an infinite potential well. At the bottom of the potential well, x=0,U=0 and the kinetic energy is a maximum, K=E,sovmax=±2E/m.
+
+However, from the slope of this potential energy curve, you can also deduce information about the force on the glider and its acceleration. We saw earlier that the negative of the slope of the potential energy is the spring force, which in this case is also the net force, and thus is proportional to the acceleration. When x=0, the slope, the force, and the acceleration are all zero, so this is an equilibrium point. The negative of the slope, on either side of the equilibrium point, gives a force pointing back to the equilibrium point, F=±kx, so the equilibrium is termed stable and the force is called a restoring force. This implies that U(x) has a relative minimum there. If the force on either side of an equilibrium point has a direction opposite from that direction of position change, the equilibrium is termed unstable, and this implies that U(x) has a relative maximum there.
+Quartic and Quadratic Potential Energy Diagram
+The potential energy for a particle undergoing one-dimensional motion along the x-axis is U(x)=2(x4−x2), where U is in joules and x is in meters. The particle is not subject to any non-conservative forces and its mechanical energy is constant at E=−0.25J. (a) Is the motion of the particle confined to any regions on the x-axis, and if so, what are they? (b) Are there any equilibrium points, and if so, where are they and are they stable or unstable?
+
+Quartic and Quadratic Potential Energy Diagram
+Strategy
+First, we need to graph the potential energy as a function of x. The function is zero at the origin, becomes negative as x increases in the positive or negative directions (x2 is larger than x4 for x<1), and then becomes positive at sufficiently large |x|. Your graph should look like a double potential well, with the zeros determined by solving the equation U(x)=0, and the extremes determined by examining the first and second derivatives of U(x), as shown in .
+
+Strategy
+
+You can find the values of (a) the allowed regions along the x-axis, for the given value of the mechanical energy, from the condition that the kinetic energy can’t be negative, and (b) the equilibrium points and their stability from the properties of the force (stable for a relative minimum and unstable for a relative maximum of potential energy).
+
+You can just eyeball the graph to reach qualitative answers to the questions in this example. That, after all, is the value of potential energy diagrams. You can see that there are two allowed regions for the motion (E>U) and three equilibrium points (slope dU/dx=0), of which the central one is unstable (d2U/dx2<0), and the other two are stable (d2U/dx2>0).
+Solution
+
+Solution
+
+To find the allowed regions for x, we use the condition
+K=E−U=−14−2(x4−x2)≥0.
+If we complete the square in x2, this condition simplifies to 2(x2−12)2≤14, which we can solve to obtain
+12−18≤x2≤12+18.
+This represents two allowed regions, xp≤x≤xR and −xR≤x≤−xp, where xp=0.38 and xR=0.92 (in meters).
+
+To find the equilibrium points, we solve the equation
+dU/dx=8x3−4x=0
+and find x=0 and x=±xQ, where xQ=1/2=0.707 (meters). The second derivative 
+d2U/dx2=24x2−4
+is negative at x=0, so that position is a relative maximum and the equilibrium there is unstable. The second derivative is positive at x=±xQ, so these positions are relative minima and represent stable equilibria.
+Significance
+The particle in this example can oscillate in the allowed region about either of the two stable equilibrium points we found, but it does not have enough energy to escape from whichever potential well it happens to initially be in. The conservation of mechanical energy and the relations between kinetic energy and speed, and potential energy and force, enable you to deduce much information about the qualitative behavior of the motion of a particle, as well as some quantitative information, from a graph of its potential energy.
+
+Significance
+
+Repeat when the particle’s mechanical energy is +0.25J.
+
+a. yes, motion confined to −1.055m≤x≤1.055m; b. same equilibrium points and types as in example
+
+Before ending this section, let’s practice applying the method based on the potential energy of a particle to find its position as a function of time, for the one-dimensional, mass-spring system considered earlier in this section.
+Sinusoidal Oscillations
+Find x(t) for a particle moving with a constant mechanical energy E>0 and a potential energy U(x)=12kx2, when the particle starts from rest at time t=0.
+
+Sinusoidal Oscillations
+Strategy
+We follow the same steps as we did in . Substitute the potential energy U into and factor out the constants, like m or k. Integrate the function and solve the resulting expression for position, which is now a function of time.
+
+Strategy
+Solution
+Substitute the potential energy in and integrate using an integral solver found on a web search:
+
+Solution
+
+From the initial conditions at t=0, the initial kinetic energy is zero and the initial potential energy is 12kx02=E, from which you can see that x0/(2E/k)=±1 and sin−1(±)=±900. Now you can solve for x:
+Significance
+A few paragraphs earlier, we referred to this mass-spring system as an example of a harmonic oscillator. Here, we anticipate that a harmonic oscillator executes sinusoidal oscillations with a maximum displacement of (2E/k) (called the amplitude) and a rate of oscillation of (1/2π)k/m (called the frequency). Further discussions about oscillations can be found in Oscillations.
+
+Significance
+
+Find x(t) for the mass-spring system in if the particle starts from x0=0 at t=0. What is the particle’s initial velocity?
+x(t)=±(2E/k)sin[(k/m)t]andv0=±(2E/m)
+
+Summary
+
+Interpreting a one-dimensional potential energy diagram allows you to obtain qualitative, and some quantitative, information about the motion of a particle.
+
+At a turning point, the potential energy equals the mechanical energy and the kinetic energy is zero, indicating that the direction of the velocity reverses there.
+
+The negative of the slope of the potential energy curve, for a particle, equals the one-dimensional component of the conservative force on the particle. At an equilibrium point, the slope is zero and is a stable (unstable) equilibrium for a potential energy minimum (maximum).
+
+Problems
+
+A mysterious constant force of 10 N acts horizontally on everything. The direction of the force is found to be always pointed toward a wall in a big hall. Find the potential energy of a particle due to this force when it is at a distance x from the wall, assuming the potential energy at the wall to be zero.
+
+10x with x-axis pointed away from the wall and origin at the wall
+
+A single force F(x)=−4.0x (in newtons) acts on a 1.0-kg body. When x=3.5m, the speed of the body is 4.0 m/s. What is its speed at x=2.0m?
+
+A particle of mass 4.0 kg is constrained to move along the x-axis under a single force F(x)=−cx3, where c=8.0N/m3. The particle’s speed at A, where xA=1.0m, is 6.0 m/s. What is its speed at B, where xB=−2.0m?
+
+4.6 m/s
+
+The force on a particle of mass 2.0 kg varies with position according to F(x)=−3.0x2 (x in meters, F(x) in newtons). The particle’s velocity at x=2.0m is 5.0 m/s. Calculate the mechanical energy of the particle using (a) the origin as the reference point and (b) x=4.0m as the reference point. (c) Find the particle’s velocity at x=1.0m. Do this part of the problem for each reference point.
+
+A 4.0-kg particle moving along the x-axis is acted upon by the force whose functional form appears below. The velocity of the particle at x=0 is v=6.0m/s. Find the particle’s speed at x=(a)2.0m,(b)4.0m,(c)10.0m,(d) Does the particle turn around at some point and head back toward the origin? (e) Repeat part (d) if v=2.0m/satx=0.
+
+a. 5.6 m/s; b. 5.2 m/s; c. 6.4 m/s; d. no; e. yes
+
+A particle of mass 0.50 kg moves along the x-axis with a potential energy whose dependence on x is shown below. (a) What is the force on the particle at x=2.0,5.0,8.0,and 12 m? (b) If the total mechanical energy E of the particle is −6.0 J, what are the minimum and maximum positions of the particle? (c) What are these positions if E=2.0J? (d) If E=16J, what are the speeds of the particle at the positions listed in part (a)?
+
+(a) Sketch a graph of the potential energy function U(x)=kx2/2+Ae−αx2, where k,A,andα are constants. (b) What is the force corresponding to this potential energy? (c) Suppose a particle of mass m moving with this potential energy has a velocity va when its position is x=a. Show that the particle does not pass through the origin unless
+
+a. 
+
+ where k=0.02,A=1,α=1; b. F=kx−αxAe−αx2; c. The potential energy at x=0 must be less than the kinetic plus potential energy at x=a or A≤12mv2+12ka2+Ae−αa2. Solving this for A matches results in the problem.
+
+position where the assumed conservative, net force on a particle, given by the slope of its potential energy curve, is zero
+graph of a particle’s potential energy as a function of position
+position where the velocity of a particle, in one-dimensional motion, changes sign

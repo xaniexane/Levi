@@ -1,0 +1,923 @@
+# m79672
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Matched or Paired Samples (Optional)
+
+Matched or Paired Samples (Optional)
+
+When using a hypothesis test for matched or paired samples, the following characteristics should be present:
+
+Simple random sampling is used.
+
+Sample sizes are often small.
+
+Two measurements (samples) are drawn from the same pair of individuals or objects.
+
+Differences are calculated from the matched or paired samples.
+
+The differences form the sample that is used for the hypothesis test.
+
+Either the matched pairs have differences that come from a population that is normal or the number of differences is sufficiently large so that distribution of the sample mean of differences is approximately normal.
+
+In a hypothesis test for matched or paired samples, subjects are matched in pairs and differences are calculated. The differences are the data. The population mean for the differences, μd, is then tested using a Student’s-t test for a single population mean with n – 1 degrees of freedom, where n is the number of differences.
+
+The test statistic (t-score) is
+A study was conducted to investigate the effectiveness of pain-reducing medication. Results for randomly selected subjects are shown in . A lower score indicates less pain. The before value is matched to an after value, and the differences are calculated. The differences have a normal distribution. Are the sensory measurements, on average, lower after the medication? Test at a 5 percent significance level.
+
+Subject:
+A
+B
+C
+D
+E
+F
+G
+H
+Before
+6.6
+6.5
+9.0
+10.3
+11.3
+8.1
+6.3
+11.6
+After
+6.8
+2.4
+7.4
+8.5
+8.1
+6.1
+3.4
+2.0
+Corresponding before and after values form matched pairs. (Calculate after – before.)
+
+After Data
+Before Data
+Difference
+6.8
+6.6
+0.2
+2.4
+6.5
+–4.1
+7.4
+9
+–1.6
+8.5
+10.3
+–1.8
+8.1
+11.3
+–3.2
+6.1
+8.1
+–2
+3.4
+6.3
+–2.9
+2
+11.6
+–9.6
+The data for the test are the differences: {0.2, –4.1, –1.6, –1.8, –3.2, –2, –2.9, –9.6}
+
+The sample mean and sample standard deviation of the differences are: 
+
+x
+d
+
+=
+–3.13
+ and 
+
+s
+d
+
+=
+2.91
+
+Verify these values.
+
+Let 
+
+μ
+d
+
+ be the population mean for the differences. We use the subscript d to denote differences.
+Random variable:
+
+X
+¯
+
+d
+
+ = the mean difference of the sensory measurements.
+H0: μd ≥ 0
+
+The null hypothesis is zero or positive, meaning that there is the same or more pain felt after taking the medication. That means the subject shows no improvement. μd is the population mean of the differences.
+Ha: μd < 0
+
+The alternative hypothesis is negative, meaning there is less pain felt after taking the medication. That means the subject shows improvement. The score should be lower after taking the medication, so the difference ought to be negative to indicate improvement.
+Distribution for the test: The distribution is a Student’s t with df = n – 1 = 8 – 1 = 7. Use t7. Note that the test is for a single population mean.
+Calculate the p-value using the Student’s-t distribution: p-value = 0.0095
+Graph:
+X
+¯
+
+d
+
+ is the random variable for the differences.
+
+The sample mean and sample standard deviation of the differences are as follows:
+x
+¯
+
+d
+
+ = –3.13
+s
+¯
+
+d
+
+ = 2.91
+Compare α and the p-value: α = 0.05 and p-value = 0.0095. α > p-value.
+Make a decision: Since α > p-value, reject H0. This means that μd < 0 and there is improvement.
+Conclusion: At a 5 percent level of significance, from the sample data, there is sufficient evidence to conclude that the sensory measurements, on average, are lower after taking the medication. The medication appears to be effective in reducing pain.
+
+Note
+
+For the TI-83+ and TI-84 calculators, you can either calculate the differences ahead of time (after - before) and put the differences into a list or you can put the after data into a first list and the before data into a second list. Then, go to a third list and arrow up to the name. Enter 1st list name – 2nd list name. The calculator will do the subtraction, and you will have the differences in the third list.
+
+Use your list of differences as the data. Press STAT and arrow over to TESTS. Press 2:T-Test. Arrow over to Data and press ENTER. Arrow down and enter 0 for μ0, the name of the list where you put the data, and 1 for Freq:. Arrow down to μ: and arrow over to < μ0. Press ENTER. Arrow down to Calculate and press ENTER. The p-value is 0.0094, and the test statistic is –3.04. Do these instructions again except, arrow to Draw instead of Calculate. Press ENTER.
+
+Try It
+
+A study was conducted to investigate how effective a new diet was in lowering cholesterol. Results for the randomly selected subjects are shown in the table. The differences have a normal distribution. Are the subjects’ cholesterol levels lower on average after the diet? Test at the 5 percent level.
+
+Subject
+A
+B
+C
+D
+E
+F
+G
+H
+I
+Before
+209
+210
+205
+198
+216
+217
+238
+240
+222
+After
+199
+207
+189
+209
+217
+202
+211
+223
+201
+The p-value is 0.0130, so we can reject the null hypothesis. There is enough evidence to suggest that the diet lowers cholesterol.
+
+A college football coach was interested in whether the college’s strength development class increased his players’ maximum lift (in pounds) on the bench press exercise. He asked four of his players to participate in a study. The amount of weight they could each lift was recorded before they took the strength development class. After completing the class, the amount of weight they could each lift was again measured. The data are as follows:
+
+Weight (in pounds)
+Player 1
+Player 2
+Player 3
+Player 4
+Amount of weight lifted prior to the class
+205
+241
+338
+368
+Amount of weight lifted after the class
+295
+252
+330
+360
+The coach wants to know if the strength development class makes his players stronger, on average.
+Record the differences data. Calculate the differences by subtracting the amount of weight lifted prior to the class from the weight lifted after completing the class. The data for the differences are: {90, 11, -8, -8}. Assume the differences have a normal distribution.
+
+Using the differences data, calculate the sample mean and the sample standard deviation.
+x
+¯
+
+d
+
+ = 21.3, sd = 46.7
+
+Note
+
+The data given here would indicate that the distribution is right-skewed. The difference 90 may be an extreme outlier. It is pulling the sample mean to be 21.3 (positive). The means of the other three data values are negative.
+
+Using the difference data, this becomes a test of a single __________.
+Define the random variable: 
+
+X
+¯
+
+d
+
+ is the mean difference in the maximum lift per player.
+
+The distribution for the hypothesis test is t3.
+H0: μd ≤ 0, Ha: μd > 0
+Graph:
+Calculate the p-value: The p-value is 0.2150.
+Decision: If the level of significance is 5 percent, the decision is not to reject the null hypothesis, because α < p-value.
+What is the conclusion?
+
+At a 5 percent level of significance, from the sample data, there is not sufficient evidence to conclude that the strength development class helped make the players stronger, on average.
+
+Try It
+
+A new prep class was designed to improve SAT test scores. Five students were selected at random. Their scores on two practice exams were recorded, one before the class and one after. The data are recorded in . Are the scores, on average, higher after the class? Test at a 5 percent level.
+
+SAT Scores
+Student 1
+Student 2
+Student 3
+Score before class
+1840
+1960
+1920
+Score after class
+1920
+2160
+2200
+2100
+The p-value is 0.0874, so we decline to reject the null hypothesis. The data do not support that the class improves SAT scores significantly.
+
+Seven eighth-graders at Kennedy Middle School measured how far they could push the shot put with their dominant (writing) hand and their weaker (nonwriting) hand. They thought that they could push equal distances with both hands. The data are collected and recorded in .
+
+Distance (in feet) using
+Student 1
+Student 2
+Student 3
+Student 4
+Student 5
+Student 6
+Student 7
+Dominant Hand
+30
+26
+34
+17
+19
+26
+20
+Weaker Hand
+28
+14
+27
+18
+17
+26
+16
+Conduct a hypothesis test to determine whether the mean difference in distances between the children’s dominant versus weaker hands is significant.
+
+Record the differences data. Calculate the differences by subtracting the distances with the weaker hand from the distances with the dominant hand. The data for the differences are: {2, 12, 7, –1, 2, 0, 4}. The differences have a normal distribution.
+
+Using the differences data, calculate the sample mean and the sample standard deviation. 
+
+x
+¯
+
+d
+
+ = 3.71, 
+
+s
+d
+
+ = 4.5.
+Random variable: 
+
+X
+¯
+
+d
+
+ = mean difference in the distances between the hands.
+Distribution for the hypothesis test: t6
+H0: μd = 0 Ha: μd ≠ 0
+Graph:
+Calculate the p-value: The p-value is 0.0716 (using the data directly).
+
+Test statistic = 2.18. p-value = 0.0719 using 
+ 
+ (
+
+ x
+ ¯
+
+ d
+ 
+ =3.71, 
+ s
+ d
+ 
+ =4.5
+ 
+ )
+ 
+.
+Decision: Assume α = 0.05. Since α < p-value, do not reject H0.
+Conclusion: At the 5 percent level of significance, from the sample data, there is not sufficient evidence to conclude that there is a difference in the children’s weaker and dominant hands to push the shot put.
+
+Try-It
+
+Five ball players think they can throw the same distance with their dominant hand (throwing) and off-hand (catching hand). The data were collected and recorded in . Conduct a hypothesis test to determine whether the mean 5 difference in distances between the dominant and off-hand is significant. Test at the 5 percent level.
+
+Player 1
+Player 2
+Player 3
+Player 4
+Player 5
+Dominant Hand
+120
+111
+135
+140
+125
+Off-Hand
+105
+109
+98
+111
+99
+The p-value is 0.0230, so we can reject the null hypothesis. The data show that the players do not throw the same distance with their off-hands as they do with their dominant hands.
+
+Chapter Review
+
+A hypothesis test for matched or paired samples (t-test) has these characteristics:
+
+Test the differences by subtracting one measurement from the other measurement
+
+Random variable: 
+
+x
+¯
+
+d
+
+ = mean of the differences.
+
+Distribution: Student’s t distribution with n – 1 degrees of freedom.
+
+If the number of differences is small (less than 30), the differences must follow a normal distribution.
+
+Two samples are drawn from the same set of objects.
+
+Samples are dependent.
+
+Formula Review
+
+Test statistic (t-score): t = 
+
+x
+¯
+
+d
+
+−
+μ
+d
+
+(
+
+s
+d
+
+n
+
+)
+
+where:
+x
+¯
+
+d
+
+ is the mean of the sample differences, μd is the mean of the population differences, sd is the sample standard deviation of the differences, and n is the sample size.
+Use the following information to answer the next five exercises. A study was conducted to test the effectiveness of a software patch in reducing system failures over a six-month period. Results for randomly selected installations are shown in . The before value is matched to an after value, and the differences are calculated. The differences have a normal distribution. Test at the 1 percent significance level.
+
+Installation
+A
+B
+C
+D
+E
+F
+G
+Before
+3
+6
+4
+2
+5
+8
+2
+After
+1
+5
+2
+0
+1
+0
+2
+2
+What is the random variable?
+
+the mean difference of the system failures
+
+State the null and alternative hypotheses.
+
+What is the p-value?
+
+0.0067
+
+Draw the graph of the p-value.
+
+What conclusion can you draw about the software patch?
+
+With a p-value 0.0067, we can reject the null hypothesis. There is enough evidence to support that the software patch is effective in reducing the number of system failures.
+Use the following information to answer next five exercises. A study was conducted to test the effectiveness of a juggling class. Before the class started, six subjects juggled as many balls as they could at once. After the class, the same six subjects juggled as many balls as they could. The differences in the number of balls are calculated. The differences have a normal distribution. Test at the 1 percent significance level.
+
+Subject
+A
+B
+C
+D
+E
+Before
+3
+4
+3
+2
+4
+After
+4
+5
+6
+4
+5
+7
+State the null and alternative hypotheses.
+
+What is the p-value?
+
+0.0021
+
+What is the sample mean difference?
+
+Draw the graph of the p-value.
+
+What conclusion can you draw about the juggling class?
+Use the following information to answer the next five exercises. A doctor wants to know if a blood pressure medication is effective. Six subjects have their blood pressures recorded. After twelve weeks on the medication, the same six subjects have their blood pressure recorded again. For this test, only systolic pressure is of concern. Test at the 1 percent significance level.
+
+Patient
+A
+B
+C
+D
+E
+Before
+161
+162
+165
+162
+166
+After
+158
+159
+166
+160
+167
+169
+State the null and alternative hypotheses.
+H0: μd ≥ 0
+Ha: μd < 0
+
+What is the test statistic?
+
+What is the p-value?
+
+0.0699
+
+What is the sample mean difference?
+
+What is the conclusion?
+
+We decline to reject the null hypothesis. There is not sufficient evidence to support that the medication is effective.
+
+Homework
+DIRECTIONS: For each of the word problems, use a solution sheet to do the hypothesis test. The solution sheet is found in Appendix E. Please feel free to make copies of the solution sheets. For the online version of the book, it is suggested that you copy the .doc or the .pdf files.
+
+Note
+
+If you are using a Student’s t-distribution for the homework problems, including for paired data, you may assume that the underlying population is normally distributed. (When using these tests in a real situation, you must first prove that assumption.)
+
+Ten individuals went on a low-fat diet for 12 weeks to lower their cholesterol. The data are recorded in . Do you think that their cholesterol levels were significantly lowered?
+
+Starting cholesterol level
+Ending cholesterol level
+140
+140
+220
+230
+110
+120
+240
+220
+200
+190
+180
+150
+190
+200
+360
+300
+280
+300
+260
+p-value = 0.1494
+
+At the 5 percent significance level, there is insufficient evidence to conclude that the medication lowered cholesterol levels after 12 weeks.
+Use the following information to answer the next two exercises. A new preventative medication was tried on a group of 224 patients who had the same risk factors for a disease. 45 patients developed the disease after four years. In a control group of 224 patients, 68 developed the disease after four years. We want to test whether the method of treatment reduces the proportion of patients who develop the disease after four years.
+
+Let the subscript t = treated patient and ut = untreated patient.
+
+The appropriate hypotheses are
+H0: pt < put and Ha: pt ≥ put
+H0: pt ≤ put and Ha: pt > put
+H0: pt = put and Ha: pt ≠ put
+H0: pt = put and Ha: pt < put
+
+If the p-value is 0.0062, what is the conclusion? Use α = 0.05.
+
+The method has no effect.
+
+There is sufficient evidence to conclude that the method reduces the proportion of patients who develop the disease after four years.
+
+There is sufficient evidence to conclude that the method increases the proportion of patients who develop the disease after four years.
+
+There is insufficient evidence to conclude that the method reduces the proportion of patients who develop the disease after four years.
+
+b
+Use the following information to answer the next two exercises. An experiment is conducted to show that blood pressure can be consciously reduced in people trained in a biofeedback exercise program. Six subjects were randomly selected, and blood pressure measurements were recorded before and after the training. The difference between blood pressures was calculated (after – before), producing the following results: 
+
+x
+¯
+
+d
+
+ = −10.2 sd = 8.4. Using the data, test the hypothesis that the blood pressure has decreased after the training.
+
+The distribution for the test is
+t5
+t6
+N(−10.2, 8.4)
+
+N(−10.2, 
+
+8.4
+
+6
+
+)
+
+If α = 0.05, the p-value and the conclusion are
+
+0.0014; There is sufficient evidence to conclude that the blood pressure decreased after the training.
+
+0.0014; There is sufficient evidence to conclude that the blood pressure increased after the training.
+
+0.0155; There is sufficient evidence to conclude that the blood pressure decreased after the training.
+
+0.0155; There is sufficient evidence to conclude that the blood pressure increased after the training.
+
+c
+
+A golf instructor is interested in determining if her new technique for improving players’ golf scores is effective. She takes four new students. She records their 18-hole scores before learning the technique and then after having taken her class. She conducts a hypothesis test. The data are as follows.
+
+Player 1
+Player 2
+Player 3
+Player 4
+Mean score before class
+83
+78
+93
+87
+Mean score after class
+80
+80
+86
+86
+The correct decision is
+
+reject H0.
+
+do not reject H0.
+
+A local research group is studying a chronic disease. They believe the number of cases of the disease is higher in 2013 than in 2012 in the southern United States. The group compared the estimates of new cases by southern state in 2012 and 2013. The results are in .
+
+Southern States
+2012
+2013
+Alabama
+3,450
+3,720
+Arkansas
+2,150
+2,280
+Florida
+15,540
+15,710
+Georgia
+6,970
+7,310
+Kentucky
+3,160
+3,300
+Louisiana
+3,320
+3,630
+Mississippi
+1,990
+2,080
+North Carolina
+7,090
+7,430
+Oklahoma
+2,630
+2,690
+South Carolina
+3,570
+3,580
+Tennessee
+4,680
+5,070
+Texas
+15,050
+14,980
+Virginia
+6,190
+6,280
+Test: two matched pairs or paired samples (t-test)
+
+Random variable: 
+
+X
+¯
+
+d
+
+Distribution: t12
+H0: μd = 0 Ha: μd > 0
+
+The mean of the differences of new female breast cancer cases in the south between 2013 and 2012 is greater than zero. The estimate for new female breast cancer cases in the south is higher in 2013 than in 2012.
+
+Graph: right-tailed
+p-value: 0.0004
+
+Decision: Reject H0.
+
+Conclusion: At the 5 percent level of significance, from the sample data, there is sufficient evidence to conclude that there was a higher estimate of new female breast cancer cases in 2013 than in 2012.
+
+A traveler wanted to know if the prices of hotels are different in the 10 cities that he visits the most often. The list of the cities with the corresponding prices for his two favorite hotel chains is in . Test at the 1 percent level of significance.
+
+Cities
+Hyatt Regency prices in dollars
+Hilton prices in dollars
+Atlanta
+107
+169
+Boston
+358
+289
+Chicago
+209
+299
+Dallas
+209
+198
+Denver
+167
+169
+Indianapolis
+179
+214
+Los Angeles
+179
+169
+New York City
+625
+459
+Philadelphia
+179
+159
+Washington, DC
+245
+239
+A politician asked his staff to determine whether the underemployment rate in the Northeast decreased from 2011 to 2012. The results are in .
+
+Northeastern States
+2011
+2012
+Connecticut
+17.3
+16.4
+Delaware
+17.4
+13.7
+Maine
+19.3
+16.1
+Maryland
+16.0
+15.5
+Massachusetts
+17.6
+18.2
+New Hampshire
+15.4
+13.5
+New Jersey
+19.2
+18.7
+New York
+18.5
+18.7
+Ohio
+18.2
+18.8
+Pennsylvania
+16.5
+16.9
+Rhode Island
+20.7
+22.4
+Vermont
+14.7
+12.3
+West Virginia
+15.5
+17.3
+Test: matched or paired samples (t-test)
+
+Difference data: {–0.9, –3.7, –3.2, –0.5, 0.6, –1.9, –0.5, 0.2, 0.6, 0.4, 1.7, –2.4, 1.8}
+
+Random Variable: 
+
+X
+¯
+
+d
+
+Distribution: H0: μd = 0 Ha: μd < 0
+
+The mean of the differences of the rate of underemployment in the northeastern states between 2012 and 2011 is less than zero. The underemployment rate went down from 2011 to 2012.
+
+Graph: left-tailed.
+p-value: 0.1207
+
+Decision: Do not reject H0.
+
+Conclusion: At the 5 percent level of significance, from the sample data, there is not sufficient evidence to conclude that there was a decrease in the underemployment rates of the northeastern states from 2011 to 2012.
+
+Bringing It Together
+Use the following information to answer the next 10 exercises. Indicate which of the following choices best identifies the hypothesis test.
+
+Independent group means, population standard deviations and/or variances known
+
+Independent group means, population standard deviations and/or variances unknown
+
+Matched or paired samples
+
+Single mean
+
+Two proportions
+
+Single proportion
+
+A powder diet is tested on 49 people, and a liquid diet is tested on 36 different people. The population standard deviations are two pounds and three pounds, respectively. Of interest is whether the liquid diet yields a higher mean weight loss than the powder diet.
+
+A new chocolate bar is taste-tested on consumers. Of interest is whether the proportion of children who like the new chocolate bar is greater than the proportion of adults who like it.
+
+e
+
+The mean number of English courses taken in a two-year time period by male and female college students is believed to be about the same. An experiment is conducted and data are collected from 9 males and 16 females.
+
+A football league reported that the mean number of touchdowns per game was five. A study is done to determine if the mean number of touchdowns has decreased.
+
+d
+
+A study is done to determine if students in the California state university system take longer to graduate than students enrolled in private universities. One hundred students from both the California state university system and private universities are surveyed. From years of research, it is known that the population standard deviations are 1.5811 years and 1 year, respectively.
+
+According to a doctor’s magazine, 75 percent of senior citizens think that yearly checkups are very important. A study is done to verify this.
+
+f
+
+According to a recent study, U.S. companies have a mean maternity leave of six weeks.
+
+A recent survey showed an increase in use of prescription medication among local senior citizens as compared to the national percent. Suppose that a survey of 100 local senior citizens and 100 national senior citizens is conducted to see if the proportion of prescription medication use is higher locally than nationally.
+
+e
+
+A new SAT study course is tested on 12 individuals. Pre-course and post-course scores are recorded. Of interest is the mean increase in SAT scores. The following data are collected:
+
+Pre-course score
+Post-course score
+1
+300
+960
+920
+1010
+1100
+840
+880
+1100
+1070
+1250
+1320
+860
+860
+1330
+1370
+790
+770
+990
+1040
+1110
+1200
+740
+850
+According to a statistics college professor, 68 percent of his students pass the final exam. A graduate researcher designs a study to determine if this claim is true.
+
+f
+
+The graduate researcher will be comparing a sample proportion to a population proportion or claim. Thus, the study includes the hypothesis test of a single proportion. A two proportion hypothesis test compares two sample proportions.
+
+Lesley E. Tan investigated the relationship between left-handedness versus right-handedness and motor competence in preschool children. Random samples of 41 left-handed preschool children and 41 right-handed preschool children were given several tests of motor skills to determine if there is evidence of a difference between the children based on this experiment. The experiment produced the means and standard deviations shown in . Determine the appropriate test and best distribution to use for that test.
+
+Left-handed
+Right-handed
+Sample size
+41
+41
+Sample mean
+97.5
+98.1
+Sample standard deviation
+17.5
+19.2
+Two independent means, normal distribution
+
+Two independent means, Student’s t-distribution
+
+Matched or paired samples, Student’s t-distribution
+
+Two population proportions, normal distribution
+
+A golf instructor is interested in determining if her new technique for improving players’ golf scores is effective. She takes four new students. She records their 18-hole scores before learning the technique and after having taken her class. She conducts a hypothesis test. The data are shown in .
+
+Player 1
+Player 2
+Player 3
+Player 4
+Mean score before class
+83
+78
+93
+87
+Mean score after class
+80
+80
+86
+86
+This is
+
+a test of two independent means.
+
+a test of two proportions.
+
+a test of a single mean.
+
+a test of a single proportion.
+
+a

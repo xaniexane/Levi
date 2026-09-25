@@ -1,0 +1,177 @@
+# m00120
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Euler Trails
+
+Euler Trails
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe and identify Euler trails.
+
+Solve applications using Euler trails theorem.
+
+Identify bridges in a graph.
+
+Apply Fleury’s algorithm.
+
+Evaluate Euler trails in real-world applications.
+
+We used Euler circuits to help us solve problems in which we needed a route that started and ended at the same place. In many applications, it is not necessary for the route to end where it began. In other words, we may not be looking at circuits, but trails, like the old Pony Express trail that led from Sacramento, California in the west to St. Joseph, Missouri in the east, never backtracking.
+
+Euler Trails
+
+If we need a trail that visits every edge in a graph, this would be called an Euler trail. Since trails are walks that do not repeat edges, an Euler trail visits every edge exactly once.
+
+Recognizing Euler Trails
+
+Use to determine if each series of vertices represents a trail, an Euler trail, both, or neither. Explain your reasoning.
+a → b → e → g → f → c → d → e
+a → b → e → g → f → c → d → e → b → a → d → g
+g → d → a → b → e → d → c → f → g → e
+
+It is a trail only. It is a trail because it is a walk that doesn’t cover any edges twice, but it is not an Euler trail because it didn’t cover edges ad or dg.
+
+It is neither. It is not a trail because it visits ab and be twice. Since it is not a trail, it cannot be an Euler trail.
+
+It is both. It is a trail because it is a walk that doesn’t cover any edges twice, and it is an Euler trail because it visits all the edges.
+
+The Five Rooms Puzzle
+
+Just as Euler determined that only graphs with vertices of even degree have Euler circuits, he also realized that the only vertices of odd degree in a graph with an Euler trail are the starting and ending vertices. For example, in , Graph H has exactly two vertices of odd degree, vertex g and vertex e. Notice the Euler trail we saw in Excercise 3 of began at vertex g and ended at vertex e.
+
+This is consistent with what we learned about vertices off odd degree when we were studying Euler circuits. We saw that a vertex of odd degree couldn't exist in an Euler circuit as depicted in . If it was a starting vertex, at some point we would leave the vertex and not be able to return without repeating an edge. If it was not a starting vertex, at some point we would return and not be able to leave without repeating an edge. Since the starting and ending vertices in an Euler trail are not the same, the start is a vertex we want to leave without returning, and the end is a vertex we want to return to and never leave. Those two vertices must have odd degree, but the others cannot.
+
+Let’s use the Euler trail theorem to solve a puzzle so you can amaze your friends! This puzzle is called the “Five Rooms Puzzle.” Suppose that you were in a house with five rooms and the exterior. There is a doorway in every shared wall between any two rooms and between any room and the exterior as shown in . Could you find a route through the house that passes through each doorway exactly once?
+
+Let’s represent the puzzle with a graph in which vertices are rooms (or the exterior) and an edge indicates a door between two rooms as shown in .
+
+To pass through each doorway exactly once means that we cross every edge in the graph exactly once. Since we have not been asked to start and end at the same position, but to visit each edge exactly once, we are looking for an Euler trail. Let’s check the degrees of the vertices.
+
+Since there are more than two vertices of odd degree as shown in , the graph of the five rooms puzzle contains no Euler path. Now you can amaze and astonish your friends!
+
+Bridges and Local Bridges
+
+Now that we know which graphs have Euler trails, let’s work on a method to find them. The method we will use involves identifying bridges in our graphs. A bridge is an edge which, if removed, increases the number of components in a graph. Bridges are often referred to as cut-edges. In , there are several examples of bridges. Notice that an edge that is not part of a cycle is always a bridge, and an edge that is part of a cycle is never a bridge.
+
+Edges bf, cg, and dg are “bridges”
+
+The graph in is connected, which means it has exactly one component. Each time we remove one of the bridges from the graph the number of components increases by one as shown in . If we remove all three, the resulting graph in has four components.
+
+In sociology, bridges are a key part of social network analysis. Sociologists study two kinds of bridges: local bridges and regular bridges. Regular bridges are defined the same in sociology as in graph theory, but they are unusual when studying a large social network because it is very unlikely a group of individuals in a large social network has only one link to the rest of the network. On the other hand, a local bridge occurs much more frequently. A local bridge is a friendship between two individuals who have no other friends in common. If they lose touch, there is no single individual who can pass information between them. In graph theory, a local bridge is an edge between two vertices, which, when removed, increases the length of the shortest path between its vertices to more than two edges. In , a local bridge between vertices b and e has been removed. As a result, the shortest path between b and e is b → i → j → k → e, which is four edges. On the other hand, if edge ab were removed, then there are still paths between a and b that cover only two edges, like a → i → b.
+
+The significance of a local bridge in sociology is that it is the shortest communication route between two groups of people. If the local bridge is removed, the flow of information from one group to another becomes more difficult. Let’s say that vertex b is Brielle and vertex e is Ella. Now, Brielle is less likely to hear about things like job opportunities, that Ella many know about. This is likely to impact Brielle as well as the friends of Brielle.
+
+Identifying Bridges and Local Bridges
+
+Use the graph of a social network in to answer each question.
+
+Identify any bridges.
+
+If all bridges were removed, how many components would there be in the resulting graph?
+
+Identify one local bridge.
+
+For the local bridge you identified in part 3, identify the shortest path between the vertices of the local bridge if the local bridge were removed.
+
+The edges ku, gh, and hi are bridges.
+
+If the bridges were all removed, there would be four components in the resulting graph, {i}, {h}, {u, v, w, x}, and {a, b, c, d, e, f, g, j, k, m, n, o, p, q, r, s, t} as shown in .
+
+ Graph of Social Network without Bridges
+
+Three local bridges are dn, ef, and qt, among others.
+
+If dn were removed, the shortest path between d and n would be d → e → f → j → o → m → n.
+
+Bridges and Local Bridges in Graph Theory
+
+Finding an Euler Trail with Fleury’s Algorithm
+
+Now that we are familiar with bridges, we can use a technique called Fleury’s algorithm, which is a series of steps, or algorithm, used to find an Euler trail in any graph that has exactly two vertices of odd degree.
+
+Here are the steps involved in applying Fleury’s algorithm.
+Step 1: Begin at either of the two vertices of odd degree.
+Step 2: Remove an edge between the vertex and any adjacent vertex that is NOT a bridge, unless there is no other choice, making a note of the edge you removed. Repeat this step until all edges are removed.
+Step 3: Write out the Euler trail using the sequence of vertices and edges that you found. For example, if you removed ab, bc, cd, de, and ef, in that order, then the Euler trail is a → b → c → d → e → f.
+shows the steps to find an Euler trail in a graph using Fleury’s algorithm.
+
+The Euler trail that was found in is t → v → w → u → t → w → y → x → v.
+
+Finding an Euler Trail with Fleury’s Algorithm
+
+Use Fleury’s Algorithm to find an Euler trail for Graph J in .
+Step 1: Choose one of the two vertices of odd degree, c or f, as your starting vertex. We will choose c.
+Step 2: Remove edge ca, cb, or cd. None of these are cut edges so we can select any of the three. We will choose cb as shown in to be the first edge removed.
+Repeat Step 2 The next choice is to remove edge ba, bd, or bf as shown in , but bf is not an option since it is a bridge. We will choose ba as shown in to be the second edge removed.
+Repeat Step 2 for the third, fourth, fifth, sixth, and seventh edges. As shown in , until we get to the seventh edge there is only one option each time, ac, cd, db, and bf in that order. For the seventh edge, we must choose between fe and fg. Neither of these are bridges. We choose fe. shows that ac, cd, db, bf, and fe have been removed.
+Repeat Step 2 for the eight, ninth, tenth, and eleventh edges. As shown in , there is only one option for each of these edges, eh, hi, ig, and gf, in that order.
+Step 3: Write out the Euler trail using the vertices in the sequence that the edges were removed. We removed cb, ba, ac, cd, db, bf, fe, eh, hi, ig, and gf, in that order. The Euler trail is c → b → a → c → d → b → f → e → h → i → g → f.
+TIP! To avoid errors, count the number of edges in your graph and make sure thatyour Euler trail represents that number of edges.
+
+In the previous section, we found Euler circuits using an algorithm that involved joining circuits together into one large circuit. You can also use Fleury’s algorithm to find Euler circuits in any graph with vertices of all even degree. In that case, you can start at any vertex that you would like to use.
+Step 1: Begin at any vertex.
+Step 2: Remove an edge between the vertex and any adjacent vertex that is NOT a bridge, unless there is no other choice, making a note of the edge you removed. Repeat this step until all edges are removed.
+Step 3: Write out the Euler circuit using the sequence of vertices and edges that you found. For example, if you removed ab, bc, cd, de, and ea, in that order, then the Euler circuit is a → b → c → d → e → a.
+Fluery's Algorithm to Find an Euler Circuit
+IMPORTANT! Since a circuit is a closed trail, every Euler circuit is also an Euler trail, but when we say Euler trail in this chapter, we are referring to an open Euler trail that begins and ends at different vertices.
+
+Finding an Euler Circuit or Euler Trail Using Fleury’s Algorithm
+
+Use Fleury’s algorithm to find either an Euler circuit or Euler trail in Graph G in .
+
+Graph G has all vertices of even degree so it has an Euler circuit.
+Step 1: Choose any vertex. We will choose vertex j.
+Step 2: Remove one of the four edges that meet at vertex j. Since jn is a bridge, we must remove either jh, ji, or jk. We remove ji as shown in .
+Repeat Step 2: Since id is a bridge, we can remove either ih or ik next. We remove ih, and then the only option is to remove hj as shown in .
+Repeat Step 2: Since jn is a bridge, the next edge removed must be jk, and then the only option is to remove ki followed by id as shown in . Even though id is a bridge, it can be removed because it is the only option at this point. shows Graph G with these additional edges removed.
+Repeat Step 2: Choose any one of the edges db, dc, or de. We remove dc as shown in .
+Repeat Step 2: Since co is a bridge, choose cb next. We remove cb, then bd, and then de as shown in .
+Repeat Step 2: Next, remove ec and co. Then choose any of op, pn, or om. We remove on as shown in .
+Repeat Step 2: Next, remove either nm, np, or nj, but nj is a So, we remove nm as shown in .
+Repeat Step 2: Next, remove mo, op, pn, and nj. And we are done!
+Step 3: Notice that the algorithm brought us back to the vertex where we started, forming an Euler circuit. Write out the Euler circuit:
+j → i → h → j → k → i → d → c → b → d → e → c → o → n → m → o → p → n → j
+
+We have discussed a lot of subtle concepts in this section. Let’s make sure we are all on the same page. Work with a partner to explain why each of the following facts about bridges are true. Support your explanations with definitions and graphs.
+
+When a bridge is removed from a graph, the number of components increases.
+
+A bridge is never part of a circuit.
+
+An edge that is part of a triangle is never a local bridge.
+
+Check Your Understanding
+
+Key Terms
+
+algorithm
+
+Fleury’s algorithm
+
+Euler trail
+
+bridge
+
+local bridge
+
+Key Concepts
+
+An Euler trail exists whenever a graph has exactly two vertices of odd degree.
+
+When a bridge is removed from a graph, the number of components increases.
+
+A bridge is never part of a circuit.
+
+When a local bridge is removed from a graph, the distance between vertices increases.
+
+An edge that is part of a triangle is never a local bridge.
+
+Videos
+Bridges and Local Bridges in Graph Theory
+Fluery's Algorithm to Find an Euler Circuit

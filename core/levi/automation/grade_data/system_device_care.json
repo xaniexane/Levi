@@ -1,0 +1,3663 @@
+{
+  "batch": "system_device_care",
+  "graded_at": "2026-09-18T19:01:55.874135+00:00",
+  "rubric": "core/levi/automation/grading.py",
+  "record_count": 42,
+  "grade_counts": {
+    "intake": 0,
+    "high-grade": 0,
+    "premium": 0,
+    "elite": 0,
+    "enterprise": 42
+  },
+  "catalog_signature_verified": true,
+  "signature_id": "ipsig-bdcf0abdca01",
+  "records": [
+    {
+      "minion_id": "system-device-care-app-hoard-audit-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-app-hoard-audit-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-4cb5bdeda798",
+          "node_detail": [
+            "[trigger] trigger: Time 10:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: App Hoard Audit (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-app-hoard-audit-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-app-hoard-audit-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 10:00",
+        "condition": "Month day = 1",
+        "rite_steps": [
+          "List apps untouched 90",
+          "days with storage footprint and last-opened dates",
+          "Echo-branch each untouched app's story: map last-opened against seasonal use before listing",
+          "REIM-compost: apps you uninstalled then reinstalled teach the audit seasonal forgiveness",
+          "Mandella-stake the condition: phantom-run 'Month day = 1' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - LEVI uninstalls only the ones you point at"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Unused apps are nesting parasites; LEVI counts them monthly and only evicts the ones you point at. Signature: Echo-branch x REIM-compost - the audit reads each app's story, forgives seasons. Uniqueness kept: App Hoard Audit stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "App Hoard Audit Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-battery-hog-parade-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-battery-hog-parade-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 8
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "approval",
+          "run_id": "flow-d5d0811417b8",
+          "node_detail": [
+            "[trigger] trigger: Time 21:30: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Battery Hog Parade (8 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-battery-hog-parade-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-battery-hog-parade-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 21:30",
+        "condition": "Day Sunday",
+        "rite_steps": [
+          "Rank the week's top 5 battery gluttons by drain share",
+          "Draft a restriction order for the worst offender's background activity",
+          "Brief it digest-rite style (productivity-email-digest-01): the perp walk compressed to five gluttons and one stake",
+          "RIEM-forge the restriction orders: keep the ones that tamed the hog",
+          "Echo-scout the trigger ground: confirm 'Time 21:30' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Day Sunday' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: Approval - restrict the offender only on your word"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "A weekly perp walk for background vampires; LEVI hands you the stake. Signature: digest-rite graft x RIEM-forge - the parade briefs sharp, the stake lands. Uniqueness kept: Battery Hog Parade stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Battery Hog Parade Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-battery-watch-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-battery-watch-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-0aed4c82acae",
+          "node_detail": [
+            "[trigger] trigger: Battery low: flow entered via manual trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Battery Watch (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-battery-watch-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-battery-watch-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Battery low",
+        "condition": "Battery <20%",
+        "rite_steps": [
+          "Read battery level and rank current drain sources by draw",
+          "Draft low-power plan: dim to 40%, throttle refresh, shed top background consumers",
+          "Echo-branch the drain: map which consumers spike when before drafting the plan",
+          "RIEM-forge the low-power plan: keep the cuts that saved hours without pain",
+          "Mandella-stake the condition: phantom-run 'Battery <20%' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: Notification & Dialog - offer the plan; apply only the pieces you tap"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "None"
+        },
+        "notes": "Never kills your foreground work; the den stays lit. Signature: Echo-branch x RIEM-forge - the plan maps the drain, keeps what worked. Uniqueness kept: Battery Watch stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Battery Watch Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-bluetooth-car-handshake-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-bluetooth-car-handshake-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-ae6918e0e8a4",
+          "node_detail": [
+            "[trigger] trigger: Bluetooth connected (car): flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Bluetooth Car Handshake (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-bluetooth-car-handshake-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-bluetooth-car-handshake-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Bluetooth connected (car)",
+        "condition": "Always",
+        "rite_steps": [
+          "On the car's BT handshake, queue maps and the driving playlist",
+          "Stage the driving profile: driving DND, auto-replies on",
+          "Echo-branch the cockpit: map which car profile answered before queuing maps and music",
+          "REIM-compost: vetoes teach the handshake your quiet-car preference",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm the driving profile, or veto to keep the phone quiet?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI hears the car's handshake and readies the cockpit: navigation up, music rolling, phone behaving. Signature: Echo-branch x REIM-compost - the cockpit readies for the right car, learns the quiet ones. Uniqueness kept: Bluetooth Car Handshake stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Bluetooth Car Handshake Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-cache-sweep-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-cache-sweep-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-31a86790ec84",
+          "node_detail": [
+            "[trigger] trigger: Time 03:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Cache Sweep (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-cache-sweep-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-cache-sweep-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 03:00",
+        "condition": "Idle minutes = 30",
+        "rite_steps": [
+          "Enumerate app caches older than 7 days and compute total reclaimable size",
+          "Bag the candidates into a review list with per-app breakdown",
+          "Echo-scout the cache terrain: map per-app growth trends so the bag targets growers, not the settled",
+          "REIM-compost: caches that regrew within a day feed the exclusion list",
+          "Mandella-stake the condition: phantom-run 'Idle minutes = 30' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - sweep the bagged caches only on your nod; nothing is deleted without approval"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "None"
+        },
+        "notes": "Fail closed; nothing swept without a nod. Signature: Echo-scout x REIM-compost - the sweep learns the terrain and composts its misses. Uniqueness kept: Cache Sweep stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Cache Sweep Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-charge-ceiling-keeper-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-charge-ceiling-keeper-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-cd8a04bf9665",
+          "node_detail": [
+            "[trigger] trigger: Battery =80%: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Charge Ceiling Keeper (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-charge-ceiling-keeper-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-charge-ceiling-keeper-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Battery =80%",
+        "condition": "Power = charging",
+        "rite_steps": [
+          "Watch the charge curve and trip the moment the cell hits 80%",
+          "Ping with a gentle stop-charging nudge",
+          "RIEM-forge the nudge: keep the timing that actually stopped the charge, drop the nagging",
+          "Echo-scout the trigger ground: confirm 'Battery =80%' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Power = charging' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: notify with a one-tap snooze for this charge session"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI guards battery lifespan like a dragon guards gold: 80% is the ceiling, not a suggestion. Signature: RIEM-forge - the nudge lands once, and lands. Uniqueness kept: Charge Ceiling Keeper stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Charge Ceiling Keeper Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-clipboard-janitor-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-clipboard-janitor-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-f7f4c69ae83f",
+          "node_detail": [
+            "[trigger] trigger: Clipboard copied: flow entered via manual trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Clipboard Janitor (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-clipboard-janitor-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-clipboard-janitor-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Clipboard copied",
+        "condition": "Idle minutes = 60",
+        "rite_steps": [
+          "If a copied secret has sat idle 60 minutes, wipe the clipboard",
+          "Name the app that filled it",
+          "Mandella-stake the wipe: phantom-run against a still-needed-secret signal before mopping",
+          "Echo-scout the trigger ground: confirm 'Clipboard copied' is real signal before the rite runs",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: acknowledge the wipe"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Secrets should not sunbathe on the clipboard; LEVI mops them up after an hour of neglect. Signature: Mandella-stake - the mop never takes a working secret. Uniqueness kept: Clipboard Janitor stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Clipboard Janitor Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-crash-log-janitor-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-crash-log-janitor-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 8
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-a952468b26b2",
+          "node_detail": [
+            "[trigger] trigger: App crashed: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Crash Log Janitor (8 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-crash-log-janitor-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-crash-log-janitor-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App crashed",
+        "condition": "Always",
+        "rite_steps": [
+          "Grab the crash trace, timestamp, and app version",
+          "Draft a bug note to the dev",
+          "Brief it digest-rite style (productivity-email-digest-01): the autopsy compressed to trace, version, and one-line cause",
+          "RIEM-forge the bug note: keep the drafts that got dev replies",
+          "Echo-scout the trigger ground: confirm 'App crashed' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: Edit & Approve the report before it goes anywhere"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Every crash leaves tracks; LEVI bags the evidence and drafts the autopsy for your signature. Signature: digest-rite graft x RIEM-forge - the autopsy briefs sharp, the note lands. Uniqueness kept: Crash Log Janitor stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Crash Log Janitor Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-data-cap-shepherd-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-data-cap-shepherd-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 8
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-8d1d07a91832",
+          "node_detail": [
+            "[trigger] trigger: Mobile data = 80%: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Data Cap Shepherd (8 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-data-cap-shepherd-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-data-cap-shepherd-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Mobile data = 80%",
+        "condition": "Billing = active",
+        "rite_steps": [
+          "Break down which apps ate the first 80% of the cap",
+          "Project the overage date from the burn rate",
+          "Echo-branch the burn: map per-app appetite trends before projecting the overage date",
+          "Set the follow-up reminder (productivity-calendar-reminder-01) at 90% so the flock gets counted twice",
+          "Mandella-stake the condition: phantom-run 'Billing = active' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - throttle background sync now, or let it ride?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "A shepherd for your gigabytes; LEVI counts the flock nightly so the carrier cannot pick off strays. Signature: Echo-branch x reminder graft - the shepherd maps the flock, counts it twice. Uniqueness kept: Data Cap Shepherd stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Data Cap Shepherd Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-do-not-disturb-sync-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-do-not-disturb-sync-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-37079ff3dce3",
+          "node_detail": [
+            "[trigger] trigger: New event: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Do Not Disturb Sync (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-do-not-disturb-sync-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-do-not-disturb-sync-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New event",
+        "condition": "Event type = focus",
+        "rite_steps": [
+          "Wrap the new focus event in DND that lifts the minute it ends",
+          "RIEM-forge the DND window: keep the wraps that lifted exactly on time",
+          "Echo-scout the trigger ground: confirm 'New event' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Event type = focus' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: notify with the DND window so nothing important gets silenced"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Your calendar marks the hunting ground; LEVI silences the pack until the block is over. Signature: RIEM-forge - the silence lifts on the minute. Uniqueness kept: Do Not Disturb Sync stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Do Not Disturb Sync Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-download-triage-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-download-triage-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-aea214bd7ff1",
+          "node_detail": [
+            "[trigger] trigger: Time 06:00: flow entered via schedule trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Download Triage (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-download-triage-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-download-triage-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 06:00",
+        "condition": "Day Saturday",
+        "rite_steps": [
+          "Sort the week's downloads into documents, images, installers, and mystery files",
+          "Draft the triage move map",
+          "Echo-branch the midden: map file kinds across the week's downloads before drafting the move map",
+          "REIM-compost: moves you undid teach the map your real folders",
+          "Mandella-stake the condition: phantom-run 'Day Saturday' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Edit & Approve the map before LEVI moves a single file"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "The downloads folder is a midden; LEVI sorts it weekly and asks before relocating a single bone. Signature: Echo-branch x REIM-compost - the sort maps first, learns your folders. Uniqueness kept: Download Triage stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Download Triage Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-duplicate-burial-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-duplicate-burial-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-7560c3fd98f8",
+          "node_detail": [
+            "[trigger] trigger: Day Saturday: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Duplicate Burial (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Automate, AutoHotkey, AppleScript, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-duplicate-burial-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-duplicate-burial-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Day Saturday",
+        "condition": "Storage = over 75%",
+        "rite_steps": [
+          "Hash-scan storage for byte-identical duplicates and group by original",
+          "Propose burial list keeping the newest copy of each group",
+          "Mandella-stake each burial group: phantom-run the keep-newest choice against an edited-older-copy signal",
+          "Echo-scout the trigger ground: confirm 'Day Saturday' is real signal before the rite runs",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - bury the copies, keep the originals, only on your word"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Automate",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "None"
+        },
+        "notes": "Keeps newest-by-default suggestion; Approval mandatory. Signature: Mandella-stake - the burial never buries the true original. Uniqueness kept: Duplicate Burial stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Duplicate Burial Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-earbud-battery-ping-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-earbud-battery-ping-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-b5cbd9336bf2",
+          "node_detail": [
+            "[trigger] trigger: Earbud battery <20%: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Earbud Battery Ping (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-earbud-battery-ping-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-earbud-battery-ping-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Earbud battery <20%",
+        "condition": "Always",
+        "rite_steps": [
+          "Watch each bud's battery across sessions",
+          "Ping before the weaker bud dies mid-call",
+          "RIEM-forge the ping timing: keep the warnings that beat the silence, drop the early nags",
+          "Echo-scout the trigger ground: confirm 'Earbud battery <20%' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: notify with a find-my-buds shortcut"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI tracks each bud like a cub: if one is starving, you hear about it before the silence does. Signature: RIEM-forge - the ping beats the silence, never nags. Uniqueness kept: Earbud Battery Ping stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Earbud Battery Ping Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-focus-mode-auto-arm-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-focus-mode-auto-arm-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-50da7e70dd14",
+          "node_detail": [
+            "[trigger] trigger: Time 09:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Focus Mode Auto-Arm (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-focus-mode-auto-arm-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-focus-mode-auto-arm-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 09:00",
+        "condition": "Weekday = yes",
+        "rite_steps": [
+          "Stage the work focus profile: DND on, social apps muted, allowed list enforced",
+          "Mandella-stake the arm: phantom-run against a meeting-heavy-day signal - the profile stages, the day decides",
+          "REIM-compost: skips teach the arm your real deep-work days",
+          "Echo-scout the trigger ground: confirm 'Time 09:00' is real signal before the rite runs",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - arm the focus profile, or skip for a meeting-heavy day?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI raises the portcullis on your attention every weekday morning; the noise stays outside the walls. Signature: Mandella-stake x REIM-compost - the portcullis learns your true battles. Uniqueness kept: Focus Mode Auto-Arm stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Focus Mode Auto-Arm Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-grayscale-wind-down-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-grayscale-wind-down-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-e5e56b65819a",
+          "node_detail": [
+            "[trigger] trigger: Time 22:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Grayscale Wind-Down (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-grayscale-wind-down-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-grayscale-wind-down-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 22:00",
+        "condition": "Weekday = yes",
+        "rite_steps": [
+          "Stage the evening wind-down: grayscale plus low brightness",
+          "Echo-branch your evenings: map the nights you actually slept better before draining the color",
+          "Mandella-stake the condition: phantom-run 'Weekday = yes' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - drain the screen to slate for the evening, or push it back an hour?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Color is candy for the late-night brain; LEVI turns the screen to slate so sleep can sneak up. Signature: Echo-branch - the slate follows your real sleep. Uniqueness kept: Grayscale Wind-Down stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Grayscale Wind-Down Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-health-checkup-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-health-checkup-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-893da0379be8",
+          "node_detail": [
+            "[trigger] trigger: Time 08:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Health Checkup (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Termux, PowerShell, AppleScript, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-health-checkup-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-health-checkup-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 08:00",
+        "condition": "Month day = 1",
+        "rite_steps": [
+          "Scan disk health, battery cycle count, and thermal history read-only",
+          "Score each subsystem and draft tune-up recommendations",
+          "Mandella-stake the tune-ups: phantom-run each fix against a still-under-warranty signal before staging",
+          "REIM-compost: tune-ups that changed nothing get dropped from future scans",
+          "Echo-scout the trigger ground: confirm 'Time 08:00' is real signal before the rite runs",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - apply the recommended tune-ups, or keep the scan read-only?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Termux",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "None"
+        },
+        "notes": "Scan is read-only; fixes wait for Confirm. Signature: Mandella-stake x REIM-compost - the checkup stakes its fixes, composts its duds. Uniqueness kept: Health Checkup stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Health Checkup Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-hotspot-auto-shutoff-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-hotspot-auto-shutoff-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-d755665899d6",
+          "node_detail": [
+            "[trigger] trigger: Hotspot client count = 0: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Hotspot Auto Shutoff (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-hotspot-auto-shutoff-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-hotspot-auto-shutoff-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Hotspot client count = 0",
+        "condition": "Idle minutes = 15",
+        "rite_steps": [
+          "Verify zero clients have joined for 15 idle minutes",
+          "Power down the hotspot radio to save battery",
+          "Mandella-stake the shutoff: phantom-run against a client-reconnecting signal before powering down the radio",
+          "Echo-scout the trigger ground: confirm 'Hotspot client count = 0' is real signal before the rite runs",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: notify with a one-tap restart shortcut"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI hates a radio shouting into an empty room; it quiets the hotspot and saves the battery. Signature: Mandella-stake - the radio never sleeps on a returning client. Uniqueness kept: Hotspot Auto Shutoff stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Hotspot Auto Shutoff Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-large-file-scout-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-large-file-scout-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-04721cb80f0d",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Large File Scout (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-large-file-scout-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-large-file-scout-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Month day = 15",
+        "rite_steps": [
+          "Surface every file over 500MB with age and location",
+          "RIEM-forge the census: keep the whale tags that led to real culls",
+          "Echo-scout the trigger ground: confirm 'Time 07:00' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Month day = 15' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: acknowledge the report, or hand LEVI the cull list for next month"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "A mid-month census of the storage whales; LEVI tags the giants and lets you decide who stays. Signature: RIEM-forge - the census tags what matters. Uniqueness kept: Large File Scout stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Large File Scout Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-log-rotation-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-log-rotation-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-9122683da22d",
+          "node_detail": [
+            "[trigger] trigger: Time 04:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Log Rotation (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Termux, PowerShell, AppleScript, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-log-rotation-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-log-rotation-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 04:00",
+        "condition": "Log size = over 50MB",
+        "rite_steps": [
+          "Measure log volume and compress anything older than 7 days into the archive",
+          "Verify archive integrity before rotation",
+          "RIEM-forge the archive: keep the compression that preserved evidence cheapest",
+          "Echo-scout log growth trends so the rotation anticipates, not just reacts",
+          "Mandella-stake the condition: phantom-run 'Log size = over 50MB' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: notify with what was shelved and the reclaimed size"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Termux",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "None"
+        },
+        "notes": "Archived before rotation; logs are evidence, not trash. Signature: RIEM-forge x Echo-scout - the archive sharpens, the rotation looks ahead. Uniqueness kept: Log Rotation stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Log Rotation Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-nightly-airplane-lull-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-nightly-airplane-lull-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-52b64aeb7cc0",
+          "node_detail": [
+            "[trigger] trigger: Time 23:30: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Nightly Airplane Lull (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-nightly-airplane-lull-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-nightly-airplane-lull-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 23:30",
+        "condition": "Wifi location = home",
+        "rite_steps": [
+          "Stage the nightly radio lull: airplane mode with Wi-Fi kept alive",
+          "Echo-scout the night's obligations: map any expected late call before dropping the radios",
+          "Mandella-stake the condition: phantom-run 'Wifi location = home' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - drop the radios for the night? Cellular sleeps, Wi-Fi dozes, nothing buzzes at 3 AM"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI tucks the radios in at home base: cellular sleeps, Wi-Fi dozes, nothing buzzes at 3 AM. Signature: Echo-scout - the lull checks the night's watch first. Uniqueness kept: Nightly Airplane Lull stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Nightly Airplane Lull Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-notification-tidy-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-notification-tidy-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-bf1693d89d10",
+          "node_detail": [
+            "[trigger] trigger: Time 23:55: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Notification Tidy (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-notification-tidy-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-notification-tidy-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 23:55",
+        "condition": "Notifications = over 20",
+        "rite_steps": [
+          "Sweep the shade for stale non-persistent notifications older than 6 hours",
+          "Keep pinned and media notifications untouched and build the sweep list",
+          "REIM-compost: notifications you restored from the sweep teach the tidy what counts as stale",
+          "RIEM-forge the sweep list: keep the filters that never touched the pinned",
+          "Echo-scout the trigger ground: confirm 'Time 23:55' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Notifications = over 20' against a false reading before the rite commits",
+          "HITL: Confirm - purge the sweep list?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "A cluttered shade is a noisy den; LEVI sweeps the stale alerts out every night before bed. Signature: REIM-compost x RIEM-forge - the tidy learns your keepers. Uniqueness kept: Notification Tidy stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Notification Tidy Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-permission-audit-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-permission-audit-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-f45c49b9511c",
+          "node_detail": [
+            "[trigger] trigger: Day Sunday: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Permission Audit (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, AppleScript, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-permission-audit-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-permission-audit-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Day Sunday",
+        "condition": "Always",
+        "rite_steps": [
+          "Audit every installed app's granted permissions against least-privilege baselines",
+          "Flag over-broad grants with a prune recommendation each",
+          "Echo-branch each app's permission lineage: map when and why each grant was given",
+          "REIM-compost: prunes you reverted teach the recommendations humility",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Edit & Approve - prune exactly what you check off; LEVI suggests, you decide"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "None"
+        },
+        "notes": "LEVI suggests, you decide; permission changes are gate-only. Signature: Echo-branch x REIM-compost - LEVI suggests with history, learns from reversals. Uniqueness kept: Permission Audit stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Permission Audit Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-private-dns-auto-arm-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-private-dns-auto-arm-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-0d67c437a7df",
+          "node_detail": [
+            "[trigger] trigger: Wi-Fi connected: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Private DNS Auto-Arm (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-private-dns-auto-arm-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-private-dns-auto-arm-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Wi-Fi connected",
+        "condition": "SSID = untrusted",
+        "rite_steps": [
+          "On joining the unknown network, prepare the hardened Private DNS resolver swap",
+          "Echo-scout the network's DNS tampering history before swapping resolvers",
+          "Mandella-stake the condition: phantom-run 'SSID = untrusted' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - swap to the hardened resolver and keep it until you leave this network?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI armors DNS on hostile airwaves: untrusted Wi-Fi gets the private resolver, no exceptions. Signature: Echo-scout - the armor fits the actual threat. Uniqueness kept: Private DNS Auto-Arm stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Private DNS Auto-Arm Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-ram-relieve-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-ram-relieve-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-96a5485a98c2",
+          "node_detail": [
+            "[trigger] trigger: RAM > 90%: flow entered via manual trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: RAM Relieve (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-ram-relieve-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-ram-relieve-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "RAM > 90%",
+        "condition": "Screen = on",
+        "rite_steps": [
+          "Rank background processes by RAM appetite at 90% pressure",
+          "Echo-branch the hogs: map which processes are actually idle-fat versus working-hard before the dialog",
+          "REIM-compost: culls you regretted teach the flush restraint",
+          "Mandella-stake the condition: phantom-run 'Screen = on' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Notification & Dialog - pick which hogs LEVI may cull from the dialog"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Memory pressure is a hunt in progress; LEVI flushes out the RAM hogs and lets you choose the targets. Signature: Echo-branch x REIM-compost - the hunt maps first, learns its regrets. Uniqueness kept: RAM Relieve stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "RAM Relieve Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-roaming-guard-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-roaming-guard-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-4d67624d844f",
+          "node_detail": [
+            "[trigger] trigger: Network operator changed: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Roaming Guard (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-roaming-guard-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-roaming-guard-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Network operator changed",
+        "condition": "Country = roaming",
+        "rite_steps": [
+          "Detect the foreign operator on arrival and freeze data roaming instantly",
+          "Stage a local eSIM re-enable plan",
+          "Mandella-stake the freeze: phantom-run against a border-town-tower signal before locking roaming",
+          "Echo-scout the local eSIM options before staging the re-enable plan",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - re-enable roaming on the local eSIM, or keep it locked?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI treats foreign networks like foreign fangs: roaming stays locked until you say otherwise. Signature: Mandella-stake x Echo-scout - the guard never locks on a border tower. Uniqueness kept: Roaming Guard stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Roaming Guard Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-screen-lock-shortener-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-screen-lock-shortener-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-2937ceb4418a",
+          "node_detail": [
+            "[trigger] trigger: Location changed: flow entered via manual trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Screen Lock Shortener (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-screen-lock-shortener-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-screen-lock-shortener-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Location changed",
+        "condition": "Location = away",
+        "rite_steps": [
+          "Tighten auto-lock to 30 seconds outside home and work",
+          "Echo-scout the territory: confirm away means truly away before tightening the leash",
+          "Mandella-stake the condition: phantom-run 'Location = away' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: acknowledge the tighter lock before LEVI enforces it"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "In strange territory LEVI shortens the leash: the screen locks fast, and strangers get nothing. Signature: Echo-scout - the leash tightens on real strange ground. Uniqueness kept: Screen Lock Shortener stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Screen Lock Shortener Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-screen-timeout-steward-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-screen-timeout-steward-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-5523c34ade06",
+          "node_detail": [
+            "[trigger] trigger: App opened (Reader): flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Screen Timeout Steward (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-screen-timeout-steward-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-screen-timeout-steward-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Reader)",
+        "condition": "Always",
+        "rite_steps": [
+          "Stretch the screen timeout to 10 minutes while the reader is in front",
+          "Snap it back to 30s the moment the reader exits",
+          "REIM-compost: exits where you immediately re-lengthened the timer teach the steward your real reading apps",
+          "Echo-scout the trigger ground: confirm 'App opened (Reader)' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: notify each time the steward swaps the timer"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Reading should not fight the dimmer; LEVI holds the light while your eyes work and releases it after. Signature: REIM-compost - the steward learns your true readers. Uniqueness kept: Screen Timeout Steward stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Screen Timeout Steward Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-screenshot-sorter-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-screenshot-sorter-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-a5c345e8a475",
+          "node_detail": [
+            "[trigger] trigger: New screenshot: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Screenshot Sorter (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-screenshot-sorter-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-screenshot-sorter-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New screenshot",
+        "condition": "Always",
+        "rite_steps": [
+          "File each new screenshot into a dated folder the moment it lands",
+          "RIEM-forge the filing: keep the dated-folder scheme that survived your gallery",
+          "Echo-scout the trigger ground: confirm 'New screenshot' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: notify with an undo link for the last move"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Screenshots pile up like shed scales; LEVI files them by date so the gallery stays a gallery. Signature: RIEM-forge - the filing earns its folders. Uniqueness kept: Screenshot Sorter stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Screenshot Sorter Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-sensor-deep-sleep-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-sensor-deep-sleep-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-c9e2b7736689",
+          "node_detail": [
+            "[trigger] trigger: Time 23:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Sensor Deep Sleep (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-sensor-deep-sleep-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-sensor-deep-sleep-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 23:00",
+        "condition": "Wifi location = home",
+        "rite_steps": [
+          "Stage the sensor blackout: kill location, motion sensors, background scanning until 06:00",
+          "Mandella-stake the blackout: phantom-run against an expected-late-arrival signal before tucking the sensors in",
+          "Echo-scout the trigger ground: confirm 'Time 23:00' is real signal before the rite runs",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - blackout the sensors for tonight?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "At home the sensors can sleep too; LEVI tucks GPS and motion in for the night and wakes them at dawn. Signature: Mandella-stake - the blackout never sleeps through your arrival. Uniqueness kept: Sensor Deep Sleep stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Sensor Deep Sleep Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-slow-charger-snitch-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-slow-charger-snitch-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-208df4eae232",
+          "node_detail": [
+            "[trigger] trigger: Charging started: flow entered via manual trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Slow Charger Snitch (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-slow-charger-snitch-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-slow-charger-snitch-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Charging started",
+        "condition": "Charge rate = under 5W",
+        "rite_steps": [
+          "Measure charge wattage in the first 60 seconds of plug-in",
+          "Compare against the charger's rated output and name the impostor",
+          "Echo-branch the charger's history: map its past wattage before naming it an impostor",
+          "REIM-compost: chargers you vindicated get struck from the shame list",
+          "Mandella-stake the condition: phantom-run 'Charge rate = under 5W' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Notification & Dialog - log it to the bad-cable blacklist?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI sniffs out anemic chargers by their discharge curve and puts them on the public shame list. Signature: Echo-branch x REIM-compost - the snitch checks the record before the accusation. Uniqueness kept: Slow Charger Snitch stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Slow Charger Snitch Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-speaker-dust-eject-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-speaker-dust-eject-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-621c805e35a3",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Speaker Dust Eject (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-speaker-dust-eject-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-speaker-dust-eject-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Month day = 1",
+        "rite_steps": [
+          "Stage the 165Hz dust-eject tone: full volume, one loop",
+          "Mandella-stake the tone: phantom-run against a sleeping-baby-in-the-room signal before staging the blast",
+          "Echo-scout the trigger ground: confirm 'Time 07:00' is real signal before the rite runs",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Confirm - ears clear of the blast radius? On confirm, play the tone once and log the shake-out"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "A monthly ultrasonic shake-out for the speaker grilles; LEVI dislodges the dust so the sound stays crisp. Signature: Mandella-stake - the shake-out never ambushes a nursery. Uniqueness kept: Speaker Dust Eject stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Speaker Dust Eject Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-startup-herd-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-startup-herd-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 8
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-5a4d614d073a",
+          "node_detail": [
+            "[trigger] trigger: Device boot: flow entered via manual trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Startup Herd (8 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-startup-herd-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-startup-herd-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Device boot",
+        "condition": "Always",
+        "rite_steps": [
+          "Audit all startup entries and flag stragglers by boot-time cost",
+          "Compose the herd report with disable recommendations",
+          "Brief it digest-rite style (productivity-email-digest-01): the herd report compressed to stragglers and their boot cost",
+          "RIEM-forge the flagging: keep the straggler patterns that proved real",
+          "Echo-scout the trigger ground: confirm 'Device boot' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: Acknowledge the report; stragglers are disabled only on your word"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "None"
+        },
+        "notes": "Read-only audit; disables need your word. Signature: digest-rite graft x RIEM-forge - the audit briefs sharp. Uniqueness kept: Startup Herd stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Startup Herd Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-storage-forecast-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-storage-forecast-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 8
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "notification",
+          "run_id": "flow-02023f87a330",
+          "node_detail": [
+            "[trigger] trigger: Time 20:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Storage Forecast (8 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-storage-forecast-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-storage-forecast-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 20:00",
+        "condition": "Day Sunday",
+        "rite_steps": [
+          "Fit the last 90 days of storage growth to a trend and predict the fill date",
+          "Name the top three growth drivers",
+          "Echo-branch the growth drivers: map which three are accelerating, not just large",
+          "Set the follow-up reminder (productivity-calendar-reminder-01) a week before the predicted fill date",
+          "Mandella-stake the condition: phantom-run 'Day Sunday' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: notify with the forecast"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI reads the storage tea leaves weekly: when the disk will fill, and exactly what is filling it. Signature: Echo-branch x reminder graft - the tea leaves name the accelerants, the reminder beats the fill. Uniqueness kept: Storage Forecast stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Storage Forecast Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-storage-reclaim-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-storage-reclaim-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-878a798ed519",
+          "node_detail": [
+            "[trigger] trigger: Storage >85%: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Storage Reclaim (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Automate, PowerShell, AppleScript, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-storage-reclaim-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-storage-reclaim-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Storage >85%",
+        "condition": "Storage = over 85%",
+        "rite_steps": [
+          "Scan storage and rank files over 100MB by size and age",
+          "Build the candidate burial list with safe-to-move flags",
+          "Mandella-stake the burial list: phantom-run each candidate against a project-active signal before flagging",
+          "REIM-compost: files you rescued from burial teach the flags restraint",
+          "Echo-scout the trigger ground: confirm 'Storage >85%' is real signal before the rite runs",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - you pick what gets buried; LEVI never buries blind"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Automate",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "None"
+        },
+        "notes": "Destructive list; Approval mandatory, fail closed. Signature: Mandella-stake x REIM-compost - LEVI never buries blind, and learns from every rescue. Uniqueness kept: Storage Reclaim stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Storage Reclaim Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-temp-file-purge-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-temp-file-purge-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-306f2cc88811",
+          "node_detail": [
+            "[trigger] trigger: Time 03:30: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Temp File Purge (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-temp-file-purge-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-temp-file-purge-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 03:30",
+        "condition": "Temp size = over 1GB",
+        "rite_steps": [
+          "Measure temp and cache-adjacent sprawl past 1GB and itemize the fattest folders",
+          "Echo-scout the burrow: map the fattest orphan folders before itemizing",
+          "REIM-compost: purges that broke an app teach the excavator its load-bearing walls",
+          "Mandella-stake the condition: phantom-run 'Temp size = over 1GB' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - purge the itemized list only on your word"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Distinct from the cache sweep: this is the deep burrow of orphaned temp files, and LEVI excavates it. Signature: Echo-scout x REIM-compost - the excavator maps, and learns the load-bearing walls. Uniqueness kept: Temp File Purge stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Temp File Purge Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-thermal-guard-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-thermal-guard-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-746ea146cb8c",
+          "node_detail": [
+            "[trigger] trigger: Temperature high: flow entered via manual trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Thermal Guard (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Shortcuts, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-thermal-guard-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-thermal-guard-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Temperature high",
+        "condition": "Temp = over 45C",
+        "rite_steps": [
+          "Read SoC and battery temps and identify the heavy jobs driving them",
+          "Throttle the top offenders first, never silently",
+          "Echo-branch the heat: map which jobs drive temperature before throttling",
+          "REIM-compost: throttles that cost you a render teach the guard your deadlines",
+          "Mandella-stake the condition: phantom-run 'Temp = over 45C' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Notification & Dialog - cool the den before resuming full speed?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "None"
+        },
+        "notes": "Fails safe: throttles first, never silent. Signature: Echo-branch x REIM-compost - the guard maps the heat, respects the deadline. Uniqueness kept: Thermal Guard stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Thermal Guard Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-time-sync-check-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-time-sync-check-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-bfdeaf772ca4",
+          "node_detail": [
+            "[trigger] trigger: Timezone changed: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Time Sync Check (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-time-sync-check-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-time-sync-check-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Timezone changed",
+        "condition": "Always",
+        "rite_steps": [
+          "Compare the device clock against NTP after the hop",
+          "Resync if it drifted",
+          "RIEM-forge the resync: keep the NTP sources that proved truest across hops",
+          "Echo-scout the trigger ground: confirm 'Timezone changed' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Always' against a false reading before the rite commits",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "HITL: notify with the corrected offset"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Travel scrambles the clock; LEVI re-anchors it to true time so alarms never land an hour off. Signature: RIEM-forge - the clock anchors to the truest time. Uniqueness kept: Time Sync Check stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Time Sync Check Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-trash-bin-emptier-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-trash-bin-emptier-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 6
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "approval",
+          "run_id": "flow-a06936150966",
+          "node_detail": [
+            "[trigger] trigger: Time 06:30: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Trash Bin Emptier (6 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-trash-bin-emptier-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-trash-bin-emptier-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 06:30",
+        "condition": "Day Sunday",
+        "rite_steps": [
+          "List everything in the recycle bin older than 30 days with sizes",
+          "Mandella-stake each deletion: phantom-run the item against a recently-trashed-by-accident pattern - the burial waits for your word, the stake double-checks",
+          "Echo-scout the trigger ground: confirm 'Time 06:30' is real signal before the rite runs",
+          "REIM-compost: every false trigger is composted into a truer condition",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - permanent delete, item by item or in bulk, only on your word"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Trash that never empties is just slow storage; LEVI proposes the final burial and waits for your word. Signature: Mandella-stake - the final burial gets a second look. Uniqueness kept: Trash Bin Emptier stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Trash Bin Emptier Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-update-sentinel-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-update-sentinel-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-43c6d1bb16d8",
+          "node_detail": [
+            "[trigger] trigger: Time 05:00: flow entered via schedule trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Update Sentinel (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, Shortcuts, None)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-update-sentinel-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-update-sentinel-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 05:00",
+        "condition": "Updates = available",
+        "rite_steps": [
+          "Check OS and app stores for pending updates and stage the downloads",
+          "Summarize what each update changes and its size",
+          "Echo-scout each update's changelog before staging: map what changes, not just the size",
+          "REIM-compost: updates that broke things teach the sentinel to flag their kin",
+          "Mandella-stake the condition: phantom-run 'Updates = available' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: Approval - install the staged updates on your word; never installs silently"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "None"
+        },
+        "notes": "Never installs silently; reboots need you. Signature: Echo-scout x REIM-compost - the sentinel reads before it stages. Uniqueness kept: Update Sentinel stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Update Sentinel Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-volume-headroom-guard-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-volume-headroom-guard-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-17d405ee3279",
+          "node_detail": [
+            "[trigger] trigger: Earbuds connected: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Volume Headroom Guard (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-volume-headroom-guard-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-volume-headroom-guard-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Earbuds connected",
+        "condition": "Volume = over 70%",
+        "rite_steps": [
+          "Catch the volume spike when earbuds pair",
+          "Stage a pull-down to a safe 60%",
+          "RIEM-forge the cap: keep the 60% that protected ears without a fight",
+          "REIM-compost: sessions where you raised it teach the guard your loud rooms",
+          "Echo-scout the trigger ground: confirm 'Earbuds connected' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Volume = over 70%' against a false reading before the rite commits",
+          "HITL: Confirm the cap, or raise it once for this session?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "LEVI stands between your eardrums and the volume slider: 70% on pair is a trap, and it disarms it. Signature: RIEM-forge x REIM-compost - the cap protects, and learns the loud rooms. Uniqueness kept: Volume Headroom Guard stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Volume Headroom Guard Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-vpn-reconnect-watchdog-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-vpn-reconnect-watchdog-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-3867eb43f45c",
+          "node_detail": [
+            "[trigger] trigger: VPN disconnected: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: VPN Reconnect Watchdog (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-vpn-reconnect-watchdog-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-vpn-reconnect-watchdog-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "VPN disconnected",
+        "condition": "Wifi location = away",
+        "rite_steps": [
+          "Detect the dropped tunnel and re-dial the VPN profile",
+          "Verify the new exit IP and kill-switch status",
+          "REIM-compost: tunnels that re-dialed clean teach the watchdog which profiles heal fastest",
+          "Echo-scout the trigger ground: confirm 'VPN disconnected' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Wifi location = away' against a false reading before the rite commits",
+          "RIEM-forge the rite: keep the steps that served the trigger, sharpen the rest",
+          "HITL: notify with the fresh IP and kill-switch status"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "A dropped tunnel is a dropped scent; LEVI picks the trail back up before packets wander off. Signature: REIM-compost - the watchdog learns the fastest healers. Uniqueness kept: VPN Reconnect Watchdog stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "VPN Reconnect Watchdog Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "system-device-care-wifi-stall-rescue-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-system-device-care-wifi-stall-rescue-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 7
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-44fa5297dcfd",
+          "node_detail": [
+            "[trigger] trigger: Wi-Fi throughput = 0: flow entered via manual trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: WiFi Stall Rescue (7 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'system-device-care-wifi-stall-rescue-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'system-device-care-wifi-stall-rescue-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Wi-Fi throughput = 0",
+        "condition": "Connected minutes = 5",
+        "rite_steps": [
+          "Ping the gateway; if it answers but data will not flow, cycle the Wi-Fi radio",
+          "Re-test throughput after the cycle",
+          "REIM-compost: stalls that needed a router reboot, not a radio cycle, teach the rescue to escalate",
+          "RIEM-forge the re-test: keep the checks that proved the air truly alive",
+          "Echo-scout the trigger ground: confirm 'Wi-Fi throughput = 0' is real signal before the rite runs",
+          "Mandella-stake the condition: phantom-run 'Connected minutes = 5' against a false reading before the rite commits",
+          "HITL: acknowledge the rescue and log the stall"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Connected but dead air is LEVI's favorite prey; it bites the radio back awake and notes the carcass. Signature: REIM-compost x RIEM-forge - the rescue learns when to escalate. Uniqueness kept: WiFi Stall Rescue stays one of one.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "WiFi Stall Rescue Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+# m00037
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+While loop
+
+While loop
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain the loop construct in Python.
+
+Use a while loop to implement repeating tasks.
+
+While loop
+
+A while loop is a code construct that runs a set of statements, known as the loop body, while a given condition, known as the loop expression, is true. At each iteration, once the loop statement is executed, the loop expression is evaluated again.
+
+If true, the loop body will execute at least one more time (also called looping or iterating one more time).
+
+If false, the loop's execution will terminate and the next statement after the loop body will execute.
+
+While loop
+
+While loop example
+
+Fibonacci is a series of numbers in which each number is the sum of the two preceding numbers. The Fibonacci sequence starts with two ones: 1, 1, 2, 3, . . . . Consider the following code that prints all Fibonacci numbers less than 20, and answer the following questions.
+
+Counting with a while loop
+
+A while loop can be used to count up or down. A counter variable can be used in the loop expression to determine the number of iterations executed. Ex: A programmer may want to print all even numbers between 1 and 20. The task can be done by using a counter initialized with 1. In each iteration, the counter's value is increased by one, and a condition can check whether the counter's value is an even number or not. The change in the counter's value in each iteration is called the step size. The step size can be any positive or negative value. If the step size is a positive number, the counter counts in ascending order, and if the step size is a negative number, the counter counts in descending order.
+
+A program printing all odd numbers between 1 and 10
+
+Counting with while loop
+
+while loop counting examples
+
+Given the code, answer the following questions.
+
+Reading inputs in a while loop
+
+Write a program that takes user inputs in a while loop until the user enters "begin". Test the code with the given input values to check that the loop does not terminate until the input is "begin". Once the input "begin" is received, print "The while loop
+ condition has been met.".
+
+Enter different input words to see when the while loop condition is met.
+
+Sum of odd numbers
+
+Write a program that reads two integer values, n1 and n2. Use a while loop to calculate the sum of odd numbers between n1 and n2 (inclusive of n1 and n2). Remember, a number is odd if number % 2 != 0.

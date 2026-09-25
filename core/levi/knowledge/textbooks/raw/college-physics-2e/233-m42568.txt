@@ -1,0 +1,249 @@
+# m42568
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Photon Momentum
+
+Photon Momentum
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Relate the linear momentum of a photon to its energy or wavelength, and apply linear momentum conservation to simple processes involving the emission, absorption, or reflection of photons.
+
+Account qualitatively for the increase of photon wavelength that is observed, and explain the significance of the Compton wavelength.
+
+Measuring Photon Momentum
+
+The quantum of EM radiation we call a photon has properties analogous to those of particles we can see, such as grains of sand. A photon interacts as a unit in collisions or when absorbed, rather than as an extensive wave. Massive quanta, like electrons, also act like macroscopic particles—something we expect, because they are the smallest units of matter. Particles carry momentum as well as energy. Despite photons having no mass, there has long been evidence that EM radiation carries momentum. (Maxwell and others who studied EM waves predicted that they would carry momentum.) It is now a well-established fact that photons do have momentum. In fact, photon momentum is suggested by the photoelectric effect, where photons knock electrons out of a substance. shows macroscopic evidence of photon momentum.
+shows a comet with two prominent tails. What most people do not know about the tails is that they always point away from the Sun rather than trailing behind the comet (like the tail of Bo Peep’s sheep). Comet tails are composed of gases and dust evaporated from the body of the comet and ionized gas. The dust particles recoil away from the Sun when photons scatter from them. Evidently, photons carry momentum in the direction of their motion (away from the Sun), and some of this momentum is transferred to dust particles in collisions. Gas atoms and molecules in the blue tail are most affected by other particles of radiation, such as protons and electrons emanating from the Sun, rather than by the momentum of photons.
+
+Connections: Conservation of Momentum
+
+Not only is momentum conserved in all realms of physics, but all types of particles are found to have momentum. We expect particles with mass to have momentum, but now we see that massless particles including photons also carry momentum.
+
+Momentum is conserved in quantum mechanics just as it is in relativity and classical physics. Some of the earliest direct experimental evidence of this came from scattering of x-ray photons by electrons in substances, named Compton scattering after the American physicist Arthur H. Compton (1892–1962). Around 1923, Compton observed that x rays scattered from materials had a decreased energy and correctly analyzed this as being due to the scattering of photons from electrons. This phenomenon could be handled as a collision between two particles—a photon and an electron at rest in the material. Energy and momentum are conserved in the collision. (See ) He won a Nobel Prize in 1929 for the discovery of this scattering, now called the Compton effect, because it helped prove that photon momentum is given by
+
+where h is Planck’s constant and λ is the photon wavelength. (Note that relativistic momentum given as p=γmu is valid only for particles having mass.)
+
+We can see that photon momentum is small, since p=h/λ and h is very small. It is for this reason that we do not ordinarily observe photon momentum. Our mirrors do not recoil when light reflects from them (except perhaps in cartoons). Compton saw the effects of photon momentum because he was observing x rays, which have a small wavelength and a relatively large momentum, interacting with the lightest of particles, the electron.
+
+Electron and Photon Momentum Compared
+
+(a) Calculate the momentum of a visible photon that has a wavelength of 500 nm. (b) Find the velocity of an electron having the same momentum. (c) What is the energy of the electron, and how does it compare with the energy of the photon?
+Strategy
+
+Strategy
+
+Finding the photon momentum is a straightforward application of its definition: p=hλ. If we find the photon momentum is small, then we can assume that an electron with the same momentum will be nonrelativistic, making it easy to find its velocity and kinetic energy from the classical formulas.
+Solution for (a)
+
+Solution for (a)
+
+Photon momentum is given by the equation:
+
+Entering the given photon wavelength yields
+Solution for (b)
+
+Solution for (b)
+
+Since this momentum is indeed small, we will use the classical expression p=mv to find the velocity of an electron with this momentum. Solving for v and using the known value for the mass of an electron gives
+Solution for (c)
+
+Solution for (c)
+
+The electron has kinetic energy, which is classically given by
+
+Thus,
+
+Converting this to eV by multiplying by (1 eV)/(1.602×10–19J) yields
+
+The photon energy E is
+
+which is about five orders of magnitude greater.
+Discussion
+
+Discussion
+
+Photon momentum is indeed small. Even if we have huge numbers of them, the total momentum they carry is small. An electron with the same momentum has a 1460 m/s velocity, which is clearly nonrelativistic. A more massive particle with the same momentum would have an even smaller velocity. This is borne out by the fact that it takes far less energy to give an electron the same momentum as a photon. But on a quantum-mechanical scale, especially for high-energy photons interacting with small masses, photon momentum is significant. Even on a large scale, photon momentum can have an effect if there are enough of them and if there is nothing to prevent the slow recoil of matter. Comet tails are one example, but there are also proposals to build space sails that use huge low-mass mirrors (made of aluminized Mylar) to reflect sunlight. In the vacuum of space, the mirrors would gradually recoil and could actually take spacecraft from place to place in the solar system. (See .)
+
+Relativistic Photon Momentum
+
+There is a relationship between photon momentum p and photon energy E that is consistent with the relation given previously for the relativistic total energy of a particle as E2=(pc)2+(mc)2. We know m is zero for a photon, but p is not, so that 
+
+E2
+=
+(pc)2
++
+(mc2)2
+ becomes
+
+or
+
+To check the validity of this relation, note that E=hc/λ for a photon. Substituting this into p=E/c yields
+
+as determined experimentally and discussed above. Thus, p=E/c is equivalent to Compton’s result p=h/λ. For a further verification of the relationship between photon energy and momentum, see .
+
+Photon Detectors
+
+Almost all detection systems talked about thus far—eyes, photographic plates, photomultiplier tubes in microscopes, and CCD cameras—rely on particle-like properties of photons interacting with a sensitive area. A change is caused and either the change is cascaded or zillions of points are recorded to form an image we detect. These detectors are used in biomedical imaging systems, and there is ongoing research into improving the efficiency of receiving photons, particularly by cooling detection systems and reducing thermal effects.
+
+Photon Energy and Momentum
+
+Show that p=E/c for the photon considered in the .
+Strategy
+
+Strategy
+
+We will take the energy E found in , divide it by the speed of light, and see if the same momentum is obtained as before.
+Solution
+
+Solution
+
+Given that the energy of the photon is 2.48 eV and converting this to joules, we get
+Discussion
+
+Discussion
+
+This value for momentum is the same as found before (note that unrounded values are used in all calculations to avoid even small rounding errors), an expected verification of the relationship p=E/c. This also means the relationship between energy, momentum, and mass given by E2=(pc)2+(mc)2 applies to both matter and photons. Once again, note that p is not zero, even when m is.
+
+Problem-Solving Suggestion
+
+Note that the forms of the constants h= 4.14 × 10–15 eV ⋅ s and hc= 1240 eV ⋅ nm may be particularly useful for this section’s Problems and Exercises.
+
+Test Prep for AP Courses
+
+The mass of a proton is 1.67 × 10–27 kg. If a proton has the same momentum as a photon with a wavelength of 325 nm, what is its speed?
+
+2.73 × 10–3 m/s
+
+0.819 m/s
+
+1.22 m/s
+
+2.71 × 104 m/s
+
+(c)
+
+A strip of metal foil with a mass of 5.00 × 10–7 kg is suspended in a vacuum and exposed to a pulse of light. The velocity of the foil changes from zero to 1.00 × 10–3 m/s in the same direction as the initial light pulse, and the light pulse is entirely reflected from the surface of the foil. Given that the wavelength of the light is 450 nm, and assuming that this wavelength is the same before and after the collision, how many photons in the pulse collide with the foil?
+
+In an experiment in which the Compton effect is observed, a “gamma ray” photon with a wavelength of 5.00 × 10–13 m scatters from an electron. If the change in the electron energy is 1.60 × 10–15 J, what is the wavelength of the photon after the collision with the electron?
+
+4.95 × 10–13 m
+
+4.98 × 10–13 m
+
+5.02 × 10–13 m
+
+5.05 × 10–13 m
+
+(c)
+
+Consider two experiments involving a metal sphere with a radius of 2.00 μm that is suspended in a vacuum. In one experiment, a pulse of N photons reflects from the surface of the sphere, causing the sphere to acquire momentum. In a second experiment, an identical pulse of photons is completely absorbed by the sphere, so that the sphere acquires momentum. Identify each type of collision as either elastic or inelastic, and, assuming that the change in the photon wavelength can be ignored, use linear momentum conservation to derive the expression for the momentum of the sphere in each experiment.
+
+Section Summary
+
+Photons have momentum, given by p=hλ, where λ is the photon wavelength.
+
+Photon energy and momentum are related by
+ p=Ec, where E=hf=hc/λ for a photon.
+
+Conceptual Questions
+
+Which formula may be used for the momentum of all particles, with or without mass?
+
+Is there any measurable difference between the momentum of a photon and the momentum of matter?
+
+Why don’t we feel the momentum of sunlight when we are on the beach?
+
+Problems & Exercises
+
+(a) Find the momentum of a 4.00-cm-wavelength microwave photon. (b) Discuss why you expect the answer to (a) to be very small.
+
+(a)
+
+ 1.66
+ ×
+ 
+ 10
+
+ −
+ 32
+
+ kg
+ ⋅
+ m/s
+
+(b) The wavelength of microwave photons is large, so the momentum they carry is very small.
+
+(a) What is the momentum of a 0.0100-nm-wavelength photon that could detect details of an atom? (b) What is its energy in MeV?
+
+(a) What is the wavelength of a photon that has a momentum of 5.00×10−29kg⋅m/s? (b) Find its energy in eV.
+
+(a) 13.3 μm
+
+(b) 9.38×10-2 eV
+
+(a) A γ-ray photon has a momentum of 8.00×10−21kg⋅m/s. What is its wavelength? (b) Calculate its energy in MeV.
+
+(a) Calculate the momentum of a photon having a wavelength of 2.50 μm. (b) Find the velocity of an electron having the same momentum. (c) What is the kinetic energy of the electron, and how does it compare with that of the photon?
+
+(a) 2.65×10−28kg⋅m/s
+
+(b) 291 m/s
+
+(c) electron 3.86×10−26 J, photon 7.96×10−20 J, ratio 2.06×106
+
+Repeat the previous problem for a 10.0-nm-wavelength photon.
+
+(a) Calculate the wavelength of a photon that has the same momentum as a proton moving at 1.00% of the speed of light. (b) What is the energy of the photon in MeV? (c) What is the kinetic energy of the proton in MeV?
+
+(a) 1.32×10−13 m
+
+(b) 9.39 MeV
+
+(c) 4.70×10−2 MeV
+
+(a) Find the momentum of a 100-keV x-ray photon. (b) Find the equivalent velocity of a neutron with the same momentum. (c) What is the neutron’s kinetic energy in keV?
+
+Take the ratio of relativistic rest energy, E=γmc2mc2, to relativistic momentum, p=γmu, and show that in the limit that mass approaches zero, you find E/p=c.
+E=γmc2mc2 and
+P=γmu, so
+
+As the mass of particle approaches zero, its velocity u will approach c, so that the ratio of energy to momentum in this limit is
+
+which is consistent with the equation for photon energy.
+Construct Your Own Problem
+
+Construct Your Own Problem
+
+Consider a space sail such as mentioned in . Construct a problem in which you calculate the light pressure on the sail in N/m2 produced by reflecting sunlight. Also calculate the force that could be produced and how much effect that would have on a spacecraft. Among the things to be considered are the intensity of sunlight, its average wavelength, the number of photons per square meter this implies, the area of the space sail, and the mass of the system being accelerated.
+Unreasonable Results
+
+Unreasonable Results
+
+A car feels a small force due to the light it sends out from its headlights, equal to the momentum of the light divided by the time in which it is emitted. (a) Calculate the power of each headlight, if they exert a total force of 2.00×10−2 N backward on the car. (b) What is unreasonable about this result? (c) Which assumptions are unreasonable or inconsistent?
+
+(a)
+
+ 3
+ .
+ 
+ 00
+ ×
+ 
+ 10
+
+ 6
+
+ W
+
+(b) Headlights are way too bright.
+
+(c) Force is too large.
+
+the amount of momentum a photon has, calculated by p=hλ=Ec
+the phenomenon whereby x rays scattered from materials have decreased energy

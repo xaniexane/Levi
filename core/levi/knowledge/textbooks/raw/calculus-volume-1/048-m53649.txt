@@ -1,0 +1,425 @@
+# m53649
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Moments and Centers of Mass
+
+Moments and Centers of Mass
+
+Find the center of mass of objects distributed along a line.
+
+Locate the center of mass of a thin plate.
+
+Use symmetry to help locate the centroid of a thin plate.
+
+Apply the theorem of Pappus for volume.
+
+In this section, we consider centers of mass (also called centroids, under certain conditions) and moments. The basic idea of the center of mass is the notion of a balancing point. Many of us have seen performers who spin plates on the ends of sticks. The performers try to keep several of them spinning without allowing any of them to drop. If we look at a single plate (without spinning it), there is a sweet spot on the plate where it balances perfectly on the stick. If we put the stick anywhere other than that sweet spot, the plate does not balance and it falls to the ground. (That is why performers spin the plates; the spin helps keep the plates from falling even if the stick is not exactly in the right place.) Mathematically, that sweet spot is called the center of mass of the plate.
+
+In this section, we first examine these concepts in a one-dimensional context, then expand our development to consider centers of mass of two-dimensional regions and symmetry. Last, we use centroids to find the volume of certain solids by applying the theorem of Pappus.
+
+Center of Mass and Moments
+
+Let’s begin by looking at the center of mass in a one-dimensional context. Consider a long, thin wire or rod of negligible mass resting on a fulcrum, as shown in (a). Now suppose we place objects having masses m1 and m2 at distances d1 and d2 from the fulcrum, respectively, as shown in (b).
+
+The most common real-life example of a system like this is a playground seesaw, or teeter-totter, with children of different weights sitting at different distances from the center. On a seesaw, if one child sits at each end, the heavier child sinks down and the lighter child is lifted into the air. If the heavier child slides in toward the center, though, the seesaw balances. Applying this concept to the masses on the rod, we note that the masses balance each other if and only if m1d1=m2d2.
+
+In the seesaw example, we balanced the system by moving the masses (children) with respect to the fulcrum. However, we are really interested in systems in which the masses are not allowed to move, and instead we balance the system by moving the fulcrum. Suppose we have two point masses, m1 and m2, located on a number line at points x1 and x2, respectively (). The center of mass, x–, is the point where the fulcrum should be placed to make the system balance.
+
+Thus, we have
+
+The expression in the numerator, m1x1+m2x2, is called the first moment of the system with respect to the origin. If the context is clear, we often drop the word first and just refer to this expression as the moment of the system. The expression in the denominator, m1+m2, is the total mass of the system. Thus, the center of mass of the system is the point at which the total mass of the system could be concentrated without changing the moment.
+
+This idea is not limited just to two point masses. In general, if n masses, m1,m2,…,mn, are placed on a number line at points x1,x2,…,xn, respectively, then the center of mass of the system is given by
+
+Center of Mass of Objects on a Line
+
+Let m1,m2,…,mn be point masses placed on a number line at points x1,x2,…,xn, respectively, and let m=∑i=1nmi denote the total mass of the system. Then, the moment of the system with respect to the origin is given by
+
+and the center of mass of the system is given by
+
+We apply this theorem in the following example.
+
+Finding the Center of Mass of Objects along a Line
+
+Suppose four point masses are placed on a number line as follows:
+
+Find the moment of the system with respect to the origin and find the center of mass of the system.
+
+First, we need to calculate the moment of the system:
+
+Now, to find the center of mass, we need the total mass of the system:
+
+Then we have
+
+The center of mass is located 1/2 m to the left of the origin.
+
+Suppose four point masses are placed on a number line as follows:
+
+Find the moment of the system with respect to the origin and find the center of mass of the system.
+M=24,x–=25m
+
+Hint
+
+Use the process from the previous example.
+
+We can generalize this concept to find the center of mass of a system of point masses in a plane. Let m1 be a point mass located at point (x1,y1) in the plane. Then the moment Mx of the mass with respect to the x-axis is given by Mx=m1y1. Similarly, the moment My with respect to the y-axis is given by My=m1x1. Notice that the x-coordinate of the point is used to calculate the moment with respect to the y-axis, and vice versa. The reason is that the x-coordinate gives the distance from the point mass to the y-axis, and the y-coordinate gives the distance to the x-axis (see the following figure).
+
+If we have several point masses in the xy-plane, we can use the moments with respect to the x- and y-axes to calculate the x- and y-coordinates of the center of mass of the system.
+
+Center of Mass of Objects in a Plane
+
+Let m1,m2,…,mn be point masses located in the xy-plane at points (x1,y1),(x2,y2),…,(xn,yn), respectively, and let m=∑i=1nmi denote the total mass of the system. Then the moments Mx and My of the system with respect to the x- and y-axes, respectively, are given by
+
+Also, the coordinates of the center of mass (x–,y–) of the system are
+
+The next example demonstrates how to apply this theorem.
+
+Finding the Center of Mass of Objects in a Plane
+
+Suppose three point masses are placed in the xy-plane as follows (assume coordinates are given in meters):
+
+Find the center of mass of the system.
+
+First we calculate the total mass of the system:
+
+Next we find the moments with respect to the x- and y-axes:
+
+Then we have
+
+The center of mass of the system is (1,1/3), in meters.
+
+Suppose three point masses are placed on a number line as follows (assume coordinates are given in meters):
+
+Find the center of mass of the system.
+(−1,−1) m
+
+Hint
+
+Use the process from the previous example.
+
+Center of Mass of Thin Plates
+
+So far we have looked at systems of point masses on a line and in a plane. Now, instead of having the mass of a system concentrated at discrete points, we want to look at systems in which the mass of the system is distributed continuously across a thin sheet of material. For our purposes, we assume the sheet is thin enough that it can be treated as if it is two-dimensional. Such a sheet is called a lamina. Next we develop techniques to find the center of mass of a lamina. In this section, we also assume the density of the lamina is constant.
+
+Laminas are often represented by a two-dimensional region in a plane. The geometric center of such a region is called its centroid. Since we have assumed the density of the lamina is constant, the center of mass of the lamina depends only on the shape of the corresponding region in the plane; it does not depend on the density. In this case, the center of mass of the lamina corresponds to the centroid of the delineated region in the plane. As with systems of point masses, we need to find the total mass of the lamina, as well as the moments of the lamina with respect to the x- and y-axes.
+
+We first consider a lamina in the shape of a rectangle. Recall that the center of mass of a lamina is the point where the lamina balances. For a rectangle, that point is both the horizontal and vertical center of the rectangle. Based on this understanding, it is clear that the center of mass of a rectangular lamina is the point where the diagonals intersect, which is a result of the symmetry principle, and it is stated here without proof.
+
+The Symmetry Principle
+
+If a region R is symmetric about a line l, then the centroid of R lies on l.
+
+Let’s turn to more general laminas. Suppose we have a lamina bounded above by the graph of a continuous function f(x), below by the x-axis, and on the left and right by the lines x=a and x=b, respectively, as shown in the following figure.
+
+As with systems of point masses, to find the center of mass of the lamina, we need to find the total mass of the lamina, as well as the moments of the lamina with respect to the x- and y-axes. As we have done many times before, we approximate these quantities by partitioning the interval [a,b] and constructing rectangles.
+
+For i=0,1,2,…,n, let P={xi} be a regular partition of [a,b]. Recall that we can choose any point within the interval [xi−1,xi] as our xi*. In this case, we want xi* to be the x-coordinate of the centroid of our rectangles. Thus, for i=1,2,…,n, we select xi*∈[xi−1,xi] such that xi* is the midpoint of the interval. That is, xi*=(xi−1+xi)/2. Now, for i=1,2,…,n, construct a rectangle of height f(xi*) on [xi−1,xi]. The center of mass of this rectangle is (xi*,(f(xi*))/2), as shown in the following figure.
+
+Next, we need to find the total mass of the rectangle. Let ρ represent the density of the lamina (note that ρ is a constant). In this case, ρ is expressed in terms of mass per unit area. Thus, to find the total mass of the rectangle, we multiply the area of the rectangle by ρ. Then, the mass of the rectangle is given by ρf(xi*)Δx.
+
+To get the approximate mass of the lamina, we add the masses of all the rectangles to get
+
+This is a Riemann sum. Taking the limit as n→∞ gives the exact mass of the lamina:
+
+Next, we calculate the moment of the lamina with respect to the x-axis. Returning to the representative rectangle, recall its center of mass is (xi*,(f(xi*))/2). Recall also that treating the rectangle as if it is a point mass located at the center of mass does not change the moment. Thus, the moment of the rectangle with respect to the x-axis is given by the mass of the rectangle, ρf(xi*)Δx, multiplied by the distance from the center of mass to the x-axis: (f(xi*))/2. Therefore, the moment with respect to the x-axis of the rectangle is ρ([f(xi*)]2/2)Δx. Adding the moments of the rectangles and taking the limit of the resulting Riemann sum, we see that the moment of the lamina with respect to the x-axis is
+
+We derive the moment with respect to the y-axis similarly, noting that the distance from the center of mass of the rectangle to the y-axis is xi*. Then the moment of the lamina with respect to the y-axis is given by
+
+We find the coordinates of the center of mass by dividing the moments by the total mass to give x–=My/mandy–=Mx/m. If we look closely at the expressions for Mx,My,andm, we notice that the constant ρ cancels out when x– and y– are calculated.
+
+We summarize these findings in the following theorem.
+
+Center of Mass of a Thin Plate in the xy-Plane
+
+Let R denote a region bounded above by the graph of a continuous function f(x), below by the x-axis, and on the left and right by the lines x=a and x=b, respectively. Let ρ denote the density of the associated lamina. Then we can make the following statements:
+
+The mass of the lamina is
+m=ρ∫abf(x)dx.
+
+The moments Mx and My of the lamina with respect to the x- and y-axes, respectively, are
+Mx=ρ∫ab[f(x)]22dxandMy=ρ∫abxf(x)dx.
+
+The coordinates of the center of mass (x–,y–) are
+x–=Mymandy–=Mxm.
+
+In the next example, we use this theorem to find the center of mass of a lamina.
+
+Finding the Center of Mass of a Lamina
+
+Let R be the region bounded above by the graph of the function f(x)=x and below by the x-axis over the interval [0,4]. Find the centroid of the region.
+
+The region is depicted in the following figure.
+
+Since we are only asked for the centroid of the region, rather than the mass or moments of the associated lamina, we know the density constant ρ cancels out of the calculations eventually. Therefore, for the sake of convenience, let’s assume ρ=1.
+
+First, we need to calculate the total mass:
+
+Next, we compute the moments:
+
+and
+
+Thus, we have
+
+The centroid of the region is (12/5,3/4).
+
+Let R be the region bounded above by the graph of the function f(x)=x2 and below by the x-axis over the interval [0,2]. Find the centroid of the region.
+
+The centroid of the region is (3/2,6/5).
+
+Hint
+
+Use the process from the previous example.
+
+We can adapt this approach to find centroids of more complex regions as well. Suppose our region is bounded above by the graph of a continuous function f(x), as before, but now, instead of having the lower bound for the region be the x-axis, suppose the region is bounded below by the graph of a second continuous function, g(x), as shown in the following figure.
+
+Again, we partition the interval [a,b] and construct rectangles. A representative rectangle is shown in the following figure.
+
+Note that the centroid of this rectangle is (xi*,(f(xi*)+g(xi*))/2). We won’t go through all the details of the Riemann sum development, but let’s look at some of the key steps. In the development of the formulas for the mass of the lamina and the moment with respect to the y-axis, the height of each rectangle is given by f(xi*)−g(xi*), which leads to the expression f(x)−g(x) in the integrands.
+
+In the development of the formula for the moment with respect to the x-axis, the moment of each rectangle is found by multiplying the area of the rectangle, ρ[f(xi*)−g(xi*)]Δx, by the distance of the centroid from the x-axis, (f(xi*)+g(xi*))/2, which gives ρ(1/2){[f(xi*)]2−[g(xi*)]2}Δx. Summarizing these findings, we arrive at the following theorem.
+
+Center of Mass of a Lamina Bounded by Two Functions
+
+Let R denote a region bounded above by the graph of a continuous function f(x), below by the graph of the continuous function g(x), and on the left and right by the lines x=a and x=b, respectively. Let ρ denote the density of the associated lamina. Then we can make the following statements:
+
+The mass of the lamina is
+m=ρ∫ab[f(x)−g(x)]dx.
+
+The moments Mx and My of the lamina with respect to the x- and y-axes, respectively, are
+Mx=ρ∫ab12([f(x)]2−[g(x)]2)dxandMy=ρ∫abx[f(x)−g(x)]dx.
+
+The coordinates of the center of mass (x–,y–) are
+x–=Mymandy–=Mxm.
+
+We illustrate this theorem in the following example.
+
+Finding the Centroid of a Region Bounded by Two Functions
+
+Let R be the region bounded above by the graph of the function f(x)=1−x2 and below by the graph of the function g(x)=x−1. Find the centroid of the region.
+
+The region is depicted in the following figure.
+
+The graphs of the functions intersect at (−2,−3) and (1,0), so we integrate from −2 to 1. Once again, for the sake of convenience, assume ρ=1.
+
+First, we need to calculate the total mass:
+
+Next, we compute the moments:
+
+and
+
+Therefore, we have
+
+The centroid of the region is (−(1/2),−(3/5)).
+
+Let R be the region bounded above by the graph of the function f(x)=6−x2 and below by the graph of the function g(x)=3−2x. Find the centroid of the region.
+
+The centroid of the region is (1,13/5).
+
+Hint
+
+Use the process from the previous example.
+
+The Symmetry Principle
+
+We stated the symmetry principle earlier, when we were looking at the centroid of a rectangle. The symmetry principle can be a great help when finding centroids of regions that are symmetric. Consider the following example.
+
+Finding the Centroid of a Symmetric Region
+
+Let R be the region bounded above by the graph of the function f(x)=4−x2 and below by the x-axis. Find the centroid of the region.
+
+The region is depicted in the following figure.
+
+The region is symmetric with respect to the y-axis. Therefore, the x-coordinate of the centroid is zero. We need only calculate y–. Once again, for the sake of convenience, assume ρ=1.
+
+First, we calculate the total mass:
+
+Next, we calculate the moments. We only need Mx:
+
+Then we have
+
+The centroid of the region is (0,8/5).
+
+Let R be the region bounded above by the graph of the function f(x)=1−x2 and below by x-axis. Find the centroid of the region.
+
+The centroid of the region is (0,2/5).
+
+Hint
+
+Use the process from the previous example.
+
+The Grand Canyon Skywalk
+
+The Grand Canyon Skywalk opened to the public on March 28, 2007. This engineering marvel is a horseshoe-shaped observation platform suspended 4000 ft above the Colorado River on the West Rim of the Grand Canyon. Its crystal-clear glass floor allows stunning views of the canyon below (see the following figure).
+
+The Skywalk is a cantilever design, meaning that the observation platform extends over the rim of the canyon, with no visible means of support below it. Despite the lack of visible support posts or struts, cantilever structures are engineered to be very stable and the Skywalk is no exception. The observation platform is attached firmly to support posts that extend 46 ft down into bedrock. The structure was built to withstand 100-mph winds and an 8.0-magnitude earthquake within 50 mi, and is capable of supporting more than 70,000,000 lb.
+
+One factor affecting the stability of the Skywalk is the center of gravity of the structure. We are going to calculate the center of gravity of the Skywalk, and examine how the center of gravity changes when tourists walk out onto the observation platform.
+
+The observation platform is U-shaped. The legs of the U are 10 ft wide and begin on land, under the visitors’ center, 48 ft from the edge of the canyon. The platform extends 70 ft over the edge of the canyon.
+
+To calculate the center of mass of the structure, we treat it as a lamina and use a two-dimensional region in the xy-plane to represent the platform. We begin by dividing the region into three subregions so we can consider each subregion separately. The first region, denoted R1, consists of the curved part of the U. We model R1 as a semicircular annulus, with inner radius 25 ft and outer radius 35 ft, centered at the origin (see the following figure).
+
+The legs of the platform, extending 35 ft between R1 and the canyon wall, comprise the second sub-region, R2. Last, the ends of the legs, which extend 48 ft under the visitor center, comprise the third sub-region, R3. Assume the density of the lamina is constant and assume the total weight of the platform is 1,200,000 lb (not including the weight of the visitor center; we will consider that later). Use g=32ft/sec2.
+
+Compute the area of each of the three sub-regions. Note that the areas of regions R2 and R3 should include the areas of the legs only, not the open space between them. Round answers to the nearest square foot.
+
+Determine the mass associated with each of the three sub-regions.
+
+Calculate the center of mass of each of the three sub-regions.
+
+Now, treat each of the three sub-regions as a point mass located at the center of mass of the corresponding sub-region. Using this representation, calculate the center of mass of the entire platform.
+
+Assume the visitor center weighs 2,200,000 lb, with a center of mass corresponding to the center of mass of R3. Treating the visitor center as a point mass, recalculate the center of mass of the system. How does the center of mass change?
+
+Although the Skywalk was built to limit the number of people on the observation platform to 120, the platform is capable of supporting up to 800 people weighing 200 lb each. If all 800 people were allowed on the platform, and all of them went to the farthest end of the platform, how would the center of gravity of the system be affected? (Include the visitor center in the calculations and represent the people by a point mass located at the farthest edge of the platform, 70 ft from the canyon wall.)
+
+Theorem of Pappus
+
+This section ends with a discussion of the theorem of Pappus for volume, which allows us to find the volume of particular kinds of solids by using the centroid. (There is also a theorem of Pappus for surface area, but it is much less useful than the theorem for volume.)
+
+Theorem of Pappus for Volume
+
+Let R be a region in the plane and let l be a line in the plane that does not intersect R. Then the volume of the solid of revolution formed by revolving R around l is equal to the area of R multiplied by the distance d traveled by the centroid of R.
+
+Proof
+
+We can prove the case when the region is bounded above by the graph of a function f(x) and below by the graph of a function g(x) over an interval [a,b], and for which the axis of revolution is the y-axis. In this case, the area of the region is A=∫ab[f(x)−g(x)]dx. Since the axis of rotation is the y-axis, the distance traveled by the centroid of the region depends only on the x-coordinate of the centroid, x–, which is
+
+where
+
+Then,
+
+and thus
+
+However, using the method of cylindrical shells, we have
+
+So,
+
+and the proof is complete.
+
+□
+
+Using the Theorem of Pappus for Volume
+
+Let R be a circle of radius 2 centered at (4,0). Use the theorem of Pappus for volume to find the volume of the torus generated by revolving R around the y-axis.
+
+The region and torus are depicted in the following figure.
+
+The region R is a circle of radius 2, so the area of R is A=4π units2. By the symmetry principle, the centroid of R is the center of the circle. The centroid travels around the y-axis in a circular path of radius 4, so the centroid travels d=8π units. Then, the volume of the torus is A·d=32π2 units3.
+
+Let R be a circle of radius 1 centered at (3,0). Use the theorem of Pappus for volume to find the volume of the torus generated by revolving R around the y-axis.
+6π2 units3
+
+Hint
+
+Use the process from the previous example.
+
+Key Concepts
+
+Mathematically, the center of mass of a system is the point at which the total mass of the system could be concentrated without changing the moment. Loosely speaking, the center of mass can be thought of as the balancing point of the system.
+
+For point masses distributed along a number line, the moment of the system with respect to the origin is M=∑i=1nmixi. For point masses distributed in a plane, the moments of the system with respect to the x- and y-axes, respectively, are Mx=∑i=1nmiyi and My=∑i=1nmixi, respectively.
+
+For a lamina bounded above by a function f(x), the moments of the system with respect to the x- and y-axes, respectively, are Mx=ρ∫ab[f(x)]22dx and My=ρ∫abxf(x)dx.
+
+The x- and y-coordinates of the center of mass can be found by dividing the moments around the y-axis and around the x-axis, respectively, by the total mass. The symmetry principle says that if a region is symmetric with respect to a line, then the centroid of the region lies on the line.
+
+The theorem of Pappus for volume says that if a region is revolved around an external axis, the volume of the resulting solid is equal to the area of the region multiplied by the distance traveled by the centroid of the region.
+
+Key Equations
+x–=Mymandy–=Mxm
+For the following exercises, calculate the center of mass for the collection of masses given.
+m1=2 at x1=1 and m2=4 at x2=2
+m1=1 at x1=−1 and m2=3 at x2=2
+54
+m=3 at x=0,1,2,6
+
+Unit masses at (x,y)=(1,0),(0,1),(1,1)
+(23,23)
+m1=1 at (1,0) and m2=4 at (0,1)
+m1=1 at (1,0) and m2=3 at (2,2)
+(74,32)
+
+For the following exercises, compute the center of mass x–.
+ρ=1 for x∈(−1,3)
+ρ=x2 for x∈(0,L)
+3L4
+ρ=1 for x∈(0,1) and ρ=2 for x∈(1,2)
+ρ=sinx for x∈(0,π)
+π2
+ρ=cosx for x∈(0,π2)
+ρ=ex for x∈(0,2)
+e2+1e2−1
+ρ=x3+xe−x for x∈(0,1)
+ρ=xsinx for x∈(0,π)
+π2−4π
+ρ=x for x∈(1,4)
+ρ=lnx for x∈(1,e)
+14(1+e2)
+
+For the following exercises, compute the center of mass (x–,y–). Use symmetry to help locate the center of mass whenever possible.
+ρ=7 in the square 0≤x≤1, 0≤y≤1
+ρ=3 in the triangle with vertices (0,0), (a,0), and (0,b)
+(a3,b3)
+ρ=2 for the region bounded by y=cos(x), y=−cos(x), x=−π2, and x=π2
+
+For the following exercises, use a calculator to draw the region, then compute the center of mass (x–,y–). Use symmetry to help locate the center of mass whenever possible.
+[T] The region bounded by y=cos(2x), x=−π4, and x=π4
+(0,π8)
+[T] The region between y=2x2, y=0, x=0, and x=1
+[T] The region between y=54x2 and y=5
+(0,3)
+[T] Region between y=x, y=ln(x), x=1, and x=4
+[T] The region bounded by y=0, x24+y29=1
+(0,4π)
+[T] The region bounded by y=0, x=0, and x24+y29=1
+[T] The region bounded by y=x2 and y=x4 in the first quadrant
+(58,13)
+
+For the following exercises, use the theorem of Pappus to determine the volume of the shape.
+
+Rotating y=mx around the x-axis between x=0 and x=1
+
+Rotating y=mx around the y-axis between x=0 and x=1
+2mπ3
+
+A general cone created by rotating a triangle with vertices (0,0), (a,0), and (0,b) around the y-axis. Does your answer agree with the volume of a cone?
+
+A general cylinder created by rotating a rectangle with vertices (0,0), (a,0),(0,b), and (a,b) around the y-axis. Does your answer agree with the volume of a cylinder?
+πa2b
+
+A sphere created by rotating a semicircle with radius a around the y-axis. Does your answer agree with the volume of a sphere?
+
+For the following exercises, use a calculator to draw the region enclosed by the curve. Find the area M and the centroid (x–,y–) for the given shapes. Use symmetry to help locate the center of mass whenever possible.
+[T] Quarter-circle: y=1−x2, y=0, and x=0
+(43π,43π)
+[T] Triangle: y=x, y=2−x, and y=0
+[T] Lens: y=x2 and y=x
+(12,25)
+[T] Ring: y2+x2=1 and y2+x2=4
+[T] Half-ring: y2+x2=1, y2+x2=4, and y=0
+(0,289π)
+
+Find the generalized center of mass in the sliver between y=xa and y=xb with a>b. Then, use the Pappus theorem to find the volume of the solid generated when revolving around the y-axis.
+
+Find the generalized center of mass between y=a2−x2, x=0, and y=0. Then, use the Pappus theorem to find the volume of the solid generated when revolving around the y-axis.
+
+Center of mass: (a6,4a25), volume: 2πa49
+
+Find the generalized center of mass between y=bsin(ax), x=0, and x=πa. Then, use the Pappus theorem to find the volume of the solid generated when revolving around the y-axis.
+
+Use the theorem of Pappus to find the volume of a torus (pictured here). Assume that a disk of radius a is positioned with the left end of the circle at x=b, b>0, and is rotated around the y-axis.
+
+Volume: 2π2a2(b+a)
+
+Find the center of mass (x–,y–) for a thin wire along the semicircle y=1−x2 with unit mass. (Hint: Use the theorem of Pappus.)
+
+the point at which the total mass of the system could be concentrated without changing the moment
+the centroid of a region is the geometric center of the region; laminas are often represented by regions in the plane; if the lamina has a constant density, the center of mass of the lamina depends only on the shape of the corresponding planar region; in this case, the center of mass of the lamina corresponds to the centroid of the representative region
+a thin sheet of material; laminas are thin enough that, for mathematical purposes, they can be treated as if they are two-dimensional
+if n masses are arranged on a number line, the moment of the system with respect to the origin is given by M=∑i=1nmixi; if, instead, we consider a region in the plane, bounded above by a function f(x) over an interval [a,b], then the moments of the region with respect to the x- and y-axes are given by Mx=ρ∫ab[f(x)]22dx and My=ρ∫abxf(x)dx, respectively
+the symmetry principle states that if a region R is symmetric about a line l, then the centroid of R lies on l
+this theorem states that the volume of a solid of revolution formed by revolving a region around an external axis is equal to the area of the region multiplied by the distance traveled by the centroid of the region

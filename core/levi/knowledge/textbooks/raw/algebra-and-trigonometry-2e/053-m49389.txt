@@ -1,0 +1,2719 @@
+# m49389
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Graphs of the Other Trigonometric Functions
+
+Graphs of the Other Trigonometric Functions
+
+In this section, you will:
+
+Analyze the graph of  y=tan x.
+
+Graph variations of  y=tan x.
+
+Analyze the graphs of  y=sec x  and  y=csc x.
+
+Graph variations of  y=sec x  and  y=csc x.
+
+Analyze the graph of  y=cot x.
+
+Graph variations of  y=cot x.
+
+We know the tangent function can be used to find distances, such as the height of a building, mountain, or flagpole. But what if we want to measure repeated occurrences of distance? Imagine, for example, a fire truck parked next to a warehouse. The rotating light from the truck would travel across the wall of the warehouse in regular intervals. If the input is time, the output would be the distance the beam of light travels. The beam of light would repeat the distance at regular intervals. The tangent function can be used to approximate this distance. Asymptotes would be needed to illustrate the repeated cycles when the beam runs parallel to the wall because, seemingly, the beam of light could appear to extend forever. The graph of the tangent function would clearly illustrate the repeated intervals. In this section, we will explore the graphs of the tangent and other trigonometric functions.
+
+Analyzing the Graph of y = tan x
+
+We will begin with the graph of the tangent function, plotting points as we did for the sine and cosine functions. Recall that
+
+The period of the tangent function is 
+ 
+ π
+ 
+ because the graph repeats itself on intervals of 
+ 
+ kπ
+ 
+ where 
+ 
+ k
+ 
+ is a constant. If we graph the tangent function on 
+ 
+ −
+ π
+ 2
+
+ to 
+
+ π
+ 2
+ 
+ ,
+ 
+ we can see the behavior of the graph on one complete cycle. If we look at any larger interval, we will see that the characteristics of the graph repeat.
+
+We can determine whether tangent is an odd or even function by using the definition of tangent.
+
+Therefore, tangent is an odd function. We can further analyze the graphical behavior of the tangent function by looking at values for some of the special angles, as listed in .
+−
+ π
+ 6
+tan(
+ x
+ )
+−
+ 3
+−
+
+ 3
+
+ 3
+3
+
+ 3
+3
+undefined
+These points will help us draw our graph, but we need to determine how the graph behaves where it is undefined. If we look more closely at values when 
+
+ π
+ 3
+ 
+ <x<
+ π
+ 2
+ 
+ ,
+ 
+ we can use a table to look for a trend. Because 
+
+ π
+ 3
+ 
+ ≈1.05
+ 
+ and 
+
+ π
+ 2
+ 
+ ≈1.57,
+ 
+ we will evaluate 
+ 
+ x
+ 
+ at radian measures 
+ 
+ 1.05<x<1.57
+ 
+ as shown in .
+x
+1.3
+1.5
+1.55
+tanx
+3.6
+14.1
+48.1
+92.6
+As 
+ 
+ x
+ 
+ approaches 
+
+ π
+ 2
+ 
+ ,
+ 
+ the outputs of the function get larger and larger. Because 
+ 
+ y=tanx
+ 
+ is an odd function, we see the corresponding table of negative values in .
+x
+−1.3
+−1.5
+−1.55
+tanx
+−3.6
+−14.1
+−48.1
+−92.6
+We can see that, as 
+ 
+ x
+ 
+ approaches 
+ 
+ −
+ π
+ 2
+ 
+ ,
+ 
+ the outputs get smaller and smaller. Remember that there are some values of 
+ 
+ x
+ 
+ for which 
+ 
+ cosx=0.
+ 
+ For example, 
+ 
+ cos(
+
+ π
+ 2
+
+ )=0
+ 
+ and 
+ 
+ cos(
+
+ 3π
+ 
+ 2
+
+ )=0.
+ 
+ At these values, the tangent function is undefined, so the graph of 
+ 
+ y=tanx
+ 
+ has discontinuities at 
+ 
+ x=
+ π
+ 2
+ 
+  and 
+ 
+ 3π
+ 
+ 2
+ 
+ .
+ 
+ At these values, the graph of the tangent has vertical asymptotes. represents the graph of 
+ 
+ y=tanx.
+ 
+ The tangent is positive from 0 to 
+
+ π
+ 2
+
+ and from 
+ 
+ π
+ 
+ to 
+
+ 3π
+ 
+ 2
+ 
+ ,
+ 
+ corresponding to quadrants I and III of the unit circle.
+
+Graphing Variations of y = tan x
+
+As with the sine and cosine functions, the tangent function can be described by a general equation.
+
+We can identify horizontal and vertical stretches and compressions using values of 
+ 
+ A
+ 
+ and 
+ 
+ B.
+ The horizontal stretch can typically be determined from the period of the graph. With tangent graphs, it is often necessary to determine a vertical stretch using a point on the graph.
+
+Because there are no maximum or minimum values of a tangent function, the term amplitude cannot be interpreted as it is for the sine and cosine functions. Instead, we will use the phrase stretching/compressing factor when referring to the constant 
+ 
+ A.
+
+Features of the Graph of y = Atan(Bx)
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+ 
+ P=
+ π
+ 
+ | B |
+
+ .
+
+The domain is all real numbers 
+ 
+ x,
+ 
+ where 
+ 
+ x≠
+ π
+ 
+ 2| B |
+
+ +
+ π
+ 
+ | B |
+
+ k
+ 
+ such that 
+ 
+ k
+ 
+ is an integer.
+
+The range is 
+ 
+ (−∞,∞).
+
+The asymptotes occur at 
+ 
+ x=
+ π
+ 
+ 2| B |
+
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ is an integer.
+y=Atan(
+ 
+ Bx
+ 
+ )
+ 
+ is an odd function.
+
+Graphing One Period of a Stretched or Compressed Tangent Function
+
+We can use what we know about the properties of the tangent function to quickly sketch a graph of any stretched and/or compressed tangent function of the form 
+ 
+ f(x)=Atan(Bx).
+ 
+ We focus on a single period of the function including the origin, because the periodic property enables us to extend the graph to the rest of the function’s domain if we wish. Our limited domain is then the interval 
+ 
+ (
+ 
+ −
+ P
+ 2
+ 
+ ,
+ P
+ 2
+
+ )
+ 
+ and the graph has vertical asymptotes at 
+ 
+ ±
+ P
+ 2
+
+ where 
+ 
+ P=
+ π
+ B
+ 
+ .
+ 
+ On 
+ 
+ (
+ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ),
+ 
+ the graph will come up from the left asymptote at 
+ 
+ x=−
+ π
+ 2
+ 
+ ,
+ 
+ cross through the origin, and continue to increase as it approaches the right asymptote at 
+ 
+ x=
+ π
+ 2
+ 
+ .
+ 
+ To make the function approach the asymptotes at the correct rate, we also need to set the vertical scale by actually evaluating the function for at least one point that the graph will pass through. For example, we can use
+
+because 
+ 
+ tan(
+
+ π
+ 4
+
+ )=1.
+Given the function 
+ 
+ f(x)=Atan(Bx),
+ 
+ graph one period.
+
+Identify the stretching factor, 
+ 
+ | A |.
+
+Identify 
+ 
+ B
+ 
+ and determine the period, 
+ 
+ P=
+ π
+ 
+ | B |
+
+ .
+
+Draw vertical asymptotes at 
+ 
+ x=−
+ P
+ 2
+
+ and 
+ 
+ x=
+ P
+ 2
+ 
+ .
+
+For 
+ 
+ AB>0,
+ 
+ the graph approaches the left asymptote at negative output values and the right asymptote at positive output values (reverse for 
+ 
+ AB<0
+ 
+ ).
+
+Plot reference points at 
+ 
+ (
+
+ P
+ 4
+ 
+ ,A
+ 
+ ),
+
+ (
+ 
+ 0,0
+ 
+ ),
+ 
+ and 
+ 
+ (
+ 
+ −
+ P
+ 4
+ 
+ ,−A
+ 
+ ),
+ 
+ and draw the graph through these points.
+
+Sketching a Compressed Tangent
+
+Sketch a graph of one period of the function 
+ 
+ y=0.5tan(
+
+ π
+ 2
+ 
+ x
+ 
+ ).
+
+First, we identify 
+ 
+ A
+ 
+ and 
+ 
+ B.
+
+Because 
+ 
+ A=0.5
+ 
+ and 
+ 
+ B=
+ π
+ 2
+ 
+ ,
+ 
+ we can find the stretching/compressing factor and period. The period is 
+
+ π
+
+ π
+ 2
+
+ =2,
+ 
+ so the asymptotes are at 
+ 
+ x=±1.
+ 
+ At a quarter period from the origin, we have
+
+This means the curve must pass through the points 
+ 
+ (
+ 
+ 0.5,0.5
+ 
+ ),
+
+ (
+ 
+ 0,0
+ 
+ ),
+ 
+ and 
+ 
+ (
+ 
+ −0.5,−0.5
+ 
+ ).
+ 
+ The only inflection point is at the origin. shows the graph of one period of the function.
+
+Sketch a graph of 
+ 
+ f(x)=3tan(
+
+ π
+ 6
+ 
+ x
+ 
+ ).
+
+Graphing One Period of a Shifted Tangent Function
+
+Now that we can graph a tangent function that is stretched or compressed, we will add a vertical and/or horizontal (or phase) shift. In this case, we add 
+ 
+ C
+ 
+ and 
+ 
+ D
+ 
+ to the general form of the tangent function.
+
+The graph of a transformed tangent function is different from the basic tangent function 
+ 
+ tanx
+ 
+ in several ways:
+
+Features of the Graph of y = Atan(Bx−C)+D
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+
+ π
+ 
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ C
+ B
+ 
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+The range is 
+ 
+ (−∞,∞).
+
+The vertical asymptotes occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+There is no amplitude.
+Given the function 
+ 
+ y=Atan(Bx−C)+D,
+ 
+ sketch the graph of one period.
+
+Express the function given in the form 
+ 
+ y=Atan(
+ 
+ Bx−C
+ 
+ )+D.
+
+Identify the stretching/compressing factor, 
+ 
+ | A |.
+
+Identify 
+ 
+ B
+ 
+ and determine the period, 
+ 
+ P=
+ π
+ 
+ | B |
+
+ .
+
+Identify 
+ 
+ C
+ 
+ and determine the phase shift, 
+
+ C
+ B
+ 
+ .
+
+Draw the graph of 
+ 
+ y=Atan(Bx)
+ 
+ shifted to the right by 
+
+ C
+ B
+
+ and up by 
+ 
+ D.
+
+Sketch the vertical asymptotes, which occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+Plot any three reference points and draw the graph through these points.
+
+Graphing One Period of a Shifted Tangent Function
+
+Graph one period of the function 
+ 
+ y=−2tan(πx+π)−1.
+Step 1. The function is already written in the form 
+ 
+ y=Atan(
+ 
+ Bx−C
+ 
+ )+D.
+Step 2. 
+ 
+ A=−2, 
+ so the stretching factor is 
+ 
+ | A |=2.
+Step 3. 
+ 
+ B=π, 
+ so the period is 
+ 
+ P=
+ π
+ 
+ | B |
+
+ =
+ π
+ π
+ 
+ =1.
+Step 4. 
+ 
+ C=−π, 
+ so the phase shift is 
+
+ C
+ B
+ 
+ =
+ 
+ −π
+ 
+ π
+ 
+ =−1.
+Step 5-7. The asymptotes are at 
+ 
+ x=−
+ 3
+ 2
+
+ and 
+ 
+ x=−
+ 1
+ 2
+
+ and the three recommended reference points are 
+ 
+ (
+ 
+ −1.25,1
+ 
+ ), 
+
+ (
+ 
+ −1,−1
+ 
+ ), 
+ and 
+ 
+ (
+ 
+ −0.75,−3
+ 
+ ). 
+ The graph is shown in .
+
+Analysis
+
+Note that this is a decreasing function because 
+ 
+ A<0.
+
+How would the graph in look different if we made 
+ 
+ A=2
+ 
+ instead of 
+ 
+ −2?
+
+It would be reflected across the line 
+ 
+ y=−1,
+ 
+ becoming an increasing function.
+Given the graph of a tangent function, identify horizontal and vertical stretches.
+
+Find the period 
+ 
+ P
+ 
+ from the spacing between successive vertical asymptotes or x-intercepts.
+
+Write 
+ 
+ f(x)=Atan(
+
+ π
+ P
+ 
+ x
+ 
+ ).
+
+Determine a convenient point 
+ 
+ (x,f(x))
+ 
+ on the given graph and use it to determine 
+ 
+ A.
+
+Identifying the Graph of a Stretched Tangent
+
+Find a formula for the function graphed in .
+
+The graph has the shape of a tangent function.
+Step 1. One cycle extends from –4 to 4, so the period is 
+ 
+ P=8.
+ 
+ Since 
+ 
+ P=
+ π
+ 
+ | B |
+
+ ,
+ 
+ we have 
+ 
+ B=
+ π
+ P
+ 
+ =
+ π
+ 8
+ 
+ .
+Step 2. The equation must have the form 
+ 
+ f(x)=Atan(
+
+ π
+ 8
+ 
+ x
+ 
+ ).
+Step 3. To find the vertical stretch 
+ 
+ A,
+ 
+ we can use the point 
+ 
+ (
+ 
+ 2,2
+ 
+ ).
+
+ 2=Atan(
+
+ π
+ 8
+ 
+ ⋅2
+ 
+ )=Atan(
+
+ π
+ 4
+
+ )
+
+Because 
+ 
+ tan(
+
+ π
+ 4
+
+ )=1,
+
+ A=2.
+
+This function would have a formula 
+ 
+ f(x)=2tan(
+
+ π
+ 8
+ 
+ x
+ 
+ ).
+
+Find a formula for the function in .
+g(x)=4tan(2x)
+
+Analyzing the Graphs of y = sec x and y = cscx
+
+The secant was defined by the reciprocal identity 
+ 
+ secx=
+ 1
+ 
+ cosx
+
+ .
+ 
+ Notice that the function is undefined when the cosine is 0, leading to vertical asymptotes at 
+
+ π
+ 2
+ 
+ ,
+
+ 3π
+ 
+ 2
+ 
+ ,
+ 
+ etc. Because the cosine is never more than 1 in absolute value, the secant, being the reciprocal, will never be less than 1 in absolute value.
+
+We can graph 
+ 
+ y=secx
+ 
+ by observing the graph of the cosine function because these two functions are reciprocals of one another. See . The graph of the cosine is shown as a dashed orange wave so we can see the relationship. Where the graph of the cosine function decreases, the graph of the secant function increases. Where the graph of the cosine function increases, the graph of the secant function decreases. When the cosine function is zero, the secant is undefined.
+
+The secant graph has vertical asymptotes at each value of 
+ 
+ x
+ 
+ where the cosine graph crosses the x-axis; we show these in the graph below with dashed vertical lines, but will not show all the asymptotes explicitly on all later graphs involving the secant and cosecant.
+
+Note that, because cosine is an even function, secant is also an even function. That is, 
+ 
+ sec(
+ 
+ −x
+ 
+ )=secx.
+
+As we did for the tangent function, we will again refer to the constant 
+ 
+ | A |
+ 
+ as the stretching factor, not the amplitude.
+
+Features of the Graph of y = Asec(Bx)
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+
+ 2π
+
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+The range is 
+ 
+ (−∞,−| A |]∪[| A |,∞).
+
+The vertical asymptotes occur at 
+ 
+ x=
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+There is no amplitude.
+y=Asec(
+ 
+ Bx
+ 
+ )
+ 
+ is an even function because cosine is an even function.
+
+Similar to the secant, the cosecant is defined by the reciprocal identity 
+ 
+ cscx=
+ 1
+ 
+ sinx
+
+ .
+ 
+ Notice that the function is undefined when the sine is 0, leading to a vertical asymptote in the graph at 
+ 
+ 0,
+
+ π,
+ 
+ etc. Since the sine is never more than 1 in absolute value, the cosecant, being the reciprocal, will never be less than 1 in absolute value.
+
+We can graph 
+ 
+ y=cscx
+ 
+ by observing the graph of the sine function because these two functions are reciprocals of one another. See . The graph of sine is shown as a dashed orange wave so we can see the relationship. Where the graph of the sine function decreases, the graph of the cosecant function increases. Where the graph of the sine function increases, the graph of the cosecant function decreases.
+
+The cosecant graph has vertical asymptotes at each value of 
+ 
+ x
+ 
+ where the sine graph crosses the x-axis; we show these in the graph below with dashed vertical lines.
+
+Note that, since sine is an odd function, the cosecant function is also an odd function. That is, 
+ 
+ csc(
+ 
+ −x
+ 
+ )=−cscx.
+
+The graph of cosecant, which is shown in , is similar to the graph of secant.
+
+Features of the Graph of y = Acsc(Bx)
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+
+ 2π
+
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+The range is 
+ 
+ ( 
+ −∞,−| A |
+ ]∪[ 
+ | A |,∞
+ ).
+
+The asymptotes occur at 
+ 
+ x=
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+y=Acsc(
+ 
+ Bx
+ 
+ )
+ 
+ is an odd function because sine is an odd function.
+
+Graphing Variations of y = sec x and y= csc x
+
+For shifted, compressed, and/or stretched versions of the secant and cosecant functions, we can follow similar methods to those we used for tangent and cotangent. That is, we locate the vertical asymptotes and also evaluate the functions for a few points (specifically the local extrema). If we want to graph only a single period, we can choose the interval for the period in more than one way. The procedure for secant is very similar, because the cofunction identity means that the secant graph is the same as the cosecant graph shifted half a period to the left. Vertical and phase shifts may be applied to the cosecant function in the same way as for the secant and other functions.The equations become the following.
+
+Features of the Graph of y = Asec(Bx−C)+D
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+
+ 2π
+
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ C
+ B
+ 
+ +
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+The range is 
+ 
+ (−∞,−| A |+D]∪[| A |+D,∞).
+
+The vertical asymptotes occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+There is no amplitude.
+y=Asec(
+ 
+ Bx-C
+ 
+ )+D
+ 
+ is an even function because cosine is an even function.
+
+Features of the Graph of y = Acsc(Bx−C)+D
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+
+ 2π
+
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ C
+ B
+ 
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+The range is 
+ 
+ (−∞,−| A |+D]∪[| A |+D,∞).
+
+The vertical asymptotes occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ |B|
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+There is no amplitude.
+y=Acsc(
+ 
+ Bx-C
+ 
+ )+D
+ 
+ is an odd function because sine is an odd function.
+Given a function of the form 
+ 
+ y=Asec(
+ 
+ Bx
+ 
+ ),
+ 
+ graph one period.
+
+Express the function given in the form 
+ 
+ y=Asec(
+ 
+ Bx
+ 
+ ).
+
+Identify the stretching/compressing factor, 
+ 
+ | A |.
+
+Identify 
+ 
+ B
+ 
+ and determine the period, 
+ 
+ P=
+ 
+ 2π
+
+ | B |
+
+ .
+
+Sketch the graph of 
+ 
+ y=Acos(
+ 
+ Bx
+ 
+ ).
+
+Use the reciprocal relationship between 
+ 
+ y=cosx
+ 
+ and 
+ 
+ y=secx
+ 
+ to draw the graph of 
+ 
+ y=Asec(
+ 
+ Bx
+ 
+ ).
+
+Sketch the asymptotes.
+
+Plot any two reference points and draw the graph through these points.
+
+Graphing a Variation of the Secant Function
+
+Graph one period of 
+ 
+ f(x)=2.5sec(0.4x).
+Step 1. The given function is already written in the general form, 
+ 
+ y=Asec(
+ 
+ Bx
+ 
+ ).
+Step 2. 
+ 
+ A=2.5 
+ so the stretching factor is 
+ 
+ 2.5.
+Step 3. 
+ 
+ B=0.4 
+ so 
+ 
+ P=
+ 
+ 2π
+
+ 0.4
+
+ =5π. 
+ The period is 
+ 
+ 5π 
+ units.
+Step 4. Sketch the graph of the function 
+ 
+ g(x)=2.5cos(0.4x).
+Step 5. Use the reciprocal relationship of the cosine and secant functions to draw the cosecant function.
+Steps 6–7. Sketch two asymptotes at 
+ 
+ x=1.25π 
+ and 
+ 
+ x=3.75π. 
+ We can use two reference points, the local minimum at 
+ 
+ (
+ 
+ 0,2.5
+ 
+ ) 
+ and the local maximum at 
+ 
+ (
+ 
+ 2.5π,−2.5
+ 
+ ). 
+ shows the graph.
+
+Graph one period of 
+ 
+ f(x)=−2.5sec(0.4x).
+
+This is a vertical reflection of the preceding graph because 
+ 
+ A
+ 
+ is negative.
+Do the vertical shift and stretch/compression affect the secant’s range?
+Yes. The range of 
+ 
+ f(
+ x
+ )=Asec(
+ 
+ Bx−C
+ 
+ )+D
+ 
+ is 
+ 
+ ( 
+ −∞,−| A |+D
+ ]∪[ 
+ | A |+D,∞
+ ).
+Given a function of the form 
+ 
+ f(
+ x
+ )=Asec(
+ 
+ Bx−C
+ 
+ )+D,
+ 
+ graph one period.
+
+Express the function given in the form 
+ 
+ y=Asec(Bx−C)+D.
+
+Identify the stretching/compressing factor, 
+ 
+ | A |.
+
+Identify 
+ 
+ B
+ 
+ and determine the period, 
+
+ 2π
+
+ | B |
+
+ .
+
+Identify 
+ 
+ C
+ 
+ and determine the phase shift, 
+
+ C
+ B
+ 
+ .
+
+Draw the graph of 
+ 
+ y=Asec(Bx)
+ 
+ , but shift it to the right by 
+
+ C
+ B
+
+ and up by 
+ 
+ D.
+
+Sketch the vertical asymptotes, which occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ 2| B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an odd integer.
+
+Graphing a Variation of the Secant Function
+
+Graph one period of 
+ 
+ y=4sec(
+
+ π
+ 3
+ 
+ x−
+ π
+ 2
+
+ )+1.
+Step 1. Express the function given in the form 
+ 
+ y=4sec(
+
+ π
+ 3
+ 
+ x−
+ π
+ 2
+
+ )+1.
+Step 2. The stretching/compressing factor is 
+ 
+ | A |=4.
+Step 3. The period is
+
+ 2π
+
+ |B|
+
+ =
+ 
+ 2π
+
+ π
+ 3
+
+       =
+ 
+ 2π
+ 
+ 1
+ 
+ ⋅
+ 3
+ π
+
+       =6
+Step 4. The phase shift is
+
+ C
+ B
+ 
+ =
+
+ π
+ 2
+
+ π
+ 3
+
+    =
+ π
+ 2
+ 
+ ⋅
+ 3
+ π
+
+    =1.5
+Step 5. Draw the graph of 
+ 
+ y=Asec(Bx),
+ 
+ but shift it to the right by 
+
+ C
+ B
+ 
+ =1.5
+ 
+ and up by 
+ 
+ D=1.
+Step 6. Sketch the vertical asymptotes, which occur at 
+ 
+ x=0,x=3,
+ 
+ and 
+ 
+ x=6.
+ 
+ There is a local minimum at 
+ 
+ (
+ 
+ 1.5,5
+ 
+ )
+ 
+ and a local maximum at 
+ 
+ (
+ 
+ 4.5,−3
+ 
+ ).
+ 
+ shows the graph.
+
+Graph one period of 
+ 
+ f(
+ x
+ )=−6sec(4x+2)−8.
+The domain of 
+ 
+ cscx
+ 
+ was given to be all 
+ 
+ x
+ 
+ such that 
+ 
+ x≠kπ
+ 
+ for any integer 
+ 
+ k.
+ 
+ Would the domain of 
+ 
+ y=Acsc(Bx−C)+Dbex≠
+ 
+ C+kπ
+ 
+ B
+ 
+ ?
+Yes. The excluded points of the domain follow the vertical asymptotes. Their locations show the horizontal shift and compression or expansion implied by the transformation to the original function’s input.
+Given a function of the form 
+ 
+ y=Acsc(
+ 
+ Bx
+ 
+ ),
+ 
+ graph one period.
+
+Express the function given in the form 
+ 
+ y=Acsc(
+ 
+ Bx
+ 
+ ).
+| A |.
+
+Identify 
+ 
+ B
+ 
+ and determine the period, 
+ 
+ P=
+ 
+ 2π
+
+ | B |
+
+ .
+
+Draw the graph of 
+ 
+ y=Asin(
+ 
+ Bx
+ 
+ ).
+
+Use the reciprocal relationship between 
+ 
+ y=sinx
+ 
+ and 
+ 
+ y=cscx
+ 
+ to draw the graph of 
+ 
+ y=Acsc(
+ 
+ Bx
+ 
+ ).
+
+Sketch the asymptotes.
+
+Plot any two reference points and draw the graph through these points.
+
+Graphing a Variation of the Cosecant Function
+
+Graph one period of 
+ 
+ f(x)=−3csc(4x).
+Step 1. The given function is already written in the general form, 
+ 
+ y=Acsc(
+ 
+ Bx
+ ).
+Step 2. 
+ 
+ | A |=| 
+ −3 |=3,
+ so the stretching factor is 3.
+Step 3. 
+ 
+ B=4,
+ so 
+ 
+ P=
+ 
+ 2π
+ 4
+ 
+ =
+ π
+ 2
+ 
+ .
+ The period is 
+
+ π
+ 2
+
+ units.
+Step 4. Sketch the graph of the function 
+ 
+ g(x)=−3sin(4x).
+Step 5. Use the reciprocal relationship of the sine and cosecant functions to draw the cosecant function.
+Steps 6–7. Sketch three asymptotes at 
+ 
+ x=0,x=
+ π
+ 4
+ 
+ ,
+ and 
+ 
+ x=
+ π
+ 2
+ 
+ .
+ We can use two reference points, the local maximum at 
+ 
+ (
+
+ π
+ 8
+ 
+ ,−3
+ )
+ and the local minimum at 
+ 
+ (
+
+ 3π
+ 8
+ 
+ ,3
+ ).
+ shows the graph.
+
+Graph one period of 
+ 
+ f(x)=0.5csc(2x).
+Given a function of the form 
+ 
+ f(
+ x
+ )=Acsc(
+ 
+ Bx−C
+ )+D,
+ graph one period.
+
+Express the function given in the form 
+ 
+ y=Acsc(Bx−C)+D.
+
+Identify the stretching/compressing factor, 
+ 
+ | A |.
+
+Identify 
+ 
+ B
+ 
+ and determine the period, 
+
+ 2π
+
+ | B |
+
+ .
+
+Identify 
+ 
+ C
+ 
+ and determine the phase shift, 
+
+ C
+ B
+ 
+ .
+
+Draw the graph of 
+ 
+ y=Acsc(Bx)
+ 
+ but shift it to the right by 
+ C
+ B
+ and up by 
+ 
+ D.
+
+Sketch the vertical asymptotes, which occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+Graphing a Vertically Stretched, Horizontally Compressed, and Vertically Shifted Cosecant
+
+Sketch a graph of 
+ 
+ y=2csc(
+
+ π
+ 2
+ 
+ x
+ )+1.
+ What are the domain and range of this function?
+Step 1. Express the function given in the form 
+ 
+ y=2csc(
+
+ π
+ 2
+ 
+ x
+ 
+ )+1.
+Step 2. Identify the stretching/compressing factor, 
+ 
+ | A |=2.
+Step 3. The period is 
+
+ 2π
+
+ | B |
+
+ =
+ 
+ 2π
+
+ π
+ 2
+
+ =
+ 
+ 2π
+ 
+ 1
+ 
+ ⋅
+ 2
+ π
+ 
+ =4.
+Step 4. The phase shift is 
+
+ 0
+
+ π
+ 2
+
+ =0.
+Step 5. Draw the graph of 
+ 
+ y=Acsc(Bx) 
+ but shift it up 
+ 
+ D=1.
+Step 6. Sketch the vertical asymptotes, which occur at 
+ 
+ x=0,x=2,x=4.
+
+The graph for this function is shown in .
+
+Analysis
+
+The vertical asymptotes shown on the graph mark off one period of the function, and the local extrema in this interval are shown by dots. Notice how the graph of the transformed cosecant relates to the graph of 
+ 
+ f(x)=2sin(
+
+ π
+ 2
+ 
+ x
+ )+1,
+ shown as the orange dashed wave.
+
+Given the graph of 
+ 
+ f(x)=2cos(
+
+ π
+ 2
+ 
+ x
+ )+1
+ shown in , sketch the graph of 
+ 
+ g(x)=2sec(
+
+ π
+ 2
+ 
+ x
+ )+1
+ on the same axes.
+
+Analyzing the Graph of y = cot x
+
+The last trigonometric function we need to explore is cotangent. The cotangent is defined by the reciprocal identity 
+ 
+ cotx=
+ 1
+ 
+ tanx
+ 
+ .
+ Notice that the function is undefined when the tangent function is 0, leading to a vertical asymptote in the graph at 
+ 
+ 0,π,
+ etc. Since the output of the tangent function is all real numbers, the output of the cotangent function is also all real numbers.
+
+We can graph 
+ 
+ y=cotx
+ by observing the graph of the tangent function because these two functions are reciprocals of one another. See . Where the graph of the tangent function decreases, the graph of the cotangent function increases. Where the graph of the tangent function increases, the graph of the cotangent function decreases.
+
+The cotangent graph has vertical asymptotes at each value of 
+ 
+ x
+ where 
+ 
+ tanx=0;
+ we show these in the graph below with dashed lines. Since the cotangent is the reciprocal of the tangent, 
+ 
+ cotx
+ has vertical asymptotes at all values of 
+ 
+ x
+ where 
+ 
+ tanx=0,
+ and 
+ 
+ cotx=0
+ at all values of 
+ 
+ x
+ where 
+ 
+ tanx
+ has its vertical asymptotes.
+
+Features of the Graph of y = Acot(Bx)
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+ 
+ P=
+ π
+ 
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ is an integer.
+
+The range is 
+ 
+ (−∞,∞).
+
+The asymptotes occur at 
+ 
+ x=
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ is an integer.
+y=Acot(
+ 
+ Bx
+ )
+ is an odd function.
+
+Graphing Variations of y = cot x
+
+We can transform the graph of the cotangent in much the same way as we did for the tangent. The equation becomes the following.
+
+Features of the Graph of y = Acot(Bx−C)+D
+
+The stretching factor is 
+ 
+ | A |.
+
+The period is 
+
+ π
+ 
+ | B |
+
+ .
+
+The domain is 
+ 
+ x≠
+ C
+ B
+ 
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+The range is 
+ 
+ (−∞,∞).
+
+The vertical asymptotes occur at 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+There is no amplitude.
+y=Acot(Bx)
+ 
+ is an odd function because it is the quotient of even and odd functions (cosine and sine, respectively)
+Given a modified cotangent function of the form 
+ 
+ f(
+ x
+ )=Acot(
+ 
+ Bx
+ ),
+ graph one period.
+
+Express the function in the form 
+ 
+ f(
+ x
+ )=Acot(
+ 
+ Bx
+ ).
+
+Identify the stretching factor, 
+ 
+ | A |.
+
+Identify the period, 
+ 
+ P=
+ π
+ 
+ | B |
+ 
+ .
+
+Draw the graph of 
+ 
+ y=Atan(Bx).
+
+Plot any two reference points.
+
+Use the reciprocal relationship between tangent and cotangent to draw the graph of 
+ 
+ y=Acot(
+ 
+ Bx
+ ).
+
+Sketch the asymptotes.
+
+Graphing Variations of the Cotangent Function
+
+Determine the stretching factor, period, and phase shift of 
+ 
+ y=3cot(4x),
+ and then sketch a graph.
+Step 1. Expressing the function in the form 
+ 
+ f(
+ x
+ )=Acot(
+ 
+ Bx
+ )
+ gives 
+ 
+ f(
+ x
+ )=3cot(
+ 
+ 4x
+ ).
+Step 2. The stretching factor is 
+ 
+ | A |=3.
+Step 3. The period is 
+ 
+ P=
+ π
+ 4
+ 
+ .
+Step 4. Sketch the graph of 
+ 
+ y=3tan(4x).
+Step 5. Plot two reference points. Two such points are 
+ 
+ (
+
+ π
+ 
+ 16
+ 
+ ,3
+ )
+ and 
+ 
+ (
+
+ 3π
+ 
+ 16
+ 
+ ,−3
+ ).
+Step 6. Use the reciprocal relationship to draw 
+ 
+ y=3cot(4x).
+Step 7. Sketch the asymptotes, 
+ 
+ x=0,x=
+ π
+ 4
+ 
+ .
+
+The blue graph in shows 
+ 
+ y=3tan(
+ 
+ 4x
+ )
+ and the green graph shows 
+ 
+ y=3cot(
+ 
+ 4x
+ ).
+Given a modified cotangent function of the form 
+ 
+ f(
+ x
+ )=Acot(
+ 
+ Bx−C
+ )+D,
+ graph one period.
+
+Express the function in the form 
+ 
+ f(
+ x
+ )=Acot(
+ 
+ Bx−C
+ )+D.
+
+Identify the stretching factor, 
+ 
+ | A |.
+
+Identify the period, 
+ 
+ P=
+ π
+ 
+ | B |
+ 
+ .
+
+Identify the phase shift, 
+
+ C
+ B
+ 
+ .
+
+Draw the graph of 
+ 
+ y=Atan(Bx)
+ 
+ shifted to the right by 
+
+ C
+ B
+
+ and up by 
+ 
+ D.
+
+Sketch the asymptotes 
+ 
+ x=
+ C
+ B
+ 
+ +
+ π
+ 
+ | B |
+
+ k,
+ 
+ where 
+ 
+ k
+ 
+ is an integer.
+
+Plot any three reference points and draw the graph through these points.
+
+Graphing a Modified Cotangent
+
+Sketch a graph of one period of the function 
+ 
+ f(
+ x
+ )=4cot(
+
+ π
+ 8
+ 
+ x−
+ π
+ 2
+
+ )−2.
+Step 1. The function is already written in the general form 
+ 
+ f(
+ x
+ )=Acot(
+ 
+ Bx−C
+ )+D.
+Step 2. 
+ 
+ A=4,
+ so the stretching factor is 4.
+Step 3. 
+ 
+ B=
+ π
+ 8
+ 
+ ,
+ so the period is 
+ 
+ P=
+ π
+ 
+ | B |
+
+ =
+ π
+
+ π
+ 8
+
+ =8.
+Step 4. 
+ 
+ C=
+ π
+ 2
+ 
+ ,
+ so the phase shift is 
+
+ C
+ B
+ 
+ =
+
+ π
+ 2
+
+ π
+ 8
+
+ =4.
+Step 5. We draw 
+ 
+ f(
+ x
+ )=4tan(
+
+ π
+ 8
+ 
+ x−
+ π
+ 2
+
+ )−2.
+Step 6-7. Three points we can use to guide the graph are 
+ 
+ (6,2),(8,−2),
+ and 
+ 
+ (10,−6).
+ We use the reciprocal relationship of tangent and cotangent to draw 
+ 
+ f(
+ x
+ )=4cot(
+
+ π
+ 8
+ 
+ x−
+ π
+ 2
+
+ )−2.
+Step 8. The vertical asymptotes are 
+ 
+ x=4
+ and 
+ 
+ x=12.
+
+The graph is shown in .
+
+Using the Graphs of Trigonometric Functions to Solve Real-World Problems
+
+Many real-world scenarios represent periodic functions and may be modeled by trigonometric functions. As an example, let’s return to the scenario from the section opener. Have you ever observed the beam formed by the rotating light on a fire truck and wondered about the movement of the light beam itself across the wall? The periodic behavior of the distance the light shines as a function of time is obvious, but how do we determine the distance? We can use the tangent function.
+
+Using Trigonometric Functions to Solve Real-World Scenarios
+
+Suppose the function 
+ 
+ y=5tan(
+
+ π
+ 4
+ 
+ t
+ )
+ marks the distance in the movement of a light beam from the top of a police car across a wall where 
+ 
+ t
+ is the time in seconds and 
+ 
+ y
+ is the distance in feet from a point on the wall directly across from the police car.
+ⓐ Find and interpret the stretching factor and period.
+ⓑ Graph on the interval 
+ 
+ [ 
+ 0,5 ].
+ⓒ Evaluate 
+ 
+ f(
+ 1
+ )
+ and discuss the function’s value at that input.
+ⓐ We know from the general form of 
+ 
+ y=Atan(
+ 
+ Bt
+ )
+ that 
+ 
+ | A |
+ is the stretching factor and 
+
+ π
+ B
+
+ is the period.
+
+ We see that the stretching factor is 5. This means that the beam of light will have moved 5 ft after half the period.
+ The period is 
+
+ π
+
+ π
+ 4
+
+ =
+ π
+ 1
+ 
+ ⋅
+ 4
+ π
+ 
+ =4.
+ This means that every 4 seconds, the beam of light sweeps the wall. The distance from the spot across from the police car grows larger as the police car approaches.
+
+We see that the stretching factor is 5. This means that the beam of light will have moved 5 ft after half the period.
+
+The period is 
+
+ π
+
+ π
+ 4
+
+ =
+ π
+ 1
+ 
+ ⋅
+ 4
+ π
+ 
+ =4.
+ This means that every 4 seconds, the beam of light sweeps the wall. The distance from the spot across from the police car grows larger as the police car approaches.
+ⓑ To graph the function, we draw an asymptote at 
+ 
+ t=2
+ and use the stretching factor and period. See
+ⓒ period: 
+ 
+ f(1)=5tan(
+
+ π
+ 4
+ 
+ (1)
+ )=5(1)=5;
+ after 1 second, the beam of has moved 5 ft from the spot across from the police car.
+
+Access these online resources for additional instruction and practice with graphs of other trigonometric functions.
+Graphing the Tangent
+Graphing Cosecant and Secant
+Graphing the Cotangent
+
+Key Equations
+
+y=Atan(
+ 
+ Bx−C
+ 
+ )+D
+y=Asec(
+ 
+ Bx−C
+ 
+ )+D
+y=Acsc(
+ 
+ Bx−C
+ 
+ )+D
+y=Acot(
+ 
+ Bx−C
+ 
+ )+D
+Key Concepts
+
+The tangent function has period 
+ 
+ π.
+f(
+ x
+ )=Atan(
+ 
+ Bx−C
+ )+D
+ is a tangent with vertical and/or horizontal stretch/compression and shift. See , , and .
+
+The secant and cosecant are both periodic functions with a period of 
+ 
+ 2π.
+
+ f(
+ x
+ )=Asec(
+ 
+ Bx−C
+ )+D
+ gives a shifted, compressed, and/or stretched secant function graph. See and .
+f(
+ x
+ )=Acsc(
+ 
+ Bx−C
+ )+D
+ gives a shifted, compressed, and/or stretched cosecant function graph. See and .
+
+The cotangent function has period 
+ 
+ π
+ and vertical asymptotes at 
+ 
+ 0,±π,±2π,...
+
+The range of cotangent is 
+ 
+ (
+ 
+ −∞,∞
+ ),
+ and the function is decreasing at each point in its range.
+
+The cotangent is zero at 
+ 
+ ±
+ π
+ 2
+ 
+ ,±
+ 
+ 3π
+ 2
+ 
+ ,...
+f(
+ x
+ )=Acot(
+ 
+ Bx−C
+ )+D
+ is a cotangent with vertical and/or horizontal stretch/compression and shift. See and .
+
+Real-world scenarios can be solved using graphs of trigonometric functions. See .
+
+Section Exercises
+
+Verbal
+
+Explain how the graph of the sine function can be used to graph 
+ 
+ y=cscx.
+
+Since 
+ 
+ y=cscx
+ is the reciprocal function of 
+ 
+ y=sinx,
+ you can plot the reciprocal of the coordinates on the graph of 
+ 
+ y=sinx
+ to obtain the y-coordinates of 
+ 
+ y=cscx.
+ The x-intercepts of the graph 
+ 
+ y=sinx
+ are the vertical asymptotes for the graph of 
+ 
+ y=cscx.
+
+How can the graph of 
+ 
+ y=cosx
+ be used to construct the graph of 
+ 
+ y=secx?
+
+Explain why the period of 
+ 
+ tanx
+ is equal to 
+ 
+ π.
+
+Answers will vary. Using the unit circle, one can show that 
+ 
+ tan(
+ 
+ x+π
+ )=tanx.
+
+Why are there no intercepts on the graph of 
+ 
+ y=cscx?
+
+How does the period of 
+ 
+ y=cscx
+ compare with the period of 
+ 
+ y=sinx?
+
+The period is the same: 
+ 
+ 2π.
+
+Algebraic
+
+For the following exercises, match each trigonometric function with one of the following graphs.
+f(
+ x
+ )=tanx
+f(
+ x
+ )=secx
+
+IV
+f(
+ x
+ )=cscx
+f(
+ x
+ )=cotx
+
+III
+
+For the following exercises, find the period and horizontal shift of each of the functions.
+f(
+ x
+ )=2tan(
+ 
+ 4x−32
+ )
+h(
+ x
+ )=2sec(
+
+ π
+ 4
+ 
+ (
+ 
+ x+1
+ )
+ )
+
+period: 8; horizontal shift: 1 unit to left
+m(
+ x
+ )=6cs
+[truncated]

@@ -1,0 +1,267 @@
+# m58287
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Finding Velocity and Displacement from Acceleration
+
+Finding Velocity and Displacement from Acceleration
+
+By the end of this section, you will be able to:
+
+Derive the kinematic equations for constant acceleration using integral calculus.
+
+Use the integral formulation of the kinematic equations in analyzing motion.
+
+Find the functional form of velocity versus time given the acceleration function.
+
+Find the functional form of position versus time given the velocity function.
+
+This section assumes you have enough background in calculus to be familiar with integration. In Instantaneous Velocity and Speed and Average and Instantaneous Acceleration we introduced the kinematic functions of velocity and acceleration using the derivative. By taking the derivative of the position function we found the velocity function, and likewise by taking the derivative of the velocity function we found the acceleration function. Using integral calculus, we can work backward and calculate the velocity function from the acceleration function, and the position function from the velocity function.
+
+Kinematic Equations from Integral Calculus
+
+Let’s begin with a particle with an acceleration a(t) which is a known function of time. Since the time derivative of the velocity function is acceleration,
+
+we can take the indefinite integral of both sides, finding
+
+where C1 is a constant of integration. Since ∫ddtv(t)dt=v(t), the velocity is given by
+
+Similarly, the time derivative of the position function is the velocity function,
+
+Thus, we can use the same mathematical manipulations we just used and find
+
+where C2 is a second constant of integration.
+
+We can derive the kinematic equations for a constant acceleration using these integrals. With a(t) = a a constant, and doing the integration in , we find
+
+If the initial velocity is v(0) = v0, then
+
+Then, C1 = v0 and
+
+which is . Substituting this expression into gives
+
+Doing the integration, we find
+
+If x(0) = x0, we have
+
+so, C2 = x0. Substituting back into the equation for x(t), we finally have
+
+which is .
+Motion of a MotorboatA motorboat is traveling at a constant velocity of 5.0 m/s when it starts to accelerate opposite to the motion to arrive at the dock. Its acceleration is a(t)=−14tm/s3. (a) What is the velocity function of the motorboat? (b) At what time does the velocity reach zero? (c) What is the position function of the motorboat? (d) What is the displacement of the motorboat from the time it begins to accelerate opposite to the motion to when the velocity is zero? (e) Graph the velocity and position functions.
+
+Motion of a Motorboat
+Strategy(a) To get the velocity function we must integrate and use initial conditions to find the constant of integration. (b) We set the velocity function equal to zero and solve for t. (c) Similarly, we must integrate to find the position function and use initial conditions to find the constant of integration. (d) Since the initial position is taken to be zero, we only have to evaluate the position function at the time when the velocity is zero.
+
+Strategy
+Solution
+We take t = 0 to be the time when the boat starts to accelerate opposite to the motion.
+
+Solution
+
+From the functional form of the acceleration we can solve to get v(t):
+v(t)=∫a(t)dt+C1=∫−14tm/s3dt+C1=−18m/s3t2+C1.
+At t = 0 we have v(0) = 5.0 m/s = 0 + C1, so C1 = 5.0 m/s or v(t)=5.0m/s−18m/s3t2.
+v(t)=0=5.0m/s−18t2
+
+m/s3
+
+⇒t=6.3s
+
+Solve :
+x(t)=∫v(t)dt+C2=∫(5.0−18t2)dt+C2=
+
+ 5.0tm/s−124t3m/s3+C2.
+
+At t = 0, we set x(0) = 0 = x0, since we are only interested in the displacement from when the boat starts to accelerate opposite to the motion. We have
+x(0)=0=C2.
+Therefore, the equation for the position is
+x(t)=5.0tm/s−124t3m/s3.
+
+Since the initial position is taken to be zero, we only have to evaluate the position function at the time when the velocity is zero. This occurs at t = 6.3 s. Therefore, the displacement is
+x(6.3)=5.0tm/s(6.3s)−124t3m/ss(6.3s)3=21.1m.
+Significance
+The acceleration function is linear in time so the integration involves simple polynomials. In , we see that if we extend the solution beyond the point when the velocity is zero, the velocity becomes negative and the boat reverses direction. This tells us that solutions can give us information outside our immediate interest and we should be careful when interpreting them.
+
+Significance
+
+A particle starts from rest and has an acceleration function
+a(t)=(5–(101s)t)ms2. (a) What is the velocity function? (b) What is the position function? (c) When is the velocity zero?
+
+The velocity function is the integral of the acceleration function plus a constant of integration. By ,
+v(t)=∫a(t)dt+C1=∫(5−10t)dt+C1=5t−5t2+C1.
+Since v(0) = 0, we have C1 = 0; so,
+v(t)=5t−5t2.
+
+By ,
+x(t)=∫v(t)dt+C2=∫(5t−5t2)dt+C2=52t2−53t3+C2.
+Since x(0) = 0, we have C2 = 0, and
+x(t)=52t2−53t3.
+
+The velocity can be written as v(t) = 5t(1 – t), which equals zero at t = 0, and t = 1 s.
+
+Summary
+
+Integral calculus gives us a more complete formulation of kinematics.
+
+If acceleration a(t) is known, we can use integral calculus to derive expressions for velocity v(t) and position x(t).
+
+If acceleration is constant, the integral equations reduce to and for motion with constant acceleration.
+
+Key Equations
+
+Δx=xf−xi
+ΔxTotal=∑ Δxi
+v–=ΔxΔt=x2−x1t2−t1
+v(t)=dx(t)dt
+Average speed=s–=Total distanceElapsed time
+Instantaneous speed=|v(t)|
+a–=ΔvΔt=vf−v0tf−t0
+a(t)=dv(t)dt
+x=x0+v–t
+v–=v0+v2
+v=v0+at(constanta)
+x=x0+v0t+12at2(constanta)
+v2=v02+2a(x−x0)(constanta)
+v=v0−gt(positive upward)
+y=y0+v0t−12gt2
+v2=v02−2g(y−y0)
+v(t)=∫a(t)dt+C1
+x(t)=∫v(t)dt+C2
+Conceptual Questions
+
+When given the acceleration function, what additional information is needed to find the velocity function and position function?
+
+Problems
+
+The acceleration of a particle varies with time according to the equation a(t)=pt2−qt3. Initially, the velocity and position are zero. (a) What is the velocity as a function of time? (b) What is the position as a function of time?
+
+Between t = 0 and t = t0, a rocket moves straight upward with an acceleration given by a(t)=A−Bt1/2, where A and B are constants. (a) If x is in meters and t is in seconds, what are the units of A and B? (b) If the rocket starts from rest, how does the velocity vary between t = 0 and t = t0? (c) If its initial position is zero, what is the rocket’s position as a function of time during this same time interval?
+
+a. A=m/s2B=m/s5/2;
+b. v(t)=∫a(t)dt+C1=∫(A−Bt1/2)dt+C1=At−23Bt3/2+C1v(0)=0=C1sov(t0)=At0−23Bt03/2;
+c. x(t)=∫v(t)dt+C2=∫(At−23Bt3/2)dt+C2=12At2−415Bt5/2+C2x(0)=0=C2sox(t0)=12At02−415Bt05/2
+
+The velocity of a particle moving along the x-axis varies with time according to v(t)=A+Bt−1, where A = 2 m/s, B = 0.25 m, and 1.0s≤t≤8.0s. Determine the acceleration and position of the particle at t = 2.0 s and t = 5.0 s. Assume that x(t=1s)=0.
+
+A particle at rest leaves the origin with its velocity increasing with time according to v(t) = 3.2t m/s. At 5.0 s, the particle’s velocity starts decreasing according to [16.0 – 1.5(t – 5.0)] m/s. This decrease continues until t = 11.0 s, after which the particle’s velocity remains constant at 7.0 m/s. (a) What is the acceleration of the particle as a function of time? (b) What is the position of the particle at t = 2.0 s, t = 7.0 s, and t = 12.0 s?
+
+a. a(t)=3.2m/s2t≤5.0sa(t)=1.5m/s25.0s≤t≤11.0sa(t)=0m/s2t>11.0s;
+b. x(t)=∫v(t)dt+C2=∫3.2tdt+C2=1.6t2+C2t≤5.0sx(0)=0⇒C2=0therefore,x(2.0s)=6.4mx(t)=∫v(t)dt+C2=∫[16.0−1.5(t−5.0)]dt+C2=16t−1.5(t22−5.0t)+C25.0≤t≤11.0sx(5s)=1.6(5.0)2=40m=16(5.0s)−1.5(522−5.0(5.0))+C240=98.75+C2⇒C2=−58.75x(7.0s)=16(7.0)−1.5(722−5.0(7))−58.75=69mx(t)=∫7.0dt+C2=7t+C2t≥11.0sx(11.0s)=16(11)−1.5(1122−5.0(11))−58.75=109=7(11.0s)+C2⇒C2=32mx(t)=7t+32mx≥11.0s⇒x(12.0s)=7(12)+32=116m
+
+Additional Problems
+
+Professional baseball player Nolan Ryan could pitch a baseball at approximately 160.0 km/h. At that average velocity, how long did it take a ball thrown by Ryan to reach home plate, which is 18.4 m from the pitcher’s mound? Compare this with the average reaction time of a human to a visual stimulus, which is 0.25 s.
+
+An airplane leaves Chicago and makes the 3000-km trip to Los Angeles in 5.0 h. A second plane leaves Chicago one-half hour later and arrives in Los Angeles at the same time. Compare the average velocities of the two planes. Ignore the curvature of Earth and the difference in altitude between the two cities.
+
+Take west to be the positive direction.
+1st plane: ν–=600km/h
+2nd plane ν–=667.0km/h
+Unreasonable Results A cyclist rides 16.0 km east, then 8.0 km west, then 8.0 km east, then 32.0 km west, and finally 11.2 km east. If his average velocity is 24 km/h, how long did it take him to complete the trip? Is this a reasonable time?
+
+An object has an acceleration of +1.2cm/s2. At t=4.0s, its velocity is −3.4cm/s. Determine the object’s velocities at t=1.0s and t=6.0s.
+a=v−v0t−t0, t=0,a=−3.4cm/s−v04s=1.2cm/s2⇒v0=−8.2cm/s v=v0+at=−8.2+1.2t; v=−7.0cm/sv=−1.0cm/s
+
+A particle moves along the x-axis according to the equation x(t)=2.0−4.0t2 m. What are the velocity and acceleration at t=2.0 s and t=5.0 s?
+
+A particle moving at constant acceleration has velocities of 2.0m/s at t=2.0 s and −7.6m/s at t=5.2 s. What is the acceleration of the particle?
+a=−3m/s2
+
+A train is moving up a steep grade at constant velocity (see following figure) when its caboose breaks loose and starts rolling freely along the track. After 5.0 s, the caboose is 30 m behind the train. What is the acceleration of the caboose?
+
+An electron is moving in a straight line with a velocity of 4.0×105 m/s. It enters a region 5.0 cm long where it undergoes an acceleration of 6.0×1012m/s2 along the same straight line. (a) What is the electron’s velocity when it emerges from this region? b) How long does the electron take to cross the region?
+
+a.v=8.7×105m/s;b. t=7.8×10−8s
+
+An ambulance driver is rushing a patient to the hospital. While traveling at 72 km/h, she notices the traffic light at the upcoming intersections has turned amber. To reach the intersection before the light turns red, she must travel 50 m in 2.0 s. (a) What minimum acceleration must the ambulance have to reach the intersection before the light turns red? (b) What is the speed of the ambulance when it reaches the intersection?
+
+A motorcycle that is slowing down uniformly covers 2.0 successive km in 80 s and 120 s, respectively. Calculate (a) the acceleration of the motorcycle and (b) its velocity at the beginning and end of the 2-km trip.
+1km=v0(80.0s)+12a(80.0)2; 2km=v0(200.0)+12a(200.0)2 solve simultaneously to get a=−0.12400.0km/s2 and v0=0.014167km/s, which is 51.0km/h. Velocity at the end of the trip is v=21.0km/h.
+
+A cyclist travels from point A to point B in 10 min. During the first 2.0 min of her trip, she maintains a uniform acceleration of 0.090m/s2. She then travels at constant velocity for the next 5.0 min. Next, she accelerates opposite to the motion at a constant rate so that she comes to a rest at point B 3.0 min later. (a) Sketch the velocity-versus-time graph for the trip. (b) What is the acceleration during the last 3 min? (c) How far does the cyclist travel?
+
+Two trains are moving at 30 m/s in opposite directions on the same track. The engineers see simultaneously that they are on a collision course and apply the brakes when they are 1000 m apart. Assuming both trains have the same acceleration, what must this acceleration be if the trains are to stop just short of colliding?
+a=−0.9m/s2
+
+A 10.0-m-long truck moving with a constant velocity of 97.0 km/h passes a 3.0-m-long car moving with a constant velocity of 80.0 km/h. How much time elapses between the moment the front of the truck is even with the back of the car and the moment the back of the truck is even with the front of the car?
+
+A police car waits in hiding slightly off the highway. A speeding car is spotted by the police car doing 40 m/s. At the instant the speeding car passes the police car, the police car accelerates from rest at 4 m/s2 to catch the speeding car. How long does it take the police car to catch the speeding car?
+
+Equation for the speeding car: This car has a constant velocity, which is the average velocity, and is not accelerating, so use the equation for displacement with x0=0:x=x0+v–t=v–t; Equation for the police car: This car is accelerating, so use the equation for displacement with x0=0 and v0=0, since the police car starts from rest: x=x0+v0t+12at2=12at2; Now we have an equation of motion for each car with a common parameter, which can be eliminated to find the solution. In this case, we solve for t. Step 1, eliminating x: x=v–t=12at2; Step 2, solving for t: t=2v–a. The speeding car has a constant velocity of 40 m/s, which is its average velocity. The acceleration of the police car is 4 m/s2. Evaluating t, the time for the police car to reach the speeding car, we have t=2v–a=2(40)4=20s.
+
+Pablo is running in a half marathon at a velocity of 3 m/s. Another runner, Jacob, is 50 meters behind Pablo with the same velocity. Jacob begins to accelerate at 0.05 m/s2. (a) How long does it take Jacob to catch Pablo? (b) What is the distance covered by Jacob? (c) What is the final velocity of Jacob?
+Unreasonable results A runner approaches the finish line and is 75 m away; her speed at this position is 8 m/s. She accelerates opposite to the motion at this point at 0.5 m/s2. How long does it take her to cross the finish line from 75 m away? Is this reasonable?
+
+At this acceleration she comes to a full stop in t=−v0a=80.5=16s, but the distance covered is x=8m/s(16s)−12(0.5)(16s)2=64m, which is less than the distance she is away from the finish line, so she never finishes the race.
+
+An airplane accelerates at 5.00 m/s2 for 30.0 s. During this time, it covers a distance of 10.0 km. What are the initial and final velocities of the airplane?
+
+Compare the distance traveled of an object that undergoes a change in velocity that is twice its initial velocity with an object that changes its velocity by four times its initial velocity over the same time period. The accelerations of both objects are constant.
+x1=32v0t
+x2=53x1
+
+An object is moving east with a constant velocity and is at position x0attimet0=0. (a) With what acceleration must the object have for its total displacement to be zero at a later time t ? (b) What is the physical interpretation of the solution in the case for t→∞?
+
+A ball is thrown straight up. It passes a 2.00-m-high window 7.50 m off the ground on its path up and takes 1.30 s to go past the window. What was the ball’s initial velocity?
+v0=7.9m/s velocity at the bottom of the window.
+v=7.9m/s
+v0=14.5m/s
+
+A coin is dropped from a hot-air balloon that is 300 m above the ground and rising at 10.0 m/s upward. For the coin, find (a) the maximum height reached, (b) its position and velocity 4.00 s after being released, and (c) the time before it hits the ground.
+
+A soft tennis ball is dropped onto a hard floor from a height of 1.50 m and rebounds to a height of 1.10 m. (a) Calculate its velocity just before it strikes the floor. (b) Calculate its velocity just after it leaves the floor on its way back up. (c) Calculate its acceleration during contact with the floor if that contact lasts 3.50 ms (3.50×10−3s) (d) How much did the ball compress during its collision with the floor, assuming the floor is absolutely rigid?
+
+a. v=5.42m/s;
+b. v=4.64m/s;
+c. a=2874.28m/s2;
+d. (x−x0)=5.11×10−3m
+Unreasonable results. A raindrop falls from a cloud 100 m above the ground. Neglect air resistance. What is the speed of the raindrop when it hits the ground? Is this a reasonable number?
+
+Compare the time in the air of a basketball player who jumps 1.0 m vertically off the floor with that of a player who jumps 0.3 m vertically.
+
+Consider the players fall from rest at the height 1.0 m and 0.3 m.
+0.9 s
+0.5 s
+
+Suppose that a person takes 0.5 s to react and move his hand to catch an object he has dropped. (a) How far does the object fall on Earth, where g=9.8m/s2? (b) How far does the object fall on the Moon, where the acceleration due to gravity is 1/6 of that on Earth?
+
+A hot-air balloon rises from ground level at a constant velocity of 3.0 m/s. One minute after liftoff, a sandbag is dropped accidentally from the balloon. Calculate (a) the time it takes for the sandbag to reach the ground and (b) the velocity of the sandbag when it hits the ground.
+
+a. t=6.37s taking the positive root;
+b. v=59.5m/s
+
+(a) A world record was set for the men’s 100-m dash in the 2008 Olympic Games in Beijing by Usain Bolt of Jamaica. Bolt “coasted” across the finish line with a time of 9.69 s. If we assume that Bolt accelerated for 3.00 s to reach his maximum speed, and maintained that speed for the rest of the race, calculate his maximum speed and his acceleration. (b) During the same Olympics, Bolt also set the world record in the 200-m dash with a time of 19.30 s. Using the same assumptions as for the 100-m dash, what was his maximum speed for this race?
+
+An object is dropped from a height of 75.0 m above ground level. (a) Determine the distance traveled during the first second. (b) Determine the final velocity at which the object hits the ground. (c) Determine the distance traveled during the last second of motion before hitting the ground.
+
+a. y=4.9m;
+b. v=38.3m/s;
+c. −33.3m
+
+A steel ball is dropped onto a hard floor from a height of 1.50 m and rebounds to a height of 1.45 m. (a) Calculate its velocity just before it strikes the floor. (b) Calculate its velocity just after it leaves the floor on its way back up. (c) Calculate its acceleration during contact with the floor if that contact lasts 0.0800 ms (8.00×10−5s) (d) How much did the ball compress during its collision with the floor, assuming the floor is absolutely rigid?
+
+An object is dropped from a roof of a building of height h. During the last second of its descent, it drops a distance h/3. Calculate the height of the building.
+h=12gt2, h = total height and time to drop to ground
+23h=12g(t−1)2 in t – 1 seconds it drops 2/3h
+23(12gt2)=12g(t−1)2 or t23=12(t−1)2
+0=t2−6t+3 t=6±62−4·32=3±242
+t = 5.45 s and h = 145.5 m. Other root is less than 1 s. Check for t = 4.45 s h=12gt2=97.0 m =23(145.5)
+
+Challenge Problems
+
+In a 100-m race, the winner is timed at 11.2 s. The second-place finisher’s time is 11.6 s. How far is the second-place finisher behind the winner when she crosses the finish line? Assume the velocity of each runner is constant throughout the race.
+
+The position of a particle moving along the x-axis varies with time according to x(t)=5.0t2−4.0t3 m. Find (a) the velocity and acceleration of the particle as functions of time, (b) the velocity and acceleration at t = 2.0 s, (c) the time at which the position is a maximum, (d) the time at which the velocity is zero, and (e) the maximum position.
+
+a. v(t)=10t−12t2m/s,a(t)=10−24tm/s2;
+b. v(2s)=−28m/s,a(2s)=−38m/s2; c. The slope of the position function is zero or the velocity is zero. There are two possible solutions: t = 0, which gives x = 0, or t = 10.0/12.0 = 0.83 s, which gives x = 1.16 m. The second answer is the correct choice; d. 0.83 s (e) 1.16 m
+
+A cyclist sprints at the end of a race to clinch a victory. She has an initial velocity of 11.5 m/s and accelerates at a rate of 0.500 m/s2 for 7.00 s. (a) What is her final velocity? (b) The cyclist continues at this velocity to the finish line. If she is 300 m from the finish line when she starts to accelerate, how much time did she save? (c) The second-place winner was 5.00 m ahead when the winner started to accelerate, but he was unable to accelerate, and traveled at 11.8 m/s until the finish line. What was the difference in finish time in seconds between the winner and runner-up? How far back was the runner-up when the winner crossed the finish line?
+
+In 1967, New Zealander Burt Munro set the world record for an Indian motorcycle, on the Bonneville Salt Flats in Utah, of 295.38 km/h. The one-way course was 8.00 km long. Acceleration rates are often described by the time it takes to reach 96.0 km/h from rest. If this time was 4.00 s and Burt accelerated at this rate until he reached his maximum speed, how long did it take Burt to complete the course?
+96km/h=26.67m/s,a=26.67m/s4.0s=6.67m/s2, 295.38 km/h = 82.05 m/s, t=12.3s time to accelerate to maximum speed
+x=504.55m distance covered during acceleration
+7495.44m at a constant speed
+7495.44m82.05m/s=91.35s so total time is 91.35s+12.3s=103.65s.

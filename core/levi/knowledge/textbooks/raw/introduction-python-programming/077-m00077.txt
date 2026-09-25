@@ -1,0 +1,62 @@
+# m00077
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Conditionals and looping in dictionaries
+
+Conditionals and looping in dictionaries
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Write a conditional statement to check for a key/value.
+
+Write a for loop to iterate over elements of a dictionary.
+
+Conditionals for dictionary
+
+Conditional statements can be used with dictionaries to check if certain keys, values, or dictionary items exist in the dictionary or if a value satisfies a particular condition.
+
+Templates and examples of a conditional statement on a dictionary
+
+True
+
+True
+
+True
+
+True
+
+Conditionals on dictionaries
+
+Given the dictionary fruit_count = {"apple": 2, "orange": 5, "pomegranate": 1}, answer the following questions.
+
+Looping on a dictionary
+
+Looping over a Python dictionary is a way to iterate through key-value pairs in the dictionary. Looping in a dictionary can be done by iterating over keys or items. When looping using keys, keys are obtained using the keys() function and are passed to the loop variable one at a time. When looping over items using the items() function, both the key and value for each item are passed to the loop variable.
+
+A for loop over a dictionary retrieves each key in the dictionary
+
+Iterating over a dictionary
+
+Berkeley 94709
+Santa Cruz 95064
+Mountain View 94030
+Berkeley
+Santa Cruz
+Mountain View
+94709
+95064
+94030
+Loops on dictionaries
+
+Character count in a string
+
+Given a string value, calculate and print the number of occurrences of all characters using a dictionary.
+
+Calculate the total number of fruits
+
+Given a fruit_count dictionary that contains information about fruits and the count of each fruit, calculate the total number of fruits across all fruit types.

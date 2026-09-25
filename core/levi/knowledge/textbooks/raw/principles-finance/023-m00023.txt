@@ -1,0 +1,111 @@
+# m00023
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Sources and Characteristics of Economic Data
+
+Sources and Characteristics of Economic Data
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Interpret economic data.
+
+Compute the percent change for economic variables.
+
+FRED: Federal Reserve Economic Data
+
+One of the largest sources of economic data is the Federal Reserve Economic Data (FRED) database.Federal Reserve Bank of St. Louis. Economic Resources & Data. Accessed October 25, 2021. https://www.stlouisfed.org/ This database is maintained by the Federal Reserve Bank of St. Louis and contains more than 765,000 economic time series. These time series are compiled by the Federal Reserve and come from a number of sources, including the Bureau of Labor Statistics and the US Census.
+
+FRED
+
+Data included in the FRED database is divided into these broad categories:
+
+Money, Banking, and Finance
+
+Population, Employment, and Labor Markets
+
+National Accounts
+
+Production and Business Activity
+
+Prices
+
+International Data
+
+US Regional Data
+
+Academic Data
+
+Watch this FRED introduction video to learn more information about how to use FRED.
+
+You can find statistics on employment, inflation, exchange rates, gross domestic product, interest rates, and many other economic variables in the FRED database. Although much of the data is about the US markets, macroeconomic data from other countries is also available. In addition to being viewable in graphical and text form on the FRED site, the data is easily downloaded into an Excel spreadsheet for analysis.
+
+Creating a Stacked Area Graph
+
+Not only does FRED provide an excellent source for economic data, but it allows users to create custom graphs that can be used in presentations and reports. To learn more about how to create these graphs, read this article on using stacking. This tutorial provides step-by-step instructions for creating a stacked area graph of real GDP and its separate components and a real GDP area graph showing the percent that each of these components contributes to the total value of real GDP.
+
+Levels versus Percentage Changes
+
+The same information can be presented in graphs several different ways. The particular format you choose will depend on how you are using the data.
+shows the real GDP of Japan for 2010–2020. This chart is created showing the level of real GDP. The steep drop in 2020 highlights the economic decline associated with the COVID-19 pandemic. Looking at the chart, it is easy to see that after 10 years of a general upward trend, Japan’s GDP quickly fell to a level not seen in the previous decade as COVID-19 began spreading in early 2020.
+
+Real Gross Domestic Product for Japan, 2010–2020Data from JP, Cabinet Office. “Real Gross Domestic Product for Japan (JPNRGDPEXP).” FRED. Federal Reserve Bank of St. Louis, accessed July 7, 2021. https://fred.stlouisfed.org/series/JPNRGDPEXP
+
+The vertical axis in is measured in yen. Over the time period shown, the real GDP ranged from 500 trillion yen to 560 trillion yen. The general trend (until COVID-19) was upward, indicating growth in the Japanese economy. However, the growth was not consistent from year to year.
+also contains information about Japanese real GDP from 2010 to 2020. This chart measures the percent change for each quarter on the vertical axis. It is created using the same underlying data as . demonstrates a way of highlighting the growth (or contraction) of an economy at a particular point in time.
+
+Percent Change for Gross Domestic Product for Japan, 2010–2020Data from JP, Cabinet Office. “Real Gross Domestic Product for Japan (JPNRGDPEXP).” FRED. Federal Reserve Bank of St. Louis, accessed July 7, 2021. https://fred.stlouisfed.org/series/JPNRGDPEXP
+
+The formula to calculate the percentage change from one quarter to the next is
+
+In the first quarter of 2013, the real GDP for Japan was 522,594.2 billion yen. In the second quarter of 2013, the real GDP had risen to 527,277.0 billion yen. Thus, the percentage change in real GDP from quarter one to quarter two was
+
+As long as the percentage change for a quarter is positive, the real GDP in will rise; this indicates that the economy is growing. If the percentage change shown in is negative, then real GDP will fall; this indicates that the economy is contracting. Looking at the percentage change in is helpful for detecting when the economy is growing but the growth is slowing. If the percentage change is positive but lower than it was for the previous quarter, then GDP is growing, but the growth rate is slowing.
+
+Indexes
+
+An index is created to track the performance of a particular aspect of the economy or the financial markets. An index helps compare the level of a variable at one point in time relative to another point in time. Indexes are often used when movement over time is more important than the absolute level of the variable at any one point in time.
+
+Earlier in this chapter, we looked at the rate of change in the CPI to measure the rate of inflation. In its raw form, the CPI is an index. Remember that the CPI is a measure of the cost of a market basket of goods. When the index is created, the total cost of the market basket, whether it is $300 or $950, is irrelevant. What economists are interested in is the magnitude of the difference in cost of the same market basket at a later date.
+
+In order to focus on the change over time, a base year is identified. The cost of the market basket in the base year is given an index level of 100. Let’s assume that the market basket costs $300 in the base year. If the same basket of goods costs $330 the following year, then the index level the following year would be 110. The index level increases by 10% when the cost of the market basket increases by 10%. This makes it easy to compare different measures of inflation.
+
+For example, suppose a market basket costs 40,000 yen in the first year and 42,000 yen in the second year. In the base year, the CPI in Japan would be set at 100; the following year, the index would rise to 105 (because of the 5% rise in the market basket cost). Comparing the levels of the index in Japan with the index in the United States allows you to compare inflation trends in the two countries.
+contains the CPI for the United States, Japan, and Switzerland for each decade since 1970. A base year of 1970 is used for all three countries, so the index level is 100 for all three countries in 1970. You can see that Japan has experienced virtually no inflation for the last several decades. If the index level remains the same from one year to the next, there is a zero rate of inflation. Negative rates of inflation, or deflation, would be associated with a falling index level.
+
+CPI Levels for the United States, Switzerland, and JapanData from US Bureau of Labor Statistics. “Consumer Price Index for All Urban Consumers: All Items in US City Average (CPIAUCNS).” FRED. Federal Reserve Bank of St. Louis, accessed July 31, 2021. https://fred.stlouisfed.org/series/CPIAUCNS; Organization for Economic Co-operation and Development. “Consumer Price Index: All Items for Switzerland (CHECPIALLMINMEI).” FRED. Federal Reserve Bank of St. Louis, accessed July 31, 2021. https://fred.stlouisfed.org/series/CHECPIALLMINMEI; Organization for Economic Co-operation and Development. “Consumer Price Index of All Items in Japan (JPNCPIALLMINMEI).” FRED. Federal Reserve Bank of St. Louis, accessed July 31, 2021. https://fred.stlouisfed.org/series/JPNCPIALLMINMEI
+
+Japan
+1970
+100.0
+100.0
+100.0
+1980
+212.3
+162.3
+232.5
+1990
+336.5
+226.4
+291.2
+2000
+443.5
+278.2
+322.1
+2010
+561.6
+304.3
+313.6
+2020
+666.6
+302.3
+331.8
+Using an index level helps us compare the impact that inflation has had on the cost of living in the three countries. Prices were rising rapidly in Japan in the 1970s, outpacing price increases in both the United States and Switzerland. By the mid-1980s, however, price increases in Japan tapered off. Although prices in Switzerland rose much more slowly in the 1970s, the price level continued to rise over the next couple of decades. Even though the price increases have followed different patterns in Switzerland and Japan, the overall price level today is about three times what it was in 1970 in both of those countries. However, the price level in the United States has continued to rise; today, the price level in the United States is about seven times higher than it was in in the 1970s.
+
+One of the most comprehensive sources of economic data is the FRED database, maintained by the Federal Reserve Bank of St. Louis. Over 765,000 time series of data are available. In addition to being viewable in graphical and text form on the FRED site, the data is easily downloaded into an Excel spreadsheet for analysis.
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.

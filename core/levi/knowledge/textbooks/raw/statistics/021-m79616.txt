@@ -1,0 +1,1285 @@
+# m79616
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Contingency Tables
+
+Contingency Tables
+
+A two-way table provides a way of portraying data that can facilitate calculating probabilities. When used to calculate probabilities, a two-way table is often called a contingency table. The table helps in determining conditional probabilities quite easily. The table displays sample values in relation to two different variables that may be dependent or contingent on one another. We used two-way tables in Chapters 1 and 2 to calculate marginal and conditional distributions. These tables organize data in a way that supports the calculation of relative frequency and, therefore, experimental (empirical) probability. Later on, we will use contingency tables again, but in another manner.
+
+Suppose a study of speeding violations and drivers who use cell phones produced the following fictional data:
+
+Speeding Violation in the Last Year
+No Speeding Violation in the Last Year
+Total
+
+Uses a cell phone while driving
+25
+280
+305
+
+Does not use a cell phone while driving
+45
+405
+450
+
+Total
+70
+685
+755
+
+Speeding Violation in the Last Year
+No Speeding Violation in the Last Year
+Total
+Uses a cell phone while driving
+25
+280
+305
+Does not use a cell phone while driving
+45
+405
+450
+Total
+70
+685
+755
+The total number of people in the sample is 755. The row totals are 305 and 450. The column totals are 70 and 685. Notice that 305 + 450 = 755 and 70 + 685 = 755.
+
+Using the table, calculate the following probabilities:
+
+Find P(Person uses a cell phone while driving).
+
+Find P(Person had no violation in the last year).
+
+Find P(Person had no violation in the last year and uses a cell phone while driving).
+
+Find P(Person uses a cell phone while driving or person had no violation in the last year).
+
+Find P(Person uses a cell phone while driving given person had a violation in the last year).
+
+Find P(Person had no violation last year given person does not use a cell phone while driving).
+
+a. This is the same as the marginal distribution (Section 1.2).
+
+b. The marginal distribution is
+
+c. Find the number of participants who satisfy both conditions.
+
+d. To find this probability, you need to identify how many participants use a cell phone while driving OR have no violation in the past year OR both.
+P(
+ 
+ Person uses a cell phone while drivingORhad no violation in the last year
+ 
+ )
+ 
+ =
+ 
+ 25+405+280
+
+ 755
+
+e. This is a conditional probability. You are given that the person had no violation in the last year, so you need only consider the values in that column of data.
+
+f. For this conditional probability, consider only values in the row labeled Does not use a cell phone while driving.
+
+Try it
+shows the number of athletes who stretch before exercising and how many had injuries within the past year.
+
+Injury in Past Year
+No Injury in Past Year
+Total
+
+Stretches
+55
+295
+350
+
+Does not stretch
+231
+219
+450
+
+Total
+286
+514
+800
+
+Injury in Past Year
+No Injury in Past Year
+Total
+Stretches
+55
+295
+350
+Does not stretch
+231
+219
+450
+Total
+286
+514
+800
+What is P(Athlete stretches before exercising)?
+
+What is P(Athlete stretches before exercising|no injury in the last year)?
+P(Athlete stretches before exercising) = 
+
+350
+
+800
+
+ = 0.4375
+P(Athlete stretches before exercising|no injury in the last year) = 
+
+295
+
+514
+
+ = 0.5739
+shows a random sample of 100 hikers and the areas of hiking they prefer.
+
+Hiking Area Preference
+
+Sex
+The Coastline
+Near Lakes and Streams
+On Mountain Peaks
+Total
+Female
+18
+16
+___
+45
+Male
+___
+___
+14
+55
+Total
+___
+41
+___
+___
+a. Complete the table.
+
+a. There are 45 females in the sample; 18 prefer the coastline and 16 prefer hiking near lakes and streams. So, we know there are 45 − 18 − 16 = 11 female students who prefer hiking on mountain peaks.
+
+Continue reasoning in this way to complete the table.
+
+Hiking Area Preference
+
+Sex
+The Coastline
+Near Lakes and Streams
+On Mountain Peaks
+Total
+
+Female
+18
+16
+11
+45
+
+Male
+16
+25
+14
+55
+
+Total
+34
+41
+25
+100
+
+Hiking Area Preference
+
+Sex
+The Coastline
+Near Lakes and Streams
+On Mountain Peaks
+Total
+Female
+18
+11
+45
+25
+14
+55
+34
+100
+b. Are the events being female and preferring the coastline independent events?
+
+Let F = being female and let C = preferring the coastline.
+
+Find P(F AND C).
+
+Find P(F)P(C).
+
+Are these two numbers the same? If they are, then F and C are independent. If they are not, then F and C are not independent.
+
+b.P(F AND C) = 
+
+18
+
+100
+
+ = .18
+P(F)P(C) = 
+
+(
+
+45
+
+100
+
+)(
+
+34
+
+100
+
+)
+
+ = (.45)(.34) = .153
+P(F AND C) = 
+
+18
+
+100
+
+ = .18
+P(F)P(C) = 
+
+(
+
+45
+
+100
+
+)(
+
+34
+
+100
+
+)
+
+ = (.45)(.34) = .153
+P(F AND C) ≠ P(F)P(C), so the events F and C are not independent.
+
+c. Find the probability that a person is male given that the person prefers hiking near lakes and streams. Let M = being male, and let L = prefers hiking near lakes and streams.
+
+What word tells you this is a conditional?
+
+Is the sample space for this problem all 100 hikers? If not, what is it?
+
+Fill in the blanks and calculate the probability: P(_____|_____) = _____.
+
+c. The word given tells you that this is a conditional.
+No, the sample space for this problem is the 41 hikers who prefer lakes and streams.
+Find the conditional probability P(M|L). Because it is given that the person prefers hiking near lakes and streams, you need only consider the values in the column labeled "Near Lakes and Streams." P(M|L) = 
+
+25
+
+41
+
+The word given tells you that this is a conditional.
+
+No, the sample space for this problem is the 41 hikers who prefer lakes and streams.
+
+Find the conditional probability P(M|L). Because it is given that the person prefers hiking near lakes and streams, you need only consider the values in the column labeled "Near Lakes and Streams." P(M|L) = 
+
+25
+
+41
+
+d. Find the probability that a person is female or prefers hiking on mountain peaks. Let F = being female, and let P = prefers mountain peaks.
+
+Find P(F).
+
+Find P(P).
+
+Find P(F AND P).
+
+Find P(F OR P).
+
+d. 
+P(F) = 
+
+45
+
+100
+
+P(P) = 
+
+25
+
+100
+
+P(F AND P) = 
+
+ number of hikers that are both female AND prefers mountain peaks
+
+ number of hikers in study
+
+ = 
+
+11
+
+100
+
+P(F OR P) = P(F) + P(P) − P(F AND P) = 
+
+45
+
+100
+
+ + 
+
+25
+
+100
+
+ - 
+
+11
+
+100
+
+ = 
+
+59
+
+100
+P(F) = 
+
+45
+
+100
+P(P) = 
+
+25
+
+100
+P(F AND P) = 
+
+ number of hikers that are both female AND prefers mountain peaks
+
+ number of hikers in study
+
+ = 
+
+11
+
+100
+P(F OR P) = P(F) + P(P) − P(F AND P) = 
+
+45
+
+100
+
+ + 
+
+25
+
+100
+
+ - 
+
+11
+
+100
+
+ = 
+
+59
+
+100
+
+Try It
+shows a random sample of 200 cyclists and the routes they prefer. Let M = males and H = hilly path.
+
+Gender
+Lake Path
+Hilly Path
+Wooded Path
+Total
+
+Female
+45
+38
+27
+110
+
+Male
+26
+52
+12
+90
+
+Total
+71
+90
+39
+200
+
+Gender
+Lake Path
+Hilly Path
+Wooded Path
+Total
+Female
+45
+38
+27
+110
+Male
+26
+52
+12
+90
+Total
+71
+90
+39
+200
+Out of the males, what is the probability that the cyclist prefers a hilly path?
+
+Are the events being male and preferring the hilly path independent events?
+P(H|M) = 
+
+52
+
+90
+
+ = 0.5778
+
+For M and H to be independent, show P(H|M) = P(H)
+P(H|M) = 0.5778, P(H) = 
+
+90
+
+200
+
+ = 0.45
+P(H|M) does not equal P(H) so M and H are NOT independent.
+
+Muddy Mouse lives in a cage with three doors. If Muddy goes out the first door, the probability that he gets caught by Alissa the cat is 
+
+1
+5
+
+ and the probability he is not caught is 
+
+4
+5
+
+. If he goes out the second door, the probability he gets caught by Alissa is 
+
+1
+4
+
+ and the probability he is not caught is 
+
+3
+4
+
+. The probability that Alissa catches Muddy coming out of the third door is 
+
+1
+2
+
+ and the probability she does not catch Muddy is 
+
+1
+2
+
+. It is equally likely that Muddy will choose any of the three doors, so the probability of choosing each door is 
+
+1
+3
+
+.
+
+Door Choice
+
+Caught or Not
+Door One
+Door Two
+Door Three
+Total
+1
+6
+____
+1
+6
+____
+Total
+____
+____
+____
+1
+The first entry 
+
+1
+15
+
+ = (
+
+1
+5
+
+)
+(
+
+1
+3
+
+) is P(Door One AND Caught).
+
+The entry
+
+4
+15
+
+= (
+
+4
+5
+
+)(
+
+1
+3
+
+) is P(Door One AND Not Caught).
+
+Verify the remaining entries.
+
+a. Complete the probability contingency table. Calculate the entries for the totals. Verify that the lower-right corner entry is 1.
+
+a. Door Choice
+
+Caught or Not
+Door One
+Door Two
+Door Three
+Total
+
+Caught
+
+1
+15
+
+1
+12
+
+1
+6
+
+1960
+
+Not Caught
+
+4
+15
+
+3
+12
+
+1
+6
+
+4160
+
+Total
+515
+412
+26
+1
+
+Door Choice
+
+Caught or Not
+Door One
+Door Two
+Door Three
+Total
+1960
+4160
+26
+1
+b. What is the probability that Alissa does not catch Muddy?
+
+b. 4160
+
+c. What is the probability that Muddy chooses Door One OR Door Two given that Muddy is caught by Alissa?
+
+c. This is a conditional probability, so consider only probabilities in the row labeled "Caught." Choosing Door One and choosing Door Two are mutually exclusive, so
+
+Use the formula for conditional probability 
+
+ P(A|B)=
+ 
+ P(
+ 
+ A AND B
+ 
+ )
+
+ P(
+ B
+ )
+
+ .
+contains the number of crimes per 100,000 inhabitants from 2008 to 2011 in the United States.
+
+U.S. Crime Index Rates Per 100,000 Inhabitants 2008–2011
+
+Year
+Crime A
+Crime B
+Crime C
+Crime D
+Total
+2008
+145.7
+732.1
+29.7
+314.7
+2009
+133.1
+717.7
+29.1
+259.2
+2010
+119.3
+701
+27.7
+239.1
+2011
+113.7
+702.2
+26.8
+229.6
+Total
+TOTAL each column and each row. Total data = 4,520.7.
+
+Find P(2009 AND Crime A).
+
+Find P(2010 AND Crime B).
+
+Find P(2010 OR Crime B).
+
+Find P(2011|Crime A).
+
+Find P(Crime D|2008).
+
+a. 
+
+ 133.1
+
+ 4,520.7
+
+ = .0294, b. 
+
+ 701
+
+ 4,520.7
+
+ = .1551, c. P(2010 OR Crime B) = P(2010) + P(Crime B) – P(2010 AND Crime B) = 
+
+ 1,087.1
+
+ 4,520.7
+
+ + 
+
+ 2,852.9
+
+ 4,520.7
+
+ − 
+
+ 701
+
+ 4,520.7
+
+ = .7165, d. 
+
+ 113.7
+
+ 511.8
+
+ = .2222, e. 
+
+ 314.7
+
+ 1,222.2
+
+ = .2575
+
+Try It
+relates the weights and heights of a group of individuals participating in an observational study.
+
+Ages
+Tall
+Medium
+Short
+Totals
+Under 18
+18
+28
+14
+18–50
+20
+51
+28
+51+
+12
+25
+9
+Totals
+Find the total for each row and column.
+
+Find the probability that a randomly chosen individual from this group is tall.
+
+Find the probability that a randomly chosen individual from this group is Under 18 and tall.
+
+Find the probability that a randomly chosen individual from this group is tall given that the individual is Under 18.
+
+Find the probability that a randomly chosen individual from this group is Under 18 given that the individual is tall.
+
+Find the probability a randomly chosen individual from this group is tall and age 51+.
+
+Are the events under 18 and tall independent?
+
+Weight/Height
+Tall
+Medium
+Short
+Totals
+Obese
+18
+28
+14
+60
+Normal
+20
+51
+28
+99
+Underweight
+12
+25
+9
+46
+Totals
+50
+104
+51
+205
+Row Totals: 60, 99, 46. Column totals: 50, 104, 51.
+P(Tall) = 
+
+50
+
+205
+
+ = 0.244
+P(Obese AND Tall) = 
+
+18
+
+205
+
+ = 0.088
+P(Tall|Obese) = 
+
+18
+
+60
+
+ = 0.3
+P(Obese|Tall) = 
+
+18
+
+50
+
+ = 0.36
+P(Tall AND Underweight = 
+
+12
+
+205
+
+ = 0.0585
+
+No. P(Tall) does not equal P(Tall|Obese).
+
+References
+
+American Red Cross. (2013). Blood Types. Retrieved from http://www.redcrossblood.org/learn-about-blood/bloodtypes
+
+Centers for Disease Control and Prevention/National Center for Health Statistics, United States Department of Health and Human Services. (n.d.). Retrieved from https://www.cdc.gov/nchs/
+
+Haiman, C. A., et al. (2006, Jan. 26). Ethnic and racial differences in the smoking-related risk of lung cancer. The New England Journal of Medicine. Retrieved from http://www.nejm.org/doi/full/10.1056/NEJMoa033250
+
+Samuels, T. M. (2013). Strange facts about RH negative blood. eHow Health. Retrieved from http://www.ehow.com/facts_5552003_strange-rh-negative-blood.html
+
+The Disaster Center Crime Pages. (n.d.). United States: Uniform crime report  state statistics from 19602011. Retrieved from http://www.disastercenter.com/crime/
+
+United Blood Services. (2011). Human blood types. Retrieved from http://www.unitedbloodservices.org/learnMore.aspx
+
+United States Senate. (n.d.). Retrieved from www.senate.gov
+
+Chapter Review
+
+There are several tools you can use to help organize and sort data when calculating probabilities. Contingency tables, also known as two-way tables, help display data and are particularly useful when calculating probabilites that have multiple dependent variables.
+
+Use the following information to answer the next four exercises. shows a random sample of musicians and how they learned to play their instruments.
+
+Gender
+Self-Taught
+Studied in School
+Private Instruction
+Total
+Female
+12
+38
+22
+72
+Male
+19
+24
+15
+58
+Total
+31
+62
+37
+130
+Find P(musician is a female).
+
+Find P(musician is a male AND had private instruction).
+P(musician is a male AND had private instruction) = 
+
+15
+
+130
+
+ = 
+
+3
+
+26
+
+ = .12
+
+Find P(musician is a female OR is self taught).
+
+Are the events being a female musician and learning music in school mutually exclusive events?
+P(being a female musician AND learning music in school) = 
+
+38
+
+130
+
+ = 
+
+19
+
+65
+
+ = .29
+P(being a female musician)P(learning music in school) = 
+
+(
+
+72
+
+130
+
+)(
+
+62
+
+130
+
+)
+
+ = 
+
+4,464
+
+16,900
+
+ = 
+
+1,116
+
+4,225
+
+ = .26
+
+No, they are not independent because P(being a female musician AND learning music in school) is not equal to P(being a female musician)P(learning music in school).
+
+Bringing It Together
+
+Use the following information to answer the next seven exercises. An article in the New England Journal of Medicine, reported about a study of people who use a product in California and Hawaii. In one part of the report, the self-reported ethnicity and using the product levels per day were given. Of the people using the product at most 10 times a day, there were 9,886 African Americans, 2,745 Native Hawaiians, 12,831 Latinos, 8,378 Japanese Americans, and 7,650 whites. Of the people using the product 11 to 20 times per day, there were 6,514 African Americans, 3,062 Native Hawaiians, 4,932 Latinos, 10,680 Japanese Americans, and 9,877 whites. Of the people using the product 21 to 30 times per day, there were 1,671 African Americans, 1,419 Native Hawaiians, 1,406 Latinos, 4,715 Japanese Americans, and 6,062 Whites. Of the people using the product at least 31 times per day, there were 759 African Americans, 788 Native Hawaiians, 800 Latinos, 2,305 Japanese Americans, and 3,970 whites.
+
+Complete the table using the data provided. Suppose that one person from the study is randomly selected. Find the probability that person used the product 11 to 20 times a day.
+
+Product Use by Ethnicity
+
+Product Use (times per day)
+African Americans
+Native Hawaiians
+Latinos
+Japanese Americans
+Whites
+TOTALS
+1–10
+11–20
+21–30
+31+
+TOTALS
+Suppose that one person from the study is randomly selected. Find the probability that the person used the product 11 to 20 times per day.
+35,065100,450
+
+Find the probability that the person was Latino.
+
+In words, explain what it means to pick one person from the study who is Japanese American AND uses the product 21 to 30 times per day. Also, find the probability.
+
+To pick one person from the study who is Japanese American AND uses the product 21 to 30 times a day means that the person has to meet both criteria: both Japanese American and uses the product 21 to 30 times a day. The sample space should include everyone in the study. The probability is 4,715100,450.
+
+In words, explain what it means to pick one person from the study who is Japanese American OR uses the product 21 to 30 times per day. Also, find the probability.
+
+In words, explain what it means to pick one person from the study who is Japanese American GIVEN that the person uses the product 21 to 30 times per day. Also, find the probability.
+
+To pick one person from the study who is Japanese American given that person uses the product 21 to 30 times a day, means that the person must fulfill both criteria and the sample space is reduced to those who uses the product 21 to 30 times a day. The probability is 471515,273.
+
+Prove that product use/day and ethnicity are dependent events.
+
+Homework
+Use the information in the to answer the next eight exercises. The table shows the political party affiliation of each of 67 members of the U.S. Senate in June 2012, and when they would next be up for reelection.
+
+Up for Reelection:
+Democratic Party
+Republican Party
+Other
+Total
+
+November 2014
+20
+13
+0
+
+November 2016
+10
+24
+0
+
+Total
+
+Up for Reelection:
+Democratic Party
+Republican Party
+Other
+Total
+November 2014
+20
+13
+0
+November 2016
+10
+24
+0
+Total
+What is the probability that a randomly selected senator had an Other affiliation?
+
+0
+
+What is the probability that a randomly selected senator would be up for reelection in November 2016?
+
+What is the probability that a randomly selected senator was a Democrat and was up for reelection in November 2016?
+10
+
+67
+
+What is the probability that a randomly selected senator was a Republican or was up for reelection in November 2014?
+
+Suppose that a member of the U.S. Senate is randomly selected. Given that the randomly selected senator was up for reelection in November 2016, what is the probability that this senator was a Democrat?
+10
+
+34
+
+Suppose that a member of the U.S. Senate is randomly selected. What is the probability that the senator was up for reelection in November 2014, knowing that this senator was a Republican?
+
+The events Republican and Up for reelection in 2016 are ________.
+
+mutually exclusive
+
+independent
+
+both mutually exclusive and independent
+
+neither mutually exclusive nor independent
+
+d
+
+The events Other and Up for reelection in November 2016 are ________.
+
+mutually exclusive
+
+independent
+
+both mutually exclusive and independent
+
+neither mutually exclusive nor independent
+Use the following information to answer the next two exercises. The table of data obtained from www.baseball-almanac.com shows hit information for four well-known baseball players. Suppose that one hit from the table is randomly selected.
+
+Name
+Single
+Double
+Triple
+Home Run
+Total Hits
+Babe Ruth
+1,517
+506
+136
+714
+2,873
+Jackie Robinson
+1,054
+273
+54
+137
+1,518
+Ty Cobb
+3,603
+174
+295
+114
+4,189
+Hank Aaron
+2,294
+624
+98
+755
+3,771
+TOTAL
+8,471
+1,577
+583
+1,720
+12,351
+Find P(Hit was made by Babe Ruth).
+1,518
+
+2,873
+2,873
+
+12,351
+583
+
+12,351
+4,189
+
+12,351
+
+Find P(Hit was made by Ty Cobb|The hit was a Home Run).
+4,189
+
+12,351
+114
+
+1,720
+1,720
+
+4,189
+114
+
+12,351
+
+b
+identifies a group of children by one of four hair colors, and by type of hair.
+
+Hair Type
+Brown
+Blond
+Black
+Red
+Totals
+
+Wavy
+20
+
+15
+3
+43
+
+Straight
+80
+15
+
+12
+
+Totals
+
+20
+
+215
+
+Hair Type
+Brown
+Blond
+Black
+Red
+Totals
+Wavy
+20
+15
+3
+43
+Straight
+80
+15
+12
+Totals
+20
+215
+Complete the table.
+
+What is the probability that a randomly selected child will have wavy hair?
+
+What is the probability that a randomly selected child will have either brown or blond hair?
+
+What is the probability that a randomly selected child will have wavy brown hair?
+
+What is the probability that a randomly selected child will have red hair, given that he or she has straight hair?
+
+If B is the event of a child having brown hair, find the probability of the complement of B.
+
+In words, what does the complement of B represent?
+
+In a previous year, the weights of the members of a California football team and a Texas football team were published in a newspaper. The factual data were compiled into the following table. The weights in the column headings are in pounds.
+
+Shirt #
+≤ 210
+211–250
+251–290
+> 290
+
+1–33
+21
+5
+0
+0
+
+34–66
+6
+18
+7
+4
+
+66–99
+6
+12
+22
+5
+
+Shirt #
+≤ 210
+211–250
+251–290
+> 290
+1–33
+21
+5
+0
+0
+34–66
+6
+18
+7
+4
+66–99
+6
+12
+22
+5
+For the following, suppose that you randomly select one player from the California team or the Texas team.
+
+Find the probability that his shirt number is from 1 to 33.
+Find the probability that he weighs at most 210 pounds.
+Find the probability that his shirt number is from 1 to 33 AND he weighs at most 210 pounds.
+Find the probability that his shirt number is from 1 to 33 OR he weighs at most 210 pounds.
+Find the probability that his shirt number is from 1 to 33 GIVEN that he weighs at most 210 pounds.
+
+Find the probability that his shirt number is from 1 to 33.
+
+Find the probability that he weighs at most 210 pounds.
+
+Find the probability that his shirt number is from 1 to 33 AND he weighs at most 210 pounds.
+
+Find the probability that his shirt number is from 1 to 33 OR he weighs at most 210 pounds.
+
+Find the probability that his shirt number is from 1 to 33 GIVEN that he weighs at most 210 pounds.
+26
+
+106
+33
+
+106
+21
+
+106
+(
+
+26
+
+106
+
+)
+
+ + 
+
+(
+
+33
+
+106
+
+)
+
+ – 
+
+(
+
+21
+
+106
+
+)
+
+ = 
+
+(
+
+38
+
+106
+
+)
+21
+
+33
+
+the method of displaying a frequency distribution as a table with rows and columns to show how two variables may be dependent (contingent) upon each other; the table provides an easy way to calculate conditional probabilities

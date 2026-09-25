@@ -1,0 +1,87 @@
+# m00114
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+This chapter introduced the basics of programming in Python, including:
+print() and input().
+
+Variables and assignment.
+
+Strings, integers, and floats.
+
+Arithmetic, concatenation.
+
+Common error messages.
+
+Comments and docstrings.
+
+At this point, you should be able to write programs that ask for input, perform simple calculations, and output the results. The programming practice below ties together most topics presented in the chapter.
+
+Chapter 1 reference.
+
+Function
+print(values)
+If present, prompt is output to the user. The function then reads a line of input from the user.
+If present, prompt is output to the user. The function then reads a line of input from the user.
+len(string)
+Returns the type (or class) of a value. Ex: type(123) is <class 'int'>.
+Returns the type (or class) of a value. Ex: type(123) is <class 'int'>.
+=
+ (Assignment)
+
++
+ (Concatenation)
+
++
+ (Addition)
+
+-
+ (Subtraction)
+
+*
+ (Multiplication)
+
+/
+ (Division)
+
+**
+ (Exponentiation)
+Raises a number to a power. Ex: 3**2 is three squared.
+Raises a number to a power. Ex: 3**2 is three squared.
+#
+ (Comment)
+
+' or "
+ (String)
+Strings may be written using either kind of quote. Ex: 'A' and "A" represent the same string. By convention, this book uses double quotes (") for most strings.
+Strings may be written using either kind of quote. Ex: 'A' and "A" represent the same string. By convention, this book uses double quotes (") for most strings.
+"""
+ (Docstring)
+Used for documentation, often in multi-line strings, to summarize a program's purpose or usage.
+Used for documentation, often in multi-line strings, to summarize a program's purpose or usage.
+
+Fun facts
+
+Write a program that assigns a variable named number to any integer of your choice. Ex: number = 74. Then, use this variable to calculate and output the following results:
+
+Run the program multiple times, using a different integer each time. Your output should be mathematically correct for any integer that you choose.
+
+The point of this exercise is to perform basic arithmetic within a print statement. Do not use any other variables besides number. Your program should have only one assignment statement (at the beginning).
+
+Mad lib
+
+A mad lib is a word game in which one person asks others for words to substitute into a pre-written story. The story is then read aloud with the goal of making people laugh.
+
+This exercise is based the Vacations Mad Lib available on the Printables section of MadLibs.com. Write a program that asks the user to input two adjectives and two nouns (user input in bold):
+
+Use input() to display each prompt exactly as shown. The user's input should be on the same line as the prompt. Each colon must be followed by exactly one space. After reading the input, the program should output the following three lines:
+
+Notice that the first line should be completely blank. Replace the bold words (from the above example) with the actual words input by the user.
+
+Your final program should have four input statements, three print statements, and at least two comments. For completeness, write an appropriate docstring at the top of the program.

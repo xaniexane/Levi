@@ -1,0 +1,77 @@
+# m00014
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Floating-point errors
+
+Floating-point errors
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain numerical inaccuracies related to floating-point representation.
+
+Use the round() function to mitigate floating-point errors in output.
+
+Floating-point errors
+
+Computers store information using 0's and 1's. All information must be converted to a string of 0's and 1's. Ex: 5 is converted to 101. Since only two values, 0 or 1, are allowed the format is called binary.
+
+Floating-point values are stored as binary by Python. The conversion of a floating point number to the underlying binary results in specific types of floating-point errors.
+
+A round-off error occurs when floating-point values are stored erroneously as an approximation. The difference between an approximation of a value used in computation and the correct (true) value is called a round-off error.
+
+Ex: Storing the float (0.1)10 results in binary values that actually produce (0.1000000000000000055511151231257827021181583404541015625)10 when converted back, which is not exactly equal to (0.1)10.
+
+Round-off error.
+0.100000000000000005551115123126
+0.200000000000000011102230246252
+0.400000000000000022204460492503
+An overflow error occurs when a value is too large to be stored. The maximum and minimum floating-point values that can be represented are 1.8×10308 and −1.8×10308, respectively. Attempting to store a floating-point value outside the range (−1.8×10308,1.8×10308) leads to an overflow error.
+
+Below, 3.0256 and 3.0512 can be represented, but 3.01024 is too large and causes an overflow error.
+
+Overflow error.
+3.0 to the power of 256 = 1.3900845237714473e+122
+3.0 to the power of 512 = 1.9323349832288915e+244
+3.0 to the power of 1024 =
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+    print('3.0 to the power of 1024 = ', 3.0**1024)
+OverflowError: (34, 'Numerical result out of range')
+Floating-point errors
+
+For each situation, which error occurs?
+
+Floating point round() function
+
+Python's round() function is used to round a floating-point number to a given number of decimal places. The function requires two arguments. The first argument is the number to be rounded. The second argument decides the number of decimal places to which the number is rounded. If the second argument is not provided, the number will be rounded to the closest integer. The round() function can be used to mitigate floating-point errors.
+
+Ex:
+round(2.451, 2) = 2.45
+round(2.451) = 2
+
+Examples of round() function
+
+Examples of round() function
+
+Inaccurate tips
+
+The following code calculates the tip amount, given a bill amount and the tip ratio. Experiment with the following bill amounts and tip ratios and see if any inaccuracies may result in calculating the tip amount.
+
+bill amount: 22.70 and 33.33
+
+tip ratio: 0.15, 0.18, and 0.20
+
+Area of a triangle
+
+Complete the following steps to calculate a triangle's area, and print the result of each step. The area of a triangle is bh2, where b is the base and h is the height.
+
+Calculate the area of a triangle with base = 7 and height = 3.5.
+
+Round the triangle's area to one decimal place.
+
+Round the triangle's area to the nearest integer value.

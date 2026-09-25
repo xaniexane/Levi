@@ -1,0 +1,476 @@
+# m53492
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Limit Laws
+
+The Limit Laws
+
+Recognize the basic limit laws.
+
+Use the limit laws to evaluate the limit of a function.
+
+Evaluate the limit of a function by factoring.
+
+Use the limit laws to evaluate the limit of a polynomial or rational function.
+
+Evaluate the limit of a function by factoring or by using conjugates.
+
+Evaluate the limit of a function by using the squeeze theorem.
+
+In the previous section, we evaluated limits by looking at graphs or by constructing a table of values. In this section, we establish laws for calculating limits and learn how to apply these laws. In the Student Project at the end of this section, you have the opportunity to apply these limit laws to derive the formula for the area of a circle by adapting a method devised by the Greek mathematician Archimedes. We begin by restating two useful limit results from the previous section. These two results, together with the limit laws, serve as a foundation for calculating many limits.
+
+Evaluating Limits with the Limit Laws
+
+The first two limit laws were stated in and we repeat them here. These basic results, together with the other limit laws, allow us to evaluate limits of many algebraic functions.
+
+Basic Limit Results
+
+For any real number a and any constant c,
+limx→ax=a
+limx→ac=c
+
+Evaluating a Basic Limit
+
+Evaluate each of the following limits using .
+limx→2x
+limx→25
+
+The limit of x as x approaches a is a: limx→2x=2.
+
+The limit of a constant is that constant: limx→25=5.
+
+We now take a look at the limit laws, the individual properties of limits. The proofs that these laws hold are omitted here.
+
+Limit Laws
+
+Let f(x) and g(x) be defined for all x≠a over some open interval containing a. Assume that L and M are real numbers such that limx→af(x)=L and limx→ag(x)=M. Let c be a constant. Then, each of the following statements holds:
+Sum law for limits: limx→a(f(x)+g(x))=limx→af(x)+limx→ag(x)=L+M
+Difference law for limits: limx→a(f(x)−g(x))=limx→af(x)−limx→ag(x)=L−M
+Constant multiple law for limits: limx→acf(x)=c·limx→af(x)=cL
+Product law for limits: limx→a(f(x)·g(x))=limx→af(x)·limx→ag(x)=L·M
+Quotient law for limits: limx→af(x)g(x)=limx→af(x)limx→ag(x)=LM for M≠0
+Power law for limits: limx→a(f(x))n=(limx→af(x))n=Ln for every positive integer n.
+Root law for limits: limx→af(x)n=limx→af(x)n=Ln for all L if n is odd and for L≥0 if n is even and f(x)≥0.
+
+We now practice applying these limit laws to evaluate a limit.
+
+Evaluating a Limit Using Limit Laws
+
+Use the limit laws to evaluate limx→−3(4x+2).
+
+Let’s apply the limit laws one step at a time to be sure we understand how they work. We need to keep in mind the requirement that, at each application of a limit law, the new limits must exist for the limit law to be applied.
+limx→−3(4x+2)=limx→−34x+limx→−32Apply the sum law.=4·limx→−3x+limx→−32Apply the constant multiple law.=4·(−3)+2=−10.Apply the basic limit results and simplify.
+
+Using Limit Laws Repeatedly
+
+Use the limit laws to evaluate limx→22x2−3x+1x3+4.
+
+To find this limit, we need to apply the limit laws several times. Again, we need to keep in mind that as we rewrite the limit in terms of other limits, each new limit must exist for the limit law to be applied.
+limx→22x2−3x+1x3+4=limx→2(2x2−3x+1)limx→2(x3+4)Apply the quotient law, making sure that.(2)3+4≠0=2·limx→2x2−3·limx→2x+limx→21limx→2x3+limx→24Apply the sum law and constant multiple law.=2·(limx→2x)2−3·limx→2x+limx→21(limx→2x)3+limx→24Apply the power law.=2(4)−3(2)+1(2)3+4=14.Apply the basic limit laws and simplify.
+
+Use the limit laws to evaluate limx→6(2x−1)x+4. In each step, indicate the limit law applied.
+1110
+
+Hint
+
+Begin by applying the product law.
+
+Limits of Polynomial and Rational Functions
+
+By now you have probably noticed that, in each of the previous examples, it has been the case that limx→af(x)=f(a). This is not always true, but it does hold for all polynomials for any choice of a and for all rational functions at all values of a for which the rational function is defined.
+
+Limits of Polynomial and Rational Functions
+
+Let p(x) and q(x) be polynomial functions. Let a be a real number. Then,
+
+To see that this theorem holds, consider the polynomial p(x)=cnxn+cn−1xn−1+⋯+c1x+c0. By applying the sum, constant multiple, and power laws, we end up with
+
+It now follows from the quotient law that if p(x) and q(x) are polynomials for which q(a)≠0, then
+applies this result.
+
+Evaluating a Limit of a Rational Function
+
+Evaluate the limx→32x2−3x+15x+4.
+
+Since 3 is in the domain of the rational function f(x)=2x2−3x+15x+4, we can calculate the limit by substituting 3 for x into the function. Thus,
+
+Evaluate limx→−2(3x3−2x+7).
+
+−13;
+
+Hint
+
+Use
+
+Additional Limit Evaluation Techniques
+
+As we have seen, we may evaluate easily the limits of polynomials and limits of some (but not all) rational functions by direct substitution. However, as we saw in the introductory section on limits, it is certainly possible for limx→af(x) to exist when f(a) is undefined. The following observation allows us to evaluate many limits of this type:
+
+If for all x≠a,f(x)=g(x) over some open interval containing a, then limx→af(x)=limx→ag(x).
+
+To understand this idea better, consider the limit limx→1x2−1x−1.
+
+The function
+
+and the function g(x)=x+1 are identical for all values of x≠1. The graphs of these two functions are shown in .
+
+We see that
+
+The limit has the form limx→af(x)g(x), where limx→af(x)=0 and limx→ag(x)=0. (In this case, we say that f(x)/g(x) has the indeterminate form 0/0.) The following Problem-Solving Strategy provides a general outline for evaluating limits of this type.
+
+Problem-Solving Strategy: Calculating a Limit When f(x)/g(x) has the Indeterminate Form 0/0
+
+First, we need to make sure that our function has the appropriate form and cannot be evaluated immediately using the limit laws.
+
+We then need to find a function that is equal to h(x)=f(x)/g(x) for all x≠a over some interval containing a. To do this, we may need to try one or more of the following steps:
+
+If f(x) and g(x) are polynomials, we should factor each function and cancel out any common factors.
+If the numerator or denominator contains a difference involving a square root, we should try multiplying the numerator and denominator by the conjugate of the expression involving the square root.
+If f(x)/g(x) is a complex fraction, we begin by simplifying it.
+
+If f(x) and g(x) are polynomials, we should factor each function and cancel out any common factors.
+
+If the numerator or denominator contains a difference involving a square root, we should try multiplying the numerator and denominator by the conjugate of the expression involving the square root.
+
+If f(x)/g(x) is a complex fraction, we begin by simplifying it.
+
+Last, we apply the limit laws.
+
+The next examples demonstrate the use of this Problem-Solving Strategy. illustrates the factor-and-cancel technique; shows multiplying by a conjugate. In , we look at simplifying a complex fraction.
+
+Evaluating a Limit by Factoring and Canceling
+
+Evaluate limx→3x2−3x2x2−5x−3.
+Step 1. The function f(x)=x2−3x2x2−5x−3 is undefined for x=3. In fact, if we substitute 3 into the function we get 0/0, which is undefined. Factoring and canceling is a good strategy:
+Step 2. For all x≠3,x2−3x2x2−5x−3=x2x+1. Therefore,
+Step 3. Evaluate using the limit laws:
+
+Evaluate limx→−3x2+4x+3x2−9.
+13
+
+Hint
+
+Follow the steps in the Problem-Solving Strategy and .
+
+Evaluating a Limit by Multiplying by a Conjugate
+
+Evaluate limx→−1x+2−1x+1.
+Step 1. x+2−1x+1 has the form 0/0 at −1. Let’s begin by multiplying by x+2+1, the conjugate of x+2−1, on the numerator and denominator:
+Step 2. We then multiply out the numerator. We don’t multiply out the denominator because we are hoping that the (x+1) in the denominator cancels out in the end:
+Step 3. Then we cancel:
+Step 4. Last, we apply the limit laws:
+
+Evaluate limx→5x−1−2x−5.
+14
+
+Hint
+
+Follow the steps in the Problem-Solving Strategy and .
+
+Evaluating a Limit by Simplifying a Complex Fraction
+
+Evaluate limx→11x+1−12x−1.
+Step 1. 1x+1−12x−1 has the form 0/0 at 1. We simplify the algebraic fraction by multiplying by 2(x+1)/2(x+1):
+Step 2. Next, we multiply through the numerators. Do not multiply the denominators because we want to be able to cancel the factor (x−1):
+Step 3. Then, we simplify the numerator:
+Step 4. Now we factor out −1 from the numerator:
+Step 5. Then, we cancel the common factors of (x−1):
+Step 6. Last, we evaluate using the limit laws:
+
+Evaluate limx→−31x+2+1x+3.
+
+−1;
+
+Hint
+
+Follow the steps in the Problem-Solving Strategy and .
+does not fall neatly into any of the patterns established in the previous examples. However, with a little creativity, we can still use these same techniques.
+
+Evaluating a Limit When the Limit Laws Do Not Apply
+
+Evaluate limx→0(1x+5x(x−5)).
+
+Both 1/x and 5/x(x−5) fail to have a limit at zero. Since neither of the two functions has a limit at zero, we cannot apply the sum law for limits; we must use a different strategy. In this case, we find the limit by performing addition and then applying one of our previous strategies. Observe that
+
+Thus,
+
+Evaluate limx→3(1x−3−4x2−2x−3).
+14
+
+Hint
+
+Use the same technique as . Don’t forget to factor x2−2x−3 before getting a common denominator.
+
+Let’s now revisit one-sided limits. Simple modifications in the limit laws allow us to apply them to one-sided limits. For example, to apply the limit laws to a limit of the form limx→a−h(x), we require the function h(x) to be defined over an open interval of the form (b,a); for a limit of the form limx→a+h(x), we require the function h(x) to be defined over an open interval of the form (a,c). illustrates this point.
+
+Evaluating a One-Sided Limit Using the Limit Laws
+
+Evaluate each of the following limits, if possible.
+limx→3−x−3
+limx→3+x−3
+illustrates the function f(x)=x−3 and aids in our understanding of these limits.
+
+The function f(x)=x−3 is defined over the interval [3,+∞). Since this function is not defined to the left of 3, we cannot apply the limit laws to compute limx→3−x−3. In fact, since f(x)=x−3 is undefined to the left of 3, limx→3−x−3 does not exist.
+
+Since f(x)=x−3 is defined to the right of 3, the limit laws do apply to limx→3+x−3. By applying these limit laws we obtain limx→3+x−3=0.
+
+In we look at one-sided limits of a piecewise-defined function and use these limits to draw a conclusion about a two-sided limit of the same function.
+
+Evaluating a Two-Sided Limit Using the Limit Laws
+
+For f(x)={4x−3ifx<2(x−3)2ifx≥2, evaluate each of the following limits:
+limx→2−f(x)
+limx→2+f(x)
+limx→2f(x)
+illustrates the function f(x) and aids in our understanding of these limits.
+
+Since f(x)=4x−3 for all x in (−∞,2), replace f(x) in the limit with 4x−3 and apply the limit laws:
+limx→2−f(x)=limx→2−(4x−3)=5.
+
+Since f(x)=(x−3)2 for all x in (2,+∞), replace f(x) in the limit with (x−3)2 and apply the limit laws:
+limx→2+f(x)=limx→2+(x−3)2=1.
+
+Since limx→2−f(x)=5 and limx→2+f(x)=1, we conclude that limx→2f(x) does not exist.
+
+Graph f(x)={−x−2ifx<−12ifx=−1x3ifx>−1 and evaluate limx→−1−f(x).
+limx→−1−f(x)=−1
+
+Hint
+
+Use the method in to evaluate the limit.
+
+We now turn our attention to evaluating a limit of the form limx→af(x)g(x), where limx→af(x)=K, where K≠0 and limx→ag(x)=0. That is, f(x)/g(x) has the form K/0,K≠0 at a.
+
+Evaluating a Limit of the Form K/0,K≠0 Using the Limit Laws
+
+Evaluate limx→2−x−3x2−2x.
+Step 1. After substituting in x=2, we see that this limit has the form −1/0. That is, as x approaches 2 from the left, the numerator approaches −1; and the denominator approaches 0. Consequently, the magnitude of x−3x(x−2) becomes infinite. To get a better idea of what the limit is, we need to factor the denominator:
+Step 2. Since x−2 is the only part of the denominator that is zero when 2 is substituted, we then separate 1/(x−2) from the rest of the function:
+Step 3. limx→2−x−3x=−12 and limx→2−1x−2=−∞. Therefore, the product of (x−3)/x and 1/(x−2) has a limit of +∞:
+
+Evaluate limx→1x+2(x−1)2.
+
++∞
+
+Hint
+
+Use the methods from .
+
+The Squeeze Theorem
+
+The techniques we have developed thus far work very well for algebraic functions, but we are still unable to evaluate limits of very basic trigonometric functions. The next theorem, called the squeeze theorem, proves very useful for establishing basic trigonometric limits. This theorem allows us to calculate limits by “squeezing” a function, with a limit at a point a that is unknown, between two functions having a common known limit at a. illustrates this idea.
+
+The Squeeze Theorem
+
+Let f(x),g(x), and h(x) be defined for all x≠a over an open interval containing a. If
+
+for all x≠a in an open interval containing a and
+
+where L is a real number, then limx→ag(x)=L.
+
+Applying the Squeeze Theorem
+
+Apply the squeeze theorem to evaluate limx→0xcosx.
+
+Because −1≤cosx≤1 for all x, we have −|x|≤xcosx≤|x|.
+Since limx→0(−|x|)=0=limx→0|x|, from the squeeze theorem, we obtain limx→0xcosx=0.
+The graphs of f(x)=−|x|,g(x)=xcosx, and h(x)=|x| are shown in .
+
+Use the squeeze theorem to evaluate limx→0x2sin1x.
+
+0
+
+Hint
+
+Use the fact that −x2≤x2sin(1/x)≤x2 to help you find two functions such that x2sin(1/x) is squeezed between them.
+
+We now use the squeeze theorem to tackle several very important limits. Although this discussion is somewhat lengthy, these limits prove invaluable for the development of the material in both the next section and the next chapter. The first of these limits is limθ→0sinθ. Consider the unit circle shown in . In the figure, we see that sinθ is the y-coordinate on the unit circle and it corresponds to the line segment shown in blue. The radian measure of angle θ is the length of the arc it subtends on the unit circle. Therefore, we see that for 0<θ<π2,0<sinθ<θ.
+
+Because limθ→0+0=0 and limθ→0+θ=0, by using the squeeze theorem we conclude that
+
+To see that limθ→0−sinθ=0 as well, observe that for −π2<θ<0,0<−θ<π2 and hence, 0<sin(−θ)<−θ. Consequently, 0<−sinθ<−θ. It follows that 0>sinθ>θ. An application of the squeeze theorem produces the desired limit. Thus, since limθ→0+sinθ=0 and limθ→0−sinθ=0,
+
+Next, using the identity cosθ=1−sin2θ for −π2<θ<π2, we see that
+
+We now take a look at a limit that plays an important role in later chapters—namely, limθ→0sinθθ. To evaluate this limit, we use the unit circle in . Notice that this figure adds one additional triangle to . We see that the length of the side opposite angle θ in this new triangle is tanθ. Thus, we see that for 0<θ<π2,sinθ<θ<tanθ.
+
+By dividing by sinθ in all parts of the inequality, we obtain
+
+Equivalently, we have
+
+Since limθ→0+1=1=limθ→0+cosθ, we conclude that limθ→0+sinθθ=1. By applying a manipulation similar to that used in demonstrating that limθ→0−sinθ=0, we can show that limθ→0−sinθθ=1. Thus,
+
+In we use this limit to establish limθ→01−cosθθ=0. This limit also proves useful in later chapters.
+
+Evaluating an Important Trigonometric Limit
+
+Evaluate limθ→01−cosθθ.
+
+In the first step, we multiply by the conjugate so that we can use a trigonometric identity to convert the cosine in the numerator to a sine:
+
+Therefore,
+
+Evaluate limθ→01−cosθsinθ.
+
+0
+
+Hint
+
+Multiply numerator and denominator by 1+cosθ.
+
+Deriving the Formula for the Area of a Circle
+
+Some of the geometric formulas we take for granted today were first derived by methods that anticipate some of the methods of calculus. The Greek mathematician Archimedes (ca. 287−212; BCE) was particularly inventive, using polygons inscribed within circles to approximate the area of the circle as the number of sides of the polygon increased. He never came up with the idea of a limit, but we can use this idea to see what his geometric constructions could have predicted about the limit.
+
+We can estimate the area of a circle by computing the area of an inscribed regular polygon. Think of the regular polygon as being made up of n triangles. By taking the limit as the vertex angle of these triangles goes to zero, you can obtain the area of the circle. To see this, carry out the following steps:
+
+Express the height h and the base b of the isosceles triangle in in terms of θ and r.
+
+Using the expressions that you obtained in step 1, express the area of the isosceles triangle in terms of θ and r.(Substitute (1/2)sinθ for sin(θ/2)cos(θ/2) in your expression.)
+
+If an n-sided regular polygon is inscribed in a circle of radius r, find a relationship between θ and n. Solve this for n. Keep in mind there are 2π radians in a circle. (Use radians, not degrees.)
+
+Find an expression for the area of the n-sided polygon in terms of r and θ.
+
+To find a formula for the area of the circle, find the limit of the expression in step 4 as θ goes to zero. (Hint: limθ→0(sinθ)θ=1).
+
+The technique of estimating areas of regions by using polygons is revisited in Introduction to Integration.
+
+Key Concepts
+
+The limit laws allow us to evaluate limits of functions without having to go through step-by-step processes each time.
+
+For polynomials and rational functions, limx→af(x)=f(a).
+
+You can evaluate the limit of a function by factoring and canceling, by multiplying by a conjugate, or by simplifying a complex fraction.
+
+The squeeze theorem allows you to find the limit of a function if the function is always greater than one function and less than another function with limits that are known.
+
+Key Equations
+limθ→0sinθ=0
+ limθ→0cosθ=1
+ limθ→0sinθθ=1
+ limθ→01−cosθθ=0
+In the following exercises, use the limit laws to evaluate each limit. Justify each step by indicating the appropriate limit law(s).
+limx→0(4x2−2x+3)
+
+Use constant multiple law and difference law: limx→0(4x2−2x+3)=4limx→0x2−2limx→0x+limx→03=3
+limx→1x3+3x2+54−7x
+limx→−2x2−6x+3
+
+Use root law: limx→−2x2−6x+3=limx→−2(x2−6x+3)=19
+limx→−1(9x+1)2
+
+In the following exercises, use direct substitution to evaluate each limit.
+limx→7x2
+
+49
+limx→−2(4x2−1)
+limx→011+sinx
+
+1
+limx→2e2x−x2
+limx→12−7xx+6
+−57
+limx→3lne3x
+
+In the following exercises, use direct substitution to show that each limit leads to the indeterminate form 0/0. Then, evaluate the limit.
+limx→4x2−16x−4
+limx→4x2−16x−4=16−164−4=00; then, limx→4x2−16x−4=limx→4(x+4)(x−4)x−4=8
+limx→2x−2x2−2x
+limx→63x−182x−12
+limx→63x−182x−12=18−1812−12=00; then, limx→63x−182x−12=limx→63(x−6)2(x−6)=32
+limh→0(1+h)2−1h
+limt→9t−9t−3
+limx→9t−9t−3=9−93−3=00; then, limt→9t−9t−3=limt→9t−9t−3t+3t+3=limt→9(t+3)=6
+limh→01a+h−1ah, where a is a non-zero real-valued constant
+limθ→πsinθtanθ
+limθ→πsinθtanθ=sinπtanπ=00; then, limθ→πsinθtanθ=limθ→πsinθsinθcosθ=limθ→πcosθ=−1
+limx→1x3−1x2−1
+limx→1/22x2+3x−22x−1
+limx→1/22x2+3x−22x−1=12+32−21−1=00; then, limx→1/22x2+3x−22x−1=limx→1/2(2x−1)(x+2)2x−1=52
+limx→−3x+4−1x+3
+
+In the following exercises, use direct substitution to obtain an undefined expression. Then, use the method of to simplify the function to help determine the limit.
+limx→−2−2x2+7x−4x2+x−2
+
+−∞
+limx→−2+2x2+7x−4x2+x−2
+limx→1−2x2+7x−4x2+x−2
+
+−∞
+limx→1+2x2+7x−4x2+x−2
+
+In the following exercises, assume that limx→6f(x)=4,limx→6g(x)=9, and limx→6h(x)=6. Use these three facts and the limit laws to evaluate each limit.
+limx→62f(x)g(x)
+limx→62f(x)g(x)=2limx→6f(x)limx→6g(x)=72
+limx→6g(x)−1f(x)
+limx→6(f(x)+13g(x))
+limx→6(f(x)+13g(x))=limx→6f(x)+13limx→6g(x)=7
+limx→6(h(x))32
+limx→6g(x)−f(x)
+limx→6g(x)−f(x)=limx→6g(x)−limx→6f(x)=5
+limx→6x·h(x)
+limx→6[(x+1)·f(x)]
+limx→6[(x+1)f(x)]=(limx→6(x+1))(limx→6f(x))=28
+limx→6(f(x)·g(x)−h(x))
+[T] In the following exercises, use a calculator to draw the graph of each piecewise-defined function and study the graph to evaluate the given limits.
+f(x)={x2,x≤3x+4,x>3
+limx→3−f(x)
+limx→3+f(x)
+a. 9; b. 7
+g(x)={x3−1,x≤01,x>0
+limx→0−g(x)
+limx→0+g(x)
+h(x)={x2−2x+1,x<23−x,x≥2
+limx→2−h(x)
+limx→2+h(x)
+a. 1; b. 1
+
+In the following exercises, use the following graphs and the limit laws to evaluate each limit.
+limx→−3+(f(x)+g(x))
+limx→−3−(f(x)−3g(x))
+limx→−3−(f(x)−3g(x))=limx→−3−f(x)−3limx→−3−g(x)=0+6=6
+limx→0f(x)g(x)3
+limx→−52+g(x)f(x)
+limx→−52+g(x)f(x)=2+(limx→−5g(x))limx→−5f(x)=2+02=1
+limx→1(f(x))2
+limx→1f(x)−g(x)3
+limx→1f(x)−g(x)3=limx→1f(x)−limx→1g(x)3=2+53=73
+limx→−7(x·g(x))
+limx→−9[x·f(x)+2·g(x)]
+limx→−9(xf(x)+2g(x))=(limx→−9x)(limx→−9f(x))+2limx→−9(g(x))=(−9)(6)+2(4)=−46
+
+For the following problems, evaluate the limit using the squeeze theorem. Use a calculator to graph the functions f(x),g(x), and h(x) when possible.
+[T] True or False? If 2x−1≤g(x)≤x2−2x+3, then limx→2g(x)=0.
+[T] limθ→0θ2cos(1θ)
+
+The limit is zero.
+limx→0f(x), where f(x)={0,xrationalx2,xirrational
+[T] In physics, the magnitude of an electric field generated by a point charge at a distance r in vacuum is governed by Coulomb’s law: E(r)=q4πε0r2, where E represents the magnitude of the electric field, q is the charge of the particle, r is the distance between the particle and where the strength of the field is measured, and 14πε0 is Coulomb’s constant: 8.988×109N·m2/C2.
+
+Use a graphing calculator to graph E(r) given that the charge of the particle is q=10−10.
+
+Evaluate limr→0+E(r). What is the physical meaning of this quantity? Is it physically relevant? Why are you evaluating from the right?
+
+a.
+
+b. ∞. The magnitude of the electric field as you approach the particle q becomes infinite. It does not make physical sense to evaluate negative distance.
+[T] The density of an object is given by its mass divided by its volume: ρ=m/V.
+
+Use a calculator to plot the volume as a function of density (V=m/ρ), assuming you are examining something of mass 8 kg (m=8).
+
+Evaluate limρ→0+V(ρ) and explain the physical meaning.
+
+the limit law limx→acf(x)=c·limx→af(x)=cL
+the limit law limx→a(f(x)−g(x))=limx→af(x)−limx→ag(x)=L−M
+the individual properties of limits; for each of the individual laws, let f(x) and g(x) be defined for all x≠a over some open interval containing a; assume that L and M are real numbers so that limx→af(x)=L and limx→ag(x)=M; let c be a constant
+the limit law limx→a(f(x))n=(limx→af(x))n=Ln for every positive integer n
+the limit law limx→a(f(x)·g(x))=limx→af(x)·limx→ag(x)=L·M
+the limit law limx→af(x)g(x)=limx→af(x)limx→ag(x)=LM for M≠0
+the limit law limx→af(x)n=limx→af(x)n=Ln for all L if n is odd and for L≥0 if n is even
+states that if f(x)≤g(x)≤h(x) for all x≠a over an open interval containing a and limx→af(x)=L=limx→ah(x) where L is a real number, then limx→ag(x)=L
+The limit law limx→a(f(x)+g(x))=limx→af(x)+limx→ag(x)=L+M

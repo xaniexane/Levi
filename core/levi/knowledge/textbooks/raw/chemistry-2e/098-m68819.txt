@@ -1,0 +1,538 @@
+# m68819
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Free Energy
+
+Free Energy
+
+By the end of this section, you will be able to:
+
+Define Gibbs free energy, and describe its relation to spontaneity
+
+Calculate free energy change for a process using free energies of formation for its reactants and products
+
+Calculate free energy change for a process using enthalpies of formation and the entropies for its reactants and products
+
+Explain how temperature affects the spontaneity of some processes
+
+Relate standard free energy changes to equilibrium constants
+
+One of the challenges of using the second law of thermodynamics to determine if a process is spontaneous is that it requires measurements of the entropy change for the system and the entropy change for the surroundings. An alternative approach involving a new thermodynamic property defined in terms of system properties only was introduced in the late nineteenth century by American mathematician Josiah Willard Gibbs. This new property is called the Gibbs free energy (G) (or simply the free energy), and it is defined in terms of a system’s enthalpy and entropy as the following:
+
+Free energy is a state function, and at constant temperature and pressure, the free energy change (ΔG) may be expressed as the following:
+
+(For simplicity’s sake, the subscript “sys” will be omitted henceforth.)
+
+The relationship between this system property and the spontaneity of a process may be understood by recalling the previously derived second law expression:
+
+The first law requires that qsurr = −qsys, and at constant pressure qsys = ΔH, so this expression may be rewritten as:
+
+Multiplying both sides of this equation by −T, and rearranging yields the following:
+
+Comparing this equation to the previous one for free energy change shows the following relation:
+
+The free energy change is therefore a reliable indicator of the spontaneity of a process, being directly related to the previously identified spontaneity indicator, ΔSuniv. summarizes the relation between the spontaneity of a process and the arithmetic signs of these indicators.
+
+Relation between Process Spontaneity and Signs of Thermodynamic Properties
+ΔSuniv > 0
+ΔG < 0
+spontaneous
+ΔSuniv < 0
+ΔG > 0
+nonspontaneous
+ΔSuniv = 0
+ΔG = 0
+at equilibrium
+What’s “Free” about ΔG?
+
+In addition to indicating spontaneity, the free energy change also provides information regarding the amount of useful work (w) that may be accomplished by a spontaneous process. Although a rigorous treatment of this subject is beyond the scope of an introductory chemistry text, a brief discussion is helpful for gaining a better perspective on this important thermodynamic property.
+
+For this purpose, consider a spontaneous, exothermic process that involves a decrease in entropy. The free energy, as defined by
+
+may be interpreted as representing the difference between the energy produced by the process, ΔH, and the energy lost to the surroundings, TΔS. The difference between the energy produced and the energy lost is the energy available (or “free”) to do useful work by the process, ΔG. If the process somehow could be made to take place under conditions of thermodynamic reversibility, the amount of work that could be done would be maximal:
+
+where wmax refers to all types of work except expansion (pressure-volume) work.
+
+However, as noted previously in this chapter, such conditions are not realistic. In addition, the technologies used to extract work from a spontaneous process (e.g., batteries) are never 100% efficient, and so the work done by these processes is always less than the theoretical maximum. Similar reasoning may be applied to a nonspontaneous process, for which the free energy change represents the minimum amount of work that must be done on the system to carry out the process.
+
+Calculating Free Energy Change
+
+Free energy is a state function, so its value depends only on the conditions of the initial and final states of the system. A convenient and common approach to the calculation of free energy changes for physical and chemical reactions is by use of widely available compilations of standard state thermodynamic data. One method involves the use of standard enthalpies and entropies to compute standard free energy changes, ΔG°, according to the following relation.
+Using Standard Enthalpy and Entropy Changes to Calculate ΔG°Use standard enthalpy and entropy data from Appendix G to calculate the standard free energy change for the vaporization of water at room temperature (298 K). What does the computed value for ΔG° say about the spontaneity of this process?
+
+Using Standard Enthalpy and Entropy Changes to Calculate ΔG°
+Solution
+The process of interest is the following:
+
+Solution
+
+The standard change in free energy may be calculated using the following equation:
+
+From Appendix G:
+
+S°(J/K·mol)
+H2O(l)
+−285.83
+70.0
+H2O(g)
+−241.82
+188.8
+Using the appendix data to calculate the standard enthalpy and entropy changes yields:
+
+Substitution into the standard free energy equation yields:
+
+At 298 K (25 °C) ΔG°>0, so boiling is nonspontaneous (not spontaneous).
+Check Your Learning
+Use standard enthalpy and entropy data from Appendix G to calculate the standard free energy change for the reaction shown here (298 K). What does the computed value for ΔG° say about the spontaneity of this process?
+
+Check Your Learning
+
+Answer:
+ΔG°=102.0 kJ/mol; the reaction is nonspontaneous (not spontaneous) at 25 °C.
+
+The standard free energy change for a reaction may also be calculated from standard free energy of formation ΔGf° values of the reactants and products involved in the reaction. The standard free energy of formation is the free energy change that accompanies the formation of one mole of a substance from its elements in their standard states. Similar to the standard enthalpy of formation, ΔGf° is by definition zero for elemental substances in their standard states. The approach used to calculate ΔG° for a reaction from ΔGf° values is the same as that demonstrated previously for enthalpy and entropy changes. For the reaction
+
+the standard free energy change at room temperature may be calculated as
+Using Standard Free Energies of Formation to Calculate ΔG°
+Consider the decomposition of yellow mercury(II) oxide.
+
+Using Standard Free Energies of Formation to Calculate ΔG°
+
+Calculate the standard free energy change at room temperature, ΔG°, using (a) standard free energies of formation and (b) standard enthalpies of formation and standard entropies. Do the results indicate the reaction to be spontaneous or nonspontaneous under standard conditions?
+Solution
+The required data are available in Appendix G and are shown here.
+
+Solution
+
+S°(J/K·mol)
+HgO (s, yellow)
+−58.43
+−90.46
+71.13
+Hg(l)
+0
+0
+75.9
+O2(g)
+0
+0
+205.2
+(a) Using free energies of formation:
+
+(b) Using enthalpies and entropies of formation:
+
+Both ways to calculate the standard free energy change at 25 °C give the same numerical value (to three significant figures), and both predict that the process is nonspontaneous (not spontaneous) at room temperature.
+Check Your Learning
+Calculate ΔG° using (a) free energies of formation and (b) enthalpies of formation and entropies (Appendix G). Do the results indicate the reaction to be spontaneous or nonspontaneous at 25 °C?
+
+Check Your Learning
+
+Answer:
+
+(a) 140.8 kJ/mol, nonspontaneous
+
+(b) 141.5 kJ/mol, nonspontaneous
+
+Free Energy Changes for Coupled Reactions
+
+The use of free energies of formation to compute free energy changes for reactions as described above is possible because ΔG is a state function, and the approach is analogous to the use of Hess’ Law in computing enthalpy changes (see the chapter on thermochemistry). Consider the vaporization of water as an example:
+
+An equation representing this process may be derived by adding the formation reactions for the two phases of water (necessarily reversing the reaction for the liquid phase). The free energy change for the sum reaction is the sum of free energy changes for the two added reactions:
+
+This approach may also be used in cases where a nonspontaneous reaction is enabled by coupling it to a spontaneous reaction. For example, the production of elemental zinc from zinc sulfide is thermodynamically unfavorable, as indicated by a positive value for ΔG°:
+
+The industrial process for production of zinc from sulfidic ores involves coupling this decomposition reaction to the thermodynamically favorable oxidation of sulfur:
+
+The coupled reaction exhibits a negative free energy change and is spontaneous:
+
+This process is typically carried out at elevated temperatures, so this result obtained using standard free energy values is just an estimate. The gist of the calculation, however, holds true.
+Calculating Free Energy Change for a Coupled Reaction
+Is a reaction coupling the decomposition of ZnS to the formation of H2S expected to be spontaneous under standard conditions?
+
+Calculating Free Energy Change for a Coupled Reaction
+Solution
+Following the approach outlined above and using free energy values from Appendix G:
+
+Solution
+
+The coupled reaction exhibits a positive free energy change and is thus nonspontaneous.
+Check Your Learning
+What is the standard free energy change for the reaction below? Is the reaction expected to be spontaneous under standard conditions?
+
+Check Your Learning
+
+Answer:
+
+−199.7 kJ; spontaneous
+
+Temperature Dependence of Spontaneity
+
+As was previously demonstrated in this chapter’s section on entropy, the spontaneity of a process may depend upon the temperature of the system. Phase transitions, for example, will proceed spontaneously in one direction or the other depending upon the temperature of the substance in question. Likewise, some chemical reactions can also exhibit temperature dependent spontaneities. To illustrate this concept, the equation relating free energy change to the enthalpy and entropy changes for the process is considered:
+
+The spontaneity of a process, as reflected in the arithmetic sign of its free energy change, is then determined by the signs of the enthalpy and entropy changes and, in some cases, the absolute temperature. Since T is the absolute (kelvin) temperature, it can only have positive values. Four possibilities therefore exist with regard to the signs of the enthalpy and entropy changes:
+Both ΔH and ΔS are positive. This condition describes an endothermic process that involves an increase in system entropy. In this case, ΔG will be negative if the magnitude of the TΔS term is greater than ΔH. If the TΔS term is less than ΔH, the free energy change will be positive. Such a process is spontaneous at high temperatures and nonspontaneous at low temperatures.
+Both ΔH and ΔS are negative. This condition describes an exothermic process that involves a decrease in system entropy. In this case, ΔG will be negative if the magnitude of the TΔS term is less than ΔH. If the TΔS term’s magnitude is greater than ΔH, the free energy change will be positive. Such a process is spontaneous at low temperatures and nonspontaneous at high temperatures.
+ΔH is positive and ΔS is negative. This condition describes an endothermic process that involves a decrease in system entropy. In this case, ΔG will be positive regardless of the temperature. Such a process is nonspontaneous at all temperatures.
+ΔH is negative and ΔS is positive. This condition describes an exothermic process that involves an increase in system entropy. In this case, ΔG will be negative regardless of the temperature. Such a process is spontaneous at all temperatures.
+
+These four scenarios are summarized in .
+Predicting the Temperature Dependence of Spontaneity
+The incomplete combustion of carbon is described by the following equation:
+
+Predicting the Temperature Dependence of Spontaneity
+
+How does the spontaneity of this process depend upon temperature?
+Solution
+Combustion processes are exothermic (ΔH < 0). This particular reaction involves an increase in entropy due to the accompanying increase in the amount of gaseous species (net gain of one mole of gas, ΔS > 0). The reaction is therefore spontaneous (ΔG < 0) at all temperatures.
+
+Solution
+Check Your Learning
+Popular chemical hand warmers generate heat by the air-oxidation of iron:
+
+Check Your Learning
+
+How does the spontaneity of this process depend upon temperature?
+
+Answer:
+
+ΔH and ΔS are negative; the reaction is spontaneous at low temperatures.
+
+When considering the conclusions drawn regarding the temperature dependence of spontaneity, it is important to keep in mind what the terms “high” and “low” mean. Since these terms are adjectives, the temperatures in question are deemed high or low relative to some reference temperature. A process that is nonspontaneous at one temperature but spontaneous at another will necessarily undergo a change in “spontaneity” (as reflected by its ΔG) as temperature varies. This is clearly illustrated by a graphical presentation of the free energy change equation, in which ΔG is plotted on the y axis versus T on the x axis:
+
+Such a plot is shown in . A process whose enthalpy and entropy changes are of the same arithmetic sign will exhibit a temperature-dependent spontaneity as depicted by the two yellow lines in the plot. Each line crosses from one spontaneity domain (positive or negative ΔG) to the other at a temperature that is characteristic of the process in question. This temperature is represented by the x-intercept of the line, that is, the value of T for which ΔG is zero:
+
+So, saying a process is spontaneous at “high” or “low” temperatures means the temperature is above or below, respectively, that temperature at which ΔG for the process is zero. As noted earlier, the condition of ΔG = 0 describes a system at equilibrium.
+Equilibrium Temperature for a Phase TransitionAs defined in the chapter on liquids and solids, the boiling point of a liquid is the temperature at which its liquid and gaseous phases are in equilibrium (that is, when vaporization and condensation occur at equal rates). Use the information in Appendix G to estimate the boiling point of water.
+
+Equilibrium Temperature for a Phase Transition
+Solution
+The process of interest is the following phase change:
+
+Solution
+
+When this process is at equilibrium, ΔG = 0, so the following is true:
+
+Using the standard thermodynamic data from Appendix G,
+
+The accepted value for water’s normal boiling point is 373.2 K (100.0 °C), and so this calculation is in reasonable agreement. Note that the values for enthalpy and entropy changes data used were derived from standard data at 298 K (Appendix G). If desired, you could obtain more accurate results by using enthalpy and entropy changes determined at (or at least closer to) the actual boiling point.
+Check Your Learning
+Use the information in Appendix G to estimate the boiling point of CS2.
+
+Check Your Learning
+
+Answer:
+
+313 K (accepted value 319 K)
+
+Free Energy and Equilibrium
+
+The free energy change for a process may be viewed as a measure of its driving force. A negative value for ΔG represents a driving force for the process in the forward direction, while a positive value represents a driving force for the process in the reverse direction. When ΔG is zero, the forward and reverse driving forces are equal, and the process occurs in both directions at the same rate (the system is at equilibrium).
+
+In the chapter on equilibrium the reaction quotient, Q, was introduced as a convenient measure of the status of an equilibrium system. Recall that Q is the numerical value of the mass action expression for the system, and that you may use its value to identify the direction in which a reaction will proceed in order to achieve equilibrium. When Q is lesser than the equilibrium constant, K, the reaction will proceed in the forward direction until equilibrium is reached and Q = K. Conversely, if Q > K, the process will proceed in the reverse direction until equilibrium is achieved.
+
+The free energy change for a process taking place with reactants and products present under nonstandard conditions (pressures other than 1 bar; concentrations other than 1 M) is related to the standard free energy change according to this equation:
+R is the gas constant (8.314 J/K mol), T is the kelvin or absolute temperature, and Q is the reaction quotient. For gas phase equilibria, the pressure-based reaction quotient, QP, is used. The concentration-based reaction quotient, QC, is used for condensed phase equilibria. This equation may be used to predict the spontaneity for a process under any given set of conditions as illustrated in .
+Calculating ΔG under Nonstandard Conditions
+What is the free energy change for the process shown here under the specified conditions?
+
+Calculating ΔG under Nonstandard Conditions
+T = 25 °C, PN2=0.870 atm, PH2=0.250 atm, and PNH3=12.9 atm
+Solution
+The equation relating free energy change to standard free energy change and reaction quotient may be used directly:
+
+Solution
+
+Since the computed value for ΔG is positive, the reaction is nonspontaneous under these conditions.
+Check Your Learning
+Calculate the free energy change for this same reaction at 875 °C for a mixture containing each gas at a partial pressure of 1.88 atm. Is the reaction spontaneous under these conditions?
+
+Check Your Learning
+
+Answer:
+
+ΔG = 45.1 kJ/mol; no
+
+For a system at equilibrium, Q = K and ΔG = 0, and the previous equation may be written as
+
+This form of the equation provides a useful link between these two essential thermodynamic properties, and it can be used to derive equilibrium constants from standard free energy changes and vice versa. The relations between standard free energy changes and equilibrium constants are summarized in .
+
+K
+ΔG°
+Composition of an Equilibrium Mixture
+> 1
+< 0
+Products are more abundant
+< 1
+> 0
+Reactants are more abundant
+= 1
+= 0
+Calculating an Equilibrium Constant using Standard Free Energy Change
+Given that the standard free energies of formation of Ag+(aq), Cl−(aq), and AgCl(s) are 77.1 kJ/mol, −131.2 kJ/mol, and −109.8 kJ/mol, respectively, calculate the solubility product, Ksp, for AgCl.
+
+Calculating an Equilibrium Constant using Standard Free Energy Change
+Solution
+The reaction of interest is the following:
+
+Solution
+
+The standard free energy change for this reaction is first computed using standard free energies of formation for its reactants and products:
+
+The equilibrium constant for the reaction may then be derived from its standard free energy change:
+
+This result is in reasonable agreement with the value provided in Appendix J.
+Check Your Learning
+Use the thermodynamic data provided in Appendix G to calculate the equilibrium constant for the dissociation of dinitrogen tetroxide at 25 °C.
+
+Check Your Learning
+
+Answer:
+K = 3.1
+
+To further illustrate the relation between these two essential thermodynamic concepts, consider the observation that reactions spontaneously proceed in a direction that ultimately establishes equilibrium. As may be shown by plotting the free energy versus the extent of the reaction (for example, as reflected in the value of Q), equilibrium is established when the system’s free energy is minimized (). If a system consists of reactants and products in nonequilibrium amounts (Q ≠ K), the reaction will proceed spontaneously in the direction necessary to establish equilibrium.
+
+Key Concepts and Summary
+
+Gibbs free energy (G) is a state function defined with regard to system quantities only and may be used to predict the spontaneity of a process. A negative value for ΔG indicates a spontaneous process; a positive ΔG indicates a nonspontaneous process; and a ΔG of zero indicates that the system is at equilibrium. A number of approaches to the computation of free energy changes are possible.
+
+Key Equations
+
+ΔG = ΔH − TΔS
+Chemistry End of Chapter Exercises
+
+What is the difference between ΔG and ΔG° for a chemical change?
+
+A reaction has ΔH° = 100 kJ/mol and ΔS°=250 J/mol·K. Is the reaction spontaneous at room temperature? If not, under what temperature conditions will it become spontaneous?
+
+The reaction is nonspontaneous at room temperature.
+Above 400 K, ΔG will become negative, and the reaction will become spontaneous.
+
+Explain what happens as a reaction starts with ΔG < 0 (negative) and reaches the point where ΔG = 0.
+
+Use the standard free energy of formation data in Appendix G to determine the free energy change for each of the following reactions, which are run under standard state conditions and 25 °C. Identify each as either spontaneous or nonspontaneous at these conditions.
+
+(a) MnO2(s)⟶Mn(s)+O2(g)
+
+(b) H2(g)+Br2(l)⟶2HBr(g)
+
+(c) Cu(s)+S(g)⟶CuS(s)
+
+(d) 2LiOH(s)+CO2(g)⟶Li2CO3(s)+H2O(g)
+
+(e) CH4(g)+O2(g)⟶C(s,graphite)+2H2O(g)
+
+(f) CS2(g)+3Cl2(g)⟶CCl4(g)+S2Cl2(g)
+
+(a) 465.1 kJ nonspontaneous; (b) −106.86 kJ spontaneous; (c) −291.9 kJ spontaneous; (d) −83.4 kJ spontaneous; (e) −406.7 kJ spontaneous; (f) −154.3 kJ spontaneous
+
+Use the standard free energy data in Appendix G to determine the free energy change for each of the following reactions, which are run under standard state conditions and 25 °C. Identify each as either spontaneous or nonspontaneous at these conditions.
+
+(a) C(s, graphite)+O2(g)⟶CO2(g)
+
+(b) O2(g)+N2(g)⟶2NO(g)
+
+(c) 2Cu(s)+S(g)⟶Cu2S(s)
+
+(d) CaO(s)+H2O(l)⟶Ca(OH)2(s)
+
+(e) Fe2O3(s)+3CO(g)⟶2Fe(s)+3CO2(g)
+
+(f) CaSO4·2H2O(s)⟶CaSO4(s)+2H2O(g)
+
+Given:
+P4(s)+5O2(g)⟶P4O10(s)ΔG°=−2697.0 kJ/mol
+2H2(g)+O2(g)⟶2H2O(g)ΔG°=−457.18 kJ/mol
+6H2O(g)+P4O10(s)⟶4H3PO4(l)ΔG°=−428.66 kJ/mol
+
+(a) Determine the standard free energy of formation, ΔGf°, for phosphoric acid.
+
+(b) How does your calculated result compare to the value in Appendix G? Explain.
+
+(a) The standard free energy of formation is –1124.3 kJ/mol. (b) The calculation agrees with the value in Appendix G because free energy is a state function (just like the enthalpy and entropy), so its change depends only on the initial and final states, not the path between them.
+
+Is the formation of ozone (O3(g)) from oxygen (O2(g)) spontaneous at room temperature under standard state conditions?
+
+Consider the decomposition of red mercury(II) oxide under standard state conditions.
+2HgO(s,red)⟶2Hg(l)+O2(g)
+
+(a) Is the decomposition spontaneous under standard state conditions?
+
+(b) Above what temperature does the reaction become spontaneous?
+
+(a) The reaction is nonspontaneous; (b) Above 566 °C the process is spontaneous.
+
+Among other things, an ideal fuel for the control thrusters of a space vehicle should decompose in a spontaneous exothermic reaction when exposed to the appropriate catalyst. Evaluate the following substances under standard state conditions as suitable candidates for fuels.
+
+(a) Ammonia: 2NH3(g)⟶N2(g)+3H2(g)
+
+(b) Diborane: B2H6(g)⟶2B(g)+3H2(g)
+
+(c) Hydrazine: N2H4(g)⟶N2(g)+2H2(g)
+
+(d) Hydrogen peroxide: H2O2(l)⟶H2O(g)+12O2(g)
+
+Calculate ΔG° for each of the following reactions from the equilibrium constant at the temperature given.
+
+(a) N2(g)+O2(g)⟶2NO(g)T=2000°CKp=4.1×10−4
+
+(b) H2(g)+I2(g)⟶2HI(g)T=400°CKp=50.0
+
+(c) CO2(g)+H2(g)⟶CO(g)+H2O(g)T=980°CKp=1.67
+
+(d) CaCO3(s)⟶CaO(s)+CO2(g)T=900°CKp=1.04
+
+(e) HF(aq)+H2O(l)⟶H3O+(aq)+F−(aq)T=25°CKp=7.2×10−4
+
+(f) AgBr(s)⟶Ag+(aq)+Br−(aq)T=25°CKp=3.3×10−13
+
+(a) 1.5 × 102 kJ; (b) −21.9 kJ; (c) −5.34 kJ; (d) −0.383 kJ; (e) 18 kJ; (f) 71 kJ
+
+Calculate ΔG° for each of the following reactions from the equilibrium constant at the temperature given.
+
+(a) Cl2(g)+Br2(g)⟶2BrCl(g)T=25°CKp=4.7×10−2
+
+(b) 2SO2(g)+O2(g)⇌2SO3(g)T=500°CKp=48.2
+
+(c) H2O(l)⇌H2O(g)T=60°CKp=0.196
+
+(d) CoO(s)+CO(g)⇌Co(s)+CO2(g)T=550°CKp=4.90×102
+
+(e) CH3NH2(aq)+H2O(l)⟶CH3NH3+(aq)+OH−(aq)T=25°CKp=4.4×10−4
+
+(f) PbI2(s)⟶Pb2+(aq)+2I−(aq)T=25°CKp=8.7×10−9
+
+Calculate the equilibrium constant at 25 °C for each of the following reactions from the value of ΔG° given.
+
+(a) O2(g)+2F2(g)⟶2OF2(g)ΔG°=−9.2 kJ
+
+(b) I2(s)+Br2(l)⟶2IBr(g)ΔG°=7.3 kJ
+
+(c) 2LiOH(s)+CO2(g)⟶Li2CO3(s)+H2O(g)ΔG°=−79 kJ
+
+(d) N2O3(g)⟶NO(g)+NO2(g)ΔG°=−1.6 kJ
+
+(e) SnCl4(l)⟶SnCl4(l)ΔG°=8.0 kJ
+
+(a) K = 41; (b) K = 0.053; (c) K = 6.9 × 1013; (d) K = 1.9; (e) K = 0.04
+
+Calculate the equilibrium constant at 25 °C for each of the following reactions from the value of ΔG° given.
+
+(a) I2(s)+Cl2(g)⟶2ICl(g)ΔG°=−10.88 kJ
+
+(b) H2(g)+I2(s)⟶2HI(g)ΔG°=3.4 kJ
+
+(c) CS2(g)+3Cl2(g)⟶CCl4(g)+S2Cl2(g)ΔG°=−39 kJ
+
+(d) 2SO2(g)+O2(g)⟶2SO3(g)ΔG°=−141.82 kJ
+
+(e) CS2(g)⟶CS2(l)ΔG°=−1.88 kJ
+
+Calculate the equilibrium constant at the temperature given.
+
+(a) O2(g)+2F2(g)⟶2F2O(g)(T=100°C)
+
+(b) I2(s)+Br2(l)⟶2IBr(g)(T=0.0°C)
+
+(c) 2LiOH(s)+CO2(g)⟶Li2CO3(s)+H2O(g)(T=575°C)
+
+(d) N2O3(g)⟶NO(g)+NO2(g)(T=−10.0°C)
+
+(e) SnCl4(l)⟶SnCl4(g)(T=200°C)
+
+In each of the following, the value of ΔG is not given at the temperature of the reaction. Therefore, we must calculate ΔG from the values ΔH° and ΔS and then calculate ΔG from the relation ΔG = ΔH° − TΔS°.
+(a) K = 1.07 × 10−13;
+(b) K = 2.51 × 10−3;
+(c) K = 2.73 × 104;
+(d) K = 0.219;
+(e) K = 16.1
+
+Calculate the equilibrium constant at the temperature given.
+
+(a) I2(s)+Cl2(g)⟶2ICl(g)(T=100°C)
+
+(b) H2(g)+I2(s)⟶2HI(g)(T=0.0°C)
+
+(c) CS2(g)+3Cl2(g)⟶CCl4(g)+S2Cl2(g)(T=125°C)
+
+(d) 2SO2(g)+O2(g)⟶2SO3(g)(T=675°C)
+
+(e) CS2(g)⟶CS2(l)(T=90°C)
+
+Consider the following reaction at 298 K:
+N2O4(g)⇌2NO2(g)KP=0.142
+
+What is the standard free energy change at this temperature? Describe what happens to the initial system, where the reactants and products are in standard states, as it approaches equilibrium.
+
+The standard free energy change is ΔG°=−RTlnK=4.84 kJ/mol. When reactants and products are in their standard states (1 bar or 1 atm), Q = 1. As the reaction proceeds toward equilibrium, the reaction shifts left (the amount of products drops while the amount of reactants increases): Q < 1, and ΔG becomes less positive as it approaches zero. At equilibrium, Q = K, and ΔG = 0.
+
+Determine the normal boiling point (in kelvin) of dichloromethane, CH2Cl2. Find the actual boiling point using the Internet or some other source, and calculate the percent error in the temperature. Explain the differences, if any, between the two values.
+
+Under what conditions is N2O3(g)⟶NO(g)+NO2(g) spontaneous?
+
+The reaction will be spontaneous at temperatures greater than 287 K.
+
+At room temperature, the equilibrium constant (Kw) for the self-ionization of water is 1.00 × 10−14. Using this information, calculate the standard free energy change for the aqueous reaction of hydrogen ion with hydroxide ion to produce water. (Hint: The reaction is the reverse of the self-ionization reaction.)
+
+Hydrogen sulfide is a pollutant found in natural gas. Following its removal, it is converted to sulfur by the reaction 2H2S(g)+SO2(g)⇌38S8(s,rhombic)+2H2O(l). What is the equilibrium constant for this reaction? Is the reaction endothermic or exothermic?
+K = 5.35 × 1015;
+The process is exothermic.
+
+Consider the decomposition of CaCO3(s) into CaO(s) and CO2(g). What is the equilibrium partial pressure of CO2 at room temperature?
+
+In the laboratory, hydrogen chloride (HCl(g)) and ammonia (NH3(g)) often escape from bottles of their solutions and react to form the ammonium chloride (NH4Cl(s)), the white glaze often seen on glassware. Assuming that the number of moles of each gas that escapes into the room is the same, what is the maximum partial pressure of HCl and NH3 in the laboratory at room temperature? (Hint: The partial pressures will be equal and are at their maximum value when at equilibrium.)
+
+1.0 × 10−8 atm. This is the maximum pressure of the gases under the stated conditions.
+
+Benzene can be prepared from acetylene. 3C2H2(g)⇌C6H6(g). Determine the equilibrium constant at 25 °C and at 850 °C. Is the reaction spontaneous at either of these temperatures? Why is all acetylene not found as benzene?
+
+Carbon dioxide decomposes into CO and O2 at elevated temperatures. What is the equilibrium partial pressure of oxygen in a sample at 1000 °C for which the initial pressure of CO2 was 1.15 atm?
+x=1.29×10−5atm=PO2
+
+Carbon tetrachloride, an important industrial solvent, is prepared by the chlorination of methane at 850 K.
+CH4(g)+4Cl2(g)⟶CCl4(g)+4HCl(g)
+
+What is the equilibrium constant for the reaction at 850 K? Would the reaction vessel need to be heated or cooled to keep the temperature of the reaction constant?
+
+Acetic acid, CH3CO2H, can form a dimer, (CH3CO2H)2, in the gas phase.
+2CH3CO2H(g)⟶(CH3CO2H)2(g)
+
+The dimer is held together by two hydrogen bonds with a total strength of 66.5 kJ per mole of dimer.
+
+At 25 °C, the equilibrium constant for the dimerization is 1.3 × 103 (pressure in atm). What is ΔS° for the reaction?
+
+−0.16 kJ
+
+Determine ΔGº for the following reactions.
+
+(a) Antimony pentachloride decomposes at 448 °C. The reaction is:
+SbCl5(g)⟶SbCl3(g)+Cl2(g)
+
+An equilibrium mixture in a 5.00 L flask at 448 °C contains 3.85 g of SbCl5, 9.14 g of SbCl3, and 2.84 g of Cl2.
+
+(b) Chlorine molecules dissociate according to this reaction:
+Cl2(g)⟶2Cl(g)
+
+1.00% of Cl2 molecules dissociate at 975 K and a pressure of 1.00 atm.
+
+(a) 22.1 kJ; (b) 98.9 kJ/mol
+
+Given that the ΔGf° for Pb2+(aq) and Cl−(aq) is −24.3 kJ/mole and −131.2 kJ/mole respectively, determine the solubility product, Ksp, for PbCl2(s).
+
+Determine the standard free energy change, ΔGf°, for the formation of S2−(aq) given that the ΔGf° for Ag+(aq) and Ag2S(s) are 77.1 kJ/mole and −39.5 kJ/mole respectively, and the solubility product for Ag2S(s) is 8 × 10−51.
+
+90 kJ/mol
+
+Determine the standard enthalpy change, entropy change, and free energy change for the conversion of diamond to graphite. Discuss the spontaneity of the conversion with respect to the enthalpy and entropy changes. Explain why diamond spontaneously changing into graphite is not observed.
+
+The evaporation of one mole of water at 298 K has a standard free energy change of 8.58 kJ.
+H2O(l)⇌H2O(g)ΔG°=8.58 kJ
+
+(a) Is the evaporation of water under standard thermodynamic conditions spontaneous?
+
+(b) Determine the equilibrium constant, KP, for this physical process.
+
+(c) By calculating ∆G, determine if the evaporation of water at 298 K is spontaneous when the partial pressure of water, PH2O, is 0.0
+[truncated]

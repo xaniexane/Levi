@@ -1,0 +1,656 @@
+# m79593
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Definitions of Statistics, Probability, and Key Terms
+
+Definitions of Statistics, Probability, and Key Terms
+
+The science of statistics deals with the collection, analysis, interpretation, and presentation of data. We see and use data in our everyday lives.
+
+In your classroom, try this exercise. Have class members write down the average time—in hours, to the nearest half-hour—they sleep per night. Your instructor will record the data. Then create a simple graph, called a dot plot, of the data. A dot plot consists of a number line and dots, or points, positioned above the number line. For example, consider the following data:
+
+5, 5.5, 6, 6, 6, 6.5, 6.5, 6.5, 6.5, 7, 7, 8, 8, 9.
+
+The dot plot for this data would be as follows:
+
+Does your dot plot look the same as or different from the example? Why? If you did the same example in an English class with the same number of students, do you think the results would be the same? Why or why not?
+
+Where do your data appear to cluster? How might you interpret the clustering?
+
+The questions above ask you to analyze and interpret your data. With this example, you have begun your study of statistics.
+
+In this course, you will learn how to organize and summarize data. Organizing and summarizing data is called descriptive statistics. Two ways to summarize data are by graphing and by using numbers, for example, finding an average. After you have studied probability and probability distributions, you will use formal methods for drawing conclusions from good data. The formal methods are called inferential statistics. Statistical inference uses probability to determine how confident we can be that our conclusions are correct.
+
+Effective interpretation of data, or inference, is based on good procedures for producing data and thoughtful examination of the data. You will encounter what will seem to be too many mathematical formulas for interpreting data. The goal of statistics is not to perform numerous calculations using the formulas, but to gain an understanding of your data. The calculations can be done using a calculator or a computer. The understanding must come from you. If you can thoroughly grasp the basics of statistics, you can be more confident in the decisions you make in life.
+
+Statistical Models
+
+Statistics, like all other branches of mathematics, uses mathematical models to describe phenomena that occur in the real world. Some mathematical models are deterministic. These models can be used when one value is precisely determined from another value. Examples of deterministic models are the quadratic equations that describe the acceleration of a car from rest or the differential equations that describe the transfer of heat from a stove to a pot. These models are quite accurate and can be used to answer questions and make predictions with a high degree of precision. Space agencies, for example, use deterministic models to predict the exact amount of thrust that a rocket needs to break away from Earths gravity and achieve orbit.
+
+However, life is not always precise. While scientists can predict to the minute the time that the sun will rise, they cannot say precisely where a hurricane will make landfall. Statistical models can be used to predict lifes more uncertain situations. These special forms of mathematical models or functions are based on the idea that one value affects another value. Some statistical models are mathematical functions that are more preciseone set of values can predict or determine another set of values. Or some statistical models are mathematical functions in which a set of values do not precisely determine other values. Statistical models are very useful because they can describe the probability or likelihood of an event occurring and provide alternative outcomes if the event does not occur. For example, weather forecasts are examples of statistical models. Meteorologists cannot predict tomorrows weather with certainty. However, they often use statistical models to tell you how likely it is to rain at any given time, and you can prepare yourself based on this probability.
+
+Probability
+Probability is a mathematical tool used to study randomness. It deals with the chance of an event occurring. For example, if you toss a fair coin four times, the outcomes may not be two heads and two tails. However, if you toss the same coin 4,000 times, the outcomes will be close to half heads and half tails. The expected theoretical probability of heads in any one toss is 
+
+ 1
+ 2
+
+ or .5. Even though the outcomes of a few repetitions are uncertain, there is a regular pattern of outcomes when there are many repetitions. After reading about the English statistician Karl Pearson who tossed a coin 24,000 times with a result of 12,012 heads, one of the authors tossed a coin 2,000 times. The results were 996 heads. The fraction 
+
+ 996
+
+ 2,000
+
+ is equal to .498 which is very close to .5, the expected probability.
+
+The theory of probability began with the study of games of chance such as poker. Predictions take the form of probabilities. To predict the likelihood of an earthquake, of rain, or whether you will get an A in this course, we use probabilities. Doctors use probability to determine the chance of a vaccination causing the disease the vaccination is supposed to prevent. A stockbroker uses probability to determine the rate of return on a client's investments.
+
+Key Terms
+
+In statistics, we generally want to study a population. You can think of a population as a collection of persons, things, or objects under study. To study the population, we select a sample. The idea of sampling is to select a portion, or subset, of the larger population and study that portion—the sample—to gain information about the population. Data are the result of sampling from a population.
+
+Because it takes a lot of time and money to examine an entire population, sampling is a very practical technique. If you wished to compute the overall grade point average at your school, it would make sense to select a sample of students who attend the school. The data collected from the sample would be the students' grade point averages. In presidential elections, opinion poll samples of 1,000–2,000 people are taken. The opinion poll is supposed to represent the views of the people in the entire country. Manufacturers of canned carbonated drinks take samples to determine if a 16-ounce can contains 16 ounces of carbonated drink.
+
+From the sample data, we can calculate a statistic. A statistic is a number that represents a property of the sample. For example, if we consider one math class as a sample of the population of all math classes, then the average number of points earned by students in that one math class at the end of the term is an example of a statistic. Since we do not have the data for all math classes, that statistic is our best estimate of the average for the entire population of math classes. If we happen to have data for all math classes, we can find the population parameter. A parameter is a numerical characteristic of the whole population that can be estimated by a statistic. Since we considered all math classes to be the population, then the average number of points earned per student over all the math classes is an example of a parameter.
+
+One of the main concerns in the field of statistics is how accurately a statistic estimates a parameter. In order to have an accurate sample, it must contain the characteristics of the population in order to be a representative sample. We are interested in both the sample statistic and the population parameter in inferential statistics. In a later chapter, we will use the sample statistic to test the validity of the established population parameter.
+
+A variable, usually notated by capital letters such as X and Y, is a characteristic or measurement that can be determined for each member of a population. Variables may describe values like weight in pounds or favorite subject in school. Numerical variables take on values with equal units such as weight in pounds and time in hours. Categorical variables place the person or thing into a category. If we let X equal the number of points earned by one math student at the end of a term, then X is a numerical variable. If we let Y be a person's party affiliation, then some examples of Y include Republican, Democrat, and Independent. Y is a categorical variable. We could do some math with values of X—calculate the average number of points earned, for example—but it makes no sense to do math with values of Y—calculating an average party affiliation makes no sense.
+Data are the actual values of the variable. They may be numbers or they may be words. Datum is a single value.
+
+Two words that come up often in statistics are mean and proportion. If you were to take three exams in your math classes and obtain scores of 86, 75, and 92, you would calculate your mean score by adding the three exam scores and dividing by three. Your mean score would be 84.3 to one decimal place. If, in your math class, there are 40 students and 22 are males and 18 females, then the proportion of men students is 2240 and the proportion of women students is 1840. Mean and proportion are discussed in more detail in later chapters.
+
+NOTE
+
+The words mean and average are often used interchangeably. In this book, we use the term arithmetic mean for mean.
+
+Determine what the population, sample, parameter, statistic, variable, and data referred to in the following study.
+
+We want to know the mean amount of extracurricular activities in which high school students participate. We randomly surveyed 100 high school students. Three of those students were in 2, 5, and 7 extracurricular activities, respectively.
+
+The population is all high school students.
+
+The sample is the 100 high school students interviewed.
+
+The parameter is the mean amount of extracurricular activities in which all high school students participate.
+
+The statistic is the mean amount of extracurricular activities in which the sample of high school students participate.
+
+The variable could be the amount of extracurricular activities by one high school student. Let X = the amount of extracurricular activities by one high school student.
+
+The data are the number of extracurricular activities in which the high school students participate. Examples of the data are 2, 5, 7.
+
+Try It
+
+Find an article online or in a newspaper or magazine that refers to a statistical study or poll. Identify what each of the key terms—population, sample, parameter, statistic, variable, and data—refers to in the study mentioned in the article. Does the article use the key terms correctly?
+
+Try It Solutions
+
+The population is all families with children attending Knoll Academy.
+
+The sample is a random selection of 100 families with children attending Knoll Academy.
+
+The parameter is the average (mean) amount of money spent on school uniforms by families with children at Knoll Academy.
+
+The statistic is the average (mean) amount of money spent on school uniforms by families in the sample.
+
+The variable is the amount of money spent by one family. Let X = the amount of money spent on school uniforms by one family with children attending Knoll Academy.
+
+The data are the dollar amounts spent by the families. Examples of the data are $65, $75, and $95.
+
+Determine what the key terms refer to in the following study.
+
+A study was conducted at a local high school to analyze the average cumulative GPAs of students who graduated last year. Fill in the letter of the phrase that best describes each of the items below.
+
+1. Population ____ 2. Statistic ____ 3. Parameter ____ 4. Sample ____ 5. Variable ____ 6. Data ____
+
+a) all students who attended the high school last year
+
+b) the cumulative GPA of one student who graduated from the high school last year
+
+c) 3.65, 2.80, 1.50, 3.90
+
+d) a group of students who graduated from the high school last year, randomly selected
+
+e) the average cumulative GPA of students who graduated from the high school last year
+
+f) all students who graduated from the high school last year
+
+g) the average cumulative GPA of students in the study who graduated from the high school last year
+1. f
+2. g
+3. e
+4. d
+5. b
+6. c
+
+1. f
+
+2. g
+
+3. e
+
+4. d
+
+5. b
+
+6. c
+
+Determine what the population, sample, parameter, statistic, variable, and data referred to in the following study.
+
+As part of a study designed to test the safety of automobiles, the National Transportation Safety Board collected and reviewed data about the effects of an automobile crash on test dummies (The Data and Story Library, n.d.). Here is the criterion they used.
+
+Speed at which Cars Crashed
+Location of Driver (i.e., dummies)
+35 miles/hour
+Front seat
+Cars with dummies in the front seats were crashed into a wall at a speed of 35 miles per hour. We want to know the proportion of dummies in the driver’s seat that would have had head injuries, if they had been actual drivers. We start with a simple random sample of 75 cars.
+
+The population is all cars containing dummies in the front seat.
+
+The sample is the 75 cars, selected by a simple random sample.
+
+The parameter is the proportion of driver dummies—if they had been real people—who would have suffered head injuries in the population.
+
+The statistic is proportion of driver dummies—if they had been real people—who would have suffered head injuries in the sample.
+
+The variable X = whether driver dummies—if they had been real people—would have suffered head injuries.
+
+The data are either: yes, had head injury, or no, did not.
+
+Determine what the population, sample, parameter, statistic, variable, and data referred to in the following study.
+
+An insurance company would like to determine the proportion of all medical doctors
+who have been involved in one or more malpractice lawsuits. The company selects
+500 doctors at random from a professional directory and determines the number in
+the sample who have been involved in a malpractice lawsuit.
+
+The population is all medical doctors listed in the professional directory.
+
+The parameter is the proportion of medical doctors who have been involved in one or more malpractice suits in the population.
+
+The sample is the 500 doctors selected at random from the professional directory.
+
+The statistic is the proportion of medical doctors who have been involved in one or more malpractice suits in the sample.
+
+The variable X records whether a doctor has or has not been involved in a malpractice suit.
+
+The data are either: yes, was involved in one or more malpractice lawsuits; or no, was not.
+
+Do the following exercise collaboratively with up to four people per group. Find a population, a sample, the parameter, the statistic, a variable, and data for the following study: You want to determine the average—mean—number of glasses of milk college students drink per day. Suppose yesterday, in your English class, you asked five students how many glasses of milk they drank the day before. The answers were 1, 0, 1, 3, and 4 glasses of milk.
+
+References
+
+The Data and Story Library. Retrieved from http://lib.stat.cmu.edu/DASL/Stories/CrashTestDummies.html.
+
+Chapter Review
+
+The mathematical theory of statistics is easier to learn when you know the language. This module presents important terms that will be used throughout the text.
+
+Practice
+
+Below is a two-way table showing the types of college sports played by men and women.
+
+Soccer
+Basketball
+Lacrosse
+Total
+Women
+8
+8
+4
+20
+Men
+4
+12
+4
+20
+Total
+12
+20
+8
+40
+Given these data, calculate the marginal distributions of college sports for the people surveyed.
+
+soccer = 12/40 = ;
+
+basketball = 20/40 = ;
+
+lacrosse = 8/40 = 0.2
+
+Below is a two-way table showing the types of college sports played by men and women.
+
+Soccer
+Basketball
+Lacrosse
+Total
+Women
+8
+8
+4
+20
+Men
+4
+12
+4
+20
+Total
+12
+20
+8
+40
+Given these data, calculate the conditional distributions for the subpopulation of women who play college sports.
+
+women who play soccer = 8/20 = ;
+
+women who play basketball = 8/20 = ;
+
+women who play lacrosse = 4/20 = ;
+Use the following information to answer the next five exercises. Studies are often done by pharmaceutical companies to determine the effectiveness of a treatment program. Suppose that a new viral antibody drug is currently under study. It is given to patients once the virus's symptoms have revealed themselves. Of interest is the average (mean) length of time in months patients live once they start the treatment. Two researchers each follow a different set of 40 patients with the viral disease from the start of treatment until their deaths. The following data (in months) are collected.
+Researcher A3
+4
+11
+15
+16
+17
+22
+44
+37
+16
+14
+24
+25
+15
+26
+27
+33
+29
+35
+44
+13
+21
+22
+10
+12
+8
+40
+32
+26
+27
+31
+34
+29
+17
+8
+24
+18
+47
+33
+34
+
+Researcher A
+
+3
+
+4
+
+11
+
+15
+
+16
+
+17
+
+22
+
+44
+
+37
+
+16
+
+14
+
+24
+
+25
+
+15
+
+26
+
+27
+
+33
+
+29
+
+35
+
+44
+
+13
+
+21
+
+22
+
+10
+
+12
+
+8
+
+40
+
+32
+
+26
+
+27
+
+31
+
+34
+
+29
+
+17
+
+8
+
+24
+
+18
+
+47
+
+33
+
+34
+Researcher B3
+14
+11
+5
+16
+17
+28
+41
+31
+18
+14
+14
+26
+25
+21
+22
+31
+2
+35
+44
+23
+21
+21
+16
+12
+18
+41
+22
+16
+25
+33
+34
+29
+13
+18
+24
+23
+42
+33
+29
+
+Researcher B
+
+3
+
+14
+
+11
+
+5
+
+16
+
+17
+
+28
+
+41
+
+31
+
+18
+
+14
+
+14
+
+26
+
+25
+
+21
+
+22
+
+31
+
+2
+
+35
+
+44
+
+23
+
+21
+
+21
+
+16
+
+12
+
+18
+
+41
+
+22
+
+16
+
+25
+
+33
+
+34
+
+29
+
+13
+
+18
+
+24
+
+23
+
+42
+
+33
+
+29
+
+Determine what the key terms refer to in the example for Researcher A.
+
+population
+
+patients with the virus
+
+sample
+
+parameter
+
+The average length of time (in months) patients live after treatment.
+
+statistic
+
+variable
+X = the length of time (in months) patients live after treatment
+
+HOMEWORK
+
+For each of the following situations, indicate whether it would be best modeled with a mathematical model or a statistical model. Explain your answers.
+
+driving time from New York to Florida
+
+departure time of a commuter train at rush hour
+
+distance from your house to school
+
+temperature of a refrigerator at any given time
+
+weight of a bag of rice at the store
+
+statistical model: The time any journey takes from New York to Florida is variable and depends on traffic and other driving conditions.
+
+statistical model: Although trains try to leave on time, the exact time of departure differs slightly from day to day.
+
+mathematical model: The distance from your house to school is the same every day and can be precisely determined.
+
+statistical model: The temperature of a refrigerator fluctuates as the compressor turns on and off.
+
+statistical model: The fill weight of a bag of rice is different for each bag. Manufacturers spend considerable effort to minimize the variance from bag to bag.
+For each of the following eight exercises, identify: a. the population, b. the sample, 
+c. the parameter, d. the statistic, e. the variable, and f. the data. Give examples where appropriate.
+
+A fitness center is interested in the mean amount of time a client exercises in the center each
+week.
+
+Ski resorts are interested in the mean age that children take their first ski and snowboard lessons. They need this information to plan their ski classes optimally.
+
+all children who take ski or snowboard lessons
+
+a group of these children
+
+the population mean age of children who take their first snowboard lesson
+
+the sample mean age of children who take their first snowboard lesson
+X = the age of one child who takes his or her first ski or snowboard lesson
+
+values for X, such as 3, 7, and so on
+
+A cardiologist is interested in the mean recovery period of her patients who have had heart attacks.
+
+Insurance companies are interested in the mean health costs each year of their clients, so that they can determine the costs of health insurance.
+
+the clients of the insurance companies
+
+a group of the clients
+
+the mean health costs of the clients
+
+the mean health costs of the sample
+X = the health costs of one client
+
+values for X, such as 34, 9, 82, and so on
+
+A politician is interested in the proportion of voters in his district who think he is doing a new good job.
+
+A marriage counselor is interested in the proportion of clients she counsels who stay married.
+
+all the clients of this counselor
+
+a group of clients of this marriage counselor
+
+the proportion of all her clients who stay married
+
+the proportion of the sample of the counselor’s clients who stay married
+X = the number of couples who stay married
+
+yes, no
+
+Political pollsters may be interested in the proportion of people who will vote for a particular
+cause.
+
+A marketing company is interested in the proportion of people who will buy a particular product.
+
+all people (maybe in a certain geographic area, such as the United States)
+
+a group of the people
+
+the proportion of all people who will buy the product
+
+the proportion of the sample who will buy the product
+X = the number of people who will buy it
+
+buy, not buy
+Use the following information to answer the next three exercises: A Lake Tahoe Community College instructor is interested in the mean number of days Lake Tahoe Community College math students are absent from class during a quarter.
+
+What is the population she is interested in?
+
+all Lake Tahoe Community College students
+
+all Lake Tahoe Community College English students
+
+all Lake Tahoe Community College students in her classes
+
+all Lake Tahoe Community College math students
+
+Consider the following
+X
+ = number of days a Lake Tahoe Community College math student is absent.
+
+In this case, X is an example of which of the following?
+
+variable
+
+population
+
+statistic
+
+data
+
+a
+
+The instructor’s sample produces a mean number of days absent of 3.5 days. This value is an example of which of the following?
+
+parameter
+
+data
+
+statistic
+
+variable
+
+also called mean; a number that describes the central tendency of the data
+variables that take on values that are names or labels
+a set of observations (a set of possible outcomes); most data can be put into two groups: qualitative (an attribute whose value is indicated by a label) or quantitative (an attribute whose value is indicated by a number)
+Quantitative data can be separated into two subgroups: discrete and continuous. Data is discrete if it is the result of counting (such as the number of students of a given ethnic group in a class or the number of books on a shelf). Data is continuous if it is the result of measuring (such as distance traveled or weight of luggage)
+variables that take on values that are indicated by numbers
+a number that is used to represent a population characteristic and that generally cannot be determined easily
+all individuals, objects, or measurements whose properties are being studied
+a number between zero and one, inclusive, that gives the likelihood that a specific event will occur
+the number of successes divided by the total number in the sample
+the consistency of a measure; a measure is reliable when the same results are produced given the same circumstances
+a subset of the population that has the same characteristics as the population
+a subset of the population studied
+a numerical characteristic of the sample; a statistic estimates the corresponding population parameter
+refers to how much a measure or conclusion accurately reflects real world
+a characteristic of interest for each person or object in a population
+a description of a phenomenon using mathematical concepts, such as equations, inequalities, distributions, etc.
+a description of a phenomenon using probability distributions that describe the expected behavior of the phenomenon and the variability in the expected observations

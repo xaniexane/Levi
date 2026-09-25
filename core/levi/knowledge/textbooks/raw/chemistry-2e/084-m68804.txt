@@ -1,0 +1,198 @@
+# m68804
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+pH and pOH
+
+pH and pOH
+
+By the end of this section, you will be able to:
+
+Explain the characterization of aqueous solutions as acidic, basic, or neutral
+
+Express hydronium and hydroxide ion concentrations on the pH and pOH scales
+
+Perform calculations relating pH and pOH
+
+As discussed earlier, hydronium and hydroxide ions are present both in pure water and in all aqueous solutions, and their concentrations are inversely proportional as determined by the ion product of water (Kw). The concentrations of these ions in a solution are often critical determinants of the solution’s properties and the chemical behaviors of its other solutes, and specific vocabulary has been developed to describe these concentrations in relative terms. A solution is neutral if it contains equal concentrations of hydronium and hydroxide ions; acidic if it contains a greater concentration of hydronium ions than hydroxide ions; and basic if it contains a lesser concentration of hydronium ions than hydroxide ions.
+
+A common means of expressing quantities that may span many orders of magnitude is to use a logarithmic scale. One such scale that is very popular for chemical concentrations and equilibrium constants is based on the p-function, defined as shown where “X” is the quantity of interest and “log” is the base-10 logarithm:
+
+The pH of a solution is therefore defined as shown here, where [H3O+] is the molar concentration of hydronium ion in the solution:
+
+Rearranging this equation to isolate the hydronium ion molarity yields the equivalent expression:
+
+Likewise, the hydroxide ion molarity may be expressed as a p-function, or pOH:
+
+or
+
+Finally, the relation between these two ion concentration expressed as p-functions is easily derived from the Kw expression:
+
+At 25 °C, the value of Kw is 1.0 × 10−14, and so:
+
+As was shown in , the hydronium ion molarity in pure water (or any neutral solution) is 1.0 × 10−7 M at 25 °C. The pH and pOH of a neutral solution at this temperature are therefore:
+
+And so, at this temperature, acidic solutions are those with hydronium ion molarities greater than 1.0 × 10−7 M and hydroxide ion molarities less than 1.0 × 10−7 M (corresponding to pH values less than 7.00 and pOH values greater than 7.00). Basic solutions are those with hydronium ion molarities less than 1.0 × 10−7 M and hydroxide ion molarities greater than 1.0 × 10−7 M (corresponding to pH values greater than 7.00 and pOH values less than 7.00).
+
+Since the autoionization constant Kw is temperature dependent, these correlations between pH values and the acidic/neutral/basic adjectives will be different at temperatures other than 25 °C. For example, the “Check Your Learning” exercise accompanying showed the hydronium molarity of pure water at 80 °C is 4.9 × 10−7 M, which corresponds to pH and pOH values of:
+
+At this temperature, then, neutral solutions exhibit pH = pOH = 6.31, acidic solutions exhibit pH less than 6.31 and pOH greater than 6.31, whereas basic solutions exhibit pH greater than 6.31 and pOH less than 6.31. This distinction can be important when studying certain processes that occur at other temperatures, such as enzyme reactions in warm-blooded organisms at a temperature around 36–40 °C. Unless otherwise noted, references to pH values are presumed to be those at 25 °C ().
+
+Summary of Relations for Acidic, Basic and Neutral Solutions
+Classification
+Relative Ion Concentrations
+pH at 25 °C
+acidic
+[H3O+] > [OH−]
+pH < 7
+neutral
+[H3O+] = [OH−]
+pH = 7
+basic
+[H3O+] < [OH−]
+shows the relationships between [H3O+], [OH−], pH, and pOH for solutions classified as acidic, basic, and neutral.
+Calculation of pH from [H3O+]
+What is the pH of stomach acid, a solution of HCl with a hydronium ion concentration of 1.2 × 10−3 M?
+
+Calculation of pH from [H3O+]
+Solution
+pH=−log[H3O+]
+=−log(1.2×10−3)
+=−(−2.92)=2.92
+(The use of logarithms is explained in Appendix B. When taking the log of a value, keep as many decimal places in the result as there are significant figures in the value.)
+
+Solution
+Check Your Learning
+Water exposed to air contains carbonic acid, H2CO3, due to the reaction between carbon dioxide and water:
+
+Check Your Learning
+
+Air-saturated water has a hydronium ion concentration caused by the dissolved CO2 of 2.0 × 10−6 M, about 20-times larger than that of pure water. Calculate the pH of the solution at 25 °C.
+
+Answer:
+
+5.70
+Calculation of Hydronium Ion Concentration from pH
+Calculate the hydronium ion concentration of blood, the pH of which is 7.3.
+
+Calculation of Hydronium Ion Concentration from pH
+Solution
+pH=−log[H3O+]=7.3
+log[H3O+]=−7.3
+[H3O+]=10−7.3or[H3O+]=antilog of −7.3
+[H3O+]=5×10−8M
+(On a calculator take the antilog, or the “inverse” log, of −7.3, or calculate 10−7.3.)
+
+Solution
+Check Your Learning
+Calculate the hydronium ion concentration of a solution with a pH of −1.07.
+
+Check Your Learning
+
+Answer:
+
+12 M
+
+Environmental Science
+
+Normal rainwater has a pH between 5 and 6 due to the presence of dissolved CO2 which forms carbonic acid:
+
+Acid rain is rainwater that has a pH of less than 5, due to a variety of nonmetal oxides, including CO2, SO2, SO3, NO, and NO2 being dissolved in the water and reacting with it to form not only carbonic acid, but sulfuric acid and nitric acid. The formation and subsequent ionization of sulfuric acid are shown here:
+
+Carbon dioxide is naturally present in the atmosphere because most organisms produce it as a waste product of metabolism. Carbon dioxide is also formed when fires release carbon stored in vegetation or fossil fuels. Sulfur trioxide in the atmosphere is naturally produced by volcanic activity, but it also originates from burning fossil fuels, which have traces of sulfur, and from the process of “roasting” ores of metal sulfides in metal-refining processes. Oxides of nitrogen are formed in internal combustion engines where the high temperatures make it possible for the nitrogen and oxygen in air to chemically combine.
+
+Acid rain is a particular problem in industrial areas where the products of combustion and smelting are released into the air without being stripped of sulfur and nitrogen oxides. In North America and Europe until the 1980s, it was responsible for the destruction of forests and freshwater lakes, when the acidity of the rain actually killed trees, damaged soil, and made lakes uninhabitable for all but the most acid-tolerant species. Acid rain also corrodes statuary and building facades that are made of marble and limestone (). Regulations limiting the amount of sulfur and nitrogen oxides that can be released into the atmosphere by industry and automobiles have reduced the severity of acid damage to both natural and manmade environments in North America and Europe. It is now a growing problem in industrial areas of China and India.
+
+For further information on acid rain, visit this website hosted by the US Environmental Protection Agency.
+Calculation of pOH
+What are the pOH and the pH of a 0.0125-M solution of potassium hydroxide, KOH?
+
+Calculation of pOH
+Solution
+Potassium hydroxide is a highly soluble ionic compound and completely dissociates when dissolved in dilute solution, yielding [OH−] = 0.0125 M:
+
+Solution
+
+The pH can be found from the pOH:
+Check Your Learning
+The hydronium ion concentration of vinegar is approximately 4 × 10−3 M. What are the corresponding values of pOH and pH?
+
+Check Your Learning
+
+Answer:
+
+pOH = 11.6, pH = 2.4
+
+The acidity of a solution is typically assessed experimentally by measurement of its pH. The pOH of a solution is not usually measured, as it is easily calculated from an experimentally determined pH value. The pH of a solution can be directly measured using a pH meter ().
+
+The pH of a solution may also be visually estimated using colored indicators (). The acid-base equilibria that enable use of these indicator dyes for pH measurements are described in a later section of this chapter.
+
+Key Concepts and Summary
+
+Concentrations of hydronium and hydroxide ions in aqueous media are often represented as logarithmic pH and pOH values, respectively. At 25 °C, the autoprotolysis equilibrium for water requires the sum of pH and pOH to equal 14 for any aqueous solution. The relative concentrations of hydronium and hydroxide ion in a solution define its status as acidic ([H3O+] > [OH−]), basic ([H3O+] < [OH−]), or neutral ([H3O+] = [OH−]). At 25 °C, a pH < 7 indicates an acidic solution, a pH > 7 a basic solution, and a pH = 7 a neutral solution.
+
+Key Equations
+pH=−log[H3O+]
+pOH = −log[OH−]
+[H3O+] = 10−pH
+[OH−] = 10−pOH
+pH + pOH = pKw = 14.00 at 25 °C
+Chemistry End of Chapter Exercises
+
+Explain why a sample of pure water at 40 °C is neutral even though [H3O+] = 1.7 × 10−7 M. Kw is 2.9 × 10−14 at 40 °C.
+
+In a neutral solution [H3O+] = [OH−]. At 40 °C,
+[H3O+] = [OH−] = (2.910 × 10−14)1/2 = 1.7 × 10−7.
+
+The ionization constant for water (Kw) is 2.9 × 10−14 at 40 °C. Calculate [H3O+], [OH−], pH, and pOH for pure water at 40 °C.
+
+The ionization constant for water (Kw) is 9.311 × 10−14 at 60 °C. Calculate [H3O+], [OH−], pH, and pOH for pure water at 60 °C.
+x = 3.051 × 10−7 M = [H3O+] = [OH−]; pH = −log3.051 × 10−7 = −(−6.5156) = 6.5156; pOH = pH = 6.5156
+
+Calculate the pH and the pOH of each of the following solutions at 25 °C for which the substances ionize completely:
+
+(a) 0.200 M HCl
+
+(b) 0.0143 M NaOH
+
+(c) 3.0 M HNO3
+
+(d) 0.0031 M Ca(OH)2
+
+Calculate the pH and the pOH of each of the following solutions at 25 °C for which the substances ionize completely:
+
+(a) 0.000259 M HClO4
+
+(b) 0.21 M NaOH
+
+(c) 0.000071 M Ba(OH)2
+
+(d) 2.5 M KOH
+
+(a) pH = 3.587; pOH = 10.413; (b) pOH = 0.68; pH = 13.32; (c) pOH = 3.85; pH = 10.15; (d) pOH = −0.40; pH = 14.4
+
+What are the pH and pOH of a solution of 2.0 M HCl, which ionizes completely?
+
+What are the hydronium and hydroxide ion concentrations in a solution whose pH is 6.52?
+
+[H3O+] = 3.0 × 10−7 M; [OH−] = 3.3 × 10−8 M
+
+Calculate the hydrogen ion concentration and the hydroxide ion concentration in wine from its pH. See for useful information.
+
+Calculate the hydronium ion concentration and the hydroxide ion concentration in lime juice from its pH. See for useful information.
+
+[H3O+] = 1 × 10−2 M; [OH−] = 1 × 10−12 M
+
+The hydronium ion concentration in a sample of rainwater is found to be 1.7 × 10−6 M at 25 °C. What is the concentration of hydroxide ions in the rainwater?
+
+The hydroxide ion concentration in household ammonia is 3.2 × 10−3 M at 25 °C. What is the concentration of hydronium ions in the solution?
+
+[OH−] = 3.1 × 10−12 M
+
+a solution in which [H3O+] > [OH−]
+a solution in which [H3O+] < [OH−]
+describes a solution in which [H3O+] = [OH−]
+logarithmic measure of the concentration of hydronium ions in a solution
+logarithmic measure of the concentration of hydroxide ions in a solution

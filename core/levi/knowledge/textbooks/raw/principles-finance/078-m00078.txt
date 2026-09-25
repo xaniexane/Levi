@@ -1,0 +1,140 @@
+# m00078
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Measures of Center
+
+Measures of Center
+
+By the end of this section, you will be able to:
+
+Calculate various measures of the average of a data set, such as mean, median, mode, and geometric mean.
+
+Recognize when a certain measure of center is more appropriate to use, such as weighted mean.
+
+Distinguish among arithmetic mean, geometric mean, and weighted mean.
+
+Arithmetic Mean
+
+The average of a data set is a way of describing location. The most widely used measures of the center of a data set are the mean (average), median, and mode. The arithmetic mean is the most common measure of the average. We will discuss the geometric mean later.
+
+Note that the words mean and average are often used interchangeably. The substitution of one word for the other is common practice. The technical term is arithmetic mean, and average technically refers only to a center location. Formally, the arithmetic mean is called the first moment of the distribution by mathematicians. However, in practice among non-statisticians, average is commonly accepted as a synonym for arithmetic mean.
+
+To calculate the arithmetic mean value of 50 stock portfolios, add the 50 portfolio dollar values together and divide the sum by 50. To calculate the arithmetic mean for a set of numbers, add the numbers together and then divide by the number of data values.
+
+In statistical analysis, you will encounter two types of data sets: sample data and population data. Population data represents all the outcomes or measurements that are of interest. Sample data represents outcomes or measurements collected from a subset, or part, of the population of interest.
+
+The notation x¯ is used to indicate the sample mean, where the arithmetic mean is calculated based on data taken from a sample. The notation ∑x is used to denote the sum of the data values, and n is used to indicate the number of data values in the sample, also known as the sample size.
+
+The sample mean can be calculated using the following formula:
+
+Finance professionals often rely on averages of Treasury bill auction amounts to determine their value. lists the Treasury bill auction amounts for a sample of auctions from December 2020.
+
+United States Treasury Bill Auctions, December 22 and 24, 2020
+
+Maturity
+Amount ($Billions)
+4-week T-bills
+$32.9
+8-week T-bills
+38.4
+13-week T-bills
+63.1
+26-week T-bills
+59.6
+52-week T-bills
+$233.7
+To calculate the arithmetic mean of the amount paid for Treasury bills at auction, in billions of dollars, we use the following formula:
+
+Median
+
+To determine the median of a data set, order the data from smallest to largest, and then find the middle value in the ordered data set. For example, to find the median value of 50 portfolios, find the number that splits the data into two equal parts. The portfolio values owned by 25 people will be below the median, and 25 people will have portfolio values above the median. The median is generally a better measure of the average when there are extreme values or outliers in the data set.
+
+An outlier or extreme value is a data value that is significantly different from the other data values in a data set. The median is preferred when outliers are present because the median is not affected by the numerical values of the outliers.
+
+The ordered data set from appears as follows:
+
+The middle value in this ordered data set is the third data value, which is 39.7. Thus, the median is $39.7 billion.
+
+You can quickly find the location of the median by using the expression n + 12. The variable n represents the total number of data values in the sample. If n is an odd number, the median is the middle value of the data values when ordered from smallest to largest. If n is an even number, the median is equal to the two middle values of the ordered data values added together and divided by 2. In the example from , there are five data values, so n = 5. To identify the position of the median, calculate n + 12, which is 5 + 12, or 3. This indicates that the median is located in the third data position, which corresponds to the value 39.7.
+
+As mentioned earlier, when outliers are present in a data set, the mean can be nonrepresentative of the center of the data set, and the median will provide a better measure of center. The following Think It Through example illustrates this point.
+
+Finding the Measure of Center
+
+Suppose that in a small village of 50 people, one person earns a salary of $5 million per year, and the other 49 individuals each earn $30,000. Which is the better measure of center: the mean or the median?
+Solution:
+
+The mean, in dollars, would be arrived at mathematically as follows:
+
+However, the median would be $30,000. There are 49 people who earn $30,000 and one person who earns $5,000,000.
+
+The median is a better measure of the “average” than the mean because 49 of the values are $30,000 and one is $5,000,000. The $5,000,000 is an outlier. The $30,000 gives us a better sense of the middle of the data set.
+
+Mode
+
+Another measure of center is the mode. The mode is the most frequent value. There can be more than one mode in a data set as long as those values have the same frequency and that frequency is the highest. A data set with two modes is called bimodal. For example, assume that the weekly closing stock price for a technology stock, in dollars, is recorded for 20 consecutive weeks as follows:
+
+To find the mode, determine the most frequent score, which is 72. It occurs five times. Thus, the mode of this data set is 72. It is helpful to know that the most common closing price of this particular stock over the past 20 weeks has been $72.00.
+
+Geometric Mean
+
+The arithmetic mean, median, and mode are all measures of the center of a data set, or the average. They are all, in their own way, trying to measure the common point within the data—that which is “normal.” In the case of the arithmetic mean, this is accomplished by finding the value from which all points are equal linear distances. We can imagine that all the data values are combined through addition and then distributed back to each data point in equal amounts.
+
+The geometric mean redistributes not the sum of the values but their product. It is calculated by multiplying all the individual values and then redistributing them in equal portions such that the total product remains the same. This can be seen from the formula for the geometric mean, x̃ (pronounced x-tilde):
+
+The geometric mean is relevant in economics and finance for dealing with growth—of markets, in investments, and so on. For an example of a finance application, assume we would like to know the equivalent percentage growth rate over a five-year period, given the yearly growth rates for the investment.
+
+For a five-year period, the annual rate of return for a certificate of deposit (CD) investment is as follows: 3.21%, 2.79%, 1.88%, 1.42%, 1.17%. Find the single percentage growth rate that is equivalent to these five annual consecutive rates of return. The geometric mean of these five rates of return will provide the solution. To calculate the geometric mean for these values (which must all be positive), first multiplyIn this chapter, the interpunct dot will be used to indicate the multiplication operation in formulas. the rates of return together—after adding 1 to the decimal equivalent of each interest rate—and then take the nth root of the product. We are interested in calculating the equivalent overall rate of return for the yearly rates of return, which can be expressed as 1.0321, 1.0279, 1.0188, 1.0142, and 1.0117:
+
+Based on the geometric mean, the equivalent annual rate of return for this time period is 2.09%.
+
+Arithmetic versus Geometric Means
+
+In this video on arithmetic versus geometric means, the returns of the S&P 500 are tracked using an arithmetic mean versus a geometric mean, and the difference between these two measurements is discussed.
+
+Weighted Mean
+
+A weighted mean is a measure of the center, or average, of a data set where each data value is assigned a corresponding weight. A common financial application of a weighted mean is in determining the average price per share for a certain stock when the stock has been purchased at different points in time and at different share prices.
+
+To calculate a weighted mean, create a table with the data values in one column and the weights in a second column. Then create a third column in which each data value is multiplied by each weight on a row-by-row basis. Then, the weighted mean is calculated as the sum of the results from the third column divided by the sum of the weights.
+
+Calculating the Weighted Mean
+
+Assume your portfolio contains 1,000 shares of XYZ Corporation, purchased on three different dates, as shown in . Calculate the weighted mean of the purchase price for the 1,000 shares.
+
+1,000 Shares of XYZ Corporation
+
+Date Purchased
+Purchase Price ($)
+Number of Shares Purchased
+Price ($) TimesNumber of Shares
+January 17
+78
+200
+15,600
+February 10
+122
+300
+36,600
+March 23
+131
+500
+Solution:
+
+In this example, the purchase price is weighted by the number of shares. The sum of the third column is $117,700, and sum of the weights is 1,000. The weighted mean is calculated as $117,700 divided by 1,000, which is $117.70.
+
+Thus, the average cost per share for the 1,000 shares of XYZ Corporation is $117.70.
+
+Several measurements are used to provide the average of a data set, including mean, median, and mode. The terms mean and average are often used interchangeably. To calculate the mean for a set of numbers, add the numbers together and then divide the sum by the number of data values. The geometric mean redistributes not the sum of the values but the product by multiplying all of the individual values and then redistributing them in equal portions such that the total product remains the same. To calculate the median for a set of numbers, order the data from smallest to largest and identify the middle data value in the ordered data set.
+
+a measure of center of a data set, calculated by adding up the data values and dividing the sum by the number of data values
+a measure of center of a data set, calculated by multiplying the data values and then raising the product to the exponent 1n, where n is the number of data values
+the middle value in an ordered data set
+the most frequently occurring data value in a data set
+data values that are significantly different from the other data values in a data set
+data representing all the outcomes or measurements that are of interest
+data representing outcomes or measurements collected from a subset or part of a population
+a measure of center of a data set in which each data value has a corresponding weighting

@@ -1,0 +1,510 @@
+# m68752
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Stoichiometry of Gaseous Substances, Mixtures, and Reactions
+
+Stoichiometry of Gaseous Substances, Mixtures, and Reactions
+
+By the end of this section, you will be able to:
+
+Use the ideal gas law to compute gas densities and molar masses
+
+Perform stoichiometric calculations involving gaseous substances
+
+State Dalton’s law of partial pressures and use it in calculations involving gaseous mixtures
+
+The study of the chemical behavior of gases was part of the basis of perhaps the most fundamental chemical revolution in history. French nobleman Antoine Lavoisier, widely regarded as the “father of modern chemistry,” changed chemistry from a qualitative to a quantitative science through his work with gases. He discovered the law of conservation of matter, discovered the role of oxygen in combustion reactions, determined the composition of air, explained respiration in terms of chemical reactions, and more. He was a casualty of the French Revolution, guillotined in 1794. Of his death, mathematician and astronomer Joseph-Louis Lagrange said, “It took the mob only a moment to remove his head; a century will not suffice to reproduce it.”“Quotations by Joseph-Louis Lagrange,” last modified February 2006, accessed February 10, 2015, http://www-history.mcs.st-andrews.ac.uk/Quotations/Lagrange.html Much of the knowledge we do have about Lavoisier's contributions is due to his wife, Marie-Anne Paulze Lavoisier, who worked with him in his lab. A trained artist fluent in several languages, she created detailed illustrations of the equipment in his lab, and translated texts from foreign scientists to complement his knowledge. After his execution, she was instrumental in publishing Lavoisier's major treatise, which unified many concepts of chemistry and laid the groundwork for significant further study.
+
+As described in an earlier chapter of this text, we can turn to chemical stoichiometry for answers to many of the questions that ask “How much?” The essential property involved in such use of stoichiometry is the amount of substance, typically measured in moles (n). For gases, molar amount can be derived from convenient experimental measurements of pressure, temperature, and volume. Therefore, these measurements are useful in assessing the stoichiometry of pure gases, gas mixtures, and chemical reactions involving gases. This section will not introduce any new material or ideas, but will provide examples of applications and ways to integrate concepts already discussed.
+
+Gas Density and Molar Mass
+
+The ideal gas law described previously in this chapter relates the properties of pressure P, volume V, temperature T, and molar amount n. This law is universal, relating these properties in identical fashion regardless of the chemical identity of the gas:
+
+The density d of a gas, on the other hand, is determined by its identity. As described in another chapter of this text, the density of a substance is a characteristic property that may be used to identify the substance.
+
+Rearranging the ideal gas equation to isolate V and substituting into the density equation yields
+
+The ratio m/n is the definition of molar mass, ℳ:
+
+The density equation can then be written
+
+This relation may be used for calculating the densities of gases of known identities at specified values of pressure and temperature as demonstrated in .
+Measuring Gas Density
+What is the density of molecular nitrogen gas at STP?
+
+Measuring Gas Density
+Solution
+
+Solution
+
+The molar mass of molecular nitrogen, N2, is 28.01 g/mol. Substituting this value along with standard temperature and pressure into the gas density equation yields
+Check Your Learning
+What is the density of molecular hydrogen gas at 17.0 °C and a pressure of 760 torr?
+
+Check Your Learning
+
+Answer:
+
+d = 0.0847 g/L
+
+When the identity of a gas is unknown, measurements of the mass, pressure, volume, and temperature of a sample can be used to calculate the molar mass of the gas (a useful property for identification purposes). Combining the ideal gas equation
+
+and the definition of molar mass
+
+yields the following equation:
+
+Determining the molar mass of a gas via this approach is demonstrated in .
+Determining the Molecular Formula of a Gas from its Molar Mass and Empirical Formula
+Cyclopropane, a gas once used with oxygen as a general anesthetic, is composed of 85.7% carbon and 14.3% hydrogen by mass. Find the empirical formula. If 1.56 g of cyclopropane occupies a volume of 1.00 L at 0.984 atm and 50 °C, what is the molecular formula for cyclopropane?
+
+Determining the Molecular Formula of a Gas from its Molar Mass and Empirical Formula
+Solution
+First determine the empirical formula of the gas. Assume 100 g and convert the percentage of each element into grams. Determine the number of moles of carbon and hydrogen in the 100-g sample of cyclopropane. Divide by the smallest number of moles to relate the number of moles of carbon to the number of moles of hydrogen. In the last step, realize that the smallest whole number ratio is the empirical formula:
+
+Solution
+
+Empirical formula is CH2 [empirical mass (EM) of 14.03 g/empirical unit].
+
+Next, use the provided values for mass, pressure, temperature and volume to compute the molar mass of the gas:
+
+Comparing the molar mass to the empirical formula mass shows how many empirical formula units make up a molecule:
+
+The molecular formula is thus derived from the empirical formula by multiplying each of its subscripts by three:
+Check Your LearningAcetylene, a fuel used in welding torches, is composed of 92.3% C and 7.7% H by mass. Find the empirical formula. If 1.10 g of acetylene occupies of volume of 1.00 L at 1.15 atm and 59.5 °C, what is the molecular formula for acetylene?
+
+Check Your Learning
+
+Answer:
+
+Empirical formula, CH; Molecular formula, C2H2
+Determining the Molar Mass of a Volatile Liquid
+The approximate molar mass of a volatile liquid can be determined by:
+
+Determining the Molar Mass of a Volatile Liquid
+
+Heating a sample of the liquid in a flask with a tiny hole at the top, which converts the liquid into gas that may escape through the hole
+
+Removing the flask from heat at the instant when the last bit of liquid becomes gas, at which time the flask will be filled with only gaseous sample at ambient pressure
+
+Sealing the flask and permitting the gaseous sample to condense to liquid, and then weighing the flask to determine the sample’s mass (see )
+
+Using this procedure, a sample of chloroform gas weighing 0.494 g is collected in a flask with a volume of 129 cm3 at 99.6 °C when the atmospheric pressure is 742.1 mm Hg. What is the approximate molar mass of chloroform?
+Solution
+Since ℳ=mn and n=PVRT, substituting and rearranging gives ℳ=mRTPV,
+
+Solution
+
+then
+Check Your Learning
+A sample of phosphorus that weighs 3.243 × 10−2 g exerts a pressure of 31.89 kPa in a 56.0-mL bulb at 550 °C. What are the molar mass and molecular formula of phosphorus vapor?
+
+Check Your Learning
+
+Answer:
+
+124 g/mol P4
+
+The Pressure of a Mixture of Gases: Dalton’s Law
+
+Unless they chemically react with each other, the individual gases in a mixture of gases do not affect each other’s pressure. Each individual gas in a mixture exerts the same pressure that it would exert if it were present alone in the container (). The pressure exerted by each individual gas in a mixture is called its partial pressure. This observation is summarized by Dalton’s law of partial pressures: The total pressure of a mixture of ideal gases is equal to the sum of the partial pressures of the component gases:
+
+In the equation PTotal is the total pressure of a mixture of gases, PA is the partial pressure of gas A; PB is the partial pressure of gas B; PC is the partial pressure of gas C; and so on.
+
+The partial pressure of gas A is related to the total pressure of the gas mixture via its mole fraction (X), a unit of concentration defined as the number of moles of a component of a solution divided by the total number of moles of all components:
+
+where PA, XA, and nA are the partial pressure, mole fraction, and number of moles of gas A, respectively, and nTotal is the number of moles of all components in the mixture.
+The Pressure of a Mixture of Gases
+A 10.0-L vessel contains 2.50 × 10−3 mol of H2, 1.00 × 10−3 mol of He, and 3.00 × 10−4 mol of Ne at 35 °C.
+
+The Pressure of a Mixture of Gases
+
+(a) What are the partial pressures of each of the gases?
+
+(b) What is the total pressure in atmospheres?
+SolutionThe gases behave independently, so the partial pressure of each gas can be determined from the ideal gas equation, using P=nRTV:
+
+Solution
+
+The total pressure is given by the sum of the partial pressures:
+Check Your Learning
+A 5.73-L flask at 25 °C contains 0.0388 mol of N2, 0.147 mol of CO, and 0.0803 mol of H2. What is the total pressure in the flask in atmospheres?
+
+Check Your Learning
+
+Answer:
+
+1.137 atm
+
+Here is another example of this concept, but dealing with mole fraction calculations.
+The Pressure of a Mixture of Gases
+A gas mixture used for anesthesia contains 2.83 mol oxygen, O2, and 8.41 mol nitrous oxide, N2O. The total pressure of the mixture is 192 kPa.
+
+The Pressure of a Mixture of Gases
+
+(a) What are the mole fractions of O2 and N2O?
+
+(b) What are the partial pressures of O2 and N2O?
+Solution
+The mole fraction is given by XA=nAnTotal and the partial pressure is PA = XA × PTotal.
+
+Solution
+
+For O2,
+
+and PO2=XO2×PTotal=0.252×192 kPa=48.4 kPa
+
+For N2O,
+XN2O=nN2OnTotal=8.41 mol(2.83+8.41)mol=0.748
+
+and
+PN2O=XN2O×PTotal=0.748×192 kPa=144 kPa
+Check Your Learning
+What is the pressure of a mixture of 0.200 g of H2, 1.00 g of N2, and 0.820 g of Ar in a container with a volume of 2.00 L at 20 °C?
+
+Check Your Learning
+
+Answer:
+
+1.87 atm
+
+Collection of Gases over Water
+
+A simple way to collect gases that do not react with water is to capture them in a bottle that has been filled with water and inverted into a dish filled with water. The pressure of the gas inside the bottle can be made equal to the air pressure outside by raising or lowering the bottle. When the water level is the same both inside and outside the bottle (), the pressure of the gas is equal to the atmospheric pressure, which can be measured with a barometer.
+
+However, there is another factor we must consider when we measure the pressure of the gas by this method. Water evaporates and there is always gaseous water (water vapor) above a sample of liquid water. As a gas is collected over water, it becomes saturated with water vapor and the total pressure of the mixture equals the partial pressure of the gas plus the partial pressure of the water vapor. The pressure of the pure gas is therefore equal to the total pressure minus the pressure of the water vapor—this is referred to as the “dry” gas pressure, that is, the pressure of the gas only, without water vapor. The vapor pressure of water, which is the pressure exerted by water vapor in equilibrium with liquid water in a closed container, depends on the temperature (); more detailed information on the temperature dependence of water vapor can be found in , and vapor pressure will be discussed in more detail in the next chapter on liquids.
+
+Vapor Pressure of Ice and Water in Various Temperatures at Sea Level
+Temperature (°C)
+Pressure (torr)
+Temperature (°C)
+Pressure (torr)
+Temperature (°C)
+Pressure (torr)
+–10
+1.95
+18
+15.5
+30
+31.8
+–5
+3.0
+19
+16.5
+35
+42.2
+–2
+3.9
+20
+17.5
+40
+55.3
+0
+4.6
+21
+18.7
+50
+92.5
+2
+5.3
+22
+19.8
+60
+149.4
+4
+6.1
+23
+21.1
+70
+233.7
+6
+7.0
+24
+22.4
+80
+355.1
+8
+8.0
+25
+23.8
+90
+525.8
+10
+9.2
+26
+25.2
+95
+633.9
+12
+10.5
+27
+26.7
+99
+733.2
+14
+12.0
+28
+28.3
+100.0
+760.0
+16
+13.6
+29
+30.0
+101.0
+Pressure of a Gas Collected Over Water
+If 0.200 L of argon is collected over water at a temperature of 26 °C and a pressure of 750 torr in a system like that shown in , what is the partial pressure of argon?
+
+Pressure of a Gas Collected Over Water
+Solution
+According to Dalton’s law, the total pressure in the bottle (750 torr) is the sum of the partial pressure of argon and the partial pressure of gaseous water:
+
+Solution
+
+Rearranging this equation to solve for the pressure of argon gives:
+
+The pressure of water vapor above a sample of liquid water at 26 °C is 25.2 torr (Appendix E), so:
+Check Your LearningA sample of oxygen collected over water at a temperature of 29.0 °C and a pressure of 764 torr has a volume of 0.560 L. What volume would the dry oxygen from this sample have under the same conditions of temperature and pressure?
+
+Check Your Learning
+
+Answer:
+
+0.537 L
+
+Chemical Stoichiometry and Gases
+
+Chemical stoichiometry describes the quantitative relationships between reactants and products in chemical reactions.
+
+We have previously measured quantities of reactants and products using masses for solids and volumes in conjunction with the molarity for solutions; now we can also use gas volumes to indicate quantities. If we know the volume, pressure, and temperature of a gas, we can use the ideal gas equation to calculate how many moles of the gas are present. If we know how many moles of a gas are involved, we can calculate the volume of a gas at any temperature and pressure.
+
+Avogadro’s Law Revisited
+
+Sometimes we can take advantage of a simplifying feature of the stoichiometry of gases that solids and solutions do not exhibit: All gases that show ideal behavior contain the same number of molecules in the same volume (at the same temperature and pressure). Thus, the ratios of volumes of gases involved in a chemical reaction are given by the coefficients in the equation for the reaction, provided that the gas volumes are measured at the same temperature and pressure.
+
+We can extend Avogadro’s law (that the volume of a gas is directly proportional to the number of moles of the gas) to chemical reactions with gases: Gases combine, or react, in definite and simple proportions by volume, provided that all gas volumes are measured at the same temperature and pressure. For example, since nitrogen and hydrogen gases react to produce ammonia gas according to N2(g)+3H2(g)⟶2NH3(g), a given volume of nitrogen gas reacts with three times that volume of hydrogen gas to produce two times that volume of ammonia gas, if pressure and temperature remain constant.
+
+The explanation for this is illustrated in . According to Avogadro’s law, equal volumes of gaseous N2, H2, and NH3, at the same temperature and pressure, contain the same number of molecules. Because one molecule of N2 reacts with three molecules of H2 to produce two molecules of NH3, the volume of H2 required is three times the volume of N2, and the volume of NH3 produced is two times the volume of N2.
+Reaction of Gases
+Propane, C3H8(g), is used in gas grills to provide the heat for cooking. What volume of O2(g) measured at 25 °C and 760 torr is required to react with 2.7 L of propane measured under the same conditions of temperature and pressure? Assume that the propane undergoes complete combustion.
+
+Reaction of Gases
+Solution
+The ratio of the volumes of C3H8 and O2 will be equal to the ratio of their coefficients in the balanced equation for the reaction:
+
+Solution
+
+From the equation, we see that one volume of C3H8 will react with five volumes of O2:
+
+A volume of 13.5 L of O2 will be required to react with 2.7 L of C3H8.
+Check Your Learning
+An acetylene tank for an oxyacetylene welding torch provides 9340 L of acetylene gas, C2H2, at 0 °C and 1 atm. How many tanks of oxygen, each providing 7.00 × 103 L of O2 at 0 °C and 1 atm, will be required to burn the acetylene?
+
+Check Your Learning
+
+Answer:
+
+3.34 tanks (2.34 × 104 L)
+Volumes of Reacting Gases
+Ammonia is an important fertilizer and industrial chemical. Suppose that a volume of 683 billion cubic feet of gaseous ammonia, measured at 25 °C and 1 atm, was manufactured. What volume of H2(g), measured under the same conditions, was required to prepare this amount of ammonia by reaction with N2?
+
+Volumes of Reacting Gases
+Solution
+Because equal volumes of H2 and NH3 contain equal numbers of molecules and each three molecules of H2 that react produce two molecules of NH3, the ratio of the volumes of H2 and NH3 will be equal to 3:2. Two volumes of NH3, in this case in units of billion ft3, will be formed from three volumes of H2:
+
+Solution
+
+The manufacture of 683 billion ft3 of NH3 required 1020 billion ft3 of H2. (At 25 °C and 1 atm, this is the volume of a cube with an edge length of approximately 1.9 miles.)
+Check Your Learning
+What volume of O2(g) measured at 25 °C and 760 torr is required to react with 17.0 L of ethylene, C2H4(g), measured under the same conditions of temperature and pressure? The products are CO2 and water vapor.
+
+Check Your Learning
+
+Answer:
+
+51.0 L
+Volume of Gaseous Product
+What volume of hydrogen at 27 °C and 723 torr may be prepared by the reaction of 8.88 g of gallium with an excess of hydrochloric acid?
+
+Volume of Gaseous Product
+Solution
+Convert the provided mass of the limiting reactant, Ga, to moles of hydrogen produced:
+
+Solution
+
+Convert the provided temperature and pressure values to appropriate units (K and atm, respectively), and then use the molar amount of hydrogen gas and the ideal gas equation to calculate the volume of gas:
+Check Your Learning
+Sulfur dioxide is an intermediate in the preparation of sulfuric acid. What volume of SO2 at 343 °C and 1.21 atm is produced by burning 1.00 kg of sulfur in excess oxygen?
+
+Check Your Learning
+
+Answer:
+
+1.30 × 103 L
+
+Greenhouse Gases and Climate Change
+
+The thin skin of our atmosphere keeps the earth from being an ice planet and makes it habitable. In fact, this is due to less than 0.5% of the air molecules. Of the energy from the sun that reaches the earth, almost 13 is reflected back into space, with the rest absorbed by the atmosphere and the surface of the earth. Some of the energy that the earth absorbs is re-emitted as infrared (IR) radiation, a portion of which passes back out through the atmosphere into space. Most if this IR radiation, however, is absorbed by certain atmospheric gases, effectively trapping heat within the atmosphere in a phenomenon known as the greenhouse effect. This effect maintains global temperatures within the range needed to sustain life on earth. Without our atmosphere, the earth's average temperature would be lower by more than 30 °C (nearly 60 °F). The major greenhouse gases (GHGs) are water vapor, carbon dioxide, methane, and ozone. Since the Industrial Revolution, human activity has been increasing the concentrations of GHGs, which have changed the energy balance and are significantly altering the earth’s climate ().
+
+There is strong evidence from multiple sources that higher atmospheric levels of CO2 are caused by human activity, with fossil fuel burning accounting for about 34 of the recent increase in CO2. Reliable data from ice cores reveals that CO2 concentration in the atmosphere is at the highest level in the past 800,000 years; other evidence indicates that it may be at its highest level in 20 million years. In recent years, the CO2 concentration has increased preindustrial levels of ~280 ppm to more than 400 ppm today ().
+
+Click here to see a 2-minute video explaining greenhouse gases and global warming.
+
+Susan Solomon
+
+Atmospheric and climate scientist Susan Solomon () is the author of one of The New York Times books of the year (The Coldest March, 2001), one of Time magazine’s 100 most influential people in the world (2008), and a working group leader of the Intergovernmental Panel on Climate Change (IPCC), which was the recipient of the 2007 Nobel Peace Prize. She helped determine and explain the cause of the formation of the ozone hole over Antarctica, and has authored many important papers on climate change. She has been awarded the top scientific honors in the US and France (the National Medal of Science and the Grande Medaille, respectively), and is a member of the National Academy of Sciences, the Royal Society, the French Academy of Sciences, and the European Academy of Sciences. Formerly a professor at the University of Colorado, she is now at MIT, and continues to work at NOAA.
+
+For more information, watch this video about Susan Solomon.
+
+Key Concepts and Summary
+
+The ideal gas law can be used to derive a number of convenient equations relating directly measured quantities to properties of interest for gaseous substances and mixtures. Appropriate rearrangement of the ideal gas equation may be made to permit the calculation of gas densities and molar masses. Dalton’s law of partial pressures may be used to relate measured gas pressures for gaseous mixtures to their compositions. Avogadro’s law may be used in stoichiometric computations for chemical reactions involving gaseous reactants or products.
+
+Key Equations
+XA=nAnTotal
+Chemistry End of Chapter Exercises
+
+What is the density of laughing gas, dinitrogen monoxide, N2O, at a temperature of 325 K and a pressure of 113.0 kPa?
+
+Calculate the density of Freon 12, CF2Cl2, at 30.0 °C and 0.954 atm.
+
+4.64 g L−1
+
+Which is denser at the same temperature and pressure, dry air or air saturated with water vapor? Explain.
+
+A cylinder of O2(g) used in breathing by patients with emphysema has a volume of 3.00 L at a pressure of 10.0 atm. If the temperature of the cylinder is 28.0 °C, what mass of oxygen is in the cylinder?
+
+38.8 g
+
+What is the molar mass of a gas if 0.0494 g of the gas occupies a volume of 0.100 L at a temperature 26 °C and a pressure of 307 torr?
+
+What is the molar mass of a gas if 0.281 g of the gas occupies a volume of 125 mL at a temperature 126 °C and a pressure of 777 torr?
+
+72.0 g mol−1
+
+How could you show experimentally that the molecular formula of propene is C3H6, not CH2?
+
+The density of a certain gaseous fluoride of phosphorus is 3.93 g/L at STP. Calculate the molar mass of this fluoride and determine its molecular formula.
+
+88.1 g mol−1; PF3
+
+Consider this question: What is the molecular formula of a compound that contains 39% C, 45% N, and 16% H if 0.157 g of the compound occupies 125 mL with a pressure of 99.5 kPa at 22 °C?
+
+(a) Outline the steps necessary to answer the question.
+
+(b) Answer the question.
+
+A 36.0–L cylinder of a gas used for calibration of blood gas analyzers in medical laboratories contains 350 g CO2, 805 g O2, and 4,880 g N2. At 25 degrees C, what is the pressure in the cylinder in atmospheres?
+
+141 atm, 107,000 torr, 14,300 kPa
+
+A cylinder of a gas mixture used for calibration of blood gas analyzers in medical laboratories contains 5.0% CO2, 12.0% O2, and the remainder N2 at a total pressure of 146 atm. What is the partial pressure of each component of this gas? (The percentages given indicate the percent of the total pressure that is due to each component.)
+
+A sample of gas isolated from unrefined petroleum contains 90.0% CH4, 8.9% C2H6, and 1.1% C3H8 at a total pressure of 307.2 kPa. What is the partial pressure of each component of this gas? (The percentages given indicate the percent of the total pressure that is due to each component.)
+
+CH4: 276 kPa; C2H6: 27 kPa; C3H8: 3.4 kPa
+
+A mixture of 0.200 g of H2, 1.00 g of N2, and 0.820 g of Ar is stored in a closed container at STP. Find the volume of the container, assuming that the gases exhibit ideal behavior.
+
+Most mixtures of hydrogen gas with oxygen gas are explosive. However, a mixture that contains less than 3.0 % O2 is not. If enough O2 is added to a cylinder of H2 at 33.2 atm to bring the total pressure to 34.5 atm, is the mixture explosive?
+
+Yes
+
+A commercial mercury vapor analyzer can detect, in air, concentrations of gaseous Hg atoms (which are poisonous) as low as 2 × 10−6 mg/L of air. At this concentration, what is the partial pressure of gaseous mercury if the atmospheric pressure is 733 torr at 26 °C?
+
+A sample of carbon monoxide was collected over water at a total pressure of 756 torr and a temperature of 18 °C. What is the pressure of the carbon monoxide? (See for the vapor pressure of water.)
+
+740 torr
+
+In an experiment in a general chemistry laboratory, a student collected a sample of a gas over water. The volume of the gas was 265 mL at a pressure of 753 torr and a temperature of 27 °C. The mass of the gas was 0.472 g. What was the molar mass of the gas?
+
+Joseph Priestley first prepared pure oxygen by heating mercuric oxide, HgO:
+2HgO(s)⟶2Hg(l)+O2(g)
+
+(a) Outline the steps necessary to answer the following question: What volume of O2 at 23 °C and 0.975 atm is produced by the decomposition of 5.36 g of HgO?
+
+(b) Answer the question.
+
+(a) Determine the moles of HgO that decompose; using the chemical equation, determine the moles of O2 produced by decomposition of this amount of HgO; and determine the volume of O2 from the moles of O2, temperature, and pressure. (b) 0.308 L
+
+Cavendish prepared hydrogen in 1766 by the novel method of passing steam through a red-hot gun barrel:
+4H2O(g)+3Fe(s)⟶Fe3O4(s)+4H2(g)
+
+(a) Outline the steps necessary to answer the following question: What volume of H2 at a pressure of 745 torr and a temperature of 20 °C can be prepared from the reaction of 15.0 g of H2O?
+
+(b) Answer the question.
+
+The chlorofluorocarbon CCl2F2 can be recycled into a different compound by reaction with hydrogen to produce CH2F2(g), a compound useful in chemical manufacturing:
+CCl2F2(g)+4H2(g)⟶CH2F2(g)+2HCl(g)
+
+(a) Outline the steps necessary to answer the following question: What volume of hydrogen at 225 atm and 35.5 °C would be required to react with 1 ton (1.000 × 103 kg) of CCl2F2?
+
+(b) Answer the question.
+
+(a) Determine the molar mass of CCl2F2. From the balanced equation, calculate the moles of H2 needed for the complete reaction. From the ideal gas law, convert moles of H2 into volume. (b) 3.72 × 103 L
+
+Automobile air bags are inflated with nitrogen gas, which is formed by the decomposition of solid sodium azide (NaN3). The other product is sodium metal. Calculate the volume of nitrogen gas at 27 °C and 756 torr formed by the decomposition of 125 g of sodium azide.
+
+Lime, CaO, is produced by heating calcium carbonate, CaCO3; carbon dioxide is the other product.
+
+(a) Outline the steps necessary to answer the following question: What volume of carbon dioxide at 875 K and 0.966 atm is produced by the decomposition of 1 ton (1.000 × 103 kg) of calcium carbonate?
+
+(b) Answer the question.
+
+(a) Balance the equation. Determine the grams of CO2 produced and the number of moles. From the ideal gas law, determine the volume of gas. (b) 7.43 × 105 L
+
+Before small batteries were available, carbide lamps were used for bicycle lights. Acetylene gas, C2H2, and solid calcium hydroxide were formed by the reaction of calcium carbide, CaC2, with water. The ignition of the acetylene gas provided the light. Currently, the same lamps are used by some cavers, and calcium carbide is used to produce acetylene for carbide cannons.
+
+(a) Outline the steps necessary to answer the following question: What volume of C2H2 at 1.005 atm and 12.2 °C is formed by the reaction of 15.48 g of CaC2 with water?
+
+(b) Answer the question.
+
+Calculate the volume of oxygen required to burn 12.00 L of ethane gas, C2H6, to produce carbon dioxide and water, if the volumes of C2H6 and O2 are measured under the same conditions of temperature and pressure.
+
+42.00 L
+
+What volume of O2 at STP is required to oxidize 8.0 L of NO at STP to NO2? What volume of NO2 is produced at STP?
+
+Consider the following questions:
+
+(a) What is the total volume of the CO2(g) and H2O(g) at 600 °C and 0.888 atm produced by the combustion of 1.00 L of C2H6(g) measured at STP?
+
+(b) What is the partial pressure of H2O in the product gases?
+
+(a) 18.0 L; (b) 0.533 atm
+
+Methanol, CH3OH, is produced industrially by the following reaction:
+CO(g)+2H2(g)→copper catalyst 300 °C, 300 atmCH3OH(g)
+
+Assuming that the gases behave as ideal gases, find the ratio of the total volume of the reactants to the final volume.
+
+What volume of oxygen at 423.0 K and a pressure of 127.4 kPa is produced by the decomposition of 129.7 g of BaO2 to BaO and O2?
+
+10.57 L O2
+
+A 2.50-L sample of a colorless gas at STP decomposed to give 2.50 L of N2 and 1.25 L of O2 at STP. What is the colorless gas?
+
+Ethanol, C2H5OH, is produced industrially from ethylene, C2H4, by the following sequence of reactions:
+3C2H4+2H2SO4⟶C2H5HSO4+(C2H5)2SO4
+C2H5HSO4+(C2H5)2SO4+3H2O⟶3C2H5OH+2H2SO4
+
+What volume of ethylene at STP is required to produce 1.000 metric ton (1000 kg) of ethanol if the overall yield of ethanol is 90.1%?
+
+5.40 × 105 L
+
+One molecule of hemoglobin will combine with four molecules of oxygen. If 1.0 g of hemoglobin combines with 1.53 mL of oxygen at body temperature (37 °C) and a pressure of 743 torr, what is the molar mass of hemoglobin?
+
+A sample of a compound of xenon and fluorine was confined in a bulb with a pressure of 18 torr. Hydrogen was added to the bulb until the pressure was 72 torr. Passage of an electric spark through the mixture produced Xe and HF. After the HF was removed by reaction with solid KOH, the final pressure of xenon and unreacted hydrogen in the bulb was 36 torr. What is the empirical formula of the xenon fluoride in the original sample? (Note: Xenon fluorides contain only one xenon atom per molecule.)
+
+XeF4
+
+One method of analyzing amino acids is the van Slyke method. The characteristic amino groups (−NH2) in protein material are allowed to react with nitrous acid, HNO2, to form N2 gas. From the volume of the gas, the amount of amino acid can be determined. A 0.0604-g sample of a biological sample containing glycine, CH2(NH2)COOH, was analyzed by the van Slyke method and yielded 3.70 mL of N2 collected over water at a pressure of 735 torr and 29 °C. What was the percentage of glycine in the sample?
+CH2(NH2)CO2H+HNO2⟶CH2(OH)CO2H+H2O+N2
+
+total pressure of a mixture of ideal gases is equal to the sum of the partial pressures of the component gases
+concentration unit defined as the ratio of the molar amount of a mixture component to the total number of moles of all mixture components
+pressure exerted by an individual g
+[truncated]

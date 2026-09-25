@@ -1,0 +1,75 @@
+# m00046
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Variable scope
+
+Variable scope
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify the scope of a program's variables.
+
+Discuss the impact of a variable's scope.
+
+Global scope
+
+A variable's scope is the part of a program where the variable can be accessed. A variable created outside of a function has global scope and can be accessed anywhere in the program. A Python program begins in global scope, and the global scope lasts for the entire program execution.
+
+Global variables in a program with a function
+
+Global variables
+
+Local scope
+
+A variable created within a function has local scope and only exists within the function. A local variable cannot be accessed outside of the function in which the variable was created. After a function finishes executing, the function's local variables no longer exist.
+
+Global and local variables in a program with a function
+
+Local variables
+
+Using local and global variables together
+
+Python allows global and local variables to have the same name, which can lead to unexpected program behavior. A function treats a variable edited within the function as a local variable unless told otherwise. To edit a global variable inside a function, the variable must be declared with the global keyword.
+
+Editing global variables in a program with a function
+
+Using both local and global variables
+
+Consider the following variations on the example program with the input 9.
+
+Benefits of limiting scope
+
+A programmer might ask, "Why not just make all variables global variables to avoid access errors?" Making every variable global can make a program messy. Ex: A programmer debugging a large program discovers a variable has the wrong value. If the whole program can modify the variable, then the bug could be anywhere in the large program. Limiting a variable's scope to only what's necessary and restricting global variable use make a program easier to debug, maintain, and update.
+
+Battle royale game launch
+
+Write a program that reads in a selected game mode and calls one of two functions to launch the game. If the input is "br", call battle_royale(). Otherwise, call practice().
+battle_royale():
+
+Reads in the number of players.
+
+Computes the number of teammates still needed. A full team is 3 players.
+
+Calls the function find_teammates() with the calculated number.
+
+Prints "Match starting . . .".
+practice():
+
+Reads in a string representing the desired map.
+
+Prints "Launching practice on [desired map]".
+
+Note: find_teammates() is provided and does not need to be edited.
+
+Given input:
+
+The output is:
+
+Given input:
+
+The output is:

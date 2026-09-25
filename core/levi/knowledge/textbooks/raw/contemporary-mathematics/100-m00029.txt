@@ -1,0 +1,295 @@
+# m00029
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Fairness in Apportionment Methods
+
+Fairness in Apportionment Methods
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe and illustrate the Alabama paradox.
+
+Describe and illustrate the population paradox.
+
+Describe and illustrate the new-states paradox.
+
+Identify ways to promote fairness in apportionment methods.
+
+Apportionment Paradoxes
+
+The citizens of Imaginaria will want the apportionment method to be as fair as possible. There are certain characteristics that they would reasonably expect from a fair apportionment.
+
+If the house size is increased, the state quotas should all increase or remain the same but never decrease.
+
+If one state’s population is growing more rapidly than another state’s population, the faster growing state should not lose a seat while a slower growing state maintains or gains a seat.
+
+If there is a fixed number of seats, adding a new state should not cause an existing state to gain seats while others lose them.
+
+However, apportionment methods are known to contradict these expectations. Before you decide on the right apportionment for Imaginarians, let’s explore the apportionment paradox, a situation that occurs when an apportionment method produces results that seem to contradict reasonable expectations of fairness.
+
+There is a lot that the founders of Imaginaria can learn from U.S. history. The constitution of the United States requires that the seats in the House of Representatives be apportioned according to the results of the census that occurs every decade, but the number of seats and the apportionment method is not stipulated. Over the years, several different apportionment methods and house sizes have been used and scrutinized for fairness. This scrutiny has led to the discovery of several of these apportionment paradoxes.
+
+The Alabama Paradox
+
+At the time of the 1880 U.S. Census, the Hamilton method of apportionment had replaced the Jefferson method. The number of seats in the House of Representatives was not fixed. To achieve the fairest apportionment possible, the house sizes were chosen so that the Hamilton and Webster methods would result in the same apportionment. The chief clerk of the Census Bureau calculated the apportionments for house sizes between 275 and 350. There was a surprising result that became known as the Alabama paradox, which is said to occur when an increase in house size reduces a state’s quota. Alabama would receive eight seats with a house size of 299, but only receive seven seats if the house size increased to 300. (Michael J. Caulfield (Gannon University), "Apportioning Representatives in the United States Congress - Paradoxes of Apportionment," Convergence (November 2010), DOI:10.4169/loci003163)
+
+The 1880 Alabama Quota
+
+The 1880 census recorded the population of Alabama as 1,513,401 and that of the U.S. as 62,979,766.
+
+Calculate the standard divisor and standard quota for the State of Alabama based on a house size of 299.
+
+Calculate the standard divisor and standard quota for the State of Alabama based on a house size of 300.
+
+Did the standard quota increase or decrease when the house size increased?
+
+Consider the Hamilton method of apportionment. Explain how Alabama’s final quota could be smaller with a larger standard quota.
+
+The standard divisor is 62,979,766÷299=210,resulting in634.6689 citizens per seat. The standard quota for Alabama is 1,513,401÷210,634.7=7.1850 seats.
+
+The standard divisor is 62,979,766÷300=209,resulting in932.5533 citizens per seat. The standard quota for Alabama is 1,513,401÷209,932.6=7.2090 seats.
+
+The standard quota increased.
+
+In each case, the state would receive the lower quota of 7 and then be awarded one more seat if the fractional part of the standard quota were high enough relative to the fractional parts of the other states’ standard quotas. When the house size was 299, Alabama received one of the remaining seats after the lower quotas were distributed. When the house size was 300, Alabama did not receive one of the remaining seats after the lower quotas were distributed. It must have been the case that either the fractional part 0.2090 ranked lower amongst the other fractional parts of the state quotas than the fractional part 0.1850 did, or there were fewer remaining seats, or both.
+
+After the 1900 census, the Census Bureau again calculated the apportionment based on various house sizes. It was determined that Colorado would receive three seats with a house size of 356, but only two seats with a house size of 357.
+
+Hamilton’s Method and the Alabama Paradox
+
+Suppose that States A and B each have a population of 6, while State C has a population of 2.
+
+Use the Hamilton method to apportion 10 seats.
+
+Use the Hamilton method to apportion 11 seats.
+
+Does this example demonstrate the Alabama paradox? If so, how?
+Step 1: The total population is 14. The standard divisor is 14÷10=1.4 individuals per seat.
+ Step 2: The states’ standard quotas are as follows: A 6÷1.4≈4.29, B 6÷1.4≈4.29, and C 2÷1.4≈1.43.
+ Step 3: The states’ lower quotas are as follows: A 4, B 4, and C 1.
+ Step 4: The sum of the lower quotas is 9, which means there is one seat remaining to be apportioned. State C has the highest fractional part and receives the additional seat.
+ Step 5: The final apportionment is as follows: A 4, B 4, and C 2, which sums to 10.
+Step 1: The total population is 14. The standard divisor is 14÷10=1.4 individuals per seat.
+Step 2: The states’ standard quotas are as follows: A 6÷1.4≈4.29, B 6÷1.4≈4.29, and C 2÷1.4≈1.43.
+Step 3: The states’ lower quotas are as follows: A 4, B 4, and C 1.
+Step 4: The sum of the lower quotas is 9, which means there is one seat remaining to be apportioned. State C has the highest fractional part and receives the additional seat.
+Step 5: The final apportionment is as follows: A 4, B 4, and C 2, which sums to 10.
+Step 1: The total population is 14. The standard divisor is 14÷11≈1.2727 individuals per seat.
+ Step 2: The states’ standard quotas are: A 6÷1.2727≈4.71, B 6÷1.2727≈4.71, and C 2÷1.2727≈1.57.
+ Step 3: The states’ lower quotas are: A 4, B 4, and C 1.
+ Step 4: The sum of the lower quotas is 9, which means there are two seats remaining to be apportioned. A and B have the highest fractional parts and receive the additional seats.
+ Step 5: The final apportionment is: A 5, B 5, and C 1.
+Step 1: The total population is 14. The standard divisor is 14÷11≈1.2727 individuals per seat.
+Step 2: The states’ standard quotas are: A 6÷1.2727≈4.71, B 6÷1.2727≈4.71, and C 2÷1.2727≈1.57.
+Step 3: The states’ lower quotas are: A 4, B 4, and C 1.
+Step 4: The sum of the lower quotas is 9, which means there are two seats remaining to be apportioned. A and B have the highest fractional parts and receive the additional seats.
+Step 5: The final apportionment is: A 5, B 5, and C 1.
+
+Yes, this demonstrates the Alabama paradox because State C receives two seats if the house size is 10, but only one seat if the house size is 11.
+
+The Population Paradox
+
+It is important for the founders of Imaginaria to keep in mind that the populations of states change as time passes. Some populations grow and some shrink. Some populations increase by a large amount while others increase by a small amount. These changes may necessitate a reapportionment of seats, or the recalculation of state quotas due to a change in population. It would be reasonable for Imaginarians to expect that the state with a population that has grown more than others will gain a seat before the other states. Once again, this is not always the case with the Hamilton method of apportionment. The population growth rate of a state is the ratio of the change in the population to the original size of the population, often expressed as a percentage. This value is positive if the population is increasing and negative if the population is decreasing. The population paradox occurs when a state with an increasing population loses a seat while a state with a decreasing population either retains or gains seats. More generally, the population paradox occurs when a state with a higher population growth rate loses seats while a state with a lower population growth rate retains or gains seats.
+
+Notice that the population paradox definitions has two parts. If either part applies, then the population paradox has occurred. The first part of the definition only applies when one state has a decreasing population. The second part of the definition applies in all situations, whether there is a state with a decreasing population or not. It will be easier to identify situations that involve a decreasing population. The other situations requires the calculation of a growth rate. The reason that we don't have to calculate a growth rate when one state has a decreasing population and the other has an increasing population is that increasing population has a positive growth rate which is always greater than the negative growth rate of a decreasing population.
+A state must lose a seat in order for the population paradox to apply. It is not enough for a state with a lower growth rate to gain a seat while a state with a higher growth rate retains the same number of seats.
+
+Apportionment of Respirators to Hospitals
+
+Suppose that 18 respirators are to be apportioned to three hospitals based on their capacities. The Hamilton method is used to allocate the respirators in 2020, then to reallocate based on new capacities in 2021. The results are shown in the table below. How does this demonstrate the population paradox?
+Respirators in 2021
+A
+825
+9
+57825≈0.0691=6.91%
+882
+9
+B
+613
+7
+13613≈0.0212=2.12%
+626
+6
+C
+239
+2
+3239=0.0126=1.26%
+242
+3
+Hospital B lost a respirator while hospital C gained one, even though hospital B had a higher growth rate than hospital C.
+
+The growth rate of a population can be calculated by subtracting the previous population size from the current population size, and then dividing the difference by the previous population size.
+Make sure to calculate the subtraction before the division. If you are entering the values in a calculator, it is helpful to put parentheses around the subtracted terms.
+
+The Congress of Costaguana
+
+The country of Costaguana has three states: Azuera with a population of 894,000; Punta Mala with a population of 696,000; and Esmeralda with a population of 215,000. There are 38 seats in the Congress of Costaguana. The apportionment of the seats is determined by Hamilton’s method to be: 19 for Azuera, 15 for Punta Mala, and 4 for Esmerelda. A census reveals that the population has grown and the seats must be reapportioned. If Azuera now has 953,000 residents, Punta Mala now has 706,000 residents, and Esmerelda now has 218,000 residents, how many seats will each state receive upon reapportionment? How is this an example of the population paradox?
+
+The Hamilton reapportionment is: 19 for Azuera, 14 for Punta Mala, and 5 for Esmerelda. This is an example of the population paradox because Punta Mala lost a seat to Esmerelda, even though Punta Mala’s population grew by 1.44 percent while Esmerelda’s only grew by 1.40 percent.
+
+The New-States Paradox
+
+As a founder of Imaginaria, you might also consider the possibility that Imaginaria could annex nearby lands and increase the number of states. This occurred several times in the United States such as when Oklahoma became a state in 1907. The House size was increased from 386 to 391 to accommodate Oklahoma’s quota of five seats. When the seats were reapportioned using Hamilton’s method, New York lost a seat to Maine despite the fact that their populations had not changed. This is an example of the new-state paradox, which occurs when the addition of a new state is accompanied by an increase in seats to maintain the standard ratio of population to seats, but one of the existing states loses a seat in the resulting reapportionment.
+
+New State of Oscuridad
+
+The country of San Lorenzo has grown from two states to three. The house size of the congress has been increased by eight and the seats have been reapportioned to accommodate the new state of Oscuridad. The constitution mandates the use of the Hamilton method of apportionment. Use this information and the following table to answer the questions.
+
+State
+Population (in hundreds)
+Original Apportionment
+Reapportionment
+Clara
+7,100
+39
+40
+Velasco
+9,080
+51
+50
+Oscuridad
+1,500
+Not Applicable
+8
+What was the original house size?
+
+What is the new house size?
+
+How is this reapportionment an example of the new-states paradox?
+39+51=90
+40+50+8=98
+
+The original state of Velasco lost a seat to the original state of Clara when the new state of Oscuridad was added.
+
+The Growing Country of Gulliversia
+
+The country of Gulliversia has two states: Lilliput with a population of 700,000 and Brobdingnag with a population of 937,000. The constitution of Gulliversia requires that the 90 congressional seats be apportioned by Hamilton’s method. Lilliput has received 38 seats while Brobdingnag has received 52 seats. Recently, the island of Houyhnhnmsland with a population of 170,000 has joined the union, becoming a state of Gulliversia. When Houyhnhnmsland is included, nine additional seats must be apportioned to maintain the same ratio of seats to citizens. Use Hamilton’s method to reapportion the 99 seats to the three states. How is the resulting apportionment an example of the new-states paradox?
+
+The reapportionment gives 39 seats to Lilliput, 51 seats to Brobdingnag, and 9 seats to Houyhnhnmsland. This is an example of the new-states paradox because the original state of Brobdingnag lost a seat to the original state of Lilliput when the new state was added to the union.
+
+When a new state is added, it is necessary to determine the amount that the house size must be increased to retain the original ratio of population to seats, in other words to keep the original standard divisor. To calculate the new house size, divide the new population by the original standard divisor, and round to the nearest whole number.
+New House Size=New PopulationOriginal Standard Divisorrounded to the nearest whole number.
+
+Oklahoma Joins the Union
+
+Oklahoma was admitted as the 46th state on November 16, 1907. Before Oklahoma joined the union, the U.S. population was approximately 75,030,000 and the House of Representatives had 386 seats. The new state had a population of approximately 970,000. Use this information to estimate the original standard divisor to the nearest hundred, the new population, the new house size, and the number of seats Oklahoma should receive.
+Step 1: Original Standard Divisor≈75,030,000386≈194,400
+Step 2: New Population ≈75,030,000+970,000=76,000,000
+Step 3:New House Size≈76,000,000194,400≈391
+Step 4: There are 391-386=5 new seats to be apportioned to Oklahoma.
+
+The Search for the Perfect Apportionment Method
+
+The ideal apportionment method would simultaneously satisfy the following four fairness criteria.
+
+Satisfy the quota rule
+
+Avoid the Alabama paradox
+
+Avoid the population paradox
+
+Avoid the new-states paradox
+
+We have seen that the Hamilton method allows the Alabama paradox, the population paradox, and the new-states paradox in some apportionment scenarios. Let’s explore the results of the other methods of apportionment we have discussed in some of the same scenarios.
+
+Orange Grove and the New-States Paradox
+
+The incorporated town of Orange Grove consists of two subdivisions: The Oaks with 1,254 residents and The Villages with 10,746 residents. A council with 100 members supervises the municipality’s operations. The council votes to annex an unincorporated subdivision called The Lakes with a population of 630. They plan to increase the size of the council to maintain the ratio of seats to residents such that the new council will have 100 seats plus the number of seats given to The Lakes. Use each of the following apportionment methods and indicated number of additional seats to find the original and new apportionment and determine whether the new-state paradox occurs.
+
+Jefferson’s method with five additional seats.
+
+Adams’s method with six additional seats.
+
+Webster’s method with five additional seats
+
+Using a modified divisor of 119, the original apportionment would have been: The Oaks 10 and The Villages 90. Using a modified divisor of 119, the new apportionment would be: The Oaks 10, The Villages 90, and The Lakes 5. The new-state paradox does not occur.
+
+Using a modified divisor of 121, the original apportionment would have been: The Oaks 11 and The Villages 89. Using a modified divisor of 121, the new apportionment would be: The Oaks 11, The Villages 89, and The Lakes 6. The new-state paradox does not occur.
+
+Using the standard divisor of 120, the original apportionment would have been: The Oaks 10 and The Villages 90. Using a modified divisor of 119.5, the new apportionment would be: The Oaks 10, The Villages 90, and The Lakes 5. The new-state paradox does not occur.
+
+We have seen in our examples that neither the population paradox nor the new-states paradox occurred when using the Jefferson, Adams, and Webster methods. It turns out that, although all three of these divisor methods violate the quota rule, none of them ever causes the population paradox, new-states paradox, or even the Alabama paradox. On the other hand, the Hamilton method satisfies the quota rule, but will cause the population paradox, the new-states paradox, and the Alabama paradox in some scenarios.
+
+In 1983, mathematicians Michel Balinski and Peyton Young proved that no method of apportionment can simultaneously satisfy all four fairness criteria.
+
+There are other apportionment methods that satisfy different subsets of these fairness criteria. For example, the mathematicians, Balinski and Young who proved the Balinski-Young Impossibility Theorem created a method that both satisfies the quota rule and is free of the Alabama paradox. (Balinski, Michel L.; Young, H. Peyton (November 1974). “A New Method for Congressional Apportionment.” Proceedings of the National Academy of Sciences. 71 (11): 4602–4606.) However, no method may always follow the quota rule and simultaneously be free of the population paradox. (Balinski, Michel L.; Young, H. Peyton (September 1980). "The Theory of Apportionment" (PDF). Working Papers. International Institute for Applied Systems Analysis. WP-80-131.)
+
+So, as you and your fellow founders of Imaginaria make the important decision about the right apportionment method for Imaginaria, do not look for a perfect apportionment method. Instead, look for an apportionment method that best meets the needs and concerns of Imaginarians.
+
+Check Your Understanding
+
+Key Terms
+
+apportionment paradox
+
+Alabama paradox
+
+reapportionment
+
+population growth rate
+
+population paradox
+
+new-state paradox
+
+Key Concepts
+
+Several surprising outcomes can occur when apportioning seats that voters may find unfair: Alabama paradox, population paradox, and new-state paradox.
+
+Apportionment methods are susceptible to apportionment paradoxes and may violate the quota rule.
+
+The Balinsky-Young Impossibility Theorem indicates that no apportionment can satisfy all fairness criteria.
+
+Formulas
+population growth rate=current population size-previous population sizeprevious population size
+New House Size=New PopulationOriginal Standard Divisorrounded to the nearest whole number.
+
+Projects
+
+The First Census: Challenges of Collecting Population Data
+
+As you and your fellow founders write the Imaginarian constitution, you must also design systems to collect accurate information about the population of Imaginaria. Why is this important and what are the challenges you will face? Let’s find out! Research and answer each question. (Questions adapted from “Authorizing the First Census–The Significance of Population Data,” Census.gov, United States Census Bureau)
+
+The First Congress laid out a plan for collecting this data in Chapter II, An Act Providing for the Enumeration of the Inhabitants of the United States, which was approved March 1, 1790. What group did Congress select to carry out the first enumeration? Why did they choose this group? What might be the advantages and disadvantages to this approach?
+
+Choose at least two challenges faced by the U.S. government during the first enumeration and explain how the information gathered might have helped address them.
+
+President James Madison was a U.S. Representative who participated in the census debate in the first congress. What were the main points of his remarks and how were they relevant to the overall debate about the first enumeration?
+
+What issues do you think the U.S. Census Bureau encounters today as it continues to collect and process data about the U.S. population that might be significant to you and the other founders of Imaginaria?
+
+The Party System: How Many Political Parties Are Enough?
+
+The electoral system of Imaginaria will likely involve multiple political parties. The way these parties interact with the system may be determined by the founders of the new democracy. Let’s explore the ways in which political parties interact with the governments of various democracies by researching and answering each of the following questions.
+
+What concerns did the founders of the United States have about political parties? Have any of their concerns become a reality? Were political parties addressed in the U.S. Constitution? How did they become such a large part of politics in the U.S.? As a founder of Imaginaria, would you address political parties in your constitution?
+
+What is frontloading? Does our current system of frontloading impact fair representation? Why do two small, racially homogeneous states hold their primaries first? Do you think this impacts the final results?
+
+How does the interaction political parties and the electoral system in the United States differ from that of other countries? Give at least three specific examples. Of these three, which would you be most likely to use as a model for Imaginaria?
+
+Technology and Voting: How Has the Digital Age Impacted Elections?
+
+Unlike most other countries, Imaginaria will be founded in the digital age. Let’s explore the impact this might have on how you choose to set up your electoral system. Research and answer each question.
+
+Participation in an electoral system if very important. In what ways does the Internet positively affect participation? In what ways does it negatively affect participation. What roll, if any, should government of Imaginaria play in tempering or promoting the Impact of the Internet?
+
+Find at least three examples of governments that utilize Internet voting around the world. What concerns have slowed the spread of this technology? What are the advantages and disadvantages of Internet voting? Would you be in favor of Internet voting for Imaginaria? Why or why not?
+
+Chapter Review
+Voting Methods
+
+Fairness in Voting Methods
+
+Standard Divisors, Standard Quotas, and the Apportionment Problem
+
+Apportionment Methods
+
+Fairness in Apportionment Methods
+
+Chapter Test

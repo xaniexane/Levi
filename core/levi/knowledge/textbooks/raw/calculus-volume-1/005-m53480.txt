@@ -1,0 +1,425 @@
+# m53480
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Inverse Functions
+
+Inverse Functions
+
+Determine the conditions for when a function has an inverse.
+
+Use the horizontal line test to recognize when a function is one-to-one.
+
+Find the inverse of a given function.
+
+Draw the graph of an inverse function.
+
+Evaluate inverse trigonometric functions.
+
+An inverse function reverses the operation done by a particular function. In other words, whatever a function does, the inverse function undoes it. In this section, we define an inverse function formally and state the necessary conditions for an inverse function to exist. We examine how to find an inverse function and study the relationship between the graph of a function and the graph of its inverse. Then we apply these ideas to define and discuss properties of the inverse trigonometric functions.
+
+Existence of an Inverse Function
+
+We begin with an example. Given a function f and an output y=f(x), we are often interested in finding what value or values x were mapped to y by f. For example, consider the function f(x)=x3+4. Since any output y=x3+4, we can solve this equation for x to find that the input is x=y−43. This equation defines x as a function of y. Denoting this function as f−1, and writing x=f−1(y)=y−43, we see that for any x in the domain of f,f−1(f(x))=f−1(x3+4)=x. Thus, this new function, f−1, “undid” what the original function f did. A function with this property is called the inverse function of the original function.
+
+Definition
+
+Given a function f with domain D and range R, its inverse function (if it exists) is the function f−1 with domain R and range D such that f−1(y)=x if f(x)=y. In other words, for a function f and its inverse f−1,
+
+Note that f−1 is read as “f inverse.” Here, the −1 is not used as an exponent and f−1(x)≠1/f(x). shows the relationship between the domain and range of f and the domain and range of f−1.
+
+Recall that a function has exactly one output for each input. Therefore, to define an inverse function, we need to map each input to exactly one output. For example, let’s try to find the inverse function for f(x)=x2. Solving the equation y=x2 for x, we arrive at the equation x=±y. This equation does not describe x as a function of y because there are two solutions to this equation for every y>0. The problem with trying to find an inverse function for f(x)=x2 is that two inputs are sent to the same output for each output y>0. The function f(x)=x3+4 discussed earlier did not have this problem. For that function, each input was sent to a different output. A function that sends each input to a different output is called a one-to-one function.
+
+Definition
+
+We say a f is a one-to-one function if f(x1)≠f(x2) when x1≠x2.
+
+One way to determine whether a function is one-to-one is by looking at its graph. If a function is one-to-one, then no two inputs can be sent to the same output. Therefore, if we draw a horizontal line anywhere in the xy-plane, according to the horizontal line test, it cannot intersect the graph more than once. We note that the horizontal line test is different from the vertical line test. The vertical line test determines whether a graph is the graph of a function. The horizontal line test determines whether a function is one-to-one ().
+
+Rule: Horizontal Line Test
+
+A function f is one-to-one if and only if every horizontal line intersects the graph of f no more than once.
+
+Determining Whether a Function Is One-to-One
+
+For each of the following functions, use the horizontal line test to determine whether it is one-to-one.
+
+Since the horizontal line y=n for any integer n≥0 intersects the graph more than once, this function is not one-to-one.
+
+Since every horizontal line intersects the graph once (at most), this function is one-to-one.
+
+Is the function f graphed in the following image one-to-one?
+
+No.
+
+Hint
+
+Use the horizontal line test.
+
+Finding a Function’s Inverse
+
+We can now consider one-to-one functions and show how to find their inverses. Recall that a function maps elements in the domain of f to elements in the range of f. The inverse function maps each element from the range of f back to its corresponding element from the domain of f. Therefore, to find the inverse function of a one-to-one function f, given any y in the range of f, we need to determine which x in the domain of f satisfies f(x)=y. Since f is one-to-one, there is exactly one such value x. We can find that value x by solving the equation f(x)=y for x. Doing so, we are able to write x as a function of y where the domain of this function is the range of f and the range of this new function is the domain of f. Consequently, this function is the inverse of f, and we write x=f−1(y). Since we typically use the variable x to denote the independent variable and y to denote the dependent variable, we often interchange the roles of x and y, and write y=f−1(x). Representing the inverse function in this way is also helpful later when we graph a function f and its inverse f−1 on the same axes.
+
+Problem-Solving Strategy: Finding an Inverse Function
+
+Solve the equation y=f(x) for x.
+
+Interchange the variables x and y and write y=f−1(x).
+
+Finding an Inverse Function
+
+Find the inverse for the function f(x)=3x−4. State the domain and range of the inverse function. Verify that f−1(f(x))=x.
+
+Follow the steps outlined in the strategy.
+
+Step 1. If y=3x−4, then 3x=y+4 and x=13y+43.
+
+Step 2. Rewrite as y=13x+43 and let y=f−1(x).
+
+Therefore, f−1(x)=13x+43.
+
+Since the domain of f is (−∞,∞), the range of f−1 is (−∞,∞). Since the range of f is (−∞,∞), the domain of f−1 is (−∞,∞).
+
+You can verify that f−1(f(x))=x by writing
+
+Note that for f−1(x) to be the inverse of f(x), both f−1(f(x))=x and f(f−1(x))=x for all x in the domain of the inside function.
+
+Find the inverse of the function f(x)=3x/(x−2). State the domain and range of the inverse function.
+f−1(x)=2xx−3. The domain of f−1 is {x|x≠3}. The range of f−1 is {y|y≠2}.
+
+Hint
+
+Use the for finding inverse functions.
+
+Graphing Inverse Functions
+
+Let’s consider the relationship between the graph of a function f and the graph of its inverse. Consider the graph of f shown in and a point (a,b) on the graph. Since b=f(a), then f−1(b)=a. Therefore, when we graph f−1, the point (b,a) is on the graph. As a result, the graph of f−1 is a reflection of the graph of f about the line y=x.
+
+Sketching Graphs of Inverse Functions
+
+For the graph of f in the following image, sketch a graph of f−1 by sketching the line y=x and using symmetry. Identify the domain and range of f−1.
+
+Reflect the graph about the line y=x. The domain of f−1 is [0,∞). The range of f−1 is [−2,∞). By using the preceding strategy for finding inverse functions, we can verify that the inverse function is f−1(x)=x2−2, as shown in the graph.
+
+Sketch the graph of f(x)=2x+3 and the graph of its inverse using the symmetry property of inverse functions.
+
+Hint
+
+The graphs are symmetric about the line y=x.
+
+Restricting Domains
+
+As we have seen, f(x)=x2 does not have an inverse function because it is not one-to-one. However, we can choose a subset of the domain of f such that the function is one-to-one. This subset is called a restricted domain. By restricting the domain of f, we can define a new function g such that the domain of g is the restricted domain of f and g(x)=f(x) for all x in the domain of g. Then we can define an inverse function for g on that domain. For example, since f(x)=x2 is one-to-one on the interval [0,∞), we can define a new function g such that the domain of g is [0,∞) and g(x)=x2 for all x in its domain. Since g is a one-to-one function, it has an inverse function, given by the formula g−1(x)=x. On the other hand, the function f(x)=x2 is also one-to-one on the domain (−∞,0]. Therefore, we could also define a new function h such that the domain of h is (−∞,0] and h(x)=x2 for all x in the domain of h. Then h is a one-to-one function and must also have an inverse. Its inverse is given by the formula h−1(x)=−x ().
+
+Restricting the Domain
+
+Consider the function f(x)=(x+1)2.
+
+Sketch the graph of f and use the horizontal line test to show that f is not one-to-one.
+
+Show that f is one-to-one on the restricted domain [−1,∞). Determine the domain and range for the inverse of f on this restricted domain and find a formula for f−1.
+
+The graph of f is the graph of y=x2 shifted left 1 unit. Since there exists a horizontal line intersecting the graph more than once, f is not one-to-one.
+
+On the interval [−1,∞),f is one-to-one.
+
+The domain and range of f−1 are given by the range and domain of f, respectively. Therefore, the domain of f−1 is [0,∞) and the range of f−1 is [−1,∞). To find a formula for f−1, solve the equation y=(x+1)2 for x. If y=(x+1)2, then x=−1±y. Since we are restricting the domain to the interval where x≥−1, we need ±y≥0. Therefore, x=−1+y. Interchanging x and y, we write y=−1+x and conclude that f−1(x)=−1+x.
+
+Consider f(x)=1/x2 restricted to the domain (−∞,0). Verify that f is one-to-one on this domain. Determine the domain and range of the inverse of f and find a formula for f−1.
+
+The domain of f−1 is (0,∞). The range of f−1 is (−∞,0). The inverse function is given by the formula f−1(x)=−1/x.
+
+Hint
+
+The domain and range of f−1 is given by the range and domain of f, respectively. To find f−1, solve y=1/x2 for x.
+
+Inverse Trigonometric Functions
+
+The six basic trigonometric functions are periodic, and therefore they are not one-to-one. However, if we restrict the domain of a trigonometric function to an interval where it is one-to-one, we can define its inverse. Consider the sine function (). The sine function is one-to-one on an infinite number of intervals, but the standard convention is to restrict the domain to the interval [−π2,π2]. By doing so, we define the inverse sine function on the domain [−1,1] such that for any x in the interval [−1,1], the inverse sine function tells us which angle θ in the interval [−π2,π2] satisfies sinθ=x. Similarly, we can restrict the domains of the other trigonometric functions to define inverse trigonometric functions, which are functions that tell us which angle in a certain interval has a specified trigonometric value.
+
+Definition
+
+The inverse sine function, denoted sin−1 or arcsin, and the inverse cosine function, denoted cos−1 or arccos, are defined on the domain D={x|−1≤x≤1} as follows:
+
+The inverse tangent function, denoted tan−1 or arctan, and inverse cotangent function, denoted cot−1 or arccot, are defined on the domain D={x|−∞<x<∞} as follows:
+
+The inverse cosecant function, denoted csc−1 or arccsc, and inverse secant function, denoted sec−1 or arcsec, are defined on the domain D={x||x|≥1} as follows:
+
+To graph the inverse trigonometric functions, we use the graphs of the trigonometric functions restricted to the domains defined earlier and reflect the graphs about the line y=x ().
+
+Go to the following site for more comparisons of functions and their inverses.
+
+When evaluating an inverse trigonometric function, the output is an angle. For example, to evaluate cos−1(12), we need to find an angle θ such that cosθ=12. Clearly, many angles have this property. However, given the definition of cos−1, we need the angle θ that not only solves this equation, but also lies in the interval [0,π]. We conclude that cos−1(12)=π3.
+
+We now consider a composition of a trigonometric function and its inverse. For example, consider the two expressions sin(sin−1(22)) and sin−1(sin(π)). For the first one, we simplify as follows:
+
+For the second one, we have
+
+The inverse function is supposed to “undo” the original function, so why isn’t sin−1(sin(π))=π? Recalling our definition of inverse functions, a function f and its inverse f−1 satisfy the conditions f(f−1(y))=y for all y in the domain of f−1 and f−1(f(x))=x for all x in the domain of f, so what happened here? The issue is that the inverse sine function, sin−1, is the inverse of the restricted sine function defined on the domain [−π2,π2]. Therefore, for x in the interval [−π2,π2], it is true that sin−1(sinx)=x. However, for values of x outside this interval, the equation does not hold, even though sin−1(sinx) is defined for all real numbers x.
+
+What about sin(sin−1y)? Does that have a similar issue? The answer is no. Since the domain of sin−1 is the interval [−1,1], we conclude that sin(sin−1y)=y if −1≤y≤1 and the expression is not defined for other values of y. To summarize,
+
+and
+
+Similarly, for the cosine function,
+
+and
+
+Similar properties hold for the other trigonometric functions and their inverses.
+
+Evaluating Expressions Involving Inverse Trigonometric Functions
+
+Evaluate each of the following expressions.
+sin−1(−32)
+tan(tan−1(−13))
+cos−1(cos(5π4))
+sin−1(cos(2π3))
+
+Evaluating sin−1(−3/2) is equivalent to finding the angle θ such that sinθ=−3/2 and −π/2≤θ≤π/2. The angle θ=−π/3 satisfies these two conditions. Therefore, sin−1(−3/2)=−π/3.
+
+First we use the fact that tan−1(−1/3)=−π/6. Then tan(-π/6)=−1/3. Therefore, tan(tan−1(−1/3))=−1/3.
+
+To evaluate cos−1(cos(5π/4)), first use the fact that cos(5π/4)=−2/2. Then we need to find the angle θ such that cos(θ)=−2/2 and 0≤θ≤π. Since 3π/4 satisfies both these conditions, we have cos-1(cos(5π/4))=cos−1(−2/2)=3π/4.
+
+Since cos(2π/3)=−1/2, we need to evaluate sin−1(−1/2). That is, we need to find the angle θ such that sin(θ)=−1/2 and −π/2≤θ≤π/2. Since −π/6 satisfies both these conditions, we can conclude that sin−1(cos(2π/3))=sin−1(−1/2)=−π/6.
+
+The Maximum Value of a Function
+
+In many areas of science, engineering, and mathematics, it is useful to know the maximum value a function can obtain, even if we don’t know its exact value at a given instant. For instance, if we have a function describing the strength of a roof beam, we would want to know the maximum weight the beam can support without breaking. If we have a function that describes the speed of a train, we would want to know its maximum speed before it jumps off the rails. Safe design often depends on knowing maximum values.
+
+This project describes a simple example of a function with a maximum value that depends on two equation coefficients. We will see that maximum values can depend on several factors other than the independent variable x.
+
+Consider the graph in of the function y=sinx+cosx. Describe its overall shape. Is it periodic? How do you know?
+
+The graph of y=sinx+cosx.
+
+Using a graphing calculator or other graphing device, estimate the x- and y-values of the maximum point for the graph (the first such point where x > 0). It may be helpful to express the x-value as a multiple of π.
+
+Now consider other graphs of the form y=Asinx+Bcosx for various values of A and B. Sketch the graph when A = 2 and B = 1, and find the x- and y-values for the maximum point. (Remember to express the x-value as a multiple of π, if possible.) Has it moved?
+
+Repeat for A = 1, B = 2. Is there any relationship to what you found in part (2)?
+
+Complete the following table, adding a few choices of your own for A and B:
+
+A
+B
+x
+y
+
+A
+B
+x
+y
+
+0
+1
+
+3
+1
+
+1
+0
+
+1
+3
+
+1
+1
+
+12
+5
+
+1
+2
+
+5
+12
+
+2
+1
+
+2
+2
+
+3
+4
+
+4
+3
+y
+0
+3
+1
+1
+0
+3
+1
+1
+12
+5
+1
+2
+5
+12
+2
+1
+2
+2
+3
+4
+4
+3
+Try to figure out the formula for the y-values.
+
+The formula for the x-values is a little harder. The most helpful points from the table are (1,1),(1,3),(3,1). (Hint: Consider inverse trigonometric functions.)
+
+If you found formulas for parts (5) and (6), show that they work together. That is, substitute the x-value formula you found into y=Asinx+Bcosx and simplify it to arrive at the y-value formula you found.
+
+Key Concepts
+
+For a function to have an inverse, the function must be one-to-one. Given the graph of a function, we can determine whether the function is one-to-one by using the horizontal line test.
+
+If a function is not one-to-one, we can restrict the domain to a smaller domain where the function is one-to-one and then define the inverse of the function on the smaller domain.
+
+For a function f and its inverse f−1,f(f−1(x))=x for all x in the domain of f−1 and f−1(f(x))=x for all x in the domain of f.
+
+Since the trigonometric functions are periodic, we need to restrict their domains to define the inverse trigonometric functions.
+
+The graph of a function f and its inverse f−1 are symmetric about the line y=x.
+
+Key Equations
+f−1(f(x))=xfor allxinD,andf(f−1(y))=yfor allyinR.
+For the following exercises, use the horizontal line test to determine whether each of the given graphs is one-to-one.
+
+Not one-to-one
+
+Not one-to-one
+
+One-to-one
+
+For the following exercises, a. find the inverse function, and b. find the domain and range of the inverse function.
+f(x)=x2−4,x≥0
+
+a. f−1(x)=x+4 b. Domain :x≥−4,range:y≥0
+f(x)=x−43
+f(x)=x3+1
+
+a. f−1(x)=x−13 b. Domain: all real numbers, range: all real numbers
+f(x)=(x−1)2,x≤1
+f(x)=x−1
+
+a. f−1(x)=x2+1, b. Domain: x≥0, range: y≥1
+f(x)=1x+2
+
+For the following exercises, use the graph of f to sketch the graph of its inverse function.
+
+For the following exercises, use composition to determine which pairs of functions are inverses.
+f(x)=8x,g(x)=x8
+
+These are inverses.
+f(x)=8x+3,g(x)=x−38
+f(x)=5x−7,g(x)=x+57
+
+These are not inverses.
+f(x)=23x+2,g(x)=32x+3
+f(x)=1x−1,x≠1,g(x)=1x+1,x≠0
+
+These are inverses.
+f(x)=x3+1,g(x)=(x−1)1/3
+f(x)=x2+2x+1,x≥−1,g(x)=−1+x,x≥0
+
+These are inverses.
+f(x)=4−x2,0≤x≤2,g(x)=4−x2,0≤x≤2
+
+For the following exercises, evaluate the functions. Give the exact value.
+tan−1(33)
+π6
+cos−1(−22)
+cot−1(1)
+π4
+sin−1(−1)
+cos−1(32)
+π6
+cos(tan−1(3))
+sin(cos−1(22))
+22
+sin−1(sin(π3))
+tan−1(tan(−π6))
+−π6
+
+The function C=T(F)=(5/9)(F−32) converts degrees Fahrenheit to degrees Celsius.
+
+Find the inverse function F=T−1(C)
+
+What is the inverse function used for?
+[T] The velocity V (in centimeters per second) of blood in an artery at a distance x cm from the center of the artery can be modeled by the function V=f(x)=500(0.04−x2) for 0≤x≤0.2.
+
+Find x=f−1(V).
+
+Interpret what the inverse function is used for.
+
+Find the distance from the center of an artery with a velocity of 15 cm/sec, 10 cm/sec, and 5 cm/sec.
+
+a. x=f−1(V)=0.04−V500 b. The inverse function determines the distance from the center of the artery at which blood is flowing with velocity V. c. 0.1 cm; 0.14 cm; 0.17 cm
+
+A function that converts dress sizes in the United States to those in Europe is given by D(x)=2x+24.
+
+Find the European dress sizes that correspond to sizes 6, 8, 10, and 12 in the United States.
+
+Find the function that converts European dress sizes to U.S. dress sizes.
+
+Use part b. to find the dress sizes in the United States that correspond to 46, 52, 62, and 70.
+[T] The cost to remove a toxin from a lake is modeled by the function
+C(p)=75p/(85−p), where C is the cost (in thousands of dollars) and p is the amount of toxin in a small lake (measured in parts per billion [ppb]). This model is valid only when the amount of toxin is less than 85 ppb.
+
+Find the cost to remove 25 ppb, 40 ppb, and 50 ppb of the toxin from the lake.
+
+Find the inverse function. c. Use part b. to determine how much of the toxin is removed for $50,000.
+
+a. $31,250, $66,667, $107,143 b. (p=85CC+75) c. 34 ppb
+[T] A race car is accelerating at a velocity given by
+v(t)=254t+54,
+where v is the velocity (in feet per second) at time t.
+
+Find the velocity of the car at 10 sec.
+
+Find the inverse function.
+
+Use part b. to determine how long it takes for the car to reach a speed of 150 ft/sec.
+[T] An airplane’s Mach number M is the ratio of its speed to the speed of sound. When a plane is flying at a constant altitude, then its Mach angle is given by μ=2sin−1(1M).
+
+Find the Mach angle (to the nearest degree) for the following Mach numbers.
+M=1.4
+M=2.8
+M=4.3
+
+a. ~92° b. ~42° c. ~27°
+[T] Using μ=2sin−1(1M), find the Mach number M for the following angles.
+μ=π6
+μ=2π7
+μ=3π8
+[T] The average temperature (in degrees Celsius) of a city in the northern United States can be modeled by the function
+T(x)=5+18sin[π6(x−4.6)],
+where x is time in months and x=1.00 corresponds to January 1. Determine the day(s) (month and day) when the average temperature is 21°C. Use the integer portion of your answer(s) as the month and calculate the day of the month from the decimal portion.
+x≈6.69,8.51; so, the temperature occurs on June 21 and August 15
+[T] The depth (in feet) of water at a dock changes with the rise and fall of tides. It is modeled by the function
+D(t)=5sin(π6t−7π6)+8,
+where t is the number of hours after midnight. Determine the first time after midnight when the depth is 11.75 ft.
+[T] An object moving in simple harmonic motion is modeled by the function
+s(t)=−6cos(πt2),
+where s is measured in inches and t is measured in seconds. Determine the first time when the distance moved is 4.5 in.
+~1.5sec
+[T] A local art gallery has a portrait 3 ft in height that is hung 2.5 ft above the eye level of an average person. The viewing angle θ can be modeled by the function
+θ=tan−15.5x−tan−12.5x,
+where x is the distance (in feet) from the portrait. Find the viewing angle when a person is 4 ft from the portrait.
+[T] Use a calculator to evaluate tan−1(tan(2.1)) and cos−1(cos(2.1)). Explain the results of each.
+tan−1(tan(2.1))≈−1.0416; the expression does not equal 2.1 since 2.1>1.57=π2—in other words, it is not in the restricted domain of tanx.cos−1(cos(2.1))=2.1, since 2.1 is in the restricted domain of cosx.
+[T] Use a calculator to evaluate sin(sin−1(−2)) and tan(tan−1(−2)). Explain the results of each.
+
+a function f is one-to-one if and only if every horizontal line intersects the graph of f, at most, once
+for a function f, the inverse function f−1 satisfies f−1(y)=x if f(x)=y
+the inverses of the trigonometric functions are defined on restricted domains where they are one-to-one functions
+a function f is one-to-one if f(x1)≠f(x2) if x1≠x2
+a subset of the domain of a function f

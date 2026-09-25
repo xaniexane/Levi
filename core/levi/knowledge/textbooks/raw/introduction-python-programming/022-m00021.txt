@@ -1,0 +1,101 @@
+# m00021
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Strings revisited
+
+Strings revisited
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Extract a specific character from a string using an index.
+
+Use escape sequences to represent special characters.
+
+Indexes
+
+A string is a sequence of zero or more characters. Each character has an index that refers to the character's position. Indexes are numbered from left to right, starting at 0. Indexes are also numbered from right to left, starting at -1.
+
+String indexes
+
+String indexes
+
+Unicode
+
+Python uses Unicode, the international standard for representing text on computers. Unicode defines a unique number, called a code point, for each possible character. Ex: "P" has the code point 80, and "!" has the code point 33.
+
+The built-in ord() function converts a character to a code point. Ex: ord("P") returns the integer 80. Similarly, the built-in chr() function converts a code point to a character. Ex: chr(33) returns the string "!".
+
+Unicode is an extension of ASCII, the American Standard Code for Information Interchange. Originally, ASCII defined only 128 code points, enough to support the English language. Unicode defines over one million code points and supports most of the world's written languages.
+
+Character values.
+96  `
+ 97  a
+ 98  b
+ 99  c
+ 100  d
+ 101  e
+ 102  f
+ 103  g
+ 104  h
+ 105  i
+ 106  j
+ 107  k
+ 108  l
+ 109  m
+ 110  n
+ 111  o
+ 112  p
+ 113  q
+ 114  r
+ 115  s
+ 116  t
+ 117  u
+ 118  v
+ 119  w
+ 120  x
+ 121  y
+ 122  z
+ 123  {
+ 124  |
+ 125  }
+ 126  ~
+ 127  (delete)
+ord() and chr()
+
+Special characters
+
+An escape sequence uses a backslash (\) to represent a special character within a string.
+
+Common escape sequences.
+
+Escape sequence
+Meaning
+Example
+\n
+Escapesequence!
+\t
+\'
+\"
+\\
+This prints a \
+Tabs and newlines
+
+Hopper quote
+Grace Hopper (1906–1992) was a famous computer scientist (and rear admiral in the US Navy!) who came up with the idea of machine-independent programming languages. She envisioned a programming language based on English and made many contributions that paved the way for modern programming languages, including Python.
+
+Write a program that prints the following text, including the quotation marks. Your program may not use single quotes (') anywhere in the code. The last line must be indented with a tab character.
+
+Shift cipher
+
+During the Roman Empire, Julius Caesar (100–44 BCE) used a simple technique to encrypt private messages. Each letter of the message was replaced with the third next letter of the alphabet. Ex: If the message was CAT, the C became F, the A became D, and the T became W, resulting in the message FDW. This technique is known as a shift cipher because each letter is shifted by some amount. In Caesar's case, the amount was three, but other amounts (besides 0) would work too.
+
+Write a program that prompts the user to input the following two values (example input in bold):
+
+The program should then shift each letter of the word by the desired amount. Based on the example above, the output would be:
+
+Hint: Use the ord() function to convert each letter to an integer, add the shift amount to each integer, use the chr() function to convert each integer to a character, and concatenate the resulting characters.

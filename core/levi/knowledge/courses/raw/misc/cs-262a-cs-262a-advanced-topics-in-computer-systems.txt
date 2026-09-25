@@ -1,0 +1,229 @@
+# CS 262a: Advanced Topics in Computer Systems
+# UC Berkeley
+# source: http://www.cs.berkeley.edu/~brewer/cs262/
+
+CS262a: Advanced Topics in Computer Systems
+M/W 10:30-Noon in 310 Soda CCN: 26794 Prof. Eric
+Brewer , Fall 2011 Poster
+Session:  Monday 12/12 Noon-2pm in the 6th floor
+Atrium of Soda Hall Paper: Due 12/19 at noon
+via e-mail.  The paper should be similar in scope and style to the (modern)
+systems paper we have read. Length should be 8-12 pages with 10 viewed as
+ideal.  It should include motivation, related work, key ideas or
+principles, and measurements.  CS262a is the first
+semester of a year-long sequence on computer systems research, including
+operating systems, database systems, and Internet infrastructure systems.
+The goal of the course is to cover a broad array of research topics in computer
+systems, and to engage you in top-flight systems research.  The first
+semester is devoted to basic thematic issues and underlying techniques in
+computer systems, while the second semester goes deeper into topics related to
+scalable, parallel and distributed systems.  The class is based on a
+discussion of important research papers and a research project.
+Prerequisites: The historical prerequisite was to pass an
+entrance exam in class, which covered undergraduate operating systems material
+(similar to UCB's CS162). There is no longer an exam. However, if you have
+not already taken a decent undergrad OS class, you should talk with me before
+taking this class. The exam had the benefit of "paging in" the undergrad
+material, which may have been its primary value (since the pass rate was high).
+Exams, Papers, etc. The main work of this class is to read frequently
+and deeply, while working toward a group research project of publishable
+quality.  Each student will be individually responsible for writing up a
+short summary of every paper. There will be one midterm exam (albeit near the
+end), and no final exam. Research projects are a critical aspect of the
+course.  Your goal is to do some quality systems research; that is, to add
+to our understanding of how to build systems.  Research projects must be
+written up in a term paper, and will be presented in a poster in a departmental
+mini-conference.  Suggested project ideas will be provided by the
+instructors, but you are strongly encouraged to come up with your own project
+ideas.  Potential projects include implementation or analysis of some piece
+of an OS, a DBMS, or an Internet service; extending one of these systems with
+new functionality; or measurement and analysis of existing systems with the goal
+of better understanding issues in system design.    Overall
+Grading:
+50% project paper
+15% project demo
+25% midterm
+10% paper summaries
+Lecture and Reading Schedule There is no required textbook, but some of
+the papers are in Readings in
+Database Systems . We will read and discuss 2-4 papers per
+week. Likely all of the papers will be available online.
+Paper Summaries For every assigned paper
+(except for some explicit exceptions), students must turn in a reading
+summary before the beginning of the corresponding lecture. Summaries should
+be e-mailed to cs262profs@db.cs.berkeley.edu. Summaries should be limited to 1/2
+page at most and should include at least one criticism of the paper. (Just a
+simple summary, as you might get from the abstract or conclusion, misses the
+point, which is to get students to read the papers!) You can miss 3 summaries
+without penalty.
+Part 1:  Some
+Classics
+M 8/29 Week 1
+The UNIX Time-Sharing System [NEW
+annotated version] [no summary required] Dennis M. Richie and
+Ken Thompson (New electronic version)
+W 8/31
+A
+History and Evaluation of System R [Annotated version]
+[in the "Red Book"] Donald D. Chamberlin, Morton A. Astrahan, Michael
+W. Blasgen, James N. Gray, W. Frank King, Bruce G. Lindsay, Raymond Lorie,
+James W. Mehl, Thomas G. Price, Franco Putzolu, Patricia Griffiths
+Selinger, Mario Schkolnick, Donald R. Slutz, Irving L. Traiger, Bradford
+W. Wade and Robert A. Yost Optional Reading 1: Architecture
+of a Database System [also in textbook] Optional Reading 2:
+The Design and Implementation of Ingres [in Red Book] Michael
+Stonebraker, Eugene Wong, Peter Kreps and Gerald Held.
+M 9/5 Week 2
+Labor Day Holiday
+Part 2: Persistent Storage
+W 9/7
+A Fast File System for UNIX McKusick,
+Joy, Leffler and Fabry Analysis
+and Evolution of Journaling File Systems
+Optional reading: The Design and Implementation of a
+Log-Structured File System Rosenblum and Ousterhout
+(229K)
+M 9/12 Week 3
+The
+HP AutoRAID Hierarchical Storage System [My temporary local copy ,\ 2-up
+version ] Wilkes, Golding, Staelin and Sullivan
+W 9/14
+ARIES: A Transaction Recovery Method
+Supporting Fine-Granularity Locking and Partial Rollbacks Using
+Write-ahead Logging , 2-up
+version C. Mohan et al. (in Red Book)
+M 9/19 Week 4
+Segment-Based
+Recovery: Write-ahead Logging Revisited Sears and
+Brewer
+W 9/21
+Lightweight Recoverable Virtual
+Memory M. Satyanarayanan, Henry H. Mashburn, Puneet
+Kumar, David C. Steere, and James J. Kistler
+Part 3: Concurrency
+M 9/26 Week 5 Joe
+Hellerstein
+Granularity
+of Locks and Degrees of Consistency in a Shared Database Gray
+et al. (Also in the Red Book) Concurrency Control in
+Database Systems Bernstein and Goodman
+Optional reading: Generalized
+Isolation Levels Atul Adya, Barbara Liskov, Patrick O'Neil
+W 9/28
+Experience with Processes and Monitors in
+Mesa Butler Lampson and David Redell
+M 10/3 Week 6
+SEDA:
+An Architecture for Well-Conditioned, Scalable Internet
+Services Welsh, Culler, Brewer
+Optional paper:  Capriccio:
+Scalable Threads for Internet Services
+W 10/5
+Concurrency Control Performance Modeling:
+Alternatives and Implications Agrawal et al.
+M 10/10 Week 7
+Lottery
+Scheduling: Flexible Proportional-Share Resource Management
+Waldspurger and Weihl
+Optional reading: Stride
+Scheduling: Deterministic Proportional-Share Resource Management
+Part 4: Higher-Level Models
+W 10/12
+Parallel Database Systems: The Future
+of High Performance Database Systems Dave DeWitt and Jim
+Gray MapReduce: Simplified
+Data Processing on Large Clusters Dean and Ghemawhat.
+M 10/17 Week 8
+Access Path Selection in a Relational
+Database Management System [all new version!] [in Red
+Book] Selinger, Astrahan, Chamberlain, Lorie & Price
+Optional reading: Grammar-like Functional Rules
+for Representing Query Optimization Alternatives G. Lohman [in Red
+Book]
+W 10/19
+Encapsulation
+of Parallelism Graefe Eddies:
+Continuously Adaptive Query Processing Ron Avnur and Joe
+Hellerstein
+M  10/24 Week 9
+The Click
+Modular Router Kohler, Morris, Chen, Jannotti and
+Kaashoek
+W  10/26
+Consistency
+Analysis in Bloom: a CALM and Collected Approach Alvaro,
+Conway, Hellerstein and Marczak
+Part 5: Virtual Machines
+M 10/31 Week 10
+Xen
+and the Art of Virtualization P. Barham, B. Dragovic, K Fraser,
+S. Hand, T. Harris, A. Ho, R. Neugebauer, I. Pratt and A.
+Warfield. Are
+Virtual Machine Monitors Microkernels Done Right? S. Hand, A.
+Warfield, K. Fraser, E. Kotsovinos, D. Magenheimer.
+W 11/2
+Live
+Migration of Virtual Machines C. Clark, K. Fraser, S. Hand, J.
+Hansen, E. Jul, C. Limpach, I. Pratt, A. Warfield ReVirt:
+Enabling Intrusion Analysis through Virtual Machine Logging and
+Replay G. Dunlap, S. King, S. Cinar, M. Basrai and P. Chen
+Part 6: Cloud Computing
+M 11/7 Week 11
+Cluster-based
+Scalable Network Services Fox, Gribble, Chawathe, Brewer and
+Gauthier
+Optional: Lessons from
+Giant-Scale Services Brewer
+W 11/9
+Chord:
+A Scalable Peer-to-peer Lookup Service for Internet Applications
+Stoica, Morris, Karger, Kaashoek, Balakrishnan
+Scalable
+Distributed Data Structures Gribble et al.
+Part 7: Parallel and Distributed
+Computing
+M 11/14 Week 12
+Dynamo:
+Amazon's Highly Available Key-Value Store
+W 11/16
+BigTable Chang
+et al.
+M 11/21 Week 13
+Paxos
+Made Simple Lamport  No summary required, but
+please read:  two-phase
+commit
+Optional Wikipedia
+entry on Paxos
+W 11/23
+Reflections
+on Trusting Trust (Ken Thompson's Turing Award Lecture) No
+summary required
+M 11/28 Week 13
+K42:
+Building a Complete Operating System [NO SUMMARY
+REQUIRED] Krieger et al.
+No summary required: The
+multikernel: a new OS architecture for scalable multicore
+systems
+Part 8: Potpourri
+W 11/30
+Speculative Execution in
+a Distributed File System  [NO SUMMARY REQUIRED] E. B.
+Nightengale, P. M. Chen and J. Flinn
+M 12/5 Week 15
+Reading Week
+W 12/7
+Reading Week
+Mon 12/12 Noon-2 pm
+[ Tentative ] Poster
+Session , 6th Floor Atrum, Soda Hall, Open to the
+public
+Lecture Notes 11/30: Speculator 11/28: K42 11/21: Paxos 11/16:
+BigTable 11/14: Dynamo 11/9: DDS , Chord 11/7:  Cluster-based services , Giant-scale services 11/2: Virtual Machines, part 2 10/31: Virtual Machines 10/24: Click 10/19: Exchange
+and Eddies 10:17: Query
+optimization 10/12: MapReduce, Parallel
+Databases 10/10: Scheduling 10/5: Concurrency control performance 10/3: Threads and Events 9/28: Monitors and Mesa , MARS
+rover priority inversion story 9/26: Concurrency
+Control , Updated notes 9/21: LRVM 9/19: Segment-oriented Recovery 9/14: Aries 9/12: AutoRAID 9/7: File
+Systems 8/31: System R 8/29: Unix

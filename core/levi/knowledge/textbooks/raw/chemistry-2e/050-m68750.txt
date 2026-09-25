@@ -1,0 +1,296 @@
+# m68750
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Gas Pressure
+
+Gas Pressure
+
+By the end of this section, you will be able to:
+
+Define the property of pressure
+
+Define and convert among the units of pressure measurements
+
+Describe the operation of common tools for measuring gas pressure
+
+Calculate pressure from manometer data
+
+The earth’s atmosphere exerts a pressure, as does any other gas. Although we do not normally notice atmospheric pressure, we are sensitive to pressure changes—for example, when your ears “pop” during take-off and landing while flying, or when you dive underwater. Gas pressure is caused by the force exerted by gas molecules colliding with the surfaces of objects (). Although the force of each collision is very small, any surface of appreciable area experiences a large number of collisions in a short time, which can result in a high pressure. In fact, normal air pressure is strong enough to crush a metal container when not balanced by equal pressure from inside the container.
+
+A dramatic illustration of atmospheric pressure is provided in this brief video, which shows a railway tanker car imploding when its internal pressure is decreased.
+
+A smaller scale demonstration of this phenomenon is briefly explained.
+
+Atmospheric pressure is caused by the weight of the column of air molecules in the atmosphere above an object, such as the tanker car. At sea level, this pressure is roughly the same as that exerted by a full-grown African elephant standing on a doormat, or a typical bowling ball resting on your thumbnail. These may seem like huge amounts, and they are, but life on earth has evolved under such atmospheric pressure. If you actually perch a bowling ball on your thumbnail, the pressure experienced is twice the usual pressure, and the sensation is unpleasant.
+
+In general, pressure is defined as the force exerted on a given area: P=FA. Note that pressure is directly proportional to force and inversely proportional to area. Thus, pressure can be increased either by increasing the amount of force or by decreasing the area over which it is applied; pressure can be decreased by decreasing the force or increasing the area.
+
+Let’s apply this concept to determine which exerts a greater pressure in —the elephant or the figure skater? A large African elephant can weigh 7 tons, supported on four feet, each with a diameter of about 1.5 ft (footprint area of 250 in2), so the pressure exerted by each foot is about 14 lb/in2:
+
+The figure skater weighs about 120 lbs, supported on two skate blades, each with an area of about 2 in2, so the pressure exerted by each blade is about 30 lb/in2:
+
+Even though the elephant is more than one hundred-times heavier than the skater, it exerts less than one-half of the pressure. On the other hand, if the skater removes their skates and stands with bare feet (or regular footwear) on the ice, the larger area over which their weight is applied greatly reduces the pressure exerted:
+
+The SI unit of pressure is the pascal (Pa), with 1 Pa = 1 N/m2, where N is the newton, a unit of force defined as 1 kg m/s2. One pascal is a small pressure; in many cases, it is more convenient to use units of kilopascal (1 kPa = 1000 Pa) or bar (1 bar = 100,000 Pa). In the United States, pressure is often measured in pounds of force on an area of one square inch—pounds per square inch (psi)—for example, in car tires. Pressure can also be measured using the unit atmosphere (atm), which originally represented the average sea level air pressure at the approximate latitude of Paris (45°). provides some information on these and a few other common units for pressure measurements
+
+Pressure Units
+Unit Name and Abbreviation
+Definition or Relation to Other Unit
+pascal (Pa)
+1 Pa = 1 N/m2recommended IUPAC unit
+kilopascal (kPa)
+1 kPa = 1000 Pa
+pounds per square inch (psi)
+air pressure at sea level is ~14.7 psi
+atmosphere (atm)
+1 atm = 101,325 Pa = 760 torrair pressure at sea level is ~1 atm
+bar (bar, or b)
+1 bar = 100,000 Pa (exactly)commonly used in meteorology
+millibar (mbar, or mb)
+1000 mbar = 1 bar
+inches of mercury (in. Hg)
+1 in. Hg = 3386 Paused by aviation industry, also some weather reports
+1 torr=1760atmnamed after Evangelista Torricelli, inventor of the barometer
+millimeters of mercury (mm Hg)
+Conversion of Pressure Units
+The United States National Weather Service reports pressure in both inches of Hg and millibars. Convert a pressure of 29.2 in. Hg into:
+
+Conversion of Pressure Units
+
+(a) torr
+
+(b) atm
+
+(c) kPa
+
+(d) mbar
+Solution
+This is a unit conversion problem. The relationships between the various pressure units are given in .
+
+Solution
+
+(a) 29.2in Hg×25.4mm1in
+
+×1 torr1mm Hg
+
+=742 torr
+
+(b) 742torr×1 atm760torr=0.976 atm
+
+(c) 742torr×101.325 kPa760torr=98.9 kPa
+
+(d) 98.9kPa×1000Pa1kPa×1bar100,000Pa×1000 mbar1bar=989 mbar
+Check Your Learning
+A typical barometric pressure in Kansas City is 740 torr. What is this pressure in atmospheres, in millimeters of mercury, in kilopascals, and in bar?
+
+Check Your Learning
+
+Answer:
+
+0.974 atm; 740 mm Hg; 98.7 kPa; 0.987 bar
+
+We can measure atmospheric pressure, the force exerted by the atmosphere on the earth’s surface, with a barometer (). A barometer is a glass tube that is closed at one end, filled with a nonvolatile liquid such as mercury, and then inverted and immersed in a container of that liquid. The atmosphere exerts pressure on the liquid outside the tube, the column of liquid exerts pressure inside the tube, and the pressure at the liquid surface is the same inside and outside the tube. The height of the liquid in the tube is therefore proportional to the pressure exerted by the atmosphere.
+
+If the liquid is water, normal atmospheric pressure will support a column of water over 10 meters high, which is rather inconvenient for making (and reading) a barometer. Because mercury (Hg) is about 13.6-times denser than water, a mercury barometer only needs to be 113.6 as tall as a water barometer—a more suitable size. Standard atmospheric pressure of 1 atm at sea level (101,325 Pa) corresponds to a column of mercury that is about 760 mm (29.92 in.) high. The torr was originally intended to be a unit equal to one millimeter of mercury, but it no longer corresponds exactly. The pressure exerted by a fluid due to gravity is known as hydrostatic pressure, p:
+
+where h is the height of the fluid, ρ (lowercase Greek letter rho) is the density of the fluid, and g is acceleration due to gravity.
+Calculation of Barometric Pressure
+Show the calculation supporting the claim that atmospheric pressure near sea level corresponds to the pressure exerted by a column of mercury that is about 760 mm high. The density of mercury = 13.6 g/cm3.
+
+Calculation of Barometric Pressure
+SolutionThe hydrostatic pressure is given by p = hρg, with h = 760 mm, ρ = 13.6 g/cm3, and g = 9.81 m/s2. Plugging these values into the equation and doing the necessary unit conversions will give us the value we seek. (Note: We are expecting to find a pressure of ~101,325 Pa.)
+
+Solution
+Check Your Learning
+Calculate the height of a column of water at 25 °C that corresponds to normal atmospheric pressure. The density of water at this temperature is 1.0 g/cm3.
+
+Check Your Learning
+
+Answer:
+
+10.3 m
+
+A manometer is a device similar to a barometer that can be used to measure the pressure of a gas trapped in a container. A closed-end manometer is a U-shaped tube with one closed arm, one arm that connects to the gas to be measured, and a nonvolatile liquid (usually mercury) in between. As with a barometer, the distance between the liquid levels in the two arms of the tube (h in the diagram) is proportional to the pressure of the gas in the container. An open-end manometer () is the same as a closed-end manometer, but one of its arms is open to the atmosphere. In this case, the distance between the liquid levels corresponds to the difference in pressure between the gas in the container and the atmosphere.
+Calculation of Pressure Using a Closed-End Manometer
+The pressure of a sample of gas is measured with a closed-end manometer, as shown to the right. The liquid in the manometer is mercury. Determine the pressure of the gas in:
+
+Calculation of Pressure Using a Closed-End Manometer
+
+(a) torr
+
+(b) Pa
+
+(c) bar
+Solution
+The pressure of the gas is equal to a column of mercury of height 26.4 cm. (The pressure at the bottom horizontal line is equal on both sides of the tube. The pressure on the left is due to the gas and the pressure on the right is due to 26.4 cm Hg, or mercury.) We could use the equation p = hρg as in , but it is simpler to just convert between units using .
+
+Solution
+
+(a) 26.4cm Hg×10mm Hg1cm Hg×1 torr1mm Hg=264 torr
+
+(b) 264torr×1atm760torr×101,325 Pa1atm=35,200 Pa
+
+(c) 35,200Pa×1 bar100,000Pa=0.352 bar
+Check Your Learning
+The pressure of a sample of gas is measured with a closed-end manometer. The liquid in the manometer is mercury. Determine the pressure of the gas in:
+
+Check Your Learning
+
+(a) torr
+
+(b) Pa
+
+(c) bar
+
+Answer:
+
+(a) ~150 torr; (b) ~20,000 Pa; (c) ~0.20 bar
+Calculation of Pressure Using an Open-End Manometer
+The pressure of a sample of gas is measured at sea level with an open-end Hg (mercury) manometer, as shown to the right. Determine the pressure of the gas in:
+
+Calculation of Pressure Using an Open-End Manometer
+
+(a) mm Hg
+
+(b) atm
+
+(c) kPa
+Solution
+The pressure of the gas equals the hydrostatic pressure due to a column of mercury of height 13.7 cm plus the pressure of the atmosphere at sea level. (The pressure at the bottom horizontal line is equal on both sides of the tube. The pressure on the left is due to the gas and the pressure on the right is due to 13.7 cm of Hg plus atmospheric pressure.)
+
+Solution
+
+(a) In mm Hg, this is: 137 mm Hg + 760 mm Hg = 897 mm Hg
+
+(b) 897mm Hg×1 atm760mm Hg=1.18 atm
+
+(c) 1.18atm×101.325 kPa1atm=1.20×102kPa
+Check Your Learning
+The pressure of a sample of gas is measured at sea level with an open-end Hg manometer, as shown to the right. Determine the pressure of the gas in:
+
+Check Your Learning
+
+(a) mm Hg
+
+(b) atm
+
+(c) kPa
+
+Answer:
+
+(a) 642 mm Hg; (b) 0.845 atm; (c) 85.6 kPa
+
+Measuring Blood Pressure
+
+Blood pressure is measured using a device called a sphygmomanometer (Greek sphygmos = “pulse”). It consists of an inflatable cuff to restrict blood flow, a manometer to measure the pressure, and a method of determining when blood flow begins and when it becomes impeded (). Since its invention in 1881, it has been an essential medical device. There are many types of sphygmomanometers: manual ones that require a stethoscope and are used by medical professionals; mercury ones, used when the most accuracy is required; less accurate mechanical ones; and digital ones that can be used with little training but that have limitations. When using a sphygmomanometer, the cuff is placed around the upper arm and inflated until blood flow is completely blocked, then slowly released. As the heart beats, blood forced through the arteries causes a rise in pressure. This rise in pressure at which blood flow begins is the systolic pressure—the peak pressure in the cardiac cycle. When the cuff’s pressure equals the arterial systolic pressure, blood flows past the cuff, creating audible sounds that can be heard using a stethoscope. This is followed by a decrease in pressure as the heart’s ventricles prepare for another beat. As cuff pressure continues to decrease, eventually sound is no longer heard; this is the diastolic pressure—the lowest pressure (resting phase) in the cardiac cycle. Blood pressure units from a sphygmomanometer are in terms of millimeters of mercury (mm Hg).
+
+Meteorology, Climatology, and Atmospheric Science
+
+Throughout the ages, people have observed clouds, winds, and precipitation, trying to discern patterns and make predictions: when it is best to plant and harvest; whether it is safe to set out on a sea voyage; and much more. We now face complex weather and atmosphere-related challenges that will have a major impact on our civilization and the ecosystem. Several different scientific disciplines use chemical principles to help us better understand weather, the atmosphere, and climate. These are meteorology, climatology, and atmospheric science. Meteorology is the study of the atmosphere, atmospheric phenomena, and atmospheric effects on earth’s weather. Meteorologists seek to understand and predict the weather in the short term, which can save lives and benefit the economy. Weather forecasts () are the result of thousands of measurements of air pressure, temperature, and the like, which are compiled, modeled, and analyzed in weather centers worldwide.
+
+In terms of weather, low-pressure systems occur when the earth’s surface atmospheric pressure is lower than the surrounding environment: Moist air rises and condenses, producing clouds. Movement of moisture and air within various weather fronts instigates most weather events.
+
+The atmosphere is the gaseous layer that surrounds a planet. Earth’s atmosphere, which is roughly 100–125 km thick, consists of roughly 78.1% nitrogen and 21.0% oxygen, and can be subdivided further into the regions shown in : the exosphere (furthest from earth, > 700 km above sea level), the thermosphere (80–700 km), the mesosphere (50–80 km), the stratosphere (second lowest level of our atmosphere, 12–50 km above sea level), and the troposphere (up to 12 km above sea level, roughly 80% of the earth’s atmosphere by mass and the layer where most weather events originate). As you go higher in the troposphere, air density and temperature both decrease.
+
+Climatology is the study of the climate, averaged weather conditions over long time periods, using atmospheric data. However, climatologists study patterns and effects that occur over decades, centuries, and millennia, rather than shorter time frames of hours, days, and weeks like meteorologists. Atmospheric science is an even broader field, combining meteorology, climatology, and other scientific disciplines that study the atmosphere.
+
+Key Concepts and Summary
+
+Gases exert pressure, which is force per unit area. The pressure of a gas may be expressed in the SI unit of pascal or kilopascal, as well as in many other units including torr, atmosphere, and bar. Atmospheric pressure is measured using a barometer; other gas pressures can be measured using one of several types of manometers.
+
+Key Equations
+p = hρg
+Chemistry End of Chapter Exercises
+
+Why are sharp knives more effective than dull knives? (Hint: Think about the definition of pressure.)
+
+The cutting edge of a knife that has been sharpened has a smaller surface area than a dull knife. Since pressure is force per unit area, a sharp knife will exert a higher pressure with the same amount of force and cut through material more effectively.
+
+Why do some small bridges have weight limits that depend on how many wheels or axles the crossing vehicle has?
+
+Why should you roll or belly-crawl rather than walk across a thinly-frozen pond?
+
+Lying down distributes your weight over a larger surface area, exerting less pressure on the ice compared to standing up. If you exert less pressure, you are less likely to break through thin ice.
+
+A typical barometric pressure in Redding, California, is about 750 mm Hg. Calculate this pressure in atm and kPa.
+
+A typical barometric pressure in Denver, Colorado, is 615 mm Hg. What is this pressure in atmospheres and kilopascals?
+
+0.809 atm; 82.0 kPa
+
+A typical barometric pressure in Kansas City is 740 torr. What is this pressure in atmospheres, in millimeters of mercury, and in kilopascals?
+
+Canadian tire pressure gauges are marked in units of kilopascals. What reading on such a gauge corresponds to 32 psi?
+
+2.2 × 102 kPa
+
+During the Viking landings on Mars, the atmospheric pressure was determined to be on the average about 6.50 millibars (1 bar = 0.987 atm). What is that pressure in torr and kPa?
+
+The pressure of the atmosphere on the surface of the planet Venus is about 88.8 atm. Compare that pressure in psi to the normal pressure on earth at sea level in psi.
+
+Earth: 14.7 lb in–2; Venus: 1.30 × 103 lb in−2
+
+A medical laboratory catalog describes the pressure in a cylinder of a gas as 14.82 MPa. What is the pressure of this gas in atmospheres and torr?
+
+Consider this scenario and answer the following questions: On a mid-August day in the northeastern United States, the following information appeared in the local newspaper: atmospheric pressure at sea level 29.97 in. Hg, 1013.9 mbar.
+
+(a) What was the pressure in kPa?
+
+(b) The pressure near the seacoast in the northeastern United States is usually reported near 30.0 in. Hg. During a hurricane, the pressure may fall to near 28.0 in. Hg. Calculate the drop in pressure in torr.
+
+(a) 101.5 kPa; (b) 51 torr drop
+
+Why is it necessary to use a nonvolatile liquid in a barometer or manometer?
+
+The pressure of a sample of gas is measured at sea level with a closed-end manometer. The liquid in the manometer is mercury. Determine the pressure of the gas in:
+
+(a) torr
+
+(b) Pa
+
+(c) bar
+
+(a) 264 torr; (b) 35,200 Pa; (c) 0.352 bar
+
+The pressure of a sample of gas is measured with an open-end manometer, partially shown to the right. The liquid in the manometer is mercury. Assuming atmospheric pressure is 29.92 in. Hg, determine the pressure of the gas in:
+
+(a) torr
+
+(b) Pa
+
+(c) bar
+
+The pressure of a sample of gas is measured at sea level with an open-end mercury manometer. Assuming atmospheric pressure is 760.0 mm Hg, determine the pressure of the gas in:
+
+(a) mm Hg
+
+(b) atm
+
+(c) kPa
+
+(a) 623 mm Hg; (b) 0.820 atm; (c) 83.1 kPa
+
+The pressure of a sample of gas is measured at sea level with an open-end mercury manometer. Assuming atmospheric pressure is 760 mm Hg, determine the pressure of the gas in:
+
+(a) mm Hg
+
+(b) atm
+
+(c) kPa
+
+How would the use of a volatile liquid affect the measurement of a gas using open-ended manometers vs. closed-end manometers?
+
+With a closed-end manometer, no change would be observed, since the vaporized liquid would contribute equal, opposing pressures in both arms of the manometer tube. However, with an open-ended manometer, a higher pressure reading of the gas would be obtained than expected, since Pgas = Patm + Pvol liquid.
+
+unit of pressure; 1 atm = 101,325 Pa
+(bar or b) unit of pressure; 1 bar = 100,000 Pa
+device used to measure atmospheric pressure
+pressure exerted by a fluid due to gravity
+device used to measure the pressure of a gas trapped in a container
+SI unit of pressure; 1 Pa = 1 N/m2
+unit of pressure common in the US
+force exerted per unit area
+unit of pressure; 1 torr=1760atm

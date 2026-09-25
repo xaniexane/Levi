@@ -1,0 +1,307 @@
+# ECS 222A: Graduate Level Algorithm Design and Analysis
+# UC Davis
+# source: http://web.cs.ucdavis.edu/~gusfield/cs222w11/
+
+ECS 222A - Algorithms - Winter 2011 - Gusfield
+ECS 222A - Winter 2011 Algorithm Design and Analysis - Gusfield
+This index page will just link to the various course handouts that
+are available on the web, and provide some description of them.
+Distribution List
+lecture
+videos from CS 222A Fall 2007 Plus several supplemental videos from previous
+courses.
+lecture
+videos from CS 122A Fall 2010
+Course Syllabus
+A Running list of topics covered in lecture
+Introduction to complexity and rules of the
+game
+HW 1, due January 11. Read about late homeworks on the syllabus.
+Rant on induction - might be helpful if you are unsure about how to do inductive proofs
+Notes on using the Master Method to solve divide and conquer recurrence relations
+Different notes on solving recurrence relations and the Master method.
+There is an error in the sum given in Method 2. Instead of summing from 0 to 8, it should be from 0 to 7.
+Notes on Strassen's matrix multiplication method Use the ID and password
+given in class.
+There will be a discussion section on monday 5:10-6:00 in 118 Olson Hall, starting Jan. 10.
+A copy of the Kleinberg and Tardos book has been placed on 2hr reserve in Shields Library.
+Video of the second lecture: Strassen's fast matrix multiplication method
+Notes on adversary method for median finding.
+Balaji's office hours are: M 4-5, T 3-5 and Friday 3-5 in 55 Kemper Hall.
+Gusfield's office hours are Tuesday 11-12 and Wed. 2-3.
+For problem 3 on HW 1, you do not need to use FFT. Try to think of a direct divide and conqure method.
+However, the notion of convolution is useful. If you need FFT or convolution, go ahead and use it, because
+the completely direct divide and conqure method I had in mind is not working well.
+Homework 2, Due Tuesday Jan. 18
+Notes on Four Russians method
+There will be an optional discussion section on Monday Jan. 17 at 5pm in 1065 Kemper Hall. Note
+the location is not Olson hall because it will most likely be locked.
+Video of the lecture on the Four Russian's method.
+PDF slides on an Intro to DP, illustrated by the Maximum Sequence Alignment Problem
+This is similar to the sequence alignment problem discussed in the book, but in the book the problem is cast as
+a minimization problem rather than a maximization problem.
+Homework 3, Due Weds. Jan. 26
+A Perl program that computes the proposed counting solution
+for problem 3 in HW 3. I think this program computes the proposed solution. If you
+find that it does not, let me know.
+Solutions for HW 1.
+Solution to the unwrapping problem on HW 1
+Video from the lecture of January 25. Advanced alignment topics: optimal alignmentin linear space; alignment of circular strings faster than the obvious way.
+Sequence alignment in linear space without
+an increase in the asymptotic running time; alignment of circular sequences much faster than the straightforward way.
+Homework 4, Due Thursday Feb. 3 (extension until Tues Feb 8)
+The videoing on Friday Jan. 28 will be at 3:00 pm instead of 1:30. Sorry for the late notice.
+Solutions for HW 2.
+Midterm from CS222 Fall 2005. That class had a somewhat different
+selection of material and the midterm came at a different point in the quarter. So, these questions
+are not necessaryilly appropriate for our class. However, people asked to see an old exam
+in order to see the {\it style} of the questions. The style will be the same - conceptual questions whose
+answers
+mostly require proofs or compelling explanations.
+There will be no questions of the type "run algorithm X on data Y and show the result".
+Video of lecture on Minimum Cost Arborescence
+Class lectures on this subject were on Jan. 27 and Feb. 1
+A cleaner proof of the correctness of the min cost arborescence algorithm
+Homework 4 I have added some clarifying comments (marked with stars), and changed the space
+target from $O(n)$ to $O(n \log n)$ in one of the problems (marked with stars).
+For the midterm, please bring a bluebook to write your answers (If you have time to get one).
+Please do not use a bluebook with an engineering grid - it makes it hard to read. thanks.
+Solution to Problem 1 (now it should be there) and to the RNA problem from HW 3.
+Solution to midterm
+Homework 5 Due Tuesday Feb. 15.
+Midterm mean was 41.9, median 43.5, std. deviation 14.9. max possible 75.
+Homework 6 Due Thursday Feb. 24. Remember to justify your answers. A justification
+is either a proof or a convincing explanation.
+In the original problem 3 of HW 6, the problem should have asked you to prove that A is a subset of P, rather than
+the other way around. The current posted version of HW 6 has made this correction.
+Old Video on baseball and sports elimination numbers. This solves, through the use
+of network flow, the question of whether a team in elminated, or equivalently whether the team can either
+be the undisputed winner or tie for the most
+number of games won. The W* threshold theorem for all monotonic sports scoring schemes.
+New Video on Sports elimination numbers. This covers the W* threshold theorem
+(which was also covered in the previous video), and
+then the solution to the question of which teams team can be the *undisputed* winner. For any
+single team, we can determine, via network flow, whether it can be the undisputed winner (strictly winning more games than any other team)
+using a single network flow computation. Here we show that we can identify *all*
+the teams that can be the undisputed winner,
+each under a different scenario for the remaining games, using a single network flow computation after
+W* is known. However, the video does not show the actual network flow formulation. That is left
+as an exercise in HW 7.
+Homework 7 Due Thursday Feb. 31. Remember to justify your answers. A justification
+is either a proof or a convincing explanation.
+solutions to HW 4 All of the solutions are there now.
+Global Min Cut The lecture of March 1 is based
+on this material.
+Constant time least common ancestor The lecture of March 3 is based
+on this material.
+HW 8, Due Monday March 14. Problem 2 on this homework was changed and
+simplified March 7.
+I will not be able to have my Tuesday 11-12 office hours. Sorry for the late notice.
+Videos of two topics I had hoped to cover in this class but did not have time for. These will
+not be on any exam; these are posted here for your enjoyment:
+First lecture on how to find the connected components of a conflict graph in linear
+time.
+Second lecture on how to find the connected components of a conflict graph in linear
+time.
+Finding a suffix array in linear time. The next video
+shows how to compute the associated LCP array in linear time, and how this allows the construction of a suffix tree
+in linear time.
+Finding the LCP (longest common prefix) array in linear.
+The LCP array, along with the suffix array for a string, allows linear-time solution to many string algorithms
+that can be solved in linear time using a suffix tree. The two arrays also allow the construction of a suffix tree
+in linear time.
+solutions to HW 5
+solutions to HW 6
+2007 final exam Some of the questions relate to material
+we did not cover in this class. So if something looks completely unfamiliar, ignore it.
+Your graded HW 4 papers are available, in a hanging basket outside of my office 2125 Kemper Hall.
+A few solved questions about NP completeness From
+the final exam of CS 122, Fall 2010.
+The final exam will emphasize material not covered on the midterm. However material before the midterm
+is also fair and there might be some questions on that material also.
+Please bring a small blue book to the final exam, and use a sharp pencil or pen.
+solutions to HW 7
+The final exam is open book and notes, but as in the midterm, just the text from the class
+and materials distributed on the class site, and your own notes.
+Comments on, and some solution sketches to the final exam
+The final exam.
+The class TA, Till Stegers, will hold office hours Tues. 3-5; Wed. 3-5; and Thurs 10-12, in Room 53
+Kemper Hall. These will start tomorrow (Oct. 2). Gusfield's office hours will be Monday 4-6 and Thurs. 5-6, and by appointment.
+We will announce information about a possible discussion section in the class on Weds, and on this site.
+A Running list of topics covered in lecture
+We will have a weekly discussion on Weds. 6-7 (starting tonight Oct. 3)
+in the same room as the class in Bainer hall. It is not certain
+that these will be able to be televised, but that is a future possibility.
+HW 2, due October 17. The page reference for
+problem 2 should be 329, not 239.
+Weds. class and discussion section will be taught by Till Stegers. Gusfield will not have thursday office
+hours October. 11.
+HW 1 Solutions
+The midterm will be Friday October 26.
+The solutions will be
+password protected to keep them out of google. The ID is cs222f07 and password is
+jointo, which will be changed next week in class.
+HW 3, due October 26.
+The HW 2 posted above now includes a write up of the way we discussed the interleaving problem
+in the Oct. 17 discussion section, for people who did not attend.
+Homework 1 scores: Max possible 40, Max achieved 36, Average 23.83, Median 25,
+Average in terms of percent of Max possible 59.58%.
+I was very impressed by how much work people
+put into this assignment, and how sophisticated some of the answers were. I think the TAs also
+put a huge effort into grading quickly, making many comments that should help you understand any deficiencies
+in your solutions. Problem 1b was not graded. We may often need to do that; not grade some problems in order to
+concentrate on grading others in depth.
+If you have questions about the grading on problem 1, see Till Stegers in his office hours. If you have
+questions about Problems 2 and 3 on HW 1, hold off for now until - more information forthcoming.
+I was asked what the course material is, since the exact topics in the syllabus do not exactly match
+what we have done. The material of the course is what we have covered in
+class or homework or any indicated reading specified in a homework.
+The running list of lecture topics posted above lists the topics we have discussed
+in class.
+However, it may be that I can craft a fair question
+in the midterm about something that wasn't explicitly in the class
+material,if I think
+it is close enough to class material, so that a student
+who understands the class material should be able to figure out
+that question.
+Our second TA Juan Lang will have one weekly office hour to discuss homework problems
+that he graded. On homework 1 those are problems 2 and 3. He will have office hours on Tuesady from 4 to 5
+in 53 Kemper.
+HW 2 Solutions
+Discussion section Wed. Oct. 24 will be held as usual.
+Gusfield's office hour Thursday Oct. 25 is cancelled.
+Midterm Solutions
+Homework 4
+Notes on the sports elimination theorem
+discussed October 29
+Solutions to HW 3 The solution to problem 4 has been modified Nov. 1, 2007.
+Till's solution to the Node Cover problem from HW 3
+Webcast of the first lecture 9-28-07
+Webcast of 10-1-07 - trial
+Webcast of 10-3-07 - trial
+Webcast of 10-5-07 - trial
+Webcast of 10-8-07 - trial
+Webcast of 10-10-07 - trial
+Webcast of 10-12-07 - trial
+Webcast of 10-15-07 - trial
+Webcast of 10-17-07 - trial
+Webcast of 10-19-07 - trial
+Webcast of 10-22-07 - trial
+Webcast of 10-24-07 - trial
+Webcast of 10-29-07 - trial
+Webcast of 10-31-07 - trial
+Webcast of 11-2-07 - trial
+Webcast of 11-5-07
+Webcast of 11-7-07
+Webcast of 11-9-07
+Webcast of 11-14-07
+Webcast of 11-16-07
+Webcast of 11-19-07
+Webcast of 11-21-07
+Webcast of 11-26-07 Some part of the beginning of this lecture was lost. The topic is a deterministic algorithm
+for global minimum cut in an undirected graph. This algorithm is not discussed in the book, but a randomized
+algorithm for the problem is discussed, so you can read the start of that discussion for the definition
+of the problem, and for some other comments on the problem that relate to both the deterministic and
+the randomized algorithms.
+Test video posting
+Webcast of 11-28-07
+Webcast of 11-30-07
+Webcast of 12-3-07
+Webcast of 12-5-07
+Webcast of 12-7-07 Oops, at the end of the lecture (the end of the course) things got a bit rushed and
+I wrote that the DP for independent set for graph G runs in time that is polynomial in
+w(T) and n and m, where w(T) is the width of the tree
+decomposition T, and n and m are the number of nodes and edges in the graph G. What is correct is that the DP
+runs in time that is exponential in w(T) (in fact it contributes a factor of 4^{w(T)}), and polynomial in n and m.
+The actual running time is something like O(4^{w(T)}nm). The point is that if w(T) is
+bounded, independent of n and m, then 4^{w(T)} is just a constant number, so independent set problem can be solved
+in polynomial time as a function of n and m (again if w(T) is bounded independent of n and m). Similarly, even
+if w(T) is not bounded, if it is small, then the running time is practical for realistic n and m. The smaller
+w(T) is, the more tree-like is the graph, and the faster the DP.
+Webcast of 12-11-07
+webcast of discussion Oct. 10, 2007
+webcast of discussion Oct. 17, 2007
+webcast of discussion Oct. 24, 2007
+webcast of discussion Oct. 31, 2007
+webcast of discussion Nov. 7, 2007
+webcast of discussion Nov. 14, 2007
+There are no webcasts of discussions between Nov. 14 and Dec. 5, although the videos of those are available.
+webcast of
+Discussion Dec. 5, 2007
+distribution of hw scores:
+Assignment: HW1, HW2
+Max possible: 40,30
+Max achieved: 36,29
+Average: 24.05, 21.78
+Average in percent: 60.12%, 72.58%
+Median: 25, 22.5
+Median in percent: 62.50%, 75.00%
+Comments on HW 4: Yes problem 1 is easy. Problem 2 asks for a solution using one flow. More exactly,
+a single network flow computation
+suffices, after determining some legal assignment. Hence if we want to compute v*(i,j) for each empty cell (i,j),
+it suffices to compute one flow to determine a first legal assignment, followed by one flow per empty cell.
+Midterm grade information:
+Max possible 90
+Average 38.83
+Average in percent 43.14%
+Median 40
+Median in percent 44.44%
+Max 76
+Max in percent 84.44%
+Min 7
+Till is moving his thursday (Nov. 8) office hour to 1-3pm,
+this week only.
+Homework 5
+NOTE on Nov. 8, 2007.
+No need to do problem 2 on HW 4. The hint I gave you on how to solve problem 2 on HW 4, i.e., to
+use the solution I gave in problem 4 of HW 3 was likely confusing, because the second half of problem 4 on HW 3
+had an error in it. I am now writing up corrections to problem 4 of HW 3 and will post them here
+later. But given the added difficulties
+this probably caused, you may skip problem 2 of HW 4 if you have not already done it. I apologize for the
+confusion.
+Corrected solutions to HW 3 problems, and a discussion of Problem 2 on
+HW 4.
+Several people have asked whether the node cover question in problem 2 of HW 5 is restricted to
+a tree, as is the greedy independent set method. The answer is yes.
+Notes on the Steiner String Problem discussed Nov. 14, 16
+Homework 6
+There will be NO discussion section on Wed. Nov. 21. Happy Thanksgiving.
+Till will not have any more Thursday 10-12 office hours. His other office hours
+will remain the same.
+Solutions to HW 4
+Notes on the Z-algorithm
+Note on the grading of HW 3. Problem 2 was not graded (to save time and because the problem is similar
+to problem 1), and the second part of Problem 4 was also not graded.
+Homework 7 Corrections made in the periodicity problem Dec. 5
+A simple min-cut algorithm Presented in class Nov. 25. This may not be accessable from outside
+of UCD. The citation is J. of the ACM, Vol 44, No. 4, July 1997, p. 585-591
+Solutions to HW 5
+Nov. 30 and Dec. 3 we discussed a simple algorithm for the Constant-Time LCA problem. I was following unpublished
+notes titles ``The LCA Problem Revisited" by M. Bender and M. Farach-Colton. I notice that many people on the web
+have posted those notes, so you can find them through google. Being more mindfull of copyright, I will not post
+those notes here. The notes seem also to be posted on Benders homepage www.cs.sunysb.edu/~bender/ but I
+couldn't get those to download properly. There also is a more complete and complex published version of that paper.
+The first part of one of the Final Exam questions
+The following fact may be very useful for the periodic string problem on HW 7: If a string
+is periodic with period A and also with period B, then it is also periodic with period
+GCD(A,B). In particular, A and B are multiples of GCD(A,B). You can use this fact in the HW
+without needing to prove it. Also, there was a typo in the original posting of this problem,
+and it has been corrected along with some other changes, and HW 7 has been reposted.
+December 6, 2007. Sorry I (Gusfield) will not be in my office today for office hours.
+I will be back in town tomorrow (friday), so send me mail if you want an appointment.
+I will hold normal office hours next week on monday, and will be available by appointment.
+Solutions to HW 6
+Solutions to HW 7 I am off by 1 in several places in the Solution to Problem 2, but the ideas are basically correct.
+Draw a picture of a periodic prefix to get the idea of the solution, and from there you can figure out exactly what the indices should be.
+Graded Homework 5 papers are in a box outside of my office door - 2125 Kemper.
+The rules for the final exam are the same as for the midterm - open book and notes, but only the two books associated with the class,
+and only your own notes and the notes/papers distributed through the class. In fact, some problems may assume that you have the
+book with you, i.e. refering to definitions you have seen, but not rewriting them. Also, it would help again if you brought a small
+blue book - much easier to keep the papers together, reducing the probability that yours will be lost.
+Graded homeworks 6 and 7 are outside the door at 2125 Kemper. On HW 7, problem 2 and problem 4b were not graded.
+Most people missed the point of question 4a on Homework 6, and thought it was
+a trivial question. Some have come to talk to me about it. I have now written a full
+explanation of the problem with the trivial solution, and what a correct solution should
+be.
+Solutions to HW 6 with expanded discussion of problem 4a
+-->

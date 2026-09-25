@@ -1,0 +1,259 @@
+# m79691
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Testing the Significance of the Correlation Coefficient (Optional)
+
+Testing the Significance of the Correlation Coefficient (Optional)
+
+The correlation coefficient, r, tells us about the strength and direction of the linear relationship between x and y. However, the reliability of the linear model also depends on how many observed data points are in the sample. We need to look at both the correlation coefficient r and the sample size n, together.
+
+We perform a hypothesis test of the significance of the correlation coefficient to decide whether the linear relationship in the sample data is strong enough to use to model the relationship in the population.
+
+The sample data are used to compute r, the correlation coefficient for the sample. If we had data for the entire population, we could find the population correlation coefficient. But, because we have only sample data, we cannot calculate the population correlation coefficient. The sample correlation coefficient, r, is our estimate of the unknown population correlation coefficient.
+
+The symbol for the population correlation coefficient is ρ, the Greek letter rho.
+ρ = population correlation coefficient (unknown).
+r = sample correlation coefficient (known; calculated from sample data).
+
+The hypothesis test lets us decide whether the value of the population correlation coefficient ρ is close to zero or significantly different from zero. We decide this based on the sample correlation coefficient r and the sample size n.
+
+If the test concludes the correlation coefficient is significantly different from zero, we say the correlation coefficient is significant.
+
+Conclusion: There is sufficient evidence to conclude there is a significant linear relationship between x and y because the correlation coefficient is significantly different from zero.
+What the conclusion means: There is a significant linear relationship between x and y. We can use the regression line to model the linear relationship between x and y in the population.
+
+Conclusion: There is sufficient evidence to conclude there is a significant linear relationship between x and y because the correlation coefficient is significantly different from zero.
+
+What the conclusion means: There is a significant linear relationship between x and y. We can use the regression line to model the linear relationship between x and y in the population.
+
+If the test concludes the correlation coefficient is not significantly different from zero (it is close to zero), we say the correlation coefficient is not significant.
+
+Conclusion: There is insufficient evidence to conclude there is a significant linear relationship between x and y because the correlation coefficient is not significantly different from zero.
+What the conclusion means: There is not a significant linear relationship between x and y. Therefore, we cannot use the regression line to model a linear relationship between x and y in the population.
+
+Conclusion: There is insufficient evidence to conclude there is a significant linear relationship between x and y because the correlation coefficient is not significantly different from zero.
+
+What the conclusion means: There is not a significant linear relationship between x and y. Therefore, we cannot use the regression line to model a linear relationship between x and y in the population.
+
+Note
+
+If r is significant and the scatter plot shows a linear trend, the line can be used to predict the value of
+y for values of x that are within the domain of observed x values.
+
+If r is not significant or if the scatter plot does not show a linear trend, the line should not be used for prediction.
+
+If r is significant and the scatter plot shows a linear trend, the line may not be appropriate or reliable for prediction outside the domain of observed x values in the data.
+
+Performing the Hypothesis Test
+
+Null hypothesis: H0: ρ = 0.
+
+Alternate hypothesis: Ha: ρ ≠ 0.
+What the Hypothesis Means in Words:
+
+What the Hypothesis Means in Words:
+Null hypothesis H0: The population correlation coefficient is not significantly different from zero. There is not a significant linear relationship (correlation) between x and y in the population.
+Alternate hypothesis Ha: The population correlation coefficient is significantly different from zero. There is a significant linear relationship (correlation) between x and y in the population.
+Drawing a Conclusion:There are two methods to make a conclusion. The two methods are equivalent and give the same result.
+
+Drawing a Conclusion:
+Method 1: Use the p-value.
+Method 2: Use a table of critical values.
+
+In this chapter, we will always use a significance level of 5 percent, α = 0.05.
+
+Note
+
+Using the p-value method, you could choose any appropriate significance level you want; you are not limited to using α = 0.05. But, the table of critical values provided in this textbook assumes we are using a significance level of 5 percent, α = 0.05. If we wanted to use a significance level different from 5 percent with the critical value method, we would need different tables of critical values that are not provided in this textbook.
+
+METHOD 1: Using a p-value to Make a Decision
+
+To calculate the p-value using LinRegTTEST:
+
+Complete the same steps as the LinRegTTest performed previously in this chapter, making sure on the line prompt for β or σ, ≠ 0 is highlighted.
+
+When looking at the output screen, the p-value is on the line that reads p =.
+
+If the p-value is less than the significance level (α = 0.05):
+
+Decision: Reject the null hypothesis.
+
+Conclusion: There is sufficient evidence to conclude there is a significant linear relationship between x and y because the correlation coefficient is significantly different from zero.
+
+If the p-value is not less than the significance level (α = 0.05):
+
+Decision: Do not reject the null hypothesis.
+
+Conclusion: There is insufficient evidence to conclude there is a significant linear relationship between x and y because the correlation coefficient is not significantly different from zero.
+
+You will use technology to calculate the p-value, but it is useful to know that the p-value is calculated using a t distribution with n – 2 degrees of freedom and that the p-value is the combined area in both tails.
+
+An alternative way to calculate the p-value (p) given by LinRegTTest is the command 2*tcdf(abs(t),10^99, n–2) in 2nd DISTR.
+
+Third Exam vs. Final Exam Example: p-value Method
+
+Consider the third exam/final exam example.
+
+The line of best fit is ŷ = 173.51 + 4.83x, with r = 0.6631, and there are n = 11 data points.
+
+Can the regression line be used for prediction? Given a third exam score (x value), can we
+use the line to predict the final exam score (predicted y value)?
+H0: ρ = 0
+Ha: ρ ≠ 0
+α = 0.05
+
+The p-value is 0.026 (from LinRegTTest on a calculator or from computer software).
+
+The p-value, 0.026, is less than the significance level of α = 0.05.
+
+Decision: Reject the null hypothesis H0.
+
+Conclusion: There is sufficient evidence to conclude there is a significant linear relationship between the third exam score (x) and the final exam score (y) because the correlation coefficient is significantly different from zero.
+
+Because r is significant and the scatter plot shows a linear trend, the regression line can be used to predict final exam scores.
+
+METHOD 2: Using a Table of Critical Values to Make a Decision
+
+The 95 Percent Critical Values of the Sample Correlation Coefficient Table () can be used to give you a good idea of whether the computed value of r is significant. Use it to find the critical values using the degrees of freedom, df = n – 2. The table has already been calculated with α = 0.05. The table tells you the positive critical value, but you should also make that number negative to have two critical values. If r is not between the positive and negative critical values, then the correlation coefficient is significant. If r is significant, then you may use the line for prediction. If r is not significant (between the critical values), you should not use the line to make predictions.
+
+Suppose you computed r = 0.801 using n = 10 data points. The degrees of freedom would be 8 (df = n – 2 = 10 – 2 = 8). Using with df = 8, we find that the critical value is 0.632. This means the critical values are really ±0.632. Since r = 0.801 and 0.801 > 0.632, r is significant and the line may be used for prediction. If you view this example on a number line, it will help you to see that r is not between the two critical values.
+
+Try It
+
+For a given line of best fit, you computed that r = 0.6501 using n = 12 data points, and the critical value found on the table is 0.576. Can the line be used for prediction? Why or why not?
+
+If the scatter plot looks linear then yes, the line can be used for prediction, because r > the positive critical value.
+
+Suppose you computed r = 0.624 with 14 data points, where df = 14 – 2 = 12. The critical values are –0.532 and 0.532. Since –0.624 < –0.532, r is significant and the line can be used for prediction.
+
+Try It
+
+For a given line of best fit, you compute that r = 0.5204 using n = 9 data points, and the critical values are ±0.666. Can the line be used for prediction? Why or why not?
+
+No, the line cannot be used for prediction, because r < the positive critical value.
+
+Suppose you computed r = 0.776 and n = 6, with df = 6 - 2 = 4. The critical values are  0.811 and 0.811. Since 0.776 is between the two critical values, r is not significant. The line should not be used for prediction.
+
+Try It
+
+For a given line of best fit, you compute that r = –0.7204 using n = 8 data points, and the critical value is 0.707. Can the line be used for prediction? Why or why not?
+
+Yes, the line can be used for prediction, because r < the negative critical value.
+
+Third Exam vs. Final Exam Example: Critical Value Method
+
+Consider the third exam/final exam example.
+The line of best fit is: ŷ = –173.51 + 4.83x, with r = .6631, and there are n = 11 data points. Can the regression line be used for prediction? Given a third exam score (x value), can we use the line to predict the final exam score (predicted y value)?
+H0: ρ = 0
+Ha: ρ ≠ 0
+α = 0.05
+
+Use the 95 Percent Critical Values table for r with df = n – 2 = 11 – 2 = 9.
+
+Using the table with df = 9, we find that the critical value listed is 0.602. Therefore, the critical values are ±0.602.
+
+Since 0.6631 > 0.602, r is significant.
+
+Decision: Reject the null hypothesis.
+
+Conclusion: There is sufficient evidence to conclude there is a significant linear relationship between the third exam score (x) and the final exam score (y) because the correlation coefficient is significantly different from zero.
+
+Because r is significant and the scatter plot shows a linear trend, the regression line can be used to predict final exam scores.
+
+Suppose you computed the following correlation coefficients. Using the table at the end of the chapter, determine whether r is significant and whether the line of best fit associated with each correlation coefficient can be used to predict a y value. If it helps, draw a number line.
+r = 0.567 and the sample size, n, is 19.
+To solve this problem, first find the degrees of freedom. df = n - 2 = 17.
+Then, using the table, the critical values are ±0.456.
+0.567 < 0.456, or you may say that 0.567 is not between the two critical values.
+r is significant and may be used for predictions.
+r = 0.708 and the sample size, n, is 9.
+df = n - 2 = 7
+The critical values are ±0.666.
+0.708 > 0.666.
+r is significant and may be used for predictions.
+r = 0.134 and the sample size, n, is 14.
+df = 14 - 2 = 12.
+The critical values are ±0.532.
+0.134 is between 0.532 and 0.532.
+r is not significant and may not be used for predictions.
+r = 0 and the sample size, n, is 5.
+It doesn't matter what the degrees of freedom are because r = 0 will always be between the two critical values, so r is not significant and may not be used for predictions.
+
+Try It
+
+For a given line of best fit, you compute that r = 0 using n = 100 data points. Can the line be used for prediction? Why or why not?
+
+No, the line cannot be used for prediction no matter what the sample size is.
+
+Assumptions in Testing the Significance of the Correlation Coefficient
+
+Testing the significance of the correlation coefficient requires that certain assumptions about the data be satisfied. The premise of this test is that the data are a sample of observed points taken from a larger population. We have not examined the entire population because it is not possible or feasible to do so. We are examining the sample to draw a conclusion about whether the linear relationship that we see between x and y in the sample data provides strong enough evidence that we can conclude there is a linear relationship between x and y in the population.
+
+The regression line equation that we calculate from the sample data gives the best-fit line for our particular sample. We want to use this best-fit line for the sample as an estimate of the best-fit line for the population. Examining the scatter plot and testing the significance of the correlation coefficient helps us determine whether it is appropriate to do this.
+
+The assumptions underlying the test of significance are as follows:
+
+There is a linear relationship in the population that models the sample data. Our regression line from the sample is our best estimate of this line in the population.
+
+The y values for any particular x value are normally distributed about the line. This implies there are more y values scattered closer to the line than are scattered farther away. Assumption 1 implies that these normal distributions are centered on the line; the means of these normal distributions of y values lie on the line.
+
+Normal distributions of all the y values have the same shape and spread about the line.
+
+The residual errors are mutually independent (no pattern).
+
+The data are produced from a well-designed, random sample or randomized experiment.
+
+Chapter Review
+
+Linear regression is a procedure for fitting a straight line of the form ŷ = a + bx to data. The conditions for regression are as follows:
+
+Linear: In the population, there is a linear relationship that models the average value of y for different values of x.
+
+Independent: The residuals are assumed to be independent.
+
+Normal: The y values are distributed normally for any value of x.
+
+Equal variance: The standard deviation of the y values is equal for each x value.
+
+Random: The data are produced from a well-designed random sample or a randomized experiment.
+
+The slope b and intercept a of the least-squares line estimate the slope β and intercept α of the population (true) regression line. To estimate the population standard deviation of y (σ) use the standard deviation of the residuals: 
+ 
+ s=
+
+ SSE
+
+ n−2
+
+. The variable ρ (rho) is the population correlation coefficient. To test the null hypothesis, H0: ρ = hypothesized value, use a linear regression t-test. The most common null hypothesis is H0: ρ = 0, which indicates there is no linear relationship between x and y in the population. The TI-83, 83+, 84, 84+ calculator function LinRegTTest can perform this test (STATS, TESTS, LinRegTTest).
+
+Formula Review
+
+Least-Squares Line or Line of Best Fit:
+ŷ
+ =a+bx
+,
+
+where a is the y-intercept and b is the slope.
+
+Standard Deviation of the Residuals:
+s=
+
+ SSE
+
+ n−2
+
+ ,
+
+where SSE = sum of squared errors, and
+n = the number of data points.
+
+When testing the significance of the correlation coefficient, what is the null hypothesis?
+
+When testing the significance of the correlation coefficient, what is the alternative hypothesis?
+Ha: ρ ≠ 0
+
+If the level of significance is 0.05 and the p-value is 0.04, what conclusion can you draw?

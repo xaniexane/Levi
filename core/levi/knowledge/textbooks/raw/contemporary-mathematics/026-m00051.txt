@@ -1,0 +1,299 @@
+# m00051
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Geometric Sequences
+
+Geometric Sequences
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Identify geometric sequences.
+
+Find a given term in a geometric sequence.
+
+Find the nth term of a geometric sequence.
+
+Find the sum of a finite geometric sequence.
+
+Use geometric sequences to solve real-world applications.
+
+One of the concerns when investing is the doubling time, which is length of time it takes for the value of the investment to be twice, or double, that of its starting value. A shorter doubling times means the investment gets bigger, sooner. For example, if you invest $200 in an account with an 8-year doubling time, then in 8 years the value of the account will be double the starting amount, or 2×$200=$400. After another 8 years (for a total of 16 years) the investment would be twice its value after the first 8 years, or 2×(2×$400)=2×($400)=$800. Every 8 years, the investment would double again, so after the third 8-year period, the investment would be worth 2×2×(2×$400)=$1,600. This process exhibits exponential growth, an application of geometric sequences, which is explored in this section.
+
+Identifying Geometric Sequences
+
+We know what a sequence is, but what makes a sequence a geometric sequence? In an arithmetic sequence, each term is the previous term plus the constant difference. So, you add a (possibly negative) number at each step. In a geometric sequence, though, each term is the previous term multiplied by the same specified value, called the common ratio. In the sequence { 3,6,12,24,48,96,192,384,728,1456 } the common ratio is 2. To see the difference between an arithmetic sequence and geometric sequence, examine these two sequences (Figures 3.52 and 3.53).
+
+Each term in this arithmetic sequence is the previous term plus 5.
+
+Each term in this geometric sequence is the previous term times 2.
+
+In the sequence {3,6,12,24,48,96,192,384,728,1456}, the numbers get big fairly quickly, and stay positive. However, that’s not always the case with geometric sequences. Depending on the value of the common ratio, the terms could increase each time (like in the one shown in ), or the terms can get smaller each time, or the terms can alternate between positive and negative values. It all depends on the value of the common ratio, r.
+
+Consider this geometric sequence:
+ {5,15,45,135,405,2025...}
+
+Each term is the previous term times 5, which means the common ratio is 5. This common ratio is larger than 1, and so the terms increase each time. Now, look at this geometric sequence:
+ {2,−6,18,−54,162,−486,1458...}
+
+Each term is the previous term times −3, and the sign of the terms alternate from positive to negative. Then, there’s this geometric sequence:
+ { 9,3,1,13,19,127... }
+
+Each term is the previous term times 13, and the terms decrease each time. What we should take away from these three examples is if the common ratio is a positive number larger than 1, then the sequence increases. If the common ratio is a negative number, then the sign of the terms alternates between positive and negative. If the common ratio is between 0 and 1, then the terms decrease.
+
+Two special cases of geometric sequences are when the constant ratio is 1 and when the common ratio is 0. When the constant ratio is 1, every term of the sequence is the same, as in { 3,3,3,3,3,3,3,3,3}. This is referred to as a constant sequence. When the constant ratio is 0, the first term can be any number, but every term after the first term is 0, as in {−43.2,0,0,0,0,0,0,0}.
+
+Identifying Geometric Sequences
+
+For each sequence, determine if the sequence is a geometric sequence. If so, identify the common ratio.
+{5,20,80,320,1,280,5,120,20,480,...}
+{−3,6,−12,24,11,33}
+{ 4,2,1,12,14,18,... }
+
+In the sequence {5,20,80,320,1,280,5,120,20,480,...}, the jump from 5 to 20 is a multiplication by 4, as is the next jump to 80, and the next to 320. Each term is 4 times the previous term. Since each term is 4 times the previous, this is a geometric sequence. The common ratio is 4.
+
+In the sequence {−3,6,−12,24,11,33}, notice that 6 is −3 times −2. The jump from 6 to −12 is another multiplication by negative. So, if this is a geometric sequence, each term should be the previous term times −2. But the change from 24 to 11 is not a multiplication by −2, This means the sequence is not a geometric sequence.
+
+In the sequence { 4,2,1,12,14,18,... }, the change from 4 to 2 is a multiplication by 12, as is the next jump, from 2 to 1, as is the next from 1 to 12. Each term is 12 times the previous term. Since each term is 12 times the previous, this is a geometric sequence. The common ratio is 12.
+
+As with arithmetic sequences, the first term of a geometric sequence is labeled a1. The number that is multiplied by each term is called the common ratio and is denoted r. So, if the first term is known, a 1, and the common ratio is known, r, then the nth term, an, can be calculated with the formula an=a1rn−1.
+
+The nth term of the geometric sequence, an, with first term a1 and common ratio r, is an=a1rn−1.
+
+Return to the sequence { 3,6,12,24,48,96,192,384,728,... }. We observe that the first term is 3, so a1=3. We also found that the common ratio is 2, so r=2. The table below shows how any term can be calculated using just a1 and r.
+ai,ith,Term
+Value of Term
+Term Written as a1×ri−1
+a1
+3×20
+a2
+3×21
+a3
+3×22
+a4
+3×23
+a5
+3×2i−1
+Determining the Value of a Specific Term in a Geometric Sequence
+
+In the following geometric sequences, determine the indicated term of the geometric sequence with a given first term and common ratio.
+
+Determine the 9th term of the geometric sequence with a1×6 and r=3.
+
+Determine the 11th term of the geometric sequence with a1=2 and r=−5.
+
+Using an=a1rn−1 with a1=6, r=3, and n=9, we calculate
+ a9=a1r9−1=6×(3)9−1=6×(3)8=6×6561=39366.
+ The 9th term of the geometric sequence with a1=6 and r=3 is a9=39366.
+
+The 9th term of the geometric sequence with a1=6 and r=3 is a9=39366.
+
+Using an=a1rn−1 with a1=2, r=−5, and n=11, we calculate
+ a11=a1r11−1=2×(−5)11−1=2×(−5)10=2×9,765,625=19,531,250.
+
+Geometric Sequences
+
+Finding the Sum of a Finite Geometric Sequence
+
+As with arithmetic sequences, it is possible to add the terms of the geometric sequence. Like arithmetic sequences, the formula for the finite sum of the terms of a geometric sequence has a straightforward formula.
+
+The sum of the first n terms of a finite geometric sequence, written sn, with first term a1 and common ratio r, is sn=a1(1−rn1−r) provided that r≠1.
+
+Calculating the Sum of a Finite Geometric Sequence
+
+What is the sum of the first 13 terms of the geometric sequence with first term a1=5 and common ratio r=3?
+
+What is the sum of the first 7 terms of the geometric sequence with first term a1=16 and common ratio r=18?
+
+Using a1=5, r=3, and n=13, we find that the sum is:
+ S13=a1(1−r131−r)=5(1−3131−3)=5(1−1,594,323−2)=5(−1,594,322−2)=5(797,161)=3,985,805
+ The sum of the first 13 terms of this geometric sequence is 3,985,805.
+
+The sum of the first 13 terms of this geometric sequence is 3,985,805.
+
+Using a1=16, r=18, and n=7, we find that the sum is:
+ s7=a1(1−r71−r)=16(1−(18)71−(18))=16(1−(12,097,152)78)=16(2,097,1512,097,15278)=16(299,593262,144)=299,59316,384=18.2857
+ The sum of the first 7 terms of this geometric sequence is 18.2857.
+
+The sum of the first 7 terms of this geometric sequence is 18.2857.
+
+Using Geometric Sequences to Solve Real-World Applications
+
+Geometric sequences have a multitude of applications, one of which is compound interest. Compound interest is something that happens to money deposited into an account, be it savings or an individual retirement account, or IRA. The interest on the account is calculated and added to the account at regular intervals. This means the interest that was earned later gains its own interest. This allows the money to grow faster. If that interest is added every month, we say it is compounded monthly. If the interest is added daily, then we say it is compounded daily. The amount of money that is deposited into the account is called the principal and is denoted P. The account earns money on that principal. The amount it earns is a percentage of the money in the account. The interest rate, expressed as a decimal, is denoted r.
+
+If you deposit P dollars in an account that earns interest compounded yearly, then the amount in the account, A, after t years is calculated with the formula: A=P(1+r)t. This is a geometric sequence, with constant ratio (1+r) and first term a1=P.
+
+Calculating Interest Compounded Yearly
+
+Daryl deposits $1,000 in an account earning 4% interest compounded yearly. How much money is in the account after 25 years?
+
+Using A=P(1+r)t with P=1000, r=0.04, and t=25, we find that A=P(1+r)t=1,000×(1+0.04)25=1,000×(1.04)25=1,000×2.66583633=2,665.85. After 25 years, there is $2,665.84 in the account.
+
+Another application of geometric sequences is exponential growth. This arises in biology quite frequently, especially in relation to bacterial cultures, but also with other organism population models. In bacterial cultures, the time it takes the population to double is often recorded. This time to double is the same, regardless of how big the population gets. So, if the population doubles after 3 hours, it doubles again after another 3 hours, and again after another 3 hours, and so on. Put into geometric sequence language, it has a common ratio of 2.
+
+Doubling a Bacterial Culture
+
+When Escherichia coli (E. coli) is in a broth culture at 37°C, the population of E. coli doubles in number with 30 organisms, how many E. coli bacteria are present in the culture after 16 hours?
+
+Since the population is doubling every 20 minutes, this is a geometric sequence situation with common ratio r=2. The culture begins with 30 organisms, so a1=30. The time,16 hours, is 48 twenty-minute periods, so we’re looking for the 48th term in the sequence. Using these values in the geometric sequence formula gives
+a48=a1rn−1=30×248−1=30×247=30×(1.40737×1014)=4.22212×1015.
+
+So, after 16 hours, the culture contains 4.22212×1015 E. coli organisms. That’s more than 4,000 trillion bacteria.
+
+Applying the Sum of a Finite Geometric Sequence
+
+A player places one grain of rice on the first square of a chess board. On the second square, the player places 2 grains of rice. On the third square, the player places 4 grains of rice. On each successive square of the board, the player doubles the number of grains of rice placed on the chess board. When the player places the last rice on the 64th square, how many total grains of rice have been placed on the board?
+
+Since the number of grains of rice is doubled at each step, this is a geometric sequence with first term a1=1 and common ratio r=2. Rice is placed on 64 total squares, so we want the sum of the first 64 terms. Using this information and the formula, the total number of grains of rice on the board will be:
+ s64=a1(1−rn−11−r)=1×(1−264−11−2)=(1−263−1)=−(1−263)=−(−9.2233720369×1018)=9.2233720369×1018
+
+That’s a 20-digit number!
+
+Sum of a Finite Geometric Sequence
+
+Check Your Understanding
+
+Key Terms
+
+geometric sequence
+
+common ratio
+
+Key Concepts
+
+A special form of a sequence is a geometric sequence. Each geometric sequence is determined by its first term and its constant ratio. Any term in a geometric sequence is determined by multiplying the constant ratio to the preceding term.
+
+If the first term and the constant ratio of a geometric sequence are known, then any term of the sequence can be found directly.
+
+Because geometric sequences follow such a strict pattern, the sum of the first n terms of a geometric sequence can be determined with the formula sn=a1(1−rn−11−r).
+
+Finding the sum of a finite geometric sequence
+
+Applying arithmetic sequences
+
+Formulas
+an=a1rn−1
+sn=a1(1−rn−11−r)
+
+Videos
+Geometric Sequences
+Sum of a Finite Geometric Sequence
+
+Encryption Throughout History
+
+Encryption began at least as far back as the Roman Empire. During the reign of Caesar, a particular cypher was used, fittingly named the Caesar Cypher. This encryption process granted the Romans a great tactical advantage. Even if a message was intercepted, it would not make sense to the person intercepting the message.
+
+Find four instances when encryption was used and cracked over the course of history.
+
+Projects
+
+The Golden Ratio in Art and Architecture
+
+The golden ratio has been used in art and architecture as far back as ancient Greece (possibly further). It also appears in South America (Incan architecture). Find five instances of the use of the golden ratio in art or architecture and describe its use in each of those instances.
+
+Your Budget
+
+Budgeting either is, or will shortly be, an important aspect of your life. Managing money well reduces stress in your life, and provides space for planning for future expenses, such as vacations or home improvements.
+
+Imagine your life 10 years from now. Estimate your monthly income. Identify expenses you will encounter monthly (mortgage or rent, car payment, insurance, entertainment, etc.). Decide on an amount you plan to save monthly (this is treated as an expense). Create a spreadsheet with those values. Record your monthly net income (your income minus your expenses). Determine how much money you will have saved over the course of 5 years (ignore interest). Write a reflection on your anticipated financial health.
+
+Estimating Pi
+
+The value of pi is the ratio of the circumference of a circle to the diameter of the circle. It is also equal to the ratio of the area of the circle to the square of the radius of the square.
+
+Research three ways to physically estimate pi.
+
+Estimate pi using all three processes you found.
+
+Present your process and solutions in class.
+
+Design Your Own Shift Cypher
+
+A cypher is a message written in such a way as to mask its contents. Changing a message into its cypher form is called encryption. Decryption or deciphering is the process of changing a cyphertext message back into the original (legible) message. One process of encryption is to scramble the letters, symbols, and punctuation of a message according to a mathematical rule. One rule that could be used for such a cypher is addition in a chosen modulus. In this project, you will create such a cypher, encrypt a message, and then decrypt the message.
+Step 1: Choose the letters, symbols, and punctuation marks you want to allow in your messages. This 
+ should include at least the uppercase letters and a space character. This is your character set.
+Step 2: Count the number of characters you will use. Label this number n.
+Step 3: Pair each character of your character set an integer from 0 to (n−1). Do not assign more than one character to an integer.
+Step 4: Choose an integer between 1 and (n−1). This will be the number used to create the cypher. Label this number s.
+Step 5: Write a message using your character set.
+Step 6: Replace every character in your message by the integer with which it was paired in Step 3.
+Step 7: For every number, x, from Step 7, perform the addition x+s (mod n).
+Step 8: Replace every number found in Step 7 with the character with which it was paired in Step 3. This is your cyphertext.
+
+To decrypt your cyphertext, reverse the steps above.
+Step 1: Replace the cyphertext characters with the paired values.
+Step 2: For each value x, perform the subtraction x–s (mod n).
+Step 3: Replace the numbers from Step 2 with their paired characters from the character set.
+
+The message is then deciphered.
+
+Design Your Own Cypher Using Multiplication
+
+A cypher is a message written in such a way as to mask its contents. Changing a message into its cypher form is called encryption. Decryption or deciphering is the process of changing a cyphertext message back into the original (legible) message. One process of encryption is to scramble the letters, symbols, and punctuation of a message according to a mathematical rule. One rule that could be used for such a cypher is multiplication in a chosen modulus. In this project, you will create such a cypher, encrypt a message, then decrypt the message.
+Step 1: Choose the letters, symbols, and punctuation marks you want to allow in your messages. This should include at least the uppercase letters and a space character. This is your character set.
+Step 2: Count the number of characters you will use. Label this number n.
+Step 3: Pair each character of your character set an integer from 0 to (n−1). Do not assign more than one character to an integer.
+Step 4: Choose an integer, labeled s, between 1 and (n−1) so that GCF(n,s)=1. This will be the number used to create the cypher.
+Step 5: Write a message using your character set.
+Step 6: Replace every character in your message by the integer with which it was paired in Step 3.
+Step 7: For every number, x, from Step 6, perform the multiplication x−s (mod n).
+Step 8: Replace every number found in Step 7 with the character with which it was paired in Step 3. This is your cyphertext.
+
+Before beginning to decrypt in this cypher, you need to know the multiplicative inverse of the value you chose as s.
+Step 1: The multiplicative inverse of s is the number that, when multiplied by s in your modulus, equals 1. To find this, you will have to multiply s and every number between 2 and (n–1) until the product is 1 (mod n). Once this number is found, the message can be decrypted. Call this number r.
+Step 2: To decrypt your cyphertext, replace the cyphertext characters with the paired values.
+Step 3: For each of the value, x, perform the multiplication x×r(modn).
+Step 4: Replace the numbers from Step 3 with their paired characters from the character set.
+
+The message is then deciphered.
+
+Key Terms
+
+common ratio
+
+geometric sequence
+
+Key Concepts
+
+Geometric sequence.
+
+Finding an arbitrary term in a geometric sequence.
+
+Constant ratio.
+
+Finding the sum of a finite geometric sequence.
+
+Applying arithmetic sequences.
+
+Formulas
+an=a1rn−1
+sn=a1(1−rn−11−r)
+
+Chapter Review
+Prime and Composite Numbers
+
+The Integers
+
+Order of Operations
+
+Rational Numbers
+
+Irrational Numbers
+
+Real Numbers
+
+Clock Arithmetic
+
+Exponents
+
+Scientific Notation
+
+Arithmetic Sequences
+
+Geometric Sequences
+
+Chapter Test

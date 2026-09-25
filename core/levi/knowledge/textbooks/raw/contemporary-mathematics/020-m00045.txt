@@ -1,0 +1,361 @@
+# m00045
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Irrational Numbers
+
+Irrational Numbers
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Define and identify numbers that are irrational.
+
+Simplify irrational numbers and express in lowest terms.
+
+Add and subtract irrational numbers.
+
+Multiply and divide irrational numbers.
+
+Rationalize fractions with irrational denominators.
+
+The Pythagoreans were a philosophical sect in ancient Greece. Their philosophy included reincarnation and purifying the mind through the study and contemplation of mathematics and science. One of their principles was the cosmos is ruled by order, specifically mathematics and music. They even held mystic beliefs about specific numbers and figures. For example, the number 1 was associated with the mind and essence. Four represented justice, as it is the first product of two even numbers. Most famously, though, is the association with the Pythagorean Theorem, which states that in a right triangle, the sum of the squares of the shorter sides of the triangle (the legs) equals the square of the longer side (the hypotenuse). Even the ancient Egyptians used this relationship, as triangles with side measures 3, 4, and 5 were often used in surveying following the flooding of the Nile.
+
+There is a story of a Pythagorean, Hippasus, discovering that not all numbers could be expressed as fractions. In other words, not all numbers were rational numbers. The story ends with Hippasus, who shared this, or in some versions discovered it, put to death by drowning for sharing this fact, that not all quantities could be expressed as the ratio of two natural numbers.
+
+As colorful as that story may be, it is most likely false, as there are no contemporary sources to corroborate it. But it does seem to mark the discovery that not all quantities or measures were fractions of numbers. And so, irrational numbers were discovered.
+The Philosophy of the Pythagoreans
+
+Defining and Identifying Numbers That Are Irrational
+
+We defined rational numbers in the last section as numbers that could be expressed as a fraction of two integers. Irrational numbers are numbers that cannot be expressed as a fraction of two integers. Recall that rational numbers could be identified as those whose decimal representations either terminated (ended) or had a repeating pattern at some point. So irrational numbers must be those whose decimal representations do not terminate or become a repeating pattern.
+
+One collection of irrational numbers is square roots of numbers that aren’t perfect squares. x is the square root of the number a, denoted a, if x2=a. The number a is the perfect square of the integer n if a=n2. The rational number ab is a perfect square if both a and b are perfect squares.
+
+One method of determining if an integer is a perfect square is to examine its prime factorization. If, in that factorization, all the prime factors are raised to even powers, the integer is a perfect square. Another method is to attempt to factor the integer into an integer squared. It is possible that you recognize the number as a perfect square (such as 4 or 9). Or, if you have a calculator at hand, use the calculator to determine if the square root of the integer is an integer.
+
+Identifying Perfect Squares
+
+Determine which of the following are perfect squares.
+
+45
+
+81
+928
+144400
+
+The prime factorization of 45 is 45=32×5. Since the 5 is not raised to an even power, 45 is not a perfect square.
+
+The prime factorization of 81 is 34. All the prime factors are raised to even powers, so 81 is a perfect square.
+
+We must determine if both the numerator and denominator of 928 are perfect squares for the rational number to be a perfect square. The numerator is 9, and as mentioned above, 9 is a perfect square (it is 3 squared). Now we check the prime factorization of the denominator, 28, which is 28=22×7. Since 7 is not raised to an even power, 28 is not a perfect square. Since the denominator is not a perfect square, 928 is not a perfect square.
+
+We must determine if both the numerator and denominator of 144400 are perfect squares for the rational number to be a perfect square. The numerator is 144. The prime factorization of 144 is 144=24×32. Since all the prime factors of 144 are raised to even powers, 144 is a perfect square. Now we check the prime factorization of the denominator, 400, which is 400=24×52. Since all the prime factors of 400 are raised to even powers, 400 is a perfect square. Since the numerator and denominator of 144400 are perfect squares, 144400 is a perfect square.
+
+Using Desmos to Determine if a Number Is a Perfect Square
+
+Desmos may be used to determine if a number is a perfect square by using its square root function. When Desmos is opened, there is a tab in the lower left-hand corner of the Desmos screen. This tab opens the Desmos keypad, shown in .
+
+There you find the key for the square root, which is circled in . To find the square root of a number, click the square root key, which begins a calculation, and then enter the value for which you want a square root. If the result is an integer, then the number is a perfect square.
+Using Desmos to Find the Square Root of a Number
+
+Another collection of irrational numbers is based on the special number, pi, denoted by the Greek letter π, which is the ratio of the circumference of the diameter of the circle ().
+
+Any multiple or power of π is an irrational number.
+
+Any number expressed as a rational number times an irrational number is an irrational number also. When an irrational number takes that form, we call the rational number the rational part, and the irrational number the irrational part. It should be noted that a rational number plus, minus, multiplied by, or divided by any irrational number is an irrational number.
+
+Identifying Irrational Numbers
+
+Identify which of the following numbers are irrational.
+35
+0.15¯
+121
+4π
+
+35 can be factored as 5×7, showing that 35 is not the square of an integer or a rational number. This mean its square root is an irrational number.
+
+Since 0.15¯ is a decimal with a repeating pattern, it is rational, so it is not an irrational number.
+121=112. Since 121 is the square of an integer, its square root is a rational number.
+
+Since 4π is a multiple of pi, it is irrational. In this case, the rational part of the number is 4, while the irrational part is π.
+
+Euler-Mascheroni Constant
+
+Determining if a number is rational or irrational is not trivial. There are numbers that defied such classification for quite a long time. One such is the Euler-Mascheroni constant. The Euler-Mascheroni constant is used in mathematics, and is primarily associated with the natural logarithm, which is a mathematical function. The constant has been around since around 1790. However, it was unknown if this constant was rational or irrational until 2013, at which point it was proven to be irrational.
+
+Simplifying Square Roots and Expressing Them in Lowest Terms
+
+To simplify a square root means that we rewrite the square root as a rational number times the square root of a number that has no perfect square factors. The act of changing a square root into such a form is simplifying the square root.
+
+The number inside the square root symbol is referred to as the radicand. So in the expression a the number a is referred to as the radicand.
+
+Before discussing how to simplify a square root, we need to introduce a rule about square roots. The square root of a product of numbers equals the product of the square roots of those number. Written symbolically, a×b=a×b.
+
+For any two numbers a and b, a×b=a×b.
+
+Using this formula, we can factor an integer inside a square root into a perfect square times another integer. Then the square root can be applied to the perfect square, leaving an integer times the square root of another integer. If the number remaining under the square root has no perfect square factors, then we’ve simplified the irrational number into lowest terms. To simplify the irrational number into lowest terms when n is an integer:
+Step 1: Determine the largest perfect square factor of n, which we denote a2.
+Step 2: Factor n into a2×b.
+Step 3: Apply a2×b=a2×b.
+Step 4: Write n in its simplified form, ab.
+
+When a square root has been simplified in this manner, a is referred to as the rational part of the number, and b is referred to as the irrational part.
+
+Simplifying a Square Root
+
+Simplify the irrational number 180 and express in lowest terms. Identify the rational and irrational parts.
+
+Begin by finding the largest perfect square that is a factor of 180. We can do this by writing out the factor pairs of 180:
+ 1×1802×903×604×455×366×309×2010×1812×15
+
+Looking at the list of factors, the perfect squares are 4, 9, and 36. The largest is 36, so we factor the into 36×5=62×5. In the formula, a=6 and b=5. Apply a2×b=a2×b.
+62×5=62×5
+
+The simplified form of 180 is 65. In this example, the 6 is the rational part, and the 5 is the irrational part.
+
+Simplifying Square Roots
+
+Simplifying a Square Root
+
+Simplify the irrational number 330 and express in lowest terms. Identify the rational and irrational parts.
+
+Begin by finding the largest perfect square that is a factor of 330. We can do this by writing out the factor pairs of 330:
+ 1×3302×1653×1105×666×5510×3311×3015×22
+
+Looking at the list of factors, there are no perfect squares other than 1, which means 330 is already expressed in lowest terms. In this case, 1 is the rational part, and 330 is the irrational part. Though we could write this as 1330, but the product of 1 and any other number is just the number.
+
+Simplifying a Square Root
+
+Simplify the irrational number 2,548 and express in lowest terms. Identify the rational and irrational parts.
+
+Begin by finding the largest perfect square that is a factor of 2,548. We can do this by writing out the factor pairs of 2,548:
+ 1×25482×12744×6377×36413×19614×18226×9828×9149×52
+
+Looking at the list of factors, the perfect squares are 4, 49, and 196. The largest is 196, so we factor the 2,548 into 196×13=142×13. In the formula, a=14 and b=5. Apply a2×b=a2×b.
+142×13=142×13
+
+The simplified form of 2,548 is 1413. In this example, 14 is the rational part, and 13 is the irrational part.
+
+Simplifying Square Roots
+
+Adding and Subtracting Irrational Numbers
+
+Just like any other number we’ve worked with, irrational numbers can be added or subtracted. When working with a calculator, enter the operation and a decimal representation will be given. However, there are times when two irrational numbers may be added or subtracted without the calculator. This can happen only when the irrational parts of the irrational numbers are the same.
+
+To add or subtract two irrational numbers that have the same irrational part, add or subtract the rational parts of the numbers, and then multiply that by the common irrational part.
+
+Let our first irrational number be a×x, where a is the rational and x the irrational parts.
+
+Let the other irrational number be b×x, where b is the rational and x the irrational parts.
+
+Then a×x±b×x=(a±b)×x.
+
+Subtracting Irrational Numbers with Similar Irrational Parts
+
+If possible, subtract the following irrational numbers without using a calculator. If this is not possible, state why.
+37−87
+
+Since these two irrational numbers have the same irrational part, 7, we can subtract without using a calculator. The rational part of the first number is 3. The rational part of the second number is 8. Using the formula yields 37−87=(3−8)×7=−57.
+
+Adding Irrational Numbers with Similar Irrational Parts
+
+If possible, add the following irrational numbers without using a calculator. If this is not possible, state why.
+35π+17π
+
+Since these two irrational numbers have the same irrational part, π, the addition can be performed without using a calculator. The rational part of the first number is 35. The rational part of the second number is 17. Using the formula yields 35π+17π=(35+17)×π=52π.
+
+Subtracting Irrational Numbers with Different Irrational Parts
+
+If possible, subtract the following irrational numbers without using a calculator. If this is not possible, state why.
+193−5.67
+
+The two numbers being subtracted do not have the same irrational part, so the operation cannot be performed.
+
+Multiplying and Dividing Irrational Numbers
+
+Just like any other number that we’ve worked with, irrational numbers can be multiplied or divided. When working with a calculator, enter the operation and a decimal representation will be given. Sometimes, though, you may want to retain the form of the irrational number as a rational part times an irrational part. The process is similar to adding and subtracting irrational numbers when they are in this form. We do not need the irrational parts to match. Even though they need not match, they do need to be similar, such as both irrational parts are square roots, or both irrational parts are multiples of pi. Also, if the irrational parts are square roots, we may need to reduce the resulting square root to lowest terms.
+
+When multiplying two square roots, use the following formula. It is the same formula presented during the discussion of simplifying square roots.
+
+For any two positive numbers a and b, a×b=a×b.
+
+When dividing two square roots, use the following formula.
+
+For any two positive numbers a and b, with b not equal to 0, a÷b=ab=ab.
+
+To multiply or divide irrational numbers with similar irrational parts, do the following:
+Step 1: Multiply or divide the rational parts.
+Step 2: If necessary, reduce the result of Step 1 to lowest terms. This becomes the rational part of the answer.
+Step 3: Multiply or divide the irrational parts.
+Step 4: If necessary, reduce the result from Step 3 to lowest terms. This becomes the irrational part of the answer.
+Step 5: The result is the product of the rational and irrational parts.
+
+Dividing Irrational Numbers with Similar Irrational Parts
+
+Perform the following operations without a calculator. Simplify if possible.
+315÷(83)
+14.7135÷(35).
+
+In this division problem, 315÷(83), notice that the irrational parts of these numbers are similar. They are both square roots, so follow the steps given above.
+ Step 1: Divide the rational parts. 3÷8=38
+ Step 2: If necessary, reduce the result of Step 1 to lowest terms. The 3 and 8 have no common factors, so 38 is already in lowest terms.
+ Step 3: Divide the irrational parts. 15÷3=153=153
+ Step 4: If necessary, reduce the result from Step 3 to lowest terms. The radicand can be reduced, which yields 5.
+ Step 5: The result is the product of the rational and irrational parts, which is 385.
+Step 1: Divide the rational parts. 3÷8=38
+Step 2: If necessary, reduce the result of Step 1 to lowest terms. The 3 and 8 have no common factors, so 38 is already in lowest terms.
+Step 3: Divide the irrational parts. 15÷3=153=153
+Step 4: If necessary, reduce the result from Step 3 to lowest terms. The radicand can be reduced, which yields 5.
+Step 5: The result is the product of the rational and irrational parts, which is 385.
+
+In this division problem, 14.7135÷(35), notice that the irrational parts of these numbers are similar. They are both square roots, so follow the steps given above.
+ Step 1: Divide the rational parts. 14.7÷3=4.9
+ Step 2: If necessary, reduce the result of Step 1 to lowest terms. This rational number is expressed as a decimal so will not be reduced.
+ Step 3: Divide the irrational parts. 135÷5=1355=1355
+ Step 4: If necessary, reduce the result from Step 3 to lowest terms. The radicand can be reduced, which yields 1355=27=9×3=33.
+ Step 5: The result is the product of the rational and irrational parts, which is 4.9×33=14.73.
+Step 1: Divide the rational parts. 14.7÷3=4.9
+Step 2: If necessary, reduce the result of Step 1 to lowest terms. This rational number is expressed as a decimal so will not be reduced.
+Step 3: Divide the irrational parts. 135÷5=1355=1355
+Step 4: If necessary, reduce the result from Step 3 to lowest terms. The radicand can be reduced, which yields 1355=27=9×3=33.
+Step 5: The result is the product of the rational and irrational parts, which is 4.9×33=14.73.
+
+Multiplying Irrational Numbers with Similar Irrational Parts
+
+Perform the following operations without a calculator. Simplify if possible.
+(193)×(5.612)
+13π×8π
+
+In this multiplication problem, (193)×(5.612), notice that the irrational parts of these numbers are similar. They are both square roots. Follow the process above.
+ Step 1: Multiply the rational parts. 19×5.6=106.4
+ Step 2: If necessary, reduce the result of Step 1 to lowest terms. This rational number is expressed as a decimal and will not be reduced.
+ Step 3: Multiply the irrational parts. 3×12=3×12=36
+ Step 4: If necessary, reduce the result from Step 3 to lowest terms. The radicand is 36, which is the square of 6. The irrational part reduces to 36=6.
+ Step 5: The result is the product of the rational and irrational parts, which is 106.4×6=638.4.
+ Notice that sometimes multiplying or dividing irrational numbers can result in a rational number.
+Step 1: Multiply the rational parts. 19×5.6=106.4
+Step 2: If necessary, reduce the result of Step 1 to lowest terms. This rational number is expressed as a decimal and will not be reduced.
+Step 3: Multiply the irrational parts. 3×12=3×12=36
+Step 4: If necessary, reduce the result from Step 3 to lowest terms. The radicand is 36, which is the square of 6. The irrational part reduces to 36=6.
+Step 5: The result is the product of the rational and irrational parts, which is 106.4×6=638.4.
+
+Notice that sometimes multiplying or dividing irrational numbers can result in a rational number.
+In this multiplication problem, 13π×8π, notice that the irrational parts of these numbers are the same, π. Follow the process above.
+ Step 1: Multiply the rational parts. 13×8=104
+ Step 2: If necessary, reduce the result of Step 1 to lowest terms. That result is an integer.
+ Step 3: Multiply the irrational parts. π×π=π2
+ Step 4: If necessary, reduce the result from Step 3 to lowest terms. This cannot be reduced.
+ Step 5: The result is the product of the rational and irrational parts, which is 104π2.
+
+In this multiplication problem, 13π×8π, notice that the irrational parts of these numbers are the same, π. Follow the process above.
+Step 1: Multiply the rational parts. 13×8=104
+Step 2: If necessary, reduce the result of Step 1 to lowest terms. That result is an integer.
+Step 3: Multiply the irrational parts. π×π=π2
+Step 4: If necessary, reduce the result from Step 3 to lowest terms. This cannot be reduced.
+Step 5: The result is the product of the rational and irrational parts, which is 104π2.
+
+Rationalizing Fractions with Irrational Denominators
+
+Fractions often represent that some amount is being equally divided into some number of parts. But to conceptualize a fraction in that manner, the denominator needs to be an integer. An irrational number in the denominator interferes with that interpretation of a fraction. Fractions that have denominators that are just the square root of an integer can be altered into fractions with integer denominators using a process called rationalizing the denominator. The process relies on the following property of square roots: a×a=a and the following property of fractions: ab=acbc for any non-zero number c.
+
+Using these two properties, when a fraction has a square root in the denominator, we can eliminate that square root. Multiply the numerator and denominator by that square root from the denominator, ab=abb×b. Then apply a×a=a to the denominator, yielding abb×b=abb. Notice that there is no longer a square root in the denominator, which allows for interpreting the fraction as dividing a whole into equal parts.
+Rationalizing the Denominator
+
+Rationalizing the Denominator
+
+Rationalize the denominator of the following:
+57
+36210
+
+The square root in the denominator is 7. In order to rationalize the denominator of 57, we need to multiply the numerator and denominator by 7 and simplify.
+ 57=577×7=577 The square root is in simplified form, so the final answer is 577.
+
+The square root in the denominator is 10.Step 1: In order to rationalize the denominator of 36210, we need to multiply the numerator and denominator by 10 and simplify.
+ 36210=36×10210×10=3602×10=36020
+ Step 2: The 60 under the square root can be factored into the following factor pairs:
+ 1×602×303×204×155×126×10
+ Step 3: The largest square factor of 60 is 4, so we simplify the 60 in the numerator into 215. We also cancel any common factors.
+ 36020=3×21520=61520=31510
+ This is completely simplified.
+Step 2: The 60 under the square root can be factored into the following factor pairs:
+Step 3: The largest square factor of 60 is 4, so we simplify the 60 in the numerator into 215. We also cancel any common factors.
+
+This is completely simplified.
+
+There are occasions when the denominator is irrational but is the sum of two numbers where one or both involve square roots. For instance, 54+3. The process used earlier required that the denominator was the square root of a number and would not work here. However, this type of denominator can be rationalized. In order to rationalize such a denominator, we will multiply the numerator and denominator of the fraction by the conjugate of the denominator. The conjugate of a+b is a–b. We say that a+b and a‒b are conjugate numbers.
+
+So, the conjugate of −3+10 is just −3−10. But why is this of interest? The reason is because it leads to the difference of squares formula, which is used to factor the difference of two squares. Or, for our purposes, in reverse it allows us to eliminate a square root.
+
+For any two numbers, a and b, a2−b2=(a−b)(a+b).
+
+Looking at that formula, you should see that the two factors on the right-hand side of the equals sign are conjugates of one another. So, for our purposes, we’re interested in (a−b)(a+b)=a2−b2. This tells us that when we multiply a+b by its conjugate, we get a squared minus b squared, or a2−b2. But how is this useful? Let’s return to the fraction above, 54+3. The denominator is 4+3. Its conjugate is 4−3. According to the formula, and letting a=4 and b=3, we see that (4+3)(4−3)=42−(3)2. But (3)2 is just 3. That means the product is 16−3 or 13. This no longer has a square root. We use this to rationalize the denominator.
+
+We will also need the distributive property of numbers.
+
+For any three numbers a, b, and c, a×(b±c)=a×b±a×c. This is called the distributive property.
+
+Rationalizing the Denominator Using Conjugates
+
+Rationalize the denominator of 46+10
+ .
+Step 1: We recognize that the denominator is the sum of two numbers where one or both involve square roots. This means the conjugate can be used to remove the square root from the denominator.
+Step 2: To do so, we multiply the numerator and the denominator each by the conjugate of the denominator. Since the denominator is 6+10, the conjugate we will use is 6−10.
+Step 3: The conjugate is multiplied by the numerator and the denominator.
+46+10×6−106−10
+Step 4: Remembering how a number times its conjugate works, this becomes
+46+10×6−106−10=4×(6−10)62−(10)2.
+Step 5: In the numerator, we apply the distributive property. Using it yields 4×(6−10)62−(10)2=24−41036−10=24−41026.
+Step 6: Notice that the denominator no longer contains a square root. It has been rationalized. If desired, this can then be written as a rational number minus an irrational number, by recalling that a−bc=ac−bc.
+
+Applying that to the answer, we have 46+10=24−41026=2426−41026.
+Step 7: With a bit of cancellation, this reduces to 46+10=2426−41026=1213−21013.
+
+Rationalizing the Denominator
+
+Check Your Understanding
+
+Key Terms
+
+conjugate numbers
+
+difference of squares
+
+irrational numbers
+
+lowest terms
+
+rationalize the denominator
+
+Key Concepts
+
+Irrational numbers are numbers that cannot be written as an integer divided by another integer. One example is pi, denoted π. Another collection of irrational numbers are natural numbers that are not perfect squares.
+
+Some irrational numbers can be written as a rational part multiplied by an irrational part. If two irrational numbers have the same irrational parts, they can be added or subtracted.
+
+When irrational numbers are similar, on can multiply and divide the numbers without a calculator.
+
+Since a×b=a×b , and a÷b=ab=ab, products and quotients of square roots can be determined.
+
+Because a2=a and a×b=a×b, it is possible to simplify square root expressions so the radicand contains no perfect square factors.
+
+When a fraction has an irrational number as its denominator, it is possible to convert the denominator into a rational number using its conjugate. Doing so involves multiplying the numerator and denominator by the conjugate of the denominator, and then applying the difference of squares formula.
+
+With a single square root term
+
+Using conjugate numbers for two term denominators
+
+Formulas
+a×b=a×b
+a×x±b×x=(a±b)×x
+a÷b=ab=ab
+a2−b2=(a−b)(a+b)
+
+Videos
+The Philosophy of the Pythagoreans
+Using Desmos to Find the Square Root of a Number
+Simplifying Square Roots
+Rationalizing the Denominator

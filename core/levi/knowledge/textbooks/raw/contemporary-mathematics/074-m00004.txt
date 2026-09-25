@@ -1,0 +1,612 @@
+# m00004
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Mean, Median and Mode
+
+Mean, Median and Mode
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Calculate the mode of a dataset.
+
+Calculate the median of a dataset.
+
+Calculate the mean of a dataset.
+
+Contrast measures of central tendency to identify the most representative average.
+
+Solve application problems involving mean, median, and mode.
+
+What exactly do we mean when we describe something as "average"? Is the height of an average person the height that more people share than any other? What if we line up every person in the world, in order from shortest to tallest, and find the person right in the middle: Is that person’s height the average? Or maybe it’s something more complicated.
+
+Imagine a game where you and a friend are trying to guess the typical person’s height. Once the guesses are made, you bring in every person and measure their height. You and your friend figure out how far off each of your guesses were from the actual value, then square that number. The result is the number of points you earn for that person. After we check every height and award points accordingly, the person with the lower score wins (because a lower score means that person’s guess was, overall, closer to the actual values). Could we define the average height to be the number that you should guess to give you the smallest possible score?
+
+Each of these three methods of determining the “average” is commonly used. They are all methods of measuring centrality (or central tendency). Centrality is just a word that describes the middle of a set of data. All give potentially different results, and all are useful for different reasons. In this section, we’ll explore each of these methods of finding the “average.”
+
+The Mode
+
+In our discussion of average heights, the first possible definition we offered was the height that more people share than any other. This is the mode, or the value that appears most often. If there are two modes, the data are bimodal.
+
+Let’s look at some examples.
+
+Finding the Mode Using a Stem-and-Leaf Plot
+
+In , we looked at a stem-and-leaf plot of the sale prices (in dollars) of a particular collectible trading card:
+
+ 0
+ 5 8 9
+
+ 1
+ 0 0 0 3 4 4 5 5 5 5 6 9 9
+
+ 2
+ 0 0 0 0 5 5 9 9
+
+ 3
+ 0 0 0 5 5
+
+ 4
+ 0 0 5
+
+ 5
+
+ 6
+ 0
+
+0
+5 8 9
+1
+0 0 0 3 4 4 5 5 5 5 6 9 9
+2
+0 0 0 0 5 5 9 9
+3
+0 0 0 5 5
+4
+0 0 5
+5
+6
+0
+What is the mode price?
+
+The mode is the price that appears most often. Both 15 and 20 appear 4 times, more than any other values. So, they are the modes (and we can conclude that this set of data is bimodal).
+
+When we have a complete list of the data or a stem-and-leaf plot, it’s pretty straightforward to find the mode; we just need to find the number that appears most often. If we’re given a frequency distribution instead, the technique is different (but just as straightforward): we’re looking for the number with the highest frequency.
+
+Finding the Mode Using a Frequency Distribution
+
+In , we created a frequency distribution of the number of siblings of conflict resolution class attendees.
+
+ Number of Siblings
+ Frequency
+
+ 0
+ 5
+
+ 1
+ 13
+
+ 2
+ 6
+
+ 3
+ 3
+
+ 4
+ 2
+
+ 5
+ 1
+
+Number of Siblings
+Frequency
+0
+5
+1
+13
+2
+6
+3
+3
+4
+2
+5
+1
+What is the mode of the number of siblings?
+
+The mode is the value that appears the most often, which means it has the greatest frequency. Thirteen of the respondents have one sibling, more than any other number. So, the mode is 1.
+
+What happens if there is no number in the data that appears more than once? In that case, by our definition, every data value is a mode. But according to some other definitions, the data would have no mode. In practice, though, it doesn’t really matter; if no data value appears more than once, then the mode is not helpful at all as a measure of centrality.
+
+The Median
+
+Let's revisit our example of trying to identify the height of the “average” person. If we lined everyone up in order by height and found the person right in the middle, that person’s height is called the median, or the value that is greater than no more than half and less than no more than half of the values.
+
+Let’s look at a really simple example. Consider the following list of numbers: 11, 12, 13, 13, 14. Is the first number on the list, 11, the median? There are no values less than 11 (that’s 0%), and there are four values greater than 11 (that’s 80%). Since more than 50% of the data are greater than 11, the definition is violated; it’s not the median. Here’s a chart with the rest of the data, with red shading to show where the definition is violated:
+
+ Data Value
+ Number of Values Below
+ Percentage of Values Below
+ Number of Values Above
+ Percentage of Values Above
+
+ 11
+ 0
+ 0%
+ 4
+ 80%
+
+ 12
+ 1
+ 20%
+ 3
+ 60%
+
+ 13
+ 2
+ 40%
+ 1
+ 20%
+
+ 14
+ 4
+ 80%
+ 0
+ 0%
+
+Data Value
+Number of Values Below
+Percentage of Values Below
+Number of Values Above
+Percentage of Values Above
+11
+0
+0%
+80%
+12
+1
+20%
+60%
+13
+2
+40%
+1
+20%
+14
+80%
+0
+0%
+Only 13 has no violations, so it’s the median according to the definition. In practice, we find the median just like we described in the average height example: by lining up all the data values in order from smallest to largest and picking the value in the middle. For our easy example (with data values 11, 12, 13, 13, 14), that first 13 is right in the middle; there are two values to the left and two values to the right. If there’s not one value right in the middle, we pick the two closest, then choose the number exactly between them. For example, let’s say we have the data 41, 44, 46, 53. Since there are an even number of data values in our list, we can’t pick the one right in the middle. The two closest to the middle are 44 and 46, so we’ll choose the number halfway between those to be the median: 45. As this example shows, the median (unlike the mode) doesn’t have to be a number in our original set of data.
+
+In the examples we’ve looked at so far, it’s been pretty easy to identify which number is right in the middle. If we had a very large dataset, though, it might be harder. Fortunately, we have some formulas to help us with that.
+
+Suppose we have a set of data with n values, ordered from smallest to largest. If n is odd, then the median is the data value at position n+12. If n is even, then we find the values at positions n2 and n2+1. If those values are named a and b, then the median is defined to be a+b2.
+
+Let’s put those formulas to work in an example.
+
+Finding the Median Using a Stem-and-Leaf Plot
+
+In , we looked at a stem-and-leaf plot that contained 33 sale prices (in dollars) of a particular collectible trading card:
+
+ 0
+ 5 8 9
+
+ 1
+ 0 0 0 3 4 4 5 5 5 5 6 9 9
+
+ 2
+ 0 0 0 0 5 5 9 9
+
+ 3
+ 0 0 0 5 5
+
+ 4
+ 0 0 5
+
+ 5
+
+ 6
+ 0
+
+0
+5 8 9
+1
+0 0 0 3 4 4 5 5 5 5 6 9 9
+2
+0 0 0 0 5 5 9 9
+3
+0 0 0 5 5
+4
+0 0 5
+5
+6
+0
+What is the median price?
+Step 1: Since 33 is odd, the median is the data value at position n+12, where n is the number of values in the dataset. There are 33 total values, so our formula becomes 33+12=17. That means we want to look for the 17th number in the dataset.
+Step 2: We'll want to count from the lowest value to the 17th number. We can use our stem and leaf plot to do this.
+1 2 3
+0
+4 5 6 7 8 9 10 11 12 13 14 15 16
+1
+17
+2
+0 0 0 0 5 5 9 9
+3
+0 0 0 5 5
+4
+0 0 5
+5
+6
+0
+The seventeenth number is 20, so the median is 20.
+
+Now, let’s tackle an example with an even number of values.
+
+Finding the Median
+
+In , we looked at the number of times different crickets (of differing species, genders, etc.) chirped in a one-minute span. That data is again provided below:
+
+ 89
+ 97
+ 82
+ 102
+ 84
+ 99
+
+ 115
+ 105
+ 89
+ 109
+ 107
+ 89
+
+ 101
+ 109
+ 116
+ 103
+ 100
+ 91
+
+ 93
+ 103
+ 120
+ 91
+ 85
+ 104
+
+ 104
+ 82
+ 106
+ 92
+ 104
+ 106
+
+89
+97
+82
+102
+84
+99
+115
+105
+89
+109
+107
+89
+101
+109
+116
+103
+100
+91
+93
+103
+120
+91
+85
+104
+104
+82
+106
+92
+104
+106
+Find the median.
+Step 1: In order to find the median, we first need to sort the data so that they’re in order, smallest to largest:
+
+ 82
+ 82
+ 84
+ 85
+ 89
+ 89
+
+ 89
+ 91
+ 91
+ 92
+ 93
+ 97
+
+ 99
+ 100
+ 101
+ 102
+ 103
+ 103
+
+ 104
+ 104
+ 104
+ 105
+ 106
+ 106
+
+ 107
+ 109
+ 109
+ 115
+ 116
+ 120
+
+82
+82
+84
+85
+89
+89
+89
+91
+91
+92
+93
+97
+99
+100
+101
+102
+103
+103
+104
+104
+104
+105
+106
+106
+107
+109
+109
+115
+116
+Step 2: Next, we figure out how many data values we have. Counting them up, we see there are 30, which is even.
+Step 3: Since we have an even number of data values, we need to find the values in positions 302=15 and 302+1=16. These are 101 and 102.
+Step 4: We use the formula to compute the median: 101+1022=101.5.
+
+Finding the Median Using a Frequency Distribution
+
+In , we created a frequency distribution of the number of siblings of the people who attended a conflict resolution class. Let's review that data again:
+
+ Number of Siblings
+ Frequency
+
+ 0
+ 5
+
+ 1
+ 13
+
+ 2
+ 6
+
+ 3
+ 3
+
+ 4
+ 2
+
+ 5
+ 1
+
+Number of Siblings
+Frequency
+0
+5
+1
+13
+2
+6
+3
+3
+4
+2
+5
+1
+What is the median of the number of siblings?
+
+There are 30 data values total, so the median is between the 15th and 16th values in the ordered list. There are five 0s and thirteen 1s according to the frequency distribution, so items one through five are all 0s and items six through eighteen are all 1s. Since both items fifteen and sixteen are 1s, the median is 1.
+
+The Mean
+
+Recall our example of ways we could identify the “average” height of an individual. The last method we discussed was also the most complicated. It involved a game where the player guesses a height, then figures out how far off that guess is from every single person’s height. Those differences get squared and added together to get a score. Our next measure of centrality gives the lowest possible score: No other guess would beat it in the game. Given a dataset containing n total values, the mean of the dataset is the sum of all the data values, divided by n.
+
+This is a computation you have likely done before. In many places, including spreadsheet programs like Microsoft Excel and Google Sheets, this number is called the average. For statisticians, though, the word average has too many possible meanings, so they prefer the one we’ll use: mean.
+
+Finding the Mean
+
+Compute the mean of the numbers 12, 15, 17, 18, 18, and 19.
+
+The mean is the sum of the values, divided by the number of values on the list. So, we get:
+ 12+15+17+18+18+196=996=16.5.
+
+Finding the Mean Using a Frequency Distribution
+
+Refer again to the frequency distribution of the number of siblings people who attended a conflict resolution class reported:
+
+ Number of Siblings
+ Frequency
+
+ 0
+ 5
+
+ 1
+ 13
+
+ 2
+ 6
+
+ 3
+ 3
+
+ 4
+ 2
+
+ 5
+ 1
+
+Number of Siblings
+Frequency
+0
+5
+1
+13
+2
+6
+3
+3
+4
+2
+5
+1
+What is the mean of the number of siblings?
+Step 1: We compute the mean by adding up all the data values and then dividing by the number of data values on the list.
+Step 2: Adding up the frequencies, we get 5+13+6+3+2+1=30 data values in our list.
+Step 3: Now, to find the sum of all the data values, we could simply reconstruct the raw data and add up all the numbers there. But, there’s an easier way: Remember that repeatedly adding a number to itself is the definition of multiplication. So, for example, since there are six 2s in our data, the sum of all those 2s must be 6×2=12.
+Step 4: Let’s add a column to our distribution for these products:
+
+ Number of Siblings
+ Frequency
+ (Number of Siblings) × (Frequency)
+
+ 0
+ 5
+ 0
+
+ 1
+ 13
+ 13
+
+ 2
+ 6
+ 12
+
+ 3
+ 3
+ 9
+
+ 4
+ 2
+ 8
+
+ 5
+ 1
+ 5
+
+Number of Siblings
+Frequency
+(Number of Siblings) × (Frequency)
+0
+5
+0
+1
+13
+13
+2
+6
+12
+3
+3
+9
+4
+2
+8
+5
+1
+Step 5: So, the sum of all our data values is 0+13+12+9+8+5=47. The mean is 4730≈1.567.
+
+As the number of data values we are considering grows, the computation for the mean gets more and more complicated. That’s why people generally trust technology to perform that computation.
+Compute Measures of Centrality Using Google Sheets
+
+Note that a recent update to Google Sheets introduced a new function called “MODE.MULT,” which will find every mode (not just the first one on the list).
+
+Using Google Sheets to Compute Measures of Centrality
+
+The dataset "InState" contains the in-state tuitions of every college and university in the country that reported that data to the Department of Education. Find the mode, median, and mean of those in-state tuition values.
+Step 1: To find the mode, we select an empty cell type “=MODE(”, click on the header of the column to insert a reference to the column into our formula, and then close the parentheses. When we hit the enter key, our formula is replaced with the mode: $13,380.
+Step 2: We can find the median and mean using the same process, except using the functions “MEDIAN” and “AVERAGE” in place of “MODE”. We find that the median is $11,207 and the mean is $15,476.79.
+
+Which Is Better: Mode, Median, or Mean?
+
+If the mode, median, and mean all purport to measure the same thing (centrality), why do we need all three? The answer is complicated, as each measure has its own strengths and weaknesses. The mode is simple to compute, but there may be more than one. Further, if no data value appears more than once, the mode is entirely unhelpful. As for the mean and median, the main difference between these two measures is how each is affected by extreme values.
+
+Consider this example: the mean and median of 1, 2, 3, 4, 5 are both 3. But what if the dataset is instead 1, 2, 3, 4, 10? The median is still 3, but the mean is now 4. What this example shows is that the mean is sensitive to extreme values, while the median isn’t. This knowledge can help us decide which of the two is more relevant for a given dataset. If it is important that the really high or really low values are reflected in the measure of centrality, then the mean is the better option. If very high or low values are not important, however, then we should stick with the median.
+
+The decision between mean and median only really matters if the data are skewed. If the data are symmetric, then the mean and median are going to be approximately equal, and the distinction between them is irrelevant. If the data are skewed, the mean gets pulled in the direction of the skew (i.e., if the data are right-skewed, then the mean will be bigger than the median; if the data are left-skewed, the opposite relation is true).
+
+Choosing Which Measure of Centrality to Use
+
+For the following situations, decide which measure(s) of centrality would be best:
+ 
+ You found a used car that you like, and you want to know if the price is too high or too low. You find a list of sale prices for that make and model, and you see that the distribution of those prices is skewed to the right. Some of the prices at the high end are close to the original sale price of the car, so you guess that those cars might have really low mileage, or have other enhancements added on that increased the value (but which don’t apply to the car you found).
+ You are asked to analyze the responses to a survey. One of the questions asked, “How strongly do you agree with the statement, ‘I believe my elected representatives have my best interests in mind when they vote’?” Responses are a number between 1 and 5, with 1 representing “strongly disagree” and 5 representing “strongly agree.”
+ You are asked to find the “average” household income for a zip code. Those values are skewed right.
+ Thinking back to the situation at the beginning of this section: you want to find “average” height. The data you’ve collected seem to be distributed symmetrically.
+
+You found a used car that you like, and you want to know if the price is too high or too low. You find a list of sale prices for that make and model, and you see that the distribution of those prices is skewed to the right. Some of the prices at the high end are close to the original sale price of the car, so you guess that those cars might have really low mileage, or have other enhancements added on that increased the value (but which don’t apply to the car you found).
+
+You are asked to analyze the responses to a survey. One of the questions asked, “How strongly do you agree with the statement, ‘I believe my elected representatives have my best interests in mind when they vote’?” Responses are a number between 1 and 5, with 1 representing “strongly disagree” and 5 representing “strongly agree.”
+
+You are asked to find the “average” household income for a zip code. Those values are skewed right.
+
+Thinking back to the situation at the beginning of this section: you want to find “average” height. The data you’ve collected seem to be distributed symmetrically.
+In this situation, the high values are not comparable to the value of the car you found and we don’t want them to affect the results. Also, we’re unlikely to find many repeated values, so the mode is probably not useful. Median is best.
+ Here, we want to know what a typical result is. The mean doesn’t really make sense; it involves adding the numbers together, so it would treat two “strongly disagree” and two “strongly agree” responses (those add to 1+1+5+5=12) as exactly the same as four “neutral” responses (3+3+3+3=12). But those are really different situations; the first shows a strong polarization in the responses, while the second represents strong indifference. The mode is probably the best choice (because the data are actually categorical), but the median would be good too.
+ The mode isn’t going to be useful in this situation because it’s unlikely you will find many households that have exactly the same income. The mean and median will be different because of the skew, so the choice comes down to the extreme values. Remember that the data are skewed right, so high values are prevalent. Because these high values are important for our analysis, we want them to be reflected in the results. Thus, the mean is best. That being said, the median is also useful; it allows us to say something like “50% of the households surveyed make more than” the median.
+ Because we aren’t likely to find many people with exactly the same height, the mode won’t be useful. Since the data are symmetric, the mean and the median will be about the same. So, it doesn’t really matter which of those two we choose.
+
+In this situation, the high values are not comparable to the value of the car you found and we don’t want them to affect the results. Also, we’re unlikely to find many repeated values, so the mode is probably not useful. Median is best.
+
+Here, we want to know what a typical result is. The mean doesn’t really make sense; it involves adding the numbers together, so it would treat two “strongly disagree” and two “strongly agree” responses (those add to 1+1+5+5=12) as exactly the same as four “neutral” responses (3+3+3+3=12). But those are really different situations; the first shows a strong polarization in the responses, while the second represents strong indifference. The mode is probably the best choice (because the data are actually categorical), but the median would be good too.
+
+The mode isn’t going to be useful in this situation because it’s unlikely you will find many households that have exactly the same income. The mean and median will be different because of the skew, so the choice comes down to the extreme values. Remember that the data are skewed right, so high values are prevalent. Because these high values are important for our analysis, we want them to be reflected in the results. Thus, the mean is best. That being said, the median is also useful; it allows us to say something like “50% of the households surveyed make more than” the median.
+
+Because we aren’t likely to find many people with exactly the same height, the mode won’t be useful. Since the data are symmetric, the mean and the median will be about the same. So, it doesn’t really matter which of those two we choose.
+
+Check Your Understanding
+
+Key Terms
+
+mode
+
+bimodal
+
+median
+
+mean
+
+Key Concepts
+
+The mode of a dataset is the value that appears the most frequently. The median is a value that is greater than or equal to no more than 50% of the data and less than or equal to no more than 50% of the data. The mean is the sum of all the data values, divided by the number of units in the dataset.
+
+The median of a dataset is not affected by outliers, but the mean will be biased toward outliers. This distinction might affect which measure of centrality is used to summarize a dataset.
+
+Formulas
+
+Suppose we have a set of data with n values, ordered from smallest to largest. If n is odd, then the median is the data value at position n+12. If n is even, then we find the values at positions n2 and n2+1. If those values are named a and b, then the median is defined to be a+b2
+ .
+
+Videos
+Compute Measures of Centrality Using Google Sheets

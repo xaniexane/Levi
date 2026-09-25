@@ -1,0 +1,208 @@
+# m53585
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Implicit Differentiation
+
+Implicit Differentiation
+
+Find the derivative of a complicated function by using implicit differentiation.
+
+Use implicit differentiation to determine the equation of a tangent line.
+
+We have already studied how to find equations of tangent lines to functions and the rate of change of a function at a specific point. In all these cases we had the explicit equation for the function and differentiated these functions explicitly. Suppose instead that we want to determine the equation of a tangent line to an arbitrary curve or the rate of change of an arbitrary curve at a point. In this section, we solve these problems by finding the derivatives of functions that define y implicitly in terms of x.
+
+Implicit Differentiation
+
+In most discussions of math, if the dependent variable y is a function of the independent variable x, we express y in terms of x. If this is the case, we say that y is an explicit function of x. For example, when we write the equation y=x2+1, we are defining y explicitly in terms of x. On the other hand, if the relationship between the function y and the variable x is expressed by an equation where y is not expressed entirely in terms of x, we say that the equation defines y implicitly in terms of x. For example, the equation y−x2=1 defines the function y=x2+1 implicitly.
+
+Implicit differentiation allows us to find slopes of tangents to curves that are clearly not functions (they fail the vertical line test). We are using the idea that portions of y are functions that satisfy the given equation, but that y is not actually a function of x.
+
+In general, an equation defines a function implicitly if the function satisfies that equation. An equation may define many different functions implicitly. For example, the functions
+y=25−x2 and y={25−x2if−5<x<0−25−x2if0<x<25, which are illustrated in , are just three of the many functions defined implicitly by the equation x2+y2=25.
+
+If we want to find the slope of the line tangent to the graph of x2+y2=25 at the point (3,4), we could evaluate the derivative of the function y=25−x2 at x=3. On the other hand, if we want the slope of the tangent line at the point (3,−4), we could use the derivative of y=−25−x2. However, it is not always easy to solve for a function defined implicitly by an equation. Fortunately, the technique of implicit differentiation allows us to find the derivative of an implicitly defined function without ever solving for the function explicitly. The process of finding dydx using implicit differentiation is described in the following problem-solving strategy.
+
+Problem-Solving Strategy: Implicit Differentiation
+
+To perform implicit differentiation on an equation that defines a function y implicitly in terms of a variable x, use the following steps:
+
+Take the derivative of both sides of the equation. Keep in mind that y is a function of x. Consequently, whereas ddx(sinx)=cosx,ddx(siny)=cosydydx because we must use the chain rule to differentiate siny with respect to x.
+
+Rewrite the equation so that all terms containing dydx are on the left and all terms that do not contain dydx are on the right.
+
+Factor out dydx on the left.
+
+Solve for dydx by dividing both sides of the equation by an appropriate algebraic expression.
+
+Using Implicit Differentiation
+
+Assuming that y is defined implicitly by the equation x2+y2=25, find dydx.
+
+Follow the steps in the problem-solving strategy.
+
+Analysis
+
+Note that the resulting expression for dydx is in terms of both the independent variable x and the dependent variable y. Although in some cases it may be possible to express dydx in terms of x only, it is generally not possible to do so.
+
+Using Implicit Differentiation and the Product Rule
+
+Assuming that y is defined implicitly by the equation x3siny+y=4x+3, find dydx.
+
+Using Implicit Differentiation to Find a Second Derivative
+
+Find d2ydx2 if x2+y2=25.
+
+In , we showed that dydx=−xy. We can take the derivative of both sides of this equation to find d2ydx2.
+
+At this point we have found an expression for d2ydx2. If we choose, we can simplify the expression further by recalling that x2+y2=25 and making this substitution in the numerator to obtain d2ydx2=−25y3.
+
+Find dydx for y defined implicitly by the equation 4x5+tany=y2+5x.
+dydx=5−20x4sec2y−2y
+
+Hint
+
+Follow the problem solving strategy, remembering to apply the chain rule to differentiate tan and y2.
+
+Finding Tangent Lines Implicitly
+
+Now that we have seen the technique of implicit differentiation, we can apply it to the problem of finding equations of tangent lines to curves described by equations.
+
+Finding a Tangent Line to a Circle
+
+Find the equation of the line tangent to the curve x2+y2=25 at the point (3,−4).
+
+Although we could find this equation without using implicit differentiation, using that method makes it much easier. In , we found dydx=−xy.
+
+The slope of the tangent line is found by substituting (3,−4) into this expression. Consequently, the slope of the tangent line is dydx|(3,−4)=−3−4=34.
+
+Using the point (3,−4) and the slope 34 in the point-slope equation of the line, we obtain the equation y=34x−254 ().
+
+Finding the Equation of the Tangent Line to a Curve
+
+Find the equation of the line tangent to the graph of y3+x3−3xy=0 at the point (32,32) (). This curve is known as the folium (or leaf) of Descartes.
+
+Begin by finding dydx.
+
+Next, substitute (32,32) into dydx=3y−3x23y2−3x to find the slope of the tangent line:
+
+Finally, substitute into the point-slope equation of the line to obtain
+
+Applying Implicit Differentiation
+
+In a simple video game, a rocket travels in an elliptical orbit whose path is described by the equation 4x2+25y2=100. The rocket can fire missiles along lines tangent to its path. The object of the game is to destroy an incoming asteroid traveling along the positive x-axis toward (0,0). If the rocket fires a missile when it is located at (3,85), where will it intersect the x-axis?
+
+To solve this problem, we must determine where the line tangent to the graph of
+4x2+25y2=100 at (3,85) intersects the x-axis. Begin by finding dydx implicitly.
+
+Differentiating, we have
+
+Solving for dydx, we have
+
+The slope of the tangent line is dydx|(3,85)=−310. The equation of the tangent line is y=−310x+52. To determine where the line intersects the x-axis, solve 0=−310x+52. The solution is x=253. The missile intersects the x-axis at the point (253,0).
+
+Find the equation of the line tangent to the hyperbola x2−y2=16 at the point (5,3).
+y=53x−163
+
+Hint
+dydx=xy
+
+Key Concepts
+
+We use implicit differentiation to find derivatives of implicitly defined functions (functions defined by equations).
+
+By using implicit differentiation, we can find the equation of a tangent line to the graph of a curve.
+
+For the following exercises, use implicit differentiation to find dydx.
+x2−y2=4
+6x2+3y2=12
+dydx=−2xy
+x2y=y−7
+3x3+9xy2=5x3
+dydx=x3y−y2x
+xy−cos(xy)=1
+yx+4=xy+8
+dydx=y−y2x+4x+4−x
+−xy−2=x7
+ysin(xy)=y2+2
+dydx=y2cos(xy)2y−sin(xy)−xycosxy
+(xy)2+3x=y2
+x3y+xy3=−8
+dydx=−3x2y−y3x3+3xy2
+
+For the following exercises, find the equation of the tangent line to the graph of the given equation at the indicated point. Use a calculator or computer software to graph the function and the tangent line.
+[T] x4y−xy3=−2,(−1,−1)
+[T] x2y2+5xy=14,(2,1)
+y=−12x+2
+[T] tan(xy)=y,(π4,1)
+[T] xy2+sin(πy)−2x2=10,(2,−3)
+y=1π+12x−3π+38π+12
+[T] xy+5x−7=−34y,(1,2)
+[T] xy+sin(x)=1,(π2,0)
+y=0
+[T] The graph of a folium of Descartes with equation 2x3+2y3−9xy=0 is given in the following graph.
+
+Find the equation of the tangent line at the point (2,1). Graph the tangent line along with the folium.
+
+Find the equation of the normal line to the tangent line in a. at the point (2,1).
+
+For the equation x2+2xy−3y2=0,
+
+Find the equation of the normal to the tangent line at the point (1,1).
+
+At what other point does the normal line in a. intersect the graph of the equation?
+
+a. y=−x+2 b. (3,−1)
+
+Find all points on the graph of y3−27y=x2−90 at which the tangent line is vertical.
+
+For the equation x2+xy+y2=7,
+
+Find the x-intercept(s).
+
+Find the slope of the tangent line(s) at the x-intercept(s).
+
+What does the value(s) in b. indicate about the tangent line(s)?
+
+a. (±7,0) b. −2 c. They are parallel since the slope is the same at both intercepts.
+
+Find the equation of the tangent line to the graph of the equation sin−1x+sin−1y=π6 at the point (0,12).
+
+Find the equation of the tangent line to the graph of the equation tan−1(x+y)=x2+π4 at the point (0,1).
+y=−x+1
+
+Find y′ and y″ for x2+6xy−2y2=3.
+[T] The number of cell phones produced when x dollars is spent on labor and y dollars is spent on capital invested by a manufacturer can be modeled by the equation 60x3/4y1/4=3240.
+
+Find dydx and evaluate at the point (81,16).
+
+Interpret the result of a.
+
+a. −0.5926 b. When $81 is spent on labor and $16 is spent on capital, the amount spent on capital is decreasing by $0.5926 per $1 spent on labor.
+[T] The number of cars produced when x dollars is spent on labor and y dollars is spent on capital invested by a manufacturer can be modeled by the equation 30x1/3y2/3=360.
+
+(Both x and y are measured in thousands of dollars.)
+
+Find dydx and evaluate at the point (27,8).
+
+Interpret the result of a.
+
+The volume of a right circular cone of radius x and height y is given by V=13πx2y. Suppose that the volume of the cone is a constant. Find dydx when x=4 and y=16.
+−8
+
+For the following exercises, consider a closed rectangular box with a square base with side x and height y.
+
+Find an equation for the surface area of the rectangular box, S(x,y).
+
+If the surface area of the rectangular box is 78 square feet, find dydx when x=3 feet and y=5 feet.
+−2.67
+
+For the following exercises, use implicit differentiation to determine y′. Does the answer agree with the formulas we have previously determined?
+x=siny
+x=cosy
+y′=−11−x2
+x=tany
+
+is a technique for computing dydx for a function defined by an equation, accomplished by differentiating both sides of the equation (remembering to treat the variable y as a function) and solving for dydx

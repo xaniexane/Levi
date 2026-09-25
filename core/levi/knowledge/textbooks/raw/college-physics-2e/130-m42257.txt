@@ -1,0 +1,338 @@
+# m42257
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Sound Intensity and Sound Level
+
+Sound Intensity and Sound Level
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define intensity, sound intensity, and sound pressure level.
+
+Calculate sound intensity levels in decibels (dB).
+
+In a quiet forest, you can sometimes hear a single leaf fall to the ground. After settling into bed, you may hear your blood pulsing through your ears. But when a passing motorist has his stereo turned up, you cannot even hear what the person next to you in your car is saying. We are all very familiar with the loudness of sounds and aware that they are related to how energetically the source is vibrating. In cartoons depicting a screaming person (or an animal making a loud noise), the cartoonist often shows an open mouth with a vibrating uvula, the hanging tissue at the back of the mouth, to suggest a loud sound coming from the throat . High noise exposure is hazardous to hearing, and it is common for musicians to have hearing losses that are sufficiently severe that they interfere with the musicians’ abilities to perform. The relevant physical quantity is sound intensity, a concept that is valid for all sounds whether or not they are in the audible range.
+
+Intensity is defined to be the power per unit area carried by a wave. Power is the rate at which energy is transferred by the wave. In equation form, intensity I is
+
+where P is the power through an area A. The SI unit for I is W/m2. The intensity of a sound wave is related to its amplitude squared by the following relationship:
+
+Here Δp is the pressure variation or pressure amplitude (half the difference between the maximum and minimum pressure in the sound wave) in units of pascals (Pa) or N/m2. (We are using a lower case p for pressure to distinguish it from power, denoted by P above.) The energy (as kinetic energy
+mv22) of an oscillating element of air due to a traveling sound wave is proportional to its amplitude squared. In this equation,
+ρ is the density of the material in which the sound wave travels, in units of kg/m3, and vw is the speed of sound in the medium, in units of m/s. The pressure variation is proportional to the amplitude of the oscillation, and so I varies as (Δp)2 (). This relationship is consistent with the fact that the sound wave is produced by some vibration; the greater its pressure amplitude, the more the air is compressed in the sound it creates.
+
+Sound intensity levels are quoted in decibels (dB) much more often than sound intensities in watts per meter squared. Decibels are the unit of choice in the scientific literature as well as in the popular media. The reasons for this choice of units are related to how we perceive sounds. How our ears perceive sound can be more accurately described by the logarithm of the intensity rather than directly to the intensity. The sound intensity level β in decibels of a sound having an intensity I in watts per meter squared is defined to be
+
+where I0=10–12W/m2 is a reference intensity. In particular, I0 is the lowest or threshold intensity of sound a person with normal hearing can perceive at a frequency of 1000 Hz. Sound intensity level is not the same as intensity. Because β is defined in terms of a ratio, it is a unitless quantity telling you the level of the sound relative to a fixed standard (10–12W/m2, in this case). The units of decibels (dB) are used to indicate this ratio is multiplied by 10 in its definition. The bel, upon which the decibel is based, is named for Alexander Graham Bell, the inventor of the telephone.
+
+Sound Intensity Levels and Intensities
+
+Sound intensity level β (dB)
+Intensity I(W/m2)
+1×10–12
+1×10–11
+1×10–10
+1×10–9
+1×10–8
+1×10–7
+1×10–6
+1×10–5
+1×10–4
+1×10–3
+1×10–2
+1×10–1
+1
+1×102
+1×104
+Bursting of eardrums
+The decibel level of a sound having the threshold intensity of 10–12W/m2 is β=0dB, because log101=0. That is, the threshold of hearing is 0 decibels. gives levels in decibels and intensities in watts per meter squared for some familiar sounds.
+
+One of the more striking things about the intensities in is that the intensity in watts per meter squared is quite small for most sounds. The ear is sensitive to as little as a trillionth of a watt per meter squared—even more impressive when you realize that the area of the eardrum is only about 1 cm2, so that only 10–16 W falls on it at the threshold of hearing! Air molecules in a sound wave of this intensity vibrate over a distance of less than one molecular diameter, and the gauge pressures involved are less than 10–9 atm.
+
+Another impressive feature of the sounds in is their numerical range. Sound intensity varies by a factor of 1012 from threshold to a sound that causes damage in seconds. You are unaware of this tremendous range in sound intensity because how your ears respond can be described approximately as the logarithm of intensity. Thus, sound intensity levels in decibels fit your experience better than intensities in watts per meter squared. The decibel scale is also easier to relate to because most people are more accustomed to dealing with numbers such as 0, 53, or 120 than numbers such as 1.00×10–11.
+
+One more observation readily verified by examining or using I=(Δp)2ρvw2 is that each factor of 10 in intensity corresponds to 10 dB. For example, a 90 dB sound compared with a 60 dB sound is 30 dB greater, or three factors of 10 (that is, 103 times) as intense. Another example is that if one sound is 107 as intense as another, it is 70 dB higher. See .
+
+Ratios of Intensities and Corresponding Differences in Sound Intensity Levels
+β2–β1
+2.0
+3.0 dB
+5.0
+7.0 dB
+10.0
+10.0 dB
+Calculating Sound Intensity Levels: Sound Waves
+
+Calculate the sound intensity level in decibels for a sound wave traveling in air at 0ºC
+ and having a pressure amplitude of 0.656 Pa.
+Strategy
+
+Strategy
+
+We are given Δp, so we can calculate I using the equation
+
+I=(Δp)2
+
+/
+
+(
+2
+pvw
+)2
+
+. Using I, we can calculate
+
+β straight from its definition in
+
+βdB=10log10(I/I0).
+Solution
+
+Solution
+
+(1) Identify knowns:
+
+Sound travels at 331 m/s in air at 0ºC.
+
+Air has a density of 1.29 kg/m3 at atmospheric pressure and 0ºC.
+
+(2) Enter these values and the pressure amplitude into
+
+I=
+(Δp)
+
+2
+
+/
+(
+2ρvw
+)
+:
+
+(3) Enter the value for I and the known value for I0 into βdB=10log10(I/I0). Calculate to find the sound intensity level in decibels:
+Discussion
+
+Discussion
+
+This 87 dB sound has an intensity five times as great as an 80 dB sound. So a factor of five in intensity corresponds to a difference of 7 dB in sound intensity level. This value is true for any intensities differing by a factor of five.
+
+Change Intensity Levels of a Sound: What Happens to the Decibel Level?
+
+Show that if one sound is twice as intense as another, it has a sound level about 3 dB higher.
+Strategy
+
+Strategy
+
+You are given that the ratio of two intensities is 2 to 1, and are then asked to find the difference in their sound levels in decibels. You can solve this problem using of the properties of logarithms.
+Solution
+
+Solution
+
+(1) Identify knowns:
+
+The ratio of the two intensities is 2 to 1, or:
+
+We wish to show that the difference in sound levels is about 3 dB. That is, we want to show:
+
+Note that:
+
+(2) Use the definition of β to get:
+
+Thus,
+Discussion
+
+Discussion
+
+This means that the two sound intensity levels differ by 3.01 dB, or about 3 dB, as advertised. Note that because only the ratio I2/I1 is given (and not the actual intensities), this result is true for any intensities that differ by a factor of two. For example, a 56.0 dB sound is twice as intense as a 53.0 dB sound, a 97.0 dB sound is half as intense as a 100 dB sound, and so on.
+
+It should be noted at this point that there is another decibel scale in use, called the sound pressure level, based on the ratio of the pressure amplitude to a reference pressure. This scale is used particularly in applications where sound travels in water. It is beyond the scope of most introductory texts to treat this scale because it is not commonly used for sounds in air, but it is important to note that very different decibel levels may be encountered when sound pressure levels are quoted. For example, ocean noise pollution produced by ships may be as great as 200 dB expressed in the sound pressure level, where the more familiar sound intensity level we use here would be something under 140 dB for the same sound.
+
+Take-Home Investigation: Feeling Sound
+
+Find a CD player and a CD that has rock music. Place the player on a light table, insert the CD into the player, and start playing the CD. Place your hand gently on the table next to the speakers. Increase the volume and note the level when the table just begins to vibrate as the rock music plays. Increase the reading on the volume control until it doubles. What has happened to the vibrations?
+
+Check Your Understanding
+
+Describe how amplitude is related to the loudness of a sound.
+
+Amplitude is directly proportional to the experience of loudness. As amplitude increases, loudness increases.
+
+Check Your Understanding
+
+Identify common sounds at the levels of 10 dB, 50 dB, and 100 dB.
+
+10 dB: Running fingers through your hair.
+
+50 dB: Inside a quiet home with no television or radio.
+
+100 dB: Take-off of a jet plane.
+
+Test Prep for AP Courses
+
+In order to waken a sleeping child, the volume on an alarm clock is tripled. Under this new scenario, how much more energy will be striking the child’s ear drums each second?
+
+twice as much
+
+three times as much
+
+approximately 4.8 times as much
+
+six times as much
+
+nine times as much
+
+(e)
+
+A musician strikes the strings of a guitar such that they vibrate with twice the amplitude.
+
+Explain why this requires an energy input greater than twice the original value.
+
+Explain why the sound leaving the string will not result in a decibel level that is twice as great.
+
+Section Summary
+Intensity is the same for a sound wave as was defined for all waves; it is
+ I=PA,
+where P is the power crossing area A. The SI unit for I is watts per meter squared. The intensity of a sound wave is also related to the pressure amplitude Δp
+I=
+
+(Δp)
+
+2
+
+2
+ρv
+
+w
+
+,
+where ρ is the density of the medium in which the sound wave travels and vw is the speed of sound in the medium.
+
+Intensity is the same for a sound wave as was defined for all waves; it is
+ I=PA,
+where P is the power crossing area A. The SI unit for I is watts per meter squared. The intensity of a sound wave is also related to the pressure amplitude Δp
+I=
+
+(Δp)
+
+2
+
+2
+ρv
+
+w
+
+,
+where ρ is the density of the medium in which the sound wave travels and vw is the speed of sound in the medium.
+Sound intensity level in units of decibels (dB) is
+ βdB=10log10II0,
+where 
+
+I0
+
+=
+
+10
+–12
+
+W/
+
+m2
+
+ is the threshold intensity of hearing.
+
+Sound intensity level in units of decibels (dB) is
+ βdB=10log10II0,
+where 
+
+I0
+
+=
+
+10
+–12
+
+W/
+
+m2
+
+ is the threshold intensity of hearing.
+
+Conceptual Questions
+
+Six members of a synchronized swim team wear earplugs to protect themselves against water pressure at depths, but they can still hear the music and perform the combinations in the water perfectly. One day, they were asked to leave the pool so the dive team could practice a few dives, and they tried to practice on a mat, but seemed to have a lot more difficulty. Why might this be?
+
+A community is concerned about a plan to bring train service to their downtown from the town’s outskirts. The current sound intensity level, even though the rail yard is blocks away, is 70 dB downtown. The mayor assures the public that there will be a difference of only 30 dB in sound in the downtown area. Should the townspeople be concerned? Why?
+
+Problems & Exercises
+
+What is the intensity in watts per meter squared of 85.0-dB sound?
+
+The warning tag on a lawn mower states that it produces noise at a level of 91.0 dB. What is this in watts per meter squared?
+
+A sound wave traveling in 20ºC air has a pressure amplitude of 0.5 Pa. What is the intensity of the wave?
+
+What intensity level does the sound in the preceding problem correspond to?
+
+What sound intensity level in dB is produced by earphones that create an intensity of
+
+ 4.00
+ ×
+ 
+ 10
+ −2
+
+ W/m
+ 2
+
+?
+
+106 dB
+
+Show that an intensity of 10–12W/m2 is the same as 10–16W/cm2.
+
+(a) What is the decibel level of a sound that is twice as intense as a 90.0-dB sound? (b) What is the decibel level of a sound that is one-fifth as intense as a 90.0-dB sound?
+
+(a) 93 dB
+
+(b) 83 dB
+
+(a) What is the intensity of a sound that has a level 7.00 dB lower than a 4.00×10–9W/m2 sound? (b) What is the intensity of a sound that is 3.00 dB higher than a 4.00×10–9W/m2 sound?
+
+(a) How much more intense is a sound that has a level 17.0 dB higher than another? (b) If one sound has a level 23.0 dB less than another, what is the ratio of their intensities?
+
+(a) 50.1
+
+(b) 5.01×10–3
+ or 1200
+
+People with good hearing can perceive sounds as low in level as –8.00 dB at a frequency of 3000 Hz. What is the intensity of this sound in watts per meter squared?
+
+If a large housefly 3.0 m away from you makes a noise of 40.0 dB, what is the noise level of 1000 flies at that distance, assuming interference has a negligible effect?
+
+70.0 dB
+
+Ten cars in a circle at a boom box competition produce a 120-dB sound intensity level at the center of the circle. What is the average sound intensity level produced there by each stereo, assuming interference effects can be neglected?
+
+The amplitude of a sound wave is measured in terms of its maximum gauge pressure. By what factor does the amplitude of a sound wave increase if the sound intensity level goes up by 40.0 dB?
+
+100
+
+If a sound intensity level of 0 dB at 1000 Hz corresponds to a maximum gauge pressure (sound amplitude) of 10–9atm, what is the maximum gauge pressure in a 60-dB sound? What is the maximum gauge pressure in a 120-dB sound?
+
+An 8-hour exposure to a sound intensity level of 90.0 dB may cause hearing damage. What energy in joules falls on a 0.800-cm-diameter eardrum so exposed?
+
+(a) Ear trumpets were never very common, but they did aid people with hearing losses by gathering sound over a large area and concentrating it on the smaller area of the eardrum. What decibel increase does an ear trumpet produce if its sound gathering area is 900 cm2 and the area of the eardrum is 0.500 cm2, but the trumpet only has an efficiency of 5.00% in transmitting the sound to the eardrum? (b) Comment on the usefulness of the decibel increase found in part (a).
+
+Sound is more effectively transmitted into a stethoscope by direct contact than through the air, and it is further intensified by being concentrated on the smaller area of the eardrum. It is reasonable to assume that sound is transmitted into a stethoscope 100 times as effectively compared with transmission though the air. What, then, is the gain in decibels produced by a stethoscope that has a sound gathering area of 15.0 cm2, and concentrates the sound onto two eardrums with a total area of 0.900 cm2 with an efficiency of 40.0%?
+
+28.2 dB
+
+Loudspeakers can produce intense sounds with surprisingly small energy input in spite of their low efficiencies. Calculate the power input needed to produce a 90.0-dB sound intensity level for a 12.0-cm-diameter speaker that has an efficiency of 1.00%. (This value is the sound intensity level right at the speaker.)
+
+the power per unit area carried by a wave
+a unitless quantity telling you the level of the sound relative to a fixed standard
+the ratio of the pressure amplitude to a reference pressure

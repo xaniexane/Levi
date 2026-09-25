@@ -1,0 +1,114 @@
+# m42211
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Motion of an Object in a Viscous Fluid
+
+Motion of an Object in a Viscous Fluid
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate the Reynolds number for an object moving through a fluid.
+
+Explain whether the Reynolds number indicates laminar or turbulent flow.
+
+Describe the conditions under which an object has a terminal speed.
+
+A moving object in a viscous fluid is equivalent to a stationary object in a flowing fluid stream. (For example, when you ride a bicycle at 10 m/s in still air, you feel the air in your face exactly as if you were stationary in a 10-m/s wind.) Flow of the stationary fluid around a moving object may be laminar, turbulent, or a combination of the two. Just as with flow in tubes, it is possible to predict when a moving object creates turbulence. We use another form of the Reynolds number NR′, defined for an object moving in a fluid to be
+
+where L is a characteristic length of the object (a sphere’s diameter, for example), ρ the fluid density,
+
+η its viscosity, and
+
+v the object’s speed in the fluid. If
+
+NR′ is less than about 1, flow around the object can be laminar, particularly if the object has a smooth shape. The transition to turbulent flow occurs for NR′ between 1 and about 10, depending on surface roughness and so on. Depending on the surface, there can be a turbulent wake behind the object with some laminar flow over its surface. For an
+
+NR′ between 10 and
+
+106, the flow may be either laminar or turbulent and may oscillate between the two. For
+
+NR′ greater than about
+
+106, the flow is entirely turbulent, even at the surface of the object. (See .) Laminar flow occurs mostly when the objects in the fluid are small, such as raindrops, pollen, and blood cells in plasma.
+
+Does a Ball Have a Turbulent Wake?
+
+Calculate the Reynolds number NR′ for a ball with a 7.40-cm diameter thrown at 40.0 m/s.
+Strategy
+
+Strategy
+
+We can use NR′=ρvLη to calculate NR′, since all values in it are either given or can be found in tables of density and viscosity.
+Solution
+
+Solution
+
+Substituting values into the equation for NR′ yields
+Discussion
+
+Discussion
+
+This value is sufficiently high to imply a turbulent wake. Most large objects, such as airplanes and sailboats, create significant turbulence as they move. As noted before, the Bernoulli principle gives only qualitatively-correct results in such situations.
+
+One of the consequences of viscosity is a resistance force called viscous drag
+
+FV that is exerted on a moving object. This force typically depends on the object’s speed (in contrast with simple friction). Experiments have shown that for laminar flow (
+
+NR′ less than about one) viscous drag is proportional to speed, whereas for NR′ between about 10 and
+
+106, viscous drag is proportional to speed squared. (This relationship is a strong dependence and is pertinent to bicycle racing, where even a small headwind causes significantly increased drag on the racer. Cyclists take turns being the leader in the pack for this reason.) For
+
+NR′ greater than
+
+106, drag increases dramatically and behaves with greater complexity. For laminar flow around a sphere,
+
+FV is proportional to fluid viscosity
+
+η, the object’s characteristic size
+
+L, and its speed
+
+v. All of which makes sense—the more viscous the fluid and the larger the object, the more drag we expect. Recall Stoke’s law
+
+FS=6πrηv. For the special case of a small sphere of radius
+
+R moving slowly in a fluid of viscosity
+
+η, the drag force
+
+FS is given by
+
+An interesting consequence of the increase in FV with speed is that an object falling through a fluid will not continue to accelerate indefinitely (as it would if we neglect air resistance, for example). Instead, viscous drag increases, slowing acceleration, until a critical speed, called the terminal speed, is reached and the acceleration of the object becomes zero. Once this happens, the object continues to fall at constant speed (the terminal speed). This is the case for particles of sand falling in the ocean, cells falling in a centrifuge, and sky divers falling through the air. shows some of the factors that affect terminal speed. There is a viscous drag on the object that depends on the viscosity of the fluid and the size of the object. But there is also a buoyant force that depends on the density of the object relative to the fluid. Terminal speed will be greatest for low-viscosity fluids and objects with high densities and small sizes. Thus a skydiver falls more slowly with outspread limbs than when they are in a pike position—head first with hands at their side and legs together.
+
+Take-Home Experiment: Don’t Lose Your Marbles
+
+By measuring the terminal speed of a slowly moving sphere in a viscous fluid, one can find the viscosity of that fluid (at that temperature). It can be difficult to find small ball bearings around the house, but a small marble will do. Gather two or three fluids (syrup, motor oil, honey, olive oil, etc.) and a thick, tall clear glass or vase. Drop the marble into the center of the fluid and time its fall (after letting it drop a little to reach its terminal speed). Compare your values for the terminal speed and see if they are inversely proportional to the viscosities as listed in . Does it make a difference if the marble is dropped near the side of the glass?
+
+Knowledge of terminal speed is useful for estimating sedimentation rates of small particles. We know from watching mud settle out of dirty water that sedimentation is usually a slow process. Centrifuges are used to speed sedimentation by creating accelerated frames in which gravitational acceleration is replaced by centripetal acceleration, which can be much greater, increasing the terminal speed.
+
+Section Summary
+
+When an object moves in a fluid, there is a different form of the Reynolds number 
+NR′=ρvLη(object in fluid), which indicates whether flow is laminar or turbulent.
+
+For NR′ less than about one, flow is laminar.
+
+For NR′ greater than
+
+106, flow is entirely turbulent.
+
+Conceptual Questions
+
+What direction will a helium balloon move inside a car that is slowing down—toward the front or back? Explain your answer.
+
+Will identical raindrops fall more rapidly in 5º C air or 25º C air, neglecting any differences in air density? Explain your answer.
+
+If you took two marbles of different sizes, what would you expect to observe about the relative magnitudes of their terminal velocities?
+
+a resistance force exerted on a moving object, with a nontrivial dependence on velocity
+the speed at which the viscous drag of an object falling in a viscous fluid is equal to the other forces acting on the object (such as gravity), so that the acceleration of the object is zero

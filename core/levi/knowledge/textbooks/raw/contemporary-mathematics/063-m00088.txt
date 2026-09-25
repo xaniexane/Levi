@@ -1,0 +1,416 @@
+# m00088
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Tree Diagrams, Tables, and Outcomes
+
+Tree Diagrams, Tables, and Outcomes
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Determine the sample space of single stage experiment.
+
+Use tables to list possible outcomes of a multistage experiment.
+
+Use tree diagrams to list possible outcomes of a multistage experiment.
+
+In the 19th century, an Augustinian friar and scientist named Gregor Mendel used his observations of pea plants to set out his theory of genetic propagation. In his work, he looked at the offspring that resulted from breeding plants with different characteristics together. For applications like this, it is often insufficient to only know in how many ways a process might end; we need to be able to list all of the possibilities. As we’ve seen, the number of possible outcomes can be very large! Thus, it’s important to have a strategy that allows us to systematically list these possibilities to make sure we don’t leave any out. In this section, we’ll look at two of these strategies.
+
+Single Stage Experiments
+
+When we are talking about combinatorics or probability, the word “experiment” has a slightly different meaning than it does in the sciences. Experiments can range from very simple (“flip a coin”) to very complex (“count the number of uranium atoms that undergo nuclear fission in a sample of a given size over the course of an hour”). Experiments have unknown outcomes that generally rely on something random, so that if the experiment is repeated (or replicated) the outcome might be different. No matter what the experiment, though, analysis of the experiment typically begins with identifying its sample space.
+
+The sample space of an experiment is the set of all of the possible outcomes of the experiment, so it’s often expressed as a set (i.e., as a list bound by braces; if the experiment is “randomly select a number between 1 and 4,” the sample space would be written {1,2,3,4}).
+
+Finding the Sample Space of an Experiment
+
+For each of the following experiments, identify the sample space.
+
+Flip a coin (which has 2 faces, typically called “heads” and “tails”) and note which face is up.
+
+Flip a coin 10 times and count the number of heads.
+
+Roll a 6-sided die and note the number that is on top.
+
+Roll two 6-sided dice and note the sum of the numbers on top.
+
+If we use “H” to denote “heads is facing up” and “T” to denote “tails is facing up”, then the sample space is {H, T}.
+
+It’s possible (though unlikely) that there will be no heads flipped; the outcome in that case would be “0.” It’s also possible (more likely, but still quite unlikely) that only one flip will result in heads. Any other whole number is possible, up to the maximum: We’re flipping the coin 10 times, so we can’t get any more than 10 heads. So, the sample space is {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}.
+
+There are 6 numbers on the die: 1, 2, 3, 4, 5, and 6. So, the sample space for a single roll of the die is {1, 2, 3, 4, 5, 6}.
+
+If we roll 2 dice, the smallest possible sum we could get is 1+1=2 and the biggest is 6+6=12. Every other whole number between those two is possible. So, the sample space is {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}.
+
+Multistage Experiments
+
+Some experiments have more complicated sample spaces because they occur in stages. These stages can occur in succession (like drawing cards one at a time) or simultaneously (rolling 2 dice). Sample spaces get more complicated as the complexity of the experiment increases, so it’s important to choose a systematic method for identifying all of the possible outcomes. The first method we’ll discuss is the table.
+
+Using Tables to Find Sample Spaces
+
+Tables are useful for finding the sample space for experiments that meet two criteria: (1) The experiment must have only two stages, and (2) the outcomes of each stage must have no effect on the outcomes of the other. When the stages do not affect each other, we say the stages are independent. Otherwise, the stages are dependent and so we can’t use tables; we’ll look at a method for analyzing dependent stages soon.
+
+Determining Independence
+
+Decide whether the two stages in these experiments are independent or dependent.
+
+You flip a coin and note the result, and then flip the coin again and note the result.
+
+You draw 2 cards from a standard deck (52 cards), one at a time.
+
+No matter what happens on the first flip, the second flip has the same sample space: {H, T} (You’ll sometimes hear the phrase “The coin has no memory”). So, these stages are independent.
+
+Let’s say that the first card you draw is A♠. The sample space for the second draw consists of all the cards except A♠ (since that card is no longer in the deck, you can’t draw it again). If instead that first card was 2♡, the sample space for the second draw is different: it’s every card except 2♡. Since the sample space for the second card changes based on the result of the first draw, these stages are dependent.
+
+If you have a two-stage experiment with independent stages, a table is the most straightforward way to identify the sample space. To build a table, you list the outcomes of one stage of the experiment along the top of the table and the outcomes of the other stage down the side. The cells in the interior of the table are then filled using the outcomes associated with each cell’s row and column. Let’s look at an example.
+
+Using Tables to Identify Sample Spaces
+
+Identify the sample spaces of these experiments using tables.
+
+You roll two dice: one 4-sided and one 6-sided.
+
+You’re in an ice-cream shop, and you’re going to get a single scoop of ice cream with a topping. The flavors of ice cream you’re considering are vanilla, chocolate, and rocky road; the toppings are fudge, whipped cream, and sprinkles.
+
+The pea plants you’re breeding have two possible pod colors: green and yellow. These colors are decided by a particular gene, which comes in two types: “G” for green, and “g” for yellow (In genetics, capital letters usually denote dominant genes, while lower-case letters denote recessive genes). Each plant has two genes. If you breed a Gg pea plant with a gg plant, the offspring plant will get one gene from each parent. What are the possible outcomes?
+Step 1: Make the outline of a table, with the results of the 4-sided roll on one side and the results of the 6-sided roll on the other. In practice, it doesn’t matter which you choose; for this example, we’ll put the 4-sided results on top (labeling the columns of the chart) and the 6-sided results on the side (labeling the rows of the chart) as shown in the following table:
+
+ 4-Sided Roll
+
+ 1
+ 2
+ 3
+ 4
+
+ 6-Sided Roll
+ 1
+
+ 2
+
+ 3
+
+ 4
+
+ 5
+
+ 6
+
+ Step 2: Fill in the results in each cell of the table below. Use the notation of an ordered pair, with the row label first.
+
+ 4-Sided Roll
+
+ 1
+ 2
+ 3
+ 4
+
+ 6-Sided Roll
+ 1
+ (1,1)
+ (1,2)
+ (1,3)
+ (1,4)
+
+ 2
+ (2,1)
+ (2,2)
+ (2,3)
+ (2,4)
+
+ 3
+ (3,1)
+ (3,2)
+ (3,3)
+ (3,4)
+
+ 4
+ (4,1)
+ (4,2)
+ (4,3)
+ (4,4)
+
+ 5
+ (5,1)
+ (5,2)
+ (5,3)
+ (5,4)
+
+ 6
+ (6,1)
+ (6,2)
+ (6,3)
+ (6,4)
+
+ So, for example, (3,2) represents the outcome where the 6-sided roll results in a 3, and the 4-sided roll gives us a 2. Thus, the sample space of the experiment is {(1,1), (1,2), (1,3), (1,4), (2,1), (2,2), (2,3), (2,4), (3,1), (3,2), (3,3), (3,4), (4,1), (4,2), (4,3), (4,4), (5,1), (5,2), (5,3), (5,4), (6,1), (6,2), (6,3), (6,4)}.
+
+4-Sided Roll
+1
+2
+3
+Step 2: Fill in the results in each cell of the table below. Use the notation of an ordered pair, with the row label first.
+
+4-Sided Roll
+1
+2
+3
+1
+(1,1)
+(1,2)
+(1,3)
+2
+(2,1)
+(2,2)
+(2,3)
+3
+(3,1)
+(3,2)
+(3,3)
+4
+(4,1)
+(4,2)
+(4,3)
+5
+(5,1)
+(5,2)
+(5,3)
+6
+(6,1)
+(6,2)
+(6,3)
+(6,4)
+So, for example, (3,2) represents the outcome where the 6-sided roll results in a 3, and the 4-sided roll gives us a 2. Thus, the sample space of the experiment is {(1,1), (1,2), (1,3), (1,4), (2,1), (2,2), (2,3), (2,4), (3,1), (3,2), (3,3), (3,4), (4,1), (4,2), (4,3), (4,4), (5,1), (5,2), (5,3), (5,4), (6,1), (6,2), (6,3), (6,4)}.
+Step 1: Let’s put the flavors on the rows and the toppings on the columns of the following table:
+
+ Toppings
+
+ fudge
+ whipped cream
+ sprinkles
+
+ Flavors
+ vanilla
+
+ chocolate
+
+ rocky road
+
+ Step 2: We can fill in the cells of the table below with the resulting combinations.
+
+ Toppings
+
+ fudge
+ whipped cream
+ sprinkles
+
+ Flavors
+ vanilla
+ vanilla with fudge 
+ vanilla with whipped cream
+ vanilla with sprinkles
+
+ chocolate
+ chocolate with fudge
+ chocolate with whipped cream
+ chocolate with sprinkles
+
+ rocky road
+ rocky road with fudge
+ rocky road with whipped cream
+ rocky road with sprinkles
+
+ So, the sample space is {vanilla with fudge, vanilla with whipped cream, vanilla with sprinkles, chocolate with fudge, chocolate with whipped cream, chocolate with sprinkles, rocky road with fudge, rocky road with whipped cream, rocky road with sprinkles}.
+
+Toppings
+fudge
+whipped cream
+Step 2: We can fill in the cells of the table below with the resulting combinations.
+
+ Toppings
+
+ fudge
+ whipped cream
+ sprinkles
+
+ Flavors
+ vanilla
+ vanilla with fudge 
+ vanilla with whipped cream
+ vanilla with sprinkles
+
+ chocolate
+ chocolate with fudge
+ chocolate with whipped cream
+ chocolate with sprinkles
+
+ rocky road
+ rocky road with fudge
+ rocky road with whipped cream
+ rocky road with sprinkles
+
+Toppings
+fudge
+whipped cream
+vanilla
+vanilla with fudge
+vanilla with whipped cream
+chocolate
+chocolate with fudge
+chocolate with whipped cream
+rocky road
+rocky road with fudge
+rocky road with whipped cream
+rocky road with sprinkles
+So, the sample space is {vanilla with fudge, vanilla with whipped cream, vanilla with sprinkles, chocolate with fudge, chocolate with whipped cream, chocolate with sprinkles, rocky road with fudge, rocky road with whipped cream, rocky road with sprinkles}.
+Step 1: We’ll put the parents’ genes (P1 and P2) as labels on the rows and columns of the following table:
+
+ P2
+
+ g
+ g
+
+ P1
+ G
+
+ g
+
+ Step 2: We’ll fill in the offspring’s gene composition, listing parent 1’s gene first in the table below.
+
+ P2
+
+ g
+ g
+
+ P1
+ G
+ Gg
+ Gg
+
+ g
+ gg
+ gg
+
+ Thus, the sample space is {Gg, Gg, gg, gg}. (Diagrams like this, which allow us to identify the genotypes of offspring, are called Punnett squares in honor of Reginald Punnett (1875–1967), who first used them in the context of genetics.)
+
+P2
+g
+Step 2: We’ll fill in the offspring’s gene composition, listing parent 1’s gene first in the table below.
+
+ P2
+
+ g
+ g
+
+ P1
+ G
+ Gg
+ Gg
+
+ g
+ gg
+ gg
+
+P2
+g
+G
+Gg
+g
+gg
+gg
+Thus, the sample space is {Gg, Gg, gg, gg}. (Diagrams like this, which allow us to identify the genotypes of offspring, are called Punnett squares in honor of Reginald Punnett (1875–1967), who first used them in the context of genetics.)
+
+Using Tree Diagrams to Identify Sample Spaces
+
+In experiments where there are more than two stages, or where the stages are dependent, a tree diagram is a helpful tool for systematically identifying the sample space. Tree diagrams are built by first drawing a single point (or node), then from that node we draw one branch (a short line segment) for each outcome of the first stage. Each branch gets its own node at the other end (which we typically label with the corresponding outcome for that branch); from each of these, we draw another branch for each outcome of the second stage, assuming that the outcome of the first stage matches the branch we were on. If there are other stages, we can continue from there by continuing to add branches and nodes. This sounds really complicated, but it’s easier to understand through an example.
+
+Using a Tree Diagram to Identify a Sample Space
+
+Use a tree diagram to find the sample spaces of each of the following experiments:
+
+You flip a coin 3 times, noting the outcome of each flip in order.
+
+You flip a coin. If the result is heads, you roll a 4-sided die. If it’s tails, you roll a 6-sided die.
+
+You are planning to go on a hike with a group of friends. There are 3 trails to consider: Abel Trail, Borel Trail, and Condorcet Trail. One of your friends, Jess, requires a wheelchair; if she joins you, the group couldn’t handle the rocky Condorcet Trail.
+Step 1: Let’s start by placing our first node ().
+
+ Step 2: We’ll add two branches, one for each outcome of the first coin flip, and label them ().
+
+ Step 3: We’re ready for stage two of the experiment: another coin flip. At each node, we
+ add in branches that represent those outcomes ().
+
+ Finally, we can add another set of branches for the outcomes of the third stage ().
+
+ (These final nodes are called leaves.)
+ Step 4: We can write down the outcomes in the sample space by tracing the path out to each leaf, writing down the outcome at each node we pass through. For example, this leaf ():
+
+ is reached via this path ():
+
+ Step 5: We’ll label that leaf as "HTH" (), since the path passes through nodes labeled H, T, and H on its way out to our leaf.
+
+ Step 6: We can label the remaining leaves using the same method ().
+
+ The sample space is the labels on the leaves: {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT}.
+Step 2: We’ll add two branches, one for each outcome of the first coin flip, and label them ().
+Step 3: We’re ready for stage two of the experiment: another coin flip. At each node, we
+ add in branches that represent those outcomes ().
+
+Finally, we can add another set of branches for the outcomes of the third stage ().
+
+(These final nodes are called leaves.)
+Step 4: We can write down the outcomes in the sample space by tracing the path out to each leaf, writing down the outcome at each node we pass through. For example, this leaf ():
+
+is reached via this path ():
+Step 5: We’ll label that leaf as "HTH" (), since the path passes through nodes labeled H, T, and H on its way out to our leaf.
+Step 6: We can label the remaining leaves using the same method ().
+
+The sample space is the labels on the leaves: {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT}.
+Step 1: We’ll start with our initial node ().
+
+ Step 2: We’ll add in branches for the outcomes of the first stage (), which is the coin flip.
+
+ Step 3: The second stage of the experiment depends on the outcome of the first stage.
+Step 2: We’ll add in branches for the outcomes of the first stage (), which is the coin flip.
+Step 3: The second stage of the experiment depends on the outcome of the first stage.
+
+If the outcome of the first stage was H, then we roll a 4-sided die. So, only on the node for H, we’ll add in the outcomes of a 4-sided die roll ().
+
+If the outcome of the first stage was T, then we roll a 6-sided die. So, we’ll add those branches to the node for T ().
+
+ Step 4: We can label the leaves to get the sample space ().
+
+ The sample space is: {H1, H2, H3, H4, T1, T2, T3, T4, T5, T6}.
+Step 4: We can label the leaves to get the sample space ().
+
+The sample space is: {H1, H2, H3, H4, T1, T2, T3, T4, T5, T6}.
+Step 1: Let’s label the trails A, B, and C for ease of labeling. Even though the trails are listed first in the exercise, we can’t use the trail choice as our first stage: the trails available to us depend on whether Jess is able to join the trip. So, the first stage is whether Jess joins us (J) or not (N) ().
+
+ Step 2: We list the appropriate trails on each branch ().
+
+ So, the sample space is {JA, JB, NA, NB, NC}.
+Step 2: We list the appropriate trails on each branch ().
+
+So, the sample space is {JA, JB, NA, NB, NC}.
+
+Check Your Understanding
+
+Key Terms
+
+experiment
+
+replication
+
+sample space
+
+independent/dependent
+
+Key Concepts
+
+We identify the sample space of an experiment by identifying all of its possible outcomes.
+
+Tables can help us find a sample space by keeping the possible outcomes organized.
+
+Tree diagrams provide a visualization of the sample space of an experiment that involves multiple stages.

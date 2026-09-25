@@ -1,0 +1,551 @@
+# m79641
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+The Standard Normal Distribution
+
+The Standard Normal Distribution
+
+The standardized normal distribution is a type of normal distribution, with a mean of 0 and standard deviation of 1. It represents a distribution of standardized scores, called z-scores, as opposed to raw scores (the actual data values). A z-score indicates the number of standard deviation a score falls above or below the mean. Z-scores allow for comparison of scores, occurring in different data sets, with different means and standard deviations. It would not make sense to compare apples and oranges. Likewise, it does not make sense to compare scores from two different samples that have different means and standard deviations. Z-scores can be looked up in a Z-Table of Standard Normal Distribution, in order to find the area under the standard normal curve, between a score and the mean, between two scores, or above or below a score. The standard normal distribution allows us to interpret standardized scores and provides us with one table that we may use, in order to compute areas under the normal curve, for an infinite number of data sets, no matter what the mean or standard deviation.
+
+A z-score is calculated as 
+
+ z=
+ 
+ x−μ
+ 
+ σ
+
+. The score itself can be found by using algebra and solving for x. Multiplying both sides of the equation by σ gives: 
+
+ (
+ z
+ )(
+ σ
+ )=x−μ
+
+. Adding μ to both sides of the equation gives 
+
+ μ+(
+ z
+ )(
+ σ
+ )=x
+
+.
+
+Suppose we have a data set with a mean of 5 and standard deviation of 2. We want to determine the number of standard deviations the score of 11 falls above the mean. We can find this answer (or z-score) by writing
+
+or
+
+we can solve for z.
+
+We have determined that the score of 11 falls 3 standard deviations above the mean of 5.
+
+With a standard normal distribution, we indicate the distribution by writing Z ~ N(0, 1) which shows the normal distribution has a mean of 0 and standard deviation of 1. This notation simply indicates that a standard normal distribution is being used.
+Z-Scores
+
+As described previously, if X is a normally distributed random variable and X ~ N(μ, σ), then the z-score is
+
+The z-score tells you how many standard deviations the value x is above, to the right of, or below, to the left of, the mean, μ. Values of x that are larger than the mean have positive z-scores, and values of x that are smaller than the mean have negative z-scores. If x equals the mean, then x has a z-score of zero.
+
+When determining the z-score for an x-value, for a normal distribution, with a given mean and standard deviation, the notation above for a normal distribution, will be given.
+
+Suppose X ~ N(5, 6). This equation says that X is a normally distributed random variable with mean μ = 5 and standard deviation σ = 6. Suppose x = 17. Then,
+
+This means that x = 17 is two standard deviations (2σ) above, or to the right, of the mean μ = 5.
+
+Notice that 5 + (2)(6) = 17. The pattern is μ + zσ = x.
+
+Now suppose x = 1. Then, z = 
+
+ x–μ
+ 
+ σ
+
+ = 
+
+ 1–5
+ 
+ 6
+
+ = –0.67, rounded to two decimal places.
+This means that x = 1 is 0.67 standard deviations (–0.67σ) below or to the left of the mean μ = 5. This z-score shows that x = 1 is less than 1 standard deviation below the mean of 5. Therefore, the score doesn't fall very far below the mean.
+
+Summarizing, when z is positive, x is above or to the right of μ, and when z is negative, x is to the left of or below μ. Or, when z is positive, x is greater than μ, and when z is negative, x is less than μ. The absolute value of z indicates how far the score is from the mean, in either direction.
+
+Try It
+
+What is the z-score of x, when x = 1 and X ~ N(12, 3)?
+z=
+ 
+ 1–12
+ 
+ 3
+ 
+ ≈–3.67
+
+Some doctors believe that a person can lose five pounds, on average, in a month by reducing his or her fat intake and by consistently exercising. Suppose weight loss has a normal distribution. Let X = the amount of weight lost, in pounds, by a person in a month. Use a standard deviation of two pounds. X ~ N(5, 2). Fill in the blanks.
+
+a. Suppose a person lost 10 pounds in a month. The z-score when x = 10 pounds is z = 2.5 (verify). This z-score tells you that x = 10 is ________ standard deviations to the ________ (right or left) of the mean _____ (What is the mean?).
+
+a. This z-score tells you that x = 10 is 2.5 standard deviations to the right of the mean five.
+
+b. Suppose a person gained three pounds, a negative weight loss. Then z = __________. This z-score tells you that x = –3 is ________ standard deviations to the __________ (right or left) of the mean.
+
+b. z = –4. This z-score tells you that x = –3 is four standard deviations to the left of the mean.
+
+c. Suppose the random variables X and Y have the following normal distributions: X ~ N(5, 6) and Y ~ N(2, 1). If x = 17, then z = 2. This was previously shown. If y = 4, what is z?
+
+c. z = 
+
+ y−μ
+ 
+ σ
+
+ = 
+
+ 4−2
+ 
+ 1
+
+ = 2, where µ = 2 and σ = 1.
+
+The z-score for y = 4 is z = 2. This means that four is z = 2 standard deviations to the right of the mean. Therefore, x = 17 and y = 4 are both two of their own standard deviations to the right of their respective means.
+The z-score allows us to compare data that are scaled differently. To better understand the concept, suppose
+X ~ N(5, 6) represents weight gains for one group of people who are trying to gain weight in a six-week period and Y ~ N(2, 1) measures the same weight gain for a second group of people. A negative weight gain would be a weight loss. Since x = 17 and y = 4 are each two standard deviations to the right of their means, they represent the same, standardized weight gain relative to their means.
+
+Try It
+
+Fill in the blanks.
+
+Jerome averages 16 points a game with a standard deviation of four points. X ~ N(16, 4). Suppose Jerome scores 10 points in a game. The z-score when x = 10 is –1.5. This score tells you that x = 10 is _____ standard deviations to the ______ (right or left) of the mean______ (What is the mean?).
+
+1.5, left, 16
+The Empirical Rule If X is a random variable and has a normal distribution with mean µ and standard deviation σ, then the Empirical Rule states the following:
+
+The Empirical Rule
+
+About 68 percent of the x values lie between –1σ and +1σ of the mean µ (within one standard deviation of the mean).
+
+About 95 percent of the x values lie between –2σ and +2σ of the mean µ (within two standard deviations of the mean).
+
+About 99.7 percent of the x values lie between –3σ and +3σ of the mean µ (within three standard deviations of the mean). Notice that almost all the x values lie within three standard deviations of the mean.
+
+The z-scores for +1σ and –1σ are +1 and –1, respectively.
+
+The z-scores for +2σ and –2σ are +2 and –2, respectively.
+
+The z-scores for +3σ and –3σ are +3 and –3, respectively.
+
+So, in other words, this is that about 68 percent of the values lie between z-scores of –1 and 1, about 95% of the values lie between z-scores of –2 and 2, and about 99.7 percent of the values lie between z-scores of -3 and 3. These facts can be checked, by looking up the mean to z area in a z-table for each positive z-score and multiplying by 2.
+
+The empirical rule is also known as the 68–95–99.7 rule.
+
+The mean height of 15-to 18-year-old males from Chile from 2009 to 2010 was 170 cm with a standard deviation of 6.28 cm. Male heights are known to follow a normal distribution. Let X = the height of a 15-to 18-year-old male from Chile in 20092010. Then X ~ N(170, 6.28).
+
+a. Suppose a 15-to 18-year-old male from Chile was 168 cm tall in 20092010. The z-score when x = 168 cm is z = _______. This z-score tells you that x = 168 is ________ standard deviations to the ________ (right or left) of the mean _____ (What is the mean?).
+
+a. –0.32, 0.32, left, 170
+
+b. Suppose that the height of a 15-to 18-year-old male from Chile in 20092010 has a z-score of z = 1.27. What is the male’s height? The z-score (z = 1.27) tells you that the male’s height is ________ standard deviations to the __________ (right or left) of the mean.
+
+b. 177.98 cm, 1.27, right
+
+Try It
+
+Use the information in to answer the following questions:
+
+Suppose a 15-to 18-year-old male from Chile was 176 cm tall from 20092010. The z-score when x = 176 cm is z = _______. This z-score tells you that x = 176 cm is ________ standard deviations to the ________ (right or left) of the mean _____ (What is the mean?).
+
+Suppose that the height of a 15-to 18-year-old male from Chile in 20092010 has a z-score of z = –2. What is the male’s height? The z-score (z = –2) tells you that the male’s height is ________ standard deviations to the __________ (right or left) of the mean.
+
+Try It Solutions
+
+Solve the equation z = 
+
+ x−μ
+ 
+ σ
+
+ for x. x = μ + (z)(σ)
+z = 
+
+ 176−170
+
+ 6.28
+
+ ≈ 0.96, This z-score tells you that x = 176 cm is 0.96 standard deviations to the right of the mean 170 cm.
+X = 157.44 cm, The z-score(z = –2) tells you that the male’s height is two standard deviations to the left of the mean.
+
+From 1984 to 1985, the mean height of 15-to 18-year-old males from Chile was 172.36 cm, and the standard deviation was 6.34 cm. Let Y = the height of 15-to 18-year-old males from 19841985, and y = the height of one male from this group. Then Y ~ N(172.36, 6.34).
+
+The mean height of 15-to 18-year-old males from Chile in 20092010 was 170 cm with a standard deviation of 6.28 cm. Male heights are known to follow a normal distribution. Let X = the height of a 15-to 18-year-old male from Chile in 20092010, and x = the height of one male from this group. Then X ~ N(170, 6.28).
+
+Find the z-scores for x = 160.58 cm and y = 162.85 cm. Interpret each z-score. What can you say about x = 160.58 cm and y = 162.85 cm as they compare to their respective means and standard deviations?
+
+The z-score for x = 160.58 cm is z = –1.5.
+The z-score for y = 162.85 cm is z = –1.5.
+Both x = 160.58 and y = 162.85 deviate the same number of standard deviations from their respective means and in the same direction.
+
+Try It
+
+In 2012, 1,664,479 students took the SAT exam. The distribution of scores in the verbal section of the SAT had a mean µ = 496 and a standard deviation σ = 114. Let X = a SAT exam verbal section score in 2012. Then, X ~ N(496, 114).
+
+Find the z-scores for x1 = 325 and x2 = 366.21. Interpret each z-score. What can you say about x1 = 325 and x2 = 366.21, as they compare to their respective means and standard deviations?
+
+The z-score for x1 = 325 is z1 = –1.14.
+
+The z-score for x2 = 366.21 is z2 = –1.14.
+
+Student 2 scored closer to the mean than Student 1 and, since they both had negative z-scores, Student 2 had the better score.
+
+Suppose x has a normal distribution with mean 50 and standard deviation 6.
+
+About 68 percent of the x values lie within one standard deviation of the mean. Therefore, about 68 percent of the x values lie between –1σ = (–1)(6) = –6 and 1σ = (1)(6) = 6 of the mean 50. The values 50 – 6 = 44 and 50 + 6 = 56 are within one standard deviation from the mean 50. The z-scores are –1 and +1 for 44 and 56, respectively.
+
+About 95 percent of the x values lie within two standard deviations of the mean. Therefore, about 95 percent of the x values lie between –2σ = (–2)(6) = –12 and 2σ = (2)(6) = 12. The values 50 – 12 = 38 and 50 + 12 = 62 are within two standard deviations from the mean 50. The z-scores are –2 and +2 for 38 and 62, respectively.
+
+About 99.7 percent of the x values lie within three standard deviations of the mean. Therefore, about 95 percent of the x values lie between –3σ = (–3)(6) = –18 and 3σ = (3)(6) = 18 of the mean 50. The values 50 – 18 = 32 and 50 + 18 = 68 are within three standard deviations from the mean 50. The z-scores are –3 and +3 for 32 and 68, respectively.
+
+Try It
+
+Suppose X has a normal distribution with mean 25 and standard deviation five. Between what values of x do 68 percent of the values lie?
+
+between 20 and 30.
+
+From 19841985, the mean height of 15-to 18-year-old males from Chile was 172.36 cm, and the standard deviation was 6.34 cm. Let Y = the height of 15-to 18-year-old males in 19841985. Then Y ~ N(172.36, 6.34).
+About 68 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+About 95 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________ respectively.
+About 99.7 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+
+About 68 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+
+About 95 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________ respectively.
+
+About 99.7 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+
+About 68 percent of the values lie between 166.02 cm and 178.7 cm. The z-scores are –1 and 1.
+
+About 95 percent of the values lie between 159.68 cm and 185.04 cm. The z-scores are –2 and 2.
+
+About 99.7 percent of the values lie between 153.34 cm and 191.38 cm. The z-scores are –3 and 3.
+
+Try It
+
+The scores on a college entrance exam have an approximate normal distribution with mean, µ = 52 points and a standard deviation, σ = 11 points.
+
+About 68 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+
+About 95 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+
+About 99.7 percent of the y values lie between what two values? These values are ________________. The z-scores are ________________, respectively.
+
+About 68% of the values lie between the values 41 and 63. The z-scores are –1 and 1, respectively.
+
+About 95% of the values lie between the values 30 and 74. The z-scores are –2 and 2, respectively.
+
+About 99.7% of the values lie between the values 19 and 85. The z-scores are –3 and 3, respectively.
+
+References
+
+CollegeBoard. (2012). 2012 College-bound seniors: Total group profile report. Retrieved from http://media.collegeboard.com/digitalServices/pdf/research/TotalGroup-2012.pdf
+
+Joyce, C. A., Janssen, S., & Liu, M. L. (2010). The world almanac and book of facts, 2010. New York, NY: World Almanac Books.
+
+London School of Hygiene and Tropical Medicine. (2009). Calculation of z-scores. Retrieved from http://conflict.lshtm.ac.uk/page_125.htm
+
+National Center for Education Statistics. (2009). ACT score averages and standard deviations, by sex and race/ethnicity, and percentage of ACT test takers, by selected composite score ranges and planned fields of study: Selected years, 1995 through 2009. Retrieved from http://nces.ed.gov/programs/digest/d09/tables/dt09_147.asp
+
+NBA.com. (2013). NBA Media Ventures. Retrieved from http://www.nba.com
+
+StatCrunch. (2010). Blood pressure of males and females. Retrieved from http://www.statcrunch.com/5.0/viewreport.php?reportid=11960
+The Mercury News. (n.d.). Retrieved from http://www.mercurynews.com/
+
+Wikipedia. (2013). List of stadiums by capacity - Wikipedia. Retrieved from https://en.wikipedia.org/wiki/List_of_stadiums_by_capacity
+
+Chapter Review
+
+A z-score is a standardized value. Its distribution is the standard normal, Z ~ N(0, 1). The mean of the z-scores is zero and the standard deviation is one. If z is the z-score for a value x from the normal distribution N(µ, σ), then z tells you how many standard deviations x is abovegreater thanor belowless thanµ.
+
+Formula Review
+Z ~ N(0, 1)
+z = a standardized value (z-score)
+
+mean = 0, standard deviation = 1
+
+To find the kth percentile of X when the z-score is known,k = μ + (z)σ
+z-score: z = 
+
+ x – μ
+ 
+ σ
+Z = the random variable for z-scores
+
+A bottle of water contains 12.05 fluid ounces with a standard deviation of 0.01 ounces. Define the random variable X in words. X = ____________.
+
+ounces of water in a bottle
+
+A normal distribution has a mean of 61 and a standard deviation of 15. What is the median?
+X ~ N(1, 2)
+σ = _______
+
+2
+
+A company manufactures rubber balls. The mean diameter of a ball is 12 cm with a standard deviation of 0.2 cm. Define the random variable X in words. X = ______________.
+X ~ N(–4, 1)
+
+What is the median?
+
+–4
+X ~ N(3, 5)
+σ = _______
+X ~ N(–2, 1)
+μ = _______
+
+–2
+
+What does a z-score measure?
+
+What does standardizing a normal distribution do to the mean?
+
+The mean becomes zero.
+
+Is X ~ N(0, 1) a standardized normal distribution? Why or why not?
+
+What is the z-score of x = 12, if it is two standard deviations to the right of the mean?
+z = 2
+
+What is the z-score of x = 9, if it is 1.5 standard deviations to the left of the mean?
+
+What is the z-score of x = –2, if it is 2.78 standard deviations to the right of the mean?
+z = 2.78
+
+What is the z-score of x = 7, if it is 0.133 standard deviations to the left of the mean?
+
+Suppose X ~ N(2, 6). What value of x has a z-score of three?
+x = 20
+
+Suppose X ~ N(8, 1). What value of x has a z-score of –2.25?
+
+Suppose X ~ N(9, 5). What value of x has a z-score of –0.5?
+x = 6.5
+
+Suppose X ~ N(2, 3). What value of x has a z-score of –0.67?
+
+Suppose X ~ N(4, 2). What value of x is 1.5 standard deviations to the left of the mean?
+x = 1
+
+Suppose X ~ N(4, 2). What value of x is two standard deviations to the right of the mean?
+
+Suppose X ~ N(8, 9). What value of x is 0.67 standard deviations to the left of the mean?
+x = 1.97
+
+Suppose X ~ N(–1, 2). What is the z-score of x = 2?
+
+Suppose X ~ N(12, 6). What is the z-score of x = 2?
+z = –1.67
+
+Suppose X ~ N(9, 3). What is the z-score of x = 9?
+
+Suppose a normal distribution has a mean of six and a standard deviation of 1.5. What is the z-score of x = 5.5?
+z ≈ –0.33
+
+In a normal distribution, x = 5 and z = –1.25. This tells you that x = 5 is ____ standard deviations to the ____ (right or left) of the mean.
+
+In a normal distribution, x = 3 and z = 0.67. This tells you that x = 3 is ____ standard deviations to the ____ (right or left) of the mean.
+
+0.67, right
+
+In a normal distribution, x = –2 and z = 6. This tells you that x = –2 is ____ standard deviations to the ____ (right or left) of the mean.
+
+In a normal distribution, x = –5 and z = –3.14. This tells you that x = –5 is ____ standard deviations to the ____ (right or left) of the mean.
+
+3.14, left
+
+In a normal distribution, x = 6 and z = –1.7. This tells you that x = 6 is ____ standard deviations to the ____ (right or left) of the mean.
+
+About what percent of x values from a normal distribution lie within one standard deviation, left and right, of the mean of that distribution?
+
+about 68 percent
+
+About what percent of the x values from a normal distribution lie within two standard deviations, left and right, of the mean of that distribution?
+
+About what percent of x values lie between the second and third standard deviations, both sides?
+
+about 4 percent
+
+Suppose X ~ N(15, 3). Between what x values does 68.27 percent of the data lie? The range of x values is centered at the mean of the distribution (i.e., 15).
+
+Suppose X ~ N(–3, 1). Between what x values does 95.45 percent of the data lie? The range of x values is centered at the mean of the distribution (i.e., –3).
+
+between –5 and –1
+
+Suppose X ~ N(–3, 1). Between what x values does 34.14 percent of the data lie?
+
+About what percent of x values lie between the mean and three standard deviations?
+
+about 50 percent
+
+About what percent of x values lie between the mean and one standard deviation?
+
+About what percent of x values lie between the first and second standard deviations from the mean, both sides?
+
+about 27 percent
+
+About what percent of x values lie between the first and third standard deviations, both sides?
+Use the following information to answer the next two exercises: The life of Sunshine CD players is normally distributed with mean of 4.1 years and a standard deviation of 1.3 years. A CD player is guaranteed for three years. We are interested in the length of time a CD player lasts.
+
+Define the random variable X in words. X = _______________.
+
+The lifetime of a Sunshine CD player measured in years
+X ~ _____(_____, _____)
+
+Homework
+Use the following information to answer the next two exercises: The patient recovery time from a particular surgical procedure is normally distributed with a mean of 5.3 days and a standard deviation of 2.1 days.
+
+What is the median recovery time?
+
+2.7
+
+5.3
+
+7.4
+
+2.1
+
+What is the z-score for a patient who takes 10 days to recover?
+
+1.5
+
+0.2
+
+2.2
+
+7.3
+
+c
+
+The length of time it takes to find a parking space at 9 a.m. follows a normal distribution with a mean of five minutes and a standard deviation of two minutes. If the mean is significantly greater than the standard deviation, which of the following statements is true?
+
+The data cannot follow the uniform distribution.
+
+The data cannot follow the exponential distribution.
+
+The data cannot follow the normal distribution.
+
+I only
+
+II only
+
+III only
+
+I, II, and III
+
+The heights of the 430 basketball players were listed on team rosters at the start of the 2005–2006 season. The heights of basketball players have an approximate normal distribution with a mean, µ = 79 inches, and a standard deviation, σ = 3.89 inches. For each of the following heights, calculate the z-score and interpret it using complete sentences:
+
+77 inches
+
+85 inches
+
+If a player reported his height had a z-score of 3.5, would you believe him? Explain your answer.
+
+Use the z-score formula. z = –0.5141. The height of 77 inches is 0.5141 standard deviations below the mean. An NBA player whose height is 77 inches is shorter than average.
+
+Use the z-score formula. z = 1.5424. The height 85 inches is 1.5424 standard deviations above the mean. An NBA player whose height is 85 inches is taller than average.
+
+Height = 79 + 3.5(3.89) = 90.67 inches, which is over 7.7 feet tall. There are very few NBA players this tall; so, the answer is no, not likely.
+
+The systolic blood pressure, given in millimeters, of males has an approximately normal distribution with mean µ = 125 and standard deviation σ = 14. Systolic blood pressure for males follows a normal distribution.
+
+Calculate the z-scores for the male systolic blood pressures 100 and 150 millimeters.
+
+If a male friend of yours said he thought his systolic blood pressure was 2.5 standard deviations below the mean, and that he believed his blood pressure was between 100 and 150 millimeters, what would you say to him?
+
+Kyle’s doctor told him that the z-score for his systolic blood pressure is 1.75. Which of the following is the best interpretation of this standardized score? The systolic blood pressure, given in millimeters, of males has an approximately normal distribution with mean µ = 125 and standard deviation σ = 14. If X = a systolic blood pressure score, then X ~ N (125, 14).
+
+Which answer(s) is/are correct?
+
+Kyle’s systolic blood pressure is 175.
+Kyle’s systolic blood pressure is 1.75 times the average blood pressure of men his age.
+Kyle’s systolic blood pressure is 1.75 above the average systolic blood pressure of men his age.
+Kyles’s systolic blood pressure is 1.75 standard deviations above the average systolic blood pressure for men.
+
+Kyle’s systolic blood pressure is 175.
+
+Kyle’s systolic blood pressure is 1.75 times the average blood pressure of men his age.
+
+Kyle’s systolic blood pressure is 1.75 above the average systolic blood pressure of men his age.
+
+Kyles’s systolic blood pressure is 1.75 standard deviations above the average systolic blood pressure for men.
+
+Calculate Kyle’s blood pressure.
+
+iv
+
+Kyle’s blood pressure is equal to 125 + (1.75)(14) = 149.5.
+
+Height and weight are two measurements used to track a child’s development. The World Health Organization measures child development by comparing the weights of children who are the same height and same gender. In 2009, weights for all 80 cm girls in the reference population had a mean µ = 10.2 kg and standard deviation σ = 0.8 kg. Weights are normally distributed. X ~ N(10.2, 0.8). Calculate the z-scores that correspond to the following weights and interpret them:
+
+11 kg
+7.9 kg
+12.2 kg
+
+11 kg
+
+7.9 kg
+
+12.2 kg
+
+In 2005, 1,475,623 students heading to college took the SAT exam. The distribution of scores in the math section of the SAT follows a normal distribution with mean µ = 520 and standard deviation σ = 115.
+
+Calculate the z-score for an SAT score of 720. Interpret it using a complete sentence.
+
+What math SAT score is 1.5 standard deviations above the mean? What can you say about this SAT score?
+
+For 2012, the SAT math test had a mean of 514 and standard deviation 117. The ACT math test is an alternative to the SAT math test, and is approximately normally distributed with mean 21 and standard deviation 5.3. If one person took the SAT math test and scored 700 and a second person took the ACT math test and scored 30, who did better with respect to the test that each person took?
+
+Let X = an SAT math score and Y = an ACT math score.
+X = 720 
+
+ 720 – 520
+
+ 15
+
+ = 1.74 The exam score of 720 is 1.74 standard deviations above the mean of 520.
+z = 1.5 The math SAT score is 520 + 1.5(115) ≈ 692.5. The exam score of 692.5 is 1.5 standard deviations above the mean of 520.
+X – μ
+ 
+ σ
+
+ = 
+
+ 700 – 514
+
+ 117
+
+ ≈ 1.59, the z-score for the SAT. 
+
+ Y – μ
+ 
+ σ
+
+ = 
+
+ 30 – 21
+
+ 5.3
+
+ ≈ 1.70, the z-scores for the ACT. With respect to the test they took, the person who took the ACT did betterhas the higher z-score).
+
+a continuous random variable (RV) X ~ N(0, 1); when X follows the standard normal distribution, it is often noted as Z ~ N(0, 1).
+the linear transformation of the form z = 
+
+ x – μ
+ 
+ σ
+
+; if this transformation is applied to any normal distribution X ~ N(μ, σ), the result is the standard normal distribution Z ~ N(0, 1);
+If this transformation is applied to any specific value x of the RV with mean μ and standard deviation σ, the result is called the z-score of x. The z-score allows us to compare data that are normally distributed but scaled differently.

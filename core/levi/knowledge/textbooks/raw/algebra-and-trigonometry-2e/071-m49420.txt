@@ -1,0 +1,1434 @@
+# m49420
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Systems of Linear Equations: Two Variables
+
+Systems of Linear Equations: Two Variables
+
+In this section, you will:
+
+Solve systems of equations by graphing.
+
+Solve systems of equations by substitution.
+
+Solve systems of equations by addition.
+
+Identify inconsistent systems of equations containing two variables.
+
+Express the solution of a system of dependent equations containing two variables.
+
+Learning Objectives
+
+Determine whether an ordered pair is a solution of a system of equations (IA 4.1.1)
+
+Solve a system of linear equations by graphing (IA 4.1.2)
+
+Objective: Determine whether an ordered pair is a solution of a system of equations (IA 4.1.1)
+
+A system of linear equations is a group of two or more linear equations. For example,
+
+is a system of linear equations
+
+A solution to a system of linear equations is an ordered pair x,y that is a solution to every equation in the system.
+
+Determine whether the ordered pairs are solutions to the given system.
+2x-6y=03x-y=5 at (3, 1) and (-3, 4)
+
+We substitute (3, 1) into both equations:
+(3,1) is a solution to 3x-4y=5
+Conclusion: since (3,1) is a solution to both equations, then it is a solution to the system 2x-6y=03x-4y=5
+Next we substitute (-3, -1) into both equations:
+(-3,-1) is not a solution to 3x-4y=5
+Conclusion: Since (-3,-1) is not a solution to one of the equations, then it is not a solution to the system 2x-6y=03x-4y=5
+Practice Makes Perfect
+
+Determine whether the ordered pairs are solutions to the given system.
+3x+y=0x+2y=-5 at (0, 0) and (1, -3)
+
+At (0, 0):
+x+2y=–5
+________________________________________________
+________________________________________________
+________________________________________________
+________________________________________________
+Conclusion: ________________________
+At (1, –3)
+x+2y=–5
+________________________________________________
+________________________________________________
+________________________________________________
+________________________________________________
+Conclusion: ________________________
+Solve a system of linear equations by graphing (IA 4.1.2)
+
+Solve a system of linear equations by graphing
+
+Graph the first equation.
+
+Graph the second equation on the same rectangular coordinate system.
+
+Determine whether the lines intersect, are parallel, or are the same line.
+
+Identify the solution to the system.
+
+Check the solution in both equations.
+
+If the lines intersect, identify the point of intersection. This is the solution to the system.
+If the lines are parallel, the system has no solutions.
+If the lines are the same, the system has an infinite number of solutions.
+Solve the system by graphing.
+
+Solve the system by graphing.
+-x+y=12x+y=10
+
+Step 1
+Graph -x+y=1 
+We can use the slope intercept – form: y=x+1 
+Slope = 1 
+y-intercept: (0, 1)
+Step 2
+Graph 2x+y=10 
+We can use the slope intercept – form: y=-2x+10 
+Slope = –2 
+y-intercept: (0, 10)
+Step 3
+The lines intersect
+Step 4
+The solution is the point (3, 4)
+Step 5
+Let’s check the solution:
+ -x+y=12x+y=10-3+4=12(3)+4=101=110=10
+
+Since (3, 4) is a solution to both equations, then it is a solution to the system
+ -x+y=1 
+ 2x+y=10
+Solve a system of linear equations by graphing
+y=-2x+44x+2y=6
+
+Step 1
+Graph y=-2x+4 
+Slope = ________
+y-intercept = ________
+Step 2
+Graph 4x+2y=6
+Slope = ________
+y-intercept = ________
+Step 3
+Do the lines intersect?________
+Step 4
+Read from the graph the point of intersection.________
+Step 5
+Check the solution in both equations.________
+Practice Makes Perfect
+
+Determine whether the ordered pair is a solution to the given system
+
+ x-3y=-8-3x-y=4
+
+Solve the following system by graphing.
+ y=-14x+2x+4y=8
+
+A skateboard manufacturer introduces a new line of boards. The manufacturer tracks its costs, which is the amount it spends to produce the boards, and its revenue, which is the amount it earns through sales of its boards. How can the company determine if it is making a profit with its new line? How many skateboards must be produced and sold before a profit is possible? In this section, we will consider linear equations with two variables to answer these and similar questions.
+
+Introduction to Systems of Equations
+
+In order to investigate situations such as that of the skateboard manufacturer, we need to recognize that we are dealing with more than one variable and likely more than one equation. A system of linear equations consists of two or more linear equations made up of two or more variables such that all equations in the system are considered simultaneously. To find the unique solution to a system of linear equations, we must find a numerical value for each variable in the system that will satisfy all equations in the system at the same time. Some linear systems may not have a solution and others may have an infinite number of solutions. In order for a linear system to have a unique solution, there must be at least as many equations as there are variables. Even so, this does not guarantee a unique solution.
+
+In this section, we will look at systems of linear equations in two variables, which consist of two equations that contain two different variables. For example, consider the following system of linear equations in two variables.
+
+The solution to a system of linear equations in two variables is any ordered pair that satisfies each equation independently. In this example, the ordered pair (4, 7) is the solution to the system of linear equations. We can verify the solution by substituting the values into each equation to see if the ordered pair satisfies both equations. Shortly we will investigate methods of finding such a solution if it exists.
+
+In addition to considering the number of equations and variables, we can categorize systems of linear equations by the number of solutions. A consistent system of equations has at least one solution. A consistent system is considered to be an independent system if it has a single solution, such as the example we just explored. The two lines have different slopes and intersect at one point in the plane. A consistent system is considered to be a dependent system if the equations have the same slope and the same y-intercepts. In other words, the lines coincide so the equations represent the same line. Every point on the line represents a coordinate pair that satisfies the system. Thus, there are an infinite number of solutions.
+
+Another type of system of linear equations is an inconsistent system, which is one in which the equations represent two parallel lines. The lines have the same slope and different y-intercepts. There are no points common to both lines; hence, there is no solution to the system.
+
+Types of Linear Systems
+
+There are three types of systems of linear equations in two variables, and three types of solutions.
+
+An independent system has exactly one solution pair 
+ 
+ (
+ 
+ x,y
+ 
+ ).
+ 
+ The point where the two lines intersect is the only solution.
+An inconsistent system has no solution. Notice that the two lines are parallel and will never intersect.
+A dependent system has infinitely many solutions. The lines are coincident. They are the same line, so every coordinate pair on the line is a solution to both equations.
+
+An independent system has exactly one solution pair 
+ 
+ (
+ 
+ x,y
+ 
+ ).
+ 
+ The point where the two lines intersect is the only solution.
+
+An inconsistent system has no solution. Notice that the two lines are parallel and will never intersect.
+
+A dependent system has infinitely many solutions. The lines are coincident. They are the same line, so every coordinate pair on the line is a solution to both equations.
+compares graphical representations of each type of system.
+Given a system of linear equations and an ordered pair, determine whether the ordered pair is a solution.
+
+Substitute the ordered pair into each equation in the system.
+
+Determine whether true statements result from the substitution in both equations; if so, the ordered pair is a solution.
+
+Determining Whether an Ordered Pair Is a Solution to a System of Equations
+
+Determine whether the ordered pair 
+ 
+ (
+ 
+ 5,1
+ 
+ )
+ 
+ is a solution to the given system of equations.
+
+Substitute the ordered pair 
+ 
+ (
+ 
+ 5,1
+ 
+ )
+ 
+ into both equations.
+
+The ordered pair 
+ 
+ (
+ 
+ 5,1
+ 
+ )
+ 
+ satisfies both equations, so it is the solution to the system.
+
+Analysis
+
+We can see the solution clearly by plotting the graph of each equation. Since the solution is an ordered pair that satisfies both equations, it is a point on both of the lines and thus the point of intersection of the two lines. See .
+
+Determine whether the ordered pair 
+ 
+ (
+ 
+ 8,5
+ 
+ )
+ 
+ is a solution to the following system.
+
+Not a solution.
+
+Solving Systems of Equations by Graphing
+
+There are multiple methods of solving systems of linear equations. For a system of linear equations in two variables, we can determine both the type of system and the solution by graphing the system of equations on the same set of axes.
+
+Solving a System of Equations in Two Variables by Graphing
+
+Solve the following system of equations by graphing. Identify the type of system.
+
+Solve the first equation for 
+ 
+ y.
+
+Solve the second equation for 
+ 
+ y.
+
+Graph both equations on the same set of axes as in .
+
+The lines appear to intersect at the point 
+ 
+ (
+ 
+−3,−2
+ 
+ ).
+ 
+ We can check to make sure that this is the solution to the system by substituting the ordered pair into both equations.
+
+The solution to the system is the ordered pair 
+ 
+ (
+ 
+−3,−2
+ 
+ ),
+ 
+ so the system is independent.
+
+Solve the following system of equations by graphing.
+
+The solution to the system is the ordered pair 
+ 
+ (
+ 
+ −5,3
+ 
+ ).
+Can graphing be used if the system is inconsistent or dependent?
+Yes, in both cases we can still graph the system to determine the type of system and solution. If the two lines are parallel, the system has no solution and is inconsistent. If the two lines are identical, the system has infinite solutions and is a dependent system.
+
+Solving Systems of Equations by Substitution
+
+Solving a linear system in two variables by graphing works well when the solution consists of integer values, but if our solution contains decimals or fractions, it is not the most precise method. We will consider two more methods of solving a system of linear equations that are more precise than graphing. One such method is solving a system of equations by the substitution method, in which we solve one of the equations for one variable and then substitute the result into the second equation to solve for the second variable. Recall that we can solve for only one variable at a time, which is the reason the substitution method is both valuable and practical.
+Given a system of two equations in two variables, solve using the substitution method.
+
+Solve one of the two equations for one of the variables in terms of the other.
+
+Substitute the expression for this variable into the second equation, then solve for the remaining variable.
+
+Substitute that solution into either of the original equations to find the value of the first variable. If possible, write the solution as an ordered pair.
+
+Check the solution in both equations.
+
+Solving a System of Equations in Two Variables by Substitution
+
+Solve the following system of equations by substitution.
+
+First, we will solve the first equation for 
+ 
+ y.
+
+Now we can substitute the expression 
+ 
+ x−5
+ 
+ for 
+ 
+ y
+ 
+ in the second equation.
+
+Now, we substitute 
+ 
+ x=8
+ 
+ into the first equation and solve for 
+ 
+ y.
+
+Our solution is 
+ 
+ (
+ 
+ 8,3
+ 
+ ).
+
+Check the solution by substituting 
+ 
+ (
+ 
+ 8,3
+ 
+ )
+ 
+ into both equations.
+
+Solve the following system of equations by substitution.
+(
+ 
+ −2,−5
+ 
+ )
+Can the substitution method be used to solve any linear system in two variables?
+Yes, but the method works best if one of the equations contains a coefficient of 1 or –1 so that we do not have to deal with fractions.
+
+Solving Systems of Equations in Two Variables by the Addition Method
+
+A third method of solving systems of linear equations is the addition method. In this method, we add two terms with the same variable, but opposite coefficients, so that the sum is zero. Of course, not all systems are set up with the two terms of one variable having opposite coefficients. Often we must adjust one or both of the equations by multiplication so that one variable will be eliminated by addition.
+Given a system of equations, solve using the addition method.
+
+Write both equations with x- and y-variables on the left side of the equal sign and constants on the right.
+
+Write one equation above the other, lining up corresponding variables. If one of the variables in the top equation has the opposite coefficient of the same variable in the bottom equation, add the equations together, eliminating one variable. If not, use multiplication by a nonzero number so that one of the variables in the top equation has the opposite coefficient of the same variable in the bottom equation, then add the equations to eliminate the variable.
+
+Solve the resulting equation for the remaining variable.
+
+Substitute that value into one of the original equations and solve for the second variable.
+
+Check the solution by substituting the values into the other equation.
+
+Solving a System by the Addition Method
+
+Solve the given system of equations by addition.
+
+Both equations are already set equal to a constant. Notice that the coefficient of 
+ 
+ x
+ 
+ in the second equation, –1, is the opposite of the coefficient of 
+ 
+ x
+ 
+ in the first equation, 1. We can add the two equations to eliminate 
+ 
+ x
+ 
+ without needing to multiply by a constant.
+
+Now that we have eliminated 
+ 
+ x,
+ 
+ we can solve the resulting equation for 
+ 
+ y.
+
+Then, we substitute this value for 
+ 
+ y
+ 
+ into one of the original equations and solve for 
+ 
+ x.
+
+The solution to this system is 
+ 
+ (
+ 
+ −
+ 7
+ 3
+ 
+ ,
+ 2
+ 3
+
+ ).
+
+Check the solution in the first equation.
+
+Analysis
+
+We gain an important perspective on systems of equations by looking at the graphical representation. See to find that the equations intersect at the solution. We do not need to ask whether there may be a second solution because observing the graph confirms that the system has exactly one solution.
+
+Using the Addition Method When Multiplication of One Equation Is Required
+
+Solve the given system of equations by the addition method.
+
+Adding these equations as presented will not eliminate a variable. However, we see that the first equation has 
+ 
+ 3x
+ 
+ in it and the second equation has 
+ 
+ x.
+ 
+ So if we multiply the second equation by 
+ 
+ −3,
+ 
+ the x-terms will add to zero.
+
+Now, let’s add them.
+
+For the last step, we substitute 
+ 
+ y=−4
+ 
+ into one of the original equations and solve for 
+ 
+ x.
+
+Our solution is the ordered pair 
+ 
+ (
+ 
+ 3,−4
+ 
+ ).
+ 
+ See . Check the solution in the original second equation.
+
+Solve the system of equations by addition.
+(
+ 
+−6,−2
+ 
+ )
+
+Using the Addition Method When Multiplication of Both Equations Is Required
+
+Solve the given system of equations in two variables by addition.
+
+One equation has 
+ 
+ 2x
+ 
+ and the other has 
+ 
+ 5x.
+ 
+ The least common multiple is 
+ 
+ 10x
+ 
+ so we will have to multiply both equations by a constant in order to eliminate one variable. Let’s eliminate 
+ 
+ x
+ 
+ by multiplying the first equation by 
+ 
+ −5
+ 
+ and the second equation by 
+ 
+ 2.
+
+Then, we add the two equations together.
+
+Substitute 
+ 
+ y=−4
+ 
+ into the original first equation.
+
+The solution is 
+ 
+ (
+ 
+−2,−4
+ 
+ ).
+ 
+ Check it in the other equation.
+
+See .
+
+Using the Addition Method in Systems of Equations Containing Fractions
+
+Solve the given system of equations in two variables by addition.
+
+First clear each equation of fractions by multiplying both sides of the equation by the least common denominator.
+
+Now multiply the second equation by 
+ 
+ −1
+ 
+ so that we can eliminate the x-variable.
+
+Add the two equations to eliminate the x-variable and solve the resulting equation.
+
+Substitute 
+ 
+ y=7
+ 
+ into the first equation.
+
+The solution is 
+ 
+ (
+
+ 11
+ 
+ 2
+ 
+ ,7
+ 
+ ).
+ 
+ Check it in the other equation.
+
+Solve the system of equations by addition.
+(
+ 
+ 10,−4
+ 
+ )
+
+Identifying Inconsistent Systems of Equations Containing Two Variables
+
+Now that we have several methods for solving systems of equations, we can use the methods to identify inconsistent systems. Recall that an inconsistent system consists of parallel lines that have the same slope but different 
+ 
+ y
+ 
+ -intercepts. They will never intersect. When searching for a solution to an inconsistent system, we will come up with a false statement, such as 
+ 
+ 12=0.
+
+Solving an Inconsistent System of Equations
+
+Solve the following system of equations.
+
+We can approach this problem in two ways. Because one equation is already solved for 
+ 
+ x,
+ 
+ the most obvious step is to use substitution.
+
+Clearly, this statement is a contradiction because 
+ 
+ 9≠13.
+ 
+ Therefore, the system has no solution.
+
+The second approach would be to first manipulate the equations so that they are both in slope-intercept form. We manipulate the first equation as follows.
+
+We then convert the second equation expressed to slope-intercept form.
+
+Comparing the equations, we see that they have the same slope but different y-intercepts. Therefore, the lines are parallel and do not intersect.
+
+Analysis
+
+Writing the equations in slope-intercept form confirms that the system is inconsistent because all lines will intersect eventually unless they are parallel. Parallel lines will never intersect; thus, the two lines have no points in common. The graphs of the equations in this example are shown in .
+
+Solve the following system of equations in two variables.
+
+No solution. It is an inconsistent system.
+
+Expressing the Solution of a System of Dependent Equations Containing Two Variables
+
+Recall that a dependent system of equations in two variables is a system in which the two equations represent the same line. Dependent systems have an infinite number of solutions because all of the points on one line are also on the other line. After using substitution or addition, the resulting equation will be an identity, such as 
+ 
+ 0=0.
+
+Finding a Solution to a Dependent System of Linear Equations
+
+Find a solution to the system of equations using the addition method.
+
+With the addition method, we want to eliminate one of the variables by adding the equations. In this case, let’s focus on eliminating 
+ 
+ x.
+ 
+ If we multiply both sides of the first equation by 
+ 
+ −3,
+ 
+ then we will be able to eliminate the 
+ 
+ x
+ 
+ -variable.
+
+Now add the equations.
+
+We can see that there will be an infinite number of solutions that satisfy both equations.
+
+Analysis
+
+If we rewrote both equations in the slope-intercept form, we might know what the solution would look like before adding. Let’s look at what happens when we convert the system to slope-intercept form.
+
+See . Notice the results are the same. The general solution to the system is 
+ 
+ (
+ 
+ x, −
+ 1
+ 3
+ 
+ x+
+ 2
+ 3
+
+ ).
+
+Solve the following system of equations in two variables.
+
+The system is dependent so there are infinite solutions of the form 
+ 
+ (x,2x+5).
+
+Using Systems of Equations to Investigate Profits
+
+Using what we have learned about systems of equations, we can return to the skateboard manufacturing problem at the beginning of the section. The skateboard manufacturer’s revenue function is the function used to calculate the amount of money that comes into the business. It can be represented by the equation 
+ 
+ R=xp,
+ 
+ where 
+ 
+ x=
+ 
+ quantity and 
+ 
+ p=
+ 
+ price. The revenue function is shown in orange in .
+
+The cost function is the function used to calculate the costs of doing business. It includes fixed costs, such as rent and salaries, and variable costs, such as utilities. The cost function is shown in blue in . The 
+ 
+ x
+ 
+ -axis represents quantity in hundreds of units. The y-axis represents either cost or revenue in hundreds of dollars.
+
+The point at which the two lines intersect is called the break-even point. We can see from the graph that if 700 units are produced, the cost is $3,300 and the revenue is also $3,300. In other words, the company breaks even if they produce and sell 700 units. They neither make money nor lose money.
+
+The shaded region to the right of the break-even point represents quantities for which the company makes a profit. The shaded region to the left represents quantities for which the company suffers a loss. The profit function is the revenue function minus the cost function, written as 
+ 
+ P(x)=R(x)−C(x).
+ 
+ Clearly, knowing the quantity for which the cost equals the revenue is of great importance to businesses.
+
+Finding the Break-Even Point and the Profit Function Using Substitution
+
+Given the cost function 
+ 
+ C(x)=0.85x+35,000
+ 
+ and the revenue function 
+ 
+ R(x)=1.55x,
+ 
+ find the break-even point and the profit function.
+
+Write the system of equations using 
+ 
+ y
+ 
+ to replace function notation.
+
+Substitute the expression 
+ 
+ 0.85x+35,000
+ 
+ from the first equation into the second equation and solve for 
+ 
+ x.
+
+Then, we substitute 
+ 
+ x=50,000
+ 
+ into either the cost function or the revenue function.
+
+The break-even point is 
+ 
+ (
+ 
+50,000,77,500
+ 
+ ).
+
+The profit function is found using the formula 
+ 
+ P(x)=R(x)−C(x).
+
+The profit function is 
+ 
+ P(x)=0.7x−35,000.
+
+Analysis
+
+The cost to produce 50,000 units is $77,500, and the revenue from the sales of 50,000 units is also $77,500. To make a profit, the business must produce and sell more than 50,000 units. See .
+
+We see from the graph in that the profit function has a negative value until 
+ 
+ x=50,000,
+ when the graph crosses the x-axis. Then, the graph emerges into positive y-values and continues on this path as the profit function is a straight line. This illustrates that the break-even point for businesses occurs when the profit function is 0. The area to the left of the break-even point represents operating at a loss.
+
+Writing and Solving a System of Equations in Two Variables
+
+The cost of a ticket to the circus is 
+ 
+ $25.00
+ 
+ for children and 
+ 
+ $50.00
+ 
+ for adults. On a certain day, attendance at the circus is 
+ 
+ 2,000
+ 
+ and the total gate revenue is 
+ 
+ $70,000.
+ 
+ How many children and how many adults bought tickets?
+
+Let c = the number of children and a = the number of adults in attendance.
+
+The total number of people is 
+ 
+ 2,000.
+ 
+ We can use this to write an equation for the number of people at the circus that day.
+
+The revenue from all children can be found by multiplying 
+ 
+ $25.00
+ 
+ by the number of children, 
+ 
+ 25c.
+ 
+ The revenue from all adults can be found by multiplying 
+ 
+ $50.00
+ 
+ by the number of adults, 
+ 
+ 50a.
+ 
+ The total revenue is 
+ 
+$70,000.
+ 
+ We can use this to write an equation for the revenue.
+
+We now have a system of linear equations in two variables.
+
+In the first equation, the coefficient of both variables is 1. We can quickly solve the first equation for either 
+ 
+ c
+ 
+ or 
+ a.
+ 
+ We will solve for 
+ 
+ a.
+
+Substitute the expression 
+ 
+ 2,000−c
+ 
+ in the second equation for 
+ 
+ a
+ 
+ and solve for 
+ 
+ c.
+
+Substitute 
+ 
+ c=1,200
+ 
+ into the first equation to solve for 
+ 
+ a.
+
+We find that 
+ 
+ 1,200
+ 
+ children and 
+ 
+ 800
+ 
+ adults bought tickets to the circus that day.
+
+Meal tickets at the circus cost 
+ 
+ $4.00
+ 
+ for children and 
+ 
+ $12.00
+ 
+ for adults. If 
+ 
+ 1,650
+ 
+ meal tickets were bought for a total of 
+ 
+ $14,200,
+ 
+ how many children and how many adults bought meal tickets?
+
+700 children, 950 adults
+
+Access these online resources for additional instruction and practice with systems of linear equations.
+Solving Systems of Equations Using Substitution
+Solving Systems of Equations Using Elimination
+Applications of Systems of Equations
+
+Key Concepts
+
+A system of linear equations consists of two or more equations made up of two or more variables such that all equations in the system are considered simultaneously.
+
+The solution to a system of linear equations in two variables is any ordered pair that satisfies each equation independently. See .
+
+Systems of equations are classified as independent with one solution, dependent with an infinite number of solutions, or inconsistent with no solution.
+
+One method of solving a system of linear equations in two variables is by graphing. In this method, we graph the equations on the same set of axes. See .
+
+Another method of solving a system of linear equations is by substitution. In this method, we solve for one variable in one equation and substitute the result into the second equation. See .
+
+A third method of solving a system of linear equations is by addition, in which we can eliminate a variable by adding opposite coefficients of corresponding variables. See .
+
+It is often necessary to multiply one or both equations by a constant to facilitate elimination of a variable when adding the two equations together. See , , and .
+
+Either method of solving a system of equations results in a false statement for inconsistent systems because they are made up of parallel lines that never intersect. See .
+
+The solution to a system of dependent equations will always be true because both equations describe the same line. See .
+
+Systems of equations can be used to solve real-world problems that involve more than one variable, such as those relating to revenue, cost, and profit. See and .
+
+Section Exercises
+
+Verbal
+
+Can a system of linear equations have exactly two solutions? Explain why or why not.
+
+No, you can either have zero, one, or infinitely many. Examine graphs.
+
+If you are performing a break-even analysis for a business and their cost and revenue equations are dependent, explain what this means for the company’s profit margins.
+
+If you are solving a break-even analysis and get a negative break-even point, explain what this signifies for the company?
+
+This means there is no realistic break-even point. By the time the company produces one unit they are already making profit.
+
+If you are solving a break-even analysis and there is no break-even point, explain what this means for the company. How should they ensure there is a break-even point?
+
+Given a system of equations, explain at least two different methods of solving that system.
+
+You can solve by substitution (isolating 
+ 
+ x
+ 
+ or 
+ 
+ y
+ 
+ ), graphically, or by addition.
+
+Algebraic
+
+For the following exercises, determine whether the given ordered pair is a solution to the system of equations.
+5x−y=4
+
+ x+6y=2
+
+ and 
+ 
+ (4,0)
+−3x−5y=13
+
+ −x+4y=10
+
+ and 
+ 
+ (−6,1)
+
+Yes
+3x+7y=1
+
+ 2x+4y=0
+
+ and 
+ 
+ (2,3)
+−2x+5y=7
+
+ 2x+9y=7
+
+ and 
+ 
+ (−1,1)
+
+Yes
+x+8y=43
+
+ 3x−2y=−1
+
+ and 
+ 
+ (3,5)
+
+For the following exercises, solve each system by substitution.
+x+3y=5
+
+ 2x+3y=4
+(−1,2)
+3x−2y=18
+
+ 5x+10y=−10
+4x+2y=−10
+
+ 3x+9y=0
+(−3,1)
+2x+4y=−3.8
+
+ 9x−5y=1.3
+−2x+3y=1.2
+
+ −3x−6y=1.8
+(
+ 
+ −
+ 3
+ 5
+ 
+ ,0
+ 
+ )
+x−0.2y=1
+
+ −10x+2y=5
+3x+5y=9
+
+ 30x+50y=−90
+
+No solutions exist.
+−3x+y=2
+
+ 12x−4y=−8
+1
+ 2
+ 
+ x+
+ 1
+ 3
+ 
+ y=16
+
+ 1
+ 6
+ 
+ x+
+ 1
+ 4
+ 
+ y=9
+(
+
+ 72
+ 
+ 5
+ 
+ ,
+ 
+ 132
+ 
+ 5
+
+ )
+−
+ 1
+ 4
+ 
+ x+
+ 3
+ 2
+ 
+ y=11
+
+ −
+ 1
+ 8
+ 
+ x+
+ 1
+ 3
+ 
+ y=3
+
+For the following exercises, solve each system by addition.
+−2x+5y=−42
+
+ 7x+2y=30
+(
+ 
+ 6,−6
+ 
+ )
+6x−5y=−34
+
+ 2x+6y=4
+5x−y=−2.6
+
+ −4x−6y=1.4
+(
+ 
+ −
+ 1
+ 2
+ 
+ ,
+ 1
+ 
+ 10
+
+ )
+7x−2y=3
+
+ 4x+5y=3.25
+−x+2y=−1
+
+ 5x−10y=6
+
+No solutions exist.
+7x+6y=2
+
+ −28x−24y=−8
+5
+ 6
+ 
+ x+
+ 1
+ 4
+ 
+ y=0
+
+ 1
+ 8
+ 
+ x−
+ 1
+ 2
+ 
+ y=−
+ 
+ 43
+
+ 120
+(
+ 
+ −
+ 1
+ 5
+ 
+ ,
+ 2
+ 3
+
+ )
+1
+ 3
+ 
+ x+
+ 1
+ 9
+ 
+ y=
+ 2
+ 9
+
+ −
+ 1
+ 2
+ 
+ x+
+ 4
+ 5
+ 
+ y=−
+ 1
+ 3
+−0.2x+0.4y=0.6
+
+ x−2y=−3
+(
+ 
+ x,
+ 
+ x+3
+ 
+ 2
+
+ )
+−0.1x+0.2y=0.6
+
+ 5x−10y=1
+
+For the following exercises, solve each system by any method.
+5x+9y=16
+
+ x+2y=4
+(−4,4)
+6x−8y=−0.6
+
+ 3x+2y=0.9
+5x−2y=2.25
+
+ 7x−4y=3
+(
+
+ 1
+ 2
+ 
+ ,
+ 1
+ 8
+
+ )
+x−
+ 5
+ 
+ 12
+
+ y=−
+ 
+ 55
+
+ 12
+
+ −6x+
+ 5
+ 2
+ 
+ y=
+ 
+ 55
+ 
+ 2
+7x−4y=
+ 7
+ 6
+
+ 2x+4y=
+ 1
+ 3
+(
+
+ 1
+ 6
+ 
+ ,0
+ 
+ )
+3x+6y=11
+
+ 2x+4y=9
+7
+ 3
+ 
+ x−
+ 1
+ 6
+ 
+ y=2
+
+ −
+ 
+ 21
+ 
+ 6
+ 
+ x+
+ 3
+ 
+ 12
+
+ y=−3
+(
+ 
+ x,2(7x−6)
+ 
+ )
+1
+ 2
+ 
+ x+
+ 1
+ 3
+ 
+ y=
+ 1
+ 3
+
+ 3
+ 2
+ 
+ x+
+ 1
+ 4
+ 
+ y=−
+ 1
+ 8
+2.2x+1.3y=−0.1
+
+ 4.2x+4.2y=2.1
+(
+ 
+ −
+ 5
+ 6
+ 
+ ,
+ 4
+ 3
+
+ )
+0.1x+0.2y=2
+
+ 0.35x−0.3y=0
+
+Graphical
+
+For the following exercises, graph the system of equations and state whether the system is consistent, inconsistent, or dependent and whether the system has one solution, no solution, or infinite solutions.
+3x−y=0.6
+
+ x−2y=1.3
+
+Consistent with one solution
+−x+2y=4
+
+ 2x−4y=1
+x+2y=7
+
+ 2x+6y=12
+
+Consistent with one solution
+3x−5y=7
+
+ x−2y=3
+3x−2y=5
+
+ −9x+6y=−15
+
+Dependent with infinitely many solutions
+
+Technology
+
+For the following exercises, use the intersect function on a graphing device to solve each system. Round all answers to the nearest hundredth.
+0.1x+0.2y=0.3
+
+ −0.3x+0.5y=1
+−0.01x+0.12y=0.62
+
+ 0.15x+0.20y=0.52
+(
+ 
+ −3.08,4.91
+ 
+ )
+0.5x+0.3y=4
+
+ 0.25x−0.9y=0.46
+0.15x+0.27y=0.39
+
+ −0.34x+0.56y=1.8
+(
+ 
+ −1.52,2.29
+ 
+ )
+−0.71x+0.92y=0.13
+
+ 0.83x+0.05y=2.1
+
+Extensions
+
+For the following exercises, solve each system in terms of 
+ 
+ A,B,C,D,E,
+ 
+ and 
+ 
+ F
+ 
+ where 
+ 
+ A–F
+ 
+ are nonzero numbers. Note that 
+ 
+ A≠B
+ 
+ and 
+ 
+ AE≠BD.
+x+y=A
+
+ x−y=B
+(
+
+ A+B
+ 
+ 2
+ 
+ ,
+ 
+ A−B
+ 
+ 2
+
+ )
+x+Ay=1
+
+ x+By=1
+Ax+y=0
+
+ Bx+y=1
+(
+
+ −1
+
+ A−B
+
+ ,
+ A
+ 
+ A−B
+
+ )
+Ax+By=C
+
+ x+y=1
+Ax+By=C
+
+ Dx+Ey=F
+(
+
+ CE−BF
+
+ BD−AE
+
+ ,
+ 
+ AF−CD
+
+ BD−AE
+
+ )
+
+Real-World Applications
+
+For the following exercises, solve for the desired quantity.
+
+A stuffed animal business has a total cost of production 
+ 
+ C=12x+30
+ 
+ and a revenue function 
+ 
+ R=20x.
+ 
+ Find the break-even point.
+
+An Ethiopian restaurant has a cost of production 
+ 
+ C(x)=11x+120
+ 
+ and a revenue function 
+ 
+ R(x)=5x.
+ 
+ When does the company start to turn a profit?
+
+They never turn a profit.
+
+A cell phone factory has a cost of production 
+ 
+ C(x)=150x+10,000
+ 
+ and a revenue function 
+ 
+ R(x)=200x.
+ 
+ What is the break-even point?
+
+A musician charges 
+ 
+ C(x)=64x+20,000
+ 
+ where 
+ x
+ 
+ is the total number of attendees at the concert. The venue charges $80 per ticket. After how many people buy tickets does the venue break even, and what is the value of the total tickets sold at that point?
+[truncated]

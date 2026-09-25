@@ -1,0 +1,218 @@
+# m42177
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Angular Acceleration
+
+Angular Acceleration
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe uniform circular motion.
+
+Explain non-uniform circular motion.
+
+Calculate angular acceleration of an object.
+
+Observe the link between linear and angular acceleration.
+Uniform Circular Motion and Gravitation discussed only uniform circular motion, which is motion in a circle at constant speed and, hence, constant angular velocity. Recall that angular velocity ω was defined as the time rate of change of angle θ:
+
+where θ is the angle of rotation as seen in . The relationship between angular velocity ω and linear velocity v was also defined in Rotation Angle and Angular Velocity as
+
+or
+
+where r is the radius of curvature, also seen in . According to the sign convention, the counter clockwise direction is considered as positive direction and clockwise direction as negative
+
+Angular velocity is not constant when a skater pulls in her arms, when a child starts up a merry-go-round from rest, or when a computer’s hard disk slows to a halt when switched off. In all these cases, there is an angular acceleration, in which ω changes. The faster the change occurs, the greater the angular acceleration. Angular acceleration α is defined as the rate of change of angular velocity. In equation form, angular acceleration is expressed as follows:
+
+where Δω is the change in angular velocity and Δt is the change in time. The units of angular acceleration are rad/s/s, or rad/s2. If ω increases, then α is positive. If ω decreases, then α is negative.
+
+Calculating the Angular Acceleration and Deceleration of a Bike Wheel
+
+Suppose a teenager puts her bicycle on its back and starts the rear wheel spinning from rest to a final angular velocity of 250 rpm in 5.00 s. (a) Calculate the angular acceleration in rad/s2. (b) If she now slams on the brakes, causing an angular acceleration of –87.3
+rad/s2, how long does it take the wheel to stop?
+Strategy for (a)
+
+Strategy for (a)
+
+The angular acceleration can be found directly from its definition in α=ΔωΔt because the final angular velocity and time are given. We see that Δω is 250 rpm and Δt is 5.00 s.
+Solution for (a)
+
+Solution for (a)
+
+Entering known information into the definition of angular acceleration, we get
+
+Because Δω is in revolutions per minute (rpm) and we want the standard units of rad/s2 for angular acceleration, we need to convert Δω from rpm to rad/s:
+
+Entering this quantity into the expression for α, we get
+Strategy for (b)
+
+Strategy for (b)
+
+In this part, we know the angular acceleration and the initial angular velocity. We can find the stoppage time by using the definition of angular acceleration and solving for Δt, yielding
+Solution for (b)
+
+Solution for (b)
+
+Here the angular velocity decreases from 26.2 rad/s (250 rpm) to zero, so that
+
+Δω is
+
+–26.2 rad/s, and
+
+α is given to be
+
+–87.3rad/s2. Thus,
+Discussion
+
+Discussion
+
+Note that the angular acceleration as the girl spins the wheel is small and positive; it takes 5 s to produce an appreciable angular velocity. When she hits the brake, the angular acceleration is large and negative. The angular velocity quickly goes to zero. In both cases, the relationships are analogous to what happens with linear motion. For example, there is a large deceleration when you crash into a brick wall—the velocity change is large in a short time interval.
+
+If the bicycle in the preceding example had been on its wheels instead of upside-down, it would first have accelerated along the ground and then come to a stop. This connection between circular motion and linear motion needs to be explored. For example, it would be useful to know how linear and angular acceleration are related. In circular motion, linear acceleration is tangent to the circle at the point of interest, as seen in . Thus, linear acceleration is called tangential acceleration at.
+
+Linear or tangential acceleration refers to changes in the magnitude of velocity but not its direction. We know from Uniform Circular Motion and Gravitation that in circular motion centripetal acceleration,
+
+ac, refers to changes in the direction of the velocity but not its magnitude. An object undergoing circular motion experiences centripetal acceleration, as seen in . Thus,
+
+at and
+
+ac are perpendicular and independent of one another. Tangential acceleration
+
+at is directly related to the angular acceleration
+
+α and is linked to an increase or decrease in the velocity, but not its direction.
+
+Now we can find the exact relationship between linear acceleration at and angular acceleration α. Because linear acceleration is proportional to a change in the magnitude of the velocity, it is defined (as it was in One-Dimensional Kinematics) to be
+
+For circular motion, note that v=rω, so that
+
+The radius r is constant for circular motion, and so Δ(rω)=r(Δω). Thus,
+
+By definition, α=ΔωΔt. Thus,
+
+or
+
+These equations mean that linear acceleration and angular acceleration are directly proportional. The greater the angular acceleration is, the larger the linear (tangential) acceleration is, and vice versa. For example, the greater the angular acceleration of a car’s drive wheels, the greater the acceleration of the car. The radius also matters. For example, the smaller a wheel, the smaller its linear acceleration for a given angular acceleration α.
+
+Calculating the Angular Acceleration of a Motorcycle Wheel
+
+A powerful motorcycle can accelerate from 0 to 30.0 m/s (about 108 km/h) in 4.20 s. What is the angular acceleration of its 0.320-m-radius wheels? (See .)
+Strategy
+
+We are given information about the linear velocities of the motorcycle. Thus, we can find its linear acceleration at. Then, the expression α=atr can be used to find the angular acceleration.
+Solution
+ The linear acceleration is
+
+Solution
+
+We also know the radius of the wheels. Entering the values for at and r into
+
+α=atr, we get
+Discussion
+
+Units of radians are dimensionless and appear in any relationship between angular and linear quantities.
+
+So far, we have defined three rotational quantities— θ, ω, and α. These quantities are analogous to the translational quantities x, v, and a. displays rotational quantities, the analogous translational quantities, and the relationships between them.
+
+Rotational and Translational Quantities
+
+Rotational
+Translational
+α
+ =
+
+ a
+
+ t
+
+ r
+Making Connections: Take-Home Experiment
+
+Sit down with your feet on the ground on a chair that rotates. Lift one of your legs such that it is unbent (straightened out). Using the other leg, begin to rotate yourself by pushing on the ground. Stop using your leg to push the ground but allow the chair to rotate. From the origin where you began, sketch the angle, angular velocity, and angular acceleration of your leg as a function of time in the form of three separate graphs. Estimate the magnitudes of these quantities.
+
+Check Your Understanding
+
+Angular acceleration is a vector, having both magnitude and direction. How do we denote its magnitude and direction? Illustrate with an example.
+
+The magnitude of angular acceleration is α and its most common units are rad/s2. The direction of angular acceleration along a fixed axis is denoted by a + or a – sign, just as the direction of linear acceleration in one dimension is denoted by a + or a – sign. For example, consider a gymnast doing a forward flip. Her angular momentum would be parallel to the mat and to her left. The magnitude of her angular acceleration would be proportional to her angular velocity (spin rate) and her moment of inertia about her spin axis.
+
+Ladybug Revolution
+
+Join the ladybug in an exploration of rotational motion. Rotate the merry-go-round to change its angle, or choose a constant angular velocity or angular acceleration. Explore how circular motion relates to the bug's x,y position, velocity, and acceleration using vectors or graphs.
+Click to view content.
+
+Section Summary
+
+Uniform circular motion is the motion with a constant angular velocity ω=ΔθΔt.
+
+In non-uniform circular motion, the velocity changes with time and the rate of change of angular velocity (i.e. angular acceleration) is α=ΔωΔt.
+
+Linear or tangential acceleration refers to changes in the magnitude of velocity but not its direction, given as at=ΔvΔt.
+
+For circular motion, note that v=rω, so that
+ at=ΔrωΔt.
+
+The radius r is constant for circular motion, and so Δrω=rΔω. Thus,
+ at=rΔωΔt.
+
+By definition, Δω/Δt=α. Thus,
+
+ a
+
+ t
+
+ =
+ rα
+
+ or
+ α=atr.
+
+or
+
+Conceptual Questions
+
+Analogies exist between rotational and translational physical quantities. Identify the rotational term analogous to each of the following: acceleration, force, mass, work, translational kinetic energy, linear momentum, impulse.
+
+Explain why centripetal acceleration changes the direction of velocity in circular motion but not its magnitude.
+
+In circular motion, a tangential acceleration can change the magnitude of the velocity but not its direction. Explain your answer.
+
+Suppose a piece of food is on the edge of a rotating microwave oven plate. Does it experience nonzero tangential acceleration, centripetal acceleration, or both when: (a) The plate starts to spin? (b) The plate rotates at constant angular velocity? (c) The plate slows to a halt?
+
+Problems & Exercises
+
+At its peak, a tornado is 60.0 m in diameter and carries 500 km/h winds. What is its angular velocity in revolutions per second?
+ω
+ =
+
+ 0
+ .
+ 737 rev/s
+Integrated Concepts
+
+Integrated Concepts
+
+An ultracentrifuge accelerates from rest to 100,000 rpm in 2.00 min. (a) What is its angular acceleration in rad/s2? (b) What is the tangential acceleration of a point 9.50 cm from the axis of rotation? (c) What is the radial acceleration in m/s2 and multiples of g of this point at full rpm?
+Integrated Concepts
+
+Integrated Concepts
+
+You have a grindstone (a disk) that is 90.0 kg, has a 0.340-m radius, and is turning at 90.0 rpm, and you press a steel axe against it with a radial force of 20.0 N. (a) Assuming the kinetic coefficient of friction between steel and stone is 0.20, calculate the angular acceleration of the grindstone. (b) How many turns will the stone make before coming to rest?
+
+(a) −0.26 rad/s2
+
+(b) 27rev
+Unreasonable Results
+
+Unreasonable Results
+
+You are told that a basketball player spins the ball with an angular acceleration of 100 rad/s2. (a) What is the ball’s final angular velocity if the ball starts from rest and the acceleration lasts 2.00 s? (b) What is unreasonable about the result? (c) Which premises are unreasonable or inconsistent?
+
+the rate of change of angular velocity with time
+the difference between final and initial values of angular velocity
+the acceleration in a direction tangent to the circle at the point of interest in circular motion

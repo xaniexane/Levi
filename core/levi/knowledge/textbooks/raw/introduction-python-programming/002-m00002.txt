@@ -1,0 +1,69 @@
+# m00002
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Background
+
+Background
+
+Learning Objectives
+
+By the end of this section you should be able to
+
+Name two examples of computer programs in everyday life.
+
+Explain why Python is a good programming language to learn.
+
+Computer programs
+
+A computer is an electronic device that stores and processes information. Examples of computers include smartphones, tablets, laptops, desktops, and servers. Technically, a program is a sequence of instructions that a computer can run. Programs help people accomplish everyday tasks, create new technology, and have fun.
+
+The goal of this book is to teach introductory programming and problem solving. Writing programs is a creative activity, inherently useful, and rewarding!
+No prior background in computer science is necessary to read this book. Many different types of programs exist, as shown in the illustration below.
+This book will focus on general purpose programs that typically run "behind the scenes."
+
+Online music streaming
+
+Computers and programs
+
+Exploring further
+
+Later chapters of this book show how to write analysis programs using real data. Example libraries that provide access to online streaming services include Spotipy, Pytube, and Pydora. Python-related tools often have the letters "py" in their name.
+
+The Python language
+
+This book introduces Python, one of the top programming languages today. Leading tech giants like Google, Apple, NASA, Instagram, Pixar, and others use Python extensively.
+
+One reason why Python is popular is because many libraries exist for doing real work. A library is a collection of code that can be used in other programs. Python comes with an extensive Standard Library for solving everyday computing problems like extracting data from files and creating summary reports. In addition, the community develops many other libraries for Python. Ex: Pandas is a widely used library for data analysis.
+
+Another reason why Python is popular is because the syntax is concise and straightforward. The syntax of a language defines how code must be structured. Syntax rules define the keywords, symbols, and formatting used in programs. Compared to other programming languages, Python is more concise and straightforward.
+
+Hello world in Python and Java
+
+By tradition, Hello World is the first program to write when learning a new language. This program simply displays the message "Hello, World!" to the user. The hello world program is only one line in Python:
+
+In contrast, the hello world program is five lines in Java (a different language).
+
+However, conciseness is not the only consideration for which language is used. In different situations different languages may be more appropriate. Ex: Java is often used in Android development.
+
+Counting lines in a file
+
+Python vs Java syntax
+
+Favorite song
+
+The program below asks for your name and displays a friendly greeting. Run the program and see what happens. In the error message, EOF stands for End of File.
+
+Many of the programs in this chapter expect input from the user. Enter your name in the Input box below the code. Run the program again, and see what changes.
+
+Copy the following lines to the end of the program:
+
+print("What is your favorite song?")
+song = input()
+print("Cool! I like", song, "too.")
+
+The modified program reads two lines of input: name and song. Add your favorite song to the Input box below your name, and run the program again.
+
+The next section of the book will explain how print() and input() work. Feel free to experiment with this code until you are ready to move on.

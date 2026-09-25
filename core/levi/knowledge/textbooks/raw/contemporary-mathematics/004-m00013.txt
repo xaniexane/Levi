@@ -1,0 +1,124 @@
+# m00013
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Understanding Venn Diagrams
+
+Understanding Venn Diagrams
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Utilize a universal set with two sets to interpret a Venn diagram.
+
+Utilize a universal set with two sets to create a Venn diagram.
+
+Determine the complement of a set.
+
+Have you ever ordered a new dresser or bookcase that required assembly? When your package arrives you excitedly open it and spread out the pieces. Then you check the assembly guide and verify that you have all the parts required to assemble your new dresser. Now, the work begins. Luckily for you, the assembly guide includes step-by-step instructions with images that show you how to put together your product. If you are really lucky, the manufacturer may even provide a URL or QR code connecting you to an online video that demonstrates the complete assembly process. We can likely all agree that assembly instructions are much easier to follow when they include images or videos, rather than just written directions. The same goes for the relationships between sets.
+
+Interpreting Venn Diagrams
+Venn diagrams are the graphical tools or pictures that we use to visualize and understand relationships between sets. Venn diagrams are named after the mathematician John Venn, who first popularized their use in the 1880s. When we use a Venn diagram to visualize the relationships between sets, the entire set of data under consideration is drawn as a rectangle, and subsets of this set are drawn as circles completely contained within the rectangle. The entire set of data under consideration is known as the universal set.
+
+Consider the statement: All trees are plants. This statement expresses the relationship between the set of all plants and the set of all trees. Because every tree is a plant, the set of trees is a subset of the set of plants. To represent this relationship using a Venn diagram, the set of plants will be our universal set and the set of trees will be the subset. Recall that this relationship is expressed symbolically as: Trees⊂Plants. To create a Venn diagram, first we draw a rectangle and label the universal set “U=Plants.” Then we draw a circle within the universal set and label it with the word “Trees.”
+
+This section will introduce how to interpret and construct Venn diagrams. In future sections, as we expand our knowledge of relationships between sets, we will also develop our knowledge and use of Venn diagrams to explore how multiple sets can be combined to form new sets.
+
+Interpreting the Relationship between Sets in a Venn Diagram
+
+Write the relationship between the sets in the following Venn diagram, in words and symbolically.
+
+The set of terriers is a subset of the universal set of dogs. In other words, the Venn diagram depicts the relationship that all terriers are dogs. This is expressed symbolically as T⊂U.
+
+So far, the only relationship we have been considering between two sets is the subset relationship, but sets can be related in other ways. Lions and tigers are both different types of cats, but no lions are tigers, and no tigers are lions. Because the set of all lions and the set of all tigers do not have any members in common, we call these two sets disjoint sets, or non-overlapping sets.
+
+Two sets A and B are disjoint sets if they do not share any elements in common. That is, if a is a member of set A, then a is not a member of set B. If b is a member of set B, then b is not a member of set A. To represent the relationship between the set of all cats and the sets of lions and tigers using a Venn diagram, we draw the universal set of cats as a rectangle and then draw a circle for the set of lions and a separate circle for the set of tigers within the rectangle, ensuring that the two circles representing the set of lions and the set of tigers do not touch or overlap in any way.
+
+Describing the Relationship between Sets
+
+Describe the relationship between the sets in the following Venn diagram.
+
+The set of triangles and the set of squares are two disjoint subsets of the universal set of two-dimensional figures. The set of triangles does not share any elements in common with the set of squares. No triangles are squares and no squares are triangles, but both squares and triangles are 2D figures.
+
+Creating Venn Diagrams
+
+The main purpose of a Venn diagram is to help you visualize the relationship between sets. As such, it is necessary to be able to draw Venn diagrams from a written or symbolic description of the relationship between sets.
+
+Procedure
+
+To create a Venn diagram:
+
+Draw a rectangle to represent the universal set, and label it U=set name.
+
+Draw a circle within the rectangle to represent a subset of the universal set and label it with the set name.
+If there are multiple disjoint subsets of the universal set, their separate circles should not touch or overlap.
+
+Drawing a Venn Diagram to Represent the Relationship Between Two Sets
+
+Draw a Venn diagram to represent the relationship between each of the sets.
+
+All rectangles are parallelograms.
+
+All women are people.
+
+The set of rectangles is a subset of the set of parallelograms.First, draw a rectangle to represent the universal set and label it with U=Parallelograms, then draw a circle completely within the rectangle, and label it with the name of the set it represents, R=Rectangles.
+
+In this example, both letters and names are used to represent the sets involved, but this is not necessary. You may use either letters or names alone, as long as the relationship is clearly depicted in the diagram, as shown below.
+
+or
+
+The universal set is the set of people, and the set of all women is a subset of the set of people.
+
+Drawing a Venn Diagram to Represent the Relationship Between Three Sets
+
+All bicycles and all cars have wheels, but no bicycle is a car. Draw a Venn diagram to represent this relationship.
+Step 1: The set of bicycles and the set of cars are both subsets of the set of things with wheels. The universal set is the set of things with wheels, so we first draw a rectangle and label it with U=Things with Wheels.
+Step 2: Because the set of bicycles and the set of cars do not share any elements in common, these two sets are disjoint and must be drawn as two circles that do not touch or overlap with the universal set.
+
+The Complement of a Set
+
+Recall that if set A is a proper subset of set U, the universal set (written symbolically as A⊂U), then there is at least one element in set U that is not in set A. The set of all the elements in the universal set U that are not in the subset A is called the complement of set A, A'. In set builder notation this is written symbolically as: A'={x∈U|x∉A}. The symbol ∈ is used to represent the phrase, “is a member of,” and the symbol ∉ is used to represent the phrase, “is not a member of.” In the Venn diagram below, the complement of set A is the region that lies outside the circle and inside the rectangle. The universal set U includes all of the elements in set A and all of the elements in the complement of set A, and nothing else.
+
+Consider the set of digit numbers. Let this be our universal set, U={0,1,2,3,4,5,6,7,8,9}. Now, let set A be the subset of U consisting of all the prime numbers in set U, A={2,3,5,7}. The complement of set A is A'={0,1,4,6,8,9}. The following Venn diagram represents this relationship graphically.
+
+Finding the Complement of a Set
+
+For both of the questions below, A is a proper subset of U.
+ 
+ Given the universal set U={Billie Eilish, Donald Glover, Bruno Mars, Adele, Ed Sheeran} and set A={Donald Glover, Bruno Mars, Ed Sheeran}, find A'.
+ Given the universal set U={d|d is a dog} and B={b ∈ U|b is a beagle}, find B'.
+
+Given the universal set U={Billie Eilish, Donald Glover, Bruno Mars, Adele, Ed Sheeran} and set A={Donald Glover, Bruno Mars, Ed Sheeran}, find A'.
+
+Given the universal set U={d|d is a dog} and B={b ∈ U|b is a beagle}, find B'.
+
+The complement of set A is the set of all elements in the universal set U that are not in set A. A'={Billie Eilish, Adele}.
+
+The complement of set B is the set of all dogs that are not beagles. All members of set B′ are in the universal set because they are dogs, but they are not in set B, because they are not beagles. This relationship can be expressed in set build notation as follows: B′={All dogs that are not beagles.}, B′={d∈U|dis not a beagle.}, or B′={d∈U|d∉B}.
+
+Check Your Understanding
+
+Key Terms
+
+Venn diagram
+
+universal set
+
+disjoint set
+
+complement of a set
+
+Key Concepts
+
+A Venn diagram is a graphical representation of the relationship between sets.
+
+In a Venn diagram, the universal set, U is the largest set under consideration and is drawn as a rectangle. All subsets of the universal set are drawn as circles within this rectangle.
+
+The complement of set A includes all the members of the universal set that are not in set A. A set and its complement are disjoint sets, they do not share any elements in common.
+
+To find the complement of set A remove all the elements of set A from the universal set U, the set that includes only the remaining elements is the complement of set A, A′.
+
+Determine the complement of a set using Venn diagrams, the roster method and set builder notation.

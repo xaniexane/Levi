@@ -1,0 +1,15 @@
+# m00051
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Introduction
+
+Introduction
+
+As programs get longer and more complex, organizing the code into modules is helpful. This chapter shows how to define, import, and find new modules. Python's standard library provides over 200 built-in modules. Hundreds of thousands of other modules are available online.
+
+A module is a .py file containing function definitions and other statements. The module's name is the file's name without the .py extension at the end. Ex: The following code, written in a file named greetings.py, defines a module named greetings.
+
+Technically, every program in this book is a module. But not every module is designed to run like a program. Running greetings.py as a program would accomplish very little. Two functions would be defined, but the functions would never be called. These functions are intended to be called in other modules.

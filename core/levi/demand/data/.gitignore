@@ -1,0 +1,4 @@
+# DemandPulse local data (machine of record lives here at runtime).
+# Real ledger rows must never be committed — the JSONL is the local
+# machine of record (O1), not repo content.
+*.jsonl

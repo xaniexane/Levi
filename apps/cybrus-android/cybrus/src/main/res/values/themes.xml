@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Framework Material theme (zero dependencies): styles the window
+         chrome dark so the WebView never flashes light. -->
+    <style name="Theme.Cybrus" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/void_bg</item>
+        <item name="android:statusBarColor">@color/void_bg</item>
+        <item name="android:navigationBarColor">@color/void_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

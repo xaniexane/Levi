@@ -1,0 +1,236 @@
+# m00119
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Euler Circuits
+
+Euler Circuits
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Determine if a graph is connected.
+
+State the Chinese postman problem.
+
+Describe and identify Euler Circuits.
+
+Apply the Euler Circuits Theorem.
+
+Evaluate Euler Circuits in real-world applications.
+
+The delivery of goods is a huge part of our daily lives. From the factory to the distribution center, to the local vendor, or to your front door, nearly every product that you buy has been shipped multiple times to get to you. If the cost and time of that delivery is too great, you will not be able to afford the product. Delivery personnel have to leave from one location, deliver the goods to various places, and then return to their original location and do all of this in an organized way without losing money. How do delivery services find the most efficient delivery route? The answer lies in graph theory.
+
+Connectedness
+
+Before we can talk about finding the best delivery route, we have to make sure there is a route at all. For example, suppose that you were tasked with visiting every airport on the graph in by plane. Could you accomplish that task, only taking direct flight paths between airports listed on this graph? In other words, are all the airports connected by paths? Or are some of the airports disconnected from the others?
+
+In , we can see TPA is adjacent to PBI, FLL, MIA, and EYW. Also, there is a path between TPA and MCO through FLL. This indicates there is a path between each pair of vertices. So, it is possible to travel to each of these airports only taking direct flight paths and visiting no other airports. In other words, the graph is connected because there is a path joining every pair of vertices on the graph. Notice that if one vertex is connected to each of the others in a graph, then all the vertices are connected to each other. So, one way to determine if a graph is connected is to focus on a single vertex and determine if there is a path between that vertex and each of the others. If so, the graph is connected. If not, the graph is disconnected, which means at least one pair of vertices in a graph is not joined by a path. Let’s take a closer look at graph X in . Focus on vertex a. There is a path between vertices a and b, but there is no path between vertex a and vertex c. So, Graph X is disconnected.
+
+When you are working with a planar graph, you can also determine if a graph is connected by untangling it. If you draw it so that so that none of the edges are overlapping, like we did with Graph X in , it is easier to see that the graph is disconnected.
+
+Versions 2 and 3 of Graph X in each have the same number of vertices, number of edges, degrees of the vertices, and pairs of adjacent vertices as version 1. In other words, each version retains the same structure as the original graph. Since versions 2 and 3 of Graph X, do not have overlapping edges, it is easier to identify pairs of vertices that do not have paths between them, and it is more obvious that Graph X is disconnected. In fact, there are two completely separate, disconnected subgraphs, one with the vertices in {a, b, e}, and the other with the vertices {c, d, f}
+
+These sets of vertices together with all of their edges are called components of Graph X. A component of a graph is a subgraph in which there is a path between each pair of vertices in the subgraph, but no edges between any of the vertices in the subgraph and a vertex that is not in the subgraph.
+
+Now let’s focus on Graph Y from . As in Graph X, there is a path between vertices a and b, as well as between vertices a and e, but Graph Y is different from Graph X because of vertex g. Not only is there a path between vertices a and g, but vertex g bridges the gap between a and c with the path a → b → g → c. Similarly, there is a path between vertices a and d and vertices a and f: a → b → g → d, a → b → g → d → f. Since there is a path between vertex a and every other vertex, Graph Y is connected. You can also see this a bit more clearly by untangling Graph Y as in . Even when Y is drawn so that the edges do not overlap, the graph cannot be drawn as two separate, unconnected pieces. In other words, Graph Y has only one component with the vertices {a, b, c, d, e, f}.
+
+We can give an alternate definition of connected and disconnected using the idea of components. A graph is connected if it has only one component. A graph is disconnected if it has more than one component. These alternate definitions are equivalent to the previous definitions. This means that you can confirm a graph is connected or disconnected either by checking to see if there is a path between each vertex and each other vertex, or by identifying the number of components. A graph is connected if it has only one component.
+
+Determining If a Graph Is Connected or Disconnected
+
+Use to answer each question.
+
+Find a path between vertex a and every other vertex on the graph, if possible.
+
+Identify all the components of Graph E.
+
+Determine whether the graph is connected or disconnected and explain how you know.
+
+The paths are a → d → b, a → d → c, and a → d.
+
+There is only one component in Graph E. It has the vertices {a, b, c, d}.
+
+The graph is connected, because there is a path between vertex a and every other vertex. We can also so that Graph E is connected because it has only one component.
+
+Connected and Disconnected Graphs in Graph Theory
+
+Applying Connectedness
+
+The U.S. Interstate Highway System extends throughout the 48 contiguous states. It also has routes in the states of Hawaii and Alaska, and the commonwealth of Puerto Rico. Consider a graph representing the U.S. Interstate Highway System, in which there is a vertex for each of the 50 states and Puerto Rico, and an edge is drawn between any two vertices representing states that are connected by a highway in that system. Would this graph be connected or disconnected? Explain your reasoning.
+
+Hawaii, Alaska, and Puerto Rico are geographically separate from the 48 contiguous states, and each from each other. This means that there are vertices on the graph with no path joining them to the other vertices. So the graph is disconnected.
+
+Origin of Euler Circuits
+
+The city of Konigsberg, modern day Kaliningrad, Russia, has waterways that divide up the city. In the 1700s, the city had seven bridges over the various waterways. The map of those bridges is shown in . The question as to whether it was possible to find a route that crossed each bridge exactly once and return to the starting point was known as the Konigsberg Bridge Problem. In 1735, one of the most influential mathematicians of all time, Leonard Euler, solved the problem using an area of mathematics that he created himself, graph theory!
+
+Euler drew a multigraph in which each vertex represented a land mass, and each edge represented a bridge connecting them, as shown in . Remember from Navigating Graphs that a circuit is a trail, so it never repeats an edge, and it is closed, so it begins and ends at the same vertex. Euler pointed out that the Konigsberg Bridge Problem was the same as asking this graph theory question: Is it possible to find a circuit that crosses every edge? Since then, circuits (or closed trails) that visit every edge in a graph exactly once have come to be known as Euler circuits in honor of Leonard Euler.
+Recognizing Euler Trails and Euler Circuits
+
+Euler was able to prove that, in order to have an Euler circuit, the degrees of all the vertices of a graph have to be even. He also proved that any graph with that characteristic must have an Euler circuit. So, saying that a connected graph is Eulerian is the same as saying it has vertices with all even degrees, known as the Eulerian circuit theorem.
+
+To understand why the Euler circuit theorem is true, think about a vertex of degree 3 on any graph, as shown in .
+
+First imagine the vertex of degree 3 shown in is not the starting vertex. At some point, each edge must be traveled. The first time one of the three edges is traveled, the direction will be toward the vertex, and the second time it will be away from the vertex. Then, at some point, the third edge must be traveled coming in toward the vertex again. This is a problem, because the only way to get back to the starting vertex is to then visit one of the three edges a second time. So, this vertex cannot be part of an Euler circuit.
+
+Next imagine the vertex of degree 3 shown in is the starting vertex. The first time one of the edges is traveled, the direction is away from the vertex. At some point, the second edge will be traveled coming in toward the vertex, and the third edge will be the way back out, but the starting vertex is also the ending vertex in a circuit. The only way to return to the vertex is now to travel one of the edges a second time. So, again, this vertex cannot be part of an Euler circuit.
+
+For the same reason that a vertex of degree 3 can never be part of an Euler circuit, a vertex of any odd degree cannot either. We can use this fact and the graph in to solve the Konigsberg Bridge Problem. Since the degrees of the vertices of the graph in are not even, the graph is not Eulerian and it cannot have an Euler circuit. This means it is not possible to travel through the city of Konigsberg, crossing every bridge exactly once, and returning to your starting position.
+Existence of Euler Circuits in Graph Theory
+
+Chinese Postman Problem
+
+At Camp Woebegone, campers travel the waterways in canoes. As part of the Camp Woebegone Olympics, you will hold a canoeing race. You have placed a checkpoint on each of the 11 different streams. The competition requires each team to travel each stream, pass through the checkpoints in any order, and return to the starting line, as shown in the .
+
+Since the teams want to go as fast as possible, they would like to find the shortest route through the course that visits each checkpoint and returns to the starting line. If possible, they would also like to avoid backtracking. Let’s visualize the course as a multigraph in which the vertices represent turns and the edges represent checkpoints as in .
+
+The teams would like to find a closed walk that repeats as few edges as possible while still visiting every edge. If they never repeat an edge, then they have found a closed trail, which is a circuit. That circuit must cover all edges; so, it would be an Euler circuit. The task of finding a shortest circuit that visits every edge of a connected graph is often referred to as the Chinese postman problem. The name Chinese postman problem was coined in honor of the Chinese mathematician named Kwan Mei-Ko in 1960 who first studied the problem.
+
+If a graph has an Euler circuit, that will always be the best solution to a Chinese postman problem. Let’s determine if the multigraph of the course has an Euler circuit by looking at the degrees of the vertices in . Since the degrees of the vertices are all even, and the graph is connected, the graph is Eulerian. It is possible for a team to complete the canoe course in such a way that they pass through each checkpoint exactly once and return to the starting line.
+
+Understanding Eulerian Graphs
+
+A postal delivery person must deliver mail to every block on every street in a local subdivision. is a map of the subdivision. Use the map to answer each question.
+
+Draw a graph or multigraph to represent the subdivision in which the vertices represent the intersections, and the edges represent streets.
+
+Is your graph connected? Explain how you know.
+
+Determine the degrees of the vertices in the graph.
+
+Is your graph an Eulerian graph?
+
+Is it possible for the postal delivery person to visit each block on each street exactly once? Justify your answer.
+
+The graph is in .
+
+ Graph of Subdivision
+
+The graph is connected. It has only one component and there is a path between each pair of vertices.
+
+There are four corner vertices of degree 2, there are eight exterior vertices of degree 3, and there are four interior vertices of degree 4.
+
+The graph is not Eulerian because it has vertices of odd degree.
+
+No. Since the graph is not Eulerian, there is no Euler circuit, which means that there is no route that would pass through every edge exactly once.
+
+Identifying Euler Circuits
+
+Solving the Chinese postman problem requires finding a shortest circuit through any graph or multigraph that visits every edge. In the case of Eulerian graphs, this means finding an Euler circuit. The method we will use is to find any circuit in the graph, then find a second circuit starting at a vertex from the first circuit that uses only edges that were not in the first circuit, then find a third circuit starting at a vertex from either of the first two circuits that uses only edges that were not in the first two circuits, and then continue this process until all edges have been used. In the end, you will be able to link all the circuits together into one large Euler circuit.
+
+Let’s find an Euler circuit in the map of the Camp Woebegone canoe race. In , we have labeled the edges of the multigraph so that the circuits can be named. In a multigraph it is necessary to name circuits using edges and vertices because there can be more than one edge between adjacent vertices.
+
+We will begin with vertex 1 because it represents the starting line in this application. In general, you can start at any vertex you want. Find any circuit beginning and ending with vertex 1. Remember, a circuit is a trail, so it doesn’t pass through any edge more than once. shows one possible circuit that we could use as the first circuit, 1 → A → 2 → B → 3 → C → 4 → G → 5 → J → 1.
+
+From the edges that remain, we can form two more circuits that each start at one of the vertices along the first circuit. Starting at vertex 3 we can use 3 → H → 5 → I → 1 → K → 3 and starting at vertex 2 we can use 2 → D → 6 → E → 7 → F → 2, as shown in .
+
+Now that each of the edges is included in one and only once circuit, we can create one large circuit by inserting the second and third circuits into the first. We will insert them at their starting vertices 2 and 3
+
+becomes
+
+Finally, we can name the circuit using vertices, 1 → 2 → 6 → 7 → 2 → 3 → 5 → 1 → 3 → 4 → 5 → 1, or edges, A → D → E → F → B → H → I → K → C → G → J.
+
+Let's review the steps we used to find this Eulerian Circuit.
+Steps to Find an Euler Circuit in an Eulerian Graph
+Step 1 - Find a circuit beginning and ending at any point on the graph. If the circuit crosses every edges of the graph, the circuit you found is an Euler circuit. If not, move on to step 2.
+Step 2 - Beginning at a vertex on a circuit you already found, find a circuit that only includes edges that have not previously been crossed. If every edge has been crossed by one of the circuits you have found, move on to Step 3. Otherwise, repeat Step 2.
+Step 3 - Now that you have found circuits that cover all of the edges in the graph, combine them into an Euler circuit. You can do this by inserting any of the circuits into another circuit with a common vertex repeatedly until there is one long circuit.
+
+Finding an Euler Circuit
+
+Use to answer each question.
+
+Verify the Graph F is Eulerian.
+
+Find an Euler circuit that begins and ends at vertex c.
+
+The graph is connected because it has only one component. Also, each of the vertices in graph F has even degree as shown in . So, the graph is Eulerian.
+
+ Degrees of Vertices in Graph F
+Step 1: Beginning at vertex c, identify circuit c → e → b → c as shown in . Since this circuit does not cover every edge in the graph, move on to Step 2.
+
+ First Circuit in Graph F
+ 
+ Step 2: Find another circuit beginning at one of the vertices in the first circuit, using only edges that have not been used in the first circuit. It is possible to do this using either vertex c or vertex b. In , we have used vertex b as the starting and ending point for a second circuit, b → d → c → a → b. Since all edges have been crossed by one of the two circuits, move on to Step 3.
+
+ Second Circuit in Graph F
+ 
+ Step 3: Combine the two circuits into one. Replace vertex b in the first circuit with the whole second circuit that begins at vertex b.
+ c→e→b→cbecomesc→e→b→d→c→a→b→c.
+ An Euler circuit that begins at vertex c is c → e → b → d → c → a → b → c.
+
+Eulerization
+
+The Chinese postman problem doesn’t only apply to Eulerian graphs. Recall the postal delivery person who needed to deliver mail to every block of every street in a subdivision. We used the map in to create the graph in .
+
+Since the graph of the subdivision has vertices of odd degree, there is no Euler circuit. This means that there is no route through the subdivision that visits every block of every street without repeating a block. What should our delivery person do? They need to repeat as few blocks as possible. The technique we will use to find a closed walk that repeats as few edges as possible is called eulerization. This method adds duplicate edges to a graph to create vertices of even degree so that the graph will have an Euler circuit.
+
+In , the eight vertices of odd degree in the graph of the subdivision are circled in green. We have added duplicate edges between the pairs of vertices, which changes the degrees of the vertices to even degrees so the resulting multigraph has an Euler circuit. In other words, we have eulerized the graph.
+
+The duplicate edges in the eulerized graph correspond to blocks that our delivery person would have to travel twice. By keeping these duplicate edges to a minimum, we ensure the shortest possible route. It can be challenging to determine the fewest duplicate edges needed to eulerize a graph, but you can never do better than half the number of odd vertices. In the graph in , we have found a way to fix the eight vertices of odd degree with only four duplicate edges. Since four is half of eight, we will never do better.
+IMPORTANT! The duplicate edges that we add indicate places where the route will pass twice. An entirely new edge between two vertices that were not previously adjacent would indicate that our postal delivery person created a new road through someone’s property! So, we can duplicate existing edges, but we cannot create new ones.
+
+Eulerizing Graphs
+
+Use Graph A and multigraphs B, C, D, and E given in to answer the questions.
+
+Which of the multigraphs are not eulerizations of Graph A? Explain your answer.
+
+Which eulerization of Graph A uses the fewest duplicate edges? How many does it use?
+
+Is it possible to eulerize Graph A using fewer duplicate edges than your answer to part 2? If so, give an example. If not, explain why not.
+
+Multigraph B is not an eulerization of A because the edge N between vertices c and d is not a duplicate of an existing edge. Multigraph E is not an eulerization of A because vertices b and e have odd degree.
+
+Multigraph C uses 3 duplicate edges while multigraph D only uses 2. So, D uses the fewest.
+
+Since there were four vertices in Graph A, the fewest number of edges that could possibly eulerize the graph is half of four, which is two. So, it is not possible to eulerize Graph A using fewer edges.
+
+IMPORTANT! Since only duplicate edges can be added to eulerize a graph, it is not possible to eulerize a disconnected graph.
+
+In The Wonderful Wizard of Oz, written by L. Frank Baum and illustrated by W. W. Denslow, the region of the Emerald City lies at the center of the magical land of Oz, with Gillikin Country to the north, Winkie Country to the east, Munchkin Country to the west, and Quadling Country to the south. Munchkin Country and Winkie Country each shares a border with Gillikin Country and Quadling Country. Let’s apply graph theory to Dorothy’s famous journey through Oz. Draw a graph in which each vertex is one of the regions of Oz. Then answer each question:
+
+Is there an Euler trail circuit that Dorothy could follow, instead of the yellow brick road, to lead her from the land of the Munchkins, through all the regions of Oz and back, passing over each border exactly once? If not, how could the graph be Eulerized most efficiently?
+
+What is the chromatic number of the graph? Find a graph coloring that demonstrates your answer and use it to draw and color a graph of Oz.
+
+Check Your Understanding
+
+Key Terms
+
+connected
+
+component
+
+disconnected
+
+Euler circuit
+
+Eulerian graph
+
+Chinese postman problem
+
+Eulerization
+
+Key Concepts
+
+A connected graph has only one component.
+
+The Euler circuit theorem states that an Euler circuit exists in every connected graph in which all vertices have even degree, but not in disconnected graphs or any graph with one or more vertices of odd degree.
+
+The Chinese postman problem asks how to find the shortest closed trail that visits all edges at least once.
+
+If an Euler circuit exists, it is always the best solution to the Chinese postman problem.
+
+Eulerization is the process of adding duplicate edges to a graph so that the new multigraph has an Euler circuit.
+
+The minimum number of duplicated edges needed to eulerize a graph is half the number of odd vertices or more.
+
+Videos
+Connected and Disconnected Graphs in Graph Theory
+Recognizing Euler Trails and Euler Circuits
+Existence of Euler Circuits in Graph Theory

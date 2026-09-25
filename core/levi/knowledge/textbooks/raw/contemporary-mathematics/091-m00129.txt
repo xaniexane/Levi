@@ -1,0 +1,166 @@
+# m00129
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Tessellations
+
+Tessellations
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Apply translations, rotations, and reflections.
+
+Determine if a shape tessellates.
+
+The illustration shown above () is an unusual pattern called a Penrose tiling. Notice that there are two types of shapes used throughout the pattern: smaller green parallelograms and larger blue parallelograms. What's interesting about this design is that although it uses only two shapes over and over, there is no repeating pattern.
+
+In this section, we will focus on patterns that do repeat. Repeated patterns are found in architecture, fabric, floor tiles, wall patterns, rug patterns, and many unexpected places as well. It may be a simple hexagon-shaped floor tile, or a complex pattern composed of several different motifs. These two-dimensional designs are called regular (or periodic) tessellations. There are countless designs that may be classified as regular tessellations, and they all have one thing in common—their patterns repeat and cover the plane.
+
+We will explore how tessellations are created and experiment with making some of our own as well. The topic of tessellations belongs to a field in mathematics called transformational geometry, which is a study of the ways objects can be moved while retaining the same shape and size. These movements are termed rigid motions and symmetries.
+
+M. C. Escher
+
+A good place to start the study of tessellations is with the work of M. C. Escher. The Dutch graphic artist was famous for the dimensional illusions he created in his woodcuts and lithographs, and that theme is carried out in many of his tessellations as well. Escher became obsessed with the idea of the “regular division of the plane.” He sought ways to divide the plane with shapes that would fit snugly next to each other with no gaps or overlaps, represent beautiful patterns, and could be repeated infinitely to fill the plane. He experimented with practically every geometric shape imaginable and found the ones that would produce a regular division of the plane. The idea is similar to dividing a number by one of its factors. When a number divides another number evenly, there are no remainders, like there are no gaps when a shape divides or fills the plane.
+
+Escher went far beyond geometric shapes, beyond triangles and polygons, beyond irregular polygons, and used other shapes like figures, faces, animals, fish, and practically any type of object to achieve his goal; and he did achieve it, beautifully, and left it for the ages to appreciate.
+M.C. Escher: How to Create a Tessellation
+The Mathematical Art of M.C. Escher
+
+Tessellation Properties and Transformations
+
+A regular tessellation means that the pattern is made up of congruent regular polygons, same size and shape, including some type of movement; that is, some type of transformation or symmetry. Here we consider the rigid motions of translations, rotations, reflections, or glide reflections. A plane of tessellations has the following properties:
+ 
+ Patterns are repeated and fill the plane.
+ There are no gaps or overlaps. Shapes must fit together perfectly. (It was Escher who determined that a proper tessellation could have no gaps and no overlaps.)
+ Shapes are combined using a transformation.
+ All the shapes are joined at a vertex. In other words, if you were to draw a circle around a vertex, it would include a corner of each shape touching at that vertex.
+ For a tessellation of regular congruent polygons, the sum of the measures of the interior angles that meet at a vertex equals 360∘.
+
+Patterns are repeated and fill the plane.
+
+There are no gaps or overlaps. Shapes must fit together perfectly. (It was Escher who determined that a proper tessellation could have no gaps and no overlaps.)
+
+Shapes are combined using a transformation.
+
+All the shapes are joined at a vertex. In other words, if you were to draw a circle around a vertex, it would include a corner of each shape touching at that vertex.
+
+For a tessellation of regular congruent polygons, the sum of the measures of the interior angles that meet at a vertex equals 360∘.
+
+In , the tessellation is made up of squares. There are four squares meeting at a vertex. An interior angle of a square is 90∘ and the sum of four interior angles is 360∘. In , the tessellation is made up of regular hexagons. There are three hexagons meeting at each vertex. The interior angle of a hexagon is 120∘, and the sum of three interior angles is 360∘. Both tessellations will fill the plane, there are no gaps, the sum of the interior angle meeting at the vertex is 360∘, and both are achieved by translation transformations. These tessellations work because all the properties of a tessellation are present.
+
+The movements or rigid motions of the shapes that define tessellations are classified as translations, rotations, reflections, or glide reflections. Let’s first define these movements and then look at some examples showing how these transformations are revealed.
+
+Translation
+
+A translation is a movement that shifts the shape vertically, horizontally, or on the diagonal. Consider the trapezoid ABCD in . We have translated it 3 units to the right and 3 units up. That means every corner is moved by the number of units and in the direction specified. Mathematicians will indicate this movement with a vector, an arrow that is drawn to illustrate the criteria and the magnitude of the translation. The location of the translated trapezoid is marked with the vertices, A′B′C′D′, but it is still the exact same shape and size as the original trapezoid ABCD.
+
+Creating a Translation
+
+Suppose you have a hexagon on a grid as in . Translate the hexagon 5 units to the right and 3 units up.
+
+The best way to do this is by translating the individual points A,B,C,D,E,F. Once translated, the points become A′,B′,C′,D′,E′,F′.
+
+Rotation
+
+The rotation transformation occurs when you rotate a shape about a point and at a predetermined angle. In , the triangle is rotated around the rotation point by 90∘, and then translated 7 units up and 4 units over to the right. That means that each corner is translated to the new location by the same number of units and in the same direction.
+
+We can see that ΔA is mapped to ΔA′ by a rotation of 90∘ up and to the right. If rotated again by 90∘, the triangle would be upside down.
+
+Applying a Rotation
+illustrates a tessellation begun with an equilateral triangle. Explain how this pattern is produced.
+
+A rotation to the right or to the left around the vertex by 60∘, six times, produces the hexagonal shape. The sixth rotation brings the triangle back to its original position. Then, a reflection up and another one on the diagonal will reproduce the pattern. When a shape returns to its original position by a rotation, we say that it has rotational symmetry.
+
+Reflection
+
+A reflection is the third transformation. A shape is reflected about a line and the new shape becomes a mirror image. You can reflect the shape vertically, horizontally, or on the diagonal. There are two shapes in . The quadrilateral is reflected horizontally; the arrow shape is reflected vertically.
+
+Glide Reflection
+
+The glide reflection is the fourth transformation. It is a combination of a reflection and a translation. This can occur by first reflecting the shape and then gliding or translating it to its new location, or by translating first and then reflecting. The example in shows a trapezoid, which is reflected over the dashed line, so it appears upside down. Then, we shifted the shape horizontally by 6 units to the right. Whether we use the glide first or the reflection first, the end result is the same in most cases. However, the tessellation shown in the next example can only be achieved by a reflection first and then a translation.
+
+Applying the Glide Reflection
+
+An obtuse triangle is reflected about the dashed line, and the two shapes are joined together. How does the tessellation shown in materialize?
+
+The new shape is reflected horizontally and joined with the original shape. It is then translated vertically and horizontally to make up the tessellation. Notice the blank spaces next to the vertical pattern. These areas are made up of the exact original shape rotated 180∘, but with no line up the center. These rotated shapes are translated horizontally and vertically, and thus, the plane is tessellated with no gaps. This is an example of a glide reflection where the order of the transformations matters.
+
+Applying More Than One Tessellation
+
+Show how this tessellation () can be achieved.
+
+This is a tessellation that has one color on the front of the trapezoid and a different color on the back. There is a translation on the diagonal, and a reflection vertically. These are two separate transformations resulting in two new placements of the trapezoid. We can call this a combination of two transformations or a glide reflection.
+
+Interior Angles
+
+The sum of the interior angles of a tessellation is 360∘. In , the tessellation is made of six triangles formed into the shape of a hexagon. Each angle inside a triangle equals 60∘, and the six vertices meet the sum of those interior angles, 6(60°)=360°.
+
+In , the tessellation is made up of trapezoids, such that two of the interior angles of each trapezoid equals 75° and the other two angles equal 105°. Thus, the sum of the interior angles where the vertices of four trapezoids meet equals 105°+75°+75°+105°=360°.
+
+These tessellations illustrate the property that the shapes meet at a vertex where the interior angles sum to 360°.
+
+Tessellating Shapes
+
+We might think that all regular polygons will tessellate the plane by themselves. We have seen that squares do and hexagons do. The pattern of squares in is a translation of the shape horizontally and vertically. The hexagonal pattern in , is translated horizontally, and then on the diagonal, either to the right or to the left. This particular pattern can also be formed by rotations. Both tessellations are made up of congruent shapes and each shape fits in perfectly as the pattern repeats.
+
+We have also seen that equilateral triangles will tessellate the plane without gaps or overlaps, as shown in . The pattern is made by a reflection and a translation. The darker side is the face of the triangle and the lighter side is the back of the triangle, shown by the reflection. Each triangle is reflected and then translated on the diagonal.
+
+Escher experimented with all regular polygons and found that only the ones mentioned, the equilateral triangle, the square, and the hexagon, will tessellate the plane by themselves. Let’s try a few other regular polygons to observe what Escher found.
+
+Tessellating the Plane
+
+Do regular pentagons tessellate the plane by themselves ()?
+
+We can see that regular pentagons do not tessellate the plane by themselves. There is a gap, a gap in the shape of a parallelogram. We conclude that regular pentagons will not tessellate the plane by themselves.
+
+Tessellating Octagons
+
+Do regular octagons tessellate the plane by themselves ()?
+
+Again, we see that regular octagons do not tessellate the plane by themselves. The gaps, however, are squares. So, two regular polygons, an octagon and a square, do tessellate the plane.
+
+Just because regular pentagons do not tessellate the plane by themselves does not mean that there are no pentagons that tessellate the plane, as we see in .
+
+Another example of an irregular polygon that tessellates the plane is by using the obtuse irregular triangle from a previous example. What transformations should be performed to produce the tessellation shown in ?
+
+First, the triangle is reflected over the tip at point A, and then translated to the right and joined with the original triangle to form a parallelogram. The parallelogram is then translated on the diagonal and to the right and to the left.
+
+Naming
+
+A tessellation of squares is named by choosing a vertex and then counting the number of sides of each shape touching the vertex. Each square in the tessellation shown in has four sides, so starting with square A, the first number is 4, moving around counterclockwise to the next square meeting the vertex, square B, we have another 4, square C adds another 4, and finally square D adds a fourth 4. So, we would name this tessellation a 4.4.4.4.
+
+The hexagon tessellation, shown in has six sides to the shape and three hexagons meet at the vertex. Thus, we would name this a 6.6.6. The triangle tessellation, shown in has six triangles meeting the vertex. Each triangle has three sides. Thus, we name this a 3.3.3.3.3.3.
+
+Creating Your Own Tessellation
+
+Create a tessellation using two colors and two shapes.
+
+We used a parallelogram and an isosceles triangle. The parallelogram is reflected vertically and horizontally so that only every other corner touches. The triangles are reflected vertically and horizontally and then translated over the parallelogram. The result is alternating vertical columns of parallelograms and then triangles ().
+
+Check Your Understanding
+
+Key Terms
+
+tessellation
+
+translation
+
+reflection
+
+rotation
+
+glide reflection
+
+Key Concepts
+
+A tessellation is a particular pattern composed of shapes, usually polygons, that repeat and cover the plane with no gaps or overlaps.
+
+Properties of tessellations include rigid motions of the shapes called transformations. Transformations refer to translations, rotations, reflections, and glide reflections. Shapes are transformed in such a way to create a pattern.
+
+Videos
+M.C. Escher: How to Create a Tessellation
+The Mathematical Art of M.C. Escher

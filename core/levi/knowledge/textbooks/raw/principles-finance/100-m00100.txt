@@ -1,0 +1,288 @@
+# m00100
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Net Present Value (NPV) Method
+
+Net Present Value (NPV) Method
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Define net present value.
+
+Calculate net present value.
+
+List the advantages and disadvantages of using the net present value method.
+
+Graph an NPV profile.
+
+Net Present Value (NPV) Calculation
+
+Sam’s purchasing of the embroidery machine involves spending money today in the hopes of making more money in the future. Because the cash inflows and outflows occur in different time periods, they cannot be directly compared to each other. Instead, they must be translated into a common time period using time value of money techniques. By converting all of the cash flows that will occur from a project into present value, or current dollars, the cash inflows from the project can be compared to the cash outflows. If the cash inflows exceed the cash outflows in present value terms, the project will add value and should be accepted. The difference between the present value of the cash inflows and the present value of cash outflows is known as net present value (NPV).
+
+The equation for NPV can be written as
+
+Consider Sam’s Sporting Goods’ decision of whether to purchase the embroidery machine. If we assume that after six years the embroidery machine will be obsolete and the project will end, when placed on a timeline, the project’s expected cash flow is shown in :
+
+Year
+0
+1
+2
+3
+4
+5
+6
+Cash Flow ($)
+(16,000)
+2,000
+4,000
+5,000
+5,000
+5,000
+5,000
+Calculating NPV is simply a time value of money problem in which each cash flow is discounted back to the present value. If we assume that the cost of funds for Sam’s is 9%, then the NPV can be calculated as
+
+Because the NPV is positive, Sam’s Sporting Goods should purchase the embroidery machine. The value of the firm will increase by $2,835.63 as a result of accepting the project.
+
+Calculating NPV involves computing the present value of each cash flow and then summing the present values of all cash flows from the project. This project has six future cash flows, so six present values must be computed. Although this is not difficult, it is tedious.
+
+A financial calculator is able to calculate a series of present values in the background for you, automating much of the process. You simply have to provide the calculator with each cash flow, the time period in which each cash flow occurs, and the discount rate that you want to use to discount the future cash flows to the present.
+
+Follow the steps in for calculating NPV:
+
+Calculator Steps for NPVThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+CF
+CF0
+XXXX
+2
+2ND [CLR WORK]
+CF0
+0
+3
+Enter initial cash flow
+16000 +/- ENTER
+CF0 =
+-16,000.00
+4
+Enter cash flow for the first year
+↓     2000 ENTER
+C01 =
+2,000.00
+↓
+F01 =
+1.0
+5
+Enter cash flow for the second year
+↓     4000 ENTER
+C02 =
+4,000.00
+↓
+F02 =
+1.0
+6
+Enter cash flow for the third year
+↓     5000 ENTER
+C03 =
+5,000.00
+↓
+F03 =
+1.0
+7
+Enter cash flow for the fourth year
+↓     5000 ENTER
+C04 =
+5,000.00
+↓
+F04 =
+1.0
+8
+Enter cash flow for the fifth year
+↓     5000 ENTER
+C05 =
+5,000.00
+↓
+F05 =
+1.0
+9
+Enter cash flow for the sixth year
+↓     5000 ENTER
+C06 =
+5,000.00
+↓
+F06 =
+1.0
+10
+NPV
+I
+0.00
+11
+Enter discount rate
+9 ENTER
+I =
+9.00
+12
+Compute NPV
+↓     CPT
+NPV =
+2,835.63
+Net Present Value
+
+This video provides another example of how to use NPV to evaluate whether a project should be accepted or rejected.
+
+Advantages
+
+The NPV method solves several of the listed problems with the payback period approach. First, the NPV method uses the time value of money concept. All of the cash flows are discounted back to their present value to be compared. Second, the NPV method provides a clear decision criterion. Projects with a positive NPV should be accepted, and projects with a negative NPV should be rejected. Third, the discount rate used to discount future cash flows to the present can be increased or decreased to adjust for the riskiness of the project’s cash flows.
+
+Disadvantages
+
+The NPV method can be difficult for someone without a finance background to understand. Also, the NPV method can be problematic when available capital resources are limited. The NPV method provides a criterion for whether or not a project is a good project. It does not always provide a good solution when a company must make a choice between several acceptable projects because funds are not available to pursue them all.
+
+Calculating NVP
+
+Suppose your company is considering a project that will cost $30,000 this year. The cash inflow from this project is expected to be $6,000 next year and $8,000 the following year. The cash inflow is expected to increase by $2,000 yearly, resulting in a cash inflow of $18,000 in year 7, the final year of the project. You know that your company’s cost of funds is 9%. Use a financial calculator to calculate NPV to determine whether this is a good project for your company to undertake (see ).
+Solution:
+
+Calculator Steps for NPV
+
+Step
+Description
+Enter
+Display
+1
+CF
+CF0
+XXXX
+2
+2ND [CLR WORK]
+CF0
+0
+3
+Enter initial cash flow
+30000 +/- ENTER
+CF0 =
+-30,000.00
+4
+Enter cash flow for the first year
+↓     6000 ENTER
+C01 =
+6,000.00
+↓
+F01 =
+1.0
+5
+Enter cash flow for the second year
+↓     8000 ENTER
+C02 =
+8,000.00
+↓
+F02 =
+1.0
+6
+Enter cash flow for the third year
+↓     10000 ENTER
+C03 =
+10,000.00
+↓
+F03 =
+1.0
+7
+Enter cash flow for the fourth year
+↓     12000 ENTER
+C04 =
+12,000.00
+↓
+F04 =
+1.0
+8
+Enter cash flow for the fifth year
+↓     14000 ENTER
+C05 =
+14,000.00
+↓
+F05 =
+1.0
+9
+Enter cash flow for the sixth year
+↓     16000 ENTER
+C06 =
+16,000.00
+↓
+F06 =
+1.0
+10
+Enter cash flow for the seventh year
+↓     18000 ENTER
+C07 =
+18,000.00
+↓
+F07 =
+1.0
+11
+NPV
+I
+0.00
+12
+Enter discount rate
+9 ENTER
+I =
+9.00
+13
+Compute NPV
+↓     CPT
+NPV =
+26,946.90
+The NPV for this project is $26,946.90. Undertaking this project will add a net present value of $26,946.90; therefore, this is a good project that should be undertaken.
+
+Calculating the NPV of an MBA Program
+
+The NPV calculation can be used as a decision tool when you are deciding whether you should spend money today to make money in the future. This website on calculating the NPV on an MBA degree lets you apply this concept in an educational setting. The initial cost of the MBA includes both the dollars spent on tuition and the wages that a full-time student could have earned if they were not in school. Why is it appropriate to include these forgone wages in the calculation? What adjustments would students need to make to this analysis if they wanted to consider attending a part-time MBA program that allowed them to continue working while completing the program?
+
+NPV Profile
+
+The NPV of a project depends on the expected cash flows from the project and the discount rate used to translate those expected cash flows to the present value. When we used a 9% discount rate, the NPV of the embroidery machine project was $2,836. If a higher discount rate is used, the present value of future cash flows falls, and the NPV of the project falls.
+
+Theoretically, we should use the firm’s cost to attract capital as the discount rate when calculating NPV. In reality, it is difficult to estimate this cost of capital accurately and confidently. Because the discount rate is an approximate value, we want to determine whether a small error in our estimate is important to our overall conclusion. We can do this by creating an NPV profile, which graphs the NPV at a variety of discount rates and allows us to determine how sensitive the NPV is to changes in the discount rate.
+
+To construct an NPV profile for Sam’s, select several discount rates and compute the NPV for the embroidery machine project using each of those discount rates. below shows the NPV for several discount rates. Notice that if the discount rate is zero, the NPV is simply the sum of the cash flows. As the discount rate becomes larger, the NPV falls and eventually becomes negative.
+
+The information in is presented in a graph in . We can see that the graph crosses the horizontal axis at about 14%. To the left, or at lower discount rates, the NPV is positive. If you are confident that the firm’s cost of attracting funds is less than 14%, the company should accept the project. If the cost of capital is more than 14%, however, the NPV is negative, and the company should reject the project.
+
+NPV for Various Discount Rates
+
+Discount Rate
+NPV ($)
+0%
+10,000
+3%
+7,231
+9%
+2,836
+12%
+1,081
+14%
+42
+15%
+(442)
+18%
+(1,773)
+21%
+(2,939)
+NPV Profile Graph
+
+Net present value (NPV) is calculated by subtracting the present value of a project’s cash outflows from the present value of the project’s cash inflows. A project should be accepted if its NPV is positive and rejected if its NPV is negative.
+
+Calculating NPV and IRR
+
+Businesses use NPV and IRR to determine whether or not a project will add value for shareholders. Watch this CFA® Level I Corporate Finance video to learn more. Working along with the video, you will gain practice in using your financial calculator to calculate IRR.
+
+the present value of the cash inflows of a project minus the present value of the cash outflows of the project

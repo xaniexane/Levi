@@ -1,0 +1,46 @@
+# m00013
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Mixed data types
+
+Mixed data types
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify the data types produced by operations with integers, floats, and strings.
+
+Use operators and type conversions to combine integers, floats, and strings.
+
+Combining integers and floats
+
+Programmers often need to combine numbers of different data types. Ex: A program computes the total for an online shopping order:
+quantity is an integer, and price is a float. So what is the data type of total? For input 3 and 5.0, total is a float, and the program prints 15.0.
+
+Combining an integer and a float produces a float. A float is by default printed with at least one figure after the decimal point and has as many figures as needed to represent the value. Note: Division using the / operator always produces a float.
+
+Operations combining integers and floats
+
+Operations combining integers and floats
+
+Combining numeric types and strings
+
+Easy type conversion in Python can lead a programmer to assume that any data type can be combined with another. Ex: Noor's program reads in a number from input and uses the number in a calculation. This results in an error in the program because the input() function by default stores the number as a string. Strings and numeric data types are incompatible for addition, subtraction, and division. One of the operands needs to be explicitly converted depending on the goal of arithmetic or string concatenation.
+
+The * operator also serves as the repetition operator, which accepts a string operand and an integer operand and repeats the string. Ex: "banjo" * 3 produces "banjobanjobanjo".
+
+Adding a string and an integer
+
+Operations combining numeric types and strings
+
+After the point
+
+Write a program that reads in a string of digits that represents the digits after the decimal point of a number, num. Concatenate the input string together with '.' and num, and print the result. Ex: If input is 345, the program will print 2.345.
+
+Print n times
+
+Write a program that reads in two strings, str1 and str2, and an integer, count. Concatenate the two strings with a space in between and a newline ("\n") at the end. Print the resulting string count times.

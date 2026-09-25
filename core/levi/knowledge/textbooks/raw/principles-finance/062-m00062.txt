@@ -1,0 +1,469 @@
+# m00062
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Bond Valuation
+
+Bond Valuation
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Determine the value (price) of a bond.
+
+Understand the characteristics of and differences between discount and premium bonds.
+
+Draw a timeline indicating bond cash flows.
+
+Differentiate between fixed-rate and variable-rate bonds.
+
+Determine bond yields.
+
+Pricing a Bond in Steps
+
+Why do we want to learn how to price a bond? The answer goes to the heart of finance: the valuation of assets. We need to ascertain what a given bond is worth to a willing buyer and a willing seller. What is its value to these interested parties? Remember that a bond is a financial asset that a company sells to raise money from willing investors. Whether you are the company selling the bond or the investor buying the bond, you want to make sure that you are selling or buying at the best available price.
+
+Let’s begin our pricing examples with the 3M Company corporate bond listed in above. The table information tells us that 3M issued a series of corporate bonds that promise to pay coupons annually on September 19 and to pay back the principal, or face value, on the maturity date of September 19, 2026. While this is not specified in the table, let’s say these are 15-year corporate bonds. In that case, we know that they were issued on September 20, 2011.
+
+The 3M bonds have an annual coupon rate of 2.25%, which indicates that the annual interest payment on the bond will be the face value (assumed to be $1,000.00 multiplied by 2.25%), or $22.50. The appropriate discount rate to apply to these future payments is the yield to bond maturity, 1.24%.
+
+Note that the 3M bond is selling at a premium (above par or face value) due to the fact that its coupon rate is greater than the YTM percentage. This means that the bond earns more value in interest than it loses due to discounting its cash flows to allow for the time value of money principle.
+
+Finally, the table tells us some of the bond’s features. For example, Standard & Poor’s, an international rating agency, rates 3M Co. as A+ (high credit quality). Additionally, the bonds are designated as callable, meaning that 3M has the option of redeeming them before their maturity on September 19, 2026.
+
+We can price a bond using the same methods from earlier chapters: an equation, a calculator, and a spreadsheet. Let’s start with the equation method (see ).
+
+Steps in Pricing a Bond
+
+The first step is to identify the amounts and the timing of the two types of future cash flows to be received on the bond. Any bond that pays interest or coupon payments (coupon bonds) will have two sources of future cash flow to its bondholder/investor: the periodic coupon payments, which are a form of annuity, and the final lump sum payment of the face value amount at maturity.
+
+As discussed above, the principal or face value is paid in a one-time lump sum payment at bond maturity. In our example with 3M Co., this is the $1,000 par value of the bond that will be paid on the maturity date of September 19, 2026. Step 1 is to lay out the timing and amount of the future cash flows. The first future cash flow we need to determine is the annual interest payment. Here, it is the coupon rate of 2.25% times the par value of the bond. As mentioned above, we will use $1,000 as the par value of this bond, so the annual coupon or interest payment will equal $22.50:
+
+The next future cash flow that we need to determine is the payment of the par value or principal—in this case, the $1,000 par value of the bond—at the maturity date of September 19, 2026. We can set out the future cash flows for the bond as shown in :
+
+Year (Period)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+Coupons
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+$22.50
+Principal
+$1,000
+Note that annual coupon payments are made each year on September 19, and the first annual coupon payment date is September 19, 2012. The annual payments continue for 15 years, with the last payment being made on September 19, 2026. At this point, we can apply previously learned concepts: the coupon payments constitute an annuity stream, or payments of the same amount at regular intervals.
+
+The principal of $1,000 is also paid out at maturity. Here, we recognize another key concept: the final amount is a lump sum payment. So, we now have the promised set of future cash flows for the 3M Co. bond.
+
+In Step 2, we will need to decide on a discount rate to use on these future bond cash payments. For now, we will jump to the answer and simply use the YTM of 1.24% from the bond data in . Later in the chapter, we will develop the concepts behind how an appropriate discount rate is determined.
+
+For Step 3, we now apply two equations to the set of future cash flows from the bond. This will then provide us with the present values of these cash flows, or the expected present-day value of the bond. Because we know that the coupon payments constitute an annuity stream, we can use the equation for the present value of an annuity (discussed in Time Value of Money II: Equal Multiple Payments. To value the one-time par value payment, we use the equation for the present value of a lump sum payment. So, by combining these, we will have the present value of the coupon payment stream, or
+
+So, for our example above, this becomes
+
+Next, we need to determine the present value of the payment of the par or face value of the bond at maturity. This is calculated as follows:
+
+Inserting our values into this formula gives us
+
+Adding the present values of the two payment streams gives us
+
+Our bond price is $1,137.47. This bond price represents the value of the financial asset to both a willing buyer and a willing seller.
+
+In this example, the willing seller is 3M Company. The willing buyer is an investor who is demanding a 1.24% yield on the investment. As per above, the 3M bond sold for $1,051.20 in March 2021. However, we display the price as a percentage of the par value, so we have the displayed price as
+
+Because we round the percent of par, we do not see the cents digit in the quoted price.
+
+Pricing a Bond Using a Financial Calculator
+
+A financial calculator can also be used to solve common types of bond valuations. For example, what would be the current price (value) of a 4% coupon bond, paid semiannually, with a face value of $1,000 and a remaining term to maturity of 15 years, assuming a required YTM rate of 5%? The steps to solve this problem are shown in below.
+
+Calculator Steps for Bond ValuationsThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter future or par value as a negative amount
+1000 +|- FV
+FV =
+-1,000.0000
+3
+Enter interest rate5%annualrate2=2.5% semiannualrate
+2.5 I/Y
+I/Y =
+2.5000
+4
+Enter periods Enter periods (15 years×2=30 semiannualperiods)
+30 N
+N =
+30.0000
+5
+Enter coupon payment $1,000 × 4%2=$20as a negative amount
+20 +|- PMT
+PMT =
+-20.0000
+6
+CPT PV
+PV =
+895.3485
+The current price is $895.35.
+
+Time Value Connection
+
+As we have briefly discussed, bond valuation is determined by time value of money techniques, most notably present value calculations. This makes logical sense when one considers that an investment in a bond involves a series of future cash inflows, or payments from the bond issuer to the bondholder over the term of the bond’s maturity.
+
+To determine the value of a bond today, the two-step time value of money calculation we discussed earlier must be used, and the present value of a series of coupon payments (or an annuity) must be determined. This present value amount will then be added to the present value of a single lump sum payment (the principal or face value) that will come to the bondholder at the end of the bond’s term (maturity).
+
+Fixed Income
+
+Because standard fixed-rate bonds have their coupon payments and maturity amounts locked in, they are often referred to as fixed-income investments. This is because their values are relatively straightforward to calculate. Bonds are generally viewed as stable investments that offer income and a lower amount of volatility compared to stocks.
+
+While yields provided by corporate and government bonds such as US T-bills and municipal bonds are currently low because the Federal Reserve System (the Fed) has kept interest rates low for several years, investors may still consider adding bonds to their portfolios.Adam Hayes. “What Do Constantly Low Bond Yields Mean for the Stock Market?” Investopedia. June 15, 2021. https://www.investopedia.com/ask/answers/061715/how-can-bond-yield-influence-stock-market.asp This is especially true as investors enter their retirement years and seek to generate income while avoiding the volatility of the stock market. Such investors can add a mix of individual bonds, mutual funds, or exchange-traded funds to their portfolios, thus generating potential return while keeping risks at a minimum. Fixed-income investments such as intermediate- or longer-term bond funds are still providing good yields despite the low-interest-rate state of the economy.
+
+It is important to note, however, that even though bonds are generally thought of as safer investments, they still are subject to a number of risks. Because income from most bonds is fixed, such instruments can have their values eroded by external factors such as interest rates and inflation. We will discuss some of these risks after the next section.
+
+Period
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+End Date
+6/30/20
+12/31/20
+6/30/21
+12/31/21
+6/30/22
+12/31/22
+6/30/23
+12/31/23
+6/30/24
+12/31/24
+Coupon
+$4,500
+$4,500
+$4,500
+$4,500
+$4,500
+$4,500
+$4,500
+$4,500
+$4,500
+$4,500
+Principal
+shows the cash inflow of a five-year, 9%, $100,000 corporate bond dated January 1, 2020. The bond will have coupon (interest) payment dates of June 30 and December 31 for each of the following five years. Because the bond was issued on January 1, 2020, the year 2020 is the first full year of the bond, followed by the years 2021, 2022, 2023, and 2024, with the bond maturing in December of the latter year.
+
+Cash inflows will be (1) the coupon or interest payments of 9% × $100,0002=$4,500, paid to the bondholder every six months, and (2) the one-time principal or face-value payment of $100,000 upon maturity on December 31, 2024.
+
+Yields and Coupon Rates
+
+The two interest rates that we associate with a bond are often confusing to students when they first begin to work with bonds. The coupon rate is the interest rate printed on the bond; this is only used to determine the interest or coupon payments. The yield to maturity (YTM) is an interest rate that is used to discount the bond’s future cash flow. The YTM is derived from the marketplace and is based on the riskiness of future cash flows.
+
+As we have seen when pricing bonds, a bond’s YTM is the rate of return that the bondholder will receive at the current price if the investor holds the bond to maturity.
+
+Yield to Maturity
+
+As noted above, the market sets this discount rate, or the yield to maturity. The YTM reflects the going rate in the bond market for this type of bond and the bond issuer’s perceived ability to make the future payments. Hence, we base the yield on a mutually agreeable price between seller and buyer. The bond market determines the YTM and the available supply of competing financial assets. By competing against other available financial assets, the YTM reflects the risk-free rate and inflation, plus such premiums as maturity and default specific to the issued bond.
+
+The YTM is the expected return rate on the bond held to maturity. How do we determine the bond’s YTM? We can use our same three trusty methods: equations, a financial calculator, and Microsoft Excel (as shown at the end of the chapter).
+
+Determining Bond Yield Using an Equation
+
+The solution, when solving for discount rates, requires us to revisit the bond pricing formula, which is
+
+Of course, with one equation, we can solve for only one unknown, and here the variable of concern is r, which is the YTM. Unfortunately, it is difficult to isolate r on the left-hand side of the equation. Therefore, we need to use a calculator or spreadsheet to solve for the bond’s YTM.
+
+Let’s take another bond, the Coca-Cola bond, from above and again back up our time to March 2021. If the Coca-Cola bond has just been issued in March 2021, then it would be a seven-year, semiannual bond with a coupon rate of 1.0% and an original price of $952.06 at the time of issue ().
+
+Overview of Coca-Cola Bond (as of March 2021)
+
+Bond Characteristic
+Details
+Price (% of par)
+95.20
+Coupon rate
+1%
+Maturity date
+March 15, 2028
+Standard & Poor’s Rating
+A+
+Coupon payment frequency
+Semiannual
+First coupon date
+September 1, 2021
+Type
+Corporate
+Callable?
+Yes
+Determining Bond Yield Using a Calculator
+
+For the Coca-Cola bond above, what was the bond’s YTM at its issue date? This is not an easy problem to solve with a mathematical formula. It is far more practical, not to mention easier, to use a financial calculator or an Excel spreadsheet to solve for bond prices, yields, and maturity periods.
+
+We will cover Excel applications later, but we can jump into some calculator examples right now. So, to calculate the yield on the Coca-Cola bond, we’ll start by entering the values we have for this bond into a calculator. The values we know are as follows:
+
+If the bond’s selling price was $952.06 at issue, we have all the information we need to determine the bond’s YTM at issue. shows the steps for using a calculator to come to an answer.
+
+Calculator Steps for Bond’s Yield to Maturity at Issue
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter present value or price as a negative amount
+952.06 +|- PV
+PV =
+-952.0600
+3
+Enter future or par value
+1000 FV
+FV =
+1,000.0000
+4
+Enter periods 7 years×2=14semiannualperiods
+14 N
+N =
+14.0000
+5
+Enter coupon payment $1,000 × 1%2=$5.00
+5 PMT
+PMT =
+5.0000
+6
+CPT I/Y
+I/Y =
+0.8651
+The calculated I/Y (interest rate or YTM) of 0.8651 is a semiannual figure because the periods and coupon payments we entered for the calculation are semiannual values. To covert the semiannual value into an annual rate, we will need multiply the calculated I/Y by 2. This gives us an amount of 1.73%.
+
+So, the YTM of the Coca-Cola bond at issue date was 1.73%. It is important to know that unless otherwise indicated, bond yields are expressed in annual percentage terms.
+
+We have just demonstrated how a calculator can be used to determine the YTM or interest rate of a bond. Let’s look at a few more examples that cover the most common types of bond problems. These are determining a YTM, calculating a bond’s current price (or value), and determining a bond’s maturity period.
+
+First, let’s work through another example of calculating a YTM, but this time with a bond that has annual interest payments instead of semiannual coupons.
+
+Let’s say you are considering buying a bond, but you want to calculate the YTM to determine if it will meet your overall return requirements. Some facts you have on the bond are that it has a $1,000 face value and that it matures in 12 years. Assume that the current price of the bond is $675 and it pays coupons annually at 3.5%. See for the steps to calculate the YTM.
+
+Calculator Steps for Computing Yield to Maturity
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter present value or price as a negative amount
+675 +|- PV
+PV =
+-675.0000
+3
+Enter future or par value
+1000 FV
+FV =
+1,000.0000
+4
+Enter periods (12 years)
+12 N
+N =
+12.0000
+5
+Enter coupon payment ($1,000 × 3.5% = $35.00)
+35 PMT
+PMT =
+35.0000
+6
+Compute interest rate
+CPT I/Y
+I/Y =
+7.7589
+By following the steps in the table above, you will arrive at a YTM of 7.76%.
+
+Using a calculator is fast and accurate for finding bond yields. Thus, if you know the bond’s current price and all of the future cash flows, you can find the YTM, or the return rate that the bond buyer is receiving on the funds loaned to the bond issuer. As mentioned, Excel spreadsheets are as easy and accurate as a financial calculator for determining bond rates, and we will cover these later in the chapter.
+
+Determining Bond Price or Value Using a Calculator
+
+Let’s say a friend recommends a 20-year bond that has a face value of $1,000 and a 6% annual coupon rate. If similar bonds are yielding 4% annually, what would be a fair price for this bond today? shows the steps to make this determination.
+
+Calculator Steps for Computing Present Value
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter future or par value as a negative amount
+1000 +|- FV
+FV =
+-1,000.0000
+3
+Enter interest rate (4% annual rate)
+4 I/Y
+I/Y =
+4.0000
+4
+Enter periods (20 years)
+20 N
+N =
+20.0000
+5
+Enter coupon payment ($1,000 × 6% = $60)  asa negative amount
+60 +|- PMT
+PMT =
+-60.0000
+6
+CPT PV
+PV =
+1,271.8065
+So, the bond should be priced today at $1,271.81.
+
+Determining Bond Maturity Using a Calculator
+
+Imagine you are considering investing in a bond that is selling for $820, has a face value of $1,000, and has an annual coupon rate of 3%. If the YTM is 10%, how long would it take for the bond to mature? See for the steps to calculate the time to maturity.
+
+Calculator Steps for Computing Time to Maturity
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter present value or price as a negative amount
+820 +|- PV
+PV =
+-820.0000
+3
+Enter interest rate (10% annual rate)
+10 I/Y
+I/Y =
+10.0000
+4
+Enter future or par value
+1000 FV
+FV =
+1,000.0000
+5
+Enter coupon payment ($1,000 × 3% = $30.00)
+30 PMT
+PMT =
+30.0000
+6
+CPT N
+N =
+3.1188
+So, the bond’s time to maturity would be 3.12 years.
+
+Using a Calculator
+
+If a $1,000 face value bond is selling for $595, has 20 years until it matures, and has a YTM of 6.5%, what are the coupon rate and the periodic coupon payment of the bond? Follow the steps in .
+
+Calculator Steps for Computing Coupon Payment
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter present value or price as a negative amount
+595 +|- PV
+PV =
+-595.0000
+3
+Enter periods
+20 N
+N =
+20.0000
+4
+Enter future or par value
+1000 FV
+FV =
+1,000.0000
+5
+Enter interest rate or YTM
+6.5 I/Y
+I/Y =
+6.5000
+6
+CPT PMT
+PMT =
+Solution:
+
+The annual coupon payment amount is $28.24. This means the coupon rate on the bond is 28.241,000=2.824%.
+
+The Coupon Rate
+
+The coupon rate is the rate that we use to determine the amount of a bond’s coupon payments. The issuer states the rate as an annual rate, even though payments may be made more frequently. Thus, for semiannual bonds, the most common type of corporate and government bond, the coupon payment is the par value of the bond multiplied by the annual coupon rate and then divided by the number of payments per year, 2.
+
+We have already seen the coupon rate. The first bond we reviewed, the 3M Co. bond, was an annual coupon bond with a coupon rate of 2.25%. Using a par value of $1,000, we determined that the annual coupon payments would be $1,000 × 0.0225 = $22.50.
+
+For the Coca-Cola bond, we note from that it has a coupon rate of 1% and is paid semiannually. Using a par value of $1,000, we can determine that the coupon payments would be $1,000 × 1%2=$5.00.
+
+The Relationship of Yield to Maturity and Coupon Rate to Bond Prices
+
+The value or price of any bond has a direct relationship with the YTM and the coupon rate.
+
+When the coupon rate of a bond exceeds the YTM, the bond sells at a premium compared to its par value. That is, market demand will push the price of the bond to an amount greater that than its face or par value. We call this kind of bond a premium bond.
+
+When the coupon rate is less than the YTM, the bond sells at a discounted amount, or less than its par value. We refer to such a bond as a discount bond.
+
+When the coupon rate and YTM are identical, a bond will sell at its par value. Bonds that experience this scenario in the market are referred to as par value bonds.
+
+The interest or coupon payments of a bond are determined by its coupon rate and are calculated by multiplying the face value of the bond by this coupon rate.
+
+The inverse relationship of interest rates and bond prices is an important concept for investors to know. Because interest rates fluctuate and can change significantly over time, it is important to understand how these changes will impact bond values.
+
+It is important to ascertain what a given bond is worth to a willing buyer and a willing seller. We can price a bond using an equation, a calculator, or a spreadsheet. The essential steps are (1) identify the amount and timing of the future cash flow; (2) determine the discount rate; (3) find the present values of the lump sum principal and the annuity stream of coupons; and (4) add the present value of the lump sum principal and the present value of the coupons.
+
+Using TI BA II+ to Price a Bond
+
+a bond currently trading for less than its par value in the secondary market; offers a coupon rate that is lower than prevailing interest rates
+the central banking system of the United States, responsible for administering fiscal policy for the country
+a bond that is trading above its par value in the secondary market; offers a coupon rate that is higher than the current prevailing interest rates being offered

@@ -1,0 +1,61 @@
+# m00085
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+The Multiplication Rule for Counting
+
+The Multiplication Rule for Counting
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Apply the Multiplication Rule for Counting to solve problems.
+
+One of the first bits of mathematical knowledge children learn is how to count objects by pointing to them in turn and saying: “one, two, three, …” That’s a useful skill, but when the number of things that we need to count grows large, that method becomes onerous (or, for very large numbers, impossible for humans to accomplish in a typical human lifespan). So, mathematicians have developed short cuts to counting big numbers. These techniques fall under the mathematical discipline of combinatorics, which is devoted to counting.
+
+Multiplication as a Combinatorial Short Cut
+
+One of the first combinatorial short cuts to counting students learn in school has to do with areas of rectangles. If we have a set of objects to be counted that can be physically arranged into a rectangular shape, then we can use multiplication to do the counting for us. Consider this set of objects ():
+
+Certainly we can count them by pointing and running through the numbers, but it’s more efficient to group them ().
+
+If we group the balls by 4s, we see that we have 6 groups (or, we can see this arrangement as 4 groups of 6 balls). Since multiplication is repeated addition (i.e., 6×4=4+4+4+4+4+4), we can use this grouping to quickly see that there are 24 balls.
+
+Let’s generalize this idea a little bit. Let’s say that we’re visiting a bakery that offers customized cupcakes. For the cake, we have three choices: vanilla, chocolate, and strawberry. Each cupcake can be topped with one of four types of frosting: vanilla, chocolate, lemon, and strawberry. How many different cupcake combinations are possible? We can think of laying out all the possibilities in a grid, with cake choices defining the rows and frosting choices defining the columns (Figure 7.5).
+
+Since there are 3 rows (cakes) and 4 columns (frostings), we have 3×4=12 possible combinations. This is the reasoning behind the Multiplication Rule for Counting, which is also known as the Fundamental Counting Principle. This rule says that if there are n ways to accomplish one task and m ways to accomplish a second task, then there are n×m ways to accomplish both tasks. We can tack on additional tasks by multiplying the number of ways to accomplish those tasks to our previous product.
+
+Using the Multiplication Rule for Counting
+
+Every card in a standard deck of cards has two identifying characteristics: a suit (clubs, diamonds, hearts, or spades; these are indicated by these symbols, respectively: ♣, ♢, ♡, ♠) and a rank (ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, jack, queen, and king; the letters A, J, Q, and K are used to represent the words). Each possible pair of suit and rank appears exactly once in the deck. How many cards are in the standard deck?
+
+Since there are 4 suits and 13 ranks, the number of cards must be 4×13=52 ().
+
+ Standard Deck of Cards, Sorted by Rank and Suit (credit: "Playing Cards, USS Arkansas" by Naval History & Heritage Command/Flickr, CC BY 2.0)
+
+Using the Multiplication Rule for Counting for 4 Groups
+
+The University Combinatorics Club has 31 members: 8 seniors, 7 juniors, 5 sophomores, and 11 first-years. How many possible 4-person committees can be formed by selecting 1 member from each class?
+
+Since we have 8 choices for the senior, 7 choices for the junior, 5 for the sophomore, and 11 for the first-year, there are 8×7×5×11=3,080 different ways to fill out the committee.
+
+Using the Multiplication Rule for Counting for More Groups
+
+The standard license plates for vehicles in a certain state consist of 6 characters: 3 letters followed by 3 digits. There are 26 letters in the alphabet and 10 digits (0 through 9) to choose from. How many license plates can be made using this format?
+
+Since there are 26 different letters and 10 different digits, the total number of possible license plates is 26×26×26×10×10×10=17,576,000.
+
+Check Your Understanding
+
+Key Terms
+
+combinatorics
+
+Multiplication Rule for Counting (Fundamental Counting Principle)
+
+Key Concepts
+
+The Multiplication Rule for Counting is used to count large sets.

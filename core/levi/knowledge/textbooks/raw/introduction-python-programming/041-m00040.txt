@@ -1,0 +1,47 @@
+# m00040
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Break and continue
+
+Break and continue
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Analyze a loop's execution with break and continue statements.
+
+Use break and continue control statements in while and for loops.
+
+Break
+
+A break statement is used within a for or a while loop to allow the program execution to exit the loop once a given condition is triggered. A break statement can be used to improve runtime efficiency when further loop execution is not required.
+
+Ex: A loop that looks for the character "a" in a given string called user_string. The loop below is a regular for loop for going through all the characters of user_string. If the character is found, the break statement takes execution out of the for loop. Since the task has been accomplished, the rest of the for loop execution is bypassed.
+
+Break statement in a while loop
+
+Infinite loop
+
+A break statement is an essential part of a loop that does not have a termination condition. A loop without a termination condition is known as an infinite loop. Ex: An infinite loop that counts up starting from 1 and prints the counter's value while the counter's value is less than 10. A break condition is triggered when the counter's value is equal to 10, and hence the program execution exits.
+
+Using a break statement
+
+Continue
+
+A continue statement allows for skipping the execution of the remainder of the loop without exiting the loop entirely. A continue statement can be used in a for or a while loop. After the continue statement's execution, the loop expression will be evaluated again and the loop will continue from the loop's expression. A continue statement facilitates the loop's control and readability.
+
+Continue statement in a while loop
+
+Using a continue statement
+
+Using break control statement in a loop
+
+Write a program that reads a string value and prints "Found" if the string contains a space character. Else, prints "Not found".
+
+Using a continue statement in a loop
+
+Complete the following code so that the program calculates the sum of all the numbers in list my_list that are greater than or equal to 5.

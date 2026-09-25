@@ -1,0 +1,119 @@
+# m00005
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Formatting and Templates in Microsoft Excel
+
+Formatting and Templates in Microsoft Excel
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Format and manipulate a cell or group of cells
+
+Design column and row headers
+
+Use conditional formatting
+
+Work with templates to format worksheets
+
+At WorldCorp, there is so much data that it is impossible to look at it all at once. For example, on a long worksheet with several hundred or thousand orders, you might want to see only orders over a certain value. In the previous sections, you learned how to organize the information in a spreadsheet and analyze the data using some basic calculations. These calculations provide the information needed to present the data to other entities in the corporation, but it might not yet be formatted in a professional manner. You may want to ensure the data meets certain criteria; you might want to add additional formatting to highlight certain trends in the data or group the data in a different way to show meaningful differences. With the skills you learned in the previous sections and those to follow, you can create a meaningful report and analysis of the data to effectively communicate company performance. This report can be utilized to measure company progress toward strategic goals or to compare WorldCorp to their competitors.
+
+Formatting Cells
+
+We’ve discussed formatting cells according to their contents, such as number, percentage, or text, but formatting extends to the visual presentation of a worksheet. In this context, formatting involves applying colors, font types, and borders to cells for styling purposes. It can make a presentation more visually appealing or distinct from other presentations. Another important reason for formatting is to increase the readability and comprehension of data. Formatting can be applied to text and numbers, to cell backgrounds, or to cell borders. It is important to remember that sometimes additional formatting may not be necessary. The goal is to have a professional presentation of the information. Too much formatting such as bright colors or distracting fonts does not enhance the presentation of the information. It is advisable to stick to simple formatting that is not distracting and is in line with company standards for your corporation.
+
+Using Color and Fonts
+
+Colors and fonts can be used to highlight specific parts of a worksheet such as the header row or the total row and to indicate the end of a table. Highlighting values that are outside of a certain range or to show trends in a dataset can also be useful. In accounting, the convention is to have negative numbers in red font and positive numbers in black font. These uses of colors and fonts provide meaningful information to the user at a glance.
+
+In a, the current header row is gray with white font. Suppose your manager wants to follow the color scheme of the company and wants the header row to be highlighted with a blue cell fill and a larger font. To change the fill color of the cells, first select the cells you want to change (a) and then click on the paint bucket in the Font command group on the Home tab. The drop-down arrow next to the bucket allows you to choose from many preset colors, or you can create your own by clicking on More Colors. For this table, click on the blue fill box in the middle of the fifth column of colors. Now that the background is blue, the white font is harder to read, so you should change it to a darker color. To change the color of the font, select the cells and click on the text icon next to the paint bucket. You can change the font by clicking on the Font drop-down menu and the size by clicking on the adjacent Font Size drop-down menu (b). You can also change the formatting of individual cells, but it saves time to highlight all of the header cells and format them at the same time.
+
+Borders
+
+The default style in Excel is for gridlines to be visible in order to distinguish one cell from another when viewed on the screen. However, there may be times when that distinction could be clearer, or you want to divide groups of columns or rows. You can use borders to make these distinctions. Let’s assume you would like to put a border around the total cell. To add this border, first select the cell or cells where you want to add a border (). Then, from the Home tab, in the Font command group, you will find the Border command drop-down menu. You can also access this by right-clicking after you selected the cells and choosing Format Cells and then the Borders tab (a). By selecting the down arrow of the Border command, you can choose the appropriate border for the cell or cells. You can change the border style and color. First, select the style and thickness of the outline, change the color if you want it to be a color other than black, then apply it on the preview on the right by clicking on each border (b). You can choose multiple styles of borders or leave cells without borders, such as if you wanted a border around your table but not within the rows and columns. More border options are available by choosing More Borders at the bottom of the list. This will bring up the Format Cells dialog box, Borders tab. Make sure your header row is now formatted consistently.
+
+Wrapping Text
+
+When you are working with text that is long, you can extend the width of your columns to fit it all in. One way is to do it manually. Hover over the line between two columns. The cursor will change to a black vertical line with opposite arrows. Click on this line and drag the column to your preferred width. You can also use the AutoFit command to automatically size the columns to fit the data contained in that column (a). To AutoFit the columns, hover over the line between the columns, as you would to do it manually. Then, double-click on the line, and the column will adjust to the width of the contents. For example, to automatically size column E to the appropriate size for the data in the column, double-click on the line between the D and F columns at the top of the spreadsheet.
+
+Sometimes, the text is so long that the whole width of the column is not visible on your screen; other times, you may not want a column to take up most of the width of your table. In those cases, the text is cut off. In a, the header for column E is too long to fit in the cell. To fix this, select the cell, then on the Home tab, click on Wrap Text. The Wrap Text feature arranges the text in a cell so that it extends onto another line and increases the height of the row (b).
+
+Merging Cells
+
+Borders provided one method of grouping content in a table, but there are other ways to show that some rows or columns of data should be grouped together. The merge feature combines the content from two or more cells. When merging, the content and formatting of the first cell supersedes the content and formatting of the others. Merging cells can increase the readability of the tables. a shows a row added above the header row to group some of the columns together to identify important sales order information to the port dispatchers. The first two columns tell the port dispatchers when the order was placed, so you want the cell that says “When” to span both columns. First, add “When” to the first cell. Then, select both cells over the columns you want the header to span and click on Merge & Center on the Home tab. b shows the merged and centered cells. This can be repeated with cells E3 and F3. You can also merge content within a table. At the bottom, merge cell A14 with cells B14, C14, D14, E14, and F14, to make the Total row more readable. Now that the merging is complete, you can format the border outlines. Format the top row, making sure all cell contents are centered and have borders, and add borders to the bottom row to highlight the totals. c shows the completed table.
+
+Did you know that you can embed Excel objects and components into other Microsoft applications? You can insert all or parts of an Excel worksheet into your presentations and documents, saving time from re-creating the same content in these applications. Embedding content also helps ensure that the content provided in your document or presentation is accurate, as changes in Excel will update in these files as well. Visit this Microsoft page that shows how to embed Excel content in PowerPoint to learn more.
+
+Working with Columns and Rows
+
+The label added to tables at the top of a column or to the left of a row to make the data understandable is called a header. You’ve already learned to type words at the top of a column and format cells so that the headers look different from the rest of the table. Fonts can be bolded or centered, and background colors or shading applied. You can also freeze columns and rows so that the viewer of the document can see the header even if the document extends beyond the screen. Hiding rows and columns can also be useful for reducing the size of a worksheet.
+
+Freezing Columns and Rows
+
+When you have a large set of data, you will need to scroll beyond the edges of your screen to see all of it. You will need to be able to look at the data in each column or row but scrolling can take the header row or column off the screen. To ensure that the column or row headers are visible, you can use a command called Freeze Panes, which fixes the headers on the screen while allowing users to scroll through the rest of the data. The table in a extends beyond row 22. As you scroll down through the data, notice that you can no longer see the column headers, so you will want to freeze the header row so that you can still see the column headers when you scroll down through the data. b shows the choices in the Freeze Panes command on the View tab. You can freeze the top row, the first column, or both. For this data, freeze the top row so that scrolling down will keep the column headers in view. b shows a line below the top row that indicates that the row is frozen. You are not limited to only freezing a header row or column. Excel allows you to use Freeze Panes anywhere in the spreadsheet. Just click on a cell and then on Freeze Panes, and it will freeze everything above and to the left of it.
+
+On a Mac, Excel uses icons for many of the drop-down menus that appear in the Windows version. The Freeze tool, for example, is always visible at the top of your active workbook.
+
+Go Skills is a company that offers a variety of free or paid online courses. Go to their website to review presentation tips for Excel tables and learn more.
+
+Hiding Columns and Rows
+
+Sometimes when working with data, information may be irrelevant for one use but cannot be deleted. This could be important when formatting spreadsheets for various users or when performing calculations. A user might not need to see all the data that goes into the formula but needs to see the final result of the formula. For example, in a, column B contains the name of the port, but all of the visible data for the port is the same. If the port of Portland, Maine, is working with this data, they won’t need to see the column that contains the port name. Additionally, the workers at the port won’t need to know the price per unit. To make the table more usable for these workers, you can use the Hide command, which temporarily removes designated rows or columns from view. To hide a row or column, click on the row or column designation (the number to the left of the row header or the letter above the column header) to select the whole row or column, then right-click and select Hide from the menu (column B in a). The result is shown in b. To unhide a column, select the two columns that surround the hidden column, right-click, and select Unhide (a). The column appears again, as shown in b.
+
+You can tell when a row or column is hidden by looking at the header, where you can see that letters or numbers are missing and there are two lines between the column or row designations. For example, we can see in b that the header row goes from column A to column C. B is hidden and is not shown as a header. It is important to watch for that when you are using a spreadsheet that you did not create.
+
+To access the Hide function, hold the Control key and click on the column.
+
+Conditional Formatting
+
+All of the formatting you have learned about so far has involved manually configuring individual cells or groups of cells. Excel has additional formatting features that can save you the time of manual formatting. One of these features, conditional formatting, analyzes the cell contents and applies certain preset designs or layouts based on the content. One example is to change the color of the font if the data is above or below a certain threshold (). Conditional formatting is not turned on by default, so you will need to apply and customize it. Click on the drop-down menu next to Conditional Formatting on the Home tab and choose the formatting you want to use. You can set up the parameters using the dialog box shown in a. b shows another example of conditional formatting: highlighting the top ten FOB $ values.
+
+Excel in the Construction Industry
+
+The construction industry in the United States employs nearly ten million people and contributes over $1 trillion to the economy in structures built each year.Ken Simonson. “Construction Data.” Associated General Contractors of America. Excel can manage all the information needed to share among the various entities involved in a construction project. From building a small home garden shed to constructing an office complex, Excel can help manage the overall progress of a construction project. Excel can be helpful when estimating costs for construction projects to submit bids for particular projects. Items that can be summarized, tracked, and analyzed in Excel include order tracking, calculating needed quantities of materials such as lumber or piping, and payroll. Even for the small construction management company, Excel can be used to effectively manage a large construction project to keep the project on time and within budget. There are many templates available to help set up a construction project from start to finish.
+
+What are some other industries where Excel could be a useful tool?
+
+Working with Templates
+
+As in the other Office applications, Excel has built-in and online templates. Microsoft has their own online templates for Office, but many other websites offer free Excel templates. Templates are blank, formatted workbooks that you populate with your own data. Microsoft provides some built-in templates. shows the selection of a sales report, which has five sheets. This sales report has an order ledger, called “Sales Data,” with the product name, customer code, and quarterly sales figures. The template comes with a few lines of generic data. The other sheets use the data you enter on the first sheet. The second sheet uses the sales data but organizes it by product. The third sheet organizes the same data by customer. The fourth sheet filters the data to show the top 10 products, and the fifth sheet filters the data to show the top 10 customers. You should be able to find a similar template in your version of Excel, but there are many other sales reports templates available. The template library is frequently updated by Microsoft, so the versions you see might look a bit different than what we have shown here. The functionality will be similar, but the colors and the layout could vary.
+
+shows a product price list downloaded from http://templates.office.com that has columns for a product inventory number, product name, product description, retail price, and volume-selling price. This sort of price list is an information sheet for potential business clients who are considering products from you. These templates are modifiable, so you can update the header with your company’s information. You can also add more products or change the headers.
+
+Ethical Considerations in Using Templates
+
+Templates are a wonderful resource and can save time and money in creating spreadsheets and workbooks in Excel. Templates can come with preset formatting and formulas, with little more to do than enter your own data. There are many templates available online, but you must choose one carefully. You will need to consider the purpose of the template you are using, company policy regarding branding, the version of the software you are using, as well as copyright and licensing of the template itself prior to using it for business purposes. For instance, perhaps you are using a template to create an invoice to provide clients. The template may hold a license that allows you to use the template for commercial use so long as you do not resell the template itself, or the license might prohibit commercial use altogether, restricting its use to nonprofit activities only. If that is the case, you should not use the template for business purposes as it may place the business at risk of litigation. It is always best to carefully read the user agreement and license of a template prior to implementing it.
+
+Where might you find a template’s licensing and permissible usage information? How can you be sure you are permitted to use a template in the manner in which you intend?
+
+Summary
+
+Formatting cells using colors, fonts, and borders can make a worksheet more readable and visually appealing. Other commands such as Merge Cells and Wrap Text can be used to adjust the information in the cells to enhance the professional presentation of the spreadsheet.
+
+By hiding columns or rows, you can make a more manageable worksheet or control what other users see and how they interact with it.
+
+Freezing rows or columns keeps the information visible when navigating large spreadsheets.
+
+Using conditional formatting identifies trends in the data or highlights values that are inside or outside a certain range.
+
+There are a variety of templates available within Excel and online for many uses such as invoicing, sales reports, and budgeting.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+Case Exercises
+
+feature in Excel that analyzes the cell contents and applies certain preset designs or layouts based on the content
+applying colors, font types, and borders to cells for styling purposes
+fixing the headers on the screen while allowing users to scroll through the rest of the data
+label added to tables at the top of the columns or to the left of the rows to make the data understandable
+temporarily remove designated rows or columns from view
+combine content from two or more cells
+feature that arranges the text in a cell so that it extends onto another line and increases the height of the row

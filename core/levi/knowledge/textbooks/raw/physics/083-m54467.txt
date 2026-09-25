@@ -1,0 +1,477 @@
+# m54467
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Motors, Generators, and Transformers
+
+Motors, Generators, and Transformers
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Explain how electric motors, generators, and transformers work
+
+Explain how commercial electric power is produced, transmitted, and distributed
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(5) The student knows the nature of forces in the physical world. The student is expected to:
+
+(G)
+investigate and describe the relationship between electric and magnetic fields in applications such as generators, motors, and transformers.
+(G)
+investigate and describe the relationship between electric and magnetic fields in applications such as generators, motors, and transformers.
+
+Section Key Terms
+
+electric motor
+generator
+transformer
+Electric Motors, Generators, and Transformers
+
+As we learned previously, a current-carrying wire in a magnetic field experiences a force—recall 
+
+F=IℓBsinθ
+
+ . Electric motors, which convert electrical energy into mechanical energy, are the most common application of magnetic force on current-carrying wires. Motors consist of loops of wire in a magnetic field. When current is passed through the loops, the magnetic field exerts a torque on the loops, which rotates a shaft. Electrical energy is converted to mechanical work in the process. shows a schematic drawing of an electric motor.
+
+Let us examine the force on each segment of the loop in to find the torques produced about the axis of the vertical shaft—this will lead to a useful equation for the torque on the loop. We take the magnetic field to be uniform over the rectangular loop, which has width w and height 
+
+ℓ
+
+,
+
+ as shown in the figure. First, consider the force on the top segment of the loop. To determine the direction of the force, we use the right-hand rule. The current goes from left to right into the page, and the magnetic field goes from left to right in the plane of the page. Curl your right fingers from the current vector to the magnetic field vector and your right thumb points down. Thus, the force on the top segment is downward, which produces no torque on the shaft. Repeating this analysis for the bottom segment—neglect the small gap where the lead wires go out—shows that the force on the bottom segment is upward, again producing no torque on the shaft.
+
+Consider now the left vertical segment of the loop. Again using the right-hand rule, we find that the force exerted on this segment is perpendicular to the magnetic field, as shown in . This force produces a torque on the shaft. Repeating this analysis on the right vertical segment of the loop shows that the force on this segment is in the direction opposite that of the force on the left segment, thereby producing an equal torque on the shaft. The total torque on the shaft is thus twice the toque on one of the vertical segments of the loop.
+
+To find the magnitude of the torque as the wire loop spins, consider , which shows a view of the wire loop from above. Recall that torque is defined as 
+
+τ=rFsinθ
+,
+
+ where F is the applied force, r is the distance from the pivot to where the force is applied, and θ is the angle between r and F. Notice that, as the loop spins, the current in the vertical loop segments is always perpendicular to the magnetic field. Thus, the equation 
+
+F=IℓBsinθ
+
+ gives the magnitude of the force on each vertical segment as 
+
+F=IℓB
+.
+
+ The distance r from the shaft to where this force is applied is w/2, so the torque created by this force is
+
+Because there are two vertical segments, the total torque is twice this, or
+
+If we have a multiple loop with N turns, we get N times the torque of a single loop. Using the fact that the area of the loop is 
+
+A=wℓ
+;
+
+ the expression for the torque becomes
+
+This is the torque on a current-carrying loop in a uniform magnetic field. This equation can be shown to be valid for a loop of any shape.
+
+From the equation 
+
+τ=NIABsinθ
+,
+
+ we see that the torque is zero when 
+
+θ=0
+.
+
+ As the wire loop rotates, the torque increases to a maximum positive torque of 
+
+wℓB
+
+ when 
+
+θ=90°
+.
+
+ The torque then decreases back to zero as the wire loop rotates to 
+
+θ=180°
+.
+
+ From 
+
+θ=180°
+
+ to 
+
+θ=360°
+,
+
+ the torque is negative. Thus, the torque changes sign every half turn, so the wire loop will oscillate back and forth.
+
+For the coil to continue rotating in the same direction, the current is reversed as the coil passes through 
+
+θ=0andθ=180°
+
+ using automatic switches called brushes, as shown in .
+
+Consider now what happens if we run the motor in reverse; that is, we attach a handle to the shaft and mechanically force the coil to rotate within the magnetic field, as shown in . As per the equation 
+
+F=qvBsinθ
+
+ —where 
+ θ
+ is the angle between the vectors 
+
+v
+→
+
+ and 
+
+B
+→
+
+ —charges
+ 
+ in the wires of the loop experience a magnetic force because they are moving in a magnetic field. Again using the right-hand rule, where we curl our fingers from vector 
+
+v
+→
+
+ to vector 
+
+B
+→
+
+, we find that charges in the top and bottom segments feel a force perpendicular to the wire, which does not cause a current. However, charges in the vertical wires experience forces parallel to the wire, causing a current to flow through the wire and through an external circuit if one is connected. A device such as this that converts mechanical energy into electrical energy is called a generator.
+
+Because current is induced only in the side wires, we can find the induced emf by only considering these wires. As explained in Induced Current in a Wire, motional emf in a straight wire moving at velocity v through a magnetic field B is 
+
+E=Bℓv
+,
+
+ where the velocity is perpendicular to the magnetic field. In the generator, the velocity makes an angle 
+θ
+ with B (see ), so the velocity component perpendicular to B is 
+
+vsinθ
+.
+
+ Thus, in this case, the emf induced on each vertical wire segment is 
+
+E=Bℓvsinθ
+,
+
+ and they are in the same direction. The total emf around the loop is then
+
+Although this expression is valid, it does not give the emf as a function of time. To find how the emf evolves in time, we assume that the coil is rotated at a constant angular velocity 
+
+ω
+.
+ 
+ The angle 
+θ
+ is related to the angular velocity by 
+
+θ=ωt
+,
+
+ so that
+
+Recall that tangential velocity v is related to angular velocity 
+ω
+ by 
+
+v=rω
+.
+
+ Here, 
+
+r=w/2
+
+, so that 
+
+v=(
+
+w/2
+
+)ω
+
+ and
+
+Noting that the area of the loop is 
+
+A=ℓw
+
+ and allowing for N wire loops, we find that
+
+is the emf induced in a generator coil of N turns and area A rotating at a constant angular velocity 
+ω
+ in a uniform magnetic field B. This can also be expressed as
+
+where
+
+is the maximum (peak) emf.
+shows a generator connected to a light bulb and a graph of the emf vs. time. Note that the emf oscillates from a positive maximum of 
+
+E
+0
+
+ to a negative maximum of 
+
+−E
+0
+
+.
+
+ In between, the emf goes through zero, which means that zero current flows through the light bulb at these times. Thus, the light bulb actually flickers on and off at a frequency of 2f, because there are two zero crossings per period. Since alternating current such as this is used in homes around the world, why do we not notice the lights flickering on and off? In the United States, the frequency of alternating current is 60 Hz, so the lights flicker on and off at a frequency of 120 Hz. This is faster than the refresh rate of the human eye, so you don’t notice the flicker of the lights. Also, other factors prevent various different types of light bulbs from switching on and off so fast, so the light output is smoothed out a bit.
+
+Generator
+
+Use this simulation to discover how an electrical generator works. Control the water supply that makes a water wheel turn a magnet. This induces an emf in a nearby wire coil, which is used to light a light bulb. You can also replace the light bulb with a voltmeter, which allows you to see the polarity of the voltage, which changes from positive to negative.
+
+Set the number of wire loops to three, the bar-magnet strength to about 50 percent, and the loop area to 100 percent. Note the maximum voltage on the voltmeter. Assuming that one major division on the voltmeter is 5V, what is the maximum voltage when using only a single wire loop instead of three wire loops?
+
+5 V
+
+15 V
+
+125 V
+
+53 V
+
+In real life, electric generators look a lot different than the figures in this section, but the principles are the same. The source of mechanical energy that turns the coil can be falling water—hydropower—steam produced by the burning of fossil fuels, or the kinetic energy of wind. shows a cutaway view of a steam turbine; steam moves over the blades connected to the shaft, which rotates the coil within the generator.
+
+Another very useful and common device that exploits magnetic induction is called a transformer. Transformers do what their name implies—they transform voltages from one value to another; the term voltage is used rather than emf because transformers have internal resistance. For example, many cell phones, laptops, video games, power tools, and small appliances have a transformer built into their plug-in unit that changes 120 V or 240 V AC into whatever voltage the device uses. shows two different transformers. Notice the wire coils that are visible in each device. The purpose of these coils is explained below.
+shows a laminated-coil transformer, which is based on Faraday’s law of induction and is very similar in construction to the apparatus Faraday used to demonstrate that magnetic fields can generate electric currents. The two wire coils are called the primary and secondary coils. In normal use, the input voltage is applied across the primary coil, and the secondary produces the transformed output voltage. Not only does the iron core trap the magnetic field created by the primary coil, but also its magnetization increases the field strength, which is analogous to how a dielectric increases the electric field strength in a capacitor. Since the input voltage is AC, a time-varying magnetic flux is sent through the secondary coil, inducing an AC output voltage.
+
+Magnetic Rope Memory
+
+To send men to the moon, the Apollo program had to design an onboard computer system that would be robust, consume little power, and be small enough to fit onboard the spacecraft. In the 1960s, when the Apollo program was launched, entire buildings were regularly dedicated to housing computers whose computing power would be easily outstripped by today’s most basic handheld calculator.
+
+To address this problem, engineers at MIT and a major defense contractor turned to magnetic rope memory, which was an offshoot of a similar technology used prior to that time for creating random access memories. Unlike random access memory, magnetic rope memory was read-only memory that contained not only data but instructions as well. Thus, it was actually more than memory: It was a hard-wired computer program.
+
+The components of magnetic rope memory were wires and iron rings—which were called cores. The iron cores served as transformers, such as that shown in the previous figure. However, instead of looping the wires multiple times around the core, individual wires passed only a single time through the cores, making these single-turn transformers. Up to 63 word wires could pass through a single core, along with a single bit wire. If a word wire passed through a given core, a voltage pulse on this wire would induce an emf in the bit wire, which would be interpreted as a one. If the word wire did not pass through the core, no emf would be induced on the bit wire, which would be interpreted as a zero.
+
+Engineers would create programs that would be hard wired into these magnetic rope memories. The wiring process could take as long as a month to complete as workers painstakingly threaded wires through some cores and around others. If any mistakes were made either in the programming or the wiring, debugging would be extraordinarily difficult, if not impossible.
+
+These modules did their job quite well. They are credited with correcting an astronaut mistake in the lunar landing procedure, thereby allowing Apollo 11 to land on the moon. It is doubtful that Michael Faraday ever imagined such an application for magnetic induction when he discovered it.
+
+For the transformer shown in , the output voltage 
+
+V
+S
+
+ from the secondary coil depends almost entirely on the input voltage 
+
+V
+P
+
+ across the primary coil and the number of loops in the primary and secondary coils. Faraday’s law of induction for the secondary coil gives its induced output voltage 
+
+V
+S
+
+ to be
+
+where 
+
+N
+S
+
+ is the number of loops in the secondary coil and 
+
+ΔΦ
+/
+Δt
+
+ is the rate of change of magnetic flux. The output voltage equals the induced emf 
+
+(
+
+V
+S
+
+=
+E
+S
+
+),
+
+ provided coil resistance is small—a reasonable assumption for transformers. The cross-sectional area of the coils is the same on each side, as is the magnetic field strength, and so 
+
+ΔΦ/Δt
+
+ is the same on each side. The input primary voltage 
+
+V
+P
+
+ is also related to changing flux by
+
+Taking the ratio of these last two equations yields the useful relationship
+
+This is known as the transformer equation. It simply states that the ratio of the secondary voltage to the primary voltage in a transformer equals the ratio of the number of loops in secondary coil to the number of loops in the primary coil.
+
+Transmission of Electrical Power
+
+Transformers are widely used in the electric power industry to increase voltages—called step-up transformers—before long-distance transmission via high-voltage wires. They are also used to decrease voltages—called step-down transformers—to deliver power to homes and businesses. The overwhelming majority of electric power is generated by using magnetic induction, whereby a wire coil or copper disk is rotated in a magnetic field. The primary energy required to rotate the coils or disk can be provided by a variety of means. Hydroelectric power plants use the kinetic energy of water to drive electric generators. Coal or nuclear power plants create steam to drive steam turbines that turn the coils. Other sources of primary energy include wind, tides, or waves on water.
+
+Once power is generated, it must be transmitted to the consumer, which often means transmitting power over hundreds of kilometers. To do this, the voltage of the power plant is increased by a step-up transformer, that is stepped up, and the current decreases proportionally because
+
+The lower current 
+
+I
+
+transmitted
+
+ in the transmission wires reduces the Joule losses, which is heating of the wire due to a current flow. This heating is caused by the small, but nonzero, resistance 
+
+R
+
+wire
+
+ of the transmission wires. The power lost to the environment through this heat is
+
+which is proportional to the current squared in the transmission wire. This is why the transmitted current 
+
+I
+
+transmitted
+
+ must be as small as possible and, consequently, the voltage must be large to transmit the power 
+
+P
+
+transmitted
+
+⋅
+
+Voltages ranging from 120 to 700 kV are used for transmitting power over long distances. The voltage is stepped up at the exit of the power station by a step-up transformer, as shown in .
+
+Once the power has arrived at a population or industrial center, the voltage is stepped down at a substation to between 5 and 30 kV. Finally, at individual homes or businesses, the power is stepped down again to 120, 240, or 480 V. Each step-up and step-down transformation is done with a transformer designed based on Faradays law of induction. We’ve come a long way since Queen Elizabeth asked Faraday what possible use could be made of electricity.
+
+Check Your Understanding
+
+What should be the ratio of the number of output coils to the number of input coil in a step-up transformer to increase the voltage fivefold?
+
+The ratio is five times.
+
+The ratio is 10 times.
+
+The ratio is 15 times.
+
+The ratio is 20 times.
+
+Section Summary
+
+Electric motors contain wire loops in a magnetic field. Current is passed through the wire loops, which forces them to rotate in the magnetic field. The current is reversed every half rotation so that the torque on the loop is always in the same direction.
+
+Electric generators contain wire loops in a magnetic field. An external agent provides mechanical energy to force the loops to rotate in the magnetic field, which produces an AC voltage that drives an AC current through the loops.
+
+Transformers contain a ring made of magnetic material and, on opposite sides of the ring, two windings of wire wrap around the ring. A changing current in one wire winding creates a changing magnetic field, which is trapped in the ring and thus goes through the second winding and induces an emf in the second winding. The voltage in the second winding is proportional to the ratio of the number of loops in each winding.
+
+Transformers are used to step up and step down the voltage for power transmission.
+
+Over long distances, electric power is transmitted at high voltage to minimize the current and thereby minimize the Joule losses due to resistive heating.
+
+Concept Items
+
+What is a voltage transformer?
+
+A transformer is a device that transforms current to voltage.
+
+A transformer is a device that transforms voltages from one value to another.
+
+A transformer is a device that transforms resistance of wire to voltage.
+
+Why is electric power transmitted at high voltage?
+
+To increase the current for the transmission
+
+To reduce energy loss during transmission
+
+To increase resistance during transmission
+
+To reduce resistance during transmission
+
+Critical Thinking
+
+Explain why power is transmitted over long distances at high voltages.
+Plost = Itransmitted Vtransmitted, so to maximize current, the voltage must be maximized
+Ptransmitted = Itransmitted Vtransmitted, so to maximize current, the voltage must be maximized
+Plost = Itransmitted Vtransmitted, so to minimize current, the voltage must be maximized
+Ptransmitted = Itransmitted Vtransmitted, so to minimize current, the voltage must be maximized
+
+Test Prep Multiple Choice
+
+An electrical generator ________.
+
+is a generator powered by electricity
+
+must be turned by hand
+
+converts other sources of power into electrical power
+
+uses magnetism to create electrons
+
+A step-up transformer increases the
+
+voltage from power lines for use in homes
+
+current from the power lines for use in homes
+
+current from the electrical generator for transmission along power lines
+
+voltage from the electrical power plant for transmission along power lines
+
+What would be the effect on the torque of an electric motor of doubling the width of the current loop in the motor?
+
+Torque remains the same.
+
+Torque is doubled.
+
+Torque is quadrupled.
+
+Torque is halved.
+
+Test Prep Short Answer
+
+A laminated-coil transformer has a wire coiled 12 times around one of its sides. How many coils should you wrap around the opposite side to get a voltage output that is one half of the input voltage? Explain.
+
+six output coils because the ratio of output to input voltage is the same as the ratio of number of output coils to input coils
+
+12 output coils because the ratio of output to input voltage is the same as the ratio of number of output coils to input coils
+
+24 output coils because the ratio of output to input voltage is half the ratio of the number of output coils to input coils
+
+36 output coils because the ratio of output to input voltage is three times the ratio of the number of output coils to input coils
+
+Explain why long-distance electrical power lines are designed to carry very high voltages.
+Ptransmitted = Itransmitted>2 Rwire and Plost = Itransmitted Vtransmitted, so V must be low to make the current transmitted as high as possible.
+Ptransmitted = Itransmitted>2 Rwire and Plost = Ilost Vlost, so V must be low to make the current transmitted as high as possible.
+Ptransmitted = Itransmitted>2 Rwire and Plost = Itransmitted Vtransmitted, so V must be high to make the current transmitted as low as possible
+Plost = Itransmitted2 Rwire and Ptransmitted = Itransmitted Vtransmitted, so V must be high to make the current transmitted as low as possible.
+
+Performance Task
+
+Your family takes a trip to Cuba, and rents an old car to drive into the countryside to see the sights. Unfortunately, the next morning you find yourself deep in the countryside and the car won’t start because the battery is too weak. Wanting to jump-start the car, you open the hood and find that you can’t tell which battery terminal is positive and which is negative. However, you do have a bar magnet with the north and south poles labeled and you manage to find a short wire. How do you use these to determine which terminal is which? For starters, how do you determine the direction of a magnetic field around a current-carrying wire? And in which direction will the force be on another magnet placed in this field? Do you need to worry about the sign of the mobile charge carriers in the wire?
+
+Teacher Support
+
+This experiment can be done by using typical AAA batteries or similar batteries, a short length of flexible wire, and normal magnets, for example a good refrigerator magnet. The magnet should have the north and south poles labeled. Place the magnet near the wire so that the magnetic field of the magnet will be roughly parallel or antiparallel to the magnet field created by current in the wire. Upon briefly connecting the wire across the terminals of the battery, the wire will be attracted or repelled, respectively, from the magnet. By using the right-hand rule, you can determine in which the direction the current is flowing in the wire and thereby determine the polarity of the battery.
+
+Test Prep Extended Response
+
+Your friend tells you that power lines must carry a maximum current because P = I2R, where R is the resistance of the transmission line. What do you tell her?
+Ptransmitted = Itransmitted2Rwire and Plost = Itransmitted Vtransmitted, so I must be high to reduce power lost due to transmission.
+Plost = Itransmitted2Rwire and Plost = Itransmitted Vtransmitted, so I must be high to reduce power lost due to transmission.
+Ptransmitted = Itransmitted2Rwire and Plost = Itransmitted Vtransmitted, so I must be low to reduce power lost due to transmission.
+Plost = Itransmitted2Rwire and Plost = Itransmitted Vtransmitted, so I must be low to reduce power lost due to transmission.
+
+device that transforms electrical energy into mechanical energy
+device that transforms mechanical energy into electrical energy
+device that transforms voltages from one value to another

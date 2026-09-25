@@ -1,0 +1,826 @@
+# m53491
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Limit of a Function
+
+The Limit of a Function
+
+Using correct notation, describe the limit of a function.
+
+Use a table of values to estimate the limit of a function or to identify when the limit does not exist.
+
+Use a graph to estimate the limit of a function or to identify when the limit does not exist.
+
+Define one-sided limits and provide examples.
+
+Explain the relationship between one-sided and two-sided limits.
+
+Using correct notation, describe an infinite limit.
+
+Define a vertical asymptote.
+
+The concept of a limit or limiting process, essential to the understanding of calculus, has been around for thousands of years. In fact, early mathematicians used a limiting process to obtain better and better approximations of areas of circles. Yet, the formal definition of a limit—as we know and understand it today—did not appear until the late 19th century. We therefore begin our quest to understand limits, as our mathematical ancestors did, by using an intuitive approach. At the end of this chapter, armed with a conceptual understanding of limits, we examine the formal definition of a limit.
+
+We begin our exploration of limits by taking a look at the graphs of the functions
+
+which are shown in . In particular, let’s focus our attention on the behavior of each graph at and around x=2.
+
+Each of the three functions is undefined at x=2, but if we make this statement and no other, we give a very incomplete picture of how each function behaves in the vicinity of x=2. To express the behavior of each graph in the vicinity of 2 more completely, we need to introduce the concept of a limit.
+
+Intuitive Definition of a Limit
+
+Let’s first take a closer look at how the function f(x)=(x2−4)/(x−2) behaves around x=2 in . As the values of x approach 2 from either side of 2, the values of y=f(x) approach 4. Mathematically, we say that the limit of f(x) as x approaches 2 is 4. Symbolically, we express this limit as
+
+From this very brief informal look at one limit, let’s start to develop an intuitive definition of the limit. We can think of the limit of a function at a number a as being the one real number L that the functional values approach as the x-values approach a, provided such a real number L exists. Stated more carefully, we have the following definition:
+
+Definition
+
+Let f(x) be a function defined at all values in an open interval containing a, with the possible exception of a itself, and let L be a real number. If all values of the function f(x) approach the real number L as the values of x(≠a) approach the number a, then we say that the limit of f(x) as x approaches a is L. (More succinct, as x gets closer to a, f(x) gets closer and stays close to L.) Symbolically, we express this idea as
+
+We can estimate limits by constructing tables of functional values and by looking at their graphs. This process is described in the following Problem-Solving Strategy.
+
+Problem-Solving Strategy: Evaluating a Limit Using a Table of Functional Values
+
+To evaluate limx→af(x), we begin by completing a table of functional values. We should choose two sets of x-values—one set of values approaching a and less than a, and another set of values approaching a and greater than a. demonstrates what your tables might look like.
+Table of Functional Values for limx→af(x)
+
+ x
+ f(x)
+ 
+x
+ f(x)
+
+ a−0.1
+ f(a−0.1)
+
+a+0.1
+ f(a+0.1)
+
+ a−0.01
+ f(a−0.01)
+ a+0.01
+ f(a+0.01)
+
+ a−0.001
+ f(a−0.001)
+ a+0.001
+ f(a+0.001)
+
+ a−0.0001
+ f(a−0.0001)
+ a+0.0001
+ f(a+0.0001)
+
+ Use additional values as necessary.
+ Use additional values as necessary.
+
+Table of Functional Values for limx→af(x)
+f(a+0.0001)
+Use additional values as necessary.
+Use additional values as necessary.
+Next, let’s look at the values in each of the f(x) columns and determine whether the values seem to be approaching a single value as we move down each column. In our columns, we look at the sequence f(a−0.1),f(a−0.01),f(a−0.001).,f(a−0.0001), and so on, and f(a+0.1),f(a+0.01),f(a+0.001),f(a+0.0001), and so on. (Note: Although we have chosen the x-values a±0.1,a±0.01,a±0.001,a±0.0001, and so forth, and these values will probably work nearly every time, on very rare occasions we may need to modify our choices.)
+
+If both columns approach a common y-value L, we state limx→af(x)=L. We can use the following strategy to confirm the result obtained from the table or as an alternative method for estimating a limit.
+
+Using a graphing calculator or computer software that allows us to graph functions, we can plot the function f(x), making sure the functional values of f(x) for x-values near a are in our window. We can use the trace feature to move along the graph of the function and watch the y-value readout as the x-values approach a. If the y-values approach L as our x-values approach a from both directions, then limx→af(x)=L. We may need to zoom in on our graph and repeat this process several times.
+
+We apply this Problem-Solving Strategy to compute a limit in .
+
+Evaluating a Limit Using a Table of Functional Values 1
+
+Evaluate limx→0sinxx using a table of functional values.
+
+We have calculated the values of f(x)=(sinx)/x for the values of x listed in .
+
+Table of Functional Values for limx→0sinxx
+sinxx
+−0.1
+0.998334166468
+0.1
+0.998334166468
+−0.01
+0.999983333417
+0.01
+0.999983333417
+−0.001
+0.999999833333
+0.001
+0.999999833333
+−0.0001
+0.999999998333
+0.0001
+Note: The values in this table were obtained using a calculator and using all the places given in the calculator output.
+
+As we read down each (sinx)x column, we see that the values in each column appear to be approaching one. Thus, it is fairly reasonable to conclude that limx→0sinxx=1. A calculator or computer-generated graph of f(x)=(sinx)x would be similar to that shown in , and it confirms our estimate.
+
+Evaluating a Limit Using a Table of Functional Values 2
+
+Evaluate limx→4x−2x−4 using a table of functional values.
+
+As before, we use a table—in this case, —to list the values of the function for the given values of x.
+
+Table of Functional Values for limx→4x−2x−4
+x−2x−4
+3.9
+0.251582341869
+4.1
+0.248456731317
+3.99
+0.25015644562
+4.01
+0.24984394501
+3.999
+0.250015627
+4.001
+0.249984377
+3.9999
+0.250001563
+4.0001
+0.249998438
+3.99999
+0.25000016
+4.00001
+0.24999984
+After inspecting this table, we see that the functional values less than 4 appear to be decreasing toward 0.25 whereas the functional values greater than 4 appear to be increasing toward 0.25. We conclude that limx→4x−2x−4=0.25. We confirm this estimate using the graph of f(x)=x−2x−4 shown in .
+
+Estimate limx→11x−1x−1 using a table of functional values. Use a graph to confirm your estimate.
+limx→11x−1x−1=−1
+
+Hint
+
+Use 0.9, 0.99, 0.999, 0.9999, 0.99999 and 1.1, 1.01, 1.001, 1.0001, 1.00001 as your table values.
+
+At this point, we see from and that it may be just as easy, if not easier, to estimate a limit of a function by inspecting its graph as it is to estimate the limit by using a table of functional values. In , we evaluate a limit exclusively by looking at a graph rather than by using a table of functional values.
+
+Evaluating a Limit Using a Graph
+
+For g(x) shown in , evaluate limx→−1g(x).
+
+Despite the fact that g(−1)=4, as the x-values approach −1 from either side, the g(x) values approach 3. Therefore, limx→−1g(x)=3. Note that we can determine this limit without even knowing the algebraic expression of the function.
+
+Based on , we make the following observation: It is possible for the limit of a function to exist at a point, and for the function to be defined at this point, but the limit of the function and the value of the function at the point may be different.
+
+Use the graph of h(x) in to evaluate limx→2h(x), if possible.
+limx→2h(x)=−1.
+
+Hint
+
+What y-value does the function approach as the x-values approach 2?
+
+Looking at a table of functional values or looking at the graph of a function provides us with useful insight into the value of the limit of a function at a given point. However, these techniques rely too much on guesswork. We eventually need to develop alternative methods of evaluating limits. These new methods are more algebraic in nature and we explore them in the next section; however, at this point we introduce two special limits that are foundational to the techniques to come.
+
+Two Important Limits
+
+Let a be a real number and c be a constant.
+limx→ax=a
+limx→ac=c
+
+We can make the following observations about these two limits.
+
+For the first limit, observe that as x approaches a, so does f(x), because f(x)=x. Consequently, limx→ax=a.
+
+For the second limit, consider .
+
+Table of Functional Values for limx→ac=c
+c
+Observe that for all values of x (regardless of whether they are approaching a), the values f(x) remain constant at c. We have no choice but to conclude limx→ac=c.
+
+The Existence of a Limit
+
+As we consider the limit in the next example, keep in mind that for the limit of a function to exist at a point, the functional values must approach a single real-number value at that point. If the functional values do not approach a single value, then the limit does not exist.
+
+Evaluating a Limit That Fails to Exist
+
+Evaluate limx→0sin(1/x) using a table of values.
+lists values for the function sin(1/x) for the given values of x.
+
+Table of Functional Values for limx→0sin(1x)
+sin(1x)
+−0.1
+0.544021110889
+0.1
+−0.544021110889
+−0.01
+0.50636564111
+0.01
+−0.50636564111
+−0.001
+−0.8268795405312
+0.001
+0.826879540532
+−0.0001
+0.305614388888
+0.0001
+−0.305614388888
+−0.00001
+−0.035748797987
+0.00001
+0.035748797987
+−0.000001
+0.349993504187
+0.000001
+−0.349993504187
+After examining the table of functional values, we can see that the y-values do not seem to approach any one single value. It appears the limit does not exist. Before drawing this conclusion, let’s take a more systematic approach. Take the following sequence of x-values approaching 0:
+
+The corresponding y-values are
+
+At this point we can indeed conclude that limx→0sin(1/x) does not exist. (Mathematicians frequently abbreviate “does not exist” as DNE. Thus, we would write limx→0sin(1/x) DNE.) The graph of f(x)=sin(1/x) is shown in and it gives a clearer picture of the behavior of sin(1/x) as x approaches 0. You can see that sin(1/x) oscillates ever more wildly between −1 and 1 as x approaches 0.
+
+Use a table of functional values to evaluate limx→2|x2−4|x−2, if possible.
+limx→2|x2−4|x−2 does not exist.
+
+Hint
+
+Use x-values 1.9, 1.99, 1.999, 1.9999, 1.9999 and 2.1, 2.01, 2.001, 2.0001, 2.00001 in your table.
+
+One-Sided Limits
+
+Sometimes indicating that the limit of a function fails to exist at a point does not provide us with enough information about the behavior of the function at that particular point. To see this, we now revisit the function g(x)=|x−2|/(x−2) introduced at the beginning of the section (see (b)). As we pick values of x close to 2, g(x) does not approach a single value, so the limit as x approaches 2 does not exist—that is, limx→2g(x) DNE. However, this statement alone does not give us a complete picture of the behavior of the function around the x-value 2. To provide a more accurate description, we introduce the idea of a one-sided limit. For all values to the left of 2 (or the negative side of 2), g(x)=−1. Thus, as x approaches 2 from the left, g(x) approaches −1. Mathematically, we say that the limit as x approaches 2 from the left is −1. Symbolically, we express this idea as
+
+Similarly, as x approaches 2 from the right (or from the positive side), g(x) approaches 1. Symbolically, we express this idea as
+
+We can now present an informal definition of one-sided limits.
+
+Definition
+
+We define two types of one-sided limits.
+Limit from the left: Let f(x) be a function defined at all values in an open interval of the form (c, a), and let L be a real number. If the values of the function f(x) approach the real number L as the values of x (where x<a) approach the number a, then we say that L is the limit of f(x) as x approaches a from the left. Symbolically, we express this idea as
+Limit from the right: Let f(x) be a function defined at all values in an open interval of the form (a,c), and let L be a real number. If the values of the function f(x) approach the real number L as the values of x (where x>a) approach the number a, then we say that L is the limit of f(x) as x approaches a from the right. Symbolically, we express this idea as
+
+Evaluating One-Sided Limits
+
+For the function f(x)={x+1ifx<2x2−4ifx≥2, evaluate each of the following limits.
+limx→2−f(x)
+limx→2+f(x)
+
+We can use tables of functional values again . Observe that for values of x less than 2, we use f(x)=x+1 and for values of x greater than 2, we use f(x)=x2−4.
+
+Table of Functional Values for f(x)={x+1ifx<2x2−4ifx≥2
+f(x)=x2−4
+1.9
+2.9
+2.1
+0.41
+1.99
+2.99
+2.01
+0.0401
+1.999
+2.999
+2.001
+0.004001
+1.9999
+2.9999
+2.0001
+0.00040001
+1.99999
+2.99999
+2.00001
+0.0000400001
+Based on this table, we can conclude that a. limx→2−f(x)=3 and b. limx→2+f(x)=0. Therefore, the (two-sided) limit of f(x) does not exist at x=2. shows a graph of f(x) and reinforces our conclusion about these limits.
+
+Use a table of functional values to estimate the following limits, if possible.
+limx→2−|x2−4|x−2
+limx→2+|x2−4|x−2
+
+a. limx→2−|x2−4|x−2=−4; b. limx→2+|x2−4|x−2=4
+
+Hint
+
+Use x-values 1.9, 1.99, 1.999, 1.9999, 1.9999 to estimate limx→2−|x2−4|x−2.
+
+Use x-values 2.1, 2.01, 2.001, 2.0001, 2.00001 to estimate limx→2+|x2−4|x−2.
+(These tables are available from a previous Checkpoint problem.)
+
+Let us now consider the relationship between the limit of a function at a point and the limits from the right and left at that point. It seems clear that if the limit from the right and the limit from the left have a common value, then that common value is the limit of the function at that point. Similarly, if the limit from the left and the limit from the right take on different values, the limit of the function does not exist. These conclusions are summarized in .
+
+Relating One-Sided and Two-Sided Limits
+
+Let f(x) be a function defined at all values in an open interval containing a, with the possible exception of a itself, and let L be a real number. Then,
+
+Infinite Limits
+
+Evaluating the limit of a function at a point or evaluating the limit of a function from the right and left at a point helps us to characterize the behavior of a function around a given value. As we shall see, we can also describe the behavior of functions that do not have finite limits.
+
+We now turn our attention to h(x)=1/(x−2)2, the third and final function introduced at the beginning of this section (see (c)). From its graph we see that as the values of x approach 2, the values of h(x)=1/(x−2)2 become larger and larger and, in fact, become infinite. Mathematically, we say that the limit of h(x) as x approaches 2 is positive infinity. Symbolically, we express this idea as
+
+More generally, we define infinite limits as follows:
+
+Definition
+
+We define three types of infinite limits.
+Infinite limits from the left: Let f(x) be a function defined at all values in an open interval of the form (b,a).
+
+If the values of f(x) increase without bound as the values of x (where x<a) approach the number a, then we say that the limit as x approaches a from the left is positive infinity and we write
+limx→a−f(x)=+∞.
+
+If the values of f(x) decrease without bound as the values of x (where x<a) approach the number a, then we say that the limit as x approaches a from the left is negative infinity and we write
+limx→a−f(x)=−∞.
+Infinite limits from the right: Let f(x) be a function defined at all values in an open interval of the form (a,c).
+
+If the values of f(x) increase without bound as the values of x (where x>a) approach the number a, then we say that the limit as x approaches a from the right is positive infinity and we write
+limx→a+f(x)=+∞.
+
+If the values of f(x) decrease without bound as the values of x (where x>a) approach the number a, then we say that the limit as x approaches a from the right is negative infinity and we write
+limx→a+f(x)=−∞.
+Two-sided infinite limit: Let f(x) be defined for all x≠a in an open interval containing a.
+
+If the values of f(x) increase without bound as the values of x (where x≠a) approach the number a, then we say that the limit as x approaches a is positive infinity and we write
+limx→af(x)=+∞.
+
+If the values of f(x) decrease without bound as the values of x (where x≠a) approach the number a, then we say that the limit as x approaches a is negative infinity and we write
+limx→af(x)=−∞.
+
+It is important to understand that when we write statements such as limx→af(x)=+∞ or limx→af(x)=−∞ we are describing the behavior of the function, as we have just defined it. We are not asserting that a limit exists. For the limit of a function f(x) to exist at a, it must approach a real number L as x approaches a. That said, if, for example, limx→af(x)=+∞, we always write limx→af(x)=+∞ rather than limx→af(x) DNE.
+
+Recognizing an Infinite Limit
+
+Evaluate each of the following limits, if possible. Use a table of functional values and graph f(x)=1/x to confirm your conclusion.
+limx→0−1x
+limx→0+1x
+limx→01x
+
+Begin by constructing a table of functional values.
+
+Table of Functional Values for f(x)=1x
+1x
+−0.1
+−10
+0.1
+10
+−0.01
+−100
+0.01
+100
+−0.001
+−1000
+0.001
+1000
+−0.0001
+−10,000
+0.0001
+10,000
+−0.00001
+−100,000
+0.00001
+100,000
+−0.000001
+−1,000,000
+0.000001
+1,000,000
+The values of 1/x decrease without bound as x approaches 0 from the left. We conclude that
+limx→0−1x=−∞.
+
+The values of 1/x increase without bound as x approaches 0 from the right. We conclude that
+limx→0+1x=+∞.
+
+Since limx→0−1x=−∞ and limx→0+1x=+∞ have different values, we conclude that
+limx→01xDNE.
+
+The graph of f(x)=1/x in confirms these conclusions.
+
+Evaluate each of the following limits, if possible. Use a table of functional values and graph f(x)=1/x2 to confirm your conclusion.
+limx→0−1x2
+limx→0+1x2
+limx→01x2
+
+a. limx→0−1x2=+∞; b. limx→0+1x2=+∞; c. limx→01x2=+∞
+
+Hint
+
+Follow the procedures from .
+
+It is useful to point out that functions of the form f(x)=1/(x−a)n, where n is a positive integer, have infinite limits as x approaches a from either the left or right (). These limits are summarized in .
+
+Infinite Limits from Positive Integers
+
+If n is a positive even integer, then
+
+If n is a positive odd integer, then
+
+and
+
+We should also point out that in the graphs of f(x)=1/(x−a)n, points on the graph having x-coordinates very near to a are very close to the vertical line x=a. That is, as x approaches a, the points on the graph of f(x) are closer to the line x=a. The line x=a is called a vertical asymptote of the graph. We formally define a vertical asymptote as follows:
+
+Definition
+
+Let f(x) be a function. If any of the following conditions hold, then the line x=a is a vertical asymptote of f(x).
+
+Finding a Vertical Asymptote
+
+Evaluate each of the following limits using . Identify any vertical asymptotes of the function f(x)=1/(x+3)4.
+limx→−3−1(x+3)4
+limx→−3+1(x+3)4
+limx→−31(x+3)4
+
+We can use directly.
+limx→−3−1(x+3)4=+∞
+limx→−3+1(x+3)4=+∞
+limx→−31(x+3)4=+∞
+
+The function f(x)=1/(x+3)4 has a vertical asymptote of x=−3.
+
+Evaluate each of the following limits. Identify any vertical asymptotes of the function f(x)=1(x−2)3.
+limx→2−1(x−2)3
+limx→2+1(x−2)3
+limx→21(x−2)3
+
+a. limx→2−1(x−2)3=−∞; b. limx→2+1(x−2)3=+∞; c. limx→21(x−2)3 DNE. The line x=2 is the vertical asymptote of f(x)=1/(x−2)3.
+
+Hint
+
+Use .
+
+In the next example we put our knowledge of various types of limits to use to analyze the behavior of a function at several different points.
+
+Behavior of a Function at Different Points
+
+Use the graph of f(x) in to determine each of the following values:
+limx→−4−f(x);limx→−4+f(x);limx→−4f(x);f(−4)
+limx→−2−f(x);limx→−2+f(x);limx→−2f(x);f(−2)
+limx→1−f(x);limx→1+f(x);limx→1f(x);f(1)
+limx→3−f(x);limx→3+f(x);limx→3f(x);f(3)
+
+Using and the graph for reference, we arrive at the following values:
+limx→−4−f(x)=0;limx→−4+f(x)=0;limx→−4f(x)=0;f(−4)=0
+limx→−2−f(x)=3.;limx→−2+f(x)=3;limx→−2f(x)=3;f(−2) is undefined
+limx→1−f(x)=6;limx→1+f(x)=3;limx→1f(x) DNE; f(1)=6
+limx→3−f(x)=−∞;limx→3+f(x)=−∞;limx→3f(x)=−∞;f(3) is undefined
+
+Evaluate limx→1f(x) for f(x) shown here:
+
+Does not exist.
+
+Hint
+
+Compare the limit from the right with the limit from the left.
+
+Chapter Opener: Einstein’s Equation
+
+In the chapter opener we mentioned briefly how Albert Einstein showed that a limit exists to how fast any object can travel. Given Einstein’s equation for the mass of a moving object, what is the value of this bound?
+
+Our starting point is Einstein’s equation for the mass of a moving object,
+
+where m0 is the object’s mass at rest, v is its speed, and c is the speed of light. To see how the mass changes at high speeds, we can graph the ratio of masses m/m0 as a function of the ratio of speeds, v/c ().
+
+We can see that as the ratio of speeds approaches 1—that is, as the speed of the object approaches the speed of light—the ratio of masses increases without bound. In other words, the function has a vertical asymptote at v/c=1. We can try a few values of this ratio to test this idea.
+
+Ratio of Masses and Speeds for a Moving Object
+mm0
+0.99
+0.1411
+7.089
+0.999
+0.0447
+22.37
+0.9999
+0.0141
+70.71
+Thus, according to , if an object with mass 100 kg is traveling at 0.9999c, its mass becomes 7071 kg. Since no object can have an infinite mass, we conclude that no object can travel at or more than the speed of light.
+
+Key Concepts
+
+A table of values or graph may be used to estimate a limit.
+
+If the limit of a function at a point does not exist, it is still possible that the limits from the left and right at that point may exist.
+
+If the limits of a function from the left and right exist and are equal, then the limit of the function is that common value.
+
+We may use limits to describe infinite behavior of a function at a point.
+
+Key Equations
+limx→af(x)=+∞:limx→a−f(x)=+∞ and limx→a+f(x)=+∞
+ limx→af(x)=−∞:limx→a−f(x)=−∞ and limx→a+f(x)=−∞
+For the following exercises, consider the function f(x)=x2−1|x−1|.
+[T] Complete the following table for the function. Round your solutions to four decimal places.
+f(x)
+0.9
+a.
+1.1
+e.
+0.99
+b.
+1.01
+f.
+0.999
+c.
+1.001
+g.
+0.9999
+d.
+1.0001
+h.
+What do your results in the preceding exercise indicate about the two-sided limit limx→1f(x)? Explain your response.
+limx→1f(x) does not exist because limx→1−f(x)=−2≠limx→1+f(x)=2.
+
+For the following exercises, consider the function f(x)=(1+x)1/x.
+[T] Make a table showing the values of f for x=−0.01,−0.001,−0.0001,−0.00001 and for x=0.01,0.001,0.0001,0.00001. Round your solutions to five decimal places.
+f(x)
+−0.01
+a.
+0.01
+e.
+−0.001
+b.
+0.001
+f.
+−0.0001
+c.
+0.0001
+g.
+−0.00001
+d.
+0.00001
+h.
+What does the table of values in the preceding exercise indicate about the function f(x)=(1+x)1/x?
+limx→0(1+x)1/x=2.7183
+
+To which mathematical constant does the limit in the preceding exercise appear to be getting closer?
+
+In the following exercises, use the given values to set up a table to evaluate the limits. Round your solutions to eight decimal places.
+[T] limx→0sin2xx;±0.1,±0.01,±0.001,±.0001
+sin2xx
+−0.1
+a.
+0.1
+e.
+−0.01
+b.
+0.01
+f.
+−0.001
+c.
+0.001
+g.
+−0.0001
+d.
+0.0001
+h.
+a. 1.98669331; b. 1.99986667; c. 1.99999867; d. 1.99999999; e. 1.98669331; f. 1.99986667; g. 1.99999867; h. 1.99999999; limx→0sin2xx=2
+[T] limx→0sin3xx ±0.1, ±0.01, ±0.001, ±0.0001
+sin3xx
+−0.1
+a.
+0.1
+e.
+−0.01
+b.
+0.01
+f.
+−0.001
+c.
+0.001
+g.
+−0.0001
+d.
+0.0001
+h.
+Use the preceding two exercises to conjecture (guess) the value of the following limit: limx→0sinaxx for a, a positive real value.
+limx→0sinaxx=a
+[T] In the following exercises, set up a table of values to find the indicated limit. Round to eight digits.
+limx→2x2−4x2+x−6
+x2−4x2+x−6
+1.9
+a.
+2.1
+e.
+1.99
+b.
+2.01
+f.
+1.999
+c.
+2.001
+g.
+1.9999
+d.
+2.0001
+limx→1(1−2x)
+1−2x
+0.9
+a.
+1.1
+e.
+0.99
+b.
+1.01
+f.
+0.999
+c.
+1.001
+g.
+0.9999
+d.
+1.0001
+h.
+a. −0.80000000; b. −0.98000000; c. −0.99800000; d. −0.99980000; e. −1.2000000; f. −1.0200000; g. −1.0020000; h. −1.0002000; limx→1(1−2x)=−1
+limx→051−e1/x
+51−e1/x
+−0.1
+a.
+0.1
+e.
+−0.01
+b.
+0.01
+f.
+−0.001
+c.
+0.001
+g.
+−0.0001
+d.
+0.0001
+limz→0z−1z2(z+3)
+z−1z2(z+3)
+−0.1
+a.
+0.1
+e.
+−0.01
+b.
+0.01
+f.
+−0.001
+c.
+0.001
+g.
+−0.0001
+d.
+0.0001
+h.
+a. −37.931934; b. −3377.9264; c. −333,777.93; d. −33,337,778; e. −29.032258; f. −3289.0365; g. −332,889.04; h. −33,328,889 limx→0z−1z2(z+3)=−∞
+limt→0+costt
+costt
+0.1
+a.
+0.01
+b.
+0.001
+c.
+0.0001
+limx→21−2xx2−4
+1−2xx2−4
+1.9
+a.
+2.1
+e.
+1.99
+b.
+2.01
+f.
+1.999
+c.
+2.001
+g.
+1.9999
+d.
+2.0001
+h.
+a. 0.13495277; b. 0.12594300; c. 0.12509381; d. 0.12500938; e. 0.11614402; f. 0.12406794; g. 0.12490631; h. 0.12499063; ∴limx→21−2xx2−4=0.1250=18
+[T] In the following exercises, set up a table of values and round to eight significant digits. Based on the table of values, make a guess about what the limit is. Then, use a calculator to graph the function and determine the limit. Was the conjecture correct? If not, why does the method of tables fail?
+limθ→0sin(πθ)
+sin(πθ)
+−0.1
+a.
+0.1
+e.
+−0.01
+b.
+0.01
+f.
+−0.001
+c.
+0.001
+g.
+−0.0001
+d.
+0.0001
+limα→0+1αcos(πα)
+1αcos(πα)
+0.1
+a.
+0.01
+b.
+0.001
+c.
+0.0001
+d.
+a. 10.00000; b. 100.00000; c. 1000.0000; d. 10,000.000; Guess: limα→0+1αcos(πα)=∞, actual: DNE
+
+In the following exercises, consider the graph of the function y=f(x) shown here. Which of the statements about y=f(x) are true and which are false? Explain why a statement is false.
+limx→10f(x)=0
+limx→−2+f(x)=3
+
+False; limx→−2+f(x)=+∞
+limx→−8f(x)=f(−8)
+limx→6f(x)=5
+
+False; limx→6f(x) DNE since limx→6−f(x)=2 and limx→6+f(x)=5.
+
+In the following exercises, use the following graph of the function y=f(x) to find the values, if possible. Estimate when necessary.
+limx→1−f(x)
+limx→1+f(x)
+
+2
+limx→1f(x)
+limx→2f(x)
+
+1
+f(1)
+
+In the following exercises, use the graph of the function y=f(x) shown here to find the values, if possible. Estimate when necessary.
+limx→0−f(x)
+
+1
+limx→0+f(x)
+limx→0f(x)
+
+DNE
+limx→2f(x)
+
+In the following exercises, use the graph of the function y=f(x) shown here to find the values, if possible. Estimate when necessary.
+limx→−2−f(x)
+
+0
+limx→−2+f(x)
+limx→−2f(x)
+
+DNE
+limx→2−f(x)
+limx→2+f(x)
+
+2
+limx→2f(x)
+
+In the following exercises, use the graph of the function y=g(x) shown here to find the values, if possible. Estimate when necessary.
+limx→0−g(x)
+
+3
+limx→0+g(x)
+limx→0g(x)
+
+DNE
+
+In the following exercises, use the graph of the function y=h(x) shown here to find the values, if possible. Estimate when necessary.
+limx→0−h(x)
+limx→0+h(x)
+
+0
+limx→0h(x)
+
+In the following exercises, use the graph of the function y=f(x) shown here to find the values, if possible. Estimate when necessary.
+limx→0−f(x)
+
+−2
+limx→0+f(x)
+limx→0f(x)
+
+DNE
+limx→1f(x)
+limx→2f(x)
+
+0
+
+In the following exercises, sketch the graph of a function with the given properties.
+limx→2f(x)=1,limx→4−f(x)=3,limx→4+f(x)=6,f(4) is not defined.
+As x→−∞ , f(x)→0,limx→−1−f(x)=−∞, limx→−1+f(x)=∞,limx→0f(x)=f(0),f(0)=1, As x→∞, f(x)→−∞
+
+Answers may vary.
+As x→−∞, f(x)→2,limx→3−f(x)=−∞, limx→3+f(x)=∞, As x→∞, f(x)→2,f(0)=−13
+As x→−∞, f(x)→2,limx→−2f(x)=−∞, As x→∞, f(x)→2,f(0)=0
+
+Answers may vary.
+As x→−∞, f(x)→0,limx→−1−f(x)=∞,limx→−1+f(x)=−∞, f(0)=−1,limx→1−f(x)=−∞,limx→1+f(x)=∞, As x→∞, f(x)→0
+
+Shock waves arise in many physical applications, ranging from supernovas to detonation waves. A graph of the density of a shock wave with respect to distance, x, is shown here. We are mainly interested in the location of the front of the shock, labeled xSF in the diagram.
+
+Evaluate limx→xSF+ρ(x).
+
+Evaluate limx→xSF−ρ(x).
+
+Evaluate limx→xSFρ(x). Explain the physical meanings behind your answers.
+
+a. ρ2 b. ρ1 c. DNE unless ρ1=ρ2. As you approach xSF from the left, you are in the high-density area of the shock. When you approach from the right, you have not experienced the “shock” yet and are at a lower density.
+
+A track coach uses a camera with a fast shutter to estimate the position of a runner with respect to time. A table of the values of position of the athlete versus time is given here, where x is the position in meters of the runner and t is time in seconds. What is limt→2x(t)? What does it mean physically?
+x (m)
+1.75
+4.5
+1.95
+6.1
+1.99
+6.42
+2.01
+6.58
+2.05
+6.9
+2.25
+8.5
+A function has an infinite limit at a point a if it either increases or decreases without bound as it approaches a
+If all values of the function f(x) approach the real number L as the values of x(≠a) approach a, f(x) approaches L
+A one-sided limit of a function is a limit taken from either the left or the right
+A function has a vertical asymptote at x=a if the limit as x approaches a from the right or left is infinite

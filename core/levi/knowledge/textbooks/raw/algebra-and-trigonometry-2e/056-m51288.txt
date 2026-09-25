@@ -1,0 +1,1888 @@
+# m51288
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Verifying Trigonometric Identities and Using Trigonometric Identities to Simplify Trigonometric Expressions
+
+Verifying Trigonometric Identities and Using Trigonometric Identities to Simplify Trigonometric Expressions
+
+Verify the fundamental trigonometric identities.
+
+Simplify trigonometric expressions using algebra and the identities.
+
+In espionage movies, we see international spies with multiple passports, each claiming a different identity. However, we know that each of those passports represents the same person. The trigonometric identities act in a similar manner to multiple passports—there are many ways to represent the same trigonometric expression. Just as a spy will choose an Italian passport when traveling to Italy, we choose the identity that applies to the given scenario when solving a trigonometric equation.
+
+In this section, we will begin an examination of the fundamental trigonometric identities, including how we can verify them and how we can use them to simplify trigonometric expressions.
+
+Verifying the Fundamental Trigonometric Identities
+
+Identities enable us to simplify complicated expressions. They are the basic tools of trigonometry used in solving trigonometric equations, just as factoring, finding common denominators, and using special formulas are the basic tools of solving algebraic equations. In fact, we use algebraic techniques constantly to simplify trigonometric expressions. Basic properties and formulas of algebra, such as the difference of squares formula and the perfect squares formula, will simplify the work involved with trigonometric expressions and equations. We already know that all of the trigonometric functions are related because they all are defined in terms of the unit circle. Consequently, any trigonometric identity can be written in many ways.
+
+To verify the trigonometric identities, we usually start with the more complicated side of the equation and essentially rewrite the expression until it has been transformed into the same expression as the other side of the equation. Sometimes we have to factor expressions, expand expressions, find common denominators, or use other algebraic strategies to obtain the desired result. In this first section, we will work with the fundamental identities: the Pythagorean identities, the even-odd identities, the reciprocal identities, and the quotient identities.
+
+We will begin with the Pythagorean identities (see ), which are equations involving trigonometric functions based on the properties of a right triangle. We have already seen and used the first of these identifies, but now we will also use additional identities.
+
+1+
+
+tan
+
+2
+
+θ=
+
+sec
+
+2
+
+θ
+The second and third identities can be obtained by manipulating the first. The identity 
+
+1+
+
+cot
+
+2
+
+θ=
+
+csc
+
+2
+
+θ
+
+ is found by rewriting the left side of the equation in terms of sine and cosine.
+
+Prove: 
+
+1+
+
+cot
+
+2
+
+θ=
+
+csc
+
+2
+
+θ
+
+Similarly, 
+
+1+
+
+tan
+
+2
+
+θ=
+
+sec
+
+2
+
+θ
+
+ can be obtained by rewriting the left side of this identity in terms of sine and cosine. This gives
+
+Recall that we determined which trigonometric functions are odd and which are even. The next set of fundamental identities is the set of even-odd identities. The even-odd identities relate the value of a trigonometric function at a given angle to the value of the function at the opposite angle. (See ).
+
+cos(−θ)=cosθ
+
+sec(−θ)=secθ
+Recall that an odd function is one in which 
+
+f(−
+
+x
+
+)= −f(
+x
+)
+
+ for all 
+
+x
+
+ in the domain of 
+
+f.
+
+ The sine function is an odd function because 
+
+sin(
+
+−θ
+
+)=−sinθ.
+
+ The graph of an odd function is symmetric about the origin. For example, consider corresponding inputs of 
+
+π
+2
+
+ and 
+
+−
+π
+2
+
+.
+
+ The output of 
+
+sin(
+
+π
+2
+
+)
+
+ is opposite the output of 
+
+sin(
+
+−
+π
+2
+
+).
+
+ Thus,
+
+This is shown in .
+
+Recall that an even function is one in which
+
+The graph of an even function is symmetric about the y-axis. The cosine function is an even function because 
+
+cos(−θ)=cosθ.
+
+For example, consider corresponding inputs 
+
+π
+4
+
+ and 
+
+−
+π
+4
+
+.
+
+ The output of 
+
+cos(
+
+π
+4
+
+)
+
+ is the same as the output of 
+
+cos(
+
+−
+π
+4
+
+).
+
+ Thus,
+
+See .
+
+For all 
+
+θ
+
+ in the domain of the sine and cosine functions, respectively, we can state the following:
+
+Since 
+
+sin(−θ
+)=−sinθ, sine is an odd function.
+
+Since, 
+
+cos(−
+
+θ
+
+)=cosθ,
+
+ cosine is an even function.
+
+The other even-odd identities follow from the even and odd nature of the sine and cosine functions. For example, consider the tangent identity, 
+
+tan(−
+
+θ
+
+)=−tanθ.
+
+ We can interpret the tangent of a negative angle as 
+
+tan(−
+
+θ
+
+)=
+
+sin(
+
+−θ
+
+)
+
+cos(−
+
+θ
+
+)
+
+=
+
+−sinθ
+
+cosθ
+
+=−tanθ.
+
+ Tangent is therefore an odd function, which means that 
+
+tan(
+
+−θ
+
+)=−tan(
+θ
+)
+
+ for all 
+
+θ
+
+ in the domain of the tangent function.
+
+The cotangent identity, 
+
+cot(
+
+−θ
+
+)=−cotθ,
+
+ also follows from the sine and cosine identities. We can interpret the cotangent of a negative angle as 
+
+cot(
+
+−θ
+
+)=
+
+cos(
+
+−θ
+
+)
+
+sin(
+
+−θ
+
+)
+
+=
+
+cosθ
+
+−sinθ
+
+=−cotθ.
+
+ Cotangent is therefore an odd function, which means that 
+
+cot(
+
+−θ
+
+)=−cot(
+θ
+)
+
+ for all 
+
+θ
+
+ in the domain of the cotangent function.
+
+The cosecant function is the reciprocal of the sine function, which means that the cosecant of a negative angle will be interpreted as 
+
+csc(
+
+−θ
+
+)=
+1
+
+sin(
+
+−θ
+
+)
+
+=
+1
+
+−sinθ
+
+=−cscθ.
+
+ The cosecant function is therefore odd.
+
+Finally, the secant function is the reciprocal of the cosine function, and the secant of a negative angle is interpreted as 
+
+sec(
+
+−θ
+
+)=
+1
+
+cos(
+
+−θ
+
+)
+
+=
+1
+
+cosθ
+
+=secθ.
+
+ The secant function is therefore even.
+
+To sum up, only two of the trigonometric functions, cosine and secant, are even. The other four functions are odd, verifying the even-odd identities.
+
+The next set of fundamental identities is the set of reciprocal identities, which, as their name implies, relate trigonometric functions that are reciprocals of each other. See . Recall that we first encountered these identities when defining trigonometric functions from right angles in Right Angle Trigonometry.
+
+cotθ=
+1
+
+tanθ
+The final set of identities is the set of quotient identities, which define relationships among certain trigonometric functions and can be very helpful in verifying other identities. See .
+
+cotθ=
+
+cosθ
+
+sinθ
+The reciprocal and quotient identities are derived from the definitions of the basic trigonometric functions.
+
+Summarizing Trigonometric Identities
+
+The Pythagorean identities are based on the properties of a right triangle.
+
+The even-odd identities relate the value of a trigonometric function at a given angle to the value of the function at the opposite angle.
+
+The reciprocal identities define reciprocals of the trigonometric functions.
+
+The quotient identities define the relationship among the trigonometric functions.
+
+Graphing the Equations of an Identity
+
+Graph both sides of the identity 
+
+cotθ=
+1
+
+tanθ
+
+.
+
+ In other words, on the graphing calculator, graph 
+
+y=cotθ
+
+ and 
+
+y=
+1
+
+tanθ
+
+.
+
+See .
+
+Analysis
+
+We see only one graph because both expressions generate the same image. One is on top of the other. This is a good way to confirm an identity verified with analytical means. If both expressions give the same graph, then they are most likely identities.
+Given a trigonometric identity, verify that it is true.
+
+Work on one side of the equation. It is usually better to start with the more complex side, as it is easier to simplify than to build.
+
+Look for opportunities to factor expressions, square a binomial, or add fractions.
+
+Noting which functions are in the final expression, look for opportunities to use the identities and make the proper substitutions.
+
+If these steps do not yield the desired result, try converting all terms to sines and cosines.
+
+Verifying a Trigonometric Identity
+
+Verify 
+
+tanθcosθ=sinθ.
+
+We will start on the left side, as it is the more complicated side:
+
+Analysis
+
+This identity was fairly simple to verify, as it only required writing 
+
+tanθ
+
+ in terms of 
+
+sinθ
+
+ and 
+
+cosθ.
+
+Verify the identity 
+ 
+ cscθcosθtanθ=1.
+
+Verifying the Equivalency Using the Even-Odd Identities
+
+Verify the following equivalency using the even-odd identities:
+
+Working on the left side of the equation, we have
+
+Verifying a Trigonometric Identity Involving sec2θ
+
+Verify the identity 
+
+sec
+
+2
+
+θ−1
+
+sec
+
+2
+
+θ
+
+=
+
+sin
+
+2
+
+θ
+
+As the left side is more complicated, let’s begin there.
+
+There is more than one way to verify an identity. Here is another possibility. Again, we can start with the left side.
+
+Analysis
+
+In the first method, we used the identity 
+
+sec
+
+2
+
+θ=
+
+tan
+
+2
+
+θ+1
+
+ and continued to simplify. In the second method, we split the fraction, putting both terms in the numerator over the common denominator. This problem illustrates that there are multiple ways we can verify an identity. Employing some creativity can sometimes simplify a procedure. As long as the substitutions are correct, the answer will be the same.
+
+Show that 
+
+cotθ
+
+cscθ
+
+=cosθ.
+
+Creating and Verifying an Identity
+
+Create an identity for the expression 
+ 
+ 2tanθsecθ
+ 
+ by rewriting strictly in terms of sine.
+
+There are a number of ways to begin, but here we will use the quotient and reciprocal identities to rewrite the expression:
+
+Thus,
+
+Verifying an Identity Using Algebra and Even/Odd Identities
+
+Verify the identity:
+
+Let’s start with the left side and simplify:
+
+Verify the identity 
+
+ sin
+ 
+ 2
+ 
+ θ−1
+
+ tanθsinθ−tanθ
+
+ =
+ 
+ sinθ+1
+
+ tanθ
+
+ .
+sin
+ 
+ 2
+ 
+ θ−1
+
+ tanθsinθ−tanθ
+
+ =
+
+ (sinθ+1)(sinθ−1)
+
+ tanθ(sinθ−1)
+
+ =
+
+ sinθ+1
+
+ tanθ
+
+Verifying an Identity Involving Cosines and Cotangents
+
+Verify the identity: 
+
+(
+
+1−
+
+cos
+
+2
+
+x
+
+)(
+
+1+
+
+cot
+
+2
+
+x
+
+)=1.
+
+We will work on the left side of the equation.
+
+Using Algebra to Simplify Trigonometric Expressions
+
+We have seen that algebra is very important in verifying trigonometric identities, but it is just as critical in simplifying trigonometric expressions before solving. Being familiar with the basic properties and formulas of algebra, such as the difference of squares formula, the perfect square formula, or substitution, will simplify the work involved with trigonometric expressions and equations.
+
+For example, the equation 
+
+(
+
+sinx+1
+
+)(
+
+sinx−1
+
+)=0
+
+ resembles the equation 
+
+(
+
+x+1
+
+)(
+
+x−1
+
+)=0,
+
+ which uses the factored form of the difference of squares. Using algebra makes finding a solution straightforward and familiar. We can set each factor equal to zero and solve. This is one example of recognizing algebraic patterns in trigonometric expressions or equations.
+
+Another example is the difference of squares formula, 
+
+a
+2
+
+−
+b
+2
+
+=(
+
+a−b
+
+)(
+
+a+b
+
+),
+
+ which is widely used in many areas other than mathematics, such as engineering, architecture, and physics. We can also create our own identities by continually expanding an expression and making the appropriate substitutions. Using algebraic properties and formulas makes many trigonometric equations easier to understand and solve.
+
+Writing the Trigonometric Expression as an Algebraic Expression
+
+Write the following trigonometric expression as an algebraic expression: 
+
+2
+
+cos
+
+2
+
+θ+cosθ−1.
+
+Notice that the pattern displayed has the same form as a standard quadratic expression, 
+
+a
+x
+2
+
++bx+c.
+
+ Letting 
+
+cosθ=x,
+
+ we can rewrite the expression as follows:
+
+This expression can be factored as 
+
+(
+
+2x–1
+
+)(
+
+x+1
+
+).
+
+ If it were set equal to zero and we wanted to solve the equation, we would use the zero factor property and solve each factor for 
+
+x.
+
+ At this point, we would replace 
+
+x
+
+ with 
+
+cosθ
+
+ and solve for 
+
+θ.
+
+Rewriting a Trigonometric Expression Using the Difference of Squares
+
+Rewrite the trigonometric expression using the difference of squares: 
+
+4
+
+cos
+
+2
+
+θ−1.
+
+Notice that both the coefficient and the trigonometric expression in the first term are squared, and the square of the number 1 is 1. This is the difference of squares.
+
+Analysis
+
+If this expression were written in the form of an equation set equal to zero, we could solve each factor using the zero factor property. We could also use substitution like we did in the previous problem and let 
+
+cosθ=x,
+
+ rewrite the expression as 
+
+4
+x
+2
+
+−1,
+
+ and factor 
+
+(
+
+2x−1
+
+)(
+
+2x+1
+
+).
+
+ Then replace 
+
+x
+
+ with 
+
+cosθ
+
+ and solve for the angle.
+
+Rewrite the trigonometric expression using the difference of squares: 
+ 
+ 25−9
+ 
+ sin
+ 
+ 2
+ 
+ θ.
+
+This is a difference of squares formula: 
+ 
+ 25−9
+ 
+ sin
+ 
+ 2
+ 
+ θ=(5−3sinθ)(5+3sinθ).
+
+Simplify by Rewriting and Using Substitution
+
+Simplify the expression by rewriting and using identities:
+
+We can start with the Pythagorean identity.
+
+Now we can simplify by substituting 
+
+1+
+
+cot
+
+2
+
+θ
+
+ for 
+
+csc
+
+2
+
+θ.
+
+ We have
+
+Use algebraic techniques to verify the identity: 
+
+cosθ
+
+1+sinθ
+
+=
+
+1−sinθ
+
+cosθ
+
+.
+
+(Hint: Multiply the numerator and denominator on the left side by 
+
+1−sinθ.)
+
+Access these online resources for additional instruction and practice with the fundamental trigonometric identities.
+Fundamental Trigonometric Identities
+Verifying Trigonometric Identities
+
+Key Equations
+
+cos
+2
+
+θ+
+sin
+2
+
+θ=1
+
+1+
+cot
+2
+
+θ=
+csc
+2
+
+θ
+
+1+
+tan
+2
+
+θ=
+sec
+2
+
+θ
+tan(−θ)
+
+ =
+
+ −tanθ
+
+ cot(−θ)
+
+ =
+
+ −cotθ
+
+ sin(−θ)
+
+ =
+
+ −sinθ
+
+ csc(−θ)
+
+ =
+
+ −cscθ
+
+ cos(−θ)
+
+ =
+
+ cosθ
+
+ sec(−θ)
+
+ =
+
+ secθ
+sinθ
+
+ =
+
+ 1
+ 
+ cscθ
+
+ cosθ
+
+ =
+
+ 1
+ 
+ secθ
+
+ tanθ
+
+ =
+
+ 1
+ 
+ cotθ
+
+ cscθ
+
+ =
+
+ 1
+ 
+ sinθ
+
+ secθ
+
+ =
+
+ 1
+ 
+ cosθ
+
+ cotθ
+
+ =
+
+ 1
+ 
+ tanθ
+tanθ
+
+ =
+
+ sinθ
+
+ cosθ
+
+ cotθ
+
+ =
+
+ cosθ
+
+ sinθ
+Key Concepts
+
+There are multiple ways to represent a trigonometric expression. Verifying the identities illustrates how expressions can be rewritten to simplify a problem.
+
+Graphing both sides of an identity will verify it. See .
+
+Simplifying one side of the equation to equal the other side is another method for verifying an identity. See and .
+
+The approach to verifying an identity depends on the nature of the identity. It is often useful to begin on the more complex side of the equation. See .
+
+We can create an identity and then verify it. See .
+
+Verifying an identity may involve algebra with the fundamental identities. See and .
+
+Algebraic techniques can be used to simplify trigonometric expressions. We use algebraic techniques throughout this text, as they consist of the fundamental rules of mathematics. See , , and .
+
+Section Exercises
+
+Verbal
+
+We know 
+
+g(x)=cosx
+
+ is an even function, and 
+
+f(x)=sinx
+
+ and 
+
+h(x)=tanx
+
+ are odd functions. What about 
+
+G(x)=
+
+cos
+
+2
+
+x,F(x)=
+
+sin
+
+2
+
+x,
+
+ and 
+
+H(x)=
+
+tan
+
+2
+
+x?
+
+ Are they even, odd, or neither? Why?
+
+All three functions, 
+
+F,G,
+ and 
+
+H,
+ are even.
+
+This is because 
+
+F(
+
+−x
+
+)=sin(
+
+−x
+
+)sin(
+
+−x
+
+)=(
+
+−sinx
+
+)(
+
+−sinx
+
+)=
+
+sin
+
+2
+
+x=F(
+x
+),G(
+
+−x
+
+)=cos(
+
+−x
+
+)cos(
+
+−x
+
+)=cosxcosx=
+
+cos
+
+2
+
+x=G(
+x
+)
+
+ and 
+
+H(
+
+−x
+
+)=tan(
+
+−x
+
+)tan(
+
+−x
+
+)=(
+
+−tanx
+
+)(
+
+−tanx
+
+)=
+
+tan
+
+2
+
+x=H(
+x
+).
+
+Examine the graph of 
+
+f(x)=secx
+
+ on the interval 
+
+[−π,π].
+
+ How can we tell whether the function is even or odd by only observing the graph of 
+
+f(x)=secx?
+
+After examining the reciprocal identity for 
+
+sect,
+
+ explain why the function is undefined at certain points.
+
+When 
+
+cost=0,
+
+ then 
+
+sect=
+1
+0
+
+,
+
+ which is undefined.
+
+All of the Pythagorean identities are related. Describe how to manipulate the equations to get from 
+
+sin
+
+2
+
+t+
+
+cos
+
+2
+
+t=1
+
+ to the other forms.
+
+Algebraic
+
+For the following exercises, use the fundamental identities to fully simplify the expression.
+sinxcosxsecx
+sinx
+sin(−x)cos(−x)csc(−x)
+tanxsinx+secx
+ 
+ cos
+ 
+ 2
+ 
+ x
+secx
+cscx+cosxcot(−x)
+cott+tant
+
+ sec(−t)
+csct
+3
+ 
+ sin
+ 
+ 3
+ 
+ tcsct+
+ 
+ cos
+ 
+ 2
+ 
+ t+2cos(−t)cost
+−tan(−x)cot(−x)
+−1
+−sin(−x)cosxsecxcscxtanx
+
+ cotx
+1+
+
+tan
+
+2
+
+θ
+
+csc
+
+2
+
+θ
+
++
+
+sin
+
+2
+
+θ+
+1
+
+sec
+
+2
+
+θ
+sec
+
+2
+
+x
+(
+
+tanx
+
+csc
+
+2
+
+x
+
++
+
+tanx
+
+sec
+
+2
+
+x
+
+)(
+
+1+tanx
+
+1+cotx
+
+)−
+1
+
+cos
+
+2
+
+x
+1−
+ 
+ cos
+ 
+ 2
+ 
+ x
+
+ tan
+ 
+ 2
+ 
+ x
+
+ +2
+ 
+ sin
+ 
+ 2
+ 
+ x
+sin
+
+2
+
+x+1
+
+For the following exercises, simplify the first trigonometric expression by writing the simplified form in terms of the second expression.
+tanx+cotx
+
+cscx
+
+;cosx
+secx+cscx
+
+1+tanx
+
+;sinx
+1
+
+sinx
+cosx
+
+1+sinx
+
++tanx;cosx
+1
+
+sinxcosx
+
+−cotx;cotx
+1
+
+cotx
+1
+
+1−cosx
+
+−
+
+cosx
+
+1+cosx
+
+;cscx
+(
+
+secx+cscx
+
+)(
+
+sinx+cosx
+
+)−2−cotx;tanx
+tanx
+1
+
+cscx−sinx
+
+;secx and tanx
+1−sinx
+
+1+sinx
+
+−
+
+1+sinx
+
+1−sinx
+
+;secx and tanx
+−4secxtanx
+tanx;secx
+secx;cotx
+±
+
+1
+
+cot
+
+2
+
+x
+
++1
+secx;sinx
+cotx;sinx
+±
+
+1−
+
+sin
+
+2
+
+x
+
+sinx
+cotx;cscx
+
+For the following exercises, verify the identity.
+cosx−
+ 
+ cos
+ 
+ 3
+ 
+ x=cosx
+ 
+ sin
+ 
+ 2
+ 
+ x
+
+Answers will vary. Sample proof:
+cosx−
+ 
+ cos
+ 
+ 3
+ 
+ x
+
+ =
+
+ cosx(1−
+ 
+ cos
+ 
+ 2
+ 
+ x)
+
+ =
+
+ cosx
+ 
+ sin
+ 
+ 2
+ 
+ x
+cosx(
+
+tanx−sec(
+
+−x
+
+)
+
+)=sinx−1
+1+
+ 
+ sin
+ 
+ 2
+ 
+ x
+
+ cos
+ 
+ 2
+ 
+ x
+
+ =
+ 1
+
+ cos
+ 
+ 2
+ 
+ x
+
+ +
+
+ sin
+ 
+ 2
+ 
+ x
+
+ cos
+ 
+ 2
+ 
+ x
+
+ =1+2
+ 
+ tan
+ 
+ 2
+ 
+ x
+
+Answers will vary. Sample proof: 
+
+1+
+
+sin
+
+2
+
+x
+
+cos
+
+2
+
+x
+
+=
+1
+
+cos
+
+2
+
+x
+
++
+
+sin
+
+2
+
+x
+
+cos
+
+2
+
+x
+
+=
+
+sec
+
+2
+
+x+
+
+tan
+
+2
+
+x=
+
+tan
+
+2
+
+x+1+
+
+tan
+
+2
+
+x=1+2
+
+tan
+
+2
+
+x
+(
+
+sinx+cosx
+
+)
+
+2
+
+=1+2sinxcosx
+cos
+
+2
+
+x−
+
+tan
+
+2
+
+x=2−
+
+sin
+
+2
+
+x−
+
+sec
+
+2
+
+x
+
+Answers will vary. Sample proof:
+
+cos
+
+2
+
+x−
+
+tan
+
+2
+
+x=1−
+
+sin
+
+2
+
+x−(
+
+sec
+
+2
+
+x−1
+
+)=1−
+
+sin
+
+2
+
+x−
+
+sec
+
+2
+
+x+1=2−
+
+sin
+
+2
+
+x−
+
+sec
+
+2
+
+x
+
+Extensions
+
+For the following exercises, prove or disprove the identity.
+1
+ 
+ 1+cosx
+
+ −
+ 1
+ 
+ 1−cos(−x)
+
+ =−2cotxcscx
+csc
+
+2
+
+x(
+
+1+
+
+sin
+
+2
+
+x
+
+)=
+
+cot
+
+2
+
+x
+
+False
+(
+
+ sec
+ 
+ 2
+ 
+ (−x)−
+ 
+ tan
+ 
+ 2
+ 
+ x
+
+ tanx
+
+ )(
+
+ 2+2tanx
+
+ 2+2cotx
+
+ )−2
+ 
+ sin
+ 
+ 2
+ 
+ x=cos2x
+tanx
+
+secx
+
+sin(
+
+−x
+
+)=
+
+cos
+
+2
+
+x
+
+False
+sec(
+
+−x
+
+)
+
+tanx+cotx
+
+=−sin(
+
+−x
+
+)
+1+sinx
+
+cosx
+
+=
+
+cosx
+
+1+sin(
+
+−x
+
+)
+
+Proved with negative and Pythagorean identities
+
+For the following exercises, determine whether the identity is true or false. If false, find an appropriate equivalent expression.
+cos
+
+2
+
+θ−
+
+sin
+
+2
+
+θ
+
+1−
+
+tan
+
+2
+
+θ
+
+=
+
+sin
+
+2
+
+θ
+3
+ 
+ sin
+ 
+ 2
+ 
+ θ+4
+ 
+ cos
+ 
+ 2
+ 
+ θ=3+
+ 
+ cos
+ 
+ 2
+ 
+ θ
+
+True 
+ 
+ 3
+ 
+ sin
+ 
+ 2
+ 
+ θ+4
+ 
+ cos
+ 
+ 2
+ 
+ θ=3
+ 
+ sin
+ 
+ 2
+ 
+ θ+3
+ 
+ cos
+ 
+ 2
+ 
+ θ+
+ 
+ cos
+ 
+ 2
+ 
+ θ=3(
+
+ sin
+ 
+ 2
+ 
+ θ+
+ 
+ cos
+ 
+ 2
+ 
+ θ
+ 
+ )+
+ 
+ cos
+ 
+ 2
+ 
+ θ=3+
+ 
+ cos
+ 
+ 2
+ 
+ θ
+secθ+tanθ
+
+cotθ+cosθ
+
+=
+
+sec
+
+2
+
+θ
+
+set of equations involving trigonometric functions such that if 
+
+f(
+
+−x
+
+)=−f(
+x
+),
+
+ the identity is odd, and if 
+
+f(
+
+−x
+
+)=f(
+x
+),
+
+ the identity is even
+set of equations involving trigonometric functions based on the right triangle properties
+pair of identities based on the fact that tangent is the ratio of sine and cosine, and cotangent is the ratio of cosine and sine
+set of equations involving the reciprocals of basic trigonometric definitions

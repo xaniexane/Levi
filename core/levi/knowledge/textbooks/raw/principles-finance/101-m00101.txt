@@ -1,0 +1,131 @@
+# m00101
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Internal Rate of Return (IRR) Method
+
+Internal Rate of Return (IRR) Method
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Define internal rate of return (IRR).
+
+Calculate internal rate of return.
+
+List advantages and disadvantages of using the internal rate of return method.
+
+Internal Rate of Return (IRR) Calculation
+
+The internal rate of return (IRR) is the discount rate that sets the present value of the cash inflows equal to the present value of the cash outflows. In considering whether Sam’s Sporting Goods should purchase the embroidery machine, the IRR method approaches the time value of money problem from a slightly different angle. Instead of using the company’s cost of attracting funds for the discount rate and solving for NPV, as we did in the first NPV equation, we set NPV equal to zero and solve for the discount rate to find the IRR:
+
+The IRR is the discount rate at which the NPV profile graph crosses the horizontal axis. If the IRR is greater than the cost of capital, a project should be accepted. If the IRR is less than the cost of capital, a project should be rejected. The NPV profile graph for the embroidery machine crossed the horizontal axis at 14%. Therefore, if Sam’s Sporting Goods can attract capital for less than 14%, the IRR exceeds the cost of capital and the embroidery machine should be purchased. However, if it costs Sam’s more than 14% to attract capital, the embroidery machine should not be purchased.
+
+In other words, a company wants to accept projects that have an IRR that exceed the company’s cost of attracting funds. The cash flow from these projects will be great enough to cover the cost of attracting money from investors in addition to the other costs of the project. A company should reject any project that has an IRR less than the company’s cost of attracting funds; the cash flows from such a project are not enough to compensate the investors for the use of their funds.
+
+Calculating IRR without a financial calculator is an arduous, time-consuming process that requires trial and error to find the discount rate that makes NPV exactly equal zero. Your calculator uses the same type of trial-and-error iterative process, but because it uses an automated process, it can do so much more quickly than you can. A problem that might require 30 minutes of detailed mathematical calculations by hand can be completed in a matter of seconds with the assistance of a financial calculator.
+
+All the information your calculator needs to calculate IRR is the value of each cash flow and the time period in which it occurs. To calculate IRR, begin by entering the cash flows for the project, just as you do for the NPV calculation (see ). After these cash flows are entered, simply compute IRR in the final step.
+
+Calculator Steps for IRR
+
+Step
+Description
+Enter
+Display
+1
+CF
+CF0
+XXXX
+2
+2ND [CLR WORK]
+CF0
+0
+3
+Enter initial cash flow
+16000 +/- ENTER
+CF0 =
+-16,000.00
+4
+Enter cash flow for the first year
+↓     2000 ENTER
+C01 =
+2,000.00
+↓
+F01 =
+1.0
+5
+Enter cash flow for the second year
+↓     4000 ENTER
+C02 =
+4,000.00
+↓
+F02 =
+1.0
+6
+Enter cash flow for the third year
+↓     5000 ENTER
+C03 =
+5,000.00
+↓
+F03 =
+1.0
+7
+Enter cash flow for the fourth year
+↓     5000 ENTER
+C04 =
+5,000.00
+↓
+F04 =
+1.0
+8
+Enter cash flow for the fifth year
+↓     5000 ENTER
+C05 =
+5,000.00
+↓
+F05 =
+1.0
+9
+Enter cash flow for the sixth year
+↓     5000 ENTER
+C06 =
+5,000.00
+↓
+F06 =
+1.0
+10
+IRR CPT
+IRR =
+14.09
+Advantages
+
+The primary advantage of using the IRR method is that it is easy to interpret and explain. Investors like to speak in terms of annual percentage returns when evaluating investment possibilities.
+
+Disadvantages
+
+One disadvantage of using IRR is that it can be tedious to calculate. We knew the IRR was about 14% for the embroidery machine project because we had previously calculated the NPV for several discount rates. The IRR is about, but not exactly, 14%, because NPV is not exactly equal to zero (just very close to zero) when we use 14% as the discount rate. Before the prevalence of financial calculators and spreadsheets, calculating the exact IRR was difficult and time-consuming. With today’s technology, this is no longer a major consideration. Later in this chapter, we will look at how to use a spreadsheet to do these calculations.
+No Single Mathematical Solution. Another disadvantage of using the IRR method is that there may not be a single mathematical solution to an IRR problem. This can happen when negative cash flows occur in more than one period in the project. Suppose your company is considering building a facility for an upcoming Olympic competition. The construction cost would be $350 million. The facility would be used for one year and generate cash inflows of $950 million. Then, the following year, your company would be required to convert the facility into a public park area for the city, which is expected to cost $620 million. Placing these cash flows in a timeline results in the following ():
+
+Year
+0
+1
+2
+Cash Flow ($Millions)
+(350)
+950
+(620)
+The NPV profile for this project looks like . The NPV is negative at low interest rates, becomes positive at higher interest rates, and then turns negative again as the interest rate continues to rise. Because the NPV profile line crosses the horizontal axis twice, there are two IRRs. In other words, there are two interest rates at which NPV equals zero.
+
+NPV Profile Graph for a Project with Two IRRs
+Reinvestment Rate Assumption. The IRR assumes that the cash flows are reinvested at the internal rate of return when they are received. This is a disadvantage of the IRR method. The firm may not be able to find any other projects with returns equal to a high-IRR project, so the company may not be able to reinvest at the IRR.
+
+The reinvestment rate assumption becomes problematic when a company has several acceptable projects and is attempting to rank the projects. We will look more closely at the issues that can arise when considering mutually exclusive projects later in this chapter. If a company is simply deciding whether to accept a single project, the reinvestment assumption limitation is not relevant.
+Overlooking Differences in Scale. Another disadvantage of using the IRR method to choose among various acceptable projects is that it ignores differences in scale. The IRR converts the cash flows to percentages and ignores differences in the size or scale of projects. Issues that occur when comparing projects of different scales are covered later in this chapter.
+
+The internal rate of return (IRR) of a project is the discount rate that sets the present value of a project’s cash inflows exactly equal to the present value of the project’s cash outflows. A project should be accepted if its IRR is greater than the firm’s cost of attracting capital.
+
+the discount rate that sets the NPV of a project equal to zero

@@ -1,0 +1,41 @@
+{
+  "description": "Software developer career pack for the Sidewinder course: team guidance plus skill development aimed at refining and improving the developer career — field how-tos (debugging and incident improvisation without proper tooling, shipping under constraints), career-skill entries (craft refinement, mentoring, leveling up), and team-play entries (on-call rotations, incident command, review culture, how teams coordinate and improvise together under pressure). Feeds the learning engine's personal-refinement sub-engine. Lawful software work only.",
+  "draft": true,
+  "entry_count": 44,
+  "field": "developer",
+  "level_breakdown": {
+    "applied": 27,
+    "foundation": 11,
+    "mastery": 6
+  },
+  "notes_for_main_builder": "Draft of 44 entries in three kinds: 20 field how-tos (sw-general-developer-001 to 020), 12 career-skill (021-032), 12 team-play (033-044). All prerequisites resolve pack-locally to lower-numbered entries. Domain is 'general'. Ids normalized by coordinator to the framework law (curriculum/schema.py: sw-<domain>[-<pack>]-NNN); full file validates clean. Open question: should team-play entries later get a distinct domain or keep 'general' with kind discoverable from id ranges?",
+  "pack": "Developer",
+  "safety_posture": "Lawful software work only, defensive posture only. Debugging, incident response, reliability, and team practices — no exploit writing, no bypass techniques, no offensive security content of any kind. Stop conditions escalate (page, roll back, declare incident) rather than circumvent. No credential exfiltration: fixtures are anonymized, tracing never uses production credentials from personal machines.",
+  "selector": {
+    "domains": [
+      "general"
+    ],
+    "levels": [
+      "foundation",
+      "applied",
+      "mastery"
+    ],
+    "tracks": [
+      "build",
+      "create",
+      "improve",
+      "restore",
+      "combine",
+      "improvise"
+    ]
+  },
+  "track_emphasis": {
+    "build": "secondary — health checks, feature flags, zero-downtime migrations, reliable jobs, runbooks",
+    "combine": "tertiary — script consolidation, pattern hybrids, pair programming as combined skill",
+    "create": "secondary — API contracts, decision records, postmortems, onboarding docs, game days",
+    "improve": "primary — profiling, N+1 taming, debugging intuition, estimation, code review, on-call fairness",
+    "improvise": "primary — Sidewinder doctrine core: no-debugger diagnosis, read-only-shell hotfixes, onboarding with no docs, incident command on a call and a doc",
+    "restore": "primary — crash diagnosis, bisection, rollbacks, flaky-test quarantine, corruption recovery"
+  },
+  "version": "0.1.0-draft"
+}

@@ -1,0 +1,58 @@
+# m00110
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+NumPy
+
+NumPy
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe the NumPy library.
+
+Create a NumPy array object.
+
+Choose appropriate NumPy functions to process arrays of numerical data.
+
+NumPy library
+NumPy (Numerical Python) is a Python library that provides support for efficient numerical operations on large, multi-dimensional arrays and serves as a fundamental building block for data analysis in Python. The conventional alias for importing NumPy is np. In other words, NumPy is imported as import numpy as np. NumPy implements the ndarray object, which allows the creation of a multi-dimensional array of homogeneous data types (columns with the same data type) and efficient data processing. An ndarray object can have any number of dimensions and can store elements of various numeric data types. To create a NumPy ndarray object, one of the following options can be used:
+
+Creating an ndarray by converting a Python list or tuple using the np.array() function.
+
+Using built-in functions like np.zeros() and np.ones() for creating an array of all 0's or all 1's, respectively.
+
+Generating an array with random numbers using np.random.rand(n, m), where n and m are the number of rows and columns, respectively.
+
+Loading data from a file. Ex: np.genfromtxt('data.csv', delimiter=',').
+
+Creating an ndarray object
+
+NumPy library
+
+NumPy operations
+
+In addition to the ndarray data type, NumPy's operations provide optimized performance for large-scale computation. The key features of NumPy include:
+
+Mathematical operations: NumPy provides a range of mathematical functions and operations that can be applied to entire arrays or specific elements. These operations include arithmetic, trigonometric, exponential, and logarithmic functions.
+
+Array manipulation: NumPy provides various functions to manipulate the shape, size, and structure of arrays. These include reshaping, transposing, concatenating, splitting, and adding or removing elements from arrays.
+
+Linear algebra operations: NumPy offers a set of linear algebra functions for matrix operations, like matrix multiplication, matrix inversion, eigenvalues, and eigenvectors.
+
+NumPy array operations
+
+NumPy operations
+
+Exploring further
+
+Please refer to the NumPy user guide for more information about the NumPy library.
+NumPy User Guide
+
+Programming practice with Google
+
+Use the Google Colaboratory document below to practice NumPy functionalities to extract statistical insights from a dataset.
+Google Colaboratory document

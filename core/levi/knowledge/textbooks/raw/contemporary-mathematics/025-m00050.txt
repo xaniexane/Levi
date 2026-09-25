@@ -1,0 +1,186 @@
+# m00050
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Arithmetic Sequences
+
+Arithmetic Sequences
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Identify arithmetic sequences.
+
+Find a given term in an arithmetic sequence.
+
+Find the nth term of an arithmetic sequence.
+
+Find the sum of a finite arithmetic sequence.
+
+Use arithmetic sequences to solve real- world applications
+
+As we saw in the previous section, we are adding about 2.5 quintillion bytes of data per day to the Internet. If there are 550 quintillion bytes of data today, then there will be 552.5 quintillion bytes tomorrow, and 555 quintillion bytes in 2 days. This is an example of an arithmetic sequence. There are many situations where this concept of fixed increases comes into play, such as raises or table arrangements.
+
+Identifying Arithmetic Sequences
+
+A sequence of numbers is just that, a list of numbers in order. It can be a short list, such as the number of points earned on each assignment in a class, such as {10, 10, 8, 9, 10, 6, 10}. Or it can be a longer list, even infinitely long, such as the list of prime numbers. For example, here’s a sequence of numbers, specifically, the squares of the first 12 natural numbers.
+
+{1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144}
+
+Each value in the sequence is called a term. Terms in the list are often referred to by their location in the sequence, as in the nth term. For the sequence {1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144}, the first term of the sequence is 1, the fourth term is 16, and so on. In the sequence of assignment scores {10, 10, 8, 9, 10, 6, 10}, the first term is 10 and the third term is 8 ().
+
+The notation we use with sequences is a letter, which represents a term in the sequence, and a subscript, which indicates what place the term is in the sequence. For the sequence {1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144}, we will use the letter a as a value in the sequence, and so a5 would be the term in the sequence at the fifth position. That number is 25, so we can write a5=25.
+
+In this section, we focus on a special kind of sequence, one referred to as an arithmetic sequence. Arithmetic sequences have terms that increase by a fixed number or decrease by a fixed number, called the constant difference (denoted by d), provided that value is not 0. This means the next term is always the previous term plus or minus a specified, constant value. Another way to say this is that the difference between any consecutive terms of the sequence is always the same value.
+
+To see a constant difference, look at the following sequence: {7, 15, 23, 31, 39, 47, 55, 63, 71, 79, 87}. illustrates that each term of the sequence is the previous term plus 8. Eight is the constant difference here.
+
+Identifying Arithmetic Sequences
+
+Determine if the following sequences are arithmetic sequences. Explain your reasoning.
+{4,7,10,13,16,19,22,25,...}
+{20,40,80,160,320,640}
+{7,1,−5,−11,−17,−23,−29,−34,−40}
+
+In the sequence {4,7,10,13,16,19,22,25,...}, every term is the previous term plus 3. The ellipsis indicates that the pattern continues, which means keep adding 3 to the previous term to get the new term. Therefore, this is an infinite arithmetic sequence.
+
+In the sequence {20,40,80,160,320,640}, terms increase by various amounts, for instance from term 1 to term 2, the sequence increases by 20, but from term 2 to term 3 the sequence increases by 40. So, this is not an arithmetic sequence.
+
+In the sequence {7,1,−5,−11,−17,−23,−29,−34,−40}, every term is the previous term minus 6, so this is an arithmetic sequence.
+
+Arithmetic sequences can be expressed with a formula. When we know the first term of an arithmetic sequence, which we label a1, and we know the constant difference, which is denoted d, we can find any other term of the arithmetic sequence. The formula for the ith term of an arithmetic sequence is ai=a1+d×(i−1).
+
+If we have an arithmetic sequence with first term a1 and constant difference d, then the ith term of the arithmetic sequence is ai=a1+d×(i−1).
+
+Let’s examine the formula with this arithmetic sequence: {4,7,10,13,16,19,22,25,...}. In this sequence a1=4 and d=3. The table below shows the values calculated.
+ai, ith Term
+Value of Term
+Term Written as a1+3×(i−1)
+a1
+4+3×0
+a2
+4+3×1
+a3
+4+3×2
+a4
+4+3×3
+a5
+4+3×(i−1)
+We can see how the ith term can be directly calculated. In this sequence, the formula is a1+3×(i−1) where the first term, a1, is 4 and the constant difference d is 3. We can then determine the 47th term of this sequence: a47=4+3×(47−1)=4+3×46=4+138=142.
+
+Calculating a Term in an Arithmetic Sequence
+
+Identify a1 and d for the following arithmetic sequence. Use this information to determine the 60th term.
+ {18,31,44,57,70,83,...}
+
+Inspecting the sequence shows that a1=18 and d=13. We use those values in the formula, with i=60.
+
+Arithmetic Sequences
+
+If we know two terms of the sequence, it is possible to determine the general form of an arithmetic sequence, ai=a1+d×(i−1).
+
+If we have the ith term of an arithmetic sequence, ai, and the jth term of the sequence, aj, then the constant difference is d=aj−aij−i and the first term of the sequence is a1=ai−d(i−1).
+
+Determining First Term and Constant Difference Using Two Terms
+
+A sequence is known to be arithmetic. Two of its terms are a7=56 and a19=104. Use that information to find the constant difference, the first term, and then the 50th term of the sequence.
+
+To find the constant difference, use d=aj−aij−i. The location of the terms is given by the subscript of the two a terms, i=7 and j=19. So, the constant difference can be calculated as such:
+d=104−5619−7=4812=4.
+
+The constant difference of 4 is then used to find a1.
+a1=ai−d(i−1)=a7−4(7−1)=56−4×6=32.
+
+So d=4 and a1=32.
+
+With this information, the 50th term can be found.
+
+The 50th term is a50=228.
+
+Finding the First Term and Constant Difference for an Arithmetic Sequence
+
+Finding the Sum of a Finite Arithmetic Sequence
+
+Sometimes we want to determine the sum of the numbers of a finite arithmetic sequence. The formula for this is fairly straightforward.
+
+The sum of the first n terms of a finite arithmetic sequence, written sn, with first and last term a1 and an, respectively, is sn=n(a1+an2).
+
+Finding the Sum of a Finite Arithmetic Sequence
+
+What is the sum of the first 60 terms of an arithmetic sequence with a1=4.5 and d=2.5?
+
+The formula requires the first and last terms of the sequence. The first term is given, a1=4.5. The 60th term is needed. Using the formula a1=ai+d(i−1) provides the value for the 60th term.
+
+Applying the formula sn=n(a1+an2) provides the sum of the first 60 terms.
+
+The sum of the first 60 terms is 4,695.
+
+Finding the Sum of a Finite Arithmetic Sequence
+
+Using Arithmetic Sequences to Solve Real-World Applications
+
+Applications of arithmetic sequences occur any time some quantity increases by a fixed amount at each step. For instance, suppose someone practices chess each week and increases the amount of time they study each week. The first week the person practices for 3 hours, and vows to practice 30 more minutes each week. Since the amount of time practicing increases by a fixed number each week, this would qualify as an arithmetic sequence.
+
+Applying an Arithmetic Sequence
+
+Jordan has just watched The Queen’s Gambit and decided to hone their skills in chess. To really improve at the game, Jordan decides to practice for 3 hours the first week, and increase their time spent practicing by 30 minutes each week. How many hours will Jordan practice chess in week 20?
+
+Jordan’s practice scheme is an arithmetic sequence, as it increases by a fixed amount each week. The first week there are 3 hours of practice. This means a1=3. Jordan increases the time spent practicing by 30 minutes, or half an hour, each week. This means d=0.5. Using those values, and that we want to know the amount of time Jordan will study in week 20, we determine the time in week 20 using ai=a1+d×(i−1).
+
+So, Jordan will practice 12.5 hours in week 20.
+
+Finding the Sum of a Finite Arithmetic Sequence
+
+Let’s check back in on Jordan. Recall, Jordan had just watched The Queen’s Gambit and decided to hone their skills, practicing for 3 hours the first week, and increasing the time spent practicing by 30 minutes each week. How many hours total will Jordan have practiced chess after 30 weeks of practice?
+
+To calculate the total amount of time that Jordan practiced, we need to use sn=n(a1+an2). The formula requires the first and last terms of the sequence. Since Jordan practiced 3 hours in the first week, the first term is a1=3. Because we want the total practice time after 30 weeks, we need the 30th term. Because the constant difference is d=0.5, the 30th term is a30=3+0.5(30−1)=3+0.5×29=3+14.5=17.5.
+
+Applying the formula sn=n(a1+an2) provides the sum of the first 30 terms.
+
+This means that Jordan practiced a total of 615 hours after 30 weeks.
+
+The Fibonacci Sequence
+
+Not all sequences are arithmetic. One special sequence is the Fibonacci sequence, which is the sequence that has as its first two terms 1 and 1. Every term thereafter is the sum of the previous two terms. The first nine terms of the Fibonacci sequence are 1, 1, 2, 3, 5, 8, 13, 21, and 34.
+
+This sequence is found in nature, architecture, and even music! In nature, the Fibonacci sequence describes the spirals of sunflower seeds, certain galaxy spirals, and flower petals. In music, the band Tool used the Fibonacci sequence in the song “Lateralus.” The Fibonacci sequence even relates to architecture, as it is closely related to the golden ratio.
+Fibonacci Sequence and “Lateralus”
+
+Check Your Understanding
+
+Key Terms
+
+sequence
+
+term of a sequence
+
+arithmetic sequence
+
+first term
+
+constant difference
+
+Key Concepts
+
+A sequence is a list of numbers. Any individual number in that list, or sequence, is a term of the sequence. A specific term of a sequence is denoted by the sequence symbol with a subscript indicating where the term in the sequence is.
+
+A special form of a sequence is an arithmetic sequence. Each arithmetic sequence is determined by its first term and its constant difference. Any term in an arithmetic sequence is determined by adding the constant difference to the preceding term.
+
+If the first term and the constant difference of an arithmetic sequence are known, then any term of the sequence can be found directly.
+
+Because arithmetic sequences follow such a strict pattern, the sum of the first n terms of an arithmetic sequence can be determined with the formula sn=n(a1+an2).
+
+Formulas
+ai=a1+d×(i−1)
+d=aj−aij−i
+a1=ai−d(i−1)
+sn=n(a1+an2)
+
+Videos
+Arithmetic Sequences
+Finding the First Term and Constant Difference for an Arithmetic Sequence
+Finding the Sum of a Finite Arithmetic Sequence
+Fibonacci Sequence and “Lateralus”

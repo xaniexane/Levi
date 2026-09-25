@@ -1,0 +1,124 @@
+# m00056
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Finding modules
+
+Finding modules
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain differences between the standard library and PyPI.
+
+Search python.org and pypi.org for modules of interest.
+
+Built-in modules
+
+The Python Standard Library is a collection of built-in functions and modules that support common programming tasks. Ex: The math module provides functions like sqrt() and constants like pi. Python's official documentation includes a library reference and a module index for becoming familiar with the standard library.
+
+For decades, Python has maintained a "batteries included" philosophy. This philosophy means that the standard library should come with everything most programmers need. In fact, the standard library includes over 200 built-in modules!
+
+Example built-in modules in the standard library.
+
+Module
+calendar
+
+datetime
+
+email
+
+math
+
+os
+
+random
+
+statistics
+
+sys
+
+turtle
+
+zipfile
+
+Read and write ZIP-format archive files.
+Built-in modules
+
+Use the library reference, module index, and documentation links above to answer the questions.
+
+Third-party modules
+
+The Python Package Index (PyPI), available at pypi.org, is the official third-party software library for Python. The abbreviation "PyPI" is pronounced like pie pea eye (in contrast to PyPy, a different project).
+
+PyPI allows anyone to develop and share modules with the Python community. Module authors include individuals, large companies, and non-profit organizations. PyPI helps programmers install modules and receive updates.
+
+Most software available on PyPI is free and open source. PyPI is supported by the Python Software Foundation and is maintained by an independent group of developers.
+
+Example third-party modules available from PyPI.
+
+Module
+arrow
+
+BeautifulSoup
+
+bokeh
+
+matplotlib
+
+moviepy
+
+nltk
+
+numpy
+
+pandas
+
+pillow
+
+pytest
+
+requests
+
+scikit-learn
+
+scipy
+
+scrapy
+
+tensorflow
+
+End-to-end machine learning platform for everyone.
+Third-party modules
+
+Use pypi.org and the links in the table above to answer the questions.
+
+Exploring further
+
+Programming blogs often highlight PyPI modules to demonstrate the usefulness of Python. The following examples provide more background information about the modules listed above.
+Top 20 Python Libraries for Data Science for 2023
+24 Best Python Libraries You Should Check in 2022
+Most Popular Python Packages in 2021
+
+Happy birthday
+
+Module documentation pages often include examples to help programmers become familiar with the module. For this exercise, refer to the following examples from the datetime module documentation:
+Examples of Usage: date
+Examples of Usage: timedelta
+
+Write a program that creates a date object representing your birthday. Then get a date object representing today's date (the date the program is run). Calculate the difference between the two dates, and output the results in the following format:
+
+More exact age
+
+The datetime module does not provide a built-in way to display a person's exact age. Ex: The following program calculates an exact age (in years and days) using floor division and modulo. The output is: You are 15 years and 4 days old.
+
+Notice how leap years are included in the calculation. February 29th occurs four times between birth and today. Therefore, the user is not only 15 years old, but 15 years and 4 days old.
+
+Many commonly used modules from PyPI, including arrow, are installed in the Python shell at python.org/shell. Open the Python shell and type the following lines:
+
+Refer to the humanize() examples from the arrow module documentation. In the Python shell, figure out how to display the number of years and days since birth using one line of code. Then display the number of years, months, and days since birth. Finally, use the print() function to output the results in this format: You are 18 years 4 months and 7 days old.
+
+As time permits, experiment with other functions provided by the arrow module.

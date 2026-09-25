@@ -1,0 +1,58 @@
+# m00075
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Dictionary creation
+
+Dictionary creation
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Create a dictionary object with given key/value pairs.
+
+Dictionary creation
+
+Two methods exist for creating an empty dictionary:
+ 
+ Using curly braces {}. Ex: dict_1 = {}.
+ Using the dict() function. Ex: dict_2 = dict().
+
+Using curly braces {}. Ex: dict_1 = {}.
+
+Using the dict() function. Ex: dict_2 = dict().
+
+A dictionary object can also be created with initial key-value pairs enclosed in curly braces. Ex: my_dict = {"pizza": 2, "pasta": 3, "drink": 4} creates a dictionary object my_dict. A key and associated value are separated by a colon, and key-value pairs are separated by commas.
+
+Creating a dictionary object
+
+Creating dictionary exercises
+
+dict() for dictionary creation
+
+A dictionary object can be created with initial key-value pairs using the dict() function.
+
+Creating a dictionary from a list of tuples.
+ 
+ my_list = [("apple", 2), ("banana", 3), ("orange", 4)]
+ my_dict = dict(my_list)
+
+Creating a dictionary using keyword arguments.
+ 
+ my_dict = dict(apple=2, banana=3, orange=4)
+
+Creating a dictionary from another dictionary.
+ 
+ old_dict = {"apple": 2, "banana": 3, "orange": 4}
+ new_dict = dict(old_dict)
+
+dict() for dictionary initialization
+
+dict() function for dictionary creation
+
+Personal information dictionary
+
+Create a dictionary, my_info, with three key-value pairs. The keys should be "first name", "last name", and "age" with the values being corresponding information about yourself. Then, print my_info.

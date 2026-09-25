@@ -1,0 +1,69 @@
+# m00100
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Microsoft Excel and Microsoft PowerPoint Integration
+
+Microsoft Excel and Microsoft PowerPoint Integration
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Add PowerPoint slides to Excel worksheets
+
+Incorporate Excel worksheets into PowerPoint slides
+
+Integrate Excel charts into PowerPoint slides
+
+WorldCorp shares information in a variety of ways and with multiple audiences. Integrating Excel and PowerPoint data is simply another way of presenting information to others in a streamlined format, often eliminating the need for sending multiple files. For example, you may need to share some key financial data with an external stakeholder, but you only wish to share some of that data as well as provide some context for it. A PowerPoint presentation that includes Excel charts and data tables can be a useful and visually interesting way of sharing this type of information. Using many of the same approaches covered in earlier sections, integrating Excel and PowerPoint is quite simple.
+
+Add Microsoft PowerPoint Slides to Microsoft Excel Worksheets
+
+The accounting department at WorldCorp has prepared a summary of recent transactions and saved that information in an Excel file. They also created a short PowerPoint presentation to explain the data and analysis. A formal meeting will not be held, but the department felt that including the presentation as part of the spreadsheet would be helpful when distributing the information to other departments. The presentation and Excel files have been created, but now we need to integrate the presentation into the Excel file so that it can be distributed to others.
+
+The workbook is arranged into three sheets, with the first sheet being a brief summary of the data (). We will integrate the PowerPoint file on the summary sheet. The first step is to select a cell where the slides will be integrated into Excel. We selected cell F1.
+
+As with other applications, you can either embed or link the file in Excel. Be aware that embedding the slideshow file, which makes it a part of the Excel file, can increase the size of the file considerably, especially if your presentation includes many graphics. You should have no problems sharing such a file via OneDrive, but you may experience some challenges if you need to email the large file to others, as some email systems restrict the size of files you can attach and send. Instead, you may want to choose linking, which simply establishes the connection between the two files. Let’s link the PowerPoint to our Excel file and display it as an icon rather than an image of the first slide in the slideshow.
+
+We follow a similar path as in previous examples: Insert tab, then Text command group, then Object ().
+
+In the Insert Object dialog window that appears, select Create from File and find the PowerPoint file name (in this case, AccountingReport.pptx). Be sure to select Link to File and Display as Icon, then click OK (). The icon that was displayed in the Insert Object window will be inserted into cell F1. You can resize and move the icon if desired. Also remember, you can change the icon to a different picture by clicking Change Icon. You can access the PowerPoint presentation by either double-clicking on the icon or right-clicking and choosing one of the options listed.
+
+Remember the shortcut on the Insert tab for linking a file. If you choose this option, you will get a drop-down list of the files you used most recently. You can also Browse to find the file you want to link by choosing Insert Link from the bottom of the drop-down list. When you click on the file name, a link with the name of the file will be inserted into the cell, as shows. You do not have an option to embed or display as an icon. Instead, the file name (Accounting Report) will be displayed. When you click on the link, the PowerPoint file will be opened in the PowerPoint application rather than within the Excel worksheet environment.
+
+Incorporate Microsoft Excel Worksheets into Microsoft PowerPoint Slides
+
+Recall that you can use copy and paste to insert individual tables or charts into slides. Here we discuss going a bit further than simply copying and pasting. We are integrating the entire Excel file or specific parts of the Excel file into another application. We do this by either linking or embedding.
+
+First, let us look at linking or embedding the entire Excel file into the PowerPoint file. To begin, open the slideshow file; in this example, it is called AccountingReport.pptx. The accounting department would like the recipients of the slideshow to also have access to the actual data file. This will enable the recipients to do their own data analysis. Choose the location to include the embedded or linked object in the presentation. In this example, let’s include an embedded object on the last slide and display it as an icon (see ). Click on the slide where you would like to insert the Excel object and complete the usual steps for inserting an object. The icon will then appear on the slide (). It may be helpful to give the user some text indicating whether the Excel file is linked or embedded.
+
+To access the Excel file, double-click on the icon and the file will open in Excel. You can also right-click on the icon and choose Worksheet Object and then Open.
+
+Just as in Excel, there is a shortcut on the Insert tab to link a file directly. The file will be linked with the file name displayed as in the example covered earlier in the chapter. Choose the drop-down menu from Link on the Insert tab to see a list of the most recent files. Remember, you can also browse for files, choosing the option at the bottom of the drop-down menu. When the file is linked in your slideshow, the font color will be light blue—a default setting in Office for indicating a linked file. It is possible that this color may not work well with your slide design, as you can see in . In that case, simply select the file name text and change the font color and/or size to meet your needs. Refer to previous chapters to review the process for changing font colors, styles, and size in PowerPoint.
+
+If you would like to link only some of the information contained in the Excel file, you will need to use the Paste Special approach. You can also use the standard copy-and-paste approach, but this may alter the formatting or will not be updated if you make changes to the table. Therefore, using Paste Special is a better approach as it offers you more options for preserving formatting. One thing to note is that the columns/rows must be adjacent to each other when making your selection; you cannot copy rows or columns that are noncontiguous (not immediately adjacent to each other).
+
+For this example, let’s link only the Volume Sold and Marginal Profit columns to our PowerPoint slide. First select the two columns you want to link, then copy those columns using either the Copy icon on the Home tab or right-click, then Copy (). Determine where in the slideshow you would like the link to the Excel information to appear (). Then choose Paste Special from the Paste options in the Clipboard command group. Choose Paste Link and click OK. The two columns are now linked in the PowerPoint file and should appear neatly, with their formatting preserved, on your slide ().
+
+Integrate Microsoft Excel Charts into Microsoft PowerPoint Slides
+
+Integrating Excel charts into PowerPoint slides is similar to the process of selecting and integrating parts of a table. You will use the Copy, then Paste Special approach to either link or embed charts into the PowerPoint slideshow. Returning to our example slideshow, let’s embed the Marginal Profit donut chart in the PowerPoint file. First go to the Excel file and select the chart you wish to integrate. Then copy the chart using one of the two approaches for copying information: right-click, then copy; or select Copy from the Home tab. Determine the placement of the chart in the PowerPoint slide. Then, from the Home tab, select Paste, then Paste Special.
+
+Notice there are several options for integrating the chart into the slide, as shows. We choose to embed the chart as a Microsoft Excel Chart Object to integrate the information. The other options, many of which allow you to insert the chart as if it were an image (e.g., the JPEG and PNG file formats), will not embed or link. They will simply place a copy of the Excel chart into the file (see ). Then click OK. The image can then be resized like usual.
+
+Summary
+
+PowerPoint files can be linked or embedded directly into Excel files.
+
+You can link or embed entire Excel files into a PowerPoint presentation or choose only certain selections. Linking and embedding Excel information into PowerPoint files is similar to the process used to link and embed Excel into Word.
+
+Integrating Excel tables and charts into PowerPoint presentations can enhance a presentation by showing relevant data and visuals to explain trends.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises

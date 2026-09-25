@@ -1,0 +1,239 @@
+# m00112
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Exploratory data analysis
+
+Exploratory data analysis
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe exploratory data analysis.
+
+Inspect DataFrame entries through appropriate indexing.
+
+Use filtering and slicing to obtain a subset of a DataFrame.
+
+Identify Null values in a DataFrame.
+
+Remove or replace Null values in a DataFrame.
+
+Exploratory data analysis
+Exploratory Data Analysis (EDA) is the task of analyzing data to gain insights, identify patterns, and understand the underlying structure of the data. During EDA, data scientists visually and statistically examine data to uncover relationships, anomalies, and trends, and to generate hypotheses for further analysis. The main goal of EDA is to become familiar with the data and assess the quality of the data. Once data are understood and cleaned, data scientists may perform feature creation and hypothesis formation. A feature is an individual variable or attribute that is calculated from the raw data in the dataset.
+Data indexing can be used to select and access specific rows and columns. Data indexing is essential in examining a dataset. In Pandas, two types of indexing methods exist:
+
+Label-based indexing using loc[]: loc[] allows you to access data in a DataFrame using row/column labels. Ex: df.loc[row_label, column_label] returns specific data at the intersection of row_label and column_label.
+
+Integer-based indexing using iloc[]: iloc[] allows you to access data in a DataFrame using integer-based indexes. Integer indexes can be passed to retrieve specific data. Ex: df.iloc[row_index, column_index] returns specific data at the index row_index and column_index.
+
+Indexing a DataFrame
+
+DataFrame indexing
+
+Given the following code, respond to the questions below.
+
+Data slicing and filtering
+
+Data slicing and filtering involve selecting specific subsets of data based on certain conditions or index/label ranges. Data slicing refers to selecting a subset of rows and/or columns from a DataFrame. Slicing can be performed using ranges, lists, or Boolean conditions.
+
+Slicing using ranges: Ex: df.loc[start_row:end_row, start_column:end_column] selects rows and columns within the specified ranges.
+
+Slicing using a list: Ex: df.loc[[label1, label2, ...], :] selects rows that are in the list [label1, label2, ...] and includes all columns since all columns are selected by the colon operator.
+
+Slicing based on a condition: df[condition] selects only the rows that meet the given condition.
+Data filtering involves selecting rows or columns based on certain conditions. Ex: In the expression df[df['column_name'] > threshold], the DataFrame df is filtered using the selection operator ([]) and the condition(df['column_name'] > threshold) that is passed. All entries in the DataFrame df where the corresponding value in the DataFrame is True will be returned.
+
+Indexing on a flight dataset
+
+DataFrame slicing and filtering
+
+Given the following code, respond to the questions.
+
+Handling missing data
+
+Missing values in a dataset can occur when data are not available or are not recorded properly. Identifying and removing missing values is an important step in data cleaning and preprocessing. A data scientist should consider ethical considerations throughout the EDA process, especially when handling missing data. They might consider answering questions such as "Why are the data missing?", "Whose data are missing?", and "Considering the missing data, is the dataset still a representative sample of the population under study?". The functions below are useful in understanding and analyzing missing data.
+isnull(): The isnull() function can be used to identify Null entries in a DataFrame. The return value of the function is a Boolean DataFrame, with the same dimensions as the original DataFrame with True values where missing values exist.
+dropna(): The dropna() function can be used to drop rows with Null values.
+fillna(): The fillna() function can be used to replace Null values with a provided substitute value. Ex: df.fillna(df.mean()) replaces all Null values with the average value of the specific column.
+
+To define a Null value in a DataFrame, you can use the np.nan value from the NumPy library. Functions that aid in identifying and removing null entries are described in the table below the following code.
+
+Column 1
+Column 2
+Column 3
+0
+A
+NaN
+True
+1
+B
+200.0
+True
+2
+C
+500.0
+False
+3
+D
+0.0
+NaN
+4
+E
+-10.0
+NaN
+Null identification and removal examples.
+
+Function
+Example
+Output
+Column 1
+Column 2
+Column 3
+
+0
+False
+True
+False
+
+1
+False
+False
+False
+
+2
+False
+False
+False
+
+3
+False
+False
+True
+
+4
+False
+False
+True
+
+Column 1
+Column 2
+Column 3
+0
+False
+True
+False
+1
+False
+False
+False
+2
+False
+False
+False
+3
+False
+False
+True
+4
+False
+False
+The df.isnull() function returns a Boolean array with Boolean values representing whether each entry is Null.
+The df.isnull() function returns a Boolean array with Boolean values representing whether each entry is Null.
+Column 1
+Column 2
+Column 3
+
+0
+A
+172.5
+True
+
+1
+B
+200.0
+True
+
+2
+C
+500.0
+False
+
+3
+D
+0.0
+NaN
+
+4
+E
+-10.0
+NaN
+
+Column 1
+Column 2
+Column 3
+0
+A
+172.5
+True
+1
+B
+200.0
+True
+2
+C
+500.0
+False
+3
+D
+0.0
+NaN
+4
+E
+-10.0
+Null values in Column 2 are replaced with the mean of non-Null values in the column.
+Column 1
+Column 2
+Column 3
+
+0
+A
+172.5
+True
+
+1
+B
+200.0
+True
+
+2
+C
+500.0
+False
+
+Column 1
+Column 2
+Column 3
+0
+A
+172.5
+True
+1
+B
+200.0
+True
+2
+C
+500.0
+All rows containing a Null value are removed from the DataFrame.
+All rows containing a Null value are removed from the DataFrame.
+
+Missing value treatment
+
+Programming practice with Google
+
+Use the Google Colaboratory document below to practice EDA on a given dataset.
+Google Colaboratory document

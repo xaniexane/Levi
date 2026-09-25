@@ -1,0 +1,84 @@
+# m00007
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Text and Numbers in Google Sheets
+
+Text and Numbers in Google Sheets
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Use the insert and copy-and-paste functions in Google Sheets
+
+Enter numeric and text data in a Sheets cell
+
+Create basic graphs from numeric and text data
+
+Use page layout and review features
+
+There is a great need for text and numeric data in databases. For example, in WorldCorp’s database, the client’s surnames and given names are in two separate text data columns. The address, city, and state are each in their own text columns, too. The zip code and telephone may be in text format. This is because these values are numerical, but they are not used to perform any calculations. They are instead providing information about the client. Order quantity may be a number, and total dollar value per client is in accounting format. Sheets can handle large datasets in a similar manner to Excel. The cell formatting in Sheets is similar to that of Excel. Sometimes it is more a matter of company and/or personal preference. Some companies may be used to using Sheets for collaboration and information sharing, or a user might prefer the Sheets GUI over Excel. One drawback of Sheets is that it offers fewer options for charts and graphs than Excel.
+
+Using the Copy-and-Paste and Insert Functions
+
+Before learning to design and build a table from a blank worksheet, you need to understand how to use formatting from an existing table, as with Excel. Say a table to be copied to a new blank worksheet. Follow the same basic procedure as with Excel. First, select the table (), then choose Copy from the Edit menu or press Ctrl+C on the keyboard. Next, go to the new worksheet and choose Paste from the Edit menu or press Ctrl+V. There will be are a few minor differences between your new table and the original. For example, the column widths of the original were adjusted to their contents, whereas in the pasted table, all columns have the same width. To adjust the widths, you can double-click on the edges of the header row between two columns you want to adjust.
+
+As in Excel, Mac uses the Command key instead of the Control key, so the shortcut for copy is Command+C and the shortcut for paste is Command+V.
+
+You have now created a new table using the formatting of an existing table, but the table isn’t exactly what we need. Your manager asks you to add a new column between existing columns for the destination. To do this, first click on the top of column C to highlight the whole column, because you will insert the new column to its left. Then, click on the Insert menu to select Column Left (a), which will insert a blank column (b) where you can input your new data.
+
+Working with Numeric and Text Data in a Sheets Cell
+
+Copying the formatting from an existing table is helpful, but it is not always an option. In some cases, you will need to create a table from scratch. The first step is to establish the headers in the first row (a). Based on the headers, you can then choose the most appropriate format for the data (b).
+
+The format types Sheets uses are similar to the ones Excel uses. compares the formats between Sheets and Excel. The names differ slightly, but many mean almost the same thing. There are minor differences like the order the format types appear in the menu, and there are some formats that are unique to Sheets. Sheets has the Financial, Currency rounded, Date time, and Duration formats that are not available in Excel.
+
+Data Formats in Google Sheets Compared with Excel
+
+Type of Numerical Value
+Number
+Percentage
+Scientific
+Accounting
+Financial
+Currency
+Currency rounded
+Date
+Time
+Date time
+Duration
+Unique to Sheets; a new way to measure time
+Once you have your headers in place, you can apply the appropriate format to the cells below. Select all of column A and go to the More formats drop-down menu, and use the Date format (a). You can set the next three columns as Plain Text and leave columns E and F as Automatic format. Set column G as Accounting. Then, you can fill in the table by adding each order. With all of the data entered, you can make any final formatting changes. First, adjust the width of the columns by double-clicking at the edge of each column. Next, drag the edge of column F to make it narrower so that the header has one word per line. Then, center align and apply bold font on all headers. Finally, apply the background color from the Custom set of colors, which shows recently used colors (b).
+
+Using Numeric and Text Data to Create Basic Graphs
+
+To create a chart or graph in Sheets, the process is slightly different from Excel. First, select the data as you would do when creating a graph or chart in Excel. Then, go to the Insert menu and choose Chart. The chart will appear on the screen in the spreadsheet you have created. Google will analyze the type of data and choose the chart that seems appropriate for the data you have selected. The Chart Editor window will appear to the right. Here, you can adjust the type of chart you want to use and customize the chart with titles and other formatting options. Use the sales report created in b to make a graph that compares the FOB $ to the Date. In other words, it will show the amount of money traded on each day. Sheets analyzes the data before creating the graph and will manipulate the data to be chronological, if necessary. It will also use its built-in artificial intelligence to choose the type of graph most appropriate for the data. You can override the graph type Sheets selects if there is one you feel is more appropriate. PivotTables/Charts goes into more detail about creating graphs and charts.
+
+To create a basic graph, first select the columns you want to compare (), using the Ctrl key to select two noncontiguous columns. Then, click on Insert Chart, and Sheets will create the graph it determines is the most appropriate. You can change the type of graph if you prefer a different type. Using the Chart Type drop-down menu, you can choose a different layout (). Two other options for this data are a bar chart with the chronological order inversed, and an area chart, which is similar to the line chart. When choosing any chart option, Sheets will automatically reorder the dates.
+
+The help forums for Sheets contain a short introduction to all the types of graphs you can build. They describe the use of each of the graphs, previews, and short step-by-step instructions. Go to Google’s support page on the different graph types to learn more.
+
+Page Layout and Review Menus
+
+Sheets does not have menus that directly compare to the Page Layout and Review tabs in Excel, but it does have many of the same features. One feature Sheets does not have is Page Setup. The items in the Page Setup command group such as margins and page orientation are managed in the Print Setting in Google. Similar to the Themes command group in Excel, Sheets has a Theme option found in the Format menu (). Excel’s Page Layout tab also has the Background command that allows you to choose an image for the background of your worksheet. This feature is partly available in Sheets in the Insert menu, which allows you to insert an “Image in cell” or “Image over cells” (a). The result of placing an image in a cell is shown in b. The inserted image (either in a cell or over cells) sits on top of the information in the cells, unlike in Excel, where the image is in the background. The other functions, like moving an object forward or backward, adding gridlines, or scaling settings, are partly available in Sheets. You can insert objects such as Google Draw files, Google Forms, charts, and images into the worksheets, but moving them around may be more cumbersome and less robust compared with Excel.
+
+The review features in Sheets differ somewhat from the Review tab commands in Excel. Sheets allows you to insert a comment () and view all the comments on the document by clicking on the Comment History button on the top. The Tools menu in Sheets has a spelling and grammar check ().
+
+Summary
+
+The copy-and-paste function in Sheets works the same way as in Excel and allows the user to use the structure of an existing table to create a new one. Users can then manipulate the table by inserting columns or rows.
+
+To create a new table, first create header rows and then format the cells below it based on their contents. Then, as you add text or numbers, Sheets will automatically format them based on the type of data.
+
+Basic graphs require selecting the data for analysis and then inserting a graph. Sheets chooses the type of graph based on the type of data. You can change the graph type using the sidebar.
+
+Sheets has many of the same page layout and review features as Excel, with the major difference being the location of the tools in the interface.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises

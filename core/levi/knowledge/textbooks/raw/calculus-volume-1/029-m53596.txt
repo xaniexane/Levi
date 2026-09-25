@@ -1,0 +1,540 @@
+# m53596
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Limits at Infinity and Asymptotes
+
+Limits at Infinity and Asymptotes
+
+Calculate the limit of a function as x increases or decreases without bound.
+
+Recognize a horizontal asymptote on the graph of a function.
+
+Estimate the end behavior of a function as x increases or decreases without bound.
+
+Recognize an oblique asymptote on the graph of a function.
+
+Analyze a function and its derivatives to draw its graph.
+
+We have shown how to use the first and second derivatives of a function to describe the shape of a graph. To graph a function f defined on an unbounded domain, we also need to know the behavior of f as x→±∞. In this section, we define limits at infinity and show how these limits affect the graph of a function. At the end of this section, we outline a strategy for graphing an arbitrary function f.
+
+Limits at Infinity
+
+We begin by examining what it means for a function to have a finite limit at infinity. Then we study the idea of a function with an infinite limit at infinity. Back in Introduction to Functions and Graphs, we looked at vertical asymptotes; in this section we deal with horizontal and oblique asymptotes.
+
+Limits at Infinity and Horizontal Asymptotes
+
+Recall that limx→af(x)=L means f(x) becomes arbitrarily close to L as long as x is sufficiently close to a. We can extend this idea to limits at infinity. For example, consider the function f(x)=2+1x. As can be seen graphically in and numerically in , as the values of x get larger, the values of f(x) approach 2. We say the limit as x approaches ∞ of f(x) is 2 and write limx→∞f(x)=2. Similarly, for x<0, as the values |x| get larger, the values of f(x) approaches 2. We say the limit as x approaches −∞ of f(x) is 2 and write limx→-∞f(x)=2.
+
+Values of a function f as x→±∞
+1.9999
+More generally, for any function f, we say the limit as x→∞ of f(x) is L if f(x) becomes arbitrarily close to L as long as x is sufficiently large. In that case, we write limx→∞f(x)=L. Similarly, we say the limit as x→−∞ of f(x) is L if f(x) becomes arbitrarily close to L as long as x<0 and |x| is sufficiently large. In that case, we write limx→−∞f(x)=L. We now look at the definition of a function having a limit at infinity.
+
+Definition
+
+(Informal) If the values of f(x) become arbitrarily close to L as x becomes sufficiently large, we say the function f has a limit at infinity and write
+
+If the values of f(x) becomes arbitrarily close to L for x<0 as |x| becomes sufficiently large, we say that the function f has a limit at negative infinity and write
+
+If the values f(x) are getting arbitrarily close to some finite value L as x→∞ or x→−∞, the graph of f approaches the line y=L. In that case, the line y=L is a horizontal asymptote of f (). For example, for the function f(x)=1x, since limx→∞f(x)=0, the line y=0 is a horizontal asymptote of f(x)=1x.
+
+Definition
+
+If limx→∞f(x)=L or limx→−∞f(x)=L, we say the line y=L is a horizontal asymptote of f.
+
+A function cannot cross a vertical asymptote because the graph must approach infinity (or −∞) from at least one direction as x approaches the vertical asymptote. However, a function may cross a horizontal asymptote. In fact, a function may cross a horizontal asymptote an unlimited number of times. For example, the function f(x)=(cosx)x+1 shown in intersects the horizontal asymptote y=1 an infinite number of times as it oscillates around the asymptote with ever-decreasing amplitude.
+
+The algebraic limit laws and squeeze theorem we introduced in Introduction to Limits also apply to limits at infinity. We illustrate how to use these laws to compute several limits at infinity.
+
+Computing Limits at Infinity
+
+For each of the following functions f, evaluate limx→∞f(x) and limx→−∞f(x). Determine the horizontal asymptote(s) for f.
+f(x)=5−2x2
+f(x)=sinxx
+f(x)=tan−1(x)
+
+Using the algebraic limit laws, we have limx→∞(5−2x2)=limx→∞5−2(limx→∞1x).(limx→∞1x)=5−2·0=5.
+
+Similarly, limx→-∞f(x)=5.
+
+Therefore, f(x)=5−2x2 has a horizontal asymptote of y=5 and f approaches this horizontal asymptote as x→±∞ as shown in the following graph.
+
+This function approaches a horizontal asymptote as x→±∞.
+
+Since −1≤sinx≤1 for all x, we have
+−1x≤sinxx≤1x
+for all x≠0. Also, since
+limx→∞−1x=0=limx→∞1x,
+we can apply the squeeze theorem to conclude that
+limx→∞sinxx=0.
+Similarly,
+limx→−∞sinxx=0.
+
+Thus, f(x)=sinxx has a horizontal asymptote of y=0 and f(x) approaches this horizontal asymptote as x→±∞ as shown in the following graph.
+
+This function crosses its horizontal asymptote multiple times.
+
+To evaluate limx→∞tan−1(x) and limx→−∞tan−1(x), we first consider the graph of y=tan(x) over the interval (−π/2,π/2) as shown in the following graph.
+
+The graph of tanx has vertical asymptotes at x=±π2
+
+Since
+
+it follows that
+
+Similarly, since
+
+it follows that
+
+As a result, y=π2 and y=−π2 are horizontal asymptotes of f(x)=tan−1(x) as shown in the following graph.
+
+Evaluate limx→−∞(3+4x) and limx→∞(3+4x). Determine the horizontal asymptotes of f(x)=3+4x, if any.
+
+Both limits are 3. The line y=3 is a horizontal asymptote.
+
+Hint
+limx→±∞1/x=0
+
+Infinite Limits at Infinity
+
+Sometimes the values of a function f become arbitrarily large as x→∞ (or as x→−∞). In this case, we write limx→∞f(x)=∞ (or limx→−∞f(x)=∞). On the other hand, if the values of f are negative but become arbitrarily large in magnitude as x→∞ (or as x→−∞), we write limx→∞f(x)=−∞ (or limx→−∞f(x)=−∞).
+
+For example, consider the function f(x)=x3. As seen in and , as x→∞ the values f(x) become arbitrarily large. Therefore, limx→∞x3=∞. On the other hand, as x→−∞, the values of f(x)=x3 are negative but become arbitrarily large in magnitude. Consequently, limx→−∞x3=−∞.
+
+Values of a power function as x→±∞
+−1,000,000,000
+Definition
+
+(Informal) We say a function f has an infinite limit at infinity and write
+
+if f(x) becomes arbitrarily large for x sufficiently large. We say a function has a negative infinite limit at infinity and write
+
+if f(x)<0 and |f(x)| becomes arbitrarily large for x sufficiently large. Similarly, we can define infinite limits as x→−∞.
+
+Formal Definitions
+
+Earlier, we used the terms arbitrarily close, arbitrarily large, and sufficiently large to define limits at infinity informally. Although these terms provide accurate descriptions of limits at infinity, they are not precise mathematically. Here are more formal definitions of limits at infinity. We then look at how to use these definitions to prove results involving limits at infinity.
+
+Definition
+
+(Formal) We say a function f has a limit at infinity, if there exists a real number L such that for all ε>0, there exists N>0 such that
+
+for all x>N. In that case, we write
+
+(see ).
+
+We say a function f has a limit at negative infinity if there exists a real number L such that for all ε>0, there exists N<0 such that
+
+for all x<N. In that case, we write
+
+Earlier in this section, we used graphical evidence in and numerical evidence in to conclude that limx→∞(2+1x)=2. Here we use the formal definition of limit at infinity to prove this result rigorously.
+
+A Finite Limit at Infinity Example
+
+Use the formal definition of limit at infinity to prove that limx→∞(2+1x)=2.
+
+Let ε>0. Let N=1ε. Therefore, for all x>N, we have
+
+Use the formal definition of limit at infinity to prove that limx→∞(3−1x2)=3.
+
+Let ε>0. Let N=1ε. Therefore, for all x>N, we have
+|3−1x2−3|=1x2<1N2=ε
+
+Therefore, limx→∞(3−1/x2)=3.
+
+Hint
+
+Let N=1ε.
+
+We now turn our attention to a more precise definition for an infinite limit at infinity.
+
+Definition
+
+(Formal) We say a function f has an infinite limit at infinity and write
+
+if for all M>0, there exists an N>0 such that
+
+for all x>N (see ).
+
+We say a function has a negative infinite limit at infinity and write
+
+if for all M<0, there exists an N>0 such that
+
+for all x>N.
+
+Similarly we can define limits as x→−∞.
+
+Earlier, we used graphical evidence () and numerical evidence () to conclude that limx→∞x3=∞. Here we use the formal definition of infinite limit at infinity to prove that result.
+
+An Infinite Limit at Infinity
+
+Use the formal definition of infinite limit at infinity to prove that limx→∞x3=∞.
+
+Let M>0. Let N=M3. Then, for all x>N, we have
+
+Therefore, limx→∞x3=∞.
+
+Use the formal definition of infinite limit at infinity to prove that limx→∞3x2=∞.
+
+Let M>0. Let N=M3. Then, for all x>N, we have
+3x2>3N2=3(M3)22=3M3=M
+
+Hint
+
+Let N=M3.
+
+End Behavior
+
+The behavior of a function as x→±∞ is called the function’s end behavior. At each of the function’s ends, the function could exhibit one of the following types of behavior:
+
+The function f(x) approaches a horizontal asymptote y=L.
+
+The function f(x)→∞ or f(x)→−∞.
+
+The function does not approach a finite limit, nor does it approach ∞ or −∞. In this case, the function may have some oscillatory behavior.
+
+Let’s consider several classes of functions here and look at the different types of end behaviors for these functions.
+
+End Behavior for Polynomial Functions
+
+Consider the power function f(x)=xn where n is a positive integer. From and , we see that
+
+and
+
+Using these facts, it is not difficult to evaluate limx→∞cxn and limx→−∞cxn, where c is any constant and n is a positive integer. If c>0, the graph of y=cxn is a vertical stretch or compression of y=xn, and therefore
+
+If c<0, the graph of y=cxn is a vertical stretch or compression combined with a reflection about the x-axis, and therefore
+
+If c=0,y=cxn=0, in which case limx→∞cxn=0=limx→−∞cxn.
+
+Limits at Infinity for Power Functions
+
+For each function f, evaluate limx→∞f(x) and limx→−∞f(x).
+f(x)=−5x3
+f(x)=2x4
+
+Since the coefficient of x3 is −5, the graph of f(x)=−5x3 involves a vertical stretch and reflection of the graph of y=x3 about the x-axis. Therefore, limx→∞(−5x3)=−∞ and limx→−∞(−5x3)=∞.
+
+Since the coefficient of x4 is 2, the graph of f(x)=2x4 is a vertical stretch of the graph of y=x4. Therefore, limx→∞2x4=∞ and limx→−∞2x4=∞.
+
+Let f(x)=−3x4. Find limx→∞f(x).
+−∞
+
+Hint
+
+The coefficient −3 is negative.
+
+We now look at how the limits at infinity for power functions can be used to determine limx→±∞f(x) for any polynomial function f. Consider a polynomial function
+
+of degree n≥1 so that an≠0. Factoring, we see that
+
+As x→±∞, all the terms inside the parentheses approach zero except the first term. We conclude that
+
+For example, the function f(x)=5x3−3x2+4 behaves like g(x)=5x3 as x→±∞ as shown in and .
+
+A polynomial’s end behavior is determined by the term with the largest exponent.
+−5,000,000,000
+End Behavior for Algebraic Functions
+
+The end behavior for rational functions and functions involving radicals is a little more complicated than for polynomials. In , we show that the limits at infinity of a rational function f(x)=p(x)q(x) depend on the relationship between the degree of the numerator and the degree of the denominator. To evaluate the limits at infinity for a rational function, we divide the numerator and denominator by the highest power of x appearing in the denominator. This determines which term in the overall expression dominates the behavior of the function at large values of x.
+
+Determining End Behavior for Rational Functions
+
+For each of the following functions, determine the limits as x→∞ and x→−∞. Then, use this information to describe the end behavior of the function.
+f(x)=3x−12x+5 (Note: The degree of the numerator and the denominator are the same.)
+f(x)=3x2+2x4x3−5x+7 (Note: The degree of numerator is less than the degree of the denominator.)
+f(x)=3x2+4xx+2 (Note: The degree of numerator is greater than the degree of the denominator.)
+
+The highest power of x in the denominator is x. Therefore, dividing the numerator and denominator by x and applying the algebraic limit laws, we see that
+limx→±∞3x−12x+5=limx→±∞3−1/x2+5/x=limx→±∞(3−1/x)limx→±∞(2+5/x)=limx→±∞3−limx→±∞1/xlimx→±∞2+limx→±∞5/x=3−02+0=32.
+Since limx→±∞f(x)=32, we know that y=32 is a horizontal asymptote for this function as shown in the following graph.
+
+The graph of this rational function approaches a horizontal asymptote as x→±∞.
+
+Since the largest power of x appearing in the denominator is x3, divide the numerator and denominator by x3. After doing so and applying algebraic limit laws, we obtain
+limx→±∞3x2+2x4x3−5x+7=limx→±∞3/x+2/x24−5/x2+7/x3=3(0)+2(0)4−5(0)+7(0)=0.
+Therefore f has a horizontal asymptote of y=0 as shown in the following graph.
+
+The graph of this rational function approaches the horizontal asymptote y=0 as x→±∞.
+
+Dividing the numerator and denominator by x, we have
+limx→±∞3x2+4xx+2=limx→±∞3x+41+2/x.
+As x→±∞, the denominator approaches 1. As x→∞, the numerator approaches +∞. As x→−∞, the numerator approaches −∞. Therefore limx→∞f(x)=∞, whereas limx→−∞f(x)=−∞ as shown in the following figure.
+
+As x→∞, the values f(x)→∞. As x→−∞, the values f(x)→−∞.
+
+Evaluate limx→±∞3x2+2x−15x2−4x+7 and use these limits to determine the end behavior of f(x)=3x2+2x−15x2−4x+7.
+35
+
+Hint
+
+Divide the numerator and denominator by x2.
+
+Before proceeding, consider the graph of f(x)=(3x2+4x)(x+2) shown in . As x→∞ and x→−∞, the graph of f appears almost linear. Although f is certainly not a linear function, we now investigate why the graph of f seems to be approaching a linear function. First, using long division of polynomials, we can write
+
+Since 4(x+2)→0 as x→±∞, we conclude that
+
+Therefore, the graph of f approaches the line y=3x−2 as x→±∞. This line is known as an oblique asymptote for f ().
+
+We can summarize the results of to make the following conclusion regarding end behavior for rational functions. Consider a rational function
+
+where an≠0andbm≠0.
+
+If the degree of the numerator is the same as the degree of the denominator (n=m), then f has a horizontal asymptote of y=an/bm as x→±∞.
+
+If the degree of the numerator is less than the degree of the denominator (n<m), then f has a horizontal asymptote of y=0 as x→±∞.
+
+If the degree of the numerator is greater than the degree of the denominator (n>m), then f does not have a horizontal asymptote. The limits at infinity are either positive or negative infinity, depending on the signs of the leading terms. In addition, using long division, the function can be rewritten as
+f(x)=p(x)q(x)=g(x)+r(x)q(x),
+where the degree of r(x) is less than the degree of q(x). As a result, limx→±∞r(x)/q(x)=0. Therefore, the values of [f(x)−g(x)] approach zero as x→±∞. If the degree of p(x) is exactly one more than the degree of q(x) (n=m+1), the function g(x) is a linear function. In this case, we call g(x) an oblique asymptote.
+Now let’s consider the end behavior for functions involving a radical.
+
+Determining End Behavior for a Function Involving a Radical
+
+Find the limits as x→∞ and x→−∞ for f(x)=3x−24x2+5 and describe the end behavior of f.
+
+Let’s use the same strategy as we did for rational functions: divide the numerator and denominator by a power of x. To determine the appropriate power of x, consider the expression 4x2+5 in the denominator. Since
+
+for large values of x in effect x appears just to the first power in the denominator. Therefore, we divide the numerator and denominator by |x|. Then, using the fact that |x|=x for x>0, |x|=−x for x<0, and |x|=x2 for all x, we calculate the limits as follows:
+
+Therefore, f(x) approaches the horizontal asymptote y=32 as x→∞ and the horizontal asymptote y=−32 as x→−∞ as shown in the following graph.
+
+Evaluate limx→∞3x2+4x+6.
+±3
+
+Hint
+
+Divide the numerator and denominator by |x|.
+
+Determining End Behavior for Transcendental Functions
+
+The six basic trigonometric functions are periodic and do not approach a finite limit as x→±∞. For example, sinx oscillates between 1and−1 (). The tangent function x has an infinite number of vertical asymptotes as x→±∞; therefore, it does not approach a finite limit nor does it approach ±∞ as x→±∞ as shown in .
+
+Recall that for any base b>0,b≠1, the function y=bx is an exponential function with domain (−∞,∞) and range (0,∞). If b>1,y=bx is increasing over `(−∞,∞). If 0<b<1, y=bx is decreasing over (−∞,∞). For the natural exponential function f(x)=ex, e≈2.718>1. Therefore, f(x)=ex is increasing on `(−∞,∞) and the range is `(0,∞). The exponential function f(x)=ex approaches ∞ as x→∞ and approaches 0 as x→−∞ as shown in and .
+
+End behavior of the natural exponential function
+148.413
+Recall that the natural logarithm function f(x)=ln(x) is the inverse of the natural exponential function y=ex. Therefore, the domain of f(x)=ln(x) is (0,∞) and the range is (−∞,∞). The graph of f(x)=ln(x) is the reflection of the graph of y=ex about the line y=x. Therefore, ln(x)→−∞ as x→0+ and ln(x)→∞ as x→∞ as shown in and .
+
+End behavior of the natural logarithm function
+4.605
+Determining End Behavior for a Transcendental Function
+
+Find the limits as x→∞ and x→−∞ for f(x)=(2+3ex)(7−5ex) and describe the end behavior of f.
+
+To find the limit as x→∞, divide the numerator and denominator by ex:
+
+As shown in , ex→∞ as x→∞. Therefore,
+
+We conclude that limx→∞f(x)=−35, and the graph of f approaches the horizontal asymptote y=−35 as x→∞. To find the limit as x→−∞, use the fact that ex→0 as x→−∞ to conclude that limx→∞f(x)=27, and therefore the graph of approaches the horizontal asymptote y=27 as x→−∞.
+
+Find the limits as x→∞ and x→−∞ for f(x)=(3ex−4)(5ex+2).
+limx→∞f(x)=35, limx→−∞f(x)=−2
+
+Hint
+limx→∞ex=∞ and limx→∞ex=0.
+
+Guidelines for Drawing the Graph of a Function
+
+We now have enough analytical tools to draw graphs of a wide variety of algebraic and transcendental functions. Before showing how to graph specific functions, let’s look at a general strategy to use when graphing any function.
+
+Problem-Solving Strategy: Drawing the Graph of a Function
+
+Given a function f, use the following steps to sketch a graph of f:
+
+Determine the domain of the function.
+
+Locate the x- and y-intercepts.
+
+Evaluate limx→∞f(x) and limx→−∞f(x) to determine the end behavior. If either of these limits is a finite number L, then y=L is a horizontal asymptote. If either of these limits is ∞ or −∞, determine whether f has an oblique asymptote. If f is a rational function such that f(x)=p(x)q(x), where the degree of the numerator is greater than the degree of the denominator, then f can be written as
+f(x)=p(x)q(x)=g(x)+r(x)q(x),
+where the degree of r(x) is less than the degree of q(x). The values of f(x) approach the values of g(x) as x→±∞. If g(x) is a linear function, it is known as an oblique asymptote.
+
+Determine whether f has any vertical asymptotes.
+
+Calculate f′. Find all critical points and determine the intervals where f is increasing and where f is decreasing. Determine whether f has any local extrema.
+
+Calculate f″. Determine the intervals where f is concave up and where f is concave down. Use this information to determine whether f has any inflection points. The second derivative can also be used as an alternate means to determine or verify that f has a local extremum at a critical point.
+
+Now let’s use this strategy to graph several different functions. We start by graphing a polynomial function.
+
+Sketching a Graph of a Polynomial
+
+Sketch a graph of f(x)=(x−1)2(x+2).
+
+Step 1. Since f is a polynomial, the domain is the set of all real numbers.
+
+Step 2. When x=0,f(x)=2. Therefore, the y-intercept is (0,2). To find the x-intercepts, we need to solve the equation (x−1)2(x+2)=0, gives us the x-intercepts (1,0) and (−2,0)
+
+Step 3. We need to evaluate the end behavior of f. As x→∞, (x−1)2→∞ and (x+2)→∞. Therefore, limx→∞f(x)=∞. As x→−∞, (x−1)2→∞ and (x+2)→−∞. Therefore, limx→−∞f(x)=−∞. To get even more information about the end behavior of f, we can multiply the factors of f. When doing so, we see that
+
+Since the leading term of f is x3, we conclude that f behaves like y=x3 as x→±∞.
+
+Step 4. Since f is a polynomial function, it does not have any vertical asymptotes.
+
+Step 5. The first derivative of f is
+
+Therefore, f has two critical points: x=1,−1. Divide the interval (−∞,∞) into the three smaller intervals: (−∞,−1), (−1,1), and (1,∞). Then, choose test points x=−2, x=0, and x=2 from these intervals and evaluate the sign of f′(x) at each of these test points, as shown in the following table.
+
+Interval
+Test Point
+Sign of Derivative f′(x)=3x2−3=3(x−1)(x+1)
+f is increasing.
+From the table, we see that f has a local maximum at x=−1 and a local minimum at x=1. Evaluating f(x) at those two points, we find that the local maximum value is f(−1)=4 and the local minimum value is f(1)=0.
+
+Step 6. The second derivative of f is
+
+The second derivative is zero at x=0. Therefore, to determine the concavity of f, divide the interval (−∞,∞) into the smaller intervals (−∞,0) and (0,∞), and choose test points x=−1 and x=1 to determine the concavity of f on each of these smaller intervals as shown in the following table.
+
+Interval
+Test Point
+Sign of f″(x)=6x
+f is concave up.
+We note that the information in the preceding table confirms the fact, found in step 5, that f has a local maximum at x=−1 and a local minimum at x=1. In addition, the information found in step 5—namely, f has a local maximum at x=−1 and a local minimum at x=1, and f′(x)=0 at those points—combined with the fact that f″ changes sign only at x=0 confirms the results found in step 6 on the concavity of f.
+
+Combining this information, we arrive at the graph of f(x)=(x−1)2(x+2) shown in the following graph.
+
+Sketch a graph of f(x)=(x−1)3(x+2).
+
+Hint
+f is a fourth-degree polynomial.
+
+Sketching a Rational Function
+
+Sketch the graph of f(x)=x2(1−x2).
+
+Step 1. The function f is defined as long as the denominator is not zero. Therefore, the domain is the set of all real numbers x except x=±1.
+
+Step 2. Find the intercepts. If x=0, then f(x)=0, so 0 is an intercept. If y=0, then x2(1−x2)=0, which implies x=0. Therefore, (0,0) is the only intercept.
+
+Step 3. Evaluate the limits at infinity. Since f is a rational function, divide the numerator and denominator by the highest power in the denominator: x2. We obtain
+
+Therefore, f has a horizontal asymptote of y=−1 as x→∞ and x→−∞.
+
+Step 4. To determine whether f has any vertical asymptotes, first check to see whether the denominator has any zeroes. We find the denominator is zero when x=±1. To determine whether the lines x=1 or x=−1 are vertical asymptotes of f, evaluate limx→1f(x) and limx→−1f(x). By looking at each one-sided limit as x→1, we see that
+
+In addition, by looking at each one-sided limit as x→−1, we find that
+
+Step 5. Calculate the first derivative:
+
+Critical points occur at points x where f′(x)=0 or f′(x) is undefined. We see that f′(x)=0 when x=0. The derivative f′ is not undefined at any point in the domain of f. However, x=±1 are not in the domain of f. Therefore, to determine where f is increasing and where f is decreasing, divide the interval (−∞,∞) into four smaller intervals: (−∞,−1), (−1,0), (0,1), and (1,∞), and choose a test point in each interval to determine the sign of f′(x) in each of these intervals. The values x=−2, x=−12, x=12, and x=2 are good choices for test points as shown in the following table.
+
+Interval
+Test Point
+Sign of f′(x)=2x(1−x2)2
+f is increasing.
+From this analysis, we conclude that f has a local minimum at x=0 but no local maximum.
+
+Step 6. Calculate the second derivative:
+
+To determine the intervals where f is concave up and where f is concave down, we first need to find all points x where f″(x)=0 or f″(x) is undefined. Since the numerator 6x2+2≠0 for any x, f″(x) is never zero. Furthermore, f″ is not undefined for any x in the domain of f. However, as discussed earlier, x=±1 are not in the domain of f. Therefore, to determine the concavity of f, we divide the interval (−∞,∞) into the three smaller intervals (−∞,−1), (−1,−1), and (1,∞), and choose a test point in each of these intervals to evaluate the sign of f″(x). in each of these intervals. The values x=−2, x=0, and x=2 are possible test points as shown in the following table.
+
+Interval
+Test Point
+Sign of f″(x)=6x2+2(1−x2)3
+f is concave down.
+Combining all this information, we arrive at the graph of f shown below. Note that, although f changes concavity at x=−1 and x=1, there are no inflection points at either of these places because f is not continuous at x=−1 or x=1.
+
+Sketch a graph of f(x)=(3x+5)(8+4x).
+
+Hint
+
+A line y=L is a horizontal asymptote of f if the limit as x→∞ or the limit as x→−∞ of f(x) is L. A line x=a is a vertical asymptote if at least one of the one-sided limits of f as x→a is ∞ or −∞.
+
+Sketching a Rational Function with an Oblique Asymptote
+
+Sketch the graph of f(x)=x2(x−1)
+
+Step 1. The domain of f is the set of all real numbers x except x=1.
+
+Step 2. Find the intercepts. We can see that when x=0, f(x)=0, so (0,0) is the only intercept.
+
+Step 3. Evaluate the limits at infinity. Since the degree of the numerator is one more than the degree of the denominator, f must have an oblique asymptote. To find the oblique asymptote, use long division of polynomials to write
+
+Since 1/(x−1)→0 as x→±∞, f(x) approaches the line y=x+1 as x→±∞. The line y=x+1 is an oblique asymptote for f.
+
+Step 4. To check for vertical asymptotes, look at where the denominator is zero. Here the denominator is zero at x=1. Looking at both one-sided limits as x→1, we find
+
+Therefore, x=1 is a vertical asymptote, and we have determined the behavior of f as x approaches 1 from the right and the left.
+
+Step 5. Calculate the first derivative:
+
+We have f′(x)=0 when x2−2x=x(x−2)=0. Therefore, x=0 and x=2 are critical points. Since f is undefined at x=1, we need to divide the interval (−∞,∞) into the smaller intervals (−∞,0), (0,1), (1,2), and (2,∞), and choose a test point from each interval to evaluate the sign of f′(x) in each of these smaller intervals. For example, let x=−1, x=12, x=32, and x=3 be the test points as shown in the following table.
+
+Interval
+Test Point
+Sign of f′(x)=x2−2x(x−1)2=x(x−2)(x−1)2
+f is increasing.
+From this table, we see that f has a local maximum at x=0 and a local minimum at x=2. The value of f at the local maximum is f(0)=0 and the value of f at the local minimum is f(2)=4. Therefore, (0,0) and (2,4) are important points on the graph.
+
+Step 6. Calculate the second derivative:
+
+We see that f″(x) is never zero or undefined for x in the domain of f. Since f is undefined at x=1, to check concavity we just divide the interval (−∞,∞) into the two smaller intervals (−∞,1) and (1,∞), and choose a test point from each interval to evaluate the sign of f″(x) in each of these intervals. The values x=0 and x=2 are possible test points as shown in the following table.
+
+Interval
+Test Point
+Sign of f″(x)=2(x−1)3
+f is concave up.
+From the information gathered, we arrive at the following graph for f.
+
+Find the oblique asymptote for f(x)=(3x3−2x+1)(2x2−4).
+y=32x
+
+Hint
+
+Use long division of polynomials.
+
+Sketching the Graph of a Function with a Cusp
+
+Sketch a graph of f(x)=(x−1)2/3.
+
+Step 1. Since the cube-root function is defined for all real numbers x and (x−1)2/3=(x−13)2, the domain of f is all real numbers.
+
+Step 2: To find the y-intercept, evaluate f(0). Since f(0)=1, the y-intercept is (0,1). To find the x-intercept, solve (x−1)2/3=0. The solution of this equation is x=1, so the x-intercept is (1,0).
+
+Step 3: Since limx→±∞(x−1)2/3=∞, the function continues to grow without bound as x→∞ and x→−∞.
+
+Step 4: The function has no vertical asymptotes.
+
+Step 5: To determine where f is increasing or decreasing, calculate f′. We find
+
+This function is not zero anywhere, but it is undefined when x=1. Therefore, the only critical point is x=1. Divide the interval (−∞,∞) into the smaller intervals (−∞,1) and (1,∞), and choose test points in each of these intervals to determine the sign of f′(x) in each of these smaller intervals. Let x=0 and x=2 be the test points as shown in the following table.
+
+Interval
+Test Point
+Sign of f′(x)=23(x−1)1/3
+f is increasing.
+We conclude that f has a local minimum at x=1. Evaluating f at x=1, we find that the value of f at the local minimum is zero. Note that f′(1) is undefined, so to determine the behavior of the function at this critical point, we need to examine limx→1f′(x). Looking at the one-sided limits, we have
+
+Therefore, f has a cusp at x=1.
+
+Step 6: To determine concavity, we calculate the second derivative of f:
+
+We find that f″(x) is defined for all x, but is undefined when x=1. Therefore, divide the interval (−∞,∞) into the smaller intervals (−∞,1) and (1,∞), and choose test points to evaluate the sign of f″(x) in each of these intervals. As we did earlier, let x=0 and x=2 be test points as shown in the following table.
+
+Interval
+Test Point
+Sign of f″(x)=−29(x−1)4/3
+f is concave down.
+From this table, we conclude that f is concave down everywhere. Combining all of this information, we arrive at the following graph for f.
+
+Consider the function f(x)=5−x2/3. Determine the point on the graph where a cusp is located. Determine the end behavior of f.
+
+The function f has a cusp at (0,5) limx→0−f′(x)=∞, limx→0+f′(x)=−∞. For end behavior, limx→±∞f(x)=−∞.
+
+Hint
+
+A function f has a cusp at a point a if f(a) exists, f′(a) is undefined, one of the one-sided limits as x→a of f′(x) is +∞, and the other one-sided limit is −∞.
+
+Key Concepts
+
+The limit of f(x) is L as x→∞ (or as x→−∞) if the values f(x) become arbitrarily close to L as x becomes sufficiently large.
+
+The limit of f(x) is ∞ as x→∞ if f(x) becomes arbitrarily large as x becomes sufficiently large. The limit of f(x) is −∞ as x→∞ if f(x)<0 and |f(x)| becomes arbitrarily large as x becomes sufficiently large. We can define the limit of f(x) as x approaches −∞ similarly.
+
+For a polynomial function p(x)=anxn+an−1xn−1+…+a1x+a0, where an≠0, the end behavior is determined by the leading term anxn. If n≠0, p(x) approaches ∞ or −∞ at each end.
+
+For a rational function f(x)=p(x)q(x), the end behavior is determined by the relationship between the degree of p and the degree of q. If the degree of p is less than the degree of q, the line y=0 is a horizontal asymptote for f. If the degree of p is equal to the degree of q, then the line y=anbn is a horizontal asymptote, where an and bn are the le
+[truncated]

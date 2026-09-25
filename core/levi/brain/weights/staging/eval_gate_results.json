@@ -1,0 +1,95 @@
+{
+ "heldout_records": 20,
+ "heldout_chars": 6477,
+ "heldout_ce_incumbent": 2.316936180591583,
+ "heldout_ce_candidate": 1.8166704416275024,
+ "heldout_ce_delta": 0.5002657389640808,
+ "gate_margin": 0.02,
+ "gate_numeric_pass": true,
+ "sampling": {
+  "temperature": 0,
+  "seed": 7,
+  "max_new_chars": 160
+ },
+ "samples": [
+  {
+   "prompt_id": "conv-greeting",
+   "prompt": "User: hello\nLEVI:",
+   "incumbent": " The Stare Seare Some Seare Seart Start Searing and Strout Stare Staration Conter Seartion Computer Sertion Stalle Seare Seare Seare Seare and Seare and and and",
+   "candidate": " The conse the start and the sole the sole the so the stame the will the was the the work the work the the wask whill will with the will with the whing the whin"
+  },
+  {
+   "prompt_id": "conv-capabilities",
+   "prompt": "User: what can you do\nLEVI:",
+   "incumbent": " Compler and Computer Stare Secture Startion Conter Sete Seartion Stall Searting Stronge and Sering Seare and and and and the the the seare the the seat and the",
+   "candidate": " The will what is the course will course the with the course with the will what the course with the course will with the will with the what whing the whing the "
+  },
+  {
+   "prompt_id": "conv-conscious",
+   "prompt": "User: are you conscious\nLEVI:",
+   "incumbent": " Andarning and and and the the to the the the sourse the the the the the the the the the the the the soure the the the the the soure the the the the soure the t",
+   "candidate": " The controduction the stame the start and the start the stack the stand the start the the stand the the will will the the will will the the will will the the w"
+  },
+  {
+   "prompt_id": "conv-arithmetic",
+   "prompt": "User: what is 2+2\nLEVI:",
+   "incumbent": " The Stare Staraling and Stromming the the the solling the the the the the the the the the the the the the the soure the the the the the soure the the the the s",
+   "candidate": " The will course with the stack in the start and the stand the stack the stand the state the the stand the the will will the the will will the the will will the"
+  },
+  {
+   "prompt_id": "conv-followup",
+   "prompt": "User: what is 2+2\nLEVI: 4.\nUser: and what is 3+3\nLEVI:",
+   "incumbent": " The Secture Searter Seare Secture Seare Secture Seare Seare Seare Seare Seare and and and and the the seare the the seare seare seare the the seat and the the ",
+   "candidate": " The course is the store the startics in the stard the stand the stated the stare stare the will with the will with the will what what the the will will the the"
+  },
+  {
+   "prompt_id": "conv-weather",
+   "prompt": "User: what is the weather like\nLEVI:",
+   "incumbent": " The the the the the the the sourse the sement the the the the the the sture the the the the the soure the the the the the soure the the the the soure the the t",
+   "candidate": " The receipt and the will the course the stack the will the stand the wast the the the stater the will with the will with the will with the whing the whing the "
+  },
+  {
+   "prompt_id": "conv-plan-day",
+   "prompt": "User: help me plan my day\nLEVI:",
+   "incumbent": " Stare Searning Stand Secture Stare Searting Standent Stand Strones and and Staching Seartion the and and and the the the seare the the the seare the the the se",
+   "candidate": " The course a stat and the the start and the stand the stat the stat the was the will course the will with the will will what what the the will will the the wil"
+  },
+  {
+   "prompt_id": "conv-are-you-sure",
+   "prompt": "User: are you sure about that\nLEVI:",
+   "incumbent": " The sture and and the the the sours and the seat the sourchourse the the the the the seme the the the the soure the the the the the soure the the the the soure",
+   "candidate": " The will will course the will stare and the start and the stame the stand the stare and the stare stare the will with the will what what the the will will the "
+  },
+  {
+   "prompt_id": "conv-about-levi",
+   "prompt": "User: tell me about LEVI\nLEVI:",
+   "incumbent": " Starning and Staraling and Seart Sorting and Strodes and and Conter Serenter Stare Sere Searing Seare and Seare and and and the the seare the the the seare sea",
+   "candidate": " The course the course the section the soll the stard the stack the state the source to the stout the the the the the willd the the will will the the will will "
+  },
+  {
+   "prompt_id": "conv-goodnight",
+   "prompt": "User: goodnight\nLEVI:",
+   "incumbent": " The Stare Sear Searial Seartion and Seart Somenter Strourch Stating Seartion and the and ster and the stere seat and the the seare seare the the the seare sear",
+   "candidate": " The conter and the so the the should the source seard the stack the was the the will the was the the soment will the the will will the the will whate whater th"
+  },
+  {
+   "prompt_id": "creat-story",
+   "prompt": "The daemon kept ticking through the night, and LEVI watched the logs grow like",
+   "incumbent": " the the the the the the the the the the the sture seare the the the the soure the the the the soure the the the soure the the the the the soure the the the the",
+   "candidate": " the the the to the the work the work the the willd the will will with the will with the what whing the the what whing the whing the whing the whing the whing t"
+  },
+  {
+   "prompt_id": "creat-description",
+   "prompt": "Describe the quiet of an offline machine at 3am:",
+   "incumbent": " Stare and and the student the the the source the the the the the the the the the soure the the the the the soure the the the the soure the the the the the sour",
+   "candidate": " a stack the course to the course with the proved the course with the course the willd the will with the will will course the willd the whate will with the will"
+  },
+  {
+   "prompt_id": "creat-voice",
+   "prompt": "A short piece in LEVI's voice about receipts:",
+   "incumbent": " The to the the the the the the the the the the sourch the the the sement the the the the the soure the the the the the soure the the the the soure the the the ",
+   "candidate": " the course and the stame the source the seart the stand the state the the stand the will with the will with the will with the will what the the will will the t"
+  }
+ ],
+ "seconds": 395.3
+}

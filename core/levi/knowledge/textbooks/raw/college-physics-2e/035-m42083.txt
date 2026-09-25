@@ -1,0 +1,186 @@
+# m42083
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Rotation Angle and Angular Velocity
+
+Rotation Angle and Angular Velocity
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define arc length, rotation angle, radius of curvature and angular velocity.
+
+Calculate the angular velocity of a car wheel spin.
+
+In Kinematics, we studied motion along a straight line and introduced such concepts as displacement, velocity, and acceleration. Two-Dimensional Kinematics dealt with motion in two dimensions. Projectile motion is a special case of two-dimensional kinematics in which the object is projected into the air, while being subject to the gravitational force, and lands a distance away. In this chapter, we consider situations where the object does not land but moves in a curve. We begin the study of uniform circular motion by defining two angular quantities needed to describe rotational motion.
+
+Rotation Angle
+
+When objects rotate about some axis—for example, when the CD (compact disc) in rotates about its center—each point in the object follows a circular arc. Consider a line from the center of the CD to its edge. Each pit used to record sound along this line moves through the same angle in the same amount of time. The rotation angle is the amount of rotation and is analogous to linear distance. We define the rotation angle Δθ to be the ratio of the arc length to the radius of curvature:
+All points on a CD travel in circular arcs. The pits along a line from the center to the edge all move through the same angle Δθ in a time Δt.
+
+The arc lengthΔs is the distance traveled along a circular path as shown in Note that r is the radius of curvature of the circular path.
+
+We know that for one complete revolution, the arc length is the circumference of a circle of radius r. The circumference of a circle is 2πr. Thus for one complete revolution the rotation angle is
+
+This result is the basis for defining the units used to measure rotation angles, Δθ to be radians (rad), defined so that
+
+A comparison of some useful angles expressed in both degrees and radians is shown in .
+
+Comparison of Angular Units
+
+Degree Measures
+π
+If Δθ=2π rad, then the CD has made one complete revolution, and every point on the CD is back at its original position. Because there are 360º in a circle or one revolution, the relationship between radians and degrees is thus
+
+so that
+
+Angular Velocity
+
+How fast is an object rotating? We define angular velocity ω as the rate of change of an angle. In symbols, this is
+
+where an angular rotation Δθ takes place in a time Δt. The greater the rotation angle in a given amount of time, the greater the angular velocity. The units for angular velocity are radians per second (rad/s).
+
+Angular velocity ω is analogous to linear velocity v. To get the precise relationship between angular and linear velocity, we again consider a pit on the rotating CD. This pit moves an arc length Δs in a time Δt, and so it has a linear velocity
+
+From Δθ=Δsr we see that Δs=
+
+r
+Δ
+θ
+
+. Substituting this into the expression for v gives
+
+We write this relationship in two different ways and gain two different insights:
+
+The first relationship in v=rω or ω=vr states that the linear velocity v is proportional to the distance from the center of rotation, thus, it is largest for a point on the rim (largest r), as you might expect. We can also call this linear speed v of a point on the rim the tangential speed. The second relationship in v=rω or ω=vr can be illustrated by considering the tire of a moving car. Note that the speed of a point on the rim of the tire is the same as the speed v of the car. See . So the faster the car moves, the faster the tire spins—large v means a large ω, because v=rω. Similarly, a larger-radius tire rotating at the same angular velocity (ω) will produce a greater linear speed (v) for the car.
+
+How Fast Does a Car Tire Spin?
+
+Calculate the angular velocity of a 0.300 m radius car tire when the car travels at 15.0m/s (about 54km/h). See .
+Strategy
+
+Strategy
+
+Because the linear speed of the tire rim is the same as the speed of the car, we have
+
+ v
+ =
+ 15.0 m/s
+ .
+
+The radius of the tire is given to be
+
+ r
+ =
+ 0.300 m
+ .
+
+ Knowing
+
+v and r, we can use the second relationship in v=rω, ω=vr to calculate the angular velocity.
+Solution
+
+Solution
+
+To calculate the angular velocity, we will use the following relationship:
+
+Substituting the knowns,
+Discussion
+
+Discussion
+
+When we cancel units in the above calculation, we get 50.0/s. But the angular velocity must have units of rad/s. Because radians are actually unitless (radians are defined as a ratio of distance), we can simply insert them into the answer for the angular velocity. Also note that if an earth mover with much larger tires, say 1.20 m in radius, were moving at the same speed of 15.0 m/s, its tires would rotate more slowly. They would have an angular velocity
+
+Both ω and v have directions (hence they are angular and linear velocities, respectively). Angular velocity has only two directions with respect to the axis of rotation—it is either clockwise or counterclockwise. Linear velocity is tangent to the path, as illustrated in .
+
+Take-Home Experiment
+
+Tie an object to the end of a string and swing it around in a horizontal circle above your head (swing at your wrist). Maintain uniform speed as the object swings and measure the angular velocity of the motion. What is the approximate speed of the object? Identify a point close to your hand and take appropriate measurements to calculate the linear speed at this point. Identify other circular motions and measure their angular velocities.
+
+Ladybug Revolution
+
+Join the ladybug in an exploration of rotational motion. Rotate the merry-go-round to change its angle, or choose a constant angular velocity or angular acceleration. Explore how circular motion relates to the bug's x,y position, velocity, and acceleration using vectors or graphs.
+Click to view content.
+
+Section Summary
+
+Uniform circular motion is motion in a circle at constant speed. The rotation angle Δθ is defined as the ratio of the arc length to the radius of curvature:
+
+ Δθ=Δsr,where arc length Δs is distance traveled along a circular path and r is the radius of curvature of the circular path. The quantity Δθ is measured in units of radians (rad), for which2πrad=360º= 1 revolution.
+
+where arc length Δs is distance traveled along a circular path and r is the radius of curvature of the circular path. The quantity Δθ is measured in units of radians (rad), for which
+
+The conversion between radians and degrees is 1rad=57.3º.
+
+Angular velocity ω is the rate of change of an angle,
+
+ ω=ΔθΔt,where a rotation Δθ takes place in a time Δt. The units of angular velocity are radians per second (rad/s). Linear velocity v and angular velocity ω are related byv=rω or ω=vr.
+
+where a rotation Δθ takes place in a time Δt. The units of angular velocity are radians per second (rad/s). Linear velocity v and angular velocity ω are related by
+
+Conceptual Questions
+
+There is an analogy between rotational and linear physical quantities. What rotational quantities are analogous to distance and velocity?
+
+Problem Exercises
+
+Semi-trailer trucks have an odometer on one hub of a trailer wheel. The hub is weighted so that it does not rotate, but it contains gears to count the number of wheel revolutions—it then calculates the distance traveled. If the wheel has a 1.15 m diameter and goes through 200,000 rotations, how many kilometers should the odometer read?
+
+723 km
+
+Microwave ovens rotate at a rate of about 6 rev/min. What is this in revolutions per second? What is the angular velocity in radians per second?
+
+An automobile with 0.260 m radius tires travels 80,000 km before wearing them out. How many revolutions do the tires make, neglecting any backing up and any change in radius due to wear?
+5×107rotations
+
+(a) What is the period of rotation of Earth in seconds? (b) What is the angular velocity of Earth? (c) Given that Earth has a radius of 6.4×106m at its equator, what is the linear velocity at Earth’s surface?
+
+A baseball pitcher brings his arm forward during a pitch, rotating the forearm about the elbow. If the velocity of the ball in the pitcher’s hand is 35.0 m/s and the ball is 0.300 m from the elbow joint, what is the angular velocity of the forearm?
+
+117 rad/s
+
+In lacrosse, a ball is thrown from a net on the end of a stick by rotating the stick and forearm about the elbow. If the angular velocity of the ball about the elbow joint is 30.0 rad/s and the ball is 1.30 m from the elbow joint, what is the velocity of the ball?
+
+A truck with 0.420-m-radius tires travels at 32.0 m/s. What is the angular velocity of the rotating tires in radians per second? What is this in rev/min?
+
+76.2 rad/s
+
+728 rpm
+Integrated Concepts When kicking a football, the kicker rotates his leg about the hip joint.
+
+Integrated Concepts
+
+(a) If the velocity of the tip of the kicker’s shoe is 35.0 m/s and the hip joint is 1.05 m from the tip of the shoe, what is the shoe tip’s angular velocity?
+
+(b) The shoe is in contact with the initially stationary 0.500 kg football for 20.0 ms. What average force is exerted on the football to give it a velocity of 20.0 m/s?
+
+(c) Find the maximum range of the football, neglecting air resistance.
+
+(a) 33.3 rad/s
+
+(b) 500 N
+
+(c) 40.8 m
+Construct Your Own Problem
+
+Construct Your Own Problem
+
+Consider an amusement park ride in which participants are rotated about a vertical axis in a cylinder with vertical walls. Once the angular velocity reaches its full value, the floor drops away and friction between the walls and the riders prevents them from sliding down. Construct a problem in which you calculate the necessary angular velocity that assures the riders will not slide down the wall. Include a free body diagram of a single rider. Among the variables to consider are the radius of the cylinder and the coefficients of friction between the riders’ clothing and the wall.
+Δs, the distance traveled by an object along a circular path
+a tiny indentation on the spiral track moulded into the top of the polycarbonate layer of CD
+the ratio of the arc length to the radius of curvature on a circular path:
+
+Δ
+ θ
+ =
+
+ Δs
+
+ r
+radius of a circular path
+ω, the rate of change of the angle with which an object moves on a circular path

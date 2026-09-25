@@ -1,0 +1,83 @@
+# m00080
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Measures of Position
+
+Measures of Position
+
+By the end of this section, you will be able to:
+
+Define and calculate z-scores for a measurement.
+
+Define and calculate quartiles and percentiles for a data set.
+
+Use quartiles as a method to detect outliers in a data set.
+z-Scores
+
+A z-score, also called a z-value, is a measure of the position of an entry in a data set. It represents the number of standard deviations by which a data value differs from the mean. For example, suppose that in a certain year, the rates of return for various technology-focused mutual funds are examined, and the mean return is 7.8% with a standard deviation of 2.3%. A certain mutual fund publishes its rate of return as 12.4%. Based on this rate of return of 12.4%, we can calculate the relative standing of this mutual fund compared to the other technology-focused mutual funds. The corresponding z-score of a measurement considers the given measurement in relation to the mean and standard deviation for the entire population.
+
+The formula for a z-score calculation is as follows:
+
+where x is the measurement, μ is the mean, and σ is the standard deviation.
+
+Interpreting a z-Score
+
+A certain technology-based mutual fund reports a rate of return of 12.4% for a certain year, while the mean rate of return for comparable funds is 7.8% and the standard deviation is 2.3%. Calculate and interpret the z-score for this particular mutual fund.
+Solution:
+
+In this example, the measurement x=12.4, μ=7.8, and σ = 2.3. Using the z-score formula, the calculation is performed as follows:
+
+The resulting z-score indicates the number of standard deviations by which a particular measurement is above or below the mean. In this example, the rate of return for this particular mutual fund is 2 standard deviations above the mean, indicating that this mutual fund generated a significantly better rate of return than all other technology-based mutual funds for the same time period.
+
+Quartiles and Percentiles
+
+If a person takes an IQ test, their resulting score might be reported as in the 87th percentile. This percentile indicates the person’s relative performance compared to others taking the IQ test. A person scoring in the 87th percentile has an IQ score higher than 87% of all others taking the test. This is the same as saying that the person is in the top 13% of all people taking the IQ test.
+
+Common measures of location are quartiles and percentiles. Quartiles are special percentiles. The first quartile, Q1, is the same as the 25th percentile, and the third quartile, Q3, is the same as the 75th percentile. The median, M, is called both the second quartile and the 50th percentile.
+
+To calculate quartiles and percentiles, the data must be ordered from smallest to largest. Quartiles divide ordered data into quarters. Percentiles divide ordered data into hundredths. If you score in the 90th percentile of an exam, that does not necessarily mean that you receive 90% on the test. It means that 90% of the test scores are the same as or less than your score and the remaining 10% of the scores are the same as or greater than your score.
+
+Percentiles are useful for comparing values. In a finance example, a mutual fund might report that the performance for the fund over the past year was in the 80th percentile of all mutual funds in the peer group. This indicates that the fund performed better than 80% of all other funds in the peer group. This also indicates that 20% of the funds performed better than this particular fund.
+
+Quartiles are values that separate the data into quarters. Quartiles may or may not be part of the data. To find the quartiles, first find the median, or second quartile. The first quartile, Q1, is the middle value, or median, of the lower half of the data, and the third quartile, Q3, is the middle value of the upper half of the data. As an example, consider the following ordered data set, which represents the rates of return for a group of technology-based mutual funds in a certain year:
+
+The median, or second quartile, is the middle value in this data set, which is 7.2. Notice that 50% of the data values are below the median, and 50% of the data values are above the median. The lower half of the data values are 5.4, 6.0, 6.3, 6.8, 7.1 Notice that these are the data values below the median. The upper half of the data values are 7.4, 7.5, 7.9, 8.2, 8.7, which are the data values above the median.)
+
+To find the first quartile, Q1, locate the middle value of the lower half of the data. The middle value of the lower half of the data set is 6.3. Notice that one-fourth, or 25%, of the data values are below this first quartile, and 75% of the data values are above this first quartile.
+
+To find the third quartile, Q3, locate the middle value of the upper half of the data. The middle value of the upper half of the data set is 7.9. Notice that one-fourth, or 25%, of the data values are above this third quartile, and 75% of the data values are below this third quartile.
+
+The interquartile range (IQR) is a number that indicates the spread of the middle half, or the middle 50%, of the data. It is the difference between the third quartile, Q3, and the first quartile, Q1.
+
+In the above example, the IQR can be calculated as
+
+Outlier Detection
+
+Quartiles and the IQR can be used to flag possible outliers in a data set. For example, if most employees at a company earn about $50,000 and the CEO of the company earns $2.5 million, then we consider the CEO’s salary to be an outlier data value because is significantly different from all the other salaries in the data set. An outlier data value can also be a value much lower than the other data values, so if one employee only makes $15,000, then this employee’s low salary might also be considered an outlier.
+
+To detect outliers, use the quartiles and the IQR to calculate a lower and an upper bound for outliers. Then any data values below the lower bound or above the upper bound will be flagged as outliers. These data values should be further investigated to determine the nature of the outlier condition.
+
+To calculate the lower and upper bounds for outliers, use the following formulas:
+
+Calculating the IQR
+
+Calculate the IQR for the following 13 portfolio values, and determine if any of the portfolio values are potential outliers. Data values are in dollars.
+
+389,950; 230,500; 158,000; 479,000; 639,000; 114,950; 5,500,000; 387,000; 659,000; 529,000; 575,000; 488,800; 1,095,000
+Solution:
+
+Order the data from smallest to largest.
+
+114,950; 158,000; 230,500; 387,000; 389,950; 479,000; 488,800; 529,000; 575,000; 639,000; 659,000; 1,095,000; 5,500,000
+
+No portfolio value price is less than -201,625. However, 5,500,000 is more than 1,159,375. Therefore, the portfolio value of 5,500,000 is a potential outlier. This is important because the presence of outliers could potentially indicate data errors or some other anomalies in the data set that should be investigated.
+
+Several measures are used to indicate the position of a data value in a data set. One measure of position is the z-score for a particular measurement. The z-score indicates how many standard deviations a particular measurement is above or below the mean. Other measures of position include quartiles and percentiles. Quartiles are special percentiles. The first quartile, Q1, is the same as the 25th percentile, and the third quartile, Q3, is the same as the 75th percentile. The median, M, is called both the second quartile and the 50th percentile. To calculate quartiles and percentiles, the data must be ordered from smallest to largest. Quartiles divide ordered data into quarters. Percentiles divide ordered data into hundredths.
+
+a number that indicates the spread of the middle half, or middle 50%, of the data; the difference between the third quartile (Q3) and the first quartile (Q1)
+numbers that divide an ordered data set into hundredths; often used to indicate position of a data value in a data set
+numbers that divide an ordered data set into quarters; the second quartile is the same as the median
+a measure of the position of a data value in the data set, calculated by subtracting the mean from the data value and then dividing the difference by the standard deviation

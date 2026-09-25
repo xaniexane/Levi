@@ -1,0 +1,1827 @@
+# m49409
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Parametric Equations
+
+Parametric Equations
+
+In this section, you will:
+
+Parameterize a curve.
+
+Eliminate the parameter.
+
+Find a rectangular equation for a curve defined parametrically.
+
+Find parametric equations for curves defined by rectangular equations.
+
+Consider the path a moon follows as it orbits a planet, which simultaneously rotates around the sun, as seen in . At any moment, the moon is located at a particular spot relative to the planet. But how do we write and solve the equation for the position of the moon when the distance from the planet, the speed of the moon’s orbit around the planet, and the speed of rotation around the sun are all unknowns? We can solve only for one variable at a time.
+
+In this section, we will consider sets of equations given by 
+ 
+ x(
+ t
+ )
+ and 
+ 
+ y(
+ t
+ )
+ where 
+ 
+ t
+ is the independent variable of time. We can use these parametric equations in a number of applications when we are looking for not only a particular position but also the direction of the movement. As we trace out successive values of 
+ 
+ t,
+ the orientation of the curve becomes clear. This is one of the primary advantages of using parametric equations: we are able to trace the movement of an object along a path according to time. We begin this section with a look at the basic components of parametric equations and what it means to parameterize a curve. Then we will learn how to eliminate the parameter, translate the equations of a curve defined parametrically into rectangular equations, and find the parametric equations for curves defined by rectangular equations.
+
+Parameterizing a Curve
+
+When an object moves along a curve—or curvilinear path—in a given direction and in a given amount of time, the position of the object in the plane is given by the x-coordinate and the y-coordinate. However, both 
+ 
+ x
+ and 
+ 
+ y
+
+vary over time and so are functions of time. For this reason, we add another variable, the parameter, upon which both 
+ 
+ x
+ and 
+ 
+ y
+ are dependent functions. In the example in the section opener, the parameter is time, 
+ 
+ t.
+ The 
+ 
+ x
+ position of the moon at time, 
+ 
+ t,
+ is represented as the function 
+ 
+ x(t),
+ and the 
+ 
+ y
+ position of the moon at time, 
+ 
+ t,
+ is represented as the function 
+ 
+ y(t).
+ Together, 
+ 
+ x(t)
+ and 
+ 
+ y(t)
+ are called parametric equations, and generate an ordered pair 
+ 
+ (
+ 
+ x(t),y(t)
+ 
+ ).
+ 
+ Parametric equations primarily describe motion and direction.
+
+When we parameterize a curve, we are translating a single equation in two variables, such as 
+ 
+ x
+ and 
+ 
+ y ,
+ into an equivalent pair of equations in three variables, 
+ 
+ x,y,
+ and 
+ 
+ t.
+ One of the reasons we parameterize a curve is because the parametric equations yield more information: specifically, the direction of the object’s motion over time.
+
+When we graph parametric equations, we can observe the individual behaviors of 
+ 
+ x
+ and of 
+ 
+ y.
+ There are a number of shapes that cannot be represented in the form 
+ 
+ y=f(x),
+ meaning that they are not functions. For example, consider the graph of a circle, given as 
+
+ r
+ 2
+ 
+ =
+ x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ .
+ Solving for 
+ 
+ y
+ gives 
+ 
+ y=±
+
+ r
+ 2
+ 
+ −
+ x
+ 2
+
+ ,
+ or two equations: 
+
+ y
+ 1
+ 
+ =
+
+ r
+ 2
+ 
+ −
+ x
+ 2
+
+ and 
+
+ y
+ 2
+ 
+ =−
+
+ r
+ 2
+ 
+ −
+ x
+ 2
+
+ .
+ If we graph 
+
+ y
+ 1
+
+ and 
+
+ y
+ 2
+
+ together, the graph will not pass the vertical line test, as shown in . Thus, the equation for the graph of a circle is not a function.
+
+However, if we were to graph each equation on its own, each one would pass the vertical line test and therefore would represent a function. In some instances, the concept of breaking up the equation for a circle into two functions is similar to the concept of creating parametric equations, as we use two functions to produce a non-function. This will become clearer as we move forward.
+
+Parametric Equations
+
+Suppose 
+ 
+ t
+ is a number on an interval, 
+ 
+ I.
+ The set of ordered pairs, 
+ 
+ (
+ x(t),
+ y(t)
+ ),
+ where 
+ 
+ x=f(t)
+ and 
+ 
+ y=g(t),
+ forms a plane curve based on the parameter 
+ 
+ t.
+ The equations 
+ 
+ x=f(t)
+ and 
+ 
+ y=g(t)
+ are the parametric equations.
+
+Parameterizing a Curve
+
+Parameterize the curve 
+ 
+ y=
+ x
+ 2
+ 
+ −1
+ letting 
+ 
+ x(t)=t.
+ Graph both equations.
+
+If 
+ 
+ x(
+ t
+ )=t,
+ then to find 
+ 
+ y(
+ t
+ )
+ we replace the variable 
+ 
+ x
+ with the expression given in 
+ 
+ x(
+ t
+ ).
+ In other words, 
+ 
+ y(
+ t
+ )=
+ t
+ 2
+ 
+ −1.
+ Make a table of values similar to , and sketch the graph.
+y(
+ 4
+ )=
+ 
+ (
+ 4
+ )
+ 2
+ 
+ −1=15
+See the graphs in . It may be helpful to use the TRACE feature of a graphing calculator to see how the points are generated as 
+ 
+ t
+ increases.
+
+Analysis
+
+The arrows indicate the direction in which the curve is generated. Notice the curve is identical to the curve of 
+ 
+ y=
+ x
+ 2
+ 
+ −1.
+
+Construct a table of values and plot the parametric equations: 
+ 
+ x(
+ t
+ )=t−3, y(
+ t
+ )=2t+4;−1≤t≤2.
+
+8
+Finding a Pair of Parametric Equations
+
+Find a pair of parametric equations that models the graph of 
+ 
+ y=1−
+ x
+ 2
+ 
+ ,
+ using the parameter 
+ 
+ x(
+ t
+ )=t.
+ Plot some points and sketch the graph.
+
+If 
+ 
+ x(t)=t
+ 
+ and we substitute 
+
+ t
+ 
+ for 
+ 
+ x
+ into the 
+ 
+ y
+ equation, then 
+ 
+ y(
+ t
+ )=1−
+ t
+ 2
+ 
+ .
+ Our pair of parametric equations is
+
+To graph the equations, first we construct a table of values like that in . We can choose values around 
+ 
+ t=0,
+ from 
+ 
+ t=−3
+ to 
+ 
+ t=3.
+ The values in the 
+ 
+ x(t)
+ column will be the same as those in the 
+ 
+ t
+ column because 
+ 
+ x(t)=t.
+ Calculate values for the column 
+ 
+ y(t).
+y(3)=1−
+ 
+ (3)
+ 2
+ 
+ =−8
+The graph of 
+ 
+ y=1−
+ t
+ 2
+
+ is a parabola facing downward, as shown in . We have mapped the curve over the interval 
+ 
+ [−3,3],
+ shown as a solid line with arrows indicating the orientation of the curve according to 
+ 
+ t.
+ Orientation refers to the path traced along the curve in terms of increasing values of 
+ 
+ t.
+ As this parabola is symmetric with respect to the line 
+ 
+ x=0,
+ the values of 
+ 
+ x
+ are reflected across the y-axis.
+
+Parameterize the curve given by 
+ 
+ x=
+ y
+ 3
+ 
+ −2y.
+x(t)=
+ t
+ 3
+ 
+ −2t
+
+ y(t)=t
+
+Finding Parametric Equations That Model Given Criteria
+
+An object travels at a steady rate along a straight path 
+ 
+ (−5,3)
+ to 
+ 
+ (3,−1)
+ in the same plane in four seconds. The coordinates are measured in meters. Find parametric equations for the position of the object.
+
+The parametric equations are simple linear expressions, but we need to view this problem in a step-by-step fashion. The x-value of the object starts at 
+ 
+ −5
+ meters and goes to 3 meters. This means the distance x has changed by 8 meters in 4 seconds, which is a rate of 
+
+ 8 m
+ 
+ 4 s
+ 
+ ,
+ or 
+ 
+ 2m/s.
+ 
+ We can write the x-coordinate as a linear function with respect to time as 
+ 
+ x(t)=2t−5.
+ In the linear function template 
+ 
+ y=mx+b,2t=mx
+ and 
+ 
+ −5=b.
+
+Similarly, the y-value of the object starts at 3 and goes to 
+ 
+ −1,
+ which is a change in the distance y of −4 meters in 4 seconds, which is a rate of 
+
+ −4 m
+ 
+ 4 s
+ 
+ ,
+ or 
+ 
+ −1m/s.
+ 
+ We can also write the y-coordinate as the linear function 
+ 
+ y(t)=−t+3.
+ Together, these are the parametric equations for the position of the object, where 
+ 
+ x
+
+and 
+ 
+ y
+
+are expressed in meters and 
+ 
+ t
+
+represents time:
+
+Using these equations, we can build a table of values for 
+ 
+ t,x,
+ and 
+ 
+ y
+ (see ). In this example, we limited values of 
+ 
+ t
+ to non-negative numbers. In general, any value of 
+ 
+ t
+ can be used.
+y=−(4)+3=−1
+From this table, we can create three graphs, as shown in .
+
+Analysis
+
+Again, we see that, in (c), when the parameter represents time, we can indicate the movement of the object along the path with arrows.
+
+Eliminating the Parameter
+
+In many cases, we may have a pair of parametric equations but find that it is simpler to draw a curve if the equation involves only two variables, such as 
+ 
+ x
+ and 
+ 
+ y.
+ 
+ Eliminating the parameter is a method that may make graphing some curves easier. However, if we are concerned with the mapping of the equation according to time, then it will be necessary to indicate the orientation of the curve as well. There are various methods for eliminating the parameter 
+ 
+ t
+ from a set of parametric equations; not every method works for every type of equation. Here we will review the methods for the most common types of equations.
+
+Eliminating the Parameter from Polynomial, Exponential, and Logarithmic Equations
+
+For polynomial, exponential, or logarithmic equations expressed as two parametric equations, we choose the equation that is most easily manipulated and solve for 
+ 
+ t.
+ We substitute the resulting expression for 
+ 
+ t
+
+into the second equation. This gives one equation in 
+ 
+ x
+ and 
+ 
+ y.
+
+Eliminating the Parameter in Polynomials
+
+Given 
+ 
+ x(t)=
+ t
+ 2
+ 
+ +1
+ and 
+ 
+ y(t)=2+t,
+ eliminate the parameter, and write the parametric equations as a Cartesian equation.
+
+We will begin with the equation for 
+ 
+ y
+ because the linear equation is easier to solve for 
+ 
+ t.
+
+Next, substitute 
+ 
+ y−2
+ for 
+ 
+ t
+ in 
+ 
+ x(t).
+
+The Cartesian form is 
+ 
+ x=
+ y
+ 2
+ 
+ −4y+5.
+
+Analysis
+
+This is an equation for a parabola in which, in rectangular terms, 
+ 
+ x
+ is dependent on 
+ 
+ y.
+ From the curve’s vertex at 
+ 
+ (
+ 
+ 1,2
+ ),
+ the graph sweeps out to the right. See . In this section, we consider sets of equations given by the functions 
+ 
+ x(
+ t
+ )
+ and 
+ 
+ y(
+ t
+ ),
+ where 
+ 
+ t
+ is the independent variable of time. Notice, both 
+ 
+ x
+ and 
+ 
+ y
+ are functions of time; so in general 
+ 
+ y
+ is not a function of 
+ 
+ x.
+
+Given the equations below, eliminate the parameter and write as a rectangular equation for 
+ 
+ y
+ as a function of 
+ 
+ x.
+y=5−
+
+ 1
+ 2
+
+ x−3
+
+Eliminating the Parameter in Exponential Equations
+
+Eliminate the parameter and write as a Cartesian equation: 
+ 
+ x(t)=
+ e
+ 
+ −t
+
+ and 
+ 
+ y(t)=3
+ e
+ t
+ 
+ , t>0.
+
+Isolate 
+
+ e
+ t
+ 
+ .
+
+Substitute the expression into 
+ 
+ y(t).
+
+The Cartesian form is 
+ 
+ y=
+ 3
+ x
+ 
+ .
+
+Analysis
+
+The graph of the parametric equation is shown in (a). The domain is restricted to 
+ 
+ t>0.
+ The Cartesian equation, 
+ 
+ y=
+ 3
+ x
+
+ is shown in (b) and has only one restriction on the domain, 
+ 
+ x≠0.
+
+Eliminating the Parameter in Logarithmic Equations
+
+Eliminate the parameter and write as a Cartesian equation: 
+ 
+ x(t)=
+ t
+ 
+ +2
+ and 
+ 
+ y(t)=log(t).
+
+Solve the first equation for 
+ 
+ t.
+
+Then, substitute the expression for 
+ 
+ t
+ into the 
+ 
+y
+ equation.
+
+The Cartesian form is 
+ 
+ y=log
+ 
+ (
+ 
+ x−2
+ )
+ 2
+ 
+ .
+
+Analysis
+
+To be sure that the parametric equations are equivalent to the Cartesian equation, check the domains. The parametric equations restrict the domain on 
+ 
+ x=
+ t
+ 
+ +2
+ to 
+ 
+ t>0;
+ we restrict the domain on 
+ 
+ x
+ to 
+ 
+ x>2.
+ The domain for the parametric equation 
+ 
+ y=log(t)
+ is restricted to 
+ 
+ t>0;
+ we limit the domain on 
+ 
+ y=log
+ 
+ (
+ 
+ x−2
+ )
+ 2
+
+ to 
+ 
+ x>2.
+
+Eliminate the parameter and write as a rectangular equation.
+y=ln
+ x
+
+Eliminating the Parameter from Trigonometric Equations
+
+Eliminating the parameter from trigonometric equations is a straightforward substitution. We can use a few of the familiar trigonometric identities and the Pythagorean Theorem.
+
+First, we use the identities:
+
+Solving for 
+ 
+ cost
+ and 
+ 
+ sint,
+ we have
+
+Then, use the Pythagorean Theorem:
+
+Substituting gives
+
+Eliminating the Parameter from a Pair of Trigonometric Parametric Equations
+
+Eliminate the parameter from the given pair of trigonometric equations where 
+ 
+ 0≤t≤2π
+ and sketch the graph.
+
+Solving for 
+ 
+ cost
+ and 
+ 
+ sint,
+ we have
+
+Next, use the Pythagorean identity and make the substitutions.
+
+The graph for the equation is shown in .
+
+Analysis
+
+Applying the general equations for conic sections (introduced in Analytic Geometry, we can identify 
+
+ x
+ 2
+
+ 16
+ 
+ +
+
+ y
+ 2
+
+ 9
+ 
+ =1
+ as an ellipse centered at 
+ 
+ (
+ 
+ 0,0
+ ).
+ Notice that when 
+ 
+ t=0
+ the coordinates are 
+ 
+ (
+ 
+ 4,0
+ ),
+ and when 
+ 
+ t=
+ π
+ 2
+
+ the coordinates are 
+ 
+ (
+ 
+ 0,3
+ ).
+ This shows the orientation of the curve with increasing values of 
+ 
+ t.
+
+Eliminate the parameter from the given pair of parametric equations and write as a Cartesian equation: 
+ 
+ x(t)=2cost
+ and 
+ 
+ y(t)=3sint.
+x
+ 2
+
+ 4
+ 
+ +
+
+ y
+ 2
+
+ 9
+ 
+ =1
+
+Finding Cartesian Equations from Curves Defined Parametrically
+
+When we are given a set of parametric equations and need to find an equivalent Cartesian equation, we are essentially “eliminating the parameter.” However, there are various methods we can use to rewrite a set of parametric equations as a Cartesian equation. The simplest method is to set one equation equal to the parameter, such as 
+ 
+ x(
+ t
+ )=t.
+ In this case, 
+ 
+ y(
+ t
+ )
+ can be any expression. For example, consider the following pair of equations.
+
+Rewriting this set of parametric equations is a matter of substituting 
+ 
+ x
+ for 
+ 
+ t.
+ Thus, the Cartesian equation is 
+ 
+ y=
+ x
+ 2
+ 
+ −3.
+
+Finding a Cartesian Equation Using Alternate Methods
+
+Use two different methods to find the Cartesian equation equivalent to the given set of parametric equations.
+Method 1. First, let’s solve the 
+ 
+ x
+ equation for 
+ 
+ t.
+ Then we can substitute the result into the 
+ 
+ y
+ equation.
+
+Now substitute the expression for 
+ 
+ t
+ into the 
+ 
+ y
+ equation.
+Method 2. Solve the 
+ 
+ y
+ equation for 
+ 
+ t
+ and substitute this expression in the 
+ 
+ x
+ equation.
+
+Make the substitution and then solve for 
+ 
+ y.
+
+Write the given parametric equations as a Cartesian equation: 
+ 
+ x(t)=
+ t
+ 3
+
+ and 
+ 
+ y(t)=
+ t
+ 6
+ 
+ .
+y=
+ x
+ 2
+
+Finding Parametric Equations for Curves Defined by Rectangular Equations
+
+Although we have just shown that there is only one way to interpret a set of parametric equations as a rectangular equation, there are multiple ways to interpret a rectangular equation as a set of parametric equations. Any strategy we may use to find the parametric equations is valid if it produces equivalency. In other words, if we choose an expression to represent 
+ 
+ x,
+ and then substitute it into the 
+ 
+ y
+ equation, and it produces the same graph over the same domain as the rectangular equation, then the set of parametric equations is valid. If the domain becomes restricted in the set of parametric equations, and the function does not allow the same values for 
+ 
+ x
+ as the domain of the rectangular equation, then the graphs will be different.
+
+Finding a Set of Parametric Equations for Curves Defined by Rectangular Equations
+
+Find a set of equivalent parametric equations for 
+ 
+ y=
+ 
+ (
+ 
+ x+3
+ )
+ 2
+ 
+ +1.
+
+An obvious choice would be to let 
+ 
+ x(
+ t
+ )=t.
+ Then 
+ 
+ y(
+ t
+ )=
+ 
+ (
+ 
+ t+3
+ )
+ 2
+ 
+ +1.
+ But let’s try something more interesting. What if we let 
+ 
+ x=t+3?
+ Then we have
+
+The set of parametric equations is
+
+See .
+
+Access these online resources for additional instruction and practice with parametric equations.
+Introduction to Parametric Equations
+Converting Parametric Equations to Rectangular Form
+
+Key Concepts
+
+Parameterizing a curve involves translating a rectangular equation in two variables, 
+ 
+ x
+ and 
+ 
+ y,
+ into two equations in three variables, x, y, and t. Often, more information is obtained from a set of parametric equations. See , , and .
+
+Sometimes equations are simpler to graph when written in rectangular form. By eliminating 
+ 
+ t,
+ an equation in 
+ 
+ x
+ and 
+ 
+ y
+ is the result.
+
+To eliminate 
+ 
+ t,
+ solve one of the equations for 
+ 
+ t,
+ and substitute the expression into the second equation. See , , , and .
+
+Finding the rectangular equation for a curve defined parametrically is basically the same as eliminating the parameter. Solve for 
+ 
+ t
+ in one of the equations, and substitute the expression into the second equation. See .
+
+There are an infinite number of ways to choose a set of parametric equations for a curve defined as a rectangular equation.
+
+Find an expression for 
+ 
+ x
+ such that the domain of the set of parametric equations remains the same as the original rectangular equation. See .
+
+Section Exercises
+
+Verbal
+
+What is a system of parametric equations?
+
+A pair of functions that is dependent on an external factor. The two functions are written in terms of the same parameter. For example, 
+ 
+ x=f(
+ t
+ )
+ and 
+ 
+ y=f(
+ t
+ ).
+
+Some examples of a third parameter are time, length, speed, and scale. Explain when time is used as a parameter.
+
+Explain how to eliminate a parameter given a set of parametric equations.
+
+Choose one equation to solve for 
+ 
+ t,
+ substitute into the other equation and simplify.
+
+What is a benefit of writing a system of parametric equations as a Cartesian equation?
+
+What is a benefit of using parametric equations?
+
+Some equations cannot be written as functions, like a circle. However, when written as two parametric equations, separately the equations are functions.
+
+Why are there many sets of parametric equations to represent on Cartesian function?
+
+Algebraic
+
+For the following exercises, eliminate the parameter 
+ 
+ t
+ to rewrite the parametric equation as a Cartesian equation.
+{ 
+
+ x(
+ t
+ )=5−t
+
+ y(
+ t
+ )=8−2t
+y=−2+2x
+{ 
+
+ x(
+ t
+ )=6−3t
+
+ y(
+ t
+ )=10−t
+{ 
+
+ x(
+ t
+ )=2t+1
+
+ y(
+ t
+ )=3
+ t
+y=3
+
+ x−1
+ 2
+{ 
+
+ x(
+ t
+ )=3t−1
+
+ y(
+ t
+ )=2
+ t
+ 2
+{ 
+
+ x(
+ t
+ )=2
+ e
+ t
+
+ y(
+ t
+ )=1−5t
+x=2
+ e
+
+ 1−y
+ 5
+
+ or 
+ 
+ y=1−5ln(
+
+ x
+ 2
+
+ )
+{ 
+
+ x(
+ t
+ )=
+ e
+ 
+ −2t
+
+ y(
+ t
+ )=2
+ e
+ 
+ −t
+{
+
+ x(t)=4log(t)
+
+ y(t)=3+2t
+x=4log(
+
+ y−3
+ 2
+
+ )
+{
+
+ x(t)=log(2t)
+
+ y(t)=
+ 
+ t−1
+{ 
+
+ x(
+ t
+ )=
+ t
+ 3
+ 
+ −t
+
+ y(
+ t
+ )=2t
+x=
+ 
+ (
+
+ y
+ 2
+
+ )
+ 3
+ 
+ −
+ y
+ 2
+{ 
+
+ x(
+ t
+ )=t−
+ t
+ 4
+
+ y(
+ t
+ )=t+2
+{ 
+
+ x(
+ t
+ )=
+ e
+ 
+ 2t
+
+ y(
+ t
+ )=
+ e
+ 
+ 6t
+y=
+ x
+ 3
+{ 
+
+ x(
+ t
+ )=
+ t
+ 5
+
+ y(
+ t
+ )=
+ t
+ 
+ 10
+{
+
+ x(t)=4cost
+
+ y(t)=5sint
+(
+
+ x
+ 4
+
+ )
+ 2
+ 
+ +
+ 
+ (
+
+ y
+ 5
+
+ )
+ 2
+ 
+ =1
+{ 
+
+ x(
+ t
+ )=3sint
+
+ y(
+ t
+ )=6cost
+{
+
+ x(t)=2
+ 
+ cos
+ 
+ 2
+ 
+ t
+
+ y(t)=−sint
+y
+ 2
+ 
+ =1−
+ 1
+ 2
+ 
+ x
+{ 
+
+ x(t)=cost+4
+
+ y(t)=2
+ sin
+ 2
+ 
+ t
+{ 
+
+ x(t)=t−1
+
+ y(t)=
+ t
+ 2
+y=
+ x
+ 2
+ 
+ +2x+1
+{ 
+
+ x(t)=−t
+
+ y(t)=
+ t
+ 3
+ 
+ +1
+{ 
+
+ x(t)=2t−1
+
+ y(t)=
+ t
+ 3
+ 
+ −2
+y=
+ 
+ (
+
+ x+1
+ 2
+
+ )
+ 3
+ 
+ −2
+
+For the following exercises, rewrite the parametric equation as a Cartesian equation by building an 
+ 
+ x-y
+ 
+ table.
+{ 
+
+ x(t)=2t−1
+
+ y(t)=t+4
+{ 
+
+ x(t)=4−t
+
+ y(t)=3t+2
+y=−3x+14
+{ 
+
+ x(t)=2t−1
+
+ y(t)=5t
+{ 
+
+ x(t)=4t−1
+
+ y(t)=4t+2
+y=x+3
+
+For the following exercises, parameterize (write parametric equations for) each Cartesian equation by setting 
+ 
+ x(
+ t
+ )=t
+ or by setting 
+ 
+ y(t)=t.
+y(
+ x
+ )=3
+ x
+ 2
+ 
+ +3
+y(
+ x
+ )=2sinx+1
+{ 
+
+ x(
+ t
+ )=t
+
+ y(
+ t
+ )=2sint+1
+x(
+ y
+ )=3log(
+ y
+ )+y
+x(
+ y
+ )=
+ y
+ 
+ +2y
+{ 
+
+ x(
+ t
+ )=
+ t
+ 
+ +2t
+
+ y(
+ t
+ )=t
+
+For the following exercises, parameterize (write parametric equations for) each Cartesian equation by using 
+ 
+ x(
+ t
+ )=acost
+ and 
+ 
+ y(t)=bsint.
+ Identify the curve.
+x
+ 2
+
+ 4
+ 
+ +
+
+ y
+ 2
+
+ 9
+ 
+ =1
+x
+ 2
+
+ 16
+ 
+ +
+
+ y
+ 2
+
+ 36
+ 
+ =1
+{ 
+
+ x(
+ t
+ )=4cost
+
+ y(
+ t
+ )=6sint
+
+ ;
+ Ellipse
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =16
+x
+ 2
+ 
+ +
+ y
+ 2
+ 
+ =10
+{ 
+
+ x(
+ t
+ )=
+ 
+ 10
+ 
+ cost
+
+ y(
+ t
+ )=
+ 
+ 10
+ 
+ sint
+
+ ;
+
+Circle
+
+Parameterize the line from 
+ 
+ (3,0)
+ to 
+ 
+ (−2,−5)
+ so that the line is at 
+ 
+ (3,0)
+ at 
+ 
+ t=0,
+ and at 
+ 
+ (−2,−5)
+ at 
+ 
+ t=1.
+
+Parameterize the line from 
+ 
+ (−1,0)
+ to 
+ 
+ (3,−2)
+ so that the line is at 
+ 
+ (−1,0)
+ at 
+ 
+ t=0,
+ and at 
+ 
+ (3,−2)
+ at 
+ 
+ t=1.
+{ 
+
+ x(
+ t
+ )=−1+4t
+
+ y(
+ t
+ )=−2t
+
+Parameterize the line from 
+ 
+ (−1,5)
+ to 
+ 
+ (2,3)
+ so that the line is at 
+ 
+ (−1,5)
+ at 
+ 
+ t=0,
+ and at 
+ 
+ (2,3)
+ at 
+ 
+ t=1.
+
+Parameterize the line from 
+ 
+ (4,1)
+ to 
+ 
+ (6,−2)
+ so that the line is at 
+ 
+ (4,1)
+ at 
+ 
+ t=0,
+ and at 
+ 
+ (6,−2)
+ at 
+ 
+ t=1.
+{ 
+
+ x(
+ t
+ )=4+2t
+
+ y(
+ t
+ )=1−3t
+
+Technology
+
+For the following exercises, use the table feature in the graphing calculator to determine whether the graphs intersect.
+{ 
+
+ x
+ 1
+ 
+ (t)=3t
+
+ y
+ 1
+ 
+ (t)=2t−1
+
+  and { 
+
+ x
+ 2
+ 
+ (t)=t+3
+
+ y
+ 2
+ 
+ (t)=4t−4
+{ 
+
+ x
+ 1
+ 
+ (t)=
+ t
+ 2
+
+ y
+ 1
+ 
+ (t)=2t−1
+
+  and { 
+
+ x
+ 2
+ 
+ (t)=−t+6
+
+ y
+ 2
+ 
+ (t)=t+1
+
+yes, at 
+ 
+ t=2
+
+For the following exercises, use a graphing calculator to complete the table of values for each set of parametric equations.
+{ 
+
+ x
+ 1
+ 
+ (
+ t
+ )=3
+ t
+ 2
+ 
+ −3t+7
+
+ y
+ 1
+ 
+ (
+ t
+ )=2t+3
+
+y
+–1
+0
+{ 
+
+ x
+ 1
+ 
+ (
+ t
+ )=
+ t
+ 2
+ 
+ −4
+
+ y
+ 1
+ 
+ (
+ t
+ )=2
+ t
+ 2
+ 
+ −1
+
+y
+1
+2
+3
+y
+1
+-3
+1
+2
+0
+7
+3
+5
+{ 
+
+ x
+ 1
+ 
+ (
+ t
+ )=
+ t
+ 4
+
+ y
+ 1
+ 
+ (
+ t
+ )=
+ t
+ 3
+ 
+ +4
+
+y
+-1
+0
+1
+2
+Extensions
+
+Find two different sets of parametric equations for 
+ 
+ y=
+ 
+ (
+ 
+ x+1
+ )
+ 2
+ 
+ .
+
+answers may vary: 
+ 
+ { 
+
+ x(
+ t
+ )=t−1
+
+ y(
+ t
+ )=
+ t
+ 2
+
+  and { 
+
+ x(
+ t
+ )=t+1
+
+ y(
+ t
+ )=
+ 
+ (
+ 
+ t+2
+ )
+ 2
+
+Find two different sets of parametric equations for 
+ 
+ y=3x−2.
+
+Find two different sets of parametric equations for 
+ 
+ y=
+ x
+ 2
+ 
+ −4x+4.
+
+answers may vary: , 
+ 
+ { 
+
+ x(
+ t
+ )=t
+
+ y(
+ t
+ )=
+ t
+ 2
+ 
+ −4t+4
+
+  and { 
+
+ x(
+ t
+ )=t+2
+
+ y(
+ t
+ )=
+ t
+ 2
+
+a variable, often representing time, upon which 
+ 
+ x
+ and 
+ 
+ y
+ are both dependent

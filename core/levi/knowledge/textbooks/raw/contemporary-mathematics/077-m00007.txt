@@ -1,0 +1,422 @@
+# m00007
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+The Normal Distribution
+
+The Normal Distribution
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe the characteristics of the normal distribution.
+
+Apply the 68-95-99.7 percent groups to normal distribution datasets.
+
+Use the normal distribution to calculate a z-score.
+
+Find and interpret percentiles and quartiles.
+
+Many datasets that result from natural phenomena tend to have histograms that are symmetric and bell-shaped. Imagine finding yourself with a whole lot of time on your hands, and nothing to keep you entertained but a coin, a pencil, and paper. You decide to flip that coin 100 times and record the number of heads. With nothing else to do, you repeat the experiment ten times total. Using a computer to simulate this series of experiments, here’s a sample for the number of heads in each trial:
+
+54, 51, 40, 42, 53, 50, 52, 52, 47, 54
+
+It makes sense that we’d get somewhere around 50 heads when we flip the coin 100 times, and it makes sense that the result won’t always be exactly 50 heads. In our results, we can see numbers that were generally near 50 and not always 50, like we thought.
+
+Moving Toward Normality
+
+Let’s take a look at a histogram for the dataset in our section opener:
+
+This is interesting, but the data seem pretty sparse. There were no trials where you saw between 43 and 47 heads, for example. Those results don’t seem impossible; we just didn’t flip enough times to give them a chance to pop up. So, let’s do it again, but this time we'll perform 100 coin flips 100 times. Rather than review all 100 results, which could be overwhelming, let's instead visualize the resulting histogram.
+
+From the histogram, we see that most of the trials resulted in between, say, 44 and 56 heads. There were some more unusual results: one trial resulted in 70 heads, which seems really unlikely (though still possible!). But we’re starting to maybe get a sense of the distribution. More data would help, though. Let’s simulate another 900 trials and add them to the histogram!
+
+We can still see that 70 is a really unusual observation, though we came close in another trial (one that had 68 heads). Now, the distribution is coming more into focus: It looks quite symmetric and bell-shaped. Let’s just go ahead and take this thought experiment to an extreme conclusion: 10,000 trials.
+
+The distribution is pretty clear now. Distributions that are symmetric and bell-shaped like this pop up in all sorts of natural phenomena, such as the heights of people in a population, the circumferences of eggs of a particular bird species, and the numbers of leaves on mature trees of a particular species. All of these have bell-shaped distributions. Additionally, the results of many types of repeated experiments generally follow this same pattern, as we saw with the coin-flipping example; this fact is the basis for much of the work done by statisticians. It’s a fact that’s important enough to have its own name: the Central Limit Theorem.
+
+John Kerrich
+
+Having enough time on your hands to actually perform this coin-flipping experiment may sound far-fetched, but the English mathematician John Kerrich found himself in just such a situation. While he was studying abroad in Denmark in 1940, that country was invaded by the Germans. Kerrich was captured and placed in an internment camp, where he remained for the duration of the war. Kerrich knew that he had all kinds of time on his hands. He also studied statistics, so he knew what should happen theoretically if he flipped a coin many, many times. He also knew of nobody who had ever tested that theory with an actual, large-scale experiment. So, he did it: While he was incarcerated, Kerrich flipped a regular coin 10,000 times and recorded the results. Sure enough, the theory held up!
+
+The Normal Distribution
+
+In the coin flipping example above, the distribution of the number of heads for 10,000 trials was close to perfectly symmetric and bell-shaped:
+
+Because distributions with this shape appear so often, we have a special name for them: normal distributions. Normal distributions can be completely described using two numbers we’ve seen before: the mean of the data and the standard deviation of the data. You may remember that we described the mean as a measure of centrality; for a normal distribution, the mean tells us exactly where the center of the distribution falls. The peak of the distribution happens at the mean (and, because the distribution is symmetric, it’s also the median). The standard deviation is a measure of dispersion; for a normal distribution, it tells us how spread out the histogram looks. To illustrate these points, let’s look at some examples.
+
+Identifying the Mean of a Normal Distribution
+
+This graph shows three normal distributions. What are their means?
+Step 1: Take a look at the three curves on the graph. Since the mean of a normal distribution occurs at the peak, we should look for the highest point on each distribution. Let’s draw a line from each curve's peak down to the axis, so we can see where these peaks occur:
+Step 2: The peak of the red (leftmost) distribution occurs over the number 1 on the horizontal axis. Thus, the mean of the red distribution is 1. Similarly, the mean of the blue (middle) distribution is 2, and the mean of the yellow (rightmost) distribution is 3.
+
+Identifying the Standard Deviation of a Normal Distribution
+
+This graph shows three distributions, all with mean 2. What are their standard deviations?
+Step 1: Identifying the standard deviation from a graph can be a little bit tricky. Let’s focus in on the yellow (lowest peaked) curve:
+Step 2: Notice that the graph curves downward in the middle, and curves upwards on the ends. Highlighted in red is the part that curves downward and in green, the part that curves upward:
+Step 3: The places where the graph changes from curving up to curving down (or vice versa) are called inflection points. Let’s identify where those occur by dropping a line straight down from each:
+Step 4: We can estimate that the inflection points occur at x=-1 and x=5; the mean is at x=2 (as shown by the middle dotted line). The difference between the mean and the location of either inflection point is the standard deviation; since 5-2=2-(-1)=3, we conclude that the standard deviation of the green distribution is 3.
+Step 5: Now, looking at the other two graphs, let's first identify the inflection points:
+Step 6: The red (tallest peaked) distribution has inflection points at 1 and 3, and the mean is 2. Thus, the standard deviation of the red distribution is 3-2=2-1=1. The blue (lower peaked) distribution has inflection points at 0 and 4, and its mean is also 2. So, the standard deviation of the blue distribution is 2.
+
+Let’s put it all together to identify a completely unknown normal distribution.
+
+Identifying the Mean and Standard Deviation of a Normal Distribution
+
+Using the graph, identify the mean and standard deviation of the normal distribution.
+Step 1: Let’s start by putting dots on the graph at the peak and at the inflection points, then drop lines from those points straight down to the axis:
+Step 2: From the red (middle) line, we can see that the mean of this distribution is 55. The blue (outermost) lines are each 3 units away from the mean (at 52 and 58), so the standard deviation is 3.
+
+Properties of Normal Distributions: The 68-95-99.7 Rule
+
+The most important property of normal distributions is tied to its standard deviation. If a dataset is perfectly normally distributed, then 68% of the data values will fall within one standard deviation of the mean. For example, suppose we have a set of data that follows the normal distribution with mean 400 and standard deviation 100. This means 68% of the data would fall between the values of 300 (one standard deviation below the mean: 400-100=300) and 500 (one standard deviation above the mean: 400+100=500). Looking at the histogram below, the shaded area represents 68% of the total area under the graph and above the axis:
+
+Since 68% of the area is in the shaded region, this means that 100% − 68% = 32% of the area is found in the unshaded regions. We know that the distribution is symmetric, so that 32% must be divided evenly into the two unshaded tails: 16% in each.
+
+Of course, datasets in the real world are never perfect; when dealing with actual data that seem to follow a symmetric, bell-shaped distribution, we’ll give ourselves a little bit of wiggle room and say that approximately 68% of the data fall within one standard deviation of the mean.
+
+The rule for one standard deviation can be extended to two standard deviations. Approximately 95% of a normally distributed dataset will fall within 2 standard deviations of the mean. If the mean is 400 and the standard deviation is 100, that means 95% calculation describes the way we compute standardized scores. (two standard deviations below the mean: 400–2×100=200) and 600 (two standard deviations above the mean: 400+2×100=600). We can visualize this in the following histogram:
+
+As before, since 95% of the data are in the shaded area, that leaves 5% of the data to go into the unshaded tails. Since the histogram is symmetric, half of the 5% (that’s 2.5%) is in each.
+
+We can even take this one step further: 99.7% of normally distributed data fall within 3 standard deviations of the mean. In this example, we’d see 99.7% of the data between 100 (calculated as 400–3×100=100) and 700 (calculated as 400+3×100=700). We can see this in the histogram below, although you may need to squint to find the unshaded bits in the tails!
+
+This observation is formally known as the 68-95-99.7 Rule.
+
+Using the 68-95-99.7 Rule to Find Percentages
+
+If data are normally distributed with mean 8 and standard deviation 2, what percent of the data falls between 4 and 12?
+
+If data are normally distributed with mean 25 and standard deviation 5, what percent of the data falls between 20 and 30?
+
+If data are normally distributed with mean 200 and standard deviation 15, what percent of the data falls between 155 and 245?
+Let’s look at a table that sets out the data values that are even multiples of the standard deviation (SD) above and below the mean:
+
+ mean-3×SD
+ mean-2×SD
+ mean-1×SD
+ Mean
+ mean+1×SD
+ mean+2×SD
+ mean+3×SD
+
+ 2
+ 4
+ 6
+ 8
+ 10
+ 12
+ 14
+
+ Since 4 and 12 represent two standard deviations above and below the mean, we conclude that 95% of the data will fall between them.
+
+Let’s look at a table that sets out the data values that are even multiples of the standard deviation (SD) above and below the mean:
+
+ mean-3×SD
+ mean-2×SD
+ mean-1×SD
+ Mean
+ mean+1×SD
+ mean+2×SD
+ mean+3×SD
+
+ 2
+ 4
+ 6
+ 8
+ 10
+ 12
+ 14
+mean-1×SD
+mean+3×SD
+2
+4
+6
+8
+10
+12
+14
+Since 4 and 12 represent two standard deviations above and below the mean, we conclude that 95% of the data will fall between them.
+Let’s build another table:
+
+ mean-3×SD
+ mean-2×SD
+ mean-1×SD
+ Mean
+ mean+1×SD
+ mean+2×SD
+ mean+3×SD
+
+ 10
+ 15
+ 20
+ 25
+ 30
+ 35
+ 40
+
+ We can see that 20 and 30 represent one standard deviation above and below the mean, so 68% of the data fall in that range.
+
+Let’s build another table:
+
+ mean-3×SD
+ mean-2×SD
+ mean-1×SD
+ Mean
+ mean+1×SD
+ mean+2×SD
+ mean+3×SD
+
+ 10
+ 15
+ 20
+ 25
+ 30
+ 35
+ 40
+mean-1×SD
+mean+3×SD
+10
+15
+20
+25
+30
+35
+40
+We can see that 20 and 30 represent one standard deviation above and below the mean, so 68% of the data fall in that range.
+Let’s make one more table:
+
+ mean-3×SD
+ mean-2×SD
+ mean−1×SD
+ Mean
+ mean+1×SD
+ mean+2×SD
+ mean+3×SD
+
+ 155
+ 170
+ 185
+ 200
+ 215
+ 230
+ 245
+
+ Since 155 and 245 are three standard deviations above and below the mean, we know that 99.7% of the data will fall between them.
+
+Let’s make one more table:
+
+ mean-3×SD
+ mean-2×SD
+ mean−1×SD
+ Mean
+ mean+1×SD
+ mean+2×SD
+ mean+3×SD
+
+ 155
+ 170
+ 185
+ 200
+ 215
+ 230
+ 245
+mean−1×SD
+mean+3×SD
+155
+170
+185
+200
+215
+230
+245
+Since 155 and 245 are three standard deviations above and below the mean, we know that 99.7% of the data will fall between them.
+
+Using the 68-95-99.7 Rule to Find Data Values
+
+If data are distributed normally with mean 100 and standard deviation 20, between what two values will 68% of the data fall?
+
+If data are distributed normally with mean 0 and standard deviation 15, between what two values will 95% of the data fall?
+
+If data are distributed normally with mean 14 and standard deviation 2, between what two values will 99.7% of the data fall?
+
+The 68-95-99.7 Rule tells us that 68% of the data will fall within one standard deviation of the mean. So, to find the values we seek, we’ll add and subtract one standard deviation from the mean: 100-1×20=80 and 100+1×20=120. Thus, we know that 68% of the data fall between 80 and 120.
+
+Using the 68-95-99.7 Rule again, we know that 95% of the data will fall within 2 standard deviations of the mean. Let’s add and subtract two standard deviations from that mean: 0-2×15=-30 and 0+2×15=30. So, 95% of the data will fall between -30 and 30.
+
+Once again, the 68-95-99.7 Rule tells us that 99.7% of the data will fall within three standard deviations of the mean. So, let’s add and subtract three standard deviations from the mean: and 14+3×2=20. Thus, we conclude that 99.7% of the data will fall between 8 and 20.
+
+There are more problems we can solve using the 68-95-99.7 Rule. but first we must understand what the rule implies. Remember, the rule says that 68% of the data falls within one standard deviation of the mean. Thus, with normally distributed data with mean 100 and standard deviation 10, we have this distribution:
+
+Since we know that 68% of the data lie within one standard deviation of the mean, the implication is that 32% of the data must fall beyond one standard deviation away from the mean. Since the histogram is symmetric, we can conclude that half of the 32% (or 16%) is more than one standard deviation above the mean and the other half is more than one standard deviation below the mean:
+
+Further, we know that the middle 68% can be split in half at the peak of the histogram, leaving 34% on either side:
+
+So, just the “68” part of the 68-95-99.7 Rule gives us four other proportions in addition to the 68% in the rule. Similarly, the “95” and “99.7” parts each give us four more proportions:
+
+We can put all these together to find even more complicated proportions. For example, since the proportion between 100 and 120 is 47.5% and the proportion between 100 and 110 is 34%, we can subtract to find that the proportion between 110 and 120 is 47.5-34=13.5%:
+
+Finding Other Proportions Using the 68-95-99.7 Rule
+
+Assume that we have data that are normally distributed with mean 80 and standard deviation 3.
+
+What proportion of the data will be greater than 86?
+
+What proportion of the data will be between 74 and 77?
+
+What proportion of the data will be between 74 and 83?
+
+Before we can answer these questions, we must mark off sections that are multiples of the standard deviation away from the mean:
+
+To figure out what proportion of the data will be greater than 86, let's start by shading in the area of data that are above 86 in our figure, or the data more than two standard deviations above the mean.
+
+ We saw in that this proportion is 2.5%.
+
+To figure out what proportion of the data will be between 74 and 77, let's start by shading in that area of data. These are data that are more than one but less than two standard deviations below the mean.
+
+ From , we know that the proportion of data less than two standard deviations below the mean is 47.5%. And, from YOUR TURN 8.33, we know that 34% of the data is less than one standard deviation below the mean:
+
+ Subtracting, we see that the proportion of data between 74 and 77 is 13.5%.
+
+To figure out what proportion of the data will be between 74 and 83, let's start by shading in that area of data in our figure.
+
+ Next, we'll break this region into two pieces at the mean:
+
+ From , we know the blue (leftmost) region represents 47.5% of the data. And, using YOUR TURN 8.33, we get that the red (rightmost) region covers 34% of the data. Adding those together, the proportion we want is 81.5%.
+
+Standardized Scores
+
+When we want to apply the 68-95-99.7 Rule, we must first figure out how many standard deviations above or below the mean our data fall. This calculation is common enough that it has its own name: the standardized score. Values above the mean have positive standardized scores, while those below the mean have negative standardized scores. Since it's common to use the letter z to represent a standard score, this value is also often referred to as a z-score.
+
+So far, we’ve only really considered z-scores that are whole numbers, but in general they can be any number at all. For example, if we have data that are normally distributed with mean 80 and standard deviation 6, the value 85 is five units above the mean, which is less than one standard deviation. Dividing by the standard deviation, we get 56. Since 85 is 56 of one standard deviation above the mean, we’d say that the standardized score for 85 is z=56 (which is positive, since 85>80). This calculation describes the way we compute standardized scores.
+
+If x is a member of a normally distributed dataset with mean µ and standard deviation σ, then the standardized score for x isz=x-µσ.
+
+If you know a z-score but not the original data value x, you can find it by solving the previous equation for x:x=µ+z×σ.
+
+The symbols μ and σ are the Greek letters mu and sigma. They are the analogues of the English letters m and s, which stand for mean and standard deviation.
+
+If you convert every data value in a dataset into its z-score, the resulting set of data will have mean 0 and standard deviation 1. This is why we call these standardized scores: the normal distribution with mean 0 and standard deviation 1 is often called the standard normal distribution.
+
+Standardizing Data
+
+Suppose we have data that are normally distributed with mean 50 and standard deviation 6. Compute the standardized scores (rounded to three decimal places) for these data values:
+
+52
+
+40
+
+68
+
+For each of these, we’ll plug the given values into the formula. Remember, the mean is μ=50 and the standard deviation is σ=6:
+z=x-µσ=52-506=0.333
+z=x-µσ=40-506=-1.667
+z=x-µσ=68-506=3
+
+Converting Standardized Scores to Original Values
+
+Suppose we have data that are normally distributed with mean 10 and standard deviation 2. Convert the following standardized scores into data values.
+
+1.4
+
+−0.9
+
+3.5
+
+We’ll use the formula previously introduced to convert z-scores into x-values. In this case, the mean is µ=10 and the standard deviation is σ=2:
+x=µ+z×σ=10+1.4×2=12.8
+x=µ+z×σ=10+(-0.9)×2=8.2
+x=µ+z×σ=10+3.5×2=17
+
+Using Google Sheets to Find Normal Percentiles
+
+The 68-95-99.7 Rule is great when we’re dealing with whole-number z-scores. However, if the z-score is not a whole number, the Rule isn’t going to help us. Luckily, we can use technology to help us out. We’ll talk here about the built-in functions in Google Sheets, but other tools work similarly.
+
+Let’s say we’re working with normally distributed data with mean 40 and standard deviation 7, and we want to know at what percentile a data value of 50 would fall. That corresponds to finding the proportion of the data that are less than 50. If we create our histogram and mark off whole-number multiples of the standard deviation like we did before, we’ll see why the 68-95-99.7 Rule isn’t going to help:
+
+Since 50 doesn’t line up with one of our lines, the 68-95-99.7 Rule fails us. Looking back at and , the best we can say is that 50 is between the 84th and 99.5th percentiles, but that’s a pretty wide range. Google Sheets has a function that can help; it’s called NORM.DIST. Here’s how to use it:
+
+Click in an empty cell in your worksheet.
+
+Type “=NORM.DIST(“
+
+Inside the parentheses, we must enter a list of four things, separated by commas: the data value, the mean, the standard deviation, and the word “TRUE”. These have to be entered in this order!
+
+Close the parentheses, and hit Enter. The result is then displayed in the cell; convert it to a percent to get the percentile.
+
+So, for our example, we should type “=NORM.DIST(50, 40, 7, TRUE)” into an empty cell, and hit Enter. The result is 0.9234362745; converting to a percent and rounding, we can conclude that 50 is at the 92nd percentile. Let’s walk through a few more examples.
+
+Using Google Sheets to Find Percentiles
+
+Suppose we have data that are normally distributed with mean 28 and standard deviation 4. At what percentile do each of the following data values fall?
+
+30
+
+23
+
+35
+
+By entering “=NORM.DIST(30, 28, 4, TRUE)” we find that 30 is at the 69th percentile.
+
+By entering “=NORM.DIST(23, 28, 4, TRUE)” we find that 23 is at the 11th percentile.
+
+By entering “=NORM.DIST(35, 28, 4, TRUE)” we find that 35 is at the 96th percentile.
+
+Google Sheets can also help us go the other direction: If we want to find the data value that corresponds to a given percentile, we can use the NORM.INV function. For example, if we have normally distributed data with mean 150 and standard deviation 25, we can find the data value at the 30th percentile as follows:
+
+Click on an empty cell in your worksheet.
+
+Type “=NORM.INV(“
+
+Inside the parentheses, we’ll enter a list of three numbers, separated by commas: the percentile in question expressed as a decimal, the mean, and the standard deviation. These must be entered in this order!
+
+Close the parentheses and hit Enter. The desired data value will be in the cell!
+
+In our example, we want the 30th percentile; converting 30% to a decimal gives us 0.3. So, we’ll type “=NORM.INV(0.3, 150, 25)” to get 136.8899872; let’s round that off to 137.
+
+Using Google Sheets to Find the Data Value Corresponding to a Percentile
+
+Suppose we have data that are normally distributed with mean 47 and standard deviation 9. Find the data values (rounded to the nearest tenth) corresponding to these percentiles:
+
+75th (that’s the third quartile)
+
+12th
+
+90th
+
+By entering “=NORM.INV(0.75, 47, 9)” we find that 53.1 is at the 75th percentile.
+
+By entering “=NORM.INV(0.12, 47, 9)” we find that 36.4 is at the 12th percentile.
+
+By entering “=NORM.INV(0.9, 47, 9)” we find that 58.5 is at the 90th percentile.
+
+Check Your Understanding
+
+normal distribution
+
+68-95-99.7 Rule
+
+standardized score (z-score)
+
+Key Concepts
+
+Normally distributed data follow a bell-shaped, symmetrical distribution.
+
+The mean of normally distributed data falls at the peak of the distribution. The standard deviation of normally-distributed data is the distance from the peak to either of the inflection points.
+
+Data that are normally distributed follow the 68-95-99.7 Rule, which says that approximately 68% of the data fall within one standard deviation of the mean, 95% fall within two standard deviations, and 99.7% fall within three standard deviations.
+
+The z-score for a data value is the number of standard deviations that value falls above (or below, if the z-score is negative) the mean.
+
+We can use the normal distribution to estimate percentiles.
+
+Formulas
+
+If x is a member of a normally distributed dataset with mean µ and standard deviation σ, then the standardized score for x is z=x-µσ.
+
+If you know a z-score but not the original data value x, you can find it by solving the previous equation for x:x=µ+z×σ.

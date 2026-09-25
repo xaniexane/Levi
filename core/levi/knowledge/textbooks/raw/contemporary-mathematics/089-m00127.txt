@@ -1,0 +1,206 @@
+# m00127
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Triangles
+
+Triangles
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Identify triangles by their sides.
+
+Identify triangles by their angles.
+
+Determine if triangles are congruent.
+
+Determine if triangles are similar.
+
+Find the missing side of similar triangles.
+
+How were the ancient Greeks able to calculate the radius of Earth? How did soldiers gauge their target? How was it possible centuries ago to estimate the height of a sail at sea? Triangles have always played a significant role in how we find heights of objects too high to measure or distances between objects too far away to calculate. In particular, the concept of similar triangles has countless applications in the real world, and we shall explore some of those applications in this section.
+
+Technology has given us instruments that allow us to find measurements of distant objects with little effort. However, it is all based on the properties of triangles discovered centuries ago. In this section, we will explore the various types of triangles and their special properties, as well as how to measure interior and exterior angles. We will also explore congruence theorems and similarity.
+
+Identifying Triangles
+
+Joining any three noncollinear points with line segments produces a triangle. For example, given points A, B, and C, connected by the line segments AB¯,BC,¯ and AC¯, we have a triangle, as shown in .
+
+Triangles are classified by their angles and their sides. All angles in an acute triangle measure <90∘. One of the angles in a right triangle measures 90∘, symbolized by □. One angle in an obtuse triangle measures between 90∘ and 180∘. Sides that have equal length are indicated by the same hash marks. illustrates the shapes of the basic triangles, their names, and their properties.
+
+A few other facts to remember as we move forward:
+
+The points where the line segments meet are called the vertices (plural for vertex).
+
+We often refer to sides of a triangle by the angle they are opposite. In other words, side a is opposite angle A, side b is opposite angle B, and side c is opposite angle C.
+
+We want to add a special note about right triangles here, as they are referred to more than any other triangle. The side opposite the right angle is its longest side and is called the hypotenuse, and the sides adjacent to the right angle are called the legs.
+
+One of the most important properties of triangles is that the sum of the interior angles equals 180∘. Euclid discovered and proved this property using parallel lines. The completed sketch is shown in .
+
+This is how the proof goes:
+Step 1: Start with a straight line AB↔ and a point C not on the line.
+Step 2: Draw a line through point C parallel to the line AB↔.
+Step 3: Construct two transversals (a line crossing the parallel lines), one angled to the right and one angled to the left, to intersect the parallel lines.
+Step 4: Because of the property that alternate interior angles inside parallel lines are equal, we have that
+ m∡2=m∢1andm∡3=m∡4.
+Step 5: Notice that m∡2+m∡5+m∡4=180∘ by the straight angle property.
+Step 6: Therefore, by substitution, m∡1=m∡2, and m∡3=m∡4, we have that
+ m∡1+m∡3+m∢5=180∘.
+
+Therefore, the sum of the interior angles of a triangle=180∘.
+
+Finding Measures of Angles Inside a Triangle
+
+Find the measure of each angle in the triangle shown (). We know that the sum of the angles must equal 180∘.
+Step 1: As the sum of the interior angles equals 180∘, we can use algebra to find the measures:
+ x+(x+17)+(3x−62)=1805x−45=1805x=225x=2255=45
+Step 2: Now that we have the value of x, we can substitute 45 into the other two expressions to find the measure of those angles:
+ (x+17)=45+17=62∘(3x−62)=3(45)−62=135−62=73∘
+Step 3: Then, m∡x=45∘, m∡(x+17)=62∘, and m∡(3x−62)=73∘.
+
+Finding Angle Measures
+
+Find the measure of angles numbered 1–5 in .
+
+The m∡1=119∘ because it is supplementary with the unknown angle of the adjacent triangle. The unknown angle measures 61∘. The m∡2=61∘ because of vertical angles. The m∡5=59∘ because the angle that is supplementary to the 134∘ measures 46∘, and angle 5 is the unknown angle in that triangle. The m∡4=59∘ by vertical angles. Finally, m∡3=60∘, as it is the third angle in the triangle with angles measuring 59∘ and 61∘.
+
+Congruence
+
+If two triangles have equal angles and their sides lengths are equal, the triangles are congruent. In other words, if you can pick up one triangle and place it on top of the other triangle and they coincide, even if you have to rotate one, they are congruent.
+
+Determining If Triangles Are Congruent
+
+In , is the triangle ABC congruent to triangle DEF?
+
+Triangle ABC is congruent to triangle DEF. Angles A and C are congruent to angles D and F, which implies that angle B is congruent to angle E. Side AB is congruent to side DE, and side CB is congruent to side FE, which implies that side AC is congruent to side DF.
+
+The Congruence Theorems
+
+The following theorems are tools you can use to prove that two triangles are congruent. We use the symbol ≅ to define congruence. For example, ΔABC≅ΔDEF.
+Side-Side-Side (SSS). If three sides of one triangle are equal to the corresponding sides of the second triangle, then the triangles are congruent. See .
+
+We have that DF¯≅RT¯, EF¯≅ST¯, and DE¯≅RS¯, then ΔDEF≅ΔRST.
+Side-Angle-Side (SAS). If two sides of a triangle and the angle between them are equal to the corresponding two sides and included angle of the second triangle, then the triangles are congruent. See . We see that AB¯≅A′B′¯ and BC¯≅B′C′¯, m∡B=m∡B′, then ΔABC≅ΔA′B′C′.
+Angle-Side-Angle (ASA). If two angles and the side between them in one triangle are congruent to the two corresponding angles and the side between them in a second triangle, then the two triangles are congruent. See . Notice that m∡A≅m∡F, and m∡C≅m∡D, AC¯≅DF¯, then ΔABC≅ΔDEF.
+Angle-Angle-Side (AAS). If two angles and a nonincluded side of one triangle are congruent to two angles and the nonincluded corresponding side of a second triangle, then the triangles are congruent.
+
+See . We see that m∡X≅mX′, m∡Z≅m∡Z′, and XY¯≅X′Y′¯, then ΔXYZ≅ΔX′Y′Z′.
+
+Identifying Congruence Theorems
+
+What congruence theorem is illustrated in ?
+
+AAS: Two angles and a non-included side in one triangle are congruent to the corresponding angles and side in the second triangle.
+
+Determining the Congruence Theorem
+
+What congruence theorem is illustrated in ?
+
+The SSS theorem.
+
+Similarity
+
+If two triangles have the same angle measurements and are the same shape but differ in size, the two triangles are similar. The lengths of the sides of one triangle will be proportional to the corresponding sides of the second triangle. Note that a single fraction ab is called a ratio, but two fractions equal to each other is called a proportion, such as ab=cd.
+
+This rule of similarity applies to all shapes as well as triangles. Another way to view similarity is by applying a scaling factor, which is the ratio of corresponding measurements between an object or representation of the object, to an image that produces the second, similar image.
+
+For example, why are the two images in are similar? These two images have the same proportions between elements. Therefore, they are similar.
+
+Determining If Triangles Are Similar
+
+Are the two triangles shown in similar?
+Step 1: We will look at the proportions within each triangle. In triangle α (alpha), the side opposite the 57∘ angle measures 7, and the side opposite the 33∘ angle measures 4. Then, the measures of the corresponding sides in triangle β (beta) measures 3.5 and 2, respectively. We have
+ 47=0.571423.5=0.5714.
+
+This is the proportion 47=23.5. The scaling factor is 0.5714.
+Step 2: Let’s try another correspondence. In triangle α, the hypotenuse measures 8.06 and the side opposite the 57∘ angle measures 7. In triangle β, the hypotenuse measure 4.03 and the side opposite the 57∘ angle measures 3.5. We have
+ 78.06=0.86853.54.03=0.8685.
+Step 3: Now, let’s look at the proportions between triangle α and triangle β. The side measuring 2 in triangle β corresponds to the side measuring 4 in triangle α, the side measuring 3.5 in triangle β corresponds to the side measuring 7 in triangle α, and the hypotenuse in triangle β corresponds to the hypotenuse in triangle α. We have
+ 24=0.53.57=0.54.038.06=0.5
+
+Thus, the corresponding angles are equal and the proportions between each pair of corresponding sides equals 0.5. In other words, the scaling factor is 0.5. Therefore, the triangles are similar.
+
+Proving Similarity
+
+In , is triangle δ (delta) similar to triangle ε (epsilon)? Find the lengths of sides x and y as part of your answer.
+
+We can see that all three angles in triangle δ are equal to the corresponding angles in triangle ε. That is enough to determine similarity. However, we want to find the values of x and y to prove similarity.
+Step 1: We have to do is set up the proportions between the corresponding sides. We have the side that measures 2.375 in triangle δ corresponding to the side measuring 1.069 in triangle ε. We have the hypotenuse/side in triangle δ measuring 6 corresponding to the hypotenuse/side labeled y in triangle ε. And, finally, the side labeled x in triangle δ corresponds to the side measuring 2.475 in triangle ε.
+
+Each proportion should be equal. We start with the proportion of the shorter sides. Thus
+ 1.0692.375=0.45
+Step 2: We solve for y using the first proportion. Set the two ratios equal to each other, cross-multiply, and solve for y. We have:
+ 1.0692.375=y6(6)(1.069)=(2.375)(y)6.414=2.375y6.4142.375=2.7=y
+
+So, y=2.7.
+Step 3: Checking that length in the proportion factor of 0.45, we have:
+ y6=2.76=0.45
+Step 4: Solving for x, we will use the same proportion we used to solve for y. We have:
+ 1.0692.375=2.475x1.069(x)=2.475(2.375)1.069(x)=5.878x=5.8781.069=5.52.475x=2.4755.5=0.45
+Step 5: We test the proportions. We have the following:
+ 2.76=2.4755.5=1.0692.375=0.45
+
+The proportions are all equal. Therefore, we have proven the property of similarity between triangle δ and triangle ε.
+
+Applying Similar Triangles
+
+A person who is 5 feet tall is standing 50 feet away from the base of a tree (). The tree casts a 57-foot shadow. The person casts a 7-foot shadow. What is the height of the tree?
+
+The bigger triangle includes a tree at side x and the smaller triangle includes the person at the side labeled 5 ft. These two triangles are similar because the smaller triangle fits inside the larger triangle at the smallest angle. It would fit inside the larger triangle at either of the other two angles as well. That all angles are equal is one of the criteria for similar triangles, so we can solve using proportions:
+ 57=x575(57)=7x2857=x=40.7
+
+The tree is 40.7 feet tall.
+
+Finding Missing Lengths
+
+At a certain time of day, a radio tower casts a shadow 180 feet long (). At the same time, a 9-foot truck casts a shadow 15 feet long. What is the height of the tower?
+
+These are similar triangles and the problem can be solved by using proportions:
+ x180=9159(180)=15x1620=15x108=x
+
+The height of the tower is 108 ft.
+
+Thales of Miletus
+
+Thales of Miletus, sixth century BC, is considered one of the greatest mathematicians and philosophers of all time. Thales is credited with being the first to discover that the two angles at the base of an isosceles triangle are equal, and that the two angles formed by intersecting lines are equal—that is, vertical or opposite angles, are equal. Thales is also known for devising a method for measuring the height of the pyramids by similar right triangles. shows his method. He measured the length of the shadow cast by the pyramid at the precise time when his own shadow ended at the same place.
+
+He equated the vertical height of the pyramid with his own height; the horizontal distance from the pyramid to the tip of its shadow with the distance from himself and the tip of his own shadow; and finally, the length of the shadow cast off the top of the pyramid with length of his own shadow cast off the top of his head. Using proportions, as shown in , he essentially discovered the properties of similarity for right triangles. That is, △ABC is similar to △A′B′C′. Note that to be similar, all corresponding angles between the two triangles must be equal, and the proportions from one side to another side within each triangle, as well as the proportions of the corresponding sides between the two triangles must be equal.
+
+Thales is also credited with discovering a method of determining the distance of a ship from the shoreline. Here is how he did it, as illustrated in .
+
+Thales walked along the shoreline pointing a stick at the ship until it formed a 90∘ angle to the shore. Then he walked along the shot and placed the stick in the ground at point C. He continued walking until he reached point D. Then, he turned and walked away from the shore at a 90∘ angle until the stick he placed in the ground at point C lined up with the ship, point E. This is how he created similar triangles and estimated the distance of the ship to the shore by using proportions.
+
+Check Your Understanding
+
+Key Terms
+
+acute
+
+obtuse
+
+isosceles
+
+equilateral
+
+hypotenuse
+
+congruence
+
+similarity
+
+scaling factor
+
+Key Concepts
+
+The sum of the interior angles of a triangle equals 180∘.
+
+Two triangles are congruent when the corresponding angles have the same measure and the corresponding side lengths are equal.
+
+The congruence theorems include the following: SAS, two sides and the included angle of one triangle are congruent to the same in a second triangle; ASA, two angles and the included side of one triangle are congruent to the same in a second triangle; SSS, all three side lengths of one triangle are congruent to the same in a second triangle; AAS, two angles and the non-included side of one triangle are congruent to the same in a second triangle.
+
+Two shapes are similar when the proportions between corresponding angles, sides or features of two shapes are equal, regardless of size.

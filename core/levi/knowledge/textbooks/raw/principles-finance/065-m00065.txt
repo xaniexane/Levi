@@ -1,0 +1,131 @@
+# m00065
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Using Spreadsheets to Solve Bond Problems
+
+Using Spreadsheets to Solve Bond Problems
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Demonstrate bond valuations using Excel.
+
+Demonstrate bond yield calculations using Excel.
+
+Calculating the Price (Present Value) of a Bond
+
+The following examples illustrate how Microsoft Excel can be used to calculate common bond problems. Please be sure to refer to the chapters on the time value of money for examples of using spreadsheets to solve present value problems, as these same concepts are also used in solving bond problems.
+
+You can use the following steps in Excel to determine the price or present value of a coupon bond. Suppose that a bond has a par or face value of $1,000, pays coupons semiannually at a 4% annual rate, and matures in 15 years. We can assume a YTM rate of 5%.
+
+First, select Formulas from the Excel upper menu bar, and from the dialog box, select PV (see ).
+ 
+ Using Excel to Enter a PV (Present Value) Function
+
+Using Excel to Enter a PV (Present Value) Function
+
+When the PV function is selected, another dialog box will appear (see ). It is here that the function variables, or arguments, will be entered. It is preferable to use cell addresses to refer to these arguments so that the spreadsheet can be easily used again if inputs/arguments change.
+ 
+ Function Arguments Dialog Box
+
+Function Arguments Dialog Box
+
+Enter the function inputs or arguments (see ). We refer to the cell addresses as per our example spreadsheet.
+ 
+ Completed Data Entry Menu
+
+Completed Data Entry Menu
+
+Note that the result, the price or present value, will appear in the bottom left section of the Function Arguments box once the arguments are entered. It will appear as a negative value because of the sign convention and because the bond face value in cell F4 was entered as a positive value.
+
+Calculating the Yield to Maturity (Interest Rate) of a Bond
+
+Use the following steps in Excel to determine the YTM (interest rate) of a bond. Assume that you want to find the YTM of a $1,000, 3.5% bond with annual coupon payments that is selling for $675.00 and will mature in 12 years.
+
+First, select Formulas from the Excel upper menu bar, and from the dialog box, select Rate (see ).
+ 
+ Using Excel to Enter a Rate Function
+
+Using Excel to Enter a Rate Function
+
+After the dialog box appears, enter the variables or arguments. As with our earlier example, we will use the preferred method of identifying the arguments with cell addresses (see ).
+ 
+ Completed Data Entry Menu
+
+Completed Data Entry Menu
+
+Again, after all arguments are entered through their correct cell references, the answer will appear in the lower left corner of the box. Once satisfied with the result, you can hit Enter to insert this final calculated value in your spreadsheet. This has been set up in this sheet in cell H10.
+
+Calculating a Coca-Cola Bond to Maturity
+
+Earlier, we covered how a financial calculator could be used to determine the YTM of our Coca-Cola bond example. If we wanted to use an Excel spreadsheet to perform this calculation instead of a calculator, we would set up our spreadsheet as shown in the steps below. The current bond price, entered as a negative, is ($952.06). The bond face value of FV is $1,000; the time period is 7 years×2, or 14 semiannual periods; the coupon rate is 1%2, or 0.05%; and the coupon payment is $5.00.
+
+First, select Formulas from the Excel upper menu bar, and from the dialog box, select Rate (see ).
+ 
+ Using Excel to Enter a Rate Function
+
+Using Excel to Enter a Rate Function
+
+After the dialog box appears, enter the variables or arguments. As with our earlier examples, we will use the preferred method of identifying arguments with cell addresses (see ).
+ 
+ Completed Data Entry Menu
+
+Completed Data Entry Menu
+
+Again, after all arguments are entered through their correct cell references, the answer will appear in the lower left corner of the box. Once satisfied with the result, you can hit Enter to insert this final calculated value into your spreadsheet. This has been set up in this sheet in cell H10.
+
+As noted above, remember that this is a semiannual rate because it was calculated using semiannual coupon payments and periods. To express it as an annual YTM rate, you must multiply it by 2.
+
+Calculating the Maturity Period (Term) of a Bond
+
+You can use the following steps in Excel to determine the maturity period or term of a bond. Assume that you are considering investing in a bond that is selling for $820.00, has a face value of $1,000, and has an annual coupon rate of 3%. If the YTM is 10%, how long will it be until the bond matures?
+
+First, select Formulas from the Excel upper menu bar, and from the dialog box, select Nper (see ).
+ 
+ Using Excel to Calculate Bond Time to Maturity
+
+Using Excel to Calculate Bond Time to Maturity
+
+When the dialog box appears, enter function arguments (see ). Once again, we will use the preferred method of using cell addresses as reference points.
+ 
+ Completed Data Entry Menu
+
+Completed Data Entry Menu
+
+When arguments have all been entered, the answer will appear in the lower left of the Function Arguments box, as per the above. We arrive at a final answer of 3.12 years until this bond matures.
+
+Calculating Coupon Rate and Interest (Coupon) Payments
+
+Here is how you would determine the coupon or interest rate and coupon payment using Excel. Assume a $1,000 face value bond is selling for $595, has 20 years until it matures, and has a YTM of 6.5%. What are the coupon rate and the periodic coupon payment amount of the bond?
+
+First, select Formulas from the Excel upper menu bar, and from the dialog box, select PMT (see ).
+ 
+ Using Excel to Enter a PMT or Payment Function
+
+Using Excel to Enter a PMT or Payment Function
+
+When the dialog box appears, enter function arguments. Once again, we will use the preferred method of using cell addresses as reference points (see ).
+ 
+ Completed Data Entry Menu
+
+Completed Data Entry Menu
+
+When arguments have all been entered, the answer will appear in the lower left of the Function Arguments box, as per the above. We arrive at a final answer of $28.24 as the coupon payment.
+
+The coupon rate can be calculated by taking this coupon payment amount and dividing it by the face value:
+
+So, the coupon rate is 2.824%.
+
+Microsoft Excel can be used to solve common bond problems. It can be used to calculate the value of a coupon bond, the yield to maturity (interest rate) of a bond, the maturity period of a bond, and the coupon rate and interest (coupon) payments of a bond.
+
+Bond Pricing, Valuation, Formulas, and Functions in Excel
+
+Review the examples included in this video, and practice setting up spreadsheets that solve for each of the five primary bond variables using the values in the videos (maturity 10 years, coupon rate 10%, coupon payment $100, yield to maturity 8%, and par value $1,000). Parallel the spreadsheets that are set up in the video, ensuring that you arrive at the same results for each bond variable amount.
+
+CFA Institute
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.

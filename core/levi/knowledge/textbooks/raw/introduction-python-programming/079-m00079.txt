@@ -1,0 +1,96 @@
+# m00079
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+A dictionary in Python is a container object including key-value pairs.
+
+The dict type implements a dictionary in Python.
+
+A dictionary cannot have duplicate keys.
+
+A dictionary is a mutable object but keys in the dictionary must be immutable objects.
+
+A dictionary can be created using curly braces or the dict() method.
+
+Values in the dictionary can be obtained through square bracket notation or the get() method.
+
+Dictionary items, keys, and values can be obtained using items(), keys(), and values() methods, respectively.
+
+Existing items can be modified or new items can be added to a dictionary using square brackets notation or the update() method.
+
+Items can be removed from a dictionary using the del keyword or the pop() method.
+
+Conditional statements can be used with a dictionary to check if the dictionary contains specific keys, values, or key-value pairs.
+
+Looping on a dictionary can be done by iterating over keys, values, or items.
+
+Nested dictionaries are dictionaries that are stored as values within another dictionary.
+
+With dictionary comprehension, elements of an iterable object are transformed into key-value pairs.
+
+At this point, you should be able to use dictionaries in your programs. The programming practice below ties together most topics presented in the chapter.
+
+Chapter 10 reference.
+
+Concept
+Description
+Dictionary creation using the dict() method
+Dictionary creation using the dict() method
+# Using a list
+my_list = [(key1, value1), (key2, value2)]
+my_dict = dict(my_list)
+
+# Using keyword arguments
+my_dict = dict(key1=value1, key2=value2)
+
+# From another dictionary
+old_dict = {key1: value1, key2: value2}
+new_dict = dict(old_dict)
+my_dict = {key1: value1, key2: value2}
+
+# Accessing item using square bracket notation
+my_dict[key1]
+
+# Accessing item through get() method
+my_dict.get(key1)
+my_dict.items()
+my_dict.keys()
+my_dict.values()
+my_dict = {key1: value1, key2: value2}
+
+# Updating an item using square bracket notation
+my_dict[key1] = new_value
+# Adding a new key-value pair using square bracket notation
+my_dict[key3] = value3
+
+# Updating an item using update() method
+my_dict.update({key1: new_value})
+# Adding a new key-value pair using update() method
+my_dict.update({key3: value3})
+my_dict = {key1: value1, key2: value2}
+
+# Using del keyword
+del my_dict[key1]
+
+# Using pop() method
+deleted_value = my_dict.pop(key1)
+for key in dictionary: # Loop expression
+  # Statements to execute in the loop
+
+#Statements to execute after the loop
+{
+key_1:{key11:value11, key12:value12},
+key_2:{key21:value21, key22:value22}
+}
+{key_expression: value_expression for element in iterable}
+Even and odd values
+
+Given a list, create a dictionary with two keys, "even" and "odd". The values associated with each key must be the list of corresponding even and odd values in the given list.

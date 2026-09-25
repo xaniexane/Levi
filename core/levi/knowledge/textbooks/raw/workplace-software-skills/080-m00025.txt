@@ -1,0 +1,106 @@
+# m00025
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Financial Functions in Microsoft Excel
+
+Financial Functions in Microsoft Excel
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Describe the use of financial functions
+
+Use common financial functions in Excel
+
+WorldCorp and all other corporations all over the world use financial equations to manage their businesses. These equations can help business leaders understand the impact of taking out a loan to purchase equipment, the value of a particular financial investment, and other related decisions. Microsoft Excel has programmed many of the more common financial equations as functions so that you do not need to type a formula. Instead, you use the name of the function and the variables. This means that if you want to calculate the investment of a stock or bond, you may need to have three of the five financial variables in the time value of money theory. Similar to a financial calculator, you can use FV, PV, PMT, N, or I to figure out if an investment is worthwhile. You have already been briefly introduced to some of these functions in The Advantages of a Data Table.
+
+In this section, you will learn how to use financial functions in Excel in the context of the time value of money theory and depreciation. These are common accounting principles that will be briefly discussed. More information on these concepts can be found in a standard accounting textbook.
+
+Add-ins
+
+Excel comes with standard financial functions; however, many users are able to “add-in” other functions and utilities. Of course, the common user will find the preexisting functions more than sufficient for most of their needs; however, if you have any financial responsibilities at an organization, you may find a need for these additional functions or features to help speed up your work. You can find preset add-ins on the Insert tab under either My Add-ins for existing ones that you may have installed already or Get Add-ins for others available through Office or from other companies. You will find an interesting list of choices when searching for add-ins, such as data analytics, productivity, and financial connector. Under Financial Connector, some of the add-ins available include a stock connector, as well as additional financial analysis and financial analytics tools. These can serve as powerful features to further automate and keep current financial information you are using to populate your sheets.
+
+Applications of Financial Functions
+
+Financial functions are used for calculating a diverse set of common key performance indicators in a business, or for predicting the value of money through time. The time value of money theory states that money loses value as time passes. It is a simple concept that is ingrained in every business decision because it is important for a business to use financial instruments and investments to increase the value of their savings or idle cash. One way you can see this theory in practice is in the steady increase in the sales prices of goods over time.
+
+Common Financial Functions in Practice
+
+You were introduced to the Excel function PMT in The Advantages of a Data Table for determining the monthly (or yearly, daily, or quarterly) payment of an investment or loan. There are other important variables involved in the financial functions related to the time value of money theory, which can help a business determine profitability. This section will focus on an annual payment rather than a monthly payment. But keep in mind, many loans require monthly payments and the variables in the function will need to be adjusted accordingly.
+
+There are five main time value of money variables (PMT, RATE, NPER, PV, and FV) used in these calculations. lists these variables and what they represent in Excel. To find the answer to a time value of money problem, you must have the values of at least three of the five variables. There is an additional variable that you need to consider and that is “Type.” In the functions, “Type” represents when payments are made. If they are made at the beginning of the term, use 1 in the function. If you do not enter anything, Excel will use the default of “0,” meaning payments are made at the end of the term. The timing of the payments impacts the amount of interest paid.
+
+One way to calculate any of these time value of money variables is to use a financial calculator, which works like a regular calculator, except that it has certain financial functions programmed into it. A financial calculator has a button associated with each of the time value of money variables. Excel also has these functions programmed into it.
+
+Time Value of Money Variables
+
+Variable
+PMT
+RATE
+NPER
+PV
+FV
+Type
+Whether payments are made at the beginning of the term or at the end of the term; the default is “0” or at the end of the term
+PMT
+
+To calculate PMT, you need at least three of the other variables. For this example, assume that WorldCorp is building a new manufacturing plant, at a cost of $4,743,542. To finance the investment, they will borrow the money from a bank, rather than use their savings. The bank terms are 5.6 percent for a twelve-year loan. You will use these variables to find the amount WorldCorp will pay each year for a loan. You know the loan term (NPER, which is the number of periods for the loan), the interest rate (RATE), and the original amount of the loan (PV). You do not know the future value (FV) or the yearly payment installment (PMT).
+
+Excel performs these time value of money calculations using functions and the values of the known variables. First, construct a table that lists the five variables and the values you have. You can then use the Excel function to calculate PMT (). Recall that this function can be found on the Formulas tab under Financial in the Function Library command group. You enter all of the values into the dialog box or in the Formula Bar using the cell references. shows the PMT function using the variables and the cell references.
+a shows the yearly installment WorldCorp will have to pay on this loan. As was noted in The Advantages of a Data Table, Excel gives the PMT answer as a negative number by default. You can change this by putting a “-” sign in front of the PV cell reference or after the “=” in the formula in the Formula Bar (b).
+
+In the Mac version of Excel, using the functions for all of the time value of money variables does not open a dialog box, as it does in the Windows version. Instead, you must enter the values between the parentheses in the Formula Bar.
+
+RATE
+
+The RATE function works in the same way as the PMT function. Again, you can find the RATE function in the financial functions library. For this example, WorldCorp wants to open another manufacturing plant for making headphones. The cost of the site and the machinery is $3,843,974, but they will use a down payment of $450,000. The loan they would need then would be $3,393,974 (total cost − $450,000). The bank loan will be over twelve years, with yearly payments of $427,308.08. You need to determine the interest rate. shows the table of variables, but this time the interest rate is missing. You can then use the RATE function to determine the interest rate ().
+
+NPER
+
+You can use the NPER function in Excel in the same way as the other time value of money functions to determine the amount of time required to repay the loan. For this example, WorldCorp has decided to change the look of their retail stores. They asked you, a financial analyst, to find the best bank loan terms—the one that costs the company the least amount in total payment. The average cost of each store renovation is $64,757. Bank X offers an interest rate of 5.45 percent and Bank Y offers an interest rate of 6.55 percent. Bank Y is your current bank, and you have a great working relationship with the employees. You want to keep banking there, but want to understand the long-term impact of the higher interest rate for this loan. You have budgeted $1,500 each month toward the loan for an annual payment of $18,000 ($1,500 × 12 months). You can use those values in the NPER function to determine the repayment time period for each loan , which you can then use to determine the total payment of the loan. You would multiply the PMT by the NPER you just found.
+
+The difference between the two options might not seem that significant: 4.11 years compared with 4.24 years. However, when you take that number and multiply it by the yearly installment, you can see the overall difference between the two loans. For Bank X, you will pay a total of $74,027.02 (= 4.11 × $1,800) and using the same process for Bank Y, the total cost is $76,239.91. It would save you more than $2,000 by going with Bank X. You will need to decide if that is enough savings to take the business away from your current bank. This example shows you that sometimes decisions are not always based on the numbers. Sometimes nonfinancial aspects must be considered when making decisions such as this.
+
+The Mac version requires the periods to be in months.
+
+PV
+
+Excel’s PV function allows you to calculate the principal of a loan. Suppose you are WorldCorp’s new financial analyst, and your supervisor asked you to track down all of the company’s outstanding bank loans and their original principals. The first loan you find has a monthly payment of $8,673.38, a period of eight years and an annual interest rate of 6.55 percent. As with other examples, the first step is to set up your table of information. However, the table you have been using has the term set up in years, but the term of this loan is in months. You will need to multiply 8 years by 12 months to get NPER, and you will need to divide your annual interest (RATE) by 12 months () to get the monthly interest. Now that you have converted all of your figures to months, you can use the PV function from Excel to get the original principal of $646,743.00 ().
+
+An amortization schedule is a summary table of all the principal and interest payments made on a loan. This helps the borrower understand the impact of the interest rate and the timeline to pay back a loan such as one for a car or a home. Excel is a great tool for constructing such a table. Read this Ablebits tutorial about creating a loan amortization schedule in Excel to learn more about how to create a loan payment schedule.
+
+FV
+
+The final time value of money function you will use is for the future value, which the previous examples have not used. For this example, you will analyze a stock investment. As a financial analyst at WorldCorp, you need to assess the value of investments in a savings account to determine whether it would be better for WorldCorp to use this cash for buying stock of other companies to get a greater return. The stocks they are considering will increase in market value in the future, so you will need to calculate the amount WorldCorp will gain when they sell it. They have $5,456,254.00 in their savings account now. They are considering investing that savings in other company stocks that increase in value on average 6.57 percent per year, and they would plan to hold on to the stock for nine years. You would use the FV function, as shown in to determine this value. You can then compare that with what they would get if they just keep the funds in the savings account during that nine-year time period ().
+
+Depreciation
+
+Depreciation is not one of the five variables used in time value of money theory, but it is an important function used in accounting. The steady decrease in value of an asset, such as a piece of equipment, over time is called depreciation. The IRS lets businesses calculate depreciation as an expenditure, which in turn reduces the total amount they are taxed each year. There are several different depreciation functions in Excel, but this section will focus on the DB (declining balance) function. This is one of the most used methods of depreciation in accounting. With this function, you are essentially reducing the total value of the asset over a period of time.
+
+The formula for depreciation takes into account the original price, the current market value of the item (or the salvage value), the years of use (or useful life), and the period. The years of use is the average lifespan of the machine. The period is the time that has passed since the purchase. The other variable in the function is Month. This can be used if the machine was purchased in the middle of the year. Excel will assume a normal twelve-month year for the first year if you leave this value blank. The number you enter here is the number of months the business owned the asset during a partial year. For this example, you will use the values in , which shows the DB function. shows the depreciation of the asset. As shown, during period 2, the machine is $18,627.12 less than its original value, meaning that in year 2 the machine is worth $61,372.88 (or $80,000 − $18,627.12).
+
+Procedures and Reporting Standards
+
+Financial accounting follows a set of standardized rules. All publicly traded corporations use Generally Accepted Accounting Procedures (GAAP) or International Financial Reporting Standards (IFRS) standards. There are options within GAAP that let the company report some accounts differently. For example, inventory can be valued as first in, first out (FIFO) or last in, first out (LIFO). It is important for a company to disclose all these optional changes to the GAAP in the financial statement notes, and in the annual report. For example, a company can explain how they calculated depreciation or value of inventory. Auditors use this information to ensure that the company has followed the appropriate accounting practices and that the financial statements are an accurate reflection of the company’s financial health.
+
+These notes also allow potential investors to consider them in an analysis of a company and in comparing the company with another company in the same industry. Without including full financial statement notes to explain variations in accounting principles, auditors and investors may not be able to determine the accuracy of a company’s financial statement, which could lead to questioning a company’s ethics and their adherence to GAAP or IFRS.
+
+Summary
+
+The time value of money theory, or the theory that money loses value as time passes, is the basis of many financial decisions and can be useful in helping decision makers understand the long-term impacts of their choices now.
+
+The time value of money variables are PV, RATE, NPER, PMT, and FV. They allow you to calculate the time value of money.
+
+Depreciation is a mathematical formula that allows business owners to quantify how much value an asset loses over time so that they can plan for replacing the asset.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+steady decrease in value of an asset over time

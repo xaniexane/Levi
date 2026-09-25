@@ -1,0 +1,275 @@
+# m00088
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Creating Forms in Microsoft Access
+
+Creating Forms in Microsoft Access
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Understand why forms are useful
+
+Create and edit a form using the Form Wizard
+
+Customize a form by adding images and text
+
+Relational databases are built on a structure of tables; each table is made up of columns, which hold fields, and rows, which hold the information for each field for a specific record. This is an effective structure for the organization, but as the database becomes more complex and we use joins in queries to create relationships between data across tables, we need an easier and more manageable way to work with the database. Using forms to interact with our database tables has two benefits:
+
+Forms provide an easy way to interact with the database.
+
+Forms protect the data and underlying table structure from accidental changes.
+
+Most websites are based on databases and use forms to connect to the database. In fact, online shopping sites use a combination of forms, preset queries, and reports to create a positive user experience. Forms are the pages themselves, which allow us to search and retrieve information (e.g., a product listing) by running preset queries and returning detail in either a form or report format. When we look at a website, we do not see the underlying data tables; we see forms and the results of queries based on forms or formatted as results.
+
+Using Forms in a Database
+
+Forms are objects that are positioned between the data and the individual user. When individuals work with a database using forms, they do not see the table structure with thousands or hundreds of thousands of records. Instead, they see only a specific view designed to make the data accessible and useful for them. Forms are typically bound to the database, which means that the fields within the forms are the same fields as in the database, and any changes in either the form or the table are reflected in the other.
+
+You can also create an unbound form containing buttons and commands that allow an individual to access the database but that does not display any information. An unbound form is likely to be used as an interface to the database and can create a “home page” that makes it possible for someone unfamiliar with the database to easily access and use what they need.
+
+If you were going to build a database that was simple and used only by you, you might not need a form. Even so, a form would make it easier for you to navigate, interact with, and complete tasks. You could build a form that would let you automate tasks that you perform often, like updating inventory. For a single person accessing a database, forms make work more efficient, although they may not be critical to success.
+
+When a database needs to be used by many people, including some who are relatively unfamiliar with the database or with database technology, forms are a critical tool. They provide both an interface to the database and a way to navigate and access data that is pleasant to use, makes sense, is designed for the specific use case, and enables anyone to use the database while ensuring data integrity and security.
+
+The sales and marketing group at WorldCorp has asked you to set up a database that the team can use to look at sales figures for different time periods based on products. The team is not familiar with Access or with databases in general and does not want to spend time learning the technology. Instead, they want an easy-to-use interface that will allow them to search and retrieve summary data. You already have a database with all this information that is ready for use, but it was not designed for the sales and marketing team. You decide to create a form that will allow the team to add a date range and a product type, then return a summarized report showing the necessary sales.
+
+You build a form with this function and then add text that explains the purpose of the form and how to use it. Once the form is finished, you create a dashboard for the team that allows the team to choose this specific form by clicking a labeled button. After you have built and tested the forms, you alert them to the new function. This gives them a powerful new way of looking at sales data and retrieving the information they need, when they need it, in a format that works for them—all without needing to modify the database or its objects.
+
+Addressing Data Security Risks
+
+Employees who work with data need to be aware of data security and able to manage security issues. Nevertheless, many employees may not be aware of the risks that their behavior poses to personal and business data. Even as we work to increase technical security, employees’ irresponsible or unethical behaviors may put their own, their coworkers, and even the organization’s data at risk. According to Forbes, risks to consider include the following:
+
+Social engineering vulnerabilities: The risk of employees being tricked into revealing credentials or installing malware through tactics like phishing attacks.
+
+Unmanaged IoT devices: The challenges posed by the increasing number of unmanaged Internet of Things (IoT) devices, which lack proper policies and controls.
+
+Lack of awareness: The risk associated with employees’ inability to detect frauds, scams, and phishing emails, emphasizing the need for strong security awareness training.
+
+Data loss: The importance of adopting a data-centric approach and implementing data loss prevention measures to safeguard data and ensure compliance.
+
+Personal data accessibility: The need to ensure that customer data is only accessed by authorized individuals through proper security protocols.
+
+Managing the increasingly complex digital business environment: The difficulty in consistently following security rules in a growing and complex digital landscape.
+
+Insider threats: The significance of paying attention to insider threats and ensuring that employees and other individuals with access to corporate data do not misuse their privileges.
+
+Insecure applications: The risk associated with applications storing and transmitting sensitive data, especially through insecure application programming interfaces and third-party channels.
+
+Untrained end users: The vulnerabilities arising from employees who fall prey to phishing emails, download malware, or mishandle confidential data, emphasizing the importance of ongoing training.
+
+Consumer trust in data repositories: The impact of data breaches on consumer trust and the need for comprehensive asset audits and robust segmentation to mitigate such threats.
+
+Third-party risk: The importance of evaluating and securing third-party relationships to prevent data from being exposed to a wider network.
+
+Overestimating the ability of network defenses to ensure data security: The need to protect data within applications through encryption, authentication, and secure key management, rather than relying solely on network defenses.
+
+Misconfigured cloud servers: The risks associated with misconfigured servers in cloud environments and the need for automated security solutions to identify and remediate misconfigurations.
+
+Lack of data access oversight: The risk posed by granting employees and contractors excessive data access privileges, necessitating continuous data classification and auditing efforts.
+
+Addressing these risks is crucial for businesses to protect their data, minimize potential financial losses, and maintain customer trust and confidence.
+
+Types of Forms
+
+As mentioned, you might decide to create a form as a user interface or a form that accesses and displays information. A form that acts as an interface is likely to be unbound (meaning it is not connected to any specific table or database query) and to include a combination of text, images, and command buttons that access certain objects in the database. These forms can also include search fields if that function is valuable to your audience.
+
+In a bound form, the fields are linked directly to objects in the database. We use bound forms when we want to access data in tables or through queries. Remember, any modification to a field value in a form also updates the underlying data in the table.
+
+Here are some common forms that you can create in Access:
+Simple form: a form that displays and allows editing of a single record at a time.
+Split form: a form that has two functions; for example, it might display a single record as well as a view of the datasheet in which the record is held. A split form is useful when you need to see the larger set of data but work with only one record at a time.
+Multiple-item form: a form that displays information about more than one record or item at a time. It appears like a datasheet but allows you to add commands, format text, and add other controls.
+Navigation form: a form that allows you to add formatting, text, and commands to act as an interface, or navigation area, for your database. (These are typically unbounded forms.)
+
+Tips for Effective Forms
+
+Creating useful and effective forms requires a clear understanding of the data you have, the audience that will use the form, and the use case for the data. Good forms are more than just boxes on a screen; they demonstrate an awareness of how people will interact with the data and use it on a daily basis. A good form should anticipate user expectations and adapt to meet them. For example, using white spaces to separate information into useful blocks can make it easier for the reader to quickly navigate the form. In addition, you can use the form to control what users can enter into fields. Customers should not be able to enter in numbers as their name for example. To ensure data integrity, you should consider restrictions on what can be entered into forms. If you are using free-form fields, those filling out the form could really put in anything they want, resulting in unusable data for your organization.
+
+Here are some tips for creating effective forms:
+
+Label your fields (to the left or above the point where data will be entered or viewed).
+
+Do not use spacing in field names.
+
+Stack your fields on top of one another to increase readability.
+
+Mark required fields with an asterisk (*).
+
+When there are more than five or six choices, use a drop-down menu.
+
+Break forms into steps if you have many fields to fill in.
+
+Adjust field size based on the length of the answer.
+
+Keep related areas on the form together (e.g., all name fields should be together).
+
+Offer ways for people to get help (including instructions, email addresses, and phone numbers).
+
+Keep the form as brief as possible; make sure the size fits the use of the form.
+
+Use white space (blank space) on your form to help your users understand and work with the form comfortably.
+
+Test your form with different people in the target workgroup and on different technology when possible.
+
+Do test prints with PDF files to see if records will be visually attractive if saved.
+
+Creating and Editing Forms with the Form Wizard
+
+You have several options for creating forms in Access. You can use the Form Wizard, which walks you through the steps to set up a simple form. Alternatively, you can use a preset form, or you can work entirely in Design View, where you have complete control over your layout and contents. Each method has its benefits, and many people use a variety of techniques (e.g., starting with the Wizard or another type of form, then customizing your form in Layout or Design View).
+
+The Form Wizard gives you a quick way to create a form that you can later modify as needed. Like other Microsoft Office Wizards, the Form Wizard asks you a series of questions and uses your responses to format the desired object.
+
+Creating a Form
+
+To start the Wizard, click on the Create tab. Then, in the Forms group, click on Form Wizard. Once the Wizard opens, walk through each screen, making choices at each step to design and complete your form.
+
+Step 1: Choose the table(s) and fields you want to appear on the form. Move fields to the form by clicking on the >> button. Note: To use fields from more than one table, switch tables while on this screen and move the appropriate fields to the right using the >> button (see ).
+
+Step 2: Choose the layout you want for the form and click Next:
+Columnar layout shows a single record set up on the screen.
+Tabular layout creates a listing of all records in columns, similar to a datasheet (but formatted differently).
+Datasheet layout gives you a list of records as they would appear in a datasheet.
+Justified layout creates a record-by-record form, arranged across the screen.
+
+Once the form is built, you can modify it to ensure it looks the way you feel is best for your data and audience (see ).
+
+Step 3: Enter a unique name for the form and choose whether you want to see the form in design or view mode. Click Finish to create the form.
+
+Forms can also be built from any table or query or a combination of both. One way to streamline setting up a form is to set up a specific query with the fields you want to be displayed on the form. Once the query is ready, you can do the following:
+
+Click on the table or query from which you want to build the form.
+
+Click on the Create menu, then click the Form command. Access will create a form and open it in Layout View for review and modification.
+
+Using the More Forms Command
+
+If a simple form does not provide what you need for your database, consider using the More Forms command on the Create menu. This command offers four form types, built directly on the table or query you click on in the navigation pane.
+
+To use the More Forms command:
+
+Click on the table or query on which you want to base your form in the All Access Objects navigation area.
+
+Click on the Create menu and then the More Forms command under the Forms section.
+
+Choose the type of form you want to work with. Access will immediately create the form, which you can then modify to suit your needs (see ).
+
+ You can select the type of form you wish to create using the More Forms command. (Used with permission from Microsoft)
+
+Reviewing a Form
+
+Regardless of the method you use, once your form is created you can view it either in view mode (which shows how your audience will view the form) or in Layout View or Design View, which allows you to modify the form (see ). To change your view, click on the Home tab and then on the View command. Under the View command, choose one of the following:
+Form View: to see how the audience will view the form
+Layout View: to modify the layout and formatting of the form
+Design View: to modify any and all attributes of the form
+
+ As with viewing reports, there are three different options for viewing a form. (Used with permission from Microsoft)
+
+The forms that Access builds can be used as is, but you will often want to add to a form or slightly adjust its formatting. You can do this in two views: in Layout View, which allows you to change the overall layout and formatting, and in Design View, which allows you to change any attributes in the form.
+
+When you edit a form in either Layout View or Design View, you will have the ability to work with fields and controls. Fields are columns within the database where data is stored. You can add and remove fields from your form to ensure that you display the data you need to your audience when they work with the form. Fields in the form reference field values in the database and display information from the database. When you are in Layout View, you can see this as you work; in Design View, you will see the design elements but not values.
+
+You can also add controls to a form. Controls are items that are part of your form and can enhance its usability. Bound controls are connected (or bound) to a specific field, table, or query in your database. Unbound controls are not tied to the database but exist only in your form, where they run a specific command or action or display specific information.
+
+Some common controls in Access include text boxes (see ), labels, buttons, and links. Each of these controls adds functionality to your form. You can add a command to open a form in Design View by clicking on the specific command in the Controls group on the Form Design tab in the ribbon.
+
+Depending on the control you add, you may need to work with the Control Wizard, complete a screen, adjust properties, or complete the control on screen. When you begin working with forms in Access, you may work with the Control Wizard and then preview the form in the View menu to see how the control works in practice.
+
+Note that in Access, a text box is typically linked to a field in a database. To add static text to a form, you should instead use a label. Labels do not change on the form based on the data within the database, unlike text boxes.
+
+Customizing Forms
+
+In both the Layout View and the Design View, you can customize elements of the forms to meet your needed. This goes beyond simply adding, reordering, or removing fields from your form. You can change the size of the field and the caption that the users see for that field. In the Design View, you can change the size of the fields by simply clicking on the field box and resizing the box. To change the caption for the field, double-click on the text in the field, and the Property Sheet screen will appear on the right side of the screen. Conversely, you can simply click on the Property Sheet tool in the Tools command group on the Form Design tab to change the captions. Through the Property Sheet tool, you can also adjust items such as the font, color, background color, and border of the fields in the form. You can adjust these settings for each field independently. This means that one field could have different settings than another field. More is covered about the Property Sheet options in the following section.
+
+You might want to add header or footer information to your form. Typical information contained in a form header would be specific company details such as the company logo, address, and contact information. WorldCorp has standard header information that should be included on all files as was covered in previous chapters. This information is customized on the form through the Form Design tab and the Header/Footer command group. You can have text, images, and the date and time added to the header. This information can also be added in the same manner to the header. To adjust the text, simply click on the existing text in the header or footer and replace with the text you want to include. Note that Access will give a header to the form based on the name of the table used to create the form. You will likely want to replace this header with something more descriptive. For example, if you are creating a form based on a table called “Sales Data,” the form header will be “Sales Data” as well. You could replace that with something like “Sales Data for Region 3, 2023.”
+
+In summary, customizing forms in Access is similar to customizing reports, which we covered earlier in this chapter. You can generally customize just about every aspect of the form from the font, to colors, to adding images, and other related aspects.
+
+Layout View
+
+The Layout View screen gives you a good look at your form, with real data showing on the screen. This enables you to modify the screen’s visual appearance, including the size and placement of controls. Not all tasks are available in Layout View; depending on your goal, you may find that you need to change to Design View.
+
+To modify a form in Layout View, start by opening the form in Layout View. Then, proceed as follows:
+
+To add a field, click on the Format tab in the Controls group; then click Add existing fields and drag the field to the form.
+
+To move a control, click on any instance of the control and drag it to a new location. (Note: You will have limited options for moving a control.)
+
+To resize a control, click on the control, select its border, and click and drag until it is sized properly.
+
+To add an image to the page, click on the Insert Image command on the Controls group and choose the file. Once the image is on the form, you can move and resize it.
+
+These are only a few of the options available to you in Layout View; to see more options for customizing your form, hover over the command on the ribbon and read the description. Remember, what you see on screen in Layout View reflects the final form, making it easier to set up a form that meets your needs and has the appearance you feel works best for your data and your audience.
+
+Design View
+
+If you find that you need to make changes to a complex form, you will likely want to switch from Layout View to Design View. The Design View screen gives you complete control over the appearance of the form but is more complex to use. You may want to use Design View for tasks such as moving elements and controls, adding images, adding simple controls, and changing form properties.
+
+In Design View, you will see tabs that control how you lay out the form. You may also see floating menus and boxes that appear depending on the items you click on:
+
+The Design tab contains commands that control the overall design scheme (colors and fonts), controls you can add to the form, and commands that allow you to insert items and change properties of items on the form.
+
+The Arrange tab contains commands that allow you to line up items; insert, move, and arrange items; and manage the layout of items on the page. (Note: This tab may not be available unless you select more than one item, such as an image or a control.)
+
+The Format tab contains commands that let you format the text on the form and add background images and formatting.
+
+To move items manually, click and drag them or click on multiple items and use the commands on the Arrange tab on the ribbon. To move a single item (control, image, text), click and drag the item. To move more than one item, hold down Control, click on each item, and then move all of them at once.
+
+Adding an Image
+
+It can be beneficial to add an image, such as a logo, to a form for customization. You may also create a text explanation or block of text in a graphics program and then insert it into the database as an image.
+
+To add an image in Design View, click on the Form Design tab and choose the image that you would like to add. You can add any image to the page by clicking on Insert Image and locating the file (be aware that if you insert an image in the detail section of the form, it will repeat in each row). To add a logo, click on Logo in the Header/Footer group and the image will appear at the top of your form, in the header.
+
+In addition to images, you can also add a title or date and time in the header/footer section of the form. These items will be displayed for your users but will not be stored as data in the database.
+
+Changing Form Properties
+
+Properties describe how a form control or field acts in a form. Form controls determine how the form works. There is a long list of properties that you can control; initially, you will likely only change basic properties such as the width of a screen or the addition of scroll bars (see ).
+
+To change a form property:
+
+In the open form, click on the command Property Sheet (Form Design, Tools group). The property sheet will open.
+
+In the property sheet, verify that Form shows as the selection type.
+
+Modify the properties you would like to change, and click on the category of property you would like to work with (e.g., you might want to format items on the form).
+
+Here are a few examples:
+
+To add a caption to the form, click on the Format tab within the property sheet and add caption text.
+
+To change the default view, click on the default view and switch the type of form.
+
+To control the width of the form, set the width in the width row.
+
+When you create a form or modify an existing form, Access will prompt you to name and save it. You can save manually by right-clicking on the name of the tab in the work area and choosing the Save command. To close a form that is open in the work area, click on the X next to the tab name.
+
+Summary
+
+Forms provide an easy-to-use interface with a database. Most websites use forms for inputting, requesting, and accessing information.
+
+Forms can be created and edited using the Form Wizard.
+
+Forms can be customized in either Layout View or Design View.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+Case Exercise
+
+a form layout that shows a single record
+a form layout that lists all records as they would appear in a datasheet
+a layout showing a record-by-record form, arranged across the screen
+a form that displays information about more than one record or item at a time
+a form that allows you to add formatting, text, and commands to act as an interface, or navigation area, for your database
+a form that displays and allows editing of a single record at a time
+a form that has two functions; for example, it might display a single record as well as a view of the datasheet in which the record is held
+a form layout that shows all records listed in columns, similar to a datasheet

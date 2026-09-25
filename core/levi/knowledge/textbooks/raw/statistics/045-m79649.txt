@@ -1,0 +1,582 @@
+# m79649
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+The Central Limit Theorem for Sums (Optional)
+
+The Central Limit Theorem for Sums (Optional)
+
+Suppose X is a random variable with a distribution that may be known or unknown (it can be any distribution) and suppose:
+μX = the mean of Χ
+σΧ = the standard deviation of X
+
+If you draw random samples of size n, then as n increases, the random variable ΣX consisting of sums tends to be normally distributed and ΣΧ ~ N[(n)(μΧ), (
+
+ n
+
+)(σΧ)].
+The central limit theorem for sums says that if you keep drawing larger and larger samples and taking their sums, the sums form their own normal distribution (the sampling distribution), which approaches a normal distribution as the sample size increases. The normal distribution has a mean equal to the original mean multiplied by the sample size and a standard deviation equal to the original standard deviation multiplied by the square root of the sample size.
+
+The random variable ΣX has the following z-score associated with it:
+
+Σx is one sum.
+z = 
+ 
+ Σx–(n)(
+ μ
+ X
+ 
+ )
+
+ (
+ n
+ 
+ )(
+ σ
+ X
+ 
+ )
+
+(n)(μX) = mean of ΣX
+
+ (
+ n
+ 
+ )(
+ σ
+ X
+ 
+ )
+ 
+ = standard deviation of 
+ 
+ ΣX
+
+(n)(μX) = mean of ΣX
+(
+ n
+ 
+ )(
+ σ
+ X
+ 
+ )
+ 
+ = standard deviation of 
+ 
+ ΣX
+
+To find probabilities for sums on the calculator, follow these steps:
+
+2nd DISTR
+2:normalcdf
+normalcdf(lower value of the area, upper value of the area, (n)(mean), (
+
+ n
+
+)(standard deviation))
+
+where,
+mean is the mean of the original distribution,
+standard deviation is the standard deviation of the original distribution, and
+sample size = n.
+mean is the mean of the original distribution,
+standard deviation is the standard deviation of the original distribution, and
+sample size = n.
+
+An unknown distribution has a mean of 90 and a standard deviation of 15. A sample of size 80 is drawn randomly from the population.
+
+Find the probability that the sum of the 80 values (or the total of the 80 values) is more than 7,500.
+
+Find the sum that is 1.5 standard deviations above the mean of the sums.
+
+Let X = one value from the original unknown population. The probability question asks you to find a probability for the sum (or total of) 80 values.
+
+ΣX = the sum or total of 80 values. Because μX = 90, σX = 15, and n = 80, 
+ 
+ ΣX
+ 
+ ~ N[(80)(90), (
+
+ 80
+
+)(15)]
+
+mean of the sums = (n)(μX) = (80)(90) = 7200
+
+standard deviation of the sums = 
+ 
+ (
+ n
+ 
+ )(
+ σ
+ X
+ 
+ ) = (
+ 
+ 80
+
+ )
+ 
+(15)
+
+sum of 80 values = Σx = 7500
+
+a. Find P(Σx > 7500)
+P(Σx > 7500) = 0.0127
+normalcdf(lower value, upper value, mean of sums, stdev of sums)
+
+The parameter list is abbreviated(lower, upper, (n)(μX, 
+ (
+
+ n
+
+ )
+ 
+(σX))
+normalcdf (7500,1E99,(80)(90),
+ 
+ (
+
+ 80
+
+ )
+ 
+(15)) = 0.0127
+
+Reminder
+1E99 = 1099.
+
+Press the EE key for E.
+
+b. Find Σx where z = 1.5.
+
+Σx = (n)(μX) + (z)
+ 
+ (
+
+ n
+
+ )
+ 
+(σΧ) = (80)(90) + (1.5)(
+
+ 80
+
+)(15) = 7401.2
+
+Try It
+
+An unknown distribution has a mean of 45 and a standard deviation of 8. A sample size of 50 is drawn randomly from the population. Find the probability that the sum of the 50 values is more than 2,400.
+
+0.0040
+
+To find percentiles for sums on the calculator, follow these steps:
+
+2nd DIStR
+3:invNorm
+k = invNorm (area to the left of k, (n)(mean), 
+ 
+ (
+ n
+ 
+ )
+ 
+(standard deviation))
+
+where,
+k is the kth percentile,
+mean is the mean of the original distribution,
+standard deviation is the standard deviation of the original distribution, and
+sample size = n.
+k is the kth percentile,
+mean is the mean of the original distribution,
+standard deviation is the standard deviation of the original distribution, and
+sample size = n.
+
+In a recent study reported Oct. 29, 2012, the mean age of tablet users is 34 years. Suppose the standard deviation is 15 years. The sample size is 50.
+
+What are the mean and standard deviation for the sum of the ages of tablet users? What is the distribution?
+
+Find the probability that the sum of the ages is between 1,500 and 1,800 years.
+
+Find the 80th percentile for the sum of the 50 ages.
+μΣx = nμx = 50(34) = 1,700 and σΣx = 
+
+ n
+
+σx = 
+ 
+ (
+ 
+ 50
+
+  )
+ 
+(15) = 106.01
+The distribution is normal for sums by the central limit theorem.
+P(1500 < Σx < 1800) = normalcdf
+(1500, 1800, (50)(34), 
+ 
+ (
+ 
+ 50
+
+  )
+ 
+(15)) = 0.7974
+
+Let k = the 80th percentile.
+k = invNorm(0.80,(50)(34),
+ 
+ (
+ 
+ 50
+
+  )
+ 
+(15)) = 1789.3
+
+Try It
+
+In a recent study reported Oct.29, 2012, the mean age of tablet users is 35 years. Suppose the standard deviation is 10 years. The sample size is 39.
+
+What are the mean and standard deviation for the sum of the ages of tablet users? What is the distribution?
+
+Find the probability that the sum of the ages is between 1,400 and 1,500 years.
+
+Find the 90th percentile for the sum of the 39 ages.
+μΣx = nμx = 1,365 and σΣx = 
+
+ n
+
+ σ
+ x
+
+ = 62.4
+The distribution is normal for sums by the central limit theorem.
+P(1400 < Σx < 1500) = normalcdf
+(1400,1500,(39)(35),(
+
+ 39
+
+)(10)) = 0.2723
+
+Let k = the 90th percentile.
+
+k = invNorm(0.90,(39)(35),(
+
+ 39
+
+)
+(10)) = 1445.0
+
+The mean number of minutes for app engagement by a tablet user is 8.2 minutes. Suppose the standard deviation is one minute. Take a sample size of 70.
+
+What are the mean and standard deviation for the sums?
+
+Find the 95th percentile for the sum of the sample. Interpret this value in a complete sentence.
+
+Find the probability that the sum of the sample is at least 10 hours.
+μΣx = nμx = 70(8.2) = 574 minutes and σΣx = 
+ 
+ (
+
+ n
+
+ )(
+
+ σ
+ x
+
+ )
+ 
+ = 
+ 
+ (
+ 
+ 70
+
+  )
+ 
+(1) = 8.37 minutes
+
+Let k = the 95th percentile.
+k = invNorm
+(0.95,(70)(8.2),
+ 
+ (
+ 
+ 70
+
+ )
+ 
+(1)) = 587.76 minutes
+Ninety-five percent of the app engagement times are at most 587.76 minutes.
+
+10 hours = 600 minutes
+P(Σx ≥ 600) = normalcdf(600,E99,(70)(8.2),
+ 
+ (
+ 
+ 70
+
+ )
+ 
+(1)) = 0.0009
+
+The mean number of minutes for app engagement by a tablet user is 8.2 minutes. Suppose the standard deviation is one minute. Take a sample size of 70.
+
+What is the probability that the sum of the sample is between seven hours and 10 hours? What does this mean in context of the problem?
+
+Find the 84th and 16th percentiles for the sum of the sample. Interpret these values in context.
+
+7 hours = 420 minutes
+10 hours = 600 minutes
+normalcdf
+ 
+ P(420≤Σx≤600)=normalcdf(420,600,(70)(8.2),
+ 
+ 70
+
+ (1))=0.9991
+
+This means that for this sample sums there is a 99.9% chance that the sums of usage minutes will be between 420 minutes and 600 minutes.
+invNorm(0.84,(70)(8.2),
+ 
+ 70
+
+ (1))=582.32
+
+ invNorm(0.16,(70)(8.2),
+ 
+ 70
+
+ (1))=565.68
+ 
+Since 84% of the app engagement times are at most 582.32 minutes and 16% of the app engagement times are at most 565.68 minutes, we may state that 68% of the app engagement times are between 565.68 minutes and 582.32 minutes.
+
+References
+
+Farago, P. (2012, Oct. 29). The truth about cats and dogs: Smartphone vs tablet usage differences. Flurry Analytics Blog. Retrieved from http://flurrymobile.tumblr.com/post/113379683050/the-truth-about-cats-and-dogs-smartphone-vs
+
+Chapter Review
+
+The central limit theorem tells us that for a population with any distribution, the distribution of the sums for the sample means approaches a normal distribution as the sample size increases. In other words, if the sample size is large enough, the distribution of the sums can be approximated by a normal distribution, even if the original population is not normally distributed. Additionally, if the original population has a mean of μX and a standard deviation of σx, the mean of the sums is nμx and the standard deviation is 
+ 
+ (
+ n
+ 
+ )
+ 
+(σx), where n is the sample size.
+
+Formula Review
+
+Central limit theorem for sums: ∑X ~ N[(n)(μx),(
+
+ n
+
+)(σx)]
+
+Mean for sums (∑X): (n)(μx)
+
+Central limit theorem for sums z-score and standard deviation for sums: 
+ 
+ z for the sample mean = 
+ 
+ Σx–(n)(
+ μ
+ X
+ 
+ )
+
+ (
+ n
+ 
+ )(
+ σ
+ X
+ 
+ )
+
+Standard deviation for sums (∑X): 
+ 
+ (
+ n
+ 
+ )
+ 
+(σx)
+Use the following information to answer the next four exercises: An unknown distribution has a mean of 80 and a standard deviation of 12. A sample size of 95 is drawn randomly from the population.
+
+Find the probability that the sum of the 95 values is greater than 7,650.
+
+0.3345
+
+Find the probability that the sum of the 95 values is less than 7,400.
+
+Find the sum that is two standard deviations above the mean of the sums.
+
+7833.92
+
+Find the sum that is 1.5 standard deviations below the mean of the sums.
+Use the following information to answer the next five exercises: The distribution of results from a cholesterol test has a mean of 180 and a standard deviation of 20. A sample size of 40 is drawn randomly.
+
+Find the probability that the sum of the 40 values is greater than 7,500.
+
+0.0089
+
+Find the probability that the sum of the 40 values is less than 7,000.
+
+Find the sum that is one standard deviation above the mean of the sums.
+
+7326.49
+
+Find the sum that is 1.5 standard deviations below the mean of the sums.
+
+Find the percentage of sums between 1.5 standard deviations below the mean of the sums and one standard deviation above the mean of the sums.
+
+77.45%
+Use the following information to answer the next six exercises: A researcher measures the amount of sugar in several cans of the same type of soda. The mean is 39.01 with a standard deviation of 0.5. The researcher randomly selects a sample of 100.
+
+Find the probability that the sum of the 100 values is greater than 3,910.
+
+Find the probability that the sum of the 100 values is less than 3,900.
+
+0.4207
+
+Find the probability that the sum of the 100 values falls between the numbers you found in (16) and (17).
+
+Find the sum with a z-score of –2.5.
+
+3,888.5
+
+Find the sum with a z-score of 0.5.
+
+Find the probability that the sums will fall between the z-scores –2 and 1.
+
+0.8186
+Use the following information to answer the next four exercises: An unknown distribution has a mean 12 and a standard deviation of one. A sample size of 25 is taken. Let X = the object of interest.
+
+What is the mean of ΣX?
+
+What is the standard deviation of ΣX?
+
+5
+
+What is P(Σx = 290)?
+
+What is P(Σx > 290)?
+
+0.9772
+
+True or False: Only the sums of normal distributions are also normal distributions.
+
+In order for the sums of a distribution to approach a normal distribution, what must be true?
+
+The sample size, n, gets larger.
+
+What three things must you know about a distribution to find the probability of sums?
+
+An unknown distribution has a mean of 25 and a standard deviation of six. Let X = one object from this distribution. What is the sample size if the standard deviation of ΣX is 42?
+
+49
+
+An unknown distribution has a mean of 19 and a standard deviation of 20. Let X = the object of interest. What is the sample size if the mean of ΣX is 15,200?
+Use the following information to answer the next three exercises: A market researcher analyzes how many electronics devices customers buy in a single purchase. The distribution has a mean of three with a standard deviation of 0.7. She samples 400 customers.
+
+What is the z-score for Σx = 840?
+
+26.00
+
+What is the z-score for Σx = 1,186?
+
+What is P(Σx < 1186)?
+
+0.1587
+Use the following information to answer the next three exercises: An unkwon distribution has a mean of 100, a standard deviation of 100, and a sample size of 100. Let X = one object of interest.
+
+What is the mean of ΣX?
+
+What is the standard deviation of ΣX?
+
+1000
+
+What is P(Σx > 9000)?
+
+Homework
+
+Which of the following is NOT true about the theoretical distribution of sums?
+
+The mean, median, and mode are equal.
+
+The area under the curve is one.
+
+The curve never touches the x-axis.
+
+The curve is skewed to the right.
+
+Suppose that the duration of a particular type of criminal trial is known to have a mean of 21 days and a standard deviation of seven days. We randomly sample nine trials.
+
+In words, ΣX = ______________.
+ΣX ~ _____(_____, _____)
+
+Find the probability that the total length of the nine trials is at least 225 days.
+
+Ninety percent of the total of nine of these types of trials will last at least how long?
+
+the total length of time for nine criminal trials
+N(189, 21)
+
+0.0432
+
+162.09; 90 percent of the total nine trials of this type will last 162 days or more.
+
+Suppose that the weight of open boxes of cereal in a home with children is uniformly distributed from two to six pounds with a mean of four pounds and standard deviation of 1.1547. We randomly survey 64 homes with children.
+
+In words, X = _____________.
+
+The distribution is _______.
+
+In words, ΣX = _______________.
+ΣX ~ _____(_____, _____)
+
+Find the probability that the total weight of the open boxes is less than 250 pounds.
+
+Find the 35th percentile for the total weight of open boxes of cereal.
+
+Salaries for entry-level managers at a restaurant chain are normally distributed with a mean of $44,000 and a standard deviation of $6,500. We randomly survey 10 managers from these restaurants.
+
+In words, X = ______________.
+X ~ _____(_____, _____)
+
+In words, ΣX = _____________.
+ΣX ~ _____(_____, _____)
+
+Find the probability that the managers earn a total of over $400,000.
+
+Find the 90th percentile for an individual manager's salary.
+
+Find the 90th percentile for the sum of ten managers' salary.
+
+If we surveyed 70 managers instead of ten, graphically, how would that change the distribution in part (d)?
+
+If each of the 70 managers received a $3,000 raise, graphically, how would that change the distribution in part (b)?
+X = the salary of one elementary school teacher in the district
+X ~ N(44000, 6500)
+ΣX ~ sum of the salaries of 10 elementary school teachers in the sample
+ΣX ~ N(44,000, 20,554.80)
+
+0.9742
+
+$52,330.09
+
+466,342.04
+
+Sampling 70 teachers instead of 10 would cause the distribution to be more spread out. It would be a more symmetrical normal curve.
+
+If every teacher received a $3,000 raise, the distribution of X would shift to the right by $3,000. In other words, it would have a mean of $47,000.

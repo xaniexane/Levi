@@ -1,0 +1,473 @@
+# m00068
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Dividend Discount Models (DDMs)
+
+Dividend Discount Models (DDMs)
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Identify and use DDMs (dividend discount models).
+
+Define the constant growth DDM.
+
+List the assumptions and limitations of the Gordon growth model.
+
+Understand and be able to use the various forms of DDM.
+
+Explain the advantages and limitations of DDMs.
+
+The dividend discount model (DDM) is a method used to value a stock based on the concept that its worth is the present value of all of its future dividends. Using the stock’s price, a required rate of return, and the value of the next year’s dividend, investors can determine a stock’s value based on the total present value of future dividends.
+
+This means that if an investor is buying a stock primarily based on its dividend, the DDM can be a useful tool to determine exactly how much of the stock’s price is supported by future dividends. However, it is important to understand that the DDM is not without flaws and that using it requires assumptions to be made that, in the end, may not prove to be true.
+
+The Gordon Growth Model
+
+The most common DDM is the Gordon growth model, which uses the dividend for the next year (D1), the required return (r), and the estimated future dividend growth rate (g) to arrive at a final price or value of the stock. The formula for the Gordon growth model is as follows:
+
+This calculation values the stock entirely on expected future dividends. You can then compare the calculated price to the actual market price in order to determine whether purchasing the stock at market will meet your requirements.
+
+Dividend Discount Model
+
+Watch this short video on the dividend discount model and how it is used it in stock valuation and analysis.
+
+The Gordon growth model equation is presented and then applied to a sample problem to demonstrate how the DDM yields an estimated share price for the stock of any company.
+
+Now that we have been introduced to the basic idea behind the dividend discount model, we can move on to cover other forms of DDM.
+
+Zero Growth Dividend Discount Model
+
+The zero growth DDM assumes that all future dividends of a stock will be fixed at essentially the same dollar value forever, or at least for as long as an individual investor holds the shares of stock. In such a case, the stock’s intrinsic value is determined by dividing the annual dividend amount by the required rate of return:
+
+When examined closely, it can be seen that this is the exact same formula that is used to calculate the present value of a perpetuity, which is
+
+For the purpose of using this formula in stock valuation, we can express this as
+
+where PV is equal to the price or value of the stock, D represents the dividend payment, and r represents the required rate of return.
+
+This makes perfect sense because a stock that pays the exact same dividend amount forever is no different from a perpetuity—a continuous, never-ending annuity—and for this reason, the same formula can be used to price preferred stock. The only factor that might alter the value of a stock based on the zero-growth model would be a change in the required rate of return due to fluctuations in perceived risk levels.
+
+Example:
+
+What is the intrinsic value of a stock that pays $2.00 in dividends every year if the required rate of return on similar investments in the market is 6%?
+Solution:
+
+We can apply the zero growth DDM formula to get
+
+While this model is relatively easy to understand and to calculate, it has one significant flaw: it is highly unlikely that a firm’s stock would pay the exact same dollar amount in dividends forever, or even for an extended period of time. As companies change and grow, dividend policies will change, and it naturally follows that the payout of dividends will also change. This is why it is important to become familiar with other DDMs that may be more practical in their use.
+
+Constant Growth Dividend Discount Model
+
+As indicated by its name, the constant growth DDM assumes that a stock’s dividend payments will grow at a fixed annual percentage that will remain the same throughout the period of time they are held by an investor. While the constant growth DDM may be more realistic than the zero growth DDM in allowing for dividend growth, it assumes that dividends grow by the same specific percentage each year. This is also an unrealistic assumption that can present problems when attempting to evaluate companies such as Amazon, Facebook, Google, or other organizations that do not pay dividends. Constant growth models are most often used to value mature companies whose dividend payments have steadily increased over a significant period of time. When applied, the constant growth DDM will generate the present value of an infinite stream of dividends that are growing at a constant rate.
+
+The constant growth DDM formula is
+
+where D0 is the value of the dividend received this year, D1 is the value of the dividend to be received next year, g is the growth rate of the dividend, and r is the required rate of return.
+
+As can be seen above, after simplification, the constant growth DDM formula becomes the Gordon growth model formula and works in the same way. Let’s look at some examples.
+
+Constant Growth DDM: Example 1
+
+If a stock is paying a dividend of $5.00 this year and the dividend has been steadily growing at 4% annually, what is the intrinsic value of the stock, assuming an investor’s required rate of return of 8%?
+Solution:
+
+Apply the constant growth DDM formula:
+
+Simplify to the Gordon growth model:
+
+Constant Growth DDM: Example 2
+
+If a stock is selling at $250 with a current dividend of $10, what would be the dividend growth rate of this stock, assuming a required rate of return of 12%?
+Solution:
+
+Apply the constant growth DDM formula:
+
+Simplify and continue the calculation:
+
+So, the growth rate is 7.69%.
+
+Dividend Discount Model: A Complete Animated Guide
+
+In this video for the Investing for Beginners course and podcast, Andrew Sather introduces the DDM, demonstrating both the constant growth DDM (Gordon growth model) and the two-stage DDM.
+
+Variable or Nonconstant Growth Dividend Discount Model
+
+Many experienced analysts prefer to use the variable (nonconstant) growth DDM because it is a much closer approximation of businesses’ actual dividend payment policies, making it much closer to reality than other forms of DDM. The variable growth model is based on the real-life assumption that a company and its stock value will progress through different stages of growth.
+
+The variable growth model is estimated by extending the constant growth model to include a separate calculation for each growth period. Determine present values for each of these periods, and then add them all together to arrive at the intrinsic value of the stock. The variable growth model is more involved than other DDM methods, but it is not overly complex and will often provide a more realistic and accurate picture of a stock’s true value.
+
+As an example of the variable growth model, let’s say that Maddox Inc. paid $2.00 per share in common stock dividends last year. The company’s policy is to increase its dividends at a rate of 5% for four years, and then the growth rate will change to 3% per year from the fifth year forward. What is the present value of the stock if the required rate of return is 8%? The calculation is shown in .
+
+Value of Stock with 8% Required Rate of Return
+
+Year
+Growth %
+Dividend  ($)
+Value after Year 4 ($)
+PV Discount Factor at 8%
+Present Value of Dividend ($)
+0
+5%
+2.00
+1
+5%
+2.10
+1.0800
+1.9444
+2
+5%
+2.21
+1.1664
+1.8904
+3
+5%
+2.32
+1.2597
+1.8379
+4
+5%
+2.43
+1.3605
+1.7869
+5
+3%
+2.50
+50.07886
+1.4693
+Total: $43.2466
+Note:
+
+The value of Maddox stock in this example would be $43.25 per share.
+
+Two-Stage Dividend Discount Model
+
+The two-stage DDM is a methodology used to value a dividend-paying stock and is based on the assumption of two primary stages of dividend growth: an initial period of higher growth and a subsequent period of lower, more stable growth.
+
+The two-stage DDM is often used with mature companies that have an established track record of making residual cash dividend payments while experiencing moderate rates of growth. Many analysts like to use the two-stage model because it is reasonably grounded in reality. For example, it is probably a more reasonable assumption that a firm that had an initial growth rate of 10% might see its growth drop to a more modest level of, say, 5% as the company becomes more established and mature, rather than assuming that the firm will maintain the initial growth rate of 10%. Experts tend to agree that firms that have higher payout ratios of dividends may be well suited to the two-stage DDM.
+
+As we have seen, the assumptions of the two-stage model are as follows:
+
+The first period analyzed will be one of high initial growth.
+
+This stage of higher growth will eventually transition into a period of more mature, stable, and sustainable growth at a lower rate than the initial high-growth period.
+
+The dividend payout ratio will be based on company performance and the expected growth rate of its operations.
+
+Let’s use an example. Lore Ltd. estimates that its dividend growth will be 13% per year for the next five years. It will then settle to a sustainable, constant, and continuing rate of 5%. Let’s say that the current year’s dividend is $14 and the required rate of return (or discount rate) is 12%. What is the current value of Lore Ltd. stock?
+Step 1:
+
+First, we will need to calculate the dividends for each year until the second, stable growth rate phase is reached. Based on the current dividend value of $14 and the anticipated growth rate of 13%, the values of dividends (D1, D2, D3, D4, D5) can be determined for each year of the first phase. Because the stable growth rate is achieved in the second phase, after five years have passed, if we assume that the current year is 2021, we can lay out the profile for this stock’s dividends through the year 2026, as per .
+
+Profile of Stock Dividend through 2026
+Step 2:
+
+Next, we apply the DDM to determine the terminal value, or the value of the stock at the end of the five-year high-growth phase and the beginning of the second, lower growth-phase.
+
+We can apply the DDM formula at any point in time, but in this example, we are working with a stock that has constant growth in dividends for five years and then decreases to a lower growth rate in its secondary phase. Because of this timing and dividend structure, we calculate the value of the stock five years from now, or the terminal value. Again, this is calculated at the end of the high-growth phase, in 2026. By applying the constant growth DDM formula, we arrive at the following:
+
+The terminal value can be calculated by applying the DDM formula in Excel, as seen in and . The terminal value, or the value at the end of 2026, is $386.91.
+
+Terminal Value at the End of 2026 (Showing Formula)
+
+Terminal Value at the End of 2026
+Step 3:
+
+Next, we find the PV of all paid dividends that occur during the high-growth period of 2022–2026. This is shown in . Our required rate of return (discount rate) is 12%.
+
+Present Value of All Paid Dividends, 2022–2026
+Step 4:
+
+Next, we calculate the PV of the single lump-sum terminal value:
+
+Remember that due to the sign convention, either the FV must be entered as a negative value or, if entered as a positive value, the resulting PV will be negative. This example shows the former.
+Step 5:
+
+Our next step is to find the current fair (intrinsic) value of the stock, which comprises the PV of all future dividends plus the PV of the terminal value. This is represented in the following formula, with all factors shown in :
+
+Fair Value of the Stock
+
+So, we end up with a total current fair value of Lore Ltd. stock of $291.44 (due to Excel’s rounding), although the sum can also be calculated as shown below:
+
+Determining Stock Value
+
+Take a few minutes to review this video, which covers methods used to determine stock value when dividend growth is nonconstant.
+
+Advantages and Limitations of DDMs
+
+Some of the primary advantages of DDMs are their basis in the sound logic of present value concepts, their consistency, and the implication that companies that pay dividends tend to be mature and stable entities. Also, because the model is essentially a mathematical formula, there is little room for misinterpretation or subjectivity. As a result of these advantages, DDMs are a very popular form of stock evaluation that most analysts show faith in.
+
+Because dividends are paid in cash, companies may keep making their dividend payments even when doing so is not in their best long-term interests. They may not want to manipulate dividend payments, as this can directly lead to stock price volatility. Rather, they may manipulate dividend payments in the interest of buoying up their stock price.
+
+To further illustrate limitations of DDMs, let’s examine the Concepts in Practice case.
+
+Limitations of DDMs
+
+A major limitation of the dividend discount model is that it cannot be used to value companies that do not pay dividends. This is becoming a growing trend, particularly for young high-tech companies. Warren Buffett, CEO of Berkshire Hathaway, has stated that companies are usually better off if they take their excess funds and reinvest them into infrastructure, evolving technologies, and other profitable ventures. The payment of dividends to shareholders is “almost a last resort for corporate management,”Dan Caplinger. “Why Don’t These Winning Stocks Pay Dividends?” The Motley Fool. Updated October 3, 2018. https://www.fool.com/investing/general/2015/03/01/why-dont-these-winning-stocks-pay-dividends.aspx says Buffett, and cash balances should be invested in “projects to become more efficient, expand territorially, extend and improve product lines or . . . otherwise widen the economic moat separating the company from its competitors.”The Motley Fool. “Why Warren Buffet’s Berkshire Hathaway Won’t Pay a Dividend in 2015.” Nasdaq. November 16, 2014. https://www.nasdaq.com/articles/why-warren-buffetts-berkshire-hathaway-wont-pay-dividend-2015-2014-11-16. Berkshire follows this practice of reinvesting cash rather than paying dividends, as do tech companies such as Amazon, Google, and Biogen.Caplinger, “Why Don’t These Winning Stocks Pay Dividends?” The Motley Fool. So, rather than receiving cash dividends, stockholders of these companies are rewarded by seeing stock price appreciation in their investments and ultimately large capital gains when they finally decide to sell their shares.
+
+The sensitivity of assumptions is also a drawback of using DDMs. The fair price of a stock can be highly sensitive to growth rates and the required rates of return demanded by investors. A single percentage point change in either of these two factors can have a dramatic impact on a company’s stock, potentially changing it by as much as 10 to 20%.
+
+Finally, the results obtained using DDMs may not be related to the results of a company’s operations or its profitability. Dividend payments should theoretically be tied to a company’s profitability, but in some instances, companies will make misguided efforts to maintain a stable dividend payout even through the use of increased borrowing and debt, which is not beneficial to an organization’s long-term financial health.
+
+(sources: www.wallstreetmojo.com/dividend-discount-model/; pages.stern.nyu.edu/~adamodar/pdfiles/valn2ed/ch13d.pdf; www.managementstudyguide.com/disadvantages-of-dividend-discount-model.htm)
+
+Stock Valuation with Changing Growth Rates and Time Horizons
+
+Before we move on from our discussion of dividend discount models, let’s work through some more examples of how the DDM can be used with a number of different scenarios, changing growth rates, and time horizons.
+
+As we have seen, the value or price of a financial asset is equal to the present value of the expected future cash flows received while maintaining ownership of the asset. In the case of stock, investors receive cash flows in the form of dividends from the company, plus a final payout when they decide to relinquish their ownership rights or sell the stock.
+
+Let’s look at a simple illustration of the price of a single share of common stock when we know the future dividends and final selling price.
+Problem:
+
+Steve wants to purchase shares of Old Peak Construction Company and hold these common shares for five years. The company will pay $5.00 annual cash dividends per share for the next five years.
+
+At the end of the five years, Steve will sell the stock. He believes that he will be able to sell the stock for $25.00 per share. If Steve wants to earn 10% on this investment, what price should he pay today for this stock?
+Solution:
+
+The current price of the stock is the discounted cash flow that Steve will receive over the next five years while holding the stock. If we let the final price represent a lump-sum future value and treat the dividend payments as an annuity stream over the next five years, we can apply the time value of money concepts we covered in earlier chapters.
+
+Method 1: Using an Equation
+
+Method 2: Using a Financial Calculator
+
+We can also use a calculator or spreadsheet to find the price of the stock (see ).
+
+Calculator Steps for Finding the Price of the StockThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.00
+2
+Enter number of periods (5)
+5 N
+N =
+5.00
+3
+Enter rate of return or interest rate (10%)
+10 I/Y
+I/Y =
+10.00
+4
+Enter eventual sales price ($25)
+25 FV
+FV =
+25.00
+5
+Enter dividend amount ($5)
+5 PMT
+PMT =
+5.00
+6
+CPT PV
+PV =
+– 34.47
+The stock price is calculated as $34.47.
+
+Note that the value given is expressed as a negative value due to the sign convention used by financial calculators. We know the actual stock value is not negative, so we can just ignore the minus sign.
+
+In cases such as the above, we find the present value of a dividend stream and the present value of the lump-sum future price. So, if we know the dividend stream, the future price of the stock, the future selling date of the stock, and the required return, it is possible to price stocks in the same manner that we price bonds.
+
+Method 3: Using Excel
+shows a spreadsheet setup in Excel to reach a solution to this problem.
+
+Excel Solution for Finding the Price of the Stock
+
+Due to the sign convention in Excel, we can ignore the parentheses around the solution, which indicate a negative value. Therefore, the price is $34.48. The Excel command used in cell F6 to calculate present value is as follows:
+
+Finding Stock Price with Constant Dividends
+Example 1:
+
+Four Seasons Resorts pays a $0.25 dividend every quarter and will maintain this policy forever. What price should you pay for one share of common stock if you want an annual return of 10% on your investment?
+Solution:
+
+You can restate your annual required rate of 10% as a quarterly rate of 2.5% 10%4. Apply the quarterly dividend amount and the quarterly rate of return to determine the price:
+
+Even though we anticipate that companies will be in business “forever,” we are not going to own a company’s stock forever. Therefore, the dividend stream to which we would have legal claim is only for that period of the company’s life during which we own the stock. We need to modify the dividend model to account for a finite period when we will sell the stock at some future time. This modification brings us from an infinite to a finite dividend pricing model, which we will use to price a finite amount of dividends and the future selling price of the stock. We will maintain a constant dividend assumption. Let’s assume we will hold a share in a company that pays a $1 dividend for 20 years and then sell the stock.
+
+Method 1: Using an Equation
+
+The dividend pricing model under a finite horizon is a concept we have seen earlier. It is a simple present value annuity stream application:
+
+We now need to determine the selling price that we would get in 20 years if we were to sell the stock to someone else at that time. What would a willing buyer give us for the stock 20 years from now? This price is difficult to estimate, so for the sake of this exercise, we will assume that the price in 20 years will be $30. So, what is the present value of the price in 20 years with a 10% discount rate? Again, this is just a simple application of the PV formula we covered earlier in the text:
+
+We can now price the stock as if it were a bond with a dividend stream of 20 years, a sales price in 20 years, and a required return of 10%:
+
+The dividend stream is analogous to the coupon payments.
+
+The sales price is analogous to the bond’s principal.
+
+The 20-year investment horizon is analogous to the bond’s maturity date.
+
+The required return is analogous to the bond’s yield.
+
+Carrying on with the PV calculations, we have
+
+Method 2: Using a Financial Calculator
+
+We can also use a calculator or spreadsheet to find the price of the stock using constant dividends (see ).
+
+Calculator Steps for Finding the Price of Stock Using Constant Dividends
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.00
+2
+Enter number of periods (20)
+20 N
+N =
+20.00
+3
+Enter rate of return or interest rate (10%)
+10 I/Y
+I/Y =
+10.00
+4
+Enter eventual sales price (30)
+30 FV
+FV =
+30.00
+5
+Enter dividend amount ($1)
+1 PMT
+PMT =
+1.00
+6
+CPT PV
+PV =
+−12.97
+The stock price resulting from the calculation is $12.97.
+
+Method 3: Using Excel
+
+This same problem can be solved using Excel with a setup similar to that shown in .
+
+Excel Solution for Finding the Price of Stock Using Constant Dividends
+
+Once again, we can ignore the negative indicator that is generated by the Excel sign convention because we know that the stock will not have a negative value 20 years from now. Therefore, the price is $12.97. The Excel command used in cell F13 to calculate present value is as follows:
+Example 2:
+
+Let’s look at an example and estimate current stock price given a 10.44% constant growth rate of dividends forever and a desired return on the stock of 13.5%. We will assume that the current stock owner has just received the most recent dividend, D0, and the new buyer will receive all future cash dividends, beginning with D1. This part of the setup of the model is important because the price reflects all future dividends, starting with D1, discounted back to today. (Price0 refers to the price at time zero, or today.) The first dividend the buyer would receive is one full period away. Using the discounted cash flow approach, we have
+
+where g is the annual growth rate of the dividends and r is the required rate of return on the stock. We can simplify the equation above into the following:
+
+As we discussed above, this classic model of constant dividend growth, known as the Gordon growth model, is a fundamental method of stock pricing. The Gordon growth model determines a stock’s value based on a future stream of dividends that grows at a constant rate. Again, we assume that this constantly growing dividend stream will pay forever. To see how the constant growth model works, let’s use our example from above once again as a test case. The most recent dividend (D0) is $1.76, the growth rate (g) is 10.44%, and the required rate of return (r) is 13.5%, so applying our PV equation, we have
+
+Our estimated price for this example is $63.52. Notice that the formula requires the return rate r to be greater than the growth rate g of the dividend stream. If g were greater than r, we would be dividing by a negative number and producing a negative price, which would be meaningless.
+
+Let’s pick another company and see if we can apply the dividend growth model and price the company’s stock with a different dividend history. In addition, our earlier example will provide a shortcut method to estimate g, although you could still calculate each year’s percentage change and then average the changes over the 10 years.
+
+Estimating a Stock Price from a Past Dividend Pattern
+Problem:
+
+Phased Solutions Inc. has paid the following dividends per share from 2011 to 2020:
+
+2011
+2012
+2013
+2014
+2015
+2016
+2017
+2018
+2019
+2020
+$0.700
+$0.800
+$0.925
+$1.095
+$1.275
+$1.455
+$1.590
+$1.795
+$1.930
+$2.110
+If you plan to hold this stock for 10 years, believe Phased Solutions will continue this dividend pattern forever, and you want to earn 17% on your investment, what would you be willing to pay per share of Phased Solutions stock as of January 1, 2021?
+Solution:
+
+First, we need to estimate the annual growth rate of this dividend stream. We can use a shortcut to determine the average growth rate by using the first and last dividends in the stream and the time value of money equation. We want to find the average growth rate given an initial dividend (present value) of $0.70, the most recent dividend (future value) of $2.11, and the number of years (n) between the two dividends, or the number of dividend changes, which is 9. So, we calculate the average growth rate as follows:
+shows the step-by-step process of using a financial calculator to solve for the growth rate.
+
+Calculator Steps for Solving the Growth Rate
+
+Step
+Description
+Enter
+Display
+1
+CE/C
+0.0000
+2
+Enter number of periods (9)
+9 N
+N =
+9.0000
+3
+Enter present value or initial dividend ($0.70) as a negativevalue
+0.7 +|- PV
+PV =
+-0.7000
+4
+Enter future value or the most recent dividend ($2.11)
+2.11 FV
+FV =
+2.1100
+5
+Enter a zero value for payment as a placeholder, as thisfactor is not used here
+0 PMT
+PMT
+0.0000
+6
+CPT I/Y
+I/Y =
+13.0427
+The calculated growth rate is 13.04%.
+
+We can also use Excel to set up a spreadsheet similar to the one in that will calculate this growth rate.
+
+Excel Solution for Growth Rate
+
+The Excel command used in cell G22 to calculate the growth rate is as follows:
+
+We now have two methods to estimate g, the growth rate of the dividends. The first method, calculating the change in dividend each year and then averaging these changes, is the arithmetic approach. The second method, using the first and last dividends only, is the geometric approach. The arithmetic approach is equivalent to a simple interest approach, and the geometric approach is equivalent to a compound interest approach.
+
+To apply our PV formula above, we had to assume that the company would pay dividends forever and that we would hold on to our stock forever. If we assume that we will sell the stock at some point in the future, however, can we use this formula to estimate the value of a stock held for a finite period of time? The answer is a qualified yes. We can adjust this model for a finite horizon to estimate the present value of the dividend stream that we will receive while holding the stock. We will still have a problem estimating the stock’s selling price at the end of this finite dividend stream, and we will address this issue shortly. For the finite growing dividend stream, we adjust the infinite stream in our earlier equation to the following:
+
+where n is the number of future dividends.
+
+This equation may look very complicated, but just focus on the far right part of the model. This part calculates the percentage of the finite dividend stream that you will receive if you sell the stock at the end of the nth year. Say you will sell Johnson & Johnson after 10 years. What percentage of the $60.23 (the finite dividend stream) will you get? Begin with the following:
+
+Now, multiply the result by the price for your portion of the infinite stream:
+
+The next step is to discount the selling price of Johnson & Johnson in 10 years at 17% and then add the two values to get the stock’s price. So, how do we estimate the stock’s price at the end of 10 years? If we elect to sell the stock after 10 years and the company will continue to pay dividends at the same growth rate, what would a buyer be willing to pay? How could we estimate the selling price (value) of the stock at that time?
+
+We need to estimate the dividend in 10 years and assume a growth rate and the required return of the new owner at that point in time. Let’s assume that the new owner also wants a 17% return and that the dividend growth rate will remain at 13.04%. We calculate the dividend in 10 years by taking the current growth rate plus one raised to the tenth power times the current dividend:
+
+We then use the dividend growth model with infinite horizon to determine the price in 10 years as follows:
+
+Your price for the stock today—given that you will receive the growing dividend stream for 10 years and sell for $258.10 in 10 years, and also given that you want a 17% return over the 10 years—is as shown below:
+
+Why did you get the same price of $60.23 for your stock with both the infinite growth model and the finite model? The reason is that the required rate of return of the stock remained at 17% (your rate) and the growth rate of the dividends remained at 13.04%. The infinite growth model gives the same price as the finite model with a future selling price as long as the required return and the growth rate are the same for all future sales of the stock.
+
+Although this point may be subtle, what we have just shown is that a stock’s price is the present value of its future dividend stream. When you sell the stock, the buyer purchases the remaining dividend stream. If that individual should sell the stock in the future, the new owner would buy the remaining dividends. That will always be the case; a stock’s buyer is always buying the future dividend stream.
+
+Determining Stock Value Using Different Scenarios
+
+This video explains methods for determining stock value using scenarios of constant dividends and scenarios of constant dividend growth.
+
+Nonconstant Growth Dividends
+
+One final issue to address in this section is how we price a stock when dividends are neither constant nor growing at a constant ra
+[truncated]

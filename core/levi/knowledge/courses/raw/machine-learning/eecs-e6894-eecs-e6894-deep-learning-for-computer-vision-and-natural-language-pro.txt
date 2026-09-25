@@ -1,0 +1,189 @@
+# EECS E6894: Deep Learning for Computer Vision and Natural Language Processing
+# Columbia University
+# source: http://llcao.net/cu-deeplearning15/index.html
+
+Deep Learning for CV and NLP
+Columbia University EECS E6894, Spring 2015 (7:00-9:30pm, Wednesday at 644 Seeley W. Mudd Bld)
+Deep Learning for Computer Vision and Natural Language Processing
+A similar course (Deep Learning for Computer Vision, Speech, and Language)
+will be provided in Spring, 2017.
+Schedule
+Reading
+Resource
+Projects
+Prog. Problem
+Instructors
+Liangliang Cao (liangliang.cao_at_gmail_dot_com)
+James Fan (jfan.us_at_gmail_dot_com)
+TA: Colin Raffel (craffel_at_gmail_dot_com)
+Course Introduction
+This graduate level research class focuses on deep learning techniques for vision and natural language processing problems.
+It gives an overview of the various deep learning models and techniques, and surveys recent advances in the related fields.
+This course uses Theano as the main programminging tool.
+GPU programming experiences are preferred although not required.
+Frequent paper presentations and a heavy programming workload are expected.
+Course Requirement
+Knowledgeable about NLP and/or vision and/or machine learning
+Fluent in Python and Numpy programming
+Students will be strongly advised to drop the class if they cannot finish the first homework on time.
+We suggest the final report to follow the format of the ACL short paper .
+-->
+Requirements for students' presentations
+Every student should prepare a 20 minute talk to present 1-2 papers that he/she is interested in.
+Presentation slides should be sent to the instructor one day before the class (for the benefits of discussion)
+The presenter is encouraged to describe concerns or difficulties from his own viewpoint
+The presenter is encouraged to connect the presented paper to his own project implementation
+Grading
+60% project
+30% paper presentation
+10% participation
+Course Schedule
+Part I: Background and Introduction
+Week
+Topic
+Note
+1 (1/21)
+Liangliang
+Course overview
+James
+From deep QA to deep NLP: the success of IBM Jeopardy! and beyond
+First homework assigned
+2 (1/28)
+Liangliang
+A computational viewpoint for deep learning
+Discussion of student project ideas
+First homework due
+Part II: Programming Guidance
+Week
+Topic
+Note
+3 (2/4)
+James
+Quick tour of Theano programming
+In class programming competition
+code example
+4 (2/11)
+Liangliang
+Comparing MLP and CNN with dropout for handwriting digit recognition
+In class programming competition
+Best performance: 1.3% on 14 x 14 MNIST images (by Christopher Cleveland and Zheng Shou)
+Reference:
+MNIST small (14x14)
+How to prepare MNIST small and
+test it with a MLP experiment
+5 (2/18)
+Student Projects
+Mid-term project proposal presentation
+please send TA your team information and project title!
+Registering students' course presentation
+Part III: Deep Learning and Vision
+Week
+Topic
+Note
+6 (2/25)
+Jamis M. Johnson:
+Visualizing and Optimizing Convolutional Neural Nets
+Christopher Cleveland: Very deep convolutoinal networks for
+large scale image recognition
+Liangliang: Large scale video recognition and
+Deep learning for OCR
+-->
+7 (3/4)
+-->
+Jake Varley Deep Image: Scaling Up Image Recognition
+Joaquin Ruales
+Deep Neural Networks for Object Detection
+Lance W. Legel Deep Object Detection
+Zheng Shou:
+Insights for incremental learning
+Grace Lindsay: A specialized face-processing network
+consistent with the representational
+geometry of monkey face patches
+8 (3/11)
+James Guevara, RNNs for Image Caption Generation
+Christopher Cleveland, Neural Turing Machines: Can neural nets learn programs
+Divyansh Agarwal, Unifying Visual-Semantic Embeddings with Multimodal Neural Language Models
+Sameer Lal,
+Semi-supervised Learning with Deep Generative Models
+No class (3/18)
+Spring break
+Part IV: Deep Learning and NLP
+Week
+Topic
+Note
+9 (3/25)
+Chris Kedize, GloVe: Global Vectors for Word Representation
+Ankit Gupta, Efficient Estimation of Word Representation in Vector Space
+Nikolai Yakovenko, DeepMind Self-Learning Atari Agent
+Angus Ding,
+Playing Atari with Deep Reinforcement Learning
+Robert Dadashi A comparative study of deep learning based
+methods for MRI image processing
+10 (4/1)
+Chad DeChant, Text Understanding
+from Scratch
+Neel Vadoothker,
+Deep Visual-Semantic Alignments for Generating Image Descriptions
+Alexander Spangher, Mikolov's Language Models: Distributed Represetnations of Sentences and Documents; Recurrent Neural Language Model .
+[ Alex's ipython notebook ]
+Kui Tang,
+11 (4/8)
+Qiming Chen, A fast and accurate dependency parser using neural networks
+Sami Mourad, Optimization
+Dwayne V. Campbell, Recursive deep models for semantic compositionalty over a sentiment treebank
+Alberto Benavides, Neural Machine Translation By Learning to Jointly Align and Translate
+Prateek Goel, Learning Deep Structured Semantic
+Models for Web Search using
+Clickthrough Data
+Part V: Conclusion and Final Project
+Week
+Topic
+Note
+12 (4/15)
+Roy Aslan, Factoid Question Answering
+Zhiyuan Guo, Two implementations of RNNs in Image Description
+Final project presentation I
+Christopher Cleveland and Sami Moura: How Deep Learning can Solve Phishing
+James Guevara and Ankit Gupta: Object Detection Using Given Key Words
+Final project slides due
+13 (4/22)
+Final project presentation II
+Alan Chad DeChant, Jacob Joseph Varley, Joaquín Ruales: 3D CNNs for Robotic Grasp Stability Estimation
+Neelamohan Vadoothker, Robert Dadashi, Alberto Benavides: Deep Learning on Medical Images
+Lance Legel, Jamis Johnson, Angus Ding: Extending "Playing Atari with Deep Reinforcement Learning"
+Nikolai Yakovenko: 2-7 Triple Draw Poker
+Prateek Goel, Divyansh Agarwal: Visual Search for Fashion
+14 (4/29)
+Final project presentation III
+Zheng Shou and Roy Aslan: Incremental learning for Convolutional Neural Networks
+Qiming Chen and Zhiyuan Guo: Plant recognition using Convolutional Neural Networks
+Kui Tang, Sameer Lal: Topic Models for Texts and Images in Representation Space
+Alexander Arthur Spangher: Auto-comment moderator for comments posted to the New York Times website
+Chris Kedzie, Dwayne Campbell, Roy Aslan: Application of neural networks to discourse coherence
+Announcement
+Congratulations to Chris Cleveland's startup for receiving a $10000 award from Columbia Venture Competition! (05/19)
+Course finished. Thank you everyone for the wonderful experience! (05/15)
+Congratulations to the Idol Award winners! Project page updated (04/30)
+Project page updated(04/28)
+Presentation slides updated. Final project information will be on the "Project" page (04/19)
+Presentation slides updated (04/09)
+Presentation slides updated (04/06)
+Presentation slides updated (03/25)
+Add a tab "Programming Problem" for MNIST 14x14 dataset.
+Chad got a new record of 0.833% error rate! (03/25)
+Student presentation slides are updated (03/25)
+Update presentation schedule on March 12 (03/12)
+Update presentation slides on March 04 (03/04)
+Update DeepMind's Nature paper and related codes in reading page: Thanks to the information from Colin Raffel (03/02)
+Update reading page and resource page (03/01)
+Update presentation slides, projects, and paper assignments (02/26)
+Update presentation assignments and reading list (02/21)
+Update initial presentation assignments (with presentation requirement) (02/19)
+Update students' project page (02/19).
+Update the existing selection of paper presentation (02/13).
+Slides and resource page updated (02/13).
+Reading and resource pages updated (02/09).
+Slides uploaded (02/05).
+Code example for in class programming uploaded (02/05).
+Reading list updated (02/05).
+Liangliang Cao and James Fan, Updated 02/21/2015

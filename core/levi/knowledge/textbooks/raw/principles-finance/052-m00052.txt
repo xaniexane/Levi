@@ -1,0 +1,84 @@
+# m00052
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Perpetuities
+
+Perpetuities
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Define perpetuity.
+
+Explain how perpetuities are valued.
+
+In Time Value of Money I, we learned that the value of money changes with the passage of time. Decision-makers consider how investments, projects, and even opportunity costs gain value as we move forward into the future. They similarly consider how value in the future can be reduced to a value in present or past periods. We saw that these value projections are called determination of future value (compounding, moving forward on a timeline) or present value (discounting, moving backward on a timeline). The easiest way to visualize this movement through time, whether forward or backward, is by use of a timeline.
+
+Throughout the first chapter on the time value of money, we were analyzing a single amount. In this chapter, we deal with a stream of payments made periodically—in other words, payments made or received regularly over a span of time. We begin with the illustration of a perpetuity.
+
+What Is a Perpetuity?
+
+A perpetuity is a series of payments or receipts that continues forever, or perpetually. One of the best ways to analyze the basics of an annuity (the stream of payments to be paid or received in the future) is by starting with a perpetuity. The most common examples of perpetuities in the author’s experience are college chair endowments and preferred stock.
+
+If you gift $1,500,000 to a college to name a professor’s chair for your family, you might specify that the money must be held in perpetuity and invested by the college to yield a fixed 3%. The college will take those proceeds of the investment, leaving your original $1,500,000 intact, and use the annual interest of $45,000 to fund a portion of the professor’s salary.
+
+Another common example is preferred stock. Most preferred stock issues carry a fixed and predetermined rate of dividend. If we assume that the dividend will not change in future years, then preferred dividend shareholders will receive a fixed amount of money in future years—assuming, of course, that the company’s board of directors declares the dividends sufficient to fund these requirements. If we assume that the dividend is declared and paid and that it remains constant, this represents a perpetuity.
+
+For example, Shaw Inc. has issued 100,000 shares of preferred stock with a stated value of $50 and a 4% dividend. Therefore, if they can fund and decide to declare dividends for the full amount, they will pay out $200,000, or $2.00 per preferred share. Because shares such as these are created with the intention of continuity, the owner of this preferred stock can theoretically expect this dividend income stream in perpetuity.
+
+To place a current market value on this stream of future income, how much should an investor pay for one share of this preferred stock? The calculation is a present value. The amount the investor pays today for that one share is equal to the annual dividend (assuming it is declared and paid) divided by the rate of return. But be careful—it is not the rate on the face of the preferred stock but the required rate of return, the “market rate” that investors expect from a stock of this level of risk. We must also note an important fact affecting all investment valuations: the value of an investment generally represents our expectations of all future cash flows from that investment, discounted to today’s dollars.
+
+Because a perpetuity is a stream of payments continuing indefinitely, determining the future value isn’t possible. Determining the present value, however, is possible, although one might wonder how. As we learned earlier, the greater the amount of time used in a present value calculation, the smaller the amount of dollars needed at the beginning, regardless of the interest rate involved. Therefore, when we discount each payment in an infinite series, remembering that we would then add them together once we discount them to the present, the infinite payments become negligible at some point and will no longer have a significant impact on today’s value. To grow to one dollar 70 years from now, even at a growth rate of 5% per year, we would only need $0.0329—not even four cents. Keeping all other facts the same, if we had 100 years to grow an investment to one dollar, we would only need 0.76 cents—not even a whole penny! There is no question that the effect of time is substantial and dramatic.
+
+The study of perpetuities in corporate finance is a first step to understanding valuation models of certain investments, such as the dividend discount model and the constant growth model, to be addressed in other chapters. Our ability to discount future cash flows, even infinite cash flows, to a present value is a clue to the price at which a company’s stock might trade. From a personal financial planning perspective, the individual investor is also better able to be certain that they are paying a fair price for holdings in their portfolio. For purposes of long-term or retirement planning, the investor must consider that a fixed and unchanging dividend, such as from preferred stock, might not adequately protect the holder from inflation in times of rising prices.
+
+How to Value a Perpetuity
+
+Given these facts, how do we place a value on a perpetuity? Let’s keep the preferred stock example for Shaw Inc. in mind. The holder of one share will expect to receive a $2.00 dividend for every share owned. Although a perpetuity may allow for growth of that dividend, we will hold that constant now. We must know one additional fact: the required rate of return. This is our random variable, which can cause fluctuation in the price of the preferred stock. Let’s assume that the required rate of return, which we’ll call RS, is 7%. This is the rate of return that the market expects in order to take on the risk of an investment such as Shaw.
+
+Determination of the price of Shaw’s preferred stock becomes quite simple because the expected annual cash flow should not change, making it a constant perpetuity. The constant perpetuity formula is
+
+where PV is the price of the preferred stock, C is the constant dividend, and Rs is the required rate of return.
+
+By substitution,
+
+The price one should pay for a share of Shaw’s preferred stock is $28.57.
+
+Here’s another constant perpetuity to try. The preferred stock of Rooney Corporation pays an annual dividend of $1.75 per share. If the required rate of return in the market for shares such as Rooney’s is 5.8%, at what price should these preferred shares be trading? The answer is $1.750.058, or $30.17.
+
+Some investments might involve a growing perpetuity. In this case, some degree of change in the amount of the dividend is expected. The formula is altered slightly to include a rate of growth in the denominator, noted as G, making the growing perpetuity formula
+
+To illustrate a growing perpetuity, let’s revisit Rooney Corp.’s stock, with its annual dividend of $1.75 and a required rate of return in the market of 5.8%. If the expected dividend growth rate G is 1.2%, then the value changes to $1.750.058 - 0.021, or $38.04. The expectation of growth in the dividend provides incentive for the investor to pay a higher price.
+
+A Growing Perpetuity
+Savo Corporation. While we think of perpetuities as being static, with a constant benefit or dividend, as seen above, they might have the possibility of growth. Let’s assume that our preferred stock in Savo Corporation is expected to grow at a rate of 0.2% per year. Its annual dividend per share is $4.00, and its required rate of return in the market is 3%. If this is a constant dividend stock, like most preferred stock, its price would be expected to approximate
+
+or
+
+When we factor in the 0.2% annual growth in the dividend, what does the price per share become?
+Solution:
+
+College Endowment
+
+In the case of an endowment for a college chair, as noted in the beginning of this section, instead of a dividend amount for a preferred stock, we would use the desired amount of the distribution that the chair would receive as part of their compensation package. Assume the college can invest this money at a fixed 3.5% annual rate. If you wish to gift the college enough funds to be held in perpetuity to produce $75,000 each year for that professor, how would you calculate this?
+Solution:
+
+We modify the constant perpetuity formula:
+
+In one year, $2,142,857 grows to
+
+The earnings (gift) of $75,000 are withdrawn to compensate the professor, and we are left with the amount originally endowed, $2,142,857:
+
+A perpetuity is an investment that is intended to provide an expected return indefinitely, either remaining constant or growing by an incremental amount. Preferred stock is a common example with a preestablished dividend formula. An indefinite stream of payments cannot be compounded into a future value, but it can be discounted to a present value, providing an opportunity to determine the amount an investor should be willing to pay for a share of that stock.
+
+Use four decimal places on time value of money factors unless otherwise specified. Approximations and minor differences because of rounding are acceptable. Ignore the effect of taxes. Assume that all percentages are annual rates and that compounding occurs annually unless indicated otherwise.
+
+a stream of periodic payments that is expected to continue indefinitely with no change in the amount paid or received
+a stream of periodic payments that is expected to continue indefinitely with growth of the amount paid or received in the future, usually by a fixed percentage
+a stream of periodic payments that is expected to continue indefinitely
+shares of ownership in a corporation that typically entitle the holder to a fixed dividend per share, if declared by the corporation, with priority over holders of that corporation’s common stock
+the minimum amount of return that an investor will accept on an investment given the level of risk involved

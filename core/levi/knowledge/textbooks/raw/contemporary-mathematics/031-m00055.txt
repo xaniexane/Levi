@@ -1,0 +1,1232 @@
+# m00055
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Addition and Subtraction in Base Systems
+
+Addition and Subtraction in Base Systems
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Add and subtract in bases 2–9 and 12.
+
+Identify errors in adding and subtracting in bases 2–9 and 12.
+
+Once we decide on a system for counting, we need to establish rules for combining the numbers we’re using. This begins with the rules for addition and subtraction. We are familiar with base 10 arithmetic, such as 2+5=7 or 3×5=15. How does that change if we instead use a different base? A larger base? A smaller one? In particular, computers use base 2 for all number representation. When your calculator adds or subtracts, multiplies or divides, it uses base 2. This is because the circuitry recognizes only two things, high current and low current, which means the system is uses only has two symbols. Which is what base 2 is.
+
+In this section, we use addition and subtraction in bases other than 10 by referencing the processes of base 10, but applied to a new base system.
+
+Addition in Bases Other Than Base 10
+
+Now that we understand what it means for numbers to be expressed in a base other than 10, we can look at arithmetic using other bases, starting with addition. When you think back to when you first learned addition, it is very likely you learned the addition table. Once you knew the addition table, you moved on to addition of numbers with more than one digit. The same process holds for addition in other bases. We begin with an addition table, and then move on to adding numbers with two or more digits.
+
+We worked with base 6 earlier, and have the numbers in base 6 up to 1006. Using that table of values, we can create the base 6 addition table.
+
+Here’s the beginning of the base 6 addition table:
+
++
+0
+1
+2
+3
+4
+5
+0
+0
+1
+2
+3
+4
+5
+1
+1
+2
+3
+4
+5
+?
+2
+2
+3
+4
+5
+?
+?
+3
+3
+4
+5
+?
+?
+?
+4
+4
+5
+?
+?
+?
+?
+5
+5
+?
+?
+?
+?
+?
+Many of the cells are not filled out. The ones filled in are values that never get past 5, which is the largest legal symbol in base 6, so they are acceptable symbols. But what do we do with 5 + 3 in base 6? We can’t represent the answer as “8” since “8” is not a symbol available to us. Let’s go back to the list of numbers we have for base 6.
+
+0
+1
+2
+3
+4
+5
+10
+11
+12
+13
+14
+15
+20
+21
+22
+23
+24
+25
+30
+31
+32
+33
+34
+35
+40
+41
+42
+43
+44
+45
+50
+51
+52
+53
+54
+55
+So, what is 5 + 1 equal to in base 6? Well, start at the 5, and jump ahead one step. You land on 10.
+
+This means that, in base 6, 5 + 1 = 10.
+
+So, what is 5 + 2 in base 6? Well, 5 + 2 = 5 + 1 + 1, so 10 + 1…jump one more space and you land on 11. So, 5 + 2 = 11 in base 6.
+
+And so it goes. Using that process, stepping one more along the list, we can fill in the remainder of the base 6 addition table ().
+
++
+0
+1
+2
+3
+4
+5
+0
+0
+1
+2
+3
+4
+5
+1
+1
+2
+3
+4
+10
+2
+2
+3
+4
+11
+3
+3
+4
+12
+4
+4
+13
+5
+14
+With this table, and with our understanding of “carrying the one,” we can then use the addition table to do addition in base 6 for numbers with two or more digits, using the same processes you learned for addition when you did it by hand.
+
+Adding in Base 6
+
+Calculate 2516 + 1336.
+Step 1: Let’s set up the addition using columns.
+
+2
+5
+1
++
+1
+3
+Step 2: Let’s do the one’s place first. According to the base 6 addition table (), 1 + 3 = 4.
+
+2
+5
+1
++
+1
+3
+Step 3: Now, we do the “tens” place (it’s really the sixes place). According to the base 6 addition table (), we have 5 + 3 = 12. So, like in base 10, we use the 2 and carry the 1.
+1
+2
+5
+1
++
+1
+3
+2
+Step 4: Now the “hundreds” place (really, thirty-sixes place). There, we have 1 + 2 + 1 = 3 + 1 = 4.
+
+1
+2
+5
+1
++
+1
+3
+4
+2
+4
+So, 2516 + 1336 = 4246.
+
+As you can see, the process is the same as when you learned base 10 addition, just a different symbol set.
+
+Creating an Addition Table for a Base Lower Than 10
+
+Create the addition table for base 7.
+
+Create the addition table for base 2.
+
+We begin with the table below.
+
+ +
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 0
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 1
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 2
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 3
+ 3
+ 4
+ 5
+ 6
+
+ 4
+ 4
+ 5
+ 6
+
+ 5
+ 5
+ 6
+
+ 6
+ 6
+
+ In base 7, the number that follows 6 is 10 (since we’ve run out of symbols!). So, 67 + 17 = 107. Once that is established, 67 + 27 will be two numbers past 6, which is 11 in base 7.
+
+ +
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 0
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 1
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 10
+
+ 2
+ 2
+ 3
+ 4
+ 5
+ 6
+ 
+ 11
+
+ 3
+ 3
+ 4
+ 5
+ 6
+
+ 4
+ 4
+ 5
+ 6
+
+ 5
+ 5
+ 6
+
+ 6
+ 6
+ 10
+ 11
+
+ Continuing, we can fill in the rows as we would in base 10, but being aware that we are working in base 7 ().
+
+ +
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 0
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+ 1
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 10
+
+ 2
+ 2
+ 3
+ 4
+ 5
+ 6
+ 10
+ 11
+
+ 3
+ 3
+ 4
+ 5
+ 6
+ 10
+ 11
+ 12
+
+ 4
+ 4
+ 5
+ 6
+ 10
+ 11
+ 12
+ 13
+
+ 5
+ 5
+ 6
+ 10
+ 11
+ 12
+ 13
+ 14
+
+ 6
+ 6
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+
+ Base 7 Addition Table
+
++
+0
+1
+2
+3
+4
+5
+6
+0
+0
+1
+2
+3
+4
+5
+6
+1
+1
+2
+3
+4
+5
+6
+2
+2
+3
+4
+5
+6
+3
+3
+4
+5
+6
+4
+4
+5
+6
+5
+5
+6
+6
+6
+In base 7, the number that follows 6 is 10 (since we’ve run out of symbols!). So, 67 + 17 = 107. Once that is established, 67 + 27 will be two numbers past 6, which is 11 in base 7.
+
++
+0
+1
+2
+3
+4
+5
+6
+0
+0
+1
+2
+3
+4
+5
+6
+1
+1
+2
+3
+4
+5
+10
+2
+2
+3
+4
+5
+11
+3
+3
+4
+5
+6
+4
+4
+5
+6
+5
+5
+6
+6
+11
+Continuing, we can fill in the rows as we would in base 10, but being aware that we are working in base 7 ().
+
++
+0
+1
+2
+3
+4
+5
+6
+0
+0
+1
+2
+3
+4
+5
+6
+1
+1
+2
+3
+4
+5
+6
+10
+2
+2
+3
+4
+5
+6
+10
+11
+3
+3
+4
+5
+6
+10
+11
+12
+4
+4
+5
+6
+10
+11
+12
+13
+5
+5
+6
+10
+11
+12
+13
+14
+6
+6
+10
+11
+12
+13
+14
+15
+We revisit base 2 here. Begin with the table:
+
+ +
+ 0
+ 1
+
+ 0
+ 0
+ 1
+
+ 1
+ 1
+
+ Base 2 Addition Table
+ 
+ In base 2, the number that follows 1 is 10 (since we’ve run out of symbols!). So, 12 + 12 = 102. The complete table for base two then is below.
+
+ +
+ 0
+ 1
+ 0
+ 0
+ 1
+ 1
+ 1
+ 10
+
+ This demonstrates that the rules necessary for base 2 addition are as small as possible: four rules.
+
++
+0
+1
+0
+0
+1
+1
+1
+In base 2, the number that follows 1 is 10 (since we’ve run out of symbols!). So, 12 + 12 = 102. The complete table for base two then is below.
+
+ +
+ 0
+ 1
+ 0
+ 0
+ 1
+ 1
+ 1
+ 10
+
+ This demonstrates that the rules necessary for base 2 addition are as small as possible: four rules.
+
++
+0
+1
+0
+0
+1
+1
+1
+10
+
+To summarize the creation of the addition tables for a given base, do the following.
+Step 1: Set up the table.
+Step 2: Fill in all the additions that use the “legal” symbols for the base. The diagonal that goes from upper left to lower right that is immediately next to the filled boxes all get the value 10, regardless of base.
+Step 3: Enter the values that are in the “teens.” This can all be done on one table without creating multiple copies of previously done work.
+
+Adding in Base 7
+
+Calculate 5367 + 4337.
+Step 1: Let’s set up the addition using columns.
+
+5
+3
+6
++
+4
+3
+Step 2: Let’s do the one’s place first. According to the base 7 addition table in the solution for , 6 + 3 = 12. We will carry the 1.
+1
+5
+3
+6
++
+4
+3
+Step 3: Now, we do the “tens” place (it’s really the sevens place). According to the base 7 addition table in the solution for , we have 1 + 3 + 3 = 10. So, like in base 10, we use the 0 and carry the 1.
+1
+5
+3
+6
++
+4
+3
+0
+Step 4: Now the “hundreds” place (really, forty-ninths place). There, we have 1 + 5 + 4 = 6 + 4 = 13.
+
+1
+5
+3
+6
++
+4
+3
+3
+0
+2
+So, 5367 + 3337 = 13027.
+
+As seen previously, when performing addition in another base, set up the problem exactly as you would for addition in base 10. At each step, check the addition table for the base. As in base 10 addition, move right to left, adding down the columns using the rules in the addition table. When necessary and just as in base 10, be sure to carry the 1.
+
+Creating an Addition Table for a Base Higher Than 10
+
+Create the addition table for base 12.
+Step 1: Recall, in base 12, the symbol set is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, and B. So, the addition table begins as shown below.
+
++
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+0
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+2
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+3
+3
+4
+5
+6
+7
+8
+9
+A
+B
+4
+4
+5
+6
+7
+8
+9
+A
+B
+5
+5
+6
+7
+8
+9
+A
+B
+6
+6
+7
+8
+9
+A
+B
+7
+7
+8
+9
+A
+B
+8
+8
+9
+A
+B
+9
+9
+A
+B
+A
+A
+B
+B
+Step 2: The diagonal immediately to the right of the filled in boxes is where the 10 goes for this base.
+
++
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+0
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+10
+2
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+10
+3
+3
+4
+5
+6
+7
+8
+9
+A
+B
+10
+4
+4
+5
+6
+7
+8
+9
+A
+B
+10
+5
+5
+6
+7
+8
+9
+A
+B
+10
+6
+6
+7
+8
+9
+A
+B
+10
+7
+7
+8
+9
+A
+B
+10
+8
+8
+9
+A
+B
+10
+9
+9
+A
+B
+10
+A
+A
+B
+10
+B
+B
+Step 3: Using the pattern we’re familiar with, and counting in base 12, we can fill in the other cells.
+
++
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+0
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+10
+2
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+10
+11
+3
+3
+4
+5
+6
+7
+8
+9
+A
+B
+10
+11
+12
+4
+4
+5
+6
+7
+8
+9
+A
+B
+10
+11
+12
+13
+5
+5
+6
+7
+8
+9
+A
+B
+10
+11
+12
+13
+14
+6
+6
+7
+8
+9
+A
+B
+10
+11
+12
+13
+14
+15
+7
+7
+8
+9
+A
+B
+10
+11
+12
+13
+14
+15
+16
+8
+8
+9
+A
+B
+10
+11
+12
+13
+14
+15
+16
+17
+9
+9
+A
+B
+10
+11
+12
+13
+14
+15
+16
+17
+18
+A
+A
+B
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+B
+B
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+1A
+Notice that the lower-right entry is 1A12, as this is the number one past 1912.
+
+Adding in Base 12
+
+Calculate 3A712 + 9BA12.
+Step 1: Using the process established in the earlier addition problem, set up the columns.
+
+3
+A
+7
++
+9
+B
+Step 2: Using the rules from the base 12 addition table in the solution for , and being careful to carry the 1 when necessary, we get the following:
+
+1
+1
+3
+A
+7
++
+9
+B
+1
+A
+5
+The ones that were carried are located over the columns.
+
+So, 3A712 + 9BA12= 11A512.
+
+Adding in Base 2
+
+We again return to base 2, the base used by computers. Calculate 10012 + 110112.
+Step 1: Using the process established in the earlier addition problem, set up the columns.
+
+1
+0
+0
+1
++
+1
+1
+0
+1
+Step 2: Using the rules from the base 2 addition table in the solution for , and being careful to carry the 1 when necessary (and shown at the top of the grid), we get the following:
+
+1
+1
+1
+1
+0
+0
+1
++
+1
+1
+0
+1
+1
+1
+0
+0
+1
+0
+Step 3: Calculate 10012 + 110112 = 1001002.
+
+So, 10012 + 110112 = 1001002.
+
+Subtraction in Bases Other Than Base 10
+Subtraction in bases other than base 10 follow the same processes as base 10 subtraction, but, as with addition, using the addition table for the base.
+
+Subtracting in Base 6
+
+Calculate 526 − 346.
+Step 1: Let’s set up the subtraction using columns.
+
+5
+2
+−
+3
+Step 2: Just as we might do in base 10, we borrow a 1 from the 5 for the ones digit.
+12
+−
+3
+Step 3: Referring to the base 6 addition table (), we see that 4 + 4 = 12, so 126 − 46 is 46.
+12
+−
+3
+Step 4: Now we deal with the “tens” (really, sixes) digit, 46 − 36, which equals 16 according to the base 6 addition table ().
+12
+−
+3
+1
+4
+So, 526 − 346 = 146.
+
+Subtracting in Base 12
+
+Calculate A1712 − 4B312.
+Step 1: Let’s set up the subtraction using columns.
+
+A
+1
+7
+−
+4
+B
+Step 2: Even in base 12, 712 − 312 = 412.
+
+A
+1
+7
+−
+4
+B
+Step 3: Moving to the “tens” digit, we have 112 − B12. Since 1 is less than B in base 12, we need to borrow a 1 from the A, just as we would for subtraction in base 10.
+11
+7
+−
+4
+B
+3
+Step 4: According to the base 12 addition table in the solution for , B12 + 212 = 1112, so 1112 − B12 = 212.
+11
+7
+−
+4
+B
+2
+Step 5: Finally, we deal with the “hundreds” digit. According to the base 12 addition table in the solution for , 412 + 512 = 912, so 912 − 412 = 512.
+A 9
+11
+7
+−
+4
+B
+5
+2
+4
+So, A1712 − 4B312 = 52412.
+
+Errors When Adding and Subtracting in Bases Other Than Base 10
+
+Errors when computing in bases other than 10 often involve applying base 10 rules or symbols to an arithmetic problem in a base other than base 10. The first type of error is using a symbol that is not in the symbol set for the base. For instance, if a 9 shows up when working in base 7, you know an error has happened because 9 is not a legal symbol in base 7.
+
+Identifying an Illegal Symbol in Arithmetic in a Base Other Than Base 10
+
+Explain the error in the following calculation:
+
+Since the problem is in base 6, the symbol set available is 0, 1, 2, 3, 4 and 5. The 9 in the answer is clearly not a legal symbol for base 6. Looking back to the base 6 addition table (), we see that 56+46=136. Correcting the error, we see the sum is 156+346=536.
+
+The second type of error is using a base 10 rule when the numbers are not in base 10. For instance, if you are working in base 13, then 913 + 913 is not 1813, even though 18 is the correct answer in base 10.
+
+Identifying an Arithmetic Error in a Base Other Than Base 10
+
+Explain the error in the following calculation, and correct the error:
+
+If this problem was a base 10 problem, this would be the correct answer. However, in base 12, 9 + 6 is not 15, but is instead 13. To correct this error, carefully use the addition table for base 12. If properly used, the correct answer would be 14312, as seen below:
+
+8
+9
++
+7
+6
+1
+4
+3
+
+Check Your Understanding
+
+Key Concepts
+
+Addition tables for bases other than 10 can be built using the same processes that are used in base 10, including using a number line.
+
+Addition in bases other than base 10 use the same processes as addition in base 10, but use the addition table for that base.
+
+Subtraction in bases other than base 10 use the same processes as subtraction in base 10, but use the addition table for that base.

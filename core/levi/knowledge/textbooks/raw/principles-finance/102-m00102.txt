@@ -1,0 +1,116 @@
+# m00102
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Alternative Methods
+
+Alternative Methods
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Calculate profitability index.
+
+Calculate discounted payback period.
+
+Calculate modified internal rate of return.
+
+Profitability Index (PI)
+
+The profitability index (PI) uses the same inputs as the NPV calculation, but it converts the results to a ratio. The numerator is the present value of the benefits of doing a project. The denominator is the present value of the cost of doing the project. The formula for calculating PI is
+
+For the embroidery machine project that Sam’s Sporting Goods is considering, the PI would be calculated as
+
+The numerator of the PI formula is the benefit of the project, and the denominator is the cost of the project. Thus, the PI is the benefit relative to the cost. When NPV is greater than zero, PI will be greater than 1. When NPV is less than zero, PI will be less than 1. Therefore, the decision criterion using the PI method is to accept a project if the PI is greater than 1 and reject a project if the PI is less than 1.
+
+Note that the NPV method and the PI method of project evaluation will always provide the same answer to the accept-or-reject question. The advantage of using the PI method is that it is helpful in ranking projects from best to worst. Issues that arise when ranking projects are discussed later in this chapter.
+
+Discounted Payback Period
+
+The payback period method provides a fast, simple approach to evaluating a project, but it suffers from the fact that it ignores the time value of money. The discounted payback period method addresses this flaw by discounting cash flows using the company’s cost of funds and then using these discounted values to determine the payback period.
+
+Consider Sam’s Sporting Goods’ decision regarding whether to purchase an embroidery machine. The expected cash flows and their values when discounted using the company’s 9% cost of funds are shown in . Earlier, we calculated the project’s payback period as four years; that is how long it would take the company to recover all of the cash that it would spend on the project. Remember, however, that the payback period does not consider the company’s cost of funds, so it underestimates the true breakeven time period.
+
+Year
+0
+1
+2
+3
+4
+5
+6
+Cash Flow ($)
+(16,000.00)
+2,000.00
+4,000.00
+5,000.00
+5,000.00
+5,000.00
+5,000.00
+Discounted Cash Flow ($)
+(16,000)
+1,834.86
+3,366.72
+3,860.92
+3,542.13
+3,249.66
+2,981.34
+Cumulative Discounted Cash Flow ($)
+(16,000.00)
+(14,165.14)
+(10,798.42)
+(6,937.50)
+(3,395.37)
+(145.72)
+2,835.62
+When the cash flows are appropriately discounted, the project still has not broken even by the end of year 5. The discounted payback period would be 5+145.722,981.34=5.05 years. This adjusted calculation addresses the payback period method’s flaw of not considering the time value of money, but managers are still confronted with the other disadvantages. No objective criterion for acceptance or rejection exists because of the lack of a theoretical underpinning for what is an acceptable payback period length. The discounted payback period ignores any cash flows after breakeven occurs; this is a serious drawback, especially when comparing mutually exclusive projects.
+
+Modified Internal Rate of Return (MIRR)
+
+Financial analysts have developed an alternative evaluation technique that is similar to the IRR but modified in an attempt to address some of the weakness of the IRR method. This modified internal rate of return (MIRR) is calculated using the following steps:
+
+Find the present value of all of the cash outflows using the firm’s cost of attracting capital as the discount rate.
+
+Find the future value of all cash inflows using the firm’s cost of attracting capital as the discount rate. All cash inflows are compounded to the point in time at which the last cash inflow will be received. The sum of the future value of cash inflows is known as the project terminal value.
+
+Compute the yield that sets the future value of the inflows equal to the present value of the outflows. This yield is the modified internal rate of return.
+
+For our embroidery machine project, the MIRR would be calculated as shown in :
+
+Year
+0
+1
+2
+3
+4
+5
+6
+Cash Flow ($)
+(16,000.00)
+2,000.00
+4,000.00
+5,000.00
+5,000.00
+5,000.00
+5,000.00
+3,077.25
+5,646.33
+6,475.15
+5,940.50
+$31,595.22
+The only cash outflow is the $16,000 at time period 0.
+
+The future value of each of the six expected cash inflows is calculated using the company’s 9% cost of attracting capital. Each of the cash flows is translated to its value in time period 6, the time period of the final cash inflow. The sum of the future value of these six cash flows is $31,595.22. Thus, the terminal value is $31,595.22
+
+The interest rate that equates the present value of the outflows, $16,000, to the terminal value of $31,595.22 six years later is found using the formula
+
+The MIRR solves the reinvestment rate assumption problem of the IRR method because all cash flows are compounded at the cost of capital. In addition, solving for MIRR will result in only one solution, unlike the IRR, which may have multiple mathematical solutions. However, the MIRR method, like the IRR method, suffers from the limitation that it does not distinguish between large-scale and small-scale projects. Because of this limitation, the MIRR cannot be used to rank projects; it can only be used to make accept-or-reject decisions.
+
+The discounted payback period uses the time value of money to discount future cash flows to see how long it will be before the initial investment of a project is recovered. MIRR provides a variation on IRR in which all cash flows are compounded using the cost of capital, resolving the reinvestment rate assumption problem of the IRR method; unlike IRR, which may have multiple mathematical solutions, MIRR will result in one solution. The profitability index is calculated as the NPV of the project divided by the initial cost of the project.
+
+the length of time it will take for the present value of the future cash inflows of a project to equal the initial cost of the investment
+the yield that sets the future value of the cash inflows of a project equal to the present value of the cash outflows of the project
+the present value of cash inflows divided by the present value of cash outflows

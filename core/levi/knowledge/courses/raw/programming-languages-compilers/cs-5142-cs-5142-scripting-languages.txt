@@ -1,0 +1,177 @@
+# CS 5142: Scripting Languages
+# Cornell University
+# source: http://www.cs.cornell.edu/courses/CS5142/2013fa/
+
+Scripting Languages (CS 5142) Fall 2013
+Scripting Languages
+CS 5142, Fall 2013
+General information /
+Course Description /
+Schedule /
+Grading /
+See also
+General Information
+Lecture:
+MWF 12:20-1:10pm, Olin 245
+Instructor:
+Robert Soulé ,
+soule@cs.cornell.edu , 4154 Upson Hall
+Instructor office hours:
+Mondays 1:10pm - 2:10pm (after class).
+Assistants:
+Ozan Irsoy ( oirsoy@cs.cornell.edu ),
+Theodoros Gkountouvas ( tg294@cornell.edu )
+Piazza:
+https://piazza.com/cornell/fall2013/cs5142/home
+CMS:
+http://cms.csuglab.cornell.edu/
+Course Description
+Perl, PHP, JavaScript, VisualBasic -- they are often-requested skills for
+employment, but most of us do not have the time to find out what they are all
+about. In this course, you learn how to use scripting languages for rapid
+prototyping, web programming, data processing, and application
+extension. Besides covering traditional programming languages concepts as they
+apply to scripting (e.g., dynamic typing and scoping), this course looks at new
+concepts rarely found in traditional languages (e.g., string interpolation,
+hashes, and polylingual code). Through a series of small projects, you use
+different languages to achieve programming tasks that highlight the strengths
+and weaknesses of scripting. As a side effect, you practice teaching yourself
+new languages.
+Syllabus
+Fundamentals : interpreters, dynamic typing, dynamic
+scoping (Perl, VBA).
+Data processing : regular expressions, string
+interpolation, hash tables (Perl), XML and DOM (JavaScript).
+Web programming : server (PHP), client (JavaScript),
+databases, AJAX, security.
+Application extension : Automating tasks in large systems
+(VBA).
+Other languages : Brief overview of Python, Bash (shell),
+Ruby.
+Recommended Books
+There is no official textbook for this course. However, here are some useful resources:
+Programming Language Pragmatics , 3rd edition.
+Michael Scott.
+ISBN 0123745144, Morgan Kaufmann, 2009.
+Programming Perl , 4th edition.
+Larry Wall, Tom Christiansen, and Jon Orwant.
+ISBN 0-596-00492-3, O'Reilly, 2012.
+Programming PHP , 3rd edition.
+Rasmus Lerdorf, Kevin Tatroe, and Peter MacIntyre.
+ISBN 1449392776, O'Reilly, 2013.
+JavaScript: The Definitive Guide , 6th edition.
+David Flanagan.
+ISBN 0-596-80552-7, O'Reilly, 2011.
+Mastering VBA for Office 2010 , 2nd edition.
+Richard Mansfield.
+ISBN 0470634006, Sybex, 2010.
+Prerequisites
+The course is designed to be relatively self-contained. You need to be
+familiar with some existing C-like language (one of C, C++, Java, or
+C#, to name a few). But you do not need prior knowledge of either web
+design or scripting languages for this course. As long as you have a
+basic understanding of computer science, you should be able to pick up
+the new languages in the class.
+Grading
+Grades will be calculated to
+25% from homeworks,
+11% from prelim1,
+19% from prelim2, and
+45% from the final exam.
+Homeworks are assigned each week on Thursday, and
+each homework is due one week later on Friday at 6pm. This
+is a strict deadline. Homeworks involve both conceptual
+questions and hands-on programming.
+Prelims are 35 minutes long. The
+prelims focus on conceptual questions. Prelims are shorter
+than the final exam, but similar in style.
+Academic integrity
+Please carefully read the the university and department's academic integrity policies:
+Cornell University Code of Academic Integrity
+Computer Science Department Code of Academic Integrity
+Explanation of AI Proceedings
+I encourage you to collaborate on homework assignments. But you
+must write up and turn in your own answers. Also, you
+must clearly indicate who you collaborated with.
+During prelims and the final exam, you must not use any
+reference material, and you must not communicate with your
+fellow students.
+If I detect any incidents of cheating, I will report them
+immediately to the department.
+Assignment deadlines
+The policy for late assignments is as follows:
+If you submit at least 1 minute late, but at most 3 hours
+late, you receive 50% of the points for that homework.
+Otherwise, late homeworks are only acceptable if the
+lateness is caused by circumstances beyond your control,
+such as illness or a missed flight.
+In this case, you only get the points for the homework if
+you provide official documentation, such as a doctor's
+certificate, for the reason why your homework is late.
+Tentative Schedule
+Date Lecture topic Homework Quiz
+08/28/2013 Introduction
+08/30/2013 End user programming (VBA)
+hw1
+09/02/2013 No class. Happy Labor Day.
+09/04/2013 Objects, properties, call-backs I
+09/06/2013 Objects, properties, call-backs II
+hw2
+09/09/2013 Textual data processing (Perl) I
+09/11/2013 Textual data processing (Perl) II
+09/13/2013 Guest Lecture: Dr. Thomas Ball ,TouchDevelop
+hw3
+09/16/2013 Regular expressions
+09/18/2013 Context, objects, scripting as glue I
+09/20/2013 Context, objects, scripting as glue II
+hw4
+09/23/2013 Bash
+09/25/2013 Prelim Review
+09/27/2013 Prelim 1 (in class)
+09/30/2013 Server-side scripting (PHP) I
+10/02/2013 Server-side scripting (PHP) II
+10/04/2013 Server-side scripting (PHP) III
+hw5
+10/07/2013 Client-side scripting (JavaScript) I
+10/09/2013 Client-side scripting (JavaScript) II
+10/11/2013 JQuery
+hw6
+10/14/2013 No Class (Fall Break)
+10/16/2013 Web applications and databases I
+10/18/2013 Web applications and databases II
+hw7
+10/21/2013 Server-side
+Javascript I
+10/23/2013 Server-side
+Javascript II
+10/25/2013 Ruby I
+hw8
+10/28/2013 Ruby II
+10/30/2013 Prelim Review
+11/01/2013 Prelim 2 (in class)
+11/04/2013 Python
+11/06/2013 CFG, Parsing
+parser.py
+11/08/2013 Python II
+hw9
+11/11/2013 TouchDevelop
+Tutorial , Basic Abstractions
+11/13/2013 TouchDevelop Boxes and Pages
+11/15/2013 TouchDevelop Build , TypeScript
+hw10
+11/18/2013 Security
+11/20/2013 Security (Guest Lecture: Owen Arden )
+11/22/2013 Security (Guest Lecture: Prof. Andrew Myers )
+hw11
+11/25/2013 Debugging
+11/27/2013 No class (Thanksgiving)
+11/29/2013 No class (Thanksgiving)
+hw12 (for fun)
+12/02/2013 OCaml
+12/04/2013 Final Review
+12/06/2013 Final Review
+12/17/2013 Final Exam at 7pm, Olin Hall 165
+See also
+This material is based on a
+course
+designed by Dr. Martin Hirzel at New York University.

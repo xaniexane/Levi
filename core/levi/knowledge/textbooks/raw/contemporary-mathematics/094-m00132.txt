@@ -1,0 +1,293 @@
+# m00132
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Right Triangle Trigonometry
+
+Right Triangle Trigonometry
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Apply the Pythagorean Theorem to find the missing sides of a right triangle.
+
+Apply the 30∘-60∘-90∘ and 45∘-45∘-90∘ right triangle relationships to find the missing sides of a triangle.
+
+Apply trigonometric ratios to find missing parts of a right triangle.
+
+Solve application problems involving trigonometric ratios.
+
+This is another excerpt from Raphael’s The School of Athens. The man writing in the book represents Pythagoras, the namesake of one of the most widely used formulas in geometry, engineering, architecture, and many other fields, the Pythagorean Theorem. However, there is evidence that the theorem was known as early as 1900–1100 BC by the Babylonians. The Pythagorean Theorem is a formula used for finding the lengths of the sides of right triangles.
+
+Born in Greece, Pythagoras lived from 569–500 BC. He initiated a cult-like group called the Pythagoreans, which was a secret society composed of mathematicians, philosophers, and musicians. Pythagoras believed that everything in the world could be explained through numbers. Besides the Pythagorean Theorem, Pythagoras and his followers are credited with the discovery of irrational numbers, the musical scale, the relationship between music and mathematics, and many other concepts that left an immeasurable influence on future mathematicians and scientists.
+
+The focus of this section is on right triangles. We will look at how the Pythagorean Theorem is used to find the unknown sides of a right triangle, and we will also study the special triangles, those with set ratios between the lengths of sides. By ratios we mean the relationship of one side to another side. When you think about ratios, you should think about fractions. A fraction is a ratio, the ratio of the numerator to the denominator. Finally, we will preview trigonometry. We will learn about the basic trigonometric functions, sine, cosine and tangent, and how they are used to find not only unknown sides but unknown angles, as well, with little information.
+
+Pythagorean Theorem
+
+The Pythagorean Theorem is used to find unknown sides of right triangles. The theorem states that the sum of the squares of the two legs of a right triangle equals the square of the hypotenuse (the longest side of the right triangle).
+
+The Pythagorean Theorem states
+ a2+b2=c2
+ where a and b are two sides (legs) of a right triangle and c is the hypotenuse, as shown in .
+
+For example, given that side a=6, and side b=8, we can find the measure of side c using the Pythagorean Theorem. Thus,
+ a2+b2=c2(6)2+(8)2=c236+64=c2100=c2100=c210=c
+
+Using the Pythagorean Theorem
+
+Find the length of the missing side of the triangle ().
+
+Using the Pythagorean Theorem, we have
+ (6)2+b2=(14)236+b2=196b2=196−36b2=160b=±160=410=12.65
+
+When we take the square root of a number, the answer is usually both the positive and negative root. However, lengths cannot be negative, which is why we only consider the positive root.
+
+Distance
+
+The applications of the Pythagorean Theorem are countless, but one especially useful application is that of distance. In fact, the distance formula stems directly from the theorem. It works like this:
+
+In , the problem is to find the distance between the points (−3,−1) and (3,2). We call the length from point (−3,−1) to point (3,−1) side a, and the length from point (3,−1) to point (3,2) side b. To find side c, we use the distance formula and we will explain it relative to the Pythagorean Theorem. The distance formula is d=(x2−x1)2+(y2−y1)2, such that (x2−x1) is a substitute for a in the Pythagorean Theorem and is equal to 3−(−3)=6; and (y2−y1) is a substitute for b in the Pythagorean Theorem and is equal to 2−(−1)=3. When we plug in these numbers to the distance formula, we have
+ d=(3−(−3))2+(2−(−1))2=(6)2+(3)2=36+9=45=35=6.7
+
+Thus, d=c, the hypotenuse, in the Pythagorean Theorem.
+
+Calculating Distance Using the Distance Formula
+
+You live on the corner of First Street and Maple Avenue, and work at Star Enterprises on Tenth Street and Elm Drive (). You want to calculate how far you walk to work every day and how it compares to the actual distance (as the crow flies). Each block measures 200 ft by 200 ft.
+
+You travel 7 blocks south and 9 blocks west. If each block measures 200 ft by 200 ft, then 9(200)+7(200)=1,800ft+1,400ft=3,200ft.
+
+As the crow flies, use the distance formula. We have
+ d=(1,800−0)2+(1,400−0)2=3,240,000+1,960,000=5,200,000=2280.4ft
+
+Calculating Distance with the Pythagorean Theorem
+
+The city has specific building codes for wheelchair ramps. Every vertical rise of 1 in requires that the horizontal length be 12 inches. You are constructing a ramp at your business. The plan is to make the ramp 130 inches in horizontal length and the slanted distance will measure approximately 132.4 inches (). What should the vertical height be?
+
+The Pythagorean Theorem states that the horizontal length of the base of the ramp, side a, is 130 in. The length of c, or the length of the hypotenuse, is 132.4 in. The length of the height of the triangle is side b.
+
+Then, by the Pythagorean Theorem, we have:
+ a2+b2=c2(130)2+b2=(132.4)216,900+b2=17,529.76b2=17,529.76−16,900b2=629.8b=629.8=25
+
+If you construct the ramp with a 25 in vertical rise, will it fulfill the building code? If not, what will have to change?
+
+The building code states 12 in of horizontal length for each 1 in of vertical rise. The vertical rise is 25 in, which means that the horizontal length has to be 12(25)=300in. So, no, this will not pass the code. If you must keep the vertical rise at 25 in, what will the other dimensions have to be? Since we need a minimum of 300 in for the horizontal length:
+ (300)2+(25)2=c290,625=c290,625=c=301in
+
+The new ramp will look like .
+
+30∘-60∘-90∘ Triangles
+
+In geometry, as in all fields of mathematics, there are always special rules for special circumstances. An example is the perfect square rule in algebra. When expanding an expression like (2x+5y)2, we do not have to expand it the long way:
+ (2x+5y)2=(2x+5y)(2x+5y)=(2x)2+10xy+10xy+(5y)2=4x2+20xy+25y2
+
+If we know the perfect square formula, given as
+ (a+b)2=a2+2ab+b2,
+ we can skip the middle step and just start writing down the answer. This may seem trivial with problems like (a+b)2. However, what if you have a problem like (23+331.8c3)2? That is a different story. Nevertheless, we use the same perfect square formula. The same idea applies in geometry. There are special formulas and procedures to apply in certain types of problems. What is needed is to remember the formula and remember the kind of problems that fit. Sometimes we believe that because a formula is labeled special, we will rarely have use for it. That assumption is incorrect. So, let us identify the 30∘-60∘-90∘ triangle and find out why it is special. See .
+
+We see that the shortest side is opposite the smallest angle, and the longest side, the hypotenuse, will always be opposite the right angle. There is a set ratio of one side to another side for the 30∘-60∘-90∘ triangle given as 1:3:2, or x:x3:2x. Thus, you only need to know the length of one side to find the other two sides in a 30∘-60∘-90∘ triangle.
+
+Finding Missing Lengths in a 30∘-60∘-90∘ Triangle
+
+Find the measures of the missing lengths of the triangle ().
+
+We can see that this is a 30∘-60∘-90∘ triangle because we have a right angle and a 30∘ angle. The remaining angle, therefore, must equal 60∘. Because this is a special triangle, we have the ratios of the sides to help us identify the missing lengths. Side a is the shortest side, as it is opposite the smallest angle 30∘, and we can substitute a=x. The ratios are x:x3:2x. We have the hypotenuse equaling 10, which corresponds to side c, and side c is equal to 2x. Now, we must solve for x:
+ 2x=10x=5
+
+Side b is equal to x3 or 53. The lengths are 5,53,10.
+
+Applying 30∘-60∘-90∘ Triangle to the Real World
+
+A city worker leans a 40-foot ladder up against a building at a 30∘ angle to the ground (). How far up the building does the ladder reach?
+
+We have a 30∘-60∘-90∘ triangle, and the hypotenuse is 40 ft. This length is equal to 2x, where x is the shortest side. If 2x=40, then x=20. The ladder is leaning on the wall 20 ft up from the ground.
+
+45∘-45∘-90∘ Triangles
+
+The 45∘-45∘-90∘ triangle is another special triangle such that with the measure of one side we can find the measures of all the sides. The two angles adjacent to the 90∘ angle are equal, and each measures 45∘. If two angles are equal, so are their opposite sides. The ratio among sides is 1:1:2, or x:x:x2, as shown in .
+
+Finding Missing Lengths of a 45∘-45∘-90∘ Triangle
+
+Find the measures of the unknown sides in the triangle ().
+
+Because we have a 45∘-45∘-90∘ triangle, we know that the two legs are equal in length and the hypotenuse is a product of one of the legs and 2. One leg measures 3, so the other leg, a, measures 3. Remember the ratio of x:x:x2. Then, the hypotenuse, c, equals 32.
+
+Trigonometry Functions
+
+Trigonometry developed around 200 BC from a need to determine distances and to calculate the measures of angles in the fields of astronomy and surveying. Trigonometry is about the relationships (or ratios) of angle measurements to side lengths in primarily right triangles. However, trigonometry is useful in calculating missing side lengths and angles in other triangles and many applications.
+NOTE: You will need either a scientific calculator or a graphing calculator for this section. It must have the capability to calculate trigonometric functions and express angles in degrees.
+
+Trigonometry is based on three functions. We title these functions using the following abbreviations:
+ 
+ sin=sine
+ cos=cosine
+ tan=tangent
+sin=sine
+cos=cosine
+tan=tangent
+
+Letting r=x2+y2, which is the hypotenuse of a right triangle, we have . The functions are given in terms of x, y, and r, and in terms of sides relative to the angle, like opposite, adjacent, and the hypotenuse.
+tanθ=yx=oppadj
+We will be applying the sine function, cosine function, and tangent function to find side lengths and angle measurements for triangles we cannot solve using any of the techniques we have studied to this point. In , we have an illustration mainly to identify r and the sides labeled x and y.
+
+An angle θ sweeps out in a counterclockwise direction from the positive x-axis and stops when the angle reaches the desired measurement. That ray extending from the origin that marks θ∘ is called the terminal side because that is where the angle terminates. Regardless of the information given in the triangle, we can find all missing sides and angles using the trigonometric functions. For example, in , we will solve for the missing sides.
+
+Let’s use the trigonometric functions to find the sides x and y. As long as your calculator mode is set to degrees, you do not have to enter the degree symbol. First, let’s solve for y.
+
+We have sinθ=yr, and θ=60∘. Then,
+ sin60∘=y22sin60∘=y1.732=y3=y
+
+Next, let’s find x. This is the cosine function. We have cosθ=xr. Then,
+ cos60∘=x22cos60∘=x=1
+
+Now we have all sides, 1,3,2. You can also check the sides using the 30∘-60∘-90∘ ratio of 1:3:2. is a list of common angles, which you should find helpful.
+cos90∘=0
+Using Trigonometric Functions
+
+Find the lengths of the missing sides for the triangle ().
+
+We have a 55∘ angle, and the length of the triangle on the x-axis is 6 units.
+Step 1: To find the length of r, we can use the cosine function, as cosθ=xr. We manipulate this equation a bit to solve for r:
+ cos(55∘)=6rrcos(55∘)=6r=6cos(55∘)r=60.5736=10.46
+Step 2: We can use the Pythagorean Theorem to find the length of y. Prove that your answers are correct by using other trigonometric ratios:
+ 62+y2=10.462y2=109.4−36y=8.57
+Step 3: Now that we have y, we can use the sine function to prove that r is correct. We have sinθ=yr.
+ sin(55∘)=8.57rrsin(55∘)=8.57r=8.57sin(55∘)=8.570.819=10.46
+
+To find angle measurements when we have two side measurements, we use the inverse trigonometric functions symbolized as sin−1, cos−1, or tan−1. The –1 looks like an exponent, but it means inverse. For example, in the previous example, we had x=6 and r=10.46. To find what angle has these values, enter the values for the inverse cosine function cos−1(xr) in your calculator:
+ cos−1(610.46)=55∘.
+
+You can also use the inverse sine function and enter the values of sin−1(yr) in your calculator given y=8.57 and r=10.46. We have
+ sin−1(8.5710.46)=55∘.
+
+Finally, we can also use the inverse tangent function. Recall tanθ=yx. We have
+ tan−1(8.576)=55∘.
+
+Solving for Lengths in a Right Triangle
+
+Solve for the lengths of a right triangle in which θ=30∘ and r=6 ().
+Step 1: To find side a, we use the sine function:
+ sin30∘=a66sin30∘=a=3
+Step 2: To find b, we use the cosine function:
+ cos30∘=b66cos30∘=b=5.196
+Step 3: Since this is a 30∘-60∘-90∘ triangle and side b should equal x3, if we input 3 for x, we have b=33. Put this in your calculator and you will get 33=5.196.
+
+Finding Altitude
+
+A small plane takes off from an airport at an angle of 31.3∘ to the ground. About two-thirds of a mile (3,520 ft) from the airport is an 1,100-ft peak in the flight path of the plane (). If the plane continues that angle of ascent, find its altitude when it is above the peak, and how far it will be above the peak.
+
+To solve this problem, we use the tangent function:
+ tan31.3∘=x3,5203,520tan31.3∘=2,140
+
+The plane’s altitude when passing over the peak is 2,140 ft, and it is 1,040 ft above the peak.
+
+Finding Unknown Sides and Angles
+
+Suppose you have two known sides, but do not know the measure of any angles except for the right angle (). Find the measure of the unknown angles and the third side.
+Step 1: We can find the third side using the Pythagorean Theorem:
+ 62+42=c252=c2213=c
+
+Now, we have all three sides.
+Step 2: To find θ, we will first find sinθ.
+ sinθ=opphyp=4213=213.
+
+The angle θ is the angle whose sine is 213.
+Step 3: To find θ, we use the inverse sine function:
+ θ=sin−1(213)=33.7∘
+Step 4: To find the last angle, we just subtract: 180∘−90∘−33.7∘=56.3∘.
+
+Angle of Elevation and Angle of Depression
+
+Other problems that involve trigonometric functions include calculating the angle of elevation and the angle of depression. These are very common applications in everyday life. The angle of elevation is the angle formed by a horizontal line and the line of sight from an observer to some object at a higher level. The angle of depression is the angle formed by a horizontal line and the line of sight from an observer to an object at a lower level.
+
+Finding the Angle of Elevation
+
+A guy wire of length 110 meters runs from the top of an antenna to the ground (). If the angle of elevation of an observer to the top of the antenna is 43∘, how high is the antenna?
+
+We are looking for the height of the tower. This corresponds to the y-value, so we will use the sine function:
+ sin43∘=y110110sin43∘=y75=y
+
+The tower is 75 m high.
+
+Finding Angle of Elevation
+
+You are sitting on the grass flying a kite on a 50-foot string (). The angle of elevation is 60∘. How high above the ground is the kite?
+
+We can solve this using the sine function, sinθ=opphyp.
+ sin60∘=x5050sin60∘=x=43.3ft
+
+Pythagoras and the Pythagoreans
+
+The Pythagorean Theorem is so widely used that most people assume that Pythagoras (570–490 BC) discovered it. The philosopher and mathematician uncovered evidence of the right triangle concepts in the teachings of the Babylonians dating around 1900 BC. However, it was Pythagoras who found countless applications of the theorem leading to advances in geometry, architecture, astronomy, and engineering.
+
+Among his accolades, Pythagoras founded a school for the study of mathematics and music. Students were called the Pythagoreans, and the school’s teachings could be classified as a religious indoctrination just as much as an academic experience. Pythagoras believed that spirituality and science coexist, that the intellectual mind is superior to the senses, and that intuition should be honored over observation.
+
+Pythagoras was convinced that the universe could be defined by numbers, and that the natural world was based on mathematics. His primary belief was All is Number. He even attributed certain qualities to certain numbers, such as the number 8 represented justice and the number 7 represented wisdom. There was a quasi-mythology that surrounded Pythagoras. His followers thought that he was more of a spiritual being, a sort of mystic that was all-knowing and could travel through time and space. Some believed that Pythagoras had mystical powers, although these beliefs were never substantiated.
+
+Pythagoras and his followers contributed more ideas to the field of mathematics, music, and astronomy besides the Pythagorean Theorem. The Pythagoreans are credited with the discovery of irrational numbers and of proving that the morning star was the planet Venus and not a star at all. They are also credited with the discovery of the musical scale and that different strings made different sounds based on their length. Some other concepts attributed to the Pythagoreans include the properties relating to triangles other than the right triangle, one of which is that the sum of the interior angles of a triangle equals 180∘. These geometric principles, proposed by the Pythagoreans, were proven 200 years later by Euclid.
+
+A Visualization of the Pythagorean Theorem
+
+In , which is one of the more popular visualizations of the Pythagorean Theorem, we see that square a is attached to side a; square b is attached to side b; and the largest square, square c, is attached to side c. Side a measures 3 cm in length, side b measures 4 cm in length, and side c measures 5 cm in length. By definition, the area of square a measures 9 square units, the area of square b measures 16 square units, and the area of square c measures 25 square units. Substitute the values given for the areas of the three squares into the Pythagorean Theorem and we have
+ a2+b2=c232+42=529+16=25
+
+Thus, the sum of the squares of the two legs of a right triangle is equal to the square of the hypotenuse, as stated in the Pythagorean Theorem.
+
+Check Your Understanding
+
+Key Terms
+
+right triangle
+
+sine
+
+cosine
+
+tangent
+
+Key Concepts
+
+The Pythagorean Theorem is applied to right triangles and is used to find the measure of the legs and the hypotenuse according the formula a2+b2=c2, where c is the hypotenuse.
+
+To find the measure of the sides of a special angle, such as a 30∘-60∘-90∘ triangle, use the ratio x:x3:2x, where each of the three sides is associated with the opposite angle and 2x is associated with the hypotenuse, opposite the 90∘ angle.
+
+To find the measure of the sides of the second special triangle, the 45∘-45∘-90∘ triangle, use the ratio x:x:x2, where each of the three sides is associated with the opposite angle and x2 is associated with the hypotenuse, opposite the 90∘ angle.
+
+The primary trigonometric functions are sinθ=opphyp, cosθ=adjhyp, and tanθ=oppadj.
+
+Trigonometric functions can be used to find either the length of a side or the measure of an angle in a right triangle, and in applications such as the angle of elevation or the angle of depression formed using right triangles.
+
+Formula
+
+The Pythagorean Theorem states
+ a2+b2=c2
+ where a and b are two sides (legs) of a right triangle and c is the hypotenuse.
+
+Projects
+
+One of the reasons so many formulas in geometry were discovered was because of the importance in finding measurements of lengths, areas, perimeter, and angles. Find at least five examples of how geometry can be used in practical applications today.
+
+Who were the Pythagoreans? Why did this society exist? Explore what they did and discuss some of their beliefs.
+
+Chapter Review
+Points, Lines, and Planes
+
+Angles
+
+Triangles
+
+Polygons, Perimeter, and Circumference
+
+Tessellations
+
+Area
+
+Volume and Surface Area
+
+Right Triangle Trigonometry
+
+Chapter Test

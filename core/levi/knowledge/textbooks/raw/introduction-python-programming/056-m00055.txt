@@ -1,0 +1,79 @@
+# m00055
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+The help function
+
+The help function
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use the help() function to explore a module's contents.
+
+Identify portions of code included in the documentation.
+
+Colors on websites
+
+This section introduces an example module for working with HTML colors. HyperText Markup Language (HTML) is used to design websites and graphical applications. Web browsers like Chrome and Safari read HTML and display the corresponding contents. Ex: The HTML code <p style="color: Red">Look out!</p> represents a paragraph with red text.
+
+HTML defines 140 standard color names. Additional colors can be specified using a hexadecimal format: #RRGGBB. The digits RR, GG, and BB represent the red, green, and blue components of the color. Ex: #DC143C is 220 red + 20 green + 60 blue, which is the color Crimson.
+
+Red, green, and blue values range from 0 to 255 (or 00 to FF in hexadecimal). Lower values specify darker colors, and higher values specify lighter colors. Ex: #008000 is the color Green, and #00FF00 is the color Lime.
+
+HTML color codes
+
+HTML color codes
+
+Example colors module
+
+A module for working with HTML color codes would be helpful to graphic designers and web developers. The following Python code is in a file named colors.py.
+
+Line 1 is the docstring for the module.
+
+Lines 3–16 assign variables for frequently used colors.
+
+Lines 18–24 define a function to be used within the module.
+
+Lines 26–45 define functions to be used in other modules.
+
+Note: The tohex() and torgb() functions use Python features (string formatting and slicing) described later in the book. For now, the documentation and comments are more important than the implementation details.
+
+The colors module
+
+Module documentation
+
+The built-in help() function provides a summary of a module's functions and data. Calling help(module_name) in a shell is a convenient way to learn about a module.
+
+Output of help(colors) in a shell
+
+The documentation below is automatically generated from the docstrings in colors.py.
+
+The help() function
+
+Help on modules
+
+The random and statistics modules are useful for running scientific experiments. You can become familiar with these two modules by skimming their documentation.
+
+Open a Python shell on your computer, or use the one at python.org/shell. Type the following lines, one at a time, into the shell.
+import random
+help(random)
+import statistics
+help(statistics)
+
+Many shell environments, including the one on python.org, display the output of help() one page at a time. Use the navigation keys on the keyboard (up/down arrows, page up/down, home/end) to read the documentation. When you are finished reading, press the Q key ("quit") to return to the Python shell.
+
+Help on functions
+
+The help() function can be called on specific functions in a module. Open a Python shell on your computer, or use the one at python.org/shell. Type the following lines, one at a time, into the shell.
+import random
+help(random.randint)
+help(random.choice)
+import statistics
+help(statistics.median)
+help(statistics.mode)
+
+Remember to use the navigation keys on the keyboard, and press the Q key ("quit") to return to the Python shell.

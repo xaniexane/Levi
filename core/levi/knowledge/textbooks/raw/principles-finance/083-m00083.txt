@@ -1,0 +1,203 @@
+# m00083
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Data Visualization and Graphical Displays
+
+Data Visualization and Graphical Displays
+
+By the end of this section, you will be able to:
+
+Determine appropriate graphs to use for various types of data.
+
+Create and interpret univariate graphs such as bar graphs and histograms.
+
+Create and interpret bivariate graphs such as time series graphs and scatter plot graphs.
+
+Graphing Univariate Data
+Data visualization refers to the use of graphical displays to summarize data to help to interpret patterns and trends in the data. Univariate data refers to observations recorded for a single characteristic or attribute, such as salaries or blood pressure measurements. When graphing univariate data, we can choose from among several types of graphs, such as bar graphs, time series graphs, and so on.
+
+The most effective type of graph to use for a certain data set will depend on the nature of the data and the purpose of the graph. For example, a time series graph is typically used to show how a measurement is changing over time and to identify patterns or trends over time.
+
+Below are some examples of typical applications for various graphs and displays.
+
+Graphs used to show the distribution of data:
+
+Bar chart: used to show frequency or relative frequency distributions for categorical data
+
+Histogram: used to show frequency or relative frequency distributions for continuous data
+
+Graphs used to show relationships between data points:
+
+Time series graph: used to show measurement data plotted against time, where time is displayed on the horizontal axis
+
+Scatter plot: used to show the relationship between a dependent variable and an independent variable
+
+Bar Graphs
+
+A bar graph consists of bars that are separated from each other and compare percentages. The bars can be rectangles, or they can be rectangular boxes (used in three-dimensional plots), and they can be vertical or horizontal. The bar graph shown in the example below has age groups represented on the x-axis and proportions on the y-axis.
+
+By the end of 2021, a certain social media site had over 146 million users in the United States. shows three age groups, the number of users in each age group, and the proportion (%) of users in each age group. A bar graph using this data is shown in .
+
+Data for Bar Graph of Age Groups
+
+Age Groups
+Number of Site Users
+Percent of Site Users
+13–25
+65,082,280
+45
+26–44
+53,300,200
+36
+45–64
+27,885,100
+19
+Bar Graph of Age Groups
+
+Histograms
+
+A histogram is a bar graph that is used for continuous numeric data, such as salaries, blood pressures, heights, and so on. One advantage of a histogram is that it can readily display large data sets. A rule of thumb is to use a histogram when the data set consists of 100 values or more.
+
+A histogram consists of contiguous (adjoining) boxes. It has both a horizontal axis and a vertical axis. The horizontal axis is labeled with what the data represents (for instance, distance from your home to school). The vertical axis is labeled either Frequency or Relative Frequency (or Percent Frequency or Probability). The graph will have the same shape regardless of the label on the vertical axis. A histogram, like a stem-and-leaf plot, can give you the shape of the data, the center, and the spread of the data.
+
+The relative frequency is equal to the frequency of an observed data value divided by the total number of data values in the sample. Remember, frequency is defined as the number of times a solution occurs. Relative frequency is calculated using the formula
+
+where f = frequency, n = the total number of data values (or the sum of the individual frequencies), and RF = relative frequency.
+
+To construct a histogram, first decide how many bars or intervals, also called classes, will represent the data. Many histograms consist of 5 to 15 bars or classes for clarity. The number of bars needs to be chosen. Choose a starting point for the first interval that is less than the smallest data value. A convenient starting point is a lower value carried out to one more decimal place than the value with the most decimal places. For example, if the value with the most decimal places is 6.1, and if this is the smallest value, a convenient starting point is 6.05 (because 6.1-0.05=6.05). We say that 6.05 has more precision. If the value with the most decimal places is 2.23 and the lowest value is 1.5, a convenient starting point is 1.495 (1.5-0.005=1.495). If the value with the most decimal places is 3.234 and the lowest value is 1.0, a convenient starting point is 0.995 (1.0-0.0005=0.9995). If all the data values happen to be integers and the smallest value is 2, then a convenient starting point is 1.5 (2-0.05=1.5). Also, when the starting point and other boundaries are carried to one additional decimal place, no data value will fall on a boundary. The next two examples go into detail about how to construct a histogram using continuous data and how to create a histogram using discrete data.
+Example: The following data values are the portfolio values, in thousands of dollars, for 100 investors.
+
+60, 60.5, 61, 61, 61.5
+ 63.5, 63.5, 63.5
+ 64, 64, 64, 64, 64, 64, 64, 64.5, 64.5, 64.5, 64.5, 64.5, 64.5, 64.5, 64.5
+ 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 66.5, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5
+ 68, 68, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69.5, 69.5, 69.5, 69.5, 69.5
+ 70, 70, 70, 70, 70, 70, 70.5, 70.5, 70.5, 71, 71, 71
+ 72, 72, 72, 72.5, 72.5, 73, 73.5
+ 74
+
+The smallest data value is 60. Because the data values with the most decimal places have one decimal place (for instance, 61.5), we want our starting point to have two decimal places. Because the numbers 0.5, 0.05, 0.005, and so on are convenient numbers, use 0.05 and subtract it from 60, the smallest value, to get a convenient starting point: 60-0.05=59.95, which is more precise than, say, 61.5 by one decimal place. Thus, the starting point is 59.95. The largest value is 74, and 74+0.05=74.05, so 74.05 is the ending value.
+
+Next, calculate the width of each bar or class interval. To calculate this width, subtract the starting point from the ending value and divide the result by the number of bars (you must choose the number of bars you desire). Suppose you choose eight bars. The interval width is calculated as follows:
+
+We will round up to 2 and make each bar or class interval 2 units wide. Rounding up to 2 is one way to prevent a value from falling on a boundary. Rounding to the next number is often necessary, even if it goes against the standard rules of rounding. For this example, using 1.76 as the width would also work. A guideline that is followed by some for the width of a bar or class interval is to take the square root of the number of data values and then round to the nearest whole number if necessary. For example, if there are 150 data values, take the square root of 150 and round to 12 bars or intervals. The boundaries are as follows:
+
+The data values 60 through 61.5 are in the interval 59.95–61.95. The data values of 63.5 are in the interval 61.95–63.95. The data values of 64 and 64.5 are in the interval 63.95–65.95. The data values 66 through 67.5 are in the interval 65.95–67.95. The data values 68 through 69.5 are in the interval 67.95–69.95. The data values 70 through 71 are in the interval 69.95–71.95. The data values 72 through 73.5 are in the interval 71.95–73.95. The data value 74 is in the interval 73.95–75.95. The histogram shown in displays the portfolio values on the x-axis and relative frequency on the y-axis.
+
+Histogram of Portfolio Values
+
+Graphing Bivariate Data
+Bivariate data refers to paired data, where each value of one variable is paired with a value of a second variable. An example of paired data would be if data were collected on employees’ years of experience and their corresponding salaries. Typically, it is of interest to investigate possible associations or correlations between the two variables under analysis.
+
+Time Series Graphs
+
+Suppose that we want to track the consumer price index (CPI) over the past 10 years. One feature of the data that we may want to consider is the element of time. Because each year is paired with the CPI value for that year, we do not have to think of the data as being random. We can instead use the years given to impose a chronological order on the data. A graph that recognizes this ordering and displays the changing CPI value as the decade progresses is called a time series graph.
+
+To construct a time series graph, we must look at both pieces of our paired data set. We start with a standard Cartesian coordinate system. The horizontal axis is used to plot the time increments, and the vertical axis is used to plot the values of the variable that we are measuring. By doing this, we make each point on the graph correspond to a point in time and a measured quantity. The points on the graph are typically connected by straight lines in the order in which they occur.
+Example: The following data set shows the annual CPI for 10 years. We need to construct a time series graph for the (rounded) annual CPI data (see ). The time series graph is shown in .
+
+Data for Time Series Graph of Annual CPI, 2012–2021
+
+Year
+CPI
+2012
+226.65
+2013
+230.28
+2014
+233.91
+2015
+233.70
+2016
+236.91
+2017
+242.84
+2018
+247.87
+2019
+251.71
+2020
+257.97
+2021
+261.58
+Time Series Graph of Annual CPI, 2012–2021
+
+Scatter Plots
+
+A scatter plot, or scatter diagram, is a graphical display intended to show the relationship between two variables. The setup of the scatter plot is that one variable is plotted on the horizontal axis and the other variable is plotted on the vertical axis. Then each pair of data values is considered as an (x, y) point, and the various points are plotted on the diagram. A visual inspection of the plot is then made to detect any patterns or trends. Additional statistical analysis can be conducted to determine if there is a correlation or other statistically significant relationship between the two variables.
+
+Assume we are interested in tracking the closing price of Nike stock over the one-year time period from April 2020 to March 2021. We would also like to know if there is a correlation or relationship between the price of Nike stock and the value of the S&P 500 over the same time period. To visualize this relationship, we can create a scatter plot based on the (x, y) data shown in . The resulting scatter plot is shown in .
+
+Data for S&P 500 and Nike Stock Price over a 12-Month Period
+
+Date
+S&P 500
+Nike Stock Price ($)
+4/1/2020
+2,912.43
+87.18
+5/1/2020
+3,044.31
+98.58
+6/1/2020
+3,100.29
+98.05
+7/1/2020
+3,271.12
+97.61
+8/1/2020
+3,500.31
+111.89
+9/1/2020
+3,363.00
+125.54
+10/1/2020
+3,269.96
+120.08
+11/1/2020
+3,621.63
+134.70
+12/1/2020
+3,756.07
+141.47
+1/1/2021
+3,714.24
+133.59
+2/1/2021
+3,811.15
+134.78
+3/1/2021
+3,943.34
+140.45
+3/12/2021
+3,943.34
+140.45
+Scatter Plot of Nike Stock Price versus S&P 500
+
+Note the linear pattern of the points on the scatter plot. Because the data points generally align along a straight line, this provides an indication of a linear correlation between the price of Nike stock and the value of the S&P 500 over this one-year time period.
+
+The scatter plot can be generated using Excel as follows:
+
+Enter the x-data in column A of a spreadsheet.
+
+Enter the y-data in column B.
+
+Highlight the data with your mouse.
+
+Go to the Insert menu and select the icon for a scatter plot, as shown in .
+
+Excel Menu Showing the Scatter Plot Icon
+
+Data visualization refers to the use of graphical displays to summarize a data set to help to interpret patterns and trends in the data. Univariate data refers to observations recorded for a single characteristic or attribute, such as salaries or blood pressure measurements. When graphing univariate data, we can choose from among several types of graphs. The type of graph to be used for a certain data set will depend on the nature of the data and the purpose of the graph. Examples of graphs for univariate data include line graphs, bar graphs, and histograms. Bivariate data refers to paired data where each value of one variable is paired with a value of a second variable. Examples of graphs for bivariate data include time series graphs and scatter plots.
+
+a chart that presents categorical data in a summarized form based on frequency or relative frequency
+paired data in which each value of one variable is paired with a value of a second variable
+the use of graphical displays, such as bar charts, histograms, and scatter plots, to help interpret patterns and trends in a data set
+a graphical display of continuous data showing class intervals on the horizontal axis and frequency or relative frequency on the vertical axis
+a graphical display that shows the relationship between a dependent variable and an independent variable
+a graphical display used to show measurement data plotted versus time, where time is displayed on the horizontal axis
+the horizontal axis in a rectangular coordinate system
+the vertical axis in a rectangular coordinate system

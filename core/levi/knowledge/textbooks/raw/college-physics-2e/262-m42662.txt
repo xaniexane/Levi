@@ -1,0 +1,664 @@
+# m42662
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Fission
+
+Fission
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define nuclear fission.
+
+Discuss how fission fuel reacts and describe what it produces.
+
+Describe controlled and uncontrolled chain reactions.
+Nuclear fission is a reaction in which a nucleus is split (or fissured). Controlled fission is a reality, whereas controlled fusion is a hope for the future. Hundreds of nuclear fission power plants around the world attest to the fact that controlled fission is practical and, at least in the short term, economical, as seen in . Whereas nuclear power was of little interest for decades following TMI and Chernobyl (and now Fukushima Daiichi), growing concerns over global warming has brought nuclear power back on the table as a viable energy alternative. By the end of 2009, there were 442 reactors operating in 30 countries, providing 15% of the world’s electricity. France provides over 75% of its electricity with nuclear power, while the US has 104 operating reactors providing 20% of its electricity. Australia and New Zealand have none. China is building nuclear power plants at the rate of one start every month.
+
+Fission is the opposite of fusion and releases energy only when heavy nuclei are split. As noted in Fusion, energy is released if the products of a nuclear reaction have a greater binding energy per nucleon (BE/A) than the parent nuclei. shows that BE/A is greater for medium-mass nuclei than heavy nuclei, implying that when a heavy nucleus is split, the products have less mass per nucleon, so that mass is destroyed and energy is released in the reaction. The amount of energy per fission reaction can be large, even by nuclear standards. The graph in shows BE/A to be about 7.6 MeV/nucleon for the heaviest nuclei (A about 240), while BE/A is about 8.6 MeV/nucleon for nuclei having A about 120. Thus, if a heavy nucleus splits in half, then about 1 MeV per nucleon, or approximately 240 MeV per fission, is released. This is about 10 times the energy per fusion reaction, and about 100 times the energy of the average α, β, or γ decay.
+
+Calculating Energy Released by Fission
+
+Calculate the energy released in the following spontaneous fission reaction:
+
+given the atomic masses to be m(238U)=
+
+238.050784 u
+,
+
+m(95Sr)=
+94.919388 u,
+
+m(140Xe)=
+139.921610 u, and
+m(n)=1.008665 u.
+Strategy
+
+Strategy
+
+As always, the energy released is equal to the mass destroyed times 
+
+ c
+
+ 2
+
+ , so we must find the difference in mass between the parent 
+
+ 238
+
+ U
+
+ and the fission products.
+Solution
+
+Solution
+
+The products have a total mass of
+
+The mass lost is the mass of 
+
+ 238
+
+ U
+
+ minus mproducts, or
+
+so the energy released is
+Discussion
+
+Discussion
+
+A number of important things arise in this example. The 171-MeV energy released is large, but a little less than the earlier estimated 240 MeV. This is because this fission reaction produces neutrons and does not split the nucleus into two equal parts. Fission of a given nuclide, such as 
+
+ 238
+
+ U
+
+ , does not always produce the same products. Fission is a statistical process in which an entire range of products are produced with various probabilities. Most fission produces neutrons, although the number varies with each fission. This is an extremely important aspect of fission, because neutrons can induce more fission, enabling self-sustaining chain reactions.
+
+Spontaneous fission can occur, but this is usually not the most common decay mode for a given nuclide. For example, 
+
+ 238
+
+ U
+
+ can spontaneously fission, but it decays mostly by α emission. Neutron-induced fission is crucial as seen in . Being chargeless, even low-energy neutrons can strike a nucleus and be absorbed once they feel the attractive nuclear force. Large nuclei are described by a liquid drop model with surface tension and oscillation modes, because the large number of nucleons act like atoms in a drop. The neutron is attracted and thus, deposits energy, causing the nucleus to deform as a liquid drop. If stretched enough, the nucleus narrows in the middle. The number of nucleons in contact and the strength of the nuclear force binding the nucleus together are reduced. Coulomb repulsion between the two ends then succeeds in fissioning the nucleus, which pops like a water drop into two large pieces and a few neutrons. Neutron-induced fission can be written as
+
+where FF1 and FF2 are the two daughter nuclei, called fission fragments, and x is the number of neutrons produced. Most often, the masses of the fission fragments are not the same. Most of the released energy goes into the kinetic energy of the fission fragments, with the remainder going into the neutrons and excited states of the fragments. Since neutrons can induce fission, a self-sustaining chain reaction is possible, provided more than one neutron is produced on average — that is, if x>1 in n+AX→FF1+FF2+xn. This can also be seen in .
+
+An example of a typical neutron-induced fission reaction is
+
+Note that in this equation, the total charge remains the same (is conserved): 
+
+ 92
+ +
+ 0
+ 
+ =
+ 
+ 56
+ +
+ 36
+
+ . Also, as far as whole numbers are concerned, the mass is constant: 
+
+ 1
+ +
+ 235
+ 
+ =
+
+ 142
+ +
+ 91
+ 
+ +
+ 3
+
+ . This is not true when we consider the masses out to 6 or 7 significant places, as in the previous example.
+Neutron-induced fission is shown. First, energy is put into this large nucleus when it absorbs a neutron. Acting like a struck liquid drop, the nucleus deforms and begins to narrow in the middle. Since fewer nucleons are in contact, the repulsive Coulomb force is able to break the nucleus into two parts with some neutrons also flying away.
+
+Not every neutron produced by fission induces fission. Some neutrons escape the fissionable material, while others interact with a nucleus without making it fission. We can enhance the number of fissions produced by neutrons by having a large amount of fissionable material. The minimum amount necessary for self-sustained fission of a given nuclide is called its critical mass. Some nuclides, such as 
+
+ 239
+
+ Pu
+
+ , produce more neutrons per fission than others, such as 
+
+ 235
+
+ U
+
+ . Additionally, some nuclides are easier to make fission than others. In particular, 
+
+ 235
+
+ U
+
+ and 
+
+ 239
+
+ Pu
+
+ are easier to fission than the much more abundant 
+
+ 238
+
+ U
+
+ . Both factors affect critical mass, which is smallest for 
+
+ 239
+
+ Pu
+
+ .
+
+The reason 
+
+ 235
+
+ U
+
+ and 
+
+ 239
+
+ Pu
+
+ are easier to fission than 
+
+ 238
+
+ U
+
+ is that the nuclear force is more attractive for an even number of neutrons in a nucleus than for an odd number. Consider that 
+
+ 92
+
+ 235
+
+ U
+
+ 143
+
+ has 143 neutrons, and 
+
+ 94
+
+ 239
+
+ P
+
+ 145
+
+ has 145 neutrons, whereas 
+
+ 92
+
+ 238
+
+ U
+
+ 146
+
+ has 146. When a neutron encounters a nucleus with an odd number of neutrons, the nuclear force is more attractive, because the additional neutron will make the number even. About 2-MeV more energy is deposited in the resulting nucleus than would be the case if the number of neutrons was already even. This extra energy produces greater deformation, making fission more likely. Thus, 
+
+ 235
+
+ U
+
+ and 
+
+ 239
+
+ Pu
+
+ are superior fission fuels. The isotope 
+
+ 235
+
+ U
+
+ is only 0.72 % of natural uranium, while 
+
+ 238
+
+ U
+
+ is 99.27%, and 
+
+ 239
+
+ Pu
+
+ does not exist in nature. Australia has the largest deposits of uranium in the world, standing at 28% of the total. This is followed by Kazakhstan and Canada. The US has only 3% of global reserves.
+
+Most fission reactors utilize 
+
+ 235
+
+ U
+
+ , which is separated from 
+
+ 238
+
+ U
+
+ at some expense. This is called enrichment. The most common separation method is gaseous diffusion of uranium hexafluoride (UF6) through membranes. Since 
+
+ 235
+
+ U
+
+ has less mass than 
+
+ 238
+
+ U
+
+ , its UF6 molecules have higher average velocity at the same temperature and diffuse faster. Another interesting characteristic of 
+
+ 235
+
+ U
+
+ is that it preferentially absorbs very slow moving neutrons (with energies a fraction of an eV), whereas fission reactions produce fast neutrons with energies in the order of an MeV. To make a self-sustained fission reactor with 
+
+ 235
+
+ U
+
+ , it is thus necessary to slow down (“thermalize”) the neutrons. Water is very effective, since neutrons collide with protons in water molecules and lose energy. shows a schematic of a reactor design, called the pressurized water reactor.
+
+Control rods containing nuclides that very strongly absorb neutrons are used to adjust neutron flux. To produce large power, reactors contain hundreds to thousands of critical masses, and the chain reaction easily becomes self-sustaining, a condition called criticality. Neutron flux should be carefully regulated to avoid an exponential increase in fissions, a condition called supercriticality. Control rods help prevent overheating, perhaps even a meltdown or explosive disassembly. The water that is used to thermalize neutrons, necessary to get them to induce fission in 
+
+ 235
+
+ U
+
+ , and achieve criticality, provides a negative feedback for temperature increases. In case the reactor overheats and boils the water to steam or is breached, the absence of water kills the chain reaction. Considerable heat, however, can still be generated by the reactor’s radioactive fission products. Other safety features, thus, need to be incorporated in the event of a loss of coolant accident, including auxiliary cooling water and pumps.
+
+Calculating Energy from a Kilogram of Fissionable Fuel
+
+Calculate the amount of energy produced by the fission of 1.00 kg of 
+
+ 235
+
+ U
+
+ , given the average fission reaction of 
+
+ 235
+
+ U
+
+ produces 200 MeV.
+Strategy
+
+Strategy
+
+The total energy produced is the number of 
+
+ 235
+
+ U
+
+ atoms times the given energy per 
+
+ 235
+
+ U
+
+ fission. We should therefore find the number of 
+
+ 235
+
+ U
+
+ atoms in 1.00 kg.
+Solution
+
+Solution
+
+The number of 
+
+ 235
+
+ U
+
+ atoms in 1.00 kg is Avogadro’s number times the number of moles. One mole of 
+
+ 235
+
+ U
+
+ has a mass of 235.04 g; thus, there are (1000 g)/(235.04 g/mol)=4.25 mol. The number of 
+
+ 235
+
+ U
+
+ atoms is therefore,
+
+So the total energy released is
+Discussion
+
+Discussion
+
+This is another impressively large amount of energy, equivalent to about 14,000 barrels of crude oil or 600,000 gallons of gasoline. But, it is only one-fourth the energy produced by the fusion of a kilogram mixture of deuterium and tritium as seen in . Even though each fission reaction yields about ten times the energy of a fusion reaction, the energy per kilogram of fission fuel is less, because there are far fewer moles per kilogram of the heavy nuclides. Fission fuel is also much more scarce than fusion fuel, and less than 1% of uranium 
+
+ (the
+
+ 235
+
+ U
+ )
+
+ is readily usable.
+
+One nuclide already mentioned is 
+
+ 239
+
+ Pu
+
+ , which has a 24,120-y half-life and does not exist in nature. Plutonium-239 is manufactured from 
+
+ 238
+
+ U
+
+ in reactors, and it provides an opportunity to utilize the other 99% of natural uranium as an energy source. The following reaction sequence, called breeding, produces 
+
+ 239
+
+ Pu
+
+ . Breeding begins with neutron capture by 
+
+ 238
+
+ U
+
+ :
+
+Uranium-239 then β– decays:
+
+Neptunium-239 also β– decays:
+
+Plutonium-239 builds up in reactor fuel at a rate that depends on the probability of neutron capture by 
+
+ 238
+
+ U
+
+ (all reactor fuel contains more 
+
+ 238
+
+ U
+
+ than 
+
+ 235
+
+ U
+
+ ). Reactors designed specifically to make plutonium are called breeder reactors. They seem to be inherently more hazardous than conventional reactors, but it remains unknown whether their hazards can be made economically acceptable. The four reactors at Chernobyl, including the one that was destroyed, were built to breed plutonium and produce electricity. These reactors had a design that was significantly different from the pressurized water reactor illustrated above.
+
+Plutonium-239 has advantages over 
+
+ 235
+
+ U
+
+ as a reactor fuel — it produces more neutrons per fission on average, and it is easier for a thermal neutron to cause it to fission. It is also chemically different from uranium, so it is inherently easier to separate from uranium ore. This means 
+
+ 239
+
+ Pu
+
+ has a particularly small critical mass, an advantage for nuclear weapons.
+
+Nuclear Fission
+
+Start a chain reaction, or introduce non-radioactive isotopes to prevent one. Control energy production in a nuclear reactor!
+Click to view content.
+
+Test Prep for AP Courses
+
+Which of the following statements about nuclear fission is true?
+
+No new elements can be produced in a fission reaction.
+
+Energy released in fission reactions is generally less than that from fusion reactions.
+
+In a fission reaction, two light nuclei are combined into a heavier one.
+
+Fission reactions can be explained on the basis of the conservation of mass-energy.
+
+(d)
+
+What is the energy obtained when 10 g of mass is converted to energy with an efficiency of 70%?
+
+3.93 × 1027 MeV
+
+3.93 × 1030 MeV
+
+5.23 × 1027 MeV
+
+5.23 × 1030 MeV
+
+In a neutron-induced fission reaction of 239Pu, which of the following is produced along with 96Sr and four neutrons?
+56
+
+ 139
+
+ Ba
+56
+
+ 140
+
+ Ba
+54
+
+ 139
+
+ Xe
+54
+
+ 140
+
+ Xe
+
+(b)
+
+When 235U is bombarded with one neutron, the following fission reaction occurs: 
+
+   92
+
+ 235
+
+ U + n →
+
+   56
+
+ 141
+
+ Ba +
+
+  y
+
+ 92
+
+ Kr + xn
+ 
+ .
+
+Find the values for x and y.
+
+Assuming that the mass of 235U is 235.04 u, the mass of 141Ba is 140.91 u, the mass of 92Kr is 91.93 u, and the mass of n is 1.01 u, a student calculates the energy released in the fission reaction as 2.689 × 10−8, but forgets to write the unit. Find the correct unit and convert the answer to MeV.
+
+Section Summary
+
+Nuclear fission is a reaction in which a nucleus is split.
+
+Fission releases energy when heavy nuclei are split into medium-mass nuclei.
+
+Self-sustained fission is possible, because neutron-induced fission also produces neutrons that can induce other fissions, n+AX→FF1+FF2+xn, where FF1 and FF2 are the two daughter nuclei, or fission fragments, and x is the number of neutrons produced.
+
+A minimum mass, called the critical mass, should be present to achieve criticality.
+
+More than a critical mass can produce supercriticality.
+
+The production of new or different isotopes (especially 
+
+ 239
+
+ Pu
+
+ ) by nuclear transformation is called breeding, and reactors designed for this purpose are called breeder reactors.
+
+Conceptual Questions
+
+Explain why the fission of heavy nuclei releases energy. Similarly, why is it that energy input is required to fission light nuclei?
+
+Explain, in terms of conservation of momentum and energy, why collisions of neutrons with protons will thermalize neutrons better than collisions with oxygen.
+
+The ruins of the Chernobyl reactor are enclosed in a huge concrete structure built around it after the accident. Some rain penetrates the building in winter, and radioactivity from the building increases. What does this imply is happening inside?
+
+Since the uranium or plutonium nucleus fissions into several fission fragments whose mass distribution covers a wide range of pieces, would you expect more residual radioactivity from fission than fusion? Explain.
+
+The core of a nuclear reactor generates a large amount of thermal energy from the decay of fission products, even when the power-producing fission chain reaction is turned off. Would this residual heat be greatest after the reactor has run for a long time or short time? What if the reactor has been shut down for months?
+
+How can a nuclear reactor contain many critical masses and not go supercritical? What methods are used to control the fission in the reactor?
+
+Why can heavy nuclei with odd numbers of neutrons be induced to fission with thermal neutrons, whereas those with even numbers of neutrons require more energy input to induce fission?
+
+Why is a conventional fission nuclear reactor not able to explode as a bomb?
+
+Problem Exercises
+
+(a) Calculate the energy released in the neutron-induced fission (similar to the spontaneous fission in )
+n+238
+U→
+96
+Sr +
+140
+Xe+3n,
+
+given m(96
+Sr)
+=
+95.921750 u and m(140
+Xe)
+=
+139.92164. (b) This result is about 6 MeV greater than the result for spontaneous fission. Why? (c) Confirm that the total number of nucleons and total charge are conserved in this reaction.
+
+(a) 177.1 MeV
+
+(b) Because the gain of an external neutron yields about 6 MeV, which is the average BE/A for heavy nuclei.
+
+(c) A=1+238=96+140+1+1+1,Z=92=38+53,efn=0=0
+
+(a) Calculate the energy released in the neutron-induced fission reaction
+n+235
+U→
+92
+Kr+
+142
+Ba+2n,
+
+given m(92Kr)=91.926269 u and
+
+m(142Ba)=141.916361u.
+
+(b) Confirm that the total number of nucleons and total charge are conserved in this reaction.
+
+(a) Calculate the energy released in the neutron-induced fission reaction
+n+
+239Pu→
+96Sr+
+140Ba+4n,
+
+given m(96Sr)=95.921750 u and
+
+m(140Ba)=139.910581 u.
+
+(b) Confirm that the total number of nucleons and total charge are conserved in this reaction.
+
+(a) 180.6 MeV
+
+(b) A=1+239=96+140+1+1+1+1,Z=94=38+56,efn=0=0
+
+Confirm that each of the reactions listed for plutonium breeding just following conserves the total number of nucleons, the total charge, and electron family number.
+
+Breeding plutonium produces energy even before any plutonium is fissioned. (The primary purpose of the four nuclear reactors at Chernobyl was breeding plutonium for weapons. Electrical power was a by-product used by the civilian population.) Calculate the energy produced in each of the reactions listed for plutonium breeding just following . The pertinent masses are
+m(239U
+)=239.054289 u,
+
+m(239Np
+)=
+239.052932 u, and
+
+m(239Pu
+)=
+239.052157 u.
+238U+n→239U+γ 4.81 MeV
+239U→239Np+β−+ve 0.753 MeV
+239Np→239Pu+β−+ve 0.211 MeV
+
+The naturally occurring radioactive isotope 232Th does not make good fission fuel, because it has an even number of neutrons; however, it can be bred into a suitable fuel (much as 238U is bred into 239P).
+
+(a) What are Z and N for 232Th?
+
+(b) Write the reaction equation for neutron captured by 
+
+ 232
+
+ Th
+
+ and identify the nuclide
+AX produced in
+
+n+232Th→AX+γ.
+
+(c) The product nucleus β− decays, as does its daughter. Write the decay equations for each, and identify the final nucleus.
+
+(d) Confirm that the final nucleus has an odd number of neutrons, making it a better fission fuel.
+
+(e) Look up the half-life of the final nucleus to see if it lives long enough to be a useful fuel.
+
+The electrical power output of a large nuclear reactor facility is 900 MW. It has a 35.0% efficiency in converting nuclear power to electrical.
+
+(a) What is the thermal nuclear power output in megawatts?
+
+(b) How many 235U nuclei fission each second, assuming the average fission produces 200 MeV?
+
+(c) What mass of 235U is fissioned in one year of full-power operation?
+
+(a) 2.57×103MW
+
+(b) 8.03×1019fission/s
+
+(c) 991 kg
+
+A large power reactor that has been in operation for some months is turned off, but residual activity in the core still produces 150 MW of power. If the average energy per decay of the fission products is 1.00 MeV, what is the core activity in curies?
+
+reactors that are designed specifically to make plutonium
+reaction process that produces 239Pu
+condition in which a chain reaction easily becomes self-sustaining
+minimum amount necessary for self-sustained fission of a given nuclide
+a daughter nuclei
+a model of nucleus (only to understand some of its features) in which nucleons in a nucleus act like atoms in a drop
+reaction in which a nucleus splits
+fission that is initiated after the absorption of neutron
+an exponential increase in fissions

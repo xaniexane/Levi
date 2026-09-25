@@ -1,0 +1,262 @@
+# m00015
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Set Operations with Three Sets
+
+Set Operations with Three Sets
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Interpret Venn diagrams with three sets.
+
+Create Venn diagrams with three sets.
+
+Apply set operations to three sets.
+
+Prove equality of sets using Venn diagrams.
+
+Have you ever searched for something on the Internet and then soon after started seeing multiple advertisements for that item while browsing other web pages? Large corporations have built their business on data collection and analysis. As we start working with larger data sets, the analysis becomes more complex. In this section, we will extend our knowledge of set relationships by including a third set.
+
+A Venn diagram with two intersecting sets breaks up the universal set into four regions; simply adding one additional set will increase the number of regions to eight, doubling the complexity of the problem.
+
+Venn Diagrams with Three Sets
+
+Below is a Venn diagram with two intersecting sets, which breaks the universal set up into four distinct regions.
+
+Next, we see a Venn diagram with three intersecting sets, which breaks up the universal set into eight distinct regions.
+
+Shading Venn Diagrams
+
+Venn Diagram is an Android application that allows you to visualize how the sets are related in a Venn diagram by entering expressions and displaying the resulting Venn diagram of the set shaded in gray.
+
+The Venn Diagram application uses some notation that differs from the notation covered in this text.
+
+The complement of set A in this text is written symbolically as A′, but the Venn Diagram app uses AC to represent the complement operation.
+
+The set difference operation, −, is available in the Venn Diagram app, although this operation is not covered in the text.
+
+It is recommended that you explore this application to expand your knowledge of Venn diagrams prior to continuing with the next example.
+
+In the next example, we will explore the three main blood factors, A, B and Rh. The following background information about blood types will help explain the relationships between the sets of blood factors. If an individual has blood factor A or B, those will be included in their blood type. The Rh factor is indicated with a + or a −. For example, if a person has all three blood factors, then their blood type would be AB+. In the Venn diagram, they would be in the intersection of all three sets, A∩B∩Rh+. If a person did not have any of these three blood factors, then their blood type would be O−, and they would be in the set (A∪B∪Rh+)′ which is the region outside all three circles.
+
+Interpreting a Venn Diagram with Three Sets
+
+Use the Venn diagram below, which shows the blood types of 100 people who donated blood at a local clinic, to answer the following questions.
+How many people with a type A blood factor donated blood?
+ Julio has blood type B+. If he needs to have surgery that requires a blood transfusion, he can accept blood from anyone who does not have a type A blood factor. How many people donated blood that Julio can accept?
+ How many people who donated blood do not have the Rh+ blood factor?
+ How many people had type A and type B blood?
+
+How many people with a type A blood factor donated blood?
+
+Julio has blood type B+. If he needs to have surgery that requires a blood transfusion, he can accept blood from anyone who does not have a type A blood factor. How many people donated blood that Julio can accept?
+
+How many people who donated blood do not have the Rh+ blood factor?
+
+How many people had type A and type B blood?
+The number of people who donated blood with a type A blood factor will include the sum of all the values included in the A circle. It will be the union of sets A−,A+,AB−andAB+. n(A)=n(A−)+n(A+)+n(AB−)+n(AB+)=6+36+1+3=46.
+ In part 1, it was determined that the number of donors with a type A blood factor is 46. To determine the number of people who did not have a type A blood factor, use the following property, A′ union is equal to U, which means 
+ n(A)+n(A′)=n(U), and n(A′)=n(U)−n(A)=100−46=54. Thus, 54 people donated blood that Julio can accept.
+ This would be everyone outside the Rh+ circle, or everyone with a negative Rh factor, n(Rh−)=n(O−)+n(A−)+n(AB−)+n(B−)=7+6+1+2=16.
+ To have both blood type A and blood type B, a person would need to be in the intersection of sets A and B. The two circles overlap in the regions labeled AB− and AB+. Add up the number of people in these two regions to get the total: 1+3=4. This can be written symbolically as n(AandB)=n(A∩B)=n(AB−)+n(AB+)=1+3=4.
+
+The number of people who donated blood with a type A blood factor will include the sum of all the values included in the A circle. It will be the union of sets A−,A+,AB−andAB+. n(A)=n(A−)+n(A+)+n(AB−)+n(AB+)=6+36+1+3=46.
+
+In part 1, it was determined that the number of donors with a type A blood factor is 46. To determine the number of people who did not have a type A blood factor, use the following property, A′ union is equal to U, which means 
+ n(A)+n(A′)=n(U), and n(A′)=n(U)−n(A)=100−46=54. Thus, 54 people donated blood that Julio can accept.
+
+This would be everyone outside the Rh+ circle, or everyone with a negative Rh factor, n(Rh−)=n(O−)+n(A−)+n(AB−)+n(B−)=7+6+1+2=16.
+
+To have both blood type A and blood type B, a person would need to be in the intersection of sets A and B. The two circles overlap in the regions labeled AB− and AB+. Add up the number of people in these two regions to get the total: 1+3=4. This can be written symbolically as n(AandB)=n(A∩B)=n(AB−)+n(AB+)=1+3=4.
+
+Blood Types
+
+Most people know their main blood type of A, B, AB, or O and whether they are Rh+ or Rh−, but did you know that the International Society of Blood Transfusion recognizes twenty-eight additional blood types that have important implications for organ transplants and successful pregnancy? For more information, check out this article:
+Blood mystery solved: Two new blood types identified
+
+Creating Venn Diagrams with Three Sets
+
+In general, when creating Venn diagrams from data involving three subsets of a universal set, the strategy is to work from the inside out. Start with the intersection of the three sets, then address the regions that involve the intersection of two sets. Next, complete the regions that involve a single set, and finally address the region in the universal set that does not intersect with any of the three sets. This method can be extended to any number of sets. The key is to start with the region involving the most overlap, working your way from the center out.
+
+Creating a Venn Diagram with Three Sets
+
+A teacher surveyed her class of 43 students to find out how they prepared for their last test. She found that 24 students made flash cards, 14 studied their notes, and 27 completed the review assignment. Of the entire class of 43 students, 12 completed the review and made flash cards, nine completed the review and studied their notes, and seven made flash cards and studied their notes, while only five students completed all three of these tasks. The remaining students did not do any of these tasks. Create a Venn diagram with subsets labeled: “Notes,” “Flash Cards,” and “Review” to represent how the students prepared for the test.
+Step 1: First, draw a Venn diagram with three intersecting circles to represent the three intersecting sets: Notes, Flash Cards, and Review. Label the universal set with the cardinality of the class.
+Step 2: Next, in the region where all three sets intersect, enter the number of students who completed all three tasks.
+Step 3: Next, calculate the value and label the three sections where just two sets overlap.
+ 
+ Review and flash card overlap. A total of 12 students completed the review and made flash cards, but five of these twelve students did all three tasks, so we need to subtract: 12−5=7. This is the value for the region where the flash card set intersects with the review set.
+ Review and notes overlap. A total of 9 students completed the review and studied their notes, but again, five of these nine students completed all three tasks. So, we subtract: 9−5=4. This is the value for the region where the review set intersects with the notes set.
+ Flash card and notes overlap. A total of 7 students made flash cards and studied their notes; subtracting the five students that did all three tasks from this number leaves 2 students who only studied their notes and made flash cards. Add these values to the Venn diagram.
+Review and flash card overlap. A total of 12 students completed the review and made flash cards, but five of these twelve students did all three tasks, so we need to subtract: 12−5=7. This is the value for the region where the flash card set intersects with the review set.
+Review and notes overlap. A total of 9 students completed the review and studied their notes, but again, five of these nine students completed all three tasks. So, we subtract: 9−5=4. This is the value for the region where the review set intersects with the notes set.
+Flash card and notes overlap. A total of 7 students made flash cards and studied their notes; subtracting the five students that did all three tasks from this number leaves 2 students who only studied their notes and made flash cards. Add these values to the Venn diagram.
+Step 4: Now, repeat this process to find the number of students who only completed one of these three tasks.
+ 
+ A total of 24 students completed flash cards, but we have already accounted for 2+5+7=14 of these. Thus, 24-14=10 students who just made flash cards.
+ A total of 14 students studied their notes, but we have already accounted for 4+5+2=11 of these. Thus, 14-11=3 students only studied their notes.
+ A total of 27 students completed the review assignment, but we have already accounted for 4+5+7=16 of these, which means 27-16=11 students only completed the review assignment.
+ Add these values to the Venn diagram.
+
+A total of 24 students completed flash cards, but we have already accounted for 2+5+7=14 of these. Thus, 24-14=10 students who just made flash cards.
+
+A total of 14 students studied their notes, but we have already accounted for 4+5+2=11 of these. Thus, 14-11=3 students only studied their notes.
+
+A total of 27 students completed the review assignment, but we have already accounted for 4+5+7=16 of these, which means 27-16=11 students only completed the review assignment.
+
+Add these values to the Venn diagram.
+Step 5: Finally, compute how many students did not do any of these three tasks. To do this, we add together each value that we have already calculated for the separate and intersecting sections of our three sets: 3+2+4+5+10+7+11=42. Because there 43 students in the class, and 43−42=1, this means only one student did not complete any of these tasks to prepare for the test. Record this value somewhere in the rectangle, but outside of all the circles, to complete the Venn diagram.
+
+Applying Set Operations to Three Sets
+
+Set operations are applied between two sets at a time. Parentheses indicate which operation should be performed first. As with numbers, the inner most parentheses are applied first. Next, find the complement of any sets, then perform any union or intersections that remain.
+
+Applying Set Operations to Three Sets
+
+Perform the set operations as indicated on the following sets:
+ U={0,1,2,3,4,5,6,7,8,9,10,11,12}
+ , A={0,1,2,3,4,5,6}, B={0,2,4,6,8,10,12}, and C={0,3,6,9,12}.
+
+Find (A∩B)∩C.
+
+Find A∩(B∪C).
+
+Find (A∩B)∪C′.
+Parentheses first, A intersection B equals A∩B={0,2,4,6}, the elements common to both A and B. (A∩B)∩C={0,2,4,6}∩{0,3,6,9,12}={0,6}, because the only elements that are in both sets are 0 and 6.
+ Parentheses first, B union C equals B∪C={0,2,3,4,6,8,9,10,12}, the collection of all elements in set B or set C or both. A∩(B∪C)={0,1,2,3,4,5,6}∩{0,2,3,4,6,8,9,10,12}={0,2,3,4,6}, because the intersection of these two sets is the set of elements that are common to both sets.
+ Parentheses first, A intersection B equals A∩B={0,2,4,6}. Next, find C′. The complement of set C is the set of elements in the universal set U that are not in set C. C′={1,2,4,5,7,8,10,11}. Finally, find (A∩B)∪C′={0,2,4,6}∪{1,2,4,5,7,8,10,11}={0,1,2,4,5,6,7,8,10,11}.
+
+Parentheses first, A intersection B equals A∩B={0,2,4,6}, the elements common to both A and B. (A∩B)∩C={0,2,4,6}∩{0,3,6,9,12}={0,6}, because the only elements that are in both sets are 0 and 6.
+
+Parentheses first, B union C equals B∪C={0,2,3,4,6,8,9,10,12}, the collection of all elements in set B or set C or both. A∩(B∪C)={0,1,2,3,4,5,6}∩{0,2,3,4,6,8,9,10,12}={0,2,3,4,6}, because the intersection of these two sets is the set of elements that are common to both sets.
+
+Parentheses first, A intersection B equals A∩B={0,2,4,6}. Next, find C′. The complement of set C is the set of elements in the universal set U that are not in set C. C′={1,2,4,5,7,8,10,11}. Finally, find (A∩B)∪C′={0,2,4,6}∪{1,2,4,5,7,8,10,11}={0,1,2,4,5,6,7,8,10,11}.
+
+Notice that the answers to the Your Turn are the same as those in the Example. This is not a coincidence. The following equivalences hold true for sets:
+A∩(B∩C)=(A∩B)∩C and A∪(B∪C)=(A∪B)∪C. These are the associative property for set intersection and set union.
+A∩B=B∩A and A∪B=B∪A. These are the commutative property for set intersection and set union.
+A∩(B∪C)=(A∩B)∪(A∩C) and A∪(B∩C)=(A∪B)∩(A∪C). These are the distributive property for sets over union and intersection, respectively.
+
+Proving Equality of Sets Using Venn Diagrams
+
+To prove set equality using Venn diagrams, the strategy is to draw a Venn diagram to represent each side of the equality, then look at the resulting diagrams to see if the regions under consideration are identical.
+
+Augustus De Morgan was an English mathematician known for his contributions to set theory and logic. De Morgan’s law for set complement over union states that (A∪B)′=A′∩B′. In the next example, we will use Venn diagrams to prove De Morgan’s law for set complement over union is true. But before we begin, let us confirm De Morgan’s law works for a specific example. While showing something is true for one specific example is not a proof, it will provide us with some reason to believe that it may be true for all cases.
+
+Let U={1,2,3,4,5,6,7}, A={2,3,4}, and B={3,4,5,6}. We will use these sets in the equation (A∪B)′=A′∩B′. To begin, find the value of the set defined by each side of the equation.
+Step 1: A∪B is the collection of all unique elements in set A or set B or both. A∪B={2,3,4,5,6}. The complement of A union B, (A∪B)′, is the set of all elements in the universal set that are not in A∪B. So, the left side the equation (A∪B)′ is equal to the set {1,7}.
+Step 2: The right side of the equation is A′∩B′. A′ is the set of all members of the universal set U that are not in set A. A′={1,5,6,7}. Similarly, B′={1,2,7}.
+Step 3: Finally, A′∩B′ is the set of all elements that are in both A′ and B′. The numbers 1 and 7 are common to both sets, therefore, A′∩B′={1,7}. Because, {1,7}={1,7} we have demonstrated that De Morgan’s law for set complement over union works for this particular example. The Venn diagram below depicts this relationship.
+
+Proving De Morgan’s Law for Set Complement over Union Using a Venn Diagram
+
+De Morgan’s Law for the complement of the union of two sets A and B states that: (A∪B)′=A′∩B′. Use a Venn diagram to prove that De Morgan’s Law is true.
+Step 1: First, draw a Venn diagram representing the left side of the equality. The regions of interest are shaded to highlight the sets of interest. A∪B is shaded on the left, and (A∪B)′ is shaded on the right.
+Step 2: Next, draw a Venn diagram to represent the right side of the equation. A′ is shaded and B′ is shaded. Because A′ and B′ mix to form A′∩B′ is also shaded.
+Step 3: Verify the conclusion. Because the shaded region in the Venn diagram for (A∪B)′ matches the shaded region in the Venn diagram for A′∩B', the two sides of the equation are equal, and the statement is true. This completes the proof that De Morgan’s law is valid.
+
+Check Your Understanding
+
+Key Concepts
+
+A Venn diagram with two overlapping sets breaks the universal set up into four distinct regions. When a third overlapping set is added the Venn diagram is broken up into eight distinct regions.
+
+Analyze, interpret, and create Venn diagrams involving three overlapping sets.
+ 
+ Including the blood factors: A, B and Rh
+ To find unions and intersections.
+ To find cardinality of both unions and intersections.
+
+Including the blood factors: A, B and Rh
+
+To find unions and intersections.
+
+To find cardinality of both unions and intersections.
+
+When performing set operations with three or more sets, the order of operations is inner most parentheses first, then fine the complement of any sets, then perform any union or intersection operations that remain.
+
+To prove set equality using Venn diagrams the strategy is to draw a Venn diagram to represent each side of the equality or equation, then look at the resulting diagrams to see if the regions under consideration are identical. If they regions are identical the equation represents a true statement, otherwise it is not true.
+
+Projects
+
+Cardinality of Infinite Sets
+
+In set theory, it has been shown that the set of irrational numbers has a cardinality greater than the set of natural numbers. That is, the set of irrational numbers is so large that it is uncountably infinite.
+
+Perform a search with the phrase, “Who first proved that the real numbers are uncountable?”
+ 
+ Who first proved that the real numbers are uncountable?
+ What was the significance of this proof to the development of set theory and by extension other fields of mathematics?
+
+Who first proved that the real numbers are uncountable?
+
+What was the significance of this proof to the development of set theory and by extension other fields of mathematics?
+
+Recent discoveries in the field of set theory include the solution to a 70-year-old problem previously thought to be unprovable. To learn more read this article:
+ 
+ What does it mean for two infinite sets to have the same size?
+ The real numbers are sometimes referred to as what?
+ Summarize your understanding of the problem known as the “Continuum Hypothesis.”
+ Malliaris and Shelah’s proof of this 70-year-old problem is opening up investigation in what two fields of mathematics?
+
+What does it mean for two infinite sets to have the same size?
+
+The real numbers are sometimes referred to as what?
+
+Summarize your understanding of the problem known as the “Continuum Hypothesis.”
+
+Malliaris and Shelah’s proof of this 70-year-old problem is opening up investigation in what two fields of mathematics?
+
+Summarize your understanding of infinity.
+ 
+ Define what it means to be infinite.
+ Explain the difference between countable and uncountable sets.
+ Research the difference between a discrete set and a continuous set, then summarize your findings.
+
+Define what it means to be infinite.
+
+Explain the difference between countable and uncountable sets.
+
+Research the difference between a discrete set and a continuous set, then summarize your findings.
+
+Set Notation
+
+In arithmetic, the operation of addition is represented by the plus sign, +, but multiplication is represented in multiple ways, including ⋅,×,∗, and parentheses, such as 5(3). Several set operations also are written in different forms based on the preferences of the mathematician and often their publisher.
+
+Search for “Set Complement” on the internet and list at least three ways to represent the complement of a set.
+
+Both the Set Challenge and Venn Diagram smartphone apps highlighted in the Tech Check sections have an operation for set difference. List at least two ways to represent set difference and provide a verbal description of how to calculate the difference between two sets A and B.
+
+When researching possible Venn diagram applications, the Greek letter delta, Δ appeared as a symbol for a set operator. List at least one other symbol used for this same operation.
+
+Search for “List of possible set operations and their symbols.” Find and select two symbols that were not presented in this chapter.
+
+The Real Number System
+
+The set of real numbers and their properties are studied in elementary school today, but how did the number system evolve? The idea of natural numbers or counting numbers surfaced prior to written words, as evidenced by tally marks in cave writing. Create a timeline for significant contributions to the real number system.
+
+Use the following phrase to search online for information on the origins of the number zero: “History of the number zero.” Then, record significant dates for the invention and common use of the number zero on your timeline.
+
+Find out who is credited for discovering that the 2 is irrational and add this information to your timeline. Hint: Search for, “Who was the first to discover irrational numbers?”
+
+Research Georg Cantor’s contribution to the representation of real numbers as a continuum and add this to your timeline.
+
+Research Ernst Zermelo’s contribution to the real number system and add this to your timeline.
+
+Chapter Review
+Basic Set Concepts
+
+Subsets
+
+Understanding Venn Diagrams
+
+Set Operations with Two Sets
+
+Set Operations with Three Sets
+
+Chapter Test

@@ -1,0 +1,170 @@
+# m00019
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Statistical Functions
+
+Statistical Functions
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Use basic statistical functions to describe a dataset
+
+Describe other useful functions for data analysis in Microsoft Excel
+
+Use the Data Analysis tool for advanced statistical functions
+
+Understand the Solver add-in and its use for data analysis
+
+Data surrounds us. In business, there is always a need to better understand the company, the competitors, and the customers. You gain this understanding through data collection and data analysis. The field of statistics is centered on analyzing and making sense out of data. You may have taken a statistics class at some point, but even if you have not taken a statistics class, you have probably used some statistical concepts—maybe more often than you think. Concepts such as averages and probabilities are often applicable to everyday life. For example, you may have been exposed to some statistical concepts when learning about political candidates prior to an election. This could include the percentage of registered voters of a particular demographic or the correlation between geographic location and political party. Statistics can be applied across nearly all fields and situations, and there is almost always a need to know more and dig deeper into what the data are showing.
+
+There are two branches of statistics: descriptive and inferential. Descriptive statistics, as the name implies, describe situations. For example, the average transaction amount for purchases in a store at a specific location is descriptive information about that location. Another example of descriptive information is the turnover rate of employees in a manufacturing facility.
+
+Inferential statistics relate to predicting and forecasting. With inferential statistics, you are using historical data and trends to forecast future performance. The regional sales manager might use the last five years of sales data to make a forecast for this year’s total sales. A nonprofit organization might use historical fundraising efforts to make predictions about fundraising for the next two years. Both branches are useful in understanding data. Information garnered from statistics can be used in a variety of ways in businesses to improve performance and track progress. Microsoft Excel has a variety of tools to make statistical analysis easier.
+
+Basic Statistical Functions
+
+There are several commonly used statistical functions that can give you a basic summary and understanding of the information in your spreadsheet. You can access the functions through the Formulas tab. From this tab, you can either choose Insert Function on the far left of the tab or use the grouped functions in the Function Library (). The Function Library is helpful if you are not quite sure of the appropriate function for your needs. The functions are organized by application (e.g., financial) and include the ones that are most commonly used.
+
+Using the Insert Function command has some advantages. When you click on Insert Function, a window appears with the functions grouped by category like in the Function Library, and then listed alphabetically within each category. When you click on a function, a brief description of the function appears in the window. There is also an option to search for functions by typing a description or keyword. This is useful if you are unsure of the function’s purpose ().
+
+To use functions, first, click in the empty cell where you want to put the function. Then, use either the Insert Function option or the Function Library to select the function. For this example, you will choose the AVERAGE function to calculate the average of a list of data. When you select a function from the Insert Function window, an input window will appear where you will select the range of data for analysis (). After you select the range, click OK. Notice that the result of the function is displayed in the lower left of the input window. Also notice that a dotted line will surround the data identified for analysis. The function will also be visible in the Formula Bar.
+
+When you select a function from one of the groups in the Function Library, the function will appear in the spreadsheet (). You can select the data for analysis and press Enter. A dotted line will still appear around the selected range of cells, and the function still displays in the Formula Bar.
+
+One of the most commonly used functions is SUM. It even has its own button on the Home tab as the AutoSum feature (). The function gives the total for a selected range of cells. Other commonly used functions in data analysis are MODE, RANGE, MEDIAN, and AVERAGE, which returns the mean of a selected range of data.
+
+Other Useful Functions
+
+There are several other functions available that are not specifically statistical functions, but they can be quite useful when dealing with large datasets or with text. Some of these were covered in Advanced Excel Formulas, Functions, and Techniques. These functions can help you manage and sort datasets of any size. summarizes some useful functions for data analysis.
+
+Numerical Functions
+
+Function
+AVERAGEIF
+COUNT
+COUNTIF
+CORR
+IF
+MAX
+MIN
+SUMIF
+SUMIFS
+Returns the sum of a range that meets multiple specific criteria
+Let us look closer at the AVERAGEIF function. It returns the average of a selected range according to a set of criteria. As with other functions, it is accessed through the Insert Function button on the Data tab or from the Function Library. When selected from the Insert Function tool, an input window will appear with three arguments to fill in (). In the first box, input the range to examine against the criteria. In the second box, set the criteria, and in the third box, input the range of numbers to be averaged. Both formulas and text can be entered into the criteria. Be sure to put text elements in quotation marks when establishing criteria.
+
+Let’s revisit the employee vacation data and use it to find the average number of vacation days employees have remaining for the North location. The criteria range is the Location column (D2:D21), the criteria is “North,” and the average range is the Days Left column (C2:C21) (). The function then returns the average number of vacation days remaining for all the employees in the list at the North location.
+
+In some cases, you might need to evaluate data using more than a single criterion. The AVERAGEIFS, COUNTIFS, and SUMIFS functions give the flexibility to add additional criteria. Just remember that each criterion must be matched with a range where the function will search (). To add an additional criterion with its corresponding range to the analysis, simply press the Tab key on your keyboard and additional criteria will be added to the function arguments.
+
+The functions we have discussed so far deal with numbers, but there are some functions that are useful for dealing with text. These can be particularly helpful when you are importing data into a spreadsheet. These functions can separate out parts of text or take the first several characters and put them in a separate column. summarizes some useful functions for managing text in a spreadsheet.
+
+Text Functions
+
+Function
+CONCATENATE
+LEFT
+RIGHT
+TRIM
+Removes spaces from cells except the single space between words
+The CONCATENATE function is useful when data comes from a database or other files. It combines information from multiple columns into a single column. For example, data imported into an Excel spreadsheet often contains first and last names in separate columns. With the CONCATENATE function, you can easily combine those two columns into a single column. To use the function, select the text elements that you want to combine into one cell (). To include a space, in the Text2 argument insert “ ” (quotation marks with a space between). This will then output the first name last name correctly spaced (). Use AutoFill to copy the CONCATENATE function through the entire list. In newer versions of Excel, the function has been replaced with CONCAT, which includes additional features.
+
+The Text to Columns tool on the Data tab is the opposite of the CONCATENATE function. It takes a single column of text and separates it into two or more columns. This tool is also a helpful tool if you are importing information. Sometimes data imported from another program might not be in the format you desire or need for further analysis. For example, you can use this tool to place First Name and Last Name in a separate column if they are imported into a single column. Text to Columns can also be used to separate out City, State, and Zip into columns.
+
+Data Analysis Tools Add-in
+
+Excel has many advanced data analysis tools available. These include a wide variety of simple and more complex statistical functions that are available as individual functions in Excel, but it is easier to access the tools through the add-in called Data Analysis. This add-in puts all the statistical tools together in one place. As this section discusses these tools, it will keep the focus on using the tools within Excel and not on statistical techniques, their assumptions, and usage for data analysis. (You can learn more about those topics in a statistics course or resource.) Some of the most commonly used built-in tools include Correlation, Descriptive Statistics, Histogram, and Regression. Additional advanced tools include Analysis of variance (ANOVA), and several tools for testing hypothesis, including the F-Test, t-Test, and z-Test.
+
+Excel also offers a helpful feature to guide you through ideas for analyzing your dataset, called the Analyze Data help feature, accessed on the far-right side of the Home tab (). This tool allows you to search for helpful functions or Excel tools to analyze your dataset. A pop-out will appear on the right side of the screen, listing a few examples of ways to understand the data better. If you are finding it difficult to get started on analyzing a dataset, this might be an effective way to generate ideas as you work through the information. Suggested items for data analysis might include charts, graphs, or a PivotTable.
+GCFGlobal.org provides 100 percent free online courses in a number of topics relevant to career preparation. This includes a variety of technology and computer skills courses. They currently offer a number of micro-courses in Excel. Go to this page to see a list of these courses, as well as others offered on the site.
+
+Getting the Data Analysis Tool
+
+Because the Data Analysis tools are an add-in, they are included with Excel but generally not installed by default. To obtain the add-in, go to the File tab, select Options, and select Add-Ins. From there, click on Analysis ToolPak and select Go at the bottom left of the window (a). Then, select the checkbox for Analysis ToolPak, Analysis ToolPak - VBA, and Solver Add-in. Click OK (b). This will add both the Data Analysis tool and the Solver add-in to the far-right side of the Data tab ().
+
+Built-in Data Analysis Tools
+
+The Data Analysis tool add-in offers a variety of statistical tools. You likely won’t use many of them unless you are doing in-depth statistical analysis. However, there are several that are quite helpful for evaluating most datasets. These tools are some of the more frequently used statistical analysis tools regardless of the industry or application. The functions and tools are listed in the Data Analysis library in alphabetical order. Detailed explanations of the context, analysis, and use of these statistical analysis tools is outside the scope of this text. Rather than focus on the statistics here, this section will walk through the steps involved in using each tool.
+
+Correlation
+Correlation is used to analyze the relationship between two variables. The function in Excel computes the correlation between two or more variables at one time. The output is in the form of a correlation matrix or grid that shows how the variables are connected to each other. The closer the correlation value is to either +1 or −1, the more strongly connected the variables are to each other. A value closer to zero is a sign that the two values are not strongly connected. A positive correlation indicates that the variables will move in the same direction. This means if one variable is higher, the other variable will also be higher, for instance, when a company’s increased sales also increase their overall company profit. A negative correlation value indicates that the data move in opposite directions, for example, if an increase in price decreases the quantity sold. Only numerical data can be analyzed using correlation. If you have categorical data that you are interested in analyzing, you will need to code it using numbers.
+
+To use the tool, go to the Data tab and select the Data Analysis tool and then Correlation. Then, select the data of interest and click OK (). Be sure to select Labels in First Row if your dataset contains column headings. It is generally good practice to include these in your analysis as it helps to identify the information and has a more professional look. If there are no headings, the output will list the data by column number. You can also select an area on the page to display the output or have the output on a new tab in the current worksheet or a new worksheet entirely. The output will be static. That means if you change any of the data points in the selection, the correlation will not be updated. You will need to run the Correlation tool again to update it based on new or different data.
+
+WorldCorp would like to investigate the relationship between the price of their products and the quantity sold. Management thinks that the items with the lower prices sell more. For this example, the selected range is the Quantity column and the Price column. Be sure to check Labels in First Row to tell Excel that there are column headings in your selection.
+
+Using the dataset from WorldCorp’s product sales, you can create the correlation matrix in as the output. The default for Excel is to include several decimal points. Often, this level of detail is not necessary, so you may need to clean the output by reducing the number of decimal points and changing the column widths. You might also consider additional formatting such as bolding certain numbers or filling cells with color. According to the output, the correlation between sales and price is not very strong. The value −0.092 is closer to zero than it is to one, which indicates that management’s suspicion that more products at the lower price range are sold is not correct.
+
+Descriptive Statistics
+
+The Descriptive Statistics tool provides a summary of the dataset in a table format. The summary information includes items such as the mean, variance, standard deviation, and range. You can select a single column of data or multiple columns at once. You can also analyze data that is grouped in rows rather than columns. Be sure to check the appropriate box when prompted if your data is in rows. As with correlation, you can display the information on the current worksheet, on a new worksheet, or in an entirely new workbook. To access Descriptive Statistics, go to the Data tab and then Data Analysis. Choose Descriptive Statistics (). When the input window appears, select the data you want to analyze. Be sure to check the box to indicate that the data has a header row. Next, determine the desired location for the output result. Finally, select Summary Statistics at the bottom of the input window and click OK.
+
+Notice that you also have an option to select confidence levels and both the Kth largest and smallest values in the output. These are more advanced level statistical analyses. If desired, choose those options to be included in the output. The default setting for confidence intervals in Excel is 95 percent, but you can customize that setting. If you use the dataset for WorldCorp, you obtain the following output when you use the Descriptive Statistics tool ().
+
+Notice with this output, you will again need to adjust the number of displayed decimal points to give it a more professional look. You can also choose to format the numbers with commas or as currency, if applicable.
+
+Histograms
+
+A histogram is a chart that displays the number of occurrences of data within a defined range. This is a convenient way to easily see the ranges of most of the data. It is not an in-depth statistical analysis of the data; instead, it provides a summary of the overall distribution of the data. Histograms can be used with data that is at least at the ordinal level of measurement. The histogram function can be accessed through the Data Analysis library. When selected, as with others in the analysis library, an input window will appear (). You will need to input some information such as the input range and the bin range.
+
+The input range represents the data being divided into the various “bins,” or category ranges. These bins must be mutually exclusive and collectively exhaustive. In other words, each data point needs to have only one bin into which it fits. This means the bin ranges must be set up to accommodate the maximum and minimum values. Excel will sort the data correctly into the bins. Other options for the Histogram tool are to include the cumulative percentage, output a sorted histogram, or have the output be in the form of a chart in addition to sorting the data into each of the bins.
+
+Let us look at the WorldCorp sales data again. To construct the histogram, establish the number of bins and the size of the bins you will be using. Be sure to include enough bins to show differences that may exist in the dataset but not so many that it is difficult to see trends or that several bins have no data in them. A general rule of thumb is to divide the range of the data (highest data point – lowest data point) by the width of the categories. For example, if the range is 800 and you want each category or bin to increase by 50, you will need approximately 16 bins. You can also determine the range of each bin by first determining how many bins you want. For your range of 800, if you want 20 bins, each bin will have a range of 40.
+
+The column of data you will use for the histogram is column E, Unit Price. When using the Descriptive Statistics tool, you determined that the minimum number is $7.64 and the maximum number is $14,353. The output also gave the range of the dataset, $14,345.36. If you divide the range by the number of desired bins, you get the approximate size of the bins you should use. In this example, let’s use 15 bins. That would be 14,345.36/15 or 95.62. You then use this as a basis to establish the bin range that you will use in the Histogram tool. You can use whole number categories to make the histogram easier to follow and look cleaner. You could set the first bin at $100 since the value calculated was almost $100 ($95.62). This means that all data up to, but not including $100 will be included in that bin. Each subsequent bin will increase by 100 until you reach 16 bins. You record these bins in the spreadsheet manually. Excel does not create the bins for you. These bins can be either on the dataset worksheet or a separate worksheet. You will use these cells as your bin range when creating the histogram.
+
+Open the Histogram tool in Data Analysis. Select the input range, the Unit Price column, and then select the bin range. Be sure to select the Labels checkbox if you are including the column header in the input data selection. You must also include a column heading for the bin range if the data range has a column heading (a).
+
+The output for the histogram Data Table shows the count in each of the established bins for the input range selected (b). Excel will automatically add a “More” bin at the end to include all data that falls outside of the range that you establish. Even if you have a bin to accommodate the maximum data point, Excel will add the “More” bin at the end of the histogram Data Table.
+
+From this table of data, you can create the histogram using the options on the Insert tab. Alternatively, you can select the chart output and create the chart at the same time you create the data by checking the Chart Output option at the bottom of the window. You can also include cumulative percentages in the output by checking the Cumulative Percentage (). Creating a histogram chart from a dataset not using the Data Analysis tools will be covered in Histogram.
+
+Regression
+Regression is a tool used in inferential statistics. It determines the best fit line or data model for a given dataset. There are many types of regressions, but linear regression is the method most used in business. Linear regression can be used to forecast sales and expenses for the next year, to better understand the drivers of customer purchasing levels, or to investigate how price changes might impact profit. With the regression process, you have one dependent variable you are predicting (Y) and one or more independent variables (X) you are using to predict Y. With the tool in Excel, you can have as many X variables as you need.
+
+Regression in Business
+
+Regression is the primary tool used by businesses to determine if a relationship between variables exists, as well as the magnitude and nature of this relationship should it exist. In business, regression can be helpful in optimization and business forecasting across a variety of industries. For instance, you can investigate the increase in new home sales based on economic growth. You can also make determinations about how much inventory to purchase.
+
+Regression is one of the Data Analysis tools. As with the other tools, when you open it, an input window will appear (). Select the column to use for the Y variable and then select the column(s) to use for the independent variable(s) X. If using more than one independent variable, be sure that all the X variable columns are next to each other. Also note that you must have equal numbers of rows for all variables you select for analysis.
+
+Be sure to check the Labels box if you included the column headings. It is good practice to include the headings, as the output for regression will be more specific to your dataset. Other checkboxes relate to residuals and line fit plots, so check them if they apply to your situation. These options are more advanced statistical tools that can be used. As with the other tools, you can decide where to place the output of the function. The output will be a detailed regression analysis from which you can extract the relevant information, such as R2 and the regression equation, using the coefficients column.
+
+Using the same dataset you’ve been using, you can run a single regression using Quantity as the independent variable (X) to predict the FOB $ as the dependent variable (Y). These values were chosen to investigate the impact that Quantity has on FOB $. Management believes that although Unit Price and Quantity are not strongly connected, the Quantity value is a good predictor of FOB $ (). To begin, go to the Data tab, and choose Data Analysis. Then, select Regression from the list. Select the data in column F, FOB $, as the Y input range and column D, Quantity, as the X input range. Check the Labels box if you also included the column headings. Then, click OK. Make sure to clean up the data, such as by reducing the number of decimal places, and format it to give it a professional look ().
+
+If the dataset has more than one independent variable, the information for each variable will be listed in the output as an additional row under the Intercept row.
+
+Advanced Data Analysis Tools
+
+The Data Analysis library of tools has many other statistical analysis tools. These are used in business less frequently than the tools discussed so far, but they do offer some opportunities for more in-depth analysis. You might see these tools used in more scientific disciplines such as chemistry or biology. This section will briefly introduce how to use these functions in Excel.
+
+Analysis of Variance
+Analysis of variance (ANOVA) is a statistical technique used to compare more than two groups at the same time. It involves conducting an analysis to determine if differences are present in the data based on their respective variances.
+
+There are three types of ANOVA analyses available in Excel that are easily accessed through the Data Analysis tool. The input windows for the ANOVA functions look very similar, so be sure to check the title at the top of the input window.
+ANOVA: Single Factor focuses on analyzing information for a single variable (). For example, perhaps you want to do some price checking on your favorite brands at three retailers. You could use ANOVA to determine if there are price differences between the retailers.
+
+To use the Single Factor function, simply select the data of interest and choose the appropriate grouping of the data (columns or rows). Be sure to check the Labels box if you included the headings in your selection. You also have the option to change the alpha (significance level) for your analysis. The output will be in the form of a typical ANOVA table, which you may have seen in a statistics course.
+ANOVA: Two-Factor With Replication is used to test two variables and to determine if there is any interaction present in the variables (). The input window looks like that of the Single Factor, except you will need to add the number of rows per sample. This number will need to be the same for all categories. You must also have row and column headings for this option. Excel assumes that the first column and the first row in the selection will include the headings for the data, so there is no Labels checkbox.
+
+The final type of ANOVA in Excel is ANOVA: Two-Factor Without Replication, which allows you to test two variables. Unlike With Replication, here you will not be testing for the interaction between the two variables. Instead, you are testing the two variables independent of each other, but simultaneously. Notice in that the window looks the same as the window for Single Factor, except for the title. There is no box to fill in the Rows per Sample, as there is in Two-Factor With Replication.
+
+Through the use of the advanced statistical tools in Excel, you can better analyze data and discover differences among various groups of consumers in your target market. Watch this video on how ANOVA can be used to understand consumers in the craft beer industry to learn more.
+
+F-Test
+
+The F-Test is used to determine if two datasets are from the same population based on their variances. It is another type of hypothesis test that can be used for in-depth statistical analysis. Select F-Test: Two Sample for Variances from the Data Analysis tool library. As with the other functions, an input window will appear (). You will need to select the range of each variable separately. The ranges do not need to be the same size. Check the Labels box if you included the column headings. Click OK when you are ready to analyze the data.
+
+T-Tests
+T-Tests are also hypothesis tests. T-Tests are used when data does not follow the normal distribution (a concept in statistics), when the sample sizes are small (generally less than 30), or when you do not have a population standard deviation. It is often used in statistics to test for statistical differences between two groups of data. There are three t-Tests available in Excel. The input windows look the same, except for the title of the input window, so make sure you have selected the appropriate test. The first type, t-Test: Paired Two Sample for Means is for dependent datasets, such as if you are determining the success of a coupon campaign. You could track sales for a group of customers before the coupon and then track the sales for the same group of customers after the coupon campaign. You can then use this test to determine if there is a statistical difference between the means of the two groups, or you can input a specific level for the difference in the Hypothesized Mean Difference input argument (). If there is no set difference level you are investigating, then type “0” in the Hypothesized Mean Difference box.
+
+The two remaining t-Tests in Excel are for analysis with independent datasets. The tests are t-Test: Two-Sample Assuming Equal Variances and t-Test: Two-Sample Assuming Unequal Variances. You could use the two-sample t-Test to determine if there is a difference between purchase amounts for males and females. You could also use the test to determine if sales have changed between last year and this year. The difference between the two tests is that one deals with equal variances, and the other deals with unequal variances. You will need to determine before selecting the test if the variances are nearly equal or not. You can determine if the variances of two datasets are equal by using the Descriptive Statistics tool discussed in Descriptive Statistics. When you choose the appropriate function, an input window will appear (). As with the Paired test, you will need to select the two ranges of data and a Hypothesized Mean Difference. If there is no difference, then type “0” into the Hypothesized Mean Difference box.
+
+Using the WorldCorp data file with unit price, you can determine if there is a difference in the unit price between Home Stereo Systems and Computer Servers Accessories. The t-Test is appropriate for this analysis because the population standard deviation is not known. In other words, you do not know whether the data follows the normal distribution. Upon verification, you determine that the variances of the two groups are very different, so you should choose the t-Test: Two-Sample Assuming Unequal Variances ().
+
+The output from the function gives all the information needed to make the decision for the hypothesis test. As with previous functions, clean up the decimal points and reformat. The output obtained from
+[truncated]

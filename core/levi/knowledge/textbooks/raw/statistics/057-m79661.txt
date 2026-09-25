@@ -1,0 +1,245 @@
+# m79661
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Null and Alternative Hypotheses
+
+Null and Alternative Hypotheses
+
+The actual test begins by considering two hypotheses. They are called the null hypothesis and the alternative hypothesis. These hypotheses contain opposing viewpoints.
+H0, the null hypothesis: a statement of no difference between sample means or proportions or no difference between a sample mean or proportion and a population mean or proportion. In other words, the difference equals 0.
+Ha, the alternative hypothesis: a claim about the population that is contradictory to H0 and what we conclude when we reject H0.
+
+Since the null and alternative hypotheses are contradictory, you must examine evidence to decide if you have enough evidence to reject the null hypothesis or not. The evidence is in the form of sample data.
+
+After you have determined which hypothesis the sample supports, you make a decision.
+There are two options for a decision. They are reject H0 if the sample information favors the alternative hypothesis or do not reject H0 or decline to reject H0 if the sample information is insufficient to reject the null hypothesis.
+
+Mathematical Symbols Used in H0 and Ha:
+
+H0
+Ha
+
+equal (=)
+not equal (≠) or greater than (>) or less than (<)
+
+greater than or equal to (≥)
+less than (<)
+
+less than or equal to (≤)
+more than (>)
+Ha
+equal (=)
+not equal (≠) or greater than (>) or less than (<)
+greater than or equal to (≥)
+less than (<)
+less than or equal to (≤)
+more than (>)
+Note
+H0 always has a symbol with an equal in it. Ha never has a symbol with an equal in it. The choice of symbol depends on the wording of the hypothesis test. However, be aware that many researchers use = in the null hypothesis, even with > or < as the symbol in the alternative hypothesis. This practice is acceptable because we only make the decision to reject or not reject the null hypothesis.
+H0: No more than 30 percent of the registered voters in Santa Clara County voted in the primary election. p ≤ 30
+Ha: More than 30 percent of the registered voters in Santa Clara County voted in the primary election. p > 30
+
+Try It
+
+A medical trial is conducted to test whether or not a new medicine reduces cholesterol by 25 percent. State the null and alternative hypotheses.
+H0 : The drug reduces cholesterol by 25 percent. p = 0.25
+Ha : The drug does not reduce cholesterol by 25 percent. p ≠ 0.25
+
+We want to test whether the mean GPA of students in American colleges is different from 2.0 (out of 4.0). The null and alternative hypotheses are the following:
+H0: μ = 2.0
+Ha: μ ≠ 2.0
+
+Try It
+
+We want to test whether the mean height of eighth graders is 66 inches. State the null and alternative hypotheses. Fill in the correct symbol (=, ≠, ≥, <, ≤, >) for the null and alternative hypotheses.
+H0: μ __ 66
+Ha: μ __ 66
+H0: μ __ 66
+Ha: μ __ 66
+H0 : μ = 66
+Ha : μ ≠ 66
+
+We want to test if college students take fewer than five years to graduate from college, on the average. The null and alternative hypotheses are the following:
+H0: μ ≥ 5
+Ha: μ < 5
+
+Try It
+
+We want to test if it takes fewer than 45 minutes to teach a lesson plan. State the null and alternative hypotheses. Fill in the correct symbol ( =, ≠, ≥, <, ≤, >) for the null and alternative hypotheses.
+H0: μ __ 45
+Ha: μ __ 45
+H0: μ __ 45
+Ha: μ __ 45
+H0: μ ≥ 45
+Ha: μ < 45
+
+An article on school standards stated that about half of all students in France, Germany, and Israel take advanced placement exams and a third of the students pass. The same article stated that 6.6 percent of U.S. students take advanced placement exams and 4.4 percent pass. Test if the percentage of U.S. students who take advanced placement exams is more than 6.6 percent. State the null and alternative hypotheses.
+H0: p ≤ 0.066
+Ha: p > 0.066
+
+Try It
+
+On a state driver’s test, about 40 percent pass the test on the first try. We want to test if more than 40 percent pass on the first try. Fill in the correct symbol (=, ≠, ≥, <, ≤, >) for the null and alternative hypotheses.
+
+H0: p __ 0.40
+Ha: p __ 0.40
+H0: p __ 0.40
+Ha: p __ 0.40
+H0: p = 0.40
+Ha: p > 0.40
+
+Bring to class a newspaper, some news magazines, and some internet articles. In groups, find articles from which your group can write null and alternative hypotheses. Discuss your hypotheses with the rest of the class.
+
+Chapter Review
+
+In a hypothesis test, sample data are evaluated in order to arrive at a decision about some type of claim. If certain conditions about the sample are satisfied, then the claim can be evaluated for a population. In a hypothesis test, we do the following:
+
+Evaluate the null hypothesis, typically denoted with H0. The null is not rejected unless the hypothesis test shows otherwise. The null statement must always contain some form of equality (=, ≤, or ≥).
+
+Always write the alternative hypothesis, typically denoted with Ha or H1, using less than, greater than, or not equals symbols, i.e., (≠, >, or <).
+
+If we reject the null hypothesis, then we can assume there is enough evidence to support the alternative hypothesis.
+
+Never state that a claim is proven true or false. Keep in mind the underlying fact that hypothesis testing is based on probability laws; therefore, we can talk only in terms of non-absolute certainties.
+
+Evaluate the null hypothesis, typically denoted with H0. The null is not rejected unless the hypothesis test shows otherwise. The null statement must always contain some form of equality (=, ≤, or ≥).
+
+Always write the alternative hypothesis, typically denoted with Ha or H1, using less than, greater than, or not equals symbols, i.e., (≠, >, or <).
+
+If we reject the null hypothesis, then we can assume there is enough evidence to support the alternative hypothesis.
+
+Never state that a claim is proven true or false. Keep in mind the underlying fact that hypothesis testing is based on probability laws; therefore, we can talk only in terms of non-absolute certainties.
+
+Formula Review
+H0 and Ha are contradictory.
+If H0 has:
+equal (=)
+greater than or equal to (≥)
+then Ha has:
+not equal (≠) or greater than (>) or less than (<)
+less than (<)
+greater than (>)
+If α ≤ p-value, then do not reject H0.
+
+If α > p-value, then reject H0.
+α is preconceived. Its value is set before the hypothesis test starts. The p-value is calculated from the data.
+
+You are testing that the mean speed of your cable internet connection is more than three megabits per second. What is the random variable? Describe it in words.
+
+The random variable is the mean Internet speed in megabits per second.
+
+You are testing that the mean speed of your cable internet connection is more than three megabits per second. State the null and alternative hypotheses.
+
+The American family has an average of two children. What is the random variable? Describe in words.
+
+The random variable is the mean number of children an American family has.
+
+The mean entry level salary of an employee at a company is $58,000. You believe it is higher for IT professionals in the company. State the null and alternative hypotheses.
+
+A sociologist claims the probability that a person picked at random in Times Square in New York City is visiting the area is 0.83. You want to test to see if the proportion is actually less. What is the random variable? Describe in words.
+
+The random variable is the proportion of people picked at random in Times Square visiting the city.
+
+A sociologist claims the probability that a person picked at random in Times Square in New York City is visiting the area is 0.83. You want to test to see if the claim is correct. State the null and alternative hypotheses.
+
+In a population of fish, approximately 42 percent are female. A test is conducted to see if, in fact, the proportion is less. State the null and alternative hypotheses.
+H0: p = 0.42
+Ha: p < 0.42
+H0: p = 0.42
+Ha: p < 0.42
+
+Suppose that a recent article stated that the mean time students spend doing homework each week is 2.5 hours. A study was then done to see if the mean time has increased in the new century. A random sample of 26 students. The mean length of time the students spent on homework was 3 hours with a standard deviation of 1.8 hours. Suppose that it is somehow known that the population standard deviation is 1.5. If you were conducting a hypothesis test to determine if the mean length of homework has increased, what would the null and alternative hypotheses be? The distribution of the population is normal.
+H0: ________
+
+Ha: ________
+H0: ________
+Ha: ________
+
+A random survey of 75 long-term marathon runners revealed that the mean length of time they've been running is 17.4 years with a standard deviation of 6.3 years. If you were conducting a hypothesis test to determine if the population mean time for these runners could likely be 15 years, what would the null and alternative hypotheses be?
+H0: __________
+Ha: __________
+H0: μ = 15
+Ha: μ ≠ 15
+
+Researchers published an article stating that in any one-year period, approximately 9.5 percent of American adults suffer from a particular type of disease. Suppose that in a survey of 100 people in a certain town, seven of them suffered from this disease. If you were conducting a hypothesis test to determine if the true proportion of people in that town suffering from this disease is lower than the percentage in the general adult American population, what would the null and alternative hypotheses be?
+H0: ________
+Ha: ________
+H0: ________
+Ha: ________
+
+Homework
+
+Some of the following statements refer to the null hypothesis, some to the alternate hypothesis.
+
+State the null hypothesis, H0, and the alternative hypothesis. Ha, in terms of the appropriate parameter (μ or p).
+
+The mean number of years Americans work before retiring is 34.
+
+At most 60 percent of Americans vote in presidential elections.
+
+The mean starting salary for San Jose State University graduates is at least $100,000 per year.
+
+Twenty-nine percent of high school students take physical education daily.
+
+Less than 5 percent of adults ride the bus to work in Los Angeles.
+
+The mean number of cars a person owns in her lifetime is not more than 10.
+
+About half of Americans prefer to live away from cities, given the choice.
+
+Europeans have a mean paid vacation each year of six weeks.
+
+The chance of developing breast cancer is under 11 percent for women.
+
+Private universities' mean tuition cost is more than $20,000 per year.
+H0: μ = 34; Ha: μ ≠ 34
+H0: p ≤ 0.60; Ha: p > 0.60
+H0: μ ≥ 100,000; Ha: μ < 100,000
+H0: p = 0.29; Ha: p ≠ 0.29
+H0: p = 0.05; Ha: p < 0.05
+H0: μ ≤ 10; Ha: μ > 10
+H0: p = 0.50; Ha: p ≠ 0.50
+H0: μ = 6; Ha: μ ≠ 6
+H0: p ≥ 0.11; Ha: p < 0.11
+H0: μ ≤ 20,000; Ha: μ > 20,000
+
+A recent survey of 273 randomly selected teens living in Massachusetts asked about social media. Sixty-three said that they routinely use a certain app to share pictures. The researchers want to determine if there is good evidence that more than 30 percent of teens use this app. The alternative hypothesis is as follows:
+p < 0.30
+p ≤ 0.30
+p ≥ 0.30
+p > 0.30
+
+A statistics instructor believes that fewer than 20 percent of Evergreen Valley College (EVC) students attended the opening night midnight showing of the latest Harry Potter movie. She surveys 84 of her students and finds that 11 attended the midnight showing. An appropriate alternative hypothesis is as follows:
+p = 0.20
+p > 0.20
+p < 0.20
+p ≤ 0.20
+
+c
+
+Previously, an organization reported that teenagers spent 4.5 hours per week, on average, on the phone. The organization thinks that, currently, the mean is higher. Fifteen randomly chosen teenagers were asked how many hours per week they spend on the phone. The sample mean was 4.75 hours with a sample standard deviation of 2.0. Conduct a hypothesis test. The null and alternative hypotheses are as follows:
+Ho: 
+
+x
+¯
+
+ = 4.5, Ha : 
+
+x
+¯
+
+ > 4.5
+Ho: μ ≥ 4.5, Ha: μ < 4.5
+Ho: μ = 4.75, Ha: μ > 4.75
+Ho: μ = 4.5, Ha: μ > 4.5
+
+References
+
+Centers for Disease Control and Prevention. (n.d.). Physical activity facts. Retrieved from http://www.cdc.gov/healthyschools/physicalactivity/facts.htm
+
+National Institute of Mental Health. (n.d.). Publications about depression. Retrieved from http://www.nimh.nih.gov/publicat/depression.cfm
+
+a statement about the value of a population parameter; in the case of two hypotheses, the statement assumed to be true is called the null hypothesis (notation H0) and the contradictory statement is called the alternative hypothesis (notation Ha)

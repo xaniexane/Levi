@@ -1,0 +1,889 @@
+# m79689
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+The Regression Equation
+
+The Regression Equation
+
+Data rarely fit a straight line exactly. Usually, you must be satisfied with rough
+predictions. Typically, you have a set of data with a scatter plot that appear to fit a straight line. This is called a line of best fit or least-squares regression line.
+
+If you know a person’s pinky (smallest) finger length, do you think you could predict that person’s height? Collect data from your class (pinky finger length, in inches). The independent variable, x, is pinky finger length and the dependent variable, y, is height. For each set of data, plot the points on graph paper. Make your graph big enough and use a ruler. Then, by eye, draw a line that appears to fit the data. For your line, pick two convenient points and use them to find the slope of the line. Find the y-intercept of the line by extending your line so it crosses the y-axis. Using the slopes and the y-intercepts, write your equation of best fit. Do you think everyone will have the same equation? Why or why not? According to your equation, what is the predicted height for a pinky length of 2.5 inches?
+
+A random sample of 11 statistics students produced the data in , where x is the third exam score out of 80 and y is the final exam score out of 200. Can you predict the final exam score of a random student if you know the third exam score?
+y (final exam score)
+65
+175
+67
+133
+71
+185
+71
+163
+66
+126
+75
+198
+67
+153
+70
+163
+71
+159
+69
+151
+69
+159
+Try It
+
+SCUBA divers have maximum dive times they cannot exceed when going to different depths. The data in show different depths in feet, with the maximum dive times in minutes. Use your calculator to find the least squares regression line and predict the maximum dive time for 110 feet.
+y (maximum dive time)
+50
+80
+60
+55
+70
+45
+80
+35
+90
+25
+100
+ŷ = 127.24 – 1.11x
+
+At 110 feet, a diver could dive for only five minutes.
+
+The third exam score, x, is the independent variable, and the final exam score, y, is the dependent variable. We will plot a regression line that best fits the data. If each of you were to fit a line by eye, you would draw different lines. We can obtain a line of best fit using either the median-median line approach or by calculating the least-squares regression line.
+
+Let's first find the line of best fit for the relationship between the third exam score and the final exam score using the median-median line approach. Remember that this is the data from after the ordered pairs have been listed by ordering x values. If multiple data points have the same y values, then they are listed in order from least to greatest y (see data values where x = 71). We first divide our scores into three groups of approximately equal numbers of x values per group. The first and third groups have the same number of x values. We must remember first to put the x values in ascending order. The corresponding y values are then recorded. However, to find the median, we first must rearrange the y values in each group from the least value to the greatest value. shows the correct ordering of the x values but does not show a reordering of the y values.
+y (final exam score)
+65
+175
+66
+126
+67
+133
+67
+153
+69
+151
+69
+159
+70
+163
+71
+159
+71
+163
+71
+185
+75
+198
+With this set of data, the first and last groups each have four x values and four corresponding y values. The second group has three x values and three corresponding y values. We need to organize the x and y values per group and find the median x and y values for each group. Let’s now write out our y values for each group in ascending order. For group 1, the y values in order are 126, 133, 153, and 175. For group 2, the y values are already in order. For group 3, the y values are also already in order. We can represent these data as shown in , but notice that we have broken the ordered pairs; (65, 126) is not a data point in our original set:
+
+y (final exam score)
+Median x value
+Median y value
+1
+65666767
+126133153175
+66.5
+143
+2
+696970
+151159163
+69
+159
+3
+71717175
+159163185198
+71
+174
+When this is completed, we can write the ordered pairs for the median values. This allows us to find the slope and y-intercept of the median-median line.
+
+The ordered pairs are (66.5, 143), (69, 159), and (71, 174).
+
+The slope can be calculated using the formula 
+
+  m−
+
+ y
+ 2
+ 
+ −
+ y
+ 1
+
+ x
+ 2
+ 
+ −
+ x
+ 1
+
+ .
+
+ Substituting the median x and y values from the first and third groups gives 
+
+ m=
+ 
+ 174−143
+
+ 71−66.5
+
+ ,
+
+ which simplifies to 
+
+ m≈ 6.9
+.
+
+The y-intercept may be found using the formula 
+
+ b=
+ 
+ Σy−mΣx
+ 
+ 3
+
+, which means the quantity of the sum of the median y values minus the slope times the sum of the median x values divided by three.
+
+The sum of the median x values is 206.5, and the sum of the median y values is 476. Substituting these sums and the slope into the formula gives 
+
+b=
+ 
+ 476−6.9(206.5)
+ 
+ 3
+
+, which simplifies to 
+
+ b≈−316.3
+.
+
+The line of best fit is represented as 
+
+ y=mx+b
+.
+
+Thus, the equation can be written as y = 6.9x − 316.3.
+
+The median–median line may also be found using your graphing calculator. You can enter the x and y values into two separate lists; choose Stat, Calc, Med-Med, and press Enter. The slope, a, and y-intercept, b, will be provided. The calculator shows a slight deviation from the previous manual calculation as a result of rounding. Rounding to the nearest tenth, the calculator gives the median-median line of 
+ 
+ y=6.9x−315.5
+.
+ 
+ Each point of data is of the the form (x, y), and each point of the line of best fit using least-squares linear regression has the form (x, ŷ).
+
+The ŷ is read y hat and is the estimated value of y. It is the value of y obtained using the regression line. It is not generally equal to y from data, but it is still important because it can help make predictions for other values.
+
+The term y0 – ŷ0 = ε0 is called the error or residual. It is not an error in the sense of a mistake. The absolute value of a residual measures the vertical distance between the actual value of y and the estimated value of y. In other words, it measures the vertical distance between the actual data point and the predicted point on the line, or it measures how far the estimate is from the actual data value.
+
+If the observed data point lies above the line, the residual is positive and the line underestimates the actual data value for y. If the observed data point lies below the line, the residual is negative and the line overestimates that actual data value for y.
+
+In , y0 – ŷ0 = ε0 is the residual for the point shown. Here the point lies above the line and the residual is positive.
+ε = the Greek letter epsilon
+
+For each data point, you can calculate the residuals or errors, yi  ŷi = εi for i = 1, 2, 3, . . . , 11.
+
+Each |ε| is a vertical distance.
+
+For the example about the third exam scores and the final exam scores for the 11 statistics students, there are 11 data points. Therefore, there are 11 ε values. If you square each ε and add them, you get the sum of ε squared from i = 1 to i = 11, as shown below.
+(
+ ε
+ 1
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ ε
+ 2
+ 
+ )
+ 
+ 2
+ 
+ +...+
+ 
+ (
+ ε
+ 
+ 11
+
+ )
+ 
+ 2
+ 
+ =
+
+ Σ
+ 
+ i = 1
+
+ 11
+
+ ε
+ 2
+ 
+ .
+
+This is called the sum of squared errors (SSE).
+
+Using calculus, you can determine the values of a and b that make the SSE a minimum. When you make the SSE a minimum, you have determined the points that are on the line of best fit. It turns out that the line of best fit has the equation
+
+where
+a=
+ y
+ ¯
+ 
+ −b
+ x
+ ¯
+
+and 
+
+ b=
+ 
+ ∑(
+ 
+ x−
+ x
+ ¯
+
+ )(
+ 
+ y−
+ y
+ ¯
+
+ )
+
+ ∑
+ 
+ (
+ 
+ x−
+ x
+ ¯
+
+ )
+ 
+ 2
+
+.
+
+The sample means of the x values and the y values are 
+ 
+ x
+ ¯
+
+ and 
+ 
+ y
+ ¯
+
+, respectively. The best-fit line always passes through the point 
+ 
+ (
+ x
+ ¯
+ 
+ ,
+ y
+ ¯
+ 
+ )
+ 
+.
+
+The slope (b) can be written as 
+ 
+ b=r(
+
+ s
+ y
+
+ s
+ x
+
+ )
+ 
+ where sy = the standard deviation of the y values and sx = the standard deviation of the x values. r is the correlation coefficient, which shows the relationship between the x and y values. This will be discussed in more detail in the next section.
+
+Least-Squares Criteria for Best Fit
+
+The process of fitting the best-fit line is called linear regression. We assume that the data are scattered about a straight line. To find that line, we minimize the sum of the squared errors (SSE), or make it as small as possible. Any other line you might choose would have a higher SSE than the best-fit line. This best-fit line is called the least-squares regression line.
+
+Note
+
+Computer spreadsheets, statistical software, and many calculators can quickly calculate the best-fit line and create the graphs. The calculations tend to be tedious if done by hand. Instructions to use the TI-83, TI-83+, and TI-84+ calculators to find the best-fit line and create a scatter plot are shown at the end of this section.
+
+Third Exam vs. Final Exam Example
+
+The graph of the line of best fit for the third exam/final exam example is as follows:
+
+The least-squares regression line (best-fit line) for the third exam/final exam example has the equation
+
+Understanding and Interpreting the y-intercept
+
+The y-intercept, a, of the line describes where the plot line crosses the y-axis. The y-intercept of the best-fit line tells us the best value of the relationship when x is zero. In some cases, it does not make sense to figure out what y is when x = 0. For example, in the third exam vs. final exam example, the y-intercept occurs when the third exam score, or x, is zero. Since all the scores are grouped around a passing grade, there is no need to figure out what the final exam score, or y, would be when the third exam was zero.
+
+However, the y-intercept is very useful in many cases. For many examples in science, the y-intercept gives the baseline reading when the experimental conditions aren't applied to an experimental system. This baseline indicates how much the experimental condition affects the system. It could also be used to ensure that equipment and measurements are calibrated properly before starting the experiment.
+
+In biology, the concentration of proteins in a sample can be measured using a chemical assay that changes color depending on how much protein is present. The more protein present, the darker the color. The amount of color can be measured by the absorbance reading. shows the expected absorbance readings at different protein concentrations. This is called a standard curve for the assay.
+
+Concentration (mM)
+Absorbance (mAU)
+125
+0.021
+250
+0.023
+500
+0.068
+750
+0.086
+1,000
+0.105
+1,500
+0.124
+2,000
+0.146
+The scatter plot includes the line of best fit.
+
+The y-intercept of this line occurs at 0.0226 mAU. This means the assay gives a reading of 0.0226 mAU when there is no protein present. That is, it is the baseline reading that can be attributed to something else, which, in this case, is some other non-protein chemicals that are absorbing light. We can tell that this line of best fit is reasonable because the y-intercept is small, close to zero. When there is no protein present in the sample, we expect the absorbance to be very small, or close to zero, as well.
+
+Understanding Slope
+
+The slope of the line, b, describes how changes in the variables are related. It is important to interpret the slope of the line in the context of the situation represented by the data. You should be able to write a sentence interpreting the slope in plain English.
+Interpretation of the Slope: The slope of the best-fit line tells us how the dependent variable (y) changes for every one unit increase in the independent (x) variable, on average.
+Third Exam vs. Final Exam ExampleSlope: The slope of the line is b = 4.83.
+Interpretation: For a 1-point increase in the score on the third exam, the final exam score increases by 4.83 points, on average.
+
+Third Exam vs. Final Exam Example
+
+Using the Linear Regression T Test: LinRegTTest
+
+In the STAT list editor, enter the x data in list L1 and the y data in list L2, paired so that the corresponding (x, y) values are next to each other in the lists. (If a particular pair of values is repeated, enter it as many times as it appears in the data.)
+
+On the STAT TESTS menu, scroll down and select LinRegTTest. (Be careful to select LinRegTTest. Some calculators may also have a different item called LinRegTInt.)
+
+On the LinRegTTest input screen, enter Xlist: L1, Ylist: L2, and Freq: 1.
+
+On the next line, at the prompt β or ρ, highlight ≠ 0 and press ENTER.
+
+Leave the line for RegEQ: blank.
+
+Highlight Calculate and press ENTER.
+
+The output screen contains a lot of information. For now, let’s focus on a few items from the output and return to the other items later.
+The second line says y = a + bx. Scroll down to find the values a = –173.513 and b = 4.8273.
+
+The equation of the best-fit line is ŷ = –173.51 + 4.83x.
+The two items at the bottom are r2 = .43969 and r = .663. For now, just note where to find these values; we examine them in the next two sections.
+
+Graphing the Scatter Plot and Regression Line
+
+We are assuming the x data are already entered in list L1 and the y data are in list L2.
+
+Press 2nd STATPLOT ENTER to use Plot 1.
+
+On the input screen for PLOT 1, highlight On, and press ENTER.
+
+For TYPE, highlight the first icon, which is the scatter plot, and press ENTER.
+
+Indicate Xlist: L1 and Ylist: L2.
+
+For Mark, it does not matter which symbol you highlight.
+
+Press the ZOOM key and then the number 9 (for menu item ZoomStat); the calculator fits the window to the data.
+
+To graph the best-fit line, press the Y= key and type the equation –173.5 + 4.83X into equation Y1. (The X key is immediately left of the STAT key.) Press ZOOM 9 again to graph it.
+
+Optional: If you want to change the viewing window, press the WINDOW key. Enter your desired window using Xmin, Xmax, Ymin, and Ymax.
+
+NOTE
+
+Another way to graph the line after you create a scatter plot is to use LinRegTTest.
+
+Make sure you have done the scatter plot. Check it on your screen.
+Go to LinRegTTest and enter the lists.
+At RegEq, press VARS and arrow over to Y-VARS. Press 1 for 1:Function. Press 1 for 1:Y1. Then, arrow down to Calculate and do the calculation for the line of best fit.
+Press Y= (you will see the regression equation).
+Press GRAPH, and the line will be drawn.
+
+Make sure you have done the scatter plot. Check it on your screen.
+
+Go to LinRegTTest and enter the lists.
+
+At RegEq, press VARS and arrow over to Y-VARS. Press 1 for 1:Function. Press 1 for 1:Y1. Then, arrow down to Calculate and do the calculation for the line of best fit.
+
+Press Y= (you will see the regression equation).
+
+Press GRAPH, and the line will be drawn.
+
+The Correlation Coefficient r
+
+Besides looking at the scatter plot and seeing that a line seems reasonable, how can you determine whether the line is a good predictor? Use the correlation coefficient as another indicator (besides the scatter plot) of the strength of the relationship between x and y.
+
+The correlation coefficient, r, developed by Karl Pearson during the early 1900s, is numeric and provides a measure of the strength and direction of the linear association between the independent variable x and the dependent variable y.
+
+If you suspect a linear relationship between x and y, then r can measure the strength of the linear relationship.
+What the Value of r Tells Us
+
+The value of r is always between –1 and +1. In other words, –1 ≤ r ≤ 1.
+The size of the correlation r indicates the strength of the linear relationship between x and y. Values of r close to –1 or to +1 indicate a stronger linear relationship between x and y.
+
+If r = 0, there is absolutely no linear relationship between x and y (no linear correlation).
+If r = 1, there is perfect positive correlation. If r = –1, there is perfect negative correlation. In both these cases, all the original data points lie on a straight line. Of course, in the real world, this does not generally happen.
+
+What the Value of r Tells Us
+
+The value of r is always between –1 and +1. In other words, –1 ≤ r ≤ 1.
+
+The size of the correlation r indicates the strength of the linear relationship between x and y. Values of r close to –1 or to +1 indicate a stronger linear relationship between x and y.
+
+If r = 0, there is absolutely no linear relationship between x and y (no linear correlation).
+
+If r = 1, there is perfect positive correlation. If r = –1, there is perfect negative correlation. In both these cases, all the original data points lie on a straight line. Of course, in the real world, this does not generally happen.
+What the Sign of r Tells Us
+A positive value of r means that when x increases, y tends to increase and when x decreases, y tends to decrease (positive correlation).
+A negative value of r means that when x increases, y tends to decrease and when x decreases, y tends to increase (negative correlation).
+The sign of r is the same as the sign of the slope, b, of the best-fit line.
+
+What the Sign of r Tells Us
+
+A positive value of r means that when x increases, y tends to increase and when x decreases, y tends to decrease (positive correlation).
+
+A negative value of r means that when x increases, y tends to decrease and when x decreases, y tends to increase (negative correlation).
+
+The sign of r is the same as the sign of the slope, b, of the best-fit line.
+
+Note
+
+The correlation coefficient is calculated as the quantity of data points times the sum of the quantity of the x-coordinates times the y-coordinates, minus the quantity of the sum of the x-coordinates times the sum of the y-coordinates, all divided by the square root of the quantity of data points times the sum of the x-coordinates squared minus the square of the sum of the x-coordinates, times the number of data points times the sum of the y-coordinates squared minus the square of the sum of the y-coordinates. It can be summarized by the following equation:
+r=
+ 
+ nΣ(xy)−(Σx)(Σy)
+
+ [ 
+ nΣ
+ x
+ 2
+ 
+ −
+ 
+ (Σx)
+ 
+ 2
+
+ ][ 
+ nΣ
+ y
+ 2
+ 
+ −
+ 
+ (Σy)
+ 
+ 2
+
+ ]
+
+where n is the number of data points.
+
+The formula for r looks formidable. However, computer spreadsheets, statistical software, and many calculators can calculate r quickly. The correlation coefficient, r, is the bottom item in the output screens for the LinRegTTest on the TI-83, TI-83+, or TI-84+ calculator (see previous section for instructions).
+
+The Coefficient of Determination
+
+The variable r2 is called the coefficient of determination and it is the square of the correlation coefficient, but it is usually stated as a percentage, rather than in decimal form. It has an interpretation in the context of the data:
+r
+2
+
+,
+ when expressed as a percent, represents the percentage of variation in the dependent (predicted) variable y that can be explained by variation in the independent (explanatory) variable x using the regression (best-fit) line.
+
+1 – 
+ r
+2
+
+,
+ when expressed as a percentage, represents the percentage of variation in y that is not explained by variation in x using the regression line. This can be seen as the scattering of the observed data points about the regression line.
+
+Consider the third exam/final exam example introduced in the previous section.
+The line of best fit is: ŷ = –173.51 + 4.83x.
+ The correlation coefficient is r = .6631.
+The coefficient of determination is r2 = .66312 = .4397.
+
+The line of best fit is: ŷ = –173.51 + 4.83x.
+
+The correlation coefficient is r = .6631.
+
+The coefficient of determination is r2 = .66312 = .4397.
+
+Interpret r2 in the context of this example.
+Approximately 44 percent of the variation (0.4397 is approximately 0.44) in the final exam grades can be explained by the variation in the grades on the third exam, using the best-fit regression line.
+Therefore, the rest of the variation (1 – 0.44 = 0.56 or 56 percent) in the final exam grades cannot be explained by the variation of the grades on the third exam with the best-fit regression line. These are the variation of the points that are not as close to the regression line as others.
+
+Approximately 44 percent of the variation (0.4397 is approximately 0.44) in the final exam grades can be explained by the variation in the grades on the third exam, using the best-fit regression line.
+
+Therefore, the rest of the variation (1 – 0.44 = 0.56 or 56 percent) in the final exam grades cannot be explained by the variation of the grades on the third exam with the best-fit regression line. These are the variation of the points that are not as close to the regression line as others.
+
+Chapter Review
+
+A regression line, or a line of best fit, can be drawn on a scatter plot and used to predict outcomes for the x and y variables in a given data set or sample data. There are several ways to find a regression line, but usually the least-squares regression line is used because it creates a uniform line. Residuals, also called errors, measure the distance from the actual value of y and the estimated value of y. The sum of squared errors, or SSE, when set to its minimum, calculates the points on the line of best fit. Regression lines can be used to predict values within the given set of data but should not be used to make predictions for values outside the set of data.
+
+The correlation coefficient, r, measures the strength of the linear association between x and y. The variable r has to be between –1 and +1. When r is positive, x and y tend to increase and decrease together. When r is negative, x increases and y decreases, or the opposite occurs: x decreases and y increases. The coefficient of determination, r2, is equal to the square of the correlation coefficient. When expressed as a percentage, r2 represents the percentage of variation in the dependent variable, y, that can be explained by variation in the independent variable, x, using the regression line.
+
+Table 12.16 below represents the relationship between the number of hours spent studying and final exam grades.
+y (final exam grades)
+3
+50
+5
+72
+1
+45
+2
+51
+6
+80
+8
+96
+4
+65
+7
+90
+Fill in the following chart as a first step in finding the line of best fit, using the median–median approach.
+
+y (final exam grades)
+Median x Value
+Median y Value
+1
+2
+3
+y (final exam grades)
+Median x value
+Median y value
+1
+123
+455051
+2
+50
+2
+45
+6572
+4.5
+68.5
+3
+678
+809096
+7
+Use the following information to answer the next five exercises. A random sample of 10 professional athletes produced the following data, where x is the number of endorsements the player has and y is the amount of money made, in millions of dollars.
+x
+y
+x
+y
+
+0
+2
+5
+12
+
+3
+8
+4
+9
+
+2
+7
+3
+9
+
+1
+3
+0
+3
+
+5
+13
+4
+10
+
+y
+0
+2
+5
+12
+3
+8
+4
+9
+2
+7
+3
+9
+1
+3
+0
+3
+5
+13
+4
+10
+Draw a scatter plot of the data.
+
+Use regression to find the equation for the line of best fit.
+ŷ = 2.23 + 1.99x
+
+Draw the line of best fit on the scatter plot.
+
+What is the slope of the line of best fit? What does it represent?
+
+The slope is 1.99 (b = 1.99). It means that for every endorsement deal a professional player gets, he gets an average of another $1.99 million in pay each year.
+
+What is the y-intercept of the line of best fit? What does it represent?
+
+What does an r value of zero mean?
+
+It means that there is no correlation between the data sets.
+
+When n = 2 and r = 1, are the data significant? Explain.
+
+When n = 100 and r = –0.89, is there a significant correlation? Explain.
+
+Yes. There are enough data points and the value of r is strong enough to show there is a strong negative correlation between the data sets.
+
+Homework
+
+What is the process through which we can calculate a line that goes through a scatter plot with a linear pattern?
+
+Explain what it means when a correlation has an r2 value of .72.
+
+It means that 72 percent of the variation in the dependent variable (y) can be explained by the variation in the independent variable (x).
+
+Can a coefficient of determination be negative? Why or why not?
+
+The table below represents the relationship between SAT scores on the math portion of the test and high school grade point averages (GPAs).
+
+Use the median-median line approach to find the equation for the line of best fit.
+y (GPAs)
+624
+90
+544
+86
+363
+70
+373
+71
+350
+65
+741
+98
+262
+60
+587
+87
+327
+62
+364
+67
+261
+y (GPAs)
+261
+50
+262
+60
+327
+62
+350
+65
+363
+70
+364
+67
+373
+71
+544
+86
+587
+87
+624
+90
+741
+98
+We must remember to check the order of the y values within each group as well. We notice that the y values in the second group are not in order from the least value to the greatest value; these values thus must be reordered, meaning the median y value for that group is 70.
+
+y (GPAs)
+Median x value
+Median y value
+1
+261262327350
+50606265
+294.5
+61
+2
+363364373
+677071
+364
+70
+3
+544587624741
+86879098
+605.5
+88.5
+The ordered pairs are (294.5, 61), (364, 70), and (605.5, 88.5).
+
+The slope can be calculated using the formula 
+ 
+ m=
+
+ y
+ 3
+ 
+ −
+ y
+ 1
+
+ x
+ 3
+ 
+ −
+ x
+ 1
+
+ .
+ 
+ Substituting the median x and y values, from the first and third groups gives 
+ 
+ m=
+ 
+ 88.5−61
+
+ 605.5−294.5
+
+,
+ 
+ which simplifies to 
+ 
+ m≈0.09
+.
+
+The y-intercept may be found using the formula 
+ 
+ b=
+
+ ∑ 
+ y−m
+ ∑ x
+
+ 3
+ 
+ .
+ 
+ The sum of the median x values is 1264, and the sum of the median y values is 219.5. Substituting these sums and the slope into the formula gives 
+ 
+ b=
+ 
+ 219.5−0.09(1264)
+ 
+ 3
+ 
+ ,
+ 
+ which simplifies to 
+ 
+ b≈35.25
+.
+
+The line of best fit is represented as 
+ 
+ y=mx+b
+ 
+. Thus, the equation can be written as 
+ 
+ y=0.09x+35.25
+ .
+
+a measure developed by Karl Pearson during the early 1900s that gives the strength of association between the independent variable and the dependent variable;
+
+ r=
+ 
+ n
+
+ ∑
+ ​
+
+ ​
+ 
+ xy−[
+
+ ∑
+ ​
+
+ ​
+ 
+ x][
+
+ ∑
+ ​
+
+ ​
+ 
+ y]
+
+ (n
+
+ ∑
+ ​
+
+ ​
+
+ x
+ 2
+ 
+ −
+ 
+ [
+
+ ∑
+ ​
+
+ ​
+ 
+ x]
+ 
+ 2
+ 
+ )(n
+
+ ∑
+ ​
+
+ ​
+
+ y
+ 2
+ 
+ −
+ 
+ [
+
+ ∑
+ ​
+
+ ​
+ 
+ y]
+ 
+ 2
+ 
+ )
+
+where n is the number of data points
+The coefficient cannot be more than 1 and less than –1. The closer the coefficient is to ±1, the stronger the evidence of a significant linear relationship between x and y.

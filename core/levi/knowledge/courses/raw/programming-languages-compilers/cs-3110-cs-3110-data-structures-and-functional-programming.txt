@@ -1,0 +1,536 @@
+# CS 3110: Data Structures and Functional Programming
+# Cornell University
+# source: http://www.cs.cornell.edu/Courses/cs3110/2014fa/course_info.php
+
+CS 3110 - Fall 2014 - Course Info
+Skip to main content
+Cornell University
+Unit Name
+SEARCH:
+CS
+Cornell
+more options
+Home
+Syllabus
+Schedule
+CMS
+Piazza
+Resources
+CS 3110 Fall 2014 :: Data Structures and Functional Programming
+Staff
+Course Administration
+Materials
+Lectures and Sections
+Programming Assignments
+Exams
+Grading
+Academic Integrity
+Special Needs
+Syllabus
+CS 3110 (formerly CS 312) is the third programming course in the Computer Science curriculum,
+following CS 1110/1112 and CS 2110. The goal of the course is to help students
+become excellent programmers and software designers who can design and
+implement software that is elegant, efficient, and correct, and whose code
+can be maintained and reused.
+CS 3110 covers a broad range of topics, including:
+Alternative programming paradigms, especially functional and concurrent programming
+Writing and using specifications
+Modular programming and data abstraction
+Reasoning about program correctness
+Reasoning about system performance
+Useful and efficient data structures
+A complete listing of topics will evolve throughout the semester on the lecture notes
+page. Here is a (somewhat dated) diagram
+showing the course material and the dependencies among different parts of the course.
+Functional Programming in Objective Caml (OCaml)
+We use a programming language from the ML family of programming languages
+throughout the course: Objective Caml (OCaml).
+OCaml is a modern functional programming language with
+advanced type and module systems. However, the course is not
+about the OCaml language; rather, OCaml provides a convenient framework
+in which we can achieve the objectives of the course. Like the
+object-oriented model of Java, the functional paradigm of OCaml is an
+important programming model with which all students should be familiar, as
+it underlies the core of almost any high-level programming language. In
+addition, the OCaml type and module systems provide frameworks for ensuring
+code is modular, correct, re-usable, and elegant.
+In fact, OCaml does support objects, but we will
+focus more on other aspects of the language.
+By studying alternatives to object-oriented programming, students will
+be better equipped to use, implement or even design future
+programming environments that combine the best features of both worlds.
+Another important reason we use OCaml is that it has a relatively clean and
+simple evaluation model that makes it easier to reason about the correctness of
+programs. In our studies, we will
+reason not only about the functional correctness of code, but also the
+space, time, and other resources used in a computation.
+Staff
+PHOTO
+NAME
+POSITION
+OFFICE
+HOURS
+Michael Clarkson
+Instructor
+461 Gates
+Tuesday & Thursday 3–4pm
+Remy Jette (rcj57@cornell.edu)
+Course Administrator / TA
+Upson 360
+Tuesday 6-8pm
+Ralph Recto
+TA
+Upson 360
+Tuesday 8-10pm
+Michael Yang
+TA
+Upson 360
+Thursday 4-6pm
+Drew Weymouth
+TA
+Upson 360
+Thursday 6:30-8:30pm
+Kyle Genova
+TA
+Upson 360
+Thursday 7-9pm
+Linda Pei
+TA
+Upson 360
+Wednesday 8-10pm
+Andy Wang
+TA
+Upson 360
+Thursday 8:30-10:30pm
+Muhammad Khan
+TA
+Upson 360
+Monday 8-10pm
+Giang Nguyen
+TA
+Upson 360
+Monday 6-8pm
+David Kelly
+TA
+Upson 360
+Monday 8-10pm
+Quinn Beightol
+TA
+Upson 360
+Tuesday 6-8pm
+Patrick Cao
+TA
+Upson 360
+Sunday 6-8pm
+Arjun Biddanda
+TA
+Upson 360
+Thursday 8-10pm
+Ameya Acharya
+TA
+Upson 360
+Thursday 6-8pm
+Yuxiao Tan
+Consultant
+Upson 360
+Sunday 8-10pm
+Michael Whittaker
+Consultant
+Upson 360
+Sunday 8-10pm
+Chie Shu
+Consultant
+Upson 360
+Monday 6-8pm
+Rebant Srivastava
+Consultant
+Upson 360
+Thursday 4:30-6:30pm
+Sean Chen
+Consultant
+Upson 360
+Monday 4-6pm
+Joshua Reichler
+Consultant
+Upson 360
+Monday 8-10pm
+Emmett Kotlikoff
+Consultant
+Upson 360
+Tuesday 8-10pm, Wednesday 8-10pm
+Rene Zhang
+Consultant
+Upson 360
+Tuesday 6-8pm
+Amber Hillhouse
+Consultant
+Upson 360
+Wednesday 12:15-2:15pm
+Grant Hoffecker
+Consultant
+Upson 360
+Sunday 8-10pm
+Daniel Hanggi
+Consultant
+Upson 360
+Sunday 6-8pm
+Seung Hee Han
+Consultant
+Upson 360
+Tuesday 8-10pm
+Alan Cheng
+Consultant
+Upson 360
+Wednesday 3:30-6pm
+Victoria Yang
+Consultant
+Upson 360
+Monday 4:30-6:30pm
+Alice Meng
+Consultant
+Upson 360
+Monday 4:30-6:30pm
+Richard Zhang
+Consultant
+Upson 360
+Wednesday 6-8pm
+Patrick Niedzielski
+Consultant
+Upson 360
+Wednesday 6-10pm, Thursday 6-10pm
+Derek Chen
+Consultant
+Upson 360
+Wednesday 6-8pm
+Kavan Bhavin
+Consultant
+Upson 360
+Sunday 8-10pm
+Staff Responsibilities
+The teaching assistants (TAs) teach recitation sections and assist with homework and exams.
+All TAs hold regular office hours, and we encourage you to attend them if you have difficulties.
+The consultants are undergraduates who have excelled in their coursework
+and are employed as graders and tutors. They also hold regular office hours.
+The course administrator provides clerical and logistical support for the course.
+Please notify the course administrator of any errors or discrepancies in the website.
+Consulting runs only when Cornell is in session.
+Consulting hours end at 6pm on a day following an assignment due date and 7pm on a prelim day.
+There are no consulting hours during official breaks.
+Consulting ends on the last shift on the last week of classes.
+Course Administration
+Website
+The course website is
+http://www.cs.cornell.edu/courses/cs3110/ .
+Announcements and Discussion Forum
+We will be using Piazza for announcements and class discussion.
+Piazza is a web-based discussion forum for communication with
+classmates and the course staff.
+You can sign up at http://www.piazza.com/cornell/spring2014/cs3110 .
+You are responsible for familiarizing yourself with all announcements
+made on Piazza.
+The staff continuously monitor the forum and will respond to questions
+in a timely manner.
+This is the most efficient method of getting help and has the
+added advantage that others can benefit from your question.
+If you know the answer to a question, feel free to post a reply yourself,
+but avoid giving away any hints on the homework or posting any part of a solution.
+This will be considered a violation of Academic Integrity.
+Generally, rough algorithms or non-solution-specific code fragments are ok if
+you need them to illustrate a point.
+Email Policy
+Refrain from emailing the course staff directly.
+For confidential matters, post a private question to Piazza.
+This is the most effective way for the course staff to manage
+such a large course.
+If you do happen to send course-related email to the instructor,
+understand that it will be answered only during specific times
+set aside during the week for this purpose.
+Do not expect an instantaneous response.
+Do not send email about problem sets; such email will be ignored.
+CMS
+We are using the course management system CMS.
+Everyone who preregistered for the course is entered,
+but if you did not preregister, you are probably missing.
+Please login to http://cms.csuglab.cornell.edu/
+and check whether you exist.
+There will be a list of courses you are registered for, and CS 3110 should be one of them.
+If not, please send your full name and Cornell netID to the
+Course Administrator so that you can be registered.
+You can check your grades and submit homework in CMS.
+There is a help page with instructions.
+Materials
+Text
+There is no official textbook for the course. However, here are some useful resources:
+OCaml Reference Manual
+Introduction to Objective Caml , by Jason Hickey, to be published by Cambridge University Press
+Other OCaml Resources
+The last link contains many other resources on the Web for OCaml,
+including other tutorials, free compilers, libraries, etc.
+If you want to buy a book, Real World OCaml (Yaron Minsky,
+Anil Madhavapeddy, and Jason Hickey, O'Reilly, 2013, ISBN 978-1-449-32391-2)
+is a good choice. Two of the three authors are Cornellians.
+Handouts
+All handouts will be available either on the course web site or in CMS in pdf, html, or plain text format. Check often for new postings.
+i>clickers
+You are required to have an i>clicker
+and to bring it to class every day.
+You can buy an i>clicker at The Cornell Store.
+Or you can use i>clicker GO ,
+an app that runs on iOS and Android.
+Cornell CIT provides technical support for i>clicker .
+You will need to
+register your i>clicker
+with CIT.
+Use of someone else's i>clicker, either because you forgot yours or because they
+cannot be there and asked you to click theirs, is a violation of the
+Code of Academic Integrity and will be prosecuted.
+You will never be graded on whether the answers you submit by i>clicker
+are correct; it is part of your participation grade.
+Lectures and Sections
+In the table below, LEC=lecture, DIS=recitation section, MW=Monday & Wednesday, TR=Tuesday & Thursday.
+Time and Place
+ID
+SECTION
+DAY & TIME
+ROOM
+INSTRUCTOR
+11258
+LEC 001
+TR 10:10AM - 11:00AM
+Olin 155
+Clarkson
+11259
+DIS 201
+MW 02:30PM - 03:20PM
+Hollister 306
+Recto & Yang
+11260
+DIS 202
+MW 3:35PM - 4:25PM
+Hollister 306
+Nguyen & Pei
+11261
+DIS 203
+MW 7:30PM - 8:20PM
+Hollister 306
+Beightol & Hanggi
+13144
+DIS 204
+MW 10:10AM - 11:00AM
+Hollister 306
+Cao
+13145
+DIS 205
+TR 1:25PM - 2:15PM
+Hollister 306
+Jette
+13146
+DIS 206
+TR 3:35PM - 4:25PM
+Hollister 306
+Kelly
+13250
+DIS 207
+MW 2:30PM - 3:20PM
+Snee 1150
+Weymouth
+13251
+DIS 208
+MW 2:30PM - 3:20PM
+Thurston 203
+Biddanda
+13252
+DIS 209
+MW 3:35PM - 4:25PM
+Phillips 203
+Khan
+13253
+DIS 210
+MW 3:35PM - 4:25PM
+Hollister 110
+Acharya
+13254
+DIS 211
+MW 7:30PM - 8:20PM
+Hollister 110
+Genova
+Attendance
+Attendance at lecture and section is mandatory.
+Section will cover new material not covered in lecture and provide an opportunity for
+questions on recent material, assignments, and exams. You must register for a section,
+but you may attend any section. However, we prefer that you select one and stay with it.
+Occasionally section instructors temporarily move their section to a
+computer lab. Pay attention to announcements to keep track of any
+room changes.
+Notes
+Lecture and section notes will be available on the lecture notes page.
+Programming Assignments
+There will be six problem sets (and an initial, optional Problem Set 0).
+Each problem set will involve a programming assignment and may include written
+exercises and optional karma problems .
+Posted due dates are subject to change.
+Assignments are due at 11:59pm on the due date.
+You should start assignments early.
+The best use of your time is to
+think about the problems before typing anything at the
+computer.
+Karma Problems
+Assignments may include optional problems called karma
+problems . These problems exist to provide an extra challenge for those
+who are up to it. Karma problems will be graded, but will not affect your
+score—they mostly just give good karma. Students who do karma
+problems will be noticed, and doing them may be taken into account when
+assigning final grades. For example, karma might make a difference if you are right on the line between
+a B+ and an A–. However, spending your time on regular
+problems is almost always a more effective way to improve your overall score.
+Tackle karma problems only after you are sure you have the rest of the
+assignment well in hand.
+Joint Work
+All assignments will be done in pairs. You will submit a single joint
+assignment with both names on it. You must form a group in CMS to do
+this.
+Under no circumstances may you collaborate on the homework with
+anyone except your partner or misrepresent the authorship of your submitted work.
+Please see the section on Academic Integrity below.
+Submission
+You must submit your work online via CMS.
+Follow the online instructions for submitting files.
+You may upload as many times as you wish, and only the latest version
+will be graded. Note however that if you upload both before and after the deadline,
+the one after the deadline will be taken, and you will be subject to a late penalty.
+If you are working with a partner, you should coordinate
+with your partner well in advance of the due date and time.
+You must register the partnership in CMS for each problem set.
+One of the partners must invite the other, and the other must accept the invitation.
+See the CMS online help for details. Only one of the partners need submit the files.
+Please be careful to submit the correct versions of your files.
+We will view the excuse "I accidentally submitted the wrong version" with
+extreme skepticism—we have heard it countless times.
+Please include the names and netIds (not your Cornell student id!)
+of you and your partner in all submitted files.
+Late Policy
+Submit your assignments on time.
+CMS tends to lag right near the deadline because too many
+students wait until the last minute to submit, so make sure to finalize your submission approximately 15 minutes before the deadline.
+Additionally, make certain that your code compiles.
+We use an automated test harness to thoroughly grade submissions.
+Code which does not compile cannot go through the harness and will receive an automatic zero.
+However, to avoid over-penalizing students for small typographical or cross-platform errors, the course staff will notify students if their submission did not compile and grant a 48 hour window to correct the error with a small (2-3 line) fix.
+If, after applying the fix, your code runs smoothly through the harness, it will receive no point deductions and be graded as if it were submitted correctly and on time.
+Late submissions will not be accepted.
+If you submit after submissions close on CMS, you will receive no credit for the assignment.
+The size of this course hinders our ability to deal with abberations in the grading schedule.
+In order to provide timely feedback, the course staff needs to receive submissions when they are due.
+That said, we understand that the responsiblities of a full courseload may become overbearing.
+Hence each student will be granted two late passes for assignments.
+Using a late pass grants an automatic 48 hour extension to submit the assignment.
+(On partner assignments, both partners must relinquish a late pass in order to receive an extension).
+The no-compile grace period does not apply to assignments submitted with a late pass:
+late-pass submissions that do not compile will receive minimal credit.
+Extensions will be granted only in exceptional circumstances, such as documented illness, and are handled exclusively by the instructor.
+Exams
+There will be two preliminary exams and a final exam.
+Exams will cover material presented in class and in recitation.
+Practice exams from previous semesters will be posted on CMS prior to the exam.
+The exam schedule can be found here .
+Makeup prelim exams are offered for students with conflicts.
+The makeup for a prelim is held on the same day as the prelim itself,
+but at 5:15–7:15 pm 5:30–7:00 pm [updated 10/01/14].
+All students with conflicts must notify the Course Administrator
+within the first two weeks of the course, so that we can
+reserve sufficiently large rooms.
+No other makeup exams will be offered, including no makeup
+for the final exam. Creation of alternative exams has become
+impractical in this course.
+If you cannot attend a prelim because of health or family
+crises, or similar life events, you may ask the Course Administrator
+for permission to be excused from the exam.
+If you miss an exam, and we excused you,
+we modify the grading formula to compute your grade with just
+the two other exams.
+If you cannot attend a prelim because of a job interview,
+sporting event, or similar extra-curricular conflicts,
+you must ask the Course Administrator how to proceed.
+We will most likely arrange for you to take the exam
+in a remote location, such as your hotel room.
+In either case, you must ask us for permission:
+don't just skip exams and assume you can be excused
+retroactively.
+If you miss an exam and we didn't excuse you, you get
+a zero for the missing score.
+Grading
+The breakdown for the overall course grade is as follows:
+Problem sets: 40%
+Preliminary exams: 30%
+Final exam: 25%
+Participation: 3%
+Meet your professor: 1%
+Course evaluation: 1%
+Problems sets are weighted equally.
+Problem set grading is normally done the weekend after the due date, and assignments returned the following week in section.
+Graders' comments will be posted on CMS.
+Preliminary exams are also weighted equally.
+Participation includes participation on Piazza and
+class participation through i>clicker. To get full credit
+for class participation on a given day,
+you must answer 75% of i>clicker
+questions during that class. (It doesn't matter whether your answer
+is correct.)
+Meet your professor means coming to the instructor's office hours
+at least one time during the semester, introducing yourself,
+identifying that this is your "meet your professor" visit,
+and chatting for awhile. You can chat about academic
+goals, the course, or anything else that seems interesting to you!
+Course evaluation means submitting a response to the online
+course evaluation conducted each semester by the university.
+Your responses are anonymous, of course, but the university does
+give the instructor a list of the names of students who complete
+the evaluation.
+Regrades
+For all graded work, you may request a regrade
+if you feel we have made an error in the grading or simply to request a
+clarification. There is a deadline for regrade requests, normally one
+week after grades have been posted.
+Regrades for problem sets are done using CMS. Follow the online instructions.
+For exams, attach a cover sheet to your exam with a description
+of the problem and submit it to the Course Administrator in person
+so that your request can be logged.
+Academic Integrity
+Absolute integrity is expected of every Cornell student in all
+academic undertakings.
+The instructor will prosecute violations aggressively.
+The course staff uses automated tools to detect plagiarism.
+You have been warned.
+You are responsible for understanding every word of these policies:
+Cornell University Code of Academic Integrity
+Computer Science Department Code of Academic Integrity
+The protocol for prosecution of violations is described here:
+Explanation of AI Proceedings .
+Under no circumstances may you hand
+in work done with or by someone else under your own name
+or share code with anyone else except your partner.
+(You would be amazed at how easy it is to tell when code has been shared.)
+You may discuss general questions regarding the OCaml language or the requirements of the
+assignment with others, but it must never go down to the level of
+program design or coding.
+All exams are closed book. You may not give nor receive assistance from anyone else during an exam.
+You may not give away any hints or post any code that might be
+part of a solution on Piazza. Rough algorithms or non-solution-specific
+code fragments are ok if you need them to illustrate a point.
+If you are unsure about what is permissible and what is not, please ask .
+Special Needs
+We provide appropriate academic accommodations
+for students with special needs and/or disabilities. Requests for academic
+accommodations are to be made during the first three weeks of the semester and
+must be accompanied by official documentation. Please register with
+Student Disability Services
+in 420 CCC to document your eligibility.
+Quick Links
+OCaml Reference Manual
+OCaml Tutorial
+Introduction to Objective Caml by Jason Hickey
+Other OCaml Resources
+OCaml Alliance Network
+CS 3110 OCaml Style Guide
+CS 3110 Guide to Emacs with Tuareg Mode
+©2005 – 2014 Cornell University

@@ -1,0 +1,660 @@
+# m54307
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Applications of Thermodynamics: Heat Engines, Heat Pumps, and Refrigerators
+
+Applications of Thermodynamics: Heat Engines, Heat Pumps, and Refrigerators
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Explain how heat engines, heat pumps, and refrigerators work in terms of the laws of thermodynamics
+
+Describe thermal efficiency
+
+Solve problems involving thermal efficiency
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(6) Science concepts. The student knows that changes occur within a physical system and applies the laws of conservation of energy and momentum. The student is expected to:
+
+(G) analyze and explain everyday examples that illustrate the laws of thermodynamics, including the law of conservation of energy and the law of entropy.
+(G) analyze and explain everyday examples that illustrate the laws of thermodynamics, including the law of conservation of energy and the law of entropy.
+
+Section Key Terms
+
+cyclical process
+heat engine
+heat pump
+thermal efficiency
+Teacher Support
+[BL][OL][AL]
+Return again to the discussion of efficiency that was begun at the start of the module. Review the ideal gas law, laws of thermodynamics, and entropy.
+[OL] Ask students whether they can explain the limits on efficiency in terms of what they have now learned.
+
+Heat Engines, Heat Pumps, and Refrigerators
+
+In this section, we’ll explore how heat engines, heat pumps, and refrigerators operate in terms of the laws of thermodynamics.
+
+One of the most important things we can do with heat is to use it to do work for us. A heat engine does exactly this—it makes use of the properties of thermodynamics to transform heat into work. Gasoline and diesel engines, jet engines, and steam turbines that generate electricity are all examples of heat engines.
+illustrates one of the ways in which heat transfers energy to do work. Fuel combustion releases chemical energy that heat transfers throughout the gas in a cylinder. This increases the gas temperature, which in turn increases the pressure of the gas and, therefore, the force it exerts on a movable piston. The gas does work on the outside world, as this force moves the piston through some distance. Thus, heat transfer of energy to the gas in the cylinder results in work being done.
+
+To repeat this process, the piston needs to be returned to its starting point. Heat now transfers energy from the gas to the surroundings, so that the gas’s pressure decreases, and a force is exerted by the surroundings to push the piston back through some distance.
+
+A cyclical process brings a system, such as the gas in a cylinder, back to its original state at the end of every cycle. All heat engines use cyclical processes.
+
+Heat engines do work by using part of the energy transferred by heat from some source. As shown in , heat transfers energy, 
+
+ Q
+ h
+
+, from the high-temperature object (or hot reservoir), whereas heat transfers unused energy, 
+
+ Q
+ c
+
+, into the low-temperature object (or cold reservoir), and the work done by the engine is W. In physics, a reservoir is defined as an infinitely large mass that can take in or put out an unlimited amount of heat, depending upon the needs of the system. The temperature of the hot reservoir is 
+
+ T
+ h
+ 
+ ,
+ 
+ and the temperature of the cold reservoir is 
+
+ T
+ c
+
+ .
+
+As noted, a cyclical process brings the system back to its original condition at the end of every cycle. Such a system’s internal energy, U, is the same at the beginning and end of every cycle—that is, 
+ 
+ ΔU=0
+
+. The first law of thermodynamics states that 
+ 
+ ΔU=Q−W
+,
+ 
+ where Q is the net heat transfer during the cycle, and W is the net work done by the system. The net heat transfer is the energy transferred in by heat from the hot reservoir minus the amount that is transferred out to the cold reservoir ( 
+ 
+ Q=
+ Q
+ h
+ 
+ −
+ Q
+ c
+
+ ). Because there is no change in internal energy for a complete cycle ( 
+ 
+ ΔU=0
+
+), we have
+
+so that
+
+Therefore, the net work done by the system equals the net heat into the system, or
+
+for a cyclical process.
+
+Because the hot reservoir is heated externally, which is an energy-intensive process, it is important that the work be done as efficiently as possible. In fact, we want W to equal 
+
+ Q
+ h
+
+, and for there to be no heat to the environment (that is, 
+
+ Q
+ c
+ 
+ =0
+ 
+ ). Unfortunately, this is impossible. According to the second law of thermodynamics, heat engines cannot have perfect conversion of heat into work. Recall that entropy is a measure of the disorder of a system, which is also how much energy is unavailable to do work. The second law of thermodynamics requires that the total entropy of a system either increases or remains constant in any process. Therefore, there is a minimum amount of 
+
+ Q
+ h
+
+ that cannot be used for work. The amount of heat rejected to the cold reservoir, 
+
+ Q
+ c
+ 
+ ,
+ 
+ depends upon the efficiency of the heat engine. The smaller the increase in entropy, 
+ 
+ ΔS
+
+, the smaller the value of 
+
+ Q
+ c
+
+, and the more heat energy is available to do work.
+Heat pumps, air conditioners, and refrigerators utilize heat transfer of energy from low to high temperatures, which is the opposite of what heat engines do. Heat transfers energy 
+
+ Q
+ c
+
+ from a cold reservoir and delivers energy 
+
+ Q
+ h
+
+ into a hot one. This requires work input, W, which produces a transfer of energy by heat. Therefore, the total heat transfer to the hot reservoir is
+
+The purpose of a heat pump is to transfer energy by heat to a warm environment, such as a home in the winter. The great advantage of using a heat pump to keep your home warm rather than just burning fuel in a fireplace or furnace is that a heat pump supplies 
+
+ Q
+ h
+ 
+ =
+ Q
+ c
+ 
+ +W
+ 
+ . Heat 
+
+ Q
+ c
+
+ comes from the outside air, even at a temperature below freezing, to the indoor space. You only pay for W, and you get an additional heat transfer of 
+
+ Q
+ c
+
+ from the outside at no cost. In many cases, at least twice as much energy is transferred to the heated space as is used to run the heat pump. When you burn fuel to keep warm, you pay for all of it. The disadvantage to a heat pump is that the work input (required by the second law of thermodynamics) is sometimes more expensive than simply burning fuel, especially if the work is provided by electrical energy.
+
+The basic components of a heat pump are shown in . A working fluid, such as a refrigerant, is used. In the outdoor coils (the evaporator), heat 
+
+ Q
+ c
+
+ enters the working fluid from the cold outdoor air, turning it into a gas.
+
+The electrically driven compressor (work input W) raises the temperature and pressure of the gas and forces it into the condenser coils that are inside the heated space. Because the temperature of the gas is higher than the temperature inside the room, heat transfers energy to the room, and the gas condenses into a liquid. The liquid then flows back through an expansion (pressure-reducing) valve. The liquid, having been cooled through expansion, returns to the outdoor evaporator coils to resume the cycle.
+
+The quality of a heat pump is judged by how much energy is transferred by heat into the warm space ( 
+
+ Q
+ h
+
+ ) compared with how much input work (W) is required.
+
+Teacher Support
+
+Remember that refrigerators and air conditioners do not create cold. They merely transfer heat from the inside to the outside.
+
+Revisit the ideal gas law, laws of thermodynamics, and entropy. Use these to understand the workings of air conditioners and refrigerators. This will also give you the opportunity to assess your understanding of these concepts. Both refrigerators and air conditioners use chemicals that can easily change phase from liquid to gas and back. The chemical is present in a closed circuit of tubing. Initially, it is in a gaseous state. The compressor works to squeeze the gas particles of the chemical closer together, creating high pressure. Following the ideal gas law, as pressure increases, so does temperature. This hot, dense gas spreads out in the small pipes or fins of the condenser, which is located on the outside part of the air conditioner (and backside of a refrigerator). The fins come in contact with outside air, which is cooler than the compressed chemical, and hence, as entropy indicates, heat transfers energy from the hot condenser to the relatively cooler air. The result is that the gas cools and condenses into a liquid. This liquid is then allowed to go to an evaporator through a tiny, narrow hole. On the other side of the hole, the gas spreads out (entropy increases), and its pressure drops. Consequently, obeying the ideal gas law, its temperature decreases as well. A fan blows air over this now-cool evaporator and into the room or refrigerator ().
+
+Air conditioners and refrigerators are designed to cool substances by transferring energy by heat 
+
+ Q
+ c
+
+ out of a cool environment to a warmer one, where heat 
+
+ Q
+ h
+
+ is given up. In the case of a refrigerator, heat is moved out of the inside of the fridge into the surrounding room. For an air conditioner, heat is transferred outdoors from inside a home. Heat pumps are also often used in a reverse setting to cool rooms in the summer.
+
+As with heat pumps, work input is required for heat transfer of energy from cold to hot. The quality of air conditioners and refrigerators is judged by how much energy is removed by heat 
+
+ Q
+ c
+
+ from a cold environment, compared with how much work, W, is required. So, what is considered the energy benefit in a heat pump, is considered waste heat in a refrigerator.
+
+Thermal Efficiency
+
+In the conversion of energy into work, we are always faced with the problem of getting less out than we put in. The problem is that, in all processes, there is some heat 
+
+ Q
+ c
+
+ that transfers energy to the environment—and usually a very significant amount at that. A way to quantify how efficiently a machine runs is through a quantity called thermal efficiency.
+
+We define thermal efficiency, Eff, to be the ratio of useful energy output to the energy input (or, in other words, the ratio of what we get to what we spend). The efficiency of a heat engine is the output of net work, W, divided by heat-transferred energy, 
+
+ Q
+ h
+
+, into the engine; that is
+Eff=
+ W
+
+ Q
+ h
+
+ .
+
+An efficiency of 1, or 100 percent, would be possible only if there were no heat to the environment ( 
+
+ Q
+ c
+ 
+ =0
+
+).
+
+All values of heat ( 
+
+ Q
+ h
+
+ and 
+
+ Q
+ c
+
+ ) are positive; there is no such thing as negative heat. The direction of heat is indicated by a plus or minus sign. For example, 
+
+ Q
+ c
+
+ is out of the system, so it is preceded by a minus sign in the equation for net heat.
+
+Solving Thermal Efficiency Problems
+
+Daily Work Done by a Coal-Fired Power Station and Its Efficiency
+
+A coal-fired power station is a huge heat engine. It uses heat to transfer energy from burning coal to do work to turn turbines, which are used then to generate electricity. In a single day, a large coal power station transfers 
+ 
+ 2.50×
+ 
+ 10
+
+ 14
+
+ J
+ 
+ by heat from burning coal and transfers 
+ 
+ 1.48×
+ 
+ 10
+
+ 14
+
+ J
+ 
+ by heat into the environment. (a) What is the work done by the power station? (b) What is the efficiency of the power station?
+
+Strategy
+
+We can use 
+ 
+ W=
+ Q
+ h
+ 
+ −
+ Q
+ c
+
+ to find the work output, W, assuming a cyclical process is used in the power station. In this process, water is boiled under pressure to form high-temperature steam, which is used to run steam turbine-generators and then condensed back to water to start the cycle again.
+
+Solution
+
+Work output is given by
+
+Substituting the given values,
+
+Strategy
+
+The efficiency can be calculated with 
+ 
+ Eff=
+ W
+
+ Q
+ h
+
+, because 
+
+ Q
+ h
+
+ is given, and work, W, was calculated in the first part of this example.
+
+Solution
+
+Efficiency is given by
+
+The work, W, is found to be 
+ 
+ 1.02×
+ 
+ 10
+
+ 14
+
+ J
+ 
+, and 
+
+ Q
+ h
+
+ is given ( 
+ 
+ 2.50×
+ 
+ 10
+
+ 14
+
+ J
+ 
+ ), so the efficiency is
+
+Discussion
+
+The efficiency found is close to the usual value of 42 percent for coal-burning power stations. It means that fully 59.2 percent of the energy is transferred by heat to the environment, which usually results in warming lakes, rivers, or the ocean near the power station and is implicated in a warming planet generally. While the laws of thermodynamics limit the efficiency of such plants—including plants fired by nuclear fuel, oil, and natural gas—the energy transferred by heat to the environment could be, and sometimes is, used for heating homes or for industrial processes.
+
+Practice Problems
+
+A heat engine takes in 6.0 kJ from heat and produces waste heat of 4.8 kJ. What is its efficiency?
+
+25 percent
+
+2.50 percent
+
+2.00 percent
+
+20 percent
+
+Check Your Understanding
+
+Teacher Support
+
+Use these questions to assess student achievement of the section’s learning objectives. If students are struggling with a specific objective, these questions will help identify which and direct students to the relevant content.
+
+Give an example of a heat engine.
+
+A generator
+
+A battery
+
+A water pump
+
+A car engine
+
+Section Summary
+
+Heat engines use the heat transfer of energy to do work.
+
+Cyclical processes are processes that return to their original state at the end of every cycle.
+
+The thermal efficiency of a heat engine is the ratio of work output divided by the amount of energy input.
+
+The amount of work a heat engine can do is determined by the net heat transfer of energy during a cycle; more waste heat leads to less work output.
+
+Heat pumps draw energy by heat from cold outside air and use it to heat an interior room.
+
+A refrigerator is a type of heat pump; it takes energy from the warm air from the inside compartment and transfers it to warmer exterior air.
+
+Key Equations
+
+Eff=
+ W
+
+ Q
+ h
+W=
+ Q
+ h
+ 
+ −
+ Q
+ c
+Concept Items
+
+What is the quality by which air conditioners are judged?
+
+The amount of energy generated by heat from a hot environment, compared with the required work input
+
+The amount of energy transferred by heat from a cold environment, compared with the required work input
+
+The amount of energy transferred by heat from a hot environment, compared with the required work output
+
+The amount of energy transferred by heat from a cold environment, compared with the required work output
+
+Why is the efficiency of a heat engine never 100 percent?
+
+Some energy is always gained by heat from the environment.
+
+Some energy is always lost by heat to the environment.
+
+Work output is always greater than energy input.
+
+Work output is infinite for any energy input.
+
+What is a cyclic process?
+
+A process in which the system returns to its original state at the end of the cycle
+
+A process in which the system does not return to its original state at the end of the cycle
+
+A process in which the system follows the same path for every cycle
+
+A process in which the system follows a different path for every cycle
+
+Critical Thinking
+
+What is the advantage of a heat pump as opposed to burning fuel (as in a fireplace) for keeping warm?
+
+A heat pump supplies energy by heat from the cold, outside air.
+
+A heat pump supplies energy generated by the work done.
+
+A heat pump supplies energy by heat from the cold, outside air and also from the energy generated by the work done.
+
+A heat pump supplies energy not by heat from the cold, outside air, nor from the energy generated by the work done, but from more accessible sources.
+
+What is thermal efficiency of an engine? Can it ever be 100 percent? Why or why not?
+
+Thermal efficiency is the ratio of the output (work) to the input (heat). It is always 100 percent.
+
+Thermal efficiency is the ratio of the output (heat) to the input (work). It is always 100 percent.
+
+Thermal efficiency is the ratio of the output (heat) to the input (work). It is never 100 percent.
+
+Thermal efficiency is the ratio of the output (work) to the input (heat). It is never 100 percent.
+
+When would 100 percent thermal efficiency be possible?
+
+When all energy is transferred by heat to the environment
+
+When mass transferred to the environment is zero
+
+When mass transferred to the environment is at a maximum
+
+When no energy is transferred by heat to the environment
+
+Problems
+
+A coal power station functions at 40.0 percent efficiency. What is the amount of work it does if it takes in 1.20×1012 J by heat?
+
+3×1010 J
+
+4.8×1011 J
+
+3×1012 J
+
+4.8×1013 J
+
+A heat engine functions with 70.7 percent thermal efficiency and consumes 12.0 kJ from heat daily. If its efficiency were raised to 75.0 percent, how much energy from heat would be saved daily, while providing the same output?
+
+−10.8 kJ
+
+−1.08 kJ
+
+0.7 kJ
+
+7 kJ
+
+Test Prep Multiple Choice
+
+Which of these quantities needs to be zero for efficiency to be 100 percent?
+
+ΔU
+W
+Qh
+Qc
+
+Which of the following always has the greatest value in a system having 80 percent thermal efficiency?
+
+ΔU
+W
+Qh
+Qc
+
+In the equation Q = Qh − Qc, what does the negative sign indicate?
+
+Heat transfer of energy is always negative.
+
+Heat transfer can only occur in one direction.
+
+Heat is directed into the system from the surroundings outside the system.
+
+Heat is directed out of the system.
+
+What is the purpose of a heat pump?
+
+A heat pump uses work to transfer energy by heat from a colder environment to a warmer environment.
+
+A heat pump uses work to transfer energy by heat from a warmer environment to a colder environment.
+
+A heat pump does work by using heat to convey energy from a colder environment to a warmer environment.
+
+A heat pump does work by using heat to convey energy from a warmer environment to a colder environment.
+
+Test Prep Short Answer
+
+Which component of an air conditioner converts gas into liquid?
+
+the condenser
+
+the compressor
+
+the evaporator
+
+the thermostat
+
+What is one example for which calculating thermal efficiency is of interest?
+
+A wind turbine
+
+An electric pump
+
+A bicycle
+
+A car engine
+
+How is the efficiency of a refrigerator or heat pump expressed?
+Eff=
+
+ W
+ Q
+ c
+Eff=
+ W
+
+ Q
+ c
+Eff=
+
+ Q
+ c
+ ×W
+Eff=
+
+ Q
+ c
+
+W
+
+Performance Task
+
+You have been tasked to design and construct a thermometer that works on the principle of thermal expansion. There are four materials available for you to test, each of which will find use under different sets of conditions and temperature ranges:
+
+Materials
+
+Four sample materials with similar mass or volume: copper, steel, water, and alcohol (ethanol or isopropanol)
+
+Oven or similar heating source
+
+Instrument (e.g., meter ruler, Vernier calipers, or micrometer) for measuring changes in dimension
+
+Balance for measuring mass
+
+Procedure
+
+Design a safe experiment to analyze the thermal expansion properties of each material.
+
+Write down the materials needed for your experiment and the procedure you will follow. Make sure that you include every detail so that the experiment can be repeated by others.
+
+Select an appropriate material to measure temperature over a predecided temperature range, and give reasons for your choice.
+
+Calibrate your instrument to measure temperature changes accurately.
+
+Which physical quantities are affected by temperature change and thermal expansion?
+
+How do such properties as specific heat and thermal conductivity affect the use of each material as a thermometer?
+
+Does a change of phase take place for any of the tested materials over the temperature range to be examined?
+
+What are your independent and dependent variables for this series of tests? Which variables need to be controlled in the experiment?
+
+What are your sources of error?
+
+Can all the tested materials be used effectively in the same ranges of temperature? Which applications might be suitable for one or more of the tested substances but not the others?
+
+Teacher Support
+
+This performance task supports the following:
+NGSS HS-PS3-3: Design, build, and refine a device that works within given constraints to convert one form of energy into another form of energy.
+
+Alcohol and water can be used effectively in a temperature range between 
+ 
+ 0 °C and 100 °C.
+ Copper and steel do not expand greatly at these temperatures. The experimental design needs to take this into account.
+
+During thermal expansion, the entire volume of the substance changes, with proportional expansion or contraction occurring in each dimension. Student designs should take this into account; if possible, students should design a means by which all but one dimension is constrained so that temperature may be related directly to linear change (i.e., expansion or contraction in one dimension only).
+
+Test Prep Extended Response
+
+In the equation W = Qh − Qc, if the value of Qc were equal to zero, what would it signify?
+
+The efficiency of the engine is 75 percent.
+
+The efficiency of the engine is 25 percent.
+
+The efficiency of the engine is 0 percent.
+
+The efficiency of the engine is 100 percent.
+
+A coal power station transfers 3.0×1012 J by heat from burning coal and transfers 1.5×1012 J by heat into the environment. What is the efficiency of the power station?
+
+0.33
+
+0.5
+
+0.66
+
+1
+
+process in which a system is brought back to its original state at the end of every cycle
+machine that uses energy transfer by heat to do work
+machine that generates the heat transfer of energy from cold to hot
+ratio of useful energy output to the energy input

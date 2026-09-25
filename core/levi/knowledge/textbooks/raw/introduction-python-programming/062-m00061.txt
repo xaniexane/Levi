@@ -1,0 +1,71 @@
+# m00061
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Searching/testing strings
+
+Searching/testing strings
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use the in operator to identify whether a given string contains a substring.
+
+Call the count() method to count the number of substrings in a given string.
+
+Search a string to find a substring using the find() method.
+
+Use the index() method to find the index of the first occurrence of a substring in a given string.
+
+Write a for loop on strings using in operator.
+
+in operator
+
+The in Boolean operator can be used to check if a string contains another string. in returns True if the first string exists in the second string, False otherwise.
+
+What is in the phrase?
+
+Using in operator to find substrings
+
+For loop using in operator
+
+The in operator can be used to iterate over characters in a string using a for loop. In each for loop iteration, one character is read and will be the loop variable for that iteration.
+
+for loop using in operator
+
+Using in operator within for loop
+
+count()
+
+The count() method counts the number of occurrences of a substring in a given string. If the given substring does not exist in the given string, the value 0 is returned.
+
+Counting the number of occurrences of a substring
+
+Using count() to count the number of substrings
+
+find()
+
+The find() method returns the index of the first occurrence of a substring in a given string. If the substring does not exist in the given string, the value of -1 is returned.
+
+Finding the first index of a substring
+
+Using find() to locate a substring
+
+index()
+
+The index() method performs similarly to the find() method in which the method returns the index of the first occurrence of a substring in a given string. The index() method assumes that the substring exists in the given string; otherwise, throws a ValueError.
+
+Getting the time's minute portion
+
+Consider a time value is given as part of a string using the format of "hh:mm" with "hh" representing the hour and "mm" representing the minutes. To retrieve only the string's minute portion, the following code can be used:
+
+The above code's output is:
+
+Using index() to locate a substring
+
+Finding all spaces
+
+Write a program that, given a string, counts the number of space characters in the string. Also, print the given string with all spaces removed.

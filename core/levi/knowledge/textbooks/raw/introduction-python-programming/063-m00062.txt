@@ -1,0 +1,154 @@
+# m00062
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+String formatting
+
+String formatting
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Format a string template using input arguments.
+
+Use format() to generate numerical formats based on a given template.
+
+String format specification
+
+Python provides string substitutions syntax for formatting strings with input arguments. Formatting string includes specifying string pattern rules and modifying the string according to the formatting specification. Examples of formatting strings include using patterns for building different string values and specifying modification rules for the string's length and alignment.
+
+String formatting with replacement fields
+Replacement fields are used to define a pattern for creating multiple string values that comply with a given format. The example below shows two string values that use the same template for making requests to different individuals for taking different courses.
+
+String values from the same template
+
+In the example above, replacement fields are 1) the name of the individual the request is being made to, 2) title of the course, and 3) the name of the instructor. To create a template, replacement fields can be added with {} to show a placeholder for user input. The format() method is used to pass inputs for replacement fields in a string template.
+
+String template formatting for course enrollment requests
+
+A string template with replacement fields is defined below to create string values with different input arguments. The format() method is used to pass inputs to the template in the same order.
+
+The above code's output is:
+
+String template and formatting
+
+Named replacement fields
+
+Replacement fields can be tagged with a label, called named replacement fields, for ease of access and code readability. The example below illustrates how named replacement fields can be used in string templates.
+
+Season weather template using named replacement fields
+
+A named replacement argument is a convenient way of assigning name tags to replacement fields and passing values associated with replacement fields using corresponding names (instead of passing values in order).
+
+The above code's output is:
+
+Multiple use of a named argument
+
+Since named replacement fields are referred to using a name key, a named replacement field can appear and be used more than once in the template. Also, positional ordering is not necessary when named replacement fields are used.
+
+The above code's output is:
+
+Named replacement field examples
+
+Numbered replacement fields
+
+Python's string format() method can use positional ordering to match the numbered arguments. The replacement fields that use the positional ordering of arguments are called numbered replacement fields. The indexing of the arguments starts from 0. Ex: print("{1}{0}".format("Home", "Welcome")) outputs the string value "Welcome Home" as the first argument. "Home" is at index 0, and the second argument, "Welcome", is at index 1. Replacing these arguments in the order of "{1}{0}" creates the string "Welcome Home".
+
+Numbered replacement fields can use argument's values for multiple replacement fields by using the same argument index. The example below illustrates how an argument is used for more than one numbered replacement field.
+
+Numbered replacement field to build a phrase
+
+Numbered replacement fields are used in this example to build phrases like "very very cold" or "very hot".
+
+The above code's output is:
+
+String length and alignment formatting
+
+Formatting the string length may be needed for standardizing the output style when multiple string values of the same context are being created and printed. The example below shows a use case of string formatting in printing a table with minimum-length columns and specific alignment.
+
+A formatted table of a class roster
+
+A formatted table of a class roster
+
+In the example above, the table is formatted into three columns. The first column takes up 15 characters and is left-aligned. The second column uses 25 characters and is center-aligned, and the last column uses two characters and is right aligned. Alignment and length format specifications controls are used to create the formatted table.
+
+The field width in string format specification is used to specify the minimum length of the given string. If the string is shorter than the given minimum length, the string will be padded by space characters. A field width is included in the format specification field using an integer after a colon. Ex: {name:15} specifies that the minimum length of the string values that are passed to the name field is 15.
+
+Since the field width can be used to specify the minimum length of a string, the string can be padded with space characters from right, left, or both to be left-aligned, right-aligned, and centered, respectively. The string alignment type is specified using <, >, or ^characters after the colon when field length is specified. Ex: {name:^20} specifies a named replacement field with the minimum length of 20 characters that is center-aligned.
+
+String alignment formatting.
+
+Alignment Type
+Symbol
+Example
+Output
+<
+template = "{hex:<7}{name:<10}"
+ print(template.format(hex = "#FF0000", name = "Red"))
+ print(template.format(hex = "#00FF00", name = "green"))
+#FF0000Red
+ #00FF00green
+
+>
+template = "{hex:>7}{name:>10}"
+ print(template.format(hex = "#FF0000", name = "Red"))
+ print(template.format(hex = "#00FF00", name = "green"))
+#FF0000          Red
+ #00FF00        green
+
+Centered
+template = "{hex:^7}{name:^10}"
+ print(template.format(hex = "#FF0000", name = "Red"))
+ print(template.format(hex = "#00FF00", name = "green"))
+#FF0000   Red
+ #00FF00  green
+
+Specifying field width and alignment
+
+Formatting numbers
+
+The format() method can be used to format numerical values. Numerical values can be padded to have a given minimum length, precision, and sign character. The syntax for modifying numeric values follows the {[index]:[width][.precision][type]} structure. In the given syntax,
+
+The index field refers to the index of the argument.
+
+The width field refers to the minimum length of the string.
+
+The precision field refers to the floating-point precision of the given number.
+
+The type field shows the type of the input that is passed to the format() method. Floating-point and decimal inputs are identified by "f" and "d", respectively. String values are also identified by "s".
+
+The table below summarizes formatting options for modifying numeric values.
+
+Numerical formatting options.
+
+Example
+Output
+print("{:.7f}".format(0.9795))
+0.9795000
+The format specification .7 shows the output must have seven decimal places. The f specification is an identifier of floating-point formatting.
+The format specification .7 shows the output must have seven decimal places. The f specification is an identifier of floating-point formatting.
+print("{:.3f}".format(12))
+12.000
+The format specification .3 shows the output must have three decimal places. The f specification is an identifier of floating-point formatting.
+The format specification .3 shows the output must have three decimal places. The f specification is an identifier of floating-point formatting.
+print("{:+.2f}".format(4))
++4.00
+The format specification .2 shows the output must have two decimal places. The f specification is an identifier of floating-point formatting. The + sign before the precision specification adds a sign character to the output.
+The format specification .2 shows the output must have two decimal places. The f specification is an identifier of floating-point formatting. The + sign before the precision specification adds a sign character to the output.
+print("{:0>5d}".format(5))
+00005
+The format specification 0>5 defines the width field as 5, and thus the output must have a minimum length of 5. And, if the number has fewer than five digits, the number must be padded with 0's from the left side. The d specification is an identifier of a decimal number formatting.
+The format specification 0>5 defines the width field as 5, and thus the output must have a minimum length of 5. And, if the number has fewer than five digits, the number must be padded with 0's from the left side. The d specification is an identifier of a decimal number formatting.
+print("{:.3s}".format("12.50"))
+12.
+The format specification .3 shows the output will have three characters. The s specification is an identifier of string formatting.
+The format specification .3 shows the output will have three characters. The s specification is an identifier of string formatting.
+
+Numeric value formatting examples
+
+Formatting a list of numbers
+
+Given a list of numbers (floating-point or integer), print numbers with two decimal place precision and at least six characters.

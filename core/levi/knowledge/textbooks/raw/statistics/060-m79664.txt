@@ -1,0 +1,325 @@
+# m79664
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Rare Events, the Sample, and the Decision and Conclusion
+
+Rare Events, the Sample, and the Decision and Conclusion
+
+Establishing the type of distribution, sample size, and known or unknown standard deviation can help you figure out how to go about a hypothesis test. However, there are several other factors you should consider when working out a hypothesis test.
+
+Rare Events
+
+The thinking process in hypothesis testing can be summarized as follows: You want to test whether or not a particular property of the population is true. You make an assumption about the true population mean for numerical data or the true population proportion for categorical data. This assumption is the null hypothesis. Then you gather sample data that is representative of the population. From this sample data you compute the sample mean (or the sample proportion). If the value that you observe is very unlikely to occur (a rare event) if the null hypothesis is true, then you wonder why this is happening. A plausible explanation is that the null hypothesis is false.
+
+For example, Didi and Ali are at a birthday party of a very wealthy friend. They hurry to be first in line to grab a prize from a tall basket that they cannot see inside because they will be blindfolded. There are 200 plastic bubbles in the basket, and Didi and Ali have been told that there is only one with a $100 bill. Didi is the first person to reach into the basket and pull out a bubble. Her bubble contains a $100 bill. The probability of this happening is 1200 = 0.005. Because this is so unlikely, Ali is hoping that what the two of them were told is wrong and there are more $100 bills in the basket. A rare event has occurred (Didi getting the $100 bill) so Ali doubts the assumption about only one $100 bill being in the basket.
+
+Using the Sample to Test the Null Hypothesis
+
+After you collect data and obtain the test statistic (the sample mean, sample proportion, or other test statistic), you can determine the probability of obtaining that test statistic when the null hypothesis is true. This probability is called the p-value.
+
+When the p-value is very small, it means that the observed test statistic is very unlikely to happen if the null hypothesis is true. This gives significant evidence to suggest that the null hypothesis is false, and to reject it in favor of the alternative hypothesis. In practice, to reject the null hypothesis we want the p-value to be smaller than 0.05 (5 percent) or sometimes even smaller than 0.01 (1 percent).
+
+Suppose a baker claims that his bread height is more than 15 cm, on average. Several of his customers do not believe him. To persuade his customers that he is right, the baker decides to do a hypothesis test. He bakes 10 loaves of bread. The mean height of the sample loaves is 17 cm. The baker knows from baking hundreds of loaves of bread that the standard deviation for the height is 0.5 cm and the distribution of heights is normal.
+
+The null hypothesis could be H0: μ ≤ 15. The alternate hypothesis is Ha: μ > 15.
+
+The words is more than translates as a ">" so "μ > 15" goes into the alternate hypothesis. The null hypothesis must contradict the alternate hypothesis.
+
+Since σ is known (σ = 0.5 cm), the distribution for the population is known to be normal with mean μ = 15 and standard deviation 
+
+σ
+
+n
+
+=
+
+0.5
+
+10
+
+=0.16
+
+.
+
+Suppose the null hypothesis is true (which is that the mean height of the loaves is no more than 15 cm). Then is the mean height (17 cm) calculated from the sample unexpectedly large? The hypothesis test works by asking the question how unlikely the sample mean would be if the null hypothesis were true. The graph shows how far out the sample mean is on the normal curve. The p-value is the probability that, if we were to take other samples, any other sample mean would fall at least as far out as 17 cm.
+The p-value, then, is the probability that a sample mean is the same or greater than 17 cm when the population mean is, in fact, 15 cm. We can calculate this probability using the normal distribution for means. In , the p-value is the area under the normal curve to the right of 17. Using a normal distribution table or a calculator, we can compute that this probability is practically zero.
+p-value = P(
+
+x
+¯
+
+ > 17), which is approximately zero.
+
+Because the p-value is almost 0, we conclude that obtaining a sample height of 17 cm or higher from 10 loaves of bread is very unlikely if the true mean height is 15 cm. We reject the null hypothesis and conclude that there is sufficient evidence to claim that the true population mean height of the baker’s loaves of bread is higher than 15 cm.
+
+Try It
+
+A normal distribution has a standard deviation of 1. We want to verify a claim that the mean is greater than 12. A sample of 36 is taken with a sample mean of 12.5.
+H0: μ ≤ 12
+Ha: μ > 12
+The p-value is 0.0013.
+Draw a graph that shows the p-value.
+p-value = 0.0013
+
+Decision and Conclusion
+
+A systematic way to make a decision of whether to reject or not reject the null hypothesis
+is to compare the p-value and a preset or preconceived α, also called the level of significance of the test. A preset α is the probability of a Type I error (rejecting the null hypothesis when the null hypothesis is true). It may or may not be given to you at the beginning of the problem.
+
+When you make a decision to reject or not reject H0, do as follows:
+If p-value 
+
+ <α
+
+, reject H0. The results of the sample data are significant. There is sufficient evidence to conclude that H0 is an incorrect belief and that the alternative hypothesis, Ha, may be correct.
+If p-value 
+
+ ≥α
+
+, do not reject H0. The results of the sample data are not significant.There is not sufficient evidence to conclude that the alternative hypothesis, Ha, may be correct.
+When you do not reject H0, it does not mean that you should believe that H0 is true. It simply means that the sample data have failed to provide sufficient evidence to cast serious doubt about the truthfulness of H0.
+
+If p-value 
+
+ <α
+
+, reject H0. The results of the sample data are significant. There is sufficient evidence to conclude that H0 is an incorrect belief and that the alternative hypothesis, Ha, may be correct.
+
+If p-value 
+
+ ≥α
+
+, do not reject H0. The results of the sample data are not significant.There is not sufficient evidence to conclude that the alternative hypothesis, Ha, may be correct.
+
+When you do not reject H0, it does not mean that you should believe that H0 is true. It simply means that the sample data have failed to provide sufficient evidence to cast serious doubt about the truthfulness of H0.
+Conclusion: After you make your decision, write a thoughtful conclusion about the hypotheses in terms of the given problem.
+
+When using the p-value to evaluate a hypothesis test, you might find it useful to use the following mnemonic device:
+
+If the p-value is low, the null must go.
+
+If the p-value is high, the null must fly.
+
+This memory aid relates a p-value less than the established alpha (the p is low) as rejecting the null hypothesis and, likewise, relates a p-value higher than the established alpha (the p is high) as not rejecting the null hypothesis.
+
+Fill in the blanks.
+
+Reject the null hypothesis when ______________________________________.
+
+The results of the sample data _____________________________________.
+
+Do not reject the null hypothesis when __________________________________________.
+
+The results of the sample data ____________________________________________.
+
+Reject the null hypothesis when the p-value is less than the established alpha value. The results of the sample data support the alternative hypothesis.
+
+Do not reject the null hypothesis when the p-value is greater or equal to the established alpha value. The results of the sample data do not support the alternative hypothesis.
+
+Try It
+
+It’s a Boy Genetics Labs, a genetics company, claims their procedures improve the chances of a boy being born. The results for a test of a single population proportion are as follows:
+H0: p = 0.50, Ha: p > 0.50
+α = 0.01
+p-value = 0.025
+
+Interpret the results and state a conclusion in simple, nontechnical terms.
+
+Since the p-value is greater than the established alpha value (the p-value is high), we do not reject the null hypothesis. There is not enough evidence to support It’s a Boy Genetics Labs' stated claim that their procedures improve the chances of a boy being born.
+
+Chapter Review
+
+When the probability of an event occurring is low, and it happens, it is called a rare event. Rare events are important to consider in hypothesis testing because they can inform your willingness not to reject or to reject a null hypothesis. To test a null hypothesis, find the p-value for the sample data and graph the results. When deciding whether or not to reject the null the hypothesis, keep these two parameters in mind:
+α > p-value, reject the null hypothesis.
+α ≤ p-value, do not reject the null hypothesis.
+α > p-value, reject the null hypothesis.
+α ≤ p-value, do not reject the null hypothesis.
+
+When do you reject the null hypothesis?
+
+The probability of winning the grand prize at a particular carnival game is 0.005. Is the outcome of winning very likely or very unlikely?
+
+The outcome of winning is very unlikely.
+
+The probability of winning the grand prize at a particular carnival game is 0.005. Michele wins the grand prize. Is this considered a rare or common event? Why?
+
+It is believed that the mean height of high school students who play basketball on the school team is 73 inches with a standard deviation of 1.8 inches. A random sample of 40 players is chosen. The sample mean was 71 inches, and the sample standard deviation was 1.5 inches. Do the data support the claim that the mean height is less than 73 inches? The p-value is almost zero. State the null and alternative hypotheses and interpret the p-value.
+H0: μ > = 73
+Ha: μ < 73
+The p-value is almost zero, which means there is sufficient data to conclude that the mean height of high school students who play basketball on the school team is less than 73 inches at the 5 percent level. The data do support the claim.
+
+The mean age of graduate students at a university is at most 31 years with a standard deviation of two years. A random sample of 15 graduate students is taken. The sample mean is 32 years and the sample standard deviation is three years. Are the data significant at the 1 percent level? The p-value is 0.0264. State the null and alternative hypotheses and interpret the p-value.
+
+Does the shaded region represent a low or a high p-value compared to a level of significance of 1 percent?
+
+The shaded region shows a low p-value.
+
+What should you do when α > p-value?
+
+What should you do if α = p-value?
+
+Do not reject H0.
+
+If you do not reject the null hypothesis, then it must be true. Is that statement correct? State why or why not in complete sentences.
+Use the following information to answer the next seven exercises: Suppose that a recent article stated that the mean time students spend doing homework each week is 2.5 hours. A study was then done to see if the mean time has increased in the new century. A random sample of 26 students was taken. The mean length of time they did homework each week was three hours with a standard deviation of 1.8 hours. Suppose that it is somehow known that the population standard deviation is 1.5. Conduct a hypothesis test to determine if the mean length of time doing homework each week has increased. Assume the distribution of homework times is approximately normal.
+
+Is this a test of means or proportions?
+
+means
+
+What symbol represents the random variable for this test?
+
+In words, define the random variable for this test.
+
+the mean time spent on homework for 26 students
+
+Is σ known and, if so, what is it?
+
+Calculate the following:
+
+ x
+ ¯
+
+ _______
+ σ _______
+ sx _______
+ n _______
+x
+ ¯
+
+ _______
+σ _______
+sx _______
+n _______
+
+3
+
+1.5
+
+1.8
+
+26
+
+Since both σ and 
+
+ s
+ x
+
+ are given, which should be used? In one to two complete sentences, explain why.
+
+State the distribution to use for the hypothesis test.
+X
+ ¯
+ 
+ ~N(
+ 
+ 2.5,
+ 
+ 1.5
+
+ 26
+
+ )
+
+A random survey of 75 long-term marathon runners revealed that the mean length of time they have been running is 17.4 years with a standard deviation of 6.3 years. Conduct a hypothesis test to determine if the population mean time is likely to be 15 years.
+
+Is this a test of one mean or proportion?
+
+State the null and alternative hypotheses.
+ H0: ____________________ Ha : ____________________
+
+Is this a right-tailed, left-tailed, or two-tailed test?
+
+What symbol represents the random variable for this test?
+
+In words, define the random variable for this test.
+
+Is the population standard deviation known and, if so, what is it?
+
+Calculate the following:
+
+ x
+ ¯
+
+ = _____________ 
+s = ____________ 
+n = ____________
+x
+ ¯
+
+ = _____________
+s = ____________
+n = ____________
+
+Which test should be used?
+
+State the distribution to use for the hypothesis test.
+
+Find the p-value.
+
+At a pre-conceived α = 0.05, give your answer for each of the following:
+
+Decision:
+Reason for the decision:
+Conclusion (write out in a complete sentence):
+
+Decision:
+
+Reason for the decision:
+
+Conclusion (write out in a complete sentence):
+
+Homework
+
+The National Institute of Mental Health published an article stating that in any one-year period approximately 9.5 percent of American adults suffer from depression or a depressive illness. Suppose that in a survey of 100 people in a certain town, seven of them suffered from depression or a depressive illness. Conduct a hypothesis test to determine if the true proportion of people in that town suffering from depression or a depressive illness is lower than the percent in the general adult American population.
+
+Is this a test of one mean or proportion?
+
+State the null and alternative hypotheses.
+H0: ____________________ Ha: ____________________
+
+Is this a right-tailed, left-tailed, or two-tailed test?
+
+What symbol represents the random variable for this test?
+
+In words, define the random variable for this test.
+
+Calculate the following:
+
+x = ________________
+n = ________________
+
+ p
+ ′
+
+ = _____________
+x = ________________
+n = ________________
+p
+ ′
+
+ = _____________
+
+Calculate σx = __________. Show the formula setup.
+
+State the distribution to use for the hypothesis test.
+
+Find the p-value.
+
+At a pre-conceived α = 0.05, give your answer for each of the following:
+
+Decision:
+Reason for the decision:
+Conclusion (write out in a complete sentence):
+
+Decision:
+
+Reason for the decision:
+
+Conclusion (write out in a complete sentence):
+
+probability of a Type I error (reject the null hypothesis when it is true) Notation: α. In hypothesis testing, the level of significance is called the preconceived α or the preset α.
+the probability that an event will happen purely by chance assuming the null hypothesis is true; the smaller the p-value, the stronger the evidence is against the null hypothesis

@@ -1,0 +1,1854 @@
+# m51278
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Zeros of Polynomial Functions
+
+Zeros of Polynomial Functions
+
+In this section, you will:
+
+Evaluate a polynomial using the Remainder Theorem.
+
+Use the Factor Theorem to solve a polynomial equation.
+
+Use the Rational Zero Theorem to find rational zeros.
+
+Find zeros of a polynomial function.
+
+Use the Linear Factorization Theorem to find polynomials with given zeros.
+
+Use Descartes’ Rule of Signs.
+
+Solve real-world applications of polynomial equations
+
+Learning Objectives
+
+Solve quadratic and higher order equations by factoring (IA 6.5.2)
+
+Objective 1: Solve quadratic and higher order equations by factoring (IA 6.5.2)
+
+In Section 5.3 we have reviewed how to solve quadratic equations by factoring. Now we will discuss how to use factoring to solve polynomial equations.
+
+A polynomial equation is an equation that contains a polynomial expression. The degree of the polynomial equation is the highest power on any one term of the polynomial.
+
+Vocabulary of Polynomial Functions
+
+Fill in the blanks for the polynomial: x3-x2-4x+4
+
+The leading coefficient is ________ and the degree of this polynomial is _________.
+
+Solve: 9m3+100m=60m2.
+9m3+100m=60m2Bring all the terms to one side so that the other side is zero.9m3−60m2+100m=0Factor the greatest common factor first.m(9m2−60m+100)=0Factor the trinomial.m(3m−10)(3m−10)=0Use the Zero Product Property to set each factor to 0.Solve each equation.m=03m−10=03m−10=0m=0m=103m=103Check your answers.The check is left to you.
+
+Practice Makes Perfect
+
+Solve quadratic and higher order equations by factoring.
+8x3=24x2-18x
+16x2=32x3+2x
+
+Solve quadratic and higher order equations by factoring.
+x3-x2-4x+4=0
+Factor by grouping.x2(x-1)-4(x-1)=0Factor out the common factor.(x-1)(x2-4)Factor(x2-4)using difference of squares(x-1)(x-2)(x+2)By the zero-product propertyx=1, x=2, x=-2
+
+Check the work in the above example using a graph.
+
+Graph f(x)=x3-x2-4x+4 below.
+
+What are the x-intercepts of this function?
+
+What is the connection between these x-intercepts and the solutions of the equation in part b?
+
+The x-intercepts are called solutions or Zeros of the Function. Explain why.
+
+Practice Makes Perfect
+
+Solve quadratic and higher order equations by factoring.
+ⓐ Solve x3+2x2=6x  .
+ⓑ Use your graphing calculator to graph f(x)=x3+x2-6x below.
+ⓒ What are the x-intercepts of this function?
+ⓓ What is the connection between these x-intercepts and the solutions of the equation in part a?
+f(x)=3x3+9x2-12x
+ⓐ Use factoring to find the zeros of the function. These are the x-intercepts of f(x). Plot these points by hand on the graph below.
+ⓑ What is the end behavior of this polynomial function?
+ⓒ Using the x-intercepts and the end behavior, sketch the graph of this function.
+
+Find the zeros of the function algebraically. Check by graphing a function on a graphing calculator.
+ⓐ f(x)=2x3-x2+8x-4
+ⓑ f(x)=3x3-12x
+ⓒ f(x)=3x3+5x2-2x
+
+A new bakery offers decorated, multi-tiered cakes for display and cutting at Quinceañera and wedding celebrations, as well as sheet cakes to serve most of the guests. The bakery wants the volume of a small sheet cake to be 351 cubic inches. The cake is in the shape of a rectangular solid. They want the length of the cake to be four inches longer than the width of the cake and the height of the cake to be one-third of the width. What should the dimensions of the cake pan be?
+
+This problem can be solved by writing a cubic function and solving a cubic equation for the volume of the cake. In this section, we will discuss a variety of tools for writing polynomial functions and solving polynomial equations.
+
+Evaluating a Polynomial Using the Remainder Theorem
+
+In the last section, we learned how to divide polynomials. We can now use polynomial division to evaluate polynomials using the Remainder Theorem. If the polynomial is divided by 
+ 
+ x–k,
+ the remainder may be found quickly by evaluating the polynomial function at 
+ k,
+ that is, 
+ f(
+ k
+ )
+ Let’s walk through the proof of the theorem.
+
+Recall that the Division Algorithm states that, given a polynomial dividend 
+ 
+ f(x)
+ and a non-zero polynomial divisor 
+ d(x)
+ , there exist unique polynomials 
+ q(x)
+ and 
+ r(x)
+ such that
+
+and either 
+ r(x)=0
+ or the degree of 
+ r(x)
+ is less than the degree of 
+ d(x)
+ . In practice divisors, 
+ d(x)
+ will have degrees less than or equal to the degree of 
+ f(x)
+ . If the divisor, 
+ 
+ d(x),
+ is 
+ x−k,
+ this takes the form
+
+Since the divisor 
+ 
+ x−k
+ is linear, the remainder will be a constant, 
+ r.
+ And, if we evaluate this for 
+ x=k,
+ we have
+
+In other words, 
+ 
+ f(k)
+ is the remainder obtained by dividing 
+ f(x)
+ by 
+ x−k.
+
+The Remainder Theorem
+
+If a polynomial 
+ f(x)
+ is divided by 
+ x−k,
+ then the remainder is the value 
+ f(k).
+Given a polynomial function 
+ f,
+ evaluate 
+ f(
+ x
+ )
+ at 
+ x=k
+ using the Remainder Theorem.
+
+Use synthetic division to divide the polynomial by 
+ x−k.
+
+The remainder is the value 
+ f(k).
+
+Using the Remainder Theorem to Evaluate a Polynomial
+
+Use the Remainder Theorem to evaluate 
+ 
+ f(x)=6
+ x
+ 4
+ 
+ −
+ x
+ 3
+ 
+ −15
+ x
+ 2
+ 
+ +2x−7
+ 
+ at 
+ 
+ x=2.
+
+To find the remainder using the Remainder Theorem, use synthetic division to divide the polynomial by 
+ 
+ x−2.
+
+The remainder is 25. Therefore, 
+ 
+ f(2)=25.
+
+Analysis
+
+We can check our answer by evaluating 
+ 
+ f(2).
+
+Use the Remainder Theorem to evaluate 
+ f(x)=2
+ x
+ 5
+ 
+ −3
+ x
+ 4
+ 
+ −9
+ x
+ 3
+ 
+ +8
+ x
+ 2
+ 
+ +2
+ 
+ at 
+ 
+ x=−3.
+f(−3)=−412
+
+Using the Factor Theorem to Solve a Polynomial Equation
+
+The Factor Theorem is another theorem that helps us analyze polynomial equations. It tells us how the zeros of a polynomial are related to the factors. Recall that the Division Algorithm.
+
+If 
+ 
+ k
+ 
+ is a zero, then the remainder 
+ r
+ 
+ is 
+ f(k)=0
+ 
+ and 
+ f(x)=(x−k)q(x)+0
+ 
+ or 
+ f(x)=(x−k)q(x).
+
+Notice, written in this form, 
+ 
+ x−k
+ is a factor of 
+ f(x).
+ We can conclude if 
+ k
+ 
+ is a zero of 
+ f(x),
+ then 
+ x−k
+ is a factor of 
+ 
+f(x).
+
+Similarly, if 
+ 
+ x−k
+ 
+ is a factor of 
+ f(x),
+ 
+ then the remainder of the Division Algorithm 
+ f(x)=(x−k)q(x)+r
+ 
+ is 0. This tells us that 
+ k
+ 
+ is a zero.
+
+This pair of implications is the Factor Theorem. As we will soon see, a polynomial of degree 
+ 
+ n
+ 
+ in the complex number system will have 
+ n
+ 
+ zeros. We can use the Factor Theorem to completely factor a polynomial into the product of 
+ n
+ 
+ factors. Once the polynomial has been completely factored, we can easily determine the zeros of the polynomial.
+
+The Factor Theorem
+
+According to the Factor Theorem, 
+ k
+ 
+ is a zero of 
+ f(x)
+ 
+ if and only if 
+ (x−k)
+ 
+ is a factor of 
+ f(x).
+Given a factor and a third-degree polynomial, use the Factor Theorem to factor the polynomial.
+
+Use synthetic division to divide the polynomial by 
+ (x−k).
+
+Confirm that the remainder is 0.
+
+Write the polynomial as the product of 
+ (x−k)
+ and the quadratic quotient.
+
+If possible, factor the quadratic.
+
+Write the polynomial as the product of factors.
+
+Using the Factor Theorem to Find the Zeros of a Polynomial Expression
+
+Show that 
+ 
+ (x+2)
+ 
+ is a factor of 
+
+ x
+ 3
+ 
+ −6
+ x
+ 2
+ 
+ −x+30.
+ Find the remaining factors. Use the factors to determine the zeros of the polynomial.
+
+We can use synthetic division to show that 
+ 
+ (x+2)
+ is a factor of the polynomial.
+
+The remainder is zero, so 
+ 
+ (x+2)
+ is a factor of the polynomial. We can use the Division Algorithm to write the polynomial as the product of the divisor and the quotient:
+
+We can factor the quadratic factor to write the polynomial as
+
+By the Factor Theorem, the zeros of 
+
+ x
+ 3
+ 
+ −6
+ x
+ 2
+ 
+ −x+30
+ are –2, 3, and 5.
+
+Use the Factor Theorem to find the zeros of 
+ f(x)=
+ x
+ 3
+ 
+ +4
+ x
+ 2
+ 
+ −4x−16
+ 
+ given that 
+ 
+ (x−2)
+ 
+ is a factor of the polynomial.
+
+The zeros are 2, –2, and –4.
+
+Using the Rational Zero Theorem to Find Rational Zeros
+
+Another use for the Remainder Theorem is to test whether a rational number is a zero for a given polynomial. But first we need a pool of rational numbers to test. The Rational Zero Theorem helps us to narrow down the number of possible rational zeros using the ratio of the factors of the constant term and factors of the leading coefficient of the polynomial
+
+Consider a quadratic function with two zeros, 
+ 
+ x=
+ 2
+ 5
+
+ and 
+ x=
+ 3
+ 4
+ 
+ .
+ 
+ By the Factor Theorem, these zeros have factors associated with them. Let us set each factor equal to 0, and then construct the original quadratic function absent its stretching factor.
+
+Notice that two of the factors of the constant term, 6, are the two numerators from the original rational roots: 2 and 3. Similarly, two of the factors from the leading coefficient, 20, are the two denominators from the original rational roots: 5 and 4.
+
+We can infer that the numerators of the rational roots will always be factors of the constant term and the denominators will be factors of the leading coefficient. This is the essence of the Rational Zero Theorem; it is a means to give us a pool of possible rational zeros.
+
+The Rational Zero Theorem
+
+The Rational Zero Theorem states that, if the polynomial 
+ f(x)=
+ a
+ n
+
+ x
+ n
+ 
+ +
+ a
+ 
+ n−1
+
+ x
+ 
+ n−1
+ 
+ +...+
+ a
+ 1
+ 
+ x+
+ a
+ 0
+
+ has integer coefficients, then every rational zero of 
+ f(x)
+ 
+ has the form 
+ 
+ p
+ q
+
+ where 
+ p
+ is a factor of the constant term 
+ 
+ a
+ 0
+
+ and 
+ q
+ is a factor of the leading coefficient 
+ 
+ a
+ n
+ 
+ .
+
+When the leading coefficient is 1, the possible rational zeros are the factors of the constant term.
+Given a polynomial function 
+ f(x),
+ use the Rational Zero Theorem to find rational zeros.
+
+Determine all factors of the constant term and all factors of the leading coefficient.
+
+Determine all possible values of 
+ 
+ p
+ q
+ 
+ ,
+ where 
+ 
+ p
+ is a factor of the constant term and 
+ 
+ q
+ is a factor of the leading coefficient. Be sure to include both positive and negative candidates.
+
+Determine which possible zeros are actual zeros by evaluating each case of 
+ f(
+ 
+ p
+ q
+
+ ).
+
+Listing All Possible Rational Zeros
+
+List all possible rational zeros of 
+ 
+ f(x)=2
+ x
+ 4
+ 
+ −5
+ x
+ 3
+ 
+ +
+ x
+ 2
+ 
+ −4.
+
+The only possible rational zeros of 
+ 
+ f(x)
+ 
+ are the quotients of the factors of the last term, –4, and the factors of the leading coefficient, 2.
+
+The constant term is –4; the factors of –4 are 
+ 
+ p=±1,±2,±4.
+
+The leading coefficient is 2; the factors of 2 are 
+ 
+ q=±1,±2.
+
+If any of the four real zeros are rational zeros, then they will be of one of the following factors of –4 divided by one of the factors of 2.
+
+Note that 
+
+ 2
+ 2
+ 
+ =1
+ 
+ and 
+
+ 4
+ 2
+ 
+ =2,
+ which have already been listed. So we can shorten our list.
+
+Using the Rational Zero Theorem to Find Rational Zeros
+
+Use the Rational Zero Theorem to find the rational zeros of 
+ 
+ f(x)=2
+ x
+ 3
+ 
+ +
+ x
+ 2
+ 
+ −4x+1.
+
+The Rational Zero Theorem tells us that if 
+
+ p
+ q
+
+ is a zero of 
+ 
+ f(x),
+ 
+ then 
+ 
+ p
+ is a factor of 1 and 
+ 
+ q
+ is a factor of 2.
+
+The factors of 1 are 
+ 
+±1
+ and the factors of 2 are 
+ 
+±1
+ and 
+ 
+±2.
+ The possible values for 
+
+ p
+ q
+
+ are 
+ 
+±1
+ and 
+ 
+ ±
+ 1
+ 2
+ 
+ .
+ These are the possible rational zeros for the function. We can determine which of the possible zeros are actual zeros by substituting these values for 
+ 
+ x
+ in 
+ 
+ f(x).
+
+Of those, 
+ 
+−1,−
+ 1
+ 2
+ 
+ ,and 
+ 1
+ 2
+
+ are not zeros of 
+ 
+ f(x).
+ 1 is the only rational zero of 
+ 
+ f(x).
+
+Use the Rational Zero Theorem to find the rational zeros of 
+ f(x)=
+ x
+ 3
+ 
+ −5
+ x
+ 2
+ 
+ +2x+1.
+
+There are no rational zeros.
+
+Finding the Zeros of Polynomial Functions
+
+The Rational Zero Theorem helps us to narrow down the list of possible rational zeros for a polynomial function. Once we have done this, we can use synthetic division repeatedly to determine all of the zeros of a polynomial function.
+Given a polynomial function 
+ f,
+ use synthetic division to find its zeros.
+
+Use the Rational Zero Theorem to list all possible rational zeros of the function.
+
+Use synthetic division to evaluate a given possible zero by synthetically dividing the candidate into the polynomial. If the remainder is 0, the candidate is a zero. If the remainder is not zero, discard the candidate.
+
+Repeat step two using the quotient found with synthetic division. If possible, continue until the quotient is a quadratic.
+
+Find the zeros of the quadratic function. Two possible methods for solving quadratics are factoring and using the quadratic formula.
+
+Finding the Zeros of a Polynomial Function with Repeated Real Zeros
+
+Find the zeros of 
+ 
+ f(x)=4
+ x
+ 3
+ 
+ −3x−1.
+
+The Rational Zero Theorem tells us that if 
+
+ p
+ q
+
+ is a zero of 
+ 
+ f(x),
+ then 
+ 
+ p
+ 
+ is a factor of –1 and 
+ 
+ q
+ is a factor of 4.
+
+The factors of 
+ 
+ –1
+ 
+ are 
+ 
+±1
+ 
+ and the factors of 
+ 
+ 4
+ 
+ are 
+ 
+±1,±2,
+ and 
+ 
+ ±4.
+ The possible values for 
+
+ p
+ q
+
+ are 
+ 
+±1,±
+ 1
+ 2
+ 
+ ,
+ and 
+ 
+ ±
+ 1
+ 4
+ 
+ .
+ 
+ These are the possible rational zeros for the function. We will use synthetic division to evaluate each possible zero until we find one that gives a remainder of 0. Let’s begin with 1.
+
+Dividing by 
+ 
+ (x−1)
+ 
+ gives a remainder of 0, so 1 is a zero of the function. The polynomial can be written as
+
+The quadratic is a perfect square. 
+ 
+ f(x)
+ 
+ can be written as
+
+We already know that 1 is a zero. The other zero will have a multiplicity of 2 because the factor is squared. To find the other zero, we can set the factor equal to 0.
+
+The zeros of the function are 1 and 
+ 
+ −
+ 1
+ 2
+
+ with multiplicity 2.
+
+Analysis
+
+Look at the graph of the function 
+ 
+ f
+ in . Notice, at 
+ 
+ x=−0.5,
+ the graph bounces off the x-axis, indicating the even multiplicity (2,4,6…) for the zero 
+ 
+ −0.5.
+ 
+ At 
+ 
+ x=1,
+ the graph crosses the x-axis, indicating the odd multiplicity (1,3,5…) for the zero 
+ 
+ x=1.
+
+Using the Fundamental Theorem of Algebra
+
+Now that we can find rational zeros for a polynomial function, we will look at a theorem that discusses the number of complex zeros of a polynomial function. The Fundamental Theorem of Algebra tells us that every polynomial function has at least one complex zero. This theorem forms the foundation for solving polynomial equations.
+
+Suppose 
+ 
+ f
+ is a polynomial function of degree four, and 
+ f(x)=0.
+ The Fundamental Theorem of Algebra states that there is at least one complex solution, call it 
+ 
+ c
+ 1
+ 
+ .
+ By the Factor Theorem, we can write 
+ f(x)
+ as a product of 
+ x−
+ c
+ 1
+
+ and a polynomial quotient. Since 
+ x−
+ c
+ 1
+
+ is linear, the polynomial quotient will be of degree three. Now we apply the Fundamental Theorem of Algebra to the third-degree polynomial quotient. It will have at least one complex zero, call it 
+ 
+ c
+ 2
+ 
+ .
+ So we can write the polynomial quotient as a product of 
+ x−
+ c
+ 2
+
+ and a new polynomial quotient of degree two. Continue to apply the Fundamental Theorem of Algebra until all of the zeros are found. There will be four of them and each one will yield a factor of 
+ f(x).
+
+The Fundamental Theorem of Algebra
+
+The Fundamental Theorem of Algebra states that, if 
+ f(x)
+ is a polynomial of degree n > 0, then 
+ f(x)
+ has at least one complex zero.
+
+We can use this theorem to argue that, if 
+ f(x)
+ is a polynomial of degree 
+ n>0,
+ and 
+ a
+ 
+ is a non-zero real number, then 
+ f(x)
+ has exactly 
+ n
+ 
+ linear factors
+
+where 
+ 
+ c
+ 1
+ 
+ ,
+ c
+ 2
+ 
+ ,...,
+ c
+ n
+
+ are complex numbers. Therefore, 
+ f(x)
+ has 
+ n
+ roots if we allow for multiplicities.
+Does every polynomial have at least one imaginary zero?
+No. Real numbers are a subset of complex numbers, but not the other way around. A complex number is not necessarily imaginary. Real numbers are also complex numbers.
+
+Finding the Zeros of a Polynomial Function with Complex Zeros
+
+Find the zeros of 
+ 
+ f(x)=3
+ x
+ 3
+ 
+ +9
+ x
+ 2
+ 
+ +x+3.
+
+The Rational Zero Theorem tells us that if 
+
+ p
+ q
+
+ is a zero of 
+ 
+ f(x),
+ then 
+ 
+ p
+ is a factor of 3 and 
+ 
+ q
+ is a factor of 3.
+
+The factors of 3 are 
+ 
+±1
+ and 
+ 
+±3.
+ The possible values for 
+
+ p
+ q
+ 
+ ,
+ and therefore the possible rational zeros for the function, are 
+ 
+±3,±1, and ±
+ 1
+ 3
+ 
+ .
+ We will use synthetic division to evaluate each possible zero until we find one that gives a remainder of 0. Let’s begin with –3.
+
+Dividing by 
+ 
+ (x+3)
+ gives a remainder of 0, so –3 is a zero of the function. The polynomial can be written as
+
+We can then set the quadratic equal to 0 and solve to find the other zeros of the function.
+
+The zeros of 
+ 
+ f(x)
+ 
+ are –3 and 
+ 
+ ±
+ 
+ i
+ 3
+
+ 3
+ 
+ .
+
+Analysis
+
+Look at the graph of the function 
+ 
+ f
+ in . Notice that, at 
+ 
+ x=−3,
+ 
+ the graph crosses the x-axis, indicating an odd multiplicity (1) for the zero 
+ 
+ x=–3.
+ Also note the presence of the two turning points. This means that, since there is a 3rd degree polynomial, we are looking at the maximum number of turning points. So, the end behavior of increasing without bound to the right and decreasing without bound to the left will continue. Thus, all the x-intercepts for the function are shown. So either the multiplicity of 
+ 
+ x=−3
+ is 1 and there are two complex solutions, which is what we found, or the multiplicity at 
+ 
+ x=−3
+ is three. Either way, our result is correct.
+
+Find the zeros of 
+ f(x)=2
+ x
+ 3
+ 
+ +5
+ x
+ 2
+ 
+ −11x+4.
+
+The zeros are 
+ –4, 
+ 1
+ 2
+ 
+ ,and 1.
+
+Using the Linear Factorization Theorem to Find Polynomials with Given Zeros
+
+A vital implication of the Fundamental Theorem of Algebra, as we stated above, is that a polynomial function of degree 
+ 
+ n
+ 
+ will have 
+ n
+ zeros in the set of complex numbers, if we allow for multiplicities. This means that we can factor the polynomial function into 
+ n
+ factors. The Linear Factorization Theorem tells us that a polynomial function will have the same number of factors as its degree, and that each factor will be in the form 
+ (x−c),
+ where 
+ c
+ is a complex number.
+
+Let 
+ 
+ f
+ 
+ be a polynomial function with real coefficients, and suppose 
+ a+bi, b≠0,
+ 
+ is a zero of 
+ f(x).
+ 
+ Then, by the Factor Theorem, 
+ x−(a+bi)
+ 
+ is a factor of 
+ f(x).
+ 
+ For 
+ f
+ 
+ to have real coefficients, 
+ x−(a−bi)
+ 
+ must also be a factor of 
+ f(x).
+ 
+ This is true because any factor other than 
+ x−(a−bi),
+ 
+ when multiplied by 
+ x−(a+bi),
+ 
+ will leave imaginary components in the product. Only multiplication with conjugate pairs will eliminate the imaginary parts and result in real coefficients. In other words, if a polynomial function 
+ f
+ 
+ with real coefficients has a complex zero 
+ a+bi,
+ 
+ then the complex conjugate 
+ a−bi
+ 
+ must also be a zero of 
+ f(x).
+ This is called the Complex Conjugate Theorem.
+
+Complex Conjugate Theorem
+
+According to the Linear Factorization Theorem, a polynomial function will have the same number of factors as its degree, and each factor will be in the form 
+ 
+ (x−c)
+ , where 
+ c
+ 
+ is a complex number.
+
+If the polynomial function 
+ f
+ 
+ has real coefficients and a complex zero in the form 
+ a+bi,
+ 
+ then the complex conjugate of the zero, 
+ a−bi,
+ 
+ is also a zero.
+Given the zeros of a polynomial function 
+ f
+ and a point (c, f(c)) on the graph of 
+ f,
+ use the Linear Factorization Theorem to find the polynomial function.
+
+Use the zeros to construct the linear factors of the polynomial.
+
+Multiply the linear factors to expand the polynomial.
+
+Substitute 
+ (
+ 
+ c,f(
+ c
+ )
+ )
+ into the function to determine the leading coefficient.
+
+Simplify.
+
+Using the Linear Factorization Theorem to Find a Polynomial with Given Zeros
+
+Find a fourth degree polynomial with real coefficients that has zeros of –3, 2, 
+ 
+ i,
+ such that 
+ 
+ f(−2)=100.
+
+Because 
+ 
+ x=i
+ 
+ is a zero, by the Complex Conjugate Theorem 
+ 
+ x=–i
+ 
+ is also a zero. The polynomial must have factors of 
+ 
+ (x+3),(x−2),(x−i),
+ and 
+ 
+ (x+i).
+ Since we are looking for a degree 4 polynomial, and now have four zeros, we have all four factors. Let’s begin by multiplying these factors.
+
+We need to find a to ensure 
+ 
+ f(–2)=100.
+ Substitute 
+ 
+ x=–2 
+ and 
+ 
+ f(2)=100
+ 
+ into 
+ 
+ f(x).
+
+So the polynomial function is
+
+or
+
+Analysis
+
+We found that both 
+ 
+ i
+ and 
+ 
+ −i
+ were zeros, but only one of these zeros needed to be given. If 
+ 
+ i
+ is a zero of a polynomial with real coefficients, then 
+ 
+ −i
+ must also be a zero of the polynomial because 
+ 
+ −i
+ is the complex conjugate of 
+ 
+ i.
+If 
+ 2+3i
+ 
+ were given as a zero of a polynomial with real coefficients, would 
+ 2−3i
+ 
+ also need to be a zero?
+Yes. When any complex number with an imaginary component is given as a zero of a polynomial with real coefficients, the conjugate must also be a zero of the polynomial.
+
+Find a third degree polynomial with real coefficients that has zeros of 5 and 
+ −2i
+ such that 
+ 
+ f(1)=10.
+f(x)=−
+ 1
+ 2
+
+ x
+ 3
+ 
+ +
+ 5
+ 2
+
+ x
+ 2
+ 
+ −2x+10
+
+Using Descartes’ Rule of Signs
+
+There is a straightforward way to determine the possible numbers of positive and negative real zeros for any polynomial function. If the polynomial is written in descending order, Descartes’ Rule of Signs tells us of a relationship between the number of sign changes in 
+ 
+ f(x)
+ and the number of positive real zeros. For example, the polynomial function below has one sign change.
+
+This tells us that the function must have 1 positive real zero.
+
+There is a similar relationship between the number of sign changes in 
+ 
+ f(−x)
+ and the number of negative real zeros.
+
+In this case, 
+ 
+ f(−x)
+ has 3 sign changes. This tells us that 
+ f(x)
+ could have 3 or 1 negative real zeros.
+
+Descartes’ Rule of Signs
+
+According to Descartes’ Rule of Signs, if we let 
+ f(x)=
+ a
+ n
+
+ x
+ n
+ 
+ +
+ a
+ 
+ n−1
+
+ x
+ 
+ n−1
+ 
+ +...+
+ a
+ 1
+ 
+ x+
+ a
+ 0
+
+ be a polynomial function with real coefficients:
+
+The number of positive real zeros is either equal to the number of sign changes of 
+ f(x)
+ or is less than the number of sign changes by an even integer.
+
+The number of negative real zeros is either equal to the number of sign changes of 
+ f(−x)
+ or is less than the number of sign changes by an even integer.
+
+Using Descartes’ Rule of Signs
+
+Use Descartes’ Rule of Signs to determine the possible numbers of positive and negative real zeros for 
+ 
+ f(x)=−
+ x
+ 4
+ 
+ −3
+ x
+ 3
+ 
+ +6
+ x
+ 2
+ 
+ −4x−12.
+
+Begin by determining the number of sign changes.
+
+There are two sign changes, so there are either 2 or 0 positive real roots. Next, we examine 
+ f(−x)
+ to determine the number of negative real roots.
+
+Again, there are two sign changes, so there are either 2 or 0 negative real roots.
+
+There are four possibilities, as we can see in .
+
+Positive Real
+ Zeros
+Negative Real
+ Zeros
+Complex
+ Zeros
+Total
+ Zeros
+2
+2
+0
+4
+2
+0
+2
+4
+0
+2
+2
+4
+0
+0
+4
+4
+Analysis
+
+We can confirm the numbers of positive and negative real roots by examining a graph of the function. See . We can see from the graph that the function has 0 positive real roots and 2 negative real roots.
+
+Use Descartes’ Rule of Signs to determine the maximum possible numbers of positive and negative real zeros for 
+ f(x)=2
+ x
+ 4
+ 
+ −10
+ x
+ 3
+ 
+ +11
+ x
+ 2
+ 
+ −15x+12.
+ 
+ Use a graph to verify the numbers of positive and negative real zeros for the function.
+
+There must be 4, 2, or 0 positive real roots and 0 negative real roots. The graph shows that there are 2 positive real zeros and 0 negative real zeros.
+
+Solving Real-World Applications
+
+We have now introduced a variety of tools for solving polynomial equations. Let’s use these tools to solve the bakery problem from the beginning of the section.
+
+Solving Polynomial Equations
+
+A new bakery offers decorated, multi-tiered cakes for display and cutting at Quinceañera and wedding celebrations, as well as sheet cakes to serve most of the guests. The bakery wants the volume of a small sheet cake to be 351 cubic inches. The cake is in the shape of a rectangular solid. They want the length of the cake to be four inches longer than the width of the cake and the height of the cake to be one-third of the width. What should the dimensions of the cake pan be?
+
+Begin by writing an equation for the volume of the cake. The volume of a rectangular solid is given by 
+ 
+ V=lwh.
+ We were given that the length must be four inches longer than the width, so we can express the length of the cake as 
+ 
+ l=w+4.
+ We were given that the height of the cake is one-third of the width, so we can express the height of the cake as 
+ 
+ h=
+ 1
+ 3
+ 
+ w.
+ Let’s write the volume of the cake in terms of width of the cake.
+
+Substitute the given volume into this equation.
+
+Descartes' rule of signs tells us there is one positive solution. The Rational Zero Theorem tells us that the possible rational zeros are 
+ 
+ ±1,±3,±9,±13,±27,±39,±81,±117,±351,
+ 
+ and 
+ 
+ ±1053.
+ 
+ We can use synthetic division to test these possible zeros. Only positive numbers make sense as dimensions for a cake, so we need not test any negative values. Let’s begin by testing values that make the most sense as dimensions for a small sheet cake. Use synthetic division to check 
+ 
+ x=1.
+
+Since 1 is not a solution, we will check 
+ 
+ x=3.
+
+Since 3 is not a solution either, we will test 
+ 
+ x=9.
+
+Synthetic division gives a remainder of 0, so 9 is a solution to the equation. We can use the relationships between the width and the other dimensions to determine the length and height of the sheet cake pan.
+
+The sheet cake pan should have dimensions 13 inches by 9 inches by 3 inches.
+
+A shipping container in the shape of a rectangular solid must have a volume of 84 cubic meters. The client tells the manufacturer that, because of the contents, the length of the container must be one meter longer than the width, and the height must be one meter greater than twice the width. What should the dimensions of the container be?
+
+3 meters by 4 meters by 7 meters
+
+Access these online resources for additional instruction and practice with zeros of polynomial functions.
+Real Zeros, Factors, and Graphs of Polynomial Functions
+Complex Factorization Theorem
+Find the Zeros of a Polynomial Function
+Find the Zeros of a Polynomial Function 2
+Find the Zeros of a Polynomial Function 3
+
+Key Concepts
+
+To find 
+ f(k),
+ determine the remainder of the polynomial 
+ 
+ f(x)
+ when it is divided by 
+ 
+ x−k.
+ This is known as the Remainder Theorem. See .
+
+According to the Factor Theorem, 
+ k
+ is a zero of 
+ 
+ f(x)
+ 
+ if and only if 
+ 
+ (x−k)
+ 
+ is a factor of 
+ 
+ f(x).
+ See .
+
+According to the Rational Zero Theorem, each rational zero of a polynomial function with integer coefficients will be equal to a factor of the constant term divided by a factor of the leading coefficient. See and .
+
+When the leading coefficient is 1, the possible rational zeros are the factors of the constant term.
+
+Synthetic division can be used to find the zeros of a polynomial function. See .
+
+According to the Fundamental Theorem, every polynomial function has at least one complex zero. See .
+
+Every polynomial function with degree greater than 0 has at least one complex zero.
+
+Allowing for multiplicities, a polynomial function will have the same number of factors as its degree. Each factor will be in the form 
+ (x−c),
+ where 
+ 
+ c
+ 
+ is a complex number. See .
+
+The number of positive real zeros of a polynomial function is either the number of sign changes of the function or less than the number of sign changes by an even integer.
+
+The number of negative real zeros of a polynomial function is either the number of sign changes of 
+ f(−x)
+ 
+ or less than the number of sign changes by an even integer. See .
+
+Polynomial equations model many real-world scenarios. Solving the equations is easiest done by synthetic division. See .
+
+Section Exercises
+
+Verbal
+
+Describe a use for the Remainder Theorem.
+
+The theorem can be used to evaluate a polynomial.
+
+Explain why the Rational Zero Theorem does not guarantee finding zeros of a polynomial function.
+
+What is the difference between rational and real zeros?
+
+Rational zeros can be expressed as fractions whereas real zeros include irrational numbers.
+
+If Descartes’ Rule of Signs reveals a no change of signs or one sign of changes, what specific conclusion can be drawn?
+
+If synthetic division reveals a zero, why should we try that value again as a possible solution?
+
+Polynomial functions can have repeated zeros, so the fact that number is a zero doesn’t preclude it being a zero again.
+
+Algebraic
+
+For the following exercises, use the Remainder Theorem to find the remainder.
+(
+
+ x
+ 4
+ 
+ −9
+ x
+ 2
+ 
+ +14
+ )÷(
+ 
+ x−2
+ )
+(
+ 
+ 3
+ x
+ 3
+ 
+ −2
+ x
+ 2
+ 
+ +x−4
+ )÷(
+ 
+ x+3
+ )
+−106
+(
+
+ x
+ 4
+ 
+ +5
+ x
+ 3
+ 
+ −4x−17
+ )÷(
+ 
+ x+1
+ )
+(
+ 
+ −3
+ x
+ 2
+ 
+ +6x+24
+ )÷(
+ 
+ x−4
+ )
+0
+(
+ 
+ 5
+ x
+ 5
+ 
+ −4
+ x
+ 4
+ 
+ +3
+ x
+ 3
+ 
+ −2
+ x
+ 2
+ 
+ +x−1
+ )÷(
+ 
+ x+6
+ )
+(
+
+ x
+ 4
+ 
+ −1
+ )÷(
+ 
+ x−4
+ )
+255
+(
+ 
+ 3
+ x
+ 3
+ 
+ +4
+ x
+ 2
+ 
+ −8x+2
+ )÷(
+ 
+ x−3
+ )
+(
+ 
+ 4
+ x
+ 3
+ 
+ +5
+ x
+ 2
+ 
+ −2x+7
+ )÷(
+ 
+ x+2
+ )
+−1
+
+For the following exercises, use the given factor and the Factor Theorem to find all real zeros for the given polynomial function.
+f(x)=2
+ x
+ 3
+ 
+ −9
+ x
+ 2
+ 
+ +13x−6;x−1
+f(x)=2
+ x
+ 3
+ 
+ +
+ x
+ 2
+ 
+ −5x+2;x+2
+−2, 1, 
+ 1
+ 2
+f(x)=3
+ x
+ 3
+ 
+ +
+ x
+ 2
+ 
+ −20x+12;x+3
+f(x)=2
+ x
+ 3
+ 
+ +3
+ x
+ 2
+ 
+ +x+6;x+2
+−2
+f(x)=−5
+ x
+ 3
+ 
+ +16
+ x
+ 2
+ 
+ −9;x−3
+x
+ 3
+ 
+ +3
+ x
+ 2
+ 
+ +4x+12;x+3
+−3
+4
+ x
+ 3
+ 
+ −7x+3;x−1
+2
+ x
+ 3
+ 
+ +5
+ x
+ 2
+ 
+ −12x−30,​2x+5
+−
+ 5
+ 2
+ 
+ , 
+ 6
+ 
+ , −
+ 6
+
+For the following exercises, use the Rational Zero Theorem to find the real solution(s) to each equation.
+x
+ 3
+ 
+ −3
+ x
+ 2
+ 
+ −10x+24=0
+2
+ x
+ 3
+ 
+ +7
+ x
+ 2
+ 
+ −10x−24=0
+2, −4, −
+ 3
+ 2
+x
+ 3
+ 
+ +2
+ x
+ 2
+ 
+ −9x−18=0
+x
+ 3
+ 
+ +5
+ x
+ 2
+ 
+ −16x−80=0
+4, −4, −5
+x
+ 3
+ 
+ −3
+ x
+ 2
+ 
+ −25x+75=0
+2
+ x
+ 3
+ 
+ −3
+ x
+ 2
+ 
+ −32x−15=0
+5, −3, −
+ 1
+ 2
+2
+ x
+ 3
+ 
+ +
+ x
+ 2
+ 
+ −7x−6=0
+2
+ x
+ 3
+ 
+ −3
+ x
+ 2
+ 
+ −x+1=0
+1
+ 2
+ 
+ , 
+ 
+ 1+
+ 5
+
+ 2
+ 
+ , 
+ 
+ 1−
+ 5
+
+ 2
+3
+ x
+ 3
+ 
+ −
+ x
+ 2
+ 
+ −11x−6=0
+2
+ x
+ 3
+ 
+ −5
+ x
+ 2
+ 
+ +9x−9=0
+3
+ 2
+2
+ x
+ 3
+ 
+ −3
+ x
+ 2
+ 
+ +4x+3=0
+x
+ 4
+ 
+ −2
+ x
+ 3
+ 
+ −7
+ x
+ 2
+ 
+ +8x+12=0
+2, 3, −1, −2
+x
+ 4
+ 
+ +2
+ x
+ 3
+ 
+ −9
+ x
+ 2
+ 
+ −2x+8=0
+4
+ x
+ 4
+ 
+ +4
+ x
+ 3
+ 
+ −25
+ x
+ 2
+ 
+ −x+6=0
+1
+ 2
+ 
+ , −
+ 1
+ 2
+ 
+ , 2, −3
+2
+ x
+ 4
+ 
+ −3
+ x
+ 3
+ 
+ −15
+ x
+ 2
+ 
+ +32x−12=0
+x
+ 4
+ 
+ +2
+ x
+ 3
+ 
+ −4
+ x
+ 2
+ 
+ −10x−5=0
+−1, −1, 
+ 5
+ 
+ , −
+ 5
+4
+ x
+ 3
+ 
+ −3x+1=0
+8
+ x
+
+ 4
+
+ +26
+ x
+ 3
+ 
+ +39
+ x
+ 2
+ 
+ +26x+6
+−
+ 3
+ 4
+ 
+ , −
+ 1
+ 2
+
+For the following exercises, find all complex solutions (real and non-real).
+x
+ 3
+ 
+ +
+ x
+ 2
+ 
+ +x+1=0
+x
+ 3
+ 
+ −8
+ x
+ 2
+ 
+ +25x−26=0
+2, 3+2i,
+[truncated]

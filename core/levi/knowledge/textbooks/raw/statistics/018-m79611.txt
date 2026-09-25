@@ -1,0 +1,962 @@
+# m79611
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Terminology
+
+Terminology
+Probability is a measure that is associated with how certain we are of results, or outcomes, of a particular activity. When the activity is a planned operation carried out under controlled conditions, it is called an experiment. If the result is not predetermined, then the experiment is said to be a chance experiment. Each time the experiment is attempted is called a trial.
+
+Examples of chance experiments include the following:
+
+flipping a fair coin,
+
+spinning a spinner,
+
+drawing a marble at random from a bag, and
+
+rolling a pair of dice.
+
+A result of an experiment is called an outcome. The sample space of an experiment is the set, or collection, of all possible outcomes.
+
+There are four main ways to represent a sample space:
+
+Flipping a Fair Coin
+Systematic List of Outcomes
+heads (H)tails (T)
+S= { 
+ HH, HT, TH, TT
+ }
+*We will investigate tree diagrams and Venn diagrams in Section 3.5.
+
+Note—when represented as a set, the sample space is denoted with an uppercase S.
+
+An event is any combination of outcomes. It is a subset of the sample space, so uppercase letters like A and B are commonly used to represent events. For example, if the experiment is to flip three fair coins, event A might be getting at most one head.
+
+The probability of an event A is written P(A), and 
+
+  0 ≤ P(
+ A
+ )
+  ≤ 1.P(A) = 0
+
+ means the event A can never happen. P(A) = 1 means the event A always happens. 
+
+ P(A) = 0.5
+
+ means the event A is equally likely to occur or not to occur.
+
+If two outcomes or events are equally likely, then they have equal probability. For example, if you toss a fair, six-sided die, each face (1, 2, 3, 4, 5, or 6) is as likely to occur as any other face. If you toss a fair coin, a Head (H) and a Tail (T) are equally likely to occur. If you randomly guess the answer to a true/false question on an exam, you are equally likely to select a correct answer or an incorrect answer.
+
+To calculate the probability of an event A when all outcomes in the sample space are equally likely, count the number of outcomes for event A and divide by the total number of outcomes in the sample space. This is known as the theoretical probability of A.
+Theoretical Probability of Event A
+
+For example, if you toss a fair dime and a fair nickel, the sample space is {HH, TH, HT, TT} where T = tails and H = heads. The sample space has four outcomes. Let A represent the outcome getting one head. There are two outcomes that meet this condition {HT, TH}, so 
+
+ P(A)=
+ 2
+ 4
+ 
+ =
+ 1
+ 2
+ 
+ =.5.
+
+Theoretical probability is not sufficient in all situations, however. Suppose we want to calculate the probability that a randomly selected car will run a red light at a given intersection. In this case, we need to look at events that have occurred, not theoretical possibilities. We could install a traffic camera and count the number of times that cars failed to stop when the light was red and the total number of cars that passed through the intersection for a period of time. These data will allow us to calculate the experimental, or empirical, probability that a car runs the red light.
+Experimental Probability of Event A
+
+While theoretical and experimental methods provide two different ways to calculate probability, these methods are closely related. If you flip one fair coin, there is one way to obtain heads and two possible outcomes. So, the theoretical probability of heads is 
+
+ 1
+ 2
+
+. Probability does not predict short-term results, however. If an experiment involves flipping a coin 10 times, you should not expect exactly five heads and five tails. The probability of any outcome measures the long-term relative frequency of that outcome. If you continue to flip the coin (from 20 to 2,000 to 20,000 times) the relative frequency of heads approaches .5 (the probability of heads).This important characteristic of probability experiments is known as the law of large numbers, which states that as the number of repetitions of an experiment is increased, the relative frequency obtained in the experiment tends to become closer and closer to the theoretical probability. Even though the outcomes do not happen according to any set pattern or order, overall, the long-term observed, or empirical, relative frequency will approach the theoretical probability.
+
+Suppose you roll one fair, six-sided die with the numbers {1, 2, 3, 4, 5, 6} on its faces. Let event E = rolling a number that is at least five. There are two outcomes {5, 6}. 
+
+ P(E)=
+ 2
+ 6
+ 
+ .
+
+ If you were to roll the die only a few times, you would not be surprised if your observed results did not match the probability. If you were to roll the die a very large number of times, you would expect that, overall, 
+
+ 2
+ 6
+
+ of the rolls would result in an outcome of at least five. You would not expect exactly 
+
+ 2
+ 6
+
+, but the long-term relative frequency of obtaining this result would approach the theoretical probability of 
+
+ 2
+ 6
+
+ as the number of repetitions grows larger and larger.
+
+It is important to realize that in many situations, the outcomes are not equally likely. A coin or die may be unfair, or biased. Two math professors in Europe had their statistics students test the Belgian one-euro coin and discovered that in 250 trials, a head was obtained 56 percent of the time and a tail was obtained 44 percent of the time. The data seem to show that the coin is not a fair coin; more repetitions would be helpful to draw a more accurate conclusion about such bias. Some dice may be biased. Look at the dice in a game you have at home; the spots on each face are usually small holes carved out and then painted to make the spots visible. Your dice may or may not be biased; it is possible that the outcomes may be affected by the slight weight differences due to the different numbers of holes in the faces. Gambling casinos make a lot of money depending on outcomes from rolling dice, so casino dice are made differently to eliminate bias. Casino dice have flat faces; the holes are completely filled with paint having the same density as the material that the dice are made out of so that each face is equally likely to occur. Later we will learn techniques to use to work with probabilities for events that are not equally likely.
+OR EventAn outcome is in the event A OR B if the outcome is in A or is in B or is in both A and B. For example, let A = {1, 2, 3, 4, 5} and B = {4, 5, 6, 7, 8}. A OR B = {1, 2, 3, 4, 5, 6, 7, 8}. Notice that 4 and 5 are not listed twice.
+
+OR Event
+AND EventAn outcome is in the event A AND B if the outcome is in both A and B at the same time. For example, let A and B be {1, 2, 3, 4, 5} and {4, 5, 6, 7, 8}, respectively. Then A AND B = {4, 5}.
+
+AND Event
+
+The complement of event A is denoted A′ (read "A prime"). A′ consists of all outcomes that are not in A. Notice that P(A) + P(A′) = 1. For example, let S = {1, 2, 3, 4, 5, 6} and let A = {1, 2, 3, 4}. Then, A′ = {5, 6}. P(A) = 46, P(A′) = 26, and P(A) + P(A′) = 
+
+ 4
+ 6
+ 
+ + 
+ 2
+ 6
+
+ = 1.
+
+The conditional probability of A given B is written P(A|B), read "the probability of A, given B." P(A|B) is the probability that event A will occur given that the event B has already occurred. A conditional probability reduces the sample space. We calculate the probability of A from the reduced sample space B. The formula to calculate P(A|B) is P(A|B) = 
+
+P(A AND B)
+
+ P(B)
+
+ where P(B) is greater than zero.
+
+For example, suppose we toss one fair, six-sided die. The sample space S = {1, 2, 3, 4, 5, 6}. Let A = {2, 3} and B = {2, 4, 6}. P(A|B) represents the probability that a randomly selected outcome is in A given that it is in B. We know that the outcome must lie in B, so there are three possible outcomes. There is only one outcome in B that also lies in A, so P(A|B) = 
+
+ 1
+ 3
+
+.
+
+We get the same result by using the formula. Remember that S has six outcomes.
+P(A|B) = 
+
+P(A AND B)
+
+ P(B)
+
+ =
+
+ (the number of outcomes that are 2 or 3 and even in S)
+ 
+ 6
+
+ (the number of outcomes that are even in S)
+ 
+ 6
+
+ =
+
+ 1
+ 6
+
+ 3
+ 6
+
+ =
+ 1
+ 3
+Understanding Terminology and SymbolsIt is important to read each problem carefully to think about and understand what the events are. Understanding the wording is the first very important step in solving probability problems. Reread the problem several times if necessary. Clearly identify the event of interest. Determine whether there is a condition stated in the wording that would indicate that the probability is conditional; carefully identify the condition, if any.
+
+Understanding Terminology and Symbols
+
+The sample space S is the whole numbers starting at one and less than 20.
+S = ________
+Let event A = the even numbers and event B = numbers greater than 13.
+
+Let event A = the even numbers and event B = numbers greater than 13.
+A = ________, B = ________
+P(A) = ________, P(B) = ________
+A AND B = ________, A OR B = ________
+P(A AND B) = ________, P(A OR B) = ________
+A′ = ________, P(A′) = ________
+P(A) + P(A′) = ________
+P(A|B) = ________, P(B|A) = ________; are the probabilities equal?
+S = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}
+A = {2, 4, 6, 8, 10, 12, 14, 16, 18}, B = {14, 15, 16, 17, 18, 19}
+P(A) = 
+
+ number of outcomes in A
+
+ number of outcomes in S
+
+ = 919
+ , P(B) = 
+
+ number of outcomes in B
+
+ number of outcomes in S
+
+ = 
+ 6
+ 
+ 19
+
+The set A AND B contains all outcomes that lie in both sets A and B, so A AND B = {14,16,18}, The set A OR B contains all outcomes that lie either of the sets A or B, so A OR B = {2, 4, 6, 8, 10, 12, 14, 15, 16, 17, 18, 19}.
+P(A AND B) = 319 , P(A OR B) = 
+
+ 12
+ 
+ 19
+A' consists of all outcomes in the sample space, S, that DO NOT lie in A, so A′ = 1, 3, 5, 7, 9, 11, 13, 15, 17, 19; P(A′) = 
+ 1019 .
+P(A) + P(A′) = 
+ 919 + 
+ 1019 = 1
+P(A|B) = 
+
+ P(A AND B)
+
+ P(B)
+
+ =
+
+ 3
+ 
+ 19
+
+ 6
+ 
+ 19
+
+= 
+
+ 3
+ 6
+
+, P(B|A) = 
+
+ P(A AND B)
+
+ P(A)
+
+ =
+
+ 3
+ 
+ 19
+
+ 9
+ 
+ 19
+
+ = 
+
+ 3
+ 9
+
+, No, the probabilities are not equal.
+
+Try It
+
+The sample space S is all the ordered pairs of two whole numbers, the first from one to three and the second from one to four (Example: (1, 4)).
+S = ________
+Let event A = the sum is even and event B = the first number is prime.
+A = ________, B = ________
+P(A) = ________, P(B) = ________
+A AND B = ________, A OR B = ________
+P(A AND B) = ________, P(A OR B) = ________
+B′ = ________, P(B′) = ________
+P(A) + P(A′) = ________
+P(A|B) = ________, P(B|A) = ________; are the probabilities equal?
+S = {(1,1), (1,2), (1,3), (1,4), (2,1), (2,2), (2,3), (2,4), (3,1), (3,2), (3,3), (3,4)}
+A = {(1,1), (1,3), (2,2), (2,4), (3,1), (3,3)}
+B = {(2,1), (2,2), (2,3), (2,4), (3,1), (3,2), (3,3), (3,4)}
+P(A) = 
+
+ 1
+ 2
+
+, P(B) = 
+
+ 2
+ 3
+A AND B = {(2,2), (2,4), (3,1), (3,3)}
+ A OR B = {(1,1), (1,3), (2,1), (2,2), (2,3), (2,4), (3,1), (3,2), (3,3), (3,4)}
+P(A AND B) = 
+
+ 1
+ 3
+
+, P(A OR B) = 
+
+ 5
+ 6
+B′ = {(1,1), (1,2), (1,3), (1,4)}, P(B′) = 13
+P(B) + P(B′) = 1
+P(A|B) = 
+
+ P(A AND B)
+
+ P(B)
+
+ = 
+ 1
+ 2
+
+, P(B|A) = 
+
+ P(A AND B)
+
+ P(B)
+
+ = 
+ 2
+ 3
+
+, No.
+
+A fair, six-sided die is rolled. The sample space, S, is {1, 2, 3, 4, 5, 6}. Describe each event and calculate its probability.
+
+Event T = the outcome is two.
+
+Event A = the outcome is an even number.
+
+Event B = the outcome is less than four.
+
+The complement of A
+A GIVEN B
+B GIVEN A
+A AND B
+A OR B
+A OR B′
+
+Event N = the outcome is a prime number.
+
+Event I = the outcome is seven.
+T = {2}, P(T) = 
+
+ number of outcomes in T
+
+ number of outcomes in S
+
+ = 16
+A = {2, 4, 6}, P(A) = 36 = 12
+B = {1, 2, 3}, P(B) = 36 = 12
+A′ = {1, 3, 5}, P(A′) = 36 = 12
+A|B = {2}, There are three outcomes in B, and only 1 of these lies in A, so P(A|B) = 13
+B|A = {2}, There are three outcomes in A, and only 1 of these lies in B, so P(B|A) = 13
+A AND B = {2}, P(A AND B) = 16
+A OR B = {1, 2, 3, 4, 6}, P(A OR B) = 56
+A OR B′ = {2, 4, 5, 6}, P(A OR B′) = 46 = 23
+N = {2, 3, 5}, P(N) = 12
+
+It is impossible to roll a die and get an outcome of 7, so P(7) = 0.
+describes the distribution of a random sample S of 100 individuals, organized by gender and whether they are right or left-handed.
+
+Right-Handed
+Left-Handed
+
+Males
+43
+9
+
+Females
+44
+4
+
+Right-Handed
+Left-Handed
+Males
+43
+9
+Females
+44
+4
+Let’s denote the events M = the subject is male, F = the subject is female, R = the subject is right-handed, L = the subject is left-handed. Compute the following probabilities:
+P(M)
+P(F)
+P(R)
+P(L)
+P(M AND R)
+P(F AND L)
+P(M OR F)
+P(M OR R)
+P(F OR L)
+P(M')
+P(R|M)
+P(F|L)
+P(L|F)
+P(M)=
+ 
+ number of males
+
+ total number of subjects
+
+ =
+ 
+ 43+9
+
+ 43+9+44+4
+
+ =
+ 
+ 52
+
+ 100
+
+ =.52
+P(F)=
+ 
+ number of females
+
+ total number of subjects
+
+ =
+ 
+ 44+4
+
+ 43+9+44+4
+
+ =
+ 
+ 48
+
+ 100
+
+ =.48
+P(R)=
+ 
+ number of right-handed subjects
+
+ total number of subjects
+
+ =
+ 
+ 43+44
+
+ 43+9+44+4
+
+ =
+ 
+ 87
+
+ 100
+
+ =.87
+P(L)=
+ 
+ number of left-handed subjects
+
+ total number of subjects
+
+ =
+ 
+ 9+4
+
+ 43+9+44+4
+
+ =
+ 
+ 13
+
+ 100
+
+ =.13
+P(M and R)=
+ 
+ number of male, right-handed subjects
+
+ total number of subjects
+
+ =
+ 
+ 43
+
+ 100
+
+ =.43
+P(F and L)=
+ 
+ number of female, left-handed subjects
+
+ total number of subjects
+
+ =
+ 4
+ 
+ 100
+
+ =.04
+P(M or F)=
+ 
+ number of subjects that are male or female
+
+ total number of subjects
+
+ =
+ 
+ 52+48
+
+ 100
+
+ =
+ 
+ 100
+
+ 100
+
+ =1
+P(M or R)=
+ 
+ number of subjects that are male or right-handed
+
+ total number of subjects
+
+ =
+ 
+ 43+9+44
+
+ 100
+
+ =
+ 
+ 96
+
+ 100
+
+ =.96
+P(F or L)=
+ 
+ number of subjects that are female or left-handed
+
+ total number of subjects
+
+ =
+ 
+ 44+4+9
+
+ 100
+
+ =
+ 
+ 57
+
+ 100
+
+ =.57
+P(
+ M
+ '
+ 
+ )=
+ 
+ number of subjects who are not male
+
+ total number of subjects
+
+ =
+ 
+ 44+4
+
+ 43+9+44+4
+
+ =
+ 
+ 48
+
+ 100
+
+ =.48
+P(R|M)=
+ 
+ P(R and M)
+
+ P(M)
+
+ =
+ 
+ 0.43
+
+ 0.52
+
+ ˜=.8269
+
+ (rounded to four decimal places)
+P(F|L)=
+ 
+ P(F and L)
+
+ P(L)
+
+ =
+ 
+ 0.04
+
+ 0.13
+
+ ˜=.3077
+
+ (rounded to four decimal places)
+P(L|F)=
+ 
+ P(L and F)
+
+ P(F)
+
+ =
+ 
+ 0.04
+
+ 0.48
+
+ ˜=.0833
+
+ (rounded to four decimal places)
+
+References
+
+Worldatlas. (2013). Countries list by continent. Retrieved from http://www.worldatlas.com/cntycont.htm
+
+Chapter Review
+
+In this module we learned the basic terminology of probability. The set of all possible outcomes of an experiment is called the sample space. Events are subsets of the sample space, and they are assigned a probability that is a number between zero and one, inclusive.
+
+Formula Review
+A and B are events
+P(S) = 1 where S is the sample space
+
+0 ≤ P(A) ≤ 1
+P(A|B) = 
+
+ P(A AND B)
+
+ P(B)
+
+In a particular college class, there are male and female students. Some students have long hair and some students have short hair. Write the symbols for the probabilities of the events for parts A through J of this question. Note that you cannot find numerical answers here. You were not given enough information to find any probability values yet; concentrate on understanding the symbols.
+
+Let F be the event that a student is female.
+
+Let M be the event that a student is male.
+
+Let S be the event that a student has short hair.
+
+Let L be the event that a student has long hair.
+
+The probability that a student does not have long hair.
+
+The probability that a student is male or has short hair.
+
+The probability that a student is female and has long hair.
+
+The probability that a student is male, given that the student has long hair.
+
+The probability that a student has long hair, given that the student is male.
+
+Of all female students, the probability that a student has short hair.
+
+Of all students with long hair, the probability that a student is female.
+
+The probability that a student is female or has long hair.
+
+The probability that a randomly selected student is a male student with short hair.
+
+The probability that a student is female.
+P(L′) = P(S)
+P(M OR S)
+P(F AND L)
+P(M|L)
+P(L|M)
+P(S|F)
+P(F|L)
+P(F OR L)
+P(M AND S)
+P(F)
+Use the following information to answer the next four exercises. A box is filled with several party favors. It contains 12 hats, 15 noisemakers, 10 finger traps, and five bags of confetti.
+Let H = the event of getting a hat.
+Let N = the event of getting a noisemaker.
+Let F = the event of getting a finger trap.
+Let C = the event of getting a bag of confetti.
+
+Find P(H).
+
+Find P(N).
+P(N) = 
+
+ 15
+
+ 42
+
+ = 
+
+ 5
+ 
+ 14
+
+ = .36
+
+Find P(F).
+
+Find P(C).
+P(C) = 
+
+ 5
+ 
+ 42
+
+ = .12
+Use the following information to answer the next six exercises. A jar of 150 jelly beans contains 22 red jelly beans, 38 yellow, 20 green, 28 purple, 26 blue, and the rest are orange.
+Let B = the event of getting a blue jelly bean
+Let G = the event of getting a green jelly bean.
+Let O = the event of getting an orange jelly bean.
+Let P = the event of getting a purple jelly bean.
+Let R = the event of getting a red jelly bean.
+Let Y = the event of getting a yellow jelly bean.
+
+Find P(B).
+
+Find P(G).
+P(G) = 
+
+ 20
+
+ 150
+
+ = 
+
+ 2
+ 
+ 15
+
+ = .13
+
+Find P(P).
+
+Find P(R).
+P(R) = 
+
+ 22
+
+ 150
+
+ = 
+
+ 11
+
+ 75
+
+ = .15
+
+Find P(Y).
+
+Find P(O).
+P(O) = 
+
+ 150−22−38−20−28−26
+
+ 150
+
+ = 
+
+ 16
+
+ 150
+
+ = 
+
+ 8
+ 
+ 75
+
+ = .11
+Use the following information to answer the next six exercises. There are 23 countries in North America, 12 countries in South America, 47 countries in Europe, 44 countries in Asia, 54 countries in Africa, and 14 countries in Oceania (Pacific Ocean region).
+Let A = the event that a country is in Asia.
+Let E = the event that a country is in Europe.
+Let F = the event that a country is in Africa.
+Let N = the event that a country is in North America.
+Let O = the event that a country is in Oceania.
+Let S = the event that a country is in South America.
+
+Find P(A).
+
+Find P(E).
+P(E) = 
+
+ 47
+
+ 194
+
+ = .24
+
+Find P(F).
+
+Find P(N).
+P(N) = 
+
+ 23
+
+ 194
+
+ = .12
+
+Find P(O).
+
+Find P(S).
+P(S) = 
+
+ 12
+
+ 194
+
+ = 
+
+ 6
+ 
+ 97
+
+ = .06
+
+What is the probability of drawing a red card in a standard deck of 52 cards?
+
+What is the probability of drawing a club in a standard deck of 52 cards?
+13
+
+ 52
+
+ = 
+
+ 1
+ 4
+
+ = .25
+
+What is the probability of rolling an even number of dots with a fair, six-sided die numbered one through six?
+
+What is the probability of rolling a prime number of dots with a fair, six-sided die numbered one through six?
+3
+ 6
+
+ = 
+
+ 1
+ 2
+
+ = .5
+Use the following information to answer the next two exercises. You see a game at a local fair. You have to throw a dart at a color wheel. Each section on the color wheel is equal in area.
+
+Let B = the event of landing on blue.
+Let R = the event of landing on red.
+Let G = the event of landing on green.
+Let Y = the event of landing on yellow.
+
+If you land on Y, you get the biggest prize. Find P(Y).
+
+If you land on red, you don’t get a prize. What is P(R)?
+P(R)=
+ 4
+ 8
+ 
+ =.5
+Use the following information to answer the next 10 exercises. On a baseball team, there are infielders and outfielders. Some players are great hitters, and some players are not great hitters.
+Let I = the event that a player in an infielder.
+Let O = the event that a player is an outfielder.
+Let H = the event that a player is a great hitter.
+Let N = the event that a player is not a great hitter.
+
+Write the symbols for the probability that a player is not an outfielder.
+
+Write the symbols for the probability that a player is an outfielder or is a great hitter.
+P(O OR H)
+
+Write the symbols for the probability that a player is an infielder and is not a great hitter.
+
+Write the symbols for the probability that a player is a great hitter, given that the player is an infielder.
+P(H|I)
+
+Write the symbols for the probability that a player is an infielder, given that the player is a great hitter.
+
+Write the symbols for the probability that of all the outfielders, a player is not a great hitter.
+P(N|O)
+
+Write the symbols for the probability that of all the great hitters, a player is an outfielder.
+
+Write the symbols for the probability that a player is an infielder or is not a great hitter.
+P(I OR N)
+
+Write the symbols for the probability that a player is an outfielder and is a great hitter.
+
+Write the symbols for the probability that a player is an infielder.
+P(I)
+
+What is the word for the set of all possible outcomes?
+
+What is conditional probability?
+
+The likelihood that an event will occur given that another event has already occurred.
+
+A shelf holds 12 books. Eight are fiction and the rest are nonfiction. Each is a different book with a unique title. The fiction books are numbered one to eight. The nonfiction books are numbered one to four. Randomly select one book
+Let F = event that book is fiction
+Let N = event that book is nonfiction
+What is the sample space?
+
+What is the sum of the probabilities of an event and its complement?
+
+1
+Use the following information to answer the next two exercises. You are rolling a fair, six-sided number cube. Let E = the event that it lands on an even number. Let M = the event that it lands on a multiple of three.
+
+What does P(E|M) mean in words?
+
+What does P(E OR M) mean in words?
+
+the probability of landing on an even number or a multiple of three
+
+Homework
+
+The graph in displays the sample sizes and percentages of people in different age and gender groups who were polled concerning their approval of Mayor Ford’s actions in office. The total number in the sample of all the age groups is 1,045.
+
+Define three events in the graph.
+
+Describe in words what the entry 40 means.
+
+Describe in words the complement of the entry in the previous question.
+
+Describe in words what the entry 30 means.
+
+Out of the males and females, what percent are males?
+
+Out of the females, what percent disapprove of Mayor Ford?
+
+Out of all the age groups, what percent approve of Mayor Ford?
+
+Find P(Approve|Male).
+
+Out of the age groups, what percent are more than 44 years old?
+
+Find P(Approve|Age < 35).
+
+Explain what is wrong with the following statements. Use complete sentences.
+
+If there is a 60 percent chance of rain on Saturday and a 70 percent chance of rain on Sunday, then there is a 130 percent chance of rain over the weekend.
+
+The probability that a baseball player hits a home run is greater than the probability that he gets a successful hit.
+
+You can't calculate the joint probability knowing the probability of both events occurring, which is not in the information given; the probabilities should be multiplied, not added; and probability is never greater than 100 percent
+
+A home run by definition is a successful hit, so he has to have at least as many successful hits as home runs.
+
+the likelihood that an event will occur given that another event has already occurred
+each outcome of an experiment has the same probability
+a subset of the set of all outcomes of an experiment; the set of all outcomes of an experiment is called a sample space and is usually denoted by S.
+An event is an arbitrary subset in S. It can contain one outcome, two outcomes, no outcomes (empty subset), the entire sample space, and the like. Standard notations for events are capital letters such as A, B, C, and so on
+a planned activity carried out under controlled conditions
+a particular result of an experiment
+a number between zero and one, inclusive, that gives the likelihood that a specific event will occur; the foundation of statistics is given by the following three axioms (by A.N. Kolmogorov, 1930s): Let S denote the sample space and A and B are two events in S; then
+
+0 ≤ P(A) ≤ 1,
+If A and B are any two mutually exclusive events, then P(A OR B) = P(A) + P(B), and
+P(S) = 1
+0 ≤ P(A) ≤ 1,
+
+If A and B are any two mutually exclusive events, then P(A OR B) = P(A) + P(B), and
+P(S) = 1
+
+the set of all possible outcomes of an experiment
+an outcome is in the event A AND B if the outcome is in both A AND B at the same time
+the complement of event A consists of all outcomes that are NOT in A
+an outcome is in the event A OR B if the outcome is in A or is in B or is in both A and B

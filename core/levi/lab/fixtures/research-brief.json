@@ -1,0 +1,112 @@
+{
+  "scenario": "research-brief",
+  "title": "Research brief with web tools",
+  "description": "The loop fetches a page over HTTP — via a small helper script on loopback (local stub server: fully offline) — and saves the findings to memory.",
+  "provenance": {
+    "captured_utc": "2026-09-15T19:38:55+00:00",
+    "provider": "local",
+    "levi_version": "0.9.5",
+    "live": true,
+    "python": "3.12.3",
+    "scenario": "research-brief",
+    "note": "Real transcript from LEVI's agentic loop (run_subtask, local provider). Illustrative of a real run, not live intelligence."
+  },
+  "phases": [
+    {
+      "name": "fetch",
+      "transcript": {
+        "task": "Run the command `python3 fetchbrief`",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "shell_exec",
+                "args": {
+                  "cmd": "python3 fetchbrief"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "shell_exec",
+                "ok": true,
+                "output": "<html><body><h1>Lab Brief</h1><p>Example Domain is reserved for documentation use.</p><p>Second fact: the lab runs fully offline.</p></body></html>\n",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: ran `python3 fetchbrief`. Output: '<html><body><h1>Lab Brief</h1><p>Example Domain is reserved for documentation use.</p><p>Second fact: the lab runs fully offline.</p></body></html>'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 1,
+          "tool_calls": 1,
+          "tools_used": [
+            "shell_exec"
+          ],
+          "failed_tool_calls": 0,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: ran `python3 fetchbrief`. Output: '<html><body><h1>Lab Brief</h1><p>Example Domain is reserved for documentation use.</p><p>Second fact: the lab runs fully offline.</p></body></html>'."
+        }
+      }
+    },
+    {
+      "name": "note",
+      "transcript": {
+        "task": "Remember that the lab brief says Example Domain is reserved for documentation use",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "memory_write",
+                "args": {
+                  "text": "the lab brief says Example Domain is reserved for documentation use"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "memory_write",
+                "ok": true,
+                "output": "remembered 'scratch'",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: saved the note to memory: 'the lab brief says Example Domain is reserved for documentation use'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 1,
+          "tool_calls": 1,
+          "tools_used": [
+            "memory_write"
+          ],
+          "failed_tool_calls": 0,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: saved the note to memory: 'the lab brief says Example Domain is reserved for documentation use'."
+        }
+      }
+    }
+  ],
+  "events": [],
+  "notes": "The page is served by a stub HTTP server on loopback so the demo needs no internet. Swap the URL for a real one with --live and your own endpoint."
+}

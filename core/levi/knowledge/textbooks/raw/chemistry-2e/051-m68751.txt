@@ -1,0 +1,379 @@
+# m68751
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Relating Pressure, Volume, Amount, and Temperature: The Ideal Gas Law
+
+Relating Pressure, Volume, Amount, and Temperature: The Ideal Gas Law
+
+By the end of this section, you will be able to:
+
+Identify the mathematical relationships between the various properties of gases
+
+Use the ideal gas law, and related gas laws, to compute the values of various gas properties under specified conditions
+
+During the seventeenth and especially eighteenth centuries, driven both by a desire to understand nature and a quest to make balloons in which they could fly (), a number of scientists established the relationships between the macroscopic physical properties of gases, that is, pressure, volume, temperature, and amount of gas. Although their measurements were not precise by today’s standards, they were able to determine the mathematical relationships between pairs of these variables (e.g., pressure and temperature, pressure and volume) that hold for an ideal gas—a hypothetical construct that real gases approximate under certain conditions. Eventually, these individual laws were combined into a single equation—the ideal gas law—that relates gas quantities for gases and is quite accurate for low pressures and moderate temperatures. We will consider the key developments in individual relationships (for pedagogical reasons not quite in historical order), then put them together in the ideal gas law.
+
+Pressure and Temperature: Amontons’s Law
+
+Imagine filling a rigid container attached to a pressure gauge with gas and then sealing the container so that no gas may escape. If the container is cooled, the gas inside likewise gets colder and its pressure is observed to decrease. Since the container is rigid and tightly sealed, both the volume and number of moles of gas remain constant. If we heat the sphere, the gas inside gets hotter () and the pressure increases.
+
+This relationship between temperature and pressure is observed for any sample of gas confined to a constant volume. An example of experimental pressure-temperature data is shown for a sample of air under these conditions in . We find that temperature and pressure are linearly related, and if the temperature is on the kelvin scale, then P and T are directly proportional (again, when volume and moles of gas are held constant); if the temperature on the kelvin scale increases by a certain factor, the gas pressure increases by the same factor.
+
+Guillaume Amontons was the first to empirically establish the relationship between the pressure and the temperature of a gas (~1700), and Joseph Louis Gay-Lussac determined the relationship more precisely (~1800). Because of this, the P-T relationship for gases is known as either Amontons’s law or Gay-Lussac’s law. Under either name, it states that the pressure of a given amount of gas is directly proportional to its temperature on the kelvin scale when the volume is held constant. Mathematically, this can be written:
+
+where ∝ means “is proportional to,” and k is a proportionality constant that depends on the identity, amount, and volume of the gas.
+
+For a confined, constant volume of gas, the ratio PT is therefore constant (i.e., PT=k). If the gas is initially in “Condition 1” (with P = P1 and T = T1), and then changes to “Condition 2” (with P = P2 and T = T2), we have that P1T1=k and P2T2=k, which reduces to P1T1=P2T2. This equation is useful for pressure-temperature calculations for a confined gas at constant volume. Note that temperatures must be on the kelvin scale for any gas law calculations (0 on the kelvin scale and the lowest possible temperature is called absolute zero). (Also note that there are at least three ways we can describe how the pressure of a gas changes as its temperature changes: We can use a table of values, a graph, or a mathematical equation.)
+Predicting Change in Pressure with Temperature
+A can of hair spray is used until it is empty except for the propellant, isobutane gas.
+
+Predicting Change in Pressure with Temperature
+
+(a) On the can is the warning “Store only at temperatures below 120 °F (48.8 °C). Do not incinerate.” Why?
+
+(b) The gas in the can is initially at 24 °C and 360 kPa, and the can has a volume of 350 mL. If the can is left in a car that reaches 50 °C on a hot day, what is the new pressure in the can?
+Solution
+(a) The can contains an amount of isobutane gas at a constant volume, so if the temperature is increased by heating, the pressure will increase proportionately. High temperature could lead to high pressure, causing the can to burst. (Also, isobutane is combustible, so incineration could cause the can to explode.)
+
+Solution
+
+(b) We are looking for a pressure change due to a temperature change at constant volume, so we will use Amontons’s/Gay-Lussac’s law. Taking P1 and T1 as the initial values, T2 as the temperature where the pressure is unknown and P2 as the unknown pressure, and converting °C to K, we have:
+
+Rearranging and solving gives: P2=360kPa×323K297K=390kPa
+Check Your Learning
+A sample of nitrogen, N2, occupies 45.0 mL at 27 °C and 600 torr. What pressure will it have if cooled to –73 °C while the volume remains constant?
+
+Check Your Learning
+
+Answer:
+
+400 torr
+
+Volume and Temperature: Charles’s Law
+
+If we fill a balloon with air and seal it, the balloon contains a specific amount of air at atmospheric pressure, let’s say 1 atm. If we put the balloon in a refrigerator, the gas inside gets cold and the balloon shrinks (although both the amount of gas and its pressure remain constant). If we make the balloon very cold, it will shrink a great deal, and it expands again when it warms up.
+
+This video shows how cooling and heating a gas causes its volume to decrease or increase, respectively.
+
+These examples of the effect of temperature on the volume of a given amount of a confined gas at constant pressure are true in general: The volume increases as the temperature increases, and decreases as the temperature decreases. Volume-temperature data for a 1-mole sample of methane gas at 1 atm are listed and graphed in .
+
+The relationship between the volume and temperature of a given amount of gas at constant pressure is known as Charles’s law in recognition of the French scientist and balloon flight pioneer Jacques Alexandre César Charles. Charles’s law states that the volume of a given amount of gas is directly proportional to its temperature on the kelvin scale when the pressure is held constant.
+
+Mathematically, this can be written as:
+
+with k being a proportionality constant that depends on the amount and pressure of the gas.
+
+For a confined, constant pressure gas sample, VT is constant (i.e., the ratio = k), and as seen with the P-T relationship, this leads to another form of Charles’s law: V1T1=V2T2.
+Predicting Change in Volume with Temperature
+A sample of carbon dioxide, CO2, occupies 0.300 L at 10 °C and 750 torr. What volume will the gas have at 30 °C and 750 torr?
+
+Predicting Change in Volume with Temperature
+Solution
+Because we are looking for the volume change caused by a temperature change at constant pressure, this is a job for Charles’s law. Taking V1 and T1 as the initial values, T2 as the temperature at which the volume is unknown and V2 as the unknown volume, and converting °C into K we have:
+
+Solution
+
+Rearranging and solving gives: V2=0.300L×303K283K=0.321L
+
+This answer supports our expectation from Charles’s law, namely, that raising the gas temperature (from 283 K to 303 K) at a constant pressure will yield an increase in its volume (from 0.300 L to 0.321 L).
+Check Your Learning
+A sample of oxygen, O2, occupies 32.2 mL at 30 °C and 452 torr. What volume will it occupy at –70 °C and the same pressure?
+
+Check Your Learning
+
+Answer:
+
+21.6 mL
+Measuring Temperature with a Volume Change
+Temperature is sometimes measured with a gas thermometer by observing the change in the volume of the gas as the temperature changes at constant pressure. The hydrogen in a particular hydrogen gas thermometer has a volume of 150.0 cm3 when immersed in a mixture of ice and water (0.00 °C). When immersed in boiling liquid ammonia, the volume of the hydrogen, at the same pressure, is 131.7 cm3. Find the temperature of boiling ammonia on the kelvin and Celsius scales.
+
+Measuring Temperature with a Volume Change
+Solution
+ When immersed in an ice-water bath at 0.00 °C (T1), the thermometer’s gas volume is 150.0 cm3 (V1). When immersed in boiling liquid ammonia (T2), the thermometer’s gas volume is 131.7 cm3. The relation between volume and temperature at constant pressure is provided by Charles’s Law:
+
+Solution
+
+Rearrangement gives T2=131.7cm3×273.15K150.0cm3=239.8K
+
+Subtracting 273.15 from 239.8 K, we find that the temperature of the boiling ammonia on the Celsius scale is –33.4 °C.
+Check Your Learning
+What is the volume of a sample of ethane at 467 K and 1.1 atm if it occupies 405 mL at 298 K and 1.1 atm?
+
+Check Your Learning
+
+Answer:
+
+635 mL
+
+Volume and Pressure: Boyle’s Law
+
+If we partially fill an airtight syringe with air, the syringe contains a specific amount of air at constant temperature, say 25 °C. If we slowly push in the plunger while keeping temperature constant, the gas in the syringe is compressed into a smaller volume and its pressure increases; if we pull out the plunger, the volume increases and the pressure decreases. This example of the effect of volume on the pressure of a given amount of a confined gas is true in general. Decreasing the volume of a contained gas will increase its pressure, and increasing its volume will decrease its pressure. In fact, if the volume increases by a certain factor, the pressure decreases by the same factor, and vice versa. Volume-pressure data for an air sample at room temperature are graphed in .
+
+Unlike the P-T and V-T relationships, pressure and volume are not directly proportional to each other. Instead, P and V exhibit inverse proportionality: Increasing the pressure results in a decrease of the volume of the gas. Mathematically this can be written:
+
+with k being a constant. Graphically, this relationship is shown by the straight line that results when plotting the inverse of the pressure (1P) versus the volume (V), or the inverse of volume (1V) versus the pressure (P). Graphs with curved lines are difficult to read accurately at low or high values of the variables, and they are more difficult to use in fitting theoretical equations and parameters to experimental data. For those reasons, scientists often try to find a way to “linearize” their data. If we plot P versus V, we obtain a hyperbola (see ).
+
+The relationship between the volume and pressure of a given amount of gas at constant temperature was first published by the English natural philosopher Robert Boyle over 300 years ago. It is summarized in the statement now known as Boyle’s law: The volume of a given amount of gas held at constant temperature is inversely proportional to the pressure under which it is measured.
+Volume of a Gas Sample
+The sample of gas in has a volume of 15.0 mL at a pressure of 13.0 psi. Determine the pressure of the gas at a volume of 7.5 mL, using:
+
+Volume of a Gas Sample
+
+(a) the P-V graph in
+
+(b) the 1P vs. V graph in
+
+(c) the Boyle’s law equation
+
+Comment on the likely accuracy of each method.
+Solution
+(a) Estimating from the P-V graph gives a value for P somewhere around 27 psi.
+
+Solution
+
+(b) Estimating from the 1P versus V graph give a value of about 26 psi.
+
+(c) From Boyle’s law, we know that the product of pressure and volume (PV) for a given sample of gas at a constant temperature is always equal to the same value. Therefore we have P1V1 = k and P2V2 = k which means that P1V1 = P2V2.
+
+Using P1 and V1 as the known values 13.0 psi and 15.0 mL, P2 as the pressure at which the volume is unknown, and V2 as the unknown volume, we have:
+
+Solving:
+
+It was more difficult to estimate well from the P-V graph, so (a) is likely more inaccurate than (b) or (c). The calculation will be as accurate as the equation and measurements allow.
+Check Your LearningThe sample of gas in has a volume of 30.0 mL at a pressure of 6.5 psi. Determine the volume of the gas at a pressure of 11.0 psi, using:
+
+Check Your Learning
+
+(a) the P-V graph in
+
+(b) the 1P vs. V graph in
+
+(c) the Boyle’s law equation
+
+Comment on the likely accuracy of each method.
+
+Answer:
+
+(a) about 17–18 mL; (b) ~18 mL; (c) 17.7 mL; it was more difficult to estimate well from the P-V graph, so (a) is likely more inaccurate than (b); the calculation will be as accurate as the equation and measurements allow
+
+Breathing and Boyle’s Law
+
+What do you do about 20 times per minute for your whole life, without break, and often without even being aware of it? The answer, of course, is respiration, or breathing. How does it work? It turns out that the gas laws apply here. Your lungs take in gas that your body needs (oxygen) and get rid of waste gas (carbon dioxide). Lungs are made of spongy, stretchy tissue that expands and contracts while you breathe. When you inhale, your diaphragm and intercostal muscles (the muscles between your ribs) contract, expanding your chest cavity and making your lung volume larger. The increase in volume leads to a decrease in pressure (Boyle’s law). This causes air to flow into the lungs (from high pressure to low pressure). When you exhale, the process reverses: Your diaphragm and rib muscles relax, your chest cavity contracts, and your lung volume decreases, causing the pressure to increase (Boyle’s law again), and air flows out of the lungs (from high pressure to low pressure). You then breathe in and out again, and again, repeating this Boyle’s law cycle for the rest of your life ().
+
+Moles of Gas and Volume: Avogadro’s Law
+
+The Italian scientist Amedeo Avogadro advanced a hypothesis in 1811 to account for the behavior of gases, stating that equal volumes of all gases, measured under the same conditions of temperature and pressure, contain the same number of molecules. Over time, this relationship was supported by many experimental observations as expressed by Avogadro’s law: For a confined gas, the volume (V) and number of moles (n) are directly proportional if the pressure and temperature both remain constant.
+
+In equation form, this is written as:
+
+Mathematical relationships can also be determined for the other variable pairs, such as P versus n, and n versus T.
+
+Visit this interactive PhET simulation to investigate the relationships between pressure, volume, temperature, and amount of gas. Use the simulation to examine the effect of changing one parameter on another while holding the other parameters constant (as described in the preceding sections on the various gas laws).
+
+The Ideal Gas Law
+
+To this point, four separate laws have been discussed that relate pressure, volume, temperature, and the number of moles of the gas:
+
+Boyle’s law: PV = constant at constant T and n
+
+Amontons’s law: PT = constant at constant V and n
+
+Charles’s law: VT = constant at constant P and n
+
+Avogadro’s law: Vn = constant at constant P and T
+
+Combining these four laws yields the ideal gas law, a relation between the pressure, volume, temperature, and number of moles of a gas:
+
+where P is the pressure of a gas, V is its volume, n is the number of moles of the gas, T is its temperature on the kelvin scale, and R is a constant called the ideal gas constant or the universal gas constant. The units used to express pressure, volume, and temperature will determine the proper form of the gas constant as required by dimensional analysis, the most commonly encountered values being 0.08206 L atm mol–1 K–1 and 8.314 kPa L mol–1 K–1.
+
+Gases whose properties of P, V, and T are accurately described by the ideal gas law (or the other gas laws) are said to exhibit ideal behavior or to approximate the traits of an ideal gas. An ideal gas is a hypothetical construct that may be used along with kinetic molecular theory to effectively explain the gas laws as will be described in a later module of this chapter. Although all the calculations presented in this module assume ideal behavior, this assumption is only reasonable for gases under conditions of relatively low pressure and high temperature. In the final module of this chapter, a modified gas law will be introduced that accounts for the non-ideal behavior observed for many gases at relatively high pressures and low temperatures.
+
+The ideal gas equation contains five terms, the gas constant R and the variable properties P, V, n, and T. Specifying any four of these terms will permit use of the ideal gas law to calculate the fifth term as demonstrated in the following example exercises.
+Using the Ideal Gas Law
+Methane, CH4, is being considered for use as an alternative automotive fuel to replace gasoline. One gallon of gasoline could be replaced by 655 g of CH4. What is the volume of this much methane at 25 °C and 745 torr?
+
+Using the Ideal Gas Law
+Solution
+We must rearrange PV = nRT to solve for V: V=nRTP
+
+Solution
+
+If we choose to use R = 0.08206 L atm mol–1 K–1, then the amount must be in moles, temperature must be in kelvin, and pressure must be in atm.
+
+Converting into the “right” units:
+
+It would require 1020 L (269 gal) of gaseous methane at about 1 atm of pressure to replace 1 gal of gasoline. It requires a large container to hold enough methane at 1 atm to replace several gallons of gasoline.
+Check Your Learning
+Calculate the pressure in bar of 2520 moles of hydrogen gas stored at 27 °C in the 180-L storage tank of a modern hydrogen-powered car.
+
+Check Your Learning
+
+Answer:
+
+350 bar
+
+If the number of moles of an ideal gas are kept constant under two different sets of conditions, a useful mathematical relationship called the combined gas law is obtained: P1V1T1=P2V2T2 using units of atm, L, and K. Both sets of conditions are equal to the product of n × R (where n = the number of moles of the gas and R is the ideal gas law constant).
+Using the Combined Gas Law
+When filled with air, a typical scuba tank with a volume of 13.2 L has a pressure of 153 atm (). If the water temperature is 27 °C, how many liters of air will such a tank provide to a diver’s lungs at a depth of approximately 70 feet in the ocean where the pressure is 3.13 atm?
+
+Using the Combined Gas Law
+SolutionLetting 1 represent the air in the scuba tank and 2 represent the air in the lungs, and noting that body temperature (the temperature the air will be in the lungs) is 37 °C, we have:
+
+Solution
+
+Solving for V2:
+
+(Note: Be advised that this particular example is one in which the assumption of ideal gas behavior is not very reasonable, since it involves gases at relatively high pressures and low temperatures. Despite this limitation, the calculated volume can be viewed as a good “ballpark” estimate.)
+Check Your Learning
+A sample of ammonia is found to occupy 0.250 L under laboratory conditions of 27 °C and 0.850 atm. Find the volume of this sample at 0 °C and 1.00 atm.
+
+Check Your Learning
+
+Answer:
+
+0.193 L
+
+The Interdependence between Ocean Depth and Pressure in Scuba Diving
+
+Whether scuba diving at the Great Barrier Reef in Australia (shown in ) or in the Caribbean, divers must understand how pressure affects a number of issues related to their comfort and safety.
+
+Pressure increases with ocean depth, and the pressure changes most rapidly as divers reach the surface. The pressure a diver experiences is the sum of all pressures above the diver (from the water and the air). Most pressure measurements are given in units of atmospheres, expressed as “atmospheres absolute” or ATA in the diving community: Every 33 feet of salt water represents 1 ATA of pressure in addition to 1 ATA of pressure from the atmosphere at sea level. As a diver descends, the increase in pressure causes the body’s air pockets in the ears and lungs to compress; on the ascent, the decrease in pressure causes these air pockets to expand, potentially rupturing eardrums or bursting the lungs. Divers must therefore undergo equalization by adding air to body airspaces on the descent by breathing normally and adding air to the mask by breathing out of the nose or adding air to the ears and sinuses by equalization techniques; the corollary is also true on ascent, divers must release air from the body to maintain equalization. Buoyancy, or the ability to control whether a diver sinks or floats, is controlled by the buoyancy compensator (BCD). If a diver is ascending, the air in their BCD expands because of lower pressure according to Boyle’s law (decreasing the pressure of gases increases the volume). The expanding air increases the buoyancy of the diver, and they begin to ascend. The diver must vent air from the BCD or risk an uncontrolled ascent that could rupture the lungs. In descending, the increased pressure causes the air in the BCD to compress and the diver sinks much more quickly; the diver must add air to the BCD or risk an uncontrolled descent, facing much higher pressures near the ocean floor. The pressure also impacts how long a diver can stay underwater before ascending. The deeper a diver dives, the more compressed the air that is breathed because of increased pressure: If a diver dives 33 feet, the pressure is 2 ATA and the air would be compressed to one-half of its original volume. The diver uses up available air twice as fast as at the surface.
+
+Standard Conditions of Temperature and Pressure
+
+We have seen that the volume of a given quantity of gas and the number of molecules (moles) in a given volume of gas vary with changes in pressure and temperature. Chemists sometimes make comparisons against a standard temperature and pressure (STP) for reporting properties of gases: 273.15 K and 1 atm (101.325 kPa).The IUPAC definition of standard pressure was changed from 1 atm to 1 bar (100 kPa) in 1982, but the prior definition remains in use by many literature resources and will be used in this text. At STP, one mole of an ideal gas has a volume of about 22.4 L—this is referred to as the standard molar volume ().
+
+Key Concepts and Summary
+
+The behavior of gases can be described by several laws based on experimental observations of their properties. The pressure of a given amount of gas is directly proportional to its absolute temperature, provided that the volume does not change (Amontons’s law). The volume of a given gas sample is directly proportional to its absolute temperature at constant pressure (Charles’s law). The volume of a given amount of gas is inversely proportional to its pressure when temperature is held constant (Boyle’s law). Under the same conditions of temperature and pressure, equal volumes of all gases contain the same number of molecules (Avogadro’s law).
+
+The equations describing these laws are special cases of the ideal gas law, PV = nRT, where P is the pressure of the gas, V is its volume, n is the number of moles of the gas, T is its kelvin temperature, and R is the ideal (universal) gas constant.
+
+Key Equations
+PV = nRT
+Chemistry End of Chapter Exercises
+
+Sometimes leaving a bicycle in the sun on a hot day will cause a blowout. Why?
+
+Explain how the volume of the bubbles exhausted by a scuba diver () change as they rise to the surface, assuming that they remain intact.
+
+As the bubbles rise, the pressure decreases, so their volume increases as suggested by Boyle’s law.
+
+One way to state Boyle’s law is “All other things being equal, the pressure of a gas is inversely proportional to its volume.” (a) What is the meaning of the term “inversely proportional?” (b) What are the “other things” that must be equal?
+
+An alternate way to state Avogadro’s law is “All other things being equal, the number of molecules in a gas is directly proportional to the volume of the gas.” (a) What is the meaning of the term “directly proportional?” (b) What are the “other things” that must be equal?
+
+(a) The number of particles in the gas increases as the volume increases. (b) temperature, pressure
+
+How would the graph in change if the number of moles of gas in the sample used to determine the curve were doubled?
+
+How would the graph in change if the number of moles of gas in the sample used to determine the curve were doubled?
+
+The curve would be farther to the right and higher up, but the same basic shape.
+
+In addition to the data found in , what other information do we need to find the mass of the sample of air used to determine the graph?
+
+Determine the volume of 1 mol of CH4 gas at 150 K and 1 atm, using .
+
+About 12.5 L
+
+Determine the pressure of the gas in the syringe shown in when its volume is 12.5 mL, using:
+
+(a) the appropriate graph
+
+(b) Boyle’s law
+
+A spray can is used until it is empty except for the propellant gas, which has a pressure of 1344 torr at 23 °C. If the can is thrown into a fire (T = 475 °C), what will be the pressure in the hot can?
+
+3.40 × 103 torr
+
+What is the temperature of an 11.2-L sample of carbon monoxide, CO, at 744 torr if it occupies 13.3 L at 55 °C and 744 torr?
+
+A 2.50-L volume of hydrogen measured at –196 °C is warmed to 100 °C. Calculate the volume of the gas at the higher temperature, assuming no change in pressure.
+
+12.1 L
+
+A balloon inflated with three breaths of air has a volume of 1.7 L. At the same temperature and pressure, what is the volume of the balloon if five more same-sized breaths are added to the balloon?
+
+A weather balloon contains 8.80 moles of helium at a pressure of 0.992 atm and a temperature of 25 °C at ground level. What is the volume of the balloon under these conditions?
+
+217 L
+
+The volume of an automobile air bag was 66.8 L when inflated at 25 °C with 77.8 g of nitrogen gas. What was the pressure in the bag in kPa?
+
+How many moles of gaseous boron trifluoride, BF3, are contained in a 4.3410-L bulb at 788.0 K if the pressure is 1.220 atm? How many grams of BF3?
+
+8.190 × 10–2 mol; 5.553 g
+
+Iodine, I2, is a solid at room temperature but sublimes (converts from a solid into a gas) when warmed. What is the temperature in a 73.3-mL bulb that contains 0.292 g of I2 vapor at a pressure of 0.462 atm?
+
+How many grams of gas are present in each of the following cases?
+
+(a) 0.100 L of CO2 at 307 torr and 26 °C
+
+(b) 8.75 L of C2H4, at 378.3 kPa and 483 K
+
+(c) 221 mL of Ar at 0.23 torr and –54 °C
+
+(a) 7.24 × 10–2 g; (b) 23.1 g; (c) 1.5 × 10–4 g
+
+A high altitude balloon is filled with 1.41 × 104 L of hydrogen at a temperature of 21 °C and a pressure of 745 torr. What is the volume of the balloon at a height of 20 km, where the temperature is –48 °C and the pressure is 63.1 torr?
+
+A cylinder of medical oxygen has a volume of 35.4 L, and contains O2 at a pressure of 151 atm and a temperature of 25 °C. What volume of O2 does this correspond to at normal body conditions, that is, 1 atm and 37 °C?
+
+5561 L
+
+A large scuba tank () with a volume of 18 L is rated for a pressure of 220 bar. The tank is filled at 20 °C and contains enough air to supply 1860 L of air to a diver at a pressure of 2.37 atm (a depth of 45 feet). Was the tank filled to capacity at 20 °C?
+
+A 20.0-L cylinder containing 11.34 kg of butane, C4H10, was opened to the atmosphere. Calculate the mass of the gas remaining in the cylinder if it were opened and the gas escaped until the pressure in the cylinder was equal to the atmospheric pressure, 0.983 atm, and a temperature of 27 °C.
+
+46.4 g
+
+While resting, the average 70-kg human male consumes 14 L of pure O2 per hour at 25 °C and 100 kPa. How many moles of O2 are consumed by a 70 kg man while resting for 1.0 h?
+
+For a given amount of gas showing ideal behavior, draw labeled graphs of:
+
+(a) the variation of P with V
+
+(b) the variation of V with T
+
+(c) the variation of P with T
+
+(d) the variation of 1P with V
+
+For a gas exhibiting ideal behavior:
+
+A liter of methane gas, CH4, at STP contains more atoms of hydrogen than does a liter of pure hydrogen gas, H2, at STP. Using Avogadro’s law as a starting point, explain why.
+
+The effect of chlorofluorocarbons (such as CCl2F2) on the depletion of the ozone layer is well known. The use of substitutes, such as CH3CH2F(g), for the chlorofluorocarbons, has largely corrected the problem. Calculate the volume occupied by 10.0 g of each of these compounds at STP:
+
+(a) CCl2F2(g)
+
+(b) CH3CH2F(g)
+
+(a) 1.85 L CCl2F2; (b) 4.66 L CH3CH2F
+
+As 1 g of the radioactive element radium decays over 1 year, it produces 1.16 × 1018 alpha particles (helium nuclei). Each alpha particle becomes an atom of helium gas. What is the pressure in pascal of the helium gas produced if it occupies a volume of 125 mL at a temperature of 25 °C?
+
+A balloon with a volume of 100.21 L at 21 °C and 0.981 atm is released and just barely clears the top of Mount Crumpit in British Columbia. If the final volume of the balloon is 144.53 L at a temperature of 5.24 °C, what is the pressure experienced by the balloon as it clears Mount Crumpit?
+
+0.644 atm
+
+If the temperature of a fixed amount of a gas is doubled at constant volume, what happens to the pressure?
+
+If the volume of a fixed amount of a gas is tripled at constant temperature, what happens to the pressure?
+
+The pressure decreases by a factor of 3.
+
+temperature at which the volume of a gas would be zero according to Charles’s law.
+(also, Gay-Lussac’s law) pressure of a given number of moles of gas is directly proportional to its kelvin temperature when the volume is held constant
+volume of a gas at constant temperature and pressure is proportional to the number of gas molecules
+volume of a given number of moles of gas held at constant temperature is inversely proportional to the pressure under which it is measured
+volume of a given number of moles of gas is directly proportional to its kelvin temperature when the pressure is held constant
+hypothetical gas whose physical properties are perfectly described by the gas laws
+constant derived from the ideal gas equation R = 0.08206 L atm mol–1 K–1 or 8.314 L kPa mol–1 K–1
+relation between the pressure, volume, amount, and temperature of a gas under conditions derived by combinat
+[truncated]

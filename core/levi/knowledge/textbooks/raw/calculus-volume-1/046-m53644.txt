@@ -1,0 +1,293 @@
+# m53644
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Arc Length of a Curve and Surface Area
+
+Arc Length of a Curve and Surface Area
+
+Determine the length of a curve, y=f(x), between two points.
+
+Determine the length of a curve, x=g(y), between two points.
+
+Find the surface area of a solid of revolution.
+
+In this section, we use definite integrals to find the arc length of a curve. We can think of arc length as the distance you would travel if you were walking along the path of the curve. Many real-world applications involve arc length. If a rocket is launched along a parabolic path, we might want to know how far the rocket travels. Or, if a curve on a map represents a road, we might want to know how far we have to drive to reach our destination.
+
+We begin by calculating the arc length of curves defined as functions of x, then we examine the same process for curves defined as functions of y. (The process is identical, with the roles of x and y reversed.) The techniques we use to find arc length can be extended to find the surface area of a surface of revolution, and we close the section with an examination of this concept.
+
+Arc Length of the Curve y = f(x)
+
+In previous applications of integration, we required the function f(x) to be integrable, or at most continuous. However, for calculating arc length we have a more stringent requirement for f(x). Here, we require f(x) to be differentiable, and furthermore we require its derivative, f′(x), to be continuous. Functions like this, which have continuous derivatives, are called smooth. (This property comes up again in later chapters.)
+
+Let f(x) be a smooth function defined over [a,b]. We want to calculate the length of the curve from the point (a,f(a)) to the point (b,f(b)). We start by using line segments to approximate the length of the curve. For i=0,1,2,…,n, let P={xi} be a regular partition of [a,b]. Then, for i=1,2,…,n, construct a line segment from the point (xi−1,f(xi−1)) to the point (xi,f(xi)). Although it might seem logical to use either horizontal or vertical line segments, we want our line segments to approximate the curve as closely as possible. depicts this construct for n=5.
+
+To help us find the length of each line segment, we look at the change in vertical distance as well as the change in horizontal distance over each interval. Because we have used a regular partition, the change in horizontal distance over each interval is given by Δx. The change in vertical distance varies from interval to interval, though, so we use Δyi=f(xi)−f(xi−1) to represent the change in vertical distance over the interval [xi−1,xi], as shown in . Note that some (or all) Δyi may be negative.
+
+By the Pythagorean theorem, the length of the line segment is (Δx)2+(Δyi)2. We can also write this as Δx1+((Δyi)/(Δx))2. Now, by the Mean Value Theorem, there is a point xi*∈[xi−1,xi] such that f′(xi*)=(Δyi)/(Δx). Then the length of the line segment is given by Δx1+[f′(xi*)]2. Adding up the lengths of all the line segments, we get
+
+This is a Riemann sum. Taking the limit as n→∞, we have
+
+We summarize these findings in the following theorem.
+
+Arc Length for y = f(x)
+
+Let f(x) be a smooth function over the interval [a,b]. Then the arc length of the portion of the graph of f(x) from the point (a,f(a)) to the point (b,f(b)) is given by
+
+Note that we are integrating an expression involving f′(x), so we need to be sure f′(x) is integrable. This is why we require f(x) to be smooth. The following example shows how to apply the theorem.
+
+Calculating the Arc Length of a Function of x
+
+Let f(x)=2x3/2. Calculate the arc length of the graph of f(x) over the interval [0,1]. Round the answer to three decimal places.
+
+We have f′(x)=3x1/2, so [f′(x)]2=9x. Then, the arc length is
+
+Substitute u=1+9x. Then, du=9dx. When x=0, then u=1, and when x=1, then u=10. Thus,
+
+Let f(x)=(4/3)x3/2. Calculate the arc length of the graph of f(x) over the interval [0,1]. Round the answer to three decimal places.
+16(55−1)≈1.697
+
+Hint
+
+Use the process from the previous example. Don’t forget to change the limits of integration.
+
+Although it is nice to have a formula for calculating arc length, this particular theorem can generate expressions that are difficult to integrate. We study some techniques for integration in Introduction to Techniques of Integration. In some cases, we may have to use a computer or calculator to approximate the value of the integral.
+
+Using a Computer or Calculator to Determine the Arc Length of a Function of x
+
+Let f(x)=x2. Calculate the arc length of the graph of f(x) over the interval [1,3].
+
+We have f′(x)=2x, so [f′(x)]2=4x2. Then the arc length is given by
+
+Using a computer to approximate the value of this integral, we get
+
+Let f(x)=sinx. Calculate the arc length of the graph of f(x) over the interval [0,π]. Use a computer or calculator to approximate the value of the integral.
+Arc Length≈3.8202
+
+Hint
+
+Use the process from the previous example.
+
+Arc Length of the Curve x = g(y)
+
+We have just seen how to approximate the length of a curve with line segments. If we want to find the arc length of the graph of a function of y, we can repeat the same process, except we partition the y-axis instead of the x-axis. shows a representative line segment.
+
+Then the length of the line segment is (Δy)2+(Δxi)2, which can also be written as Δy1+((Δxi)/(Δy))2. If we now follow the same development we did earlier, we get a formula for arc length of a function x=g(y).
+
+Arc Length for x = g(y)
+
+Let g(y) be a smooth function over a y interval [c,d]. Then, the arc length of the graph of g(y) from the point (g(d), d) to the point (g(c), c) is given by
+
+Calculating the Arc Length of a Function of y
+
+Let g(y)=3y3. Calculate the arc length of the graph of g(y) over the interval [1,2].
+
+We have g′(y)=9y2, so [g′(y)]2=81y4. Then the arc length is
+
+Using a computer to approximate the value of this integral, we obtain
+
+Let g(y)=1/y. Calculate the arc length of the graph of g(y) over the interval [1,4]. Use a computer or calculator to approximate the value of the integral.
+Arc Length=3.15018
+
+Hint
+
+Use the process from the previous example.
+
+Area of a Surface of Revolution
+
+The concepts we used to find the arc length of a curve can be extended to find the surface area of a surface of revolution. Surface area is the total area of the outer layer of an object. For objects such as cubes or bricks, the surface area of the object is the sum of the areas of all of its faces. For curved surfaces, the situation is a little more complex. Let f(x) be a nonnegative smooth function over the interval [a,b]. We wish to find the surface area of the surface of revolution created by revolving the graph of y=f(x) around the x-axis as shown in the following figure.
+
+As we have done many times before, we are going to partition the interval [a,b] and approximate the surface area by calculating the surface area of simpler shapes. We start by using line segments to approximate the curve, as we did earlier in this section. For i=0,1,2,…,n, let P={xi} be a regular partition of [a,b]. Then, for i=1,2,…,n, construct a line segment from the point (xi−1,f(xi−1)) to the point (xi,f(xi)). Now, revolve these line segments around the x-axis to generate an approximation of the surface of revolution as shown in the following figure.
+
+Notice that when each line segment is revolved around the axis, it produces a band. These bands are actually pieces of cones (think of an ice cream cone with the pointy end cut off). A piece of a cone like this is called a frustum of a cone.
+
+To find the surface area of the band, we need to find the lateral surface area, S, of the frustum (the area of just the slanted outside surface of the frustum, not including the areas of the top or bottom faces). Let r1 and r2 be the radii of the wide end and the narrow end of the frustum, respectively, and let l be the slant height of the frustum as shown in the following figure.
+
+We know the lateral surface area of a cone is given by
+
+where r is the radius of the base of the cone and s is the slant height (see the following figure).
+
+Since a frustum can be thought of as a piece of a cone, the lateral surface area of the frustum is given by the lateral surface area of the whole cone less the lateral surface area of the smaller cone (the pointy tip) that was cut off (see the following figure).
+
+The cross-sections of the small cone and the large cone are similar triangles, so we see that
+
+Solving for s, we get
+
+Then the lateral surface area (SA) of the frustum is
+
+Let’s now use this formula to calculate the surface area of each of the bands formed by revolving the line segments around the x-axis. A representative band is shown in the following figure.
+
+Note that the slant height of this frustum is just the length of the line segment used to generate it. So, applying the surface area formula, we have
+
+Now, as we did in the development of the arc length formula, we apply the Mean Value Theorem to select xi*∈[xi−1,xi] such that f′(xi*)=(Δyi)/Δx. This gives us
+
+Furthermore, since f(x) is continuous, by the Intermediate Value Theorem, there is a point xi**∈[xi−1,xi] such that f(xi**)=(1/2)[f(xi−1)+f(xi)], so we get
+
+Then the approximate surface area of the whole surface of revolution is given by
+
+This almost looks like a Riemann sum, except we have functions evaluated at two different points, xi* and xi**, over the interval [xi−1,xi]. Although we do not examine the details here, it turns out that because f(x) is smooth, if we let n→∞, the limit works the same as a Riemann sum even with the two different evaluation points. This makes sense intuitively. Both xi* and xi** are in the interval [xi−1,xi], so it makes sense that as n→∞, both xi* and xi** approach x. Those of you who are interested in the details should consult an advanced calculus text.
+
+Taking the limit as n→∞, we get
+
+As with arc length, we can conduct a similar development for functions of y to get a formula for the surface area of surfaces of revolution about the y-axis. These findings are summarized in the following theorem.
+
+Surface Area of a Surface of Revolution
+
+Let f(x) be a nonnegative smooth function over the interval [a,b]. Then, the surface area of the surface of revolution formed by revolving the graph of f(x) around the x-axis is given by
+
+Similarly, let g(y) be a nonnegative smooth function over the interval [c,d]. Then, the surface area of the surface of revolution formed by revolving the graph of g(y) around the y-axis is given by
+
+Calculating the Surface Area of a Surface of Revolution 1
+
+Let f(x)=x over the interval [1,4]. Find the surface area of the surface generated by revolving the graph of f(x) around the x-axis. Round the answer to three decimal places.
+
+The graph of f(x) and the surface of rotation are shown in the following figure.
+
+We have f(x)=x. Then, f′(x)=1/(2x) and (f′(x))2=1/(4x). Then,
+
+Let u=x+1/4. Then, du=dx. When x=1, u=5/4, and when x=4, u=17/4. This gives us
+
+Let f(x)=1−x over the interval [0,1/2]. Find the surface area of the surface generated by revolving the graph of f(x) around the x-axis. Round the answer to three decimal places.
+π6(55−33)≈3.133
+
+Hint
+
+Use the process from the previous example.
+
+Calculating the Surface Area of a Surface of Revolution 2
+
+Let f(x)=y=3x3. Consider the portion of the curve where 0≤y≤2. Find the surface area of the surface generated by revolving the graph of f(x) around the y-axis.
+
+Notice that we are revolving the curve around the y-axis, and the interval is in terms of y, so we want to rewrite the function as a function of y. We get x=g(y)=(1/3)y3. The graph of g(y) and the surface of rotation are shown in the following figure.
+
+We have g(y)=(1/3)y3, so g′(y)=y2 and (g′(y))2=y4. Then
+
+Let u=y4+1. Then du=4y3dy. When y=0, u=1, and when y=2, u=17. Then
+
+Let g(y)=9−y2 over the interval y∈[0,2]. Find the surface area of the surface generated by revolving the graph of g(y) around the y-axis.
+12π
+
+Hint
+
+Use the process from the previous example.
+
+Key Concepts
+
+The arc length of a curve can be calculated using a definite integral.
+
+The arc length is first approximated using line segments, which generates a Riemann sum. Taking a limit then gives us the definite integral formula. The same process can be applied to functions of y.
+
+The concepts used to calculate the arc length can be generalized to find the surface area of a surface of revolution.
+
+The integrals generated by both the arc length and surface area formulas are often difficult to evaluate. It may be necessary to use a computer or calculator to approximate the values of the integrals.
+
+Key Equations
+Surface Area=∫ab(2πf(x)1+(f′(x))2)dx
+For the following exercises, find the length of the functions over the given interval.
+y=5xfromx=0tox=2
+226
+y=−12x+25fromx=1tox=4
+x=4yfromy=−1toy=1
+217
+
+Pick an arbitrary linear function x=g(y) over any interval of your choice (y1,y2). Determine the length of the function and then prove the length is correct by using geometry.
+
+Find the surface area of the volume generated when the curve y=x revolves around the x-axis from (1,1) to (4,2), as seen here.
+π6(1717−55)
+
+Find the surface area of the volume generated when the curve y=x2 revolves around the y-axis from (1,1) to (3,9).
+
+For the following exercises, find the lengths of the functions of x over the given interval. If you cannot evaluate the integral exactly, use technology to approximate it.
+y=x3/2 from (0,0)to(1,1)
+1313−827
+y=x2/3 from (1,1)to(8,4)
+y=13(x2+2)3/2 from x=0tox=1
+43
+y=13(x2−2)3/2 from x=2 to x=4
+[T] y=ex on x=0 to x=1
+2.0035
+y=x33+14x from x=1tox=3
+y=x44+18x2 from x=1tox=2
+12332
+y=2x3/23−x1/22 from x=1tox=4
+y=127(9x2+6)3/2 from x=0tox=2
+10
+[T] y=sinx on x=0tox=π
+
+For the following exercises, find the lengths of the functions of y over the given interval. If you cannot evaluate the integral exactly, use technology to approximate it.
+y=5−3x4 from y=0 to y=4
+203
+x=12(ey+e−y) from y=−1toy=1
+x=5y3/2 from y=0 to y=1
+1675(229229−8)
+[T] x=y2 from y=0 to y=1
+x=y from y=0toy=1
+18(45+ln(9+45))
+x=23(y2+1)3/2 from y=1 to y=3
+[T] x=tany from y=0 to y=34
+1.201
+[T] x=cos2y from y=−π2 to y=π2
+[T] x=4y from y=0toy=2
+15.2341
+[T] x=ln(y) on y=1e to y=e
+
+For the following exercises, find the surface area of the volume generated when the following curves revolve around the x-axis. If you cannot evaluate the integral exactly, use your calculator to approximate it.
+y=x from x=2 to x=6
+49π3
+y=x3 from x=0 to x=1
+y=7x from x=−1tox=1
+70π2
+[T] y=1x2 from x=1tox=3
+y=4−x2 from x=0tox=2
+8π
+y=4−x2 from x=−1tox=1
+y=5x from x=1tox=5
+120π26
+[T] y=tanx from x=−π4tox=π4
+
+For the following exercises, find the surface area of the volume generated when the following curves revolve around the y-axis. If you cannot evaluate the integral exactly, use your calculator to approximate it.
+y=x2 from x=0tox=2
+π6(1717−1)
+y=12x2+12 from x=0tox=1
+y=x+1 from x=0tox=3
+92π
+[T] y=1x from x=12 to x=1
+y=x3 from x=1tox=27
+1010π27(7373−1)
+[T] y=3x4 from x=0 to x=1
+[T] y=1x from x=1 to x=3
+25.645
+[T] y=cosx from x=0 to x=π2
+
+The base of a lamp is constructed by revolving a quarter circle y=2x−x2 around the y-axis from x=1 to x=2, as seen here. Create an integral for the surface area of this curve and compute it.
+π(π+2)
+
+A light bulb is a sphere with radius 1/2 in. with the bottom sliced off to fit exactly onto a cylinder of radius 1/4 in. and length 1/3 in., as seen here. The sphere is cut off at the bottom to fit exactly onto the cylinder, so the radius of the cut is 1/4 in. Find the surface area (not including the top or bottom of the cylinder).
+[T] A lampshade is constructed by rotating y=1/x around the x-axis from y=1 to y=2, as seen here. Determine how much material you would need to construct this lampshade—that is, the surface area—accurate to four decimal places.
+10.5017
+[T] An anchor drags behind a boat according to the function y=24e−x/2−24, where y represents the depth beneath the boat and x is the horizontal distance of the anchor from the back of the boat. If the anchor is 23 ft below the boat, how much rope do you have to pull to reach the anchor? Round your answer to three decimal places.
+[T] You are building a bridge that will span 10 ft. You intend to add decorative rope in the shape of y=5|sin((xπ)/5)|, where x is the distance in feet from one end of the bridge. Find out how much rope you need to buy, rounded to the nearest foot.
+23 ft
+
+For the following exercises, find the exact arc length for the following problems over the given interval.
+y=ln(sinx) from x=π/4 to x=(3π)/4. (Hint: Recall trigonometric identities.)
+
+Draw graphs of y=x2, y=x6, and y=x10. For y=xn, as n increases, formulate a prediction on the arc length from (0,0) to (1,1). Now, compute the lengths of these three functions and determine whether your prediction is correct.
+2
+
+Compare the lengths of the parabola x=y2 and the line x=by from (0,0)to(b2,b) as b increases. What do you notice?
+
+Solve for the length of x=y2 from (0,0)to(1,1). Show that x=(1/2)y2 from (0,0) to (2,2) is twice as long. Graph both functions and explain why this is so.
+
+Answers may vary
+[T] Which is longer between (1,1) and (2,1/2): the hyperbola y=1/x or the graph of x+2y=3?
+
+Explain why the surface area is infinite when y=1/x is rotated around the x-axis for 1≤x<∞, but the volume is finite.
+
+For more information, look up Gabriel’s Horn.
+
+the arc length of a curve can be thought of as the distance a person would travel along the path of the curve
+a portion of a cone; a frustum is constructed by cutting the cone with a plane parallel to the base
+the surface area of a solid is the total area of the outer layer of the object; for objects such as cubes or bricks, the surface area of the object is the sum of the areas of all of its faces

@@ -1,0 +1,87 @@
+# m00095
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+The Capital Asset Pricing Model (CAPM)
+
+The Capital Asset Pricing Model (CAPM)
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Define risk premium.
+
+Explain the concept of beta.
+
+Compute the required return of a security using the CAPM.
+
+Risk-Free Rate
+
+The capital asset pricing model (CAPM) is a financial theory based on the idea that investors who are willing to hold stocks that have higher systematic risk should be rewarded more for taking on this market risk. The CAPM focuses on systematic risk, rather than a stock’s individual risk, because firm-specific risk can be eliminated through diversification.
+
+Suppose that your grandparents have given you a gift of $20,000. After you graduate from college, you plan to work for a few years and then apply to law school. You want to use the $20,000 your grandparents gave you to pay for part of your law school tuition. It will be several years before you are ready to spend the money, and you want to keep the money safe. At the same time, you would like to invest the money and have it grow until you are ready to start law school.
+
+Although you would like to earn a return on the money so that you have more than $20,000 by the time you start law school, your primary objective is to keep the money safe. You are looking for a risk-free investment. Lending money to the US government is considered the lowest-risk investment that you can make. You can purchase a US Treasury security. The chances of the US government not paying its debts is close to zero. Although, in theory, no investment is 100% risk-free, investing in US government securities is generally considered a risk-free investment because the risk is so miniscule.
+
+The rate that you can earn by purchasing US Treasury securities is a proxy for the risk-free rate. It is used as an investing benchmark. The average rate of return for the three-month US Treasury security from 1928 to 2020 is 3.36%.“Historical Return on Stocks, Bonds and Bills: 1928–2020.” Damodaran Online. Stern School of Business, New York University, January 2021. http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html You can see that you will not become immensely wealthy by investing in US Treasury bills. Another characteristic of US Treasury securities, however, is that their volatility tends to be much lower than that of stocks. In fact, the standard deviation of returns for the US Treasury bills is 3.0%. Unlike the returns for stocks, the return on US Treasury bills has never been negative. The lowest annual return was 0.03%, which occurred in 2014.Ibid.
+US Treasury Securities
+
+Visit the website of the US Department of the Treasury to learn more about US Treasury securities. You will find current interest rates for both short-term securities (US Treasury bills) and long-term securities (US Treasury bonds).
+
+Risk Premium
+
+You know that if you use your $20,000 to invest in stock rather than in US Treasury bills, the outcome of the investment will be uncertain. Your investments may do well, but there is also a risk of losing money. You will only be willing to take on this risk if you are rewarded for doing so. In other words, you will only be willing to take the risk of investing in stocks if you think that doing so will make you more than you would make investing in US Treasury securities.
+
+From 1928 to 2020, the average return for the S&P 500 stock index has been 11.64%, which is much higher than the 3.36% average return for US Treasury bills.Ibid. Stock returns, with a standard deviation of 19.49%, however, have also been much more volatile. In fact, there were 25 years in which the return for the S&P 500 index was negative.
+
+You may not be willing to take the risk of losing some of the money your grandparents gave you because you have been setting it aside for law school. If that’s the case, you will want to invest in US Treasury securities. You may have money that you are saving for other long-term goals, such as retirement, with which you are willing to take some risk. The extra return that you will earn for taking on risk is known as the risk premium. The risk premium can be thought of as your reward for being willing to bear risk.
+
+The risk premium is calculated as the difference between the return you receive for taking on risk and what you would have returned if you did not take on risk. Using the average return of the S&P 500 (to measure what investors who bear the risk earn) and the US Treasury bill rate (to measure what investors who do not bear risk earn), the risk premium is calculated as
+
+Beta
+
+The risk premium represents how much an investor who takes on the market portfolio is rewarded for risk. Investors who purchase one stock—DAL, for example—experience volatility, which is measured by the standard deviation of that stock’s returns. Remember that some of that volatility, the volatility caused by firm-specific risk, can be diversified away. Because investors can eliminate firm-specific risk through diversification, they will not be rewarded for that risk. Investors are rewarded for the amount of systematic risk they incur.
+
+Interpreting Beta
+
+The relevant risk for investors is the systematic risk they incur. The systematic risk of a particular stock is measured by how much the stock moves with the market. The measure of how much a stock moves with the market is known as its beta. A stock that tends to move in sync with the market will have a beta of 1. For these stocks, if the market goes up 10%, the stock generally also goes up 10%; if the market goes down 5%, stocks with a beta of 1 also tend to go down 5%.
+
+If a company has a beta greater than 1, then the stock tends to have a more pronounced move in the same direction as a market move. For example, if a stock has a beta of 2, the stock will tend to increase by 20% when the market goes up by 10%. If the market falls by 5%, that same stock will tend to fall by twice as much, or 10%. Thus, stocks with a beta greater than 1 experience greater swings than the overall market and are considered to be riskier than the average stock.
+
+On the other hand, stocks with a beta less than 1 experience smaller swings than the overall market. A beta of 0.5, for example, means that a stock tends to experience moves that are only 50% of overall market moves. So, if the market increases by 10%, a stock with a beta of 0.5 would tend to rise by only 5%. A market decline of 5% would tend to be associated with a 2.5% decrease in the stock.
+
+Calculating Betas
+
+The calculation of beta for DAL is demonstrated in . Monthly returns for DAL and for the S&P 500 are plotted in the diagram. Each dot in the scatter plot corresponds to a month from 2018 to 2020; for example, the dot that lies furthest in the upper right-hand corner represents November 2020. The return for the S&P 500 was 10.88% that month; this return is plotted along the horizontal axis. The return for DAL during November 2020 was 31.36%; this return is plotted along the vertical axis.
+
+You can see that generally, when the overall stock market as measured by the S&P 500 is positive, the return for DAL is also positive. Likewise, in months in which the return for the S&P 500 is negative, the return for DAL is also usually negative. Drawing a line that best fits the data, also known as a regression line, summarizes the relationship between the returns for DAL and the S&P 500. The slope of this line, 1.39, is DAL’s beta. Beta measures the amount of systematic risk that DAL has.
+
+Calculation of Beta for DAL
+
+CAPM Equation
+
+Because DAL’s beta of 1.39 is greater than 1, DAL is riskier than the average stock in the market. Finance theory suggests that investors who purchase DAL will expect a higher rate of return to compensate them for this risk. DAL has 139% of the average stock’s systematic risk; therefore, investors in the stock should receive 139% of the market risk premium.
+
+The capital asset pricing model (CAPM) equation is
+
+where Re is the expected return of the asset, Rf is the risk-free rate of return, and Rm is the expected return of the market. Given the average S&P 500 return of 11.64% and the average US Treasury bill return of 3.36%, the expected return of DAL would be calculated as
+
+Calculating Beta
+
+Many providers of stock data and investment information will list a company’s beta. Two internet sources that can be used to find a company’s beta are Yahoo! Finance and MarketWatch. Various sources may not provide the exact same value for beta for a company. For example, in early February 2021, Yahoo! Finance reported that the beta for DAL was 1.46,“Delta Air Lines, Inc. (DAL).” Yahoo! Finance. Verizon Media, accessed February 2021. https://finance.yahoo.com/quote/DAL/ while MarketWatch reported it as 1.29.“Delta Air Lines Inc.” MarketWatch. Accessed February 2021. https://www.marketwatch.com/investing/stock/dal Both of these numbers are slightly different from the 1.39 calculated in the graph above.
+
+There are several reasons why beta may vary slightly from source to source. One is the time frame used in the beta calculation. Data from three years were used to calculate the beta in . Time frames ranging from three to five years are commonly used when calculating beta. Another reason different sources might report different betas is the frequency with which the data is collected. Monthly returns are used in ; some analysts will use weekly data. Finally, the S&P 500 is used to measure the market return in ; the S&P 500 is one of the most common measures of overall market returns, but alternatives exist and are used by some analysts
+CAPM
+
+Watch this video for further information about the CAPM.
+
+The capital asset pricing model (CAPM) relates the expected return of an asset to the systematic risk of that asset. Investors will be rewarded for taking on systematic risk. They will not be rewarded for taking on firm-specific risk, however, because that risk can be diversified away.
+
+a measure of how a stock moves relative to the market
+the expected return of a security, equal to the risk-free rate plus a premium for the amount of risk taken
+the reward for taking on the average amount of market risk
+the reward for lending money when there is no risk of not receiving the principal and interest as promised
+the extra return earned by taking on risk

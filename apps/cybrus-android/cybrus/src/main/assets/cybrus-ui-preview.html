@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cybrus — UI Preview</title>
+<style>
+  :root{
+    --bg:#050508; --panel:#0b0b13; --panel2:#101019; --line:#1f1f31;
+    --txt:#eceaf4; --mut:#8b8b9e; --dim:#55556a;
+    --vio:#8b5cf6; --vio2:#6d3df5; --cy:#22d3ee; --grn:#34d399; --amb:#fbbf24; --red:#f87171;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  body{margin:0; background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+    font-size:15px; line-height:1.45}
+  .app{max-width:1060px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column}
+  header.top{display:flex; align-items:center; gap:12px; padding:14px 18px;
+    border-bottom:1px solid var(--line); position:sticky; top:0; background:rgba(5,5,8,.92);
+    backdrop-filter:blur(8px); z-index:5}
+  .mark{width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+    background:linear-gradient(135deg,var(--vio2),#3b1f9e); font-size:19px;
+    box-shadow:0 0 22px rgba(139,92,246,.45)}
+  .wordmark{font-weight:800; letter-spacing:.14em; font-size:17px}
+  .wordmark small{display:block; font-weight:400; letter-spacing:.02em; font-size:11px; color:var(--mut)}
+  .spacer{flex:1}
+  .pill{font-size:11px; padding:4px 10px; border-radius:999px; border:1px solid var(--line);
+    color:var(--mut); white-space:nowrap}
+  .pill.ok{color:var(--grn); border-color:rgba(52,211,153,.4)}
+  .pill .dot{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--grn); margin-right:6px}
+  nav.tabs{display:flex; gap:4px; padding:10px 14px; border-bottom:1px solid var(--line);
+    overflow-x:auto; position:sticky; top:63px; background:rgba(5,5,8,.92); backdrop-filter:blur(8px); z-index:4}
+  nav.tabs button{background:none; border:0; color:var(--mut); font-size:14px; font-weight:600;
+    padding:9px 13px; border-radius:10px; cursor:pointer; white-space:nowrap}
+  nav.tabs button.on{background:var(--panel2); color:var(--txt); box-shadow:inset 0 0 0 1px var(--line)}
+  nav.tabs button .bdg{display:inline-block; min-width:20px; text-align:center; font-size:11px;
+    background:var(--amb); color:#111; border-radius:999px; padding:1px 6px; margin-left:6px; font-weight:800}
+  main{padding:18px; flex:1}
+  .view{display:none} .view.on{display:block; animation:fade .18s ease}
+  @keyframes fade{from{opacity:.4} to{opacity:1}}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px}
+  .row{display:flex; align-items:center; gap:12px}
+  .grow{flex:1; min-width:0}
+  h2{font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:var(--mut); margin:4px 0 12px}
+  input[type=text],input[type=search]{width:100%; background:var(--panel2); border:1px solid var(--line);
+    color:var(--txt); border-radius:10px; padding:11px 13px; font-size:15px; outline:none}
+  input:focus{border-color:var(--vio)}
+  .entry{display:flex; align-items:center; gap:13px; padding:13px 14px; border:1px solid var(--line);
+    border-radius:12px; margin-bottom:8px; background:var(--panel); cursor:pointer}
+  .entry:active{border-color:var(--vio)}
+  .ava{width:42px; height:42px; border-radius:12px; display:grid; place-items:center; font-weight:800;
+    font-size:17px; color:#fff; flex:none}
+  .entry .t{font-weight:700} .entry .s{color:var(--mut); font-size:13px}
+  .chev{color:var(--dim); font-size:18px}
+  .detail{border:1px solid var(--vio); border-radius:14px; padding:16px; background:linear-gradient(180deg,#12101f,#0b0b13); margin-bottom:12px}
+  .kv{display:flex; justify-content:space-between; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line); font-size:14px}
+  .kv:last-child{border-bottom:0}
+  .kv .k{color:var(--mut)} .kv .v{font-family:ui-monospace,Menlo,monospace; word-break:break-all; text-align:right}
+  .btn{border:0; border-radius:10px; padding:11px 16px; font-weight:700; font-size:14px; cursor:pointer}
+  .btn.pri{background:linear-gradient(135deg,var(--vio),var(--vio2)); color:#fff; width:100%}
+  .btn.gho{background:var(--panel2); color:var(--txt); border:1px solid var(--line)}
+  .btn.dan{background:rgba(248,113,113,.12); color:var(--red); border:1px solid rgba(248,113,113,.35)}
+  .btn.okb{background:rgba(52,211,153,.12); color:var(--grn); border:1px solid rgba(52,211,153,.35)}
+  .btnrow{display:flex; gap:8px; margin-top:12px} .btnrow .btn{flex:1}
+  .meter{height:8px; border-radius:99px; background:var(--panel2); overflow:hidden; margin:10px 0 4px}
+  .meter i{display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--red),var(--amb),var(--grn)); transition:width .2s}
+  .gen-out{font-family:ui-monospace,Menlo,monospace; font-size:17px; word-break:break-all;
+    background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:13px; margin:10px 0}
+  input[type=range]{width:100%; accent-color:var(--vio)}
+  .tgl{display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--line)}
+  .tgl:last-child{border:0}
+  .sw{width:46px; height:27px; border-radius:99px; background:var(--panel2); border:1px solid var(--line);
+    position:relative; cursor:pointer; flex:none}
+  .sw::after{content:""; position:absolute; top:2px; left:2px; width:21px; height:21px; border-radius:50%;
+    background:var(--dim); transition:all .15s}
+  .sw.on{border-color:var(--vio)} .sw.on::after{left:21px; background:var(--vio)}
+  .plat{display:flex; align-items:center; gap:13px; padding:13px 14px; border:1px solid var(--line);
+    border-radius:12px; margin-bottom:8px; background:var(--panel)}
+  .st{font-size:11px; font-weight:800; padding:3px 9px; border-radius:99px; text-transform:uppercase; letter-spacing:.06em}
+  .st.c{color:var(--grn); background:rgba(52,211,153,.12)} .st.p{color:var(--amb); background:rgba(251,191,36,.12)}
+  .tok{padding:13px 14px; border:1px solid var(--line); border-radius:12px; margin-bottom:8px; background:var(--panel)}
+  .tok .scopes{font-size:12px; color:var(--cy); font-family:ui-monospace,Menlo,monospace; margin-top:6px}
+  .exp{font-size:12px; color:var(--mut); margin-top:6px}
+  .appr{border:1px solid rgba(251,191,36,.4); border-radius:14px; padding:16px; margin-bottom:12px;
+    background:linear-gradient(180deg,#171307,#0b0b13)}
+  .appr h3{margin:0 0 6px; font-size:16px} .appr p{color:var(--mut); font-size:13px; margin:0 0 4px}
+  .audit{font-family:ui-monospace,Menlo,monospace; font-size:12.5px}
+  .audit .a{padding:10px 12px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; background:var(--panel)}
+  .audit .h{color:var(--cy)} .audit .t{color:var(--dim)}
+  .note{color:var(--dim); font-size:12px; text-align:center; padding:18px 10px 26px}
+  .lockline{display:flex; gap:10px; align-items:center; background:rgba(139,92,246,.08);
+    border:1px solid rgba(139,92,246,.3); border-radius:12px; padding:12px 14px; margin-bottom:14px; font-size:13px}
+  @media (max-width:640px){
+    main{padding:12px} .wordmark small{display:none}
+    nav.tabs{top:62px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="mark">◈</div>
+    <div class="wordmark">CYBRUS<small>your credentials, held like they matter</small></div>
+    <div class="spacer"></div>
+    <span class="pill ok"><span class="dot"></span>vault locked</span>
+    <span class="pill">local-first</span>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-v="vault" class="on">Vault</button>
+    <button data-v="gen">Generator</button>
+    <button data-v="broker">Broker</button>
+    <button data-v="tokens">OAuth Tokens</button>
+    <button data-v="appr">Approvals<span class="bdg" id="apprBdg">2</span></button>
+    <button data-v="audit">Audit</button>
+  </nav>
+
+  <main>
+    <!-- VAULT -->
+    <section class="view on" id="v-vault">
+      <div class="lockline">🔒 Vault encrypts on this device only. Master password is never stored, never leaves.</div>
+      <input type="search" id="q" placeholder="Search credentials…" autocomplete="off">
+      <div style="height:12px"></div>
+      <div id="entries"></div>
+      <div id="detail"></div>
+    </section>
+
+    <!-- GENERATOR -->
+    <section class="view" id="v-gen">
+      <h2>Password generator — local, never transmitted</h2>
+      <div class="card">
+        <div class="gen-out" id="genOut">…</div>
+        <div class="meter"><i id="mfill" style="width:0%"></i></div>
+        <div class="row"><span class="grow" style="color:var(--mut);font-size:13px" id="mlabel"></span>
+          <button class="btn gho" style="width:auto" onclick="gen()">↻ Regenerate</button></div>
+        <div style="height:8px"></div>
+        <div class="row"><span class="grow">Length</span><b id="lenV">20</b></div>
+        <input type="range" id="len" min="8" max="64" value="20">
+        <div class="tgl"><span>Uppercase A–Z</span><div class="sw on" data-k="u"></div></div>
+        <div class="tgl"><span>Lowercase a–z</span><div class="sw on" data-k="l"></div></div>
+        <div class="tgl"><span>Digits 0–9</span><div class="sw on" data-k="d"></div></div>
+        <div class="tgl"><span>Symbols !@#$…</span><div class="sw on" data-k="s"></div></div>
+        <div class="btnrow"><button class="btn pri" onclick="useGen()">Use in a new vault entry</button></div>
+      </div>
+    </section>
+
+    <!-- BROKER -->
+    <section class="view" id="v-broker">
+      <h2>Third-party broker — provision &amp; track accounts</h2>
+      <div id="plats"></div>
+      <div class="card" style="border-style:dashed; text-align:center; color:var(--mut)">
+        + Connect a new platform <span style="font-size:12px">(OAuth handoff, token lands in the vault)</span>
+      </div>
+    </section>
+
+    <!-- TOKENS -->
+    <section class="view" id="v-tokens">
+      <h2>OAuth tokens — issued once, hashed at rest</h2>
+      <div id="toks"></div>
+    </section>
+
+    <!-- APPROVALS -->
+    <section class="view" id="v-appr">
+      <h2>Human approval gates — nothing consequential moves without you</h2>
+      <div id="apprs"></div>
+      <div class="note" id="apprDone" style="display:none">Queue clear. Every decision is in the audit log.</div>
+    </section>
+
+    <!-- AUDIT -->
+    <section class="view" id="v-audit">
+      <h2>Tamper-evident audit log — hash-chained</h2>
+      <div class="audit" id="aud"></div>
+    </section>
+
+    <div class="note">UI preview — mock data only. No real secrets here.<br>Pricing: undecided (Chauncey's call).</div>
+  </main>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+/* ---- tabs ---- */
+$('#tabs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  $$('#tabs button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  $$('.view').forEach(v=>v.classList.remove('on')); $('#v-'+b.dataset.v).classList.add('on');
+});
+/* ---- vault data ---- */
+const VAULT=[
+ {site:'demo code host',user:'demo.alice',pw:'demo-password-001',upd:'2h ago',c:'#6e5494',i:'G'},
+ {site:'demo mail',user:'demo.bob',pw:'demo-password-002',upd:'yesterday',c:'#ea4335',i:'M'},
+ {site:'demo bank',user:'demo.carol',pw:'demo-password-003',upd:'3d ago',c:'#0f9d58',i:'$'},
+ {site:'demo movies',user:'demo.dave',pw:'demo-password-004',upd:'last week',c:'#b20710',i:'N'},
+ {site:'demo pay',user:'demo.erin',pw:'demo-password-005',upd:'last week',c:'#635bff',i:'S'},
+ {site:'demo cloud',user:'demo.frank',pw:'demo-password-006',upd:'2w ago',c:'#ff9900',i:'a'},
+];
+let unlocked=false;
+function renderEntries(f=''){
+  const w=$('#entries'); w.innerHTML='';
+  VAULT.filter(e=>(e.site+e.user).toLowerCase().includes(f.toLowerCase())).forEach((e,idx)=>{
+    const d=document.createElement('div'); d.className='entry';
+    d.innerHTML=`<div class="ava" style="background:${e.c}">${e.i}</div>
+      <div class="grow"><div class="t">${e.site}</div><div class="s">${e.user} · ${e.upd}</div></div>
+      <div class="chev">›</div>`;
+    d.onclick=()=>showDetail(idx); w.appendChild(d);
+  });
+  if(!w.children.length) w.innerHTML='<div class="note">No matches.</div>';
+}
+function showDetail(idx){
+  const e=VAULT[idx], d=$('#detail');
+  d.innerHTML=`<div class="detail">
+    <div class="row"><div class="ava" style="background:${e.c}">${e.i}</div>
+      <div class="grow"><div class="t" style="font-size:17px">${e.site}</div>
+      <div class="s">${e.user}</div></div></div>
+    <div style="height:8px"></div>
+    <div class="kv"><span class="k">username</span><span class="v">${e.user}</span></div>
+    <div class="kv"><span class="k">password</span><span class="v" id="pwv">${unlocked?e.pw:'••••••••••••••••'}</span></div>
+    <div class="kv"><span class="k">last rotated</span><span class="v">${e.upd}</span></div>
+    <div class="btnrow">
+      <button class="btn gho" onclick="unlocked=!unlocked;showDetail(${idx})">${unlocked?'🔒 Hide':'🔓 Reveal'}</button>
+      <button class="btn gho" onclick="navigator.clipboard&&navigator.clipboard.writeText('${e.pw}');this.textContent='Copied ✓';setTimeout(()=>this.textContent='Copy',1200)">Copy</button>
+      <button class="btn gho" onclick="this.textContent='Rotated ✓';setTimeout(()=>showDetail(${idx}),900)">Rotate</button>
+    </div></div>`;
+  d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+$('#q').addEventListener('input',e=>{$('#detail').innerHTML='';renderEntries(e.target.value)});
+renderEntries();
+/* ---- generator ---- */
+const SETS={u:'ABCDEFGHJKLMNPQRSTUVWXYZ',l:'abcdefghijkmnopqrstuvwxyz',d:'23456789',s:'!@#$%^&*()-_=+[]{};:,.<>?'};
+const on={u:1,l:1,d:1,s:1};
+$$('.sw').forEach(s=>s.onclick=()=>{s.classList.toggle('on');on[s.dataset.k]=s.classList.contains('on')?1:0;gen()});
+$('#len').addEventListener('input',e=>{$('#lenV').textContent=e.target.value;gen()});
+function gen(){
+  let pool=''; for(const k in on) if(on[k]) pool+=SETS[k];
+  if(!pool){$('#genOut').textContent='select at least one set';return}
+  const n=+$('#len').value, buf=new Uint32Array(n);
+  crypto.getRandomValues(buf);
+  let out=''; for(let i=0;i<n;i++) out+=pool[buf[i]%pool.length];
+  $('#genOut').textContent=out;
+  const bits=Math.log2(pool.length)*n, pct=Math.min(100,bits/128*100);
+  $('#mfill').style.width=pct+'%';
+  $('#mlabel').textContent='≈ '+Math.round(bits)+' bits of entropy — '+(bits>=100?'vault-grade':bits>=60?'strong':'weak');
+}
+function useGen(){alert('Mock: would open a new vault entry with this password.');}
+gen();
+/* ---- broker ---- */
+const PLATS=[
+ {n:'GitHub',s:'c',d:'deploy keys · 3 repos',c:'#6e5494',i:'G'},
+ {n:'Google',s:'c',d:'oauth · mail + drive scopes',c:'#ea4335',i:'G'},
+ {n:'Stripe',s:'p',d:'restricted key awaiting approval',c:'#635bff',i:'S'},
+ {n:'Netlify',s:'p',d:'deploy token awaiting approval',c:'#00c7b7',i:'N'},
+];
+$('#plats').innerHTML=PLATS.map(p=>`<div class="plat">
+  <div class="ava" style="background:${p.c}">${p.i}</div>
+  <div class="grow"><div class="t">${p.n}</div><div class="s">${p.d}</div></div>
+  <span class="st ${p.s}">${p.s==='c'?'connected':'pending'}</span></div>`).join('');
+/* ---- tokens ---- */
+const TOKS=[
+ {n:'Google OAuth',sc:'mail.readonly drive.file',exp:'expires in 41m · auto-refresh on',id:'tok_9f2…c41d'},
+ {n:'GitHub App',sc:'repo contents:write',exp:'expires in 6d 3h',id:'tok_71b…09e2'},
+ {n:'Stripe restricted',sc:'charges:read',exp:'no expiry · rotation due',id:'tok_44a…b7f0'},
+];
+$('#toks').innerHTML=TOKS.map((t,i)=>`<div class="tok">
+  <div class="row"><div class="grow"><div class="t">${t.n}</div><div class="s">${t.id}</div></div>
+  <button class="btn dan" style="width:auto;padding:8px 14px" onclick="this.closest('.tok').style.opacity=.35;this.textContent='Revoked';this.disabled=true">Revoke</button></div>
+  <div class="scopes">${t.sc}</div><div class="exp">${t.exp}</div></div>`).join('');
+/* ---- approvals ---- */
+let APPR=[
+ {t:'Broker provision: Netlify deploy token',d:'Requested by levi.factory · scope: sites:write · 1 site',r:'medium'},
+ {t:'Token refresh: Stripe restricted key',d:'Scheduled rotation · scope unchanged · charges:read',r:'low'},
+];
+function renderAppr(){
+  const w=$('#apprs'); w.innerHTML='';
+  APPR.forEach((a,i)=>{
+    const d=document.createElement('div'); d.className='appr';
+    d.innerHTML=`<h3>${a.t}</h3><p>${a.d}</p><p>risk: ${a.r} · waiting on you</p>
+      <div class="btnrow"><button class="btn okb" onclick="decide(${i},1)">Approve</button>
+      <button class="btn dan" onclick="decide(${i},0)">Deny</button></div>`;
+    w.appendChild(d);
+  });
+  $('#apprBdg').style.display=APPR.length?'':'none';
+  $('#apprBdg').textContent=APPR.length;
+  $('#apprDone').style.display=APPR.length?'none':'block';
+}
+function decide(i,ok){APPR.splice(i,1);renderAppr();}
+renderAppr();
+/* ---- audit ---- */
+const AUD=[
+ ['vault.unlock','biometric · this device','a91f…','2m ago'],
+ ['token.refresh','google oauth · scopes unchanged','77c2…','19m ago'],
+ ['broker.request','netlify deploy token · queued for approval','b310…','1h ago'],
+ ['entry.rotate','github.com · password rotated','e58d…','2h ago'],
+ ['vault.lock','auto-lock · 5m idle','19aa…','3h ago'],
+];
+$('#aud').innerHTML=AUD.map(a=>`<div class="a"><span class="h">◈ ${a[2]}</span> <b>${a[0]}</b><br>${a[1]} <span class="t">· ${a[3]}</span></div>`).join('');
+</script>
+</body>
+</html>

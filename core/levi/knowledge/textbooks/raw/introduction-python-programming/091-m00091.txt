@@ -1,0 +1,59 @@
+# m00091
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+More math recursion
+
+More math recursion
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Define a recursive function to generate Fibonacci numbers.
+
+Fibonacci sequence using recursion
+
+The Fibonacci sequence is a sequence in which each number in the sequence is the sum of the previous two numbers in the sequence. The first two numbers are 0 and 1. Thus, starting from 0 and 1, the third number is 0 + 1 = 1, and the next number is 1 + 1 = 2. The sequence of numbers is 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... .
+
+Recursion can be used to calculate the nth Fibonacci number. The base cases are 0 and 1. Thereafter, the nth number is given by adding the (n - 1)th and (n - 2)th number. Thus, fib(n) = fib(n - 1) + fib(n - 2), which is a recursive definition ending with base cases f(0) = 0, and f(1) = 1.
+
+For a recursion that calls multiple functions in the recursive case, tracing how the recursion proceeds is useful. A structure used to trace the calls made by a recursive function is called a recursion tree. The animation below traces the recursion tree for a call to a recursive function to calculate the Fibonacci number for n = 5.
+
+Finding the nth Fibonacci number
+
+The Fibonacci function recursion is more complex with the value at n depending on two function calls with smaller values.
+
+The above code's output is:
+
+Recursive Fibonacci function
+
+Fibonacci numbers
+
+Greatest common divisor (GCD)
+
+The greatest common divisor (GCD) of two positive integers is an integer that is a divisor for both integers. Ex: The GCD of 6 and 9 is 3 because 3 x 2 = 6, and 3 x 3 = 9.
+
+The GCD is found easily using Euclid's method. Euclid's method recursively subtracts the smaller integer from the larger integer until a base case with equal integers is reached. The greatest common divisor is the integer value when the base case is reached.
+
+Finding the GCD
+
+The above code's output is:
+
+GCD
+
+Recursive power
+
+Write a recursive power() function, such that given an integer x and a positive integer y, power(x, y) returns x raised to y.
+
+Ex: power(3, 4) returns 81.
+
+Recursive power (with any integer power)
+
+Write a recursive rec_pow() function such that given two integers, x and y, it returns x raised to y.
+
+(Note: this is an extension of the above problem but now works for any integer value of y, positive or negative. How should the recursive function change to deal with a negative value of y?)
+
+Ex: rec_pow(2, -4) returns 0.0625.

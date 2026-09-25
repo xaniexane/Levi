@@ -1,0 +1,242 @@
+# m58278
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Coordinate Systems and Components of a Vector
+
+Coordinate Systems and Components of a Vector
+
+By the end of this section, you will be able to:
+
+Describe vectors in two and three dimensions in terms of their components, using unit vectors along the axes.
+
+Distinguish between the vector components of a vector and the scalar components of a vector.
+
+Explain how the magnitude of a vector is defined in terms of the components of a vector.
+
+Identify the direction angle of a vector in a plane.
+
+Explain the connection between polar coordinates and Cartesian coordinates in a plane.
+
+Vectors are usually described in terms of their components in a coordinate system. Even in everyday life we naturally invoke the concept of vector components in a rectangular coordinate system. For example, if you ask someone for directions to a particular location, you will more likely be told to go 40 km east and 30 km north than 50 km in the direction 37° north of east.
+
+In a rectangular (Cartesian) xy-coordinate system in a plane, a point in a plane is described by a pair of coordinates (x, y). In a similar fashion, a vector A→ in a plane is described by a pair of its vector coordinates. The x-coordinate of vector A→ is called its x-component and the y-coordinate of vector A→ is called its y-component. The vector x-component is a vector denoted by A→x. The vector y-component is a vector denoted by A→y. In the Cartesian system, the x and y vector components of a vector are the orthogonal projections, as illustrated in , of this vector onto the x- and y-axes, respectively. In this way, following the parallelogram rule for vector addition, each vector on a Cartesian plane can be expressed as the vector sum of its vector components:
+
+As illustrated in , vector A→ is the diagonal of the rectangle where the x-component A→x is the side parallel to the x-axis and the y-component A→y is the side parallel to the y-axis. Vector component A→x is orthogonal to vector component A→y.
+
+It is customary to denote the positive direction on the x-axis by the unit vector i^ and the positive direction on the y-axis by the unit vector j^. Unit vectors of the axes, i^ and j^, define two orthogonal directions in the plane. As shown in , the x- and y- components of a vector can now be written in terms of the unit vectors of the axes:
+
+The vectors A→x and A→y defined by are the vector components of vector A→. The numbers Ax and Ay that define the vector components in are the scalar components of vector A→. Combining with , we obtain the component form of a vector:
+
+If we know the coordinates b(xb,yb) of the origin point of a vector (where b stands for “beginning”) and the coordinates e(xe,ye) of the end point of a vector (where e stands for “end”), we can obtain the scalar components of a vector simply by subtracting the origin point coordinates from the end point coordinates:
+Displacement of a Mouse Pointer
+A mouse pointer on the display monitor of a computer at its initial position is at point (6.0 cm, 1.6 cm) with respect to the lower left-side corner. If you move the pointer to an icon located at point (2.0 cm, 4.5 cm), what is the displacement vector of the pointer?
+
+Displacement of a Mouse Pointer
+Strategy
+The origin of the xy-coordinate system is the lower left-side corner of the computer monitor. Therefore, the unit vector i^ on the x-axis points horizontally to the right and the unit vector
+j^ on the y-axis points vertically upward. The origin of the displacement vector is located at point b(6.0, 1.6) and the end of the displacement vector is located at point e(2.0, 4.5). Substitute the coordinates of these points into to find the scalar components Dx and Dy of the displacement vector D→. Finally, substitute the coordinates into to write the displacement vector in the vector component form.
+
+Strategy
+Solution
+We identify xb=6.0, xe=2.0, yb=1.6, and ye=4.5, where the physical unit is 1 cm. The scalar x- and y-components of the displacement vector are
+
+Solution
+
+The vector component form of the displacement vector is
+
+This solution is shown in .
+Significance
+Notice that the physical unit—here, 1 cm—can be placed either with each component immediately before the unit vector or globally for both components, as in . Often, the latter way is more convenient because it is simpler.
+
+Significance
+
+The vector x-component D→x=−4.0i^=4.0(−i^) of the displacement vector has the magnitude |D→x|=|−4.0||i^|=4.0 because the magnitude of the unit vector is |i^|=1. Notice, too, that the direction of the x-component is −i^, which is antiparallel to the direction of the +x-axis; hence, the x-component vector D→x points to the left, as shown in . The scalar x-component of vector D→ is Dx=−4.0.
+
+Similarly, the vector y-component D→y=+2.9j^ of the displacement vector has magnitude |D→y|=|2.9||j^|=2.9 because the magnitude of the unit vector is |j^|=1. The direction of the y-component is +j^, which is parallel to the direction of the +y-axis. Therefore, the y-component vector D→y points up, as seen in . The scalar y-component of vector D→ is Dy=+2.9. The displacement vector D→ is the resultant of its two vector components.
+
+The vector component form of the displacement vector tells us that the mouse pointer has been moved on the monitor 4.0 cm to the left and 2.9 cm upward from its initial position.
+
+A blue fly lands on a sheet of graph paper at a point located 10.0 cm to the right of its left edge and 8.0 cm above its bottom edge and walks slowly to a point located 5.0 cm from the left edge and 5.0 cm from the bottom edge. Choose the rectangular coordinate system with the origin at the lower left-side corner of the paper and find the displacement vector of the fly. Illustrate your solution by graphing.
+D→=(−5.0i^−3.0j^)cm; the fly moved 5.0 cm to the left and 3.0 cm down from its landing site.
+
+When we know the scalar components Ax and Ay of a vector A→, we can find its magnitude A and its direction angle θA. The direction angle—or direction, for short—is the angle the vector forms with the positive direction on the x-axis. The angle θA is measured in the counterclockwise direction from the +x-axis to the vector (). Because the lengths A, Ax, and Ay form a right triangle, they are related by the Pythagorean theorem:
+
+This equation works even if the scalar components of a vector are negative. The direction angle θA of a vector is defined via the tangent function of angle θA in the triangle shown in :
+
+When the vector lies either in the first quadrant or in the fourth quadrant, where component Ax is positive (), the angle θ in is identical to the direction angle θA. For vectors in the fourth quadrant, angle θ is negative, which means that for these vectors, direction angle θA is measured clockwise from the positive x-axis. Similarly, for vectors in the second quadrant, angle θ is negative. When the vector lies in either the second or third quadrant, where component Ax is negative, the direction angle is θA=θ+180° ().
+Magnitude and Direction of the Displacement VectorYou move a mouse pointer on the display monitor from its initial position at point (6.0 cm, 1.6 cm) to an icon located at point (2.0 cm, 4.5 cm). What are the magnitude and direction of the displacement vector of the pointer?
+
+Magnitude and Direction of the Displacement Vector
+Strategy
+In , we found the displacement vector D→ of the mouse pointer (see ). We identify its scalar components Dx=−4.0cm and Dy=+2.9cm and substitute into and to find the magnitude D and direction θD, respectively.
+
+Strategy
+Solution
+The magnitude of vector D→ is
+
+Solution
+
+The direction angle is
+
+Vector D→ lies in the second quadrant, so its direction angle is
+
+If the displacement vector of a blue fly walking on a sheet of graph paper is D→=(−5.00i^−3.00j^)cm, find its magnitude and direction.
+
+5.83 cm, 211°
+
+In many applications, the magnitudes and directions of vector quantities are known and we need to find the resultant of many vectors. For example, imagine 400 cars moving on the Golden Gate Bridge in San Francisco in a strong wind. Each car gives the bridge a different push in various directions and we would like to know how big the resultant push can possibly be. We have already gained some experience with the geometric construction of vector sums, so we know the task of finding the resultant by drawing the vectors and measuring their lengths and angles may become intractable pretty quickly, leading to huge errors. Worries like this do not appear when we use analytical methods. The very first step in an analytical approach is to find vector components when the direction and magnitude of a vector are known.
+
+Let us return to the right triangle in . The quotient of the adjacent side Ax to the hypotenuse A is the cosine function of direction angle θA, Ax/A=cosθA, and the quotient of the opposite side Ay to the hypotenuse A is the sine function of θA, Ay/A=sinθA. When magnitude A and direction θA are known, we can solve these relations for the scalar components:
+
+When calculating vector components with , care must be taken with the angle. The direction angle θA of a vector is the angle measured counterclockwise from the positive direction on the x-axis to the vector. The clockwise measurement gives a negative angle.
+Components of Displacement Vectors
+A rescue party for a missing child follows a search dog named Trooper. Trooper wanders a lot and makes many trial sniffs along many different paths. Trooper eventually finds the child and the story has a happy ending, but his displacements on various legs seem to be truly convoluted. On one of the legs he walks 200.0 m southeast, then he runs north some 300.0 m. On the third leg, he examines the scents carefully for 50.0 m in the direction 30° west of north. On the fourth leg, Trooper goes directly south for 80.0 m, picks up a fresh scent and turns 23° west of south for 150.0 m. Find the scalar components of Trooper’s displacement vectors and his displacement vectors in vector component form for each leg.
+
+Components of Displacement Vectors
+Strategy
+Let’s adopt a rectangular coordinate system with the positive x-axis in the direction of geographic east, with the positive y-direction pointed to geographic north. Explicitly, the unit vector i^ of the x-axis points east and the unit vector j^ of the y-axis points north. Trooper makes five legs, so there are five displacement vectors. We start by identifying their magnitudes and direction angles, then we use to find the scalar components of the displacements and for the displacement vectors.
+
+Strategy
+Solution
+On the first leg, the displacement magnitude is L1=200.0m and the direction is southeast. For direction angle θ1 we can take either 45° measured clockwise from the east direction or 45°+270° measured counterclockwise from the east direction. With the first choice, θ1=−45°. With the second choice, θ1=+315°. We can use either one of these two angles. The components are
+
+Solution
+
+The displacement vector of the first leg is
+
+On the second leg of Trooper’s wanderings, the magnitude of the displacement is L2=300.0m and the direction is north. The direction angle is θ2=+90°. We obtain the following results:
+
+On the third leg, the displacement magnitude is L3=50.0m and the direction is 30° west of north. The direction angle measured counterclockwise from the eastern direction is θ3=30°+90°=+120°. This gives the following answers:
+
+On the fourth leg of the excursion, the displacement magnitude is L4=80.0m and the direction is south. The direction angle can be taken as either θ4=−90° or θ4=+270°. We obtain
+
+On the last leg, the magnitude is L5=150.0m and the angle is θ5=−23°+270°=+247° (23° west of south), which gives
+
+If Trooper runs 20 m west before taking a rest, what is his displacement vector?
+D→=(−20m)i^
+
+Polar Coordinates
+
+To describe locations of points or vectors in a plane, we need two orthogonal directions. In the Cartesian coordinate system these directions are given by unit vectors i^ and j^ along the x-axis and the y-axis, respectively. The Cartesian coordinate system is very convenient to use in describing displacements and velocities of objects and the forces acting on them. However, it becomes cumbersome when we need to describe the rotation of objects. When describing rotation, we usually work in the polar coordinate system.
+
+In the polar coordinate system, the location of point P in a plane is given by two polar coordinates (). The first polar coordinate is the radial coordinate r, which is the distance of point P from the origin. The second polar coordinate is an angle φ that the radial vector makes with some chosen direction, usually the positive x-direction. In polar coordinates, angles are measured in radians, or rads. The radial vector is attached at the origin and points away from the origin to point P. This radial direction is described by a unit radial vector r^. The second unit vector t^ is a vector orthogonal to the radial direction r^. The positive +t^ direction indicates how the angle φ changes in the counterclockwise direction. In this way, a point P that has coordinates (x, y) in the rectangular system can be described equivalently in the polar coordinate system by the two polar coordinates (r,φ). is valid for any vector, so we can use it to express the x- and y-coordinates of vector r→. In this way, we obtain the connection between the polar coordinates and rectangular coordinates of point P:
+Polar Coordinates
+A treasure hunter finds one silver coin at a location 20.0 m away from a dry well in the direction 20° north of east and finds one gold coin at a location 10.0 m away from the well in the direction 20° north of west. What are the polar and rectangular coordinates of these findings with respect to the well?
+
+Polar Coordinates
+Strategy
+The well marks the origin of the coordinate system and east is the +x-direction. We identify radial distances from the locations to the origin, which are rS=20.0m (for the silver coin) and rG=10.0m (for the gold coin). To find the angular coordinates, we convert 20° to radians: 20°=π20/180=π/9. We use to find the x- and y-coordinates of the coins.
+
+Strategy
+Solution
+The angular coordinate of the silver coin is φS=π/9, whereas the angular coordinate of the gold coin is φG=π−π/9=8π/9. Hence, the polar coordinates of the silver coin are (rS,φS)=(20.0m,π/9) and those of the gold coin are (rG,φG)=(10.0m,8π/9). We substitute these coordinates into to obtain rectangular coordinates. For the gold coin, the coordinates are
+
+Solution
+
+For the silver coin, the coordinates are
+
+Vectors in Three Dimensions
+
+To specify the location of a point in space, we need three coordinates (x, y, z), where coordinates x and y specify locations in a plane, and coordinate z gives a vertical position above or below the plane. Three-dimensional space has three orthogonal directions, so we need not two but three unit vectors to define a three-dimensional coordinate system. In the Cartesian coordinate system, the first two unit vectors are the unit vector of the x-axis i^ and the unit vector of the y-axis j^. The third unit vector k^ is the direction of the z-axis (). The order in which the axes are labeled, which is the order in which the three unit vectors appear, is important because it defines the orientation of the coordinate system. The order x-y-z, which is equivalent to the order i^ - j^ - k^, defines the standard right-handed coordinate system (positive orientation). Notice that while previously the y-axis was used for the upward direction, in three dimensions we usually choose z to represent the vertical. A right-handed coordinate system with z up and with one of the remaining axes pointing to the right and the other out of the page must have the y-axis pointing right and x out of the page, as illustrated here.
+
+In three-dimensional space, vector A→ has three vector components: the x-component A→x=Axi^, which is the part of vector A→ along the x-axis; the y-component A→y=Ayj^, which is the part of A→ along the y-axis; and the z-component A→z=Azk^, which is the part of the vector along the z-axis. A vector in three-dimensional space is the vector sum of its three vector components ():
+
+If we know the coordinates of its origin b(xb,yb,zb) and of its end e(xe,ye,ze), its scalar components are obtained by taking their differences: Ax and Ay are given by and the z-component is given by
+
+Magnitude A is obtained by generalizing to three dimensions:
+
+This expression for the vector magnitude comes from applying the Pythagorean theorem twice. As seen in , the diagonal in the xy-plane has length Ax2+Ay2 and its square adds to the square Az2 to give A2. Note that when the z-component is zero, the vector lies entirely in the xy-plane and its description is reduced to two dimensions.
+Takeoff of a Drone
+During a takeoff of IAI Heron (), its position with respect to a control tower is 100 m above the ground, 300 m to the east, and 200 m to the north. One minute later, its position is 250 m above the ground, 1200 m to the east, and 2100 m to the north. What is the drone’s displacement vector with respect to the control tower? What is the magnitude of its displacement vector?
+
+Takeoff of a Drone
+Strategy
+We take the origin of the Cartesian coordinate system as the control tower. The direction of the +x-axis is given by unit vector i^ to the east, the direction of the +y-axis is given by unit vector j^ to the north, and the direction of the +z-axis is given by unit vector k^, which points up from the ground. The drone’s first position is the origin (or, equivalently, the beginning) of the displacement vector and its second position is the end of the displacement vector.
+
+Strategy
+SolutionWe identify b(300.0 m, 200.0 m, 100.0 m) and e(1200 m, 2100 m, 250 m), and use and to find the scalar components of the drone’s displacement vector:
+
+Solution
+
+We substitute these components into to find the displacement vector:
+
+We substitute into to find the magnitude of the displacement:
+
+If the average velocity vector of the drone in the displacement in is u→=(15.0i^+31.7j^+2.5k^)m/s, what is the magnitude of the drone’s velocity vector?
+
+35.2 m/s = 126.4 km/h
+
+Summary
+
+Vectors are described in terms of their components in a coordinate system. In two dimensions (in a plane), vectors have two components. In three dimensions (in space), vectors have three components.
+
+A vector component of a vector is its part in an axis direction. The vector component is the product of the unit vector of an axis with its scalar component along this axis. A vector is the resultant of its vector components.
+
+Scalar components of a vector are differences of coordinates, where coordinates of the origin are subtracted from end point coordinates of a vector. In a rectangular system, the magnitude of a vector is the square root of the sum of the squares of its components.
+
+In a plane, the direction of a vector is given by an angle the vector has with the positive x-axis. This direction angle is measured counterclockwise. The scalar x-component of a vector can be expressed as the product of its magnitude with the cosine of its direction angle, and the scalar y-component can be expressed as the product of its magnitude with the sine of its direction angle.
+
+In a plane, there are two equivalent coordinate systems. The Cartesian coordinate system is defined by unit vectors i^ and j^ along the x-axis and the y-axis, respectively. The polar coordinate system is defined by the radial unit vector r^, which gives the direction from the origin, and a unit vector t^, which is perpendicular (orthogonal) to the radial direction.
+
+Conceptual Questions
+
+Give an example of a nonzero vector that has a component of zero.
+
+a unit vector of the x-axis
+
+Explain why a vector cannot have a component greater than its own magnitude.
+
+If two vectors are equal, what can you say about their components?
+
+They are equal.
+
+If vectors A→ and B→ are orthogonal, what is the component of B→ along the direction of A→? What is the component of A→ along the direction of B→?
+
+If one of the two components of a vector is not zero, can the magnitude of the other vector component of this vector be zero?
+
+yes
+
+If two vectors have the same magnitude, do their components have to be the same?
+
+Problems
+
+Assuming the +x-axis is horizontal and points to the right, resolve the vectors given in the following figure to their scalar components and express them in vector component form.
+
+a. A→=+8.66i^+5.00j^, b. B→=+3.01i^+3.99j^, c. C→=+6.00i^−10.39j^, d. D→=−15.97i^+12.04j^, f. F→=−17.32i^−10.00j^
+
+Suppose you walk 18.0 m straight west and then 25.0 m straight north. How far are you from your starting point? What is your displacement vector? What is the direction of your displacement? Assume the +x-axis is to the east.
+
+You drive 7.50 km in a straight line in a direction 15° east of north. (a) Find the distances you would have to drive straight east and then straight north to arrive at the same point. (b) Show that you still arrive at the same point if the east and north legs are reversed in order. Assume the +x-axis is to the east.
+
+a. 1.94 km, 7.24 km; b. proof
+
+A sledge is being pulled by two horses on a flat terrain. The net force on the sledge can be expressed in the Cartesian coordinate system as vector F→=(−2980.0i^+8200.0j^)N, where i^ and j^ denote directions to the east and north, respectively. Find the magnitude and direction of the pull.
+
+A trapper walks a 5.0-km straight-line distance from her cabin to the lake, as shown in the following figure. Determine the east and north components of her displacement vector. How many more kilometers would she have to walk if she walked along the component displacements? What is her displacement vector?
+
+3.8 km east, 3.2 km north, 2.0 km, D→=(3.8i^+3.2j^)km
+
+The polar coordinates of a point are 4π/3 and 5.50 m. What are its Cartesian coordinates?
+
+Two points in a plane have polar coordinates P1(2.500m,π/6) and P2(3.800m,2π/3). Determine their Cartesian coordinates and the distance between them in the Cartesian coordinate system. Round the distance to a nearest centimeter.
+P1(2.165m,1.250m), P2(−1.900m,3.290m), 4.55 m
+
+A chameleon is resting quietly on a lanai screen, waiting for an insect to come by. Assume the origin of a Cartesian coordinate system at the lower left-hand corner of the screen and the horizontal direction to the right as the +x-direction. If its coordinates are (2.000 m, 1.000 m), (a) how far is it from the corner of the screen? (b) What is its location in polar coordinates?
+
+Two points in the Cartesian plane are A(2.00 m, −4.00 m) and B(−3.00 m, 3.00 m). Find the distance between them and their polar coordinates.
+
+8.60 m, A(25m,0.647π), B(32m,0.75π)
+
+A fly enters through an open window and zooms around the room. In a Cartesian coordinate system with three axes along three edges of the room, the fly changes its position from point b(4.0 m, 1.5 m, 2.5 m) to point e(1.0 m, 4.5 m, 0.5 m). Find the scalar components of the fly’s displacement vector and express its displacement vector in vector component form. What is its magnitude?
+
+a vector written as the vector sum of its components in terms of unit vectors
+in a plane, an angle between the positive direction of the x-axis and the vector, measured counterclockwise from the axis to the vector
+an orthogonal coordinate system where location in a plane is given by polar coordinates
+a radial coordinate and an angle
+distance to the origin in a polar coordinate system
+a number that multiplies a unit vector in a vector component of a vector
+unit vectors that define orthogonal directions in a plane or in space
+orthogonal components of a vector; a vector is the vector sum of its vector components.

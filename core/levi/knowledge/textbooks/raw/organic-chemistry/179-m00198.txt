@@ -1,0 +1,159 @@
+# m00198
+# Book: OpenStax Organic Chemistry: A Tenth Edition
+# Subject: science
+# Source: https://github.com/openstax/osbooks-organic-chemistry
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Synthesis of Polysubstituted Benzenes
+
+Synthesis of Polysubstituted Benzenes
+
+As discussed in the Introduction to Organic Synthesis in , one of the surest ways to learn organic chemistry is to work synthesis problems. The ability to plan a successful multistep synthesis of a complex molecule requires a working knowledge of the uses and limitations of a great many organic reactions. Not only must you know which reactions to use, you must also know when to use them because the order in which reactions are carried out is often critical to the success of the overall scheme.
+
+The ability to plan a sequence of reactions in the right order is particularly important in the synthesis of substituted aromatic rings, where the introduction of a new substituent is strongly affected by the directing effects of other substituents. Planning syntheses of substituted aromatic compounds is therefore a good way to gain confidence in using the many reactions discussed in the past few chapters.
+
+As we said in , it’s usually best to work a synthesis problem backward, or retrosynthetically. Look at the target molecule and ask yourself, “What is an immediate precursor of this compound?” Choose a likely answer and continue working backward, one step at a time, until you arrive at a simple starting material. Let’s try some examples.
+
+Synthesizing a Polysubstituted Benzene
+
+How would you synthesize 4-bromo-2-nitrotoluene from benzene?
+Strategy Draw the target molecule, identify the substituents, and recall how each group can be introduced separately. Then plan retrosynthetically.
+Strategy
+
+The three substituents on the ring are a bromine, a methyl group, and a nitro group. A bromine can be introduced by bromination with Br2/FeBr3, a methyl group can be introduced by Friedel–Crafts alkylation with CH3Cl/AlCl3, and a nitro group can be introduced by nitration with HNO3/H2SO4.
+Solution Ask yourself, “What is an immediate precursor of the target?” The final step will involve introduction of one of three groups—bromine, methyl, or nitro—so we have to consider three possibilities. Of the three, the bromination of o-nitrotoluene could be used because the activating methyl group would dominate the deactivating nitro group and direct bromination to the correct position. Unfortunately, a mixture of product isomers would be formed. A Friedel–Crafts reaction can’t be used as the final step because this reaction doesn’t work on a nitro-substituted (strongly deactivated) benzene. The best precursor of the desired product is probably p-bromotoluene, which can be nitrated ortho to the activating methyl group to give a single product.
+Solution
+
+Next ask, “What is an immediate precursor of p-bromotoluene?” Perhaps toluene is an immediate precursor because the methyl group would direct bromination to the ortho and para positions. Alternatively, bromobenzene might be an immediate precursor because we could carry out a Friedel–Crafts methylation and obtain a mixture of ortho and para products. Both answers are satisfactory, although both would also lead unavoidably to a mixture of products that would have to be separated.
+
+“What is an immediate precursor of toluene?” Benzene, which could be methylated in a Friedel–Crafts reaction. Alternatively, “What is an immediate precursor of bromobenzene?” Benzene, which could be brominated.
+
+The retrosynthetic analysis has provided two valid routes from benzene to 4-bromo-2-nitrotoluene.
+
+Synthesizing a Polysubstituted Benzene
+
+Synthesize 4-chloro-2-propylbenzenesulfonic acid from benzene.
+Strategy Draw the target molecule, identify its substituents, and recall how each of the three can be introduced. Then plan retrosynthetically.
+Strategy
+
+The three substituents on the ring are a chlorine, a propyl group, and a sulfonic acid group. A chlorine can be introduced by chlorination with Cl2/FeCl3, a propyl group can be introduced by Friedel–Crafts acylation with CH3CH2COCl/AlCl3 followed by reduction with H2/Pd, and a sulfonic acid group can be introduced by sulfonation with SO3/H2SO4.
+Solution “What is an immediate precursor of the target?” The final step will involve introduction of one of three groups—chlorine, propyl, or sulfonic acid—so we have to consider three possibilities. Of the three, the chlorination of o-propylbenzenesulfonic acid can’t be used because the reaction would occur at the wrong position. Similarly, a Friedel–Crafts reaction can’t be used as the final step because this reaction doesn’t work on sulfonic-acid-substituted (strongly deactivated) benzenes. Thus, the immediate precursor of the desired product is probably m-chloropropylbenzene, which can be sulfonated to give a mixture of product isomers that must then be separated.
+Solution
+
+“What is an immediate precursor of m-chloropropylbenzene?” Because the two substituents have a meta relationship, the first substituent placed on the ring must be a meta director so that the second substitution will take place at the proper position. Furthermore, because primary alkyl groups such as propyl can’t be introduced directly by Friedel–Crafts alkylation, the precursor of m-chloropropylbenzene is probably m-chloropropiophenone, which could be catalytically reduced.
+
+“What is an immediate precursor of m-chloropropiophenone?” Propiophenone, which could be chlorinated in the meta position.
+
+“What is an immediate precursor of propiophenone?” Benzene, which could undergo Friedel–Crafts acylation with propanoyl chloride and AlCl3.
+
+The final synthesis is a four-step route from benzene:
+
+Planning an organic synthesis has been compared with playing chess. There are no tricks; all that’s required is a knowledge of the allowable moves (the organic reactions) and the discipline to plan ahead, carefully evaluating the consequences of each move. Practicing may not be easy, but it’s a great way to learn organic chemistry.
+
+Problems
+
+Combinatorial Chemistry
+
+Traditionally, organic compounds have been synthesized one at a time. This works well for preparing large amounts of a few substances, but it doesn’t work so well for preparing small amounts of a great many substances. This latter goal is particularly important in the pharmaceutical industry, where vast numbers of structurally similar compounds must be synthesized and screened to find an optimum drug candidate.
+
+To speed the process of drug discovery, combinatorial chemistry has been developed to prepare what are called combinatorial libraries, in which anywhere from a few dozen to several hundred thousand substances are prepared simultaneously. Among the early successes of combinatorial chemistry is the development of a benzodiazepine library, a class of aromatic compounds commonly used as antianxiety agents.
+
+Two main approaches to combinatorial chemistry are used—parallel synthesis and split synthesis. In parallel synthesis, each compound is prepared independently. Typically, a reactant is first linked to the surface of polymer beads, which are then placed into small wells on a 96-well glass plate. Programmable robotic instruments add different sequences of building blocks to the different wells, thereby making 96 different products. When the reaction sequences are complete, the polymer beads are washed and their products are released.
+
+In split synthesis, the initial reactant is again linked to the surface of polymer beads, which are then divided into several groups. A different building block is added to each group of beads, the different groups are combined, and the reassembled mix is again split to form new groups. Another building block is added to each group, the groups are again combined and redivided, and the process continues. If, for example, the beads are divided into four groups at each step, the number of compounds increases in the progression 4 → 16 → 64 → 256. After 10 steps, more than 1 million compounds have been prepared ().
+
+Of course, with so many different final products mixed together, the problem is to identify them. What structure is linked to what bead? Several approaches to this problem have been developed, all of which involve the attachment of encoding labels to each polymer bead to keep track of the chemistry each has undergone. Encoding labels used thus far have included proteins, nucleic acids, halogenated aromatic compounds, and even computer chips.
+acyl group
+acylation
+alkylation
+benzyne
+combinatorial chemistry
+electrophilic aromatic substitution
+Friedel–Crafts reaction
+inductive effect
+nucleophilic aromatic substitution
+resonance effect
+
+Summary
+
+We’ve continued the coverage of aromatic molecules in this chapter, shifting focus to concentrate on reactions. In particular, we’ve looked at the relationship between aromatic structure and reactivity, a relationship critical to understanding how numerous biological molecules and pharmaceutical agents are synthesized and why they behave as they do.
+
+An electrophilic aromatic substitution reaction takes place in two steps—initial reaction of an electrophile, E+, with the aromatic ring, followed by loss of H+ from the resonance-stabilized carbocation intermediate to regenerate the aromatic ring.
+
+Many variations of the reaction can be carried out, including halogenation, nitration, and sulfonation. Friedel–Crafts alkylation and acylation reactions, which involve reaction of an aromatic ring with carbocation electrophiles, are particularly useful. They are limited, however, by the fact that the aromatic ring must be at least as reactive as a halobenzene. In addition, polyalkylation and carbocation rearrangements often occur in Friedel–Crafts alkylation.
+
+Substituents on the benzene ring affect both the reactivity of the ring toward further substitution and the orientation of that substitution. Groups can be classified as ortho- and para-directing activators, ortho- and para-directing deactivators, or meta-directing deactivators. Substituents influence aromatic rings by a combination of resonance and inductive effects. Resonance effects are transmitted through π bonds; inductive effects are transmitted through σ bonds.
+
+Halobenzenes undergo nucleophilic aromatic substitution through either of two mechanisms. If the halobenzene has a strongly electron-withdrawing substituent in the ortho or para position, substitution occurs by addition of a nucleophile to the ring, followed by elimination of halide from the intermediate anion. If the halobenzene is not activated by an electron-withdrawing substituent, substitution can occur by elimination of HX to give a benzyne, followed by addition of a nucleophile.
+
+The benzylic position of an alkylbenzene can be brominated by reaction with N-bromosuccinimide, and the entire side chain can be degraded to a carboxyl group by oxidation with aqueous KMnO4. Aromatic rings can also be reduced to cyclohexanes by hydrogenation over a platinum or rhodium catalyst, and aryl alkyl ketones are reduced to alkylbenzenes by hydrogenation over a platinum catalyst.
+
+Summary of Reactions
+
+Electrophilic aromatic substitution
+ 
+ Fluorination ()
+
+ Bromination ()
+
+ Chlorination ()
+
+ Iodination ()
+
+ Nitration ()
+
+ Sulfonation ()
+
+ Friedel–Crafts alkylation ()
+
+ Friedel–Crafts acylation ()
+
+Fluorination ()
+
+Bromination ()
+
+Chlorination ()
+
+Iodination ()
+
+Nitration ()
+
+Sulfonation ()
+
+Friedel–Crafts alkylation ()
+
+Friedel–Crafts acylation ()
+
+Reduction of aromatic nitro groups ()
+
+Nucleophilic aromatic substitution
+ 
+ By addition to activated aryl halides ()
+
+ By formation of benzyne intermediate from unactivated aryl halide ()
+
+By addition to activated aryl halides ()
+
+By formation of benzyne intermediate from unactivated aryl halide ()
+
+Oxidation of alkylbenzene side chain ()
+
+Benzylic bromination of alkylbenzene side chain ()
+
+Catalytic hydrogenation of aromatic ring ()
+
+Reduction of aryl alkyl ketones ()
+
+Additional Problems
+Visualizing Chemistry
+
+Mechanism Problems
+Mechanisms of Electrophilic Substitutions
+
+Additional Mechanism Practice
+
+Reactivity and Orientation of Electrophilic Substitutions
+
+Organic Synthesis
+
+General Problems

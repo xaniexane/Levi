@@ -1,0 +1,2254 @@
+# m49407
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Polar Coordinates: Graphs
+
+Polar Coordinates: Graphs
+
+In this section you will:
+
+Test polar equations for symmetry.
+
+Graph polar equations by plotting points.
+
+The planets move through space in elliptical, periodic orbits about the sun, as shown in . They are in constant motion, so fixing an exact position of any planet is valid only for a moment. In other words, we can fix only a planet’s instantaneous position. This is one application of polar coordinates, represented as 
+ 
+ (r,θ).
+
+ We interpret 
+ 
+ r
+ 
+ as the distance from the center of the sun and 
+ 
+ θ
+ 
+ as the planet’s angular bearing, or its direction from the center of the sun. In this section, we will focus on the polar system and the graphs that are generated directly from polar coordinates.
+
+Testing Polar Equations for Symmetry
+
+Just as a rectangular equation such as 
+ 
+ y=
+ x
+ 2
+
+ describes the relationship between 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ on a Cartesian grid, a polar equation describes a relationship between 
+ 
+ r
+ 
+ and 
+ 
+ θ
+ 
+ on a polar grid. Recall that the coordinate pair 
+ 
+ (r,θ)
+ 
+ indicates that we move counterclockwise from the polar axis (positive x-axis) by an angle of 
+ 
+ θ,
+ 
+ and extend a ray from the pole (origin) 
+ 
+ r
+ 
+ units in the direction of 
+ 
+ θ.
+ 
+ All points that satisfy the polar equation are on the graph.
+
+Symmetry is a property that helps us recognize and plot the graph of any equation. If an equation has a graph that is symmetric with respect to an axis, it means that if we folded the graph in half over that axis, the portion of the graph on one side would coincide with the portion on the other side. By performing three tests, we will see how to apply the properties of symmetry to polar equations. Further, we will use symmetry (in addition to plotting key points, zeros, and maximums of 
+ 
+ r)
+
+to determine the graph of a polar equation.
+
+In the first test, we consider symmetry with respect to the line 
+ 
+ θ=
+ π
+ 2
+
+ (y-axis). We replace 
+ 
+ (r,θ)
+ 
+ with 
+ 
+ (−r,−θ)
+ 
+ to determine if the new equation is equivalent to the original equation. For example, suppose we are given the equation 
+ 
+ r=2sinθ;
+
+This equation exhibits symmetry with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ .
+
+In the second test, we consider symmetry with respect to the polar axis ( 
+ 
+ x
+ 
+-axis). We replace 
+ 
+ (r,θ)
+ 
+ with 
+ 
+ (
+ 
+ r,−θ
+ 
+ )
+ 
+ or 
+ 
+ (
+ 
+ −r,π−θ
+ 
+ )
+ 
+ to determine equivalency between the tested equation and the original. For example, suppose we are given the equation 
+ 
+ r=1−2cosθ.
+
+The graph of this equation exhibits symmetry with respect to the polar axis.
+
+In the third test, we consider symmetry with respect to the pole (origin). We replace 
+ 
+ (r,θ)
+ 
+ with 
+ 
+ (
+ 
+ −r,θ
+ 
+ )
+ 
+ to determine if the tested equation is equivalent to the original equation. For example, suppose we are given the equation 
+ 
+ r=2sin(3θ).
+
+The equation has failed the symmetry test, but that does not mean that it is not symmetric with respect to the pole. Passing one or more of the symmetry tests verifies that symmetry will be exhibited in a graph. However, failing the symmetry tests does not necessarily indicate that a graph will not be symmetric about the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ the polar axis, or the pole. In these instances, we can confirm that symmetry exists by plotting reflecting points across the apparent axis of symmetry or the pole. Testing for symmetry is a technique that simplifies the graphing of polar equations, but its application is not perfect.
+
+Symmetry Tests
+
+A polar equation describes a curve on the polar grid. The graph of a polar equation can be evaluated for three types of symmetry, as shown in .
+Given a polar equation, test for symmetry.
+
+Substitute the appropriate combination of components for 
+ 
+ (
+ 
+ r,θ
+ 
+ ):
+
+ (
+ 
+ −r,−θ
+ 
+ )
+ 
+ for 
+ 
+ θ=
+ π
+ 2
+
+ symmetry; 
+ 
+ (
+ 
+ r,−θ
+ 
+ )
+ 
+ for polar axis symmetry; and 
+ 
+ (
+ 
+ −r,θ
+ 
+ )
+ 
+ for symmetry with respect to the pole.
+
+If the resulting equations are equivalent in one or more of the tests, the graph produces the expected symmetry.
+
+Testing a Polar Equation for Symmetry
+
+Test the equation 
+ 
+ r=2sinθ
+ 
+ for symmetry.
+
+Test for each of the three types of symmetry.
+
+−r=2sin(−θ)
+
+ −r=−2sinθ
+
+ Even-odd identity
+
+ r=2sinθ
+
+ Multiplyby−1
+
+ Passed
+r=2sin(−θ)
+
+ r=−2sinθ
+
+ Even-odd identity
+
+ r=−2sinθ≠2sinθ
+
+ Failed
+−r=2sinθ
+
+   r=−2sinθ≠2sinθ
+
+ Failed
+Analysis
+
+Using a graphing calculator, we can see that the equation 
+ 
+ r=2sinθ
+ 
+ is a circle centered at 
+ 
+ (0,1)
+ 
+ with radius 
+ 
+ r=1
+ 
+ and is indeed symmetric to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ .
+ 
+ We can also see that the graph is not symmetric with the polar axis or the pole. See .
+
+Test the equation for symmetry: 
+ 
+ r=−2cosθ.
+
+The equation fails the symmetry test with respect to the line 
+ 
+ θ=
+ π
+ 2
+
+ and with respect to the pole. It passes the polar axis symmetry test.
+
+Graphing Polar Equations by Plotting Points
+
+To graph in the rectangular coordinate system we construct a table of 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ values. To graph in the polar coordinate system we construct a table of 
+ 
+ θ
+ 
+ and 
+ 
+ r
+ 
+ values. We enter values of 
+ 
+ θ
+
+into a polar equation and calculate 
+ 
+ r.
+ 
+ However, using the properties of symmetry and finding key values of 
+ 
+ θ
+ 
+ and 
+ 
+ r
+ 
+ means fewer calculations will be needed.
+
+Finding Zeros and Maxima
+
+To find the zeros of a polar equation, we solve for the values of 
+ 
+ θ
+ 
+ that result in 
+ 
+ r=0.
+ 
+ Recall that, to find the zeros of polynomial functions, we set the equation equal to zero and then solve for 
+ 
+ x.
+ 
+ We use the same process for polar equations. Set 
+ 
+ r=0,
+ 
+ and solve for 
+ 
+ θ.
+
+For many of the forms we will encounter, the maximum value of a polar equation is found by substituting those values of 
+ 
+ θ
+ 
+ into the equation that result in the maximum value of the trigonometric functions. Consider 
+ 
+ r=5cosθ;
+ 
+ the maximum distance between the curve and the pole is 5 units. The maximum value of the cosine function is 1 when 
+ 
+ θ=0,
+ 
+ so our polar equation is 
+ 
+ 5cosθ,
+ 
+ and the value 
+ 
+ θ=0
+ 
+ will yield the maximum 
+ 
+ | r |.
+
+Similarly, the maximum value of the sine function is 1 when 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ and if our polar equation is 
+ 
+ r=5sinθ,
+ 
+ the value 
+ 
+ θ=
+ π
+ 2
+
+ will yield the maximum 
+ 
+ | r |.
+ 
+ We may find additional information by calculating values of 
+ 
+ r
+ 
+ when 
+ 
+ θ=0.
+ 
+ These points would be polar axis intercepts, which may be helpful in drawing the graph and identifying the curve of a polar equation.
+
+Finding Zeros and Maximum Values for a Polar Equation
+
+Using the equation in , find the zeros and maximum 
+ 
+ | r |
+ 
+ and, if necessary, the polar axis intercepts of 
+ 
+ r=2sinθ.
+
+To find the zeros, set 
+ 
+ r
+ 
+ equal to zero and solve for 
+ 
+ θ.
+
+Substitute any one of the 
+ 
+ θ
+ 
+ values into the equation. We will use 
+ 
+ 0.
+
+The points 
+ 
+ (0,0)
+ 
+ and 
+ 
+ (0,±nπ)
+ 
+ are the zeros of the equation. They all coincide, so only one point is visible on the graph. This point is also the only polar axis intercept.
+
+To find the maximum value of the equation, look at the maximum value of the trigonometric function 
+ 
+ sinθ,
+ 
+ which occurs when 
+ 
+ θ=
+ π
+ 2
+ 
+ ±2kπ
+ 
+ resulting in 
+ 
+ sin(
+
+ π
+ 2
+
+ )=1.
+ 
+ Substitute 
+
+ π
+ 2
+
+ for 
+ 
+ θ.
+
+Analysis
+
+The point 
+ 
+ (
+ 
+ 2,
+ π
+ 2
+
+ )
+ 
+ will be the maximum value on the graph. Let’s plot a few more points to verify the graph of a circle. See and .
+r
+0
+Without converting to Cartesian coordinates, test the given equation for symmetry and find the zeros and maximum values of 
+ 
+ | r |:
+
+ r=3cosθ.
+
+Tests will reveal symmetry about the polar axis. The zero is 
+ 
+ (
+ 
+ 0,
+ π
+ 2
+
+ ),
+ 
+ and the maximum value is 
+ 
+ (3,0).
+
+Investigating Circles
+
+Now we have seen the equation of a circle in the polar coordinate system. In the last two examples, the same equation was used to illustrate the properties of symmetry and demonstrate how to find the zeros, maximum values, and plotted points that produced the graphs. However, the circle is only one of many shapes in the set of polar curves.
+
+There are five classic polar curves: cardioids, limaҫons, lemniscates, rose curves, and Archimedes’ spirals. We will briefly touch on the polar formulas for the circle before moving on to the classic curves and their variations.
+
+Formulas for the Equation of a Circle
+
+Some of the formulas that produce the graph of a circle in polar coordinates are given by 
+ 
+ r=acosθ
+ 
+ and 
+ 
+ r=asinθ,
+ 
+ where 
+ 
+ a
+ 
+ is the diameter of the circle or the distance from the pole to the farthest point on the circumference. The radius is 
+
+ | a |
+ 
+ 2
+ 
+ ,
+ 
+ or one-half the diameter. For 
+ 
+ r=acosθ, 
+ 
+ the center is 
+ 
+ (
+
+ a
+ 2
+ 
+ ,0
+ 
+ ).
+ 
+ For 
+ 
+ r=asinθ,
+ 
+ the center is 
+ 
+ (
+
+ a
+ 2
+ 
+ ,π2
+ 
+ ).
+ 
+ shows the graphs of these four circles.
+
+Sketching the Graph of a Polar Equation for a Circle
+
+Sketch the graph of 
+ 
+ r=4cosθ.
+
+First, testing the equation for symmetry, we find that the graph is symmetric about the polar axis. Next, we find the zeros and maximum 
+ 
+ | r |
+ 
+ for 
+ 
+ r=4cosθ.
+ 
+ First, set 
+ 
+ r=0,
+ 
+ and solve for 
+ 
+ θ
+ 
+. Thus, a zero occurs at 
+ 
+ θ=
+ π
+ 2
+ 
+ ±kπ.
+ 
+ A key point to plot is 
+ 
+ (
+ 
+ 0,​​
+ π
+ 2
+
+ ).
+
+To find the maximum value of 
+ 
+ r,
+ 
+ note that the maximum value of the cosine function is 1 when 
+ 
+ θ=0±2kπ.
+ 
+ Substitute 
+ 
+ θ=0
+ 
+ into the equation:
+
+The maximum value of the equation is 4. A key point to plot is 
+ 
+ (4,0).
+
+As 
+ 
+ r=4cosθ
+ 
+ is symmetric with respect to the polar axis, we only need to calculate r-values for 
+ 
+ θ
+ 
+ over the interval 
+ 
+ [0, π].
+ 
+ Points in the upper quadrant can then be reflected to the lower quadrant. Make a table of values similar to . The graph is shown in .
+θ
+r
+4
+3.46
+2.83
+2
+0
+−2
+−2.83
+−3.46
+−4
+Investigating Cardioids
+
+While translating from polar coordinates to Cartesian coordinates may seem simpler in some instances, graphing the classic curves is actually less complicated in the polar system. The next curve is called a cardioid, as it resembles a heart. This shape is often included with the family of curves called limaçons, but here we will discuss the cardioid on its own.
+
+Formulas for a Cardioid
+
+The formulas that produce the graphs of a cardioid are given by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ where 
+ 
+ a>0, b>0,
+ 
+ and 
+
+ a
+ b
+ 
+ =1.
+ 
+ The cardioid graph passes through the pole, as we can see in .
+Given the polar equation of a cardioid, sketch its graph.
+
+Check equation for the three types of symmetry.
+
+Find the zeros. Set 
+ 
+ r=0.
+
+Find the maximum value of the equation according to the maximum value of the trigonometric expression.
+
+Make a table of values for 
+ 
+ r
+ 
+ and 
+ 
+ θ.
+
+Plot the points and sketch the graph.
+
+Sketching the Graph of a Cardioid
+
+Sketch the graph of 
+ 
+ r=2+2cosθ.
+
+First, testing the equation for symmetry, we find that the graph of this equation will be symmetric about the polar axis. Next, we find the zeros and maximums. Setting 
+ 
+ r=0,
+ 
+ we have 
+ 
+ θ=π+2kπ.
+ 
+ The zero of the equation is located at 
+ 
+ (
+ 
+ 0,π
+ 
+ ).
+ 
+ The graph passes through this point.
+
+The maximum value of 
+ 
+ r=2+2cosθ
+ 
+ occurs when 
+ 
+ cosθ
+ 
+ is a maximum, which is when 
+ 
+ cosθ=1
+ 
+ or when 
+ 
+ θ=0.
+ 
+ Substitute 
+ 
+ θ=0
+ 
+ into the equation, and solve for 
+ 
+ r.
+
+The point 
+ 
+ (4,0)
+ 
+ is the maximum value on the graph.
+
+We found that the polar equation is symmetric with respect to the polar axis, but as it extends to all four quadrants, we need to plot values over the interval 
+ 
+ [0,π].
+ 
+ The upper portion of the graph is then reflected over the polar axis. Next, we make a table of values, as in , and then we plot the points and draw the graph. See .
+
+r
+4
+3.41
+2
+1
+0
+Investigating Limaçons
+
+The word limaçon is Old French for “snail,” a name that describes the shape of the graph. As mentioned earlier, the cardioid is a member of the limaçon family, and we can see the similarities in the graphs. The other images in this category include the one-loop limaçon and the two-loop (or inner-loop) limaçon. One-loop limaçons are sometimes referred to as dimpled limaçons when 
+ 
+ 1<
+ a
+ b
+ 
+ <2
+ 
+ and convex limaçons when 
+
+ a
+ b
+ 
+ ≥2.
+
+Formulas for One-Loop Limaçons
+
+The formulas that produce the graph of a dimpled one-loop limaçon are given by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ where 
+ 
+ a>0,b>0, and 1<
+ a
+ b
+ 
+ <2.
+ 
+ All four graphs are shown in .
+Given a polar equation for a one-loop limaçon, sketch the graph.
+
+Test the equation for symmetry. Remember that failing a symmetry test does not mean that the shape will not exhibit symmetry. Often the symmetry may reveal itself when the points are plotted.
+
+Find the zeros.
+
+Find the maximum values according to the trigonometric expression.
+
+Make a table.
+
+Plot the points and sketch the graph.
+
+Sketching the Graph of a One-Loop Limaçon
+
+Graph the equation 
+ 
+ r=4−3sinθ.
+
+First, testing the equation for symmetry, we find that it fails all three symmetry tests, meaning that the graph may or may not exhibit symmetry, so we cannot use the symmetry to help us graph it. However, this equation has a graph that clearly displays symmetry with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ yet it fails all the three symmetry tests. A graphing calculator will immediately illustrate the graph’s reflective quality.
+
+Next, we find the zeros and maximum, and plot the reflecting points to verify any symmetry. Setting 
+ 
+ r=0
+ 
+ results in 
+ 
+ θ
+ 
+ being undefined. What does this mean? How could 
+ 
+ θ
+ 
+ be undefined? The angle 
+ 
+ θ
+ 
+ is undefined for any value of 
+ 
+ sinθ>1.
+ 
+ Therefore, 
+ 
+ θ
+ 
+ is undefined because there is no value of 
+ 
+ θ
+ 
+ for which 
+ 
+ sinθ>1.
+ 
+ Consequently, the graph does not pass through the pole. Perhaps the graph does cross the polar axis, but not at the pole. We can investigate other intercepts by calculating 
+ 
+ r
+ 
+ when 
+ 
+ θ=0.
+
+So, there is at least one polar axis intercept at 
+ 
+ (4,0).
+
+Next, as the maximum value of the sine function is 1 when 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ we will substitute 
+ 
+ θ=
+ π
+ 2
+
+into the equation and solve for 
+ 
+ r.
+ 
+ Thus, 
+ 
+ r=1.
+
+Make a table of the coordinates similar to .
+r
+4
+2.5
+1.4
+1
+1.4
+2.5
+4
+5.5
+6.6
+7
+6.6
+5.5
+4
+The graph is shown in .
+
+Analysis
+
+This is an example of a curve for which making a table of values is critical to producing an accurate graph. The symmetry tests fail; the zero is undefined. While it may be apparent that an equation involving 
+ 
+ sinθ
+ 
+ is likely symmetric with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ evaluating more points helps to verify that the graph is correct.
+
+Sketch the graph of 
+ 
+ r=3−2cosθ.
+
+Another type of limaçon, the inner-loop limaçon, is named for the loop formed inside the general limaçon shape. It was discovered by the German artist Albrecht Dürer(1471-1528), who revealed a method for drawing the inner-loop limaçon in his 1525 book Underweysung der Messing. A century later, the father of mathematician Blaise Pascal, Étienne Pascal(1588-1651), rediscovered it.
+
+Formulas for Inner-Loop Limaçons
+
+The formulas that generate the inner-loop limaçons are given by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ where 
+ 
+ a>0, b>0,
+ 
+ and 
+ a<b.
+ 
+ The graph of the inner-loop limaçon passes through the pole twice: once for the outer loop, and once for the inner loop. See for the graphs.
+
+Sketching the Graph of an Inner-Loop Limaçon
+
+Sketch the graph of 
+ 
+ r=2+5cosθ.
+
+Testing for symmetry, we find that the graph of the equation is symmetric about the polar axis. Next, finding the zeros reveals that when 
+ 
+ r=0, θ=1.98.
+
+The maximum 
+ 
+ | r |
+ 
+ is found when 
+ 
+ cosθ=1
+ 
+ or when 
+ 
+ θ=0.
+ 
+ Thus, the maximum is found at the point (7, 0).
+
+Even though we have found symmetry, the zero, and the maximum, plotting more points will help to define the shape, and then a pattern will emerge.
+
+See .
+r
+7
+6.3
+4.5
+2
+−0.5
+−2.3
+−3
+−2.3
+−0.5
+2
+4.5
+6.3
+7
+As expected, the values begin to repeat after 
+ 
+ θ=π.
+ 
+ The graph is shown in .
+
+Investigating Lemniscates
+
+The lemniscate is a polar curve resembling the infinity symbol 
+ 
+ ∞
+ 
+ or a figure 8. Centered at the pole, a lemniscate is symmetrical by definition.
+
+Formulas for Lemniscates
+
+The formulas that generate the graph of a lemniscate are given by 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ cos2θ
+ 
+ and 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ sin2θ
+ 
+ where 
+ 
+ a≠0.
+ 
+ The formula 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ sin2θ
+ 
+ is symmetric with respect to the pole. The formula 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ cos2θ
+ 
+ is symmetric with respect to the pole, the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ and the polar axis. See for the graphs.
+
+Sketching the Graph of a Lemniscate
+
+Sketch the graph of 
+
+ r
+ 2
+ 
+ =4cos2θ.
+
+The equation exhibits symmetry with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ the polar axis, and the pole.
+
+Let’s find the zeros. It should be routine by now, but we will approach this equation a little differently by making the substitution 
+ 
+ u=2θ.
+
+So, the point 
+ 
+ (
+ 
+ 0,
+ π
+ 4
+
+ )
+ 
+ is a zero of the equation.
+
+Now let’s find the maximum value. Since the maximum of 
+ 
+ cosu=1
+ 
+ when 
+ 
+ u=0,
+ 
+ the maximum 
+ 
+ cos2θ=1
+ 
+ when 
+ 
+ 2θ=0.
+ 
+ Thus,
+
+We have a maximum at (2, 0). Since this graph is symmetric with respect to the pole, the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ and the polar axis, we only need to plot points in the first quadrant.
+
+Make a table similar to .
+θ
+±
+ 
+ 2
+0
+Plot the points on the graph, such as the one shown in .
+
+Analysis
+
+Making a substitution such as 
+ 
+ u=2θ
+ 
+ is a common practice in mathematics because it can make calculations simpler. However, we must not forget to replace the substitution term with the original term at the end, and then solve for the unknown.
+
+Some of the points on this graph may not show up using the Trace function on the TI-84 graphing calculator, and the calculator table may show an error for these same points of 
+ 
+ r.
+ 
+ This is because there are no real square roots for these values of 
+ 
+ θ.
+ 
+ In other words, the corresponding r-values of 
+
+ 4cos(2θ)
+
+are complex numbers because there is a negative number under the radical.
+
+Investigating Rose Curves
+
+The next type of polar equation produces a petal-like shape called a rose curve. Although the graphs look complex, a simple polar equation generates the pattern.
+
+Rose Curves
+
+The formulas that generate the graph of a rose curve are given by 
+ 
+ r=acosnθ
+ 
+ and 
+ 
+ r=asinnθ
+ 
+ where 
+ 
+ a≠0.
+ 
+ If 
+ 
+ n
+ 
+ is even, the curve has 
+ 
+ 2n
+ 
+ petals. If 
+ 
+ n
+ 
+ is odd, the curve has 
+ 
+ n
+ 
+ petals. See .
+
+Sketching the Graph of a Rose Curve (n Even)
+
+Sketch the graph of 
+ 
+ r=2cos4θ.
+
+Testing for symmetry, we find again that the symmetry tests do not tell the whole story. The graph is not only symmetric with respect to the polar axis, but also with respect to the line 
+ 
+ θ=
+ π
+ 2
+
+ and the pole.
+
+Now we will find the zeros. First make the substitution 
+ 
+ u=4θ.
+
+The zero is 
+ 
+ θ=
+ π
+ 8
+ 
+ .
+ 
+ The point 
+ 
+ (
+ 
+ 0,
+ π
+ 8
+
+ )
+ 
+ is on the curve.
+
+Next, we find the maximum 
+ 
+ | r |.
+ 
+ We know that the maximum value of 
+ 
+ cosu=1
+ 
+ when 
+ 
+ θ=0.
+ 
+ Thus,
+
+The point 
+ 
+ (
+ 
+ 2,0
+ 
+ )
+ 
+ is on the curve.
+
+The graph of the rose curve has unique properties, which are revealed in .
+θ
+r
+2
+0
+−2
+0
+2
+0
+−2
+As 
+ 
+ r=0
+ 
+ when 
+ 
+ θ=
+ π
+ 8
+ 
+ ,
+ 
+ it makes sense to divide values in the table by 
+
+ π
+ 8
+
+ units. A definite pattern emerges. Look at the range of r-values: 2, 0, −2, 0, 2, 0, −2, and so on. This represents the development of the curve one petal at a time. Starting at 
+ 
+ r=0,
+ 
+ each petal extends out a distance of 
+ 
+ r=2,
+ 
+ and then turns back to zero 
+ 
+ 2n
+ 
+ times for a total of eight petals. See the graph in .
+
+Analysis
+
+When these curves are drawn, it is best to plot the points in order, as in the . This allows us to see how the graph hits a maximum (the tip of a petal), loops back crossing the pole, hits the opposite maximum, and loops back to the pole. The action is continuous until all the petals are drawn.
+
+Sketch the graph of 
+ 
+ r=4sin(
+ 
+ 2θ
+ 
+ ).
+
+The graph is a rose curve, 
+ 
+ n
+ 
+ even
+
+Sketching the Graph of a Rose Curve (n Odd)
+
+Sketch the graph of 
+ 
+ r=2sin(
+ 
+ 5θ
+ 
+ ).
+
+The graph of the equation shows symmetry with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ .
+ 
+ Next, find the zeros and maximum. We will want to make the substitution 
+ 
+ u=5θ.
+
+The maximum value is calculated at the angle where 
+ 
+ sinθ
+ 
+ is a maximum. Therefore,
+
+Thus, the maximum value of the polar equation is 2. This is the length of each petal. As the curve for 
+ 
+ n
+ 
+ odd yields the same number of petals as 
+ 
+ n,
+ 
+ there will be five petals on the graph. See .
+
+Create a table of values similar to .
+θ
+r
+0
+1
+−1.73
+2
+−1.73
+1
+0
+Sketch the graph of 
+ 
+ r=3cos(3θ).
+
+Rose curve, 
+ 
+ n
+ 
+ odd
+
+Investigating the Archimedes’ Spiral
+
+The final polar equation we will discuss is the Archimedes’ spiral, named for its discoverer, the Greek mathematician Archimedes (c. 287 BCE-c. 212 BCE), who is credited with numerous discoveries in the fields of geometry and mechanics.
+
+Archimedes’ Spiral
+
+The formula that generates the graph of the Archimedes’ spiral is given by 
+ 
+ r=θ
+
+for 
+ 
+ θ≥0.
+ 
+ As 
+ 
+ θ
+ 
+ increases, 
+ 
+ r
+
+increases at a constant rate in an ever-widening, never-ending, spiraling path. See .
+Given an Archimedes’ spiral over 
+ 
+ [ 
+ 0,2π
+ ],
+ 
+ sketch the graph.
+
+Make a table of values for 
+ 
+ r
+ 
+ and 
+ 
+ θ
+ 
+ over the given domain.
+
+Plot the points and sketch the graph.
+
+Sketching the Graph of an Archimedes’ Spiral
+
+Sketch the graph of 
+ 
+ r=θ
+ 
+ over 
+ 
+ [0,2π].
+
+As 
+ 
+ r
+ 
+ is equal to 
+ 
+ θ,
+ 
+ the plot of the Archimedes’ spiral begins at the pole at the point (0, 0). While the graph hints of symmetry, there is no formal symmetry with regard to passing the symmetry tests. Further, there is no maximum value, unless the domain is restricted.
+
+Create a table such as .
+r
+0.785
+1.57
+3.14
+4.71
+5.50
+6.28
+Notice that the r-values are just the decimal form of the angle measured in radians. We can see them on a graph in .
+
+Analysis
+
+The domain of this polar curve is 
+ 
+ [ 
+ 0,2π
+ ].
+ 
+ In general, however, the domain of this function is 
+ 
+ (
+ 
+ −∞,∞
+ 
+ ).
+ 
+ Graphing the equation of the Archimedes’ spiral is rather simple, although the image makes it seem like it would be complex.
+
+Sketch the graph of 
+ 
+ r=−θ
+ 
+ over the interval 
+ 
+ [ 
+ 0,4π
+ ].
+
+Summary of Curves
+
+We have explored a number of seemingly complex polar curves in this section. and summarize the graphs and equations for each of these curves.
+
+Access these online resources for additional instruction and practice with graphs of polar coordinates.
+Graphing Polar Equations Part 1
+Graphing Polar Equations Part 2
+Animation: The Graphs of Polar Equations
+Graphing Polar Equations on the TI-84
+
+Key Concepts
+
+It is easier to graph polar equations if we can test the equations for symmetry with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ the polar axis, or the pole.
+
+There are three symmetry tests that indicate whether the graph of a polar equation will exhibit symmetry. If an equation fails a symmetry test, the graph may or may not exhibit symmetry. See .
+
+Polar equations may be graphed by making a table of values for 
+ 
+ θ
+ 
+ and 
+ 
+ r.
+
+The maximum value of a polar equation is found by substituting the value 
+ 
+ θ
+ 
+ that leads to the maximum value of the trigonometric expression.
+
+The zeros of a polar equation are found by setting 
+ 
+ r=0
+ 
+ and solving for 
+ 
+ θ.
+ 
+ See .
+
+Some formulas that produce the graph of a circle in polar coordinates are given by 
+ 
+ r=acosθ
+ 
+ and 
+ 
+ r=asinθ.
+ 
+ See .
+
+The formulas that produce the graphs of a cardioid are given by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ,
+ 
+ for 
+ 
+ a>0, b>0,
+ 
+ and 
+
+ a
+ b
+ 
+ =1.
+ 
+ See .
+
+The formulas that produce the graphs of a one-loop limaçon are given by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ for 
+ 
+ 1<
+ a
+ b
+ 
+ <2.
+ 
+ See .
+
+The formulas that produce the graphs of an inner-loop limaçon are given by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ for 
+ 
+ a>0, b>0,
+
+and 
+ 
+ a<b.
+
+See .
+
+The formulas that produce the graphs of a lemniscates are given by 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ cos2θ
+ 
+ and 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ sin2θ,
+ 
+ where 
+ 
+ a≠0.
+ 
+ See .
+
+The formulas that produce the graphs of rose curves are given by 
+ 
+ r=acosnθ
+ 
+ and 
+ 
+ r=asinnθ,
+ 
+ where 
+ 
+ a≠0;
+ 
+ if 
+ 
+ n
+ 
+ is even, there are 
+ 
+ 2n
+ 
+ petals, and if 
+ 
+ n
+ 
+ is odd, there are 
+ 
+ n
+ 
+ petals. See and .
+
+The formula that produces the graph of an Archimedes’ spiral is given by 
+ 
+ r=θ, θ≥0.
+ 
+ See .
+
+Section Exercises
+
+Verbal
+
+Describe the three types of symmetry in polar graphs, and compare them to the symmetry of the Cartesian plane.
+
+Symmetry with respect to the polar axis is similar to symmetry about the 
+ 
+ x
+ 
+-axis, symmetry with respect to the pole is similar to symmetry about the origin, and symmetric with respect to the line 
+ 
+ θ=
+ π
+ 2
+
+ is similar to symmetry about the 
+ 
+ y
+ 
+-axis.
+
+Which of the three types of symmetries for polar graphs correspond to the symmetries with respect to the x-axis, y-axis, and origin?
+
+What are the steps to follow when graphing polar equations?
+
+Test for symmetry; find zeros, intercepts, and maxima; make a table of values. Decide the general type of graph, cardioid, limaçon, lemniscate, etc., then plot points at
+
+ θ=0,
+ π
+ 2
+ 
+ , π and  
+ 
+ 3π
+ 
+ 2
+ 
+ ,
+ 
+ and sketch the graph.
+
+Describe the shapes of the graphs of cardioids, limaçons, and lemniscates.
+
+What part of the equation determines the shape of the graph of a polar equation?
+
+The shape of the polar graph is determined by whether or not it includes a sine, a cosine, and constants in the equation.
+
+Graphical
+
+For the following exercises, test the equation for symmetry.
+r=5cos3θ
+r=3−3cosθ
+
+symmetric with respect to the polar axis
+r=3+2sinθ
+r=3sin2θ
+
+symmetric with respect to the polar axis, symmetric with respect to the line 
+ 
+ θ=
+ π
+ 2
+ 
+ ,
+ 
+ symmetric with respect to the pole
+r=4
+r=2θ
+
+symmetric with respect to the line 
+ θ=π2
+r=4cos
+ θ
+ 2
+r=
+ 2
+ θ
+
+no symmetry
+r=3
+ 
+ 1−
+ 
+ cos
+ 
+ 2
+ 
+ θ
+r=
+ 
+ 5sin2θ
+
+symmetric with respect to the pole
+
+For the following exercises, graph the polar equation. Identify the name of the shape.
+r=3cosθ
+r=4sinθ
+
+circle
+r=2+2cosθ
+r=2−2cosθ
+
+cardioid
+r=5−5sinθ
+r=3+3sinθ
+
+cardioid
+r=3+2sinθ
+r=7+4sinθ
+
+one-loop/dimpled limaçon
+r=4+3cosθ
+r=5+4cosθ
+
+one-loop/dimpled limaçon
+r=10+9cosθ
+r=1+3sinθ
+
+inner loop/two-loop limaçon
+r=2+5sinθ
+r=5+7sinθ
+
+inner loop/two-loop limaçon
+r=2+4cosθ
+r=5+6cosθ
+
+inner loop/two-loop limaçon
+r
+ 2
+ 
+ =36cos(
+ 
+ 2θ
+ 
+ )
+r
+ 2
+ 
+ =10cos(
+ 
+ 2θ
+ 
+ )
+
+lemniscate
+r
+ 2
+ 
+ =4sin(
+ 
+ 2θ
+ 
+ )
+r
+ 2
+ 
+ =10sin(
+ 
+ 2θ
+ 
+ )
+
+lemniscate
+r=3sin(2θ)
+r=3cos(2θ)
+
+rose curve
+r=5sin(3θ)
+r=4sin(4θ)
+
+rose curve
+r=4sin(5θ)
+r=−θ
+
+Archimedes’ spiral
+r=2θ
+r=−3θ
+
+Archimedes’ spiral
+
+Technology
+
+For the following exercises, use a graphing calculator to sketch the graph of the polar equation.
+r=
+ 1
+ θ
+r=
+ 1
+
+ θ
+r=2sinθtanθ,
+ 
+ a cissoid
+r=2
+ 
+ 1−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+, a hippopede
+r=5+cos(
+ 
+ 4θ
+ 
+ )
+r=2−sin(
+ 
+ 2θ
+ 
+ )
+r=
+ θ
+ 2
+r=θ+1
+r=θsinθ
+r=θcosθ
+
+For the following exercises, use a graphing utility to graph each pair of polar equations on a domain of 
+ 
+ [ 
+ 0,4π
+ ]
+ 
+ and then explain the differences shown in the graphs.
+r=θ,r=−θ
+r=θ,r=θ+sinθ
+
+They are both spirals, but not quite the same.
+r=sinθ+θ,r=sinθ−θ
+r=2sin(
+
+ θ
+ 2
+
+ ),r=θsin(
+
+ θ
+ 2
+
+ )
+
+Both graphs are curves with 2 loops. The equation with a coefficient of 
+ 
+ θ
+ 
+ has two loops on the left, the equation with a coefficient of 2 has two loops side by side. Graph these from 0 to 
+ 
+ 4π
+ 
+ to get a better picture.
+r=sin(
+ 
+ cos(3θ)
+ 
+ )r=sin(3θ)
+
+On a graphing utility, graph 
+ 
+ r=sin(
+
+ 16
+ 
+ 5
+ 
+ θ
+ 
+ )
+ 
+ on 
+ [
+ 0, 4π
+ ], [
+ 0, 8π
+ ], [
+ 0, 12π
+ ]
+, and 
+ [
+ 0, 16π
+].
+ Describe the effect of increasing the width of the domain.
+
+When the width of the domain is increased, more petals of the flower are visible.
+
+On a graphing utility, graph and sketch 
+ 
+ r=sinθ+
+ 
+ (
+ 
+ sin(
+
+ 5
+ 2
+ 
+ θ
+ 
+ )
+ 
+ )
+ 
+ 3
+
+ on 
+ 
+ [ 
+ 0,4π
+ ].
+
+On a graphing utility, graph each polar equation. Explain the similarities and differences you observe in the graphs.
+
+The graphs are three-petal, rose curves. The larger the coefficient, the greater the curve’s distance from the pole.
+
+On a graphing utility, graph each polar equation. Explain the similarities and differences you observe in the graphs.
+
+On a graphing utility, graph each polar equation. Explain the similarities and differences you observe in the graphs.
+
+The graphs are spirals. The smaller the coefficient, the tighter the spiral.
+
+Extensions
+
+For the following exercises, draw each polar equation on the same set of polar axes, and find the points of intersection.
+r
+ 1
+ 
+ =3+2sinθ,
+ r
+ 2
+ 
+ =2
+r
+ 1
+ 
+ =6−4cosθ,
+ r
+ 2
+ 
+ =4
+(
+ 
+ 4,
+ π
+ 3
+
+ ),(
+ 
+ 4,
+ 
+ 5π
+ 
+ 3
+
+ )
+r
+ 1
+ 
+ =1+sinθ,
+ r
+ 2
+ 
+ =3sinθ
+r
+ 1
+ 
+ =1+cosθ,
+ r
+ 2
+ 
+ =3cosθ
+(
+
+ 3
+ 2
+ 
+ ,
+ π
+ 3
+
+ ),(
+
+ 3
+ 2
+ 
+ ,
+ 
+ 5π
+ 
+ 3
+
+ )
+r
+ 1
+ 
+ =cos(
+ 
+ 2θ
+ 
+ ),
+ r
+ 2
+ 
+ =sin(
+ 
+ 2θ
+ 
+ )
+r
+ 1
+ 
+ =
+ 
+ sin
+ 
+ 2
+ 
+ (
+ 
+ 2θ
+ 
+ ), 
+ r
+ 2
+ 
+ =1−cos(
+ 
+ 4θ
+ 
+ )
+(
+ 
+ 0,
+ π
+ 2
+
+ ),(
+ 
+ 0,π
+ 
+ ),(
+ 
+ 0,
+ 
+ 3π
+ 
+ 2
+
+ ),(
+ 
+ 0,2π
+ 
+ )
+r
+ 1
+ 
+ =
+ 3
+ 
+ ,
+ r
+ 2
+ 
+ =2sin(
+ θ
+ )
+r
+ 1
+
+ 2
+ 
+ =sinθ,
+ r
+ 2
+
+ 2
+ 
+ =cosθ
+(
+
+ 8
+ 4
+
+ 2
+ 
+ ,
+ π
+ 4
+
+ ),(
+
+ 8
+ 4
+
+ 2
+ 
+ ,
+ 
+ 5π
+ 
+ 4
+
+ )
+
+and at 
+ 
+ θ=
+ 
+ 3π
+ 
+ 4
+ 
+ , 
+ 
+ 7π
+ 
+ 4
+
+since 
+ 
+ r
+ 
+ is squared
+r
+ 1
+ 
+ =1+cosθ, 
+ r
+ 2
+ 
+ =1−sinθ
+
+a polar curve given by 
+ 
+ r=θ.
+ 
+ When multiplied by a constant, the equation appears as 
+ 
+ r=aθ.
+ 
+ As 
+ 
+ r=θ,
+ 
+ the curve continues to widen in a spiral path over the domain.
+a member of the limaçon family of curves, named for its resemblance to a heart; its equation is given as 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ,
+ 
+ where 
+
+ a
+ b
+ 
+ =1
+a type of one-loop limaçon represented by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ such that 
+
+ a
+ b
+ 
+ ≥2
+a type of one-loop limaçon represented by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ such that 
+ 
+ 1<
+ a
+ b
+ 
+ <2
+a polar curve similar to the cardioid, but with an inner loop; passes through the pole twice; represented by 
+ 
+ r=a±bcosθ
+ 
+ and 
+ 
+ r=a±bsinθ
+ 
+ where 
+ 
+ a<b
+a polar curve resembling a figure 8 and given by the equation 
+
+ r
+ 2
+ 
+ =
+ a
+ 2
+ 
+ cos2θ
+ 
+ and 
+
+ r
+
+[truncated]

@@ -1,0 +1,141 @@
+# m00122
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Hamilton Paths
+
+Hamilton Paths
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe and identify Hamilton paths.
+
+Evaluate Hamilton paths in real-world applications.
+
+Distinguish between Hamilton paths and Euler trails.
+
+In the United States, school buses carry 25 million children between school and home every day. The total distance they travel is around 6 billion kilometers per year. In the city of Boston, Massachusetts, the 2016 budget for running those buses was $120 million dollars. In 2017, the city held a competition to find ways to cut costs and the Quantum Team from the MIT Operations Research Center came to the rescue, using a computer algorithm to identify the most efficient and least costly routes, which saved the city of Boston $5 million each year and even reduced daily CO2 emissions by 9,000 kilograms! (This U.S. city put an algorithm in charge of its school bus routes and saved $5 million, Sean Fleming, World Economic Forum)
+
+The problem the Quantum Team tackled involves graph theory. Imagine a graph in which vertices are the bus depot, the school, and the bus stops along a particular route. The bus must start at the depot, visit every stop exactly once, and end at the school. The route is a special kind of path that visits every vertex exactly once. Can you guess what those paths are called?
+
+Hamilton Paths
+
+Just as circuits that visit each vertex in a graph exactly once are called Hamilton cycles (or Hamilton circuits), paths that visit each vertex on a graph exactly once are called Hamilton paths. As we explore Hamilton paths, you might find it helpful to refresh your memory about the relationships between walks, trails, and paths by looking at . We know that paths are walks that don’t repeat any vertices or edges. So, a Hamilton path visits every vertex without repeating any vertices or edges. shows a path from vertex A to vertex E and a Hamilton path from vertex A to vertex E.
+
+Identifying Hamilton Paths
+
+Which of the following sequences of vertices is a Hamilton path for Graph Q in ?
+a → d → b → c → e → g → f
+c → b → e → h → g → f → d → a
+h → e → g → d → b → e → g → f → d → a → b → c
+
+Sequence 1 is a path, because it is a walk that doesn’t repeat any vertices or edges, but not a Hamilton path because it skips vertex h. Sequence 2 is a path that visits each vertex exactly once; so, it is a Hamilton path. Sequence 3 is a walk, but it is not a path because it visits vertices g, e, and b each more than once; so, it cannot be a Hamilton path. So, we can see that only sequence 2 is a Hamilton path.
+
+TIP! Since a Hamilton path visits each vertex exactly once, it must have the same number of vertices listed as appear in the graph.
+
+Finding Hamilton Paths
+
+Suppose you were visiting an aquarium with some friends. The map of the aquarium is given in . The letters represent the exhibits.
+shows a graph of the aquarium in which each vertex represents an exhibit and each edge is a route between the pair of exhibits that doesn’t bypass another exhibit.
+
+Let’s see if we can plan a tour of the exhibits that visits each exhibit exactly once, beginning at exhibit O and ending at exhibit C. Suppose that, after exhibit O, we plan to visit exhibit Q and then exhibit M. After M, should we plan to visit N, L, or R? Take a look at . If R is not chosen next, that will cause a problem later on. Do you see what it is?
+
+If L or N is chosen next, the only way to get to R later will be to go from S to R, and then we will not be able to continue without repeating a vertex. So, we will pick R next, and then the only option is S. After S we have another choice to make. As shown in , the next choice is between B and E. Keeping in mind that the goal is to end at C, which would be the better choice?
+
+If you said vertex B, you are right! Otherwise, we will not be able to visit B later. After B, the only option is E. Then we can choose either D or G. Either will work fine. Let’s choose G as shown in . After G, you must visit H, but should you visit K or L after that?
+
+If you said to go to vertex L next, you are right! Otherwise, it will be impossible to visit N without repeating a vertex. So, next is L, then N, then K, and then at J you have another decision to make we can see in . Should you choose F, I, or P next?
+
+If you said P, you are right! If you choose either of the other two vertices, you will not be able to visit P later without passing through another vertex twice. Once P is chosen, vertex I must be next followed by F. Then you have to choose between A and D as shown in .
+
+In this case, we must go to D then to A so that we can visit C without backtracking. The complete Hamilton path is shown in .
+
+So, one Hamilton path that begins at O and ends at C is O → Q → M → R → S → B → E → G → H → L → N → K → J → P → I → F → D → A → C.
+
+There is no set sequence of steps that can be used to find a Hamilton path if it exists, but it does help to keep in mind where we are headed and avoid choices that will make returning to a particular vertex impossible without repeating vertices. Let’s practice finding Hamilton paths.
+
+Finding a Hamilton Path
+
+Use to find a Hamilton path between vertices C and D.
+
+If we start at vertex C, A must be next. Then we must choose between B and F. If we choose F, we will have to backtrack to get to include B; so, we must choose B. Once we choose B, we must choose F next. After F, we choose E, because we want to end at D. So, a Hamilton path between C and D is C → A → B → F → E → D.
+
+Existence of a Hamilton Path
+
+It turns out that there is no Hamilton path between vertices A and E in Graph G in . To understand why, let’s imagine there is a red apple tree on one side of a bridge and a green apple tree on the other side of the bridge. Now suppose someone asked you to pick up all the fallen apples under each tree without crossing the bridge more than once, and making sure that the first apple you pick up and the last apple you pick up are both red. You would say, that is impossible! To have the first and last apple be red would either require leaving the green apples on the ground or crossing the bridge twice.
+
+Let’s see how this relates to finding a Hamilton path between A and E in Graph G. The edge AC is a bridge because, if it were removed, the graph would become disconnected with two components, the component {C} and the component {A, B, D, E, F}. So, we can think of the vertices A, B, D, E, and F as the red apples, vertex C as the green apple, and the edge AC is the bridge between them as in .
+
+The creation of a Hamilton path requires a visit to each vertex, just as picking up all the apples requires a visit to each apple. A and E are both red apples; so, a path from A to E would both start and end at a red apple, just as you were asked to do. And you wouldn’t be able to cross the bridge twice because that would mean visiting A twice, which is not allowed in a Hamilton path. So, it is impossible to find a Hamilton path from A to E just as it was impossible to pick up all the apples without crossing the bridge more than once. By the same reasoning, if a graph has a bridge, there will never be a Hamilton path that begins and ends on the same side of that bridge, meaning beginning and ending at vertices that would be in the same component if the bridge were removed from the graph.
+
+Finding a Hamilton Path If One Exists
+
+Find a Hamilton path from vertex s to vertex v for each graph in or indicate that there is none.
+
+Graph A: Edge uw is a bridge connecting component {s, t, u, v} to the component {w, x, y, z}. There is no Hamilton path from vertex s to vertex v because they would be part of the same component if the bridge uw were removed.
+
+Graph B: There are no bridges in Graph B. The only method we have to determine if a Hamilton path from vertex s to vertex v exists is to try every possibility. From vertex s, we can visit either vertex y or vertex t. We will try vertex y first and then come back to see what happens with vertex t. After visiting y, we must visit z and then u, but then we have to decide between vertices r, t, and v next as shown in .
+
+Vertex v is not an option since we want to end at v. Vertex t is not an option since that would force us to go to visit s a second time. So, we must go to vertex r next. After vertex r, we must visit x, then w, then v, but we missed vertex t as shown in .
+
+Let’s go back to the beginning and choose t instead of y. After t, we must go to u and then we have a choice to make between r, v, and z as shown in .
+
+Vertex v is not an option since we want to end at v. Vertex z is not an option since that would force us to go y and then to visit s a second time. So, we must go to vertex r next. After r, we must go to x then w then v, where we have to stop even though we have missed vertices y and z, as shown in .
+
+So, we have tried every possible route and there are no Hamilton paths between s and v in Graph B.
+
+Graph C: In Graph C, there is a Hamilton path, s → t → u → x → w → v.
+
+Graph D: In Graph D, there is a bridge, tx, which would form components {r, s, t, u, q} and {v, w, x, y, z} if it were removed. Since s and v would be in different components, it is possible there is a Hamilton path between them. The only way to know is to try all possibilities. If we begin at s, we can go to r then t, or we can go directly to t, either way, we have a problem as you can see in .
+
+If we visit all the vertices in the component {r, s, t, u, q}, we will have to visit t a second time in order to cross the bridge. If we visit t only once, we have to skip some of the vertices. So, there is no Hamilton path between s and v.
+
+There is not a short way to determine if there is a Hamilton path between two vertices on a graph that works in every situation. However, there are a few common situations that can help us to quickly determine that there is no Hamilton path. Some of these are listed in .
+
+Scenario
+Diagram
+No Hamilton path between any two vertices in the component {a, c, d, f}.
+ No Hamilton path between any two vertices in {b, e, h, g, i}.
+No Hamilton path beginning or ending at a or b.
+
+There are also many other situations in which a Hamilton path is not possible. These are just a few that you will encounter.
+
+Hamilton Path or Euler Trail?
+
+We learned in Euler Trails that an Euler trail visits each edge exactly once, whereas a Hamilton path visits each vertex exactly once. Let’s practice distinguishing between the two.
+
+Distinguishing between Hamilton Path and Euler Trail
+
+Use to determine if the given sequence of vertices is a Hamilton path, an Euler trail, both, or neither.
+
+Graph A, e → b → a → e → d → c → b
+
+Graph F, f → g → j → h → i
+
+Graph K, k → l → m → n → o
+
+Since the sequence covers every edge once but visits vertices more than once, it is only an Euler trail.
+
+Since the sequence visits every vertex exactly once but skips some edges, it is only a Hamilton path.
+
+Since the sequence visits each edge and each vertex exactly once, it is both an Euler trail and a Hamilton path.
+
+As we saw in , the Emerald City lies at the center of the Magical Land of Oz, with Gillikin Country to the north, Winkie Country to the east, Munchkin Country to the west, and Quadling Country to the south. Munchkin Country and Winkie Country each shares a border with Gillikin Country and Quadling Country. Let’s apply graph theory to Dorothy’s famous journey through Oz one more time!
+
+Draw a graph in which each vertex is one of the regions of Oz. Is there a Hamilton path that Dorothy could follow, instead of the yellow brick road, to lead her from the land of the Munchkins, through all the regions of Oz exactly once, and end in the Emerald City? If so, what might it be? Compare your results with those of a classmate.
+
+Check Your Understanding
+
+Key Terms
+
+Hamilton path
+
+Key Concepts
+
+A Hamilton path visits every vertex exactly once.
+
+Some Hamilton paths are also Euler trails, but some are not.

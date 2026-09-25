@@ -1,0 +1,51 @@
+{
+  "activationEvents": [
+    "onCommand:levi.councilBuild",
+    "onCommand:levi.buildApp",
+    "onCommand:levi.generateImage",
+    "onCommand:levi.studioConsent"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "levi.councilBuild",
+        "title": "LEVI: Council Build (multi-model code review)"
+      },
+      {
+        "command": "levi.buildApp",
+        "title": "LEVI: Build App (autonomous app builder)"
+      },
+      {
+        "command": "levi.generateImage",
+        "title": "LEVI: Generate Image"
+      },
+      {
+        "command": "levi.studioConsent",
+        "title": "LEVI Studio: Consent Panel (approve/deny side-effect actions)"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "levi.cliPath": {
+          "default": "levi",
+          "description": "Path to the local LEVI CLI (default \"levi\" on PATH). The extension only shells out to this binary \u2014 no network, no telemetry.",
+          "type": "string"
+        }
+      },
+      "title": "LEVI"
+    }
+  },
+  "description": "LEVI in your editor: multi-model council code review, autonomous app builder, image generation, and the Omega Studio consent panel \u2014 via your local LEVI CLI. Zero telemetry, zero network.",
+  "displayName": "LEVI",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "main": "./extension.js",
+  "name": "levi-vscode",
+  "publisher": "levi",
+  "version": "0.1.0"
+}

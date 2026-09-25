@@ -1,0 +1,319 @@
+# m00085
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Querying a Database
+
+Querying a Database
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Explain the uses of queries to explore data in a database
+
+Build and edit a query in Access through the query grid
+
+Establish a relationship between tables with a simple query
+
+WorldCorp collects data constantly in all its departments. The Human Resources Department maintains employee records; the Maintenance Department monitors equipment, repair, and inspection records; and the Accounting Department keeps records on all purchases, to name just a few departments. The data collected in all of these areas can inform decisions, as long as it is accessible and analyzable.
+
+The WorldCorp product and sales division constantly updates customer records, processes sales, and maintains inventory levels. It has a data warehouse that powers its transactions, which is continuously working in real time. This information is key to its success, but it cannot work with it directly because that would mean turning the system off. Instead of taking a production system offline for analysis, you will work with a dataset based on last week’s work.
+
+Working with a dataset can be complicated, and as the datasets get more complex with more records, you will need to be able to query or ask questions using Access. Because Access runs on your computer against a database file, it is quick and responsive and integrates well with other Microsoft programs like Excel for visualization and Word and PowerPoint for communication.
+
+Understanding Queries
+
+Queries allow you to ask questions of a database or take an action within a database. To write a query, you need to know the question you want to answer. For example, you might need a listing of all products sold over the past quarter, a list of equipment that needs to be inspected, or a list of products in the company’s inventory. Once you establish what you want to know, you can then write a query that will ask the database to share the correct information.
+
+A query is really a question written in computer syntax. The query collects data that meets your specifications by running against the table(s) in your database. A query can be simple—for example, returning all values in a field in the table, such as product ID number. A query can also be complex, limiting the dataset and results to precisely what you are looking for. Expressions that a database management system uses to limit the results of a query based on matching field values are called criteria. Adding criteria enables you to control what data you see so that you can identify the records you need and omit the ones that do not meet your needs. In turn, this makes it easier to answer questions and visualize the data you need.
+
+Before you create a query in Access, you should have a strong understanding of what you want from your dataset. For example, WorldCorp could be interested in discovering how their latest product has been selling based on data in their transactional database. To accomplish this, you might need to look for sales that match certain criteria, such as sales for a specific product identification number. Knowing this in advance and putting it in writing will help you craft useful queries. When planning a query, you will want to identify the following:
+
+The fields you want
+
+The value(s) you expect in each field
+
+Any calculations or changes you want from the data
+
+How you want the data displayed (e.g., in order by date)
+
+Although the steps are the same in building both simple and complex queries, the planning process becomes more important the more complex your queries are.
+
+Queries can be designed for a single use or built for ongoing work. Ad hoc queries typically answer a specific question and are needed only at the moment you create them. Once you are done with an ad hoc query, you will not use it again, so it does not need to be stored or saved. Other queries, called predefined queries, are set up and saved. Predefined queries are used to automate data management tasks that meet specific organizational needs. An example of a predefined query is a sales report or top-selling product report that you frequently run without change (or with only minor changes). In this case, you will want to save the query to make your work easier. You might even want to set up a screen with all of your predefined queries.
+
+The Purpose of Queries in Databases
+
+Queries are an essential part of making a database accessible. Imagine trying to make sense of hundreds, thousands, or even more records without a tool to help you. It is simply not possible. The more complex your dataset, the more important it is to use queries and reports to retrieve data. Most databases have too many records to work with unless you have well-written queries. A well-written query is specific, organized, and comprehensive, meaning that it contains everything you need.
+
+Protecting the Privacy of Data
+
+The Target data breach in 2013 was a significant security incident, resulting in the theft of forty million credit and debit records and seventy million customer records. The breach demonstrated that such incidents can severely undermine customer trust and confidence in data security. Customers concerned about the potential leakage of their data became wary of Target, leading to decreased sales reputational damage.
+
+The breach also highlighted the need for companies to ensure the security of their vendors. Target’s compromise, for example, originated from a third-party vendor. Cybersecurity is a weakest link proposition: Organizations must consider the security of all parties involved in their data ecosystem.
+
+Although Target’s handling of the breach included prompt notification to customers, it was clear that additional precautions could have been taken that would have made the attack more challenging for cybercriminals. The incident highlights the need for proactive security measures and robust disaster preparedness plans. Furthermore, the breach had financial implications that went beyond the settlement costs; Target experienced reduced earnings and a decline in customer patronage. The ultimate cost of the breach was estimated to be well over $200 million.
+
+The Target data breach serves as a reminder for organizations to prioritize data security, protect customer information, engage in proactive defenses, and have strategies in place to restore customer trust if a breach occurs.
+
+See this coverage of the Target data breach and think about how your data may be stored and used by companies and websites and also about how you, as a professional, need to manage data to protect it and the people who have shared it with you and your company.
+
+You are most likely to use queries to retrieve a specific record or set of records, but queries have other functions as well. For example, they can summarize data and perform calculations. You can even set up queries that show you the most current data in the database each time you refresh your records.
+
+Designing Queries
+
+Before building a query, you need to take some time to think through how the query will work and what it will accomplish. Start with a question, such as one of the following examples:
+
+What does inventory look like right now?
+
+What sales were made last week?
+
+What were the top products sold, based on volume, last quarter?
+
+These questions demonstrate in detail how to structure the query. Once we have the question in mind, we can then consider other items that inform our query design: what data is available, where it is located, how it may need to be processed (e.g., sorted, filtered, or calculated) to get to the answer, and how the output should be organized (e.g., sorted by date).
+
+This design, or model, tells you how to create the query in your software. Once you have created the query in Access, you will need to test it by running it a few times to make sure it returns the values you are looking for. You will likely revise your queries as you test them. Remember that the more complex a query is, the more revision and testing you will need to do.
+
+A query based on your question or need for information contains specific components. In Access, these are as follows:
+
+The name of the query (if you will be saving it), which appears at the top of the query screen
+
+The field in which your data is stored
+
+The table in which the field is located
+
+Sort, which determines the column that will be used to sort the query (e.g., in numerical order by product ID)
+
+Criteria (text that can be used to limit the results of a query)
+
+Or, which allows you to create more complex statements
+
+When you create a query in Access through the Query Wizard (), these areas will be filled in by the wizard. If you need to modify a query or want to create one without using the wizard, you will use the query grid to set up the query. You learn more about this later in the section on Editing Queries with the QBE Grid and in the chapter on Advanced Database Use.
+
+Using these areas of the query allows you to accomplish multiple tasks, including choosing the data you want to include, omitting data that is not of interest to you, sorting data, and even combining data from multiple tables.
+
+Running a Simple Query
+
+A simple query is one that finds and displays information. Very simple queries may show all the data in the database, in columns, or all the information in one specific field or column. Once a query has been created and saved, you can run the query whenever it is needed to return the updated results. Each saved query has a name associated with it, and typically these names follow a specific pattern that helps you to differentiate between them. For example, a version of a customer list sorted by last name and the same list sorted by state would be named qryCustomerLastNameState.
+
+In the Access database with queries, you will see a list of saved queries in the navigation section of your database. For example, in the database shown in , you can see four queries under the Queries heading: ProductCategoryList, ProductList with client information, ProductsACTIVE, and ProductsALL. These simple queries are already created; to run them, simply double-click on the name of the query you want.
+
+Once you double-click on a query name, it will open and show you the results table. The query will generate updated results every time it is opened, allowing users to use a simple query over and over, even as data is refreshed in your database.
+
+When queries—or any database objects—are open, you will see the name of the object on a tab above your work area. To close a query, click on the X to the right of the object’s name.
+
+Switching Views
+
+Access can switch between the Design View of the query and the results of the query. For queries, you will frequently change views to move back and forth between the underlying query structure and the results of running the query. When you look at the structure in Layout View, you can modify how the query works. When you go to SQL View, you are also able to modify the query structure (see ).
+
+To change views, first click on the View command on the ribbon, and then choose the view you would like to see. You can choose from three views:
+Datasheet View shows you the results of the query in table form.
+SQL View shows the query in structured query language form.
+Design View shows the query in the form of a QBE (query by example) grid.
+
+Using these views, you can see your query in multiple ways, first visualizing the query and then seeing the results quickly.
+
+Query Walkthrough
+
+In today’s fast-paced business landscape, staying ahead of the competition requires a deep understanding of your products and their performance. WorldCorp’s state-of-the-art sales and marketing database is designed to maximize their sales potential. At the core of this powerful database lies the ability to perform queries that deliver invaluable insights. A query in WorldCorp’s sales and marketing database returns a list of products, including the product ID code, product category code, and notes (if any are present). Notice that there is only one table, called the Product List, and that all three fields are used in the query.
+
+First, shows the query in Design View. Note that the list is sorted in ascending order based on the product ID. The result of the query is shown in .
+
+Now, let’s look at a query that uses more than one table. In this example, the query returns a list of products with information about wholesalers who have showed interest in those products. Three tables are used:
+
+ProductList: list of products that WorldCorp offers
+
+WholesalerList: list of wholesalers that WorldCorp works with
+
+WholesalerInterestList: table that includes ProductID (from ProductList) and WholesalerID (from WholesalerList)
+
+See that the tables are joined by the fields ProductID and WholesalerID. If you used only the WholesalerInterestList table, you would not be able to display the product category or the wholesaler name—information needed to make the results of the query useful for the sales and marketing team. If you look at the grid in , you will also see that the table uses sorting and an expression (a combination of two fields displayed together). The results are shown in .
+
+Notice that this query combines several different techniques, including the use of multiple tables, sorting, criteria, and even an expression that combines fields in the query (in this case, the wholesaler ID and name). This is just a small demonstration of the power of queries.
+
+Using Data to Make Informed Decisions
+
+Netflix collects and analyzes vast amounts of user data, including viewing history, ratings, and preferences, to drive their content strategy and personalized recommendations. By analyzing this data, Netflix can determine which TV shows and movies are popular among different segments of their user base, make data-driven decisions on content acquisition and production, and provide personalized recommendations that enhance the user experience. This data-driven approach has contributed to Netflix’s success in delivering highly relevant and engaging content to their subscribers.
+
+Netflix also uses data to make informed decisions in other aspects of its business, including the following:
+
+Content acquisition and production: Netflix analyzes viewership data, user preferences, and market trends to help it make informed decisions about acquiring rights to existing content or investing in original content production.
+
+Audience segmentation and targeting: Netflix leverages user data to segment its audience based on viewing habits, preferences, and demographics.
+
+Pricing and packaging strategies: Netflix analyzes data on user subscriptions, engagement levels, and pricing experiments to assess the impact of different pricing and packaging strategies.
+
+User experience and interface design: Netflix utilizes data on user interactions, browsing behavior, and feedback to continuously improve its user interface design and user experience. Netflix runs experiments, conducts A/B tests, and gathers user feedback to refine features, layout, and content presentation, ensuring an intuitive and engaging viewing experience.
+
+Customer service and support: Data analysis helps Netflix identify patterns and trends in customer support interactions, enabling it to improve response times, identify common issues, and enhance customer satisfaction. Netflix can also proactively address potential issues by analyzing data on streaming quality, buffering, and device compatibility.
+
+Using this data-driven approach, Netflix can make informed decisions that drive customer acquisition, retention, and overall business growth, allowing it to stay ahead of the competition, continuously improve service, and deliver a highly personalized and satisfying entertainment experience to millions of subscribers worldwide.
+
+Saving and Closing the Query
+
+The first time you create a query, you need to give it a name. After that, if you modify the query, you will need to save it, and doing so will update the copy you have. To save the query, you can click on the Save icon on the quick access toolbar or use Ctrl+S on the keyboard. Access will also prompt you to save when you close a query that you modified.
+
+If you do not plan on using a query again or if it is extremely straightforward, you may not want to save it, but if you are likely to reuse the query, you will want to give it a descriptive name. It makes sense to create a naming schema that you can continue. For example, if you are querying for a specific project team, you may start with the team name, like ProductTeam, to help you identify the query later on.
+
+Building and Creating Queries
+
+WorldCorp needs to quickly gather data related to sales records of their new health-care product in the market of Southeast Asia. Although you could design a query to gather relevant information from scratch, Access has a convenient wizard that can help you design a suitable query. Wizards are small programs that run within Access to help you set up the objects in your database. A wizard will prompt you to add the information you need. For example, the Query Wizard will ask questions that will help you decide what table (or tables) you want to work with, the fields you will use, and how you will display the output. Once you have created a query with the wizard, you can modify it however you like.
+
+To access the Query Wizard in Access:
+
+Click on the Create menu and locate the command for Query Wizard.
+
+Choose the type of query you want to build. In this case, we choose the Simple Query Wizard, as you can see in , which selects and displays specific records. This is the most commonly used query.
+
+ The Query Wizard can be used to create simple queries, crosstab queries, or queries to find duplicate or unmatched records. (Used with permission from Microsoft)
+
+Use the ≫ button to choose the table or queries and the fields you want to use in the query. You can add from different tables or queries by changing the Table/Queries drop-down menu to choose a different object to work with. When you are finished, click Next to move to the next screen (see ).
+
+ The Query Wizard allows you to select individual fields you want to include in your final query. (Used with permission from Microsoft)
+
+Once you have set up your query, you can name it on the last screen and choose whether you would like to see the results of the query (View Information) or modify the design of the query (Modify Design). Then click Finish to build the query.
+
+ The Query Wizard allows you to title your query before finishing it. (Used with permission from Microsoft)
+
+Editing Queries with the QBE Grid
+
+Once a query is built, you can edit it using the QBE grid, which gives you the ability to look at a query and rearrange, modify, and add to it, as well as the ability to run the query and see the results.
+
+To open a query in the QBE grid, right-click the query in the navigation area of the screen, or to open the query, click on the View command, and choose Design View, as shows.
+
+The QBE grid () allows you to interact with a query visually. It places the elements of the query on screen in order from left to right and gives you the ability to modify the format of the query. You can do the following using the QBE grid:
+
+View, add, or change the tables used in the query
+
+Add or reorder fields
+
+Sort values returned by the field
+
+Choose whether a field is shown in the query (e.g., you may want to sort or use a field but not have it appear in the results)
+
+Add criteria to limit the records returned by the query
+
+Building a Query with the QBE Grid
+
+Although the Query Wizard is a useful tool and a good way to quickly start a query, using the QBE grid gives you more options for building complex queries. The QBE grid consists of a table that makes commands available.
+
+In setting up the query, follow these steps:
+
+Add tables.
+
+Choose fields, one per column header.
+
+Choose the sorting criteria.
+
+Run the criteria to see results.
+
+Return to Layout View to continue working.
+
+To set a sort order, which will control the order of records displayed in the query, follow these steps:
+
+View the query in Design View.
+
+Locate the column you want to sort.
+
+Click on the down arrow in the Sort row and choose the sort order (ascending, descending, or not sorted). By default, the column is not sorted.
+
+You can also set criteria here to control which records are displayed. Criteria are commands that are written using symbols together with a text string that tells Access what you want the query to do. A criterion statement has two parts: the criterion/operator and descriptive text. For example, in the criterion statement
+= 100
+
+the equals sign serves as the operator, and 100 is the descriptor.
+
+There are several different criteria you can use within your queries. Some of the operations (criteria) are displayed in .
+
+Display Criteria
+
+Criterion
+Result
+=
+Returns values that are equal=99 will return all values that are 99
+>
+Returns values that are greater than>99 will return all values greater than 99
+<
+Returns values that are less than<99 will return all values less than 99
+Is null
+Returns records with empty cells (Note: “null” signifies empty, not 0)
+“ ”
+Return records that are an exact match to whatever is between the “ ”
+Like
+Returns records that contain the value between “ ”“Like gp” will return all values containing gp
+Not
+Returns values that do not match the criteria“Not 100” will return all values that are not 100
+Databases can hold hundreds, thousands, and even hundreds of thousands of records. One way to limit the results to what is relevant to your project or to the decision you need to make is to use criteria to limit the data that a query returns. Limiting the results makes it easier for you to work with the data and helps ensure that your decisions are both accurate and effective.
+
+Setting criteria can help you select specific items in an Access database by showing only items that match the criteria you have set in creating the query. Individual criteria can be used in expressions, or statements, that specify values to select or omit.
+
+Using Tables in Queries
+
+The query grid will open with a blank gray area, a blank table across the bottom of your screen, and a window in which you can add tables. To add a table to the screen to work with it, double-click the table name or click and drag it into the gray area ().
+
+You will likely want to work with more than one table at a time, as one of the reasons we use relational databases is to be able to split our data into multiple tables and then combine them as needed, giving us enhanced performance and flexibility. To work with multiple tables, drag them onto the screen or double-click them.
+
+If you have a query open in the QBE grid, you can add tables to the screen by right-clicking anywhere in the table area and choosing the Show Table command.
+
+Joining Tables
+
+Splitting data into tables in a relational database like Access enhances database performance, which is a key issue in working with very large datasets. It also increases flexibility by allowing us to chunk, or separate, our data into smaller sets, which are easier to work with. Splitting up the data also enables us to avoid creating many null (empty) fields. (Imagine using a single spreadsheet to manage all your information—it would not be useful, as it would have too many fields, and many of those fields would be blank.)
+
+When using a relational database to separate data into smaller, ID-focused tables (e.g., a table including only salespersons, another for clients), you need to join these tables based on key fields. In this example, you would likely create a primary key, SalesRepID, on the sales rep table, and then include this same field as a foreign key on the client table. You can then create queries that will join these tables by making sure that Access understands the connection between the fields.
+
+In fact, the ability to create and define relationships between tables is one of the most important functions of a relational database. If you consider a database a set of data tables with relationships between them, Access needs to be able to connect related fields between one table and another. It does so by means of the connection or relationship known as a join.
+
+A primary key, or unique key, is a field that uniquely identifies a record. As with an ID number, no two records can have the same primary key. A foreign key field is a primary key field that appears in another table. We can join foreign keys to primary keys to create a relationship between the two fields.
+
+Recall that a join refers to the relationship between two fields in different tables. Access will create a relationship or join when it sees a primary key field in one table and the same primary key used in another. This is because Access understands that these fields have a relationship.
+
+Joins appear between two fields in two or more tables in the query design screen. They are shown as lines connecting the fields, which represent the relationship between the two tables as a one-to-one, one-to-many, or many-to-many join. Access will create a join automatically when it recognizes the same field in two tables. At times, however, Access will not recognize the relationship, or you may want to relate two fields for the purpose of a specific query. In these instances—when we realize that two fields are related but that Access does not automatically understand this—we can also create joins manually. For example, this happens when different field names apply to the same field: A person may realize that CustomerNumber and CustomerID are the same, but Access likely would not recognize this. In this case, it is our job to add the relationship, letting Access know that these fields should be joined when we perform a query, as and show.
+
+Types of Joins
+
+There are two main types of joins: inner and outer. The type of join controls what data will display when the query runs. In an inner join, Access looks at the common fields and data between the two tables and only displays the matches, omitting any records from either table that do not match. The inner join is the most common type of join and is the default type for Access.
+
+In an outer join, Access looks at the common fields and displays the related (matched) data plus the rest of the records from a single specified table. You can use the Join Properties box to choose which table will have all its records displayed.
+
+As an example of an inner join, the sales and marketing database has a table with client information and a table with sales invoices. Both tables include the field ClientID. These tables are related using the default join type, the inner join.
+
+Suppose the team at WorldCorp needs to see a list of all products with the clients that have purchased them so they can share new sales information appropriately. The tables in include the fields ClientInfo and SalesInvoices.
+
+After looking at what the team actually needs for the process, you decide to add the fields from ClientInfo, including ClientID, ClientName, and ClientMailingAddressAll, and to use two SalesInvoices table fields—ClientID and ProductID—to narrow the results to just the clients who have purchased specific products.
+
+After creating a new query and adding both tables to the grid, you realize that Access did not automatically create the join. You drag ClientID from the Client table to the matching ClientID in the SalesInvoice table. This creates an inner join, which will return only the details for the records that match.
+
+You then add the fields for the query into the query grid. Add the ProductID field first because it should appear first on the screen. Then add the ClientID field, followed by ClientName and ClientMailingAddressAll.
+
+Using these fields, as shows, you created a query that returns a list of each product, followed by the clients that purchased it. By adding ClientID, ClientName, and ClientMailingAddressAll, the team can send the correct mailings to the customers that have purchased these specific products in the past.
+
+Creating Joins
+
+To create a join in Access, you need to have both tables open on the query design screen. With the tables open, click on the field you want to join in one table and drag it to the matching field on the other table. Access will usually create an inner join, displaying only the records that match on both tables.
+
+If you want to display the data differently, you can double-click the join line and change the type of join. To change a join, double-click on the join itself in the query grid. The Join Properties box () will open. In the box, you can change the tables or columns of the join and can also change the type of join relationship. Sometimes it is helpful to modify the join on a dataset to see the results. The Join Properties box is helpful because it gives you a quick reminder of the results you can expect from the join, using the names of your tables.
+
+If you decide you do not want or need a join for any reason, you can click on the join line in the query layout view and click Del on your keyboard. The join will be removed.
+
+Summary
+
+Queries can return data from one or more tables and can sort, limit, or calculate values from tables. SQL is a universal language used for queries; however, it is not necessary in Access.
+
+Access queries can be set up using either the Query Wizard or the QBE grid.
+
+Joins, representing relationships between fields across tables, can be created, changed, or removed.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+Case Exercise
+
+expressions that a database management system uses to limit the results of a query based on matching field values
+view that shows the result of a query in table form
+view that shows a query in the form of a QBE (query by example) grid
+queries used to answer frequently asked qu
+[truncated]

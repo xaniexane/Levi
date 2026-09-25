@@ -1,0 +1,87 @@
+# m00020
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+What-If Analysis
+
+What-If Analysis
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Use Scenario Manager to evaluate different variables
+
+Determine a desired result using Goal Seek
+
+Having a backup plan is helpful when things do not go as expected. The plan offers an alternative course of action to pursue in case the first path does not work out. In business, this practice is called contingency planning, and it is essential for the business to be successful. This planning process can involve investigating alternatives if sales are lower than expected. It can involve planning for the eventual retirement of key personnel in the business. It could also address items such as the long-term strategic direction of the company. The contingency plan is a proactive attempt to anticipate some situations that might be different from your expected course of action and that might negatively impact the success of your business. Having this plan in place certainly does not guarantee that nothing outside of the plan will happen, but it helps a business to deal with specific situations they have identified as well as some degree of uncertainty. You cannot always plan for the unexpected, such as natural disasters or shifts in consumer preferences, but there are some things that you can plan around. For example, the business can have a plan in place in the event sales are lower than expected. This plan could involve budget cuts or enhanced marketing efforts to boost sales.
+
+There is a process to developing a contingency plan for a business. These steps might also be helpful in your personal life as you plan for your future career. The first step is to list the risks or the events that have some uncertainty associated with them. For example, if you are unsure of what the utility costs might be for a new building, that could be a risk for your business. Some areas where a business may experience risks are unplanned issues with time or schedule, cost adjustments, availability of resources, or technical problems. Next, you will need to rank the risks according to the impact to the business. For example, if your business is an e-commerce site, a technical issue that crashes your website would be a significant priority over increased office supply expenses. Next, you need to set a plan for each event that you have identified. Each plan should be detailed enough to provide an alternative course of action for the business. Your business should revisit the contingency plan often and make any adjustments necessary, based on any changes in the business. There are many templates online that can help you with contingency planning in business. Some Excel templates use formatting to make the plan easy to understand and professional so that you can easily share it with others in the company.
+
+Using Scenario Manager
+
+The Scenario Manager tool in Excel provides a way to look quantitatively at contingency planning. It allows the user to change attributes without altering live data to examine the resulting impact on key variables. You can change up to 32 cells and view the results of those changes all at the same time. This feature can be quite helpful for contingency planning. For example, you might already have metrics that identify the best- and worst-case scenarios for sales. Using this range and the Scenario Manager tool, you can look at the impact to the overall profit picture for the business. You could also use the tool for planning your personal finances. You could investigate the impact of increasing your monthly mortgage payment on the time it will take you to pay off the loan. The tool can be instrumental in helping a business navigate multiple courses of action to determine the best approach moving forward. You can also merge the scenarios from a single or multiple worksheets together for more in-depth analysis.
+
+What Is a Scenario?
+
+The Scenario Manager is part of the What-If Analysis tools suite in the Forecast command group. The tool is accessed from the Data tab and is in the Forecast command group ().
+
+A scenario determines the values that Excel will use to change the input cells. You can save different scenarios with different values to view the impact on your target cell(s) at the same time. When you choose Scenario Manager, an input window will appear (). From here, you will set the changing cells that define the scenario and the target cell for the results.
+
+Let’s begin with a simple example of obtaining a home mortgage. The initial mortgage is for $150,000 for 30 years with an interest rate of 5 percent. You want to find a better interest rate and see the impact that rate will have on your payment and the total amount you will pay. Using the PMT (payment) and FV (future value) functions from the Function Library, you can quickly determine the status of the loan (). With these values at the current rate of 5 percent, you will pay just over $800 per month and at the end of the life of the loan, you will have paid nearly $260,000. The functions by default return a negative number for the results, as indicated by the parentheses and the red font color. You will need to adjust the equation to convert the number to a positive number. You can either put a “-” in front of the function or use the ABS function at the beginning of the formula to use the absolute value of the number. You can use the Scenario Manager to investigate different interest rates and different payment terms if you decide you want to pay the loan over 15 years or a time frame other than the standard 30-year mortgage term. You will use the same mortgage example to investigate different levels for the interest rate and repayment terms.
+
+Adding and Deleting a Scenario
+
+Using the mortgage example, you can create a scenario to look at the impact of lowering the interest rate on both the payment and the total amount paid for the loan. First, to add a scenario, go to the Data tab, choose What-If Analysis, and select Scenario Manager. Click Add and the Add Scenario dialog box will appear (). Here, you will define the changing cells and name the scenario. You can name this scenario “rate changes.”
+
+Next, select the cell you want to change. To change the rate, you would select cell A3. The Scenario Manager does allow you to add more than one cell in the scenario. In this example, you will also change the length of time for the loan. Select A3:B3 for Changing cells. You can add comments if desired to explain the scenario, such as details about the reason for the selected ranges and other relevant information. Then, click OK. Next, you will define the levels or range of values that Excel will use to change the value in cells A3 and B3. Assume you want to compare the impact of a rate higher than the original 5 percent and a loan term shorter than the original 360 months to the impact of a lower rate and longer loan term (). Add two separate scenarios at the various levels for each cell, A3 and B3. Click OK. This will take you back to the Scenario Manager window. Add the other scenario in the same way.
+
+Notice that you have two scenarios listed in the Scenario Manager ().
+
+There are a couple of options at this point. If you want to see the results from either scenario on the spreadsheet, click the appropriate scenario in the list and click Show. This will change the value in the spreadsheet, but only for one scenario at a time. If you choose Summary, the Scenario Manager will compile the information for all the scenarios in the list in a clear table on a separate worksheet so that you can compare the results (). You can then format and adjust the table to fit your needs. One other functionality of the Scenario Manager is that it can merge scenarios from other worksheets into a single worksheet using the Merge button.
+
+To delete a scenario, go to the Scenario Manager and select the scenario you want to delete from the list and choose Delete. If you have created a scenario summary table, the table will remain even if you delete the scenario. If you instead selected Show and the scenario is displayed on the spreadsheet, the numbers will not revert to the original values even if you delete the scenario. Rather, you will lose your original data. For this reason, it is generally better to use the Scenario Summary rather than the Show option.
+
+Personal Budgeting
+
+You’ve learned that Excel can be a helpful tool for managing your personal finances. It can also be a handy tool to help you plan for future purchases and accumulate savings for retirement. Take a look at this article to see how the Scenario Manager can help with budgeting your personal finances. Let’s use the Scenario Manager to save for a vacation. You will need to investigate the cost of the vacation—for instance, factor in all costs associated with the travel (flight, hotel, food, etc.). Ideally, you will want to compare more than one cost associated with the vacation—perhaps you are comparing hotels, or flights, or even another destination altogether. Then, determine what your sources of income might be. You will use the Scenario Manager to determine the costs of the vacation by comparing the different vacation options using your budget information.
+
+Think about the following:
+
+How can the Scenario Manager tool be used to help you reach your goals?
+
+What assumptions did you need to make in order to establish your budget?
+
+Editing a Scenario
+
+To edit a scenario, open the Scenario Manager, select the scenario you want to edit, and choose Edit on the right of the window. This will open the initial scenario window. You can make changes to the target cells, comments, or name of the scenario. Then, click OK. You will be prompted to adjust the values if desired. Then, click OK. You will need to run the Summary again to see the updated results based on the changes you made.
+
+Using Goal Seek
+
+Goal Seek is another tool in the What-If Analysis group. It is like Solver but restricted to a single input variable. The Goal Seek tool allows you to select a target cell and value for that cell by changing another cell that contains a formula. For example, Goal Seek could determine how much money you need to set aside to reach your retirement fund goal. It could also determine the mortgage interest rate needed to keep a monthly payment within your budget. In a small business, this tool can help when considering a purchase of equipment or property for the business. In this case, the duration and the total amount of the loan are typically known. Goal Seek can investigate financing options to get the monthly installment payment within budget. Conversely, Goal Seek can determine how much in total a person or business can afford for a loan based on a set interest rate and length of the loan.
+
+To begin, open the spreadsheet with the information needed for your analysis or create a new one. Using the mortgage example, suppose you would like to determine what value of home you can afford. Most mortgages have a term of 30 years (360 months), and you are planning on a 5 percent interest rate. You would like a monthly payment not to exceed $850. The Goal Seek tool can determine the loan amount that will keep the mortgage payment within your budget. Go to the Data tab, click on the drop-down arrow next to What-If Analysis, and choose Goal Seek (). Notice the input window has three arguments: Set cell, To value, and By changing cell.
+
+In this example, type $D$3 in the Set cell field, 850 in the To value field, and $C$3 in the By changing cell field (loan amount). Click OK (). The result will display in the window if Excel found a solution.
+
+Your budgeted monthly payment of $850 will allow you to afford a home that is approximately $158,000. The result window also provides the target value (850) and current value ($850.00) for the solution. When you click OK, Excel retains the solution in the spreadsheet. If you want the values to return to their original numbers, click Cancel instead. You can use the tool to examine various options, such as the price you could afford if you increased your monthly payment to $900. This tool provides information for data analysis and contingency planning when you are focused on one input variable, but it is limited in its use for in-depth planning and analysis.
+
+Summary
+
+Scenario Manager and Goal Seek are part of the What-If Analysis tool group.
+
+The Scenario Manager is a tool that allows you to investigate the impact of various changes to input cells on target cells.
+
+The Scenario Manager can give you a summary of all scenarios to help with decision making.
+
+Goal Seek is used when you have a single input variable.
+
+Goal Seek is used to set a target value for a cell by changing the values in another cell.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises

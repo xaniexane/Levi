@@ -1,0 +1,180 @@
+# m00084
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Microsoft Access: Main Features and Navigation
+
+Microsoft Access: Main Features and Navigation
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Demonstrate navigation of the Microsoft Access screen interface
+
+Identify the main features of Access
+
+Understand how to close Access
+
+The benefit of Microsoft Access is that its design and structure enable it to communicate with other systems that hold data. Unlike larger database systems that run on dedicated servers, Access runs on a regular desktop computer. Because it is a desktop database system, the user can work within the database without connecting to those larger systems.
+
+As a Microsoft software package, Access follows many of the conventions of Microsoft Office. This provides a consistent, familiar interface for work and ensures that file transfer is seamless between Microsoft Office software, for example, between Access and Excel.
+
+What Is Access?
+
+Access is a RDBMS that can import and manipulate data from other systems on your desktop computer. While data science professionals work directly with the data warehouse and can create queries using programming languages such as R and Python, individuals who need to analyze data as part of their jobs within a department often find Access to be a user-friendly software package that has the power to access, retrieve, and report data using a Microsoft interface. Access also integrates well with Microsoft Excel, providing even more analytical and reporting power that can inform decision-making.
+
+In small businesses and organizations, Access can act as the main data store; however, it is much more likely that you will use data that is collected and stored in other systems and then imported into Access for analysis.
+
+The Role of Access in an Organization
+
+Access is one of the many tools that make up an organization’s data landscape—the entirety of data storage and sharing in an organization. An organization may have both production databases and analytical databases.
+
+Production databases are systems that handle daily transactions related to an organization’s core business functions, such as sales, inventory, human resources, payroll, and purchasing. Because production databases provide value to the organization, companies devote significant resources to ensure they remain online and active. Companies do not work directly with a production system when analyzing a business because this may interfere with regular operations for customer transactions; instead, companies use a data warehouse or analytical database for building new applications or testing new features. This type of database is entirely separate from the production database, so changes to the analytical database will not modify the production database until the developer is ready to push the changes to the production database after thorough testing.
+
+Analytical databases (data warehouses) serve as an organization’s single point of truth (SPOT) in which a primary copy of a data element is stored. Changes made to a data element outside of the data warehouse are not considered final until the primary data element in the data warehouse is also updated. These large databases contain a vast number of records, each of which stores historical information about the organization itself. A data warehouse is not a production system; rather, it is filled with data from the production system, collected over time and organized in a way that makes retrieval and use easier for business use. We can request information from the data warehouse, which is then exported to a file we can use in our analytical software, such as Access or Excel. The ultimate goal of using data is to make good decisions based on the data and not on emotions.
+
+An organization’s data landscape can also contain numerous flat files held within teams and workgroups, other systems that run on databases that should be connected to the data warehouse, and even information from vendors and public sources that can inform data. The data landscape may include information scraped from the web, downloaded and processed from public sources, and environmental data. The extent of an organization’s data landscape is based on the size and role of the company; larger companies will often have more complex data landscapes, as will organizations that are undergoing digital transformation and either have or are building a core platform for all business functions.
+
+Access and Excel
+
+Access and Excel are both software packages in Microsoft Office. They are complementary: Although they have some functions in common, each package is designed for specific uses. Sometimes, the overlap or commonalities between them can make it difficult to know which is most useful. Both Access and Excel can store large amounts of data, run powerful queries, use analysis tools to manipulate data, and perform complex calculations. However, each software has its own strengths, and choosing the right software will make your work easier, as outlines.
+
+Choosing Excel or Access
+
+Use Excel to:
+Use Access when you:
+Analyze a specific dataset
+Need to track and record data regularly
+Perform complex numerical calculations
+Need to ensure data integrity
+Work with a table for calculations
+Expect data to be accessed by multiple users
+Perform what-if analysis to run scenarios
+Store data in multiple tables
+Create advanced pivot tables and charts
+Need to connect to other data sources to refresh data (either manually or on a schedule)
+Create visualizations
+Secure data at the user level (each user can have different roles and access to specific data)
+Access and Excel can be used together. It is possible to move data from the data warehouse to Access and then, as necessary, query and export data from Access to Excel for further analysis and visualization. Transferring data from one program to another is one of the benefits of using a desktop database program; as part of the Microsoft suite of products, both Access and Excel can communicate effectively, so users can also import flat files from Excel and convert them to relational tables.
+
+Features of Access
+
+Access is a cost-effective database solution. It runs on a desktop computer and provides an easy-to-use interface that is familiar to users of other Microsoft software. Access interacts well with Excel for deeper analysis, with Word for reporting, and with PowerPoint for presentations. It can work with data from external sources, such as a data warehouse, or with exported files from the web and other systems.
+
+Microsoft Access:
+
+Creates the framework or structure to store small bits of information (data) in a database
+
+Allows users to open tables and scroll through records
+
+Provides an easy-to-use interface for adding, modifying, and retrieving records
+
+Has a process for creating queries to select, combine, and calculate data from multiple tables
+
+Provides user-friendly screens and support for creating queries, forms, and reports that allow access and use of the data held in the database
+
+One difference between Access and other Microsoft 365 software is in its introduction or opening screens. Access loads one database at a time, and all screens focus on the open database. When you first open Access, the screen will be blank, until you load a database. Once loaded, the screen shows all available commands.
+
+As you move through Access, different commands will become available based on the active objects. For example, you will see different commands when working in tables versus working with queries. The main working area in Access is the center of the screen, with navigation on the left and commands across the top.
+
+The Opening Screen
+
+When Access is open without a database, most commands either do not appear or are unavailable (grayed out). Without a database, the software is inactive. When a database is open on the screen, you will see commands available on the ribbon along the top () and a navigation area along the left edge of your screen (). Only one database can be open at a time in Access, and all software is focused on supporting your open database.
+
+As you click through the ribbon, notice that some commands are not available unless you have specific database objects open, and you can move between objects in your database by using the navigation area on the left side of your database screen.
+
+Although there are many different database software programs in use, most of them have the same parts. Access, as a RDBMS, follows the typical database conventions, or standards, in use in all relational database systems.
+
+You can think of Access as a container that holds database objects, which, recall, are items in a relational database. Each object plays a role in managing the database and the data it stores. Because the database is electronic, it can grow to hold many objects and can create links and new uses for each over time.
+
+Like many databases, Access databases usually contain tables, forms, reports, and queries. (They can also contain macros and modules, which you will learn about in Advanced Database Use.)
+
+Locating and Opening Database Objects
+
+Once you open the database or the container that holds database the object, you will see a navigation area open on the left side of the screen. This area has headings for each type of object that is present in the database, followed by the names of each object you have. To open any object, double-click on its name, and it will open in the main work area on the right side of the screen (). To close an object, click on the X next to the name of the object.
+
+Tables
+
+Tables hold the data in a database. One database can contain many tables, each of which holds a different record (or set of related information) or parts of a record. One benefit of a relational database is its ability to split large sets of information about a specific item, person, or idea over multiple tables. This action speeds up processing and gives the database a better organizational structure.
+
+As you learned in What Is a Database?, tables are built with rows and columns. The rows of a table consist of individual records or lines of related data. The columns represent fields or headings referring to information that is likely to be included in all the records. This structure, which characterizes all relational databases, makes it possible to share datasets between different database software packages. An example of table structure is presented in .
+
+Table Structure
+
+ID
+FirstName
+LastName
+MiddleInitial
+1234
+Mary
+Nanas
+A
+2345
+Jose
+Garcia
+I
+3456
+Andre
+Williams
+C
+4567
+Lisa
+Estrich
+J
+5678
+Pat
+Johnson
+E
+6789
+Stevie
+Larose
+Y
+This small table contains four fields—ID, FirstName, LastName, MiddleInitial—and six records, which contain the information for each field for six different employees.
+
+Queries
+
+Queries are a way of asking questions of a dataset. Recall that a query is a structured request for information, allowing you to choose what information appears, the order in which it appears, and how it is organized. Queries can also be used to calculate information based on fields. Typically, when you interact with the database, you will be creating queries to satisfy business requirements.
+
+Like other database objects, queries appear in the navigation area of the database. To open a query, double-click it, and it will appear in the work area of your screen. In Access, you can change how you view a query, choosing either Datasheet View, which shows the results of the query in table form, or Design View, which shows the structure of the query and allows you to modify it. You will learn more about these views in Querying a Database.
+
+Reports
+
+A report shows the results of a query, formatted in a business-friendly way. Creating a report allows you to choose the precise information you want to include and the format in which you would like your audience to view it. Since tables and queries typically return results in the form of tables, reports allow you to focus on the message your audience will need for decision-making, not on the data. One advantage of creating reports is that you can set up standard reports that you will need to run frequently (e.g., a report of sales totals) and then open them and view the latest results as often as necessary.
+
+Like other objects, reports in Access can be created in a Wizard that walks you through the basics, and then you can adjust the report in Design View. Building a useful report can take time and care to ensure it summarizes and displays information in an actionable way that supports the work group’s goals.
+
+Forms
+
+Recall that a form in a database allows users to work with records in an easy-to-use format. Forms limit the individual’s view of the database to what is necessary for a specific task or information request. On most websites, we interact with forms that are built on the basis of queries: They request and present data taken from the underlying table and query structure. Forms are often based on predefined queries that run over and over again and, as with a search for a product, may prompt the user for a response.
+
+Forms appear in the navigation area of the database and can be opened in Layout or Design View, which allows you to modify the form itself (), or in Form View (ready for use) ().
+
+Sometimes the best way to learn is to explore on your own. Visit Microsoft’s featured Access templates page to choose a template and then download, open, and explore it in Access.
+
+Closing Databases
+
+In Access, only one database can be open at a time. As you work, all on-screen commands will focus on this open database, and you will need to close the database itself to end your working session. When you are ready to close the database, Access will either save objects automatically or prompt you to save objects before closing. In general, Access will automatically save records when you are done with them (i.e., when you leave the row) but will prompt you to save changes to objects, such as tables and queries, so you can decide whether you want to save them.
+
+If you want to make sure an object is saved in Access before you close the database, you can use any typical Save command shortcut (e.g., File>Save, Ctrl+S) to request that Access save your changes. Access will prompt you if you need to take any additional steps.
+
+When you are done working with your database, click on File>Close to close all objects and exit the Access software. Be sure to close your database every time you are done using it; this will ensure that all objects are closed and that data is correctly written to the records within the database.
+
+Summary
+
+Access is a relational database management system that can work with other systems.
+
+Access contains typical database objects such as tables, queries, forms, and reports.
+
+Closing and saving your work in Access is an important process, as only one database can be open at a time.
+
+Review Questins
+
+Written Questions
+
+Practice Exercises
+
+the entirety of data storage and sharing in an organization
+the idea that there is one place storing information that all business units agree is factual

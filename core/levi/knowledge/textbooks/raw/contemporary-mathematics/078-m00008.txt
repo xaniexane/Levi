@@ -1,0 +1,101 @@
+# m00008
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Applications of the Normal Distribution
+
+Applications of the Normal Distribution
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Apply the normal distribution to real-world scenarios.
+
+As we saw in The Normal Distribution, the word “standardized” is closely associated with the normal distribution. This is why tests like college entrance exams, state achievement tests for K–12 students, and Advanced Placement tests are often called “standardized tests”: scores are assigned in a way that forces them to follow a normal distribution, with a mean and standard deviation that are consistent from year to year. Standardization also allows people like college admissions officers to directly compare an applicant who took the ACT (a college entrance exam) to an applicant who instead chose to take the SAT (a different college entrance exam). Standardization allows us to compare individuals from different groups; this is among the most important applications of the normal distribution. We’ll explore this and other real-world uses of the normal distribution in this section.
+
+College Entrance Exams
+
+There are two good ways to compare two data values from different groups: using z-scores and using percentiles. The two methods will always give consistent results (meaning that we won’t find, for example, that the first value is better using z-scores but the second value is better using percentiles), so use whichever method is more comfortable for you.
+
+Evaluating College Entrance Exam Scores
+
+According to the Digest of Education Statistics, composite scores on the SAT have mean 1060 and standard deviation 195, while composite scores on the ACT have mean 21 and standard deviation 5.
+
+At what percentile would an SAT score of 990 fall?
+
+What is the z-score of an ACT score of 27?
+
+Which is better: a score of 1450 on the SAT or 29 on the ACT?
+
+Using Google Sheets, we can answer this question with the formula “=NORM.DIST(990, 1060, 195, TRUE)”. A score of 990 would fall at the 36th percentile.
+
+Using the formula z=x-µs, we get z=27-215=1.2.
+Let’s compare the values using both percentiles and z-values:
+ Percentiles: Using “=NORM.DIST(1450, 1060, 195, TRUE)” we find that an SAT score of 1450 is at the 98th percentile. Meanwhile, by entering “=NORM.DIST(29, 21, 5, TRUE)” we see that an ACT score of 29 is around the 95th percentile. Since it’s at a higher percentile, we can conclude that an SAT score of 1450 is better than an ACT score of 29.
+ z-scores: Using the formula, we see that the z-score for an SAT score of 1450 is z=1450-1060195=2, while the z-score for an ACT score of 29 is z=29-215=1.6. Since it has a higher z-score, an SAT score of 1450 is better than an ACT score of 29.
+
+Let’s compare the values using both percentiles and z-values:
+Percentiles: Using “=NORM.DIST(1450, 1060, 195, TRUE)” we find that an SAT score of 1450 is at the 98th percentile. Meanwhile, by entering “=NORM.DIST(29, 21, 5, TRUE)” we see that an ACT score of 29 is around the 95th percentile. Since it’s at a higher percentile, we can conclude that an SAT score of 1450 is better than an ACT score of 29.
+z-scores: Using the formula, we see that the z-score for an SAT score of 1450 is z=1450-1060195=2, while the z-score for an ACT score of 29 is z=29-215=1.6. Since it has a higher z-score, an SAT score of 1450 is better than an ACT score of 29.
+
+Coin flipping
+
+In the opening of The Normal Distribution, we saw that the number of heads we get when we flip a coin 100 times is distributed normally. It can be shown that if n is the number of flips, then the mean of that distribution is n2 and the standard deviation is n2 (as long as n≥20). So, for 100 flips, the mean of the distribution is 50 and the standard deviation is 5.
+ In that opening example, one of our early runs gave us 70 heads in 100 flips, which we noted seemed unusual. Using the normal distribution, we can identify exactly how unusual that really is. Using Google Sheets, the formula “=NORM.DIST(70, 50, 5, TRUE)” gives us 0.999968, which is the 99.997th percentile! How is that useful? Suppose you need to test whether a coin is fair, and so you flip it 100 times. While we might be suspicious if we get 70 heads out of the 100 flips, we now have a numerical measure for how unusual that is: If the coin were fair, we would expect to see 70 heads (or more) only 100-99.9968=0.0032% of the time. That’s really unlikely! Analysis like this is related to hypothesis testing, an important application of statistics in the sciences and social sciences.
+
+Flipping a Coin
+
+Let’s say we flip a coin 64 times and count the number of heads.
+
+What would be the mean of the corresponding distribution?
+
+What would be the standard deviation of the corresponding distribution?
+
+Suppose we got 25 heads, which seems a little low. At what percentile would 25 heads fall?
+
+Since n=64, the mean is 642=32.
+
+Again using n=64, we get a standard deviation of 642=4.
+
+Using “=NORM.DIST(25, 32, 4, TRUE)”, we see that 25 heads is at the 4th percentile. Reading and Interpreting Scatter Plots
+
+Analyzing Data That Are Normally Distributed
+
+Whenever we’re working with a dataset that has a distribution that looks symmetric and bell-shaped, we can use techniques associated with the normal distribution to analyze the data.
+
+Using Normal Techniques to Analyze Data
+
+The data in “AvgSAT” contains the average SAT score for students attending every institution of higher learning in the United States for which data is available. In , we created a histogram for these data:
+
+ (data source: https://data.ed.gov)
+
+This distribution is fairly symmetric (it’s just a little right-skewed) and bell-shaped, so we can use normal distribution techniques to analyze the data.
+
+What is the mean of these average SAT scores?
+
+What is the standard deviation of these SAT scores?
+
+Using the answers to the previous two questions, use NORM.DIST in Google Sheets to estimate at what percentile the University at Buffalo in New York (average SAT: 1250) falls.
+
+Use PERCENTRANK to find the actual percentile of the University at Buffalo, and see how close the estimate in the previous question came.
+
+Using the AVERAGE function in Google Sheets, we find that the mean is 1141.174.
+
+Using the STDEV function, we get that the standard deviation is 125.517.
+
+Entering “=NORM.DIST(1250, 1141, 125.517, TRUE)” into Google Sheets, we estimate that the University at Buffalo is at the 81st percentile.
+
+Using PERCENTRANK, we find that the actual percentile is the 84th. These are close!
+
+Political Meddling Exposed
+
+The normal distribution pops up in some unusual places. Recently, a team at Duke University has been using statistics to help identify partisan gerrymandering, where electoral districts have been carefully drawn in a way that benefits one political party over another. In their analysis, they found that hypothetical election results in randomly drawn districts are normally distributed. By using techniques similar to the ones we used above, they can quantify precisely how biased a particular electoral map is by finding the percentile rank of the actual election result on the normal distribution of the hypothetical results. You can find out more about their work at the "Quantifying Gerrymandering" site here.
+
+Check Your Understanding
+
+Key Concepts
+
+We can use z-scores to compare data values from different datasets.

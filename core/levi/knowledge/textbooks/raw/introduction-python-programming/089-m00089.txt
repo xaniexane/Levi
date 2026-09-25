@@ -1,0 +1,66 @@
+# m00089
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Simple math recursion
+
+Simple math recursion
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify a recursive case and a base case in a recursive algorithm.
+
+Demonstrate how to compute a recursive solution for the factorial function.
+
+Calculating a factorial
+
+The factorial of a positive integer is defined as the product of the integer and the positive integers less than the integer.
+
+Ex: 5! = 5 * 4 * 3 * 2 * 1
+
+Written as a general equation for a positive integer n: n! = n * (n - 1) * (n - 2) * . . . * 1
+
+The above formula for the factorial of n results in a recursive formula:
+ n! = n * (n - 1)!
+
+Thus, the factorial of n depends upon the value of the factorial at n - 1. The factorial of n can be found by repeating the factorial of n - 1 until (n - 1)! = 1! (we know that 1! = 1). This result can be used to build the overall solution as seen in the animation below.
+
+Finding the factorial of 5
+
+Recognizing recursion
+
+Can the following algorithms be written recursively?
+
+Defining a recursive function
+
+Recursive algorithms are written in Python as functions. In a recursive function different actions are performed according to the input parameter value. A critical part of a recursive function is that the function must call itself.
+
+A value for which the recursion applies is called the recursive case. In the recursive case, the function calls itself with a smaller portion of the input parameter. Ex: In the recursive function factorial(), the initial parameter is an integer n. In the function's recursive case, the argument passed to factorial() is n - 1, which is smaller than n.
+
+A value of n for which the solution is known is called the base case. The base case stops the recursion. A recursive algorithm must include a base case; otherwise, the algorithm may result in an infinite computation.
+
+To calculate a factorial, a recursive function, factorial() is defined with an integer input parameter, n. When n > 1, the recursive case applies. The factorial() calls itself with a smaller argument, n - 1. When n == 1, the solution is known because 1! is 1; therefore, n == 1 is a base case.
+
+Note: 0! is defined to be 1; therefore, n == 0 is a second base case for factorial(). When n < 1, an error is returned.
+
+Factorial using recursion
+
+Programming recursion
+
+For the questions below, the function rec_fact() is another recursive function that calculates a factorial. What is the result of each definition of rec_fact() if n = 17 is the initial input parameter?
+
+Recursive summation
+
+Write a program that uses a recursive function to calculate the summation of numbers from 0 to a user specified positive integer n.
+
+Digits
+
+Write a program that computes the sum of the digits of a positive integer using recursion.
+
+Ex: The sum of the digits of 6721 is 16.
+
+Hint: There are 10 base cases, which can be checked easily with the right condition.

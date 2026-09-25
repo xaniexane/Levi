@@ -1,0 +1,254 @@
+# m58373
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Standing Waves and Resonance
+
+Standing Waves and Resonance
+
+By the end of this section, you will be able to:
+
+Describe standing waves and explain how they are produced
+
+Describe the modes of a standing wave on a string
+
+Provide examples of standing waves beyond the waves on a string
+
+Throughout this chapter, we have been studying traveling waves, or waves that transport energy from one place to another. Under certain conditions, waves can bounce back and forth through a particular region, effectively becoming stationary. These are called standing waves.
+
+Another related effect is known as resonance. In Oscillations, we defined resonance as a phenomenon in which a small-amplitude driving force could produce large-amplitude motion. Think of a child on a swing, which can be modeled as a physical pendulum. Relatively small-amplitude pushes by a parent can produce large-amplitude swings. Sometimes this resonance is good—for example, when producing music with a stringed instrument. At other times, the effects can be devastating, such as the collapse of a building during an earthquake. In the case of standing waves, the relatively large amplitude standing waves are produced by the superposition of smaller amplitude component waves.
+
+Standing Waves
+
+Sometimes waves do not seem to move; rather, they just vibrate in place. You can see unmoving waves on the surface of a glass of milk in a refrigerator, for example. Vibrations from the refrigerator motor create waves on the milk that oscillate up and down but do not seem to move across the surface. shows an experiment you can try at home. Take a bowl of milk and place it on a common box fan. Vibrations from the fan will produce circular standing waves in the milk. The waves are visible in the photo due to the reflection from a lamp. These waves are formed by the superposition of two or more traveling waves, such as illustrated in for two identical waves moving in opposite directions. The waves move through each other with their disturbances adding as they go by. If the two waves have the same amplitude and wavelength, then they alternate between constructive and destructive interference. The resultant looks like a wave standing in place and, thus, is called a standing wave.
+
+Consider two identical waves that move in opposite directions. The first wave has a wave function of y1(x,t)=Asin(kx−ωt) and the second wave has a wave function y2(x,t)=Asin(kx+ωt). The waves interfere and form a resultant wave
+
+This can be simplified using the trigonometric identity
+
+where α=kx and β=ωt, giving us
+
+which simplifies to
+
+Notice that the resultant wave is a sine wave that is a function only of position, multiplied by a cosine function that is a function only of time. Graphs of y(x,t) as a function of x for various times are shown in . The red wave moves in the negative x-direction, the blue wave moves in the positive x-direction, and the black wave is the sum of the two waves. As the red and blue waves move through each other, they move in and out of constructive interference and destructive interference.
+
+Initially, at time t=0, the two waves are in phase, and the result is a wave that is twice the amplitude of the individual waves. The waves are also in phase at the time t=T2. In fact, the waves are in phase at any integer multiple of half of a period:
+
+At other times, the two waves are 180°(πradians) out of phase, and the resulting wave is equal to zero. This happens at
+
+Notice that some x-positions of the resultant wave are always zero no matter what the phase relationship is. These positions are called nodes. Where do the nodes occur? Consider the solution to the sum of the two waves
+
+Finding the positions where the sine function equals zero provides the positions of the nodes.
+
+There are also positions where y oscillates between y=±A. These are the antinodes. We can find them by considering which values of x result in sin(kx)=±1.
+
+What results is a standing wave as shown in , which shows snapshots of the resulting wave of two identical waves moving in opposite directions. The resulting wave appears to be a sine wave with nodes at integer multiples of half wavelengths. The antinodes oscillate between y=±2A due to the cosine term, cos(ωt), which oscillates between ±1.
+
+The resultant wave appears to be standing still, with no apparent movement in the x-direction, although it is composed of one wave function moving in the positive, whereas the second wave is moving in the negative x-direction. shows various snapshots of the resulting wave. The nodes are marked with red dots while the antinodes are marked with blue dots.
+
+A common example of standing waves are the waves produced by stringed musical instruments. When the string is plucked, pulses travel along the string in opposite directions. The ends of the strings are fixed in place, so nodes appear at the ends of the strings—the boundary conditions of the system, regulating the resonant frequencies in the strings. The resonance produced on a string instrument can be modeled in a physics lab using the apparatus shown in .
+
+The lab setup shows a string attached to a string vibrator, which oscillates the string with an adjustable frequency f. The other end of the string passes over a frictionless pulley and is tied to a hanging mass. The magnitude of the tension in the string is equal to the weight of the hanging mass. The string has a constant linear density (mass per length) μ and the speed at which a wave travels down the string equals v=FTμ=mgμ . The symmetrical boundary conditions (a node at each end) dictate the possible frequencies that can excite standing waves. Starting from a frequency of zero and slowly increasing the frequency, the first mode n=1 appears as shown in . The first mode, also called the fundamental mode or the first harmonic, shows half of a wavelength has formed, so the wavelength is equal to twice the length between the nodes λ1=2L. The fundamental frequency, or first harmonic frequency, that drives this mode is
+
+where the speed of the wave is v=FTμ. Keeping the tension constant and increasing the frequency leads to the second harmonic or the n=2 mode. This mode is a full wavelength λ2=L and the frequency is twice the fundamental frequency:
+
+The next two modes, or the third and fourth harmonics, have wavelengths of λ3=23L and λ4=24L, driven by frequencies of f3=3v2L=3f1 and f4=4v2L=4f1. All frequencies above the frequency f1 are known as the overtones. The equations for the wavelength and the frequency can be summarized as:
+
+The standing wave patterns that are possible for a string, the first four of which are shown in , are known as the normal modes, with frequencies known as the normal frequencies. In summary, the first frequency to produce a normal mode is called the fundamental frequency (or first harmonic). Any frequencies above the fundamental frequency are overtones. The second frequency of the n=2 normal mode of the string is the first overtone (or second harmonic). The frequency of the n=3 normal mode is the second overtone (or third harmonic) and so on.
+
+The solutions shown as and are for a string with the boundary condition of a node on each end. When the boundary condition on either side is the same, the system is said to have symmetric boundary conditions. and are good for any symmetric boundary conditions, that is, nodes at both ends or antinodes at both ends.
+Standing Waves on a String
+Consider a string of L=2.00m. attached to an adjustable-frequency string vibrator as shown in . The waves produced by the vibrator travel down the string and are reflected by the fixed boundary condition at the pulley. The string, which has a linear mass density of μ=0.006kg/m, is passed over a frictionless pulley of a negligible mass, and the tension is provided by a 2.00-kg hanging mass. (a) What is the velocity of the waves on the string? (b) Draw a sketch of the first three normal modes of the standing waves that can be produced on the string and label each with the wavelength. (c) List the frequencies that the string vibrator must be tuned to in order to produce the first three normal modes of the standing waves.
+
+Standing Waves on a String
+Strategy
+
+Strategy
+
+The velocity of the wave can be found using v=FTμ. The tension is provided by the weight of the hanging mass.
+
+The standing waves will depend on the boundary conditions. There must be a node at each end. The first mode will be one half of a wave. The second can be found by adding a half wavelength. That is the shortest length that will result in a node at the boundaries. For example, adding one quarter of a wavelength will result in an antinode at the boundary and is not a mode which would satisfy the boundary conditions. This is shown in .
+
+Since the wave speed velocity is the wavelength times the frequency, the frequency is wave speed divided by the wavelength.
+
+(a) The figure represents the second mode of the string that satisfies the boundary conditions of a node at each end of the string. (b)This figure could not possibly be a normal mode on the string because it does not satisfy the boundary conditions. There is a node on one end, but an antinode on the other.
+Solution
+
+Solution
+
+Begin with the velocity of a wave on a string. The tension is equal to the weight of the hanging mass. The linear mass density and mass of the hanging mass are given:
+v=FTμ=mgμ=2kg(9.8ms)0.006kgm=57.15m/s.
+
+The first normal mode that has a node on each end is a half wavelength. The next two modes are found by adding a half of a wavelength.
+
+The frequencies of the first three modes are found by using f=vwλ.
+f1=vwλ1=57.15m/s4.00m=14.29Hzf2=vwλ2=57.15m/s2.00m=28.58Hzf3=vwλ3=57.15m/s1.333m=42.87Hz
+Significance
+The three standing modes in this example were produced by maintaining the tension in the string and adjusting the driving frequency. Keeping the tension in the string constant results in a constant velocity. The same modes could have been produced by keeping the frequency constant and adjusting the speed of the wave in the string (by changing the hanging mass.)
+
+Significance
+
+Engage the Phet simulation below to play with a 1D or 2D system of coupled mass-spring oscillators. Vary the number of masses, set the initial conditions, and watch the system evolve. See the spectrum of normal modes for arbitrary motion. See longitudinal or transverse modes in the 1D system.
+
+The equations for the wavelengths and the frequencies of the modes of a wave produced on a string:
+
+were derived by considering a wave on a string where there were symmetric boundary conditions of a node at each end. These modes resulted from two sinusoidal waves with identical characteristics except they were moving in opposite directions, confined to a region L with nodes required at both ends. Will the same equations work if there were symmetric boundary conditions with antinodes at each end? What would the normal modes look like for a medium that was free to oscillate on each end? Don’t worry for now if you cannot imagine such a medium, just consider two sinusoidal wave functions in a region of length L, with antinodes on each end.
+
+Yes, the equations would work equally well for symmetric boundary conditions of a medium free to oscillate on each end where there was an antinode on each end. The normal modes of the first three modes are shown below. The dotted line shows the equilibrium position of the medium.
+
+Note that the first mode is two quarters, or one half, of a wavelength. The second mode is one quarter of a wavelength, followed by one half of a wavelength, followed by one quarter of a wavelength, or one full wavelength. The third mode is one and a half wavelengths. These are the same result as the string with a node on each end. The equations for symmetrical boundary conditions work equally well for fixed boundary conditions and free boundary conditions. These results will be revisited in the next chapter when discussing sound wave in an open tube.
+
+The free boundary conditions shown in the last Check Your Understanding may seem hard to visualize. How can there be a system that is free to oscillate on each end? In are shown two possible configuration of a metallic rods (shown in red) attached to two supports (shown in blue). In part (a), the rod is supported at the ends, and there are fixed boundary conditions at both ends. Given the proper frequency, the rod can be driven into resonance with a wavelength equal to length of the rod, with nodes at each end. In part (b), the rod is supported at positions one quarter of the length from each end of the rod, and there are free boundary conditions at both ends. Given the proper frequency, this rod can also be driven into resonance with a wavelength equal to the length of the rod, but there are antinodes at each end. If you are having trouble visualizing the wavelength in this figure, remember that the wavelength may be measured between any two nearest identical points and consider .
+
+Note that the study of standing waves can become quite complex. In (a), the n=2 mode of the standing wave is shown, and it results in a wavelength equal to L. In this configuration, the n=1 mode would also have been possible with a standing wave equal to 2L. Is it possible to get the n=1 mode for the configuration shown in part (b)? The answer is no. In this configuration, there are additional conditions set beyond the boundary conditions. Since the rod is mounted at a point one quarter of the length from each side, a node must exist there, and this limits the possible modes of standing waves that can be created. We leave it as an exercise for the reader to consider if other modes of standing waves are possible. It should be noted that when a system is driven at a frequency that does not cause the system to resonate, vibrations may still occur, but the amplitude of the vibrations will be much smaller than the amplitude at resonance.
+
+A field of mechanical engineering uses the sound produced by the vibrating parts of complex mechanical systems to troubleshoot problems with the systems. Suppose a part in an automobile is resonating at the frequency of the car’s engine, causing unwanted vibrations in the automobile. This may cause the engine to fail prematurely. The engineers use microphones to record the sound produced by the engine, then use a technique called Fourier analysis to find frequencies of sound produced with large amplitudes and then look at the parts list of the automobile to find a part that would resonate at that frequency. The solution may be as simple as changing the composition of the material used or changing the length of the part in question.
+
+There are other numerous examples of resonance in standing waves in the physical world. The air in a tube, such as found in a musical instrument like a flute, can be forced into resonance and produce a pleasant sound, as we discuss in Sound.
+
+At other times, resonance can cause serious problems. A closer look at earthquakes provides evidence for conditions appropriate for resonance, standing waves, and constructive and destructive interference. A building may vibrate for several seconds with a driving frequency matching that of the natural frequency of vibration of the building—producing a resonance resulting in one building collapsing while neighboring buildings do not. Often, buildings of a certain height are devastated while other taller buildings remain intact. The building height matches the condition for setting up a standing wave for that particular height. The span of the roof is also important. Often it is seen that gymnasiums, supermarkets, and churches suffer damage when individual homes suffer far less damage. The roofs with large surface areas supported only at the edges resonate at the frequencies of the earthquakes, causing them to collapse. As the earthquake waves travel along the surface of Earth and reflect off denser rocks, constructive interference occurs at certain points. Often areas closer to the epicenter are not damaged, while areas farther away are damaged.
+
+Summary
+
+A standing wave is the superposition of two waves which produces a wave that varies in amplitude but does not propagate.
+
+Nodes are points of no motion in standing waves.
+
+An antinode is the location of maximum amplitude of a standing wave.
+
+Normal modes of a wave on a string are the possible standing wave patterns. The lowest frequency that will produce a standing wave is known as the fundamental frequency. The higher frequencies which produce standing waves are called overtones.
+
+Key Equations
+
+v=λT=λf
+μ=mass of the stringlength of the string
+|v|=FTμ
+v=Βρ
+yR(x,t)=[2Acos(ϕ2)]sin(kx−ωt+ϕ2)
+k≡2πλ
+v=ωk
+y(x,t)=Asin(kx∓ωt+ϕ)
+kx∓ωt+ϕ
+∂2y(x,t)∂x2=1vw2∂2y(x,t)∂t2
+Pave=EλT=12μA2ω2λT=12μA2ω2v
+I=PA
+I=P4πr2
+y(x,t)=[2Asin(kx)]cos(ωt)
+λn=2nL,n=1,2,3,4,5...
+fn=nv2L=nf1,n=1,2,3,4,5...
+Conceptual Questions
+
+A truck manufacturer finds that a strut in the engine is failing prematurely. A sound engineer determines that the strut resonates at the frequency of the engine and suspects that this could be the problem. What are two possible characteristics of the strut can be modified to correct the problem?
+
+It may be as easy as changing the length and/or the density a small amount so that the parts do not resonate at the frequency of the motor.
+
+Why do roofs of gymnasiums and churches seem to fail more than family homes when an earthquake occurs?
+
+Wine glasses can be set into resonance by moistening your finger and rubbing it around the rim of the glass. Why?
+
+Energy is supplied to the glass by the work done by the force of your finger on the glass. When supplied at the right frequency, standing waves form. The glass resonates and the vibrations produce sound.
+
+Air conditioning units are sometimes placed on the roof of homes in the city. Occasionally, the air conditioners cause an undesirable hum throughout the upper floors of the homes. Why does this happen? What can be done to reduce the hum?
+
+Consider a standing wave modeled as y(x,t)=4.00cmsin(3m−1x)cos(4s−1t). Is there a node or an antinode at x=0.00m? What about a standing wave modeled as y(x,t)=4.00cmsin(3m−1x+π2)cos(4s−1t)? Is there a node or an antinode at the x=0.00m position?
+
+For the equation y(x,t)=4.00cmsin(3m−1x)cos(4s−1t), there is a node because when x=0.00m, sin(3m−1(0.00m))=0.00, so y(0.00m,t)=0.00m for all time. For the equation y(x,t)=4.00cmsin(3m−1x+π2)cos(4s−1t), there is an antinode because when x=0.00m, sin(3m−1(0.00m)+π2)=+1.00, so y(0.00m,t) oscillates between +A and −A as the cosine term oscillates between +1 and -1.
+
+Problems
+
+A wave traveling on a Slinky® that is stretched to 4 m takes 2.4 s to travel the length of the Slinky and back again. (a) What is the speed of the wave? (b) Using the same Slinky stretched to the same length, a standing wave is created which consists of three antinodes and four nodes. At what frequency must the Slinky be oscillating?
+
+A 2-m long string is stretched between two supports with a tension that produces a wave speed equal to vw=50.00m/s. What are the wavelength and frequency of the first three modes that resonate on the string?
+λn=2.00nL,fn=vλnλ1=4.00m,f1=12.5Hzλ2=2.00m,f2=25.00Hzλ3=1.33m,f3=37.59Hz
+
+Consider the experimental setup shown below. The length of the string between the string vibrator and the pulley is L=1.20m. The linear density of the string is μ=0.006kg/m. The string vibrator can oscillate at any frequency. The hanging mass is 2.00 kg. (a)What are the wavelength and frequency of n=6 mode? (b) The string oscillates the air around the string. What is the wavelength of the sound if the speed of the sound is vs=343.00m/s?
+
+A cable with a linear density of μ=0.02kg/m is hung from telephone poles. The tension in the cable is 500.00 N. The distance between poles is 20 meters. The wind blows across the line, causing the cable resonate. A standing waves pattern is produced that has 4.5 wavelengths between the two poles. The speed of sound at the current temperature T=20°C is 343.00 m/s. What are the frequency and wavelength of the hum?
+v=158.11m/s,λ=4.44m,f=35.61Hzλs=9.63m
+
+Consider a rod of length L, mounted in the center to a support. A node must exist where the rod is mounted on a support, as shown below. Draw the first two normal modes of the rod as it is driven into resonance. Label the wavelength and the frequency required to drive the rod into resonance.
+
+Consider two wave functions y(x,t)=0.30cmsin(3m−1x−4s−1t) and y(x,t)=0.30cmsin(3m−1x+4s−1t). Write a wave function for the resulting standing wave.
+y(x,t)=[0.60cmsin(3m−1x)]cos(4s−1t)
+
+A 2.40-m wire has a mass of 7.50 g and is under a tension of 160 N. The wire is held rigidly at both ends and set into oscillation. (a) What is the speed of waves on the wire? The string is driven into resonance by a frequency that produces a standing wave with a wavelength equal to 1.20 m. (b) What is the frequency used to drive the string into resonance?
+
+A string with a linear mass density of 0.0062 kg/m and a length of 3.00 m is set into the n=100 mode of resonance. The tension in the string is 20.00 N. What is the wavelength and frequency of the wave?
+λ100=0.06mv=56.8m/s,fn=nf1,n=1,2,3,4,5...f100=947Hz
+
+A string with a linear mass density of 0.0075 kg/m and a length of 6.00 m is set into the n=4 mode of resonance by driving with a frequency of 100.00 Hz. What is the tension in the string?
+
+Two sinusoidal waves with identical wavelengths and amplitudes travel in opposite directions along a string producing a standing wave. The linear mass density of the string is μ=0.075kg/m and the tension in the string is FT=5.00N. The time interval between instances of total destructive interference is Δt=0.13s. What is the wavelength of the waves?
+T=2Δt,v=λT,λ=2.12m
+
+A string, fixed on both ends, is 5.00 m long and has a mass of 0.15 kg. The tension if the string is 90 N. The string is vibrating to produce a standing wave at the fundamental frequency of the string. (a) What is the speed of the waves on the string? (b) What is the wavelength of the standing wave produced? (c) What is the period of the standing wave?
+
+A string is fixed at both end. The mass of the string is 0.0090 kg and the length is 3.00 m. The string is under a tension of 200.00 N. The string is driven by a variable frequency source to produce standing waves on the string. Find the wavelengths and frequency of the first four modes of standing waves.
+λ1=6.00m,λ2=3.00m,λ3=2.00m,λ4=1.50mv=258.20m/s=λff1=43.03Hz,f2=86.07Hz,f3=129.10Hz,f4=172.13Hz
+
+The frequencies of two successive modes of standing waves on a string are 258.36 Hz and 301.42 Hz. What is the next frequency above 100.00 Hz that would produce a standing wave?
+
+A string is fixed at both ends to supports 3.50 m apart and has a linear mass density of μ=0.005kg/m. The string is under a tension of 90.00 N. A standing wave is produced on the string with six nodes and five antinodes. What are the wave speed, wavelength, frequency, and period of the standing wave?
+v=134.16ms,λ=1.4m,f=95.83Hz,T=0.0104s
+
+Sine waves are sent down a 1.5-m-long string fixed at both ends. The waves reflect back in the opposite direction. The amplitude of the wave is 4.00 cm. The propagation velocity of the waves is 175 m/s. The n=6 resonance mode of the string is produced. Write an equation for the resulting standing wave.
+
+Additional Problems
+
+Ultrasound equipment used in the medical profession uses sound waves of a frequency above the range of human hearing. If the frequency of the sound produced by the ultrasound machine is f=30kHz, what is the wavelength of the ultrasound in bone, if the speed of sound in bone is v=3000m/s?
+λ=0.10m
+
+Shown below is the plot of a wave function that models a wave at time t=0.00s and t=2.00s. The dotted line is the wave function at time t=0.00s and the solid line is the function at time t=2.00s. Estimate the amplitude, wavelength, velocity, and period of the wave.
+
+The speed of light in air is approximately v=3.00×108m/s and the speed of light in glass is v=2.00×108m/s. A red laser with a wavelength of λ=633.00nm shines light incident of the glass, and some of the red light is transmitted to the glass. The frequency of the light is the same for the air and the glass. (a) What is the frequency of the light? (b) What is the wavelength of the light in the glass?
+
+a. f=4.74×1014Hz; b. λ=422nm
+
+A radio station broadcasts radio waves at a frequency of 101.7 MHz. The radio waves move through the air at approximately the speed of light in a vacuum. What is the wavelength of the radio waves?
+
+A sunbather stands waist deep in the ocean and observes that six crests of periodic surface waves pass each minute. The crests are 16.00 meters apart. What is the wavelength, frequency, period, and speed of the waves?
+λ=16.00m,f=0.10Hz,T=10.00s,v=1.6m/s
+
+A tuning fork vibrates producing sound at a frequency of 512 Hz. The speed of sound of sound in air is v=343.00m/s if the air is at a temperature of 20.00°C. What is the wavelength of the sound?
+
+A motorboat is traveling across a lake at a speed of vb=15.00m/s. The boat bounces up and down every 0.50 s as it travels in the same direction as a wave. It bounces up and down every 0.30 s as it travels in a direction opposite the direction of the waves. What is the speed and wavelength of the wave?
+λ=(vb+v)tb,v=3.75m/s,λ=3.00m
+
+Use the linear wave equation to show that the wave speed of a wave modeled with the wave function y(x,t)=0.20msin(3.00m−1x+6.00s−1t) is v=2.00m/s. What are the wavelength and the speed of the wave?
+
+Given the wave functions y1(x,t)=Asin(kx−ωt) and y2(x,t)=Asin(kx−ωt+ϕ) with ϕ≠π2, show that y1(x,t)+y2(x,t) is a solution to the linear wave equation with a wave velocity of v=ωk.
+∂2(y1+y2)∂t2=−Aω2sin(kx−ωt)−Aω2sin(kx−ωt+ϕ)∂2(y1+y2)∂x2=−Ak2sin(kx−ωt)−Ak2sin(kx−ωt+ϕ)∂2y(x,t)∂x2=1v2∂2y(x,t)∂t2−Aω2sin(kx−ωt)−Aω2sin(kx−ωt+ϕ)=(1v2)(−Ak2sin(kx−ωt)−Ak2sin(kx−ωt+ϕ))v=ωk
+
+A transverse wave on a string is modeled with the wave function y(x,t)=0.10msin(0.15m−1x+1.50s−1t+0.20). (a) Find the wave velocity. (b) Find the position in the y-direction, the velocity perpendicular to the motion of the wave, and the acceleration perpendicular to the motion of the wave, of a small segment of the string centered at x=0.40m at time t=5.00s.
+
+A sinusoidal wave travels down a taut, horizontal string with a linear mass density of μ=0.060kg/m. The magnitude of maximum vertical acceleration of the wave is aymax=0.90cm/s2 and the amplitude of the wave is 0.40 m. The string is under a tension of FT=600.00N. The wave moves in the negative x-direction. Write an equation to model the wave.
+y(x,t)=0.40msin(0.015m−1x+1.5s−1t)
+
+A transverse wave on a string (μ=0.0030kg/m) is described with the equation y(x,t)=0.30msin(2π4.00m(x−16.00mst)). What is the tension under which the string is held taut?
+
+A transverse wave on a horizontal string (μ=0.0060kg/m) is described with the equation y(x,t)=0.30msin(2π4.00m(x−vwt)). The string is under a tension of 300.00 N. What are the wave speed, wave number, and angular frequency of the wave?
+v=223.61m/s,k=1.57m−1,ω=142.43s−1
+
+A student holds an inexpensive sonic range finder and uses the range finder to find the distance to the wall. The sonic range finder emits a sound wave. The sound wave reflects off the wall and returns to the range finder. The round trip takes 0.012 s. The range finder was calibrated for use at room temperature T=20°C, but the temperature in the room is actually T=23°C. Assuming that the timing mechanism is perfect, what percentage of error can the student expect due to the calibration?
+
+A wave on a string is driven by a string vibrator, which oscillates at a frequency of 100.00 Hz and an amplitude of 1.00 cm. The string vibrator operates at a voltage of 12.00 V and a current of 0.20 A. The power consumed by the string vibrator is P=IV. Assume that the string vibrator is 90% efficient at converting electrical energy into the energy associated with the vibrations of the string. The string is 3.00 m long, and is under a tension of 60.00 N. What is the linear mass density of the string?
+P=12A2(2πf)2μFTμ=2.00×10−4kg/m
+
+A traveling wave on a string is modeled by the wave equation y(x,t)=3.00cmsin(8.00m−1x+100.00s−1t). The string has a linear mass density of μ=0.00800kg/m. What is the average power transferred by the wave on the string?
+
+A transverse wave on a string has a wavelength of 5.0 m, a period of 0.02 s, and an amplitude of 1.5 cm. The average power transferred by the wave is 5.00 W. What is the tension in the string?
+P=12μA2ω2λT,μ=0.0018kg/m
+FT=v2μ=(λT)2μ=110N
+
+(a) What is the intensity of a laser beam used to burn away cancerous tissue that, when 90.0% absorbed, puts 500.0 J of energy into a circular spot 2.00 mm in diameter in 4.00 s? (b) Discuss how this intensity compares to the average intensity of sunlight (about 1 kW/m2) and the implications that would have if the laser beam entered your eye. Note how your answer depends on the time duration of the exposure.
+
+Consider two periodic wave functions, y1(x,t)=Asin(kx−ωt) and y2(x,t)=Asin(kx−ωt+ϕ). (a) For what values of ϕ will the wave that results from a superposition of the wave functions have an amplitude of 2A? (b) For what values of ϕ will the wave that results from a superposition of the wave functions have an amplitude of zero?
+
+a. AR=2Acos(ϕ2),cos(ϕ2)=1,ϕ=0,2π,4π,...; b. AR=2Acos(ϕ2),cos(ϕ2)=0,ϕ=0,π,3π,5π...
+
+Consider two periodic wave functions, y1(x,t)=Asin(kx−ωt) and y2(x,t)=Acos(kx−ωt+ϕ). (a) For what values of ϕ will the wave that results from a superposition of the wave functions have an amplitude of 2A? (b) For what values of ϕ will the wave that results from a superposition of the wave functions have an amplitude of zero?
+
+A trough with dimensions 10.00 meters by 0.10 meters by 0.10 meters is partially filled with water. Small-amplitude surface water waves are produced from both ends of the trough by paddles oscillating in simple harmonic mot
+[truncated]

@@ -1,0 +1,418 @@
+# m00056
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Equal Payments with a Financial Calculator and Excel
+
+Equal Payments with a Financial Calculator and Excel
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Use a financial calculator and Excel to solve perpetuity problems.
+
+Use a financial calculator and Excel to solve annuity problems.
+
+Calculate an effective rate of interest.
+
+Schedule the amortization of a loan repayment.
+
+Solving Time Value of Money Problems Using a Financial Calculator
+
+Since the 1980s, many convenient and inexpensive tools have become available to simplify business and personal calculations, including personal computers with financial applications and handheld/desktop or online calculators with many of the functions we’ve studied already. This section will explore examples of both, beginning with financial calculators. While understanding and mastery of the use of time value of money equations are part of a solid foundation in the study of business and personal finance, calculators are rapid and efficient.
+
+We’ll begin with the constant perpetuity that we used to illustrate the constant perpetuity formula. A share of preferred stock of Shaw Inc., pays an annual $2.00 dividend, and the required rate of return that investors in this stock expect is 7%. The simple technique to solve this problem using the calculator is shown in .
+
+Calculator Steps to Find the Required Rate of ReturnThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+Enter formula
+2 ÷ 7 % =
+28.57
+Earlier we solved for the present value of a 5-year ordinary annuity of $25,000 earning 8% annually. We then solved for an annuity due, all other facts remaining the same. The two solutions were $99,817.50 and $107,802.50, respectively. We enter our variables as shown in to solve for an ordinary annuity:
+
+Calculator Steps to Solve for an Ordinary Annuity
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+Enter number of payments
+5 N
+N =
+5.00
+3
+Enter interest rate per payment period
+8 I/Y
+I/Y =
+8.00
+4
+Enter payment amount
+25000 +/- PMT
+PMT =
+-25,000.00
+5
+CPT PV
+PV =
+99,817.75
+Note that the default setting on the financial calculator is END to indicate that payment is made at the end of a period, as in our ordinary annuity. In addition, we follow the payment amount of $25,000 with the +/- keystroke—an optional step to see the final present value result as a positive value.
+
+To perform the same calculation as an annuity due, we can perform the same procedures as above, but with two additional steps after Step 1 to change the default from payments at the end of each period to payments at the beginning of each period (see ).
+
+Calculator Steps to Solve for an Annuity Due
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+2ND [BGN] 2ND [SET]
+BGN
+0.00
+3
+2ND [QUIT]
+0.00
+4
+Enter number of payments
+5 N
+N =
+5.00
+5
+Enter interest rate per payment period
+8 I/Y
+I/Y =
+8.00
+6
+Enter payment amount
+25000 +/- PMT
+PMT =
+-25,000.00
+7
+CPT PV
+PV =
+107,803.17
+The procedures to find future values of both ordinary annuities and annuities due are comparable to the two procedures above. We begin with the ordinary annuity, with reminders that this is the default for the financial calculator and that entering the payment as a negative number produces a positive result (see ).
+
+Calculator Steps to Find the Future Value of an Ordinary Annuity
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+Enter number of payments
+5 N
+N =
+5.00
+3
+Enter interest rate per payment period
+4 I/Y
+I/Y =
+4.00
+4
+Enter payment amount
+3000 +/- PMT
+PMT =
+-3,000.00
+5
+CPT FV
+FV =
+16,248.97
+Solving for an annuity due with the same details requires the keystrokes listed in .
+
+Calculator Steps to Find the Future Value of an Annuity Due
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+2ND [BGN] 2ND [SET]
+BGN
+0.00
+3
+Return to calculator mode
+2ND [QUIT]
+0.00
+4
+Enter number of payments
+5 N
+N =
+5.00
+5
+Enter interest rate per payment period
+4 I/Y
+I/Y =
+4.00
+6
+Enter payment amount
+3000 +/- PMT
+PMT =
+-3,000.00
+7
+CPT FV
+FV =
+16,898.93
+Earlier in the chapter, we explored the effect of interannual compounding on the true cost of money, recalling the basic compounding formula:
+
+We saw that when modified for monthly compounding at a stated rate of 1.5%, the actual (effective) rate of interest per year was 19.56%. One simple way to prove this is by using the calculator keystrokes listed in .
+
+Calculator Steps to Prove the Actual Rate of Interest per Year
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+2ND [FORMAT] 4 ENTER
+DEC =
+4.0000
+3
+2ND [QUIT]
+0.0000
+4
+Enter (1 + the monthly interest rate)
+1.015 YX
+1.0150
+5
+Enter the number of months
+12 YX
+1.1956
+Had we assumed that the stated monthly interest rate of 1.5% could be simply multiplied by 12 months for an annual rate of 18%, we would be ignoring the effect of more frequent compounding. As indicated above, the annual interest on the money that we spent initially, accumulating at a rate of 1.5% per month, is 19.56%, not 18%:
+
+The final example in this chapter will represent the amortization of a loan. Using a 36-month auto loan for $32,000 at 6% per year compounded monthly, we can easily find the monthly payment and the amortization of this loan on our calculator using the following procedures and keystrokes.
+
+First, we find the monthly payment (see ).
+
+Calculator Steps to Find the Monthly Payment of a Loan
+
+Step
+Description
+Enter
+Display
+1
+2ND [RESET] ENTER
+RST
+0.00
+2
+2ND [P/Y] 12 ENTER
+P/Y =
+12.00
+3
+2ND [QUIT]
+0.00
+4
+Enter number of payments with the payment multiplier
+3 2ND [xP/Y] N
+N =
+36.00
+5
+Enter annual interest rate
+6 I/Y
+I/Y =
+6.00
+6
+Enter loan amount
+32000 PV
+PV =
+32,000.00
+7
+CPT PMT
+PMT =
+-973.50
+We’ve verified the amount of our monthly debt service, including both the interest and repayment of the principal, as $973.50. The next step with our calculator is to verify our amortization at any point (see ).
+
+Calculator Steps to Verify Amortization at the End of One Year
+
+Step
+Description
+Enter
+Display
+1
+2ND [AMORT]
+P1 =
+1.00
+2
+Set beginning period to 1
+1 ENTER
+P1 =
+1.00
+3
+Set ending period to 12
+↓ 12 ENTER
+P2 =
+12.00
+4
+Display amortization data at the end of month 12
+↓
+BAL =
+21,965.02
+5
+↓
+PRN =
+-10,034.98
+6
+↓
+INT =
+-1,647.02
+Without resetting the calculator, we will try a second example, this time reviewing the second full year of amortization at the end of 24 months (see ).
+
+Calculator Steps to Verify Amortization at the End of Two Years
+
+Step
+Description
+Enter
+Display
+1
+2ND [AMORT]
+P1 =
+1.00
+2
+Change beginning period to month 13
+13 ENTER
+P1 =
+13.00
+3
+Change ending period to month 24
+↓ 24 ENTER
+P2 =
+24.00
+4
+Display amortization data at the end of month 24
+↓
+BAL =
+11,311.13
+5
+↓
+PRN =
+-10,653.89
+6
+↓
+INT =
+-1,028.11
+Solving Time Value of Money Problems Using Excel
+
+Microsoft’s popular spreadsheet program Excel is arguably one of the most common and powerful numeric and data analysis products available. Yet while mastery of Excel requires extensive study and practice, enough basics can be learned in two or three hours to provide the user with the ability to solve problems quickly and conveniently, including extensive financial capability. Most of the calculations in this chapter were prepared with Excel.
+
+The boxes in the Excel gridwork, known individually as cells (located at the intersection of a column and a row), can contain numbers, text, and very powerful formulas (or functions) for calculations and data analytics. Cells, rows, columns, and groups of cells (ranges) are easily moved, formatted, and replicated. In the mortgage amortization table for 240 months seen in Section 8.3.2, only the formulas for month 1 were typed in. With one simple command, that row of formulas was replicated 239 more times, with each line updating itself with relevant number adjustments automatically. With some practice, a long table such as that can be constructed by even a relatively new user in less than 10 minutes.
+
+In this section, we will illustrate how to use Excel to solve problems from earlier in the chapter, including perpetuities, ordinary annuities, effective interest rates, and loan amortization. We will omit the basic dynamics of an Excel spreadsheet because they were presented sufficiently in preceding chapters.
+
+Revisiting the constant perpetuity from Section 8.1, in which our shares of Shaw Inc., preferred stock pay an annual fixed dividend of $2.00 and the required rate of return is 7%, we do not use an Excel function for this simple operation. The two values are entered in cells B3 and B4, respectively.
+
+We enter a formula in cell B6 to perform the division and display the result in that cell. The actual contents of cell B6 are typed below it for your reference, in cell B8 (see ).
+
+Excel Spreadsheet for Valuing a Perpetuity
+
+Download the spreadsheet file containing key Chapter 8 Excel exhibits.
+
+To find the present value of an ordinary annuity, we revisit Section 8.2.1. You will draw $25,000 at the end of each year for five years from a fund earning 8% annually, and you want to know how much you need in that fund today to accomplish this. We accomplish this in Excel easily with the PV function. The format of the PV command is
+
+Only the first three arguments inside the parentheses are used. We’ll place them in cells and refer to those cells in our PV function. As an option, you could also type the numbers into the parentheses directly. Notice the slight rounding error because of decimal expansion. Also, the payment must be entered as a negative number for your result to be positive; this can be accomplished either by making the $25,000 in cell B5 a negative amount or by placing a minus sign in front of the B5 in the formula’s arguments. In cell B3, you must enter the percent either as 0.08 or as 8% (with the percent sign). We repeated the formula syntax and the actual formula inputs in column A near the result, for your reference (see ).
+
+Excel Spreadsheet Showing the Present Value of an Ordinary Annuity
+
+We also found the present value of an annuity due. We use the same information from the ordinary annuity problem above, but you will recall that the first of five payments happens immediately at the start of year 1, not at the end. We follow the same procedures and inputs as in the previous example, but with one change to the PV function: the last argument in the parentheses will change from 0 to 1. This is a toggle switch that commands the PV function to treat this as an annuity due instead of an ordinary annuity (see ).
+
+Excel Spreadsheet Showing the Present Value of an Annuity Due
+Section 8.2 introduced us to future values. Comparable to the PV function above, Excel provides the FV function. Using the same information—$3,000 invested annually for five years, starting one year from now, at 4%—we’ll solve using Excel (see ). The format of the command is
+
+Excel Spreadsheet Showing the Future Value of an Ordinary Annuity
+
+As with present values, using the same data but solving for an annuity due requires the fifth argument inside the parentheses to be changed from 0 to 1; all other values remain the same (see ).
+
+Excel Spreadsheet Showing the Future Value of an Annuity Due
+
+In Section 8.4, we explained the difference between stated and effective rates of interest to show the true cost of borrowing, in this case for a one-year period, if interest is compounded for periods within a year. The syntax for the Excel effect function to calculate this rate is
+
+where rate is the nominal rate and periods represents the number of periods within a year.
+
+Earlier, our example showed that 1.5% compounded monthly results in not 18% per year but actually over 19.56% (see ).
+
+Excel Spreadsheet Showing Effective Interest Rate
+
+Note several things: First, the nominal interest rate is entered as a percent. Second, the actual effect function in C7 is typed as =EFFECT(rate,B7); we use the word rate because we actually assigned a name to cell B3, so Excel can use it in a function and replicate it without it changing. When cell C7 is replicated to C8 and C9, rate remains the same, but the formulas automatically adjust to use B8 and B9 for the periods.
+
+To assign a name to a cell, keep in mind that every cell has column-row coordinates. We want cell B3 to be the anchor of our effective rate calculations. Rather than referring to cell B3, we can name it, and in this case, we use the name rate, which we can then use in formulas like any other Excel cell letter-number reference. Place the cursor in cell B3. Now, look at cell A1 on the grid: right above that cell, you see a box displaying B3, the current cursor location. If you click in that box and type “rate” (without the quotation marks), as we did, then hit the enter key, the value in that box will change to rate. Now, if you type “rate” (again, without quotation marks) into a formula, Excel knows to use the contents of cell B3.
+
+Excel provides convenient tools for figuring out amortization. We’ll revisit our 36-month auto loan for $32,000 at 6% per year, compounded monthly. A loan amortization table for a fixed interest rate debt is usually formatted as follows, with the Interest and Principal columns interchangeable:
+
+In Excel, a table is completed by using the function PMT. The individual steps follow.
+
+List the information about the loan in the upper left of the worksheet, and create the column headings for the schedule of amortization. Type “B5” (without the quotation marks) in cell E9 to begin the schedule. Then enter 1 for the first month under the Payment # (or Month) column, in cell A10 (see ).
+ 
+ Step 1 of Creating an Amortization Table
+
+Step 1 of Creating an Amortization Table
+
+Next, in cell B10, the payment is derived from the formula =PMT(rate,periods,pv), with PV representing the present value, or the loan amount. Because we are compounding monthly, enter C$2 and C$3 for the rate and periods, respectively. Cell B5 is used for the loan amount, but notice the optional minus sign placed in front of the entry B$5; this causes the results in the schedule to be displayed as positive numbers. The dollar sign ($) inserted in the cell references forces Excel to “freeze” those locations so that they don’t attempt to update when we replicate them later; this is known in spreadsheet programs as an absolute reference (see ).
+ 
+ Step 2 of Creating an Amortization Table
+
+Step 2 of Creating an Amortization Table
+
+The next step is to calculate the interest. We take the remaining balance from the previous line, in this case cell E9, and multiply it by the monthly interest rate in cell C2, typing C$2 to lock in the reference. The remaining balance of the loan should always be multiplied by this monthly percentage (see ).
+ 
+ Step 3 of Creating an Amortization Table
+
+Step 3 of Creating an Amortization Table
+
+Because this is a fixed-rate loan, whatever is left from each payment after first deducting the interest represents principal, the amount by which the balance of the outstanding loan balance is reduced. Therefore, the contents of cell D10 represent B10, the total payment, minus C10, the interest portion (see ). No dollar signs are included because this cell reference can adjust to each row into which this formula is replicated, as will be seen in the following examples.
+ 
+ Step 4 of Creating an Amortization Table
+
+Step 4 of Creating an Amortization Table
+
+Because our principal portion of the last payment has reduced our outstanding balance, it is subtracted from the preceding balance in cell E9 (see ). The command therefore is =E9-D10.
+ 
+ Step 5 of Creating an Amortization Table
+
+Step 5 of Creating an Amortization Table
+
+Now that the first full row is defined, an amortization schedule is easily developed by Excel’s replication abilities. Place the cursor on cell A10, hold down the left mouse button, and drag the cursor to cell E10. Cells A10 through E10 in row 10 should now be highlighted. Release the mouse button. Then “grab” the tiny square symbol at the bottom right of cell E10 and drag it downward as far as you need; in this case, you’ll need 35 more rows because this is a 36-month loan, so it will end at row 45. We added a line for totals.
+
+This is now a complete loan amortization schedule (see ). The first several periods display, followed by the last few periods, to prove that the schedule is complete (data rows for month 4 to month 22 are hidden).
+
+Completed Amortization Schedule
+
+This will look familiar; it’s the same amortization table used as a proof in Section 8.3 (see ). There is no rounding error because Excel uses the full decimal expansion in its calculations.
+
+This chapter has explored the time value of money by expanding on the concepts discussed in Time Value of Money I with additional funds being periodically added to or subtracted from our investment, either compounding or discounting them according to the situation. In all cases, the payments in the stream were identical. If they had not been identical, a separate set of operators would be required, and these will be addressed in the next chapter.
+
+The use of two tools for managing and understanding the time value of money and its many applications was discussed: a professional financial calculator and the popular Microsoft Office Suite spreadsheet application Excel.
+
+CFA Institute
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.

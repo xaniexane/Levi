@@ -1,0 +1,59 @@
+# m00048
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Return values
+
+Return values
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify a function's return value.
+
+Employ return statements in functions to return values.
+
+Returning from a function
+
+When a function finishes, the function returns and provides a result to the calling code. A return statement finishes the function execution and can specify a value to return to the function's caller. Functions introduced so far have not had a return statement, which is the same as returning None, representing no value.
+
+Returning a value from a function
+
+Using return statements
+
+Using multiple return statements
+
+Functions that have multiple execution paths may use multiple return statements. Ex: A function with an if-else statement may have two return statements for each branch. Return statements always end the function and return control flow to the calling code.
+
+In the table below, calc_mpg() takes in miles driven and gallons of gas used and calculates a car's miles per gallon. calc_mpg() checks if gallons is 0 (to avoid division by 0), and if so, returns -1, a value often used to indicate a problem.
+
+Calculating miles-per-gallon and checking for division by zero.
+Car 1's mpg is 28.0
+Gallons can't be 0
+Car 2's mpg is -1
+Multiple return statements
+
+Using functions as values
+
+Functions are objects that evaluate to values, so function calls can be used in expressions. A function call can be combined with other function calls, variables, and literals as long as the return value is compatible with the operation.
+
+Using function calls in expressions
+
+Using function values
+
+Estimated days alive
+
+Write a function, days_alive(), that takes in an age in years and outputs the estimated days the user has been alive as an integer. Assume each year has 365.24 days. Use round(), which takes a number and returns the nearest whole number.
+
+Then write a main program that reads in a user's age and outputs the result of days_alive().
+
+Given input:
+
+The output is:
+
+Averaging lists
+
+Write a function, avg_list(), that takes in a list and returns the average of the list values.

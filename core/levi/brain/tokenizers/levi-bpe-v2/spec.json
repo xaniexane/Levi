@@ -1,0 +1,10 @@
+{
+  "name": "levi-bpe-v2",
+  "format": "levi-bpe-v1",
+  "vocab_size": 8192,
+  "specials": {"<pad>": 256, "<doc>": 257, "<eod>": 258, "<unk>": 259, "<bos>": 260, "<eos>": 261},
+  "trained_on": "train_corpus.jsonl (corpus_curriculum.jsonl + corpus_dialogue.jsonl)",
+  "trained_utc": "2026-09-21",
+  "merges": 7930,
+  "note": "v2 adds explicit <bos>/<eos> vs v1's 4-special table. Codec unchanged (levi-bpe-v1). Sequences are wrapped [bos] ... [eos]; <eod> still marks document boundaries inside multi-doc streams."
+}

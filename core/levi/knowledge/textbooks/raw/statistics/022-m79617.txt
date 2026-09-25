@@ -1,0 +1,1157 @@
+# m79617
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Tree and Venn Diagrams
+
+Tree and Venn Diagrams
+
+Sometimes, when the probability problems are complex, it can be helpful to graph the situation. Tree diagrams and Venn diagrams are two tools that can be used to visualize and solve conditional probabilities.
+
+Tree Diagrams
+
+A tree diagram is a special type of graph used to determine the outcomes of an experiment. It consists of branches that are labeled with either frequencies or probabilities. Tree diagrams can make some probability problems easier to visualize and solve. The following example illustrates how to use a tree diagram:
+
+In an urn, there are 11 balls. Three balls are red (R) and eight balls are blue (B). Draw two balls, one at a time, with replacement. With replacement means that you put the first ball back in the urn before you select the second ball. Therefore, you are selecting from exactly the same group each time, so each draw is independent. The tree diagram shows all the possible outcomes.
+
+The first set of branches represents the first draw. There are 8 ways to draw a blue marble and 3 ways to draw a red one. The second set of branches represents the second draw. Regardless of the choice on the first draw, there are again eight ways to draw a blue marble and 3 ways to draw a red one. Read down each branch to see the total number of possible outcomes. For example, there are 8 ways to get a blue marble on the first draw, and eight ways to get one on the second draw, so there are 8 × 8 = 64 different ways to draw two blue marbles in succession. Each of the outcomes is distinct. In fact, we can list each red ball as R1, R2, and R3 and each blue ball as B1, B2, B3, B4, B5, B6, B7, and B8. Then the nine RR outcomes can be written as follows:
+R1R1, R1R2, R1R3, R2R1, R2R2, R2R3, R3R1, R3R2, R3R3.
+
+The other outcomes are similar.
+
+There are a total of 11 balls in the urn. Draw two balls, one at a time, with replacement. There are 11(11) = 121 outcomes, the size of the sample space.
+
+a. List the 24 BR outcomes: B1R1, B1R2, B1R3, . . .
+
+a. We know that there will be 24 different possible outcomes because there are eight ways to draw blue and three ways to draw red. Make a systematic list of possible outcomes that consist of a blue marble on the first draw and a red marble on the second draw.
+B1R1, B1R2, B1R3
+B2R1, B2R2, B2R3
+B3R1, B3R2, B3R3
+B4R1, B4R2, B4R3
+B5R1, B5R2, B5R3
+B6R1, B6R2, B6R3
+B7R1, B7R2, B7R3
+B8R1, B8R2, B8R3
+
+b. Calculate P(RR).
+
+b. You can use the tree diagram. There are nine ways to draw two reds and 121 possible outcomes. So, P(RR) = 
+
+ 9
+
+ 121
+.
+
+.
+
+Each draw is independent, so you can also use the formula: P(RR) = P(R)P(R) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 3
+ 
+ 11
+
+ )
+ 
+ = 
+
+ 9
+ 
+ 121
+.
+
+c. Calculate P(RB OR BR).
+
+c. The tree diagram shows that there are 24 ways to draw RB and 24 ways to draw BR. There are 121 possible outcomes, so P(RB or BR) = 
+
+ 24+24
+
+ 121
+
+ =
+ 
+ 48
+
+ 121
+
+.
+
+The events RB and BR are mutually exclusive, so P(RB OR BR) = P(RB) + P(BR) = P(R)P(B) + P(B)P(R) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 8
+ 
+ 11
+
+ )
+ 
+ + 
+ 
+ (
+
+ 8
+ 
+ 11
+
+ )(
+
+ 3
+ 
+ 11
+
+ )
+ 
+ = 
+
+ 48
+
+ 121
+.
+
+d. Using the tree diagram, calculate P(R on 1st draw AND B on 2nd draw).
+
+d. Follow the path on the tree. There are three ways to get a red marble on the first draw and eight ways to get a blue on the second draw. There are 3 × 8 = 24 ways to draw red then blue, so P(RB) = 
+
+24
+
+ 121
+
+.
+
+Can you think of another way to find this probability? P(R on 1st draw AND B on 2nd draw) = P(RB) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 8
+ 
+ 11
+
+ )
+ 
+ = 
+
+ 24
+
+ 121
+
+e. Using the tree diagram, calculate P(R on 2nd draw GIVEN B on 1st draw).
+
+e. Given that a blue marble is selected first, we need only follow the left set of branches on the tree diagram. In this case, there are three ways to obtain red on the second draw and 11 possible outcomes.
+P(
+ 
+ R on 2nd draw GIVEN B on 1st
+ 
+ )=P(
+ 
+ R on 2nd | B on 1st
+ 
+ )=
+ 3
+ 
+ 11
+
+You can also use the formula
+
+f. Using the tree diagram, calculate P(BB).
+
+f. P(BB) = 
+
+ 64
+
+ 121
+
+g. Using the tree diagram, calculate P(B on the 2nd draw GIVEN R on the first draw).
+
+g. P(B on 2nd draw|R on 1st draw) = 
+
+ 8
+ 
+ 11
+
+There are 9 + 24 outcomes that have R on the first draw (9 RR and 24 RB). The sample space is then 9 + 24 = 33. Twenty-four of the 33 outcomes have B on the second draw. The probability is then 
+ 24
+ 33
+ .
+
+Try It
+
+In a standard deck, there are 52 cards. Twelve cards are face cards (event F) and 40 cards are not face cards (event N). Draw two cards, one at a time, with replacement. All possible outcomes are shown in the tree diagram as frequencies. Using the tree diagram, calculate P(FF).
+
+Total number of outcomes is 144 + 480 + 480 + 1600 = 2,704.
+P(FF) = 
+
+ 144
+
+ 144 + 480 + 480 + 1,600
+
+ =
+ 
+ 144
+
+ 2,704
+
+ =
+ 9
+ 
+ 169
+
+An urn has three red marbles and eight blue marbles in it. Draw two marbles, one at a time, this time without replacement, from the urn. Without replacement means that you do not put the first ball back before you select the second marble. Following is a tree diagram for this situation. The branches are labeled with probabilities instead of frequencies. The numbers at the ends of the branches are calculated by multiplying the numbers on the two corresponding branches, for example, P(RR) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 2
+ 
+ 10
+
+ )=
+ 6
+ 
+ 110
+
+.
+
+NOTE
+
+If you draw a red on the first draw from the three red possibilities, there are two red marbles left to draw on the second draw. You do not put back or replace the first marble after you have drawn it. You draw without replacement, so that on the second draw there are 10 marbles left in the urn.
+Calculate the following probabilities using the tree diagram:
+
+a. P(RR) = ________
+
+a. P(RR) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 2
+ 
+ 10
+
+ )=
+ 6
+ 
+ 110
+
+b. Fill in the blanks.
+P(RB OR BR) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 8
+ 
+ 10
+
+ ) + (________)(________) = 
+ 
+ 48
+
+ 110
+
+b. P(RB OR BR) = P(RB) + P(BR) = P(R on 1st) P(B on 2nd) + P(B on 1st) P(R on 2nd) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 8
+ 
+ 10
+
+ )
+ 
+ + 
+ 
+ (
+
+ 8
+ 
+ 11
+
+ )(
+
+ 3
+ 
+ 10
+
+ )
+ 
+ = 
+
+ 48
+
+ 110
+
+c. Because this is a conditional probability, we restrict the sample space to consider only those outcomes that have a blue marble in the first draw. Look at the second level of the tree to see that P(R on 2nd|B on 1st) = 
+
+ 3
+ 
+ 10
+
+c. P(R on 2nd|B on 1st) = 
+
+ 3
+ 
+ 10
+
+d. Fill in the blanks.
+P(R on 1st AND B on 2nd) = P(RB) = (________)(________) = 
+
+ 24
+
+ 100
+
+d. P(R on 1st AND B on 2nd) = P(RB) = 
+ 
+ (
+
+ 3
+ 
+ 11
+
+ )(
+
+ 8
+ 
+ 10
+
+ )
+ 
+ = 
+
+ 24
+
+ 100
+
+e. Find P(BB).
+
+e. P(BB) = 
+ 
+ (
+
+ 8
+ 
+ 11
+
+ )(
+
+ 7
+ 
+ 10
+
+ )
+
+f. Find P(B on 2nd|R on 1st).
+
+f. Using the tree diagram, P(B on 2nd|R on 1st) = P(R|B) = 
+
+ 8
+ 
+ 10
+
+.
+
+If we are using probabilities, we can label the tree in the following general way:
+P(R|R) here means P(R on 2nd|R on 1st)
+P(B|R) here means P(B on 2nd|R on 1st)
+P(R|B) here means P(R on 2nd|B on 1st)
+P(B|B) here means P(B on 2nd|B on 1st)
+
+Try It
+
+In a standard deck, there are 52 cards. Twelve cards are face cards (F) and 40 cards are not face cards (N). Draw two cards, one at a time, without replacement. The tree diagram is labeled with all possible probabilities.
+
+Find P(FN OR NF).
+
+Find P(N|F).
+
+Find P(at most one face card).
+Hint: At most one face card means zero or one face card.
+
+Find P(at least one face card).
+Hint: At least one face card means one or two face cards.
+P(FN OR NF) = 
+
+ 480
+
+ 2,652
+
+  + 
+ 
+ 480
+
+ 2,652
+
+  = 
+ 
+ 960
+
+ 2,652
+
+  = 
+ 
+ 80
+
+ 221
+P(N|F) = 
+
+ 40
+
+ 51
+P(at most one face card) = 
+
+ (480  +  480  +  1,560)
+
+ 2,652
+
+ = 
+
+ 2,520
+
+ 2,652
+P(at least one face card) = 
+
+ (132 + 480 + 480)
+
+ 2,652
+
+ = 
+
+ 1,092
+
+ 2,652
+
+A litter of kittens available for adoption at the Humane Society has four tabby kittens and five black kittens. A family comes in and randomly selects two kittens (without replacement) for adoption.
+
+Which shows the probability that both kittens are tabby?
+
+ a.(
+
+ 1
+ 2
+
+ )(
+
+ 1
+ 2
+
+ )
+
+ b.(
+
+ 4
+ 9
+
+ )(
+
+ 4
+ 9
+
+ )
+
+ c.(
+
+ 4
+ 9
+
+ )(
+
+ 3
+ 8
+
+ )
+
+ d.(
+
+ 4
+ 9
+
+ )(
+
+ 5
+ 9
+
+ )
+
+What is the probability that one kitten of each coloring is selected?
+
+ a.(
+
+ 4
+ 9
+
+ )(
+
+ 5
+ 9
+
+ )
+
+ b.(
+
+ 4
+ 9
+
+ )(
+
+ 5
+ 8
+
+ )
+
+ c.(
+
+ 4
+ 9
+
+ )(
+
+ 5
+ 9
+
+ )+(
+
+ 5
+ 9
+
+ )(
+
+ 4
+ 9
+
+ )
+
+ d.(
+
+ 4
+ 9
+
+ )(
+
+ 5
+ 8
+
+ )+(
+
+ 5
+ 9
+
+ )(
+
+ 4
+ 8
+
+ )
+
+What is the probability that a tabby is chosen as the second kitten when a black kitten was chosen as the first?
+
+What is the probability of choosing two kittens of the same color?
+
+a. 
+
+ (
+
+ 4
+ 9
+
+ )(
+
+ 3
+ 8
+
+ )
+
+, b. 
+ 
+ (
+
+ 4
+ 9
+
+ )(
+
+ 5
+ 8
+
+ )+(
+
+ 5
+ 9
+
+ )(
+
+ 4
+ 8
+
+ )
+ 
+ , c. 
+
+ 4
+ 8
+
+, d. 
+
+ 32
+
+ 72
+
+Try It
+
+Suppose there are four red balls and three yellow balls in a box. Three balls are drawn from the box without replacement. What is the probability that one ball of each coloring is selected?
+(
+
+ 4
+ 7
+
+ )(
+
+ 3
+ 6
+
+ )
+ 
+ + 
+ 
+ (
+
+ 3
+ 7
+
+ )(
+
+ 4
+ 6
+
+ )
+
+Venn Diagram
+
+A Venn diagram is a picture that represents the outcomes of an experiment. It generally consists of a box that represents the sample space S together with circles or ovals. The circles or ovals represent events.
+
+Suppose an experiment has the outcomes 1, 2, 3, . . . , 12 where each outcome has an equal chance of occurring. Let event A = {1, 2, 3, 4, 5, 6} and event B = {6, 7, 8, 9}. Then A AND B = {6} and A OR B = {1, 2, 3, 4, 5, 6, 7, 8, 9}. The Venn diagram is as follows:
+
+Try It
+
+Suppose an experiment has outcomes black, white, red, orange, yellow, green, blue, and purple, where each outcome has an equal chance of occurring. Let event C = {green, blue, purple} and event P = {red, yellow, blue}. Then C AND P = {blue} and C OR P = {green, blue, purple, red, yellow}. Draw a Venn diagram representing this situation.
+
+Flip two fair coins. Let A = tails on the first coin. Let B = tails on the second coin. Then A = {TT, TH} and B = {TT, HT}. Therefore, A AND B = {TT}. A OR B = {TH, TT, HT}.
+
+The sample space when you flip two fair coins is X = {HH, HT, TH, TT}. The outcome HH is in NEITHER A NOR B. The Venn diagram is as follows:
+
+Try It
+
+Roll a fair, six-sided die. Let A = a prime number of dots is rolled. Let B = an odd number of dots is rolled. Then A = {2, 3, 5} and B = {1, 3, 5}. Therefore, A AND B = {3, 5}. A OR B = {1, 2, 3, 5}. The sample space for rolling a fair die is S = {1, 2, 3, 4, 5, 6}. Draw a Venn diagram representing this situation.
+Forty percent of the students at a local college belong to a club and 50 percent work part time. Five percent of the students work part time and belong to a club. Draw a Venn diagram showing the relationships. Let C = student belongs to a club and PT = student works part time.
+
+Start by drawing a rectangle to represent the sample space. Then draw two circles or ovals inside the rectangle to represent the events of interest: belonging to a club (C) and working part time (PT). Always draw overlapping shapes to represent outcomes that are in both events.
+
+Label each piece of the diagram clearly and note the probability or frequency of each part. Start by labeling the overlapping section first. Note that the probabilities in C total 0.40 and the sum of the probabilities in PT is 0.50. The total of all probabilities displayed must be 1, representing 100 percent of the sample space.
+
+If a student is selected at random, find the following:
+
+the probability that the student belongs to a club.
+
+the probability that the student works part time.
+
+the probability that the student belongs to a club AND works part time.
+
+the probability that the student belongs to a club given that the student works part time.
+
+the probability that the student belongs to a club OR works part time.
+P(C) = .40
+P(PT) = .50
+P(C AND PT) = .05
+P(C|PT) = 
+ 
+ P(C AND PT)
+
+ P(PT)
+
+  = 
+ 
+ .05
+
+ .50
+
+  = .1
+P(C OR PT) = P(C) + P(PT) − P(C AND PT) = .40 + .50 − .05 = .85
+
+Try It
+
+Fifty percent of the workers at a factory work a second job, 25 percent have a spouse who also works, and 5 percent work a second job and have a spouse who also works. Draw a Venn diagram showing the relationships. Let W = works a second job and S = spouse also works.
+
+A person with type O blood and a negative Rh factor (Rh–) can donate blood to any person with any blood type. Four percent of African Americans have type O blood and a negative Rh factor, 5−10 percent of African Americans have the Rh– factor, and 51 percent have type O blood.
+
+The “O” circle represents the African Americans with type O blood. The “Rh–" oval represents the African Americans with the Rh– factor.
+
+We will use the average of 5 percent and 10 percent, 7.5 percent, as the percentage of African Americans who have the Rh– factor. Let O = African American with Type O blood and R = African American with Rh– factor.
+P(O) = ___________
+P(R) = ___________
+P(O AND R) = ___________
+P(O OR R) = ____________
+
+In the Venn Diagram, describe the overlapping area using a complete sentence.
+
+In the Venn Diagram, describe the area in the rectangle but outside both the circle and the oval using a complete sentence.
+
+a. P(O) = .51
+
+b. P(R) = .075 because an average of 7.5 percent of African Americans have the Rh– factor.
+
+c. P(O AND R) = 0.04 because 4 percent of African Americans have both Type O blood and the Rh– factor.
+
+d. P(O OR R) = P(O) + P(R) - P(O AND R) = .51 + .075 − .04 = .545
+
+e. The area represents the African Americans that have type O blood and the Rh– factor.
+
+f. The area represents the African Americans that have neither type O blood nor the Rh– factor.
+
+Try It
+
+In a bookstore, the probability that the customer buys a novel is .6, and the probability that the customer buys a nonfiction book is .4. Suppose that the probability that the customer buys both is .2.
+
+Draw a Venn diagram representing the situation.
+
+Find the probability that the customer buys either a novel or a nonfiction book.
+
+In the Venn diagram, describe the overlapping area using a complete sentence.
+
+Suppose that some customers buy only compact disks. Draw an oval in your Venn diagram representing this event.
+
+a. and d. In the following Venn diagram below, the blue oval represent customers buying a novel, the red oval represents customer buying non-fiction, and the yellow oval customer who buy compact disks.
+
+b. P(novel or non-fiction) = P(Blue OR Red) = P(Blue) + P(Red) - P(Blue AND Red) = 0.6 + 0.4 - 0.2 = 0.8.
+c. The overlapping area of the blue oval and red oval represents the customers buying both a novel and a nonfiction book.
+
+References
+
+American Cancer Society. (n.d.). Retrieved from https://www.cancer.org/
+
+Clara County Public Health Department. (n.d.). Retrieved from https://www.sccgov.org/sites/sccphd/en-us/pages/phd.aspx
+
+Federal Highway Administration, U.S. Department of Transportation. (n.d.). Retrieved from https://www.fhwa.dot.gov/
+
+The Data and Story Library. (1996). Retrieved from http://lib.stat.cmu.edu/DASL/
+
+The Roper Center for Public Opinion Research. (2013). Search for datasets. Retrieved from http://www.ropercenter.uconn.edu/data_access/data/search_for_datasets.html
+USA Today. (n.d.). Retrieved from https://www.usatoday.com/
+
+U.S. Census Bureau. (n.d.). Retrieved from https://www.census.gov/
+
+World Bank Group. (2013). Environment. Available online at http://data.worldbank.org/topic/environment
+
+Chapter Review
+
+A tree diagram uses branches to show the different outcomes of experiments and makes complex probability questions easy to visualize.
+
+A Venn diagram is a picture that represents the outcomes of an experiment. It generally consists of a box that represents the sample space S together with circles or ovals. The circles or ovals represent events. A Venn diagram is especially helpful for visualizing the OR event, the AND event, and the complement of an event and for understanding conditional probabilities.
+
+The probability that a man develops some form of cancer in his lifetime is 0.4567. The probability that a man has at least one false-positive test result, meaning the test comes back for cancer when the man does not have it, is .51. Let C = a man develops cancer in his lifetime; P = a man has at least one false-positive test. Construct a tree diagram of the situation.
+
+Homework
+Use the following information to answer the next two exercises. This tree diagram shows the tossing of an unfair coin followed by drawing one bead from a cup containing three red (R), four yellow (Y), and five blue (B) beads. For the coin, P(H) = 
+
+ 2
+ 3
+
+ and P(T) = 
+
+ 1
+ 3
+
+ where H is heads and T is tails.
+
+Find P(tossing a head on the coin AND a red bead).
+2
+ 3
+5
+ 15
+6
+ 36
+5
+ 36
+
+Find P(blue bead).
+15
+
+ 36
+10
+
+ 36
+10
+
+ 12
+6
+
+ 36
+
+a
+
+A box of cookies contains three chocolate and seven butter cookies. Miguel randomly selects a cookie and eats it. Then he randomly selects another cookie and eats it. How many cookies did he take?
+
+Draw the tree that represents the possibilities for the cookie selections. Write the probabilities along each branch of the tree.
+
+Are the probabilities for the flavor of the second cookie that Miguel selects independent of his first selection? Explain.
+
+For each complete path through the tree, write the event it represents and find the probabilities.
+
+Let S be the event that both cookies selected were the same flavor. Find P(S).
+
+Let T be the event that the cookies selected were different flavors. Find P(T) by two different methods by using the complement rule and by using the branches of the tree. Your answers should be the same with both methods.
+
+Let U be the event that the second cookie selected is a butter cookie. Find P(U).
+
+Bringing It Together
+Use the following information to answer the next two exercises. Suppose that you have eight cards. Five are green and three are yellow. The cards are well shuffled.
+
+Suppose that you randomly draw two cards, one at a time, with replacement.
+Let G1 = first card is green
+Let G2 = second card is green
+
+Draw a tree diagram of the situation.
+
+Find P(G1 AND G2).
+
+Find P(at least one green).
+
+Find P(G2|G1).
+
+Are G2 and G1 independent events? Explain why or why not.
+
+P(GG) = 
+ 
+ (
+
+ 5
+ 8
+
+ )(
+
+ 5
+ 8
+
+ )
+ 
+ = 
+
+ 25
+
+ 64
+P(at least one green) = P(GG) + P(GY) + P(YG) = 
+
+ 25
+
+ 64
+
+ + 
+
+ 15
+
+ 64
+
+ + 
+
+ 15
+
+ 64
+
+ = 
+
+ 55
+
+ 64
+P(G|G) = 
+
+ 5
+ 8
+
+Yes, they are independent because the first card is placed back in the bag before the second card is drawn. The composition of cards in the bag remains the same from draw one to draw two.
+
+Suppose that you randomly draw two cards, one at a time, without replacement.
+G1 = first card is green
+G2 = second card is green
+
+Draw a tree diagram of the situation.
+
+Find P(G1 AND G2).
+
+Find P(at least one green).
+
+Find P(G2|G1).
+
+Are G2 and G1 independent events? Explain why or why not.
+Use the following information to answer the next two exercises. The percent of licensed U.S. drivers (from a recent year) who are female is 48.60. Of the females, 5.03 percent are age 19 and under; 81.36 percent are age 20–64; 13.61 percent are age 65 or over. Of the licensed U.S. male drivers, 5.04 percent are age 19 and under; 81.43 percent are age 20–64; 13.53 percent are age 65 or over.
+
+Complete the following:
+
+Construct a table or a tree diagram of the situation.
+
+Find P(driver is female).
+
+Find P(driver is age 65 or over|driver is female).
+
+Find P(driver is age 65 or over AND female).
+
+In words, explain the difference between the probabilities in Part c and Part d.
+
+Find P(driver is age 65 or over).
+
+Are being age 65 or over and being female mutually exclusive events? How do you know?
+<2020–64>64Totals
+
+Female
+.0244
+.3954
+.0661
+.486
+
+Male
+.0259
+.4186
+.0695
+.514
+
+Totals
+.0503
+.8140
+.1356
+1
+
+<20
+20–64
+>64
+Female
+.0244
+.3954
+.0661
+Male
+.0259
+.4186
+.0695
+Totals
+.0503
+.8140
+.1356
+P(F) = .486
+P(>64|F) = .1361
+P(>64 and F) = P(F) P(>64|F) = (.486)(.1361) = .0661
+P(>64|F) is the percentage of female drivers who are 65 or older and P(>64 and F) is the percentage of drivers who are female and 65 or older.
+P(>64) = P(>64 and F) + P(>64 and M) = .1356
+
+No, being female and 65 or older are not mutually exclusive because they can occur at the same time P(>64 and F) = .0661.
+
+Suppose that 10,000 U.S. licensed drivers are randomly selected.
+
+How many would you expect to be male?
+
+Using the table or tree diagram, construct a contingency table of gender versus age group.
+
+Using the contingency table, find the probability that out of the age 20–64 group, a randomly selected driver is female.
+
+Approximately 86.5 percent of Americans commute to work by car, truck, or van. Out of that group, 84.6 percent drive alone and 15.4 percent drive in a carpool. Approximately 3.9 percent walk to work and approximately 5.3 percent take public transportation.
+
+Construct a table or a tree diagram of the situation. Include a branch for all other modes of transportation to work.
+
+Assuming that the walkers walk alone, what percent of all commuters travel alone to work?
+
+Suppose that 1,000 workers are randomly selected. How many would you expect to travel alone to work?
+
+Suppose that 1,000 workers are randomly selected. How many would you expect to drive in a carpool?
+Car, Truck or Van
+Walk
+Public Transportation
+Other
+Totals
+
+Alone
+.7318
+
+Not Alone
+.1332
+
+Totals
+.8650
+.0390
+.0530
+.0430
+1
+
+Car, Truck or Van
+Walk
+Public Transportation
+Other
+Alone
+Not Alone
+Totals
+.8650
+.0390
+.0530
+.0430
+1
+If we assume that all walkers are alone and that none from the other two groups travel alone (which is a big assumption) we have: P(Alone) = .7318 + .0390 = .7708.
+
+Make the same assumptions as in (b) we have: (.7708)(1,000) = 771
+
+(.1332)(1,000) = 133
+
+When the euro coin was introduced in 2002, two math professors had their statistics students test whether the Belgian one euro-coin was a fair coin. They spun the coin rather than tossing it and found that out of 250 spins, 140 showed a head (event H) while 110 showed a tail (event T). On that basis, they claimed that it is not a fair coin.
+
+Based on the given data, find P(H) and P(T).
+
+Use a tree to find the probabilities of each possible outcome for the experiment of spinning the coin twice.
+
+Use the tree to find the probability of obtaining exactly one head in two spins of the coin.
+
+Use the tree to find the probability of obtaining at least one head.
+Use the following information to answer the next two exercises. The following are real data from Santa Clara County, California. As of a certain time, there had been a total of 3,059 documented cases of a disease in the county. They were grouped into the following categories, with risk factors of becoming ill with the disease labeled as Methods A, B, and C and Other:
+
+ Method A
+ Method B
+ Method C
+ Other
+ Totals
+
+ Female
+ 0
+ 70
+ 136
+ 49
+ ____
+
+ Male
+ 2,146
+ 463
+ 60
+ 135
+ ____
+
+ Totals
+ ____
+ ____
+ ____
+ ____
+ ____
+
+Method A
+Method B
+Method C
+Other
+Totals
+Female
+0
+70
+136
+49
+____
+Male
+2,146
+463
+60
+135
+____
+Totals
+____
+____
+____
+____
+____
+Suppose a person with a disease in Santa Clara County is randomly selected.
+
+Find P(Person is female).
+
+Find P(Person has a risk factor of method C).
+
+Find P(Person is female OR has a risk factor of method B).
+
+Find P(Person is female AND has a risk factor of method A).
+
+Find P(Person is male AND has a risk factor of method B).
+
+Find P(Person is female GIVEN person got the disease from method C).
+
+Construct a Venn diagram. Make one group females and the other group method C.
+
+The completed contingency table is as follows:
+
+Method A
+Method B
+Method C
+Other
+Totals
+Female
+0
+70
+136
+255
+Male
+2,146
+463
+60
+2,804
+255
+ 3059
+196
+ 3059
+718
+ 3059
+
+0
+463
+ 3059
+136
+ 196
+
+Answer these questions using probability rules. Do NOT use the contingency table. Three thousand fifty-nine cases of a disease had been reported in Santa Clara County, California, through a certain date. Those cases will be our population. Of those cases, 6.4 percent obtained the disease through method C and 7.4 percent are female. Out of the females with the disease, 53.3 percent got the disease from method C.
+
+Find P(Person is female).
+
+Find P(Person obtained the disease through method C).
+
+Find P(Person is female GIVEN person got the disease from method C)
+
+Construct a Venn diagram representing this situation. Make one group females and the other group method C. Fill in all values as probabilities.
+
+the useful visual representation of a sample space and events in the form of a tree with branches marked by possible outcomes together with associated probabilities (frequencies, relative frequencies)
+the visual representation of a sample space and events in the form of circles or ovals showing their intersections

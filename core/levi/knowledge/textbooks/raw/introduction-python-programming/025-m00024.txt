@@ -1,0 +1,70 @@
+# m00024
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+List basics
+
+List basics
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use indexes to access individual elements in a list.
+
+Use indexes to modify individual elements in a list.
+
+Use len() function to find the length of a list.
+
+Demonstrate that lists can be changed after creation.
+
+Lists
+
+A list object can be used to bundle elements together in Python. A list is defined by using square brackets [] with comma separated values within the square brackets. Ex: list_1 = [1, 2, 4].
+
+Empty lists can be defined in two ways:
+ 
+ list_1 = []
+ list_1 = list()
+list_1 = []
+list_1 = list()
+
+Lists can be made of elements of any type. Lists can contain integers, strings, floats, or any other type. Lists can also contain a combination of types. Ex: [2, "Hello", 2.5] is a valid list.
+
+Python lists allow programmers to change the contents of the list in various ways.
+
+Lists
+
+Lists
+
+Using indexes
+
+Individual list elements can be accessed directly using an index. Indexes begin at 0 and end at one less than the length of the sequence. Ex: For a sequence of 50 elements, the first position is 0, and the last position is 49.
+
+The index number is put in square brackets [] and attached to the end of the name of the list to access the required element. Ex: new_list[3] accesses the 4th element in new_list. An expression that evaluates to an integer number can also be used as an index. Similar to strings, negative indexing can also be used to address individual elements. Ex: Index -1 refers to the last element and -2 the second-to-last element.
+
+The len() function, when called on a list, returns the length of the list.
+
+List indexes and len() function
+
+The following code demonstrates the use of list indexes and the len() function. Line 6 shows the use of the len() function to get the length of the list. Line 10 shows how to access an element using an index. Line 14 shows how to modify a list element using an index.
+
+The above code's output is:
+
+List indexes and the len() function
+
+List basics
+
+Write a program to complete the following:
+ 
+ Create a list with the following elements: 2, 23, 39, 6, -5. 
+ Change the third element of the list (index 2) to 35. 
+ Print the resulting list and the list's length.
+
+Create a list with the following elements: 2, 23, 39, 6, -5.
+
+Change the third element of the list (index 2) to 35.
+
+Print the resulting list and the list's length.

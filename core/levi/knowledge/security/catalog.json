@@ -1,0 +1,1355 @@
+{
+  "entries": [
+    {
+      "id": "android-security",
+      "name": "Android Security",
+      "defensive_summary": "Android Security covers the attack surface of the Android platform: app sandboxing, permissions, intents, WebView, and device-level protections. Defenders care because mobile devices hold credentials, MFA tokens, and corporate data, making them a prime target for credential theft and surveillance. Understanding the platform's security model lets defenders evaluate app risk, configure MDM policies, and spot malicious apps.",
+      "detection_notes": "Watch for apps requesting excessive permissions relative to their function, side-loaded APKs outside managed app stores, and MDM telemetry showing disabled screen lock or unknown device-admin apps. On managed fleets, alert on devices failing SafetyNet/Play Integrity checks or reporting rooted status.",
+      "hardening_notes": "Enforce managed app distribution through an MDM, require device encryption and strong screen lock, and restrict side-loading on corporate devices. Keep the OS and WebView patched, apply least-privilege app permissions, and segment corporate data with work profiles.",
+      "key_concepts": [
+        "app sandbox",
+        "permissions model",
+        "intents",
+        "MDM",
+        "side-loading",
+        "Play Integrity"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Android Security",
+      "attack_relevant": true,
+      "attack_profile": "Attacks against Android typically arrive as malicious or trojanized apps that abuse granted permissions to exfiltrate data, intercept MFA codes, or surveil the user. Conceptually the attack exploits the gap between what an app claims to do and what its permissions allow, sometimes combined with accessibility services for screen reading or overlay windows for credential theft. Targets include banking credentials, authenticator data, and corporate email. Observable footprints: apps requesting permissions far beyond their function, side-loaded APKs, accessibility-service abuse, and data exfiltration to unusual domains."
+    },
+    {
+      "id": "appsec",
+      "name": "AppSec",
+      "defensive_summary": "AppSec (application security) is the practice of finding and fixing vulnerabilities in software across its lifecycle, from design to deployment. Defenders care because the application layer is where business logic flaws, injection, and broken access control live — the flaws most often exploited in breaches. A mature AppSec program combines secure coding, testing, and guardrails in the delivery pipeline.",
+      "detection_notes": "Watch SAST/DAST/SCA findings trending upward, repeated vulnerability classes across services, and runtime alerts from RASP or WAF telemetry. Track mean time to remediate by severity as the program health signal.",
+      "hardening_notes": "Embed security checks into CI/CD (SAST, dependency scanning, secret scanning), adopt secure defaults and vetted frameworks, and run threat modeling for high-risk features. Fix vulnerability classes at the framework level rather than one bug at a time.",
+      "key_concepts": [
+        "SAST",
+        "DAST",
+        "SCA",
+        "threat modeling",
+        "secure SDLC",
+        "RASP"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> AppSec",
+      "attack_relevant": true,
+      "attack_profile": "Application-layer attacks exploit flaws in how software handles input, identity, and business logic: injection, broken access control, and logic abuse are the classic classes. Conceptually the attacker feeds the application inputs its developers never anticipated, turning the app's own features against it. Targets are data stores, user accounts, and backend systems reachable through the app. Observable footprints: anomalous input patterns in logs, authorization-bypass attempts, and error messages revealing internals."
+    },
+    {
+      "id": "asset-discovery",
+      "name": "Asset Discovery",
+      "defensive_summary": "Asset Discovery is the discipline of finding every internet-facing and internal asset an organization owns: domains, subdomains, IPs, cloud resources, and shadow IT. Defenders care because you cannot protect what you do not know exists, and attackers routinely find forgotten assets first. Continuous discovery feeds vulnerability management and reduces the unknown attack surface.",
+      "detection_notes": "Watch for new DNS records, unexpected TLS certificates (via certificate transparency logs), and cloud resources appearing outside approved accounts. Alert when external scan data shows services on assets missing from the CMDB.",
+      "hardening_notes": "Maintain a living asset inventory reconciled against DNS, certificate transparency, and cloud APIs. Require asset registration before production exposure, decommission stale endpoints, and scan the discovered surface on a schedule.",
+      "key_concepts": [
+        "attack surface",
+        "certificate transparency",
+        "shadow IT",
+        "CMDB",
+        "subdomain enumeration",
+        "cloud asset inventory"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Asset Discovery",
+      "attack_relevant": true,
+      "attack_profile": "Attackers perform asset discovery as reconnaissance: enumerating subdomains, certificates, and cloud resources to find the forgotten or misconfigured systems defenders overlook. Conceptually it is systematic enumeration of the target's public footprint using DNS, certificate transparency, and search engines. Targets: dev servers, staging environments, and legacy systems. Observable footprints from the defender's side: enumeration patterns in DNS logs, certificate-transparency alerts for lookalike domains, and scans against non-production hosts."
+    },
+    {
+      "id": "bug-bounty",
+      "name": "Bug Bounty",
+      "defensive_summary": "Bug Bounty covers vulnerability disclosure programs where independent researchers report flaws for rewards, plus the write-ups hunters publish. Defenders care because bounty programs surface real-world vulnerabilities in production systems, and published write-ups are free threat intelligence about which bug classes are being exploited. A well-run program multiplies the eyes on your attack surface.",
+      "detection_notes": "Watch for duplicate or out-of-scope reports that reveal asset inventory gaps, and track which vulnerability classes recur in submissions. Monitor public write-ups about your technology stack for techniques that may soon target you.",
+      "hardening_notes": "Publish a clear scope and safe-harbor policy, triage reports quickly, and feed recurring bug classes back into developer training and pipeline checks. Treat the program as a complement to, not a replacement for, internal testing.",
+      "key_concepts": [
+        "VDP",
+        "safe harbor",
+        "scope",
+        "triage",
+        "write-ups",
+        "coordinated disclosure"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Bug Bounty",
+      "attack_relevant": true,
+      "attack_profile": "Bug bounty hunting systematizes vulnerability discovery against in-scope production systems, with hunters chaining minor flaws into impactful exploits. Conceptually it mirrors adversary reconnaissance but with authorization and disclosure. Targets: web apps, APIs, and mobile backends. Defensive value: each published write-up documents a real exploited flaw class to defend against; footprints of malicious lookalikes include out-of-scope probing and automated scanning bursts."
+    },
+    {
+      "id": "cellular-hacking",
+      "name": "Cellular Hacking",
+      "defensive_summary": "Cellular Hacking research covers weaknesses in 3G/4G/5G protocols, basebands, and SIM infrastructure. Defenders care because SMS-based MFA, voice calls, and mobile data all ride on this infrastructure, and protocol downgrades or rogue base stations can intercept them. Understanding these weaknesses drives MFA choices and mobile policy.",
+      "detection_notes": "Watch for unexpected network downgrades (5G/4G to 2G), duplicate SIM activation events, and MFA delivery failures clustered by carrier. Mobile threat defense telemetry can flag baseband anomalies and IMSI-catcher indicators.",
+      "hardening_notes": "Move high-value accounts from SMS OTP to phishing-resistant MFA such as FIDO2 keys, and prefer app-based or hardware-backed authenticators. Monitor SIM-swap processes with carriers and train staff on number-porting fraud.",
+      "key_concepts": [
+        "IMSI catcher",
+        "SIM swap",
+        "SS7",
+        "baseband",
+        "FIDO2",
+        "downgrade attack"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Cellular Hacking",
+      "attack_relevant": true,
+      "attack_profile": "Cellular attacks exploit protocol and infrastructure weaknesses: rogue base stations that force network downgrades, signaling-system interception and location tracking, and SIM-swap fraud via carrier social engineering. Conceptually the attack inserts the adversary into the trust path between phone and network. Targets: SMS one-time codes, calls, and location data. Observable footprints: sudden 2G downgrades, duplicate SIM activations, and MFA delivery anomalies."
+    },
+    {
+      "id": "cicd-attacks",
+      "name": "CI/CD Attacks",
+      "defensive_summary": "CI/CD Attacks research studies how build and deployment pipelines can be abused: poisoned dependencies, leaked secrets, and runner compromise. Defenders care because a compromised pipeline can silently backdoor every artifact it ships, turning one breach into a supply-chain incident. Pipeline integrity is release integrity.",
+      "detection_notes": "Watch for unexpected changes to pipeline definitions, secrets accessed from unusual jobs, and artifacts whose hashes differ from reproducible builds. Alert on new external contributors gaining write access to pipeline configuration.",
+      "hardening_notes": "Pin dependencies with lockfiles and hashes, scope pipeline tokens to least privilege with short lifetimes, and require reviews for pipeline definition changes. Sign artifacts and verify signatures at deploy time; keep runners ephemeral and isolated.",
+      "key_concepts": [
+        "supply chain",
+        "artifact signing",
+        "OIDC",
+        "ephemeral runners",
+        "dependency pinning",
+        "SLSA"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> CI/CD Attacks",
+      "attack_relevant": true,
+      "attack_profile": "CI/CD attacks target the build pipeline itself: injecting malicious code via compromised dependencies or pull requests, stealing pipeline secrets, or tampering with artifacts between build and deploy. Conceptually the pipeline is a trusted insider, so compromising it backdoors everything it ships. Targets: release artifacts, signing keys, and deployment credentials. Observable footprints: pipeline-definition changes, anomalous secret access, and artifact hash mismatches."
+    },
+    {
+      "id": "ctf",
+      "name": "CTF",
+      "defensive_summary": "CTF (Capture The Flag) covers the frameworks, challenges, and resources used in cybersecurity competitions. Defenders care because CTFs are the safest legal venue to practice the attacker mindset: participants learn how exploitation works in sandboxed labs, which directly improves detection writing and incident response. Many strong blue-team analysts started in CTFs.",
+      "detection_notes": "Not a detection domain itself; the defender value is in the skills transfer. Teams returning from CTFs often write better detection rules because they have seen the techniques from the attacker's side in a lab.",
+      "hardening_notes": "Use internal CTFs and lab environments to train defenders on real technique mechanics, then convert each solved challenge into a detection or hardening task. Keep all practice inside isolated labs, never against production or third-party systems.",
+      "key_concepts": [
+        "jeopardy",
+        "attack-defense",
+        "wargames",
+        "sandboxed labs",
+        "blue team training"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> CTF",
+      "attack_relevant": false
+    },
+    {
+      "id": "cyber-security-university",
+      "name": "Cyber Security University",
+      "defensive_summary": "Cyber Security University collects free, hands-on learning resources for building cybersecurity skill by doing. Defenders care because continuous practice is the only way detection and response skills stay sharp against evolving threats. Structured labs beat passive reading for building muscle memory.",
+      "detection_notes": "For team leads: watch for skill gaps by tracking which lab scenarios your analysts struggle with, and map training back to the techniques most seen in your telemetry.",
+      "hardening_notes": "Build a training plan that pairs each defensive control you own with a lab exercise, and schedule recurring practice rather than one-off sessions. Document lessons learned from labs in runbooks so the whole team benefits.",
+      "key_concepts": [
+        "hands-on labs",
+        "blue team training",
+        "skill progression",
+        "runbooks"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Cyber Security University",
+      "attack_relevant": false
+    },
+    {
+      "id": "cyber-skills",
+      "name": "Cyber Skills",
+      "defensive_summary": "Cyber Skills catalogs legal, safe training environments where practitioners can practice offensive and defensive techniques. Defenders care because these sandboxes let analysts detonate malware, practice forensics, and test detections without risking production. Safe practice grounds are where detection engineering is validated.",
+      "detection_notes": "Use lab environments to generate ground-truth telemetry: run a technique in the lab, capture the logs, and confirm your production detections would fire. Gaps found in the lab are gaps in production.",
+      "hardening_notes": "Keep training traffic strictly inside isolated lab networks, snapshot environments for repeatability, and treat lab credentials as disposable. Convert every lab exercise into a detection rule or hardening checklist item.",
+      "key_concepts": [
+        "isolated labs",
+        "ground-truth telemetry",
+        "detection validation",
+        "safe practice"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Cyber Skills",
+      "attack_relevant": false
+    },
+    {
+      "id": "cybersources",
+      "name": "Cybersources",
+      "defensive_summary": "Cybersources is a broad collection of cybersecurity tools and resources across many domains. Defenders care because a curated map of the tooling landscape speeds up control selection: instead of evaluating tools blindly, teams can compare options by category. The value is orientation, not any single tool.",
+      "detection_notes": "When adopting a new tool from a broad collection, first define what telemetry it must produce and which detection gaps it closes. Avoid tool sprawl by mapping each tool to a specific control objective.",
+      "hardening_notes": "Standardize on a small, well-understood toolset per domain, keep everything patched and inventoried, and prefer tools with strong logging and API support so they feed the SIEM. Review the toolset annually against your threat model.",
+      "key_concepts": [
+        "tool selection",
+        "control mapping",
+        "telemetry requirements",
+        "tool sprawl"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Cybersources",
+      "attack_relevant": false
+    },
+    {
+      "id": "detection-engineering",
+      "name": "Detection Engineering",
+      "defensive_summary": "Detection Engineering is the practice of designing, building, testing, and operating detective controls: SIEM rules, EDR analytics, and hunting hypotheses. Defenders care because detections are the product of a security operations team; without engineered, tested detections, telemetry is just expensive noise. It turns raw logs into reliable alerts.",
+      "detection_notes": "Watch detection health itself: rule coverage mapped to a technique framework, true/false positive rates, and mean time to detect. Alert on detections that stop firing after log source changes, which signals silent coverage loss.",
+      "hardening_notes": "Version-control detection rules, test them against lab-generated attack telemetry before deploying, and tune with a documented false-positive budget. Map every detection to the technique it covers and review coverage quarterly.",
+      "key_concepts": [
+        "SIEM",
+        "detection-as-code",
+        "MITRE ATT&CK",
+        "true/false positives",
+        "hunting hypotheses",
+        "coverage mapping"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Detection Engineering",
+      "attack_relevant": false
+    },
+    {
+      "id": "devsecops",
+      "name": "DevSecOps",
+      "defensive_summary": "DevSecOps integrates security into DevOps workflows: automated scanning, policy as code, and secure pipeline design. Defenders care because modern infrastructure is defined in code and shipped continuously, so security must move at the same speed. Done well, every commit and deploy carries its security checks with it.",
+      "detection_notes": "Watch pipeline telemetry: failed security gates, suppressed findings, and deploys that bypass checks. Alert on infrastructure-as-code changes that weaken security groups, encryption, or logging.",
+      "hardening_notes": "Make security gates blocking rather than advisory for high-severity findings, manage infrastructure with versioned code and mandatory reviews, and scan containers and dependencies at build time. Keep pipeline secrets in a vault, never in code.",
+      "key_concepts": [
+        "shift left",
+        "policy as code",
+        "IaC scanning",
+        "secret management",
+        "security gates"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> DevSecOps",
+      "attack_relevant": false
+    },
+    {
+      "id": "drone-hacking",
+      "name": "Drone Hacking",
+      "defensive_summary": "Drone Hacking resources cover the security of unmanned aerial systems: their radio links, GPS dependence, and onboard software. Defenders care because drones overfly sensitive sites, can carry sensors into restricted airspace, and their control links are attackable. Facilities with airspace concerns need a drone-aware security posture.",
+      "detection_notes": "Watch for unknown RF drone-control signatures near sensitive facilities using drone-detection sensors, and GPS anomalies suggesting spoofing. Correlate visual or radar sightings with RF telemetry before responding.",
+      "hardening_notes": "Deploy drone detection (RF, radar, optical) proportionate to site sensitivity, establish no-fly coordination with aviation authorities, and harden any organizational drone fleet with encrypted control links and firmware updates. Plan a proportionate, lawful response playbook.",
+      "key_concepts": [
+        "C-UAS",
+        "GPS spoofing",
+        "RF detection",
+        "no-fly zones",
+        "control link encryption"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Drone Hacking",
+      "attack_relevant": true,
+      "attack_profile": "Drone attacks target the aircraft's control link, GPS navigation, or onboard software: jamming, spoofing, or hijacking the command channel. Conceptually the drone trusts unauthenticated radio signals, so a stronger spoofed signal wins. Targets: surveillance evasion, airspace intrusion, or capture of the aircraft. Observable footprints: GPS anomalies, control-link interference, and unexpected flight behavior."
+    },
+    {
+      "id": "embedded-and-iot-security",
+      "name": "Embedded and IoT Security",
+      "defensive_summary": "Embedded and IoT Security addresses the security of constrained devices: firmware, boot chains, and device management at scale. Defenders care because IoT devices are numerous, rarely patched, and often hold network footholds into otherwise segmented environments. A single vulnerable camera fleet can become a botnet or a pivot point.",
+      "detection_notes": "Watch for IoT devices communicating with unexpected external hosts, default-credential login attempts in device logs, and firmware versions with known flaws. Baseline normal device traffic so anomalies stand out.",
+      "hardening_notes": "Segment IoT devices onto dedicated VLANs with strict egress rules, change default credentials before deployment, and require signed firmware updates. Maintain a device inventory with patch status and retire devices that vendors no longer support.",
+      "key_concepts": [
+        "firmware",
+        "secure boot",
+        "device segmentation",
+        "default credentials",
+        "OTA updates",
+        "botnets"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Embedded and IoT Security",
+      "attack_relevant": true,
+      "attack_profile": "IoT attacks exploit constrained devices: default credentials, unpatched firmware, and exposed management services, often conscripting devices into botnets or using them as network pivots. Conceptually the device is a full computer the owner never patches and rarely monitors. Targets: botnet recruitment, lateral movement, and sensor data. Observable footprints: default-credential login attempts, anomalous outbound traffic from device VLANs, and known-vulnerable firmware versions."
+    },
+    {
+      "id": "fuzzing",
+      "name": "Fuzzing",
+      "defensive_summary": "Fuzzing is automated testing that feeds malformed or random inputs to software to uncover crashes and memory-safety flaws. Defenders care because fuzzing finds the vulnerability classes attackers exploit (buffer overflows, parsing bugs) before release, and crash triage teaches root-cause analysis. It is one of the highest-ROI proactive defenses for software you build or buy.",
+      "detection_notes": "In production, watch for crash-reporting telemetry and malformed-input errors clustering on specific parsers, which suggest active probing. In development, track fuzzing coverage and unique crash counts per build.",
+      "hardening_notes": "Run continuous fuzzing on parsers and protocol handlers in CI, triage every unique crash to root cause, and pair fuzzing with sanitizers that turn silent corruption into visible failures. Prefer memory-safe languages for new parsing code.",
+      "key_concepts": [
+        "coverage-guided fuzzing",
+        "sanitizers",
+        "crash triage",
+        "memory safety",
+        "root cause analysis"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Fuzzing",
+      "attack_relevant": true,
+      "attack_profile": "Fuzzing-driven attacks begin where fuzzing ends: the memory-corruption and parsing flaws that malformed inputs reveal become the raw material for exploits. Conceptually the attacker automates input mutation until the target crashes, then analyzes the crash for controllability. Targets: parsers, network services, and file-format handlers. Observable footprints: crash-report clusters and malformed-input error spikes preceding targeted exploitation."
+    },
+    {
+      "id": "hacking",
+      "name": "Hacking",
+      "defensive_summary": "Hacking, as a general topic, covers the tutorials, tools, and techniques used to probe and exploit systems. Defenders study this material for one reason: you cannot reliably detect or stop techniques you do not understand. The defensive value is threat-informed defense — every technique learned becomes a detection to write or a control to verify.",
+      "detection_notes": "Watch for commodity attack tooling executing in your environment: reconnaissance binaries, credential tools, and tunneling utilities that have no business purpose on the host. Baseline normal administrative tooling so attacker tooling stands out.",
+      "hardening_notes": "Convert each studied technique into a defensive action: a detection rule, a configuration hardening, or a tabletop scenario. Restrict dual-use administrative tools with application control and monitor their invocation centrally.",
+      "key_concepts": [
+        "threat-informed defense",
+        "dual-use tools",
+        "technique study",
+        "application control"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Hacking",
+      "attack_relevant": true,
+      "attack_profile": "Hacking as a discipline spans the full intrusion lifecycle: reconnaissance, initial access, privilege escalation, persistence, and exfiltration. Conceptually each phase exploits a different trust assumption, from human trust to software trust to network trust. Targets: credentials, data, and control. Observable footprints: phase-specific telemetry anomalies that, chained together, reveal an intrusion in progress."
+    },
+    {
+      "id": "honeypots",
+      "name": "Honeypots",
+      "defensive_summary": "Honeypots are decoy systems and services designed to attract, detect, and study attackers. Defenders care because any interaction with a honeypot is malicious by definition, producing high-fidelity alerts with almost no false positives. They also yield fresh threat intelligence about current attacker tooling.",
+      "detection_notes": "Alert on any connection to honeypot services, credential use against honey accounts, and file access on honeytokens. Treat honeypot alerts as confirmed malicious activity requiring investigation, not tuning.",
+      "hardening_notes": "Deploy honeypots that blend into the environment without touching production data, isolate them on segmented networks, and forward all their logs to the SIEM. Rotate honey credentials and review collected attacker telemetry for new indicators.",
+      "key_concepts": [
+        "deception",
+        "honeytokens",
+        "high-fidelity alerts",
+        "threat intel collection",
+        "decoy credentials"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Honeypots",
+      "attack_relevant": true,
+      "attack_profile": "From the attacker's side, honeypot interactions reveal standard intrusion behavior: scanning, credential guessing, and payload deployment against what looks like a real system. Conceptually the attacker cannot distinguish decoy from production and proceeds normally, generating perfect-fidelity telemetry. Targets (from the defender's view): attacker tools and methods. Observable footprints: any interaction at all — honeypot contact is malicious by definition."
+    },
+    {
+      "id": "incident-response",
+      "name": "Incident Response",
+      "defensive_summary": "Incident Response covers the tools and processes for handling security incidents: preparation, detection, containment, eradication, and recovery. Defenders care because incidents are a matter of when, not if, and the quality of the response determines the blast radius. Good IR tooling plus practiced playbooks turn chaos into procedure.",
+      "detection_notes": "Watch for the signals that trigger IR: EDR high-severity alerts, impossible-travel logons, mass file encryption, and data exfiltration patterns. Measure mean time to detect and to contain as the core IR health metrics.",
+      "hardening_notes": "Maintain tested playbooks for common scenarios (ransomware, account compromise, data theft), ensure centralized logging with tamper-evident retention, and run tabletop exercises quarterly. Pre-authorize containment actions so responders are not waiting on approvals mid-incident.",
+      "key_concepts": [
+        "playbooks",
+        "containment",
+        "chain of custody",
+        "tabletop exercises",
+        "MTTD/MTTR",
+        "lessons learned"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Incident Response",
+      "attack_relevant": false
+    },
+    {
+      "id": "industrial-control-system-security",
+      "name": "Industrial Control System Security",
+      "defensive_summary": "Industrial Control System Security protects OT environments: PLCs, SCADA, and the processes they control. Defenders care because compromises here threaten physical safety and production continuity, not just data. OT networks have legacy protocols without authentication and devices that cannot be patched without outages, demanding specialized defenses.",
+      "detection_notes": "Watch for IT-to-OT boundary crossings, unexpected engineering-workstation connections to controllers, and protocol anomalies in Modbus, DNP3, or OPC traffic. Baseline process values so malicious setpoint changes stand out.",
+      "hardening_notes": "Segment OT from IT with monitored conduits, enforce strict change control on controller logic, and maintain offline backups of configurations. Patch during planned maintenance windows and monitor for unauthorized firmware changes.",
+      "key_concepts": [
+        "OT segmentation",
+        "SCADA",
+        "PLC",
+        " Purdue model",
+        "safety instrumented systems",
+        "change control"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Industrial Control System Security",
+      "attack_relevant": true,
+      "attack_profile": "OT attacks target industrial processes: manipulating controller logic, spoofing sensor values, or disrupting safety systems. Conceptually the attacker crosses from IT into the deterministic OT world where availability and safety outweigh confidentiality. Targets: production continuity and physical safety. Observable footprints: unauthorized engineering-workstation connections, logic changes outside maintenance windows, and anomalous setpoint writes."
+    },
+    {
+      "id": "infosec",
+      "name": "InfoSec",
+      "defensive_summary": "InfoSec, as a general field, spans the courses and training resources for information security practice. Defenders care because security is a team discipline: broad foundational knowledge across networking, systems, and risk lets analysts connect signals that specialists might miss. Continuous learning is a control in itself.",
+      "detection_notes": "For leaders: watch for knowledge gaps by mapping team skills against the techniques appearing in your threat landscape, and track training completion against that map.",
+      "hardening_notes": "Invest in structured learning paths for each defensive role, pair training with hands-on labs, and rotate analysts through detection, response, and hardening duties. Document institutional knowledge so it survives turnover.",
+      "key_concepts": [
+        "foundations",
+        "continuous learning",
+        "role-based training",
+        "knowledge management"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> InfoSec",
+      "attack_relevant": false
+    },
+    {
+      "id": "iot-and-hardware-security",
+      "name": "IoT and Hardware Security",
+      "defensive_summary": "IoT and Hardware Security covers the intersection of physical devices and their software: hardware roots of trust, side channels, and device supply chains. Defenders care because hardware flaws undermine every software control above them, and compromised devices ship with the product. Understanding this layer informs procurement and device policy.",
+      "detection_notes": "Watch for devices with unpatchable firmware on the network, unexpected hardware identifiers, and supply-chain anomalies such as devices arriving with nonstandard configurations. Monitor for known-vulnerable hardware models in the asset inventory.",
+      "hardening_notes": "Procure devices with hardware roots of trust and vendor patch commitments, verify firmware integrity on receipt, and isolate untrusted hardware on segmented networks. Include hardware security requirements in procurement contracts.",
+      "key_concepts": [
+        "root of trust",
+        "TPM",
+        "supply chain",
+        "side channels",
+        "firmware integrity"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> IoT and Hardware Security",
+      "attack_relevant": true,
+      "attack_profile": "Hardware-layer attacks undermine the foundation software trusts: malicious or counterfeit components, firmware implants, and side-channel extraction of secrets. Conceptually the attack sits below every software control, invisible to the operating system. Targets: cryptographic keys, device identity, and supply-chain integrity. Observable footprints: devices with unexpected firmware hashes, anomalous hardware identifiers, and missing side-channel protections."
+    },
+    {
+      "id": "mainframe-hacking",
+      "name": "Mainframe Hacking",
+      "defensive_summary": "Mainframe Hacking resources address the security of mainframe platforms, which still run core banking, airline, and government workloads. Defenders care because mainframes are high-value, low-visibility targets: few analysts understand them, yet they hold the most sensitive data. Obscurity is not a control.",
+      "detection_notes": "Watch for unusual privileged-user activity on mainframe consoles, unexpected dataset access patterns, and network connections to mainframe services from nonstandard hosts. Ensure mainframe security logs feed the SIEM like any other platform.",
+      "hardening_notes": "Apply least privilege to mainframe datasets and transactions, enforce MFA for privileged mainframe access, and include mainframes in vulnerability management and penetration-test scopes. Train at least one responder on mainframe forensics basics.",
+      "key_concepts": [
+        "RACF/ACF2",
+        "least privilege",
+        "mainframe logging",
+        "privileged access",
+        "dataset controls"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Mainframe Hacking",
+      "attack_relevant": true,
+      "attack_profile": "Mainframe attacks exploit the platform's obscurity and immense privilege concentration: credential abuse on highly privileged accounts and exploitation of legacy services. Conceptually the mainframe is a fortress few understand, so small misconfigurations grant enormous access. Targets: financial records and core transaction systems. Observable footprints: unusual privileged sessions, off-hours batch-job submissions, and dataset access outside normal patterns."
+    },
+    {
+      "id": "malware-analysis",
+      "name": "Malware Analysis",
+      "defensive_summary": "Malware Analysis is the study of malicious software to understand its behavior, capabilities, and indicators. Defenders care because analysis turns an unknown binary into actionable intelligence: what it does, how to detect it, and how to remove it. Static and dynamic analysis skills underpin incident response and threat hunting.",
+      "detection_notes": "Watch for the indicators analysis produces: file hashes, C2 domains and IPs, persistence mechanisms, and distinctive process or registry artifacts. Feed confirmed indicators into EDR, firewall, and DNS controls promptly.",
+      "hardening_notes": "Analyze all malware in isolated sandboxes or air-gapped VMs, never on production hosts. Build a malware library with handling procedures, and convert each analysis into detection rules and hardening notes for the affected platform.",
+      "key_concepts": [
+        "static analysis",
+        "dynamic analysis",
+        "sandboxing",
+        "indicators of compromise",
+        "C2",
+        "unpacking"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Malware Analysis",
+      "attack_relevant": true,
+      "attack_profile": "Malware operates through a lifecycle: delivery, execution, persistence, command-and-control, and objective (theft, encryption, or destruction). Conceptually each sample is a small program pursuing the attacker's goal while evading detection through packing, obfuscation, or living-off-the-land techniques. Targets: credentials, data, and system control. Observable footprints: C2 beacons, persistence artifacts, and the behavioral anomalies that analysis documents as indicators."
+    },
+    {
+      "id": "malware-persistence",
+      "name": "Malware Persistence",
+      "defensive_summary": "Malware Persistence studies the techniques adversaries use to maintain access across reboots and logoffs: scheduled tasks, services, registry run keys, and boot components. Defenders study these mechanisms to know exactly where to look when hunting for footholds. Every persistence location is a detection opportunity and a hardening target.",
+      "detection_notes": "Watch for new autostart entries, services, and scheduled tasks appearing outside change windows, especially ones pointing to unusual paths or signed by unknown publishers. Baseline persistence locations per host role and alert on deviations.",
+      "hardening_notes": "Restrict who can create services and scheduled tasks, monitor persistence locations with EDR or Sysmon-style telemetry, and remove unnecessary autostart capability from standard builds. During IR, check all known persistence points, not just the one that fired.",
+      "key_concepts": [
+        "autostart locations",
+        "scheduled tasks",
+        "services",
+        "registry run keys",
+        "boot persistence",
+        "EDR telemetry"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Malware Persistence",
+      "attack_relevant": true,
+      "attack_profile": "Persistence techniques ensure malicious code survives reboots: scheduled tasks, services, registry run keys, startup folders, and boot components. Conceptually the attacker plants a hook in every mechanism the OS offers for legitimate auto-start. Targets: long-term access to the host. Observable footprints: new autostart entries outside change windows, services pointing to unusual binaries, and boot-component modifications."
+    },
+    {
+      "id": "nodejs-security",
+      "name": "Node.js Security",
+      "defensive_summary": "Node.js Security covers the risks of the Node ecosystem: dependency supply chain, prototype pollution, and server-side JavaScript pitfalls. Defenders care because Node powers countless APIs and web apps, and its vast npm dependency trees are a proven supply-chain attack vector. Securing Node means securing what you did not write.",
+      "detection_notes": "Watch dependency-scan alerts for vulnerable or hijacked packages, unexpected network calls from server processes, and prototype-pollution error patterns in application logs. Monitor for newly published versions of pinned dependencies.",
+      "hardening_notes": "Lock dependencies with lockfiles, audit them on a schedule, and minimize direct dependencies. Run Node with least privilege, keep the runtime patched, validate and sanitize all input, and avoid dangerous dynamic evaluation patterns in application code.",
+      "key_concepts": [
+        "supply chain",
+        "npm",
+        "prototype pollution",
+        "lockfiles",
+        "dependency audit",
+        "least privilege"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Node.js Security",
+      "attack_relevant": true,
+      "attack_profile": "Node.js attacks exploit the ecosystem's trust in third-party code: typosquatted or hijacked npm packages, prototype pollution in vulnerable libraries, and server-side injection in application code. Conceptually the application executes attacker-influenced code the moment a compromised dependency loads. Targets: application servers and their data. Observable footprints: unexpected dependency versions, anomalous process network calls, and pollution-pattern errors in logs."
+    },
+    {
+      "id": "osint",
+      "name": "OSINT",
+      "defensive_summary": "OSINT (Open Source Intelligence) is the collection of publicly available information: domains, breaches, social media, and public records. Defenders use OSINT to discover what attackers already know about the organization: exposed credentials, leaked documents, and employee information useful for phishing. It is reconnaissance turned inward for defense.",
+      "detection_notes": "Watch for your organization's data appearing in breach dumps, paste sites, and public code repositories. Monitor certificate transparency and DNS for lookalike domains targeting your brand, and alert on exposed credentials tied to corporate emails.",
+      "hardening_notes": "Run regular self-OSINT to find and remediate exposures, enforce MFA so leaked passwords alone are insufficient, and train staff on what not to publish. Establish a takedown process for phishing domains and leaked secrets.",
+      "key_concepts": [
+        "breach monitoring",
+        "lookalike domains",
+        "exposure assessment",
+        "takedown process",
+        "threat intel"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> OSINT",
+      "attack_relevant": true,
+      "attack_profile": "OSINT-driven attacks begin with public information: breach dumps yielding credentials, social media revealing org structure, and code repositories leaking secrets. Conceptually the attacker assembles the target's public footprint into a phishing or intrusion plan before touching a single system. Targets: credentials and human trust. Observable footprints (defensive view): your own data in dumps and pastes, lookalike domains registering, and employees targeted after public disclosures."
+    },
+    {
+      "id": "osx-and-ios-security",
+      "name": "OSX and iOS Security",
+      "defensive_summary": "OSX and iOS Security addresses Apple platform protections: Gatekeeper, notarization, sandboxing, and iOS app review boundaries. Defenders care because macOS is now common in enterprises and iOS devices carry corporate data, yet both are under-instrumented compared to Windows. Platform-native controls must be deliberately managed, not assumed.",
+      "detection_notes": "Watch for Gatekeeper bypass events, unsigned or ad-hoc-signed binaries executing on macOS, and MDM compliance drift on iOS devices. Centralize unified logs from macOS endpoints into the SIEM.",
+      "hardening_notes": "Enforce Gatekeeper and SIP on macOS, manage devices with MDM profiles requiring encryption and screen lock, and restrict app installation to managed sources. Keep Apple platforms in the patch cycle with the same urgency as other endpoints.",
+      "key_concepts": [
+        "Gatekeeper",
+        "notarization",
+        "SIP",
+        "MDM profiles",
+        "sandboxing",
+        "unified logs"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> OSX and iOS Security",
+      "attack_relevant": true,
+      "attack_profile": "Apple-platform attacks abuse trust in the ecosystem: trojanized or side-loaded apps, malicious configuration profiles, and spyware exploiting zero-days. Conceptually the platform's strong defaults push attackers toward social engineering and profile abuse rather than raw exploitation. Targets: messages, credentials, and location. Observable footprints: Gatekeeper bypass events, unknown configuration profiles, and MDM compliance drift."
+    },
+    {
+      "id": "password-cracking",
+      "name": "Password Cracking",
+      "defensive_summary": "Password Cracking covers the tools and techniques used to recover plaintext from password hashes and to guess credentials at scale. Defenders study this domain to understand exactly how fast weak passwords fall, which justifies password policy and MFA decisions with math instead of opinion. Knowing the attacker's speed sets the defender's bar.",
+      "detection_notes": "Watch for mass authentication failures indicating spraying or stuffing, hashes or SAM-like stores exfiltrated from hosts, and GPU-compute anomalies suggesting offline cracking. Alert on logon bursts against many accounts from few sources.",
+      "hardening_notes": "Require MFA everywhere, especially on privileged and remote access. Store passwords with memory-hard hashing, enforce length over complexity, screen new passwords against breach corpora, and throttle and lock out repeated failures.",
+      "key_concepts": [
+        "credential stuffing",
+        "password spraying",
+        "memory-hard hashing",
+        "MFA",
+        "breach-corpus screening",
+        "lockout policy"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Password Cracking",
+      "attack_relevant": true,
+      "attack_profile": "Password attacks convert stolen hashes or login endpoints into plaintext: offline hash guessing at GPU speed, online spraying of common passwords across many accounts, and stuffing of breached credential pairs. Conceptually the attack exploits the low entropy of human-chosen secrets against fast guessing. Targets: any password-authenticated account. Observable footprints: mass authentication failures, logon bursts across accounts, and exfiltrated hash stores."
+    },
+    {
+      "id": "pcaptools",
+      "name": "Pcaptools",
+      "defensive_summary": "Pcaptools are utilities for capturing and analyzing network traces. Defenders rely on packet capture for ground truth during incidents: when logs disagree, the packets do not lie. Skilled pcap analysis turns encrypted-metadata patterns, timing, and protocol anomalies into confirmed findings.",
+      "detection_notes": "Watch for beaconing patterns (regular intervals to rare domains), large or unusual data transfers, and protocol misuse such as DNS carrying non-DNS data. Full-packet capture at key choke points enables retrospective hunting after new indicators emerge.",
+      "hardening_notes": "Deploy capture at network boundaries and data-center egress with defined retention, ensure time synchronization so captures correlate with logs, and train responders in protocol analysis. Encrypt capture storage and restrict access to it.",
+      "key_concepts": [
+        "full packet capture",
+        "beaconing",
+        "protocol analysis",
+        "retention policy",
+        "retrospective hunting"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Pcaptools",
+      "attack_relevant": false
+    },
+    {
+      "id": "pentest",
+      "name": "Pentest",
+      "defensive_summary": "Pentest (penetration testing) resources cover authorized, scoped security assessments that emulate attackers. Defenders care because pentests validate whether controls actually work: they find the chained misconfigurations that scanners miss. The defensive value is entirely in the remediation that follows the report.",
+      "detection_notes": "During authorized tests, watch whether your detections fire on the tester's techniques — silent tests reveal detection gaps. Track findings by root cause to find systemic weaknesses rather than one-off bugs.",
+      "hardening_notes": "Scope tests to include detection validation, not just exploitation. Remediate findings by root cause, retest to confirm, and feed recurring themes into secure baselines and developer training. Never test systems you are not authorized to test.",
+      "key_concepts": [
+        "authorized scope",
+        "rules of engagement",
+        "detection validation",
+        "remediation tracking",
+        "retesting"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Pentest",
+      "attack_relevant": true,
+      "attack_profile": "Penetration tests emulate the intrusion lifecycle under authorization: reconnaissance, exploitation, privilege escalation, lateral movement, and reporting. Conceptually the tester thinks in attack paths, chaining small weaknesses into full compromise. Targets: whatever the scope defines. Defensive value: each emulated phase tests whether detections fire; silent phases are detection gaps."
+    },
+    {
+      "id": "php-security",
+      "name": "PHP Security",
+      "defensive_summary": "PHP Security covers secure coding for the PHP ecosystem: randomness, encryption, and vulnerability scanning for the language that still powers much of the web. Defenders care because legacy PHP applications are common, long-lived, and historically rich in injection and inclusion flaws. Hardening PHP means modernizing both code and deployment.",
+      "detection_notes": "Watch WAF and application logs for injection probes against PHP endpoints, unexpected file-inclusion parameters, and deserialization error spikes. Scan PHP codebases for known-vulnerable functions and outdated frameworks.",
+      "hardening_notes": "Keep PHP and frameworks on supported versions, use vetted libraries for randomness and encryption, and apply parameterized queries and output encoding everywhere. Disable dangerous functions and expose minimal error detail in production.",
+      "key_concepts": [
+        "injection",
+        "file inclusion",
+        "deserialization",
+        "supported versions",
+        "output encoding"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> PHP Security",
+      "attack_relevant": true,
+      "attack_profile": "PHP application attacks exploit the language's legacy patterns: SQL and command injection through unsanitized input, file inclusion via attacker-controlled paths, and deserialization of untrusted data. Conceptually user input reaches a trusting interpreter. Targets: databases, the host OS, and application data. Observable footprints: injection probes in web logs, inclusion-parameter tampering, and deserialization errors."
+    },
+    {
+      "id": "prompt-injection",
+      "name": "Prompt Injection",
+      "defensive_summary": "Prompt Injection studies attacks that manipulate AI and LLM systems through crafted inputs, causing them to ignore instructions or leak data. Defenders care because LLM features are being wired into tools with real privileges: email, code, and data access. An injected model becomes an insider acting on attacker instructions.",
+      "detection_notes": "Watch for anomalous tool calls from AI agents, outputs containing instruction-like text from untrusted sources, and data exfiltration patterns via model outputs. Log prompts, tool invocations, and outputs for review.",
+      "hardening_notes": "Give AI systems least-privilege tool access, treat model output as untrusted input to downstream systems, and require human approval for consequential actions. Sanitize untrusted content before it reaches the model and monitor for jailbreak patterns.",
+      "key_concepts": [
+        "indirect injection",
+        "least-privilege tools",
+        "human-in-the-loop",
+        "output validation",
+        "jailbreak monitoring"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Prompt Injection",
+      "attack_relevant": true,
+      "attack_profile": "Prompt injection manipulates AI systems by embedding instructions in data the model processes: webpages, documents, or tool outputs that tell the model to ignore its directives. Conceptually the attack exploits the model's inability to distinguish instruction from data. Targets: the model's tools, connected data, and user trust. Observable footprints: tool calls inconsistent with the user's request and instruction-like text in untrusted content."
+    },
+    {
+      "id": "real-time-communications",
+      "name": "Real-time Communications hacking & pentesting resources",
+      "defensive_summary": "Real-time Communications security covers VoIP, WebRTC, and VoLTE: signaling, media encryption, and telephony fraud. Defenders care because voice and video carry sensitive conversations and are increasingly targeted for eavesdropping and toll fraud. Misconfigured telephony is also a classic pivot into corporate networks.",
+      "detection_notes": "Watch for anomalous call volumes or international destinations indicating toll fraud, SIP registration anomalies, and unencrypted media streams. Alert on PBX administration access from unexpected sources.",
+      "hardening_notes": "Enforce encrypted signaling and media (TLS/SRTP), harden PBX systems with strong credentials and patching, and set call-spend alerts with destination restrictions. Segment voice infrastructure from data networks.",
+      "key_concepts": [
+        "SIP",
+        "SRTP",
+        "toll fraud",
+        "PBX hardening",
+        "WebRTC security",
+        "eavesdropping"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Real-time Communications hacking & pentesting resources",
+      "attack_relevant": true,
+      "attack_profile": "Telephony attacks exploit VoIP and PBX systems: toll fraud via compromised trunks, eavesdropping on unencrypted media, and SIP credential abuse. Conceptually the phone system is a networked computer that defenders forget to harden. Targets: call budgets, conversations, and network pivots. Observable footprints: anomalous international call volumes, SIP registration anomalies, and unencrypted media streams."
+    },
+    {
+      "id": "red-teaming-toolkit",
+      "name": "Red Teaming Toolkit",
+      "defensive_summary": "Red Teaming Toolkit collects the open-source tooling used in adversary-emulation exercises. Defenders study these tools for a specific purpose: to recognize them in telemetry and to validate that detections fire when they run. Every red-team tool understood is a detection waiting to be written.",
+      "detection_notes": "Watch for known red-team binaries, renamed or not, executing in the environment: command-and-control frameworks, lateral-movement utilities, and credential tools. Behavioral detections (parent-child process anomalies, unusual network patterns) catch renamed variants.",
+      "hardening_notes": "Run adversary-emulation exercises to test detection coverage, then close the gaps found. Restrict and monitor dual-use administrative tools, and ensure EDR policies cover the techniques these tools implement, not just their file hashes.",
+      "key_concepts": [
+        "adversary emulation",
+        "behavioral detection",
+        "dual-use tools",
+        "coverage testing",
+        "purple teaming"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Red Teaming Toolkit",
+      "attack_relevant": true,
+      "attack_profile": "Red-team tooling implements the adversary lifecycle as reusable capabilities: command-and-control, lateral movement, credential access, and exfiltration. Conceptually each tool automates one phase of intrusion so operators can focus on objectives. Targets: detection coverage itself — the tools exist to test it. Observable footprints: tool-specific process, network, and authentication patterns that behavioral detections must catch even when binaries are renamed."
+    },
+    {
+      "id": "reinforcement-learning-for-cyber-security",
+      "name": "Reinforcement Learning for Cyber Security",
+      "defensive_summary": "Reinforcement Learning for Cyber Security explores RL applied to security problems: adaptive defenses, automated response, and attack simulation. Defenders care because RL can optimize response playbooks and resource allocation faster than static rules, but the same research shows how adaptive attackers might behave. The defensive play is to adopt RL for defense before attackers perfect it for offense.",
+      "detection_notes": "Watch for increasingly adaptive attacker behavior that evades static thresholds, which is the operational signature RL-driven techniques would produce. Measure whether your detections degrade against polymorphic or timing-randomized activity.",
+      "hardening_notes": "Pilot RL for defensive tasks with clear safety bounds: automated containment with human approval gates, and reward functions aligned to business risk, not just alert volume. Keep humans in the loop for any autonomous response action.",
+      "key_concepts": [
+        "adaptive defense",
+        "automated response",
+        "reward design",
+        "human-in-the-loop",
+        "adversarial adaptation"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Reinforcement Learning for Cyber Security",
+      "attack_relevant": false
+    },
+    {
+      "id": "reversing",
+      "name": "Reversing",
+      "defensive_summary": "Reversing (reverse engineering) is the practice of analyzing compiled software to understand its behavior without source code. Defenders use it to dissect malware, verify the behavior of closed-source components, and understand exploitation primitives. It is the deepest form of technical understanding a defender can build.",
+      "detection_notes": "The artifacts of reversing skill are better detections: analysts who reverse malware write precise indicators and understand which behaviors are essential versus incidental. Track whether malware dissections produce detection rules within the same incident cycle.",
+      "hardening_notes": "Practice reversing only on samples you are authorized to analyze, inside isolated labs. Use findings to harden the specific platforms targeted and to validate that your controls detect the technique, not just the sample hash.",
+      "key_concepts": [
+        "disassembly",
+        "decompilation",
+        "debugging",
+        "isolated labs",
+        "behavioral indicators"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Reversing",
+      "attack_relevant": true,
+      "attack_profile": "What reversing reveals about attacks: malware authors structure implants in stages (loader, payload, command-and-control), choose evasion techniques (packing, string obfuscation, anti-analysis checks), and implement persistence and exfiltration as modular components. Conceptually reversing reads the attacker's engineering decisions from the binary. Targets of study: the malware's capabilities and infrastructure. Footprints produced: precise behavioral indicators for detection."
+    },
+    {
+      "id": "sec-talks",
+      "name": "Sec Talks",
+      "defensive_summary": "Sec Talks collects recorded security conference presentations. Defenders care because talks are where new techniques, defensive research, and incident lessons are shared first, often months before they reach papers or products. A regular talks diet is cheap, continuous threat-intel.",
+      "detection_notes": "After relevant talks, check whether the presented technique would trigger your detections; treat each talk as a free adversarial test case. Track which presented techniques later appear in your telemetry.",
+      "hardening_notes": "Assign talks by role so detection engineers, responders, and architects each get relevant content, and convert key takeaways into backlog items. Prefer talks with released tools or data you can test in your lab.",
+      "key_concepts": [
+        "threat intel",
+        "technique awareness",
+        "continuous learning",
+        "lab validation"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Sec Talks",
+      "attack_relevant": false
+    },
+    {
+      "id": "seclists",
+      "name": "SecLists",
+      "defensive_summary": "SecLists is a collection of wordlists and lists used during security assessments: usernames, passwords, directories, and payloads patterns. Defenders use these lists defensively to test their own controls: password screening, WAF rule validation, and detection testing in authorized assessments. Knowing the lists attackers use lets you pre-block their first moves.",
+      "detection_notes": "Watch for authentication attempts cycling through common usernames, directory-enumeration patterns in web logs, and WAF blocks spiking on list-driven probes. These patterns distinguish automated tooling from targeted manual activity.",
+      "hardening_notes": "Screen user passwords against common-password lists at creation, test your WAF and detection rules against standard lists in a lab, and rate-limit authentication and enumeration endpoints. Use the lists to validate controls, never against systems you do not own.",
+      "key_concepts": [
+        "password screening",
+        "enumeration detection",
+        "WAF testing",
+        "rate limiting",
+        "authorized testing only"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> SecLists",
+      "attack_relevant": true,
+      "attack_profile": "List-driven attacks automate the guessing game: username and password lists for credential attacks, directory lists for content discovery, and pattern lists for fuzzing. Conceptually the attacker trades precision for coverage, trying thousands of common values quickly. Targets: login endpoints and hidden web content. Observable footprints: high-velocity attempts cycling through common values and enumeration patterns in web logs."
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "defensive_summary": "Security, as a general collection, spans software, libraries, documents, and resources across the whole field. Defenders use broad collections for orientation: mapping which domains exist, what tooling is available, and where their program has gaps. Breadth first, then depth where the threat model demands it.",
+      "detection_notes": "Use broad resource maps during program assessments to check coverage: for each domain, confirm you have a control, a detection, or an explicit risk acceptance. Gaps found this way become roadmap items.",
+      "hardening_notes": "Prioritize depth in the domains matching your threat model rather than spreading thin everywhere. Revisit the map annually as threats and the business change, and retire controls that no longer match reality.",
+      "key_concepts": [
+        "program assessment",
+        "coverage mapping",
+        "threat model alignment",
+        "control inventory"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Security",
+      "attack_relevant": false
+    },
+    {
+      "id": "social-engineering",
+      "name": "Social Engineering",
+      "defensive_summary": "Social Engineering covers the manipulation of people to bypass technical controls: phishing, pretexting, and influence techniques. Defenders care because it remains the most common initial-access vector; no firewall stops a user handing over credentials. Defense is a mix of technical controls and human resilience.",
+      "detection_notes": "Watch for MFA push-fatigue patterns, logons from new devices following helpdesk password resets, and email authentication failures on lookalike domains. Track phishing-report rates as a positive security metric.",
+      "hardening_notes": "Deploy phishing-resistant MFA (FIDO2), enforce email authentication (SPF, DKIM, DMARC), and run regular, blameless phishing simulations with training. Establish verification procedures for sensitive requests such as payment changes.",
+      "key_concepts": [
+        "phishing",
+        "pretexting",
+        "phishing-resistant MFA",
+        "DMARC",
+        "security awareness",
+        "verification procedures"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Social Engineering",
+      "attack_relevant": true,
+      "attack_profile": "Social engineering attacks manipulate people instead of systems: phishing for credentials, pretexting helpdesks for resets, and baiting with trusted branding. Conceptually the attack exploits human helpfulness and authority bias to bypass technical controls entirely. Targets: credentials, MFA approvals, and fraudulent transactions. Observable footprints: MFA fatigue patterns, lookalike-domain emails, and verification-procedure bypasses."
+    },
+    {
+      "id": "static-analysis",
+      "name": "Static Analysis",
+      "defensive_summary": "Static Analysis covers tools that inspect code without running it: linters, security scanners, and quality checkers across languages. Defenders care because static analysis catches vulnerability classes at the cheapest point — while the code is being written. Integrated into CI, it prevents entire bug classes from shipping.",
+      "detection_notes": "Watch scanner telemetry for recurring vulnerability classes and for findings suppressed without justification. Track new-code versus legacy-code finding rates to measure whether the codebase is actually improving.",
+      "hardening_notes": "Run language-appropriate analyzers as blocking CI gates, tune rules to minimize false positives, and fix findings by root cause in shared libraries and templates. Pair static analysis with dependency scanning for full coverage.",
+      "key_concepts": [
+        "SAST",
+        "linters",
+        "CI gates",
+        "false-positive tuning",
+        "secure defaults"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Static Analysis",
+      "attack_relevant": false
+    },
+    {
+      "id": "the-art-of-hacking-series",
+      "name": "The Art of Hacking Series",
+      "defensive_summary": "The Art of Hacking Series is a large curated collection of cybersecurity references and learning resources. Defenders use comprehensive collections as study maps: working through them systematically builds the broad foundation that incident response demands. The value is structured breadth for self-directed learners.",
+      "detection_notes": "For team development: map the collection's topics against your analysts' skills to find training gaps, and prioritize the domains where your telemetry shows the most attacker activity.",
+      "hardening_notes": "Build study plans that pair each topic with a hands-on lab and a defensive deliverable (a rule, a runbook section, a hardening check). Keep all practice in authorized lab environments.",
+      "key_concepts": [
+        "structured learning",
+        "skill mapping",
+        "hands-on labs",
+        "defensive deliverables"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> The Art of Hacking Series",
+      "attack_relevant": false
+    },
+    {
+      "id": "threat-intelligence",
+      "name": "Threat Intelligence",
+      "defensive_summary": "Threat Intelligence covers the collection and use of information about adversaries: their tools, infrastructure, and targeting. Defenders care because intelligence turns generic alerting into prioritized defense: knowing which groups target your sector tells you which techniques to hunt for first. Good intel is actionable, not just interesting.",
+      "detection_notes": "Watch for intelligence-report indicators appearing in your telemetry, and track which intel-driven hunts produce true positives. Measure intel by decisions changed, not reports consumed.",
+      "hardening_notes": "Subscribe to sector-relevant feeds, operationalize indicators into blocking and detection controls with expiry dates, and share anonymized findings with peer groups. Require every intel item to map to a defensive action.",
+      "key_concepts": [
+        "indicators",
+        "attribution",
+        "actionable intel",
+        "indicator lifecycle",
+        "information sharing"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Threat Intelligence",
+      "attack_relevant": true,
+      "attack_profile": "Threat intelligence describes adversary behavior at scale: which groups target which sectors, their preferred initial access, and their infrastructure patterns. Conceptually it profiles the attacker the way a defender profiles a vulnerability — to prioritize. Targets of study: adversary tools, techniques, and procedures. Footprints produced: indicators and behaviors to hunt for in your own telemetry."
+    },
+    {
+      "id": "vehicle-security",
+      "name": "Vehicle Security",
+      "defensive_summary": "Vehicle Security addresses the cybersecurity of connected cars: CAN bus, telematics, keyless entry, and infotainment. Defenders care because vehicles are safety-critical systems with growing connectivity and historically weak internal segmentation. Fleet operators and manufacturers need vehicle-aware incident response.",
+      "detection_notes": "Watch for anomalous CAN traffic patterns, unexpected telematics data flows, and keyless-entry relay indicators such as unlocks without the key present. Fleet telematics baselines make anomalies visible.",
+      "hardening_notes": "Segment vehicle networks with gateways between safety-critical and infotainment domains, require authenticated firmware updates, and monitor fleets centrally for anomalies. Plan incident response for vehicles as cyber-physical systems.",
+      "key_concepts": [
+        "CAN bus",
+        "telematics",
+        "relay attacks",
+        "firmware signing",
+        "fleet monitoring",
+        "cyber-physical IR"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Vehicle Security",
+      "attack_relevant": true,
+      "attack_profile": "Vehicle attacks target connected-car systems: CAN bus injection to influence vehicle functions, keyless-entry relay attacks, and telematics exploitation. Conceptually the car's internal network was designed without authentication, trusting every node. Targets: vehicle control and theft. Observable footprints: anomalous CAN traffic, relay-attack indicators such as keyless unlocks without the key present, and unexpected telematics flows."
+    },
+    {
+      "id": "web-hacking",
+      "name": "Web Hacking",
+      "defensive_summary": "Web Hacking covers the techniques used to probe web applications: injection, broken access control, and logic abuse. Defenders study these techniques to build applications that resist them and to recognize them in logs. Every web attack technique understood becomes a test case for your WAF, your code, and your monitoring.",
+      "detection_notes": "Watch WAF and application logs for injection probes, authentication bypass attempts, and enumeration of hidden endpoints. Correlate low-and-slow probing with later exploitation attempts from the same sources.",
+      "hardening_notes": "Build with vetted frameworks and secure defaults, validate and encode all input and output, enforce proper access control server-side, and test with authorized assessments before release. Patch web frameworks promptly.",
+      "key_concepts": [
+        "injection",
+        "access control",
+        "WAF",
+        "input validation",
+        "authorized testing",
+        "secure frameworks"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Web Hacking",
+      "attack_relevant": true,
+      "attack_profile": "Web attacks exploit application trust in client input: injection that turns database queries against their owners, broken access control exposing other users' data, and logic abuse of business workflows. Conceptually the browser is attacker-controlled, so every request must be validated server-side. Targets: data and accounts. Observable footprints: injection probes, ID enumeration, and workflow-abuse patterns in application logs."
+    },
+    {
+      "id": "web3-security",
+      "name": "Web3 Security",
+      "defensive_summary": "Web3 Security covers the risks of blockchain-based systems: smart contracts, wallets, and bridges. Defenders care because smart-contract flaws are irreversible once exploited and bridge compromises have caused the largest thefts in the space. The defensive playbook blends code auditing with transaction monitoring.",
+      "detection_notes": "Watch for anomalous smart-contract interactions, large or unusual fund movements, and phishing targeting wallet seed phrases. Monitor bridge and contract events for patterns preceding known exploit classes.",
+      "hardening_notes": "Require independent audits for smart contracts plus formal verification for high-value logic, use multisig wallets and hardware signers, and implement transaction monitoring with pause mechanisms. Never rush unaudited contract upgrades.",
+      "key_concepts": [
+        "smart contract audit",
+        "multisig",
+        "transaction monitoring",
+        "bridge risk",
+        "formal verification"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Web3 Security",
+      "attack_relevant": true,
+      "attack_profile": "Web3 attacks exploit smart-contract logic and blockchain infrastructure: reentrancy and price-oracle manipulation in contracts, private-key theft from wallets, and bridge compromises. Conceptually code-is-law means a logic flaw is directly stealable funds with no chargeback. Targets: locked value in contracts and bridges. Observable footprints: anomalous contract calls, flash-loan patterns preceding exploits, and large fund movements."
+    },
+    {
+      "id": "yara",
+      "name": "YARA",
+      "defensive_summary": "YARA is a pattern-matching language for identifying malware families and suspicious artifacts. Defenders care because YARA rules turn one analyzed sample into fleet-wide detection: scan endpoints, email attachments, and file shares for the whole family. It is the lingua franca of malware identification.",
+      "detection_notes": "Watch YARA match telemetry for rule hits across the fleet, and track which rules produce true positives versus noise. Retire or refine rules that never fire or fire constantly.",
+      "hardening_notes": "Write rules from analyzed samples with test corpora of clean and malicious files, version-control them, and deploy across endpoints and mail gateways. Share and consume community rules with local validation before enforcing.",
+      "key_concepts": [
+        "pattern matching",
+        "malware families",
+        "rule testing",
+        "fleet scanning",
+        "rule lifecycle"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> YARA",
+      "attack_relevant": false
+    },
+    {
+      "id": "ai-security",
+      "name": "AI Security",
+      "defensive_summary": "AI Security covers the protection of AI systems and the use of AI in security: model threats, data poisoning, and AI-assisted defense. Defenders care on both sides: their organizations are deploying models that need hardening, and AI tooling can scale detection beyond human analyst capacity. Securing the model lifecycle is now part of the job.",
+      "detection_notes": "Watch for anomalous model behavior suggesting poisoning or extraction attempts, unexpected training-data access, and AI-agent tool calls outside their intended scope. Monitor model APIs for abuse patterns such as bulk extraction queries.",
+      "hardening_notes": "Validate and version training data, restrict model and data access with least privilege, and sandbox AI agents with constrained tool permissions. Keep humans in the loop for consequential automated decisions.",
+      "key_concepts": [
+        "data poisoning",
+        "model extraction",
+        "AI agents",
+        "least privilege",
+        "training-data integrity"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> AI Security",
+      "attack_relevant": true,
+      "attack_profile": "AI-system attacks target the model lifecycle: data poisoning that corrupts training, prompt injection that hijacks behavior, and extraction queries that steal the model itself. Conceptually the model trusts its inputs the way applications trust user data — often too much. Targets: model integrity, training data, and connected tools. Observable footprints: anomalous training-data changes, bulk extraction query patterns, and agent tool calls outside intended scope."
+    },
+    {
+      "id": "annual-security-reports",
+      "name": "Annual Security Reports",
+      "defensive_summary": "Annual Security Reports compile industry data on breaches, trends, and attacker behavior each year. Defenders care because these reports provide the statistical grounding for security strategy: which attack vectors are growing, what breaches cost, and where peers are investing. They turn anecdotes into evidence for budgets and priorities.",
+      "detection_notes": "Compare your own incident and telemetry trends against reported industry patterns; divergence in either direction deserves investigation. Track year-over-year movement in the vectors most relevant to your sector.",
+      "hardening_notes": "Use report findings to justify control investments and to prioritize the fastest-growing attack vectors in your environment. Present the data to leadership in business terms: likelihood, cost, and mitigation ROI.",
+      "key_concepts": [
+        "trend analysis",
+        "breach statistics",
+        "benchmarking",
+        "strategy input",
+        "sector comparisons"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Annual Security Reports",
+      "attack_relevant": false
+    },
+    {
+      "id": "api-security-checklist",
+      "name": "API Security Checklist",
+      "defensive_summary": "API Security Checklist distills the essential countermeasures for designing, testing, and releasing APIs. Defenders care because APIs are now the primary interface of most systems, and broken object-level authorization in APIs is a leading breach cause. A checklist turns tribal knowledge into repeatable assurance.",
+      "detection_notes": "Watch API gateway logs for authorization bypass patterns, excessive data returned per call, and token misuse. Alert on new endpoints appearing without security review.",
+      "hardening_notes": "Enforce authentication and per-object authorization on every endpoint, validate all input, rate-limit aggressively, and log security-relevant API events centrally. Run the checklist at design review, not after deployment.",
+      "key_concepts": [
+        "BOLA",
+        "authentication",
+        "rate limiting",
+        "schema validation",
+        "design review"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> API Security Checklist",
+      "attack_relevant": true,
+      "attack_profile": "API attacks exploit the gap between intended and enforced authorization, most famously broken object-level authorization where changing an ID in a request exposes another user's data. Conceptually the attacker maps every endpoint and parameter, then tests which ones trust client-supplied identifiers. Targets: user records, admin functions, and bulk data. Observable footprints: ID enumeration patterns, mass data retrieval per token, and access to endpoints outside the documented client flow."
+    },
+    {
+      "id": "apt-notes",
+      "name": "APT Notes",
+      "defensive_summary": "APT Notes collects public reporting on advanced persistent threat campaigns: their tooling, infrastructure, and targeting. Defenders care because APT reports are the highest-quality free threat intelligence available, describing real adversary tradecraft in detail. Studying them focuses hunting on the techniques that matter most.",
+      "detection_notes": "Extract indicators and behaviors from APT reports and hunt for them in your telemetry, prioritizing the groups known to target your sector. Track which reported techniques your detections would catch.",
+      "hardening_notes": "Use APT tradecraft to prioritize controls: if every relevant group abuses valid accounts, prioritize identity hardening. Brief leadership on sector-targeting trends and keep incident playbooks aligned to observed adversary behavior.",
+      "key_concepts": [
+        "threat actors",
+        "campaign analysis",
+        "sector targeting",
+        "behavioral indicators",
+        "hunting"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> APT Notes",
+      "attack_relevant": true,
+      "attack_profile": "APT campaigns are long-running, resourced intrusions combining spear-phishing, zero-days, and living-off-the-land techniques to reach high-value targets. Conceptually they trade noise for persistence: slow, deliberate movement that blends into normal activity over months. Targets: government, defense, critical infrastructure, and research. Observable footprints: rare legitimate-tool misuse, long-dwell beacons, and staged data collection before exfiltration."
+    },
+    {
+      "id": "bug-bounty-reference",
+      "name": "Bug Bounty Reference",
+      "defensive_summary": "Bug Bounty Reference organizes public vulnerability write-ups by bug class. Defenders care because these write-ups are a free curriculum in real-world exploitation: each one shows how a specific flaw was found and abused in production. Reading them by bug class reveals which flaws keep recurring across the industry.",
+      "detection_notes": "After reading write-ups for your technology stack, verify your monitoring would catch the described exploitation. Track which bug classes appear most in write-ups about systems like yours.",
+      "hardening_notes": "Feed recurring bug classes from write-ups into developer training and pipeline checks so your code does not repeat industry mistakes. Use write-ups as tabletop scenarios for your response team.",
+      "key_concepts": [
+        "write-ups",
+        "bug classes",
+        "recurring flaws",
+        "training input",
+        "detection validation"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Bug Bounty Reference",
+      "attack_relevant": true,
+      "attack_profile": "Organized by bug class, these write-ups show how specific vulnerability types are found and exploited in real systems: the reconnaissance, the proof of impact, the report. Conceptually each class follows a pattern — attacker-controlled input reaching a trusting sink. Targets vary by class: data, accounts, or execution. Observable footprints: class-specific probe patterns in logs that defenders can signature."
+    },
+    {
+      "id": "capsulecorp-pentest",
+      "name": "Capsulecorp Pentest",
+      "defensive_summary": "Capsulecorp Pentest provides a virtual lab network for practicing penetration testing techniques in an isolated environment. Defenders value such labs because they allow safe, legal practice of the full attack chain, which builds the intuition needed for detection and response. Practice in the lab becomes readiness in production.",
+      "detection_notes": "Use lab networks to generate attack telemetry and confirm your detection stack fires on each phase of an intrusion, from initial access to exfiltration. Document which phases are silent and prioritize those detections.",
+      "hardening_notes": "Keep lab environments strictly isolated from production networks, reset them between exercises, and convert every successful lab attack path into a hardening task. Never repurpose lab tooling against real networks.",
+      "key_concepts": [
+        "isolated labs",
+        "attack-chain practice",
+        "detection validation",
+        "safe training"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Capsulecorp Pentest",
+      "attack_relevant": false
+    },
+    {
+      "id": "cryptography",
+      "name": "Cryptography",
+      "defensive_summary": "Cryptography covers the algorithms and tools that provide confidentiality, integrity, and authentication. Defenders care because cryptography underpins everything: TLS, disk encryption, password storage, and code signing. Most real-world crypto failures are not broken math but broken usage: weak randomness, bad modes, and expired certificates.",
+      "detection_notes": "Watch for certificate expirations and weak cipher negotiations in TLS telemetry, unencrypted sensitive traffic, and applications using deprecated algorithms. Alert on code-signing validation failures.",
+      "hardening_notes": "Use vetted libraries and never implement primitives yourself, enforce modern TLS configurations, automate certificate renewal, and store secrets in dedicated vaults. Plan migration to post-quantum algorithms for long-lived data.",
+      "key_concepts": [
+        "TLS",
+        "key management",
+        "vetted libraries",
+        "certificate lifecycle",
+        "authenticated encryption"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Cryptography",
+      "attack_relevant": false
+    },
+    {
+      "id": "cve-poc",
+      "name": "CVE PoC",
+      "defensive_summary": "CVE PoC collections gather proof-of-concept code demonstrating real vulnerabilities. Defenders use PoCs strictly in the lab: to confirm whether their systems are affected, to validate that patches actually fix the flaw, and to build precise detections. A PoC turns a theoretical CVE into a testable fact.",
+      "detection_notes": "Watch vulnerability-scanner output and threat feeds for CVEs with public PoCs affecting your stack; weaponization risk jumps sharply once a PoC exists. Prioritize patching for PoC-available flaws in internet-facing systems.",
+      "hardening_notes": "Test PoCs only in isolated labs against your own systems, use them to verify patch efficacy before closing tickets, and convert PoC behavior into detection rules. Never run PoCs against systems you do not own.",
+      "key_concepts": [
+        "vulnerability validation",
+        "patch verification",
+        "exposure prioritization",
+        "lab-only testing"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> CVE PoC",
+      "attack_relevant": true,
+      "attack_profile": "A proof of concept demonstrates a vulnerability's exploitability: it shows the flaw is real, reachable, and impactful, turning a CVE entry into confirmed risk. Conceptually the PoC is the bridge between theoretical weakness and practical weaponization. Targets: unpatched systems running the vulnerable component. Observable footprints: the PoC's network and host artifacts, which defenders capture in the lab to build detections."
+    },
+    {
+      "id": "cyberchef",
+      "name": "CyberChef",
+      "defensive_summary": "CyberChef is a web-based toolkit for analyzing and decoding data: encodings, encryption, and binary formats. Defenders use it daily during analysis: decoding obfuscated payloads, parsing suspicious strings, and understanding what an attacker hid in a blob. It is a force multiplier for analysts, entirely defensive in application.",
+      "detection_notes": "The defensive value is analytical speed: faster decoding of suspicious artifacts means faster indicator extraction during incidents. There is no detection content here beyond enabling the analyst.",
+      "hardening_notes": "Run a local instance for sensitive investigations so case data never leaves your network, and train analysts on its core transforms. Keep recipes for common decoding tasks in the team runbook.",
+      "key_concepts": [
+        "decoding",
+        "deobfuscation",
+        "data transforms",
+        "analyst tooling",
+        "local deployment"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> CyberChef",
+      "attack_relevant": false
+    },
+    {
+      "id": "detection-lab",
+      "name": "Detection Lab",
+      "defensive_summary": "Detection Lab provides scripts to build a complete lab environment with security tooling and logging best practices. Defenders care because a proper lab is where detection engineering happens: generate attack telemetry safely, write rules against it, and validate before production deployment. It is the factory for reliable detections.",
+      "detection_notes": "Use the lab to measure detection efficacy: run techniques, record which rules fire, and track coverage over time. Lab-validated rules deploy to production with known true-positive behavior.",
+      "hardening_notes": "Keep the lab network isolated, automate its rebuild for repeatability, and mirror production logging configurations so lab results transfer. Treat lab detections as pre-production: review and tune before wide deployment.",
+      "key_concepts": [
+        "lab automation",
+        "telemetry generation",
+        "rule validation",
+        "repeatability",
+        "pre-production testing"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Detection Lab",
+      "attack_relevant": false
+    },
+    {
+      "id": "executable-packing",
+      "name": "Executable Packing",
+      "defensive_summary": "Executable Packing covers the packers and unpackers used to compress or obfuscate binaries. Defenders study packing because malware routinely uses packers to evade signature detection; recognizing packer artifacts is essential for triage. Understanding packing separates the wrapper from the malicious payload inside.",
+      "detection_notes": "Watch for high-entropy binaries, known packer section names or stubs, and files that unpack themselves in memory at runtime. Endpoint telemetry showing process hollowing or in-memory execution after a packed dropper is a strong malicious signal.",
+      "hardening_notes": "Deploy EDR with memory scanning and behavioral analysis rather than relying on static signatures alone, detonate suspicious files in sandboxes, and block unsigned packed binaries at email and web gateways where policy allows.",
+      "key_concepts": [
+        "entropy analysis",
+        "packer stubs",
+        "memory scanning",
+        "sandbox detonation",
+        "behavioral detection"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Executable Packing",
+      "attack_relevant": true,
+      "attack_profile": "Packing as an attack technique wraps malicious payloads in compression or encryption layers so static analysis sees only the unpacker stub. Conceptually the malware carries its own locked box and opens it in memory at runtime. Targets: signature-based detection. Observable footprints: high-entropy binaries, in-memory unpacking behavior, and process anomalies after execution."
+    },
+    {
+      "id": "forensics",
+      "name": "Forensics",
+      "defensive_summary": "Forensics covers the tools and methods for investigating compromised systems: disk, memory, and timeline analysis. Defenders care because forensics answers the questions incidents always raise: how did they get in, what did they touch, and are they really gone. Sound forensic practice also preserves evidence for legal proceedings.",
+      "detection_notes": "Forensic findings feed future detection: every investigation should produce new indicators and identify which telemetry was missing. Track recurring evidence gaps to justify logging improvements.",
+      "hardening_notes": "Maintain write-blocked imaging capability and a forensic toolkit, ensure centralized tamper-evident logging with adequate retention, and document chain of custody from the first response action. Train responders before the incident, not during it.",
+      "key_concepts": [
+        "disk imaging",
+        "memory forensics",
+        "timeline analysis",
+        "chain of custody",
+        "evidence preservation"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Forensics",
+      "attack_relevant": false
+    },
+    {
+      "id": "free-programming-books",
+      "name": "Free Programming Books",
+      "defensive_summary": "Free Programming Books collects no-cost programming resources for developers. Defenders care indirectly but deeply: defenders who can read and write code understand vulnerabilities at their root, automate analysis, and evaluate tools critically. Programming fluency is the foundation beneath every advanced defensive skill.",
+      "detection_notes": "Not a detection domain; the value is capability building. Teams that invest in programming skill produce better detection logic and faster incident automation.",
+      "hardening_notes": "Encourage analysts to learn at least one scripting language for log analysis and automation, and one systems language for understanding exploitation primitives. Fund learning time as a security control.",
+      "key_concepts": [
+        "scripting",
+        "automation",
+        "code literacy",
+        "analyst development"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Free Programming Books",
+      "attack_relevant": false
+    },
+    {
+      "id": "gtfobins",
+      "name": "GTFOBins",
+      "defensive_summary": "GTFOBins documents Unix binaries that can be abused to bypass local security restrictions. Defenders study this list for one critical reason: these are the binaries already installed on every Linux host, so attackers do not need to bring tools. Knowing which binaries are dual-use tells defenders exactly what to monitor and restrict.",
+      "detection_notes": "Watch for dual-use binaries (package managers, scripting interpreters, system utilities) spawned with unusual arguments or from unusual parent processes. Command-line logging and EDR telemetry turn this list into concrete detection rules.",
+      "hardening_notes": "Apply application allow-listing, remove or restrict unneeded dual-use binaries on hardened hosts, and enforce least privilege so binary abuse gains little. Alert on first-seen invocations of powerful binaries in production.",
+      "key_concepts": [
+        "dual-use binaries",
+        "command-line logging",
+        "application allow-listing",
+        "least privilege",
+        "behavioral detection"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> GTFOBins",
+      "attack_relevant": true,
+      "attack_profile": "Binary-abuse attacks repurpose legitimate Unix tools for malicious ends: using built-in interpreters, downloaders, or privilege-adjacent utilities to execute code or exfiltrate data. Conceptually the attacker needs no malware when the operating system ships the capability. Targets: execution and egress under the guise of normal administration. Observable footprints: dual-use binaries invoked with unusual arguments or from unusual parents."
+    },
+    {
+      "id": "hacker101",
+      "name": "Hacker101",
+      "defensive_summary": "Hacker101 is a free web-security class teaching how web vulnerabilities work through lessons and practice. Defenders care because understanding web exploitation mechanics is prerequisite to defending web applications: you cannot write meaningful WAF rules or review code for flaws you have never seen exploited. Structured, legal practice builds that understanding.",
+      "detection_notes": "Use the techniques taught to validate your own web monitoring: if a lesson's attack would not alert in your environment, that is a detection gap to close. Track lesson coverage against your WAF and logging.",
+      "hardening_notes": "Have web defenders complete the curriculum in the provided practice environment, then convert each lesson into a code-review checklist item or a detection rule. Keep all practice inside the authorized lab.",
+      "key_concepts": [
+        "web fundamentals",
+        "authorized practice",
+        "detection validation",
+        "code review"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Hacker101",
+      "attack_relevant": false
+    },
+    {
+      "id": "infosec-getting-started",
+      "name": "Infosec Getting Started",
+      "defensive_summary": "Infosec Getting Started gathers beginner resources for entering information security. Defenders care because the field's talent pipeline starts here: well-onboarded newcomers become the analysts, engineers, and responders of tomorrow. Good starting resources reduce the time from curious to contributing.",
+      "detection_notes": "For team builders: watch for onboarding gaps by checking which fundamentals new hires struggle with, and map starter resources to your team's actual tooling.",
+      "hardening_notes": "Pair newcomers with mentors, give them lab environments on day one, and structure their first months around fundamentals plus your specific stack. Document your environment so knowledge is not trapped in senior staff.",
+      "key_concepts": [
+        "onboarding",
+        "fundamentals",
+        "mentorship",
+        "lab access"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Infosec Getting Started",
+      "attack_relevant": false
+    },
+    {
+      "id": "infosec-reference",
+      "name": "Infosec Reference",
+      "defensive_summary": "Infosec Reference is a no-nonsense information security reference for practitioners. Defenders value concise references during incidents: when time matters, a clear reference beats a long textbook. Keeping trusted references at hand shortens investigation and response cycles.",
+      "detection_notes": "During incidents, use references to validate that your interpretation of artifacts and protocols is correct before acting on it. Misread evidence causes wrong containment decisions.",
+      "hardening_notes": "Curate a small set of trusted references for your team, keep them available offline for incident use, and review them periodically for currency. Add your own environment-specific notes alongside.",
+      "key_concepts": [
+        "quick reference",
+        "incident support",
+        "offline availability",
+        "validated knowledge"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Infosec Reference",
+      "attack_relevant": false
+    },
+    {
+      "id": "ioc",
+      "name": "IOC",
+      "defensive_summary": "IOC (Indicators of Compromise) collections gather sources of compromise indicators: hashes, IPs, domains, and URLs tied to malicious activity. Defenders care because indicators are the consumable output of threat intelligence: feed them into blocking and detection controls to catch known-bad activity automatically. Fresh, relevant indicators compress attacker dwell time.",
+      "detection_notes": "Watch for indicator matches in firewall, DNS, proxy, and EDR telemetry, and track which feeds produce true positives in your environment. Expire stale indicators so controls stay fast and accurate.",
+      "hardening_notes": "Automate indicator ingestion into enforcement points with confidence scoring and expiry, prioritize indicators relevant to your sector, and always pair indicator matching with behavioral detection since attackers rotate infrastructure quickly.",
+      "key_concepts": [
+        "indicators of compromise",
+        "feed automation",
+        "indicator expiry",
+        "blocking",
+        "confidence scoring"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> IOC",
+      "attack_relevant": false
+    },
+    {
+      "id": "linux-kernel-exploitation",
+      "name": "Linux Kernel Exploitation",
+      "defensive_summary": "Linux Kernel Exploitation research studies how kernel flaws become privilege escalation: memory-corruption primitives and mitigation bypasses. Defenders study these primitives to understand what kernel exploitation looks like in telemetry and which hardening actually raises the bar. You defend the kernel better when you understand how it fails.",
+      "detection_notes": "Watch for unexpected privilege transitions, kernel oops or crash patterns preceding exploitation attempts, and processes gaining capabilities they should not have. EDR kernel telemetry and audit logs are the primary sources.",
+      "hardening_notes": "Patch kernels promptly, enable available hardening (KASLR, SMEP/SMAP equivalents, hardened configs), restrict kernel module loading, and apply seccomp and least privilege to reduce the reachable attack surface. Monitor for exploitation attempts, not just successes.",
+      "key_concepts": [
+        "privilege escalation",
+        "kernel hardening",
+        "mitigations",
+        "seccomp",
+        "patch cadence",
+        "least privilege"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Linux Kernel Exploitation",
+      "attack_relevant": true,
+      "attack_profile": "Kernel exploitation escalates from unprivileged code to full kernel control via memory-corruption flaws: developing the primitive, defeating mitigations, and hijacking control flow to install persistence. Conceptually each exploit is a chain of small violations that compose into total compromise. Targets: full host control. Observable footprints: unexpected privilege transitions, kernel crash patterns, and capability anomalies."
+    },
+    {
+      "id": "machine-learning-for-cyber-security",
+      "name": "Machine Learning for Cyber Security",
+      "defensive_summary": "Machine Learning for Cyber Security applies ML to defensive problems: anomaly detection, malware classification, and phishing detection. Defenders care because ML scales pattern recognition beyond human analyst capacity, catching novel variants of known-bad. But ML models are also attackable, so deployment demands the same rigor as any control.",
+      "detection_notes": "Watch model performance metrics for drift indicating changing attacker behavior or evasion, and monitor for adversarial inputs designed to fool classifiers. Track precision and recall per model, not just aggregate accuracy.",
+      "hardening_notes": "Validate models against adversarial test cases before deployment, keep humans in the loop for high-impact decisions, and retrain on fresh labeled data regularly. Never let a model be the sole control for a critical decision.",
+      "key_concepts": [
+        "anomaly detection",
+        "model drift",
+        "adversarial ML",
+        "human-in-the-loop",
+        "retraining"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Machine Learning for Cyber Security",
+      "attack_relevant": false
+    },
+    {
+      "id": "payloads",
+      "name": "Payloads",
+      "defensive_summary": "Payloads collections gather known malicious input patterns used in web attacks. Defenders study these patterns for strictly defensive purposes: building WAF and IDS signatures, testing that controls actually block them, and recognizing them in logs. Knowing the pattern library attackers draw from lets you pre-build the defenses.",
+      "detection_notes": "Watch WAF and application logs for requests matching known malicious patterns, especially encoded or obfuscated variants. Cluster repeated patterns by source to distinguish scanning from targeted attempts.",
+      "hardening_notes": "Test your WAF and input-validation controls against standard pattern collections in a lab, fix the application code so patterns are rejected by design (parameterized queries, output encoding), and keep signatures updated. Test only systems you own.",
+      "key_concepts": [
+        "WAF signatures",
+        "input validation",
+        "pattern recognition",
+        "control testing",
+        "defense in depth"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Payloads",
+      "attack_relevant": true,
+      "attack_profile": "Payloads are the malicious inputs attackers deliver to vulnerable sinks: injection strings, traversal sequences, and command fragments tailored to each flaw class. Conceptually the payload is the attacker's voice speaking the application's own language against it. Targets: databases, file systems, and operating-system shells behind the app. Observable footprints: pattern matches in WAF and application logs, especially encoded variants."
+    },
+    {
+      "id": "payloadsallthethings",
+      "name": "PayloadsAllTheThings",
+      "defensive_summary": "PayloadsAllTheThings is a large collection of payload patterns and bypass techniques for web application security testing. Defenders use it the way vaccine researchers use virus samples: to test and strengthen controls in authorized assessments. Each bypass documented is a gap to close in your WAF rules and input handling.",
+      "detection_notes": "Watch for bypass-pattern variations in logs that evade your current signatures; each evasion is a signature-improvement task. Correlate multi-vector probing from single sources as targeted assessment activity.",
+      "hardening_notes": "Validate WAF rules against bypass collections in a lab, fix applications so bypasses fail at the code level rather than relying on the WAF alone, and layer controls so no single bypass defeats the defense. Restrict testing to authorized systems.",
+      "key_concepts": [
+        "bypass techniques",
+        "WAF tuning",
+        "defense in depth",
+        "authorized testing",
+        "input handling"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> PayloadsAllTheThings",
+      "attack_relevant": true,
+      "attack_profile": "This collection documents bypass thinking: when a defense blocks the obvious payload, attackers mutate it — encoding, alternative syntax, and filter-evasion tricks — until something slips through. Conceptually it is an arms race between filter and filter-evasion. Targets: input filters, WAFs, and sanitizers. Observable footprints: multi-vector probing from single sources and filter-evasion patterns in logs."
+    },
+    {
+      "id": "pentest-wiki",
+      "name": "Pentest Wiki",
+      "defensive_summary": "Pentest Wiki is a free knowledge library documenting penetration-testing methodology for researchers. Defenders study assessment methodology to understand how their environment would be attacked: the enumeration order, the privilege-escalation paths, the exfiltration routes. Methodology knowledge directs hardening to the paths attackers actually walk.",
+      "detection_notes": "Map documented assessment methodologies to your telemetry: each methodology phase should correspond to detections in your environment. Silent phases are your detection roadmap.",
+      "hardening_notes": "Harden along the paths methodology documents: enumeration resistance, privilege boundaries, and egress controls. Use the methodology as a checklist for your own authorized assessments, then remediate by root cause.",
+      "key_concepts": [
+        "methodology",
+        "attack paths",
+        "enumeration resistance",
+        "egress control",
+        "authorized assessment"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Pentest Wiki",
+      "attack_relevant": true,
+      "attack_profile": "Documented assessment methodology describes the standard attack progression: enumerate, gain foothold, escalate, move laterally, persist, exfiltrate. Conceptually methodology turns scattered techniques into a repeatable campaign plan. Targets: the full environment. Observable footprints: methodology phases map directly to detection opportunities at each stage."
+    },
+    {
+      "id": "probable-wordlists",
+      "name": "Probable Wordlists",
+      "defensive_summary": "Probable Wordlists are password lists ordered by real-world probability, originally built for password research. Defenders use them to measure password strength honestly: if a password appears early in a probability-ordered list, it will fall quickly. They turn password policy from guesswork into measurement.",
+      "detection_notes": "Watch authentication logs for guessing patterns that follow probability-ordered attempts, which indicate list-driven attacks rather than random brute force. Alert on high-velocity attempts against many accounts.",
+      "hardening_notes": "Screen new passwords against probability-ordered lists at creation time, require MFA so even guessed passwords are insufficient, and enforce length minimums that push passwords beyond practical guessing. Never use these lists against accounts you do not own.",
+      "key_concepts": [
+        "password screening",
+        "probability ordering",
+        "MFA",
+        "guessing resistance",
+        "authorized use only"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Probable Wordlists",
+      "attack_relevant": true,
+      "attack_profile": "Probability-ordered guessing attacks try the most likely passwords first, making short work of human-chosen secrets: credential stuffing replays breached pairs, spraying tries few passwords across many accounts. Conceptually the attack exploits the predictability of human memory. Targets: password-only accounts. Observable footprints: high-velocity logon attempts following probability order and bursts across many usernames."
+    },
+    {
+      "id": "red-team-physical-tools",
+      "name": "Red Team Physical Tools",
+      "defensive_summary": "Red Team Physical Tools covers the equipment used in physical security assessments: access-control testing and covert-entry gear. Defenders study this domain to harden the physical layer that technical controls assume: badge systems, locks, and facility procedures. A network is only as secure as the building it sits in.",
+      "detection_notes": "Watch badge-access logs for tailgating indicators, after-hours access anomalies, and cloned-credential use. Correlate physical access events with logical access for the same identity.",
+      "hardening_notes": "Enforce anti-tailgating procedures and test them, use badge systems with cloning-resistant credentials, and run authorized physical assessments to find weaknesses before adversaries do. Train staff to challenge unknown individuals politely.",
+      "key_concepts": [
+        "tailgating",
+        "badge cloning",
+        "physical assessment",
+        "access logs",
+        "facility procedures"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Red Team Physical Tools",
+      "attack_relevant": true,
+      "attack_profile": "Physical attacks bypass digital controls entirely: cloning badge credentials, tailgating through secured doors, and accessing exposed network ports or unlocked workstations. Conceptually the building's trust assumptions are the vulnerability. Targets: facility access leading to network access. Observable footprints: badge anomalies, after-hours access, and unknown devices on internal ports."
+    },
+    {
+      "id": "reverse-engineering",
+      "name": "Reverse Engineering",
+      "defensive_summary": "Reverse Engineering is the systematic analysis of software to understand its inner workings, covered here through articles, books, and papers. Defenders rely on it for malware analysis, vulnerability research, and verifying third-party components. Deep reverse-engineering skill produces the precise, behavior-based detections that signatures alone cannot.",
+      "detection_notes": "Analysts trained in reverse engineering produce higher-quality indicators: behaviors that survive malware repacking rather than fragile hashes. Track whether dissections yield detections within the incident timeline.",
+      "hardening_notes": "Invest in analyst training and lab tooling for binary analysis, document findings as reusable detection logic, and use reverse-engineering insights to harden the specific platforms and formats attackers target.",
+      "key_concepts": [
+        "binary analysis",
+        "behavioral indicators",
+        "analyst training",
+        "vulnerability research"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Reverse Engineering",
+      "attack_relevant": true,
+      "attack_profile": "Reverse engineering of malicious software exposes attacker tradecraft: how command-and-control protocols are structured, how persistence is implemented, and which evasion checks the malware performs. Conceptually it converts an opaque binary into a documented adversary capability. Targets: understanding, for defense. Footprints produced: network indicators, host artifacts, and behavioral signatures."
+    },
+    {
+      "id": "rfsec-toolkit",
+      "name": "RFSec-ToolKit",
+      "defensive_summary": "RFSec-ToolKit collects tools for analyzing radio-frequency communication protocols. Defenders care because wireless is invisible: rogue access points, vulnerable IoT radios, and insecure RF protocols all operate below the view of wired monitoring. RF awareness closes a blind spot.",
+      "detection_notes": "Watch for rogue wireless access points, unexpected RF protocol traffic near facilities, and wireless intrusion-detection alerts. Baseline the authorized RF environment so anomalies are visible.",
+      "hardening_notes": "Deploy wireless intrusion detection, enforce WPA3 with strong credentials on corporate wireless, and segment IoT radios from sensitive networks. Survey facilities periodically for unauthorized transmitters.",
+      "key_concepts": [
+        "rogue AP",
+        "wireless IDS",
+        "WPA3",
+        "RF survey",
+        "IoT radios"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> RFSec-ToolKit",
+      "attack_relevant": true,
+      "attack_profile": "RF attacks target wireless protocols: rogue access points for interception, deauthentication to force reconnections, and exploitation of weak IoT radio protocols. Conceptually radio is a shared medium where the loudest transmitter wins trust. Targets: wireless credentials and device control. Observable footprints: rogue access-point beacons, deauthentication floods, and unknown transmitters."
+    },
+    {
+      "id": "security-cheatsheets",
+      "name": "Security Cheatsheets",
+      "defensive_summary": "Security Cheatsheets distill defensive best practices into concise, actionable guidance, notably the OWASP Cheat Sheet Series for application security. Defenders care because cheatsheets convert expert knowledge into checklists developers and operators can actually follow. They are among the highest-leverage defensive documents in existence.",
+      "detection_notes": "Use cheatsheets as audit baselines: check whether your applications and configurations match the recommended practices, and treat deviations as findings. Track adoption per team.",
+      "hardening_notes": "Adopt the relevant cheatsheets as organizational standards, integrate them into code review checklists and configuration baselines, and update them as the sheets evolve. Prefer concise, actionable guidance over long policy documents.",
+      "key_concepts": [
+        "OWASP",
+        "secure defaults",
+        "checklists",
+        "code review",
+        "configuration baselines"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Security Cheatsheets",
+      "attack_relevant": false
+    },
+    {
+      "id": "shell",
+      "name": "Shell",
+      "defensive_summary": "Shell covers command-line frameworks, toolkits, and guides for making full use of the terminal. Defenders live in the shell: log analysis, incident response, and automation all run through it. Shell fluency multiplies every other defensive skill, and understanding shell tradecraft helps recognize malicious shell use.",
+      "detection_notes": "Watch for shells spawned from unusual parents (office documents, web servers), encoded command lines, and interactive shells on servers that should not have them. Command-line logging is one of the highest-value telemetry sources.",
+      "hardening_notes": "Enable command-line logging everywhere, restrict interactive shell access with jump hosts and MFA, and train responders in shell-based triage. Build response tooling as auditable scripts, not ad-hoc commands.",
+      "key_concepts": [
+        "command-line logging",
+        "jump hosts",
+        "automation",
+        "triage",
+        "script auditing"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Shell",
+      "attack_relevant": true,
+      "attack_profile": "Malicious shell use is the universal post-exploitation language: encoded commands to evade logging, shells spawned from exploited applications, and living-off-the-land binaries for every phase. Conceptually the shell turns any foothold into full system control. Targets: the host and everything reachable from it. Observable footprints: shells with unusual parents, encoded command lines, and interactive sessions on servers."
+    },
+    {
+      "id": "suricata",
+      "name": "Suricata",
+      "defensive_summary": "Suricata is an open-source IDS/IPS and network security monitoring engine. Defenders deploy it to inspect network traffic for malicious patterns in real time, with protocol awareness far beyond simple string matching. Properly tuned, it is a cornerstone of network detection.",
+      "detection_notes": "Watch Suricata alert telemetry for rule hits correlated with endpoint and log data, and track rule performance to prune noisy signatures. Alert on Suricata sensor health itself: a blind sensor is a coverage gap.",
+      "hardening_notes": "Deploy sensors at network choke points with adequate hardware, tune rules to your traffic to control false positives, and update rulesets on a schedule. Run in IDS mode first to validate before enabling IPS blocking.",
+      "key_concepts": [
+        "IDS/IPS",
+        "network security monitoring",
+        "rule tuning",
+        "protocol awareness",
+        "sensor placement"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Suricata",
+      "attack_relevant": false
+    },
+    {
+      "id": "threathunter-playbook",
+      "name": "ThreatHunter-Playbook",
+      "defensive_summary": "ThreatHunter-Playbook provides structured hypotheses and techniques for proactive threat hunting. Defenders care because hunting finds the intrusions that automated alerts miss: analysts start from adversary behavior and search telemetry for it. A playbook turns hunting from art into repeatable process.",
+      "detection_notes": "Track hunt outcomes: confirmed true positives become permanent detections, and hunts that find nothing still validate coverage. Measure mean dwell time of hunt-discovered intrusions.",
+      "hardening_notes": "Run hunts on a schedule driven by your threat model, document every hunt as a hypothesis with data sources and findings, and convert successful hunts into automated detections. Ensure hunts have access to the telemetry they need.",
+      "key_concepts": [
+        "threat hunting",
+        "hypotheses",
+        "behavioral search",
+        "dwell time",
+        "hunt-to-detection pipeline"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> ThreatHunter-Playbook",
+      "attack_relevant": false
+    },
+    {
+      "id": "tor",
+      "name": "Tor",
+      "defensive_summary": "Tor covers the anonymity network and its implications for defenders. Defenders care because Tor is dual-use: it protects legitimate privacy, and it also carries malicious traffic that bypasses normal attribution. Organizations need a deliberate Tor policy rather than accidental exposure.",
+      "detection_notes": "Watch for Tor client traffic on corporate networks, connections to known Tor entry nodes, and data exfiltration patterns routed through anonymity networks. Decide whether Tor use is alert-worthy or policy-violating in your environment.",
+      "hardening_notes": "Define an explicit organizational policy on Tor, block or allow Tor at the boundary per that policy, and monitor for circumvention. Harden any legitimate Tor use cases with endpoint controls and logging.",
+      "key_concepts": [
+        "anonymity networks",
+        "egress policy",
+        "entry nodes",
+        "dual-use",
+        "exfiltration"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Tor",
+      "attack_relevant": true,
+      "attack_profile": "Tor abuse leverages anonymity for malicious ends: exfiltrating data through onion routing, operating command-and-control that resists takedown, and obscuring attacker origin. Conceptually the same properties that protect legitimate privacy also protect intruders. Targets: attribution itself. Observable footprints: Tor client traffic on corporate networks and connections to entry nodes during incidents."
+    },
+    {
+      "id": "vulhub",
+      "name": "Vulhub",
+      "defensive_summary": "Vulhub provides pre-built vulnerable environments for practicing exploitation and defense in isolated containers. Defenders use these environments to reproduce real CVEs safely: confirm patch effectiveness, develop detections for the exploitation pattern, and train responders on real vulnerability mechanics. Reproducing the flaw is the fastest path to understanding it.",
+      "detection_notes": "For each reproduced CVE, capture the exploitation telemetry and verify your detections fire on it. Track which reproduced vulnerabilities lack detection coverage in production.",
+      "hardening_notes": "Run vulnerable environments strictly isolated and never expose them to untrusted networks, use them to validate patches before production rollout, and tear them down after exercises. Convert each exercise into a detection or hardening note.",
+      "key_concepts": [
+        "vulnerable environments",
+        "CVE reproduction",
+        "patch validation",
+        "isolated labs",
+        "detection development"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Vulhub",
+      "attack_relevant": false
+    },
+    {
+      "id": "web-security",
+      "name": "Web Security",
+      "defensive_summary": "Web Security curates materials on securing web applications and infrastructure. Defenders care because the web remains the dominant attack surface: nearly every breach involves a web vector somewhere. A current, curated reading list keeps defenders aligned with how web attacks evolve.",
+      "detection_notes": "Stay current on emerging web attack classes and verify your logging captures the data needed to detect them. Review WAF and application logs against newly documented techniques.",
+      "hardening_notes": "Maintain a web-security baseline covering headers, TLS, authentication, and input handling, review it against current materials annually, and test applications with authorized assessments. Patch web stacks on a disciplined cadence.",
+      "key_concepts": [
+        "web baseline",
+        "security headers",
+        "TLS",
+        "authorized testing",
+        "current tradecraft"
+      ],
+      "reference": "Hack-with-Github/Awesome-Hacking -> Web Security",
+      "attack_relevant": true,
+      "attack_profile": "Web attack classes evolve continuously: new injection variants, client-side attacks on single-page apps, and supply-chain compromises of frontend dependencies. Conceptually the web's complexity guarantees a steady supply of trust-boundary mistakes. Targets: users and their data via the browser and the server. Observable footprints: emerging probe patterns that defenders must learn to recognize."
+    }
+  ]
+}

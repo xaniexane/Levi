@@ -1,0 +1,350 @@
+# m58320
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Conservation of Linear Momentum
+
+Conservation of Linear Momentum
+
+By the end of this section, you will be able to:
+
+Explain the meaning of “conservation of momentum”
+
+Correctly identify if a system is, or is not, closed
+
+Define a system whose momentum is conserved
+
+Mathematically express conservation of momentum for a given system
+
+Calculate an unknown quantity using conservation of momentum
+
+Recall Newton’s third law: When two objects of masses m1 and m2 interact (meaning that they apply forces on each other), the force that object 2 applies to object 1 is equal in magnitude and opposite in direction to the force that object 1 applies on object 2. Let:
+F→21= the force on m1 from m2
+F→12= the force on m2 from m1
+
+Then, in symbols, Newton’s third law says
+
+(Recall that these two forces do not cancel because they are applied to different objects. F21 causes m1 to accelerate, and F12 causes m2 to accelerate.)
+
+Although the magnitudes of the forces on the objects are the same, the accelerations are not, simply because the masses (in general) are different. Therefore, the changes in velocity of each object are different:
+
+However, the products of the mass and the change of velocity are equal (in magnitude):
+
+It’s a good idea, at this point, to make sure you’re clear on the physical meaning of the derivatives in . Because of the interaction, each object ends up getting its velocity changed, by an amount dv. Furthermore, the interaction occurs over a time interval dt, which means that the change of velocities also occurs over dt. This time interval is the same for each object.
+
+Let‘s assume, for the moment, that the masses of the objects do not change during the interaction. (We’ll relax this restriction later.) In that case, we can pull the masses inside the derivatives:
+
+and thus
+
+This says that the rate at which momentum changes is the same for both objects. The masses are different, and the changes of velocity are different, but the rate of change of the product of m and v→ are the same.
+
+Physically, this means that during the interaction of the two objects (m1andm2), both objects have their momentum changed; but those changes are identical in magnitude, though opposite in sign. For example, the momentum of object 1 might increase, which means that the momentum of object 2 decreases by exactly the same amount.
+
+In light of this, let’s re-write in a more suggestive form:
+
+This says that during the interaction, although object 1’s momentum changes, and object 2’s momentum also changes, these two changes cancel each other out, so that the total change of momentum of the two objects together is zero.
+
+Since the total combined momentum of the two objects together never changes, then we could write
+
+from which it follows that
+
+As shown in , the total momentum of the system before and after the collision remains the same.
+
+Generalizing this result to N objects, we obtain
+is the definition of the total (or net) momentum of a system of N interacting objects, along with the statement that the total momentum of a system of objects is constant in time—or better, is conserved.
+
+Conservation Laws
+
+If the value of a physical quantity is constant in time, we say that the quantity is conserved.
+
+Requirements for Momentum Conservation
+
+There is a complication, however. A system must meet two requirements for its momentum to be conserved:
+The mass of the system must remain constant during the interaction.
+As the objects interact (apply forces on each other), they may transfer mass from one to another; but any mass one object gains is balanced by the loss of that mass from another. The total mass of the system of objects, therefore, remains unchanged as time passes:
+[dmdt]system=0.
+The net external force on the system must be zero.
+As the objects collide, or explode, and move around, they exert forces on each other. However, all of these forces are internal to the system, and thus each of these internal forces is balanced by another internal force that is equal in magnitude and opposite in sign. As a result, the change in momentum caused by each internal force is cancelled by another momentum change that is equal in magnitude and opposite in direction. Therefore, internal forces cannot change the total momentum of a system because the changes sum to zero. However, if there is some external force that acts on all of the objects (gravity, for example, or friction), then this force changes the momentum of the system as a whole; that is to say, the momentum of the system is changed by the external force. Thus, for the momentum of the system to be conserved, we must have
+F→ext=0→.
+
+A system of objects that meets these two requirements is said to be a closed system (also called an isolated system). Thus, the more compact way to express this is shown below.
+
+Law of Conservation of Momentum
+
+The total momentum of a closed system is conserved:
+
+This statement is called the Law of Conservation of Momentum. Along with the conservation of energy, it is one of the foundations upon which all of physics stands. All our experimental evidence supports this statement: from the motions of galactic clusters to the quarks that make up the proton and the neutron, and at every scale in between. In a closed system, the total momentum never changes.
+
+Note that there absolutely can be external forces acting on the system; but for the system’s momentum to remain constant, these external forces have to cancel, so that the net external force is zero. Billiard balls on a table all have a weight force acting on them, but the weights are balanced (canceled) by the normal forces, so there is no net force.
+
+The Meaning of ‘System’
+
+A system (mechanical) is the collection of objects in whose motion (kinematics and dynamics) you are interested. If you are analyzing the bounce of a ball on the ground, you are probably only interested in the motion of the ball, and not of Earth; thus, the ball is your system. If you are analyzing a car crash, the two cars together compose your system ().
+
+Conservation of Momentum
+
+Using conservation of momentum requires four basic steps. The first step is crucial:
+
+Identify a closed system (total mass is constant, no net external force acts on the system).
+
+Write down an expression representing the total momentum of the system before the “event” (explosion or collision).
+
+Write down an expression representing the total momentum of the system after the “event.”
+
+Set these two expressions equal to each other, and solve this equation for the desired quantity.
+Colliding Carts
+Two carts in a physics lab roll on a level track, with negligible friction. These carts have small magnets at their ends, so that when they collide, they stick together (). The first cart has a mass of 675 grams and is rolling at 0.75 m/s to the right; the second has a mass of 500 grams and is rolling at 1.33 m/s, also to the right. After the collision, what is the velocity of the two joined carts?
+
+Colliding Carts
+Strategy
+We have a collision. We’re given masses and initial velocities; we’re asked for the final velocity. This all suggests using conservation of momentum as a method of solution. However, we can only use it if we have a closed system. So we need to be sure that the system we choose has no net external force on it, and that its mass is not changed by the collision.
+
+Strategy
+
+Defining the system to be the two carts meets the requirements for a closed system: The combined mass of the two carts certainly doesn’t change, and while the carts definitely exert forces on each other, those forces are internal to the system, so they do not change the momentum of the system as a whole. In the vertical direction, the weights of the carts are canceled by the normal forces on the carts from the track.
+Solution
+Conservation of momentum is
+
+Solution
+
+Define the direction of their initial velocity vectors to be the +x-direction. The initial momentum is then
+
+The final momentum of the now-linked carts is
+
+Equating:
+
+Substituting the given numbers:
+Significance
+The principles that apply here to two laboratory carts apply identically to all objects of whatever type or size. Even for photons, the concepts of momentum and conservation of momentum are still crucially important even at that scale. (Since they are massless, the momentum of a photon is defined very differently from the momentum of ordinary objects. You will learn about this when you study quantum physics.)
+
+Significance
+
+Suppose the second, smaller cart had been initially moving to the left. What would the sign of the final velocity have been in this case?
+
+If the smaller cart were rolling at 1.33 m/s to the left, then conservation of momentum gives
+(m1+m2)v→f=m1v1i^−m2v2i^v→f=(m1v1−m2v2m1+m2)i^=[(0.675kg)(0.75m/s)−(0.500kg)(1.33m/s)1.175kg]i^=−(0.135m/s)i^
+Thus, the final velocity is 0.135 m/s to the left.
+A Bouncing Superball
+A superball of mass 0.25 kg is dropped from rest from a height of h=1.50m above the floor. It bounces with no loss of energy and returns to its initial height ().
+
+A Bouncing Superball
+
+What is the superball’s change of momentum during its bounce on the floor?
+
+What was Earth’s change of momentum due to the ball colliding with the floor?
+
+What was Earth’s change of velocity as a result of this collision?
+
+(This example shows that you have to be careful about defining your system.)
+Strategy
+Since we are asked only about the ball’s change of momentum, we define our system to be the ball. But this is clearly not a closed system; gravity applies a downward force on the ball while it is falling, and the normal force from the floor applies a force during the bounce. Thus, we cannot use conservation of momentum as a strategy. Instead, we simply determine the ball’s momentum just before it collides with the floor and just after, and calculate the difference. We have the ball’s mass, so we need its velocities.
+
+Strategy
+Solution
+
+Solution
+
+Since this is a one-dimensional problem, we use the scalar form of the equations. Let:
+
+p0= the magnitude of the ball’s momentum at time t0, the moment it was released; since it was dropped from rest, this is zero.
+p1= the magnitude of the ball’s momentum at time t1, the instant just before it hits the floor.
+p2= the magnitude of the ball’s momentum at time t2, just after it loses contact with the floor after the bounce.
+
+The ball’s change of momentum is
+Δp→=p→2−p→1=p2j^−(−p1j^)=(p2+p1)j^.
+Its velocity just before it hits the floor can be determined from either conservation of energy or kinematics. We use kinematics here; you should re-solve it using conservation of energy and confirm you get the same result.
+We want the velocity just before it hits the ground (at time t1). We know its initial velocity v0=0 (at time t0), the height it falls, and its acceleration; we don’t know the fall time. We could calculate that, but instead we use
+v→1=−j^2gy=−5.4m/sj^.
+Thus the ball has a momentum of
+p→1=−(0.25kg)(−5.4m/sj^)=−(1.4kg·m/s)j^.
+We don’t have an easy way to calculate the momentum after the bounce. Instead, we reason from the symmetry of the situation.
+Before the bounce, the ball starts with zero velocity and falls 1.50 m under the influence of gravity, achieving some amount of momentum just before it hits the ground. On the return trip (after the bounce), it starts with some amount of momentum, rises the same 1.50 m it fell, and ends with zero velocity. Thus, the motion after the bounce was the mirror image of the motion before the bounce. From this symmetry, it must be true that the ball’s momentum after the bounce must be equal and opposite to its momentum before the bounce. (This is a subtle but crucial argument; make sure you understand it before you go on.)
+Therefore,
+p→2=−p→1=+(1.4kg·m/s)j^.
+Thus, the ball’s change of momentum during the bounce is
+Δp→=p→2−p→1=(1.4kg·m/s)j^−(−1.4kg·m/s)j^=+(2.8kg·m/s)j^.
+p0= the magnitude of the ball’s momentum at time t0, the moment it was released; since it was dropped from rest, this is zero.
+p1= the magnitude of the ball’s momentum at time t1, the instant just before it hits the floor.
+p2= the magnitude of the ball’s momentum at time t2, just after it loses contact with the floor after the bounce.
+
+What was Earth’s change of momentum due to the ball colliding with the floor?
+Your instinctive response may well have been either “zero; the Earth is just too massive for that tiny ball to have affected it” or possibly, “more than zero, but utterly negligible.” But no—if we re-define our system to be the Superball + Earth, then this system is closed (neglecting the gravitational pulls of the Sun, the Moon, and the other planets in the solar system), and therefore the total change of momentum of this new system must be zero. Therefore, Earth’s change of momentum is exactly the same magnitude:
+Δp→Earth=−2.8kg·m/sj^.
+
+What was Earth’s change of velocity as a result of this collision?
+This is where your instinctive feeling is probably correct: 
+Δv→Earth=Δp→EarthMEarth=−2.8kg·m/s5.97×1024kgj^=−(4.7×10−25m/s)j^.
+This change of Earth’s velocity is utterly negligible.
+Significance
+It is important to realize that the answer to part (c) is not a velocity; it is a change of velocity, which is a very different thing. Nevertheless, to give you a feel for just how small that change of velocity is, suppose you were moving with a velocity of 4.7×10−25m/s. At this speed, it would take you about 7 million years to travel a distance equal to the diameter of a hydrogen atom.
+
+Significance
+
+Would the ball’s change of momentum have been larger, smaller, or the same, if it had collided with the floor and stopped (without bouncing)?
+
+Would the ball’s change of momentum have been larger, smaller, or the same, if it had collided with the floor and stopped (without bouncing)?
+
+If the ball does not bounce, its final momentum p→2 is zero, so
+Δp→=p→2−p→1=(0)j^−(−1.4kg·m/s)j^=+(1.4kg·m/s)j^
+Ice Hockey 1
+Two hockey pucks of identical mass are on a flat, horizontal ice hockey rink. The red puck is motionless; the blue puck is moving at 2.5 m/s to the left (). It collides with the motionless red puck. The pucks have a mass of 15 g. After the collision, the red puck is moving at 2.5 m/s, to the left. What is the final velocity of the blue puck?
+
+Ice Hockey 1
+Strategy
+We’re told that we have two colliding objects, we’re told the masses and initial velocities, and one final velocity; we’re asked for both final velocities. Conservation of momentum seems like a good strategy. Define the system to be the two pucks; there’s no friction, so we have a closed system.
+
+Strategy
+
+Before you look at the solution, what do you think the answer will be?
+
+The blue puck final velocity will be:
+
+zero
+
+2.5 m/s to the left
+
+2.5 m/s to the right
+
+1.25 m/s to the left
+
+1.25 m/s to the right
+
+something else
+Solution
+Define the +x-direction to point to the right. Conservation of momentum then reads
+
+Solution
+
+Before the collision, the momentum of the system is entirely and only in the blue puck. Thus,
+
+(Remember that the masses of the pucks are equal.) Substituting numbers:
+Significance
+Evidently, the two pucks simply exchanged momentum. The blue puck transferred all of its momentum to the red puck. In fact, this is what happens in similar collision where m1=m2.
+
+Significance
+
+Even if there were some friction on the ice, it is still possible to use conservation of momentum to solve this problem, but you would need to impose an additional condition on the problem. What is that additional condition?
+
+Consider the impulse momentum theory, which is J→=Δp→. If J→=0, we have the situation described in the example. If a force acts on the system, then J→=F→aveΔt. Thus, instead of p→f=p→i, we have
+F→aveΔt=Δp→=p→f−p→i
+where F→ave is the force due to friction.
+Landing of Philae
+On November 12, 2014, the European Space Agency successfully landed a probe named Philae on Comet 67P/Churyumov/Gerasimenko (). During the landing, however, the probe actually landed three times, because it bounced twice. Let’s calculate how much the comet’s speed changed as a result of the first bounce.
+
+Landing of Philae
+
+Let’s define upward to be the +y-direction, perpendicular to the surface of the comet, and y=0 to be at the surface of the comet. Here’s what we know:
+
+The mass of Comet 67P: Mc=1.0×1013kg
+
+The acceleration due to the comet’s gravity: a→=−(5.0×10−3m/s2)j^
+Philae’s mass: Mp=96kg
+
+Initial touchdown speed: v→1=−(1.0m/s)j^
+
+Initial upward speed due to first bounce: v→2=(0.38m/s)j^
+
+Landing impact time: Δt=1.3s
+Strategy
+We’re asked for how much the comet’s speed changed, but we don’t know much about the comet, beyond its mass and the acceleration its gravity causes. However, we are told that the Philae lander collides with (lands on) the comet, and bounces off of it. A collision suggests momentum as a strategy for solving this problem.
+
+Strategy
+
+If we define a system that consists of both Philae and Comet 67/P, then there is no net external force on this system, and thus the momentum of this system is conserved. (We’ll neglect the gravitational force of the sun.) Thus, if we calculate the change of momentum of the lander, we automatically have the change of momentum of the comet. Also, the comet’s change of velocity is directly related to its change of momentum as a result of the lander “colliding” with it.
+Solution
+Let p→1 be Philae’s momentum at the moment just before touchdown, and p→2 be its momentum just after the first bounce. Then its momentum just before landing was
+
+Solution
+
+and just after was
+
+Therefore, the lander’s change of momentum during the first bounce is
+
+Notice how important it is to include the negative sign of the initial momentum.
+
+Now for the comet. Since momentum of the system must be conserved, the comet’s momentum changed by exactly the negative of this:
+
+Therefore, its change of velocity is
+Significance
+This is a very small change in velocity, about a thousandth of a billionth of a meter per second. Crucially, however, it is not zero.
+
+Significance
+
+The changes of momentum for Philae and for Comet 67/P were equal (in magnitude). Were the impulses experienced by Philae and the comet equal? How about the forces? How about the changes of kinetic energies?
+
+The impulse is the change in momentum multiplied by the time required for the change to occur. By conservation of momentum, the changes in momentum of the probe and the comment are of the same magnitude, but in opposite directions, and the interaction time for each is also the same. Therefore, the impulse each receives is of the same magnitude, but in opposite directions. Because they act in opposite directions, the impulses are not the same. As for the impulse, the force on each body acts in opposite directions, so the forces on each are not equal. However, the change in kinetic energy differs for each, because the collision is not elastic.
+
+Summary
+
+The law of conservation of momentum says that the momentum of a closed system is constant in time (conserved).
+
+A closed (or isolated) system is defined to be one for which the mass remains constant, and the net external force is zero.
+
+The total momentum of a system is conserved only when the system is closed.
+
+Conceptual Questions
+
+Under what circumstances is momentum conserved?
+
+Momentum is conserved when the mass of the system of interest remains constant during the interaction in question and when no net external force acts on the system during the interaction.
+
+Can momentum be conserved for a system if there are external forces acting on the system? If so, under what conditions? If not, why not?
+
+Explain in terms of momentum and Newton’s laws how a car’s air resistance is due in part to the fact that it pushes air in its direction of motion.
+
+To accelerate air molecules in the direction of motion of the car, the car must exert a force on these molecules by Newton’s second law F→=dp→/dt. By Newton’s third law, the air molecules exert a force of equal magnitude but in the opposite direction on the car. This force acts in the direction opposite the motion of the car and constitutes the force due to air resistance.
+
+Can objects in a system have momentum while the momentum of the system is zero? Explain your answer.
+
+A sprinter accelerates out of the starting blocks. Can you consider him as a closed system? Explain.
+
+No, he is not a closed system because a net nonzero external force acts on him in the form of the starting blocks pushing on his feet.
+
+A rocket in deep space (zero gravity) accelerates by firing hot gas out of its thrusters. Does the rocket constitute a closed system? Explain.
+
+Problems
+
+Train cars are coupled together by being bumped into one another. Suppose two loaded train cars are moving toward one another, the first having a mass of 1.50×105kg and a velocity of (0.30m/s)i^, and the second having a mass of 1.10×105kg and a velocity of −(0.12m/s)i^. What is their final velocity?
+(0.122m/s)i^
+
+Two identical pucks collide elastically on an air hockey table. Puck 1 was originally at rest; puck 2 has an incoming speed of 6.00 m/s and scatters at an angle of 30° with respect to its incoming direction. What is the velocity (magnitude and direction) of puck 1 after the collision?
+
+The figure below shows a bullet of mass 200 g traveling horizontally towards the east with speed 400 m/s, which strikes a block of mass 1.5 kg that is initially at rest on a frictionless table.
+
+After striking the block, the bullet is embedded in the block and the block and the bullet move together as one unit.
+
+What is the magnitude and direction of the velocity of the block/bullet combination immediately after the impact?
+
+What is the magnitude and direction of the impulse by the block on the bullet?
+
+What is the magnitude and direction of the impulse from the bullet on the block?
+
+If it took 3 ms for the bullet to change the speed from 400 m/s to the final speed after impact, what is the average force between the block and the bullet during this time?
+
+a. 47 m/s in the bullet to block direction; b.70.6N·s, toward the bullet; c. 70.6N·s, toward the block; d. magnitude is 2.35×104N
+
+A 20-kg child is coasting at 3.3 m/s over flat ground in a 4.0-kg wagon.
+ If the child drops a 1-kg ball out the back of the wagon, what is the final speed of the child and wagon?
+ If the child drops a 1-kg ball out the back of the wagon so that the ball is at rest relative to the ground, what is the final speed of the child and wagon?
+
+If the child drops a 1-kg ball out the back of the wagon, what is the final speed of the child and wagon?
+
+If the child drops a 1-kg ball out the back of the wagon so that the ball is at rest relative to the ground, what is the final speed of the child and wagon?
+
+A 4.5 kg puffer fish expands to 40% of its mass by taking in water. When the puffer fish is threatened, it releases the water toward the threat to move quickly forward. What is the ratio of the speed of the puffer fish forward to the speed of the expelled water backwards?
+
+2:5
+
+Explain why a cannon recoils when it fires a shell.
+
+Two figure skaters are coasting in the same direction, with the leading skater moving at 5.5 m/s and the trailing skating moving at 6.2 m/s. When the trailing skater catches up with the leading skater, he picks her up without applying any horizontal forces on his skates. If the trailing skater is 50% heavier than the 50-kg leading skater, what is their speed after he picks her up?
+
+5.9 m/s
+
+A 2000-kg railway freight car coasts at 4.4 m/s underneath a grain terminal, which dumps grain directly down into the freight car. If the speed of the loaded freight car must not go below 3.0 m/s, what is the maximum mass of grain that it can accept?
+
+system for which the mass is constant and the net external force on the system is zero
+total momentum of a closed system cannot change
+object or collection of objects whose motion is currently under investigation; however, your system is defined at the start of the problem, you must keep that definition for the entire problem

@@ -1,0 +1,51 @@
+# m00054
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Top-level code
+
+Top-level code
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify code that will run as a side effect of importing.
+
+Explain the purpose of if __name__ == "__main__".
+
+Side effects
+
+Modules define functions and constants to be used in other programs. When importing a module, all code in the module is run from top to bottom. If a module is not designed carefully, unintended code might run as a side effect. The unintended code is generally at the top level, outside of function definitions.
+
+Sphere test code
+
+Side effects
+
+Using __name__
+
+Python modules often include the statement if __name__ == "__main__" to prevent side effects. This statement is true when the module is run as a program and false when the module is imported.
+
+The main module
+
+Using __name__
+
+Exploring further
+
+Variables that begin and end with double underscores have special meaning in Python. Double underscores are informally called "dunder" or "magic" variables. Other examples include __doc__ (the module's docstring) and __file__ (the module's filename).
+
+Side effects
+
+This exercise is a continuation of the "Missing imports" exercise. Previously, you added missing import statements to the top of the program. Now, modify the program to prevent side effects when importing the program as a module:
+
+Add if __name__ == "__main__" at the end.
+
+Move all test code under that if statement.
+
+The program should run without errors and produce the same output as before.
+
+Conversion test
+
+This exercise is a continuation of the "Conversion module" exercise. Previously, you wrote the functions cel2fah, fah2cel, km2mi, and mi2km. Write test code at the end of conversion.py (the original file) for each of these functions. The test code must not run as a side effect when conversion is imported by other programs. When running conversion.py as the main program, the test output should be:

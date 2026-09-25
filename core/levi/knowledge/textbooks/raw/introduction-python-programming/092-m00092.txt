@@ -1,0 +1,51 @@
+# m00092
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Using recursion to solve problems
+
+Using recursion to solve problems
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use recursion to efficiently search a list.
+
+Demonstrate a solution to the Three Towers problem.
+
+Binary search
+
+Searching a sorted list usually involves looking at each item. If the item being searched is not found, then the search can take a long time.
+
+A binary search is a recursive algorithm used to efficiently search sorted lists. In each recursive step, about half the items are discarded as not being potential matches, so the search proceeds much faster.
+
+A binary search begins by checking the middle element of the list. If the search key is found, the algorithm returns the matching location (base case). Otherwise, the search is repeated on approximately half the list. If the key is greater than the middle element, then the key must be on the right half, and vice versa. The process continues by checking the middle element of the remaining half of the list.
+
+Binary search
+
+The above code's output is:
+
+Binary search
+
+Binary search
+
+Solving Three Towers
+
+As discussed in an earlier section, the Three Towers problem can be solved using recursion. The solution depends on calling the solution to the next smaller problem twice. As shown in the code example below, the recursive solution can solve the problem for any number of rings.
+
+Solving N towers
+
+The solution to Three Towers is simple with recursion. In the code below, rings are numbered from the top down. The smallest ring is 1, the next ring is 2, and when solving for three rings, the bottom ring is 3.
+
+The above code's output is:
+
+Solving Three Towers
+
+Coin combinations
+
+Write a recursive function print_H_T() that produces all possible combinations of heads ("H") and tails ("T") for a given number of coin tosses.
+
+Ex: For three coins, the program should print the output shown below.

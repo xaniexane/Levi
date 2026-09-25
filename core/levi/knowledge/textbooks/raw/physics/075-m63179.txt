@@ -1,0 +1,821 @@
+# m63179
+# Book: OpenStax Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-physics
+# License: Creative Commons Attribution License
+
+Capacitors and Dielectrics
+
+Capacitors and Dielectrics
+
+Section Learning Objectives
+
+By the end of this section, you will be able to do the following:
+
+Calculate the energy stored in a charged capacitor and the capacitance of a capacitor
+
+Explain the properties of capacitors and dielectrics
+
+Teacher Support
+
+The learning objectives in this section will help your students master the following standards:
+
+(5) The student knows the nature of forces in the physical world. The student is expected to:
+
+(F)
+design construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+(F)
+design construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+
+In addition, the High School Physics Laboratory Manual addresses content in this section in the lab titled: Electric Charge as well as the following standards:
+
+(5) The student knows the nature of forces in the physical world. The student is expected to:
+
+(F)
+ design construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+(F)
+ design construct, and calculate in terms of current through, potential difference across, resistance of, and power used by electric circuit elements connected in both series and parallel combinations.
+
+Section Key Terms
+
+capacitor
+dielectric
+Teacher Support
+
+To present capacitors, this section emphasizes their capacity to store energy. Dielectrics are introduced as a way to increase the amount of energy that can be stored in a capacitor. To introduce the idea of energy storage, discuss with students other mechanisms of storing energy, such as dams or batteries. Ask which have greater capacity.
+
+Capacitors
+
+Teacher Support
+
+Explain that electrical capacitors are vital parts of all electrical circuits. In fact, all electrical devices have a capacitance even if a capacitor is not explicitly put into the device.
+[BL]Have students define how the word capacity is used in everyday life. Have them look up the definition in the dictionary. Compare and contrast the everyday meaning with the meaning of the term in physics.
+[OL]Ask students whether they have heard the word capacitor used in conjunction with electricity, such as in power stations or electric circuits. Have them describe how the word is used.
+[AL]Discuss how a spring has a capacity to store mechanical energy. Discuss which properties of the spring would increase its capacity to store energy. Point out that these properties are intrinsic to the spring.
+
+Consider again the X-ray tube discussed in the previous sample problem. How can a uniform electric field be produced? A single positive charge produces an electric field that points away from it, as in . This field is not uniform, because the space between the lines increases as you move away from the charge. However, if we combine a positive and a negative charge, we obtain the electric field shown in (a). Notice that, between the charges, the electric field lines are more equally spaced.
+
+What happens if we place, say, five positive charges in a line across from five negative charges, as in ? Now the region between the lines of charge contains a fairly uniform electric field.
+
+We can extend this idea even further and into two dimensions by placing two metallic plates face to face and charging one with positive charge and the other with an equal magnitude of negative charge. This can be done by connecting one plate to the positive terminal of a battery and the other plate to the negative terminal, as shown in . The electric field between these charged plates will be extremely uniform.
+
+Let’s think about the work required to charge these plates. Before the plates are connected to the battery, they are neutral—that is, they have zero net charge. Placing the first positive charge on the left plate and the first negative charge on the right plate requires very little work, because the plates are neutral, so no opposing charges are present. Now consider placing a second positive charge on the left plate and a second negative charge on the right plate. Because the first two charges repel the new arrivals, a force must be applied to the two new charges over a distance to put them on the plates. This is the definition of work, which means that, compared with the first pair, more work is required to put the second pair of charges on the plates. To place the third positive and negative charges on the plates requires yet more work, and so on. Where does this work come from? The battery! Its chemical potential energy is converted into the work required to separate the positive and negative charges.
+
+Although the battery does work, this work remains within the battery-plate system. Therefore, conservation of energy tells us that, if the potential energy of the battery decreases to separate charges, the energy of another part of the system must increase by the same amount. In fact, the energy from the battery is stored in the electric field between the plates. This idea is analogous to considering that the potential energy of a raised hammer is stored in Earth’s gravitational field. If the gravitational field were to disappear, the hammer would have no potential energy. Likewise, if no electric field existed between the plates, no energy would be stored between them.
+
+If we now disconnect the plates from the battery, they will hold the energy. We could connect the plates to a lightbulb, for example, and the lightbulb would light up until this energy was used up. These plates thus have the capacity to store energy. For this reason, an arrangement such as this is called a capacitor. A capacitor is an arrangement of objects that, by virtue of their geometry, can store energy an electric field.
+
+Various real capacitors are shown in . They are usually made from conducting plates or sheets that are separated by an insulating material. They can be flat or rolled up or have other geometries.
+
+The capacity of a capacitor is defined by its capacitance C, which is given by
+
+where Q is the magnitude of the charge on each capacitor plate, and V is the potential difference in going from the negative plate to the positive plate. This means that both Q and V are always positive, so the capacitance is always positive. We can see from the equation for capacitance that the units of capacitance are C/V, which are called farads (F) after the nineteenth-century English physicist Michael Faraday.
+
+The equation 
+ 
+ C=Q/V
+
+ makes sense: A parallel-plate capacitor (like the one shown in ) the size of a football field could hold a lot of charge without requiring too much work per unit charge to push the charge into the capacitor. Thus, Q would be large, and V would be small, so the capacitance C would be very large. Squeezing the same charge into a capacitor the size of a fingernail would require much more work, so V would be very large, and the capacitance would be much smaller.
+
+Although the equation 
+ 
+ C=Q/V
+
+ makes it seem that capacitance depends on voltage, in fact it does not. For a given capacitor, the ratio of the charge stored in the capacitor to the voltage difference between the plates of the capacitor always remains the same. Capacitance is determined by the geometry of the capacitor and the materials that it is made from. For a parallel-plate capacitor with nothing between its plates, the capacitance is given by
+
+where A is the area of the plates of the capacitor and d is their separation. We use 
+
+ C
+ 0
+
+ instead of C, because the capacitor has nothing between its plates (in the next section, we’ll see what happens when this is not the case). The constant 
+
+ ε
+ 0
+ 
+ ,
+ 
+ read epsilon zero is called the permittivity of free space, and its value is
+
+Coming back to the energy stored in a capacitor, we can ask exactly how much energy a capacitor stores. If a capacitor is charged by putting a voltage V across it for example, by connecting it to a battery with voltage V—the electrical potential energy stored in the capacitor is
+
+Notice that the form of this equation is similar to that for kinetic energy, 
+ 
+ K=
+ 
+ 1
+ 2
+
+ m
+ v
+
+ 2
+
+ .
+
+Where does Capacitance Come From?
+
+This video shows how capacitance is defined and why it depends only on the geometric properties of the capacitor, not on voltage or charge stored. In so doing, it provides a good review of the concepts of work and electric potential.
+
+If you increase the distance between the plates of a capacitor, how does the capacitance change?
+
+Doubling the distance between capacitor plates will reduce the capacitance four fold.
+
+Doubling the distance between capacitor plates will reduce the capacitance two fold.
+
+Doubling the distance between capacitor plates will increase the capacitance two times.
+
+Doubling the distance between capacitor plates will increase the capacitance four times.
+
+Charge your Capacitor
+
+In this simulation, you are presented with a parallel-plate capacitor connected to a variable-voltage battery. The battery is initially at zero volts, so no charge is on the capacitor. Slide the battery slider up and down to change the battery voltage, and observe the charges that accumulate on the plates. Display the capacitance, top-plate charge, and stored energy as you vary the battery voltage. You can also display the electric-field lines in the capacitor. Finally, probe the voltage between different points in this circuit with the help of the voltmeter.
+
+True or false— In a capacitor, the stored energy is always positive, regardless of whether the top plate is charged with negative or positive charge.
+
+false
+
+true
+
+Capacitance and Charge Stored in a Parallel Plate Capacitor
+
+(a) What is the capacitance of a parallel-plate capacitor with metal plates, each of area 1.00 m2, separated by 0.0010 m? (b) What charge is stored in this capacitor if a voltage of 3.00 × 103 V is applied to it?
+
+Strategy FOR (A)
+
+Use the equation 
+
+ C
+ 0
+ 
+ =
+ ε
+ 0
+
+ A
+ d
+
+ .
+
+Solution for (a)
+
+Entering the given values into this equation for the capacitance of a parallel-plate capacitor yields
+
+Discussion for (a)
+
+This small value for the capacitance indicates how difficult it is to make a device with a large capacitance. Special techniques help, such as using very-large-area thin foils placed close together or using a dielectric (to be discussed below).
+
+Strategy FOR (B)
+
+Knowing C, find the charge stored by solving the equation 
+ 
+ C=Q/V
+
+, for the charge Q.
+
+Solution for (b)
+
+The charge Q on the capacitor is
+
+Discussion for (b)
+
+This charge is only slightly greater than typical static electricity charges. More charge could be stored by using a dielectric between the capacitor plates.
+
+What battery is needed to charge a capacitor?
+
+Your friend provides you with a 
+ 
+ 10μF
+ 
+ capacitor. To store 
+ 
+ 120μC
+ 
+ on this capacitor, what voltage battery should you buy?
+
+Strategy
+
+Use the equation 
+ 
+ C=Q/V
+
+ to find the voltage needed to charge the capacitor.
+
+Solution
+
+Solving 
+ 
+ C=Q/V
+
+ for the voltage gives 
+ 
+ V=Q/C
+
+ . Inserting 
+ 
+ C=10μF=10×
+ 
+ 10
+
+ −6
+
+ F
+ 
+ and 
+ 
+ Q=120μC=120×
+ 
+ 10
+
+ −6
+
+ C
+ 
+ gives
+
+Discussion
+
+Such a battery should be easy to procure. There is still a question of whether the battery contains enough energy to provide the desired charge. The equation 
+
+ U
+ E
+ 
+ =
+ 
+ 1
+ 2
+
+ C
+ V
+ 2
+
+ allows us to calculate the required energy.
+
+A typical commercial battery can easily provide this much energy.
+
+Practice Problems
+
+What is the voltage on a 35 μF with 25 nC of charge?
+
+8.75 × 10−13 V
+
+0.71 × 10−3 V
+
+1.4 × 10−3 V
+
+1.4 × 103 V
+
+Which voltage is across a 100 μF capacitor that stores 10 J of energy?
+
+−4.5 × 102 V
+
+4.5 × 102 V
+
+±4.5 × 102 V
+
+±9 × 102 V
+
+Dielectrics
+
+Teacher Support
+
+Explain that dielectric is short for dielectric material, which has specific electrical properties to be discussed in this section. The word dielectric is used to indicate the energy-storage capacity of a material. Remind students that insulator is used to indicate the ability of a material to prevent the passage of electric charge.
+[BL][OL]Point out that the prefix di means two or double. Combined with the word electric, this implies that a dielectric can have two electric charges.
+[AL]Ask students whether they know of other words that use the prefix di in science (diatomic, carbon dioxide, dipole, …).
+
+Before working through some sample problems, let’s look at what happens if we put an insulating material between the plates of a capacitor that has been charged and then disconnected from the charging battery, as illustrated in . Because the material is insulating, the charge cannot move through it from one plate to the other, so the charge Q on the capacitor does not change. An electric field exists between the plates of a charged capacitor, so the insulating material becomes polarized, as shown in the lower part of the figure. An electrically insulating material that becomes polarized in an electric field is called a dielectric.
+shows that the negative charge in the molecules in the material shifts to the left, toward the positive charge of the capacitor. This shift is due to the electric field, which applies a force to the left on the electrons in the molecules of the dielectric. The right sides of the molecules are now missing a bit of negative charge, so their net charge is positive.
+
+Teacher Support
+
+Point out the positive and negative surface charge on each side of the dielectric. Discuss with students that the electric-field lines are drawn so that they touch the surface charges, because electric-field lines always start or terminate on a charge. Thus, fewer electric-field lines will traverse the dielectric, meaning the electric field is weaker inside the dielectric.
+
+All electrically insulating materials are dielectrics, but some are better dielectrics than others. A good dielectric is one whose molecules allow their electrons to shift strongly in an electric field. In other words, an electric field pulls their electrons a fair bit away from their atom, but they do not escape completely from their atom (which is why they are insulators).
+shows a macroscopic view of a dielectric in a charged capacitor. Notice that the electric-field lines in the capacitor with the dielectric are spaced farther apart than the electric-field lines in the capacitor with no dielectric. This means that the electric field in the dielectric is weaker, so it stores less electrical potential energy than the electric field in the capacitor with no dielectric.
+
+Where has this energy gone? In fact, the molecules in the dielectric act like tiny springs, and the energy in the electric field goes into stretching these springs. With the electric field thus weakened, the voltage difference between the two sides of the capacitor is smaller, so it becomes easier to put more charge on the capacitor. Placing a dielectric in a capacitor before charging it therefore allows more charge and potential energy to be stored in the capacitor. A parallel plate with a dielectric has a capacitance of
+
+where 
+ κ
+ (kappa) is a dimensionless constant called the dielectric constant. Because 
+ κ
+ is greater than 1 for dielectrics, the capacitance increases when a dielectric is placed between the capacitor plates. The dielectric constant of several materials is shown in .
+
+Dielectric Constants for Various Materials at 20 °C
+
+Material
+Dielectric Constant ( 
+ κ
+ )
+Vacuum
+1.00000
+Air
+1.00059
+Fused quartz
+3.78
+Neoprene rubber
+6.7
+Nylon
+3.4
+Paper
+3.7
+Polystyrene
+2.56
+Pyrex glass
+5.6
+Silicon oil
+2.5
+Strontium titanate
+233
+Teflon
+2.1
+Water
+80
+Teacher Support
+
+Emphasize that the electric-field lines in the dielectric are less dense than in the capacitor with no dielectric, which shows that the electric field is weaker in the dielectric.
+
+Capacitor for Camera Flash
+
+A typical flash for a point-and-shoot camera uses a capacitor of about 
+ 
+ 200μF
+ 
+ . (a) If the potential difference between the capacitor plates is 100 V—that is, 100 V is placed “across the capacitor,” how much energy is stored in the capacitor? (b) If the dielectric used in the capacitor were a 0.010-mm-thick sheet of nylon, what would be the surface area of the capacitor plates?
+
+Strategy FOR (A)
+
+Given that 
+ 
+ V=100V
+ 
+ and 
+ 
+ C=200×
+ 
+ 10
+
+ −6
+
+ F
+ 
+, we can use the equation 
+
+ U
+ E
+ 
+ =
+ 
+ 1
+ 2
+
+ C
+ V
+ 2
+
+, to find the electric potential energy stored in the capacitor.
+
+Solution for (a)
+
+Inserting the given quantities into 
+
+ U
+ E
+ 
+ =
+ 
+ 1
+ 2
+
+ C
+ V
+ 2
+
+ gives
+
+Discussion for (a)
+
+This is enough energy to lift a 1-kg ball about 1 m up from the ground. The flash lasts for about 0.001 s, so the power delivered by the capacitor during this brief time is 
+ 
+ P=
+
+ U
+ E
+
+ t
+ 
+ =
+ 
+ 1.0J
+
+ 0.001s
+
+ =1kW
+ 
+ . Considering that a car engine delivers about 100 kW of power, this is not bad for a little capacitor!
+
+Strategy FOR (B)
+
+Because the capacitor plates are in contact with the dielectric, we know that the spacing between the capacitor plates is 
+ 
+ d=0.010mm=1.0×
+ 
+ 10
+
+ −5
+
+ m
+ 
+ . From the previous table, the dielectric constant of nylon is 
+ 
+ κ=3.4
+ 
+ . We can now use the equation 
+ 
+ C=κ
+ ε
+ 0
+
+ A
+ d
+
+ to find the area A of the capacitor.
+
+Solution (b)
+
+Solving the equation for the area A and inserting the known quantities gives
+
+Discussion for (b)
+
+This is much too large an area to roll into a capacitor small enough to fit in a handheld camera. This is why these capacitors don’t use simple dielectrics but a more advanced technology to obtain a high capacitance.
+
+Practice Problems
+
+With 12 V across a capacitor, it accepts 10 mC of charge. What is its capacitance?
+
+0.83 μF
+
+83 μF
+
+120 μF
+
+830 μF
+
+A parallel-plate capacitor has an area of 10 cm2 and the plates are separated by 100 μm . If the capacitor contains paper between the plates, what is its capacitance?
+
+3.3 × 10−10 F
+
+3.3 × 10−8 F
+
+3.3 × 10−6 F
+
+3.3 × 10−4 F
+
+Check Your Understanding
+
+Section Summary
+
+The capacitance of a capacitor depends only on the geometry of the capacitor and the materials from which it is made. It does not depend on the voltage across the capacitor.
+
+Capacitors store electrical energy in the electric field between their plates.
+
+A dielectric material is an insulator that is polarized in an electric field.
+
+Putting a dielectric between the plates of a capacitor increases the capacitance of the capacitor.
+
+Key Equations
+
+C=
+ Q
+ V
+U
+ E
+ 
+ =
+ 1
+ 2
+ 
+ C
+ V
+ 2
+C=κ
+ ε
+ 0
+
+ A
+ d
+Concept Items
+
+You insert a dielectric into an air-filled capacitor. How does this affect the energy stored in the capacitor?
+
+Energy stored in the capacitor will remain same.
+
+Energy stored in the capacitor will decrease.
+
+Energy stored in the capacitor will increase.
+
+Energy stored in the capacitor will increase first, and then it will decrease.
+
+True or false Placing a dielectric between the plates of a capacitor increases the energy of the capacitor.
+
+false
+
+true
+
+True or false The electric field in an air-filled capacitor is reduced when a dielectric is inserted between the plates.
+
+false
+
+true
+
+Critical Thinking
+
+When you insert a dielectric into a capacitor, the energy stored in the capacitor decreases. If you take the dielectric out, the energy increases again. Where does this energy go in the former case, and where does the energy come from in the latter case?
+
+Energy is utilized to remove the dielectric and is released when the dielectric is introduced between the plates.
+
+Energy is released when the dielectric is added and is utilized when the dielectric is introduced between the plates.
+
+Energy is utilized to polarize the dielectric and is released when the dielectric is introduced between the plates.
+
+Energy is released to polarize the dielectric and is utilized when dielectric is introduced between the plates.
+
+Problems
+
+A 4.12 µF parallel-plate capacitor has a plate area of 2,000 cm2 and a plate separation of 10 µm . What dielectric is between the plates?
+
+1, the dielectric is strontium titanate
+
+466, the dielectric is strontium
+
+699, the dielectric is strontium nitrate
+
+1,000, the dielectric is strontium chloride
+
+Performance Task
+
+Newton’s law of universal gravitation is
+
+where 
+ 
+ G=6.67×
+ 
+ 10
+
+ −11
+
+ m
+ 3
+ 
+ /kg⋅
+ s
+ 2
+
+ . This describes the gravitational force between two point masses m1 and m2.
+
+Coulomb’s law is
+
+where 
+ 
+ k=8.99×
+ 
+ 10
+ 
+ 9
+ 
+ N⋅
+ m
+ 2
+
+ /C
+ 
+ 2
+
+ . This describes the electric force between two point charges q1 and q2.
+
+(a) Describe how the force in each case depends on the distance r between the objects. How do the forces change if the distance is reduced by half? If the distance is doubled?
+
+(b) Describe the similarities and differences between the two laws. Consider the signs of the quantities that create the interaction (i.e., mass and charge), the constants G and k, and their dependence on separation r.
+
+(c) Given that the electric force is much stronger than the gravitational force, discuss why the law for gravitational force was discovered much earlier than the law for electric force.
+
+(d) Consider a hydrogen atom, which is a single proton orbited by a single electron. The electric force holds the electron and proton together so that the hydrogen atom has a radius of about 
+ 
+ 0.5×
+ 
+ 10
+
+ −10
+
+ m
+ 
+ . Assuming the force between electron and proton does not change, what would be the approximate radius of the hydrogen atom if 
+ 
+ k=6.67×
+ 
+ 10
+
+ −11
+
+ N⋅
+ m
+ 2
+
+ /C
+ 
+ 2
+
+ ?
+
+Teacher Support
+
+HS-PS2-4. Use mathematical representations of Newton’s law of gravitation and Coulomb’s law to describe and predict the gravitational and electrostatic forces between objects. Clarification statementEmphasis is on quantitative and conceptual descriptions of gravitational and electric fields.
+
+Assessment boundaryAssessment is limited to systems with two objects.
+
+(a) For both laws, the force varies as the inverse of the distance between the objects. The forces increase fourfold if the distance is reduced by half and decrease fourfold if the distance is doubled.
+
+(b) Both laws vary as the inverse distance squared between the objects. Because charge can be positive or negative, the electric force can be attractive or repulsive, whereas the force of gravity is only attractive because mass is a strictly positive quantity. Finally, the constants involved show that the electric force is typically much stronger than the force of gravity.
+
+(c) Because gravity is only attractive, it is noticeable on a macroscopic scale. The electric force between most macroscopic objects is very small, because such objects typically contain equal amounts of positive and negative charge. Thus, the electric force between macroscopic objects is typically not noticeable.
+
+(d) 
+
+ k
+ 
+ real
+
+ q
+ 1
+
+ q
+ 2
+
+ r
+ 
+ real
+ 2
+
+ =
+
+ k
+ 
+ gravity
+
+ q
+ 1
+
+ q
+ 2
+
+ r
+ 
+ gravity
+ 2
+
+ r
+ 
+ gravity
+
+ =
+
+ r
+ 
+ real
+
+ k
+ 
+ real
+
+ k
+ 
+ gravity
+
+ =(
+ 
+ 0.5×
+ 
+ 10
+ 
+ −10
+ 
+ m
+ )
+
+ 8.99×
+ 
+ 10
+ 9
+ 
+ N⋅
+ m
+ 2
+
+ /C
+ 2
+
+ 6.67×
+ 
+ 10
+ 
+ −11
+ 
+ N⋅
+ m
+ 2
+
+ /C
+ 2
+
+ ≈
+
+ 0.6m
+
+Test Prep Multiple Choice
+
+Which magnitude of charge is stored on each plate of a 12 µF capacitor with 12 V applied across it?
+
+1.0 × 106 C
+
+1.0 × 106 C
+
+1.4 × 104 C
+
+1.4 × 104 C
+
+What is the capacitance of a parallel-plate capacitor with an area of 200 cm2, a distance of 0.20 mm between the plates, and polystyrene as a dielectric?
+
+2.3 nC
+
+0.89 nC
+
+23 nC
+
+8.9 nC
+
+Which factors determine the capacitance of a device?
+
+Capacitance depends only on the materials that make up the device.
+
+Capacitance depends on the electric field surrounding the device.
+
+Capacitance depends on the geometric and material parameters of the device.
+
+Capacitance depends only on the mass of the capacitor
+
+Test Prep Short Answer
+
+A capacitor with neoprene rubber as the dielectric stores 0.185 mJ of energy with a voltage of 50 V across the plates. If the area of the plates is 500 cm2, what is the plate separation?
+
+20 µm
+
+20 m
+
+80 µm
+
+80 m
+
+Explain why a storm cloud before a lightning strike is like a giant capacitor.
+
+The storm cloud acts as a giant charged capacitor, as it can store a large amount of charge.
+
+The storm cloud acts as a giant charged capacitor, as it contains a high amount of excess charges.
+
+The storm cloud acts as a giant charged capacitor, as it splits in two capacitor plates with equal and opposite charge.
+
+The storm cloud acts as a giant charged capacitor, as it splits in two capacitor plates with unequal and opposite charges.
+
+A storm cloud is 2 km above the surface of Earth. The lower surface of the cloud is approximately 2 km2 in area. What is the approximate capacitance of this storm cloud-Earth system?
+
+9 × 1015 F
+
+9 × 10-9 F
+
+17.7 × 10-15 F
+
+17.7 × 10-9 F
+
+Test Prep Extended Response
+
+A 12 μF air-filled capacitor has 12 V across it. If the surface charge on each capacitor plate is σ = 7.2 mC / m2, what is the attractive force of one capacitor plate toward the other?
+
+0.81 × 105 N
+
+0.81 × 106 N
+
+1.2 × 105 N
+
+1.2 × 106 N
+
+Explain why capacitance should be inversely proportional to the separation between the plates of a capacitor.
+
+Capacitance is directly proportional to the electric field, which is inversely proportional to the distance between the capacitor plates.
+
+Capacitance is inversely proportional to the electric field, which is inversely proportional to the distance between the capacitor plates.
+
+Capacitance is inversely proportional to the electric field, which is directly proportional to the distance between the capacitor plates.
+
+Capacitance is directly proportional to the electric field, which is directly proportional to the distance between the capacitor plates.
+
+arrangement of objects that can store electrical energy by virtue of their geometry
+electrically insulating material that becomes polarized in an electric field

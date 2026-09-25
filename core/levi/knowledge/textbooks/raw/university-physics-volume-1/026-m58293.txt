@@ -1,0 +1,298 @@
+# m58293
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Relative Motion in One and Two Dimensions
+
+Relative Motion in One and Two Dimensions
+
+By the end of this section, you will be able to:
+
+Explain the concept of reference frames.
+
+Write the position and velocity vector equations for relative motion.
+
+Draw the position and velocity vectors for relative motion.
+
+Analyze one-dimensional and two-dimensional relative motion problems using the position and velocity vector equations.
+
+Motion does not happen in isolation. If you’re riding in a train moving at 10 m/s east, this velocity is measured relative to the ground on which you’re traveling. However, if another train passes you at 15 m/s east, your velocity relative to this other train is different from your velocity relative to the ground. Your velocity relative to the other train is 5 m/s west. To explore this idea further, we first need to establish some terminology.
+
+Reference Frames
+
+To discuss relative motion in one or more dimensions, we first introduce the concept of reference frames. When we say an object has a certain velocity, we must state it has a velocity with respect to a given reference frame. In most examples we have examined so far, this reference frame has been Earth. If you say a person is sitting in a train moving at 10 m/s east, then you imply the person on the train is moving relative to the surface of Earth at this velocity, and Earth is the reference frame. We can expand our view of the motion of the person on the train and say Earth is spinning in its orbit around the Sun, in which case the motion becomes more complicated. In this case, the solar system is the reference frame. In summary, all discussion of relative motion must define the reference frames involved. We now develop a method to refer to reference frames in relative motion. This method makes an approximation that breaks down near the speed of light, where the more accurate methods or special relativity are needed, but is extremely accurate for everyday speeds (Relativity).
+
+Relative Motion in One Dimension
+
+We introduce relative motion in one dimension first, because the velocity vectors simplify to having only two possible directions. Take the example of the person sitting in a train moving east. If we choose east as the positive direction and Earth as the reference frame, then we can write the velocity of the train with respect to the Earth as v→TE=10m/si^ east, where the subscripts TE refer to train and Earth. Let’s now say the person gets up out of her seat and walks toward the back of the train at 2 m/s. This tells us she has a velocity relative to the reference frame of the train. Since the person is walking west, in the negative direction, we write her velocity with respect to the train as v→PT=−2m/si^. We can add the two velocity vectors to find the velocity of the person with respect to Earth. This relative velocity is written as
+
+Note the ordering of the subscripts for the various reference frames in . The subscripts for the coupling reference frame, which is the train, appear consecutively in the right-hand side of the equation. shows the correct order of subscripts when forming the vector equation.
+
+Adding the vectors, we find v→PE=8m/si^, so the person is moving 8 m/s east with respect to Earth. Graphically, this is shown in .
+
+Relative Velocity in Two Dimensions
+
+We can now apply these concepts to describing motion in two dimensions. Consider a particle P and reference frames S and S′, as shown in . The position of the origin of S′ as measured in S is r→S′S, the position of P as measured in S′ is r→PS′, and the position of P as measured in S is r→PS.
+
+From we see that
+
+The relative velocities are the time derivatives of the position vectors. Therefore,
+The velocity of a particle relative to S is equal to its velocity relative to S′ plus the velocity of S′ relative to S.
+
+We can extend to any number of reference frames. For particle P with velocities v→PA,v→PB,andv→PC in frames A, B, and C,
+
+We can also see how the accelerations are related as observed in two reference frames by differentiating :
+
+We see that if the velocity of S′ relative to S is a constant, then a→S′S=0 and
+
+This says the acceleration of a particle is the same as measured by two observers moving at a constant velocity relative to each other.
+Motion of a Car Relative to a Truck
+A truck is traveling south at a speed of 70 km/h toward an intersection. A car is traveling east toward the intersection at a speed of 80 km/h (). What is the velocity of the car relative to the truck?
+
+Motion of a Car Relative to a Truck
+Strategy
+First, we must establish the reference frame common to both vehicles, which is Earth. Then, we write the velocities of each with respect to the reference frame of Earth, which enables us to form a vector equation that links the car, the truck, and Earth to solve for the velocity of the car with respect to the truck.
+
+Strategy
+Solution
+The velocity of the car with respect to Earth is v→CE=80km/hi^. The velocity of the truck with respect to Earth is v→TE=−70km/hj^. Using the velocity addition rule, the relative motion equation we are seeking is
+
+Solution
+
+Here, v→CT is the velocity of the car with respect to the truck, and Earth is the connecting reference frame. Since we have the velocity of the truck with respect to Earth, the negative of this vector is the velocity of Earth with respect to the truck: v→ET=−v→TE. The vector diagram of this equation is shown in .
+
+We can now solve for the velocity of the car with respect to the truck:
+
+and
+Significance
+Drawing a vector diagram showing the velocity vectors can help in understanding the relative velocity of the two objects.
+
+Significance
+
+A boat heads due north, moving at 4.5 m/s relative to the water of a river that is running east at 3.0 m/s. What is the velocity of the boat with respect to Earth?
+
+Labeling subscripts for the vector equation, we have B = boat, R = river, and E = Earth. The vector equation becomes v→BE=v→BR+v→RE. We have right triangle geometry shown in Figure 04_05_BoatRiv_img. Solving for v→BE, we have
+vBE=vBR2+vRE2=4.52+3.02
+vBE=5.4m/s, θ=tan−1(3.04.5)=33.7°.
+Flying a Plane in a Wind
+A pilot must fly a plane due north to reach their destination. The plane can fly at 300 km/h in still air. A wind is blowing out of the northeast at 90 km/h. (a) In what direction must the pilot head the plane to fly due north? (b) What is the speed of the plane relative to the ground?
+
+Flying a Plane in a Wind
+Strategy
+The pilot must point the plane somewhat east of north to compensate for the wind velocity. We need to construct a vector equation that contains the velocity of the plane with respect to the ground, the velocity of the plane with respect to the air, and the velocity of the air with respect to the ground. Since these last two quantities are known, we can solve for the velocity of the plane with respect to the ground. We can graph the vectors and use this diagram to evaluate the magnitude of the plane’s velocity with respect to the ground. The diagram will also tell us the angle the plane’s velocity makes with north with respect to the air, which is the direction the pilot must head the plane.
+
+Strategy
+Solution
+The vector equation is v→PG=v→PA+v→AG, where P = plane, A = air, and G = ground. From the geometry in , we can solve easily for the magnitude of the velocity of the plane with respect to the ground and the angle of the plane’s heading, θ.
+
+Solution
+
+Known quantities:
+
+(a) In the x direction we have the following:
+|v→PA|sinθ–|v→AG|sin45°=0
+|v→PA|sinθ–|v→AG|sin45°=0
+θ=sin–1(90km/h)(sin45°300km/h)
+θ=sin–1(90km/h)(sin45°300km/h)
+θ=12° east of north
+θ=12° east of north
+
+(b) In the y direction we have the following:
+|v→PG|=|v→PA|cosθ–|v→AG|cos45°
+|v→PG|=|v→PA|cosθ–|v→AG|cos45°
+|v→PG|=(300km/h)(cos12°)–(90km/h)(cos45°)
+|v→PG|=(300km/h)(cos12°)–(90km/h)(cos45°)
+|v→PG|=230km/h
+|v→PG|=230km/h
+
+Summary
+
+When analyzing motion of an object, the reference frame in terms of position, velocity, and acceleration needs to be specified.
+
+Relative velocity is the velocity of an object as observed from a particular reference frame, and it varies with the choice of reference frame.
+
+If S and S′ are two reference frames moving relative to each other at a constant velocity, then the velocity of an object relative to S is equal to its velocity relative to S′ plus the velocity of S′ relative to S.
+
+If two reference frames are moving relative to each other at a constant velocity, then the accelerations of an object as observed in both reference frames are equal.
+
+Key Equations
+
+r→(t)=x(t)i^+y(t)j^+z(t)k^
+Δr→=r→(t2)−r→(t1)
+v→(t)=limΔt→0r→(t+Δt)−r→(t)Δt=dr→dt
+v→(t)=vx(t)i^+vy(t)j^+vz(t)k^
+vx(t)=dx(t)dtvy(t)=dy(t)dtvz(t)=dz(t)dt
+v→avg=r→(t2)−r→(t1)t2−t1
+a→(t)=limt→0v→(t+Δt)−v→(t)Δt=dv→(t)dt
+a→(t)=dvx(t)dti^+dvy(t)dtj^+dvz(t)dtk^
+a→(t)=d2x(t)dt2i^+d2y(t)dt2j^+d2z(t)dt2k^
+Ttof=2(v0sinθ0)g
+y=(tanθ0)x−[g2(v0cosθ0)2]x2
+R=v02sin2θ0g
+aC=v2r
+r→(t)=Acosωti^+Asinωtj^
+v→(t)=dr→(t)dt=−Aωsinωti^+Aωcosωtj^
+a→(t)=dv→(t)dt=−Aω2cosωti^−Aω2sinωtj^
+aT=d|v→|dt
+a→=a→C+a→T
+r→PS=r→PS′+r→S′S
+v→PS=v→PS′+v→S′S
+v→PC=v→PA+v→AB+v→BC
+a→PS=a→PS′+a→S′S
+Conceptual Questions
+
+What frame or frames of reference do you use instinctively when driving a car? When flying in a commercial jet?
+
+A basketball player dribbling down the court usually keeps his eyes fixed on the players around him. He is moving fast. Why doesn’t he need to keep his eyes on the ball?
+
+If he is going to pass the ball to another player, he needs to keep his eyes on the reference frame in which the other players on the team are located.
+
+If someone is riding in the back of a pickup truck and throws a softball straight backward, is it possible for the ball to fall straight down as viewed by a person standing at the side of the road? Under what condition would this occur? How would the motion of the ball appear to the person who threw it?
+
+The hat of a jogger running at constant velocity falls off the back of his head. Draw a sketch showing the path of the hat in the jogger’s frame of reference. Draw its path as viewed by a stationary observer. Neglect air resistance.
+
+A clod of dirt falls from the bed of a moving truck. It strikes the ground directly below the end of the truck. (a) What is the direction of its velocity relative to the truck just before it hits? (b) Is this the same as the direction of its velocity relative to ground just before it hits? Explain your answers.
+
+Problems
+
+The coordinate axes of the reference frame 
+S′ remain parallel to those of S, as 
+S′ moves away from S at a constant velocity 
+
+ v→
+ 
+ S′S=(4.0i^+3.0j^+5.0k^)m/s. 
+
+(a) If at time t = 0 the origins coincide, what is the position of the origin 
+O′ in the S frame as a function of time? (b) How is particle position for r→(t) and 
+r→′(t), as measured in S and 
+S′, respectively, related? (c) What is the relationship between particle velocities v→(t)and
+v→′(t)? (d) How are accelerations a→(t)and
+a→′(t) related?
+
+a. O′(t)=(4.0i^+3.0j^+5.0k^)tm,
+b. r→PS=r→PS′+r→S′S,  r→(t)=r→′(t)+(4.0i^+3.0j^+5.0k^)tm,
+c. v→(t)=v→′(t)+(4.0i^+3.0j^+5.0k^)m/s, d. The accelerations are the same.
+
+The coordinate axes of the reference frame S′ remain parallel to those of S, as S′ moves away from S at a constant velocity v→S′S=(1.0i^+2.0j^+3.0k^)tm/s. (a) If at time t = 0 the origins coincide, what is the position of origin O′ in the S frame as a function of time? (b) How is particle position for r→(t) and r→′(t), as measured in S and S′, respectively, related? (c) What is the relationship between particle velocities v→(t)andv→′(t)? (d) How are accelerations a→(t) anda→′(t) related?
+
+The velocity of a particle in reference frame A is (2.0i^+3.0j^)m/s. The velocity of reference frame A with respect to reference frame B is 4.0k^m/s, and the velocity of reference frame B with respect to C is 2.0j^m/s. What is the velocity of the particle in reference frame C?
+v→PC=(2.0i^+5.0j^+4.0k^)m/s
+
+Raindrops fall vertically at 4.5 m/s relative to the earth. What does an observer in a car moving at 22.0 m/s in a straight line measure as the velocity of the raindrops?
+
+A seagull can fly at a velocity of 9.00 m/s in still air. (a) If it takes the bird 20.0 min to travel 6.00 km straight into an oncoming wind, what is the velocity of the wind? (b) If the bird turns around and flies with the wind, how long will it take the bird to return 6.00 km?
+
+a. A = air, S = seagull, G = groundv→SA=9.0m/s velocity of seagull with respect to still air
+v→AG=?v→SG=5m/s v→SG=v→SA+v→AG⇒v→AG=v→SG−v→SA
+v→AG=−4.0m/s
+b. v→SG=v→SA+v→AG⇒v→SG=−13.0m/s
+−6000m−13.0m/s=7 min 42 s
+
+A ship sets sail from Rotterdam, heading due north at 7.00 m/s relative to the water. The local ocean current is 1.50 m/s in a direction 40.0° north of east. What is the velocity of the ship relative to Earth?
+
+A boat can be rowed at 8.0 km/h in still water. (a) How much time is required to row 1.5 km downstream in a river moving 3.0 km/h relative to the shore? (b) How much time is required for the return trip? (c) In what direction must the boat be aimed to row straight across the river? (d) Suppose the river is 0.8 km wide. What is the velocity of the boat with respect to Earth and how much time is required to get to the opposite shore? (e) Suppose, instead, the boat is aimed straight across the river. How much time is required to get across and how far downstream is the boat when it reaches the opposite shore?
+
+Take the positive direction to be the same direction that the river is flowing, which is east. S = shore/Earth, W = water, and B = boat.
+a. v→BS=11km/h
+t=8.2min
+b. v→BS=−5km/h
+t=18min
+c. v→BS=v→BW+v→WS θ=22° west of north
+
+d. |v→BS|=7.4km/h t=6.5min
+e. v→BS=8.54km/h, but only the component of the velocity straight across the river is used to get the time
+
+t=6.0min
+Downstream = 0.3 km
+
+A small plane flies at 200 km/h in still air. If the wind blows directly out of the west at 50 km/h, (a) in what direction must the pilot head her plane to move directly north across land and (b) how long does it take her to reach a point 300 km directly north of her starting point?
+
+A cyclist traveling southeast along a road at 15 km/h feels a wind blowing from the southwest at 25 km/h. To a stationary observer, what are the speed and direction of the wind?
+v→AG=v→AC+v→CG
+|v→AC|=25km/h|v→CG|=15km/h|v→AG|=29.15km/h v→AG=v→AC+v→CG
+The angle between v→AC and v→AG is 31°, so the direction of the wind is 14° north of east.
+
+A river is moving east at 4.0 m/s. A boat starts from the dock heading 30° north of west at 7.0 m/s. If the river is 1800 m wide, (a) what is the velocity of the boat with respect to Earth and (b) how long does it take the boat to cross the river?
+
+Additional Problems
+
+A Formula One race car is traveling at 89.0 m/s along a straight track enters a turn on the race track with radius of curvature of 200.0 m. What centripetal acceleration must the car have to stay on the track?
+aC=39.6m/s2
+
+A particle travels in a circular orbit of radius 10 m. Its speed is changing at a rate of 15.0m/s2 at an instant when its speed is 40.0 m/s. What is the magnitude of the acceleration of the particle?
+
+The driver of a car moving at 90.0 km/h presses down on the brake as the car enters a circular curve of radius 150.0 m. If the speed of the car is decreasing at a rate of 9.0 km/h each second, what is the magnitude of the acceleration of the car at the instant its speed is 60.0 km/h?
+90.0km/h=25.0m/s,9.0km/h=2.5m/s, 60.0km/h=16.7m/s
+aT=−2.5m/s2,aC=1.86m/s2,a=3.1m/s2
+
+A race car entering the curved part of the track at the Daytona 500 drops its speed from 85.0 m/s to 80.0 m/s in 2.0 s. If the radius of the curved part of the track is 316.0 m, calculate the total acceleration of the race car at the beginning and ending of reduction of speed.
+
+An elephant is located on Earth’s surface at a latitude λ. Calculate the centripetal acceleration of the elephant resulting from the rotation of Earth around its polar axis. Express your answer in terms of λ, the radius RE of Earth, and time T for one rotation of Earth. Compare your answer with g for λ=40°.
+
+The radius of the circle of revolution at latitude λ is REcosλ. The velocity of the body is 2πrT.aC=4π2REcosλT2 for λ=40°,aC=0.26%g
+
+A proton in a synchrotron is moving in a circle of radius 1 km and increasing its speed by v(t)=c1+c2t2,wherec1=2.0×105m/s,c2=105m/s3. (a) What is the proton’s total acceleration at t = 5.0 s? (b) At what time does the expression for the velocity become unphysical?
+
+A propeller blade at rest starts to rotate from t = 0 s to t = 5.0 s with a tangential acceleration of the tip of the blade at 3.00m/s2. The tip of the blade is 1.5 m from the axis of rotation. At t = 5.0 s, what is the total acceleration of the tip of the blade?
+aT=3.00m/s2
+v(5s)=15.00m/saC=150.00m/s2θ=88.8° with respect to the tangent to the circle of revolution directed inward. |a→|=150.03m/s2
+
+A particle is executing circular motion with a constant angular frequency of ω=4.00rad/s. If time t = 0 corresponds to the position of the particle being located at y = 0 m and x = 5 m, (a) what is the position of the particle at t = 10 s? (b) What is its velocity at this time? (c) What is its acceleration?
+
+A particle’s centripetal acceleration is aC=4.0m/s2 at t = 0 s where it is on the x-axis and moving counterclockwise in the xy plane. It is executing uniform circular motion about an axis at a distance of 5.0 m. What is its velocity at t = 10 s?
+a→(t)=−Aω2cosωti^−Aω2sinωtj^
+aC=5.0mω2ω=0.89rad/s
+v→(t)=−2.24m/si^−3.87m/sj^
+
+A rod 3.0 m in length is rotating at 2.0 rev/s about an axis at one end. Compare the centripetal accelerations at radii of (a) 1.0 m, (b) 2.0 m, and (c) 3.0 m.
+
+A particle located initially at (1.5j^+4.0k^)m undergoes a displacement of (2.5i^+3.2j^−1.2k^)m. What is the final position of the particle?
+r→1=1.5j^+4.0k^r→2=Δr→+r→1=2.5i^+4.7j^+2.8k^
+
+The position of a particle is given by r→(t)=(50m/s)ti^−(4.9m/s2)t2j^. (a) What are the particle’s velocity and acceleration as functions of time? (b) What are the initial conditions to produce the motion?
+
+A spaceship is traveling at a constant velocity of v→(t)=250.0i^m/s when its rockets fire, giving it an acceleration of a→(t)=(3.0i^+4.0k^)m/s2. What is its velocity 5 s after the rockets fire?
+vx(t)=265.0m/s
+vy(t)=20.0m/s
+v→(5.0s)=(265.0i^+20.0j^)m/s
+
+A crossbow is aimed horizontally at a target 40 m away. The arrow hits 30 cm below the spot at which it was aimed. What is the initial velocity of the arrow?
+
+A long jumper can jump a distance of 8.0 m when he takes off at an angle of 45° with respect to the horizontal. Assuming he can jump with the same initial speed at all angles, how much distance does he lose by taking off at 30°?
+R=1.07m
+
+On planet Arcon, the maximum horizontal range of a projectile launched at 10 m/s is 20 m. What is the acceleration of gravity on this planet?
+
+A mountain biker encounters a jump on a race course that sends him into the air at 60° to the horizontal. If he lands at a horizontal distance of 45.0 m and 20 m below his launch point, what is his initial speed?
+v0=20.1m/s
+
+Which has the greater centripetal acceleration, a car with a speed of 15.0 m/s along a circular track of radius 100.0 m or a car with a speed of 12.0 m/s along a circular track of radius 75.0 m?
+
+A geosynchronous satellite orbits Earth at a distance of 42,250.0 km and has a period of 1 day. What is the centripetal acceleration of the satellite?
+v=3072.5m/s
+aC=0.223m/s2
+
+Two speedboats are traveling at the same speed relative to the water in opposite directions in a moving river. An observer on the riverbank sees the boats moving at 4.0 m/s and 5.0 m/s. (a) What is the speed of the boats relative to the river? (b) How fast is the river moving relative to the shore?
+
+Challenge Problems
+
+World’s Longest Par 3. The tee of the world’s longest par 3 sits atop South Africa’s Hanglip Mountain at 400.0 m above the green and can only be reached by helicopter. The horizontal distance to the green is 359.0 m. Neglect air resistance and answer the following questions. (a) If a golfer launches a shot that is 40° with respect to the horizontal, what initial velocity must she give the ball? (b) What is the time to reach the green?
+
+a. −400.0m=v0yt−4.9t2359.0m=v0xtt=359.0v0x−400.0=359.0v0yv0x−4.9(359.0v0x)2
+−400.0=359.0tan40−631,516.9v0x2⇒v0x2=900.6v0x=30.0m/sv0y=v0xtan40=25.2m/s
+v=39.2m/s, b. t=12.0s
+
+When a field goal kicker kicks a football as hard as he can at 45° to the horizontal, the ball just clears the 3-m-high crossbar of the goalposts 45.7 m away. (a) What is the maximum speed the kicker can impart to the football? (b) In addition to clearing the crossbar, the football must be high enough in the air early during its flight to clear the reach of the onrushing defensive lineman. If the lineman is 4.6 m away and has a vertical reach of 2.5 m, can he block the 45.7-m field goal attempt? (c) What if the lineman is 1.0 m away?
+
+A truck is traveling east at 80 km/h. At an intersection 32 km ahead, a car is traveling north at 50 km/h. (a) How long after this moment will the vehicles be closest to each other? (b) How far apart will they be at that point?
+
+a. r→TC=(−32+80t)i^+50tj^,|r→TC|2=(−32+80t)2+(50t)2
+2rdrdt=2(−32+80t)(80)+5000tdrdt=160(−32+80t)+5000t2r=0
+17800t=5184⇒t=0.29 hr,
+b. |r→TC|=17km
+
+coordinate system in which the position, velocity, and acceleration of an object at rest or moving is measured
+velocity of an object as observed from a particular reference frame, or the velocity of one reference frame with respect to another reference frame

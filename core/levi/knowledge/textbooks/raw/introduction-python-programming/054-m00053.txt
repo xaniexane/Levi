@@ -1,0 +1,55 @@
+# m00053
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Importing names
+
+Importing names
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Import functions from a module using the from keyword.
+
+Explain how to avoid a name collision when importing a module.
+
+The from keyword
+
+Specific functions in a module can be imported using the from keyword:
+
+These functions can be called directly, without referring to the module:
+
+Exploring further
+
+As shown below, the from keyword can lead to confusing names.
+
+Importing functions
+
+The from keyword
+
+Name collisions
+
+Modules written by different programmers might use the same name for a function. A name collision occurs when a function is defined multiple times. If a function is defined more than once, the most recent definition is used:
+
+A programmer might not realize the cube function is defined twice because no error occurs when running the program. Name collisions are not considered errors and often lead to unexpected behavior.
+
+Care should be taken to avoid name collisions. Selecting specific functions from a module to import reduces the memory footprint; however, importing a complete module can help to avoid collisions because a module.name format would be used. This is a tradeoff the programmer must consider.
+
+Module and function names
+
+Name collisions
+
+Exploring further
+
+If a name is defined, imported, or assigned multiple times, Python uses the most recent definition. Other languages allow multiple functions to have the same name if the parameters are different. This feature, known as function overloading, is not part of the Python language.
+
+Missing imports
+
+Add the missing import statements to the top of the file. Do not make any changes to the rest of the code. In the end, the program should run without errors.
+
+Party favors
+
+The following program does not run correctly because of name collisions. Fix the program by modifying import statements, function calls, and variable assignments. The output should be:

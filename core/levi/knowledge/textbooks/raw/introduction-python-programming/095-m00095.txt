@@ -1,0 +1,64 @@
+# m00095
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Inheritance basics
+
+Inheritance basics
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify is-a and has-a relationships between classes.
+
+Differentiate between a subclass and a superclass.
+
+Create a superclass, subclass, and instances of each.
+
+is-a vs has-a relationships
+
+Classes are related to each other. An is-a relationship exists between a subclass and a superclass. Ex: A daffodil is a plant. A Daffodil class inherits from a superclass, Plant.
+
+Is-a relationships can be confused with has-a relationships. A has-a relationship exists between a class that contains another class. Ex: An employee has a company-issued laptop. Note: The laptop is not an employee.
+
+is-a relationship between Employee and Developer
+
+Relationships between classes
+
+Inheritance in Python
+
+Inheritance uses an is-a relationship to inherit a class from a superclass. The subclass inherits all the superclass's attributes and methods, and extends the superclass's functionality.
+
+In Python, a subclass is created by including the superclass name in parentheses at the top of the subclass's definition:
+
+Using inheritance to create subclasses
+
+Creating subclasses
+
+Alternative inheritance terms
+
+Python documentation for inheritance uses multiple terms to refer to the class that is inherited from and the class that inherits. This book uses superclass/subclass throughout for consistency.
+
+Class inherited from
+Class that inherits
+superclass
+subclass
+base class
+derived class
+parent class
+child class
+Employee and Developer classes
+
+Given the Employee class, create a Developer class that inherits from Employee. The Developer class has one method, update_codebase(), which prints "Employee has updated the codebase". Then, use the Developer instance, python_dev, to call print_company() and update_codebase().
+
+Polygon classes
+
+Define three classes: Polygon, Rectangle, and Square:
+Polygon has the method p_disp(), which prints "object is a Polygon".
+Rectangle inherits from Polygon and has the method r_disp(), which prints "object is a Rectangle".
+Square inherits from Rectangle and has the method s_disp(), which prints "object is a Square".
+
+Create an instance of each class. Then, for each instance, call all the methods the instance has access to.

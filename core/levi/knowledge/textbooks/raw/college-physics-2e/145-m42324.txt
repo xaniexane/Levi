@@ -1,0 +1,510 @@
+# m42324
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Electric Potential Energy: Potential Difference
+
+Electric Potential Energy: Potential Difference
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define electric potential and electric potential energy.
+
+Describe the relationship between potential difference and electrical potential energy.
+
+Explain electron volt and its usage in submicroscopic process.
+
+Determine electric potential energy given potential difference and amount of charge.
+
+When a free positive charge q is accelerated by an electric field, such as shown in , it is given kinetic energy. The process is analogous to an object being accelerated by a gravitational field. It is as if the charge is going down an electrical hill where its electric potential energy is converted to kinetic energy. Let us explore the work done on a charge q by the electric field in this process, so that we may develop a definition of electric potential energy.
+
+The electrostatic or Coulomb force is conservative, which means that the work done on q is independent of the path taken. This is exactly analogous to the gravitational force in the absence of dissipative forces such as friction. When a force is conservative, it is possible to define a potential energy associated with the force, and it is usually easier to deal with the potential energy (because it depends only on position) than to calculate the work directly.
+
+We use the letters PE to denote electric potential energy, which has units of joules (J). The change in potential energy, ΔPE, is crucial, since the work done by a conservative force is the negative of the change in potential energy; that is, W =–ΔPE. For example, work 
+ 
+ W
+ 
+ done to accelerate a positive charge from rest is positive and results from a loss in PE, or a negative ΔPE. There must be a minus sign in front of ΔPE to make 
+ 
+ W
+ 
+ positive. PE can be found at any point by taking one point as a reference and calculating the work needed to move a charge to the other point.
+
+Potential Energy
+W =–ΔPE. For example, work 
+ 
+ W
+ 
+ done to accelerate a positive charge from rest is positive and results from a loss in PE, or a negative ΔPE. There must be a minus sign in front of ΔPE to make W positive. PE can be found at any point by taking one point as a reference and calculating the work needed to move a charge to the other point.
+
+Gravitational potential energy and electric potential energy are quite analogous. Potential energy accounts for work done by a conservative force and gives added insight regarding energy and energy transformation without the necessity of dealing with the force directly. It is much more common, for example, to use the concept of voltage (related to electric potential energy) than to deal with the Coulomb force directly.
+
+Calculating the work directly is generally difficult, since W = Fdcosθ and the direction and magnitude of F can be complex for multiple charges, for odd-shaped objects, and along arbitrary paths. But we do know that, since F =qE, the work, and hence ΔPE, is proportional to the test charge q. To have a physical quantity that is independent of test charge, we define electric potential V (or simply potential, since electric is understood) to be the potential energy per unit charge:
+
+Electric Potential
+
+This is the electric potential energy per unit charge.
+
+Since PE is proportional to q , the dependence on q cancels. Thus V does not depend on q. The change in potential energy ΔPE is crucial, and so we are concerned with the difference in potential or potential difference ΔV between two points, where
+
+The potential difference between points A and B, VB–VA, is thus defined to be the change in potential energy of a charge q moved from A to B, divided by the charge. Units of potential difference are joules per coulomb, given the name volt (V) after Alessandro Volta.
+
+Potential Difference
+
+The potential difference between points A and B, VB-VA, is defined to be the change in potential energy of a charge q moved from A to B, divided by the charge. Units of potential difference are joules per coulomb, given the name volt (V) after Alessandro Volta.
+
+The familiar term voltage is the common name for potential difference. Keep in mind that whenever a voltage is quoted, it is understood to be the potential difference between two points. For example, every battery has two terminals, and its voltage is the potential difference between them. More fundamentally, the point you choose to be zero volts is arbitrary. This is analogous to the fact that gravitational potential energy has an arbitrary zero, such as sea level or perhaps a lecture hall floor.
+
+In summary, the relationship between potential difference (or voltage) and electrical potential energy is given by
+
+Potential Difference and Electrical Potential Energy
+
+The relationship between potential difference (or voltage) and electrical potential energy is given by
+
+The second equation is equivalent to the first.
+
+Voltage is not the same as energy. Voltage is the energy per unit charge. Thus a motorcycle battery and a car battery can both have the same voltage (more precisely, the same potential difference between battery terminals), yet one stores much more energy than the other since ΔPE =qΔV. The car battery can move more charge than the motorcycle battery, although both are 12 V batteries.
+
+Calculating Energy
+
+Suppose you have a 12.0 V motorcycle battery that can move 5000 C of charge, and a 12.0 V car battery that can move 60,000 C of charge. How much energy does each deliver? (Assume that the numerical value of each charge is accurate to three significant figures.)
+Strategy
+
+Strategy
+
+To say we have a 12.0 V battery means that its terminals have a 12.0 V potential difference. When such a battery moves charge, it puts the charge through a potential difference of 12.0 V, and the charge is given a change in potential energy equal to ΔPE =qΔV.
+
+So to find the energy output, we multiply the charge moved by the potential difference.
+Solution
+
+Solution
+
+For the motorcycle battery, q=5000 C and ΔV=12.0 V. The total energy delivered by the motorcycle battery is
+
+Similarly, for the car battery, q=60,000C and
+Discussion
+
+Discussion
+
+While voltage and energy are related, they are not the same thing. The voltages of the batteries are identical, but the energy supplied by each is quite different. Note also that as a battery is discharged, some of its energy is used internally and its terminal voltage drops, such as when headlights dim because of a low car battery. The energy supplied by the battery is still calculated as in this example, but not all of the energy is available for external use.
+
+Note that the energies calculated in the previous example are absolute values. The change in potential energy for the battery is negative, since it loses energy. These batteries, like many electrical systems, actually move negative charge—electrons in particular. The batteries repel electrons from their negative terminals (A) through whatever circuitry is involved and attract them to their positive terminals (B) as shown in . The change in potential is ΔV=VB–VA=+12 V and the charge q is negative, so that ΔPE=qΔV is negative, meaning the potential energy of the battery has decreased when q has moved from A to B.
+
+How Many Electrons Move through a Headlight Each Second?
+
+When a 12.0 V car battery runs a single 30.0 W headlight, how many electrons pass through it each second?
+Strategy
+
+Strategy
+
+To find the number of electrons, we must first find the charge that moved in 1.00 s. The charge moved is related to voltage and energy through the equation ΔPE= qΔV. A 30.0 W lamp uses 30.0 joules per second. Since the battery loses energy, we have
+ΔPE=–30.0 J and, since the electrons are going from the negative terminal to the positive, we see that
+ΔV=+12.0 V.
+Solution
+
+Solution
+
+To find the charge q moved, we solve the equation ΔPE= qΔV:
+
+Entering the values for ΔPE and ΔV, we get
+
+The number of electrons ne is the total charge divided by the charge per electron. That is,
+Discussion
+
+Discussion
+
+This is a very large number. It is no wonder that we do not ordinarily observe individual electrons with so many being present in ordinary systems. In fact, electricity had been in use for many decades before it was determined that the moving charges in many circumstances were negative. Positive charge moving in the opposite direction of negative charge often produces identical effects; this makes it difficult to determine which is moving or whether both are moving.
+
+The Electron Volt
+
+The energy per electron is very small in macroscopic situations like that in the previous example—a tiny fraction of a joule. But on a submicroscopic scale, such energy per particle (electron, proton, or ion) can be of great importance. For example, even a tiny fraction of a joule can be great enough for these particles to destroy organic molecules and harm living tissue. The particle may do its damage by direct collision, or it may create harmful x rays, which can also inflict damage. It is useful to have an energy unit related to submicroscopic effects. shows a situation related to the definition of such an energy unit. An electron is accelerated between two charged metal plates as it might be in an old-model television tube or oscilloscope. The electron is given kinetic energy that is later converted to another form—light in the television tube, for example. (Note that downhill for the electron is uphill for a positive charge.) Since energy is related to voltage by ΔPE=qΔV, we can think of the joule as a coulomb-volt.
+
+On the submicroscopic scale, it is more convenient to define an energy unit called the electron volt (eV), which is the energy given to a fundamental charge accelerated through a potential difference of 1 V. In equation form,
+
+Electron Volt
+
+On the submicroscopic scale, it is more convenient to define an energy unit called the electron volt (eV), which is the energy given to a fundamental charge accelerated through a potential difference of 1 V. In equation form,
+
+An electron accelerated through a potential difference of 1 V is given an energy of 1 eV. It follows that an electron accelerated through 50 V is given 50 eV. A potential difference of 100,000 V (100 kV) will give an electron an energy of 100,000 eV (100 keV), and so on. Similarly, an ion with a double positive charge accelerated through 100 V will be given 200 eV of energy. These simple relationships between accelerating voltage and particle charges make the electron volt a simple and convenient energy unit in such circumstances.
+
+Connections: Energy Units
+
+The electron volt (eV) is the most common energy unit for submicroscopic processes. This will be particularly noticeable in the chapters on modern physics. Energy is so important to so many subjects that there is a tendency to define a special energy unit for each major topic. There are, for example, calories for food energy, kilowatt-hours for electrical energy, and therms for natural gas energy.
+
+The electron volt is commonly employed in submicroscopic processes—chemical valence energies and molecular and nuclear binding energies are among the quantities often expressed in electron volts. For example, about 5 eV of energy is required to break up certain organic molecules. If a proton is accelerated from rest through a potential difference of 30 kV, it is given an energy of 30 keV (30,000 eV) and it can break up as many as 6000 of these molecules (30,000 eV ÷ 5 eV per molecule= 6000 molecules). Nuclear decay energies are on the order of 1 MeV (1,000,000 eV) per event and can, thus, produce significant biological damage.
+
+Conservation of Energy
+
+The total energy of a system is conserved if there is no net addition (or subtraction) of work or heat transfer. For conservative forces, such as the electrostatic force, conservation of energy states that mechanical energy is a constant.
+Mechanical energy is the sum of the kinetic energy and potential energy of a system; that is, KE+PE = constant. A loss of PE of a charged particle becomes an increase in its KE. Here PE is the electric potential energy. Conservation of energy is stated in equation form as
+
+or
+
+where i and f stand for initial and final conditions. As we have found many times before, considering energy can give us insights and facilitate problem solving.
+
+Electrical Potential Energy Converted to Kinetic Energy
+
+Calculate the final speed of a free electron accelerated from rest through a potential difference of 100 V. (Assume that this numerical value is accurate to three significant figures.)
+Strategy
+
+Strategy
+
+We have a system with only conservative forces. Assuming the electron is accelerated in a vacuum, and neglecting the gravitational force (we will check on this assumption later), all of the electrical potential energy is converted into kinetic energy. We can identify the initial and final forms of energy to be KEi =0, 
+ KEf
+=½mv2, PEi
+=qV, and PEf
+=0.
+Solution
+
+Solution
+
+Conservation of energy states that
+
+Entering the forms identified above, we obtain
+
+We solve this for v:
+
+Entering values for q, V, and m gives
+Discussion
+
+Discussion
+
+Note that both the charge and the initial voltage are negative, as in . From the discussions in Electric Charge and Electric Field, we know that electrostatic forces on small particles are generally very large compared with the gravitational force. The large final speed confirms that the gravitational force is indeed negligible here. The large speed also indicates how easy it is to accelerate electrons with small voltages because of their very small mass. Voltages much higher than the 100 V in this problem are typically used in electron guns. Those higher voltages produce electron speeds so great that relativistic effects must be taken into account. That is why a low voltage is considered (accurately) in this example.
+
+Test Prep for AP Courses
+
+An electron is placed in an electric field of 12.0 N/C to the right. What is the resulting force on the electron?
+
+1.33×10-20 N right
+
+1.33×10-20 N left
+
+1.92×10-18 N right
+
+1.92×10-18 N left
+
+(d)
+
+A positively charged object in a certain electric field is currently being pushed west by the resulting force. How will the force change if the charge grows? What if it becomes negative?
+
+A −5.0 C charge is being forced south by a 60 N force. What are the magnitude and direction of the local electric field?
+
+12 N/C south
+
+12 N/C north
+
+300 N/C south
+
+300 N/C north
+
+(b)
+
+A charged object has a net force of 100 N east acting on it due to an electric field of 50 N/C pointing north. How is this possible? If not, why not?
+
+How many electrons have to be moved by a car battery containing 7.20×105 J at 12 V to reduce the energy by 1%?
+
+4.80×1027
+
+4.00×1026
+
+3.75×1021
+
+3.13×1020
+
+(c)
+
+Most of the electricity in the power grid is generated by powerful turbines spinning around. Why don’t these turbines slow down from the work they do moving electrons?
+
+A typical AAA battery can move 2000 C of charge at 1.5 V. How long will this run a 50 mW LED?
+
+1000 minutes
+
+120,000 seconds
+
+15 hours
+
+250 minutes
+
+(a)
+
+Find an example car (or other vehicle) battery, and compute how many of the AAA batteries in the previous problem it would take to equal the energy stored in it. Which is more compact?
+
+What is the internal energy of a system consisting of two point charges, one 2.0 µC, and the other −3.0 µC, placed 1.2 m away from each other?
+
+−3.8×10-2 J
+
+−4.5×10-2 J
+
+4.5×10-2 J
+
+3.8×10-2 J
+
+(b)
+
+A system of three point charges has a 1.00 µC charge at the origin, a −2.00 µC charge at x=30 cm, and a 3.00 µC charge at x=70 cm. What is the total stored potential energy of this configuration?
+
+A system has 2.00 µC charges at (50 cm, 0) and (−50 cm, 0) and a −1.00 µC charge at (0, 70 cm). As the y-coordinate of the −1.00 µC charge increases, the potential energy ___. As the y-coordinate of the −1.00 µC charge decreases, the potential energy ___.
+
+increases, increases
+
+increases, decreases
+
+decreases, increases
+
+decreases, decreases
+
+(b)
+
+A system of three point charges has a 1.00 µC charge at the origin, a −2.00 µC charge at x=30 cm, and a 3.00 µC charge at x=70 cm. What happens to the total potential energy of this system if the −2.00 µC charge and the 3.00 µC charge trade places?
+
+Take a square configuration of point charges, two positive and two negative, all of the same magnitude, with like charges sharing diagonals. What will happen to the internal energy of this system if one of the negative charges becomes a positive charge of the same magnitude?
+
+increase
+
+decrease
+
+no change
+
+not enough information
+
+(a)
+
+Take a square configuration of point charges, two positive and two negative, all of the same magnitude, with like charges sharing diagonals. What will happen to the internal energy of this system if the sides of the square decrease in length?
+
+A system has 2.00 µC charges at (50 cm, 0) and (−50 cm, 0) and a −1.00 µC charge at (0, 70 cm), with a velocity in the –y-direction. When the −1.00 µC charge is at (0, 0) the potential energy is at a ___ and the kinetic energy is ___.
+
+maximum, maximum
+
+maximum, minimum
+
+minimum, maximum
+
+minimum, minimum
+
+(c)
+
+What is the velocity of an electron that goes through a 10 V potential after initially being at rest?
+
+Section Summary
+
+Electric potential is potential energy per unit charge.
+
+The potential difference between points A and B, VB–VA, defined to be the change in potential energy of a charge q moved from A to B, is equal to the change in potential energy divided by the charge, Potential difference is commonly called voltage, represented by the symbol
+ΔV.
+
+ Δ
+ V 
+ =
+
+ ΔPE
+ 
+ q
+
+ and ΔPE = 
+ qΔV
+ .
+
+An electron volt is the energy given to a fundamental charge accelerated through a potential difference of 1 V. In equation form,
+
+ 1 eV
+ =
+
+ 1.60
+ ×
+ 
+ 10
+ –19
+ 
+ C
+
+ 1 V
+
+ =
+
+ 1.60
+ ×
+ 
+ 10
+ –19
+ 
+ C
+
+ 1 J/C
+
+ =
+
+ 1.60
+ ×
+ 
+ 10
+ –19
+ 
+ J.
+
+Mechanical energy is the sum of the kinetic energy and potential energy of a system, that is, KE+PE. This sum is a constant.
+
+Conceptual Questions
+
+Voltage is the common word for potential difference. Which term is more descriptive, voltage or potential difference?
+
+If the voltage between two points is zero, can a test charge be moved between them with zero net work being done? Can this necessarily be done without exerting a force? Explain.
+
+What is the relationship between voltage and energy? More precisely, what is the relationship between potential difference and electric potential energy?
+
+Voltages are always measured between two points. Why?
+
+How are units of volts and electron volts related? How do they differ?
+
+Problems & Exercises
+
+Find the ratio of speeds of an electron and a negative hydrogen ion (one having an extra electron) accelerated through the same voltage, assuming non-relativistic final speeds. Take the mass of the hydrogen ion to be 1.67×10–27 kg.
+
+42.8
+
+An evacuated tube uses an accelerating voltage of 40 kV to accelerate electrons to hit a copper plate and produce x rays. Non-relativistically, what would be the maximum speed of these electrons?
+
+A bare helium nucleus has two positive charges and a mass of 6.64 × 10–27 kg. (a) Calculate its kinetic energy in joules at 2.00% of the speed of light. (b) What is this in electron volts? (c) What voltage would be needed to obtain this energy?
+Integrated Concepts
+
+Integrated Concepts
+
+Singly charged gas ions are accelerated from rest through a voltage of 13.0 V. At what temperature will the average kinetic energy of gas molecules be the same as that given these ions?
+1
+ .
+ 00
+ ×
+ 
+ 10
+
+ 5
+
+ K
+Integrated Concepts
+
+Integrated Concepts
+
+The temperature near the center of the Sun is thought to be 15 million degrees Celsius 1.5×107ºC. Through what voltage must a singly charged ion be accelerated to have the same energy as the average kinetic energy of ions at this temperature?
+Integrated Concepts
+
+Integrated Concepts
+
+(a) What is the average power output of a heart defibrillator that dissipates 400 J of energy in 10.0 ms? (b) Considering the high-power output, why doesn’t the defibrillator produce serious burns?
+
+(a) 4×104 W
+
+(b) A defibrillator does not cause serious burns because the skin conducts electricity well at high voltages, like those used in defibrillators. The gel used aids in the transfer of energy to the body, and the skin doesn’t absorb the energy, but rather lets it pass through to the heart.
+Integrated Concepts
+
+Integrated Concepts
+
+A lightning bolt strikes a tree, moving 20.0 C of charge through a potential difference of 
+
+ 1.00
+ ×
+ 
+ 10
+ 2
+
+ MV
+
+. (a) What energy was dissipated? (b) What mass of water could be raised from 15ºC to the boiling point and then boiled by this energy? (c) Discuss the damage that could be caused to the tree by the expansion of the boiling steam.
+Integrated Concepts
+
+Integrated Concepts
+
+A 12.0 V battery-operated bottle warmer heats 50.0 g of glass, 
+
+ 2.50
+ ×
+ 
+ 10
+ 2
+
+ g
+
+ of baby formula, and 
+
+ 2.00
+ ×
+ 
+ 10
+ 2
+
+ g
+
+ of aluminum from 20.0ºC to 90.0ºC. (a) How much charge is moved by the battery? (b) How many electrons per second flow if it takes 5.00 min to warm the formula? (Hint: Assume that the specific heat of baby formula is about the same as the specific heat of water.)
+
+(a) 7.40×103 C
+
+(b) 1.54×1020 electrons per second
+Integrated Concepts
+
+Integrated Concepts
+
+A battery-operated car utilizes a 12.0 V system. Find the charge the batteries must be able to move in order to accelerate the 750 kg car from rest to 25.0 m/s, make it climb a 
+
+ 2.00
+ ×
+ 
+ 10
+ 2
+
+ m
+
+ high hill, and then cause it to travel at a constant 25.0 m/s by exerting a 
+
+ 5.00
+ ×
+ 
+ 10
+ 2
+
+ N
+
+ force for an hour.
+3.89
+ ×
+ 
+ 10
+
+ 6
+
+ C
+Integrated Concepts
+
+Integrated Concepts
+
+Fusion probability is greatly enhanced when appropriate nuclei are brought close together, but mutual Coulomb repulsion must be overcome. This can be done using the kinetic energy of high-temperature gas ions or by accelerating the nuclei toward one another. (a) Calculate the potential energy of two singly charged nuclei separated by 1.00×10–12 m by finding the voltage of one at that distance and multiplying by the charge of the other. (b) At what temperature will atoms of a gas have an average kinetic energy equal to this needed electrical potential energy?
+Unreasonable Results
+
+Unreasonable Results
+
+(a) Find the voltage near a 10.0 cm diameter metal sphere that has 8.00 C of excess positive charge on it. (b) What is unreasonable about this result? (c) Which assumptions are responsible?
+
+(a) 
+
+ 1.44
+ ×
+ 
+ 10
+ 12
+
+ V
+
+(b) This voltage is very high. A 10.0 cm diameter sphere could never maintain this voltage; it would discharge.
+
+(c) An 8.00 C charge is more charge than can reasonably be accumulated on a sphere of that size.
+Construct Your Own Problem
+
+Construct Your Own Problem
+
+Consider a battery used to supply energy to a cellular phone. Construct a problem in which you determine the energy that must be supplied by the battery, and then calculate the amount of charge it must be able to move in order to supply this energy. Among the things to be considered are the energy needs and battery voltage. You may need to look ahead to interpret manufacturer’s battery ratings in ampere-hours as energy in joules.
+
+potential energy per unit charge
+change in potential energy of a charge moved from one point to another, divided by the charge; units of potential difference are joules per coulomb, known as volt
+the energy given to a fundamental charge accelerated through a potential difference of one volt
+sum of the kinetic energy and potential energy of a system; this sum is a constant

@@ -1,0 +1,831 @@
+# m79614
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Two Basic Rules of Probability
+
+Two Basic Rules of Probability
+
+In calculating probability, there are two rules to consider when you are determining if two events are independent or dependent and if they are mutually exclusive or not.
+
+The Multiplication Rule
+
+If A and B are two events defined on a sample space, then P(A AND B) = P(B)P(A|B).
+
+This equation can be rewritten as P(A AND B) = P(B)P(A|B), the multiplication rule.
+
+If A and B are independent, then P(A|B) = P(A). In this special case, P(A AND B) = P(A|B)P(B) becomes P(A AND B) = P(A)P(B).
+
+A bag contains four green marbles, three red marbles, and two yellow marbles. Mark draws two marbles from the bag without replacement. The probability that he draws a yellow marble and then a green marble is
+
+Notice that 
+
+ P(
+ 
+ green | yellow
+ 
+ )=
+ 4
+ 8
+
+. After the yellow marble is drawn, there are four green marbles in the bag and eight marbles in all.
+
+The Addition Rule
+
+If A and B are defined on a sample space, then P(A OR B) = P(A) + P(B) − P(A AND B).
+
+Draw one card from a standard deck of playing cards. Let H = the card is a heart, and let J = the card is a jack. These events are not mutually exclusive because a card can be both a heart and a jack.
+
+If A and B are mutually exclusive, then P(A AND B) = 0. Then P(A OR B) = P(A) + P(B) − P(A AND B) becomes P(A OR B) = P(A) + P(B).
+
+Draw one card from a standard deck of playing cards. Let H = the card is a heart and S = the card is a spade. These events are mutually exclusive because a card cannot be a heart and a spade at the same time. The probability that the card is a heart or a spade is
+
+Klaus is trying to choose where to go on vacation. His two choices are: A = New Zealand and B = Alaska.
+
+Klaus can only afford one vacation. The probability that he chooses A is P(A) = .6 and the probability that he chooses B is P(B) = .35.
+P(A AND B) = 0 because Klaus can only afford to take one vacation.
+
+Therefore, the probability that he chooses either New Zealand or Alaska is P(A OR B) = P(A) + P(B) = .6 + .35 = .95. Note that the probability that he does not choose to go anywhere on vacation must be .05.
+
+Carlos plays college soccer. He makes a goal 65 percent of the time he shoots. Carlos is going to attempt two goals in a row in the next game. A = the event Carlos is successful on his first attempt. P(A) = .65. B = the event Carlos is successful on his second attempt. P(B) = .65. Carlos tends to shoot in streaks. The probability that he makes the second goal given that he made the first goal is .90.
+
+a. What is the probability that he makes both goals?
+
+a. The problem is asking you to find P(A AND B) = P(B AND A). Since P(B|A) = .90: P(B AND A) = P(B|A) P(A) = (.90)(.65) = .585.
+
+Carlos makes the first and second goals with probability .585.
+
+b. What is the probability that Carlos makes either the first goal or the second goal?
+
+b. The problem is asking you to find P(A OR B).
+P(A OR B) = P(A) + P(B) − P(A AND B) = .65 + .65 − .585 = .715
+
+Carlos makes either the first goal or the second goal with probability .715.
+
+c. Are A and B independent?
+
+c. No, they are not, because P(B AND A) = .585.
+P(B)P(A) = (.65)(.65) = .423
+
+.423 ≠ .585 = P(B AND A)
+
+So, P(B AND A) is not equal to P(B)P(A).
+
+d. Are A and B mutually exclusive?
+
+d. No, they are not because P(A and B) = .585.
+
+To be mutually exclusive, P(A AND B) must equal zero.
+
+Try It
+
+Helen plays basketball. For free throws, she makes the shot 75 percent of the time. Helen must now attempt two free throws. C = the event that Helen makes the first shot. P(C) = .75. D = the event Helen makes the second shot. P(D) = .75. The probability that Helen makes the second free throw given that she made the first is .85. What is the probability that Helen makes both free throws?
+P(D|C) = 0.85
+P(C AND D) = P(D AND C)
+P(D AND C) = P(D|C)P(C) = (0.85)(0.75) = 0.6375
+Helen makes the first and second free throws with probability 0.6375.
+
+A community swim team has 150 members. Seventy-five of the members are advanced swimmers. Forty-seven of the members are intermediate swimmers. The remainder are novice swimmers. Forty of the advanced swimmers practice four times a week. Thirty of the intermediate swimmers practice four times a week. Ten of the novice swimmers practice four times a week. Suppose one member of the swim team is chosen randomly.
+
+a. What is the probability that the member is a novice swimmer?
+
+a. There are 150 members; 75 of these are advanced, and 47 of these are intermediate swimmers. So there are 150 − 75 − 47 = 28 novice swimmers. The probability that a randomly selected swimmer is a novice is 28150.
+
+b. What is the probability that the member practices four times a week?
+
+b. 
+
+ 40 + 30 + 10 
+
+ 150
+
+ =
+ 
+ 80
+
+ 150
+
+c. What is the probability that the member is an advanced swimmer and practices four times a week?
+
+c. There are 40 advanced swimmers who practice four times per week, so the probability is 40150.
+
+d. What is the probability that a member is an advanced swimmer and an intermediate swimmer? Are being an advanced swimmer and being an intermediate swimmer mutually exclusive? Why or why not?
+
+d. P(advanced AND intermediate) = 0, so these are mutually exclusive events. A swimmer cannot be an advanced swimmer and an intermediate swimmer at the same time.
+
+e. Are being a novice swimmer and practicing four times a week independent events? Why or why not?
+
+e. No, these are not independent events.
+P(novice AND practices four times per week) = .0667
+P(novice)P(practices four times per week) = .0996
+.0667 ≠ .0996
+
+Try It
+
+A school has 200 seniors of whom 140 will be going to college next year. Forty will be going directly to work. The remainder are taking a gap year. Fifty of the seniors going to college are on their school's sports teams. Thirty of the seniors going directly to work are on their school's sports teams. Five of the seniors taking a gap year are on their schools sports teams. What is the probability that a senior is taking a gap year?
+P=
+
+200−140−40
+
+200
+
+=
+
+20
+
+200
+
+=0.1
+
+Felicity attends a school in Modesto, CA. The probability that Felicity enrolls in a math class is .2 and the probability that she enrolls in a speech class is .65. The probability that she enrolls in a math class GIVEN that she enrolls in speech class is .25.
+
+Let M = math class, S = speech class, and M|S = math given speech.
+
+What is the probability that Felicity enrolls in math and speech?
+Find P(M AND S) = P(M|S)P(S).
+
+What is the probability that Felicity enrolls in math or speech classes?
+Find P(M OR S) = P(M) + P(S) − P(M AND S).
+
+Are M and S independent? Is P(M|S) = P(M)?
+
+Are M and S mutually exclusive? Is P(M AND S) = 0?
+
+a. P(M AND S) = P(M|S)P(S) = .25(.65) = .1625
+
+b. P(M OR S) = P(M) + P(S) − P(M AND S) = .2 + .65 − .1625 = .6875
+
+c. No, P(M|S) = .25 and P(M) = .2.
+
+d. No, P(M AND S) = .1625.
+
+Try It
+
+A student goes to the library. Let events B = the student checks out a book and D = the student checks out a DVD. Suppose that P(B) = .40, P(D) = .30, and P(D|B) = .5.
+
+Find P(B AND D).
+
+Find P(B OR D).
+P(B AND D) = P(D|B)P(B) = (0.5)(0.4) = 0.20.
+P(B OR D) = P(B) + P(D) − P(B AND D) = 0.40 + 0.30 − 0.20 = 0.50
+
+Researchers are studying one particular type of disease that affects women more often than men. Studies show that about one woman in seven (approximately 14.3 percent) who live to be 90 will develop the disease. Suppose that of those women who develop this disease, a test is negative 2 percent of the time. Also suppose that in the general population of women, the test for the disease is negative about 85 percent of the time. Let B = woman develops the disease and let N = tests negative. Suppose one woman is selected at random.
+
+a. What is the probability that the woman develops the disease? What is the probability that woman tests negative?
+
+a. P(B) = .143; P(N) = .85
+
+b. Given that the woman develops the disease, what is the probability that she tests negative?
+
+b. Among women who develop the disease, the test is negative 2 percent of the time, so P(N|B) = .02
+
+c. What is the probability that the woman has the disease AND tests negative?
+
+c. P(B AND N) = P(B)P(N|B) = (.143)(.02) = .0029
+
+d. What is the probability that the woman has the disease OR tests negative?
+
+d. P(B OR N) = P(B) + P(N) − P(B AND N) = .143 + .85 − .0029 = .9901
+
+e. Are having the disease and testing negative independent events?
+
+e. No. P(N) = .85; P(N|B) = .02. So, P(N|B) does not equal P(N).
+
+f. Are having the disease and testing negative mutually exclusive?
+
+f. No. P(B AND N) = .0029. For B and N to be mutually exclusive, P(B AND N) must be zero.
+
+Try It
+
+A school has 200 seniors of whom 140 will be going to college next year. Forty will be going directly to work. The remainder are taking a gap year. Fifty of the seniors going to college are on their school's sports teams. Thirty of the seniors going directly to work are on their school's sports teams. Five of the seniors taking a gap year are on their school's sports teams. What is the probability that a senior is going to college and plays sports?
+
+Let A = student is a senior going to college.
+
+Let B = student plays sports.
+P(B) = 
+
+140
+
+200
+P(B|A) = 
+
+50
+
+140
+P(A AND B) = P(B|A)P(A)
+P(A AND B) = 
+
+(
+
+140
+
+200
+
+)(
+
+50
+
+140
+
+)
+
+ = 
+
+1
+4
+
+Refer to the information in . P = tests positive.
+
+Given that a woman develops the disease, what is the probability that she tests positive? Find P(P|B) = 1 − P(N|B).
+
+What is the probability that a woman develops the disease and tests positive? Find P(B AND P) = P(P|B)P(B).
+
+What is the probability that a woman does not develop the disease? Find P(B′) = 1 − P(B).
+
+What is the probability that a woman tests positive for the disease? Find P(P) = 1 − P(N).
+
+a. P(P|B) = 1 − P(N|B) = 1 − .02 = .98
+
+b. P(B AND P) = P(P|B)P(B) = .98(.143) = .1401
+
+c. P(B') = 1 − P(B) = 1 − .143 = .857
+
+d. P(P) = 1 − P(N) = 1 − .85 = .15
+
+Try It
+
+A student goes to the library. Let events B = the student checks out a book and D = the student checks out a DVD. Suppose that P(B) = .40, P(D) = .30, and P(D|B) = .5.
+
+Find P(B′).
+
+Find P(D AND B).
+
+Find P(B|D).
+
+Find P(D AND B′).
+
+Find P(D|B′).
+P(B′) = 0.60
+P(D AND B) = P(D|B)P(B) = 0.20
+P(B|D) = 
+
+P(B AND D)
+
+P(D)
+
+ = 
+
+(
+
+0.20
+
+)
+
+(0.30)
+
+ = 0.66
+P(D AND B′) = P(D) - P(D AND B) = 0.30 - 0.20 = 0.10
+P(D|B′) = P(D AND B′)P(B′) = (P(D) - P(D AND B))(0.60) = (0.10)(0.60) = 0.06
+
+References
+
+Baseball Almanac. (2013). Retrieved from www.baseball-almanac.com
+
+DiCamillo, Mark, and Field, M. The file poll. Field Research Corporation. Retrieved from http://www.field.com/fieldpollonline/subscribers/Rls2443.pdf
+
+Field Research Corporation. (n.d.). Retrieved from www.field.com/fieldpollonline
+
+Forum Research. (n.d.). Mayors approval down. Retrieved from http://www.forumresearch.com/forms/News Archives/News Releases/74209_TO_Issues_-_Mayoral_Approval_%28Forum_Research%29%2820130320%29.pdf
+
+Rider, D. (2011, Sept. 14). Ford support plummeting, poll suggests. The Star. Retrieved from http://www.thestar.com/news/gta/2011/09/14/ford_support_plummeting_poll_suggests.html
+
+Shin, H. B., and Kominski, R. A. (2010 April). Language use in the United States: 2007 (American Community Survey Reports, ACS-12). Washington, DC: United States Census Bureau. Retrieved from http://www.census.gov/hhes/socdemo/language/data/acs/ACS-12.pdf
+
+The Roper Center for Public Opinion Research. (n.d.). Archives. Retrieved from http://www.ropercenter.uconn.edu/
+The Wall Street Journal. (n.d.). Retrieved from https://www.wsj.com/
+
+U.S. Census Bureau. (n.d.). Retrieved from https://www.census.gov/
+
+Wikipedia. (n.d.). Roulette. Retrieved from http://en.wikipedia.org/wiki/Roulette
+
+Chapter Review
+
+The multiplication rule and the addition rule are used for computing the probability of A and B, as well as the probability of A or B for two given events A, B defined on the sample space. In sampling with replacement, each member of a population is replaced after it is picked, so that member has the possibility of being chosen more than once, and the events are considered to be independent. In sampling without replacement, each member of a population may be chosen only once, and the events are considered to be not independent. The events A and B are mutually exclusive events when they do not have any outcomes in common.
+
+Formula Review
+The multiplication rule—P(A AND B) = P(A|B)P(B)
+The addition rule—P(A OR B) = P(A) + P(B) − P(A AND B)
+Use the following information to answer the next 10 exercises. Forty-eight percent of all voters of a certain state prefer life in prison without parole over the death penalty for a person convicted of first-degree murder. Among Latino registered voters in this state, 55 percent prefer life in prison without parole over the death penalty for a person convicted of first-degree murder. Of all citizens in this state, 37.6 percent are Latino.
+
+In this problem, let
+C = citizens of a certain state (registered voters) preferring life in prison without parole over the death penalty for a person convicted of first-degree murder.
+L = registered voters of the state who are Latino.
+C = citizens of a certain state (registered voters) preferring life in prison without parole over the death penalty for a person convicted of first-degree murder.
+L = registered voters of the state who are Latino.
+
+Suppose that one citizen is randomly selected.
+
+Find P(C).
+
+Find P(L).
+
+0.376
+
+Find P(C|L).
+
+In words, what is C|L?
+C|L means, given the person chosen is a Latino Californian, the person is a registered voter who prefers life in prison without parole for a person convicted of first degree murder.
+
+Find P(L AND C).
+
+In words, what is L AND C?
+L AND C is the event that the person chosen is a voter of the ethnicity in question who prefers life without parole over the death penalty for a person convicted of first degree murder.
+
+Are L and C independent events? Show why or why not.
+
+Find P(L OR C).
+
+.6492
+
+In words, what is L OR C?
+
+Are L and C mutually exclusive events? Show why or why not.
+
+No, because P(L AND C) does not equal 0.
+
+Homework
+
+On February 28, 2013, a Field Poll Survey reported that 61 percent of California registered voters approved of a law that was about to be passed. Among 18- to 39-year olds (California registered voters), the approval rating was 78 percent. Six in 10 California registered voters said that the upcoming Supreme Courts ruling about the constitutionality of the law was either very or somewhat important to them. Out of those registered voters who supported the law, 75 percent say the ruling is important to them.
+
+In this problem, let
+C = California registered voters who supported the law,
+B = California registered voters who say the Supreme Courts ruling about the law is very or somewhat important to them, and
+A = California registered voters who are 18 to 39 years old.
+
+Find P(C).
+
+Find P(B).
+
+Find P(C|A).
+
+Find P(B|C).
+
+In words, what is C|A?
+
+In words, what is B|C?
+
+Find P(C AND B).
+
+In words, what is C AND B?
+
+Find P(C OR B).
+
+Are C and B mutually exclusive events? Show why or why not.
+
+After a mayor of a major Canadian city announced his plans to cut budget costs in late 2011, researchers polled 1,046 people to measure the mayor’s popularity. Everyone polled expressed either approval or disapproval. These are the results their poll produced:
+
+In early 2011, 60 percent of the population approved of the mayor's actions in office.
+
+In mid-2011, 57 percent of the population approved of his actions.
+
+In late 2011, the percentage of popular approval was measured at 42 percent.
+
+What is the sample size for this study?
+
+What proportion in the poll disapproved of the mayor, according to the results from late 2011?
+
+How many people polled responded that they approved of the mayor in late 2011?
+
+What is the probability that a person supported the mayor, based on the data collected in mid-2011?
+
+What is the probability that a person supported the mayor, based on the data collected in early 2011?
+
+The Forum Research surveyed 1,046 Torontonians.
+
+58 percent
+
+42 percent of 1,046 = 439 (rounding to the nearest integer)
+
+.57
+
+.60.
+Use the following information to answer the next three exercises. A local restaurant sells pork chops and chicken breasts. The given values below are the weights (in ounces) of pork chops and chicken breasts listed on the menu. Your server will randomly select one piece of meat (pork chop or chicken breast) that you will be served.
+
+Pork Chops
+17
+20
+21
+18
+20
+20
+20
+18
+19
+19
+20
+19
+21
+20
+18
+20
+20
+19
+18
+19
+Chicken Breasts
+17
+19
+17
+21
+17
+21
+18
+21
+19
+21
+20
+17
+20
+18
+19
+20
+20
+17
+21
+20
+List the sample space of the possible items that are on the menu.
+
+Find P(you will get a 17-oz. piece of meat).
+
+Find P(you will get a pork chop).
+
+Find P(you will get a 17-oz. pork chop).
+
+Is getting a pork chop the complement of getting a chicken breast? Why?
+
+Find two mutually exclusive events.
+
+Are the events getting 17 oz. of meat and getting a pork chop independent?
+
+yes; P(getting a pork chop) = P(not getting a chicken breast)
+
+getting a pork chop and getting a chicken breast
+
+no
+
+Compute the probabilities.
+P(you will get a chicken breast)
+P(you will get a 17-oz. chicken breast)
+P(you will get a chicken breast or you will not get a 17-oz. pork chop)
+P(you will not get a chicken breast and you will get an 18-oz. pork chop)
+P(you will get a piece of meat that is not 21 oz.)
+P(you will get a piece of chicken that is not 21 oz.)
+P(you will not get a chicken breast and you will not get a pork chop)
+
+20/40 = 1/2
+
+5/40 = 1/8
+
+39/40
+
+4/40 = 1/10
+
+33/40
+
+15/40 = 3/8
+
+0/40 = 0
+
+Compute the probabilities:
+P(you will not get a pork chop)
+P(you will get a 20-oz. pork chop)
+P(you will not get a chicken breast or you will not get an 18-oz. pork chop)
+P(you will not get a chicken breast and you will not get an 18-oz. pork chop)
+P(you will get a pork chop that is not 21 oz.)
+P(you will not get a chicken breast or you will not get a pork chop)
+
+Compute the probabilities.
+
+20/40 = 1/2
+
+8/40 = 1/5
+
+40/40 = 1
+
+16/40 = 2/5
+
+18/40 = 9/20
+
+40/40 = 1
+
+Suppose that you have eight cards. Five are green and three are yellow. The five green cards are numbered 1, 2, 3, 4, and 5. The three yellow cards are numbered 1, 2, and 3. The cards are well shuffled. You randomly draw one card.
+G = card drawn is green
+E = card drawn is even-numbered
+List the sample space.
+P(G) = ________
+P(G|E) = ________
+P(G AND E) = ________
+P(G OR E) = ________
+Are G and E mutually exclusive? Justify your answer numerically.
+
+List the sample space.
+P(G) = ________
+P(G|E) = ________
+P(G AND E) = ________
+P(G OR E) = ________
+
+Are G and E mutually exclusive? Justify your answer numerically.
+
+{G1, G2, G3, G4, G5, Y1, Y2, Y3}
+5
+8
+2
+3
+2
+8
+6
+8
+
+No, because P(G AND E) does not equal 0.
+
+Roll two fair dice separately. Each die has six faces.
+
+List the sample space.
+
+Let A be the event that either a three or four is rolled first, followed by an even number. Find P(A).
+
+Let B be the event that the sum of the two rolls is at most seven. Find P(B).
+
+In words, explain what P(A|B) represents. Find P(A|B).
+
+Are A and B mutually exclusive events? Explain your answer in one to three complete sentences, including numerical justification.
+
+Are A and B independent events? Explain your answer in one to three complete sentences, including numerical justification.
+
+A special deck of cards has 10 cards. Four are green, three are blue, and three are red. When a card is picked, its color is recorded. An experiment consists of first picking a card and then tossing a coin.
+
+List the sample space.
+
+Let A be the event that a blue card is picked first, followed by landing a head on the coin toss. Find P(A).
+
+Let B be the event that a red or green is picked, followed by landing a head on the coin toss. Are the events A and B mutually exclusive? Explain your answer in one to three complete sentences, including numerical justification.
+
+Let C be the event that a red or blue is picked, followed by landing a head on the coin toss. Are the events A and C mutually exclusive? Explain your answer in one to three complete sentences, including numerical justification.
+
+NOTE
+
+The coin toss is independent of the card picked first.
+
+{(G,H) (G,T) (B,H) (B,T) (R,H) (R,T)}
+P(A) = P(blue)P(head) = 
+
+(
+
+3
+
+10
+
+)
+
+(
+
+1
+
+2
+
+)
+
+= 
+
+3
+
+20
+
+Yes, A and B are mutually exclusive because they cannot happen at the same time; you cannot pick a card that is both blue and also (red or green). P(A AND B) = 0.
+
+No, A and C are not mutually exclusive because they can occur at the same time. In fact, C includes all of the outcomes of A; if the card chosen is blue it is also (red or blue). P(A AND C) = P(A) = 
+
+3
+
+20
+.
+
+An experiment consists of first rolling a die and then tossing a coin.
+
+List the sample space.
+
+Let A be the event that either a three or a four is rolled first, followed by landing a head on the coin toss. Find P(A).
+
+Let B be the event that the first and second tosses land on heads. Are the events A and B mutually exclusive? Explain your answer in one to three complete sentences, including numerical justification.
+
+An experiment consists of tossing a nickel, a dime, and a quarter. Of interest is the side the coin lands on.
+
+List the sample space.
+
+Let A be the event that there are at least two tails. Find P(A).
+
+Let B be the event that the first and second tosses land on heads. Are the events A and B mutually exclusive? Explain your answer in one to three complete sentences, including justification.
+S = {(HHH), (HHT), (HTH), (HTT), (THH), (THT), (TTH), (TTT)}
+4
+8
+
+Yes, because if A has occurred, it is impossible to obtain two tails. In other words, P(A AND B) = 0.
+
+Consider the following scenario:
+Let P(C) = .4.
+Let P(D) = .5.
+Let P(C|D) = .6.
+
+Find P(C AND D).
+Are C and D mutually exclusive? Why or why not?
+Are C and D independent events? Why or why not?
+Find P(C OR D).
+Find P(D|C).
+
+Find P(C AND D).
+
+Are C and D mutually exclusive? Why or why not?
+
+Are C and D independent events? Why or why not?
+
+Find P(C OR D).
+
+Find P(D|C).
+Y and Z are independent events.
+
+Rewrite the basic Addition Rule P(Y OR Z) = P(Y) + P(Z) - P(Y AND Z) using the information that Y and Z are independent events.
+
+Use the rewritten rule to find P(Z) if P(Y OR Z) = .71 and P(Y) = .42.
+
+If Y and Z are independent, then P(Y AND Z) = P(Y)P(Z), so P(Y OR Z) = P(Y) + P(Z) – P(Y)P(Z).
+
+.5
+G and H are mutually exclusive events. P(G) = .5 P(H) = .3
+
+Explain why the following statement MUST be false: P(H|G) = .4.
+
+Find P(H OR G).
+
+Are G and H independent or dependent events? Explain in a complete sentence.
+
+Approximately 281,000,000 people over age five live in the United States. Of these people, 55,000,000 speak a language other than English at home. Of those who speak another language at home, 62.3 percent speak Spanish.
+
+Let E = speaks English at home; E′ = speaks another language at home; and S = speaks Spanish.
+
+Finish each probability statement by matching the correct answer.
+
+Probability Statements
+Answers
+a. P(E′) =
+i. .8043
+b. P(E) =
+ii. .623
+c. P(S and E′) =
+iii. .1957
+d. P(S|E′) =
+iii
+i
+iv
+ii
+
+iii
+
+i
+
+iv
+
+ii
+
+In 1994, the U.S. government held a lottery to issue 55,000 licenses of a certain type. Renate Deutsch, from Germany, was one of approximately 6.5 million people who entered this lottery. Let G = won license.
+
+What was Renate’s chance of winning one of the licenses? Write your answer as a probability statement.
+
+In the summer of 1994, Renate received a letter stating she was one of 110,000 finalists chosen. Once the finalists were chosen, assuming that each finalist had an equal chance to win, what was Renate’s chance of winning one of the licenses? Write your answer as a conditional probability statement. Let F = was a finalist.
+
+Are G and F independent or dependent events? Justify your answer numerically and also explain why.
+
+Are G and F mutually exclusive events? Justify your answer numerically and explain why.
+
+Three professors at George Washington University did an experiment to determine if economists are more likely to return found money than other people. They dropped 64 stamped, addressed envelopes with $10 cash in different classrooms on the George Washington campus. Forty-four percent were returned overall. From the economics classes 56 percent of the envelopes were returned. From the business, psychology, and history classes 31 percent were returned.
+
+Let R = money returned; E = economics classes; and O = other classes.
+
+Write a probability statement for the overall percentage of money returned.
+
+Write a probability statement for the percentage of money returned out of the economics classes.
+
+Write a probability statement for the percentage of money returned out of the other classes.
+
+Is money being returned independent of the class? Justify your answer numerically and explain it.
+
+Based upon this study, do you think that economists are more selfish than other people? Explain why or why not. Include numbers to justify your answer.
+P(R) = .44
+P(R|E) = .56
+P(R|O) = .31
+
+No, whether the money is returned is not independent of which class the money was placed in. There are several ways to justify this mathematically, but one is that the money placed in economics classes is not returned at the same overall rate; P(R|E) ≠ P(R).
+
+No, this study definitely does not support that notion; in fact, it suggests the opposite. The money placed in the economics classrooms was returned at a higher rate than the money place in all classes collectively; P(R|E) > P(R).
+
+The following table of data obtained from www.baseball-almanac.com shows hit information for four players. Suppose that one hit from the table is randomly selected.
+
+Name
+Single
+Double
+Triple
+Home Run
+Total Hits
+Babe Ruth
+1,517
+506
+136
+714
+2,873
+Jackie Robinson
+1,054
+273
+54
+137
+1,518
+Ty Cobb
+3,603
+174
+295
+114
+4,189
+Hank Aaron
+2,294
+624
+98
+755
+3,771
+Total
+8,471
+1,577
+583
+1,720
+12,351
+Are the hit being made by Hank Aaron and the hit being a double independent events?
+
+Yes, because P(hit by Hank Aaron|hit is a double) = P(hit by Hank Aaron)
+
+No, because P(hit by Hank Aaron|hit is a double) ≠ P(hit is a double)
+
+No, because P(hit is by Hank Aaron|hit is a double) ≠ P(hit by Hank Aaron)
+
+Yes, because P(hit is by Hank Aaron|hit is a double) = P(hit is a double)
+
+United Blood Services is a blood bank that serves more than 500 hospitals in 18 states. According to their website, a person with type O blood and a negative Rh factor (Rh–) can donate blood to any person with any bloodtype. Their data show that 43 percent of people have type O blood and 15 percent of people have Rh– factor; 52 percent of people have type O or Rh– factor.
+
+Find the probability that a person has both type O blood and the Rh– factor.
+
+Find the probability that a person does not have both type O blood and the Rh– factor.
+P(type O OR Rh–) = P(type O) + P(Rh–) – P(type O AND Rh–)
+0.52 = 0.43 + 0.15 – P(type O AND Rh–); solve to find P(type O AND Rh–) = .06
+6 percent of people have type O, Rh– blood
+P(type O OR Rh–) = P(type O) + P(Rh–) – P(type O AND Rh–)
+
+0.52 = 0.43 + 0.15 – P(type O AND Rh–); solve to find P(type O AND Rh–) = .06
+
+6 percent of people have type O, Rh– blood
+P(NOT(type O AND Rh–)) = 1 – P(type O AND Rh–) = 1 – .06 = .94
+94 percent of people do not have type O, Rh– blood
+P(NOT(type O AND Rh–)) = 1 – P(type O AND Rh–) = 1 – .06 = .94
+
+94 percent of people do not have type O, Rh– blood
+
+At a college, 72 percent of courses have final exams and 46 percent of courses require research papers. Suppose that 32 percent of courses have a research paper and a final exam. Let F be the event that a course has a final exam. Let R be the event that a course requires a research paper.
+
+Find the probability that a course has a final exam or a research project.
+
+Find the probability that a course has neither of these two requirements.
+
+In a box of assorted cookies, 36 percent contain chocolate and 12 percent contain nuts. Of those, 8 percent contain both chocolate and nuts. Sean is allergic to both chocolate and nuts.
+
+Find the probability that a cookie contains chocolate or nuts (he can't eat it).
+
+Find the probability that a cookie does not contain chocolate or nuts (he can eat it).
+
+Let C = be the event that the cookie contains chocolate. Let N = the event that the cookie contains nuts.
+P(C OR N) = P(C) + P(N) – P(C AND N) = .36 + .12 – .08 = .40
+P(NEITHER chocolate NOR nuts) = 1 – P(C OR N) = 1 – .40 = .60
+
+A college finds that 10 percent of students have taken a distance learning class and that 40 percent of students are part-time students. Of the part-time students, 20 percent have taken a distance learning class. Let D = event that a student takes a distance learning class and E = event that a student is a part-time student.
+
+Find P(D AND E).
+
+Find P(E|D).
+
+Find P(D OR E).
+
+Using an appropriate test, show whether D and E are independent.
+
+Using an appropriate test, show whether D and E are mutually exclusive.
+
+P(A|B) = P(A)
+P(B|A) = P(B)
+P(A AND B) = P(A)P(B)
+
+two events are mutually exclusive if the probability that they both happen at the same time is zero; if events A and B are mutually exclusive, then P(A AND B) = 0

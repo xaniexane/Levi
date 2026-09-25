@@ -1,0 +1,44 @@
+{
+  "description": "Specialized TEAM and SKILL pack for the nonprofit-operations career: field how-tos for stretching tiny budgets and running programs with what's on hand (improvised event production, donation ops, pantry lines, borrowed-space programs), career-skill entries that refine the craft (grant writing and budgeting, donor stewardship, fundraising pipelines, board governance, career leveling from volunteer to coordinator), and team-play entries for how nonprofit staffs and volunteer crews coordinate, train fast, improvise together under pressure, and avoid burnout — all feeding toward personal refinement tools.",
+  "draft": true,
+  "entry_count": 36,
+  "field": "non-profit organization",
+  "kind_breakdown": {
+    "career": 12,
+    "field": 14,
+    "team": 10
+  },
+  "level_breakdown": {
+    "applied": 22,
+    "foundation": 8,
+    "mastery": 6
+  },
+  "notes_for_main_builder": "Ids normalized by coordinator to the framework law (curriculum/schema.py: sw-general-nonprofit-NNN); full file validates clean against validate_entry. Domain 'general'. Prerequisites are pack-local only. No stubs.",
+  "pack": "Non-Profit Organization",
+  "selector": {
+    "domains": [
+      "general"
+    ],
+    "levels": [
+      "foundation",
+      "applied",
+      "mastery"
+    ],
+    "tracks": [
+      "build",
+      "create",
+      "improve",
+      "restore",
+      "combine",
+      "improvise"
+    ]
+  },
+  "track_emphasis": {
+    "build": "secondary — check-in desks, driver networks, monthly-donor pipelines, substitute benches",
+    "combine": "tertiary — multi-drive events, combined funder reports, cross-trained floaters",
+    "create": "secondary — appeal letters, sponsorship menus, elevator pitches, boilerplate kits",
+    "improve": "primary — stewardship cadence, career leveling, burnout watch, meeting and reporting discipline",
+    "improvise": "primary — stretching tiny budgets, borrowed gear, no-show crews, zero-print outreach",
+    "restore": "secondary — donor-database cleanup, declined-grant debriefs, staff-volunteer friction repair"
+  }
+}

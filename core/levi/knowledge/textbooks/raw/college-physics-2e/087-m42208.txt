@@ -1,0 +1,166 @@
+# m42208
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Most General Applications of Bernoulli’s Equation
+
+The Most General Applications of Bernoulli’s Equation
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate using Torricelli’s theorem.
+
+Calculate power in fluid flow.
+
+Torricelli’s Theorem
+shows water gushing from a large tube through a dam. What is its speed as it emerges? Interestingly, if resistance is negligible, the speed is just what it would be if the water fell a distance h from the surface of the reservoir; the water’s speed is independent of the size of the opening. Let us check this out. Bernoulli’s equation must be used since the depth is not constant. We consider water flowing from the surface (point 1) to the tube’s outlet (point 2). Bernoulli’s equation as stated in previously is
+
+Both P1 and P2 equal atmospheric pressure (P1 is atmospheric pressure because it is the pressure at the top of the reservoir. P2 must be atmospheric pressure, since the emerging water is surrounded by the atmosphere and cannot have a pressure different from atmospheric pressure.) and subtract out of the equation, leaving
+
+Solving this equation for v22, noting that the density 
+ 
+ ρ
+ 
+ cancels (because the fluid is incompressible), yields
+
+We let h=h1−h2; the equation then becomes
+
+where h is the height dropped by the water. This is simply a kinematic equation for any object falling a distance h with negligible resistance. In fluids, this last equation is called Torricelli’s theorem. Note that the result is independent of the velocity’s direction, just as we found when applying conservation of energy to falling objects.
+
+All preceding applications of Bernoulli’s equation involved simplifying conditions, such as constant height or constant pressure. The next example is a more general application of Bernoulli’s equation in which pressure, velocity, and height all change. (See .)
+
+Calculating Pressure: A Fire Hose Nozzle
+
+Fire hoses used in major structure fires have inside diameters of 6.40 cm. Suppose such a hose carries a flow of 40.0 L/s starting at a gauge pressure of 1.62×106N/m2. The hose goes 10.0 m up a ladder to a nozzle having an inside diameter of 3.00 cm. Assuming negligible resistance, what is the pressure in the nozzle?
+Strategy
+
+Strategy
+
+Here we must use Bernoulli’s equation to solve for the pressure, since depth is not constant.
+Solution
+
+Solution
+
+Bernoulli’s equation states
+
+where the subscripts 1 and 2 refer to the initial conditions at ground level and the final conditions inside the nozzle, respectively. We must first find the speeds v1 and v2. Since 
+
+ Q
+ =
+ 
+ A
+ 
+ 1
+
+ v
+ 
+ 1
+
+ , we get
+
+Similarly, we find
+
+(This rather large speed is helpful in reaching the fire.) Now, taking h1 to be zero, we solve Bernoulli’s equation for P2:
+
+Substituting known values yields
+Discussion
+
+Discussion
+
+This value is a gauge pressure, since the initial pressure was given as a gauge pressure. Thus the nozzle pressure is very close to atmospheric pressure, as it must because the water exits into the atmosphere without changes in its conditions.
+
+Power in Fluid Flow
+
+Power is the rate at which work is done or energy in any form is used or supplied. To see the relationship of power to fluid flow, consider Bernoulli’s equation:
+
+All three terms have units of energy per unit volume, as discussed in the previous section. Now, considering units, if we multiply energy per unit volume by flow rate (volume per unit time), we get units of power. That is, (E/V)(V/t)=E/t. This means that if we multiply Bernoulli’s equation by flow rate Q, we get power. In equation form, this is
+
+Each term has a clear physical meaning. For example, PQ is the power supplied to a fluid, perhaps by a pump, to give it its pressure P. Similarly, 12ρv2Q is the power supplied to a fluid to give it its kinetic energy. And ρghQ is the power going to gravitational potential energy.
+
+Making Connections: Power
+
+Power is defined as the rate of energy transferred, or E/t. Fluid flow involves several types of power. Each type of power is identified with a specific type of energy being expended or changed in form.
+
+Calculating Power in a Moving Fluid
+
+Suppose the fire hose in the previous example is fed by a pump that receives water through a hose with a 6.40-cm diameter coming from a hydrant with a pressure of 0.700×106N/m2. What power does the pump supply to the water?
+Strategy
+
+Strategy
+
+Here we must consider energy forms as well as how they relate to fluid flow. Since the input and output hoses have the same diameters and are at the same height, the pump does not change the speed of the water nor its height, and so the water’s kinetic energy and gravitational potential energy are unchanged. That means the pump only supplies power to increase water pressure by 0.92×106N/m2 (from 0.700×106N/m2 to 1.62×106N/m2).
+Solution
+
+Solution
+
+As discussed above, the power associated with pressure is
+Discussion
+
+Discussion
+
+Such a substantial amount of power requires a large pump, such as is found on some fire trucks. (This kilowatt value converts to about 50 hp.) The pump in this example increases only the water’s pressure. If a pump—such as the heart—directly increases velocity and height as well as pressure, we would have to calculate all three terms to find the power it supplies.
+
+Test Prep for AP Courses
+
+A horizontally oriented pipe has a diameter of 5.6 cm and is filled with water. The pipe draws water from a reservoir that is initially at rest. A manually operated plunger provides a force of 440 N in the pipe. Assuming that the other end of the pipe is open to the air, with what speed does the water emerge from the pipe?
+
+12 m/s
+
+19 m/s
+
+150 m/s
+
+190 m/s
+
+(a)
+
+A 3.5-cm-diameter pipe contains a pumping mechanism that provides a force of 320 N to push water up into a tall building. Upon entering the piston mechanism, the water is flowing at a rate of 2.5 m/s. The water is then pumped to a level 21 m higher where the other end of the pipe is open to the air. With what speed does water leave the pipe?
+
+A large container of water is open to the air, and it develops a hole of area 10 cm2 at a point 5 m below the surface of the water. What is the flow rate (m3⁄s) of the water emerging from this hole?
+
+99 m3⁄s
+
+9.9 m3⁄s
+
+0.099 m3⁄s
+
+0.0099 m3⁄s
+
+(d)
+
+A pipe is tapered so that the large end has a diameter twice as large as the small end. What must be the gauge pressure (the difference between pressure at the large end and pressure at the small end) in order for water to emerge from the small end with a speed of 12 m/s if the small end is elevated 8 m above the large end of the pipe?
+
+Summary
+
+Power in fluid flow is given by the equation P1+12ρv2+ρghQ=power, where the first term is power associated with pressure, the second is power associated with velocity, and the third is power associated with height.
+
+Conceptual Questions
+
+Based on Bernoulli’s equation, what are three forms of energy in a fluid? (Note that these forms are conservative, unlike heat transfer and other dissipative forms not included in Bernoulli’s equation.)
+
+Water that has emerged from a hose into the atmosphere has a gauge pressure of zero. Why? When you put your hand in front of the emerging stream you feel a force, yet the water’s gauge pressure is zero. Explain where the force comes from in terms of energy.
+
+The old rubber boot shown in has two leaks. To what maximum height can the water squirt from Leak 1? How does the velocity of water emerging from Leak 2 differ from that of leak 1? Explain your responses in terms of energy.
+
+Water pressure inside a hose nozzle can be less than atmospheric pressure due to the Bernoulli effect. Explain in terms of energy how the water can emerge from the nozzle against the opposing atmospheric pressure.
+
+Problems & Exercises
+
+Hoover Dam on the Colorado River is the highest dam in the United States at 221 m, with an output of 1300 MW. The dam generates electricity with water taken from a depth of 150 m and an average flow rate of 650m3/s. (a) Calculate the power in this flow. (b) What is the ratio of this power to the facility’s average of 680 MW?
+
+(a)
+9.56×108W
+
+(b) 1.4
+
+A frequently quoted rule of thumb in aircraft design is that wings should produce about 1000 N of lift per square meter of wing. (The fact that a wing has a top and bottom surface does not double its area.) (a) At takeoff, an aircraft travels at 60.0 m/s, so that the air speed relative to the bottom of the wing is 60.0 m/s. Given the sea level density of air to be 1.29kg/m3, how fast must it move over the upper surface to create the ideal lift? (b) How fast must air move over the upper surface at a cruising speed of 245 m/s and at an altitude where air density is one-fourth that at sea level? (Note that this is not all of the aircraft’s lift—some comes from the body of the plane, some from engine thrust, and so on. Furthermore, Bernoulli’s principle gives an approximate answer because flow over the wing creates turbulence.)
+
+The left ventricle of a resting adult’s heart pumps blood at a flow rate of 83.0cm3/s, increasing its pressure by 110 mm Hg, its speed from zero to 30.0 cm/s, and its height by 5.00 cm. (All numbers are averaged over the entire heartbeat.) Calculate the total power output of the left ventricle. Note that most of the power is used to increase blood pressure.
+
+1.26 W
+
+A sump pump (used to drain water from the basement of houses built below the water table) is draining a flooded basement at the rate of 0.750 L/s, with an output pressure of 3.00×105N/m2. (a) The water enters a hose with a 3.00-cm inside diameter and rises 2.50 m above the pump. What is its pressure at this point? (b) The hose goes over the foundation wall, losing 0.500 m in height, and widens to 4.00 cm in diameter. What is the pressure now? You may neglect frictional losses in both parts of the problem.

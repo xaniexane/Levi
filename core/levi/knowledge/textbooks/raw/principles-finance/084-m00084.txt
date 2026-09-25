@@ -1,0 +1,125 @@
+# m00084
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+The R Statistical Analysis Tool
+
+The R Statistical Analysis Tool
+
+By the end of this section, you will be able to:
+
+Create a vector of data values for the R statistical analysis tool.
+
+Write basic statistical commands using the R statistical analysis tool.
+
+Commands and Vectors in R
+
+R is a statistical analysis tool that is widely used in the finance industry. It is available as a free program and provides an integrated suite of functions for data analysis, graphing, and statistical programming. R is increasingly being used as a data analysis and statistical tool as it is an open-source language and additional features are constantly being added by the user community. The tool can be used on many different computing platforms and can be downloaded at the R Project website.
+
+Using the R Statistical Tool
+
+There are many resources for learning and using the R statistical tool, including the following:
+How to install R on different computer operating systems
+Introduction to using R
+How to import and export data using R
+Frequently asked questions (FAQ) on using R
+
+Once you have installed and started R on your computer, at the bottom of the R console, you should see the symbol >, which indicates that R is ready to accept commands.
+
+R is a command-driven language, meaning that the user enters commands at the prompt, which R then executes one at a time. R can also execute a program containing multiple commands. There are ways to add a graphic user interface (GUI) to R. An example of a GUI tool for R is RStudio.
+
+The R command line can be used to perform any numeric calculation, similar to a handheld calculator. For example, to evaluate the expression 10+3·7, enter the following expression at the command line prompt and hit return:
+
+Most calculations in R are handled via functions. For statistical analysis, there are many preestablished functions in R to calculate mean, median, standard deviation, quartiles, and so on. Variables can be named and assigned values using the assignment operator <-. For example, the following R commands assign the value of 20 to the variable named x and assign the value of 30 to the variable named y:
+
+These variable names can be used in any calculation, such as multiplying x by y to produce the result 600:
+
+The typical method for using functions in statistical applications is to first create a vector of data values. There are several ways to create vectors in R. For example, the c function is often used to combine values into a vector. The following R command will generate a vector called salaries that contains the data values 40,000, 50,000, 75,000, and 92,000:
+
+This vector salaries can then be used in statistical functions such as mean, median, min, max, and so on, as shown:
+
+Another option for generating a vector in R is to use the seq function, which will automatically generate a sequence of numbers. For example, we can generate a sequence of numbers from 1 to 5, incremented by 0.5, and call this vector example1, as follows:
+
+If we then type the name of the vector and hit enter, R will provide a listing of numeric values for that vector name.
+
+Often, we are interested in generating a quick statistical summary of a data set in the form of its mean, median, quartiles, min, and max. The R command called summary provides these results.
+
+For measures of spread, R includes a command for standard deviation, called sd, and a command for variance, called var. The standard deviation and variance are calculated with the assumption that the data set was collected from a sample.
+
+To calculate a weighted mean in R, create two vectors, one of which contains the data values and the other of which contains the associated weights. Then enter the R command weighted.mean(values, weights).
+
+The following is an example of a weighted mean calculation in R:Assume your portfolio contains 1,000 shares of XYZ Corporation, purchased on three different dates, as shown in . Calculate the weighted mean of the purchase price, where the weights are based on the number of shares in the portfolio.
+
+Portfolio of XYZ Shares
+
+Date Purchased
+Purchase Price ($)
+Number of Shares Purchased
+January 17
+78
+200
+February 10
+122
+300
+March 23
+131
+1,000
+Here is how you would create two vectors in R: the price vector will contain the purchase price, and the shares vector will contain the number of shares. Then execute the R command weighted.mean(price, shares), as follows:
+
+A list of common R statistical commands appears in .
+
+List of Common R Statistical Commands
+
+R Command
+Result
+mean( )
+Calculates the arithmetic mean
+median( )
+Calculates the median
+min( )
+Calculates the minimum value
+max( )
+Calculates the maximum value
+weighted.mean( )
+Calculates the weighted mean
+sum( )
+Calculates the sum of values
+summary( )
+Calculates the mean, median, quartiles, min, and max
+sd( )
+Calculates the sample standard deviation
+var( )
+Calculates the sample variance
+IQR( )
+Calculates the interquartile range
+barplot( )
+Plots a bar chart of non-numeric data
+boxplot( )
+Plots a boxplot of numeric data
+hist( )
+Plots a histogram of numeric data
+plot( )
+Plots various graphs, including a scatter plot
+freq( )
+Creates a frequency distribution table
+Graphing in R
+
+There are many statistical applications in R, and many graphical representations are possible, such as bar graphs, histograms, time series plots, scatter plots, and others. The basic command to create a plot in R is the plot command, plot(x, y), where x is a vector containing the x-values of the data set and y is a vector containing the y-values of the data set.
+
+The general format of the command is as follows:
+
+For example, we are interested in creating a scatter plot to examine the correlation between the value of the S&P 500 and Nike stock prices. Assume we have the data shown in , collected over a one-year time period.
+
+Note that data can be read into R from a text file or Excel file or from the clipboard by using various R commands. Assume the values of the S&P 500 have been loaded into the vector SP500 and the values of Nike stock prices have been loaded into the vector Nike. Then, to generate the scatter plot, we can use the following R command:
+
+As a result of these commands, R provides the scatter plot shown in . This is the same data that was used to generate the scatter plot in in Excel.
+
+Scatter Plot Generated by R for Nike Stock Price versus S&P 500
+
+R is an open-source statistical analysis tool that is widely used in the finance industry. It provides an integrated suite of functions for data analysis, graphing, and statistical programming. R is increasingly being used as a data analysis and statistical tool as it is an open-source language, and additional features are constantly being added by the user community. This tool can be used on many different computing platforms and can be downloaded at The R Project for Statistical Computing.
+
+CFA Institute
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.

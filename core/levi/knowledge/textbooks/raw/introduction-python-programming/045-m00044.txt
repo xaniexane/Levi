@@ -1,0 +1,61 @@
+# m00044
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Defining functions
+
+Defining functions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify function calls in a program.
+
+Define a parameterless function that outputs strings.
+
+Describe benefits of using functions.
+
+Calling a function
+
+Throughout the book, functions have been called to perform tasks. Ex: print() prints values, and sqrt() calculates the square root. A function is a named, reusable block of code that performs a task when called.
+
+Example: Simple math program
+
+Identifying function calls
+
+Defining a function
+
+A function is defined using the def keyword. The first line contains def followed by the function name (in snake case), parentheses (with any parameters—discussed later), and a colon. The indented body begins with a documentation string describing the function's task and contains the function statements. A function must be defined before the function is called.
+
+Example: Welcome message function
+
+Defining functions
+
+Benefits of functions
+
+A function promotes modularity by putting code statements related to a single task in a separate group. The body of a function can be executed repeatedly with multiple function calls, so a function promotes reusability. Modular, reusable code is easier to modify and is shareable among programmers to avoid reinventing the wheel.
+
+Improving a program with a function
+
+Improving programs with functions
+
+Consider the code above.
+
+Cinema concession stand
+
+Write a function, concessions(), that prints the food and drink options at a cinema.
+
+Given:
+
+The output is:
+
+Terms and conditions prompt
+
+Write a function, terms(), that asks the user to accept the terms and conditions, reads in Y/N, and outputs a response. In the main program, read in the number of users and call terms() for each user.
+
+Given inputs 1 and "Y", the output is:
+
+Given inputs 2, "N", and "Y", the output is:

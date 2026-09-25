@@ -1,0 +1,511 @@
+# m53624
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Approximating Areas
+
+Approximating Areas
+
+Use sigma (summation) notation to calculate sums and powers of integers.
+
+Use the sum of rectangular areas to approximate the area under a curve.
+
+Use Riemann sums to approximate area.
+Archimedes was fascinated with calculating the areas of various shapes—in other words, the amount of space enclosed by the shape. He used a process that has come to be known as the method of exhaustion, which used smaller and smaller shapes, the areas of which could be calculated exactly, to fill an irregular region and thereby obtain closer and closer approximations to the total area. In this process, an area bounded by curves is filled with rectangles, triangles, and shapes with exact area formulas. These areas are then summed to approximate the area of the curved region.
+
+In this section, we develop techniques to approximate the area between a curve, defined by a function f(x), and the x-axis on a closed interval [a,b]. Like Archimedes, we first approximate the area under the curve using shapes of known area (namely, rectangles). By using smaller and smaller rectangles, we get closer and closer approximations to the area. Taking a limit allows us to calculate the exact area under the curve.
+
+Let’s start by introducing some notation to make the calculations easier. We then consider the case when f(x) is continuous and nonnegative. Later in the chapter, we relax some of these restrictions and develop techniques that apply in more general cases.
+
+Sigma (Summation) Notation
+
+As mentioned, we will use shapes of known area to approximate the area of an irregular region bounded by curves. This process often requires adding up long strings of numbers. To make it easier to write down these lengthy sums, we look at some new notation here, called sigma notation (also known as summation notation). The Greek capital letter Σ, sigma, is used to express long sums of values in a compact form. For example, if we want to add all the integers from 1 to 20 without sigma notation, we have to write
+
+We could probably skip writing a couple of terms and write
+
+which is better, but still cumbersome. With sigma notation, we write this sum as
+
+which is much more compact.
+
+Typically, sigma notation is presented in the form
+
+where ai describes the terms to be added, and the i is called the index. Each term is evaluated, then we sum all the values, beginning with the value when i=1 and ending with the value when i=n. For example, an expression like ∑i=27si is interpreted as s2+s3+s4+s5+s6+s7. Note that the index is used only to keep track of the terms to be added; it does not factor into the calculation of the sum itself. The index is therefore called a dummy variable. We can use any letter we like for the index. Typically, mathematicians use i, j, k, m, and n for indices.
+
+Let’s try a couple of examples of using sigma notation.
+
+Using Sigma Notation
+
+Write in sigma notation and evaluate the sum of terms 3i for i=1,2,3,4,5.
+
+Write the sum in sigma notation:
+1+14+19+116+125.
+
+Write
+∑i=153i=3+32+33+34+35=363.
+
+The denominator of each term is a perfect square. Using sigma notation, this sum can be written as ∑i=151i2.
+
+Write in sigma notation and evaluate the sum of terms 2i for i=3,4,5,6.
+∑i=362i=23+24+25+26=120
+
+Hint
+
+Use the solving steps in as a guide.
+
+The properties associated with the summation process are given in the following rule.
+
+Rule: Properties of Sigma Notation
+
+Let a1,a2,…,an and b1,b2,…,bn represent two sequences of terms and let c be a constant. The following properties hold for all positive integers n and for integers m, with 1≤m≤n.
+∑i=1nc=nc
+∑i=1ncai=c∑i=1nai
+∑i=1n(ai+bi)=∑i=1nai+∑i=1nbi
+∑i=1n(ai−bi)=∑i=1nai−∑i=1nbi
+∑i=1nai=∑i=1mai+∑i=m+1nai
+
+Proof
+
+We prove properties 2. and 3. here, and leave proof of the other properties to the Exercises.
+
+2. We have
+
+3. We have
+
+□
+
+A few more formulas for frequently found functions simplify the summation process further. These are shown in the next rule, for sums and powers of integers, and we use them in the next set of examples.
+
+Rule: Sums and Powers of Integers
+
+The sum of n integers is given by
+∑i=1ni=1+2+⋯+n=n(n+1)2.
+
+The sum of consecutive integers squared is given by
+∑i=1ni2=12+22+⋯+n2=n(n+1)(2n+1)6.
+
+The sum of consecutive integers cubed is given by
+∑i=1ni3=13+23+⋯+n3=n2(n+1)24.
+
+Evaluation Using Sigma Notation
+
+Write using sigma notation and evaluate:
+
+The sum of the terms (i−3)2 for i=1,2,…,200.
+
+The sum of the terms (i3−i2) for i=1,2,3,4,5,6.
+
+Multiplying out (i−3)2, we can break the expression into three terms.
+∑i=1200(i−3)2=∑i=1200(i2−6i+9)=∑i=1200i2−∑i=12006i+∑i=12009=∑i=1200i2−6∑i=1200i+∑i=12009=200(200+1)(400+1)6−6[200(200+1)2]+9(200)=2,686,700−120,600+1800=2,567,900
+
+Use sigma notation property iv. and the rules for the sum of squared terms and the sum of cubed terms.
+∑i=16(i3−i2)=∑i=16i3−∑i=16i2=62(6+1)24−6(6+1)(2(6)+1)6=17644−5466=350
+
+Find the sum of the values of 4+3i for i=1,2,…,100.
+
+15,550
+
+Hint
+
+Use the properties of sigma notation to solve the problem.
+
+Finding the Sum of the Function Values
+
+Find the sum of the values of f(x)=x3 over the integers 1,2,3,…,10.
+
+Using the formula, we have
+
+Evaluate the sum indicated by the notation ∑k=120(2k+1).
+
+440
+
+Hint
+
+Use the rule on sum and powers of integers.
+
+Approximating Area
+
+Now that we have the necessary notation, we return to the problem at hand: approximating the area under a curve. Let f(x) be a continuous, nonnegative function defined on the closed interval [a,b]. We want to approximate the area A bounded by f(x) above, the x-axis below, the line x=a on the left, and the line x=b on the right ().
+
+How do we approximate the area under this curve? The approach is a geometric one. By dividing a region into many small shapes that have known area formulas, we can sum these areas and obtain a reasonable estimate of the true area. We begin by dividing the interval [a,b] into n subintervals of equal width, b−an. We do this by selecting equally spaced points x0,x1,x2,…,xn with x0=a,xn=b, and
+
+for i=1,2,3,…,n.
+
+We denote the width of each subinterval with the notation Δx, so Δx=b−an and
+
+for i=1,2,3,…,n. This notion of dividing an interval [a,b] into subintervals by selecting points from within the interval is used quite often in approximating the area under a curve, so let’s define some relevant terminology.
+
+Definition
+
+A set of points P={xi} for i=0,1,2,…,n with a=x0<x1<x2<⋯<xn=b, which divides the interval [a,b] into subintervals of the form [x0,x1],[x1,x2],…,[xn−1,xn] is called a partition of [a,b]. If the subintervals all have the same width, the set of points forms a regular partition of the interval [a,b].
+
+We can use this regular partition as the basis of a method for estimating the area under the curve. We next examine two methods: the left-endpoint approximation and the right-endpoint approximation.
+
+Rule: Left-Endpoint Approximation
+
+On each subinterval [xi−1,xi] (for i=1,2,3,…,n), construct a rectangle with width Δx and height equal to f(xi−1), which is the function value at the left endpoint of the subinterval. Then the area of this rectangle is f(xi−1)Δx. Adding the areas of all these rectangles, we get an approximate value for A (). We use the notation Ln to denote that this is a left-endpoint approximation of A using n subintervals.
+
+The second method for approximating area under a curve is the right-endpoint approximation. It is almost the same as the left-endpoint approximation, but now the heights of the rectangles are determined by the function values at the right of each subinterval.
+
+Rule: Right-Endpoint Approximation
+
+Construct a rectangle on each subinterval [xi−1,xi], only this time the height of the rectangle is determined by the function value f(xi) at the right endpoint of the subinterval. Then, the area of each rectangle is f(xi)Δx and the approximation for A is given by
+
+The notation Rn indicates this is a right-endpoint approximation for A ().
+
+The graphs in represent the curve f(x)=x22. In graph (a) we divide the region represented by the interval [0,3] into six subintervals, each of width 0.5. Thus, Δx=0.5. We then form six rectangles by drawing vertical lines perpendicular to xi−1, the left endpoint of each subinterval. We determine the height of each rectangle by calculating f(xi−1) for i=1,2,3,4,5,6. The intervals are [0,0.5],[0.5,1],[1,1.5],[1.5,2],[2,2.5],[2.5,3]. We find the area of each rectangle by multiplying the height by the width. Then, the sum of the rectangular areas approximates the area between f(x) and the x-axis. When the left endpoints are used to calculate height, we have a left-endpoint approximation. Thus,
+
+In (b), we draw vertical lines perpendicular to xi such that xi is the right endpoint of each subinterval, and calculate f(xi) for i=1,2,3,4,5,6. We multiply each f(xi) by Δx to find the rectangular areas, and then add them. This is a right-endpoint approximation of the area under f(x). Thus,
+
+Approximating the Area Under a Curve
+
+Use both left-endpoint and right-endpoint approximations to approximate the area under the curve of f(x)=x2 on the interval [0,2]; use n=4.
+
+First, divide the interval [0,2] into n equal subintervals. Using n=4,Δx=(2−0)4=0.5. This is the width of each rectangle. The intervals [0,0.5],[0.5,1],[1,1.5],[1.5,2] are shown in . Using a left-endpoint approximation, the heights are f(0)=0,f(0.5)=0.25,f(1)=1,f(1.5)=2.25. Then,
+
+The right-endpoint approximation is shown in . The intervals are the same, Δx=0.5, but now use the right endpoint to calculate the height of the rectangles. We have
+
+The left-endpoint approximation is 1.75; the right-endpoint approximation is 3.75.
+
+Sketch left-endpoint and right-endpoint approximations for f(x)=1x on [1,2]; use n=4. Approximate the area using both methods.
+
+The left-endpoint approximation is 0.7595. The right-endpoint approximation is 0.6345. See the below .
+
+Hint
+
+Follow the solving strategy in step-by-step.
+
+Looking at and the graphs in , we can see that when we use a small number of intervals, neither the left-endpoint approximation nor the right-endpoint approximation is a particularly accurate estimate of the area under the curve. However, it seems logical that if we increase the number of points in our partition, our estimate of A will improve. We will have more rectangles, but each rectangle will be thinner, so we will be able to fit the rectangles to the curve more precisely.
+
+We can demonstrate the improved approximation obtained through smaller intervals with an example. Let’s explore the idea of increasing n, first in a left-endpoint approximation with four rectangles, then eight rectangles, and finally 32 rectangles. Then, let’s do the same thing in a right-endpoint approximation, using the same sets of intervals, of the same curved region. shows the area of the region under the curve f(x)=(x−1)3+4 on the interval [0,2] using a left-endpoint approximation where n=4. The width of each rectangle is
+
+The area is approximated by the summed areas of the rectangles, or
+shows the same curve divided into eight subintervals. Comparing the graph with four rectangles in with this graph with eight rectangles, we can see there appears to be less white space under the curve when n=8. This white space is area under the curve we are unable to include using our approximation. The area of the rectangles is
+
+The graph in shows the same function with 32 rectangles inscribed under the curve. There appears to be little white space left. The area occupied by the rectangles is
+
+We can carry out a similar process for the right-endpoint approximation method. A right-endpoint approximation of the same curve, using four rectangles (), yields an area
+
+Dividing the region over the interval [0,2] into eight rectangles results in Δx=2−08=0.25. The graph is shown in . The area is
+
+Last, the right-endpoint approximation with n=32 is close to the actual area (). The area is approximately
+
+Based on these figures and calculations, it appears we are on the right track; the rectangles appear to approximate the area under the curve better as n gets larger. Furthermore, as n increases, both the left-endpoint and right-endpoint approximations appear to approach an area of 8 square units. shows a numerical comparison of the left- and right-endpoint methods. The idea that the approximations of the area under the curve get better and better as n gets larger and larger is very important, and we now explore this idea in more detail.
+
+Converging Values of Left- and Right-Endpoint Approximations as n Increases
+
+Values of n
+Approximate Area Ln
+n=4
+7.5
+n=8
+7.75
+n=32
+7.94
+8.06
+Forming Riemann Sums
+
+So far we have been using rectangles to approximate the area under a curve. The heights of these rectangles have been determined by evaluating the function at either the right or left endpoints of the subinterval [xi−1,xi]. In reality, there is no reason to restrict evaluation of the function to one of these two points only. We could evaluate the function at any point xi* in the subinterval [xi−1,xi], and use f(xi*) as the height of our rectangle. This gives us an estimate for the area of the form
+
+A sum of this form is called a Riemann sum, named for the 19th-century mathematician Bernhard Riemann, who developed the idea.
+
+Definition
+
+Let f(x) be defined on a closed interval [a,b] and let P be a regular partition of [a,b]. Let Δx be the width of each subinterval [xi−1,xi] and for each i, let xi* be any point in [xi−1,xi]. A Riemann sum is defined for f(x) as
+
+Recall that with the left- and right-endpoint approximations, the estimates seem to get better and better as n get larger and larger. The same thing happens with Riemann sums. Riemann sums give better approximations for larger values of n. We are now ready to define the area under a curve in terms of Riemann sums.
+
+Definition
+
+Let f(x) be a continuous, nonnegative function on an interval [a,b], and let ∑i=1nf(xi*)Δx be a Riemann sum for f(x). Then, the area under the curve y=f(x) on [a,b] is given by
+
+See a graphical demonstration of the construction of a Riemann sum.
+
+Some subtleties here are worth discussing. First, note that taking the limit of a sum is a little different from taking the limit of a function f(x) as x goes to infinity. Limits of sums are discussed in detail in the chapter on Sequences and Series; however, for now we can assume that the computational techniques we used to compute limits of functions can also be used to calculate limits of sums.
+
+Second, we must consider what to do if the expression converges to different limits for different choices of {xi*}. Fortunately, this does not happen. Although the proof is beyond the scope of this text, it can be shown that if f(x) is continuous on the closed interval [a,b], then limn→∞∑i=1nf(xi*)Δx exists and is unique (in other words, it does not depend on the choice of {xi*}).
+
+We look at some examples shortly. But, before we do, let’s take a moment and talk about some specific choices for {xi*}. Although any choice for {xi*} gives us an estimate of the area under the curve, we don’t necessarily know whether that estimate is too high (overestimate) or too low (underestimate). If it is important to know whether our estimate is high or low, we can select our value for {xi*} to guarantee one result or the other.
+
+If we want an overestimate, for example, we can choose {xi*} such that for i=1,2,3,…,n,f(xi*)≥f(x) for all x∈[xi−1,xi]. In other words, we choose {xi*} so that for i=1,2,3,…,n,f(xi*) is the maximum function value on the interval [xi−1,xi]. If we select {xi*} in this way, then the Riemann sum ∑i=1nf(xi*)Δx is called an upper sum. Similarly, if we want an underestimate, we can choose {xi*} so that for i=1,2,3,…,n,f(xi*) is the minimum function value on the interval [xi−1,xi]. In this case, the associated Riemann sum is called a lower sum. Note that if f(x) is either increasing or decreasing throughout the interval [a,b], then the maximum and minimum values of the function occur at the endpoints of the subintervals, so the upper and lower sums are just the same as the left- and right-endpoint approximations.
+
+Finding Lower and Upper Sums
+
+Find a lower sum for f(x)=10−x2 on [1,2]; let n=4 subintervals.
+
+With n=4 over the interval [1,2],Δx=14. We can list the intervals as [1,1.25],[1.25,1.5],[1.5,1.75],[1.75,2]. Because the function is decreasing over the interval [1,2], shows that a lower sum is obtained by using the right endpoints.
+
+The Riemann sum is
+
+The area of 7.28 is a lower sum and an underestimate.
+
+Find an upper sum for f(x)=10−x2 on [1,2]; let n=4.
+
+Sketch the approximation.
+Upper sum=8.0313.
+
+Hint
+f(x) is decreasing on [1,2], so the maximum function values occur at the left endpoints of the subintervals.
+
+Finding Lower and Upper Sums for f(x)=sinx
+
+Find a lower sum for f(x)=sinx over the interval [a,b]=[0,π2]; let n=6.
+
+Let’s first look at the graph in to get a better idea of the area of interest.
+
+The intervals are [0,π12],[π12,π6],[π6,π4],[π4,π3],[π3,5π12], and [5π12,π2]. Note that f(x)=sinx is increasing on the interval [0,π2], so a left-endpoint approximation gives us the lower sum. A left-endpoint approximation is the Riemann sum ∑i=05sinxi(π12). We have
+
+Using the function f(x)=sinx over the interval [0,π2], find an upper sum; let n=6.
+A≈1.125
+
+Hint
+
+Follow the steps from .
+
+Key Concepts
+
+The use of sigma (summation) notation of the form ∑i=1nai is useful for expressing long sums of values in compact form.
+
+For a continuous function defined over an interval [a,b], the process of dividing the interval into n equal parts, extending a rectangle to the graph of the function, calculating the areas of the series of rectangles, and then summing the areas yields an approximation of the area of that region.
+
+The width of each rectangle is Δx=b−an.
+
+Riemann sums are expressions of the form ∑i=1nf(xi*)Δx, and can be used to estimate the area under the curve y=f(x). Left- and right-endpoint approximations are special kinds of Riemann sums where the values of {xi*} are chosen to be the left or right endpoints of the subintervals, respectively.
+
+Riemann sums allow for much flexibility in choosing the set of points {xi*} at which the function is evaluated, often with an eye to obtaining a lower sum or an upper sum.
+
+Key Equations
+A≈Rn=f(x1)Δx+f(x2)Δx+⋯+f(xn)Δx=∑i=1nf(xi)Δx
+State whether the given sums are equal or unequal.
+∑i=110i and ∑k=110k
+∑i=110i and ∑i=615(i−5)
+∑i=110i(i−1) and ∑j=09(j+1)j
+∑i=110i(i−1) and ∑k=110(k2−k)
+
+a. They are equal; both represent the sum of the first 10 whole numbers. b. They are equal; both represent the sum of the first 10 whole numbers. c. They are equal by substituting j=i−1. d. They are equal; the first sum factors the terms of the second.
+
+In the following exercises, use the rules for sums of powers of integers to compute the sums.
+∑i=510i
+∑i=510i2
+385−30=355
+
+Suppose that ∑i=1100ai=15 and ∑i=1100bi=−12. In the following exercises, compute the sums.
+∑i=1100(ai+bi)
+∑i=1100(ai−bi)
+15−(−12)=27
+∑i=1100(3ai−4bi)
+∑i=1100(5ai+4bi)
+5(15)+4(−12)=27
+
+In the following exercises, use summation properties and formulas to rewrite and evaluate the sums.
+∑k=120100(k2−5k+1)
+∑j=150(j2−2j)
+∑j=150j2−2∑j=150j=(50)(51)(101)6−2(50)(51)2=40,​375
+∑j=1120(j2−10j)
+∑k=125[(2k)2−100k]
+4∑k=125k2−100∑k=125k=4(25)(26)(51)6−50(25)(26)=−10,​400
+
+Let Ln denote the left-endpoint sum using n subintervals and let Rn denote the corresponding right-endpoint sum. In the following exercises, compute the indicated left and right sums for the given functions on the indicated interval.
+L4 for f(x)=1x−1 on [2,3]
+R4 for g(x)=cos(πx) on [0,1]
+R4=-0.25
+L6 for f(x)=1x(x−1) on [2,5]
+R6 for f(x)=1x(x−1) on [2,5]
+R6=0.372
+R4 for 1x2+1 on [−2,2]
+L4 for 1x2+1 on [−2,2]
+L4=2.20
+R8 for x2−2x+1 on [0,2]
+L8 for x2−2x+1 on [0,2]
+L8=0.6875
+
+Compute the left and right Riemann sums—L4 and R4, respectively—for f(x)=(2−|x|) on [−2,2]. Compute their average value and compare it with the area under the graph of f.
+
+Compute the left and right Riemann sums—L6 and R6, respectively—for f(x)=(3−|3−x|) on [0,6]. Compute their average value and compare it with the area under the graph of f.
+L6=9.000=R6. The graph of f is a triangle with area 9.
+
+Compute the left and right Riemann sums—L4 and R4, respectively—for f(x)=4−x2 on [−2,2] and compare their values.
+
+Compute the left and right Riemann sums—L6 and R6, respectively—for f(x)=9−(x−3)2 on [0,6] and compare their values.
+L6=13.12899=R6. They are equal.
+
+Express the following endpoint sums in sigma notation but do not evaluate them.
+L30 for f(x)=x2 on [1,2]
+L10 for f(x)=4−x2 on [−2,2]
+L10=410∑i=1104−(−2+4(i−1)10)2
+R20 for f(x)=sinx on [0,π]
+R100 for lnx on [1,e]
+R100=e−1100∑i=1100ln(1+(e−1)i100)
+
+In the following exercises, graph the function then use a calculator or a computer program to evaluate the following left and right endpoint sums. If the two agree, say "neither."
+[T] L100 and R100 for y=x2−x+3 on the interval [−1,1]
+[T] L100 and R100 for y=x2 on the interval [0,1]
+R100=0.33835,L100=0.32835. The plot shows that the left Riemann sum is an underestimate because the function is increasing. Similarly, the right Riemann sum is an overestimate. The area lies between the left and right Riemann sums. Ten rectangles are shown for visual clarity. This behavior persists for more rectangles.
+[T] L50 and R50 for y=x+1x2−1 on the interval [2,4]
+[T] L100 and R100 for y=x3 on the interval [−1,1]
+L100=3.980,R100=4.020,R100>L100. The left endpoint sum is an underestimate because the function is increasing. Similarly, a right endpoint approximation is an overestimate. The area lies between the left and right endpoint estimates.
+[T] L50 and R50 for y=tan(x) on the interval [0,π4]
+[T] L100 and R100 for y=e2x on the interval [−1,1]
+L100=3.555,R100=3.670 The plot shows that the left Riemann sum is an underestimate because the function is increasing. Ten rectangles are shown for visual clarity. This behavior persists for more rectangles.
+
+Let tj denote the time that it took Tejay van Garteren to ride the jth stage of the Tour de France in 2014. If there were a total of 21 stages, interpret ∑j=121tj.
+
+Let rj denote the total rainfall in Portland on the jth day of the year in 2009. Interpret ∑j=131rj.
+
+The sum represents the cumulative rainfall in January 2009.
+
+Let dj denote the hours of daylight and δj denote the increase in the hours of daylight from day j−1 to day j in Fargo, North Dakota, on the jth day of the year. Interpret d1+∑j=2365δj.
+
+To help get in shape, Joe gets a new pair of running shoes. If Joe runs 1 mi each day in week 1 and adds 110 mi to his daily routine each week, what is the total mileage on Joe’s shoes after 25 weeks?
+
+The total mileage is 7×∑i=125(1+(i−1)10)=7×25+710×12×25=385mi.
+
+The following table gives approximate values of the average annual atmospheric rate of increase in carbon dioxide (CO2) each decade since 1960, in parts per million (ppm). Estimate the total increase in atmospheric CO2 between 1964 and 2013.
+
+Average Annual Atmospheric CO2 Increase, 1964–2013
+
+Decade
+Ppm/y
+1964–1973
+1.07
+1974–1983
+1.34
+1984–1993
+1.40
+1994–2003
+1.87
+2004–2013
+2.07
+The following table gives the approximate increase in sea level in inches over 20 years starting in the given year. Estimate the net change in mean sea level from 1870 to 2010.
+
+Approximate 20-Year Sea Level Increases, 1870–1990
+
+Starting Year
+20-Year Change
+1870
+0.3
+1890
+1.5
+1910
+0.2
+1930
+2.8
+1950
+0.7
+1970
+1.1
+1990
+1.5
+Add the numbers to get 8.1-in. net increase.
+
+The following table gives the approximate increase in dollars in the average price of a gallon of gas per decade since 1950. If the average price of a gallon of gas in 2010 was $2.60, what was the average price of a gallon of gas in 1950?
+
+Approximate 10-Year Gas Price Increases, 1950–2000
+
+Starting Year
+10-Year Change
+1950
+0.03
+1960
+0.05
+1970
+0.86
+1980
+−0.03
+1990
+0.29
+2000
+1.12
+The following table gives the percent growth of the U.S. population beginning in July of the year indicated. If the U.S. population was 281,421,906 in July 2000, estimate the U.S. population in July 2010.
+
+Annual Percentage Growth of U.S. Population, 2000–2009
+
+Year
+% Change/Year
+2000
+1.12
+2001
+0.99
+2002
+0.93
+2003
+0.86
+2004
+0.93
+2005
+0.93
+2006
+0.97
+2007
+0.96
+2008
+0.95
+2009
+0.88
+(Hint: To obtain the population in July 2001, multiply the population in July 2000 by 1.0112 to get 284,573,831.)
+
+309,389,957
+
+In the following exercises, estimate the areas under the curves by computing the left Riemann sums, L8.
+L8=3+2+1+2+3+4+5+4=24
+L8=3+5+7+6+8+6+5+4=44
+[T] Use a computer algebra system to compute the Riemann sum, LN, for N=10,30,50 for f(x)=1−x2 on [−1,1].
+[T] Use a computer algebra system to compute the Riemann sum, LN, for N=10,30,50 for f(x)=11+x2 on [−1,1].
+L10≈1.7604,L30≈1.7625,L50≈1.76265
+[T] Use a computer algebra system to compute the Riemann sum, LN, for N=10,30,50 for f(x)=sin2x on [0,2π]. Compare these estimates with π.
+
+In the following exercises, use a calculator or a computer program to evaluate the endpoint sums RN and LN for N=1,10,100. How do these estimates compare with the exact answers, which you can find via geometry?
+[T] y=cos(πx) on the interval [0,1]
+R1=−1,L1=1,R10=−0.1,L10=0.1,L100=0.01, and R100=−0.1. By symmetry of the graph, the exact area is zero.
+[T] y=3x+2 on the interval [3,5]
+
+In the following exercises, use a calculator or a computer program to evaluate the endpoint sums RN and LN for N=1,10,100.
+[T] y=x4−5x2+4 on the interval [−2,2], which has an exact area of 3215
+R1=0,L1=0,R10=2.4499,L10=2.4499,R100=2.1365,L100=2.1365
+[T] y=lnx on the interval [1,2], which has an exact area of 2ln(2)−1
+
+Explain why, if f(a)≥0 and f is increasing on [a,b], that the left endpoint estimate is a lower bound for the area below the graph of f on [a,b].
+
+If [c,d] is a subinterval of [a,b] under one of the left-endpoint sum rectangles, then the area of the rectangle contributing to the left-endpoint estimate is f(c)(d−c). But, f(c)≤f(x) for c≤x≤d, so the area under the graph of f between c and d is f(c)(d−c) plus the area below the graph of f but above the horizontal line segment at height f(c), which is positive. As this is true for each left-endpoint sum interval, it follows that the left Riemann sum is less than or equal to the area below the graph of f on [a,b].
+
+Explain why, if f(b)≥0 and f is decreasing on [a,b], that the left endpoint estimate is an upper bound for the area below the graph of f on [a,b].
+
+Show that, in general, RN−LN=(b−a)×f(b)−f(a)N.
+LN=b−aN∑i=1Nf(a+(b−a)i−1N)=b−aN∑i=0N−1f(a+(b−a)iN) and RN=b−aN∑i=1Nf(a+(b−a)iN). The left sum has a term corresponding to i=0 and the right sum has a term corresponding to i=N. In RN−LN, any term corresponding to i=1,2,…,N−1 occurs once with a plus sign and once with a minus sign, so each such term cancels and one is left with RN−LN=b−aN(f(a+(b−a))NN)−(f(a)+(b−a)0N)=b−aN(f(b)−f(a)).
+
+Explain why, if f is increasing on [a,b], the error between either LN or RN and the area A below the graph of f is at most (b−a)f(b)−f(a)N.
+
+For each of the three graphs:
+
+Obtain a lower bound L(A) for the area enclosed by the curve by adding the areas of the squares enclosed completely by the curve.
+
+Obtain an upper bound U(A) for the area by adding to L(A) the areas B(A) of the squares enclosed partially by the curve.
+
+Graph 1: a. L(A)=0,B(A)=20; b. U(A)=20. Graph 2: a. L(A)=9; b. B(A)=11,U(A)=20. Graph 3: a. L(A)=11.0; b. B(A)=4.5,U(A)=15.5.
+
+In the previous exercise, explain why L(A) gets no smaller while U(A) gets no larger as the squares are subdivided into four boxes of equal area.
+
+A unit circle is made up of n wedges equivalent to the inner wedge in the figure. The base of the inner triangle is 1 unit and its height is 
+sin(
+ 2πn
+ ). The base of the outer triangle is 
+B=cos(
+ πn
+)+sin(
+ πn
+)tan(
+ πn
+) and the height is H=Bsin(
+ 2πn). Use this information to argue that the area of a unit circle is equal to π.
+
+Let A be the area of the unit circle. The circle encloses n congruent triangles each of area sin(2πn)2, so n2sin(2πn)≤A. Similarly, the circle is contained inside n congruent triangles each of area BH2=12cosπn+sinπntanπn2sin2πn, so A≤n2sin(2πn)(cos(πn)+sin(πn)tan(πn))2. As n→∞,n2sin(2πn)=sin(2πn)(2n)Α→π, so we conclude π≤A. Also, as n→∞,cos(πn)+sin(πn)tan(πn)→1, so we also have A≤π. By the squeeze theorem for limits, we conclude that A=π.
+
+an approximation of the area under a curve computed by using the left endpoint of each subinterval to calculate the height of the vertical sides of each rectangle
+a sum obtained by using the minimum value of f(x) on each subinterval
+a set of points that divides an interval into subintervals
+a partition in which the subintervals all have the same width
+an estimate of the area under the curve of the form A≈∑i=1nf(xi*)Δx
+the right-endpoint approximation is an approximation of the area of the rectangles under a curve using the right endpoint of each subinterval to construct the vertical sides of each rectangle
+(also, summation notation) the Greek letter sigma (Σ) indicates addition of the values; the values of the index above and below the sigma indicate where to begin the summation and where to end it
+a sum obtained by using the maximum value of f(x) on each subinterval

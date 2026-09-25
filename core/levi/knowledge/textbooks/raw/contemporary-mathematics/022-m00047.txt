@@ -1,0 +1,178 @@
+# m00047
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Clock Arithmetic
+
+Clock Arithmetic
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Add, subtract, and multiply using clock arithmetic.
+
+Apply clock arithmetic to calculate real-world applications.
+
+Online shopping requires you to enter your credit card number, which is then sent electronically to the vendor. Using an ATM involves sliding your bank card into a reader, which then reads, sends, and verifies your card. Swiping or tapping for a purchase in a brick–and-mortar store is how your card sends its information to the machine, which is then communicated to the store’s computer and your credit card company. This information is read, recorded, and transferred many times. Each instance provides one more opportunity for error to creep into the process, a misrecorded digit, transposed digits, or missing digits. Fortunately, these card numbers have a built-in error checking system that relies on modular arithmetic, which is often referred to as clock arithmetic. In this section, we explore clock, or modular, arithmetic.
+Determining the Day of the Week for Any Date in History
+
+Adding, Subtracting, and Multiplying Using Clock Arithmetic
+
+When we do arithmetic, numbers can become larger and larger. But when we work with time, specifically with clocks, the numbers cycle back on themselves. It will never be 49 o’clock. Once 12 o’clock is reached, we go back to 1 and repeat the numbers. If it's 11 AM and someone says, “See you in four hours,” you know that 11 AM plus 4 hours is 3 PM, not 15 AM (ignoring military time for now). Math worked on the clock, where numbers restart after passing 12, is called clock arithmetic.
+
+Clock arithmetic hinges on the number 12. Each cycle of 12 hours returns to the original time (). Imagine going around the clock one full time. Twelve hours pass, but the time is the same. So, if it is 3:00, 14 hours later and two hours later both read the same on the clock, 5:00. Adding 14 hours and adding 2 hours are identical. As is adding 26 hours. And adding 38 hours.
+
+What do 2, 14, 26, and 38 have in common in relation to 12? When they are divided by 12, they each have a remainder of 2. That's the key. When you add a number of hours to a specific time on the clock, first divide the number of hours being added by 12 and determine the remainder. Add that remainder to the time on the clock to know what time it will be.
+
+A good visualization is to wrap a number line around the clock, with the 0 at the starting time. Then each time 12 on the number line passes, the number line passes the starting spot on the clock. This is referred to as modulo 12 arithmetic. Even though the process says to divide the number being added by 12, first perform the addition; the result will be the same if you add the numbers first, and then divide by 12 and determine the remainder.
+
+In general terms, let n be a positive integer. Then n modulo 12, written (n mod 12), is the remainder when n is divided by 12. If that remainder is x, we would write n=x (mod 12).
+Caution: 12 mod 12 is 0. So, if a mod 12 problem ends at 0, that would be 12 on the clock.
+
+Determining the Value of a Number modulo 12
+
+Find the value of the following numbers modulo 12:
+
+34
+
+539
+
+156
+
+To determine the value of a number modulo 12, divide the number by 12 and record the remainder.
+
+To find the value 34 modulo 12:
+ Step 1: Determine the remainder when 34 is divided by 12 using long division. The largest multiple of 12 that is less than or equal to 34 is 24, which is the product of 12 and 2.
+ 1234224_
+ Step 2: Performing the subtraction yields 10.
+ 1234224_10
+ Since that subtraction resulted in a number less than 12, that is the remainder, 10. The value of 34 modulo 12 is 10, or 34 = 10 (mod 12).
+Step 1: Determine the remainder when 34 is divided by 12 using long division. The largest multiple of 12 that is less than or equal to 34 is 24, which is the product of 12 and 2.
+ 1234224_
+Step 2: Performing the subtraction yields 10.
+ 1234224_10
+
+Since that subtraction resulted in a number less than 12, that is the remainder, 10. The value of 34 modulo 12 is 10, or 34 = 10 (mod 12).
+
+To find the value 539 modulo 12:
+ Step 1: Determine the remainder when 539 is divided by 12 using long division. We first look to the first two digits of 539, 53. The largest multiple of 12 that is less than or equal to 53 is 48, which is the product of 12 and 4.
+ 12539448_
+ Step 2: Performing the subtraction results in 5.
+ 12539448_5
+ Step 3: Now, the 9 is brought down.
+ 12539448_59
+ Step 4: The largest multiple of 12 that is less than or equal to 59 is once more 48 itself, which is 12×4.
+ 125394448_5948_
+ Step 5: Finishing the process, the 48 is subtracted from the 59, yielding 11.
+ 125394448_5948_11
+ We've used all the digits of 539, and the last subtraction resulted in a number less than 12, so that number, 11, is the remainder. The value of 539 modulo 12 is 11, or, 539 = 11 (mod 12).
+Step 1: Determine the remainder when 539 is divided by 12 using long division. We first look to the first two digits of 539, 53. The largest multiple of 12 that is less than or equal to 53 is 48, which is the product of 12 and 4.
+ 12539448_
+Step 2: Performing the subtraction results in 5.
+ 12539448_5
+Step 3: Now, the 9 is brought down.
+ 12539448_59
+Step 4: The largest multiple of 12 that is less than or equal to 59 is once more 48 itself, which is 12×4.
+ 125394448_5948_
+Step 5: Finishing the process, the 48 is subtracted from the 59, yielding 11.
+ 125394448_5948_11
+
+We've used all the digits of 539, and the last subtraction resulted in a number less than 12, so that number, 11, is the remainder. The value of 539 modulo 12 is 11, or, 539 = 11 (mod 12).
+
+To find the value 156 modulo 12:
+ Step 1: Determine the remainder when 156 is divided by 12 using long division. We first look to the first two digits of 156, 15. The largest multiple of 12 that is less than or equal to 15 is 12 itself, which is the product of 12 and 1.
+ 12156112_
+ Step 2: Performing the subtraction results in 3.
+ 12156112_3
+ Step 3: Now, the 6 is brought down.
+ 12156112_36
+ Step 4: The largest multiple of 12 that is less than or equal to 36 is 36 itself, which is 12×3.
+ 121561312_3636_
+ Step 5: Finishing the process, the 36 is subtracted from the 36, yielding 0.
+ 121561312_3636_0
+Step 1: Determine the remainder when 156 is divided by 12 using long division. We first look to the first two digits of 156, 15. The largest multiple of 12 that is less than or equal to 15 is 12 itself, which is the product of 12 and 1.
+ 12156112_
+Step 2: Performing the subtraction results in 3.
+ 12156112_3
+Step 3: Now, the 6 is brought down.
+ 12156112_36
+Step 4: The largest multiple of 12 that is less than or equal to 36 is 36 itself, which is 12×3.
+ 121561312_3636_
+Step 5: Finishing the process, the 36 is subtracted from the 36, yielding 0.
+ 121561312_3636_0
+
+We've used all the digits of 156, and the last subtraction resulted in a number less than 12, so that number, 0, is the remainder. The value of 156 modulo 12 is 0, or, 156 = 0 (mod 12).
+
+We should note here that, had we been speaking of time, the 0 would be interpreted as 12:00.
+
+Using Desmos to Determine the Value of a Number module 12
+
+Desmos may be used to determine the value of a number modulo 12. It is flexible enough to find the value of a number modulo of any other integer you want. To determine the value of n modulo 12, type mod(n,12) into Desmos. The result will be displayed immediately. This can be used to find 539 modulo 12, as shown in the .
+
+Clock arithmetic is modulo 12 arithmetic but applied to time. As time is divided into 12 hours that repeat a cycle, we use modulo 12 for clock arithmetic.
+Clock Arithmetic
+
+Adding with Clock Arithmetic
+
+If it's 3:00, what time will it be in 89 hours?
+
+To find that future time, we may determine the value of 89 (mod 12), either by long division or by using a calculator, such as Desmos. Then add the result to 3:00. Entering mod(89,12) in Desmos results in 5. Adding 5 hours, which was 89 (mod12), to 3:00 results in 8:00.
+
+Subtracting time on the clock works in much the same way as addition. Find the value of the number of hours being subtracted modulo 12, then subtract that from the original time.
+
+Subtracting with Clock Arithmetic
+
+If it is 4:00 now, what time was it 67 hours ago?
+
+To find that past time, we may determine the value of 67 (mod 12), either by long division or by using a calculator, such as Desmos. Then subtract the result to 4:00. Entering mod(67,12) in Desmos results in 7. Subtracting 7 hours from 4:00 results in ‒3:00. We know, though, that time is not represented with negative times. This value, ‒3:00, indicates three hours before 12:00, which is 9:00. So, 67 hours before 4:00 was 9:00. We see this in the .
+
+Recall that clock arithmetic was referred to as modulo 12 arithmetic. Multiplying in modulo 12 also relies on the remainder when dividing by 12. To multiply modulo 12 is just to multiply the two numbers, and then determine the remainder when divided by 12.
+
+Multiplying modulo 12
+
+What is the product of 11 and 45 modulo 12?
+
+We begin by multiplying 11 and 45, which is 495. Next, we find 495 modulo 12, either by dividing the result by 12 to determine the remainder, or by using a calculator. Entering mod(495,12) in Desmos yields 3. Had long division been used, the remainder would be 3. So 11×45=3 modulo 12.
+
+Calculating Real-World Applications with Clock Arithmetic
+
+Applying Clock Arithmetic
+
+Suppose it is 3:00, and you decide to check your email every 5 hours. What time will it be when you check your email the ninth time?
+
+If you check your email every 5 hours nine times, that ninth check will occur 45 hours after 3:00, which is an addition of 45 hours to 3:00. So, we find 45 modulo 12, which is 9. Nine hours after 3:00 is 12:00. It will be 12:00 when you check your email the ninth time.
+
+Clock arithmetic processes can be applied to days of the week. Every 7 days the day of the week repeats, much like every 12 hours the time on the clock repeats. The only difference will be that we work with remainders after dividing by 7. In technical terms, this is referred to as modulo 7. More generally, let n be a positive integer. Then n modulo 7, written n mod 7, is the remainder when n is divided by 7. If that value is x, we may write n=x (mod 7).
+
+Applying Clock Arithmetic to Days of the Week
+
+Your family has a cat, and no one wants to empty the litter box. However, it has to be done daily. The six of you agree to take turns, so everyone has to empty the litter box every 6 days. You empty the box on a Thursday. What day will you empty the box for the 10th time?
+
+The first time you emptied the litter box was on a Thursday. So,the 10th time you empty the litter box will be 9 times later (you've already had your first turn, so 9 turns left!). This will happen 54 (9 times 6) days later. Finding the value of 54 modulo 7, using division to determine the remainder or using a calculator to find the value of 54 modulo 7 gives the answer 5. Five days after a Thursday is Tuesday.
+
+Check Your Understanding
+
+Key Terms
+
+clock arithmetic
+
+modulo 7
+
+modulo 12
+
+Key Concepts
+
+Clock arithmetic uses the idea that after 12 o’clock comes 1 o’clock. For clock arithmetic, this means that every time 12 is passed in an arithmetic process, the next number is 1, not 13.
+
+To determine the clock result of an arithmetic operation, divide the final result by 12 and keep the remainder. If the remainder is 0, then the time is 12 o’clock.
+
+Clock arithmetic is technically called modulo 12 arithmetic. To perform modulo 12 arithmetic, calculate the expression, then divide the result by 12. The modulo 12 result is the remainder.
+
+Days, in our system, pass in groups of seven. To calculate in day arithmetic, modulo 7 is used. To perform modulo 7 arithmetic, calculate the expression, then divide the result by 7. The modulo 7 result is the remainder.
+
+Videos
+Determining the Day of the Week for Any Date in History
+Clock Arithmetic

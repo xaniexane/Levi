@@ -1,0 +1,123 @@
+# m00115
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Summary
+
+Summary
+
+Highlights from this chapter include:
+
+Data science is a multidisciplinary field that combines collection, processing, and analysis of large volumes of data to extract insights and drive informed decision-making.
+
+The data science life cycle is the framework followed by data scientists to complete a data science project.
+
+The data science life cycle includes 1) data acquisition, 2) data exploration, 3) data analysis, and 4) reporting.
+
+Google Colaboratory is a cloud-based Jupyter Notebook environment that allows programmers to write, run, and share Python code online.
+
+NumPy (Numerical Python) is a Python library that provides support for efficient numerical operations on large, multi-dimensional arrays and serves as a fundamental building block for data analysis in Python.
+
+NumPy implements an ndarray object that allows the creation of multi-dimensional arrays of homogeneous data types and efficient data processing.
+
+NumPy provides functionalities for mathematical operations, array manipulation, and linear algebra operations.
+
+Pandas is an open-source Python library used for data cleaning, processing, and analysis.
+
+Pandas provides Series and DataFrame data structures, data processing functionality, and integration with other libraries.
+
+Exploratory Data Analysis (EDA) is the task of analyzing data to gain insights, identify patterns, and understand the underlying structure of the data.
+
+A feature is an individual variable or attribute that is calculated from raw data in a dataset.
+
+Data indexing can be used to select and access specific rows and columns.
+
+Data slicing refers to selecting a subset of rows and/or columns from a DataFrame.
+
+Data filtering involves selecting rows or columns based on certain conditions.
+
+Missing values in a dataset can occur when data are not available or were not recorded properly.
+
+Data visualization has a crucial role in data science for understanding the data.
+
+Different types of visualizations include bar plot, line plot, scatter plot, histogram plot, and box plot.
+
+Several Python data visualization libraries exist that offer a range of capabilities and features to create different plot types. These libraries include Matplotlib, Seaborn, and Plotly.
+
+The conventional aliases for importing NumPy, Pandas, and Matplotlib.pyplot are np, pd, and plt, respectively.
+
+At this point, you should be able to write programs to create data structures to store different datasets and explore and visualize datasets.
+
+Chapter 15 reference.
+
+Function
+np.array()
+Creates an ndarray from a list or tuple.
+Creates an ndarray from a list or tuple.
+np.zeros()
+
+np.ones()
+
+np.random.rand(n, m)
+Creates an array of random numbers with n rows and m columns
+Creates an array of random numbers with n rows and m columns
+np.genfromtxt('data.csv', delimiter=',')
+
+pd.DataFrame()
+Creates a DataFrame from a list, dictionary, or an array.
+Creates a DataFrame from a list, dictionary, or an array.
+pd.read_csv()
+Creates a DataFrame from a CSV file.
+Creates a DataFrame from a CSV file.
+df.head()
+Returns the first few rows of a DataFrame.
+Returns the first few rows of a DataFrame.
+df.tail()
+Returns the last few rows of a DataFrame.
+Returns the last few rows of a DataFrame.
+df.info()
+
+df.describe()
+
+df.value_counts()
+
+df.unique()
+
+loc[]
+
+iloc[]
+
+df[condition]
+Selects only the rows that meet the given condition.
+Selects only the rows that meet the given condition.
+df.loc[start_row:end_row, start_column:end_column]
+
+df.loc[[label1, label2, ...], :]
+Slices rows that are in the list [label1, label2, ...].
+Slices rows that are in the list [label1, label2, ...].
+df.isnull()
+Returns a Boolean array with Boolean values representing whether each entry has been Null.
+Returns a Boolean array with Boolean values representing whether each entry has been Null.
+fillna()
+Replaces Null values.
+Replaces Null values.
+dropna()
+Removes all rows containing a Null value.
+Removes all rows containing a Null value.
+plt.bar(x, height)
+Takes in two inputs, x and height, and plots bars for each x value with the height given in the height variable.
+Takes in two inputs, x and height, and plots bars for each x value with the height given in the height variable.
+plt.plot(x, y)
+Takes in two inputs, x and y, and plots lines connecting pairs of (x, y) values.
+Takes in two inputs, x and y, and plots lines connecting pairs of (x, y) values.
+plt.scatter(x, y)
+Takes in two inputs, x and y, and plots points representing (x, y) pairs.
+Takes in two inputs, x and y, and plots points representing (x, y) pairs.
+plt.hist(x)
+Takes in one input, x, and plots a histogram of values in x to show distribution or trend.
+Takes in one input, x, and plots a histogram of values in x to show distribution or trend.
+plt.boxplot(x)
+Takes in one input, x, and represents minimum, maximum, first, second, and third quartiles, as well as outliers in x.
+Takes in one input, x, and represents minimum, maximum, first, second, and third quartiles, as well as outliers in x.

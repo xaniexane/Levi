@@ -1,0 +1,156 @@
+{"content": "Self-attention: each position forms a query, scores it against all keys with a dot product, softmaxes the scores, and mixes the values by those weights.", "tags": ["ml", "transformers", "attention"], "importance": 0.95}
+{"content": "Scaled dot-product attention divides scores by sqrt(d_k) because unscaled dot products grow with dimension and saturate the softmax, killing gradients.", "tags": ["ml", "transformers", "attention"], "importance": 0.9}
+{"content": "Attention is permutation-invariant without position information; order must be injected via positional encodings, RoPE, or biases.", "tags": ["ml", "transformers", "attention"], "importance": 0.85}
+{"content": "Multi-head attention splits d_model into h heads of dimension d_model/h, each learning a different similarity metric, then concatenates and reprojects.", "tags": ["ml", "transformers", "attention"], "importance": 0.9}
+{"content": "Causal masking adds negative infinity to the upper triangle of the score matrix so position t can only attend to positions <= t.", "tags": ["ml", "transformers", "training"], "importance": 0.9}
+{"content": "A missing or inverted causal mask lets the model peek at the future: train loss looks amazing, generation is garbage.", "tags": ["ml", "transformers", "gotcha"], "importance": 0.85}
+{"content": "The modern transformer block is pre-norm: x = x + Attention(Norm(x)), then x = x + FFN(Norm(x)).", "tags": ["ml", "transformers", "architecture"], "importance": 0.9}
+{"content": "Pre-norm stabilizes deep stacks; post-norm (norm after the residual add) becomes unstable as layers grow.", "tags": ["ml", "transformers", "architecture"], "importance": 0.8}
+{"content": "Residual connections y = x + F(x) give gradients a direct identity path, which is why 100+ layer networks train at all.", "tags": ["ml", "transformers", "architecture"], "importance": 0.9}
+{"content": "Cross-attention takes queries from the decoder and keys/values from the encoder (or retrieved passages); no causal mask on the source side.", "tags": ["ml", "transformers", "attention"], "importance": 0.8}
+{"content": "RoPE rotates each query/key 2D chunk by an angle proportional to its position, so attention scores depend on relative distance automatically.", "tags": ["ml", "transformers", "position"], "importance": 0.9}
+{"content": "RoPE is applied to queries and keys only, never to values; head dimension must be even.", "tags": ["ml", "transformers", "position"], "importance": 0.85}
+{"content": "Sinusoidal positional encodings use sin/cos waves at geometrically spaced frequencies; PE(pos+k) is a linear function of PE(pos).", "tags": ["ml", "transformers", "position"], "importance": 0.75}
+{"content": "ALiBi adds a fixed per-head linear penalty proportional to distance, which extrapolates to longer contexts better than unscaled RoPE.", "tags": ["ml", "transformers", "position"], "importance": 0.75}
+{"content": "T5-style relative position bias adds a learned per-distance-bucket term directly to attention scores.", "tags": ["ml", "transformers", "position"], "importance": 0.7}
+{"content": "FlashAttention never materializes the n x n score matrix: it tiles through SRAM with an online softmax, giving exact attention in O(n) memory.", "tags": ["ml", "transformers", "efficiency"], "importance": 0.85}
+{"content": "The KV cache stores past keys and values so each generation step only computes one new query; memory cost is 2 * layers * heads * head_dim * seq_len * bytes.", "tags": ["ml", "transformers", "inference"], "importance": 0.9}
+{"content": "LayerNorm normalizes across the feature dimension per token: y = gain * (x - mean)/sqrt(var + eps) + bias; it works with batch size 1.", "tags": ["ml", "transformers", "normalization"], "importance": 0.85}
+{"content": "RMSNorm drops mean-centering: y = gain * x / sqrt(mean(x^2) + eps); cheaper than LayerNorm and the modern default.", "tags": ["ml", "transformers", "normalization"], "importance": 0.85}
+{"content": "The transformer FFN holds roughly two-thirds of a block's parameters; attention moves information between positions, the FFN transforms within each position.", "tags": ["ml", "transformers", "architecture"], "importance": 0.8}
+{"content": "SwiGLU FFN: (Swish(xW1) * xW3)W2 with hidden size 8/3 * d_model; the gate gives multiplicative feature control and beats plain ReLU MLPs.", "tags": ["ml", "transformers", "architecture"], "importance": 0.8}
+{"content": "Tied embeddings share one matrix between input lookup and output projection, saving vocab*d parameters; standard for decoder LMs.", "tags": ["ml", "transformers", "efficiency"], "importance": 0.8}
+{"content": "Mixture of Experts routes each token to 1-2 of many expert FFNs, scaling parameters without scaling FLOPs; without a load-balancing loss the router collapses.", "tags": ["ml", "transformers", "architecture"], "importance": 0.75}
+{"content": "Encoder-only models (bidirectional, masked-LM) suit understanding tasks; decoder-only (causal, next-token) suits generation; encoder-decoder suits conditioned seq2seq.", "tags": ["ml", "transformers", "architecture"], "importance": 0.8}
+{"content": "Attention maps are not explanations: a high weight means information flowed there, not that the model decided anything.", "tags": ["ml", "transformers", "interpretability"], "importance": 0.7}
+{"content": "Softmax attention weights always sum to 1, so the model cannot output 'nothing' for irrelevant context; masking removes positions entirely.", "tags": ["ml", "transformers", "attention"], "importance": 0.75}
+{"content": "Attention complexity is O(n^2 * d) time and O(n^2) memory for the score matrix without tiling.", "tags": ["ml", "transformers", "efficiency"], "importance": 0.8}
+{"content": "Not every attention head is useful; pruning studies routinely find dead or redundant heads.", "tags": ["ml", "transformers", "attention"], "importance": 0.65}
+{"content": "In fp16, use a large negative constant like -1e4 (not -inf) for masked attention scores to avoid NaN in some softmax implementations.", "tags": ["ml", "transformers", "gotcha"], "importance": 0.7}
+{"content": "Teacher forcing trains on ground-truth prefixes for parallelism; the train/inference mismatch it creates is called exposure bias.", "tags": ["ml", "training", "transformers"], "importance": 0.85}
+{"content": "Temperature T scales softmax sharpness: T->0 is greedy, T=1 samples raw, T>1 flattens; 0.7 is a common default.", "tags": ["ml", "inference", "sampling"], "importance": 0.8}
+{"content": "Top-p (nucleus) sampling keeps the smallest token set with cumulative probability >= p, adapting the candidate count to distribution sharpness.", "tags": ["ml", "inference", "sampling"], "importance": 0.8}
+{"content": "Always report sampling settings alongside generation evals; greedy for determinism, fixed seeds for reproducibility.", "tags": ["ml", "inference", "evaluation"], "importance": 0.7}
+{"content": "BPE learns merges by repeatedly combining the most frequent adjacent pair, starting from 256 byte tokens; encoding applies merges greedily in learned order.", "tags": ["ml", "tokenization"], "importance": 0.9}
+{"content": "Byte-fallback BPE can represent any input with no UNK token, since every string decomposes to bytes.", "tags": ["ml", "tokenization"], "importance": 0.8}
+{"content": "WordPiece merges the pair that most increases data likelihood (not raw frequency) and encodes with longest-match; Unigram prunes by likelihood and segments with Viterbi search.", "tags": ["ml", "tokenization"], "importance": 0.75}
+{"content": "Never swap tokenizers on a trained model: token ids map to different strings and everything breaks silently.", "tags": ["ml", "tokenization", "gotcha"], "importance": 0.9}
+{"content": "Tokenizer fertility (tokens per word) measures compression; a bad tokenizer on your domain wastes context and compute.", "tags": ["ml", "tokenization"], "importance": 0.75}
+{"content": "Character-level tokenization needs no training and has no OOV, but sequences run ~4x longer than BPE for the same text.", "tags": ["ml", "tokenization"], "importance": 0.75}
+{"content": "EOS must appear in training targets or the model never learns when to stop generating.", "tags": ["ml", "tokenization", "gotcha"], "importance": 0.85}
+{"content": "PAD tokens must be masked out of the loss; training a model to predict padding teaches it to emit padding.", "tags": ["ml", "tokenization", "gotcha"], "importance": 0.9}
+{"content": "Vocab size trades embedding parameters (vocab*d) against sequence length; size it with the model, e.g. 8k for ~14M params, 32k+ for 7B class.", "tags": ["ml", "tokenization"], "importance": 0.8}
+{"content": "Round-trip property to assert: decode(encode(s)) == s; watch leading spaces, normalization, byte fallback, and literal special-token strings.", "tags": ["ml", "tokenization", "gotcha"], "importance": 0.75}
+{"content": "Pre-tokenization regex (how text splits before BPE) is part of tokenizer behavior; two BPE tokenizers with different pre-splitting disagree.", "tags": ["ml", "tokenization"], "importance": 0.7}
+{"content": "A tokenizer trained on English-heavy data explodes fertility on other languages; match tokenizer training data to the model's target distribution.", "tags": ["ml", "tokenization"], "importance": 0.75}
+{"content": "Word embeddings encode the distributional hypothesis: words in similar contexts get similar vectors; geometry reflects co-occurrence, not definitions.", "tags": ["ml", "embeddings"], "importance": 0.8}
+{"content": "Antonyms often sit near each other in embedding space because they share contexts; distributional similarity is not semantic equivalence.", "tags": ["ml", "embeddings", "gotcha"], "importance": 0.7}
+{"content": "Embedding lookup is O(1) per token; its cost is memory (vocab*d) and its gradients are sparse per batch, so rare tokens train slowly.", "tags": ["ml", "embeddings"], "importance": 0.75}
+{"content": "Vector analogies (king - man + woman ~= queen) show relations can be linear in embedding space; they measure the corpus as much as the model and encode its biases.", "tags": ["ml", "embeddings"], "importance": 0.7}
+{"content": "Cross-entropy loss for language modeling is L = -mean(log p(true token)) over non-pad tokens; it is the maximum-likelihood objective for next-token prediction.", "tags": ["ml", "training", "loss"], "importance": 0.95}
+{"content": "Implement cross-entropy via log_softmax (log-sum-exp), never softmax-then-log; the naive form overflows.", "tags": ["ml", "training", "numerics"], "importance": 0.85}
+{"content": "Gradient descent: theta = theta - lr * grad; the learning rate dominates all other hyperparameters in effect.", "tags": ["ml", "training", "optimization"], "importance": 0.9}
+{"content": "Minibatch SGD trades exact gradients for speed; the noise helps escape sharp minima, and shuffling every epoch is mandatory.", "tags": ["ml", "training", "optimization"], "importance": 0.85}
+{"content": "Report LM batch size in tokens, not sequences, for comparability across setups.", "tags": ["ml", "training"], "importance": 0.65}
+{"content": "Momentum keeps a velocity v = mu*v + grad with mu ~ 0.9, damping oscillation and amplifying steady directions ~10x.", "tags": ["ml", "training", "optimization"], "importance": 0.8}
+{"content": "Adam tracks per-parameter first moment m and second moment v, with bias correction m/(1-b1^t), v/(1-b2^t); defaults b1=0.9, b2=0.999, eps=1e-8.", "tags": ["ml", "training", "optimization"], "importance": 0.9}
+{"content": "Adam's per-parameter adaptivity is why it trains transformers where SGD struggles: attention and embedding gradients span orders of magnitude.", "tags": ["ml", "training", "optimization"], "importance": 0.85}
+{"content": "AdamW applies weight decay outside the adaptive denominator: theta -= lr*(update + wd*theta); plain Adam+L2 regularizes backwards.", "tags": ["ml", "training", "optimization"], "importance": 0.9}
+{"content": "Exclude biases, normalization gains (and often embeddings) from weight decay; typical wd is 0.01-0.1 for transformers.", "tags": ["ml", "training", "optimization"], "importance": 0.8}
+{"content": "Backprop is the chain rule evaluated once per parameter via the computation graph: one forward pass to record, one backward pass for all gradients.", "tags": ["ml", "training"], "importance": 0.85}
+{"content": "Always zero_grad() before backward(); gradients accumulate into .grad and forgetting silently sums across batches.", "tags": ["ml", "training", "gotcha"], "importance": 0.85}
+{"content": "Warmup ramps LR linearly from 0 over ~1-5% of steps; skipping it is the most common cause of divergence in the first few hundred steps.", "tags": ["ml", "training", "optimization"], "importance": 0.9}
+{"content": "Cosine decay (max LR to min over the run) is the modern default schedule; set its horizon to the actual planned step count.", "tags": ["ml", "training", "optimization"], "importance": 0.85}
+{"content": "If loss diverges right after warmup ends, the peak learning rate is too high; warmup only delays the explosion.", "tags": ["ml", "training", "gotcha"], "importance": 0.8}
+{"content": "Global gradient-norm clipping rescales g to norm c when ||g|| > c (c ~ 1.0); chronic clipping means LR too high or data pathology.", "tags": ["ml", "training", "optimization"], "importance": 0.85}
+{"content": "In mixed precision, order is: unscale gradients, then clip, then step; wrong order clips scaled gradients.", "tags": ["ml", "training", "gotcha"], "importance": 0.8}
+{"content": "Underfitting (high train loss): add capacity, training time, or LR; overfitting (train low, held-out high): add data or regularization. Diagnose before prescribing.", "tags": ["ml", "training", "diagnostics"], "importance": 0.9}
+{"content": "Train fits, validation steers decisions (early stopping, tuning), test judges once; every decision made on test leaks into the model.", "tags": ["ml", "training", "evaluation"], "importance": 0.9}
+{"content": "Early stopping: keep the best-validation checkpoint, stop after patience stagnant evals, and restore the best weights; it is a free regularizer for small runs.", "tags": ["ml", "training"], "importance": 0.8}
+{"content": "Dropout zeroes activations with prob p during training (survivors scaled by 1/(1-p)) and must be OFF at inference.", "tags": ["ml", "training", "regularization"], "importance": 0.85}
+{"content": "Label smoothing replaces one-hot targets with (1-eps) on true + eps/V elsewhere, curbing overconfidence and aiding calibration.", "tags": ["ml", "training", "regularization"], "importance": 0.75}
+{"content": "Mixed precision: fp32 master weights, fp16/bf16 compute; fp16 needs loss scaling, bf16 usually does not.", "tags": ["ml", "training", "efficiency"], "importance": 0.85}
+{"content": "Gradient accumulation: effective batch = micro_batch * accum_steps; scale loss by 1/accum and schedule LR on optimizer steps.", "tags": ["ml", "training", "efficiency"], "importance": 0.8}
+{"content": "Xavier init Var(W) = 2/(fan_in+fan_out) suits symmetric activations; He init Var(W) = 2/fan_in suits ReLU; never init to zero.", "tags": ["ml", "training", "initialization"], "importance": 0.8}
+{"content": "Residual-branch outputs often use scaled init (divided by sqrt(2*n_layers)) because skip-path variance accumulates with depth.", "tags": ["ml", "training", "initialization"], "importance": 0.75}
+{"content": "The log-sum-exp trick (subtract the max before exponentiating) makes softmax and cross-entropy numerically safe in any precision.", "tags": ["ml", "training", "numerics"], "importance": 0.85}
+{"content": "Chinchilla rule: compute-optimal training uses roughly 20 tokens per parameter; small models are therefore always data-starved relative to optimum.", "tags": ["ml", "training", "scaling"], "importance": 0.85}
+{"content": "A complete checkpoint holds weights, optimizer state, scheduler position, RNG states, step counters, and a config hash; weights alone are not resumption.", "tags": ["ml", "training", "operations"], "importance": 0.85}
+{"content": "Keep-last-N checkpoints for crash recovery plus keep-best by validation for selection; verify a checkpoint loads before you need it.", "tags": ["ml", "training", "operations"], "importance": 0.8}
+{"content": "Perplexity = exp(cross-entropy loss); PPL 125 means the model is as surprised per token as uniform choice among 125 options.", "tags": ["ml", "evaluation"], "importance": 0.9}
+{"content": "Never compare perplexity across tokenizers: different tokenizations give different per-token surprise mechanically.", "tags": ["ml", "evaluation", "gotcha"], "importance": 0.85}
+{"content": "Bits-per-byte (total NLL in bits divided by UTF-8 bytes) is the tokenizer-agnostic way to compare language models.", "tags": ["ml", "evaluation"], "importance": 0.8}
+{"content": "Low perplexity does not imply good generation; degenerate repetitive text can score great PPL.", "tags": ["ml", "evaluation", "gotcha"], "importance": 0.8}
+{"content": "Evaluate with fixed-prompt generation samples, not just numbers; samples reveal repetition and degeneracy that metrics hide.", "tags": ["ml", "evaluation"], "importance": 0.8}
+{"content": "Eval gates are hard thresholds (PPL below X, no NaN, sane samples) a checkpoint must pass before promotion; automate the bar.", "tags": ["ml", "evaluation", "operations"], "importance": 0.75}
+{"content": "Test contamination (benchmark text in training data) inflates scores; screen with n-gram overlap and canary strings, dedup eval from train.", "tags": ["ml", "evaluation", "data"], "importance": 0.85}
+{"content": "Token accuracy (argmax equals true token) is crude but interpretable and correlates with perplexity.", "tags": ["ml", "evaluation"], "importance": 0.65}
+{"content": "Dataset curation pipeline: language ID, heuristic filters, quality classifier, domain balancing; clean data beats bigger models at fixed compute.", "tags": ["ml", "data"], "importance": 0.9}
+{"content": "Duplicates waste capacity on memorization, distort the learned distribution, and inflate eval; dedup exactly (hash) and near (MinHash+LSH).", "tags": ["ml", "data"], "importance": 0.85}
+{"content": "Dedup across train/val/test boundaries, not just within train; cross-split duplicates are silent eval killers.", "tags": ["ml", "data", "gotcha"], "importance": 0.85}
+{"content": "Sequence packing concatenates documents with separators to fill the context window, reaching near-100% token utilization on short documents.", "tags": ["ml", "data", "efficiency"], "importance": 0.8}
+{"content": "Dynamic padding pads to the longest sequence in the batch, not a global max; bucketing by length cuts waste further.", "tags": ["ml", "data", "efficiency"], "importance": 0.75}
+{"content": "Keep separate attention masks (which positions are real) and loss masks (which positions train); conflating them is a classic bug.", "tags": ["ml", "data", "gotcha"], "importance": 0.85}
+{"content": "Pad on the right for training, on the left for batched generation so the last real token aligns across the batch.", "tags": ["ml", "data", "inference"], "importance": 0.75}
+{"content": "DataLoader discipline: tokenize once and cache, shuffle before batching, use worker processes with prefetch so the GPU never waits on data.", "tags": ["ml", "data", "efficiency"], "importance": 0.8}
+{"content": "Text augmentation (paraphrase, back-translation, noise) teaches robustness and format, never new facts; cap the augmented fraction.", "tags": ["ml", "data"], "importance": 0.75}
+{"content": "Aggressive quality filtering can erase dialects and minority voices; audit what the filters remove.", "tags": ["ml", "data", "gotcha"], "importance": 0.7}
+{"content": "Huber loss is quadratic near zero and linear far away: MSE precision with MAE robustness; the sane default for noisy regression.", "tags": ["ml", "training", "loss"], "importance": 0.7}
+{"content": "MSE assumes Gaussian noise, MAE Laplacian; normalize regression targets or gradient magnitudes become absurd.", "tags": ["ml", "training", "loss"], "importance": 0.7}
+{"content": "Nesterov momentum computes the gradient at the lookahead point (theta - mu*v) instead of the current position.", "tags": ["ml", "training", "optimization"], "importance": 0.65}
+{"content": "Loss functions encode a noise model; pick the loss that matches your data, not the one that is fashionable.", "tags": ["ml", "training", "loss"], "importance": 0.7}
+{"content": "CTC loss sums over all alignments of output to input with blank tokens, enabling training on unsegmented sequences like speech.", "tags": ["ml", "training", "loss"], "importance": 0.65}
+{"content": "LEVI's brain learns in two stages: a runtime knowledge base (ingested courses, no training) and a genuinely trained tiny neural network (proof the loop works).", "tags": ["ml", "levi", "architecture"], "importance": 0.9}
+{"content": "LEVI tiny-gpt-v2: 6 layers, 6 heads, 384 embd, vocab 8192, RoPE, RMSNorm, SwiGLU, tied embeddings, exactly 13,767,552 parameters.", "tags": ["ml", "levi", "architecture"], "importance": 0.9}
+{"content": "tiny-gpt-v2 training: 5400 steps, batch 32, seq 128, cosine LR 3.0e-4 to 3.0e-5, 100 warmup steps, seed 1337; held-out perplexity 125.01.", "tags": ["ml", "levi", "training"], "importance": 0.85}
+{"content": "LEVI corpus records have shape {text, kind, register}; identity records (one per register, count test-asserted) seed the brain with LEVI's voice.", "tags": ["ml", "levi", "data"], "importance": 0.8}
+{"content": "LEVI's held-out carving (carve_heldout.py) is deterministic and seed-fixed (20260921), stratified by kind, so eval gates measure genuinely unseen material.", "tags": ["ml", "levi", "evaluation"], "importance": 0.8}
+{"content": "Every LEVI corpus build writes a manifest (generator, version, seed, timestamp, counts, record shape, sources); a corpus without one is an anecdote.", "tags": ["ml", "levi", "operations"], "importance": 0.75}
+{"content": "LEVI working tokenizer: train/tokenizer.json, byte-level BPE, vocab 8192; the v2 harness refuses loudly on tokenizer/model vocab mismatch.", "tags": ["ml", "levi", "tokenization"], "importance": 0.85}
+{"content": "LEVI honest-limits doctrine: the tiny brain is proof of learning, not a capable mind; it learns spelling, phrasing, and texture, not reasoning or facts.", "tags": ["ml", "levi", "evaluation"], "importance": 0.9}
+{"content": "levi-brain is an explicit-only provider (--provider levi-brain); the deterministic local planner stays default until the brain earns more.", "tags": ["ml", "levi", "inference"], "importance": 0.85}
+{"content": "Canon 2026-09-22: weight-training data comes from Echoverse-engine simulations (hypothesize -> simulate -> train); external knowledge feeds the retrieval side (playbooks, seeds).", "tags": ["ml", "levi", "data"], "importance": 0.9}
+{"content": "Two Echoverse engine variants exist (LEVI engine, LWP engine); brain-training simulations should come from the correct engine variant for the corpus.", "tags": ["ml", "levi", "data"], "importance": 0.8}
+{"content": "The v2 run died silently twice mid-run (steps 4500, 5000) and resumed from checkpoints; checkpoint discipline is survival, not hygiene.", "tags": ["ml", "levi", "operations"], "importance": 0.8}
+{"content": "At 5400 steps x batch 32 x seq 128, tiny-gpt-v2 saw ~22M tokens: far below the ~276M Chinchilla-optimal for 13.8M params, hence proof-of-learning framing.", "tags": ["ml", "levi", "scaling"], "importance": 0.8}
+{"content": "In the agent loop the levi-brain provider answers in prose; it does not emit tool calls.", "tags": ["ml", "levi", "inference"], "importance": 0.75}
+{"content": "LEVI's corpus chunking targets ~512-token records; chunks must stay within the model's block size or they truncate silently.", "tags": ["ml", "levi", "data"], "importance": 0.75}
+{"content": "If a LEVI training loss does not move, the corpus is broken: the tiny brain doubles as a smoke test for corpus quality.", "tags": ["ml", "levi", "diagnostics"], "importance": 0.8}
+{"content": "Context window costs: attention compute O(n^2*d), KV-cache memory linear in n with a brutal constant; match trained length to data.", "tags": ["ml", "inference", "efficiency"], "importance": 0.85}
+{"content": "RoPE extrapolation past trained length degrades; check needle-in-haystack evals, not just the config's claimed window.", "tags": ["ml", "inference", "gotcha"], "importance": 0.75}
+{"content": "KV-cache quantization, paged attention, and sink-token eviction exist because cache memory often exceeds weight memory at long context.", "tags": ["ml", "inference", "efficiency"], "importance": 0.75}
+{"content": "Sampling hyperparameters are part of the eval: unreported temperature/top-p makes generation benchmarks meaningless.", "tags": ["ml", "evaluation", "gotcha"], "importance": 0.75}
+{"content": "Overparameterized networks have many good-enough minima; SGD noise finds flat ones that generalize.", "tags": ["ml", "training", "theory"], "importance": 0.65}
+{"content": "Weight decay strength interacts with the LR schedule; retune them together, not separately.", "tags": ["ml", "training", "gotcha"], "importance": 0.7}
+{"content": "Too much weight decay on a small model visibly underfits: the model forgets faster than it learns.", "tags": ["ml", "training", "gotcha"], "importance": 0.7}
+{"content": "Time-series data must be split by time, not randomly; random splits let the future leak into training.", "tags": ["ml", "data", "evaluation"], "importance": 0.75}
+{"content": "A test set reused across 50 experiments is a validation set with a fancy name; rotate evals or accept the optimism.", "tags": ["ml", "evaluation", "gotcha"], "importance": 0.7}
+{"content": "Regularizing an underfitting model makes it worse; high train loss calls for capacity, not constraints.", "tags": ["ml", "training", "diagnostics"], "importance": 0.85}
+{"content": "The loss landscape is non-convex with no global-optimality guarantees; what saves training is abundant good-enough minima.", "tags": ["ml", "training", "theory"], "importance": 0.6}
+{"content": "Adam's eps is a hidden learning-rate cap when gradients are tiny; raising it to 1e-6 is common in fp16.", "tags": ["ml", "training", "gotcha"], "importance": 0.7}
+{"content": "Fine-tuning sometimes wants lower Adam b2 because the long second-moment memory holds stale curvature after distribution shifts.", "tags": ["ml", "training", "optimization"], "importance": 0.65}
+{"content": "Attention dropout placement (after softmax weights) regularizes the mixing itself; keep rates modest or heads go diffuse.", "tags": ["ml", "transformers", "regularization"], "importance": 0.65}
+{"content": "Embedding tables are often excluded from weight decay because decay on rare-token rows adds noise without benefit.", "tags": ["ml", "training", "gotcha"], "importance": 0.7}
+{"content": "Scheduled sampling (mixing model predictions into training prefixes) addresses exposure bias but is fiddly and rarely used now.", "tags": ["ml", "training"], "importance": 0.6}
+{"content": "For retrieval embeddings, encoder models are cheaper per query than prompting a decoder; pick architecture by task economics.", "tags": ["ml", "transformers", "inference"], "importance": 0.7}
+{"content": "Decoder-only models won by scaling simplicity (one objective), not because encoders are worse at understanding.", "tags": ["ml", "transformers", "architecture"], "importance": 0.7}
+{"content": "Identity records are tiny relative to the corpus; they flavor the voice, they do not teach persona.", "tags": ["ml", "levi", "gotcha"], "importance": 0.7}
+{"content": "Rebuilding a corpus (dedup, re-chunk) changes the seed story; rebuild manifests and re-carve held-out afterward.", "tags": ["ml", "levi", "operations"], "importance": 0.7}
+{"content": "A retrained tokenizer without a retrained model silently breaks every id mapping; the harness vocab-match guard exists because this mistake is catastrophic.", "tags": ["ml", "levi", "gotcha"], "importance": 0.85}
+{"content": "Never claim capabilities beyond what the artifacts show: train_log loss fell, eval held-out tracked, samples textured; hype is forbidden by the honest-limits doctrine.", "tags": ["ml", "levi", "evaluation"], "importance": 0.85}
+{"content": "Head dimension 64 with 6 heads gives d_model 384; RoPE requires the head dimension to be even.", "tags": ["ml", "levi", "architecture"], "importance": 0.75}
+{"content": "Fused attention kernels prefer power-of-two head dimensions (64, 128); odd sizes waste the fast path.", "tags": ["ml", "transformers", "efficiency"], "importance": 0.65}
+{"content": "With tied embeddings at vocab 8192 and d=384, the embedding table is about 3.1M parameters.", "tags": ["ml", "levi", "architecture"], "importance": 0.7}
+{"content": "Softmax temperature at inference is a different knob from the sqrt(d_k) training-time scaling; do not conflate them.", "tags": ["ml", "transformers", "gotcha"], "importance": 0.7}
+{"content": "Prefix-LM masking: the prompt region is fully visible bidirectionally, only the generated tail is causal.", "tags": ["ml", "transformers", "attention"], "importance": 0.65}
+{"content": "Batch serving with different sequence lengths fragments the KV cache; paged or blocked allocators fix the waste.", "tags": ["ml", "inference", "efficiency"], "importance": 0.7}
+{"content": "Changing the prompt mid-generation invalidates the KV cache; sampling parameters do not.", "tags": ["ml", "inference", "gotcha"], "importance": 0.7}
+{"content": "Stochastic depth randomly drops whole residual branches during training, regularizing very deep nets as an ensemble of depths.", "tags": ["ml", "training", "regularization"], "importance": 0.6}
+{"content": "Gradient accumulation plus a naive per-document loss weighting needs care; accumulation composes fine with packing otherwise.", "tags": ["ml", "training", "gotcha"], "importance": 0.65}
+{"content": "Document order within a pack is a weak signal; shuffle documents before packing.", "tags": ["ml", "data", "gotcha"], "importance": 0.65}
+{"content": "Eval on packed data must use the same cross-document masking decision as training, or the numbers are not comparable.", "tags": ["ml", "evaluation", "gotcha"], "importance": 0.7}
+{"content": "Model-generated paraphrases can launder hallucinations into training data; verify augmentation samples.", "tags": ["ml", "data", "gotcha"], "importance": 0.7}
+{"content": "For pre-training at scale, augmentation is mostly pointless: the web already contains the variation.", "tags": ["ml", "data"], "importance": 0.65}
+{"content": "Keep raw data and filter decisions (provenance); you will re-tune filters and want to rebuild without re-crawling.", "tags": ["ml", "data", "operations"], "importance": 0.7}
+{"content": "Over-dedup can remove legitimately repeated content like licenses; usually fine, occasionally load-bearing.", "tags": ["ml", "data", "gotcha"], "importance": 0.6}
+{"content": "Dead ReLU neurons accumulate in FFNs; gated variants like SwiGLU suffer less from dead units.", "tags": ["ml", "transformers", "architecture"], "importance": 0.65}

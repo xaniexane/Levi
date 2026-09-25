@@ -1,0 +1,1412 @@
+# m49411
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Parametric Equations: Graphs
+
+Parametric Equations: Graphs
+
+In this section you will:
+
+Graph plane curves described by parametric equations by plotting points.
+
+Graph parametric equations.
+
+While not every fan (or team manager) appreciates it, baseball and many other sports have become dependent on analytics, which involve complex data recording and quantitative evaluation used to understand and predict behavior. The earliest influence of analytics was mostly statistical; more recently, physics and other sciences have come into play. Foremost among these is the focus on launch angle and exit velocity, which when at certain values can almost guarantee a home run. On the other hand, emphasis on launch angle and focusing on home runs rather than overall hitting results in far more outs. Consider the following situation: it is the bottom of the ninth inning, with two outs and two players on base. The home team is losing by two runs. The batter swings and hits the baseball at 140 feet per second and at an angle of approximately 
+ 
+ 45°
+ 
+ to the horizontal. How far will the ball travel? Will it clear the fence for a game-winning home run? The outcome may depend partly on other factors (for example, the wind), but mathematicians can model the path of a projectile and predict approximately how far it will travel using parametric equations. In this section, we’ll discuss parametric equations and some common applications, such as projectile motion problems.
+
+Graphing Parametric Equations by Plotting Points
+
+In lieu of a graphing calculator or a computer graphing program, plotting points to represent the graph of an equation is the standard method. As long as we are careful in calculating the values, point-plotting is highly dependable.
+Given a pair of parametric equations, sketch a graph by plotting points.
+
+Construct a table with three columns: 
+ 
+ t,x(t),andy(t).
+
+Evaluate 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ for values of 
+ 
+ t
+ 
+ over the interval for which the functions are defined.
+
+Plot the resulting pairs 
+ 
+ (
+ 
+ x,y
+ 
+ ).
+
+Sketching the Graph of a Pair of Parametric Equations by Plotting Points
+
+Sketch the graph of the parametric equations 
+ 
+ x(t)=
+ t
+ 2
+ 
+ +1, y(t)=2+t.
+
+Construct a table of values for 
+ 
+ t,x(t), 
+ 
+ and 
+ 
+ y(t),
+ 
+ as in , and plot the points in a plane.
+7
+The graph is a parabola with vertex at the point 
+ 
+ (
+ 
+ 1,2
+ 
+ ),
+ 
+ opening to the right. See .
+
+Analysis
+
+As values for 
+ 
+ t
+ 
+ progress in a positive direction from 0 to 5, the plotted points trace out the top half of the parabola. As values of 
+ 
+ t
+ 
+ become negative, they trace out the lower half of the parabola. There are no restrictions on the domain. The arrows indicate direction according to increasing values of 
+ 
+ t.
+ 
+ The graph does not represent a function, as it will fail the vertical line test. The graph is drawn in two parts: the positive values for 
+ 
+ t,
+ 
+ and the negative values for 
+ 
+ t.
+
+Sketch the graph of the parametric equations 
+ 
+ x=
+ t
+ 
+ , y=2t+3, 0≤t≤3.
+
+Sketching the Graph of Trigonometric Parametric Equations
+
+Construct a table of values for the given parametric equations and sketch the graph:
+
+Construct a table like that in using angle measure in radians as inputs for 
+ 
+ t,
+ 
+ and evaluating 
+ 
+ x
+ 
+ and 
+ 
+ y.
+ 
+ Using angles with known sine and cosine values for 
+ 
+ t
+ 
+ makes calculations easier.
+y=4sint
+shows the graph.
+
+By the symmetry shown in the values of 
+ 
+ x
+ 
+ and 
+ 
+ y, 
+ we see that the parametric equations represent an ellipse. The ellipse is mapped in a counterclockwise direction as shown by the arrows indicating increasing 
+ 
+ t 
+ values.
+
+Analysis
+
+We have seen that parametric equations can be graphed by plotting points. However, a graphing calculator will save some time and reveal nuances in a graph that may be too tedious to discover using only hand calculations.
+
+Make sure to change the mode on the calculator to parametric (PAR). To confirm, the 
+ 
+ Y=
+ 
+ window should show
+
+instead of 
+
+ Y
+ 1
+ 
+ =.
+
+Graph the parametric equations: 
+ 
+ x=5cost, y=3sint.
+
+Graphing Parametric Equations and Rectangular Form Together
+
+Graph the parametric equations 
+ 
+ x=5cost
+ 
+ and 
+ 
+ y=2sint.
+ 
+ First, construct the graph using data points generated from the parametric form. Then graph the rectangular form of the equation. Compare the two graphs.
+
+Construct a table of values like that in .
+y=2sin(−5)≈1.9
+Plot the 
+ 
+ (
+ 
+ x,y
+ 
+ ) 
+ values from the table. See .
+
+Next, translate the parametric equations to rectangular form. To do this, we solve for 
+ 
+ t
+ 
+ in either 
+ 
+ x(
+ t
+ )
+ 
+ or 
+ 
+ y(
+ t
+ ),
+ 
+ and then substitute the expression for 
+ 
+ t
+ 
+ in the other equation. The result will be a function 
+ 
+ y(
+ x
+ )
+ 
+ if solving for 
+ 
+ t
+ 
+ as a function of 
+ 
+ x,
+ 
+ or 
+ 
+ x(y)
+ 
+ if solving for 
+ 
+ t
+ 
+ as a function of 
+ 
+ y.
+
+Then, use the Pythagorean Theorem.
+
+Analysis
+
+In , the data from the parametric equations and the rectangular equation are plotted together. The parametric equations are plotted in blue; the graph for the rectangular equation is drawn on top of the parametric in a dashed style colored red. Clearly, both forms produce the same graph.
+
+Graphing Parametric Equations and Rectangular Equations on the Coordinate System
+
+Graph the parametric equations 
+ 
+ x=t+1
+ 
+ and 
+ 
+ y=
+ t
+ 
+ , t≥0,
+ 
+ and the rectangular equivalent 
+ 
+ y=
+ 
+ x−1
+
+ on the same coordinate system.
+
+Construct a table of values for the parametric equations, as we did in the previous example, and graph 
+ 
+ y=
+ t
+ 
+ , t≥0
+ 
+ on the same grid, as in .
+
+Analysis
+
+With the domain on 
+ 
+ t
+ 
+ restricted, we only plot positive values of 
+ 
+ t.
+ 
+ The parametric data is graphed in blue and the graph of the rectangular equation is dashed in red. Once again, we see that the two forms overlap.
+
+Sketch the graph of the parametric equations 
+ 
+ x=2cosθandy=4sinθ, 
+ along with the rectangular equation on the same grid.
+
+The graph of the parametric equations is in red and the graph of the rectangular equation is drawn in blue dots on top of the parametric equations.
+
+Applications of Parametric Equations
+
+Many of the advantages of parametric equations become obvious when applied to solving real-world problems. Although rectangular equations in x and y give an overall picture of an object's path, they do not reveal the position of an object at a specific time. Parametric equations, however, illustrate how the values of x and y change depending on t, as the location of a moving object at a particular time.
+
+A common application of parametric equations is solving problems involving projectile motion. In this type of motion, an object is propelled forward in an upward direction forming an angle of 
+ 
+ θ
+ 
+ to the horizontal, with an initial speed of 
+
+ v
+ 0
+ 
+ ,
+ 
+ and at a height 
+ 
+ h
+ 
+ above the horizontal.
+
+The path of an object propelled at an inclination of 
+ 
+ θ
+ 
+ to the horizontal, with initial speed 
+
+ v
+ 0
+ 
+ ,
+ 
+ and at a height 
+ 
+ h
+ 
+ above the horizontal, is given by
+
+where 
+ 
+ g 
+ accounts for the effects of gravity and 
+ 
+ h
+ 
+ is the initial height of the object. Depending on the units involved in the problem, use 
+ 
+ g=32ft/
+ s
+ 2
+
+ or 
+ 
+ g=9.8m/
+ s
+ 2
+ 
+ .
+ 
+ The equation for 
+ 
+ x 
+ gives horizontal distance, and the equation for 
+ 
+ y 
+ gives the vertical distance.
+Given a projectile motion problem, use parametric equations to solve.
+
+The horizontal distance is given by 
+ 
+ x=(
+
+ v
+ 0
+ 
+ cosθ
+ 
+ )t.
+ 
+ Substitute the initial speed of the object for 
+
+ v
+ 0
+ 
+ .
+
+The expression 
+ 
+ cosθ
+ 
+ indicates the angle at which the object is propelled. Substitute that angle in degrees for 
+ 
+ cosθ.
+
+The vertical distance is given by the formula 
+ 
+ y=−
+ 1
+ 2
+ 
+ g
+ t
+ 2
+ 
+ +(
+
+ v
+ 0
+ 
+ sinθ
+ 
+ )t+h.
+ 
+ The term 
+ 
+ −
+ 1
+ 2
+ 
+ g
+ t
+ 2
+
+ represents the effect of gravity. Depending on units involved, use 
+ 
+ g=32
+ 
+ ft/s
+ 
+ 2
+
+ or 
+ 
+ g=9.8
+ 
+ m/s
+ 
+ 2
+ 
+ .
+ 
+ Again, substitute the initial speed for 
+
+ v
+ 0
+ 
+ ,
+ 
+ and the height at which the object was propelled for 
+ 
+ h.
+
+Proceed by calculating each term to solve for 
+ 
+ t.
+
+Finding the Parametric Equations to Describe the Motion of a Baseball
+
+Solve the problem presented at the beginning of this section. Does the batter hit the game-winning home run? Assume that the ball is hit with an initial velocity of 140 feet per second at an angle of 
+ 
+ 45°
+ 
+ to the horizontal, making contact 3 feet above the ground.
+ⓐ Find the parametric equations to model the path of the baseball.
+ⓑ Where is the ball after 2 seconds?
+ⓒ How long is the ball in the air?
+ⓓ Is it a home run?
+ⓐUse the formulas to set up the equations. The horizontal position is found using the parametric equation for 
+ 
+ x.
+ Thus,
+
+ x=(
+ v
+ 0
+ 
+ cosθ)t
+
+ x=(140cos(45°))t
+
+The vertical position is found using the parametric equation for 
+ 
+ y.
+ 
+ Thus,
+
+ y=−16
+ t
+ 2
+ 
+ +(
+ v
+ 0
+ 
+ sinθ)t+h
+
+ y=−16
+ t
+ 2
+ 
+ +(140sin(45°))t+3
+
+Use the formulas to set up the equations. The horizontal position is found using the parametric equation for 
+ 
+ x.
+ Thus,
+
+The vertical position is found using the parametric equation for 
+ 
+ y.
+ 
+ Thus,
+ⓑ Substitute 2 into the equations to find the horizontal and vertical positions of the ball. 
+
+ x=(140cos(45°))(2)
+
+ x=198 feet
+
+ y=−16
+ 
+ (2)
+ 
+ 2
+ 
+ +(140sin(45°))(2)+3
+
+ y=137 feet
+
+After 2 seconds, the ball is 198 feet away from the batter’s box and 137 feet above the ground.
+
+Substitute 2 into the equations to find the horizontal and vertical positions of the ball.
+
+After 2 seconds, the ball is 198 feet away from the batter’s box and 137 feet above the ground.
+ⓒTo calculate how long the ball is in the air, we have to find out when it will hit ground, or when 
+ 
+ y=0.
+ Thus,
+
+ y=−16
+ t
+ 2
+ 
+ +(
+ 
+ 140sin(
+ 
+ 45
+ 
+ ∘
+ 
+ )
+ 
+ )t+3
+
+ y=0
+
+ Set y(t)=0 and solve the quadratic.
+
+ t=6.2173
+
+When 
+ 
+ t=6.2173
+ 
+ seconds, the ball has hit the ground. (The quadratic equation can be solved in various ways, but this problem was solved using a computer math program.)
+
+To calculate how long the ball is in the air, we have to find out when it will hit ground, or when 
+ 
+ y=0.
+ Thus,
+
+When 
+ 
+ t=6.2173
+ 
+ seconds, the ball has hit the ground. (The quadratic equation can be solved in various ways, but this problem was solved using a computer math program.)
+ⓓWe cannot confirm that the hit was a home run without considering the size of the outfield, which varies from field to field. However, for simplicity’s sake, let’s assume that the outfield wall is 400 feet from home plate in the deepest part of the park. Let’s also assume that the wall is 10 feet high. In order to determine whether the ball clears the wall, we need to calculate how high the ball is when x = 400 feet. So we will set x = 400, solve for 
+ 
+ t, 
+ and input 
+ 
+ t
+ 
+ into 
+ 
+ y. 
+
+x=(
+ 
+ 140cos(45°)
+ 
+ )t
+
+ 400=(
+ 
+ 140cos(45°)
+ 
+ )t
+
+ t=4.04
+
+ y=−16
+ 
+ (4.04)
+ 
+ 2
+ 
+ +(
+ 
+ 140sin(45°)
+ 
+ )(4.04)+3
+
+ y=141.8
+
+The ball is 141.8 feet in the air when it soars out of the ballpark. It was indeed a home run. See .
+
+We cannot confirm that the hit was a home run without considering the size of the outfield, which varies from field to field. However, for simplicity’s sake, let’s assume that the outfield wall is 400 feet from home plate in the deepest part of the park. Let’s also assume that the wall is 10 feet high. In order to determine whether the ball clears the wall, we need to calculate how high the ball is when x = 400 feet. So we will set x = 400, solve for 
+ 
+ t, 
+ and input 
+ 
+ t
+ 
+ into 
+ 
+ y.
+
+The ball is 141.8 feet in the air when it soars out of the ballpark. It was indeed a home run. See .
+
+Access the following online resource for additional instruction and practice with graphs of parametric equations.
+Graphing Parametric Equations on the TI-84
+
+Key Concepts
+
+When there is a third variable, a third parameter on which 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ depend, parametric equations can be used.
+
+To graph parametric equations by plotting points, make a table with three columns labeled 
+ 
+ t,x(
+ t
+ ),
+ 
+ and 
+ 
+ y(t).
+ 
+ Choose values for 
+ 
+ t
+ 
+ in increasing order. Plot the last two columns for 
+ 
+ x
+ 
+ and 
+ 
+ y.
+ 
+ See and .
+
+When graphing a parametric curve by plotting points, note the associated t-values and show arrows on the graph indicating the orientation of the curve. See and .
+
+Parametric equations allow the direction or the orientation of the curve to be shown on the graph. Equations that are not functions can be graphed and used in many applications involving motion. See .
+
+Projectile motion depends on two parametric equations: 
+ 
+ x=(
+ v
+ 0
+ 
+ cosθ)t
+ 
+ and 
+ 
+ y=−16
+ t
+ 2
+ 
+ +(
+ v
+ 0
+ 
+ sinθ)t+h.
+ 
+ Initial velocity is symbolized as 
+
+ v
+ 0
+ 
+ .θ
+ 
+ represents the initial angle of the object when thrown, and 
+ 
+ h
+ 
+ represents the height at which the object is propelled.
+
+Section Exercises
+
+Verbal
+
+What are two methods used to graph parametric equations?
+
+plotting points with the orientation arrow and a graphing calculator
+
+What is one difference in point-plotting parametric equations compared to Cartesian equations?
+
+Why are some graphs drawn with arrows?
+
+The arrows show the orientation, the direction of motion according to increasing values of 
+ t.
+
+Name a few common types of graphs of parametric equations.
+
+Why are parametric graphs important in understanding projectile motion?
+
+The parametric equations show the different vertical and horizontal motions over time.
+
+Graphical
+
+For the following exercises, graph each set of parametric equations by making a table of values. Include the orientation on the graph.
+{ 
+
+ x(
+ t
+ )=t
+
+ y(
+ t
+ )=
+ t
+ 2
+ 
+ −1
+
+{ 
+
+ x(
+ t
+ )=t−1
+
+ y(
+ t
+ )=
+ t
+ 2
+
+{ 
+
+ x(
+ t
+ )=2+t
+
+ y(
+ t
+ )=3−2t
+
+{ 
+
+ x(
+ t
+ )=−2−2t
+
+ y(
+ t
+ )=3+t
+
+{ 
+
+ x(
+ t
+ )=
+ t
+ 3
+
+ y(
+ t
+ )=t+2
+
+{ 
+
+ x(
+ t
+ )=
+ t
+ 2
+
+ y(
+ t
+ )=t+3
+
+y
+For the following exercises, sketch the curve and include the orientation.
+{ 
+
+ x(t)=t
+
+ y(t)=
+ t
+{ 
+
+ x(t)=−
+ t
+
+ y(t)=t
+{ 
+
+ x(t)=5−| t |
+
+ y(t)=t+2
+{ 
+
+ x(t)=−t+2
+
+ y(t)=5−| t |
+{ 
+
+ x(t)=4sint
+
+ y(t)=2cost
+{
+
+ x(t)=2sint
+
+ y(t)=4cost
+{ 
+
+ x(t)=3
+ cos
+ 2
+ 
+ t
+
+ y(t)=−3sint
+{ 
+
+ x(t)=3
+ cos
+ 2
+ 
+ t
+
+ y(t)=−3
+ sin
+ 2
+ 
+ t
+{ 
+
+ x(t)=sect
+
+ y(t)=tant
+{ 
+
+ x(t)=sect
+
+ y(t)=
+ tan
+ 2
+ 
+ t
+{ 
+
+ x(t)=
+ 1
+
+ e
+ 
+ 2t
+
+ y(t)=
+ e
+ 
+ −t
+
+For the following exercises, graph the equation and include the orientation. Then, write the Cartesian equation.
+{ 
+
+ x(
+ t
+ )=t−1
+
+ y(
+ t
+ )=−
+ t
+ 2
+{ 
+
+ x(
+ t
+ )=
+ t
+ 3
+
+ y(
+ t
+ )=t+3
+{ 
+
+ x(t)=2cost
+
+ y(t)=−sint
+
+{ 
+
+ x(t)=7cost
+
+ y(t)=7sint
+{ 
+
+ x(t)=
+ e
+ 
+ 2t
+
+ y(t)=−
+ e
+ 
+ t
+
+For the following exercises, graph the equation and include the orientation.
+x=
+ t
+ 2
+ 
+ ,y=3t,0≤t≤5
+x=2t,y=
+ t
+ 2
+ 
+ ,−5≤t≤5
+x=t, y=
+ 
+ 25−
+ t
+ 2
+
+ , 0<t≤5
+x(t)=−t,y(t)=
+ t
+ 
+ , t≥0
+x=−2cost, y=6sint, 0≤t≤π
+x=−sect, y=tant, −
+ 
+ π
+ 
+ 2
+ 
+ <t<
+ π
+ 2
+
+For the following exercises, use the parametric equations for integers a and b:
+
+Graph on the domain 
+ 
+ [ 
+ −π,0
+ ], 
+ 
+ where 
+ 
+ a=2 
+ and 
+ 
+ b=1, 
+ 
+ and include the orientation.
+
+Graph on the domain 
+ 
+ [ 
+ −π,0
+ ], 
+ 
+ where 
+ 
+ a=3 
+ and 
+ 
+ b=2
+ 
+ , and include the orientation.
+
+Graph on the domain 
+ 
+ [ 
+ −π,0
+ ], 
+ 
+ where 
+ 
+ a=4 
+ and 
+ 
+ b=3
+ 
+ , and include the orientation.
+
+Graph on the domain 
+ 
+ [ 
+ −π,0
+ ], 
+ 
+ where 
+ 
+ a=5 
+ and 
+ 
+ b=4
+ 
+ , and include the orientation.
+
+If 
+ 
+ a 
+ is 1 more than 
+ 
+ b, 
+ 
+ describe the effect the values of 
+ 
+ a 
+ and 
+ 
+ b 
+ have on the graph of the parametric equations.
+
+Describe the graph if 
+ 
+ a=100 
+ and 
+ 
+ b=99.
+
+There will be 100 back-and-forth motions.
+
+What happens if 
+ 
+ b 
+ is 1 more than 
+ 
+ a? 
+ Describe the graph.
+
+If the parametric equations 
+ 
+ x(t)=
+ t
+ 2
+
+ and 
+ 
+ y(
+ t
+ )=6−3t 
+ have the graph of a horizontal parabola opening to the right, what would change the direction of the curve?
+
+Take the opposite of the 
+ x(
+ t
+ )
+ 
+ equation.
+
+For the following exercises, describe the graph of the set of parametric equations.
+x(t)=−
+ t
+ 2
+
+ and 
+ 
+ y(
+ t
+ ) 
+ is linear
+y(t)=
+ t
+ 2
+
+ and 
+ 
+ x(
+ t
+ ) 
+ is linear
+
+The parabola opens up.
+y(t)=−
+ t
+ 2
+
+ and 
+ 
+ x(
+ t
+ ) 
+ is linear
+
+Write the parametric equations of a circle with center 
+ 
+ (
+ 
+ 0,0
+ 
+ ),
+ 
+ radius 5, and a counterclockwise orientation.
+{ 
+
+ x(
+ t
+ )=5cost
+
+ y(
+ t
+ )=5sint
+
+Write the parametric equations of an ellipse with center 
+ 
+ (
+ 
+ 0,0
+ 
+ ),
+ 
+ major axis of length 10, minor axis of length 6, and a counterclockwise orientation.
+
+For the following exercises, use a graphing utility to graph on the window 
+ 
+ [ 
+ −3,3
+ ] 
+ by 
+ 
+ [ 
+ −3,3
+ ] 
+ on the domain 
+ 
+ [0,2π) 
+ for the following values of 
+ 
+ a 
+ and 
+ 
+ b
+ 
+ , and include the orientation.
+
+ { 
+
+ x(t)=sin(at)
+
+ y(t)=sin(bt)
+a=1,b=2
+a=2,b=1
+a=3,b=3
+a=5,b=5
+a=2,b=5
+a=5,b=2
+
+Technology
+
+For the following exercises, look at the graphs that were created by parametric equations of the form 
+ 
+ {
+
+ x(t)=acos(bt)
+
+ y(t)=csin(dt)
+
+ .
+ 
+ Use the parametric mode on the graphing calculator to find the values of 
+ 
+ a,b,c,
+ 
+ and 
+ 
+ d
+ 
+ to achieve each graph.
+a=4, b=3, c=6, d=1
+a=4, b=2, c=3, d=3
+
+For the following exercises, use a graphing utility to graph the given parametric equations.
+
+ { 
+
+ x(t)=cost−1
+
+ y(t)=sint+t
+
+ { 
+
+ x(t)=cost+t
+
+ y(t)=sint−1
+
+ { 
+
+ x(
+ t
+ )=t−sint
+
+ y(
+ t
+ )=cost−1
+{ 
+
+ x(t)=cost−1
+
+ y(t)=sint+t
+{ 
+
+ x(t)=cost+t
+
+ y(t)=sint−1
+{ 
+
+ x(
+ t
+ )=t−sint
+
+ y(
+ t
+ )=cost−1
+
+Graph all three sets of parametric equations on the domain 
+ 
+ [0, 2π].
+
+Graph all three sets of parametric equations on the domain 
+ 
+ [ 
+ 0,4π
+ ].
+
+Graph all three sets of parametric equations on the domain 
+ 
+ [ 
+ −4π,6π
+ ].
+
+The graph of each set of parametric equations appears to “creep” along one of the axes. What controls which axis the graph creeps along?
+
+Explain the effect on the graph of the parametric equation when we switched 
+ 
+ sint 
+ and 
+ 
+ cost
+ 
+ .
+
+The 
+ 
+ y
+ 
+-intercept changes.
+
+Explain the effect on the graph of the parametric equation when we changed the domain.
+
+Extensions
+
+An object is thrown in the air with vertical velocity of 20 ft/s and horizontal velocity of 15 ft/s. The object’s height can be described by the equation 
+ 
+ y(
+ t
+ )=−16
+ t
+ 2
+ 
+ +20t
+ 
+ , while the object moves horizontally with constant velocity 15 ft/s. Write parametric equations for the object’s position, and then eliminate time to write height as a function of horizontal position.
+y(
+ x
+ )=−16
+ 
+ (
+
+ x
+ 
+ 15
+
+ )
+ 
+ 2
+ 
+ +20(
+
+ x
+ 
+ 15
+
+ )
+
+A skateboarder riding on a level surface at a constant speed of 9 ft/s throws a ball in the air, the height of which can be described by the equation 
+ 
+ y(
+ t
+ )=−16
+ t
+ 2
+ 
+ +10t+5.
+ 
+ Write parametric equations for the ball’s position, and then eliminate time to write height as a function of horizontal position.
+
+For the following exercises, use this scenario: A dart is thrown upward with an initial velocity of 64 ft/s at an angle of elevation of 52°. Consider the position of the dart at any time 
+ 
+ t. 
+ Neglect air resistance.
+
+Find parametric equations that model the problem situation.
+{ 
+
+ x(t)=64tcos(
+ 
+ 52°
+ 
+ )
+
+ y(t)=−16
+ t
+ 2
+ 
+ +64tsin(
+ 
+ 52°
+ 
+ )
+
+Find all possible values of 
+ 
+ x 
+ that represent the situation.
+
+When will the dart hit the ground?
+
+approximately 3.2 seconds
+
+Find the maximum height of the dart.
+
+At what time will the dart reach maximum height?
+
+1.6 seconds
+
+For the following exercises, look at the graphs of each of the four parametric equations. Although they look unusual and beautiful, they are so common that they have names, as indicated in each exercise. Use a graphing utility to graph each on the indicated domain.
+
+An epicycloid: 
+ 
+ {
+
+ x(t)=14cost−cos(14t)
+
+ y(t)=14sint+sin(14t)
+
+ on the domain 
+ 
+ [0,2π]
+ 
+ .
+
+A hypocycloid: 
+ 
+ { 
+
+ x(t)=6sint+2sin(6t)
+
+ y(t)=6cost−2cos(6t)
+
+ on the domain 
+ 
+ [0,2π]
+ 
+ .
+
+A hypotrochoid: 
+ 
+ { 
+
+ x(t)=2sint+5cos(6t)
+
+ y(t)=5cost−2sin(6t)
+
+ on the domain 
+ 
+ [0,2π]
+ 
+ .
+
+A rose: 
+ 
+ { 
+
+ x(t)=5sin(2t)sint
+
+ y(t)=5sin(2t)cost
+
+ on the domain 
+ 
+ [0,2π]
+ 
+ .

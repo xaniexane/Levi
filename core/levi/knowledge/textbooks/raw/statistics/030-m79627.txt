@@ -1,0 +1,601 @@
+# m79627
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Poisson Distribution (Optional)
+
+Poisson Distribution (Optional)
+
+There are two main characteristics of a Poisson experiment.
+
+The Poisson probability distribution gives the probability of a number of events occurring in a fixed interval of time or space if these events happen with a known average rate and independently of the time since the last event. For example, a book editor might be interested in the number of words spelled incorrectly in a particular book. It might be that, on the average, there are five words spelled incorrectly in 100 pages. The interval is the 100 pages.
+
+The Poisson distribution may be used to approximate the binomial if the probability of success is small (such as .01) and the number of trials is large (such as 1,000). You will verify the relationship in the homework exercises. n is the number of trials, and p is the probability of a success.
+
+The random variable X = the number of occurrences in the interval of interest.
+
+The average number of loaves of bread put on a shelf in a bakery in a half-hour period is 12. Of interest is the number of loaves of bread put on the shelf in five minutes. The time interval of interest is five minutes. What is the probability that the number of loaves, selected randomly, put on the shelf in five minutes is three?
+
+Let X = the number of loaves of bread put on the shelf in five minutes. If the average number of loaves put on the shelf in 30 minutes (half-hour) is 12, then the average number of loaves put on the shelf in five minutes is 
+ 
+ (
+
+ 5
+ 
+ 30
+
+ )
+ 
+(12) = 2 loaves of bread.
+
+The probability question asks you to find P(x = 3).
+
+Try It
+
+The average number of fish caught in an hour is eight. Of interest is the number of fish caught in 15 minutes. The time interval of interest is 15 minutes. What is the average number of fish caught in 15 minutes?
+(
+
+ 15
+
+ 60
+
+ )
+ 
+(8) = 2 fish
+
+A bank expects to receive six bad checks per day, on average. What is the probability of the bank getting fewer than five bad checks on any given day? Of interest is the number of checks the bank receives in one day, so the time interval of interest is one day. Let X = the number of bad checks the bank receives in one day. If the bank expects to receive six bad checks per day then the average is six checks per day. Write a mathematical statement for the probability question.
+P(x < 5)
+
+Try It
+
+An electronics store expects to have 10 returns per day on average. The manager wants to know the probability of the store getting fewer than eight returns on any given day. State the probability question mathematically.
+P(x < 8)
+
+You notice that a news reporter says "uh," on average, two times per broadcast. What is the probability that the news reporter says "uh" more than two times per broadcast?
+
+This is a Poisson problem because you are interested in knowing the number of times the news reporter says "uh" during a broadcast.
+
+a. What is the interval of interest?
+
+a. one broadcast
+
+b. What is the average number of times the news reporter says "uh" during one broadcast?
+
+b. 2
+
+c. Let X = ________. What values does X take on?
+
+c. Let X = the number of times the news reporter says "uh" during one broadcast.
+x = 0, 1, 2, 3, . . .
+
+d. The probability question is P(______).
+
+d. P(x > 2)
+
+Try It
+
+An emergency room at a particular hospital gets an average of five patients per hour. A doctor wants to know the probability that the ER gets more than five patients per hour. Give the reason why this would be a Poisson distribution.
+
+This problem wants to find the probability of events occurring in a fixed interval of time with a known average rate. The events are independent.
+
+Notation for the Poisson: P = Poisson Probability Distribution Function
+X ~ P(μ)
+
+Read this as X is a random variable with a Poisson distribution. The parameter is μ (or λ); μ (or λ) = the mean for the interval of interest.
+
+Leah's answering machine receives about six telephone calls between 8 a.m. and 10 a.m. What is the probability that Leah receives more than one call in the next 15 minutes?
+
+Let X = the number of calls Leah receives in 15 minutes. The interval of interest is 15 minutes or 
+
+ 1
+ 4
+
+ hour.
+x = 0, 1, 2, 3, . . .
+
+If Leah receives, on the average, six telephone calls in two hours, and there are eight 15-minute intervals in two hours, then Leah receives
+(
+
+ 1
+ 8
+
+ )
+ 
+(6) = .75 calls in 15 minutes, on average. So, μ = .75 for this problem.
+X ~ P(.75)
+
+Find P(x > 1). P(x > 1) = .1734 (calculator or computer)
+
+Note
+
+The TI calculators use λ (lambda) for the mean.
+
+Press 1 – and then press 2nd DISTR.
+
+Arrow down to poissoncdf. Press ENTER.
+
+Enter (.75,1).
+
+The result is P(x > 1) = .1734.
+
+The probability that Leah receives more than one telephone call in the next 15 minutes is about .1734 or P(x > 1) = 1 − poissoncdf(.75, 1).
+
+The graph of X ~ P(.75) is
+
+The y-axis contains the probability of x where X = the number of calls in 15 minutes.
+
+Try It
+
+A customer service center receives about 10 emails every half-hour. What is the probability that the customer service center receives more than four emails in the next six minutes? Use the TI-83+ or TI-84 calculator to find the answer.
+P(x > 4) = 0.0527
+
+According to Baydin, an email management company, an email user gets, on average, 147 emails per day. Let X = the number of emails an email user receives per day. The discrete random variable X takes on the values x = 0, 1, 2 . . . . The random variable X has a Poisson distribution: X ~ P(147). The mean is 147 emails.
+
+What is the probability that an email user receives exactly 160 emails per day?
+
+What is the probability that an email user receives at most 160 emails per day?
+
+What is the standard deviation?
+P(x = 160) = poissonpdf(147, 160) ≈ .0180
+P(x ≤ 160) = poissoncdf(147, 160) ≈ .8666
+
+Standard Deviation = 
+ 
+ σ=
+ μ
+ 
+ =
+ 
+ 147
+
+ ≈12.1244
+
+Try It
+
+According to a recent poll girls between the ages of 14 and 17 send an average of 187 text messages each day. Let X = the number of texts that a girl aged 14 to 17 sends per day. The discrete random variable X takes on the values x = 0, 1, 2 …. The random variable X has a Poisson distribution: X ~ P(187). The mean is 187 text messages.
+
+What is the probability that a teen girl sends exactly 175 texts per day?
+
+What is the probability that a teen girl sends at most 150 texts per day?
+
+What is the standard deviation?
+P(x = 175) = poissonpdf(187, 175) ≈ 0.0203
+P(x ≤ 150) = poissoncdf(187, 150) ≈ 0.0030
+
+Standard Deviation = 
+ 
+ σ=
+ μ
+ 
+  = 
+ 
+ 187
+
+ ≈13.6748
+
+Text message users receive or send an average of 41.5 text messages per day.
+
+How many text messages does a text message user receive or send per hour?
+
+What is the probability that a text message user receives or sends two messages per hour?
+
+What is the probability that a text message user receives or sends more than two messages per hour?
+
+Let X = the number of texts that a user sends or receives in one hour. The average number of texts received per hour is 
+
+ 41.5
+
+ 24
+
+ ≈ 1.7292.
+X ~ P(1.7292), so P(x = 2) = poissonpdf(1.7292, 2) ≈ .2653
+P(x > 2) = 1 – P(x ≤ 2) = 1 – poissoncdf(1.7292, 2) ≈ 1 – .7495 = .2505
+
+Try It
+
+Scientists recently researched the busiest airport in the world. On average, there are 2,500 arrivals and departures each day.
+
+How many airplanes arrive and depart the airport per hour?
+
+What is the probability that there are exactly 100 arrivals and departures in one hour?
+
+What is the probability that there are at most 100 arrivals and departures in one hour?
+
+Let X = the number of airplanes arriving and departing from Hartsfield-Jackson in one hour. The average number of arrivals and departures per hour is 
+
+ 2,500
+
+ 24
+
+ ≈ 104.1667.
+X ~ P(104.1667), so P(x = 100) = poissonpdf(104.1667, 100) ≈ 0.0366.
+P(x ≤ 100) = poissoncdf(104.1667, 100) ≈ 0.3651.
+
+The Poisson distribution can be used to approximate probabilities for a binomial distribution. This next example demonstrates the relationship between the Poisson and the binomial distributions. Let n represent the number of binomial trials and let p represent the probability of a success for each trial. If n is large enough and p is small enough then the Poisson approximates the binomial very well. In general, n is considered “large enough” if it is greater than or equal to 20. The probability p from the binomial distribution should be less than or equal to 0.05. When the Poisson is used to approximate the binomial, we use the binomial mean μ = np. The variance of X is σ2 = μ and the standard deviation is σ = 
+
+ μ
+
+. The Poisson approximation to a binomial distribution was commonly used in the days before technology made both values very easy to calculate.
+
+On May 13, 2013, starting at 4:30 p.m., the probability of low seismic activity for the next 48 hours in Alaska was reported as about 1.02 percent. Use this information for the next 200 days to find the probability that there will be low seismic activity in 10 of the next 200 days. Use both the binomial and Poisson distributions to calculate the probabilities. Are they close?
+
+Let X = the number of days with low seismic activity.
+
+Using the binomial distribution
+ P(x = 10) = binompdf(200, .0102, 10) ≈ .000039
+P(x = 10) = binompdf(200, .0102, 10) ≈ .000039
+
+Using the Poisson distribution
+Calculate μ = np = 200(.0102) ≈ 2.04
+P(x = 10) = poissonpdf(2.04, 10) ≈ .000045
+
+Calculate μ = np = 200(.0102) ≈ 2.04
+P(x = 10) = poissonpdf(2.04, 10) ≈ .000045
+
+We expect the approximation to be good because n is large (greater than 20) and p is small (less than .05). The results are close—both probabilities reported are almost 0.
+
+Try It
+
+On May 13, 2013, starting at 4:30 p.m., the probability of moderate seismic activity for the next 48 hours in the Kuril Islands off the coast of Japan was reported at about 1.43 percent. Use this information for the next 100 days to find the probability that there will be low seismic activity in 5 of the next 100 days. Use both the binomial and Poisson distributions to calculate the probabilities. Are they close?
+
+Let X = the number of days with moderate seismic activity.
+
+Using the binomial distribution: P(x = 5) = binompdf(100, 0.0143, 5) ≈ 0.0115
+
+Using the Poisson distribution:
+
+Calculate μ = np = 100(0.0143) = 1.43
+P(x = 5) = poissonpdf(1.43, 5) = 0.0119
+
+Calculate μ = np = 100(0.0143) = 1.43
+P(x = 5) = poissonpdf(1.43, 5) = 0.0119
+
+We expect the approximation to be good because n is large (greater than 20) and p is small (less than 0.05). The results are close—the difference between the values is 0.0004.
+
+References
+
+Centers for Disease Control and Prevention. (2012, Oct. 2). Teen drivers: Get the facts. Retrieved from http://www.cdc.gov/Motorvehiclesafety/Teen_Drivers/teendrivers_factsheet.html
+Daily Mail. (2011, June 9). One born every minute: the maternity unit where mothers are THREE to a bed. Retrieved from http://www.dailymail.co.uk/news/article-2001422/Busiest-maternity-ward-planet-averages-60-babies-day-mothersbed.html
+
+Department of Aviation at the Hartsfield-Jackson Atlanta International Airport. (2013). ATL fact sheet. Retrieved from http://www.atlanta-airport.com/Airport/ATL/ATL_FactSheet.aspx
+
+Lenhart, A. (2012). Teens, smartphones & testing: Texting volume is up while the frequency of voice calling is down. About one in four teens say they own smartphones. Pew Internet. Retrieved from http://www.pewinternet.org/~/media/Files/Reports/2012/PIP_Teens_Smartphones_and_Texting.pdf
+
+Ministry of Health, Labour, and Welfare. (n.d.). Children and childrearing. Retrieved from http://www.mhlw.go.jp/english/policy/children/children-childrearing/index.html
+
+Pew Internet. (2013). How Americans use text messaging. Retrieved from http://pewinternet.org/Reports/2011/Cell-Phone-Texting-2011/Main-Report.aspx
+
+South Carolina Department of Mental Health. (2006). Eating disorder statistics. Retrieved from http://www.state.sc.us/dmh/anorexia/statistics.htm
+The Guardian. (2011, June 8). Giving birth in Manila: The maternity ward at the Dr Jose Fabella Memorial Hospital in Manila, the busiest in the Philippines, where there is an average of 60 births a day. Retrieved from http://www.theguardian.com/world/gallery/2011/jun/08/philippines-health#/?picture=375471900&index=2
+
+Vanderkam, L. (2012, Oct. 8). Stop checking your email, now. CNNMoney. Retrieved from http://management.fortune.cnn.com/2012/10/08/stop-checking-your-email-now/
+
+World Earthquakes. (2012). World earthquakes: Live earthquake news and highlights. Retrieved from http://www.worldearthquakes.com/index.php?option=ethq_prediction
+
+Chapter Review
+
+A Poisson probability distribution of a discrete random variable gives the probability of a number of events occurring in a fixed interval of time or space, if these events happen at a known average rate and independently of the time since the last event. The Poisson distribution may be used to approximate the binomial, if the probability of success is small (less than or equal to .05) and the number of trials is large (greater than or equal to 20).
+
+Formula Review
+X ~ P(μ) means that X has a Poisson probability distribution where X = the number of occurrences in the interval of interest.
+X takes on the values x = 0, 1, 2, 3, . . .
+
+The mean μ is typically given.
+
+The variance is σ2 = μ, and the standard deviation is 
+ 
+ σ = 
+ μ
+
+.
+
+When P(μ) is used to approximate a binomial distribution, μ = np where n represents the number of independent trials and p represents the probability of success in a single trial.
+Use the following information to answer the next six exercises: On average, a clothing store gets 120 customers per day.
+
+Assume the event occurs independently in any given day. Define the random variable X.
+
+What values does X take on?
+
+0, 1, 2, 3, 4, …
+
+What is the probability of getting 150 customers in one day?
+
+What is the probability of getting 35 customers in the first four hours? Assume the store is open 12 hours each day.
+
+.0485
+
+What is the probability that the store will have more than 12 customers in the first hour?
+
+What is the probability that the store will have fewer than 12 customers in the first two hours?
+
+.0214
+
+Which type of distribution can the Poisson model be used to approximate? When would you do this?
+Use the following information to answer the next six exercises: On average, eight teens in the United States die from motor vehicle injuries per day. As a result, states across the country are debating raising the driving age.
+
+Assume the event occurs independently in any given day. In words, define the random variable X.
+X = the number of United States teens who die from motor vehicle injuries per day.
+X ~ _____(_____,_____)
+
+What values does X take on?
+
+0, 1, 2, 3, 4, ...
+
+For the given values of the random variable X, fill in the corresponding probabilities.
+
+Is it likely that there will be no teens killed from motor vehicle injuries on any given day in the United States? Justify your answer numerically.
+
+no
+
+Is it likely that there will be more than 20 teens killed from motor vehicle injuries on any given day in the United States? Justify your answer numerically.
+
+HOMEWORK
+
+The switchboard in a Minneapolis law office gets an average of 5.5 incoming phone calls during the noon hour on Mondays. Experience shows that the existing staff can handle up to six calls in an hour. Let X = the number of calls received at noon.
+
+Find the mean and standard deviation of X.
+
+What is the probability that the office receives at most six calls at noon on Monday?
+
+Find the probability that the law office receives six calls at noon. What does this mean to the law office staff who get, on average, 5.5 incoming phone calls at noon?
+
+What is the probability that the office receives more than eight calls at noon?
+X ~ P(5.5); μ = 5.5; 
+ 
+ σ = 
+ 
+ 5.5
+
+ ≈ 2.3452
+P(x ≤ 6) = poissoncdf(5.5, 6) ≈ .6860
+
+There is a 15.7 percent probability that the law staff will receive more calls than they can handle.
+P(x > 8) = 1 – P(x ≤ 8) = 1 – poissoncdf(5.5, 8) ≈ 1 – .8944 = .1056
+
+The maternity ward at a hospital in the Philippines is one of the busiest in the world with an average of 60 births per day. Let X = the number of births in an hour.
+
+Find the mean and standard deviation of X.
+
+Sketch a graph of the probability distribution of X.
+
+What is the probability that the maternity ward will deliver three babies in one hour?
+
+What is the probability that the maternity ward will deliver at most three babies in one hour?
+
+What is the probability that the maternity ward will deliver more than five babies in one hour?
+
+A manufacturer of decorative string lights knows that 3 percent of its bulbs are defective. Using both the binomial and Poisson distributions, find the probability that a string of 100 lights contains at most four defective bulbs.
+
+Let X = the number of defective bulbs in a string.
+
+Using the Poisson distribution:
+ 
+ μ = np = 100(.03) = 3
+ X ~ P(3)
+ P(x ≤ 4) = poissoncdf(3, 4) ≈ .8153
+μ = np = 100(.03) = 3
+X ~ P(3)
+P(x ≤ 4) = poissoncdf(3, 4) ≈ .8153
+
+Using the binomial distribution
+
+X ~ B(100, .03)
+P(x ≤ 4) = binomcdf(100, .03, 4) ≈ .8179
+X ~ B(100, .03)
+P(x ≤ 4) = binomcdf(100, .03, 4) ≈ .8179
+
+The Poisson approximation is very good—the difference between the probabilities is only .0026.
+
+The average number of children a Japanese woman has in her lifetime is 1.37. Suppose that one Japanese woman is randomly chosen.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+Find the probability that she has no children.
+
+Find the probability that she has fewer children than the Japanese average.
+
+Find the probability that she has more children than the Japanese average.
+
+The average number of children a Spanish woman has in her lifetime is 1.47. Suppose that one Spanish woman is randomly chosen.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+Find the probability that she has no children.
+
+Find the probability that she has fewer children than the Spanish average.
+
+Find the probability that she has more children than the Spanish average.
+X = the number of children for a Spanish woman
+
+0, 1, 2, 3,...
+X ~ P(1.47)
+
+.2299
+
+.5679
+
+.4321
+
+Fertile, female cats produce an average of three litters per year. Suppose that one fertile, female cat is randomly chosen. Answer the questions about the cat's probability of litters in one year.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _______
+
+Find the probability that she has no litters in one year.
+
+Find the probability that she has at least two litters in one year.
+
+Find the probability that she has exactly three litters in one year.
+
+The chance of having an extra fortune in a fortune cookie is about 3 percent. Given a bag of 144 fortune cookies, we are interested in the number of cookies with an extra fortune. Two distributions may be used to solve this problem, but only use one distribution to solve the problem.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+How many cookies do we expect to have an extra fortune?
+
+Find the probability that none of the cookies have an extra fortune.
+
+Find the probability that more than three have an extra fortune.
+
+As n increases, what happens involving the probabilities using the two distributions? Explain in complete sentences.
+X = the number of fortune cookies that have an extra fortune
+
+0, 1, 2, 3,... 144
+X ~ B(144, .03) or P(4.32)
+
+4.32
+
+.0124 or .0133
+
+.6300 or .6264
+
+As n gets larger, the probabilities get closer together.
+
+According to the South Carolina Department of Mental Health website, for every 200 U.S. women, the average number who suffer from a particular disease is one. Out of a randomly chosen group of 600 U.S. women. Determine the following:
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+How many are expected to suffer from this disease?
+
+Find the probability that no one suffers from this disease.
+
+Find the probability that more than four suffer from this disease.
+
+The chance of an IRS audit for a tax return reporting more than $25,000 in income is about 2 percent per year. Suppose that 100 people with tax returns over $25,000 are randomly picked. We are interested in the number of people audited in one year. Use a Poisson distribution to anwer the following questions.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+How many are expected to be audited?
+
+Find the probability that no one was audited.
+
+Find the probability that at least three were audited.
+X = the number of people audited in one year
+
+0, 1, 2, ..., 100
+X ~ P(2)
+
+2
+
+.1353
+
+.3233
+
+Approximately 8 percent of students at a local high school participate in after-school sports all four years of high school. A group of 60 seniors is randomly chosen. Of interest is the number who participated in after-school sports all four years of high school.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+How many seniors are expected to have participated in after-school sports all four years of high school?
+
+Based on numerical values, would you be surprised if none of the seniors participated in after-school sports all four years of high school? Justify your answer numerically.
+
+Based on numerical values, is it more likely that four or that five of the seniors participated in after-school sports all four years of high school? Justify your answer numerically.
+
+On average, Pierre, an amateur chef, drops three pieces of eggshell into every two cake batters he makes. Suppose that you buy one of his cakes.
+
+In words, define the random variable X.
+
+List the values that X may take on.
+
+Give the distribution of X. X ~ _____(_____,_____)
+
+On average, how many pieces of eggshell do you expect to be in the cake?
+
+What is the probability that there will not be any pieces of eggshell in the cake?
+
+Let’s say that you buy one of Pierre’s cakes each week for six weeks. What is the probability that there will not be any eggshell in any of the cakes?
+
+Based upon the average given for Pierre, is it possible for there to be seven pieces of shell in the cake? Why?
+X = the number of shell pieces in one cake
+
+0, 1, 2, 3,...
+X ~ P(1.5)
+
+1.5
+
+.2231
+
+.0001
+
+yes
+Use the following information to answer the next two exercises: The average number of times per week that Mrs. Plum’s cats wake her up at night because they want to play is 10. We are interested in the number of times her cats wake her up each week.
+
+In words, what is the random variable X?
+
+the number of times Mrs. Plum’s cats wake her up each week
+
+the number of times Mrs. Plum’s cats wake her up each hour
+
+the number of times Mrs. Plum’s cats wake her up each night
+
+the number of times Mrs. Plum’s cats wake her up
+
+Find the probability that her cats will wake her up no more than five times next week.
+
+.5000
+
+.9329
+
+.0378
+
+.0671
+
+d
+
+a discrete random variable (RV) that counts the number of times a certain event will occur in a specific interval; characteristics of the variable:
+
+The probability that the event occurs in a given interval is the same for all intervals
+The events occur with a known mean and independently of the time since the last event
+
+The distribution is defined by the mean μ of the event in the interval. Notation X ~ P(μ). The mean is μ = np. The standard deviation is 
+ 
+ σ = 
+ μ
+
+. The probability of having exactly x successes in r trials is P(X=x)=
+ 
+ (
+ e
+ 
+ −μ
+
+ )
+
+ μ
+ x
+
+ x!
+
+. The Poisson distribution is often used to approximate the binomial distribution, when n is large and p is small (a general rule is that n should be greater than or equal to 20 and p should be less than or equal to .05).
+The probability that the event occurs in a given interval is the same for all intervals
+
+The events occur with a known mean and independently of the time since the last event

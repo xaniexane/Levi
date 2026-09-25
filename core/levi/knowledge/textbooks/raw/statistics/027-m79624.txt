@@ -1,0 +1,852 @@
+# m79624
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Binomial Distribution (Optional)
+
+Binomial Distribution (Optional)
+
+There are three characteristics of a binomial experiment:
+There are a fixed number of trials. Think of trials as repetitions of an experiment. The letter n denotes the number of trials.
+There are only two possible outcomes, called success and failure, for each trial. The outcome that we are measuring is defined as a success, while the other outcome is defined as a failure. The letter p denotes the probability of a success on one trial, and q denotes the probability of a failure on one trial. p + q = 1.
+The n trials are independent and are repeated using identical conditions. Because the n trials are independent, the outcome of one trial does not help in predicting the outcome of another trial. Another way of saying this is that for each individual trial, the probability, p, of a success and probability, q, of a failure remain the same. Let us look at several examples of a binomial experiment.
+Example 1: Toss a fair coin once and record the result.
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 1. There are only two outcomes, a head or a tail, of each trial. We can define a head as a success if we are measuring number of heads. For a fair coin, the probabilities of getting head or tail are both .5. So, p = q − .5. Both p and q remain the same from trial to trial. This experiment is also called a Bernoulli trial, named after Jacob Bernoulli who, in the late 1600s, studied such trials extensively. Any experiment that has characteristics two and three and where n = 1 is called a Bernoulli trial. A binomial experiment takes place when the number of successes is counted in one or more Bernoulli trials.
+Example 2: Randomly guess a multiple choice question has A, B, C and D four options.
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 1. There are only two outcomes, guess correctly or guess wrong, of each trial. We can define guess correctly as a success. For a random guess (you have no clue at all), the probability of guessing correct should be 
+
+ 1
+ 4
+
+ because there are four options and only one option is correct. So, and 
+
+ p=
+ 1
+ 4
+
+ and 
+
+ q=1−p=1−
+ 1
+ 4
+ 
+ =
+ 3
+ 4
+
+. Both p and q remain the same from trial to trial. This experiment is also a Bernoulli trial. It meets the characteristics two and three and n = 1.
+Example 3: Toss a fair coin five times and record the result. 
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 5. There are only two outcomes, head or tail, of each trial. If we define head as a success, then p = q = 0.5. Both p and q remain the same for each trial. Since n = 5, this experiment is not a Bernoulli trial although it meets the characteristics two and three.
+Example 4: Randomly guess 10 multiple choice questions in an exam. Each question has A, B, C and D four options. 
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 10. There are only two outcomes, guess correctly or guess wrong, of each trial. We can define guess correctly as a success. As we explained in example 2, 
+
+ p=
+ 1
+ 4
+
+ and 
+
+ q=1−p=1−
+ 1
+ 4
+ 
+ =
+ 3
+ 4
+
+. Both p and q remain the same for each guess. Since n = 10, this experiment is not a Bernoulli trial.
+The next two experiments are not binomial experiments.
+Example 5: Randomly select two balls from a jar with five red balls and five blue balls without replacement. This means we select the first ball, and then without returning the selected ball into the jar, we will select the second ball.
+This is not a binomial experiment since the third characteristic is not met. The number of trials n = 2. There are only two outcomes, a red ball or a blue ball, of each trial. If we define selecting a red ball as a success, then selecting a blue ball is a failure. The probability of getting the first ball red is 
+
+ 5
+ 
+ 10
+
+ since there are five red balls out of 10 balls. So, 
+
+ p=
+ 5
+ 
+ 10
+
+ and 
+
+  q=1−p=1−
+ 5
+ 
+ 10
+
+ =
+ 5
+ 
+ 10
+
+. However, p and q do not remain the same for the second trial. If the first ball selected is red, then the probability of getting the second ball red is 
+
+ 4
+ 9
+
+ since there are only four red balls out of nine balls. But if the first ball selected is blue, then the probability of getting the second ball red is 
+
+ 5
+ 9
+
+ since there are still five red balls out of nine balls. 
+Example 6: Toss a fair coin until a head appears. 
+This is not a binomial experiment since the first characteristic is not met. The number of trials n is not fixed. n could be 1 if a head appears from the first toss. n could be 2 if the first toss is a tail and the second toss is a head. So on and so forth.
+More examples of binomial and non-binomial experiments will be discussed in this section later.
+
+There are a fixed number of trials. Think of trials as repetitions of an experiment. The letter n denotes the number of trials.
+
+There are only two possible outcomes, called success and failure, for each trial. The outcome that we are measuring is defined as a success, while the other outcome is defined as a failure. The letter p denotes the probability of a success on one trial, and q denotes the probability of a failure on one trial. p + q = 1.
+
+The n trials are independent and are repeated using identical conditions. Because the n trials are independent, the outcome of one trial does not help in predicting the outcome of another trial. Another way of saying this is that for each individual trial, the probability, p, of a success and probability, q, of a failure remain the same. Let us look at several examples of a binomial experiment.
+Example 1: Toss a fair coin once and record the result.
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 1. There are only two outcomes, a head or a tail, of each trial. We can define a head as a success if we are measuring number of heads. For a fair coin, the probabilities of getting head or tail are both .5. So, p = q − .5. Both p and q remain the same from trial to trial. This experiment is also called a Bernoulli trial, named after Jacob Bernoulli who, in the late 1600s, studied such trials extensively. Any experiment that has characteristics two and three and where n = 1 is called a Bernoulli trial. A binomial experiment takes place when the number of successes is counted in one or more Bernoulli trials.
+Example 2: Randomly guess a multiple choice question has A, B, C and D four options.
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 1. There are only two outcomes, guess correctly or guess wrong, of each trial. We can define guess correctly as a success. For a random guess (you have no clue at all), the probability of guessing correct should be 
+
+ 1
+ 4
+
+ because there are four options and only one option is correct. So, and 
+
+ p=
+ 1
+ 4
+
+ and 
+
+ q=1−p=1−
+ 1
+ 4
+ 
+ =
+ 3
+ 4
+
+. Both p and q remain the same from trial to trial. This experiment is also a Bernoulli trial. It meets the characteristics two and three and n = 1.
+Example 3: Toss a fair coin five times and record the result. 
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 5. There are only two outcomes, head or tail, of each trial. If we define head as a success, then p = q = 0.5. Both p and q remain the same for each trial. Since n = 5, this experiment is not a Bernoulli trial although it meets the characteristics two and three.
+Example 4: Randomly guess 10 multiple choice questions in an exam. Each question has A, B, C and D four options. 
+This is a binomial experiment since it meets all three characteristics. The number of trials n = 10. There are only two outcomes, guess correctly or guess wrong, of each trial. We can define guess correctly as a success. As we explained in example 2, 
+
+ p=
+ 1
+ 4
+
+ and 
+
+ q=1−p=1−
+ 1
+ 4
+ 
+ =
+ 3
+ 4
+
+. Both p and q remain the same for each guess. Since n = 10, this experiment is not a Bernoulli trial.
+The next two experiments are not binomial experiments.
+Example 5: Randomly select two balls from a jar with five red balls and five blue balls without replacement. This means we select the first ball, and then without returning the selected ball into the jar, we will select the second ball.
+This is not a binomial experiment since the third characteristic is not met. The number of trials n = 2. There are only two outcomes, a red ball or a blue ball, of each trial. If we define selecting a red ball as a success, then selecting a blue ball is a failure. The probability of getting the first ball red is 
+
+ 5
+ 
+ 10
+
+ since there are five red balls out of 10 balls. So, 
+
+ p=
+ 5
+ 
+ 10
+
+ and 
+
+  q=1−p=1−
+ 5
+ 
+ 10
+
+ =
+ 5
+ 
+ 10
+
+. However, p and q do not remain the same for the second trial. If the first ball selected is red, then the probability of getting the second ball red is 
+
+ 4
+ 9
+
+ since there are only four red balls out of nine balls. But if the first ball selected is blue, then the probability of getting the second ball red is 
+
+ 5
+ 9
+
+ since there are still five red balls out of nine balls. 
+Example 6: Toss a fair coin until a head appears. 
+This is not a binomial experiment since the first characteristic is not met. The number of trials n is not fixed. n could be 1 if a head appears from the first toss. n could be 2 if the first toss is a tail and the second toss is a head. So on and so forth.
+More examples of binomial and non-binomial experiments will be discussed in this section later.
+
+The outcomes of a binomial experiment fit a binomial probability distribution. The random variable X = the number of successes obtained in the n independent trials.
+
+There are shortcut formulas for calculating mean μ, variance σ2, and standard deviation σ of a binomial probability distribution. The formulas are given as below. The deriving of these formulas will not be discussed in this book.
+
+Here n is the number of trials, p is the probability of a success, and q is the probability of a failure.
+
+At ABC High School, the withdrawal rate from an elementary physics course is 30 percent for any given term. This implies that, for any given term, 70 percent of the students stay in the class for the entire term. The random variable X = the number of students who withdraw from the randomly selected elementary physics class. Since we are measuring the number of students who withdrew, a success is defined as an individual who withdrew.
+
+Try It
+
+The state health board is concerned about the amount of fruit available in school lunches. Forty-eight percent of schools in the state offer fruit in their lunches every day. This implies that 52 percent do not. What would a success be in this case?
+
+a school that offers fruit in their lunch every day
+
+Suppose you play a game that you can only either win or lose. The probability that you win any game is 55 percent, and the probability that you lose is 45 percent. Each game you play is independent. If you play the game 20 times, write the function that describes the probability that you win 15 of the 20 times. Here, if you define X as the number of wins, then X takes on the values 0, 1, 2, 3, . . ., 20. The probability of a success is p = 0.55. The probability of a failure is q = .45. The number of trials is n = 20. The probability question can be stated mathematically as P(x = 15). If you define X as the number of losses, then a success is defined as a loss and a failure is defined as a win. A success does not necessarily represent a good outcome. It is simply the outcome that you are measuring. X still takes on the values of 0, 1, 2, 3, . . ., 20. The probability of a success is 
+
+ p=.45
+
+. The probability of a failure is 
+
+ q=.55
+
+.
+
+Try It
+
+A trainer is teaching a dolphin to do tricks. The probability that the dolphin successfully performs the trick is 35 percent, and the probability that the dolphin does not successfully perform the trick is 65 percent. Out of 20 attempts, you want to find the probability that the dolphin succeeds 12 times. State the probability question mathematically.
+P(x = 12)
+
+A fair coin is flipped 15 times. Each flip is independent. What is the probability of getting more than 10 heads? Let X = the number of heads in 15 flips of the fair coin. X takes on the values 0, 1, 2, 3, . . ., 15. Since the coin is fair, p = .5 and q = .5. The number of trials n = 15. State the probability question mathematically.
+P(x > 10)
+
+Try It
+
+A fair, six-sided die is rolled 10 times. Each roll is independent. You want to find the probability of rolling a one more than three times. State the probability question mathematically.
+P(x > 3)
+
+Approximately 70 percent of statistics students do their homework in time for it to be collected and graded. Each student does homework independently. In a statistics class of 50 students, what is the probability that at least 40 will do their homework on time? Students are selected randomly.
+
+a. This is a binomial problem because there is only a success or a ________, there are a fixed number of trials, and the probability of a success is .70 for each trial.
+
+a. failure
+
+b. If we are interested in the number of students who do their homework on time, then how do we define X?
+
+b. X = the number of statistics students who do their homework on time
+
+c. What values does x take on?
+
+c. 0, 1, 2, . . ., 50
+
+d. What is a failure, in words?
+
+d. Failure is defined as a student who does not complete his or her homework on time.
+
+The probability of a success is p = .70. The number of trials is n = 50.
+
+e. If p + q = 1, then what is q?
+
+e. q = .30
+
+f. The words at least translate as what kind of inequality for the probability question P(x ____ 40)?
+
+f. greater than or equal to (≥)
+The probability question is P(x ≥ 40).
+
+Try It
+
+Sixty-five percent of people pass the state driver’s exam on the first try. A group of 50 individuals who have taken the driver’s exam is randomly selected. Give two reasons why this is a binomial problem.
+
+This is a binomial problem because there is only a success or a failure, and there are a definite number of trials. The probability of a success stays the same for each trial.
+
+Notation for the Binomial: B = Binomial Probability Distribution Function
+X ~ B(n, p)
+
+Read this as X is a random variable with a binomial distribution. The parameters are n and p: n = number of trials, p = probability of a success on each trial.
+
+It has been stated that about 41 percent of adult workers have a high school diploma but do not pursue any further education. If 20 adult workers are randomly selected, find the probability that at most 12 of them have a high school diploma but do not pursue any further education. How many adult workers do you expect to have a high school diploma but do not pursue any further education?
+
+Let X = the number of workers who have a high school diploma but do not pursue any further education.
+X takes on the values 0, 1, 2, . . ., 20 where n = 20, p = .41, and q = 1 – .41 = .59. X ~ B(20, .41)
+
+Find P(x ≤ 12). There is a formula to define the probability of a binomial distribution P(x). We can use the formula to find 
+
+ P(x≤12)
+
+. But the calculation is tedious and time consuming, and people usually use a graphing calculator, software, or binomial table to get the answer. Use a graphing calculator, you can get 
+
+ P(x≤12)=.9738
+
+. The instruction of TI-83, 83+, 84, 84+ is given below.
+
+Go into 2nd DISTR. The syntax for the instructions are as follows:
+To calculate the probability of a value 
+
+ P(x=value)
+
+: use binompdf(n, p, number). Here binompdf represents binomial probability density function. It is used to find the probability that a binomial random variable is equal to an exact value. n is the number of trials, p is the probability of a success, and number is the value. If number is left out, which means use binompdf(n, p), then all the probabilities 
+
+ P(
+ 
+ x=0
+ 
+ ),P(
+ 
+ x=1
+ 
+ ),…,P(
+ 
+ x=n
+ 
+ )
+
+ will be calculated.
+To calculate the cumulative probability 
+
+ P(x≤value)
+
+: use binomcdf(n, p, number). Here binomcdf represents binomial cumulative distribution function. It is used to determine the probability of at most type of problem, the probability that a binomial random variable is less than or equal to a value. n is the number of trials, p is the probability of a success, and number is the value. If number is left out, all the cumulative probabilities 
+
+ P(
+ 
+ x≤0
+ 
+ ),P(
+ 
+ x≤1
+ 
+ ),…,P(
+ 
+ x≤n
+ 
+ )
+
+ will be calculated.
+To calculate the cumulative probability 
+
+ P(x≥value)
+
+: use 1 - binomcdf(n, p, number). n is the number of trials, p is the probability of a success, and number is the value. TI calculators do not have a built-in function to find the probability that a binomial random variable is greater than a value. However, we can use the fact that 
+
+P(
+ 
+ x>value
+ 
+ )=1−P(
+ 
+ x≤value
+ 
+ )
+
+ to find the answer.
+For this problem: After you are in 2nd DISTR, arrow down to binomcdf. Press ENTER. Enter 20,.41,12). The result is P(x ≤ 12) = .9738.
+
+NOTE
+
+If you want to find P(x = 12), use the pdf (binompdf). If you want to find P(x > 12), use 1 − binomcdf(20,.41,12).
+
+The probability that at most 12 workers have a high school diploma but do not pursue any further education is .9738.
+
+The graph of X ~ B(20, .41) is as follows.
+
+The previous graph is called a probability distribution histogram. It is made of a series of vertical bars. The x-axis of each bar is the value of X = the number of workers who have only a high school diploma, and the height of that bar is the probability of that value occurring.
+
+The number of adult workers that you expect to have a high school diploma but not pursue any further education is the mean, μ = np = (20)(.41) = 8.2.
+
+The formula for the variance is σ2 = npq. The standard deviation is σ = 
+
+ npq
+
+. σ = 
+
+ (
+ 
+ 20
+ 
+ )(
+ 
+ .41
+ 
+ )(
+ 
+ .59
+ 
+ )
+
+ = 2.20.
+
+The following is the interpretation of the mean 
+
+ μ=8.2
+
+ and standard deviation 
+
+ σ=2.20
+
+:
+
+If you randomly select 20 adult workers, and do that over and over, you expect around eight adult workers out of 20 to have a high school diploma but do not pursue any further education on average. And you expect that to vary by about two workers on average.
+
+Try It
+
+About 32 percent of students participate in a community volunteer program outside of school. If 30 students are selected at random, find the probability that at most 14 of them participate in a community volunteer program outside of school. Use the TI-83+ or TI-84 calculator to find the answer.
+P(x ≤ 14) = 0.9695
+
+A store releases a 560-page art supply catalog. Eight of the pages feature signature artists. Suppose we randomly sample 100 pages. Let X = the number of pages that feature signature artists.
+
+What values does x take on?
+
+What is the probability distribution? Find the following probabilities:
+ 
+ the probability that two pages feature signature artists
+ the probability that at most six pages feature signature artists
+ the probability that more than three pages feature signature artists
+
+the probability that two pages feature signature artists
+
+the probability that at most six pages feature signature artists
+
+the probability that more than three pages feature signature artists
+
+Using the formulas, calculate the (i) mean and (ii) standard deviation.
+x = 0, 1, 2, 3, 4, 5, 6, 7, 8
+
+This is a binomial experiment since all three characteristics are met. Each page is a trial. Since we sample 100 pages, the number of trials is n = 100. For each page, there are two possible outcomes, features signature artists or does not feature signature artists. Since we are measuring the number of pages that feature signature artists, a page that features signature artists is defined as a success and a page that does not feature signature artists is defined as a failure. There are 8 out of 560 pages that feature signature artists. Therefore the probability of a success 
+
+ p=
+ 8
+ 
+ 560
+
+ and the probability of a failure 
+
+ q=1−p=1−
+ 8
+ 
+ 560
+
+ =
+ 
+ 552
+
+ 560
+
+.
+Both p and q remain the same for each page. Therefore, X is a binomial random variable, and it can be written as 
+
+ X~B(
+ 
+ 100,
+ 8
+ 
+ 560
+
+ )
+
+.
+We can use a graphing calculator to answer Parts i to iii.
+P(x = 2) = binompdf
+ 
+ (
+ 
+ 100,
+ 8
+ 
+ 560
+
+ ,2
+ 
+ )
+ 
+ = .2466
+ P(x ≤ 6) = binomcdf
+ 
+ (
+ 
+ 100,
+ 8
+ 
+ 560
+
+ ,6
+ 
+ )
+ 
+ = .9994
+ P(x > 3) = 1 – P(x ≤ 3) = 1 – binomcdf
+ 
+ (
+ 
+ 100,
+ 8
+ 
+ 560
+
+ ,3
+ 
+ )
+ 
+ = 1 – .9443 = .0557
+P(x = 2) = binompdf
+ 
+ (
+ 
+ 100,
+ 8
+ 
+ 560
+
+ ,2
+ 
+ )
+ 
+ = .2466
+P(x ≤ 6) = binomcdf
+ 
+ (
+ 
+ 100,
+ 8
+ 
+ 560
+
+ ,6
+ 
+ )
+ 
+ = .9994
+P(x > 3) = 1 – P(x ≤ 3) = 1 – binomcdf
+ 
+ (
+ 
+ 100,
+ 8
+ 
+ 560
+
+ ,3
+ 
+ )
+ 
+ = 1 – .9443 = .0557
+mean = np = (100)
+ 
+ (
+
+ 8
+ 
+ 560
+
+ )
+ 
+ = 
+
+ 800
+ 
+ 560
+
+ ≈ 1.4286
+standard deviation = 
+
+ npq
+
+ = 
+
+ (100)(
+
+ 8
+ 
+ 560
+
+ )(
+
+ 552
+
+ 560
+
+ )
+
+ ≈ 1.1867
+
+mean = np = (100)
+ 
+ (
+
+ 8
+ 
+ 560
+
+ )
+ 
+ = 
+
+ 800
+ 
+ 560
+
+ ≈ 1.4286
+
+standard deviation = 
+
+ npq
+
+ = 
+
+ (100)(
+
+ 8
+ 
+ 560
+
+ )(
+
+ 552
+
+ 560
+
+ )
+
+ ≈ 1.1867
+
+Try It
+
+According to a poll, 60 percent of American adults prefer saving over spending. Let X = the number of American adults out of a random sample of 50 who prefer saving to spending.
+
+What is the probability distribution for X?
+
+Use your calculator to find the following probabilities:
+ 
+ The probability that 25 adults in the sample prefer saving over spending
+ The probability that at most 20 adults prefer saving
+ The probability that more than 30 adults prefer saving
+
+The probability that 25 adults in the sample prefer saving over spending
+
+The probability that at most 20 adults prefer saving
+
+The probability that more than 30 adults prefer saving
+
+Using the formulas, calculate the (i) mean and (ii) standard deviation of X.
+X ∼ B(50, 0.6)
+
+Using the TI-83, 83+, 84 calculator with instructions as provided in :
+ P(x = 25) = binompdf(50, 0.6, 25) = 0.0405
+ P(x ≤ 20) = binomcdf(50, 0.6, 20) = 0.0034
+ P(x > 30) = 1 - binomcdf(50, 0.6, 30) = 1 – 0.5535 = 0.4465
+P(x = 25) = binompdf(50, 0.6, 25) = 0.0405
+P(x ≤ 20) = binomcdf(50, 0.6, 20) = 0.0034
+P(x > 30) = 1 - binomcdf(50, 0.6, 30) = 1 – 0.5535 = 0.4465
+mean = np = 50(0.6) = 30
+standard deviation = 
+
+ npq
+
+ = 
+
+ 50(
+ 
+ 0.6
+ 
+ )(
+ 
+ 0.4
+ 
+ )
+
+ ≈ 3.4641
+
+mean = np = 50(0.6) = 30
+
+standard deviation = 
+
+ npq
+
+ = 
+
+ 50(
+ 
+ 0.6
+ 
+ )(
+ 
+ 0.4
+ 
+ )
+
+ ≈ 3.4641
+
+The lifetime risk of developing a specific disease is about 1 in 78 (1.28 percent). Suppose we randomly sample 200 people. Let X = the number of people who will develop the disease.
+
+What is the probability distribution for X?
+
+Using the formulas, calculate the (i) mean and (ii) standard deviation of X.
+
+Use your calculator to find the probability that at most eight people develop the disease.
+
+Is it more likely that five or six people will develop the disease? Justify your answer numerically.
+
+This is a binomial experiment since all three characteristics are met. Each person is a trial. Since we sample 200 people, the number of trials is n = 200. For each person, there are two possible outcomes: will develop the disease or not. Since we are measuring the number of people who will develop the disease, a person who will develop the disease is defined as a success and a person who will not develop the disease is defined as a failure. The risk of developing the disease is 1.28 percent. Therefore the probability of a success, p=1.28 percent, .0128, and the probability of a failure, 
+ 
+ q=1−p=1−.0128=.9872
+ 
+. Both p and q remain the same for each person. Therefore, X is a binomial random variable and it can be written as 
+
+ X~B(
+ 
+ 200,.0128
+ 
+ )
+
+.
+We can use a graphing calculator to answer Questions c and d.
+Mean = np = 200(.0128) = 2.56
+Standard Deviation = 
+
+ npq
+
+  =  
+ 
+ (200)(0.128)(.9872)
+
+ ≈1.5897
+
+Mean = np = 200(.0128) = 2.56
+
+Standard Deviation = 
+
+ npq
+
+  =  
+ 
+ (200)(0.128)(.9872)
+
+ ≈1.5897
+
+Using the TI-83, 83+, 84 calculator with instructions as provided in :
+P(x ≤ 8) = binomcdf(200, .0128, 8) = .9988
+P(x = 5) = binompdf(200, .0128, 5) = .0707
+P(x = 6) = binompdf(200, .0128, 6) = .0298
+So P(x = 5) > P(x = 6); it is more likely that five people will develop the disease than six.
+
+Try It
+
+During the 2013 regular basketball season, a player had the highest field goal completion rate in the league. This player scored with 61.3 percent of his shots. Suppose you choose a random sample of 80 shots made by this player during the 2013 season. Let X = the number of shots that scored points.
+
+What is the probability distribution for X?
+
+Using the formulas, calculate the (i) mean and (ii) standard deviation of X.
+
+Use your calculator to find the probability that this player scored with 60 of these shots.
+
+Find the probability that this player scored with more than 50 of these shots.
+X ~ B(80, 0.613)
+Mean = np = 80(0.613) = 49.04
+Standard Deviation = 
+
+ npq
+
+ =
+ 
+ 80(0.613)(0.387)
+
+ ≈4.3564
+
+Mean = np = 80(0.613) = 49.04
+
+Standard Deviation = 
+
+ npq
+
+ =
+ 
+ 80(0.613)(0.387)
+
+ ≈4.3564
+
+Using the TI-83, 83+, 84 calculator with instructions as provided in :
+P(x = 60) = binompdf(80, 0.613, 60) = 0.0036
+P(x > 50) = 1 – P(x ≤ 50) = 1 – binomcdf(80, 0.613, 50) = 1 – 0.6282 = 0.3718
+
+The following example illustrates a problem that is not binomial. It violates the condition of independence. ABC High School has a student advisory committee made up of 10 staff members and six students. The committee wishes to choose a chairperson and a recorder. What is the probability that the chairperson and recorder are both students? The names of all committee members are put into a box, and two names are drawn without replacement. The first name drawn determines the chairperson and the second name the recorder. There are two trials. However, the trials are not independent because the outcome of the first trial affects the outcome of the second trial. The probability of a student on the first draw is 
+
+ 6
+ 
+ 16
+
+ because there are six students out of 16 members (10 staff members + six students). If the first draw selects a student, then the probability of a student on the second draw is 
+
+ 5
+ 
+ 16
+
+ because there are only five students out of 15 members. If the first draw selects a staff member, then the probability of a student on the second draw is 
+
+ 6
+ 
+ 15
+
+ because there are still six students out of 15 members. The probability of drawing a student's name changes for each of the trials and, therefore, violates the condition of independence.
+
+Try It
+
+A lacrosse team is selecting a captain. The names of all the seniors are put into a hat, and the first three that are drawn will be the captains. The names are not replaced once they are drawn (one person cannot be two captains). You want to see if the captains all play the same position. State whether this problem is binomial or not and state why.
+
+This is not binomial because the names are not replaced, which means the probability changes for each time a name is drawn. This violates the condition of independence.
+
+References
+
+American Cancer Society. (2013). What are the key statistics about pancreatic cancer? Retrieved from http://www.cancer.org/cancer/pancreaticcancer/detailedguide/pancreatic-cancer-key-statistics
+
+Central Intelligence Agency. (n.d.). The world factbook. Retrieved from https://www.cia.gov/library/publications/theworld-factbook/geos/af.html
+
+ESPN NBA. (2013). NBA statistics  2013. Retrieved from http://espn.go.com/nba/statistics/_/seasontype/2
+
+Newport, F. (2013). Americans still enjoy saving rather than spending: Few demographic differences seen in these views other than by income. GALLUP Economy. Retrieved from http://www.gallup.com/poll/162368/americansenjoy-saving-rather-spending.aspx
+
+Pryor, J. H., et al. (2011). The American freshman: National norms fall 2011. Los Angeles, CA: Cooperative Institutional Research Program, Higher Education Research Institute. Retrieved from http://heri.ucla.edu/PDFs/pubs/TFS/Norms/Monographs/TheAmericanFreshman2011.pdf
+
+Wikipedia. (n.d.). Distance education. Retrieved from http://en.wikipedia.org/wiki/Distance_education
+
+World Bank Group. (2013). Access to electricity (% of population). Retrieved from http://data.worldbank.org/indicator/EG.ELC.ACCS.ZS?order=wbapi_data_value_2009%20wbapi_data_value%20wbapi_data_value-first&sort=asc
+
+Chapter Review
+
+A statistical experiment can be classified as a binomial experiment if the following conditions are met:
+
+There are a fixed number of trials, n
+
+There are only two possible outcomes, called success and failure, for each trial; the letter p denotes the probability of a success on one trial and q denotes the probability of a failure on one trial
+
+The n trials are independent and are repeated using identical conditions
+
+The outcomes of a binomial experiment fit a binomial probability distribution. The random variable X = the number of successes obtained in the n independent trials. The mean of X can be calculated using the formula μ = np, and the standard deviation is given by the formula σ = 
+
+ npq
+
+.
+
+Formula Review
+X ~ B(n, p) means that the discrete random variable X has a binomial probability distribution with n trials and probability of success p.
+X = the number of successes in n independent trials
+n = the number of independent trials
+X takes on the values x = 0, 1, 2, 3, . . . , n
+p = the probability of a success for any trial
+q = the probability of a failure for any trial
+p + q = 1
+q = 1 – p
+
+The mean of X is μ = np. The standard deviation of X is σ = 
+
+ npq
+
+.
+Use the following information to answer the next eight exercises: Researchers collected data from 203,967 incoming first-time, full-time freshmen from 270 four-year colleges and universities in the United States. Of those students, 71.3 percent replied that, yes, they agreed with a recent federal law that was passed.
+
+Suppose that you randomly pick eight first-time, full-time freshmen from the survey. You are interested in the number who agreed with that law.
+
+In word
+[truncated]

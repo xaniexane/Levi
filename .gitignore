@@ -1,0 +1,78 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Credentials / secrets
+.env
+.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+credentials.json
+client_secret*.json
+.envrc
+.terraform/
+.grok/
+creds/
+secrets/
+*.log
+
+# Archives
+*.zip
+*.tar.gz
+*.tar
+archives/
+archive/
+# ...but the LEVI Archive (Smithsonian module) is a real Python package:
+!core/levi/archive/
+
+# Temp
+*.tmp
+*.bak
+*.orig
+
+# Virtual envs
+venv/
+.env3/
+ENV/
+.venv/
+
+# JS / node
+node_modules/
+
+# Android
+.kotlin/
+*.apk
+*.aab
+*.dex
+*.class
+*.jar
+*.keystore
+*.jks
+local.properties
+.gradle/
+build/
+
+# Archives of old content
+docs_old/
+legacy/
+extras/

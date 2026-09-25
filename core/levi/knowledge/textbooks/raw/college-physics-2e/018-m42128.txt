@@ -1,0 +1,420 @@
+# m42128
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Vector Addition and Subtraction: Analytical Methods
+
+Vector Addition and Subtraction: Analytical Methods
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Understand the rules of vector addition and subtraction using analytical methods.
+
+Apply analytical methods to determine vertical and horizontal component vectors.
+
+Apply analytical methods to determine the magnitude and direction of a resultant vector.
+Analytical methods of vector addition and subtraction employ geometry and simple trigonometry rather than the ruler and protractor of graphical methods. Part of the graphical technique is retained, because vectors are still represented by arrows for easy visualization. However, analytical methods are more concise, accurate, and precise than graphical methods, which are limited by the accuracy with which a drawing can be made. Analytical methods are limited only by the accuracy and precision with which physical quantities are known.
+
+Resolving a Vector into Perpendicular Components
+
+Analytical techniques and right triangles go hand-in-hand in physics because (among other things) motions along perpendicular directions are independent. We very often need to separate a vector into perpendicular components. For example, given a vector like A in , we may wish to find which two perpendicular vectors, Ax and Ay, add to produce it.
+Ax and Ay are defined to be the components of A along the x- and y-axes. The three vectors A, Ax, and Ay form a right triangle:
+
+Note that this relationship between vector components and the resultant vector holds only for vector quantities (which include both magnitude and direction). The relationship does not apply for the magnitudes alone. For example, if Ax=3 m east,
+
+Ay=4 m north, and
+
+A=5 m north-east, then it is true that the vectors Ax + Ay = A. However, it is not true that the sum of the magnitudes of the vectors is also equal. That is,
+
+Thus,
+
+If the vector A is known, then its magnitude A (its length) and its angle 
+
+ θ
+
+ (its direction) are known. To find Ax and Ay, its x- and y-components, we use the following relationships for a right triangle.
+
+and
+
+Suppose, for example, that A is the vector representing the total displacement of the person walking in a city considered in Kinematics in Two Dimensions: An Introduction and Vector Addition and Subtraction: Graphical Methods.
+
+Then A=10.3 blocks and
+
+ θ
+ =
+ 29.1º
+
+, so that
+
+Ax=Acosθ=(10.3 blocks)(cos29.1º)=9.0 blocksAy=Asinθ=(10.3 blocks)(sin29.1º)=5.0 blocks.
+
+Calculating a Resultant Vector
+
+If the perpendicular components Ax and Ay of a vector A are known, then A can also be found analytically. To find the magnitude A and direction 
+
+ θ
+
+ of a vector from its perpendicular components Ax and Ay, relative to the x-axis, we use the following relationships:
+
+Note that the equation
+
+ A
+ =
+
+ A
+ x
+ 2
+ 
+ +
+ 
+ A
+ y
+ 2
+
+ is just the Pythagorean theorem relating the legs of a right triangle to the length of the hypotenuse. For example, if Ax and Ay are 9 and 5 blocks, respectively, then A=92+52=10.3 blocks, again consistent with the example of the person walking in a city. Finally, the direction is
+
+ θ
+ =
+ 
+ tan
+
+ –1
+
+ (
+ 5/9
+ )
+ =29.1º
+
+, as before.
+
+Determining Vectors and Vector Components with Analytical Methods
+
+Equations Ax=Acosθ and Ay=Asinθ are used to find the perpendicular components of a vector—that is, to go from A and 
+
+ θ
+
+ to Ax and Ay. Equations A=Ax2+Ay2 and θ=tan–1(Ay/Ax) are used to find a vector from its perpendicular components—that is, to go from Ax and Ay to A and 
+
+ θ
+ 
+ . Both processes are crucial to analytical methods of vector addition and subtraction.
+
+Adding Vectors Using Analytical Methods
+
+To see how to add vectors using perpendicular components, consider , in which the vectors A and B are added to produce the resultant R.
+
+If A and B represent two legs of a walk (two displacements), then R is the total displacement. The person taking the walk ends up at the tip of R. There are many ways to arrive at the same point. In particular, the person could have walked first in the x-direction and then in the y-direction. Those paths are the x- and y-components of the resultant, Rx and Ry. If we know
+
+Rx and Ry, we can find
+
+R and
+
+ θ
+
+ using the equations
+
+A
+=
+A
+x
+2
++
+
+Ay
+2
+ and
+
+θ
+=tan
+–1
+(Ay
+/Ax
+). When you use the analytical method of vector addition, you can determine the components or the magnitude and direction of a vector.
+Step 1. Identify the x- and y-axes that will be used in the problem. Then, find the components of each vector to be added along the chosen perpendicular axes. Use the equations
+Ax=Acosθ and
+
+Ay=Asinθ to find the components. In , these components are
+
+Ax,
+
+Ay,
+
+Bx, and
+
+By. The angles that vectors A and B make with the x-axis are θA and θB, respectively.
+Step 2. Find the components of the resultant along each axis by adding the components of the individual vectors along that axis. That is, as shown in ,
+
+and
+
+Components along the same axis, say the x-axis, are vectors along the same line and, thus, can be added to one another like ordinary numbers. The same is true for components along the y-axis. (For example, a 9-block eastward walk could be taken in two legs, the first 3 blocks east and the second 6 blocks east, for a total of 9, because they are along the same direction.) So resolving vectors into components along common axes makes it easier to add them. Now that the components of R are known, its magnitude and direction can be found.
+Step 3. To get the magnitude R of the resultant, use the Pythagorean theorem:
+Step 4. To get the direction of the resultant relative to the x-axis:
+
+The following example illustrates this technique for adding vectors using perpendicular components.
+
+Adding Vectors Using Analytical Methods
+
+Add the vector A to the vector B shown in , using perpendicular components along the x- and y-axes. The x- and y-axes are along the east–west and north–south directions, respectively. Vector A represents the first leg of a walk in which a person walks 53.0 m in a direction 20.0º north of east. Vector B represents the second leg, a displacement of 34.0 m in a direction 63.0º north of east.
+Strategy
+
+Strategy
+
+The components of A and B along the x- and y-axes represent walking due east and due north to get to the same ending point. Once found, they are combined to produce the resultant.
+Solution
+
+Solution
+
+Following the method outlined above, we first find the components of
+
+A and
+
+B along the x- and y-axes. Note that
+
+A=53.0 m,
+
+θA=20.0º,
+
+B=34.0 m, and θB=63.0º.
+
+ We find the x-components by using Ax=Acosθ, which gives
+
+and
+
+Similarly, the y-components are found using Ay=AsinθA:
+
+and
+
+The x- and y-components of the resultant are thus
+
+and
+
+Now we can find the magnitude of the resultant by using the Pythagorean theorem:
+
+so that
+
+Finally, we find the direction of the resultant:
+
+Thus,
+Discussion
+
+Discussion
+
+This example illustrates the addition of vectors using perpendicular components. Vector subtraction using perpendicular components is very similar—it is just the addition of a negative vector.
+
+Subtraction of vectors is accomplished by the addition of a negative vector. That is, A−B≡A+(–B). Thus, the method for the subtraction of vectors using perpendicular components is identical to that for addition. The components of
+
+–B are the negatives of the components of
+
+B. The x- and y-components of the resultant A−B = R are thus
+
+and
+
+and the rest of the method outlined above is identical to that for addition. (See .)
+
+Analyzing vectors using perpendicular components is very useful in many areas of physics, because perpendicular quantities are often independent of one another. The next module, Projectile Motion, is one of many in which using perpendicular components helps make the picture clear and simplifies the physics.
+
+Vector Addition
+
+Learn how to add vectors. Drag vectors onto a graph, change their length and angle, and sum them together. The magnitude, angle, and components of each vector can be displayed in several formats.
+
+Summary
+
+The analytical method of vector addition and subtraction involves using the Pythagorean theorem and trigonometric identities to determine the magnitude and direction of a resultant vector.
+
+The steps to add vectors A and B using the analytical method are as follows:
+ Step 1: Determine the coordinate system for the vectors. Then, determine the horizontal and vertical components of each vector using the equations
+
+ A
+
+ x
+
+ =
+
+ A
+
+ cos
+ θ
+
+ B
+
+ x
+
+ =
+
+ B
+ 
+ cos
+ θ
+
+ and
+
+ A
+
+ y
+
+ =
+
+ A
+
+ sin
+ θ
+
+ By
+
+ =
+
+ B
+ 
+ sin 
+ θ
+ .
+
+ Step 2: Add the horizontal and vertical components of each vector to determine the components Rx and Ry of the resultant vector, R:
+
+ R
+
+ x
+
+ =
+
+ A
+
+ x
+
+ +
+ 
+ B
+
+ x
+
+ and
+ Ry=Ay+By.
+ Step 3: Use the Pythagorean theorem to determine the magnitude, R, of the resultant vector R:R=Rx2+Ry2.
+ Step 4: Use a trigonometric identity to determine the direction, θ, of R:θ=tan−1(Ry/Rx).
+
+Step 1: Determine the coordinate system for the vectors. Then, determine the horizontal and vertical components of each vector using the equations
+
+and
+
+Step 2: Add the horizontal and vertical components of each vector to determine the components Rx and Ry of the resultant vector, R:
+
+and
+
+Step 3: Use the Pythagorean theorem to determine the magnitude, R, of the resultant vector R:
+
+Step 4: Use a trigonometric identity to determine the direction, θ, of R:
+
+Conceptual Questions
+
+Suppose you add two vectors A and B. What relative direction between them produces the resultant with the greatest magnitude? What is the maximum magnitude? What relative direction between them produces the resultant with the smallest magnitude? What is the minimum magnitude?
+
+Give an example of a nonzero vector that has a component of zero.
+
+Explain why a vector cannot have a component greater than its own magnitude.
+
+If the vectors A and B are perpendicular, what is the component of A along the direction of B? What is the component of B along the direction of A?
+
+Problems & Exercises
+
+Find the following for path C in : (a) the total distance traveled and (b) the magnitude and direction of the displacement from start to finish. In this part of the problem, explicitly show how you follow the steps of the analytical method of vector addition.
+The various lines represent paths taken by different people walking in a city. All blocks are 120 m on a side.
+
+(a) 1.56 km
+
+(b) 120 m east
+
+Find the following for path D in : (a) the total distance traveled and (b) the magnitude and direction of the displacement from start to finish. In this part of the problem, explicitly show how you follow the steps of the analytical method of vector addition.
+
+Find the north and east components of the displacement from San Francisco to Sacramento shown in .
+
+North-component 87.0 km, east-component 87.0 km
+
+Solve the following problem using analytical techniques: Suppose you walk 18.0 m straight west and then 25.0 m straight north. How far are you from your starting point, and what is the compass direction of a line connecting your starting point to your final position? (If you represent the two legs of the walk as vector displacements A and B, as in , then this problem asks you to find their sum R=A+B.)
+
+Note that you can also solve this graphically. Discuss why the analytical technique for solving this problem is potentially more accurate than the graphical technique.
+
+Repeat using analytical techniques, but reverse the order of the two legs of the walk and show that you get the same final result. (This problem shows that adding them in reverse order gives the same result—that is,
+
+B + A = A + B
+ 
+.) Discuss how taking another path to reach the same point might help to overcome an obstacle blocking your other path.
+
+30.8 m, 35.8 west of north
+
+You drive 7.50 km in a straight line in a direction
+
+15º east of north. (a) Find the distances you would have to drive straight east and then straight north to arrive at the same point. (This determination is equivalent to find the components of the displacement along the east and north directions.) (b) Show that you still arrive at the same point if the east and north legs are reversed in order.
+
+Do again using analytical techniques and change the second leg of the walk to 25.0 m straight south. (This is equivalent to subtracting B from A —that is, finding
+R′=A – B) (b) Repeat again, but now you first walk 25.0 m north and then 18.0 m east. (This is equivalent to subtract A from B —that is, to find A=B+C. Is that consistent with your result?)
+
+(a) 30.8 m, 54.2º south of west
+
+(b) 30.8 m, 54.2º north of east
+
+A new landowner has a triangular piece of flat land she wishes to fence. Starting at the west corner, she measures the first side to be 80.0 m long and the next to be 105 m. These sides are represented as displacement vectors A from B in . She then correctly calculates the length and orientation of the third side C. What is her result?
+
+You fly 32.0 km in a straight line in still air in the direction
+
+35.0º south of west. (a) Find the distances you would have to fly straight south and then straight west to arrive at the same point. (This determination is equivalent to finding the components of the displacement along the south and west directions.) (b) Find the distances you would have to fly first in a direction
+
+45.0º south of west and then in a direction
+
+45.0º west of north. These are the components of the displacement along a different set of axes—one rotated
+
+45º.
+
+18.4 km south, then 26.2 km west(b) 31.5 km at
+45.0º south of west, then 5.56 km at
+45.0º west of north
+
+A farmer wants to fence off a four-sided plot of flat land. They measure the first three sides, shown as 
+
+ A
+ ,
+
+ B
+ ,
+
+ and 
+
+ C
+
+ in , and then correctly calculate the length and orientation of the fourth side D.
+ What is their result?
+
+In an attempt to escape his island, Gilligan builds a raft and sets to sea. The wind shifts a great deal during the day, and he is blown along the following straight lines: 2.50 km
+45.0º
+
+ north of west; then
+
+4.70 km
+
+60.0º south of east; then
+
+1.30 km
+
+25.0º south of west; then
+
+5.10 km straight east; then
+
+1.70 km
+
+5.00º east of north; then
+
+7.20 km 
+
+55.0º south of west; and finally
+
+2.80 km
+
+10.0º north of east. What is his final position relative to the island?
+7.34 km, 63.5º south of east
+
+Suppose a pilot flies 40.0 km in a direction 60º north of east and then flies 30.0 km in a direction 15º north of east as shown in . Find her total distance R from the starting point and the direction θ of the straight-line path to the final position. Discuss qualitatively how this flight would be altered by a wind from the north and how the effect of the wind would depend on both wind speed and the speed of the plane relative to the air mass.
+
+the method of determining the magnitude and direction of a resultant vector using the Pythagorean theorem and trigonometric identities

@@ -1,0 +1,180 @@
+# m00121
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Hamilton Cycles
+
+Hamilton Cycles
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Describe and identify Hamilton cycles.
+
+Compute the number of Hamilton cycles in a complete graph.
+
+Apply and evaluate weighted graphs.
+
+In Euler Circuits and Euler Trails, we looked for circuits and paths that visited each edge of a graph exactly once. In this section, we will look for circuits that visit each vertex exactly once. Like many concepts in graph theory, the idea of a circuit that visits each vertex once was inspired by games and puzzles. As early as the 9th century, Indian and Islamic intellectuals wondered whether it was possible for a knight to visit every space on a chess board of a given size, which is equivalent to visiting every vertex of a graph that represents the chess board.
+
+In 1857, a mathematician named William Rowan Hamilton invented a puzzle in which players were asked to find a route along the edges of a dodecahedron (see ), which visited every vertex exactly once. Let’s explore how graph theory provides insight into these games as well as practical applications such as the Traveling Salesperson Problem.
+
+Hamilton’s Puzzle
+
+Before we look at the solution to Hamilton's puzzle, let’s review some vocabulary we used in . It will be helpful to remember that directed cycle is a type of circuit that doesn’t repeat any edges or vertices.
+
+The goal of Hamilton's puzzle was to find a route along the edges of the dodecahedron, which visits each vertex exactly once. A dodecahedron is a three-dimensional space figure with faces that are all pentagons as we saw in .
+
+Since it is easier to visualize two dimensions rather than three, we will flatten out the dodecahedron and look at the edges and vertices on a flat surface. Graph A in shows a two-dimensional graph of the edges and vertices, and Graph B shows an untangled version of Graph A in which no edges are crossing. Graph B in is very similar to the design of the game board that Hamilton invented for his puzzle.
+Untangle graph
+We can see that this is a planar graph because it can be “untangled.” In order to solve Hamilton’s puzzle, we need to find a circuit that visits every vertex once. A solution is shown in .
+In three Dimensions
+>
+A circuit that doesn’t repeat any vertices, like the one in , is called a directed cycle. So, we can most accurately say that Hamilton’s puzzle asks us to find a directed cycle that visits every vertex in a graph exactly once. Because Hamilton created and solved this puzzle, these special circuits were named Hamilton cycles, or Hamilton circuits.
+
+Icosian Game
+
+When Hamilton invented his puzzle in the 19th century, it was originally called the Icosian game. This was a reference to an icosahedron, not a dodecahedron. Why? Hamilton was actually interested in the symmetries of icosahedrons. It turns out that these two space figures are related to each other. The dodecahedron has 30 edges, 20 faces, and 12 vertices, while the icosahedron has 30 edges, 12 faces, and 20 vertices. By relating the vertices of the dodecahedron to the faces of the icosahedron, Hamilton was able to make the mathematical connections necessary to use graph theory and dodecahedrons to make discoveries about the symmetries of icosahedrons.
+
+Hamilton Cycles vs. Euler Circuits
+
+Let’s practice naming and identifying Hamilton cycles, as well as distinguishing them from Euler circuits. It is important to remember that Euler circuits visit all edges without repetition, while Hamilton cycles visit all vertices without repetition. Hamilton cycles are named by their vertices just like all circuits. An example is given in .
+
+Notice that the Hamilton cycle a → b → c → d for Graph Z in is NOT an Euler circuit, because it does not visit edge ac. Some Hamilton cycles are also Euler circuits while some are not, and some Euler circuits are Hamilton cycles while some are not.
+TIP! Sometimes students confuse Euler circuits with Hamilton cycles. To help you remember, think of the E in Euler as standing for Edge.
+
+Differentiating between Hamilton Cycles or Euler Circuits
+
+Use to determine whether the given circuit is a Hamilton cycle, an Euler circuit, both, or neither.
+a → b → c → e → h → g → f → d → a
+g → e → h → g → f → d → a → b → d → g
+a → b → c → e → h → g → f → d → b → e → g → d → a
+
+This circuit is a Hamilton cycle only. It visits each vertex exactly once, so, it is a Hamilton cycle. It is not an Euler circuit because it doesn’t visit all of the edges.
+
+This circuit is neither Hamilton cycle nor an Euler circuit. It doesn’t visit vertex c, so, it is not a Hamilton cycle. It also doesn’t visit edges be and ce, so, it is not an Euler circuit.
+
+This circuit is an Euler circuit only. It visits several vertices more than once; so, it is not a Hamilton cycle. It visits every edge exactly once, so, it is an Euler circuit.
+TIP! Euler circuits never skip a vertex, so, they only fail to be Hamilton cycles when they visit a vertex more than once. Hamilton cycles never visit any edges twice, so, they only fail to be Euler circuits when they skip edges.
+
+Notice that the graph is a cycle. A cycle will always be Eulerian because all vertices are degree 2. Moreover, any circuit in the graph will always be both an Euler circuit and a Hamilton cycle. It is not always as easy to determine if a graph has a Hamilton cycle as it is to see that it has an Euler circuit, but there is a large group of graphs that we know will always have Hamilton cycles, the complete graphs. Since all vertices in a complete graph are adjacent, we can always find a directed cycle that visits all the vertices. For example, look at the directed six-cycle, n → o → p → q → r → s, in the complete graph with six vertices in .
+
+That is not the only directed six-cycle in the graph though. We could find another just be reversing the direction, and we could find even more by using different edges. So, how many Hamilton cycles are in a complete graph with n vertices? Before we tackle this problem, let’s look at a shorthand notation that we use in mathematics which will be helpful to us.
+
+Factorials
+
+In many areas of mathematics, we must calculate products like 7⋅6⋅5⋅4⋅3⋅2⋅1 or 11⋅10⋅9⋅8⋅7⋅6⋅5⋅4⋅3⋅2⋅1, products that involve multiplying all the counting numbers from a particular number down to 1. Imagine that the product happened to be all the numbers from 100 down to 1. That’s a lot of writing! Instead of writing all of that out, mathematicians came up with a shorthand notation. For example, instead of 7⋅6⋅5⋅4⋅3⋅2⋅1, we write 7!, which is read “7 factorial.” In other words, the product of all the counting numbers from n down to 1 is called n factorial and it is written n!
+
+Evaluating Factorials
+
+Evaluate n! and (n−1)! for n=4.
+n!=4!=4⋅3⋅2⋅1=24 and (n−1)!=(4−1)!=3!=3⋅2⋅1=6
+
+A common use for factorials is counting the number of ways to arrange objects. Suppose that there were three students, Aryana, Byron, and Carlos, who wanted to line up in a row. How many arrangements are possible? There are six possibilities: ABC, ACB, BAC, BCA, CAB, or CBA. Notice that there were three students being arranged, and the number of possible arrangements is three.
+
+The number of ways to arrange n distinct objects is n!.
+
+Counting Arrangements of Letters
+
+Find the number of ways to arrange the letters a, b, c, and d.
+4!=4⋅3⋅2⋅1=24
+
+Counting Hamilton Cycles in Complete Graphs
+
+Now, let’s get back to answering the question of how many Hamilton cycles are in a complete graph. In , we have drawn all the four cycles in a complete graph with four vertices. Remember, cycles can be named starting with any vertex in the cycle, but we will name them starting with vertex a.
+
+Complete Graph
+Cycle
+Cycle
+shows that there are three unique four-cycles in a complete graph with four vertices. Notice that there were two ways to name each cycle, one reading the vertices in a clockwise direction and one reading the vertices in a counterclockwise direction. This is important to us because we are interested in Hamilton cycles, which are directed cycles. Although the cycles (a, b, c, d) and (a, d, c, b) are the same cycle, the directed cycles, a → b → c → d → a and a → d → c → b → a, which travel the same route in reverse order are considered different directed cycles, as shown in .
+
+Complete Graph
+Cycle
+Cycle
+a → b → c → d → a
+a → b → c → d → a
+a → b → d → c → a
+a → b → d → c → a
+a → c → b → d → a
+a → c → b → d → a
+a → d → c → b → a
+a → d → c → b → a
+a → c → d → b → a
+a → c → d → b → a
+a → d → b → c → a
+a → d → b → c → a
+
+The six directed four-cycles in are the only distinct Hamilton cycles in a complete graph with four vertices. Six is also the number of ways to arrange the three letters b, c, and d. (Do you see why?) The number of ways to arrange three letters is 3!=3⋅2⋅1=6. Similarly, the number of Hamilton cycles in a graph with five vertices is the number of ways to arrange four letters, which is 4!=4⋅3⋅2⋅1=24. In general, to find the number of Hamilton cycles in a graph, we take one less than the number of vertices and find its factorial.
+
+The number of distinct Hamilton cycles in a complete graph with n vertices is (n−1)!
+
+Counting Hamilton Cycles in a Complete Graph
+
+How many Hamilton cycles are in the complete graph in ?
+
+There are five vertices in the graph. Using n=5, we have(n−1)!=(5−1)!=4!=4⋅3⋅2⋅1=24 Hamilton cycles.
+
+Weighted Graphs
+
+Suppose that an officer in the U.S. Air Force who is stationed at Vandenberg Air Force base must drive to visit three other California Air Force bases before returning to Vandenberg. The officer needs to visit each base once. The vertices in the graph in represent the four U.S. Air Force bases, Vandenberg, Edwards, Los Angeles, and Beale. The edges are labeled to with the driving distance between each pair of cities.
+
+The graph in is called a weighted graph, because each edge has been assigned a value or weight. The weights can represent quantities such as time, distance, money, or any quantity associated with the adjacent vertices joined by the edges. The total weight of any walk, trail, or path is the sum of the weights of the edges it visits.
+
+Notice that the officer’s trip can be represented as a Hamilton cycle, because each of the four vertices in the graph is visited exactly once.
+
+Finding Hamilton Cycles of Lowest Weight
+
+Use and the given Hamilton cycles to answer the following questions.
+V → L → E → B → V
+V → L → B → E → V
+V → E → L → B → V
+V → B → E → L → V
+
+Which of the Hamilton cycles (directed cycles) lie on the same cycle (undirected cycle) in the graph?
+
+Find the total weight of each cycle.
+
+Of the four, which of the Hamilton cycles describes the shortest trip for the officer? Describe the route.
+V → L → E → B → V and V → B → E → L → V follow the same edges in reverse order.
+
+Any Hamilton cycles that lie on the same cycle will have the same edges and the same total weight.
+ V → L → E → B → V and V → B → E → L → V each have total weight 159+106+410+396=1071.
+ V → L → B → E → V has a total weight 159+439+410+207=1215. 
+ V → E → L → B → V has a total weight 396+439+106+207=1148.
+V → L → E → B → V and V → B → E → L → V each have total weight 159+106+410+396=1071.
+V → L → B → E → V has a total weight 159+439+410+207=1215.
+V → E → L → B → V has a total weight 396+439+106+207=1148.
+
+Hamilton cycles V → L → E → B → V and V → B → E → L → V each have the lowest total weight. The officer would take the route from Vandenberg, to Los Angeles, to Edwards, to Beale, and back to Vandenberg, or reverse that route.
+
+Check Your Understanding
+
+Key Terms
+
+Hamilton cycle, or Hamilton circuit
+n factorial
+
+weighted graph
+
+total weight
+
+Key Concepts
+
+A Hamilton cycle is a directed cycle, or circuit, that visits each vertex exactly once.
+
+Some Hamilton cycles are also Euler circuits, but some are not.
+
+Hamilton cycles that follow the same undirected cycle in the same direction are considered the same cycle even if they begin at a different vertex.
+
+The number of unique Hamilton cycles in a complete graph with n vertices is the same as the number of ways to arrange n−1 distinct objects.
+
+Weighted graphs have a value assigned to each edge, which can represent distance, time, money and other quantities.
+
+Formulas
+
+The number of ways to arrange n distinct objects is n!.
+
+The number of distinct Hamilton cycles in a complete graph with n vertices is (n−1)!.

@@ -1,0 +1,2971 @@
+# m51290
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Double-Angle, Half-Angle, and Reduction Formulas
+
+Double-Angle, Half-Angle, and Reduction Formulas
+
+Use double-angle formulas to find exact values.
+
+Use double-angle formulas to verify identities.
+
+Use reduction formulas to simplify an expression.
+
+Use half-angle formulas to find exact values.
+
+Bicycle and skateboard ramps made for competition (see ) must vary in height depending on the skill level of the competitors. For advanced competitors, the angle formed by the ramp and the ground should be 
+ 
+ θ
+ 
+ such that 
+ 
+ tanθ=
+ 5
+ 3
+ 
+ .
+ 
+ The angle is divided in half for novices. What is the steepness of the ramp for novices? In this section, we will investigate three additional categories of identities that we can use to answer questions such as this one.
+
+Using Double-Angle Formulas to Find Exact Values
+
+In the previous section, we used addition and subtraction formulas for trigonometric functions. Now, we take another look at those same formulas. The double-angle formulas are a special case of the sum formulas, where 
+ 
+ α=β.
+ 
+ Deriving the double-angle formula for sine begins with the sum formula,
+
+If we let 
+ 
+ α=β=θ,
+ 
+ then we have
+
+Deriving the double-angle for cosine gives us three options. First, starting from the sum formula, 
+ 
+ cos(
+ 
+ α+β
+ 
+ )=cosαcosβ−sinαsinβ,
+ 
+ and letting 
+ 
+ α=β=θ,
+ 
+ we have
+
+Using the Pythagorean properties, we can expand this double-angle formula for cosine and get two more variations. The first variation is:
+
+The second variation is:
+
+Similarly, to derive the double-angle formula for tangent, replacing 
+ 
+ α=β=θ
+ 
+ in the sum formula gives
+
+Double-Angle Formulas
+
+The double-angle formulas are summarized as follows:
+Given the tangent of an angle and the quadrant in which it is located, use the double-angle formulas to find the exact value.
+
+Draw a triangle to reflect the given information.
+
+Determine the correct double-angle formula.
+
+Substitute values into the formula based on the triangle.
+
+Simplify.
+
+Using a Double-Angle Formula to Find the Exact Value Involving Tangent
+
+Given that 
+ 
+ tanθ=−
+ 3
+ 4
+
+ and 
+ 
+ θ
+ 
+ is in quadrant II, find the following:
+ⓐ 
+ 
+ sin(
+ 
+ 2θ
+ 
+ )
+ⓑ 
+ 
+ cos(
+ 
+ 2θ
+ 
+ )
+ⓒ 
+ 
+ tan(
+ 
+ 2θ
+ 
+ )
+
+If we draw a triangle to reflect the information given, we can find the values needed to solve the problems on the image. We are given 
+ 
+ tanθ=−
+ 3
+ 4
+ 
+ ,
+ 
+ such that 
+ 
+ θ
+ 
+ is in quadrant II. The tangent of an angle is equal to the opposite side over the adjacent side, and because 
+ 
+ θ
+ 
+ is in the second quadrant, the adjacent side is on the x-axis and is negative. Use the Pythagorean Theorem to find the length of the hypotenuse:
+
+Now we can draw a triangle similar to the one shown in .
+ⓐ Let’s begin by writing the double-angle formula for sine.
+
+ sin(2θ)=2sinθcosθ
+
+We see that we to need to find 
+ 
+ sinθ
+ 
+ and 
+ 
+ cosθ.
+ 
+ Based on , we see that the hypotenuse equals 5, so 
+ 
+ sinθ=
+ 3
+ 5
+ 
+ ,
+ 
+ and 
+ 
+ cosθ=−
+ 4
+ 5
+ 
+ .
+ 
+ Substitute these values into the equation, and simplify.Thus,
+
+ sin(2θ)
+
+ =
+
+ 2(
+
+ 3
+ 5
+
+ )(
+ 
+ −
+ 4
+ 5
+
+ )
+
+ =
+
+ −
+ 
+ 24
+
+ 25
+
+We see that we to need to find 
+ 
+ sinθ
+ 
+ and 
+ 
+ cosθ.
+ 
+ Based on , we see that the hypotenuse equals 5, so 
+ 
+ sinθ=
+ 3
+ 5
+ 
+ ,
+ 
+ and 
+ 
+ cosθ=−
+ 4
+ 5
+ 
+ .
+ 
+ Substitute these values into the equation, and simplify.
+
+Thus,
+ⓑ Write the double-angle formula for cosine.
+
+ cos(
+ 
+ 2θ
+ 
+ )=
+ 
+ cos
+ 
+ 2
+ 
+ θ−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+ Again, substitute the values of the sine and cosine into the equation, and simplify.
+
+ cos(2θ)
+
+ =
+
+ (
+ 
+ −
+ 4
+ 5
+
+ )
+ 
+ 2
+ 
+ −
+ 
+ (
+
+ 3
+ 5
+
+ )
+ 
+ 2
+
+ =
+
+ 16
+
+ 25
+
+ −
+ 9
+ 
+ 25
+
+ =
+
+ 7
+ 
+ 25
+
+Again, substitute the values of the sine and cosine into the equation, and simplify.
+ⓒ Write the double-angle formula for tangent.
+
+ tan(2θ)=
+ 
+ 2tanθ
+
+ 1−
+ 
+ tan
+ 
+ 2
+ 
+ θ
+
+In this formula, we need the tangent, which we were given as 
+ 
+ tanθ=−
+ 3
+ 4
+ 
+ .
+ 
+ Substitute this value into the equation, and simplify.
+
+ tan(2θ)
+
+ =
+
+ 2(
+ 
+ −
+ 3
+ 4
+
+ )
+
+ 1−
+ 
+ (
+ 
+ −
+ 3
+ 4
+
+ )
+ 
+ 2
+
+ =
+
+ −
+ 3
+ 2
+
+ 1−
+ 9
+ 
+ 16
+
+ =
+
+ −
+ 3
+ 2
+ 
+ (
+
+ 16
+ 
+ 7
+
+ )
+
+ =
+
+ −
+ 
+ 24
+ 
+ 7
+
+In this formula, we need the tangent, which we were given as 
+ 
+ tanθ=−
+ 3
+ 4
+ 
+ .
+ 
+ Substitute this value into the equation, and simplify.
+
+Given 
+ 
+ sinα=
+ 5
+ 8
+ 
+ ,
+ 
+ with 
+ 
+ α
+ 
+ in quadrant I, find 
+ 
+ cos(
+ 
+ 2α
+ 
+ ).
+cos(
+ 
+ 2α
+ 
+ )=
+ 7
+ 
+ 32
+
+Using the Double-Angle Formula for Cosine without Exact Values
+
+Use the double-angle formula for cosine to write 
+ 
+ cos(
+ 
+ 6x
+ 
+ )
+ 
+ in terms of 
+ 
+ cos(
+ 
+ 3x
+ 
+ ).
+
+Analysis
+
+This example illustrates that we can use the double-angle formula without having exact values. It emphasizes that the pattern is what we need to remember and that identities are true for all values in the domain of the trigonometric function.
+
+Using Double-Angle Formulas to Verify Identities
+
+Establishing identities using the double-angle formulas is performed using the same steps we used to derive the sum and difference formulas. Choose the more complicated side of the equation and rewrite it until it matches the other side.
+
+Using the Double-Angle Formulas to Verify an Identity
+
+Verify the following identity using double-angle formulas:
+
+We will work on the right side of the equal sign and rewrite the expression until it matches the left side.
+
+Analysis
+
+This process is not complicated, as long as we recall the perfect square formula from algebra:
+
+where 
+ 
+ a=sinθ
+ 
+ and 
+ 
+ b=cosθ.
+ 
+ Part of being successful in mathematics is the ability to recognize patterns. While the terms or symbols may change, the algebra remains consistent.
+
+Verify the identity: 
+
+ cos
+ 
+ 4
+ 
+ θ−
+ 
+ sin
+ 
+ 4
+ 
+ θ=cos(
+ 
+ 2θ
+ 
+ ).
+cos
+ 
+ 4
+ 
+ θ−
+ 
+ sin
+ 
+ 4
+ 
+ θ=(
+
+ cos
+ 
+ 2
+ 
+ θ+
+ 
+ sin
+ 
+ 2
+ 
+ θ
+ 
+ )(
+
+ cos
+ 
+ 2
+ 
+ θ−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+ 
+ )=cos(
+ 
+ 2θ
+ 
+ )
+
+Verifying a Double-Angle Identity for Tangent
+
+Verify the identity:
+
+In this case, we will work with the left side of the equation and simplify or rewrite until it equals the right side of the equation.
+
+Analysis
+
+Here is a case where the more complicated side of the initial equation appeared on the right, but we chose to work the left side. However, if we had chosen the left side to rewrite, we would have been working backwards to arrive at the equivalency. For example, suppose that we wanted to show
+
+Let’s work on the right side.
+
+When using the identities to simplify a trigonometric expression or solve a trigonometric equation, there are usually several paths to a desired result. There is no set rule as to what side should be manipulated. However, we should begin with the guidelines set forth earlier.
+
+Verify the identity: 
+ 
+ cos(2θ)cosθ=
+ 
+ cos
+ 
+ 3
+ 
+ θ−cosθ
+ 
+ sin
+ 
+ 2
+ 
+ θ.
+cos(
+ 
+ 2θ
+ 
+ )cosθ=(
+
+ cos
+ 
+ 2
+ 
+ θ−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+ 
+ )cosθ=
+ 
+ cos
+ 
+ 3
+ 
+ θ−cosθ
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+Use Reduction Formulas to Simplify an Expression
+
+The double-angle formulas can be used to derive the reduction formulas, which are formulas we can use to reduce the power of a given expression involving even powers of sine or cosine. They allow us to rewrite the even powers of sine or cosine in terms of the first power of cosine. These formulas are especially important in higher-level math courses, calculus in particular. Also called the power-reducing formulas, three identities are included and are easily derived from the double-angle formulas.
+
+We can use two of the three double-angle formulas for cosine to derive the reduction formulas for sine and cosine. Let’s begin with 
+ 
+ cos(
+ 
+ 2θ
+ 
+ )=1−2
+ 
+ sin
+ 
+ 2
+ 
+ θ.
+ 
+ Solve for 
+
+ sin
+ 
+ 2
+ 
+ θ:
+
+Next, we use the formula 
+ 
+ cos(
+ 
+ 2θ
+ 
+ )=2
+ 
+ cos
+ 
+ 2
+ 
+ θ−1.
+ 
+ Solve for 
+
+ cos
+ 
+ 2
+ 
+ θ:
+
+The last reduction formula is derived by writing tangent in terms of sine and cosine:
+
+Reduction Formulas
+
+The reduction formulas are summarized as follows:
+
+Writing an Equivalent Expression Not Containing Powers Greater Than 1
+
+Write an equivalent expression for 
+
+ cos
+ 
+ 4
+ 
+ x
+ 
+ that does not involve any powers of sine or cosine greater than 1.
+
+We will apply the reduction formula for cosine twice.
+
+Analysis
+
+The solution is found by using the reduction formula twice, as noted, and the perfect square formula from algebra.
+
+Using the Power-Reducing Formulas to Prove an Identity
+
+Use the power-reducing formulas to prove
+
+We will work on simplifying the left side of the equation:
+
+Analysis
+
+Note that in this example, we substituted
+
+for 
+
+ sin
+ 
+ 2
+ 
+ (
+ 
+ 2x
+ 
+ ).
+ 
+ The formula states
+
+We let 
+ 
+ θ=2x,
+ 
+ so 
+ 
+ 2θ=4x.
+
+Use the power-reducing formulas to prove that 
+ 
+ 10
+ 
+ cos
+ 
+ 4
+ 
+ x=
+ 
+ 15
+ 
+ 4
+ 
+ +5cos(
+ 
+ 2x
+ 
+ )+
+ 5
+ 4
+ 
+ cos(
+ 
+ 4x
+ 
+ ).
+10
+ 
+ cos
+ 
+ 4
+ 
+ x
+
+ =
+
+ 10
+ 
+ (
+
+ cos
+ 
+ 2
+ 
+ x
+ 
+ )
+ 
+ 2
+
+ =
+
+ 10
+ 
+ [ 
+
+ 1+cos(2x)
+ 
+ 2
+
+ ]
+ 
+ 2
+
+ Substitute reduction formula for cos
+ 
+ 2
+ 
+ x.
+
+ =
+
+ 10
+ 
+ 4
+ 
+ [1+2cos(2x)+
+ 
+ cos
+ 
+ 2
+ 
+ (2x)]
+
+ =
+
+ 10
+ 
+ 4
+ 
+ +
+ 
+ 10
+ 
+ 2
+ 
+ cos(2x)+
+ 
+ 10
+ 
+ 4
+ 
+ (
+
+ 1+cos2(2x)
+ 
+ 2
+
+ )
+
+ Substitute reduction formula for cos
+ 
+ 2
+ 
+ x.
+
+ =
+
+ 10
+ 
+ 4
+ 
+ +
+ 
+ 10
+ 
+ 2
+ 
+ cos(2x)+
+ 
+ 10
+ 
+ 8
+ 
+ +
+ 
+ 10
+ 
+ 8
+ 
+ cos(4x)
+
+ =
+
+ 30
+ 
+ 8
+ 
+ +5cos(2x)+
+ 
+ 10
+ 
+ 8
+ 
+ cos(4x)
+
+ =
+
+ 15
+ 
+ 4
+ 
+ +5cos(2x)+
+ 5
+ 4
+ 
+ cos(4x)
+
+Using Half-Angle Formulas to Find Exact Values
+
+The next set of identities is the set of half-angle formulas, which can be derived from the reduction formulas and we can use when we have an angle that is half the size of a special angle. If we replace 
+ 
+ θ
+ 
+ with 
+
+ α
+ 2
+ 
+ ,
+ 
+ the half-angle formula for sine is found by simplifying the equation and solving for 
+ 
+ sin(
+
+ α
+ 2
+
+ ).
+ 
+ Note that the half-angle formulas are preceded by a 
+ 
+ ±
+ 
+ sign. This does not mean that both the positive and negative expressions are valid. Rather, it depends on the quadrant in which 
+
+ α
+ 2
+
+ terminates.
+
+The half-angle formula for sine is derived as follows:
+
+To derive the half-angle formula for cosine, we have
+
+For the tangent identity, we have
+
+Half-Angle Formulas
+
+The half-angle formulas are as follows:
+
+Using a Half-Angle Formula to Find the Exact Value of a Sine Function
+
+Find 
+ 
+sin(15°)
+ 
+ using a half-angle formula.
+
+Since 
+ 
+ 15°=
+ 
+ 30°
+ 
+ 2
+ 
+ ,
+ 
+ we use the half-angle formula for sine:
+
+Remember that we can check the answer with a graphing calculator.
+
+Analysis
+
+Notice that we used only the positive root because 
+ 
+ sin(15°)
+ 
+ is positive.
+Given the tangent of an angle and the quadrant in which the angle lies, find the exact values of trigonometric functions of half of the angle.
+
+Draw a triangle to represent the given information.
+
+Determine the correct half-angle formula.
+
+Substitute values into the formula based on the triangle.
+
+Simplify.
+
+Finding Exact Values Using Half-Angle Identities
+
+Given that 
+ 
+ tanα=
+ 8
+ 
+ 15
+
+ and 
+ α
+ 
+ lies in quadrant III, find the exact value of the following:
+ⓐ 
+ 
+ sin(
+
+ α
+ 2
+
+ )
+ⓑ 
+ 
+ cos(
+
+ α
+ 2
+
+ )
+ⓒ 
+ 
+ tan(
+
+ α
+ 2
+
+ )
+
+Using the given information, we can draw the triangle shown in . Using the Pythagorean Theorem, we find the hypotenuse to be 17. Therefore, we can calculate 
+ 
+ sinα=−
+ 8
+ 
+ 17
+
+ and 
+ 
+ cosα=−
+ 
+ 15
+
+ 17
+
+ .
+ⓐ Before we start, we must remember that if 
+ 
+ α
+ 
+ is in quadrant III, then 
+ 
+ 180°<α<270°,
+ 
+ so 
+
+ 180°
+ 
+ 2
+ 
+ <
+ α
+ 2
+ 
+ <
+ 
+ 270°
+ 
+ 2
+ 
+ .
+ 
+ This means that the terminal side of 
+
+ α
+ 2
+
+ is in quadrant II, since 
+ 
+ 90°<
+ α
+ 2
+ 
+ <135°.
+
+ To find 
+ 
+ sin
+ α
+ 2
+ 
+ ,
+ 
+ we begin by writing the half-angle formula for sine. Then we substitute the value of the cosine we found from the triangle in and simplify. 
+
+ sin
+ α
+ 2
+
+ =
+
+ ±
+
+ 1−cosα
+ 
+ 2
+
+ =
+
+ ±
+
+ 1−(
+ 
+ −
+ 
+ 15
+
+ 17
+
+ )
+ 
+ 2
+
+ =
+
+ ±
+
+ 32
+
+ 17
+
+ 2
+
+ =
+
+ ±
+
+ 32
+
+ 17
+
+ ⋅
+ 1
+ 2
+
+ =
+
+ ±
+
+ 16
+
+ 17
+
+ =
+
+ ±
+ 4
+
+ 17
+
+ =
+
+ 4
+ 
+ 17
+
+ 17
+
+We choose the positive value of 
+ 
+ sin
+ α
+ 2
+
+ because the angle terminates in quadrant II and sine is positive in quadrant II.
+
+To find 
+ 
+ sin
+ α
+ 2
+ 
+ ,
+ 
+ we begin by writing the half-angle formula for sine. Then we substitute the value of the cosine we found from the triangle in and simplify.
+
+We choose the positive value of 
+ 
+ sin
+ α
+ 2
+
+ because the angle terminates in quadrant II and sine is positive in quadrant II.
+ⓑ To find 
+ 
+ cos
+ α
+ 2
+ 
+ ,
+ 
+ we will write the half-angle formula for cosine, substitute the value of the cosine we found from the triangle in , and simplify.
+
+ cos
+ α
+ 2
+
+ =
+
+ ±
+
+ 1+cosα
+ 
+ 2
+
+ =
+
+ ±
+
+ 1+(
+ 
+ −
+ 
+ 15
+
+ 17
+
+ )
+ 
+ 2
+
+ =
+
+ ±
+
+ 2
+ 
+ 17
+
+ 2
+
+ =
+
+ ±
+
+ 2
+ 
+ 17
+
+ ⋅
+ 1
+ 2
+
+ =
+
+ ±
+
+ 1
+ 
+ 17
+
+ =
+
+ −
+
+ 17
+
+ 17
+
+We choose the negative value of 
+ 
+ cos
+ α
+ 2
+
+ because the angle is in quadrant II because cosine is negative in quadrant II.
+
+We choose the negative value of 
+ 
+ cos
+ α
+ 2
+
+ because the angle is in quadrant II because cosine is negative in quadrant II.
+ⓒ To find 
+ 
+ tan
+ α
+ 2
+ 
+ ,
+ 
+ we write the half-angle formula for tangent. Again, we substitute the value of the cosine we found from the triangle in and simplify.
+
+ tan
+ α
+ 2
+
+ =
+
+ ±
+
+ 1−cosα
+
+ 1+cosα
+
+ =
+
+ ±
+
+ 1−(−
+ 
+ 15
+
+ 17
+
+ )
+
+ 1+(−
+ 
+ 15
+
+ 17
+
+ )
+
+ =
+
+ ±
+
+ 32
+
+ 17
+
+ 2
+ 
+ 17
+
+ =
+
+ ±
+
+ 32
+ 
+ 2
+
+ =
+
+ −
+ 
+ 16
+
+ =
+
+ −4
+
+We choose the negative value of 
+ 
+ tan
+ α
+ 2
+
+ because 
+
+ α
+ 2
+
+ lies in quadrant II, and tangent is negative in quadrant II.
+
+We choose the negative value of 
+ 
+ tan
+ α
+ 2
+
+ because 
+
+ α
+ 2
+
+ lies in quadrant II, and tangent is negative in quadrant II.
+
+Given that 
+ 
+ sinα=−
+ 4
+ 5
+
+ and 
+ 
+ α
+ 
+ lies in quadrant IV, find the exact value of 
+ 
+ cos(
+
+ α
+ 2
+
+ ).
+−
+ 2
+
+ 5
+
+Finding the Measurement of a Half Angle
+
+Now, we will return to the problem posed at the beginning of the section. A bicycle ramp is constructed for high-level competition with an angle of 
+ 
+ θ
+ 
+ formed by the ramp and the ground. Another ramp is to be constructed half as steep for novice competition. If 
+ 
+ tanθ=
+ 5
+ 3
+
+ for higher-level competition, what is the measurement of the angle for novice competition?
+
+Since the angle for novice competition measures half the steepness of the angle for the high level competition, and 
+ 
+ tanθ=
+ 5
+ 3
+
+ for high competition, we can find 
+ 
+ cosθ
+ 
+ from the right triangle and the Pythagorean theorem so that we can use the half-angle identities. See .
+
+We see that 
+ 
+ cosθ=
+ 3
+
+ 34
+
+ =
+ 
+ 3
+ 
+ 34
+
+ 34
+
+ .
+ 
+ We can use the half-angle formula for tangent: 
+ 
+ tan
+ θ
+ 2
+ 
+ =
+
+ 1−cosθ
+
+ 1+cosθ
+
+ .
+ 
+ Since 
+ 
+ tanθ
+ 
+ is in the first quadrant, so is 
+ 
+ tan
+ θ
+ 2
+ 
+ .
+
+We can take the inverse tangent to find the angle: 
+
+ tan
+
+ −1
+
+ (0.57)≈29.7°.
+ 
+ So the angle of the ramp for novice competition is 
+ 
+ ≈29.7°.
+
+Access these online resources for additional instruction and practice with double-angle, half-angle, and reduction formulas.
+Double-Angle Identities
+Half-Angle Identities
+
+Key Equations
+
+sin(2θ)
+
+ =
+
+ 2sinθcosθ
+
+ cos(2θ)
+
+ =
+
+ cos
+ 
+ 2
+ 
+ θ−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 1−2
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 2
+ 
+ cos
+ 
+ 2
+ 
+ θ−1
+
+ tan(2θ)
+
+ =
+
+ 2tanθ
+
+ 1−
+ 
+ tan
+ 
+ 2
+ 
+ θ
+sin
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 1−cos(2θ)
+ 
+ 2
+
+ cos
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 1+cos(2θ)
+ 
+ 2
+
+ tan
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 1−cos(2θ)
+
+ 1+cos(2θ)
+sin
+ α
+ 2
+
+ =
+
+ ±
+
+ 1−cosα
+ 
+ 2
+
+ cos
+ α
+ 2
+
+ =
+
+ ±
+
+ 1+cosα
+ 
+ 2
+
+ tan
+ α
+ 2
+
+ =
+
+ ±
+
+ 1−cosα
+
+ 1+cosα
+
+ =
+
+ sinα
+
+ 1+cosα
+
+ =
+
+ 1−cosα
+
+ sinα
+Key Concepts
+
+Double-angle identities are derived from the sum formulas of the fundamental trigonometric functions: sine, cosine, and tangent. See , , , and .
+
+Reduction formulas are especially useful in calculus, as they allow us to reduce the power of the trigonometric term. See and .
+
+Half-angle formulas allow us to find the value of trigonometric functions involving half-angles, whether the original angle is known or not. See , , and .
+
+Section Exercises
+
+Verbal
+
+Explain how to determine the reduction identities from the double-angle identity 
+ 
+ cos(
+ 
+ 2x
+ 
+ )=
+ 
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 2
+ 
+ x.
+
+Use the Pythagorean identities and isolate the squared term.
+
+Explain how to determine the double-angle formula for 
+ 
+ tan(2x)
+ 
+ using the double-angle formulas for 
+ 
+ cos(2x)
+ 
+ and 
+ 
+ sin(2x).
+
+We can determine the half-angle formula for 
+ 
+ tan(
+
+ x
+ 2
+
+ )=
+
+ 1−cosx
+
+ 1+cosx
+
+ by dividing the formula for 
+ 
+ sin(
+
+ x
+ 2
+
+ )
+ 
+ by 
+ 
+ cos(
+
+ x
+ 2
+
+ ).
+ 
+ Explain how to determine two formulas for 
+ 
+ tan(
+
+ x
+ 2
+
+ )
+
+ that do not involve any square roots.
+1−cosx
+
+ sinx
+
+ ,
+ 
+ sinx
+
+ 1+cosx
+
+ ,
+ 
+ multiplying the top and bottom by 
+
+ 1−cosx
+
+ and 
+
+ 1+cosx
+
+ ,
+ 
+ respectively.
+
+For the half-angle formula given in the previous exercise for 
+ 
+ tan(
+
+ x
+ 2
+
+ ),
+ 
+ explain why dividing by 0 is not a concern. (Hint: examine the values of 
+ 
+ cosx
+ 
+ necessary for the denominator to be 0.)
+
+Algebraic
+
+For the following exercises, find the exact values of a) 
+ 
+ sin(
+ 
+ 2x
+ 
+ ),
+ 
+ b) 
+ 
+ cos(
+ 
+ 2x
+ 
+ ),
+ 
+ and c) 
+ 
+ tan(
+ 
+ 2x
+ 
+ )
+ 
+ without solving for 
+ 
+ x.
+
+If 
+ 
+ sinx=
+ 1
+ 8
+ 
+ ,
+ 
+ and 
+ 
+ x
+ 
+ is in quadrant I.
+
+a) 
+
+ 3
+ 7
+
+ 32
+
+ b) 
+
+ 31
+
+ 32
+
+ c) 
+
+ 3
+ 7
+
+ 31
+
+If 
+ 
+ cosx=
+ 2
+ 3
+ 
+ ,
+ 
+ and 
+ x
+ 
+ is in quadrant I.
+
+If 
+ 
+ cosx=−
+ 1
+ 2
+ 
+ ,
+ 
+ and 
+ 
+ x  
+ 
+ is in quadrant III.
+
+a) 
+
+ 3
+
+ 2
+
+ b) 
+ 
+ −
+ 1
+ 2
+
+ c) 
+ 
+ −
+ 3
+
+If 
+ 
+ tanx=−8,
+ 
+ and 
+ 
+ x
+ 
+ is in quadrant IV.
+
+For the following exercises, find the values of the six trigonometric functions if the conditions provided hold.
+cos(2θ)=
+ 3
+ 5
+
+ and 
+ 
+ 90°≤θ≤180°
+cosθ=−
+ 
+ 2
+ 5
+
+ 5
+ 
+ ,sinθ=
+
+ 5
+
+ 5
+ 
+ ,tanθ=−
+ 1
+ 2
+ 
+ ,cscθ=
+ 5
+ 
+ ,secθ=−
+
+ 5
+
+ 2
+ 
+ ,cotθ=−2
+cos(2θ)=
+ 1
+
+ 2
+
+ and 
+ 
+ 180°≤θ≤270°
+
+For the following exercises, simplify to one trigonometric expression.
+2sin(
+
+ π
+ 4
+
+ )2cos(
+
+ π
+ 4
+
+ )
+2sin(
+
+ π
+ 2
+
+ )
+4sin(
+
+ π
+ 8
+
+ )cos(
+
+ π
+ 8
+
+ )
+
+For the following exercises, find the exact value using half-angle formulas.
+sin(
+
+ π
+ 8
+
+ )
+2−
+ 2
+
+ 2
+cos(
+ 
+ −
+ 
+ 11π
+
+ 12
+
+ )
+sin(
+
+ 11π
+
+ 12
+
+ )
+2−
+ 3
+
+ 2
+cos(
+
+ 7π
+ 
+ 8
+
+ )
+tan(
+
+ 5π
+
+ 12
+
+ )
+2+
+ 3
+tan(
+ 
+ −
+ 
+ 3π
+
+ 12
+
+ )
+tan(
+ 
+ −
+ 
+ 3π
+ 
+ 8
+
+ )
+−1−
+ 2
+
+For the following exercises, find the exact values of a) 
+ 
+ sin(
+
+ x
+ 2
+
+ ),
+ 
+ b) 
+ 
+ cos(
+
+ x
+ 2
+
+ ),
+ 
+ and c) 
+ 
+ tan(
+
+ x
+ 2
+
+ )
+ 
+ without solving for 
+ 
+ x,
+ 
+ when 
+ 
+ 0°≤x≤360°.
+
+If 
+ 
+ tanx=−
+ 4
+ 3
+ 
+ ,
+ 
+ and 
+ 
+ x
+ 
+ is in quadrant IV.
+
+If 
+ 
+ sinx=−
+ 
+ 12
+
+ 13
+
+ ,
+ 
+ and 
+ x
+ 
+ is in quadrant III.
+
+a) 
+
+ 3
+ 
+ 13
+
+ 13
+
+ b) 
+ 
+ −
+ 
+ 2
+ 
+ 13
+
+ 13
+
+ c) 
+ 
+ −
+ 3
+ 2
+
+If 
+ 
+ cscx=7,
+ 
+ and 
+ 
+  x  
+ 
+ is in quadrant II.
+
+If 
+ 
+ secx=−4,
+ 
+ and 
+ x
+ 
+ is in quadrant II.
+
+a) 
+
+ 10
+
+ 4
+
+ b) 
+
+ 6
+
+ 4
+
+ c) 
+
+ 15
+
+ 3
+
+For the following exercises, use to find the requested half and double angles.
+
+Find 
+ 
+ sin(
+ 
+ 2θ
+ 
+ ),cos(2θ),
+ 
+ and 
+ 
+ tan(2θ).
+
+Find 
+ 
+ sin(2α),cos(2α),
+ 
+ and 
+ 
+ tan(2α).
+120
+
+ 169
+
+ ,–
+ 
+ 119
+
+ 169
+
+ ,–
+ 
+ 120
+
+ 119
+
+Find 
+ 
+ sin(
+
+ θ
+ 2
+
+ ),cos(
+
+ θ
+ 2
+
+ ),
+ 
+ and 
+ 
+ tan(
+
+ θ
+ 2
+
+ ).
+
+Find 
+ 
+ sin(
+
+ α
+ 2
+
+ ),cos(
+
+ α
+ 2
+
+ ),
+ 
+ and 
+ 
+ tan(
+
+ α
+ 2
+
+ ).
+2
+ 
+ 13
+
+ 13
+
+ ,
+ 
+ 3
+ 
+ 13
+
+ 13
+
+ ,
+ 2
+ 3
+
+For the following exercises, simplify each expression. Do not evaluate.
+cos
+ 
+ 2
+ 
+ (28°)−
+ 
+ sin
+ 
+ 2
+ 
+ (28°)
+2
+ 
+ cos
+ 
+ 2
+ 
+ (37°)−1
+cos(74°)
+1−2
+ 
+ sin
+ 
+ 2
+ 
+ (17°)
+cos
+ 
+ 2
+ 
+ (9x)−
+ 
+ sin
+ 
+ 2
+ 
+ (9x)
+cos(18x)
+4sin(8x)cos(8x)
+6sin(5x)cos(5x)
+3sin(10x)
+
+For the following exercises, prove the given identity.
+(
+ 
+ sint−cost
+ 
+ )
+ 
+ 2
+ 
+ =1−sin(
+ 
+ 2t
+ 
+ )
+sin(
+ 
+ 2x
+ 
+ )=−2sin(
+ 
+ −x
+ 
+ )cos(
+ 
+ −x
+ 
+ )
+−2sin(
+ 
+ −x
+ 
+ )cos(
+ 
+ −x
+ 
+ )=−2(−sin(
+ x
+ )cos(
+ x
+ ))=sin(
+ 
+ 2x
+ 
+ )
+cotx−tanx=2cot(
+ 
+ 2x
+ 
+ )
+sin(
+ 
+ 2θ
+ 
+ )
+
+ 1+cos(
+ 
+ 2θ
+ 
+ )
+
+ tan
+ 
+ 2
+ 
+ θ=
+ tan3
+ θ
+sin(2θ)
+
+ 1+cos(2θ)
+
+ tan
+ 
+ 2
+ 
+ θ
+
+ =
+
+ 2sin(θ)cos(θ)
+
+ 1+
+ 
+ cos
+ 
+ 2
+ 
+ θ−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+ tan
+ 
+ 2
+ 
+ θ=
+
+ 2sin(θ)cos(θ)
+
+ 2
+ 
+ cos
+ 
+ 2
+ 
+ θ
+
+ tan
+ 
+ 2
+ 
+ θ
+
+ =
+
+ sin(θ)
+
+ cosθ
+
+ tan
+ 
+ 2
+ 
+ θ=
+
+ cot(θ)
+ 
+ tan
+ 
+ 2
+ 
+ θ
+
+ =
+
+ tan3
+ θ
+
+For the following exercises, rewrite the expression with an exponent no higher than 1.
+cos
+ 
+ 2
+ 
+ (5x)
+cos
+ 
+ 2
+ 
+ (6x)
+1+cos(12x)
+ 
+ 2
+sin
+ 
+ 4
+ 
+ (8x)
+sin
+ 
+ 4
+ 
+ (3x)
+3+cos(12x)−4cos(6x)
+ 
+ 8
+cos
+ 
+ 2
+ 
+ x
+ 
+ sin
+ 
+ 4
+ 
+ x
+cos
+ 
+ 4
+ 
+ x
+ 
+ sin
+ 
+ 2
+ 
+ x
+2+cos(2x)−2cos(4x)−cos(6x)
+
+ 32
+tan
+ 
+ 2
+ 
+ x
+ 
+ sin
+ 
+ 2
+ 
+ x
+
+Technology
+
+For the following exercises, reduce the equations to powers of one, and then check the answer graphically.
+tan
+ 
+ 4
+ 
+ x
+3+cos(4x)−4cos(2x)
+
+ 3+cos(4x)+4cos(2x)
+sin
+ 
+ 2
+ 
+ (2x)
+sin
+ 
+ 2
+ 
+ x
+ 
+ cos
+ 
+ 2
+ 
+ x
+1−cos(4x)
+ 
+ 8
+tan
+ 
+ 2
+ 
+ xsinx
+tan
+ 
+ 4
+ 
+ x
+ 
+ cos
+ 
+ 2
+ 
+ x
+3+cos(4x)−4cos(2x)
+
+ 4(cos(2x)+1)
+cos
+ 
+ 2
+ 
+ xsin(
+ 
+ 2x
+ 
+ )
+cos
+ 
+ 2
+ 
+ (
+ 
+ 2x
+ 
+ )sinx
+(
+ 
+ 1+cos(
+ 
+ 4x
+ 
+ )
+ 
+ )sinx
+ 
+ 2
+tan
+ 
+ 2
+ 
+ (
+
+ x
+ 2
+
+ )sinx
+
+For the following exercises, algebraically find an equivalent function, only in terms of 
+ 
+ sinx
+ 
+ and/or 
+ 
+ cosx,
+ 
+ and then check the answer by graphing both functions.
+sin(4x)
+4sinxcosx(
+
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 2
+ 
+ x
+ 
+ )
+cos(4x)
+
+Extensions
+
+For the following exercises, prove the identities.
+sin(
+ 
+ 2x
+ 
+ )=
+ 
+ 2tanx
+
+ 1+
+ 
+ tan
+ 
+ 2
+ 
+ x
+2tanx
+
+ 1+
+ 
+ tan
+ 
+ 2
+ 
+ x
+
+ =
+
+ 2sinx
+
+ cosx
+
+ 1+
+
+ sin
+ 
+ 2
+ 
+ x
+
+ cos
+ 
+ 2
+ 
+ x
+
+ =
+
+ 2sinx
+
+ cosx
+
+ cos
+ 
+ 2
+ 
+ x+
+ 
+ sin
+ 
+ 2
+ 
+ x
+
+ cos
+ 
+ 2
+ 
+ x
+
+ =
+
+ 2sinx
+
+ cosx
+
+ .
+
+ cos
+ 
+ 2
+ 
+ x
+ 
+ 1
+ 
+ =2sinxcosx=sin(2x)
+cos(2α)=
+ 
+ 1−
+ 
+ tan
+ 
+ 2
+ 
+ α
+
+ 1+
+ 
+ tan
+ 
+ 2
+ 
+ α
+tan(2x)=
+ 
+ 2sinxcosx
+
+ 2
+ 
+ cos
+ 
+ 2
+ 
+ x−1
+2sinxcosx
+
+ 2
+ 
+ cos
+ 
+ 2
+ 
+ x−1
+
+ =
+ 
+ sin(2x)
+
+ cos(2x)
+
+ =tan(2x)
+(
+
+ sin
+ 
+ 2
+ 
+ x−1
+ 
+ )
+ 
+ 2
+ 
+ =cos(
+ 
+ 2x
+ 
+ )+
+ 
+ sin
+ 
+ 4
+ 
+ x
+sin(
+ 
+ 3x
+ 
+ )=3sinx
+ 
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 3
+ 
+ x
+sin(x+2x)
+
+ =
+
+ sinxcos(2x)+sin(2x)cosx
+
+ =
+
+ sinx(
+
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 2
+ 
+ x
+ 
+ )+2sinxcosxcosx
+
+ =
+
+ sinx
+ 
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 3
+ 
+ x+2sinx
+ 
+ cos
+ 
+ 2
+ 
+ x
+
+ =
+
+ 3sinx
+ 
+ cos
+ 
+ 2
+ 
+ x−
+ 
+ sin
+ 
+ 3
+ 
+ x
+cos(
+ 
+ 3x
+ 
+ )=
+ 
+ cos
+ 
+ 3
+ 
+ x−3
+ 
+ sin
+ 
+ 2
+ 
+ xcosx
+1+cos(
+ 
+ 2t
+ 
+ )
+
+ sin(
+ 
+ 2t
+ 
+ )−cost
+
+ =
+ 
+ 2cost
+
+ 2sint−1
+1+cos(2t)
+
+ sin(2t)−cost
+
+ =
+
+ 1+2
+ 
+ cos
+ 
+ 2
+ 
+ t−1
+
+ 2sintcost−cost
+
+ =
+
+ 2
+ 
+ cos
+ 
+ 2
+ 
+ t
+
+ cost(2sint−1)
+
+ =
+
+ 2cost
+
+ 2sint−1
+sin(
+ 
+ 16x
+ 
+ )=16sinxcosxcos(
+ 
+ 2x
+ 
+ )cos(
+ 
+ 4x
+ 
+ )cos(
+ 
+ 8x
+ 
+ )
+cos(
+ 
+ 16x
+ 
+ )=(
+
+ cos
+ 
+ 2
+ 
+ (
+ 
+ 4x
+ 
+ )−
+ 
+ sin
+ 
+ 2
+ 
+ (
+ 
+ 4x
+ 
+ )−sin(
+ 
+ 8x
+ 
+ )
+ 
+ )(
+
+ cos
+ 
+ 2
+ 
+ (
+ 
+ 4x
+ 
+ )−
+ 
+ sin
+ 
+ 2
+ 
+ (
+ 
+ 4x
+ 
+ )+sin(
+ 
+ 8x
+ 
+ )
+ 
+ )
+(
+
+ cos
+ 
+ 2
+ 
+ (4x)−
+ 
+ sin
+ 
+ 2
+ 
+ (4x)−sin(8x))(
+ 
+ cos
+ 
+ 2
+ 
+ (4x)−
+ 
+ sin
+ 
+ 2
+ 
+ (4x)+sin(8x)
+ 
+ )
+
+ =
+
+ =
+
+ (cos(8x)−sin(8x))(cos(8x)+sin(8x))
+
+ =
+
+ cos
+ 
+ 2
+ 
+ (8x)−
+ 
+ sin
+ 
+ 2
+ 
+ (8x)
+
+ =
+
+ cos(16x)
+
+identities derived from the sum formulas for sine, cosine, and tangent in which the angles are equal
+identities derived from the reduction formulas and used to determine half-angle values of trigonometric functions
+identities derived from the double-angle formulas and used to reduce the power of a trigonometric function

@@ -1,0 +1,2656 @@
+# m53186
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Proofs, Identities, and Toolkit Functions
+
+Proofs, Identities, and Toolkit Functions
+
+Important Proofs and Derivations
+Product Rule
+log
+ 
+ a
+ 
+ xy=
+ 
+ log
+ 
+ a
+ 
+ x+
+ 
+ log
+ 
+ a
+ 
+ y
+Proof:
+
+Let 
+ 
+ m=
+ 
+ log
+ 
+ a
+ 
+ x
+ 
+ and 
+ 
+ n=
+ 
+ log
+ 
+ a
+ 
+ y.
+
+Write in exponent form.
+x=
+ a
+ m
+
+ and 
+ 
+ y=
+ a
+ n
+ 
+ .
+
+Multiply.
+xy=
+ a
+ m
+
+ a
+ n
+ 
+ =
+ a
+ 
+ m+n
+a
+ 
+ m+n
+
+ =
+
+ xy
+
+ log
+ a
+ 
+ (xy)
+
+ =
+
+ m+n
+
+ =
+
+ log
+ a
+ 
+ x+
+ 
+ log
+ b
+ 
+ y
+Change of Base Rule
+log
+ a
+ 
+ b=
+
+ log
+ c
+ 
+ b
+
+ log
+ c
+ 
+ a
+
+ log
+ a
+ 
+ b=
+ 1
+
+ log
+ b
+ 
+ a
+
+where 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ are positive, and 
+ 
+ a>0,a≠1.
+Proof:
+
+Let 
+ 
+ x=
+ 
+ log
+ 
+ a
+ 
+ b.
+
+Write in exponent form.
+a
+ x
+ 
+ =b
+
+Take the 
+
+ log
+ 
+ c
+
+ of both sides.
+log
+ c
+
+ a
+ x
+
+ =
+
+ log
+ c
+ 
+ b
+
+ x
+ 
+ log
+ c
+ 
+ a
+
+ =
+
+ log
+ c
+ 
+ b
+
+ x
+
+ =
+
+ log
+ c
+ 
+ b
+
+ log
+ c
+ 
+ a
+
+ log
+ a
+ 
+ b
+
+ =
+
+ log
+ c
+ 
+ b
+
+ log
+ c
+ 
+ a
+
+When 
+ 
+ c=b,
+log
+ 
+ a
+ 
+ b=
+
+ log
+ 
+ b
+ 
+ b
+
+ log
+ 
+ b
+ 
+ a
+
+ =
+ 1
+
+ log
+ 
+ b
+ 
+ a
+Heron’s Formula
+A=
+ 
+ s(
+ 
+ s−a
+ 
+ )(
+ 
+ s−b
+ 
+ )(
+ 
+ s−c
+ 
+ )
+
+where 
+ 
+ s=
+ 
+ a+b+c
+ 
+ 2
+Proof:
+
+Let 
+ 
+ a,
+
+ b,
+ 
+ and 
+ 
+ c
+ 
+ be the sides of a triangle, and 
+ 
+ h
+ 
+ be the height.
+
+So 
+ 
+ s=
+ 
+ a+b+c
+ 
+ 2
+
+.
+
+We can further name the parts of the base in each triangle established by the height such that 
+ 
+ p+q=c.
+
+Using the Pythagorean Theorem, 
+
+ h
+ 2
+ 
+ +
+ p
+ 2
+ 
+ =
+ a
+ 2
+
+ and 
+
+ h
+ 2
+ 
+ +
+ q
+ 2
+ 
+ =
+ b
+ 2
+ 
+ .
+
+Since 
+ 
+ q=c−p,
+ 
+ then 
+
+ q
+ 2
+ 
+ =
+ 
+ (
+ 
+ c−p
+ 
+ )
+ 
+ 2
+ 
+ .
+ 
+ Expanding, we find that 
+
+ q
+ 2
+ 
+ =
+ c
+ 2
+ 
+ −2cp+
+ p
+ 2
+ 
+ .
+
+We can then add 
+
+ h
+ 2
+
+ to each side of the equation to get 
+
+ h
+ 2
+ 
+ +
+ q
+ 2
+ 
+ =
+ h
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −2cp+
+ p
+ 2
+ 
+ .
+
+Substitute this result into the equation 
+
+ h
+ 2
+ 
+ +
+ q
+ 2
+ 
+ =
+ b
+ 2
+
+ yields 
+
+ b
+ 2
+ 
+ =
+ h
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −2cp+
+ p
+ 2
+ 
+ .
+
+Then replacing 
+
+ h
+ 2
+ 
+ +
+ p
+ 2
+
+ with 
+
+ a
+ 2
+
+ gives 
+
+ b
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −2cp+
+ c
+ 2
+ 
+ .
+
+Solve for 
+ 
+ p
+ 
+ to get
+p=
+
+ a
+ 2
+ 
+ +
+ b
+ 2
+ 
+ −
+ c
+ 2
+
+ 2c
+
+Since 
+
+ h
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ p
+ 2
+ 
+ ,
+ 
+ we get an expression in terms of 
+ 
+ a,
+
+ b,
+ 
+ and 
+ 
+ c.
+h
+ 2
+
+ =
+
+ a
+ 2
+ 
+ −
+ p
+ 2
+
+ =
+
+ (a+p)(a−p)
+
+ =
+
+ [ 
+ a+
+ 
+ (
+
+ a
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −
+ b
+ 2
+
+ )
+ 
+ 2c
+ 
+ ][ 
+ a−
+ 
+ (
+
+ a
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −
+ b
+ 2
+
+ )
+ 
+ 2c
+ 
+ ]
+
+ =
+
+ (
+ 
+ 2ac+
+ a
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −
+ b
+ 2
+
+ )(
+ 
+ 2ac−
+ a
+ 2
+ 
+ −
+ c
+ 2
+ 
+ +
+ b
+ 2
+
+ )
+ 
+ 4
+ c
+ 2
+
+ =
+
+ (
+
+ (a+c)
+ 2
+ 
+ −
+ b
+ 2
+
+ )(
+
+ b
+ 2
+ 
+ −
+ 
+ (a−c)
+ 2
+
+ )
+ 
+ 4
+ c
+ 2
+
+ =
+
+ (a+b+c)(a+c−b)(b+a−c)(b−a+c)
+ 
+ 4
+ c
+ 2
+
+ =
+
+ (a+b+c)(−a+b+c)(a−b+c)(a+b−c)
+ 
+ 4
+ c
+ 2
+
+ =
+
+ 2s⋅(2s−a)⋅(2s−b)(2s−c)
+ 
+ 4
+ c
+ 2
+
+Therefore,
+h
+ 2
+
+ =
+
+ 4s(s−a)(s−b)(s−c)
+
+ c
+ 2
+
+ h
+
+ =
+
+ 2
+ 
+ s(s−a)(s−b)(s−c)
+
+ c
+
+And since 
+ 
+ A=
+ 1
+ 2
+ 
+ ch,
+ 
+ then
+A
+
+ =
+
+ 1
+ 2
+ 
+ c
+ 
+ 2
+ 
+ s(s−a)(s−b)(s−c)
+
+ c
+
+ =
+
+ s(s−a)(s−b)(s−c)
+Properties of the Dot Product
+u·v=v·u
+Proof:
+u·v
+
+ =〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉·〈
+ v
+ 1
+ 
+ ,
+ v
+ 2
+ 
+ ,...
+ v
+ n
+ 
+ 〉
+
+ =
+ u
+ 1
+
+ v
+ 1
+ 
+ +
+ u
+ 2
+
+ v
+ 2
+ 
+ +...+
+ u
+ n
+
+ v
+ n
+
+ =
+ v
+ 1
+
+ u
+ 1
+ 
+ +
+ v
+ 2
+
+ u
+ 2
+ 
+ +...+
+ v
+ n
+
+ v
+ n
+
+ =〈
+ v
+ 1
+ 
+ ,
+ v
+ 2
+ 
+ ,...
+ v
+ n
+ 
+ 〉·〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉
+
+ =v·u
+u·(
+ 
+ v+w
+ 
+ )=u·v+u·w
+Proof:
+u·(v+w)
+
+ =〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉·(
+ 
+ 〈
+ v
+ 1
+ 
+ ,
+ v
+ 2
+ 
+ ,...
+ v
+ n
+ 
+ 〉+〈
+ w
+ 1
+ 
+ ,
+ w
+ 2
+ 
+ ,...
+ w
+ n
+ 
+ 〉
+ )
+
+ =〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉·〈
+ v
+ 1
+ 
+ +
+ w
+ 1
+ 
+ ,
+ v
+ 2
+ 
+ +
+ w
+ 2
+ 
+ ,...
+ v
+ n
+ 
+ +
+ w
+ n
+ 
+ 〉
+
+ =〈
+ u
+ 1
+ 
+ (
+ v
+ 1
+ 
+ +
+ w
+ 1
+ 
+ ),
+ u
+ 2
+ 
+ (
+ v
+ 2
+ 
+ +
+ w
+ 2
+ 
+ ),...
+ u
+ n
+ 
+ (
+ v
+ n
+ 
+ +
+ w
+ n
+ 
+ )〉
+
+ =〈
+ u
+ 1
+
+ v
+ 1
+ 
+ +
+ u
+ 1
+
+ w
+ 1
+ 
+ ,
+ u
+ 2
+
+ v
+ 2
+ 
+ +
+ u
+ 2
+
+ w
+ 2
+ 
+ ,...
+ u
+ n
+
+ v
+ n
+ 
+ +
+ u
+ n
+
+ w
+ n
+ 
+ 〉
+
+ =〈
+ u
+ 1
+
+ v
+ 1
+ 
+ ,
+ u
+ 2
+
+ v
+ 2
+ 
+ ,...,
+ u
+ n
+
+ v
+ n
+ 
+ 〉+〈
+ u
+ 1
+
+ w
+ 1
+ 
+ ,
+ u
+ 2
+
+ w
+ 2
+ 
+ ,...,
+ u
+ n
+
+ w
+ n
+ 
+ 〉
+
+ =〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉·〈
+ v
+ 1
+ 
+ ,
+ v
+ 2
+ 
+ ,...
+ v
+ n
+ 
+ 〉+〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉·〈
+ w
+ 1
+ 
+ ,
+ w
+ 2
+ 
+ ,...
+ w
+ n
+ 
+ 〉
+
+ =u·v+u·w
+u·u=
+ 
+ | u |
+ 
+ 2
+Proof:
+u·u
+
+ =〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉·〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉
+
+ =
+ u
+ 1
+
+ u
+ 1
+ 
+ +
+ u
+ 2
+
+ u
+ 2
+ 
+ +...+
+ u
+ n
+
+ u
+ n
+
+ =
+ u
+ 1
+
+ 2
+ 
+ +
+ u
+ 2
+
+ 2
+ 
+ +...+
+ u
+ n
+
+ 2
+
+ =|〈
+ u
+ 1
+ 
+ ,
+ u
+ 2
+ 
+ ,...
+ u
+ n
+ 
+ 〉
+ |
+ 2
+
+ =u·u
+Standard Form of the Ellipse centered at the Origin
+1=
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+Derivation
+
+An ellipse consists of all the points for which the sum of distances from two foci is constant:
+(
+ 
+ x−(
+ 
+ −c
+ 
+ )
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−0
+ 
+ )
+ 
+ 2
+
+ +
+
+ (
+ 
+ x−c
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−0
+ 
+ )
+ 
+ 2
+
+ =constant
+
+Consider a vertex.
+
+Then, 
+
+ (
+ 
+ x−(
+ 
+ −c
+ 
+ )
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−0
+ 
+ )
+ 
+ 2
+
+ +
+
+ (
+ 
+ x−c
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−0
+ 
+ )
+ 
+ 2
+
+ =2a
+
+Consider a covertex.
+
+Then 
+
+ b
+ 2
+ 
+ +
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ .
+(x−(−c))
+ 2
+ 
+ +
+ 
+ (y−0)
+ 2
+
+ +
+
+ (x−c)
+ 2
+ 
+ +
+ 
+ (y−0)
+ 2
+
+ =
+
+ 2a
+
+ (x+c)
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 2a−
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ (x+c)
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ (
+ 
+ 2a−
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ )
+ 2
+
+ x
+ 2
+ 
+ +2cx+
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 4
+ a
+ 2
+ 
+ −4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ +
+ 
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ x
+ 2
+ 
+ +2cx+
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 4
+ a
+ 2
+ 
+ −4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ +
+ x
+ 2
+ 
+ −2cx+
+ y
+ 2
+
+ 2cx
+
+ =
+
+ 4
+ a
+ 2
+ 
+ −4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ −2cx
+
+ 4cx−4
+ a
+ 2
+
+ =
+
+ 4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ −
+ 1
+ 
+ 4a
+ 
+ (
+ 
+ 4cx−4
+ a
+ 2
+
+ )
+
+ =
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ a−
+ c
+ a
+ 
+ x
+
+ =
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ a
+ 2
+ 
+ −2xc+
+
+ c
+ 2
+
+ a
+ 2
+
+ x
+ 2
+
+ =
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ a
+ 2
+ 
+ −2xc+
+
+ c
+ 2
+
+ a
+ 2
+
+ x
+ 2
+
+ =
+
+ x
+ 2
+ 
+ −2xc+
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ a
+ 2
+ 
+ +
+
+ c
+ 2
+
+ a
+ 2
+
+ x
+ 2
+
+ =
+
+ x
+ 2
+ 
+ +
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ a
+ 2
+ 
+ +
+
+ c
+ 2
+
+ a
+ 2
+
+ x
+ 2
+
+ =
+
+ x
+ 2
+ 
+ +
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ a
+ 2
+ 
+ −
+ c
+ 2
+
+ =
+
+ x
+ 2
+ 
+ −
+
+ c
+ 2
+
+ a
+ 2
+
+ x
+ 2
+ 
+ +
+ y
+ 2
+
+ a
+ 2
+ 
+ −
+ c
+ 2
+
+ =
+
+ x
+ 2
+ 
+ (
+ 
+ 1−
+
+ c
+ 2
+
+ a
+ 2
+
+ )+
+ y
+ 2
+
+Let 
+ 
+ 1=
+
+ a
+ 2
+
+ a
+ 2
+
+ .
+
+Because 
+
+ b
+ 2
+ 
+ +
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ ,
+ 
+ then 
+
+ b
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ c
+ 2
+ 
+ .
+Standard Form of the Hyperbola
+1=
+
+ x
+ 2
+
+ a
+ 2
+
+ −
+
+ y
+ 2
+
+ b
+ 2
+Derivation
+
+A hyperbola is the set of all points in a plane such that the absolute value of the difference of the distances between two fixed points is constant.
+
+Diagram 1: The difference of the distances from Point P to the foci is constant:
+(x−(−c))
+ 
+ 2
+ 
+ +
+ 
+ (y−0)
+ 
+ 2
+
+ −
+
+ (x−c)
+ 
+ 2
+ 
+ +
+ 
+ (y−0)
+ 
+ 2
+
+ =constant
+
+Diagram 2: When the point is a vertex, the difference is 
+ 
+ 2a.
+(
+ 
+ x−(
+ 
+ −c
+ 
+ )
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−0
+ 
+ )
+ 
+ 2
+
+ −
+
+ (
+ 
+ x−c
+ 
+ )
+ 
+ 2
+ 
+ +
+ 
+ (
+ 
+ y−0
+ 
+ )
+ 
+ 2
+
+ =2a
+(x−(−c))
+ 2
+ 
+ +
+ 
+ (y−0)
+ 2
+
+ −
+
+ (x−c)
+ 2
+ 
+ +
+ 
+ (y−0)
+ 2
+
+ =
+
+ 2a
+
+ (x+c)
+ 2
+ 
+ +
+ y
+ 2
+
+ −
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 2a
+
+ (x+c)
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 2a+
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ (x+c)
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ (
+ 
+ 2a+
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ )
+
+ x
+ 2
+ 
+ +2cx+
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 4
+ a
+ 2
+ 
+ +4a
+
+ (x−c)
+ 2
+
+ +
+ y
+ 2
+
+ x
+ 2
+ 
+ +2cx+
+ c
+ 2
+ 
+ +
+ y
+ 2
+
+ =
+
+ 4
+ a
+ 2
+ 
+ +4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ +
+ x
+ 2
+ 
+ −2cx+
+ y
+ 2
+
+ 2cx
+
+ =
+
+ 4
+ a
+ 2
+ 
+ +4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ −2cx
+
+ 4cx−4
+ a
+ 2
+
+ =
+
+ 4a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ cx−
+ a
+ 2
+
+ =
+
+ a
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ (
+ 
+ cx−
+ a
+ 2
+
+ )
+ 2
+
+ =
+
+ a
+ 2
+ 
+ (
+
+ (x−c)
+ 2
+ 
+ +
+ y
+ 2
+
+ )
+
+ c
+ 2
+
+ x
+ 2
+ 
+ −2
+ a
+ 2
+
+ c
+ 2
+
+ x
+ 2
+ 
+ +
+ a
+ 4
+
+ =
+
+ a
+ 2
+
+ x
+ 2
+ 
+ −2
+ a
+ 2
+
+ c
+ 2
+
+ x
+ 2
+ 
+ +
+ a
+ 2
+
+ c
+ 2
+ 
+ +
+ a
+ 2
+
+ y
+ 2
+
+ c
+ 2
+
+ x
+ 2
+ 
+ +
+ a
+ 4
+
+ =
+
+ a
+ 2
+
+ x
+ 2
+ 
+ +
+ a
+ 2
+
+ c
+ 2
+ 
+ +
+ a
+ 2
+
+ y
+ 2
+
+ a
+ 4
+ 
+ −
+ a
+ 2
+
+ c
+ 2
+
+ =
+
+ a
+ 2
+
+ x
+ 2
+ 
+ −
+ c
+ 2
+
+ x
+ 2
+ 
+ +
+ a
+ 2
+
+ y
+ 2
+
+ a
+ 2
+ 
+ (
+
+ a
+ 2
+ 
+ −
+ c
+ 2
+
+ )
+
+ =
+
+ (
+
+ a
+ 2
+ 
+ −
+ c
+ 2
+
+ )
+ x
+ 2
+ 
+ +
+ a
+ 2
+
+ y
+ 2
+
+ a
+ 2
+ 
+ (
+
+ a
+ 2
+ 
+ −
+ c
+ 2
+
+ )
+
+ =
+
+ (
+
+ c
+ 2
+ 
+ −
+ a
+ 2
+
+ )
+ x
+ 2
+ 
+ −
+ a
+ 2
+
+ y
+ 2
+
+Define 
+ 
+ b
+ 
+ as a positive number such that 
+
+ b
+ 2
+ 
+ =
+ c
+ 2
+ 
+ −
+ a
+ 2
+ 
+ .
+
+Trigonometric Identities
+
+cos
+ 2
+ 
+ θ+
+ sin
+ 2
+ 
+ θ=1
+
+ 1+
+ tan
+ 2
+ 
+ θ=
+ sec
+ 2
+ 
+ θ
+
+ 1+
+ cot
+ 2
+ 
+ θ=
+ csc
+ 2
+ 
+ θ
+cos(−θ)=cosθ
+
+ sec(−θ)=secθ
+
+ sin(−θ)=−sinθ
+
+ tan(−θ)=−tanθ
+
+ csc(−θ)=−cscθ
+
+ cot(−θ)=−cotθ
+cosθ=sin(
+
+ π
+ 2
+ 
+ −θ
+ 
+ )
+
+ sinθ=cos(
+
+ π
+ 2
+ 
+ −θ
+ 
+ )
+
+ tanθ=cot(
+
+ π
+ 2
+ 
+ −θ
+ 
+ )
+
+ cotθ=tan(
+
+ π
+ 2
+ 
+ −θ
+ 
+ )
+
+ secθ=csc(
+
+ π
+ 2
+ 
+ −θ
+ 
+ )
+
+ cscθ=sec(
+
+ π
+ 2
+ 
+ −θ
+ 
+ )
+tanθ=
+ 
+ sinθ
+
+ cosθ
+
+ secθ=
+ 1
+ 
+ cosθ
+
+ cscθ=
+ 1
+ 
+ sinθ
+
+ cotθ=
+ 1
+ 
+ tanθ
+
+ =
+ 
+ cosθ
+
+ sinθ
+cos(α+β)=cosαcosβ−sinαsinβ
+
+ cos(α−β)=cosαcosβ+sinαsinβ
+
+ sin(α+β)=sinαcosβ+cosαsinβ
+
+ sin(α−β)=sinαcosβ−cosαsinβ
+
+ tan(α+β)=
+ 
+ tanα+tanβ
+
+ 1−tanαtanβ
+
+ tan(α−β)=
+ 
+ tanα−tanβ
+
+ 1+tanαtanβ
+sin(2θ)=2sinθcosθ
+
+ cos(2θ)=
+ 
+ cos
+ 
+ 2
+ 
+ θ−
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+ cos(2θ)=1−2
+ 
+ sin
+ 
+ 2
+ 
+ θ
+
+ cos(2θ)=2
+ 
+ cos
+ 
+ 2
+ 
+ θ−1
+
+ tan(2θ)=
+ 
+ 2tanθ
+
+ 1−
+ 
+ tan
+ 
+ 2
+ 
+ θ
+sin
+ α
+ 2
+ 
+ =±
+
+ 1−cosα
+ 
+ 2
+
+ cos
+ α
+ 2
+ 
+ =±
+
+ 1+cosα
+ 
+ 2
+
+ tan
+ α
+ 2
+ 
+ =±
+
+ 1−cosα
+
+ 1+cosα
+
+ tan
+ α
+ 2
+ 
+ =
+ 
+ sinα
+
+ 1+cosα
+
+ tan
+ α
+ 2
+ 
+ =
+ 
+ 1−cosα
+
+ sinα
+sin
+ 2
+ 
+ θ=
+ 
+ 1−cos(
+ 
+ 2θ
+ 
+ )
+ 
+ 2
+
+ cos
+ 2
+ 
+ θ=
+ 
+ 1+cos(
+ 
+ 2θ
+ 
+ )
+ 
+ 2
+
+ tan
+ 2
+ 
+ θ=
+ 
+ 1−cos(
+ 
+ 2θ
+ 
+ )
+
+ 1+cos(
+ 
+ 2θ
+ 
+ )
+cosαcosβ=
+ 1
+ 2
+ 
+ [ 
+ cos(α−β)+cos(α+β)
+ ]
+
+ sinαcosβ=
+ 1
+ 2
+ 
+ [ 
+ sin(α+β)+sin(α−β)
+ ]
+
+ sinαsinβ=
+ 1
+ 2
+ 
+ [ 
+ cos(α−β)−cos(α+β)
+ ]
+
+ cosαsinβ=
+ 1
+ 2
+ 
+ [ 
+ sin(α+β)−sin(α−β)
+ ]
+sinα+sinβ=2sin(
+
+ α+β
+ 
+ 2
+
+ )cos(
+
+ α−β
+ 
+ 2
+
+ )
+
+ sinα−sinβ=2sin(
+
+ α−β
+ 
+ 2
+
+ )cos(
+
+ α+β
+ 
+ 2
+
+ )
+
+ cosα−cosβ=−2sin(
+
+ α+β
+ 
+ 2
+
+ )sin(
+
+ α−β
+ 
+ 2
+
+ )
+
+ cosα+cosβ=2cos(
+
+ α+β
+ 
+ 2
+
+ )cos(
+
+ α−β
+ 
+ 2
+
+ )
+sinα
+ 
+ a
+ 
+ =
+ 
+ sinβ
+ 
+ b
+ 
+ =
+ 
+ sinγ
+ 
+ c
+
+ a
+ 
+ sinα
+
+ =
+ b
+ 
+ sinβ
+
+ =
+ c
+ 
+ sinγ
+a
+ 2
+ 
+ =
+ b
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −2bccosα
+
+ b
+ 2
+ 
+ =
+ a
+ 2
+ 
+ +
+ c
+ 2
+ 
+ −2accosβ
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ +
+ b
+ 2
+ 
+ −2abcosγ
+ToolKit Functions
+
+Trigonometric Functions
+Unit Circle
+
+Cosine
+1
+2
+Sine
+3
+
+2
+Tangent
+3
+
+3
+3
+Secant
+2
+2
+Cosecant
+Undefined
+2
+3
+
+3
+Cotangent
+3
+3
+
+3
+0

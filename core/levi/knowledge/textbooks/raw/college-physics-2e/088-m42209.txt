@@ -1,0 +1,394 @@
+# m42209
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Viscosity and Laminar Flow; Poiseuille’s Law
+
+Viscosity and Laminar Flow; Poiseuille’s Law
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define laminar flow and turbulent flow.
+
+Explain what viscosity is.
+
+Calculate flow and resistance with Poiseuille’s law.
+
+Explain how pressure drops due to resistance.
+
+Laminar Flow and Viscosity
+
+When you pour yourself a glass of juice, the liquid flows freely and quickly. But when you pour syrup on your pancakes, that liquid flows slowly and sticks to the pitcher. The difference is fluid friction, both within the fluid itself and between the fluid and its surroundings. We call this property of fluids viscosity. Juice has low viscosity, whereas syrup has high viscosity. In the previous sections we have considered ideal fluids with little or no viscosity. In this section, we will investigate what factors, including viscosity, affect the rate of fluid flow.
+
+The precise definition of viscosity is based on laminar, or nonturbulent, flow. Before we can define viscosity, then, we need to define laminar flow and turbulent flow. shows both types of flow. Laminar flow is characterized by the smooth flow of the fluid in layers that do not mix. Turbulent flow, or turbulence, is characterized by eddies and swirls that mix layers of fluid together.
+shows schematically how laminar and turbulent flow differ. Layers flow without mixing when flow is laminar. When there is turbulence, the layers mix, and there are significant velocities in directions other than the overall direction of flow. The lines that are shown in many illustrations are the paths followed by small volumes of fluids. These are called streamlines. Streamlines are smooth and continuous when flow is laminar, but break up and mix when flow is turbulent. Turbulence has two main causes. First, any obstruction or sharp corner, such as in a faucet, creates turbulence by imparting velocities perpendicular to the flow. Second, high speeds cause turbulence. The drag both between adjacent layers of fluid and between the fluid and its surroundings forms swirls and eddies, if the speed is great enough. We shall concentrate on laminar flow for the remainder of this section, leaving certain aspects of turbulence for later sections.
+
+Making Connections: Take-Home Experiment: Go Down to the River
+
+Try dropping simultaneously two sticks into a flowing river, one near the edge of the river and one near the middle. Which one travels faster? Why?
+shows how viscosity is measured for a fluid. Two parallel plates have the specific fluid between them. The bottom plate is held fixed, while the top plate is moved to the right, dragging fluid with it. The layer (or lamina) of fluid in contact with either plate does not move relative to the plate, and so the top layer moves at v while the bottom layer remains at rest. Each successive layer from the top down exerts a force on the one below it, trying to drag it along, producing a continuous variation in speed from v to 0 as shown. Care is taken to insure that the flow is laminar; that is, the layers do not mix. The motion in is like a continuous shearing motion. Fluids have zero shear strength, but the rate at which they are sheared is related to the same geometrical factors A and L as is shear deformation for solids.
+
+A force F is required to keep the top plate in moving at a constant velocity v, and experiments have shown that this force depends on four factors. First, F is directly proportional to v (until the speed is so high that turbulence occurs—then a much larger force is needed, and it has a more complicated dependence on v). Second, F is proportional to the area A of the plate. This relationship seems reasonable, since A is directly proportional to the amount of fluid being moved. Third, F is inversely proportional to the distance between the plates L. This relationship is also reasonable; L is like a lever arm, and the greater the lever arm, the less force that is needed. Fourth, F is directly proportional to the coefficient of viscosity, η. The greater the viscosity, the greater the force required. These dependencies are combined into the equation
+
+which gives us a working definition of fluid viscosity η. Solving for η gives
+
+which defines viscosity in terms of how it is measured. The SI unit of viscosity is N⋅m/[(m/s)m2]=(N/m2)s or Pa⋅s. lists the coefficients of viscosity for various fluids.
+
+Viscosity varies from one fluid to another by several orders of magnitude. As you might expect, the viscosities of gases are much less than those of liquids, and these viscosities are often temperature dependent. The viscosity of blood can be reduced by aspirin consumption, allowing it to flow more easily around the body. (When used over the long term in low doses, aspirin can help prevent heart attacks, and reduce the risk of blood clotting.)
+
+Laminar Flow Confined to Tubes—Poiseuille’s Law
+
+What causes flow? The answer, not surprisingly, is pressure difference. In fact, there is a very simple relationship between horizontal flow and pressure. Flow rate Q is in the direction from high to low pressure. The greater the pressure differential between two points, the greater the flow rate. This relationship can be stated as
+
+where P1 and P2 are the pressures at two points, such as at either end of a tube, and R is the resistance to flow. The resistance R includes everything, except pressure, that affects flow rate. For example, R is greater for a long tube than for a short one. The greater the viscosity of a fluid, the greater the value of R. Turbulence greatly increases R, whereas increasing the diameter of a tube decreases R.
+
+If viscosity is zero, the fluid is frictionless and the resistance to flow is also zero. Comparing frictionless flow in a tube to viscous flow, as in , we see that for a viscous fluid, speed is greatest at midstream because of drag at the boundaries. We can see the effect of viscosity in a Bunsen burner flame, even though the viscosity of natural gas is small.
+
+The resistance R to laminar flow of an incompressible fluid having viscosity η through a horizontal tube of uniform radius r and length l, such as the one in , is given by
+
+This equation is called Poiseuille’s law for resistance after the French scientist J. L. Poiseuille (1799–1869), who derived it in an attempt to understand the flow of blood, an often turbulent fluid.
+
+Let us examine Poiseuille’s expression for R to see if it makes good intuitive sense. We see that resistance is directly proportional to both fluid viscosity η and the length l of a tube. After all, both of these directly affect the amount of friction encountered—the greater either is, the greater the resistance and the smaller the flow. The radius r of a tube affects the resistance, which again makes sense, because the greater the radius, the greater the flow (all other factors remaining the same). But it is surprising that r is raised to the fourth power in Poiseuille’s law. This exponent means that any change in the radius of a tube has a very large effect on resistance. For example, doubling the radius of a tube decreases resistance by a factor of 24=16.
+
+Taken together, Q=P2−P1R and R=8ηlπr4 give the following expression for flow rate:
+
+This equation describes laminar flow through a tube. It is sometimes called Poiseuille’s law for laminar flow, or simply Poiseuille’s law.
+
+Using Flow Rate: Plaque Deposits Reduce Blood Flow
+
+Suppose the flow rate of blood in a coronary artery has been reduced to half its normal value by plaque deposits. By what factor has the radius of the artery been reduced, assuming no turbulence occurs?
+Strategy
+
+Strategy
+
+Assuming laminar flow, Poiseuille’s law states that
+
+We need to compare the artery radius before and after the flow rate reduction.
+Solution
+
+Solution
+
+With a constant pressure difference assumed and the same length and viscosity, along the artery we have
+
+So, given that Q2=0.5Q1, we find that r24=0.5r14.
+
+Therefore, r2=0.50.25r1=0.841r1, a decrease in the artery radius of 16%.
+Discussion
+
+Discussion
+
+This decrease in radius is surprisingly small for this situation. To restore the blood flow in spite of this buildup would require an increase in the pressure difference P2−P1 of a factor of two, with subsequent strain on the heart.
+
+Coefficients of Viscosity of Various Fluids
+
+Fluid
+Temperature (ºC)
+Gases
+Air
+0
+0.0171
+20
+0.0181
+40
+0.0190
+100
+0.0218
+Ammonia
+20
+0.00974
+Carbon dioxide
+20
+0.0147
+Helium
+20
+0.0196
+Hydrogen
+0
+0.0090
+Mercury
+20
+0.0450
+Oxygen
+20
+0.0203
+Steam
+100
+Liquids
+Water
+0
+1.792
+20
+1.002
+37
+0.6947
+40
+0.653
+100
+0.282
+Whole bloodThe ratios of the viscosities of blood to water are nearly constant between 0°C and 37°C.
+20
+3.015
+37
+2.084
+Blood plasmaSee note on Whole Blood.
+20
+1.810
+37
+1.257
+Ethyl alcohol
+20
+1.20
+Methanol
+20
+0.584
+Oil (heavy machine)
+20
+660
+Oil (motor, SAE 10)
+30
+200
+Oil (olive)
+20
+138
+Glycerin
+20
+1500
+Honey
+20
+2000–10000
+Maple Syrup
+20
+2000–3000
+Milk
+20
+3.0
+Oil (Corn)
+20
+65
+The circulatory system provides many examples of Poiseuille’s law in action—with blood flow regulated by changes in vessel size and blood pressure. Blood vessels are not rigid but elastic. Adjustments to blood flow are primarily made by varying the size of the vessels, since the resistance is so sensitive to the radius. During vigorous exercise, blood vessels are selectively dilated to important muscles and organs and blood pressure increases. This creates both greater overall blood flow and increased flow to specific areas. Conversely, decreases in vessel radii, perhaps from plaques in the arteries, can greatly reduce blood flow. If a vessel’s radius is reduced by only 5% (to 0.95 of its original value), the flow rate is reduced to about (0.95)4=0.81 of its original value. A 19% decrease in flow is caused by a 5% decrease in radius. The body may compensate by increasing blood pressure by 19%, but this presents hazards to the heart and any vessel that has weakened walls. Another example comes from automobile engine oil. If you have a car with an oil pressure gauge, you may notice that oil pressure is high when the engine is cold. Motor oil has greater viscosity when cold than when warm, and so pressure must be greater to pump the same amount of cold oil.
+
+What Pressure Produces This Flow Rate?
+
+An intravenous (IV) system is supplying saline solution to a patient at the rate of 0.120cm3/s through a needle of radius 0.150 mm and length 2.50 cm. What pressure is needed at the entrance of the needle to cause this flow, assuming the viscosity of the saline solution to be the same as that of water? The gauge pressure of the blood in the patient’s vein is 8.00 mm Hg. (Assume that the temperature is
+
+ 20ºC
+
+.)
+Strategy
+
+Strategy
+
+Assuming laminar flow, Poiseuille’s law applies. This is given by
+
+where P2 is the pressure at the entrance of the needle and P1 is the pressure in the vein. The only unknown is P2.
+Solution
+
+Solution
+
+Solving for P2 yields
+P1 is given as 8.00 mm Hg, which converts to 1.066×103N/m2. Substituting this and the other known values yields
+Discussion
+
+Discussion
+
+This pressure could be supplied by an IV bottle with the surface of the saline solution 1.61 m above the entrance to the needle (this is left for you to solve in this chapter’s Problems and Exercises), assuming that there is negligible pressure drop in the tubing leading to the needle.
+
+Flow and Resistance as Causes of Pressure Drops
+
+You may have noticed that water pressure in your home might be lower than normal on hot summer days when there is more use. This pressure drop occurs in the water main before it reaches your home. Let us consider flow through the water main as illustrated in . We can understand why the pressure P1 to the home drops during times of heavy use by rearranging
+
+to
+
+where, in this case, P2 is the pressure at the water works and R is the resistance of the water main. During times of heavy use, the flow rate Q is large. This means that P2−P1 must also be large. Thus P1 must decrease. It is correct to think of flow and resistance as causing the pressure to drop from P2 to P1. P2−P1=RQ is valid for both laminar and turbulent flows.
+
+We can use P2−P1=RQ to analyze pressure drops occurring in more complex systems in which the tube radius is not the same everywhere. Resistance will be much greater in narrow places, such as an obstructed coronary artery. For a given flow rate Q, the pressure drop will be greatest where the tube is most narrow. This is how water faucets control flow. Additionally, R is greatly increased by turbulence, and a constriction that creates turbulence greatly reduces the pressure downstream. Plaque in an artery reduces pressure and hence flow, both by its resistance and by the turbulence it creates.
+is a schematic of the human circulatory system, showing average blood pressures in its major parts for an adult at rest. Pressure created by the heart’s two pumps, the right and left ventricles, is reduced by the resistance of the blood vessels as the blood flows through them. The left ventricle increases arterial blood pressure that drives the flow of blood through all parts of the body except the lungs. The right ventricle receives the lower pressure blood from two major veins and pumps it through the lungs for gas exchange with atmospheric gases – the disposal of carbon dioxide from the blood and the replenishment of oxygen. Only one major organ is shown schematically, with typical branching of arteries to ever smaller vessels, the smallest of which are the capillaries, and rejoining of small veins into larger ones. Similar branching takes place in a variety of organs in the body, and the circulatory system has considerable flexibility in flow regulation to these organs by the dilation and constriction of the arteries leading to them and the capillaries within them. The sensitivity of flow to tube radius makes this flexibility possible over a large range of flow rates.
+
+Each branching of larger vessels into smaller vessels increases the total cross-sectional area of the tubes through which the blood flows. For example, an artery with a cross section of 1cm2 may branch into 20 smaller arteries, each with cross sections of
+
+0.5cm2, with a total of
+
+10cm2. In that manner, the resistance of the branchings is reduced so that pressure is not entirely lost. Moreover, because
+
+Q=A
+
+ v
+ ¯
+
+ and 
+ 
+ A
+ 
+ increases through branching, the average velocity of the blood in the smaller vessels is reduced. The blood velocity in the aorta (diameter=1cm) is about 25 cm/s, while in the capillaries (
+
+ 20 μm
+
+ in diameter) the velocity is about 1 mm/s. This reduced velocity allows the blood to exchange substances with the cells in the capillaries and alveoli in particular.
+
+Section Summary
+
+Laminar flow is characterized by smooth flow of the fluid in layers that do not mix.
+
+Turbulence is characterized by eddies and swirls that mix layers of fluid together.
+
+Fluid viscosity η is due to friction within a fluid. Representative values are given in . Viscosity has units of 
+
+(
+
+N/m
+
+2
+
+)
+
+s
+
+ or 
+
+Pa
+
+⋅
+
+s
+
+ .
+
+Flow is proportional to pressure difference and inversely proportional to resistance:
+ Q=P2−P1R.
+
+For laminar flow in a tube, Poiseuille’s law for resistance states that
+ R=8ηlπr4.
+
+Poiseuille’s law for flow in a tube is
+ Q=(P2−P1)πr48ηl.
+
+The pressure drop caused by flow and resistance is given by
+ P2−P1=RQ.
+
+Conceptual Questions
+
+Explain why the viscosity of a liquid decreases with temperature—that is, how might increased temperature reduce the effects of cohesive forces in a liquid? Also explain why the viscosity of a gas increases with temperature—that is, how does increased gas temperature create more collisions between atoms and molecules?
+
+When paddling a canoe upstream, it is wisest to travel as near to the shore as possible. When canoeing downstream, it may be best to stay near the middle. Explain why.
+
+Why does flow decrease in your shower when someone flushes the toilet?
+
+Plumbing usually includes air-filled tubes near water faucets, as shown in . Explain why they are needed and how they work.
+
+Problems & Exercises
+
+(a) Calculate the retarding force due to the viscosity of the air layer between a cart and a level air track given the following information—air temperature is 20º C, the cart is moving at 0.400 m/s, its surface area is 2.50×10−2m2, and the thickness of the air layer is 6.00×10−5m. (b) What is the ratio of this force to the weight of the 0.300-kg cart?
+
+(a) 3.02×10−3 N
+
+(b) 1.03×10−3
+
+What force is needed to pull one microscope slide over another at a speed of 1.00 cm/s, if there is a 0.500-mm-thick layer of 20º C water between them and the contact area is 8.00cm2?
+
+A glucose solution being administered with an IV has a flow rate of 4.00cm3/min. What will the new flow rate be if the glucose is replaced by whole blood having the same density but a viscosity 2.50 times that of the glucose? All other factors remain constant.
+1
+ .
+ 
+ 60 cm
+
+ 3
+
+ /min
+
+The pressure drop along a length of artery is 100 Pa, the radius is 10 mm, and the flow is laminar. The average speed of the blood is 15 mm/s. (a) What is the net force on the blood in this section of artery? (b) What is the power expended maintaining the flow?
+
+A small artery has a length of 1.1×10−3m and a radius of 2.5×10−5m. If the pressure drop across the artery is 1.3 kPa, what is the flow rate through the artery? (Assume that the temperature is 
+
+37º C
+
+ .)
+8.7
+
+×
+
+10
+
+−
+
+11
+
+m
+
+3
+
+/s
+
+Fluid originally flows through a tube at a rate of 100cm3/s. To illustrate the sensitivity of flow rate to various factors, calculate the new flow rate for the following changes with all other factors remaining the same as in the original conditions. (a) Pressure difference increases by a factor of 1.50. (b) A new fluid with 3.00 times greater viscosity is substituted. (c) The tube is replaced by one having 4.00 times the length. (d) Another tube is used with a radius 0.100 times the original. (e) Yet another tube is substituted with a radius 0.100 times the original and half the length, and the pressure difference is increased by a factor of 1.50.
+
+The arterioles (small arteries) leading to an organ, constrict in order to decrease flow to the organ. To shut down an organ, blood flow is reduced naturally to 1.00% of its original value. By what factor did the radii of the arterioles constrict? Penguins do this when they stand on ice to reduce the blood flow to their feet.
+
+0.316
+
+Angioplasty is a technique in which arteries partially blocked with plaque are dilated to increase blood flow. By what factor must the radius of an artery be increased in order to increase blood flow by a factor of 10?
+
+(a) Suppose a blood vessel’s radius is decreased to 90.0% of its original value by plaque deposits and the body compensates by increasing the pressure difference along the vessel to keep the flow rate constant. By what factor must the pressure difference increase? (b) If turbulence is created by the obstruction, what additional effect would it have on the flow rate?
+
+(a) 1.52
+
+(b) Turbulence will decrease the flow rate of the blood, which would require an even larger increase in the pressure difference, leading to higher blood pressure.
+
+A spherical particle falling at a terminal speed in a liquid must have the gravitational force balanced by the drag force and the buoyant force. The buoyant force is equal to the weight of the displaced fluid, while the drag force is assumed to be given by Stokes Law, Fs=6πrηv. Show that the terminal speed is given by v=2R2g9ηρs−ρ1, where R is the radius of the sphere, ρs is its density, and ρ1 is the density of the fluid and η the coefficient of viscosity.
+
+Using the equation of the previous problem, find the viscosity of motor oil in which a steel ball of radius 0.8 mm falls with a terminal speed of 4.32 cm/s. The densities of the ball and the oil are 7.86 and 0.88 g/mL, respectively.
+
+A skydiver will reach a terminal velocity when the air drag equals their weight. For a skydiver with high speed and a large body, turbulence is a factor. The drag force then is approximately proportional to the square of the velocity. Taking the drag force to be FD=12ρAv2 and setting this equal to the person’s weight, find the terminal speed for a person falling “spread eagle.” Find both a formula and a number for vt, with assumptions as to size.
+
+A layer of oil 1.50 mm thick is placed between two microscope slides. Researchers find that a force of 5.50×10−4N is required to glide one over the other at a speed of 1.00 cm/s when their contact area is 6.00cm2. What is the oil’s viscosity? What type of oil might it be?
+
+or
+
+Olive oil.
+
+(a) Verify that a 19.0% decrease in laminar flow through a tube is caused by a 5.00% decrease in radius, assuming that all other factors remain constant, as stated in the text. (b) What increase in flow is obtained from a 5.00% increase in radius, again assuming all other factors remain constant?
+dealt with the flow of saline solution in an IV system. (a) Verify that a pressure of 1.62×104N/m2 is created at a depth of 1.61 m in a saline solution, assuming its density to be that of sea water. (b) Calculate the new flow rate if the height of the saline solution is decreased to 1.50 m. (c) At what height would the direction of flow be reversed? (This reversal can be a problem when patients stand up.)
+
+(a) 1.62×104 N/m2
+
+(b) 0.111 cm3/s
+
+(c)10.6 cm
+
+When physicians diagnose arterial blockages, they quote the reduction in flow rate. If the flow rate in an artery has been reduced to 10.0% of its normal value by a blood clot and the average pressure difference has increased by 20.0%, by what factor has the clot reduced the radius of the artery?
+
+During a marathon race, a runner’s blood flow increases to 10.0 times her resting rate. Her blood’s viscosity has dropped to 95.0% of its normal value, and the blood pressure difference across the circulatory system has increased by 50.0%. By what factor has the average radii of her blood vessels increased?
+
+1.59
+
+Water supplied to a house by a water main has a pressure of 3.00×105N/m2 early on a summer day when neighborhood use is low. This pressure produces a flow of 20.0 L/min through a garden hose. Later in the day, pressure at the exit of the water main and entrance to the house drops, and a flow of only 8.00 L/min is obtained through the same hose. (a) What pressure is now being supplied to the house, assuming resistance is constant? (b) By what factor did the flow rate in the water main increase in order to cause this decrease in delivered pressure? The pressure at the entrance of the water main is 5.00×105N/m2, and the original flow rate was 200 L/min. (c) How many more users are there, assuming each would consume 20.0 L/min in the morning?
+
+An oil gusher shoots crude oil 25.0 m into the air through a pipe with a 0.100-m diameter. Neglecting air resistance but not the resistance of the pipe, and assuming laminar flow, calculate the gauge pressure at the entrance of the 50.0-m-long vertical pipe. Take the density of the oil to be 900kg/m3 and its viscosity to be 1.00(N/m2)⋅s (or 
+
+1.00
+
+Pa
+
+⋅
+
+s
+
+ ). Note that you must take into account the pressure due to the 50.0-m column of oil in the pipe.
+2.95×106 N/m2(gauge pressure)
+
+Concrete is pumped from a cement mixer to the place it is being laid, instead of being carried in wheelbarrows. The flow rate is 200.0 L/min through a 50.0-m-long, 8.00-cm-diameter hose, and the pressure at the pump is 8.00×106N/m2. (a) Calculate the resistance of the hose. (b) What is the viscosity of the concrete, assuming the flow is laminar? (c) How much power is being supplied, assuming the point of use is at the same level as the pump? You may neglect the power supplied to increase the concrete’s velocity.
+Construct Your Own Problem
+
+Construct Your Own Problem
+
+Consider a coronary artery constricted by arteriosclerosis. Construct a problem in which you calculate the amount by which the diameter of the artery is decreased, based on an assessment of the decrease in flow rate.
+
+Consider a river that spreads out in a delta region on its way to the sea. Construct a problem in which you calculate the average speed at which water moves in the delta region, based on the speed at which it was moving up river. Among the things to consider are the size and flow rate of the river before it spreads out and its size once it has spread out. You can construct the problem for the river spreading out into one large river or into multiple smaller rivers.
+
+a type of fluid flow in which layers do not mix
+fluid flow in which layers mix together via eddies and swirls
+the friction in a fluid, defined in terms of the friction between layers
+the resistance to laminar flow of an incompressible fluid in a tube: R = 8ηl/πr4
+the rate of laminar flow of an incompressible fluid in a tube: Q = (P2 − P1)πr4/8ηl

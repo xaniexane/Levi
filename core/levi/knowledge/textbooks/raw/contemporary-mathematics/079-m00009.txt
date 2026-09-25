@@ -1,0 +1,323 @@
+# m00009
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Scatter Plots, Correlation, and Regression Lines
+
+Scatter Plots, Correlation, and Regression Lines
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Construct a scatter plot for a dataset.
+
+Interpret a scatter plot.
+
+Distinguish among positive, negative and no correlation.
+
+Compute the correlation coefficient.
+
+Estimate and interpret regression lines.
+
+One of the most powerful tools statistics gives us is the ability to explore relationships between two datasets containing quantitative values, and then use that relationship to make predictions. For example, a student who wants to know how well they can expect to score on an upcoming final exam may consider reviewing the data on midterm and final exam scores for students who have previously taken the class. It seems reasonable to expect that there is a relationship between those two datasets: If a student did well on the midterm, they were probably more likely to do well on the final than the average student. Similarly, if a student did poorly on the midterm, they probably also did poorly on the final exam.
+
+Of course, that relationship isn’t set in stone; a student’s performance on a midterm exam doesn’t cement their performance on the final! A student might use a poor result on the midterm as motivation to study more for the final. A student with a really good grade on the midterm might be overconfident going into the final, and as a result doesn’t prepare adequately.
+
+The statistical method of regression can find a formula that does the best job of predicting a score on the final exam based on the student’s score on the midterm, as well as give a measure of the confidence of that prediction! In this section, we’ll discover how to use regression to make these predictions. First, though, we need to lay some graphical groundwork.
+
+Relationships Between Quantitative Datasets
+
+Before we can evaluate a relationship between two datasets, we must first decide if we feel that one might depend on the other. In our exam example, it is appropriate to say that the score on the final depends on the score on the midterm, rather than the other way around: if the midterm depended on the final, then we’d need to know the final score first, which doesn’t make sense.
+
+Here’s another example: if we collected data on home purchases in a certain area, and noted both the sale price of the house and the annual household income of the purchaser, we might expect a relationship between those two. Which depends on the other? In this case, sale price depends on income: people who have a higher income can afford a more expensive house. If it were the other way around, people could buy a new, more expensive house and then expect a raise! (This is very bad advice.)
+
+It's worth noting that not every pair of related datasets has clear dependence. For example, consider the percent of a country’s budget devoted to the military and the percent earmarked for public health. These datasets are generally related: as one goes up, the other goes down. However, in this case, there’s not a preferred choice for dependence, as each could be seen as depending on the other. When exploring the relationship between two datasets, if one set seems to depend on the other, we’ll say that dataset contains values of the response variable (or dependent variable). The dataset that the response variable depends on contains values of what we call the explanatory variable (or independent variable). If no dependence relationship can be identified, then we can assign either dataset to either role.
+
+Identifying Explanatory and Response Variables
+
+For each of the following pairs of related datasets, identify which (if any) should be assigned the role of response variable and which should be assigned to be the explanatory variable.
+
+A person’s height and weight
+
+A professional basketball player’s salary and their average points scored per game (which is a measure of how good they are at basketball)
+
+The length and width of leaves on a tree
+
+As people get taller, their weight tends to increase. But if a person goes on a diet and loses weight, we don’t expect them to also get shorter. So, weight depends on height. That means we’ll say that the response variable is weight and the explanatory variable is height.
+
+The more points a basketball player scores, the more money they should make. But if a basketball player gets a raise, we wouldn’t expect them to get better at basketball as a result. So, the response is salary and the explanatory is points per game.
+
+The way that the length and width of leaves are connected isn’t clear. It seems reasonable that as the width goes up, so would the length. But the other direction is also plausible: as the length goes up, so does the width. Without a clear dependence relationship, we’re free to declare either to be the response and the other to be the explanatory.
+
+Once we’ve assigned roles to our two datasets, we can take the first step in visualizing the relationship between them: creating a scatter plot.
+
+Creating Scatter Plots
+
+A scatter plot is a visualization of the relationship between two quantitative sets of data. The scatter plot is created by turning the datasets into ordered pairs: the first coordinate contains data values from the explanatory dataset, and the second coordinate contains the corresponding data values from the response dataset. These ordered pairs are then plotted in the xy-plane. Let's return to our exam example to put this into practice.
+
+Creating Scatter Plots Without Technology
+
+Students are exploring the relationship between scores on the midterm exam and final exam in their math course. Here are some of the scores reported by their
+ classmates:
+
+Name
+Midterm grade
+Final grade
+Student 1
+88
+84
+Student 2
+71
+80
+Student 3
+75
+77
+Student 4
+94
+95
+Student 5
+68
+73
+Create a scatter plot to visualize the data.
+Step 1: Since it makes more sense to think of the final exam score as being dependent on the midterm exam score, we’ll let the final grade be the response. So, let’s think of these two datasets as a set of ordered pairs, midterm first, final second:
+
+Name
+(Midterm, Final)
+Student 1
+(88, 84)
+Student 2
+(71, 80)
+Student 3
+(75, 77)
+Student 4
+(94, 95)
+Student 5
+Step 2: Next, let’s make the axes. On the horizontal axis, make sure the range of values is sufficient to cover all of the explanatory data. For our data, that’s 68 to 94. Similarly, the vertical axis should cover all of the response data (73 to 95):
+Step 3: Our first point is (88, 84). So, we’ll locate 88 on the horizontal axis, 84 on the vertical axis, and identify the point that’s directly above the first location and horizontally level with the second:
+Step 4: Repeat this process to place the other four points on the graph:
+Step 5: Finally, label the axes:
+
+For large datasets, it’s impractical to create scatter plots manually. Luckily, Google Sheets automates this process for us.
+Making Scatter Plots in Google Sheets
+
+Creating Scatter Plots in Google Sheets
+
+The dataset “NHL19” gives the results of the 2018–2019 National Hockey League season. The columns are team, wins (W), losses (L), overtime losses (OTL), total points (PTS), goals scored by the team (GF), goals scored against the team (GA), and goal differential (the difference in GF and GA). Use Google Sheets to create a scatter plot for GF vs. GA.
+
+When we talk about plotting one set versus another, the first is the response and the second is explanatory.
+Step 1: Open the dataset in Google Sheets, and click and drag to select the data we want to visualize (in this case, we want the columns for GF and GA; make sure you include those labels in the selection).
+Step 2: Next, click on the “Insert” menu, then click “Chart.” Sheets will automatically choose a chart format; if the result isn’t a scatter plot, click on the drop-down menu under “Chart type” in the Chart Editor on the right side of the window and select “Scatter chart.”
+Step 3: Next, check that the correct choices were made for the horizontal and vertical axes. In this case, we want to see GF on the vertical axis and GA on the horizontal axis. If Sheets made the wrong choice, we can fix it in the Chart Editor by clicking on the name of the dataset under “X-axis” to open up a dropdown menu, then selecting the variable that should go on the horizontal axis (GA in this case).
+Step 4: Now, click on the variable under “Series” and select the one that should go on the vertical axis (GF). If you had to make that change, the axis labels in the graph may also need changing; those labels can be fixed using the “Customize” tab in the Chart Editor under “Chart & axis titles.” Your result should look like this:
+
+Reading and Interpreting Scatter Plots
+
+Scatter plots give us information about the existence and strength of a relationship between two datasets. To break that information down, there are a series of questions we might ask to help us. First: Is there a curved pattern in the data? If the answer is “yes,” then we can stop; none of the linear regression techniques from here to the end of this section are appropriate. and show several examples of scatter plots that can help us identify these curved patterns.
+
+Once we have confirmed that there is no curved pattern in our data, we can move to the next question: Is there a linear relationship? To answer this, we must look at different values of the explanatory variable and determine whether the corresponding response values are different, on average. It's important to look at the values “on average” because, in general, our scatter plots won’t include just one corresponding response point for each value of the explanatory variable (i.e., there may be multiple response values for each explanatory value). So, we try to look for the center of those points. Let’s look again at , but consider some different values for the explanatory variable. Let’s highlight the points whose x-values are around 50 and those that are around 80:
+
+Now, we can estimate the middle of each group of points. Let's add our estimated averages to the plot as starred points:
+
+Since those two starred points occur at different heights, we can conclude that there’s likely a relationship worth exploring.
+
+Here’s another example using a different set of data:
+
+Let’s look again at the points near 50 and near 80, and estimate the middles of those clusters:
+
+Notice that there’s not much vertical distance between our two starred points. This tells us that there’s not a strong relationship between these two datasets.
+
+Positive and Negative Linear Relationships
+
+Another way to assess whether there is a relationship between two datasets in a scatter plot is to see if the points seem to be clustered around a line (specifically, a line that’s not horizontal). The stronger the clustering around that line is, the stronger the relationship.
+
+Once we’ve established that there’s a relationship worth exploring, it’s time to start quantifying that relationship. Two datasets have a positive linear relationship if the values of the response tend to increase, on average, as the values of the explanatory variable increase. If the values of the response decrease with increasing values of the explanatory variable, then there is a negative linear relationship between the two datasets. The strength of the relationship is determined by how closely the scatter plot follows a single straight line: the closer the points are to that line, the stronger the relationship. The scatter plots
+ in to depict varying strengths and directions of linear relationships.
+
+The strength and direction (positive or negative) of a linear relationship can also be measured with a statistic called the correlation coefficient (denoted r). Positive values of r indicate a positive relationship, while negative values of r indicate a negative relationship. Values of r close to 0 indicate a weak relationship, while values close to ±1 correspond to a very strong relationship. Looking again at to , the correlation coefficients for each, in sequential order, are: ‒1, ‒0.97, ‒0.55, ‒0.03, 0.61, 0.97, and 1.
+
+There’s no firm rule that establishes a cutoff value of r to divide strong relationships from weak ones, but ±0.7 is often given as the dividing line (i.e., if r>0.7 or r<-0.7 the relationship is strong, and if -0.7<r<0.7 the relationship is weak).
+
+The formula for computing r is very complicated; it’s almost never done without technology. Google Sheets will do the computation for you using the CORREL function. The syntax works like this: if your explanatory values are in cells A2 to A50 and the corresponding response values are in B2 to B50, then you can find the correlation coefficient by entering “=CORREL(A2:A50, B2:B50)”. (Note that the order doesn’t matter for correlation coefficients; “=CORREL(B2:B50, A2:A50)” will give the same result.)
+
+Let’s put all of this together in an example.
+
+Interpreting Scatter Plots
+
+Consider the four scatter plots below:
+
+For each of these, answer the following questions:
+
+Is there a curved pattern in the data? If yes, stop here. If no, continue to part b.
+
+Classify the strength and direction of the relationship. Make a guess at the value of r.
+Yes, there is a curved pattern.
+
+Yes, there is a curved pattern.
+No, there’s no curved pattern.
+ Since the points tend upward as we move from left to right, this is a positive relationship. The points seem pretty closely grouped around a line, so it’s fairly strong. Comparing this scatter plot
+ to those in to , we can see that the relationship is stronger than the one in (r=0.61 ) but not as strong as the one in (r=0.97). So, the value of the correlation coefficient is somewhere between the two. We might guess that r=0.9.
+
+No, there’s no curved pattern.
+
+Since the points tend upward as we move from left to right, this is a positive relationship. The points seem pretty closely grouped around a line, so it’s fairly strong. Comparing this scatter plot
+ to those in to , we can see that the relationship is stronger than the one in (r=0.61 ) but not as strong as the one in (r=0.97). So, the value of the correlation coefficient is somewhere between the two. We might guess that r=0.9.
+No, there’s no curved pattern.
+ Since the points tend downward as we move from left to right, this is a negative relationship. The points are not tightly grouped around a line, but the pattern is clear. It looks like it has approximately the same strength as the plot in , just with the opposite sign. So, we might guess that r=-0.6.
+
+No, there’s no curved pattern.
+
+Since the points tend downward as we move from left to right, this is a negative relationship. The points are not tightly grouped around a line, but the pattern is clear. It looks like it has approximately the same strength as the plot in , just with the opposite sign. So, we might guess that r=-0.6.
+No, there’s no curved pattern.
+ Since the points don’t really tend upward or downward as we move from left to right, there is no real relationship here. Thus, r≈0.
+
+No, there’s no curved pattern.
+
+Since the points don’t really tend upward or downward as we move from left to right, there is no real relationship here. Thus, r≈0.
+
+Finding the Correlation Coefficient
+
+The data that were plotted in the previous example can be found in the dataset “correlationcoefficient1”. All of them share the same values for the explanatory variable x. The four responses are labeled y1 through y4 . Compute the correlation coefficients for each, if appropriate, using Google Sheets. Round to the nearest hundredth.
+Step 1: There is a curved pattern in the data, so the correlation coefficient isn’t meaningful.
+Step 2: Using “=CORREL(A2:A101, C2:C101)” we get r=0.89.
+Step 3: Using “=CORREL(A2:A101, D2:D101)” we get r=-0.66.
+Step 4: Using “=CORREL(A2:A101, E2:E101)” we get r=-0.04.
+
+Winning with Statistics
+
+Billy Beane, the former general manager of the Oakland A’s baseball team, famously took his low budget team to unprecedented heights by using statistics to identify undervalued players; his story is recounted in the book Moneyball (which was later made into a movie, with Brad Pitt playing Beane). You can do the same thing: Take a look at team statistics in the sport of your choice and try to identify a statistic that’s most closely related to winning (meaning that it has the highest correlation coefficient with team wins).
+
+Linear Regression
+
+The final step in our analysis of the relationship between two datasets is to find and use the equation of the regression line. For a given set of explanatory and response data, the regression line (also called the least-squares line or line of best fit) is the line that does the best job of approximating the data.
+
+What does it mean to say that a particular line does the “best job” of approximating the data? The way that statisticians characterize this “best line” is rather technical, but we’ll include it for the sake of satisfying your curiosity (and backing up the claim of "best"). Imagine drawing a line that looks like it does a pretty good job of approximating the data. Most of the points in the scatter plot will probably not fall exactly on the line; the distance above or below the line a given point falls is called that point’s residual. We could compute the residuals for every point in the scatter plot. If you take all those residuals and square them, then add the results together, you get a statistic called the sum of squared errors for the line (the name tells you what it is: “sum” because we’re adding, “squared” because we’re squaring, and “errors” is another word for “residuals”). The line that we choose to be the “best” is the one that has the smallest possible sum of squared errors. The implied minimization (“smallest”) is where the “least” in “least squares” comes from; the “squares” comes from the fact that we’re minimizing the sum of squared errors. This is very similar to the process we outlined in the "game" that we used to introduce the mean. Both the regression line and the mean are designed to minimize a sum of squared errors. Here ends the super technical part.
+
+Finding the Equation of the Regression Line
+
+So, how do we find the equation of the regression line? Recall the point-slope form of the equation of a line:
+
+If a line has slope m and passes through a point (x0,y0), then the point-slope form of the equation of the line is:
+y=m(x-x0)+y0
+
+The regression line has two properties that we can use to find its equation. First, it always passes through the point of means. If x¯ and y¯ are the means of the explanatory and response datasets, respectively, then the point of means is (x¯,y¯). We’ll use that as the point in the point-slope form of the equation. Second, if sx and sy are the standard deviations of the explanatory and response datasets, respectively, and if r is the correlation coefficient, then the slope is m=r×sysx. Putting all that together with the point-slope formula gives us this:
+
+Suppose x and y are explanatory and response datasets that have a linear relationship. If their means are x¯ and y¯ respectively, their standard deviations are sx and sy respectively, and their correlation coefficient is r, then the equation of the regression line is:
+y=r(sysx)(x-x¯)+y¯.
+
+Let's walk through an example.
+
+Finding the Equation of the Regression Line from Statistics
+
+Suppose you have datasets x and y with the following statistics: x has mean 21 and standard deviation 4, y has mean 8 and standard deviation 2, and their correlation coefficient is −0.4. What’s the equation of the regression line?
+Step 1: We’re given x¯=21, sx=4, y¯=8, sy=2, and r=-0.4. Let's start with the formula for the equation of the regression line:
+ y=r(sysx)(x-x¯)+y¯
+Step 2: Plugging in our values gives us:
+ y=-0.4(24)(x-21)+8
+Step 3: Our final regression line equation is:
+ y=-0.2x+12.2
+
+As you can see, finding the equation of the regression line involves a lot of steps if you have to find all of the values of the needed quantities yourself. But, as usual, technology comes to our rescue. This video (which you actually watched earlier when learning how to create scatter plots) covers the regression line at around the 3:30 mark. Note that Google Sheets calls it the "trendline."
+
+Let's put this into practice.
+
+Finding the Equation of the Regression Line Using Google Sheets
+
+In , we considered the relationship between goals scored (GF) and goals against (GA) using the dataset “NHL19”. Recreate the scatter plot in Google Sheets, and use it to find the equation of the regression line.
+
+Once we have recreated the scatter plot, we find the equation of the regression line by clicking the three dots at the top right of the plot, selecting “Edit chart,” then clicking on “Customize” and “Series.” We add the regression line by checking the box next to “Trendline,” and then we show the equation by selecting “Use Equation” in the drop-down menu under “Label.” The equation of the tangent line is y=-0.0554x+261.
+
+Using the Equation of the Regression Line
+
+Once we’ve found the equation of the regression line, what do we do with it? We’ll look at two possible applications: making predictions and interpreting the slope.
+
+We can use the equation of the regression line to predict the response value y for a given explanatory value x. All we have to do is plug that explanatory value into the formula and see what response value results. This is useful in two ways: first, it can be used to make a guess about an unknown data value (like one that hasn’t been observed yet). Second, it can be used to evaluate performance (meaning, we can predict an outcome given a particular event). In , we created a scatter plot of final exam scores vs. midterm exam scores using this data:
+
+Name
+Midterm Grade
+Final Grade
+Allison
+88
+84
+Benjamin
+71
+80
+Carly
+75
+77
+Daniel
+94
+95
+Elmo
+68
+73
+The equation of the regression line is y=0.687x+27.4, where y is the final exam score and x is the midterm exam score. If Frank scored 85 on the midterm, then our prediction for his final exam score is 0.687×85+27.4=85.795. To use the regression line to evaluate performance, we use a data value we’ve already observed. For example, Allison scored 88 on the midterm. The regression line predicts that someone who scores an 88 on the midterm will get 0.687×88+27.4=87.856 on the final. Allison actually scored 84 on the final, meaning she underperformed expectations by almost 4 points (87.856-84).
+
+The second application of the equation of the regression line is interpreting the slope of the line to describe the relationship between the explanatory and response datasets. For the exam data in the previous paragraph, the slope of the regression line is 0.687. Recall that the slope of a line can be computed by finding two points on the line and dividing the difference in the y-values of those points by the difference in the x-values. Keeping that in mind, we can interpret our slope as 0.687=difference in final scoresdifference in midterm scores . Multiplying both sides of that equation by the denominator of the fraction, we get 0.687×difference in midterm scores=difference in final scores. Thus, a one-point increase in the midterm score would result in a predicted increase in the final score of 0.687 points. A ten-point drop in the midterm score would give us a decrease in the predicted final score of 6.87 points. In general, the slope gives us the predicted change in the response that corresponds to a one unit increase in the explanatory variable.
+
+Applying the Equation of the Regression Line
+
+The data in “MLB2019Off” gives offensive team stats for the 2019 Major League Baseball season. Use that dataset to answer the following questions:
+
+What is the equation of the regression line for runs (R) vs. hits (H)?
+
+How many runs would we expect a team to score if the team got 1500 hits in a season?
+
+Did the Kansas City Royals (KCR) overperform or underperform in terms of runs scored, based on their hit total? By how much?
+
+Write a sentence to interpret the slope of the regression line.
+
+Using Google Sheets, we find that the regression line equation is y=0.884x–456, where y is the number of runs scored and x is the number of hits.
+
+Plugging 1500 into the equation of the regression line, we get 0.884×1500-456=870. We would predict that a team with 1500 hits would score 870 runs.
+
+The Royals had 1356 hits, so we would predict their run total to be 0.884×1356-456≈743. They actually scored 691 runs, so they underperformed expectations by 52 runs (743–691).
+
+The slope gives us the predicted change in the response that corresponds to a one unit increase in the explanatory variable. So, we expect one additional hit to result in 0.884 more runs. Since 0.884 runs doesn’t really make sense, we can get a better interpretation by multiplying through by ten or one hundred: Ten additional hits will result in almost nine additional runs, or a hundred additional hits will yield on average just over 88 additional runs.
+
+Math and the Movies
+
+Statistics and regression are used by Hollywood movie producers to decide what movies to make, and to predict how much money they’ll earn at the box office. According to the American Statistical Association, not only do producers use statistics to identify the next potential blockbuster, but they’ve also pinned down how much money awards add to the bottom line. (An Academy Award is worth about $3 million!) In addition, studios use their streaming services to gather data about their customers and the types of movies they watch; this data helps them learn what kinds of entertainment their customers want more of.
+
+Collecting and Analyzing Your Own Data
+
+This section has demonstrated many pairs of related quantitative datasets. Think about some quantitative variables that you can ask your classmates about, which might be related. Once you have some ideas, collect the data from your classmates. Then analyze the data by creating a scatter plot, finding the equation of the regression line (if appropriate), and interpreting it.
+
+Extrapolation
+
+A very common misuse of regression techniques involves extrapolation, which involves making a prediction about something that doesn't belong in the dataset.
+
+More Applying the Equation of the Regression Line
+
+The data in “WNBA2019” gives team statistics from the 2019 WNBA season. Use that dataset to answer these questions about team wins (W) and the proportion of team field goals made (FG%, the number of shots made divided by the number of shots attempted. Even though this column is labeled using a percent sign, the values are not expressed as percentages):
+
+What is the equation of the regression line for wins vs. proportion of made field goals?
+
+How many wins would we expect for a team that makes 42% of its shots?
+
+Did the New York Liberty overperform or underperform in terms of wins, based on the team’s proportion of made field goals?
+
+Write a sentence to interpret the slope of the regression line.
+
+Using Google Sheets, we get the equation y=178.097x-58.543, where x is the proportion of field goals made and y is the number of wins.
+
+Since 42% corresponds to a proportion of 0.42, we’ll plug 0.42 into the regression equation for x, which gives us 178.097×0.42-58.543≈16.26. We would predict that a team that makes 42% of its shots would win about 16 games.
+
+The New York Liberty made 41.4% of their shots, so we expect they would have 178.097×0.414-58.543≈15.19wins. In fact, they had only 10 wins, so they underperformed expectations by over 5 wins.
+Step 1: The slope gives us the expected increase in the response that corresponds to a one unit increase in the explanatory variable. If we simply go with that interpretation, we would get a sentence like “We expect an increase in proportion of field goals made of 1 would result in an additional 178 wins.” However, that sentence doesn't make much sense. Let's consider why.
+ Step 2: First, proportions must be between 0 and 1, the proportion of made field goals can’t be increased by 1 and still make sense. Second, the total number of games played is only 34, so no team could get an additional 178 wins! So, we’ll have to change the units.
+ Step 3: Since the proportions of made field goals are often expressed as a percentage, we could try to use that. If we express the slope as a fraction with 1 in the denominator (remember, the denominator represents the proportion of field goals made), then convert the denominator to a percentage and simplify, we get 178.0971=178.097100%≈1.781%.
+ Step 4: So, an increase in field goal percentage of 1% would result in an expected increase of 1.78 wins.
+
+Correlation Does Not Imply Causation
+
+One of the most common fallacies about statistics has to do with the relationship between two datasets. In the dataset “Public”, we find that the correlation coefficient between the 75th percentile math SAT score and the 75th percentile verbal SAT score is 0.92, which is really strong. The slope of the regression line that predicts the verbal score from the math score is 0.729, which we might interpret as follows: “If the 75th percentile math SAT score goes up by 10 points, we’d expect the corresponding verbal SAT score to go up by just over 7 points.”
+
+Does the increasing math score cause the increase in the verbal score? Probably not. What’s really going on is that there’s a third variable that’s affecting them both: To raise the SAT math score by 10 points, a school will recruit students who do better on the SAT in general; these students will also naturally have higher SAT verbal scores. This third variable is sometimes called a lurking variable or a confounding variable. Unless all possible lurking variables are ruled out, we cannot conclude that one thing causes another.
+
+Dr. Talithia Williams
+
+Dr. Talithia Williams is a statistician on the faculty of Harvey Mudd College, and the first Black woman to achieve tenure at this university. She advocates for more women to become involved i
+[truncated]

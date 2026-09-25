@@ -1,0 +1,99 @@
+# m00028
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Boolean values
+
+Boolean values
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain a Boolean value.
+
+Use bool variables to store Boolean values.
+
+Demonstrate converting integers, floats, and strings to Booleans.
+
+Demonstrate converting Booleans to integers, floats, and strings.
+
+Use comparison operators to compare integers, floats, and strings.
+
+bool data type
+
+People often ask binary questions such as yes/no or true/false questions. Ex: Do you like pineapple on pizza? Ex: True or false: I like pineapple on pizza. The response is a Boolean value, meaning the value is either true or false. The bool data type, standing for Boolean, represents a binary value of either true or false. true and false are keywords, and capitalization is required.
+
+Example: Crosswalk sign
+
+Using Boolean variables
+
+Consider the following code:
+
+Type conversion with bool()
+
+Deciding whether a value is true or false is helpful when writing programs/statements based on decisions. Converting data types to Booleans can seem unintuitive at first. Ex: Is "ice cream" True? But the conversion is actually simple.
+bool() converts a value to a Boolean value, True or False.
+ 
+ True: any non-zero number, any non-empty string
+ False: 0, empty string
+True: any non-zero number, any non-empty string
+False: 0, empty string
+
+Converting integers, floats, and strings using bool()
+
+Converting numeric types and strings to Booleans
+
+Converting Booleans to numeric types and strings
+
+Given is_on = True, what is the value of each expression?
+
+Comparison operators
+
+Programmers often have to answer questions like "Is the current user the admin?" A programmer may want to compare a string variable, user, to the string, "admin". Comparison operators are used to compare values, and the result is either true or false. Ex: is_admin = (user == "admin"). user is compared with "admin" using the == operator, which tests for equality. The Boolean variable, is_admin, is assigned with the Boolean result.
+
+The 6 comparison operators:
+ 
+ equal to: ==
+ not equal to: !=
+ greater than: >
+ less than: <
+ greater than or equal to: >=
+ less than or equal to: <=
+
+equal to: ==
+
+not equal to: !=
+
+greater than: >
+
+less than: <
+
+greater than or equal to: >=
+
+less than or equal to: <=
+
+Example: Rolling a d20 in a tabletop game
+
+Comparing values
+
+For each new variable, what is the value of compare_result?
+
+= vs ==
+
+A common mistake is using = for comparison instead of ==. Ex: is_zero = num=0 will always assign is_zero and num with 0, regardless of num's original value. The = operator performs assignment and will modify the variable. The == operator performs comparison, does not modify the variable, and produces True or False.
+
+Exploring further
+Unicode Basic Latin Chart
+
+Friday Boolean
+
+"It's Friday, I'm in love" —from "Friday I'm in Love," a song released by the Cure in 1992.
+
+Write a program that reads in the day of the week. Assign the Boolean variable, in_love, with the result of whether the day is Friday or not.
+
+Even numbers
+
+Write a program that reads in an integer and prints whether the integer is even or not. Remember, a number is even if the number is divisible by 2. To test this use number % 2 == 0. Ex: If the input is 6, the output is "6 is even: True".

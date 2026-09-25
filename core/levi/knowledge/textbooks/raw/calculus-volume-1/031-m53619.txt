@@ -1,0 +1,473 @@
+# m53619
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+L’Hôpital’s Rule
+
+L’Hôpital’s Rule
+
+Recognize when to apply L’Hôpital’s rule.
+
+Identify indeterminate forms produced by quotients, products, subtractions, and powers, and apply L’Hôpital’s rule in each case.
+
+Describe the relative growth rates of functions.
+
+In this section, we examine a powerful tool for evaluating limits. This tool, known as L’Hôpital’s rule, uses derivatives to calculate limits. With this rule, we will be able to evaluate many limits we have not yet been able to determine. Instead of relying on numerical evidence to conjecture that a limit exists, we will be able to show definitively that a limit exists and to determine its exact value.
+
+Applying L’Hôpital’s Rule
+
+L’Hôpital’s rule can be used to evaluate limits involving the quotient of two functions. Consider
+
+If limx→af(x)=L1andlimx→ag(x)=L2≠0, then
+
+However, what happens if limx→af(x)=0 and limx→ag(x)=0? We call this one of the indeterminate forms, of type 00. This is considered an indeterminate form because we cannot determine the exact behavior of f(x)g(x) as x→a without further analysis. We have seen examples of this earlier in the text. For example, consider
+
+For the first of these examples, we can evaluate the limit by factoring the numerator and writing
+
+For limx→0sinxx we were able to show, using a geometric argument, that
+
+Here we use a different technique for evaluating limits such as these. Not only does this technique provide an easier way to evaluate these limits, but also, and more important, it provides us with a way to evaluate many other limits that we could not calculate previously.
+
+The idea behind L’Hôpital’s rule can be explained using local linear approximations. Consider two differentiable functions f and g such that limx→af(x)=0=limx→ag(x) and such that g′(a)≠0 For x near a, we can write
+
+and
+
+Therefore,
+
+Since f is differentiable at a, then f is continuous at a, and therefore f(a)=limx→af(x)=0. Similarly, g(a)=limx→ag(x)=0. If we also assume that f′ and g′ are continuous at x=a, then f′(a)=limx→af′(x) and g′(a)=limx→ag′(x). Using these ideas, we conclude that
+
+Note that the assumption that f′ and g′ are continuous at a and g′(a)≠0 can be loosened. We state L’Hôpital’s rule formally for the indeterminate form 00. Also note that the notation 00 does not mean we are actually dividing zero by zero. Rather, we are using the notation 00 to represent a quotient of limits, each of which is zero.
+
+L’Hôpital’s Rule (0/0 Case)
+
+Suppose f and g are differentiable functions over an open interval containing a, except possibly at a. If limx→af(x)=0 and limx→ag(x)=0, then
+
+assuming the limit on the right exists or is ∞ or −∞. This result also holds if we are considering one-sided limits, or if a=∞and−∞.
+
+Proof
+
+We provide a proof of this theorem in the special case when f,g,f′, and g′ are all continuous over an open interval containing a. In that case, since limx→af(x)=0=limx→ag(x) and f and g are continuous at a, it follows that f(a)=0=g(a). Therefore,
+
+Note that L’Hôpital’s rule states we can calculate the limit of a quotient fg by considering the limit of the quotient of the derivatives f′g′. It is important to realize that we are not calculating the derivative of the quotient fg.
+
+□
+
+Applying L’Hôpital’s Rule (0/0 Case)
+
+Evaluate each of the following limits by applying L’Hôpital’s rule.
+limx→01−cosxx
+limx→1sin(πx)lnx
+limx→∞e1/x−11/x
+limx→0sinx−xx2
+
+Since the numerator 1−cosx→0 and the denominator x→0, we can apply L’Hôpital’s rule to evaluate this limit. We have
+limx→01−cosxx=limx→0ddx(1−cosx)ddx(x)=limx→0sinx1=limx→0(sinx)limx→0(1)=01=0.
+
+As x→1, the numerator sin(πx)→0 and the denominator ln(x)→0. Therefore, we can apply L’Hôpital’s rule. We obtain
+limx→1sin(πx)lnx=limx→1πcos(πx)1/x=limx→1(πx)cos(πx)=(π·1)(−1)=−π.
+
+As x→∞, the numerator e1/x−1→0 and the denominator (1x)→0. Therefore, we can apply L’Hôpital’s rule. We obtain
+limx→∞e1/x−11x=limx→∞e1/x(−1x2)(−1x2)=limx→∞e1/x=e0=1.
+
+As x→0, both the numerator and denominator approach zero. Therefore, we can apply L’Hôpital’s rule. We obtain
+limx→0sinx−xx2=limx→0cosx−12x.
+Since the numerator and denominator of this new quotient both approach zero as x→0, we apply L’Hôpital’s rule again. In doing so, we see that
+limx→0cosx−12x=limx→0−sinx2=0.
+Therefore, we conclude that
+limx→0sinx−xx2=0.
+
+Evaluate limx→0xtanx.
+1
+
+Hint
+ddxtanx=sec2x
+
+We can also use L’Hôpital’s rule to evaluate limits of quotients f(x)g(x) in which f(x)→±∞ and g(x)→±∞. Limits of this form are classified as indeterminate forms of type ∞/∞. Again, note that we are not actually dividing ∞ by ∞. Since ∞ is not a real number, that is impossible; rather, ∞/∞. is used to represent a quotient of limits, each of which is ∞ or −∞.
+
+L’Hôpital’s Rule (∞/∞ Case)
+
+Suppose f and g are differentiable functions over an open interval containing a, except possibly at a. Suppose limx→af(x)=∞ (or −∞) and limx→ag(x)=∞ (or −∞). Then,
+
+assuming the limit on the right exists or is ∞ or −∞. This result also holds if the limit is infinite, if a=∞ or −∞, or the limit is one-sided.
+
+Applying L’Hôpital’s Rule (∞/∞ Case)
+
+Evaluate each of the following limits by applying L’Hôpital’s rule.
+limx→∞3x+52x+1
+limx→0+lnxcotx
+
+Since 3x+5 and 2x+1 are first-degree polynomials with positive leading coefficients, limx→∞(3x+5)=∞ and limx→∞(2x+1)=∞. Therefore, we apply L’Hôpital’s rule and obtain
+limx→∞3x+52x+1/x=limx→∞32=32.
+Note that this limit can also be calculated without invoking L’Hôpital’s rule. Earlier in the chapter we showed how to evaluate such a limit by dividing the numerator and denominator by the highest power of x in the denominator. In doing so, we saw that
+limx→∞3x+52x+1=limx→∞3+5/x2+1/x=32.
+L’Hôpital’s rule provides us with an alternative means of evaluating this type of limit.
+
+Here, limx→0+lnx=−∞ and limx→0+cotx=∞. Therefore, we can apply L’Hôpital’s rule and obtain
+limx→0+lnxcotx=limx→0+1/x−csc2x=limx→0+1−xcsc2x.
+Now as x→0+, csc2x→∞. Therefore, the first term in the denominator is approaching zero and the second term is getting really large. In such a case, anything can happen with the product. Therefore, we cannot make any conclusion yet. To evaluate the limit, we use the definition of cscx to write
+limx→0+1−xcsc2x=limx→0+sin2x−x.
+Now limx→0+sin2x=0 and limx→0+x=0, so we apply L’Hôpital’s rule again. We find
+limx→0+sin2x−x=limx→0+2sinxcosx−1=0−1=0.
+We conclude that
+limx→0+lnxcotx=0.
+
+Evaluate limx→∞lnx5x.
+0
+
+Hint
+ddxlnx=1x
+
+As mentioned, L’Hôpital’s rule is an extremely useful tool for evaluating limits. It is important to remember, however, that to apply L’Hôpital’s rule to a quotient f(x)g(x), it is essential that the limit of f(x)g(x) be of the form 00 or ∞/∞. Consider the following example.
+
+When L’Hôpital’s Rule Does Not Apply
+
+Consider limx→1x2+53x+4. Show that the limit cannot be evaluated by applying L’Hôpital’s rule.
+
+Because the limits of the numerator and denominator are not both zero and are not both infinite, we cannot apply L’Hôpital’s rule. If we try to do so, we get
+
+and
+
+At which point we would conclude erroneously that
+
+However, since limx→1(x2+5)=6 and limx→1(3x+4)=7, we actually have
+
+We can conclude that
+
+Explain why we cannot apply L’Hôpital’s rule to evaluate limx→0+cosxx. Evaluate limx→0+cosxx by other means.
+limx→0+cosx=1. Therefore, we cannot apply L’Hôpital’s rule. The limit of the quotient is ∞
+
+Hint
+
+Determine the limits of the numerator and denominator separately.
+
+Other Indeterminate Forms
+
+L’Hôpital’s rule is very useful for evaluating limits involving the indeterminate forms 00 and ∞/∞. However, we can also use L’Hôpital’s rule to help evaluate limits involving other indeterminate forms that arise when evaluating limits. The expressions 0·∞, ∞−∞, 1∞, ∞0, and 00 are all considered indeterminate forms. These expressions are not real numbers. Rather, they represent forms that arise when trying to evaluate certain limits. Next we realize why these are indeterminate forms and then understand how to use L’Hôpital’s rule in these cases. The key idea is that we must rewrite the indeterminate forms in such a way that we arrive at the indeterminate form 00 or ∞/∞.
+
+Indeterminate Form of Type 0·∞
+
+Suppose we want to evaluate limx→a(f(x)·g(x)), where f(x)→0 and g(x)→∞ (or −∞) as x→a. Since one term in the product is approaching zero but the other term is becoming arbitrarily large (in magnitude), anything can happen to the product. We use the notation 0·∞ to denote the form that arises in this situation. The expression 0·∞ is considered indeterminate because we cannot determine without further analysis the exact behavior of the product f(x)g(x) as x→a. For example, let n be a positive integer and consider
+
+As x→∞, f(x)→0 and g(x)→∞. However, the limit as x→∞ of f(x)g(x)=3x2(xn+1) varies, depending on n. If n=2, then limx→∞f(x)g(x)=3. If n=1, then limx→∞f(x)g(x)=∞. If n=3, then limx→∞f(x)g(x)=0. Here we consider another limit involving the indeterminate form 0·∞ and show how to rewrite the function as a quotient to use L’Hôpital’s rule.
+
+Indeterminate Form of Type 0·∞
+
+Evaluate limx→0+xlnx.
+
+First, rewrite the function xlnx as a quotient to apply L’Hôpital’s rule. If we write
+
+we see that lnx→−∞ as x→0+ and 1x→∞ as x→0+. Therefore, we can apply L’Hôpital’s rule and obtain
+
+We conclude that
+
+Evaluate limx→0xcotx.
+1
+
+Hint
+
+Write xcotx=xcosxsinx
+
+Indeterminate Form of Type ∞−∞
+
+Another type of indeterminate form is ∞−∞. Consider the following example. Let n be a positive integer and let f(x)=3xn and g(x)=3x2+5. As x→∞, f(x)→∞ and g(x)→∞. We are interested in limx→∞(f(x)−g(x)). Depending on whether f(x) grows faster, g(x) grows faster, or they grow at the same rate, as we see next, anything can happen in this limit. Since f(x)→∞ and g(x)→∞, we write ∞−∞ to denote the form of this limit. As with our other indeterminate forms, ∞−∞ has no meaning on its own and we must do more analysis to determine the value of the limit. For example, suppose the exponent n in the function f(x)=3xn is n=3, then
+
+On the other hand, if n=2, then
+
+However, if n=1, then
+
+Therefore, the limit cannot be determined by considering only ∞−∞. Next we see how to rewrite an expression involving the indeterminate form ∞−∞ as a fraction to apply L’Hôpital’s rule.
+
+Indeterminate Form of Type ∞−∞
+
+Evaluate limx→0+(1x2−1tanx).
+
+By combining the fractions, we can write the function as a quotient. Since the least common denominator is x2tanx, we have
+
+As x→0+, the numerator tanx−x2→0 and the denominator x2tanx→0. Therefore, we can apply L’Hôpital’s rule. Taking the derivatives of the numerator and the denominator, we have
+
+As x→0+, (sec2x)−2x→1 and x2sec2x+2xtanx→0. Since the denominator is positive as x approaches zero from the right, we conclude that
+
+Therefore,
+
+Evaluate limx→0+(1x−1sinx).
+0
+
+Hint
+
+Rewrite the difference of fractions as a single fraction.
+
+Another type of indeterminate form that arises when evaluating limits involves exponents. The expressions 00, ∞0, and 1∞ are all indeterminate forms. On their own, these expressions are meaningless because we cannot actually evaluate these expressions as we would evaluate an expression involving real numbers. Rather, these expressions represent forms that arise when finding limits. Now we examine how L’Hôpital’s rule can be used to evaluate limits involving these indeterminate forms.
+
+Since L’Hôpital’s rule applies to quotients, we use the natural logarithm function and its properties to reduce a problem evaluating a limit involving exponents to a related problem involving a limit of a quotient. For example, suppose we want to evaluate limx→af(x)g(x) and we arrive at the indeterminate form ∞0. (The indeterminate forms 00 and 1∞ can be handled similarly.) We proceed as follows. Let
+
+Then,
+
+Therefore,
+
+Since limx→af(x)=∞, we know that limx→aln(f(x))=∞. Therefore, limx→ag(x)ln(f(x)) is of the indeterminate form 0·∞, and we can use the techniques discussed earlier to rewrite the expression g(x)ln(f(x)) in a form so that we can apply L’Hôpital’s rule. Suppose limx→ag(x)ln(f(x))=L, where L may be ∞ or −∞. Then
+
+Since the natural logarithm function is continuous, we conclude that
+
+which gives us
+
+Indeterminate Form of Type ∞0
+
+Evaluate limx→∞x1/x.
+
+Let y=x1/x. Then,
+
+We need to evaluate limx→∞lnxx. Applying L’Hôpital’s rule, we obtain
+
+Therefore, limx→∞lny=0. Since the natural logarithm function is continuous, we conclude that
+
+which leads to
+
+Hence,
+
+Evaluate limx→∞x1/ln(x).
+e
+
+Hint
+
+Let y=x1/ln(x) and apply the natural logarithm to both sides of the equation.
+
+Indeterminate Form of Type 00
+
+Evaluate limx→0+xsinx.
+
+Let
+
+Therefore,
+
+We now evaluate limx→0+sinxlnx. Since limx→0+sinx=0 and limx→0+lnx=−∞, we have the indeterminate form 0·∞. To apply L’Hôpital’s rule, we need to rewrite sinxlnx as a fraction. We could write
+
+or
+
+Let’s consider the first option. In this case, applying L’Hôpital’s rule, we would obtain
+
+Unfortunately, we not only have another expression involving the indeterminate form 0·∞, but the new limit is even more complicated to evaluate than the one with which we started. Instead, we try the second option. By writing
+
+and applying L’Hôpital’s rule, we obtain
+
+Using the fact that cscx=1sinx and cotx=cosxsinx, we can rewrite the expression on the right-hand side as
+
+We conclude that limx→0+lny=0. Therefore, ln(limx→0+y)=0 and we have
+
+Hence,
+
+Evaluate limx→0+xx.
+1
+
+Hint
+
+Let y=xx and take the natural logarithm of both sides of the equation.
+
+Growth Rates of Functions
+
+Suppose the functions f and g both approach infinity as x→∞. Although the values of both functions become arbitrarily large as the values of x become sufficiently large, sometimes one function is growing more quickly than the other. For example, f(x)=x2 and g(x)=x3 both approach infinity as x→∞. However, as shown in the following table, the values of x3 are growing much faster than the values of x2.
+
+Comparing the Growth Rates of x2 and x3
+1,000,000,000,000
+In fact,
+
+As a result, we say x3 is growing more rapidly than x2 as x→∞. On the other hand, for f(x)=x2 and g(x)=3x2+4x+1, although the values of g(x) are always greater than the values of f(x) for x>0, each value of g(x) is roughly three times the corresponding value of f(x) as x→∞, as shown in the following table. In fact,
+
+Comparing the Growth Rates of x2 and 3x2+4x+1
+300,040,001
+In this case, we say that x2 and 3x2+4x+1 are growing at the same rate as x→∞.
+
+More generally, suppose f and g are two functions that approach infinity as x→∞. We say g grows more rapidly than f as x→∞ if
+
+On the other hand, if there exists a constant M≠0 such that
+
+we say f and g grow at the same rate as x→∞.
+
+Next we see how to use L’Hôpital’s rule to compare the growth rates of power, exponential, and logarithmic functions.
+
+Comparing the Growth Rates of ln(x), x2, and ex
+
+For each of the following pairs of functions, use L’Hôpital’s rule to evaluate limx→∞(f(x)g(x)).
+f(x)=x2andg(x)=ex
+f(x)=ln(x)andg(x)=x2
+
+Since limx→∞x2=∞ and limx→∞ex=∞, we can use L’Hôpital’s rule to evaluate limx→∞[x2ex]. We obtain
+limx→∞x2ex=limx→∞2xex.
+Since limx→∞2x=∞ and limx→∞ex=∞, we can apply L’Hôpital’s rule again. Since
+limx→∞2xex=limx→∞2ex=0,
+we conclude that
+limx→∞x2ex=0.
+Therefore, ex grows more rapidly than x2 as x→∞ (See and ).
+
+An exponential function grows at a faster rate than a power function.
+
+Growth rates of a power function and an exponential function.
+
+x
+5
+10
+15
+20
+
+x2
+25
+100
+225
+400
+
+ex
+148
+22,026
+3,269,017
+485,165,195
+
+Growth rates of a power function and an exponential function.
+485,165,195
+Since limx→∞lnx=∞ and limx→∞x2=∞, we can use L’Hôpital’s rule to evaluate limx→∞lnxx2. We obtain
+limx→∞lnxx2=limx→∞1/x2x=limx→∞12x2=0.
+Thus, x2 grows more rapidly than lnx as x→∞ (see and ).
+
+A power function grows at a faster rate than a logarithmic function.
+
+Growth rates of a power function and a logarithmic function
+
+x
+10
+100
+1000
+10,000
+
+ln(x)
+2.303
+4.605
+6.908
+9.210
+
+x2
+100
+10,000
+1,000,000
+100,000,000
+
+Growth rates of a power function and a logarithmic function
+100,000,000
+Compare the growth rates of x100 and 2x.
+
+The function 2x grows faster than x100.
+
+Hint
+
+Apply L’Hôpital’s rule to x100/2x
+
+Using the same ideas as in a. it is not difficult to show that ex grows more rapidly than xp for any p>0. In and , we compare ex with x3 and x4 as x→∞.
+
+An exponential function grows at a faster rate than any power function
+485,165,195
+Similarly, it is not difficult to show that xp grows more rapidly than lnx for any p>0. In and , we compare lnx with x3 and x.
+
+A logarithmic function grows at a slower rate than any root function
+100
+Key Concepts
+
+L’Hôpital’s rule can be used to evaluate the limit of a quotient when the indeterminate form 00 or ∞/∞ arises.
+
+L’Hôpital’s rule can also be applied to other indeterminate forms if they can be rewritten in terms of a limit involving a quotient that has the indeterminate form 00 or ∞/∞.
+
+The exponential function ex grows faster than any power function xp, p>0.
+
+The logarithmic function lnx grows more slowly than any power function xp, p>0.
+
+For the following exercises, evaluate the limit.
+
+Evaluate the limit limx→∞exx.
+
+Evaluate the limit limx→∞exxk.
+∞
+
+Evaluate the limit limx→∞lnxxk.
+
+Evaluate the limit limx→ax−ax2−a2,a≠0.
+12a
+
+Evaluate the limit limx→ax−ax3−a3,a≠0.
+
+Evaluate the limit limx→ax−axn−an,a≠0.
+1nan−1
+
+For the following exercises, determine whether you can apply L’Hôpital’s rule directly. Explain why or why not. Then, indicate if there is some way you can alter the limit so you can apply L’Hôpital’s rule.
+limx→0+x2lnx
+limx→∞x1/x
+
+Cannot apply directly; use logarithms
+limx→0x2/x
+limx→0x21/x
+
+Cannot apply directly; rewrite as limx→0x3
+limx→∞exx
+
+For the following exercises, evaluate the limits with either L’Hôpital’s rule or previously learned methods.
+limx→3x2−9x−3
+6
+limx→3x2−9x+3
+limx→0(1+x)−2−1x
+−2
+limx→π/2cosxπ2−x
+limx→πx−πsinx
+−1
+limx→1x−1sinx
+limx→0(1+x)n−1x
+n
+limx→0(1+x)n−1−nxx2
+limx→0sinx−tanxx3
+−12
+limx→01+x−1−xx
+limx→0ex−x−1x2
+12
+limx→0+tanxx
+limx→1x−1lnx
+1
+limx→0(x+1)1/x
+limx→1x−x3x−1
+16
+limx→0+x2x
+limx→∞xsin(1x)
+1
+limx→0sinx−xx2
+limx→0+xln(x4)
+0
+limx→∞(x−ex)
+limx→∞x2e−x
+0
+limx→03x−2xx
+limx→01+1/x1−1/x
+−1
+limx→π/4(1−tanx)cotx
+limx→∞xe1/x
+∞
+limx→0+x1/cosx
+limx→0+x1/x
+0
+limx→0-(1−1x)x
+limx→∞(1−1x)x
+1e
+
+For the following exercises, use a calculator to graph the function and estimate the value of the limit, then use L’Hôpital’s rule to find the limit directly.
+[T] limx→0ex−1x
+[T] limx→0xsin(1x)
+0
+[T] limx→1x−11−cos(πx)
+[T] limx→1e(x−1)−1x−1
+1
+[T] limx→1(x−1)2lnx
+[T] limx→π1+cosxsinx
+0
+[T] limx→0(cscx−1x)
+[T] limx→0+tan(xx)
+tan(1)
+[T] limx→0+lnxsinx
+[T] limx→0ex−e−xx
+2
+
+when evaluating a limit, the forms 00, ∞/∞, 0·∞, ∞−∞, 00, ∞0, and 1∞ are considered indeterminate because further analysis is required to determine whether the limit exists and, if so, what its value is
+if f and g are differentiable functions over an interval a, except possibly at a, and limx→af(x)=0=limx→ag(x) or limx→af(x) and limx→ag(x) are infinite, then limx→af(x)g(x)=limx→af′(x)g′(x), assuming the limit on the right exists or is ∞ or −∞

@@ -1,0 +1,145 @@
+# m42336
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Capacitors in Series and Parallel
+
+Capacitors in Series and Parallel
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Derive expressions for total capacitance in series and in parallel.
+
+Identify series and parallel parts in the combination of connection of capacitors.
+
+Calculate the effective capacitance in series and parallel given individual capacitances.
+
+Several capacitors may be connected together in a variety of applications. Multiple connections of capacitors act like a single equivalent capacitor. The total capacitance of this equivalent single capacitor depends both on the individual capacitors and how they are connected. There are two simple and common types of connections, called series and parallel, for which we can easily calculate the total capacitance. Certain more complicated connections can also be related to combinations of series and parallel.
+
+Capacitance in Series
+(a) shows a series connection of three capacitors with a voltage applied. As for any capacitor, the capacitance of the combination is related to charge and voltage by C=QV.
+
+Note in that opposite charges of magnitude Q flow to either side of the originally uncharged combination of capacitors when the voltage V is applied. Conservation of charge requires that equal-magnitude charges be created on the plates of the individual capacitors, since charge is only being separated in these originally neutral devices. The end result is that the combination resembles a single capacitor with an effective plate separation greater than that of the individual capacitors alone. (See (b).) Larger plate separation means smaller capacitance. It is a general feature of series connections of capacitors that the total capacitance is less than any of the individual capacitances.
+
+We can find an expression for the total capacitance by considering the voltage across the individual capacitors shown in . Solving C=QV for V gives V=QC. The voltages across the individual capacitors are thus V1=QC1, V2=QC2, and V3=QC3. The total voltage is the sum of the individual voltages:
+
+Now, calling the total capacitance CS for series capacitance, consider that
+
+Entering the expressions for V1, V2, and V3, we get
+
+Canceling the Qs, we obtain the equation for the total capacitance in series CS to be
+
+where “...” indicates that the expression is valid for any number of capacitors connected in series. An expression of this form always results in a total capacitance CS that is less than any of the individual capacitances C1, C2, ..., as the next example illustrates.
+
+Total Capacitance in Series, C s
+
+Total capacitance in series: 1CS=1C1+1C2+1C3+...
+
+What Is the Series Capacitance?
+
+Find the total capacitance for three capacitors connected in series, given their individual capacitances are 1.000, 5.000, and 8.000 µF.
+Strategy
+
+Strategy
+
+With the given information, the total capacitance can be found using the equation for capacitance in series.
+Solution
+
+Solution
+
+Entering the given capacitances into the expression for 1CS gives 1CS=1C1+1C2+1C3.
+
+Inverting to find CS yields CS=µF1.325=0.755 µF.
+Discussion
+
+Discussion
+
+The total series capacitance Cs is less than the smallest individual capacitance, as promised. In series connections of capacitors, the sum is less than the parts. In fact, it is less than any individual. Note that it is sometimes possible, and more convenient, to solve an equation like the above by finding the least common denominator, which in this case (showing only whole-number calculations) is 40. Thus,
+
+so that
+
+Capacitors in Parallel
+(a) shows a parallel connection of three capacitors with a voltage applied. Here the total capacitance is easier to find than in the series case. To find the equivalent total capacitance Cp, we first note that the voltage across each capacitor is V, the same as that of the source, since they are connected directly to it through a conductor. (Conductors are equipotentials, and so the voltage across the capacitors is the same as that across the voltage source.) Thus the capacitors have the same charges on them as they would have if connected individually to the voltage source. The total charge Q is the sum of the individual charges:
+
+Using the relationship Q=CV, we see that the total charge is Q=CpV, and the individual charges are Q1=C1V, Q2=C2V, and Q3=C3V. Entering these into the previous equation gives
+
+Canceling V from the equation, we obtain the equation for the total capacitance in parallel
+ Cp:
+
+Total capacitance in parallel is simply the sum of the individual capacitances. (Again the “...” indicates the expression is valid for any number of capacitors connected in parallel.) So, for example, if the capacitors in the example above were connected in parallel, their capacitance would be
+
+The equivalent capacitor for a parallel connection has an effectively larger plate area and, thus, a larger capacitance, as illustrated in (b).
+
+Total Capacitance in Parallel, Cp
+
+Total capacitance in parallel Cp=C1+C2+C3+...
+
+More complicated connections of capacitors can sometimes be combinations of series and parallel. (See .) To find the total capacitance of such combinations, we identify series and parallel parts, compute their capacitances, and then find the total.
+
+A Mixture of Series and Parallel Capacitance
+
+Find the total capacitance of the combination of capacitors shown in . Assume the capacitances in are known to three decimal places (
+C1=1.000 µF, C2=5.000 µF, and C3=8.000 µF), and round your answer to three decimal places.
+Strategy
+
+Strategy
+
+To find the total capacitance, we first identify which capacitors are in series and which are in parallel. Capacitors C1 and C2 are in series. Their combination, labeled CS in the figure, is in parallel with C3.
+Solution
+
+Solution
+
+Since C1 and C2 are in series, their total capacitance is given by 1CS=1C1+1C2+1C3. Entering their values into the equation gives
+
+Inverting gives
+
+This equivalent series capacitance is in parallel with the third capacitor; thus, the total is the sum
+Discussion
+
+Discussion
+
+This technique of analyzing the combinations of capacitors piece by piece until a total is obtained can be applied to larger combinations of capacitors.
+
+Section Summary
+
+Total capacitance in series 1CS=1C1+1C2+1C3+...
+
+Total capacitance in parallel Cp=C1+C2+C3+...
+
+If a circuit contains a combination of capacitors in series and parallel, identify series and parallel parts, compute their capacitances, and then find the total.
+
+Conceptual Questions
+
+If you wish to store a large amount of energy in a capacitor bank, would you connect capacitors in series or parallel? Explain.
+
+Problems & Exercises
+
+Find the total capacitance of the combination of capacitors in .
+0.293 μF
+
+Suppose you want a capacitor bank with a total capacitance of 0.750 F and you possess numerous 1.50 mF capacitors. What is the smallest number you could hook together to achieve your goal, and how would you connect them?
+
+What total capacitances can you make by connecting a 5.00 µF and an 8.00 µF capacitor together?
+3.08 µF in series combination, 13.0 µF in parallel combination
+
+Find the total capacitance of the combination of capacitors shown in .
+2
+ .
+ 79 µF
+
+Find the total capacitance of the combination of capacitors shown in .
+Unreasonable Results
+
+Unreasonable Results
+
+(a) An 8.00 µF capacitor is connected in parallel to another capacitor, producing a total capacitance of 5.00 µF. What is the capacitance of the second capacitor? (b) What is unreasonable about this result? (c) Which assumptions are unreasonable or inconsistent?
+
+(a) –3.00 µF
+
+(b) You cannot have a negative value of capacitance.
+
+(c) The assumption that the capacitors were hooked up in parallel, rather than in series, was incorrect. A parallel connection always produces a greater capacitance, while here a smaller capacitance was assumed. This could happen only if the capacitors are connected in series.

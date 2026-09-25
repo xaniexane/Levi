@@ -1,0 +1,389 @@
+# m00058
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Timing of Cash Flows
+
+Timing of Cash Flows
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Describe how multiple payments of unequal value are present in everyday situations.
+
+Calculate the future value of a series of multiple payments of unequal value.
+
+Calculate the present value of a series of multiple payments of unequal value.
+
+Multiple Payments or Receipts of Unequal Value: The Mixed Stream
+
+At this point, you are familiar with the time value of money of single amounts and annuities and how they must be managed and controlled for business as well as personal purposes. If a stream of payments occurs in which the amount of the payments changes at any point, the techniques for solving for annuities must be modified. Shortcuts that we have seen in earlier chapters cannot be taken. Fortunately, with tools such as financial or online calculators and Microsoft Excel, the method can be quite simple.
+
+The ability to analyze and understand cash flow is essential. From a personal point of view, assume that you have an opportunity to invest $2,000 every year, beginning next year, to save for a down payment on the purchase of your first home seven years from now. In the third year, you also inherit $10,000 and put it all toward this goal. In the fifth year, you receive a large bonus of $3,000 and also dedicate this to your ongoing investment.
+
+The stream of regular payments has been interrupted—which is, of course, good news for you. However, it does add a new complexity to the math involved in finding values related to time, whether compounding into the future or discounting to the present value. Analysts refer to such a series of payments as a mixed stream. If you make the first payment on the first day of next year and continue to do so on the first day of each following year, and if your investment will always be earning 7% interest, how much cash will you have accumulated—principal plus earned interest—at the end of the seven years?
+
+This is a future value question, but because the stream of payments is mixed, we cannot use annuity formulas or approaches and the shortcuts they provide. As noted in previous chapters, when solving a problem involving the time value of money, a timeline and/or table is helpful. The cash flows described above are shown in 
+. Remember that all money is assumed to be deposited in your investment at the beginning of each year. The cumulative cash flows do not yet consider interest.
+
+Year
+0
+1
+2
+3
+4
+5
+6
+7
+Cash Invested
+$0.00
+$2,000
+$2,000
+$2,000
+$12,000
+$2,000
+$5,000
+$2,000
+Cumulative Cash Flows
+$2,000
+$4,000
+$6,000
+$18,000
+$20,000
+$25,000
+$27,000
+By the end of seven years, you have invested $27,000 of your own money before we consider interest:
+
+Seven years times $2,000 each year, or $14,000
+
+The extra $10,000 you received in year 3 (which is invested at the start of year 4)
+
+The extra $3,000 you received in year 5 (which is invested at the start of year 6)
+
+These funds were invested at different times, and time and interest rate will work for you on all accumulated balances as you proceed. Therefore, focus on the line in your table with the cumulative cash flows. How much cash will you have accumulated at the end of this investment program if you’re earning 7% compounded annually? You could use the future value of a single amount equation, but not for an annuity. Because the amount invested changes, you must calculate the future value of each amount invested and add them together for your result.
+
+Recall that the formula for finding the future value of a single amount is 
+ 
+ FV
+ =
+ PV
+ ×
+ (
+ 1
+ +
+ i
+ 
+ )
+ n
+
+ , where FV is the future value we are trying to determine, PV is the value invested at the start of each period, i is the interest rate, and n is the number of periods remaining for compounding to take effect.
+
+Let us repeat the table with your cash flows above. 
+ includes a line to show for how many periods (years, in this case) each investment will compound at 7%.
+
+Year
+0
+1
+2
+3
+4
+5
+6
+7
+Cash Invested
+$0.00
+$2,000
+$2,000
+$2,000
+$12,000
+$2,000
+$5,000
+$2,000
+Cumulative Cash Flows
+$2,000
+$4,000
+$6,000
+$18,000
+$20,000
+$25,000
+$27,000
+Years to Compound
+7
+6
+5
+4
+3
+2
+1
+The $2,000 that you deposit at the start of year 1 will earn 7% interest for the entire seven years. When you make your second investment at the start of year 2, you will now have spent $4,000. However, the interest from your first $2,000 investment will have earned you 
+ 
+ $
+ 2,000
+ ×
+ 0.07
+ =
+ $
+ 140
+ 
+ , so you will begin year 2 with $4,140 rather than $4,000.
+
+Before we complicate the problem with a schedule that ties everything together, let’s focus on years 1 and 2 with the original formula for the future value of a single amount. What will your year 1 investment be worth at the end of seven years?
+
+You need to address the year 2 investment separately at this point because you’ve calculated the year 1 investment and its compounding on its own. Now you need to know what your year 2 investment will be worth in the future, but it will only compound for six years. What will it be worth?
+
+You can perform the same operation on each of the remaining five invested amounts, remembering that you invest $12,000 at the start of year 4 and $5,000 at the start of year 6, as per the table. Here are the five remaining calculations:
+
+Notice how the exponent representing n decreases each year to reflect the decreasing number of years that each invested amount will compound until the end of your seven-year stream. For clarity, let us insert each of these amounts in a row of 
+:
+
+Year
+0
+1
+2
+3
+4
+5
+6
+7
+Cash Invested
+$0.00
+$2,000
+$2,000
+$2,000
+$12,000
+$2,000
+$5,000
+$2,000
+Cumulative Cash Flows
+$2,000
+$4,000
+$6,000
+$18,000
+$20,000
+$25,000
+$27,000
+Years to Compound
+7
+6
+5
+4
+3
+2
+1
+Compounded Value at End of Year 7
+$3,211.56
+$3,001.46
+$2,805.10
+$15,729.55
+$2,450.09
+$5,724.50
+$2,140.00
+The solution to the original question—the value of your seven different investments at the end of the seven-year period—is the total of each individual investment compounded over the remaining years. Adding the compounded values in the bottom row provides the answer: $35,062.26. This includes the $27,000 that you invested plus $8,062.26 in interest earned by compounding.
+
+It’s important to note that throughout these sections on the time value of money and compounded or discounted values of mixed streams and their analysis, we are placing the valuation at the end or beginning of a period for simplicity in the examples. In reality, businesses might consider valuations happening within the period to allow for a degree of regularity in the revenue streams provided by the asset being considered. However, because this is a technique of forecasting, which is inherently uncertain, we will continue with analysis by period.
+
+Future Value of a Mixed Stream
+
+Assume that you can invest five annual payments of $10,000, beginning immediately, but you believe you will be able to invest additional amounts of $5,000 at the beginning of years 4 and 5. This investment is expected to earn 4% each year. What is the anticipated future value of this investment after the full five years?
+Solution:
+
+Year
+0
+1
+2
+3
+4
+5
+Cash Invested
+$0.00
+$10,000
+$10,000
+$10,000
+$15,000
+$15,000
+Cumulative Cash Flows
+$10,000
+$20,000
+$30,000
+$45,000
+$60,000
+Years to Compound
+5
+4
+3
+2
+1
+Compounded Value at End of Year 5
+$12,166.53
+$11,698.59
+$11,248.64
+$16,224.00
+$15,600.00
+The equations to calculate each individual year’s compounded value at the end of the five years are as follows:
+
+The sum of these individual calculations is $66,937.76, which is the total value of this stream of invested amounts plus compounded interest.
+
+Let’s take the example above and review it from a different angle. Keeping in mind that we have not yet explored the use of Excel, is there another way to view our solution? The problem above takes each annual investment and compounds it into the future, then adds the results of each calculation to find the total future value of the stream of payments.
+
+But when you break the problem down, another way to look at the problem is as a five-year annuity of $10,000 per year plus added payments in years 4 and 5. Can we solve for the future value of an annuity first and then perform two separate calculations on the additional amounts ($5,000 each in years 4 and 5)? Yes, we can.
+
+Let’s summarize:
+
+Future value of a $10,000 annuity due, 4%, 5 years, plus
+
+Future value of a single payment of $5,000, 4%, 2 years, plus
+
+Future value of a single payment of $5,000, 4%, 1 year
+
+This must give us the same result. The formula for the future value of an annuity due is
+
+This problem can be solved in the three steps of the summary above.
+
+Step 1:
+
+Step 2:
+
+Step 3:
+
+Combining the results from each of the three steps gives us
+
+It works. Whether you view this problem as five separate periods that can be compounded separately and then combined or as a combination of one or more annuities and/or single payment problems, we always arrive at the same solution if we are diligent about the time, the interest, and the stream of payments.
+
+The Present Value of a Mixed Stream
+
+Now that we’ve seen the calculation of a future value, consider a present value. We will begin with a personal example. You win a cash windfall through your state’s lottery. You would like to take a portion of the funds and place them in a fixed investment so that you can draw $17,000 per year starting one year from now and continue to do so for the next two years. At the end of year 4, you want to withdraw $17,500, and at the end of year 5, you will withdraw the last $18,000 to close the account. When you take your last payment of $18,000, your fund will be totally depleted. You will always be earning 6% annually. How much of your cash windfall should you set aside today to accomplish this?
+
+Let us break down the problem, remembering that we are thinking in reverse from the earlier problems that involved future values. In this case, we’re bringing future values back in time to find their present values. You will recall that this process is called discounting rather than compounding.
+
+Regardless of how we solve this, the question remains the same: How much money must we invest today (present value) to achieve this? And remember that we will always be earning 6% compounded annually on any invested balances.
+
+We are calculating present values as we did in previous chapters, given a known future value “target,” in order to determine how much money you need today to achieve that goal. Let us break this down by first reviewing the relevant equations from previous chapters.
+
+Present value of an ordinary annuity:
+
+Present value of a single amount:
+
+where PVa is the present value of an annuity, PYMT is one payment in a consistent stream (an annuity), i is the interest rate (annual unless otherwise specified), n is the number of periods, PV is the present value of a single amount, and FV is the future value of a single amount.
+
+You want to find out how much money you need to set aside today to accomplish your goal. You can also find out how much money you need to set aside in each period to accomplish this goal. Therefore, we can address this problem in increments. Let us look at potential solutions.
+
+First, we will break this down into the cash flows of each year. 
+ shows the timing of the future cash flows you’re expecting:
+
+Year
+0
+1
+2
+3
+4
+5
+Expected Amount to Be Withdrawn at End of Year
+$0.00
+$17,000
+$17,000
+$17,000
+$17,500
+$18,000
+One method is to take each year’s cash flows, which happen at the end of the year, and discount them to today using the present value formula for a single amount:
+
+Because year 1’s withdrawal from your fund only has one year to earn interest, we discounted it for one year. The second amount is discounted for two years:
+
+The next three years are discounted in the same way, for three, four, and five years, respectively:
+
+Notice how we reverse our thinking on the exponent n from our approach to future value. This time, it increases each period because we discount each future amount for a longer period to arrive at the value in today’s dollars.
+
+When we add all five discounted present value amounts from above, we derive today’s value of $72,753.49. Expressed more simply, if you wanted to extract the specified stream of cash flows at the end of each year ($17,000 for three years, then $17,500, then $18,000), you would have to begin with $72,753.49. The thing to remember is that any amounts remaining in this fund, regardless of how you deplete it, will always be earning 6% annually. See .
+
+Year
+0
+1
+2
+3
+4
+5
+Withdrawn at End of Year
+$17,000.00
+$17,000.00
+$17,000.00
+$17,500.00
+$18,000.00
+Interest on Balance
+$4,365.21
+$3,607.12
+$2,803.55
+$1,951.76
+$1,018.87
+Remaining Balance
+$72,753.49
+$60,118.70
+$46,725.82
+$32,529.37
+$16,981.13
+$0.00
+Let us try another approach. Because the amount of cash withdrawn in the first three years remains constant at $17,000, it can be viewed as an annuity—specifically, a three-period annuity of $17,000 and two single payments of $17,500 and $18,000. Therefore, we could also discount (bring to present value) an annuity of $17,000 for three years (the first three) and then combine it with the year 4 discounted amount and the year 5 discounted amount. We can try it using the formulas for PVa and PVused above. In Step 1, we will discount the first three years as an annuity (ordinary, as the first withdrawal is not made until one year from now); in Step 2, we will discount the year 4 single payment amount; and in Step 3, we will do the same for the year 5 single payment amount. Then we can add them together.
+
+Step 1: Find the present value of the annuity using the PVa formula:
+
+Step 2: Discount the year 4 amount using the formula for the present value of a single amount:
+
+Step 3: Perform the same operation as in Step 2 for the year 5 amount:
+
+Now that all three amounts have been discounted to today’s value, we can add them:
+
+Calculating the present value of cash flows is very common and critical in the analysis of capital investments in business for two compelling reasons: first, the investment is likely quite significant, and second, the risk will usually encompass a longer time frame. When the author of this chapter would purchase a large machine, it would likely take several years for that machine to justify its purchase with the revenues it would generate. This is one of the primary reasons that accountants require us to depreciate the cost of an asset over time: to assess the cost against the time it will take for that asset to produce profits and cash flow.
+
+Present Value of a Mixed Stream
+
+Assume that you decide to invest $450,000. All cash flows are discounted at 4%. You are told by your financial advisor to expect cash inflows from your investment of $100,000 in year 1, $125,000 in year 2, $175,000 in year 3, $90,000 in year 4, and $50,000 in year 5. Would you agree to this plan based only on the numbers? Each amount will be withdrawn at the end of every year, and interest will be compounded annually.
+Solution:
+
+Year
+0
+1
+2
+3
+4
+5
+Expected Amount to Be Withdrawn at End of Year
+$0.00
+$100,000
+$125,000
+$175,000
+$90,000
+$50,000
+Applying the formula for the present value of a single amount, we discount each amount and then add the discounted amounts. We will simplify this approach with Excel shortly, but we must understand the reasoning behind discounting uneven cash flow streams with a direct solution.
+
+By combining the five discounted amounts above, we get a total present value of $485,326.48. This amount represents the value today of the five expected cash inflows for as long as our remaining balance is earning 4%.
+
+Thoughts on Cash Flow from Irina Simmons
+
+In 2013, the author interviewed Irina Simmons, senior vice president, chief risk officer, and former treasurer of EMC Corporation. The importance and understanding of cash flow analysis is fundamental to this text, and several of her insights are highly relevant to our content and procedures here.
+AA: Ms. Simmons, why is cash management so important to an existing or start-up firm, and how does it compare to the more basic and traditional focus on profitability?
+Simmons: While profitability is very useful for analysis by investors to measure performance, an organization’s cash flow provides superior measurement. Cash flow is easy to understand, provides a transparent way of assessing a firm’s health, and is not subject to any qualifications. By focusing upon cash flow, any firm—whether it is mature or a start-up organization—can have a clear picture of its health and success.
+AA: In your bio, you mention liquidity management. Can you elaborate on this and why liquidity management is so important to a firm?
+Simmons: Just as effective forecasting can provide superior cash management, the same holds true for liquidity management. For example, if you are able to confidently predict levels and timing of cash, then based on that forecast, you can make effective short- and long-term borrowing decisions. A disciplined approach to projecting one’s cash position means that instead of investing cash in the money market to maximize day-to-day liquidity, you can look into longer-term investments that can provide a significantly higher return. This is essential to the effective matching of cash inflows and outflows for the firm.
+AA: In summary, do you have any words of advice to students who might have an eye to entrepreneurial ventures?
+Simmons: “Cash is king,” don’t forget that. Understand how cash moves through a business. It is also very important to implement and retain a cash management discipline. Never put that off until later. Many times, start-ups will say, “Well, I have all this venture money, and we can start making things happen and worry about being good cash managers later.” But what I’ve seen is that the longer companies wait, the harder it is to break bad habits. Making cash management a priority now will serve entrepreneurs in perfect stead as their business starts to gain traction.
+
+We closed this excellent interview with agreement that we were “kindred spirits” regarding the importance of cash flow analysis, including capital decisions such as those mentioned in this chapter. We confirmed with each other the core belief that “cash flow is the axis upon which the world of business spins.”
+
+(source: Business Finance: A Clear View, 3rd edition, by Alan S. Adams. LAD Publishing, 2015.)
+
+Analyst Training Materials
+
+These materials, developed to help professionals prepare for an analyst certification exam, describe the sources of return from investing in a bond.
+
+To understand the true value and strength of cash, it is necessary to consider its timing. This is relevant for investments for the future and for analyses of the value of projects that require investment today to produce expected flows of cash later. These future cash flows could involve inflows or outflows of cash in unequal amounts. This section analyzed the determination of present and future value of these uneven or mixed cash flows.
+
+General instructions: Approximations and minor differences because of rounding are acceptable. Ignore the effect of taxes. Please assume that all percentages are annual rates and compounding occurs annually unless otherwise indicated.
+
+Calculate the Present Value for Multiple Cash Flows
+
+a major expenditure that requires a large up-front investment and is expected to generate substantial cash inflow in return
+the amount of cash actually flowing into and out of a business, as opposed to income (which is based on accounting rules, accruals, and reports)
+the value of an asset or holding at a point in the future based on expectations of that asset’s growth at a certain rate of return
+a set of cash flows over a period of time that can vary in amount from one period to the next
+the value of an asset in today’s dollars based on future growth expectations at an assumed interest rate

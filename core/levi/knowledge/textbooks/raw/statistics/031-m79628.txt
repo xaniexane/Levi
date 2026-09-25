@@ -1,0 +1,395 @@
+# m79628
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Discrete Distribution (Playing Card Experiment)
+
+Discrete Distribution (Playing Card Experiment)
+
+Discrete Distribution (Playing Card Experiment)
+
+Student Learning Outcomes
+
+The student will compare empirical data and a theoretical distribution to determine if an everyday experiment fits a discrete distribution.
+
+The student will compare technology-generated simulation and a theoretical distribution.
+
+The student will demonstrate an understanding of long-term probabilities.
+
+Supplies
+
+One full deck of playing cards
+
+Programmable calculator
+Procedure for Empirical DataThe experimental procedure for empirical data is to pick one card from a deck of shuffled cards.
+
+Procedure for Empirical Data
+
+The theoretical probability of picking a diamond from a deck is ________.
+
+Shuffle a deck of cards.
+
+Pick one card from it.
+
+Record whether it was a diamond or not a diamond.
+
+Put the card back and reshuffle.
+
+Do this a total of 10 times.
+
+Record the number of diamonds picked.
+
+Let X = number of diamonds. Theoretically, X ~ B(_____,_____)
+Procedure for SimulationRepeat the experimental procedure using a programmable calculator.
+
+Procedure for Simulation
+
+Use the randInt function to generate data. Consider 1 to be spades, 2 to be hearts, 3 to be diamonds, and 4 to be clubs. Generate 10 draws of cards with four suits with randInt(1,4,10).
+
+Let 
+
+ X= number of diamonds
+
+. Theoretically, X ~ B(_____,_____).
+
+Organize the Empirical Data
+
+Record the number of diamonds picked for your class with playing cards in . Then calculate the relative frequency.
+
+x
+Frequency
+Relative Frequency
+
+0
+__________
+__________
+
+1
+__________
+__________
+
+2
+__________
+__________
+
+3
+__________
+__________
+
+4
+__________
+__________
+
+5
+__________
+__________
+
+6
+__________
+__________
+
+7
+__________
+__________
+
+8
+__________
+__________
+
+9
+__________
+__________
+
+10
+__________
+__________
+x
+Frequency
+Relative Frequency
+0
+__________
+__________
+1
+__________
+__________
+2
+__________
+__________
+3
+__________
+__________
+4
+__________
+__________
+5
+__________
+__________
+6
+__________
+__________
+7
+__________
+__________
+8
+__________
+__________
+9
+__________
+__________
+10
+__________
+__________
+Calculate the following:
+
+ x
+ ¯
+
+ = ________
+s = ________
+x
+ ¯
+
+ = ________
+s = ________
+
+Construct a histogram of the empirical data.
+
+Organize the Simulation Data
+
+Use to record the number of diamonds picked for your class using the calculator simulation. Calculate the relative frequency.
+
+X
+Frequency
+Relative Frequency
+
+0
+__________
+__________
+
+1
+__________
+__________
+
+2
+__________
+__________
+
+3
+__________
+__________
+
+4
+__________
+__________
+
+5
+__________
+__________
+
+6
+__________
+__________
+
+7
+__________
+__________
+
+8
+__________
+__________
+
+9
+__________
+__________
+
+10
+__________
+__________
+X
+Frequency
+Relative Frequency
+0
+__________
+__________
+1
+__________
+__________
+2
+__________
+__________
+3
+__________
+__________
+4
+__________
+__________
+5
+__________
+__________
+6
+__________
+__________
+7
+__________
+__________
+8
+__________
+__________
+9
+__________
+__________
+10
+__________
+__________
+Calculate the following:
+
+ x
+ ¯
+
+ = ________
+s = ________
+x
+ ¯
+
+ = ________
+s = ________
+
+Construct a histogram of the simulation data.
+
+Theoretical Distribution
+
+Build the theoretical PDF chart based on the distribution in the Procedure section.
+
+x
+P(x)
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+P(x)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Calculate the following:
+
+μ = ____________
+σ = ____________
+μ = ____________
+σ = ____________
+
+Construct a histogram of the theoretical distribution.
+Using the Data
+
+Using the Data
+
+NOTE
+RF = relative frequency
+
+Use the table from the Theoretical Distribution section to calculate the following answers. Round your answers to four decimal places.
+P(x = 3) = ________
+P(1 < x < 4) = ________
+P(x ≥ 8) = ________
+
+Use the data from the Organize the Empirical Data section to calculate the following answers. Round your answers to four decimal places.
+
+RF(x = 3) = ________
+RF(1 < x < 4) = ________
+RF(x ≥ 8) = ________
+RF(x = 3) = ________
+RF(1 < x < 4) = ________
+RF(x ≥ 8) = ________
+
+Use the data from the Organize the Simulation Data section to calculate the following answers. Round your answers to four decimal places.
+RF(x = 3) = ________
+RF(1 < x < 4) = ________
+RF(x ≥ 8) = ________
+RF(x = 3) = ________
+RF(1 < x < 4) = ________
+RF(x ≥ 8) = ________
+Discussion QuestionsFor Questions 1 and 2, think about the shapes of the two graphs, the probabilities, the relative frequencies, the means, and the standard deviations.
+
+Discussion Questions
+
+Knowing that data vary, describe three similarities between the graphs and distributions of the theoretical, empirical, and simulation distributions. Use complete sentences.
+
+Describe the three most significant differences between the graphs or distributions of the theoretical, empirical, and simulation distributions.
+
+Using your answers from Questions 1 and 2, does it appear that the two sets of data fit the theoretical distribution? In complete sentences, explain why or why not.
+
+Suppose that the experiment had been repeated 500 times. Would you expect , , or to change, and how would it change? Why? Why wouldn’t the other table(s) change?
+
+HOMEWORK
+
+Use a programmable calculator to simulate a binomial distribution.
+
+How would you use the randInt function to simulate the number of successes in five trials of an experiment with two outcomes, each of which has a .5 probability of occurring?
+
+Use the randInt function to simulate 10 observations of the random variable in Part A.
+
+Find the sample mean and sample standard deviation.
+
+Compare the sample mean and sample standard deviation to the theoretical mean and the theoretical standard deviation.
+
+You can use randInt (0,1,5) to generate five trials of the experiment. Count the number of 1s generated to determine the number of successes.
+
+Student answers may vary.
+
+Student answers may vary.
+
+The theoretical mean is 
+
+ (
+ 5
+ )(
+ 
+ .5
+ 
+ )=2.5
+ 
+. The theoretical standard deviation is 
+
+ (
+ 5
+ )(
+ 
+ .5
+ 
+ )(
+ 
+ 0.5
+ 
+ )
+
+ =
+ 
+ 1.25
+
+.

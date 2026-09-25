@@ -1,0 +1,454 @@
+# m00111
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Pandas
+
+Pandas
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Describe the Pandas library.
+
+Create a DataFrame and a Series object.
+
+Choose appropriate Pandas functions to gain insight from heterogeneous data.
+
+Pandas library
+Pandas is an open-source Python library used for data cleaning, processing, and analysis. Pandas provides data structures and data analysis tools to analyze structured data efficiently. The name "Pandas" is derived from the term "panel data," which refers to multidimensional structured datasets. Key features of Pandas include:
+
+Data structure: Pandas implements two main data structures:
+ 
+ Series: A Series is a one-dimensional labeled array.
+ DataFrame: A DataFrame is a two-dimensional labeled data structure that consists of columns and rows. A DataFrame can be thought of as a spreadsheet-like data structure where each column represents a Series. DataFrame is a heterogeneous data structure where each column can have a different data type.
+
+Series: A Series is a one-dimensional labeled array.
+
+DataFrame: A DataFrame is a two-dimensional labeled data structure that consists of columns and rows. A DataFrame can be thought of as a spreadsheet-like data structure where each column represents a Series. DataFrame is a heterogeneous data structure where each column can have a different data type.
+
+Data processing functionality: Pandas provides various functionalities for data processing, such as data selection, filtering, slicing, sorting, merging, joining, and reshaping.
+
+Integration with other libraries: Pandas integrates well with other Python libraries, such as NumPy. The integration capability allows for data exchange between different data analysis and visualization tools.
+
+The conventional alias for importing Pandas is pd. In other words, Pandas is imported as import pandas as pd. Examples of DataFrame and Series objects are shown below.
+
+DataFrame example
+Name
+ Age
+ City
+
+ 0
+ Emma
+ 15
+ Dubai
+ 
+ 1
+ Gireeja
+ 28
+ London
+ 
+ 2
+ Sophia
+ 22
+ San Jose
+
+Name
+Age
+City
+0
+Emma
+15
+Dubai
+1
+Gireeja
+28
+London
+2
+Sophia
+22
+0
+ Emma
+ 
+ 1
+ Gireeja
+ 
+ 2
+ Sophia
+ 
+ dtype:
+ object
+
+0
+Emma
+1
+Gireeja
+2
+Sophia
+dtype:
+object
+Data input and output
+
+A DataFrame can be created from a dictionary, list, NumPy array, or a CSV file. Column names and column data types can be specified at the time of DataFrame instantiation.
+
+DataFrame creation.
+
+Description
+Example
+Output
+Explanation
+Name
+Age
+City
+
+0
+Emma
+15
+Dubai
+
+1
+Gireeja
+28
+London
+
+2
+Sophia
+22
+San Jose
+
+Name
+Age
+City
+0
+Emma
+15
+Dubai
+1
+Gireeja
+28
+London
+2
+Sophia
+22
+The pd.DataFrame() function takes in a dictionary and converts it into a DataFrame. Dictionary keys will be column labels and values are stored in respective columns.
+The pd.DataFrame() function takes in a dictionary and converts it into a DataFrame. Dictionary keys will be column labels and values are stored in respective columns.
+
+Name
+Age
+City
+
+0
+Emma
+15
+Dubai
+
+1
+Gireeja
+28
+London
+
+2
+Sophia
+22
+San Jose
+
+Name
+Age
+City
+0
+Emma
+15
+Dubai
+1
+Gireeja
+28
+London
+2
+Sophia
+22
+The pd.DataFrame() function takes in a list containing the records in different rows of a DataFrame, along with a list of column labels, and creates a DataFrame with the given rows and column labels.
+The pd.DataFrame() function takes in a list containing the records in different rows of a DataFrame, along with a list of column labels, and creates a DataFrame with the given rows and column labels.
+
+A
+B
+C
+
+0
+1
+0
+0
+
+1
+0
+1
+0
+
+2
+2
+3
+4
+
+A
+B
+C
+0
+1
+0
+0
+1
+0
+1
+0
+2
+2
+3
+A NumPy array, along with column labels, are passed to the pd.DataFrame() function to create a DataFrame object.
+A NumPy array, along with column labels, are passed to the pd.DataFrame() function to create a DataFrame object.
+
+import pandas as pd
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv("data.csv")
+
+# Display the DataFrame
+df
+The pd.read_csv() function reads a CSV file into a DataFrame and organizes the content in a tabular format.
+The pd.read_csv() function reads a CSV file into a DataFrame and organizes the content in a tabular format.
+
+import pandas as pd
+
+# Read the Excel file into a DataFrame
+df = pd.read_excel("data.xlsx")
+
+# Display the DataFrame
+df
+The pd.read_excel() function reads an Excel file into a DataFrame and organizes the content in a tabular format.
+The pd.read_excel() function reads an Excel file into a DataFrame and organizes the content in a tabular format.
+
+Pandas basics
+
+Pandas for data manipulation and analysis
+
+The Pandas library provides functions and techniques to explore, manipulate, and gain insights from the data. Key DataFrame functions that analyze this code are described in the following table.
+
+Season
+Month
+Month-day
+Year
+0
+Summer
+July
+1
+2000
+1
+Summer
+June
+12
+1990
+2
+Fall
+September
+3
+2020
+3
+Winter
+January
+7
+1998
+4
+Fall
+October
+20
+2001
+5
+Winter
+February
+28
+2022
+DataFrame functions.
+
+Function name
+Explanation
+Example
+head(n)
+Returns the first n rows. If a value is not passed, the first 5 rows will be shown.
+Returns the first n rows. If a value is not passed, the first 5 rows will be shown.
+Season
+Month
+Month-day
+Year
+
+0
+Summer
+July
+1
+2000
+
+1
+Summer
+June
+12
+1990
+
+2
+Fall
+September
+3
+2020
+
+3
+Winter
+January
+7
+1998
+
+Season
+Month
+Month-day
+Year
+0
+Summer
+July
+1
+2000
+1
+Summer
+June
+12
+1990
+2
+Fall
+September
+3
+2020
+3
+Winter
+January
+7
+tail(n)
+Returns the last n rows. If a value is not passed, the last 5 rows will be shown.
+Returns the last n rows. If a value is not passed, the last 5 rows will be shown.
+Season
+Month
+Month-day
+Year
+
+3
+Winter
+January
+7
+1998
+
+4
+Fall
+October
+20
+2001
+
+5
+Winter
+February
+28
+2022
+
+Season
+Month
+Month-day
+Year
+3
+Winter
+January
+7
+1998
+4
+Fall
+October
+20
+2001
+5
+Winter
+February
+28
+info()
+
+describe()
+
+Month-day
+Year
+
+count
+6.000000
+6.000000
+
+mean
+11.833333
+2005.166667
+
+std
+10.457852
+12.875040
+
+min
+1.000000
+1990.000000
+
+25%
+4.000000
+1998.500000
+
+50%
+9.500000
+2000.500000
+
+75%
+18.000000
+2015.250000
+
+max
+28.000000
+2022.000000
+
+Month-day
+Year
+count
+6.000000
+6.000000
+mean
+11.833333
+2005.166667
+std
+10.457852
+12.875040
+min
+1.000000
+1990.000000
+25%
+4.000000
+1998.500000
+50%
+9.500000
+2000.500000
+75%
+18.000000
+2015.250000
+max
+28.000000
+value_counts()
+
+unique()
+
+​​['Summer' 'Fall' 'Winter']
+DataFrame operations
+
+Exploring further
+
+Please refer to the Pandas user guide for more information about the Pandas library.
+Pandas User Guide
+
+Programming practice with Google
+
+Use the Google Colaboratory document below to practice Pandas functionalities to extract insights from a dataset.
+Google Colaboratory document

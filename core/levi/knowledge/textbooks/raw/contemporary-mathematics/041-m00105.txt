@@ -1,0 +1,447 @@
+# m00105
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Graphing Functions
+
+Graphing Functions
+
+Learning Objectives
+
+After completing this module, you should be able to:
+
+Graph functions using intercepts.
+
+Compute slope.
+
+Graph functions using slope and y-intercept.
+
+Graph horizontal and vertical lines.
+
+Interpret graphs of functions.
+
+Model applications using slope and y-intercept.
+
+In this section, we will expand our knowledge of graphing by graphing linear functions. There are many real-world scenarios that can be represented by graphs of linear functions. Imagine a chairlift going up at a ski resort. The journey a skier takes travelling up the chairlift could be represented as a linear function with a positive slope. The journey a skier takes down the slopes could be represented by a linear function with a negative slope.
+
+Graphing Functions Using Intercepts
+
+Every linear equation can be represented by a unique line that shows all the solutions of the equation. We have seen that when graphing a line by plotting points, you can use any three solutions to graph. This means that two people graphing the line might use different sets of three points. At first glance, their two lines might not appear to be the same, since they would have different points labeled. But if all the work was done correctly, the lines should be exactly the same. One way to recognize that they are indeed the same line is to look at where the line crosses the x-axis and the y-axis. These points are called the intercepts of a line. Let us review the graphs of the lines in .
+
+The table below lists where each of these lines crosses the x- and y-axis. Do you see a pattern? For each line, the y-coordinate of the point where the line crosses the x-axis is zero. The point where the line crosses the x-axis has the form (a, 0) and is called the x-intercept of the line. The x-intercept occurs when y is zero. In each line, the x-coordinate of the point where the line crosses the y-axis is zero. The point where the line crosses the y-axis has the form (0,b) and is called the y-intercept of the line. The y-intercept occurs when x is zero.
+Ordered Pair for This Point
+Figure (a)
+(3,0)
+(0,6)
+Figure (b)
+(0,−3)
+Figure (c)
+(0,−5)
+Figure (d)
+(0,0)
+(0,0)
+(0,b)
+Finding x- and y-Intercepts
+
+Find the x-intercept and y-intercept on the (a) and (b) graphs in .
+
+In , the graph crosses the x-axis at the point (4,0). The x-intercept is (4,0). The graph crosses the y-axis at the point (0,2). The y-intercept is (0,2). In , the graph crosses the x-axis at the point (2,0). The x-intercept is (2,0). The graph crosses the y-axis at the point (0,−6). The y-intercept is (0,−6).
+
+Graphing a Function Using Intercepts
+
+Find the intercepts of 2x+y=8. Then graph the function using the intercepts.
+
+Let y=0 to find the x-intercept, and let x=0 to find the y-intercept.
+2x+y=8
+2x+0=8
+2(0)+y=8
+2x=8x=4
+y=8
+(4,0)
+(0,8)
+Plot the intercepts to get the graph in .
+
+Computing Slope
+
+When graphing linear equations, you may notice that some lines tilt up as they go from left to right and some lines tilt down. Some lines are very steep and some lines are flatter. In mathematics, the measure of the steepness of a line is called the slope of the line. To find the slope of a line, we locate two points on the line whose coordinates are integers. Then we sketch a right triangle where the two points are vertices of the triangle and one side is horizontal and one side is vertical. Next, we measure or calculate the distance along the vertical and horizontal sides of the triangle. The vertical distance is called the rise and the horizontal distance is called the run.
+
+We can assign a numerical value to the slope of a line by finding the ratio of the rise and run. The rise is the amount the vertical distance changes while the run measures the horizontal change, as shown in this illustration. Slope () is a rate of change.
+
+To calculate slope (m), use the formula
+
+where the rise measures the vertical change and the run measures the horizontal change.
+
+The concept of slope has many applications in the real world. In construction, the pitch of a roof, the slant of plumbing pipes, and the steepness of stairs are all applications of slope. As you ski or jog down a hill, you definitely experience slope.
+
+Finding the Slope from a Graph
+
+Find the slope of the line shown in .
+Step 1: Locate two points on the graph whose coordinates are integers, such as (0,5) and (3,3). Starting at (0,5), sketch a right triangle to (3,3) as shown in .
+Step 2: Count the rise; since it goes down, it is negative. The rise is −2.
+Step 3: Count the run. The run is 3.
+Step 4: Use the slope formula m=riserun substitute the values of the rise and run. m=−23
+
+The slope of the line is −23.
+
+The solution is y decreases by 2 units as x increases by 3 units.
+
+Sometimes we will need to find the slope of a line between two points when we don’t have a graph to measure the rise and the run. We could plot the points on grid paper, then count out the rise and the run, but there is a way to find the slope without graphing. First, we need to introduce some algebraic notation.
+
+We have seen that an ordered pair (x, y) gives the coordinates of a point. But when we work with slopes, we use two points. How can the same symbol (x, y) be used to represent two different points? Mathematicians use subscripts to distinguish such points. For example, (x1, y1) would be said aloud as “x sub 1, y sub 1” and (x2, y2) read “x sub 2, y sub 2.” The “sub” is a short way of saying “subscript.” We will use (x1, y1) to identify the first point and (x2, y2) to identify the second point in our slope equation. If we had more than two points, (if we were finding more than one slope), we could use (x3, y3), (x4, y4), and so on.
+
+Let’s review how the rise and run relate to the coordinates of the two points by taking another look at the slope of the line between the points (2,3) and (7,6), as shown in .
+
+On the graph, we count the rise of 3 and the run of 5. Notice on the graph that that (x1, y1) is the point (2,3) and (x2, y2) is the point (7,6). The rise can be found by subtracting the y-coordinates, 6 and 3, and the run can be found by subtracting the x-coordinates 7 and 2.
+
+We have shown that m=y2−y1x2−x1 is really another version of m=riserun. We can use this formula to find the slope of a line.
+
+To find the slope of the line between two points (x1, y1) and (x2, y2), use the formula
+
+Finding the Slope of the Line Using Points
+
+Use the slope formula to find the slope of the line through the points (−2, −3) and (−7, 4).
+
+We’ll call (−2, −3) point 1 and (−7, 4) point 2.
+Step 1: Use the slope formula: m=y2−y1x2−x1
+Step 2: Substitute the values: m=4−(−3)−7−(−2)
+Step 3: Simplify: m=7−5=−75
+Step 4: Verify the slope on the graph shown in .
+
+Graphing Functions Using Slope and y-Intercept
+
+We have graphed linear equations by plotting points and using intercepts. Once we see how an equation in slope-intercept form and its graph are related, we will have one more method we can use to graph lines. Review the graph of the equation y=12x+3 in and find its slope and y-intercept.
+
+The vertical and horizontal lines in the graph show us the rise is 1 and the run is 2, respectively.
+
+Substituting into the slope formula: m=riserun=12
+
+The y-intercept is (0,3). Look at the equation of this line.
+
+Look at the slope and y-intercept.
+
+When a linear equation is solved for y, the coefficient of the x term is the slope and the constant term is the y-coordinate of the y-intercept. We say that the equation y=12x+3 is in slope-intercept form. Sometimes the slope-intercept form is called the y-form.
+
+Finding the Slope and y-Intercept of a Line
+
+Identify the slope and y-intercept of the line from the equation:
+y=−47x−2
+x+3y=9
+We compare our equation to the slope-intercept form of the equation.
+ Step 1: Write the slope-intercept form of the equation of the line.
+ y=mx+b
+ Step 2: Write the equation of the line. 
+ y=−47x−2
+ Step 3: Identify the slope. 
+ m=−47
+ Step 4: Identify the y-intercept. 
+ y-intercept is (0,−2)
+ When an equation of a line is not given in slope-intercept form, our first step will be to solve the equation for y.
+ Step 1: Solve for y.
+ x+3y=9
+ Step 2: Subtract x from each side.
+ 3y=−x+9
+ Step 3: Divide both sides by 3.
+ 3y3=−x+93
+ Step 4: Simplify.
+ y=−13x+3
+ Step 5: Write the slope-intercept form of the equation of the line.
+ y=mx+b
+ Step 6: Write the equation of the line.
+ y=−13x+3
+ Step 7: Identify the slope.
+ m=−13
+ Step 8: Identify the y-intercept.
+ y-intercept is(0,3).
+
+We compare our equation to the slope-intercept form of the equation.
+ Step 1: Write the slope-intercept form of the equation of the line.
+ y=mx+b
+ Step 2: Write the equation of the line. 
+ y=−47x−2
+ Step 3: Identify the slope. 
+ m=−47
+ Step 4: Identify the y-intercept. 
+ y-intercept is (0,−2)
+
+When an equation of a line is not given in slope-intercept form, our first step will be to solve the equation for y.
+ Step 1: Solve for y.
+ x+3y=9
+ Step 2: Subtract x from each side.
+ 3y=−x+9
+ Step 3: Divide both sides by 3.
+ 3y3=−x+93
+ Step 4: Simplify.
+ y=−13x+3
+ Step 5: Write the slope-intercept form of the equation of the line.
+ y=mx+b
+ Step 6: Write the equation of the line.
+ y=−13x+3
+ Step 7: Identify the slope.
+ m=−13
+ Step 8: Identify the y-intercept.
+ y-intercept is(0,3).
+
+Graphing the Slope and y-Intercept
+
+Graph the line of the equation y=−x+4 using its slope and y-intercept.
+
+The equation is in slope-intercept form y=mx+b. y=−x+4.
+Step 1: Identify the slope and y-intercept. m=−1, y-intercept is (0,4).
+Step 2: Plot the y-intercept on the coordinate system ().
+
+Identify the rise over the run. m=−1=−11
+
+Count out the rise and run to mark the second point. rise −1, run 1
+
+Graphing Horizontal and Vertical Lines
+
+Some linear equations have only one variable. They may have just x without the y, or just y without an x. This changes how we make a table of values to get the points to plot. Let us consider the equation x=−3. This equation has only one variable, x. The equation says that x is always equal to −3, so its value does not depend on y. No matter what the value of y is, the value of x is always −3. To make a table of values, write −3 in for all the x-values. Then choose any values for y. Since x does not depend on y, you can choose any numbers you like. But to fit the points on our coordinate graph, we will use 1, 2, and 3 for the y-coordinates in the table below.
+y
+(x, y)
+−3
+−3
+−3
+(−3,3)
+Plot the points from the table and connect them with a straight line (). Notice that we have graphed a vertical line.
+
+What is the slope? If we take the two points (−3,3) and (−3,1) then the rise is 2 and the run is 0.
+
+Using the slope formula we get: m=riserun=20
+
+The slope is undefined since division by zero is undefined. We say that the slope of the vertical line x=−3 is undefined. The slope of any vertical line x=a (where a is any number) will be undefined.
+
+What if the equation has y but no x? Let’s graph the equation y=4. This time the y-value is a constant, so in this equation, y does not depend on x. Fill in 4 for all the y values in the table below and then choose any values for x. We will use 0, 2, and 4 for the x-coordinates.
+y
+(x, y)
+0
+(0,4)
+2
+(2,4)
+4
+(4,4)
+In , we have graphed a horizontal line passing through the y-axis at 4.
+
+What is the slope? If we take the two points (2,4) and (4,4) then the rise is 0 and the run is 2. Using the slope formula, we get m=riserun=02=0. The slope of the horizontal line y=4 is 0. The slope of any horizontal line y=b (where b is any number) will be 0. When the y-coordinates are the same, the rise is 0.
+
+Graphing A Vertical Line
+
+Graph: x=2.
+
+The equation has only one variable, x, and x is always equal to 2. We create a table where x is always 2 and then put in any values for y. The graph is a vertical line passing through the x-axis at 2 ().
+y
+(x, y)
+2
+(2,1)
+2
+(2,2)
+2
+(2,3)
+
+Graphing A Horizontal Line
+
+Graph: y=−1.
+
+The equation y=−1 has only one variable, y. The value of y is constant. All the ordered pairs in the next table have the same y-coordinate. The graph is a horizontal line passing through the y-axis at −1 ().
+y
+(x, y)
+(0,−1)
+(−3,−1)
+
+The table below summarizes all the methods we have used to graph lines.
+
+Interpreting Graphs of Functions
+
+An important yet often overlooked area in algebra involves interpreting graphs. Oftentimes in math classes, students are given mathematical functions and can make graphs to represent them. But the interpretation of graphs is a more applicable skill to the real world. Being able to “read” a graph—understanding its domain and range, what the intercepts mean, and what the slope (or curve) means— that's a real-world skill.
+
+Interpreting a Graph
+
+In the x-axis on the graph represents the 120-minute bike ride Juan went on. The y-axis represents how far away he was from his home.
+
+Interpret the x- and y-intercept.
+
+For each segment, find the slope.
+
+Create an interpretation of this graph (i.e., make up a story that goes with it).
+(0,0) is the x- and y-intercept and represents Juan at home before his bike ride. The distance from home is 0 miles and 0 minutes have passed.
+ In the first 30 minutes, the slope is 15 and indicates Juan is traveling 1 mile for every 5 minutes. Between 30 and 60 minutes, the slope is 0 and indicates that he’s not riding the bike (the distance is not increasing). Then between 60 and 90 minutes, the slope is 15 again. Finally, after 90 minutes the slope is −415, meaning Juan is getting 4 miles closer to home every 15 minutes.
+ Answers will vary. Juan left his house for a bike ride. After 30 minutes, he was 6 miles from home and he stopped for ice cream at his local ice-cream truck. He enjoyed his ice cream for 30 minutes. He then jumped back on his bike and rode to his friend’s house. He arrived there 30 minutes later. His friend’s house was 12 miles from his home. His friend was not home so he immediately turned around and quickly rode home in 45 minutes.
+(0,0) is the x- and y-intercept and represents Juan at home before his bike ride. The distance from home is 0 miles and 0 minutes have passed.
+
+In the first 30 minutes, the slope is 15 and indicates Juan is traveling 1 mile for every 5 minutes. Between 30 and 60 minutes, the slope is 0 and indicates that he’s not riding the bike (the distance is not increasing). Then between 60 and 90 minutes, the slope is 15 again. Finally, after 90 minutes the slope is −415, meaning Juan is getting 4 miles closer to home every 15 minutes.
+
+Answers will vary. Juan left his house for a bike ride. After 30 minutes, he was 6 miles from home and he stopped for ice cream at his local ice-cream truck. He enjoyed his ice cream for 30 minutes. He then jumped back on his bike and rode to his friend’s house. He arrived there 30 minutes later. His friend’s house was 12 miles from his home. His friend was not home so he immediately turned around and quickly rode home in 45 minutes.
+
+Modeling Applications Using Slope and y-Intercept
+
+Many real-world applications are modeled by linear equations. We will review a few applications here so you can understand how equations written in slope-intercept form relate to real-world situations. Usually when a linear equation model uses real-world data, different letters are used for the variables instead of using only x and y. The variable names often remind us of what quantities are being measured. Also, we often need to extend the axes in our rectangular coordinate system to bigger positive and negative numbers to accommodate the data in the application.
+
+Converting Temperature
+
+The equation F=95C+32 is used to convert temperatures from degrees Celsius (C) to degrees Fahrenheit (F).
+
+Find the Fahrenheit temperature for a Celsius temperature of 0°.
+
+Find the Fahrenheit temperature for a Celsius temperature of 20°.
+
+Interpret the slope and F-intercept of the equation.
+
+Graph the equation.
+
+Find the Fahrenheit temperature for a Celsius temperature of 0°.
+
+ Find F when C=0.
+ F=95(0)+32
+
+ Simplify.
+ F=32
+
+F=95(0)+32
+F=32
+Find the Fahrenheit temperature for a Celsius temperature of 20°.
+
+ Find F when C=20.
+ F=95(20)+32
+
+ Simplify.
+ F=36+32
+
+ Simplify.
+ F=68
+
+F=95(20)+32
+F=36+32
+F=68
+Interpret the slope and F-intercept of the equation.
+ Even though this equation uses F and C, it is still in slope-intercept form.
+ y=mx+bF=mC+bF=95C+32
+ The slope 95 means that the temperature Fahrenheit (F) increases 9 degrees when the temperature Celsius (C) increases 5 degrees.
+ The F-intercept means that when the temperature is 0° on the Celsius scale, it is 32° on the Fahrenheit scale.
+
+Even though this equation uses F and C, it is still in slope-intercept form.
+y=mx+bF=mC+bF=95C+32
+
+The slope 95 means that the temperature Fahrenheit (F) increases 9 degrees when the temperature Celsius (C) increases 5 degrees.
+
+The F-intercept means that when the temperature is 0° on the Celsius scale, it is 32° on the Fahrenheit scale.
+
+Graph the equation.
+ We will need to use a larger scale than our usual. Start at the F-intercept (0,32), and then count out the rise of 9 and the run of 5 to get a second point as shown in .
+
+We will need to use a larger scale than our usual. Start at the F-intercept (0,32), and then count out the rise of 9 and the run of 5 to get a second point as shown in .
+
+Calculating Driving Costs
+
+Sam drives a delivery van. The equation C=0.5d+60 models the relation between his weekly cost, C, in dollars and the number of miles, d, that he drives.
+
+Find Sam’s cost for a week when he drives 0 miles.
+
+Find the cost for a week when he drives 250 miles.
+
+Interpret the slope and C-intercept of the equation.
+
+Graph the equation.
+Find Sam’s cost for a week when he drives 0 miles.
+
+ Find C when d = 0.
+ C=0.5(0)+60
+
+ Simplify.
+ C=60
+
+ Sam’s costs are $60 when he drives 0 miles.
+ 
+ Find the cost for a week when he drives 250 miles.
+
+ Find C when d=250.
+ C=0.5(250)+60
+
+ Simplify.
+ C=185
+
+ Sam’s costs are $185 when he drives 250 miles.
+ 
+ Interpret the slope and C-intercept of the equation.
+ y=mx+bC=0.5d+60
+ The slope, 0.5, means that the weekly cost, C, increases by $0.50 when the number of miles driven, d, increases by 1. The C-intercept means that when the number of miles driven is 0, the weekly cost is $60.
+ 
+ Graph the equation ().
+ We’ll need to use a larger scale than usual. Start at the C-intercept (0, 60). To count out the slope m=0.5, we rewrite it as an equivalent fraction that will make our graphing easier.
+ m=0.5=510=50100
+ So to graph the next point go up 50 from the intercept of 60 and then to the right 100. The second point will be (100, 110).
+
+Find Sam’s cost for a week when he drives 0 miles.
+
+ Find C when d = 0.
+ C=0.5(0)+60
+
+ Simplify.
+ C=60
+
+ Sam’s costs are $60 when he drives 0 miles.
+
+C=0.5(0)+60
+C=60
+Sam’s costs are $60 when he drives 0 miles.
+
+Find the cost for a week when he drives 250 miles.
+
+ Find C when d=250.
+ C=0.5(250)+60
+
+ Simplify.
+ C=185
+
+ Sam’s costs are $185 when he drives 250 miles.
+
+C=0.5(250)+60
+C=185
+Sam’s costs are $185 when he drives 250 miles.
+
+Interpret the slope and C-intercept of the equation.
+ y=mx+bC=0.5d+60
+ The slope, 0.5, means that the weekly cost, C, increases by $0.50 when the number of miles driven, d, increases by 1. The C-intercept means that when the number of miles driven is 0, the weekly cost is $60.
+y=mx+bC=0.5d+60
+
+The slope, 0.5, means that the weekly cost, C, increases by $0.50 when the number of miles driven, d, increases by 1. The C-intercept means that when the number of miles driven is 0, the weekly cost is $60.
+
+Graph the equation ().
+ We’ll need to use a larger scale than usual. Start at the C-intercept (0, 60). To count out the slope m=0.5, we rewrite it as an equivalent fraction that will make our graphing easier.
+ m=0.5=510=50100
+ So to graph the next point go up 50 from the intercept of 60 and then to the right 100. The second point will be (100, 110).
+
+We’ll need to use a larger scale than usual. Start at the C-intercept (0, 60). To count out the slope m=0.5, we rewrite it as an equivalent fraction that will make our graphing easier.
+
+So to graph the next point go up 50 from the intercept of 60 and then to the right 100. The second point will be (100, 110).
+
+Check Your Understanding
+
+Key Terms
+
+intercepts of a line
+
+slope
+
+slope-intercept form
+
+Key Concepts
+
+Every linear function can be graphically represented by a unique line that shows all the solutions of the equation.
+
+The points where the graph of a line intersects the x-axis and y-axis are called the intercepts of the line.
+
+Most lines will have one x-intercept and one y-intercept. Only if the line is straight vertical (no y-intercept) or straight horizontal (no x-intercept) will it not have both intercepts. Note that a line that is straight vertical is not a function, but a line that is straight horizontal is a function.
+
+Since any two points determine a straight line, any linear function can be graphed if both intercepts are known.
+
+The slope of a linear function is the ratio of the vertical change divided by the horizontal change. It is often referred to as riserun.
+
+A formula for finding the slope of linear functions is y2−y1x2−x1, for any two points of the linear function (x1,y1) and (x2,y2).
+
+Formulas
+
+To calculate slope (m), use the formula
+ m=riserun, where the rise measures the vertical change and the run measures the horizontal change.
+
+To find the slope of the line between two points (x1,y1) and (x2,y2), use the formula m=y2−y1x2−x1

@@ -1,0 +1,1090 @@
+# m79635
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+The Exponential Distribution (Optional)
+
+The Exponential Distribution (Optional)
+
+The exponential distribution is often concerned with the amount of time until some specific event occurs. For example, the amount of time (beginning now) until an earthquake occurs has an exponential distribution. Other examples include the length, in minutes, of long-distance business telephone calls, and the amount of time, in months, a car battery lasts. It can be shown, too, that the value of the change that you have in your pocket or purse approximately follows an exponential distribution.
+
+Values for an exponential random variable occur in the following way. There are fewer large values and more small values. For example, the amount of money customers spend in one trip to the supermarket follows an exponential distribution. There are more people who spend small amounts of money and fewer people who spend large amounts of money.
+
+Exponential distributions are commonly used in calculations of product reliability, or the length of time a product lasts.
+
+Let X = amount of time (in minutes) a postal clerk spends with his or her customer. The time is known to have an exponential distribution with the average amount of time equal to four minutes.
+X is a continuous random variable since time is measured. It is given that μ = 4 minutes. To do any calculations, you must know m, the decay parameter.
+m=
+1
+μ
+
+. Therefore, 
+
+m=
+1
+4
+
+=0.25.
+
+The standard deviation, σ, is the same as the mean. μ = σ
+
+The distribution notation is X ~ Exp(m). Therefore, X ~ Exp(0.25).
+
+The probability density function is f(x) = me-mx. The number e = 2.71828182846... It is a number that is used often in mathematics. Scientific calculators have the key "ex." If you enter one for x, the calculator will display the value e.
+
+The curve is
+f(x) = 0.25e–0.25x where x is at least zero and m = 0.25.
+
+For example, f(5) = 0.25e(−0.25)(5) = 0.072. The probability that the postal clerk spends five minutes with the customers is 0.072.
+
+The graph is as follows:
+
+Notice the graph is a declining curve. When x = 0,
+f(x) = 0.25e(−0.25)(0) = (0.25)(1) = 0.25 = m. The maximum value on the y-axis is m.
+
+Try It
+
+The amount of time spouses shop for anniversary cards can be modeled by an exponential distribution with the average amount of time equal to eight minutes. Write the distribution, state the probability density function, and graph the distribution.
+X ~ Exp(0.125), f(x) = 0.125e–0.125x,
+
+a. Using the information in , find the probability that a clerk spends four to five minutes with a randomly selected customer.
+
+a. Find P(4 < x < 5). The cumulative distribution function (CDF) gives the area to the left.
+
+NOTE
+
+You can do these calculations easily on a calculator.
+The probability that a postal clerk spends four to five minutes with a randomly selected customer is P(4 < x < 5) = P(x < 5) – P(x < 4) = 0.7135 − 0.6321 = 0.0814.
+
+On the home screen, enter (1 – e^(–0.25*5))–(1–e^(–0.25*4)) or enter e^(–0.25*4) – e^(–0.25*5).
+
+b. Half of all customers are finished within how long? (Find the 50th percentile).
+
+b. Find the 50th percentile.
+P(x < k) = 0.50, k = 2.8 minutes (calculator or computer)
+
+Half of all customers are finished within 2.8 minutes.
+
+You can also do the calculation as follows:
+
+Therefore, 0.50 = 1 − e−0.25k and e−0.25k = 1 − 0.50 = 0.5.
+
+Take natural logs: ln(e–0.25k) = ln(0.50). So, –0.25k = ln(0.50).
+
+Solve for k: 
+
+k=
+
+ln(0.50)
+
+-0.25
+
+=2.8
+
+ minutes. The calculator simplifies the calculation for percentile k. See the following two notes.
+
+Note
+
+A formula for the percentile k is 
+ 
+ k=
+ 
+ ln(1−AreaToTheLeft)
+
+ −m
+
+ where ln is the natural log.
+
+On the home screen, enter ln(1 – 0.50)/–0.25. Press the (–) for the negative.
+
+c. Which is larger, the mean or the median?
+
+c. From Part b, the median or 50th percentile is 2.8 minutes. The theoretical mean is four minutes. The mean is larger.
+
+Try It
+
+The number of days ahead travelers purchase their airline tickets can be modeled by an exponential distribution with the average amount of time equal to 15 days. Find the probability that a traveler will purchase a ticket fewer than 10 days in advance. How many days do half of all travelers wait?
+P(x < 10) = 0.4866
+
+50th percentile = 10.40
+
+Have each class member count the change he or she has in his or her pocket or purse. Your instructor will record the amounts in dollars and cents. Construct a histogram of the data taken by the class. Use five intervals. Draw a smooth curve through the bars. The graph should look approximately exponential. Then calculate the mean.
+
+Let X = the amount of money a student in your class has in his or her pocket or purse.
+
+The distribution for X is approximately exponential with mean, μ = _______ and m = _______. The standard deviation, σ = ________.
+
+Draw the appropriate exponential graph. You should label the x– and y–axes, the decay rate, and the mean. Shade the area that represents the probability that one student has less than $0.40 in his or her pocket or purse. (Shade P(x < 0.40)).
+
+On the average, a certain computer part lasts 10 years. The length of time the computer part lasts is exponentially distributed.
+
+a. What is the probability that a computer part lasts more than seven years?
+
+a. Let x = the amount of time (in years) a computer part lasts.
+
+Find P(x > 7). Draw the graph.
+
+Since P(X < x) = 1 – e–mx then P(X > x) = 1 – (1 – e–mx) = e-mx
+P(x > 7) = e(–0.1)(7) = 0.4966. The probability that a computer part lasts more than seven years is 0.4966.
+
+On the home screen, enter e^(-.1*7).
+
+b. On the average, how long would five computer parts last if they are used one after another?
+
+b. On the average, one computer part lasts 10 years. Therefore, five computer parts, if they are used one right after the other would last, on the average, (5)(10) = 50 years.
+
+c. Eighty percent of computer parts last at most how long?
+
+c. Find the 80th percentile. Draw the graph. Let k = the 80th percentile.
+
+Solve for k:
+
+Eighty percent of the computer parts last at most 16.1 years.
+
+On the home screen, enter 
+
+ ln(1–0.80)
+
+ –0.1
+
+.
+
+d. What is the probability that a computer part lasts between nine and 11 years?
+
+d. Find P(9 < x < 11). Draw the graph.
+P(9 < x < 11) = P(x < 11) – P(x < 9) = (1 – e(–0.1)(11)) – (1 – e(–0.1)(9)) = 0.6671 – 0.5934 = 0.0737. The probability that a computer part lasts between nine and 11 years is 0.0737.
+
+On the home screen, enter e^(–0.1*9) – e^(–0.1*11).
+
+Try It
+
+On average, a pair of running shoes can last 18 months if used every day. The length of time running shoes last is exponentially distributed. What is the probability that a pair of running shoes last more than 15 months? On average, how long would six pairs of running shoes last if they are used one after the other? Eighty percent of running shoes last at most how long if used every day?
+P(x > 15) = 0.4346
+
+Six pairs of running shoes would last 108 months on average.
+
+80th percentile = 28.97 months
+
+Suppose that the length of a phone call, in minutes, is an exponential random variable with decay parameter 
+
+1
+
+12
+
+. If another person arrives at a public telephone just before you, find the probability that you will have to wait more than five minutes. Let X = the length of a phone call, in minutes.
+
+What is m, μ, and σ? The probability that you must wait more than five minutes is _______ .
+m = 
+
+1
+
+12
+μ = 12
+σ = 12
+P(x > 5) = 0.6592
+
+Try It
+
+Suppose that the distance, in miles, that people are willing to commute to work is an exponential random variable with a decay parameter 
+
+1
+
+20
+
+. Let X = the distance people are willing to commute in miles. What is m, μ, and σ? What is the probability that a person is willing to commute more than 25 miles?
+m = 
+
+1
+
+20
+
+, μ = 20, σ = 20, P(x > 25) = 0.2865
+
+The time spent waiting between events is often modeled using the exponential distribution. For example, suppose that an average of 30 customers per hour arrive at a store and the time between arrivals is exponentially distributed.
+
+On average, how many minutes elapse between two successive arrivals?
+
+When the store first opens, how long on average does it take for three customers to arrive?
+
+After a customer arrives, find the probability that it takes less than one minute for the next customer to arrive.
+
+After a customer arrives, find the probability that it takes more than five minutes for the next customer to arrive.
+
+Seventy percent of the customers arrive within how many minutes of the previous customer?
+
+Is an exponential distribution reasonable for this situation?
+
+Since we expect 30 customers to arrive per hour (60 minutes), we expect on average one customer to arrive every two minutes on average.
+
+Since one customer arrives every two minutes on average, it will take six minutes on average for three customers to arrive.
+
+Let X = the time between arrivals, in minutes. By Part a, μ = 2, so m = 
+
+1
+2
+
+ = 0.5.
+Therefore, X ~ Exp(0.5).
+The cumulative distribution function is P(X < x) = 1 – e(–0.5)(x).
+Therefore P(X < 1) = 1 – e(–0.5)(1) ≈ 0.3935.
+
+1 - e^(–0.5) ≈ 0.3935
+
+1 - e^(–0.5) ≈ 0.3935
+P(X > 5) = 1 – P(X < 5) = 1 – (1 – e(−0.5)(5)) = e–2.5 ≈ 0.0821.
+
+ 1 – (1 – e^(– 0.50)(5)) or e^(– 0.50)(5)
+
+We want to solve 0.70 = P(X < x) for x.
+Substituting in the cumulative distribution function gives 0.70 = 1 – e–0.5x, so that e−0.5x = 0.30. Converting this to logarithmic form gives –0.5x = ln(0.30), or 
+ 
+ x=
+ 
+ ln(
+ 
+ 0.30
+ 
+ )
+
+ –0.5
+
+ ≈2.41
+
+ minutes.
+Thus, 70 percent of customers arrive within 2.41 minutes of the previous customer.
+You are finding the 70th percentile k so you can use the formula
+
+ k = 
+ 
+ ln(1–Area_To_The_Left_Of_k)
+
+ (–m)
+
+ k = 
+ 
+ ln(1–0.70)
+
+ (–0.5)
+
+ ≈2.41 minutes
+
+This model assumes that a single customer arrives at a time, which may not be reasonable since people might shop in groups, leading to several customers arriving at the same time. It also assumes that the flow of customers does not change throughout the day, which is not valid if some times of the day are busier than others.
+
+Try It
+
+Suppose that on a certain stretch of highway, cars pass at an average rate of five cars per minute. Assume that the duration of time between successive cars follows the exponential distribution.
+
+On average, how many seconds elapse between two successive cars?
+
+After a car passes by, how long on average will it take for another seven cars to pass by?
+
+Find the probability that after a car passes by, the next car will pass within the next 20 seconds.
+
+Find the probability that after a car passes by, the next car will not pass for at least another 15 seconds.
+
+At a rate of five cars per minute, we expect 
+
+60
+
+5
+
+ = 12 seconds to pass between successive cars on average.
+
+Using the answer from part a, we see that it takes (12)(7) = 84 seconds for the next seven cars to pass by.
+
+Let T = the time (in seconds) between successive cars.
+The mean of T is 12 seconds, so the decay parameter is 
+
+1
+
+12
+
+ and T ~ Exp
+
+1
+
+12
+
+. The cumulative distribution function of T is P(T < t) = 1 – e
+
+-
+t
+
+12
+
+. Then P(T < 20) = 1 –e
+
+-
+
+20
+
+12
+
+ ≈ 0.8111.
+
+P(T > 15) = 1 – P(T < 15) = 1 – (1 – e
+
+-
+
+15
+
+12
+
+) = e
+
+-
+
+15
+
+12
+
+ ≈ 0.2865.
+
+Memorylessness of the Exponential Distribution
+
+In recall that the amount of time between customers is exponentially distributed with a mean of two minutes (X ~ Exp(0.5)). Suppose that five minutes have elapsed since the last customer arrived. Since an unusually long amount of time has now elapsed, it would seem to be more likely for a customer to arrive within the next minute. With the exponential distribution, this is not the case—the additional time spent waiting for the next customer does not depend on how much time has already elapsed since the last customer. This is referred to as the memoryless property. Specifically, the memoryless property says the following
+
+For example, if five minutes have elapsed since the last customer arrived, then the probability that more than one minute will elapse before the next customer arrives is computed by using r = 5 and t = 1 in the foregoing equation.
+
+This is the same probability as that of waiting more than one minute for a customer to arrive after the previous arrival.
+
+The exponential distribution is often used to model the longevity of an electrical or a mechanical device. In , the lifetime of a certain computer part has the exponential distribution with a mean of ten years (X ~ Exp(0.1)). The memoryless property says that knowledge of what has occurred in the past has no effect on future probabilities. In this case it means that an old part is not any more likely to break down at any particular time than a brand new part. In other words, the part stays as good as new until it suddenly breaks. For example, if the part has already lasted ten years, then the probability that it lasts another seven years is P(X > 17|X > 10) = P(X > 7) = 0.4966.
+
+Refer to where the time a postal clerk spends with his or her customer has an exponential distribution with a mean of four minutes. Suppose a customer has spent four minutes with a postal clerk. What is the probability that he or she will spend at least an additional three minutes with the postal clerk?
+
+The decay parameter of X is m = 
+
+1
+4
+
+= 0.25, so X ~ Exp(0.25).
+
+The cumulative distribution function is P(X < x) = 1 – e–0.25x.
+
+We want to find P(X > 7|X > 4). The memoryless property says that P(X > 7|X > 4) = P (X > 3), so we just need to find the probability that a customer spends more than three minutes with a postal clerk.
+
+This is P(X > 3) = 1 – P (X < 3) = 1 – (1 – e–0.25⋅3) = e–0.75 ≈ 0.4724.
+
+1–(1–e^(–0.25*3)) = e^(–0.25*3).
+
+Try It
+
+Suppose that the longevity of a light bulb is exponential with a mean lifetime of eight years. If a bulb has already lasted 12 years, find the probability that it will last a total of more than 19 years.
+
+Let T = the lifetime of the light bulb. Then T ~ Exp
+
+(
+
+1
+8
+
+)
+
+.
+
+The cumulative distribution function is P (T < t) = 1 − 
+
+e
+
+-
+t
+8
+
+We need to find P(T > 19|T = 12). By the memoryless property,
+P(T>19|T = 12) = P(T > 7) = 1 – P(T < 7) = 1 – (1 – e–7/8)= e-7/8 ≈ 0.4169.
+
+1 – (1 – e^(–7/8)) = e^(–7/8).
+
+Relationship Between the Poisson and the Exponential Distribution
+
+There is an interesting relationship between the exponential distribution and the Poisson distribution. Suppose that the time that elapses between two successive events follows the exponential distribution with a mean of μ units of time. Also assume that these times are independent, meaning that the time between events is not affected by the times between previous events. If these assumptions hold, then the number of events per unit time follows a Poisson distribution with mean λ = 1/μ. Recall from the chapter on Discrete Random Variables that if X has the Poisson distribution with mean λ, then 
+
+P(X=k)=
+
+λ
+k
+
+e
+
+−λ
+
+k!
+
+. Conversely, if the number of events per unit time follows a Poisson distribution, then the amount of time between events follows the exponential distribution. (k! = k*(k–1*)(k–2)*(k–3)…3*2*1)
+
+Suppose X has the Poisson distribution with mean λ. Compute P(X = k) by entering 2nd, VARS(DISTR), C: poissonpdf(λ, k). To compute P(X ≤ k), enter 2nd, VARS (DISTR), D:poissoncdf(λ, k).
+
+At a police station in a large city, calls come in at an average rate of four calls per minute. Assume that the time that elapses from one call to the next has the exponential distribution. Take note that we are concerned only with the rate at which calls come in, and we are ignoring the time spent on the phone. We must also assume that the times spent between calls are independent. This means that a particularly long delay between two calls does not mean that there will be a shorter waiting period for the next call. We may then deduce that the total number of calls received during a time period has the Poisson distribution.
+
+Find the average time between two successive calls.
+
+Find the probability that after a call is received, the next call occurs in less than 10 seconds.
+
+Find the probability that exactly five calls occur within a minute.
+
+Find the probability that fewer than five calls occur within a minute.
+
+Find the probability that more than 40 calls occur in an eight-minute period.
+
+On average four calls occur per minute, so 15 seconds, or 
+
+15
+
+60
+
+ = 0.25 minutes occur between successive calls on average.
+
+Let T = time elapsed between calls. From Part a, μ = 0.25, so m = 
+
+1
+
+0.25
+
+ = 4. Thus, T ~ Exp(4).
+The cumulative distribution function is P(T < t) = 1 – e–4t.
+The probability that the next call occurs in less than 10 seconds (10 seconds = 1/6 minute) is 
+
+P(
+
+T < 
+1
+6
+
+)=1 –
+ e
+
+(–4)(
+1
+6
+
+)
+
+≈0.4866.
+
+Let X = the number of calls per minute. As previously stated, the number of calls per minute has a Poisson distribution, with a mean of four calls per minute.
+Therefore, X ~ Poisson(4), and so P(X = 5) = 
+
+4
+5
+
+e
+
+−4
+
+5!
+
+ ≈ 0.1563. (5! = (5)(4)(3)(2)(1))
+
+poissonpdf(4, 5) = 0.1563
+
+poissonpdf(4, 5) = 0.1563
+
+Keep in mind that X must be a whole number, so P(X < 5) = P(X ≤ 4).
+To compute this, we could take P(X = 0) + P(X = 1) + P(X = 2) + P(X = 3) + P(X = 4).
+Using technology, we see that P(X ≤ 4) = 0.6288.
+
+poisssoncdf(4, 4) = 0.6288
+
+poisssoncdf(4, 4) = 0.6288
+
+Let Y = the number of calls that occur during an eight-minute period.
+Since there is an average of four calls per minute, there is an average of (8)(4) = 32 calls during each eight minute period.
+Hence, Y ~ Poisson(32). Therefore, P(Y > 40) = 1 – P(Y ≤ 40) = 1 – 0.9294 = 0.0706.
+
+1 – poissoncdf(32, 40). = 0.0706
+
+1 – poissoncdf(32, 40). = 0.0706
+
+Try It
+
+In a small city, the number of automobile accidents occur with a Poisson distribution at an average of three per week.
+
+Calculate the probability that at most two accidents occur in any given week.
+
+What is the probability that there are at least two weeks between any two accidents?
+
+Let X = the number of accidents per week, so that X ~ Poisson(3). We need to find P(X ≤ 2) ≈ 0.4232
+
+poissoncdf(3, 2)
+
+poissoncdf(3, 2)
+
+Let T = the time (in weeks) between successive accidents.
+Since the number of accidents occurs with a Poisson distribution, the time between accidents follows the exponential distribution.
+If there are an average of three per week, then on average there is μ = 
+
+1
+3
+
+ of a week between accidents, and the decay parameter is m = 
+
+1
+
+(
+
+1
+3
+
+)
+
+= 3.
+To find the probability that there are at least two weeks between two accidents, P(T > 2) = 1 – P(T < 2) = 1 – (1 – e(–3)(2)) = e–6 ≈ 0.0025.
+
+e^(-3*2).
+
+e^(-3*2).
+
+Chapter Review
+
+If X has an exponential distribution with mean μ, then the decay parameter is m = 
+
+1
+μ
+
+, and we write X ~ Exp(m) where x ≥ 0 and m > 0 . The probability density function of X is f(x) = me-mx (or equivalently 
+ 
+ f(x)=
+ 1
+ μ
+
+ e
+ 
+ −x/μ
+
+. The cumulative distribution function of X is P(X ≤ x) = 1 – e–mx.
+
+The exponential distribution has the memoryless property, which says that future probabilities do not depend on any past information. Mathematically, it says that P(X > x + k|X > x) = P(X > k).
+
+If T represents the waiting time between events, and if T ~ Exp(λ), then the number of events X per unit time follows the Poisson distribution with mean λ. The probability density function of X is 
+
+P(X=k)=
+
+λ
+k
+
+e
+
+−k
+
+k!
+
+. This may be computed using a TI-83, 83+, 84, 84+ calculator with the command poissonpdf(λ, k). The cumulative distribution function P(X ≤ k) may be computed using the TI-83, 83+,84, 84+ calculator with the command poissoncdf(λ, k).
+
+Formula Review
+
+Exponential: X ~ Exp(m) where m = the decay parameter
+
+pdf: f(x) = me(–mx) where x ≥ 0 and m > 0
+
+cdf: P(X ≤ x) = 1 – e(–mx)
+
+mean µ = 
+
+1
+m
+
+standard deviation σ = µ
+
+percentile k: k = 
+
+ ln(1−AreaToTheLeftOfk)
+
+ (−m)
+
+Additionally
+P(X > x) = e(–mx)
+P(a < X < b) = e(–ma) – e(–mb)
+P(X > x) = e(–mx)
+P(a < X < b) = e(–ma) – e(–mb)
+
+Memoryless property: P(X > x + k|X > x) = P (X > k)
+
+Poisson probability: 
+
+ P(X=k)=
+
+λ
+k
+
+e
+
+−k
+
+k!
+
+ with mean λ
+k! = k*(k−1)*(k−2)*(k−3)*…3*2*1
+
+References
+
+Baseball-Reference.com. (2013). No-hitter. Retrieved from http://www.baseball-reference.com/bullpen/No-hitter
+
+U.S. Census Bureau. (n.d.). Retrieved from https://www.census.gov/
+
+World Earthquakes. (2013). Earthquake data for Papua New Guinea. Retrieved from http://www.world-earthquakes.com/
+
+Zhou, Rick. (2013). Exponential distribution lecture slides. Retrieved from www.public.iastate.edu/~riczw/stat330s11/lecture/lec13.pdf
+Use the following information to answer the next 10 exercises. A customer service representative must spend different amounts of time with each customer to resolve various concerns. The amount of time spent with each customer can be modeled by the following distribution: X ~ Exp(0.2)
+
+What type of distribution is this?
+
+Are outcomes equally likely in this distribution? Why or why not?
+
+No, outcomes are not equally likely. In this distribution, more people require a little bit of time, and fewer people require a lot of time, so it is more likely that someone will require less time.
+
+What is m? What does it represent?
+
+What is the mean?
+
+five
+
+What is the standard deviation?
+
+State the probability density function.
+f(x) = 0.2e–0.2x
+
+Graph the distribution.
+
+Find P(2 < x < 10).
+
+0.5350
+
+Find P(x > 6).
+
+Find the 70th percentile.
+
+6.02
+Use the following information to answer the next eight exercises. A distribution is given as X ~ Exp(0.75).
+
+What is m?
+
+What is the probability density function?
+f(x) = 0.75e–0.75x
+
+What is the cumulative distribution function?
+
+Draw the distribution.
+
+Find P(x < 4).
+
+Find the 30th percentile.
+
+0.4756
+
+Find the median.
+
+Which is larger, the mean or the median?
+
+The mean is larger. The mean is 
+
+1
+m
+
+=
+1
+
+0.75
+
+≈1.33
+
+, which is greater than 0.9242.
+Use the following information to answer the next eight exercises. Carbon-14 is a radioactive element with a half-life of about 5,730 years. Carbon-14 is said to decay exponentially. The decay rate is 0.000121. We start with one gram of carbon-14. We are interested in the time (years) it takes to decay carbon-14.
+
+What is being measured here?
+
+Are the data discrete or continuous?
+
+continuous
+
+In words, define the random variable X.
+
+What is the decay rate (m)?
+m = 0.000121
+
+The distribution for X is ______.
+
+Find the amount (percent of one gram) of carbon-14 lasting less than 5,730 years. The question means that you need to find P(x < 5,730).
+
+Sketch the graph, and shade the area of interest.
+
+Find the probability. P(x < 5,730) = __________
+
+Check student's solution
+P(x < 5,730) = 0.5001
+
+Find the percentage of carbon-14 lasting longer than 10,000 years.
+
+Sketch the graph, and shade the area of interest.
+
+Find the probability. P(x > 10,000) = ________
+
+Thirty percent of carbon-14 will decay within how many years?
+
+Sketch the graph, and shade the area of interest.
+
+Find the value k such that P(x < k) = 0.30.
+
+Check student's solution
+k = 2947.73
+
+Homework
+
+Suppose that the length of long-distance phone calls, measured in minutes, is known to have an exponential distribution with the average length of a call equal to eight minutes.
+
+Define the random variable. X = ________________.
+
+Is X continuous or discrete?
+X ~ ________
+μ = ________
+σ = ________
+
+Draw a graph of the probability distribution. Label the axes.
+
+Find the probability that a phone call lasts less than nine minutes.
+
+Find the probability that a phone call lasts more than nine minutes.
+
+Find the probability that a phone call lasts between seven and nine minutes.
+
+If 25 phone calls are made one after another, on average, what would you expect the total to be? Why?
+
+Suppose that the useful life of a particular car battery, measured in months, decays with parameter 0.025. We are interested in the life of the battery.
+
+Define the random variable. X = _________________________________.
+
+Is X continuous or discrete?
+X ~ ________
+
+On average, how long would you expect one car battery to last?
+
+On average, how long would you expect nine car batteries to last, if they are used one after another?
+
+Find the probability that a car battery lasts more than 36 months.
+
+Seventy percent of the batteries last at least how long?
+X = the useful life of a particular car battery, measured in months.
+X is continuous.
+X ~ Exp(0.025)
+
+40 months
+
+360 months
+
+0.4066
+
+14.27
+
+The percent of persons (ages five and older) in each state who speak a language at home other than English is approximately exponentially distributed with a mean of 9.848. Suppose we randomly pick a state.
+
+Define the random variable. X = _________________________________.
+
+Is X continuous or discrete?
+X ~ ________
+μ = ________
+σ = ________
+
+Draw a graph of the probability distribution. Label the axes.
+
+Find the probability that percentage is less than 12.
+
+Find the probability that percentage is between eight and 14.
+
+The percent of all individuals living in the United States who speak a language at home other than English is 13.8.
+
+Why is this number different from 9.848 percent?
+What would make this number higher than 9.848 percent?
+
+Why is this number different from 9.848 percent?
+
+What would make this number higher than 9.848 percent?
+
+The time (in years) after reaching age 60 that it takes an individual to retire is approximately exponentially distributed with a mean of about five years. Suppose we randomly pick one retired individual. We are interested in the time after age 60 to retirement.
+
+Define the random variable. X = _________________________________.
+
+Is X continuous or discrete?
+X ~ = ________
+μ = ________
+σ = ________
+
+Draw a graph of the probability distribution. Label the axes.
+
+Find the probability that the person retired after age 70.
+
+Do more people retire before age 65 or after age 65?
+
+In a room of 1,000 people over age 80, how many do you expect will not have retired yet?
+X = the time (in years) after reaching age 60 that it takes an individual to retire
+X is continuous.
+X ~ Exp
+
+(
+
+1
+5
+
+)
+
+five
+
+five
+
+Check student’s solution.
+
+0.1353
+
+before
+
+18.3
+
+The cost of all maintenance for a car during its first year is approximately exponentially distributed with a mean of $150.
+
+Define the random variable. X = _________________________________.
+X ~ = ________
+μ = ________
+σ = ________
+
+Draw a graph of the probability distribution. Label the axes.
+
+Find the probability that a car required over $300 for maintenance during its first year.
+Use the following information to answer the next three exercises. The average lifetime of a certain new cell phone is three years. The manufacturer will replace any cell phone failing within two years of the date of purchase. The lifetime of these cell phones is known to follow an exponential distribution.
+
+What is the decay rate?
+
+0.3333
+
+0.5000
+
+2
+
+3
+
+a
+
+What is the probability that a phone will fail within two years of the date of purchase?
+
+0.8647
+
+0.4866
+
+0.2212
+
+0.9997
+
+What is the median lifetime of these phones (in years)?
+
+0.1941
+
+1.3863
+
+2.0794
+
+5.5452
+
+c
+
+Let X ~ Exp(0.1).
+
+decay rate = ________
+μ = ________
+
+Graph the probability distribution function.
+
+On the graph, shade the area corresponding to P(x < 6), and find the probability.
+
+Sketch a new graph, shade the area corresponding to P(3 < x < 6), and find the probability.
+
+Sketch a new graph, shade the area corresponding to P(x < 7), and find the probability.
+
+Sketch a new graph, shade the area corresponding to the 40th percentile and find the value.
+
+Find the average value of x.
+
+Suppose that the longevity of a light bulb is exponential with a mean lifetime of eight years.
+
+Find the probability that a light bulb lasts less than one year.
+
+Find the probability that a light bulb lasts between six and 10 years.
+
+Seventy percent of all light bulbs last at least how long?
+
+A company decides to offer a warranty to give refunds to light bulbs whose lifetime is among the lowest two percent of all bulbs. To the nearest month, what should be the cutoff lifetime for the warranty to take place?
+
+If a light bulb has lasted seven years, what is the probability that it fails within the 8th year?
+
+Let T = the life time of a light bulb.
+
+The decay parameter is m = 1/8, and T ~ Exp(1/8). The cumulative distribution function is 
+ 
+ P(T<t)=1−
+ e
+ 
+ −
+ t
+ 8
+
+Therefore, P(T < 1) = 1 – e
+ 
+ –
+ 1
+ 8
+
+ ≈ 0.1175.
+
+We want to find P(6 < t < 10).
+ To do this, P(6 < t < 10) – P(t < 6)
+ = 
+ 
+ =(
+ 
+ 1–
+ e
+ 
+ –
+ 1
+ 8
+ 
+ *10
+
+ )–(
+ 
+ 1–
+ e
+ 
+ –
+ 1
+ 8
+ 
+ *6
+
+ )
+ 
+ ≈ 0.7135 – 0.5276 = 0.1859
+
+We want to find 0.70 
+ 
+ =P(T>t)=1–(
+ 
+ 1–
+ e
+ 
+ −
+ t
+ 8
+
+ )=
+ e
+ 
+ −
+ t
+ 8
+
+ .
+
+Solving for t, e
+ 
+ –
+ t
+ 8
+
+ = 0.70, so 
+ 
+ –
+ t
+ 8
+
+ = ln(0.70), and t = –8ln(0.70) ≈ 2.85 years
+Or use t = 
+
+ ln(area_to_the_right)
+
+ (–m)
+
+ =
+ 
+ ln(0.70)
+
+ –
+ 1
+ 8
+
+ ≈2.85 years
+ 
+.
+
+We want to find 0.02 = P(T < t) = 1 – e
+ 
+ –
+ t
+ 8
+
+.
+Solving for t, e
+ 
+ –
+ t
+ 8
+
+ = 0.98, so 
+ 
+ –
+ t
+ 8
+
+ = ln(0.98), and t = –8ln(0.98) ≈ 0.1616 years, or roughly two months.
+The warranty should cover light bulbs that last less than 2 months.
+Or use 
+
+ ln(area_to_the_right)
+
+ (–m)
+
+ =
+ 
+ ln(1–0.2)
+
+ –
+ 1
+ 8
+
+ = 0.1616.
+
+We must find P(T < 8|T > 7).
+Notice that by the rule of complement events, P(T < 8|T > 7) = 1 – P(T > 8|T > 7).
+By the memoryless property (P(X > r + t|X > r) = P(X > t)).
+So P(T > 8|T > 7) = P(T > 1) = 
+ 
+ 1–(
+ 
+ 1–
+ e
+ 
+ –
+ 1
+ 8
+
+ )=
+ e
+ 
+ –
+ 1
+ 8
+
+ ≈0.8825
+
+Therefore, P(T < 8|T > 7) = 1 – 0.8825 = 0.1175.
+
+At a 911 call center, calls come in at an average rate of one call every two minutes. Assume that the time that elapses from one call to the next has the exponential distribution.
+
+On average, how much time occurs between five consecutive calls?
+
+Find the probability that after a call is received, it takes more than three minutes for the next call to occur.
+
+Ninety-percent of all calls occur within how many minutes of the previous call?
+
+Suppose that two minutes have elapsed since the last call. Find the probability that the next call will occur within the next minute.
+
+Find the probability that fewer than 20 calls occur wit
+[truncated]

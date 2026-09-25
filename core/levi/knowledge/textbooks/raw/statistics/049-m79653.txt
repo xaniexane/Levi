@@ -1,0 +1,229 @@
+# m79653
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Introduction
+
+Introduction
+
+Chapter Objectives
+
+By the end of this chapter, the student should be able to do the following:
+
+Calculate and interpret confidence intervals for estimating a population mean and a population proportion
+
+Interpret the Student's t probability distribution as the sample size changes
+
+Discriminate between problems applying the normal and the Student's t-distributions
+
+Calculate the sample size required to estimate a population mean and a population proportion, given a desired confidence level and margin of error
+
+Suppose you were trying to determine the mean rent of a two-bedroom apartment in your town. You might look in the classified section of the newspaper, write down several rents listed, and average them together. You would have obtained a point estimate of the true mean. If you are trying to determine the percentage of times you make a basket when shooting a basketball, you might count the number of shots you make and divide that by the number of shots you attempt. In this case, you would have obtained a point estimate for the true proportion.
+
+We use sample data to make generalizations about an unknown population. This part of statistics is called inferential statistics. The sample data help us to make an estimate of a population parameter. We realize that the point estimate is most likely not the exact value of the population parameter, but close to it. After calculating point estimates, we construct interval estimates, called confidence intervals.
+
+In this chapter, you will learn to construct and interpret confidence intervals. You will also learn a new distribution, the Student's-t, and how it is used with those intervals. Throughout the chapter, it is important to keep in mind that the confidence interval is a random variable. It is the population parameter that is fixed.
+
+If you worked in the marketing department of an entertainment company, you might be interested in the mean number of songs a consumer downloads a month from an internet music store. If so, you could conduct a survey and calculate the sample mean, 
+ 
+ x
+ ¯
+ 
+ ,
+ and the sample standard deviation, s. You would use 
+ 
+ x
+ ¯
+
+ to estimate the population mean and s to estimate the population standard deviation. The sample mean, 
+ 
+ x
+ ¯
+
+, is the point estimate for the population mean, μ. The sample standard deviation, s, is the point estimate for the population standard deviation, σ.
+
+Each instance of 
+ 
+ x
+ ¯
+
+ and s is called a statistic.
+
+A confidence interval is another type of estimate but, instead of being just one number, it is an interval of numbers. The interval of numbers is a range of values calculated from a given set of sample data. The confidence interval is likely to include an unknown population parameter.
+
+Suppose, for the internet music example, we do not know the population mean, μ, but we do know that the population standard deviation is σ = 1 and our sample size is 100. Then, by the central limit theorem, the standard deviation for the sample mean is
+
+The Empirical Rule, which applies to bell-shaped distributions, says that in approximately 95 percent of the samples, the sample mean, 
+ 
+ x
+ ¯
+
+, will be within two standard deviations of the population mean, μ. For our internet music example, two standard deviations would be calculated as (2)(0.1) = 0.2. The sample mean, 
+ 
+ x
+ ¯
+ 
+ ,
+ is likely to be within 0.2 units of μ.
+
+In this example, we do not know the true population mean μ (because we do not have information from all the internet music users!), but we can compute the sample mean 
+
+ x
+ ¯
+
+ based on our sample of 100 individuals. Because the sample mean is likely to be within 0.2 units of the true population mean 95 percent of the times that we take a sample of 100 users, we can say with 95 percent confidence that μ is within 0.2 units of 
+
+ x
+ ¯
+
+. In other words, μ is somewhere between 
+
+ x
+ ¯
+ 
+ −0.2
+
+ and 
+
+ x
+ ¯
+ 
+ +0.2
+
+.
+
+Suppose that from the sample of 100 internet music customers, we compute a sample mean download of 
+
+ x
+ ¯
+ 
+ =2
+
+ songs per month. Since we know that the population standard deviation is 
+
+ σ−1
+
+, according to the central limit theorem, the standard deviation for the sample means is 
+
+ σ=
+ 1
+
+ 100
+
+ =0.1
+
+.
+
+We know that there is a 95 percent chance that the true population mean value μ is between two standard deviations from the sample mean. That is, with 95 percent confidence we can say that μ is between 
+
+ x
+ ¯
+ 
+ −2×
+ σ
+
+ n
+
+ and 
+
+ x
+ ¯
+ 
+ −2×
+ σ
+
+ n
+
+.
+
+Replacing the symbols for their values in this example, we say that we are 95 percent confident that the true average number of songs downloaded from an internet music store per month is between 
+
+ x
+ ¯
+ 
+ −2×
+ σ
+
+ n
+
+ =2−2×
+ σ
+
+ 100
+
+ =2−0.2=1.8, and
+The 95 percent confidence interval for μ is (1.8, 2.2).
+
+The 95 percent confidence interval implies two possibilities. Either the interval (1.8, 2.2) contains the true mean, μ, or our sample produced an 
+ 
+ x
+ ¯
+
+ that is not within 0.2 units of the true mean μ. The second possibility happens for only 5 percent of all the samples (95–100 percent).
+
+Remember that a confidence interval is created for an unknown population parameter like the population mean, μ. Confidence intervals for some parameters have the form
+(point estimate – margin of error, point estimate + margin of error).
+
+The margin of error depends on the confidence level or percentage of confidence and the standard error of the mean.
+
+When you read newspapers and journals, you might notice that some reports use the phrase margin of error. Other reports will not use that phrase, but include a confidence interval as the point estimate plus or minus the margin of error. Those are two ways of expressing the same concept.
+
+Note
+
+Although the text covers only symmetrical confidence intervals, there are non-symmetrical confidence intervals (for example, a confidence interval for the standard deviation).
+
+Have your instructor record the number of meals each student in your class eats out in a week. Assume that the standard deviation is known to be three meals. Construct an approximate 95 percent confidence interval for the true mean number of meals students eat out each week.
+
+Calculate the sample mean.
+
+Let σ = 3 and n = the number of students surveyed.
+
+Construct the interval. 
+
+ (
+
+ x
+ −
+ 
+ −2(
+
+ σ
+
+ n
+
+ )
+ 
+ ),(
+
+ x
+ −
+ 
+ +2(
+
+ σ
+
+ n
+
+ )
+ 
+ )
+
+We say we are approximately 95 percent confident that the true mean number of meals that students eat out in a week is between __________ and ___________.
+
+an interval estimate for an unknown population parameter. This depends on the following:
+
+the desired confidence level,
+information that is known about the distribution (for example, known standard deviation), and
+the sample and its size.
+the desired confidence level,
+
+information that is known about the distribution (for example, known standard deviation), and
+
+the sample and its size.
+
+also called statistical inference or inductive statistics; this facet of statistics deals with estimating a population parameter based on a sample statistic
+For example, if four out of the 100 calculators sampled are defective, we might infer that 4 percent of the production is defective.
+a numerical characteristic of a population
+a single number computed from a sample and used to estimate a population parameter

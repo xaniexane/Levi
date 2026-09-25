@@ -1,0 +1,547 @@
+# m42540
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Relativistic Addition of Velocities
+
+Relativistic Addition of Velocities
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Calculate relativistic velocity addition.
+
+Explain when relativistic velocity addition should be used instead of classical addition of velocities.
+
+Calculate relativistic Doppler shift.
+
+If you’ve ever seen a kayak move down a fast-moving river, you know that remaining in the same place would be hard. The river current pulls the kayak along. Pushing the oars back against the water can move the kayak forward in the water, but that only accounts for part of the velocity. The kayak’s motion is an example of classical addition of velocities. In classical physics, velocities add as vectors. The kayak’s velocity is the vector sum of its velocity relative to the water and the water’s velocity relative to the riverbank.
+
+Classical Velocity Addition
+
+For simplicity, we restrict our consideration of velocity addition to one-dimensional motion. Classically, velocities add like regular numbers in one-dimensional motion. (See .) Suppose, for example, a girl is riding in a sled at a speed 1.0 m/s relative to an observer. She throws a snowball first forward, then backward at a speed of 1.5 m/s relative to the sled. We denote direction with plus and minus signs in one dimension; in this example, forward is positive. Let v be the velocity of the sled relative to the Earth, u the velocity of the snowball relative to the Earth-bound observer, and u′ the velocity of the snowball relative to the sled.
+
+Classical Velocity Addition
+
+Thus, when the girl throws the snowball forward, u=1.0 m/s+1.5 m/s=2.5 m/s. It makes good intuitive sense that the snowball will head towards the Earth-bound observer faster, because it is thrown forward from a moving vehicle. When the girl throws the snowball backward, u=1.0 m/s+(−1.5 m/s)=−0.5 m/s. The minus sign means the snowball moves away from the Earth-bound observer.
+
+Relativistic Velocity Addition
+
+The second postulate of relativity (verified by extensive experimental observation) says that classical velocity addition does not apply to light. Imagine a car traveling at night along a straight road, as in . If classical velocity addition applied to light, then the light from the car’s headlights would approach the observer on the sidewalk at a speed u=v+c. But we know that light will move away from the car at speed c relative to the driver of the car, and light will move towards the observer on the sidewalk at speed c, too.
+
+Relativistic Velocity Addition
+
+Either light is an exception, or the classical velocity addition formula only works at low velocities. The latter is the case. The correct formula for one-dimensional relativistic velocity addition is
+
+where v is the relative velocity between two observers, u is the velocity of an object relative to one observer, and u′ is the velocity relative to the other observer. (For ease of visualization, we often choose to measure u in our reference frame, while someone moving at v relative to us measures u′.) Note that the term
+
+vu′c2 becomes very small at low velocities, and
+u=v+u′1+vu′c2 gives a result very close to classical velocity addition. As before, we see that classical velocity addition is an excellent approximation to the correct relativistic formula for small velocities. No wonder that it seems correct in our experience.
+
+Showing that the Speed of Light towards an Observer is Constant (in a Vacuum): The Speed of Light is the Speed of Light
+
+Suppose a spaceship heading directly towards the Earth at half the speed of light sends a signal to us on a laser-produced beam of light. Given that the light leaves the ship at speed c as observed from the ship, calculate the speed at which it approaches the Earth.
+Strategy
+
+Strategy
+
+Because the light and the spaceship are moving at relativistic speeds, we cannot use simple velocity addition. Instead, we can determine the speed at which the light approaches the Earth using relativistic velocity addition.
+Solution
+
+Solution
+
+Identify the knowns. v=0.500c; u′=c
+
+Identify the unknown. u
+
+Choose the appropriate equation. u=v+u′1+vu′c2
+
+Plug the knowns into the equation.
+ u=v+u′1+vu′c2
+
+=0.500c+c1+(0.500c)(c)c2
+
+=(0.500+1)c1+0.500c2c2
+
+=1.500c1+0.500
+
+=1.500c1.500
+
+=c
+Discussion
+
+Discussion
+
+Relativistic velocity addition gives the correct result. Light leaves the ship at speed c and approaches the Earth at speed c. The speed of light is independent of the relative motion of source and observer, whether the observer is on the ship or Earth-bound.
+
+Velocities cannot add to greater than the speed of light, provided that v is less than c and u′ does not exceed c. The following example illustrates that relativistic velocity addition is not as symmetric as classical velocity addition.
+
+Comparing the Speed of Light towards and away from an Observer: Relativistic Package Delivery
+
+Suppose the spaceship in the previous example is approaching the Earth at half the speed of light and shoots a canister at a speed of 0.750c. (a) At what velocity will an Earth-bound observer see the canister if it is shot directly towards the Earth? (b) If it is shot directly away from the Earth? (See .)
+Strategy
+
+Strategy
+
+Because the canister and the spaceship are moving at relativistic speeds, we must determine the speed of the canister by an Earth-bound observer using relativistic velocity addition instead of simple velocity addition.
+Solution for (a)
+
+Solution for (a)
+
+Identify the knowns. v=0.500c;
+
+u′=0.750c
+
+Identify the unknown. u
+
+Choose the appropriate equation. u=v+u′1+vu′c2
+
+Plug the knowns into the equation.
+
+ u
+ =
+
+ v+u′
+
+ 1
+ +
+
+ v
+ 
+ u
+′
+
+ c
+
+ 2
+
+ =
+
+ 0.500
+
+ c +
+
+ 0.750
+ c
+
+ 1
+ +
+
+ (
+ 0.500
+ c
+ )
+ (
+ 0.750
+ c
+ )
+
+ c
+
+ 2
+
+ =
+
+ 1.250
+ c
+
+ 1
+ +
+ 0.375
+
+ =
+ 0.909
+ c
+Solution for (b)
+
+Solution for (b)
+
+Identify the knowns. v=0.500c; u′=−0.750c
+
+Identify the unknown. u
+
+Choose the appropriate equation. u=v+u′1+vu′c2
+
+Plug the knowns into the equation.
+
+ u=
+ 
+ v+u′
+ 
+ 1
+ +
+
+ v
+
+ u′
+
+ c
+
+ 2
+
+ =
+
+ 0.500
+ 
+ c +
+
+ (
+ −
+ 0.750
+ c
+ 
+ )
+
+ 1
+ +
+
+ (
+ 0.500
+ c
+ )
+ 
+ (
+ −
+ 0.750
+ 
+ c
+ )
+
+ c
+
+ 2
+
+ =
+
+ −
+ 0.250
+ 
+ c
+
+ 1
+ −
+ 0.375
+
+ =
+ −
+ 0.400
+ c
+Discussion
+
+Discussion
+
+The minus sign indicates velocity away from the Earth (in the opposite direction from v), which means the canister is heading towards the Earth in part (a) and away in part (b), as expected. But relativistic velocities do not add as simply as they do classically. In part (a), the canister does approach the Earth faster, but not at the simple sum of 1.250c. The total velocity is less than you would get classically. And in part (b), the canister moves away from the Earth at a velocity of −0.400c, which is faster than the −0.250c you would expect classically. The velocities are not even symmetric. In part (a) the canister moves 0.409c faster than the ship relative to the Earth, whereas in part (b) it moves 0.900c slower than the ship.
+
+Doppler Shift
+
+Although the speed of light does not change with relative velocity, the frequencies and wavelengths of light do. First discussed for sound waves, a Doppler shift occurs in any wave when there is relative motion between source and observer.
+
+Relativistic Doppler Effects
+
+The observed wavelength of electromagnetic radiation is longer (called a red shift) than that emitted by the source when the source moves away from the observer and shorter (called a blue shift) when the source moves towards the observer.
+
+In the Doppler equation, λobs is the observed wavelength, λs is the source wavelength, and u is the relative velocity of the source to the observer. The velocity u is positive for motion away from an observer and negative for motion toward an observer. In terms of source frequency and observed frequency, this equation can be written
+
+Notice that the – and + signs are different than in the wavelength equation.
+
+Career Connection: Astronomer
+
+If you are interested in a career that requires a knowledge of special relativity, there’s probably no better connection than astronomy. Astronomers must take into account relativistic effects when they calculate distances, times, and speeds of black holes, galaxies, quasars, and all other astronomical objects. To have a career in astronomy, you need at least an undergraduate degree in either physics or astronomy, but a Master’s or doctoral degree is often required. You also need a good background in high-level mathematics.
+
+Calculating a Doppler Shift: Radio Waves from a Receding Galaxy
+
+Suppose a galaxy is moving away from the Earth at a speed 
+
+ 0.825
+ c
+
+ . It emits radio waves with a wavelength of 0.525m. What wavelength would we detect on the Earth?
+Strategy
+
+Strategy
+
+Because the galaxy is moving at a relativistic speed, we must determine the Doppler shift of the radio waves using the relativistic Doppler shift instead of the classical Doppler shift.
+Solution
+
+Solution
+
+Identify the knowns. 
+
+ u=
+
+ 0
+ .
+ 825
+ c
+
+ ; λs=0.525m
+
+Identify the unknown. λobs
+
+Choose the appropriate equation. λobs=λs1+uc1−uc
+
+Plug the knowns into the equation.
+
+λobs
+=
+
+λs1+uc1−uc
+
+=
+
+(0.525 m)1+0.825 cc1−0.825 cc
+
+=
+1.70 m.
+Discussion
+
+Discussion
+
+Because the galaxy is moving away from the Earth, we expect the wavelengths of radiation it emits to be redshifted. The wavelength we calculated is 1.70 m, which is redshifted from the original wavelength of 0.525 m.
+
+The relativistic Doppler shift is easy to observe. This equation has everyday applications ranging from Doppler-shifted radar velocity measurements of transportation to Doppler-radar storm monitoring. In astronomical observations, the relativistic Doppler shift provides velocity information such as the motion and distance of stars.
+
+Check Your Understanding
+
+Suppose a space probe moves away from the Earth at a speed 
+
+ 0
+ .
+ 350
+ c
+
+ . It sends a radio wave message back to the Earth at a frequency of 1.50 GHz. At what frequency is the message received on the Earth?
+
+Test Prep for AP Courses
+
+What happens when velocities comparable to the speed of light are involved in an observation?
+
+Newton’s second law of motion, 
+ 
+ F=ma
+
+, governs the motion of the object.
+
+Newton’s second law of motion, 
+ 
+ F=ma
+
+, no longer governs the dynamics of the object.
+
+Such velocities cannot be determined mathematically.
+
+None of the above
+
+How is the relativistic Doppler effect different from the classical Doppler effect?
+
+The relativistic Doppler effect takes into account the special relativity concept of time dilation and also does not require a medium of propagation to be used as a point of reference (light does not require a medium for propagation).
+
+Section Summary
+
+With classical velocity addition, velocities add like regular numbers in one-dimensional motion: u=v+u′, where v is the velocity between two observers,
+
+u is the velocity of an object relative to one observer, and u′ is the velocity relative to the other observer.
+
+Velocities cannot add to be greater than the speed of light. Relativistic velocity addition describes the velocities of an object moving at a relativistic speed:
+
+ u=
+
+ v+u′
+
+ 1
+ +
+
+ v
+ 
+ u′
+
+ c
+
+ 2
+
+An observer of electromagnetic radiation sees relativistic Doppler effects if the source of the radiation is moving relative to the observer. The wavelength of the radiation is longer (called a red shift) than that emitted by the source when the source moves away from the observer and shorter (called a blue shift) when the source moves toward the observer. The shifted wavelength is described by the equation
+
+ λ
+
+ obs
+
+ =λ
+
+ s
+
+ 1
+ +
+ 
+ u
+ c
+
+ 1
+ −
+ 
+ u
+ c
+
+ λobs is the observed wavelength, λs is the source wavelength, and u is the relative velocity of the source to the observer.
+
+Conceptual Questions
+
+Explain the meaning of the terms “red shift” and “blue shift” as they relate to the relativistic Doppler effect.
+
+What happens to the relativistic Doppler effect when relative velocity is zero? Is this the expected result?
+
+Is the relativistic Doppler effect consistent with the classical Doppler effect in the respect that λobs is larger for motion away?
+
+All galaxies farther away than about 50×106 ly exhibit a red shift in their emitted light that is proportional to distance, with those farther and farther away having progressively greater red shifts. What does this imply, assuming that the only source of red shift is relative motion? (Hint: At these large distances, it is space itself that is expanding, but the effect on light is the same.)
+
+Problems & Exercises
+
+Suppose a spaceship heading straight towards the Earth at 0.750c can shoot a canister at 0.500c relative to the ship. (a) What is the velocity of the canister relative to the Earth, if it is shot directly at the Earth? (b) If it is shot directly away from the Earth?
+
+(a) 0.909c
+
+(b) 0.400c
+
+Repeat the previous problem with the ship heading directly away from the Earth.
+
+If a spaceship is approaching the Earth at 0.100c and a message capsule is sent toward it at 0.100c relative to the Earth, what is the speed of the capsule relative to the ship?
+0
+ .
+ 198
+ c
+
+(a) Suppose the speed of light were only 3000 m/s. A jet fighter moving toward a target on the ground at 800 m/s shoots bullets, each having a muzzle velocity of 1000 m/s. What are the bullets’ velocity relative to the target? (b) If the speed of light was this small, would you observe relativistic effects in everyday life? Discuss.
+
+If a galaxy moving away from the Earth has a speed of 1000 km/s and emits 656 nm light characteristic of hydrogen (the most common element in the universe). (a) What wavelength would we observe on the Earth? (b) What type of electromagnetic radiation is this? (c) Why is the speed of the Earth in its orbit negligible here?
+
+a) 658 nm
+
+b) red
+
+c) v/c=9.92×10−5 (negligible)
+
+A space probe speeding towards the nearest star moves at 0.250c and sends radio information at a broadcast frequency of 1.00 GHz. What frequency is received on the Earth?
+
+If two spaceships are heading directly towards each other at 0.800c, at what speed must a canister be shot from the first ship to approach the other at 0.999c as seen by the second ship?
+0
+ .
+ 991
+ c
+
+Two planets are on a collision course, heading directly towards each other at 0.250c. A spaceship sent from one planet approaches the second at 0.750c as seen by the second planet. What is the velocity of the ship relative to the first planet?
+
+When a missile is shot from one spaceship towards another, it leaves the first at 0.950c and approaches the other at 0.750c. What is the relative velocity of the two ships?
+−0.696c
+
+What is the relative velocity of two spaceships if one fires a missile at the other at 0.750c and the other observes it to approach at 0.950c?
+
+Near the center of our galaxy, hydrogen gas is moving directly away from us in its orbit about a black hole. We receive 1900 nm electromagnetic radiation and know that it was 1875 nm when emitted by the hydrogen gas. What is the speed of the gas?
+0
+ .
+ 01324
+ c
+
+A highway patrol officer uses a device that measures the speed of vehicles by bouncing radar off them and measuring the Doppler shift. The outgoing radar has a frequency of 100 GHz and the returning echo has a frequency 15.0 kHz higher. What is the velocity of the vehicle? Note that there are two Doppler shifts in echoes. Be certain not to round off until the end of the problem, because the effect is small.
+
+Prove that for any relative velocity v between two observers, a beam of light sent from one to the other will approach at speed c (provided that v is less than c, of course).
+u′=c, so
+u= 
+
+ v+u′
+
+ 1
+ +
+ (
+
+ vu′/
+
+ c
+
+ 2
+
+ )
+
+ =
+
+ v+c
+
+ 1
+ +
+ (
+
+ vc
+ 
+ /
+ 
+ c
+
+ 2
+
+ )
+
+ =
+
+ v+c
+
+ 1
+ +
+ (
+
+ v
+ /
+ c
+ 
+ )
+
+ =
+
+ c
+ (
+ 
+ v+c
+ 
+ )
+
+ c+v
+
+ =
+
+ c
+
+Show that for any relative velocity v between two observers, a beam of light projected by one directly away from the other will move away at the speed of light (provided that v is less than c, of course).
+
+(a) All but the closest galaxies are receding from our own Milky Way Galaxy. If a galaxy 12.0×109 ly ly away is receding from us at 0.0.900c, at what velocity relative to us must we send an exploratory probe to approach the other galaxy at 0.990c, as measured from that galaxy? (b) How long will it take the probe to reach the other galaxy as measured from the Earth? You may assume that the velocity of the other galaxy remains constant. (c) How long will it then take for a radio signal to be beamed back? (All of this is possible in principle, but not practical.)
+
+a) 0.99947c
+
+b) 1.2064×1011 y
+
+c) 1.2058×1011 y (all to sufficient digits to show effects)
+
+the method of adding velocities when v<<c; velocities add like regular numbers in one-dimensional motion: u=v+u′, where v is the velocity between two observers, u is the velocity of an object relative to one observer, and u′ is the velocity relative to the other observer
+the method of adding velocities of an object moving at a relativistic speed: u=v+u′1+vu′c2, where v is the relative velocity between two observers, u is the velocity of an object relative to one observer, and u′ is the velocity relative to the other observer
+a change in wavelength of radiation that is moving relative to the observer; the wavelength of the radiation is longer (called a red shift) than that emitted by the source when the source moves away from the observer and shorter (called a blue shift) when the source moves toward the observer; the shifted wavelength is described by the equation
+
+ λ
+
+ obs
+
+ =λ
+
+ s
+
+ 1
+ +
+ 
+ u
+ c
+
+ 1
+ −
+ 
+ u
+ c
+
+where λobs is the observed wavelength, λs is the source wavelength, and u is the velocity of the source to the observer

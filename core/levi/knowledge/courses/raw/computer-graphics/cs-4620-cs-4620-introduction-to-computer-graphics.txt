@@ -1,0 +1,327 @@
+# CS 4620: Introduction to Computer Graphics
+# Cornell University
+# source: http://www.cs.cornell.edu/Courses/CS4620/2014fa/index.shtml#
+
+CS4620: Introduction to Computer Graphics
+CS4620 Introduction to Computer Graphics
+CS4621 Computer Graphics Practicum
+Cornell University
+MWF 2:30pm, Hollister B14
+F 3:35pm, Philips 203 [4621 only]
+Instructor: Steve Marschner
+Staff
+Eston Schweickart (Ph.D. TA, ers@cs.cornell.edu)
+Rundong Wu (Ph.D. TA, rw489@cornell.edu)
+Balazs Kovacs (Ph.D. TA, bk472@cornell.edu)
+Nicolas Savva (M.S. TA, nsavva@graphics.cornell.edu)
+Deedy Das (M.Eng. TA, dd367@cornell.edu)
+Jack Hessel (Ph.D. TA, jmh563@cornell.edu)
+Cristian Zaloj (Ugrad TA, cz68@cornell.edu)
+Victoria Dye (Ugrad TA, ved8@cornell.edu)
+Stephen McDowell (Ugrad TA, sjm324@cornell.edu)
+Eric Gao (Ugrad TA, emg222@cornell.edu)
+Alex Spitzer (Ugrad TA, aes368@cornell.edu)
+Andrew Wolfers (Ugrad TA, asw225@cornell.edu)
+Ryan Hall (Ugrad TA, rth45@cornell.edu)
+David Lee (Ugrad TA, dkl53@cornell.edu)
+Office Hours
+Schedule
+date
+topic
+reading
+assignments
+27 Aug
+intro slides
+Ch. 1, Ch. 2
+29 Aug
+triangle meshes | no 4621 slides
+Ch. 12: up to 12.1.4
+Mesh out
+1 Sep
+—Labor Day—
+3 Sep
+Blender Mesh Tutorial slides
+5 Sep
+History of CG | no 4621
+Ray1 out
+8 Sep
+ray tracing intersection slides
+Ch. 4: up to 4.4
+Mesh due
+10 Sep
+ray tracing shading slides
+Ch. 4: 4.5 to end
+12 Sep
+shading and textures slides | 4621 intro starter ideas slides
+15 Sep
+interpolation slides | transformations slides
+17 Sep
+2D transformations slides
+Ch. 5, Sec. 6.1
+19 Sep
+hierarchies slides
+Sec. 12.2
+22 Sep
+3D transformations slides
+Ch. 6: 6.2 to end
+Ray1 due
+24 Sep
+perspective slides
+Scene out
+26 Sep
+viewing slides
+Ch. 7
+29 Sep
+viewing (cont'd.)
+1 Oct
+—no class (Gates dedication)—
+3 Oct
+rasterization slides
+Ch. 8: up to 8.1
+6 Oct
+graphics pipeline slides
+Ch. 8: 8.2 to end
+8 Oct
+images slides
+Ch. 3: up to 3.3
+10 Oct
+GLSL slides slides slides
+Scene due, Shaders out
+13 Oct
+—Fall Break—
+15 Oct
+OpenGL slides
+17 Oct
+games with textures slides
+20 Oct
+images | antialiasing slides
+21 Oct Midterm: 7:30 pm , Phillips 101
+22 Oct
+compositing slides
+Sec 3.4
+24 Oct
+spline curves slides
+Ch. 15: up to 15.5
+Splines out
+27 Oct
+spline curves
+Ch. 15: up to 15.6.2
+Shaders due
+29 Oct
+spline curves
+31 Oct
+surfaces slides
+3 Nov
+surfaces
+5 Nov
+subdivision slides
+7 Nov
+subdivision
+Animation out
+10 Nov
+animation slides
+Splines due
+12 Nov
+animation notes
+14 Nov
+animation
+17 Nov
+animation | ray tracing
+19 Nov
+ray tracing acceleration slides
+21 Nov
+reflection & illumination slides
+Ray2 out
+24 Nov
+advanced ray tracing slides
+Animation due
+26 Nov
+—Thanksgiving Break—
+28 Nov
+—Thanksgiving Break—
+1 Dec
+Prof. Greenberg: TBA
+3 Dec
+Prof. James: TBA
+5 Dec
+Prof. Bala: TBA
+Ray2 due
+11 Dec Final exam, 7pm, Barton Hall (west section)
+15 Dec Final presentations [4621] (11:00-14:00 - Gates 114)
+Projects
+There will be 7 projects during the semester, due approximately every two weeks.
+Project 1 Meshes
+Due: Monday 8th September 2014 (11:59pm)
+Do this project alone or in groups of two, as you prefer. You can use Piazza to help pair yourselves up.
+Introduction
+In this assignment you will learn about the most widely used way to represent surfaces for graphics: triangle meshes. A triangle mesh is basically just a collection of triangles in 3D, but the key thing that makes it a mesh rather than just a bag of triangles is that the triangles are connected to one another to form a seamless surface. The textbook and lecture slides discuss the data structures used for storing and manipulating triangle meshes, and in this assignment we will work with the simplest kind of structure: a shared-vertex triangle mesh, also known as an indexed triangle mesh.
+Your job in this assignment is to write a simple mesh generation and processing utility that is capable of building triangle meshes to approximate some simple curved surfaces, and also can add some information to existing meshes. It reads and writes meshes stored in the popular OBJ file format , a text format with one line for each vertex and face in the mesh.
+Building a pyramid
+The written part of this assignment is a warmup for generating more complex meshes. Suppose we wish to generate a mesh (with just vertex positions, no normals or texture coordinates) for a square pyramid (like the one at Giza). The base is a square in the \(x-z\) plane, going from \(-1\) to \(1\) on each axis and the apex is at \((0,1,0)\). Write out:
+The coordinates of the 5 vertices
+The indices of the 6 triangles (you will need two for the base).
+The answer consists of 15 floating point numbers (3D coordinates of the vertices) and 18 integers (indices into the list of vertices, 3 for each triangle).
+Wireframe view of the pyramid mesh
+-->
+To test out your solution, type it into text file with the vertices, one per line, and then the triangles, also one per line. Precede each vertex with "v" and each triangle with "f". Note that the indices for the vertices, making up a particular triangle face, should be listed in a counter-clockwise order as viewed from the outside of the given mesh. And one more thing: add one to all the vertex indices, so that the count starting from 1. (Caution! this is not the same as what we do in the data structures inside the program!) For example, a single triangle in the \(x-z\) plane, facing towards \(+y\) is:
+v 0 0 0
+v 0 0 1
+v 1 0 0
+f 1 2 3
+This text file is now an OBJ file! Read it into one of the mesh viewers described below, take a couple of screen shots to show that it works, and include them with your writeup.
+The OBJ files written by the framework are a little more complicated because they can contain additional data at the vertices: normals and texture coordinates.
+Specification
+The utility "meshgen" is a mesh-generation program that runs at the command line. Its usage is:
+.obj .obj -->
+meshgen [-n] [-m] [-r] sphere|cylinder|torus|cube -o <outfile>.obj
+meshgen [-nv] [-opt] -f <infile>.obj -o <outfile>.obj
+The first required argument is the mesh specifier, and the second is the output filename. If the mesh specifier is one of the fixed strings "sphere" , "cylinder" , "cube" , or "torus" , a triangle mesh is generated that approximates that shape, with the number of triangles generated is controlled by the optional -n and -m options (details below), and written to the output file.
+A triangle mesh that is an approximation of a smooth surface should have normal vectors stored at the vertices that indicate the direction normal to the exact surface at that point. When generating the predefined shapes, you generate points that are on the surface, and for each you should also calculate the normal vector that is perpendicular to the surface at that point.
+If the mesh specifier is -f followed by the name of an OBJ file, the mesh in that file is read. If the -nv flag is given, any vertex normals are discarded and new vertex normals appropriate for a smooth surface are computed from the triangle geometry as described below. Finally, the mesh is writen to the output file.
+Details of predefined shapes
+Cylinder
+The cylinder has radius 1 and height 2 and is centered at the origin; its axis is aligned with the \(y\) axis. It is tesselated with \(n\) divisions around the outer surface. The two ends of the cylinder are closed by disc-shaped caps. The vertices around the rims of the cylinder are duplicated to allow discontinuities in the normals and texture coordinates. Texture coordinates on the outer surface are like the sphere in \(u\), running from 0 to 1 in a counterclockwise direction as viewed from the \(+y\) direction, and run from 0 to 0.5 in \(v\), increasing in the \(+y\) direction. The texture coordinates for the two caps are circles inscribed in the upper-left (for the \(-y\) cap) and upper-right (for the \(+y\) cap) quadrants of the unit square, with the \(+u\) direction corresponding to the \(+x\) direction in 3D space, and the \(v\) direction arranged to keep the texture right-reading. We have provided a partial implementation of the cylinder.
+Sphere
+The sphere has radius 1 and is centered at the origin in 3D coordinates. It is tesselated in latitude-longitude fashion, with \(n\) divisions around the equator and \(m\) divisions from pole to pole along each line of longitude. The North pole is at \((0,1,0)\), the South pole at \((0,-1,0)\), and points on the Greenwich meridian have coordinates \((0,y,z)\) with \(z > 0\). The mesh is generated with vertex normals that are normal to the exact sphere, and with texture coordinates \((u,v)\) where \(u\) depends only on longitude, with \(u=0\) at longitude \(180^\circ\) West and \(u=1\) at \(180^\circ\) East, and \(v\) depends only on latitude, with \(v=0\) at the South Pole and \(v=1\) at the North pole. Each quadrilateral formed by two adjacent longitude lines and two adjacent latitude lines is divided on the diagonal to form two triangles. The vertices along the 180th meridian are duplicated: one vertex has texture coordinate \(u=0\) and the other has texture coordinate \(u=1\), to enable correct wrapping of a tileable texture image across the seam. The vertices at the poles are duplicated \(n+1\) times, to enable nearly-appropriate texture in the row of triangles adjacent to the pole.
+You may have noticed that the triangles get compressed near the poles. An alternative tesselation approach can be used to create an isotropic mesh (See icosphere for more details. The implementation is left as an extra credit exercise for those who wish to explore this further).
+Specs illustration for the cylinder and sphere (for the case of n = 32 and m = 16)
+Torus [Extra credit]
+The torus has major radius 1 and minor radius \(r\) (controlled by the -r flag with a default of 0.25 ). Its \(u\) coordinates are like the sphere, and the \(v\) coordinate runs from 0 to 1 with a seam on the inside of the torus, with the direction arranged so that the texture is right-reading from the outside. Like the sphere it has a seam on the \(-z\) half of the \(y\)-\(z\) plane, and it has a similar seam around the inside of the tube; vertices along each seam are duplicated twofold and a single vertex, at the position \((0, 0, -1+r)\), is duplicated fourfold.
+Wireframe view of the shapes (Notice that the default up direction in Blender, as seen here, is the \(+z\) axis whereas the convention used in our description and Meshlab specifies the \(+y\) axis as upwards. You should be aware of this fact and not be perplexed by such a discrepancy).
+Computing vertex normals
+For a mesh that has vertex positions and triangles, but no vertex normals, one often wants to compute vertex normals so that the mesh can appear smooth. But since the original surface, if there even was one, is forgotten, we need some way to make up plausible normals. There are a number of ways to do this, and we'll use a simple one for this assignment: the normal at a vertex is the average of the geometric normals of the triangles that share this vertex.
+Your first thought might be to do this as a loop over vertices, with an inner loop over the triangles that share that vertex:
+for each vertex v
+normal[v] = (0,0,0)
+for each triangle t around v
+normal[v] += normal of triangle t
+normal[v].normalize()
+With the appropriate data structures, this is possible, but in our case there's no efficient way to do the inner loop: our data structure tells us what vertices belong to a triangle, but the only way to find triangles that belong to a vertex is to search through the whole list of triangles. This is possible but would be quadratic in the mesh size, which is bad news for large meshes.
+However, it's simple to do it with the loops interchanged:
+for each vertex v
+normal[v] = (0,0,0)
+for each triangle t
+for each vertex v around t
+normal[v] += normal of triangle t
+for each vertex v
+normal[v].normalize()
+This way the inner loop can efficiently visit just the necessary vertices. Nifty!
+You should compute normals whenever the -nv flag is turned on; the logic to do this is already in the framework.
+Framework
+The framework is available on a public Git repository: https://github.com/CornellCS4620/Framework.git
+If you have not used Git before, you can follow the tutorial
+here , or ask a TA for assistance. Once you have the code set up on your local machine, we recommend that you create a new branch (named, for example, my-solution), and commit all changes you make to that branch. When releasing future assignments, we will ask you to pull from our updated repository onto your master branch; creating your own solution branch will avoid the headaches of merge conflicts. We encourage you to use version control though we request that you refrain from publicly sharing your class repository.
+Setting Up Your Workspace For Eclipse
+After grabbing the repo and creating your own branch, you may fire up Eclipse to get started with coding.
+Navigate to and press "File->Import"
+Choose the option "General->Existing Projects Into Workspace"
+Press "Next"
+For the root directory, browse and select the folder CS4620, which may be found directly in the repo's root folder.
+Press "Finish" . You have set up a coding environment, but you're not done yet.
+Right-click on the CS4620 project in Package Explorer and press "Build Path->Configure Build Path"
+Navigate to the "Libraries" tab
+Expand the lwjgl.jar file and select "Native library location"
+Press "Edit" and enter in your specific path, which will be "CS4620/deps/native/<OS>" .
+We have marked all the functions or parts of the functions you need to
+complete in with TODO#A1 in the source code. To see all these TODO#A1 ’s in Eclipse,
+select Search menu, then File Search and type “TODO#A1” TODO's in Eclipse can be viewed through the Task List as well.
+You should only need to modify those the sections marked with TODO unless you want to add other cool mesh generators for extra credit (in which case look at cs4620.util.MeshGen 's switch block). All other functionality has been implemented.
+Testing your program
+The entry point of this assignment is cs4620.util.MeshGen
+Select that Java class in the Package Explorer and press the play button.
+Unless you have already put in arguments to the program, you should get an output that no arguments have been provided
+Navigate to and press "Run->Run Configurations..."
+Pick Java Application
+Select the tab "Arguments"
+Type in your arguments into "Program arguments" : (eg. "cube -o cube.obj" )
+Run it
+Since your program just writes a file full of inscrutable numbers, you need some way to look at the results. For this you can use MeshLab . Please refer to the notes from lecture on Sept 3rd for more information about how to get MeshLab and how to use it to load an OBJ mesh and find out what it contains.
+(Here are a few more programs that might be worth checking out: Blender , ObjViewer , p3d.in ).
+Warning: Blender discards the normals stored in the OBJ file and as such is not a good tool to check whether your normals are correct.
+Caution: Blender by default will rotate your mesh by 90 degrees around the \(x\) axis so that it displays right way up in Blender's \(z\)-is-up world.
+Download and unpack the following archive: MeshesTestData.zip
+To see if your meshes are generated properly, first load them into MeshLab and examine them with the default flat shading. The surface should be complete without any holes or odd artifacts. Note that as you debug, you can click on a triangle to find out its index and the indices and locations of its three vertices (use the Get Info "i" button in the toolbar).
+Viewing triangle information
+If you wish to test the normals, select "smooth shading" (the smooth-looking cylinder icon in the toolbar). The surface should look much smoother; it should be smooth but still a bit lumpy looking for coarse tessellation (e.g. -n 24 -m 12) and smooth and perfect looking once you use enough triangles (e.g. -n 64 -m 32).
+When testing the texture coordinates, put one of the PNG images from UVTestImages into the same directory as your mesh, and in MeshLab use the "Filter -> Texture -> Set Texture" command and enter the name of the texture file. (If it shows a gray grid that means it didn't find the image.) The full texture should appear on the surface; the sphere with the Earth texture should look appropriate. On the cylinder, the number texture should read right (not mirrored) on all sides and appear undistorted on the top and bottom faces (see images below).
+A textured sphere
+A textured cylinder
+Handing in
+Submit a zip file containing your solution using CMS
+You should include a readme in your zip that contains:
+You and your partner's names and NetIDs.
+The solution for the paper and pencil parts of the homework.
+Anything else you want us to know.
+Do this project in groups of two. You
+can use Piazza to help pair yourselves up.
+For this project, you'll build a complete basic pipeline for
+processing raw camera images. It will include color
+balancing, demosaicking, color correction, and tone
+mapping, using simple methods for all four stages.
+Part 1 of the project is to supply test images.
+Each group should take two images with a camera of your
+choice, in raw mode (if you don't have a camera that
+can provide raw images, you can borrow one of the
+class's EOS cameras). Make images that look nice and
+also explore some of the following extremes:
+high key (e.g. white dishes on a white tablecloth)
+low key (e.g. black cat in a coal mine)
+high contrast (e.g. people in harsh sunlight, or buildings against bright sky)
+low contrast (e.g. scenes in misty morning weather, with no very dark or very bright areas)
+fine-scale natural detail (e.g. tree branches against sky with features just a few pixels across)
+fine-scale repeating structures (e.g. venetian blinds, high-contrast woven cloth, black-on-white text, with repeating structures just a few pixels across)
+highly saturated color (e.g. crayons or paints)
+non-gray average color (e.g. person on colored background)
+noisy image (taken at high ISO)
+overexposed
+underexposed
+For each test image, also include a known-neutral
+object: a gray card if you have one, or a piece of white
+paper if you don't.
+Next, bring your camera to class and photograph a
+ColorChecker color chart in raw mode, and include this
+image with your test images. Also measure the raw RGB
+values corresponding to the 24 squares of the chart and
+put them into a space-delimited text file with 3 numbers
+per line (in English reading order ending with black).
+Convert your raw images to the DNG
+(“digital negative”) format. Your camera may
+already store raw files in this format, in which case you
+are done; most do not, but you can use
+the free Adobe
+DNG Converter to convert them. When you do this,
+navigate through the UI to Preferences, Compatibility,
+Custom…, and select “Uncompressed.”
+This will make it easier for people to read your images.
+Finally, post the DNGs to the course wiki (using
+Confulence to store large files), along with the
+ColorChecker measurements. Part 1 is due
+by 27 September.
+Part 2 of the project is to put together the basic
+pipeline. If you work in Matlab, see this post about how
+to read DNGs (which are just special TIFF files); if you
+implement your own reader see the DNG specification , and
+here
+is a copy of the TIFF/EP specification (readable to class
+only) for your
+reference.
+Linearization. Read the raw data from the
+DNG file, apply the linearization curve stored in
+the file, if there is one, and subtract the black
+level, if there is one. (In the absence of a
+linearization curve, the data should be linear, and in
+the absence of black level information, the data should
+already be corrected to a black level of zero.)
+Color balancing. Color balance the image
+using the white or gray reference in the image.
+Demosaicking. Demosaic the image using the
+“edge based” method presented in class. Yes, it will
+produce some artifacts.
+Color corrrection. Derive a color matrix
+for each camera based on the ColorChecker RGB values.
+Color balance them using
+the gray patches, and fit a 3x3 transformation that
+approximately maps them to
+the known
+XYZ values subject to the constraint that [1,1,1]
+maps to [1,1,1].

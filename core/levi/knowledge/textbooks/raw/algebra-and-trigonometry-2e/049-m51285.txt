@@ -1,0 +1,2305 @@
+# m51285
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Unit Circle
+
+Unit Circle
+
+In this section you will:
+
+Find function values for the sine and cosine of 
+ 30° or (
+
+ π
+ 6
+
+ ),45° or (
+
+ π
+ 4
+
+ ),
+ 
+ and 
+
+ 60
+ 
+ ∘
+ 
+  or (
+
+ π
+ 3
+
+ ).
+
+Identify the domain and range of sine and cosine functions.
+
+Find reference angles.
+
+Use reference angles to evaluate trigonometric functions.
+
+Looking for a thrill? Then consider a ride on the Ain Dubai, the world's tallest Ferris wheel. Located in Dubai, the most populous city and the financial and tourism hub of the United Arab Emirates, the wheel soars to 820 feet, about 1.5 tenths of a mile. Described as an observation wheel, riders enjoy spectacular views of the Burj Khalifa (the world's tallest building) and the Palm Jumeirah (a human-made archipelago home to over 10,000 people and 20 resorts) as they travel from the ground to the peak and down again in a repeating pattern. In this section, we will examine this type of revolving motion around a circle. To do so, we need to define the type of circle first, and then place that circle on a coordinate system. Then we can discuss circular motion in terms of the coordinate pairs.
+
+Finding Trigonometric Functions Using the Unit Circle
+
+We have already defined the trigonometric functions in terms of right triangles. In this section, we will redefine them in terms of the unit circle. Recall that a unit circle is a circle centered at the origin with radius 1, as shown in . The angle (in radians) that 
+
+t
+
+ intercepts forms an arc of length 
+
+s.
+
+ Using the formula 
+
+s=rt,
+
+ and knowing that 
+
+r=1,
+
+ we see that for a unit circle, 
+
+s=t.
+
+The x- and y-axes divide the coordinate plane into four quarters called quadrants. We label these quadrants to mimic the direction a positive angle would sweep. The four quadrants are labeled I, II, III, and IV.
+
+For any angle 
+
+t,
+
+ we can label the intersection of the terminal side and the unit circle as by its coordinates, 
+
+(
+
+x,y
+
+).
+
+ The coordinates 
+
+x
+
+ and 
+
+y
+
+ will be the outputs of the trigonometric functions 
+ 
+ f(t)=cost
+ and 
+ 
+ f(t)=sint,
+ respectively. This means 
+ 
+ x=cos t
+ and 
+ 
+ y=sin t.
+
+Unit Circle
+
+A unit circle has a center at 
+
+(0,0)
+
+ and radius 
+
+1.
+
+ In a unit circle, the length of the intercepted arc is equal to the radian measure of the central angle 
+
+t.
+
+Let 
+
+(
+
+ x,y
+
+)
+
+ be the endpoint on the unit circle of an arc of arc length 
+
+s.
+
+ The 
+
+(
+
+ x,y
+
+)
+
+ coordinates of this point can be described as functions of the angle.
+
+Defining Sine and Cosine Functions from the Unit Circle
+
+The sine function relates a real number 
+
+t
+
+ to the y-coordinate of the point where the corresponding angle intercepts the unit circle. More precisely, the sine of an angle 
+
+t
+
+ equals the y-value of the endpoint on the unit circle of an arc of length 
+
+t.
+
+ In , the sine is equal to 
+
+y.
+
+ Like all functions, the sine function has an input and an output. Its input is the measure of the angle; its output is the y-coordinate of the corresponding point on the unit circle.
+
+The cosine function of an angle 
+
+t
+
+ equals the x-value of the endpoint on the unit circle of an arc of length 
+
+t.
+
+ In , the cosine is equal to 
+
+x.
+
+Because it is understood that sine and cosine are functions, we do not always need to write them with parentheses: 
+ 
+ sint
+ is the same as 
+
+sin(t)
+
+ and 
+
+cost
+
+ is the same as 
+
+cos(t).
+
+ Likewise, 
+
+ cos
+
+2
+
+t
+
+ is a commonly used shorthand notation for 
+
+ (cos(t))
+
+2
+
+.
+
+ Be aware that many calculators and computers do not recognize the shorthand notation. When in doubt, use the extra parentheses when entering calculations into a calculator or computer.
+
+Sine and Cosine Functions
+
+If 
+
+t
+
+ is a real number and a point 
+
+(
+ 
+ x,y
+ 
+ )
+
+ on the unit circle corresponds to a central angle 
+
+t,
+
+ then
+Given a point P 
+
+(x,y)
+
+ on the unit circle corresponding to an angle of 
+
+t,
+
+ find the sine and cosine.
+
+The sine of 
+
+ t
+
+ is equal to the y-coordinate of point 
+ 
+ P:sin t = y.
+
+The cosine of 
+
+ t
+
+ is equal to the x-coordinate of point 
+ 
+ P:cost=x.
+
+Finding Function Values for Sine and Cosine
+
+Point 
+ 
+ P
+ 
+ is a point on the unit circle corresponding to an angle of 
+ 
+ t,
+ 
+ as shown in . Find 
+ 
+ cos(t)
+ 
+ and 
+ 
+ sin(t).
+
+We know that 
+ 
+ cost
+ 
+ is the x-coordinate of the corresponding point on the unit circle and 
+ 
+ sint
+ 
+ is the y-coordinate of the corresponding point on the unit circle. So:
+
+A certain angle 
+
+ t
+
+ corresponds to a point on the unit circle at 
+
+ (
+ 
+ −
+
+ 2
+
+ 2
+ 
+ ,
+
+ 2
+
+ 2
+
+ )
+
+ as shown in . Find 
+ 
+ cost
+ and 
+ 
+ sint.
+cos(t)=−
+
+ 2
+
+ 2
+ 
+ ,sin(t)=
+
+ 2
+
+ 2
+
+Finding Sines and Cosines of Angles on an Axis
+
+For quadrantral angles, the corresponding point on the unit circle falls on the x- or y-axis. In that case, we can easily calculate cosine and sine from the values of 
+
+x
+
+ and 
+
+y.
+
+Calculating Sines and Cosines along an Axis
+
+Find 
+ 
+ cos(90°)
+ 
+ and 
+ 
+ sin(90°).
+
+Moving 
+ 
+ 90°
+ 
+ counterclockwise around the unit circle from the positive x-axis brings us to the top of the circle, where the 
+ 
+ (x,y)
+ 
+ coordinates are 
+ 
+ (0,1),
+ 
+ as shown in .
+
+We can then use our definitions of cosine and sine.
+
+The cosine of 
+ 
+ 90°
+ 
+ is 0; the sine of 
+ 
+ 90°
+ 
+ is 1.
+
+Find cosine and sine of the angle 
+
+ π.
+cos(π)=−1,sin(π)=0
+
+The Pythagorean Identity
+
+Now that we can define sine and cosine, we will learn how they relate to each other and the unit circle. Recall that the equation for the unit circle is 
+
+x
+2
+
++
+y
+2
+
+=1.
+
+ Because 
+ 
+ x=cost
+ and 
+ 
+ y=sint,
+ we can substitute for 
+
+x
+
+ and 
+
+y
+
+ to get 
+
+ cos
+
+2
+
+t+
+
+ sin
+
+2
+
+t=1.
+
+ This equation, 
+
+ cos
+
+2
+
+t+
+
+ sin
+
+2
+
+t=1,
+
+ is known as the Pythagorean Identity. See .
+
+We can use the Pythagorean Identity to find the cosine of an angle if we know the sine, or vice versa. However, because the equation yields two solutions, we need additional knowledge of the angle to choose the solution with the correct sign. If we know the quadrant where the angle is, we can easily choose the correct solution.
+
+Pythagorean Identity
+
+The Pythagorean Identity states that, for any real number 
+
+t,
+Given the sine of some angle 
+
+t
+
+ and its quadrant location, find the cosine of 
+
+t.
+
+Substitute the known value of 
+ 
+ sint
+ 
+ into the Pythagorean Identity.
+
+Solve for 
+ 
+ cost.
+
+Choose the solution with the appropriate sign for the x-values in the quadrant where 
+
+ t
+
+ is located.
+
+Finding a Cosine from a Sine or a Sine from a Cosine
+
+If 
+ 
+ sin(t)=
+ 3
+ 7
+
+ and 
+ 
+ t
+ 
+ is in the second quadrant, find 
+ 
+ cos(t).
+
+If we drop a vertical line from the point on the unit circle corresponding to 
+ 
+ t,
+ 
+ we create a right triangle, from which we can see that the Pythagorean Identity is simply one case of the Pythagorean Theorem. See .
+
+Substituting the known value for sine into the Pythagorean Identity,
+
+Because the angle is in the second quadrant, we know the x-value is a negative real number, so the cosine is also negative.
+
+If 
+
+ cos(t)=
+ 
+ 24
+
+ 25
+
+ and 
+
+ t
+
+ is in the fourth quadrant, find 
+ 
+ sin(t).
+sin(t)=−
+ 7
+ 
+ 25
+
+Finding Sines and Cosines of Special Angles
+
+We have already learned some properties of the special angles, such as the conversion from radians to degrees, and we found their sines and cosines using right triangles. We can also calculate sines and cosines of the special angles using the Pythagorean Identity.
+
+Finding Sines and Cosines of 45° Angles
+
+First, we will look at angles of 
+
+45°
+
+ or 
+
+π
+4
+
+,
+
+ as shown in . A 
+
+45°–45°–90°
+
+ triangle is an isosceles triangle, so the x- and y-coordinates of the corresponding point on the circle are the same. Because the x- and y-values are the same, the sine and cosine values will also be equal.
+
+At 
+
+t=
+π
+4
+
+,
+
+ which is 45 degrees, the radius of the unit circle bisects the first quadrantal angle. This means the radius lies along the line 
+
+y=x.
+
+ A unit circle has a radius equal to 1 so the right triangle formed below the line 
+
+y=x
+
+ has sides 
+
+x
+
+ and 
+
+y (y=x),
+
+ and radius = 1. See .
+
+From the Pythagorean Theorem we get
+
+We can then substitute 
+
+y=x.
+
+Next we combine like terms.
+
+And solving for 
+
+x,
+
+ we get
+
+In quadrant I, 
+
+x=
+1
+
+ 2
+
+.
+
+At 
+
+t=
+π
+4
+
+ or 45 degrees,
+
+If we then rationalize the denominators, we get
+
+Therefore, the 
+
+(x,y)
+
+ coordinates of a point on a circle of radius 
+
+1
+
+ at an angle of 
+
+45°
+
+ are 
+
+(
+
+ 2
+
+ 2
+ 
+ ,
+
+ 2
+
+ 2
+
+).
+
+Finding Sines and Cosines of 30° and 60° Angles
+
+Next, we will find the cosine and sine at an angle of 
+
+30°,
+
+ or 
+
+π
+6
+
+.
+
+ First, we will draw a triangle inside a circle with one side at an angle of 
+
+30°,
+
+ and another at an angle of 
+
+−30°,
+
+ as shown in . If the resulting two right triangles are combined into one large triangle, notice that all three angles of this larger triangle will be 
+
+60°,
+
+ as shown in .
+
+Because all the angles are equal, the sides are also equal. The vertical line has length 
+
+2y,
+
+ and since the sides are all equal, we can also conclude that 
+
+r=2y
+
+ or 
+
+y=
+1
+2
+
+r.
+
+ Since 
+ 
+ sint=y,
+
+And since 
+
+r=1
+
+ in our unit circle,
+
+Using the Pythagorean Identity, we can find the cosine value.
+
+The 
+
+(x,y)
+
+ coordinates for the point on a circle of radius 
+
+1
+
+ at an angle of 
+
+30°
+
+ are 
+
+(
+
+ 3
+
+ 2
+ 
+ ,
+ 1
+ 2
+
+).
+
+ At 
+
+t=
+π
+3
+
+ (60°),
+
+ the radius of the unit circle, 1, serves as the hypotenuse of a 30-60-90 degree right triangle, 
+
+BAD,
+
+ as shown in . Angle 
+
+A
+
+ has measure 
+
+60°.
+
+ At point 
+
+B,
+
+ we draw an angle 
+
+ABC
+
+ with measure of 
+
+60°.
+
+ We know the angles in a triangle sum to 
+
+180°,
+
+ so the measure of angle 
+
+C
+
+ is also 
+
+60°.
+
+ Now we have an equilateral triangle. Because each side of the equilateral triangle 
+
+ABC
+
+ is the same length, and we know one side is the radius of the unit circle, all sides must be of length 1.
+
+The measure of angle 
+
+ABD
+
+ is 30°. Angle 
+
+ABC
+
+ is double angle 
+
+ABD,
+
+ so its measure is 60°. 
+
+BD
+
+ is the perpendicular bisector of 
+
+AC,
+
+ so it cuts 
+
+AC
+
+ in half. This means that 
+
+AD
+
+ is 
+
+1
+2
+
+ the radius, or 
+
+1
+2
+
+.
+
+ Notice that 
+
+AD
+
+ is the x-coordinate of point 
+
+B,
+
+ which is at the intersection of the 60° angle and the unit circle. This gives us a triangle 
+
+BAD
+
+ with hypotenuse of 1 and side 
+
+x
+
+ of length 
+
+1
+2
+
+.
+
+From the Pythagorean Theorem, we get
+
+Substituting 
+
+x=
+1
+2
+
+,
+
+ we get
+
+Solving for 
+
+y,
+
+ we get
+
+Since 
+
+t=
+π
+3
+
+ has the terminal side in quadrant I where the y-coordinate is positive, we choose 
+
+y=
+
+ 3
+
+2
+
+,
+
+ the positive value.
+
+At 
+
+t=
+π
+3
+
+ (60°), the 
+
+(x,y)
+
+ coordinates for the point on a circle of radius 
+
+1
+
+ at an angle of 
+
+60°
+
+ are 
+
+(
+
+ 1
+ 2
+ 
+ ,
+
+ 3
+
+ 2
+
+),
+
+ so we can find the sine and cosine.
+
+We have now found the cosine and sine values for all of the most commonly encountered angles in the first quadrant of the unit circle. summarizes these values.
+Cosine
+1
+ 2
+Sine
+3
+
+ 2
+shows the common angles in the first quadrant of the unit circle.
+
+Using a Calculator to Find Sine and Cosine
+
+To find the cosine and sine of angles other than the special angles, we turn to a computer or calculator. Be aware: Most calculators can be set into “degree” or “radian” mode, which tells the calculator the units for the input value. When we evaluate 
+
+cos(30)
+
+ on our calculator, it will evaluate it as the cosine of 30 degrees if the calculator is in degree mode, or the cosine of 30 radians if the calculator is in radian mode.
+Given an angle in radians, use a graphing calculator to find the cosine.
+
+If the calculator has degree mode and radian mode, set it to radian mode.
+
+Press the COS key.
+
+Enter the radian value of the angle and press the close-parentheses key ")".
+
+Press ENTER.
+
+Using a Graphing Calculator to Find Sine and Cosine
+
+Evaluate 
+ 
+ cos(
+
+ 5π
+ 
+ 3
+
+ )
+ 
+ using a graphing calculator or computer.
+
+Enter the following keystrokes:
+COS( 5 × π ÷ 3 ) ENTER
+
+Analysis
+
+We can find the cosine or sine of an angle in degrees directly on a calculator with degree mode. For calculators or software that use only radian mode, we can find the sine of 
+ 20°,
+ 
+ for example, by including the conversion factor to radians as part of the input:
+
+Evaluate 
+
+ sin(
+
+ π
+ 3
+
+ ).
+
+approximately 0.866025403
+
+Identifying the Domain and Range of Sine and Cosine Functions
+
+Now that we can find the sine and cosine of an angle, we need to discuss their domains and ranges. What are the domains of the sine and cosine functions? That is, what are the smallest and largest numbers that can be inputs of the functions? Because angles smaller than 
+
+0
+
+ and angles larger than 
+
+2π
+
+ can still be graphed on the unit circle and have real values of 
+ 
+ x,y, and r,
+ there is no lower or upper limit to the angles that can be inputs to the sine and cosine functions. The input to the sine and cosine functions is the rotation from the positive x-axis, and that may be any real number.
+
+What are the ranges of the sine and cosine functions? What are the least and greatest possible values for their output? We can see the answers by examining the unit circle, as shown in . The bounds of the x-coordinate are 
+
+[−1,1].
+
+ The bounds of the y-coordinate are also 
+
+[−1,1].
+
+ Therefore, the range of both the sine and cosine functions is 
+
+[−1,1].
+
+Finding Reference Angles
+
+We have discussed finding the sine and cosine for angles in the first quadrant, but what if our angle is in another quadrant? For any given angle in the first quadrant, there is an angle in the second quadrant with the same sine value. Because the sine value is the y-coordinate on the unit circle, the other angle with the same sine will share the same y-value, but have the opposite x-value. Therefore, its cosine value will be the opposite of the first angle’s cosine value.
+
+Likewise, there will be an angle in the fourth quadrant with the same cosine as the original angle. The angle with the same cosine will share the same x-value but will have the opposite y-value. Therefore, its sine value will be the opposite of the original angle’s sine value.
+
+As shown in , angle 
+
+α
+
+ has the same sine value as angle 
+
+t;
+
+ the cosine values are opposites. Angle 
+
+β
+
+ has the same cosine value as angle 
+
+t;
+
+ the sine values are opposites.
+
+Recall that an angle’s reference angle is the acute angle, 
+
+t,
+
+ formed by the terminal side of the angle 
+
+t
+
+ and the horizontal axis. A reference angle is always an angle between 
+
+0
+
+ and 
+
+90°,
+
+ or 
+
+0
+
+ and 
+
+π
+2
+
+ radians. As we can see from , for any angle in quadrants II, III, or IV, there is a reference angle in quadrant I.
+Given an angle between 
+
+0
+
+ and 
+
+2π,
+
+ find its reference angle.
+
+An angle in the first quadrant is its own reference angle.
+
+For an angle in the second or third quadrant, the reference angle is 
+
+| 
+ π−t
+ |
+
+ or 
+
+| 
+ 180°−t
+ |.
+
+For an angle in the fourth quadrant, the reference angle is 
+
+2π−t
+
+ or 
+
+360°−t.
+
+If an angle is less than 
+
+0
+
+ or greater than 
+
+2π,
+
+ add or subtract 
+
+2π
+
+ as many times as needed to find an equivalent angle between 
+
+0
+
+ and 
+
+2π.
+
+Finding a Reference Angle
+
+Find the reference angle of 
+
+ 225°
+
+ as shown in .
+
+Because 
+
+ 225°
+
+ is in the third quadrant, the reference angle is
+
+Find the reference angle of 
+
+ 5π
+ 
+ 3
+
+.
+π
+ 3
+
+Using Reference Angles
+
+Now let’s take a moment to reconsider the Ferris wheel introduced at the beginning of this section. Suppose a rider snaps a photograph while stopped twenty feet above ground level. The rider then rotates three-quarters of the way around the circle. What is the rider’s new elevation? To answer questions such as this one, we need to evaluate the sine or cosine functions at angles that are greater than 90 degrees or at a negative angle. Reference angles make it possible to evaluate trigonometric functions for angles outside the first quadrant. They can also be used to find 
+
+(
+
+x,y
+
+)
+
+ coordinates for those angles. We will use the reference angle of the angle of rotation combined with the quadrant in which the terminal side of the angle lies.
+
+Using Reference Angles to Evaluate Trigonometric Functions
+
+We can find the cosine and sine of any angle in any quadrant if we know the cosine or sine of its reference angle. The absolute values of the cosine and sine of an angle are the same as those of the reference angle. The sign depends on the quadrant of the original angle. The cosine will be positive or negative depending on the sign of the x-values in that quadrant. The sine will be positive or negative depending on the sign of the y-values in that quadrant.
+
+Using Reference Angles to Find Cosine and Sine
+
+Angles have cosines and sines with the same absolute value as their reference angles. The sign (positive or negative) can be determined from the quadrant of the angle.
+Given an angle in standard position, find the reference angle, and the cosine and sine of the original angle.
+
+Measure the angle between the terminal side of the given angle and the horizontal axis. That is the reference angle.
+
+Determine the values of the cosine and sine of the reference angle.
+
+Give the cosine the same sign as the x-values in the quadrant of the original angle.
+
+Give the sine the same sign as the y-values in the quadrant of the original angle.
+
+Using Reference Angles to Find Sine and Cosine
+ⓐ Using a reference angle, find the exact value of 
+ 
+ cos(150°)
+ 
+ and 
+ 
+ sin(150°).
+ⓑ Using the reference angle, find 
+ 
+ cos
+ 
+ 5π
+ 4
+
+ and 
+ 
+ sin
+ 
+ 5π
+ 4
+ 
+ .
+ⓐ 
+ 
+ 150°
+ 
+ is located in the second quadrant. The angle it makes with the x-axis is 
+ 
+ 180°−150°=30°,
+ 
+ so the reference angle is 
+ 
+ 30°.
+
+ This tells us that 
+ 
+ 150°
+ 
+ has the same sine and cosine values as 
+ 
+ 30°,
+ 
+ except for the sign.
+
+ cos(30°)=
+
+ 3
+
+ 2
+
+ and
+
+ sin(30°)=
+ 1
+ 2
+
+ Since 
+ 
+ 150°
+ 
+ is in the second quadrant, the x-coordinate of the point on the circle is negative, so the cosine value is negative. The y-coordinate is positive, so the sine value is positive.
+
+ cos(150°)=−
+
+ 3
+
+ 2
+
+ and
+
+ sin(150°)=
+ 1
+ 2
+
+This tells us that 
+ 
+ 150°
+ 
+ has the same sine and cosine values as 
+ 
+ 30°,
+ 
+ except for the sign.
+
+Since 
+ 
+ 150°
+ 
+ is in the second quadrant, the x-coordinate of the point on the circle is negative, so the cosine value is negative. The y-coordinate is positive, so the sine value is positive.
+ⓑ 
+
+ 5π
+ 
+ 4
+
+ is in the third quadrant. Its reference angle is 
+
+ 5π
+ 
+ 4
+ 
+ −π=
+ π
+ 4
+ 
+ .
+ 
+ The cosine and sine of 
+
+ π
+ 4
+
+ are both 
+
+ 2
+
+ 2
+ 
+ .
+ 
+ In the third quadrant, both 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ are negative, so:
+
+ cos
+ 
+ 5π
+ 4
+ 
+ =−
+
+ 2
+
+ 2
+
+ and
+
+ sin
+ 
+ 5π
+ 4
+ 
+ =−
+
+ 2
+
+ 2
+ⓐ Use the reference angle of 
+ 
+ 315°
+ 
+ to find 
+ 
+ cos(315°)
+ 
+ and 
+ 
+ sin(315°).
+ⓑ Use the reference angle of 
+ 
+ −
+ π
+ 6
+
+ to find 
+ 
+ cos(
+ 
+ −
+ π
+ 6
+
+ )
+ 
+ and 
+ 
+ sin(
+ 
+ −
+ π
+ 6
+
+ ).
+ⓐ 
+ 
+ cos(315°)=
+
+ 2
+
+ 2
+ 
+ ,sin(315°)=
+ 
+ –
+ 2
+
+ 2
+ⓑ 
+ 
+ cos(
+ 
+ −
+ π
+ 6
+
+ )=
+
+ 3
+
+ 2
+ 
+ ,sin(
+ 
+ −
+ π
+ 6
+
+ )=−
+ 1
+ 2
+
+Using Reference Angles to Find Coordinates
+
+Now that we have learned how to find the cosine and sine values for special angles in the first quadrant, we can use symmetry and reference angles to fill in cosine and sine values for the rest of the special angles on the unit circle. They are shown in . Take time to learn the 
+
+(x,y)
+
+ coordinates of all of the major angles in the first quadrant.
+
+In addition to learning the values for special angles, we can use reference angles to find 
+
+(
+
+ x,y
+
+)
+
+ coordinates of any point on the unit circle, using what we know of reference angles along with the identities
+
+First we find the reference angle corresponding to the given angle. Then we take the sine and cosine values of the reference angle, and give them the signs corresponding to the y- and x-values of the quadrant.
+Given the angle of a point on a circle and the radius of the circle, find the 
+
+(
+ 
+ x,y
+ 
+ )
+
+ coordinates of the point.
+
+Find the reference angle by measuring the smallest angle to the x-axis.
+
+Find the cosine and sine of the reference angle.
+
+Determine the appropriate signs for 
+
+ x
+
+ and 
+
+ y
+
+ in the given quadrant.
+
+Using the Unit Circle to Find Coordinates
+
+Find the coordinates of the point on the unit circle at an angle of 
+
+ 7π
+ 
+ 6
+ 
+ .
+
+We know that the angle 
+
+ 7π
+ 
+ 6
+
+ is in the third quadrant.
+
+First, let’s find the reference angle by measuring the angle to the x-axis. To find the reference angle of an angle whose terminal side is in quadrant III, we find the difference of the angle and 
+ 
+ π.
+
+Next, we will find the cosine and sine of the reference angle.
+
+We must determine the appropriate signs for x and y in the given quadrant. Because our original angle is in the third quadrant, where both 
+ 
+ x
+ 
+ and 
+ 
+ y
+ 
+ are negative, both cosine and sine are negative.
+
+Now we can calculate the 
+ 
+ (
+ 
+ x,y
+ 
+ )
+ 
+ coordinates using the identities 
+ 
+ x=cosθ
+ and 
+ 
+ y=sinθ.
+
+The coordinates of the point are 
+ 
+ (
+ 
+ −
+
+ 3
+
+ 2
+ 
+ ,−
+ 1
+ 2
+
+ )
+ 
+ on the unit circle.
+
+Find the coordinates of the point on the unit circle at an angle of 
+
+ 5π
+ 
+ 3
+ 
+ .
+(
+
+ 1
+ 2
+ 
+ ,−
+
+ 3
+
+ 2
+
+ )
+
+Access these online resources for additional instruction and practice with sine and cosine functions.
+Trigonometric Functions Using the Unit Circle
+Sine and Cosine from the Unit
+Sine and Cosine from the Unit Circle and Multiples of Pi Divided by Six
+Sine and Cosine from the Unit Circle and Multiples of Pi Divided by Four
+Trigonometric Functions Using Reference Angles
+
+Key Equations
+
+cost=x
+sint=y
+cos
+ 
+ 2
+ 
+ t+
+ 
+ sin
+ 
+ 2
+ 
+ t=1
+Key Concepts
+
+Finding the function values for the sine and cosine begins with drawing a unit circle, which is centered at the origin and has a radius of 1 unit.
+
+Using the unit circle, the sine of an angle 
+
+t
+
+ equals the y-value of the endpoint on the unit circle of an arc of length 
+
+t
+
+ whereas the cosine of an angle 
+
+t
+
+ equals the x-value of the endpoint. See .
+
+The sine and cosine values are most directly determined when the corresponding point on the unit circle falls on an axis. See .
+
+When the sine or cosine is known, we can use the Pythagorean Identity to find the other. The Pythagorean Identity is also useful for determining the sines and cosines of special angles. See .
+
+Calculators and graphing software are helpful for finding sines and cosines if the proper procedure for entering information is known. See .
+
+The domain of the sine and cosine functions is all real numbers.
+
+The range of both the sine and cosine functions is 
+
+[−1,1].
+
+The sine and cosine of an angle have the same absolute value as the sine and cosine of its reference angle.
+
+The signs of the sine and cosine are determined from the x- and y-values in the quadrant of the original angle.
+
+An angle’s reference angle is the size angle, 
+
+t,
+
+ formed by the terminal side of the angle 
+
+t
+
+ and the horizontal axis. See .
+
+Reference angles can be used to find the sine and cosine of the original angle. See .
+
+Reference angles can also be used to find the coordinates of a point on a circle. See .
+
+Section Exercises
+
+Verbal
+
+Describe the unit circle.
+
+The unit circle is a circle of radius 1 centered at the origin.
+
+What do the x- and y-coordinates of the points on the unit circle represent?
+
+Discuss the difference between a coterminal angle and a reference angle.
+
+Coterminal angles are angles that share the same terminal side. A reference angle is the size of the smallest acute angle, 
+ 
+ t,
+ 
+ formed by the terminal side of the angle 
+ 
+ t
+ 
+ and the horizontal axis.
+
+Explain how the cosine of an angle in the second quadrant differs from the cosine of its reference angle in the unit circle.
+
+Explain how the sine of an angle in the second quadrant differs from the sine of its reference angle in the unit circle.
+
+The sine values are equal.
+
+Algebraic
+
+For the following exercises, use the given sign of the sine and cosine functions to find the quadrant in which the terminal point determined by 
+ 
+ t
+ 
+ lies.
+sin(t)<0
+ 
+ and 
+ 
+ cos(t)<0
+sin(t)>0
+ 
+ and 
+ 
+ cos(t)>0
+
+I
+sin(t)>0
+ 
+ and 
+ 
+ cos(t)<0
+sin(t)<0
+ 
+ and 
+ 
+ cos(t)>0
+
+IV
+
+For the following exercises, find the exact value of each trigonometric function.
+sin
+ π
+ 2
+sin
+ π
+ 3
+3
+
+ 2
+cos
+ π
+ 2
+cos
+ π
+ 3
+1
+ 2
+sin
+ π
+ 4
+cos
+ π
+ 4
+2
+
+ 2
+sin
+ π
+ 6
+sinπ
+
+0
+sin
+ 
+ 3π
+ 2
+cosπ
+
+-1
+cos0
+cos
+ π
+ 6
+3
+
+ 2
+sin0
+
+Numeric
+
+For the following exercises, state the reference angle for the given angle.
+240°
+60°
+−170°
+100°
+80°
+−315°
+135°
+45°
+5π
+ 
+ 4
+2π
+ 
+ 3
+π
+ 3
+5π
+ 
+ 6
+−11π
+ 
+ 3
+π
+ 3
+−7π
+ 
+ 4
+−π
+ 
+ 8
+π
+ 8
+
+For the following exercises, find the reference angle, the quadrant of the terminal side, and the sine and cosine of each angle. If the angle is not one of the angles on the unit circle, use a calculator and round to three decimal places.
+225°
+300°
+60°,
+ 
+ Quadrant IV, 
+ 
+ sin(300°)=−
+
+ 3
+
+ 2
+ 
+,cos(300°)=
+ 1
+ 2
+320°
+135°
+45°,
+ 
+ Quadrant II, 
+ 
+ sin(
+ 
+ 135°
+ 
+ )=
+
+ 2
+
+ 2
+ 
+ ,cos(135°)=−
+
+ 2
+
+ 2
+210°
+120°
+60°,
+ 
+ Quadrant II, 
+ 
+ sin(
+ 
+ 120°
+ 
+ )=
+
+ 3
+
+ 2
+ 
+ ,cos(120°)=−
+ 1
+ 2
+250°
+150°
+30°,
+ 
+ Quadrant II, 
+ 
+ sin(
+ 
+ 150°
+ 
+ )=
+ 1
+ 2
+ 
+ ,cos(150°)=−
+
+ 3
+
+ 2
+5π
+ 
+ 4
+7π
+ 
+ 6
+π
+ 6
+ 
+ ,
+ 
+ Quadrant III, 
+ 
+ sin(
+
+ 7π
+ 
+ 6
+
+ )=−
+ 1
+ 2
+ 
+ ,cos(
+
+ 7π
+ 
+ 6
+
+ )=−
+
+ 3
+
+ 2
+5π
+ 
+ 3
+3π
+ 
+ 4
+π
+ 4
+ 
+ ,
+ 
+ Quadrant II, 
+ 
+ sin(
+
+ 3π
+ 
+ 4
+
+ )=
+
+ 2
+
+ 2
+ 
+ ,cos(
+
+ 3π
+ 
+ 4
+
+ )=−
+
+ 2
+
+ 2
+4π
+ 
+ 3
+2π
+ 
+ 3
+π
+ 3
+ 
+ ,
+ 
+ Quadrant II, 
+ 
+ sin(
+
+ 2π
+ 
+ 3
+
+ )=
+
+ 3
+
+ 2
+ 
+ ,cos(
+
+ 2π
+ 
+ 3
+
+ )=−
+ 1
+ 2
+5π
+ 
+ 6
+7π
+ 
+ 4
+π
+ 4
+ 
+ ,
+ 
+ Quadrant IV, 
+ 
+ sin(
+
+ 7π
+ 
+ 4
+
+ )=−
+
+ 2
+
+ 2
+ 
+ ,cos(
+
+ 7π
+ 
+ 4
+
+ )=
+
+ 2
+
+ 2
+
+For the following exercises, find the requested value.
+
+If 
+ 
+ cos(
+ t
+ )=
+ 1
+ 7
+
+ and 
+ 
+ t
+ 
+ is in the fourth quadrant, find 
+ 
+ sin(t).
+
+If 
+ 
+ cos(
+ t
+ )=
+ 2
+ 9
+
+ and 
+ 
+ t
+ 
+ is in the first quadrant, find 
+ 
+ sin(t).
+77
+
+ 9
+
+If 
+ 
+ sin(
+ t
+ )=
+ 3
+ 8
+
+ and 
+ 
+ t
+ 
+ is in the second quadrant, find 
+ 
+ cos(t).
+
+If 
+ 
+ sin(
+ t
+ )=−
+ 1
+ 4
+
+ and 
+ 
+ t
+ 
+ is in the third quadrant, find 
+ 
+ cos(t).
+−
+
+ 15
+
+ 4
+
+Find the coordinates of the point on a circle with radius 15 corresponding to an angle of 
+ 
+ 220°.
+
+Find the coordinates of the point on a circle with radius 20 corresponding to an angle of 
+ 
+ 120°.
+(
+ 
+ −10,10
+ 3
+
+ )
+
+Find the coordinates of the point on a circle with radius 8 corresponding to an angle of 
+
+ 7π
+ 
+ 4
+ 
+ .
+
+Find the coordinates of the point on a circle with radius 16 corresponding to an angle of 
+
+ 5π
+ 
+ 9
+ 
+ .
+(
+ 
+ –2.778, 15.757
+ 
+ )
+
+State the domain of the sine and cosine functions.
+
+State the range of the sine and cosine functions.
+[ 
+ –1, 1
+ ]
+
+Graphical
+
+For the following exercises, use the given point on the unit circle to find the value of the sine and cosine of 
+ 
+ t.
+sint=
+ 1
+ 2
+ 
+ ,cost=−
+
+ 3
+
+ 2
+sint=−
+
+ 2
+
+ 2
+ 
+ ,cost=−
+
+ 2
+
+ 2
+sint=
+
+ 3
+
+ 2
+ 
+ ,cost=−
+ 1
+ 2
+sint=−
+
+ 2
+
+ 2
+ 
+ ,cost=
+
+ 2
+
+ 2
+sint=0,cost=−1
+sint=−0.596,cost=0.803
+sint=
+ 1
+ 2
+ 
+ ,cost=
+
+ 3
+
+ 2
+sint=−
+ 1
+ 2
+ 
+ ,cost=
+
+ 3
+
+ 2
+sint=0.761,cost=−0.649
+sint=1,cost=0
+
+Technology
+
+For the following exercises, use a graphing calculator to evaluate.
+sin
+ 
+ 5π
+ 9
+cos
+ 
+ 5π
+ 9
+
+−0.1736
+sin
+ π
+ 
+ 10
+cos
+ π
+ 
+ 10
+
+0.9511
+sin
+ 
+ 3π
+ 4
+cos
+ 
+ 3π
+ 4
+
+−0.7071
+sin98°
+cos98°
+
+−0.1392
+cos310°
+sin310°
+
+−0.7660
+
+Extensions
+
+For the following exercises, evaluate.
+sin(
+
+ 11π
+ 3
+
+ )cos(
+
+ −5π
+ 6
+
+ )
+sin(
+
+ 3π
+ 4
+
+ )cos(
+
+ 5π
+ 3
+
+ )
+2
+
+ 4
+sin(
+ 
+ −
+ 
+ 4π
+ 3
+
+ )cos(
+
+ π
+ 2
+
+ )
+sin(
+
+ −9π
+ 4
+
+ )cos(
+
+ −π
+ 6
+
+ )
+−
+
+ 6
+
+ 4
+sin(
+
+ π
+ 6
+
+ )cos(
+
+ −π
+ 3
+
+ )
+sin(
+
+ 7π
+ 4
+
+ )cos(
+
+ −2π
+ 3
+
+ )
+2
+
+ 4
+cos(
+
+ 5π
+ 6
+
+ )cos(
+
+ 2π
+ 3
+
+ )
+cos(
+
+ −π
+ 3
+
+ )cos(
+
+ π
+ 4
+
+ )
+2
+
+ 4
+sin(
+
+ −5π
+ 4
+
+ )sin(
+
+ 11π
+ 6
+
+ )
+sin(
+ π
+ )sin(
+
+ π
+ 6
+
+ )
+
+0
+
+Real-World Applications
+
+For the following exercises, use this scenario: A child enters a carousel that takes one minute to revolve once around. The child enters at the point 
+ 
+ (0,1),
+ 
+ that is, on the due north position. Assume the carousel revolves counter clockwise.
+
+What are the coordinates of the child after 45 seconds?
+
+What are the coordinates of the child after 90 seconds?
+(
+ 
+ 0,–1
+ 
+ )
+
+What are the coordinates of the child after 125 seconds?
+
+When will the child have coordinates 
+ 
+ (0.707,–0.707)
+ 
+ if the ride lasts 6 minutes? (There are multiple answers.)
+
+37.5 seconds, 97.5 seconds, 157.5 seconds, 217.5 seconds, 277.5 seconds, 337.5 seconds
+
+When will the child have coordinates 
+ 
+ (
+ 
+ –0.866,–0.5
+ 
+ )
+ 
+ if the ride lasts 6 minutes?
+
+the x-value of the point on a unit circle corresponding to a given angle
+a corollary of the Pythagorean Theorem stating that the square of the cosine of a given angle plus the square of the sine of that angle equals 1
+the y-value of the point on a unit circle corresponding to a given angle

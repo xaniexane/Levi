@@ -1,0 +1,62 @@
+# m00078
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Nested dictionaries and dictionary comprehension
+
+Nested dictionaries and dictionary comprehension
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Explain the structure of nested dictionaries.
+
+Use dictionary comprehension to create a dictionary object.
+
+Nested dictionaries
+
+As described before, Python dictionaries are a type of data structure that allows for storing data in key-value pairs. Nested dictionaries are dictionaries that are stored as values within another dictionary. Ex: An organizational chart with keys being different departments and values being dictionaries of employees in a given department. For storing employee information in a department, a dictionary can be used with keys being employee IDs and values being employee names. The tables below outline the structure of such nested dictionaries and how nested values can be accessed.
+
+Defining nested dictionaries and accessing elements
+
+company_org_chart = {
+  "Marketing": {
+    "ID234": "Jane Smith"
+  },
+  "Sales": {
+    "ID123": "Bob Johnson",
+    "ID122": "David Lee"
+  },
+  "Engineering": {
+    "ID303": "Radhika Potlapally",
+    "ID321": "Maryam Samimi"
+  }
+}
+print(company_org_chart["Sales"]["ID122"])
+print(company_org_chart["Engineering"]["ID321"])
+
+David Lee
+Maryam Samimi
+Nested dictionary structure
+
+Dictionary comprehension
+Dictionary comprehension is a concise and efficient way to create a dictionary in Python. With dictionary comprehension, elements of an iterable object are transformed into key-value pairs. The syntax of dictionary comprehension is similar to list comprehension, but instead of using square brackets, curly braces are used to define a dictionary.
+
+Here is a general syntax for dictionary comprehension:
+
+Syntax for dictionary comprehension
+
+Squares of numbers
+
+Dictionary comprehension
+
+Product prices
+
+Suppose you have a dictionary of product prices, where the keys are product names and the values are their respective prices in dollars. Write a Python program that uses dictionary comprehension to create a new dictionary that has the same keys as the original dictionary, but the values are the prices in euros. Assume that the exchange rate is 1 dollar = 0.85 euros.
+
+Restructuring the company data
+
+Suppose you have a dictionary that contains information about employees at a company. Each employee is identified by an ID number, and their information includes their name, department, and salary. You want to create a nested dictionary that groups employees by department so that you can easily see the names and salaries of all employees in each department. Write a Python program that when given a dictionary, employees, outputs a nested dictionary, dept_employees, which groups employees by department.

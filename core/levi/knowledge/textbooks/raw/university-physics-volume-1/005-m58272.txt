@@ -1,0 +1,135 @@
+# m58272
+# Book: OpenStax University Physics Volume 1
+# Subject: science
+# Source: https://github.com/openstax/osbooks-university-physics-bundle
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Dimensional Analysis
+
+Dimensional Analysis
+
+By the end of this section, you will be able to:
+
+Find the dimensions of a mathematical expression involving physical quantities.
+
+Determine whether an equation involving physical quantities is dimensionally consistent.
+
+The dimension of any physical quantity expresses its dependence on the base quantities as a product of symbols (or powers of symbols) representing the base quantities. lists the base quantities and the symbols used for their dimension. For example, a measurement of length is said to have dimension L or L1, a measurement of mass has dimension M or M1, and a measurement of time has dimension T or T1. Like units, dimensions obey the rules of algebra. Thus, area is the product of two lengths and so has dimension L2, or length squared. Similarly, volume is the product of three lengths and has dimension L3, or length cubed. Speed has dimension length over time, L/T or LT–1. Volumetric mass density has dimension M/L3 or ML–3, or mass over length cubed. In general, the dimension of any physical quantity can be written as LaMbTcIdΘeNfJg for some powers a,b,c,d,e,f, and g. We can write the dimensions of a length in this form with a=1 and the remaining six powers all set equal to zero: L1=L1M0T0I0Θ0N0J0. Any quantity with a dimension that can be written so that all seven powers are zero (that is, its dimension is L0M0T0I0Θ0N0J0) is called dimensionless (or sometimes “of dimension 1,” because anything raised to the zero power is one). Physicists often call dimensionless quantities pure numbers.
+
+Base Quantities and Their Dimensions
+Symbol for Dimension
+Length
+L
+Mass
+M
+Time
+T
+Current
+I
+Thermodynamic temperature
+Θ
+Amount of substance
+N
+Luminous intensity
+J
+Physicists often use square brackets around the symbol for a physical quantity to represent the dimensions of that quantity. For example, if r is the radius of a cylinder and h is its height, then we write [r]=L and [h]=L to indicate the dimensions of the radius and height are both those of length, or L. Similarly, if we use the symbol A for the surface area of a cylinder and V for its volume, then [A] = L2 and [V] = L3. If we use the symbol m for the mass of the cylinder and ρ for the density of the material from which the cylinder is made, then [m]=M and [ρ]=ML−3.
+
+The importance of the concept of dimension arises from the fact that any mathematical equation relating physical quantities must be dimensionally consistent, which means the equation must obey the following rules:
+
+Every term in an expression must have the same dimensions; it does not make sense to add or subtract quantities of differing dimension (think of the old saying: “You can’t add apples and oranges”). In particular, the expressions on each side of the equality in an equation must have the same dimensions.
+
+The arguments of any of the standard mathematical functions such as trigonometric functions (such as sine and cosine), logarithms, or exponential functions that appear in the equation must be dimensionless. These functions require pure numbers as inputs and give pure numbers as outputs.
+
+If either of these rules is violated, an equation is not dimensionally consistent and cannot possibly be a correct statement of physical law. This simple fact can be used to check for typos or algebra mistakes, to help remember the various laws of physics, and even to suggest the form that new laws of physics might take. This last use of dimensions is beyond the scope of this text, but is something you may learn later in your academic career.
+Using Dimensions to Remember an Equation
+Suppose we need the formula for the area of a circle for some computation. Like many people who learned geometry too long ago to recall with any certainty, two expressions may pop into our mind when we think of circles: πr2 and 2πr. One expression is the circumference of a circle of radius r and the other is its area. But which is which?
+
+Using Dimensions to Remember an Equation
+Strategy
+One natural strategy is to look it up, but this could take time to find information from a reputable source. Besides, even if we think the source is reputable, we shouldn’t trust everything we read. It is nice to have a way to double-check just by thinking about it. Also, we might be in a situation in which we cannot look things up (such as during a test). Thus, the strategy is to find the dimensions of both expressions by making use of the fact that dimensions follow the rules of algebra. If either expression does not have the same dimensions as area, then it cannot possibly be the correct equation for the area of a circle.
+
+Strategy
+Solution
+We know the dimension of area is L2. Now, the dimension of the expression πr2 is
+
+Solution
+
+since the constant π is a pure number and the radius r is a length. Therefore, πr2 has the dimension of area. Similarly, the dimension of the expression 2πr is
+
+since the constants 2 and π are both dimensionless and the radius r is a length. We see that 2πr has the dimension of length, which means it cannot possibly be an area.
+
+We rule out 2πr because it is not dimensionally consistent with being an area. We see that πr2 is dimensionally consistent with being an area, so if we have to choose between these two expressions, πr2 is the one to choose.
+Significance
+This may seem like kind of a silly example, but the ideas are very general. As long as we know the dimensions of the individual physical quantities that appear in an equation, we can check to see whether the equation is dimensionally consistent. On the other hand, knowing that true equations are dimensionally consistent, we can match expressions from our imperfect memories to the quantities for which they might be expressions. Doing this will not help us remember dimensionless factors that appear in the equations (for example, if you had accidentally conflated the two expressions from the example into 2πr2, then dimensional analysis is no help), but it does help us remember the correct basic form of equations.
+
+Significance
+
+Suppose we want the formula for the volume of a sphere. The two expressions commonly mentioned in elementary discussions of spheres are 4πr2 and 4πr3/3. One is the volume of a sphere of radius r and the other is its surface area. Which one is the volume?
+4πr3/3
+Checking Equations for Dimensional Consistency
+Consider the physical quantities s, v, a, and t with dimensions [s]=L, [v]=LT−1, [a]=LT−2, and [t]=T. Determine whether each of the following equations is dimensionally consistent: (a) s=vt+0.5at2; (b) s=vt2+0.5at; and (c) v=sin(at2/s).
+
+Checking Equations for Dimensional Consistency
+Strategy
+By the definition of dimensional consistency, we need to check that each term in a given equation has the same dimensions as the other terms in that equation and that the arguments of any standard mathematical functions are dimensionless.
+
+Strategy
+Solution
+
+Solution
+
+There are no trigonometric, logarithmic, or exponential functions to worry about in this equation, so we need only look at the dimensions of each term appearing in the equation. There are three terms, one in the left expression and two in the expression on the right, so we look at each in turn:
+[s]=L[vt]=[v]·[t]=LT−1·T=LT0=L[0.5at2]=[a]·[t]2=LT−2·T2=LT0=L. All three terms have the same dimension, so this equation is dimensionally consistent.
+
+Again, there are no trigonometric, exponential, or logarithmic functions, so we only need to look at the dimensions of each of the three terms appearing in the equation:
+[s]=L[vt2]=[v]·[t]2=LT−1·T2=LT[at]=[a]·[t]=LT−2·T=LT−1. None of the three terms has the same dimension as any other, so this is about as far from being dimensionally consistent as you can get. The technical term for an equation like this is nonsense.
+
+This equation has a trigonometric function in it, so first we should check that the argument of the sine function is dimensionless:
+[at2s]=[a]·[t]2[s]=LT−2·T2L=LL=1. The argument is dimensionless. So far, so good. Now we need to check the dimensions of each of the two terms (that is, the left expression and the right expression) in the equation:
+[v]=LT−1[sin(at2s)]=1.
+
+The two terms have different dimensions—meaning, the equation is not dimensionally consistent. This equation is another example of “nonsense.”
+Significance
+If we are trusting people, these types of dimensional checks might seem unnecessary. But, rest assured, any textbook on a quantitative subject such as physics (including this one) almost certainly contains some equations with typos. Checking equations routinely by dimensional analysis save us the embarrassment of using an incorrect equation. Also, checking the dimensions of an equation we obtain through algebraic manipulation is a great way to make sure we did not make a mistake (or to spot a mistake, if we made one).
+
+Significance
+
+Is the equation v = at dimensionally consistent?
+
+yes
+
+One further point that needs to be mentioned is the effect of the operations of calculus on dimensions. We have seen that dimensions obey the rules of algebra, just like units, but what happens when we take the derivative of one physical quantity with respect to another or integrate a physical quantity over another? The derivative of a function is just the slope of the line tangent to its graph and slopes are ratios, so for physical quantities v and t, we have that the dimension of the derivative of v with respect to t is just the ratio of the dimension of v over that of t:
+
+Similarly, since integrals are just sums of products, the dimension of the integral of v with respect to t is simply the dimension of v times the dimension of t:
+
+By the same reasoning, analogous rules hold for the units of physical quantities derived from other quantities by integration or differentiation.
+
+Summary
+
+The dimension of a physical quantity is just an expression of the base quantities from which it is derived.
+
+All equations expressing physical laws or principles must be dimensionally consistent. This fact can be used as an aid in remembering physical laws, as a way to check whether claimed relationships between physical quantities are possible, and even to derive new physical laws.
+
+Problems
+
+A student is trying to remember some formulas from geometry. In what follows, assume A is area, V is volume, and all other variables are lengths. Determine which formulas are dimensionally consistent. (a) V=πr2h; (b) A=2πr2+2πrh; (c) V=0.5bh; (d) V=πd2; (e) V=πd3/6.
+
+Consider the physical quantities s, v, a, and t with dimensions [s]=L, [v]=LT−1, [a]=LT−2, and [t]=T. Determine whether each of the following equations is dimensionally consistent. (a) v2=2as; (b) s=vt2+0.5at2; (c) v=s/t; (d) a=v/t.
+
+a. Yes, both terms have dimension L2T-2 b. No. c. Yes, both terms have dimension LT-1 d. Yes, both terms have dimension LT-2
+
+Consider the physical quantities m, s, v, a, t, and r with dimensions [m] = M, [s] = L, [v] = LT–1, [a] = LT–2, [t] = T, and [r] = L. Assuming each of the following equations is dimensionally consistent, find the dimension of the quantity on the left-hand side of the equation: (a) F = ma; (b) K = 0.5mv2; (c) p = mv; (d) W = mas; (e) L = mvr.
+
+Suppose quantity s is a length and quantity t is a time. Suppose the quantities v and a are defined by v = ds/dt and a = dv/dt. (a) What is the dimension of v? (b) What is the dimension of the quantity a? What are the dimensions of (c) ∫vdt, (d) ∫adt, and (e) da/dt?
+
+a. [v] = LT–1; b. [a] = LT–2; c. [∫vdt]=L; d. [∫adt]=LT–1; e. [dadt]=LT–3
+
+Suppose [V] = L3, [ρ]=ML–3, and [t] = T. (a) What is the dimension of ∫ρdV? (b) What is the dimension of dV/dt? (c) What is the dimension of ρ(dV/dt)?
+
+The arc length formula says the length s of arc subtended by angle Ɵ in a circle of radius r is given by the equation s=rƟ. What are the dimensions of (a) s, (b) r, and (c) Ɵ?
+
+a. L; b. L; c. L0 = 1 (that is, it is dimensionless)
+
+expression of the dependence of a physical quantity on the base quantities as a product of powers of symbols representing the base quantities; in general, the dimension of a quantity has the form LaMbTcIdΘeNfJg for some powers a, b, c, d, e, f, and g.
+equation in which every term has the same dimensions and the arguments of any mathematical functions appearing in the equation are dimensionless
+quantity with a dimension of L0M0T0I0Θ0N0J0=1; also called quantity of dimension 1 or a pure number

@@ -1,0 +1,366 @@
+# m68727
+# Book: OpenStax Chemistry
+# Subject: science
+# Source: https://github.com/openstax/osbooks-chemistry-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Enthalpy
+
+Enthalpy
+
+By the end of this section, you will be able to:
+
+State the first law of thermodynamics
+
+Define enthalpy and explain its classification as a state function
+
+Write and balance thermochemical equations
+
+Calculate enthalpy changes for various chemical reactions
+
+Explain Hess’s law and use it to compute reaction enthalpies
+
+Thermochemistry is a branch of chemical thermodynamics, the science that deals with the relationships between heat, work, and other forms of energy in the context of chemical and physical processes. As we concentrate on thermochemistry in this chapter, we need to consider some widely used concepts of thermodynamics.
+
+Substances act as reservoirs of energy, meaning that energy can be added to them or removed from them. Energy is stored in a substance when the kinetic energy of its atoms or molecules is raised. The greater kinetic energy may be in the form of increased translations (travel or straight-line motions), vibrations, or rotations of the atoms or molecules. When thermal energy is lost, the intensities of these motions decrease and the kinetic energy falls. The total of all possible kinds of energy present in a substance is called the internal energy (U), sometimes symbolized as E.
+
+As a system undergoes a change, its internal energy can change, and energy can be transferred from the system to the surroundings, or from the surroundings to the system. Energy is transferred into a system when it absorbs heat (q) from the surroundings or when the surroundings do work (w) on the system. For example, energy is transferred into room-temperature metal wire if it is immersed in hot water (the wire absorbs heat from the water), or if you rapidly bend the wire back and forth (the wire becomes warmer because of the work done on it). Both processes increase the internal energy of the wire, which is reflected in an increase in the wire’s temperature. Conversely, energy is transferred out of a system when heat is lost from the system, or when the system does work on the surroundings.
+
+The relationship between internal energy, heat, and work can be represented by the equation:
+
+as shown in . This is one version of the first law of thermodynamics, and it shows that the internal energy of a system changes through heat flow into or out of the system (positive q is heat flow in; negative q is heat flow out) or work done on or by the system. The work, w, is positive if it is done on the system and negative if it is done by the system.
+
+A type of work called expansion work (or pressure-volume work) occurs when a system pushes back the surroundings against a restraining pressure, or when the surroundings compress the system. An example of this occurs during the operation of an internal combustion engine. The reaction of gasoline and oxygen is exothermic. Some of this energy is given off as heat, and some does work pushing the piston in the cylinder. The substances involved in the reaction are the system, and the engine and the rest of the universe are the surroundings. The system loses energy by both heating and doing work on the surroundings, and its internal energy decreases. (The engine is able to keep the car moving because this process is repeated many times per second while the engine is running.) We will consider how to determine the amount of work involved in a chemical or physical change in the chapter on thermodynamics.
+
+This view of an internal combustion engine illustrates the conversion of energy produced by the exothermic combustion reaction of a fuel such as gasoline into energy of motion.
+
+As discussed, the relationship between internal energy, heat, and work can be represented as ΔU = q + w. Internal energy is an example of a state function (or state variable), whereas heat and work are not state functions. The value of a state function depends only on the state that a system is in, and not on how that state is reached. If a quantity is not a state function, then its value does depend on how the state is reached. An example of a state function is altitude or elevation. If you stand on the summit of Mt. Kilimanjaro, you are at an altitude of 5895 m, and it does not matter whether you hiked there or parachuted there. The distance you traveled to the top of Kilimanjaro, however, is not a state function. You could climb to the summit by a direct route or by a more roundabout, circuitous path (). The distances traveled would differ (distance is not a state function) but the elevation reached would be the same (altitude is a state function).
+
+Chemists ordinarily use a property known as enthalpy (H) to describe the thermodynamics of chemical and physical processes. Enthalpy is defined as the sum of a system’s internal energy (U) and the mathematical product of its pressure (P) and volume (V):
+
+Enthalpy is also a state function. Enthalpy values for specific substances cannot be measured directly; only enthalpy changes for chemical or physical processes can be determined. For processes that take place at constant pressure (a common condition for many chemical and physical changes), the enthalpy change (ΔH) is:
+
+The mathematical product PΔV represents work (w), namely, expansion or pressure-volume work as noted. By their definitions, the arithmetic signs of ΔV and w will always be opposite:
+
+Substituting this equation and the definition of internal energy into the enthalpy-change equation yields:
+
+where qp is the heat of reaction under conditions of constant pressure.
+
+And so, if a chemical or physical process is carried out at constant pressure with the only work done caused by expansion or contraction, then the heat flow (qp) and enthalpy change (ΔH) for the process are equal.
+
+The heat given off when you operate a Bunsen burner is equal to the enthalpy change of the methane combustion reaction that takes place, since it occurs at the essentially constant pressure of the atmosphere. On the other hand, the heat produced by a reaction measured in a bomb calorimeter () is not equal to ΔH because the closed, constant-volume metal container prevents the pressure from remaining constant (it may increase or decrease if the reaction yields increased or decreased amounts of gaseous species). Chemists usually perform experiments under normal atmospheric conditions, at constant external pressure with q = ΔH, which makes enthalpy the most convenient choice for determining heat changes for chemical reactions.
+
+The following conventions apply when using ΔH:
+A negative value of an enthalpy change, ΔH < 0, indicates an exothermic reaction; a positive value, ΔH > 0, indicates an endothermic reaction. If the direction of a chemical equation is reversed, the arithmetic sign of its ΔH is changed (a process that is endothermic in one direction is exothermic in the opposite direction).
+
+A negative value of an enthalpy change, ΔH < 0, indicates an exothermic reaction; a positive value, ΔH > 0, indicates an endothermic reaction. If the direction of a chemical equation is reversed, the arithmetic sign of its ΔH is changed (a process that is endothermic in one direction is exothermic in the opposite direction).
+Chemists use a thermochemical equation to represent the changes in both matter and energy. In a thermochemical equation, the enthalpy change of a reaction is shown as a ΔH value following the equation for the reaction. This ΔH value indicates the amount of heat associated with the reaction involving the number of moles of reactants and products as shown in the chemical equation. For example, consider this equation:
+H2(g)+12O2(g)⟶H2O(l)ΔH=−286kJ
+This equation indicates that when 1 mole of hydrogen gas and 12 mole of oxygen gas at some temperature and pressure change to 1 mole of liquid water at the same temperature and pressure, 286 kJ of heat are released to the surroundings. If the coefficients of the chemical equation are multiplied by some factor, the enthalpy change must be multiplied by that same factor (ΔH is an extensive property):
+(two-fold increase in amounts)2H2(g)+O2(g)⟶2H2O(l)ΔH=2×(−286kJ)=−572kJ(two-fold decrease in amounts)12H2(g)+14O2(g)⟶12H2O(l)ΔH=12×(−286kJ)=−143kJ
+
+Chemists use a thermochemical equation to represent the changes in both matter and energy. In a thermochemical equation, the enthalpy change of a reaction is shown as a ΔH value following the equation for the reaction. This ΔH value indicates the amount of heat associated with the reaction involving the number of moles of reactants and products as shown in the chemical equation. For example, consider this equation:
+
+This equation indicates that when 1 mole of hydrogen gas and 12 mole of oxygen gas at some temperature and pressure change to 1 mole of liquid water at the same temperature and pressure, 286 kJ of heat are released to the surroundings. If the coefficients of the chemical equation are multiplied by some factor, the enthalpy change must be multiplied by that same factor (ΔH is an extensive property):
+The enthalpy change of a reaction depends on the physical states of the reactants and products, so these must be shown. For example, when 1 mole of hydrogen gas and 12 mole of oxygen gas change to 1 mole of liquid water at the same temperature and pressure, 286 kJ of heat are released. If gaseous water forms, only 242 kJ of heat are released.
+H2(g)+12O2(g)⟶H2O(g)ΔH=−242kJ
+
+The enthalpy change of a reaction depends on the physical states of the reactants and products, so these must be shown. For example, when 1 mole of hydrogen gas and 12 mole of oxygen gas change to 1 mole of liquid water at the same temperature and pressure, 286 kJ of heat are released. If gaseous water forms, only 242 kJ of heat are released.
+Writing Thermochemical EquationsWhen 0.0500 mol of HCl(aq) reacts with 0.0500 mol of NaOH(aq) to form 0.0500 mol of NaCl(aq), 2.9 kJ of heat are produced. Write a balanced thermochemical equation for the reaction of one mole of HCl.
+
+Writing Thermochemical Equations
+Solution
+For the reaction of 0.0500 mol acid (HCl), q = −2.9 kJ. The reactants are provided in stoichiometric amounts (same molar ratio as in the balanced equation), and so the amount of acid may be used to calculate a molar enthalpy change. Since ΔH is an extensive property, it is proportional to the amount of acid neutralized:
+
+Solution
+
+The thermochemical equation is then
+Check Your Learning
+When 1.34 g Zn(s) reacts with 60.0 mL of 0.750 M HCl(aq), 3.14 kJ of heat are produced. Determine the enthalpy change per mole of zinc reacting for the reaction:
+
+Check Your Learning
+
+Answer:
+
+ΔH = −153 kJ
+
+Be sure to take both stoichiometry and limiting reactants into account when determining the ΔH for a chemical reaction.
+Writing Thermochemical Equations
+A gummy bear contains 2.67 g sucrose, C12H22O11. When it reacts with 7.19 g potassium chlorate, KClO3, 43.7 kJ of heat are produced. Write a thermochemical equation for the reaction of one mole of sucrose:
+
+Writing Thermochemical Equations
+Solution
+Unlike the previous example exercise, this one does not involve the reaction of stoichiometric amounts of reactants, and so the limiting reactant must be identified (it limits the yield of the reaction and the amount of thermal energy produced or consumed).
+
+Solution
+
+The provided amounts of the two reactants are
+
+The provided molar ratio of perchlorate-to-sucrose is then
+
+The balanced equation indicates 8 mol KClO3 are required for reaction with 1 mol C12H22O11. Since the provided amount of KClO3 is less than the stoichiometric amount, it is the limiting reactant and may be used to compute the enthalpy change:
+
+Because the equation, as written, represents the reaction of 8 mol KClO3, the enthalpy change is
+
+The enthalpy change for this reaction is −5960 kJ, and the thermochemical equation is:
+Check Your Learning
+When 1.42 g of iron reacts with 1.80 g of chlorine, 3.22 g of FeCl2(s) and 8.60 kJ of heat is produced. What is the enthalpy change for the reaction when 1 mole of FeCl2(s) is produced?
+
+Check Your Learning
+
+Answer:
+
+ΔH = −338 kJ
+
+Enthalpy changes are typically tabulated for reactions in which both the reactants and products are at the same conditions. A standard state is a commonly accepted set of conditions used as a reference point for the determination of properties under other different conditions. For chemists, the IUPAC standard state refers to materials under a pressure of 1 bar and solutions at 1 M, and does not specify a temperature. Many thermochemical tables list values with a standard state of 1 atm. Because the ΔH of a reaction changes very little with such small changes in pressure (1 bar = 0.987 atm), ΔH values (except for the most precisely measured values) are essentially the same under both sets of standard conditions. We will include a superscripted “o” in the enthalpy change symbol to designate standard state. Since the usual (but not technically standard) temperature is 298.15 K, this temperature will be assumed unless some other temperature is specified. Thus, the symbol (ΔH°) is used to indicate an enthalpy change for a process occurring under these conditions. (The symbol ΔH is used to indicate an enthalpy change for a reaction occurring under nonstandard conditions.)
+
+The enthalpy changes for many types of chemical and physical processes are available in the reference literature, including those for combustion reactions, phase transitions, and formation reactions. As we discuss these quantities, it is important to pay attention to the extensive nature of enthalpy and enthalpy changes. Since the enthalpy change for a given reaction is proportional to the amounts of substances involved, it may be reported on that basis (i.e., as the ΔH for specific amounts of reactants). However, we often find it more useful to divide one extensive property (ΔH) by another (amount of substance), and report a per-amount intensive value of ΔH, often “normalized” to a per-mole basis. (Note that this is similar to determining the intensive property specific heat from the extensive property heat capacity, as seen previously.)
+
+Standard Enthalpy of Combustion
+Standard enthalpy of combustion (ΔHC°) is the enthalpy change when 1 mole of a substance burns (combines vigorously with oxygen) under standard state conditions; it is sometimes called “heat of combustion.” For example, the enthalpy of combustion of ethanol, −1366.8 kJ/mol, is the amount of heat produced when one mole of ethanol undergoes complete combustion at 25 °C and 1 atmosphere pressure, yielding products also at 25 °C and 1 atm.
+
+Enthalpies of combustion for many substances have been measured; a few of these are listed in . Many readily available substances with large enthalpies of combustion are used as fuels, including hydrogen, carbon (as coal or charcoal), and hydrocarbons (compounds containing only hydrogen and carbon), such as methane, propane, and the major components of gasoline.
+
+Standard Molar Enthalpies of Combustion
+Substance
+Combustion Reaction
+Enthalpy of Combustion, ΔHc°(kJmolat25°C)
+C(s)+O2(g)⟶CO2(g)
+−393.5
+H2(g)+12O2(g)⟶H2O(l)
+−285.8
+Mg(s)+12O2(g)⟶MgO(s)
+−601.6
+S(s)+O2(g)⟶SO2(g)
+−296.8
+CO(g)+12O2(g)⟶CO2(g)
+−283.0
+CH4(g)+2O2(g)⟶CO2(g)+2H2O(l)
+−890.8
+C2H2(g)+52O2(g)⟶2CO2(g)+H2O(l)
+−1301.1
+C2H5OH(l)+3O2(g)⟶2CO2(g)+3H2O(l)
+−1366.8
+CH3OH(l)+32O2(g)⟶CO2(g)+2H2O(l)
+−726.1
+C8H18(l)+252O2(g)⟶8CO2(g)+9H2O(l)
+Using Enthalpy of Combustion
+As suggests, the combustion of gasoline is a highly exothermic process. Let us determine the approximate amount of heat produced by burning 1.00 L of gasoline, assuming the enthalpy of combustion of gasoline is the same as that of isooctane, a common component of gasoline. The density of isooctane is 0.692 g/mL.
+
+Using Enthalpy of Combustion
+Solution
+Starting with a known amount (1.00 L of isooctane), we can perform conversions between units until we arrive at the desired amount of heat or energy. The enthalpy of combustion of isooctane provides one of the necessary conversions. gives this value as −5460 kJ per 1 mole of isooctane (C8H18).
+
+Solution
+
+Using these data,
+
+The combustion of 1.00 L of isooctane produces 33,100 kJ of heat. (This amount of energy is enough to melt 99.2 kg, or about 218 lbs, of ice.)
+
+Note: If you do this calculation one step at a time, you would find:
+Check Your Learning
+How much heat is produced by the combustion of 125 g of acetylene?
+
+Check Your Learning
+
+Answer:
+
+6.25 × 103 kJ
+
+Emerging Algae-Based Energy Technologies (Biofuels)
+
+As reserves of fossil fuels diminish and become more costly to extract, the search is ongoing for replacement fuel sources for the future. Among the most promising biofuels are those derived from algae (). The species of algae used are nontoxic, biodegradable, and among the world’s fastest growing organisms. About 50% of algal weight is oil, which can be readily converted into fuel such as biodiesel. Algae can yield 26,000 gallons of biofuel per hectare—much more energy per acre than other crops. Some strains of algae can flourish in brackish water that is not usable for growing other crops. Algae can produce biodiesel, biogasoline, ethanol, butanol, methane, and even jet fuel.
+
+According to the US Department of Energy, only 39,000 square kilometers (about 0.4% of the land mass of the US or less than 17
+of the area used to grow corn) can produce enough algal fuel to replace all the petroleum-based fuel used in the US. The cost of algal fuels is becoming more competitive—for instance, the US Air Force is producing jet fuel from algae at a total cost of under $5 per gallon.For more on algal fuel, see http://www.theguardian.com/environment/2010/feb/13/algae-solve-pentagon-fuel-problem. The process used to produce algal fuel is as follows: grow the algae (which use sunlight as their energy source and CO2 as a raw material); harvest the algae; extract the fuel compounds (or precursor compounds); process as necessary (e.g., perform a transesterification reaction to make biodiesel); purify; and distribute ().
+
+Click here to learn more about the process of creating algae biofuel.
+
+Standard Enthalpy of Formation
+
+A standard enthalpy of formation ΔHf° is an enthalpy change for a reaction in which exactly 1 mole of a pure substance is formed from free elements in their most stable states under standard state conditions. These values are especially useful for computing or predicting enthalpy changes for chemical reactions that are impractical or dangerous to carry out, or for processes for which it is difficult to make measurements. If we have values for the appropriate standard enthalpies of formation, we can determine the enthalpy change for any reaction, which we will practice in the next section on Hess’s law.
+
+The standard enthalpy of formation of CO2(g) is −393.5 kJ/mol. This is the enthalpy change for the exothermic reaction:
+
+starting with the reactants at a pressure of 1 atm and 25 °C (with the carbon present as graphite, the most stable form of carbon under these conditions) and ending with one mole of CO2, also at 1 atm and 25 °C. For nitrogen dioxide, NO2(g), ΔHf° is 33.2 kJ/mol. This is the enthalpy change for the reaction:
+
+A reaction equation with 12
+mole of N2 and 1 mole of O2 is correct in this case because the standard enthalpy of formation always refers to 1 mole of product, NO2(g).
+
+You will find a table of standard enthalpies of formation of many common substances in Appendix G. These values indicate that formation reactions range from highly exothermic (such as −2984 kJ/mol for the formation of P4O10) to strongly endothermic (such as +226.7 kJ/mol for the formation of acetylene, C2H2). By definition, the standard enthalpy of formation of an element in its most stable form is equal to zero under standard conditions, which is 1 atm for gases and 1 M for solutions.
+Evaluating an Enthalpy of Formation
+Ozone, O3(g), forms from oxygen, O2(g), by an endothermic process. Ultraviolet radiation is the source of the energy that drives this reaction in the upper atmosphere. Assuming that both the reactants and products of the reaction are in their standard states, determine the standard enthalpy of formation, ΔHf° of ozone from the following information:
+
+Evaluating an Enthalpy of Formation
+SolutionΔHf° is the enthalpy change for the formation of one mole of a substance in its standard state from the elements in their standard states. Thus, ΔHf° for O3(g) is the enthalpy change for the reaction:
+
+Solution
+
+For the formation of 2 mol of O3(g), ΔH°=+286 kJ. This ratio, (286kJ2molO3), can be used as a conversion factor to find the heat produced when 1 mole of O3(g) is formed, which is the enthalpy of formation for O3(g):
+
+Therefore, ΔHf°[ O3(g) ]=+143 kJ/mol.
+Check Your Learning
+Hydrogen gas, H2, reacts explosively with gaseous chlorine, Cl2, to form hydrogen chloride, HCl(g). What is the enthalpy change for the reaction of 1 mole of H2(g) with 1 mole of Cl2(g) if both the reactants and products are at standard state conditions? The standard enthalpy of formation of HCl(g) is −92.3 kJ/mol.
+
+Check Your Learning
+
+Answer:
+
+For the reaction H2(g)+Cl2(g)⟶2HCl(g)ΔH°=−184.6kJ
+Writing Reaction Equations for ΔHf°
+Write the heat of formation reaction equations for:
+
+Writing Reaction Equations for ΔHf°
+
+(a) C2H5OH(l)
+
+(b) Ca3(PO4)2(s)
+Solution
+Remembering that ΔHf° reaction equations are for forming 1 mole of the compound from its constituent elements under standard conditions, we have:
+
+Solution
+
+(a) 2C(s,graphite)+3H2(g)+12O2(g)⟶C2H5OH(l)
+
+(b) 3Ca(s)+12P4(s)+4O2(g)⟶Ca3(PO4)2(s)
+
+Note: The standard state of carbon is graphite, and phosphorus exists as P4.
+Check Your Learning
+Write the heat of formation reaction equations for:
+
+Check Your Learning
+
+(a) C2H5OC2H5(l)
+
+(b) Na2CO3(s)
+
+Answer:
+
+(a) 4C(s,graphite)+5H2(g)+12O2(g)⟶C2H5OC2H5(l); (b) 2Na(s)+C(s,graphite)+32O2(g)⟶Na2CO3(s)
+
+Hess’s Law
+
+There are two ways to determine the amount of heat involved in a chemical change: measure it experimentally, or calculate it from other experimentally determined enthalpy changes. Some reactions are difficult, if not impossible, to investigate and make accurate measurements for experimentally. And even when a reaction is not hard to perform or measure, it is convenient to be able to determine the heat involved in a reaction without having to perform an experiment.
+
+This type of calculation usually involves the use of Hess’s law, which states: If a process can be written as the sum of several stepwise processes, the enthalpy change of the total process equals the sum of the enthalpy changes of the various steps. Hess’s law is valid because enthalpy is a state function: Enthalpy changes depend only on where a chemical process starts and ends, but not on the path it takes from start to finish. For example, we can think of the reaction of carbon with oxygen to form carbon dioxide as occurring either directly or by a two-step process. The direct process is written:
+
+In the two-step process, first carbon monoxide is formed:
+
+Then, carbon monoxide reacts further to form carbon dioxide:
+
+The equation describing the overall reaction is the sum of these two chemical changes:
+
+Because the CO produced in Step 1 is consumed in Step 2, the net change is:
+
+According to Hess’s law, the enthalpy change of the reaction will equal the sum of the enthalpy changes of the steps.
+
+The result is shown in . We see that ΔH of the overall reaction is the same whether it occurs in one step or two. This finding (overall ΔH for the reaction = sum of ΔH values for reaction “steps” in the overall reaction) is true in general for chemical and physical processes.
+
+Before we further practice using Hess’s law, let us recall two important features of ΔH.
+ΔH is directly proportional to the quantities of reactants or products. For example, the enthalpy change for the reaction forming 1 mole of NO2(g) is +33.2 kJ:
+12N2(g)+O2(g)⟶NO2(g)ΔH=+33.2 kJ
+When 2 moles of NO2 (twice as much) are formed, the ΔH will be twice as large:
+N2(g)+2O2(g)⟶2NO2(g)ΔH=+66.4 kJ
+In general, if we multiply or divide an equation by a number, then the enthalpy change should also be multiplied or divided by the same number.
+
+ΔH is directly proportional to the quantities of reactants or products. For example, the enthalpy change for the reaction forming 1 mole of NO2(g) is +33.2 kJ:
+
+When 2 moles of NO2 (twice as much) are formed, the ΔH will be twice as large:
+
+In general, if we multiply or divide an equation by a number, then the enthalpy change should also be multiplied or divided by the same number.
+ΔH for a reaction in one direction is equal in magnitude and opposite in sign to ΔH for the reaction in the reverse direction. For example, given that:
+H2(g)+Cl2(g)⟶2HCl(g)ΔH=−184.6kJ
+Then, for the “reverse” reaction, the enthalpy change is also “reversed”:
+2HCl(g)⟶H2(g)+Cl2(g)ΔH=+184.6 kJ
+
+ΔH for a reaction in one direction is equal in magnitude and opposite in sign to ΔH for the reaction in the reverse direction. For example, given that:
+
+Then, for the “reverse” reaction, the enthalpy change is also “reversed”:
+Stepwise Calculation of ΔHf° Using Hess’s Law
+Determine the enthalpy of formation, ΔHf°,
+of FeCl3(s) from the enthalpy changes of the following two-step process that occurs under standard state conditions:
+
+Stepwise Calculation of ΔHf° Using Hess’s Law
+Solution
+We are trying to find the standard enthalpy of formation of FeCl3(s), which is equal to ΔH° for the reaction:
+
+Solution
+
+Looking at the reactions, we see that the reaction for which we want to find ΔH° is the sum of the two reactions with known ΔH values, so we must sum their ΔHs:
+
+The enthalpy of formation, ΔHf°, of FeCl3(s) is −399.5 kJ/mol.
+Check Your Learning
+Calculate ΔH for the process:
+
+Check Your Learning
+
+from the following information:
+
+Answer:
+
+66.4 kJ
+
+Here is a less straightforward example that illustrates the thought process involved in solving many Hess’s law problems. It shows how we can find many standard enthalpies of formation (and other values of ΔH) if they are difficult to determine experimentally.
+A More Challenging Problem Using Hess’s Law
+Chlorine monofluoride can react with fluorine to form chlorine trifluoride:
+
+A More Challenging Problem Using Hess’s Law
+(i) ClF(g)+F2(g)⟶ClF3(g)ΔH°=?
+
+Use the reactions here to determine the ΔH° for reaction (i):
+(ii) 2OF2(g)⟶O2(g)+2F2(g)ΔH(ii)°=−49.4kJ
+(iii) 2ClF(g)+O2(g)⟶Cl2O(g)+OF2(g)ΔH(iii)°=+214.0 kJ
+(iv) ClF3(g)+O2(g)⟶12Cl2O(g)+32OF2(g)ΔH(iv)°=+236.2 kJ
+Solution
+Our goal is to manipulate and combine reactions (ii), (iii), and (iv) such that they add up to reaction (i). Going from left to right in (i), we first see that ClF(g) is needed as a reactant. This can be obtained by multiplying reaction (iii) by 12, which means that the ΔH° change is also multiplied by 12:
+
+Solution
+
+Next, we see that F2 is also needed as a reactant. To get this, reverse and halve reaction (ii), which means that the ΔH° changes sign and is halved:
+
+To get ClF3 as a product, reverse (iv), changing the sign of ΔH°:
+
+Now check to make sure that these reactions add up to the reaction we want:
+
+Reactants 12O2
+and 12O2
+cancel out product O2; product 12Cl2O cancels reactant 12Cl2O; and reactant 32OF2 is cancelled by products 12OF2 and OF2. This leaves only reactants ClF(g) and F2(g) and product ClF3(g), which are what we want. Since summing these three modified reactions yields the reaction of interest, summing the three modified ΔH° values will give the desired ΔH°:
+Check Your Learning
+Aluminum chloride can be formed from its elements:
+
+Check Your Learning
+(i) 2Al(s)+3Cl2(g)⟶2AlCl3(s)ΔH°=?
+
+Use the reactions here to determine the ΔH° for reaction (i):
+(ii) HCl(g)⟶HCl(aq)ΔH(ii)°=−74.8kJ
+(iii) H2(g)+Cl2(g)⟶2HCl(g)ΔH(iii)°=−185kJ
+(iv) AlCl3(aq)⟶AlCl3(s)ΔH(iv)°=+323kJ/mol
+(v) 2Al(s)+6HCl(aq)⟶2AlCl3(aq)+3H2(g)ΔH(v)°=−1049kJ
+
+Answer:
+
+−1407 kJ
+
+We also can use Hess’s law to determine the enthalpy change of any reaction if the corresponding enthalpies of formation of the reactants and products are available. The stepwise reactions we consider are: (i) decompositions of the reactants into their component elements (for which the enthalpy changes are proportional to the negative of the enthalpies of formation of the reactants), followed by (ii) re-combinations of the elements to give the products (with the enthalpy changes proportional to the enthalpies of formation of the products). The standard enthalpy change of the overall reaction is therefore equal to: (ii) the sum of the standard enthalpies of formation of all the products plus (i) the sum of the negatives of the standard enthalpies of formation of the reactants. This is usually rearranged slightly to be written as follows, with ∑ representing “the sum of” and n standing for the stoichiometric coefficients:
+
+The following example shows in detail why this equation is valid, and how to use it to calculate the enthalpy change for a reaction of interest.
+Using Hess’s Law
+What is the standard enthalpy change for the reaction:
+
+Using Hess’s Law
+Solution: Using the EquationUse the special form of Hess’s law given previously, and values from Appendix G:
+
+Solution: Using the Equation
+Solution: Supporting Why the General Equation Is Valid
+Alternatively, we can write this reaction as the sum of the decompositions of 3NO2(g) and 1H2O(l) into their constituent elements, and the formation of 2HNO3(aq) and 1NO(g) from their constituent elements. Writing out these reactions, and noting their relationships to the ΔHf° values for these compounds (from Appendix G ), we have:
+
+Solution: Supporting Why the General Equation Is Valid
+
+Summing these reaction equations gives the reaction we are interested in:
+
+Summing their enthalpy changes gives the value we want to determine:
+
+So the standard enthalpy change for this reaction is ΔH° = −138.4 kJ.
+
+Note that this result was obtained by (1) multiplying the ΔHf° of each product by its stoichiometric coefficient and summing those values, (2) multiplying the ΔHf° of each reactant by its stoichiometric coefficient and summing tho
+[truncated]

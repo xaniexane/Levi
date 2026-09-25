@@ -1,0 +1,51 @@
+# m00064
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+A string is a sequence of characters.
+
+Logical operators can be used to compare two string values. String comparison is done by comparing corresponding ASCII values of characters in the order of appearance in the string.
+
+String indexing is used to access a character or a sequence of characters in the string.
+
+String objects are immutable.
+
+String splicing.
+
+At this point, you should be able to write programs dealing with string values.
+
+Chapter 8 reference.
+
+Method
+len()
+
+upper()
+
+lower()
+
+count()
+
+find()
+
+index()
+Returns the index of the first occurrence of a given substring in a string. If the substring does not exist in the string, a ValueError is returned.
+Returns the index of the first occurrence of a given substring in a string. If the substring does not exist in the string, a ValueError is returned.
+format()
+
+join()
+
+split()
+
+in
+
+in operator in a for loop
+for character in string:
+   # loop body

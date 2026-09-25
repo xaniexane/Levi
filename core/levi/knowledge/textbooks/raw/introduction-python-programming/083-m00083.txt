@@ -1,0 +1,57 @@
+# m00083
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Instance methods
+
+Instance methods
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Create and implement __init__() with multiple parameters including default parameter values.
+
+Describe what information an instance method has access to and can modify.
+
+More about __init__()
+
+In Python, __init__() is the special method that creates instances. __init__() must have the calling instance, self, as the first parameter and can have any number of other parameters with or without default parameter values.
+
+Creating patient vital signs instances
+
+Defining and using __init__() with parameters
+
+Consider the example above.
+
+Instance methods
+
+An instance method is used to access and modify instance attributes as well as class attributes. All methods shown so far, and most methods defined in a class definition, are instance methods.
+
+Instance methods are often used to get and set instance information
+
+CoffeeOrder instance methods
+
+Consider the example below:
+
+Creating a class for vending machines
+
+Write a class, VendingMachine, as described below. Default values follow the attributes. Ex: count's default value is 0. Create a vending machine using a value read from input and call instance methods.
+
+Instance attributes:
+
+count: 0
+
+max: 0
+
+Methods:
+__init__(num): initializes count and max with num parameter
+refill(): assigns count with max's value and prints "Refilled"
+sell(order): assigns count with the value of count minus order and prints "Sold: [order]"
+print_stock(): prints "Current stock: [count]"
+
+Given input:
+
+The output is:

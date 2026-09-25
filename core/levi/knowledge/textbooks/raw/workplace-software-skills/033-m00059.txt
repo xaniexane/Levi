@@ -1,0 +1,103 @@
+# m00059
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Creating Forms in Microsoft Word
+
+Creating Forms in Microsoft Word
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Understand the Developer tab and its usage
+
+Use the tools in the Controls command group
+
+Create a fillable form in Microsoft Word
+
+This section reviews how to build a fillable form in Word. Fillable forms can be very useful in businesses. These forms can be emailed to recipients as attachments and the recipients can fill in required information into the form quite easily. The fillable form creates fields that can be filled in by typing directly into the Word document. You can also insert checkbox fields, drop-down menus, and long text fields into the form. Fillable forms have many applications in business, such as gathering information on new hires that you might later want to put into a database, or obtaining company information from vendors for billing purposes. The primary purpose of the fillable form is to facilitate electronic completion while keeping the integrity and formatting of the document. Individuals can only input information into the fields you have identified. The rest of the document is locked from editing or deleting.
+shows a simple example of how a fillable form can be a useful tool. If you wanted to gather information on a new vendor, for example, you could create a simple document, email it to the vendor, and have the vendor send the completed document back to us. However, as shows, if you just create the form as a typical, printable Word document, it is difficult for the vendor to input their information. They would need to edit the form itself in order to fill it out, which is not ideal. With a fillable form, the vendor simply inserts their information into the provided fields and the rest of the document is protected from editing. The fillable form can also be enhanced with decorative features, such as the company logo.
+
+Developer Tab
+
+To create surveys in Word, you need to enable the Developer tab. This is typically not one of the default tabs in Word, so you need to manually add it. Go to the Options command on the File tab, then on the Customize Ribbon tab, then enable the Developer tab.
+
+To add the Developer toolbar on a Mac, you will need to go to Word, then select Preferences, then go to Ribbon & Toolbar. In the Search box, type “Developer.” Select the Developer tab from Suggestions. In the dialog box under the ribbon header, select the box that says Show Developer Tab.
+
+The Developer tab serves several purposes, as shows. In addition to containing the tools needed to design fillable forms, it also contains the tools to create computer programs (macros) in Word, to protect and restrict access to your document, and other advanced tasks.
+
+The majority of the features on the Developer tab are for more advanced uses of Word and are outside the scope of this text. This section focuses on the Controls and Protect command groups, which contain the tools we need to create and secure our fillable form.
+
+Controls Command Group
+
+The Controls command group includes several different icons to represent the fields you can use in your form. identifies the icons you will be using to create the form. The remaining icons in the command group are used for building sophisticated templates in Word. The controls we are using in this example are called content control fields. These fields give people a space to type in, add a date or image, or choose their response from a list. In other words, they are interactive fields that can be specially programmed to receive input from recipients. The content control fields create a user interface that seeks input from the respondent.
+
+The top-level commands are for inserting text or images into your form. The inputted answer will use either rich text or plain text. Rich text allows the user to use bold, italic, and underlined font, different font types, and so forth, whereas plain text does not allow these types of font formatting. This distinction is important if you plan to print the form and want the text to appear with specific formatting. In general, the plain text response will suffice, as most respondents will not need to add formatting to their answers. The Insert Picture command (the landscape icon) is for letting the respondent add an image to their answer; this command may be used to ask the user to upload their profile picture, for instance.
+
+The middle-level commands are for asking multiple-choice-type questions and for setting the date. The first (leftmost) in this row is the checkbox. This handy option reduces the amount of information that needs to be typed into the form. For example, the form could have a list of all departments at the company, and the respondent could simply check the box of the department that they work in, rather than type in the response manually. You could also have multiple-select questions that ask the survey taker to “check all boxes that apply.”
+
+The combo box and the drop-down list also ask the respondent to select from a set of preset choices. The main difference between the two is that the combo box lets the individual type a message after their selected answer, whereas the drop-down list forces them to choose between the options. The last (rightmost) command is the Date Picker, which allows the individual to select a date when they are completing the form. The respondent can choose any date with the Date Picker, such as their birthday or their date of hire.
+
+The Design Mode tool is used to customize the prompts that appear as the survey taker fills out the form. You can use this to customize the prompt to the respondent; this can be more helpful to the survey taker than the generic default text (e.g., “Click or tap to enter text”).
+
+The last item you may use in the command group is the Properties tool. This tool allows you to modify the lists associated with the combo box and the drop-down list. It becomes active once you have added a combo box or drop-down list to your form.
+
+Creating a Form
+
+Before adding the fields, you should first develop the plan of the form. One way to do this is to type out the information or questions that you will ask into a blank document. Creating the form using a table is one option for presenting a professional appearance; this format helps keep everything organized and neatly aligned. The table should have two columns, and as many rows as you will have questions. Using only two columns allows you to put the questions in one column and the answer fields in the other. The column on the left will have your questions, and the column on the right will have the fields for the respondent’s answers. You should change the table borders (in Table Properties) so that they are transparent, making it so that the respondent cannot see them. This way, the questions and answers remain aligned, but they will not appear to be in a table format to those viewing the form. Alternatively, you could choose to not use a table to create your form. In this case, the questions and answer fields would need to each be manually aligned.
+
+For this example, let’s use a table to create a fillable form. In your role at WorldCorp, you have been asked to collect information from all department office managers regarding their need for preprinted company office supplies. Your department (marketing) is responsible for all office supplies that include the WorldCorp logo. A large order is placed each quarter for items such as letterhead paper, envelopes, notepads and pens with the logo, and business cards. To help facilitate the process, your supervisor has asked you to create a fillable form that can be emailed to each department’s office manager to gather information on items that will need to be ordered.
+
+Creating Questions and Control Fields
+
+To begin, start with a blank document and insert a two-column table. Type all your questions in the left column: information on the department, whether they need items ordered, and the quantity and type of items are needed. shows how the information will be gathered from the various departments. Because this is just the draft form, we have noted in parentheses the type of control that will be used for that question. You can go back and remove that information after you have inserted the fields. Notice that the table lines are still visible in this initial draft version. To remove the lines from the table, use the Borders tool in the Paragraph command group on the Home tab.
+
+Then, insert the control fields—where the respondent will put their answers—in the right column. First, insert the Date Picker control field, as shows. Notice the text says, “Click or tap to enter a date.” This is not very descriptive. You can change this in Design Mode to be more descriptive. Design Mode lets you change the preset instruction text. To turn on Design Mode, simply click it in the Controls command group. You are now able to change the default text to be more specific such as “Enter Today’s Date” ().
+
+Continue with the remaining questions and enter the field and specific prompter text for each question. shows how the form should look at this point. Now, go back to each question and examine the properties to determine if changes need to be made. Notice that a bulleted list and the insert signature tool were used in the right column. (You learned these skills in the Creating and Working in Documents and Document Preparation chapters.) Note that the notes in parentheses were also removed.
+
+Now that you have the form constructed and the control fields inserted, you can customize each control field if necessary. To do that, you need to select the control field, and then choose the Properties command. A dialog box will appear for that control, as shown in for the first field, “Today’s Date.” Here, you can change the format of the date to be entered. There are only a few options for the text boxes. You can change the font and the fill color. You can also choose to have the control locked so that it cannot be deleted. For this example, use the default settings.
+
+For the multiple-choice questions, the drop-down lists, and the combo boxes, the setting up takes a little bit longer. You need to manually add the choices to the list for each question type. In your form, you need to write out the departments so that the office manager can choose the appropriate department. To do this, go to the Properties for the drop-down list (see ). At the bottom of the dialog box, locate the drop-down list properties. Here is where you will add the various departments. By default, the only option is Choose an Item. We need to remove this item and add the departments. Click on Choose an Item and select Remove from the options on the right. Now, choose Add to add each department.
+
+Notice that the Display Name and Value Name are the same. There is really no need to change this, but you can change it if you want the respondent-facing choice to look different from what is actually logged as their response. For example, you could have the Display Name (i.e., what the respondent sees in the drop-down list) to say Accounting, but the actual Value that is displayed when they choose Accounting is “Acct.”
+
+Continue in this same manner to add all the departments as shown. If desired, you can change the order of the options in the list by choosing Move Up or Move Down (). For a more professional look, consider placing the items in alphabetical order.
+
+Finally, you need to format the checkbox field. As with the other control fields, you can change the font and style (see ). But with the checkbox, you can also change what type of symbol is used in the box. For example, you can choose a heart instead of an X for the form. To do this, choose Change next to Checked Symbol. Choose what type of symbol you want for the checked box (see ).
+
+You could adjust the properties of each control field as you enter them into the document. However, it is often easier to add the fields first and then go back and make the needed customizations to each field with the Properties tool.
+
+When you have finished formatting all the control fields, make sure you have saved the document. You can now turn off Design Mode by clicking the tool in the command group. Now is also a good time to add some visual elements to the form, such as the company logo or other elements to make the form more visually appealing. You should also remove the borders around the table. shows what the finished product might look like.
+
+Protecting the Form
+
+When you are finished with the form, you need to protect the file before sending it to the various office managers. This will ensure that they cannot edit the questions and controls—that they can only provide responses. The way to protect the document is similar to the process described in the Creating and Working in Documents chapter. To protect the document, select the Restrict Editing command from the Developer tab and a sidebar will appear. You can also access the Restrict Editing command from the Review tab. This sidebar will give you options for preventing editing from happening on the file, as shown in .
+
+When you send the file to others, be sure to send the file as an attachment to the email rather than sharing the document link. If you have saved this file in your OneDrive and share the document as a link, your original file will be changed. You should instruct them to save the file under a different name and to send the file back as an attachment.
+
+There are a lot of detailed privacy considerations when conducting surveys. A considerable number of laws are in place to protect consumers when participating in corporate surveys. Visit the Information and Privacy Commissioner of Ontario’s Best Practices for Protecting Individual Privacy in Conducting Survey Research site to learn more.
+
+Summary
+
+The Developer tab is part of Word’s set of command groups, but it does not appear by default, and needs to be manually activated. It is used for making forms, macros, handling add-ons/templates, and other advanced processes.
+
+Fillable forms are built using the tools in the Controls command group of the Developer tab. This command group contains options for content control fields, which are used for creating different types of questions for forms. The respondent uses the content control fields to answer the questions in the form.
+
+Creating a fillable form in Word is a multistep process. You should first create your questions, then choose the question types, add in the content control fields, then finally edit the properties for each question.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+Case Exercise
+
+placeholders for the type of questions that the respondent will use to respond
+tool that lets the form composer type a description of the question that instructs the survey taker how to answer
+tab that is used for forms, macros, and managing add-ons or templates; it is not one of Word’s default tabs
+document type that has blanks for the recipient to add their information

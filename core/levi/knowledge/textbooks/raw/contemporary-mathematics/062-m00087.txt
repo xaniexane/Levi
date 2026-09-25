@@ -1,0 +1,211 @@
+# m00087
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Combinations
+
+Combinations
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Distinguish between permutation and combination uses.
+
+Compute combinations.
+
+Apply combinations to solve applications.
+
+In Permutations, we studied permutations, which we use to count the number of ways to generate an ordered list of a given length from a group of objects. An important property of permutations is that the order of the list matters: The results of a race and the selection of club officers are examples of lists where the order is important. In other situations, the order is not important. For example, in most card games where a player receives a hand of cards, the order in which the cards are received is irrelevant; in fact, players often rearrange the cards in a way that helps them keep the cards organized.
+
+Combinations: When Order Doesn’t Matter
+
+In situations in which the order of a list of objects doesn’t matter, the lists are no longer permutations. Instead, we call them combinations.
+
+Distinguishing Between Permutations and Combinations
+
+For each of the following situations, decide whether the chosen subset is a permutation or a combination.
+
+A social club selects 3 members to form a committee. Each of the members has an equal share of responsibility.
+
+You are prompted to reset your email password; you select a password consisting of 10 characters without repeats.
+
+At a dog show, the judge must choose first-, second-, and third-place finishers from a group of 16 dogs.
+
+At a restaurant, the special of the day comes with the customer’s choice of 3 sides taken from a list of 6 possibilities.
+
+Since there is no distinction among the responsibilities of the 3 committee members, the order isn’t important. So, this is a combination.
+
+The order of the characters in a password matter, so this is a permutation.
+
+The order of finish matters in a dog show, so this is a permutation.
+
+A plate with mashed potatoes, peas, and broccoli is functionally the same as a plate with peas, broccoli, and mashed potatoes, so this is a combination.
+
+Counting Combinations
+
+Permutations and combinations are certainly related, because they both involve choosing a subset of a large group. Let’s explore that connection, so that we can figure out how to use what we know about permutations to help us count combinations. We’ll take a basic example. How many ways can we select 3 letters from the group A, B, C, D, and E? If order matters, that number is 5P3=60. That’s small enough that we can list them all out in the table below.
+
+ABC
+ABD
+ABE
+ACB
+ACD
+ACE
+ADB
+ADC
+ADE
+AEB
+AEC
+AED
+BAC
+BAD
+BAE
+BCA
+BCD
+BCE
+BDA
+BDC
+BDE
+BEA
+BEC
+BED
+CAB
+CAD
+CAE
+CBA
+CBD
+CBE
+CDA
+CDB
+CDE
+CEA
+CEB
+CED
+DCA
+DAC
+DAE
+DBA
+DBC
+DBE
+DCA
+DCB
+DCE
+DEA
+DEB
+DEC
+EAB
+EAC
+EAD
+EBA
+EBC
+EBD
+ECA
+ECB
+ECD
+EDA
+EDB
+EDC
+Now, let’s look back at that list and color-code it so that groupings of the same 3 letters get the same color, as shown in :
+
+After color-coding, we see that the 60 cells can be seen as 10 groups (colors) of 6. That’s no coincidence! We’ve already seen how to compute the number of permutations using the formula To compute the number of combinations, let’s count them another way using the Multiplication Rule for Counting. We’ll do this in two steps:
+Step 1: Choose 3 letters (paying no attention to order).
+Step 2: Put those letters in order.
+
+The number of ways to choose 3 letters from this group of 5 (A, B, C, D, E) is the number of combinations we’re looking for; let’s call that number 5C3 (read “the number of combinations of 5 objects taken 3 at a time”). We can see from our chart that this is ten (the number of colors used). We can generalize our findings this way: remember that the number of permutations of n things taken r at a time is nPr=n!(n−r)!. That number is also equal to nCr×r!, and so it must be the case that n!(n−r)!=nCr×r!. Dividing both sides of that equation by r! gives us the formula below.
+nCr=n!r!(n−r)!
+
+Using the Combination Formula
+
+Compute the following:
+8C3
+12C5
+15C9
+8C3=8!3!(8−3)!=8×7×6×5!3×2×1×5!=8×7=56
+12C5=12!5!(12−5)!=12×11×10×9×8×7!5×4×3×2×1×7!=11×9×8=792
+15C9=15!9!(15−9)!=15×14×13×12×11×10×9!9!×6×5×4×3×2×1=14×13×11×104=5,005
+
+Applying the Combination Formula
+
+In the card game Texas Hold’em (a variation of poker), players are dealt 2 cards from a standard deck to form their hands. How many different hands are possible?
+
+The board game Clue uses a deck of 21 cards. If 3 people are playing, each person gets 6 cards for their hand. How many different 6-card Clue hands are possible?
+
+Palmetto Cash 5 is a game offered by the South Carolina Education Lottery. Players choose 5 numbers from the whole numbers between 1 and 38 (inclusive); the player wins the jackpot of $100,000 if the randomizer selects those numbers in any order. How many different sets of winning numbers are possible?
+
+A standard deck has 52 cards, and a hand has 2 cards. Since the order doesn’t matter, we use the formula for counting combinations:
+ 52C2=52!2!(52−2)!=52×51×50!2×1×50!=52×512=1,326.
+
+Again, the order doesn’t matter, so the number of combinations is: 
+ 21C6=21!6!(21−6)!=21×20×19×18×17×16×15!6×5×4×3×2×1×15!=21×19×17×162=54,264.
+
+There are 38 numbers to choose from, and we must pick 5. Since order doesn’t matter, the number of combinations is: 
+ 38C5=38!5!(38−5)!=38×37×36×35×34×33!5×4×3×2×1×33!=501,492.
+
+The notation and nomenclature used for the number of combinations is not standard across all sources. You’ll sometimes see (nr) instead of nCr . Sometimes you’ll hear that expression read as “n choose r” as shorthand for “the number of combinations of n objects taken r at a time.”
+
+Early Eastern Mathematicians
+
+Although combinations weren’t really studied in Europe until around the 13th century, mathematicians of the Middle and Far East had already been working on them for hundreds of years. The Indian mathematician known as Pingala had described them by the second century BCE; Varāhamihira (fl. sixth century) and Halayudha (fl. 10th century) extended Pingala’s work. In the ninth century, a Jain mathematician named Mahāvīra gave the formula for combinations that we use today.
+
+In 10th-century Baghdad, a mathematician named Al-Karaji also knew formulas for combinations; though his work is now lost, it was known to (and repeated by) Persian mathematician Omar Khayyam, whose work survives. Khayyam is probably best remembered as a poet, with his Rubaiyat being his most famous work.
+
+Meanwhile, in 11th-century China, Jia Xian also was working with combinations, as was his 13th-century successor Yang Hui.
+
+It is not known whether the discoveries of any of these men were known in the other regions, or if the Indians, Persians, and Chinese all came to their discoveries independently. We do know that mathematical knowledge and sometimes texts did get passed along trade routes, so it can’t be ruled out.
+
+Combining Combinations with the Multiplication Rule for Counting
+
+The student government at a university consists of 10 seniors, 8 juniors, 6 sophomores, and 4 first-years.
+
+How many ways are there to choose a committee of 8 people from this group?
+
+How many ways are to choose a committee of 8 people if the committee must consist of 2 people from each class?
+
+There are 28 people to choose from, and we need 8. So, the number of possible committees is 28C8=3,108,105.
+
+Break the selection of the committee members down into a 4-step process: Choose the seniors, then choose the juniors, then the sophomores, and then the first-years, as shown in the table below:
+
+ Class
+ Number of Ways to Choose Committee Representatives
+
+ senior
+ 10C2=45
+
+ junior
+ 8C2=28
+
+ sophomore
+ 6C2=15
+
+ first-year
+ 4C2=6
+
+ The Multiplication Rule for Counting tells us that we can get the total number of ways to complete this task by multiplying together the number of ways to do each of the four subtasks. So, there are 45×28×15×6=113,400 possible committees with these restrictions.
+
+Class
+Number of Ways to Choose Committee Representatives
+10C2=45
+8C2=28
+6C2=15
+4C2=6
+The Multiplication Rule for Counting tells us that we can get the total number of ways to complete this task by multiplying together the number of ways to do each of the four subtasks. So, there are 45×28×15×6=113,400 possible committees with these restrictions.
+
+Check Your Understanding
+
+Key Terms
+
+combination
+
+Key Concepts
+
+Permutations are used to count subsets when order matters; combinations work when order doesn't matter.
+
+Combinations can also be computed using factorials.
+
+Formulas
+
+The formula for counting combinations is:
+ nCr=n!r!(n−r)!

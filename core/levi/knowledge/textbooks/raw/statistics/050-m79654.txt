@@ -1,0 +1,1168 @@
+# m79654
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+A Single Population Mean Using the Normal Distribution
+
+A Single Population Mean Using the Normal Distribution
+
+A confidence interval for a population mean with a known standard deviation is based on the fact that the sample means follow an approximately normal distribution. Suppose that our sample has a mean of 
+
+ x
+ ¯
+ 
+  = 10
+ 
+ and we have constructed the 90 percent confidence interval (5, 15), where the margin of error = 5.
+
+Calculating the Confidence Interval
+
+To construct a confidence interval for a single unknown population mean, μ, where the population standard deviation is known, we need 
+ 
+ x
+ ¯
+
+ as an estimate for μ, and we need the margin of error. The margin of error for the population mean is called the error bound for a population mean (EBM). The sample mean, 
+
+x
+¯
+
+,
+ is the point estimate of the unknown population mean, μ.
+
+The confidence interval (CI) estimate will have the form:
+
+(point estimate – error bound, point estimate + error bound) or, in symbols, (
+
+ x
+ ¯
+ 
+ –EBM,
+ x
+ ¯
+ 
+ +EBM
+ 
+).
+
+The margin of error (EBM) depends on the confidence level (CL). The confidence level is often considered the probability that the calculated confidence interval estimate will contain the true population parameter. However, it is more accurate to state that the confidence level is the percentage of confidence intervals that contain the true population parameter when repeated samples are taken. Most often, the person constructing the confidence interval will choose a confidence level of 90 percent or higher, because that person wants to be reasonably certain of his or her conclusions.
+
+Another probability, which is called alpha 
+
+ (α)
+
+ is related to the confidence level, CL. Alpha is the probability that the confidence interval does not contain the unknown population parameter. Mathematically, alpha can be computed as 
+
+ α=1−CL
+
+.
+
+Suppose we have collected data from a sample. We know the sample mean, but we do not know the mean for the entire population.
+
+The sample mean is seven, and the error bound for the mean is 2.5.
+
+The confidence interval is (7 – 2.5, 7 + 2.5), and calculating the values gives (4.5, 9.5).
+
+If the confidence level is 95 percent, then we say, "We estimate with 95 percent confidence that the true value of the population mean is between 4.5 and 9.5."
+
+Try It
+
+Suppose we have data from a sample. The sample mean is 15, and the error bound for the mean is 3.2.
+
+What is the confidence interval estimate for the population mean?
+
+(11.8, 18.2)
+
+A confidence interval for a population mean with a known standard deviation is based on the fact that the sample means follow an approximately normal distribution. Suppose that our sample has a mean of 
+ 
+ x
+ ¯
+
+ = 10, and we have constructed the 90 percent confidence interval (5, 15) where EBM = 5.
+
+To get a 90 percent confidence interval, we must include the central 90 percent of the probability of the normal distribution. If we include the central 90 percent, we leave out a total of α = 10 percent in both tails, or 5 percent in each tail, of the normal distribution.
+
+The critical value 1.645 is the z-score in a standard normal probability distribution that puts an area of 0.90 in the center, an area of 0.05 in the far left tail, and an area of 0.05 in the far right tail. To capture the central 90 percent, we must go out 1.645 standard deviations on either side of the calculated sample mean. The critical value will change depending on the confidence level of the interval.
+
+It is important that the standard deviation used be appropriate for the parameter we are estimating, so in this section, we need to use the standard deviation that applies to sample means, which is 
+
+ σ
+
+ n
+
+ . The fraction 
+
+ σ
+
+ n
+
+ is commonly called the standard error of the mean in order to distinguish clearly the standard deviation for a mean from the population standard deviation, σ.
+In summary, as a result of the central limit theorem, the following statements apply:
+X
+ ¯
+
+ is normally distributed, that is, 
+ 
+ X
+ ¯
+
+ ~ N
+ 
+ (
+
+ μ
+ X
+ 
+ ,
+ σ
+
+ n
+
+ )
+ 
+ .
+When the population standard deviation σ is known, we use a normal distribution to calculate the error bound.
+
+Calculating the Confidence Interval
+
+To construct a confidence interval estimate for an unknown population mean, we need data from a random sample. The steps to construct and interpret the confidence interval are as follows:
+
+Calculate the sample mean, 
+ 
+ x
+ ¯
+ 
+ ,
+ from the sample data. Remember, in this section, we already know the population standard deviation, σ.
+
+Find the z-score that corresponds to the confidence level.
+
+Calculate the error bound EBM.
+
+Construct the confidence interval.
+
+If we denote the critical z-score by 
+
+ z
+
+ a
+ 2
+
+, and the sample size by n, then the formula for the confidence interval with confidence level 
+
+ Cl=1−α
+
+, is given by 
+(
+ x
+ ¯
+
+−
+ z
+
+ a
+ 2
+
+×
+ σ
+
+ n
+
+,
+ x
+ ¯
+
++
+ z
+
+ a
+ 2
+
+×
+ σ
+
+ n
+
+).
+
+Write a sentence that interprets the estimate in the context of the situation in the problem. (Explain what the confidence interval means, in the words of the problem.)
+
+We will first examine each step in more detail and then illustrate the process with some examples.
+
+Finding the z-Score for the Stated Confidence Level
+
+When we know the population standard deviation, σ, we use a standard normal distribution to calculate the error bound EBM and construct the confidence interval. We need to find the value of z that puts an area equal to the confidence level (in decimal form) in the middle of the standard normal distribution Z ~ N(0, 1).
+
+The confidence level, CL, is the area in the middle of the standard normal distribution. CL = 1 – α, so α is the area that is split equally between the two tails. Each of the tails contains an area equal to 
+
+ α
+ 2
+
+ .
+
+The z-score that has an area to the right of 
+
+ α
+ 2
+
+ is denoted by 
+
+ z
+
+ α
+ 2
+
+ .
+
+For example, when CL = 0.95, α = 0.05, and 
+
+ α
+ 2
+
+ = 0.025, we write 
+
+ z
+
+ α
+ 2
+
+ = z0.025.
+
+The area to the right of z0.025 is 0.025 and the area to the left of z0.025 is 1 – 0.025 = 0.975.
+z
+
+ α
+ 2
+
+  = 
+ z
+ 
+ 0.025
+
+  = 1.96
+ 
+, using a calculator, computer, or standard normal probability table.
+
+Normal table (see appendices) shows that the probability for 0 to 1.96 is 0.47500, and so the probability to the right tail of the critical value 1.96 is 0.5 – 0.475 = 0.025
+invNorm(0.975, 0, 1) = 1.96. In this command, the value 0.975 is the total area to the left of the critical value that we are looking to calculate. The parameters 0 and 1 are the mean value and the standard deviation of the standard normal distribution Z.
+
+Note
+
+Remember to use the area to the LEFT of 
+
+ z
+
+ α
+ 2
+
+ . In this chapter, the last two inputs in the invNorm command are 0, 1, because you are using a standard normal distribution Z with mean 0 and standard deviation 1.
+
+Calculating the Margin of Error EBM
+
+The error bound formula for an unknown population mean, μ, when the population standard deviation, σ, is known is
+
+Margin of error = 
+ 
+ (
+
+ z
+
+ α
+ 2
+
+ )(
+
+ σ
+
+ n
+
+ ).
+
+Constructing the Confidence Interval
+
+The confidence interval estimate has the format
+ sample mean plus or minus the margin of error.
+
+The graph gives a picture of the entire situation
+CL + 
+
+ α
+ 2
+
+ + 
+
+ α
+ 2
+
+ = CL + α = 1.
+
+Writing the Interpretation
+
+The interpretation should clearly state the confidence level (CL), explain which population parameter is being estimated (here, a population mean), and state the confidence interval (both endpoints): "We estimate with ___percent confidence that the true population mean (include the context of the problem) is between ___ and ___ (include appropriate units)."
+
+Suppose scores on exams in statistics are normally distributed with an unknown population mean and a population standard deviation of three points. A random sample of 36 scores is taken and gives a sample mean (sample mean score) of 68. Find a confidence interval estimate for the population mean exam score (the mean score on all exams).
+
+Find a 90 percent confidence interval for the true (population) mean of statistics exam scores.
+
+You can use technology to calculate the confidence interval directly.
+
+The first solution is shown step-by-step (Solution A).
+
+The second solution uses the TI-83, 83+, and 84+ calculators (Solution B).
+Solution ATo find the confidence interval, you need the sample mean, 
+ 
+ x
+ ¯
+
+, and the EBM.
+
+Solution A
+x
+ ¯
+ 
+  = 68
+
+ EBM = (
+ z
+
+ α
+ 2
+
+ )(
+ σ
+
+ n
+
+ )
+
+ σ = 3; n = 36
+ 
+ ;
+
+The confidence level is 90 percent (CL = 0.90).
+
+The area to the right of z0.05 is 0.05 and the area to the left of z0.05 is 1 – 0.05 = 0.95.
+
+using invNorm(0.95, 0, 1) on the TI-83,83+, and 84+ calculators. This can also be found using appropriate commands on other calculators, using a computer, or using a probability table for the standard normal distribution.
+EBM = (1.645)
+ 
+ (
+
+ 3
+
+ 36
+
+ )
+ 
+ = 0.8225
+x
+ ¯
+
+ – EBM = 68 – 0.8225 = 67.1775
+x
+ ¯
+
+ + EBM = 68 + 0.8225 = 68.8225
+
+The 90 percent confidence interval is (67.1775, 68.8225).
+Solution B
+
+Solution B
+
+Press STAT and arrow over to TESTS.
+ Arrow down to 7:ZInterval.
+ Press ENTER.
+ Arrow to Stats and press ENTER.
+ Arrow down and enter 3 for σ, 68 for 
+ 
+ x
+ ¯
+
+ , 36 for n, and .90 for C-level.
+ Arrow down to Calculate and press ENTER.
+ The confidence interval is (to three decimal places)(67.178, 68.822).
+InterpretationWe estimate with 90 percent confidence that the true population mean exam score for all statistics students is between 67.18 and 68.82.
+
+Interpretation
+Explanation of 90 percent Confidence Level
+ Ninety percent of all confidence intervals constructed in this way contain the true mean statistics exam score. For example, if we constructed 100 of these confidence intervals, we would expect 90 of them to contain the true population mean exam score.
+
+Explanation of 90 percent Confidence Level
+
+Try It
+
+Suppose average pizza delivery times are normally distributed with an unknown population mean and a population standard deviation of 6 minutes. A random sample of 28 pizza delivery restaurants is taken and has a sample mean delivery time of 36 min.
+
+Find a 90 percent confidence interval estimate for the population mean delivery time.
+
+(34.1347, 37.8653)
+
+The specific absorption rate (SAR) for a cell phone measures the amount of radio frequency (RF) energy absorbed by the user’s body when using the handset. Every cell phone emits RF energy. Different phone models have different SAR measures. For certification from the Federal Communications Commission for sale in the United States, the SAR level for a cell phone must be no more than 1.6 watts per kilogram. shows the highest SAR level for a random selection of cell phone models of a random cell phone company.
+
+Phone Model #
+SAR
+Phone Model #
+SAR
+Phone Model #
+SAR
+800
+1.11
+1800
+1.36
+2800
+0.74
+900
+1.48
+1900
+1.34
+2900
+0.5
+1000
+1.43
+2000
+1.18
+3000
+0.4
+1100
+1.3
+2100
+1.3
+3100
+0.867
+1200
+1.09
+2200
+1.26
+3200
+0.68
+1300
+0.455
+2300
+1.29
+3300
+0.51
+1400
+1.41
+2400
+0.36
+3400
+1.13
+1500
+0.82
+2500
+0.52
+3500
+0.3
+1600
+0.78
+2600
+1.6
+3600
+1.48
+1700
+1.25
+2700
+1.39
+3700
+1.38
+Find a 98 percent confidence interval for the true (population) mean of the SARs for cell phones. Assume that the population standard deviation is σ = 0.337.
+Solution ATo find the confidence interval, start by finding the point estimate: the sample mean,
+
+Solution A
+
+This is calculated by adding the specific absorption rate for the 30 cell phones in the sample, and dividing the result by 30.
+
+Next, find the EBM. Because you are creating a 98 percent confidence interval, CL = 0.98.
+
+You need to find z0.01, having the property that the area under the normal density curve to the right of z0.01 is 0.01 and the area to the left is 0.99. Use your calculator, a computer, or a probability table for the standard normal distribution to find z0.01 = 2.326.
+
+To find the 98 percent confidence interval, find 
+
+ x
+ ¯
+ 
+ ±EBM
+ 
+ .
+
+We estimate with 98 percent confidence that the true SAR mean for the population of cell phones in the United States is between 0.8809 and 1.1671 watts per kilogram.
+Solution B
+
+Solution B
+
+Press STAT and arrow over to TESTS.
+
+Arrow down to 7:ZInterval.
+
+Press ENTER.
+
+Arrow to Stats and press ENTER.
+
+Arrow down and enter the following values:
+ σ: 0.337
+
+ x
+ ¯
+ 
+ :1.024
+
+ n: 30
+ C-level: 0.98
+σ: 0.337
+x
+ ¯
+ 
+ :1.024
+n: 30
+C-level: 0.98
+
+Arrow down to Calculate and press ENTER.
+
+The confidence interval is (to three decimal places) (0.881, 1.167).
+
+Try It
+shows a different random sampling of 20 cell phone models. Use these data to calculate a 93 percent confidence interval for the true mean SAR for cell phones certified for use in the United States. As previously, assume that the population standard deviation is σ = 0.337.
+SAR
+450
+1.48
+1450
+1.53
+550
+0.8
+1550
+0.68
+650
+1.15
+1650
+1.4
+750
+1.36
+1750
+1.24
+850
+0.77
+1850
+0.57
+950
+0.462
+1950
+0.2
+1050
+1.36
+2050
+0.51
+1150
+1.39
+2150
+0.3
+1250
+1.3
+2250
+0.73
+1350
+0.7
+2350
+x
+ ¯
+ 
+ =0.940
+α
+ 2
+ 
+ =
+ 
+ 1−CL
+ 
+ 2
+ 
+ =
+ 
+ 1−0.93
+ 
+ 2
+ 
+ =0.035
+Z0.035 = 1.812
+EBM=(
+
+ z
+ 
+ 0.035
+
+ )(
+
+ σ
+
+ n
+
+ )=(
+ 
+ 1.812
+ 
+ )(
+
+ 0.337
+
+ 20
+
+ )=0.1365
+x
+ ¯
+
+ – EBM = 0.940 – 0.1365 = 0.8035
+x
+ ¯
+
+ + EBM = 0.940 + 0.1365 = 1.0765
+
+We estimate with 93 percent confidence that the true SAR mean for the population of cell phones in the United States is between 0.8035 and 1.0765 watts per kilogram.
+
+Notice the difference in the confidence intervals calculated in and the following Try It exercise. These intervals are different for several reasons: they are calculated from different samples, the samples are different sizes, and the intervals are calculated for different levels of confidence. Even though the intervals are different, they do not yield conflicting information. The effects of these kinds of changes are the subject of the next section in this chapter.
+
+Changing the Confidence Level or Sample Size
+
+Suppose we change the original problem in by using a 95 percent confidence level. Find a 95 percent confidence interval for the true (population) mean statistics exam score.
+
+To find the confidence interval, you need the sample mean, 
+ 
+ x
+ ¯
+
+ , and the EBM.
+x
+ ¯
+ 
+  = 68
+
+ EBM = (
+ z
+
+ α
+ 2
+
+ )(
+ σ
+
+ n
+
+ )
+
+ σ = 3; n = 36
+
+The confidence level is 95 percent (CL = 0.95).
+
+The area to the right of z0.025 is 0.025, and the area to the left of z0.025 is 1 – 0.025 = 0.975.
+
+when using invnorm(0.975,0,1) on the TI-83, 83+, or 84+ calculators. (This can also be found using appropriate commands on other calculators, using a computer, or using a probability table for the standard normal distribution.)
+
+Notice that the EBM is larger for a 95 percent confidence level in the original problem.
+InterpretationWe estimate with 95 percent confidence that the true population mean for all statistics exam scores is between 67.02 and 68.98.
+
+Interpretation
+Explanation of 95 percent Confidence Level95 percent of all confidence intervals constructed in this way contain the true value of the population mean statistics exam score.
+
+Explanation of 95 percent Confidence Level
+Comparing the ResultsThe 90 percent confidence interval is (67.18, 68.82). The 95 percent confidence interval is (67.02, 68.98). The 95 percent confidence interval is wider. If you look at the graphs, because the area 0.95 is larger than the area 0.90, it makes sense that the 95 percent confidence interval is wider. For more certainty that the confidence interval actually does contain the true value of the population mean for all statistics exam scores, the confidence interval necessarily needs to be wider.
+
+Comparing the Results
+Summary: Effect of Changing the Confidence Level
+
+Increasing the confidence level increases the error bound, making the confidence interval wider.
+
+Decreasing the confidence level decreases the error bound, making the confidence interval narrower.
+
+Try It
+
+Refer back to the pizza-delivery Try It exercise. The population standard deviation is six minutes and the sample mean deliver time is 36 minutes. Use a sample size of 20. Find a 95 percent confidence interval estimate for the true mean pizza-delivery time.
+
+(33.37, 38.63)
+
+Suppose we change the original problem in to see what happens to the error bound if the sample size is changed.
+
+Leave everything the same except the sample size. Use the original 90 percent confidence level. What happens to the error bound and the confidence interval if we increase the sample size and use n = 100 instead of n = 36? What happens if we decrease the sample size to n = 25 instead of n = 36?
+x
+ ¯
+
+ = 68
+EBM = 
+ 
+ (
+
+ z
+
+ α
+ 2
+
+ )(
+
+ σ
+
+ n
+
+ )
+σ = 3, the confidence level is 90 percent (CL = 0.90), 
+
+ z
+
+ α
+ 2
+
+ = z0.05 = 1.645.
+Solution AIf we increase the sample size n to 100, we decrease the margin of error.
+
+Solution A
+
+When n = 100, EBM = 
+ 
+ (
+
+ z
+
+ α
+ 2
+
+ )(
+
+ σ
+
+ n
+
+ )
+ 
+ = (1.645)
+ 
+ (
+
+ 3
+
+ 100
+
+ )
+ 
+ = 0.4935.
+Solution BIf we decrease the sample size n to 25, we increase the error bound.
+
+Solution B
+
+When n = 25, EBM = 
+ 
+ (
+
+ z
+
+ α
+ 2
+
+ )(
+
+ σ
+
+ n
+
+ )
+ 
+ = (1.645)
+ 
+ (
+
+ 3
+
+ 25
+
+ )
+ 
+ = 0.987.
+
+Summary: Effect of Changing the Sample Size
+
+Increasing the sample size causes the error bound to decrease, making the confidence interval narrower.
+
+Decreasing the sample size causes the error bound to increase, making the confidence interval wider.
+
+Try It
+
+Refer back to the pizza-delivery Try It exercise. The mean delivery time is 36 minutes and the population standard deviation is six minutes. Assume the sample size is changed to 50 restaurants with the same sample mean. Find a 90 percent confidence interval estimate for the population mean delivery time.
+
+(34.6041, 37.3958)
+
+Working Backward to Find the Error Bound or Sample Mean
+
+When we calculate a confidence interval, we find the sample mean, calculate the error bound, and use them to calculate the confidence interval. However, sometimes when we read statistical studies, the study may state the confidence interval only. If we know the confidence interval, we can work backward to find both the error bound and the sample mean.
+Finding the Error Bound
+
+From the upper value for the interval, subtract the sample mean,
+
+Or, from the upper value for the interval, subtract the lower value. Then divide the difference by 2.
+Finding the Sample Mean
+
+Subtract the error bound from the upper value of the confidence interval,
+
+Or, average the upper and lower endpoints of the confidence interval.
+
+Notice that there are two methods to perform each calculation. You can choose the method that is easier to use with the information you know.
+
+Suppose we know that a confidence interval is (67.18, 68.82) and we want to find the error bound. We may know that the sample mean is 68, or perhaps our source only gives the confidence interval and does not tell us the value of the sample mean.
+
+Calculate the error bound:
+
+If we know that the sample mean is 68, EBM = 68.82 – 68 = 0.82.
+
+If we do not know the sample mean, EBM = 
+
+ (68.82−67.18)
+ 
+ 2
+
+ = 0.82. The margin of error is the quantity that we add and subtract from the sample mean to obtain the confidence interval. Therefore, the margin of error is half of the length of the interval.
+
+Calculate the sample mean:
+
+If we know the error bound,
+
+ x
+ ¯
+
+ = 68.82 – 0.82 = 68.
+
+If we do not know the error bound, 
+ 
+ x
+ ¯
+
+ = 
+
+ (67.18+68.82)
+ 
+ 2
+
+ = 68.
+
+Try It
+
+Suppose we know that a confidence interval is (42.12, 47.88). Find the error bound and the sample mean.
+
+Sample mean is 45, error bound is 2.88
+
+Calculating the Sample Size n
+
+If researchers desire a specific margin of error, then they can use the error bound formula to calculate the required sample size. In this situation, we are given the desired margin of error, EBM, and we need to compute the sample size n.
+
+The formula for sample size is n = 
+
+ z
+ 2
+
+ σ
+ 2
+
+ EB
+ M
+ 2
+
+ , found by solving the error bound formula for n. Always round up the value of n to the closest integer.
+
+In this formula, z is the critical value 
+
+ z
+
+ α
+ 2
+
+ , corresponding to the desired confidence level. A researcher planning a study who wants a specified confidence level and error bound can use this formula to calculate the size of the sample needed for the study.
+
+The population standard deviation for the age of Foothill College students is 15 years. If we want to be 95 percent confident that the sample mean age is within two years of the true population mean age of Foothill College students, how many randomly selected Foothill College students must be surveyed?
+
+From the problem, we know that σ = 15 and EBM = 2.
+z = z0.025 = 1.96, because the confidence level is 95 percent.
+n = 
+
+ z
+ 2
+
+ σ
+ 2
+
+ EB
+ M
+ 2
+
+ = 
+
+ (
+ 
+ 1.96
+ 
+ )
+ 
+ 2
+
+ (
+ 
+ 15
+ 
+ )
+ 
+ 2
+
+ 2
+ 2
+
+ = 216.09 using the sample size equation.
+
+Use n = 217. Always round the answer up to the next higher integer to ensure that the sample size is large enough.
+
+Therefore, 217 Foothill College students should be surveyed in order to be 95 percent confident that we are within two years of the true population mean age of Foothill College students.
+
+Try It
+
+The population standard deviation for the height of high school basketball players is three inches. If we want to be 95 percent confident that the sample mean height is within one inch of the true population mean height, how many randomly selected students must be surveyed?
+
+35 students
+
+References
+
+Centers for Disease Control and Prevention. (n.d.). National health and nutrition examination survey. Retrieved from http://www.cdc.gov/nchs/nhanes.htm
+
+Foothill De Anza Community College District. (n.d.). Headcount enrollment trends by student demographics ten-year fall trends to most recently completed fall. Retrieved from http://research.fhda.edu/factbook/FH_Demo_Trends/FoothillDemographicTrends.htm
+
+Kuczmarski, R. J., et al. (2002). 2000 CDC growth charts for the United States: Methods and development. Retrieved from http://www.cdc.gov/growthcharts/2000growthchart-us.pdf
+
+La, L., and; German, K. (n.d.). Cell phones with the highest radiation levels. CNET. Retrieved from http://reviews.cnet.com/cell-phone-radiation-levels/
+
+U.S. Census Bureau. (n.d.). American FactFinder. Retrieved from http://factfinder2.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t
+
+U.S. Census Bureau. (2011). Mean income in the past 12 months (in 2011 inflation-adjusted dollars): 2011 American Community Survey 1-year estimates. Retrieved from http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_11_1YR_S1902&prodType=table
+
+U.S. Federal Election Commission. (n.d.). Disclosure data catalog: Candidate summary report 2012. Retrieved from http://www.fec.gov/data/CandidateSummary.do?format=html&election_yr=2012
+
+U.S. Federal Election Commission. (n.d.). Metadata description of candidate summary file. Retrieved from http://www.fec.gov/finance/disclosure/metadata/metadataforcandidatesummary.shtml
+
+Chapter Review
+
+In this module, we learned how to calculate the confidence interval for a single population mean where the population standard deviation is known. When estimating a population mean, the margin of error is called the error bound for a population mean (EBM). A confidence interval has the general form
+
+(lower bound, upper bound) = (point estimate – EBM, point estimate + EBM).
+
+The calculation of EBM depends on the size of the sample and the level of confidence desired. The confidence level is the percentage of all possible samples that can be expected to include the true population parameter. As the confidence level increases, the corresponding EBM increases as well. As the sample size increases, the EBM decreases. By the central limit theorem,
+EBM=z
+ σ
+
+ n
+ 
+ .
+
+Given a confidence interval, you can work backward to find the error bound (EBM) or the sample mean. To find the error bound, find the difference of the upper bound of the interval and the mean. If you do not know the sample mean, you can find the error bound by calculating half of the difference of the upper and lower bounds. To find the sample mean given a confidence interval, find the difference of the upper bound and the error bound. If the error bound is unknown, then average the upper and lower bounds of the confidence interval to find the sample mean.
+
+Sometimes researchers know in advance that they want to estimate a population mean within a specific margin of error for a given level of confidence. In that case, solve the EBM formula for n to discover the size of the sample that is needed to achieve this goal:
+
+Formula Review
+X
+ ¯
+ 
+ ~N(
+
+ μ
+ X
+ 
+ ,
+ σ
+
+ n
+
+ )
+ 
+ The distribution of sample means is normally distributed with mean equal to the population mean and standard deviation given by the population standard deviation divided by the square root of the sample size.
+
+The general form for a confidence interval for a single population mean, known standard deviation, normal distribution is given by
+ (lower bound, upper bound) = (point estimate – EBM, point estimate + EBM)
+EBM = 
+ 
+ z
+ σ
+
+ n
+
+ = the error bound for the mean, or the margin of error for a single population mean; this formula is used when the population standard deviation is known.
+CL = confidence level, or the proportion of confidence intervals created that is expected to contain the true population parameter
+α = 1 – CL = the proportion of confidence intervals that will not contain the population parameter
+z
+
+ α
+ 2
+
+ = the z-score with the property that the area to the right of the z-score is 
+
+ ∝
+ 2
+
+ ; this is the z-score, used in the calculation of EBM, where α = 1 – CL.
+n = 
+
+ z
+ 2
+
+ σ
+ 2
+
+ EB
+ M
+ 2
+
+ = the formula used to determine the sample size (n) needed to achieve a desired margin of error at a given level of confidence
+
+General form of a confidence interval
+
+(lower value, upper value) = (point estimate error bound, point estimate + error bound)
+
+To find the error bound when you know the confidence interval,
+
+error bound = upper value point estimate or error bound = 
+
+ upper value−lower value
+ 
+ 2
+ 
+ .
+
+Single population mean, known standard deviation, normal distribution
+
+Use the normal distribution for means; population standard deviation is known: EBM = z
+
+ α
+ 2
+ 
+ ⋅
+ σ
+
+ n
+
+The confidence interval has the format (
+ 
+ x
+ ¯
+
+ − EBM, 
+ 
+ x
+ ¯
+
+ + EBM).
+Use the following information to answer the next five exercises: The standard deviation of the weights of elephants is known to be approximately 15 lb. We wish to construct a 95 percent confidence interval for the mean weight of newborn elephant calves. Fifty newborn elephants are weighed. The sample mean is 244 lb. The sample standard deviation is 11 lb.
+
+Identify the following:
+x
+ ¯
+
+ = _____
+σ = _____
+n = _____
+
+244
+
+15
+
+50
+
+In words, define the random variables X and 
+ 
+ X
+ ¯
+
+ .
+
+Which distribution should you use for this problem?
+N(
+ 
+ 244,
+ 
+ 15
+
+ 50
+
+ )
+
+Construct a 95 percent confidence interval for the population mean weight of newborn elephants. State the confidence interval, sketch the graph, and calculate the error bound.
+
+What will happen to the confidence interval obtained, if 500 newborn elephants are weighed instead of 50? Why?
+
+As the sample size increases, there will be less variability in the mean, so the interval size decreases.
+Use the following information to answer the next seven exercises: The U.S. Census Bureau conducts a study to determine the time needed to complete the short form. The bureau surveys 200 people. The sample mean is 8.2 minutes. There is a known standard deviation of 2.2 minutes. The population distribution is assumed to be normal.
+
+Identify the following:
+x
+ ¯
+
+ = _____
+σ = _____
+n = _____
+
+In words, define the random variables X and 
+ 
+ X
+ ¯
+
+ .
+X is the time in minutes it takes to complete the U.S. Census short form. 
+ 
+ X
+ ¯
+
+ is the mean time it took a sample of 200 people to complete the U.S. Census short form.
+
+Which distribution should you use for this problem?
+
+Construct a 90 percent confidence interval for the population mean time to complete the forms. State the confidence interval, sketch the graph, and calculate the error bound.
+
+CI: (7.9441, 8.4559)
+EBM = 0.26
+
+If the Census wants to increase its level of confidence and keep the error bound the same by taking another survey, what changes should it make?
+
+If the Census did another survey, kept the error bound the same, and surveyed only 50 people instead of 200, what would happen to the level of confidence? Why?
+
+The level of confidence would decrease, because decreasing n makes the confidence interval wider, so at the same error bound, the confidence level decreases.
+
+Suppose the Census needed to be 98 percent confident of the population mean length of time. Would the Census have to survey more people? Why or why not?
+Use the following information to answer the next 10 exercises: A sample of 20 heads of lettuce was selected. Assume that the population distribution of head weight is normal. The weight of each head of lettuce was then recorded. The mean weight was 2.2 lb, with a standard deviation of 0.1 lb. The population standard deviation is known to be 0.2 lb.
+
+Identify the following:
+x
+ ¯
+
+ = ______
+σ = ______
+n = ______
+x
+ ¯
+
+ = 2.2
+σ = 0.2
+n = 20
+
+In words, define the random variable X.
+
+In words, define the random variable 
+ 
+ X
+ ¯
+
+ .
+X
+ ¯
+
+ is the mean weight of a sample of 20 heads of lettuce.
+
+Which distribution should you use for this problem?
+
+Construct a 90 percent confidence interval for the population mean weight of the heads of lettuce. State the confidence interval, sketch the graph, and calculate the error bound.
+EBM = 0.07
+ CI: (2.1264, 2.2736)
+
+Construct a 95 percent confidence interval for the population mean weight of the heads of lettuce. State the confidence interval, sketch the graph, and calculate the error bound.
+
+In complete sentences, explain why the confidence interval in is larger than in .
+
+The interval is greater, because the level of confidence increased. If the only change made in the analysis is a change in confidence level, then all we are doing is changing how much area is
+[truncated]

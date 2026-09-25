@@ -1,0 +1,400 @@
+# m00027
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Standard Divisors, Standard Quotas, and the Apportionment Problem
+
+Standard Divisors, Standard Quotas, and the Apportionment Problem
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Analyze the apportionment problem and applications to representation.
+
+Evaluate applications of standard divisors.
+
+Evaluate applications of standard quotas.
+
+The Apportionment Problem
+
+In the new democracy of Imaginaria, there are four states: Fictionville, Pretendstead, Illusionham, and Mythbury. Each state will have representatives in the Imaginarian Legislature. You might now have an agreement on which voting method your citizens will use to elect representatives. However, before that process can even begin, you must decided on how many representatives each state will receive. This decision will present its own challenges.
+
+When sharing your birthday cake, it’s only fair that everyone gets the same portion size, right? You were portioning the cake by dividing it up equally and giving everyone a slice. A great thing about cake is that you can slice it any way you want, but how do you apportion, or divide and distribute, items that can't be sliced? Suppose that you have a box of 16 Ring Pops™, gem-shaped lollipops on a plastic ring. You are going to share the box with four other kids. Dividing the 16 Ring Pops™ among the group of five leads to a problem; after each person in the group gets three Ring Pops™, there is still one left! Who gets the last one? The apportionment problem is how to fairly divide, or apportion, available resources that must be distributed to the recipients in whole, not fractional, parts.
+
+The apportionment problem applies to many aspects of life, including the representatives in the Imaginarian legislature. The table below provides a short list of examples of resources that must be apportioned in whole parts, and the recipients of those resources.
+
+Resource
+Recipients
+Covid-19 Vaccines
+Nations around the world
+Airport Terminals
+Airlines
+Faculty Positions at a University
+Departments
+Public Schools
+Communities
+U.S. House of Representatives Seats
+States
+Parliamentary Seats
+Political Parties
+Fair division of a resource is not necessarily equal division of the resource like when distributing cake slices. When distributing airport terminals amongst airlines, there are many factors to consider such as the size of the airline, the number and types of aircraft they have, and the demand for the service. In most cases, fairness is defined as being proportional; two quantities are proportional if they have the same relative size. In the case of the Covid-19 vaccine, the expectation would be that countries with larger populations get more doses of the vaccine. In the Imaginarian legislature, the expectation may be that the states with larger populations will receive the larger number of representatives. This concept is referred to as a part-to-part ratio.
+
+Suppose that a supermarket has a special on pies, two for $5. The first customer purchases four pies for $10, and the second customer purchases eight pies for $20. The dollar to pie ratio for the first customer is 10dollars4pies=2.5dollars per pie and the dollar to pie ratio for the second customer is 20dollars5pies=2.5dollars per pie. So, the dollar to pie ratio is constant. Although the customers do not spend the same amount of money, the amount each spent was proportional to the number of pies purchased.
+
+Now suppose that the supermarket changed the special to $5 for the first pie, and $2 for each additional pie. In that case, four pies would cost $5+3($2)=$11, while 8 pies would cost $5+7($2)=$19. The dollar to pie ratios would be 11dollars4pies=2.75dollars per pie and 19dollars8pies=2.375dollars per pie, respectively. This special does not result in a constant part to part ratio. The dollars spent are not proportional to the number of pies purchased.
+What Is a Ratio?
+What Are the Different Types of Ratios?
+
+Ratio of Faculty to Students at a College
+
+The following table provides a comparison of the number of faculty members in each department at a particular college to the student head count in that department and the number of class sections in that department in the Spring semester. Use this information to answer the questions.
+
+Department
+Mathematics
+English
+History
+(S) Student Head Count
+4800
+2376
+1536
+(C) Class Sections
+120
+108
+48
+(T) Total Faculty
+30
+27
+12
+(F) Full-Time Faculty
+10
+9
+4
+(P) Part-Time Faculty
+20
+18
+8
+16
+Determine the ratios for each department: S to C, C to T, S to T, F to P
+
+What are the units of the ratios that you found?
+
+Which of these pairs, if any, has a constant part to part ratio? State the ratio.
+
+Does it appear that the total number of faculty positions were allocated to each department based on student head count, the number of class sections, or neither? Justify your answer.
+Divide the first quantity by the second, for each department, as shown in the table below.
+ Answers are provided in last column of the table.
+
+ Department
+ Mathematics
+ English
+ History
+ Science
+ Units of Ratios Found
+
+ S to C
+ 4800120=40
+ 2376108=22
+ 153648=32
+ 288096=30
+ Students per class section
+
+ C to T
+ 12030=4
+ 10827=4
+ 4812=4
+ 9624=4
+ Class sections per faculty member
+
+ S to T
+ 480030=160
+ 237627=88
+ 153612=128
+ 288024=120
+ Students per faculty member
+
+ F to P
+ 1020=12
+ 918=12
+ 48=12
+ 816=12
+ Full-time faculty member per part-time faculty member
+
+ The ratio of class sections to faculty members is a constant ratio of four. The ratio of full-time faculty to part-time faculty is a constant ratio of 12.
+ It appears that the faculty positions were allocated based on the number of class sections because there is a constant ratio of four class sections per faculty member.
+
+Divide the first quantity by the second, for each department, as shown in the table below.
+
+Answers are provided in last column of the table.
+
+ Department
+ Mathematics
+ English
+ History
+ Science
+ Units of Ratios Found
+
+ S to C
+ 4800120=40
+ 2376108=22
+ 153648=32
+ 288096=30
+ Students per class section
+
+ C to T
+ 12030=4
+ 10827=4
+ 4812=4
+ 9624=4
+ Class sections per faculty member
+
+ S to T
+ 480030=160
+ 237627=88
+ 153612=128
+ 288024=120
+ Students per faculty member
+
+ F to P
+ 1020=12
+ 918=12
+ 48=12
+ 816=12
+ Full-time faculty member per part-time faculty member
+
+Department
+Mathematics
+English
+History
+Science
+288096=30
+9624=4
+288024=120
+816=12
+Full-time faculty member per part-time faculty member
+The ratio of class sections to faculty members is a constant ratio of four. The ratio of full-time faculty to part-time faculty is a constant ratio of 12.
+
+It appears that the faculty positions were allocated based on the number of class sections because there is a constant ratio of four class sections per faculty member.
+
+There are some useful relationships between quantities that are proportional to each other. When there is a constant ratio between two quantities, the one quantity can be found by multiplying the other by that ratio. Remember the supermarket special on pies, 2 pies for $5? The ratio of dollars to pies is 5
+ dollars2pies=2.5dollars per pie and the ratio of pies to dollars is2pies5dollars=0.4pies per dollar. These two values are reciprocals of each other, 12.5=0.4 and 10.4=2.5. This means that multiplying by one has the same effect as dividing by the other. This also means that knowing either constant ratio allows us to calculate the price given the number of pies. To find the cost of 20 pies, multiply by the ratio of dollars to pies or divide by the ratio of pies to dollars.
+20pies×2.50dollars per pie=50dollars
+20pies÷0.4pies per dollar=50dollars
+
+These patterns are true in general.
+
+Let A be a particular item and B another such that there is a constant ratio of A to B
+ 
+ ratio ofB's toA's=1ratio ofA's toB's and ratio ofA's toB's=1ratio ofB's toA's
+ 
+ units ofA=(units ofB)×(ratio ofA's toB's)=units ofBratio ofB's toA's
+ units ofB=(units ofA)×(ratio ofB's toA's)=units ofAratio ofA's toB's
+ratio ofB's toA's=1ratio ofA's toB's and ratio ofA's toB's=1ratio ofB's toA's
+units ofA=(units ofB)×(ratio ofA's toB's)=units ofBratio ofB's toA's
+units ofB=(units ofA)×(ratio ofB's toA's)=units ofAratio ofA's toB's
+
+Ratio of Faculty to Students at a College
+
+Refer to the information given in .
+
+If there are 32 class sections each semester in the Fine Art department, and the same ratio is used to determine the number of faculty members, how many faculty members would you expect to see in the Fine Art department?
+
+If the Health Sciences department has 6 full-time faculty members, how many part-time faculty members are in the department?
+Multiply the number of class sections by the ratio of faculty members to class sections to find the number of faculty. Since there are 4 classess per faculty member, the ratio of faculty members to classs sections is 14. This means that the number of faculty members for 32 classes should be 32×14=8 faculty members.
+ Multiply the number of full-time faculty by the ratio of part-time to full-time to find the number of part-time. Since ratio of full-time faculty to part-time faculty at the college is 12 or 1 full-time per 2 part time, the ratio of part-time to full-time is 21=2
+ part-time to 1 full-time; so the number of part-time faculty in a department with 6 full-time faculty should be 6.4=24 part-time faculty.
+
+Multiply the number of class sections by the ratio of faculty members to class sections to find the number of faculty. Since there are 4 classess per faculty member, the ratio of faculty members to classs sections is 14. This means that the number of faculty members for 32 classes should be 32×14=8 faculty members.
+
+Multiply the number of full-time faculty by the ratio of part-time to full-time to find the number of part-time. Since ratio of full-time faculty to part-time faculty at the college is 12 or 1 full-time per 2 part time, the ratio of part-time to full-time is 21=2
+ part-time to 1 full-time; so the number of part-time faculty in a department with 6 full-time faculty should be 6.4=24 part-time faculty.
+
+The apportionment application that will be important to the founders of Imaginaria occurs in representative democracies in which elected persons represent a group. The United Kingdom, France, and India each have a parliament, and the United States has a Congress, just as Imaginaria will have a legislature! The citizens of a country must decide what portion of the representatives each group, such as a state or province or even a political party, will have. A larger portion of representatives means greater influence over policy.
+
+Ratio of U.S. Representatives to State Population
+contains a list of the five U.S. states with the greatest number of representatives in the U.S. House of Representatives, along with the population of that state in 2021. Use the information in the table to answer the questions.
+
+State
+Representative Seats
+State Population
+(CA) California
+53
+39,613,000
+(TX) Texas
+36
+29,730,300
+(NY) New York
+27
+19,300,000
+(FL) Florida
+27
+21,944,600
+(PA) Pennsylvania
+18
+12,804,100
+What is the ratio of State Population to Representative Seats for each state to the nearest hundred thousand?
+
+What is the ratio of Representative Seats to State Population for each state rounded to seven decimal places?
+
+What is the ratio of Representative Seats to State Population for each state rounded to six decimal places?
+
+Does there appear to be a constant ratio? Justify your answer.
+CA 700,000; TX 800,000; NY 700,000; FL 800,000; PA 700,000
+ CA 0.0000013; TX 0.0000012; NY 0.0000014; FL 0.0000012; PA 0.0000014
+ CA 0.000001; TX 0.000001; NY 0.000001; FL 0.000001; PA 0.000001
+ The ratio of State Population to Representative Seats seems to be either 700,000 or 800,000. There does appear to be a constant ratio of about 0.000001 of Representative Seats to State Population if we round off to the sixth decimal place.
+
+CA 700,000; TX 800,000; NY 700,000; FL 800,000; PA 700,000
+
+CA 0.0000013; TX 0.0000012; NY 0.0000014; FL 0.0000012; PA 0.0000014
+
+CA 0.000001; TX 0.000001; NY 0.000001; FL 0.000001; PA 0.000001
+
+The ratio of State Population to Representative Seats seems to be either 700,000 or 800,000. There does appear to be a constant ratio of about 0.000001 of Representative Seats to State Population if we round off to the sixth decimal place.
+
+Math Antics – Rounding
+
+You might be wondering why the ratio doesn't appear to be quite the same depending on the rounding of the values. We will see that the key to this variation lies in the fractions. Just like the five children sharing 16 Ring Pops™, there are going to be leftovers and there are many methods for deciding what to do with those leftovers.
+
+The Standard Divisor
+
+There are two houses of congress in the United States: the Senate and the House of Representatives. Each state has two senators, but the number of representatives depends on the population of the state. The number of representative seats in the U.S. House of Representatives is currently set by law to be 435. In order to distribute the seats fairly to each state, the ratio of the population of the U.S. to the number of representative seats must be calculated. The ratio of the total population to the house size is called the standard divisor, and it is the number of members of the total population represented by one seat.
+
+Although apportionment applies to many other scenarios, such as the pencil distribution during the SAT, the terminology of apportionment is based on the House of Representatives scenario. Thus, several government-related terms take on a more general meaning. The states are the recipients of the apportioned resource, the seats are the units of the resource being apportioned, the house size is the total number of seats to be apportioned, the state population is the measurement of the state's size, and the total population is the sum of the state populations.
+Standard Divisor=Total PopulationHouse Size
+
+The Standard Divisor of the U.S. House of Representatives 2021
+
+As of this writing, the Census.gov website U.S. Population clock showed a population of 332,693,997. There are 435 seats in the U.S. House of Representatives. Find the standard divisor rounded to the nearest tenth.
+
+Dividing 330,147,881 people by 435 seats, there are 758,960.6 people per representative.
+
+Whether the standard divisor is less than, equal to, or greater than 1 depends on the ratio of the population to the number of seats.
+
+The standard divisor will be equal to 1 if the total population is equal to the number of seats. This would mean that each member of the population is allocated their own personal seat.
+
+The standard divisor will be a number between 0 and 1 when the total population is less than the number of seats. This means that each member of the population is allocated more than one seat.
+
+The standard divisor will be a number greater than 1when the total population is greater than the number of seats. This means that a certain number of members of the population will share 1 seat.
+
+If the population is five children and the house consists of five pieces of candy, the standard divisor is 5children5candies=1child per candy meaning each child gets one candy. If the population is five children and ten pieces of candy, the standard divisor is 5children10candies=0.5child per candy meaning that each child gets more than one candy. If the population is five children and four pieces of candy, the standard divisor is 5children4candies=1.25child per candy meaning that each child gets less than one candy.
+
+If the seats in the Imaginarian legislature are distributed to the states based on population, then the house size will be less than the population and we should expect the standard divisor to be a number greater than 1.
+
+School Resource Officers in Brevard County, Florida
+
+The public schools in a certain county have been allotted 349 school resource officers to be distributed among 327 public schools attended by approximately 271,500 students.
+
+Identify the states, seats, house size, state population, and total population in this apportionment scenario.
+
+Describe the ratio the standard divisor represents in this scenario and calculate the standard divisor to the nearest tenth.
+The states are the schools in that county. The seats are the school resource officers. The house size is the number of school resource officers, which is 349. The state population is the number of students in a particular school, which was not given. The total population consists of the sum of the school populations, which is 271,500.
+ The standard divisor is the ratio of the total population to the house size, which is the number of students served by each resource officer. Divide 271,500students÷349officers=777.9 students per officer.
+
+The states are the schools in that county. The seats are the school resource officers. The house size is the number of school resource officers, which is 349. The state population is the number of students in a particular school, which was not given. The total population consists of the sum of the school populations, which is 271,500.
+
+The standard divisor is the ratio of the total population to the house size, which is the number of students served by each resource officer. Divide 271,500students÷349officers=777.9 students per officer.
+
+The Standard Quota
+
+Once the standard divisor for the Imaginarian legislature is calculated, the next task is to determine the number of seats that each state should receive, which is referred to as the state’s standard quota. Unless all the states have the same population, each state will receive a different number of seats because the quantities will be proportionate to the state populations. To determine those amounts, we will use an idea we learned earlier. Recall that, when the number of units of item A is proportionate to the number of units of item B, we have: units ofA=units ofBratio ofB's toA's
+
+In this case, we are trying to calculate the number of seats a state should be apportioned, the state’s standard quota. So A So A would refer to seats allocated to a particular state, while B would refer to the state population. This means that the ratio of B to A is the ratio of the total population to house size, which is the standard divisor. So in apportionment terms, we have the following formula.
+State's Standard Quota=State PopulationStandard Divisorseats
+
+The Standard Quota of the U.S. House of Representatives 2021
+
+Example 27 outlined that the Census.gov website U.S. Population clock showed a population of 330,147,881, there are 435 seats in the U.S. House of Representatives, and the standard divisor was 758,960.6 people per representative. The state of California has a population of approximately 39,613,000. Use these values to determine the standard quota for California to two decimal places.
+California's standard Quota=California's populationStandard Divisor=39,613,000758,960.6=52.19 representatives
+
+Apportionment of Laptops in a Science Department
+
+The science department of a high school has received a grant for 34 laptops. They plan to apportion them among their six classrooms based on each classroom’s student capacity. Use the values in the table below to find the standard quota for each classroom.
+
+Room
+Students
+A
+30
+B
+25
+C
+28
+D
+32
+E
+24
+F
+Step 1: Identify the state population, total population, and the house size. The states are the classrooms, and the state populations are listed in the table. The total population is the sum of the state populations, which is 166. The house size is the number of seats, or laptops, to be allocated, which is 34.
+Step 2: Calculate the standard divisor by dividing the total population by the house size.
+Step 3: Calculate the standard quota by dividing the state population by the standard divisors , as shown in the table below.
+ Room's Standard Quota= Room CapacityStandard Divisor
+
+Room
+Room Capacity
+Room’s Standard Quota
+A
+30÷4.88≈6.15 laptops
+B
+25÷4.88≈5.12
+ laptops
+C
+28÷4.88≈5.74 laptops
+D
+32÷4.88≈6.56
+ laptops
+E
+24÷4.88≈4.92 laptops
+F
+Step 4: Find the sum of the standard quotas. 6.15+5.12+5.74+6.56+4.91+5.53=34.01. This is only slightly off from the number of laptops—34—which can be caused by rounding off in previous steps. This is a good indication that the calculations were correct. If you find that the value of the sum of the standard quotas is significantly different from the house size (number of seats), it is possible that the standard divisor was calculated using too few decimal places. Calculate the standard divisor and standard quotas again but round off to a greater number of decimal places.
+
+Check Your Understanding
+
+Key Terms
+
+apportion
+
+apportionment problem
+
+proportional
+
+part-to-part ratio
+
+representative democracies
+
+standard divisor
+
+states
+
+seats
+
+house size
+
+state population
+
+total population
+
+standard quota
+
+Key Concepts
+
+The apportionment problem is how to fairly divide and distribute available resources to recipients in whole, not fractional, parts.
+
+To distribute the seats in the U.S. House of Representatives fairly to each state, calculations are based on state population, total population, and house size, or the total number of seats to be apportioned.
+
+The standard divisor is the ratio of the total population to the house size, and the standard quota is the number of seats that each state should receive.
+
+Formulas
+
+Let A be a particular item and B another such that there is a constant ratio of A to B.
+ratio ofB's toA's=1ratio ofA's toB's and ratio ofA's toB's=1ratio ofB's toA's
+units ofA=(units ofB)×(ratio ofA's toB's)=units ofBratio ofB's toA's
+units ofB=(units ofA)×(ratio ofB's toA's)=units ofAratio ofA's toB's
+Standard Divisor=Total PopulationHouse Size
+State's Standard Quota=State PopulationStandard Divisorseats
+
+Videos
+What Is a Ratio?
+What Are the Different Types of Ratios?
+Math Antics – Rounding

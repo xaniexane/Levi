@@ -1,0 +1,3469 @@
+# m49390
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Inverse Trigonometric Functions
+
+Inverse Trigonometric Functions
+
+In this section, you will:
+
+Understand and use the inverse sine, cosine, and tangent functions.
+
+Find the exact value of expressions involving the inverse sine, cosine, and tangent functions.
+
+Use a calculator to evaluate inverse trigonometric functions.
+
+Find exact values of composite functions with inverse trigonometric functions.
+
+For any right triangle, given one other angle and the length of one side, we can figure out what the other angles and sides are. But what if we are given only two sides of a right triangle? We need a procedure that leads us from a ratio of sides to an angle. This is where the notion of an inverse to a trigonometric function comes into play. In this section, we will explore the inverse trigonometric functions.
+
+Understanding and Using the Inverse Sine, Cosine, and Tangent Functions
+
+In order to use inverse trigonometric functions, we need to understand that an inverse trigonometric function “undoes” what the original trigonometric function “does,” as is the case with any other function and its inverse. In other words, the domain of the inverse function is the range of the original function, and vice versa, as summarized in .
+
+For example, if 
+ 
+ f(x)=sinx,
+ 
+ then we would write 
+
+ f
+ 
+ −1
+
+ (x)=
+ 
+ sin
+
+ −1
+
+ x.
+ 
+ Be aware that 
+
+ sin
+
+ −1
+
+ x
+ 
+ does not mean 
+
+ 1
+ 
+ sinx
+
+ .
+ 
+ The following examples illustrate the inverse trigonometric functions:
+
+Since 
+ 
+ sin(
+
+ π
+ 6
+
+ )=
+ 1
+ 2
+ 
+ ,
+ 
+ then 
+
+ π
+ 6
+ 
+ =
+ 
+ sin
+
+ −1
+
+ (
+
+ 1
+ 2
+
+ ).
+
+Since 
+ 
+ cos(
+ π
+ )=−1,
+ 
+ then 
+ 
+ π=
+ 
+ cos
+
+ −1
+
+ (
+ 
+ −1
+ 
+ ).
+
+Since 
+ 
+ tan(
+
+ π
+ 4
+
+ )=1,
+ 
+ then 
+
+ π
+ 4
+ 
+ =
+ 
+ tan
+
+ −1
+
+ (
+ 1
+ ).
+
+In previous sections, we evaluated the trigonometric functions at various angles, but at times we need to know what angle would yield a specific sine, cosine, or tangent value. For this, we need inverse functions. Recall that, for a one-to-one function, if 
+ 
+ f(a)=b,
+ 
+ then an inverse function would satisfy 
+
+ f
+ 
+ −1
+
+ (b)=a.
+
+Bear in mind that the sine, cosine, and tangent functions are not one-to-one functions. The graph of each function would fail the horizontal line test. In fact, no periodic function can be one-to-one because each output in its range corresponds to at least one input in every period, and there are an infinite number of periods. As with other functions that are not one-to-one, we will need to restrict the domain of each function to yield a new function that is one-to-one. We choose a domain for each function that includes the number 0. shows the graph of the sine function limited to 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ]
+ 
+ and the graph of the cosine function limited to 
+ 
+ [ 
+ 0,π
+ ].
+shows the graph of the tangent function limited to 
+ 
+ (
+ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ).
+
+These conventional choices for the restricted domain are somewhat arbitrary, but they have important, helpful characteristics. Each domain includes the origin and some positive values, and most importantly, each results in a one-to-one function that is invertible. The conventional choice for the restricted domain of the tangent function also has the useful property that it extends from one vertical asymptote to the next instead of being divided into two parts by an asymptote.
+
+On these restricted domains, we can define the inverse trigonometric functions.
+
+The inverse sine function 
+ 
+ y=
+ 
+ sin
+
+ −1
+
+ x
+ 
+ means 
+ 
+ x=siny.
+ 
+ The inverse sine function is sometimes called the arcsine function, and notated 
+ 
+ arcsinx.
+
+ y=
+ 
+ sin
+
+ −1
+
+ xhas domain[−1,1]and range[ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ]
+
+The inverse cosine function 
+ 
+ y=
+ 
+ cos
+
+ −1
+
+ x
+ 
+ means 
+ 
+ x=cosy.
+ 
+ The inverse cosine function is sometimes called the arccosine function, and notated 
+ 
+ arccosx.
+
+ y=
+ 
+ cos
+
+ −1
+
+ xhas domain[−1,1]and range[0,π]
+
+The inverse tangent function 
+ 
+ y=
+ 
+ tan
+
+ −1
+
+ x
+ 
+ means 
+ 
+ x=tany.
+ 
+ The inverse tangent function is sometimes called the arctangent function, and notated 
+ 
+ arctanx.
+
+ y=
+ 
+ tan
+
+ −1
+
+ xhas domain(−∞,∞)and range(
+ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ )
+
+The graphs of the inverse functions are shown in , , and . Notice that the output of each of these inverse functions is a number, an angle in radian measure. We see that 
+
+ sin
+
+ −1
+
+ x
+ 
+ has domain 
+ 
+ [ 
+−1,1
+ ]
+ 
+ and range 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ],
+
+ cos
+
+ −1
+
+ x
+ 
+ has domain 
+ 
+ [ 
+−1,1
+ ]
+ 
+ and range 
+ 
+ [0,π],
+ 
+ and 
+
+ tan
+
+ −1
+
+ x
+ 
+ has domain of all real numbers and range 
+ 
+ (
+ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ).
+ 
+ To find the domain and range of inverse trigonometric functions, switch the domain and range of the original functions. Each graph of the inverse trigonometric function is a reflection of the graph of the original function about the line 
+ 
+ y=x.
+
+Relations for Inverse Sine, Cosine, and Tangent Functions
+
+For angles in the interval 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ],
+ 
+ if 
+ 
+ siny=x,
+ 
+ then 
+
+ sin
+
+ −1
+
+ x=y.
+
+For angles in the interval 
+ 
+ [ 
+ 0,π
+ ],
+ 
+ if 
+ 
+ cosy=x,
+ 
+ then 
+
+ cos
+
+ −1
+
+ x=y.
+
+For angles in the interval 
+ 
+ (
+ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ),
+ 
+ if 
+ 
+ tany=x,
+ 
+ then 
+
+ tan
+
+ −1
+
+ x=y.
+
+Writing a Relation for an Inverse Function
+
+Given 
+ 
+ sin(
+
+ 5π
+
+ 12
+
+ )≈0.96593,
+ 
+ write a relation involving the inverse sine.
+
+Use the relation for the inverse sine. If 
+ 
+ siny=x,
+ 
+ then 
+
+ sin
+
+ −1
+
+ x=y
+ 
+.
+
+In this problem, 
+ 
+ x=0.96593,
+ 
+ and 
+ 
+ y=
+ 
+ 5π
+
+ 12
+
+ .
+
+Given 
+ 
+ cos(0.5)≈0.8776,
+ 
+ write a relation involving the inverse cosine.
+arccos(0.8776)≈0.5
+
+Finding the Exact Value of Expressions Involving the Inverse Sine, Cosine, and Tangent Functions
+
+Now that we can identify inverse functions, we will learn to evaluate them. For most values in their domains, we must evaluate the inverse trigonometric functions by using a calculator, interpolating from a table, or using some other numerical technique. Just as we did with the original trigonometric functions, we can give exact values for the inverse functions when we are using the special angles, specifically 
+
+ π
+ 6
+
+ (30°), 
+
+ π
+ 4
+
+ (45°), and 
+
+ π
+ 3
+
+ (60°), and their reflections into other quadrants.
+Given a “special” input value, evaluate an inverse trigonometric function.
+
+Find angle 
+ 
+ x
+ 
+ for which the original trigonometric function has an output equal to the given input for the inverse trigonometric function.
+
+If 
+ 
+ x
+ 
+ is not in the defined range of the inverse, find another angle 
+ 
+ y
+ 
+ that is in the defined range and has the same sine, cosine, or tangent as 
+ 
+ x,
+ 
+ depending on which corresponds to the given inverse function.
+
+Evaluating Inverse Trigonometric Functions for Special Input Values
+
+Evaluate each of the following.
+ⓐ 
+
+ sin
+
+ −1
+
+ (
+
+ 1
+ 2
+
+ )
+ⓑ 
+
+ sin
+
+ −1
+
+ (
+ 
+ −
+
+ 2
+
+ 2
+
+ )
+ⓒ 
+
+ cos
+
+ −1
+
+ (
+ 
+ −
+
+ 3
+
+ 2
+
+ )
+ⓓ 
+
+ tan
+
+ −1
+
+ (
+ 1
+ )
+ⓐ Evaluating 
+
+ sin
+
+ −1
+
+ (
+
+ 1
+ 2
+
+ )
+ 
+ is the same as determining the angle that would have a sine value of 
+
+ 1
+ 2
+ 
+ .
+ 
+ In other words, what angle 
+ 
+ x
+ 
+ would satisfy 
+ 
+ sin(x)=
+ 1
+ 2
+ 
+ ?
+ 
+ There are multiple values that would satisfy this relationship, such as 
+
+ π
+ 6
+
+ and 
+
+ 5π
+ 
+ 6
+ 
+ ,
+ 
+ but we know we need the angle in the interval 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ],
+ 
+ so the answer will be 
+
+ sin
+
+ −1
+
+ (
+
+ 1
+ 2
+
+ )=
+ π
+ 6
+ 
+ .
+ 
+ Remember that the inverse is a function, so for each input, we will get exactly one output.
+ⓑ To evaluate 
+
+ sin
+
+ −1
+
+ (
+ 
+ −
+
+ 2
+
+ 2
+
+ ),
+ 
+ we know that 
+
+ 5π
+ 
+ 4
+
+ and 
+
+ 7π
+ 
+ 4
+
+ both have a sine value of 
+ 
+ −
+
+ 2
+
+ 2
+ 
+ ,
+ 
+ but neither is in the interval 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ ].
+ 
+ For that, we need the negative angle coterminal with 
+
+ 7π
+ 
+ 4
+ 
+ :
+
+ sin
+
+ −1
+
+ (−
+
+ 2
+
+ 2
+ 
+ )=−
+ π
+ 4
+ 
+ .
+ⓒTo evaluate 
+
+ cos
+
+ −1
+
+ (
+ 
+ −
+
+ 3
+
+ 2
+
+ ),
+ 
+ we are looking for an angle in the interval 
+ 
+ [ 
+ 0,π
+ ]
+ 
+ with a cosine value of 
+ 
+ −
+
+ 3
+
+ 2
+ 
+ .
+ 
+ The angle that satisfies this is 
+
+ cos
+
+ −1
+
+ (
+ 
+ −
+
+ 3
+
+ 2
+
+ )=
+ 
+ 5π
+ 
+ 6
+ 
+ .
+ⓓ Evaluating 
+
+ tan
+
+ −1
+
+ (
+ 1
+ ),
+ 
+ we are looking for an angle in the interval 
+ 
+ (
+ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+
+ )
+ 
+ with a tangent value of 1. The correct angle is 
+
+ tan
+
+ −1
+
+ (
+ 1
+ )=
+ π
+ 4
+ 
+ .
+
+Evaluate each of the following.
+ⓐ 
+
+ sin
+
+−1
+
+ (−1)
+ⓑ 
+
+ tan
+
+−1
+
+ (
+ 
+−1
+ 
+ )
+ⓒ 
+
+ cos
+
+−1
+
+ (
+ 
+−1
+ 
+ )
+ⓓ 
+
+ cos
+
+−1
+
+ (
+
+ 1
+ 2
+
+ )
+ⓐ
+ 
+ −
+ π
+ 2
+ 
+ ;
+ⓑ 
+ 
+ −
+ π
+ 4
+ 
+ ;
+ⓒ 
+ 
+ π;
+ⓓ 
+
+ π
+ 3
+
+Using a Calculator to Evaluate Inverse Trigonometric Functions
+
+To evaluate inverse trigonometric functions that do not involve the special angles discussed previously, we will need to use a calculator or other type of technology. Most scientific calculators and calculator-emulating applications have specific keys or buttons for the inverse sine, cosine, and tangent functions. These may be labeled, for example, SIN
+
+−1
+
+, ARCSIN, or ASIN.
+
+In the previous chapter, we worked with trigonometry on a right triangle to solve for the sides of a triangle given one side and an additional angle. Using the inverse trigonometric functions, we can solve for the angles of a right triangle given two sides, and we can use a calculator to find the values to several decimal places.
+
+In these examples and exercises, the answers will be interpreted as angles and we will use 
+ 
+ θ
+ 
+ as the independent variable. The value displayed on the calculator may be in degrees or radians, so be sure to set the mode appropriate to the application.
+
+Evaluating the Inverse Sine on a Calculator
+
+Evaluate 
+
+ sin
+
+ −1
+
+ (0.97)
+ 
+ using a calculator.
+
+Because the output of the inverse function is an angle, the calculator will give us a degree value if in degree mode and a radian value if in radian mode. Calculators also use the same domain restrictions on the angles as we are using.
+
+In radian mode, 
+
+ sin
+
+ −1
+
+ (0.97)≈1.3252.
+ 
+ In degree mode, 
+
+ sin
+
+ −1
+
+ (0.97)≈75.93°.
+ 
+ Note that in calculus and beyond we will use radians in almost all cases.
+
+Evaluate 
+
+ cos
+
+ −1
+
+ (
+ 
+ −0.4
+ 
+ )
+ 
+ using a calculator.
+
+1.9823 or 113.578°
+Given two sides of a right triangle like the one shown in , find an angle.
+
+If one given side is the hypotenuse of length 
+ 
+ h
+ and the side of length 
+ 
+ a
+ adjacent to the desired angle is given, use the equation 
+ θ=
+ 
+ cos
+ 
+ −1
+ 
+ (
+
+ a
+ h
+
+ ).
+
+If one given side is the hypotenuse of length 
+ 
+ h
+ and the side of length 
+ 
+ p
+ opposite to the desired angle is given, use the equation 
+ 
+ θ=
+ 
+ sin
+ 
+ −1
+ 
+ (
+
+ p
+ h
+
+ ).
+
+If the two legs (the sides adjacent to the right angle) are given, then use the equation 
+ 
+ θ=
+ 
+ tan
+ 
+ −1
+ 
+ (
+
+ p
+ a
+
+ ).
+
+Applying the Inverse Cosine to a Right Triangle
+
+Solve the triangle in for the angle 
+ 
+ θ.
+
+Because we know the hypotenuse and the side adjacent to the angle, it makes sense for us to use the cosine function.
+
+Solve the triangle in for the angle 
+ 
+ θ.
+sin
+ 
+−1
+ 
+ (0.6)=36.87°=0.6435
+ radians
+
+Finding Exact Values of Composite Functions with Inverse Trigonometric Functions
+
+There are times when we need to compose a trigonometric function with an inverse trigonometric function. In these cases, we can usually find exact values for the resulting expressions without resorting to a calculator. Even when the input to the composite function is a variable or an expression, we can often find an expression for the output. To help sort out different cases, let 
+ 
+ f(x)
+ and 
+ 
+ g(x)
+ be two different trigonometric functions belonging to the set 
+ 
+ { 
+ sin(x),cos(x),tan(x) }
+ and let 
+
+ f
+ 
+ −1
+ 
+ (y)
+ and 
+
+ g
+ 
+ −1
+ 
+ (y)
+ be their inverses.
+
+Evaluating Compositions of the Form f(f−1(y)) and f−1(f(x))
+
+For any trigonometric function, 
+ 
+ f(
+
+ f
+ 
+ −1
+ 
+ (
+ y
+ )
+ )=y
+ for all 
+ 
+ y
+ in the proper domain for the given function. This follows from the definition of the inverse and from the fact that the range of 
+ 
+ f
+ was defined to be identical to the domain of 
+
+ f
+ 
+ −1
+ 
+ .
+ However, we have to be a little more careful with expressions of the form 
+
+ f
+ 
+ −1
+ 
+ (
+ 
+ f(
+ x
+ )
+ ).
+
+Compositions of a trigonometric function and its inverse
+
+Is it correct that 
+
+ sin
+
+ −1
+
+ (sinx)=x?
+No. This equation is correct if 
+ 
+ x
+ belongs to the restricted domain 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ],
+ but sine is defined for all real input values, and for 
+ 
+ x
+ outside the restricted interval, the equation is not correct because its inverse always returns a value in 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ].
+ The situation is similar for cosine and tangent and their inverses. For example, 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ 3π
+ 4
+
+ )
+ )=
+ π
+ 4
+ 
+ .
+Given an expression of the form f−1(f(θ)) where 
+ 
+ f(θ)=sinθ,cosθ, or tanθ,
+ evaluate.
+
+If 
+ 
+ θ
+ is in the restricted domain of 
+ 
+ f, then 
+ f
+ 
+ −1
+
+ (f(θ))=θ.
+
+If not, then find an angle 
+ 
+ ϕ
+ within the restricted domain of 
+ 
+ f
+ such that 
+ 
+ f(ϕ)=f(θ).
+ Then 
+
+ f
+ 
+ −1
+ 
+ (
+ 
+ f(
+ θ
+ )
+ )=ϕ.
+
+Using Inverse Trigonometric Functions
+
+Evaluate the following:
+ⓐ 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ π
+ 3
+
+ )
+ )
+ⓑ 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ 2π
+ 3
+
+ )
+ )
+ⓒ 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ cos(
+
+ 2π
+ 3
+
+ )
+ )
+ⓓ 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ cos(
+ 
+ −
+ π
+ 3
+
+ )
+ )
+ⓐ 
+
+ π
+ 3
+ 
+  is in [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ],
+ so 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ π
+ 3
+
+ )
+ )=
+ π
+ 3
+ 
+ .
+ⓑ 
+
+ 2π
+ 3
+ 
+  is not in [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ],
+ but 
+ 
+ sin(
+
+ 2π
+ 3
+
+ )=sin(
+
+ π
+ 3
+
+ ),
+ so 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ 2π
+ 3
+
+ )
+ )=
+ π
+ 3
+ 
+ .
+ⓒ 
+
+ 2π
+ 3
+ 
+  is in [ 
+ 0,π ],
+ so 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ cos(
+
+ 2π
+ 3
+
+ )
+ )=
+ 
+ 2π
+ 3
+ 
+ .
+ⓓ 
+ 
+ −
+ π
+ 3
+ 
+  is not in [ 
+ 0,π ],
+ but 
+ 
+ cos(
+ 
+ −
+ π
+ 3
+
+ )=cos(
+
+ π
+ 3
+
+ )
+ because cosine is an even function.
+
+ π
+ 3
+ 
+  is in [ 
+ 0,π ],
+ so 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ cos(
+ 
+ −
+ π
+ 3
+
+ )
+ )=
+ π
+ 3
+ 
+ .
+
+Evaluate 
+
+ tan
+ 
+ −1
+ 
+ (
+ 
+ tan(
+
+ π
+ 8
+
+ )
+ )and
+ 
+ tan
+ 
+ −1
+ 
+ (
+ 
+ tan(
+
+ 11π
+ 9
+
+ )
+ ).
+π
+ 8
+ 
+ ;
+ 
+ 2π
+ 9
+
+Evaluating Compositions of the Form f−1(g(x))
+
+Now that we can compose a trigonometric function with its inverse, we can explore how to evaluate a composition of a trigonometric function and the inverse of another trigonometric function. We will begin with compositions of the form 
+
+ f
+ 
+ −1
+ 
+ (
+ 
+ g(
+ x
+ )
+ ).
+ For special values of 
+ 
+ x,
+ we can exactly evaluate the inner function and then the outer, inverse function. However, we can find a more general approach by considering the relation between the two acute angles of a right triangle where one is 
+ 
+ θ,
+ making the other 
+
+ π
+ 2
+ 
+ −θ.
+ Consider the sine and cosine of each angle of the right triangle in .
+
+Because 
+ 
+ cosθ=
+ b
+ c
+ 
+ =sin(
+
+ π
+ 2
+ 
+ −θ
+ ),
+ we have 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ cosθ
+ )=
+ π
+ 2
+ 
+ −θ
+ if 
+ 
+ 0≤θ≤π.
+ If 
+ 
+ θ
+ is not in this domain, then we need to find another angle that has the same cosine as 
+ 
+ θ
+ and does belong to the restricted domain; we then subtract this angle from 
+
+ π
+ 2
+ 
+ .
+ Similarly, 
+ 
+ sinθ=
+ a
+ c
+ 
+ =cos(
+
+ π
+ 2
+ 
+ −θ
+ ),
+ so 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ sinθ
+ )=
+ π
+ 2
+ 
+ −θ
+ if 
+ 
+ −
+ π
+ 2
+ 
+ ≤θ≤
+ π
+ 2
+ 
+ .
+ These are just the function-cofunction relationships presented in another way.
+Given functions of the form 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ cosx
+ )
+ and 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ sinx
+ ),
+ evaluate them.
+
+If 
+ 
+ x is in [ 
+ 0,π ],
+ then 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ cosx
+ )=
+ π
+ 2
+ 
+ −x.
+
+If 
+ 
+ x is not in [ 
+ 0,π ],
+ then find another angle 
+ 
+ y in [ 
+ 0,π ]
+ such that 
+ 
+ cosy=cosx.
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ cosx
+ )=
+ π
+ 2
+ 
+ −y
+
+If 
+ 
+ x is in [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ],
+ then 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ sinx
+ )=
+ π
+ 2
+ 
+ −x.
+
+If 
+ 
+ x is not in[ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ],
+ then find another angle 
+ 
+ y in [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ]
+ such that 
+ 
+ siny=sinx.
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ sinx
+ )=
+ π
+ 2
+ 
+ −y
+
+Evaluating the Composition of an Inverse Sine with a Cosine
+
+Evaluate 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ cos(
+
+ 13π
+ 6
+
+ )
+ )
+ⓐby direct evaluation.
+ⓑ by the method described previously.
+ⓐ Here, we can directly evaluate the inside of the composition.
+
+ cos(
+ 
+ 13π
+ 
+ 6
+ 
+ )=cos(
+ π
+ 6
+ 
+ +2π)
+
+                =cos(
+ π
+ 6
+ 
+ )
+
+                =
+
+ 3
+
+ 2
+
+ Now, we can evaluate the inverse function as we did earlier.
+
+ sin
+ 
+ −1
+ 
+ (
+
+ 3
+
+ 2
+
+ )=
+ π
+ 3
+
+Now, we can evaluate the inverse function as we did earlier.
+ⓑ We have 
+ 
+ x=
+ 
+ 13π
+ 6
+ 
+ ,y=
+ π
+ 6
+ 
+ ,
+ and
+
+ sin
+
+ −1
+
+ (
+ 
+ cos(
+
+ 13π
+ 
+ 6
+
+ )
+ 
+ )=
+ π
+ 2
+ 
+ −
+ π
+ 6
+
+ =
+ π
+ 3
+
+Evaluate 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ sin(
+ 
+ −
+ 
+ 11π
+ 4
+
+ )
+ ).
+3π
+ 4
+
+Evaluating Compositions of the Form f(g−1(x))
+
+To evaluate compositions of the form 
+ 
+ f(
+
+ g
+ 
+ −1
+ 
+ (
+ x
+ )
+ ),
+ where 
+ 
+ f
+ and 
+ 
+ g
+ are any two of the functions sine, cosine, or tangent and 
+ 
+ x
+ is any input in the domain of 
+
+ g
+ 
+ −1
+ 
+ ,
+ we have exact formulas, such as 
+ 
+ sin(
+
+ cos
+ 
+ −1
+ 
+ x
+ )=
+ 
+ 1−
+ x
+ 2
+
+ .
+ When we need to use them, we can derive these formulas by using the trigonometric relations between the angles and sides of a right triangle, together with the use of Pythagoras’s relation between the lengths of the sides. We can use the Pythagorean identity, 
+
+ sin
+ 2
+ 
+ x+
+ 
+ cos
+ 2
+ 
+ x=1,
+ to solve for one when given the other. We can also use the inverse trigonometric functions to find compositions involving algebraic expressions.
+
+Evaluating the Composition of a Sine with an Inverse Cosine
+
+Find an exact value for 
+ 
+ sin(
+
+ cos
+ 
+ −1
+ 
+ (
+
+ 4
+ 5
+
+ )
+ ).
+
+Beginning with the inside, we can say there is some angle such that 
+ 
+ θ=
+ 
+ cos
+ 
+ −1
+ 
+ (
+
+ 4
+ 5
+
+ ),
+ which means 
+ 
+ cosθ=
+ 4
+ 5
+ 
+ ,
+ and we are looking for 
+ 
+ sinθ.
+ We can use the Pythagorean identity to do this.
+
+Since 
+ 
+ θ=
+ 
+ cos
+ 
+ −1
+ 
+ (
+
+ 4
+ 5
+
+ )
+ is in quadrant I, 
+ 
+ sinθ
+ must be positive, so the solution is 
+
+ 3
+ 5
+ 
+ .
+ See .
+
+We know that the inverse cosine always gives an angle on the interval 
+ 
+ [ 
+ 0,π ],
+ so we know that the sine of that angle must be positive; therefore 
+ 
+ sin(
+
+ cos
+
+ −1
+
+ (
+
+ 4
+ 5
+
+ )
+ 
+ )=sinθ=
+ 3
+ 5
+ 
+ .
+
+Evaluate 
+ 
+ cos(
+
+ tan
+ 
+ −1
+ 
+ (
+
+ 5
+ 
+ 12
+
+ )
+ ).
+12
+ 
+ 13
+
+Evaluating the Composition of a Sine with an Inverse Tangent
+
+Find an exact value for 
+ 
+ sin(
+
+ tan
+ 
+ −1
+ 
+ (
+
+ 7
+ 4
+
+ )
+ ).
+
+While we could use a similar technique as in , we will demonstrate a different technique here. From the inside, we know there is an angle such that 
+ 
+ tanθ=
+ 7
+ 4
+ 
+ .
+ We can envision this as the opposite and adjacent sides on a right triangle, as shown in .
+
+Using the Pythagorean Theorem, we can find the hypotenuse of this triangle.
+
+Now, we can evaluate the sine of the angle as the opposite side divided by the hypotenuse.
+
+This gives us our desired composition.
+
+Evaluate 
+ 
+ cos(
+
+ sin
+ 
+ −1
+ 
+ (
+
+ 7
+ 9
+
+ )
+ ).
+4
+ 2
+
+ 9
+
+Finding the Cosine of the Inverse Sine of an Algebraic Expression
+
+Find a simplified expression for 
+ 
+ cos(
+
+ sin
+ 
+ −1
+ 
+ (
+
+ x
+ 3
+
+ )
+ )
+ for 
+ 
+ −3≤x≤3.
+
+We know there is an angle 
+ 
+ θ
+ such that 
+ 
+ sinθ=
+ x
+ 3
+ 
+ .
+
+Because we know that the inverse sine must give an angle on the interval 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ],
+ we can deduce that the cosine of that angle must be positive.
+
+Find a simplified expression for 
+ 
+ sin(
+
+ tan
+ 
+ −1
+ 
+ (
+ 
+ 4x
+ )
+ )
+ for 
+ 
+ −
+ 1
+ 4
+ 
+ ≤x≤
+ 1
+ 4
+ 
+ .
+4x
+
+ 16
+ x
+ 2
+ 
+ +1
+
+Access this online resource for additional instruction and practice with inverse trigonometric functions.
+Evaluate Expressions Involving Inverse Trigonometric Functions
+
+Key Concepts
+
+An inverse function is one that “undoes” another function. The domain of an inverse function is the range of the original function and the range of an inverse function is the domain of the original function.
+
+Because the trigonometric functions are not one-to-one on their natural domains, inverse trigonometric functions are defined for restricted domains.
+
+For any trigonometric function 
+ 
+ f(x),
+ if 
+ 
+ x=
+ f
+ 
+ −1
+ 
+ (y),
+ then 
+ 
+ f(x)=y.
+ However, 
+ 
+ f(x)=y
+ only implies 
+ 
+ x=
+ f
+ 
+ −1
+ 
+ (y)
+ if 
+ 
+ x
+ is in the restricted domain of 
+ 
+ f.
+ See .
+
+Special angles are the outputs of inverse trigonometric functions for special input values; for example, 
+
+ π
+ 4
+ 
+ =
+ 
+ tan
+
+ −1
+
+ (1)and
+ π
+ 6
+ 
+ =
+ 
+ sin
+
+ −1
+
+ (
+
+ 1
+ 2
+
+ ).
+ 
+ See .
+
+A calculator will return an angle within the restricted domain of the original trigonometric function. See .
+
+Inverse functions allow us to find an angle when given two sides of a right triangle. See .
+
+In function composition, if the inside function is an inverse trigonometric function, then there are exact expressions; for example, 
+ 
+ sin(
+
+ cos
+ 
+ −1
+ 
+ (
+ x
+ )
+ )=
+ 
+ 1−
+ x
+ 2
+
+ .
+ See .
+
+If the inside function is a trigonometric function, then the only possible combinations are 
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ cosx
+ )=
+ π
+ 2
+ 
+ −x
+ if 
+ 
+ 0≤x≤π
+ and 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ sinx
+ )=
+ π
+ 2
+ 
+ −x
+ if 
+ 
+ −
+ π
+ 2
+ 
+ ≤x≤
+ π
+ 2
+ 
+ .
+ 
+ See and .
+
+When evaluating the composition of a trigonometric function with an inverse trigonometric function, draw a reference triangle to assist in determining the ratio of sides that represents the output of the trigonometric function. See .
+
+When evaluating the composition of a trigonometric function with an inverse trigonometric function, you may use trig identities to assist in determining the ratio of sides. See .
+
+Section Exercises
+
+Verbal
+
+Why do the functions 
+ 
+ f(x)=
+ 
+ sin
+ 
+ −1
+ 
+ x
+ and 
+ 
+ g(x)=
+ 
+ cos
+ 
+ −1
+ 
+ x
+ have different ranges?
+
+The function 
+ 
+ y=sinx
+ is one-to-one on 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ];
+ thus, this interval is the range of the inverse function of 
+ 
+ y=sinx,
+
+ f(x)=
+ 
+ sin
+ 
+ −1
+ 
+ x.
+ The function 
+ 
+ y=cosx
+ is one-to-one on 
+ [ 
+ 0,π ];
+ thus, this interval is the range of the inverse function of 
+ 
+ y=cosx,f(x)=
+ 
+ cos
+ 
+ −1
+ 
+ x.
+
+Since the functions 
+ 
+ y=cosx
+ and 
+ 
+ y=
+ 
+ cos
+ 
+ −1
+ 
+ x
+ are inverse functions, why is 
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ cos(
+ 
+ −
+ π
+ 6
+
+ )
+ )
+ not equal to 
+ 
+ −
+ π
+ 6
+ 
+ ?
+
+Explain the meaning of 
+
+ π
+ 6
+ 
+ =arcsin(
+ 
+ 0.5
+ ).
+π
+ 6
+
+ is the radian measure of an angle between 
+ 
+ −
+ π
+ 2
+
+ and 
+
+ π
+ 2
+
+ whose sine is 0.5.
+
+Most calculators do not have a key to evaluate 
+
+ sec
+ 
+ −1
+ 
+ (
+ 2
+ ).
+ Explain how this can be done using the cosine function or the inverse cosine function.
+
+Why must the domain of the sine function, 
+ 
+ sinx,
+ be restricted to 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ]
+ for the inverse sine function to exist?
+
+In order for any function to have an inverse, the function must be one-to-one and must pass the horizontal line test. The regular sine function is not one-to-one unless its domain is restricted in some way. Mathematicians have agreed to restrict the sine function to the interval 
+ 
+ [ 
+ −
+ π
+ 2
+ 
+ ,
+ π
+ 2
+ 
+ ]
+ so that it is one-to-one and possesses an inverse.
+
+Discuss why this statement is incorrect: 
+ 
+ arccos(
+ 
+ cosx
+ )=x
+ for all 
+ 
+ x.
+
+Determine whether the following statement is true or false and explain your answer: 
+ 
+ arccos(
+ 
+ −x
+ )=π−arccosx.
+
+True . The angle, 
+
+ θ
+ 1
+
+ that equals 
+ 
+ arccos(−x)
+ , 
+ 
+ x>0
+ , will be a second quadrant angle with reference angle, 
+
+ θ
+ 2
+
+ , where 
+
+ θ
+ 2
+
+ equals 
+ 
+ arccosx
+ , 
+ 
+ x>0
+ . Since 
+
+ θ
+ 2
+
+ is the reference angle for 
+
+ θ
+ 1
+
+ , 
+
+ θ
+ 2
+ 
+ =π−
+ θ
+ 1
+
+ and 
+ 
+ arccos(−x)
+ = 
+ 
+ π−arccosx
+ -
+
+Algebraic
+
+For the following exercises, evaluate the expressions.
+sin
+ 
+ −1
+ 
+ (
+
+ 2
+
+ 2
+
+ )
+sin
+ 
+ −1
+ 
+ (
+ 
+ −
+ 1
+ 2
+
+ )
+−
+ π
+ 6
+cos
+ 
+ −1
+ 
+ (
+
+ 1
+ 2
+
+ )
+cos
+ 
+ −1
+ 
+ (
+ 
+ −
+
+ 2
+
+ 2
+
+ )
+3π
+ 4
+tan
+ 
+ −1
+ 
+ (
+ 1
+ )
+tan
+ 
+ −1
+ 
+ (
+ 
+ −
+ 3
+
+ )
+−
+ π
+ 3
+tan
+ 
+ −1
+ 
+ (
+ 
+ −1
+ )
+tan
+ 
+ −1
+ 
+ (
+
+ 3
+
+ )
+π
+ 3
+tan
+ 
+ −1
+ 
+ (
+
+ −1
+
+ 3
+
+ )
+
+For the following exercises, use a calculator to evaluate each expression. Express answers to the nearest hundredth.
+cos
+ 
+ −1
+ 
+ (
+ 
+ −0.4
+ )
+
+1.98
+arcsin(
+ 
+ 0.23
+ )
+arccos(
+
+ 3
+ 5
+
+ )
+
+0.93
+cos
+ 
+ −1
+ 
+ (
+ 
+ 0.8
+ )
+tan
+ 
+ −1
+ 
+ (
+ 6
+ )
+
+1.41
+
+For the following exercises, find the angle 
+ 
+ θ
+ in the given right triangle. Round answers to the nearest hundredth.
+
+0.56 radians
+
+For the following exercises, find the exact value, if possible, without a calculator. If it is not possible, explain why.
+sin
+ 
+ −1
+ 
+ (
+ 
+ cos(
+ π
+ )
+ )
+tan
+ 
+ −1
+ 
+ (
+ 
+ sin(
+ π
+ )
+ )
+
+0
+cos
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ π
+ 3
+
+ )
+ )
+tan
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ π
+ 3
+
+ )
+ )
+
+0.71
+sin
+ 
+ −1
+ 
+ (
+ 
+ cos(
+
+ −π
+ 2
+
+ )
+ )
+tan
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ 4π
+ 3
+
+ )
+ )
+
+-0.71
+sin
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ 5π
+ 6
+
+ )
+ )
+tan
+ 
+ −1
+ 
+ (
+ 
+ sin(
+
+ −5π
+ 2
+
+ )
+ )
+−
+ π
+ 4
+cos(
+
+ sin
+ 
+ −1
+ 
+ (
+
+ 4
+ 5
+
+ )
+ )
+sin(
+
+ cos
+ 
+ −1
+ 
+ (
+
+ 3
+ 5
+
+ )
+ )
+
+0.8
+sin(
+
+ tan
+ 
+ −1
+ 
+ (
+
+ 4
+ 3
+
+ )
+ )
+cos(
+
+ tan
+ 
+ −1
+ 
+ (
+
+ 12
+ 5
+
+ )
+ )
+5
+ 
+ 13
+cos(
+
+ sin
+ 
+ −1
+ 
+ (
+
+ 1
+ 2
+
+ )
+ )
+
+For the following exercises, find the exact value of the expression in terms of 
+ 
+ x
+ 
+ with the help of a reference triangle.
+tan(
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ x−1
+ )
+ )
+x−1
+
+ −
+ x
+ 2
+ 
+ +2x
+sin(
+
+ cos
+ 
+ −1
+ 
+ (
+ 
+ 1−x
+ )
+ )
+cos(
+
+ sin
+ 
+ −1
+ 
+ (
+
+ 1
+ x
+
+ )
+ )
+x
+ 2
+ 
+ −1
+
+ x
+cos(
+
+ tan
+ 
+ −1
+ 
+ (
+ 
+ 3x−1
+ )
+ )
+tan(
+
+ sin
+ 
+ −1
+ 
+ (
+ 
+ x+
+ 1
+ 2
+
+ )
+ )
+x+0.5
+
+ −
+ x
+ 2
+ 
+ −x+
+ 3
+ 4
+
+Extensions
+
+For the following exercises, evaluate the expression without using a calculator. Give the exact value.
+sin
+ 
+ −1
+ 
+ (
+
+ 1
+ 2
+
+ )−
+ 
+ cos
+ 
+ −1
+ 
+ (
+
+ 2
+
+ 2
+
+ )+
+ 
+ sin
+ 
+ −1
+ 
+ (
+
+ 3
+
+ 2
+
+ )−
+ 
+ cos
+ 
+ −1
+ 
+ (
+ 1
+ )
+
+ cos
+ 
+ −1
+ 
+ (
+
+ 3
+
+ 2
+
+ )−
+ 
+ sin
+ 
+ −1
+ 
+ (
+
+ 2
+
+ 2
+
+ )+
+ 
+ cos
+ 
+ −1
+ 
+ (
+
+ 1
+ 2
+
+ )−
+ 
+ sin
+ 
+ −1
+ 
+ (
+ 0
+ )
+
+For the following exercises, find the function if 
+ 
+ sint=
+ x
+ 
+ x+1
+ 
+ .
+cost
+2x+1
+
+ x+1
+sect
+cott
+2x+1
+
+ x
+cos(
+
+ sin
+ 
+ −1
+ 
+ (
+
+ x
+ 
+ x+1
+
+ )
+ )
+tan
+ 
+ −1
+ 
+ (
+
+ x
+
+ 2x+1
+
+ )
+t
+
+Graphical
+
+Graph 
+ 
+ y=
+ 
+ sin
+ 
+ −1
+ 
+ x
+ and state the domain and range of the function.
+
+Graph 
+ 
+ y=arccosx
+ and state the domain and range of the function.
+
+domain 
+ 
+ [ 
+ −1,1 ];
+ range 
+ 
+ [ 
+ 0,π ]
+
+Graph one cycle of 
+ 
+ y=
+ 
+ tan
+ 
+ −1
+ 
+ x
+ and state the domain and range of the function.
+
+For what value of 
+ 
+ x
+ does 
+ 
+ sinx=
+ 
+ sin
+ 
+ −1
+ 
+ x?
+ Use a graphing calculator to approximate the answer.
+
+approximately 
+ 
+ x=0.00
+
+For what value of 
+ 
+ x
+ does 
+ 
+ cosx=
+ 
+ cos
+ 
+ −1
+ 
+ x?
+ Use a graphing calculator to approximate the answer.
+
+Real-World Applications
+
+Suppose a 13-foot ladder is leaning against a building, reaching to the bottom of a second-ﬂoor window 12 feet above the ground. What angle, in radians, does the ladder make with the building?
+
+0.395 radians
+
+Suppose you drive 0.6 miles on a road so that the vertical distance changes from 0 to 150 feet. What is the angle of elevation of the road?
+
+An isosceles triangle has two congruent sides of length 9 inches. The remaining side has a length of 8 inches. Find the angle that a side of 9 inches makes with the 8-inch side.
+
+1.11 radians
+
+Without using a calculator, approximate the value of 
+ 
+ arctan(
+ 
+ 10,000
+ ).
+ Explain why your answer is reasonable.
+
+A truss (interior beam structure) for the roof of a house is constructed from two identical right triangles. Each has a base of 12 feet and height of 4 feet. Find the measure of the acute angle adjacent to the 4-foot side.
+
+1.25 radians
+
+The line 
+ 
+ y=
+ 3
+ 5
+ 
+ x
+ passes through the origin in the x,y-plane. What is the measure of the angle that the line makes with the positive x-axis?
+
+The line 
+ 
+ y=
+ 
+ −3
+ 7
+ 
+ x
+ passes through the origin in the x,y-plane. What is the measure of the angle that the line makes with the negative x-axis?
+
+0.405 radians
+
+What percentage grade should a road have if the angle of elevation of the road is 4 degrees? (The percentage grade is defined as the change in the altitude of the road over a 100-foot horizontal distance. For example a 5% grade means that the road rises 5 feet for every 100 feet of horizontal distance.)
+
+A 20-foot ladder leans up against the side of a building so that the foot of the ladder is 10 feet from the base of the building. If specifications call for the ladder's angle of elevation to be between 35 and 45 degrees, does the placement of this ladder satisfy safety specifications?
+
+No. The angle the ladder makes with the horizontal is 60 degrees.
+
+Suppose a 15-foot ladder leans against the side of a house so that the angle of elevation of the ladder is 42 degrees. How far is the foot of the ladder from the side of the house?
+
+Chapter Review Exercises
+Graphs of the Sine and Cosine Functions
+
+For the following exercises, graph the functions for two periods and determine the amplitude or stretching factor, period, midline equation, and asymptotes.
+f(
+ x
+ )=−3cosx+3
+
+amplitude: 3; period: 
+ 
+ 2π;
+ 
+ midline: 
+ 
+ y=3;
+ 
+ no asymptotes
+f(
+ x
+ )=
+ 1
+ 4
+ 
+ sinx
+f(
+ x
+ )=3cos(
+ 
+ x+
+ π
+ 6
+
+ )
+
+amplitude: 3; period: 
+ 
+ 2π;
+ 
+ midline: 
+ 
+ y=0;
+ 
+ no asymptotes
+f(
+ x
+ )=−2sin(
+ 
+ x−
+ 
+ 2π
+ 
+ 3
+
+ )
+f(
+ x
+ )=3sin(
+ 
+ x−
+ π
+ 4
+
+ )−4
+
+amplitude: 3; period: 
+ 
+ 2π;
+ 
+ midline: 
+ 
+ y=−4;
+ 
+ no asymptotes
+f(
+ x
+ )=2(
+ 
+ cos(
+ 
+ x−
+ 
+ 4π
+ 
+ 3
+
+ )+1
+ 
+ )
+f(
+ x
+ )=6sin(
+ 
+ 3x−
+ π
+ 6
+
+ )−1
+
+amplitude: 6; period: 
+
+ 2π
+ 
+ 3
+ 
+ ;
+ 
+ midline: 
+ 
+ y=−1;
+ 
+ no asymptotes
+f(
+ x
+ )=−100sin(
+ 
+ 50x−20
+ 
+ )
+Graphs of the Other Trigonometric Functions
+
+For the following exercises, graph the functions for two periods and determine the amplitude or stretching factor, period,
+midline equation, and asymptotes.
+f(
+ x
+ )=tanx−4
+
+stretching factor: none; period: 
+ 
+ π;
+ 
+ midline: 
+ 
+ y=−4;
+ 
+ asymptotes: 
+ 
+ x=
+ π
+ 2
+ 
+ +πk,
+ where 
+ 
+ k
+ is an integer
+f(
+ x
+ )=2tan(
+ 
+ x−
+ π
+ 6
+
+ )
+f(
+ x
+ )=−3tan(
+ 
+ 4x
+ 
+ )−2
+
+stretching factor: 3; period: 
+
+ π
+ 4
+ 
+ ;
+ 
+ midline: 
+ 
+ y=−2;
+ 
+ asymptotes: 
+ 
+ x=
+ π
+ 8
+ 
+ +
+ π
+ 4
+ 
+ k,
+ where 
+ 
+ k
+ is an integer
+f(
+ x
+ )=0.2cos(
+ 
+ 0.1x
+ 
+ )+0.3
+
+For the following exercises, graph two full periods. Identify the period, the phase shift, the amplitude, and asymptotes.
+f(
+ x
+ )=
+ 1
+ 3
+ 
+ secx
+
+amplitude: none; period: 
+ 
+ 2π;
+ no phase shift; asymptotes: 
+ 
+ x=
+ π
+ 2
+ 
+ k,
+ where 
+ 
+ k
+ is an odd integer
+f(
+ x
+ )=3cotx
+f(
+ x
+ )=4csc(
+ 
+ 5x
+ 
+ )
+
+amplitude: none; period: 
+
+ 2π
+ 
+ 5
+ 
+ ;
+ 
+ no phase shift; asymptotes: 
+ 
+ x=
+ π
+ 5
+ 
+ k,
+ where 
+ 
+ k
+ is an integer
+f(
+ x
+ )=8sec(
+
+ 1
+ 4
+ 
+ x
+ 
+ )
+f(
+ x
+ )=
+ 2
+ 3
+ 
+ csc(
+
+ 1
+ 2
+ 
+ x
+ 
+ )
+
+amplitude: none; period: 
+ 
+ 4π;
+ 
+ no phase shift; asymptotes: 
+ 
+ x=2πk,
+ where 
+ 
+ k
+ is an integer
+f(
+ x
+ )=−csc(
+ 
+ 2x+π
+ 
+ )
+
+For the following exercises, use this scenario: The population of a city has risen and fallen over a 20-year interval. Its population may be modeled by the following function: 
+ 
+ y=12,000+8,000sin(
+ 
+ 0.628x
+ 
+ ),
+ 
+ where the domain is the years since 1980 and the range is the population of the city.
+
+What is the largest and smallest population the city may have?
+
+largest: 20,000; smal
+[truncated]

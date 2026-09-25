@@ -1,0 +1,106 @@
+# m00006
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Percentiles
+
+Percentiles
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Compute percentiles.
+
+Solve application problems involving percentiles.
+
+A college admissions officer is comparing two students. The first, Anna, finished 12th in her class of 235 people. The second, Brian, finished 10th in his class of 170 people. Which of these outcomes is better? Certainly 10 is less than 12, which favors Brian, but Anna’s class was much bigger. In fact, Anna beat out 223 of her classmates, which is 223235≈95% of her classmates, while Brian bested 160 out of 170 people, or 94%. Comparing the proportions of the data values that are below a given number can help us evaluate differences between individuals in separate populations. These proportions are called percentiles. If p% of the values in a dataset are less than a number n, then we say that n is at the pth percentile.
+
+Finding Percentiles
+
+There are some other terms that are related to "percentile" with meanings you may infer from their roots. Remember that the word percent means “per hundred.” This reflects that percentiles divide our data into 100 pieces. The word quartile has a root that means “four.” So, if a data value is at the first quantile of a dataset, that means that if you break the data into four parts (because of the quart-), this data value comes after the first of those four parts. In other words, it’s greater than 25% of the data, placing it at the 25th percentile. Quintile has a root meaning “five,” so a data value at the third quintile is greater than three-fifths of the data in the set. That would put it at the 60th percentile. The general term for these is quantiles (the root quant– means “number”).
+
+In Mean, Median, and Mode, we defined the median as a number that is greater than no more than half of the data in a dataset and is less than no more than half of the data in the dataset. With our new term, we can more easily define it: The median is the value at the 50th percentile (or second quartile).
+
+Let’s look at some examples.
+
+Finding Percentiles
+
+Consider the dataset 5, 8, 12, 1, 2, 16, 2, 15, 20, 22.
+
+At what percentile is the value 5?
+
+What value is at the 60th percentile?
+
+Before we can answer these two questions, we must put the data in increasing order: 1, 2, 2, 5, 8, 12, 15, 16, 20, 22.
+
+There are three values (1, 2, and 2) in the set that are less than 5, and there are ten values in the set. Thus, 5 is at the 310×100=30th percentile.
+
+To find the value at the 60th percentile, we note that there are ten data values, and 60% of ten is six. Thus, the number we want is greater than exactly six of the data values. Thus, the 60th percentile is 15.
+
+In each of the examples above, the computations were made easier by the fact that the we were looking for percentiles that “came out evenly” with respect to the number of values in our dataset. Things don’t always work out so cleanly. Further, different sources will define the term percentile in different ways. In fact, Google Sheets has three built-in functions for finding percentiles, none of which uses our definition. Some of the definitions you’ll see differ in the inequality that is used. Ours uses “less than or equal to,” while others use “less than” (these correspond roughly to Google Sheets’ ‘PERCENTILE.INC’ and ‘PERCENTILE.EXC’). Some of them use different methods for interpolating values. (This is what we did when we first computed medians without technology; if there were an even number of data values in our dataset, found the mean of the two values in the middle. This is an example of interpolation. Most computerized methods use this technique.) Other definitions don’t interpolate at all, but instead choose the closest actual data value to the theoretical value. Fortunately, for large datasets, the differences among the different techniques become very small.
+
+So, with all these different possible definitions in play, what will we use? For small datasets, if you’re asked to compute something involving percentiles without technology
+ , use the technique we used in the previous example. In all other cases, we’ll keep things simple by using the built-in ‘PERCENTILE’ and ‘PERCENTRANK’ functions in Google Sheets (which do the same thing as the ‘PERCENTILE.INC’ and ‘PERCENTRANK.INC’ functions; they’re “inclusive, interpolating” definitions).
+Using RANK, PERCENTRANK, and PERCENTILE in Google Sheets
+
+Using Google Sheets to Compute Percentiles: Average SAT Scores
+
+The data in “AvgSAT” contains the average SAT score for students attending every institution of higher learning in the US for which data is available.
+
+What score is at the 3rd quartile?
+
+What score is at the 40th percentile?
+
+At what percentile is Albion College in Michigan (average SAT: 1132)?
+
+At what percentile is Oregon State University (average SAT: 1205)?
+
+The 3rd quartile is the 75th percentile, so we’ll use the PERCENTILE function. Click on an empty cell, and type “=PERCENTILE(“. Next, enter the data: click on the letter at the top of the column containing the average SAT scores. Then, tell the function which percentile we want; it needs to be entered as a decimal. So, type a comma (to separate the two pieces of information we’re giving this function), then type “0.75” and close the parentheses with “)”. The result should look like this (assuming the data are in column C): “=PERCENTILE(C:C, 0.75)”. When you hit the enter key, the formula will be replaced with the average SAT score at the 75th percentile: 1199.
+
+Using the PERCENTILE function, we find that an average SAT of 1100 is at the 40th percentile.
+
+Since we want to know the percentile for a particular score, we’ll use the PERCENTRANK function. Like the PERCENTILE function, we need to give PERCENTRANK two pieces of information: the data, and the value we care about. So, click on an empty cell, type “=PERCENTRANK(“, and then click on the letter at the top of the column containing the data. Next, type a comma and then the value we want to find the percentile for; in this case, we’ll type “, 1132”. Finally, close the parentheses with “)” and hit the enter key. The formula will be replaced with the information we want: an average SAT of 1132 is at the 54th percentile.
+
+Using the PERCENTRANK function, an average SAT of 1205 is at the 76.1th percentile.
+
+Using Google Sheets to Compute Percentiles: In-State Tuition
+
+The dataset "InState" contains the in-state tuitions of every college and university in the country that reported that data to the Department of Education. Use that dataset to answer these questions.
+
+What tuition is at the second quintile?
+
+What tuition is at the 95th percentile?
+
+At what percentile is Walla Walla University in Washington (in-state tuition: $28,035)?
+
+At what percentile is the College of Saint Mary in Nebraska (in-state tuition: $20,350)?
+
+The second quintile is the 40th percentile; using PERCENTILE in Google Sheets, we get $8,400.
+
+Using PERCENTILE again, we get $44,866.
+
+Using PERCENTRANK, we get the 81.6th percentile.
+
+Using PERCENTRANK, we get the 74.8th percentile.
+
+Check Your Understanding
+
+Key Terms
+
+percentile
+
+quartile
+
+quintile
+
+quantile
+
+Key Concepts
+
+The percentile rank of a data value is the percentage of all values in the dataset that are less than or equal to the given value.
+
+Videos
+Using RANK, PERCENTRANK, and PERCENTILE in Google Sheets

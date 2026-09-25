@@ -1,0 +1,517 @@
+# m42144
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Satellites and Kepler’s Laws: An Argument for Simplicity
+
+Satellites and Kepler’s Laws: An Argument for Simplicity
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+State Kepler’s laws of planetary motion.
+
+Derive the third Kepler’s law for circular orbits.
+
+Discuss the Ptolemaic model of the universe.
+
+Examples of gravitational orbits abound. Hundreds of artificial satellites orbit Earth together with thousands of pieces of debris. The Moon’s orbit about Earth has intrigued humans from time immemorial. The orbits of planets, asteroids, meteors, and comets about the Sun are no less interesting. If we look further, we see almost unimaginable numbers of stars, galaxies, and other celestial objects orbiting one another and interacting through gravity.
+
+All these motions are governed by gravitational force, and it is possible to describe them to various degrees of precision. Precise descriptions of complex systems must be made with large computers. However, we can describe an important class of orbits without the use of computers, and we shall find it instructive to study them. These orbits have the following characteristics:
+A small mass m orbits a much larger mass M. This allows us to view the motion as if M were stationary—in fact, as if from an inertial frame of reference placed on M —without significant error. Mass m is the satellite of M, if the orbit is gravitationally bound.
+The system is isolated from other masses. This allows us to neglect any small effects due to outside masses.
+
+The conditions are satisfied, to good approximation, by Earth’s satellites (including the Moon), by objects orbiting the Sun, and by the satellites of other planets. Historically, planets were studied first, and there is a classical set of three laws, called Kepler’s laws of planetary motion, that describe the orbits of all bodies satisfying the two previous conditions (not just planets in our solar system). These descriptive laws are named for the German astronomer Johannes Kepler (1571–1630), who devised them after careful study (over some 20 years) of a large amount of meticulously recorded observations of planetary motion done by Tycho Brahe (1546–1601). Such careful collection and detailed recording of methods and data are hallmarks of good science. Data constitute the evidence from which new interpretations and meanings can be constructed.
+
+Kepler’s Laws of Planetary Motion
+Kepler’s First Law
+
+The orbit of each planet about the Sun is an ellipse with the Sun at one focus.
+(a) An ellipse is a closed curve such that the sum of the distances from a point on the curve to the two foci (f1 and f2) is a constant. You can draw an ellipse as shown by putting a pin at each focus, and then placing a string around a pencil and the pins and tracing a line on paper. A circle is a special case of an ellipse in which the two foci coincide (thus any point on the circle is the same distance from the center). (b) For any closed gravitational orbit, m follows an elliptical path with M at one focus. Kepler’s first law states this fact for planets orbiting the Sun.
+Kepler’s Second Law
+
+Each planet moves so that an imaginary line drawn from the Sun to the planet sweeps out equal areas in equal times (see ).
+Kepler’s Third Law
+
+The ratio of the squares of the periods of any two planets about the Sun is equal to the ratio of the cubes of their average distances from the Sun. In equation form, this is
+
+where T is the period (time for one orbit) and r is the average radius. This equation is valid only for comparing two small masses orbiting the same large one. Most importantly, this is a descriptive equation only, giving no information as to the cause of the equality.
+
+Note again that while, for historical reasons, Kepler’s laws are stated for planets orbiting the Sun, they are actually valid for all bodies satisfying the two previously stated conditions.
+
+Find the Time for One Orbit of an Earth Satellite
+
+Given that the Moon orbits Earth each 27.3 d and that it is an average distance of 3.84×108m from the center of Earth, calculate the period of an artificial satellite orbiting at an average altitude of 1500 km above Earth’s surface.
+Strategy
+
+Strategy
+
+The period, or time for one orbit, is related to the radius of the orbit by Kepler’s third law, given in mathematical form in 
+
+ T
+
+ 1
+
+  2
+
+ T
+
+ 2
+
+  2
+
+ =
+
+ r
+
+ 1
+
+  3
+
+ r
+
+ 2
+
+  3
+
+ . Let us use the subscript 1 for the Moon and the subscript 2 for the satellite. We are asked to find T2. The given information tells us that the orbital radius of the Moon is r1=3.84×108m, and that the period of the Moon is T1=27.3 d. The height of the artificial satellite above Earth’s surface is given, and so we must add the radius of Earth (6380 km) to get r2=(1500+6380)km=7880km. Now all quantities are known, and so T2 can be found.
+Solution
+
+Solution
+
+Kepler’s third law is
+
+To solve for T2, we cross-multiply and take the square root, yielding
+
+Substituting known values yields
+Discussion This is a reasonable period for a satellite in a fairly low orbit. It is interesting that any satellite at this altitude will orbit in the same amount of time. This fact is related to the condition that the satellite’s mass is small compared with that of Earth.
+
+Discussion
+
+People immediately search for deeper meaning when broadly applicable laws, like Kepler’s, are discovered. It was Newton who took the next giant step when he proposed the law of universal gravitation. While Kepler was able to discover what was happening, Newton discovered that gravitational force was the cause.
+
+Derivation of Kepler’s Third Law for Circular Orbits
+
+We shall derive Kepler’s third law, starting with Newton’s laws of motion and his universal law of gravitation. The point is to demonstrate that the force of gravity is the cause for Kepler’s laws (although we will only derive the third one).
+
+Let us consider a circular orbit of a small mass m around a large mass M, satisfying the two conditions stated at the beginning of this section. Gravity supplies the centripetal force to mass m. Starting with Newton’s second law applied to circular motion,
+
+The net external force on mass m is gravity, and so we substitute the force of gravity for Fnet:
+
+The mass m cancels, yielding
+
+The fact that m cancels out is another aspect of the oft-noted fact that at a given location all masses fall with the same acceleration. Here we see that at a given orbital radius r, all masses orbit at the same speed. (This was implied by the result of the preceding worked example.) Now, to get at Kepler’s third law, we must get the period T into the equation. By definition, period T is the time for one complete orbit. Now the average speed v is the circumference divided by the period—that is,
+
+Substituting this into the previous equation gives
+
+Solving for T2 yields
+
+Using subscripts 1 and 2 to denote two different satellites, and taking the ratio of the last equation for satellite 1 to satellite 2 yields
+
+This is Kepler’s third law. Note that Kepler’s third law is valid only for comparing satellites of the same parent body, because only then does the mass of the parent body M cancel.
+
+Now consider what we get if we solve T2=4π2GMr3 for the ratio r3/T2. We obtain a relationship that can be used to determine the mass M of a parent body from the orbits of its satellites:
+
+If r and T are known for a satellite, then the mass M of the parent can be calculated. This principle has been used extensively to find the masses of heavenly bodies that have satellites. Furthermore, the ratio r3/T2 should be a constant for all satellites of the same parent body (because r3/T2=GM/4π2). (See ).
+
+It is clear from that the ratio of r3/T2 is constant, at least to the third digit, for all listed satellites of the Sun, and for those of Jupiter. Small variations in that ratio have two causes—uncertainties in the r and T data, and perturbations of the orbits due to other bodies. Interestingly, those perturbations can be—and have been—used to predict the location of new planets and moons. This is another verification of Newton’s universal law of gravitation.
+
+Making Connections
+
+Newton’s universal law of gravitation is modified by Einstein’s general theory of relativity, as we shall see in Particle Physics. Newton’s gravity is not seriously in error—it was and still is an extremely good approximation for most situations. Einstein’s modification is most noticeable in extremely large gravitational fields, such as near black holes. However, general relativity also explains such phenomena as small but long-known deviations of the orbit of the planet Mercury from classical predictions.
+
+The Case for Simplicity
+
+The development of the universal law of gravitation by Newton played a pivotal role in the history of ideas. While it is beyond the scope of this text to cover that history in any detail, we note some important points. The definition of planet set in 2006 by the International Astronomical Union (IAU) states that in the solar system, a planet is a celestial body that:
+
+is in orbit around the Sun,
+
+has sufficient mass to assume hydrostatic equilibrium and
+
+has cleared the neighborhood around its orbit.
+
+A non-satellite body fulfilling only the first two of the above criteria is classified as “dwarf planet.”
+
+In 2006, Pluto was demoted to a ‘dwarf planet’ after scientists revised their definition of what constitutes a “true” planet.
+
+Orbital Data and Kepler’s Third Law
+
+Parent
+Satellite
+Average orbital radius r(km)
+r3 / T2 (km3 / y2)
+Earth
+3.84
+
+ ×
+ 
+ 10
+
+ 5
+1
+ .
+ 
+ 01
+ ×
+
+ 10
+
+ 19
+Sun
+5
+ .
+ 
+ 79
+ ×
+ 
+ 10
+
+ 7
+3
+ .
+ 
+ 34
+ ×
+ 
+ 10
+
+ 24
+1
+ .
+ 
+ 082
+ ×
+ 
+ 10
+
+ 8
+3
+ .
+ 
+ 35
+ ×
+ 
+ 10
+
+ 24
+1
+ .
+ 
+ 496
+ ×
+ 
+ 10
+
+ 8
+3
+ .
+ 
+ 35
+ ×
+ 
+ 10
+
+ 24
+2
+ .
+ 
+ 279
+ ×
+ 
+ 10
+
+ 8
+3
+ .
+ 
+ 35
+ ×
+ 
+ 10
+
+ 24
+7
+ .
+ 
+ 783
+ ×
+ 
+ 10
+
+ 8
+3
+ .
+ 
+ 35
+ ×
+ 
+ 10
+
+ 24
+1
+ .
+ 
+ 427
+ ×
+ 
+ 10
+
+ 9
+3
+ .
+ 
+ 35
+ ×
+ 
+ 10
+
+ 24
+4
+ .
+ 
+ 497
+ ×
+ 
+ 10
+
+ 9
+3
+ .
+ 
+ 35
+ ×
+ 
+ 10
+
+ 24
+5
+ .
+ 
+ 90
+ ×
+ 
+ 10
+
+ 9
+3
+ .
+ 
+ 33
+ ×
+ 
+ 10
+
+ 24
+Jupiter
+4
+ .
+ 
+ 22
+ ×
+ 
+ 10
+
+ 5
+3
+ .
+ 
+ 19
+ ×
+ 
+ 10
+
+ 21
+6
+ .
+ 
+ 71
+ ×
+ 
+ 10
+
+ 5
+3
+ .
+ 
+ 20
+ ×
+ 
+ 10
+
+ 21
+1
+ .
+ 
+ 07
+ ×
+ 
+ 10
+
+ 6
+3
+ .
+ 
+ 19
+ ×
+ 
+ 10
+
+ 21
+1
+ .
+ 
+ 88
+ ×
+ 
+ 10
+
+ 6
+3
+ .
+ 
+ 20
+ ×
+ 
+ 10
+
+ 21
+The universal law of gravitation is a good example of a physical principle that is very broadly applicable. That single equation for the gravitational force describes all situations in which gravity acts. It gives a cause for a vast number of effects, such as the orbits of the planets and moons in the solar system. It epitomizes the underlying unity and simplicity of physics.
+
+Before the discoveries of Kepler, Copernicus, Galileo, Newton, and others, the solar system was thought to revolve around Earth as shown in (a). This is called the Ptolemaic view, for the Greek philosopher who lived in the second century AD. This model is characterized by a list of facts for the motions of planets with no cause and effect explanation. There tended to be a different rule for each heavenly body and a general lack of simplicity.
+(b) represents the modern or Copernican model. In this model, a small set of rules and a single underlying force explain not only all motions in the solar system, but all other situations involving gravity. The breadth and simplicity of the laws of physics are compelling. As our knowledge of nature has grown, the basic simplicity of its laws has become ever more evident.
+(a) The Ptolemaic model of the universe has Earth at the center with the Moon, the planets, the Sun, and the stars revolving about it in complex superpositions of circular paths. This geocentric model, which can be made progressively more accurate by adding more circles, is purely descriptive, containing no hints as to what are the causes of these motions. (b) The Copernican model has the Sun at the center of the solar system. It is fully explained by a small number of laws of physics, including Newton’s universal law of gravitation.
+
+Section Summary
+
+Kepler’s laws are stated for a small mass m orbiting a larger mass M in near-isolation. Kepler’s laws of planetary motion are then as follows:
+ Kepler’s first law
+ The orbit of each planet about the Sun is an ellipse with the Sun at one focus.
+ Kepler’s second law
+ Each planet moves so that an imaginary line drawn from the Sun to the planet sweeps out equal areas in equal times.
+ Kepler’s third law
+ The ratio of the squares of the periods of any two planets about the Sun is equal to the ratio of the cubes of their average distances from the Sun:
+ T1 2T2 2=r1 3r2 3,where T is the period (time for one orbit) and r is the average radius of the orbit.
+
+Kepler’s first law
+
+The orbit of each planet about the Sun is an ellipse with the Sun at one focus.
+
+Kepler’s second law
+
+Each planet moves so that an imaginary line drawn from the Sun to the planet sweeps out equal areas in equal times.
+
+Kepler’s third law
+
+The ratio of the squares of the periods of any two planets about the Sun is equal to the ratio of the cubes of their average distances from the Sun:
+
+where T is the period (time for one orbit) and r is the average radius of the orbit.
+
+The period and radius of a satellite’s orbit about a larger body M are related by
+
+ T
+
+ 2
+
+ =
+
+ 4π
+
+ 2
+
+ GM
+
+ r
+
+ 3
+
+ orr3T2=G4π2M.
+
+or
+
+Conceptual Questions
+
+In what frame(s) of reference are Kepler’s laws valid? Are Kepler’s laws purely descriptive, or do they contain causal information?
+
+Problem Exercises
+
+A geosynchronous Earth satellite is one that has an orbital period of precisely 1 day. Such orbits are useful for communication and weather observation because the satellite remains above the same point on Earth (provided it orbits in the equatorial plane in the same direction as Earth’s rotation). Calculate the radius of such an orbit based on the data for the moon in .
+
+Calculate the mass of the Sun based on data for Earth’s orbit and compare the value obtained with the Sun’s actual mass.
+1.98
+ 
+ ×
+ 
+ 10
+
+ 30
+
+ kg
+
+Find the mass of Jupiter based on data for the orbit of one of its moons, and compare your result with its actual mass.
+
+Find the ratio of the mass of Jupiter to that of Earth based on data in .
+M
+
+ J
+
+ M
+
+ E
+
+ =
+ 316
+
+Astronomical observations of our Milky Way galaxy indicate that it has a mass of about 8.0×1011 solar masses. A star orbiting on the galaxy’s periphery is about 6.0×104 light years from its center. (a) What should the orbital period of that star be? (b) If its period is 6.0×107 years instead, what is the mass of the galaxy? Such calculations are used to imply the existence of “dark matter” in the universe and have indicated, for example, the existence of very massive black holes at the centers of some galaxies.
+Integrated Concepts
+
+Integrated Concepts
+
+Space debris left from old satellites and their launchers is becoming a hazard to other satellites. (a) Calculate the speed of a satellite in an orbit 900 km above Earth’s surface. (b) Suppose a loose rivet is in an orbit of the same radius that intersects the satellite’s orbit at an angle of 90º relative to Earth. What is the velocity of the rivet relative to the satellite just before striking it? (c) Given the rivet is 3.00 mm in size, how long will its collision with the satellite last, approximating acceleration as constant and the rivet comes to a stop? (d) If its mass is 0.500 g, what is the average force it exerts on the satellite? (e) How much energy in joules is generated by the collision? (The satellite’s velocity does not change appreciably, because its mass is much greater than the rivet’s.)
+
+a) 7910m/s
+
+b) 1.12×104m/s
+
+c) 5.36×10−7s
+
+d) 1.04478×107N
+
+e) 3.14×104J
+Unreasonable Results
+
+Unreasonable Results
+
+(a) Based on Kepler’s laws and information on the orbital characteristics of the Moon, calculate the orbital radius for an Earth satellite having a period of 1.00 h. (b) What is unreasonable about this result? (c) What is unreasonable or inconsistent about the premise of a 1.00 h orbit?
+
+a) 5.08×103km
+
+b) This radius is unreasonable because it is less than the radius of earth.
+
+c) The premise of a one-hour orbit is inconsistent with the known radius of the earth.
+Construct Your Own Problem
+
+Construct Your Own Problem
+
+On February 14, 2000, the NEAR spacecraft was successfully inserted into orbit around Eros, becoming the first artificial satellite of an asteroid. Construct a problem in which you determine the orbital speed for a satellite near Eros. You will need to find the mass of the asteroid and consider such things as a safe distance for the orbit. Although Eros is not spherical, calculate the acceleration due to gravity on its surface at a point an average distance from its center of mass. Your instructor may also wish to have you calculate the escape velocity from this point on Eros.
+Critical Thinking A car travels around a loop with negligible friction at a constant speed and never loses contact with the loop. The top of the loop is labeled A and the bottom of the loop is labeled B. (a) At what point would the normal force be greatest? Briefly explain your reasoning. (b) Based on experimental data, an equation that fits the data is suggested for the normal force, FN, which may not be correct: FN=Kr1/2, where K is a constant with appropriate units and r is the radius of the loop. Is this equation consistent with your answer from part a? Explain why or why not. Does this equation make sense? Explain why or why not. (c) Now the car travels around loops of various radii and the speed at which the car barely makes it around the loop is measured. Graph that speed vs. the radius of the loop.
+
+Critical Thinking
+
+(a) The normal force is greatest at point B. At point A, the normal force and the weight are the net force; at point B, only the normal force points in the same direction as the net force.
+
+(b) i. This is not consistent because a larger radius should decease the net force and tension, not increase it. ii. This does not make sense because 
+
+ F
+ c
+ 
+ =m
+ v
+ 2
+ 
+ /r
+ .
+
+(c)

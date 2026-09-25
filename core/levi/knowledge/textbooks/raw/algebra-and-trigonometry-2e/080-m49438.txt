@@ -1,0 +1,3079 @@
+# m49438
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+The Ellipse
+
+The Ellipse
+
+In this section, you will:
+
+Write equations of ellipses in standard form.
+
+Graph ellipses centered at the origin.
+
+Graph ellipses not centered at the origin.
+
+Solve applied problems involving ellipses.
+
+Learning Objectives
+
+Complete the square of a binomial expression. (IA 9.2.1)
+
+Graph a circle. (IA 11.1.4)
+
+Objective 1: Complete the square of a binomial expression. (IA 9.2.1)
+
+Vocabulary
+
+Fill in the blanks.
+
+We say that x2+4x+4 is a ________ square trinomial because x2+4x+4=( + )2 .
+
+The square root property states that (x+2)2=9 means that
+(x+2)= ________ and (x+2)=– ________.
+
+Complete the square of a binomial expression.
+
+Use the square root property to solve (x+3)2=5 . Use the steps below to guide your work.
+ⓐ Take a square root of both sides. Remember to have ± on the right side.
+ⓑ Solve for x.
+
+Complete the square of a binomial expression.
+
+Use the square root property to solve x2+6x+9=7. Use the steps below to guide your work.
+ⓐ x2+6x+9 is a perfect square trinomial. Factor it into (_+_)2 .
+ⓑ Take a square root of both sides. Remember to have ± on the right side.
+ⓒ Solve for x.
+
+But what happens if we have to solve an equation where the trinomial is not a perfect square?
+
+For example, x2+4x+5=2 ? For these types of equations, we can use a process called completing the square.
+
+Recall (x+1)2=(x+1)(x+1)=x2+x+x+1=x2+2+1 .
+
+We can use the Binomial Squares Pattern to make a perfect square.
+
+Complete the square of a binomial expression
+
+Complete the square for
+ x2+6x to make it a perfect square.
+
+x2+6x
+x2+2·x·b+b2
+x2+2·3·x+_
+x2+6x+9
+(x+3)2
+So, we found that adding 9 to x2 + 6x completes the square, and we write it as (x + 3)2.
+
+How to Complete a square of x2+bx+c
+
+Identify b, the coefficient of x.
+
+Find 12b2 , the number needed to complete the square.
+
+Add 12b2 to x2+bx
+
+Factor the perfect square trinomial, writing it as a binomial squared.
+
+Practice Makes Perfect
+
+Determine what number would have to be added to the given terms to create a perfect square trinomial. Then rewrite as a binomial squared.
+x2+12x
+x2+5x
+x2-12x
+x2+32x
+
+Objective 2: Graph a circle. (IA 11.1.4)
+
+A circle is all points in a plane that are a fixed distance from a given point in the plane. The given point is called the center, (h, k) and the fixed distance is called the radius, r, of the circle.
+
+The standard or graphing form of the equation of a circle with center, (h, k) and radius, r, is (x-h)2+(y-k)2=r2 .
+
+Write the standard form the equation of a circle
+
+Write the standard (graphing) form of the equation of the circle with radius 2 and center (-1, 3).
+Use the standard, (graphing) form of the equation of a circle.
+ (x-h)2+(y-k)2=r2 
+
+ Substitute in the values (h, k)=(1, -3), where h=1, k=-3.
+ (x-(-1))2+(y-(3))2=22 
+
+ Simplify.
+ (x-1)2+(y+3)2=4
+
+(x-h)2+(y-k)2=r2
+(x-(-1))2+(y-(3))2=22
+(x-1)2+(y+3)2=4
+Graph a circle
+
+Graph a circle
+
+Find the center and radius, then graph the circle: (x+2)2+(y-1)2=9
+Use the standard (graphing) form of the equation of a circle.
+ (x-h)2+(y-k)2=r2 
+ Identify the center, (h,k) and radius, r.
+ (x-(-2))2+(y-1)2=32 
+ Graph the circle.
+ Center (-2, 1), r=3
+
+(x-h)2+(y-k)2=r2
+(x-(-2))2+(y-1)2=32
+Graph the circle.
+Center (-2, 1), r=3
+The general form of the equation of a circle is x2+y2+ax+by+c=0 . If we are given an equation in general form, we can change it to standard, also called the graphing form, by completing the squares in both x and y. Then we can graph the circle using its center and radius.
+
+Graph a circle
+
+Find the center and radius, then graph the circle: x2+y2+4x+6y+4=0
+
+We need to rewrite this general form into standard (graphing) form in order to find the center and radius.
+
+x2-4x+y2-6y=-4
+x2-4x+4+y2-6y+9=-4+4+9
+(x-2)2+(y-3)2=9
+Identify the center and radius.
+Center (2, 3), r=3
+Graph the circle.
+Practice Makes Perfect
+
+Write the standard (graphing) form of the equation of the circle with radius 4 and center (2,–5).
+
+Find the center and radius, then graph the circle: (x-3)2+(y+1)2=4
+
+Find the center and radius, then graph the circle: x2+y2-6x-8y+9=0
+
+Can you imagine standing at one end of a large room and still being able to hear a whisper from a person standing at the other end? The National Statuary Hall in Washington, D.C., shown in , is such a room.Architect of the Capitol. http://www.aoc.gov. Accessed April 15, 2014. It is an semi-circular room called a whispering chamber because the shape makes it possible for sound to travel along the walls and dome. In this section, we will investigate the shape of this room and its real-world applications, including how far apart two people in Statuary Hall can stand and still hear each other whisper.
+
+Writing Equations of Ellipses in Standard Form
+
+A conic section, or conic, is a shape resulting from intersecting a right circular cone with a plane. The angle at which the plane intersects the cone determines the shape, as shown in .
+
+Conic sections can also be described by a set of points in the coordinate plane. Later in this chapter, we will see that the graph of any quadratic equation in two variables is a conic section. The signs of the equations and the coefficients of the variable terms determine the shape. This section focuses on the four variations of the standard form of the equation for the ellipse. An ellipse is the set of all points 
+ 
+ (
+ 
+ x,y
+ 
+ )
+ 
+ in a plane such that the sum of their distances from two fixed points is a constant. Each fixed point is called a focus (plural: foci).
+
+We can draw an ellipse using a piece of cardboard, two thumbtacks, a pencil, and string. Place the thumbtacks in the cardboard to form the foci of the ellipse. Cut a piece of string longer than the distance between the two thumbtacks (the length of the string represents the constant in the definition). Tack each end of the string to the cardboard, and trace a curve with a pencil held taut against the string. The result is an ellipse. See .
+
+Every ellipse has two axes of symmetry. The longer axis is called the major axis, and the shorter axis is called the minor axis. Each endpoint of the major axis is the vertex of the ellipse (plural: vertices), and each endpoint of the minor axis is a co-vertex of the ellipse. The center of an ellipse is the midpoint of both the major and minor axes. The axes are perpendicular at the center. The foci always lie on the major axis, and the sum of the distances from the foci to any point on the ellipse (the constant sum) is greater than the distance between the foci. See .
+
+In this section, we restrict ellipses to those that are positioned vertically or horizontally in the coordinate plane. That is, the axes will either lie on or be parallel to the x- and y-axes. Later in the chapter, we will see ellipses that are rotated in the coordinate plane.
+
+To work with horizontal and vertical ellipses in the coordinate plane, we consider two cases: those that are centered at the origin and those that are centered at a point other than the origin. First we will learn to derive the equations of ellipses, and then we will learn how to write the equations of ellipses in standard form. Later we will use what we learn to draw the graphs.
+
+Deriving the Equation of an Ellipse Centered at the Origin
+
+To derive the equation of an ellipse centered at the origin, we begin with the foci 
+ 
+ (
+ 
+ −c,0
+ 
+ )
+ 
+ and 
+ 
+ (c,0).
+ 
+ The ellipse is the set of all points 
+ 
+ (
+ 
+ x,y
+ 
+ )
+ 
+ such that the sum of the distances from 
+ 
+ (
+ 
+ x,y
+ 
+ )
+ 
+ to the foci is constant, as shown in .
+
+If 
+ 
+ (
+ 
+ a,0
+ 
+ )
+ 
+ is a vertex of the ellipse, the distance from 
+ 
+ (
+ 
+ −c,0
+ 
+ )
+ 
+ to 
+ 
+ (a,0)
+ 
+ is 
+ 
+ a−(−c)=a+c.
+ 
+ The distance from 
+ 
+ (
+ 
+ c,0
+ 
+ )
+ 
+ to 
+ 
+ (
+ 
+ a,0
+ 
+ )
+ 
+ is 
+ 
+ a−c
+ 
+ . The sum of the distances from the foci to the vertex is
+
+If 
+ 
+ (
+ 
+ x,y
+ 
+ )
+ 
+ is a point on the ellipse, then we can define the following variables:
+
+By the definition of an ellipse, 
+
+ d
+ 1
+ 
+ +
+ d
+ 2
+
+ is constant for any point 
+ 
+ (
+ 
+ x,y
+ 
+ )
+ 
+ on the ellipse. We know that the sum of these distances is 
+ 
+ 2a
+ 
+ for the vertex 
+ 
+ (a,0).
+ 
+ It follows that 
+
+ d
+ 1
+ 
+ +
+ d
+ 2
+ 
+ =2a
+ 
+ for any point on the ellipse. We will begin the derivation by applying the distance formula. The rest of the derivation is algebraic.
+
+Thus, the standard equation of an ellipse is 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1.
+ 
+ This equation defines an ellipse centered at the origin. If 
+ 
+ a>b,
+ 
+ the ellipse is stretched further in the horizontal direction, and if 
+ 
+ b>a,
+ 
+ the ellipse is stretched further in the vertical direction.
+
+Writing Equations of Ellipses Centered at the Origin in Standard Form
+
+Standard forms of equations tell us about key features of graphs. Take a moment to recall some of the standard forms of equations we’ve worked with in the past: linear, quadratic, cubic, exponential, logarithmic, and so on. By learning to interpret standard forms of equations, we are bridging the relationship between algebraic and geometric representations of mathematical phenomena.
+
+The key features of the ellipse are its center, vertices, co-vertices, foci, and lengths and positions of the major and minor axes. Just as with other equations, we can identify all of these features just by looking at the standard form of the equation. There are four variations of the standard form of the ellipse. These variations are categorized first by the location of the center (the origin or not the origin), and then by the position (horizontal or vertical). Each is presented along with a description of how the parts of the equation relate to the graph. Interpreting these parts allows us to form a mental picture of the ellipse.
+
+Standard Forms of the Equation of an Ellipse with Center (0,0)
+
+The standard form of the equation of an ellipse with center 
+ 
+ (
+ 
+ 0,0
+ 
+ )
+ 
+ and major axis on the x-axis is
+
+where
+a>b
+
+the length of the major axis is 
+ 
+ 2a
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+
+the length of the minor axis is 
+ 
+ 2b
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ 0,±b
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ ±c,0
+ 
+ )
+ 
+ , where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+.
+ 
+ See a
+
+The standard form of the equation of an ellipse with center 
+ 
+ (
+ 
+ 0,0
+ 
+ )
+ 
+ and major axis on the y-axis is
+
+where
+a>b
+
+the length of the major axis is 
+ 
+ 2a
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ 0,±a
+ 
+ )
+
+the length of the minor axis is 
+ 
+ 2b
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ ±b,0
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±c
+ 
+ )
+ 
+ , where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ See b
+
+Note that the vertices, co-vertices, and foci are related by the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ When we are given the coordinates of the foci and vertices of an ellipse, we can use this relationship to find the equation of the ellipse in standard form.
+Given the vertices and foci of an ellipse centered at the origin, write its equation in standard form.
+
+Determine whether the major axis lies on the x- or y-axis.
+If the given coordinates of the vertices and foci have the form 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+ 
+ and 
+ 
+ (±c,0)
+ 
+ respectively, then the major axis is the x-axis. Use the standard form 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1.
+
+If the given coordinates of the vertices and foci have the form 
+ 
+ (
+ 
+ 0,±a
+ 
+ )
+ 
+ and 
+ 
+ (0,±c),
+ 
+ respectively, then the major axis is the y-axis. Use the standard form 
+
+ x
+ 2
+
+ b
+ 2
+
+ +
+
+ y
+ 2
+
+ a
+ 2
+
+ =1.
+
+If the given coordinates of the vertices and foci have the form 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+ 
+ and 
+ 
+ (±c,0)
+ 
+ respectively, then the major axis is the x-axis. Use the standard form 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1.
+
+If the given coordinates of the vertices and foci have the form 
+ 
+ (
+ 
+ 0,±a
+ 
+ )
+ 
+ and 
+ 
+ (0,±c),
+ 
+ respectively, then the major axis is the y-axis. Use the standard form 
+
+ x
+ 2
+
+ b
+ 2
+
+ +
+
+ y
+ 2
+
+ a
+ 2
+
+ =1.
+
+Use the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ ,
+ 
+ along with the given coordinates of the vertices and foci, to solve for 
+
+ b
+ 2
+ 
+ .
+
+Substitute the values for 
+
+ a
+ 2
+
+ and 
+
+ b
+ 2
+
+ into the standard form of the equation determined in Step 1.
+
+Writing the Equation of an Ellipse Centered at the Origin in Standard Form
+
+What is the standard form equation of the ellipse that has vertices 
+ 
+ (
+ 
+ ±8,0
+ 
+ )
+ 
+ and foci 
+ 
+ (
+ 
+ ±5,0
+ 
+ )?
+
+The foci are on the x-axis, so the major axis is the x-axis. Thus, the equation will have the form
+
+The vertices are 
+ 
+ (
+ 
+ ±8,0
+ 
+ ),
+ 
+ so 
+ 
+ a=8
+ 
+ and 
+
+ a
+ 2
+ 
+ =64.
+
+The foci are 
+ 
+ (
+ 
+ ±5,0
+ 
+ ),
+ 
+ so 
+ 
+ c=5
+ 
+ and 
+
+ c
+ 2
+ 
+ =25.
+
+We know that the vertices and foci are related by the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ Solving for 
+
+ b
+ 2
+ 
+ ,
+ 
+ we have:
+
+Now we need only substitute 
+
+ a
+ 2
+ 
+ =64
+ 
+ and 
+
+ b
+ 2
+ 
+ =39
+ 
+ into the standard form of the equation. The equation of the ellipse is 
+
+ x
+ 2
+
+ 64
+
+ +
+
+ y
+ 2
+
+ 39
+
+ =1.
+
+What is the standard form equation of the ellipse that has vertices 
+ 
+ (
+ 
+ 0,±4
+ 
+ )
+ 
+ and foci 
+ 
+ (
+ 
+ 0,±
+ 
+ 15
+
+ )?
+x
+ 2
+ 
+ +
+
+ y
+ 2
+
+ 16
+
+ =1
+Can we write the equation of an ellipse centered at the origin given coordinates of just one focus and vertex?
+Yes. Ellipses are symmetrical, so the coordinates of the vertices of an ellipse centered around the origin will always have the form 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+ 
+ or 
+ (0,±a).
+ Similarly, the coordinates of the foci will always have the form 
+ 
+ (
+ 
+ ±c,0
+ 
+ )
+ 
+ or 
+ (0,±c).
+ Knowing this, we can use 
+ 
+ a
+ 
+ and 
+ 
+ c
+ 
+ from the given points, along with the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ ,
+ 
+ to find 
+
+ b
+ 2
+ 
+ .
+
+Writing Equations of Ellipses Not Centered at the Origin
+
+Like the graphs of other equations, the graph of an ellipse can be translated. If an ellipse is translated 
+ 
+ h
+ 
+ units horizontally and 
+ 
+ k
+ 
+ units vertically, the center of the ellipse will be 
+ 
+ (
+ 
+ h,k
+ 
+ ).
+ 
+ This translation results in the standard form of the equation we saw previously, with 
+ 
+ x
+ 
+ replaced by 
+ 
+ (
+ 
+ x−h
+ 
+ )
+ 
+ and y replaced by 
+ 
+ (
+ 
+ y−k
+ 
+ ).
+
+Standard Forms of the Equation of an Ellipse with Center (h, k)
+
+The standard form of the equation of an ellipse with center 
+ 
+ (
+ 
+ h,k
+ 
+ )
+ 
+ and major axis parallel to the x-axis is
+
+where
+a>b
+
+the length of the major axis is 
+ 
+ 2a
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ h±a,k
+ 
+ )
+
+the length of the minor axis is 
+ 
+ 2b
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h,k±b
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ h±c,k
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ See a
+
+The standard form of the equation of an ellipse with center 
+ 
+ (
+ 
+ h,k
+ 
+ )
+ 
+ and major axis parallel to the y-axis is
+
+where
+a>b
+
+the length of the major axis is 
+ 
+ 2a
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ h,k±a
+ 
+ )
+
+the length of the minor axis is 
+ 
+ 2b
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h±b,k
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ h,k±c
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ See b
+
+Just as with ellipses centered at the origin, ellipses that are centered at a point 
+ 
+ (
+ 
+ h,k
+ 
+ )
+ 
+ have vertices, co-vertices, and foci that are related by the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ We can use this relationship along with the midpoint and distance formulas to find the equation of the ellipse in standard form when the vertices and foci are given.
+Given the vertices and foci of an ellipse not centered at the origin, write its equation in standard form.
+
+Determine whether the major axis is parallel to the x- or y-axis.
+If the y-coordinates of the given vertices and foci are the same, then the major axis is parallel to the x-axis. Use the standard form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ =1.
+
+If the x-coordinates of the given vertices and foci are the same, then the major axis is parallel to the y-axis. Use the standard form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ =1.
+
+If the y-coordinates of the given vertices and foci are the same, then the major axis is parallel to the x-axis. Use the standard form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ =1.
+
+If the x-coordinates of the given vertices and foci are the same, then the major axis is parallel to the y-axis. Use the standard form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ =1.
+
+Identify the center of the ellipse 
+ 
+ (
+ 
+ h,k
+ 
+ )
+ 
+ using the midpoint formula and the given coordinates for the vertices.
+
+Find 
+
+ a
+ 2
+
+ by solving for the length of the major axis, 
+ 
+ 2a,
+ 
+ which is the distance between the given vertices.
+
+Find 
+
+ c
+ 2
+
+ using 
+ 
+ h
+ 
+ and 
+ 
+ k,
+ 
+ found in Step 2, along with the given coordinates for the foci.
+
+Solve for 
+
+ b
+ 2
+
+ using the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+
+Substitute the values for 
+ 
+ h, k, 
+ a
+ 2
+ 
+ ,
+ 
+ and 
+
+ b
+ 2
+
+ into the standard form of the equation determined in Step 1.
+
+Writing the Equation of an Ellipse Centered at a Point Other Than the Origin
+
+What is the standard form equation of the ellipse that has vertices 
+ 
+ (
+ 
+−2,−8
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+−2,2
+ 
+ )
+
+and foci 
+ 
+ (
+ 
+−2,−7
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+−2,1
+ 
+ )?
+
+The x-coordinates of the vertices and foci are the same, so the major axis is parallel to the y-axis. Thus, the equation of the ellipse will have the form
+
+First, we identify the center, 
+ 
+ (
+ 
+ h,k
+ 
+ ).
+ 
+ The center is halfway between the vertices, 
+ 
+ (
+ 
+ −2,−8
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+ −2,2
+ 
+ ).
+ 
+ Applying the midpoint formula, we have:
+
+Next, we find 
+
+ a
+ 2
+ 
+ .
+ 
+ The length of the major axis, 
+ 
+ 2a,
+ 
+ is bounded by the vertices. We solve for 
+ 
+ a
+ 
+ by finding the distance between the y-coordinates of the vertices.
+
+So 
+
+ a
+ 2
+ 
+ =25.
+
+Now we find 
+
+ c
+ 2
+ 
+ .
+ 
+ The foci are given by 
+ 
+ (
+ 
+ h,k±c
+ 
+ ).
+ 
+ So, 
+ 
+ (
+ 
+ h,k−c
+ 
+ )=(
+ 
+−2,−7
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+ h,k+c
+ 
+ )=(
+ 
+−2,1
+ 
+ ).
+ 
+ We substitute 
+ 
+ k=−3
+ 
+ using either of these points to solve for 
+ 
+ c.
+
+So 
+
+ c
+ 2
+ 
+ =16.
+
+Next, we solve for 
+
+ b
+ 2
+
+ using the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+
+Finally, we substitute the values found for 
+ 
+ h,k,
+ a
+ 2
+ 
+ ,
+ 
+ and 
+
+ b
+ 2
+
+ into the standard form equation for an ellipse:
+
+What is the standard form equation of the ellipse that has vertices 
+ 
+ (
+ 
+−3,3
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+ 5,3
+ 
+ )
+ 
+ and foci 
+ 
+ (
+ 
+ 1−2
+ 3
+ 
+ ,3
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+ 1+2
+ 3
+ 
+ ,3
+ 
+ )?
+(
+ 
+ x−1
+ 
+ )
+ 
+ 2
+
+ 16
+
+ +
+
+ (
+ 
+ y−3
+ 
+ )
+ 
+ 2
+
+ 4
+ 
+ =1
+
+Graphing Ellipses Centered at the Origin
+
+Just as we can write the equation for an ellipse given its graph, we can graph an ellipse given its equation. To graph ellipses centered at the origin, we use the standard form 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1,a>b
+ 
+ for horizontal ellipses and 
+
+ x
+ 2
+
+ b
+ 2
+
+ +
+
+ y
+ 2
+
+ a
+ 2
+
+ =1,a>b
+ 
+ for vertical ellipses.
+Given the standard form of an equation for an ellipse centered at 
+ 
+ (
+ 
+ 0, 0
+ 
+ ),
+ 
+ sketch the graph.
+
+Use the standard forms of the equations of an ellipse to determine the major axis, vertices, co-vertices, and foci.
+If the equation is in the form 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1,
+ 
+ where 
+ 
+ a>b,
+ 
+ then
+the major axis is the x-axis
+the coordinates of the vertices are 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ 0,±b
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ ±c,0
+ 
+ )
+
+If the equation is in the form 
+
+ x
+ 2
+
+ b
+ 2
+
+ +
+
+ y
+ 2
+
+ a
+ 2
+
+ =1,
+ 
+ where 
+ 
+ a>b,
+ 
+ then
+the major axis is the y-axis
+the coordinates of the vertices are 
+ 
+ (
+ 
+ 0,±a
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ ±b,0
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±c
+ 
+ )
+
+If the equation is in the form 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1,
+ 
+ where 
+ 
+ a>b,
+ 
+ then
+the major axis is the x-axis
+the coordinates of the vertices are 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ 0,±b
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ ±c,0
+ 
+ )
+
+the major axis is the x-axis
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ ±a,0
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ 0,±b
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ ±c,0
+ 
+ )
+
+If the equation is in the form 
+
+ x
+ 2
+
+ b
+ 2
+
+ +
+
+ y
+ 2
+
+ a
+ 2
+
+ =1,
+ 
+ where 
+ 
+ a>b,
+ 
+ then
+the major axis is the y-axis
+the coordinates of the vertices are 
+ 
+ (
+ 
+ 0,±a
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ ±b,0
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±c
+ 
+ )
+
+the major axis is the y-axis
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ 0,±a
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ ±b,0
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±c
+ 
+ )
+
+Solve for 
+ 
+ c
+ 
+ using the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+
+Plot the center, vertices, co-vertices, and foci in the coordinate plane, and draw a smooth curve to form the ellipse.
+
+Graphing an Ellipse Centered at the Origin
+
+Graph the ellipse given by the equation, 
+
+ x
+ 2
+
+ 9
+ 
+ +
+
+ y
+ 2
+
+ 25
+
+ =1.
+ 
+ Identify and label the center, vertices, co-vertices, and foci.
+
+First, we determine the position of the major axis. Because 
+ 
+ 25>9,
+ 
+ the major axis is on the y-axis. Therefore, the equation is in the form 
+
+ x
+ 2
+
+ b
+ 2
+
+ +
+
+ y
+ 2
+
+ a
+ 2
+
+ =1,
+ 
+ where 
+
+ b
+ 2
+ 
+ =9
+ 
+ and 
+
+ a
+ 2
+ 
+ =25.
+ 
+ It follows that:
+the center of the ellipse is 
+ 
+ (
+ 
+ 0,0
+ 
+ )
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ 0,±a
+ 
+ )=(
+ 
+ 0,±
+ 
+ 25
+
+ )=(
+ 
+ 0,±5
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ ±b,0
+ 
+ )=(
+ 
+ ±
+ 9
+ 
+ ,0
+ 
+ )=(
+ 
+ ±3,0
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±c
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+
+ Solving for 
+ 
+ c,
+ 
+ we have:
+
+the center of the ellipse is 
+ 
+ (
+ 
+ 0,0
+ 
+ )
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ 0,±a
+ 
+ )=(
+ 
+ 0,±
+ 
+ 25
+
+ )=(
+ 
+ 0,±5
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ ±b,0
+ 
+ )=(
+ 
+ ±
+ 9
+ 
+ ,0
+ 
+ )=(
+ 
+ ±3,0
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±c
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+
+ Solving for 
+ 
+ c,
+ 
+ we have:
+
+Therefore, the coordinates of the foci are 
+ 
+ (
+ 
+ 0,±4
+ 
+ ).
+
+Next, we plot and label the center, vertices, co-vertices, and foci, and draw a smooth curve to form the ellipse. See .
+
+Graph the ellipse given by the equation 
+
+ x
+ 2
+
+ 36
+
+ +
+
+ y
+ 2
+
+ 4
+ 
+ =1.
+ 
+ Identify and label the center, vertices, co-vertices, and foci.
+
+center: 
+ 
+ (
+ 
+ 0,0
+ 
+ );
+ 
+ vertices: 
+ 
+ (
+ 
+ ±6,0
+ 
+ );
+ 
+ co-vertices: 
+ 
+ (
+ 
+ 0,±2
+ 
+ );
+ 
+ foci: 
+ 
+ (
+ 
+ ±4
+ 2
+ 
+ ,0
+ 
+ )
+
+Graphing an Ellipse Centered at the Origin from an Equation Not in Standard Form
+
+Graph the ellipse given by the equation 
+ 
+ 4
+ x
+ 2
+ 
+ +25
+ y
+ 2
+ 
+ =100.
+ 
+ Rewrite the equation in standard form. Then identify and label the center, vertices, co-vertices, and foci.
+
+First, use algebra to rewrite the equation in standard form.
+
+Next, we determine the position of the major axis. Because 
+ 
+ 25>4,
+ 
+ the major axis is on the x-axis. Therefore, the equation is in the form 
+
+ x
+ 2
+
+ a
+ 2
+
+ +
+
+ y
+ 2
+
+ b
+ 2
+
+ =1,
+ 
+ where 
+
+ a
+ 2
+ 
+ =25
+ 
+ and 
+
+ b
+ 2
+ 
+ =4.
+ 
+ It follows that:
+the center of the ellipse is 
+ 
+ (
+ 
+ 0,0
+ 
+ )
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ ±a,0
+ 
+ )=(
+ 
+ ±
+ 
+ 25
+
+ ,0
+ 
+ )=(
+ 
+ ±5,0
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ 0,±b
+ 
+ )=(
+ 
+ 0,±
+ 4
+
+ )=(
+ 
+ 0,±2
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ ±c,0
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ Solving for 
+ 
+ c,
+ 
+ we have:
+
+the center of the ellipse is 
+ 
+ (
+ 
+ 0,0
+ 
+ )
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ ±a,0
+ 
+ )=(
+ 
+ ±
+ 
+ 25
+
+ ,0
+ 
+ )=(
+ 
+ ±5,0
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ 0,±b
+ 
+ )=(
+ 
+ 0,±
+ 4
+
+ )=(
+ 
+ 0,±2
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ ±c,0
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ Solving for 
+ 
+ c,
+ 
+ we have:
+
+Therefore the coordinates of the foci are 
+ 
+ (
+ 
+ ±
+ 
+ 21
+
+ ,0
+ 
+ ).
+
+Next, we plot and label the center, vertices, co-vertices, and foci, and draw a smooth curve to form the ellipse.
+
+Graph the ellipse given by the equation 
+ 
+ 49
+ x
+ 2
+ 
+ +16
+ y
+ 2
+ 
+ =784.
+ 
+ Rewrite the equation in standard form. Then identify and label the center, vertices, co-vertices, and foci.
+
+Standard form: 
+
+ x
+ 2
+
+ 16
+
+ +
+
+ y
+ 2
+
+ 49
+
+ =1;
+ 
+ center: 
+ 
+ (
+ 
+ 0,0
+ 
+ );
+ 
+ vertices: 
+ 
+ (
+ 
+ 0,±7
+ 
+ );
+ 
+ co-vertices: 
+ 
+ (
+ 
+ ±4,0
+ 
+ );
+ 
+ foci: 
+ 
+ (
+ 
+ 0,±
+ 
+ 33
+
+ )
+
+Graphing Ellipses Not Centered at the Origin
+
+When an ellipse is not centered at the origin, we can still use the standard forms to find the key features of the graph. When the ellipse is centered at some point, 
+ 
+ (
+ 
+ h,k
+ 
+ ),
+ 
+ we use the standard forms 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ =1,a>b
+ 
+ for horizontal ellipses and 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ =1,a>b
+ 
+ for vertical ellipses. From these standard equations, we can easily determine the center, vertices, co-vertices, foci, and positions of the major and minor axes.
+Given the standard form of an equation for an ellipse centered at 
+ 
+ (
+ 
+ h, k
+ 
+ ),
+ 
+ sketch the graph.
+
+Use the standard forms of the equations of an ellipse to determine the center, position of the major axis, vertices, co-vertices, and foci.
+ 
+ If the equation is in the form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ =1, 
+ where 
+ 
+ a>b, 
+ then
+ the center is 
+ 
+ (
+ 
+ h,k
+ 
+ )
+
+the major axis is parallel to the x-axis
+ the coordinates of the vertices are 
+ 
+ (
+ 
+ h±a,k
+ 
+ )
+
+ the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h,k±b
+ 
+ )
+
+ the coordinates of the foci are 
+ 
+ (
+ 
+ h±c,k
+ 
+ )
+
+ If the equation is in the form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ =1, 
+ where 
+ 
+ a>b, 
+ then
+ the center is 
+ 
+ (
+ 
+ h,k
+ 
+ )
+
+ the major axis is parallel to the y-axis
+ the coordinates of the vertices are 
+ 
+ (
+ 
+ h,k±a
+ 
+ )
+
+ the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h±b,k
+ 
+ )
+
+ the coordinates of the foci are 
+ 
+ (
+ 
+ h,k±c
+ 
+ )
+
+If the equation is in the form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ =1, 
+ where 
+ 
+ a>b, 
+ then
+ the center is 
+ 
+ (
+ 
+ h,k
+ 
+ )
+
+the major axis is parallel to the x-axis
+ the coordinates of the vertices are 
+ 
+ (
+ 
+ h±a,k
+ 
+ )
+
+ the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h,k±b
+ 
+ )
+
+ the coordinates of the foci are 
+ 
+ (
+ 
+ h±c,k
+ 
+ )
+
+the center is 
+ 
+ (
+ 
+ h,k
+ 
+ )
+
+the major axis is parallel to the x-axis
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ h±a,k
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h,k±b
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ h±c,k
+ 
+ )
+
+If the equation is in the form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ =1, 
+ where 
+ 
+ a>b, 
+ then
+ the center is 
+ 
+ (
+ 
+ h,k
+ 
+ )
+
+ the major axis is parallel to the y-axis
+ the coordinates of the vertices are 
+ 
+ (
+ 
+ h,k±a
+ 
+ )
+
+ the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h±b,k
+ 
+ )
+
+ the coordinates of the foci are 
+ 
+ (
+ 
+ h,k±c
+ 
+ )
+
+the center is 
+ 
+ (
+ 
+ h,k
+ 
+ )
+
+the major axis is parallel to the y-axis
+
+the coordinates of the vertices are 
+ 
+ (
+ 
+ h,k±a
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (
+ 
+ h±b,k
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ h,k±c
+ 
+ )
+
+Solve for 
+ 
+ c
+ 
+ using the equation 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+
+Plot the center, vertices, co-vertices, and foci in the coordinate plane, and draw a smooth curve to form the ellipse.
+
+Graphing an Ellipse Centered at (h, k)
+
+Graph the ellipse given by the equation, 
+
+ (
+ 
+ x+2
+ 
+ )
+ 
+ 2
+
+ 4
+ 
+ +
+
+ (
+ 
+ y−5
+ 
+ )
+ 
+ 2
+
+ 9
+ 
+ =1.
+ 
+ Identify and label the center, vertices, co-vertices, and foci.
+
+First, we determine the position of the major axis. Because 
+ 
+ 9>4,
+ 
+ the major axis is parallel to the y-axis. Therefore, the equation is in the form 
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+
+ b
+ 2
+
+ +
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+
+ a
+ 2
+
+ =1,
+ 
+ where 
+
+ b
+ 2
+ 
+ =4
+ 
+ and 
+
+ a
+ 2
+ 
+ =9.
+ 
+ It follows that:
+
+the center of the ellipse is 
+ 
+ (
+ 
+ h,k
+ 
+ )=(
+ 
+ −2,5
+ 
+ )
+
+the coordinates of the vertices are 
+ 
+ (h,k±a)=(−2,5±
+ 9
+ 
+ )=(−2,5±3),
+ 
+ or 
+ 
+ (
+ 
+ −2,2
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+ −2,8
+ 
+ )
+
+the coordinates of the co-vertices are 
+ 
+ (h±b,k)=(−2±
+ 4
+ 
+ ,5)=(−2±2,5),
+ 
+ or 
+ 
+ (
+ 
+ −4,5
+ 
+ )
+ 
+ and 
+ 
+ (
+ 
+ 0,5
+ 
+ )
+
+the coordinates of the foci are 
+ 
+ (
+ 
+ h,k±c
+ 
+ ),
+ 
+ where 
+
+ c
+ 2
+ 
+ =
+ a
+ 2
+ 
+ −
+ b
+ 2
+ 
+ .
+ 
+ Solving for 
+ 
+ c,
+ 
+ we have:
+
+Therefore, the coordinates of the foci are 
+ 
+ (
+ 
+ −2,5−
+ 5
+
+ )
+ 
+ and 
+ 
+ (
+ 
+ −2,5+
+ 5
+
+ ).
+
+Next, we plot and label the center, vertices, co-vertices, and foci, and draw a smooth curve to form the ellipse.
+
+Graph the ellipse given by the equation 
+
+ (
+ 
+ x−4
+ 
+ )
+ 
+ 2
+
+ 36
+
+ +
+
+ (
+ 
+ y−2
+ 
+ )
+ 
+ 2
+
+ 20
+
+ =1. 
+ Identify and label the center, vertices, co-vertices, and foci.
+
+Center: 
+ 
+ (
+ 
+ 4,2
+ 
+ ); 
+ vertices: 
+ 
+ (
+ 
+ −2,2
+ 
+ ) 
+ and 
+ 
+ (
+ 
+ 10,2
+ 
+ ); 
+ co-vertices: 
+ 
+ (
+ 
+ 4,2−2
+ 5
+
+ ) 
+ and 
+ 
+ (
+ 
+ 4,2+2
+ 5
+
+ ); 
+ foci: 
+ 
+ (
+ 
+ 0,2
+ 
+ ) 
+ and 
+ 
+ (
+ 
+ 8,2
+ 
+ )
+Given the general form of an equation for an ellipse centered at (h, k), express the equation in standard form.
+
+Recognize that an ellipse described by an equation in the form 
+ a
+ x
+ 2
+ 
+ +b
+ y
+ 2
+ 
+ +cx+dy+e=0
+ is in general form.
+
+Rearrange the equation by grouping terms that contain the same variable. Move the constant term to the opposite side of the equation.
+
+Factor out the coefficients of the 
+
+ x
+ 2
+
+ and 
+
+ y
+ 2
+
+ terms in preparation for completing the square.
+
+Complete the square for each variable to rewrite the equation in the form of the sum of multiples of two binomials squared set equal to a constant, 
+
+ m
+ 1
+
+ (
+ 
+ x−h
+ 
+ )
+ 
+ 2
+ 
+ +
+ m
+ 2
+
+ (
+ 
+ y−k
+ 
+ )
+ 
+ 2
+ 
+ =
+ m
+ 3
+ 
+ ,
+ 
+ where 
+
+ m
+ 1
+ 
+ ,
+ m
+ 2
+ 
+ ,
+ 
+ and 
+
+ m
+ 3
+
+ are constants.
+
+Divide both sides of the equation by the constant term to express the equation in standard form.
+
+Graphing an Ellipse Centered at (h, k) by First Writing It in Standard Form
+
+Graph the ellipse given by the equation 
+ 
+ 4
+ x
+ 2
+ 
+ +9
+ y
+ 2
+ 
+ −40x+36y+100=0.
+ 
+ Identify and label the center, vertices, co-vertices, and foci.
+
+We must begin by rewriting the equation in standard form.
+
+Group terms that contain the same variable, and move the constant to the opposite side of the equation.
+
+Factor
+[truncated]

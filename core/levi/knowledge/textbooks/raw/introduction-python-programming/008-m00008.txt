@@ -1,0 +1,68 @@
+# m00008
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Comments
+
+Comments
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Write concise, meaningful comments that explain intended functionality of the code.
+
+Write a docstring (more verbose comment) that describes the program functionality.
+
+The hash character
+Comments are short phrases that explain what the code is doing. Ex: Lines 1, 8, and 10 in the following program contain comments. Each comment begins with a hash character (#). All text from the hash character to the end of the line is ignored when running the program. In contrast, hash characters inside of strings are treated as regular text. Ex: The string "Item #1: " does not contain a comment.
+
+When writing comments:
+
+The # character should be followed by a single space.
+Ex: # End of menu is easier to read than #End of menu.
+
+Comments should explain the purpose of the code, not just repeat the code itself.
+Ex: # Get the user's preferences is more descriptive than # Input item1 and item2.
+
+Program with three comments
+
+Simple comments
+
+Code quality
+
+The example program above had two parts: (1) display the menu options, and (2) get the user's preferences. Together, the blank lines and comments show the overall structure of the program.
+
+Programmers spend more time reading code than writing code. Therefore, making code easier for others to read and understand is important. Two ways to improve code quality include:
+
+Separate each part (lines that have a similar purpose) with a blank line.
+
+Write a comment before each part. Not every line needs a comment.
+
+Comments in a program
+
+Code quality
+
+Documentation
+
+Python programs may optionally begin with a string known as a docstring. A docstring is documentation written for others who will use the program but not necessarily read the source code. Most of the official documentation at docs.python.org is generated from docstrings.
+
+Documentation can be long, so docstrings are generally written as multi-line strings ("""). Common elements of a docstring include a one-line summary, a blank line, and a longer description.
+
+Vacations docstring
+
+Documentation
+
+Whose birthday
+
+Add two comments to the following program: one for the input, and one for the output. Separate the input and output with a blank line. Then, compare your comments with the sample solution, and ask yourself the following questions:
+
+Are your comments longer or shorter? Why?
+
+Is the formatting of your comments correct?
+
+Gravity calculation
+
+Write a docstring for the following program. The first line of the docstring should explain, in one short sentence, what the program is. The second line of the docstring should be blank. The third and subsequent lines should include a longer explanation of what the program does. At the end of the docstring, add a line that says "Author: " followed by your name.

@@ -1,0 +1,42 @@
+{
+  "career_field": "Heating, Ventilation, and Air Conditioning",
+  "description": "Sidewinder TEAM + SKILL edition pack for residential HVAC. Skill layer: diagnose-first troubleshooting of furnaces, air conditioners, heat pumps, and duct systems plus career development — mentoring, diagnostics discipline, seasonal readiness systems, profitable service calls, callback prevention, kit building, building-science reading, and the helper-to-lead career ladder. Team layer: crew plays for coordinated installs, two-tech radio protocol, weekly skill swaps, heat-wave surge triage, and graduated apprentice responsibility. Improvised tools and explicit stop conditions at the licensed-tech, gas-safety, and electrical-safety lines. Lawful DIY only; refrigerant handling is licensed-technician-only by law.",
+  "draft": true,
+  "entry_count": 50,
+  "name": "HVAC",
+  "notes_for_main_builder": "Draft manifest for the editions framework to validate. Prerequisite graph is internal to this pack (sw-home-hvac-* ids only). Titles were hand-deduped. Ids normalized by coordinator to the framework law (curriculum/schema.py); full file validates clean.",
+  "pack": "hvac",
+  "safety_posture": [
+    "Refrigerant handling is licensed-technician-only by law: entries diagnose up to that line and stop there.",
+    "Any gas smell: stop, evacuate, call the gas company from outside.",
+    "Electrical compartments are de-energized and verified before touching.",
+    "Capacitors are diagnose-only: never touch terminals."
+  ],
+  "selector": {
+    "domains": [
+      "home"
+    ],
+    "levels": [
+      "foundation",
+      "applied",
+      "mastery"
+    ],
+    "tracks": [
+      "build",
+      "create",
+      "improve",
+      "restore",
+      "combine",
+      "improvise"
+    ]
+  },
+  "track_emphasis": {
+    "build": "secondary - window-unit install, filter fabrication, evaporative-cooler startup",
+    "combine": "secondary - dehumidifier pairing, improvised zoning",
+    "create": "secondary - thermostat relocation, duct reroute design",
+    "improve": "primary - airflow, sealing, balancing, and efficiency upgrades",
+    "improvise": "primary - airflow-first diagnosis without gauges, improvised dampers, cut-to-fit filters, improvised manometer",
+    "restore": "primary - diagnosis and repair of furnaces, AC, heat pumps, blowers, drains, and ducts"
+  },
+  "version": "0.1.0-draft"
+}

@@ -1,0 +1,69 @@
+# m00047
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Parameters
+
+Parameters
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Identify a function's arguments and parameters.
+
+Describe how mutability affects how a function can modify arguments.
+
+Arguments and parameters
+
+What if a programmer wants to write a function that prints the contents of a list? Good practice is to pass values directly to a function rather than relying on global variables. A function argument is a value passed as input during a function call. A function parameter is a variable representing the input in the function definition. Note: The terms "argument" and "parameter" are sometimes used interchangeably in conversation and documentation.
+
+Global and local variables in a program with a function
+
+Arguments and parameters
+
+Consider the following:
+
+Multiple arguments and parameters
+
+Functions can have multiple parameters. Ex: A function uses two parameters, length and width, to compute the square footage of a room. Function calls must use the correct order and number of arguments to avoid undesired behavior and errors (unless using optional or keyword arguments as discussed later).
+
+Using multiple arguments in a function call
+
+Multiple arguments and parameters
+
+Consider the following:
+
+Modifying arguments and mutability
+
+In Python, a variable is a name that refers to an object stored in memory, aka an object reference, so Python uses a pass-by-object-reference system. If an argument is changed in a function, the changes are kept or lost depending on the object's mutability. A mutable object can be modified after creation. A function's changes to the object then appear outside the function. An immutable object cannot be modified after creation. So a function must make a local copy to modify, and the local copy's changes don't appear outside the function.
+
+Programmers should be cautious of modifying function arguments as these side effects can make programs difficult to debug and maintain.
+
+Converting temperatures
+
+What are the values of weekend_temps and type after convert_temps() finishes?
+
+The output is 9.44°F 10.56°F 6.67°F. type was changed to "C" in the function but didn't keep the change outside of the function. Why is the list argument change kept and not the string argument change? (Hint: A list is mutable. A string is immutable.)
+
+Exploring a faulty function
+
+Mutability and function arguments
+
+Printing right triangle area
+
+Write a function, print_area(), that takes in the base and height of a right triangle and prints the triangle's area. The area of a right triangle is bh2, where b is the base and h is the height.
+
+Given input:
+
+The output is:
+
+Curving scores
+
+Write a function, print_scores(), that takes in a list of test scores and a number representing how many points to add. For each score, print the original score and the sum of the score and bonus. Make sure not to change the list.
+
+Given function call:
+
+The output is:

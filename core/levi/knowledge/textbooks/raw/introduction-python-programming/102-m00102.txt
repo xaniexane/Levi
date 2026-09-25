@@ -1,0 +1,59 @@
+# m00102
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Reading from files
+
+Reading from files
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Understand how to open a file using the open() function.
+
+Demonstrate how to read information from a file using read(), readline(), and readlines().
+
+Opening a file
+
+Reading information from and writing information to files is a common task in programming.
+
+Python supports the opening of a file using the open() function.
+
+Opening a file
+
+Opening files
+
+Using read() and reading lines
+
+Python provides functions that can be called on a file object for reading the contents of a file:
+
+The read() function reads the contents of a file and returns a string.
+
+The readline() function reads the next line in a file and returns a string.
+
+The readlines() function reads the individual lines of a file and returns a string list containing all the lines of the file in order.
+
+Using read() and readlines()
+
+A file called input.txt has the following contents:
+
+The code's output is:
+
+read() and readline()
+
+Reading files
+
+Suppose fileobj = open("input.txt") has already been executed for each question below.
+input.txt:
+
+Reading from a file
+
+Open the file test.txt and print the file's contents.
+
+Reading from a file line by line
+
+The file input.txt is shown. The file represents a set of integers. Line 1 of the file specifies how many integers follow. Write a program that reads from this file and determines the average of the numbers following the first line.
+input.txt

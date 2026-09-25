@@ -1,0 +1,60 @@
+# m00050
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Chapter summary
+
+Chapter summary
+
+Highlights from this chapter include:
+
+Functions are named blocks of code that perform tasks when called and make programs more organized and optimized.
+
+Control flow is the sequence of program execution. Control flow moves between calling code and function code when a function is called.
+
+Variable scope refers to where a variable can be accessed. Global variables can be accessed anywhere in a program. Local variables are limited in scope, such as to a function.
+
+Parameters are function inputs defined with the function. Arguments are values passed to the function as input by the calling code. Parameters are assigned with the arguments' values.
+
+Function calls can use positional arguments to map values to parameters in order.
+
+Function calls can use keyword arguments to map values using parameter names in any order.
+
+Functions can define default parameter values to allow for optional arguments in function calls.
+
+Python uses a pass-by-object-reference system to assign parameters with the object values referenced by the arguments.
+
+Functions can use return statements to return values back to the calling code.
+
+At this point, you should be able to write functions that have any number of parameters and return a value, and programs that call functions using keyword arguments and optional arguments.
+
+Chapter 6 reference.
+
+Construct
+Description
+def function_name():
+  """Docstring"""
+  # Function body
+def function_name(parameter_1):
+  # Function body
+def function_name(parameter_1):
+  # Function body
+ 
+function_name(argument_1)
+def function_name():
+  # Function body
+  return result # Returns the value of result to the caller
+def function_name(parameter_1):
+  # Function body
+  local_var = parameter_1 * 5
+  return local_var
+
+global_var = function_name(arg_1)
+def function_name(parameter_1, parameter_2):
+  # Function body
+ 
+function_name(parameter_2 = 5, parameter_1 = 2)
+def function_name(parameter_1 = 100):
+  # Function body

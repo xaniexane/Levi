@@ -1,0 +1,70 @@
+# m00096
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Applications in Performance Measurement
+
+Applications in Performance Measurement
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Interpret a Sharpe ratio.
+
+Interpret a Treynor measurement.
+
+Interpret Jensen’s alpha.
+
+Sharpe Ratio
+
+Investors want a measure of how good a professional money manager is before they entrust their hard-earned funds to that professional for investing. Suppose that you see an advertisement in which McKinley Investment Management claims that the portfolios of its clients have an average return of 20% per year. You know that this average annual return is meaningless without also knowing something about the riskiness of the firm’s strategy. In this section, we consider some ways to evaluate the riskiness of an investment strategy.
+
+A basic measure of investment performance that includes an adjustment for risk is the Sharpe ratio. The Sharpe ratio is computed as a portfolio’s risk premium divided by the standard deviation of the portfolio’s return, using the formula
+
+The portfolio risk premium is the portfolio return RP minus the risk-free return Rf; this is the basic reward for bearing risk. If the risk-free return is 3%, McKinley Investment Management’s clients who are earning 20% on their portfolios have an excess return of 17%.
+
+The standard deviation of the portfolio’s return, σP, is a measure of risk. Although you see that McKinley’s clients earn a nice 20% return on average, you find that the returns are highly volatile. In some years, the clients earn much more than 20%, and in other years, the return is much lower, even negative. That volatility leads to a standard deviation of returns of 26%. The Sharpe ratio would be 17%26%, or 0.65.
+
+Thus, the Sharpe ratio can be thought of as a reward-to-risk ratio. The standard deviation in the denominator can be thought of as the units of risk the investor has. The numerator is the reward the investor is receiving for taking on that risk.
+Sharpe Ratio
+
+The Sharpe ratio was developed by Nobel laureate William F. Sharpe. You can visit Sharpe’s Stanford University website to find videos in which he discusses financial topics and links to his research as well as his advice on how to invest.
+
+Treynor Measurement of Performance
+
+Another reward-to-risk ratio measurement of investment performance is the Treynor ratio. The Treynor ratio is calculated as
+
+Just as with the Sharpe ratio, the numerator of the Treynor ratio is a portfolio’s risk premium; the difference is that the Treynor ratio focus focuses on systematic risk, using the beta of the portfolio in the denominator, while the Shape ratio focuses on total risk, using the standard deviation of the portfolio’s returns in the denominator.
+
+If McKinley Investment Management has a portfolio with a 20% return over the past five years, with a beta of 1.2 and a risk-free rate of 3%, the Treynor ratio would be (0.20 - 0.03)1.2=0.14.
+
+Both the Sharpe and Treynor ratios are relative measures of investment performance, meaning that there is not an absolute number that indicates whether an investment performance is good or bad. An investment manager’s performance must be considered in relation to that of other managers or to a benchmark index.
+
+Jensen’s Alpha
+Jensen’s alpha is another common measure of investment performance. It is computed as the raw portfolio return minus the expected portfolio return predicted by the CAPM:
+
+Suppose that the average market return has been 12%. What would Jensen’s alpha be for McKinley Investment Management’s portfolio with a 20% average return and a beta of 1.2?
+
+Unlike the Sharpe and Treynor ratios, which are meaningful in a relative sense, Jensen’s alpha is meaningful in an absolute sense. An alpha of 0.062 indicates that the McKinley Investment Management portfolio provided a return that was 6.2% higher than would be expected given the riskiness of the portfolio. A positive alpha indicates that the portfolio had an abnormal return. If Jensen’s alpha equals zero, the portfolio return was exactly what was expected given the riskiness of the portfolio as measured by beta.
+
+Comparing the Returns and Risks of Portfolios
+
+You are interviewing two investment managers. Mr. Wong shows that the average return on his portfolio for the past 10 years has been 14%, with a standard deviation of 8% and a beta of 1.2. Ms. Petrov shows that the average return on her portfolio for the past 10 years has been 16%, with a standard deviation of 10% and a beta of 1.6. You know that over the past 10 years, the US Treasury security rate has averaged 2% and the return on the S&P 500 has averaged 11%. Which portfolio manager do you think has done the better job?
+Solution:
+
+The Sharpe ratio for Mr. Wong’s portfolio is 14% - 2%8% = 1.5, and the Treynor ratio is 14% - 2%1.2=10. The Sharpe ratio for Ms. Petrov’s portfolio is 16% - 2%10% = 1.4, and the Treynor ratio is 16% - 2%1.6 = 8.75.
+
+Jensen’s alpha for Mr. Wong’s portfolio is
+
+Jensen’s alpha for Ms. Petrov’s portfolio is
+
+All three measures of portfolio performance suggest that Mr. Wong’s portfolio has performed better than Ms. Petrov’s has. Although Ms. Petrov has had a larger average return, the portfolio she manages is riskier. Ms. Petrov’s portfolio is more volatile than Mr. Wong’s, resulting in a higher standard deviation. Ms. Petrov’s portfolio has a higher beta, which means it has a higher amount of systematic risk. The CAPM suggests that a portfolio with a beta of 1.6 should have an expected return of 16.4%. Because Ms. Petrov’s portfolio has an average return of less than that, investors in Ms. Petrov’s portfolio are not rewarded for the risk that they have taken as much as would be expected.
+
+Because investors are not simply interested in returns but are also interested in risk, the success of a portfolio cannot be measured simply by considering the portfolio’s return. In order to compare investment portfolios, risk and return must both be taken into consideration. The Sharpe ratio and the Treynor ratio are two measures that provide a reward-to-risk measure of a portfolio. Jensen’s alpha provides a measure of the abnormal return of a portfolio, considering the portfolio’s risk level.
+
+a measure of portfolio performance, calculated as the raw portfolio return minus the expected portfolio return predicted by the CAPM
+a reward-to-risk measure of portfolio performance, calculated by subtracting the risk-free rate from the average portfolio return and then dividing by the standard deviation of the portfolio
+a reward-to-risk measure of portfolio performance, calculated by subtracting the risk-free rate from the average portfolio return and then dividing by the beta of the portfolio

@@ -1,0 +1,346 @@
+# m53605
+# Book: OpenStax Calculus Volume 1
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-calculus-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Linear Approximations and Differentials
+
+Linear Approximations and Differentials
+
+Describe the linear approximation to a function at a point.
+
+Write the linearization of a given function.
+
+Draw a graph that illustrates the use of differentials to approximate the change in a quantity.
+
+Calculate the relative error and percentage error in using a differential approximation.
+
+We have just seen how derivatives allow us to compare related quantities that are changing over time. In this section, we examine another application of derivatives: the ability to approximate functions locally by linear functions. Linear functions are the easiest functions with which to work, so they provide a useful tool for approximating function values. In addition, the ideas presented in this section are generalized later in the text when we study how to approximate functions by higher-degree polynomials Introduction to Power Series and Functions.
+
+Linear Approximation of a Function at a Point
+
+Consider a function f that is differentiable at a point x=a. Recall that the tangent line to the graph of f at a is given by the equation
+
+For example, consider the function f(x)=1x at a=2. Since f is differentiable at x=2 and f′(x)=−1x2, we see that f′(2)=−14. Therefore, the tangent line to the graph of f at a=2 is given by the equation
+(a) shows a graph of f(x)=1x along with the tangent line to f at x=2. Note that for x near 2, the graph of the tangent line is close to the graph of f. As a result, we can use the equation of the tangent line to approximate f(x) for x near 2. For example, if x=2.1, the y value of the corresponding point on the tangent line is
+
+The actual value of f(2.1) is given by
+
+Therefore, the tangent line gives us a fairly good approximation of f(2.1) ((b)). However, note that for values of x far from 2, the equation of the tangent line does not give us a good approximation. For example, if x=10, the y-value of the corresponding point on the tangent line is
+
+whereas the value of the function at x=10 is f(10)=0.1.
+
+In general, for a differentiable function f, the equation of the tangent line to f at x=a can be used to approximate f(x) for x near a. Therefore, we can write
+
+We call the linear function
+
+the linear approximation, or tangent line approximation, of f at x=a. This function L is also known as the linearization of f at x=a.
+
+To show how useful the linear approximation can be, we look at how to find the linear approximation for f(x)=x at x=9.
+
+Linear Approximation of x
+
+Find the linear approximation of f(x)=x at x=9 and use the approximation to estimate 9.1.
+
+Since we are looking for the linear approximation at x=9, using we know the linear approximation is given by
+
+We need to find f(9) and f′(9).
+
+Therefore, the linear approximation is given by .
+
+Using the linear approximation, we can estimate 9.1 by writing
+
+Analysis
+
+Using a calculator, the value of 9.1 to four decimal places is 3.0166. The value given by the linear approximation, 3.0167, is very close to the value obtained with a calculator, so it appears that using this linear approximation is a good way to estimate x, at least for x near 9. At the same time, it may seem odd to use a linear approximation when we can just push a few buttons on a calculator to evaluate 9.1. However, how does the calculator evaluate 9.1? The calculator uses an approximation! In fact, calculators and computers use approximations all the time to evaluate mathematical expressions; they just use higher-degree approximations.
+
+Find the local linear approximation to f(x)=x3 at x=8. Use it to approximate 8.13 to five decimal places.
+L(x)=2+112(x−8); 2.00833
+
+Hint
+L(x)=f(a)+f′(a)(x−a)
+
+Linear Approximation of sinx
+
+Find the linear approximation of f(x)=sinx at x=π3 and use it to approximate sin(62°).
+
+First we note that since π3 rad is equivalent to 60°, using the linear approximation at x=π/3 seems reasonable. The linear approximation is given by
+
+We see that
+
+Therefore, the linear approximation of f at x=π/3 is given by .
+
+To estimate sin(62°) using L, we must first convert 62° to radians. We have 62°=62π180 radians, so the estimate for sin(62°) is given by
+
+Find the linear approximation for f(x)=cosx at x=π2.
+L(x)=−x+π2
+
+Hint
+L(x)=f(a)+f′(a)(x−a)
+
+Linear approximations may be used in estimating roots and powers. In the next example, we find the linear approximation for f(x)=(1+x)n at x=0, which can be used to estimate roots and powers for real numbers near 1. The same idea can be extended to a function of the form f(x)=(m+x)n to estimate roots and powers near a different number m.
+
+Approximating Roots and Powers
+
+Find the linear approximation of f(x)=(1+x)n at x=0. Use this approximation to estimate (1.01)3.
+
+The linear approximation at x=0 is given by
+
+Because
+
+the linear approximation is given by (a).
+
+We can approximate (1.01)3 by evaluating L(0.01) when n=3. We conclude that
+
+Find the linear approximation of f(x)=(1+x)4 at x=0 without using the result from the preceding example.
+L(x)=1+4x
+
+Hint
+f′(x)=4(1+x)3
+
+Differentials
+
+We have seen that linear approximations can be used to estimate function values. They can also be used to estimate the amount a function value changes as a result of a small change in the input. To discuss this more formally, we define a related concept: differentials. Differentials provide us with a way of estimating the amount a function changes as a result of a small change in input values.
+
+When we first looked at derivatives, we used the Leibniz notation dy/dx to represent the derivative of y with respect to x. Although we used the expressions dy and dx in this notation, they did not have meaning on their own. Here we see a meaning to the expressions dy and dx. Suppose y=f(x) is a differentiable function. Let dx be an independent variable that can be assigned any nonzero real number, and define the dependent variable dy by
+
+It is important to notice that dy is a function of both x and dx. The expressions dy and dx are called differentials. We can divide both sides of by dx, which yields
+
+This is the familiar expression we have used to denote a derivative. is known as the differential form of .
+
+Computing differentials
+
+For each of the following functions, find dy and evaluate when x=3 and dx=0.1.
+y=x2+2x
+y=cosx
+
+The key step is calculating the derivative. When we have that, we can obtain dy directly.
+
+Since f(x)=x2+2x, we know f′(x)=2x+2, and therefore
+dy=(2x+2)dx.
+When x=3 and dx=0.1,
+dy=(2·3+2)(0.1)=0.8.
+
+Since f(x)=cosx, f′(x)=−sin(x). This gives us
+dy=−sinxdx.
+When x=3 and dx=0.1,
+dy=−sin(3)(0.1)=−0.1sin(3).
+
+For y=ex2, find dy.
+dy=2xex2dx
+
+Hint
+dy=f′(x)dx
+
+We now connect differentials to linear approximations. Differentials can be used to estimate the change in the value of a function resulting from a small change in input values. Consider a function f that is differentiable at point a. Suppose the input x changes by a small amount. We are interested in how much the output y changes. If x changes from a to a+dx, then the change in x is dx (also denoted Δx), and the change in y is given by
+
+Instead of calculating the exact change in y, however, it is often easier to approximate the change in y by using a linear approximation. For x near a, f(x) can be approximated by the linear approximation
+
+Therefore, if dx is small,
+
+That is,
+
+In other words, the actual change in the function f if x increases from a to a+dx is approximately the difference between L(a+dx) and f(a), where L(x) is the linear approximation of f at a. By definition of L(x), this difference is equal to f′(a)dx. In summary,
+
+Therefore, we can use the differential dy=f′(a)dx to approximate the change in y if x increases from x=a to x=a+dx. We can see this in the following graph.
+
+We now take a look at how to use differentials to approximate the change in the value of the function that results from a small change in the value of the input. Note the calculation with differentials is much simpler than calculating actual values of functions and the result is very close to what we would obtain with the more exact calculation.
+
+Approximating Change with Differentials
+
+Let y=x2+2x. Compute Δy and dy at x=3 if dx=0.1.
+
+The actual change in y if x changes from x=3 to x=3.1 is given by
+
+The approximate change in y is given by dy=f′(3)dx. Since f′(x)=2x+2, we have
+
+For y=x2+2x, find Δy and dy at x=3 if dx=0.2.
+dy=1.6, Δy=1.64
+
+Hint
+dy=f′(3)dx, Δy=f(3.2)−f(3)
+
+Calculating the Amount of Error
+
+Any type of measurement is prone to a certain amount of error. In many applications, certain quantities are calculated based on measurements. For example, the area of a circle is calculated by measuring the radius of the circle. An error in the measurement of the radius leads to an error in the computed value of the area. Here we examine this type of error and study how differentials can be used to estimate the error.
+
+Consider a function f with an input that is a measured quantity. Suppose the exact value of the measured quantity is a, but the measured value is a+dx. We say the measurement error is dx (or Δx). As a result, an error occurs in the calculated quantity f(x). This type of error is known as a propagated error and is given by
+
+Since all measurements are prone to some degree of error, we do not know the exact value of a measured quantity, so we cannot calculate the propagated error exactly. However, given an estimate of the accuracy of a measurement, we can use differentials to approximate the propagated error Δy. Specifically, if f is a differentiable function at a, the propagated error is
+
+Unfortunately, we do not know the exact value a. However, we can use the measured value a+dx, and estimate
+
+In the next example, we look at how differentials can be used to estimate the error in calculating the volume of a box if we assume the measurement of the side length is made with a certain amount of accuracy.
+
+Volume of a Cube
+
+Suppose the side length of a cube is measured to be 5 cm with an accuracy of 0.1 cm.
+
+Use differentials to estimate the error in the computed volume of the cube.
+
+Compute the volume of the cube if the side length is (i) 4.9 cm and (ii) 5.1 cm to compare the estimated error with the actual potential error.
+
+The measurement of the side length is accurate to within ±0.1 cm. Therefore,
+−0.1≤dx≤0.1.
+The volume of a cube is given by V=x3, which leads to
+dV=3x2dx.
+Using the measured side length of 5 cm, we can estimate that
+−3(5)2(0.1)≤dV≤3(5)2(0.1).
+Therefore,
+−7.5≤dV≤7.5.
+
+If the side length is actually 4.9 cm, then the volume of the cube is
+V(4.9)=(4.9)3=117.649cm3.
+If the side length is actually 5.1 cm, then the volume of the cube is
+V(5.1)=(5.1)3=132.651cm3.
+Therefore, the actual volume of the cube is between 117.649 and 132.651. Since the side length is measured to be 5 cm, the computed volume is V(5)=53=125. Therefore, the error in the computed volume is
+117.649−125≤ΔV≤132.651−125.
+That is,
+−7.351≤ΔV≤7.651.
+We see the estimated error dV is relatively close to the actual potential error in the computed volume.
+
+Estimate the error in the computed volume of a cube if the side length is measured to be 6 cm with an accuracy of 0.2 cm.
+
+The volume measurement is accurate to within 21.6cm3.
+
+Hint
+dV=3x2dx
+
+The measurement error dx (=Δx) and the propagated error Δy are absolute errors. We are typically interested in the size of an error relative to the size of the quantity being measured or calculated. Given an absolute error Δq for a particular quantity, we define the relative error as Δqq, where q is the actual value of the quantity. The percentage error is the relative error expressed as a percentage. For example, if we measure the height of a ladder to be 63 in. when the actual height is 62 in., the absolute error is 1 in. but the relative error is 162=0.016, or 1.6%. By comparison, if we measure the width of a piece of cardboard to be 8.25 in. when the actual width is 8 in., our absolute error is 14 in., whereas the relative error is 0.258=132, or 3.1%. Therefore, the percentage error in the measurement of the cardboard is larger, even though 0.25 in. is less than 1 in.
+
+Relative and Percentage Error
+
+An astronaut using a camera measures the radius of Earth as 4000 mi with an error of ±80 mi. Let’s use differentials to estimate the relative and percentage error of using this radius measurement to calculate the volume of Earth, assuming the planet is a perfect sphere.
+
+If the measurement of the radius is accurate to within ±80, we have
+
+Since the volume of a sphere is given by V=(43)πr3, we have
+
+Using the measured radius of 4000 mi, we can estimate
+
+To estimate the relative error, consider dVV. Since we do not know the exact value of the volume V, use the measured radius r=4000mi to estimate V. We obtain V≈(43)π(4000)3. Therefore the relative error satisfies
+
+which simplifies to
+
+The relative error is 0.06 and the percentage error is 6%.
+
+Determine the percentage error if the radius of Earth is measured to be 3950 mi with an error of ±100 mi.
+
+7.6%
+
+Hint
+
+Use the fact that dV=4πr2dr to find dV/V.
+
+Key Concepts
+
+A differentiable function y=f(x) can be approximated at a by the linear function
+L(x)=f(a)+f′(a)(x−a).
+
+For a function y=f(x), if x changes from a to a+dx, then
+dy=f′(x)dx
+is an approximation for the change in y. The actual change in y is
+Δy=f(a+dx)−f(a).
+
+A measurement error dx can lead to an error in a calculated quantity f(x). The error in the calculated quantity is known as the propagated error. The propagated error can be estimated by
+dy≈f′(x)dx.
+
+To estimate the relative error of a particular quantity q, we estimate Δqq.
+
+Key Equations
+dy=f′(x)dx.
+What is the linear approximation for any generic linear function y=mx+b?
+
+Determine the necessary conditions such that the linear approximation function is constant. Use a graph to prove your result.
+f′(a)=0
+
+Explain why the linear approximation becomes less accurate as you increase the distance between x and a. Use a graph to prove your argument.
+
+When is the linear approximation exact?
+
+The linear approximation exact when y=f(x) is linear or constant.
+
+For the following exercises, find the linear approximation L(x) to y=f(x) near x=a for the function.
+f(x)=x+x4,a=0
+f(x)=1x,a=2
+L(x)=12−14(x−2)
+f(x)=tanx,a=π4
+f(x)=sinx,a=π2
+L(x)=1
+f(x)=xsinx,a=2π
+f(x)=sin2x,a=0
+L(x)=0
+
+For the following exercises, compute the values given within 0.01 by deciding on the appropriate f(x) and a, and evaluating L(x)=f(a)+f′(a)(x−a). Check your answer using a calculator.
+[T] (2.001)6
+[T] sin(0.02)
+
+0.02
+[T] cos(0.03)
+[T] (15.99)1/4
+1.9996875
+[T] 10.98
+[T] sin(3.14)
+0.001593
+
+For the following exercises, determine the appropriate f(x) and a, and evaluate L(x)=f(a)+f′(a)(x−a). Calculate the numerical error in the linear approximations that follow.
+[T] (1.01)3
+[T] cos(0.01)
+1; error, ~0.00005
+[T] (sin(0.01))2
+[T] (1.01)−3
+0.97; error, ~0.0006
+[T] (1+110)10
+[T] 8.99
+3−1600; error, ~4.632×10−7
+
+For the following exercises, find the differential of the function.
+y=3x4+x2−2x+1
+y=xcosx
+dy=(cosx−xsinx)dx
+y=1+x
+y=x2+2x−1
+dy=(x2−2x−2(x−1)2)dx
+
+For the following exercises, find the differential and evaluate for the given x and dx.
+y=3x2−x+6, x=2, dx=0.1
+y=1x+1, x=1, dx=0.25
+dy=−1(x+1)2dx, −116
+y=tanx, x=0, dx=π10
+y=3x2+2x+1, x=0, dx=0.1
+dy=9x2+12x−22(x+1)3/2dx, −0.1
+y=sin(2x)x, x=π, dx=0.25
+y=x3+2x+1x, x=1, dx=0.05
+dy=(3x2+2−1x2)dx, 0.2
+
+For the following exercises, find the change in volume dV or in surface area dA.
+dV if the sides of a cube change from 10 to 10.1.
+dA if the sides of a cube change from x to x+dx.
+12xdx
+dA if the radius of a sphere changes from r by dr.
+dV if the radius of a sphere changes from r by dr.
+4πr2dr
+dV if a circular cylinder with r=2 changes height from 3 cm to 3.05cm.
+dV if a circular cylinder of height 3 changes from r=2 to r=1.9cm.
+−1.2πcm3
+
+A spherical golf ball is measured to have a radius of 5mm, with a possible measurement error of 0.1mm. What is the possible change in volume?
+
+A pool has a rectangular base of 10 ft by 20 ft and a depth of 6 ft. What is the change in volume if you only fill it up to 5.5 ft?
+−100 ft3
+
+An ice cream cone has height 4 in. and radius 1 in. If the cone is 0.1 in. thick, what is the difference between the volume of the cone, including the shell, and the volume of the ice cream you can fit inside the shell?
+
+For the following exercises, confirm the approximations by using the linear approximation at x=0.
+1−x≈1−12x
+11−x2≈1
+c2+x2≈c
+
+the differential dx is an independent variable that can be assigned any nonzero real number; the differential dy is defined to be dy=f′(x)dx
+given a differentiable function y=f′(x), the equation dy=f′(x)dx is the differential form of the derivative of y with respect to x
+the linear function L(x)=f(a)+f′(a)(x−a) is the linear approximation of f at x=a
+the relative error expressed as a percentage
+the error that results in a calculated quantity f(x) resulting from a measurement error dx
+given an absolute error Δq for a particular quantity, Δqq is the relative error.
+since the linear approximation of f at x=a is defined using the equation of the tangent line, the linear approximation of f at x=a is also known as the tangent line approximation to f at x=a

@@ -1,0 +1,291 @@
+# m00090
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Advanced Queries in Microsoft Access
+
+Advanced Queries in Microsoft Access
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Create a query with multiple criteria
+
+Create queries that use operators and expressions
+
+Design queries that select, aggregate, and run actions
+
+As your database continues to evolve, the incorporation of advanced queries aids in the management and manipulation of the exact data of interest. For example, at WorldCorp, you might need to collect all types of information on customers (e.g., email, phone, address, demographics, shopping history). This information often needs to be stored across multiple tables for both speed and efficiency. As an example, a new customer’s basic information will be stored in one table. We assume this information doesn’t change often—only when the customer moves to a different location or makes a major life change. In addition to contact and location, basic information could include demographic information, which may never change in our records.
+
+In a separate table, we would store a record of each time the customer makes a transaction. Transactions may happen often and are usually unique, as each one has a particular time/date, exact location of purchase, and possible coupons or rewards points added. Additionally, a customer’s purchase may be for a single item, several items, or perhaps 100 or more different items (think of a trip to the grocery store) on the same transaction.
+
+By using an advanced query, you can isolate both customer information and purchasing information at the same time from both tables. For example, suppose you want to know how many customers shop for a particular service or item at locations at least twenty miles from their homes. Determining this would require enforcing multiple criteria across multiple tables and using advanced features in query design to find the exact data requested. The design tools available in Access allow for this level of advanced database design and function.
+
+Queries with Multiple Criteria
+
+A query criterion is a kind of formula used in Access to filter the records based on values in fields of interest to determine whether to include the record in your query results. Criteria may take the form of a number, full or partial text, or any combination of data points within a table, such as “Red” or “=>5”. You can include criteria for each field, as shown in . Only items that match all the criteria you enter will appear in the query results.
+
+Types of Criteria
+
+Listed are the different types of criteria that can be used in an Access query:
+Simple criteria: This type of criteria involves specifying an exact value or expression to filter the results. For example, when building out the inventory database for our potential freestanding retail locations, you could use simple criteria to specify which exact type of inventory you want to isolate.
+Comparison operator: Comparison operators are used to compare two values or expressions. Examples include =, <>, <, >, <=, and >=. The < operator can be helpful to find out what inventory has less than a specified quantity on hand.
+Wildcard: Wildcards are used to represent unknown characters in a search string. The two most common wildcards in Access are the asterisk (*) and the question mark (?). For example, a wildcard can be used to find all customers whose last name starts with a particular letter. shows the most common wildcard symbols and a description of how they can be used when you have incomplete information or unknown characters.
+
+Wildcard Characters
+
+Symbol
+Description
+*
+Identifies zero or more characters. Often used as the first or last character in the character string.
+?
+Finds any single alphabetic character.
+[ ]
+Matches any character found within the brackets.
+!
+Identifies all characters not in the brackets.
+-
+Ties any one of a range of characters. Users must specify the range in ascending order (A to Z, not Z to A).
+#
+Finds any single numeric character.
+Range criteria: Range criteria are used to specify a range of values for a field. As an example, a vender that we buy from to resell in our new retail locations may want to know all of the orders we have sold of theirs within a specific date range that have been taken out of our inventory. Rather than waiting for our next order, our vender could receive critical information on how much we may be looking to order in the near future.
+Null criteria: Null criteria are used to find records that have a null value in a particular field. For example, you could use null criteria to find any inventory labels that do not include product descriptions.
+Logical operator: Logical operators are used to combine multiple criteria in a query. The two most common logical operators in Access are AND and OR. For example, you could use the AND operator to find all orders with a total greater than $100 and placed by a specific customer. summarizes common logical operators.
+
+Logical Operators
+
+Logical Operator
+Description
+AND
+Returns TRUE if both operands are true, and FALSE otherwise. It is represented by the symbol &.
+OR
+Returns FALSE if at least one of the operands is true, and FALSE otherwise. It is represented by the symbol |.
+EQV
+Returns TRUE if both operands are either true or false, and FALSE otherwise. It is represented by the symbol <=>.
+NOT
+Returns TRUE if both operands are false, and FALSE otherwise. It is represented by the symbol ~|.
+XOR
+Returns TRUE if exactly one of the operands is true, and FALSE otherwise. It is represented by the symbol ^.
+IMP
+Returns FALSE if the first operand is true and the second operand is false, and TRUE otherwise. It is represented by the symbol ->.
+[location] = Philadelphia -> [quantity] > 100
+By using these different types of criteria in an Access query, you can create powerful and flexible queries that can help you analyze and manipulate your data effectively.
+displays a few sample criteria, shown in the highlighted box, and explains how they work with operators.
+
+At WorldCorp, you may need to isolate orders that took place during a certain time frame. For example, how did our marketing campaign do in sales over a particular time period for our retail locations? How many orders did we do over the past week? How many did we do over the past month? You might need this information to help schedule orders for our retail locations. This example returns items with yesterday’s date (Date()–1). Thus, if the current date is 5/12/2024, you will see only items for the previous day, 5/11/2024.
+
+In addition to the Date() function, there is also a Now() function to consider in Access. Both Date() and Now() are used to retrieve the current date and time, but they have different purposes and applications. The Date() function returns only the current date, without any time component. It is useful for calculating dates and time intervals, such as the number of days between two dates, or for filtering data based on a specific date. On the other hand, the Now() function returns both the current date and time, including the hours, minutes, and seconds. It is useful for tracking events that occur at a specific date and time, such as recording the time that a delivery showed up in inventory at a retail location.
+
+Some reasons why you might choose to use the Now() function instead of the Date() function in Access can include the need to record time stamps. If you need to keep track of when events occur, such as the time of day when items are most likely to sell, the Now() function can be used to record the time stamp accurately. In addition, if you want to filter records based on a specific time range, such as all transactions that occurred within the last hour, then you will make use of the Now() function. In designing tables, note that it is important to use the correct format for each field used in the table you are pulling from in the query so that the unique expressions can be applied to that field.
+
+In the example shown in , the field labeled Order has a criterion of less than 50, so you will see only amounts that are less than $50 from what our customers spent at WorldCorp. The amount found in this field is calculated by multiplying two fields (price and qty) and grouping the results by sum for a total of all unique Order ID numbers. Greater-than (>), less-than (<), equal-to (=), greater-than-equal-to (=>), less-than-equal-to (=<), and other mathematical expressions can be used to query all fields that are formatted as numbers, including currency, integers, autonumbers, and calculated fields.
+
+In the example shown in , the Notes field in a query is based on a table that stores notes from sales orders that are formatted as long-text. A note can contain any amount of text, ranging from no words to a few words or even multiple paragraphs, depending on the order and the customer’s requirements. This criterion isolates all notes that contain the string Express, signifying the customer’s urgent need for the product. The key word “Express” can be extracted from all of the text logged in the Notes field, regardless of the order or length of the note.
+
+Depending on how you format the data, your next task is to select the appropriate expression to extract the data. Yes/No, OLE objects, hyperlinks, and attachments all have unique expressions to help optimize Access’s ability to match your desired outcome. Again, formatting the data within tables is key to developing successful criteria expressions.
+
+Building a Query with Criteria
+
+When you create or modify a query in Access, you will be identifying/creating fields of data to isolate. These fields will represent the data you want to include, omit data that is not of interest to you, sort the data, and even combine data from multiple tables, as shows.
+
+The example shown in of a query at WorldCorp combines two tables and isolates five fields from the related tables. The tables are related by the OrderID field. When a new order comes in, a unique OrderID is created in the TCustomerOrder table. Then, the order details are created in the TCustomerOrder table. The two tables are related by OrderID. This means that every order can have multiple sales items on the order. In short, every order is uniquely related to a customer. However, every order can have multiple sales items on the order. Those items are stored as a list in a separate table. Every customer, every order, and every list of order details need their own tables.
+
+This example’s five fields to review are: OrderID, Order Date, Notes, Price, and Qty. Because running this query would yield every order, it may not be useful unless you create criteria to isolate a particular question.
+
+Within Query Design tab, choose the column of the field to which you want to apply a criterion. Click in the box below the field name in the Criteria row for that field. Type in your first expression or right-click in the Criteria box and choose “Build” to utilize the Criteria Wizard. Repeat these steps for each field for which you want criteria that help answer the question at hand question. For instance, if you are concerned about offering free next-day shipping on all orders because of the rising costs of shipping, you might want to look at low-dollar purchases to see how often customers are asking for express shipping. One option is to review only those orders from yesterday (criterion #1), that were less than $50 (criterion #2), and also had the string “Express” in the notes (criterion #3) on the receipt. The following criteria would be typed out or built through the wizard for each field highlighted, in order, as shows.
+
+Have you ever wondered how books made into movies do in theaters? And if it is a series of books such as Harry Potter or The Hunger Games, which book/movie is more popular? Databases can be used to find out these answers. The power of a relational database lies in its ability to efficiently manage and organize large amounts of data in a structured and flexible way. To find answers—for a person, an organization, or society as a whole—data needs to be processed in a way that helps transform it into useful information. To learn more, watch this video discussing how to build a query with basic criteria using data points using the Harry Potter movies for reference.
+
+Using Operators and Expressions
+
+As you develop an inventory system for WorldCorp’s future retail locations, inventory becomes tied with POS (point of sale) systems. The actual sales amount for each inventory item has not been calculated yet. Taxes, discounts, and price corrections all have to be considered for a total. Expressions become an important element to know and understand.
+
+You might want to use expressions to create a formula to calculate a total order amount. The order amount is calculated by multiplying the price-per-item in stock to the quantity ordered of each item. As discussed in the previous example, or any number of other requests, if the number can be calculated, there may not be a need to store it in a table. In the previous example, the field “Order” has no associated table syntax is important to consider and be aware of when writing expressions in Access because it defines the rules and structure for how the expression is written. The set of rules by which the words and symbols in an expression are correctly combined is called syntax. Access uses a specific syntax to understand and interpret expressions, and any deviation from that syntax can result in errors or unexpected results. Proper syntax ensures that the expression is written in a way that Access can understand and process it correctly. It helps to avoid errors such as syntax errors, calculation errors, or incorrect results. Additionally, consistent use of syntax can make the expression more readable and understandable to other users or developers who may need to review or modify the expressions you create in the future.
+
+Overall, understanding and using proper syntax is crucial for writing accurate and efficient expressions in Access (see ). Many of the expressions that are used in tables and forms are also applicable to writing/building expressions as criteria in queries. An expression is a combination of operators, identifiers, functions, and constants that are used to perform a calculation or to produce a result. An expression can be used in a variety of contexts, such as in queries, forms, reports, or macros.
+
+To be a valid expression in Access, an expression must contain the following elements:
+
+Values: Every expression must contain constants that include one or more values, such as a number, string, or date. Values may be constants, which are entered directly into the expression. Values may also be retrieved from fields or controls in a table or form.
+
+Operators: Operators are required symbols or keywords used to perform mathematical and/or logical operations on values.
+
+Functions: Functions are predefined calculations or operations that can be used in an expression, but are not required. Access includes a wide range of built-in functions to perform such tasks as calculating totals, formatting values, and manipulating text.
+
+Parentheses: Parentheses are used to group parts of an expression and control the order in which calculations are performed. Following the rules of mathematics, expressions within parentheses are evaluated first.
+
+Identifiers: Identifiers are names used to refer to tables, fields, and other objects in an Access database. Identifiers must follow specific naming conventions, such as not containing spaces or special characters, and must be enclosed in square brackets to work within expressions.
+
+Commas: Commas are used to separate multiple arguments in a function or expression.
+
+In addition to containing these elements, keep in mind that correct syntax is established and maintained.
+
+Understanding Operators and Expressions
+
+The two most common logical operators used in building an expression for criteria in a query are AND and OR. These are assumed depending on where you place the expression in query design. Any expression placed in line with the Criteria line is defined as an AND operator. Our last example used all AND operators for the three expressions. See as an example.
+
+Placing all three criteria on the same line means that the query will display only those items that are from yesterday and are less than $50 and contain the string Express. If you want the query to look for any of the three criteria, that is yesterday, or less than $50, or containing the string Express each needs to be on a separate line. Date()-1 would be in the criteria row, <50 in the or row, and then place Like Express in the row below the or row. Rather than a dataset needing to match all three criteria or to match either of the two requirements, it can now match any of the criteria.
+
+Any expression placed below the Criteria line is then defined as an OR logical operator. If we change our last example by rearranging the placement of the expressions, it operates very differently, as shows.
+
+Placing the second and third expressions on the line below the first criterion means that the query will now yield those items that are from yesterday “or” are less than $50 “and” contain the string “Express.” Rather than a dataset needing to match all three criteria, it now needs to match either of the two requirements.
+
+Common Operators
+
+In both Excel and Access, the most common operators are arithmetic, comparison, and logical. Each has its own function and returns different results.
+
+An arithmetic operator is used to calculate a value from two or more numbers or to change the sign of a number from positive to negative or vice versa (). 
+ 
+ Arithmetic Operators
+
+ Operator
+ Description
+
+ -
+ Subtraction (2-1=1)
+
+ *
+ Multiplication (2*3=6)
+
+ /
+ Division (12/4=3)
+
+ \
+ Integer division (6\4=1)
+
+ +
+ Addition (15+4=19)
+
+ A mathematical operator could be used to combine data such as getting the total sales amount for two or more company purchases.
+
+Arithmetic Operators
+
+Operator
+-
+*
+/
+\
++
+Addition (15+4=19)
+A comparison operator is used to compare values and return a result that is true, false, or null (). 
+ 
+ Comparison Operators
+
+ Operator
+ Description
+
+ <
+ Less than
+
+ <=
+ Less than or equal to
+
+ <>
+ Not equal to
+
+ =
+ Equal to
+
+ >=
+ Greater than or equal to
+
+ >
+ Greater than
+
+ Between “Value1” And “Value2”
+ Between two values, inclusive (for example, “Between 1 And 3” would return 1, 2, 3)
+
+ To compare one customer’s sales to another, you can use comparison operators such as greater than or less than.
+
+Comparison Operators
+
+Operator
+<
+<=
+Less than or equal to
+<>
+=
+>=
+>
+Greater than
+Between “Value1” And “Value2”
+Between two values, inclusive (for example, “Between 1 And 3” would return 1, 2, 3)
+A logical operator is used to combine two Boolean values and return a true, false, or null result. There are three main logical operators that are commonly used in Access:
+ 
+ AND operator: This is used to combine two or more expressions and returns TRUE only if all the expressions are true. For example, the expression ‘sizes > 8 AND Color = 'Blue'’ will return TRUE only if the size of a shirt is greater than 8 and the color is blue.
+ OR operator: This is used to combine two or more expressions and returns TRUE if any one of the expressions is true. For example, the expression “Size > 8 OR Color = 'Red'” will return TRUE if either the size is greater than 8 or the color of the shirt in inventory is red.
+ NOT operator: This is used to reverse the logical value of an expression. It returns TRUE if the expression is false and FALSE if the expression is true. For example, the expression “NOT (size > 8)” will return TRUE if the size of the shirt is less than or equal to 8.
+
+AND operator: This is used to combine two or more expressions and returns TRUE only if all the expressions are true. For example, the expression ‘sizes > 8 AND Color = 'Blue'’ will return TRUE only if the size of a shirt is greater than 8 and the color is blue.
+
+OR operator: This is used to combine two or more expressions and returns TRUE if any one of the expressions is true. For example, the expression “Size > 8 OR Color = 'Red'” will return TRUE if either the size is greater than 8 or the color of the shirt in inventory is red.
+
+NOT operator: This is used to reverse the logical value of an expression. It returns TRUE if the expression is false and FALSE if the expression is true. For example, the expression “NOT (size > 8)” will return TRUE if the size of the shirt is less than or equal to 8.
+
+These logical operators can be used in combination with comparison operators such as =, <, >, <=, >=, and <> to create complex expressions that evaluate to true or false ().
+
+Logical Operators
+
+Operator
+AND
+NOT
+OR
+XOR
+Exactly one element of an expression must be true, not both.
+The next example, shown in , is a query designed to help create a report—in this case, you need to generate an invoice after a customer places a new order with WorldCorp. Invoices for customer sales include items such as the customer information, the date, the products ordered, price for each product, and total for the entire invoice. Refer to the chapter on Advanced Document Preparation for examples of invoices. For the report to work properly, two different criteria must be used with the logical operator AND. The first expression is [Forms]![frmOutBound2]![Document], which uses identifiers to isolate which document number the report will generate. In essence, this expression uses identifiers to query only the exact document number that is in use on the frmOutBound2 form, which is used to place all new orders from customers. By identifying the form number, the invoice will generate the exact order and only the called-upon order.
+
+The second criterion is a function expression that isolates the order date to today, and today only, ensuring that the query only creates new invoices that represent new orders from today (see ).
+
+This example shows a query designed to help show which items a T-shirt design company has in stock. Each stock item has four fields that collectively describe the piece of clothing: style, size, primary color, and graphic design on the item. In this example, a customer wants to know what graphic designs are available on a hoodie that is size XL and has a base color of green or red. These criteria combine both constants and logical operators to help isolate the data requested by the customer.
+
+Guidelines for Using Criteria
+
+There are best practices to follow when using criteria:
+
+Keep it simple. Do not try to do too much with any one query to get an answer. A query can do a great deal, one strategy is to copy previously designed queries and rename before making small changes to each copied query for a very specific purpose.
+
+To stay organized, be consistent in how your queries are named. When you first learn the syntax used in creating criteria, it is tempting to try to use all of the syntax in a single query. When creating a query, however, it is more important to keep the main purpose of the query in mind. If you have several questions, don’t be afraid to create multiple queries—a separate one for each question or task.
+
+Be sure to create tables carefully, using the correct format for each field within each table. Using good naming practices is important: A key reason that queries won’t run is likely to be the formatting of the fields rather than incorrect syntax.
+
+Develop a list of expressions that you know and can use for future projects. Often, these can be repeated in various queries for various uses.
+
+Designing Queries to Run Actions
+
+Now that you know how to build a query, let’s look at the different types of queries in Access. There are five types of queries, each with a unique function and use: (1) select queries, (2) action queries, (3) parameter queries, (4) crosstab queries, and (5) SQL (structured query language) queries.
+Select query is the most common type of query and the easiest to use. They retrieve data from one or more tables and display the result in a datasheet. Select queries are also used to group records and calculate averages, sums, counts, and other types of totals. As an example, a select query might be used to group customers by state to see which states have the highest demand.
+Action query specifies a particular action, such as creating a new table, deleting rows, updating records, or creating new records. Action queries are very popular in data management because they allow for many records to be changed at one time. For example, suppose you need to update your records to reflect a new state tax rate that affects numerous types of transactions. Creating an action query can help update records across various tables.
+
+There are four types of action queries:
+Append query: Adds records from one or more tables to the end of one or more tables.
+Update query: Makes global changes to a group of records in one or more tables. For example, you can use an update query to increase the prices on your menu by 25 percent for products within certain categories.
+Delete query: Deletes a group of records from one or more tables. For example, you can use a delete query to remove products that have been discontinued or for which there are no orders.
+Make-table query: Creates a new table and populates it with data from one or more existing tables. When you create a make-table query, you specify the fields and criteria that you want to include in the new table. Access then creates a new table and copies the selected data from the existing table(s) into the new table. The new table will have the same field names and data types as the original table(s). These queries can be useful in a variety of situations, such as creating an archive or backup of data. You can use a make-table query to create a backup copy of important data before making changes to it. In addition, simplifying complex data can be very helpful. As an example, if you have a table with many fields or complex relationships, you can use a make-table query to create a simplified version of the data that is easier to work with on a different project. Also, aggregating data can be accomplished. You can use the query to aggregate data from multiple tables into a single table, which can be useful for reporting or analysis purposes.
+Parameter query is a type of query that prompts the user for input values when it is run. The input values are used to filter the data that is returned by the query, based on the specified criteria. Parameter queries are useful when you want to create a query that can be easily customized to return different results based on specific criteria. For example, this query can be used in building a form that asks users which employee is logging into the Main Menu screen to start a transaction at WorldCorp; you type [Which User?] on the Criteria line. When the query runs, Access will prompt the WorldCorp employee for the answer to your question.
+Crosstab query calculates and restructures data for easier analysis when looking for trends or patterns. Much like the PivotTable option in Excel, Crosstab queries calculate a sum, average, count, or other type of total for data that is grouped according to two different types of information. For example, total sales for WorldCorp might be grouped in two ways: by salesperson, listed down the left side of the datasheet, and also by month and year, listed across the top of the datasheet, which now shows total sales for each salesperson by month and year.
+SQL query is created by using an SQL statement. When you create a query in Query Design View, Access builds the equivalent SQL statements for you behind the scenes. You can view or edit the SQL statement in SQL View. Upon viewing any of the created statements by Access, you can edit or add to the statement. This creates additional options for you that are often more efficient than using the Query Design View options.
+
+Building a Query that Aggregates
+Aggregate query lets you carry out calculations on record groups rather than performing individual operations. An aggregate query considers the total, subset, or gross amount of records.
+
+Aggregation is a powerful tool because of the nature of relational data. By looking across the connected tables and through the built-in relationships, these can be accounted for when performing complex data searches and totals among a vast area of applications.
+
+Often, the first step in building an aggregate query is to turn on the Totals tool that is found within the Query Design tab, as seen in .
+
+After you select Total from the menu, a new row, labeled Total, appears just below the field names, with an option area in the Access query, as seen in .
+
+The default option is Group By, which groups all identical data items in the field. For example, if you wanted to know which stock item in your company’s inventory sold the most units, you could use the StockID in two ways:
+
+Create a field for StockID in the query, and list the Totals as Group By. This will provide a list of each type of item you have sold.
+
+Create another field, also with the StockID, but this time, choose the Sum function of the Total to provide a complete sales count for each unique item. Both fields together provide a report on which items have sold the most and the least.
+
+Examples of Aggregate Queries
+
+Scenario #1: You have an online business that has customers from around the country, and you want to find out which states have the fewest customers. You decide to create an aggregate query to summarize the list of states and count the number of instances in which each state appears among your current customers. Selecting the Totals option creates the following query from the customer table, as shows: Group By StateName and Count StateName.
+
+Scenario #2: You receive two free tickets to the Super Bowl. Unfortunately, you cannot attend this year’s game, so you want to give
+[truncated]

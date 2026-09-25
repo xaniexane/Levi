@@ -1,0 +1,53 @@
+# m00106
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Raising exceptions
+
+Raising exceptions
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Use a raise statement to indicate that user input is invalid.
+
+Explain the flow of execution when an exception is raised.
+
+The raise statement
+
+A program can raise an exception when an error is detected. Raising an exception forces a program to deal with the error. If the exception is not handled using try and except, the program displays an error message and terminates.
+
+Invalid pizza size
+
+The following class represents a pizza for sale. The SIZES dictionary maps an abbreviation to a size's name and price. Line 11 checks if the size received by the constructor is in the dictionary. Line 12 raises a ValueError with specific error message.
+
+Raising an exception in a constructor prevents an invalid object from being constructed. In the example, p1 is constructed but p2 is not constructed.
+
+Predicting output with raise
+
+For each code snippet, what is the output?
+
+Language objects
+
+The file top27.csv is based on Wikipedia's list of languages by number of native speakers. A linguist would like to work with this data in an object-oriented way and has already defined a Language class. However, the code is not working correctly because of errors in the CSV file. (The CSV program cannot be changed because the program's purpose is to detect these kinds of errors.)
+
+Your task is to modify the constructor to raise a ValueError in the following situations:
+
+If the line does not have exactly four values (separated by commas).
+
+If the number of speakers is not a positive floating point number.
+
+Note: The provided top27.csv includes mistakes for English, Korean, and French. Your program should raise a ValueError only for these languages. No other errors (including IndexError) should be raised.
+
+Looking up keys
+
+When looking up a value in a dictionary, a key has to match exactly. Ex: Given fruit = {"apple": 1, "banana": 2}, the expression fruit["Apple"] raises a KeyError because "Apple" is not the same as "apple". Likewise, fruit["NANA"] raises a KeyError because "nana" does not exactly match "banana".
+
+Implement the lookup() function. This function tries to find a key in the dictionary that matches the search term. A key matches if the search term is a substring of the key, ignoring case. Ex: The key "banana" matches the search term "NANA".
+
+If no matching keys are found, lookup() should raise a KeyError with the message "search term not found". If multiple matches are found, lookup() should raise a KeyError with the message "multiple keys found". Otherwise, lookup() should return both the key and the value for the matching item in the dictionary.
+
+Given the books.csv file, the output should be:

@@ -1,0 +1,388 @@
+# m00049
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Scientific Notation
+
+Scientific Notation
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Write numbers in standard or scientific notation.
+
+Convert numbers between standard and scientific notation.
+
+Add and subtract numbers in scientific notation.
+
+Multiply and divide numbers in scientific notation.
+
+Use scientific notation in computing real-world applications.
+
+The amount of information available on the Internet is simply incomprehensible. One estimate for the amount of data that will be on the Internet by 2025 is 175 Zettabytes. A single zettabyte is one billion trillion. Written out, it is 1,000,000,000,000,000,000,000. One estimate is that we’re producing 2.5 quintillion bytes of data per day. A quintillion is a trillion trillion, or, written out, 1,000,000,000,000,000,000. To determine how many days it takes to increase the amount of information that is on the Internet by 1 zettabyte, divide these two numbers, a zettabyte being 1,000,000,000,000,000,000,000, and 2.5 quintillion, being 2,500,000,000,000,000,000, shows it takes 400 days to generate 1 zettabyte of information. But doing that calculation is awkward with a calculator. Keeping track of the zeros can be tedious, and a mistake can easily be made.
+
+On the other end of the scale, a human red blood cell has a diameter of 7.8 micrometers. One micrometer is one millionth of a meter. Written out, 7.8 micrometers is 0.0000078 meters. Smaller still is the diameter of a virus, which is about 100 nanometers in diameter, where a nanometer is a billionth of a meter. Written out, 100 nanometers is 0.0000001 meters. To compare that to engineered items, a single transistor in a computer chip can be 14 nanometers in size (0.000000014 meters). Smaller yet is the diameter of an atom, at between 0.1 and 0.5 nanometers.
+
+Sometimes we have numbers that are incredibly big, and so have an incredibly large number of digits, or sometimes numbers are incredibly small, where they have a large number of digits after the decimal. But using those representations of the names of the sizes makes comparing and computing with these numbers problematic. That’s where scientific notation comes in.
+
+Writing Numbers in Standard or Scientific Notation Form
+
+When we say that a number is in scientific notation, we are specifying the form in which that number is written. That form begins with an integer with an absolute value between 1 and 9, then perhaps followed the decimal point and then some more digits. This is then multiplied by 10 raised to some power. When the number only has one non-zero digit, the scientific notation form is the digit multiplied by 10 raised to an exponent. When the number has more than one non-zero digit, the scientific notation form is a single digit, followed by a decimal, which is then followed by the remaining digits, which is then multiplied by 10 to a power.
+
+The following numbers are written in scientific notation:
+1.45×103
+−8.345×10−4
+3×102
+3.14159×100
+
+The following numbers are not written in scientific notation:
+1.45 because it isn't multiplied by 10 raised to a power
+−50.053×107 because the absolute value of −50.053 is not at least 1 and less than 10
+41.7×109 because 41.7 is not at least 1 and less than 10
+0.036×10−3 because 0.036 is not at least one and less than 10
+
+Identifying Numbers in Scientific Notation
+
+Which of the following numbers are in scientific notation? If the number is not in scientific notation, explain why it is not.
+−9.67×1020
+145×10−8
+1.45
+
+The number −9.67×1020
+ is in scientific notation because the absolute value of −9.67 is at least 1 and less than 10.
+
+The number 145×10−8 is not in scientific notation because 145 is not at least 1 and less than 10.
+
+The number 1.45 is not in scientific notation form. Even though it is at least 1 but less than 10, it is not multiplied by 10 raised to a power.
+
+Some numbers are so large or so small that it is impractical to write them out fully. Avogadro’s number is important in chemistry. It represents the number of units in 1 mole of any substance. The substance many be electrons, atoms, molecules, or something else. Written out, the number is: 602,214,076,000,000,000,000,000. Another example of a number that is impractical to write out fully is the length of a light wave. The wavelength of the color blue is about 0.000000450 to 0.000000495 meters. Such numbers are awkward to work with, and so scientific notation is often used. We need to discuss how to convert numbers into scientific notation, and also out of scientific notation.
+
+Recall that multiplying a number by 10 adds a 0 to the end of the number or moves the decimal one place to the right, as in 43×10=430 or 3.89×10=38.9. And if you multiply by 100, it adds two zeros to the end of the number or moves the decimal two places to the right, and so on. For example, 38×100,000=3,800,000 and 32.998×10,000=329,980. Multiplying a number by 1 followed by some number of zeros just adds that many zeros to the end of the number or moves the decimal place that many places to the right. Numbers written as 1 followed by some zeros are just powers of 10, as in 101=10, 102=100, 103=1,000, etc. Generally, 10n=10...0︸n.
+
+We can use this to write very large numbers. For instance, Avogadro’s number is 602,214,076,000,000,000,000,000, which can be written as 6.02214076×1023. The multiplication moves the decimal 23 places to the right.
+
+Similarly, when we divide by 10, we move the decimal one place to the left, as in 46.710=4.67. If we divide by 100, we move the decimal two places to the left, as in 3.456100=0.03456. In general, when you divide a number by a 1 followed by n zeros, you move the decimal n places to the left, as in 8,244.9021,000,000=0.008244902. This denominator could be written as 106. If we use that in the expression and allow for negative exponents, rewrite the number as 8,244.9021,000,000=8,244.902106=8,244.902×10−6. With this, we can write division by a 1 followed by n zeros as multiplication by 10 raised to ‒n.
+
+Using that information, we can demonstrate how to convert from a number in standard form into scientific notation form.
+Case 1: The number is a single-digit integer.
+
+In this case, the scientific notation form of the number is digit×101.
+Case 2: The absolute value of the number is less than 1.
+
+Follow the process below.
+Step 1: Count the number of zeros between the decimal and the first non-zero digit. Label this n.
+Step 2: Starting with the first non-zero digit of the number, write the digits. If the number was negative, include the negative sign.
+Step 3: If there is more than one digit, place the decimal after the first digit from Step 2.
+Step 4: Multiply the number from Step 3 by 10n+1.
+Case 3: The absolute value of the number is 10 or larger.
+
+Follow the process below.
+Step 1: Count the number of digits that are to the left of the decimal point. Label this n.
+Step 2: Write the digits of the number without the decimal place, if one was present. If the number was negative, include the negative sign.
+Step 3: If there is more than one digit, place the decimal point after the first digit.
+Step 4: Multiply the number from Step 3 by 10n−1.
+
+Writing a Number in Scientific Notation
+
+Write the following numbers in scientific notation form:
+
+428.9
+
+−0.00000981
+
+8
+
+Since the absolute value of 428.9 is 10 or larger, so we use the process from Case 3, above.
+ Step 1: There are three digits to the left of the decimal point, so n=3.
+ Step 2: Write the digits of the number without the decimal place, which is 4289.
+ Step 3: Since there is more than one digit, place the decimal point after the first digit. We now have 4.289.
+ Step 4: Since n=3, we multiply 4.289 by 10 raised to the second power, 4.289×102.
+ The scientific notation form of 428.9 is 4.289×102.
+Step 1: There are three digits to the left of the decimal point, so n=3.
+Step 2: Write the digits of the number without the decimal place, which is 4289.
+Step 3: Since there is more than one digit, place the decimal point after the first digit. We now have 4.289.
+Step 4: Since n=3, we multiply 4.289 by 10 raised to the second power, 4.289×102.
+
+The scientific notation form of 428.9 is 4.289×102.
+
+Since the absolute value of −0.00000981 is less than 1, we use the process from Case 2.
+ Step 1: The number of zeros between the decimal and the first non-zero digit is 5, so n=5.
+ Step 2: We write the non-zero digits, including the negative sign, yielding −981.
+ Step 3: The decimal gets placed to the right of the first digit, resulting in −9.81.
+ Step 4: Since n=5, we multiply −9.81 by 10 raised to the fourth power, −9.81×10−6.
+ The scientific notation form of −0.00000981 is 9.81×10−6.
+Step 1: The number of zeros between the decimal and the first non-zero digit is 5, so n=5.
+Step 2: We write the non-zero digits, including the negative sign, yielding −981.
+Step 3: The decimal gets placed to the right of the first digit, resulting in −9.81.
+Step 4: Since n=5, we multiply −9.81 by 10 raised to the fourth power, −9.81×10−6.
+
+The scientific notation form of −0.00000981 is 9.81×10−6.
+
+Since 8 is a single-digit integer, apply Case 1. The scientific notation form of 8 is 8×101.
+
+When we write numbers in scientific notation form, we can manipulate the representation of the number by moving the decimal around, and making an appropriate change to the exponent of the 10. For instance, let’s look at 145.8141×108. If we wanted to move the decimal one place to the left, we’d have to increase the power of 10, as shown here: 145.8141×108=14.58141×109. Since we moved the decimal one to the left, we balance that with moving the exponent up by one. Similarly, if we move the decimal one place to the right, we have to balance that by moving the exponent one to the left, or subtracting one from the exponent, as shown here: 145.8141×108=1458.141×107. Generally, for a number in the form number×10n:
+
+If you move the decimal to the left by k digits, you increase the exponent by k.
+
+If you move the decimal to the right by k digits, you decrease the exponent by k digits.
+
+Increasing the Exponent
+
+Change 456.142×105 by moving the decimal two places to the left.
+
+Since we are moving the decimal to the left by two places, we increase the exponent of 10 by 2, so that the exponent is now 7. This gives us 456.142×105=4.56142 ×107.
+
+Decreasing the Exponent
+
+Change 12.3×102 by moving the decimal five places to the right.
+
+Since we are moving the decimal to the right by five places, we decrease the exponent of 10 by 5, so that exponent is now −3. This give us 12.3×102=1230000.0×10−3.
+
+Converting Numbers from Scientific Notation to Standard Form
+
+In the previous section, converting a number from standard form to scientific notation was explored. Now, we explore converting from scientific notation back into standard form. Doing so involves moving the decimal according to the power of the 10. The decimal is moved a number of steps equal to the exponent of the 10. As demonstrated previously, when the exponent of the 10 is negative, the decimal is moved to the left and when the exponent of the 10 is positive, the decimal is moved to the right.
+
+Converting from Scientific Notation to Standard Form
+
+Convert the following into standard form:
+2.78×109
+9.04×10−8
+
+Since the exponent is positive, the decimal moves nine places to the right, so 2.78×109 is 2,780,000,000.
+
+Since the exponent is negative, the decimal moves eight places to the left, so 9.04×10−8 is 0.0000000904.
+
+Converting from Standard Form to Scientific Notation Form
+Converting from Scientific Notation Form to Standard Form
+
+Scientific Notation on a Calculator
+
+Most scientific and graphing calculators come with the ability to directly convert from standard form to scientific notation. On the TI-83, it is accessed through the MODE menus. For a commonly used, free phone scientific calculator, the calculator can be forced to work in scientific notation mode through its settings.
+
+Some calculators, such as the Desmos online calculator, display scientific notation as a number times 10 to a power as you’ve seen in this section. However, some calculators indicate scientific notation by replacing the ×10n with an E (or EE) followed by the exponent. For example, shows what you may see on a TI-84.
+
+Adding and Subtracting Numbers in Scientific Notation
+
+To add or subtract numbers in scientific notation, the numbers first need to have the same exponent for the 10s. It is possible to add the following since the powers of 10 match:
+ 4.5×104+3.15×104=7.65×104
+
+Notice that the number parts were added, but the exponent part remained the same. This is due to the distributive property of the real numbers. The 104 is factored from the two terms, as shown:
+ 4.5×104+3.15×104=(4.5+3.15)×104=7.65×104
+
+Numbers in scientific notation can be added or subtracted directly using a calculator. Simply enter the values in scientific form and set your calculator to display scientific notation.
+
+Adding and Subtracting Numbers in Scientific Notation with the Same Powers of 10
+
+Calculate the following:
+3.8×10−3+1.006×10−3
+9.61×108−3.85×108
+
+Since the powers of 10 match, we use the distributive property of real numbers to factor 10−3 from the numbers. We then add the number parts separately to get 4.806.
+ 3.8×10−3+1.006×10−3=(3.8+1.006)×10−3=4.806×10−3
+
+Since the powers of 10 match, we use the distributive property of real numbers to factor 108 from the numbers. We then subtract the number parts separately to get 5.76. 
+ 9.61×108−3.85×108=(9.61−3.85)×108=5.76×108
+
+Adding and subtracting in scientific notation is straightforward when the exponents are the same. There are two issues that can arise. The first issue is what to do if after adding or subtracting the result is not in scientific notation.
+
+Correcting an Answer to Scientific Notation After Adding or Subtracting
+
+Calculate the following:
+7.03×1013+8.5×1013
+4.3×1021−4.613×1021
+Since the powers of 10 match, we add the number parts and multiply that by 1013: 7.03×1013+8.5×1013=(7.03+8.5)×1013=15.53×1013.
+ However, 15.53×1013 is not in scientific notation because the absolute value of 15.53 is more than 10. To put this number in scientific notation, the decimal needs to move one to the left. To balance that move, the power of 10 must be increased by 1. So, the answer in scientific notation is 1.553×1014.
+
+Since the powers of 10 match, we add the number parts and multiply that by 1013: 7.03×1013+8.5×1013=(7.03+8.5)×1013=15.53×1013.
+
+However, 15.53×1013 is not in scientific notation because the absolute value of 15.53 is more than 10. To put this number in scientific notation, the decimal needs to move one to the left. To balance that move, the power of 10 must be increased by 1. So, the answer in scientific notation is 1.553×1014.
+Since the powers of 10 match, we add the number parts: 4.3×1021−4.613×1021=(4.3−4.613)×1021=−0.313×1021
+ However, −0.313×1021 is not in scientific notation because it is less than 1. To put it in scientific notation, the decimal needs to move one to the right. To balance that move, the power of 10 must be decreased by 1. So, the answer in scientific notation is −3.13×1020.
+
+Since the powers of 10 match, we add the number parts: 4.3×1021−4.613×1021=(4.3−4.613)×1021=−0.313×1021
+
+However, −0.313×1021 is not in scientific notation because it is less than 1. To put it in scientific notation, the decimal needs to move one to the right. To balance that move, the power of 10 must be decreased by 1. So, the answer in scientific notation is −3.13×1020.
+
+The second issue that might be encountered when adding or subtracting is that the powers of 10 do not match. In that case, one of the numbers must be changed so that the powers of 10 match. It is easiest to make the smaller power of 10 larger to match the other power of 10.
+
+For example, to perform the following, 4.5×105+3.9×103, we’d change the 3.9×103 so that the power of 10 is 5. To do so, we need to increase the power of 10 and move the decimal in the number part two places to the left. That would alter 3.9×103 into 0.039×105. We would use 0.039×105 in the addition problem, so that the exponents match, allowing the addition to occur.
+ 4.5×105+3.9×103=4.5×105+0.039×105=(4.5+0.039)×105=4.539×105
+
+The steps to take when the exponents of the 10s are not equal are:
+Step 1: Increase the smaller exponent to equal the larger exponent. Label the amount increased as n.
+Step 2: For the number with the smaller power of 10, move the decimal point of the number part to the left n places.
+Step 3: Perform the addition or subtraction.
+Step 4: If the result is not in scientific notation, adjust the number to be in scientific notation.
+
+Adding Numbers in Scientific Notation with Different Powers of 10
+
+Calculate the following:
+6.1×104+4.8×105
+Step 1: The lower exponent is 4. To make this equal to the larger exponent, we increased it by 1.
+Step 2: Since the smaller exponent was increased by 1, move the decimal one to the left, so the addition become 6.1×104+4.8×105=0.61×105+4.8×105.
+Step 3: Now add the numbers, 0.61×105+4.8×105=5.41×105
+Step 4: The result is in scientific notation, so no additional adjustment is necessary.
+6.1×104+4.8×105=5.41×105
+
+Subtracting Numbers in Scientific Notation with Different Powers of 10
+
+Calculate the following:
+ 7.9×10−15−6.8×10−13
+Step 1: The lower exponent is −15 and the larger is −13. To make −15 equal to the larger exponent, we increased it by 2.
+Step 2: Since the smaller exponent increased by 2, move the decimal two to the left. The subtraction changes to 7.9×10−15−6.8×10−13=0.079×10−13−6.8×10−13.
+Step 3: Subtract the numbers, 0.079×10−13−6.8×10−13=−6.721×10−13.
+Step 4: The result is in scientific notation, so no additional adjustment is necessary. 7.9×10−15−6.8×10−13=−6.721×10−13
+
+Multiplying and Dividing Numbers in Scientific Notation
+
+Multiplying and dividing numbers in scientific notation is somewhat easier than adding or subtracting, because the exponents of the 10s do not have to match. However, it is much more likely that the result will not be in scientific notation, and so that will have to be adjusted at the end. Generally, we multiply or divide the number parts of the two values, and then apply exponent rules to the 10 raised to the powers.
+
+To multiply two numbers in scientific notation:
+Step 1: Multiply the number parts.
+Step 2: Add the exponents of the 10s.
+Step 3: The result is the answer from Step 1 times 10 raised to the answer from Step 2.
+Step 4: If the number is not in scientific notation, adjust it appropriately.
+
+Multiplying Numbers in Scientific Notation
+
+Calculate the following:
+(4.3×103)×(1.8×107)
+(4.3×103)×(1.8×107)
+(5×10−13)×(7.3×106)
+(5×10−13)×(7.3×106)
+Step 1: Multiply the number parts to get 4.3×1.8=7.74.
+ Step 2: Add the exponents of the 10s to get 3+7=10.
+ Step 3: The result is then 7.74×1010.
+ Step 4: This number is already in scientific notation, so no additional adjustment is necessary, (4.3×103)×(1.8×107)=7.74×1010.
+Step 1: Multiply the number parts to get 4.3×1.8=7.74.
+Step 2: Add the exponents of the 10s to get 3+7=10.
+Step 3: The result is then 7.74×1010.
+Step 4: This number is already in scientific notation, so no additional adjustment is necessary, (4.3×103)×(1.8×107)=7.74×1010.
+Step 1: Multiply the number parts to get 5×7.3=36.5.
+ Step 2: Add the exponents of the 10s to get −13+6=−7.
+ Step 3: The result then is 36.5×10−7.
+ Step 4:Since the number is not in scientific notation, it must be adjusted. To put 36.5×10−7 into scientific notation, the decimal moves one to the left, so the exponent would be increased by 1, giving 3.65×10−6.
+ (5×10−13)×(7.3×106)=3.65×10−6
+Step 1: Multiply the number parts to get 5×7.3=36.5.
+Step 2: Add the exponents of the 10s to get −13+6=−7.
+Step 3: The result then is 36.5×10−7.
+Step 4:Since the number is not in scientific notation, it must be adjusted. To put 36.5×10−7 into scientific notation, the decimal moves one to the left, so the exponent would be increased by 1, giving 3.65×10−6.
+(5×10−13)×(7.3×106)=3.65×10−6
+
+Multiplying Numbers in Scientific Notation
+
+Dividing Numbers in Scientific Notation
+
+To divide two numbers that are in scientific notation:
+Step 1: Divide the number parts.
+Step 2: Subtract the exponent of the denominator from the exponent of the numerator.
+Step 3: The answer is the result from Step 1 times 10 raised to the result from Step 2.
+Step 4: If the number is not in scientific notation, adjust it appropriately.
+
+Dividing Numbers in Scientific Notation
+
+Calculate the following:
+(8.4×1031)/(2.1×107)
+(4.14×10−13)/(8.28×109)
+(8.4×1031)/(2.1×107)
+ Step 1: Divide the number parts to get 8.4÷2.1=4.
+ Step 2: Subtract the exponent of the denominator from the exponent of the numerator to get 37−7=24.
+ Step 3: The result is then 4×1024.
+ Step 4: This number is already in scientific notation, so no adjustment is necessary. (8.4×1031)/(2.1×107)=4×1024
+(8.4×1031)/(2.1×107)
+Step 1: Divide the number parts to get 8.4÷2.1=4.
+Step 2: Subtract the exponent of the denominator from the exponent of the numerator to get 37−7=24.
+Step 3: The result is then 4×1024.
+Step 4: This number is already in scientific notation, so no adjustment is necessary. (8.4×1031)/(2.1×107)=4×1024
+(4.14×10−13)/(8.28×109)
+ Step 1: Divide the number parts to get 4.14÷8.28=0.5.
+ Step 2: Subtract the exponent of the denominator from the exponent of the numerator to get −13−9=−22.
+ Step 3: The result then is 0.5×10−22.
+ Step 4: Since this number is not in scientific notation, it must be adjusted. To put 0.5×10−22 into scientific notation, the decimal needs to move one to the right, so the exponent is decreased by 1, giving 5×10−23.
+ (4.14×10−13)/(8.28×109)=5×10−23
+(4.14×10−13)/(8.28×109)
+Step 1: Divide the number parts to get 4.14÷8.28=0.5.
+Step 2: Subtract the exponent of the denominator from the exponent of the numerator to get −13−9=−22.
+Step 3: The result then is 0.5×10−22.
+Step 4: Since this number is not in scientific notation, it must be adjusted. To put 0.5×10−22 into scientific notation, the decimal needs to move one to the right, so the exponent is decreased by 1, giving 5×10−23.
+ (4.14×10−13)/(8.28×109)=5×10−23
+
+Dividing Numbers in Scientific Notation
+
+Using Scientific Notation in Computing Real-World Applications
+
+As noted at the start of this section, scientific notation is useful when the standard representation of a number is awkward or impractical, which occurs when the numbers being used are extremely large or extremely small. For example, Venus is 67,667,000 miles from the sun. In scientific notation, this is 6.7667×107. Planetary and galaxy distances is one set of numbers that is easier to express using scientific notation.
+
+Calculating Distances
+
+How much farther from the sun is Earth compared to Venus if Venus is 6.7667×107 miles from the sun and Earth is 9.1692×107 miles from the sun?
+
+To determine how much farther Earth is compared to Venus, we’d subtract the distances. 
+ 9.1692×107−6.7667×107=2.4025×107.
+
+So, Earth is 2.4025×107 miles farther from the sun than Venus.
+
+Calculating Probability
+
+The probability of winning the Mega Millions lottery is published as 3.304693×10−9. The probability of being hit by lightning is approximated to be 2×10−6. How many times more likely are you to be hit by lightning than win the Mega Millions?
+
+To find out how many times more likely you are to be hit by lightning, divide the probability of being hit by lightning by the probability of winning the Mega Millions.
+ (2×10−6)/(3.304693×10−9)=6.609386×103
+Step 1: Divide the number parts to get = 0.6052 (rounded to the fourth digit).
+Step 2: Subtract the exponent of the denominator from the exponent of the numerator to get −6−(−9)=3.
+Step 3: The result then is 0.6052×103.
+Step 4: Since this number is not in scientific notation, it must be adjusted. To put 0.6052×103 into scientific notation, the decimal needs to move one place to the right, so the exponent is decreased by 1, giving 6.052×102.
+
+You are 6.052×102, or 605.2, times more likely to be hit by lightning than you are to win the Mega Millions.
+
+Calculating Time and Length
+
+Sometimes it is entertaining to determine the time it takes for something to happen. Fingernails grow about 8.032×10−11 km per minute. How many kilometers long would fingernails be after 6×104 minutes?
+
+To find the length of the fingernails after the specified time, we multiply their rate of growth and the time they’ve grown.
+ (8.032×10−11)×(6×104)=48.192×10−7=4.8192×10−6
+
+So, after 6×104 minutes, the fingernails would be 4.8192×10−6 km long. To put this in perspective, 1×10−6 km is a millimeter, and 6×104 minutes is about 4.16 days. So, after about 4.16 days, fingernails have grown about 4.8 millimeters.
+
+Calculating Data Generated
+
+As mentioned in the opening to this section, it is estimated that we’re producing 2.5 quintillion bytes of data per day. A good estimate is that there are 7.674 billion people on the planet. Convert both of those numbers to scientific notation, and then determine how much data is being generated per person each day.
+
+Written in standard form, 2.5 quintillion is 2,500,000,000,000,000,000. Changing that to scientific notation, move the decimal 18 places, so 2.5 quintillion bytes = 2.5×1018 bytes. Writing 7.647 billion in scientific notation would be 7.647×109 because a billion is 1,000,000,000 = 109. So, to find out how much data is being produced daily per person, we would divide these two numbers.
+ 2.5×10187.647×109=0.327×109=3.27×108
+
+In standard form, that’s 327,000,000 bytes per person, so 327 million bytes of data daily are being produced per person.
+
+Application of Scientific Notation
+
+What Numbers Could Be Considered “Too Big” or “Too Small”?
+
+One wonders when the numbers we represent become too large or small for consideration. Perhaps the following examples put limits on what is meaningful. The number of particles in the known universe has been estimated at 4×1080 particles. The smallest distance that has been measured is 1×10−18m, though the theoretical smallest measurable value is 1×10−35m. The distance across the universe is 4.4×1026m. Considering what those numbers represent, the extreme largest and extreme smallest, they might be numbers that constrain what we should reasonably be expected to deal with.
+
+Check Your Understanding
+
+Key Terms
+
+scientific notation
+
+standard notation
+
+Key Concepts
+
+Some numbers are so large or so small that writing the number out is clumsy and make it difficult to determine the true size of the number. Scientific notation makes the number more readable and make the relative size of the number immediately apparent.
+
+A number written in scientific notation is a number at least 1 and smaller than 10 multiplied by 10 raised to an exponent. Converting between scientific notation and standard notation involves correctly applying multiplication and division by powers of 10, which in practice equates to understanding how moving the decimal point of a number impacts the exponent of 10.
+
+Adding and subtracting numbers in base 10 requires the exponent of 10 in each number be the same. Once the numbers are converted to have the same exponent with the ten, then the numbers are added or subtracted as indicated, with the power of 10 remaining the same. If the result is not in scientific notation (for instance, the number has exceeded 10), then then number must be converted into scientific notation.
+
+Multiplying and dividing numbers in scientific notation is done by multiplying or dividing the number parts, then multiplying or dividing the 10 raised to the power parts, then multiplying those two results. If the new number is not in scientific notation, then the result must be converted into scientific notation.
+
+Videos
+Converting from Standard Form to Scientific Notation Form
+Converting from Scientific Notation Form to Standard Form
+Multiplying Numbers in Scientific Notation
+Dividing Numbers in Scientific Notation
+Application of Scientific Notation

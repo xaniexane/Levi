@@ -1,0 +1,221 @@
+# CS 287: Advanced Robotics
+# UC Berkeley
+# source: http://www.cs.berkeley.edu/~pabbeel/cs287-fa13/
+
+CS287 Fall 2013
+University of California at Berkeley
+Dept of Electrical Engineering & Computer Sciences
+CS 287: Advanced Robotics, Fall 2013
+Fall 2012 offering (reasonably similar to current year's offering)
+Fall 2011 offering (reasonably similar to current year's offering)
+Fall 2009 offering (not particularly closely matched to current year's offering)
+Instructors:
+Professor: Pieter Abbeel
+TA: John Schulman
+Lectures: Tuesdays and Thursdays, 3:30pm-5:00pm, 310 Soda Hall
+Office Hours:
+Pieter: Mondays 2:00-3:00pm (and by email arrangement) in 746 Sutardja Dai Hall
+John: Fridays 1:30-2:30pm in 730 Sutardja Dai Hall
+Bonus office hours: Wednesdays 9/11, 9/25, 10/16, 11/6 2-3pm 746 Sutardja Dai Hall (problem set due days)
+Communication: Piazza is intended for general questions about the course, clarifications about assignments, student questions to each other, discussions about material, and so on. To sign up, go to the Piazza website and sign up with "UC Berkeley" and "CS287" for your school and class.
+Announcements
+Assignments
+Prerequisites
+Class goals
+Grading
+Assignment policy
+Syllabus and materials
+Related materials
+CS 287 Fall 2011 Roster of Students -->
+Announcements
+Please sign up on Piazza for CS287 Advanced Robotics for all future announcements.
+Welcome to the Fall 2013 edition of CS287!
+Assignments
+Due: Wed 9/11, Problem Set 1: Markov Decision Processes, Value Iteration, Linear Programming ps1.pdf , starter code v3
+Due: Wed 9/25, Problem set 2: Function Approximation and LQR ps2.pdf , starter code v2
+Due: Wed 10/16, Problem Set 3: Convex Optimization, Sequential Convex Programming, Optimization-based Motion Planning and Control ps3.pdf , starter code
+Due: Wed 11/6, Problem Set 4: Multivariate Gaussians, Kalman Filtering, Maximum Likelihood, EM ps4.pdf , starter code v2
+Optional (Extra Credit, 10pt): Due Wed 12/18: Learning from Demonstrations through Trajectory Generalization with Thin-Plate Splines EC-LfD-TPS.pdf , starter code
+Optional (Extra Credit, 40pt): Due Wed 12/18: Extended Kalman Filtering and Gaussian Belief Space Planning through Sequential Convex Programming EC-EKF-GBSP.pdf , starter code v2
+Assignment policy
+Collaboration: Students may discuss assignments. However, each
+student must code up their solutions independently and write down
+their answers independently.
+Late assignments: Recognizing that students may face unusual
+circumstances and require some flexibility in the course of the
+semester, each student will have a total of seven free late (calendar)
+days to use as s/he sees fit. Late days are counted at the granularity
+of days: e.g., 3 hours late is one late day.
+If an assignment is submitted beyond the late-day budget, you will lose 20 (out of 100) points per day over budget (but you cannot go below zero).
+Final Project
+The final project could be either of the following, where in each case the topic should be closely related to the course:
+An algorithmic or theoretical contribution that extends the current state of the art.
+An implementation of a state-of-the-art algorithm using real-world data and/or robots.
+Ideally, the project covers interesting new ground and might be the basis for a future conference paper submission or product. You are encouraged to come up with your own project ideas, yet make sure to pass them by me before you submit your abstract.
+Logistics and Timeline
+1 or 2 students per project.
+Nov 1st: Approved by instructor abstracts due: 1 page description of project + goals for milestone. Make sure to meet with me before then!
+Nov 15th: 3 page milestone due. You are not graded on the milestone. Think of it as a sanity check for yourself that you indeed have started to make progress on the project and an opportunity to get feedback on your progress thus far, as well as on any revisions you might have made to your project goals.
+December 10th: In-class project presentations.
+December 15th: Final paper due. This should be a 6 page paper, structured like a conference paper. I.e., focus on the problem setting, why it matters and what's interesting/novel about it, your approach, your results, analysis of results, limitations, future directions. Cite and briefly survey prior work as appropriate but don't re-write prior work when not directly relevant to understand your approach.
+Late days cannot be used for the final project.
+All assignments and data provided in assignments is licensed under a Creative Commons Attribution 3.0 Unported License .
+Attribution: "This work was authored by Pieter Abbeel for the Fall 2011 offering of CS 287 Advanced Robotics at UC Berkeley."
+-->
+Prerequisites
+Familiarity with mathematical proofs, probability, algorithms, linear algebra; ability to
+implement algorithmic ideas in code.
+If your probability is rusty, you might want to handpick some homework/section exercises from past CS188 offerings, located here and similar url's replacing sp12 with fa11, sp11, fa10, sp10, fa09, etc.
+Consent of instructor required for undergraduate students. Come see instructor after lecture or during office hours.
+Class Goals
+Learn the math and algorithms underneath state-of-the-art robotic systems. The majority of these techniques are heavily based on probabilistic reasoning and optimization---two areas with wide applicability in modern Artificial Intelligence. An intended side-effect of the course is to generally strengthen your expertise in these two areas.
+Implement, and experiment with, these algorithms.
+Be able to understand research papers in the field of robotics:
+Main conferences: ICRA, IROS, RSS, ISER, ISRR.
+Main journals: IJRR, T-RO, Autonomous Robots.
+Try out some ideas/extensions of your own.
+Note: the focus of the course is on math and algorithms. We will not study mechanical or electrical design of robots.
+Grading
+Open-ended final project (30%)
+1/5 quality of presentation, 1/5 quality of writing of the final paper, 3/5 quality of the results themselves.
+Assignments (70%)
+Syllabus and materials
+Optimal Control (3 weeks): Globally Optimal Control through Discretization, Locally Optimal Control through Sequential Quadratic Programming, MPC, LQR, LQG, iterative versions
+Motion Planning (1 week): RRT (+variants), A* (+variants)
+Estimation (6 weeks): Bayes filters, KF, EKF, UKF, particle filter, occupancy grid mapping, EKF slam, GraphSLAM, SEIF, FastSLAM
+RGB-D and Point Clouds (2 weeks): features, Ransac, Hough, instance retrieval/detection
+Manipulation and Grasping (1/2 week): grasp quality metrics, grasp strategies, caging
+Reinforcement Learning (1 week): policy gradient
+Case Studies (2 weeks): autonomous helicopter, autonomous driving, walking, mobile manipulation.
+-->
+-->
+Slides are made available as the semester progresses.
+In the Fall 2011 edition a couple of students volunteered to record and post lecture videos. They posted them here . They might be of interest this year, too.
+Tentative schedule (edits in progress):
+Lecture
+Topic
+Readings
+Optional/Additional Readings
+Videos -->
+Th Aug 29
+Course Introduction
+Tu Sep 3
+MDP's, Exact Methods: Value Iteration, Policy Iteration, Linear Programming , LP notes
+Sutton and Barto, Reinforcement Learning , Chapters 3 and 4
+Th Sep 5
+Discretization of Continuous State Space MDPs
+Moore and Atkeson, 1993 ,
+Munos and Moore, MLJ 2001 ,
+Tu Sep 10
+Function Approximation / Feature-based Representations
+Chow and Tsitsiklis, 1991 ,
+Gordon, 1995 ,
+Tsitsiklis and Van Roy, 1996 ,
+Kushner and Dupuis, 1992/2001,
+Th Sep 12
+LQR, iterative LQR / Differential Dynamic Programming
+Tu Sep 17
+Convex Optimization
+cvx_example.m
+Boyd and Vandenberghe, Chapters 9-11
+Th Sep 19
+Non-Convex Optimization through Sequential Convex Programming (SCP) v2 , Locally Optimal Control through Optimization: Collocation, Shooting, Model Predictive Control (MPC)
+code examples -->
+Nocedal and Wright, Chapter 18
+Tu Sep 24
+Trajectory Optimization for Motion Planning --- Guest Lecturer: John Schulman ; Optimization over SE(3), Needle Steering, Channel Planning --- Guest Lecturer: Sachin Patil
+Th Sep 26
+Self-driving Cars
+Tu Oct 1
+Motion Planning: PRM, RRT + variants
+Steven M. Lavalle, Motion Planning , Chapters 5, 14, RRT*, Karaman and Frazzoli , LQR trees, Tedrake , code example
+Th Oct 3
+Motion Planning: A* + variants
+Likhachev slides ,
+Steven M. Lavalle, Motion Planning , Chapters 5, 14
+Videos:
+Urban Challenge Parking ,
+Quadruped ,
+Mobile Manipulation ;
+Papers:
+Likhachev, Gordon, and Thrun, ARA*: Anytime A* with Provable Bounds on Sub-Optimality ;
+van den Berg, Shah, Huang, and Goldberg, Anytime Nonparametric A* ;
+Koenig, Likhachev, and Furcy, Lifelong Planning A*
+Tu Oct 8
+Probability Motivation , Probability Review , Bayes Filters
+Intro: PR 1; Probability Review and Bayes Filters: PR 2
+Th Oct 10
+Multivariate Gaussians
+PR 3
+Fr Oct 11
+Stanford-Berkeley Robotics Symposium
+310 Sutardja Dai Hall
+Tu Oct 15
+Kalman Filtering
+PR 3
+From Gauss to Kalman
+Th Oct 17
+EKF, UKF
+PR 3
+Julier and Uhlmann, the UKF
+Tu Oct 22
+Smoother , MAP
+Th Oct 24
+Maximum Likelihood, EM
+Tu Oct 29
+POMDPs --- Guest Lecturer: Sachin Patil
+Th Oct 31
+Inverse Optimal Control
+Tu Nov 5
+-->Learning Trajectories from Demonstrations --- Guest Lecturer: John Schulman
+Th Nov 7
+Inverse Optimal Control (continued, same slide deck as before)
+Tu Nov 12
+SEIF, EnKF, EKF-SLAM , Motion Models , Beam Sensor Models , Scan Matching
+Motion Models: PR 5.1, 5.2, 5.3; Beam Sensor: PR 6.1, 6.2, 6.3;
+Th Nov 14
+Optimization for Estimation , GraphSLAM , Particle Filters and Localization
+Particle Filters: PR 4, Localization: PR 8.1, 8.3
+Doucet, Godsill, Andrieu, 1998 ,
+Arulampalam et al., 2002
+Tu Nov 19
+Mapping with Known Poses , Rao-Blackwellized Particle Filters , gMapping
+Mapping with Known Poses: PR 9
+Doucet, de Freitas, Murphy, Russell ,
+Grisetti, Stachniss, Burgard T-RO 2006
+Th Nov 21
+Kinect Fusion, Kintinuous and other recent 3-D work -- Guest Lecturer: Stephen Miller
+Tu Nov 26
+Projects speed-dating
+Th Nov 28
+Happy Thanksgiving!
+Tu Dec 3
+Guest Lecture: Mark Palatucci, Co-founder and Chief Product Officer of Anki Drive
+Th Dec 5
+Autonomous Helicopters and Course Wrap-Up
+Abbeel, Coates, Ng, IJRR 2010 , videos and data
+Tu Dec 10
+2-5pm Project Presentations schedule
+Th Dec 12
+No lecture
+Related materials
+Most relevant book for estimation:
+Thrun, Burgard, Fox, Probabilistic Robotics
+There is no direct match for other lectures, but here are some related resources:
+If you want to brush up your linear algebra background, I suggest working through this course (video lectures and homeworks available online) at your own pace: Stephen Boyd's EE263: Introduction to Linear Dynamical Systems .
+If you want to learn more about the linear systems aspects (Kalman filtering, LQR), I recommend Stephen Boyd's EE363: Linear Dynamical Systems .
+If you want go deeper into the theory of linear systems, I recommend:
+Claire Tomlin's EE221a: Linear System Theory
+If you want to learn more about convex optimization, I recommend:
+Stephen Boyd's EE364a: Convex Optimization I and
+Stephen Boyd's EE364b: Convex Optimization II . Both of them have all course materials, including lecture videos, available online.
+For (although draft-status) more about optimal control and motion planning,
+Russ Tedrake's class: Underactuated Robotics: Learning Planning, and
+Control for Efficient Agile Machines could give you a somewhat different angle, some complementary ideas, and more examples.
+A more traditional book on control theory: Astrom and Murray, Feedback Systems
+A more traditional book on nonlinear control: Slotine and Li, Applied Nonlinear Control .
+A great introductory text on reinforcement learning: Sutton and Barto, Reinforcement Learning
+A more mathematically oriented text on reinforcement learning: Bertsekas and Tsitsiklis, Neuro-dynamic programming
+Earlier offerings of my graduate class had more emphasis on reinforcement learning / approximate dynamic programming than the current offering: CS294-40, Fall 2008 and CS287, Fall 2009
+Ben Van Roy's class: Approximate Dynamic Programming -->
+UCB On-Line Course Catalog and Schedule of Classes -->

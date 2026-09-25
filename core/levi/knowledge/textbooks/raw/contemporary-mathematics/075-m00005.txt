@@ -1,0 +1,143 @@
+# m00005
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Range and Standard Deviation
+
+Range and Standard Deviation
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Calculate the range of a dataset
+
+Calculate the standard deviation of a dataset
+
+Measures of centrality like the mean can give us only part of the picture that a dataset paints. For example, let’s say you’ve just gotten the results of a standardized test back, and your score was 138. The mean score on the test is 120. So, your score is above average! But how good is it really? If all the scores were between 100 and 140, then you know your score must be among the best. But if the scores ranged from 0 to 200, then maybe 140 is good, but not great (though still above average). Knowing information about how the data are spread out can help us put a particular data value in better context. In this section, we’ll look at two numbers that help us describe the spread in the data: the range and the standard deviation. These numbers are called measures of dispersion.
+
+The Range
+
+Our first measure of dispersion is the range, or the difference between the maximum and minimum values in the set. It’s the measure we used in the standardized test example above.
+
+Let’s look at a couple of examples.
+
+Finding the Range
+
+You survey some of your friends to find out how many hours they work each week. Their responses are: 5, 20, 8, 10, 35, 12. What is the range?
+
+The maximum value in the set is 35 and the minimum is 5, so the range is 35-5=30.
+
+For large datasets, finding the maximum and minimum values can be daunting. There are two ways to do it in a spreadsheet. First, you can ask the spreadsheet program to sort the data from smallest to largest, then find the first and last numbers on the sorted list. The second method uses built-in functions to find the minimum and maximum.
+Find the Minimum and Maximum Using Google Sheets
+
+In either method, once you’ve found the maximum and minimum, all you have to do is subtract to find the range.
+
+Finding the Range with Google Sheets
+
+The data in “AvgSAT” contains the average SAT score for students attending every institution of higher learning in the US for which data is available. What is the range of these average SAT scores?
+Step 1: To find the maximum, click on an empty cell in the spreadsheet, type “=MAX(”, and then click on the letter that marks the top of the column containing the AvgSAT data. That inserts a reference to the column into our function. Then we close the parentheses and hit the enter key. The formula is replaced with the maximum value in our data: 1566.
+ Step 2: Using the same process (but with “MIN” instead of “MAX”), we find the minimum value is 785.
+ Step 3: So, the range is 1566-785=781.
+
+The range is very easy to compute, but it depends only on two of the data values in the entire set. If there happens to be just one unusually high or low data value, then the range might give a distorted measure of dispersion. Our next measure takes every single data value into account, making it more reliable.
+
+The Standard Deviation
+
+The standard deviation is a measure of dispersion that can be interpreted as approximately the average distance of every data value from the mean. (This distance from the mean is the “deviation” in “standard deviation.”)
+
+The standard deviation is computed as follows:
+
+Here, x represents each data value, x¯ is the mean of the data values, n is the number of data values, and the capital sigma (Σ) indicates that we take a sum.
+
+To compute the standard deviation using the formula, we follow the steps below:
+
+Compute the mean of all the data values.
+
+Subtract the mean from each data value.
+
+Square those differences.
+
+Add up the results in step 3.
+
+Divide the result in step 4 by n-1
+
+Take the square root of the result in step 5.
+
+Let’s see that process in action.
+
+Computing the Standard Deviation
+
+You surveyed some of your friends to find out how many hours they work each week. Their responses were: 5, 20, 8, 10, 35, 12. What is the standard deviation?
+
+Let’s follow the six steps mentioned previously to compute the standard deviation.
+Step 1: Find the mean: x¯=5+20+8+10+35+126=15.
+Step 2: Subtract the mean from each data value. To help keep track, let’s do this in a table. In the first row, we’ll list each of our data values (and we’ll label the row x); in the second, we’ll subtract x¯=15 from each data value.
+x
+5
+20
+8
+10
+35
+x−x¯
+−10
+5
+–7
+–5
+20
+Step 3: Square the differences. Let’s add a row to our table for those values:
+x
+5
+20
+8
+10
+35
+x−x¯
+−10
+5
+–7
+–5
+20
+(x−x¯)2
+100
+25
+49
+25
+400
+Step 4: Add up those squares: 100 + 25 + 49 + 25 + 400 + 9 = 608.
+Step 5: Divide the sum by n-1. Since we have 6 data values, that gives us 6086-1=121.6.
+Step 6: Take the square root of the result: 121.6≈11.027.
+
+Thus, the standard deviation is s≈11.027.
+
+The computation for the standard deviation is complicated, even for just a small dataset. We’d never want to compute it without technology for a large dataset! Luckily, technology makes this calculation easy.
+Find the Standard Deviation Using Google Sheets
+
+Finding the Standard Deviation with Google Sheets
+
+The data in “AvgSAT” contains the average SAT score for students attending every institution of higher learning in the US for which data is available. What is the standard deviation of these average SAT scores?
+
+To find the standard deviation, we click in an empty cell in our spreadsheet and then type “=STDEV(”. Next, click on the letter at the top of the column containing our data; this will put a reference to that column into our formula. Then close the parentheses with and hit the enter key. The formula is replaced with the result: 125.517.
+
+Check Your Understanding
+
+Key Terms
+
+range
+
+standard deviation
+
+Key Concepts
+
+The range of a dataset is the difference between its largest and smallest values. The standard deviation is approximately the mean difference (in absolute value) that individual units fall from the mean of the dataset.
+
+Formulas
+s=∑ (x-x¯)2n-1
+
+Here, s is the standard deviation, x represents each data value, x¯ is the mean of the data values, n is the number of data values, and the capital sigma (Σ) indicates that we take a sum.
+
+Videos
+Find the Minimum and Maximum Using Google Sheets
+Find the Standard Deviation Using Google Sheets

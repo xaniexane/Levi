@@ -1,0 +1,95 @@
+# m00003
+# Book: OpenStax Workplace Software and Skills
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-workplace-software-skills
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Text and Numbers in Microsoft Excel
+
+Text and Numbers in Microsoft Excel
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Explain the basics of data and data analysis
+
+Enter and format numeric data in a worksheet cell
+
+Use the Text and General formats for cell data
+
+Use the commands in the Page Layout and Review tabs
+
+WorldCorp receives many orders every day, and they rely on databases for recording all data. Large corporations like WorldCorp also keep an inventory of direct materials for manufacturing. These materials, such as bolts and screws, come from many suppliers on multiple orders. They need to store all this inventory information in the accounting system. Finished products—the products that the company packages for shipping and sells—are built with various components and parts, and they record a list of all this information for every item that is manufactured. When a client places an order from a sales agent, these transactions are recorded in a customer relationship management (CRM) database. Although many large corporations use Oracle or SAP databases, many other software companies furnish solutions to big, medium, and small organizations. Medium-sized companies may use Microsoft Access and/or Microsoft Dynamics for their database purposes and for the financial accounting. Organizations of all sizes can utilize Microsoft Excel.
+
+Here, you will learn some of the basic sales order database capabilities in Excel. For WorldCorp, Excel is an appropriate tool to gather, organize, and analyze information within the smaller business units such as by region or product line. The company-wide information might be stored in another type of program suited for large corporations, but at the business-unit level, Excel can be a powerful tool to feed into the corporate information database.
+
+Data Fundamentals
+
+For the purpose of spreadsheet programs, data can be textual (such as a product description) or numerical (such as a price per unit), and it represents what an organization has determined is valuable. If you decide to compare the prices of oranges at different grocery stores, then you are researching and creating data. You can write your data on paper, but a more efficient and common method today for capturing and storing data is with computers. Data is collected primarily to use later in data analysis, a scientific discipline that uses mathematical and statistical tools to measure trends. For example, a company could track the sales trends of three locations over the span of a few months. Watching the data could reveal slumps in sales, which could trigger the company to introduce a corrective action.
+
+There are different kinds of data that businesses like to collect from their clients. Demographic data can segment a growing list of clients so that a company can give them better service based on their likes or dislikes. Financial and accounting data can keep track of a business’s sales, unit costs, overhead costs, and so on. In addition to client data, machines are constantly generating data related to their performance. All manufacturing plants have machines that output data to computers for engineers and managers to analyze.
+Excel can manage many types of datasets but works better when the dataset is relatively small. Access databases are appropriate for large sets of data or data that will continue to grow. There are other industrial-sized data storage and analysis solutions like SAP and Oracle, as well as others that might work better for larger data files. Programs such as Sage and QuickBooks that are specific to accounting and finance provide additional features for financial analysis that are not offered in Excel.
+
+Entering and Formatting Numeric Data in a Worksheet Cell
+
+The information made of numerals that Excel reads like a calculator to perform mathematical equations is called numeric data. There are many purposes of numerical values in spreadsheets. The numbers can represent quantities, currency, dates, time stamps, percentages, and more. summarizes the numerical values Excel uses.
+
+Numerical Values in Excel
+
+Type of Numerical Value
+Number
+Currency
+Accounting
+Date
+Time
+Percentage
+Fraction
+Scientific
+Data can be shortened numbers written in exponential form. To shorten a number, display the first digit, add a decimal point, and then list the next two digits. Then, add “E” and the number of zeros the whole number contains. For example, 644362623 would be 6.44E+9. These truncated forms of numbers are commonly used in all sorts of sciences.
+Percentages are shown with two decimal points by default.
+
+You can choose the type of numerical value appropriate for your data on the Home tab. shows the drop-down menu in the Number command group where you can choose the type of numerical data you have. You can also access more details about the number type by selecting the arrow in the lower-right corner of the Number command group. This will open up the Format Cells dialog box that allows you to specify many more types of number formatting, including the number of decimal places. If you’re starting from a blank worksheet, you can plan in your mind what kind of values your tables will contain, so that you can design them to be informative and display logical information. You can even do this prewrite of the table on a piece of paper, or as you go through the process of designing the document in Excel.
+
+The Format Cells dialog box allows you to choose the category and formatting for your cell, based on the data. For example, you can determine the number of decimal places you want to show with your Accounting data. You can also use the Custom formatting category. There are numerous complicated formatting options in the Custom category, such as combining a date with a time, but you can also design your own by modifying an existing one to meet your needs.
+
+Say a sales report table contains a set of orders and the name of the salesperson who fulfilled them. This worksheet contains a variety of types of data: dates, text, general, number, accounting, and more. In order to determine the type of data, click on the cell, and check the drop-down menu in the Number command group. shows that cell A2 is a Date. You can convert any number to currency by selecting a cell and then clicking on the “$” button on the Home tab.
+
+a shows a summary of the sales figures of all agents. You will notice that the first row is shaded blue and the text is bolded. This is an effective way to differentiate the headings for each column, often referred to as the column header, title row, or header row. More about formatting cells will be covered in Formatting and Templates in Excel. For now, to make the header row stand out, you can highlight (select) the row and use the commands in the Font command group on the Home tab to change the formatting, such as bolding, shading (fill), or text color.
+a includes a column for each agent’s percentage of the FOB $ total, but by default, Excel formats cell contents as General, so it displays the calculation as a decimal number. You can format it as a Percentage by selecting the cell and changing the number format in the drop-down menu or by clicking on the button in the Number command group. We can use the same process to display the next cell as a fraction. b shows the finished table.
+
+Using the Text and General Cell Formats
+
+When your worksheet uses text data, which is information made up of words, letters, numerals, or a combination of those things, you can use the General or the Text cell format. For example, say you have salespersons’ names in Text format, and item descriptions in the General format. In a blank worksheet, you can enter your data using the default General format, and Excel will automatically format it according to the type of data you’re entering. For example, if you type a date in a cell formatted as General, Excel will identify it as a date and reformat it accordingly. If Excel detects a number or text, it will remain in the General format. General formatting is flexible and can accommodate numbers or text. Because Excel may automatically change the format of your cell contents if you leave the format as General, consider formatting all numbers as Number or Accounting, as appropriate.
+
+If you format your words or letters as Text, then Excel will not try to autoformat them. compares the same data formatted as Text and formatted as Number. The Text format is flexible in that it can store numbers, letters, symbols, and words.
+
+You are not restricted to the autoformatting that occurs when you type your data into a cell with General formatting. If you enter a number using the General format (a), but you want the number to display as currency, for example, simply select the cell or column and then choose Currency from the Number command group’s drop-down menu (b). Excel will automatically add the currency symbol and two decimal places. All cells in a new workbook are by default set to General format, but you can design your tables with the correct format for your purpose.
+
+Page Layout and Review Tabs
+
+The Page Layout tab () lets the user control the page setup for printing, such as the paper size, the vertical or horizontal orientation, and the print margins. It also contains the settings for arranging graphical objects on a worksheet. One of the most useful commands here is the Breaks drop-down menu, where you can insert page breaks, just like in Microsoft Word, so that when you print your worksheet, the page breaks occur where you want them to.
+
+The Review tab contains the commands for adding and reviewing comments and activating the track-changes tool, as shown in . It also has password protection options, where you can restrict others’ editing capabilities when you are collaborating on the same project. The spell checker and thesaurus tools are also included in the Review tab. Your Review tab might look somewhat different based on the version of Excel that you are using. If these commands are not included on your ribbon, you can add those using the process outlined in Essentials of Business Software Applications for Business.
+
+Summary
+
+Excel is a powerful tool to manage small to somewhat large sets of data.
+
+Data can be collected in Excel and analyzed to track a business’s sales or costs or a machine’s output, for example.
+
+Both text and numbers can be formatted to match the contents of the data such as formatting a description as text or a cost as accounting.
+
+The Page Layout tab includes commands to help you format the printed page in a professional manner.
+
+The Review tab is especially useful when sharing the spreadsheet for collaboration and ensuring accuracy in spelling and grammar.
+
+Review Questions
+
+Written Questions
+
+Practice Exercises
+
+scientific discipline that uses mathematical and statistical tools to measure trends
+information made of numerals that Excel reads like a calculator to perform mathematical equations
+information made up of words, letters, numerals, or a combination

@@ -1,0 +1,59 @@
+# m00099
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Multiple inheritance and mixin classes
+
+Multiple inheritance and mixin classes
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Construct a class that inherits from multiple superclasses.
+
+Identify the diamond problem within multiple inheritance.
+
+Construct a mixin class to add functionality to a subclass.
+
+Multiple inheritance basics
+Multiple inheritance is a type of inheritance in which one class inherits from multiple classes. A class inherited from multiple classes has all superclasses listed in the class definition inheritance list. Ex: class SubClass(SuperClass_1, SuperClass_2).
+
+Multiple inheritance organization
+
+Implementing multiple inheritance
+
+Consider the program:
+
+The diamond problem and mixin classes
+
+Multiple inheritance should be implemented with care. The diamond problem occurs when a class inherits from multiple classes that share a common superclass. Ex: Dessert and BakedGood both inherit from Food, and ApplePie inherits from Dessert and BakedGood.
+
+Mixin classes promote modularity and can remove the diamond problem. A mixin class:
+
+Has no superclass
+
+Has attributes and methods to be added to a subclass
+
+Isn't instantiated (Ex: Given MyMixin class, my_inst = MyMixin() should never be used.)
+Mixin classes are used in multiple inheritance to add functionality to a subclass without adding inheritance concerns.
+
+Creating a mixin class
+
+The following code isn't correct, as not all plants are carnivorous. Follow the programmer through the programmer's edits to improve the program. Note: Rose, Pitcher, and VenusFlyTrap represent plants that all photosynthesize. Pitcher and VenusFlyTrap represent plants that are also carnivorous and can eat.
+
+A pass statement is used in Python to indicate that code is to be written later and prevents certain errors that would result if no code was written or a comment was used instead.
+
+Fixing the diamond problem with a mixin class
+
+The program below represents multiple inheritance and has the diamond problem. Edit the program to use a mixin class, OnlineMixin. OnlineMixin:
+
+Replaces OnlineShop.
+
+Is a superclass of FoodFast.
+
+Has one method, process_online(), which prints "Connecting to server" and is called by FoodFast's process_order().
+
+The output should match:

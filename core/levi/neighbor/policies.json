@@ -1,0 +1,249 @@
+{
+  "_comment": "NeighborOS operator config. Config, never code forks (spec \u00a73 law 9). Worker keep floor is the fairtrade law made numeric (spec \u00a73 law 4).",
+  "branding": {
+    "app_name": "NeighborOS",
+    "tagline": "neighbors post work, trusted workers claim it"
+  },
+  "categories": [
+    "plumbing",
+    "electrical",
+    "carpentry",
+    "yard",
+    "cleaning",
+    "moving",
+    "painting",
+    "hvac",
+    "roofing",
+    "general"
+  ],
+  "commission_bands": [
+    {
+      "fee_rate": 0.12,
+      "max_amount": 100
+    },
+    {
+      "fee_rate": 0.1,
+      "max_amount": 500
+    },
+    {
+      "fee_rate": 0.08,
+      "max_amount": 2000
+    },
+    {
+      "fee_rate": 0.06,
+      "max_amount": null
+    }
+  ],
+  "dispatch_rules": [
+    {
+      "id": "category_match",
+      "weight": 30
+    },
+    {
+      "id": "dna_familiarity",
+      "weight": 20
+    },
+    {
+      "id": "proximity",
+      "weight": 20
+    },
+    {
+      "id": "availability",
+      "weight": 15
+    },
+    {
+      "id": "rating",
+      "weight": 15
+    }
+  ],
+  "emergency_rate": 0.15,
+  "estimate_fallback_band": [
+    50,
+    400
+  ],
+  "external_rails": [
+    {
+      "instructions": "Operator logs the cash handoff with date and amount in the settlement reference.",
+      "label": "Cash (in person)",
+      "name": "cash"
+    },
+    {
+      "instructions": "Operator's bank rail; reference is the transfer confirmation number.",
+      "label": "Bank transfer",
+      "name": "bank-transfer"
+    },
+    {
+      "instructions": "External Stripe plug-in moves the money; reference is the Stripe payout id.",
+      "label": "Stripe (external plug-in)",
+      "name": "stripe"
+    }
+  ],
+  "gates": {
+    "checklists": {
+      "active_dispatch": [
+        {
+          "done": false,
+          "id": "readiness_above_70",
+          "note": "launch readiness score >= 70 in the launch cell"
+        },
+        {
+          "done": false,
+          "id": "dispute_process_tested",
+          "note": "a dispute raised and resolved by a human"
+        }
+      ],
+      "recruiting": [
+        {
+          "done": false,
+          "id": "worker_onboarding_ready",
+          "note": "worker register + credential claims tested"
+        },
+        {
+          "done": false,
+          "id": "academy_seeded",
+          "note": "at least one active course"
+        }
+      ],
+      "soft_launch": [
+        {
+          "done": false,
+          "id": "one_cell_ready",
+          "note": "a single neighborhood cell chosen"
+        },
+        {
+          "done": false,
+          "id": "manual_dispatch_tested",
+          "note": "post \u2192 match \u2192 proof \u2192 settle completed end to end"
+        },
+        {
+          "done": true,
+          "id": "job_cap_set",
+          "note": "soft_launch.job_cap configured"
+        }
+      ],
+      "waitlist_only": [
+        {
+          "done": false,
+          "id": "landing_page_live",
+          "note": "public waitlist page reachable"
+        },
+        {
+          "done": false,
+          "id": "invite_codes_working",
+          "note": "mint + redeem flow tested"
+        }
+      ]
+    },
+    "soft_launch": {
+      "job_cap": 25,
+      "neighborhood_cells": [
+        "springfield-test"
+      ]
+    },
+    "stage": "waitlist_only",
+    "stages": [
+      "waitlist_only",
+      "recruiting",
+      "soft_launch",
+      "active_dispatch"
+    ]
+  },
+  "liquidity": {
+    "cold_below": 0.5,
+    "hot_above": 2.0
+  },
+  "no_contact_hiding": true,
+  "notify": {
+    "_comment": "Push plumbing (notify.py). app_push = this run's final message reaches the phone as push when the app is closed (poll-based, not instant). webhook_urls = Google Sheets Apps Script /exec URL or ntfy topic (the URL is a secret \u2014 never logged). whatsapp is declared-but-gated until a schedule is created from the WhatsApp side chat. interval_minutes is the nudge-drain cadence.",
+    "backends": [
+      "app_push",
+      "file"
+    ],
+    "interval_minutes": 30,
+    "max_retries": 2,
+    "timeout_secs": 10,
+    "webhook_urls": []
+  },
+  "passport_format_version": 1,
+  "pro_worker_commission_reduction": 0.02,
+  "readiness": {
+    "waitlist_full": 10,
+    "workers_full": 5
+  },
+  "revenue_concentration_flag": 0.4,
+  "revenue_concentration_warn": 0.35,
+  "roi_upgrades": [
+    {
+      "cost": 1800,
+      "system": "water_heater",
+      "upgrade": "heat-pump water heater",
+      "yearly_saving": 350
+    },
+    {
+      "cost": 9500,
+      "system": "hvac",
+      "upgrade": "high-efficiency heat pump",
+      "yearly_saving": 900
+    },
+    {
+      "cost": 2500,
+      "system": "roof",
+      "upgrade": "cool-roof coating",
+      "yearly_saving": 300
+    }
+  ],
+  "subscription_tiers": [
+    {
+      "id": "free_worker",
+      "monthly_price": 0.0,
+      "name": "Free Worker",
+      "note": "access to work is free, always"
+    },
+    {
+      "band": [
+        19,
+        39
+      ],
+      "id": "pro_worker",
+      "monthly_price": 29.0,
+      "name": "Pro Worker",
+      "note": "reduced commission, unlimited AI estimates, auto-bidding, analytics"
+    },
+    {
+      "id": "home_plus",
+      "monthly_price": 14.99,
+      "name": "Home+",
+      "note": "twin hosting, seasonal reminders, discounted consults"
+    },
+    {
+      "band": [
+        79,
+        199
+      ],
+      "id": "business",
+      "monthly_price": 129.0,
+      "name": "Business",
+      "note": "contractor crews, priority support"
+    },
+    {
+      "band": [
+        99,
+        499
+      ],
+      "id": "property_manager",
+      "monthly_price": 249.0,
+      "name": "Property Manager",
+      "note": "managed neighborhood hosting, twin portfolios"
+    }
+  ],
+  "system_lifespans_years": {
+    "appliances": 12,
+    "electrical": 40,
+    "foundation": 60,
+    "hvac": 15,
+    "plumbing": 40,
+    "roof": 25,
+    "water_heater": 11
+  },
+  "worker_keep_floor": 0.9
+}

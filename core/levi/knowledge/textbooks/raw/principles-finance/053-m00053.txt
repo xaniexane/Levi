@@ -1,0 +1,237 @@
+# m00053
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Annuities
+
+Annuities
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Define annuity.
+
+Distinguish between an ordinary annuity and an annuity due.
+
+Calculate the present value of an ordinary annuity and an annuity due.
+
+Explain how annuities may be used in lotteries and structured settlements.
+
+Explain how annuities might be used in retirement planning.
+
+Calculating the Present Value of an Annuity
+
+An annuity is a stream of fixed periodic payments to be paid or received in the future. Present or future values of these streams of payments can be calculated by applying time value of money formulas to each of these payments. We’ll begin with determining the present value.
+
+Before exploring present value, it’s helpful to analyze the behavior of a stream of payments over time. Assume that we commit to a program of investing $1,000 at the end of each year for five years, earning 7% compounded annually throughout. The high rate is locked in based partly on our commitment beginning today, even though we will invest no money until the end of the first year. Refer to the timeline shown in .
+
+Year
+0
+1
+2
+3
+4
+5
+Balance Forward ($)
+0.00
+0.00
+1,000.00
+2,070.00
+3,214.90
+4,439.94
+Interest Earned ($)
+0.00
+70.00
+144.90
+225.04
+310.80
+Principal Added ($)
+1,000.00
+1,000.00
+1,000.00
+1,000.00
+5,750.74
+At the end of the first year, we deposit the first $1,000 in our fund. Therefore, it has not yet had an opportunity to earn us any interest. The “new balance” number beneath is the cumulative amount in our fund, which then carries to the top of the column for the next year. In year 2, that first amount will earn 7% interest, and at the end of year 2, we add our second $1,000. Our cumulative balance is therefore $2,070, which then carries up to the top of year 3 and becomes the basis of the interest calculation for that year. At the end of the fifth year, our investing arrangement ends, and we’ve accumulated $5,750.74, of which $5,000 represents the money we invested and the other $750.74 represents accrued interest on both our invested funds and the accumulated interest from past periods.
+
+Notice two important aspects that might appear counterintuitive: (1) we’ve “wasted” the first year because we deposited no funds at the beginning of this plan, and our first $1,000 begins working for us only at the beginning of the second year; and (2) our fifth and final investment earns no interest because it’s deposited at the end of the last year. We will address these two issues from a practical application point of view shortly.
+
+Keeping this illustration in mind, we will first focus on finding the present value of an annuity. Assume that you wish to receive $25,000 each year from an existing fund for five years, beginning one year from now. This stream of annual $25,000 payments represents an annuity. Because the first payment will be received one year from now, we specifically call this an ordinary annuity. We will look at an alternative to ordinary annuities later. How much money do we need in our fund today to accomplish this stream of payments if our remaining balance will always be earning 8% annually? Although we’ll gradually deplete the fund as we withdraw periodic payments of the same amount, whatever funds remain in the account will always be earning interest.
+
+Before we investigate a formula to calculate this amount, we can illustrate the objective: determining the present value of this future stream of payments, either manually or using Microsoft Excel. We can take each of the five payments of $25,000 and discount them to today’s value using the simple present value formula:
+
+where FV is the future value, PV is the present value, r is the interest rate, and n is the number of periods.
+
+For example, the first $25,000 is discounted by the equation as follows:
+
+Proof that $23,148.15 will grow to $25,000 in one year at 8% interest:
+
+If we use this same method for each of the five years, increasing the exponent n for each year, we see the result in .
+
+Present Value of Future Payments
+
+Year
+Calculation
+Result
+$25,000 ÷ (1.08)1
+$23,148.15
+$25,000 ÷ (1.08)2
+$21,433.47
+$25,000 ÷ (1.08)3
+$19,846.81
+$25,000 ÷ (1.08)4
+$18,375.75
+$25,000 ÷ (1.08)5
+$99,818.76
+We begin with the amount calculated in our table, $99,818.76. Before any money is withdrawn, a year’s worth of interest at 8% is compounded and added to our balance. Then our first $25,000 is withdrawn, leaving us with $82,804.26. This process continues until the end of five years, when, aside from a minor rounding difference, the fund has “done its job” and is equal to zero. However, we can make this simpler. Because each payment withdrawn (or added, as we will see later) is the same, we can calculate the present value of an annuity in one step using an equation. Rather than the multiple steps above, we will use the following equation:
+
+where PVa is the present value of the annuity and PYMT is the amount of one payment.
+
+In this example, PYMT is $25,000 at the end of each of five years. Note that the greater the number of periods and/or the size of the amount borrowed, the greater the chances of large rounding errors. We have used six decimal places in our calculations, though the actual time value of money factor, combining interest and time, can be much longer. Therefore, our solutions will often use ≅ rather than the equal sign.
+
+By substitution, and then following the proper order of operations:
+
+In both cases, barring a rounding difference caused by decimal expansion, we come to the same result using the equation as when we calculate each of multiple years. It’s important to note that rounding differences can become significant when dealing with larger multipliers, as in the financing of a multimillion-dollar machine or facility. In this text, we will ignore them.
+
+In conclusion, five payments of $25,000, or $125,000 in total, can be funded today with $99,817.81, with the difference being obtained from interest always accumulating on the remaining balance at 8%. The running balance is obtained by calculating the year’s interest on the previous balance, adding it to that balance, and subtracting the $25,000 that is withdrawn on the last day of the year. In the last (fifth) year, just enough interest will accrue to bring the balance to the $25,000 needed to complete the fifth payment.
+
+A common use of the PVa is with large-money lotteries. Let’s assume you win the North Dakota Lottery for $1.2 million, and they offer you $120,000 per year for 10 years, beginning one year from today. We will ignore taxes and other nonmathematical considerations throughout these discussions and problems. The Lottery Commission will likely contact you with an alternative: would you like to accept that stream of payments … or would you like to accept a lump sum of $787,000 right now instead? Can you complete a money-based analysis of these alternatives? Based purely on the dollars, no, you cannot. The reason is that you can’t compare future amounts to present amounts without considering the effect of time—that is, the time value of money. Therefore, we need an interest rate that we can use as a discounting factor to place these alternatives on the same playing field by expressing them in terms of today’s dollars, the present value. Let’s use 9%. If we discount the future stream of fixed payments (an ordinary annuity, as the payments are identical and they begin one year from now), we can then compare that result to the cash lump sum that the Lottery Commission is offering you instead.
+
+By substitution, and following the proper order of operations:
+
+All things being equal, that expected future stream of ten $120,000 payments is worth approximately $770,119 today. Now you can compare like numbers, and the $787,000 cash lump sum is worth more than the discounted future payments. That is the choice one would accept without considering such aspects as taxation, desire, need, confidence in receiving the future payments, or other variables.
+
+Calculating the Present Value of an Annuity Due
+
+Earlier, we defined an ordinary annuity. A variation is the annuity due. The difference between the two is one period. That’s all—just one additional period of interest. An ordinary annuity assumes that there is a one-period lag between the start of a stream of payments and the actual first payment. In contrast, an annuity due assumes that payments begin immediately, as in the lottery example above. We would assume that you would receive the first annual lottery check of $120,000 immediately, not a year from now. In summary, whether calculating future value (covered in the next section) or present value of an annuity due, the one-year lag is eliminated, and we begin immediately.
+
+Since the difference is simply one additional period of time, we can adjust for this easily by taking the formula for an ordinary annuity and multiplying by one additional period. One more period, of course, is (1 + i). Recall from Time Value of Money I that the formula for compounding is (1 + i)N, where i is the interest rate and N is the number of periods. The superscript N does not apply because it represents 1, for one additional period, and the power of 1 can be ignored. Therefore, faced with an annuity due problem, we solve as if it were an ordinary annuity, but we multiply by (1 + i) one more time.
+
+In our original example from this section, we wished to withdraw $25,000 each year for five years from a fund that we would establish now. We determined how much that fund should be worth today if we intend to receive our first payment one year from now. Throughout this fund’s life, it will earn 8% annually. This time, let’s assume we’ll withdraw our first payment immediately, at point zero, making this an annuity due. Because we’re trying to determine how much our starting balance should be, it makes sense that we must begin with a larger number. Why? Because we’re pulling our first payment out immediately, so less money will remain to start compounding to the amount we need to fund all five of our planned payments! Our rule can be stated as follows:
+
+Whether one is calculating present value or future value, the result of an annuity due must always be larger than that of an ordinary annuity, all other facts remaining constant. Here is the stream of solutions for the example above, but please notice that we will multiply by (1 + i), one additional period, following the same order of operations:
+
+That’s how much we must start our fund with today, before we earn any interest or draw out any money. Note that it’s larger than the $99,817.81 that would be required for an ordinary annuity. It must be, because we’re about to diminish our compounding power with an immediate withdrawal, so we have to begin with a larger amount.
+
+We notice several things:
+
+The formula must change because the annual payment is subtracted first, prior to the calculation of annual interest.
+
+We accomplish the same result, aside from an insignificant rounding difference: the fund is depleted once the last payment is withdrawn.
+
+The last payment is withdrawn on the first day of the final year, not the last. Therefore, no interest is earned during the fifth and final year.
+
+To reinforce this, let’s use the same approach for our lottery example above. Reviewing the facts, you have a choice of receiving 10 annual payments of your $1.2 million winnings, each worth $120,000, and you discount at a rate of 9%. The only difference is that this time, you can receive your first $120,000 right away; you don’t have to wait a year. This is now an annuity due. We solve it just as before, except that we multiply by one additional period of interest, (1 + i):
+
+Again, this result must be larger than the amount we determined when this was calculated as an ordinary annuity.
+
+The calculations above, representing the present values of ordinary annuities and annuities due, have been presented on an annual basis. In Time Value of Money I, we saw that compounding and discounting calculations can be based on non-annual periods as well, such as quarterly or monthly compounding and discounting. This aspect, quite common in periodic payment calculations, will be explored in a later section of this chapter.
+
+Calculating Annuities Used in Structured Settlements
+
+In addition to lottery payouts, annuity calculations are often used in structured settlements by attorneys at law. If you win a $450,000 settlement for an insurance claim, the opposing party may ask you to accept an annuity so that they can pay you in installments rather than a lump sum of cash. What would a fair cash distribution by year mean? If you have a preferred discount rate (the percentage we all must know to calculate the time value of money) of 6% and you expect equal distributions of $45,000 over 10 years, beginning one year from now, you can use the present value of an annuity formula to compare the alternatives:
+
+By substitution:
+
+If the opposing attorney offered you a lump sum of cash less than that, all things equal, you would refuse it; if the lump sum were greater than that, you would likely accept it.
+
+What if you negotiate the first payment to be made to you immediately, turning this ordinary annuity into an annuity due? As noted above, we simply multiply by one additional period of interest, (1 + 0.06). Repeating the last step of the solution above and then multiplying by (1 + 0.06), we determine that
+
+You would insist on that number as an absolute minimum before you would consider accepting the offered stream of payments.
+
+To further verify that ordinary annuity can be converted into an annuity due by multiplying the solution by one additional period’s worth of interest before applying the annuity factor to the payment, we can divide the difference between the two results by the value of the original annuity. When the result is expressed as a percent, it must be the same as the rate of interest used in the annuity calculations. Using our example of an annuity with five payments of $25,000 at 8%, we compare the present values of the ordinary annuity of $99,817.81 and the annuity due of $107,803.24.
+
+The result shows that the present value of the annuity due is 8% higher than the present value of the ordinary annuity.
+
+Calculating the Future Value of an Annuity
+
+In the previous section, we addressed discounting a periodic stream of payments from the future to the present. We are also interested in how to project the future value of a series of payments. In this case, an investment may be made periodically. Keeping with the definition of an annuity, if the amount of periodic investment is always the same, we may take a one-step shortcut to calculate the future value of that stream by using the formula presented below:
+
+where FVa is the future value of the annuity, PYMT is a one-time payment or receipt in the series, r is the interest rate, and n is the number of periods.
+
+As we did in our section on present values of annuities, we will begin with an ordinary annuity and then proceed to an annuity due.
+
+Let’s assume that you lock in a contract for an investment opportunity at 4% per year, but you cannot make the first investment until one year from now. This is counterintuitive for an investor, perhaps, but because it is the basis of the formula and procedures for ordinary annuities, we will accept this assumption. You plan to invest $3,000 at the end of each year. How much money will you have at the end of five years?
+
+Let’s start by placing this on a timeline like the one appearing earlier in this chapter (see ):
+
+Year
+0
+1
+2
+3
+4
+5
+Balance Forward ($)
+0.00
+0.00
+3,000.00
+6,120.00
+9,364.80
+12,739.39
+Interest Earned ($)
+0.00
+120.00
+244.80
+374.59
+509.58
+Principal Added ($)
+3,000.00
+3,000.00
+3,000.00
+3,000.00
+16,248.97
+As we explained earlier when describing ordinary annuities, the payment for year 1 is not invested until the last day of that year, so year 1 is wasted as a compounding opportunity. Therefore, the amount only compounds for four years rather than five. Also, our fifth payment is not made until the last day of our contract in year 5, so it has no chance to earn a compounded future value. The investor has lost on both ends. In the table above, we have made five calculations, and for a longer-term contract such as 10, 25, or 40 years, this would be tedious. Fortunately, as with present values, this ordinary annuity can be solved in one step because all payments are identical.
+
+Repeating the formula, and then by substitution:
+
+This proof emphasizes that year 1 is wasted, with no compounding because the payment is made on the last day of year 1 rather than immediately. We lose compounding through this ordinary annuity in another way: year 5’s investment is made on the last day of this five-year contract and has no chance to accumulate interest. A more intuitive method would be to enter a contract for an annuity due so that our first payment can be made immediately. In this way, we don’t waste the first year, and all five payments work in year 5 as well. As stated previously, this means that annuities due will yield larger results than ordinary annuities, whether one is discounting (PVa) or compounding (FVa).
+
+Let’s hold all facts constant with the previous example, except that we will invest at the beginning of each year, starting immediately upon locking in this five-year contract. We follow the same technique as in the present value section: we multiply by one additional period to convert this ordinary annuity factor into a factor for an annuity due. Whether one is solving for a future value or a present value, the result of an annuity due must always be larger than an ordinary annuity. With future value, we begin investing immediately, so the result will be larger than if we waited for a period to elapse. With present value, we begin extracting funds immediately rather than letting them work for us during the first year, so logically we would have to start with more.
+
+Continuing our example but converting it to an annuity due, we will multiply by one additional period, (1 + i). All else remains the same:
+
+Let’s provide one additional example of each. Assume that you have a chance to invest $15,000 per year for 10 years, earning 8% compounded annually. What amount would you have after the 10 years? If we can only make our first payment at the end of each year, our ending value will be
+
+However, if we can make our first payment immediately and then make subsequent payments at the start of each following year, we modify the formula above by multiplying the annual payment by one additional period:
+
+Begin an Investing Program at Age 20 or 30?
+
+In this chapter’s introductory section, Why It Matters, we posed a question about pledging to invest $1,000 each year until you reach age 60. If you can earn a 5% annual rate of interest, how much will you have if you begin at age 20? What if you delay this program until age 30? The additional 10 years can make a surprisingly large difference. How can you calculate that difference?
+Solution:
+
+Perform two separate calculations comparable to the chapter examples above, using the formula for the future value of an ordinary annuity. You plan to make the first investment immediately, making this an annuity due, so you will multiply by one additional period, (1 + 0.05). Notice that the only difference between the two calculations is the exponent N, representing the number of periods.
+
+Thirty years (starting at age 30):
+
+Forty years (starting at age 20):
+
+Waiting 10 years before committing to this program comes with a surprisingly high cost—a loss of almost 82% of the potential value.
+
+How Annuities Are Used for Retirement Planning
+
+On a final note, how might annuities be used for retirement planning? A person might receive a lump-sum windfall from an investment, and rather than choosing to accept the proceeds, they might decide to invest the sum (ignoring taxes) in an annuity. Their intention is to let this invested sum produce annual distributions to supplement Social Security payments. Assume the recipient just received $75,000, again ignoring tax effects. They have the chance to invest in an annuity that will provide a distribution at the end of each of the next five years, and that annuity contract provides interest at 3% annually. Their first receipt will be one year from now. This is an ordinary annuity.
+
+We can also solve for the payment given the other variables, an important aspect of financial analysis. If the person with the $75,000 windfall wants this fund to last five years and they can earn 3%, then how much can they withdraw from this fund each year? To solve this question, we can apply the present value of an annuity formula. This time, the payment (PYMT) is the unknown, and we know that the PVa, or the present value that they have at this moment, is $75,000:
+
+The person can withdraw this amount every year beginning one year from now, and when the final payment is withdrawn, the fund will be depleted. Interest accrues each year on the beginning balance, and then $16,376.60 is withdrawn at the end of each year.
+
+Another View of Annuities
+
+Many examples of annuities are available, with presentations as varied as the opinions as to how appropriate they are for investors, especially retirees. Math Is Fun is particularly interesting and potentially helpful for understanding how to apply this knowledge.
+
+An annuity is a stream of fixed periodic payments that is expected to be paid or received. Calculations of future value or present value are commonly performed on these payment streams for a wide number of reasons in business and personal financial analysis, as seen in the chapter focusing on single amounts, particularly in loan repayment. Annuities may be ordinary annuities, in which the first cash flow of a series occurs at the end of the first period, or annuities due, if the first cash flow occurs at the beginning point of the first period.
+
+Future Value of Ordinary Annuities
+
+Practical Example of Annuities
+
+a stream of regular, periodic payments to be received or paid
+a stream of periodic payments in which the payment or receipt occurs at the beginning of each period
+an interest rate used in time value of money calculations to determine present value; may derive from several sources, such as stated contract rates, costs to borrow, or expected rates of return on investments
+a single cash payment made in lieu of a series of future payments, such as a lottery payout or a legal settlement
+a stream of periodic payments in which the payment or receipt occurs at the end of each period
+the process of determining one’s objectives for retirement, including one’s finances, and developing strategies and tactics to achieve them
+monetary legal settlements that are paid out in installments, such as an annuity, rather than a lump sum cash amount

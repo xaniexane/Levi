@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LEVI</string>
+    <string name="settings_title">Settings</string>
+
+    <!-- Shared settings chrome -->
+    <string name="badge_pending">PENDING</string>
+    <string name="state_on">On</string>
+    <string name="state_off">Off</string>
+
+    <!-- Settings home rows -->
+    <string name="row_server">LEVI server</string>
+    <string name="row_server_not_set">Not configured</string>
+    <string name="row_connectors">Connectors</string>
+    <string name="row_wallet">Wallet</string>
+    <string name="row_credentials">Secure credentials store</string>
+    <string name="row_permissions">Permissions</string>
+    <string name="row_channels">Messaging channels</string>
+    <string name="row_devices">Devices</string>
+    <string name="row_notifications">Notifications</string>
+    <string name="row_appearance">Appearance</string>
+    <string name="row_applock">App lock</string>
+    <string name="row_assistant">Set as default assistant</string>
+    <string name="row_homescreen">Add to home screen</string>
+    <string name="row_invite">Redeem invite code</string>
+    <string name="row_data">Data controls</string>
+    <string name="row_issue">Report an issue</string>
+    <string name="row_help">Help &amp; support</string>
+    <string name="row_updates">App updates</string>
+    <string name="row_legal">Legal info</string>
+    <string name="row_account">LEVI Account</string>
+    <string name="row_account_setup">Set up your profile</string>
+    <string name="row_logout">Log out</string>
+    <string name="section_account">LEVI Account</string>
+
+    <!-- Appearance -->
+    <string name="theme_void">Void (dark)</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">Follow system</string>
+
+    <!-- Default assistant / home-screen shortcut -->
+    <string name="assistant_unavailable">System assistant settings aren\'t available on this device.</string>
+    <string name="assistant_status_title">Default assistant status</string>
+    <string name="assistant_is_default">LEVI is your default assistant</string>
+    <string name="assistant_not_default">LEVI is not the default assistant</string>
+    <string name="assistant_choose_title">Choose default assistant</string>
+    <string name="assistant_choose_sub">Opens system settings where you pick LEVI</string>
+    <string name="assistant_note">Long-press home (or your device\'s assistant gesture) opens LEVI once it is selected as the default assistant. Only the system picker can change this — LEVI can only show its own status. The “Hey LEVI” hotword is a best-effort listener (toggle below), not system-level detection: it keeps the mic warm, so the mic indicator shows and battery use rises. Gesture behavior varies by manufacturer. The app lock still gates the chat, so a locked phone stays locked.</string>
+    <string name="perm_mic_title">Microphone</string>
+    <string name="perm_mic_sub">Needed for the assistant voice plate. Tap to grant.</string>
+    <string name="voice_prompt">Ask LEVI</string>
+    <string name="voice_listening">Listening…</string>
+    <string name="voice_hint">Speak now, or tap to close</string>
+    <string name="voice_hearing">"%1$s"</string>
+    <string name="voice_heard_banner">I heard: %1$s</string>
+    <string name="voice_mic_needed">Microphone permission needed</string>
+    <string name="voice_mic_why">The voice plate can\'t listen without microphone access. Grant it to talk to LEVI hands-free.</string>
+    <string name="voice_grant_mic">Grant microphone access</string>
+    <string name="voice_mic_granted">Microphone granted — invoke the assistant again to talk.</string>
+    <string name="voice_mic_denied">Microphone denied — the voice plate stays off. You can still type.</string>
+    <string name="voice_no_recognizer">No speech recognizer on this device</string>
+    <string name="voice_no_recognizer_hint">This device has no speech-to-text service. You can still open the chat and type.</string>
+    <string name="voice_open_chat">Open LEVI chat</string>
+    <string name="voice_try_again">Try again</string>
+    <string name="voice_not_caught">Didn\'t catch that</string>
+    <string name="voice_error_network">Speech service unreachable — check the connection and try again.</string>
+    <string name="voice_error_no_match">No speech heard — try again.</string>
+    <string name="voice_error_generic">Speech recognition failed — try again.</string>
+    <string name="shortcut_label">Open LEVI</string>
+    <string name="shortcut_unsupported">Pinned shortcuts aren\'t supported on this device.</string>
+    <string name="shortcut_failed">Couldn\'t create the shortcut.</string>
+
+    <!-- Log out -->
+    <string name="logout_confirm">This clears your LEVI profile from this device. Your LEVI server data is untouched.</string>
+    <string name="logged_out">Logged out.</string>
+
+    <!-- App lock -->
+    <string name="applock_locked_title">LEVI is locked</string>
+    <string name="applock_locked_body">Unlock to continue.</string>
+    <string name="applock_use_biometric">Use biometrics</string>
+    <string name="applock_unlock">Unlock</string>
+    <string name="applock_pin_hint">PIN</string>
+    <string name="applock_pin_wrong">Wrong PIN. Try again.</string>
+    <string name="applock_pin_title">Set a PIN</string>
+    <string name="applock_pin_new">New PIN (4+ digits)</string>
+    <string name="applock_pin_confirm">Confirm PIN</string>
+    <string name="applock_pin_too_short">PIN must be at least 4 digits.</string>
+    <string name="applock_pin_mismatch">PINs don\'t match.</string>
+    <string name="applock_biometric_title">Unlock LEVI</string>
+    <string name="applock_biometric_subtitle">Confirm it\'s you</string>
+    <string name="secure_unavailable">Secure storage unavailable — nothing was saved.</string>
+    <string name="applock_store_broken_title">Secure storage unavailable</string>
+    <string name="applock_store_broken_body">LEVI can\'t verify your lock because the device secure storage failed. The app stays locked to protect your data. Restart the app or device and try again.</string>
+    <string name="applock_store_broken_close">Close LEVI</string>
+
+    <!-- Notification channels -->
+    <string name="channel_messages">LEVI messages</string>
+    <string name="channel_messages_desc">Replies and alerts from LEVI.</string>
+    <string name="channel_updates">Updates</string>
+    <string name="channel_updates_desc">App news and release notes.</string>
+
+    <string name="empty_title">No server configured</string>
+    <string name="empty_body">Point LEVI at the machine serving your LEVI web client, then come back here.</string>
+    <string name="open_settings">Open settings</string>
+
+    <string name="error_title">Couldn\'t reach LEVI</string>
+    <string name="error_load">Load failed: %1$s. Check the server URL and that your machine is reachable.</string>
+    <string name="error_unknown">unknown error</string>
+    <string name="retry">Retry</string>
+
+    <string name="settings_server_label">LEVI server URL</string>
+    <string name="settings_url_hint">https://levi.example.com</string>
+    <string name="save">Save</string>
+    <string name="error_url_invalid">Enter a full URL starting with http:// or https:// (empty clears it).</string>
+    <string name="error_url_insecure">Plain http:// is only allowed for on-device servers (http://127.0.0.1). For a LAN or remote server, use its https:// URL.</string>
+    <string name="url_saved">Server URL saved: %1$s</string>
+    <string name="url_cleared">Server URL cleared.</string>
+    <string name="settings_help">On your computer, run the LEVI web client (in the repo: cd web &amp;&amp; npm run dev), then enter its https:// URL here. Plain http:// only works for an on-device server (http://127.0.0.1); for a LAN machine, serve it over TLS (e.g. a Caddy reverse proxy) or expose it with a tunnel (e.g. cloudflared) and use the https:// tunnel URL. Full steps: docs/ANDROID_APP.md</string>
+    <string name="hey_levi_title">Hey LEVI hotword</string>
+    <string name="hey_levi_sub">Listens for “Hey LEVI” and opens voice input. Best-effort: a third-party app can’t do system-level hotword detection, so this keeps the mic warm with the device’s own recognizer — Android shows the mic indicator while it listens, and it uses more battery. Stops on reboot; re-enable here.</string>
+    <string name="hey_levi_channel_listen">Hey LEVI listener</string>
+    <string name="hey_levi_notif_title">Listening for “Hey LEVI”</string>
+    <string name="hey_levi_notif_text">Tap to open LEVI voice input</string>
+    <string name="hey_levi_channel_trigger">Hey LEVI heard you</string>
+    <string name="hey_levi_trigger_title">LEVI heard you</string>
+    <string name="hey_levi_trigger_text">Tap to talk to LEVI</string>
+    <string name="speak_replies_title">Speak chat responses</string>
+    <string name="speak_replies_sub">Reads LEVI’s replies aloud with the device’s own voice — no cloud voice service. The web chat sends text through the leviSpeak bridge; silent until you turn this on.</string>
+</resources>

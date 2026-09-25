@@ -1,0 +1,228 @@
+{"content": "Python ints have arbitrary precision and never overflow like C ints.", "tags": ["python", "language"], "importance": 0.8}
+{"content": "Compare against None with `is`, never `==`.", "tags": ["python", "language"], "importance": 0.8}
+{"content": "Mutable default arguments are created once and shared across calls; use None instead.", "tags": ["python", "gotcha"], "importance": 0.9}
+{"content": "In Python, empty collections, zero, None and False are all falsy.", "tags": ["python", "language"], "importance": 0.75}
+{"content": "Loop-else runs only when the loop exits without break.", "tags": ["python", "language"], "importance": 0.6}
+{"content": "Prefer enumerate() and zip() over manual index bookkeeping in for loops.", "tags": ["python", "idiom"], "importance": 0.7}
+{"content": "Python argument passing is call-by-object-reference: mutation is visible, rebinding is not.", "tags": ["python", "language"], "importance": 0.85}
+{"content": "Names assigned inside a function are local unless declared global/nonlocal (LEGB).", "tags": ["python", "language"], "importance": 0.75}
+{"content": "Parameters after a bare * in the signature are keyword-only.", "tags": ["python", "language"], "importance": 0.65}
+{"content": "Comprehension loop variables have their own scope and do not leak.", "tags": ["python", "idiom"], "importance": 0.6}
+{"content": "Generator expressions are lazy and use constant memory for one-pass pipelines.", "tags": ["python", "idiom"], "importance": 0.8}
+{"content": "any()/all() short-circuit, pairing well with generator expressions.", "tags": ["python", "idiom"], "importance": 0.65}
+{"content": "Dict and set lookup/insert/delete are O(1) on average via hashing.", "tags": ["python", "data-structures"], "importance": 0.85}
+{"content": "Dict keys must be hashable; mutating a key would strand its entry.", "tags": ["python", "data-structures"], "importance": 0.8}
+{"content": "list(dict.fromkeys(items)) deduplicates while preserving order.", "tags": ["python", "idiom"], "importance": 0.65}
+{"content": "Python str methods return new strings; strings are immutable.", "tags": ["python", "language"], "importance": 0.8}
+{"content": "Use ''.join(pieces) instead of += in a loop to avoid O(n^2) concatenation.", "tags": ["python", "performance"], "importance": 0.75}
+{"content": "UTF-8 encode/decode at system boundaries; never mix str and bytes.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "Names assigned in the class body are shared class attributes, not per-instance state.", "tags": ["python", "oop"], "importance": 0.85}
+{"content": "@property exposes a method as attribute-style access.", "tags": ["python", "oop"], "importance": 0.65}
+{"content": "Python has no true private attributes; _x is convention, __x is name-mangled.", "tags": ["python", "oop"], "importance": 0.7}
+{"content": "Python resolves methods via C3 linearization; check ClassName.__mro__.", "tags": ["python", "oop"], "importance": 0.7}
+{"content": "Defining __eq__ without __hash__ makes instances unhashable.", "tags": ["python", "oop"], "importance": 0.8}
+{"content": "Always implement __repr__; it is what appears in tracebacks and logs.", "tags": ["python", "oop"], "importance": 0.65}
+{"content": "Any function containing yield returns a generator object when called.", "tags": ["python", "language"], "importance": 0.8}
+{"content": "Generators are single-pass; a consumed generator yields nothing more.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "for loops and unpacking both run on the iterator protocol (__iter__/__next__).", "tags": ["python", "language"], "importance": 0.7}
+{"content": "@dec is exactly f = dec(f), executed at function definition time.", "tags": ["python", "idiom"], "importance": 0.8}
+{"content": "functools.wraps preserves the wrapped function's name and docstring.", "tags": ["python", "idiom"], "importance": 0.85}
+{"content": "Stacked decorators apply bottom-up; the top one is outermost.", "tags": ["python", "idiom"], "importance": 0.65}
+{"content": "The with statement guarantees __exit__ runs even when exceptions occur.", "tags": ["python", "idiom"], "importance": 0.85}
+{"content": "@contextlib.contextmanager builds a manager from a generator with yield.", "tags": ["python", "idiom"], "importance": 0.75}
+{"content": "Never rely on __del__ for cleanup; its timing is not guaranteed.", "tags": ["python", "gotcha"], "importance": 0.8}
+{"content": "Bare except swallows KeyboardInterrupt and SystemExit; always catch specific types.", "tags": ["python", "gotcha"], "importance": 0.9}
+{"content": "raise X from err chains exceptions so the original cause stays visible.", "tags": ["python", "idiom"], "importance": 0.7}
+{"content": "assert is for internal invariants; it is stripped by python -O.", "tags": ["python", "gotcha"], "importance": 0.75}
+{"content": "import executes a module once and caches it in sys.modules.", "tags": ["python", "language"], "importance": 0.8}
+{"content": "if __name__ == '__main__' lets a file work both imported and as a script.", "tags": ["python", "idiom"], "importance": 0.8}
+{"content": "Never name your script after a stdlib module; it shadows the real one.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "python -m venv .venv creates an isolated environment per project.", "tags": ["python", "tooling"], "importance": 0.85}
+{"content": "Pin dependencies with == and pip freeze for reproducible installs.", "tags": ["python", "tooling"], "importance": 0.8}
+{"content": "Never sudo pip install into system Python; it conflicts with the OS package manager.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "Type hints are ignored at runtime; checkers like mypy verify them statically.", "tags": ["python", "tooling"], "importance": 0.8}
+{"content": "int | None is the modern spelling of Optional[int] (Python 3.10+).", "tags": ["python", "tooling"], "importance": 0.65}
+{"content": "Protocol enables structural typing: duck typing the checker can verify.", "tags": ["python", "tooling"], "importance": 0.7}
+{"content": "Dataclass mutable defaults require field(default_factory=...).", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "@dataclass(frozen=True) creates immutable, hashable value objects.", "tags": ["python", "idiom"], "importance": 0.75}
+{"content": "__post_init__ runs after the generated __init__ for validation.", "tags": ["python", "idiom"], "importance": 0.6}
+{"content": "collections.deque gives O(1) append/pop on both ends; list.pop(0) is O(n).", "tags": ["python", "data-structures"], "importance": 0.85}
+{"content": "Counter(words).most_common(n) ranks frequencies in one expression.", "tags": ["python", "stdlib"], "importance": 0.7}
+{"content": "deque(maxlen=n) auto-discards oldest items: a sliding window.", "tags": ["python", "stdlib"], "importance": 0.65}
+{"content": "itertools.groupby clusters only consecutive equal keys; sort first for global groups.", "tags": ["python", "stdlib"], "importance": 0.8}
+{"content": "Infinite iterators (count/cycle/repeat) must always be bounded with islice.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "functools.lru_cache memoizes pure functions; args must be hashable.", "tags": ["python", "stdlib"], "importance": 0.75}
+{"content": "pathlib joins paths with the / operator, portably across OSes.", "tags": ["python", "stdlib"], "importance": 0.8}
+{"content": "Always pass encoding explicitly to Path.read_text()/write_text().", "tags": ["python", "gotcha"], "importance": 0.8}
+{"content": "Joining with an absolute right side discards the left: Path('/a')/'/b' -> /b.", "tags": ["python", "gotcha"], "importance": 0.7}
+{"content": "os.replace() renames atomically: readers never see a half-written file.", "tags": ["python", "stdlib"], "importance": 0.8}
+{"content": "os.environ.get('KEY', default) avoids KeyError on missing config.", "tags": ["python", "idiom"], "importance": 0.7}
+{"content": "Prefer subprocess.run([...]) over os.system to avoid shell injection.", "tags": ["python", "security"], "importance": 0.9}
+{"content": "Pass commands as a list to subprocess.run to avoid shell injection.", "tags": ["python", "security"], "importance": 0.95}
+{"content": "check=True makes subprocess.run raise on nonzero exit instead of failing silently.", "tags": ["python", "idiom"], "importance": 0.8}
+{"content": "Always set timeout= on subprocess calls; always reap Popen children with communicate()/wait().", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "argparse converts, validates (type/choices), and generates --help automatically.", "tags": ["python", "stdlib"], "importance": 0.75}
+{"content": "Subparsers give git-style subcommands, each with its own arguments.", "tags": ["python", "stdlib"], "importance": 0.7}
+{"content": "Keep parsing thin and logic in plain functions so CLIs stay testable.", "tags": ["python", "idiom"], "importance": 0.7}
+{"content": "Only basic types round-trip through JSON natively; convert datetimes etc. explicitly.", "tags": ["python", "stdlib"], "importance": 0.8}
+{"content": "Open CSV files with newline='' and let the csv module handle line endings.", "tags": ["python", "gotcha"], "importance": 0.8}
+{"content": "csv.DictReader keys rows by header names, immune to column reordering.", "tags": ["python", "idiom"], "importance": 0.7}
+{"content": "Write regex patterns as raw strings: r'\\\\d+' not '\\\\d+'.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "re.fullmatch requires the entire string to match; re.match anchors only the start.", "tags": ["python", "stdlib"], "importance": 0.75}
+{"content": "Never parse nested formats like HTML with regex; use a real parser.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "Store and compute in UTC; convert to local time only for display.", "tags": ["python", "gotcha"], "importance": 0.9}
+{"content": "Comparing naive and aware datetimes raises TypeError.", "tags": ["python", "gotcha"], "importance": 0.8}
+{"content": "time.monotonic() measures durations; time.time() gives wall-clock timestamps.", "tags": ["python", "stdlib"], "importance": 0.75}
+{"content": "Use lazy %-style args in log calls so messages build only when emitted.", "tags": ["python", "performance"], "importance": 0.7}
+{"content": "Libraries should get loggers but never configure logging.", "tags": ["python", "idiom"], "importance": 0.75}
+{"content": "log.exception inside except blocks logs the message plus traceback.", "tags": ["python", "idiom"], "importance": 0.75}
+{"content": "Arrange-act-assert is the standard test structure: setup, execute, verify.", "tags": ["python", "testing"], "importance": 0.7}
+{"content": "Mock external boundaries (network, filesystem, clocks) so tests stay fast and deterministic.", "tags": ["python", "testing"], "importance": 0.8}
+{"content": "pytest.mark.parametrize runs one test body over many inputs.", "tags": ["python", "testing"], "importance": 0.7}
+{"content": "CPython's GIL means threads do not parallelize CPU-bound Python code.", "tags": ["python", "concurrency"], "importance": 0.9}
+{"content": "Threads excel at I/O-bound work; the GIL is released during I/O waits.", "tags": ["python", "concurrency"], "importance": 0.85}
+{"content": "Use Queue for thread-safe handoff instead of shared state plus manual locks.", "tags": ["python", "concurrency"], "importance": 0.8}
+{"content": "multiprocessing bypasses the GIL with separate processes for CPU-bound work.", "tags": ["python", "concurrency"], "importance": 0.9}
+{"content": "Worker functions must be importable top-level functions (picklable by reference).", "tags": ["python", "concurrency"], "importance": 0.8}
+{"content": "Guard pool creation with if __name__ == '__main__' to prevent spawn loops.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "socket.send() may transmit partial data; use sendall() for full delivery.", "tags": ["python", "networking"], "importance": 0.85}
+{"content": "TCP recv() returns whatever arrived; loop until the message is complete or b'' arrives.", "tags": ["python", "networking"], "importance": 0.8}
+{"content": "Always set timeouts on network calls; the default waits forever.", "tags": ["python", "gotcha"], "importance": 0.9}
+{"content": "Never interpolate values into SQL strings; use ? placeholders to prevent injection.", "tags": ["python", "security"], "importance": 0.95}
+{"content": "The with conn: block commits on clean exit and rolls back on exception.", "tags": ["python", "idiom"], "importance": 0.8}
+{"content": "SQLite needs PRAGMA foreign_keys = ON per connection to enforce foreign keys.", "tags": ["python", "gotcha"], "importance": 0.75}
+{"content": "Never store passwords as plain SHA-256; use pbkdf2_hmac, bcrypt, or argon2 with unique salts.", "tags": ["python", "security"], "importance": 0.95}
+{"content": "Use the secrets module, never random, for tokens and passwords.", "tags": ["python", "security"], "importance": 0.95}
+{"content": "Compare HMAC digests with hmac.compare_digest to avoid timing leaks.", "tags": ["python", "security"], "importance": 0.85}
+{"content": "In bash, single quotes prevent all expansion; double quotes allow $var and $(cmd).", "tags": ["linux", "shell"], "importance": 0.85}
+{"content": "set -euo pipefail makes scripts fail fast on errors, unset vars, and pipeline failures.", "tags": ["linux", "shell"], "importance": 0.85}
+{"content": "Exit status 0 means success; test with if cmd directly, not just $?.", "tags": ["linux", "shell"], "importance": 0.7}
+{"content": "cmd >file 2>&1 merges stderr into the file; the order of redirections matters.", "tags": ["linux", "shell"], "importance": 0.85}
+{"content": "Pipeline stages run in subshells; variables set there do not survive.", "tags": ["linux", "shell"], "importance": 0.75}
+{"content": "find -print0 | xargs -0 safely handles filenames with spaces/newlines.", "tags": ["linux", "shell"], "importance": 0.8}
+{"content": "grep -F treats the pattern as a fixed string: faster, no metacharacter surprises.", "tags": ["linux", "shell"], "importance": 0.8}
+{"content": "awk processes whitespace/comma-delimited fields: $1, $2, NR, NF.", "tags": ["linux", "shell"], "importance": 0.75}
+{"content": "Single-quote shell patterns so the shell does not expand them first.", "tags": ["linux", "shell"], "importance": 0.8}
+{"content": "find ... -print0 | xargs -0 cmd is the whitespace-safe bulk pattern.", "tags": ["linux", "shell"], "importance": 0.9}
+{"content": "Preview with -print before any destructive find action like -delete.", "tags": ["linux", "shell"], "importance": 0.9}
+{"content": "xargs -P N runs N parallel workers for bulk jobs.", "tags": ["linux", "shell"], "importance": 0.7}
+{"content": "Permission triples are user/group/other, each rwx; 755 executables, 644 files, 600 secrets.", "tags": ["linux", "security"], "importance": 0.85}
+{"content": "Never chmod 777; diagnose the actual missing bit instead.", "tags": ["linux", "security"], "importance": 0.9}
+{"content": "Every parent directory needs the x bit for path traversal; use namei -l to debug.", "tags": ["linux", "gotcha"], "importance": 0.8}
+{"content": "SIGTERM (15) asks a process to exit cleanly; SIGKILL (9) forces it with no cleanup.", "tags": ["linux", "os"], "importance": 0.85}
+{"content": "Always try SIGTERM before SIGKILL.", "tags": ["linux", "idiom"], "importance": 0.8}
+{"content": "Zombie processes are dead children unreaped by their parent; fix the parent.", "tags": ["linux", "os"], "importance": 0.7}
+{"content": "Use ed25519 keys with passphrases; disable password auth once keys work.", "tags": ["linux", "security"], "importance": 0.9}
+{"content": "Private SSH keys must be 600 and never shared or committed.", "tags": ["linux", "security"], "importance": 0.95}
+{"content": "Never blindly accept a changed host key; verify out-of-band first.", "tags": ["linux", "security"], "importance": 0.85}
+{"content": "In rsync, src/ copies contents; src copies the directory itself.", "tags": ["linux", "gotcha"], "importance": 0.9}
+{"content": "Always dry-run (rsync -n) before --delete; it mirrors destructively.", "tags": ["linux", "gotcha"], "importance": 0.9}
+{"content": "List tarballs (tar -t) and extract into a fresh dir to dodge tarbombs.", "tags": ["linux", "security"], "importance": 0.8}
+{"content": "Cron runs with a minimal environment; use absolute paths and set PATH in the crontab.", "tags": ["linux", "gotcha"], "importance": 0.85}
+{"content": "systemctl status + journalctl -u name is the service debugging order.", "tags": ["linux", "idiom"], "importance": 0.75}
+{"content": "systemd timers support jitter and Persistent catch-up runs; cron does not.", "tags": ["linux", "os"], "importance": 0.7}
+{"content": "export shares a variable with child processes; without it the variable is shell-local.", "tags": ["linux", "shell"], "importance": 0.8}
+{"content": "~/.bashrc runs for interactive shells; ~/.profile for login shells.", "tags": ["linux", "shell"], "importance": 0.7}
+{"content": "Never put '.' in PATH; it enables trojan-horse executables.", "tags": ["linux", "security"], "importance": 0.85}
+{"content": "A 'full' disk with free bytes usually means exhausted inodes; check df -i.", "tags": ["linux", "gotcha"], "importance": 0.85}
+{"content": "In free -h, 'available' is the meaningful number; cache is not a leak.", "tags": ["linux", "os"], "importance": 0.8}
+{"content": "Deleted-but-open files still occupy space until the holder closes them.", "tags": ["linux", "gotcha"], "importance": 0.8}
+{"content": "Debug connectivity bottom-up: DNS, then ping, then port, then HTTP.", "tags": ["linux", "networking"], "importance": 0.85}
+{"content": "ss -tlnp lists listening TCP ports and owning processes.", "tags": ["linux", "networking"], "importance": 0.75}
+{"content": "Never pipe curl output directly to a shell without inspecting it first.", "tags": ["linux", "security"], "importance": 0.9}
+{"content": "git init creates a repo; git clone copies one with full history and an origin remote.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "Set user.name/user.email before committing; commits without identity are misattributed.", "tags": ["git", "vcs"], "importance": 0.75}
+{"content": "A committed secret is compromised once pushed; rotate it, do not just delete the file.", "tags": ["git", "security"], "importance": 0.95}
+{"content": "git add -p stages interactively hunk-by-hunk for one-idea-per-commit.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "git diff --cached shows exactly what the next commit will contain.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "Never amend or rewrite history that others have based work on.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "A git branch is a lightweight pointer to a commit; creating one is nearly free.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "git branch -d refuses to delete unmerged branches as a safety net.", "tags": ["git", "vcs"], "importance": 0.7}
+{"content": "Keep branches short-lived; long branches accumulate painful merge drift.", "tags": ["git", "vcs"], "importance": 0.75}
+{"content": "Golden rule: never rebase commits that others have based work on.", "tags": ["git", "vcs"], "importance": 0.95}
+{"content": "git pull --rebase replays local commits onto the fetched tip without noise merges.", "tags": ["git", "vcs"], "importance": 0.75}
+{"content": "Use --force-with-lease instead of --force; it refuses when others pushed.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "git stash push -m 'msg' shelves work; pop restores onto the current branch.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "Stash -u includes untracked files; default stashes tracked changes only.", "tags": ["git", "vcs"], "importance": 0.7}
+{"content": "Stash is for short parking; longer work belongs on a real branch.", "tags": ["git", "vcs"], "importance": 0.7}
+{"content": "git fetch downloads remote history without touching your work; pull = fetch + integrate.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "--force-with-lease only rewrites if the remote matches what you last saw.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "Inspect with git log origin/main..main before integrating remote changes.", "tags": ["git", "vcs"], "importance": 0.7}
+{"content": "git log -S 'text' finds commits that added or removed a string (pickaxe).", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "git diff --cached shows staged changes; plain diff shows unstaged.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "A...B (three dots) shows changes unique to either side since the merge base.", "tags": ["git", "vcs"], "importance": 0.7}
+{"content": "git revert creates a new commit undoing an old one: safe for shared history.", "tags": ["git", "vcs"], "importance": 0.9}
+{"content": "git reset --hard permanently discards uncommitted work; verify status first.", "tags": ["git", "gotcha"], "importance": 0.9}
+{"content": "git reflog records HEAD movements for ~90 days: the rescue tool for lost commits.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "Prefer annotated tags (-a) over lightweight; sign release tags (-s).", "tags": ["git", "vcs"], "importance": 0.75}
+{"content": "git push --follow-tags pushes commits plus their tags.", "tags": ["git", "vcs"], "importance": 0.7}
+{"content": "Never move a published tag; cut a new version instead.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "Protect main: require reviews, green CI, no direct pushes.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "Keep pull requests small and focused for fast, real reviews.", "tags": ["git", "vcs"], "importance": 0.8}
+{"content": "Main stays releasable at all times; broken main blocks everyone.", "tags": ["git", "vcs"], "importance": 0.85}
+{"content": "Big-O describes growth rate, dropping constants and lower-order terms.", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "Nested loops over the same n give O(n^2); a hash map often reduces it to O(n).", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "State best/average/worst case; quicksort is O(n log n) average, O(n^2) worst.", "tags": ["algorithms", "cs"], "importance": 0.75}
+{"content": "Python's sorted()/list.sort() use Timsort: stable, adaptive, O(n log n).", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "Stable sorts preserve the order of equal elements, enabling multi-key sorts.", "tags": ["algorithms", "cs"], "importance": 0.75}
+{"content": "Many problems reduce to sort + one linear pass (e.g., two-sum with two pointers).", "tags": ["algorithms", "cs"], "importance": 0.8}
+{"content": "Binary search needs sorted data and runs in O(log n) time.", "tags": ["algorithms", "cs"], "importance": 0.9}
+{"content": "Exclude mid each step (lo=mid+1/hi=mid-1) or the loop may never terminate.", "tags": ["algorithms", "gotcha"], "importance": 0.85}
+{"content": "Use the bisect module for insertion points instead of hand-rolling.", "tags": ["python", "stdlib"], "importance": 0.7}
+{"content": "Every recursion needs a base case and a step that shrinks toward it.", "tags": ["algorithms", "cs"], "importance": 0.9}
+{"content": "Python has no tail-call optimization and a ~1000-frame recursion limit.", "tags": ["python", "gotcha"], "importance": 0.85}
+{"content": "Memoization (lru_cache) turns exponential naive recursion into polynomial time.", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "Use list as a stack (append/pop) and deque as a queue (popleft).", "tags": ["algorithms", "data-structures"], "importance": 0.85}
+{"content": "list.pop(0) is O(n); deque.popleft() is O(1).", "tags": ["python", "performance"], "importance": 0.85}
+{"content": "heapq provides a min-heap priority queue with O(log n) push/pop.", "tags": ["python", "stdlib"], "importance": 0.75}
+{"content": "Linked lists give O(1) insert/delete at a known node but O(i) access to index i.", "tags": ["algorithms", "data-structures"], "importance": 0.85}
+{"content": "Python lists are dynamic arrays and beat linked lists for nearly all real uses.", "tags": ["python", "performance"], "importance": 0.8}
+{"content": "Fast/slow pointers detect cycles and find midpoints in one pass.", "tags": ["algorithms", "cs"], "importance": 0.8}
+{"content": "BST inorder traversal yields values in sorted order.", "tags": ["algorithms", "data-structures"], "importance": 0.8}
+{"content": "A degenerate (unbalanced) BST degrades to O(n) per operation.", "tags": ["algorithms", "gotcha"], "importance": 0.8}
+{"content": "heapq.nlargest(k, nums) finds top-k in O(n log k) without full sort.", "tags": ["python", "stdlib"], "importance": 0.7}
+{"content": "BFS on unweighted graphs finds shortest paths; first visit is via the shortest route.", "tags": ["algorithms", "cs"], "importance": 0.9}
+{"content": "DFS and BFS are both O(V + E); a visited set is mandatory on cyclic graphs.", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "Grids are graphs: treat cells as vertices and moves as edges.", "tags": ["algorithms", "idiom"], "importance": 0.75}
+{"content": "Hash tables give O(1) average insert/lookup/delete via key hashing.", "tags": ["algorithms", "data-structures"], "importance": 0.9}
+{"content": "Equal objects must hash equal; keys must stay immutable while stored.", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "Python randomizes string hashing to defend against hash-flooding attacks.", "tags": ["python", "security"], "importance": 0.7}
+{"content": "DP needs optimal substructure plus overlapping subproblems.", "tags": ["algorithms", "cs"], "importance": 0.9}
+{"content": "Define the state precisely (dp[i] = exact meaning) before writing the recurrence.", "tags": ["algorithms", "idiom"], "importance": 0.85}
+{"content": "lru_cache turns naive exponential recursion into polynomial DP.", "tags": ["algorithms", "cs"], "importance": 0.85}
+{"content": "Threads share the process's address space; processes have separate ones.", "tags": ["os", "concurrency"], "importance": 0.9}
+{"content": "The kernel schedules threads; N threads can run on N cores simultaneously.", "tags": ["os", "concurrency"], "importance": 0.8}
+{"content": "fork duplicates a process (copy-on-write); exec replaces its image.", "tags": ["os", "concurrency"], "importance": 0.75}
+{"content": "Stack frames are automatic and fast but small; heap objects have flexible lifetimes.", "tags": ["os", "memory"], "importance": 0.85}
+{"content": "Returning a pointer to a stack local (C) creates a dangling pointer.", "tags": ["os", "gotcha"], "importance": 0.85}
+{"content": "In Python every object is heap-allocated and freed by refcount + cycle collector.", "tags": ["python", "memory"], "importance": 0.8}
+{"content": "The MMU translates per-process virtual addresses to physical RAM via page tables.", "tags": ["os", "memory"], "importance": 0.85}
+{"content": "Copy-on-write makes fork cheap by sharing pages until one side writes.", "tags": ["os", "memory"], "importance": 0.8}
+{"content": "Thrashing (working set > RAM) collapses throughput; the fix is less memory pressure.", "tags": ["os", "gotcha"], "importance": 0.8}
+{"content": "Filenames live in directories; inodes hold metadata and block pointers.", "tags": ["os", "storage"], "importance": 0.85}
+{"content": "Hard links share one inode; symlinks are path strings that can break.", "tags": ["os", "storage"], "importance": 0.8}
+{"content": "Check df -i for inode exhaustion when a disk reports full with free bytes.", "tags": ["linux", "gotcha"], "importance": 0.85}
+{"content": "SIGTERM (15) requests graceful shutdown; SIGKILL (9) forces it and cannot be caught.", "tags": ["os", "linux"], "importance": 0.9}
+{"content": "Signal handlers must be tiny and reentrant: set a flag, return.", "tags": ["os", "gotcha"], "importance": 0.85}
+{"content": "SIGKILL and SIGSTOP cannot be caught, blocked, or ignored.", "tags": ["os", "linux"], "importance": 0.85}
+{"content": "Fds 0/1/2 are stdin/stdout/stderr; the same read/write works on files, sockets, pipes.", "tags": ["os", "linux"], "importance": 0.85}
+{"content": "Leaked descriptors cause 'too many open files'; check /proc/<pid>/fd.", "tags": ["linux", "gotcha"], "importance": 0.85}
+{"content": "dup2 remaps descriptors: the mechanism behind shell redirection.", "tags": ["os", "linux"], "importance": 0.75}
+{"content": "TCP provides reliability via handshake, sequence numbers, ACKs, and retransmission.", "tags": ["networking", "fundamentals"], "importance": 0.9}
+{"content": "TCP is a byte stream; it does not preserve application message boundaries.", "tags": ["networking", "gotcha"], "importance": 0.85}
+{"content": "Private IPv4 ranges: 10/8, 172.16/12, 192.168/16 (not globally routable).", "tags": ["networking", "fundamentals"], "importance": 0.75}
+{"content": "TCP: reliable ordered byte stream. UDP: connectionless best-effort datagrams.", "tags": ["networking", "fundamentals"], "importance": 0.9}
+{"content": "UDP suits timeliness-over-completeness (media, DNS, games); TCP suits must-arrive-in-order data.", "tags": ["networking", "fundamentals"], "importance": 0.85}
+{"content": "QUIC runs reliable streams over UDP, eliminating TCP head-of-line blocking.", "tags": ["networking", "fundamentals"], "importance": 0.7}
+{"content": "DNS resolves via root -> TLD -> authoritative hierarchy, with TTL-based caching.", "tags": ["networking", "fundamentals"], "importance": 0.85}
+{"content": "Lower DNS TTLs before migrations; caches hold old values until expiry.", "tags": ["networking", "idiom"], "importance": 0.8}
+{"content": "Test DNS first when debugging connectivity: dig +short, and dig @8.8.8.8 to bypass local resolvers.", "tags": ["networking", "idiom"], "importance": 0.85}
+{"content": "HTTP status classes: 2xx success, 3xx redirect, 4xx client error, 5xx server error.", "tags": ["networking", "web"], "importance": 0.9}
+{"content": "GET/HEAD must be safe (no state change); PUT/DELETE should be idempotent.", "tags": ["networking", "web"], "importance": 0.85}
+{"content": "HTTP is stateless; sessions ride on cookies or tokens.", "tags": ["networking", "web"], "importance": 0.8}
+{"content": "Never disable TLS certificate verification to work around an error.", "tags": ["networking", "security"], "importance": 0.95}
+{"content": "TLS clients must verify chain, hostname (SAN), dates, and revocation.", "tags": ["networking", "security"], "importance": 0.9}
+{"content": "Forward secrecy (ECDHE) keeps past traffic safe even if long-term keys leak.", "tags": ["networking", "security"], "importance": 0.8}
+{"content": "Ports below 1024 are privileged: binding them requires root.", "tags": ["networking", "fundamentals"], "importance": 0.75}
+{"content": "Connection refused = nothing listening; timeout = filtered or black-holed.", "tags": ["networking", "idiom"], "importance": 0.85}
+{"content": "Firewall posture: default-deny inbound, allow only needed ports from needed sources.", "tags": ["networking", "security"], "importance": 0.9}

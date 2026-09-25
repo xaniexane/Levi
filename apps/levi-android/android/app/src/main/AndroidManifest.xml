@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- WebView needs network access. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- BiometricPrompt app lock (normal permission, granted at install). -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- Microphone for the default-assistant voice plate. Runtime permission:
+         requested in the assistant flow with a rationale; the voice plate
+         and voice session fail closed without it. The toolbar mic uses the
+         *system* speech recognizer instead and needs no permission. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Notification channels ("Messaging channels", "Notifications" rows). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- "Hey LEVI" hotword listener: a user-toggled foreground service of
+         microphone type. Needs FOREGROUND_SERVICE to run at all and the
+         microphone subtype on API 34+. USE_FULL_SCREEN_INTENT (API 34+,
+         granted at install) lets the hotword trigger pop LEVI's voice
+         input via a full-screen notification — the sanctioned path, since
+         background activity launches are restricted. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <!-- Coarse location for the "location_coarse" device tool (network/IP-based
+         estimate only). Runtime permission: the tool fails closed until granted,
+         and the location is read only when the tool is invoked — never tracked. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Package visibility (API 30+) for the device tools' intent checks:
+         resolveActivity() must see the handlers, otherwise the tools would
+         wrongly report "no_handler". -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.WEB_SEARCH" />
+        </intent>
+        <intent>
+            <action android:name="android.provider.AlarmClock.ACTION_SET_ALARM" />
+        </intent>
+        <intent>
+            <action android:name="android.provider.AlarmClock.ACTION_SET_TIMER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.INSERT" />
+            <data android:mimeType="vnd.android.cursor.dir/event" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".LeviApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.LEVI"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="false"
+        android:supportsRtl="true">
+
+        <!-- Cleartext is DENIED globally. network_security_config.xml
+             allow-lists it only for loopback hosts (on-device Termux
+             server, emulator host). LAN / public servers must use HTTPS:
+             ServerConfig rejects http:// for non-local hosts. -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <!-- App-lock gate. Never exported: only this app can show it. -->
+        <activity
+            android:name=".LockActivity"
+            android:exported="false" />
+
+        <!-- Default-assistant entry: the system fires ASSIST / VOICE_COMMAND
+             here when LEVI is the default digital assistant on paths that
+             resolve to an activity. Validates the action, ignores extras on
+             external intents, and routes into MainActivity with a
+             voice-input affordance. No UI of its own. -->
+        <activity
+            android:name=".AssistActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.LEVI">
+            <intent-filter>
+                <action android:name="android.intent.action.ASSIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VOICE_COMMAND" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Default-assistant voice interaction: declaring this service is
+             what puts LEVI in Settings → Apps → Default apps →
+             Digital assistant app. Bound only by the system. -->
+        <service
+            android:name=".voice.LeviVoiceInteractionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/voice_interaction_service" />
+        </service>
+
+        <!-- Vends the assistant overlay session. Bound only by the system. -->
+        <service
+            android:name=".voice.LeviVoiceInteractionSessionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionSessionService" />
+            </intent-filter>
+        </service>
+
+        <!-- "Hey LEVI" hotword listener. Started and stopped only by the
+             user's Settings toggle; never exported, never bound. Declaring
+             the microphone foreground-service type is what lets it hold
+             the mic while listening. -->
+        <service
+            android:name=".voice.HeyLeviService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <!-- Shares data-export / issue-report files from cache only. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+    </application>
+</manifest>

@@ -1,0 +1,126 @@
+# m00076
+# Book: OpenStax Introduction Python Programming
+# Subject: college-success
+# Source: https://github.com/openstax/osbooks-introduction-python-programming
+# License: CC BY 4.0 (OpenStax)
+
+Dictionary operations
+
+Dictionary operations
+
+Learning objectives
+
+By the end of this section you should be able to
+
+Recognize that a dictionary object is mutable.
+
+Evaluate dictionary items, keys, and values.
+
+Demonstrate the ability to access, evaluate, and modify dictionary items.
+
+Modify a dictionary by adding items.
+
+Modify a dictionary by removing items.
+
+Accessing dictionary items
+
+In Python, values associated with keys in a dictionary can be accessed using the keys as indexes. Here are two ways to access dictionary items in Python:
+ 
+ Square bracket notation: Square brackets [] with the key inside access the value associated with that key. If the key is not found, an exception will be thrown.
+ get() method: The get() method is called with the key as an argument to access the value associated with that key. If the key is not found, the method returns None by default, or a default value specified as the second argument.
+
+Square bracket notation: Square brackets [] with the key inside access the value associated with that key. If the key is not found, an exception will be thrown.
+get() method: The get() method is called with the key as an argument to access the value associated with that key. If the key is not found, the method returns None by default, or a default value specified as the second argument.
+
+Ex: In the code below, a dictionary object my_dict is initialized with items {"apple": 2, "banana": 3, "orange": 4}. The square bracket notation and get() method are used to access values associated with the keys "banana" and "apple", respectively. When accessing the dictionary to obtain the key "pineapple", -1 is returned since the key does not exist in the dictionary.
+
+Accessing dictionary items
+
+Dictionary items
+
+Given the dictionary members = {"Jaya": "Student", "John": "TA", "Ksenia": "Staff"}, answer the following questions.
+
+Obtaining dictionary keys and values
+
+Dictionary keys, values, and both keys and values can be obtained using keys(), values(), and items() function calls, respectively. The return type of keys(), values(), and items() are dict_keys, dict_values, and dict_items, which can be converted to a list object using the list constructor list().
+
+String template formatting for course enrollment requests
+
+A dictionary object with items {"a": 97, "b": 98, "c": 99} is created. Functions keys(), values(), and items() are called to obtain keys, values, and items in the dictionary, respectively. list() is also used to convert the output to a list object.
+
+The above code's output is:
+
+Dictionary keys and values
+
+Given the dictionary numbers = {"one": 1, "two": 2, "three": 3}, answer the following questions.
+
+Dictionary mutability
+
+In Python, a dictionary is a mutable data type, which means that a dictionary's content can be modified after creation. Dictionary items can be added, updated, or deleted from a dictionary after a dictionary object is created.
+
+To add an item to a dictionary, either the square bracket notation or update() function can be used.
+
+Square bracket notation: When using square brackets to create a new key object and assign a value to the key, the new key-value pair will be added to the dictionary.
+ 
+ my_dict = {"apple": 2, "banana": 3, "orange": 4}
+ my_dict["pineapple"] = 1
+ print(my_dict) # Prints: {"apple": 2, "banana": 3, "orange": 4, "pineapple": 1}
+update() method: the update() method can be called with additional key-value pairs to update the dictionary content.
+ 
+ my_dict = {"apple": 2, "banana": 3, "orange": 4}
+ my_dict.update({"pineapple": 1, "cherry": 0})
+ print(my_dict) # Prints: {"apple": 2, "banana": 3, "orange": 4, "pineapple": 1, "cherry": 0}
+
+To modify a dictionary item, the two approaches above can be used on an existing dictionary key along with the updated value. Ex:
+
+Square bracket notation:
+ 
+ my_dict = {"apple": 2, "banana": 3, "orange": 4}
+ my_dict["apple"] = 1
+ print(my_dict) # Prints: {"apple": 1, "banana": 3, "orange": 4}
+update() method:
+ 
+ my_dict = {"apple": 2, "banana": 3, "orange": 4}
+ my_dict.update({"apple": 1})
+ print(my_dict) # Prints: {"apple": 1, "banana": 3, "orange": 4}
+
+Items can be deleted from a dictionary using the del keyword or the pop() method.
+del keyword:
+ 
+ my_dict = {"apple": 2, "banana": 3, "orange": 4}
+ del my_dict["orange"]
+ print(my_dict) # Prints: {"apple": 2, "banana": 3}
+pop() method:
+ 
+ my_dict = {"apple": 2, "banana": 3, "orange": 4}
+ deleted_value = my_dict.pop("banana")
+ print(deleted_value) # Prints: 3
+ print(my_dict) # Output: {"apple": 2, "orange": 4}}
+
+Modifying dictionary items
+
+Modifying a dictionary
+
+Given the dictionary food = {"Coconut soup": "$15", "Butter Chicken": "$18", "Kabob": "$20"}, answer the following questions.
+
+Create a dictionary of cars step-by-step
+
+Follow the steps below to create a dictionary of cars and modify it step-by-step.
+
+Create an empty dictionary.
+
+Add a key-value pair of "Mustang": 10.
+
+Add another key-value pair of "Volt": 3.
+
+Print the dictionary.
+
+Modify the value associated with key "Mustang" to be equal to 2.
+
+Delete key "Volt" and the associated value.
+
+Print the dictionary content.
+
+The number of unique characters
+
+Given a string value, calculate and print the number of unique characters using a dictionary.

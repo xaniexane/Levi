@@ -1,0 +1,1441 @@
+# m51266
+# Book: OpenStax Algebra And Trigonometry
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-college-algebra-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Transformation of Functions
+
+Transformation of Functions
+
+In this section, you will:
+
+Graph functions using vertical and horizontal shifts.
+
+Graph functions using reflections about the x-axis and the y-axis.
+
+Determine whether a function is even, odd, or neither from its graph.
+
+Graph functions using compressions and stretches.
+
+Combine transformations.
+
+Learning Objectives
+
+Identify graphs of basic functions, (IA 3.6.2)
+
+Graph quadratic functions using transformations, (IA 9.7.4)
+
+Objective 1: Identify graphs of basic functions, (IA 3.6.2)
+
+Basic functions have unique shapes, characteristics, and algebraic equations. It will be helpful to recognize and identify these basic or “toolkit functions” in our work in algebra, precalculus and calculus. Remember functions can be represented in many ways including by name, equation, graph, and basic tables of values.
+
+Practice Makes Perfect
+
+Use a graphing program to help complete the following. Then, choose three values of x to evaluate for each. Add the x and y to the table for each exercise.
+
+Name
+Equation
+Graph
+y=c, where c is a constant
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=x
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=|x|
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=x2
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=x3
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=1x
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=x
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=x3
+Choose 3 values of x to evaluate for each.
+y
+Name
+Equation
+Graph
+y=ex
+Choose 3 values of x to evaluate for each.
+y
+Objective 2: Graph quadratic functions using transformations (IA 9.7.4)
+
+When we modify basic functions by adding, subtracting, or multiplying constants to the equation, very systematic changes take place. We call these transformations of basic functions. Here we will investigate the effects of vertical shifts, horizontal shifts, vertical stretches or compressions, and reflections on quadratic functions. We could use any basic function to illustrate transformations, but quadratics work nicely because we can easily keep track of a point called the vertex.
+
+Practice Makes Perfect
+
+The graphs of quadratic functions are called parabolas. Use a graphing program to graph each of the following quadratic functions. For each graph find the vertex (the minimum or maximum value) of the parabola and list its coordinates. Most importantly use the patterns observed to answer each of the given questions.
+
+In general, what effect does adding or subtracting a constant have on the graph of f(x)=x2 ?
+f(x)=x2–4
+
+vertex: ________
+In general, what effect does adding or subtracting a value to x before it is squared have on the graph of f(x)=x2 ?
+f(x)=(x+3)2
+
+vertex: ________
+In general, what effect does multiplying by a constant have on the graph of f(x)=x2 ?
+f(x)=110x2
+
+vertex: ________
+In general, what effect does multiplying by a negative constant have on the graph of f(x)=x2 ?
+f(x)=(x–3)2–2
+
+vertex: ________
+Answer each of the following based on the changes you saw in the graphs above.
+ⓐ Based on your observations from the previous graphs, what are the coordinates of the vertex of the parabola f(x)=(x+200)2-67 ? Do not attempt to graph!
+ⓑ Based on your observations from the previous graphs, what are the coordinates of the vertex of the parabola f(x)=12(x+6)2+111 ? Do not attempt to graph!
+
+Fill in the blanks:
+ⓐ If c > 0, the graph of y=f(x)+c is obtained by shifting the graph of y=f(x) to the ________ a distance of c units. The graph of y=f(x)–c is obtained by shifting the graph of y=f(x) to the ________ a distance of c units.
+ⓑ If c > 0, the graph of y=f(x)–c is obtained by shifting the graph of y=f(x) to the ________ a distance of c units. The graph of y=f(x)+c is obtained by shifting the graph of y=f(x) to the ________ a distance of c units.
+
+Apply what you have learned in this skill sheet regarding transformations. Write the equation of a quadratic function that has been transformed in the each of the ways described in parts ⓐ and ⓑ below. Write equations in f(x) = form. After writing an equation check your answer using a graphing program and graph below. Be sure to label the vertex as an ordered pair. Does your graph match the description?
+ⓐ Flipped upside down and shifted to the right 3 units and down 2 units.
+f(x) =
+ⓑ Stretched vertically by a factor of 4 and shifted left 6 units and up 5 units.
+f(x) =
+
+Remember the basic transformations investigated in this activity apply to all basic functions. Apply what you have learned in this lab about transformations. Write the equation of a function that has been transformed in the following ways. Write equations in f(x) = form. After writing an equation check your answer using a graphing program and graph below. Be sure to label a point on the graph. Does your graph match the description?
+ⓐ Begin with a basic square root function. Reflect the graph over the x-axis and shift it to the right 2 units and down 1 unit.
+f(x) =
+ⓑ Begin with an absolute value function. Stretch the graph vertically by a factor of 3 and shift it left 4 units and up 5 units.
+f(x) =
+
+We all know that a flat mirror enables us to see an accurate image of ourselves and whatever is behind us. When we tilt the mirror, the images we see may shift horizontally or vertically. But what happens when we bend a flexible mirror? Like a carnival funhouse mirror, it presents us with a distorted image of ourselves, stretched or compressed horizontally or vertically. In a similar way, we can distort or transform mathematical functions to better adapt them to describing objects or processes in the real world. In this section, we will take a look at several kinds of transformations.
+
+Graphing Functions Using Vertical and Horizontal Shifts
+
+Often when given a problem, we try to model the scenario using mathematics in the form of words, tables, graphs, and equations. One method we can employ is to adapt the basic graphs of the toolkit functions to build new models for a given scenario. There are systematic ways to alter functions to construct appropriate models for the problems we are trying to solve.
+
+Identifying Vertical Shifts
+
+One simple kind of transformation involves shifting the entire graph of a function up, down, right, or left. The simplest shift is a vertical shift, moving the graph up or down, because this transformation involves adding a positive or negative constant to the function. In other words, we add the same constant to the output value of the function regardless of the input. For a function 
+ 
+ g(x)=f(x)+k,
+ the function 
+ 
+ f(
+ x
+ )
+ is shifted vertically 
+ 
+ k
+ units. See for an example.
+
+To help you visualize the concept of a vertical shift, consider that 
+ 
+ y=f(
+ x
+ ).
+ 
+ Therefore, 
+ 
+ f(
+ x
+ )+k
+ 
+ is equivalent to 
+ 
+ y+k.
+ 
+ Every unit of 
+ 
+ y
+ 
+ is replaced by 
+ 
+ y+k,
+ 
+ so the y-value increases or decreases depending on the value of 
+ 
+ k.
+ 
+ The result is a shift upward or downward.
+
+Vertical Shift
+
+Given a function 
+ 
+ f(
+ x
+ ),
+ 
+ a new function 
+ 
+ g(x)=f(x)+k,
+ 
+ where 
+ 
+ k
+ 
+ is a constant, is a vertical shift of the function 
+ 
+ f(
+ x
+ ).
+ 
+ All the output values change by 
+ 
+ k
+ 
+ units. If 
+ 
+ k
+ 
+ is positive, the graph will shift up. If 
+ 
+ k
+ 
+ is negative, the graph will shift down.
+
+Adding a Constant to a Function
+
+To regulate temperature in a green building, airflow vents near the roof open and close throughout the day. shows the area of open vents 
+ 
+ V
+ 
+ (in square feet) throughout the day in hours after midnight, 
+ 
+ t.
+ During the summer, the facilities manager decides to try to better regulate temperature by increasing the amount of open vents by 20 square feet throughout the day and night. Sketch a graph of this new function.
+
+We can sketch a graph of this new function by adding 20 to each of the output values of the original function. This will have the effect of shifting the graph vertically up, as shown in .
+
+Notice that in , for each input value, the output value has increased by 20, so if we call the new function 
+ 
+ S(
+ t
+ ),
+ 
+ we could write
+
+This notation tells us that, for any value of 
+ 
+ t,S(t)
+ 
+ can be found by evaluating the function 
+ 
+ V
+ 
+ at the same input and then adding 20 to the result. This defines 
+ 
+ S
+ 
+ as a transformation of the function 
+ 
+ V,
+ 
+ in this case a vertical shift up 20 units. Notice that, with a vertical shift, the input values stay the same and only the output values change. See .
+t
+0
+8
+10
+17
+19
+V(t)
+0
+0
+220
+220
+0
+S(
+ t
+ )
+20
+20
+240
+240
+20
+Given a tabular function, create a new row to represent a vertical shift.
+
+Identify the output row or column.
+
+Determine the magnitude of the shift.
+
+Add the shift to the value in each output cell. Add a positive value for up or a negative value for down.
+
+Shifting a Tabular Function Vertically
+
+A function 
+ 
+ f(
+ x
+ )
+ 
+ is given in . Create a table for the function 
+ 
+ g(x)=f(x)−3.
+x
+2
+4
+6
+f(x)
+1
+3
+7
+11
+The formula 
+ 
+ g(x)=f(x)−3
+ 
+ tells us that we can find the output values of 
+ 
+ g
+ 
+ by subtracting 3 from the output values of 
+ 
+ f.
+ 
+ For example:
+
+Subtracting 3 from each 
+ 
+ f(
+ x
+ )
+ 
+ value, we can complete a table of values for 
+ 
+ g(
+ x
+ )
+ 
+ as shown in .
+x
+2
+4
+6
+f(x)
+1
+3
+7
+g(x)
+−2
+0
+4
+8
+Analysis
+
+As with the earlier vertical shift, notice the input values stay the same and only the output values change.
+
+The function 
+ 
+ h(t)=−4.9
+ t
+ 2
+ 
+ +30t
+ 
+ gives the height 
+ 
+ h
+ 
+ of a ball (in meters) thrown upward from the ground after 
+ 
+ t
+ 
+ seconds. Suppose the ball was instead thrown from the top of a 10-m building. Relate this new height function 
+ 
+ b(t)
+ 
+ to 
+ 
+ h(t),
+ 
+ and then find a formula for 
+ 
+ b(t).
+
+Identifying Horizontal Shifts
+
+We just saw that the vertical shift is a change to the output, or outside, of the function. We will now look at how changes to input, on the inside of the function, change its graph and meaning. A shift to the input results in a movement of the graph of the function left or right in what is known as a horizontal shift, shown in .
+
+For example, if 
+ 
+ f(x)=
+ x
+ 2
+ 
+ ,
+ 
+ then 
+ 
+ g(x)=
+ 
+ (x−2)
+ 
+ 2
+
+ is a new function. Each input is reduced by 2 prior to squaring the function. The result is that the graph is shifted 2 units to the right, because we would need to increase the prior input by 2 units to yield the same output value as given in 
+ 
+ f.
+
+Horizontal Shift
+
+Given a function 
+ 
+ f,
+ 
+ a new function 
+ 
+ g(
+ x
+ )=f(
+ 
+ x−h
+ 
+ ),
+ 
+ where 
+ 
+ h
+ 
+ is a constant, is a horizontal shift of the function 
+ 
+ f.
+ 
+ If 
+ 
+ h
+ is positive, the graph will shift right. If 
+ 
+ h
+ 
+ is negative, the graph will shift left.
+
+Adding a Constant to an Input
+
+Returning to our building airflow example from , suppose that in autumn the facilities manager decides that the original venting plan starts too late, and wants to begin the entire venting program 2 hours earlier. Sketch a graph of the new function.
+
+We can set 
+ 
+ V(
+ t
+ )
+ 
+ to be the original program and 
+ 
+ F(
+ t
+ )
+ 
+ to be the revised program.
+
+In the new graph, at each time, the airflow is the same as the original function 
+ 
+ V
+ 
+ was 2 hours later. For example, in the original function 
+ 
+ V,
+ 
+ the airflow starts to change at 8 a.m., whereas for the function 
+ 
+ F,
+ 
+ the airflow starts to change at 6 a.m. The comparable function values are 
+ 
+ V(8)=F(6).
+ 
+ See . Notice also that the vents first opened to 
+ 
+ 220
+ 
+ ft
+ 
+ 2
+
+ at 10 a.m. under the original plan, while under the new plan the vents reach 
+ 
+ 220
+ 
+ ft
+ 
+ 2
+
+ at 8 a.m., so 
+ 
+ V(10)=F(8).
+
+In both cases, we see that, because 
+ 
+ F(
+ t
+ )
+ 
+ starts 2 hours sooner, 
+ 
+ h=−2.
+ 
+ That means that the same output values are reached when 
+ 
+ F(t)=V(t−(
+ 
+ −2
+ 
+ ))=V(
+ 
+ t+2
+ 
+ ).
+
+Analysis
+
+Note that 
+ 
+ V(t+2)
+ 
+ has the effect of shifting the graph to the left.
+
+Horizontal changes or “inside changes” affect the domain of a function (the input) instead of the range and often seem counterintuitive. The new function 
+ 
+ F(
+ t
+ )
+ 
+ uses the same outputs as 
+ 
+ V(
+ t
+ ),
+ 
+ but matches those outputs to inputs 2 hours earlier than those of 
+ 
+ V(
+ t
+ ).
+ 
+ Said another way, we must add 2 hours to the input of 
+ 
+ V
+ 
+ to find the corresponding output for 
+ 
+ F:F(t)=V(t+2).
+Given a tabular function, create a new row to represent a horizontal shift.
+
+Identify the input row or column.
+
+Determine the magnitude of the shift.
+
+Add the shift to the value in each input cell.
+
+Shifting a Tabular Function Horizontally
+
+A function 
+ 
+ f(x)
+ is given in . Create a table for the function 
+ 
+ g(x)=f(x−3).
+x
+2
+4
+6
+f(x)
+1
+3
+7
+11
+The formula 
+ 
+ g(x)=f(x−3)
+ 
+ tells us that the output values of 
+ 
+ g
+ are the same as the output value of 
+ 
+ f
+ when the input value is 3 less than the original value. For example, we know that 
+ 
+ f(2)=1.
+ To get the same output from the function 
+ 
+ g,
+ we will need an input value that is 3 larger. We input a value that is 3 larger for 
+ 
+ g(x)
+ because the function takes 3 away before evaluating the function 
+ 
+ f.
+
+We continue with the other values to create .
+x
+5
+7
+9
+x−3
+2
+4
+6
+f(x–3)
+1
+3
+7
+g(x)
+1
+3
+7
+11
+The result is that the function 
+ 
+ g(x)
+ has been shifted to the right by 3. Notice the output values for 
+ 
+ g(x)
+ remain the same as the output values for 
+ 
+ f(x),
+ but the corresponding input values, 
+ 
+ x,
+ have shifted to the right by 3. Specifically, 2 shifted to 5, 4 shifted to 7, 6 shifted to 9, and 8 shifted to 11.
+
+Analysis
+represents both of the functions. We can see the horizontal shift in each point.
+
+Identifying a Horizontal Shift of a Toolkit Function
+represents a transformation of the toolkit function 
+ 
+ f(x)=
+ x
+ 2
+ 
+ .
+ Relate this new function 
+ 
+ g(x)
+ to 
+ 
+ f(x),
+ and then find a formula for 
+ 
+ g(x).
+
+Notice that the graph is identical in shape to the 
+ 
+ f(x)=
+ x
+ 2
+
+ function, but the x-values are shifted to the right 2 units. The vertex used to be at (0,0), but now the vertex is at (2,0). The graph is the basic quadratic function shifted 2 units to the right, so
+
+Notice how we must input the value 
+ 
+ x=2
+ to get the output value 
+ 
+ y=0;
+ the x-values must be 2 units larger because of the shift to the right by 2 units. We can then use the definition of the 
+ 
+ f(x)
+ function to write a formula for 
+ 
+ g(x)
+ by evaluating 
+ 
+ f(x−2).
+
+Analysis
+
+To determine whether the shift is 
+ 
+ +2
+ or 
+ 
+ −2
+ , consider a single reference point on the graph. For a quadratic, looking at the vertex point is convenient. In the original function, 
+ 
+ f(0)=0.
+ In our shifted function, 
+ 
+ g(2)=0.
+ 
+ To obtain the output value of 0 from the function 
+ 
+ f,
+ we need to decide whether a plus or a minus sign will work to satisfy 
+ 
+ g(2)=f(x−2)=f(0)=0.
+ 
+ For this to work, we will need to subtract 2 units from our input values.
+
+Interpreting Horizontal versus Vertical Shifts
+
+The function 
+ 
+ G(m)
+ gives the number of gallons of gas required to drive 
+ 
+ m
+ miles. Interpret 
+ 
+ G(m)+10
+ and 
+ 
+ G(m+10).
+G(m)+10
+ can be interpreted as adding 10 to the output, gallons. This is the gas required to drive 
+ 
+ m
+ miles, plus another 10 gallons of gas. The graph would indicate a vertical shift.
+G(m+10)
+ can be interpreted as adding 10 to the input, miles. So this is the number of gallons of gas required to drive 10 miles more than 
+ 
+ m
+ miles. The graph would indicate a horizontal shift.
+
+Given the function 
+ 
+ f(x)=
+ x
+ 
+ ,
+ graph the original function 
+ 
+ f(x)
+ and the transformation 
+ 
+ g(x)=f(x+2)
+ on the same axes. Is this a horizontal or a vertical shift? Which way is the graph shifted and by how many units?
+
+The graphs of 
+ 
+ f(x)
+ and 
+ 
+ g(x)
+ are shown below. The transformation is a horizontal shift. The function is shifted to the left by 2 units.
+
+Combining Vertical and Horizontal Shifts
+
+Now that we have two transformations, we can combine them. Vertical shifts are outside changes that affect the output (y-) values and shift the function up or down. Horizontal shifts are inside changes that affect the input (x-) values and shift the function left or right. Combining the two types of shifts will cause the graph of a function to shift up or down and left or right.
+Given a function and both a vertical and a horizontal shift, sketch the graph.
+
+Identify the vertical and horizontal shifts from the formula.
+
+The vertical shift results from a constant added to the output. Move the graph up for a positive constant and down for a negative constant.
+
+The horizontal shift results from a constant added to the input. Move the graph left for a positive constant and right for a negative constant.
+
+Apply the shifts to the graph in either order.
+
+Graphing Combined Vertical and Horizontal Shifts
+
+Given 
+ 
+ f(x)=| x |,
+ sketch a graph of 
+ 
+ h(x)=f(x+1)−3.
+
+The function 
+ 
+ f
+ is our toolkit absolute value function. We know that this graph has a V shape, with the point at the origin. The graph of 
+ 
+ h
+ has transformed 
+ 
+ f
+ in two ways: 
+ 
+ f(x+1)
+ is a change on the inside of the function, giving a horizontal shift left by 1, and the subtraction by 3 in 
+ 
+ f(x+1)−3
+ is a change to the outside of the function, giving a vertical shift down by 3. The transformation of the graph is illustrated in .
+
+Let us follow one point of the graph of 
+ 
+ f(x)=| x |.
+
+The point 
+ 
+ (0,0)
+ 
+ is transformed first by shifting left 1 unit: 
+ 
+ (0,0)→(−1,0)
+
+The point 
+ 
+ (−1,0)
+ 
+ is transformed next by shifting down 3 units: 
+ 
+ (−1,0)→(−1,−3)
+shows the graph of 
+ 
+ h.
+
+Given 
+ 
+ f(x)=| x |,
+ sketch a graph of 
+ 
+ h(x)=f(x−2)+4.
+
+Identifying Combined Vertical and Horizontal Shifts
+
+Write a formula for the graph shown in , which is a transformation of the toolkit square root function.
+
+The graph of the toolkit function starts at the origin, so this graph has been shifted 1 to the right and up 2. In function notation, we could write that as
+
+Using the formula for the square root function, we can write
+
+Analysis
+
+Note that this transformation has changed the domain and range of the function. This new graph has domain 
+ 
+ [1,∞)
+ and range 
+ 
+ [2,∞).
+
+Write a formula for a transformation of the toolkit reciprocal function 
+ 
+ f(
+ x
+ )=
+ 1
+ x
+
+ that shifts the function’s graph one unit to the right and one unit up.
+g(
+ x
+ )=
+ 1
+ 
+ x-1
+ 
+ +1
+
+Graphing Functions Using Reflections about the Axes
+
+Another transformation that can be applied to a function is a reflection over the x- or y-axis. A vertical reflection reflects a graph vertically across the x-axis, while a horizontal reflection reflects a graph horizontally across the y-axis. The reflections are shown in .
+
+Notice that the vertical reflection produces a new graph that is a mirror image of the base or original graph about the x-axis. The horizontal reflection produces a new graph that is a mirror image of the base or original graph about the y-axis.
+
+Reflections
+
+Given a function 
+ f(x),
+ a new function 
+ g(x)=−f(x)
+ is a vertical reflection of the function 
+ f(x),
+ sometimes called a reflection about (or over, or through) the x-axis.
+
+Given a function 
+ f(x),
+ a new function 
+ g(x)=f(−x)
+ is a horizontal reflection of the function 
+ f(x),
+ sometimes called a reflection about the y-axis.
+Given a function, reflect the graph both vertically and horizontally.
+
+Multiply all outputs by –1 for a vertical reflection. The new graph is a reflection of the original graph about the x-axis.
+
+Multiply all inputs by –1 for a horizontal reflection. The new graph is a reflection of the original graph about the y-axis.
+
+Reflecting a Graph Horizontally and Vertically
+
+Reflect the graph of 
+ s(t)=
+ t
+
+ (a) vertically and (b) horizontally.
+ⓐReflecting the graph vertically means that each output value will be reflected over the horizontal t-axis as shown in .
+
+ Vertical reflection of the square root function
+
+ Because each output value is the opposite of the original output value, we can write
+
+ V(t)=−s(t)or V(t)=−
+ t
+
+ Notice that this is an outside change, or vertical shift, that affects the output 
+ s(t)
+ values, so the negative sign belongs outside of the function.
+
+Reflecting the graph vertically means that each output value will be reflected over the horizontal t-axis as shown in .
+
+Because each output value is the opposite of the original output value, we can write
+
+Notice that this is an outside change, or vertical shift, that affects the output 
+ s(t)
+ values, so the negative sign belongs outside of the function.
+ⓑ
+ Reflecting horizontally means that each input value will be reflected over the vertical axis as shown in .
+
+ Horizontal reflection of the square root function
+
+ Because each input value is the opposite of the original input value, we can write
+
+ H(t)=s(−t)or H(t)=
+ 
+ −t
+
+ Notice that this is an inside change or horizontal change that affects the input values, so the negative sign is on the inside of the function.
+Note that these transformations can affect the domain and range of the functions. While the original square root function has domain 
+ [0,∞)
+ and range 
+ [0,∞),
+ the vertical reflection gives the 
+ V(t)
+ function the range 
+ 
+ ( 
+ −∞,0
+ ]
+ 
+ and the horizontal reflection gives the 
+ H(t)
+ function the domain 
+ 
+ ( 
+ −∞,0
+ ].
+
+Reflecting horizontally means that each input value will be reflected over the vertical axis as shown in .
+
+Because each input value is the opposite of the original input value, we can write
+
+Notice that this is an inside change or horizontal change that affects the input values, so the negative sign is on the inside of the function.
+
+Note that these transformations can affect the domain and range of the functions. While the original square root function has domain 
+ [0,∞)
+ and range 
+ [0,∞),
+ the vertical reflection gives the 
+ V(t)
+ function the range 
+ 
+ ( 
+ −∞,0
+ ]
+ 
+ and the horizontal reflection gives the 
+ H(t)
+ function the domain 
+ 
+ ( 
+ −∞,0
+ ].
+
+Reflect the graph of 
+ 
+ f(x)=|x−1|
+ 
+ (a) vertically and (b) horizontally.
+ⓐ
+ⓑ
+
+Reflecting a Tabular Function Horizontally and Vertically
+
+A function 
+ f(x)
+ is given as . Create a table for the functions below.
+ⓐ 
+ 
+ g(x)=−f(x)
+ⓑ 
+ 
+ h(x)=f(−x)
+x
+2
+4
+6
+f(x)
+1
+3
+7
+ⓐ For 
+ g(x),
+ the negative sign outside the function indicates a vertical reflection, so the x-values stay the same and each output value will be the opposite of the original output value. See .
+
+ x
+ 
+ 2
+ 4
+ 6
+ 8
+
+ g(x)
+
+ –1
+ –3
+ –7
+ –11
+
+For 
+ g(x),
+ the negative sign outside the function indicates a vertical reflection, so the x-values stay the same and each output value will be the opposite of the original output value. See .
+x
+2
+4
+6
+g(x)
+–1
+–3
+–7
+ⓑFor 
+ h(x),
+ the negative sign inside the function indicates a horizontal reflection, so each input value will be the opposite of the original input value and the 
+ h(x)
+ values stay the same as the 
+ f(x)
+ values. See .
+
+ x
+
+ −2
+ −4
+ −6
+ −8
+
+ h(x)
+
+ 1
+ 3
+ 7
+ 11
+
+For 
+ h(x),
+ the negative sign inside the function indicates a horizontal reflection, so each input value will be the opposite of the original input value and the 
+ h(x)
+ values stay the same as the 
+ f(x)
+ values. See .
+x
+−2
+−4
+−6
+h(x)
+1
+3
+7
+11
+A function 
+ f(x)
+ is given as . Create a table for the functions below.
+ⓐ 
+ 
+ g(x)=−f(x)
+ⓑ 
+ 
+ h(x)=f(−x)
+x
+−2
+0
+2
+f(x)
+5
+10
+15
+ⓐ 
+ 
+ g(x)=−f(x)
+
+ x
+
+ -2
+ 0
+ 2
+ 4
+
+ g(x)
+
+ −5
+
+ −10
+
+ −15
+
+ −20
+g(x)=−f(x)
+x
+-2
+0
+2
+ⓑ
+
+ h(x)=f(−x)
+
+ x
+
+ -2
+ 0
+ 2
+ 4
+
+ h(x)
+
+ 15
+ 10
+ 5
+ unknown
+h(x)=f(−x)
+x
+-2
+0
+2
+h(x)
+15
+10
+5
+unknown
+Applying a Learning Model Equation
+
+A common model for learning has an equation similar to 
+ 
+ k(t)=−
+ 2
+ 
+ −t
+ 
+ +1,
+ where 
+ 
+ k
+ is the percentage of mastery that can be achieved after 
+ 
+ t
+ practice sessions. This is a transformation of the function 
+ 
+ f(t)=
+ 2
+ t
+
+ shown in . Sketch a graph of 
+ 
+ k(t).
+
+This equation combines three transformations into one equation.
+
+A horizontal reflection: 
+ 
+ f(−t)=
+ 2
+ 
+ −t
+
+A vertical reflection: 
+ −f(−t)=−
+ 2
+ 
+ −t
+
+A vertical shift: 
+ −f(−t)+1=−
+ 2
+ 
+ −t
+ 
+ +1
+
+We can sketch a graph by applying these transformations one at a time to the original function. Let us follow two points through each of the three transformations. We will choose the points (0, 1) and (1, 2).
+
+First, we apply a horizontal reflection: (0, 1) (–1, 2).
+
+Then, we apply a vertical reflection: (0, -1) (-1, –2)
+
+Finally, we apply a vertical shift: (0, 0) (-1, -1)).
+
+This means that the original points, (0,1) and (1,2) become (0,0) and (-1,-1) after we apply the transformations.
+
+In , the first graph results from a horizontal reflection. The second results from a vertical reflection. The third results from a vertical shift up 1 unit.
+
+Analysis
+
+As a model for learning, this function would be limited to a domain of 
+ t≥0,
+ with corresponding range 
+ [0,1).
+
+Given the toolkit function 
+ f(x)=
+ x
+ 2
+ 
+ ,
+ graph 
+ g(x)=−f(x)
+ and 
+ h(x)=f(−x).
+ Take note of any surprising behavior for these functions.
+
+Notice: 
+ g(x)=f(−x)
+ looks the same as 
+ f(x)
+ .
+
+Determining Even and Odd Functions
+
+Some functions exhibit symmetry so that reflections result in the original graph. For example, horizontally reflecting the toolkit functions 
+ 
+ f(x)=
+ x
+ 2
+
+ or 
+ 
+ f(x)=| x |
+ will result in the original graph. We say that these types of graphs are symmetric about the y-axis. A function whose graph is symmetric about the y-axis is called an even function.
+
+If the graphs of 
+ 
+ f(x)=
+ x
+ 3
+
+ or 
+ 
+ f(x)=
+ 1
+ x
+
+ were reflected over both axes, the result would be the original graph, as shown in .
+
+We say that these graphs are symmetric about the origin. A function with a graph that is symmetric about the origin is called an odd function.
+
+Note: A function can be neither even nor odd if it does not exhibit either symmetry. For example, 
+ 
+ f(x)=
+ 2
+ x
+
+ is neither even nor odd. Also, the only function that is both even and odd is the constant function 
+ 
+ f(x)=0.
+
+Even and Odd Functions
+
+A function is called an even function if for every input 
+ x
+
+The graph of an even function is symmetric about the 
+ 
+ y- axis.
+
+A function is called an odd function if for every input 
+ x
+
+The graph of an odd function is symmetric about the origin.
+Given the formula for a function, determine if the function is even, odd, or neither.
+
+Determine whether the function satisfies 
+ 
+ f(x)=f(−x).
+ If it does, it is even.
+
+Determine whether the function satisfies 
+ 
+ f(x)=−f(−x).
+ If it does, it is odd.
+
+If the function does not satisfy either rule, it is neither even nor odd.
+
+Determining whether a Function Is Even, Odd, or Neither
+
+Is the function 
+ f(x)=
+ x
+ 3
+ 
+ +2x
+ even, odd, or neither?
+
+Without looking at a graph, we can determine whether the function is even or odd by finding formulas for the reflections and determining if they return us to the original function. Let’s begin with the rule for even functions.
+
+This does not return us to the original function, so this function is not even. We can now test the rule for odd functions.
+
+Because 
+ −f(−x)=f(x),
+ this is an odd function.
+
+Analysis
+
+Consider the graph of 
+ f
+ in . Notice that the graph is symmetric about the origin. For every point 
+ (
+ 
+ x,y
+ )
+ on the graph, the corresponding point 
+ (
+ 
+ −x,−y
+ )
+ is also on the graph. For example, (1, 3) is on the graph of 
+ f,
+ and the corresponding point 
+ 
+ (−1,−3)
+ 
+ is also on the graph.
+
+Is the function 
+ f(s)=
+ s
+ 4
+ 
+ +3
+ s
+ 2
+ 
+ +7
+ even, odd, or neither?
+
+even
+
+Graphing Functions Using Stretches and Compressions
+
+Adding a constant to the inputs or outputs of a function changed the position of a graph with respect to the axes, but it did not affect the shape of a graph. We now explore the effects of multiplying the inputs or outputs by some quantity.
+
+We can transform the inside (input values) of a function or we can transform the outside (output values) of a function. Each change has a specific effect that can be seen graphically.
+
+Vertical Stretches and Compressions
+
+When we multiply a function by a positive constant, we get a function whose graph is stretched or compressed vertically in relation to the graph of the original function. If the constant is greater than 1, we get a vertical stretch; if the constant is between 0 and 1, we get a vertical compression. shows a function multiplied by constant factors 2 and 0.5 and the resulting vertical stretch and compression.
+
+Vertical Stretches and Compressions
+
+Given a function 
+ 
+ f(x),
+ a new function 
+ 
+ g(x)=af(x),
+ where 
+ 
+ a
+ is a constant, is a vertical stretch or vertical compression of the function 
+ 
+ f(x).
+
+If 
+ 
+ a>1,
+ then the graph will be stretched.
+
+If 
+ 
+ 0<a<1,
+ then the graph will be compressed.
+
+If 
+ 
+ a<0,
+ then there will be combination of a vertical stretch or compression with a vertical reflection.
+Given a function, graph its vertical stretch.
+
+Identify the value of 
+ 
+ a.
+
+Multiply all range values by 
+ 
+ a.
+If 
+ 
+a>1,
+ the graph is stretched by a factor of 
+ 
+ a.
+ 
+ If 
+ 
+ 0<a<1,
+ the graph is compressed by a factor of 
+ 
+ a.
+ 
+ If 
+ 
+ a<0,
+ the graph is either stretched or compressed and also reflected about the x-axis.
+
+If 
+ 
+a>1,
+ the graph is stretched by a factor of 
+ 
+ a.
+
+If 
+ 
+ 0<a<1,
+ the graph is compressed by a factor of 
+ 
+ a.
+
+If 
+ 
+ a<0,
+ the graph is either stretched or compressed and also reflected about the x-axis.
+
+Graphing a Vertical Stretch
+
+A function 
+ 
+ P(
+ t
+ )
+ models the population of fruit flies. The graph is shown in .
+
+A scientist is comparing this population to another population, 
+ 
+ Q,
+ whose growth follows the same pattern, but is twice as large. Sketch a graph of this population.
+
+Because the population is always twice as large, the new population’s output values are always twice the original function’s output values. Graphically, this is shown in .
+
+If we choose four reference points, (0, 1), (3, 3), (6, 2) and (7, 0) we will multiply all of the outputs by 2.
+
+The following shows where the new points for the new graph will be located.
+
+Symbolically, the relationship is written as
+
+This means that for any input 
+ 
+ t,
+ the value of the fu
+[truncated]

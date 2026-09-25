@@ -1,0 +1,605 @@
+# m00019
+# Book: OpenStax Contemporary Mathematics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-contemporary-mathematics
+# License: CC BY 4.0 (OpenStax)
+
+Constructing Truth Tables
+
+Constructing Truth Tables
+
+Learning Objectives
+
+After completing this section, you should be able to:
+
+Interpret and apply negations, conjunctions, and disjunctions.
+
+Construct a truth table using negations, conjunctions, and disjunctions.
+
+Construct a truth table for a compound statement and interpret its validity.
+
+Are you familiar with the Choose Your Own Adventure book series written by Edward Packard? These gamebooks allow the reader to become one of the characters and make decisions that affect what happens next, resulting in different sequences of events in the story and endings based on the choices made. Writing a computer program is a little like what it must be like to write one of these books. The programmer must consider all the possible inputs that a user can put into the program and decide what will happen in each case, then write their program to account for each of these possible outcomes.
+
+A truth table is a graphical tool used to analyze all the possible truth values of the component logical statements to determine the validity of a statement or argument along with all its possible outcomes. The rows of the table correspond to each possible outcome for the given logical statement identified at the top of each column. A single logical statement p has two possible truth values, true or false. In truth tables, a capital T will represent true values, and a capital F will represent false values.
+
+In this section, you will use the knowledge built in Statements and Quantifiers and Compound Statements to analyze arguments and determine their truth value and validity. A logical argument is valid if its conclusion follows from its premises, regardless of whether those premises are true or false. You will then explore the truth tables for negation, conjunction, and disjunction, and use these truth tables to analyze compound logical statements containing these connectives.
+
+Interpret and Apply Negations, Conjunctions, and Disjunctions
+
+The negation of a statement will have the opposite truth value of the original statement. When p is true, ~p is false, and when p is false, ~p is true.
+
+Finding the Truth Value of a Negation
+
+For each logical statement, determine the truth value of its negation.
+p: 3+5=8.
+q: All horses are mustangs.
+~r: New Delhi is not the capital of India.
+p is true because 3 + 5 does equal 8; therefore, the negation of p, ~p:3+5≠8, is false.
+q is false because there are other types of horses besides mustangs, such as Clydesdales or Arabians; therefore, the negation of q, ~q, is true.
+~r is false because New Delhi is the capital of India; therefore, the negation of ~r, r, is true.
+
+A conjunction is a logical and statement. For a conjunction to be true, both statements that make up the conjunction must be true. If at least one of the statements is false, the and statement is false.
+
+Finding the Truth Value of a Conjunction
+
+Given p: 4+7=11, q: 11-3=7, and r: 7×11=77, determine the truth value of each conjunction.
+p∧q
+~q∧r
+~p∧q
+p is true, and q is false. Because one statement is true, and the other statement is false, this makes the complete conjunction false.
+q is false, so ~q is true, and r is true. Therefore, both statements are true, making the complete conjunction true.
+~p is false, and q is false. Because both statements are false, the complete conjunction is false.
+
+The only time a conjunction is true is if both statements that make up the conjunction are true.
+
+A disjunction is a logical inclusive or statement, which means that a disjunction is true if one or both statements that form it are true. The only way a logical inclusive or statement is false is if both statements that form the disjunction are false.
+
+Finding the Truth Value of a Disjunction
+
+Given p: 4+7=11, q: 11-3=7, and r: 7×11=77, determine the truth value of each disjunction.
+p∨q
+~q∨r
+~p∨q
+p is true, and q is false. One statement is true, and one statement is false, which makes the complete disjunction true.
+q is false, so ~q is true, and r is true. Therefore, one statement is true, and the other statement is true, which makes the complete disjunction true.
+~p is false, and q is false. When all of the component statements are false, the disjunction is false.
+
+In the next example, you will apply the dominance of connectives to find the truth values of compound statements containing negations, conjunctions, and disjunctions and use a table to record the results. When constructing a truth table to analyze an argument where you can determine the truth value of each component statement, the strategy is to create a table with two rows. The first row contains the symbols representing the components that make up the compound statement. The second row contains the truth values of each component below its symbol. Include as many columns as necessary to represent the value of each compound statement. The last column includes the complete compound statement with its truth value below it.
+Logic Part 2: Truth Values of Conjunctions: Is an "AND" statement true or false?
+Logic Part 3: Truth Values of Disjunctions: Is an "OR" statement true or false?
+
+Finding the Truth Value of Compound Statements
+
+Given p:4+7=11, q:11-3=7, and r:7×11=77, construct a truth table to determine the truth value of each compound statement
+~p∧q∨r
+~p∨q∧r
+~(p∧r)∨q
+Step 1: The statement “~p∧q∨r” contains three basic logical statements, p, q, and r, and three connectives, ~,∧,∨. When we place parentheses in the statement to indicate the dominance of connectives, the statement becomes (((~p)∧q)∨r).
+Step 2: After we have applied the dominance of connectives, we create a two row table that includes a column for each basic statement that makes up the compound statement, and an additional column for the contents of each parentheses. Because we have three sets of parentheses, we include a column for ~p, the innermost parentheses, a column for (~p)∧q, the next set of parentheses, and ((~p)∧q)∨r in the last column for the third parentheses.
+Step 3: Once the table is created, we determine the truth value of each statement starting from left to right. The truth values of p, q, and r are true, false, and true, respectively, so we place T, F, and T in the second row of the table. Because p is true, ~p is false.
+Step 4: Next, evaluate ~p∧q from the table: ~p is false, and q is also false, so ~p∧q is false, because a conjunction is only true if both of the statements that make it are true. Place an F in the table below its heading.
+Step 5: Finally, using the table, we understand that (~p∧q) is false and r is true, so the complete statement (~p∧q)∨r is false or true, which is true (because a disjunction is true whenever at least one of the statements that make it is true). Place a T in the last column of the table. The complete statement ~p∧q∨r is true.
+
+ p
+ q
+ r
+ ~p
+ (~p)∧q
+ ((~p)∧q)∨r
+
+ T
+ F
+ T
+ F
+ F
+ T
+Step 1: The statement “~p∧q∨r” contains three basic logical statements, p, q, and r, and three connectives, ~,∧,∨. When we place parentheses in the statement to indicate the dominance of connectives, the statement becomes (((~p)∧q)∨r).
+Step 2: After we have applied the dominance of connectives, we create a two row table that includes a column for each basic statement that makes up the compound statement, and an additional column for the contents of each parentheses. Because we have three sets of parentheses, we include a column for ~p, the innermost parentheses, a column for (~p)∧q, the next set of parentheses, and ((~p)∧q)∨r in the last column for the third parentheses.
+Step 3: Once the table is created, we determine the truth value of each statement starting from left to right. The truth values of p, q, and r are true, false, and true, respectively, so we place T, F, and T in the second row of the table. Because p is true, ~p is false.
+Step 4: Next, evaluate ~p∧q from the table: ~p is false, and q is also false, so ~p∧q is false, because a conjunction is only true if both of the statements that make it are true. Place an F in the table below its heading.
+Step 5: Finally, using the table, we understand that (~p∧q) is false and r is true, so the complete statement (~p∧q)∨r is false or true, which is true (because a disjunction is true whenever at least one of the statements that make it is true). Place a T in the last column of the table. The complete statement ~p∧q∨r is true.
+
+ p
+ q
+ r
+ ~p
+ (~p)∧q
+ ((~p)∧q)∨r
+
+ T
+ F
+ T
+ F
+ F
+ T
+((~p)∧q)∨r
+T
+F
+T
+F
+Step 1: Applying the dominance of connectives to the original compound statement ~p∨q∧r, we get (((~p)∨q)∧r).
+ Step 2: The table needs columns for p,q,r,~p,(~p)∨q, and ((~p)∨q)∧r. 
+ Step 3:The truth values of p, q, r, and ~p are the same as in Question 1.
+ Step 4: Next, ~p∨q is false or false, which is false, so we place an F below this statement in the table. This is the only time that a disjunction is false.
+ Step 5: Finally, ~p∨q and r are the conjunction of the statements, ~p∨q and r, and so the expressions evaluate to false and true, which is false. Recall that the only time an "and" statement is true is when both statements that form it are also true. The complete statement ~p∨q∧r is false. 
+
+ p
+ q
+ r
+ ~p
+ (~p)∨q
+ ((~p)∨q)∧r
+
+ T
+ F
+ T
+ F
+ F
+ F
+((~p)∨q)∧r
+T
+F
+T
+F
+Step 1: Applying the dominance of connectives to the original statement, we have: ((~(p∧r))∨q).
+ Step 2: So, the table needs the following columns: p,q,r,p∧r,~(p∧r), and ~(p∧r)∨q.
+ Step 3: The truth values of p, q, and r are the same as in Questions 1 and 2.
+ Step 4: From the table it can be seen that p∧r is true and true, which is true. So the negation of p and r is false, because the negation of a statement always has the opposite truth value of the original statement.
+ Step 5: Finally, ~(p∧r)∨q is the disjunction of ~(p∧r) with q, and so we have false or false, which makes the complete statement false.
+
+ p
+ q
+ r
+ p∧r
+ ~(p∧r)
+ ~(p∧r)∨q
+
+ T
+ F
+ T
+ T
+ F
+ F
+~(p∧r)∨q
+T
+F
+T
+T
+F
+
+Construct Truth Tables to Analyze All Possible Outcomes
+
+Recall from Statements and Questions that the negation of a statement will always have the opposite truth value of the original statement; if a statement p is false, then its negation ~p is true, and if a statement p is true, then its negation ~p is false. To create a truth table for the negation of statement p, add a column with a heading of ~p, and for each row, input the truth value with the opposite value of the value listed in the column for p, as depicted in the table below.
+
+~p
+T
+F
+F
+T
+Conjunctions and disjunctions are compound statements formed when two logical statements combine with the connectives “and” and “or” respectively. How does that change the number of possible outcomes and thus determine the number of rows in our truth table? The multiplication principle, also known as the fundamental counting principle, states that the number of ways you can select an item from a group of n items and another item from a group with m items is equal to the product of m and n. Because each proposition p and q has two possible outcomes, true or false, the multiplication principle states that there will be 2×2=4 possible outcomes: {TT, TF, FT, FF}.
+
+The tree diagram and table in demonstrate the four possible outcomes for two propositions p and q.
+
+A conjunction is a logical and statement. For a conjunction to be true, both the statements that make up the conjunction must be true. If at least one of the statements is false, the and statement is false.
+
+A disjunction is a logical inclusive or statement. Which means that a disjunction is true if one or both statements that make it are true. The only way a logical inclusive or statement is false is if both statements that make up the disjunction are false.
+
+Conjunction (AND)
+p∨q
+T
+T
+T
+T
+T
+T
+T
+F
+F
+T
+F
+T
+F
+T
+F
+F
+T
+T
+F
+F
+F
+F
+F
+Logic Part 4: Truth Values of Compound Statements with "and", "or", and "not"
+Logic Part 5: What are truth tables? How do you set them up?
+
+Constructing Truth Tables to Analyze Compound Statements
+
+Construct a truth table to analyze all possible outcomes for each of the following arguments.
+p∨~q
+~(p∧q)
+(p∨~q)∧r
+Step 1: Because there are two basic statements, p and q, and each of these has two possible outcomes, we will have 2(2)=4 rows in our table to represent all possible outcomes: TT, TF, FT, and FF. The columns will include p, q, ~q, and p∨~q.
+ Step 2: Every value in column ~q will have the opposite truth value of the corresponding value in column q: F, T, F, and T.
+Step 3: To complete the last column, evaluate each element in column p with the corresponding element in column ~q using the connective or.
+
+ p
+ q
+ ~q
+ p∨~q
+
+ T
+ T
+ F
+ T
+
+ T
+ F
+ T
+ T
+
+ F
+ T
+ F
+ F
+
+ F
+ F
+ T
+ T
+p∨~q
+T
+T
+T
+T
+F
+T
+F
+T
+F
+F
+F
+Step 1: The columns will include p, q, p∧q, and ~(p∧q). Because there are two basic statements, p and q, the table will have four rows to account for all possible outcomes.
+ Step 2: The p∧q column will be completed by evaluating the corresponding elements in columns p and q respectively with the and connective.
+ Step 3: The final column, ~(p∧q), will be the negation of the p∧q column.
+
+ p
+ q
+ p∧q
+ ~(p∧q)
+
+ T
+ T
+ T
+ F
+
+ T
+ F
+ F
+ T
+
+ F
+ T
+ F
+ T
+
+ F
+ F
+ F
+ T
+~(p∧q)
+T
+T
+F
+T
+F
+T
+F
+T
+T
+F
+F
+Step 1: This statement has three basic statements, p, q, and r. Because each basic statement has two possible truth values, true or false, the multiplication principal indicates there are 2(2)(2)=8 possible outcomes. So eight rows of outcomes are needed in the truth table to account for each possibility. Half of the eight possibilities must be true for the first statement, and half must be false.
+ Step 2: So, the first column for statement p, will have four T’s followed by four F’s. In the second column for statement q, when p is true, half the outcomes for q must be true and the other half must be false, and the same pattern will repeat for when p is false. So, column q will have TT, FF, FF, FF.
+ Step 3: The column for the third statement, r, must alternate between T and F. Once, the three basic propositions are listed, you will need a column for~q, p∨~q, and (p∨~q)∧r.
+ Step 4: The column for the negation of q, ~q, will have the opposite truth value of each value in column q.
+ Step 5: Next, fill in the truth values for the column containing the statement p∨~q. The or statement is true if at least one of p or ~q is true, otherwise it is false.
+ Step 6: Finally, fill in the column containing the conjunction (p∨~q)∧r. To evaluate this statement, combine column p∨~q and column r with the and connective. Recall, that only time "and" is true is when both values are true, otherwise the statement is false. The complete truth table is: 
+
+ p
+ q
+ r
+ ~q
+ p∨~q
+ (p∨~q)∧r
+
+ T
+ T
+ T
+ F
+ T
+ T
+
+ T
+ T
+ F
+ F
+ T
+ F
+
+ T
+ F
+ T
+ T
+ T
+ T
+
+ T
+ F
+ F
+ T
+ T
+ F
+
+ F
+ T
+ T
+ F
+ F
+ F
+
+ F
+ T
+ F
+ F
+ F
+ F
+
+ F
+ F
+ T
+ T
+ T
+ T
+
+ F
+ F
+ F
+ T
+ T
+ F
+(p∨~q)∧r
+T
+T
+T
+F
+T
+T
+T
+F
+F
+F
+T
+F
+T
+T
+T
+T
+F
+F
+T
+F
+F
+T
+T
+F
+F
+F
+T
+F
+F
+F
+F
+F
+T
+T
+T
+F
+F
+F
+T
+F
+Logic Part 6: More on Truth Tables and Setting Up Rows and Column Headings
+
+Determine the Validity of a Truth Table for a Compound Statement
+
+A logical statement is valid if it is always true regardless of the truth values of its component parts. To test the validity of a compound statement, construct a truth table to analyze all possible outcomes. If the last column, representing the complete statement, contains only true values, the statement is valid.
+
+Determining the Validity of Compound Statements
+
+Construct a truth table to determine the validity of each of the following statements.
+~p∧q
+~(p∧~p)
+Step 1: Because there are two statements, p and q, and each of these has two possible outcomes, there will be 2(2)=4 rows in our table to represent all possible outcomes: TT, TF, FT, and FF.
+Step 2: The columns, will include p, q, ~p and ~p∧q. Every value in column ~p will have the opposite truth value of the corresponding value in column p.
+ Step 3: To complete the last column, evaluate each element in column ~p with the corresponding element in column q using the connective and . The last column contains at least one false, therefore the statement ~p∧q is not valid.
+
+ p
+ q
+ ~p
+ ~p∧q
+
+ T
+ T
+ F
+ F
+
+ T
+ F
+ F
+ F
+
+ F
+ T
+ T
+ T
+
+ F
+ F
+ T
+ F
+~p∧q
+T
+T
+F
+T
+F
+F
+F
+T
+T
+F
+F
+Step 1: Because the statement ~(p∧~p) only contains one basic proposition, the truth table will only contain two rows. Statement p may be either true or false.
+Step 2: The columns will include p, ~p, p∧~p, and ~(p∧~p). Evaluate column p∧~p with the and connective, because the symbol ∧ represents a conjunction or logical and statement. True and false is false, and false and true is also false.
+Step 3: The final column is the negation of each entry in the third column, both of which are false, so the negation of false is true. Because all the truth values in the final column are true, the statement ~(p∧~p) is valid.
+
+ p
+ ~p
+ p∧~p
+ ~(p∧~p)
+
+ T
+ F
+ F
+ T
+
+ F
+ T
+ F
+ T
+~(p∧~p)
+T
+F
+T
+F
+T
+T
+
+Check Your Understanding
+
+Key Terms
+
+Truth table
+
+Multiplication principle
+
+Valid
+
+Key Concepts
+
+Determine the true values of logical statements involving negations, conjunctions, and disjunctions.
+ 
+ The negation of a logical statement has the opposite true value of the original statement.
+ A conjunction is true when both p and q are true, otherwise it is false.
+ A disjunction is false when both p and q are false, otherwise it is true.
+
+The negation of a logical statement has the opposite true value of the original statement.
+
+A conjunction is true when both p and q are true, otherwise it is false.
+
+A disjunction is false when both p and q are false, otherwise it is true.
+
+Know how to construct a truth table involving negations, conjunctions, and disjunctions and apply the dominance of connectives to determine the truth value of a compound logical statement containing, negations, conjunctions, and disjunctions.
+
+ Negation
+ 
+ Conjunction (AND)
+ 
+ Disjunction (OR)
+ p
+ ~p
+ 
+ p
+ q
+ p∧q
+ 
+ p
+ q
+ p∨q
+
+ T
+ F
+ 
+ T
+ T
+ T
+ 
+ T
+ T
+ T
+ F
+ T
+ 
+ T
+ F
+ F
+ 
+ T
+ F
+ T
+
+ F
+ T
+ F
+ 
+ F
+ T
+ T
+
+ F
+ F
+ F
+ 
+ F
+ F
+ F
+
+Negation
+Conjunction (AND)
+p∨q
+T
+F
+T
+T
+T
+T
+T
+T
+F
+T
+T
+F
+F
+T
+F
+T
+F
+T
+F
+F
+T
+T
+F
+F
+F
+F
+F
+F
+A logical statement is valid if it is always true. Know how to construct a truth table for a compound statement and use it to determine the validity of compound statements involving negations, conjunctions, and disjunctions.
+
+Video
+Logic Part 2: Truth Values of Conjunctions: Is an "AND" statement true or false?
+Logic Part 3: Truth Values of Disjunctions: Is an "OR" statement true or false?
+Logic Part 4: Truth Values of Compound Statements with "and", "or", and "not"
+Logic Part 5: What are truth tables? How do you set them up?
+Logic Part 6: More on Truth Tables and Setting Up Rows and Column Headings

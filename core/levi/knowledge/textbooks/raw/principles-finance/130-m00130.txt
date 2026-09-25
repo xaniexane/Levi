@@ -1,0 +1,176 @@
+# m00130
+# Book: OpenStax Principles of Finance
+# Subject: business
+# Source: https://github.com/openstax/osbooks-principles-finance
+# License: Creative Commons Attribution-NonCommercial-ShareAlike License
+
+Interest Rate Risk
+
+Interest Rate Risk
+
+Learning Outcomes
+
+By the end of this section, you will be able to:
+
+Describe interest rate risk.
+
+Explain how a change in interest rates changes the value of cash flows.
+
+Describe the use of an interest rate swap.
+
+An interest rate is simply the price of borrowing money. Just as other prices are volatile, interest rates are also volatile. Just as volatility in other prices leads to uncertain cash flows for a company, volatility in interest rates can also lead to uncertain cash flows.
+
+Measuring Interest Rate Risk
+
+Suppose that a company is supposed to pay a bill of $1,000 in 10 years. The present value of this bill depends on the level of interest rates. If the interest rate is 5%, the present value of the bill is $1,0001 + 0.0510=$613.91. If the interest rate rises to 6%, the present value of the bill is $1,0001 + 0.0610=$558.39. The increase in the interest rate by 1% causes the present value of the expected cash flow to fall by 613.91 - 558.39613.91=0.0904=9.04%.
+
+Interest rate risk can be highlighted by looking at bonds. Consider two $1,000 face value bonds with a 5% coupon rate, paid semiannually. One of the bonds matures in five years, and the other bond matures in 30 years. If the market interest rate is 5%, each of these bonds will sell for face value, or $1,000. If, instead, the market interest rate is 6%, the five-year bond will sell for $957.35 and the 30-year bond will sell for $861.62.
+
+Notice that as the interest rate rises, the price of both of these bonds will fall. However, the price of the longer-term bond will fall by more than the price of the shorter-term bond. The longer-term bond price will fall by 1.38%; the shorter-term bond price will fall by only 0.43%.
+
+Consider two additional $1,000 face value bonds. The difference is that these bonds have a 6% coupon rate, paid semiannually. If a bond has a 6% coupon rate and matures in five years, it will sell for $1,043.76 when the market interest rate is 5%. A 30-year bond that matures in 30 years and has a 6% coupon rate will sell for $1,154.54 when the market interest rate is 5%. However, if the interest rate in the economy is 6%, both of these bonds will sell for a price of $1,000. The price of the five-year bond will drop by 4.19%; the price of the 30-year bond will drop by 13.39%.
+
+Calculating Bond Prices as the Interest Rates Changes
+
+You are considering purchasing a $10,000 face value bond with a 4% coupon rate, paid semiannually, that matures in 20 years. If you require a 5% return to purchase this bond, what is the maximum price you would be willing to pay for the bond? If, instead, you require an 8% return to purchase this bond, what is the maximum price you would be willing to pay for the bond?
+Solution:
+
+If the bond pays coupon interest semiannually, you will receive one-half of the face value of the bond multiplied by the coupon rate every six months. So, you will receive 40 coupon payments of $10,000 × 0.02 = $200. At maturity, you will receive one lump sum of the face value of the bond. Follow the steps in to calculate the price of the bond if you require a 5% return, using a financial calculator.
+
+Calculator Step to Price a Bond Requiring a 5% ReturnThe specific financial calculator in these examples is the Texas Instruments BA II PlusTM Professional model, but you can use other financial calculators for these types of calculations.
+
+Step
+Description
+Enter
+Display
+1
+Enter the number of coupon payments you will receive
+40 N
+N =
+40
+2
+Enter your semiannual required return
+2.5 I/Y
+I/Y =
+2.5
+3
+Enter the semiannual coupon payment
+200 PMT
+PMT =
+200
+4
+Enter the face value of the bond
+10000 FV
+FV =
+10,000
+5
+CPT PV
+PV =
+-8,744.86
+When your required yield is 5%, the most you would be willing to pay for this bond is $8,744.86.
+
+To calculate the price of the bond if your required return is 8%, use the same process, replacing the I/YR in step 2 with 4 (see ). All other variables remain the same because the characteristics of the bond have not changed.
+
+Calculator Steps to Price a Bond Requiring an 8% Return
+
+Step
+Description
+Enter
+Display
+1
+Enter the number of coupon payments you will receive
+40 N
+N =
+40
+2
+Enter your semiannual required return
+4 I/Y
+I/Y =
+4
+3
+Enter the semiannual coupon payment
+200 PMT
+PMT =
+200
+4
+Enter the face value of the bond
+10000 FV
+FV =
+10,000
+5
+CPT PV
+PV =
+-6,041.45
+If your required return is 8% to invest in this bond, you will be willing to pay only $6,041.45 to purchase the bond.
+
+Thus, if interest rates rise because of changing market conditions, the price of bonds will fall.
+
+The sensitivity of bond prices to changes in the interest rate is known as interest rate risk. Duration is an important measure of interest rate risk that incorporates the maturity and coupon rate of a bond as well as the level of current market interest rates. Calculating duration is a complex topic that is beyond the scope of this introductory textbook, but it is useful to note that
+
+the higher the duration of a bond, the more sensitive the price of the bond will be to interest rate changes;
+
+the duration of a bond will be higher when market yields are lower, all else being equal;
+
+the duration of a bond will be higher the longer the maturity of the bond, all else being equal; and
+
+the duration of a bond will be higher the lower the coupon rate on the bond, all else being equal.
+
+Swap-Based Hedging
+
+As the name suggests, a swap involves two parties agreeing to swap, or exchange, something. Generally, the two parties, known as counterparties, are swapping obligations to make specified payment streams.
+
+To illustrate the basics of how an interest rate swap works, let’s consider two hypothetical companies, Alpha and Beta. Alpha is a strong, well-established company with a AAA (triple-A) bond rating. This means that Alpha has the highest rating a company can have. With this high rating, Alpha can borrow at relatively low interest rates. Often, companies in this situation will borrow at a floating rate. This means that their interest rate goes up and down as interest rates in the overall economy vary. The floating rate will be tied to a benchmark rate that is widely quoted in the financial press. Historically, companies have often used the London Interbank Offered Rate (LIBOR) as the benchmark rate. Because published quotes for LIBOR will be phased out by 2023, firms are beginning to use alternative rates. As of yet, no single alternative has emerged as the most commonly used rate; therefore, LIBOR will be used in our example. Suppose that Alpha finds that it can borrow money at rate equal to LIBOR+0.25%; thus, if LIBOR is 2.75%, the company will pay 3.0% to borrow. If the company wants to borrow at a long-term fixed rate, its cost of borrowing will be 5.0%.
+
+LIBOR Transition
+
+Although the basic principles of financial transactions remain the same over time, the particular financial instruments used change from time to time. Innovation, regulation, and technological advances lead to these changes in financial instruments. The use of LIBOR as a benchmark rate is winding down in the early 2020s. To find out more about this transition and how it impacts companies, visit the About LIBOR Transition website.
+
+Beta has a BBB bond rating. Although this is considered a good, investment-grade rating, it is lower than the rating of Alpha. Because Beta is less creditworthy and a bit riskier than Alpha, it will have to pay a higher interest rate to borrow money. If Beta wants to borrow money at a floating rate, it will need to pay LIBOR+0.75%. If LIBOR is 2.75%, Beta must pay 3.5% on its floating rate debt. In order for Beta to borrow at a long-term fixed rate, its cost of borrowing will be 6.75%.
+
+Let’s consider how these two companies can enter into a swap in which both parties benefit. summarizes the situation and the rates at which Alpha and Beta can borrow. It also illustrates a way in which an interest rate swap can benefit both Alpha and Beta.
+
+Example of a Swap Agreement
+
+Alpha
+Beta
+Bond rating
+AAA
+BBB
+LIBOR+0.75
+Fixed rate
+5
+6.75
+Rate company chooses
+Fixed at 5.0
+Floating at LIBOR+0.75
+Swap
+N/A
+N/A
+Beta pays Alpha fixed rate
+5.5
+-5.5
+Alpha pays Beta floating rate
+-LIBOR
++LIBOR
+-(LIBOR + 0.75) – 5.5 + LIBOR
+0.5 – LIBOR
+-6.25
+Benefit
+0.75
+0.5
+Alpha borrows in the capital markets at a fixed rate of 5%. Beta chooses to borrow at a floating rate that equals LIBOR + 0.75%.  Beta also agrees to pay Alpha a fixed rate of 5.5%. In essence, Beta is paying 5.5% to Alpha, 0.75% to its lender, and LIBOR to its lender.
+
+In return, Alpha promises to pay Beta LIBOR. The exact amount that Alpha will pay to Beta fluctuates as LIBOR fluctuates. However, from Beta’s perspective, the payment of LIBOR it receives from Alpha exactly offsets the payment of LIBOR it makes to its lender. When LIBOR increases, the rate of LIBOR+0.75% that Beta is paying to its lender increases, but the LIBOR rate it receives from Alpha also increases. When LIBOR decreases, Beta receives less from Alpha, but it also pays less to its lender. Because the LIBOR it receives from Alpha is exactly equal to the LIBOR it pays to its lender, Beta’s net amount of interest paid is 6.25%—the 5.5% it pays to Alpha plus the 0.75% it pays to its lender.
+
+Alpha is in the position of paying 5.0% to its lender and LIBOR to Beta while receiving 5.5% from Beta. This means that Alpha’s net interest paid is LIBOR – 0.5%. Alpha is said to have swapped its fixed interest rate for a floating rate. Because it is paying LIBOR – 0.5%, it will experience fluctuating interest rates; however, as a company with a AAA bond rating, it is a strong, creditworthy company that can withstand that interest rate exposure. It would have cost Alpha LIBOR + 0.25% to borrow the money from its lenders at a variable rate. By participating in this swap arrangement, Alpha has been able to lower its interest rate by 0.75%.
+
+Through this swap arrangement, Beta has been able to fix its interest rate at 6.25% rather than having a variable rate. This predictability is a benefit for a company, especially one that is in a bit more precarious position as far as its creditworthiness and stability. The 6.25% Beta pays as a result of this arrangement is 0.5% below the 6.75% it would have paid if it simply borrowed from its lenders at a fixed rate.
+
+When interest rates increase, the present value of future cash flows decreases. Duration is a measure of interest rate risk. A swap involves two parties agreeing to exchange something, often specified payment streams.
+
+CFA Institute
+
+This chapter supports some of the Learning Outcome Statements (LOS) in this CFA® Level I Study Session. Reference with permission of CFA Institute.
+
+a measure of interest rate risk
+an agreement between two parties to exchange something, such as their obligations to make specified payment streams

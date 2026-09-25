@@ -1,0 +1,388 @@
+# m79682
+# Book: OpenStax Statistics
+# Subject: mathematics
+# Source: https://github.com/openstax/osbooks-statistics
+# License: Creative Commons Attribution License
+
+Test of a Single Variance
+
+Test of a Single Variance
+
+A test of a single variance assumes that the underlying distribution is normal. The null and alternative hypotheses are stated in terms of the population variance or population standard deviation. The test statistic is
+
+where
+n = the total number of data,
+s2 = sample variance, and
+σ2 = population variance.
+
+You may think of s as the random variable in this test. The number of degrees of freedom is df = n – 1. A test of a single variance may be right-tailed, left-tailed, or two-tailed. will show you how to set up the null and alternative hypotheses. The null and alternative hypotheses contain statements about the population variance.
+
+Math instructors are not only interested in how their students do on exams, on average, but how the exam scores vary. To many instructors, the variance, or standard deviation, may be more important than the average.
+
+Suppose a math instructor believes that the standard deviation for his final exam is five points. One of his
+best students thinks otherwise. The student claims that the standard deviation is more than five points. If the student were to conduct a hypothesis test, what would the null and alternative hypotheses be?
+
+Even though we are given the population standard deviation, we can set up the test using the population variance as follows:
+H0: σ2 = 52
+Ha: σ2 > 52
+
+Try It
+
+A scuba instructor wants to record the collective depths each of his students dives during their checkout. He is interested in how the depths vary, even though everyone should have been at the same depth. He believes the standard deviation is three feet. His assistant thinks the standard deviation is less than three feet. If the instructor were to conduct a test, what would the null and alternative hypotheses be?
+H0: σ2 = 32
+Ha: σ2 < 32
+
+With individual lines at its various windows, a post office finds that the standard deviation for normally distributed waiting times for customers on Friday afternoon is 7.2 minutes. The post office experiments with a single, main waiting line and finds that for a random sample of 25 customers, the waiting times for customers have a standard deviation of 3.5 minutes.
+
+With a significance level of 5 percent, test the claim that a single line causes lower variation
+among waiting times (shorter waiting times) for customers.
+
+Since the claim is that a single line causes less variation, this is a test of a single variance.
+The parameter is the population variance, σ2, or the population standard deviation, σ.
+Random variable: The sample standard deviation, s, is the random variable.
+Let s = standard deviation for the waiting times.
+H0: σ2 = 7.22
+Ha: σ2 < 7.22
+
+The word less tells you this is a left-tailed test.
+Distribution for the test: χ242, where
+n = the number of customers sampled, and
+ df = n – 1 = 25 – 1 = 24.
+n = the number of customers sampled, and
+df = n – 1 = 25 – 1 = 24.
+Calculate the test statistic:
+χ
+ 2
+ 
+ =
+ 
+ (n − 1)
+ s
+ 2
+
+ σ
+ 2
+
+ =
+ 
+ (25 − 1)
+ 
+ (3.5)
+ 
+ 2
+
+ 7.2
+ 
+ 2
+
+ =5.67
+
+where n = 25, s = 3.5, and σ = 7.2.
+Graph
+Probability statement: p-value = P ( χ2 < 5.67) = 0.000042
+Compare α and the p-value:
+
+α = 0.05
+p-value = 0.000042
+α > p-value
+Make a decision: Since α > p-value, reject H0. This means that you reject σ2 = 7.22. In other words, you do not think the variation in waiting times is 7.2 minutes; you think the variation in waiting times is less.
+Conclusion: At a 5 percent level of significance, from the data, there is sufficient evidence to
+conclude that a single line causes a lower variation among the waiting times or with a single
+line, the customer waiting times vary less than 7.2 minutes.
+
+In 2nd DISTR, use 7:χ2cdf. The syntax is
+(lower, upper, df) for the parameter list.
+ For , χ2cdf(-1E99,5.67,24). The p-value = 0.000042.
+
+Try It
+
+The FCC conducts broadband speed tests to measure how much data per second passes between a consumer’s computer and the internet. As of August 2012, the standard deviation of internet speeds across internet service providers (ISPs) was 12.2 percent. Suppose a sample of 15 ISPs is taken, and the standard deviation is 13.2. An analyst claims that the standard deviation of speeds is more than what was reported. State the null and alternative hypotheses, compute the degrees of freedom, calculate the test statistic, sketch the graph of the p-value, and draw a conclusion. Test at the 1 percent significance level.
+H0: σ2 = 12.22
+Ha: σ2 > 12.22
+df = 14
+chi2 test statistic = 16.39
+
+The p-value is 0.2902, so we decline to reject the null hypothesis. There is not enough evidence to suggest that the variance is greater than 12.22.
+
+In 2nd DISTR, use7:χ2cdf. The syntax is (lower, upper, df) for the parameter list. χ2cdf(16.39,10^99,14). The p-value = 0.2902.
+
+References
+
+Apple Insider. (n.d.). Retrieved from http://appleinsider.com/mac_price_guide
+
+World Bank. (n.d.). Retrieved from http://www.worldbank.org/
+
+Chapter Review
+
+To test variability, use the chi-square test of a single variance. The test may be left-, right-, or two-tailed, and its hypotheses are always expressed in terms of the variance or standard deviation.
+
+Formula Review
+χ
+ 2
+ 
+ =
+
+ (n−1)⋅
+ s
+ 2
+
+ σ
+ 2
+
+ Test of a single variance statistic where
+ n: sample size
+ s: sample standard deviation
+ σ: population standard deviation
+df = n – 1 degrees of freedom
+
+Test of a Single Variance
+
+Use the test to determine variation.
+
+The degrees of freedom is the number of samples – 1.
+
+The test statistic is 
+
+ (n–1)⋅
+ s
+ 2
+
+ σ
+ 2
+
+, where n = the total number of data, s2 = sample variance, and σ2 = population variance.
+
+The test may be left-, right-, or two-tailed.
+Use the following information to answer the next three exercises. An archer’s standard deviation for his hits is six, where the data are measured in distance from the center of the target. An observer claims the standard deviation is less than six.
+
+What type of test should be used?
+
+a test of a single variance
+
+State the null and alternative hypotheses.
+
+Is this a right-tailed, left-tailed, or two-tailed test?
+
+a left-tailed test
+Use the following information to answer the next three exercises. The standard deviation of heights for students in a school is 0.81. A random sample of 50 students is taken, and the standard deviation of heights of the sample is 0.96. A researcher in charge of the study believes the standard deviation of heights for the school is greater than 0.81.
+
+What type of test should be used?
+
+State the null and alternative hypotheses.
+H0: σ2 = 0.812;
+Ha: σ2 > 0.812
+df = ________
+Use the following information to answer the next four exercises: The average waiting time in a doctor’s office varies. The standard deviation of waiting times in a doctor’s office is 3.4 minutes. A random sample of 30 patients in the doctor’s office has a standard deviation of waiting times of 4.1 minutes. One doctor believes the variance of waiting times is greater than originally thought.
+
+What type of test should be used?
+
+a test of a single variance
+
+What is the test statistic?
+
+What is the p-value?
+
+0.0542
+
+What can you conclude at the 5 percent significance level?
+
+Homework
+Use the following information to answer the next 12 exercises. Suppose an airline claims that its flights are consistently on time with an average delay of at most 15 minutes. It claims that the average delay is so consistent that the variance is no more than 150 minutes. Doubting the consistency part of the claim, a disgruntled traveler calculates the delays for his next 25 flights. The average delay for those 25 flights is 22 minutes with a standard deviation of 15 minutes.
+
+Is the traveler disputing the claim about the average or about the variance?
+
+A sample standard deviation of 15 minutes is the same as a sample variance of __________ minutes.
+
+225
+
+Is this a right-tailed, left-tailed, or two-tailed test?
+H0: __________
+H0: σ2 ≤ 150
+df = ________
+
+chi-square test statistic = ________
+
+36
+p-value = ________
+
+Graph the situation. Label and scale the horizontal axis. Mark the mean and test statistic. Shade the p-value.
+
+Check student’s solution.
+
+Let α = 0.05
+ Decision: ________
+ Conclusion (write out in a complete sentence): ________
+
+How did you know to test the variance instead of the mean?
+
+The claim is that the variance is no more than 150 minutes.
+
+If an additional test were done on the claim of the average delay, which distribution would you use?
+
+If an additional test were done on the claim of the average delay, but 45 flights were surveyed, which distribution would you use?
+
+a student's t or normal distribution
+For each word problem, use a solution sheet to solve the hypothesis test problem. Go to for the chi-square solution sheet. Round expected frequency to two decimal places.
+
+A plant manager is concerned her equipment may need recalibrating. It seems that the actual weight of the 15-ounce cereal boxes it fills has been fluctuating. The standard deviation should be at most 0.5 ounces. To determine if the machine needs to be recalibrated, 84 randomly selected boxes of cereal from the next day’s production were weighed. The standard deviation of the 84 boxes was 0.54. Does the machine need to be recalibrated?
+
+Consumers may be interested in whether the cost of a particular calculator varies from store to store. Based on surveying 43 stores, which yielded a sample mean of $84 and a sample standard deviation of $12, test the claim that the standard deviation is greater than $15.
+H0: σ = 15
+Ha: σ > 15
+df = 42
+
+chi-square with df = 42
+
+test statistic = 26.88
+p-value = 0.9663
+
+Check student’s solution.
+Alpha = 0.05
+ Decision: Do not reject null hypothesis.
+ Reason for decision: p-value > alpha
+ Conclusion: There is insufficient evidence to conclude that the standard deviation is greater than 15.
+
+Alpha = 0.05
+
+Decision: Do not reject null hypothesis.
+
+Reason for decision: p-value > alpha
+
+Conclusion: There is insufficient evidence to conclude that the standard deviation is greater than 15.
+
+Isabella, an accomplished Bay-to-Breakers runner, claims that the standard deviation for her time to run the 7.5 mile race is at most 3 minutes. To test her claim, Isabella looks up five of her race times. They are 55 minutes, 61 minutes, 58 minutes, 63 minutes, and 57 minutes.
+
+Airline companies are interested in the consistency of the number of babies on each flight so that they have adequate safety equipment. They are also interested in the variation of the number of babies. Suppose that an airline executive believes the average number of babies on flights is six with a variance of nine at most. The airline conducts a survey. The results of the 18 flights surveyed give a sample average of 6.4 with a sample standard deviation of 3.9. Conduct a hypothesis test of the airline executive’s belief.
+H0: σ ≤ 3
+Ha: σ > 3
+df = 17
+
+chi-square distribution with df = 17
+
+test statistic = 28.73
+p-value = 0.0371
+
+Check student’s solution.
+Alpha: 0.05
+ Decision: Reject the null hypothesis.
+ Reason for decision: p-value < alpha
+ Conclusion: There is sufficient evidence to conclude that the standard deviation is greater than three.
+
+Alpha: 0.05
+
+Decision: Reject the null hypothesis.
+
+Reason for decision: p-value < alpha
+
+Conclusion: There is sufficient evidence to conclude that the standard deviation is greater than three.
+
+The number of births per woman in China is 1.6, down from 5.91 in 1966. This fertility rate has been attributed to the law passed in 1979 restricting births to one per woman. Suppose that a group of students studied whether the standard deviation of births per woman was greater than 0.75. They asked 50 women across China the number of births they had. The results are shown in . Does the students’ survey indicate that the standard deviation is greater than 0.75?
+
+# of Births
+Frequency
+0
+5
+1
+30
+2
+10
+3
+5
+According to an avid aquarist, the average number of fish in a 20-gallon tank is 10, with a standard deviation of two. His friend, also an aquarist, does not believe that the standard deviation is two. She counts the number of fish in 15 other 20-gallon tanks. Based on the results that follow, do you think that the standard deviation is different from two? Data: 11; 10; 9; 10; 10; 11; 11; 10; 12; 9; 7; 9; 11; 10; and 11.
+H0: σ = 2
+Ha: σ ≠ 2
+df = 14
+
+chi-square distiribution with df = 14
+
+chi-square test statistic = 5.2094
+p-value = 0.0346
+
+Check student’s solution.
+Alpha = 0.05
+ Decision: Reject the null hypothesis
+ Reason for decision: p-value < alpha
+ Conclusion: There is sufficient evidence to conclude that the standard deviation is different than two.
+
+Alpha = 0.05
+
+Decision: Reject the null hypothesis
+
+Reason for decision: p-value < alpha
+
+Conclusion: There is sufficient evidence to conclude that the standard deviation is different than two.
+
+The manager of Frenchies is concerned that patrons are not consistently receiving the same amount of French fries with each order. The chef claims that the standard deviation for a 10-ounce order of fries is at most 1.5 ounces, but the manager thinks that it may be higher. He randomly weighs 49 orders of fries, which yields a mean of 11 ounces and a standard deviation of 2 ounces.
+
+You want to buy a specific computer. A sales representative of the manufacturer claims that retail stores sell this computer at an average price of $1,249 with a very narrow standard deviation of $25. You find a website that has a price comparison for the same computer at a series of stores as follows: $1,299; $1,229.99; $1,193.08; $1,279; $1,224.95; $1,229.99; $1,269.95; and $1,249. Can you argue that pricing has a larger standard deviation than claimed by the manufacturer? Use the 5 percent significance level. As a potential buyer, what would be the practical conclusion from your analysis?
+
+The sample standard deviation is $34.29.
+H0 : σ2 = 252
+ Ha : σ2 > 252
+df = n – 1 = 7
+Test statistic: 
+
+ x
+ 2
+ 
+ = 
+ x
+ 7
+ 2
+ 
+ = 
+ 
+ (n–1)
+ s
+ 2
+
+ 25
+ 
+ 2
+
+ = 
+ 
+ (8–1)
+ 
+ (34.29)
+ 
+ 2
+
+ 25
+ 
+ 2
+
+ =13.169
+ 
+;
+p-value: 
+ 
+ P(
+
+ x
+ 7
+ 2
+ 
+ >13.169
+ 
+ )=1–P(
+
+ x
+ 7
+ 2
+ 
+  ≤13.169
+ 
+ )=.0681
+Alpha: 0.05
+Decision: Do not reject the null hypothesis.
+Reason for decision: p-value > alpha
+Conclusion: At the 5 percent level, there is insufficient evidence to conclude that the variance is more than 625.
+
+A company packages apples by weight. One of the weight grades is Class A apples. Class A apples have a mean weight of 150 grams, and there is a maximum allowed weight tolerance of 5 percent above or below the mean for apples in the same consumer package. A batch of apples is selected to be included in a Class A apple package. Given the following apple weights of the batch, does the fruit comply with the Class A grade weight tolerance requirements? Conduct an appropriate hypothesis test.
+
+(a) At the 5 percent significance level
+
+(b) At the 1 percent significance level
+
+Weights in selected apple batch (in grams): 158; 167; 149; 169; 164; 139; 154; 150; 157; 171; 152; 161; 141; 166; and 172.

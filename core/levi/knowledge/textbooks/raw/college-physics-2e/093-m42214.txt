@@ -1,0 +1,372 @@
+# m42214
+# Book: OpenStax College Physics
+# Subject: science
+# Source: https://github.com/openstax/osbooks-college-physics-bundle
+# License: CC BY 4.0 (OpenStax)
+
+Temperature
+
+Temperature
+
+Learning Objectives
+
+By the end of this section, you will be able to:
+
+Define temperature.
+
+Convert temperatures between the Celsius, Fahrenheit, and Kelvin scales.
+
+Define thermal equilibrium.
+
+State the zeroth law of thermodynamics.
+
+The concept of temperature has evolved from the common concepts of hot and cold. Human perception of what feels hot or cold is a relative one. For example, if you place one hand in hot water and the other in cold water, and then place both hands in tepid water, the tepid water will feel cool to the hand that was in hot water, and warm to the one that was in cold water. The scientific definition of temperature is less ambiguous than your senses of hot and cold. Temperature is operationally defined to be what we measure with a thermometer. (Many physical quantities are defined solely in terms of how they are measured. We shall see later how temperature is related to the kinetic energies of atoms and molecules, a more physical explanation.) Two accurate thermometers, one placed in hot water and the other in cold water, will show the hot water to have a higher temperature. If they are then placed in the tepid water, both will give identical readings (within measurement uncertainties). In this section, we discuss temperature, its measurement by thermometers, and its relationship to thermal equilibrium. Again, temperature is the quantity measured by a thermometer.
+
+Misconception Alert: Human Perception vs. Reality
+
+On a cold winter morning, a wooden bench feels warmer than a metal bench. Both benches are in thermal equilibrium with the outside air, and are thus the same temperature. They feel different because of the difference in the way that they conduct heat away from your skin. The metal conducts heat away from your body faster than the wood does (see more about conductivity in Conduction). This is just one example demonstrating that the human sense of hot and cold is not determined by temperature alone.
+
+Another factor that affects our perception of temperature is humidity. Most people feel much hotter on hot, humid days than on hot, dry days. This is because on humid days, sweat does not evaporate from the skin and in our lungs as efficiently as it does on dry days. It is the evaporation of sweat (or water from a sprinkler or pool) as well as water in the lungs that cools us off.
+
+Any physical property that depends on temperature, and whose response to temperature is reproducible, can be used as the basis of a thermometer. Because many physical properties depend on temperature, the variety of thermometers is remarkable. For example, volume increases with temperature for most substances. This property is the basis for the common alcohol thermometer, the old mercury thermometer, and the bimetallic strip (). Other properties used to measure temperature include electrical resistance and color, as shown in , and the emission of infrared radiation, as shown in .
+
+Temperature Scales
+
+Thermometers are used to measure temperature according to well-defined scales of measurement, which use pre-defined reference points to help compare quantities. The three most common temperature scales are the Fahrenheit, Celsius, and Kelvin scales. A temperature scale can be created by identifying two easily reproducible temperatures. The freezing and boiling temperatures of water at standard atmospheric pressure are commonly used.
+
+The Celsius scale (which replaced the slightly different centigrade scale) has the freezing point of water at 0ºC and the boiling point at 100ºC. Its unit is the degree Celsius(ºC). On the Fahrenheit scale (still the most frequently used in the United States), the freezing point of water is at 32ºF and the boiling point is at 212ºF. The unit of temperature on this scale is the degree Fahrenheit(ºF). Note that a temperature difference of one degree Celsius is greater than a temperature difference of one degree Fahrenheit. Only 100 Celsius degrees span the same range as 180 Fahrenheit degrees, thus one degree on the Celsius scale is 1.8 times larger than one degree on the Fahrenheit scale 180/100=9/5.
+
+The Kelvin scale is the temperature scale that is commonly used in science. It is an absolute temperature scale defined to have 0 K at the lowest possible temperature, called absolute zero. The official temperature unit on this scale is the kelvin, which is abbreviated K, and is not accompanied by a degree sign. The freezing and boiling points of water are 273.15 K and 373.15 K, respectively. Thus, the magnitude of temperature differences is the same in units of kelvins and degrees Celsius. Unlike other temperature scales, the Kelvin scale is an absolute scale. It is used extensively in scientific work because a number of physical quantities, such as the volume of an ideal gas, are directly related to absolute temperature. The kelvin is the SI unit used in scientific work.
+
+The relationships between the three common temperature scales is shown in . Temperatures on these scales can be converted using the equations in .
+
+Temperature Conversions
+
+To convert from . . .
+Use this equation . . .
+Also written as . . .
+T
+
+ º
+ F
+
+ =
+ 
+ 9
+ 5
+
+ T
+
+ º
+ C
+
+ +
+ 32
+T
+
+ º
+ C
+
+ =
+ 
+ 5
+ 9
+
+ T
+
+ º
+ F
+
+ −
+ 32
+T
+ 
+ K
+
+ =
+
+ T
+
+ º
+ C
+
+ +
+ 273
+
+ .
+ 15
+T
+
+ º
+ C
+
+ =
+
+ T
+ 
+ K
+
+ −
+ 273
+
+ .
+ 15
+T
+ 
+ K
+
+ =
+ 
+ 5
+ 9
+
+ T
+
+ º
+ F
+
+ −
+ 32
+
+ +
+ 273
+ 
+ .
+ 15
+T
+
+ º
+ F
+
+ =
+ 
+ 9
+ 5
+
+ T
+ 
+ K
+
+ −
+ 273
+ 
+ .
+ 15
+
+ +
+ 32
+Notice that the conversions between Fahrenheit and Kelvin look quite complicated. In fact, they are simple combinations of the conversions between Fahrenheit and Celsius, and the conversions between Celsius and Kelvin.
+
+Converting between Temperature Scales: Room Temperature
+
+“Room temperature” is generally defined to be 25ºC. (a) What is room temperature in ºF? (b) What is it in K?
+Strategy
+
+Strategy
+
+To answer these questions, all we need to do is choose the correct conversion equations and plug in the known values.
+Solution for (a)
+
+Solution for (a)
+
+1. Choose the right equation. To convert from ºC to ºF, use the equation
+
+2. Plug the known value into the equation and solve:
+Solution for (b)
+
+Solution for (b)
+
+1. Choose the right equation. To convert from ºC to K, use the equation
+
+2. Plug the known value into the equation and solve:
+
+Converting between Temperature Scales: the Reaumur Scale
+
+The Reaumur scale is a temperature scale that was used widely in Europe in the 18th and 19th centuries. On the Reaumur temperature scale, the freezing point of water is 0ºR and the boiling temperature is 80ºR. If “room temperature” is 25ºC on the Celsius scale, what is it on the Reaumur scale?
+Strategy
+
+Strategy
+
+To answer this question, we must compare the Reaumur scale to the Celsius scale. The difference between the freezing point and boiling point of water on the Reaumur scale is 80ºR. On the Celsius scale it is 100ºC. Therefore 100º
+C=80ºR. Both scales start at 0
+º for freezing, so we can derive a simple formula to convert between temperatures on the two scales.
+Solution
+
+Solution
+
+1. Derive a formula to convert from one scale to the other:
+
+2. Plug the known value into the equation and solve:
+
+Temperature Ranges in the Universe
+shows the wide range of temperatures found in the universe. Human beings have been known to survive with body temperatures within a small range, from 24ºC to 44ºC (75ºF to 111ºF). The average normal body temperature is usually given as 37.0ºC (98.6ºF), and variations in this temperature can indicate a medical condition: a fever, an infection, a tumor, or circulatory problems (see ).
+
+The lowest temperatures ever recorded have been measured during laboratory experiments: 4.5×10–10 K at the Massachusetts Institute of Technology (USA), and 1.0×10–10 K at Helsinki University of Technology (Finland). In comparison, the coldest recorded place on Earth’s surface is Vostok, Antarctica at 183 K (–89ºC), and the coldest place (outside the lab) known in the universe is the Boomerang Nebula, with a temperature of 1 K.
+
+Making Connections: Absolute Zero
+
+What is absolute zero? The concept of absolute zero arises from the behavior of gases. shows how the pressure of gases at a constant volume decreases as temperature decreases. Various scientists have noted that the pressures of gases extrapolate to zero at the same temperature, –273.15ºC. This extrapolation suggests that there is a lowest temperature. Other thermodynamic relationships lead to the same conclusion. This lowest temperature is called absolute zero. At absolute zero, molecular motion is at the minimum energy possible. Today we know that most gases first liquefy and then freeze, and it is not actually possible to reach absolute zero. The numerical value of absolute zero temperature is –273.15ºC or 0 K.
+
+Thermal Equilibrium and the Zeroth Law of Thermodynamics
+
+Thermometers actually take their own temperature, not the temperature of the object they are measuring. This raises the question of how we can be certain that a thermometer measures the temperature of the object with which it is in contact. It is based on the fact that any two systems placed in thermal contact (meaning heat transfer can occur between them) but isolated from the rest of the environment, will reach the same temperature. That is, heat will flow from the hotter object to the cooler one until they have exactly the same temperature. The objects are then in thermal equilibrium, and no further heat flow or changes in temperature will occur. Thus, if enough time is allowed for this transfer of heat to run its course, the temperature a thermometer registers does represent the system with which it is in thermal equilibrium. Thermal equilibrium is established when two bodies are in contact with each other and can freely exchange energy. A single object is said to be in internal thermal equilibrium when no heat is flowing within the object and therefore its temperature is uniform.
+
+Furthermore, experimentation has shown that if two systems, A and B, are in thermal equilibrium with each another, and B is in thermal equilibrium with a third system C, then A is also in thermal equilibrium with C. This conclusion may seem obvious, because all three have the same temperature, but it is basic to thermodynamics. It is called the zeroth law of thermodynamics.
+
+The Zeroth Law of Thermodynamics
+
+If two systems, A and B, are in thermal equilibrium with each other, and B is in thermal equilibrium with a third system, C, then A is also in thermal equilibrium with C.
+
+This law was postulated in the 1930s, after the first and second laws of thermodynamics had been developed and named. It is called the zeroth law because it comes logically before the first and second laws (discussed in Thermodynamics). Suppose, for example, a cold metal block and a hot metal block are both placed on a metal plate at room temperature. Eventually the cold block and the plate will be in thermal equilibrium. In addition, the hot block and the plate will be in thermal equilibrium. By the zeroth law, we can conclude that the cold block and the hot block are also in thermal equilibrium. Similarly, two thermometers placed in thermal contact, one with one block and the second with the other block, will also be in thermal equilibrium and therefore read the same temperature. This establishes temperature as a meaningful concept.
+
+Check Your Understanding
+
+Does the temperature of a body in internal thermal equilibrium depend on its size?
+
+No, the system can be divided into smaller parts. Since no heat is flowing, each part is in equilibrium with the adjacent part, and according to the zeroth law, this means all parts are in equilibrium with each other and are at the same temperature. Quantities that are independent of size are called intensive quantities. Temperature is an intensive quantity.
+
+Section Summary
+
+Temperature is the quantity measured by a thermometer.
+
+Temperature is related to the average kinetic energy of atoms and molecules in a system.
+
+Absolute zero is the temperature at which there is no molecular motion.
+
+There are three main temperature scales: Celsius, Fahrenheit, and Kelvin.
+
+Temperatures on one scale can be converted to temperatures on another scale using the following equations:
+
+ T
+
+ º
+ F
+
+ =
+ 
+ 9
+ 5
+
+ T
+
+ º
+ C
+
+ +
+ 32
+
+ T
+
+ º
+ C
+
+ =
+ 
+ 5
+ 9
+
+ T
+
+ º
+ F
+
+ −
+ 32
+
+ T
+ 
+ K
+
+ =
+
+ T
+
+ º
+ C
+
+ +
+ 273
+
+ .
+ 15
+
+ T
+
+ º
+ C
+
+ =
+
+ T
+ 
+ K
+
+ −
+ 273
+
+ .
+ 15
+
+Systems are in thermal equilibrium when they have the same temperature.
+
+Thermal equilibrium occurs when two bodies are in contact with each other and can freely exchange energy.
+
+The zeroth law of thermodynamics states that when two systems, A and B, are in thermal equilibrium with each other, and B is in thermal equilibrium with a third system, C, then A is also in thermal equilibrium with C.
+
+Conceptual Questions
+
+What does it mean to say that two systems are in thermal equilibrium?
+
+Give an example of a physical property that varies with temperature and describe how it is used to measure temperature.
+
+When a cold alcohol thermometer is placed in a hot liquid, the column of alcohol goes down slightly before going up. Explain why.
+
+If you add boiling water to a cup at room temperature, what would you expect the final equilibrium temperature of the unit to be? You will need to include the surroundings as part of the system. Consider the zeroth law of thermodynamics.
+
+Problems & Exercises
+
+What is the Fahrenheit temperature of a person with a 39.0ºC fever?
+102
+ º
+ F
+
+Frost damage to most plants occurs at temperatures of 28.0ºF or lower. What is this temperature on the Kelvin scale?
+
+To conserve energy, room temperatures are kept at 68.0ºF in the winter and 78.0ºF in the summer. What are these temperatures on the Celsius scale?
+20.0ºC and 25.6ºC
+
+A tungsten light bulb filament may operate at 2900 K. What is its Fahrenheit temperature? What is this on the Celsius scale?
+
+The surface temperature of the Sun is about 5750 K. What is this temperature on the Fahrenheit scale?
+9890
+ º
+ F
+
+One of the hottest temperatures ever recorded on the surface of Earth was 134ºF in Death Valley, CA. What is this temperature in Celsius degrees? What is this temperature in Kelvin?
+
+(a) Suppose a cold front blows into your locale and drops the temperature by 40.0 Fahrenheit degrees. How many degrees Celsius does the temperature decrease when there is a 40.0ºF decrease in temperature? (b) Show that any change in temperature in Fahrenheit degrees is nine-fifths the change in Celsius degrees.
+
+(a) 22.2ºC
+
+(b) 
+ΔTºF
+=
+T2ºF−T1ºF
+
+=
+95T2ºC+32.0º−95T1ºC+ 32.0º
+
+=
+95T2ºC−T1ºC=95ΔTºC
+
+(a) At what temperature do the Fahrenheit and Celsius scales have the same numerical value? (b) At what temperature do the Fahrenheit and Kelvin scales have the same numerical value?
+
+the quantity measured by a thermometer
+temperature scale in which the freezing point of water is 0ºC and the boiling point of water is 100ºC
+unit on the Celsius temperature scale
+temperature scale in which the freezing point of water is 32ºF and the boiling point of water is 212ºF
+unit on the Fahrenheit temperature scale
+temperature scale in which 0 K is the lowest possible temperature, representing absolute zero
+the lowest possible temperature; the temperature at which all molecular motion ceases
+the condition in which heat no longer flows between two objects that are in contact; the two objects have the same temperature
+law that states that if two objects are in thermal equilibrium, and a third object is in thermal equilibrium with one of those objects, it is also in thermal equilibrium with the other object
