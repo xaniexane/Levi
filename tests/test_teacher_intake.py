@@ -348,3 +348,74 @@ def test_records_stay_compatible_with_continue(tmp_path):
     corpus = "\n\n".join(texts)
     assert corpus.startswith("User: ")
     assert set(corpus) <= VOCAB  # char mode output stays inside the vocab
+
+
+def _paste_line(teacher, n, **extra):
+    obj = {
+        "teacher": teacher,
+        "prompt": f"question number {n} here",
+        "response": f"Answer number {n} here.",
+        **extra,
+    }
+    return json.dumps(obj)
+
+
+def test_run_persists_records_to_disk_regression():
+    # Regression for the unreachable-storage bug (2026-09-24): the
+    # dedupe/storage block sat under `continue` inside `except`, so
+    # records_in > 0 always produced records_out == 0 and an empty
+    # output file. The minting worker had to bypass run() with a temp
+    # wrapper. This test pins the contract: run() persists.
+    import os
+    import tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as td:
+        p = os.path.join(td, "pastes.jsonl")
+        o = os.path.join(td, "records.jsonl")
+        lines = [
+            _paste_line("deepseek", 1),
+            _paste_line("qwen", 2),
+            _paste_line("deepseek", 3),
+            _paste_line("muse", 4, response="x"),  # too short -> rejected
+        ]
+        with open(p, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(lines) + "\n")
+
+        report = ti.run(Path(p), Path(o), VOCAB, round="r-test")
+        assert report["records_in"] == 4
+        assert report["records_out"] == 3, report
+        assert report["rejected"] == 1, report  # the too-short paste
+        # the file on disk actually holds the records
+        recs = [json.loads(line) for line in open(o, encoding="utf-8") if line.strip()]
+        assert len(recs) == 3
+        ids = [r["record_id"] for r in recs]
+        assert len(set(ids)) == 3  # stable unique IDs
+        assert all(r["text"].startswith("User: ") for r in recs)
+        assert ti.verify_provenance(recs) == []
+        teachers = sorted(r["provenance"][0]["teacher"] for r in recs)
+        assert teachers == ["deepseek", "deepseek", "qwen"]
+
+
+def test_run_dedupes_and_merges_provenance_regression():
+    # Same content pasted twice (different rounds) -> one record out,
+    # two provenance events on the survivor.
+    import os
+    import tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as td:
+        p = os.path.join(td, "pastes.jsonl")
+        o = os.path.join(td, "records.jsonl")
+        with open(p, "w", encoding="utf-8") as fh:
+            fh.write(_paste_line("deepseek", 7, round="r1") + "\n")
+            fh.write(_paste_line("qwen", 7, round="r2") + "\n")
+        report = ti.run(Path(p), Path(o), VOCAB, round="r-fallback")
+        assert report["records_in"] == 2
+        assert report["records_out"] == 1, report
+        assert report["duplicates"] == 1, report
+        recs = [json.loads(line) for line in open(o, encoding="utf-8") if line.strip()]
+        assert len(recs) == 1
+        prov = recs[0]["provenance"]
+        assert len(prov) == 2
+        assert sorted(e["round"] for e in prov) == ["r1", "r2"]

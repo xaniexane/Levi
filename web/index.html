@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEVI — void mind</title>
+<!--
+  VOID-MIND v2 — the real thing. Connected to the local LEVI daemon
+  (levi serve). No sidebar, no dashboard — the void IS the interface.
+  The core breathes. The registers orbit. The conversation is a tape
+  ledger with a real hash chain, one chain per session.
+  Everything in this file is inline. Zero network requests beyond this
+  machine's own daemon. Nothing is ever faked: when the daemon is down,
+  the void says so and refuses to chat.
+-->
+<style>
+  :root{
+    --void:#0a0a0c;
+    --surface:#121215;
+    --elevated:#1b1b20;
+    --fg:#f0eee8;
+    --muted:#9b998f;
+    --subtle:#6f6d67;
+    --gold:#C4A35A;
+    --gold-dim:rgba(196,163,90,.38);
+    --gold-faint:rgba(196,163,90,.12);
+    --green:#6fbf73;
+    --danger:#c45c4a;
+    --ash:#4a4a4e;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Noto Serif",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--void);
+    color:var(--fg);
+    font-family:var(--sans);
+    overflow:hidden;
+    /* the lineage: punch-card 20px lattice, barely there */
+    background-image:
+      linear-gradient(rgba(196,163,90,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,163,90,.045) 1px, transparent 1px);
+    background-size:20px 20px;
+  }
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:40;
+    display:flex;align-items:center;gap:12px;padding:10px 18px;
+    pointer-events:none;
+  }
+  header .wordmark{font-family:var(--serif);font-size:20px;letter-spacing:.28em;color:var(--fg)}
+  header .sub{font-size:11px;color:var(--muted);letter-spacing:.08em}
+  header .local-dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 10px var(--green);flex:none}
+  body.is-offline header .local-dot{background:var(--ash);box-shadow:none}
+  header .spacer{flex:1}
+  header .session{
+    pointer-events:auto;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface);border:1px solid rgba(240,238,232,.12);
+    padding:5px 10px;border-radius:20px;cursor:pointer;
+  }
+  header .session:hover{color:var(--gold);border-color:var(--gold-dim)}
+  /* ---------- the void field ---------- */
+  #void{
+    position:fixed;inset:0;top:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:64px 16px 190px;
+  }
+  /* the core: a breathing gold diamond lattice */
+  #core{position:relative;width:min(46vmin,300px);height:min(46vmin,300px);flex:none}
+  #core svg{width:100%;height:100%;overflow:visible}
+  #core .breath{transform-origin:center;transform-box:fill-box;animation:breath 5.2s ease-in-out infinite}
+  @keyframes breath{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.045);opacity:1}}
+  #core .shimmer{opacity:0;transform-origin:center;transform-box:fill-box}
+  #core.busy .shimmer{opacity:1;animation:ripple 1.6s ease-out infinite}
+  @keyframes ripple{0%{transform:scale(.72);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+  #core.offline .breath{animation:none;opacity:.35}
+  #core.offline .core-gold{stroke:var(--ash)!important}
+  #core.offline .core-fill{fill:rgba(74,74,78,.15)!important}
+  .core-label{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    text-align:center;pointer-events:none;width:130%;
+  }
+  .core-label .stage{font-family:var(--serif);font-size:13px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+  body.is-offline .core-label .stage{color:var(--ash)}
+  .core-label .learnings{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px}
+  /* register constellation ring */
+  #ring{position:absolute;inset:-9vmin;pointer-events:none}
+  #ring .orbit{position:absolute;inset:0;transition:transform .7s cubic-bezier(.22,.9,.28,1)}
+  .reg{
+    position:absolute;left:50%;top:50%;pointer-events:auto;cursor:pointer;
+    width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
+    background:var(--surface);border:1px solid var(--gold-dim);
+    transition:background .25s,box-shadow .25s,transform .25s;
+  }
+  .reg:hover{transform:scale(1.35)}
+  .reg.active{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  .reg .tip{
+    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    white-space:nowrap;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    color:var(--fg);background:var(--elevated);border:1px solid rgba(240,238,232,.14);
+    padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .reg:hover .tip,.reg.active .tip{opacity:1}
+  #ring-nav{position:absolute;inset:-9vmin;pointer-events:none}
+  #ring-nav button{
+    position:absolute;pointer-events:auto;cursor:pointer;
+    background:var(--surface);border:1px solid rgba(240,238,232,.16);color:var(--muted);
+    width:30px;height:30px;border-radius:50%;font-size:14px;line-height:1;
+  }
+  #ring-nav button:hover{color:var(--gold);border-color:var(--gold-dim)}
+  #ring-prev{left:2%;top:50%}
+  #ring-next{right:2%;top:50%}
+  /* current register voice */
+  #voice{margin-top:14px;text-align:center;max-width:520px}
+  #voice .rname{font-family:var(--serif);font-size:15px;letter-spacing:.24em;color:var(--fg);text-transform:uppercase}
+  #voice .rvoice{font-size:12px;color:var(--muted);margin-top:6px;font-style:italic}
+  /* ---------- tape ledger thread ---------- */
+  #tapewrap{position:fixed;left:0;right:0;bottom:118px;z-index:30}
+  #tape{
+    display:flex;gap:10px;align-items:stretch;
+    padding:12px 18px;overflow-x:auto;scrollbar-width:thin;
+    mask-image:linear-gradient(90deg,transparent,#000 8%);
+    min-height:96px;
+  }
+  #tape .empty{
+    align-self:center;margin:0 auto;font-family:var(--mono);font-size:11px;
+    color:var(--subtle);letter-spacing:.08em;
+  }
+  .seg{
+    flex:0 0 240px;background:var(--surface);
+    border:1px solid rgba(240,238,232,.1);border-left:2px solid var(--gold-dim);
+    border-radius:4px;padding:10px 12px;font-size:12px;line-height:1.5;
+    overflow-wrap:break-word;
+  }
+  .seg .who{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+  .seg.user{border-left-color:var(--green)}
+  .seg.user .who{color:var(--green)}
+  .seg .hash{font-family:var(--mono);font-size:9px;color:var(--subtle);margin-top:8px}
+  .seg.fork{border-left-color:var(--danger)}
+  .seg.fork .who{color:var(--danger)}
+  .seg.note{border-left-color:var(--gold)}
+  .seg .tps{font-family:var(--mono);font-size:9px;color:var(--subtle);margin-top:4px}
+  /* ---------- panel views (journal / growth / more) ---------- */
+  #panel{
+    position:fixed;left:0;right:0;bottom:118px;z-index:30;display:none;
+    padding:12px 18px;max-height:38vh;overflow-y:auto;
+  }
+  #panel.show{display:block}
+  #panel .card{
+    background:var(--surface);border:1px solid rgba(240,238,232,.1);
+    border-radius:8px;padding:14px 16px;margin:0 auto 10px;max-width:760px;
+    font-size:12px;line-height:1.6;
+  }
+  #panel .card .k{color:var(--subtle);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+  #panel .card .v{color:var(--fg);margin:2px 0 8px;overflow-wrap:break-word}
+  #panel .card .v:last-child{margin-bottom:0}
+  /* ---------- body readout ---------- */
+  #bodyline{
+    position:fixed;left:0;right:0;bottom:88px;z-index:30;text-align:center;
+    font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;
+    padding:0 16px;
+  }
+  #bodyline b{color:var(--fg);font-weight:600}
+  /* ---------- offline banner ---------- */
+  #offline-banner{
+    display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:150px;z-index:45;
+    background:var(--elevated);border:1px solid var(--ash);color:var(--fg);
+    font-size:12px;padding:10px 18px;border-radius:8px;max-width:90vw;text-align:center;
+  }
+  body.is-offline #offline-banner{display:block}
+  /* ---------- speak bar + nav ---------- */
+  #dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    background:linear-gradient(transparent,rgba(10,10,12,.92) 30%);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  #speak{display:flex;gap:10px;max-width:760px;margin:0 auto}
+  #speak input{
+    flex:1;background:var(--surface);border:1px solid rgba(240,238,232,.16);
+    color:var(--fg);border-radius:24px;padding:13px 18px;font-size:14px;font-family:var(--sans);
+    outline:none;
+  }
+  #speak input:focus{border-color:var(--gold-dim);box-shadow:0 0 0 1px var(--gold-faint)}
+  #speak input::placeholder{color:var(--subtle);font-style:italic}
+  #send{
+    flex:none;cursor:pointer;border:none;border-radius:24px;padding:0 26px;
+    background:var(--gold);color:#141005;font-weight:700;font-size:14px;letter-spacing:.06em;
+  }
+  #send:disabled{background:var(--ash);color:var(--muted);cursor:not-allowed}
+  nav#tabs{
+    display:flex;justify-content:center;gap:6px;max-width:760px;margin:10px auto 0;
+  }
+  nav#tabs button{
+    flex:1;cursor:pointer;background:none;border:none;color:var(--subtle);
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    padding:8px 4px;border-top:1px solid transparent;
+  }
+  nav#tabs button.on{color:var(--gold);border-top-color:var(--gold)}
+  /* ---------- inspector (wide screens) ---------- */
+  #inspector{display:none}
+  @media (min-width:1100px){
+    #void{padding-right:340px}
+    #tapewrap{right:340px}
+    #panel{right:340px}
+    #inspector{
+      display:block;position:fixed;right:0;top:0;bottom:118px;width:300px;z-index:35;
+      background:rgba(18,18,21,.86);border-left:1px solid rgba(240,238,232,.08);
+      padding:22px 20px;overflow-y:auto;backdrop-filter:blur(6px);
+    }
+    #inspector h3{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--subtle);
+      text-transform:uppercase;margin:20px 0 10px}
+    #inspector h3:first-child{margin-top:0}
+    #inspector .card{background:var(--surface);border:1px solid rgba(240,238,232,.1);
+      border-radius:8px;padding:12px;font-size:12px;line-height:1.6;overflow-wrap:break-word}
+    #inspector .card .k{color:var(--subtle);font-family:var(--mono);font-size:10px;letter-spacing:.1em}
+    #inspector .card .v{color:var(--fg);margin:2px 0 8px}
+    #inspector .tools{display:flex;gap:8px;flex-wrap:wrap}
+    #inspector .tools button{
+      cursor:pointer;background:var(--surface);border:1px solid rgba(240,238,232,.16);
+      color:var(--fg);border-radius:6px;padding:7px 12px;font-size:11px;font-family:var(--sans);
+    }
+    #inspector .tools button:hover{border-color:var(--gold-dim);color:var(--gold)}
+    #inspector .tools button:disabled{opacity:.4;cursor:not-allowed}
+  }
+  @media (max-width:640px){
+    #voice .rvoice{display:none}
+    .seg{flex-basis:200px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+    <g fill="none" stroke="#C4A35A" stroke-width="1.4">
+      <path d="M13 2 L24 13 L13 24 L2 13 Z"/>
+      <path d="M13 7 L19 13 L13 19 L7 13 Z" opacity=".55"/>
+      <path d="M13 2 V24 M2 13 H24" opacity=".3"/>
+    </g>
+  </svg>
+  <div>
+    <div class="wordmark">LEVI</div>
+    <div class="sub">synthetic intelligence · local-first</div>
+  </div>
+  <span class="local-dot" title="local"></span>
+  <div class="spacer"></div>
+  <div class="session" id="session-pill" title="start a new session">session · void-01</div>
+</header>
+
+<main id="void" aria-label="the mind-core">
+  <div id="core" role="img" aria-label="LEVI mind-core">
+    <svg viewBox="0 0 200 200">
+      <circle class="shimmer" cx="100" cy="100" r="62" fill="none" stroke="#C4A35A" stroke-width="1"/>
+      <circle class="shimmer" cx="100" cy="100" r="62" fill="none" stroke="#C4A35A" stroke-width="1" style="animation-delay:.5s"/>
+      <g class="breath">
+        <path class="core-gold" d="M100 18 L182 100 L100 182 L18 100 Z" fill="none" stroke="#C4A35A" stroke-width="1.6"/>
+        <path class="core-gold" d="M100 44 L156 100 L100 156 L44 100 Z" fill="none" stroke="#C4A35A" stroke-width="1" opacity=".6"/>
+        <path class="core-gold core-fill" d="M100 70 L130 100 L100 130 L70 100 Z" fill="rgba(196,163,90,.08)" stroke="#C4A35A" stroke-width="1" opacity=".8"/>
+        <path class="core-gold" d="M100 18 V182 M18 100 H182" stroke="#C4A35A" stroke-width=".7" opacity=".28"/>
+        <path class="core-gold" d="M100 44 V156 M44 100 H156" stroke="#C4A35A" stroke-width=".7" opacity=".2"/>
+      </g>
+    </svg>
+    <div id="ring" aria-label="register constellation"></div>
+    <div id="ring-nav">
+      <button id="ring-prev" aria-label="previous register">‹</button>
+      <button id="ring-next" aria-label="next register">›</button>
+    </div>
+    <div class="core-label">
+      <div class="stage" id="stage-name">…</div>
+      <div class="learnings" id="stage-count">reaching the daemon…</div>
+    </div>
+  </div>
+
+  <div id="voice">
+    <div class="rname" id="reg-name">LEVI</div>
+    <div class="rvoice" id="reg-voice"></div>
+  </div>
+</main>
+
+<div id="tapewrap">
+  <section id="tape" aria-label="conversation tape ledger"></section>
+</div>
+<section id="panel" aria-label="detail panel"></section>
+
+<div id="bodyline">this machine holds the mind · <b id="tps">— tok/s</b> · weights local · <b>no cloud door</b></div>
+
+<div id="offline-banner">the mind is unreachable — the void stays honest. nothing is faked while the daemon is down.</div>
+
+<aside id="inspector" aria-label="mind inspector">
+  <h3>Model · honest status</h3>
+  <div class="card" id="model-card">
+    <div class="k">RESOLVED</div><div class="v" id="model-resolved">…</div>
+    <div class="k">NOTE</div><div class="v" id="model-note">…</div>
+  </div>
+  <h3>Conversation instruments</h3>
+  <div class="tools">
+    <button id="btn-branch" title="fork this session from the last tick">⑂ branch this turn</button>
+    <button id="btn-clone" title="open a fresh session with this register">⧉ clone thread</button>
+    <button id="btn-note" title="pin the last reply to the session log">✎ pin a note</button>
+  </div>
+  <h3>Growth journal</h3>
+  <div class="card">
+    <div class="k">STAGE</div><div class="v" id="insp-stage">…</div>
+    <div class="k">NEXT</div><div class="v" id="insp-next">…</div>
+    <div class="k">LEDGER</div><div class="v">every turn lands here — the relationship record, not a chat log.</div>
+  </div>
+</aside>
+
+<div id="dock">
+  <div id="speak">
+    <input id="msg" type="text" placeholder="speak into the void…" autocomplete="off" aria-label="message LEVI">
+    <button id="send">Send</button>
+  </div>
+  <nav id="tabs" aria-label="hub tabs">
+    <button class="on" data-view="mind">mind</button><button data-view="journal">journal</button><button data-view="growth">growth</button><button data-view="more">more</button>
+  </nav>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* The daemon is this machine's own LEVI. Same origin, no cloud door. */
+  var API = "";
+  var sessionSeq = 1;
+  var sessionId = "void-01";
+  var registers = [];
+  var current = 0, rotation = 0;
+  var online = false;
+  var busy = false;
+  var lastReply = "";
+  var lastTick = "genesis";
+
+  var core = document.getElementById('core');
+  var tape = document.getElementById('tape');
+  var tapewrap = document.getElementById('tapewrap');
+  var panel = document.getElementById('panel');
+  var input = document.getElementById('msg');
+  var send = document.getElementById('send');
+  var bodyTps = document.getElementById('tps');
+
+  function api(path, opts){
+    return fetch(API + path, opts).then(function(r){
+      if(!r.ok) throw new Error("daemon answered " + r.status);
+      return r.json();
+    });
+  }
+
+  /* ---------- offline: detected, never simulated ---------- */
+  function setOnline(on){
+    online = on;
+    document.body.classList.toggle('is-offline', !on);
+    core.classList.toggle('offline', !on);
+    send.disabled = !on || busy;
+    input.disabled = !on;
+    input.placeholder = on ? "speak into the void…" : "the void is silent — daemon unreachable";
+    if(!on){
+      document.getElementById('stage-count').textContent = "daemon unreachable";
+    }
+  }
+  function probe(){
+    api("/api/health").then(function(){ if(!online){ setOnline(true); refresh(); } })
+      .catch(function(){ if(online || online === false && document.getElementById('stage-count').textContent !== "daemon unreachable"){ setOnline(false); } });
+  }
+
+  /* ---------- registers: live from the daemon, never invented ---------- */
+  var ring = document.getElementById('ring');
+  var orbit = document.createElement('div');
+  orbit.className = 'orbit';
+  ring.appendChild(orbit);
+  var R = 50;
+
+  function buildRing(){
+    orbit.innerHTML = "";
+    registers.forEach(function(r, i){
+      var d = document.createElement('button');
+      d.className = 'reg' + (i === current ? ' active' : '');
+      d.setAttribute('aria-label', 'register ' + r.name);
+      var ang = (i / registers.length) * Math.PI * 2 - Math.PI/2;
+      d.style.left = (50 + R * Math.cos(ang)) + '%';
+      d.style.top  = (50 + R * Math.sin(ang)) + '%';
+      d.innerHTML = '<span class="tip">' + escapeHtml(r.name) + '</span>';
+      d.addEventListener('click', function(){ select(i, true); });
+      orbit.appendChild(d);
+    });
+    showVoice();
+  }
+  function select(i, spin){
+    if(!registers.length) return;
+    current = (i + registers.length) % registers.length;
+    var dots = orbit.querySelectorAll('.reg');
+    dots.forEach(function(d){ d.classList.remove('active'); });
+    if(dots[current]) dots[current].classList.add('active');
+    showVoice();
+    if(spin){
+      rotation = -(current / registers.length) * 360;
+      orbit.style.transform = 'rotate(' + rotation + 'deg)';
+      dots.forEach(function(d){ d.style.transform = 'rotate(' + (-rotation) + 'deg)'; });
+    }
+  }
+  function showVoice(){
+    var r = registers[current];
+    if(!r) return;
+    document.getElementById('reg-name').textContent = r.name;
+    document.getElementById('reg-voice').textContent = r.voice || "";
+  }
+  document.getElementById('ring-prev').addEventListener('click', function(){ select(current - 1, true); });
+  document.getElementById('ring-next').addEventListener('click', function(){ select(current + 1, true); });
+
+  /* ---------- tape ledger ---------- */
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function clearEmpty(){
+    var e = tape.querySelector('.empty');
+    if(e) e.remove();
+  }
+  function addSeg(who, text, cls, tick, extra){
+    clearEmpty();
+    var s = document.createElement('div');
+    s.className = 'seg' + (cls ? ' ' + cls : '');
+    var w = document.createElement('div'); w.className = 'who'; w.textContent = who;
+    var b = document.createElement('div'); b.textContent = text;
+    s.appendChild(w); s.appendChild(b);
+    if(extra){
+      var t = document.createElement('div'); t.className = 'tps'; t.textContent = extra;
+      s.appendChild(t);
+    }
+    if(tick){
+      var h = document.createElement('div'); h.className = 'hash';
+      h.textContent = '⛓ ' + tick.tick + ' · #' + tick.n;
+      s.appendChild(h);
+      lastTick = tick.tick;
+    }
+    tape.appendChild(s);
+    tape.scrollLeft = tape.scrollWidth;
+    return s;
+  }
+  function seedEmpty(){
+    tape.innerHTML = '<div class="empty">the tape is blank — speak, and every turn lands here.</div>';
+  }
+
+  /* ---------- chat: real turns, measured tok/s ---------- */
+  function setBusy(b){
+    busy = b;
+    core.classList.toggle('busy', b);
+    send.disabled = !online || b;
+  }
+  function speak(){
+    if(!online || busy) return;
+    var v = input.value.trim();
+    if(!v) return;
+    input.value = '';
+    setBusy(true);
+    var reg = registers[current];
+    api("/api/chat", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({session_id: sessionId, message: v, register: reg ? reg.id : null})
+    }).then(function(res){
+      addSeg('you', v, 'user', res.user_tick);
+      addSeg(reg ? reg.name : 'LEVI', res.reply, '', res.tick,
+        res.tokens + ' tok · ' + res.elapsed_s + 's · ' + res.tok_per_s + ' tok/s measured');
+      bodyTps.textContent = res.tok_per_s + ' tok/s measured';
+      lastReply = res.reply;
+      setBusy(false);
+    }).catch(function(){
+      setBusy(false);
+      probe();
+    });
+  }
+  send.addEventListener('click', speak);
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') speak(); });
+
+  /* ---------- growth: live from the journal ---------- */
+  function refreshGrowth(){
+    api("/api/growth").then(function(g){
+      document.getElementById('stage-name').textContent = g.stage || 'unknown';
+      document.getElementById('stage-count').textContent =
+        (g.learnings == null ? '—' : g.learnings) + ' learnings · journal-fed';
+      document.getElementById('insp-stage').textContent =
+        (g.stage || 'unknown') + (g.stage_blurb ? ' — ' + g.stage_blurb : '');
+      var nx = g.next_stage || {};
+      var reqs = nx.requirements;
+      document.getElementById('insp-next').textContent =
+        nx.name ? nx.name + ': ' + JSON.stringify(reqs) : 'the top of the ladder';
+    }).catch(function(){});
+    api("/api/model").then(function(m){
+      document.getElementById('model-resolved').textContent = m.resolved || 'unknown';
+      document.getElementById('model-note').textContent = m.note || '';
+    }).catch(function(){});
+  }
+
+  /* ---------- views ---------- */
+  function card(k, v){
+    return '<div class="card"><div class="k">' + escapeHtml(k) + '</div><div class="v">' +
+      escapeHtml(v) + '</div></div>';
+  }
+  function showView(name){
+    var tabs = document.querySelectorAll('nav#tabs button');
+    tabs.forEach(function(t){ t.classList.toggle('on', t.dataset.view === name); });
+    if(name === 'mind'){
+      panel.classList.remove('show'); tapewrap.style.display = '';
+      return;
+    }
+    tapewrap.style.display = 'none'; panel.classList.add('show');
+    if(name === 'journal'){
+      panel.innerHTML = '<div class="card"><div class="k">GROWTH JOURNAL</div><div class="v">reading…</div></div>';
+      api("/api/journal?limit=20").then(function(j){
+        if(!j.entries.length){ panel.innerHTML = card('growth journal', 'no entries yet.'); return; }
+        panel.innerHTML = j.entries.slice().reverse().map(function(e){
+          var txt = e.summary || e.text || e.kind || JSON.stringify(e).slice(0, 220);
+          return card((e.ts || '') + ' · ' + (e.kind || 'entry'), String(txt).slice(0, 600));
+        }).join('');
+      }).catch(function(){ panel.innerHTML = card('growth journal', 'unreachable.'); });
+    } else if(name === 'growth'){
+      api("/api/growth").then(function(g){
+        var nx = g.next_stage || {};
+        panel.innerHTML =
+          card('stage', (g.stage || 'unknown') + (g.stage_blurb ? ' — ' + g.stage_blurb : '')) +
+          card('learnings consolidated', String(g.learnings == null ? '—' : g.learnings)) +
+          card('journal records', String(g.journal_records == null ? '—' : g.journal_records)) +
+          card('next stage', nx.name ? nx.name + ' — ' + JSON.stringify(nx.requirements) : 'the top of the ladder');
+      }).catch(function(){ panel.innerHTML = card('growth', 'unreachable.'); });
+    } else if(name === 'more'){
+      api("/api/model").then(function(m){
+        panel.innerHTML =
+          card('resolved model', m.resolved || 'unknown') +
+          card('note', m.note || '') +
+          card('streaming', m.streaming_note || '');
+      }).catch(function(){ panel.innerHTML = card('model', 'unreachable.'); });
+    }
+  }
+  document.querySelectorAll('nav#tabs button').forEach(function(t){
+    t.addEventListener('click', function(){ showView(t.dataset.view); });
+  });
+
+  /* ---------- instruments: branch / clone / note — all real ---------- */
+  function newSessionId(){
+    sessionSeq += 1;
+    return 'void-' + String(sessionSeq).padStart(2, '0');
+  }
+  function setSession(id){
+    sessionId = id;
+    document.getElementById('session-pill').textContent = 'session · ' + id;
+  }
+  document.getElementById('session-pill').addEventListener('click', function(){
+    setSession(newSessionId()); seedEmpty(); lastTick = 'genesis';
+  });
+  document.getElementById('btn-branch').addEventListener('click', function(){
+    if(!online) return;
+    var id = newSessionId();
+    api("/api/fork", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({new_session_id: id, from_tick: lastTick})
+    }).then(function(){
+      setSession(id);
+      addSeg('⑂ fork', 'branched from ⛓ ' + lastTick + ' — this path keeps growing beside the other.', 'fork', {tick: lastTick, n: 0});
+    }).catch(function(){ probe(); });
+  });
+  document.getElementById('btn-clone').addEventListener('click', function(){
+    setSession(newSessionId()); seedEmpty(); lastTick = 'genesis';
+  });
+  document.getElementById('btn-note').addEventListener('click', function(){
+    if(!online || !lastReply) return;
+    api("/api/note", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({session_id: sessionId, text: lastReply.slice(0, 2000)})
+    }).then(function(res){
+      addSeg('✎ note', 'pinned to the session log.', 'note', res.tick);
+    }).catch(function(){ probe(); });
+  });
+
+  /* ---------- boot ---------- */
+  function refresh(){
+    api("/api/registers").then(function(r){
+      registers = r.registers || [];
+      current = 0; rotation = 0;
+      orbit.style.transform = '';
+      buildRing();
+    }).catch(function(){});
+    refreshGrowth();
+  }
+  seedEmpty();
+  probe();
+  setInterval(probe, 15000);
+  window.addEventListener('online', probe);
+  window.addEventListener('offline', function(){ setOnline(false); });
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden) probe();
+  });
+}
+)();
+</script>
+</body>
+</html>

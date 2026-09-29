@@ -271,3 +271,71 @@ def test_activation_rejects_bad_input(home):
     with pytest.raises(E.EntitlementError):
         E.validate_activation("buyer@example.com", "bad-key")
     assert E.read_activation() is None
+
+# --------------------------------------- wave 6: entitlements hardening
+import json
+
+
+def _write_raw_record(home, rec):
+    path = E.records_path(home)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(rec) + "\n")
+
+
+def test_read_records_rejects_non_int_seq(home):
+    _write_raw_record(home, {"email": "a@b.c", "seq": "1"})
+    with pytest.raises(E.EntitlementError, match="seq must be an int"):
+        E.read_records(home)
+
+
+def test_check_malformed_date_is_fail_closed_not_crash(home):
+    rec = issue(today=DAY)
+    path = E.records_path(home)
+    lines = path.read_text(encoding="utf-8").splitlines()
+    bad = json.loads(lines[-1])
+    bad["paid_through"] = "not-a-date"
+    path.write_text("\n".join(lines[:-1] + [json.dumps(bad)]) + "\n",
+                    encoding="utf-8")
+    verdict = E.check("buyer@example.com", rec["key"], home=home, today=DAY)
+    assert verdict.active is False
+    assert "malformed" in verdict.reason
+
+
+def test_issue_renewal_refuses_keyless_active_record(home):
+    _write_raw_record(home, {
+        "seq": 1, "event": "issued", "email": "buyer@example.com",
+        "key": "", "paid_from": DAY.isoformat(),
+        "paid_through": (DAY + timedelta(days=30)).isoformat(),
+        "payment_ref": "x", "status": "active", "note": "",
+        "ts": "2026-09-24T00:00:00+00:00",
+    })
+    with pytest.raises(E.EntitlementError, match="has no key"):
+        E.issue("buyer@example.com", today=DAY, home=home)
+
+
+def test_list_entitlements_tolerates_keyless_record(home):
+    _write_raw_record(home, {
+        "seq": 1, "event": "issued", "email": "ghost@example.com",
+        "paid_from": DAY.isoformat(),
+        "paid_through": (DAY + timedelta(days=30)).isoformat(),
+        "payment_ref": "x", "status": "active", "note": "",
+        "ts": "2026-09-24T00:00:00+00:00",
+    })
+    rows = E.list_entitlements(home=home, today=DAY)
+    assert rows[0]["state"] == "expired"  # fail-closed, no crash
+    assert rows[0]["key"] == ""
+
+
+def test_store_dir_blank_env_falls_back(monkeypatch, tmp_path):
+    from pathlib import Path
+
+    monkeypatch.setenv("DEMANDPULSE_HOME", "  ")
+    assert E.store_dir().parent == Path.home() / ".demandpulse"
+
+
+def test_read_activation_bad_bytes_is_none(home):
+    E.validate_activation("buyer@example.com",
+                          E.generate_key(), home=home)
+    E.activation_path(home).write_bytes(b"\xff\xfe not json \x00")
+    assert E.read_activation(home) is None

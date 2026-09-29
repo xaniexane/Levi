@@ -54,10 +54,18 @@ EXTERNAL_PATTERNS = (
 )
 
 
+def _read_html(path: str | Path | None) -> tuple[Path, str]:
+    """Read the studio HTML. Unreadable files raise as a guard failure."""
+    target = Path(path) if path else STUDIO_HTML
+    try:
+        return target, target.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise ValueError(f"studio guard cannot read {target}: {exc}") from exc
+
+
 def check_self_contained(path: str | Path | None = None) -> list[str]:
     """Return a list of external-reference violations (empty = clean)."""
-    target = Path(path) if path else STUDIO_HTML
-    text = target.read_text(encoding="utf-8")
+    target, text = _read_html(path)
     violations: list[str] = []
     for i, line in enumerate(text.split("\n"), 1):
         for pat in EXTERNAL_PATTERNS:
@@ -68,10 +76,16 @@ def check_self_contained(path: str | Path | None = None) -> list[str]:
 
 
 def check_panels(path: str | Path | None = None) -> list[str]:
-    """Return the REQUIRED_IDS missing from the document (empty = all present)."""
-    target = Path(path) if path else STUDIO_HTML
-    text = target.read_text(encoding="utf-8")
-    missing = [pid for pid in REQUIRED_IDS if f'id="{pid}"' not in text]
+    """Return the REQUIRED_IDS missing from the document (empty = all present).
+
+    Id matching is quote-agnostic: id="x" and id='x' both count.
+    """
+    target, text = _read_html(path)
+    missing = [
+        pid
+        for pid in REQUIRED_IDS
+        if not re.search(rf'id\s*=\s*["\']{re.escape(pid)}["\']', text)
+    ]
     return missing
 
 

@@ -39,7 +39,7 @@ from typing import Any, Dict, List, Optional
 
 from levi.hicomb.ide_nl import DEFAULT_IDE_STORE
 from levi.hicomb.pollen import FormatterError, format_text
-from levi.hicomb.quetta_loop import QuettaPanLoop
+from levi.hicomb.qp_compat import require_quetta_loop
 from levi.hicomb.snapshots import SnapshotStore, StageGuard, snapshotted
 from levi.quetta_pan.riem import context_key_for
 from levi.surgeon.elite import cleanup_pass, syntax_error
@@ -114,7 +114,10 @@ class ForgeArm:
         self.store_dir.mkdir(parents=True, exist_ok=True)
         # Quetta Pan drives the forge's learning; REIM/RIEM are stages
         # inside it — nothing here touches them directly (Q1).
-        self.qp = QuettaPanLoop(
+        # Guarded: the sibling's quetta_loop may be absent on a fresh
+        # checkout — fail closed here with a clear error, never a bare
+        # ImportError at module load.
+        self.qp = require_quetta_loop()(
             self.store_dir,
             compost_name=".forge_compost.jsonl",
             genome_name=".forge_genome.json",

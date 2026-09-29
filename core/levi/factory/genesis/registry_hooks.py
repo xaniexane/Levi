@@ -43,6 +43,7 @@ def verify_skill(
         "category": skill.category,
         "risk": int(skill.risk_level),
         "version": skill.version,
+        "permissions": list(getattr(skill, "permissions", []) or []),
         "verified": True,
     }
 
@@ -50,6 +51,39 @@ def verify_skill(
 def mint_skill(skill_id: str, **kwargs: object) -> Dict[str, object]:
     """Mint step for a skill: the pack wire-up is code; this proves it."""
     return verify_skill(skill_id, **kwargs)  # type: ignore[arg-type]
+
+
+def verify_agent_definition(
+    agent_cls: type,
+    agent_id: str,
+    generation: int = 2,
+    commissioned_by: str = "factory-genesis",
+) -> Dict[str, object]:
+    """Prove any factory agent definition constructs and carries its laws."""
+    assert agent_cls.agent_id == agent_id, (
+        f"agent_id {agent_cls.agent_id!r} != {agent_id!r}"
+    )
+    assert agent_cls.generation == generation, (
+        f"generation {agent_cls.generation!r} != {generation!r}"
+    )
+    assert agent_cls.commissioned_by == commissioned_by, (
+        f"commissioned_by {agent_cls.commissioned_by!r} != {commissioned_by!r}"
+    )
+    with tempfile.TemporaryDirectory() as tmp:
+        agent = agent_cls(home=Path(tmp))
+        assert agent.agent_id == agent_id
+        state = agent.first_task()
+        assert isinstance(state, dict) and len(state) > 0, (
+            f"first_task() must return a non-empty dict, got {state!r}"
+        )
+    return {
+        "agent_id": agent_id,
+        "display_name": agent_cls.display_name,
+        "generation": generation,
+        "commissioned_by": commissioned_by,
+        "first_task_ok": True,
+        "verified": True,
+    }
 
 
 def verify_agent(
@@ -84,6 +118,9 @@ def verify_agent(
     }
 
 
-def mint_agent(**kwargs: object) -> Dict[str, object]:
+def mint_agent(agent_cls: type | None = None, **kwargs: object) -> Dict[str, object]:
     """Mint step for an agent: the wave module is code; this proves it."""
-    return verify_agent(**kwargs)  # type: ignore[arg-type]
+    if agent_cls is None:
+        return verify_agent(**kwargs)  # type: ignore[arg-type]
+    agent_id = str(kwargs.pop("agent_id", agent_cls.agent_id))
+    return verify_agent_definition(agent_cls, agent_id, **kwargs)  # type: ignore[arg-type]

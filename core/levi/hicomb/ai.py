@@ -122,7 +122,8 @@ class LocalEngine:
         """Structure summary of the file. Deterministic, labeled local."""
         lines = text.split("\n")
         defs = [m.group(1) for line in lines if (m := _DEF_RE.match(line))]
-        todos = [l.strip() for l in lines if "TODO" in l or "FIXME" in l][:8]
+        todos = [line.strip() for line in lines
+                 if "TODO" in line or "FIXME" in line][:8]
         summary = (
             f"{len(lines)} lines, {len(defs)} definitions "
             f"({', '.join(defs[:6])}{'…' if len(defs) > 6 else ''}), "
@@ -170,9 +171,9 @@ class LocalEngine:
 
         applied: list[str] = []
         lines = text.split("\n")
-        if any(l != l.rstrip() for l in lines):
+        if any(ln != ln.rstrip() for ln in lines):
             applied.append("stripped trailing whitespace")
-        if any("\t" in l for l in lines):
+        if any("\t" in ln for ln in lines):
             applied.append("expanded tabs to 4 spaces")
         try:
             new_text = format_text(language, text)
@@ -209,8 +210,6 @@ class LocalEngine:
                                 f"{node.name} has no docstring")
             except SyntaxError:
                 pass
-        lines = new_text.split("\n")
-        long_fns = [m.group(1) for l in lines if (m := _DEF_RE.match(l))]
         if not suggestions:
             suggestions.append("no structural smells detected locally")
         summary = f"pollen-normalized, {len(suggestions)} suggestion(s)"
@@ -227,9 +226,19 @@ class PairProgrammer:
         self.backend = backend
         self.local = LocalEngine()
 
+    def _backend_live(self) -> bool:
+        """A broken backend never kills local completions (I5)."""
+        try:
+            return self.backend is not None and bool(self.backend.available())
+        except Exception:
+            return False
+
     def status(self) -> str:
-        if self.backend is not None and self.backend.available():
-            return f"model:{self.backend.name()}"
+        if self._backend_live():
+            try:
+                return f"model:{self.backend.name()}"
+            except Exception:
+                return "local-only"
         return "local-only"  # I5: degradation is explicit
 
     def suggest(
@@ -237,7 +246,7 @@ class PairProgrammer:
     ) -> list[Completion]:
         """Local completions always; model completions only when wired (I4)."""
         out = self.local.complete(text, caret_line, caret_col, language)
-        if self.backend is not None and self.backend.available():
+        if self._backend_live():
             lines = text.split("\n")
             prefix = lines[caret_line][:caret_col] if 0 <= caret_line < len(lines) else ""
             try:
@@ -279,8 +288,9 @@ class PairProgrammer:
             return self.refactor(text, language)
         if "todo" in q or "marker" in q:
             lines = text.split("\n")
-            found = [f"L{i}: {l.strip()[:80]}" for i, l in enumerate(lines, 1)
-                     if "TODO" in l or "FIXME" in l]
+            found = [f"L{i}: {line.strip()[:80]}"
+                     for i, line in enumerate(lines, 1)
+                     if "TODO" in line or "FIXME" in line]
             return Analysis(engine="local", kind="explain",
                             summary=f"{len(found)} open marker(s)",
                             details=found[:20])

@@ -13,6 +13,9 @@ Ships with three native engines:
 - ``weigh``   — two-sided weighing with calibrated confidence
 - ``quorum``  — weighted majority verdicts over named votes with a
   quorum participation gate and deterministic ties
+- ``reunion`` — verdicts over divergent copies of one record:
+  converged / single-line / reconcilable (merged with provenance) /
+  conflicted (held for the keeper — never auto-merged)
 - ``quietwatch`` — selective calling over a transcript: silent until a
   registered call sign is heard (SELCAL pattern, clean-room rebuild)
 - ``handshake`` — two-party capability negotiation: tone, offer,
@@ -26,6 +29,12 @@ Ships with three native engines:
 - ``muster``   — readiness roll-call: named stations answer ready / warn /
   down (optionally weighted); any down holds the muster as standdown
   (strict) or degraded
+- ``gavel``    — adjudicated rulings over competing claims: evidence-weighted
+  scoring with a contradiction penalty, a named burden of proof, and
+  upheld / overturned / split / remanded rulings
+- ``braid``    — arbitration over verdicts from other engines: consensus
+  when all agree, majority with named dissent on a strict majority,
+  deadlock held for the keeper — conflicts are named, never averaged
 
 Use::
 
@@ -53,12 +62,15 @@ __all__ = [
 ]
 
 # Builtin engines self-register on import.
+from levi.engines import braid as _braid  # noqa: E402,F401
 from levi.engines import cadence as _cadence  # noqa: E402,F401
 from levi.engines import escalate as _escalate  # noqa: E402,F401
+from levi.engines import gavel as _gavel  # noqa: E402,F401
 from levi.engines import handshake as _handshake  # noqa: E402,F401
 from levi.engines import muster as _muster  # noqa: E402,F401
 from levi.engines import quietwatch as _quietwatch  # noqa: E402,F401
 from levi.engines import quorum as _quorum  # noqa: E402,F401
+from levi.engines import reunion as _reunion  # noqa: E402,F401
 from levi.engines import season as _season  # noqa: E402,F401
 from levi.engines import temper as _temper  # noqa: E402,F401
 from levi.engines import triage as _triage  # noqa: E402,F401

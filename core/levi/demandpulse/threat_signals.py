@@ -215,7 +215,7 @@ def classify_threat(
 
 
 def publish_scan(
-    texts: Sequence[str],
+    texts: Optional[Sequence[str]],
     *,
     credential: Optional[str] = None,
     source: str = "demandpulse-scan",
@@ -228,12 +228,20 @@ def publish_scan(
     ``{"published": 0, ...}`` (honest silence, not an error). When the
     feed refuses the batch, the refusal propagates — a failed publish is
     reported, never silently dropped.
+
+    A single string is treated as one text (never iterated as chars);
+    None texts are honest silence. An empty credential is rejected like
+    a missing one.
     """
-    if credential is None:
+    if not credential:
         raise ValueError(
             "credential is required: present a Cybrus bearer token with the "
             "'threat.intel.publish' scope"
         )
+    if texts is None:
+        texts = []
+    elif isinstance(texts, str):
+        texts = [texts]
     from levi.cybrus import threat_intel as feed
 
     indicators: List[Dict[str, Any]] = []
@@ -253,7 +261,12 @@ def publish_scan(
             "note": "no threat patterns matched; nothing published",
         }
     receipt = feed.publish(indicators, credential=credential)
-    receipt["published"] = receipt["count"]
+    if not isinstance(receipt, dict):
+        raise ValueError(
+            "threat-intel feed violated its contract: publish() returned "
+            f"{type(receipt).__name__}, not a receipt dict"
+        )
+    receipt["published"] = receipt.get("count", 0)
     return receipt
 
 

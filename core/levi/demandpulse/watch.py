@@ -73,13 +73,10 @@ class UnknownItemError(WatchError):
 # paths
 
 def watch_dir() -> Path:
-    base = Path(
-        os.environ.get(
-            "DEMANDPULSE_WATCH_DIR",
-            str(Path.home() / "workspace" / "demandpulse-watch"),
-        )
-    )
-    return base
+    raw = os.environ.get("DEMANDPULSE_WATCH_DIR") or ""
+    if not raw.strip():
+        raw = str(Path.home() / "workspace" / "demandpulse-watch")
+    return Path(raw)
 
 
 def registry_path() -> Path:
@@ -124,12 +121,33 @@ class WatchRegistry:
 
     def _load(self) -> None:
         p = self.root / "registry.json"
-        if p.exists():
+        if not p.exists():
+            self._items = {}
+            return
+        try:
             with p.open(encoding="utf-8") as fh:
                 data = json.load(fh)
-            self._items = data.get("items", {})
-        else:
-            self._items = {}
+        except (OSError, ValueError) as exc:
+            # A corrupt registry must never silently become an empty one
+            # (that would fake W3). Name it and stop.
+            raise WatchError(f"watch registry corrupt: {p}: {exc}") from exc
+        if not isinstance(data, dict) or not isinstance(data.get("items", {}), dict):
+            raise WatchError(f"watch registry has bad shape: {p}")
+        items = data["items"]
+        for iid, item in items.items():
+            if not isinstance(item, dict):
+                raise WatchError(f"watch registry: item {iid!r} is not a dict")
+            if item.get("status") not in STATUSES:
+                raise WatchError(
+                    f"watch registry: item {iid!r} has illegal status "
+                    f"{item.get('status')!r} (W1)"
+                )
+            if item.get("waiting_on", "none") not in WAITERS:
+                raise WatchError(
+                    f"watch registry: item {iid!r} has illegal waiting_on "
+                    f"{item.get('waiting_on')!r} (W5)"
+                )
+        self._items = items
 
     def _save(self) -> None:
         p = self.root / "registry.json"
@@ -168,10 +186,18 @@ class WatchRegistry:
             return []
         out: List[Dict[str, Any]] = []
         with p.open(encoding="utf-8") as fh:
-            for ln in fh:
+            for lineno, ln in enumerate(fh, 1):
                 ln = ln.strip()
-                if ln:
+                if not ln:
+                    continue
+                try:
                     out.append(json.loads(ln))
+                except ValueError as exc:
+                    # A corrupt line must not silently vanish from the
+                    # source of truth (W3). Name it and stop.
+                    raise WatchError(
+                        f"watch history corrupt: {p} line {lineno}: {exc}"
+                    ) from exc
         return out
 
     def history_for(self, item_id: str) -> List[Dict[str, Any]]:
@@ -180,6 +206,12 @@ class WatchRegistry:
         return [e for e in self.history() if e.get("id") == item_id]
 
     # -- mutations --------------------------------------------------------
+
+    @staticmethod
+    def _check_text(value: Any, field: str) -> str:
+        if not isinstance(value, str):
+            raise ValueError(f"watch {field} must be a string, got {type(value).__name__}")
+        return value
 
     def add(
         self,
@@ -190,6 +222,11 @@ class WatchRegistry:
         waiting_on: str = "none",
     ) -> Dict[str, Any]:
         """Add an item. W1/W5 enforced at the boundary."""
+        name = self._check_text(name, "name")
+        area = self._check_text(area, "area")
+        note = self._check_text(note, "note")
+        if not name.strip():
+            raise ValueError("watch name must be a non-empty string")
         if status not in STATUSES:
             raise InvalidStatusError(
                 f"status {status!r} not in {list(STATUSES)}"
@@ -215,7 +252,8 @@ class WatchRegistry:
         }
         self._items[item_id] = item
         self._append_history(
-            {"event": "created", "id": item_id, "to": status, "note": note}
+            {"event": "created", "id": item_id, "to": status,
+             "waiting_on": waiting_on, "note": note}
         )
         self._save()
         return dict(item)
@@ -237,6 +275,7 @@ class WatchRegistry:
         item = self._items.get(item_id)
         if item is None:
             raise UnknownItemError(f"no watch item {item_id!r}")
+        note = self._check_text(note, "note")
         old = item["status"]
         if old == status and not note:
             return dict(item)  # not a change — no history event (W2)
@@ -356,6 +395,9 @@ class WatchRegistry:
         seen: Dict[str, Dict[str, Any]] = {}
         last_seq = 0
         for ev in self.history():
+            if not isinstance(ev, dict):
+                problems.append(f"history event is not a dict: {ev!r}")
+                continue
             seq = ev.get("seq")
             if not isinstance(seq, int) or seq != last_seq + 1:
                 problems.append(f"history seq break at {ev!r}")
@@ -369,7 +411,16 @@ class WatchRegistry:
                 to = ev.get("to")
                 if to not in STATUSES:
                     problems.append(f"W1: illegal seeded status {to!r}")
-                seen[iid] = {"status": to, "waiting_on": "none"}
+                wto = ev.get("waiting_on", "none")
+                if wto not in WAITERS:
+                    problems.append(f"W5: illegal seeded waiter {wto!r}")
+                seen[iid] = {
+                    "status": to,
+                    "waiting_on": wto,
+                    # old created events predate the waiting_on field —
+                    # only replay-compare it when the log carried it
+                    "wto_known": "waiting_on" in ev,
+                }
             elif kind == "status":
                 if iid not in seen:
                     problems.append(f"status event for unknown {iid!r}")
@@ -384,16 +435,24 @@ class WatchRegistry:
                     problems.append(f"W5: illegal waiter {to!r} for {iid!r}")
                 if iid in seen:
                     seen[iid]["waiting_on"] = to
+                    seen[iid]["wto_known"] = True
             else:
                 problems.append(f"unknown history event {kind!r}")
         # W3: snapshot must equal replay
         for iid, item in self._items.items():
             if iid not in seen:
                 problems.append(f"W3/W4: snapshot item {iid!r} has no history")
-            elif seen[iid]["status"] != item["status"]:
+                continue
+            rep = seen[iid]
+            if rep["status"] != item["status"]:
                 problems.append(
                     f"W3: snapshot/replay mismatch for {iid!r}: "
-                    f"{item['status']!r} != {seen[iid]['status']!r}"
+                    f"{item['status']!r} != {rep['status']!r}"
+                )
+            if rep.get("wto_known") and rep["waiting_on"] != item.get("waiting_on"):
+                problems.append(
+                    f"W3: snapshot/replay waiter mismatch for {iid!r}: "
+                    f"{item.get('waiting_on')!r} != {rep['waiting_on']!r}"
                 )
             if item["status"] not in STATUSES:
                 problems.append(f"W1: snapshot illegal status for {iid!r}")
@@ -488,24 +547,36 @@ def seed(reg: Optional[WatchRegistry] = None) -> WatchRegistry:
 # board rendering (plain speech for Chauncey)
 
 def render_board(b: Dict[str, Any]) -> str:
+    # Defensive reads: a hand-built board dict with missing keys renders
+    # what it can instead of raising KeyError.
     lines = []
-    counts = b["counts"]
+    counts = b.get("counts", {}) if isinstance(b, dict) else {}
+    total = b.get("total", "?") if isinstance(b, dict) else "?"
+    groups = b.get("groups", {}) if isinstance(b, dict) else {}
     lines.append("DemandPulse Watch — everything, one board")
     lines.append(
         "  complete={complete}  in_progress={in_progress}  queued={queued}  "
         "blocked={blocked}  held={held}  (total {total})".format(
-            total=b["total"], **counts
+            total=total,
+            complete=counts.get("complete", "?"),
+            in_progress=counts.get("in_progress", "?"),
+            queued=counts.get("queued", "?"),
+            blocked=counts.get("blocked", "?"),
+            held=counts.get("held", "?"),
         )
     )
     waiter_of = {"him": "his move", "me": "my move", "none": "—"}
     for status in STATUSES:
-        items = b["groups"][status]
+        items = groups.get(status, [])
         if not items:
             continue
         lines.append(f"\n[{status}] ({len(items)})")
         for it in items:
-            w = waiter_of.get(it["waiting_on"], "?")
-            lines.append(f"  • {it['id']}: {it['name']} [{it['area']}] — {w}")
+            w = waiter_of.get(it.get("waiting_on"), "?")
+            lines.append(
+                f"  • {it.get('id', '?')}: {it.get('name', '?')} "
+                f"[{it.get('area', '?')}] — {w}"
+            )
             if it.get("note"):
                 lines.append(f"      {it['note']}")
     return "\n".join(lines)

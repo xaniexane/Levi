@@ -63,6 +63,7 @@ def save_pipeline(
     refine_store_dir: str | None = None,
     refine_log_path: str | None = None,
     snapshot_store_dir: str | None = None,
+    on_quetta_skip: Callable[[str], None] | None = None,
 ) -> SaveResult:
     """Format (Pollen), optionally refine (Quetta-Pan), then atomically save.
 
@@ -75,7 +76,9 @@ def save_pipeline(
       applied ONLY when confirm_refine(report) returns True; without a
       callback they are receipted and dropped. The agent-refined text
       re-runs Pollen's gates (Q1/Q5) — a broken agent pass aborts the
-      save exactly like a pollen refusal.
+      save exactly like a pollen refusal. A crashing refiner never
+      breaks the save: the pass is skipped (reported via on_quetta_skip)
+      and the write proceeds on the formatted text.
     - Disk failure -> ok=False; Buffer.save's temp+replace means no
       half-written file can exist.
     """
@@ -108,11 +111,14 @@ def save_pipeline(
             )
         except FormatterError as exc:
             # I1: abort. Restore buffer text if the format edit already
-            # landed, then verify the file is byte-identical.
+            # landed, then verify the file is byte-identical. The check
+            # is explicit (not assert) — it must hold under -O too.
             if buffer.get_text() != original_text:
                 buffer.set_text(original_text)
             after = _read_bytes(target)
-            assert after == before_bytes, "pollen-abort violated: file changed"
+            if after != before_bytes:
+                raise BufferError(
+                    "pollen-abort violated: file changed") from None
             return SaveResult(ok=False, aborted=f"pollen refused: {exc}")
         if refined != original_text:
             buffer.set_text(refined)  # one undo step; user can undo pollen
@@ -121,40 +127,50 @@ def save_pipeline(
     quetta_refined = False
     quetta_suggestions = 0
     if run_quetta:
-        refiner = QuettaRefiner(
-            store_dir=refine_store_dir, log_path=refine_log_path
-        )
-        report = refiner.review(buffer.get_text(), lang, target)
-        quetta_suggestions = len(report.suggestions)
-        final_text: str | None = None
-        if report.has_changes and confirm_refine is not None:
-            if confirm_refine(report):
-                final_text, receipts = refiner.decide(report, "confirmed")
+        # Advisory must never break the save: a crashing refiner
+        # degrades to skipped (reported via on_quetta_skip), not a
+        # failed save. The file is untouched either way.
+        try:
+            refiner = QuettaRefiner(
+                store_dir=refine_store_dir, log_path=refine_log_path
+            )
+            report = refiner.review(buffer.get_text(), lang, target)
+        except Exception as exc:
+            if on_quetta_skip is not None:
+                on_quetta_skip(f"quetta advisory pass skipped: {exc}")
+            report = None
+        if report is not None:
+            quetta_suggestions = len(report.suggestions)
+            final_text: str | None = None
+            if report.has_changes and confirm_refine is not None:
+                if confirm_refine(report):
+                    final_text, receipts = refiner.decide(report, "confirmed")
+                else:
+                    _, receipts = refiner.decide(report, "declined")
             else:
-                _, receipts = refiner.decide(report, "declined")
-        else:
-            _, receipts = refiner.decide(report, "advisory")
-        refiner.log_receipts(receipts)
+                _, receipts = refiner.decide(report, "advisory")
+            refiner.log_receipts(receipts)
 
-        if final_text is not None and final_text != buffer.get_text():
-            # Q1/Q5: the agent-refined text re-runs Pollen's safety gates.
-            # Anything the gates reject aborts the save like a refusal.
-            gate_reason = ""
-            try:
-                rechecked = format_text(lang, final_text)
-            except FormatterError as exc:
-                gate_reason = f"quetta refine produced unformattable text: {exc}"
-            else:
-                if rechecked != final_text:
-                    gate_reason = "quetta refine broke pollen idempotency"
-            if gate_reason:
-                if buffer.get_text() != original_text:
-                    buffer.set_text(original_text)
-                after = _read_bytes(target)
-                assert after == before_bytes, "quetta-abort violated: file changed"
-                return SaveResult(ok=False, aborted=gate_reason)
-            buffer.set_text(final_text)  # one undo step; user can undo quetta
-            quetta_refined = True
+            if final_text is not None and final_text != buffer.get_text():
+                # Q1/Q5: the agent-refined text re-runs Pollen's safety gates.
+                # Anything the gates reject aborts the save like a refusal.
+                gate_reason = ""
+                try:
+                    rechecked = format_text(lang, final_text)
+                except FormatterError as exc:
+                    gate_reason = f"quetta refine produced unformattable text: {exc}"
+                else:
+                    if rechecked != final_text:
+                        gate_reason = "quetta refine broke pollen idempotency"
+                if gate_reason:
+                    if buffer.get_text() != original_text:
+                        buffer.set_text(original_text)
+                    after = _read_bytes(target)
+                    if after != before_bytes:
+                        raise BufferError("quetta-abort violated: file changed")
+                    return SaveResult(ok=False, aborted=gate_reason)
+                buffer.set_text(final_text)  # one undo step; user can undo quetta
+                quetta_refined = True
 
     # S1: snapshot before the final write — the pre-snapshot is the
     # rollback point if the write half-finishes.

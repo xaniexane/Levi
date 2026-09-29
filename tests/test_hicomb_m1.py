@@ -6,6 +6,7 @@ Covers: buffer engine, highlighting, search, tabs/session, command bar
 
 import copy
 import json
+import os
 
 import pytest
 
@@ -679,3 +680,302 @@ def test_package_exports():
         "dock_builders",
     ):
         assert name in h.__all__ and hasattr(h, name)
+
+# ------------------------------------------- buffer hardening (2026-09-29)
+def test_buffer_open_missing_file_raises_buffer_error(tmp_path):
+    with pytest.raises(BufferError):
+        Buffer.open(str(tmp_path / "nope.txt"))
+
+
+def test_buffer_open_directory_raises_buffer_error(tmp_path):
+    with pytest.raises(BufferError):
+        Buffer.open(str(tmp_path))
+
+
+def test_buffer_undo_to_save_point_clears_dirty(tmp_path):
+    p = tmp_path / "d.txt"
+    p.write_text("base\n", encoding="utf-8")
+    buf = Buffer.open(str(p))
+    assert not buf.dirty
+    buf.insert(0, 4, "X")
+    assert buf.dirty
+    assert buf.undo()
+    assert not buf.dirty  # back at the save point -> clean
+    assert buf.redo()
+    assert buf.dirty  # re-applied the edit -> dirty again
+
+
+def test_buffer_dirty_survives_new_edit_after_undo(tmp_path):
+    p = tmp_path / "e.txt"
+    p.write_text("base\n", encoding="utf-8")
+    buf = Buffer.open(str(p))
+    buf.insert(0, 4, "X")
+    buf.undo()
+    buf.insert(0, 4, "Y")  # new edit on the save point
+    assert buf.dirty
+    assert buf.undo()
+    assert not buf.dirty
+
+
+def test_buffer_empty_delete_records_no_undo_step():
+    buf = Buffer("abc")
+    assert buf.delete(0, 1, 0, 1) == ""
+    assert not buf.can_undo
+    assert not buf.dirty
+    assert buf.get_text() == "abc"
+
+
+def test_buffer_empty_replace_records_no_undo_step():
+    buf = Buffer("abc")
+    buf.replace_range(0, 1, 0, 1, "")
+    assert not buf.can_undo
+    assert not buf.dirty
+
+
+# ------------------------------------------ commands hardening (2026-09-29)
+def test_command_bar_propose_negative_limit_returns_empty():
+    reg = default_registry()
+    bar = CommandBar(reg)
+    assert bar.propose("open", limit=-1) == []
+
+
+def test_command_bar_propose_zero_limit_returns_empty():
+    reg = default_registry()
+    bar = CommandBar(reg)
+    assert bar.propose("open", limit=0) == []
+
+# -------------------------------------------- search/tabs hardening (2026-09-29)
+def test_project_replace_leaves_no_tmp_files(tmp_path):
+    (tmp_path / "a.txt").write_text("x x")
+    v = project_replace(str(tmp_path), "x", "z")
+    assert v[str(tmp_path / "a.txt")] is FileVerdict.REPLACED
+    assert (tmp_path / "a.txt").read_text() == "z z"
+    leftovers = list(tmp_path.glob("*.hicomb-tmp"))
+    assert leftovers == []
+
+
+def test_project_replace_preserves_crlf(tmp_path):
+    (tmp_path / "w.txt").write_bytes(b"x\r\nx\r\n")
+    v = project_replace(str(tmp_path), "x", "z")
+    assert v[str(tmp_path / "w.txt")] is FileVerdict.REPLACED
+    assert (tmp_path / "w.txt").read_bytes() == b"z\r\nz\r\n"
+
+
+def test_file_tree_symlink_cycle_terminates(tmp_path):
+    sub = tmp_path / "sub"
+    sub.mkdir()
+    (sub / "f.txt").write_text("x")
+    os.symlink(str(tmp_path), str(sub / "loop"))  # cycle: sub/loop -> tmp_path
+    tree = file_tree(str(tmp_path))
+    link_nodes = []
+
+    def walk(node):
+        if node.get("symlink"):
+            link_nodes.append(node)
+        for child in node.get("children", []):
+            walk(child)
+
+    walk(tree)
+    assert len(link_nodes) == 1
+    assert link_nodes[0]["name"] == "loop"
+    assert link_nodes[0]["children"] == []
+
+
+def test_load_state_missing_file_raises_session_error(tmp_path):
+    with pytest.raises(SessionError):
+        Session.load_state(str(tmp_path / "nope.json"))
+
+
+def test_load_state_corrupt_file_raises_session_error(tmp_path):
+    p = tmp_path / "bad.json"
+    p.write_text("{not json", encoding="utf-8")
+    with pytest.raises(SessionError):
+        Session.load_state(str(p))
+
+
+def test_recent_files_zero_and_negative_limit(tmp_path):
+    s = Session()
+    s.open_tab()
+    s.active.buffer.insert(0, 0, "x")
+    out = tmp_path / "n.txt"
+    s.save_active(str(out))
+    assert s.recent_files(0) == []
+    assert s.recent_files(-5) == []
+    assert s.recent_files(5) == [str(out)]
+
+# ------------------------------------------- highlight hardening (2026-09-29)
+def test_detect_language_none_and_empty_is_plain():
+    from levi.hicomb.highlight import detect_language
+
+    assert detect_language(None) == "plain"
+    assert detect_language("") == "plain"
+    assert detect_language("x.py") == "python"
+
+
+def test_lone_at_sign_is_punct_not_crash():
+    from levi.hicomb.highlight import tokenize
+
+    toks = tokenize(["@"], "python")[0]
+    assert [(t.kind, "@"[t.start : t.end]) for t in toks] == [("punct", "@")]
+
+
+def test_html_tag_mid_line_tokenizes():
+    from levi.hicomb.highlight import tokenize
+
+    toks = tokenize(['<div class="x">hi</div>'], "html")[0]
+    kinds = [t.kind for t in toks]
+    assert kinds[0] == "tag"
+    assert "attr" in kinds and "string" in kinds
+    # token spans must tile the line with no gaps or overlaps
+    spans = sorted((t.start, t.end) for t in toks)
+    assert spans[0][0] == 0
+    for (s1, e1), (s2, e2) in zip(spans, spans[1:]):
+        assert e1 <= s2
+
+# ------------------------------------------- economy/journal hardening (2026-09-29)
+def test_royalty_rejects_bad_money():
+    import math
+
+    from levi.hicomb.economy import builder_take
+
+    for bad in (float("nan"), float("inf"), float("-inf"), "10", None, True):
+        with pytest.raises((TypeError, ValueError)):
+            marketplace_royalty(bad)
+        with pytest.raises((TypeError, ValueError)):
+            builder_take(bad)
+
+
+def test_royalty_take_split_is_exact_to_the_cent():
+    from levi.hicomb.economy import builder_take
+
+    for price in (0.01, 0.07, 0.29, 1.00, 19.99, 100.0, 1234.56):
+        royalty = marketplace_royalty(price)
+        take = builder_take(price)
+        assert royalty + take == pytest.approx(price, abs=1e-9), price
+
+
+def test_journal_entries_limit_edge_cases(tmp_path):
+    j = EditJournal(str(tmp_path))
+    j.append("edit", "a.py", "one")
+    j.append("edit", "b.py", "two")
+    assert j.entries(0) == []
+    assert j.entries(-3) == []
+    assert len(j.entries(1)) == 1
+    assert len(j.entries()) == 2
+
+
+def test_journal_recall_empty_keyword_recalls_nothing(tmp_path):
+    j = EditJournal(str(tmp_path))
+    j.append("edit", "a.py", "something")
+    assert j.recall("") == []
+    assert j.recall("   ") == []
+    assert j.recall("something", limit=0) == []
+    assert j.recall("something", limit=-1) == []
+
+# ----------------------------------------- snapshots/snippets hardening (2026-09-29)
+def _snap_store(tmp_path):
+    from levi.hicomb.snapshots import SnapshotStore
+
+    return SnapshotStore(store_dir=tmp_path / "snaps")
+
+
+def test_snapshot_restore_rejects_path_traversal(tmp_path):
+    from levi.hicomb.snapshots import SnapshotMissing
+
+    store = _snap_store(tmp_path)
+    store.capture("stage-a", {"v": 1})
+    for evil in ("../receipts", "..", "a/b", "a\\b", "", "../x.json"):
+        with pytest.raises(SnapshotMissing):
+            store.restore(evil)
+
+
+def test_snapshot_restore_corrupt_file_raises_tampered(tmp_path):
+    from levi.hicomb.snapshots import SnapshotTampered
+
+    store = _snap_store(tmp_path)
+    snap = store.capture("stage-a", {"v": 1})
+    target = tmp_path / "snaps" / f"{snap.id}.json"
+    target.write_text("NOT JSON{{{", encoding="utf-8")
+    with pytest.raises(SnapshotTampered):
+        store.restore(snap.id)
+    target.write_text('{"id": "x"}', encoding="utf-8")  # valid JSON, no payload
+    with pytest.raises(SnapshotTampered):
+        store.restore(snap.id)
+
+
+def test_snapshot_capture_rejects_bad_stage_name(tmp_path):
+    store = _snap_store(tmp_path)
+    for bad in ("", "../evil", "a/b", "a\\b"):
+        with pytest.raises(ValueError):
+            store.capture(bad, {"v": 1})
+
+
+def test_validate_snippets_data_is_clean():
+    from levi.hicomb.snippets import validate_snippets
+
+    assert validate_snippets() == []
+
+# ---------------------------------------------- card/dock hardening (2026-09-29)
+def test_gbc_theme_data_rejects_off_palette_color(monkeypatch):
+    import levi.hicomb.card as card_mod
+
+    monkeypatch.setattr(card_mod, "GBC_PALETTE", frozenset())
+    with pytest.raises(ValueError, match="outside GBC palette"):
+        card_mod.gbc_card_theme_data()
+    # and the real palette still passes (laws hold without -O asserts)
+    monkeypatch.undo()
+    data = card_mod.gbc_card_theme_data()
+    assert data["corner_radius"] == 0
+
+
+def test_dock_builders_twice_is_idempotent():
+    from levi.hicomb.dock import dock_builders
+
+    s = Session()
+    reg = default_registry()
+    engine = object()
+    r1 = dock_builders(s, reg, engine=engine)
+    r2 = dock_builders(s, reg, engine=engine)
+    assert r1.attached and r2.attached
+    assert s.extensions["builders"] is engine
+    assert reg.get("builders.scaffold") is not None
+    assert r2.commands_registered == []  # second dock registers nothing new
+
+# -------------------------------------------- pollen/studio hardening (2026-09-29)
+def test_language_for_path_never_raises_type_error():
+    from levi.hicomb.pollen import language_for_path
+
+    assert language_for_path(None) == "plain"
+    assert language_for_path("") == "plain"
+    assert language_for_path(123) == "plain"
+    assert language_for_path("x.PY") == "python"
+    assert language_for_path("Makefile") == "plain"
+
+
+def test_studio_guard_missing_file_raises_named_error(tmp_path):
+    from levi.hicomb.studio import check_panels, check_self_contained
+
+    with pytest.raises(ValueError, match="studio guard cannot read"):
+        check_self_contained(str(tmp_path / "nope.html"))
+    with pytest.raises(ValueError, match="studio guard cannot read"):
+        check_panels(str(tmp_path / "nope.html"))
+
+
+def test_check_panels_accepts_single_quoted_ids(tmp_path):
+    from levi.hicomb.studio import REQUIRED_IDS, check_panels
+
+    html = "<html><body>" + "".join(
+        f"<div id='{pid}'></div>" for pid in REQUIRED_IDS
+    ) + "</body></html>"
+    p = tmp_path / "s.html"
+    p.write_text(html, encoding="utf-8")
+    assert check_panels(str(p)) == []
+
+
+def test_check_self_contained_flags_https_src(tmp_path):
+    from levi.hicomb.studio import check_self_contained
+
+    p = tmp_path / "s.html"
+    p.write_text('<script src="https://cdn.example/x.js"></script>', encoding="utf-8")
+    violations = check_self_contained(str(p))
+    assert len(violations) == 1 and violations[0].startswith("L1:")

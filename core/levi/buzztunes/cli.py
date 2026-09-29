@@ -10,7 +10,7 @@ import argparse
 from pathlib import Path
 
 from . import m3u as m3u_mod
-from . import spotify as spotify_mod
+from . import youtube as youtube_mod
 from .dj import pick_song
 from .engine import BuzzEngine
 from .forge import MAX_FORGE, export_forge, forge_playlists
@@ -161,8 +161,8 @@ def _play_playlist(engine: BuzzEngine, args) -> int:
               f"now: {t['artist']} — {t['title']}")
     else:
         print("playlist is empty — nothing queued")
-    if not spotify_mod.configured():
-        print("(audio: Spotify not linked — order shown, "
+    if not youtube_mod.configured():
+        print("(audio: YouTube not linked — order shown, "
               "rendering is the open follow-up)")
     return 0
 

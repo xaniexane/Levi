@@ -53,7 +53,7 @@
 | SOXI | Levi × XI crossbreed intelligence classification; LN router + 10 classes; offline-first | building | `core/levi/soxi/` (13 tests) | BT needs one-time `ollama pull phi3:mini` |
 | Native brain | Tiny transformer trained from scratch (600 steps, loss 5.283→2.107); LEVI's own Ollama-style runner planned | building | `core/levi/brain/` | 600-step rerun approved; promote only on 0.02 held-out margin + better samples |
 | Nine-teacher pipeline | Teacher intake, BPE tokenizer (8,192 vocab), persistent checkpoints, resume-after-kill | building | `core/levi/brain/train/` | Samples gibberish at 45 steps — no fluency claims |
-| Cyber skills | 823 defensive blue-team playbooks (818 + phase-derived + omega) | live | `core/levi/skill/playbooks/cyber/` | Blue-team only; offensive never integrated |
+| Cyber skills | 100,823 defensive blue-team playbooks (818 batch-1/2 + phase-derived + omega + 100,000 batch-3 generated) | live | `core/levi/skill/playbooks/cyber/` | Blue-team only; offensive never integrated |
 | Finance | Market data, indicators, signals, portfolio; SimulatedBroker default | live (paper) | `core/levi/finance/` | **Paper/simulated only — live trading structurally refused** |
 | King control plane | Orchestration over story fabric + model engine; CLI `levi king` | building | `core/levi/king/`, `docs/KING.md` | unverified current state |
 | Fleet | Agent fleet categories incl. dispatch/compliance/fraud/coach/guardian | building | `core/levi/fleet/` | — |

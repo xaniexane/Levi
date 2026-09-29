@@ -13,7 +13,7 @@ Works on mobile terminals: plain ANSI + ASCII, no cursor games.
 
 from __future__ import annotations
 
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, List, Mapping
 
 THEME_SCHEMA_KEYS = ("fg", "accent", "dim", "rule", "bullet")
 
@@ -71,7 +71,7 @@ THEMES: Dict[str, Dict[str, str]] = {
 }
 
 
-def list_themes() -> list:
+def list_themes() -> List[str]:
     """Names of the bundled theme packs, sorted."""
     return sorted(THEMES)
 
@@ -131,6 +131,14 @@ def paint(theme: Mapping[str, str], role: str, text: str) -> str:
 
 
 def rule_line(theme: Mapping[str, str], width: int = 64) -> str:
-    """A horizontal rule in the theme's rule character."""
+    """A horizontal rule in the theme's rule character.
+
+    Width is coerced to int and clamped to [8, 120]; garbage widths
+    raise ThemeError rather than leaking a TypeError from min().
+    """
     valid = validate_theme(theme)
-    return valid["rule"] * max(8, min(width, 120))
+    try:
+        w = int(width)  # type: ignore[arg-type]
+    except (TypeError, ValueError) as exc:
+        raise ThemeError(f"rule width must be a number, got {width!r}") from exc
+    return valid["rule"] * max(8, min(w, 120))

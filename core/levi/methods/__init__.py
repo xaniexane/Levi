@@ -81,6 +81,18 @@ silently absorbed; nothing here phones home.
   anonymous one-idea-per-slip rounds; collection before display.
 - ``futuresearch``: Future Search (Weisbord & Janoff) — AREIN-gated,
   ordered past→present→future→common-ground→action planning arc.
+- ``synectics``: Synectics (W.J.J. Gordon, 1961) — the excursion:
+  gather analogies (direct/personal/symbolic/fantasy), never judge,
+  then force-fit the strange material back and restate the problem.
+- ``brainwriting``: Method 6-3-5 (Bernd Rohrbach, 1968) — silent
+  parallel idea rounds with sheet rotation; the slot-count invariant
+  (participants × rounds × ideas) enforced at finish.
+- ``gordon``: the Gordon Technique — the blind session: the leader
+  seals the real problem, the group works the function abstraction,
+  one reveal at harvest.
+- ``value``: Value Analysis (L.D. Miles, GE, 1947) — verb–noun
+  functions, USE/ESTEEM classification, cost hung on functions,
+  value = function / cost, waste itemized.
 - ``indenture``: the craft indenture — bonded training contract with
   master liability and staged sign-off milestones.
 - ``masterpiece``: the chef-d'oeuvre — peer-judged masterwork gate whose

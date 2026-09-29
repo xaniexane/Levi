@@ -246,7 +246,9 @@ def test_automation_warehouse_shelves_it():
     assert wh["shelves"] == ["automation"]
     assert wh["strategy"] == "capabilities"
     browsed = browse_warehouse("automation")
-    assert browsed["inventory_count"] == 5  # five declared capabilities
+    # inventory_count is counted from the declaration, never hardcoded:
+    # the warehouse's "capabilities" strategy counts DECLARATIONS provides.
+    assert browsed["inventory_count"] == len(DECLARATIONS["automation"]["provides"])
     provides = browsed["shelves"][0]["provides"]
     assert "automation.routines" in provides
     assert "automation.cli" in provides
@@ -258,7 +260,9 @@ def test_atlas_exposes_automation():
     assert mod["cli"] == ["automation"]
     assert "automation.routines" in atlas["capabilities"]
     assert "automation" in atlas["warehouses"]
-    assert atlas["warehouses"]["automation"]["inventory_count"] == 5
+    assert atlas["warehouses"]["automation"]["inventory_count"] == len(
+        DECLARATIONS["automation"]["provides"]
+    )  # derived from the declaration, not a hardcoded count
 
 
 def test_adapter_intent_to_catalog():

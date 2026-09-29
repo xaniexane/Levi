@@ -30,6 +30,10 @@ scoring — deterministic, transparent, profile is editable data):
   direction       show the direction profile (--reseed to rewrite it from
                   the documented seed; --fit "text" to score one signal)
   coach           render the coach brief from the pulse store
+
+Bridge subcommands (DemandPulse -> DDD: scored signals auto-draft held
+outreach drafts — draft-only, never approves, never sends):
+  bridge          status|scan|draft|sync-outcomes
 """
 
 from __future__ import annotations
@@ -64,6 +68,7 @@ _QUARANTINE_COMMANDS = ("quarantine",)
 _WATCHER_COMMANDS = ("watcher",)
 _OPPORTUNITIES_COMMANDS = ("opportunities",)
 _OUTCOMES_COMMANDS = ("outcomes",)
+_BRIDGE_COMMANDS = ("bridge",)
 _DIRECTION_COMMANDS = ("direction", "coach")
 
 
@@ -917,6 +922,74 @@ def _outcomes_main(argv) -> int:
     return 0
 
 
+def _bridge_main(argv) -> int:
+    """Subcommand dispatch for: bridge status|scan|draft|sync-outcomes.
+
+    The DemandPulse -> DDD bridge. Draft-only by law: nothing here
+    approves, sends, or touches the outreach gate.
+    """
+    ap = argparse.ArgumentParser(
+        prog="levi.demand bridge",
+        description="DemandPulse -> DDD bridge: scored signals auto-draft "
+                    "held DDD outreach drafts (draft-only, never sends).",
+    )
+    ap.add_argument("--ledger", default=None,
+                    help="DDD ledger store path (default: DDD_LEDGER_PATH "
+                         "or the live scratch store)")
+    import json as _json
+    sub = ap.add_subparsers(dest="action", required=True)
+
+    sub.add_parser("status", help="bridge status: signals, verdicts, drafts")
+
+    sc = sub.add_parser("scan",
+                        help="auto-draft every unbridged pursue-verdict "
+                             "live signal")
+    sc.add_argument("--limit", type=int, default=None,
+                    help="max signals to check (default: all)")
+
+    dr = sub.add_parser("draft", help="draft one signal by id")
+    dr.add_argument("--signal-id", required=True)
+
+    sub.add_parser("sync-outcomes",
+                   help="mirror bridged drafts' explicit states "
+                        "(approved/send-ready/sent) back onto their "
+                        "signals — idempotent")
+
+    args = ap.parse_args(argv)
+    from levi.demand import bridge as bmod
+    from levi.demand import direction as direction_mod
+    from levi.demand.pulse import DemandPulse
+    from pathlib import Path as _Path
+
+    ledger_path = _Path(args.ledger) if args.ledger else bmod.default_ledger_path()
+    ledger = bmod._load_ledger(ledger_path)
+    profile = direction_mod.load_profile()
+    dp = DemandPulse()
+
+    if args.action == "status":
+        print(bmod.render_status(dp, ledger, profile))
+        return 0
+    if args.action == "scan":
+        receipt = bmod.scan_and_draft(dp, ledger, profile,
+                                      limit=args.limit)
+        print(_json.dumps(receipt, indent=2))
+        return 0
+    if args.action == "draft":
+        sig = next((s for s in dp.live_signals() if s.id == args.signal_id),
+                   None)
+        if sig is None:
+            print(_json.dumps({"error": "unknown signal id",
+                               "signal_id": args.signal_id}))
+            return 1
+        print(_json.dumps(bmod.draft_for_signal(sig, ledger, profile),
+                          indent=2))
+        return 0
+    if args.action == "sync-outcomes":
+        print(_json.dumps(bmod.sync_outcomes(ledger), indent=2))
+        return 0
+    return 2
+
+
 def _direction_main(argv) -> int:
     """Subcommand dispatch for: direction | coach."""
     from pathlib import Path as _Path
@@ -1028,6 +1101,8 @@ def main(argv=None) -> int:
         return _outcomes_main(peek[1:])
     if peek and peek[0] in _DIRECTION_COMMANDS:
         return _direction_main(peek)
+    if peek and peek[0] in _BRIDGE_COMMANDS:
+        return _bridge_main(peek[1:])
     ap = argparse.ArgumentParser(
         prog="levi.demand",
         description="LEVI DemandPulse — demand signals + opportunity scoring "

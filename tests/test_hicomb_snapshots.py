@@ -44,8 +44,8 @@ def store(tmp_path):
 
 # ------------------------------------------------------------------ S2/S3
 def test_receipt_carries_stage_ts_hash_location_and_chain(store):
-    pre = store.capture("pollen-format", {"before": "x=1"}, kind="pre")
-    post = store.capture("pollen-format", {"after": "x = 1"}, kind="post")
+    store.capture("pollen-format", {"before": "x=1"}, kind="pre")
+    store.capture("pollen-format", {"after": "x = 1"}, kind="post")
     receipts = store.receipts()
     assert len(receipts) == 2
     for r in receipts:
@@ -216,19 +216,22 @@ def loop(tmp_path):
 
 def test_self_upgrade_stages_all_snapshot(loop):
     proj = loop.propose_projection(
-        "tweak x", {"kind": "fix", "module": "m"}, "fixes x")
+        "tweak x", {"kind": "fix", "module": "pollen"}, "fixes x")
     denied = loop.propose_projection(
-        "tweak y", {"kind": "fix", "module": "m"}, "fixes y")
+        "tweak y", {"kind": "fix", "module": "pollen"}, "fixes y")
     loop.decide(denied.id, False, reason="nope")
     out = loop.recombine([denied.id], "remix", {"kind": "fix"},
                          "remixed fix")
     assert out["ok"]
+    # U7: the approval needs a passed sandbox test first.
+    st = loop.sandbox_test_projection(proj.id)
+    assert st["sandbox_ok"] is True
     loop.decide(proj.id, True, reason="ship it")
     applied = loop.apply_projection(proj.id)
     assert applied["ok"]
     stages = loop._snapshots.stages_seen()
     for stage in ("upgrade-propose", "upgrade-decide", "quetta-remix",
-                  "upgrade-apply"):
+                  "upgrade-apply", "sandbox-test"):
         assert stage in stages, f"missing stage {stage}"
         kinds = [r["kind"]
                  for r in loop._snapshots.receipts(stage=stage)]

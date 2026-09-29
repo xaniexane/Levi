@@ -15,7 +15,6 @@ Every invariant declared in the module docstrings is checked here:
 Hermetic: temp dirs only, no network, stdlib only. Run from repo root.
 """
 
-import json
 import random
 
 import pytest
@@ -157,8 +156,8 @@ def test_model_completions_only_with_wired_backend():
     class DeadBackend:
         def name(self): return "ghost"
         def available(self): return False
-        def complete(self, p, c, l): return []
-        def chat(self, p, c, l): return ""
+        def complete(self, p, c, language): return []
+        def chat(self, p, c, language): return ""
 
     pp = PairProgrammer(backend=DeadBackend())
     assert pp.status() == "local-only"
@@ -168,7 +167,7 @@ def test_model_completions_only_with_wired_backend():
 
     class LiveBackend(DeadBackend):
         def available(self): return True
-        def complete(self, p, c, l):
+        def complete(self, p, c, language):
             return [Completion(text="suggestion", source="model",
                                label="test-model", confidence=0.9)]
 
@@ -176,6 +175,24 @@ def test_model_completions_only_with_wired_backend():
     assert pp2.status() == "model:ghost"
     got = pp2.suggest("x", 0, 1, "python")
     assert any(c.source == "model" for c in got)  # I4: labeled when real
+
+
+def test_broken_backend_never_kills_local():
+    """I5: a backend whose available() explodes degrades to local-only —
+    local completions keep working, nothing raises."""
+
+    class BrokenBackend:
+        def name(self): return "broken"
+        def available(self): raise RuntimeError("backend exploded")
+        def complete(self, p, c, language): raise RuntimeError("backend exploded")
+        def chat(self, p, c, language): raise RuntimeError("backend exploded")
+
+    pp = PairProgrammer(backend=BrokenBackend())
+    assert pp.status() == "local-only"
+    text = "def calculate_total(items):\n    return sum(items)\n\ncalc"
+    comps = pp.suggest(text, 3, 4, "python")
+    assert comps, "local completions must survive a broken backend"
+    assert all(c.source == "local" for c in comps)
 
 
 def test_ai_analysis_is_labeled_local():

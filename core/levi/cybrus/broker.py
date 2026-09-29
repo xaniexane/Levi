@@ -304,6 +304,7 @@ class CredentialBroker:
         signup_url: str,
         identity: Optional[str] = None,
         username: Optional[str] = None,
+        service_request_id: Optional[str] = None,
     ):
         """Provision a third-party account record.
 
@@ -312,6 +313,14 @@ class CredentialBroker:
         account metadata with status ``provisioned``. Returns
         ``(record, plaintext_password)`` — the password is shown exactly
         once by the caller and never logged.
+
+        ``service_request_id``: bloodline-law service path. When given, the
+        named broker-service ticket must exist and be pending; the mint is
+        performed under the founder's unlimited capability, so the
+        requestor's tier quota is not gated — the founder's human approval
+        on this provision is the anti-abuse gate — and the requestor's
+        meter is charged. A limited instance can never mint through this
+        path itself; only a founder-fulfilled service call supplies it.
 
         The actual signup on the external site is the operator's job (the
         broker does not browse); call :meth:`activate` once the signup is
@@ -323,13 +332,29 @@ class CredentialBroker:
         signup_url = _clean_url(signup_url)
         identity = self._actor_identity(identity)
         username = _clean_name(username, "username") if username else identity
+        if service_request_id is not None:
+            service_request_id = str(service_request_id).strip()
+            if not service_request_id:
+                raise BrokerError("service_request_id must be a non-empty id")
 
         details = {"identity": identity, "platform": platform, "username": username}
+        if service_request_id is not None:
+            # Bloodline distribution law: verify the founder-service ticket
+            # is pending; the founder's unlimited capability covers the mint.
+            from levi.cybrus import broker_meter as _meter
+
+            _meter.get_service_request(service_request_id)  # raises unless pending
+            details["service_request_id"] = _short(service_request_id)
         _require_approval("broker.provision", identity, f"thirdparty.{platform}", details)
         # RQ-2026-09-21: tier-based anti-spam gate (after approval = point of
-        # no return, so approval-pending attempts never consume quota)
-        from levi.cybrus import rate_limits as _rate_limits
-        _rate_limits.check(identity, _rate_limits.ACCOUNT_CREATE)
+        # no return, so approval-pending attempts never consume quota).
+        # Skipped on the founder-service path: the founder's unlimited
+        # capability performs the mint; the requestor's meter is charged
+        # below and the founder's approval above is the gate.
+        if service_request_id is None:
+            from levi.cybrus import rate_limits as _rate_limits
+
+            _rate_limits.check(identity, _rate_limits.ACCOUNT_CREATE)
 
         p = _paths()
         with p.store_lock(p.store_path(_ACCOUNTS_STORE)):
@@ -362,14 +387,27 @@ class CredentialBroker:
             }
             accounts.append(record)
             self._save_store(_ACCOUNTS_STORE, accounts)
+        audit_details = {
+            "account_id": _short(record["id"]),
+            "platform": platform,
+            "username": username,
+        }
+        if service_request_id is not None:
+            audit_details["service_request_id"] = _short(service_request_id)
+            # Bloodline law M3: charge the requestor's meter for the
+            # founder-fulfilled mint.
+            from levi.cybrus import broker_meter as _meter
+
+            _meter.record_use(
+                identity,
+                "account_create",
+                units=1,
+                note=f"service:{_short(service_request_id)}",
+            )
         _audit(
             "broker.account.provisioned",
             identity,
-            {
-                "account_id": _short(record["id"]),
-                "platform": platform,
-                "username": username,
-            },
+            audit_details,
         )
         return dict(record), password
 

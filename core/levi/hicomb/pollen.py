@@ -16,12 +16,10 @@ abort-on-failure gate — this module only formats.
 
 from __future__ import annotations
 
-import io
 import json
 import re
-import tokenize
 
-from levi.hicomb.highlight import LANG_BY_EXT, detect_language
+from levi.hicomb.highlight import detect_language
 
 MAX_BLANK_RUN = 2  # collapse longer blank-line runs to this many
 
@@ -181,9 +179,10 @@ def format_text(language: str, text: str) -> str:
 
 
 def language_for_path(path: str) -> str:
-    """Language name for a file path, defaulting to plain."""
-    try:
-        return detect_language(path)
-    except Exception:
-        ext = "." + path.rsplit(".", 1)[-1].lower() if "." in path else ""
-        return LANG_BY_EXT.get(ext, "plain")
+    """Language name for a file path, defaulting to plain.
+
+    Non-string or empty paths are plain — never a raw TypeError.
+    """
+    if not isinstance(path, str) or not path:
+        return "plain"
+    return detect_language(path)

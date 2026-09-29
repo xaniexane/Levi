@@ -27,7 +27,7 @@ from __future__ import annotations
 import hashlib
 import re
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from .providers import Track
 from .receipts import ReceiptLog
@@ -203,3 +203,23 @@ def pick_fingerprint(pick: DJPick) -> str:
     """Stable fingerprint of a pick: concept + track id."""
     return hashlib.sha256(
         f"{pick.concept}|{pick.track.id}".encode("utf-8")).hexdigest()[:16]
+
+
+def suggest_ringtone_segment(title: str, duration_ms: int,
+                             energies: List[float],
+                             window_ms: int = 500) -> Tuple[int, int]:
+    """The DJ SI's ringtone pick: the most energetic stretch of a track.
+
+    Chauncey's spec (2026-09-29): "auto trim by DJ AI/SI". Today the DJ
+    reads the track's energy envelope (RMS per window, measured on the
+    phone) and picks the hottest run — the hook, the drop, the loudest
+    chorus — through ``levi.buzztunes.ringtone.auto_trim`` (Law L7:
+    the pick obeys the trim laws and the user confirms before export).
+
+    This function is the seam where the DJ's taste model plugs in: same
+    signature, richer scoring later (onset detection, chorus repetition,
+    vocal presence). The energy peak is the honest v1 — never presented
+    as more than it is.
+    """
+    from . import ringtone
+    return ringtone.auto_trim(duration_ms, energies, window_ms)

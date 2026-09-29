@@ -97,10 +97,12 @@ class Scout:
     labeled OBSERVED with a basis note naming its source.
     """
 
-    def propose(self, raw_signals: Iterable[Mapping[str, Any]]) -> List[Candidate]:
+    def propose(
+        self, raw_signals: Optional[Iterable[Mapping[str, Any]]]
+    ) -> List[Candidate]:
         candidates: List[Candidate] = []
         seen: set = set()
-        for raw in raw_signals:
+        for raw in raw_signals or []:
             if not isinstance(raw, Mapping):
                 continue
             text = str(raw.get("text") or raw.get("title") or raw.get("need") or "")
@@ -134,9 +136,11 @@ class Verifier:
     Otherwise the candidate is published as-is.
     """
 
-    def verify(self, candidates: Iterable[Candidate]) -> TwinReport:
+    def verify(
+        self, candidates: Optional[Iterable[Candidate]]
+    ) -> TwinReport:
         report = TwinReport(ran_at=datetime.now(timezone.utc).isoformat())
-        for cand in candidates:
+        for cand in candidates or []:
             verdict = self._judge(cand)
             if verdict.published:
                 report.published.append(cand)
@@ -159,7 +163,7 @@ class Verifier:
 
 
 def run_twin_pass(
-    raw_signals: Iterable[Mapping[str, Any]],
+    raw_signals: Optional[Iterable[Mapping[str, Any]]],
     scout: Optional[Scout] = None,
     verifier: Optional[Verifier] = None,
 ) -> Tuple[TwinReport, List[Candidate]]:

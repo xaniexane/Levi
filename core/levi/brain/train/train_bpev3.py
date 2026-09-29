@@ -49,6 +49,7 @@ MODEL_CONFIG = {
 }
 
 CURRICULUM = os.path.join(TRAIN_DIR, "corpus_curriculum.jsonl")
+PROGRAMMING = os.path.join(TRAIN_DIR, "corpus_programming.jsonl")
 DIALOGUE = os.path.join(TRAIN_DIR, "corpus_dialogue.jsonl")
 TOKENIZER_PATH = os.environ.get(
     "LEVI_TOKENIZER_PATH",
@@ -69,12 +70,15 @@ QUALITATIVE_PROMPTS = [
     "User: state Newton's first law\nLEVI:",
     "User: the tests pass\nLEVI:",
     "User: I'm overwhelmed. Everything is due at once.\nLEVI:",
+    "User: write a function that doubles a number\nLEVI:",
+    "User: what does this print: for i in range(3): print(i)\nLEVI:",
+    "User: fix this code: pirnt('hi')\nLEVI:",
 ]
 
 
 def load_sequences(tok: ByteBPETokenizer, seed: int = 20260921):
     texts = []
-    for path in (CURRICULUM, DIALOGUE):
+    for path in (CURRICULUM, PROGRAMMING, DIALOGUE):
         with open(path, encoding="utf-8") as fh:
             for line in fh:
                 line = line.strip()

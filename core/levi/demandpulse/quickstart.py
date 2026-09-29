@@ -62,16 +62,24 @@ def outbox_dir(home: Optional[Path] = None) -> Path:
 
 
 def write_filters(
-    keywords: Sequence[str],
+    keywords: Sequence[str] | None,
     exclude: Sequence[str] = (),
     home: Optional[Path] = None,
 ) -> Dict[str, Any]:
     """Write the auditable keyword filter set. Sorted + deduped so the file
-    is diffable; the alert definition logs the same sets."""
-    include = sorted({k.strip().lower() for k in keywords if k and k.strip()})
+    is diffable; the alert definition logs the same sets.
+
+    Non-string keywords are skipped (never a raw AttributeError from
+    .strip()); no keywords at all is a named ValueError.
+    """
+    include = sorted(
+        {k.strip().lower() for k in (keywords or ()) if isinstance(k, str) and k.strip()}
+    )
     if not include:
         raise ValueError("quickstart needs at least one keyword")
-    excluded = sorted({e.strip().lower() for e in exclude if e and e.strip()})
+    excluded = sorted(
+        {e.strip().lower() for e in (exclude or ()) if isinstance(e, str) and e.strip()}
+    )
     record = {
         "include": include,
         "exclude": excluded,

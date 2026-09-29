@@ -1,4 +1,4 @@
-"""The edition catalog: 11 sector editions as data, not code sprawl.
+"""The edition catalog: sector editions as data, not code sprawl.
 
 Roster slots select agents by category (never raw ids) so catalog
 re-stamping never breaks an edition. Sides: "ai" does procedure,
@@ -519,9 +519,13 @@ LEGAL = EditionManifest(
     description=(
         "For legal practice: document workflows, research assistance, "
         "deadline tracking, billing support, and brief-drafting under "
-        "attorney review. Privilege-aware confidentiality; no training on "
-        "client matter, ever. Assists counsel — never gives legal advice as "
-        "authority, never files, never decides."
+        "attorney review. Knowledge backbone: the Ring 1 doctrine playbook "
+        "corpus (SkillRegistry category `legal`) — cited, jurisdiction-"
+        "tagged research assistance across the domain map, every file "
+        "carrying its authorities inline and a general-information banner. "
+        "Privilege-aware confidentiality; no training on client matter, "
+        "ever. Assists counsel — never gives legal advice as authority, "
+        "never files, never decides, never presents itself as a lawyer."
     ),
     roster=(
         RosterSlot(
@@ -560,12 +564,16 @@ LEGAL = EditionManifest(
         "research assistance with cited sources",
         "deadline and docket tracking",
         "billing support from time records",
+        "doctrine playbooks: cited research assistance across the 69-domain "
+        "legal map (SkillRegistry category `legal`)",
     ),
     data_posture=_dp(
         residency="firm-local; on-premise default",
         retention="matter-bound; client purge authority",
         notes="Privilege-aware: client matter never trains models, never "
-        "leaves the firm's deployment without explicit instruction.",
+        "leaves the firm's deployment without explicit instruction. Legal "
+        "research queries are matter-bound the same way: consulted from "
+        "the playbook corpus, never absorbed into weights.",
     ),
     compliance=(
         "attorney review gates on all substantive output",
@@ -580,6 +588,15 @@ LEGAL = EditionManifest(
         (
             "filing or service without attorney sign-off",
             "the edition drafts; counsel acts",
+        ),
+        (
+            "binding legal opinions",
+            "only a licensed attorney's opinion binds — the edition "
+            "prepares the brief, counsel signs it",
+        ),
+        (
+            "pro se court filings",
+            "drafts under attorney review; nothing files itself",
         ),
     ),
     tier_fit="4 to Pro — a 5-operator team template",
@@ -816,6 +833,110 @@ INDUSTRIAL = EditionManifest(
     ),
 )
 
+TRANSPORTATION = EditionManifest(
+    id="transportation",
+    name="LEVI Dispatch",
+    sector="trucking fleets, owner-operators, dispatch services",
+    ring=Ring.CLOSED,
+    tagline="Runs the board. Never drives the truck.",
+    description=(
+        "For trucking: dispatch automation, HOS co-pilot with pre-violation "
+        "alerts, virtualized paperwork packets per load, settlement support, "
+        "and routing intelligence with ranked alternates. The driver's clock "
+        "is projected against the plan — flags go to driver and dispatcher, "
+        "humans own every decision. ELD data is read-only under the fleet's "
+        "own credentials; the edition never writes logs and never coaches "
+        "evasion."
+    ),
+    roster=(
+        RosterSlot(
+            "Productivity",
+            (),
+            side="ai",
+            count=2,
+            purpose="load-card assembly, settlement sheets",
+        ),
+        RosterSlot(
+            "Communication",
+            (),
+            side="ai",
+            count=1,
+            purpose="dispatcher comms drafts, driver check-call triage",
+        ),
+        RosterSlot(
+            "Travel & Local",
+            (),
+            side="si",
+            count=1,
+            purpose="routing, fuel-stop pricing, weather/closure watch",
+        ),
+        RosterSlot(
+            "Learning & Notes",
+            (),
+            side="ai",
+            count=1,
+            purpose="HOS co-pilot, course/certification tracking",
+        ),
+        RosterSlot(
+            "Finance & Money",
+            (),
+            side="ai",
+            count=1,
+            purpose="receipts, IFTA prep, detention-claim drafting",
+        ),
+        RosterSlot(
+            "System & Device Care",
+            (),
+            side="ai",
+            count=1,
+            purpose="ELD/telematics integration health, DVIR defect routing",
+        ),
+    ),
+    ai_si_mix="AI-dominant: procedure, checklists, and audit trails; "
+    "SI in a bounded seat for load-match ranking and route improvisation "
+    "under dispatcher review.",
+    workflows=(
+        "dispatch board triage with human accept gates",
+        "HOS pre-violation alerts with mile markers",
+        "virtual paperwork packets per load (BOL, rate con, POD, receipts)",
+        "settlement build-and-release under admin review",
+        "compliance-deadline calendar (IFTA, inspections, DQ files)",
+        "morning dispatch brief: loads, risks, ETAs",
+    ),
+    data_posture=_dp(
+        residency="fleet-local; ELD/telematics stay in the fleet's deployment",
+        retention="operational; compliance-bound retention per regulation",
+        notes="The edition consults fleet data, never absorbs it. "
+        "trains_on_data is false — sold as a feature.",
+    ),
+    compliance=(
+        "FMCSA/DOT awareness built in; HOS rules as checked logic, not advice",
+        "human accept gates on every load — the edition ranks, people bind",
+        "drug & alcohol program records handled as confidential",
+        "audit receipts on every run",
+    ),
+    excluded=(
+        (
+            "auto-accepting loads or tendering freight",
+            "the edition ranks; a human binds the contract",
+        ),
+        (
+            "overriding HOS limits or coaching log falsification",
+            "safety law is a hard floor, not a suggestion",
+        ),
+        (
+            "practicing before FMCSA / legal representation",
+            "that's the legal edition's lane, under counsel",
+        ),
+    ),
+    tier_fit="4 to Pro — a 7-operator team template",
+    pricing_note=(
+        "Dollar-scale flat fee against the 7%-of-revenue dispatch norm "
+        "(~$350/week per truck at $5k revenue): volume over margin. "
+        "Undercut the percentage take, never the safety floor."
+    ),
+)
+
 OPEN_CREATIONAL = EditionManifest(
     id="open-creational",
     name="LEVI Open Creational",
@@ -875,6 +996,7 @@ EDITIONS: Dict[str, EditionManifest] = {
         NONPROFIT,
         BUSINESS,
         INDUSTRIAL,
+        TRANSPORTATION,
         OPEN_CREATIONAL,
     )
 }

@@ -223,16 +223,16 @@ def test_inventory_counts_match_reality():
     real_playbooks = len(list((PKG / "skill" / "playbooks").rglob("*.md")))
     by_name = {w["name"]: w["inventory_count"] for w in list_warehouses()}
     assert (
-        real_methods == 45
-    )  # 41 + deliberation hunt 2026-09-17: delphi/ngt/crawford/futuresearch
+        real_methods == 87
+    )  # 45 + perpetual-hunt additions incl. divergence kit 2026-09-29
     assert by_name["methods"] == real_methods
-    assert real_revivals == 469  # + revival yard (yard.py) 2026-09-18
+    assert real_revivals == 470  # + nanobit/legion crew 2026-09-26
     assert (
         by_name["revivals"] == real_revivals + 3 + 3 + 3 + 2 + 2
     )  # + telegraph shelf (envelopes/identity/directory) + analog shelf (bench/nomo/fourier) + craft shelf (hallmark/guild/measures) + teletext shelf (pages/serve) + attention shelf (signal/ritual), wave-019 2026-09-19
     assert (
-        real_playbooks == 860
-    )  # + builder pack (6) + operator.xyz, 2026-09-18; + Z-1 compressed-engine pack (6), 2026-09-19; + pack run 10 (2: temper/season compressed engines), 2026-09-20
+        real_playbooks == 1408
+    )  # recipe 2026-09-29: cyber 100,823 -> 873 (50 threat cores), operators 18 -> 7
     assert by_name["skills"] == real_playbooks
     assert (
         by_name["games"] == 10
@@ -268,30 +268,31 @@ def test_inventory_unknown_warehouse_rejected():
 def test_inventory_pagination_is_honest():
     full = warehouse_inventory("skills", limit=None)
     assert (
-        full["total"] == 860
-    )  # + builder pack (6) + operator.xyz, 2026-09-18; + Z-1 compressed-engine pack (6), 2026-09-19; + pack run 10 (2: temper/season compressed engines), 2026-09-20
-    assert len(full["items"]) == 860
+        full["total"] == 1408
+    )  # recipe 2026-09-29: cyber 100,823 -> 873, operators 18 -> 7
+    assert len(full["items"]) == 1408
     assert full["truncated"] is False
 
     page = warehouse_inventory("skills", limit=50, offset=0)
-    assert page["total"] == 860
+    assert page["total"] == 1408
     assert len(page["items"]) == 50
     assert page["truncated"] is True
 
-    last = warehouse_inventory("skills", limit=50, offset=850)
-    assert len(last["items"]) == 10  # 860 = 17*50 + 10, last page holds 10
+    last = warehouse_inventory("skills", limit=50, offset=1400)
+    assert len(last["items"]) == 8  # 1408 = 28*50 + 8, last page holds 8
     assert last["truncated"] is False
 
     for item in page["items"]:
         assert {"id", "kind", "summary"} <= set(item)
         assert item["kind"] == "playbook"
-        # playbook shelves: cyber pack + operator pack + compressed pack + builder pack
+        # playbook shelves: cyber + operator + compressed + builder + browse packs
         assert item["id"].startswith(
             (
                 "playbook.cyber.",
                 "playbook.operator.",
                 "playbook.compressed.",
                 "playbook.builder.",
+                "playbook.browse.",
             )
         )
 

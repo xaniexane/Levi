@@ -54,7 +54,11 @@ CARD_TOKENS = {
 
 
 def gbc_card_theme_data() -> dict:
-    """Theme data dict for themes.validate_theme(). All colors in palette."""
+    """Theme data dict for themes.validate_theme(). All colors in palette.
+
+    The I5/I6 palette laws are enforced with explicit raises, not assert:
+    asserts vanish under ``python -O`` and laws must hold regardless.
+    """
     ui = {
         "background": "#05070c",
         "surface": "#0b0e14",
@@ -83,8 +87,12 @@ def gbc_card_theme_data() -> dict:
         "code": "#5fffd2",
         "link": "#3868e8",
     }
-    assert all(c in GBC_PALETTE for c in ui.values()), "ui color outside GBC palette"
-    assert all(c in GBC_PALETTE for c in syntax.values()), "syntax color outside GBC palette"
+    bad_ui = sorted({c for c in ui.values() if c not in GBC_PALETTE})
+    if bad_ui:
+        raise ValueError(f"ui colors outside GBC palette (I6): {bad_ui}")
+    bad_syntax = sorted({c for c in syntax.values() if c not in GBC_PALETTE})
+    if bad_syntax:
+        raise ValueError(f"syntax colors outside GBC palette (I6): {bad_syntax}")
     return {
         "name": "gbc-card",
         "ui": ui,

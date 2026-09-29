@@ -166,6 +166,25 @@ def test_registry_lookup():
 
 
 @finance_test
+def test_days_rejects_bool_and_non_int():
+    # bool is an int subclass: True must not silently mean "1 day".
+    # Sibling providers (BinanceProvider, SyntheticProvider) and
+    # signals.generate_signal already reject bools; StooqProvider must
+    # match. Validates before any network access (hermetic).
+    provider = _patched_provider(FIXTURE_CSV)
+    for bad in [True, False, "10", 2.5, None, [10]]:
+        try:
+            provider.daily_bars("AAPL", days=bad)
+        except MarketDataError:
+            pass
+        else:
+            raise AssertionError(f"days={bad!r} did not raise")
+    # Sane int values still work.
+    assert len(provider.daily_bars("AAPL", days=10)) == 4
+    print("  bool/non-int days rejected, int days still accepted")
+
+
+@finance_test
 def test_provider_interface_sanity():
     assert issubclass(StooqProvider, MarketDataProvider)
     assert hasattr(MarketDataProvider, "daily_bars")

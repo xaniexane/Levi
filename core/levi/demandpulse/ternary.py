@@ -54,6 +54,37 @@ class TernarySignal:
         }
 
 
+def _clean_counts(counts: Sequence[int], subject: str) -> List[int]:
+    """Coerce per-scan counts to non-negative ints.
+
+    Unconvertible items raise a named ValueError (which scan, which
+    value) — never a raw TypeError/ValueError from int().
+    """
+    clean: List[int] = []
+    for i, c in enumerate(counts):
+        try:
+            v = int(c)  # type: ignore[arg-type]
+        except (TypeError, ValueError) as exc:
+            raise ValueError(
+                f"classify({subject!r}): counts[{i}]={c!r} is not a number"
+            ) from exc
+        clean.append(max(0, v))
+    return clean
+
+
+def _check_knobs(floor: int, breakout_count: int,
+                 breakout_multiple: float) -> None:
+    """Owner-tunable knobs still have sane ranges — a zero/negative bar
+    would silently reclassify every subject."""
+    if floor < 0:
+        raise ValueError(f"floor must be >= 0, got {floor!r}")
+    if breakout_count < 1:
+        raise ValueError(f"breakout_count must be >= 1, got {breakout_count!r}")
+    if not breakout_multiple > 0:
+        raise ValueError(
+            f"breakout_multiple must be > 0, got {breakout_multiple!r}")
+
+
 def classify(
     subject: str,
     counts: Sequence[int],
@@ -65,9 +96,11 @@ def classify(
     """Classify a subject's per-scan counts (oldest → newest) into a state.
 
     Pure function — no I/O, no randomness. Empty history is dormant with
-    an explicit basis, never an exception.
+    an explicit basis, never an exception. Garbage counts raise a named
+    ValueError; insane tuning knobs do too.
     """
-    clean = [max(0, int(c)) for c in counts]
+    _check_knobs(floor, breakout_count, breakout_multiple)
+    clean = _clean_counts(counts, subject)
     peak = max(clean) if clean else 0
     last = clean[-1] if clean else 0
     prior = clean[:-1]
@@ -107,8 +140,14 @@ def classify(
 
 
 def classify_all(
-    histories: Dict[str, Sequence[int]],
+    histories: Dict[str, Sequence[int]] | None,
     **kwargs: Any,
 ) -> List[TernarySignal]:
-    """Classify many subjects; deterministic order (sorted by subject)."""
+    """Classify many subjects; deterministic order (sorted by subject).
+
+    A None mapping classifies as no subjects (empty list) — the same
+    never-an-exception philosophy as empty history.
+    """
+    if histories is None:
+        return []
     return [classify(s, histories[s], **kwargs) for s in sorted(histories)]

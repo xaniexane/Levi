@@ -3581,6 +3581,10 @@ def cmd_academy(args):
             return 0
         print(json.dumps(plan, indent=1))
         return 0
+    if action == "programming":
+        from levi.academy.lessons.programming import cli as prog_cli
+
+        return prog_cli.main(getattr(args, "programming_args", None) or [])
     print(f"Unknown academy action: {action}")
     return 2
 
@@ -7403,7 +7407,7 @@ def main():
         "academy_action",
         nargs="?",
         default="status",
-        choices=["status", "session", "help", "staff", "remediate"],
+        choices=["status", "session", "help", "staff", "remediate", "programming"],
     )
     acad_p.add_argument("--day", type=int, default=None, help="session: day 1-30")
     acad_p.add_argument("--block", type=int, default=None, help="session: block 1-4")
@@ -7415,6 +7419,11 @@ def main():
     )
     acad_p.add_argument(
         "--roles", default=None, help="staff: comma-separated roles to assign"
+    )
+    acad_p.add_argument(
+        "programming_args",
+        nargs=argparse.REMAINDER,
+        help="programming: syllabus | lesson <n|id> | next [--after N] | search <words>",
     )
     # --- end academy-owned block ---
     proj_p = sub.add_parser(

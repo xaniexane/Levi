@@ -281,9 +281,10 @@ def _mine(dp, state, channel: str,
             receipt["candidates"] += 1
             sig = dp.scan_seed(need, segment="general", source=channel,
                                origin=origin)
-            receipt["signals"] += 1
-            if sig.id not in receipt["signal_ids"]:
-                receipt["signal_ids"].append(sig.id)
+            if getattr(sig, "is_new_registration", True):
+                receipt["signals"] += 1
+                if sig.id not in receipt["signal_ids"]:
+                    receipt["signal_ids"].append(sig.id)
     return receipt
 
 

@@ -168,7 +168,7 @@ class StooqProvider(MarketDataProvider):
         """Fetch the last ``days`` daily bars for a US symbol."""
         if not isinstance(symbol, str) or not _SYMBOL_RE.match(symbol):
             raise MarketDataError(f"invalid symbol: {symbol!r}")
-        if not isinstance(days, int) or days < 1:
+        if isinstance(days, bool) or not isinstance(days, int) or days < 1:
             raise MarketDataError(f"days must be a positive int, got {days!r}")
         end = date.today()
         start = end - timedelta(days=days)

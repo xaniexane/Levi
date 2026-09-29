@@ -1,8 +1,14 @@
 # Operator Skills
 
-Sixteen productivity playbooks for LEVI, registered in the `SkillRegistry`
+Seven productivity playbooks for LEVI, registered in the `SkillRegistry`
 under `category="operator"`. They are advisory-only: no system actions, no
 surveillance, no coercion. Every skill is INFO risk.
+
+Since the 2026-09-29 signature-recipe run, the pack is five **composite**
+playbooks (each chaining absorbed originals into one higher-order skill)
+plus two standalone originals. The 16 absorbed 2026-09-18 originals are
+preserved byte-identical under `stored/2026-09-29-operator-playbooks/`
+with a provenance note — stored, never deleted, regenerable on demand.
 
 Registration is data-driven — `core/levi/skill/operator_skills.py` scans
 `core/levi/skill/playbooks/operator/*.md` at import, so new playbooks
@@ -11,32 +17,26 @@ register automatically with zero merge conflicts. Skill IDs are namespaced
 
 | Skill ID | Name | Purpose | When to use |
 |---|---|---|---|
-| `operator.stress` | Stress-Test the Plan | Red-team a plan before reality does: attack it, find every way it dies, harden what survives. | Before committing to a vague or high-stakes plan; when everyone agrees too fast. |
-| `operator.eighty` | The Vital Few | Find the ~20% of work carrying ~80% of results, and produce an explicit stop-doing list. | Full plate; weekly planning; before adding anything new. |
-| `operator.mvd` | Minimum Viable Day | Exactly three must-happen items for the day; everything else is bonus. | Morning planning; days at risk of dissolving into reactive work. |
-| `operator.ship` | Define Done, Freeze Scope | Turn "almost done" into shipped: write the definition of done, freeze scope, execute. | "90% done" for too long; scope creep mid-flight. |
-| `operator.lock` | Commitment + Watch | Convert an intention into a commitment with a deadline and a check-in. | Decisions that must survive your future self; after defining done. |
-| `operator.triage` | NOW / NEXT / PARK / KILL | Sort a pile fast; every item gets exactly one bucket, and something must die. | Inbox or brain-dump overflow; "I'll get to it" as a storage strategy. |
-| `operator.review` | Shipped / Slipped / Pattern / Tomorrow | Close the day honestly: what moved, what didn't, what it means, what's next. | End of day; end of week; after a streak breaks. |
-| `operator.deep` | Sprint Design | Design one deep-work block that stays deep: one objective, a start ritual, a distraction contract. | Before focus-heavy work; when "I'll focus today" keeps dissolving. |
-| `operator.blocker` | Hard / Unclear / Avoided | Name what's actually stuck: classify the blocker honestly, then apply its class fix. | "I'm stuck" with no analysis; a task that keeps getting rescheduled. |
-| `operator.actions` | Owners + Deadlines | Turn notes and meetings into commitments: every action gets one owner and one deadline. | After meetings/calls/threads; pasted notes with implied actions. |
-| `operator.no` | One Clean Decline | Say no well — cleanly, briefly, finally. | Requests you won't take on; protecting the vital few; resentful yeses. |
-| `operator.streak` | Ship / Deep-Work Days | Track consecutive days of shipping or deep work — a mirror for consistency. | Building a daily practice; restarting after a break. |
-| `operator.spark` | Creative Ignition | Generate raw creative material fast — quantity first, judgment later. | Starting anything creative; empty-page paralysis; before cutting. |
-| `operator.cut` | Cut Ruthlessly | Improve by removing: whatever survives was load-bearing. | Bloated drafts/plans/lists; refining raw material. |
-| `operator.voice` | Voice Calibration | Match the writing voice to the job the words must do. | Drafts in the wrong register; new audiences; pre-publish. |
-| `operator.title` | Name the Thing | Give the thing a name worth remembering — a promise the work must keep. | Naming anything; embarrassing working titles; pre-publish. |
+| `operator.day` | Run the Day | The daily operating stack: vital few → triage → the three → deep block. | Morning planning; full plate; before the hardest work. |
+| `operator.loop` | The Shipping Loop | Ship the work, close the day honestly, keep the streak alive. | "Almost done" drag; end of day; building a daily practice. |
+| `operator.create` | Make the Thing | Generate fast, cut ruthlessly, calibrate the voice, name it. | Starting anything creative; bloated drafts; pre-publish. |
+| `operator.decide` | Unstick and Rule | Classify the blocker, stress-test the plan, rule like a judge. | Stuck with no analysis; vague plans; colliding claims. |
+| `operator.commit` | Commitments That Hold | Owned, dated commitments with a check-in that keeps them alive. | After meetings; intentions that must survive your future self. |
+| `operator.no` | One Clean Decline | Say no well — cleanly, briefly, finally. | Requests you won't take on; protecting the vital few. |
+| `operator.xyz` | X + Y = Z | Solve for the how from the endpoints: x inventory, z destination, y derived. | Any new directive; unknown how; stalled plans. |
 
 ## How they compose
 
-The skills are designed to chain: `operator.triage` sorts the pile,
-`operator.eighty` finds the vital few, `operator.mvd` picks today's three,
-`operator.deep` protects the hardest one, `operator.ship` gets it out the
-door, `operator.review` closes the day, and `operator.streak` keeps the
-practice alive. `operator.stress` guards the plan, `operator.blocker`
-unblocks it, `operator.lock` commits it, `operator.actions` extracts
-commitments from meetings, and `operator.no` defends the whole system.
+The composites are the chains, formalized: `operator.day` runs
+eighty→triage→mvd→deep; `operator.loop` runs ship→review→streak;
+`operator.create` runs spark→cut→voice→title; `operator.decide` runs
+blocker→stress→gavel; `operator.commit` merges actions×lock.
+`operator.no` defends the whole system; `operator.xyz` derives the how for
+any of them.
+
+Symbolic notation used in the pack (DaVinci glyph compression, 2026-09-29):
+`→` = phase chain, `×` = merge/interpenetration, `⇐` = source echo
+(composite → absorbed originals), ①②③④ = phase order.
 
 ## Frontmatter contract
 

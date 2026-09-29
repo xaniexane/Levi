@@ -93,3 +93,27 @@ def test_rule_line_uses_theme_glyph():
     line = themes.rule_line(themes.get_theme("ember"))
     assert set(line) == {"~"}
     assert 8 <= len(line) <= 120
+
+# ---------------------------------------- wave 1: themes hardening
+from levi.demandpulse.themes import (
+    ThemeError,
+    get_theme,
+    list_themes,
+    rule_line,
+)
+
+
+def test_rule_line_width_guard():
+    theme = get_theme("void")
+    assert len(rule_line(theme, -5)) == 8
+    assert len(rule_line(theme, 500)) == 120
+    assert len(rule_line(theme, "40")) == 40
+    with pytest.raises(ThemeError, match="width"):
+        rule_line(theme, "wide")
+
+
+def test_list_themes_sorted_strs():
+    names = list_themes()
+    assert names == sorted(names)
+    assert all(isinstance(n, str) for n in names)
+    assert "void" in names

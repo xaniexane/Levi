@@ -25,7 +25,7 @@ import pytest
 
 from levi.buzztunes import dj as DJ
 from levi.buzztunes import forge as F
-from levi.buzztunes import spotify as SP
+from levi.buzztunes import youtube as YT
 from levi.buzztunes.cli import cmd_buzztunes
 from levi.buzztunes.engine import BuzzEngine
 from levi.buzztunes.providers import FakeProvider, Track
@@ -156,16 +156,16 @@ def test_forge_export_writes_m3u_and_manifest(tmp_path):
         assert r["content_hash"]
 
 
-# ---------------------------------------------------------------- spotify
+# ---------------------------------------------------------------- youtube
 
-def test_spotify_seam_honest():
-    assert SP.configured() is False
+def test_youtube_seam_honest():
+    assert YT.configured() is False
     t = _catalog()[0]
-    with pytest.raises(SP.SpotifyNotConfigured):
-        SP.play(t)
-    with pytest.raises(SP.SpotifyNotConfigured):
-        SP.search("anything")
-    st = SP.status()
+    with pytest.raises(YT.YouTubeNotConfigured):
+        YT.play(t)
+    with pytest.raises(YT.YouTubeNotConfigured):
+        YT.search("anything")
+    st = YT.status()
     assert st["configured"] is False and st["needs"]
 
 
@@ -200,4 +200,4 @@ def test_cli_play_m3u_smoke(tmp_path, capsys):
                       store=str(tmp_path / "s"))
     assert cmd_buzztunes(play_args) == 0
     out = capsys.readouterr().out
-    assert "queued" in out and "Spotify not linked" in out
+    assert "queued" in out and "YouTube not linked" in out

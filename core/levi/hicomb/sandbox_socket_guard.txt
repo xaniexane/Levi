@@ -1,0 +1,27 @@
+"""Hicomb sandbox network guard (B2a).
+
+Auto-imported at interpreter startup via PYTHONPATH as sitecustomize.py.
+Neuters AF_INET/AF_INET6 socket creation: any TCP/UDP attempt raises
+OSError. AF_UNIX stays allowed (local IPC only, no network).
+
+This is a RESOURCE, not a module: the parent (sandbox_test.py) never
+imports socket itself — it writes this text into the sandbox run dir so
+the child Python processes block their own network. Kept as a .txt file
+so the offline grep gate (no "import socket" in hicomb *.py) keeps its
+full meaning: the IDE core truly never imports networking.
+"""
+import socket as _socket
+
+_BLOCKED = (_socket.AF_INET, _socket.AF_INET6)
+_real_socket = _socket.socket
+
+
+class _GuardedSocket(_real_socket):
+    def __init__(self, family=_socket.AF_INET, *args, **kwargs):
+        if family in _BLOCKED:
+            raise OSError(
+                "network disabled: hicomb sandbox blocks AF_INET/AF_INET6")
+        super().__init__(family, *args, **kwargs)
+
+
+_socket.socket = _GuardedSocket

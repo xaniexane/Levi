@@ -4,11 +4,14 @@
 ``core/levi/skill/playbooks/operator/*.md`` and parsing each file's mandatory
 frontmatter block. These tests assert:
 
-- exactly 17 playbooks exist and all load via the loader;
+- exactly 7 playbooks exist and all load via the loader (2026-09-29 recipe
+  run: 5 composite playbooks chaining the absorbed 2026-09-18 originals +
+  2 standalone; originals preserved byte-identical under
+  ``stored/2026-09-29-operator-playbooks/``);
 - every playbook carries valid frontmatter (all required keys, valid risk,
   id scheme ``operator.<slug>`` matching the filename);
 - every playbook body has the required sections;
-- all 17 register in ``SkillRegistry`` with unique ``operator.*`` ids and
+- all 7 register in ``SkillRegistry`` with unique ``operator.*`` ids and
   ``category == "operator"``;
 - ``chips.json`` holds exactly 7 chips, each with non-empty id/label/inject;
 - safety invariants: unique ids, INFO risk across the pack, no forbidden
@@ -36,22 +39,12 @@ PLAYBOOK_DIR = ROOT / "core" / "levi" / "skill" / "playbooks" / "operator"
 CHIPS_PATH = ROOT / "core" / "levi" / "skill" / "chips.json"
 
 EXPECTED_IDS = [
-    "operator.stress",
-    "operator.eighty",
-    "operator.mvd",
-    "operator.ship",
-    "operator.lock",
-    "operator.triage",
-    "operator.review",
-    "operator.deep",
-    "operator.blocker",
-    "operator.actions",
+    "operator.day",  # eighty x triage x mvd x deep
+    "operator.loop",  # ship x review x streak
+    "operator.create",  # spark x cut x voice x title
+    "operator.decide",  # blocker x stress x gavel
+    "operator.commit",  # actions x lock (merged)
     "operator.no",
-    "operator.streak",
-    "operator.spark",
-    "operator.cut",
-    "operator.voice",
-    "operator.title",
     "operator.xyz",
 ]
 
@@ -77,14 +70,14 @@ def _files():
     return sorted(PLAYBOOK_DIR.glob("*.md"))
 
 
-def test_exactly_seventeen_playbooks_present():
+def test_exactly_seven_playbooks_present():
     files = _files()
-    assert len(files) == 17, f"expected 17 operator playbooks, found {len(files)}"
+    assert len(files) == 7, f"expected 7 operator playbooks, found {len(files)}"
 
 
-def test_all_seventeen_load_via_loader():
+def test_all_seven_load_via_loader():
     skills = operator_skills.OPERATOR_SKILLS
-    assert len(skills) == 17
+    assert len(skills) == 7
     assert sorted(s.id for s in skills) == sorted(EXPECTED_IDS)
 
 
@@ -123,7 +116,7 @@ def test_playbook_bodies_have_required_sections():
             assert section in body, f"{path.name}: missing section {section}"
 
 
-def test_registry_registers_all_seventeen():
+def test_registry_registers_all_seven():
     registry = SkillRegistry()
     for skill_id in EXPECTED_IDS:
         skill = registry.get(skill_id)
@@ -163,4 +156,4 @@ def test_no_forbidden_identity_terms():
     module_text = Path(operator_skills.__file__).read_text(encoding="utf-8").lower()
     for term in FORBIDDEN_TERMS:
         assert term not in module_text, f"operator_skills.py: forbidden term {term!r}"
-    assert checked == 18
+    assert checked == 8  # 7 playbooks + chips.json

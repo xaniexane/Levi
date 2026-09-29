@@ -109,6 +109,12 @@ def _check_watchdog(home: Path | None = None) -> Tuple[bool, str]:
     return True, f"comms watchdog: {result.reason}"
 
 
+def _check_index_watch(home: Path | None = None) -> Tuple[bool, str]:
+    from levi.daemon.index_watch import _check_index_watch as _check
+
+    return _check(home=home)
+
+
 def _check_perpetual(home: Path | None = None) -> Tuple[bool, str]:
     from levi.perpetual.supervise import service_overview
 
@@ -309,6 +315,18 @@ class Supervisor:
             "start_hint": "levi watchdog  (foreground: python -m levi.daemon watchdog)",
             "health": _guarded(functools.partial(_check_watchdog)),
             "_check_fn": _check_watchdog,
+        },
+        {
+            "name": "index-watch",
+            "module": "levi.daemon.index_watch",
+            "summary": (
+                "Index-integrity watch: supervised continuous watch on the "
+                "shared git index; alerts (never resolves) on staged "
+                "deletions via the ddd-inbox. Read-only against the repo."
+            ),
+            "start_hint": "python -m levi.daemon.index_watch --run",
+            "health": _guarded(functools.partial(_check_index_watch)),
+            "_check_fn": _check_index_watch,
         },
         {
             "name": "perpetual",

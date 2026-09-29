@@ -42,12 +42,15 @@ from __future__ import annotations
 
 import json
 import time
-import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from levi.hicomb.quetta_loop import QuettaPanLoop
+from levi.hicomb.qp_compat import (
+    QuettaPanLoop,
+    QuettaPanUnavailable,
+    require_quetta_loop,
+)
 from levi.hicomb.snapshots import SnapshotStore, snapshotted
 
 # ------------------------------------------------------------------ stores
@@ -118,8 +121,9 @@ class IdeJournal:
 # ------------------------------------------------------------------ NL→IR
 def _ide_qp(store_dir: Optional[Path | str]) -> QuettaPanLoop:
     """Quetta Pan driving the IDE loop's learning. REIM/RIEM are stages
-    inside it — nothing here touches them directly (Q1)."""
-    return QuettaPanLoop(
+    inside it — nothing here touches them directly (Q1). Guarded: the
+    sibling's quetta_loop may be absent on a fresh checkout."""
+    return require_quetta_loop()(
         _store(store_dir),
         compost_name=".ide_ir_compost.jsonl",
         genome_name=".ide_ir_genome.json",
@@ -131,8 +135,23 @@ def record_ir_miss(
     intent: str, reason: str, store_dir: Optional[Path | str] = None
 ) -> Dict[str, Any]:
     """Compost an IR miss as a Quetta Pan failure outcome (N5, Q3).
-    Never drops silently."""
-    return _ide_qp(store_dir).absorb_outcome(
+    Never drops silently.
+
+    Best-effort by design: it runs on exception paths whose primary
+    contract (e.g. ValueError on empty intent, N4) must hold with or
+    without the sibling's loop. If the loop is absent, the miss is
+    journaled instead of composted — still never silent.
+    """
+    try:
+        qp = _ide_qp(store_dir)
+    except QuettaPanUnavailable:
+        return IdeJournal(store_dir).log(
+            IdeReceipt(ts=_now(), action="ir_miss",
+                       intent=str(intent)[:120],
+                       detail=f"{reason[:200]} (loop unavailable — journaled)",
+                       ok=False)
+        ).as_dict()
+    return qp.absorb_outcome(
         "failure",
         rule_id="nl_intent",
         context="nl",

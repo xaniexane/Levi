@@ -7,6 +7,10 @@ tab stops; expansion is pure string work (the UI moves the cursor).
 
 from __future__ import annotations
 
+import re
+
+_TABSTOP = re.compile(r"\$(?:\{(\d+)(?::[^}]*)?\}|(\d+))")
+
 BRACKET_PAIRS = {
     "(": ")",
     "[": "]",
@@ -230,3 +234,39 @@ def expand(language: str, trigger: str) -> str | None:
 def triggers(language: str) -> list[str]:
     """Available snippet triggers for a language (for the palette)."""
     return sorted(SNIPPETS.get(language, {}))
+
+
+def validate_snippets() -> list[str]:
+    """Proof over the snippet data: every body scans clean.
+
+    Checks each snippet body for stray ``$`` (only ${n}, ${n:placeholder}
+    and $n tab stops are legal) and for balanced braces. Returns a list
+    of problem descriptions; an empty list means the data is valid.
+    """
+    problems: list[str] = []
+    for lang, lang_snippets in SNIPPETS.items():
+        for trigger, body in lang_snippets.items():
+            where = f"{lang}/{trigger}"
+            depth = 0
+            i = 0
+            while i < len(body):
+                ch = body[i]
+                if ch == "$":
+                    m = _TABSTOP.match(body, i)
+                    if not m:
+                        problems.append(f"{where}: stray '$' at offset {i}")
+                        i += 1
+                        continue
+                    i = m.end()  # whole tab stop consumed; braces are structural
+                    continue
+                if ch == "{":
+                    depth += 1
+                elif ch == "}":
+                    depth -= 1
+                    if depth < 0:
+                        problems.append(f"{where}: unbalanced '}}' at offset {i}")
+                        depth = 0
+                i += 1
+            if depth != 0:
+                problems.append(f"{where}: {depth} unclosed '{{'")
+    return problems

@@ -113,9 +113,10 @@ def store_dir(home: Optional[Path] = None) -> Path:
     The owner-side store is deliberately separate from any product data dir —
     it is the owner's book, not the customer's.
     """
-    base = Path(home) if home is not None else Path(
-        os.environ.get("DEMANDPULSE_HOME", Path.home() / ".demandpulse")
-    )
+    base = Path(home) if home is not None else None
+    if base is None:
+        env = os.environ.get("DEMANDPULSE_HOME") or ""
+        base = Path(env) if env.strip() else Path.home() / ".demandpulse"
     return base / "entitlements"
 
 
@@ -152,6 +153,11 @@ def read_records(home: Optional[Path] = None) -> List[Dict[str, Any]]:
         if not isinstance(rec, dict) or "email" not in rec or "seq" not in rec:
             raise EntitlementError(
                 f"malformed entitlement record at {path}:{lineno}"
+            )
+        if not isinstance(rec["seq"], int) or isinstance(rec["seq"], bool):
+            raise EntitlementError(
+                f"malformed entitlement record at {path}:{lineno}: "
+                f"seq must be an int, got {rec['seq']!r}"
             )
         records.append(rec)
     records.sort(key=lambda r: r["seq"])
@@ -294,8 +300,12 @@ def issue(
 
     if current is not None and current.get("status") == STATUS_ACTIVE:
         # Renewal: same key, paid_through extends (key-stability law).
-        key = current["key"]
-        base = max(_parse_date(current["paid_through"]), today)
+        key = current.get("key")
+        if not key:
+            raise EntitlementError(
+                f"active record for {email} has no key — refusing renewal"
+            )
+        base = max(_parse_date(current.get("paid_through"), where="renewal base"), today)
         event = EVENT_RENEWED
     else:
         # New issuance (or re-issue after revoke: fresh key, old one stays dead).
@@ -367,7 +377,7 @@ def refund(
     current = latest_for(records, email)
     if current is None or current.get("status") != STATUS_ACTIVE:
         raise EntitlementError(f"no active entitlement to refund for {email}")
-    paid_from = _parse_date(current["paid_from"])
+    paid_from = _parse_date(current.get("paid_from"), where="refund window")
     if (today - paid_from).days > REFUND_DAYS:
         raise RefundWindowExpired(
             f"refund window closed for {email}: paid {current['paid_from']} "
@@ -387,8 +397,15 @@ def refund(
     return _write_record(record, home)
 
 
-def _parse_date(value: str) -> date:
-    return date.fromisoformat(value)
+def _parse_date(value: Any, where: str = "record") -> date:
+    """Parse an ISO date from a record. A bad date is a named
+    EntitlementError — never a raw ValueError from fromisoformat."""
+    try:
+        return date.fromisoformat(str(value))
+    except (ValueError, TypeError) as exc:
+        raise EntitlementError(
+            f"bad date {value!r} in {where}: {exc}"
+        ) from exc
 
 
 # ---------------------------------------------------------------------------
@@ -463,7 +480,17 @@ def check(
             paid_through=current.get("paid_through", ""),
             reason=f"entitlement {current.get('status')}",
         )
-    paid_through = _parse_date(current["paid_through"])
+    try:
+        paid_through = _parse_date(current.get("paid_through"), where="entitlement record")
+    except EntitlementError as exc:
+        # Fail-closed law: a malformed record can never grant access —
+        # inactive with a reason, never a raw KeyError/ValueError.
+        return CheckResult(
+            email=email, key_match=True, active=False, in_grace=False,
+            status=current.get("status", "unknown"),
+            paid_through=str(current.get("paid_through", "")),
+            reason=f"entitlement record malformed: {exc}",
+        )
     if today <= paid_through:
         return CheckResult(
             email=email, key_match=True, active=True, in_grace=False,
@@ -531,15 +558,12 @@ def list_entitlements(
     out: List[Dict[str, Any]] = []
     for email in emails:
         current = latest_for(records, email)
-        assert current is not None
+        if current is None:
+            continue  # cannot happen (emails derived from records); skip, never assert
         if current.get("status") == STATUS_REVOKED:
             state = "revoked"
-        elif current.get("event") == EVENT_REFUNDED or (
-            current.get("status") == STATUS_REVOKED
-        ):
-            state = "revoked"
         else:
-            verdict = check(email, current["key"], home=home, today=today)
+            verdict = check(email, current.get("key", ""), home=home, today=today)
             if verdict.active:
                 state = "active"
             elif verdict.in_grace:
@@ -551,12 +575,12 @@ def list_entitlements(
         out.append(
             {
                 "email": email,
-                "key": current["key"],
+                "key": current.get("key", ""),
                 "state": state,
-                "paid_from": current["paid_from"],
-                "paid_through": current["paid_through"],
+                "paid_from": current.get("paid_from", ""),
+                "paid_through": current.get("paid_through", ""),
                 "payment_ref": current.get("payment_ref", ""),
-                "last_event": current["event"],
+                "last_event": current.get("event", ""),
             }
         )
     return out
@@ -568,9 +592,10 @@ def list_entitlements(
 
 def activation_path(home: Optional[Path] = None) -> Path:
     """Where the customer's own activation lives (their machine, their file)."""
-    base = Path(home) if home is not None else Path(
-        os.environ.get("DEMANDPULSE_HOME", Path.home() / ".demandpulse")
-    )
+    base = Path(home) if home is not None else None
+    if base is None:
+        env = os.environ.get("DEMANDPULSE_HOME") or ""
+        base = Path(env) if env.strip() else Path.home() / ".demandpulse"
     return base / "activation.json"
 
 
@@ -605,6 +630,8 @@ def read_activation(home: Optional[Path] = None) -> Optional[Dict[str, Any]]:
         return None
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
+    except (ValueError, OSError):
+        # ValueError covers JSONDecodeError AND UnicodeDecodeError (bad
+        # bytes) — a corrupt claim file reads as no claim, never a crash.
         return None
     return data if isinstance(data, dict) else None

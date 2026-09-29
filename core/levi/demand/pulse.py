@@ -332,9 +332,14 @@ class DemandPulse:
             for s in self.signals:
                 if s.id == dup_id:
                     s.seen_count += 1
+                    # Transient, not a dataclass field: never persisted.
+                    # Lets ingest receipts count genuinely-new signals
+                    # instead of registrations attempted.
+                    s.is_new_registration = False
                     self._merge_origin(s, sig.origin)
                     return s
         self._merge_origin(sig, sig.origin)
+        sig.is_new_registration = True
         self.signals.append(sig)
         return sig
 

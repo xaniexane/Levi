@@ -735,6 +735,21 @@ class SkillRegistry:
 
         for s in CYBER_SKILLS:
             self.register(s)
+        # LEVI red-team skill pack (adversary emulation, 129 playbooks).
+        # Data-driven: red_skills scans playbooks/red/*.md. Every red skill
+        # names its blue counterpart (tests_blue); invalid files fail loudly
+        # at import. Lazy import keeps registry decoupled.
+        from levi.skill.red_skills import RED_SKILLS
+
+        for s in RED_SKILLS:
+            self.register(s)
+        # LEVI grey-team skill pack (exercise/range infrastructure, 50
+        # playbooks). Data-driven: grey_skills scans playbooks/grey/*.md.
+        # Strict validation: invalid files fail loudly at import.
+        from levi.skill.grey_skills import GREY_SKILLS
+
+        for s in GREY_SKILLS:
+            self.register(s)
         # LEVI operator skill pack (16 productivity playbooks).
         # Data-driven: operator_skills scans playbooks/operator/*.md.
         # Lazy import: operator_skills imports Skill/SkillRisk from this module.
@@ -743,11 +758,18 @@ class SkillRegistry:
         for s in OPERATOR_SKILLS:
             self.register(s)
         # LEVI compressed-engines skill pack (native engine patterns +
-        # executable triage/cadence/weigh skills). Data-driven: scans
+        # executable triage/cadence/weigh/braid skills). Data-driven: scans
         # playbooks/compressed/*.md. Lazy import keeps registry decoupled.
         from levi.skill.compressed_skills import COMPRESSED_SKILLS
 
         for s in COMPRESSED_SKILLS:
+            self.register(s)
+        # LEVI legal skill pack (Ring 1 doctrine playbooks).
+        # Data-driven: legal_skills scans playbooks/legal/*.md.
+        # Lazy import: legal_skills imports Skill/SkillRisk from this module.
+        from levi.skill.legal_skills import LEGAL_SKILLS
+
+        for s in LEGAL_SKILLS:
             self.register(s)
         # LEVI utilities skill pack (60 original utility playbooks).
         # Data-driven: utility_skills scans playbooks/utilities/*.md.
@@ -870,6 +892,22 @@ class SkillRegistry:
         from levi.skill.factory_skills import FACTORY_SKILLS
 
         for s in FACTORY_SKILLS:
+            self.register(s)
+        # LEVI DDD daily-income daemon skill pack (draft-only runners:
+        # ddd.daily-audit, ddd.daily-listing, ddd.daily-leads).
+        # INFO risk, zero permissions.
+        # Lazy import: daemons.skills imports Skill/SkillRisk from this module.
+        from levi.ddd.daemons.skills import DAEMON_SKILLS
+
+        for s in DAEMON_SKILLS:
+            self.register(s)
+        # LEVI skill-library pack (SQLite skill database: real skills +
+        # Omega refinement candidates). Exactly one INFO-risk query skill;
+        # the DB itself lives outside the import path (~/.levi/skills/).
+        # Lazy import: skilldb imports Skill/SkillRisk from this module.
+        from levi.skill.skilldb import SKILLDB_SKILLS
+
+        for s in SKILLDB_SKILLS:
             self.register(s)
         # LEVI user-created skills (~/.levi/skills/<id>/SKILL.md).
         # Data-driven: creator.list_user_skills scans the dir and registers

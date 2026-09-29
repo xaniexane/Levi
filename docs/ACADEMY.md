@@ -170,6 +170,11 @@ models.
 - `levi academy session --day N --block M` — run one session explicitly.
 - `levi academy` (no args) — run the next uncompleted session, or the queued
   remedial if one is pending.
+- `levi academy programming` — Chauncey's 14-lesson programming course as
+  teachable academy lessons: syllabus, `lesson <n|id>`, `next [--after N]`,
+  `search <words>`. (The brain-proficiency twin is
+  `core/levi/brain/train/build_programming_corpus.py` → the training
+  corpus; both layers teach his course, neither replaces the PDF.)
 
 ## Files
 
@@ -183,5 +188,9 @@ models.
 - `core/levi/academy/corpus_ingest.py` — post-mastery corpus ingestion.
 - `core/levi/academy/retrain.py` — graduation retrain launcher.
 - `core/levi/academy/schedule.json` — intended 24/7 cadence spec.
+- `core/levi/academy/lessons/programming/` — Chauncey's 14-lesson
+  programming course as structured academy lessons (`lessons.json` +
+  `manifest.json`, built deterministically from the course source by
+  `build_programming_lessons.py`; served by `levi academy programming`).
 - `~/.levi/academy/` — progress, streaks, concepts registry, lesson artifacts
   (`LEVI_ACADEMY_DIR` overrides; tests use tmp dirs).

@@ -2,6 +2,7 @@
 
 python3 -m levi.quetta_pan.cli --path .            # dry-run (default)
 python3 -m levi.quetta_pan.cli --path . --apply    # per-file approval
+python3 -m levi.quetta_pan.cli --path . --pi       # agent-pi fan-out/fan-in pass
 python3 -m levi.quetta_pan.cli --compost           # replay failure compost
 python3 -m levi.quetta_pan.cli --genome            # show learned genome
 """
@@ -13,6 +14,7 @@ import json
 import sys
 from pathlib import Path
 
+from .agent_pi import run_pi
 from .brain import QuettaPanDaVinci
 from .engine import QuettaPanEngine
 
@@ -30,6 +32,13 @@ def cmd_scan(args) -> int:
     eng = _engine_for(args)
     stats = eng.run(dry_run=not args.apply)
     print(f"\nQuetta-Pan cycle done: {stats}")
+    return 0
+
+
+def cmd_pi(args) -> int:
+    eng = _engine_for(args)
+    stats = run_pi(eng, dry_run=not args.apply)
+    print(f"\nagent-pi cycle done: {stats}")
     return 0
 
 
@@ -67,6 +76,12 @@ def main(argv=None) -> int:
         help="Prompt per file and apply (default: dry-run)",
     )
     parser.add_argument(
+        "--pi",
+        action="store_true",
+        help="Run the agent-pi fan-out/fan-in pass per file "
+        "instead of the standard suggest/apply cycle",
+    )
+    parser.add_argument(
         "--brain",
         action="store_true",
         help="Attach the QuettaPanDaVinci brain detectors",
@@ -97,6 +112,8 @@ def main(argv=None) -> int:
         return cmd_compost(args)
     if args.genome:
         return cmd_genome(args)
+    if args.pi:
+        return cmd_pi(args)
     return cmd_scan(args)
 
 

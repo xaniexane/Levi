@@ -1,0 +1,53 @@
+---
+skill_id: cyber_b3_business_email_compromise_aws_account_colocation_facility_developing
+name: Business Email Compromise Defense for AWS Accounts in Colocation Facilities (Developing Maturity)
+description: "Business Email Compromise defense playbook for AWS Accounts in Colocation Facilities at Developing maturity."
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [email, fraud, cloud, aws, on-prem, colocation, maturity-developing]
+version: 1.0.0
+---
+# Business Email Compromise Defense for AWS Accounts in Colocation Facilities (Developing Maturity)
+
+## Purpose
+
+Attackers operate inside a compromised mailbox (or a lookalike domain) to redirect payments, harvest invoices, or pivot to executives. Dwell time is often weeks; the fraud, not the malware, is the payload. Applies to AWS Accounts in Colocation Facilities at Developing maturity.
+
+## When to use
+
+- Mailbox audit logs show inbox rules created to move or delete messages containing 'invoice', 'payment', 'wire', or executive names — the classic BEC rule footprint.
+- Outbound messages to finance vendors from a slightly altered domain, or a legitimate mailbox suddenly sending payment-change requests with urgent tone.
+- Logons to the mailbox from foreign IPs or anonymizing VPNs followed by long read-only sessions (the attacker learning the payment workflow before striking).
+- Lens: Best telemetry: CloudTrail (org trail, all regions) + GuardDuty + VPC flow logs + Config. Customer-owned network taps and logging (the colo provider's logs are out of scope — verify contractually).
+
+## Prerequisites
+
+- Written authorization from the asset owner and incident commander before active containment.
+- Access to Badge/physical access logs from the facility correlated with remote-hand ticket times.
+
+## Procedure
+
+1. **Authorize and scope.** Open a ticket, confirm written authorization, and preserve evidence before changing anything.
+2. **Detect and collect.** Hunt the signals above in CloudTrail event history (console logons, IAM changes, AssumeRole, security-group changes) and GuardDuty findings, IAM Access Analyzer results, and S3 server-access logs for data stores; run `aws cloudtrail lookup-events --lookup-attributes AttributeKey=EventName,AttributeValue=ConsoleLogin --max-items 20` then `aws iam generate-credential-report && aws iam get-credential-report --query Content --output text | base64 -d | head -5`.
+3. **Analyze.** Export all inbox/transport rules for the affected mailbox and diff against a known-good baseline; BEC rules often hide with names like ';' or whitespace. Then: Trace every payment instruction the mailbox sent in the dwell window: which were acted on, which bank details changed, and whether funds are recallable.
+4. **Contain and harden.** Require out-of-band (voice/video) verification for any payment detail change, no exceptions, and alert on new inbox rules fleet-wide. Asset layer: MFA on root + all IAM users, SCPs denying logging disablement and unapproved regions, no long-lived keys. Environment layer: Locked cabinets, private cages, and escort policies for remote hands.
+5. **Document and improve.** Assign RACI for each procedure step (who detects, who contains, who communicates) and rehearse it quarterly. Record the timeline, indicators, actions taken, and lessons learned.
+
+## Expected outputs
+
+- Scoped timeline; affected assets, accounts, and data with containment status each.
+- Hardening verified effective; detection improvements filed.
+
+## Pitfalls
+
+- Focusing only on the compromised mailbox while the attacker already harvested the vendor's thread and will re-target from another account.
+- Treating a lookalike-domain BEC as an IT problem alone — finance process change is the actual fix.
+
+## References
+
+- MITRE ATT&CK: T1566 (Initial Access: Phishing) leading to collection/fraud
+- Vendor logging and hardening baselines for AWS Accounts; Locked cabinets, private cages, and escort policies for remote hands.
+
+---
+*Original work authored for LEVI. Defensive blue-team playbook; all content written from scratch for LEVI.*

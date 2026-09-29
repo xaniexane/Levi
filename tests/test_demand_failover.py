@@ -375,6 +375,8 @@ def test_check_laws_ok(tmp_path):
 
 def test_engine_deliver_failover_all_unconfigured_held(tmp_path, monkeypatch):
     _clear_env(monkeypatch)
+    # neuter rung 2 so no real sheet append happens in tests
+    monkeypatch.setattr(fo, "_sheets_cli_append", lambda sid, row: False)
     from levi.demand.alerts import AlertEngine, AlertEvent
 
     eng = AlertEngine(path=tmp_path / "alerts.json")

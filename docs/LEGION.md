@@ -57,6 +57,40 @@ The seam is **paper-only** (`legion/sale.py`):
 the three minimal hooks in `core/levi/cli/main.py` (sibling-owned;
 wired once the sibling merge lands).
 
+## What the crew loop adds (2026-09-26)
+
+- **Every crew member can now run the agentic tool loop.**
+  `legion/crew_loop.py::run_crew_turn(team, member_id, task)` resolves the
+  member (loud `LegionError` on unknown ids — never a guess), builds a
+  role-context system prompt carrying the member's responsibility and its
+  handoff rules verbatim, resolves tools through the ONE shared skill
+  pool (`legion/skill_pool/pool.py::get_pool()` — the same object Nanobit
+  uses), and runs the turn through `levi.agent.loop.run_subtask`. Roster,
+  operator resolution, and handoff rules are untouched; the loop only
+  executes through them.
+- **Nanobit got the same machinery.**
+  `revival/omega/nanobit_loop.py::run_turn(substrate, prompt)` reads the
+  room (the card's four faces, keyword-deterministic), enforces the LOW
+  ceiling *before* the loop runs — above-ceiling work is refused loudly
+  with an escalation hint, receipt recorded, the loop never executed —
+  then runs the turn with real tool access through the shared pool, and
+  composts the turn's learnings into the shared substrate so all faces
+  keep what any face learned. The final word honors the identity card:
+  tiny, bright, curious, plain words.
+- **Honest limits, still true:**
+  - Pool skills have no wired handlers in this build (the pool's final
+    shape still awaits Chauncey's word). Their tools say so honestly —
+    `ok=False`, backend flag labeled, nothing executed, nothing faked.
+    The one exception is `legion_skill_finder`, pure read-only lookup,
+    which genuinely runs.
+  - Nanobit's ceiling gate is a deliberately conservative keyword
+    heuristic: it errs toward refusing a harmless turn over ever acting
+    above LOW. The loop's own confirmation gates remain the second line.
+  - Crew turns never silently reroute: a turn that wants a handoff
+    returns its transcript as-is; routing stays the router's job
+    (`legion/product.py`). The crew still never moves money and never
+    wears another brand.
+
 ## What Legion is NOT (honest limits)
 
 - Not the full LEVI organism. A Legion install is one white-labeled

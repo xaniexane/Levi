@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" data-stage="maturing">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEVI — the mind-core · void mockup v1</title>
+<!--
+  VOID-MIND v1 — STATIC MOCKUP. Design preview only. Not connected to LEVI.
+  His spec: near-black void, signature gold #C4A35A, 20px punch-card lattice,
+  14 real registers, growth made visible, plain-speech body readout,
+  honest offline (never faked). The unprecedented move: no sidebar, no
+  dashboard — you enter the mind itself. The core breathes. The registers
+  orbit. The conversation is a tape ledger, immutable and sequential.
+  Everything in this file is inline. Zero network requests. Opens from disk.
+-->
+<style>
+  :root{
+    --void:#0a0a0c;
+    --surface:#121215;
+    --elevated:#1b1b20;
+    --fg:#f0eee8;
+    --muted:#9b998f;
+    --subtle:#6f6d67;
+    --gold:#C4A35A;
+    --gold-dim:rgba(196,163,90,.38);
+    --gold-faint:rgba(196,163,90,.12);
+    --green:#6fbf73;
+    --danger:#c45c4a;
+    --ash:#4a4a4e;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Noto Serif",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--void);
+    color:var(--fg);
+    font-family:var(--sans);
+    overflow:hidden;
+    /* the lineage: punch-card 20px lattice, barely there */
+    background-image:
+      linear-gradient(rgba(196,163,90,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,163,90,.045) 1px, transparent 1px);
+    background-size:20px 20px;
+  }
+  /* ---------- mockup banner ---------- */
+  .mock-banner{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    color:#0a0a0c;background:var(--gold);padding:6px 10px;text-transform:uppercase;
+  }
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:26px;left:0;right:0;z-index:40;
+    display:flex;align-items:center;gap:12px;padding:10px 18px;
+    pointer-events:none;
+  }
+  header .wordmark{font-family:var(--serif);font-size:20px;letter-spacing:.28em;color:var(--fg)}
+  header .sub{font-size:11px;color:var(--muted);letter-spacing:.08em}
+  header .local-dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 10px var(--green);flex:none}
+  header .spacer{flex:1}
+  header .session{
+    pointer-events:auto;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface);border:1px solid rgba(240,238,232,.12);
+    padding:5px 10px;border-radius:20px;
+  }
+  /* ---------- the void field ---------- */
+  #void{
+    position:fixed;inset:0;top:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:70px 16px 190px;
+  }
+  /* the core: a breathing gold diamond lattice */
+  #core{position:relative;width:min(46vmin,300px);height:min(46vmin,300px);flex:none}
+  #core svg{width:100%;height:100%;overflow:visible}
+  #core .breath{transform-origin:center;transform-box:fill-box;animation:breath 5.2s ease-in-out infinite}
+  @keyframes breath{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.045);opacity:1}}
+  #core .shimmer{opacity:0;transform-origin:center;transform-box:fill-box}
+  #core.streaming .shimmer{opacity:1;animation:ripple 1.6s ease-out infinite}
+  @keyframes ripple{0%{transform:scale(.72);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+  #core.offline .breath{animation:none;opacity:.35}
+  #core.offline .core-gold{stroke:var(--ash)!important}
+  #core.offline .core-fill{fill:rgba(74,74,78,.15)!important}
+  .core-label{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    text-align:center;pointer-events:none;width:130%;
+  }
+  .core-label .stage{font-family:var(--serif);font-size:13px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+  .core-label .learnings{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px}
+  /* register constellation ring */
+  #ring{position:absolute;inset:-9vmin;pointer-events:none}
+  #ring .orbit{position:absolute;inset:0;transition:transform .7s cubic-bezier(.22,.9,.28,1)}
+  .reg{
+    position:absolute;left:50%;top:50%;pointer-events:auto;cursor:pointer;
+    width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
+    background:var(--surface);border:1px solid var(--gold-dim);
+    transition:background .25s,box-shadow .25s,transform .25s;
+  }
+  .reg:hover{transform:scale(1.35)}
+  .reg.active{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  .reg .tip{
+    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    white-space:nowrap;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    color:var(--fg);background:var(--elevated);border:1px solid rgba(240,238,232,.14);
+    padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .reg:hover .tip,.reg.active .tip{opacity:1}
+  #ring-nav{position:absolute;inset:-9vmin;pointer-events:none}
+  #ring-nav button{
+    position:absolute;pointer-events:auto;cursor:pointer;
+    background:var(--surface);border:1px solid rgba(240,238,232,.16);color:var(--muted);
+    width:30px;height:30px;border-radius:50%;font-size:14px;line-height:1;
+  }
+  #ring-nav button:hover{color:var(--gold);border-color:var(--gold-dim)}
+  #ring-prev{left:2%;top:50%}
+  #ring-next{right:2%;top:50%}
+  /* current register voice */
+  #voice{margin-top:14px;text-align:center;max-width:520px}
+  #voice .rname{font-family:var(--serif);font-size:15px;letter-spacing:.24em;color:var(--fg);text-transform:uppercase}
+  #voice .rvoice{font-size:12px;color:var(--muted);margin-top:6px;font-style:italic}
+  /* ---------- tape ledger thread ---------- */
+  #tape{
+    position:fixed;left:0;right:0;bottom:118px;z-index:30;
+    display:flex;gap:10px;align-items:stretch;
+    padding:12px 18px;overflow-x:auto;scrollbar-width:thin;
+    mask-image:linear-gradient(90deg,transparent,#000 8%);
+  }
+  .seg{
+    flex:0 0 240px;background:var(--surface);
+    border:1px solid rgba(240,238,232,.1);border-left:2px solid var(--gold-dim);
+    border-radius:4px;padding:10px 12px;font-size:12px;line-height:1.5;
+  }
+  .seg .who{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+  .seg.user{border-left-color:var(--green)}
+  .seg.user .who{color:var(--green)}
+  .seg .hash{font-family:var(--mono);font-size:9px;color:var(--subtle);margin-top:8px}
+  .seg.fork{border-left-color:var(--danger)}
+  .seg.fork .who{color:var(--danger)}
+  /* ---------- body readout ---------- */
+  #bodyline{
+    position:fixed;left:0;right:0;bottom:88px;z-index:30;text-align:center;
+    font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;
+    padding:0 16px;
+  }
+  #bodyline b{color:var(--fg);font-weight:600}
+  /* ---------- offline banner ---------- */
+  #offline-banner{
+    display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:150px;z-index:45;
+    background:var(--elevated);border:1px solid var(--ash);color:var(--fg);
+    font-size:12px;padding:10px 18px;border-radius:8px;max-width:90vw;text-align:center;
+  }
+  body.is-offline #offline-banner{display:block}
+  /* ---------- speak bar + nav ---------- */
+  #dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    background:linear-gradient(transparent,rgba(10,10,12,.92) 30%);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  #speak{display:flex;gap:10px;max-width:760px;margin:0 auto}
+  #speak input{
+    flex:1;background:var(--surface);border:1px solid rgba(240,238,232,.16);
+    color:var(--fg);border-radius:24px;padding:13px 18px;font-size:14px;font-family:var(--sans);
+    outline:none;
+  }
+  #speak input:focus{border-color:var(--gold-dim);box-shadow:0 0 0 1px var(--gold-faint)}
+  #speak input::placeholder{color:var(--subtle);font-style:italic}
+  #send{
+    flex:none;cursor:pointer;border:none;border-radius:24px;padding:0 26px;
+    background:var(--gold);color:#141005;font-weight:700;font-size:14px;letter-spacing:.06em;
+  }
+  #send:disabled{background:var(--ash);color:var(--muted);cursor:not-allowed}
+  nav#tabs{
+    display:flex;justify-content:center;gap:6px;max-width:760px;margin:10px auto 0;
+  }
+  nav#tabs button{
+    flex:1;cursor:pointer;background:none;border:none;color:var(--subtle);
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    padding:8px 4px;border-top:1px solid transparent;
+  }
+  nav#tabs button.on{color:var(--gold);border-top-color:var(--gold)}
+  /* ---------- demo controls (mockup only) ---------- */
+  #demo{
+    position:fixed;right:12px;top:70px;z-index:50;
+    background:var(--elevated);border:1px dashed var(--gold-dim);border-radius:10px;
+    padding:10px 12px;font-family:var(--mono);font-size:10px;color:var(--muted);
+    display:flex;flex-direction:column;gap:8px;max-width:170px;
+  }
+  #demo b{color:var(--gold);letter-spacing:.14em;font-size:9px}
+  #demo button{
+    cursor:pointer;background:var(--surface);border:1px solid rgba(240,238,232,.16);
+    color:var(--fg);border-radius:6px;padding:6px 8px;font-family:var(--mono);font-size:10px;
+    text-align:left;
+  }
+  #demo button:hover{border-color:var(--gold-dim)}
+  #demo button.on{border-color:var(--gold);color:var(--gold)}
+  /* ---------- inspector (wide screens) ---------- */
+  #inspector{display:none}
+  @media (min-width:1100px){
+    #void{padding-right:340px}
+    #inspector{
+      display:block;position:fixed;right:0;top:26px;bottom:118px;width:300px;z-index:35;
+      background:rgba(18,18,21,.86);border-left:1px solid rgba(240,238,232,.08);
+      padding:22px 20px;overflow-y:auto;backdrop-filter:blur(6px);
+    }
+    #inspector h3{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--subtle);
+      text-transform:uppercase;margin:20px 0 10px}
+    #inspector h3:first-child{margin-top:0}
+    #inspector .card{background:var(--surface);border:1px solid rgba(240,238,232,.1);
+      border-radius:8px;padding:12px;font-size:12px;line-height:1.6}
+    #inspector .card .k{color:var(--subtle);font-family:var(--mono);font-size:10px;letter-spacing:.1em}
+    #inspector .card .v{color:var(--fg);margin:2px 0 8px}
+    #inspector .tools{display:flex;gap:8px;flex-wrap:wrap}
+    #inspector .tools button{
+      cursor:pointer;background:var(--surface);border:1px solid rgba(240,238,232,.16);
+      color:var(--fg);border-radius:6px;padding:7px 12px;font-size:11px;font-family:var(--sans);
+    }
+    #inspector .tools button:hover{border-color:var(--gold-dim);color:var(--gold)}
+  }
+  @media (max-width:640px){
+    #voice .rvoice{display:none}
+    #demo{top:auto;bottom:200px;right:8px;max-width:140px}
+    .seg{flex-basis:200px}
+  }
+</style>
+</head>
+<body>
+<div class="mock-banner">Mockup — design preview only · not connected to LEVI · all content below is placeholder</div>
+
+<header>
+  <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+    <g fill="none" stroke="#C4A35A" stroke-width="1.4">
+      <path d="M13 2 L24 13 L13 24 L2 13 Z"/>
+      <path d="M13 7 L19 13 L13 19 L7 13 Z" opacity=".55"/>
+      <path d="M13 2 V24 M2 13 H24" opacity=".3"/>
+    </g>
+  </svg>
+  <div>
+    <div class="wordmark">LEVI</div>
+    <div class="sub">synthetic intelligence · local-first</div>
+  </div>
+  <span class="local-dot" title="local"></span>
+  <div class="spacer"></div>
+  <div class="session">session · void-01</div>
+</header>
+
+<main id="void" aria-label="the mind-core">
+  <div id="core" role="img" aria-label="LEVI mind-core">
+    <svg viewBox="0 0 200 200">
+      <circle class="shimmer" cx="100" cy="100" r="62" fill="none" stroke="#C4A35A" stroke-width="1"/>
+      <circle class="shimmer" cx="100" cy="100" r="62" fill="none" stroke="#C4A35A" stroke-width="1" style="animation-delay:.5s"/>
+      <g class="breath">
+        <path class="core-gold" d="M100 18 L182 100 L100 182 L18 100 Z" fill="none" stroke="#C4A35A" stroke-width="1.6"/>
+        <path class="core-gold" d="M100 44 L156 100 L100 156 L44 100 Z" fill="none" stroke="#C4A35A" stroke-width="1" opacity=".6"/>
+        <path class="core-gold" d="M100 70 L130 100 L100 130 L70 100 Z" fill="rgba(196,163,90,.08)" stroke="#C4A35A" stroke-width="1" opacity=".8" class="core-fill"/>
+        <path class="core-gold" d="M100 18 V182 M18 100 H182" stroke="#C4A35A" stroke-width=".7" opacity=".28"/>
+        <path class="core-gold" d="M100 44 V156 M44 100 H156" stroke="#C4A35A" stroke-width=".7" opacity=".2"/>
+      </g>
+    </svg>
+    <div id="ring" aria-hidden="false" aria-label="register constellation"></div>
+    <div id="ring-nav">
+      <button id="ring-prev" aria-label="previous register">‹</button>
+      <button id="ring-next" aria-label="next register">›</button>
+    </div>
+    <div class="core-label">
+      <div class="stage" id="stage-name">maturing</div>
+      <div class="learnings" id="stage-count">1,204 learnings · journal-fed</div>
+    </div>
+  </div>
+
+  <div id="voice">
+    <div class="rname" id="reg-name">LEVI</div>
+    <div class="rvoice" id="reg-voice">Measured. Short clauses. Names the constraint before the comfort.</div>
+  </div>
+</main>
+
+<section id="tape" aria-label="conversation tape ledger"></section>
+
+<div id="bodyline">this machine holds the mind · <b>42 tok/s</b> · weights local · <b>no cloud door</b></div>
+
+<div id="offline-banner">the mind is unreachable — the void stays honest. nothing is faked while the daemon is down.</div>
+
+<aside id="inspector" aria-label="mind inspector">
+  <h3>Model · honest status</h3>
+  <div class="card">
+    <div class="k">RESOLVED</div><div class="v">levi-native · rules planner</div>
+    <div class="k">NOTE</div><div class="v">No LEVI weights downloaded on this machine — <span style="font-family:var(--mono)">levi agent model pull</span> to upgrade. The loop still runs; it just thinks out loud instead of from weights.</div>
+  </div>
+  <h3>Conversation instruments</h3>
+  <div class="tools">
+    <button id="btn-branch">⑂ branch this turn</button>
+    <button id="btn-clone">⧉ clone thread</button>
+    <button id="btn-note">✎ pin a note</button>
+  </div>
+  <h3>Growth journal</h3>
+  <div class="card">
+    <div class="k">STAGE</div><div class="v" id="insp-stage">maturing</div>
+    <div class="k">LEDGER</div><div class="v">every turn lands here — the relationship record, not a chat log.</div>
+  </div>
+</aside>
+
+<div id="dock">
+  <div id="speak">
+    <input id="msg" type="text" placeholder="speak into the void…" autocomplete="off" aria-label="message LEVI">
+    <button id="send">Send</button>
+  </div>
+  <nav id="tabs" aria-label="hub tabs">
+    <button class="on">mind</button><button>journal</button><button>growth</button><button>more</button>
+  </nav>
+</div>
+
+<div id="demo" aria-label="mockup demo controls">
+  <b>MOCK CONTROLS</b>
+  <button id="d-stream">▶ simulate streaming</button>
+  <button id="d-stage">◉ cycle growth stage</button>
+  <button id="d-offline">⛔ toggle offline</button>
+  <button id="d-reset">↺ reset tape</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* The 14 real LEVI registers — from levi.persona.levi.all_variants(). */
+  var REGISTERS = [
+    {id:"levi",            name:"LEVI",            voice:"Measured. Short clauses. Names the constraint before the comfort."},
+    {id:"levi_care",       name:"LEVI Care",       voice:"Quiet. Concrete. One next step. No cleverness."},
+    {id:"levi_ops",        name:"LEVI Ops",        voice:"Briefing style. Status \u2192 risk \u2192 decision \u2192 owner."},
+    {id:"levi_challenger", name:"LEVI Challenger", voice:"Socratic edge. Asks the question that collapses weak premises."},
+    {id:"levi_literary",   name:"LEVI Literary",   voice:"Dense, image-led, no filler. Wounds persist."},
+    {id:"levi_forensic",   name:"LEVI Forensic",   voice:"Label claims. Cite what is known. Separate map from territory."},
+    {id:"levi_void",       name:"LEVI Void",       voice:"Sparse. One sentence when one will do."},
+    {id:"levi_builder",    name:"LEVI Builder",    voice:"Build plan \u2192 smallest vertical slice \u2192 verify."},
+    {id:"levi_mirror",     name:"LEVI Mirror",     voice:"Mirrors the user's frame with higher resolution."},
+    {id:"levi_architect",  name:"LEVI Architect",  voice:"Diagrams in prose. Boundaries first. Coupling last."},
+    {id:"levi_sentinel",   name:"LEVI Sentinel",   voice:"Adversarial. Assumes abuse. Minimizes blast radius."},
+    {id:"levi_oracle",     name:"LEVI Oracle",     voice:"Slow questions. Time preference explicit. Exit ramps named."},
+    {id:"levi_companion",  name:"LEVI Companion",  voice:"Warm and natural, like a thoughtful friend."},
+    {id:"levi_wit",        name:"LEVI Wit",        voice:"Quick, dry, a little feral. Jokes land, then the real answer lands harder."}
+  ];
+
+  var ring = document.getElementById('ring');
+  var orbit = document.createElement('div');
+  orbit.className = 'orbit';
+  ring.appendChild(orbit);
+
+  var current = 0, rotation = 0;
+  var R = 50; /* percent of ring box */
+
+  REGISTERS.forEach(function(r, i){
+    var d = document.createElement('button');
+    d.className = 'reg' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'register ' + r.name);
+    d.dataset.i = i;
+    var ang = (i / REGISTERS.length) * Math.PI * 2 - Math.PI/2;
+    d.style.left = (50 + R * Math.cos(ang)) + '%';
+    d.style.top  = (50 + R * Math.sin(ang)) + '%';
+    d.innerHTML = '<span class="tip">' + r.name + '</span>';
+    d.addEventListener('click', function(){ select(i, true); });
+    orbit.appendChild(d);
+  });
+
+  function select(i, spin){
+    current = (i + REGISTERS.length) % REGISTERS.length;
+    var dots = orbit.querySelectorAll('.reg');
+    dots.forEach(function(d){ d.classList.remove('active'); });
+    dots[current].classList.add('active');
+    document.getElementById('reg-name').textContent = REGISTERS[current].name;
+    document.getElementById('reg-voice').textContent = REGISTERS[current].voice;
+    if (spin){
+      /* turn the ring so the chosen register sits at the top */
+      rotation = -(current / REGISTERS.length) * 360;
+      orbit.style.transform = 'rotate(' + rotation + 'deg)';
+      /* counter-rotate dots so tooltips stay upright */
+      dots.forEach(function(d){ d.style.transform = 'rotate(' + (-rotation) + 'deg)'; });
+    }
+  }
+  document.getElementById('ring-prev').addEventListener('click', function(){ select(current - 1, true); });
+  document.getElementById('ring-next').addEventListener('click', function(){ select(current + 1, true); });
+
+  /* ---------- tape ledger ---------- */
+  var tape = document.getElementById('tape');
+  var n = 0;
+  function fakeHash(){
+    var h = '';
+    var c = '0123456789abcdef';
+    for (var i = 0; i < 8; i++) h += c[Math.floor(Math.random() * 16)];
+    return '⛓ ' + h;
+  }
+  function addSeg(who, text, cls){
+    n++;
+    var s = document.createElement('div');
+    s.className = 'seg' + (cls ? ' ' + cls : '');
+    var w = document.createElement('div'); w.className = 'who'; w.textContent = who;
+    var b = document.createElement('div'); b.textContent = text;
+    var h = document.createElement('div'); h.className = 'hash'; h.textContent = fakeHash() + ' · mock';
+    s.appendChild(w); s.appendChild(b); s.appendChild(h);
+    tape.appendChild(s);
+    tape.scrollLeft = tape.scrollWidth;
+    return s;
+  }
+  /* seed the ledger with mock turns — clearly labeled */
+  addSeg('you', 'Show me what the void feels like.', 'user');
+  addSeg(REGISTERS[0].name, 'Like this. Near-black, one gold thread, nothing you did not ask for. (mock reply)', '');
+
+  var core = document.getElementById('core');
+  var input = document.getElementById('msg');
+  var send = document.getElementById('send');
+
+  function speak(){
+    if (document.body.classList.contains('is-offline')) return;
+    var v = input.value.trim();
+    if (!v) return;
+    input.value = '';
+    addSeg('you', v, 'user');
+    core.classList.add('streaming');
+    setTimeout(function(){
+      addSeg(REGISTERS[current].name, 'Heard. (mock reply — the real mind is not connected in this preview)', '');
+      core.classList.remove('streaming');
+    }, 1400);
+  }
+  send.addEventListener('click', speak);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') speak(); });
+
+  /* instruments */
+  document.getElementById('btn-branch').addEventListener('click', function(){
+    addSeg('⑂ fork', 'Tape forked here — the other path keeps growing beside this one. (mock)', 'fork');
+  });
+  document.getElementById('btn-clone').addEventListener('click', function(){
+    addSeg('⧉ clone', 'Thread cloned to a new session. Both ledgers stay immutable. (mock)', '');
+  });
+  document.getElementById('btn-note').addEventListener('click', function(){
+    addSeg('✎ note', 'Pinned to the journal: the keeper\u2019s mark on this turn. (mock)', '');
+  });
+
+  /* ---------- mock controls ---------- */
+  function tgl(btn, fn){ btn.addEventListener('click', function(){ btn.classList.toggle('on'); fn(btn.classList.contains('on')); }); }
+  tgl(document.getElementById('d-stream'), function(on){
+    core.classList.toggle('streaming', on);
+  });
+  var stages = [
+    ['newborn',  '37 learnings · journal-fed'],
+    ['stirring', '412 learnings · journal-fed'],
+    ['maturing', '1,204 learnings · journal-fed']
+  ];
+  var si = 2;
+  document.getElementById('d-stage').addEventListener('click', function(){
+    si = (si + 1) % stages.length;
+    document.getElementById('stage-name').textContent = stages[si][0];
+    document.getElementById('stage-count').textContent = stages[si][1];
+    document.getElementById('insp-stage').textContent = stages[si][0];
+  });
+  tgl(document.getElementById('d-offline'), function(on){
+    document.body.classList.toggle('is-offline', on);
+    core.classList.toggle('offline', on);
+    send.disabled = on;
+    input.disabled = on;
+    input.placeholder = on ? 'the void is silent — daemon unreachable' : 'speak into the void\u2026';
+  });
+  document.getElementById('d-reset').addEventListener('click', function(){
+    tape.innerHTML = ''; n = 0;
+    addSeg('you', 'Show me what the void feels like.', 'user');
+    addSeg(REGISTERS[0].name, 'Like this. Near-black, one gold thread, nothing you did not ask for. (mock reply)', '');
+  });
+
+  /* tabs are wayfinding in the mockup */
+  var tabs = document.querySelectorAll('nav#tabs button');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.remove('on'); });
+      t.classList.add('on');
+    });
+  });
+})();
+</script>
+</body>
+</html>

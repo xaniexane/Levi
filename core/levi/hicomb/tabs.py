@@ -43,7 +43,11 @@ class Tab:
 
 
 def file_tree(root: str, max_depth: int = TREE_MAX_DEPTH) -> dict:
-    """Nested file tree. Deterministic, depth-capped, skips VCS dirs."""
+    """Nested file tree. Deterministic, depth-capped, skips VCS dirs.
+
+    Symlinked directories are never descended into (a symlink cycle would
+    recurse forever); they appear as leaf dir nodes with "symlink": True.
+    """
     skip = {".git", ".hg", ".svn", "__pycache__", ".hicomb", "node_modules"}
     count = 0
 
@@ -51,6 +55,15 @@ def file_tree(root: str, max_depth: int = TREE_MAX_DEPTH) -> dict:
         nonlocal count
         name = os.path.basename(path) or path
         if os.path.isdir(path):
+            if depth > 0 and os.path.islink(path):
+                count += 1
+                return {
+                    "name": name,
+                    "path": path,
+                    "type": "dir",
+                    "children": [],
+                    "symlink": True,
+                }
             if depth > max_depth:
                 return {
                     "name": name,
@@ -195,8 +208,14 @@ class Session:
     @classmethod
     def load_state(cls, path: str) -> "Session":
         """Restore a session. Missing files are skipped, never fatal."""
-        with open(path, encoding="utf-8") as fh:
-            state = json.load(fh)
+        try:
+            with open(path, encoding="utf-8") as fh:
+                state = json.load(fh)
+        except FileNotFoundError as exc:
+            raise SessionError(f"no session state at {path}") from exc
+        except (OSError, ValueError) as exc:
+            # ValueError covers corrupt JSON (JSONDecodeError)
+            raise SessionError(f"cannot read session state {path}: {exc}") from exc
         if state.get("version") != SESSION_VERSION:
             raise SessionError(f"unsupported session version: {state.get('version')}")
         sess = cls()
@@ -218,8 +237,9 @@ class Session:
 
     def recent_files(self, limit: int = 20) -> list[str]:
         """Most-recently-opened files, active tab last (MRU order)."""
+        limit = max(0, int(limit))
         paths = [t.path for t in self.tabs if t.path]
         if self.active is not None and self.active.path in paths:
             paths.remove(self.active.path)
             paths.append(self.active.path)
-        return paths[-limit:]
+        return paths[-limit:] if limit else []

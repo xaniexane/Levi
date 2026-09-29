@@ -187,6 +187,9 @@ def project_replace(
       untouched for the paired verifier twin / the builder to review.
     - SKIPPED: binary, oversize, or undecodable.
     - CLEAN: searched, no hits.
+
+    Rewrites are atomic (temp file + os.replace): a crash mid-replace
+    never leaves a half-written file behind.
     """
     rx = _compile(pattern, regex, case_sensitive, whole_word)
     verdicts: dict[str, FileVerdict] = {}
@@ -204,8 +207,10 @@ def project_replace(
             continue
         new_text = rx.sub(lambda m: _expand_replacement(replacement, m, regex), text)
         try:
-            with open(path, "w", encoding="utf-8", newline="") as fh:
+            tmp = path + ".hicomb-tmp"
+            with open(tmp, "w", encoding="utf-8", newline="") as fh:
                 fh.write(new_text)
+            os.replace(tmp, path)
             verdicts[path] = FileVerdict.REPLACED
         except OSError:
             verdicts[path] = FileVerdict.SKIPPED

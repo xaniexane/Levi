@@ -17,6 +17,7 @@ Entry fields:
   status    "encounter" | "studied" | "declared"
   notes     anything else
 """
+
 from __future__ import annotations
 
 import datetime
@@ -31,16 +32,30 @@ REQUIRED = ("title", "where", "pattern", "language")
 STATUSES = ("encounter", "studied", "declared")
 
 
-def _read_all() -> List[Dict[str, Any]]:
+def _read_lines() -> List[str]:
+    """Raw non-blank lines of the journal file, corrupt lines included."""
     if not os.path.exists(ENTRIES_PATH):
         return []
-    entries = []
     with open(ENTRIES_PATH, encoding="utf-8") as fh:
-        for line in fh:
-            line = line.strip()
-            if line:
-                entries.append(json.loads(line))
-    return entries
+        return [line.rstrip("\n") for line in fh if line.strip()]
+
+
+def _parse_line(line: str) -> Optional[Dict[str, Any]]:
+    """Parse one journal line; None when it is corrupt or not an object.
+
+    One bad line never aborts the read of an otherwise healthy journal —
+    it is skipped by readers and preserved byte-identical by writers.
+    """
+    try:
+        record = json.loads(line)
+    except json.JSONDecodeError:
+        return None
+    return record if isinstance(record, dict) else None
+
+
+def _read_all() -> List[Dict[str, Any]]:
+    """All parseable entries. Corrupt lines are skipped, never fatal."""
+    return [e for e in (_parse_line(line) for line in _read_lines()) if e is not None]
 
 
 def _next_id(entries: List[Dict[str, Any]]) -> str:
@@ -67,8 +82,12 @@ def log(
     date: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Log one encounter. Returns the stored entry."""
-    for field, value in (("title", title), ("where", where),
-                         ("pattern", pattern), ("language", language)):
+    for field, value in (
+        ("title", title),
+        ("where", where),
+        ("pattern", pattern),
+        ("language", language),
+    ):
         if not (value or "").strip():
             raise ValueError("field %r is required" % field)
     if status not in STATUSES:
@@ -91,20 +110,21 @@ def log(
     return entry
 
 
-def list_entries(*, status: Optional[str] = None,
-                 class_code: Optional[str] = None) -> List[Dict[str, Any]]:
+def list_entries(
+    *, status: Optional[str] = None, class_code: Optional[str] = None
+) -> List[Dict[str, Any]]:
     """List entries, optionally filtered by status or class code."""
     entries = _read_all()
     if status is not None:
-        entries = [e for e in entries if e["status"] == status]
+        entries = [e for e in entries if e.get("status") == status]
     if class_code is not None:
-        entries = [e for e in entries if e["class"] == class_code]
+        entries = [e for e in entries if e.get("class") == class_code]
     return entries
 
 
 def unknowns() -> List[Dict[str, Any]]:
     """Encounters that fit no known class yet — the ? factor."""
-    return [e for e in _read_all() if e["class"] == "?"]
+    return [e for e in _read_all() if e.get("class") == "?"]
 
 
 def mark_studied(entry_id: str) -> Dict[str, Any]:
@@ -113,15 +133,23 @@ def mark_studied(entry_id: str) -> Dict[str, Any]:
 
 
 def _set_status(entry_id: str, status: str) -> Dict[str, Any]:
-    entries = _read_all()
-    for e in entries:
-        if e["id"] == entry_id:
-            e["status"] = status
-            break
-    else:
+    lines = _read_lines()
+    found: Optional[Dict[str, Any]] = None
+    out_lines: List[str] = []
+    for line in lines:
+        entry = _parse_line(line)
+        if entry is not None and entry.get("id") == entry_id:
+            entry["status"] = status
+            found = entry
+            out_lines.append(json.dumps(entry, ensure_ascii=False))
+        else:
+            # Keep every other line byte-identical — corrupt lines are
+            # never silently dropped by a status rewrite.
+            out_lines.append(line)
+    if found is None:
         raise KeyError("no such entry: %s" % entry_id)
     os.makedirs(JOURNAL_DIR, exist_ok=True)
     with open(ENTRIES_PATH, "w", encoding="utf-8") as fh:
-        for e in entries:
-            fh.write(json.dumps(e, ensure_ascii=False) + "\n")
-    return e
+        for line in out_lines:
+            fh.write(line + "\n")
+    return found

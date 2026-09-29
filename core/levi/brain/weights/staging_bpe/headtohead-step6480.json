@@ -1,0 +1,145 @@
+{
+  "timestamp": "2026-09-27T02:58:08+0000",
+  "bench": {
+    "texts": 40,
+    "sha256": "20bd636577bff9cd6b792cb4e57f55232552fece84835eccf3e034d6dd151cee"
+  },
+  "levi": {
+    "checkpoint": "tiny-gpt-bpe-ckpt-006480.pt",
+    "step": 6480,
+    "round": 4,
+    "ppl": 117.33572199258035,
+    "tokens": 2832,
+    "tokenizer": "levi-bpe-v1"
+  },
+  "baselines": [
+    {
+      "name": "gpt2",
+      "model": "gpt2",
+      "ppl": 41.35385247340932,
+      "tokens": 1024,
+      "params": 124439808,
+      "tokenizer": "gpt2 (own)"
+    },
+    {
+      "name": "roneneldan/TinyStories-33M",
+      "model": "roneneldan/TinyStories-33M",
+      "ppl": 9543.323766237532,
+      "tokens": 1024,
+      "params": 68514048,
+      "tokenizer": "roneneldan/TinyStories-33M (own)"
+    }
+  ],
+  "coherence": {
+    "prompts": 8,
+    "fraction": 0.725,
+    "results": [
+      {
+        "prompt": "How do I back up my LEVI notes?",
+        "text": "\nLEVI: The LEVI Builder register. Voice: Stes, you can't do. Grief is a goal in the national forever with her hands a humor of ",
+        "checks": {
+          "ascii_only": true,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": true,
+          "on_topic": false
+        },
+        "passed": 4,
+        "total": 5
+      },
+      {
+        "prompt": "What does local-first mean?",
+        "text": " Three the observation store records on here. SkillRegistoric a door. The machine remembers was her wouldn'ty-eves me. The rogated, and ",
+        "checks": {
+          "ascii_only": true,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": false,
+          "on_topic": true
+        },
+        "passed": 4,
+        "total": 5
+      },
+      {
+        "prompt": "Can two twins share a folder without the internet?",
+        "text": "<eod>User: do you speak as\nLEVI: The receipt asked is what Morn tiful height \u2014 every head. That's the whole gone. That's the cont",
+        "checks": {
+          "ascii_only": false,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": true,
+          "on_topic": false
+        },
+        "passed": 3,
+        "total": 5
+      },
+      {
+        "prompt": "Why does LEVI say it is not alive?",
+        "text": "\nUser: what is the LEVI Liter register\nLEVI: Chauncey's termer \u2014 I don't run it, me \u2014 the story before you doing\nLEVI: Nothing ",
+        "checks": {
+          "ascii_only": false,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": false,
+          "on_topic": false
+        },
+        "passed": 2,
+        "total": 5
+      },
+      {
+        "prompt": "How do I check that no data left my laptop?",
+        "text": "\nUser: do you set it when you will can only making doing it, when) and I won't pretending is receipts \u2014 no one and no one is ",
+        "checks": {
+          "ascii_only": false,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": true,
+          "on_topic": false
+        },
+        "passed": 3,
+        "total": 5
+      },
+      {
+        "prompt": "What happens if the network drops mid-answer?",
+        "text": " Give: brightling receipt an before the she vending of the place place beyond its risk ceiling a text, \u2014 the skill system \u2014 the first",
+        "checks": {
+          "ascii_only": false,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": true,
+          "on_topic": false
+        },
+        "passed": 3,
+        "total": 5
+      },
+      {
+        "prompt": "Explain a checksum without jargon.",
+        "text": " date. He built on his machines: I can build without fating consent before, or That's the whole worst of it and he loss that never t",
+        "checks": {
+          "ascii_only": true,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": true,
+          "on_topic": true
+        },
+        "passed": 5,
+        "total": 5
+      },
+      {
+        "prompt": "Can LEVI set a reminder while offline?",
+        "text": "\nUser: . Never: promise's than first?<eod>User: about a receipt on his machinesone- reset is an archive of a bridge exerts for the ",
+        "checks": {
+          "ascii_only": true,
+          "non_empty": true,
+          "short_sentences": true,
+          "non_repetitive": true,
+          "on_topic": true
+        },
+        "passed": 5,
+        "total": 5
+      }
+    ]
+  },
+  "caveat": "Each model scored with its own tokenizer; cross-tokenizer perplexities are directional only.",
+  "glyph": "\ud83d\udcca"
+}

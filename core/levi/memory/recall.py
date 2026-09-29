@@ -17,6 +17,7 @@ Public API: :class:`RecallIndex` — ``index_all()`` / ``search()`` / ``rebuild(
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 from dataclasses import dataclass, field
@@ -204,7 +205,7 @@ class RecallIndex:
         docs = []
         try:
             with path.open(encoding="utf-8") as fh:
-                for line in fh:
+                for lineno, line in enumerate(fh):
                     if len(docs) >= limit:
                         break
                     line = line.strip()
@@ -224,7 +225,7 @@ class RecallIndex:
                         continue
                     docs.append(
                         {
-                            "doc_id": "journal:%s" % (rec.get("id") or "?"),
+                            "doc_id": self._journal_doc_id(rec, lineno, line),
                             "title": "growth journal %s" % (rec.get("cycle") or ""),
                             "body": body,
                             "tags": "",
@@ -235,6 +236,26 @@ class RecallIndex:
             return report
         report["indexed"] = self.add_documents(docs, source="journal")
         return report
+
+    @staticmethod
+    def _journal_doc_id(rec: Dict[str, object], lineno: int, line: str) -> str:
+        """Stable, unique doc_id for one journal record.
+
+        Records carrying a usable ``id`` keep the legacy ``journal:<id>``
+        form. Records without one fall back to
+        ``journal:line-<n>-<sha1>``: without this, every id-less line
+        collapsed onto ``journal:?``, and ``add_documents``' DELETE-then-
+        INSERT silently kept only the last one — the earlier lines were
+        destroyed. The line-number + content-hash form is deterministic,
+        so re-indexing the same file is idempotent (no duplicates).
+        """
+        raw = rec.get("id")
+        if isinstance(raw, str) and raw.strip():
+            return "journal:%s" % raw.strip()
+        if raw is not None:
+            return "journal:%s" % raw
+        digest = hashlib.sha1(line.encode("utf-8")).hexdigest()[:12]
+        return "journal:line-%d-%s" % (lineno, digest)
 
     _JOURNAL_ID_KEYS = frozenset(
         {"id", "ts", "cycle_id", "memory_entry_id", "bus_published", "quiet"}

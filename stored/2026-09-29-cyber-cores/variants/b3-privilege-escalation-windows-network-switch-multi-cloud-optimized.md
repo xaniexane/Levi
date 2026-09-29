@@ -1,0 +1,53 @@
+---
+skill_id: cyber_b3_privilege_escalation_windows_network_switch_multi_cloud_optimized
+name: Windows Privilege Escalation Defense for Network Switches in Multi-Cloud (Optimized Maturity)
+description: "Windows Privilege Escalation defense playbook for Network Switches in Multi-Cloud at Optimized maturity."
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [windows, privilege-escalation, network, switching, cloud, multi-cloud, maturity-optimized]
+version: 1.0.0
+---
+# Windows Privilege Escalation Defense for Network Switches in Multi-Cloud (Optimized Maturity)
+
+## Purpose
+
+From standard user to SYSTEM/Administrator via unquoted service paths, writable service binaries, AlwaysInstallElevated, token manipulation, or kernel exploits. Windows privesc is usually a misconfiguration the attacker read, not a zero-day they brought. Applies to Network Switches in Multi-Cloud at Optimized maturity.
+
+## When to use
+
+- Service creation or modification events (7045/4697) pointing at user-writable paths, or processes spawning as SYSTEM from unexpected parents.
+- Registry writes to AlwaysInstallElevated keys, accessibility binary replacement (sethc/utilman), or token duplication API patterns in EDR telemetry.
+- Enumeration tooling: whoami /priv, accesschk, or PowerShell privesc scripts running before the escalation.
+- Lens: Best telemetry: syslog (port up/down, STP changes, config changes) + SNMP/NetFlow + NAC logs. Cloud-agnostic SIEM normalizing AWS CloudTrail, Azure Activity Log, and GCP Audit Logs into one schema.
+
+## Prerequisites
+
+- Written authorization from the asset owner and incident commander before active containment.
+- Access to CSPM coverage across all clouds with consistent misconfiguration alerting.
+
+## Procedure
+
+1. **Authorize and scope.** Open a ticket, confirm written authorization, and preserve evidence before changing anything.
+2. **Detect and collect.** Hunt the signals above in Syslog: link-state changes, MAC flaps, STP topology changes, login attempts and MAC address tables and ARP tables for device-to-port mapping during incidents; run `show mac address-table | include <suspect-mac>` then `show logging | include %SEC-6-IPACCESSLOGP|%PORT_SECURITY`.
+3. **Analyze.** Pin down the primitive: unquoted path, weak service ACL, scheduled task with stored creds, or kernel CVE — then check how many fleet hosts share it. Then: Review what the elevated access touched: SAM/LSASS access after escalation means credential theft followed.
+4. **Contain and harden.** Fix service ACLs and paths fleet-wide, disable AlwaysInstallElevated, and enforce signed-driver and LSA protection policies. Asset layer: Port security / 802.1X on access ports, BPDU guard, DHCP snooping + dynamic ARP inspection. Environment layer: Federated identity across clouds from one IdP; consistent tagging and logging standards per cloud.
+5. **Document and improve.** Feed incident lessons back into detection-as-code within one sprint — the playbook is a living document, not a PDF. Record the timeline, indicators, actions taken, and lessons learned.
+
+## Expected outputs
+
+- Scoped timeline; affected assets, accounts, and data with containment status each.
+- Hardening verified effective; detection improvements filed.
+
+## Pitfalls
+
+- Reimaging one host while the GPO-deployed misconfiguration recreates the hole on every rebuild.
+- Missing that the attacker already dumped credentials post-escalation — scope the follow-on theft, not just the privesc.
+
+## References
+
+- MITRE ATT&CK: T1068 (Privilege Escalation: Exploitation for Privilege Escalation)
+- Vendor logging and hardening baselines for Network Switches; Federated identity across clouds from one IdP; consistent tagging and logging standards per cloud.
+
+---
+*Original work authored for LEVI. Defensive blue-team playbook; all content written from scratch for LEVI.*

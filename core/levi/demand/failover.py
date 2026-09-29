@@ -47,12 +47,15 @@ Channel reality (verified, not assumed):
              "unconfigured" naming LEVI_ALERT_WEBHOOK_URL. Works against a
              local receiver (e.g. python -m http.server + a hook script)
              with zero third-party services.
-  sheets   — Google Sheets logger leg: real HTTP POST of the same payload
-             (plus delivered_via) to LEVI_SHEETS_WEBHOOK_URL (Chauncey's
-             Google Apps Script URL). Append-row semantics live in his
-             script; our side just delivers the payload honestly. Missing
-             URL -> "unconfigured" naming LEVI_SHEETS_WEBHOOK_URL and
-             skipped cleanly — he has not supplied it yet.
+  sheets   — Google Sheets logger leg, two honest rungs:
+             1. LEVI_SHEETS_WEBHOOK_URL set -> real HTTP POST of the alert
+                JSON (+ delivered_via) to his Google Apps Script URL;
+                2xx = delivered.
+             2. No webhook URL -> direct append to the DemandPulse sheet's
+                alerts tab via hatch_gws_cli (LEVI_SHEETS_SPREADSHEET_ID
+                or the default sheet); confirmed append = delivered.
+             Both rungs missing -> "unconfigured" naming both, skipped
+             cleanly (L4).
 
 stdlib-only.
 """
@@ -87,6 +90,12 @@ DEFAULT_ORDER: Tuple[str, ...] = ("sms", "email", "whatsapp", "webhook", "sheets
 
 DEFAULT_CHAIN_LOG = Path.home() / ".levi" / "demand_alert_chains.jsonl"
 DEFAULT_WHATSAPP_QUEUE = Path.home() / ".levi" / "whatsapp_relay_queue.jsonl"
+
+# The "DemandPulse" Google Sheet (created 2026-09-29 via the Sheets API:
+# tabs "payments" and "alerts"). Rung 2 of the sheets leg appends here
+# directly when no Apps Script webhook URL is configured. Override with
+# LEVI_SHEETS_SPREADSHEET_ID.
+DEFAULT_SHEETS_SPREADSHEET_ID = "1DlSeCiOBMX643F9dpSSTap6aleK7NqMnpAZ6jlHnh5Y"
 
 SMS_BINARY = "termux-sms-send"
 SMS_MAX_CHARS = 300
@@ -373,6 +382,46 @@ def send_webhook(
     return ("failed", f"webhook_error: HTTP {code} via {_host_of(url)}")
 
 
+def _sheets_cli_append(spreadsheet_id: str, row: List[str]) -> bool:
+    """Append one row to the sheet's alerts tab via hatch_gws_cli.
+
+    True only on confirmed append (CLI exit 0 + updatedRange in the
+    response) — L2, no fake receipts. stdlib-only: the CLI is invoked,
+    never imported.
+    """
+    cli = shutil.which("hatch_gws_cli")
+    if not cli:
+        return False
+    cmd = [
+        cli,
+        "sheets",
+        "spreadsheets",
+        "values",
+        "append",
+        "--params",
+        json.dumps(
+            {
+                "spreadsheetId": spreadsheet_id,
+                "range": "alerts!A:F",
+                "valueInputOption": "RAW",
+            }
+        ),
+        "--json",
+        json.dumps({"values": [row]}),
+    ]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    except Exception:  # noqa: BLE001 — CLI missing/crashed: not delivered
+        return False
+    if proc.returncode != 0:
+        return False
+    try:
+        out = json.loads(proc.stdout)
+    except Exception:  # noqa: BLE001 — unparsable output: not confirmed
+        return False
+    return bool(out.get("updatedRange") or out.get("updates", {}).get("updatedRange"))
+
+
 def send_sheets(
     title: str,
     body: str,
@@ -382,35 +431,50 @@ def send_sheets(
     channel_chain: Optional[List[str]] = None,
     delivered_via: str = "sheets",
     http_post: Optional[Callable[[str, Dict[str, Any]], int]] = None,
+    cli_append: Optional[Callable[[str, List[str]], bool]] = None,
 ) -> Tuple[str, str]:
     """Sheets logger leg — appends the alert to Chauncey's Google Sheet.
 
-    Real HTTP POST of the alert JSON (+ delivered_via) to
-    LEVI_SHEETS_WEBHOOK_URL (his Google Apps Script URL; append-row
-    semantics live in his script, our side just delivers the payload
-    honestly). 2xx = delivered. No URL -> "unconfigured" naming
-    LEVI_SHEETS_WEBHOOK_URL and skipped cleanly — he has not supplied
-    the script URL yet (L4).
+    Two honest rungs, in order:
+      1. LEVI_SHEETS_WEBHOOK_URL set -> real HTTP POST of the alert JSON
+         (+ delivered_via) to his Google Apps Script URL. 2xx = delivered.
+      2. No webhook URL -> direct append to the DemandPulse sheet's alerts
+         tab via hatch_gws_cli (LEVI_SHEETS_SPREADSHEET_ID or the default
+         sheet). Confirmed append = delivered (L2); anything else falls
+         through to "unconfigured" naming both missing pieces (L4).
     """
     url = os.environ.get("LEVI_SHEETS_WEBHOOK_URL", "").strip()
-    if not url:
-        return (
-            "unconfigured",
-            "LEVI_SHEETS_WEBHOOK_URL not set — sheets skipped cleanly "
-            "(Chauncey has not supplied the Apps Script URL yet)",
+    if url:
+        payload = _webhook_payload(
+            alert_id, title, body, severity, channel_chain or []
         )
-    payload = _webhook_payload(
-        alert_id, title, body, severity, channel_chain or []
-    )
-    payload["delivered_via"] = delivered_via
+        payload["delivered_via"] = delivered_via
+        try:
+            post = http_post or _default_http_post_noauth
+            code = post(url, payload)
+        except Exception as exc:  # noqa: BLE001 — report, never raise
+            return ("failed", f"sheets_error: {_redact(str(exc))[:160]}")
+        if 200 <= code < 300:
+            return ("delivered", f"sheets accepted (HTTP {code}) via {_host_of(url)}")
+        return ("failed", f"sheets_error: HTTP {code} via {_host_of(url)}")
+    # Rung 2: direct CLI append — no Apps Script URL needed.
+    append = cli_append or _sheets_cli_append
+    spreadsheet_id = os.environ.get(
+        "LEVI_SHEETS_SPREADSHEET_ID", DEFAULT_SHEETS_SPREADSHEET_ID
+    ).strip()
+    row = [_utcnow(), severity, title, body, delivered_via, "mirrored"]
     try:
-        post = http_post or _default_http_post_noauth
-        code = post(url, payload)
+        ok = append(spreadsheet_id, row)
     except Exception as exc:  # noqa: BLE001 — report, never raise
         return ("failed", f"sheets_error: {_redact(str(exc))[:160]}")
-    if 200 <= code < 300:
-        return ("delivered", f"sheets accepted (HTTP {code}) via {_host_of(url)}")
-    return ("failed", f"sheets_error: HTTP {code} via {_host_of(url)}")
+    if ok:
+        return ("delivered", "sheets appended to the DemandPulse sheet (alerts tab)")
+    return (
+        "unconfigured",
+        "sheets unavailable: LEVI_SHEETS_WEBHOOK_URL not set and "
+        "hatch_gws_cli append failed (CLI not installed or Sheets not "
+        "connected)",
+    )
 
 
 def _default_http_post(url: str, payload: Dict[str, Any], token: str) -> int:

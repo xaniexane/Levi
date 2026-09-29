@@ -172,6 +172,38 @@ def test_index_growth_journal_roundtrip(tmp_path):
     assert results[0].source == "journal"
 
 
+def test_index_growth_journal_idless_lines_do_not_clobber(tmp_path):
+    # Journal records without an "id" must each survive indexing: previously
+    # every id-less line collapsed onto doc_id "journal:?" and the
+    # DELETE-then-INSERT in add_documents silently kept only the last one.
+    jdir = tmp_path / "growth"
+    jdir.mkdir()
+    jpath = jdir / "journal.jsonl"
+    jpath.write_text(
+        json.dumps({"id": "cyc-1", "cycle": 1, "note": "idfull entry gamma"})
+        + "\n"
+        + json.dumps({"cycle": 2, "note": "first idless entry alpha"})
+        + "\n"
+        + json.dumps({"cycle": 3, "note": "second idless entry beta"})
+        + "\n",
+        encoding="utf-8",
+    )
+    idx = _idx(tmp_path, journal_path=jpath)
+    report = idx.index_growth_journal()
+    assert report["indexed"] == 3
+    assert idx.stats()["documents"] == 3
+    results, reason = idx.search("entry")
+    assert reason is None
+    assert len(results) == 3
+    ids = [r.doc_id for r in results]
+    assert len(set(ids)) == 3  # no clobbering
+    assert "journal:cyc-1" in ids  # legacy journal:<id> form preserved
+    # Re-indexing the same file is idempotent: no duplicates pile up.
+    report2 = idx.index_growth_journal()
+    assert report2["indexed"] == 3
+    assert idx.stats()["documents"] == 3
+
+
 def test_index_growth_journal_missing(tmp_path):
     idx = _idx(tmp_path, journal_path=tmp_path / "nope.jsonl")
     report = idx.index_growth_journal()

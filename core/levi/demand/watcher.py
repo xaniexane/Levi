@@ -521,9 +521,10 @@ def ingest_items(
                 need, segment="general", source=channel,
                 origin={"ref": iid},
             )
-            receipt["signals"] += 1
-            if sig.id not in receipt["signal_ids"]:
-                receipt["signal_ids"].append(sig.id)
+            if getattr(sig, "is_new_registration", True):
+                receipt["signals"] += 1
+                if sig.id not in receipt["signal_ids"]:
+                    receipt["signal_ids"].append(sig.id)
         # L8: threats are not demand — route to Cybrus as screening intel.
         if _alliance.extract_threats(text):
             intel_items.append(
@@ -615,9 +616,10 @@ def poll_email(dp, state: WatcherState, max_n: int = 50) -> Dict[str, Any]:
                 need, segment="general", source="email",
                 origin={"ref": mid},
             )
-            receipt["signals"] += 1
-            if sig.id not in receipt["signal_ids"]:
-                receipt["signal_ids"].append(sig.id)
+            if getattr(sig, "is_new_registration", True):
+                receipt["signals"] += 1
+                if sig.id not in receipt["signal_ids"]:
+                    receipt["signal_ids"].append(sig.id)
         # L8: threats are not demand — route to Cybrus as screening intel.
         if _alliance.extract_threats(full_text):
             intel_items.append(
@@ -725,15 +727,76 @@ def poll_facebook(dp, state: WatcherState, limit: int = 25,
                 need, segment="general", source="facebook",
                 origin={"ref": pid},
             )
-            receipt["signals"] += 1
-            if sig.id not in receipt["signal_ids"]:
-                receipt["signal_ids"].append(sig.id)
+            if getattr(sig, "is_new_registration", True):
+                receipt["signals"] += 1
+                if sig.id not in receipt["signal_ids"]:
+                    receipt["signal_ids"].append(sig.id)
         # L8: threats are not demand — route to Cybrus as screening intel.
         if text and _alliance.extract_threats(text):
             intel_items.append({"id": pid, "text": text, "channel": "facebook"})
     if intel_items:
         receipt["threat_intel"] = _alliance.share_intel(intel_items)
     state.touch("facebook")
+    return receipt
+
+
+# ---------------------------------------------------------------------------
+# Competitor intel tick (2026-09-24, hyper-aggressive scan surface).
+#
+# Runs the deep competitor intel pass (due pages re-fetched at the 12h
+# cadence, prices/tactics/userbase/hiring diffed run-over-run) and turns
+# each NEW observed move into a HYPOTHESIS signal via scan_seed (L3 —
+# the watcher can never mint OBSERVED signals). Emitted moves are
+# deduplicated in the competitors store, so a move becomes a signal once.
+# Respects the tick deadline; never raises; never touches alerts (L6).
+# ---------------------------------------------------------------------------
+
+
+def poll_competitors(dp, state: WatcherState,
+                    deadline: Optional[float] = None) -> Dict[str, Any]:
+    """One competitor-intel tick. Headless-safe, polite, never raises."""
+    import time as _time
+
+    from levi.demand import competition as _comp
+    from levi.demand import competition_intel as _ci
+
+    if deadline is not None and _time.time() >= deadline:
+        return {"channel": "competitors", "status": "budget_exceeded",
+                "moves": 0, "signals": 0}
+    state.channels.setdefault(
+        "competitors", {"last_poll": None, "seen_ids": []})
+    receipt: Dict[str, Any] = {
+        "channel": "competitors", "status": "ok", "moves": 0,
+        "signals": 0, "signal_ids": [], "news_items": 0,
+    }
+    try:
+        intel = _comp.scan_competitor_intel()
+    except Exception as exc:
+        return {"channel": "competitors", "status": "error",
+                "detail": f"{type(exc).__name__}: {exc}"[:200],
+                "moves": 0, "signals": 0}
+    receipt["news_items"] = len(intel.get("news", []))
+    for mv in intel.get("new_moves", []):
+        if not isinstance(mv, dict):
+            continue
+        if deadline is not None and _time.time() >= deadline:
+            receipt["status"] = "budget_exceeded"
+            break
+        receipt["moves"] += 1
+        try:
+            text = _ci.move_text(mv, str(mv.get("competitor", "?")))
+            sig = dp.scan_seed(
+                text, segment="general", source="competitor",
+                origin={"link": mv.get("url", ""),
+                        "competitor": mv.get("slug", "")},
+            )
+            if getattr(sig, "is_new_registration", True):
+                receipt["signals"] += 1
+                if sig.id not in receipt["signal_ids"]:
+                    receipt["signal_ids"].append(sig.id)
+        except Exception:
+            continue
+    state.touch("competitors")
     return receipt
 
 
@@ -774,6 +837,7 @@ def run(
     channels["hn"] = _eyes.poll_hn(dp, state, deadline=deadline)
     providers = _eyes.poll_providers(dp, state, deadline=deadline)["channels"]
     channels.update(providers)
+    channels["competitors"] = poll_competitors(dp, state, deadline=deadline)
     dev = device_channel_status()
     channels["text"] = {
         "channel": "text",
@@ -822,6 +886,11 @@ def run(
                 }
                 for ch, r in providers.items()
             },
+            "competitors": {
+                "status": channels["competitors"].get("status"),
+                "moves": channels["competitors"].get("moves", 0),
+                "signals": channels["competitors"].get("signals", 0),
+            },
             "text": {"status": channels["text"].get("status")},
             "notification": {"status": channels["notification"].get("status")},
         },
@@ -836,6 +905,12 @@ def status(dp=None, state: Optional[WatcherState] = None) -> Dict[str, Any]:
     gate = gmail_status()
     email_state = state.channels["email"]
     fb = facebook_status()
+    try:
+        from levi.demand import competition as _comp
+
+        last_intel = _comp.last_intel_run()
+    except Exception:
+        last_intel = None
     out = {
         "email": {
             "transport": "hatch_gws_cli gmail",
@@ -877,6 +952,16 @@ def status(dp=None, state: Optional[WatcherState] = None) -> Dict[str, Any]:
             "status": "ok",
             "last_poll": state.channels["hn"].get("last_poll"),
             "seen": len(state.channels["hn"].get("seen_ids", [])),
+        },
+        "competitors": {
+            "transport": "stdlib urllib competitor page scans "
+            "(polite, 12h re-scan cadence, deep intel diff)",
+            "status": "ok",
+            "last_poll": state.channels.setdefault(
+                "competitors", {"last_poll": None, "seen_ids": []}
+            ).get("last_poll"),
+            "last_intel": (last_intel or {}).get("ran_at"),
+            "last_intel_moves": (last_intel or {}).get("new_moves"),
         },
     }
     return out

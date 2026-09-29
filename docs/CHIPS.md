@@ -10,13 +10,13 @@ prompt text sent as the user's message.
 
 | Chip ID | Label | Inject | Invokes |
 |---|---|---|---|
-| `chip.cut-the-list` | Cut the list | "Triage the list I just gave you — half of it dies." | `operator.triage` |
-| `chip.name-the-fear` | Name the fear | "In one sentence: what am I avoiding?" | `operator.blocker` (avoided class) |
-| `chip.ship-minimum` | Ship minimum | "Define the smallest version worth shipping, then freeze it there." | `operator.ship` |
-| `chip.hold-me-to-it` | Hold me to it | "Lock this in as a commitment and check in on me." | `operator.lock` |
+| `chip.cut-the-list` | Cut the list | "Triage the list I just gave you — half of it dies." | `operator.day` (triage phase) |
+| `chip.name-the-fear` | Name the fear | "In one sentence: what am I avoiding?" | `operator.decide` (blocker phase, avoided class) |
+| `chip.ship-minimum` | Ship minimum | "Define the smallest version worth shipping, then freeze it there." | `operator.loop` (ship phase) |
+| `chip.hold-me-to-it` | Hold me to it | "Lock this in as a commitment and check in on me." | `operator.commit` |
 | `chip.no-comfort` | No comfort | "No softening. Hold the standard." | Tone override for any skill |
-| `chip.mirror` | Mirror | "Reflect my own stated priority back to me, word for word." | `operator.review` / `operator.mvd` |
-| `chip.next-90` | Next 90 | "Show me only what matters in the next 90 minutes." | `operator.mvd` (compressed) |
+| `chip.mirror` | Mirror | "Reflect my own stated priority back to me, word for word." | `operator.loop` (review phase) / `operator.day` (mvd phase) |
+| `chip.next-90` | Next 90 | "Show me only what matters in the next 90 minutes." | `operator.day` (mvd phase, compressed) |
 
 ## Contract
 

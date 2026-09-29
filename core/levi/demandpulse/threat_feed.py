@@ -101,17 +101,26 @@ def build_envelopes(
 
     Extraction is delegated to the alliance contract — this function
     never matches threats on its own. Empty list when nothing matches:
-    silence, not invention.
+    silence, not invention. Non-string text is a named ValueError —
+    extraction runs on real scan text only (P1).
     """
-    alliance = _alliance()
-    hits = alliance.extract_threats(text or "")
-    if not hits:
-        return []
+    if text is None:
+        text = ""
+    if not isinstance(text, str):
+        raise ValueError(
+            f"build_envelopes: text must be str, got {type(text).__name__}"
+        )
+    # Validate confidence BEFORE extraction: bad input is rejected even
+    # when the text matches nothing (no silent pass on garbage).
     if isinstance(confidence, bool) or not isinstance(confidence, (int, float)):
         raise ValueError("confidence must be a number in [0, 1]")
     conf = float(confidence)
     if not (0.0 <= conf <= 1.0):
         raise ValueError("confidence must be a number in [0, 1]")
+    alliance = _alliance()
+    hits = alliance.extract_threats(text)
+    if not hits:
+        return []
     published_ts = _utcnow_iso()
     envelopes: List[Dict[str, Any]] = []
     for sentence, markers in hits:
@@ -153,6 +162,16 @@ def publish(
             "published": 0,
             "accepted": 0,
             "status": "alliance_unavailable",
+            "ts": _utcnow_iso(),
+        }
+    except ValueError as exc:
+        # P4 holds for bad input too: bad confidence/text is an honest
+        # receipt, never a raised exception out of publish().
+        return {
+            "published": 0,
+            "accepted": 0,
+            "status": "invalid_input",
+            "detail": str(exc),
             "ts": _utcnow_iso(),
         }
     if not envelopes:

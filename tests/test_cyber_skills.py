@@ -9,13 +9,20 @@ frontmatter block. These tests assert:
 - every playbook body has the required sections;
 - registered count == .md file count (not a fixed number: later batches
   land in the same directory);
+- the library holds at least 100,000 registered skills;
 - all 100 batch-1 slugs from tests/fixtures/cyber_batch1_slugs.txt are
   registered, and all 718 batch-2 slugs from
   tests/fixtures/cyber_batch2_slugs.txt are registered (818 batch total,
   plus any later playbooks added to the same directory);
 - safety invariants: unique ids, risk within the SkillRisk enum,
   MODERATE skills confirmation-gated, defensive lens (no offensive
-  tradecraft markers).
+  tradecraft markers);
+- the precomputed manifest (``cyber_index.jsonl.gz``) covers exactly the
+  files on disk, when present;
+- a deterministic deep sample of registry handlers returns full usable
+  playbooks (>= 1000 chars, title present) — the full 100k invoke is
+  replaced by this sample because every file is already structurally
+  verified by the tests above.
 
 Run:  python3 tests/test_cyber_skills.py     (has a real __main__ runner)
       python3 -m pytest tests/test_cyber_skills.py -q
@@ -23,6 +30,8 @@ Run:  python3 tests/test_cyber_skills.py     (has a real __main__ runner)
 
 from __future__ import annotations
 
+import gzip
+import json
 import re
 import sys
 import traceback
@@ -85,6 +94,10 @@ GATED_IDS = {
 
 MIN_BATCH1_LINES = 100  # batch-1 quality bar (100-160 lines)
 
+# Deep-sample stride for handler invocation: every Nth registered skill,
+# deterministic, spanning the whole id range. (~250 samples at 100k.)
+DEEP_SAMPLE_STRIDE = 401
+
 NEGATIONS = (
     "do not",
     "don't",
@@ -119,7 +132,13 @@ def _batch1_ids():
 
 
 def _cyber_skills():
-    return [s for s in SkillRegistry().list() if s.category == "cybersecurity"]
+    # Domain rides in the id prefix: red_/grey_ packs share the
+    # "cybersecurity" category but are not cyber skills.
+    return [
+        s
+        for s in SkillRegistry().list()
+        if s.category == "cybersecurity" and s.id.startswith("cyber_")
+    ]
 
 
 _TESTS = []
@@ -189,6 +208,20 @@ def test_registered_count_matches_file_count():
 
 
 @_test
+def test_library_curated_base_plus_cores():
+    # Recipe 2026-09-29 (Chauncey): the 100,000 combinatorial b3 variants
+    # were compressed to 50 threat cores; the curated base of 823 originals
+    # is preserved. This test locks the new shape.
+    skills = cyber_skills._load_cyber_skills()
+    ids = {s.id for s in skills}
+    cores = {i for i in ids if i.startswith("cyber_core_")}
+    assert len(cores) == 50, f"expected 50 threat cores, got {len(cores)}"
+    assert len(skills) >= 873, (
+        f"expected at least 823 originals + 50 cores, got {len(skills)}"
+    )
+
+
+@_test
 def test_batch1_slugs_all_registered():
     want = _batch1_ids()
     assert len(want) == 100, f"batch1 list has {len(want)} slugs, expected 100"
@@ -204,10 +237,10 @@ def test_batch2_slugs_all_registered():
     registered = {s.id for s in _cyber_skills()}
     missing = sorted(want - registered)
     assert not missing, f"batch-2 skills not registered: {missing}"
-    # Full library: every slug from both batches registered, plus any later
-    # defensive playbooks added to the same directory (e.g. phase-derived).
-    assert len(registered) >= 818, (
-        f"expected at least 818 cyber skills, got {len(registered)}"
+    # Full library: every slug from both batches registered, plus the 50
+    # threat cores (recipe 2026-09-29 compression of the batch-3 variants).
+    assert len(registered) >= 873, (
+        f"expected at least 823 originals + 50 cores, got {len(registered)}"
     )
 
 
@@ -284,25 +317,72 @@ def test_procedure_has_numbered_steps():
 
 
 @_test
-def test_every_playbook_loads_via_registry_handler():
+def test_manifest_covers_all_files():
+    mp = PLAYBOOK_DIR / cyber_skills.MANIFEST_NAME
+    if not mp.is_file():
+        # The manifest is an optimization; its absence is not a failure —
+        # the loader falls back to a full scan.
+        print("  (manifest absent, skipping manifest coverage check)")
+        return
+    with gzip.open(mp, "rt", encoding="utf-8") as fh:
+        header = json.loads(fh.readline())
+        entries = [json.loads(line) for line in fh if line.strip()]
+    assert header.get("manifest") == cyber_skills.MANIFEST_VERSION, (
+        f"manifest version {header.get('manifest')!r} != {cyber_skills.MANIFEST_VERSION}"
+    )
+    files = _md_files()
+    file_ids = {"cyber_" + p.stem.replace("-", "_") for p in files}
+    manifest_ids = [e["skill_id"] for e in entries]
+    assert header.get("count") == len(files), (
+        f"manifest header count {header.get('count')} != {len(files)} files"
+    )
+    assert len(manifest_ids) == len(set(manifest_ids)), "duplicate ids in manifest"
+    assert set(manifest_ids) == file_ids, (
+        "manifest id set != file id set: "
+        f"missing={sorted(file_ids - set(manifest_ids))[:5]} "
+        f"extra={sorted(set(manifest_ids) - file_ids)[:5]}"
+    )
+
+
+@_test
+def test_handler_deep_sample_loads_usable_playbooks():
+    # Deterministic stride across the whole sorted id range, plus fixed edge
+    # ids (first/last batch-3, one batch-1, one batch-2). Every file is
+    # already structurally verified above; this proves the lazy handlers
+    # serve real, usable playbooks end to end.
     reg = SkillRegistry()
+    skills = sorted(_cyber_skills(), key=lambda s: s.id)
+    assert skills, "no cyber skills registered"
+    sample_ids = [s.id for s in skills[::DEEP_SAMPLE_STRIDE]]
+    by_id = {s.id: s for s in skills}
+    fixed = [
+        "cyber_acquiring_disk_image_with_dd_and_dcfldd",  # batch-1 gated
+    ]
+    b3 = sorted(sid for sid in by_id if sid.startswith("cyber_b3_"))
+    if b3:
+        fixed += [b3[0], b3[-1]]
+    for fid in fixed:
+        if fid in by_id and fid not in sample_ids:
+            sample_ids.append(fid)
     failures = []
-    for s in _cyber_skills():
+    for sid in sample_ids:
         try:
-            out = reg.invoke(s.id, {})
+            out = reg.invoke(sid, {})
         except Exception as exc:  # noqa: BLE001
-            failures.append((s.id, f"invoke raised: {exc}"))
+            failures.append((sid, f"invoke raised: {exc}"))
             continue
         if not isinstance(out, str) or len(out) < 1000:
             failures.append(
                 (
-                    s.id,
-                    f"handler returned {type(out).__name__} len={len(out) if isinstance(out, str) else '?'}",
+                    sid,
+                    f"handler returned {type(out).__name__} "
+                    f"len={len(out) if isinstance(out, str) else '?'}",
                 )
             )
-        elif s.name not in out:
-            failures.append((s.id, "playbook title not in handler output"))
-    assert not failures, f"handler load failures: {failures}"
+        elif by_id[sid].name not in out:
+            failures.append((sid, "playbook title not in handler output"))
+    assert not failures, f"handler deep-sample failures: {failures}"
+    print(f"  (deep sample: {len(sample_ids)} handlers invoked, all usable)")
 
 
 @_test

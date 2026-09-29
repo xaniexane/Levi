@@ -431,6 +431,7 @@ def test_provider_names():
         "levi-4b",
         "local",
         "levi-brain",
+        "levi-bpe-brain",
         "levi-local",
         "openai",
         "anthropic",

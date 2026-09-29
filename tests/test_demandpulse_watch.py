@@ -122,10 +122,10 @@ def test_check_laws_catches_tampered_snapshot(reg, tmp_path):
     (iid,) = data["items"]
     data["items"][iid]["status"] = "bogus"
     p.write_text(json.dumps(data), encoding="utf-8")
-    reg2 = W.WatchRegistry(root=tmp_path / "watch")
-    report = reg2.check_laws()
-    assert not report["ok"]
-    assert any("W1" in pr or "W3" in pr for pr in report["problems"])
+    # tampered snapshot is rejected at the load boundary (W1), before
+    # any operation can run on it — check_laws never sees it
+    with pytest.raises(W.WatchError, match="W1"):
+        W.WatchRegistry(root=tmp_path / "watch")
 
 
 def test_registry_round_trip(tmp_path, monkeypatch):
@@ -254,3 +254,86 @@ def test_cli_watch_defaults_to_board(reg, capsys):
     rc = cmd_demandpulse(_parse(["demandpulse", "watch"]))
     assert rc == 0
     assert "DemandPulse Watch" in capsys.readouterr().out
+
+# ------------------------------------------------- wave 5: watch hardening
+def test_add_rejects_non_string_fields(reg):
+    with pytest.raises(ValueError, match="name"):
+        reg.add(123, "area")
+    with pytest.raises(ValueError, match="area"):
+        reg.add("name", None)
+    with pytest.raises(ValueError, match="note"):
+        reg.add("name", "area", note=42)
+    with pytest.raises(ValueError, match="non-empty"):
+        reg.add("   ", "area")
+
+
+def test_set_status_rejects_non_string_note(reg):
+    item = reg.add("n", "a")
+    with pytest.raises(ValueError, match="note"):
+        reg.set_status(item["id"], "in_progress", note=42)
+
+
+def test_created_event_carries_waiting_on(reg):
+    item = reg.add("n", "a", waiting_on="him")
+    created = [e for e in reg.history() if e["event"] == "created"][0]
+    assert created["waiting_on"] == "him"
+    assert reg.check_laws()["ok"] is True
+    assert item["waiting_on"] == "him"
+
+
+def test_check_laws_catches_waiter_mismatch(tmp_path):
+    root = tmp_path / "w"
+    reg = W.WatchRegistry(root=root)
+    item = reg.add("n", "a", waiting_on="him")
+    # hand-edit the snapshot out from under the log
+    p = root / "registry.json"
+    data = json.loads(p.read_text(encoding="utf-8"))
+    data["items"][item["id"]]["waiting_on"] = "me"
+    p.write_text(json.dumps(data), encoding="utf-8")
+    reg2 = W.WatchRegistry(root=root)
+    verdict = reg2.check_laws()
+    assert verdict["ok"] is False
+    assert any("waiter mismatch" in pr for pr in verdict["problems"])
+
+
+def test_corrupt_registry_raises_named_error(tmp_path):
+    root = tmp_path / "w"
+    root.mkdir()
+    (root / "registry.json").write_text("{not json", encoding="utf-8")
+    with pytest.raises(W.WatchError, match="registry corrupt"):
+        W.WatchRegistry(root=root)
+
+
+def test_illegal_status_in_snapshot_rejected_at_load(tmp_path):
+    root = tmp_path / "w"
+    root.mkdir()
+    (root / "registry.json").write_text(
+        json.dumps({"items": {"x": {"id": "x", "name": "x", "area": "a",
+                                   "status": "bogus", "waiting_on": "none"}}}),
+        encoding="utf-8",
+    )
+    with pytest.raises(W.WatchError, match="W1"):
+        W.WatchRegistry(root=root)
+
+
+def test_corrupt_history_line_raises_named_error(tmp_path):
+    root = tmp_path / "w"
+    reg = W.WatchRegistry(root=root)
+    reg.add("n", "a")
+    with (root / "history.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write("{broken\n")
+    with pytest.raises(W.WatchError, match="history corrupt"):
+        reg.history()
+
+
+def test_render_board_tolerates_partial_dict():
+    text = W.render_board({"counts": {"complete": 1}, "total": 1, "groups": {}})
+    assert "DemandPulse Watch" in text
+    assert W.render_board({})  # empty dict renders, never raises
+
+
+def test_watch_dir_blank_env_falls_back(monkeypatch):
+    from pathlib import Path
+
+    monkeypatch.setenv("DEMANDPULSE_WATCH_DIR", "   ")
+    assert W.watch_dir() == Path.home() / "workspace" / "demandpulse-watch"

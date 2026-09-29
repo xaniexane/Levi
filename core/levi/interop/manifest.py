@@ -49,6 +49,7 @@ DECLARATIONS = {
             "engines.cadence",
             "engines.weigh",
             "engines.quorum",
+            "engines.reunion",
             "engines.muster",
             "engines.cli",
         ],
@@ -62,6 +63,7 @@ DECLARATIONS = {
             "automation.engine",
             "automation.hitl",
             "automation.routines",
+            "automation.verdict_ledger",
             "automation.cli",
         ],
         "requires": ["growth"],  # routines distill from the session harvest
@@ -175,10 +177,11 @@ DECLARATIONS = {
         ],
         "requires": ["memory-store", "growth"],
     },
-    # -- methods: 40 forgotten techniques (stdlib-only, local-first) ---------
+    # -- methods: 44 forgotten techniques (stdlib-only, local-first) ---------
     "methods": {
         "provides": [
             "methods.ach",
+            "methods.brainwriting",
             "methods.bruno",
             "methods.chappe",
             "methods.codebook",
@@ -192,6 +195,7 @@ DECLARATIONS = {
             "methods.florilegia",
             "methods.franklin",
             "methods.futuresearch",
+            "methods.gordon",
             "methods.ivylee",
             "methods.kardex",
             "methods.kriegsspiel",
@@ -212,6 +216,7 @@ DECLARATIONS = {
             "methods.randgame",
             "methods.ratio",
             "methods.repertory",
+            "methods.synectics",
             "methods.t5",
             "methods.therbligs",
             "methods.tickler",
@@ -220,6 +225,7 @@ DECLARATIONS = {
             "methods.trivium",
             "methods.triz",
             "methods.uniterm",
+            "methods.value",
             "methods.vsm",
             "methods.waterlogic",
         ],
@@ -308,6 +314,20 @@ DECLARATIONS = {
             "daemon.fossil.digest",
             "daemon.fossil.receipt",
             "daemon.fossil.cli",
+        ],
+        "requires": [],
+    },
+    # -- daemon-syncwatch: divergence watchdog for mirrored directory pairs --
+    # Read-only: per-relpath hash comparison across left/right mirrors,
+    # reunion-engine verdict class for text pairs, syncwatch.diverged /
+    # syncwatch.reunited signals on transitions only. Never writes to the
+    # watched trees; conflicts are reported, never resolved.
+    "daemon-syncwatch": {
+        "provides": [
+            "daemon.syncwatch.tick",
+            "daemon.syncwatch.pairs",
+            "daemon.syncwatch.signals",
+            "daemon.syncwatch.cli",
         ],
         "requires": [],
     },
@@ -600,6 +620,31 @@ DECLARATIONS = {
             "fairtrade.trades",
             "fairtrade.audit",
             "fairtrade.ledger",
+        ],
+        "requires": [],
+    },
+    # -- qbe / kwic / nomography (perpetual-hunt daily 2026-09-27, ---------
+    #    theme: forgotten methods — "show, don't tell" interfaces) ---------
+    # Zloof's Query By Example (1975-77) as an example-row query engine over
+    # local JSONL stores; Luhn's KWIC (1958) permuted concordances for
+    # browsing the archive with no search box; d'Ocagne's nomography (1880s)
+    # as a stdlib SVG alignment-chart emitter with the collinearity
+    # invariant proved by property tests. Clean-room revivals, never clones.
+    "qbe": {
+        "provides": [
+            "qbe.query",
+        ],
+        "requires": [],
+    },
+    "kwic": {
+        "provides": [
+            "kwic.concordance",
+        ],
+        "requires": [],
+    },
+    "nomography": {
+        "provides": [
+            "nomography.charts",
         ],
         "requires": [],
     },
@@ -1034,6 +1079,21 @@ DECLARATIONS = {
             "persona.canon.check_voice",
             "persona.canon.is_clean",
             "persona.canon.CANON_NAMES",
+        ],
+        "requires": [],
+    },
+    # -- customizations-shortcuts: his abbreviations, kept verbatim ------------
+    # Named command-line expansions in ~/.levi/customizations/shortcuts.json
+    # (owner-only). Expansion only, never execution; shell metacharacters
+    # refused; chains followed to a bounded depth, cycles refused; removals
+    # retire to a ledger, nothing deleted.
+    "customizations-shortcuts": {
+        "provides": [
+            "customizations.shortcuts.add",
+            "customizations.shortcuts.remove",
+            "customizations.shortcuts.restore",
+            "customizations.shortcuts.expand",
+            "customizations.shortcuts.cli",
         ],
         "requires": [],
     },

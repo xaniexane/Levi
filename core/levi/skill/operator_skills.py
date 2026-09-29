@@ -19,10 +19,13 @@ no hand-maintained list, so later playbook batches register automatically
 with zero merge conflicts. ``category`` is always ``"operator"`` and the id
 scheme is locked to ``operator.<slug>``.
 
-All 16 playbooks are original works authored for LEVI (productivity lens:
-planning, focus, shipping, honest review — operating leverage for the
-human). They are advisory only: no system actions, no surveillance, no
-coercion. Risk is INFO across the pack.
+Seven playbooks: five composite operator skills (day, loop, create, decide,
+commit) chaining the absorbed 2026-09-18 originals, plus two standalone
+(no, xyz). The 16 absorbed originals are preserved byte-identical under
+``stored/2026-09-29-operator-playbooks/`` with a provenance note (2026-09-29
+signature-recipe run: curate -> interpenetrate -> controlled compression).
+They are advisory only: no system actions, no surveillance, no coercion.
+Risk is INFO across the pack.
 
 ``CHIPS`` / ``load_chips()`` expose the one-tap prompt chips from
 ``chips.json`` (id, label, inject) for UI surfaces that want to offer them.

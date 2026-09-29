@@ -94,6 +94,19 @@ def test_pity_is_a_guarantee_not_a_hope():
     assert max_gap < ceiling
 
 
+def test_pity_rarity_beyond_the_table_fails_fast():
+    thin = DropTable(
+        [Drop("stick", "common", 70.0), Drop("hat", "uncommon", 20.0)]
+    )
+    # Previously this constructed fine and died with a bare IndexError the
+    # moment the pity ceiling fired. Fail fast, with a name for the problem.
+    with pytest.raises(ValueError, match="rarer than every drop"):
+        FairDraw(thin, 42, pity_ceiling=3, pity_rarity="legendary")
+    # An unknown pity rarity is named at construction, not mid-draw.
+    with pytest.raises(ValueError, match="unknown pity_rarity"):
+        FairDraw(_table(), 42, pity_ceiling=3, pity_rarity="mythic")
+
+
 def test_log_verifies_and_detects_tampering():
     engine = FairDraw(_table(), 99, pity_ceiling=20)
     engine.play_earned = 30

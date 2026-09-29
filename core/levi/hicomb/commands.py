@@ -13,7 +13,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
+
+if TYPE_CHECKING:  # pragma: no cover - import cycle guard for annotations
+    from levi.hicomb.tabs import Session
 
 
 class CommandVerdict(str, Enum):
@@ -28,8 +31,8 @@ class Command:
     title: str
     touch_label: str  # short label for the phone command bar
     hint: str = ""
-    arg_names: tuple = ()
-    required_args: tuple = ()
+    arg_names: tuple[str, ...] = ()
+    required_args: tuple[str, ...] = ()
     run: Callable[..., str] | None = None
 
 
@@ -79,6 +82,7 @@ class CommandBar:
         self.registry = registry
 
     def propose(self, query: str, limit: int = 8) -> list[tuple[Command, float]]:
+        limit = max(0, int(limit))  # a negative limit must not slice off the best
         scored: list[tuple[Command, float]] = []
         for cmd in self.registry.all():
             best = max(
@@ -111,7 +115,7 @@ class CommandVerifier:
 
 
 def dispatch(
-    session, registry: CommandRegistry, cmd_id: str, args: dict | None = None
+    session: "Session", registry: CommandRegistry, cmd_id: str, args: dict | None = None
 ) -> tuple[CommandVerdict, str]:
     """Propose nothing, verify everything, then run. Ternary result."""
     verifier = CommandVerifier(registry)

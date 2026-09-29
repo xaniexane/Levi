@@ -96,6 +96,11 @@ def test_manifest_registers_all_modules():
         "analog",
         # reveal (perpetual-hunt daily 2026-09-16b: retired software wave)
         "reveal",
+        # qbe / kwic / nomography (perpetual-hunt daily 2026-09-27:
+        # forgotten methods — "show, don't tell" interfaces revived)
+        "qbe",
+        "kwic",
+        "nomography",
         # fairtrade (perpetual-hunt evening 2026-09-16: giant sly-generosity
         # trades inverted into an honest-trade ledger + auditor)
         "fairtrade",

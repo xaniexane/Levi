@@ -29,7 +29,7 @@ def iso(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_HOME", str(home))
     monkeypatch.setenv("LEVI_DEVICE_DIR", str(tmp_path / "device"))
     monkeypatch.setenv("LEVI_ALERT_QUIET", "off")
-    monkeypatch.setenv("LEVI_ALERT_NUMBER", "217-610-0636")
+    monkeypatch.setenv("LEVI_ALERT_NUMBER", "555-010-0199")
     monkeypatch.delenv("LEVI_ALERT_TZ", raising=False)
     alerter.SOURCES.clear()
 
@@ -67,8 +67,8 @@ def test_exact_argv_via_subprocess(iso, monkeypatch):
         return R()
 
     monkeypatch.setattr(subprocess, "run", fake_run)
-    alerter.send_sms("217-610-0636", "hello")
-    assert seen["argv"] == ["termux-sms-send", "-n", "217-610-0636", "hello"]
+    alerter.send_sms("555-010-0199", "hello")
+    assert seen["argv"] == ["termux-sms-send", "-n", "555-010-0199", "hello"]
 
 
 def test_drain_sends_each_once(iso):
@@ -98,9 +98,9 @@ def test_number_never_in_logs(iso, capsys):
     fake = FakeSms()
     drain(sms_sender=fake, binary_present=True)
     out, err = capsys.readouterr()
-    assert "217-610-0636" not in out and "217-610-0636" not in err
+    assert "555-010-0199" not in out and "555-010-0199" not in err
     # but the sms itself got the real number
-    assert all(n == "217-610-0636" for n, _ in fake.calls)
+    assert all(n == "555-010-0199" for n, _ in fake.calls)
 
 
 def test_quiet_hours_hold_and_flush(iso, monkeypatch):

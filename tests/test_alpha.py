@@ -205,6 +205,15 @@ def test_cli_reason_smoke(capsys):
 # real weights. In environments without torch (or without the weights
 # file, which is gitignored) they skip — the honest-fallback coverage
 # above still runs.
+#
+# Verified limitation (2026-09-27): core/levi/brain/weights/tiny-gpt.pt is
+# gitignored, so NO pristine checkout can ever run these. Clean-tree
+# control (git archive HEAD -> scratch): 102 passed, 7 skipped
+# ("native-brain weights not present"). Live worktree (torch 2.14.0+cpu
+# + the untracked weights): all hybrid-path tests ran and passed. The
+# hybrid proof is therefore worktree-only, forever, unless the 13 MB
+# weights get tracked in git — repo-consequential, Chauncey's call, not
+# this fixture's.
 
 
 def _require_brain():

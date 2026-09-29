@@ -11,7 +11,6 @@ Laws under test (see quetta_refine.py):
 import json
 from pathlib import Path
 
-import pytest
 
 from levi.hicomb.buffer import Buffer
 from levi.hicomb.pipeline import save_pipeline
@@ -151,6 +150,31 @@ def test_advisory_without_callback_applies_nothing(tmp_path):
     assert "except Exception:" not in target.read_text(encoding="utf-8")
     receipts = [json.loads(line) for line in log.read_text().splitlines()]
     assert receipts and all(r["decision"] == "advisory" for r in receipts)
+
+
+def test_crashing_refiner_never_breaks_save(tmp_path, monkeypatch):
+    """Advisory must never break the save: a crashing refiner degrades
+    to skipped (reported via on_quetta_skip), the write proceeds."""
+    from levi.hicomb import quetta_refine as qr_mod
+
+    def _boom(self, text, language, path_hint="buffer"):
+        raise RuntimeError("refiner exploded")
+
+    monkeypatch.setattr(qr_mod.QuettaRefiner, "review", _boom)
+    skipped = []
+    target = tmp_path / "app.py"
+    buf = Buffer(BARE_EXCEPT_PY, path=str(target))
+    result = save_pipeline(
+        buf,
+        run_quetta=True,
+        refine_store_dir=str(tmp_path / "store"),
+        refine_log_path=str(tmp_path / "refine.jsonl"),
+        on_quetta_skip=skipped.append,
+    )
+    assert result.ok, "save must survive a crashing refiner"
+    assert not result.quetta_refined
+    assert skipped and "exploded" in skipped[0]
+    assert target.read_text(encoding="utf-8") == buf.get_text()
 
 
 def test_gate_aborts_on_bad_agent_output(tmp_path, monkeypatch):

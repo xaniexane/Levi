@@ -32,6 +32,7 @@ def _clear_env(monkeypatch):
         "LEVI_WHATSAPP_READY",
         "LEVI_ALERT_WEBHOOK_URL",
         "LEVI_SHEETS_WEBHOOK_URL",
+        "LEVI_SHEETS_SPREADSHEET_ID",
     ):
         monkeypatch.delenv(key, raising=False)
 
@@ -128,12 +129,86 @@ def test_webhook_exception_never_kills_chain(tmp_path, monkeypatch):
 # ---- sheets leg -----------------------------------------------------------
 
 
-def test_sheets_unconfigured_names_exact_var_and_skips(monkeypatch):
+def test_sheets_unconfigured_names_both_rungs_and_skips(monkeypatch):
     _clear_env(monkeypatch)
-    status, detail = fo.send_sheets("T", "B")
+    status, detail = fo.send_sheets(
+        "T", "B", cli_append=lambda sid, row: False
+    )
     assert status == "unconfigured"
-    # names the EXACT var Chauncey has not supplied yet
+    # names BOTH missing pieces: the webhook URL rung and the CLI rung
     assert "LEVI_SHEETS_WEBHOOK_URL" in detail
+    assert "hatch_gws_cli" in detail
+
+
+def test_sheets_rung2_cli_append_delivers(monkeypatch):
+    _clear_env(monkeypatch)
+    seen = {}
+
+    def fake_append(spreadsheet_id, row):
+        seen["sid"] = spreadsheet_id
+        seen["row"] = row
+        return True
+
+    status, detail = fo.send_sheets(
+        "Title", "Body", alert_id="al-7", severity="high",
+        channel_chain=["sms"], cli_append=fake_append,
+    )
+    assert status == "delivered"
+    assert "DemandPulse" in detail
+    # default sheet used when the env override is absent
+    assert seen["sid"] == fo.DEFAULT_SHEETS_SPREADSHEET_ID
+    row = seen["row"]
+    assert len(row) == 6
+    assert row[1] == "high"      # severity
+    assert row[2] == "Title"
+    assert row[3] == "Body"
+    assert row[4] == "sheets"    # delivered_via
+    assert row[5] == "mirrored"
+    assert row[0]  # timestamp
+
+
+def test_sheets_rung2_env_override_picks_sheet(monkeypatch):
+    _clear_env(monkeypatch)
+    monkeypatch.setenv("LEVI_SHEETS_SPREADSHEET_ID", "override-sheet-id")
+    seen = {}
+
+    def fake_append(spreadsheet_id, row):
+        seen["sid"] = spreadsheet_id
+        return True
+
+    status, _ = fo.send_sheets("T", "B", cli_append=fake_append)
+    assert status == "delivered"
+    assert seen["sid"] == "override-sheet-id"
+
+
+def test_sheets_rung2_exception_is_failed_not_delivered(monkeypatch):
+    _clear_env(monkeypatch)
+
+    def bad_append(spreadsheet_id, row):
+        raise RuntimeError("cli exploded")
+
+    status, detail = fo.send_sheets("T", "B", cli_append=bad_append)
+    assert status == "failed"
+    assert "sheets_error" in detail
+
+
+def test_sheets_rung1_webhook_url_takes_precedence(monkeypatch):
+    _clear_env(monkeypatch)
+    monkeypatch.setenv("LEVI_SHEETS_WEBHOOK_URL", "https://script.google.com/x")
+    calls = []
+
+    def fake_post(url, payload):
+        calls.append("post")
+        return 200
+
+    def fake_append(spreadsheet_id, row):
+        calls.append("append")
+        return True
+
+    status, _ = fo.send_sheets("T", "B", http_post=fake_post,
+                               cli_append=fake_append)
+    assert status == "delivered"
+    assert calls == ["post"]  # rung 1 wins; rung 2 never attempted
 
 
 def test_sheets_payload_includes_delivered_via(monkeypatch):
@@ -194,6 +269,8 @@ def test_sheets_dispatch_receives_chain_context(tmp_path, monkeypatch):
 
 def test_chain_log_records_new_legs(tmp_path, monkeypatch):
     _clear_env(monkeypatch)
+    # neuter rung 2 so no real sheet append happens in tests
+    monkeypatch.setattr(fo, "_sheets_cli_append", lambda sid, row: False)
     log = tmp_path / "chains.jsonl"
     report = fo.dispatch("al-4", "dk-4", "T", "B",
                          order=fo.DEFAULT_ORDER, chain_log=log)
@@ -254,6 +331,8 @@ def test_deliver_maps_unconfigured_to_not_configured(tmp_path, monkeypatch):
     from levi.demand import alerts as am
 
     _clear_env(monkeypatch)
+    # neuter rung 2 so no real sheet append happens in tests
+    monkeypatch.setattr(fo, "_sheets_cli_append", lambda sid, row: False)
     eng = am.AlertEngine(path=tmp_path / "alerts.json")
     a = eng.create("reminder", "n2", at="2026-09-24T08:00:00",
                    message="hi", channels=("console", "file"))

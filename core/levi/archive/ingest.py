@@ -431,6 +431,18 @@ REPORTS = [
         ),
     },
     {
+        "slug": "show-not-tell-20260927",
+        "files": ["findings.jsonl"],
+        "parser": parse_findings_jsonl,
+        "tag": "show-not-tell",
+        "notes": (
+            "Web-sourced 2026-09-27; two sources per entry. Theme: dead "
+            "show-don't-tell interfaces (QBE example-row querying, KWIC "
+            "permuted indexes, nomography alignment charts). Built as "
+            "core/levi/{qbe,kwic,nomography}/ with tests."
+        ),
+    },
+    {
         "slug": "games-hunt-20260916-0022",
         "files": ["findings.jsonl"],
         "parser": parse_findings_jsonl,
@@ -543,6 +555,22 @@ REPORTS = [
             "flagged per record. Honest inversion: core/levi/trust/ "
             "(attest.py earned-by-proof ledger, reach.py no-auction "
             "feed), 21 tests green."
+        ),
+    },
+    {
+        "slug": "humane-hunt-20260926-evening",
+        "files": ["findings.jsonl"],
+        "parser": parse_findings_jsonl,
+        "tag": "humane",
+        "notes": (
+            "Web-verified 2026-09-26; perpetual-hunt evening run, "
+            "forgotten-methods vein: the humane interface mechanics the "
+            "giants refused — Plan 9's plumber (user-owned dispatch "
+            "table; technique-alive: core/levi/plumb/, 19 tests green), "
+            "Etoys halos/Morphic (inspectable objects; queued larger "
+            "build), Self prototypes (live object world; queued larger "
+            "build), Canon Cat nucleus + quasimodes (leap half already "
+            "in-tree). Guesses and analysis flagged per record."
         ),
     },
 ]

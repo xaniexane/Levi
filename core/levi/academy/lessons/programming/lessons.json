@@ -1,0 +1,853 @@
+[
+ {
+  "n": 1,
+  "id": "variables",
+  "title": "Variables",
+  "subtitle": "Input → transformation → output",
+  "idea": "Every program is input → transformation → output. Variables are labeled boxes that hold values while the transformation happens.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Forget everything mystical about code. A program takes something **in**, changes it, and puts something **out**. A variable is just a labeled box — you put a value in the box, the label lets you find it later."
+   },
+   {
+    "kind": "p",
+    "text": "Four types you'll use constantly: `str` (text), `int` (whole numbers), `float` (decimals), `bool` (`True`/`False`). Python figures out the type from the value — you don't declare it. The `=` sign **stores**, it doesn't mean \"equals\" like in math."
+   },
+   {
+    "kind": "p",
+    "text": "`input()` **pauses and waits** for the user to type — that's the input. `.upper()` transforms the text — that's the transformation. `print()` shows the result — that's the output. Every program you'll ever write is this shape with fancier steps."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l1e1",
+    "title": "Boxes with labels — and every value has a type:",
+    "kind": "python",
+    "code": "name = \"Chauncey\"\nage = 34\nprice = 9.99\npaid = False\n\nprint(name, type(name))\nprint(age, type(age))\nprint(price, type(price))\nprint(paid, type(paid))",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "Chauncey <class 'str'>\n34 <class 'int'>\n9.99 <class 'float'>\nFalse <class 'bool'>\n"
+   },
+   {
+    "id": "l1e2",
+    "title": "The full model — input, transform, output:",
+    "kind": "python",
+    "code": "name = input(\"Your name: \")\nshout = name.upper()\nprint(\"Hello,\", shout + \"!\")",
+    "stdin": "Chauncey\n",
+    "args": null,
+    "files": null,
+    "output": "Your name: Hello, CHAUNCEY!\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Ask the user for two whole numbers and print their sum.",
+    "hint": "input() always returns text, even when the user types digits. int() turns text like \"42\" into the number 42. You'll need it twice.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 2,
+  "id": "decisions-repetition",
+  "title": "Decisions & repetition",
+  "subtitle": "if, for, while",
+  "idea": "if lets the program choose a path. for and while let it repeat. Choice plus repetition is the entire trick behind everything software appears to be \"smart\" at.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "A program that runs top-to-bottom with no choices is a recipe. Two ideas turn recipes into machines: **decisions** (do this OR that) and **repetition** (do it again)."
+   },
+   {
+    "kind": "p",
+    "text": "The `if` line is the question. The **indented** lines underneath run only when the answer is yes. `elif` means \"else, if this instead\" — checked only when everything above was no. `else` is the fallback. Indentation isn't style here, it's **structure**: it decides what belongs to the question."
+   },
+   {
+    "kind": "p",
+    "text": "`names` is a **list** — boxes in a row (Lesson 4 goes deep). The loop takes each item, calls it `name` for one round, and runs the indented block. Three names, three hellos, one block of code. The `if` inside shows the real shape of programs: **loops with decisions inside**."
+   },
+   {
+    "kind": "p",
+    "text": "`for` is for \"each item in this collection\". `while` is for \"keep going until something changes\". Every `while` needs a line that moves toward the exit (`n = n - 1`) — without it, the loop never ends and you meet your first **infinite loop**. (Ctrl-C kills it.)"
+   }
+  ],
+  "examples": [
+   {
+    "id": "l2e1",
+    "title": "Decisions — the program asks a yes/no question:",
+    "kind": "python",
+    "code": "score = 85\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelse:\n    print(\"keep going\")",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "B\n"
+   },
+   {
+    "id": "l2e2",
+    "title": "Repetition over a collection:",
+    "kind": "python",
+    "code": "names = [\"Ava\", \"Ben\", \"Cy\"]\n\nfor name in names:\n    if name == \"Ava\":\n        print(\"Hello, boss:\", name)\n    else:\n        print(\"Hello,\", name)",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "Hello, boss: Ava\nHello, Ben\nHello, Cy\n"
+   },
+   {
+    "id": "l2e3",
+    "title": "while repeats until a condition breaks:",
+    "kind": "python",
+    "code": "n = 3\nwhile n > 0:\n    print(n)\n    n = n - 1\nprint(\"go\")",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "3\n2\n1\ngo\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Print the numbers 1 to 20, but print the word \"even\" instead of each even number.",
+    "hint": "range(1, 21) gives 1..20. n % 2 is the remainder after dividing by 2 — it equals 0 exactly when n is even.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 3,
+  "id": "functions",
+  "title": "Functions",
+  "subtitle": "Name it once, use it everywhere",
+  "idea": "A function is a named chunk of recipe. Data goes in through parameters, results come out through return. Define once, call anywhere.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "The moment you copy-paste a block of code a second time, it wants to be a function. You give the chunk a name, list what it needs as **parameters**, and hand the answer back with **return**."
+   },
+   {
+    "kind": "p",
+    "text": "`def` draws the boundary. `name` and `days` are parameters — empty slots that get filled by whoever calls. `return` hands the finished string **back to the caller**. The function doesn't print; it returns, and the caller decides what to do with the result."
+   },
+   {
+    "kind": "p",
+    "text": "`print` shows a human a value and throws it away. `return` gives the value to the program so it can be stored (`x = double(21)`), chained (`double(double(2))`), or tested. Rule: **functions return, scripts print.**"
+   }
+  ],
+  "examples": [
+   {
+    "id": "l3e1",
+    "title": "Define once, call in a loop:",
+    "kind": "python",
+    "code": "def reminder(name, days):\n    return f\"Hi {name}, invoice due in {days} days.\"\n\nfor n in [\"Ava\", \"Ben\"]:\n    print(reminder(n, 3))",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "Hi Ava, invoice due in 3 days.\nHi Ben, invoice due in 3 days.\n"
+   },
+   {
+    "id": "l3e2",
+    "title": "return vs print — the confusion that bites everyone once:",
+    "kind": "python",
+    "code": "def double(n):\n    return n * 2\n\nx = double(21)\nprint(x)\nprint(double(double(2)))",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "42\n8\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Write total(numbers) — a function that takes a list of numbers and returns their sum.",
+    "hint": "Start with t = 0. Loop over the list, add each number to t. Return t — after the loop ends, so check your indentation.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 4,
+  "id": "lists-tuples",
+  "title": "Lists & tuples",
+  "subtitle": "Ordered collections",
+  "idea": "A list is an ordered row of boxes you can change. A tuple is the same row, locked. Position matters — counting starts at 0.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "One variable holds one value. A **list** holds many, in order. A **tuple** holds many, in order, permanently — use it when the data shouldn't change out from under you."
+   },
+   {
+    "kind": "p",
+    "text": "Indexing starts at **0** — `appts[0]` is the first item. Negative indexes count from the end (`-1` is last). Slices take a range: `appts[1:]` means \"from position 1 to the end\". `.append()` grows the list. `len()` counts it."
+   },
+   {
+    "kind": "p",
+    "text": "`x, y = point` is **unpacking** — Python splits the tuple into variables in one move. You'll see this everywhere: functions returning two values, loops over pairs. Trying `point[0] = 99` would crash — that's the lock doing its job."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l4e1",
+    "title": "Lists: index, slice, grow:",
+    "kind": "python",
+    "code": "appts = [\"9:00 Ava\", \"10:30 Ben\"]\nappts.append(\"12:00 Cy\")\nprint(len(appts))\nprint(appts[0])\nprint(appts[-1])\nprint(appts[1:])",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "3\n9:00 Ava\n12:00 Cy\n['10:30 Ben', '12:00 Cy']\n"
+   },
+   {
+    "id": "l4e2",
+    "title": "Tuples: locked, and unpacking:",
+    "kind": "python",
+    "code": "point = (10, 20)\nprint(point[0])\nx, y = point\nprint(\"x =\", x, \" y =\", y)",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "10\nx = 10  y = 20\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Reverse a list without using .reverse() or reversed().",
+    "hint": "Slicing takes an optional step: items[start:stop:step]. A step of -1 walks backwards.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 5,
+  "id": "dictionaries",
+  "title": "Dictionaries",
+  "subtitle": "Look things up by name",
+  "idea": "A dictionary is labeled drawers: you fetch values by key (a name), not by position. It's the shape of almost every real record — invoices, users, configs.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Lists answer \"what's third?\" Dictionaries answer \"what's the client's name?\" — you look things up by **key** instead of counting positions. Nearly every record in real software (an invoice, a user, a config) is a dictionary."
+   },
+   {
+    "kind": "p",
+    "text": "`invoice[\"client\"]` opens the drawer labeled `\"client\"`. Two ways to read: brackets **demand** the key exists (missing key = crash), `.get()` asks politely and takes a fallback. Rule of thumb: brackets when the key *must* be there, `.get()` when it might not be."
+   },
+   {
+    "kind": "p",
+    "text": "`.items()` gives key-and-value together — unpack them straight into two loop variables. `.keys()` and `.values()` give each side alone. Keys must be unique and unchangeable (strings and numbers are the usual choice)."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l5e1",
+    "title": "Drawers with labels:",
+    "kind": "python",
+    "code": "invoice = {\"id\": \"INV-1042\", \"client\": \"Ava\", \"amount\": 400, \"paid\": False}\nprint(invoice[\"client\"])\nprint(invoice.get(\"notes\", \"no notes\"))\ninvoice[\"paid\"] = True\nprint(invoice[\"paid\"])",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "Ava\nno notes\nTrue\n"
+   },
+   {
+    "id": "l5e2",
+    "title": "Looping over drawers:",
+    "kind": "python",
+    "code": "prices = {\"cut\": 25, \"beard\": 15, \"wash\": 10}\nfor service, price in prices.items():\n    print(service, \"->\", price)\nprint(\"keys:\", list(prices.keys()))",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "cut -> 25\nbeard -> 15\nwash -> 10\nkeys: ['cut', 'beard', 'wash']\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Count how many times each word appears in a sentence, and print the counts.",
+    "hint": "Split the sentence into words first. Then: counts[word] = counts.get(word, 0) + 1 — read it as \"whatever was there before (or 0), plus one\".",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 6,
+  "id": "strings-in-depth",
+  "title": "Strings in depth",
+  "subtitle": "Text is a sequence",
+  "idea": "Text is a sequence of characters — so everything you learned about sequences (indexing, slicing, looping) works on strings, plus purpose-built tools: split, join, strip, and f-strings.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "You already format text with f-strings. Underneath, a string is a **sequence of characters** — indexable, sliceable, loopable, exactly like a list. Plus a toolbox built for text."
+   },
+   {
+    "kind": "p",
+    "text": "`split(\"|\")` cuts the string at every `|` and returns the pieces as a list — this is how you parse lines from files, CSV-ish data, and pasted records. The f-string then reassembles the pieces in your format."
+   },
+   {
+    "kind": "p",
+    "text": "The greatest hits: `.strip()` trims whitespace, `.lower()`/`.upper()` fix case, `.split()` cuts apart, `\"sep\".join(list)` glues a list back together with a separator, `.replace()` swaps text. Chain them — `messy.strip().lower()` reads left to right and each step feeds the next."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l6e1",
+    "title": "Split a record, rebuild it your way:",
+    "kind": "python",
+    "code": "record = \"Chauncey|Springfield|555-010-0199\"\nparts = record.split(\"|\")\nprint(parts)\nprint(f\"{parts[0]} from {parts[1]}: {parts[2]}\")",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "['Chauncey', 'Springfield', '555-010-0199']\nChauncey from Springfield: 555-010-0199\n"
+   },
+   {
+    "id": "l6e2",
+    "title": "Clean and reassemble:",
+    "kind": "python",
+    "code": "messy = \"   hello WORLD   \"\nprint(messy.strip().lower())\nprint(\"a,b,c\".split(\",\"))\nprint(\" | \".join([\"a\", \"b\", \"c\"]))\nprint(\"price: 49\".replace(\"49\", \"59\") )",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "hello world\n['a', 'b', 'c']\na | b | c\nprice: 59\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Turn the string \"5550100199\" into \"555-010-0199\".",
+    "hint": "Slice it into three pieces — [0:3], [3:6], [6:] — then glue with an f-string and two dashes.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 7,
+  "id": "files-persistence",
+  "title": "Files & persistence",
+  "subtitle": "Data that survives the program",
+  "idea": "Variables die when the program ends. Files are how data survives. open() with a with-block is the whole pattern — write it once and reuse it forever.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Everything so far evaporates when the script finishes. **Files are memory that outlives the program.** Invoices, logs, configs — all just files your program reads and writes. The pattern never changes:"
+   },
+   {
+    "kind": "p",
+    "text": "`\"w\"` means **write** (creates the file, or wipes it clean first — respect that). The `with` block opens the file and **guarantees it gets closed**, even if something crashes mid-write. Always use it; never leave a file hanging open."
+   },
+   {
+    "kind": "p",
+    "text": "`\"a\"` means **append** — adds to the end without wiping. Looping directly over the file object gives you one line at a time (memory-friendly for big files). `line.strip()` trims the newline each line carries."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l7e1",
+    "title": "Write, then read back:",
+    "kind": "python",
+    "code": "with open(\"notes.txt\", \"w\") as f:\n    f.write(\"first line\\n\")\n    f.write(\"second line\\n\")\n\nwith open(\"notes.txt\") as f:\n    print(f.read())",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "first line\nsecond line\n\n"
+   },
+   {
+    "id": "l7e2",
+    "title": "Append and read line by line:",
+    "kind": "python",
+    "code": "with open(\"notes.txt\", \"a\") as f:\n    f.write(\"third line\\n\")\n\nwith open(\"notes.txt\") as f:\n    for line in f:\n        print(\">\", line.strip())",
+    "stdin": null,
+    "args": null,
+    "files": {
+     "notes.txt": "first line\nsecond line\n"
+    },
+    "output": "> first line\n> second line\n> third line\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Write a tiny log: every time the script runs, append the current date and time on its own line to log.txt.",
+    "hint": "from datetime import datetime gives you datetime.now(). Open log.txt in append mode and write str(datetime.now()) plus a newline.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 8,
+  "id": "errors-exceptions-debugging",
+  "title": "Errors, exceptions & debugging",
+  "subtitle": "Read the letter, fix the bug",
+  "idea": "An error message is a letter telling you exactly where it hurts. Read it bottom-up — last line first — and bugs stop being scary and start being instructions.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Every programmer spends half their time reading errors. The pros aren't the ones who avoid them — they're the ones who **read the letter**. Python's traceback is genuinely helpful once you know where to look."
+   },
+   {
+    "kind": "p",
+    "text": "Read **bottom-up**: the last line names the error — `NameError: name 'totla' is not defined`. That's the diagnosis: you typed a name Python never saw. The line above it points at the exact line and even the column. The fix is spelling. Most tracebacks work exactly like this: last line = what, lines above = where."
+   },
+   {
+    "kind": "p",
+    "text": "`try` says \"attempt this\". `except ValueError` says \"if *this specific thing* goes wrong, do that instead\". Catch **specific** errors — a bare `except:` hides bugs you need to see. The pattern: try the risky thing, handle the failure you can predict, let everything else crash loudly so you learn about it."
+   },
+   {
+    "kind": "h2",
+    "text": "The debugging checklist — tape this to the wall"
+   },
+   {
+    "kind": "p",
+    "text": "**1. Read the LAST line first.** The error type and message are the diagnosis — everything above is just the address."
+   },
+   {
+    "kind": "p",
+    "text": "**2. Reproduce small.** The smallest input that still crashes is worth ten guesses."
+   },
+   {
+    "kind": "p",
+    "text": "**3. Print before the crash.** `print()` the value on the line *above* the failing one — most bugs are a value you didn't expect."
+   },
+   {
+    "kind": "p",
+    "text": "**4. Check the types.** `type(x)` settles half of all arguments about what's actually in a variable."
+   },
+   {
+    "kind": "p",
+    "text": "**5. Bisect.** Comment out half the code. Bug gone? It's in that half. Repeat until cornered."
+   },
+   {
+    "kind": "p",
+    "text": "**6. Walk away.** Ten minutes off beats an hour of staring — your brain keeps working without you."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l8e1",
+    "title": "A crash, and how to read it:",
+    "kind": "python",
+    "code": "total = 10 + 5\nprint(totla)",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "Traceback (most recent call last):\n  File \"/tmp/course-verify-zyyeyt1k/main.py\", line 2, in <module>\n    print(totla)\n          ^^^^^\nNameError: name 'totla' is not defined. Did you mean: 'total'?"
+   },
+   {
+    "id": "l8e2",
+    "title": "Expect trouble and handle it:",
+    "kind": "python",
+    "code": "def to_int(text):\n    try:\n        return int(text)\n    except ValueError:\n        return None\n\nprint(to_int(\"42\"))\nprint(to_int(\"forty-two\"))",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "42\nNone\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "This crashes. Fix it so it prints a friendly fallback instead:\nprices = {\"cut\": 25}\nprint(prices[\"color\"])",
+    "hint": "The key \"color\" was never put in the drawer. Either ask politely with .get() and a default, or check membership first with: if \"color\" in prices.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 9,
+  "id": "modules-packages-pip",
+  "title": "Modules, packages & pip",
+  "subtitle": "Import solved problems",
+  "idea": "A .py file is a module the moment another file imports it. The standard library is thousands of solved problems — import before you build.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "You've been importing since lesson one without noticing (`type` and `print` are builtins, but `datetime` isn't). A **module** is just a `.py` file someone — including you — wrote. `import` loads it and hands you its contents."
+   },
+   {
+    "kind": "p",
+    "text": "`import random` brings the whole module; `from datetime import date` takes just one piece. The stdlib covers files, dates, math, randomness, the web, data formats — **check the stdlib before writing anything that feels generic**. It's already tested by millions."
+   },
+   {
+    "kind": "p",
+    "text": "`greet.py` became a module the instant `import greet` ran. Your projects grow exactly like this: one file gets crowded, you move a chunk into a new file, you import it. (That's also how your DDD tree is organized — `engines/`, `services/`, each file a module.)"
+   }
+  ],
+  "examples": [
+   {
+    "id": "l9e1",
+    "title": "The standard library does the boring parts:",
+    "kind": "python",
+    "code": "import random\nfrom datetime import date\n\nprint(random.choice([\"rock\", \"paper\", \"scissors\"]))\nprint(\"year:\", date.today().year)",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "paper\nyear: 2026\n"
+   },
+   {
+    "id": "l9e2",
+    "title": "Your own module — two files, same folder:",
+    "kind": "python",
+    "code": "import greet\n\nprint(greet.hello(\"Chauncey\"))",
+    "stdin": null,
+    "args": null,
+    "files": {
+     "greet.py": "def hello(name):\n    return f\"Hello, {name}!\"\n"
+    },
+    "output": "Hello, Chauncey!\n"
+   },
+   {
+    "id": "setup3",
+    "title": "pip — only when the stdlib can't:",
+    "kind": "shell",
+    "code": "# In Termux:\n#   pip install requests\n#\n# Rule: stdlib first, pip second. Everything in this course is stdlib —\n# nothing to install, nothing that can break on update day.",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": null
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Split any program you've written into two files: the logic in helpers.py, the running part in main.py.",
+    "hint": "Move the defs into helpers.py, then in main.py: import helpers. Guard the running part with: if __name__ == \"__main__\": — that line means \"only run this when the file is executed directly, not when it's imported\".",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 10,
+  "id": "comprehensions-iteration",
+  "title": "Comprehensions & iteration",
+  "subtitle": "Say more with less",
+  "idea": "A comprehension builds a whole list or dict in one readable line. enumerate and zip let you loop with an index or in pairs — no hand-counting.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "You'll write a lot of loops that build lists. Python compresses that pattern into one line — a **comprehension**. It reads almost like English once you've seen three of them."
+   },
+   {
+    "kind": "p",
+    "text": "Read `[n * 2 for n in nums]` as \"double each n, for each n in nums\". The optional `if` filters. If a comprehension stops fitting on one line or needs two loops, **write the loop out** — readability beats cleverness, always."
+   },
+   {
+    "kind": "p",
+    "text": "`enumerate` hands you position + item together — no `i = 0` / `i += 1` bookkeeping. `zip` pairs two lists item-by-item. And dicts get comprehensions too: `{k: f\"${v}\" for k, v in prices.items()}` rebuilds the whole price list labeled."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l10e1",
+    "title": "Loops, compressed:",
+    "kind": "python",
+    "code": "nums = [1, 2, 3, 4, 5]\ndoubled = [n * 2 for n in nums]\nevens = [n for n in nums if n % 2 == 0]\nprint(doubled)\nprint(evens)",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "[2, 4, 6, 8, 10]\n[2, 4]\n"
+   },
+   {
+    "id": "l10e2",
+    "title": "Loop like you mean it:",
+    "kind": "python",
+    "code": "names = [\"Ava\", \"Ben\", \"Cy\"]\nfor i, name in enumerate(names, start=1):\n    print(f\"{i}. {name}\")\n\nprices = {\"cut\": 25, \"wash\": 10}\nlabels = {k: f\"${v}\" for k, v in prices.items()}\nprint(labels)",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "1. Ava\n2. Ben\n3. Cy\n{'cut': '$25', 'wash': '$10'}\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "From pairs = [(\"a\", 1), (\"b\", 2)] build the dict {\"a\": 1, \"b\": 2} using a dict comprehension.",
+    "hint": "Same shape as the labels example: {k: v for k, v in pairs} — the loop unpacks each tuple straight into k and v.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 11,
+  "id": "classes",
+  "title": "Classes",
+  "subtitle": "Only as much OOP as real code needs",
+  "idea": "A class bundles data with the functions that operate on it. You need exactly this much: __init__ stores the data, methods use it, self means \"this particular one\".",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "So far data (dicts) and behavior (functions) live apart. A **class** glues them: the invoice *knows* how to report its own status. You'll meet classes in every real codebase — including yours — so here's the working minimum."
+   },
+   {
+    "kind": "p",
+    "text": "`__init__` runs once when the object is born — it stores the data on `self`. Every method takes `self` first: it's how the method reaches *this particular* invoice's data. `inv = Invoice(...)` creates one; the class is the blueprint, `inv` is the building."
+   },
+   {
+    "kind": "note",
+    "text": "You've already read a real class: DDD's Service in services/service.py — __init__, methods, self, the same shape. Lesson 14 puts you inside it."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l11e1",
+    "title": "Data that knows what to do:",
+    "kind": "python",
+    "code": "class Invoice:\n    def __init__(self, invoice_id, client, amount):\n        self.invoice_id = invoice_id\n        self.client = client\n        self.amount = amount\n        self.paid = False\n\n    def mark_paid(self):\n        self.paid = True\n\n    def status(self):\n        state = \"PAID\" if self.paid else \"DUE\"\n        return f\"{self.invoice_id} ({self.client}): ${self.amount} - {state}\"\n\ninv = Invoice(\"INV-1042\", \"Ava\", 400)\nprint(inv.status())\ninv.mark_paid()\nprint(inv.status())",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "INV-1042 (Ava): $400 - DUE\nINV-1042 (Ava): $400 - PAID\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Add a chase_message() method to Invoice that returns: \"Hi {client}, invoice {id} for ${amount} is due.\"",
+    "hint": "Methods take self first and read self.client, self.invoice_id, self.amount. It's one return line with an f-string.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 12,
+  "id": "working-with-data",
+  "title": "Working with data",
+  "subtitle": "CSV and JSON",
+  "idea": "CSV is a spreadsheet as text. JSON is a dict as text. Nearly all real-world data arrives as one of these two — read them with the stdlib, never by hand.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Invoices arrive as CSV. APIs answer in JSON. Configs live in JSON. Two formats, two stdlib modules, and you never parse either by splitting strings yourself — the edge cases will eat you."
+   },
+   {
+    "kind": "p",
+    "text": "`csv.DictReader` turns each row into a dictionary keyed by the header row — `row[\"client\"]` instead of `row[1]`. Column order stops mattering. (The `newline=\"\"` is a csv-module quirk — just include it.)"
+   },
+   {
+    "kind": "p",
+    "text": "`json.dump` writes a Python dict/list straight to a file; `json.load` reads it back. JSON *is* dicts-and-lists as text — the mapping is one-to-one. `indent=2` makes it human-readable. This exact pattern (read CSV → filter → write JSON report) is real data work."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l12e1",
+    "title": "Read a CSV by column name:",
+    "kind": "python",
+    "code": "import csv\n\nwith open(\"invoices.csv\", newline=\"\") as f:\n    for row in csv.DictReader(f):\n        print(row[\"client\"], row[\"amount\"], row[\"paid\"])",
+    "stdin": null,
+    "args": null,
+    "files": {
+     "invoices.csv": "invoice_id,client,amount,paid\nINV-1042,Ava,400,no\nINV-1043,Ben,150,yes\nINV-1044,Cy,275,no\n"
+    },
+    "output": "Ava 400 no\nBen 150 yes\nCy 275 no\n"
+   },
+   {
+    "id": "l12e2",
+    "title": "Filter it, save the answer as JSON:",
+    "kind": "python",
+    "code": "import csv, json\n\nwith open(\"invoices.csv\", newline=\"\") as f:\n    rows = list(csv.DictReader(f))\n\noutstanding = [r for r in rows if r[\"paid\"].strip().lower() != \"yes\"]\nwith open(\"report.json\", \"w\") as f:\n    json.dump(outstanding, f, indent=2)\n\nprint(f\"{len(outstanding)} outstanding:\")\nprint(open(\"report.json\").read())",
+    "stdin": null,
+    "args": null,
+    "files": {
+     "invoices.csv": "invoice_id,client,amount,paid\nINV-1042,Ava,400,no\nINV-1043,Ben,150,yes\nINV-1044,Cy,275,no\n"
+    },
+    "output": "2 outstanding:\n[\n  {\n    \"invoice_id\": \"INV-1042\",\n    \"client\": \"Ava\",\n    \"amount\": \"400\",\n    \"paid\": \"no\"\n  },\n  {\n    \"invoice_id\": \"INV-1044\",\n    \"client\": \"Cy\",\n    \"amount\": \"275\",\n    \"paid\": \"no\"\n  }\n]\n"
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Write only the rows with amount over 100 to expensive.csv, with the same header.",
+    "hint": "csv.DictWriter needs fieldnames — grab them from the reader: reader.fieldnames. Remember writer.writeheader() before the rows, and compare with float(row[\"amount\"]).",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 13,
+  "id": "automation",
+  "title": "Automation",
+  "subtitle": "Scripts, CLI args, schedules",
+  "idea": "A script that takes arguments and runs on a schedule works while you sleep. That's a daemon's little cousin — and the shape of every DDD service.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Scripts you've written so far have their settings baked in. Real automation takes **arguments** (`--days 7`) so one script serves many jobs, and runs on a **schedule** so nobody has to remember it."
+   },
+   {
+    "kind": "p",
+    "text": "`argparse` builds the `--help` text, checks types (`type=int` rejects `--days soon`), and fills defaults — for free. Run with `python3 chase.py --days 7`; run with no flags and `days` is 30. Every DDD service CLI (`--data-dir`, `--run-once`) is built exactly this way."
+   },
+   {
+    "kind": "p",
+    "text": "That's the whole automation stack: a script with arguments, a cron line, a log file. Your DDD services run this exact lifecycle — `run_once()` doing one unit of work, the schedule deciding *when*."
+   }
+  ],
+  "examples": [
+   {
+    "id": "l13e1",
+    "title": "A script that takes orders:",
+    "kind": "python",
+    "code": "import argparse\n\nparser = argparse.ArgumentParser(description=\"Chase overdue invoices.\")\nparser.add_argument(\"--days\", type=int, default=30,\n                    help=\"days overdue to chase\")\nargs = parser.parse_args()\n\nprint(f\"Chasing invoices {args.days}+ days overdue...\")",
+    "stdin": null,
+    "args": [
+     "--days",
+     "7"
+    ],
+    "files": null,
+    "output": "Chasing invoices 7+ days overdue...\n"
+   },
+   {
+    "id": "setup4",
+    "title": "Put it on a schedule (Termux):",
+    "kind": "shell",
+    "code": "# In Termux:\n#   pkg install cronie termux-services\n#   sv-enable crond\n#   crontab -e\n#\n# Add this line — every day at 9:00 AM:\n#   0 9 * * * python3 ~/code/chase.py --days 7\n#\n# The five fields: minute hour day-of-month month day-of-week.\n# Logs go nowhere by default — append >> ~/code/chase.log 2>&1 to keep them.",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": null
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "try",
+    "task": "Add a --dry-run flag: when present, the script prints what it WOULD do instead of doing it.",
+    "hint": "parser.add_argument(\"--dry-run\", action=\"store_true\") — no value needed, its presence sets args.dry_run to True. Then: if args.dry_run: print(...) else: do the thing.",
+    "detail": null
+   }
+  ]
+ },
+ {
+  "n": 14,
+  "id": "capstone",
+  "title": "Capstone",
+  "subtitle": "Own your codebase",
+  "idea": "The course ends where your real work lives: inside the DDD product tree at ~/workspace/ddd. Read it, change it, extend it, ship it.",
+  "prose": [
+   {
+    "kind": "p",
+    "text": "Everything so far was rehearsal. Your DDD tree — ten products, real CLIs, 126 tests — is written in exactly the Python you just learned. These five exercises move you from student to owner. Run them from `~/workspace/ddd`."
+   },
+   {
+    "kind": "h2",
+    "text": "Exercise 1 — Read: find the templates"
+   },
+   {
+    "kind": "p",
+    "text": "Open `services/invoicechaser.py`. Near the top you'll find `_TEMPLATES` — a dict keyed by `3, 7, 14, 30`, each value a `(subject, message)` tuple with `{client}`, `{invoice_id}`, `{amount}`, `{due}`, `{overdue}` placeholders. Below it, `run_once()` loops the CSV rows, skips paid invoices, picks the right step per row, and returns a **dict summary** of the run. Question to answer for yourself: what two things does the returned dict always contain? (Read the last three lines of `run_once`.)"
+   },
+   {
+    "kind": "h2",
+    "text": "Exercise 2 — Change: make the words yours"
+   },
+   {
+    "kind": "p",
+    "text": "Edit the day-3 template's message text in `_TEMPLATES` — keep the `{placeholders}`, change the voice. Then run the demo and watch your words come out:"
+   },
+   {
+    "kind": "p",
+    "text": "You just did the core loop of professional development: **change → run → observe**. Nothing about this required permission."
+   },
+   {
+    "kind": "h2",
+    "text": "Exercise 3 — Add: your first service"
+   },
+   {
+    "kind": "p",
+    "text": "Every DDD service implements the `Service` interface from `services/service.py` (Lesson 11's class pattern, for real). Create `services/shoutout.py`:"
+   },
+   {
+    "kind": "p",
+    "text": "Then prove it works, from `~/workspace/ddd`:"
+   },
+   {
+    "kind": "h2",
+    "text": "Exercise 4 — Wire: add a --dry-run flag"
+   },
+   {
+    "kind": "p",
+    "text": "Open the `main()` function at the bottom of `services/invoicechaser.py` — it's the argparse pattern from Lesson 13. Add `--dry-run` (`action=\"store_true\"`), and when it's set, print the messages that *would* send instead of delivering them. Test both modes against `/tmp/ddd-cap/chaser`."
+   },
+   {
+    "kind": "h2",
+    "text": "Exercise 5 — Ship: tests green, then commit"
+   },
+   {
+    "kind": "p",
+    "text": "Done. You read production code, modified a live template, added a service implementing a real interface, extended a CLI, and shipped behind a green suite. That's not coursework anymore — that's the job."
+   }
+  ],
+  "examples": [
+   {
+    "id": "cap2",
+    "title": "From ~/workspace/ddd:",
+    "kind": "shell",
+    "code": "python3 examples/make_demo.py /tmp/ddd-cap\npython3 -m services.invoicechaser --data-dir /tmp/ddd-cap/chaser --run-once\n# Now read /tmp/ddd-cap/chaser/outbox.jsonl — your edited text is in there.",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": null
+   },
+   {
+    "id": "cap3a",
+    "title": "services/shoutout.py — type this in:",
+    "kind": "python",
+    "code": "from .service import Service\n\n\nclass ShoutOut(Service):\n    name = \"shoutout\"\n\n    def run_once(self):\n        return self._note_run({\"sent\": 1, \"message\": \"still here, still building\"})",
+    "stdin": null,
+    "args": null,
+    "files": {},
+    "output": null
+   },
+   {
+    "id": "cap3b",
+    "title": "Wire it up and run it:",
+    "kind": "python",
+    "code": "import sys\nsys.path.insert(0, \"/home/hatch/workspace/ddd\")\nfrom services.shoutout import ShoutOut\n\nsvc = ShoutOut().configure({\"data_dir\": \"/tmp/ddd-cap/shout\"})\nprint(svc.status()[\"name\"])\nprint(svc.run_once())",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": "shoutout\n{'sent': 1, 'message': 'still here, still building'}\n"
+   },
+   {
+    "id": "cap5",
+    "title": "From ~/workspace/ddd:",
+    "kind": "shell",
+    "code": "python3 -m pytest tests/ -q   # all green or it doesn't ship\n# then commit your work like any other change to the tree",
+    "stdin": null,
+    "args": null,
+    "files": null,
+    "output": null
+   }
+  ],
+  "exercises": [
+   {
+    "kind": "capstone",
+    "task": "Exercise 1 — Read: find the templates",
+    "hint": null,
+    "detail": "Open `services/invoicechaser.py`. Near the top you'll find `_TEMPLATES` — a dict keyed by `3, 7, 14, 30`, each value a `(subject, message)` tuple with `{client}`, `{invoice_id}`, `{amount}`, `{due}`, `{overdue}` placeholders. Below it, `run_once()` loops the CSV rows, skips paid invoices, picks the right step per row, and returns a **dict summary** of the run. Question to answer for yourself: what two things does the returned dict always contain? (Read the last three lines of `run_once`.)\n\n"
+   },
+   {
+    "kind": "capstone",
+    "task": "Exercise 2 — Change: make the words yours",
+    "hint": null,
+    "detail": "Edit the day-3 template's message text in `_TEMPLATES` — keep the `{placeholders}`, change the voice. Then run the demo and watch your words come out:\n\nYou just did the core loop of professional development: **change → run → observe**. Nothing about this required permission.\n\n"
+   },
+   {
+    "kind": "capstone",
+    "task": "Exercise 3 — Add: your first service",
+    "hint": null,
+    "detail": "Every DDD service implements the `Service` interface from `services/service.py` (Lesson 11's class pattern, for real). Create `services/shoutout.py`:\n\nThen prove it works, from `~/workspace/ddd`:\n\n"
+   },
+   {
+    "kind": "capstone",
+    "task": "Exercise 4 — Wire: add a --dry-run flag",
+    "hint": null,
+    "detail": "Open the `main()` function at the bottom of `services/invoicechaser.py` — it's the argparse pattern from Lesson 13. Add `--dry-run` (`action=\"store_true\"`), and when it's set, print the messages that *would* send instead of delivering them. Test both modes against `/tmp/ddd-cap/chaser`.\n\n"
+   },
+   {
+    "kind": "capstone",
+    "task": "Exercise 5 — Ship: tests green, then commit",
+    "hint": null,
+    "detail": "Done. You read production code, modified a live template, added a service implementing a real interface, extended a CLI, and shipped behind a green suite. That's not coursework anymore — that's the job."
+   }
+  ]
+ }
+]

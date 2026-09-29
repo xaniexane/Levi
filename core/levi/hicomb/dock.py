@@ -17,6 +17,10 @@ from __future__ import annotations
 
 import importlib
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:  # pragma: no cover - import cycle guard for annotations
+    from levi.hicomb.tabs import Session
 
 
 @dataclass
@@ -36,13 +40,16 @@ def builders_available() -> bool:
     return True
 
 
-def dock_builders(session, registry=None, engine=None) -> DockReport:
+def dock_builders(
+    session: "Session", registry=None, engine=None
+) -> DockReport:
     """Attach the builders engine to a Hicomb session, home-agnostic.
 
     - engine=None: construct the sibling's default engine lazily.
     - registry given: registers the ``builders.scaffold`` command so the
       touch command bar can drive prompt -> skeleton -> verify.
     Never raises for a missing/refactoring builders package — it reports.
+    Docking twice is idempotent: the command is registered once.
     """
     try:
         builders = importlib.import_module("levi.builders")
@@ -63,7 +70,7 @@ def dock_builders(session, registry=None, engine=None) -> DockReport:
             )
     session.extensions["builders"] = engine
     registered: list[str] = []
-    if registry is not None:
+    if registry is not None and registry.get("builders.scaffold") is None:
         from levi.hicomb.commands import Command
 
         def _run(sess, args):

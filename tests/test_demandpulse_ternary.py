@@ -1,5 +1,7 @@
 """Tests for the ternary signal model (dormant / gathering / breakout)."""
 
+import pytest
+
 from levi.demandpulse import ternary
 
 
@@ -57,3 +59,34 @@ def test_record_shape():
     rec = ternary.classify("widgets", [1, 3, 4]).to_record()
     assert set(rec) == {"subject", "state", "label", "basis", "counts", "velocity"}
     assert rec["state"] in ternary.STATES
+
+# --------------------------------- wave 1: ternary + themes hardening
+from levi.demandpulse.ternary import classify, classify_all
+
+
+def test_classify_rejects_garbage_counts_with_index():
+    with pytest.raises(ValueError, match=r"counts\[1\]"):
+        classify("s", [3, "nope", 5])
+    with pytest.raises(ValueError, match=r"counts\[0\]"):
+        classify("s", [None])
+
+
+def test_classify_rejects_insane_knobs():
+    with pytest.raises(ValueError, match="floor"):
+        classify("s", [1, 2], floor=-1)
+    with pytest.raises(ValueError, match="breakout_count"):
+        classify("s", [1, 2], breakout_count=0)
+    with pytest.raises(ValueError, match="breakout_multiple"):
+        classify("s", [1, 2], breakout_multiple=0)
+    with pytest.raises(ValueError, match="breakout_multiple"):
+        classify("s", [1, 2], breakout_multiple=float("nan"))
+
+
+def test_classify_all_none_is_empty():
+    assert classify_all(None) == []
+
+
+def test_classify_still_pure_and_deterministic():
+    a = classify("s", [1, 2, 9])
+    b = classify("s", [1, 2, 9])
+    assert a == b and a.state == "breakout" and a.label == "INFERENCE"

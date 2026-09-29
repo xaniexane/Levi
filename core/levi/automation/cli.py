@@ -123,6 +123,31 @@ def register_automation_parser(sub) -> None:
         "--count", type=int, default=5, help="how many upcoming runs to show"
     )
 
+    vr_p = cmds.add_parser(
+        "verdict-record", help="append a verdict to the verdict ledger"
+    )
+    vr_p.add_argument(
+        "--verdict",
+        required=True,
+        help='verdict as JSON, e.g. \'{"ruling": "upheld"}\'',
+    )
+    vr_p.add_argument("--source", default="cli", help="who rendered the verdict")
+    vr_p.add_argument(
+        "--ledger",
+        default="~/.levi/automation/verdict_ledger.jsonl",
+        help="ledger file path",
+    )
+
+    vv_p = cmds.add_parser(
+        "verdict-verify", help="verify the verdict ledger hash chain"
+    )
+    vv_p.add_argument(
+        "--ledger",
+        default="~/.levi/automation/verdict_ledger.jsonl",
+        help="ledger file path",
+    )
+    vv_p.add_argument("--tail", type=int, default=5, help="show the last N entries")
+
 
 def _cmd_watch(args: argparse.Namespace) -> int:
     """Poll one watcher once and print any emitted TriggerEvents."""
@@ -205,6 +230,47 @@ def _cmd_play(args: argparse.Namespace) -> int:
     return 0 if run.ok else 2
 
 
+def _cmd_verdict_record(args: argparse.Namespace) -> int:
+    import json
+
+    from .verdict_ledger import LedgerError, VerdictLedger
+
+    try:
+        verdict = json.loads(args.verdict)
+    except ValueError as exc:
+        print(f"cannot record: verdict is not valid JSON: {exc}")
+        return 1
+    try:
+        ledger = VerdictLedger(path=args.ledger)
+        entry = ledger.record(verdict, source=args.source)
+    except LedgerError as exc:
+        print(f"cannot record: {exc}")
+        return 1
+    print(f"recorded entry {entry.seq} ({entry.entry_hash[:12]}...)")
+    return 0
+
+
+def _cmd_verdict_verify(args: argparse.Namespace) -> int:
+    from .verdict_ledger import LedgerError, VerdictLedger
+
+    try:
+        ledger = VerdictLedger(path=args.ledger)
+    except LedgerError as exc:
+        print(f"cannot verify: {exc}")
+        return 1
+    ok, problems = ledger.verify()
+    if ok:
+        print(f"ledger OK: {len(ledger)} entries, chain intact")
+    else:
+        print("ledger CORRUPT:")
+        for problem in problems:
+            print(f"  - {problem}")
+    for entry in ledger.tail(args.tail):
+        ruling = entry.verdict.get("ruling", "?")
+        print(f"  [{entry.seq}] {ruling} via {entry.source}")
+    return 0 if ok else 2
+
+
 def cmd_automation(args: argparse.Namespace) -> int:
     cmd = getattr(args, "automation_cmd", None) or "safety"
 
@@ -230,6 +296,10 @@ def cmd_automation(args: argparse.Namespace) -> int:
 
     if cmd == "recur":
         return _cmd_recur(args)
+    if cmd == "verdict-record":
+        return _cmd_verdict_record(args)
+    if cmd == "verdict-verify":
+        return _cmd_verdict_verify(args)
 
     if cmd == "watch":
         return _cmd_watch(args)

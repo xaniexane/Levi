@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import hashlib
 import json
 import random
 from pathlib import Path
@@ -39,7 +40,7 @@ OUT = HERE / "corpus_curriculum.jsonl"
 MANIFEST = HERE / "corpus_curriculum_manifest.json"
 
 SEED = 20260921
-GENERATOR_VERSION = "2026-09-21-v1"
+GENERATOR_VERSION = "2026-09-29-v2"
 
 USER = "User: "
 LEVI = "LEVI: "
@@ -948,13 +949,24 @@ def main(argv=None) -> int:
     out_path = Path(args.out)
     counts: dict[str, int] = {}
     n_chars = 0
+    # Recipe step 1 (CURATE): dedupe by text hash, keep first occurrence.
+    # Section order and RNG are fixed, so this is deterministic.
+    seen: set[str] = set()
+    n_deduped = 0
     with open(out_path, "w", encoding="utf-8") as fh:
         for name, records in sections:
-            counts[name] = len(records)
+            kept = 0
             for r in records:
+                h = hashlib.sha256(r["text"].encode("utf-8")).hexdigest()
+                if h in seen:
+                    n_deduped += 1
+                    continue
+                seen.add(h)
+                kept += 1
                 line = json.dumps(r, ensure_ascii=False)
                 fh.write(line + "\n")
                 n_chars += len(r["text"])
+            counts[name] = kept
 
     manifest = {
         "generator": "build_curriculum_corpus.py",
@@ -966,6 +978,7 @@ def main(argv=None) -> int:
         "government, civics, 5D EI, personality traits. 'more human than human.'",
         "sections": counts,
         "total_records": sum(counts.values()),
+        "deduped_records": n_deduped,
         "total_chars": n_chars,
         "record_shape": "{text, kind, source, topic} + optional sidecars "
         "(ei_dims, persona_id/provisional/tone/role, traits)",

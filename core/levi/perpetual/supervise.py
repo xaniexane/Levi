@@ -129,10 +129,17 @@ def _automation_loop(stop_event: threading.Event, interval_s: float = 300.0) -> 
         stop_event.wait(interval_s)
 
 
+def _index_watch_loop(stop_event: threading.Event, interval_s: float = 5.0) -> None:
+    from levi.daemon.index_watch import _index_watch_loop as _run
+
+    _run(stop_event, interval_s=interval_s)
+
+
 SERVICE_ADAPTERS: Dict[str, Callable[[threading.Event], None]] = {
     "levi-heartbeat": _heartbeat_loop,
     "levi-growth": _growth_loop,
     "levi-automation": _automation_loop,
+    "levi-index-watch": _index_watch_loop,
 }
 
 

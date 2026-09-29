@@ -65,6 +65,7 @@ from .routines import (
     record_from_session,
     record_routine,
 )
+from .verdict_ledger import Entry, LedgerError, VerdictLedger
 from .flows import (
     FlowError,
     FlowReceipt,
@@ -94,11 +95,13 @@ __all__ = [
     "NodeRecord",
     "RefusalAdapter",
     "WebhookAdapter",
+    "Entry",
     "Gate",
     "GateDenied",
     "GateKind",
     "GateRequest",
     "GateResult",
+    "LedgerError",
     "PRIMITIVES",
     "Primitive",
     "RAIL",
@@ -109,6 +112,7 @@ __all__ = [
     "RoutineRun",
     "RoutineStep",
     "TriggerEvent",
+    "VerdictLedger",
     "artifacts_dir",
     "auto_approve",
     "auto_deny",

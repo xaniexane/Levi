@@ -69,3 +69,17 @@ def test_report_counts():
     rec = report.to_record()
     assert rec["counts"] == {"published": 1, "quarantined": 1}
     assert rec["ran_at"]
+
+# ----------------------------------------- wave 2: twins hardening
+def test_scout_none_input_is_empty_not_exception():
+    assert twins.Scout().propose(None) == []
+
+
+def test_verifier_none_input_is_empty_report():
+    report = twins.Verifier().verify(None)
+    assert report.published == [] and report.quarantined == []
+
+
+def test_run_twin_pass_none_input():
+    report, proposed = twins.run_twin_pass(None)
+    assert proposed == [] and report.published == []

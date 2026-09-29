@@ -98,6 +98,18 @@ class FairDraw:
         self.pity_rarity = pity_rarity
         if pity_ceiling is not None and pity_ceiling < 1:
             raise ValueError("pity_ceiling must be positive or None")
+        if pity_rarity not in RARITIES:
+            raise ValueError(f"unknown pity_rarity: {pity_rarity!r}")
+        if pity_ceiling is not None:
+            floor = RARITIES.index(pity_rarity)
+            reachable = any(
+                RARITIES.index(d.rarity) >= floor for d in table._drops
+            )
+            if not reachable:
+                raise ValueError(
+                    f"pity_rarity {pity_rarity!r} is rarer than every drop "
+                    "in the table — the pity ceiling could never be honored"
+                )
         self._rng = random.Random(seed)
         self._drops = table._drops
         self._cum: List[Tuple[float, Drop]] = []

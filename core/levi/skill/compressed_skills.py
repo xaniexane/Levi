@@ -258,6 +258,12 @@ COMPRESSED_SKILLS: List[Skill] = _load_playbook_skills() + [
         "Work/rest rhythm over 14 days: surge / steady / rest, with the next rest counted down.",
         ["engines", "rhythm", "rest", "run"],
     ),
+    _engine_skill(
+        "braid",
+        "Run Braid Engine",
+        "Arbitration over verdicts from other engines: consensus, named-dissent majority, or deadlock held for the keeper.",
+        ["engines", "arbitration", "verdicts", "run"],
+    ),
     _winnow_skill(),
 ]
 

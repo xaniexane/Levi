@@ -65,5 +65,5 @@ __all__ = [
     "cli",
     "dj",
     "forge",
-    "spotify",
+    "youtube",
 ]

@@ -346,28 +346,39 @@ class QuettaPanEngine:
     # ---- safe fixes (v10.0) -------------------------------------------------
 
     def safe_fixes(
-        self, content: str, suffix: str, skip: Optional[set] = None
+        self,
+        content: str,
+        suffix: str,
+        skip: Optional[set] = None,
+        only: Optional[set] = None,
     ) -> tuple[str, List[str]]:
         """Apply v10.0's safe fixes. Returns (new_content, fix_ids).
         ``skip`` holds rule/fix ids the genome suppressed — a withheld
-        rule's fix is not applied either."""
+        rule's fix is not applied either. ``only`` restricts application
+        to the given fix ids (the agent-pi fan-out builds one variant per
+        fix subset); ``only=None`` keeps the original apply-all behavior.
+        """
         skip = skip or set()
+
+        def _take(fid: str) -> bool:
+            return (only is None or fid in only) and fid not in skip
+
         fixed = []
         if (
             suffix == ".py"
             and "except:" in content
             and "Exception" not in content
-            and "PY_BARE_EXCEPT" not in skip
+            and _take("PY_BARE_EXCEPT")
         ):
             content = content.replace("except:", "except Exception:")
             fixed.append("PY_BARE_EXCEPT")
-        if "\t" in content and "HARMONY_TABS" not in skip:
+        if "\t" in content and _take("HARMONY_TABS"):
             content = content.expandtabs(4)
             fixed.append("HARMONY_TABS")
         if (
             suffix in (".js", ".ts", ".jsx", ".tsx")
             and "debugger;" in content
-            and "TS_DEBUGGER_LOCK" not in skip
+            and _take("TS_DEBUGGER_LOCK")
         ):
             content = content.replace("debugger;", "/* debugger inactive */;")
             fixed.append("TS_DEBUGGER_LOCK")

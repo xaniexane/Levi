@@ -17,7 +17,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterator, List, Optional
+from typing import TYPE_CHECKING, Dict, Iterator, List, Optional
+
+if TYPE_CHECKING:
+    # downloads.py imports AUDIO_SUFFIXES from this module, so this
+    # import stays under TYPE_CHECKING to avoid a runtime cycle.
+    from .downloads import DownloadStore
 
 AUDIO_SUFFIXES = (".mp3", ".wav", ".ogg", ".oga", ".flac", ".m4a", ".opus", ".aac")
 
@@ -131,11 +136,7 @@ class LocalFileProvider(ProviderPlugin):
 
     def search(self, query: str, limit: int = 25) -> List[Track]:
         q = query.lower()
-        hits = [
-            self._track_for(p)
-            for p in self._iter_files()
-            if q in p.stem.lower()
-        ]
+        hits = [self._track_for(p) for p in self._iter_files() if q in p.stem.lower()]
         return hits[:limit]
 
     def resolve(self, ref: str) -> Track:
@@ -143,6 +144,77 @@ class LocalFileProvider(ProviderPlugin):
         if not path.is_file():
             raise KeyError(f"local: no such file {ref!r}")
         return self._track_for(path)
+
+
+class DownloadsProvider(LocalFileProvider):
+    """The download lane as a provider: downloaded audio files are the
+    offline-capable library. Track ids are namespaced ``downloads:``
+    and carry the download manifest metadata (source_url, sha256,
+    downloaded_at) when present. Files dropped in by hand still scan;
+    only manifest-backed entries carry provenance."""
+
+    name = "downloads"
+
+    def __init__(self, store: "DownloadStore") -> None:
+        self._store = store
+        super().__init__(store.dir)
+
+    def _track_for(self, path: Path) -> Track:
+        track_id = f"downloads:{path.name}"
+        meta: Dict = {}
+        title = artist = None
+        try:
+            rec = self._store.get(track_id)
+            meta = {
+                "source_url": rec.get("url", ""),
+                "sha256": rec.get("sha256", ""),
+                "downloaded_at": rec.get("downloaded_at", ""),
+                "bytes": rec.get("bytes", 0),
+            }
+            title, artist = rec.get("title"), rec.get("artist")
+        except KeyError:
+            pass
+        if title is None:
+            stem = path.stem
+            artist, title = "unknown artist", stem
+            if " - " in stem:
+                artist, title = (p.strip() for p in stem.split(" - ", 1))
+        return Track(
+            id=track_id,
+            title=title or path.stem,
+            artist=artist or "unknown artist",
+            provider=self.name,
+            ref=str(path),
+            meta=meta,
+        )
+
+    def search(self, query: str, limit: int = 25) -> List[Track]:
+        """File-stem search like the parent, but also matches the
+        manifest title/artist/id — a download renamed at fetch time
+        stays findable under the name the user gave it."""
+        q = query.lower().strip()
+        hits = []
+        for p in self._iter_files():
+            track = self._track_for(p)
+            if (
+                not q
+                or q in p.stem.lower()
+                or q in track.title.lower()
+                or q in track.artist.lower()
+                or q in track.id.lower()
+            ):
+                hits.append(track)
+            if len(hits) >= limit:
+                break
+        return hits
+
+    def describe(self) -> Dict:
+        d = super().describe()
+        d["note"] = (
+            "on-device downloads: direct audio files only, "
+            "persisted across launches, playable offline"
+        )
+        return d
 
 
 class FakeProvider(ProviderPlugin):
@@ -165,8 +237,14 @@ class FakeProvider(ProviderPlugin):
     def search(self, query: str, limit: int = 25) -> List[Track]:
         q = query.lower()
         hits = [
-            Track(id=tid, title=title, artist=artist, duration=dur,
-                  provider=self.name, ref=tid)
+            Track(
+                id=tid,
+                title=title,
+                artist=artist,
+                duration=dur,
+                provider=self.name,
+                ref=tid,
+            )
             for tid, title, artist, dur in self._CATALOG
             if q in title.lower() or q in artist.lower() or not q.strip()
         ]
@@ -175,8 +253,14 @@ class FakeProvider(ProviderPlugin):
     def resolve(self, ref: str) -> Track:
         for tid, title, artist, dur in self._CATALOG:
             if tid == ref:
-                return Track(id=tid, title=title, artist=artist,
-                             duration=dur, provider=self.name, ref=tid)
+                return Track(
+                    id=tid,
+                    title=title,
+                    artist=artist,
+                    duration=dur,
+                    provider=self.name,
+                    ref=tid,
+                )
         raise KeyError(f"fake: unknown ref {ref!r}")
 
     def describe(self) -> Dict:

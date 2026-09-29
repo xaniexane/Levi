@@ -72,18 +72,22 @@ class EditJournal:
                 except (json.JSONDecodeError, ValueError, TypeError):
                     continue  # a corrupt line never kills the journal
         if limit is not None:
-            out = out[-limit:]
+            limit = max(0, int(limit))
+            out = out[-limit:] if limit else []
         return out
 
     def recall(self, keyword: str, limit: int = 10) -> list[JournalEntry]:
         """'You fixed this pattern before' — keyword recall over the journal."""
         kw = keyword.lower()
+        if not kw.strip():
+            return []  # an empty keyword recalls nothing, not everything
+        limit = max(0, int(limit))
         hits = [
             e
             for e in self.entries()
             if kw in e.detail.lower() or kw in e.path.lower() or kw in e.op.lower()
         ]
-        return hits[-limit:]
+        return hits[-limit:] if limit else []
 
     def count(self) -> int:
         return len(self.entries())

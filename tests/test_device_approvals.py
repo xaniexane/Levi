@@ -35,7 +35,7 @@ def iso(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_HOME", str(tmp_path / "home"))
     monkeypatch.setenv("LEVI_DEVICE_DIR", str(tmp_path / "device"))
     monkeypatch.setenv("LEVI_ALERT_QUIET", "off")
-    monkeypatch.setenv("LEVI_ALERT_NUMBER", "217-610-0636")
+    monkeypatch.setenv("LEVI_ALERT_NUMBER", "555-010-0199")
     monkeypatch.delenv("LEVI_ALERT_TZ", raising=False)
     monkeypatch.delenv("LEVI_APPROVAL_TTL_HOURS", raising=False)
     return tmp_path
@@ -104,7 +104,7 @@ def test_wiring_needs_approval_text(iso, monkeypatch):
     assert result.sent == ["t:9"]
     assert len(fake.calls) == 1
     number, text = fake.calls[0]
-    assert number == "217-610-0636"
+    assert number == "555-010-0199"
     m = appr._ID_RE.search(text)
     assert m, f"no approval id in text: {text!r}"
     assert f"YES {m.group(1)}" in text and f"NO {m.group(1)}" in text
@@ -143,13 +143,13 @@ def test_spoofed_sender_ignored(iso):
     lines = (appr.audit_path().read_text(encoding="utf-8")).splitlines()
     entry = json.loads(lines[-1])
     assert entry["verdict"] == "ignored" and entry["sender"] == "other"
-    assert "217-610-0636" not in appr.audit_path().read_text()
+    assert "555-010-0199" not in appr.audit_path().read_text()
 
 
 def test_self_variants_accepted(iso):
     """+1 prefix / dashes / spaces all normalize to his number."""
-    for raw in ["217-610-0636", "+12176100636", "(217) 610-0636", "217 610 0636"]:
-        assert normalize_number(raw) == "2176100636"
+    for raw in ["555-010-0199", "+15550100199", "(555) 010-0199", "555 010 0199"]:
+        assert normalize_number(raw) == "5550100199"
 
 
 # --- verdicts -----------------------------------------------------------------
@@ -157,13 +157,13 @@ def test_self_variants_accepted(iso):
 def test_yes_from_self_approves(iso):
     aid = _mk_pending(iso)
     fake = FakeSms()
-    inbox = [{"number": "217-610-0636", "body": f"yes {aid} please",
+    inbox = [{"number": "555-010-0199", "body": f"yes {aid} please",
               "date": "1"}]
     stats = process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert stats["approved"] == [aid]
     rec = load_pending()[aid]
     assert rec["status"] == "approved" and "decided" in rec
-    assert fake.calls[-1] == ("217-610-0636", f"Approved {aid}.")
+    assert fake.calls[-1] == ("555-010-0199", f"Approved {aid}.")
     entry = json.loads(appr.audit_path().read_text().splitlines()[-1])
     assert entry["verdict"] == "approved" and entry["sender"] == "self"
 
@@ -171,7 +171,7 @@ def test_yes_from_self_approves(iso):
 def test_no_from_self_denies(iso):
     aid = _mk_pending(iso)
     fake = FakeSms()
-    inbox = [{"number": "2176100636", "body": f"NO {aid}", "date": "1"}]
+    inbox = [{"number": "5550100199", "body": f"NO {aid}", "date": "1"}]
     stats = process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert stats["denied"] == [aid]
     assert load_pending()[aid]["status"] == "denied"
@@ -181,7 +181,7 @@ def test_no_from_self_denies(iso):
 def test_replay_silently_dropped(iso):
     aid = _mk_pending(iso)
     fake = FakeSms()
-    msg = {"number": "217-610-0636", "body": f"YES {aid}", "date": "1"}
+    msg = {"number": "555-010-0199", "body": f"YES {aid}", "date": "1"}
     process_inbox(sms_sender=fake, list_reader=lambda: [msg])
     n_calls = len(fake.calls)
     # same text seen again (re-read) -> no new text, no state change
@@ -193,7 +193,7 @@ def test_replay_silently_dropped(iso):
 
 def test_unknown_id_gets_nothing_pending(iso):
     fake = FakeSms()
-    inbox = [{"number": "217-610-0636", "body": "YES AZZZZZ", "date": "1"}]
+    inbox = [{"number": "555-010-0199", "body": "YES AZZZZZ", "date": "1"}]
     stats = process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert stats["nothing_pending"] == 1
     assert fake.calls[-1][1] == "Nothing pending for AZZZZZ."
@@ -201,7 +201,7 @@ def test_unknown_id_gets_nothing_pending(iso):
 
 def test_chatter_ignored_silently(iso):
     fake = FakeSms()
-    inbox = [{"number": "217-610-0636", "body": "hey call me later",
+    inbox = [{"number": "555-010-0199", "body": "hey call me later",
               "date": "1"}]
     stats = process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert fake.calls == []
@@ -211,7 +211,7 @@ def test_chatter_ignored_silently(iso):
 def test_bare_yes_without_id_ignored(iso):
     assert parse_verdict("YES") == ("yes", None)
     fake = FakeSms()
-    inbox = [{"number": "217-610-0636", "body": "yes", "date": "2"}]
+    inbox = [{"number": "555-010-0199", "body": "yes", "date": "2"}]
     process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert fake.calls == []  # no id -> not a command -> leave alone
 
@@ -235,7 +235,7 @@ def test_expired_cannot_be_approved_after(iso):
         iso, expires=(datetime.now(timezone.utc)
                       - timedelta(minutes=1)).isoformat(timespec="seconds"))
     fake = FakeSms()
-    inbox = [{"number": "217-610-0636", "body": f"YES {aid}", "date": "9"}]
+    inbox = [{"number": "555-010-0199", "body": f"YES {aid}", "date": "9"}]
     stats = process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert stats["approved"] == []
     assert load_pending()[aid]["status"] == "denied"
@@ -246,7 +246,7 @@ def test_sweep_standalone(iso):
         iso, expires=(datetime.now(timezone.utc)
                       - timedelta(minutes=5)).isoformat(timespec="seconds"))
     fake = FakeSms()
-    stats = sweep_expired("217-610-0636", sms_sender=fake)
+    stats = sweep_expired("555-010-0199", sms_sender=fake)
     assert stats["expired"] == [aid]
     assert load_pending()[aid]["reason"] == "expired"
 
@@ -257,12 +257,12 @@ def test_number_never_in_logs(iso, capsys):
     aid = _mk_pending(iso)
     fake = FakeSms()
     inbox = [{"number": "+1-999-000-1234", "body": f"YES {aid}", "date": "1"},
-             {"number": "217-610-0636", "body": f"YES {aid}", "date": "2"}]
+             {"number": "555-010-0199", "body": f"YES {aid}", "date": "2"}]
     process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     out, err = capsys.readouterr()
     blob = out + err + appr.audit_path().read_text()
-    assert "217-610-0636" not in blob
-    assert "2176100636" not in blob
+    assert "555-010-0199" not in blob
+    assert "5550100199" not in blob
 
 
 def test_no_number_fails_closed(iso, monkeypatch):
@@ -308,6 +308,6 @@ def test_malformed_inbox_json_tolerated(iso, monkeypatch):
 
 def test_seen_log_grows(iso):
     fake = FakeSms()
-    inbox = [{"number": "217-610-0636", "body": "hello", "date": "3"}]
+    inbox = [{"number": "555-010-0199", "body": "hello", "date": "3"}]
     process_inbox(sms_sender=fake, list_reader=lambda: inbox)
     assert len(read_seen()) == 1

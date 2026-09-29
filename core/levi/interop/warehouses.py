@@ -131,6 +131,10 @@ CLI_COMMANDS.update(
         # -- trust (perpetual-hunt daily 2026-09-22: the trust toll inverted
         # — earned-by-proof attestation ledger + no-auction explicit feed)
         "trust": ["python -m levi.trust"],
+        # -- qbe (perpetual-hunt daily 2026-09-27: forgotten methods -------
+        # Zloof's Query By Example revived as example-row querying over
+        # local JSONL stores — show the answer's shape, get the rows.
+        "qbe": ["python -m levi.qbe"],
         # -- teletext / attention (perpetual-hunt wave-019, 2026-09-19: -----
         # dead wire protocols — Ceefax page carousel, SELCAL quiet channel,
         # Bell 103 pairing ritual, clean-room revived)
@@ -201,6 +205,8 @@ CLI_COMMANDS.update(
         "sentinel": ["sentinel"],
         # -- identity: Echo/Mandella variant engine with REIM/RIEM ----------
         "identity": ["identity"],
+        "customizations-shortcuts": ["python -m levi.customizations.shortcuts"],
+        "daemon-syncwatch": ["python -m levi.daemon.syncwatch"],
     }
 )
 
@@ -346,6 +352,8 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "bot-switchboard",
             "bot-triage",
             "bot-summarize",
+            "customizations-shortcuts",
+            "daemon-syncwatch",
             "perpetual",
             "bot-services",
             "serve",
@@ -854,6 +862,8 @@ def _module_summary(module: str) -> str:
         "bloodstream": "the one-turn pipeline + event bus",
         "daemon": "control plane — automations, heartbeat, kernel",
         "daemon-fossil": "journal compaction daemon — digests + receipts, honest retention",
+        "customizations-shortcuts": "command shortcuts — named expansions, chained, cycle-safe",
+        "daemon-syncwatch": "divergence watchdog — mirrored pairs, reunion verdicts, transition signals",
         "integrations-termux": "Termux device bridge — battery, notify, clipboard, location",
         "bot-switchboard": "inbound router bot — routes requests to manifest modules",
         "perpetual": "the never-stops engine — hunt, pulse, supervision",

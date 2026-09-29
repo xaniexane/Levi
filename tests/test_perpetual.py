@@ -147,7 +147,12 @@ def test_alive_marker_fresh_stale_missing(tmp_path):
 
 def test_service_overview_lists_configured_services(tmp_path):
     ov = supervise.service_overview(home=tmp_path)
-    assert ov["services"] == ["levi-automation", "levi-growth", "levi-heartbeat"]
+    assert ov["services"] == [
+        "levi-automation",
+        "levi-growth",
+        "levi-heartbeat",
+        "levi-index-watch",
+    ]
     assert ov["strategy"] == "one_for_one"
     assert ov["alive"]["running"] is False
 
@@ -155,7 +160,12 @@ def test_service_overview_lists_configured_services(tmp_path):
 def test_build_supervisor_specs_are_valid():
     sup = supervise.build_supervisor()
     st = sup.status()
-    assert set(st["children"]) == {"levi-heartbeat", "levi-growth", "levi-automation"}
+    assert set(st["children"]) == {
+        "levi-heartbeat",
+        "levi-growth",
+        "levi-automation",
+        "levi-index-watch",
+    }
 
 
 # ------------------------------------------------------- hunt

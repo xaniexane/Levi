@@ -44,9 +44,14 @@ FRONTMATTER_KEYS = (
 )
 
 REQUIRED_BODY_SECTIONS = (
+    "## Laws",
+)
+
+# Sections required only on the intake-triage playbook itself — the
+# production line mints new playbooks, so the pack-wide gate stays generic.
+INTAKE_TRIAGE_ONLY_SECTIONS = (
     "# Intake Triage",
     "## How to read the line",
-    "## Laws",
 )
 
 
@@ -85,6 +90,11 @@ def test_playbook_bodies_have_required_sections():
         body = path.read_text(encoding="utf-8")
         for section in REQUIRED_BODY_SECTIONS:
             assert section in body, f"{path.name}: missing section {section}"
+        if path.stem == "intake-triage":
+            for section in INTAKE_TRIAGE_ONLY_SECTIONS:
+                assert section in body, (
+                    f"{path.name}: missing section {section}"
+                )
         assert "never" in body.lower(), f"{path.name}: must state its limits"
 
 

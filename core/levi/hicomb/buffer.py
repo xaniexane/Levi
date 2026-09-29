@@ -3,6 +3,10 @@
 Line-oriented, deterministic, offline. The daemon owns buffers; the UI
 only renders them. Large files (> LARGE_FILE_LINES) still edit fine —
 only highlighting is windowed (see highlight.py), never the buffer.
+
+Dirty tracking is sequence-based: every undoable op carries a monotonic
+sequence number, so undoing back to the exact save point clears the
+dirty flag instead of leaving it stuck on.
 """
 
 from __future__ import annotations
@@ -35,6 +39,7 @@ class _Op:
     end: Position
     text: str  # text inserted by the op
     removed: str  # text removed by the op
+    seq: int = 0  # monotonic op sequence number for dirty tracking
 
 
 def _insert_end(start: Position, text: str) -> Position:
@@ -59,19 +64,36 @@ class Buffer:
         self.encoding = encoding
         self.newline = newline
         self._lines = text.split("\n")
-        self._dirty = False
+        self._seq = 0  # monotonic op sequence (survives deque eviction)
+        self._current_seq = 0  # seq of the newest applied op (0 = pristine)
+        self._saved_seq = 0  # seq at the last save/open
         self._undo: deque[_Op] = deque(maxlen=MAX_UNDO)
         self._redo: deque[_Op] = deque(maxlen=MAX_UNDO)
+
+    @property
+    def dirty(self) -> bool:
+        """True iff the buffer differs from the last save/open point."""
+        return self._current_seq != self._saved_seq
 
     # ------------------------------------------------------------------ open
     @classmethod
     def open(cls, path: str, encoding: str = "utf-8") -> "Buffer":
-        """Open a file. Detects CRLF vs LF; refuses binary/oversize files."""
-        size = os.path.getsize(path)
+        """Open a file. Detects CRLF vs LF; refuses binary/oversize files.
+
+        Missing files, directories, and unreadable paths raise BufferError
+        (not raw OSError) so callers only ever handle one failure type.
+        """
+        try:
+            size = os.path.getsize(path)
+        except OSError as exc:
+            raise BufferError(f"cannot open {path}: {exc.strerror or exc}") from exc
         if size > MAX_OPEN_BYTES:
             raise BufferError(f"file too large to open: {path} ({size} bytes)")
-        with open(path, "rb") as fh:
-            raw = fh.read()
+        try:
+            with open(path, "rb") as fh:
+                raw = fh.read()
+        except OSError as exc:
+            raise BufferError(f"cannot read {path}: {exc.strerror or exc}") from exc
         if b"\x00" in raw[:8192]:
             raise BufferError(f"refusing to open binary file: {path}")
         newline = "\r\n" if b"\r\n" in raw else "\n"
@@ -79,20 +101,14 @@ class Buffer:
             text = raw.decode(encoding)
         except UnicodeDecodeError as exc:
             raise BufferError(f"cannot decode {path} as {encoding}") from exc
-        buf = cls(
+        return cls(
             text.replace("\r\n", "\n"), path=path, encoding=encoding, newline=newline
         )
-        buf._dirty = False
-        return buf
 
     # ------------------------------------------------------------------ read
     @property
     def line_count(self) -> int:
         return len(self._lines)
-
-    @property
-    def dirty(self) -> bool:
-        return self._dirty
 
     @property
     def is_large(self) -> bool:
@@ -144,6 +160,8 @@ class Buffer:
         self._check_pos(end)
         if (end.line, end.col) < (start.line, start.col):
             raise BufferError("delete end before start")
+        if start == end:
+            return ""  # no-op: nothing removed, no undo step recorded
         removed = self._apply_delete(start, end)
         self._push(_Op("delete", start, end, "", removed))
         return removed
@@ -161,6 +179,8 @@ class Buffer:
         end = Position(end_line, end_col)
         self._check_pos(start)
         self._check_pos(end)
+        if start == end and not text:
+            return  # no-op: nothing changed, no undo step recorded
         removed = self._apply_delete(start, end)
         new_end = _insert_end(start, text)
         self._apply_insert(start, text)
@@ -181,7 +201,6 @@ class Buffer:
                 old,
             )
         )
-        self._dirty = True
 
     # ------------------------------------------------------------- undo/redo
     @property
@@ -198,7 +217,9 @@ class Buffer:
             return False
         self._apply_inverse(op)
         self._redo.append(op)
-        self._dirty = True
+        # the new top of the undo stack names the current content state;
+        # an empty stack is the pristine state (seq 0)
+        self._current_seq = self._undo[-1].seq if self._undo else 0
         return True
 
     def redo(self) -> bool:
@@ -207,7 +228,7 @@ class Buffer:
             return False
         self._apply_forward(op)
         self._undo.append(op)
-        self._dirty = True
+        self._current_seq = op.seq
         return True
 
     # ------------------------------------------------------------------ save
@@ -223,14 +244,23 @@ class Buffer:
             fh.write(self.newline.join(self._lines))
         os.replace(tmp, target)
         self.path = target
-        self._dirty = False
+        self._saved_seq = self._current_seq
         return target
 
     # -------------------------------------------------------------- internals
     def _push(self, op: _Op) -> None:
+        self._seq += 1
+        op = _Op(
+            kind=op.kind,
+            start=op.start,
+            end=op.end,
+            text=op.text,
+            removed=op.removed,
+            seq=self._seq,
+        )
         self._undo.append(op)
         self._redo.clear()
-        self._dirty = True
+        self._current_seq = self._seq
 
     def _apply_insert(self, start: Position, text: str) -> None:
         cur = self._lines[start.line]

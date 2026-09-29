@@ -30,6 +30,11 @@ LAWS (declared up front, machine-checked in tests/test_hicomb_self_upgrade.py):
   U5 PROJECTED-OUTCOMES     every projection surfaces its projected
       outcome; nothing lands silently.
   U6 OFFLINE                stdlib only. No network imports, no egress.
+  U7 SANDBOX-TESTED         every projected path is executed + tested in
+      the sandbox before the checkpoint; the tested outcome is shown
+      next to the simulated one. Approvals require sandbox_ok=True —
+      untested or failed paths are not approvable. Failed paths are
+      reported failed; deny routes them to the remix store.
 
 Snapshot-every-stage (Chauncey, 2026-09-23): propose, decide, remix,
 and apply each run under pre/post snapshots from
@@ -51,8 +56,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from levi.hicomb.ide_nl import DEFAULT_IDE_STORE
-from levi.hicomb.quetta_loop import QuettaPanLoop
-from levi.hicomb.snapshots import SnapshotStore, StageGuard, snapshotted
+from levi.hicomb.qp_compat import require_quetta_loop
+from levi.hicomb.sandbox_test import test_projection, tested_outcome_text
+from levi.hicomb.snapshots import SnapshotStore, StageGuard
 
 PROPOSED = "proposed"
 APPROVED = "approved"
@@ -84,6 +90,8 @@ class UpgradeProjection:
     created_ts: str = ""
     decided_ts: str = ""
     riem_advice: str = "unknown"  # genome consultation recorded at proposal
+    tested_outcome: str = ""  # sandbox-tested outcome (U7); "" = not run
+    sandbox_ok: Optional[bool] = None  # None = not run yet
 
     def as_dict(self) -> Dict[str, Any]:
         return {
@@ -92,6 +100,8 @@ class UpgradeProjection:
             "source": self.source, "remix_lineage": self.remix_lineage,
             "status": self.status, "created_ts": self.created_ts,
             "decided_ts": self.decided_ts, "riem_advice": self.riem_advice,
+            "tested_outcome": self.tested_outcome,
+            "sandbox_ok": self.sandbox_ok,
         }
 
     @classmethod
@@ -105,6 +115,8 @@ class UpgradeProjection:
             created_ts=d.get("created_ts", ""),
             decided_ts=d.get("decided_ts", ""),
             riem_advice=d.get("riem_advice", "unknown"),
+            tested_outcome=d.get("tested_outcome", ""),
+            sandbox_ok=d.get("sandbox_ok"),
         )
 
 
@@ -195,6 +207,7 @@ class SelfUpgradeLoop:
         self.root.mkdir(parents=True, exist_ok=True)
         self.proposals_path = self.root / "proposals.json"
         self.receipts_path = self.root / "receipts.jsonl"
+        self.sandbox_root = self.root / ".sandbox_tests"
         self.proposals: Dict[str, UpgradeProjection] = {}
         if self.proposals_path.exists():
             self.proposals = {
@@ -207,7 +220,10 @@ class SelfUpgradeLoop:
         # proposal time and the approval/denial outcomes at decision
         # time both go through it (Q1). The denied-path store stays
         # separate — it is the parts library, not the learning loop.
-        self.qp = QuettaPanLoop(
+        # Guarded: the sibling's quetta_loop may be absent on a fresh
+        # checkout — fail closed here with a clear error, never a bare
+        # ImportError at module load.
+        self.qp = require_quetta_loop()(
             self.store_dir,
             compost_name=".upgrade_compost.jsonl",
             genome_name=".upgrade_genome.json",
@@ -280,10 +296,69 @@ class SelfUpgradeLoop:
                  "proposal_id": proj.id})
         return proj
 
+    # ---- sandbox testing -------------------------------------------
+    def sandbox_test_projection(self, pid: str) -> Dict[str, Any]:
+        """Execute + test one projected path in the sandbox (B1–B5).
+
+        Runs under the sandbox-test snapshot stage (S1): pre-snapshot
+        before the run, post-snapshot with the tested outcome. The
+        tested outcome lands on the projection; only sandbox_ok=True
+        paths are approvable at the checkpoint (U7)."""
+        proj = self.proposals.get(pid)
+        if proj is None:
+            return {"ok": False, "error": "unknown projection"}
+        if proj.status != PROPOSED:
+            return {"ok": False,
+                    "error": f"already {proj.status} — sandbox tests run "
+                             "before the decision"}
+        # S1: snapshot before the sandbox run — the tested outcome can
+        # be audited back to the exact untested projection.
+        run = self._guard.begin(
+            "sandbox-test",
+            {"proposal": proj.as_dict()},
+        )
+        run.act()
+        result = test_projection(proj.id, proj.change, proj.title,
+                                 self.sandbox_root)
+        proj.tested_outcome = tested_outcome_text(result)
+        proj.sandbox_ok = bool(result.ok)
+        self._save_proposals()
+        receipt = self._receipt(pid, "sandbox-tested",
+                                f"sandbox_ok={result.ok}",
+                                proj.tested_outcome)
+        run.end({"sandbox_ok": result.ok,
+                 "tested_outcome": proj.tested_outcome,
+                 "receipt": receipt})
+        return {"ok": True, "sandbox_ok": result.ok,
+                "tested_outcome": proj.tested_outcome,
+                "result": result.as_dict(), "receipt": receipt}
+
+    def checkpoint(self, pid: str) -> Dict[str, Any]:
+        """The HITL checkpoint view: simulated + sandbox-tested outcomes
+        together, always (U7). approvable is True only for proposed
+        paths whose sandbox test passed."""
+        proj = self.proposals.get(pid)
+        if proj is None:
+            return {"ok": False, "error": "unknown projection"}
+        return {
+            "ok": True,
+            "id": proj.id,
+            "title": proj.title,
+            "change": dict(proj.change),
+            "projected_outcome": proj.projected_outcome,  # simulated
+            "tested_outcome": proj.tested_outcome,  # sandbox-tested
+            "sandbox_ok": proj.sandbox_ok,
+            "riem_advice": proj.riem_advice,
+            "status": proj.status,
+            "approvable": proj.status == PROPOSED and proj.sandbox_ok is True,
+        }
+
     # ---- HITL decisions ----------------------------------------------
     def decide(self, pid: str, approve: bool,
                reason: str = "") -> Dict[str, Any]:
         """Approve or deny one path. U1: only approvals unlock apply.
+        U7: approvals require a passed sandbox test — untested or
+        failed paths are not approvable. Denials are always allowed.
         Decided projections are terminal — no re-decides."""
         proj = self.proposals.get(pid)
         if proj is None:
@@ -291,6 +366,17 @@ class SelfUpgradeLoop:
         if proj.status != PROPOSED:
             return {"ok": False,
                     "error": f"already {proj.status} — decisions are terminal"}
+        if approve and proj.sandbox_ok is not True:
+            # Refused before any snapshot — nothing acted, nothing to undo.
+            if proj.sandbox_ok is None:
+                return {"ok": False,
+                        "error": "refusing approve — no sandbox test run yet",
+                        "detail": "run sandbox_test_projection(pid) first; "
+                                  "untested paths are not approvable"}
+            return {"ok": False,
+                    "error": "refusing approve — sandbox test failed",
+                    "detail": f"{proj.tested_outcome[:300]} — deny to route "
+                              "to the remix store"}
         # S1: snapshot before the decision mutates anything — a decision
         # can be audited back to the exact undecided projection.
         run = self._guard.begin(

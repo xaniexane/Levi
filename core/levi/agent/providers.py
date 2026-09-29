@@ -759,6 +759,14 @@ def _levi_brain_provider() -> ChatProvider:
     return NativeBrainProvider()
 
 
+def _levi_bpe_brain_provider() -> ChatProvider:
+    # Lazy for the same reason as _levi_brain_provider: torch must not
+    # slow down or break stdlib-only imports of this module.
+    from levi.agent.bpe_brain_provider import BpeBrainProvider
+
+    return BpeBrainProvider()
+
+
 def _levi_local_provider() -> ChatProvider:
     # Lazy: levi.agent.local_model subclasses OpenAICompatibleProvider,
     # so it imports this module — importing it at top level here would
@@ -775,6 +783,7 @@ def provider_names() -> list[str]:
     return model_family.family_names() + [
         "local",
         "levi-brain",
+        "levi-bpe-brain",
         "levi-local",
         "openai",
         "anthropic",
@@ -806,6 +815,10 @@ def select_provider(preference: str | None = None) -> ChatProvider:
     name = (preference or os.environ.get("LEVI_PROVIDER") or "").strip().lower()
     if name in ("levi-tiny", "levi-brain"):
         provider = _levi_brain_provider()
+        return provider if provider.is_available() else LocalProvider()
+    if name == "levi-bpe-brain":
+        # Chauncey's own model: his BPE brain, pulled locally — never rented.
+        provider = _levi_bpe_brain_provider()
         return provider if provider.is_available() else LocalProvider()
     if name == "levi-local" or (name and name in _remix_names()):
         entry = model_family.get_entry(name)

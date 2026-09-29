@@ -484,3 +484,21 @@ def test_describe_posture_names_laws_and_proof():
     for mod in (intel, threat_feed, adapters):
         p = mod.describe_posture()
         assert p["laws"] and "test_front_feed.py" in p["proof"]
+
+# ------------------------------------------------- wave 3: P4 honesty
+def test_publish_never_raises_on_bad_confidence(home):
+    receipt = threat_feed.publish("some scan text", confidence="high")
+    assert receipt["status"] == "invalid_input"
+    assert receipt["published"] == 0 and receipt["accepted"] == 0
+
+
+def test_publish_never_raises_on_bad_text(home):
+    receipt = threat_feed.publish(12345, confidence=0.5)
+    assert receipt["status"] == "invalid_input"
+
+
+def test_build_envelopes_rejects_non_string_text(home):
+    with pytest.raises(ValueError, match="must be str"):
+        threat_feed.build_envelopes(12345, confidence=0.5)
+    # None is silence, not an error
+    assert threat_feed.build_envelopes(None, confidence=0.5) == []

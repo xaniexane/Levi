@@ -126,10 +126,28 @@ class ServeHandler(BaseHTTPRequestHandler):
         self.send_error(404, "Not found")
 
     def do_GET(self) -> None:
+        if self._try_api():
+            return
         self._handle(head_only=False)
 
     def do_HEAD(self) -> None:
         self._handle(head_only=True)
+
+    def do_POST(self) -> None:
+        if self._try_api():
+            return
+        self.send_error(404, "Not found")
+
+    def _try_api(self) -> bool:
+        """Route /api/* to the void-mind API; False lets static handling run."""
+        try:
+            from levi.serve.void_api import handle_api
+        except Exception:
+            return False
+        try:
+            return bool(handle_api(self))
+        except Exception:
+            return False
 
 
 def make_server(

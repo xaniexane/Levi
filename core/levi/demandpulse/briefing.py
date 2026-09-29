@@ -16,6 +16,7 @@ levi.demandpulse.themes (validated packs, safe structured tokens).
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, List, Mapping, Optional, Sequence
@@ -48,14 +49,29 @@ def render_briefing(
     theme: str = "void",
 ) -> str:
     """Render a briefing from a digest (levi.demand.feed.Digest or mapping)
-    plus optional ternary states. Pure function — no I/O."""
+    plus optional ternary states. Pure function — no I/O.
+
+    A digest that is neither a to_record() object nor a mapping raises a
+    named ValueError — never a raw TypeError from dict().
+    """
     th = get_theme(theme)
     bullet = th["bullet"]
 
     if hasattr(digest, "to_record"):
         record = digest.to_record()
     else:
-        record = dict(digest)
+        try:
+            record = dict(digest)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(
+                f"render_briefing: digest must be a mapping or to_record() "
+                f"object, got {type(digest).__name__}"
+            ) from exc
+    if not isinstance(record, dict):
+        raise ValueError(
+            f"render_briefing: to_record() must return a dict, got "
+            f"{type(record).__name__}"
+        )
 
     items = list(record.get("items", []) or [])
     quarantined = list(record.get("quarantined", []) or [])
@@ -74,6 +90,10 @@ def render_briefing(
         )
 
     def item_line(item: Mapping[str, Any]) -> str:
+        # Feed items are mappings, but a corrupt digest may carry raw
+        # strings — render them instead of crashing on .get.
+        if not isinstance(item, Mapping):
+            return f"{bullet} {item}"
         title = item.get("title") or item.get("opportunity_id") or "untitled"
         composite = item.get("composite")
         comp = (
@@ -93,8 +113,8 @@ def render_briefing(
     lines += _section(
         "GATHERING (ternary: the third state)", [sig_line(s) for s in gathering], th
     )
-    watched = [i for i in items if i.get("watched")]
-    rest = [i for i in items if not i.get("watched")]
+    watched = [i for i in items if isinstance(i, Mapping) and i.get("watched")]
+    rest = [i for i in items if not (isinstance(i, Mapping) and i.get("watched"))]
     lines += _section("WATCHING", [item_line(i) for i in watched], th)
     lines += _section("QUIET", [item_line(i) for i in rest], th)
     lines += _section(
@@ -103,8 +123,8 @@ def render_briefing(
         th,
     )
     q_lines = [
-        f"{bullet} {q.get('title', q.get('opportunity_id', '?'))}: "
-        f"{q.get('reason', 'held by the label law')}"
+        f"{bullet} {(q.get('title', q.get('opportunity_id', '?')) if isinstance(q, Mapping) else q)}: "
+        f"{q.get('reason', 'held by the label law') if isinstance(q, Mapping) else 'held by the label law'}"
         for q in quarantined
     ]
     lines += _section(
@@ -119,12 +139,20 @@ def write_briefing(
     home: Optional[Path] = None,
     stamp: Optional[str] = None,
 ) -> Path:
-    """Write a rendered briefing to the product's file outbox. Returns path."""
+    """Write a rendered briefing to the product's file outbox. Returns path.
+
+    The stamp becomes a filename — a hostile stamp ('../../x') must never
+    escape the outbox, so non-filename stamps raise ValueError.
+    """
     from levi.demandpulse.quickstart import outbox_dir
 
     outbox = outbox_dir(home)
     outbox.mkdir(parents=True, exist_ok=True)
     stamp = stamp or datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    if not re.fullmatch(r"[\w-]+", stamp):
+        raise ValueError(
+            f"write_briefing: stamp must be a plain filename token, got {stamp!r}"
+        )
     path = outbox / f"briefing-{stamp}.txt"
     # never overwrite an existing briefing — append a counter instead
     counter = 1

@@ -197,3 +197,16 @@ def test_cli_quickstart(home, capsys):
     out = capsys.readouterr().out
     assert "quickstart" in out
     assert (home / "filters.json").exists()
+
+# -------------------------------------- wave 3: quickstart hardening
+def test_write_filters_none_keywords_is_named_error(home):
+    with pytest.raises(ValueError, match="at least one keyword"):
+        quickstart.write_filters(None, home=home)
+
+
+def test_write_filters_skips_non_string_keywords(home):
+    record = quickstart.write_filters(
+        ["  CRM  ", None, 42, "", "crm"], exclude=["X", None], home=home
+    )
+    assert record["include"] == ["crm"]
+    assert record["exclude"] == ["x"]

@@ -69,9 +69,9 @@ class LangSpec:
     keywords: frozenset = frozenset()
     builtins: frozenset = frozenset()
     line_comment: str = ""
-    block_comment: tuple = ()
-    string_delims: tuple = ('"', "'")
-    triple_delims: tuple = ()
+    block_comment: tuple[str, ...] = ()
+    string_delims: tuple[str, ...] = ('"', "'")
+    triple_delims: tuple[str, ...] = ()
     decorators: bool = False
     html_mode: bool = False
     css_mode: bool = False
@@ -162,9 +162,22 @@ def _specs() -> dict[str, LangSpec]:
 _SPECS = _specs()
 _FENCE = "```"
 
+# markdown inline spans, precompiled once (were rebuilt per line)
+_MD_INLINE = (
+    ("code", re.compile(r"`[^`]+`")),
+    ("link", re.compile(r"\[[^\]]*\]\([^)]*\)")),
+    ("bold", re.compile(r"\*\*[^*]+\*\*|__[^_]+__")),
+    ("italic", re.compile(r"(?<!\*)\*[^*]+\*(?!\*)|(?<!_)_+[^_]+_+(?!_)")),
+)
+_DECORATOR = re.compile(r"@[\w.]+")
+_SHELL_VAR = re.compile(r"\$\{[^}]*\}|\$[A-Za-z_][A-Za-z0-9_]*|\$[@*#?$!0-9]")
+_TAG_OPEN = re.compile(r"</?[A-Za-z][\w.:-]*")
 
-def detect_language(path: str) -> str:
-    """Language id from file extension; 'plain' when unknown."""
+
+def detect_language(path: str | None) -> str:
+    """Language id from file extension; 'plain' when unknown or no path."""
+    if not path:
+        return "plain"
     _, ext = os.path.splitext(path.lower())
     return LANG_BY_EXT.get(ext, "plain")
 
@@ -203,12 +216,12 @@ def _close_quote(line: str, i: int, delim: str) -> int:
 
 def _parse_tag(line: str, i: int, toks: list[Token]) -> int:
     """Parse <tag attr="v" ...> starting at i. Returns new index."""
-    m = re.match(r"</?[A-Za-z][\w.:-]*", line[i:])
+    m = _TAG_OPEN.match(line, i)
     if not m:
         toks.append(Token("punct", i, i + 1))
         return i + 1
-    toks.append(Token("tag", i, i + m.end()))
-    j = i + m.end()
+    toks.append(Token("tag", i, m.end()))
+    j = m.end()
     n = len(line)
     while j < n:
         if line.startswith("/>", j) or line[j] == ">":
@@ -333,19 +346,21 @@ def _tokenize_line(line: str, spec: LangSpec, state: _State) -> list[Token]:
         # decorators (@name at line start, python/ts)
         if spec.decorators and line[i] == "@" and (i == 0 or line[i - 1].isspace()):
             text_to(i)
-            m = re.match(r"@[\w.]+", line[i:])
-            toks.append(Token("decorator", i, i + m.end()))
-            i += m.end()
+            m = _DECORATOR.match(line, i)
+            if m is None:  # lone "@" — punctuation, not a decorator
+                toks.append(Token("punct", i, i + 1))
+                i += 1
+            else:
+                toks.append(Token("decorator", i, m.end()))
+                i = m.end()
             continue
         # shell variables
         if spec.line_comment == "#" and line[i] == "$":
             text_to(i)
-            m = re.match(
-                r"\$\{[^}]*\}|\$[A-Za-z_][A-Za-z0-9_]*|\$[@*#?$!0-9]", line[i:]
-            )
+            m = _SHELL_VAR.match(line, i)
             if m:
-                toks.append(Token("variable", i, i + m.end()))
-                i += m.end()
+                toks.append(Token("variable", i, m.end()))
+                i = m.end()
             else:
                 text_start = i if text_start is None else text_start
                 i += 1
@@ -414,14 +429,8 @@ def _tokenize_markdown_line(line: str, state: _State) -> list[Token]:
     else:
         i = 0
     # inline spans: `code`, **bold**, *italic*, [text](url)
-    patterns = [
-        ("code", re.compile(r"`[^`]+`")),
-        ("link", re.compile(r"\[[^\]]*\]\([^)]*\)")),
-        ("bold", re.compile(r"\*\*[^*]+\*\*|__[^_]+__")),
-        ("italic", re.compile(r"(?<!\*)\*[^*]+\*(?!\*)|(?<!_)_+[^_]+_+(?!_)")),
-    ]
     spans: list[Token] = []
-    for kind, rx in patterns:
+    for kind, rx in _MD_INLINE:
         for mm in rx.finditer(line, i):
             spans.append(Token(kind, mm.start(), mm.end()))
     spans.sort(key=lambda t: (t.start, t.end))

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Online by default (2026-09-28): the YouTube seam and the
+         download lane need the network; on-device downloads play offline.
+         INTERNET for downloads/YouTube; ACCESS_NETWORK_STATE so the app
+         pushes real connectivity changes to the engine — no manual
+         online toggle needed. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- YouTube-to-ringtone (2026-09-29): applying the exported ringtone as
+         the phone default needs the user's "modify system settings" grant.
+         The app asks for it only when the user taps "Set as default
+         ringtone", and degrades gracefully without it. -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <application
+        android:label="Buzz Tunes"
+        android:theme="@style/Theme.BuzzTunes"
+        android:allowBackup="true"
+        android:supportsRtl="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- YouTube-to-ringtone flow (2026-09-29, flagship). Launched from
+             the Play tab; not exported. -->
+        <activity
+            android:name=".RingtoneActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+    </application>
+</manifest>

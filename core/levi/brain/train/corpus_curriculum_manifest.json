@@ -1,22 +1,23 @@
 {
  "generator": "build_curriculum_corpus.py",
- "generator_version": "2026-09-21-v1",
+ "generator_version": "2026-09-29-v2",
  "seed": 20260921,
- "built_utc": "2026-09-21T21:49:11.046618+00:00",
+ "built_utc": "2026-09-29T15:58:53.737954+00:00",
  "directive": "Chauncey 2026-09-21 curriculum: arithmetic (required), grammar, chemistry, physics, trig, algebra, geometry, history, government, civics, 5D EI, personality traits. 'more human than human.'",
  "sections": {
-  "arithmetic": 4000,
-  "algebra": 700,
-  "number-sense": 400,
+  "arithmetic": 3932,
+  "algebra": 683,
+  "number-sense": 286,
   "grammar": 107,
   "geometry": 122,
   "science": 140,
   "civics-history": 97,
-  "ei": 60,
-  "persona": 91
+  "ei": 30,
+  "persona": 23
  },
- "total_records": 5717,
- "total_chars": 376154,
+ "total_records": 5420,
+ "deduped_records": 297,
+ "total_chars": 348713,
  "record_shape": "{text, kind, source, topic} + optional sidecars (ei_dims, persona_id/provisional/tone/role, traits)",
  "sources": {
   "arithmetic/algebra/number-sense": "programmatic templates, seeded RNG",

@@ -72,6 +72,12 @@ def cmd_research(args) -> int:
     return 0
 
 
+def cmd_programming(args) -> int:
+    from levi.academy.lessons.programming import cli as prog_cli
+
+    return prog_cli.main(getattr(args, "args", None) or [])
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         prog="levi.academy",
@@ -86,6 +92,17 @@ def main(argv=None) -> int:
     sub.add_parser("corpus", help="ingested lesson corpus stats").set_defaults(
         func=cmd_corpus
     )
+
+    p_prog = sub.add_parser(
+        "programming",
+        help="Chauncey's 14-lesson programming course: syllabus, lessons, search",
+    )
+    p_prog.add_argument(
+        "args",
+        nargs=argparse.REMAINDER,
+        help="syllabus | lesson <n|id> | next [--after N] | search <words>",
+    )
+    p_prog.set_defaults(func=cmd_programming)
 
     p_res = sub.add_parser(
         "research", help="research a session topic (web or local fallback)"
